@@ -412,7 +412,9 @@ def main():
              "label_en": c["label_en"], "kind": c.get("kind", "object")}
             for c in taxonomy["chapters"]
         ],
-        "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
+        # 故意不含时间戳字段：没有消费者会读它，留着只会让每次 `make sync` 都在
+        # manifest.json 里制造一行必然变化的 diff，破坏「sync 后 git diff 应为空」
+        # 这条一致性判据。真要知道数据新不新，看各字段自己的 verified 日期。
     }
     (DOCS_DATA / "manifest.json").write_text(dump_json(manifest), encoding="utf-8")
     (DOCS_DATA / "matrix.json").write_text(dump_json({"cells": matrix_cells}), encoding="utf-8")
