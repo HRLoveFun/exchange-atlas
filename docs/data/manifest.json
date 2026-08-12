@@ -1,0 +1,144 @@
+{
+  "exchanges": [
+    {
+      "id": "cn-sse",
+      "name_zh": "上海证券交易所",
+      "name_native": {
+        "zh-Hans": "上海证券交易所"
+      },
+      "official_languages": [
+        "zh-Hans"
+      ],
+      "group_id": null,
+      "region": "apac",
+      "tier": "pilot"
+    },
+    {
+      "id": "hk-hkex",
+      "name_zh": "香港交易及结算所（简称港交所）",
+      "name_native": {
+        "zh-Hant": "香港交易及結算所有限公司",
+        "en": "Hong Kong Exchanges and Clearing Limited (HKEX)"
+      },
+      "official_languages": [
+        "zh-Hant",
+        "en"
+      ],
+      "group_id": null,
+      "region": "apac",
+      "tier": "pilot"
+    }
+  ],
+  "dimension_groups": [
+    {
+      "id": "overview",
+      "label_zh": "基本信息",
+      "label_en": "Overview"
+    },
+    {
+      "id": "trading_mechanism",
+      "label_zh": "交易机制",
+      "label_en": "Trading Mechanism"
+    },
+    {
+      "id": "listing_delisting",
+      "label_zh": "上市与退市",
+      "label_en": "Listing & Delisting"
+    },
+    {
+      "id": "clearing_settlement",
+      "label_zh": "清算结算",
+      "label_en": "Clearing & Settlement"
+    },
+    {
+      "id": "regulation",
+      "label_zh": "监管环境",
+      "label_en": "Regulation"
+    },
+    {
+      "id": "costs_taxes",
+      "label_zh": "成本税费",
+      "label_en": "Costs & Taxes"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "overview",
+      "chapter_no": 2,
+      "label_zh": "基本信息",
+      "label_en": "Overview",
+      "kind": "object"
+    },
+    {
+      "id": "regulation",
+      "chapter_no": 3,
+      "label_zh": "监管与法律环境",
+      "label_en": "Regulation & Legal Environment",
+      "kind": "object"
+    },
+    {
+      "id": "products",
+      "chapter_no": 4,
+      "label_zh": "产品体系",
+      "label_en": "Product Universe",
+      "kind": "list"
+    },
+    {
+      "id": "market_structure",
+      "chapter_no": 5,
+      "label_zh": "市场结构与交易机制",
+      "label_en": "Market Structure & Trading Mechanism",
+      "kind": "object"
+    },
+    {
+      "id": "listing",
+      "chapter_no": 6,
+      "label_zh": "上市、持续监管与退市",
+      "label_en": "Listing, Continuing Obligations & Delisting",
+      "kind": "object"
+    },
+    {
+      "id": "indices",
+      "chapter_no": 7,
+      "label_zh": "指数体系",
+      "label_en": "Index System",
+      "kind": "list"
+    },
+    {
+      "id": "clearing",
+      "chapter_no": 8,
+      "label_zh": "清算、结算与交割",
+      "label_en": "Clearing, Settlement & Delivery",
+      "kind": "object"
+    },
+    {
+      "id": "participants",
+      "chapter_no": 9,
+      "label_zh": "市场参与者",
+      "label_en": "Market Participants",
+      "kind": "object"
+    },
+    {
+      "id": "infrastructure",
+      "chapter_no": 10,
+      "label_zh": "市场数据与技术基础设施",
+      "label_en": "Market Data & Technology Infrastructure",
+      "kind": "object"
+    },
+    {
+      "id": "costs",
+      "chapter_no": 11,
+      "label_zh": "交易成本与税费",
+      "label_en": "Trading Costs & Taxes",
+      "kind": "object"
+    },
+    {
+      "id": "risks",
+      "chapter_no": 12,
+      "label_zh": "风险与特殊考量",
+      "label_en": "Risks & Special Considerations",
+      "kind": "object"
+    }
+  ],
+  "generated_at": "2026-08-12T23:00:28+00:00"
+}

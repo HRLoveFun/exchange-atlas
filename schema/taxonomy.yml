@@ -1,0 +1,636 @@
+# taxonomy.yml — 项目宪法
+#
+# 职责边界（见 CLAUDE.md 第一节）：本文件唯一负责字段结构、双语标签、矩阵列归属、
+# 时效等级、原文要求。具体数据值一律不出现在这里，去 data/exchanges/*.yml。
+#
+# 本文件是数据结构的唯一权威 —— 不存在独立的 exchange.schema.json，
+# tools/sync.py 在构建时从本文件生成校验用的 JSON Schema。
+#
+# ── 与原始十三章大纲的对应关系 ──
+# 原大纲第一章（研究范围与对象界定）和第十三章（研究方法与维护机制）描述的是
+# 「如何研究」而非「某交易所的事实」，不适合做逐交易所字段：
+#   - 第一章的可执行部分（覆盖范围、集团归属、地区、标杆批次）落地为下面的
+#     exchange_identity（交易所身份元数据），不算一个「章」。
+#   - 第十三章本身就是这个仓库的工程机制，已经是 CLAUDE.md / SOURCES.md /
+#     tools/ 的实现，不需要在数据里再造一份。
+# 因此 chapters 收录原大纲第二至十二章，共十一个数据章节，chapter_no 保留
+# 原编号以便对照大纲，但不必连续。
+#
+# ── 字段语法（递归） ──
+# 一个 field 要么是「叶子」（type 隐含为 envelope：数据文件里对应一条事实信封
+# {zh, native, enum, detail, quote, sources, verified, confidence}，见
+# data/exchanges/cn-sse.yml 的写法），要么是「分组」（带 fields:，纯用于组织
+# 层级，不代表事实本身，如 price_limits 下面挂 main_board/st_stocks/chinext）。
+#
+# 叶子字段属性：
+#   id             字段键名
+#   label_zh / label_en   双语标签（UI 恒双语显示，见 CLAUDE.md 语言体系）
+#   volatility     stable(24个月) | moderate(12个月) | volatile(6个月) —— 复核阈值可调初值
+#   native_required  是否要求填 native（原语言原文）；仅对机制名/板块名/法规名/
+#                    订单类型名/机构名这类专有名词要求，数字百分比日期不要求
+#   enum_ref       引用 enums.yml 的词表 key；矩阵短标签与着色用
+#   in_matrix      false，或对比矩阵的维度组 id（见文末 dimension_groups）
+#
+# 章节属性：
+#   kind: object   扁平字段章节（大多数）
+#   kind: list     列表型章节（四/产品体系、七/指数体系）；用 item_schema 定义
+#                  每个列表项的形状 —— 列表项是「轻量字段」，不是完整事实信封
+#                  （没有逐项 quote/confidence，只在 _meta 层面共享一次），
+#                  否则几十个期货品种 × 完整信封会把 v0.1 直接压垮。
+#                  这是刻意的简化，见 PROJECT/OPEN-QUESTIONS.md「schema 会不会
+#                  被列表型章节撑破」。
+
+meta:
+  version: 1
+
+# ══════════════════════════════════════════════════════════════
+# 交易所身份元数据 —— 每个 data/exchanges/*.yml 顶层必填，不是 chapter
+# ══════════════════════════════════════════════════════════════
+exchange_identity:
+  fields:
+    - id: id
+      label_zh: 标识符
+      label_en: ID
+      note: "格式 <ISO3166-1 alpha-2 小写>-<简称>，如 cn-sse, hk-hkex"
+    - id: name_zh
+      label_zh: 中文名
+      label_en: Name (Chinese)
+    - id: name_native
+      label_zh: 官方原文名
+      label_en: Native Name
+      note: "对象 {语言代码: 名称}，可多语言，如港交所 {zh-Hant: 香港交易及結算所, en: HKEX}"
+    - id: official_languages
+      label_zh: 官方语言
+      label_en: Official Languages
+      note: "BCP47 数组，如 [zh-Hans]；[zh-Hant, en]。决定该所 native 字段的语言维度"
+    - id: group_id
+      label_zh: 所属集团
+      label_en: Exchange Group
+      note: "如 cme-group；无集团归属则省略此字段。矩阵可按此折叠"
+    - id: region
+      label_zh: 地区
+      label_en: Region
+      enum_ref: region
+    - id: tier
+      label_zh: 标杆批次
+      label_en: Tier
+      enum_ref: tier
+      note: "供 ROADMAP 进度矩阵与站点筛选使用"
+
+# ══════════════════════════════════════════════════════════════
+# 十一个数据章节
+# ══════════════════════════════════════════════════════════════
+chapters:
+
+  # ── 二｜基本信息 ──
+  - id: overview
+    chapter_no: 2
+    label_zh: 基本信息
+    label_en: Overview
+    kind: object
+    fields:
+      - id: timezone
+        label_zh: 时区
+        label_en: Timezone
+        volatility: stable
+      - id: dst_rule
+        label_zh: 夏令时规则
+        label_en: DST Rule
+        volatility: stable
+      - id: founded_year
+        label_zh: 成立年份
+        label_en: Founded
+        volatility: stable
+      - id: history
+        label_zh: 历史沿革
+        label_en: History
+        volatility: stable
+        note: "重大合并、改制事件，写在 detail 里，字段本身可留短摘要"
+      - id: organization_form
+        label_zh: 组织形式
+        label_en: Organization Form
+        volatility: moderate
+        enum_ref: organization_form
+        in_matrix: overview
+      - id: self_listed
+        label_zh: 自身是否上市
+        label_en: Self-listed
+        volatility: moderate
+        enum_ref: yes_no
+        in_matrix: overview
+      - id: market_cap_usd_bn
+        label_zh: 总市值（十亿美元）
+        label_en: Market Cap (USD bn)
+        volatility: volatile
+        in_matrix: overview
+      - id: listed_companies_count
+        label_zh: 上市公司数量
+        label_en: Listed Companies
+        volatility: volatile
+        in_matrix: overview
+      - id: annual_turnover_usd_bn
+        label_zh: 年成交额（十亿美元）
+        label_en: Annual Turnover (USD bn)
+        volatility: volatile
+      - id: global_ranking
+        label_zh: 全球排名
+        label_en: Global Ranking
+        volatility: volatile
+        note: "如「全球股票市值第X」，写在 detail，字段填简短摘要"
+      - id: trading_currency
+        label_zh: 交易货币
+        label_en: Trading Currency(ies)
+        volatility: stable
+        in_matrix: overview
+      - id: settlement_currency
+        label_zh: 结算货币
+        label_en: Settlement Currency(ies)
+        volatility: stable
+
+  # ── 三｜监管与法律环境 ──
+  - id: regulation
+    chapter_no: 3
+    label_zh: 监管与法律环境
+    label_en: Regulation & Legal Environment
+    kind: object
+    fields:
+      - id: regulator
+        label_zh: 政府监管机构
+        label_en: Government Regulator
+        volatility: stable
+        native_required: true
+        in_matrix: regulation
+      - id: self_regulatory_org
+        label_zh: 自律组织
+        label_en: Self-regulatory Organization
+        volatility: stable
+        native_required: true
+      - id: clearing_regulator
+        label_zh: 清算监管机构
+        label_en: Clearing Regulator
+        volatility: stable
+        native_required: true
+      - id: core_laws
+        label_zh: 核心法律法规体系
+        label_en: Core Laws & Regulations
+        volatility: moderate
+        native_required: true
+        note: "法规名清单写 detail，字段填最核心一部的名称"
+      - id: foreign_ownership_limit
+        label_zh: 外资准入与持股比例限制
+        label_en: Foreign Ownership Limit
+        volatility: moderate
+        in_matrix: regulation
+      - id: capital_controls
+        label_zh: 资本管制与外汇管制
+        label_en: Capital & FX Controls
+        volatility: moderate
+      - id: disclosure_requirements
+        label_zh: 信息披露制度
+        label_en: Disclosure Requirements
+        volatility: moderate
+        note: "语言、频率、渠道"
+      - id: investor_protection
+        label_zh: 投资者保护机制
+        label_en: Investor Protection
+        volatility: moderate
+
+  # ── 四｜产品体系（列表型）──
+  - id: products
+    chapter_no: 4
+    label_zh: 产品体系
+    label_en: Product Universe
+    kind: list
+    item_schema:
+      - {id: id, label_zh: 标识符, label_en: ID}
+      - {id: category, label_zh: 大类, label_en: Category, enum_ref: product_category}
+      - {id: name_zh, label_zh: 中文名, label_en: Name (Chinese)}
+      - {id: name_native, label_zh: 原文名, label_en: Native Name}
+      - {id: board, label_zh: 所属板块, label_en: Board}
+      - {id: derivative_of, label_zh: 标的引用, label_en: Underlying Ref, note: "跨实体引用，指向本所或指数章节的 id"}
+      - {id: description, label_zh: 说明, label_en: Description}
+
+  # ── 五｜市场结构与交易机制（本项目重点章节，字段最密）──
+  - id: market_structure
+    chapter_no: 5
+    label_zh: 市场结构与交易机制
+    label_en: Market Structure & Trading Mechanism
+    kind: object
+    fields:
+      - id: trading_sessions
+        label_zh: 交易时段
+        label_en: Trading Sessions
+        fields:
+          - {id: pre_market, label_zh: 盘前, label_en: Pre-market, volatility: moderate}
+          - {id: continuous_am, label_zh: 上午连续竞价, label_en: Morning Continuous, volatility: moderate}
+          - {id: lunch_break, label_zh: 午休, label_en: Lunch Break, volatility: moderate}
+          - {id: continuous_pm, label_zh: 下午连续竞价, label_en: Afternoon Continuous, volatility: moderate}
+          - {id: after_market, label_zh: 盘后, label_en: After-market, volatility: moderate}
+          - {id: night_session, label_zh: 夜盘, label_en: Night Session, volatility: moderate}
+      - id: holidays_note
+        label_zh: 节假日与特殊休市
+        label_en: Holidays & Special Closures
+        volatility: stable
+      - id: opening_mechanism
+        label_zh: 开盘机制
+        label_en: Opening Mechanism
+        volatility: moderate
+        native_required: true
+        in_matrix: trading_mechanism
+      - id: closing_mechanism
+        label_zh: 收盘机制
+        label_en: Closing Mechanism
+        volatility: moderate
+        native_required: true
+        in_matrix: trading_mechanism
+      - id: matching_principle
+        label_zh: 撮合原则
+        label_en: Matching Principle
+        volatility: stable
+        native_required: true
+      - id: order_types
+        label_zh: 订单类型
+        label_en: Order Types
+        volatility: moderate
+        native_required: true
+      - id: tick_size
+        label_zh: 最小报价单位
+        label_en: Tick Size
+        volatility: moderate
+      - id: board_lot_size
+        label_zh: 最小交易单位
+        label_en: Board Lot Size
+        volatility: moderate
+      - id: odd_lot_handling
+        label_zh: 碎股处理
+        label_en: Odd Lot Handling
+        volatility: moderate
+      - id: price_limits
+        label_zh: 涨跌停/价格限制
+        label_en: Price Limits
+        fields:
+          - id: type
+            label_zh: 类型
+            label_en: Type
+            volatility: moderate
+            enum_ref: price_limit_type
+            in_matrix: trading_mechanism
+          - id: main_board
+            label_zh: 主板幅度
+            label_en: Main Board Band
+            volatility: moderate
+            in_matrix: trading_mechanism
+          - id: other_boards
+            label_zh: 其他板块幅度
+            label_en: Other Boards' Bands
+            volatility: moderate
+      - id: circuit_breaker
+        label_zh: 熔断机制
+        label_en: Circuit Breaker
+        volatility: moderate
+        native_required: true
+        enum_ref: circuit_breaker_type
+        in_matrix: trading_mechanism
+      - id: volatility_interruption
+        label_zh: 波动性中断
+        label_en: Volatility Interruption
+        volatility: moderate
+        native_required: true
+        in_matrix: trading_mechanism
+      - id: trading_halt_mechanism
+        label_zh: 临时停牌与恢复
+        label_en: Trading Halt & Resumption
+        volatility: moderate
+      - id: intraday_reversal
+        label_zh: 回转交易制度
+        label_en: Intraday Reversal (T+N)
+        volatility: moderate
+        enum_ref: reversal
+        in_matrix: trading_mechanism
+      - id: short_selling
+        label_zh: 做空机制
+        label_en: Short Selling
+        volatility: moderate
+        native_required: true
+        enum_ref: short_selling_stance
+        in_matrix: trading_mechanism
+      - id: block_trade
+        label_zh: 大宗交易
+        label_en: Block Trade
+        volatility: moderate
+      - id: dark_pool
+        label_zh: 暗池与场外交易
+        label_en: Dark Pool / OTC
+        volatility: moderate
+      - id: market_maker_scheme
+        label_zh: 做市商制度
+        label_en: Market Maker Scheme
+        volatility: moderate
+        native_required: true
+      - id: connect_schemes
+        label_zh: 互联互通/跨境安排
+        label_en: Connect / Cross-border Schemes
+        volatility: moderate
+
+  # ── 六｜上市、持续监管与退市 ──
+  - id: listing
+    chapter_no: 6
+    label_zh: 上市、持续监管与退市
+    label_en: Listing, Continuing Obligations & Delisting
+    kind: object
+    fields:
+      - id: boards
+        label_zh: 板块体系
+        label_en: Boards
+        kind: list
+        item_schema:
+          - {id: id, label_zh: 标识符, label_en: ID}
+          - {id: name_zh, label_zh: 中文名, label_en: Name (Chinese)}
+          - {id: name_native, label_zh: 原文名, label_en: Native Name}
+          - {id: financial_threshold, label_zh: 财务门槛摘要, label_en: Financial Threshold}
+          - {id: target_companies, label_zh: 定位, label_en: Target Companies}
+          - {id: launched_year, label_zh: 设立年份, label_en: Launched}
+      - id: review_system
+        label_zh: 审核制度
+        label_en: Review System
+        volatility: moderate
+        enum_ref: review_system
+        in_matrix: listing_delisting
+      - id: listing_process_duration
+        label_zh: 上市流程周期
+        label_en: Listing Process Duration
+        volatility: moderate
+      - id: transfer_between_boards
+        label_zh: 转板/升降板机制
+        label_en: Board Transfer Mechanism
+        volatility: moderate
+      - id: continuing_obligations
+        label_zh: 持续上市义务
+        label_en: Continuing Obligations
+        volatility: moderate
+      - id: suspension_resumption
+        label_zh: 停牌/复牌规则
+        label_en: Suspension & Resumption
+        volatility: moderate
+      - id: delisting_conditions
+        label_zh: 退市条件
+        label_en: Delisting Conditions
+        volatility: moderate
+        native_required: true
+        in_matrix: listing_delisting
+      - id: delisting_process
+        label_zh: 退市流程
+        label_en: Delisting Process
+        volatility: moderate
+      - id: delisting_transition_period
+        label_zh: 退市整理期
+        label_en: Delisting Transition Period
+        volatility: moderate
+      - id: post_delisting_venue
+        label_zh: 退市后去向
+        label_en: Post-delisting Venue
+        volatility: moderate
+
+  # ── 七｜指数体系（列表型）──
+  - id: indices
+    chapter_no: 7
+    label_zh: 指数体系
+    label_en: Index System
+    kind: list
+    item_schema:
+      - {id: id, label_zh: 标识符, label_en: ID}
+      - {id: name_zh, label_zh: 中文名, label_en: Name (Chinese)}
+      - {id: name_native, label_zh: 原文名, label_en: Native Name}
+      - {id: compiler, label_zh: 编撰方, label_en: Compiler, enum_ref: index_compiler}
+      - {id: weighting_method, label_zh: 加权方式, label_en: Weighting Method, enum_ref: weighting_method}
+      - {id: base_date, label_zh: 基日, label_en: Base Date}
+      - {id: base_point, label_zh: 基点, label_en: Base Point}
+      - {id: review_frequency, label_zh: 定期审核频率, label_en: Review Frequency}
+      - {id: derivatives_ref, label_zh: 关联衍生品引用, label_en: Derivatives Ref}
+      - {id: flagship, label_zh: 是否旗舰指数, label_en: Flagship, enum_ref: yes_no}
+
+  # ── 八｜清算、结算与交割 ──
+  - id: clearing
+    chapter_no: 8
+    label_zh: 清算、结算与交割
+    label_en: Clearing, Settlement & Delivery
+    kind: object
+    fields:
+      - id: settlement_cycle
+        label_zh: 结算周期
+        label_en: Settlement Cycle
+        volatility: moderate
+        native_required: true
+        enum_ref: settlement_cycle
+        in_matrix: clearing_settlement
+      - id: ccp_name
+        label_zh: 中央对手方
+        label_en: CCP
+        volatility: stable
+        native_required: true
+        in_matrix: clearing_settlement
+      - id: csd_name
+        label_zh: 托管机构
+        label_en: CSD/ICSD
+        volatility: stable
+        native_required: true
+      - id: initial_margin_practice
+        label_zh: 初始保证金制度
+        label_en: Initial Margin
+        volatility: moderate
+      - id: maintenance_margin_practice
+        label_zh: 维持保证金制度
+        label_en: Maintenance Margin
+        volatility: moderate
+      - id: mark_to_market_frequency
+        label_zh: 盯市频率
+        label_en: Mark-to-market Frequency
+        volatility: moderate
+      - id: delivery_method
+        label_zh: 交割方式
+        label_en: Delivery Method
+        volatility: moderate
+        enum_ref: delivery_method
+        in_matrix: clearing_settlement
+      - id: last_trading_day_rule
+        label_zh: 最后交易日规则
+        label_en: Last Trading Day Rule
+        volatility: moderate
+      - id: default_management
+        label_zh: 违约处置与风险共担
+        label_en: Default Management
+        volatility: moderate
+
+  # ── 九｜市场参与者 ──
+  - id: participants
+    chapter_no: 9
+    label_zh: 市场参与者
+    label_en: Market Participants
+    kind: object
+    fields:
+      - id: investor_structure
+        label_zh: 投资者结构
+        label_en: Investor Structure
+        volatility: moderate
+        note: "机构/散户、本地/外资占比"
+      - id: account_opening_requirements
+        label_zh: 开户要求
+        label_en: Account Opening Requirements
+        volatility: moderate
+      - id: suitability_management
+        label_zh: 适当性管理
+        label_en: Suitability Management
+        volatility: moderate
+      - id: foreign_access_channel
+        label_zh: 外资参与通道
+        label_en: Foreign Access Channel
+        volatility: moderate
+        in_matrix: overview
+      - id: membership_structure
+        label_zh: 会员体系
+        label_en: Membership Structure
+        volatility: stable
+      - id: broker_landscape
+        label_zh: 经纪商结构
+        label_en: Broker Landscape
+        volatility: stable
+
+  # ── 十｜市场数据与技术基础设施 ──
+  - id: infrastructure
+    chapter_no: 10
+    label_zh: 市场数据与技术基础设施
+    label_en: Market Data & Technology Infrastructure
+    kind: object
+    fields:
+      - id: market_data_levels
+        label_zh: 行情数据层级
+        label_en: Market Data Levels
+        volatility: stable
+        note: "Level 1/2、逐笔数据"
+      - id: data_latency
+        label_zh: 实时/延时
+        label_en: Real-time / Delayed
+        volatility: stable
+      - id: data_pricing_model
+        label_zh: 数据收费模式
+        label_en: Data Pricing Model
+        volatility: moderate
+      - id: historical_data_availability
+        label_zh: 历史数据可得性
+        label_en: Historical Data Availability
+        volatility: stable
+      - id: trading_system_name
+        label_zh: 交易系统/撮合引擎
+        label_en: Trading System
+        volatility: stable
+        native_required: true
+      - id: access_methods
+        label_zh: 接入方式
+        label_en: Access Methods
+        volatility: stable
+        note: "直连、API、数据供应商"
+      - id: major_outage_history
+        label_zh: 历史系统故障事件
+        label_en: Major Outage History
+        volatility: moderate
+
+  # ── 十一｜交易成本与税费 ──
+  - id: costs
+    chapter_no: 11
+    label_zh: 交易成本与税费
+    label_en: Trading Costs & Taxes
+    kind: object
+    fields:
+      - id: commission_structure
+        label_zh: 佣金结构
+        label_en: Commission Structure
+        volatility: moderate
+      - id: exchange_fees
+        label_zh: 交易所费用
+        label_en: Exchange Fees
+        volatility: moderate
+      - id: clearing_fees
+        label_zh: 清算费用
+        label_en: Clearing Fees
+        volatility: moderate
+      - id: regulatory_fees
+        label_zh: 监管费用
+        label_en: Regulatory Fees
+        volatility: moderate
+      - id: stamp_duty
+        label_zh: 印花税
+        label_en: Stamp Duty
+        volatility: volatile
+        in_matrix: costs_taxes
+      - id: financial_transaction_tax
+        label_zh: 金融交易税
+        label_en: Financial Transaction Tax
+        volatility: volatile
+      - id: capital_gains_tax
+        label_zh: 资本利得税
+        label_en: Capital Gains Tax
+        volatility: volatile
+        in_matrix: costs_taxes
+      - id: dividend_withholding_tax
+        label_zh: 股息预扣税
+        label_en: Dividend Withholding Tax
+        volatility: volatile
+        in_matrix: costs_taxes
+      - id: implicit_costs_note
+        label_zh: 隐性成本
+        label_en: Implicit Costs
+        volatility: moderate
+        note: "买卖价差、冲击成本"
+
+  # ── 十二｜风险与特殊考量 ──
+  - id: risks
+    chapter_no: 12
+    label_zh: 风险与特殊考量
+    label_en: Risks & Special Considerations
+    kind: object
+    fields:
+      - id: fx_risk_note
+        label_zh: 汇率风险
+        label_en: FX Risk
+        volatility: stable
+      - id: political_risk_note
+        label_zh: 政治、地缘与制裁风险
+        label_en: Political & Geopolitical Risk
+        volatility: moderate
+      - id: liquidity_risk_note
+        label_zh: 流动性风险
+        label_en: Liquidity Risk
+        volatility: moderate
+      - id: regulatory_change_risk_note
+        label_zh: 制度变革风险
+        label_en: Regulatory Change Risk
+        volatility: moderate
+      - id: enforcement_note
+        label_zh: 市场操纵与监管执法环境
+        label_en: Market Manipulation & Enforcement
+        volatility: moderate
+
+# ══════════════════════════════════════════════════════════════
+# 对比矩阵维度组 —— 只定义组的身份和顺序
+# 组内具体列不在此手写：sync.py 扫描上面所有 in_matrix 字段生成，
+# 避免矩阵列表与字段定义两处维护（见 CLAUDE.md 6.1 原则）
+# ══════════════════════════════════════════════════════════════
+dimension_groups:
+  - id: overview
+    label_zh: 基本信息
+    label_en: Overview
+  - id: trading_mechanism
+    label_zh: 交易机制
+    label_en: Trading Mechanism
+  - id: listing_delisting
+    label_zh: 上市与退市
+    label_en: Listing & Delisting
+  - id: clearing_settlement
+    label_zh: 清算结算
+    label_en: Clearing & Settlement
+  - id: regulation
+    label_zh: 监管环境
+    label_en: Regulation
+  - id: costs_taxes
+    label_zh: 成本税费
+    label_en: Costs & Taxes

@@ -1,0 +1,694 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {},
+    "name_zh": {},
+    "name_native": {},
+    "official_languages": {},
+    "group_id": {},
+    "region": {},
+    "tier": {},
+    "overview": {
+      "type": "object",
+      "properties": {
+        "_meta": {
+          "type": "object"
+        },
+        "timezone": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "dst_rule": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "founded_year": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "history": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "organization_form": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "self_listed": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "market_cap_usd_bn": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "listed_companies_count": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "annual_turnover_usd_bn": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "global_ranking": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "trading_currency": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "settlement_currency": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "regulation": {
+      "type": "object",
+      "properties": {
+        "_meta": {
+          "type": "object"
+        },
+        "regulator": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "self_regulatory_org": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "clearing_regulator": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "core_laws": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "foreign_ownership_limit": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "capital_controls": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "disclosure_requirements": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "investor_protection": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "products": {
+      "type": "object",
+      "properties": {
+        "_meta": {
+          "type": "object"
+        },
+        "items": {
+          "type": "array"
+        }
+      },
+      "additionalProperties": false
+    },
+    "market_structure": {
+      "type": "object",
+      "properties": {
+        "_meta": {
+          "type": "object"
+        },
+        "trading_sessions": {
+          "type": "object",
+          "properties": {
+            "_meta": {
+              "type": "object"
+            },
+            "pre_market": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "continuous_am": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "lunch_break": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "continuous_pm": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "after_market": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "night_session": {
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "holidays_note": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "opening_mechanism": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "closing_mechanism": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "matching_principle": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "order_types": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "tick_size": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "board_lot_size": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "odd_lot_handling": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "price_limits": {
+          "type": "object",
+          "properties": {
+            "_meta": {
+              "type": "object"
+            },
+            "type": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "main_board": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "other_boards": {
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "circuit_breaker": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "volatility_interruption": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "trading_halt_mechanism": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "intraday_reversal": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "short_selling": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "block_trade": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "dark_pool": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "market_maker_scheme": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "connect_schemes": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "listing": {
+      "type": "object",
+      "properties": {
+        "_meta": {
+          "type": "object"
+        },
+        "boards": {
+          "type": "array"
+        },
+        "review_system": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "listing_process_duration": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "transfer_between_boards": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "continuing_obligations": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "suspension_resumption": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "delisting_conditions": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "delisting_process": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "delisting_transition_period": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "post_delisting_venue": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "indices": {
+      "type": "object",
+      "properties": {
+        "_meta": {
+          "type": "object"
+        },
+        "items": {
+          "type": "array"
+        }
+      },
+      "additionalProperties": false
+    },
+    "clearing": {
+      "type": "object",
+      "properties": {
+        "_meta": {
+          "type": "object"
+        },
+        "settlement_cycle": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "ccp_name": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "csd_name": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "initial_margin_practice": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "maintenance_margin_practice": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "mark_to_market_frequency": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "delivery_method": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "last_trading_day_rule": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "default_management": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "participants": {
+      "type": "object",
+      "properties": {
+        "_meta": {
+          "type": "object"
+        },
+        "investor_structure": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "account_opening_requirements": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "suitability_management": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "foreign_access_channel": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "membership_structure": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "broker_landscape": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "infrastructure": {
+      "type": "object",
+      "properties": {
+        "_meta": {
+          "type": "object"
+        },
+        "market_data_levels": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "data_latency": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "data_pricing_model": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "historical_data_availability": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "trading_system_name": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "access_methods": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "major_outage_history": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "costs": {
+      "type": "object",
+      "properties": {
+        "_meta": {
+          "type": "object"
+        },
+        "commission_structure": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "exchange_fees": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "clearing_fees": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "regulatory_fees": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "stamp_duty": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "financial_transaction_tax": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "capital_gains_tax": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "dividend_withholding_tax": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "implicit_costs_note": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "risks": {
+      "type": "object",
+      "properties": {
+        "_meta": {
+          "type": "object"
+        },
+        "fx_risk_note": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "political_risk_note": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "liquidity_risk_note": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "regulatory_change_risk_note": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "enforcement_note": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "id",
+    "name_zh",
+    "name_native",
+    "official_languages",
+    "region",
+    "tier"
+  ],
+  "additionalProperties": true
+}

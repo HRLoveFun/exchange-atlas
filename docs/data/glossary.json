@@ -1,0 +1,155 @@
+{
+  "terms": [
+    {
+      "id": "circuit-breaker-index",
+      "zh": "指数熔断",
+      "en": "Market-wide Circuit Breaker",
+      "note": "大盘指数触发阈值后全市场暂停交易的机制，区别于个股级的波动性中断"
+    },
+    {
+      "id": "volatility-control-mechanism",
+      "zh": "波动性中断机制",
+      "en": "Volatility Control Mechanism (VCM)",
+      "natives": {
+        "en": "Volatility Control Mechanism (VCM)"
+      },
+      "note": "港交所个股级机制，触发后进入冷静期，非全市场停牌"
+    },
+    {
+      "id": "limit-up-limit-down",
+      "zh": "涨跌限价机制",
+      "en": "Limit Up-Limit Down (LULD)",
+      "natives": {
+        "en": "Limit Up-Limit Down (LULD)"
+      },
+      "note": "美国证券市场的个股价格带机制，以过去5分钟均价为基准动态计算"
+    },
+    {
+      "id": "price-limit-percentage-band",
+      "zh": "涨跌幅限制",
+      "en": "Price Limit (Percentage Band)",
+      "note": "以前收盘价为基准的百分比涨跌幅限制，如上交所主板 ±10%"
+    },
+    {
+      "id": "price-limit-absolute-tiered",
+      "zh": "值幅限制",
+      "en": "Price Limit (Absolute Tiered)",
+      "natives": {
+        "ja": "値幅制限"
+      },
+      "note": "按价格区间分档规定绝对值幅（非百分比），日本市场典型做法；基准价称「基準値段」"
+    },
+    {
+      "id": "reference-price",
+      "zh": "基准价",
+      "en": "Reference Price",
+      "natives": {
+        "ja": "基準値段"
+      }
+    },
+    {
+      "id": "intraday-reversal-t0",
+      "zh": "当日回转交易",
+      "en": "Intraday Reversal Trading (T+0)",
+      "note": "当日买入的证券当日可卖出"
+    },
+    {
+      "id": "intraday-reversal-t1",
+      "zh": "不可当日回转",
+      "en": "No Intraday Reversal (T+1)",
+      "note": "当日买入的证券须次一交易日起才可卖出"
+    },
+    {
+      "id": "registration-based-ipo",
+      "zh": "注册制",
+      "en": "Registration-based (IPO Review)"
+    },
+    {
+      "id": "approval-based-ipo",
+      "zh": "核准制",
+      "en": "Approval-based (IPO Review)"
+    },
+    {
+      "id": "central-counterparty",
+      "zh": "中央对手方",
+      "en": "Central Counterparty (CCP)"
+    },
+    {
+      "id": "central-securities-depository",
+      "zh": "中央证券存管机构",
+      "en": "Central Securities Depository (CSD)"
+    },
+    {
+      "id": "market-maker-scheme",
+      "zh": "做市商制度",
+      "en": "Market Maker Scheme"
+    },
+    {
+      "id": "designated-market-maker",
+      "zh": "指定做市商",
+      "en": "Designated Market Maker (DMM)",
+      "natives": {
+        "en": "Designated Market Maker (DMM)"
+      },
+      "note": "纽交所特有的场内做市商角色，负责维持特定股票的公平有序市场"
+    },
+    {
+      "id": "stock-connect",
+      "zh": "互联互通机制",
+      "en": "Stock Connect",
+      "note": "内地与香港市场间的跨境交易安排，如沪港通/深港通"
+    },
+    {
+      "id": "closing-auction",
+      "zh": "收盘集合竞价",
+      "en": "Closing Auction"
+    },
+    {
+      "id": "opening-auction",
+      "zh": "开盘集合竞价",
+      "en": "Opening Auction"
+    },
+    {
+      "id": "block-trade",
+      "zh": "大宗交易",
+      "en": "Block Trade"
+    },
+    {
+      "id": "odd-lot",
+      "zh": "碎股",
+      "en": "Odd Lot"
+    },
+    {
+      "id": "board-lot",
+      "zh": "一手/整手",
+      "en": "Board Lot"
+    },
+    {
+      "id": "short-selling-uptick-rule",
+      "zh": "报升规则",
+      "en": "Uptick Rule",
+      "note": "卖空价格不得低于最近成交价的限制性规则"
+    },
+    {
+      "id": "naked-short-selling",
+      "zh": "裸卖空",
+      "en": "Naked Short Selling"
+    },
+    {
+      "id": "portfolio-margining",
+      "zh": "组合保证金",
+      "en": "Portfolio Margining",
+      "note": "欧洲期货交易所 Prisma 等采用的基于全组合风险计算保证金的方法，区别于逐笔保证金"
+    },
+    {
+      "id": "dividend-withholding-tax",
+      "zh": "股息预扣税",
+      "en": "Dividend Withholding Tax"
+    },
+    {
+      "id": "stamp-duty",
+      "zh": "印花税",
+      "en": "Stamp Duty"
+    }
+  ]
+}

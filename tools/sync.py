@@ -1,0 +1,478 @@
+#!/usr/bin/env python3
+"""tools/sync.py — 从权威 YAML 生成一切派生产物（幂等）
+
+做的事：
+  1. 读 schema/{taxonomy,glossary,enums}.yml + data/exchanges/*.yml
+  2. 把数据文件里的「简写字段」展开成完整事实信封（继承章节 _meta）
+  3. 生成 docs/data/{manifest,matrix,freshness,glossary,taxonomy,_schema}.json
+     与 docs/data/exchanges/<id>.json（前端直接 fetch 这些，不解析 YAML）
+  4. 重写五处 GENERATED 标记块：
+       PROJECT/ROADMAP.md      progress-matrix, health-summary
+       README.md               exchange-list
+       PROJECT/GLOSSARY.md     全文
+       PROJECT/OPEN-QUESTIONS.md  auto-issues
+
+跑完这个脚本后 `git diff` 应为空才说明库是一致的——这是 CLAUDE.md 一节
+「生成块新鲜度」校验的前提；validate.py 会重新跑一遍本脚本的生成逻辑做比对。
+"""
+import datetime
+import json
+import re
+import sys
+from pathlib import Path
+
+import yaml
+
+ROOT = Path(__file__).resolve().parent.parent
+SCHEMA_DIR = ROOT / "schema"
+DATA_DIR = ROOT / "data" / "exchanges"
+DOCS_DATA = ROOT / "docs" / "data"
+PROJECT_DIR = ROOT / "PROJECT"
+
+VOLATILITY_MONTHS = {"stable": 24, "moderate": 12, "volatile": 6}
+ENVELOPE_KEYS = ("zh", "native", "native_lang", "enum", "detail", "quote", "sources", "verified", "confidence")
+# exchange_identity 里视为必填的字段；group_id 允许缺省（无集团归属）
+REQUIRED_IDENTITY_FIELDS = ("id", "name_zh", "name_native", "official_languages", "region", "tier")
+
+TODAY = datetime.date.today()
+
+
+def load_yaml(path: Path):
+    with path.open(encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
+
+
+def dump_json(obj) -> str:
+    # default=str：YAML 里裸写的日期（verified: 2026-08-12）会被 PyYAML 自动解析成
+    # datetime.date 对象而非字符串——不强求每处日期都手动加引号，这里统一兜底转成
+    # ISO 字符串（str(date) 正好就是 YYYY-MM-DD）。
+    return json.dumps(obj, ensure_ascii=False, indent=2, default=str)
+
+
+def load_all():
+    taxonomy = load_yaml(SCHEMA_DIR / "taxonomy.yml")
+    glossary = load_yaml(SCHEMA_DIR / "glossary.yml")
+    enums = load_yaml(SCHEMA_DIR / "enums.yml")
+    exchanges = {}
+    for p in sorted(DATA_DIR.glob("*.yml")):
+        exchanges[p.stem] = load_yaml(p)
+    return taxonomy, glossary, enums, exchanges
+
+
+# ── 路径工具 ──────────────────────────────────────────────
+
+def get_by_path(d, path):
+    cur = d
+    for p in path:
+        if not isinstance(cur, dict) or p not in cur:
+            return None
+        cur = cur[p]
+    return cur
+
+
+def set_by_path(d, path, value):
+    cur = d
+    for p in path[:-1]:
+        cur = cur.setdefault(p, {})
+    cur[path[-1]] = value
+
+
+def walk_chapter_fields(fields, prefix=()):
+    """递归遍历一个 object 章节的 fields。
+    yield ("leaf", path, field_def)      —— 普通事实字段
+    yield ("list", path, field_def)      —— 嵌套列表字段（如 listing.boards）
+    """
+    for f in fields or []:
+        path = prefix + (f["id"],)
+        if "item_schema" in f:
+            yield ("list", path, f)
+        elif "fields" in f:
+            yield from walk_chapter_fields(f["fields"], path)
+        else:
+            yield ("leaf", path, f)
+
+
+# ── 信封展开 ──────────────────────────────────────────────
+
+def expand_field(raw, chapter_meta):
+    """裸字符串/数字 -> 只有 zh 的信封；dict -> 补齐继承字段。raw 为 None 时返回 None（缺失）。"""
+    if raw is None:
+        return None
+    if isinstance(raw, dict):
+        env = dict(raw)
+    else:
+        env = {"zh": str(raw)}
+    for key in ("sources", "verified", "confidence"):
+        if env.get(key) in (None, "") and chapter_meta.get(key) not in (None, ""):
+            env[key] = chapter_meta[key]
+    for key in ENVELOPE_KEYS:
+        env.setdefault(key, None)
+    return env
+
+
+def expand_object_chapter(chapter_def, raw_chapter):
+    raw_chapter = raw_chapter or {}
+    meta = raw_chapter.get("_meta") or {}
+    expanded = {}
+    for kind, path, fdef in walk_chapter_fields(chapter_def.get("fields", [])):
+        if kind == "leaf":
+            raw = get_by_path(raw_chapter, path)
+            set_by_path(expanded, path, expand_field(raw, meta))
+        else:  # 嵌套列表字段，轻量透传，不做信封展开
+            set_by_path(expanded, path, get_by_path(raw_chapter, path) or [])
+    return expanded
+
+
+def expand_list_chapter(raw_chapter):
+    raw_chapter = raw_chapter or {}
+    return {"meta": raw_chapter.get("_meta") or {}, "items": raw_chapter.get("items") or []}
+
+
+def expand_exchange(taxonomy, raw):
+    identity = {f["id"]: raw.get(f["id"]) for f in taxonomy["exchange_identity"]["fields"]}
+    chapters = {}
+    for ch in taxonomy["chapters"]:
+        raw_chapter = raw.get(ch["id"])
+        if ch.get("kind") == "list":
+            chapters[ch["id"]] = expand_list_chapter(raw_chapter)
+        else:
+            chapters[ch["id"]] = expand_object_chapter(ch, raw_chapter)
+    return {**identity, "chapters": chapters}
+
+
+# ── 矩阵 / 时效性 / 进度 ────────────────────────────────────
+
+def collect_matrix_cells(exchange_id, taxonomy, expanded_chapters):
+    cells = []
+    for ch in taxonomy["chapters"]:
+        if ch.get("kind") == "list":
+            continue
+        for kind, path, fdef in walk_chapter_fields(ch.get("fields", [])):
+            if kind != "leaf" or not fdef.get("in_matrix"):
+                continue
+            env = get_by_path(expanded_chapters[ch["id"]], path)
+            if not env or not env.get("zh"):
+                continue
+            cells.append({
+                "exchange_id": exchange_id,
+                "chapter": ch["id"],
+                "group": fdef["in_matrix"],
+                "field_path": ".".join(path),
+                "label_zh": fdef["label_zh"],
+                "label_en": fdef["label_en"],
+                "zh": env.get("zh"),
+                "native": env.get("native"),
+                "enum": env.get("enum"),
+                "enum_ref": fdef.get("enum_ref"),
+                "has_detail": bool(env.get("detail")),
+                "verified": env.get("verified"),
+                "confidence": env.get("confidence"),
+            })
+    return cells
+
+
+def compute_freshness(exchange_id, taxonomy, expanded_chapters):
+    rows = []
+    for ch in taxonomy["chapters"]:
+        if ch.get("kind") == "list":
+            continue
+        for kind, path, fdef in walk_chapter_fields(ch.get("fields", [])):
+            if kind != "leaf":
+                continue
+            env = get_by_path(expanded_chapters[ch["id"]], path)
+            if not env or not env.get("zh"):
+                continue
+            vol = fdef.get("volatility", "moderate")
+            threshold_days = VOLATILITY_MONTHS.get(vol, 12) * 30
+            verified = env.get("verified")
+            age_days, stale = None, True
+            if verified:
+                try:
+                    age_days = (TODAY - datetime.date.fromisoformat(str(verified))).days
+                    stale = age_days > threshold_days
+                except ValueError:
+                    pass
+            rows.append({
+                "exchange_id": exchange_id, "chapter": ch["id"],
+                "field_path": ".".join(path), "label_zh": fdef["label_zh"],
+                "volatility": vol, "verified": verified, "age_days": age_days,
+                "stale": stale, "confidence": env.get("confidence"),
+            })
+    return rows
+
+
+def chapter_status(chapter_def, raw_chapter, expanded):
+    if chapter_def.get("kind") == "list":
+        items = (raw_chapter or {}).get("items") or []
+        if items:
+            return "✅"
+        return "🟡" if raw_chapter else "⬜"
+    total = filled = low_conf = 0
+    for kind, path, fdef in walk_chapter_fields(chapter_def.get("fields", [])):
+        if kind != "leaf":
+            continue
+        total += 1
+        env = get_by_path(expanded, path)
+        if env and env.get("zh"):
+            filled += 1
+            if env.get("confidence") == "low":
+                low_conf += 1
+    if filled == 0:
+        return "⬜"
+    if filled == total and low_conf == 0:
+        return "✅"
+    return "🟡"
+
+
+# ── JSON Schema（从 taxonomy 派生，供 validate.py 做结构校验）───────
+
+def build_json_schema(taxonomy):
+    def leaf_schema():
+        return {"type": ["object", "null"]}
+
+    def group_schema(fields):
+        props = {"_meta": {"type": "object"}}
+        for f in fields:
+            if "item_schema" in f:
+                props[f["id"]] = {"type": "array"}
+            elif "fields" in f:
+                props[f["id"]] = group_schema(f["fields"])
+            else:
+                props[f["id"]] = leaf_schema()
+        return {"type": "object", "properties": props, "additionalProperties": False}
+
+    chapters_props = {}
+    for ch in taxonomy["chapters"]:
+        if ch.get("kind") == "list":
+            chapters_props[ch["id"]] = {
+                "type": "object",
+                "properties": {"_meta": {"type": "object"}, "items": {"type": "array"}},
+                "additionalProperties": False,
+            }
+        else:
+            chapters_props[ch["id"]] = group_schema(ch.get("fields", []))
+
+    identity_props = {f["id"]: {} for f in taxonomy["exchange_identity"]["fields"]}
+    return {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {**identity_props, **chapters_props},
+        "required": list(REQUIRED_IDENTITY_FIELDS),
+        "additionalProperties": True,
+    }
+
+
+# ── GENERATED 块替换 ────────────────────────────────────────
+
+def replace_generated_block(text, name, new_content):
+    pattern = re.compile(
+        r"(<!-- BEGIN:GENERATED " + re.escape(name) + r" -->\n)(.*?)(\n<!-- END:GENERATED " + re.escape(name) + r" -->)",
+        re.S,
+    )
+    if not pattern.search(text):
+        sys.exit(f"[sync] 错误：找不到 GENERATED 块 `{name}`（检查目标文件里的标记是否还在）")
+    return pattern.sub(lambda m: m.group(1) + new_content.rstrip("\n") + m.group(3), text)
+
+
+def apply_blocks(path: Path, blocks: dict):
+    text = path.read_text(encoding="utf-8")
+    for name, content in blocks.items():
+        text = replace_generated_block(text, name, content)
+    path.write_text(text, encoding="utf-8")
+
+
+# ── 各生成块的具体内容 ────────────────────────────────────────
+# 这五个 render_* 都是纯函数（相同输入 -> 相同输出，不读写文件）：
+# sync.py 用它们写盘，validate.py 用同一批函数在内存里重算一遍做比对，
+# 两边不允许出现第二份「怎么生成这段内容」的逻辑。
+
+def build_enum_label_maps(enums):
+    return {
+        "region": {v["id"]: v["label_zh"] for v in (enums.get("region") or {}).get("values", [])},
+        "tier": {v["id"]: v["label_zh"] for v in (enums.get("tier") or {}).get("values", [])},
+    }
+
+
+def render_exchange_list(exchanges_expanded, enum_label_maps):
+    if not exchanges_expanded:
+        return "（暂无交易所数据）"
+    region_map = enum_label_maps["region"]
+    tier_map = enum_label_maps["tier"]
+    lines = ["| ID | 名称 | 地区 | 批次 |", "|---|---|---|---|"]
+    for eid, ex in sorted(exchanges_expanded.items()):
+        region = region_map.get(ex.get("region"), ex.get("region") or "")
+        tier = tier_map.get(ex.get("tier"), ex.get("tier") or "")
+        lines.append(f"| `{eid}` | {ex.get('name_zh', '')} | {region} | {tier} |")
+    return "\n".join(lines)
+
+
+def render_progress_matrix(taxonomy, raw_exchanges, exchanges_expanded):
+    chapters = taxonomy["chapters"]
+    if not exchanges_expanded:
+        header = " | ".join(str(ch.get("chapter_no", "")) for ch in chapters)
+        return f"（暂无交易所数据。列将是：{header}）"
+    header = "| 交易所 | " + " | ".join(str(ch.get("chapter_no", "")) for ch in chapters) + " |"
+    sep = "|---|" + "---|" * len(chapters)
+    lines = [header, sep]
+    for eid in sorted(exchanges_expanded):
+        raw = {c["id"]: raw_exchanges[eid].get(c["id"]) for c in chapters}
+        expanded = exchanges_expanded[eid]["chapters"]
+        cells = [chapter_status(c, raw[c["id"]], expanded[c["id"]] if c.get("kind") != "list" else raw[c["id"]]) for c in chapters]
+        lines.append(f"| `{eid}` | " + " | ".join(cells) + " |")
+    legend = "、".join(f"{c.get('chapter_no')} {c['label_zh']}" for c in chapters)
+    lines.append("")
+    lines.append(f"列说明：{legend}")
+    return "\n".join(lines)
+
+
+def render_health_summary(freshness_rows):
+    if not freshness_rows:
+        return "（暂无数据）"
+    stale_rows = [r for r in freshness_rows if r["stale"]]
+    by_exchange = {}
+    for r in freshness_rows:
+        by_exchange.setdefault(r["exchange_id"], {"total": 0, "stale": 0})
+        by_exchange[r["exchange_id"]]["total"] += 1
+        if r["stale"]:
+            by_exchange[r["exchange_id"]]["stale"] += 1
+    lines = [f"共 {len(freshness_rows)} 个已填字段，其中 {len(stale_rows)} 个超过复核阈值待复核。", ""]
+    lines.append("| 交易所 | 已填字段 | 待复核 |")
+    lines.append("|---|---|---|")
+    for eid, c in sorted(by_exchange.items()):
+        lines.append(f"| `{eid}` | {c['total']} | {c['stale']} |")
+    top_stale = sorted((r for r in stale_rows if r["age_days"] is not None), key=lambda r: -r["age_days"])[:5]
+    if top_stale:
+        lines.append("")
+        lines.append("最需要复核（按超期天数排序）：")
+        for r in top_stale:
+            lines.append(f"- `{r['exchange_id']}` {r['label_zh']}（{r['field_path']}）— {r['age_days']} 天未核实")
+    return "\n".join(lines)
+
+
+def render_glossary_md(glossary):
+    terms = glossary.get("terms", [])
+    lines = [
+        "# 术语对照表 GLOSSARY",
+        "",
+        "⚠️ 本文件由 `make sync` 从 `schema/glossary.yml` 全量生成，不要手改——改 `glossary.yml`。",
+        "",
+        "| 中文 | English | 原文对照 | 说明 |",
+        "|---|---|---|---|",
+    ]
+    for t in terms:
+        natives = t.get("natives") or {}
+        native_str = "；".join(f"{k}: {v}" for k, v in natives.items()) if natives else ""
+        note = t.get("note", "")
+        lines.append(f"| {t['zh']} | {t['en']} | {native_str} | {note} |")
+    return "\n".join(lines)
+
+
+def render_auto_issues(taxonomy, raw_exchanges, exchanges_expanded):
+    issues = []
+    for eid, ex in sorted(exchanges_expanded.items()):
+        for ch in taxonomy["chapters"]:
+            if ch.get("kind") == "list":
+                continue
+            for kind, path, fdef in walk_chapter_fields(ch.get("fields", [])):
+                if kind != "leaf":
+                    continue
+                env = get_by_path(ex["chapters"][ch["id"]], path)
+                if env and env.get("zh") and env.get("confidence") == "low":
+                    issues.append(f"- `{eid}` {ch['label_zh']} / {fdef['label_zh']}（{'.'.join(path)}）— confidence: low")
+    if not issues:
+        return "（暂无 confidence: low 的字段）"
+    return "\n".join(issues)
+
+
+# ── 主流程 ────────────────────────────────────────────────
+
+def main():
+    taxonomy, glossary, enums, raw_exchanges = load_all()
+
+    exchanges_expanded = {eid: expand_exchange(taxonomy, raw) for eid, raw in raw_exchanges.items()}
+
+    matrix_cells = []
+    freshness_rows = []
+    for eid, ex in exchanges_expanded.items():
+        matrix_cells += collect_matrix_cells(eid, taxonomy, ex["chapters"])
+        freshness_rows += compute_freshness(eid, taxonomy, ex["chapters"])
+
+    # ── docs/data/ 产物 ──
+    DOCS_DATA.mkdir(parents=True, exist_ok=True)
+    (DOCS_DATA / "exchanges").mkdir(parents=True, exist_ok=True)
+
+    manifest = {
+        "exchanges": [
+            {f["id"]: ex.get(f["id"]) for f in taxonomy["exchange_identity"]["fields"]}
+            for ex in exchanges_expanded.values()
+        ],
+        "dimension_groups": taxonomy.get("dimension_groups", []),
+        "chapters": [
+            {"id": c["id"], "chapter_no": c.get("chapter_no"), "label_zh": c["label_zh"],
+             "label_en": c["label_en"], "kind": c.get("kind", "object")}
+            for c in taxonomy["chapters"]
+        ],
+        "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
+    }
+    (DOCS_DATA / "manifest.json").write_text(dump_json(manifest), encoding="utf-8")
+    (DOCS_DATA / "matrix.json").write_text(dump_json({"cells": matrix_cells}), encoding="utf-8")
+    (DOCS_DATA / "freshness.json").write_text(dump_json({"fields": freshness_rows}), encoding="utf-8")
+    (DOCS_DATA / "glossary.json").write_text(dump_json(glossary), encoding="utf-8")
+    (DOCS_DATA / "enums.json").write_text(dump_json(enums), encoding="utf-8")
+    (DOCS_DATA / "_schema.json").write_text(dump_json(build_json_schema(taxonomy)), encoding="utf-8")
+
+    # 前端友好的 taxonomy 视图（不含内部注释，扁平化 leaf 字段路径）。
+    # 注意 object 章节里也可能嵌套 list 字段（如 listing.boards）——不只是叶子字段，
+    # 否则前端拿不到 item_schema，这部分数据就会被悄悄漏渲染。
+    taxonomy_out = {"dimension_groups": taxonomy.get("dimension_groups", []), "chapters": []}
+    for ch in taxonomy["chapters"]:
+        if ch.get("kind") == "list":
+            fields_out = ch.get("item_schema", [])
+        else:
+            fields_out = []
+            for kind, path, fdef in walk_chapter_fields(ch.get("fields", [])):
+                if kind == "leaf":
+                    fields_out.append({
+                        "kind": "leaf", "path": ".".join(path), "label_zh": fdef["label_zh"], "label_en": fdef["label_en"],
+                        "volatility": fdef.get("volatility"), "native_required": fdef.get("native_required", False),
+                        "enum_ref": fdef.get("enum_ref"), "in_matrix": fdef.get("in_matrix", False),
+                    })
+                else:  # kind == "list"：嵌套列表字段
+                    fields_out.append({
+                        "kind": "list", "path": ".".join(path), "label_zh": fdef["label_zh"], "label_en": fdef["label_en"],
+                        "item_schema": fdef.get("item_schema", []),
+                    })
+        taxonomy_out["chapters"].append({
+            "id": ch["id"], "chapter_no": ch.get("chapter_no"), "label_zh": ch["label_zh"],
+            "label_en": ch["label_en"], "kind": ch.get("kind", "object"), "fields": fields_out,
+        })
+    (DOCS_DATA / "taxonomy.json").write_text(dump_json(taxonomy_out), encoding="utf-8")
+
+    for eid, ex in exchanges_expanded.items():
+        (DOCS_DATA / "exchanges" / f"{eid}.json").write_text(dump_json(ex), encoding="utf-8")
+    # 清理已删除交易所留下的孤儿 json
+    valid_names = {f"{eid}.json" for eid in exchanges_expanded}
+    for f in (DOCS_DATA / "exchanges").glob("*.json"):
+        if f.name not in valid_names:
+            f.unlink()
+
+    # ── GENERATED 文档块 ──
+    enum_label_maps = build_enum_label_maps(enums)
+
+    apply_blocks(ROOT / "README.md", {"exchange-list": render_exchange_list(exchanges_expanded, enum_label_maps)})
+    apply_blocks(PROJECT_DIR / "ROADMAP.md", {
+        "progress-matrix": render_progress_matrix(taxonomy, raw_exchanges, exchanges_expanded),
+        "health-summary": render_health_summary(freshness_rows),
+    })
+    apply_blocks(PROJECT_DIR / "OPEN-QUESTIONS.md", {
+        "auto-issues": render_auto_issues(taxonomy, raw_exchanges, exchanges_expanded),
+    })
+
+    glossary_md_path = PROJECT_DIR / "GLOSSARY.md"
+    glossary_md_path.write_text(render_glossary_md(glossary) + "\n", encoding="utf-8")
+
+    print(f"[sync] {len(exchanges_expanded)} 家交易所 → docs/data/ 产物已生成，5 处 GENERATED 块已更新")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,1312 @@
+{
+  "id": "hk-hkex",
+  "name_zh": "香港交易及结算所（简称港交所）",
+  "name_native": {
+    "zh-Hant": "香港交易及結算所有限公司",
+    "en": "Hong Kong Exchanges and Clearing Limited (HKEX)"
+  },
+  "official_languages": [
+    "zh-Hant",
+    "en"
+  ],
+  "group_id": null,
+  "region": "apac",
+  "tier": "pilot",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "Asia/Hong_Kong (UTC+8)",
+        "verified": "2026-08-12",
+        "confidence": "medium",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dst_rule": {
+        "zh": "不实行夏令时",
+        "verified": "2026-08-12",
+        "confidence": "medium",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "founded_year": {
+        "zh": "1891（前身香港经纪协会）／2000年3月6日（现HKEX集团经公司化改制成立，同年6月27日上市）",
+        "detail": "交易所前身可追溯至1891年成立的香港经纪协会，1914年更名为香港证券交易所。\n2000年3月6日，香港联合交易所、香港期货交易所与香港中央结算公司公司化合并，\n组成现在的香港交易及结算所有限公司，同年6月27日在本所主板上市。\n本条来自第三方综述（MarketsWiki/维基百科等），未逐条核对港交所官方\"关于我们\"页原文，confidence 标 medium。\n",
+        "confidence": "medium",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "history": null,
+      "organization_form": {
+        "enum": "demutualized_listed",
+        "zh": "公司制（自身上市）",
+        "detail": "2000年由会员制的联交所/期交所公司化改制而来，是本项目 v0.1 两家标杆中与上交所会员制形成直接对比的样本。",
+        "sources": [
+          {
+            "title": "HKEX 官网首页（公司公开在自身主板上市，股票代码 0388，为公开可验证事实）",
+            "url": "https://www.hkex.com.hk/",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "quote": null
+      },
+      "self_listed": {
+        "enum": "yes",
+        "zh": "是（股票代码 0388.HK，即在自己的主板上市）",
+        "sources": [
+          {
+            "title": "HKEX 官网首页",
+            "url": "https://www.hkex.com.hk/",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "detail": null,
+        "quote": null
+      },
+      "market_cap_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：2026年2月港股市场总市值约6.25万亿美元（约48.55万亿港元）——来自第三方综述，未核实原始统计口径与具体日期，留空。",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "listed_companies_count": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "annual_turnover_usd_bn": null,
+      "global_ranking": null,
+      "trading_currency": {
+        "zh": "港元为主；2023年起推出双柜台模式，部分股票可另以人民币计价交易",
+        "native": "港元 (HKD)；雙櫃檯 (Dual Counter)",
+        "detail": "「Dual Counter Market Maker」在卖空监管规则中被列为做市商豁免情形之一，确认双柜台机制存在。",
+        "sources": [
+          {
+            "title": "Regulated Short Selling（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "quote": "Dual Counter Market Maker Short Selling by a Dual Counter Market Maker",
+        "confidence": "medium",
+        "verified": "2026-08-12",
+        "native_lang": null,
+        "enum": null
+      },
+      "settlement_currency": {
+        "zh": "港元（双柜台人民币柜台以人民币结算）",
+        "verified": "2026-08-12",
+        "confidence": "medium",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "证券及期货事务监察委员会",
+        "native": "Securities and Futures Commission (SFC)",
+        "sources": [
+          {
+            "title": "Regulated Short Selling（HKEX 官网，条文引用 SFO）",
+            "url": "https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-12",
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "self_regulatory_org": {
+        "zh": "港交所本身兼具前线监管职能（对上市公司与交易参与者）",
+        "native": "Front-line regulation by HKEX",
+        "confidence": "low",
+        "detail": "SFC 与 HKEX 之间自律监管职责的精确边界未逐条核实，留待后续核实。",
+        "verified": "2026-08-12",
+        "native_lang": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "clearing_regulator": {
+        "zh": "证券及期货事务监察委员会",
+        "native": "SFC",
+        "confidence": "medium",
+        "verified": "2026-08-12",
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "core_laws": {
+        "zh": "《证券及期货条例》",
+        "native": "Securities and Futures Ordinance (SFO)",
+        "sources": [
+          {
+            "title": "Regulated Short Selling（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "quote": "Comply at all times with the Securities and Futures Ordinance, and the regulations regarding short selling in Schedule 11 of the Rules of the Exchange",
+        "confidence": "high",
+        "verified": "2026-08-12",
+        "native_lang": null,
+        "enum": null,
+        "detail": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：无一般性外资持股比例限制（自由港）——与上交所形成对比的重要字段，但未核实具体例外情形，留空。",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：港元自由兑换，联系汇率制度（与美元挂钩，7.75-7.85区间）——未附来源，留空。",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "disclosure_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：中英双语披露，与上交所（仅中文）形成对比——具体披露义务细节未核实，留空。",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-12",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "hkex-stocks",
+          "category": "equity",
+          "name_zh": "股票",
+          "name_native": "Equities",
+          "board": "主板 / GEM",
+          "description": "部分股票 2023 年起支持双柜台（港元/人民币）交易"
+        },
+        {
+          "id": "hkex-etf",
+          "category": "fund",
+          "name_zh": "交易所买卖基金",
+          "name_native": "Exchange Traded Funds (ETF)"
+        },
+        {
+          "id": "hkex-reits",
+          "category": "fund",
+          "name_zh": "房地产投资信托基金",
+          "name_native": "REITs"
+        },
+        {
+          "id": "hkex-warrants",
+          "category": "structured",
+          "name_zh": "衍生权证",
+          "name_native": "Derivative Warrants"
+        },
+        {
+          "id": "hkex-cbbc",
+          "category": "structured",
+          "name_zh": "牛熊证",
+          "name_native": "Callable Bull/Bear Contracts (CBBC)",
+          "description": "香港特色结构性产品，规模远大于多数市场"
+        },
+        {
+          "id": "hkex-bonds",
+          "category": "bond",
+          "name_zh": "债券",
+          "description": "一般知识，未逐条核实规模与品种清单"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "盘前时段 9:00-9:30（单一价格集合竞价）",
+          "native": "Pre-opening Session (POS)",
+          "quote": "Pre-opening Session / 9:00 a.m. - 9:30 a.m.",
+          "sources": [
+            {
+              "title": "Trading Hours - Securities Market（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "confidence": "high",
+          "native_lang": null,
+          "enum": null,
+          "detail": null
+        },
+        "continuous_am": {
+          "zh": "9:30-12:00",
+          "quote": "Continuous Trading Session / Morning Session / 9:30 a.m. - 12:00 noon",
+          "sources": [
+            {
+              "title": "Trading Hours - Securities Market（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "confidence": "high",
+          "native": null,
+          "native_lang": null,
+          "enum": null,
+          "detail": null
+        },
+        "lunch_break": {
+          "zh": "延长午市 12:00-13:00（非正式连续交易，圣诞夜/元旦夜/农历年夜前不设）",
+          "quote": "Extended Morning Session / 12:00 noon - 1:00 p.m.",
+          "sources": [
+            {
+              "title": "Trading Hours - Securities Market（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "confidence": "high",
+          "native": null,
+          "native_lang": null,
+          "enum": null,
+          "detail": null
+        },
+        "continuous_pm": {
+          "zh": "13:00-16:00",
+          "quote": "Afternoon Session / 1:00 p.m. - 4:00 p.m.",
+          "sources": [
+            {
+              "title": "Trading Hours - Securities Market（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "confidence": "high",
+          "native": null,
+          "native_lang": null,
+          "enum": null,
+          "detail": null
+        },
+        "after_market": {
+          "zh": "无独立盘后连续交易时段；16:00 起进入收盘集合竞价",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Trading Hours - Securities Market（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "native": null,
+          "native_lang": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "night_session": {
+          "zh": "无",
+          "detail": "官方交易时段表未列出夜盘时段，属推断而非逐字摘引，confidence 相应降级。",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Trading Hours - Securities Market（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "native": null,
+          "native_lang": null,
+          "enum": null,
+          "quote": null
+        }
+      },
+      "holidays_note": {
+        "zh": "香港公众假期休市；圣诞夜/元旦夜/农历新年夜等半日市安排下无延长午市",
+        "quote": "There is no Extended Morning Session and Afternoon Session on the eves of Christmas, New Year and Lunar New Year.",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "confidence": "high",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null
+      },
+      "opening_mechanism": {
+        "zh": "盘前集合竞价（9:00-9:30，单一价格）",
+        "native": "Pre-opening Session (POS)",
+        "quote": "Pre-opening Session / 9:00 a.m. - 9:30 a.m.",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "confidence": "high",
+        "native_lang": null,
+        "enum": null,
+        "detail": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价，4:00pm 起至 4:08-4:10pm 间随机收盘",
+        "native": "Closing Auction Session (CAS)",
+        "quote": "Closing Auction Session / 4:00 p.m. to a random closing between 4:08 p.m. and 4:10 p.m.",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "confidence": "high",
+        "native_lang": null,
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "价格优先、时间优先（一般知识，未在本次抓取的页面中直接摘引条文）",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "order_types": {
+        "zh": "限价盘为主；VCM 触发后冷静期内仅可在价格区间内报价",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "tick_size": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "按股价分层的最小变动价位表未在本次抓取，留空。",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "quote": null
+      },
+      "board_lot_size": {
+        "zh": "各股票各自设定board lot（非全市场统一，如100股/500股/1000股不等）",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "odd_lot_handling": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "none",
+          "zh": "无涨跌幅限制（无 daily price limit）",
+          "quote": "it also does not work the same way as the daily price limit model which sets a specific daily price range for securities trading as seen in some markets",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Trading Hours - Securities Market（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "native": null,
+          "native_lang": null,
+          "detail": null
+        },
+        "main_board": {
+          "zh": "",
+          "sources": [
+            {
+              "title": "Trading Hours - Securities Market（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "confidence": "high",
+          "native": null,
+          "native_lang": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "other_boards": {
+          "zh": "",
+          "sources": [
+            {
+              "title": "Trading Hours - Securities Market（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "confidence": "high",
+          "native": null,
+          "native_lang": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "stock_level",
+        "zh": "无全市场熔断；个股/产品层级设波动性中断机制（VCM）",
+        "native": "市調機制 (Volatility Control Mechanism, VCM)",
+        "detail": "非全市场熔断，是本所对港股「无涨跌停」制度的配套安全阀，见 volatility_interruption。",
+        "quote": "It is not a trading halt, does not intend to limit the ups and downs of stock prices due to fundamental events",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "confidence": "high",
+        "native_lang": null
+      },
+      "volatility_interruption": {
+        "zh": "波动性中断机制（VCM）：以5分钟前成交价为基准，触发阈值按股票分组分别为±10%/±15%/±20%，触发后进入5分钟冷静期（非停牌，仅限价区间内可继续交易）",
+        "native": "市調機制 (Volatility Control Mechanism, VCM)",
+        "detail": "监测范围为连续交易时段，但不含早市/午市开始后首15分钟及午市收盘前20分钟。\n冷静期内标的证券继续交易，但价格被限制在触发前区间内，不同于熔断/停牌。\n",
+        "quote": "The VCM is triggered if a stock is [±10%, ±15%, or ±20% depending on stock group] away from the last traded price 5 minutes ago... a cooling-off period will last for 5 minutes",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "confidence": "high",
+        "native_lang": null,
+        "enum": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "无涨跌停亦无个股熔断停牌，VCM 触发后不停牌只限价（见上）；另有因披露事项的停牌机制未逐条核实",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "intraday_reversal": {
+        "enum": "t0",
+        "zh": "T+0（可当日回转，无 SSE 式 T+1 限制）",
+        "detail": "港股交易层面无「买入证券交收前不得卖出」的限制，可当日买卖；与结算层面 T+2 是两回事，不要混淆（见 clearing.settlement_cycle）。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "quote": null
+      },
+      "short_selling": {
+        "enum": "restricted_uptick",
+        "zh": "受监管的卖空：仅限「指定证券」、须为备兑卖空、遵守报升规则（不得低于最优卖盘价/参考价）",
+        "native": "Regulated Short Selling",
+        "sources": [
+          {
+            "title": "Regulated Short Selling（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "quote": "Be placed only on Designated Securities eligible for short selling; ... Observe \"tick rule\", i.e., a short sale order of a Designated Security shall not be made on the Exchange below the POS reference price during POS, the best current ask price during CTS, or the CAS reference price during CAS",
+        "confidence": "high",
+        "verified": "2026-08-12",
+        "native_lang": null,
+        "detail": null
+      },
+      "block_trade": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "dark_pool": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "market_maker_scheme": {
+        "zh": "结构性产品（权证/牛熊证）、ETF、双柜台股票均设做市商制度，卖空规则中对做市商活动另有豁免安排",
+        "native": "Securities Market Maker / Dual Counter Market Maker",
+        "sources": [
+          {
+            "title": "Regulated Short Selling（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "quote": "With the exception of Securities Market Maker Short Selling by a Securities Market Maker, Dual Counter Market Maker Short Selling by a Dual Counter Market Maker, Structured Produc[t Market Maker...]",
+        "confidence": "high",
+        "verified": "2026-08-12",
+        "native_lang": null,
+        "enum": null,
+        "detail": null
+      },
+      "connect_schemes": {
+        "zh": "沪港通/深港通北向、南向交易；北向 SSE/SZSE 交易时段与港股不同步，需专门对照表",
+        "detail": "北向（买内地股票）：开盘集合竞价 9:15-9:25，连续竞价 9:30-11:30、13:00-14:57，收盘集合竞价 14:57-15:00\n（对照上交所自身规则，见 cn-sse market_structure.trading_sessions，两边应彼此一致）。\n",
+        "sources": [
+          {
+            "title": "Trading Hours - Securities Market（HKEX 官网，\"Stock Connect (Northbound)\"节）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "quote": "Stock Connect (Northbound) ... Opening Call Auction 9:15 a.m. - 9:25 a.m. ... Continuous Auction (Morning) 9:30 a.m. - 11:30 a.m. ... Continuous Auction (Afternoon) 1:00 p.m. - 2:57 p.m. ... Closing Call Auction 2:57 p.m. - 3:00 p.m.",
+        "confidence": "high",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null
+      }
+    },
+    "listing": {
+      "boards": [
+        {
+          "id": "hkex-main",
+          "name_zh": "主板",
+          "name_native": "Main Board",
+          "target_companies": "大中型成熟企业"
+        },
+        {
+          "id": "hkex-gem",
+          "name_zh": "GEM",
+          "name_native": "GEM",
+          "target_companies": "中小型/成长型企业，2018年改革后定位调整"
+        }
+      ],
+      "review_system": {
+        "zh": "披露为本制度（非注册制/核准制的简单二分，上市委员会对适合性有实质审核权）",
+        "detail": "与 cn-sse 的『注册制』、『核准制』二分不完全对应，这是矩阵『受控词表够不够用』待验证问题的一个真实案例，见 OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "Listing Rules（HKEX 官网）",
+            "url": "https://www.hkex.com.hk/Listing/Rules-and-Guidance/Listing-Rules?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "quote": null
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "transfer_between_boards": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "continuing_obligations": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suspension_resumption": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delisting_conditions": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delisting_process": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delisting_transition_period": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-12",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "hsi",
+          "name_zh": "恒生指数",
+          "name_native": "Hang Seng Index (HSI)",
+          "compiler": "other",
+          "weighting_method": "float_adjusted",
+          "base_date": "1964-07-31",
+          "review_frequency": "季度",
+          "flagship": "yes",
+          "description": "由恒生指数公司（恒生银行全资子公司）编制，非港交所自编——与上证综指『交易所自编』形成直接对比；1969年11月24日起公开发布，单一成分股权重上限10%。本条来自第三方综述，未逐条核实原始编制方案，confidence 应视为 medium。"
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "enum": "t2",
+        "zh": "T+2",
+        "detail": "与交易层面的 T+0（可当日回转）是两回事：T+0 指「能否当日卖出买入的证券」，T+2 指「结算交收在几天后完成」。",
+        "sources": [
+          {
+            "title": "HKEX Clearing - Securities Overview（CCASS）",
+            "url": "https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "quote": null
+      },
+      "ccp_name": {
+        "zh": "香港中央结算有限公司",
+        "native": "Hong Kong Securities Clearing Company Limited (HKSCC)",
+        "sources": [
+          {
+            "title": "HKEX Clearing - Securities Overview（CCASS）",
+            "url": "https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "quote": "HKSCC opens and maintains an omnibus stock account with CSDC and holds SSE securities on behalf of CCASS participants",
+        "confidence": "high",
+        "verified": "2026-08-12",
+        "native_lang": null,
+        "enum": null,
+        "detail": null
+      },
+      "csd_name": {
+        "zh": "香港中央结算有限公司（透过 CCASS 系统）",
+        "native": "CCASS (Central Clearing and Settlement System)",
+        "sources": [
+          {
+            "title": "HKEX Clearing - Securities Overview（CCASS）",
+            "url": "https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "quote": "Exchange Trades: Continuous Net Settlement (CNS) and Isolated Trades Systems",
+        "confidence": "high",
+        "verified": "2026-08-12",
+        "native_lang": null,
+        "enum": null,
+        "detail": null
+      },
+      "initial_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delivery_method": {
+        "enum": "na",
+        "zh": "不适用（现货市场为主）",
+        "detail": "推断依据：products 章节所列品类（股票/ETF/REITs/权证/牛熊证/债券）均为现货或现金结算的结构性产品，未见实物交割型衍生品。",
+        "sources": [
+          {
+            "title": "HKEX 官网首页",
+            "url": "https://www.hkex.com.hk/",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "quote": null
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "default_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：自由港，境外投资者可直接开户，无需类似 QFII 的额度审批渠道——与上交所形成对比的重要字段，但未核实是否存在其他限制，留空。",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "membership_structure": {
+        "zh": "交易所参与者（Exchange Participant）制度，须为持牌法团或注册机构",
+        "confidence": "medium",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "旧系统 AMS/3 在卖空规则页中被提及为历史名称，现行系统对外公开名称未核实，留空。",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "access_methods": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：券商佣金，费率市场化协商——未附来源，留空。",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "exchange_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "stamp_duty": {
+        "zh": "0.1%（买卖双方各自缴纳，2023年11月17日起由0.13%下调）",
+        "detail": "从价印花税（ad valorem stamp duty），交易双方各付0.1%，与上交所『仅卖方缴纳』的单边征收方式不同——值得在矩阵中标注这一结构性差异。",
+        "sources": [
+          {
+            "title": "Tax Alert: The reduced stamp duty rate on HK stock transfer will take effect from 17 Nov 23（KPMG）",
+            "url": "https://assets.kpmg.com/content/dam/kpmg/cn/pdf/en/2023/11/tax-alert-21-hk-the-reduced-stamp-duty-rate-on-hk-stock-transfer-will-take-effect-from-17-nov-23.pdf",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "quote": null
+      },
+      "financial_transaction_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_gains_tax": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：香港不征资本利得税——一般知识，未核实是否有细分例外，留空。",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "港元联系汇率制度下汇率波动相对可控，但联系汇率制度本身的可持续性存在长期讨论",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "enforcement_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-12",
+        "native": null,
+        "native_lang": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    }
+  }
+}

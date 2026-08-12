@@ -1,0 +1,360 @@
+{
+  "region": {
+    "values": [
+      {
+        "id": "americas",
+        "label_zh": "美洲",
+        "label_en": "Americas"
+      },
+      {
+        "id": "europe",
+        "label_zh": "欧洲",
+        "label_en": "Europe"
+      },
+      {
+        "id": "apac",
+        "label_zh": "亚太",
+        "label_en": "APAC"
+      },
+      {
+        "id": "mena_africa",
+        "label_zh": "中东非",
+        "label_en": "MENA & Africa"
+      }
+    ]
+  },
+  "tier": {
+    "values": [
+      {
+        "id": "pilot",
+        "label_zh": "首批标杆",
+        "label_en": "Pilot"
+      },
+      {
+        "id": "standard",
+        "label_zh": "标杆扩展",
+        "label_en": "Standard"
+      },
+      {
+        "id": "extended",
+        "label_zh": "横向铺开",
+        "label_en": "Extended"
+      }
+    ]
+  },
+  "organization_form": {
+    "values": [
+      {
+        "id": "demutualized_listed",
+        "label_zh": "公司制（自身上市）",
+        "label_en": "Demutualized",
+        "Listed": null
+      },
+      {
+        "id": "demutualized_unlisted",
+        "label_zh": "公司制（未上市）",
+        "label_en": "Demutualized",
+        "Unlisted": null
+      },
+      {
+        "id": "member_owned",
+        "label_zh": "会员制",
+        "label_en": "Member-owned"
+      },
+      {
+        "id": "state_owned",
+        "label_zh": "国有事业单位制",
+        "label_en": "State-owned"
+      }
+    ]
+  },
+  "review_system": {
+    "values": [
+      {
+        "id": "registration",
+        "label_zh": "注册制",
+        "label_en": "Registration-based"
+      },
+      {
+        "id": "approval",
+        "label_zh": "核准制",
+        "label_en": "Approval-based"
+      },
+      {
+        "id": "hybrid",
+        "label_zh": "混合制",
+        "label_en": "Hybrid"
+      }
+    ]
+  },
+  "index_compiler": {
+    "values": [
+      {
+        "id": "self",
+        "label_zh": "交易所自编",
+        "label_en": "Self-compiled"
+      },
+      {
+        "id": "msci",
+        "label_zh": "MSCI",
+        "label_en": "MSCI"
+      },
+      {
+        "id": "ftse_russell",
+        "label_zh": "富时罗素",
+        "label_en": "FTSE Russell"
+      },
+      {
+        "id": "sp_dj",
+        "label_zh": "标普道琼斯",
+        "label_en": "S&P DJI"
+      },
+      {
+        "id": "stoxx",
+        "label_zh": "STOXX",
+        "label_en": "STOXX"
+      },
+      {
+        "id": "other",
+        "label_zh": "其他第三方",
+        "label_en": "Other Third-party"
+      }
+    ]
+  },
+  "weighting_method": {
+    "values": [
+      {
+        "id": "market_cap",
+        "label_zh": "总市值加权",
+        "label_en": "Market-cap Weighted"
+      },
+      {
+        "id": "float_adjusted",
+        "label_zh": "自由流通调整市值加权",
+        "label_en": "Float-adjusted Weighted"
+      },
+      {
+        "id": "price_weighted",
+        "label_zh": "价格加权",
+        "label_en": "Price Weighted"
+      },
+      {
+        "id": "equal_weighted",
+        "label_zh": "等权重",
+        "label_en": "Equal Weighted"
+      },
+      {
+        "id": "other",
+        "label_zh": "其他",
+        "label_en": "Other"
+      }
+    ]
+  },
+  "product_category": {
+    "values": [
+      {
+        "id": "equity",
+        "label_zh": "股票",
+        "label_en": "Equity"
+      },
+      {
+        "id": "fund",
+        "label_zh": "基金",
+        "label_en": "Fund"
+      },
+      {
+        "id": "bond",
+        "label_zh": "债券",
+        "label_en": "Bond"
+      },
+      {
+        "id": "future",
+        "label_zh": "期货",
+        "label_en": "Future"
+      },
+      {
+        "id": "option",
+        "label_zh": "期权",
+        "label_en": "Option"
+      },
+      {
+        "id": "structured",
+        "label_zh": "结构性产品/权证",
+        "label_en": "Structured Product"
+      },
+      {
+        "id": "other",
+        "label_zh": "其他",
+        "label_en": "Other"
+      }
+    ]
+  },
+  "reversal": {
+    "values": [
+      {
+        "id": "t0",
+        "label_zh": "T+0（可当日回转）",
+        "label_en": "T+0"
+      },
+      {
+        "id": "t1",
+        "label_zh": "T+1",
+        "label_en": "T+1"
+      },
+      {
+        "id": "t2",
+        "label_zh": "T+2",
+        "label_en": "T+2"
+      },
+      {
+        "id": "mixed",
+        "label_zh": "分品种不同",
+        "label_en": "Varies by Instrument"
+      }
+    ]
+  },
+  "settlement_cycle": {
+    "values": [
+      {
+        "id": "t0",
+        "label_zh": "T+0",
+        "label_en": "T+0"
+      },
+      {
+        "id": "t1",
+        "label_zh": "T+1",
+        "label_en": "T+1"
+      },
+      {
+        "id": "t2",
+        "label_zh": "T+2",
+        "label_en": "T+2"
+      },
+      {
+        "id": "t3",
+        "label_zh": "T+3",
+        "label_en": "T+3"
+      },
+      {
+        "id": "mixed",
+        "label_zh": "分品种不同",
+        "label_en": "Varies by Instrument"
+      }
+    ]
+  },
+  "delivery_method": {
+    "values": [
+      {
+        "id": "physical",
+        "label_zh": "实物交割",
+        "label_en": "Physical Delivery"
+      },
+      {
+        "id": "cash",
+        "label_zh": "现金交割",
+        "label_en": "Cash Settlement"
+      },
+      {
+        "id": "either",
+        "label_zh": "可选",
+        "label_en": "Either"
+      },
+      {
+        "id": "na",
+        "label_zh": "不适用（现货）",
+        "label_en": "N/A (Cash Market)"
+      }
+    ]
+  },
+  "short_selling_stance": {
+    "values": [
+      {
+        "id": "freely_allowed",
+        "label_zh": "基本无限制",
+        "label_en": "Largely Unrestricted"
+      },
+      {
+        "id": "restricted_uptick",
+        "label_zh": "报升规则限制",
+        "label_en": "Uptick-rule Restricted"
+      },
+      {
+        "id": "restricted_list",
+        "label_zh": "限指定标的",
+        "label_en": "Restricted to Designated List"
+      },
+      {
+        "id": "banned",
+        "label_zh": "禁止",
+        "label_en": "Banned"
+      }
+    ]
+  },
+  "price_limit_type": {
+    "values": [
+      {
+        "id": "none",
+        "label_zh": "无",
+        "label_en": "None"
+      },
+      {
+        "id": "percentage_band",
+        "label_zh": "百分比涨跌幅",
+        "label_en": "Percentage Band"
+      },
+      {
+        "id": "absolute_tiered",
+        "label_zh": "阶梯绝对值幅",
+        "label_en": "Absolute Tiered"
+      },
+      {
+        "id": "dynamic_reference",
+        "label_zh": "动态参考价区间",
+        "label_en": "Dynamic Reference Price"
+      }
+    ]
+  },
+  "circuit_breaker_type": {
+    "values": [
+      {
+        "id": "none",
+        "label_zh": "无",
+        "label_en": "None"
+      },
+      {
+        "id": "index_level",
+        "label_zh": "指数级",
+        "label_en": "Index-level"
+      },
+      {
+        "id": "stock_level",
+        "label_zh": "个股级",
+        "label_en": "Stock-level"
+      },
+      {
+        "id": "both",
+        "label_zh": "指数级+个股级",
+        "label_en": "Both"
+      }
+    ]
+  },
+  "yes_no": {
+    "values": [
+      {
+        "id": "yes",
+        "label_zh": "有",
+        "label_en": true
+      },
+      {
+        "id": "no",
+        "label_zh": "无",
+        "label_en": false
+      },
+      {
+        "id": "partial",
+        "label_zh": "部分/有限",
+        "label_en": "Partial"
+      }
+    ]
+  }
+}
