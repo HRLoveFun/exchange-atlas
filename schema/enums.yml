@@ -6,6 +6,11 @@
 # 每个词表: {id: 词表名, values: [{id, label_zh, label_en}, ...]}
 # id 是 data/exchanges/*.yml 里 `enum:` 字段允许出现的值；label_* 供矩阵短标签与浮层显示。
 
+source_lang:
+  values:
+    - {id: zh, label_zh: 中文, label_en: Chinese}
+    - {id: en, label_zh: 英文, label_en: English}
+
 region:
   values:
     - {id: americas, label_zh: 美洲, label_en: Americas}

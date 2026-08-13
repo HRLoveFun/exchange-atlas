@@ -7,6 +7,7 @@
   "official_languages": [
     "zh-Hans"
   ],
+  "source_lang": "zh",
   "group_id": null,
   "region": "apac",
   "tier": "pilot",
@@ -16,8 +17,7 @@
         "zh": "Asia/Shanghai (UTC+8)",
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -27,8 +27,7 @@
         "zh": "不实行夏令时",
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -47,8 +46,7 @@
         "quote": "该指数以 1990 年 12 月 19 日为基日，以 100 点为基点。",
         "confidence": "high",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null
       },
       "history": null,
@@ -65,8 +63,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "quote": null
       },
       "self_listed": {
@@ -82,8 +79,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "quote": null
       },
       "market_cap_usd_bn": {
@@ -99,8 +95,7 @@
         "quote": "主板 市价总值（万亿元）52.2 ／ 科创板 市价总值（万亿元）17.0",
         "confidence": "high",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null
       },
       "listed_companies_count": {
@@ -115,8 +110,7 @@
         "quote": "主板 上市公司数 1702 ／ 科创板 上市公司数 612",
         "confidence": "high",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null
       },
@@ -134,8 +128,7 @@
         "quote": "A 股的申报价格最小变动单位为 0.01 元人民币，基金、权证交易为 0.001 元人民币，B 股交易为 0.001 美元。",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null
       },
@@ -143,8 +136,7 @@
         "zh": "人民币（B股为美元）",
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -154,7 +146,7 @@
     "regulation": {
       "regulator": {
         "zh": "中国证券监督管理委员会",
-        "native": "China Securities Regulatory Commission (CSRC)",
+        "en": "China Securities Regulatory Commission (CSRC)",
         "detail": "国务院直属正部级事业单位，统一监管全国证券期货市场。",
         "sources": [
           {
@@ -165,27 +157,24 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native_lang": null,
         "enum": null,
         "quote": null
       },
       "self_regulatory_org": {
         "zh": "中国证券业协会（券商层面）；交易所自身对上市公司行使一线自律监管职能",
-        "native": "Securities Association of China (SAC)",
+        "en": "Securities Association of China (SAC)",
         "confidence": "low",
         "detail": "SAC 官网本次抓取失败（HTTP 异常），其与交易所自律监管的职责边界未逐条核实，见 OPEN-QUESTIONS。",
         "verified": "2026-08-12",
-        "native_lang": null,
         "enum": null,
         "quote": null,
         "sources": null
       },
       "clearing_regulator": {
         "zh": "中国证券监督管理委员会（对中国结算的监管）",
-        "native": "CSRC",
+        "en": "CSRC",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native_lang": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -193,8 +182,7 @@
       },
       "core_laws": {
         "zh": "《中华人民共和国证券法》",
-        "native": "中华人民共和国证券法",
-        "detail": "另有《上海证券交易所交易规则》《股票上市规则》等交易所自律规则体系，效力位阶低于证券法。",
+        "detail": "另有《上海证券交易所交易规则》《股票上市规则》等交易所自律规则体系，效力位阶低于证券法。 英文官方译名未在本次会话核实（曾尝试 npc.gov.cn 与 csrc.gov.cn 英文站均未能定位到该法英译本 直链），留空不猜，见 OPEN-QUESTIONS。",
         "sources": [
           {
             "title": "中华人民共和国证券法（全国人大官网）",
@@ -204,7 +192,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null
       },
@@ -212,8 +200,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -223,8 +210,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -234,8 +220,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -245,8 +230,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -317,8 +301,7 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "native": null,
-          "native_lang": null,
+          "en": null,
           "enum": null,
           "detail": null,
           "quote": null
@@ -334,8 +317,7 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "native": null,
-          "native_lang": null,
+          "en": null,
           "enum": null,
           "detail": null,
           "quote": null
@@ -351,8 +333,7 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "native": null,
-          "native_lang": null,
+          "en": null,
           "enum": null,
           "detail": null,
           "quote": null
@@ -369,8 +350,7 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "native": null,
-          "native_lang": null,
+          "en": null,
           "enum": null,
           "detail": null
         },
@@ -386,8 +366,7 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "native": null,
-          "native_lang": null,
+          "en": null,
           "enum": null,
           "detail": null
         },
@@ -402,8 +381,7 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "native": null,
-          "native_lang": null,
+          "en": null,
           "enum": null,
           "detail": null,
           "quote": null
@@ -421,76 +399,91 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null
       },
       "opening_mechanism": {
         "zh": "开盘集合竞价（9:15-9:25）",
-        "native": "开盘集合竞价",
+        "en": "Opening Call Auction (9:15-9:25)",
         "quote": "9:15 至 9:25 为开盘集合竞价时间",
         "sources": [
           {
-            "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
+            "title": "上海证券交易所交易规则（2023年修订），经 mgzq.com 镜像获取，见 SOURCES.md 说明",
             "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
             "accessed": "2026-08-12"
+          },
+          {
+            "title": "Trading Rules of Shanghai Stock Exchange (2026 Revision) 第2.4.2条 — SSE 官方英文译本，仅供参考，中文本为准",
+            "url": "https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf",
+            "accessed": "2026-08-13"
           }
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native_lang": null,
         "enum": null,
         "detail": null
       },
       "closing_mechanism": {
         "zh": "收盘集合竞价（14:57-15:00，普通证券适用；基金交易无独立收盘集合竞价）",
-        "native": "收盘集合竞价",
+        "en": "Closing Call Auction (14:57-15:00)",
         "detail": "9:20-9:25 开盘集合竞价阶段、14:57-15:00 收盘集合竞价阶段，交易主机不接受撤单申报。",
         "quote": "14:57 至 15:00 为收盘集合竞价时间",
         "sources": [
           {
-            "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
+            "title": "上海证券交易所交易规则（2023年修订），经 mgzq.com 镜像获取，见 SOURCES.md 说明",
             "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
             "accessed": "2026-08-12"
+          },
+          {
+            "title": "Trading Rules of Shanghai Stock Exchange (2026 Revision) 第2.4.2条 — SSE 官方英文译本，仅供参考，中文本为准",
+            "url": "https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf",
+            "accessed": "2026-08-13"
           }
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native_lang": null,
         "enum": null
       },
       "matching_principle": {
         "zh": "价格优先、时间优先",
-        "native": "价格优先、时间优先原则",
+        "en": "Price priority and time priority",
         "quote": "证券竞价交易按价格优先、时间优先的原则撮合成交",
         "sources": [
           {
-            "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
+            "title": "上海证券交易所交易规则（2023年修订）第3.1.4条，经 mgzq.com 镜像获取，见 SOURCES.md 说明",
             "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
             "accessed": "2026-08-12"
+          },
+          {
+            "title": "Trading Rules of Shanghai Stock Exchange (2026 Revision) — SSE 官方英文译本，仅供参考，中文本为准",
+            "url": "https://english.sse.com.cn/start/trading/mechanism/",
+            "accessed": "2026-08-13"
           }
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native_lang": null,
         "enum": null,
         "detail": null
       },
       "order_types": {
         "zh": "限价申报；市价申报（仅限连续竞价阶段）",
-        "native": "限价申报 / 市价申报",
+        "en": "Limit Order; Market Order (continuous auction only)",
         "quote": "市价申报只适用于连续竞价期间的交易",
         "sources": [
           {
-            "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
+            "title": "上海证券交易所交易规则（2023年修订）第3.1.4条，经 mgzq.com 镜像获取，见 SOURCES.md 说明",
             "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
             "accessed": "2026-08-12"
+          },
+          {
+            "title": "Trading Rules of Shanghai Stock Exchange (2026 Revision) — SSE 官方英文译本，仅供参考，中文本为准",
+            "url": "https://english.sse.com.cn/start/trading/mechanism/",
+            "accessed": "2026-08-13"
           }
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native_lang": null,
         "enum": null,
         "detail": null
       },
@@ -506,8 +499,7 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null
       },
@@ -523,8 +515,7 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null
       },
@@ -540,8 +531,7 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null
       },
@@ -558,8 +548,7 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "native": null,
-          "native_lang": null,
+          "en": null,
           "detail": null,
           "quote": null
         },
@@ -575,8 +564,7 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "native": null,
-          "native_lang": null,
+          "en": null,
           "enum": null,
           "detail": null
         },
@@ -593,32 +581,34 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "native": null,
-          "native_lang": null,
+          "en": null,
           "enum": null
         }
       },
       "circuit_breaker": {
         "enum": "none",
         "zh": "无指数级熔断（2016年1月8日起暂停实施）",
-        "native": "指数熔断机制（已暂停）",
-        "detail": "2015年12月本所曾在《交易规则》第四章第五节新增\"指数熔断\"机制（以沪深300指数为基准，\n5%/7%两档阈值），实施4个交易日后于2016年1月8日起暂停，此后未恢复。现行规则中已无该章节。\n个股级另有临时停牌机制，见 volatility_interruption / trading_halt_mechanism。\n",
+        "detail": "2015年12月本所曾在《交易规则》第四章第五节新增\"指数熔断\"机制（以沪深300指数为基准，\n5%/7%两档阈值），实施4个交易日后于2016年1月8日起暂停，此后未恢复。现行规则中已无该章节。\n个股级另有临时停牌机制，见 volatility_interruption / trading_halt_mechanism。\n交叉核实：SSE 官方《交易规则》英文译本（2026年修订版）修订历史里\"Circuit Breaker\"仅在\n2015年12月4日新增该节的记录中出现一次，正文再无相关章节，与\"已暂停且未恢复\"的结论一致。\n该英文译本未提供可直接摘引的\"暂停\"表述，故本字段 en 留空。\n",
         "sources": [
           {
             "title": "关于暂停实施指数熔断机制的通知（上证发〔2016〕4号）",
             "url": "http://www.sse.com.cn/aboutus/mediacenter/hotandd/c/c_20160107_4033450.shtml",
             "accessed": "2026-08-12"
+          },
+          {
+            "title": "Trading Rules of Shanghai Stock Exchange (2026 Revision) 修订历史 — SSE 官方英文译本，仅供参考，中文本为准",
+            "url": "https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf",
+            "accessed": "2026-08-13"
           }
         ],
         "quote": "上证发〔2016〕4号 各市场参与人：为维护市场平稳运行，经中国证监会批准，上海证券交易所决定自2016年1月8日起暂停实施《上海证券交易所交易规则》第四章第五节规定的「指数熔断」机制。",
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native_lang": null
+        "en": null
       },
       "volatility_interruption": {
         "zh": "科创板设「异常波动」与「严重异常波动」两级指标并公告，不中断交易；无涨跌幅限制股票另有盘中30%/60%触发的10分钟临时停牌",
-        "native": "异常波动 / 严重异常波动",
-        "detail": "科创板异常波动：连续3个交易日内日收盘价涨跌幅偏离值累计达±30%。\n严重异常波动：连续10个交易日内累计达+100%/-50%，或连续30个交易日内累计达+200%/-70%。\n触发后本所公布相关信息（如异常交易营业部名单），不直接中断交易，属于信息披露与监控机制而非熔断。\n",
+        "detail": "科创板异常波动：连续3个交易日内日收盘价涨跌幅偏离值累计达±30%。\n严重异常波动：连续10个交易日内累计达+100%/-50%，或连续30个交易日内累计达+200%/-70%。\n触发后本所公布相关信息（如异常交易营业部名单），不直接中断交易，属于信息披露与监控机制而非熔断。\n英文对照未在本次会话核实到官方译本中的对应条款（SSE 英文版《交易规则》第六章科创板专章未见\n\"abnormal fluctuation\" 类表述），留空不猜，见 OPEN-QUESTIONS。\n",
         "quote": "连续 3 个交易日内日收盘价格涨跌幅偏离值累计达到±30%／连续 10 个交易日内日收盘价格涨跌幅偏离值累计达到＋100%（-50%）；连续 30 个交易日内日收盘价格涨跌幅偏离值累计达到＋200%（-70%）",
         "sources": [
           {
@@ -629,7 +619,7 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native_lang": null,
+        "en": null,
         "enum": null
       },
       "trading_halt_mechanism": {
@@ -644,8 +634,7 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null
       },
@@ -663,29 +652,26 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native": null,
-        "native_lang": null
+        "en": null
       },
       "short_selling": {
         "enum": "restricted_list",
         "zh": "融资融券制度，限指定标的范围内进行",
-        "native": "融资融券",
+        "en": "Margin Trading and Short Selling",
         "confidence": "low",
-        "detail": "报升规则、标的范围等具体细则未逐条核实，留待后续核实。",
+        "detail": "报升规则、标的范围等具体细则未逐条核实，留待后续核实。en 术语已用 SSE 官方英文译本确认存在 对应条款（3.2.11：会员为客户证券交易提供融资融券服务的，应当按照有关规定办理），但该条未覆盖 「限指定标的范围」这一具体限制的表述，故 confidence 维持 low，不因新增英文来源而上调。",
         "sources": [
           {
-            "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
-            "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
-            "accessed": "2026-08-12"
+            "title": "Trading Rules of Shanghai Stock Exchange (2026 Revision) 第3.2.11条 — SSE 官方英文译本，仅供参考，中文本为准",
+            "url": "https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf",
+            "accessed": "2026-08-13"
           }
         ],
         "verified": "2026-08-12",
-        "native_lang": null,
         "quote": null
       },
       "block_trade": {
         "zh": "大宗交易：意向申报 9:30-11:30、13:00-15:30；确认申报另可延至 16:00-17:00；固定价格申报 15:00-15:30",
-        "native": "大宗交易",
         "quote": "（一）9:30 至 11:30、13:00 至 15:30 接受意向申报；（二）9:30 至 11:30、13:00 至 15:30、16:00 至 17:00 接……（三）15:00 至 15:30 接受固定价格申报。",
         "sources": [
           {
@@ -696,7 +682,7 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null
       },
@@ -711,26 +697,29 @@
           }
         ],
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null
       },
       "market_maker_scheme": {
         "zh": "科创板股票交易可实行做市商机制，做市商可提供双边报价",
-        "native": "做市商机制",
+        "en": "Market Making Mechanism",
         "quote": "科创板股票交易可以实行做市商机制，做市商可以为科创板股票提供双边报价服务。",
         "sources": [
           {
-            "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
+            "title": "上海证券交易所交易规则（2023年修订），经 mgzq.com 镜像获取，见 SOURCES.md 说明",
             "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
             "accessed": "2026-08-12"
+          },
+          {
+            "title": "Trading Rules of Shanghai Stock Exchange (2026 Revision) 第6.4条 — SSE 官方英文译本，仅供参考，中文本为准",
+            "url": "https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf",
+            "accessed": "2026-08-13"
           }
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "native_lang": null,
         "enum": null,
         "detail": null
       },
@@ -746,8 +735,7 @@
           }
         ],
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null
       }
@@ -780,8 +768,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "quote": null
       },
       "listing_process_duration": {
@@ -789,8 +776,7 @@
         "confidence": "low",
         "detail": "未核实具体周期数据，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -800,8 +786,7 @@
         "confidence": "low",
         "detail": "未核实转板机制细节，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -811,8 +796,7 @@
         "confidence": "low",
         "detail": "留空前的草稿印象：定期报告、临时信息披露、公司治理规范运作等持续义务——未核实来源，故未采纳为正式字段值。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -822,8 +806,7 @@
         "confidence": "low",
         "detail": "个股级临时停牌见 market_structure.trading_halt_mechanism（已有来源）；此字段特指因重大事项等的长期停牌规则，未核实，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -840,8 +823,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null
       },
@@ -849,8 +831,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -867,8 +848,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null
@@ -877,8 +857,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -934,12 +913,11 @@
         "quote": "投资者买入的证券，在交收前不得卖出，但实行回转交易的除外。",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null
+        "en": null
       },
       "ccp_name": {
         "zh": "中国证券登记结算有限责任公司",
-        "native": "China Securities Depository and Clearing Corporation Limited (ChinaClear)",
+        "en": "China Securities Depository and Clearing Corporation Limited (ChinaClear)",
         "detail": "设上海分公司具体承担沪市业务；同时承担中央证券存管（CSD）职能。",
         "sources": [
           {
@@ -950,16 +928,14 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native_lang": null,
         "enum": null,
         "quote": null
       },
       "csd_name": {
         "zh": "中国证券登记结算有限责任公司（与 CCP 为同一机构）",
-        "native": "ChinaClear",
+        "en": "ChinaClear",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native_lang": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -970,8 +946,7 @@
         "confidence": "low",
         "detail": "现货市场无衍生品意义上的保证金；融资融券保证金比例等细节未核实，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -980,8 +955,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -991,8 +965,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1011,16 +984,14 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "quote": null
       },
       "last_trading_day_rule": {
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1030,8 +1001,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1044,8 +1014,7 @@
         "confidence": "low",
         "detail": "草稿印象：散户占比历史上较高，机构化程度持续提升——未核实具体数据来源，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -1054,8 +1023,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1066,8 +1034,7 @@
         "confidence": "low",
         "detail": "草稿印象：科创板设置投资者适当性门槛（如50万元资产+2年交易经验）——未核实最新标准原文，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -1077,8 +1044,7 @@
         "confidence": "low",
         "detail": "草稿印象：QFII/RQFII、沪港通北向资金等渠道——未核实细节，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -1087,8 +1053,7 @@
         "zh": "会员制，会员为证券公司等持牌机构",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1098,8 +1063,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1111,8 +1075,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1122,8 +1085,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1133,8 +1095,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1144,8 +1105,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1156,8 +1116,7 @@
         "confidence": "low",
         "detail": "未核实现行核心交易系统的对外公开名称，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -1166,8 +1125,7 @@
         "zh": "会员通过交易单元接入；行情与交易数据另有第三方数据商分发",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1177,8 +1135,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1198,8 +1155,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null
       },
@@ -1215,8 +1171,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null
       },
@@ -1224,8 +1179,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1235,8 +1189,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1255,8 +1208,7 @@
         "quote": "据财政部、税务总局公告，为活跃资本市场、提振投资者信心，自2023年8月28日起，证券交易印花税实施减半征收。……证券交易印花税由单边征收1‰下调至0.5‰",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null
       },
       "financial_transaction_tax": {
@@ -1264,8 +1216,7 @@
         "confidence": "low",
         "detail": "草稿印象：无独立于印花税之外的金融交易税——未核实，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -1275,8 +1226,7 @@
         "confidence": "low",
         "detail": "草稿印象：个人投资者二级市场股票转让差价所得暂免征收个人所得税——未核实最新政策原文，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -1286,8 +1236,7 @@
         "confidence": "low",
         "detail": "草稿印象：个人投资者股息红利差别化征税，持股期限越长税负越低——未核实最新税率档位，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -1296,8 +1245,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1309,8 +1257,7 @@
         "zh": "人民币非完全可自由兑换，外资参与需通过额度管理渠道，存在换汇与资金进出限制",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1320,8 +1267,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1331,8 +1277,7 @@
         "zh": "",
         "confidence": "low",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1343,8 +1288,7 @@
         "confidence": "low",
         "detail": "草稿印象：近年注册制、退市制度等改革频繁，规则变动速度较快——未附具体来源，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -1354,8 +1298,7 @@
         "confidence": "low",
         "detail": "已有来源的相关内容见 listing.delisting_conditions；本字段本身未附独立来源，留空。",
         "verified": "2026-08-12",
-        "native": null,
-        "native_lang": null,
+        "en": null,
         "enum": null,
         "quote": null,
         "sources": null

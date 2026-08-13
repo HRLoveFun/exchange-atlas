@@ -2,16 +2,21 @@
  * 数据源：docs/data/*.json（由 tools/sync.py 从 schema/ + data/ 生成，见 CLAUDE.md）
  * 路由：hash 驱动，#view=matrix|exchange|health
  * 两个全局开关（存 localStorage）：
- *   - 数据语言模式：zh（纯中文）⇄ native（原语言）—— 只影响数据值，UI 标签恒双语
+ *   - 数据语言模式：zh（中文）⇄ en（英文）—— 只影响数据值，UI 标签恒双语。
+ *     哪个是原文锚点由各交易所的 source_lang 决定（见 DECISIONS.md ADR-013），
+ *     前端不关心这个区分，两个模式都是直接读字段，谁在谁不在由数据决定。
  *   - 明暗主题
  */
 (function () {
   "use strict";
 
   var DATA_BASE = "data/";
+  var savedLang = localStorage.getItem("ea-lang");
   var state = {
     theme: localStorage.getItem("ea-theme") || "system",
-    langMode: localStorage.getItem("ea-lang") || "zh",
+    // 旧版本用过 "native" 这个值（迁移前的原语言模式），localStorage 里可能还残留；
+    // 不识别的值一律归一成 "zh"，避免切换按钮显示与实际内容对不上。
+    langMode: savedLang === "zh" || savedLang === "en" ? savedLang : "zh",
   };
   var cache = { exchanges: {} };
 
@@ -53,7 +58,7 @@
   }
   function displayValue(env) {
     if (!env) return "";
-    if (state.langMode === "native" && env.native) return nativeText(env.native);
+    if (state.langMode === "en" && env.en) return env.en;
     return env.zh || "";
   }
   function isStale(exchangeId, fieldPath) {
@@ -361,8 +366,8 @@
       html += '<div class="overlay-sub">' + esc(identity ? identity.name_zh : exchangeId) + " · " + esc(fieldPath) + "</div>";
 
       if (env) {
-        html += '<div class="overlay-section"><h4>纯中文 Plain Chinese</h4><div>' + esc(env.zh || "—") + "</div></div>";
-        if (env.native) html += '<div class="overlay-section"><h4>原语言 Native</h4><div>' + esc(nativeText(env.native)) + "</div></div>";
+        html += '<div class="overlay-section"><h4>中文 Chinese</h4><div>' + esc(env.zh || "—") + "</div></div>";
+        if (env.en) html += '<div class="overlay-section"><h4>英文 English</h4><div>' + esc(env.en) + "</div></div>";
         if (env.detail) html += '<div class="overlay-section"><h4>细则 Detail</h4><div class="overlay-detail">' + esc(env.detail) + "</div></div>";
         if (env.quote) html += '<div class="overlay-section"><h4>原文摘录 Quote</h4><div class="overlay-quote">' + esc(env.quote) + "</div></div>";
         if (env.sources && env.sources.length) {
@@ -408,10 +413,10 @@
     applyTheme();
   }
   function applyLangButtonLabel() {
-    $("#langToggle").textContent = state.langMode === "zh" ? "中文" : "原语言";
+    $("#langToggle").textContent = state.langMode === "zh" ? "中文" : "English";
   }
   function toggleLang() {
-    state.langMode = state.langMode === "zh" ? "native" : "zh";
+    state.langMode = state.langMode === "zh" ? "en" : "zh";
     localStorage.setItem("ea-lang", state.langMode);
     applyLangButtonLabel();
     route();

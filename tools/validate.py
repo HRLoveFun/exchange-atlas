@@ -11,7 +11,7 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
   2. exchange_identity 必填字段齐全
   3. 枚举合法：data 里的 enum 值、taxonomy 里的 enum_ref 都必须在 enums.yml 里
   4. volatile/moderate 字段必须有 sources
-  5. confidence: high 必须有 quote，且 zh/native 里的数字要能在 quote 里找到
+  5. confidence: high 必须有 quote，且 zh/en 里的数字要能在 quote 里找到
   6. verified 不得是未来日期
   7. 来源域名已在 SOURCES.md 登记
   8. 生成块新鲜度：五处 GENERATED 块内容 == 用 sync.py 同一批函数重新算出来的内容
@@ -116,10 +116,12 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                         # 只查 2 位数以上的数字：T+0/T+1 这类记号里的个位数是受控词表
                         # （enum_ref）记号，不是原文会照抄的具体数值，法规原文几乎从不会
                         # 写"T+1"这种写法，拿它反查 quote 只会制造噪音而非抓真实错漏。
-                        raw_nums = set(NUMBER_RE.findall(env.get("zh") or "")) | set(NUMBER_RE.findall(str(env.get("native") or "")))
+                        # zh/en 两边都查——不只是 source_lang 声明的那一边，顺带校验翻译
+                        # 有没有把数字翻丢，不需要为哪边是源语言额外分支判断。
+                        raw_nums = set(NUMBER_RE.findall(env.get("zh") or "")) | set(NUMBER_RE.findall(str(env.get("en") or "")))
                         nums = {n for n in raw_nums if len(n.replace(",", "").replace(".", "")) >= 2}
                         if nums and not any(n in env["quote"] for n in nums):
-                            err(f"{loc}: zh/native 里的数字 {sorted(nums)} 在 quote 里一个都找不到——数值可能与原文对不上")
+                            err(f"{loc}: zh/en 里的数字 {sorted(nums)} 在 quote 里一个都找不到——数值可能与原文对不上")
 
                 # verified 不得是未来日期
                 verified = env.get("verified")

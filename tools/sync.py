@@ -30,9 +30,9 @@ DOCS_DATA = ROOT / "docs" / "data"
 PROJECT_DIR = ROOT / "PROJECT"
 
 VOLATILITY_MONTHS = {"stable": 24, "moderate": 12, "volatile": 6}
-ENVELOPE_KEYS = ("zh", "native", "native_lang", "enum", "detail", "quote", "sources", "verified", "confidence")
+ENVELOPE_KEYS = ("zh", "en", "enum", "detail", "quote", "sources", "verified", "confidence")
 # exchange_identity 里视为必填的字段；group_id 允许缺省（无集团归属）
-REQUIRED_IDENTITY_FIELDS = ("id", "name_zh", "name_native", "official_languages", "region", "tier")
+REQUIRED_IDENTITY_FIELDS = ("id", "name_zh", "name_native", "official_languages", "source_lang", "region", "tier")
 
 TODAY = datetime.date.today()
 
@@ -161,7 +161,7 @@ def collect_matrix_cells(exchange_id, taxonomy, expanded_chapters):
                 "label_zh": fdef["label_zh"],
                 "label_en": fdef["label_en"],
                 "zh": env.get("zh"),
-                "native": env.get("native"),
+                "en": env.get("en"),
                 "enum": env.get("enum"),
                 "enum_ref": fdef.get("enum_ref"),
                 "has_detail": bool(env.get("detail")),
@@ -436,7 +436,7 @@ def main():
                 if kind == "leaf":
                     fields_out.append({
                         "kind": "leaf", "path": ".".join(path), "label_zh": fdef["label_zh"], "label_en": fdef["label_en"],
-                        "volatility": fdef.get("volatility"), "native_required": fdef.get("native_required", False),
+                        "volatility": fdef.get("volatility"), "en_required": fdef.get("en_required", False),
                         "enum_ref": fdef.get("enum_ref"), "in_matrix": fdef.get("in_matrix", False),
                     })
                 else:  # kind == "list"：嵌套列表字段

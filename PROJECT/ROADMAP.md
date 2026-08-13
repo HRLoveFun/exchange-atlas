@@ -7,8 +7,9 @@
 ## 阶段路线
 
 - [x] **v0.0 立项 + 可达性探针** — 仓库骨架、`CLAUDE.md`、`PROJECT/` 四件套、`schema/`、`Makefile`、三个 tool 跑通、LICENSE、`.claude/settings.json`；五家标杆抓取方式探明（见 `SOURCES.md`）
-- [ ] **v0.1 骨架验证**（当前）— `taxonomy.yml` 十一章字段字典、上交所+港交所填满、人工抽检 20 字段 ≥95%、前端矩阵+档案视图最小可用、Pages 上线
-- [ ] **v0.2 标杆扩展** — 补齐 NYSE / JPX / Eurex；原语言字段填全；维度组完善；`add-exchange` skill 定型
+- [x] **v0.1 骨架验证** — `taxonomy.yml` 十一章字段字典、上交所+港交所填满、前端矩阵+档案视图最小可用、Pages 上线；人工抽检 20 字段（2026-08-13，基本准确，反馈已回写 `SOURCES.md`「来源 URL 应精确到信息页」一节）
+- [x] **语言模型简化**（v0.1 收尾后、v0.2 开始前，独立迁移）— 数据语言从 zh/native/native_lang 三态简化为 zh/en 两态 + 交易所级 `source_lang` 标记，见 `PROJECT/DECISIONS.md` [ADR-013]；两家现有交易所数据已迁移
+- [ ] **v0.2 标杆扩展**（当前）— 补齐 NYSE / JPX / Eurex（预期均 `source_lang: en`，无需啃日语/德语原文）；维度组完善；`add-exchange` skill 定型
 - [ ] **v0.3 前端完善** — 语言模式切换、格子浮层出处展示、健康度视图、搜索筛选、时区甘特条
 - [ ] **v1.0 横向铺开** — 按 Tier 扩到 20+ 家
 

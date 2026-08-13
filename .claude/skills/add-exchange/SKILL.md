@@ -18,7 +18,12 @@ description: 给 exchange-atlas 项目新增一家交易所的数据，或补全
 
 - 定 `id`：`<ISO 3166-1 alpha-2 小写国家码>-<简称>`，如 `us-nyse`、`jp-jpx`、`de-eurex`
 - 查该所是否有集团归属（`group_id`），如 CME 系交易所填 `cme-group`
-- 确定 `official_languages`（BCP47 数组）——决定后面 `native` 字段要填几种语言
+- 确定 `official_languages`（BCP47 数组）——该所自身的官方语言，与下面的 `source_lang` 是两回事
+- 确定 `source_lang: zh` 或 `en`（必填，交易所级别一次性声明，决定 `quote`/`sources`/`confidence`
+  锚定哪种语言，另一种视为翻译展示，见 `PROJECT/DECISIONS.md` [ADR-013]）——取源规则：
+  **有可核实的官方中文原文就填 `zh`，没有就填 `en`，中英文都没有可靠原文的先别填，转
+  `PROJECT/OPEN-QUESTIONS.md` 悬置**。v0.2 的 NYSE/JPX/Eurex 预期都填 `en`（没有官方中文原文，
+  直接用英文官网取数即可，不必啃日语/德语原文）
 - 确定 `region`、`tier`（对照 `schema/enums.yml` 的受控词表）
 
 ### 2. 查 `PROJECT/SOURCES.md`，缺就探测
@@ -50,8 +55,12 @@ make fetch EX=<exchange-id>
 
 1. 先查 `schema/glossary.yml` 里有没有已收录的术语译法，有就直接用；**新术语按 glossary.yml 顶部的字段说明加一条**（回写）
 2. 逐字段填：
-   - `confidence: high` 的字段必须有 `quote`（原文照抄）且 `zh`/`native` 里的数字要能在 quote 里找到
+   - `confidence: high` 的字段必须有 `quote`（原文照抄）且 `zh`/`en` 里的数字要能在 quote 里找到
    - `volatility: moderate`/`volatile` 的字段必须有 `sources`
+   - `quote` 应该是 `source_lang` 声明的那种语言的原文；另一种语言字段（`en_required: true` 的
+     字段才需要填）是翻译展示，没有独立 quote 也没关系，但别把和 zh 内容重复的另一语言硬塞进去——
+     查不到真正对应的译文就留空，不要拿字面翻译凑数
+   - 来源 URL 尽量精确到承载该事实的具体页面/PDF，不要停在网站首页（见 `SOURCES.md` 开头的说明）
    - 查不清、抓不到、没把握的，**`zh` 留空，`confidence: low`**，别猜（CLAUDE.md 二 第4条）——这不是失败，是诚实
 3. 引用的每个来源域名，如果还没在 `SOURCES.md` 登记过，回去补上（`validate.py` 会因未登记域名直接 fail）
 
@@ -64,7 +73,7 @@ make serve       # 本地预览，浏览器打开 http://localhost:8000
 
 `make check` 报错就照着错误信息改——每一条错误都对应一条铁律或一致性规则，不要绕过去。
 
-浏览器里确认：矩阵新增了一行、点格子能看到刚填的出处、切到「原语言」模式该所的 `native` 字段显示正确、档案页十一章能逐章翻。
+浏览器里确认：矩阵新增了一行、点格子能看到刚填的出处、切到「English」模式该所的 `en` 字段显示正确、档案页十一章能逐章翻。
 
 ### 6. 遇阻：降级方案
 

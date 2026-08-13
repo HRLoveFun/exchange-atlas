@@ -1,12 +1,15 @@
 # 香港交易及结算所 Hong Kong Exchanges and Clearing (HKEX)
 # 抓取来源见 PROJECT/SOURCES.md `hk-hkex` 一节；原始页缓存于 .cache/hk-hkex/
-# 官方双语（zh-Hant, en），逐页各有独立 URL；本文件优先引用英文版官方页，
-# 中文版 native 值另行核对（见 market_structure.volatility_interruption 的双语示例）。
-
+# 官方双语（zh-Hant, en），逐页各有独立 URL（把 sc_lang=en 换成 sc_lang=zh-hk 即可切到中文版，
+# URL 结构一致）。source_lang: zh——按 DECISIONS.md ADR-013「有中选中」的取源规则，港交所有
+# 可核实的官方中文原文，故 zh 是溯源锚点、en 是翻译展示。v0.1 首次填充时实际以英文页为主抓取
+# （历史遗留，早于 ADR-013），部分字段的 zh 目前是从英文内容转译而来、未必逐字对照过中文官方页，
+# 已在迁移时逐条核实/标注；后续新增或复核字段应优先取中文版。
 id: hk-hkex
 name_zh: 香港交易及结算所（简称港交所）
 name_native: {zh-Hant: 香港交易及結算所有限公司, en: "Hong Kong Exchanges and Clearing Limited (HKEX)"}
 official_languages: [zh-Hant, en]
+source_lang: zh
 region: apac
 tier: pilot
 
@@ -60,8 +63,9 @@ overview:
 
   trading_currency:
     zh: "港元为主；2023年起推出双柜台模式，部分股票可另以人民币计价交易"
-    native: "港元 (HKD)；雙櫃檯 (Dual Counter)"
-    detail: "「Dual Counter Market Maker」在卖空监管规则中被列为做市商豁免情形之一，确认双柜台机制存在。"
+    en: "HKD; Dual Counter (HKD/RMB) since 2023"
+    detail: "「Dual Counter Market Maker」在卖空监管规则中被列为做市商豁免情形之一，确认双柜台机制存在。
+      en 里 Dual Counter 一词有 quote 支持，HKD 为港元的标准 ISO 4217 货币代码，非规则性数值。"
     sources:
       - title: Regulated Short Selling（HKEX 官网）
         url: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en
@@ -81,7 +85,7 @@ regulation:
 
   regulator:
     zh: "证券及期货事务监察委员会"
-    native: "Securities and Futures Commission (SFC)"
+    en: "Securities and Futures Commission (SFC)"
     sources:
       - title: Regulated Short Selling（HKEX 官网，条文引用 SFO）
         url: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en
@@ -90,18 +94,18 @@ regulation:
 
   self_regulatory_org:
     zh: "港交所本身兼具前线监管职能（对上市公司与交易参与者）"
-    native: "Front-line regulation by HKEX"
+    en: "Front-line regulation by HKEX"
     confidence: low
     detail: "SFC 与 HKEX 之间自律监管职责的精确边界未逐条核实，留待后续核实。"
 
   clearing_regulator:
     zh: "证券及期货事务监察委员会"
-    native: "SFC"
+    en: "SFC"
     confidence: medium
 
   core_laws:
     zh: "《证券及期货条例》"
-    native: "Securities and Futures Ordinance (SFO)"
+    en: "Securities and Futures Ordinance (SFO)"
     sources:
       - title: Regulated Short Selling（HKEX 官网）
         url: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en
@@ -179,7 +183,7 @@ market_structure:
   trading_sessions:
     pre_market:
       zh: "盘前时段 9:00-9:30（单一价格集合竞价）"
-      native: "Pre-opening Session (POS)"
+      en: "Pre-opening Session (POS)"
       quote: "Pre-opening Session / 9:00 a.m. - 9:30 a.m."
     continuous_am:
       zh: "9:30-12:00"
@@ -204,12 +208,12 @@ market_structure:
 
   opening_mechanism:
     zh: "盘前集合竞价（9:00-9:30，单一价格）"
-    native: "Pre-opening Session (POS)"
+    en: "Pre-opening Session (POS)"
     quote: "Pre-opening Session / 9:00 a.m. - 9:30 a.m."
 
   closing_mechanism:
     zh: "收盘集合竞价，4:00pm 起至 4:08-4:10pm 间随机收盘"
-    native: "Closing Auction Session (CAS)"
+    en: "Closing Auction Session (CAS)"
     quote: "Closing Auction Session / 4:00 p.m. to a random closing between 4:08 p.m. and 4:10 p.m."
 
   matching_principle:
@@ -244,18 +248,35 @@ market_structure:
 
   circuit_breaker:
     enum: stock_level
-    zh: "无全市场熔断；个股/产品层级设波动性中断机制（VCM）"
-    native: "市調機制 (Volatility Control Mechanism, VCM)"
+    zh: "无全市场熔断；个股/产品层级设波动性中断机制（官方中文全称：市場波動調節機制，简称市調機制）"
+    en: "Volatility Control Mechanism (VCM)"
     detail: "非全市场熔断，是本所对港股「无涨跌停」制度的配套安全阀，见 volatility_interruption。"
-    quote: "It is not a trading halt, does not intend to limit the ups and downs of stock prices due to fundamental events"
+    sources:
+      - title: 市場波動調節機制 常見問題（HKEX 官网中文版）
+        url: https://www.hkex.com.hk/Global/Exchange/FAQ/Securities-Market/Trading/VCM?sc_lang=zh-hk
+        accessed: 2026-08-13
+      - title: VCM FAQ（HKEX 官网英文版）
+        url: https://www.hkex.com.hk/Global/Exchange/FAQ/Securities-Market/Trading/VCM?sc_lang=en
+        accessed: 2026-08-12
+    quote: "港交所建議的市調機制旨在緩和自動化交易引致的極端價格波動（譬如「閃崩」、程式錯誤等等）以維護市場持正操作。此機制不會暫停交易，並非用來限制股價上落，亦與某些市場就證券交易限定每日價格範圍的每日漲跌停板制有所分別。"
 
   volatility_interruption:
-    zh: "波动性中断机制（VCM）：以5分钟前成交价为基准，触发阈值按股票分组分别为±10%/±15%/±20%，触发后进入5分钟冷静期（非停牌，仅限价区间内可继续交易）"
-    native: "市調機制 (Volatility Control Mechanism, VCM)"
+    zh: "波动性中断机制（市調機制/VCM）：以5分钟前成交价为基准，触发阈值按恒生综合大型股/中型股/小型股指数成份股分组分别为±10%/±15%/±20%，触发后进入5分钟冷静期（非停牌，仅限价区间内可继续交易）"
+    en: "Volatility Control Mechanism (VCM)"
     detail: |
       监测范围为连续交易时段，但不含早市/午市开始后首15分钟及午市收盘前20分钟。
       冷静期内标的证券继续交易，但价格被限制在触发前区间内，不同于熔断/停牌。
-    quote: "The VCM is triggered if a stock is [±10%, ±15%, or ±20% depending on stock group] away from the last traded price 5 minutes ago... a cooling-off period will last for 5 minutes"
+      分组门槛（恒生综合大型股±10%／中型股±15%／小型股±20%）为迁移到 source_lang: zh 时从
+      HKEX 中文版 FAQ 页新核实到的细节，此前英文来源只笼统提及"depending on stock group"、
+      未点明具体是哪个分组维度。
+    sources:
+      - title: 市場波動調節機制 常見問題（HKEX 官网中文版）
+        url: https://www.hkex.com.hk/Global/Exchange/FAQ/Securities-Market/Trading/VCM?sc_lang=zh-hk
+        accessed: 2026-08-13
+      - title: VCM FAQ（HKEX 官网英文版）
+        url: https://www.hkex.com.hk/Global/Exchange/FAQ/Securities-Market/Trading/VCM?sc_lang=en
+        accessed: 2026-08-12
+    quote: "市調機制的設計已包括特別措施以盡量減少干擾市場……觸發點設置的門檻應不致過頻地觸發市調機制（證券市場的觸發點因應股票組別分別設為±10%、±15%或±20%）；以及市調機制的監測亦不適用於某些時段（上午及下午持續交易時段的首15分鐘，及下午持續交易時段（或半日交易日的早市持續交易時段）的最後20分鐘）及某些產品。一旦股票價格超出5分鐘前最後一次交易價格的±10%（恒生綜合大型股指數成份股）、±15%（恒生綜合中型股指數成份股）或±20%（恒生綜合小型股指數成份股），市調機制將被觸發，並隨即開始5分鐘的冷靜期。"
 
   trading_halt_mechanism:
     zh: "无涨跌停亦无个股熔断停牌，VCM 触发后不停牌只限价（见上）；另有因披露事项的停牌机制未逐条核实"
@@ -270,7 +291,7 @@ market_structure:
   short_selling:
     enum: restricted_uptick
     zh: "受监管的卖空：仅限「指定证券」、须为备兑卖空、遵守报升规则（不得低于最优卖盘价/参考价）"
-    native: "Regulated Short Selling"
+    en: "Regulated Short Selling"
     sources:
       - title: Regulated Short Selling（HKEX 官网）
         url: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en
@@ -288,7 +309,7 @@ market_structure:
 
   market_maker_scheme:
     zh: "结构性产品（权证/牛熊证）、ETF、双柜台股票均设做市商制度，卖空规则中对做市商活动另有豁免安排"
-    native: "Securities Market Maker / Dual Counter Market Maker"
+    en: "Securities Market Maker / Dual Counter Market Maker"
     sources:
       - title: Regulated Short Selling（HKEX 官网）
         url: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en
@@ -405,7 +426,7 @@ clearing:
 
   ccp_name:
     zh: "香港中央结算有限公司"
-    native: "Hong Kong Securities Clearing Company Limited (HKSCC)"
+    en: "Hong Kong Securities Clearing Company Limited (HKSCC)"
     sources:
       - title: HKEX Clearing - Securities Overview（CCASS）
         url: https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en
@@ -415,7 +436,7 @@ clearing:
 
   csd_name:
     zh: "香港中央结算有限公司（透过 CCASS 系统）"
-    native: "CCASS (Central Clearing and Settlement System)"
+    en: "CCASS (Central Clearing and Settlement System)"
     sources:
       - title: HKEX Clearing - Securities Overview（CCASS）
         url: https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en
@@ -438,9 +459,12 @@ clearing:
   delivery_method:
     enum: na
     zh: "不适用（现货市场为主）"
-    detail: "推断依据：products 章节所列品类（股票/ETF/REITs/权证/牛熊证/债券）均为现货或现金结算的结构性产品，未见实物交割型衍生品。"
+    detail: "推断依据：products 章节所列品类（股票/ETF/REITs/权证/牛熊证/债券）均为现货或现金结算的结构性产品，
+      未见实物交割型衍生品——这是对本文件自身 products 章节的内部推断，sources 里的官网首页不构成对
+      这个具体结论的独立证据，只是笼统佐证 HKEX 现货业务为主，是本项目「网址精确到信息页」要求
+      尚未满足的已知案例，见 OPEN-QUESTIONS。"
     sources:
-      - title: HKEX 官网首页
+      - title: HKEX 官网首页（未找到逐产品交割方式的专门页面，见本字段 detail 说明）
         url: https://www.hkex.com.hk/
         accessed: 2026-08-12
     confidence: low
