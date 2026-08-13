@@ -51,6 +51,17 @@
     var v = table.values.filter(function (x) { return x.id === enumId; })[0];
     return v ? v.label_en : "";
   }
+  // enumLabel/enumLabelEn 是取值原语，UI 标签（如地区筛选下拉框、档案页头部标签）
+  // 恒双语显示时两个都会被用到，不受语言模式影响，符合 ADR-006。但矩阵格子、
+  // 字段卡片、列表条目里展示的是"数据值"而不是"UI 标签"，要跟 displayValue() 一样
+  // 服从 state.langMode——用这个函数代替裸调用 enumLabel()。
+  function enumDisplay(enumRef, enumId) {
+    if (state.langMode === "en") {
+      var en = enumLabelEn(enumRef, enumId);
+      if (en) return en;
+    }
+    return enumLabel(enumRef, enumId);
+  }
   function nativeText(native) {
     if (!native) return "";
     if (typeof native === "object") return Object.keys(native).map(function (k) { return native[k]; }).filter(Boolean).join(" / ");
@@ -189,7 +200,7 @@
             html += '<td><span class="cell-btn empty">—</span></td>';
             return;
           }
-          var label = col.enum_ref && cell.enum ? enumLabel(col.enum_ref, cell.enum) : displayValue(cell);
+          var label = col.enum_ref && cell.enum ? enumDisplay(col.enum_ref, cell.enum) : displayValue(cell);
           var stale = isStale(ex.id, col.path);
           var lowConf = cell.confidence === "low";
           html += '<td><button type="button" class="cell-btn' + (lowConf ? " low-conf" : "") + '" data-role="cell" data-exchange="' + esc(ex.id) +
@@ -264,7 +275,7 @@
       html += "<tr>";
       itemFields.forEach(function (f) {
         var raw = item[f.id];
-        var text = f.enum_ref && raw ? enumLabel(f.enum_ref, raw) : raw;
+        var text = f.enum_ref && raw ? enumDisplay(f.enum_ref, raw) : raw;
         html += "<td>" + esc(text == null ? "" : text) + "</td>";
       });
       html += "</tr>";
@@ -292,7 +303,7 @@
       }
       var env = getByPath(chapterData, f.path);
       var hasValue = env && env.zh;
-      var value = f.enum_ref && env && env.enum ? enumLabel(f.enum_ref, env.enum) : displayValue(env);
+      var value = f.enum_ref && env && env.enum ? enumDisplay(f.enum_ref, env.enum) : displayValue(env);
       html += '<div class="field-card">';
       html += '<div class="field-label">' + esc(f.label_zh) + " · " + esc(f.label_en) + "</div>";
       html += '<div class="field-value' + (hasValue ? "" : " empty") + '">' + esc(hasValue ? value : "（暂缺，见 OPEN-QUESTIONS）") + "</div>";

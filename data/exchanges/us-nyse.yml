@@ -42,6 +42,7 @@ overview:
 
   history:
     zh: "1792年成立；2006年由会员制改为公司制并上市（与Archipelago/Pacific Exchange合并组成NYSE Group）；2013年被洲际交易所（ICE）收购，现为ICE子公司"
+    en: "Founded 1792; demutualized and went public in 2006 (merged with Archipelago and the Pacific Exchange to form NYSE Group); acquired by Intercontinental Exchange (ICE) in 2013 and now an ICE subsidiary"
     detail: |
       2005年11月16日，洲际交易所（NYSE代码：ICE）在纽交所自身挂牌上市；2006年纽交所、
       Archipelago（Arca）、Pacific Exchange合并组成公开交易的NYSE Group，结束会员制；
@@ -100,9 +101,13 @@ overview:
     confidence: low
     detail: "草稿印象：按上市公司总市值计通常被列为全球最大交易所——未附具体统计口径与日期的来源，留空。"
 
-  trading_currency: "美元 (USD)"
+  trading_currency:
+    zh: "美元 (USD)"
+    en: "USD"
 
-  settlement_currency: "美元 (USD)"
+  settlement_currency:
+    zh: "美元 (USD)"
+    en: "USD"
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境
@@ -215,15 +220,19 @@ market_structure:
   trading_sessions:
     pre_market:
       zh: "6:30am起接受挂单排队，不成交，直至9:30am开盘集合竞价"
+      en: "Orders queue from 6:30 a.m. ET without executing, until the 9:30 a.m. Opening Auction"
       quote: "Pre-Opening Session: 6:30 a.m. ET / Orders can be entered and will be queued until the Opening Auction at 9:30 a.m. ET"
     continuous_am:
       zh: "无独立盘前连续交易时段（这点与部分NYSE集团其他实体如NYSE American/Arca不同，那些有7:00-9:30am的早盘连续交易）；9:30am开盘集合竞价后进入连续交易"
+      en: "No separate early-morning continuous session (unlike some NYSE Group siblings such as NYSE American/Arca, which run a 7:00-9:30am Early Trading Session); continuous trading begins after the 9:30am Opening Auction"
       confidence: medium
     lunch_break:
       zh: "无"
+      en: "None"
       confidence: medium
     continuous_pm:
       zh: "9:30am-3:50pm连续交易；3:50pm-4:00pm为收盘失衡期"
+      en: "Continuous trading 9:30am-3:50pm; Closing Imbalance Period 3:50-4:00pm"
       quote: "Core Trading Session: 9:30 a.m. to 4:00 p.m. ET / 9:30 a.m. ET - Core Open Auction / 3:50 p.m. to 4:00 p.m. ET - Closing Imbalance Period / 4:00 p.m. ET - Closing Auction"
     after_market:
       zh: ""
@@ -231,10 +240,12 @@ market_structure:
       detail: "官网列出的Tape A（NYSE本身）时段表未见独立盘后连续交易时段；NYSE American/Arca/National/Texas等同集团其他实体明确列有4:00-8:00pm盘后时段，NYSE本身是否有盘后交易未在本次抓取的页面中确认，留空不猜。"
     night_session:
       zh: "无"
+      en: "None"
       confidence: medium
 
   holidays_note:
     zh: "官网提供未来多年交易日历与假期安排，具体日期逐年更新未在本次逐条核实"
+    en: "The official site publishes a multi-year trading calendar and holiday schedule; specific yearly dates were not individually verified this session"
     confidence: low
 
   opening_mechanism:
@@ -299,6 +310,7 @@ market_structure:
       confidence: high
     main_board:
       zh: "按Tier 1（标普500/罗素1000/部分ETP）与Tier 2（其余NMS证券）分级设定价格带百分比，具体档位数值本次未在抓取页面中找到"
+      en: "Price bands are set by Tier 1 (S&P 500 / Russell 1000 / select ETPs) vs. Tier 2 (other NMS securities); the specific percentage figures were not found in the pages fetched this session"
       quote: "The percentage level is determined by a security's designation as a Tier 1 or Tier 2 security. Tier 1 comprises all securities in the S&P 500, the Russell 1000 and select Exchange Traded Products (ETPs). Tier 2 comprises all other NMS securities, except for rights and warrants, which are specifically excluded from coverage."
       confidence: medium
     other_boards:
@@ -330,11 +342,13 @@ market_structure:
 
   trading_halt_mechanism:
     zh: "见 circuit_breaker（全市场级）与 volatility_interruption（LULD，个股级）；另有因披露事项的停牌（regulatory halt）未逐条核实"
+    en: "See circuit_breaker (market-wide) and volatility_interruption (LULD, stock-level); regulatory halts for disclosure matters also exist but were not verified in detail this session"
     confidence: medium
 
   intraday_reversal:
     enum: t0
     zh: "T+0（可当日回转），与结算层面的T+1（见 clearing.settlement_cycle）是两回事"
+    en: "T+0 (same-day round-trip trading allowed); distinct from the T+1 settlement cycle (see clearing.settlement_cycle)"
     detail: "美股交易层面对当日买入证券当日卖出无特殊限制（区别于频繁交易者的Pattern Day Trader保证金规则，那是针对保证金账户的监管要求，非交易所层面的回转限制，本次未深入核实细节）。"
     confidence: medium
 
@@ -377,6 +391,7 @@ market_structure:
 
   connect_schemes:
     zh: "无（美股市场无类似沪港通/深港通的跨境互联互通安排）"
+    en: "None (no cross-border Connect-style scheme analogous to Stock Connect)"
     confidence: medium
 
 # ═══════════════════════════════════════════════
@@ -399,6 +414,7 @@ listing:
 
   review_system:
     zh: "披露为本（非注册制/核准制二分），设有量化+定性双重上市标准，由Issuer Regulation团队审核"
+    en: "Disclosure-based (not a simple registration/approval binary); combines quantitative and qualitative listing standards, reviewed by the Issuer Regulation team"
     detail: |
       与上交所"注册制"、港交所"披露为本但上市委员会有实质审核权"都不完全相同——NYSE
       的量化标准非常具体（按规则编号逐条列出，如Rule 102.01C(I)盈利测试、102.01C(II)
@@ -476,6 +492,7 @@ clearing:
   settlement_cycle:
     enum: t1
     zh: "T+1（2024年5月28日起，此前为T+2）"
+    en: "T+1 (effective May 28, 2024; previously T+2)"
     detail: |
       SEC于2023年2月批准修订Rule 15c6-1，将标准结算周期从T+2缩短至T+1，2024-05-28正式
       生效。本条来源是律所客户简报（第三方），非SEC规则原文——SEC.gov/FINRA.org本次多次
@@ -513,6 +530,7 @@ clearing:
   delivery_method:
     enum: na
     zh: "不适用（现货市场，无实物/现金交割概念）"
+    en: "Not applicable (cash market; no physical/cash delivery concept)"
     detail: "推断依据：products 章节所列品类（股票/ADR/封闭式基金/REITs/ETP/债券）均为现货且以电子簿记形式结算，未见实物交割型衍生品——这是对本文件自身 products 章节的内部推断，下面的 sources 只笼统佐证 NYSE 以现货产品为主，不构成对本字段结论的独立证据。"
     sources:
       - title: NYSE Listings Process & Requirements（官网，列出NYSE/NYSE American/NYSE Arca经营的产品类型：stocks, bonds, ETPs等现货品种）
@@ -555,6 +573,7 @@ participants:
 
   membership_structure:
     zh: "会员组织（member organization）体系，须通过NYSE Regulation合规审查"
+    en: "Member organization structure; subject to NYSE Regulation compliance review"
     confidence: medium
 
   broker_landscape:
@@ -670,6 +689,7 @@ risks:
 
   fx_risk_note:
     zh: "美元为全球主要储备货币，本币汇率风险对美国本土投资者而言较低；对以美元计价资产的境外投资者而言，汇率风险来自其本币兑美元波动"
+    en: "USD is the world's primary reserve currency; domestic FX risk is low for U.S.-based investors. For foreign investors holding USD-denominated assets, FX risk arises from their home currency's fluctuation against the USD"
     confidence: low
 
   political_risk_note:
