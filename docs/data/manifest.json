@@ -15,6 +15,22 @@
       "tier": "pilot"
     },
     {
+      "id": "de-eurex",
+      "name_zh": "欧洲期货交易所",
+      "name_native": {
+        "de": "Eurex Deutschland",
+        "en": "Eurex"
+      },
+      "official_languages": [
+        "de",
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": "deutsche-boerse-group",
+      "region": "europe",
+      "tier": "standard"
+    },
+    {
       "id": "hk-hkex",
       "name_zh": "香港交易及结算所（简称港交所）",
       "name_native": {

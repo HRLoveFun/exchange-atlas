@@ -16,6 +16,15 @@
       "note": "港交所个股级机制，触发后进入冷静期，非全市场停牌"
     },
     {
+      "id": "eurex-volatility-interruption",
+      "zh": "波动性中断",
+      "en": "Volatility Interruption",
+      "natives": {
+        "en": "Volatility Interruption"
+      },
+      "note": "Eurex机制，预期成交价超出动态/静态价格区间即触发，以集合竞价恢复交易；官方英文名与港交所VCM不同，且身兼波动性中断与\"涨跌停执行方式\"双重角色，不与volatility-control-mechanism合并一条"
+    },
+    {
       "id": "limit-up-limit-down",
       "zh": "涨跌限价机制",
       "en": "Limit Up-Limit Down (LULD)",

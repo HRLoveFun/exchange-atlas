@@ -22,6 +22,7 @@
 14. **`us-nyse` 的清算机构（NSCC/DTCC）字段整体留空。** `clearing.ccp_name`/`csd_name` 按常识应该是 National Securities Clearing Corporation / Depository Trust Company（均为 DTCC 子公司），但 `dtcc.com` 的所有内容子页（`/accelerated-settlement`、`/about` 等）本次多次尝试均返回 403，只有首页能访问且无实质内容（见 `SOURCES.md` 探测记录）。这是本项目第一次因为"常识性事实"和"能否找到可引用原文"发生冲突而选择遵守铁律留空的案例——诱惑很大（这个事实几乎不可能错），但按 CLAUDE.md 二第1条，没有当次抓取的原文撑腰就不填，哪怕是几乎确定正确的内容。下次有空应该专门想办法绕过 DTCC 的反爬（换 UA、加 Referer，或找 DTCC 年报/SEC备案文件里对 NSCC 角色的官方表述作为替代来源）。
 15. **`us-nyse.short_selling` 的具体触发阈值（Reg SHO Alternative Uptick Rule 的"较前收盘价下跌几%触发"）未能确认。** 与第14条类似，`sec.gov` 与 `finra.org` 本次分别尝试抓取相关规则页均返回403，无法核实这个业内广为人知的具体数字（常识印象是10%，但没有当次抓取的原文，按铁律不采纳）。这三个域名（sec.gov/finra.org/dtcc.com）叠加起来构成了美股监管/清算类信息目前最大的抓取缺口，值得作为一个整体去想解决方案，而不是逐字段单独想办法绕过。
 16. **`jp-jpx` 是否存在独立于「特別気配」之外的全市场级熔断机制，本次未能确认。** TSE《业务规程》里明确的波动控制手段是个股级的「特別気配」（申报价超出值幅制限时不成交、改显示指示性价格），这本质是值幅制限的执行方式；本次抓取的官方英文文档中没有找到类似美股 MWCB（基于大盘指数跌幅触发全市场停牌）那种独立机制的条文，但也不能排除是本次检索范围没覆盖到相关规则（如更晚修订的规程或大阪交易所衍生品市场的规则）。`circuit_breaker` 字段的 `detail` 里已如实标注这一点为未确认状态，而不是断言"日本没有市场级熔断"。
+17. **`taxonomy.yml` 假设的「公司上市」范式在衍生品交易所（`de-eurex`）不成立，这是 ADR-009 当初就预期要压测的问题，现在有了真实结果。** 六｜上市章节的全部字段（`boards`/`review_system`/`delisting_conditions`等）对期货期权交易所都不适用——衍生品交易所没有公司上市，只有「交易员/交易参与者准入」（更接近 `participants` 章节）与「合约挂牌」（更接近 `products` 章节）两个概念，`de-eurex.yml` 对 `listing` 整章如实留空并在章节顶部注释说明，没有强行把交易员准入规则套进上市字段。同样不完全适用的还有三个具体字段：`clearing.settlement_cycle`（衍生品是"每日盯市+到期日交割"，不是"买入后T+N天收货"的时间结构）、`market_structure.short_selling`（衍生品"卖出开仓"不涉及股票式的借券，机制前提不同）、`market_structure.intraday_reversal`（衍生品开平仓当日自由进行，T+0/T+1式限制的设计前提不成立）——这三个字段 `de-eurex.yml` 都如实留空并在 `detail` 里说明"设计前提不适用"，没有强行选一个enum凑数。**结论：`taxonomy.yml` 目前是以现货股票市场为默认范式设计的，六｜上市章节与三个具体字段对衍生品交易所存在系统性不适配，比"受控词表不够用"（第3条）更严重——那是"选项不够"，这是"整章/整个字段的前提假设都不成立"。** 是否需要给 `taxonomy.yml` 引入按交易所类型（现货/衍生品）的章节级条件适用机制，还是继续用"留空+detail说明"的方式吸收这类差异，等 v0.2 五家标杆全部完成、有更多样本后再评估，不要现在就动 schema。
 
 ## 具体数据悬案
 
@@ -33,6 +34,7 @@
 - `cn-sse` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
 - `cn-sse` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `cn-sse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
+- `de-eurex` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `hk-hkex` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `hk-hkex` 市场结构与交易机制 / 最小交易单位（board_lot_size）— confidence: low
 - `hk-hkex` 清算、结算与交割 / 交割方式（delivery_method）— confidence: low

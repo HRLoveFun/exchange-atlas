@@ -1,0 +1,1334 @@
+{
+  "id": "de-eurex",
+  "name_zh": "欧洲期货交易所",
+  "name_native": {
+    "de": "Eurex Deutschland",
+    "en": "Eurex"
+  },
+  "official_languages": [
+    "de",
+    "en"
+  ],
+  "source_lang": "en",
+  "group_id": "deutsche-boerse-group",
+  "region": "europe",
+  "tier": "standard",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "中欧时间（法兰克福，CET，UTC+1；夏令时CEST，UTC+2）",
+        "en": "Central European Time (Frankfurt, CET, UTC+1; CEST UTC+2 during daylight saving)",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dst_rule": {
+        "zh": "实行夏令时（随欧盟统一切换CET/CEST）",
+        "en": "Observes daylight saving time (switches CET/CEST in line with the EU)",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "founded_year": {
+        "zh": "1998（由德国期货交易所DTB与瑞士期权及金融期货交易所SOFFEX合并成立，合并细节为第三方综述未逐条核实）",
+        "en": "1998 (formed by the merger of Deutsche Terminbörse (DTB) and the Swiss Options and Financial Futures Exchange (SOFFEX); merger details are from a third-party summary, not individually verified against a primary source)",
+        "sources": [
+          {
+            "title": "The Market Place（Eurex官网）",
+            "url": "https://www.eurex.com/ex-en/find/about-us/the-market-place",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Since its inception in 1998, Eurex has continually set a proven track record in electronic trading and clearing",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "history": {
+        "zh": "1998年成立，隶属Deutsche Börse Group（法兰克福证券交易所母集团）；旗下另有Eurex Clearing（中央对手方）、Eurex Repo等姊妹机构",
+        "en": "Founded 1998; part of Deutsche Börse Group (the Frankfurt Stock Exchange's parent group); sibling entities include Eurex Clearing (the CCP) and Eurex Repo",
+        "sources": [
+          {
+            "title": "About us（Eurex官网）",
+            "url": "https://www.eurex.com/ex-en/find/about-us",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "These values connect all entities within Deutsche Börse Group",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "organization_form": {
+        "enum": "demutualized_unlisted",
+        "zh": "公司制但未单独上市——Eurex Deutschland本身不是被交易的上市实体，母集团Deutsche Börse Group本身是上市公司，但那是另一层",
+        "en": "Corporate but not separately listed — Eurex Deutschland itself is not a listed trading entity; parent Deutsche Börse Group is publicly listed, but that is a separate corporate layer",
+        "detail": "与NYSE/JPX的'partial'情况不同：NYSE/JPX的母公司当年是通过与被记录的交易所实体合并/\n收购产生了「母公司挂牌」的历史事件，Eurex从1998年成立起就是集团架构下的子公司，没有\n独立上市过，故取no而非partial。「未单独上市」是消极事实（未找到反证），不是官方原文\n正面声明\"Eurex Deutschland未上市\"，sources 只能佐证集团归属，confidence 因此标medium\n而非high。\n",
+        "sources": [
+          {
+            "title": "About us（Eurex官网，页面标识Deutsche Börse Group品牌归属）",
+            "url": "https://www.eurex.com/ex-en/find/about-us",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "quote": null
+      },
+      "self_listed": {
+        "enum": "no",
+        "zh": "否，Eurex Deutschland自身未上市",
+        "en": "No, Eurex Deutschland itself is not listed",
+        "detail": "同 organization_form：这是从'集团子公司架构'推断出的消极事实，没有官方原文正面声明，confidence标medium。",
+        "sources": [
+          {
+            "title": "About us（Eurex官网）",
+            "url": "https://www.eurex.com/ex-en/find/about-us",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "quote": null
+      },
+      "market_cap_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "衍生品交易所没有'挂牌公司总市值'这个概念（对比现货交易所），该字段对本所不适用；持仓量/名义本金等衍生品特有规模指标本次未核实，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "listed_companies_count": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "同上，'上市公司数量'对衍生品交易所不适用。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "global_ranking": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_currency": {
+        "zh": "多币种——按标的合约计价，欧元为主，另有美元、英镑、瑞士法郎等计价的产品",
+        "en": "Multi-currency — denominated per underlying contract; primarily EUR, with USD/GBP/CHF-denominated products also listed",
+        "detail": "与现货股票交易所'一种主要交易货币'的情况不同，衍生品交易所的计价货币随标的资产而定，是本所与四家现货标杆的一处结构性差异。",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "settlement_currency": {
+        "zh": "同交易货币，按合约计价货币结算",
+        "en": "Same as trading currency; settled in the currency each contract is denominated in",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "黑森州最高监管机关（交易所监管机关，Exchange Supervisory Authority）——不是联邦金融监管局BaFin",
+        "en": "The competent highest state authority in the State of Hesse (\"Exchange Supervisory Authority\") — not the federal BaFin",
+        "detail": "德国交易所监管实行邦（州）级属地管辖，法兰克福所在的黑森州对Eurex Deutschland行使\n交易所监管职能；这与常识印象里\"德国金融监管找BaFin\"不完全一致——BaFin是联邦层面的\n金融业务行为监管机构，与交易所设立/运作的属地监管是两回事，本次未找到BaFin在\nEurex具体监管职能中的官方原文表述，故本字段只写实测确认的黑森州机关，不臆测BaFin\n的角色边界。\n",
+        "quote": "Supervision of the operations of Eurex Deutschland shall be the responsibility of the competent highest state authority in the State of Hesse (hereinafter \"Exchange Supervisory Authority\").",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "self_regulatory_org": {
+        "zh": "交易所理事会（Exchange Council），依据德国交易所法及黑森州交易所条例设立",
+        "en": "Exchange Council, established pursuant to the German Stock Exchange Act and the Exchange Regulation issued by the State of Hesse",
+        "quote": "Eurex Deutschland shall establish an Exchange Council pursuant to the German Stock Exchange Act and the Exchange Regulation (Börsenverordnung) issued by the State of Hesse.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "clearing_regulator": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "Eurex Clearing AG作为中央对手方本身的监管归属（可能涉及BaFin与欧盟EMIR框架）本次未核实，留空。",
+        "sources": [
+          {
+            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "core_laws": {
+        "zh": "《德国交易所法》（Börsengesetz）",
+        "en": "German Stock Exchange Act (Börsengesetz)",
+        "quote": "pursuant to the German Stock Exchange Act and the Exchange Regulation (Börsenverordnung) issued by the State of Hesse",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "disclosure_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "Rules & Regs / Products（官网导航栏）",
+            "url": "https://www.eurex.com/ex-en/rules-regs/eurex-rules-regulations",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "eurex-interest-rate",
+          "category": "future",
+          "name_zh": "利率期货与期权",
+          "name_native": "Interest Rates（LTIR/STIR Futures & Options）"
+        },
+        {
+          "id": "eurex-equity-index",
+          "category": "future",
+          "name_zh": "股指期货与期权",
+          "name_native": "Equity Index Derivatives（EURO STOXX 50、DAX、STOXX Europe 600等）",
+          "description": "标的指数多由STOXX/Deutsche Börse等第三方或集团关联指数商编制，非Eurex自编，见 indices 章节"
+        },
+        {
+          "id": "eurex-equity-options",
+          "category": "option",
+          "name_zh": "股票期权与单一股票期货",
+          "name_native": "Equity Options, Single Stock Futures"
+        },
+        {
+          "id": "eurex-volatility",
+          "category": "future",
+          "name_zh": "波动率衍生品",
+          "name_native": "Volatility Derivatives（VSTOXX、Variance）"
+        },
+        {
+          "id": "eurex-etf-deriv",
+          "category": "future",
+          "name_zh": "ETF与ETC衍生品",
+          "name_native": "ETF & ETC Derivatives"
+        },
+        {
+          "id": "eurex-commodity",
+          "category": "future",
+          "name_zh": "商品衍生品",
+          "name_native": "Commodity Derivatives（Bloomberg Commodity Derivatives等）"
+        },
+        {
+          "id": "eurex-crypto",
+          "category": "future",
+          "name_zh": "加密货币衍生品",
+          "name_native": "Cryptocurrency Derivatives（FTSE Bitcoin & Ethereum Derivatives）"
+        },
+        {
+          "id": "eurex-fx",
+          "category": "future",
+          "name_zh": "外汇期货",
+          "name_native": "FX Futures"
+        },
+        {
+          "id": "eurex-repo",
+          "category": "other",
+          "name_zh": "回购交易（Eurex Repo Market）",
+          "description": "现券回购/GC Pooling等，非严格意义上的场内衍生品，由姊妹机构Eurex Repo运营"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "亚洲时段 01:00-08:00 CET（部分流动性较好的期货品种，属'延长交易时段'性质）",
+          "en": "Asian hours 01:00-08:00 CET (for selected liquid futures, as extended trading hours)",
+          "quote": "In addition to regular trading hours, Eurex is offering extended (Asian) trading hours for selected liquid futures. 01:00 CET (02:00 CEST) – 08:00 CET (Asian hours)",
+          "sources": [
+            {
+              "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+              "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "confidence": "high",
+          "enum": null,
+          "detail": null
+        },
+        "continuous_am": {
+          "zh": "欧洲时段 08:00-17:30 CET",
+          "en": "European hours 08:00-17:30 CET",
+          "quote": "08:00 CET – 17:30 CET (European hours)",
+          "sources": [
+            {
+              "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+              "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "confidence": "high",
+          "enum": null,
+          "detail": null
+        },
+        "lunch_break": {
+          "zh": "无",
+          "en": "None",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+              "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "continuous_pm": {
+          "zh": "美国时段 17:30-22:00 CET",
+          "en": "U.S. hours 17:30-22:00 CET",
+          "quote": "17:30 CET – 22:00 CET (U.S. hours)",
+          "sources": [
+            {
+              "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+              "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "confidence": "high",
+          "enum": null,
+          "detail": null
+        },
+        "after_market": {
+          "zh": "常规交易日 08:00-22:00 CET 整体已覆盖欧洲+美国时段，22:00后即衔接次日亚洲时段，无独立盘后连续交易时段",
+          "en": "Regular trading runs 08:00-22:00 CET covering European+U.S. hours; after 22:00 it rolls directly into the next day's Asian hours, with no separate after-hours continuous session",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+              "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "night_session": {
+          "zh": "见 pre_market 亚洲时段——本所实质上是准全天候交易（01:00-22:00 CET，仅01:00前后有窄幅间隙），与四家现货标杆均无夜盘形成鲜明对比",
+          "en": "See pre_market (Asian hours) — trading effectively runs near round-the-clock (01:00-22:00 CET with only a narrow gap), a sharp contrast with the four cash-equity benchmarks, none of which have a night session",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+              "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "holidays_note": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘集合竞价（Opening Auction），期间可继续提交订单/报价，以撮合成交量最大的价格定开盘价（Netting流程）",
+        "en": "Opening Auction; additional Orders and Quotes may still be entered during the auction, with the opening price determined via a netting process maximizing matched volume",
+        "quote": "Exchange trading can begin with an Opening Auction for the respective... The Opening Auction ends with a netting process (\"Netting\").",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价（Closing Auction），部分品种另设盘中收盘集合竞价（intra-day Closing Auction）",
+        "en": "Closing Auction; some instruments also have intra-day Closing Auctions",
+        "quote": "The Management Board may determine intra-day Closing Auctions which take place during the Trading Period.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "市价申报优先于限价申报执行；具体价格/时间优先顺序细则详见交易系统规则",
+        "en": "Market Orders are always executed before Limit Orders; detailed price/time priority mechanics are set out in the trading system rules",
+        "quote": "Market Orders shall always be executed before Limit Orders or Quotes, as the case may be, are executed.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "order_types": {
+        "zh": "市价申报、限价申报、止损申报（Market/Limit/Stop Orders），另支持多种复合工具（跨期价差组合等）",
+        "en": "Market Orders, Limit Orders, Stop Orders; complex instruments (e.g. calendar spread strategies) are also supported",
+        "sources": [
+          {
+            "title": "Conditions for Trading（官网英文版PDF）目录 3.2-3.4",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "tick_size": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "board_lot_size": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "衍生品交易所以'合约张数'为交易单位，没有股票市场'一手多少股'的概念；按合约规格（Contract Specifications）逐品种规定最小变动单位与合约乘数，未逐条核实。",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "odd_lot_handling": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "dynamic_reference",
+          "zh": "动态/静态价格区间（Dynamic/Static Price Range），预期成交价超出区间即触发波动性中断，而非直接禁止申报的固定涨跌停",
+          "en": "Dynamic/static price ranges; when the next expected execution price falls outside the range, a Volatility Interruption is triggered rather than the order being flatly rejected as with a fixed daily limit",
+          "sources": [
+            {
+              "title": "Conditions for Trading（官网英文版PDF）1.5",
+              "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "If the next expected execution price of an Instrument is outside a dynamic or static price range, an interruption of continuous trading in such Instrument shall occur (\"Volatility Interruption\").",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "detail": null
+        },
+        "main_board": {
+          "zh": "区间宽度与参考价由管理董事会（Management Board）按每个衍生品逐一确定，未公开统一的百分比表（与JPX值幅制限、美股LULD的Tier分级不同，本所未见公开的统一档位表）",
+          "en": "The size of each price range and its reference prices are set by the Management Board per Derivative; no single published percentage table was found (unlike JPX's tiered yen bands or the U.S. LULD Tier system)",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+              "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "other_boards": {
+          "zh": "",
+          "confidence": "low",
+          "sources": [
+            {
+              "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+              "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "stock_level",
+        "zh": "无独立于波动性中断之外的全市场级熔断；波动性中断（见volatility_interruption）触发后管理董事会可扩大到同一衍生品的全部合约暂停交易，但本次未找到覆盖全市场所有产品的熔断安排",
+        "en": "No market-wide circuit breaker separate from the Volatility Interruption mechanism; upon a Volatility Interruption the Management Board may extend the trading halt to all Instruments of the same Derivative, but no exchange-wide halt covering all products was found in the content fetched this session",
+        "detail": "与JPX的情况相似（也没找到独立于个股价格机制之外的全市场熔断），可能是本次检索范围局限，未逐条核实是否存在，见 OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "Conditions for Trading（官网英文版PDF）1.5",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "If the conditions required for a Volatility Interruption are satisfied for a particular Instrument, the Management Board may, in addition to Sentence 1, interrupt continuous trading for all Instruments of the respective Derivative.",
+        "confidence": "medium",
+        "verified": "2026-08-14"
+      },
+      "volatility_interruption": {
+        "zh": "波动性中断（Volatility Interruption）：预期成交价超出动态或静态价格区间即触发，中断后以集合竞价方式恢复交易（紧接的收盘集合竞价除外）",
+        "en": "Volatility Interruption: triggered when the next expected execution price falls outside the dynamic or static price range; trading resumes via an auction (unless immediately followed by a Closing Auction)",
+        "quote": "Immediately after a Volatility Interruption, exchange trading shall be resumed in the respective Instrument or Derivative with an auction period unless a Closing Auction pursuant to Number 1.4 Paragraph 3 follows immediately thereafter.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "见 volatility_interruption；另有因技术故障或第25条（德国交易所法）等原因的停牌未逐条核实",
+        "en": "See volatility_interruption; halts due to technical failures or under Section 25 of the German Stock Exchange Act also exist but were not individually verified",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "intraday_reversal": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "衍生品合约买卖本身不涉及股票市场'当日回转'限制的概念（开仓/平仓当日可自由进行），该字段的设计前提（T+0/T+1式限制）对衍生品交易所不完全适用，留空不强行套用enum，记入OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "short_selling": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "衍生品的'卖出开仓'（如卖出期货、卖出看涨期权）在机制上不同于股票卖空（不涉及借券），该字段的设计前提本身是股票市场概念，对本所不完全适用，留空不强行套用，记入OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "block_trade": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "dark_pool": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "market_maker_scheme": {
+        "zh": "受监管做市商制度（Regulated Market Maker）：需申请获得资格，须在至少一个衍生品品种上按月平均覆盖每日交易时段50%的时间持续提供双边报价，具体点差/报价量要求由管理董事会另行规定",
+        "en": "Regulated Market Maker system: admission required; must continuously enter binding two-way quotes in at least one Derivative covering 50% of daily Trading Hours on a monthly average, with specific spread/volume requirements set separately by the Management Board",
+        "detail": "该义务框架依据欧盟《受托规例》(EU) 2017/578（MiFID II项下做市商监管规则）确定。",
+        "sources": [
+          {
+            "title": "Exchange Rules（官网英文版PDF）§48-49",
+            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "the Exchange Traders acting on behalf of the Regulated Market Maker are required to continuously enter binding Quotes in at least one Derivative and during 50% of the daily Trading Hours on a monthly average.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "connect_schemes": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "listing": {
+      "boards": [],
+      "review_system": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "衍生品交易所没有公司上市审核制度；与之对应的是交易员资格考试与准入审核（Admission Regulations for Exchange Traders），性质不同，不适合填入本字段，见章节顶部说明。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "transfer_between_boards": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "continuing_obligations": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suspension_resumption": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delisting_conditions": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "衍生品没有'退市'概念，最接近的是合约到期（Expiry）或管理董事会终止交易（见market_structure.trading_halt_mechanism提及的第25条）——性质是合约生命周期管理，非公司退市，不适合填入本字段。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "delisting_process": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delisting_transition_period": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-14",
+        "confidence": "low"
+      },
+      "items": []
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "衍生品没有股票市场T+N式的'结算周期'概念——持仓每日盯市（mark-to-market）结算保证金，最终交割/现金结算发生在合约到期日，与'买入证券几天后收货'不是同一种时间结构，该字段的enum设计前提对衍生品交易所不完全适用，留空不强行套用，记入OPEN-QUESTIONS。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "ccp_name": {
+        "zh": "欧洲期货结算公司",
+        "en": "Eurex Clearing AG",
+        "quote": "the Clearing in respect of these Transactions shall be handled exclusively by Eurex Clearing AG in its capacity as a central counterparty.",
+        "sources": [
+          {
+            "title": "Exchange Rules（官网英文版PDF）§18",
+            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "csd_name": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：同集团的Clearstream可能承担证券交割相关的存管职能，但未找到Eurex官方原文明确表述两者关系，留空不猜。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "initial_margin_practice": {
+        "zh": "Eurex Clearing Prisma：基于会员整体持仓组合计算保证金的方法（而非逐笔/逐品种），可反映对冲与品种间相关性带来的风险抵消效应，覆盖场内与场外产品",
+        "en": "Eurex Clearing Prisma: a portfolio-based margin methodology (rather than trade-by-trade or product-by-product) that accounts for hedging and cross-correlation effects, covering both ETD and OTC products",
+        "sources": [
+          {
+            "title": "Margining Process（Eurex官网）",
+            "url": "https://www.eurex.com/ec-en/services/margining/margining-process",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Eurex Clearing Prisma, a robust portfolio-based risk management method has been introduced for all ETD and OTC products. The Eurex Clearing Prisma method is based on the view of each member's entire portfolio and has the advantage of accounting for hedging and cross-correlation effects through determining the margin requirement on a portfolio level.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：按日盯市（daily mark-to-market）是期货交易所的行业惯例，但未找到Eurex官方原文明确表述频率，留空不凭常识填写。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "delivery_method": {
+        "enum": "either",
+        "zh": "视产品而定：实物交割为默认方式（如部分利率/债券期货），管理董事会可决定排除实物交割改为现金结算",
+        "en": "Depends on the product: physical delivery is the default for some products (e.g. certain interest-rate/bond futures); the Management Board may rule out physical delivery in favor of cash settlement",
+        "detail": "这是与四家现货标杆（均填na）最实质性的字段差异——衍生品交易所是本项目第一次真正用上delivery_method这个字段。",
+        "sources": [
+          {
+            "title": "Exchange Rules（官网英文版PDF）§ 相关条款（物理交割排除与现金结算条款）",
+            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "In case of an exclusion of physical delivery pursuant to Clause 1 (iii) or Clause 2 (ii), a cash settlement of the relevant Contracts shall take place.",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "default_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "membership_structure": {
+        "zh": "分「获准公司」（Admitted Companies）与「交易员」（Exchange Traders）两层：公司须获准参与交易所交易，个人交易员须通过资格考试（Exchange Trader Examination）后方可代表获准公司下单",
+        "en": "Two-tier structure: \"Admitted Companies\" must be admitted to exchange trading, and individual \"Exchange Traders\" must pass an Exchange Trader Examination before placing orders on behalf of an Admitted Company",
+        "sources": [
+          {
+            "title": "Admission Regulations for Exchange Traders at Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网多处提及'Eurex Trading System'这一泛称，但未确认是否有类似NYSE Pillar/TSE arrowhead那样的具体品牌系统名称，留空不猜。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "access_methods": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Fee Regulations for Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "exchange_fees": {
+        "zh": "按三类收费：交易参与准入费、交易参与年费（由管理董事会确定）、交易员资格考试费；另有成交撤销/更正申请费每笔500欧元",
+        "en": "Three fee categories: admission fee, annual participation fee (set by the Management Board), and Exchange Trader examination fee; a separate EUR 500 fee applies per cancellation/correction application",
+        "quote": "Fees are levied for 1. admission to participation in exchange trading, 2. participation in exchange trading, and 3. participation in the Exchange trader examination. ... This fee shall amount to EUR 500 per application.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Fee Regulations for Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Fee Regulations for Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Fee Regulations for Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "stamp_duty": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Fee Regulations for Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "financial_transaction_tax": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：德国/欧盟金融交易税立法多年未最终落地，衍生品交易通常不在现有印花税类税种覆盖范围——未附来源，留空。",
+        "sources": [
+          {
+            "title": "Fee Regulations for Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "capital_gains_tax": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Fee Regulations for Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Fee Regulations for Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Fee Regulations for Eurex Deutschland（官网英文版PDF）",
+            "url": "https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "欧元区无资本管制，欧元自由浮动；因产品覆盖多币种计价（见overview.trading_currency），交易该所衍生品的汇率风险因具体产品计价货币而异，不能一概而论",
+        "en": "No capital controls in the Eurozone; the euro floats freely. Because products are denominated in multiple currencies (see overview.trading_currency), FX risk varies by the specific product's denomination currency rather than being uniform",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "enforcement_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    }
+  }
+}
