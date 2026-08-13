@@ -31,6 +31,21 @@
       "tier": "pilot"
     },
     {
+      "id": "jp-jpx",
+      "name_zh": "东京证券交易所",
+      "name_native": {
+        "ja": "東京証券取引所",
+        "en": "Tokyo Stock Exchange (TSE)"
+      },
+      "official_languages": [
+        "ja"
+      ],
+      "source_lang": "en",
+      "group_id": "jpx-group",
+      "region": "apac",
+      "tier": "standard"
+    },
+    {
       "id": "us-nyse",
       "name_zh": "纽约证券交易所",
       "name_native": {

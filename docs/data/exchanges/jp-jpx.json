@@ -1,0 +1,1412 @@
+{
+  "id": "jp-jpx",
+  "name_zh": "东京证券交易所",
+  "name_native": {
+    "ja": "東京証券取引所",
+    "en": "Tokyo Stock Exchange (TSE)"
+  },
+  "official_languages": [
+    "ja"
+  ],
+  "source_lang": "en",
+  "group_id": "jpx-group",
+  "region": "apac",
+  "tier": "standard",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "日本标准时间（JST，UTC+9）",
+        "en": "Japan Standard Time (JST, UTC+9)",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "History（JPX官网，公司发展历程）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          },
+          {
+            "title": "Before JPX Launched（JPX官网，东证前史）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/01-01.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "dst_rule": {
+        "zh": "不实行夏令时",
+        "en": "Does not observe daylight saving time",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "History（JPX官网，公司发展历程）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          },
+          {
+            "title": "Before JPX Launched（JPX官网，东证前史）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/01-01.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "founded_year": {
+        "zh": "1878（5月15日，「东京株式取引所」设立）；现行「东京证券交易所」于1949年4月1日重新成立，5月16日开业",
+        "en": "1878 (May 15, \"Tokyo Stock Exchange Co., Ltd.\" established); the present-day \"Tokyo Stock Exchange\" was founded April 1, 1949 (opened May 16)",
+        "detail": "1943年因战时统制，与全国其他交易所合并为「日本证券取引所」（准官方机构），1947年\n随占领当局的财阀解体政策解散；1949年以现行组织形式重新成立。这条历史链条与现在的\nJPX集团（2013年成立）是两回事——见 history 字段。\n",
+        "quote": "\"Tokyo Stock Exchange Co., Ltd.\" established. / \"Tokyo Stock Exchange\" in the present form founded (opened on May 16).",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "History（JPX官网，公司发展历程）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          },
+          {
+            "title": "Before JPX Launched（JPX官网，东证前史）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/01-01.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "history": {
+        "zh": "1878年设立，几经战时整合与解散重组，1949年以现行组织形式重新成立；2013年东京证券交易所集团与大阪证券交易所合并成立日本交易所集团（JPX），JPX随即于同月在TSE挂牌上市；同年大阪证交所现货市场并入TSE，衍生品市场整合进更名后的大阪交易所（OSE）",
+        "en": "Established 1878; wartime consolidation and dissolution, refounded in present form in 1949; in 2013 Tokyo Stock Exchange Group merged with Osaka Securities Exchange to form Japan Exchange Group (JPX), which listed on TSE that same month; OSE's cash equity market was integrated into TSE while its derivatives market became the renamed Osaka Exchange (OSE)",
+        "sources": [
+          {
+            "title": "History（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Jan. 1, 2013 Japan Exchange Group, Inc.(JPX) is established / Jan. 4, 2013 Japan Exchange Group, Inc.(JPX) is listed on Tokyo Stock Exchange (TSE) 1st Section / Jul. 16, 2013 Cash equity market of Osaka Securities Exchange (OSE) is integrated into TSE",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null
+      },
+      "organization_form": {
+        "enum": "demutualized_listed",
+        "zh": "公司制（母公司JPX由2013年东证集团与大阪证交所合并组成并上市）",
+        "en": "Demutualized (parent JPX formed by the 2013 merger of Tokyo Stock Exchange Group and Osaka Securities Exchange, then listed)",
+        "sources": [
+          {
+            "title": "History（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Jan. 1, 2013 Japan Exchange Group, Inc.(JPX) is established",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "detail": null
+      },
+      "self_listed": {
+        "enum": "partial",
+        "zh": "并非TSE本身单独上市，而是母公司日本交易所集团（JPX）在TSE挂牌（2013年1月4日，当时为第一部）",
+        "en": "Not TSE itself; parent Japan Exchange Group (JPX) is listed on TSE (since January 4, 2013, originally on the 1st Section)",
+        "detail": "与NYSE/ICE是同一种结构——挂牌的是控股母公司，不是被记录的交易所实体本身，故取 partial 而非简单是/否。",
+        "sources": [
+          {
+            "title": "History（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Jan. 4, 2013 Japan Exchange Group, Inc.(JPX) is listed on Tokyo Stock Exchange (TSE) 1st Section",
+        "confidence": "high",
+        "verified": "2026-08-13"
+      },
+      "market_cap_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "History（JPX官网，公司发展历程）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          },
+          {
+            "title": "Before JPX Launched（JPX官网，东证前史）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/01-01.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "listed_companies_count": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "History（JPX官网，公司发展历程）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          },
+          {
+            "title": "Before JPX Launched（JPX官网，东证前史）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/01-01.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "History（JPX官网，公司发展历程）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          },
+          {
+            "title": "Before JPX Launched（JPX官网，东证前史）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/01-01.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "global_ranking": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "History（JPX官网，公司发展历程）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          },
+          {
+            "title": "Before JPX Launched（JPX官网，东证前史）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/01-01.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "trading_currency": {
+        "zh": "日元 (JPY)",
+        "en": "JPY",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "History（JPX官网，公司发展历程）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          },
+          {
+            "title": "Before JPX Launched（JPX官网，东证前史）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/01-01.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "settlement_currency": {
+        "zh": "日元 (JPY)",
+        "en": "JPY",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "History（JPX官网，公司发展历程）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          },
+          {
+            "title": "Before JPX Launched（JPX官网，东证前史）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/01-01.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "金融厅",
+        "en": "Financial Services Agency (FSA)",
+        "detail": "交易所上市审核、退市等重大事项须向金融厅长官（Commissioner of the Financial Services Agency）报告。",
+        "sources": [
+          {
+            "title": "Securities Listing Regulations（官网英文版PDF）Rule 1604-1605",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "the Exchange shall report the details to the Commissioner of the Financial Services Agency without delay",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "self_regulatory_org": {
+        "zh": "Japan Exchange Regulation（JPX集团内设自律监管机构，2014年由「东京证券交易所自律监管法人」更名而来）；日本证券业协会（JSDA，经纪商会员层面）",
+        "en": "Japan Exchange Regulation (JPX Group's self-regulatory body, renamed from Tokyo Stock Exchange Regulation in 2014); Japan Securities Dealers Association (JSDA, broker-member level)",
+        "sources": [
+          {
+            "title": "History（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Apr. 1, 2014 Tokyo Stock Exchange Regulation is renamed Japan Exchange Regulation",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null
+      },
+      "clearing_regulator": {
+        "zh": "金融厅",
+        "en": "FSA",
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "core_laws": {
+        "zh": "《金融商品交易法》",
+        "en": "Financial Instruments and Exchange Act",
+        "detail": "卖空价格限制等具体条文即依据该法及其施行令（Enforcement Ordinance）与内阁府令（Cabinet Office Ordinance）制定。",
+        "sources": [
+          {
+            "title": "Business Regulations（官网英文版PDF）Rule 16",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "the Transaction Restriction Ordinance ... the Financial Instruments and Exchange Act",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "disclosure_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-13",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "jp-jpx-stocks",
+          "category": "equity",
+          "name_zh": "股票",
+          "name_native": "株式",
+          "description": "按 Prime/Standard/Growth 三板分类，见 listing.boards"
+        },
+        {
+          "id": "jp-jpx-etf",
+          "category": "fund",
+          "name_zh": "交易所买卖基金",
+          "name_native": "ETF（上場投資信託）"
+        },
+        {
+          "id": "jp-jpx-reit",
+          "category": "fund",
+          "name_zh": "日本房地产投资信托",
+          "name_native": "J-REIT（不動産投資信託）"
+        },
+        {
+          "id": "jp-jpx-bonds",
+          "category": "bond",
+          "name_zh": "债券",
+          "description": "含公司债、可转换公司债、可交换公司债、政府债券（日本国债交易时段与其他证券不同，见 market_structure.trading_sessions）"
+        },
+        {
+          "id": "jp-jpx-etn",
+          "category": "structured",
+          "name_zh": "交易所买卖票据",
+          "name_native": "ETN"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "无独立盘前时段",
+          "en": "No separate pre-market session",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Business Regulations（TSE官网英文版PDF）",
+              "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "continuous_am": {
+          "zh": "上午盘 9:00-11:30",
+          "en": "Morning session 9:00 a.m.-11:30 a.m.",
+          "quote": "The morning trading session shall be held from 9:00 a.m. to 11:30 a.m.",
+          "sources": [
+            {
+              "title": "Business Regulations（TSE官网英文版PDF）",
+              "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "confidence": "high",
+          "enum": null,
+          "detail": null
+        },
+        "lunch_break": {
+          "zh": "11:30-12:30 午休，无交易",
+          "en": "11:30 a.m.-12:30 p.m. lunch recess, no trading",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Business Regulations（TSE官网英文版PDF）",
+              "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "continuous_pm": {
+          "zh": "下午盘 12:30-15:30，其中15:25-15:30为收盘集合竞价",
+          "en": "Afternoon session 12:30 p.m.-3:30 p.m., with 3:25-3:30 p.m. as the closing auction session",
+          "quote": "the afternoon trading session shall be held from 0:30 p.m. to 3.30 p.m. However, 3:25 p.m. to 3:30 p.m. will be a closing auction session, with trades being executed at 3:30 p.m.",
+          "sources": [
+            {
+              "title": "Business Regulations（TSE官网英文版PDF）",
+              "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "confidence": "high",
+          "enum": null,
+          "detail": null
+        },
+        "after_market": {
+          "zh": "无独立盘后连续交易时段",
+          "en": "No separate after-hours continuous session",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Business Regulations（TSE官网英文版PDF）",
+              "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "night_session": {
+          "zh": "现货股票无夜盘（衍生品市场另有夜盘，属大阪交易所OSE，不在本文件范围）",
+          "en": "None for cash equities (derivatives have a night session under Osaka Exchange, outside this file's scope)",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Business Regulations（TSE官网英文版PDF）",
+              "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "holidays_note": {
+        "zh": "周末与法定节假日休市，具体日历官网逐年公布，未逐条核实",
+        "en": "Closed on weekends and national holidays; the exact calendar is published yearly and was not individually verified",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘集合竞价撮合决定开盘价，其后转为连续竞价",
+        "en": "Opening price determined by call auction, then continuous trading begins",
+        "detail": "「所有开盘价确定前的申报视为同时提出」——board_lot_size等细则见 Rule 10。",
+        "sources": [
+          {
+            "title": "Business Regulations（官网英文版PDF）Rule 10, Rule 12",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "All bids and offers made prior to determination of an opening price [shall be deemed to have been made simultaneously]",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价，15:25-15:30，15:30执行成交",
+        "en": "Closing call auction, 3:25-3:30 p.m., executed at 3:30 p.m.",
+        "quote": "3:25 p.m. to 3:30 p.m. will be a closing auction session, with trades being executed at 3:30 p.m.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "价格优先、时间优先；市价申报优先于指值申报",
+        "en": "Price priority, then time priority; market orders take precedence over limit orders",
+        "quote": "A lower offer shall have precedence over higher offers, and a higher bid shall have precedence over lower bids... Market orders shall have precedence over bids and offers other than those of market orders in terms of price.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null
+      },
+      "order_types": {
+        "zh": "市价申报、指值申报（限价申报）",
+        "en": "Market orders and limit orders",
+        "detail": "官方英文版《业务规程》未见对订单类型的独立分类条款清单（不同于纽交所专门的Order Type Matrix文档），本条基于撮合规则条文（Rule 10）里对市价/指值申报的提及归纳。",
+        "sources": [
+          {
+            "title": "Business Regulations（官网英文版PDF）Rule 10",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Market orders shall have precedence over bids and offers other than those of market orders in terms of price. All market orders shall be on parity with each other.",
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "tick_size": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "board_lot_size": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "日股普遍以100股为单位交易，但未在本次抓取的条文中找到统一规定的直接原文，留空不猜。",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "odd_lot_handling": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "absolute_tiered",
+          "zh": "值幅制限：按前收盘价所在区间，分37档规定绝对值幅（非百分比），如100円以下±30円……5000万円以上±1000万円",
+          "en": "Price limits on bids and offers: 37 tiers of absolute yen amounts (not percentages) keyed to the base price band, e.g. under 100 yen → ±30 yen ... 50,000,000 yen or more → ±10,000,000 yen",
+          "sources": [
+            {
+              "title": "Rules Concerning Price Limits on Bids and Offers（TSE官网英文版PDF）",
+              "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/bids_and_offers_price_limits_20141201.pdf",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "quote": "Less than 100 yen Upward/Downward 30 yen ... Where the price is more than 50,000,000 yen 10,000,000 yen",
+          "confidence": "high",
+          "verified": "2026-08-13",
+          "detail": null
+        },
+        "main_board": {
+          "zh": "见 type 字段的37档完整表；档位随基准价升高而放大，非固定比例",
+          "en": "See the 37-tier table in the type field; the band widens as the base price rises, not a fixed percentage",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Business Regulations（TSE官网英文版PDF）",
+              "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "other_boards": {
+          "zh": "Prime/Standard/Growth三板统一适用同一套值幅制限表，未发现分板差异",
+          "en": "The same price-limit table applies uniformly across the Prime/Standard/Growth boards; no board-specific variation found",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Business Regulations（TSE官网英文版PDF）",
+              "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "stock_level",
+        "zh": "无独立的全市场熔断机制（如美股MWCB）；波动控制主要通过「特別気配」（特别行情揭示）机制实现——申报价格超出值幅制限的基准价时，不直接成交，而是显示特别气配指示性价格，上午盘超出即不成交，下午盘则按值幅制限价位处理",
+        "en": "No separate market-wide circuit breaker (unlike the U.S. MWCB); volatility control operates primarily through the \"special quote\" mechanism — when an order price would exceed the price-limit band around the base price, no trade is executed at that price; instead a special indicative quote is displayed. In the morning session no transaction is effected; in the afternoon session trading is capped at the price limit",
+        "detail": "本条描述的是个股级机制，是否存在独立于值幅制限之外的全市场级熔断安排未在本次抓取内容中确认，留待后续核实，见 OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "Business Regulations（官网英文版PDF）Rule 12, Paragraph 7",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "when the price prescribed in Paragraph 2, Item (3) exceeds a price limit determined by the Exchange based on the last sale price (or a special quote if such quote is posted as prescribed by the Exchange), transactions shall be handled as prescribed for each classification... Morning session: Transactions shall not be effected.",
+        "confidence": "high",
+        "verified": "2026-08-13"
+      },
+      "volatility_interruption": {
+        "zh": "同 circuit_breaker 所述的「特別気配」机制——本质是值幅制限的执行方式，而非独立的波动性中断层，与港交所VCM那种独立于涨跌停之外的冷静期机制不是同一类设计",
+        "en": "Same \"special quote\" mechanism described under circuit_breaker — it is the enforcement mechanism of the price-limit system itself, not a separate volatility-interruption layer distinct from price limits (unlike HKEX's VCM, which operates independently of any daily price limit since HKEX has none)",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "见 circuit_breaker（特別気配）；另有因重大事项披露的停牌未逐条核实",
+        "en": "See circuit_breaker (special quote mechanism); halts for material disclosure events also exist but were not verified in detail",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "intraday_reversal": {
+        "enum": "t1",
+        "zh": "现货股票交收前不得卖出（不可当日回转），与结算层面T+2（见 clearing.settlement_cycle）相配套",
+        "en": "Securities purchased may not be sold before settlement (no same-day round-trip); pairs with the T+2 settlement cycle (see clearing.settlement_cycle)",
+        "detail": "此为一般性市场惯例的归纳，本次未找到TSE业务规程里逐条禁止当日回转的直接条文，confidence标medium。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "quote": null
+      },
+      "short_selling": {
+        "enum": "restricted_uptick",
+        "zh": "卖空须向交易所披露（标记申报），且受价格限制约束（Rule 16「卖空价格限制基准价」），类似报升规则，具体触发比例本次未能在抓取内容中确认",
+        "en": "Short sales must be flagged/disclosed to the Exchange and are subject to a price restriction (Rule 16, \"Base Prices with Short Selling Price Restriction\"), functionally similar to an uptick rule; the specific trigger percentage was not confirmed in the content fetched this session",
+        "sources": [
+          {
+            "title": "Business Regulations（官网英文版PDF）Rule 14, Rule 16",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "If the trading participant intends to execute a short sale... disclosure of that fact / Rule 16. Base Prices with Short Selling Price Restriction",
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "detail": null
+      },
+      "block_trade": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "dark_pool": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "market_maker_scheme": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "TSE现货市场撮合系统（arrowhead）为全电子化连续竞价，未确认是否存在类似纽交所DMM式的场内指定做市商角色；部分ETF/权证品种可能另有流动性提供者（Liquidity Provider）安排，未核实细节，留空不猜。",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "connect_schemes": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Business Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "listing": {
+      "boards": [
+        {
+          "id": "jp-jpx-prime",
+          "name_zh": "主市场",
+          "name_native": "Prime Market（プライム市場）",
+          "target_companies": "面向具备全球投资者对话基础的大型企业，2022年4月市场重组后设立"
+        },
+        {
+          "id": "jp-jpx-standard",
+          "name_zh": "标准市场",
+          "name_native": "Standard Market（スタンダード市場）",
+          "target_companies": "面向具备一定市场流动性与治理水平的企业"
+        },
+        {
+          "id": "jp-jpx-growth",
+          "name_zh": "成长市场",
+          "name_native": "Growth Market（グロース市場）",
+          "target_companies": "面向具高成长潜力的新兴企业"
+        }
+      ],
+      "review_system": {
+        "zh": "披露为本，交易所设初次上市审查，重大事项另须向金融厅报告",
+        "en": "Disclosure-based; the Exchange conducts initial listing examinations, with major matters also reportable to the FSA",
+        "detail": "与NYSE/港交所类似，同样不完全对应注册制/核准制的简单二分——这是受控词表'够不够用'问题的又一个真实案例（继上交所、港交所、NYSE之后第四个），记入 OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "Securities Listing Regulations（官网英文版PDF）Rule 1604",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Rule 101. Market Segments / The Exchange has established the market segments referred to in the following each item... (1) Standard Market (2) Prime Market (3) Growth Market",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "transfer_between_boards": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "continuing_obligations": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "suspension_resumption": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_conditions": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_process": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_transition_period": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-13",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "topix",
+          "name_zh": "东证股价指数",
+          "name_native": "TOPIX（東証株価指数）",
+          "compiler": "self",
+          "description": "覆盖Prime市场绝大部分上市公司的市值加权指数，是JPX/TSE最核心的市场基准指数"
+        },
+        {
+          "id": "jpx-prime150",
+          "name_zh": "JPX Prime 150指数",
+          "name_native": "JPX Prime 150 Index",
+          "compiler": "self",
+          "flagship": "no",
+          "description": "聚焦资本效率与增长性的精选150只成份股指数，具体加权方式与基日本次未核实"
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "enum": "t2",
+        "zh": "T+2（2019年7月16日起施行，此前更长）",
+        "en": "T+2 (effective July 16, 2019; previously longer)",
+        "detail": "由东证、日本证券结算公司（JSCC）、日本证券业协会（JSDA）自2015年7月组成工作组推动缩短结算周期改革后实施。",
+        "sources": [
+          {
+            "title": "Shortening of Settlement Cycle for Stocks and Other Securities (T+2)（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/equities/clearing-settlement/tplus2-settlement-cycle/index.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "it was decided to implement T+2 settlements effective July 16, 2019 (Tues.) (for executed trades), which means the date of delivery of shares and other securities occurs one business day earlier from the date of transaction than previously, and delivery is made two business days after the trade date.",
+        "confidence": "high",
+        "verified": "2026-08-13"
+      },
+      "ccp_name": {
+        "zh": "日本证券结算公司",
+        "en": "Japan Securities Clearing Corporation (JSCC)",
+        "sources": [
+          {
+            "title": "Summary（JPX官网，清算结算组织说明）",
+            "url": "https://www.jpx.co.jp/english/equities/clearing-settlement/outline/index.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Clearing services for all securities transactions on these markets are provided by Japan Securities Clearing Corporation (JSCC).",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null
+      },
+      "csd_name": {
+        "zh": "日本证券存管中心",
+        "en": "Japan Securities Depository Center, Inc. (JASDEC)",
+        "sources": [
+          {
+            "title": "Summary（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/equities/clearing-settlement/outline/index.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Japan Securities Depository Center, Inc. (Stocks and convertible bonds etc.)",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null
+      },
+      "initial_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delivery_method": {
+        "enum": "na",
+        "zh": "不适用（现货市场，透过JASDEC电子簿记结算，无实物交割）",
+        "en": "Not applicable (cash market, book-entry settlement via JASDEC, no physical delivery)",
+        "detail": "推断依据：products 章节所列品类均为现货证券。",
+        "sources": [
+          {
+            "title": "Summary（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/equities/clearing-settlement/outline/index.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "quote": null
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "default_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "membership_structure": {
+        "zh": "交易参与者（Trading Participant）制度，须通过资格审查取得交易资格",
+        "en": "Trading Participant system; qualification obtained through an examination process",
+        "sources": [
+          {
+            "title": "Rules & Trading Participants（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/index.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "arrowhead",
+        "en": "arrowhead",
+        "detail": "TSE现货股票撮合引擎名称，本次仅在术语层面确认名称存在，未抓取到对该系统本身的专门介绍页面，故无独立quote，confidence标medium。",
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "access_methods": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "exchange_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "stamp_duty": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：日本1999年已废止有价证券交易税——与上交所0.05%单边、港交所0.1%双边形成对比的重要字段，但本次未找到可引用的官方来源确认，留空不凭常识填写（该字段volatility: volatile，按铁律必须有sources才能填，本次没有）。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "financial_transaction_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_gains_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "日元汇率波动相对自由浮动，无资本管制；对以日元计价资产的境外投资者而言，汇率风险来自其本币兑日元波动",
+        "en": "JPY floats freely with no capital controls; for foreign investors holding JPY-denominated assets, FX risk arises from their home currency's fluctuation against the JPY",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "现行Prime/Standard/Growth三板体系是市场结构改制的产物，草稿印象为2022年4月由旧「一部/二部/JASDAQ/Mothers」体系改制而来，但改制的具体日期与新旧对应关系本次未找到可引用的官方原文确认，故不写入正式表述，仅标注存在过近期重大结构变革",
+        "en": "The current Prime/Standard/Growth board structure resulted from a market restructuring; a draft impression places this around April 2022 replacing the former First/Second Section, JASDAQ, and Mothers structure, but the specific date and old-to-new mapping were not confirmed against an official source this session, so this detail is flagged as unverified rather than stated as fact",
+        "sources": [
+          {
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）Rule 101",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "enforcement_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    }
+  }
+}
