@@ -29,6 +29,20 @@
       "group_id": null,
       "region": "apac",
       "tier": "pilot"
+    },
+    {
+      "id": "us-nyse",
+      "name_zh": "纽约证券交易所",
+      "name_native": {
+        "en": "New York Stock Exchange (NYSE)"
+      },
+      "official_languages": [
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": "nyse-group",
+      "region": "americas",
+      "tier": "standard"
     }
   ],
   "dimension_groups": [

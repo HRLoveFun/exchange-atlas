@@ -6,9 +6,9 @@
 
 这几条不是某个具体字段的悬案，是整个 schema 设计的待验证假设，填完上交所/港交所两家后逐条检验：
 
-1. **交易所集团 vs 单个交易所的粒度** — CME 集团下辖 CBOT/NYMEX/COMEX，Euronext 下辖 7 个国家市场。当前方案：数据实体是「交易所/市场」本身，用 `group_id` 关联集团，矩阵未来可折叠成集团视图。v0.1 的 SSE/HKEX 都无此复杂度，暂未实测 `group_id` 的实际使用体验；等 v0.2 引入 CME 系交易所时才会真正压测。
+1. **交易所集团 vs 单个交易所的粒度** — CME 集团下辖 CBOT/NYMEX/COMEX，Euronext 下辖 7 个国家市场。当前方案：数据实体是「交易所/市场」本身，用 `group_id` 关联集团，矩阵未来可折叠成集团视图。**v0.2 填 NYSE 时首次真正用到**：`us-nyse.yml` 标了 `group_id: nyse-group`，因为 NYSE、NYSE American、NYSE Arca、NYSE National、NYSE Texas 是同集团下各自独立注册的 SEC 交易所实体（不是同一实体内部的板块）——这直接影响了 `listing.boards` 怎么填：不能把 NYSE American/Arca 当成 `us-nyse` 的板块塞进 `boards` 列表（那样会歪曲"哪个实体拥有哪条规则"这个事实），只能靠 `group_id` 表达"同集团、不同实体"的关系，`boards` 留空。矩阵折叠视图本身仍未实现（只是数据字段填了），等 CME 系交易所加入时可以再压测一次多层级集团（CME 是单一交易所法人下辖多个产品条线，与 NYSE Group「多个独立法人共享集团」不是同一种集团结构，两种情况 `group_id` 字段够不够表达还需要再观察）。
 2. ~~schema 会不会被列表型章节撑破~~ — **已验证，够用。** 上交所产品体系（6条）、指数体系（2条）用轻量列表条目填起来很顺，没有感到结构性约束。列表项不需要逐条 quote/confidence 这个简化是对的，继续沿用。
-3. **受控词表（enums.yml）够不够用** — 五家标杆的机制差异能否被现有枚举值（如 `price_limit_type`: none/percentage_band/absolute_tiered/dynamic_reference）概括，还是每家都要新增例外值。如果某个字段的例外多到枚举失去意义，结论应该是这个字段不适合进矩阵（改 `in_matrix: false`），而不是无限加枚举值。
+3. **受控词表（enums.yml）够不够用** — 五家标杆的机制差异能否被现有枚举值（如 `price_limit_type`: none/percentage_band/absolute_tiered/dynamic_reference）概括，还是每家都要新增例外值。如果某个字段的例外多到枚举失去意义，结论应该是这个字段不适合进矩阵（改 `in_matrix: false`），而不是无限加枚举值。**`review_system` 已经积累了三个互不相同的真实案例**：上交所"注册制"（`registration`枚举）、港交所"披露为本但上市委员会有实质审核权"（未套用枚举，直接留 zh 文字说明）、NYSE"披露为本+非常具体的量化规则编号（如 Rule 102.01C(I)）+ 广泛自由裁量权"（同样未套枚举）——三家没有一家能被现有 `review_system` 枚举值干净覆盖，这个字段目前实质上已经退化成自由文本描述而非可比较的枚举，值得考虑要么扩充枚举维度（如拆成"审核严格度"+"规则形式化程度"两个正交维度），要么承认这个字段不适合进矩阵横向比较，只适合放在档案页。
 4. **`quote` 的粒度与成本——填 SSE 后确认这是真实瓶颈。** 十一章约 80 个可填的叶子字段（不含空章节骨架），实际只有约 20 个做到了 `confidence: high`+完整 quote；其余约 15 个因为"没有当次抓取到的原文可摘录"被迫清空转悬案（监管/参与者/风险等章节尤其明显）。这不是偷懒，是铁律生效的结果——但说明 v0.2 铺开更多交易所时，**每家所投入的检索时间要比"填一个字段"直觉上预期的更多**，排期要按此调整。
 5. **`taxonomy.yml` 单文件是否会失控** — 十一章 + 矩阵定义已经不短，未来加字段、加章节细分（如市场结构章节的产品适用范围差异）可能让单文件难以维护，或需要按章拆分成 `schema/chapters/*.yml` 由 sync.py 汇总。
 6. **「第三方来源 confidence 上限 medium」这条铁律目前没有被 `validate.py` 机器强制**，只写在 CLAUDE.md/SOURCES.md 里靠自觉遵守。填 SSE 时人工审计出 3 处字段引用第三方镜像（mgzq.com）却误标 `high`，已手工改正，但下次很可能再犯——这正是 CLAUDE.md 6.1 一直在提醒的「文档职责边界靠自觉 vs 靠机器」的活生生案例。v0.2 前应该给 `validate.py` 加一条：按 SOURCES.md 里登记的「官方/监管/第三方」标签反查每条 `sources[].url`，`confidence: high` 但来源标了「第三方」就直接 fail。
@@ -18,6 +18,9 @@
 10. **`hk-hkex` 部分 `en_required` 字段的 `quote` 仍是英文，与该所 `source_lang: zh` 的声明不完全一致。** ADR-013 迁移（2026-08-13）把 `native` 字段机械改名为 `en`，但 `regulator`/`core_laws`/`short_selling`/`market_maker_scheme`/`ccp_name`/`csd_name`/`opening_mechanism`/`closing_mechanism` 等字段的 `quote` 仍是 v0.1 首次抓取时留下的英文原文，未重新核实对应的中文官方页面。`circuit_breaker`/`volatility_interruption` 两个字段已在本次迁移中实际抓取港交所中文版（`sc_lang=zh-hk`）升级为中文 quote 锚定，且中文版内容比英文版更精确（点明了 ±10%/±15%/±20% 对应恒生综合大/中/小型股哪个分组），可作为后续补齐其余字段的操作范本。
 11. **3 处字段的 `sources` 仍引用交易所官网首页而非具体信息页。** `hk-hkex.yml` 的 `overview.organization_form`、`overview.self_listed`、`clearing.delivery_method` 三处（详见各字段 `detail` 说明）。前两处已尝试在 `hkexgroup.com` 的 About HKEX / Investor Relations 页寻找能直接佐证"股票代码 0388"的更精确来源页，未找到（页面正文未出现股票代码，可能靠动态组件渲染）；第三处本质是对本文件自身 `products` 章节的内部推断，不是独立外部证据。这是 v0.1 人工抽检反馈（见 `SOURCES.md`「经验：来源 URL 要精确到信息页」）尚未完全落实的已知缺口。
 12. **`quote` 数字反查用的是"任一数字命中即通过"，不是"全部数字都要命中"，存在被绕过的空间。** ADR-013 迁移时做对抗测试发现：`validate.py` 的判据是 `nums and not any(n in quote for n in nums)`——只要 `zh`/`en` 里**至少一个**数字能在 `quote` 里找到就算通过，不要求每个数字都对得上。故意把 `hk-hkex.yml` `volatility_interruption.en` 里塞一个编造的 "99%" 进去（`zh` 里原有的 10/15/20 仍对得上 quote），`make check` 没有报错——说明**一个字段里混入一个编造数字、只要同字段还有其他真实数字在，检测不出来**。已实测确认把判据改严成"全部数字都要在 quote 里找到"会在真实数据上产生 5 处假阳性（`cn-sse.founded_year` 把"11月26日"与"12月19日"两个不同来源的日期拼进一个字段、`market_cap_usd_bn`/`listed_companies_count` 是主板+科创板两个数字相加算出的合计数、`hk-hkex` 两个交易时段字段同理）——这些都是合法的「多来源合并」或「算出来的数」，quote 只摘了其中一部分数字，不是编造。所以简单改成"必须全部命中"不是免费的改进，需要更细的方案（比如区分"直接摘引"与"由多个 quote 片段推导"两种字段，或者在 detail 里显式标注推导来源），本次迁移未处理，记在这里留待专门解决。
+13. **`price_limits.type` 的 `dynamic_reference` 枚举值目前只有 NYSE 一个样本**，且填入时只能定性描述"以过去5分钟均价为基准动态计算"，未找到官方原文给出 Tier 1/Tier 2 具体价格带百分比（`market_structure.price_limits.main_board` 因此留了半句话说明"具体档位数值本次未在抓取页面中找到"）。这类"机制存在但具体数值缺失"的半成品状态，在矩阵格子上会显示成有内容但点开细则不完整，需要考虑前端是否要对这种情况加一个视觉区分（不同于完全空的格子，也不同于完整填好的格子）。
+14. **`us-nyse` 的清算机构（NSCC/DTCC）字段整体留空。** `clearing.ccp_name`/`csd_name` 按常识应该是 National Securities Clearing Corporation / Depository Trust Company（均为 DTCC 子公司），但 `dtcc.com` 的所有内容子页（`/accelerated-settlement`、`/about` 等）本次多次尝试均返回 403，只有首页能访问且无实质内容（见 `SOURCES.md` 探测记录）。这是本项目第一次因为"常识性事实"和"能否找到可引用原文"发生冲突而选择遵守铁律留空的案例——诱惑很大（这个事实几乎不可能错），但按 CLAUDE.md 二第1条，没有当次抓取的原文撑腰就不填，哪怕是几乎确定正确的内容。下次有空应该专门想办法绕过 DTCC 的反爬（换 UA、加 Referer，或找 DTCC 年报/SEC备案文件里对 NSCC 角色的官方表述作为替代来源）。
+15. **`us-nyse.short_selling` 的具体触发阈值（Reg SHO Alternative Uptick Rule 的"较前收盘价下跌几%触发"）未能确认。** 与第14条类似，`sec.gov` 与 `finra.org` 本次分别尝试抓取相关规则页均返回403，无法核实这个业内广为人知的具体数字（常识印象是10%，但没有当次抓取的原文，按铁律不采纳）。这三个域名（sec.gov/finra.org/dtcc.com）叠加起来构成了美股监管/清算类信息目前最大的抓取缺口，值得作为一个整体去想解决方案，而不是逐字段单独想办法绕过。
 
 ## 具体数据悬案
 
@@ -33,4 +36,7 @@
 - `hk-hkex` 市场结构与交易机制 / 最小交易单位（board_lot_size）— confidence: low
 - `hk-hkex` 清算、结算与交割 / 交割方式（delivery_method）— confidence: low
 - `hk-hkex` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
+- `us-nyse` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
+- `us-nyse` 市场结构与交易机制 / 订单类型（order_types）— confidence: low
+- `us-nyse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 <!-- END:GENERATED auto-issues -->

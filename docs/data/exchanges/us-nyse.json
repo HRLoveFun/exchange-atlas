@@ -1,0 +1,1333 @@
+{
+  "id": "us-nyse",
+  "name_zh": "纽约证券交易所",
+  "name_native": {
+    "en": "New York Stock Exchange (NYSE)"
+  },
+  "official_languages": [
+    "en"
+  ],
+  "source_lang": "en",
+  "group_id": "nyse-group",
+  "region": "americas",
+  "tier": "standard",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "America/New_York (ET)",
+        "verified": "2026-08-13",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dst_rule": {
+        "zh": "实行夏令时（东部时间在 EST/EDT 间切换）",
+        "verified": "2026-08-13",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "founded_year": {
+        "zh": "1792（5月17日，梧桐树协议 Buttonwood Agreement）",
+        "en": "1792 (Buttonwood Agreement, May 17)",
+        "detail": "24 名经纪人在华尔街一棵梧桐树下签署协议，约定佣金规则与交易对象限于彼此信任的\n成员——这是 NYSE 追溯的正式成立起点；官网同时提及其渊源可上溯至1600年代曼哈顿\n早期的贸易活动，但那不算正式成立年份。\n",
+        "sources": [
+          {
+            "title": "The History of NYSE（官网）",
+            "url": "https://www.nyse.com/history-of-nyse",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "The New York Stock Exchange traces its origins to the Buttonwood Agreement signed by 24 stockbrokers on May 17, 1792",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "history": {
+        "zh": "1792年成立；2006年由会员制改为公司制并上市（与Archipelago/Pacific Exchange合并组成NYSE Group）；2013年被洲际交易所（ICE）收购，现为ICE子公司",
+        "detail": "2005年11月16日，洲际交易所（NYSE代码：ICE）在纽交所自身挂牌上市；2006年纽交所、\nArchipelago（Arca）、Pacific Exchange合并组成公开交易的NYSE Group，结束会员制；\n2008年收购American Stock Exchange；2013年ICE反向收购NYSE Group。因此\"纽交所自身\n是否上市\"这个问题的准确答案是：挂牌的是它现在的母公司ICE，不是NYSE这个交易所\n实体本身——见 self_listed 字段的详细说明。\n",
+        "sources": [
+          {
+            "title": "The History of NYSE（官网）",
+            "url": "https://www.nyse.com/history-of-nyse",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "On November 16, 2005, Intercontinental Exchange (NYSE: ICE) listed on the NYSE. In 2006, the New York Stock Exchange (NYSE), Archipelago (Arca), and the Pacific Exchange (PCX) merged to form the publicly traded NYSE Group, ending membership ownership of the Exchange. In 2008, the NYSE acquired the American Stock Exchange, becoming the third largest U.S. options market. By 2013, ICE acquired the NYSE",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null
+      },
+      "organization_form": {
+        "enum": "demutualized_listed",
+        "zh": "公司制（2006年由会员制改制）",
+        "en": "Demutualized (2006)",
+        "detail": "改制后的公开交易主体几经并购，现处于 ICE 集团架构之下（见 history）。",
+        "sources": [
+          {
+            "title": "The History of NYSE（官网）",
+            "url": "https://www.nyse.com/history-of-nyse",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "In 2006, the New York Stock Exchange (NYSE), Archipelago (Arca), and the Pacific Exchange (PCX) merged to form the publicly traded NYSE Group, ending membership ownership of the Exchange.",
+        "confidence": "high",
+        "verified": "2026-08-13"
+      },
+      "self_listed": {
+        "enum": "partial",
+        "zh": "并非NYSE实体本身上市，而是其母公司洲际交易所（ICE）在纽交所上市（股票代码 ICE）",
+        "en": "Not NYSE itself; parent Intercontinental Exchange (ICE) is listed on NYSE",
+        "detail": "与港交所\"自身股票在自己主板挂牌\"（0388.HK）不是同一种情况——NYSE 这个交易所\n实体（现为 ICE 全资子公司）没有独立上市的股票，是它的母公司 ICE 反过来在 NYSE\n挂牌交易，方向和港交所相反。故枚举值取 partial 而非 yes/no 的简单二分。\n",
+        "sources": [
+          {
+            "title": "The History of NYSE（官网）",
+            "url": "https://www.nyse.com/history-of-nyse",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "On November 16, 2005, Intercontinental Exchange (NYSE: ICE) listed on the NYSE... By 2013, ICE acquired the NYSE",
+        "confidence": "high",
+        "verified": "2026-08-13"
+      },
+      "market_cap_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未在本次会话核实最新总市值统计口径与数字，留空。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "listed_companies_count": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "global_ranking": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：按上市公司总市值计通常被列为全球最大交易所——未附具体统计口径与日期的来源，留空。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_currency": {
+        "zh": "美元 (USD)",
+        "verified": "2026-08-13",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "settlement_currency": {
+        "zh": "美元 (USD)",
+        "verified": "2026-08-13",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "美国证券交易委员会",
+        "en": "U.S. Securities and Exchange Commission (SEC)",
+        "detail": "NYSE 规则的任何新增或修订都须依据《1934年证券交易法》第19(b)条向SEC备案（Rule 19b-4），经批准后方可生效。",
+        "quote": "As a registered securities exchange, NYSE is subject to the regulatory oversight of the SEC and all rules and amendments must be filed with and approved by the SEC pursuant to Section 19(b) of the Securities and Exchange Act of 1934 and Rule 19b-4 thereunder.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "NYSE Regulation（官网）",
+            "url": "https://www.nyse.com/regulation",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "self_regulatory_org": {
+        "zh": "NYSE Regulation（交易所自身的一线监管部门）；金融业监管局（FINRA）按监管服务协议代为执行部分跨市场执法工作",
+        "en": "NYSE Regulation; FINRA (via Regulatory Services Agreements)",
+        "detail": "NYSE Regulation 下设 Issuer Regulation（上市审核与持续监管）与 Market Regulation\n（会员合规监督、稽查执法）两大团队，由首席监管官独立领导；FINRA 代表包括 NYSE\n在内的多个自律组织处理跨市场违规调查。这与港交所\"交易所自身兼一线监管\"、上交所\n\"交易所+中国证券业协会\"的模式都不完全相同——NYSE 是\"交易所自身设专责监管部门+\n委托 FINRA 处理跨市场事务\"的第三种组合，值得记入 OPEN-QUESTIONS 的受控词表讨论。\n",
+        "quote": "Market Regulation also oversees the work that FINRA conducts on behalf of the NYSE Exchanges pursuant to Regulatory Services Agreements (RSAs). These matters are regularly brought as cross-market actions on behalf of multiple self-regulatory organizations, sometimes including FINRA.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "NYSE Regulation（官网）",
+            "url": "https://www.nyse.com/regulation",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "clearing_regulator": {
+        "zh": "美国证券交易委员会",
+        "en": "SEC",
+        "detail": "与市场监管为同一机构；清算机构 NSCC/DTCC 本身的监管细节本次未核实，见 OPEN-QUESTIONS。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "NYSE Regulation（官网）",
+            "url": "https://www.nyse.com/regulation",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "quote": null
+      },
+      "core_laws": {
+        "zh": "《1934年证券交易法》",
+        "en": "Securities Exchange Act of 1934",
+        "quote": "Section 19(b) of the Securities and Exchange Act of 1934 and Rule 19b-4 thereunder",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "NYSE Regulation（官网）",
+            "url": "https://www.nyse.com/regulation",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未核实是否存在一般性外资持股限制，留空。",
+        "sources": [
+          {
+            "title": "NYSE Regulation（官网）",
+            "url": "https://www.nyse.com/regulation",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "NYSE Regulation（官网）",
+            "url": "https://www.nyse.com/regulation",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "disclosure_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "NYSE Regulation（官网）",
+            "url": "https://www.nyse.com/regulation",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "NYSE Regulation（官网）",
+            "url": "https://www.nyse.com/regulation",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-13",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "us-nyse-equities",
+          "category": "equity",
+          "name_zh": "普通股/优先股",
+          "name_native": "Common & Preferred Stock",
+          "description": "中大型公司为主，见 listing 章节量化标准"
+        },
+        {
+          "id": "us-nyse-adr",
+          "category": "equity",
+          "name_zh": "美国存托凭证",
+          "name_native": "American Depositary Receipts (ADR)"
+        },
+        {
+          "id": "us-nyse-cef",
+          "category": "fund",
+          "name_zh": "封闭式基金",
+          "name_native": "Closed-End Funds",
+          "description": "NYSE Initial Listings 页单列的量化标准类别之一"
+        },
+        {
+          "id": "us-nyse-reits",
+          "category": "fund",
+          "name_zh": "房地产投资信托基金",
+          "name_native": "REITs"
+        },
+        {
+          "id": "us-nyse-etp",
+          "category": "fund",
+          "name_zh": "交易所买卖产品",
+          "name_native": "Exchange Traded Products (ETP)",
+          "description": "同集团的 NYSE Arca 是ETP的主要上市场所（官方定位「a highly liquid, fully electronic marketplace for ETPs」），NYSE本身的ETP占比较小，未逐一核实具体规模"
+        },
+        {
+          "id": "us-nyse-bonds",
+          "category": "bond",
+          "name_zh": "债券（NYSE Bonds平台）",
+          "description": "每个交易日两场债券拍卖：开盘4:00am、核心8:00am，未成交订单转入连续交易"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "6:30am起接受挂单排队，不成交，直至9:30am开盘集合竞价",
+          "quote": "Pre-Opening Session: 6:30 a.m. ET / Orders can be entered and will be queued until the Opening Auction at 9:30 a.m. ET",
+          "sources": [
+            {
+              "title": "Trading Information（官网）",
+              "url": "https://www.nyse.com/trade/trading-information",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "confidence": "high",
+          "en": null,
+          "enum": null,
+          "detail": null
+        },
+        "continuous_am": {
+          "zh": "无独立盘前连续交易时段（这点与部分NYSE集团其他实体如NYSE American/Arca不同，那些有7:00-9:30am的早盘连续交易）；9:30am开盘集合竞价后进入连续交易",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Trading Information（官网）",
+              "url": "https://www.nyse.com/trade/trading-information",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "lunch_break": {
+          "zh": "无",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Trading Information（官网）",
+              "url": "https://www.nyse.com/trade/trading-information",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "continuous_pm": {
+          "zh": "9:30am-3:50pm连续交易；3:50pm-4:00pm为收盘失衡期",
+          "quote": "Core Trading Session: 9:30 a.m. to 4:00 p.m. ET / 9:30 a.m. ET - Core Open Auction / 3:50 p.m. to 4:00 p.m. ET - Closing Imbalance Period / 4:00 p.m. ET - Closing Auction",
+          "sources": [
+            {
+              "title": "Trading Information（官网）",
+              "url": "https://www.nyse.com/trade/trading-information",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "confidence": "high",
+          "en": null,
+          "enum": null,
+          "detail": null
+        },
+        "after_market": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "官网列出的Tape A（NYSE本身）时段表未见独立盘后连续交易时段；NYSE American/Arca/National/Texas等同集团其他实体明确列有4:00-8:00pm盘后时段，NYSE本身是否有盘后交易未在本次抓取的页面中确认，留空不猜。",
+          "sources": [
+            {
+              "title": "Trading Information（官网）",
+              "url": "https://www.nyse.com/trade/trading-information",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "night_session": {
+          "zh": "无",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Trading Information（官网）",
+              "url": "https://www.nyse.com/trade/trading-information",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "holidays_note": {
+        "zh": "官网提供未来多年交易日历与假期安排，具体日期逐年更新未在本次逐条核实",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘集合竞价（9:30am），由指定做市商（DMM）主持",
+        "en": "Core Open Auction, facilitated by the Designated Market Maker (DMM)",
+        "detail": "DMM 角色见 market_maker_scheme。",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          },
+          {
+            "title": "NYSE Listings Process & Requirements（官网）",
+            "url": "https://www.nyse.com/listings-process",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "9:30 a.m. ET - Core Open Auction",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价（4:00pm），3:50-4:00pm为收盘失衡期",
+        "en": "Closing Auction, preceded by a Closing Imbalance Period",
+        "quote": "3:50 p.m. to 4:00 p.m. ET - Closing Imbalance Period / 4:00 p.m. ET - Closing Auction",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "开盘/收盘由DMM主持的集合竞价撮合，盘中为电子连续竞价撮合（NYSE Pillar系统）",
+        "en": "DMM-facilitated auctions at open/close; continuous electronic matching intraday via NYSE Pillar",
+        "detail": "未找到对撮合优先顺序（价格优先/时间优先等）逐条说明的官方原文，本条为对整体机制的归纳，非逐字摘引。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "quote": null
+      },
+      "order_types": {
+        "zh": "限价订单、市价订单（且有多种细分类型，如Five Best Orders Immediate or Cancel等）；具体订单类型矩阵未逐条核实",
+        "en": "Limit Order, Market Order (multiple sub-types)",
+        "detail": "官网有\"NYSE Pillar Binary/FIX Gateway Order Type Matrix\"链接列出完整订单类型表，\n本次只确认了矩阵存在及少量条目（如Market Order细分为Five Best Orders Immediate or\nCancel / Immediate to Limit），未逐条抓取完整矩阵内容。\n",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "quote": null
+      },
+      "tick_size": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未核实按股价分层的最小报价单位规则（Reg NMS Rule 612相关），留空。",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "board_lot_size": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "美股市场碎股（odd lot）交易普遍允许，是否仍有正式'整手'概念及具体股数未核实，留空。",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "odd_lot_handling": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "dynamic_reference",
+          "zh": "涨跌限价机制（LULD），非固定百分比/绝对值幅，而是以过去5分钟均价为基准动态计算的价格带",
+          "en": "Limit Up-Limit Down (LULD)",
+          "sources": [
+            {
+              "title": "Trading Information（官网）",
+              "url": "https://www.nyse.com/trade/trading-information",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "quote": "The Plan is designed to prevent trades in NMS Stocks from occurring outside specified price bands, which are set at a percentage level above and below the average reference price of a security over the preceding five-minute period.",
+          "confidence": "high",
+          "verified": "2026-08-13",
+          "detail": null
+        },
+        "main_board": {
+          "zh": "按Tier 1（标普500/罗素1000/部分ETP）与Tier 2（其余NMS证券）分级设定价格带百分比，具体档位数值本次未在抓取页面中找到",
+          "quote": "The percentage level is determined by a security's designation as a Tier 1 or Tier 2 security. Tier 1 comprises all securities in the S&P 500, the Russell 1000 and select Exchange Traded Products (ETPs). Tier 2 comprises all other NMS securities, except for rights and warrants, which are specifically excluded from coverage.",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Trading Information（官网）",
+              "url": "https://www.nyse.com/trade/trading-information",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "en": null,
+          "enum": null,
+          "detail": null
+        },
+        "other_boards": {
+          "zh": "",
+          "confidence": "low",
+          "sources": [
+            {
+              "title": "Trading Information（官网）",
+              "url": "https://www.nyse.com/trade/trading-information",
+              "accessed": "2026-08-13"
+            }
+          ],
+          "verified": "2026-08-13",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "index_level",
+        "zh": "全市场熔断（Market-Wide Circuit Breaker, MWCB），基于标普500指数单日跌幅触发三级阈值：7%（一级）、13%（二级）、20%（三级）",
+        "en": "Market-Wide Circuit Breaker (MWCB)",
+        "detail": "由 NYSE、NYSE American、NYSE Arca Rule 7.12 共同规定，跨市场协调停牌，一/二级为暂停交易15分钟，三级为直接收市（本条细则未逐字核实，见 quote 之外的机制说明）。",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "A cross-market trading halt can be triggered at three circuit breaker thresholds that measure a decrease against the prior day's closing price of the S&P 500 Index -- 7% (Level 1), 13% (Level 2), and 20% (Level 3) (See NYSE, NYSE American and NYSE Arca Rule 7.12).",
+        "confidence": "high",
+        "verified": "2026-08-13"
+      },
+      "volatility_interruption": {
+        "zh": "涨跌限价机制（LULD）本身即承担个股级波动性中断功能：价格持续处于价格带边缘会触发交易暂停",
+        "en": "LULD serves as the stock-level volatility interruption mechanism",
+        "detail": "具体触发后暂停多久、如何恢复的逐条机制（如'Limit State'持续15秒即转'Trading Pause'）本次未在抓取页面中找到明确表述，未采纳未核实的印象。",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "On May 31, 2012, the SEC approved, on a pilot basis, a National Market System Plan, known as the Limit Up/Limit Down (\"LULD\") Plan, to address extraordinary market volatility. The Plan was approved as a permanent rule on April 11, 2019.",
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "见 circuit_breaker（全市场级）与 volatility_interruption（LULD，个股级）；另有因披露事项的停牌（regulatory halt）未逐条核实",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "intraday_reversal": {
+        "enum": "t0",
+        "zh": "T+0（可当日回转），与结算层面的T+1（见 clearing.settlement_cycle）是两回事",
+        "detail": "美股交易层面对当日买入证券当日卖出无特殊限制（区别于频繁交易者的Pattern Day Trader保证金规则，那是针对保证金账户的监管要求，非交易所层面的回转限制，本次未深入核实细节）。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "quote": null
+      },
+      "short_selling": {
+        "enum": "restricted_uptick",
+        "zh": "受Regulation SHO监管，含卖空限制熔断机制（SSR）；具体触发阈值（如报升规则的百分比）本次未能在NYSE/SEC/FINRA官网核实到直接原文",
+        "en": "Regulated under Regulation SHO, incl. Short Sale Restriction (SSR) circuit breaker",
+        "detail": "NYSE 官网 Regulation SHO 页面确认该框架存在（含逐日\"Threshold Securities\"清单），但\n页面本身正文很薄，多是下载链接而非说明文字；SEC.gov/FINRA.org 的相关规则页本次多次\n尝试均返回403（见 SOURCES.md 探测记录），未能拿到\"下跌10%触发\"这类具体数值的官方\n原文，按铁律不凭记忆填入具体百分比。\n",
+        "sources": [
+          {
+            "title": "Regulation SHO（官网）",
+            "url": "https://www.nyse.com/regulation/regulation-sho",
+            "accessed": "2026-08-13"
+          },
+          {
+            "title": "Trading Information（官网，SSR Circuit Breakers 提及）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "quote": null
+      },
+      "block_trade": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "dark_pool": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "market_maker_scheme": {
+        "zh": "指定做市商制度（DMM）：每支股票指定一名DMM，负责在开盘、收盘及严重失衡/不稳定期间维持价格发现",
+        "en": "Designated Market Maker (DMM)",
+        "detail": "上市公司在上市流程第4步须选定DMM；DMM是NYSE区别于纯电子化交易所（如NYSE Arca）的标志性制度。",
+        "sources": [
+          {
+            "title": "NYSE Listings Process & Requirements（官网）",
+            "url": "https://www.nyse.com/listings-process",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Select Your Designated Market Maker (DMM) / Your DMM will facilitate price discovery for your stock during market opens, closes and during periods of substantial trading imbalances or instability.",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "connect_schemes": {
+        "zh": "无（美股市场无类似沪港通/深港通的跨境互联互通安排）",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Trading Information（官网）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "listing": {
+      "boards": [],
+      "review_system": {
+        "zh": "披露为本（非注册制/核准制二分），设有量化+定性双重上市标准，由Issuer Regulation团队审核",
+        "detail": "与上交所\"注册制\"、港交所\"披露为本但上市委员会有实质审核权\"都不完全相同——NYSE\n的量化标准非常具体（按规则编号逐条列出，如Rule 102.01C(I)盈利测试、102.01C(II)\n市值测试），另有定性标准赋予交易所较大裁量权。这是受控词表\"够不够用\"问题的第三个\n真实案例（继上交所注册制、港交所披露为本之后），已记入 OPEN-QUESTIONS。\n",
+        "sources": [
+          {
+            "title": "Initial Listings（官网）",
+            "url": "https://www.nyse.com/regulation/initial-listings",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "The Exchange has broad discretion regarding the listing of a company. All listed companies must comply with the Exchange's corporate governance standards of Section 3 of the NYSE Listed Company Manual. In addition, companies must meet other qualitative criteria including but not limited to being suitable for auction market trading and maintaining a healthy level of financial liquidity.",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网确认申请分'保密资格审查+正式申请'两步，资格审查后14个工作日内回复，但完整流程总耗时未核实，留空。",
+        "sources": [
+          {
+            "title": "Initial Listings（官网）",
+            "url": "https://www.nyse.com/regulation/initial-listings",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "transfer_between_boards": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "NYSE集团内部（如从NYSE American转至NYSE）转板机制未核实，留空。",
+        "sources": [
+          {
+            "title": "Initial Listings（官网）",
+            "url": "https://www.nyse.com/regulation/initial-listings",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "continuing_obligations": {
+        "zh": "持续上市义务由Continued Listing团队监督执行，含定量、定性与及时信息披露要求",
+        "en": "Continuing obligations monitored by the Continued Listing group",
+        "quote": "The Continued Listing group monitors and enforces quantitative, qualitative and timely filing requirements of companies listed on the NYSE Exchanges, and initiates suspensions and delistings for companies that are noncompliant or no longer suitable for continued listing.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Initial Listings（官网）",
+            "url": "https://www.nyse.com/regulation/initial-listings",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null
+      },
+      "suspension_resumption": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Initial Listings（官网）",
+            "url": "https://www.nyse.com/regulation/initial-listings",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_conditions": {
+        "zh": "未达持续上市定量/定性标准触发退市；具体阈值（如最低股价规则）本次未逐条核实",
+        "en": "Non-compliance with quantitative or qualitative continued listing standards",
+        "detail": "草稿印象：股价连续低于1美元等触发退市警示——未附具体规则编号来源，未采纳为正式数值，留空。",
+        "quote": "The Continued Listing group... initiates suspensions and delistings for companies that are noncompliant or no longer suitable for continued listing.",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Initial Listings（官网）",
+            "url": "https://www.nyse.com/regulation/initial-listings",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "delisting_process": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Initial Listings（官网）",
+            "url": "https://www.nyse.com/regulation/initial-listings",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_transition_period": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Initial Listings（官网）",
+            "url": "https://www.nyse.com/regulation/initial-listings",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：退市后通常转入OTC市场（粉单市场等）交易——未附来源，留空。",
+        "sources": [
+          {
+            "title": "Initial Listings（官网）",
+            "url": "https://www.nyse.com/regulation/initial-listings",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-13",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "nyse-composite",
+          "name_zh": "纽约证券交易所综合指数",
+          "name_native": "NYSE Composite (NYA)",
+          "compiler": "other",
+          "description": "由ICE Data Indices（NYSE母公司ICE旗下指数业务）编制，非交易所自编——与上证综指'交易所自编'形成对比；具体基日/基点/加权方式本次未逐条核实，留空不猜"
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "enum": "t1",
+        "zh": "T+1（2024年5月28日起，此前为T+2）",
+        "detail": "SEC于2023年2月批准修订Rule 15c6-1，将标准结算周期从T+2缩短至T+1，2024-05-28正式\n生效。本条来源是律所客户简报（第三方），非SEC规则原文——SEC.gov/FINRA.org本次多次\n尝试均403无法直接抓取，confidence标medium。\n",
+        "sources": [
+          {
+            "title": "One-Day Settlement Cycle (T+1) To Begin May 28, 2024（Cahill Gordon & Reindel LLP 客户简报）",
+            "url": "https://www.cahill.com/publications/client-alerts/2024-04-29-one-day-settlement-cycle-t-1-to-begin-may-28-2024",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "in February 2023, the Securities and Exchange Commission adopted amendments to Rule 15c6-1 under the Securities Exchange Act of 1934 to shorten the standard settlement cycle for most broker-dealer transactions from two business days after the trade date (\"T+2\") to one business day after the trade date (\"T+1\"). ... T+1 settlements will be required beginning on May 28, 2024",
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "en": null
+      },
+      "ccp_name": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：全国证券清算公司（National Securities Clearing Corporation, NSCC，DTCC子公司）——dtcc.com 内容子页本次多次尝试均403（首页可访问但无实质内容），未能拿到官方原文确认，留空不猜，见 OPEN-QUESTIONS。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "csd_name": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "同上，草稿印象为DTCC（Depository Trust Company），未核实，留空。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "initial_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "现货市场无衍生品意义上的保证金；融资融券保证金等细节未核实，留空。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delivery_method": {
+        "enum": "na",
+        "zh": "不适用（现货市场，无实物/现金交割概念）",
+        "detail": "推断依据：products 章节所列品类（股票/ADR/封闭式基金/REITs/ETP/债券）均为现货且以电子簿记形式结算，未见实物交割型衍生品——这是对本文件自身 products 章节的内部推断，下面的 sources 只笼统佐证 NYSE 以现货产品为主，不构成对本字段结论的独立证据。",
+        "sources": [
+          {
+            "title": "NYSE Listings Process & Requirements（官网，列出NYSE/NYSE American/NYSE Arca经营的产品类型：stocks, bonds, ETPs等现货品种）",
+            "url": "https://www.nyse.com/listings-process",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "en": null,
+        "quote": null
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "default_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：无类似QFII的额度审批制度，境外投资者可直接通过持牌经纪商开户——与上交所形成对比的重要字段，但未附具体来源核实是否存在其他限制（如特定行业外资审查CFIUS等），留空。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "membership_structure": {
+        "zh": "会员组织（member organization）体系，须通过NYSE Regulation合规审查",
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网另有独立的连接/数据费率PDF（如Wireless Connectivity Fees），本次未展开抓取，留空。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "NYSE Pillar",
+        "en": "NYSE Pillar",
+        "detail": "从订单类型矩阵文档命名（NYSE Pillar Binary Gateway / FIX Gateway Order Type Matrix、NYSE Pillar Specifications）确认系统名称，但未抓取到对该系统本身的专门介绍文字，故无独立quote，confidence标medium而非high。",
+        "sources": [
+          {
+            "title": "Trading Information（官网，Resources 小节）",
+            "url": "https://www.nyse.com/trade/trading-information",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "enum": null,
+        "quote": null
+      },
+      "access_methods": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "美国经纪商佣金由市场自行竞争定价（多数券商已对散户零佣金），交易所规则本身不规定经纪商向客户收取的佣金——与上交所交易规则里出现佣金相关条款的模式不同，这本身是一个有意思的对比点，但本次未找到NYSE/SEC对此的专门表述，留空不硬凑。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "exchange_fees": {
+        "zh": "做市商-吃单者模式（maker-taker）：为市场提供流动性的报单可获返佣（如每股0.0012美元量级），吃走流动性的一方付费；费率按会员机构的报价/成交量分层，逐月计算",
+        "en": "Maker-taker pricing model",
+        "detail": "完整的34页费率表按各种精细条件（是否DMM、是否非展示订单、流动性档位等）分层，本条只归纳整体模式，不逐条摘录具体费率档位。",
+        "sources": [
+          {
+            "title": "New York Stock Exchange Price List 2026（PDF）",
+            "url": "https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSE_Price_List.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Non-Tier Adding Credit – Equity per Share Credit - per transaction - for all orders, other than Mid-Point Liquidity (\"MPL\") and Non-Displayed Limit Orders that add liquidity to the NYSE unless a higher credit applies $0.0012",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：SEC依据《证券交易法》第31条向交易所征收的交易类监管费，最终转嫁至交易环节——未附来源核实具体费率，留空。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "stamp_duty": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：美国联邦层面无证券交易印花税——与上交所0.05%单边、港交所0.1%双边形成对比的重要字段，但本次未找到可引用的官方来源确认，留空不凭常识填写（该字段volatility: volatile，按铁律必须有sources才能填，本次没有）。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "financial_transaction_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_gains_tax": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "美国资本利得税制度复杂（联邦+州、长短期税率不同），未在本次会话深入核实，留空。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：对外国投资者股息预扣税默认30%，可按税收协定降低——未附来源，留空。",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "美元为全球主要储备货币，本币汇率风险对美国本土投资者而言较低；对以美元计价资产的境外投资者而言，汇率风险来自其本币兑美元波动",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-13",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "enforcement_note": {
+        "zh": "NYSE Regulation下设监察调查组（Surveillance and Investigations）与执法组（Enforcement），后者可通过和解（AWC）或诉讼程序对会员及其关联人员进行纪律处分，重大案件可能移交FINRA听证办公室审理",
+        "en": "Surveillance and Investigations; Enforcement (settlements or litigated proceedings)",
+        "quote": "The Enforcement group investigates potentially violative conduct that may merit formal disciplinary action. When appropriate, Enforcement will take formal disciplinary action through either settlements (i.e., AWCs) or litigated proceedings, all of which are public. Litigated matters may proceed to a contested hearing before FINRA's Office of Hearing Officers (OHO), which hears the matter and issues a decision.",
+        "sources": [
+          {
+            "title": "NYSE Regulation（官网）",
+            "url": "https://www.nyse.com/regulation",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null,
+        "detail": null
+      }
+    }
+  }
+}

@@ -25,7 +25,14 @@ CACHE_DIR = ROOT / ".cache"
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/131.0 Safari/537.36")
 
+
+# SOURCES.md 里 URL 后面常紧跟不带空格的批注，如
+# `https://example.com/page（HTTP 200，194KB）`。不能简单把全角括号整体排除掉——
+# mgzq.com 那条来源的 URL 本身就含中文文件名「...交易规则（2023年修订）.pdf」，
+# 全角括号是 URL 合法的一部分。真正的区分特征是批注固定以「（HTTP」开头，
+# 用 TRAILING_ANNOTATION_RE 单独把这段尾巴切掉，不改动 URL 主体的字符集。
 URL_RE = re.compile(r"https?://[^\s)\]]+")
+TRAILING_ANNOTATION_RE = re.compile(r"（HTTP.*$")
 HEADING_RE = re.compile(r"^###\s.*`([a-z]{2}-[a-z0-9]+)`\s*$")
 
 
@@ -63,7 +70,7 @@ def fetch_one(url: str, dest_dir: Path) -> dict:
     dest = dest_dir / (slugify(url) + ext)
     try:
         result = subprocess.run(
-            ["curl", "-sS", "-L", "-A", UA, "-o", str(dest), "-w", "%{http_code}"],
+            ["curl", "-sS", "-L", "-A", UA, "-o", str(dest), "-w", "%{http_code}", url],
             capture_output=True, text=True, timeout=60,
         )
         status = result.stdout.strip()
@@ -84,7 +91,8 @@ def main():
         sys.exit("用法: python3 tools/fetch.py <exchange-id>")
     exchange_id = sys.argv[1].strip()
     section = extract_section(exchange_id)
-    urls = sorted(set(URL_RE.findall(section)))
+    raw_urls = URL_RE.findall(section)
+    urls = sorted({TRAILING_ANNOTATION_RE.sub("", u) for u in raw_urls})
     if not urls:
         sys.exit(f"[fetch] `{exchange_id}` 章节下没有找到任何 URL，先去 SOURCES.md 登记来源。")
 
