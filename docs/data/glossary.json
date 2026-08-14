@@ -22,7 +22,31 @@
       "natives": {
         "en": "Volatility Interruption"
       },
-      "note": "Eurex机制，预期成交价超出动态/静态价格区间即触发，以集合竞价恢复交易；官方英文名与港交所VCM不同，且身兼波动性中断与\"涨跌停执行方式\"双重角色，不与volatility-control-mechanism合并一条"
+      "note": "Deutsche Börse Group（Eurex与Xetra/FWB）共用机制，预期成交价超出动态/静态价格区间即触发，以集合竞价恢复交易；官方英文名与港交所VCM不同，且身兼波动性中断与\"涨跌停执行方式\"双重角色，不与volatility-control-mechanism合并一条。Xetra（de-xetra）另设\"自动扩展区间\"（automated price range extension）模型用于ETF/ETN/ETC，是de-eurex没有的变体"
+    },
+    {
+      "id": "designated-sponsor",
+      "zh": "指定发起人",
+      "en": "Designated Sponsor",
+      "natives": {
+        "en": "Designated Sponsor"
+      },
+      "note": "Xetra特有做市参与者角色，为流动性较低证券提供双边约束报价，须遵守最大点差/最小报价量/最小报价时长等质量标准，原则上亦受MiFID II/MiFIR监管做市商规则约束；与纽交所\"指定做市商\"（DMM）功能相近但制度渊源不同（欧盟MiFID II框架 vs 美国交易所规则），不合并为一条"
+    },
+    {
+      "id": "eu-regulated-market",
+      "zh": "受监管市场",
+      "en": "EU Regulated Market",
+      "note": "欧盟MiFID II法律意义上的\"受监管市场\"（如法兰克福的Prime Standard/General Standard），区别于多边交易设施（MTF）性质的\"公开市场\"；预计随fr-euronext等其他欧盟交易所建档时复用"
+    },
+    {
+      "id": "eu-open-market-mtf",
+      "zh": "公开市场（多边交易设施）",
+      "en": "Open Market (MTF)",
+      "natives": {
+        "de": "Freiverkehr"
+      },
+      "note": "德国交易所法意义上的\"Regulierter Freiverkehr\"，性质是多边交易设施（MTF）而非受监管市场；法兰克福的Scale板块即设于此，适用的监管义务比受监管市场更轻"
     },
     {
       "id": "limit-up-limit-down",

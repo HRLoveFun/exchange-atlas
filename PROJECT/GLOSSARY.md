@@ -6,7 +6,10 @@
 |---|---|---|---|
 | 指数熔断 | Market-wide Circuit Breaker |  | 大盘指数触发阈值后全市场暂停交易的机制，区别于个股级的波动性中断 |
 | 波动性中断机制 | Volatility Control Mechanism (VCM) | en: Volatility Control Mechanism (VCM) | 港交所个股级机制，触发后进入冷静期，非全市场停牌 |
-| 波动性中断 | Volatility Interruption | en: Volatility Interruption | Eurex机制，预期成交价超出动态/静态价格区间即触发，以集合竞价恢复交易；官方英文名与港交所VCM不同，且身兼波动性中断与"涨跌停执行方式"双重角色，不与volatility-control-mechanism合并一条 |
+| 波动性中断 | Volatility Interruption | en: Volatility Interruption | Deutsche Börse Group（Eurex与Xetra/FWB）共用机制，预期成交价超出动态/静态价格区间即触发，以集合竞价恢复交易；官方英文名与港交所VCM不同，且身兼波动性中断与"涨跌停执行方式"双重角色，不与volatility-control-mechanism合并一条。Xetra（de-xetra）另设"自动扩展区间"（automated price range extension）模型用于ETF/ETN/ETC，是de-eurex没有的变体 |
+| 指定发起人 | Designated Sponsor | en: Designated Sponsor | Xetra特有做市参与者角色，为流动性较低证券提供双边约束报价，须遵守最大点差/最小报价量/最小报价时长等质量标准，原则上亦受MiFID II/MiFIR监管做市商规则约束；与纽交所"指定做市商"（DMM）功能相近但制度渊源不同（欧盟MiFID II框架 vs 美国交易所规则），不合并为一条 |
+| 受监管市场 | EU Regulated Market |  | 欧盟MiFID II法律意义上的"受监管市场"（如法兰克福的Prime Standard/General Standard），区别于多边交易设施（MTF）性质的"公开市场"；预计随fr-euronext等其他欧盟交易所建档时复用 |
+| 公开市场（多边交易设施） | Open Market (MTF) | de: Freiverkehr | 德国交易所法意义上的"Regulierter Freiverkehr"，性质是多边交易设施（MTF）而非受监管市场；法兰克福的Scale板块即设于此，适用的监管义务比受监管市场更轻 |
 | 涨跌限价机制 | Limit Up-Limit Down (LULD) | en: Limit Up-Limit Down (LULD) | 美国证券市场的个股价格带机制，以过去5分钟均价为基准动态计算 |
 | 涨跌幅限制 | Price Limit (Percentage Band) |  | 以前收盘价为基准的百分比涨跌幅限制，如上交所主板 ±10% |
 | 值幅限制 | Price Limit (Absolute Tiered) | ja: 値幅制限 | 按价格区间分档规定绝对值幅（非百分比），日本市场典型做法；基准价称「基準値段」 |
