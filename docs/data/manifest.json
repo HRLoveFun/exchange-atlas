@@ -110,6 +110,21 @@
       }
     },
     {
+      "id": "us-nasdaq",
+      "name_zh": "纳斯达克证券交易所",
+      "name_native": {
+        "en": "The Nasdaq Stock Market (Nasdaq)"
+      },
+      "official_languages": [
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": "nasdaq-group",
+      "region": "americas",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "us-nyse",
       "name_zh": "纽约证券交易所",
       "name_native": {

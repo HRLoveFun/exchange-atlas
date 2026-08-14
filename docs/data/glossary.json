@@ -168,6 +168,21 @@
         "ja": "特別気配"
       },
       "note": "东证机制，申报价超出值幅制限时不成交、改为显示指示性价格，是值幅制限的执行方式而非独立于价格限制之外的冷静期，与港交所VCM那种独立机制不同类"
+    },
+    {
+      "id": "maker-taker-pricing",
+      "zh": "做市商-吃单者定价模式",
+      "en": "Maker-Taker Pricing",
+      "note": "为市场提供流动性的报单（maker）获返佣，吃走流动性的一方（taker）付费的交易所收费结构；NYSE、Nasdaq 等美国电子化市场的主流费率模式，回填自 us-nyse（首次出现时未收录，us-nasdaq 建档时补录）"
+    },
+    {
+      "id": "competing-market-maker",
+      "zh": "竞争性做市商制度",
+      "en": "Competing Market Maker",
+      "natives": {
+        "en": "Market Maker"
+      },
+      "note": "Nasdaq 传统做市商模式——同一证券允许多家会员机构同时登记为做市商、彼此竞争报价，不同于 NYSE 的单一指定做市商（DMM）在同一证券上独占价格发现职责；与 designated-market-maker 是同一大类（做市商制度）下两种结构不同的具体实现，不合并"
     }
   ]
 }
