@@ -110,6 +110,21 @@
       }
     },
     {
+      "id": "sa-tadawul",
+      "name_zh": "沙特交易所（塔达吾尔）",
+      "name_native": {
+        "en": "Saudi Exchange (Tadawul)"
+      },
+      "official_languages": [
+        "ar"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "mena_africa",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "us-nyse",
       "name_zh": "纽约证券交易所",
       "name_native": {

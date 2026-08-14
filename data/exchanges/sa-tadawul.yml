@@ -1,0 +1,779 @@
+# 沙特交易所 Saudi Exchange (Tadawul)
+# 抓取来源见 PROJECT/SOURCES.md `sa-tadawul` 一节；原始页缓存于 .cache/sa-tadawul/
+#
+# source_lang: en——阿拉伯语是本所唯一官方语言（Market Making Regulations 封面原文：
+# "Arabic is the official language of the Saudi Exchange"），本次抓取未能核实到可直接
+# 摘引的官方阿拉伯语原文页（官网 www.saudiexchange.sa 全站被 Akamai 拦截，见下方降级说明），
+# 但拿到了监管方/集团站点发布的官方英文文本（部分标注"unofficial translation, Arabic
+# prevails"），按 ADR-013「有中文原文选中文，没有则选英文」的取源规则，本项目 zh/en 二元
+# 体系里没有阿语选项，故按「没有可核实中文原文」定为 source_lang: en，与 NYSE/JPX/Eurex
+# 同理——阿语原文的法律效力高于英文译本，但英文是本项目当前能溯源引用的最佳可得文本。
+#
+# ⚠️ 本次是 v1.0 Wave 1 里 mena_africa 地区首个样本（此前 5 家标杆里该地区 0 家）。
+#
+# group_id：未设置。Saudi Tadawul Group（集团控股公司，2021年改制为控股结构后的母公司）
+# 旗下除 Saudi Exchange（本文件记录的交易所实体）外，另有 Muqassa（证券清算中心，CCP）、
+# Edaa（证券存管中心，CSD）、Wamid（技术服务商）三家子公司——按 add-exchange skill 第1步
+# 的判断标准（"是否存在计划收录的姊妹交易所实体"，不是"母公司叫什么名字"），Muqassa/Edaa/
+# Wamid 都不是交易所实体，是清算/存管/技术服务商（角色对应 clearing.ccp_name/csd_name 字段，
+# 不是姊妹交易所），集团内没有第二家可比的证券交易所，故不设 group_id，这点与 NYSE Group
+# （旗下有多个各自独立注册的姊妹交易所）不同类。
+#
+# self_listed 的结构性细节：Saudi Exchange（运营实体本身）并未独立上市；据集团公开的组织
+# 结构（Saudi Tadawul Group 官网子公司列表页），其母公司 Saudi Tadawul Group Holding
+# Company 于2021年改制为控股集团后完成上市，在 Saudi Exchange 运营的主板挂牌交易——但本次
+# 未能抓取到直接确认母公司上市日期/代码的一手原文（仅有 WebSearch 摘要印象，按 skill 规则
+# 摘要不能当引用来源），故 self_listed 标 low confidence，具体日期/代码留待下次核实，
+# 见 OPEN-QUESTIONS。
+
+id: sa-tadawul
+name_zh: 沙特交易所（塔达吾尔）
+name_native: {en: "Saudi Exchange (Tadawul)"}
+official_languages: [ar]
+source_lang: en
+region: mena_africa
+tier: extended
+
+# ═══════════════════════════════════════════════
+# 二｜基本信息
+# ═══════════════════════════════════════════════
+overview:
+  _meta:
+    verified: 2026-08-14
+    confidence: medium
+
+  timezone: "Asia/Riyadh (UTC+3)"
+  dst_rule: "不实行夏令时"
+
+  founded_year:
+    zh: "2007年3月19日，依据《资本市场法》第20条注册成立为股份公司"
+    en: "Formed on 19 March 2007 as a joint stock company in accordance with Article 20 of the Capital Market Law"
+    detail: "Tadawul 是王国境内唯一被授权运营证券交易所的实体（'the sole entity in the Kingdom authorized to act as a securities exchange'）。2021年5月起改制为控股集团结构（Saudi Tadawul Group），成为 Saudi Exchange/Muqassa/Edaa/Wamid 四家子公司的母公司——具体改制日期与母公司上市细节本次未找到可直接摘引的一手原文，留待核实，见 OPEN-QUESTIONS。"
+    sources:
+      - title: "About Tadawul（2018年度报告存档站点，官方历史资料）"
+        url: https://annualreport2018.tadawul.com.sa/Resources/AnnualReport/company_profile/about_tadawul.html
+        accessed: 2026-08-14
+    quote: "Formed on 19 March 2007 as a joint stock company in accordance with article 20 of the Capital Market Law, Tadawul is the sole entity in the Kingdom authorized to act as a securities exchange."
+    confidence: high
+
+  organization_form:
+    enum: demutualized_unlisted
+    zh: "公司制（股份公司），但运营实体本身未独立上市——见上方身份注释"
+    en: "Demutualized (joint stock company), operating entity itself not separately listed"
+    detail: "《资本市场法》第20条要求交易所/存管中心/清算中心必须采用股份公司形式并经CMA许可，本条确认组织形式为公司制；母公司 Saudi Tadawul Group 是否/何时上市另见 self_listed 字段说明。"
+    sources:
+      - title: Capital Market Law（CMA 官方文本，Chapter Three, Article Twenty）
+        url: https://cma.gov.sa/en/RulesRegulations/CMALaw/Documents/CMA_Law.pdf
+        accessed: 2026-08-14
+    quote: "It shall be prohibited for any person to carry out any activities of the Exchange, the Depository Center, or the Clearing Center, or establish or operate any of them without obtaining a license from the Authority, provided that such person takes the legal form of a joint stock company."
+    confidence: high
+
+  self_listed:
+    enum: partial
+    zh: "运营实体本身未独立上市；母公司 Saudi Tadawul Group 据信已在本所主板挂牌，但本次未核实到可直接摘引的一手原文确认具体上市日期/代码"
+    en: "Not directly self-listed; parent Saudi Tadawul Group is believed to trade on the Exchange it operates, but no primary source confirming exact listing date/ticker was captured this round"
+    detail: "母公司/子公司四家（Saudi Exchange、Muqassa、Edaa、Wamid）的组织结构已在集团官网子公司列表页确认，但该页面本身不含母公司自身上市状态的正文说明（是JS单页应用，静态抓取正文很薄）。"
+    sources:
+      - title: "Saudi Exchange 集团子公司页（tadawulgroup.sa，正文单薄的 JS 单页应用，仅作组织结构佐证）"
+        url: https://www.tadawulgroup.sa/wps/portal/tadawulgroup/portfolio/saudi-exchange
+        accessed: 2026-08-14
+    confidence: low
+
+  market_cap_usd_bn:
+    zh: ""
+    confidence: low
+
+  listed_companies_count:
+    zh: ""
+    confidence: low
+
+  trading_currency:
+    zh: "沙特里亚尔（SAR）"
+    en: "Saudi Riyal (SAR)"
+    detail: "债券类证券以票面价值的百分比报价（非绝对价格），见 market_structure.tick_size 说明。"
+    sources:
+      - title: Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+        accessed: 2026-08-14
+    quote: "Debt Instruments are priced in percentage terms over their par value."
+    confidence: medium
+
+  settlement_currency: "沙特里亚尔（SAR）"
+
+# ═══════════════════════════════════════════════
+# 三｜监管与法律环境
+# ═══════════════════════════════════════════════
+regulation:
+  _meta:
+    verified: 2026-08-14
+    confidence: medium
+
+  regulator:
+    zh: "资本市场管理局"
+    en: "Capital Market Authority (CMA)"
+    detail: "依据2003年颁布的《资本市场法》（王室法令 M/30 号）设立，财政、法律、行政独立，直接向首相负责。"
+    sources:
+      - title: About CMA（CMA 官网）
+        url: https://cma.gov.sa/en/AboutCMA/Pages/AboutCMA.aspx
+        accessed: 2026-08-14
+    quote: "The current Capital Market Law is promulgated and pursuant to Royal Decree No. (M/30) dated 2/6/1424H, which formally brought the Capital Market Authority (CMA) into existence. The CMA is a government organization applying full financial, legal, and administrative independence, and has direct links with the Prime Minister."
+    confidence: high
+
+  self_regulatory_org:
+    zh: "Saudi Exchange 本身兼具前线监管职能（提出上市与交易相关规则、信息披露要求，报请CMA批准后实施）"
+    en: "Front-line rule-making by the Exchange, subject to CMA Board approval"
+    detail: "《资本市场法》第23条明确交易所董事会负责提出证券上市与交易条件、交易信息披露、发行人/股东/会员披露义务等规则草案，但须报请CMA董事会批准后方可施行——前线监管权与最终批准权分置的模式，与港交所「自身兼前线监管但SFC最终把关」结构相似。"
+    sources:
+      - title: Capital Market Law（CMA 官方文本，Article Twenty-Three）
+        url: https://cma.gov.sa/en/RulesRegulations/CMALaw/Documents/CMA_Law.pdf
+        accessed: 2026-08-14
+    quote: "the board of directors of the Exchange shall propose regulations, rules and instructions regarding: the conditions for listing and trading of Securities; the immediate and regular publication of the information related to executed transactions of the Securities traded on the Exchange; the obligations of Issuers, shareholders and members to disclose to the Exchange the information that the Exchange believes to be necessary..."
+    confidence: high
+
+  clearing_regulator:
+    zh: "资本市场管理局（对清算中心 Muqassa、存管中心 Edaa 同样行使许可与监管权）"
+    en: "Capital Market Authority (CMA)"
+    sources:
+      - title: Capital Market Law（CMA 官方文本，Article Twenty）
+        url: https://cma.gov.sa/en/RulesRegulations/CMALaw/Documents/CMA_Law.pdf
+        accessed: 2026-08-14
+    quote: "It shall be prohibited for any person to carry out any activities of the Exchange, the Depository Center, or the Clearing Center, or establish or operate any of them without obtaining a license from the Authority..."
+    confidence: high
+
+  core_laws:
+    zh: "《资本市场法》（王室法令 M/30 号，伊斯兰历1424年6月2日颁布）"
+    en: "Capital Market Law (Royal Decree No. M/30, dated 2/6/1424H)"
+    detail: "本次抓取到的官方英译本首页标注'The official text is in Arabic. This document in an unofficial translation and is provided for information purposes only.'——阿拉伯语原文具有法律效力，英译本仅供参考，与 SSE 英文版、JPX/Eurex 英文版的免责声明模式一致。公历对应日期本次未找到可直接摘引的一手原文确认（不同检索结果给出的公历换算日期彼此不一致），故不在 zh/en 里断言具体公历日期，只保留可核实的伊斯兰历王室法令编号与日期。其下另有交易所层面的 Listing Rules、Trading and Membership Procedures/Rules、Market Making Regulations 等实施细则，分别对应各自章节的具体规则依据。"
+    sources:
+      - title: About CMA（CMA 官网）
+        url: https://cma.gov.sa/en/AboutCMA/Pages/AboutCMA.aspx
+        accessed: 2026-08-14
+    quote: "The current Capital Market Law is promulgated and pursuant to Royal Decree No. (M/30) dated 2/6/1424H, which formally brought the Capital Market Authority (CMA) into existence."
+    confidence: high
+
+  foreign_ownership_limit:
+    zh: "非居民境外投资者单一持股不得达到或超过10%；全体境外投资者（不含外国战略投资者）合计持股上限49%"
+    en: "Non-resident foreign investors individually capped below 10% of a listed issuer; aggregate foreign ownership (excluding Foreign Strategic Investors) capped at 49%"
+    detail: "2026年1月6日CMA宣布修订外资准入框架，取消QFI（合格境外投资者）资格制度，自2026年2月1日起允许全体境外投资者不受资格分类限制直接投资主板，但10%单一上限与49%合计上限两条限制维持不变。⚠️ 本条来源为第三方律所客户简报（Latham & Watkins），非CMA官方规则原文——本次 WebSearch 检索配额已用尽，未能在 cma.gov.sa 站内定位到对应的官方公告或修订后的《外资证券投资规则》原文，按 CLAUDE.md 二第3条第三方来源上限 medium，下次有空应补找CMA官方原文升级来源，见 OPEN-QUESTIONS。"
+    sources:
+      - title: "Saudi CMA Broadens Main Market Access for Foreign Investors（Latham & Watkins 客户简报）"
+        url: https://www.lw.com/en/insights/saudi-cma-broadens-main-market-access-for-foreign-investors
+        accessed: 2026-08-14
+    quote: "Foreign investors may now invest directly in shares listed on the Main Market without the need to fall within specified investor categories. The QFI framework has been removed. The existing 10% individual cap for non-resident foreign investors and 49% aggregate cap for all foreign investors remain in force."
+    confidence: medium
+
+  capital_controls:
+    zh: ""
+    confidence: low
+
+  disclosure_requirements:
+    zh: ""
+    confidence: low
+
+  investor_protection:
+    zh: "CMA 的法定使命包括保护投资者、确保上市公司充分披露与透明"
+    en: "Investor protection is a statutory CMA mandate"
+    sources:
+      - title: About CMA（CMA 官网）
+        url: https://cma.gov.sa/en/AboutCMA/Pages/AboutCMA.aspx
+        accessed: 2026-08-14
+    quote: "The Capital Market Authority oversees the regulation and development of the capital market, and issues the necessary regulations, rules, and instructions for the implementation of the Capital Market Law. This is aimed at creating a favorable investment environment, enhancing confidence in the market, ensuring adequate disclosure and transparency by listed companies, and protecting investors and securities traders from unlawful practices in the market."
+    confidence: high
+
+# ═══════════════════════════════════════════════
+# 四｜产品体系
+# ═══════════════════════════════════════════════
+products:
+  _meta:
+    verified: 2026-08-14
+    confidence: medium
+  items:
+    - id: tadawul-equities
+      category: equity
+      name_zh: 股票
+      name_native: Equities
+      board: 主板（Main Market）/ 平行市场（Nomu Parallel Market）
+    - id: tadawul-etf
+      category: fund
+      name_zh: 交易所买卖基金
+      name_native: "Exchange Traded Funds (ETF)"
+    - id: tadawul-reits
+      category: fund
+      name_zh: 房地产投资信托基金
+      name_native: REITs
+    - id: tadawul-cef
+      category: fund
+      name_zh: 封闭式基金
+      name_native: "Closed-ended Investment Funds (CEF)"
+    - id: tadawul-bonds-sukuk
+      category: bond
+      name_zh: 债券与伊斯兰债券（Sukuk）
+      name_native: "Bonds & Sukuk"
+      description: "债券类证券以票面值百分比计价，非绝对价格。"
+    - id: tadawul-mt30-futures
+      category: future
+      name_zh: MT30 指数期货
+      name_native: "MT30 Index Futures"
+      derivative_of: msci-tadawul-30
+      description: "现金结算的股指期货，标的为与MSCI联合编制的MSCI Tadawul 30指数（MT30），由 Muqassa 独家清算结算；官方介绍资料称其为本所推出的首个衍生品品种。"
+    - id: tadawul-rights
+      category: other
+      name_zh: 优先认购权（可交易权证）
+      name_native: "Tradable Rights"
+      description: "配股/增资时向现有股东发行的可交易认购权，设有独立的每日涨跌幅计算公式，见 market_structure.price_limits。"
+
+# ═══════════════════════════════════════════════
+# 五｜市场结构与交易机制
+# ═══════════════════════════════════════════════
+market_structure:
+  _meta:
+    verified: 2026-08-14
+    sources:
+      - title: Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+        accessed: 2026-08-14
+    confidence: high
+
+  trading_sessions:
+    pre_market:
+      zh: "第一时段（开盘集合竞价）09:30–10:00"
+      en: "First Session (Opening Auction) 09:30–10:00"
+      quote: "First Session: 09:30 – 10:00 / Opening Auction"
+    continuous_am:
+      zh: "第二时段（连续交易，全天单一连续时段，无午休）10:00–15:00"
+      en: "Second Session (Market Open - Trading) 10:00–15:00"
+      quote: "Second Session: 10:00 – 15:00 / Market Open - Trading"
+    lunch_break:
+      zh: "无午休；第二时段为单一连续交易时段"
+      confidence: medium
+    continuous_pm:
+      zh: "同第二时段（10:00–15:00 为单一连续交易时段，未按上午/下午拆分）"
+      confidence: medium
+    after_market:
+      zh: "第三时段（收盘集合竞价）15:00–15:10；第四时段（尾盘按收盘价撮合 Trade at Last）15:10–15:20（债券与ETF不适用第三、四时段）"
+      en: "Third Session (Closing Auction) 15:00–15:10; Fourth Session (Trade at Last) 15:10–15:20"
+      quote: "Third Session: Listed securities (except for Debt Instruments and ETFs): 15:00 – 15:10 / Closing Auction ... Fourth Session: Listed securities (except for Debt Instruments and ETFs): 15:10 – 15:20 / Trade at Last"
+    night_session:
+      zh: "无"
+      confidence: medium
+
+  holidays_note:
+    zh: "周日至周四交易，王国官方节假日休市；具体节假日日历由交易所另行公布"
+    en: "Trading Sunday to Thursday, closed on official Kingdom holidays"
+    quote: "Listed securities are traded from Sunday to Thursday, except for on official holidays in the Kingdom."
+    confidence: high
+
+  opening_mechanism:
+    zh: "第一时段开盘集合竞价（09:30–10:00，单一理论开盘价撮合）"
+    en: "First Session Opening Auction (09:30–10:00)"
+    detail: "9.9条：第一时段最后的理论开盘价即为开盘价（Opening Price）。"
+    quote: "First Session: 09:30 – 10:00 / Opening Auction"
+    confidence: high
+
+  closing_mechanism:
+    zh: "第三时段收盘集合竞价（15:00–15:10），随后第四时段（15:10–15:20）允许会员按收盘价继续按盘撮合（Trade at Last）"
+    en: "Third Session Closing Auction (15:00–15:10), followed by Fourth Session Trade at Last (15:10–15:20)"
+    detail: "会员在第四时段可提交订单，按收盘价撮合买卖双方（2:30 PM – 3:00 PM 附近原文另有类似机制描述，属旧版页码残留，未纳入 quote）。"
+    quote: "Fourth Session: Listed securities (except for Debt Instruments and ETFs): 15:10 – 15:20 / Trade at Last"
+    confidence: high
+
+  matching_principle:
+    zh: "限价盘在同价位按订单进入顺序撮合；连续交易时段（第二时段）市价盘可部分/全部按单一价格成交"
+    en: "Price-driven matching with entry-order priority at each price level in continuous trading"
+    confidence: medium
+
+  order_types:
+    zh: "限价盘（Limit Order）：可按对手方更优价成交，未成交部分继续按限价挂单；市价盘（Market Order）：第二时段内按当前价成交，未成交部分转为限价盘"
+    en: "Limit Order and Market Order"
+    sources:
+      - title: Trading and Membership Procedures（§5 Order Types）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+        accessed: 2026-08-14
+    detail: |
+      另有订单条件（Order Conditions，§6）：FoK（Fill or Kill，全部立即成交否则撤单）、
+      FaK（Fill and Kill，部分成交即可，未成交部分撤单）、Hidden Quantity（冰山单，最低5万股或
+      5万里亚尔起，每次至少披露总量5%）、Cancel on Disconnect（连线中断自动撤单）；
+      订单有效期（§7）：Session（限当次第一/第三时段内完成）、Day（当日有效，至第四时段结束）、
+      GTC（Good till Cancelled，最长30天）、GTD（Good till Date，最长30天）。
+    quote: "5.1.1 The Trading System will improve the execution prices of limit orders ... 5.2.1 During the Second Session, the Trading System will execute market orders partially or fully at one price, and convert the unmatched parts of partially matched market orders into limit orders at their traded prices."
+    confidence: high
+
+  tick_size:
+    zh: "股票按价格分层：25里亚尔以下0.01；25–49.98为0.02；50–99.95为0.05；100–249.90为0.10；250–499.80为0.20；500里亚尔及以上为0.50；债券类按票面值0.001%计"
+    en: "Tiered by price band: below SAR 25 → SAR 0.01; SAR 25–49.98 → SAR 0.02; SAR 50–99.95 → SAR 0.05; SAR 100–249.90 → SAR 0.10; SAR 250–499.80 → SAR 0.20; at or above SAR 500 → SAR 0.50; Debt Instruments 0.001% of par value"
+    sources:
+      - title: Trading and Membership Procedures（§8.1.1 Table 2）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+        accessed: 2026-08-14
+    quote: "Below SAR 25 → SAR 0.01 / SAR 25 to 49.98 → SAR 0.02 / SAR 50 to 99.95 → SAR 0.05 / SAR 100 to 249.90 → SAR 0.10 / SAR 250 to 499.80 → SAR 0.20 / At or above SAR 500 → SAR 0.50 ... Debt Instruments are priced in percentage terms over their par value. The applicable tick size is (0.001%)."
+    confidence: high
+
+  board_lot_size:
+    zh: ""
+    confidence: low
+
+  odd_lot_handling:
+    zh: ""
+    confidence: low
+
+  price_limits:
+    type:
+      enum: percentage_band
+      zh: "百分比涨跌幅限制（按前收盘价设定的当日涨跌幅 Daily Limit），叠加一个可在盘中随波动性拍卖滚动重设的静态限制（Static Limit）"
+      en: "Percentage Band (Daily Limit off previous close), layered with a rolling Static Limit reset via intraday Volatility Auctions"
+      detail: "Daily Limit 基准是前一交易日收盘价（缺收盘价时用挂牌价），全天固定；Static Limit 基准是最近一次集合竞价成交价或最近一次波动性拍卖触发价，每次波动性拍卖后滚动重设——两层机制分别对应「当日绝对边界」与「盘中冷静阀」两种功能，参见下方 circuit_breaker/volatility_interruption。"
+      quote: "The Exchange sets daily fluctuation limits against the reference price and they remain valid during the Trading Day. The Exchange may set static fluctuation limits, these are set against the static price. ... The reference price is the previous Trading day's Closing Price ... Static price is the last auction price or, during a volatility auction, the price that triggered the auction."
+      confidence: high
+    main_board:
+      zh: "±10%（新股上市首3个交易日为±30%，第4日起收窄为±10%；ETF自上市首日起即为±10%）"
+      en: "±10% (±30% for the first 3 trading days after a new listing, narrowing to ±10% from day 4; ETFs are ±10% from day 1)"
+      sources:
+        - title: "Trading and Membership Procedures（§11 Fluctuation Limits）"
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+          accessed: 2026-08-14
+      quote: "(a) ±30% Daily Limit and ±10% Static Limit for the first three days of trading for newly listed Securities. (b) ±10% Daily Limit from the fourth day of trading the newly listed Securities onwards. 11.5.2 ±10% Daily Limit for ETFs from the first day of trading onwards."
+      confidence: high
+    other_boards:
+      zh: "平行市场（Nomu）股票：±30% Daily Limit（长期适用，不设新股宽限期）；可交易优先认购权（Rights）：按公式计算，最低±1%"
+      en: "Nomu Parallel Market shares: ±30% Daily Limit (permanent, no new-listing grace period); tradable Rights: formula-based, minimum ±1%"
+      sources:
+        - title: "Trading and Membership Procedures（§11.6 Fluctuation Limits for Parallel Market）"
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+          accessed: 2026-08-14
+      quote: "11.6 The Trading System sets fluctuation limits for Parallel Market listed securities as follows: a) ±30% Daily Limit and ±10% Static Limit. ... c) the minimum Daily Limit of the of tradable Rights is ± 1%."
+      confidence: high
+
+  circuit_breaker:
+    enum: stock_level
+    zh: "无全市场熔断；个股/产品层级设静态限制（Static Limit ±10%）触发的波动性拍卖机制，非全面停牌"
+    en: "No market-wide circuit breaker; stock-level Static Limit (±10%) triggers a Volatility Auction, not a full trading halt"
+    detail: "与港交所 VCM 机制类似：触发订单本身不成交，转入5分钟波动性拍卖参与撮合，拍卖结束后按最新理论价恢复交易；若拍卖结束时无法形成理论价，静态价格回退至此前水平。"
+    sources:
+      - title: Trading and Membership Procedures（§11.7 Volatility Auctions）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+        accessed: 2026-08-14
+    quote: "Volatility auctions are triggered intraday for 5 minutes (during the Second session), whenever an order (regardless of its size) can potentially match an opposite side order at the upper end of the Static Limit or lower end of the Static Limit (±10%). The order that triggers the volatility auction is not executed and moves to participate in the volatility auction..."
+    confidence: high
+
+  volatility_interruption:
+    zh: "波动性拍卖（Volatility Auction）：盘中订单可能以静态限制±10%边界成交时触发，5分钟集合竞价冷静期，触发价成为新的静态基准价"
+    en: "Volatility Auction: triggered when an order would match at the ±10% Static Limit boundary, 5-minute call-auction cooling-off, trigger price becomes the new static reference"
+    sources:
+      - title: "Trading and Membership Procedures（§11.7 Volatility Auctions）"
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+        accessed: 2026-08-14
+    quote: "Volatility auctions are triggered intraday for 5 minutes (during the Second session), whenever an order (regardless of its size) can potentially match an opposite side order at the upper end of the Static Limit or lower end of the Static Limit (±10%). ... The trigger price becomes the new static price for the Volatility Auction..."
+    confidence: high
+
+  trading_halt_mechanism:
+    zh: "债券类证券因付息可暂停交易最长7个日历日；紧急情况下（依《交易与会员规则》第4条）可通过15分钟集合竞价恢复交易"
+    en: "Debt Instruments may be suspended up to 7 calendar days for coupon payment; emergency situations may resume trading via a 15-minute auction"
+    sources:
+      - title: Trading and Membership Procedures（§3.10, §3.13）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+        accessed: 2026-08-14
+    quote: "The Exchange may suspend trading in a specific Debt Instrument for a maximum period of seven (7) calendar days for the purpose of coupon payment. ... the Exchange may as the case requires restore normal trading conditions or resume relevant Security/Securities trading through an auction for (15) minutes without extension..."
+    confidence: high
+
+  intraday_reversal:
+    zh: ""
+    confidence: low
+    detail: "本次抓取的规程文本未直接给出「当日买入证券当日可否卖出」的明文条款，未找到可摘引原文，留空转 OPEN-QUESTIONS。"
+
+  short_selling:
+    enum: restricted_list
+    zh: "受监管的备兑卖空：卖空订单须在交易系统中标记，且须已通过证券借贷协议借入相应证券方可卖空（不允许裸卖空）"
+    en: "Regulated covered short selling: orders must be flagged, and short sellers must have borrowed the securities under a securities lending agreement"
+    detail: "具体哪些证券属于可卖空的「合格证券」清单本次未找到独立的一手原文（Short Selling Regulations 全文本次未抓取），故 enum 暂定 restricted_list（限指定标的）而非 restricted_uptick，待补充验证是否另有报升规则，见 OPEN-QUESTIONS。"
+    sources:
+      - title: Trading and Membership Procedures（§12 Short Selling）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+        accessed: 2026-08-14
+    quote: "When an Exchange Member transmits a short selling order either as an agent or principal, the transmitted order must be flagged as a short sell order in the Trading System. ... The Exchange Member or the lending agent has borrowed/lent Securities to the client to cover the short selling transactions."
+    confidence: high
+
+  block_trade:
+    zh: "存在场外协商交易（Negotiated Deals），结算周期默认T+2，经买卖双方另行约定可在T+0至T+5间调整"
+    en: "Negotiated Deals: default T+2 settlement, adjustable between T+0 and T+5 by mutual agreement"
+    sources:
+      - title: Trading and Membership Procedures（§13 Negotiated Deals）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+        accessed: 2026-08-14
+    quote: "The settlement cycle of the Negotiated Deals transaction is T+2 unless the Buyer and Seller agreed on a different settlement cycle from T+0 to T+5."
+    confidence: high
+
+  dark_pool:
+    zh: ""
+    confidence: low
+
+  market_maker_scheme:
+    zh: "设有正式做市商制度，经CMA董事会2022年批准的《做市商规则》管辖；持有约束性证券借贷协议的做市商在从事做市活动时不适用卖空监管规则"
+    en: "Formal Market Making Regulations approved by the CMA Board in 2022"
+    sources:
+      - title: Market Making Regulations（Saudi Exchange 官方规则 PDF，经 tadawulgroup.sa 分发）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/2fc1a74f-4357-4843-9b50-0edbc06296b3/Market+Making+Regulations+%282%29.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-2fc1a74f-4357-4843-9b50-0edbc06296b3-oqd5Wba
+        accessed: 2026-08-14
+    quote: "Approved by the Board of the Capital Market Authority Pursuant to its Resolution Number (1-98-2022) Dated 18/02/1444H corresponding to 14/09/2022G ... If the Market Maker has a binding written SBL Agreement, the provisions of the Short Selling Regulations shall not apply on conducting Market Making activities..."
+    confidence: high
+
+  connect_schemes:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 六｜上市、持续监管与退市
+# ═══════════════════════════════════════════════
+listing:
+  _meta:
+    verified: 2026-08-14
+    confidence: medium
+
+  boards:
+    - id: sa-tadawul-main
+      name_zh: 主板
+      name_native: Main Market
+      target_companies: "面向公众公开发行，需满足公众持股与股东人数门槛"
+      financial_threshold: "预计上市股份总市值至少3亿沙特里亚尔；上市时至少200名公众股东，且至少30%同类股份由公众持有（经批准可降低）"
+    - id: sa-tadawul-nomu
+      name_zh: 平行市场（努木）
+      name_native: Nomu (Parallel Market)
+      target_companies: "仅限「平行市场合格投资者」交易，面向中小企业，监管要求较主板宽松"
+      financial_threshold: "预计上市股份总市值至少5000万沙特里亚尔"
+
+  review_system:
+    enum: approval
+    zh: "交易所实质审核制：交易所对申请材料进行审核并可自由裁量批准/拒绝，需委任财务顾问，重大事项另需CMA批准"
+    en: "Exchange-led approval-based review with substantive discretion; financial advisor mandatory, key matters require separate CMA approval"
+    detail: "上市申请提交给交易所（Article 14），发行人须先取得公司章程/公司法项下的所有必要内部批准（Article 15），并委任两名代表与财务顾问对接交易所（Article 16）；这一模式比单纯的「披露为本注册制」更接近核准制，但与SSE的科创板注册制、NYSE的规则化量化标准也不完全相同——与 hk-hkex/us-nyse/jp-jpx 一样，是 OPEN-QUESTIONS 第3条「review_system枚举不够用」积累的又一个真实案例。"
+    sources:
+      - title: Listing Rules（CMA/Saudi Exchange 官方上市规则 PDF，经 tadawulgroup.sa 分发）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/e4bfbba8-4932-4b0c-b405-c922ac56d780/Listing+Rules.pdf?MOD=AJPERES&CVID=pfpotDY
+        accessed: 2026-08-14
+    quote: "An issuer who is applying for listing of its securities must submit an application to the Exchange which contains the information and documents required under these Rules and pay the fee... An issuer may not submit an application for listing of shares or debt instruments or convertible debt instruments without obtaining all approvals required pursuant to its bylaws, the Companies Law and its Implementing Regulations."
+    confidence: high
+
+  listing_process_duration:
+    zh: ""
+    confidence: low
+
+  transfer_between_boards:
+    zh: "平行市场（Nomu）挂牌满两个日历年后可申请转往主板，另须最近一期财报无保留意见、无累计亏损、申请前十二个月内无因第38条导致的停牌记录"
+    en: "May apply to transfer from Nomu to the Main Market after two calendar years, subject to a clean audit opinion, no accumulated losses, and no Article 38 suspension in the prior twelve months"
+    detail: "如经历重大重组（处置/收购资产达净资产或营收净利30%以上），须自重组完成起满一个财年方可申请转板。市值门槛等其他细节本次未在抓取的条文里找到，未采纳未经一手核实的第三方摘要数字，见 OPEN-QUESTIONS。"
+    sources:
+      - title: "Listing Rules（Article 46: Conditions to transfer to the Main Market）"
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/e4bfbba8-4932-4b0c-b405-c922ac56d780/Listing+Rules.pdf?MOD=AJPERES&CVID=pfpotDY
+        accessed: 2026-08-14
+    quote: "An issuer whose shares are listed on the Parallel Market may only make an application to transfer to the Main Market after two calendar years from the day on which its shares were listed on the Parallel Market. ... The absence of a suspension case in accordance with Article 38 of these Rules to the Issuer's shares, within the twelve months prior to the submission of the application for transfer to the Main Market..."
+    confidence: high
+
+  continuing_obligations:
+    zh: ""
+    confidence: low
+
+  suspension_resumption:
+    zh: ""
+    confidence: low
+
+  delisting_conditions:
+    zh: "CMA可在多种情形下随时暂停交易或取消上市，包括：为保护投资者/维护市场秩序认为有必要；发行人重大违反《资本市场法》/实施细则/交易所规则；未按时缴纳费用或罚款；发行人业务/资产已不再适合继续上市；累计亏损达资本50%以上并已向法院申请破产重整程序等"
+    en: "CMA may suspend trading or cancel listing at any time on multiple grounds, incl. investor protection/orderly market, material rule breaches, unpaid fees/fines, unsuitability for continued listing, bankruptcy restructuring filings with accumulated losses ≥50% of capital"
+    sources:
+      - title: "Listing Rules（Article 38: Power to suspend trading or cancel listing）"
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/e4bfbba8-4932-4b0c-b405-c922ac56d780/Listing+Rules.pdf?MOD=AJPERES&CVID=pfpotDY
+        accessed: 2026-08-14
+    quote: "The Authority may at any time suspend the trading of securities or cancel their listing as it deems fit, in any of the following circumstances: 1) the Authority considers it necessary for the protection of investors or the maintenance of an orderly market; 2) the issuer fails, in a manner which the Authority considers material, to comply with the Capital Market Law, its Implementing Regulations or the Exchange Rules... 13) upon the registration of the application for the commencement of a financial restructuring procedure of the issuer, whose accumulated losses reached 50% or more of its capital with the court in accordance with the Bankruptcy Law."
+    en_required: true
+    confidence: high
+
+  delisting_process:
+    zh: ""
+    confidence: low
+
+  delisting_transition_period:
+    zh: ""
+    confidence: low
+
+  post_delisting_venue:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 七｜指数体系
+# ═══════════════════════════════════════════════
+indices:
+  _meta:
+    verified: 2026-08-14
+    confidence: medium
+    sources:
+      - title: Indices Methodology 2024（Saudi Exchange 官方指数方法论 PDF，经 tadawulgroup.sa 分发）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/93482491-9528-4979-8e6e-f11691e35bf6/Indices+Methodology+2024.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-93482491-9528-4979-8e6e-f11691e35bf6-o.tGnQ1
+        accessed: 2026-08-14
+  items:
+    - id: tasi
+      name_zh: 塔达吾尔全股指数
+      name_native: "Tadawul All Share Index (TASI)"
+      compiler: self
+      weighting_method: float_adjusted
+      flagship: "yes"
+      description: "主板全市场旗舰指数，覆盖主板全部合资格股票，自由流通市值加权，设分层封顶因子（Capping Factor）防止单一成分股权重过高。官方方法论文档未给出TASI自身的基日/基点（仅给出其下GICS行业分类指数的基日2017年1月8日），本条基日/基点暂留空，见 OPEN-QUESTIONS。"
+    - id: tasi50
+      name_zh: TASI50指数
+      name_native: "TASI50 Index"
+      compiler: self
+      weighting_method: float_adjusted
+      description: "TASI的子指数，按总市值排名前50只成分股构成，须满足年换手率（ATVR）不低于5%的准入条件。"
+    - id: nomuc
+      name_zh: 平行市场封顶指数
+      name_native: "Parallel Market Capped Index (NOMUC)"
+      compiler: self
+      weighting_method: float_adjusted
+      flagship: "yes"
+      description: "Nomu平行市场的旗舰指数，覆盖平行市场全部合资格成分股。"
+    - id: tadawul-ipo-index
+      name_zh: IPO指数
+      name_native: "Tadawul IPO Index"
+      compiler: self
+      weighting_method: float_adjusted
+      description: "TASI子指数，覆盖近5年内新上市的成分股，按自由流通市值计算。"
+
+# ═══════════════════════════════════════════════
+# 八｜清算、结算与交割
+# ═══════════════════════════════════════════════
+clearing:
+  _meta:
+    verified: 2026-08-14
+    confidence: high
+
+  settlement_cycle:
+    enum: t2
+    zh: "T+2（普通交易所交易）；场外协商交易可在T+0至T+5间另行约定；强制/自愿补仓交易（Buy-in）为T+0"
+    en: "T+2 for normal exchange transactions; Negotiated Deals adjustable T+0–T+5; Buy-in trades settle T+0"
+    sources:
+      - title: Edaa Settlement（Edaa 官网）
+        url: https://www.edaa.sa/wps/portal/edaa/services/memberservices/settlement?locale=en
+        accessed: 2026-08-14
+    quote: "T+2 All types of securities' transactions are completed within settlement timing determined by the Exchange. Normal exchange transactions are settled two business days following the transaction execution date; i.e. (T+2). Negotiated deals can have different settlement cycles that can range from T+0 up to T+5..."
+    confidence: high
+
+  ccp_name:
+    zh: "证券清算中心公司（Muqassa）"
+    en: "Securities Clearing Center Company (Muqassa)"
+    detail: "2018年设立，作为沙特金融行业发展计划（FSDP）的一部分成立，为Saudi Exchange全资子公司，是股票、Sukuk、债券、ETF、REITs等多资产类别的中央对手方。"
+    sources:
+      - title: Muqassa 首页
+        url: https://www.muqassa.sa/wps/portal/muqassa/home
+        accessed: 2026-08-14
+    quote: "Muqassa was established in 2018 as part of Saudi Arabia's Financial Sector Development Program. We offer robust clearing services that can handle multiple asset classes."
+    confidence: high
+
+  csd_name:
+    zh: "证券存管中心公司（Edaa）"
+    en: "Securities Depository Center Company (Edaa)"
+    detail: "2016年设立，为Saudi Exchange全资子公司，运营存管结算系统（Depository and Settlement System, DSS），负责证券的记账式登记与所有权登记。"
+    sources:
+      - title: Edaa 子公司页（tadawulgroup.sa）
+        url: https://www.tadawulgroup.sa/wps/portal/tadawulgroup/portfolio/edaa
+        accessed: 2026-08-14
+    quote: "The Securities Depository Center Company 'Edaa' was established in 2016 and is fully owned by Saudi Exchange (Tadawul). ... Edaa operates and maintain the Depository and Settlement System (DSS), an electronic book-entry system used to record and maintain securities and to register the ownership of securities."
+    confidence: high
+
+  initial_margin_practice:
+    zh: ""
+    confidence: low
+
+  maintenance_margin_practice:
+    zh: ""
+    confidence: low
+
+  mark_to_market_frequency:
+    zh: ""
+    confidence: low
+
+  delivery_method:
+    zh: ""
+    confidence: low
+    detail: "MT30指数期货为现金结算，但股票现货为交割证券本身（记账式过户）——不完全等同 delivery_method 枚举定义的实物/现金二分，且本次未找到覆盖全品类的一手原文，暂留空，见 OPEN-QUESTIONS。"
+
+  last_trading_day_rule:
+    zh: ""
+    confidence: low
+
+  default_management:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 九｜市场参与者
+# ═══════════════════════════════════════════════
+participants:
+  _meta:
+    verified: 2026-08-14
+    confidence: medium
+
+  investor_structure:
+    zh: ""
+    confidence: low
+
+  account_opening_requirements:
+    zh: "投资者须先通过交易所会员（经纪商）开立投资账户方可交易"
+    en: "Investors must open an investment account through a licensed Exchange Member (broker) before trading"
+    sources:
+      - title: Saudi Exchange 集团子公司页（tadawulgroup.sa）
+        url: https://www.tadawulgroup.sa/wps/portal/tadawulgroup/portfolio/saudi-exchange
+        accessed: 2026-08-14
+    quote: "To trade at Tadawul, investors should first visit a member of the exchange to open an investment portfolio."
+    confidence: medium
+
+  suitability_management:
+    zh: ""
+    confidence: low
+
+  foreign_access_channel:
+    zh: "2026年2月1日起取消QFI资格制度，境外投资者可不受投资者类别限制直接投资主板，但仍受10%单一持股与49%合计持股上限约束（见 regulation.foreign_ownership_limit）"
+    en: "QFI framework abolished effective Feb 1, 2026; foreign investors may now access the Main Market directly, subject to existing 10%/49% ownership caps"
+    detail: "本条与 regulation.foreign_ownership_limit 同源，来自第三方律所简报，confidence 同标 medium。"
+    sources:
+      - title: "Saudi CMA Broadens Main Market Access for Foreign Investors（Latham & Watkins 客户简报）"
+        url: https://www.lw.com/en/insights/saudi-cma-broadens-main-market-access-for-foreign-investors
+        accessed: 2026-08-14
+    quote: "Foreign investors no longer need to structure investments through specific investor classifications or arrangements. On January 6, 2026, Saudi Arabia's Capital Market Authority (CMA) announced amendments to the regulatory framework governing foreign investment in securities listed on the Main Market of the Saudi Exchange (Tadawul). Effective February 1, 2026, the amendments allow all foreign investors [direct access]."
+    confidence: medium
+
+  membership_structure:
+    zh: "交易所会员（经纪商）须在王国境内设立并持有CMA有效牌照；CMA另按业务类型（自营Dealing/托管Custody/资产管理Managing/安排Arranging/顾问Advising）分类颁发牌照，各类别设不同最低资本要求"
+    en: "Exchange Members must be established in the Kingdom and hold a valid CMA license; CMA licenses are categorized by activity (Dealing/Custody/Managing/Arranging/Advising) with tiered minimum capital requirements"
+    detail: "各牌照类别的具体最低资本数额（如自营+托管类为5,000万里亚尔）见 Capital Market Institutions Regulations 原文，本字段 zh/en 摘要未逐一列出具体数额以避免中文「万」进制与英文「million」进制换算后数字反查不对应，具体数额留待下次以英文原始数量级表述补充。"
+    sources:
+      - title: Saudi Exchange 集团子公司页（tadawulgroup.sa）
+        url: https://www.tadawulgroup.sa/wps/portal/tadawulgroup/portfolio/saudi-exchange
+        accessed: 2026-08-14
+      - title: Capital Market Institutions Regulations（CMA 官方规则 PDF）
+        url: https://cma.gov.sa/en/RulesRegulations/Regulations/Documents/CapitalMarketInstitutionsRegulations.pdf
+        accessed: 2026-08-14
+    quote: "Applicants must be established in the Kingdom and hold a valid license from the CMA. Once CMA authorization is obtained, applicants need to complete the Saudi Exchange membership requirements."
+    confidence: high
+
+  broker_landscape:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 十｜市场数据与技术基础设施
+# ═══════════════════════════════════════════════
+infrastructure:
+  _meta:
+    verified: 2026-08-14
+    confidence: low
+
+  market_data_levels:
+    zh: ""
+    confidence: low
+
+  data_latency:
+    zh: ""
+    confidence: low
+
+  data_pricing_model:
+    zh: ""
+    confidence: low
+
+  historical_data_availability:
+    zh: ""
+    confidence: low
+
+  trading_system_name:
+    zh: ""
+    confidence: low
+
+  access_methods:
+    zh: "订单须经三种渠道之一提交：T Channel（面向注册交易员）、I Channel（面向经会员网站/在线应用下单的客户）"
+    en: "Orders must be submitted via one of the designated channels: T Channel (Registered Traders) or I Channel (client web/app access via Exchange Members)"
+    detail: "原文另列有第三种渠道，本次抓取的段落被截断未能完整摘引，仅摘引已确认的前两种，其余留待补充。"
+    sources:
+      - title: Trading and Membership Procedures（§4 Order Channels）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+        accessed: 2026-08-14
+    quote: "Orders must be submitted using only the following channels: 4.1.1 T Channel: A channel specifically designed for Registered Traders to submit orders; 4.1.2 I Channel: A channel specifically designed for clients to submit orders via Exchange Members' websites and online applications;"
+    confidence: high
+
+  major_outage_history:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 十一｜交易成本与税费
+# ═══════════════════════════════════════════════
+costs:
+  _meta:
+    verified: 2026-08-14
+    confidence: low
+
+  commission_structure:
+    zh: ""
+    confidence: low
+
+  exchange_fees:
+    zh: ""
+    confidence: low
+
+  clearing_fees:
+    zh: ""
+    confidence: low
+
+  regulatory_fees:
+    zh: ""
+    confidence: low
+
+  stamp_duty:
+    zh: ""
+    confidence: low
+
+  financial_transaction_tax:
+    zh: ""
+    confidence: low
+
+  capital_gains_tax:
+    zh: ""
+    confidence: low
+
+  dividend_withholding_tax:
+    zh: ""
+    confidence: low
+
+  implicit_costs_note:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 十二｜风险与特殊考量
+# ═══════════════════════════════════════════════
+risks:
+  _meta:
+    verified: 2026-08-14
+    confidence: low
+
+  fx_risk_note:
+    zh: "沙特里亚尔实行盯住美元的固定汇率制度（本条为一般常识性背景信息，本次未附一手原文来源，confidence 相应降级）"
+    confidence: low
+
+  political_risk_note:
+    zh: ""
+    confidence: low
+
+  liquidity_risk_note:
+    zh: ""
+    confidence: low
+
+  regulatory_change_risk_note:
+    zh: "2026年2月起取消QFI制度、放开主板外资准入，属近期重大监管变革，详见 regulation.foreign_ownership_limit"
+    en: "QFI framework abolition (Feb 2026) is a recent major regulatory reform"
+    sources:
+      - title: "Saudi CMA Broadens Main Market Access for Foreign Investors（Latham & Watkins 客户简报）"
+        url: https://www.lw.com/en/insights/saudi-cma-broadens-main-market-access-for-foreign-investors
+        accessed: 2026-08-14
+    confidence: medium
+
+  enforcement_note:
+    zh: ""
+    confidence: low

@@ -168,6 +168,21 @@
         "ja": "特別気配"
       },
       "note": "东证机制，申报价超出值幅制限时不成交、改为显示指示性价格，是值幅制限的执行方式而非独立于价格限制之外的冷静期，与港交所VCM那种独立机制不同类"
+    },
+    {
+      "id": "sa-tadawul-volatility-auction",
+      "zh": "波动性拍卖",
+      "en": "Volatility Auction",
+      "natives": {
+        "en": "Volatility Auction"
+      },
+      "note": "沙特交易所机制，个股静态限制（Static Limit，±10%，随每次拍卖滚动重设）触发后进入5分钟集合竞价冷静期，非全面停牌；与港交所VCM、Eurex Volatility Interruption同属\"个股级冷静阀\"机制家族，但基准价（静态价）随拍卖滚动重设是其区别于前两者的设计特点"
+    },
+    {
+      "id": "qualified-investor-parallel-market",
+      "zh": "平行市场合格投资者",
+      "en": "Qualified Investor (Parallel Market)",
+      "note": "沙特Nomu平行市场准入限制——只有合格投资者可交易该板块证券，一般公众不可直接参与；与主板面向公众的开放准入形成对比，未来遇到其他市场的\"合格投资者专属板块\"设计可比对沿用此译法"
     }
   ]
 }

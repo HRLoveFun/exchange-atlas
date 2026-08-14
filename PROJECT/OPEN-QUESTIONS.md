@@ -28,6 +28,12 @@
 
 （填数据时遇到查不清的，按下面格式加条目；`make sync` 会额外从 `data/` 里 `confidence: low` 或空字段生成一份自动清单，附在下面，不需要手动同步那部分）
 
+- **`sa-tadawul` 官网 `www.saudiexchange.sa` 全站被 Akamai WAF 拦截，任何路径/PDF/UA 组合均返回 403**（响应体含 `errors.edgesuite.net`，与 v0.2 的 `sec.gov`/`finra.org`/`dtcc.com` 同一类拦截），详细探测记录见 `SOURCES.md` `sa-tadawul` 一节末尾。已用同一 CMS 后端但未被拦截的 `tadawulgroup.sa` 域名、监管方 `cma.gov.sa`、清算/存管子公司自有域名 `edaa.sa`/`muqassa.sa` 覆盖了监管、交易机制、上市、指数、清算五章的核心内容，但市场数据/技术基础设施（十）章节几乎完全留空——行情费率、历史数据可得性、交易系统名称等信息主要只在被封锁的官网上有专门页面。**待人工提供**：若能人工访问 `www.saudiexchange.sa` 截取市场数据服务页（Market Data Services / historical data / trading system 相关页面）的原文或 PDF，可补齐第十章。
+- **`sa-tadawul` 的母公司改制历史（2021年由 Tadawul 公司制改为 Saudi Tadawul Group 控股集团结构、同年完成IPO）未能核实到可直接摘引的一手原文。** 本次仅从 WebSearch 摘要拿到"2021年5月20日改制""IPO募资30%股权/每股105里亚尔"等具体数字，按 skill 规则摘要不能当引用来源，故 `overview.history` 未采纳这些具体数字，仅保留已用一手原文核实的"2007年3月19日成立"事实。**待补充**：下次可尝试 `annualreport.tadawulgroup.sa`（2022年报存档站点，与本次实际抓到的 `annualreport2018.tadawul.com.sa` 同类静态站点，本次未抓取）或 PIF/CMA 官方公告页找一手原文。
+- **`sa-tadawul.regulation.foreign_ownership_limit`（10%单一/49%合计外资持股上限、2026年2月起取消QFI制度）唯一来源是第三方律所客户简报（Latham & Watkins），未找到CMA官方规则原文或官方公告。** 本次 WebSearch 配额已用尽未能继续检索，下次应优先在 `cma.gov.sa` 站内找《外资证券投资规则》(Rules for Foreign Investment in Securities) 修订版原文或2026年1月6日的官方公告页，把 confidence 从 medium 升级为 high。
+- **`sa-tadawul.market_structure.short_selling` 的"合格卖空标的清单"具体范围与是否存在报升规则（uptick rule）未能确认。** 本次抓到的《交易与会员规程》只确认了"卖空须标记+须已借入证券覆盖"（备兑卖空），但完整的 Short Selling Regulations 全文本次未抓取，`enum` 暂定 `restricted_list` 属推断，下次应补抓该规则原文核实。
+- **`sa-tadawul.indices` 的 TASI（塔达吾尔全股指数）自身基日/基点未在官方《指数方法论》文档中找到明确数字**（该文档只给出了其下 GICS 行业分类指数的基日 2017年1月8日），故 `tasi` 条目的 `base_date`/`base_point` 留空，与常见的"TASI基日1985年"印象不同——按铁律不采纳未经核实的记忆数字，下次应找 Saudi Exchange 官方指数说明页或更早版本的方法论文档核实。
+
 <!-- BEGIN:GENERATED auto-issues -->
 - `cn-sse` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `cn-sse` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
@@ -42,6 +48,8 @@
 - `jp-jpx` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 制度变革风险（regulatory_change_risk_note）— confidence: low
+- `sa-tadawul` 基本信息 / 自身是否上市（self_listed）— confidence: low
+- `sa-tadawul` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `us-nyse` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `us-nyse` 市场结构与交易机制 / 订单类型（order_types）— confidence: low
 - `us-nyse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
