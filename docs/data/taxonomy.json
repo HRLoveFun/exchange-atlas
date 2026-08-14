@@ -107,7 +107,7 @@
           "volatility": "volatile",
           "en_required": false,
           "enum_ref": null,
-          "in_matrix": "overview"
+          "in_matrix": false
         },
         {
           "kind": "leaf",
@@ -117,7 +117,7 @@
           "volatility": "volatile",
           "en_required": false,
           "enum_ref": null,
-          "in_matrix": "overview"
+          "in_matrix": false
         },
         {
           "kind": "leaf",
@@ -186,7 +186,7 @@
           "volatility": "stable",
           "en_required": true,
           "enum_ref": null,
-          "in_matrix": false
+          "in_matrix": "regulation"
         },
         {
           "kind": "leaf",
@@ -206,7 +206,7 @@
           "volatility": "moderate",
           "en_required": true,
           "enum_ref": null,
-          "in_matrix": false
+          "in_matrix": "regulation"
         },
         {
           "kind": "leaf",
@@ -216,7 +216,7 @@
           "volatility": "moderate",
           "en_required": false,
           "enum_ref": null,
-          "in_matrix": "regulation"
+          "in_matrix": false
         },
         {
           "kind": "leaf",
@@ -411,7 +411,7 @@
           "volatility": "moderate",
           "en_required": true,
           "enum_ref": null,
-          "in_matrix": false
+          "in_matrix": "trading_mechanism"
         },
         {
           "kind": "leaf",
@@ -551,7 +551,7 @@
           "volatility": "moderate",
           "en_required": true,
           "enum_ref": null,
-          "in_matrix": false
+          "in_matrix": "trading_mechanism"
         },
         {
           "kind": "leaf",
@@ -908,7 +908,7 @@
           "volatility": "moderate",
           "en_required": false,
           "enum_ref": null,
-          "in_matrix": "overview"
+          "in_matrix": false
         },
         {
           "kind": "leaf",
@@ -918,7 +918,7 @@
           "volatility": "stable",
           "en_required": false,
           "enum_ref": null,
-          "in_matrix": false
+          "in_matrix": "overview"
         },
         {
           "kind": "leaf",
@@ -1036,7 +1036,7 @@
           "volatility": "moderate",
           "en_required": false,
           "enum_ref": null,
-          "in_matrix": false
+          "in_matrix": "costs_taxes"
         },
         {
           "kind": "leaf",
@@ -1086,7 +1086,7 @@
           "volatility": "volatile",
           "en_required": false,
           "enum_ref": null,
-          "in_matrix": "costs_taxes"
+          "in_matrix": false
         },
         {
           "kind": "leaf",
@@ -1096,7 +1096,7 @@
           "volatility": "volatile",
           "en_required": false,
           "enum_ref": null,
-          "in_matrix": "costs_taxes"
+          "in_matrix": false
         },
         {
           "kind": "leaf",

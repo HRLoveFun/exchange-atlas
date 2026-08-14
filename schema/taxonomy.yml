@@ -133,12 +133,10 @@ chapters:
         label_zh: 总市值（十亿美元）
         label_en: Market Cap (USD bn)
         volatility: volatile
-        in_matrix: overview
       - id: listed_companies_count
         label_zh: 上市公司数量
         label_en: Listed Companies
         volatility: volatile
-        in_matrix: overview
       - id: annual_turnover_usd_bn
         label_zh: 年成交额（十亿美元）
         label_en: Annual Turnover (USD bn)
@@ -176,6 +174,7 @@ chapters:
         label_en: Self-regulatory Organization
         volatility: stable
         en_required: true
+        in_matrix: regulation
       - id: clearing_regulator
         label_zh: 清算监管机构
         label_en: Clearing Regulator
@@ -187,11 +186,11 @@ chapters:
         volatility: moderate
         en_required: true
         note: "法规名清单写 detail，字段填最核心一部的名称"
+        in_matrix: regulation
       - id: foreign_ownership_limit
         label_zh: 外资准入与持股比例限制
         label_en: Foreign Ownership Limit
         volatility: moderate
-        in_matrix: regulation
       - id: capital_controls
         label_zh: 资本管制与外汇管制
         label_en: Capital & FX Controls
@@ -264,6 +263,7 @@ chapters:
         label_en: Order Types
         volatility: moderate
         en_required: true
+        in_matrix: trading_mechanism
       - id: tick_size
         label_zh: 最小报价单位
         label_en: Tick Size
@@ -338,6 +338,7 @@ chapters:
         label_en: Market Maker Scheme
         volatility: moderate
         en_required: true
+        in_matrix: trading_mechanism
       - id: connect_schemes
         label_zh: 互联互通/跨境安排
         label_en: Connect / Cross-border Schemes
@@ -496,11 +497,11 @@ chapters:
         label_zh: 外资参与通道
         label_en: Foreign Access Channel
         volatility: moderate
-        in_matrix: overview
       - id: membership_structure
         label_zh: 会员体系
         label_en: Membership Structure
         volatility: stable
+        in_matrix: overview
       - id: broker_landscape
         label_zh: 经纪商结构
         label_en: Broker Landscape
@@ -560,6 +561,7 @@ chapters:
         label_zh: 交易所费用
         label_en: Exchange Fees
         volatility: moderate
+        in_matrix: costs_taxes
       - id: clearing_fees
         label_zh: 清算费用
         label_en: Clearing Fees
@@ -581,12 +583,10 @@ chapters:
         label_zh: 资本利得税
         label_en: Capital Gains Tax
         volatility: volatile
-        in_matrix: costs_taxes
       - id: dividend_withholding_tax
         label_zh: 股息预扣税
         label_en: Dividend Withholding Tax
         volatility: volatile
-        in_matrix: costs_taxes
       - id: implicit_costs_note
         label_zh: 隐性成本
         label_en: Implicit Costs
