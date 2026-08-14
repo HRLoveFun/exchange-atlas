@@ -32,6 +32,9 @@
 24. **`uk-lse` 的 `Admission and Disclosure Standards`（LSE官网自订说明文档，标注生效日期2021年1月）与 `UKLR`（FCA Handbook，标注最后更新2026年4月）两份同时在用的官方来源之间存在术语版本不一致**：前者仍使用"premium or standard listing"描述官方名册（Official List）内部分级，这是2024年7月UKLR改革（单一"equity shares (commercial companies)"类别取代Premium/Standard两级架构）之前的旧术语；后者已完全反映新架构。这意味着交易所自身面向市场参与者的说明文档，尚未同步更新以反映监管层面的规则变革——`uk-lse.yml` 的 `listing.boards` 与 `listing.review_system` 两处均已按新（UKLR）口径填写并在注释中标注了这个版本差异，但如果后续需要再次引用 Admission and Disclosure Standards 文档里涉及"Official List"分级的具体条款，需要留意这份文档本身的用语可能滞后于监管现状，不能机械照抄。
 25. **`organization_form` 受控词表的四个值（公司制上市/公司制未上市/会员制/国有事业单位制）覆盖不了「公法机构由独立私法运营公司运营」这第五种模式，`de-xetra` 是首个真实样本。** 法兰克福证券交易所（FWB）官方原文明确写道"a stock exchange, as a public law institution with limited legal capacity, cannot act as a legal entity under private law"——FWB 本身不是公司，运营公司（Trägerin）是另一层法律实体 Deutsche Börse AG。这与同集团 `de-eurex`（Eurex Deutschland，私法主体的公司，归入 `demutualized_unlisted`）是两种不同的法律形式，即使 `group_id` 相同；也不宜归为「国有事业单位制」（运营公司是跨国上市公司而非德国政府直接运营的国企），也不是「会员制」（1808年后即为公法机构而非会员合伙关系）。`de-xetra.yml` 的 `overview.organization_form` 已如实留空 `enum`、只写文字描述，不强行套用。与第3条（`review_system` 枚举退化为自由文本）性质相同：不是"这一个字段该不该进矩阵"的问题，而是受控词表本身需要评估是否新增一个"公法机构+独立运营公司"的枚举值，还是继续接受这个矩阵列在个别样本上留空——建议等更多欧陆交易所（如 Wave 2 的 `fr-euronext`）样本到位后一并评估，不要现在就为一个样本改 enums.yml。
 26. **`clearing.settlement_cycle`（结算周期，如 T+2）字段在 `de-xetra` 留空，不是因为不存在而是本次抓取材料未提供可摘引原文。** 欧盟 CSDR 框架下现货股票市场普遍施行 T+2 结算是常识性认知，但本次抓取的《交易所规则》（Börsenordnung）§119 只规定了清算/结算走哪些机构（Eurex Clearing AG/Cboe Clear Europe N.V. 清算、Clearstream Europe AG 结算），没有找到对"T+2"这个具体周期天数的正面陈述；`.cache/de-xetra/` 里也没有专门的结算周期说明页。下次有空应找 Clearstream 官网（`clearstream.com`，本次因 WebSearch 配额耗尽未展开搜索）或 ESMA/CSDR 官方文件核实后回填。
+27. **`sg-sgx` 是本项目第一个「一所同时运营现货+衍生品两条业务线、且只建一个条目」的样本，与第17条（纯衍生品所整章不适用）是不同的适配难题。** Eurex 是单一业务（纯衍生品）的独立实体，整章/整字段可以干脆判"不适用"；SGX-ST（现货）与 SGX-DT（衍生品）是同一「新交所」品牌下两个法人实体，但 v1.0 名单只规划一个 `sg-sgx` 条目覆盖两者（详见 `sg-sgx.yml` 文件顶部注释），于是像 `clearing.delivery_method` 这类字段被迫在"现货不适用交割概念"与"衍生品部分实物/部分现金"两种矛盾的取值之间，只能选一个近似枚举（本次选了 `either` 并在 detail 说明近似之处）。`listing` 章节因为 SGX-ST 现货业务本身有完整上市范式，改为正常按现货业务填写（不套用 Eurex 的整章留空处理）。这提示 `taxonomy.yml` 未来可能需要区分"整章不适用"（衍生品所）与"字段取值因业务线混合而模糊"（一所多业务合并建档）两种不同的不适配模式，等更多"一所多业务"或"多法人合并单条目"样本出现后再评估要不要给 schema 加相应机制。
+28. **`sg-sgx` 现货证券市场的费率表（`costs.exchange_fees`）、技术基础设施整章（`infrastructure`）本次留空，根源是 `www.sgx.com` 主站是 React/Next.js 单页应用（SPA），curl 抓到的全部是约14.5KB的`<title>`空壳，正文靠前端 JS 调 API 渲染——`investorrelations.sgx.com`、`sgxgroup.com` 同样如此（后者返回空壳，前者直接连接超时）。这是继 v0.2 NYSE 时"sec.gov/finra.org/dtcc.com 域名级403"之后，第二种"抓不到"的新模式：不是反爬拒绝，是内容压根不在服务端渲染的 HTML 里。规则手册子域名 `rulebook.sgx.com` 完全不受影响（服务端渲染，全部可抓），公司概况/费率/技术基础设施类页面若确实只能在主站找到，需要专门研究能否命中 SGX 主站背后的 API 端点（如浏览器 devtools 抓包看 XHR 请求），或找年报/监管备案文件替代，下次接手 `sg-sgx` 补全时优先看这条。
+29. **`sg-sgx` 上市规则手册里发现了一个此前完全不知道的第三上市板块「Global Listing Board」**（rulebook.sgx.com 导航栏与 Mainboard/Catalist 并列），准入门槛与定义章节大量绑定"Nasdaq"（如"Nasdaq Listing Rules"），推断是专为已在 Nasdaq 上市公司申请在 SGX 双重上市设计的新机制，与本次 WebSearch 到的"MAS 正推动 SGX-Nasdaq 双重上市新规"背景吻合。但该板块具体启用/生效日期本次未找到官方原文确认（`listing.boards` 里对应条目 `launched_year` 留空），且原 Mainboard 退市规则中的「Watch-List」整章（Part V，规则1310-1315）已于2025年10月29日被删除、删除后是否有替代的财务/流动性退市触发机制本次也未核实（`listing.delisting_transition_period` 留空并记录了这一点）——这两处短期内发生的结构性变动，建议下次有空时专门核实清楚，可能牵涉到新交所上市制度一次实质性改革，值得单独调查而不只是顺手记一笔。
 
 ## 具体数据悬案
 
@@ -57,6 +60,8 @@
 - `jp-jpx` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 制度变革风险（regulatory_change_risk_note）— confidence: low
+- `sg-sgx` 上市、持续监管与退市 / 停牌/复牌规则（suspension_resumption）— confidence: low
+- `sg-sgx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `us-nyse` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `us-nyse` 市场结构与交易机制 / 订单类型（order_types）— confidence: low
 - `us-nyse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
