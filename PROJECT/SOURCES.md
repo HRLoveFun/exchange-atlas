@@ -173,6 +173,30 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `finance.sina.com.cn` | 第三方（财经媒体，全文转载深交所 2016-01-07 官方通知原文） | zh | curl 需按 GBK 解码（非 UTF-8），常规 UA 200 | 用于 circuit_breaker 字段：本次会话未抓到 szse.cn 自己的通知原页（WebSearch 未命中该页面的直链），退而用新浪财经转载的通知全文作为来源，quote 摘的是被转载的深交所官方通知原文本身，但因转载渠道是第三方，confidence 按铁律封顶 medium，不因转载内容是官方原文而破例标 high
   - 三大交易所公告确认指数熔断制度暂停实施: http://finance.sina.com.cn/stock/y/20160107/223324126797.shtml
 
+### 伦敦证券交易所 London Stock Exchange (LSE) `uk-lse`
+- `londonstockexchange.com`（`www.` 主站） | 官方 | en | ⚠️ **纯 JS 单页应用（SPA）**，curl 只能拿到空壳 HTML（标题恒为「London Stock Exchange \| London Stock Exchange」，正文为空，四个不同路径抓回的文件字节数完全相同可资验证）——与 SOURCES.md 里 `hsi.com.hk` 是同一类问题；`/discover/who-we-are`、`/discover/london-stock-exchange-group`、主板首页、Retail Broker Order Book 页均属此类，本次未能从这些 URL 拿到实质内容，改用下面 `docs.londonstockexchange.com`（静态文档子域）与 `lseg.com`（集团官网，非 SPA）替代 | —
+- `docs.londonstockexchange.com` | 官方（静态文档子域，与主站 SPA 不同，curl 可正常抓取） | en | curl 常规 UA 200，未见反爬 | 交易规则/交易系统权威技术文档
+  - Admission and Disclosure Standards（准入与披露标准）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf
+  - MIT201 – Guide to the Trading System Issue 15.8（交易时段/撮合原则/订单类型权威技术文档）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf
+  - Maintaining orderly markets（熔断/价格监控扩展 Price Monitoring Extension 说明）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/maintaining-orderly-markets.pdf
+  - Rules of the London Stock Exchange（Rulebook，Effective 5 February 2024，会员/交易参与者体系权威规则手册）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/rules-of-the-london-stock-exchange-effective-5-february-2024.pdf
+  - AIM Rules for Companies（January 2026，AIM 板块上市与持续义务规则）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf
+  - Fees for Issuers（Effective 01 January 2026，主板/AIM 发行人年费）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/fees-for-issuers-jan-2026-01.pdf
+  - Trading Services Price List（Excludes TRADEcho，Effective 01 January 2025，交易费率表）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/trading-services-price-list-january-2025.pdf
+- `lseg.com`（集团官网，与 `www.londonstockexchange.com` 是不同站点，非 SPA） | 官方（母公司 London Stock Exchange Group plc） | en | curl 常规 UA 200，未见反爬 | 历史沿革、清算（LCH）、指数方法论（FTSE Russell）、集团财报
+  - The history of LSEG（历史沿革，含1801年正式成立、1986 Big Bang、2001年自身挂牌上市、2007年与 Borsa Italiana 合并组成 LSEG 集团等关键节点）: https://www.lseg.com/en/about-us/history
+  - About LCH（清算/中央对手方）: https://www.lseg.com/en/post-trade/clearing/about-lch
+  - LSE 24（延长交易时段计划，2026年新闻稿，压测点"独立监管框架下机制持续演进"的证据）: https://www.lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-to-launch-lse-24
+  - FTSE UK Index Series Ground Rules（指数编制方法论）PDF: https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse-uk-index-series-ground-rules.pdf
+  - LSEG plc 2025年度业绩初步公告（Preliminary Results RNS，市值/财务数据）PDF: https://www.lseg.com/content/dam/lseg/en_us/documents/investor-relations/financial-results/preliminary-results/rns/lseg-2025-preliminary-results-rns-26feb2026.pdf
+- `fca.org.uk` | 监管 | en | curl 常规 UA 200，未见反爬 | 英国金融行为监管局（FCA），脱欧后 UK Listing Rules 与卖空监管的独立规则制定机关——压测点核心来源
+  - UKLR（UK Listing Rules）sourcebook 全文 PDF: https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf
+  - Short selling（卖空监管，SSR 2025 新制度说明）: https://www.fca.org.uk/markets/short-selling
+  - About T+1 settlement（结算周期改革现状，关键事实：本次会话核实时点 2026-08-14，英国仍是T+2，T+1定于2027年10月11日才生效，目前尚未发生）: https://www.fca.org.uk/markets/about-t1-settlement
+- `euroclear.com` | 官方（清算/托管机构） | en | ⚠️ curl 常规 UA 对根域名与内容页均返回 403（间隔12秒重试后仍 403，非限流，是真实拦截），未能抓到——Euroclear UK & International（原 CREST）作为 LSE 中央证券存管机构的角色改用第三方转述来源确认，见下 | —
+- `gov.uk` | 监管（税务机关 HMRC） | en | curl 常规 UA 200，未见反爬 | 印花税储备税（SDRT）官方说明，含 CREST 代收 SDRT 的机制描述
+  - Stamp Duty and Stamp Duty Reserve Tax: https://www.gov.uk/government/publications/stamp-duty-and-stamp-duty-reserve-tax/stamp-duty-and-stamp-duty-reserve-tax
+
 ---
 
 ## 探测记录（v0.0 可达性探针，2026-08-12）

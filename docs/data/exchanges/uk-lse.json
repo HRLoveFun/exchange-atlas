@@ -1,0 +1,1476 @@
+{
+  "id": "uk-lse",
+  "name_zh": "伦敦证券交易所",
+  "name_native": {
+    "en": "London Stock Exchange (LSE)"
+  },
+  "official_languages": [
+    "en"
+  ],
+  "source_lang": "en",
+  "group_id": "lseg-group",
+  "region": "europe",
+  "tier": "extended",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "Europe/London (GMT/BST)",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dst_rule": {
+        "zh": "实行英国夏令时（British Summer Time, BST），在格林尼治标准时间（GMT）与BST之间切换",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "founded_year": {
+        "zh": "1801（第一家受监管的交易所在伦敦成立，现代意义上的证券交易所由此诞生）；渊源可上溯至1698年 Jonathan's Coffee House 内 John Castaing 开始发布证券商品价格清单",
+        "en": "1801 (the first regulated exchange, marking the birth of the modern Stock Exchange); traces its origins to 1698, when John Castaing began issuing price lists at Jonathan's Coffee House",
+        "detail": "LSEG 官网历史时间线把「the modern Stock Exchange」的诞生明确定在1801年，早于此的\n1698年只是\"渊源\"（John Castaing 在 Jonathan's Coffee House 发布《The Course of the\nExchange and other things》价格清单），与 NYSE 官网对1792年 Buttonwood Agreement 之前\n1600年代贸易活动\"渊源不算正式成立\"的处理方式是同一套叙事逻辑。\n",
+        "sources": [
+          {
+            "title": "The history of LSEG（官网）",
+            "url": "https://www.lseg.com/en/about-us/history",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "1698\nAt Jonathan's Coffee House, John Castaing begins issuing a list of stock and commodity prices called 'The Course of the Exchange and other things'.\n1801\nThe first regulated exchange comes into existence in London and the modern Stock Exchange is born.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "history": {
+        "zh": "1801年现代证券交易所成立；1986年英国金融“大爆炸”（Big Bang）改革实现去监管化；1995年创立AIM（另类投资市场）；2001年7月LSE本身成为在自己市场挂牌的公众公司；2007年10月与米兰证券交易所（Borsa Italiana）合并组成伦敦证券交易所集团（LSEG）；2009年收购MillenniumIT（现交易系统Millennium Exchange的技术基础）并取得泛欧交易平台Turquoise的多数股权；2013年取得清算所LCH集团的多数股权；2021年1月完成对数据商Refinitiv的全股份收购",
+        "en": "The modern Stock Exchange was born in 1801; the UK market was deregulated in the 1986 'Big Bang'; AIM (Alternative Investment Market) was founded in 1995; in July 2001 London Stock Exchange became a public company listed on its own market; in October 2007 it merged with Milan's Borsa Italiana to form London Stock Exchange Group (LSEG); MillenniumIT was acquired in 2009 (the technology base for today's Millennium Exchange) alongside a majority stake in pan-European venue Turquoise; a majority stake in LCH Group was acquired in 2013; the all-share acquisition of Refinitiv completed in January 2021",
+        "detail": "2007年10月的 Borsa Italiana 合并是本文件 group_id 判断的直接依据（见文件头部注释）；\n2001年\"自身上市\"这一事件与2007年集团重组后的当前挂牌主体关系，见下 self_listed 字段\n的详细说明。\n",
+        "sources": [
+          {
+            "title": "The history of LSEG（官网）",
+            "url": "https://www.lseg.com/en/about-us/history",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "1986\nThe UK market is deregulated in the 'Big Bang'.\n1995\nAIM, London Stock Exchange's Alternative Investment Market, is founded... 2000 - 2009\nJuly 2001\nLondon Stock Exchange becomes a public company listed on its own market.\nOctober 2007\nLondon Stock Exchange and Borsa Italiana merge, creating London Stock Exchange Group (LSEG).",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "organization_form": {
+        "enum": "demutualized_listed",
+        "zh": "公司制（2001年7月由会员制改制为公众公司）",
+        "en": "Demutualized (became a public company in July 2001)",
+        "detail": "改制后几经集团重组（见 history），现处于 LSEG 集团架构之下。",
+        "sources": [
+          {
+            "title": "The history of LSEG（官网）",
+            "url": "https://www.lseg.com/en/about-us/history",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "July 2001\nLondon Stock Exchange becomes a public company listed on its own market.",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "self_listed": {
+        "enum": "partial",
+        "zh": "2001年7月LSE本身曾作为独立公众公司在自己市场挂牌；2007年10月与Borsa Italiana合并组成LSEG集团后，当前的挂牌主体是集团控股公司London Stock Exchange Group plc（LSEG plc），而非“伦敦证券交易所”这一运营法人实体本身",
+        "en": "London Stock Exchange itself listed on its own market in July 2001; following the October 2007 merger with Borsa Italiana that formed LSEG, the entity currently listed is the group holding company, London Stock Exchange Group plc, rather than the operating exchange entity itself",
+        "detail": "与 NYSE（现为 ICE 全资子公司，挂牌的是母公司 ICE）是同一种结构性情况：本次抓取的\nLSEG历史页明确了2001年自身上市与2007年合并组建集团两个节点，但未找到LSEG plc当前\n在自身主板具体上市板块/股票代码的独立官方原文（本次会话未专门核实这一点，2025年度\n初步业绩公告 RNS 以每股便士（p）计的每股收益/股息等数据佐证其为公开挂牌公司，但不构成\n对\"在LSE主板挂牌\"这一具体事实的直接原文引用），故 confidence 标 medium 而非 high，\n与 NYSE 的处理方式一致。\n",
+        "sources": [
+          {
+            "title": "The history of LSEG（官网）",
+            "url": "https://www.lseg.com/en/about-us/history",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "July 2001\nLondon Stock Exchange becomes a public company listed on its own market.\nOctober 2007\nLondon Stock Exchange and Borsa Italiana merge, creating London Stock Exchange Group (LSEG).",
+        "confidence": "medium",
+        "verified": "2026-08-14"
+      },
+      "market_cap_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "本次抓取到的是LSEG集团（母公司，含Data & Analytics/FTSE Russell/Post Trade等非交易所业务）合并财务数据，不是LSE交易所本身的挂牌公司总市值统计——为避免用集团口径冒充交易所口径，留空不猜，见 OPEN-QUESTIONS。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "listed_companies_count": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "同 market_cap_usd_bn：LSEG 2025年度初步业绩公告只有集团合并收入（£9,081m，含跨多个非交易所业务板块），未见LSE交易所本身成交额的独立口径，留空不猜。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "global_ranking": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "LSE24新闻稿称集团“三百余年来支持全球社区与经济的金融稳定与增长”（more than 300 years），这是历史悠久性的定性表述，不构成具体排名数据，未采纳为 global_ranking。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_currency": {
+        "zh": "英镑（GBP）为主；国际预托凭证及部分交易所买卖产品（ETP）等品类另有多币种报价（如以Euroclear Bank结算的ETP）",
+        "en": "Primarily GBP; certain segments such as international depositary receipts and some ETPs quote in other currencies (e.g. ETPs settled via Euroclear Bank)",
+        "detail": "推断依据：MIT201交易系统指南 Table 2「Trading Services」列出的品类覆盖及结算安排，未找到对交易货币种类的专门汇总声明，故 confidence 标 medium。",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "quote": null
+      },
+      "settlement_currency": {
+        "zh": "英镑（GBP）为主，经CREST（由Euroclear UK & International运营）结算；部分品类另有多币种结算安排",
+        "en": "Primarily GBP, settled via CREST (operated by Euroclear UK & International); certain instruments have multi-currency settlement arrangements",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "金融行为监管局（Financial Conduct Authority, FCA）——作为英国上市监管机关（UK Listing Authority职能），维护官方名册（Official List）并制定UK Listing Rules（UKLR）",
+        "en": "Financial Conduct Authority (FCA) — acts as the UK Listing Authority, maintains the Official List and makes the UK Listing Rules (UKLR)",
+        "detail": "英国脱欧后，FCA以UKLR取代此前直接承接自欧盟《上市指令》体系的Listing Rules框架，2024年7月改革将官方名册下的上市类别由此前的Premium/Standard两级简化为单一“equity shares (commercial companies)”类别（见listing.review_system）。",
+        "sources": [
+          {
+            "title": "Admission and Disclosure Standards（官网，术语表）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook）",
+            "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Official List — the list maintained by the FCA in accordance with section [...] Listing Rules — the Listing Rules of the FCA, which can be found in the FCA Handbook.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "self_regulatory_org": {
+        "zh": "伦敦证券交易所本身作为“认可投资交易所”（Recognised Investment Exchange, RIE），对市场准入交易与市场运作承担一线监管职责，须遵守FCA就RIE制定的监管手册（sourcebook）要求",
+        "en": "London Stock Exchange itself, as a Recognised Investment Exchange (RIE) under UK law, carries front-line responsibility for admission to trading and market operation, subject to the FCA's sourcebook for Recognised Investment Exchanges",
+        "detail": "与 UKLR（FCA作为官方名册/Listing Rules的监管者）是两套并行制度：RIE身份下交易所自身\n是Main Market/AIM/ISM/PSM等市场准入交易的一线监管方（体现在《Admission and\nDisclosure Standards》与《Rules of the London Stock Exchange》两份自订规则中），而\n官方名册（Official List）与上市持续义务由FCA依UKLR直接监管——这是\"交易所自身兼一线\n监管\"（如港交所）与\"纯由外部机构监管\"两种模式之外的第三种组合，与NYSE\"交易所自身\n设专责部门+委托FINRA\"的模式也不相同，值得记入OPEN-QUESTIONS第3条受控词表讨论增加\n一个真实样本。\n",
+        "sources": [
+          {
+            "title": "Admission and Disclosure Standards（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Exchange is a Recognised Investment Exchange under UK law. This means the Exchange must ensure that all securities admitted to trading on its markets, and all dealings in those securities are conducted in accordance with the primary and secondary market regulatory obligations set out in the FCA's sourcebook for Recognised Investment Exchanges.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "clearing_regulator": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "英格兰银行（Bank of England）按常识应是英国中央对手方（CCP）的监管机关（UK EMIR框架下），但本次抓取范围内未找到直接原文确认这一点，按铁律不采纳未核实的印象，留空，见 OPEN-QUESTIONS。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "core_laws": {
+        "zh": "《2000年金融服务与市场法》（Financial Services and Markets Act 2000, FSMA）",
+        "en": "Financial Services and Markets Act 2000 (FSMA)",
+        "detail": "UKLR、DTR（Disclosure Guidance and Transparency Rules）、PRM（Prospectus Rules）等FCA Handbook内的具体规则手册均以FSMA为上位法律依据。",
+        "sources": [
+          {
+            "title": "Admission and Disclosure Standards（官网，术语表）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "FSMA — Financial Services and Markets Act 2000.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "disclosure_requirements": {
+        "zh": "持续信息披露适用《披露指引与透明度规则》（Disclosure Guidance and Transparency Rules, DTR），与UKLR并列为FCA Handbook内的独立规则手册",
+        "en": "Ongoing disclosure obligations are set out in the Disclosure Guidance and Transparency Rules sourcebook (DTR), a separate FCA Handbook module alongside UKLR",
+        "detail": "具体披露频率/语言/渠道等细节本次未逐条核实DTR原文，只确认了该规则手册的存在与地位。",
+        "sources": [
+          {
+            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook）",
+            "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "[Note: Other parts of the Handbook that may also be relevant to issuers or sponsors include the Disclosure Guidance and Transparency Rules sourcebook (DTR), the Prospectus Rules: Admission to Trading on a Regulated Market sourcebook (PRM)...",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网，Table 2 Trading Services）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "uk-lse-equities",
+          "category": "equity",
+          "name_zh": "普通股",
+          "name_native": "Ordinary Shares",
+          "board": "Main Market / AIM",
+          "description": "由SETS（流动性较高品种，订单簿+可执行报价）与SETSqx（流动性较低、含AIM部分品种，做市商报价+定时集合竞价）两套交易服务承载"
+        },
+        {
+          "id": "uk-lse-drs",
+          "category": "equity",
+          "name_zh": "国际存托凭证",
+          "name_native": "Depositary Receipts / International Equity",
+          "board": "International Order Book (IOB)",
+          "description": "国际预托凭证与国际股票，通过International Order Book (IOB)交易服务承载"
+        },
+        {
+          "id": "uk-lse-etps",
+          "category": "fund",
+          "name_zh": "交易所买卖产品",
+          "name_native": "Exchange Traded Products (ETPs)",
+          "description": "涵盖ETF、大宗商品及票据类ETP，其中经Euroclear Bank结算的品种单列为独立交易服务"
+        },
+        {
+          "id": "uk-lse-structured",
+          "category": "structured",
+          "name_zh": "结构性产品/权证",
+          "name_native": "Securitised Derivatives",
+          "description": "备兑权证等结构性产品，Securitised Derivatives交易服务承载"
+        },
+        {
+          "id": "uk-lse-bonds",
+          "category": "bond",
+          "name_zh": "债券",
+          "name_native": "Fixed Income Securities / Gilts",
+          "description": "英国国债（Gilts）及公司债（Fixed Interest/SEAQ）；部分品种进入电子订单簿（Order book for Fixed Income Securities），部分仅作场外交易报告（TRADEcho only）"
+        },
+        {
+          "id": "uk-lse-funds",
+          "category": "fund",
+          "name_zh": "开放式基金",
+          "name_native": "Open Ended Funds (NAV Trading)",
+          "description": "UCITS开放式基金，按每日净值单一集合竞价（11:00 GMT）执行"
+        },
+        {
+          "id": "uk-lse-private",
+          "category": "equity",
+          "name_zh": "私募证券",
+          "name_native": "Private Securities Market",
+          "description": "依托Private Intermittent Securities and Capital Exchange System (PISCES)框架，为私募公司股份提供间歇性交易安排——2025年12月MIT201新增，是较新的市场品类"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "官网技术文档确认存在“Pre-trading”与“Opening auction call”两个预定交易状态，但未找到对应的具体钟点时间（该时间定义在未抓取的Business Parameters文档内），留空不猜。",
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null,
+          "sources": null
+        },
+        "continuous_am": {
+          "zh": "无独立上午/下午划分，开盘集合竞价后即进入全天单一连续交易时段，见 continuous_pm",
+          "en": "No separate morning/afternoon split; a single continuous trading session runs for the full day following the opening auction — see continuous_pm",
+          "sources": [
+            {
+              "title": "London Stock Exchange to launch LSE 24（LSEG新闻稿，2026）",
+              "url": "https://www.lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-to-launch-lse-24",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "confidence": "medium",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "lunch_break": {
+          "zh": "无",
+          "en": "None",
+          "sources": [
+            {
+              "title": "London Stock Exchange to launch LSE 24（LSEG新闻稿，2026）",
+              "url": "https://www.lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-to-launch-lse-24",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "confidence": "medium",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "continuous_pm": {
+          "zh": "主板核心连续交易时段为08:00至16:30（无午休）",
+          "en": "Main Market continuous trading runs from 08:00 to 16:30 (no lunch break)",
+          "sources": [
+            {
+              "title": "London Stock Exchange to launch LSE 24（LSEG新闻稿，2026）",
+              "url": "https://www.lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-to-launch-lse-24",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "Trading will continue on the London Stock Exchange's Main Market between 08:00 and 16:30.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "after_market": {
+          "zh": "无独立盘后连续交易时段；收盘集合竞价后另有短暂的收盘价交叉时段（Closing Price Crossing Session, CPX），仅允许以收盘价继续撮合剩余订单，非独立盘后连续交易，见closing_mechanism",
+          "en": "No separate after-hours continuous session; a brief Closing Price Crossing Session (CPX) follows the closing auction, allowing only executions at the closing auction price — not an independent after-hours session, see closing_mechanism",
+          "sources": [
+            {
+              "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+              "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "CPX is a short, modified regular trading session that follows the closing auction where executions can only be executed at the closing auction price.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "night_session": {
+          "zh": "无（拟建中的LSE 24是与Main Market分开运营的独立延长交易时段计划，17:00至次日07:50、18:30-19:00暂停做日终处理，尚待监管批准，2026年内向客户开放测试，首个资产类别ETP计划2027上半年上线，非现行机制）",
+          "en": "None (LSE 24, a planned extended-hours venue operating separately from the Main Market, would run 17:00-07:50 with an 18:30-19:00 pause for End of Day processing; subject to regulatory approval, client testing by end of 2026, first asset class ETPs targeted H1 2027 — not yet in operation)",
+          "sources": [
+            {
+              "title": "London Stock Exchange to launch LSE 24（LSEG新闻稿，2026）",
+              "url": "https://www.lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-to-launch-lse-24",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "London Stock Exchange 24 will operate from 17:00 to 07:50 with a 30-minute pause between 18:30 and 19:00 to apply End of Day processes. Trading will continue on the London Stock Exchange's Main Market between 08:00 and 16:30.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        }
+      },
+      "holidays_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘集合竞价（Opening Auction Call）",
+        "en": "Opening Auction Call",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Order book instruments generally follow a trading day consisting of an opening auction, regular trading and, where applicable, a closing auction followed by a closing price crossing session.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价，随后进入短暂的收盘价交叉时段（CPX），允许以收盘价继续撮合剩余订单",
+        "en": "Closing Auction, followed by a brief Closing Price Crossing Session (CPX) allowing continued execution at the closing auction price",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "CPX is a short, modified regular trading session that follows the closing auction where executions can only be executed at the closing auction price.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "价格优先原则（Millennium Exchange以价格优先为基础运作）；同价位内展示订单优先于非展示订单（冰山订单非展示部分＞完全隐藏订单＞中间价挂钩订单），除冰山订单非展示部分外，各类别内部再按提交时间优先排序",
+        "en": "Price priority (Millennium Exchange operates on a price priority basis); at the same price, displayed order portions take precedence over non-displayed portions (iceberg non-display > fully hidden orders > mid-price pegged orders), each category then time-prioritised except for the non-displayed iceberg portion",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Millennium Exchange operates on a price priority basis. Displayed parts of orders take precedence over non-displayed parts at any price point. With non-display portions of icebergs taking precedence over fully Hidden Orders, which in turn take precedence over Mid-Price Pegged Orders.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "order_types": {
+        "zh": "限价订单（Limit Order）、市价订单（Market Order，无价格优先于所有限价订单）、止损订单/止损限价订单（Stop/Stop Limit Order）、冰山订单（Iceberg Order，仅展示部分数量）、隐藏限价订单（Hidden Limit Order）、中间价挂钩订单（Mid-Price Pegged Order，仅在盘中以买卖中间价成交）",
+        "en": "Limit Order, Market Order (unpriced, has price priority over all priced orders), Stop / Stop Limit Order, Iceberg Order (displays only a portion of total volume), Hidden Limit Order (non-displayed), Mid-Price Pegged Order (executes only at the mid BID/OFFER price during regular trading)",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "A Market Order is un-priced, and therefore not price forming, but has price priority over all priced orders... An Iceberg Order publicly displays only a portion of its total volume that is available for execution.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "tick_size": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "确认档位分静态（static，固定值）与动态（dynamic，按订单意向价格决定）两种regime，但具体档位数值表定义在未抓取的Business Parameters文档内，留空不猜。",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "board_lot_size": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "本次抓取的技术文档未见“board lot/一手”这类整手交易单位的表述，SETS为完全电子化订单簿、以单股为基本交易单位，但未找到官方原文明确声明“无整手概念”，按铁律不主动断言，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "odd_lot_handling": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "dynamic_reference",
+          "zh": "非固定百分比涨跌停板，而是逐证券（security-by-security）的价格监控机制——静态价格监控（相对开盘集合竞价价格的偏离阈值）与动态价格监控（相对最近成交价的偏离阈值）触发后，转入波动性拍卖重新形成价格，而非直接停牌",
+          "en": "Not a fixed percentage limit-up/limit-down band; instead a security-by-security price monitoring mechanism — static price monitoring (deviation from the opening auction price) and dynamic price monitoring (deviation from the last traded price) trigger a volatility auction to re-form the price, rather than a straight halt",
+          "sources": [
+            {
+              "title": "Maintaining orderly markets（官网）",
+              "url": "https://docs.londonstockexchange.com/sites/default/files/documents/maintaining-orderly-markets.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "Not all circuit breakers work the same way. In the US, market-wide circuit breakers enforce a trading pause for all stocks for 15 minutes. London Stock Exchange's price monitoring functionality is constantly evolving to respond to clients' changing needs and instead, employs a security-by-security price monitoring mechanism.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "detail": null
+        },
+        "main_board": {
+          "zh": "以富时100成分股为例：静态价格监控阈值8%（相对上一次集合竞价成交价），动态价格监控阈值3%（相对最近成交价，触发5分钟波动性拍卖，含最多一次2分钟市价订单延期）；次一流动性梯队（如LSE行业分类FS10）静态阈值10%、动态阈值5%；富时100盘中/收盘/EDSP拍卖的动态阈值比常规交易更紧（FE10为1%，FS10为3%）",
+          "en": "For FTSE 100 constituents: static price monitoring threshold 8% (vs. last auction uncrossing price), dynamic threshold 3% (vs. last traded price, triggering a 5-minute volatility auction with up to one 2-minute Market Order extension); the next liquidity tier (e.g. LSE sector FS10) uses 10% static / 5% dynamic; FTSE 100 intraday/closing/EDSP auctions use tighter dynamic thresholds than regular trading (1% for FE10, 3% for FS10)",
+          "sources": [
+            {
+              "title": "Maintaining orderly markets（官网）",
+              "url": "https://docs.londonstockexchange.com/sites/default/files/documents/maintaining-orderly-markets.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "For the most liquid stocks in the FTSE 100 stocks (e.g. London Stock Exchange sector FE10): – An 8% (Static Price Monitoring %) move from the last auction uncross... would cause a Static Limit volatility auction with 5-minute duration... – Any single order which moves market 3% (Dynamic Price Monitoring %) from last order book traded price would cause a volatility auction of 5-minute duration... For the next most liquid stocks in the FTSE 100 (e.g. London Stock Exchange sector FS10), the Static Price Monitoring % is 10%, and the Dynamic Price Monitoring % is 5%.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "other_boards": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "AIM等其他板块/品种的具体阈值本次未在面向客户的说明性文档中找到，完整数值表在未抓取的Business Parameters文档内，留空不猜。",
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null,
+          "sources": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "stock_level",
+        "zh": "个股级价格监控机制（无美股式全市场熔断）：不同于美国基于标普500指数跌幅触发的全市场熔断（暂停全部股票交易15分钟），伦敦证券交易所采用逐证券的价格监控功能",
+        "en": "Stock-level price monitoring mechanism (no US-style market-wide circuit breaker): unlike US market-wide circuit breakers that pause all stocks for 15 minutes based on S&P 500 declines, LSE employs a security-by-security price monitoring mechanism",
+        "detail": "同一份说明文档明确将美式全市场熔断作为对照系统提及，是本项目目前少数能在同一原文里直接对比两种机制设计哲学差异的样本。",
+        "sources": [
+          {
+            "title": "Maintaining orderly markets（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/maintaining-orderly-markets.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "In the US, market-wide circuit breakers enforce a trading pause for all stocks for 15 minutes. London Stock Exchange's price monitoring functionality is constantly evolving to respond to clients' changing needs and instead, employs a security-by-security price monitoring mechanism.",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "volatility_interruption": {
+        "zh": "静态价格监控（Static Price Monitoring）与动态价格监控（Dynamic Price Monitoring）触发后转入波动性拍卖（volatility auction），价格重新形成后恢复常规交易；每次拍卖及延期后另设最长30秒随机时间",
+        "en": "Static and Dynamic Price Monitoring trigger a volatility auction; once the price re-forms, regular trading resumes; each auction/extension is followed by a random period of up to 30 seconds",
+        "sources": [
+          {
+            "title": "Maintaining orderly markets（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/maintaining-orderly-markets.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Circuit breakers are tools that temporarily halt trading activity or delay an auction execution if certain price movement tolerances would be breached. Following the halt, the affected security will be placed into auction allowing a price to be formed in an orderly fashion... Note that each auction and extension is followed by a random period of up to 30 seconds.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "两套并行机制：(1) FCA可依UKLR暂停/取消证券上市（如未达持续义务、市场平稳运行受威胁等，暂停满6个月须与FCA讨论是否取消上市）；(2) 交易所自身的技术性市场干预（Service Interruptions Protocol）——因系统故障等严重事件，可对受影响证券实施Halt（禁止新订单但可撤单）、Suspension（订单簿冻结，禁止新增和撤销）或Halt and Close（当日不再恢复交易，直接设定收盘价）三种状态之一",
+        "en": "Two parallel mechanisms: (1) the FCA may suspend/cancel a listing under UKLR (e.g. failure to meet continuing obligations, threat to orderly market operation; after 6 months of suspension the issuer must discuss cancellation with the FCA); (2) the Exchange's own technical market interventions under its Service Interruptions Protocol — for major system outages, affected securities may be placed into Halt (no new orders, deletions allowed), Market/Partition Suspension (order book frozen, no new orders or deletions) or Halt and Close (trading will not resume that day; a closing price is set)",
+        "sources": [
+          {
+            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook）",
+            "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网，第11章）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "11.4.1 Halt / If London Stock Exchange specifically wishes to prevent further order entry, then it will place the market in a Halt state, which does not allow the entry of new orders... 11.4.2 Market/Partition Suspension... 11.4.3 Halt and Close / This state will be used if London Stock Exchange concludes that there is no prospect of trading resuming on the trading day of the outage.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "intraday_reversal": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "现货市场当日买入证券当日是否可卖出（T+0）本次未找到交易所或FCA的专门表述性原文，按铁律不凭常识填入，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "short_selling": {
+        "enum": "restricted_list",
+        "zh": "《2025年卖空规则》（Short Selling Regulations 2025, SSR 2025）——脱欧后英国自订的独立卖空监管框架，2026年7月13日起正式取代此前“承接”的欧盟《卖空条例》（Regulation (EU) No 236/2012）。持有可报告股票净空头仓位达0.2%阈值须向FCA报告，FCA公布匿名化的汇总净空头仓位（ANSP）；FCA保留在特殊情形下实施限制/禁止卖空的紧急权力",
+        "en": "Short Selling Regulations 2025 (SSR 2025) — the UK's own post-Brexit short-selling framework, which from 13 July 2026 replaced the previously-assimilated EU Short Selling Regulation (Regulation (EU) No 236/2012). Net short positions in reportable shares must be notified to the FCA once the 0.2% threshold is reached; the FCA publishes anonymised Aggregate Net Short Positions (ANSP); the FCA retains emergency powers to restrict or ban short selling in exceptional circumstances",
+        "detail": "压测点核心证据：这是本项目迄今唯一能在同一份原文里直接看到\"英国自订规则明确替换欧盟\n规则、附生效日期\"的案例，比\"脱欧后监管独立\"这个笼统印象具体得多。枚举值选\nrestricted_list（需报告的可报告股票清单机制）而非 restricted_uptick（如美股报升规则），\n因为SSR 2025的核心约束是\"达到净空头仓位阈值须披露\"而非逐笔挂单的报升限制，两者机制\n设计不同，具体触发/豁免细节（稳定化交易、做市商豁免等）未逐条核实。\n",
+        "sources": [
+          {
+            "title": "Short selling（FCA官网）",
+            "url": "https://www.fca.org.uk/markets/short-selling",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The SSR is set out in the Short Selling Regulations 2025 (SSR 2025) and the Short Selling Rules Sourcebook within the FCA Handbook. These form the legal and regulatory framework for short selling in the UK. The new SSR applies from 13 July 2026. It replaces the assimilated EU Short Selling Regulation (Regulation (EU) No 236/2012)... The FCA publishes daily current and historic ANSP reports. These show the aggregated net short positions in companies based on reported net short positions above the 0.2% threshold.",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "block_trade": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dark_pool": {
+        "zh": "本所自身订单簿（SETS）内含非展示/隐藏订单类型（冰山订单非展示部分、隐藏限价订单、中间价挂钩订单），可在同一订单簿内实现部分非展示流动性；集团内另设独立法人实体Turquoise（LSEG于2009年12月取得多数股权的泛欧交易平台）专营暗池/多边交易设施业务，但那是与本交易所不同的法人实体，不计入本字段",
+        "en": "The Exchange's own order book (SETS) supports non-displayed/hidden order types (iceberg non-display portions, Hidden Limit Orders, Mid-Price Pegged Orders), enabling some non-displayed liquidity within the same book; a separate LSEG group entity, Turquoise (majority stake acquired December 2009), operates as a dedicated pan-European dark/MTF venue, but it is a distinct legal entity from this Exchange and is not counted under this field",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "The history of LSEG（官网）",
+            "url": "https://www.lseg.com/en/about-us/history",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "December 2009\nLSEG acquires a majority stake in Turquoise, the pan-European equities trading platform, which it owns in partnership with leading global investment banks.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "market_maker_scheme": {
+        "zh": "分订单驱动与报价驱动两套做市商制度：SETS/IOB/证券化衍生品/固定收益订单簿等订单驱动品种，注册做市商以可执行报价（Executable Quotes）参与；SETSqx/SEAQ/欧洲报价服务等报价驱动品种，注册做市商以非电子可执行的确定报价（Firm Quotes）参与，且仅具备中央对手方清算资格的会员机构方可注册为报价驱动品种做市商",
+        "en": "Two parallel market maker regimes: order-driven instruments (SETS, IOB, securitised derivatives, fixed income order book) use registered market makers quoting Executable Quotes; quote-driven instruments (SETSqx, SEAQ, European Quoting Service) use registered market makers providing non-electronically-executable Firm Quotes, and only member firms with central counterparty clearing capability may register as quote-driven market makers",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The obligations of market makers in order-driven securities section (rules 4100-4110.6) covers trading services SETS, IOB, securitised derivatives and order book for fixed income securities where registered market makers use Executable Quotes (EQ) to display their quote. The obligations of market makers in quote driven securities section (rules 4200 – 4334.3) covers trading services SETSqx, SEAQ and European Quoting Service where registered market makers use firm quotes to display their quote. Only member firms that have at least one Member ID that supports central counterparty clearing arrangements are permitted to register to provide firm quotes.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "connect_schemes": {
+        "zh": "深港通式安排：深圳-伦敦互联互通（Shenzhen-London Stock Connect），使境外投资者可通过在伦敦挂牌的存托凭证项目间接投资中国A股，亦使符合条件的英国上市发行人通过存托凭证项目在深圳交易所挂牌、触达中国投资者",
+        "en": "Shenzhen-London Stock Connect: enables international investors to access Chinese A-Shares via a depositary receipt programme listed in London, and enables qualifying UK-listed issuers to be admitted to the Shenzhen Stock Exchange via depositary receipt programmes to access Chinese investors",
+        "sources": [
+          {
+            "title": "Admission and Disclosure Standards（官网，术语表）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Shenzhen-London Stock Connect is a collaboration between the Exchange and the Shenzhen Stock Exchange, which enables (i) investors to access Chinese A-Shares through a depositary receipt programme listed in London; and (ii) qualifying listed issuers, through separate depository receipt programmes, to be admitted to the Shenzhen Stock Exchange and access Chinese investors in Shenzhen.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      }
+    },
+    "listing": {
+      "boards": [
+        {
+          "id": "uk-lse-main-market",
+          "name_zh": "主板",
+          "name_native": "Main Market",
+          "financial_threshold": "股票类证券预期总市值须达至少£3,000万（£30m）；须有至少10%股份于admission后处于公众持有（shares in public hands）；债券类最低£20万，封闭式/开放式投资基金最低£70万",
+          "target_companies": "受监管市场（UK Regulated Market），纳入FCA官方名册（Official List），适用UKLR全套上市与持续监管义务；含官方名册内的Specialist Fund Segment与High Growth Segment两个不纳入官方名册的子板块（见下）",
+          "launched_year": ""
+        },
+        {
+          "id": "uk-lse-aim",
+          "name_zh": "另类投资市场",
+          "name_native": "AIM (Alternative Investment Market)",
+          "financial_threshold": "AIM规则未设最低市值或最低公众持股比例的强制门槛，核心准入条件是必须始终委任一名获认可的保荐人（Nominated Adviser／Nomad）",
+          "target_companies": "面向中小型成长企业；AIM证券不纳入FCA官方名册（Official List），属交易所自身运营的多边交易设施（MTF）而非受监管市场，监管相对UKLR更为灵活",
+          "launched_year": "1995"
+        },
+        {
+          "id": "uk-lse-ism",
+          "name_zh": "国际证券市场",
+          "name_native": "International Securities Market (ISM)",
+          "financial_threshold": "",
+          "target_companies": "面向专业投资者的债券/存托凭证专门市场，是交易所运营的MTF而非受监管市场，证券不纳入官方名册",
+          "launched_year": ""
+        },
+        {
+          "id": "uk-lse-psm",
+          "name_zh": "专业证券市场",
+          "name_native": "Professional Securities Market (PSM)",
+          "financial_threshold": "",
+          "target_companies": "面向专业投资者的债券/存托凭证市场，是交易所运营的英国MTF，但须依《上市规则》第4章完成上市",
+          "launched_year": ""
+        },
+        {
+          "id": "uk-lse-high-growth",
+          "name_zh": "高增长板",
+          "name_native": "High Growth Segment",
+          "financial_threshold": "",
+          "target_companies": "面向暂不满足官方名册资格条件（尤其公众持股比例偏低）、但意图未来申请纳入官方名册的高增长交易型企业；是受监管市场（Main Market）的一部分，但证券不纳入官方名册",
+          "launched_year": ""
+        },
+        {
+          "id": "uk-lse-specialist-fund",
+          "name_zh": "专项基金板",
+          "name_native": "Specialist Fund Segment",
+          "financial_threshold": "",
+          "target_companies": "面向机构、专业及知情投资者的封闭式投资实体；是受监管市场（Main Market）的一部分，但证券不纳入官方名册",
+          "launched_year": ""
+        }
+      ],
+      "review_system": {
+        "zh": "披露为本，2024年7月UKLR改革后以单一“股票证券（商业公司）”类别取代此前Premium/Standard两级架构；申请人须在多类触发事件（如须发布招股说明书、反向收购通函等）委任一名保荐人（Sponsor）向FCA确认其符合UKLR相关要求",
+        "en": "Disclosure-based; following the July 2024 UKLR reform, a single 'equity shares (commercial companies)' category replaced the previous two-tier Premium/Standard structure. Issuers must appoint a Sponsor on multiple trigger events (e.g. when a prospectus or reverse-takeover circular is required) to confirm compliance with the relevant UKLR requirements to the FCA",
+        "detail": "这是OPEN-QUESTIONS第3条受控词表讨论的第五个真实样本：既不同于上交所\"注册制\"，也不同于\n港交所\"披露为本+上市委员会实质审核权\"，也不同于NYSE\"披露为本+高度形式化规则编号+\n广泛自由裁量权\"，也不同于JPX\"披露为本+另须向金融厅报告重大事项\"——英国这套\"披露为本+\n保荐人（Sponsor）在特定触发事件下向监管者背书\"的把关模式，是又一种不被现有三值枚举\n（registration/approval/hybrid）干净覆盖的组合，本条数据未套用enum，只留zh/en文字说明，\n与此前四家的处理方式一致。\n",
+        "sources": [
+          {
+            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook）",
+            "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "UKLR 5 – Equity shares (commercial companies): requirements for admission to listing / Applies to applicants for admission to listing in the equity shares (commercial companies) category... An issuer with a listing of equity shares in... the equity shares (commercial companies) category... must appoint a sponsor on each occasion that the issuer: (1) is required to submit... a prospectus or supplementary prospectus... UKLR TP 2 applies from 29 July 2024.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Admission and Disclosure Standards（官网，2021年1月版）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook，2026年4月更新版）",
+            "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "AIM Rules for Companies（官网，2026年1月版）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "transfer_between_boards": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "AIM转Main Market等板块间转移机制本次未逐条核实，仅在Admission and Disclosure Standards术语表中确认存在“AIM转出”相关条款（1.5.1 Transfers from AIM），未展开细节。",
+        "sources": [
+          {
+            "title": "Admission and Disclosure Standards（官网，2021年1月版）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook，2026年4月更新版）",
+            "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "AIM Rules for Companies（官网，2026年1月版）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "continuing_obligations": {
+        "zh": "官方名册内公司适用UKLR第6章持续义务（equity shares (commercial companies) 类别）；AIM公司须始终保留一名保荐人（Nominated Adviser），由其负责持续评估公司对AIM监管框架的适当性",
+        "en": "Official List companies are subject to UKLR Chapter 6 continuing obligations (equity shares (commercial companies) category); AIM companies must retain a Nominated Adviser at all times, responsible for the ongoing assessment of the company's appropriateness for AIM's regulatory framework",
+        "sources": [
+          {
+            "title": "AIM Rules for Companies（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "In order to be eligible for AIM, an applicant must appoint a nominated adviser and an AIM company must retain a nominated adviser at all times. The nominated adviser is responsible to the Exchange for assessing the appropriateness of each applicant for AIM.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "suspension_resumption": {
+        "zh": "FCA可依UKLR 21.1在市场平稳运行受威胁或需保护投资者时暂停上市；暂停满6个月后发行人须与FCA讨论是否取消上市或延长暂停",
+        "en": "The FCA may suspend a listing under UKLR 21.1 where the smooth operation of the market is jeopardised or investor protection requires it; after 6 months of suspension the issuer must discuss with the FCA whether to cancel the listing or extend the suspension",
+        "sources": [
+          {
+            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook）",
+            "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "UKLR 21.1.1 (1) The FCA may suspend, with effect from such time as it may determine, the listing of any securities if the smooth operation of the market is, or may be, temporarily jeopardised or it is necessary to protect investors... UKLR 21.1.5 Where the listing of an issuer's securities has been suspended for 6 months, the issuer must contact the FCA as soon as possible after the end of that period to discuss whether a cancellation of listing is appropriate.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_conditions": {
+        "zh": "FCA认定存在阻碍证券正常常规交易的特殊情形即可取消上市，典型触发情形包括：证券已不再符合本规则要求获准交易；发行人不再满足持续义务（如公众持股比例跌破10%，FCA可给予合理期限恢复但受市场平稳运行/投资者保护需要限制）；暂停上市已满6个月；发行人完成反向收购或“初始交易”（initial transaction）",
+        "en": "The FCA may cancel a listing where it is satisfied that special circumstances preclude normal regular dealings, including: securities no longer admitted to trading as required; the issuer no longer satisfying continuing obligations (e.g. shares in public hands falling below 10%, subject to a reasonable restoration period unless precluded by market-order/investor-protection needs); the listing having been suspended for more than 6 months; or the issuer completing a reverse takeover or 'initial transaction'",
+        "sources": [
+          {
+            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook）",
+            "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The FCA may cancel the listing of securities if it is satisfied that there are special circumstances that preclude normal regular dealings in them... the issuer no longer satisfies its continuing obligations for listing – for example, if the percentage of shares in public hands falls below 10%... the securities' listing has been suspended for more than 6 months... the issuer has completed a reverse takeover or initial transaction.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_process": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "发行人主动申请取消上市（Cancellation at issuer's request）须满足UKLR 21.2.8-21.2.18及21.3的具体程序要求，本次未逐条核实完整流程细节。",
+        "sources": [
+          {
+            "title": "Admission and Disclosure Standards（官网，2021年1月版）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook，2026年4月更新版）",
+            "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "AIM Rules for Companies（官网，2026年1月版）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "delisting_transition_period": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Admission and Disclosure Standards（官网，2021年1月版）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook，2026年4月更新版）",
+            "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "AIM Rules for Companies（官网，2026年1月版）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Admission and Disclosure Standards（官网，2021年1月版）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook，2026年4月更新版）",
+            "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "AIM Rules for Companies（官网，2026年1月版）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "FTSE UK Index Series Ground Rules（LSEG/FTSE Russell官网）",
+            "url": "https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse-uk-index-series-ground-rules.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high"
+      },
+      "items": [
+        {
+          "id": "ftse-100",
+          "name_zh": "富时100指数",
+          "name_native": "FTSE 100",
+          "compiler": "ftse_russell",
+          "weighting_method": "float_adjusted",
+          "review_frequency": "季度审核（3月/6月/9月/12月），其中6月为年度审核",
+          "flagship": "yes",
+          "description": "由英国最大的100家公司（按扣除自由流通调整前的完全市值排名）构成，纳入需满足最低10%自由流通比例等准入门槛；FTSE Russell为LSEG集团旗下指数业务，非LSE交易所本身运营"
+        },
+        {
+          "id": "ftse-250",
+          "name_zh": "富时250指数",
+          "name_native": "FTSE 250",
+          "compiler": "ftse_russell",
+          "weighting_method": "float_adjusted",
+          "review_frequency": "季度审核（3月/6月/9月/12月），其中6月为年度审核",
+          "flagship": "no",
+          "description": "富时100之外，按完全市值排名紧随其后的250家英国公司构成"
+        },
+        {
+          "id": "ftse-all-share",
+          "name_zh": "富时全股指数",
+          "name_native": "FTSE All-Share",
+          "compiler": "ftse_russell",
+          "weighting_method": "float_adjusted",
+          "review_frequency": "季度审核（3月/6月/9月/12月），其中6月为年度审核",
+          "flagship": "no",
+          "description": "由富时350（100+250）与富时小型股（SmallCap）构成，目标覆盖至少98%的英国上市公司完全市值"
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "enum": "t2",
+        "zh": "T+2（现行）；英国计划于2027年10月11日整体切换为T+1，本次核实时点（2026-08-14）尚未生效",
+        "en": "T+2 (current); the UK is planning a market-wide move to T+1 on 11 October 2027, which had not yet taken effect as of this session's verification date (2026-08-14)",
+        "detail": "这是本项目目前少数能明确标注\"尚未发生、有确定生效日期\"的制度变革样本——不同于填US-NYSE\n时\"T+1已于2024-05-28生效\"的既成事实，英国的T+1转型仍在倒计时阶段（FCA页面本身列出\n2025/2026/2027三年的准备时间表）。填数时需注意不要把\"T+1\"错误地当作当前状态。\n",
+        "sources": [
+          {
+            "title": "About T+1 settlement（FCA官网）",
+            "url": "https://www.fca.org.uk/markets/about-t1-settlement",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The UK market is moving to faster settlement of securities trades on 11 October 2027... This means if you buy a stock or bond, it will be settled within 1 business day (T+1), instead of the current 2-day (T+2) cycle.",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "ccp_name": {
+        "zh": "LCH Ltd——LSEG集团清算业务（LCH集团）旗下英国主体，作为中央对手方为包括股票在内的多资产类别提供清算服务",
+        "en": "LCH Ltd — the UK entity of LSEG's clearing business (LCH Group), acting as central counterparty across multiple asset classes including equities",
+        "sources": [
+          {
+            "title": "About LCH（LSEG官网）",
+            "url": "https://www.lseg.com/en/post-trade/clearing/about-lch",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Welcome to the LCH group of companies, comprising LCH Ltd, LCH SA, SwapAgent Ltd and LCH Group Holdings Ltd (collectively, the 'LCH Group'). Our leading multi-asset class clearing houses are part of the post trade division of London Stock Exchange Group PLC and provide proven risk management capabilities across a range of asset classes, including OTC and listed interest rates, fixed income, FX, CDS, equities... As a clearing house, we stand as a central counterparty (CCP), acting as a buyer to every seller and a seller to every buyer.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "csd_name": {
+        "zh": "CREST——由Euroclear UK & International Ltd运营的英国证券结算系统",
+        "en": "CREST — the UK securities settlement system, operated by Euroclear UK & International Ltd",
+        "detail": "CREST历史上由伦敦结算所（前身CRESTCo）运营，现属Euroclear集团旗下Euroclear UK & International；本次尝试直接抓取euroclear.com核实其角色但遭403拦截（见SOURCES.md），改用《伦敦证券交易所规则》（Rules of the London Stock Exchange）自身术语表内的定义作为权威来源。",
+        "sources": [
+          {
+            "title": "Rules of the London Stock Exchange（官网，术语表）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/rules-of-the-london-stock-exchange-effective-5-february-2024.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "CREST — the settlement system operated by Euroclear UK & International Ltd.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "initial_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delivery_method": {
+        "enum": "na",
+        "zh": "不适用（现货市场，无实物/现金交割概念）",
+        "en": "Not applicable (cash market; no physical/cash delivery concept)",
+        "detail": "推断依据：products章节所列品类（普通股/存托凭证/ETP/结构性产品/债券/开放式基金/私募证券）均为现货且以电子簿记形式经CREST结算，未见实物交割型衍生品——这是对本文件自身products章节的内部推断，与NYSE处理方式一致，confidence标medium而非high。",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网，Table 2 Trading Services，列出的品类均为现货）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "quote": null
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "default_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "membership_structure": {
+        "zh": "会员机构（member firm）制：须在英国或适格境外法域获得授权监管（或经交易所认定在资本充足性、诚信与专业能力方面已受充分监管），须持有有效LEI码，须具备充足的交易执行、记录、报告与结算能力及至少一名合规官",
+        "en": "Member firm structure: must be authorised under UK or appropriate overseas legislation (or otherwise deemed sufficiently regulated for capital adequacy and fitness/probity), must hold a valid LEI, and must maintain adequate trade execution, recording, reporting and settlement capabilities plus at least one compliance officer",
+        "sources": [
+          {
+            "title": "Rules of the London Stock Exchange（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/rules-of-the-london-stock-exchange-effective-5-february-2024.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "A member firm must at all times be authorised under relevant United Kingdom, or appropriate overseas legislation, or in the view of the Exchange be otherwise sufficiently regulated, in respect of capital adequacy, and fitness and probity... A member firm must hold a valid, issued and duly renewed LEI code at all times... A member firm must, to ensure compliance with these rules, at all times have: adequate trade execution, recording, reporting and settlement procedures and systems... sufficient staff with adequate knowledge, experience, training and competence; adequate internal procedures and controls; and one or more compliance officers.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "Millennium Exchange（技术基础来自2009年9月收购的MillenniumIT）",
+        "en": "Millennium Exchange (technology base acquired via the September 2009 acquisition of MillenniumIT)",
+        "sources": [
+          {
+            "title": "The history of LSEG（官网）",
+            "url": "https://www.lseg.com/en/about-us/history",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "September 2009\nMillenniumIT, a Sri Lanka-based technology solutions provider serving the global capital markets industry, is acquired.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "access_methods": {
+        "zh": "会员机构经FIX网关（FIX Gateway）或原生交易网关（Native Trading Gateway）接入Millennium Exchange交易系统",
+        "en": "Member firms connect to the Millennium Exchange trading system via a FIX Gateway or a Native Trading Gateway",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Participants will connect to each interface via a FIX or Native Gateway, depending on the functionality required.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "英国经纪商向客户收取的佣金由市场自行竞争定价，交易所自身规则未见对经纪商佣金水平的直接规定——与NYSE的情形类似，本次未找到LSE/FCA对此的专门表述，留空不硬凑。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "exchange_fees": {
+        "zh": "会员交易费：按月度累计成交金额分档收取基点费率（Standard value traded scheme：首£35亿0.45个基点，其后£50亿0.35个基点，超出部分0.25个基点，月度封顶£15,000），另设流动性提供计划（Liquidity Provider Scheme）对被动成交给予返佣（负费率）；发行人上市费：股票类新上市按市值分级累进收取（如£0-5百万区间为最低费£17,600，此后每百万递增£2,305……最高累计£698,000+20%增值税），另按上市证券市值每年收取年费（如£175百万市值对应年费£11,750，按每百万£60递增，上限£265,000）",
+        "en": "Member trading fees: tiered basis-point rates by monthly cumulative value traded (Standard value traded scheme: 0.45bp on the first £3.5bn, 0.35bp on the next £5bn, 0.25bp thereafter, capped at £15,000/month), plus a Liquidity Provider Scheme offering rebates (negative fees) for passive execution; issuer fees: admission fees for new equity listings are tiered by market capitalisation (e.g. minimum fee £17,600 for the £0-5m band, then £2,305 per additional £1m... cumulative maximum £698,000 plus 20% VAT), plus an annual fee based on listed market capitalisation (e.g. £11,750 minimum for a £175m market cap, £60 per £1m thereafter, capped at £265,000)",
+        "sources": [
+          {
+            "title": "Trading Services Price List（Excludes TRADEcho），Effective 01 January 2025（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/trading-services-price-list-january-2025.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Fees for Issuers，Effective 01 January 2026（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/fees-for-issuers-jan-2026-01.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Standard value traded scheme4 for Equities / First £3.5bn of orders executed 0.45bp* / Next £5bn of orders executed 0.35bp* / All subsequent value of orders executed 0.25bp* / *Monthly fee cap of £15,000.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "stamp_duty": {
+        "zh": "印花税（Stamp Duty）：纸质转让文书形式、金额超£1,000的证券交易，税率0.5%（就近取整至£5）；印花税储备税（Stamp Duty Reserve Tax, SDRT）：电子（无纸化）交易，税率0.5%（就近取整至1便士），经CREST系统自动代收并划付予英国税务海关总署（HMRC）",
+        "en": "Stamp Duty: 0.5% (rounded to the nearest £5) on paper-form share transfers over £1,000; Stamp Duty Reserve Tax (SDRT): 0.5% (rounded to the nearest 1p) on electronic (paperless) transactions, automatically collected via CREST and remitted to HMRC",
+        "sources": [
+          {
+            "title": "Stamp Duty and Stamp Duty Reserve Tax（HMRC研究报告，gov.uk）",
+            "url": "https://www.gov.uk/government/publications/stamp-duty-and-stamp-duty-reserve-tax/stamp-duty-and-stamp-duty-reserve-tax",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Stamp Duty is incurred on items that are traded 'on paper', that is using a stock transfer form, or other written instrument, and with a value more than £1,000... Stamp Duty is payable at 0.5% rounded to the nearest £5. Stamp Duty Reserve Tax is incurred on electronic (or 'paperless') transactions in shares in a UK company or a foreign company with a UK share register. Electronic transactions are usually carried out through CREST, which automatically collects Stamp Duty Reserve Tax and sends it to HMRC. Stamp Duty Reserve Tax is payable at 0.5% rounded to the nearest 1p.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "financial_transaction_tax": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "英国未见另设独立于印花税/SDRT之外的广义金融交易税；但本次来源（HMRC研究报告）本身聚焦印花税/SDRT，未见对“是否存在其他金融交易税”的专门排除性声明，为避免“未提及即等于不存在”的过度推断，本字段留空而非断言“无”，与stamp_duty字段分开处理。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_gains_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "常识印象：英国境内公司股息通常无预扣税（不同于多数司法辖区的常见做法），但本次抓取范围（gov.uk印花税页）未涉及股息预扣税主题，未找到当次可引用的官方原文，按铁律不采纳未核实的印象，留空，见 OPEN-QUESTIONS。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "压测点核心字段——英国脱欧后正处于持续的监管框架重构期，三条并行证据：(1) 2024年7月UKLR改革以单一“股票证券（商业公司）”类别取代此前承接自欧盟体系的Premium/Standard两级上市架构；(2) 2026年7月13日起，SSR 2025正式取代此前“承接”的欧盟《卖空条例》(EU) No 236/2012；(3) 英国计划于2027年10月11日整体切换至T+1结算周期（现行仍为T+2），与欧盟是否/何时跟进尚不同步。三条改革叠加意味着填写本文件时必须持续关注“规则是否已生效”而非套用脱欧前的欧盟框架惯例",
+        "en": "Core stress-test field — post-Brexit, the UK is in a sustained period of regulatory reconstruction, evidenced by three parallel threads: (1) the July 2024 UKLR reform replaced the previously EU-derived two-tier Premium/Standard listing structure with a single 'equity shares (commercial companies)' category; (2) from 13 July 2026, SSR 2025 formally replaced the previously-assimilated EU Short Selling Regulation (EU) No 236/2012; (3) the UK plans a market-wide move to T+1 settlement on 11 October 2027 (currently still T+2), not necessarily synchronised with if/when the EU follows. Together these mean data in this file must be checked against 'has this rule actually taken effect' rather than assumed to follow pre-Brexit EU-framework conventions",
+        "detail": "三条证据分别来自 listing.review_system（UKLR quote）、market_structure.short_selling\n（SSR quote）、clearing.settlement_cycle（T+1 quote）三个字段，此处汇总不重复摘录quote，\n避免同一原文在文件内出现两次——按CLAUDE.md\"任何一个事实只在一处手写\"的原则，quote\n锚点留在各自字段，这里只做跨字段的综合归纳（属于detail的归纳改写，不是quote）。\n",
+        "sources": [
+          {
+            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook）",
+            "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Short selling（FCA官网）",
+            "url": "https://www.fca.org.uk/markets/short-selling",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "About T+1 settlement（FCA官网）",
+            "url": "https://www.fca.org.uk/markets/about-t1-settlement",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "quote": null
+      },
+      "enforcement_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    }
+  }
+}
