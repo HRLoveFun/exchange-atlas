@@ -2,7 +2,7 @@
 
 进度状态放这里；「为什么这么排」去 `DECISIONS.md`，这里不重复。
 
-## 当前阶段：v0.3 前端完善已完成，下一步 v1.0 横向铺开
+## 当前阶段：v1.0 Wave 1（8 家）已完成，下一步启动 Wave 2
 
 ## 阶段路线
 
@@ -38,7 +38,7 @@
 ## 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
-共 550 个已填字段，其中 0 个超过复核阈值待复核。
+共 593 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
 |---|---|---|
@@ -80,7 +80,7 @@
 | `in-nse` 印度国家证券交易所 | apac（待核实） | 地区补充 |
 | `sa-tadawul` 沙特交易所 | mena_africa | 该地区首个样本（现有 5 家里是 0） |
 
-进度：0/8 已启动。
+进度：8/8 已完成（并行子代理模式，2026-08-14/15）。人工抽检见 `PROJECT/DECISIONS.md` [ADR-017] 执行记录；子代理踩出的新坑已回写 `.claude/skills/add-exchange/SKILL.md`。
 
 ### Wave 2（7 家，视 Wave 1 结果调整，非最终锁定）
 
@@ -98,5 +98,5 @@
 
 ### 当前进度
 
-- 5/20+ 已完成（`cn-sse`、`hk-hkex`、`us-nyse`、`jp-jpx`、`de-eurex`，见上方填充进度表）
-- v1.0 尚未启动，0/15 候选交易所已建档；本节清单是待确认草案，`id`/`region`/`group_id` 以实际建档时核实为准
+- 13/20+ 已完成（v0.1/v0.2 五家标杆 `cn-sse`/`hk-hkex`/`us-nyse`/`jp-jpx`/`de-eurex` + v1.0 Wave 1 八家 `us-nasdaq`/`cn-szse`/`uk-lse`/`de-xetra`/`sg-sgx`/`au-asx`/`in-nse`/`sa-tadawul`，见上方填充进度表）
+- Wave 1 已完成，Wave 2（7 家）待启动；启动前按 [ADR-016] 复核候选名单是否需要调整

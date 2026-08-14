@@ -173,6 +173,36 @@
       }
     },
     {
+      "id": "sa-tadawul",
+      "name_zh": "沙特交易所（塔达吾尔）",
+      "name_native": {
+        "en": "Saudi Exchange (Tadawul)"
+      },
+      "official_languages": [
+        "ar"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "mena_africa",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
+      "id": "sg-sgx",
+      "name_zh": "新加坡交易所（简称新交所）",
+      "name_native": {
+        "en": "Singapore Exchange Limited (SGX)"
+      },
+      "official_languages": [
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "uk-lse",
       "name_zh": "伦敦证券交易所",
       "name_native": {
@@ -184,6 +214,21 @@
       "source_lang": "en",
       "group_id": "lseg-group",
       "region": "europe",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
+      "id": "us-nasdaq",
+      "name_zh": "纳斯达克证券交易所",
+      "name_native": {
+        "en": "The Nasdaq Stock Market (Nasdaq)"
+      },
+      "official_languages": [
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": "nasdaq-group",
+      "region": "americas",
       "tier": "extended",
       "trading_hours": null
     },
