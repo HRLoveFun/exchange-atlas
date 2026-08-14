@@ -27,6 +27,21 @@
       }
     },
     {
+      "id": "cn-szse",
+      "name_zh": "深圳证券交易所",
+      "name_native": {
+        "zh-Hans": "深圳证券交易所"
+      },
+      "official_languages": [
+        "zh-Hans"
+      ],
+      "source_lang": "zh",
+      "group_id": null,
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "de-eurex",
       "name_zh": "欧洲期货交易所",
       "name_native": {
