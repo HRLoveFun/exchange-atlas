@@ -145,3 +145,20 @@ terms:
     natives: {ja: 特別気配}
     note: 东证机制，申报价超出值幅制限时不成交、改为显示指示性价格，是值幅制限的执行方式而非独立于价格限制之外的冷静期，与港交所VCM那种独立机制不同类
 
+  - id: anomalous-order-threshold
+    zh: 异常订单阈值机制
+    en: "Anomalous Order Threshold (AOT)"
+    natives: {en: "Anomalous Order Threshold (AOT)"}
+    note: ASX等澳大利亚市场使用的订单级价格校验机制，每分钟更新基准价，拒绝偏离基准价±10%以上的激进订单；是ASIC统一市场诚信规则(MIR)的一部分，功能定位介于逐笔价格校验与传统涨跌停之间，官方立场是"替代熔断机制"而非熔断机制本身
+
+  - id: extreme-trade-range
+    zh: 极端成交区间机制
+    en: "Extreme Trade Range (ETR)"
+    natives: {en: "Extreme Trade Range (ETR)"}
+    note: ASX个股级机制，成交价触及每只股票各自设定的区间即暂停该股交易2分钟，与AOT搭配构成ASX应对价格异常波动的组合机制，功能上对应其他交易所的波动性中断，但官方明确区别于circuit breaker
+
+  - id: continuous-disclosure
+    zh: 持续披露义务
+    en: Continuous Disclosure
+    note: 上市实体一旦知悉可能对证券价格或价值产生重大影响的信息即须立即向市场披露的义务；澳大利亚由ASX Listing Rule 3.1规定，并经《公司法》第674条赋予法定效力，触发标准是"合理人预期有重大价格影响"而非固定周期披露
+

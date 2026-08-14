@@ -1,6 +1,21 @@
 {
   "exchanges": [
     {
+      "id": "au-asx",
+      "name_zh": "澳大利亚证券交易所（通称ASX）",
+      "name_native": {
+        "en": "Australian Securities Exchange (ASX)"
+      },
+      "official_languages": [
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "cn-sse",
       "name_zh": "上海证券交易所",
       "name_native": {

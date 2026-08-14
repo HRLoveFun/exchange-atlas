@@ -1,0 +1,869 @@
+# 澳大利亚证券交易所 Australian Securities Exchange (ASX)
+# 抓取来源见 PROJECT/SOURCES.md `au-asx` 一节；原始页缓存于 .cache/au-asx/
+# source_lang: en——澳大利亚官方语言为英语，无官方中文原文，按 ADR-013「无中选英」，
+# 英文是溯源锚点，zh 是翻译展示。
+# group_id：不设。ASX Group 下设 ASX Clear/ASX Settlement/ASX Clear (Futures)/Austraclear
+# 等清算结算法人实体，以及与现货市场"ASX"同属 ASX Limited 运营的衍生品市场"ASX 24"
+# （2006年由 Sydney Futures Exchange 并入），但均非"计划收录的姊妹交易所"——不像
+# NYSE American/Arca 或 JPX 的大阪交易所那样是独立可比的交易市场法人实体；ASX 24
+# 与 ASX 现货市场由同一持牌市场运营商 ASX Limited 运营（见 asic-vs-asx.txt 脚注4："the
+# ASX and ASX 24 markets ... operated by the ASX group"），本文件聚焦现货股票市场本身，
+# ASX 24 仅在必要处提及。
+
+id: au-asx
+name_zh: 澳大利亚证券交易所（通称ASX）
+name_native: {en: "Australian Securities Exchange (ASX)"}
+official_languages: [en]
+source_lang: en
+region: apac
+tier: extended
+
+# ═══════════════════════════════════════════════
+# 二｜基本信息
+# ═══════════════════════════════════════════════
+overview:
+  _meta:
+    verified: 2026-08-14
+    confidence: medium
+
+  timezone: "Australia/Sydney (AEST UTC+10 / AEDT UTC+11)"
+  dst_rule: "实行夏令时（新南威尔士州随全国东部大部分州10月至次年4月使用AEDT）"
+
+  founded_year:
+    zh: "1987年4月1日（澳大利亚联邦议会立法批准，六个州级交易所合并组建Australian Stock Exchange Limited）；最早可追溯渊源为1871年悉尼证券交易所（Sydney Stock Exchange）成立"
+    en: "1 April 1987 (Australian Stock Exchange Limited formed by Act of the Australian Parliament, amalgamating six independent state-based stock exchanges); earliest traceable predecessor is the Sydney Stock Exchange, formed in 1871"
+    detail: |
+      1987年合并的六家州级交易所分别位于悉尼(1871)、墨尔本、布里斯班(1884)、阿德莱德(1887)、
+      霍巴特(1882)、珀斯(1889)。2006年与悉尼期货交易所(Sydney Futures Exchange)合并后，
+      机构更名为"Australian Securities Exchange"（现"澳大利亚证券交易所"译名的直接来源），
+      法定名称为"ASX Limited"，见 history 字段。
+    sources:
+      - title: History（ASX 官网）
+        url: https://www.asx.com.au/about/history.htm
+        accessed: 2026-08-14
+    quote: "1871 - The Sydney Stock Exchange formed and continued to operate until it merged with the other five state-based exchanges to form the Australian Stock Exchange on 1 April 1987. ... The Australian Stock Exchange Limited was formed in 1987 after the Australian Parliament passed legislation enabling the amalgamation of six independent state-based stock exchanges."
+    confidence: high
+
+  history:
+    zh: "1987年六州交易所合并成立Australian Stock Exchange Limited；1998年10月14日成为全球第一家完成公司化改制并直接在自己市场上市的交易所；2006年与悉尼期货交易所合并，更名为Australian Securities Exchange，法定名称ASX Limited；2010年8月起对外统称ASX Group"
+    en: "Formed 1987 by amalgamation of six state exchanges as Australian Stock Exchange Limited; on 14 October 1998 became the first exchange in the world to demutualise and directly list on itself; merged with the Sydney Futures Exchange in 2006 and renamed Australian Securities Exchange (legal name ASX Limited); known externally as ASX Group from August 2010"
+    detail: |
+      2000年起标普(Standard & Poor's)接手ASX指数编制，见 indices 章节；2010年8月起竞争引入
+      澳洲股票市场（Chi-X Australia等对手方入场），ASX在市场监管上的角色移交ASIC，见
+      regulation.self_regulatory_org 字段的细分说明。
+    sources:
+      - title: History（ASX 官网）
+        url: https://www.asx.com.au/about/history.htm
+        accessed: 2026-08-14
+      - title: ASX Group（ASX 官网）
+        url: https://www.asx.com.au/about/asx-group.htm
+        accessed: 2026-08-14
+    quote: "The Australian Stock Exchange Limited was formed in 1987 after the Australian Parliament passed legislation enabling the amalgamation of six independent state-based stock exchanges. ... 1998 - ASX became the first exchange in the world to demutualise and directly list on itself on 14 October. ... In 2006 the Australian Stock Exchange merged with the Sydney Futures Exchange to become the Australian Securities Exchange. Its official name is ASX Limited."
+    confidence: high
+
+  organization_form:
+    enum: demutualized_listed
+    zh: "公司制（自身上市）：1998年由会员制改制并直接在自己市场挂牌"
+    en: "Demutualized, Listed: demutualized in 1998 and listed directly on its own market"
+    detail: "官网明确称其为全球第一家完成公司化改制并自我上市的交易所，是本项目样本中最早的自我上市案例（早于港交所2000年、纽交所2006年）。"
+    sources:
+      - title: History（ASX 官网）
+        url: https://www.asx.com.au/about/history.htm
+        accessed: 2026-08-14
+    quote: "1998 - ASX became the first exchange in the world to demutualise and directly list on itself on 14 October."
+    confidence: high
+
+  self_listed:
+    enum: "yes"
+    zh: "是，自身股票在ASX市场上市交易（股票代码ASX）"
+    en: "Yes, ASX Limited itself is listed and trades on its own market (ticker: ASX)"
+    sources:
+      - title: History（ASX 官网）
+        url: https://www.asx.com.au/about/history.htm
+        accessed: 2026-08-14
+      - title: ASX Group（ASX 官网，"ASX is a listed exchange group"）
+        url: https://www.asx.com.au/about/asx-group.htm
+        accessed: 2026-08-14
+    quote: "ASX became the first exchange in the world to demutualise and directly list on itself on 14 October."
+    confidence: high
+
+  market_cap_usd_bn:
+    zh: ""
+    confidence: low
+    detail: "本轮未核实到具体统计口径与日期的官方总市值数字，留空。"
+
+  listed_companies_count:
+    zh: "约2,000家"
+    en: "Around 2,000"
+    detail: "来自ASX官方博客对S&P/ASX指数体系的说明文（2026年6月更新），属约数、非正式统计公报数字，confidence标medium；另据历史沿革页记载2019年时点为2,200家实体（含各类结构化产品发行人），两个数字口径不完全一致，未核实具体差异原因。"
+    sources:
+      - title: S&P/ASX indices 101（ASX 官网博客）
+        url: https://www.asx.com.au/blog/listed-at-asx/sandp-asx-indices-101
+        accessed: 2026-08-14
+    quote: "It is often seen as a proxy for the ASX 'market' even though the ASX has around 2,000 listed companies."
+    confidence: medium
+
+  annual_turnover_usd_bn:
+    zh: ""
+    confidence: low
+
+  global_ranking:
+    zh: ""
+    confidence: low
+
+  trading_currency:
+    zh: "澳元"
+    en: "AUD"
+
+  settlement_currency:
+    zh: "澳元"
+    en: "AUD"
+
+# ═══════════════════════════════════════════════
+# 三｜监管与法律环境
+# ═══════════════════════════════════════════════
+regulation:
+  _meta:
+    verified: 2026-08-14
+    confidence: high
+
+  regulator:
+    zh: "澳大利亚证券及投资委员会（ASIC）"
+    en: "Australian Securities and Investments Commission (ASIC)"
+    detail: "ASIC同时是市场行为监管者与ASX自身作为上市公司的合规监管者（ASX既是被监管市场运营商，也是ASIC监管下的上市公司）。"
+    sources:
+      - title: ASX regulatory framework（ASX 官网）
+        url: https://www.asx.com.au/about/regulation
+        accessed: 2026-08-14
+    quote: "ASIC is responsible for the supervision of real-time trading on Australia's domestic markets, including those operated by ASX Group, and for enforcing the laws against misconduct on Australia's financial markets, as well as supervising Australian Financial Service Licence (AFSL) holders."
+    confidence: high
+
+  self_regulatory_org:
+    zh: "ASX自身（一线监管，负责监督上市实体遵守《上市规则》、参与者遵守《运营规则》）"
+    en: "ASX itself (front-line regulation of listed entities under the Listing Rules and participants under the Operating Rules)"
+    detail: "2010年8月起，实时交易层面的市场监管职能已移交ASIC（见overview.history），ASX保留的一线监管集中在上市合规与参与者合规两块，与港交所模式接近但分工边界更清晰（有专门的ASIC-vs-ASX职责划分官方文件）。"
+    sources:
+      - title: Matters regulated by ASIC vs matters regulated by ASX（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/about/matters-regulated-by-asic-vs-matters-regulated-by-asx.pdf
+        accessed: 2026-08-14
+    quote: "As the licensed operator of the ASX market, ASX is responsible for monitoring and enforcing compliance by ASX listed entities with their obligations under the Listing Rules."
+    confidence: high
+
+  clearing_regulator:
+    zh: "澳大利亚储备银行（RBA，负责金融稳定标准FSS合规评估）与ASIC（负责清算结算牌照合规评估）双重监管"
+    en: "Reserve Bank of Australia (RBA, assesses compliance with Financial Stability Standards) and ASIC (assesses CS facility licence compliance) — dual oversight"
+    sources:
+      - title: ASX regulatory framework（ASX 官网）
+        url: https://www.asx.com.au/about/regulation
+        accessed: 2026-08-14
+    quote: "The RBA has responsibility for assessing whether licensed clearing and settlement facilities, including those operated by ASX Group, have complied with the RBA's Financial Stability Standards (\"FSS\") and done all other things necessary to reduce systemic risk."
+    confidence: high
+
+  core_laws:
+    zh: "《公司法2001》（Corporations Act 2001 (Cth)），市场牌照见其Part 7.2、清算结算牌照见Part 7.3"
+    en: "Corporations Act 2001 (Cth); market licensing under Part 7.2, clearing & settlement facility licensing under Part 7.3"
+    detail: "ASIC另按该法第798G条制定《市场诚信规则》（Market Integrity Rules, MIR），统一适用于全澳所有证券期货市场运营商及其参与者，见market_structure.circuit_breaker字段。"
+    sources:
+      - title: ASX regulatory framework（ASX 官网）
+        url: https://www.asx.com.au/about/regulation
+        accessed: 2026-08-14
+      - title: Corporations Act 2001（联邦立法数据库，仅目录索引，未逐条核实条文全文）
+        url: https://www.legislation.gov.au/C2004A00818/latest/text
+        accessed: 2026-08-14
+    quote: "As a licensed operator of markets and clearing and settlement facilities in Australia, ASX has various regulatory obligations under the Corporations Act 2001 (Cth)."
+    confidence: high
+
+  foreign_ownership_limit:
+    zh: "无ASX专属外资持股上限；适用全国性外国投资审查框架：私人外资对已上市实体的被动持股一般低于20%无需申报，达到20%「实质利益」门槛且资产总值超过年度指数化货币门槛需向财政部申报；外国政府投资者对上市公司的任何直接投资均须申报（不论比例）"
+    en: "No ASX-specific foreign ownership cap; governed by the national Foreign Investment Review Framework — passive holdings below a 20% 'substantial interest' threshold generally do not require notification for private foreign investors, subject to indexed monetary thresholds; foreign government investors must notify any direct investment in a listed entity regardless of size"
+    detail: "外国投资审查委员会（FIRB）辖属财政部，是全澳统一制度而非ASX自定规则，与港交所「自由港无限制」形成结构性对比。具体货币门槛按年1月1日指数化调整，本次未逐条核实2026年度具体门槛数字，只核实到判断标准本身。"
+    sources:
+      - title: Guidance Note 7 - Business Investments（外国投资审查委员会 FIRB，PDF）
+        url: https://foreigninvestment.gov.au/sites/firb.gov.au/files/guidance-notes/gn07_business-20230531.pdf
+        accessed: 2026-08-14
+    quote: "Foreign persons must notify the Treasurer before acquiring a substantial interest (generally at least 20 per cent) in an Australian entity (an Australian corporation or an Australian unit trust)"
+    confidence: high
+
+  capital_controls:
+    zh: ""
+    confidence: low
+
+  disclosure_requirements:
+    zh: "持续披露制度：上市实体一旦知悉对证券价格或价值有重大影响的信息，须立即向ASX披露（Listing Rule 3.1），该义务经《公司法》第674条赋予法定效力；另须按年度/半年度（部分矿业及油气勘探公司另加季度）提交财务报告"
+    en: "Continuous disclosure regime: a listed entity must immediately disclose to ASX any information a reasonable person would expect to have a material effect on the price or value of its securities (Listing Rule 3.1), given statutory force by section 674 of the Corporations Act; entities must also lodge annual, half-yearly (and for certain mining/oil & gas entities, quarterly) financial reports"
+    sources:
+      - title: Matters regulated by ASIC vs matters regulated by ASX（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/about/matters-regulated-by-asic-vs-matters-regulated-by-asx.pdf
+        accessed: 2026-08-14
+    quote: "This is the Listing Rule imposing continuous disclosure obligations on ASX listed entities that is given statutory force by section 674 of the Corporations Act ... Chapter 4 for listed entities to lodge annual, half-yearly and, in some cases, quarterly financial statements and reports with ASX by certain dates"
+    confidence: high
+
+  investor_protection:
+    zh: "National Guarantee Fund（国家担保基金）为特定类型的结算失败提供补偿保障，本次仅在运营规则条文中确认其存在，未找到专门说明页详述覆盖范围"
+    en: "National Guarantee Fund provides compensation cover for certain settlement failures; this round only confirmed its existence via a passing reference in the Operating Rules, no dedicated explainer page was located"
+    sources:
+      - title: ASX Operating Rules Section 3（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_section_03.pdf
+        accessed: 2026-08-14
+    quote: "does not constitute a 'reportable transaction' for the purposes of National Guarantee Fund cover"
+    confidence: medium
+
+# ═══════════════════════════════════════════════
+# 四｜产品体系
+# ═══════════════════════════════════════════════
+products:
+  _meta:
+    verified: 2026-08-14
+    sources:
+      - title: Listing requirements（ASX 官网）
+        url: https://www.asx.com.au/listings/listing-considerations/listing-requirements
+        accessed: 2026-08-14
+      - title: S&P/ASX indices 101（ASX 官网博客）
+        url: https://www.asx.com.au/blog/listed-at-asx/sandp-asx-indices-101
+        accessed: 2026-08-14
+      - title: Matters regulated by ASIC vs matters regulated by ASX（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/about/matters-regulated-by-asic-vs-matters-regulated-by-asx.pdf
+        accessed: 2026-08-14
+    confidence: medium
+  items:
+    - id: au-asx-equities
+      category: equity
+      name_zh: 股票
+      name_native: "Equities (ASX Listing / ASX Foreign Exempt Listing)"
+      description: "本地企业按ASX Listing准入；已在合格境外交易所上市的公司可按ASX Foreign Exempt Listing双重上市，主要遵守母国规则、豁免大部分ASX上市规则"
+    - id: au-asx-etp
+      category: fund
+      name_zh: 交易所买卖产品
+      name_native: "Exchange Traded Products (ETPs)"
+      description: "含ETF与交易所买卖管理基金(ETMF)，按AQUA规则(ASX运营规则附表10A)监管，发行人须满足流动性支持（做市）要求"
+    - id: au-asx-warrants
+      category: structured
+      name_zh: 权证
+      name_native: Warrants
+      description: "按AQUA/Warrant规则(ASX运营规则附表10)监管"
+    - id: au-asx-areits
+      category: fund
+      name_zh: 澳式房地产投资信托基金
+      name_native: A-REITs
+    - id: au-asx-lics
+      category: fund
+      name_zh: 上市投资公司/信托
+      name_native: "Listed Investment Companies / Trusts (LICs/LITs)"
+    - id: au-asx-interest-rate
+      category: bond
+      name_zh: 计息证券/债券
+      name_native: "Interest Rate Securities"
+    - id: au-asx-mfund
+      category: fund
+      name_zh: mFund（非上市管理基金交易服务）
+      name_native: mFund
+      description: "2014年推出，投资者可通过与买卖股票相似的流程认购/赎回非上市管理基金份额"
+      launched_year: 2014
+    - id: au-asx24-futures
+      category: future
+      name_zh: ASX 24衍生品市场期货
+      name_native: "ASX 24 Futures"
+      description: "与现货市场ASX同属ASX Limited运营的衍生品市场（2006年由Sydney Futures Exchange并入），含SPI 200股指期货、利率期货等；非本文件重点覆盖对象"
+    - id: au-asx24-options
+      category: option
+      name_zh: ASX 24衍生品市场期权及股票期权
+      name_native: "ASX 24 & Equity Options"
+      description: "非本文件重点覆盖对象"
+
+# ═══════════════════════════════════════════════
+# 五｜市场结构与交易机制
+# ═══════════════════════════════════════════════
+market_structure:
+  _meta:
+    verified: 2026-08-14
+    sources:
+      - title: Cash market trading hours（ASX 官网）
+        url: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours
+        accessed: 2026-08-14
+    confidence: high
+
+  trading_sessions:
+    pre_market:
+      zh: "盘前 07:00:00-09:59:00（悉尼时间，随机15秒），经纪商录入订单但不撮合"
+      en: "Pre-open 07:00:00-09:59:00 Sydney time (randomised 15 secs); orders queued but not matched"
+      quote: "Pre-opening takes place from 07:00:00 to 09:59:00* (randomised 15 seconds), Sydney time. During Pre-opening: Brokers enter orders into ASX Trade in preparation for the market opening. ASX Trade does not match orders."
+    continuous_am:
+      zh: "开盘单一价格集合竞价09:59:00-09:59:45后转入连续交易，无区分上下午"
+      en: "Opening Single Price Auction 09:59:00-09:59:45, transitioning into continuous trading; no AM/PM split"
+      quote: "The transition from OSPA to continuous trading (Open) occurs at 09:59:45* (randomised 15 seconds)."
+    lunch_break:
+      zh: "无午休，全天连续交易"
+      en: "No lunch break; trading is continuous throughout the day"
+      detail: "推断依据：交易时段表从09:59:45连续交易至16:00:00无中断记录，未见专门声明「无午休」的原文，confidence相应降级。"
+      confidence: medium
+    continuous_pm:
+      zh: "连续交易09:59:45-16:00:00（悉尼时间），价格/时间优先连续撮合"
+      en: "Continuous trading 09:59:45-16:00:00 Sydney time, continuous matching on price/time priority"
+      quote: "During Normal Trading from 09:59:45* (randomised 15 seconds) to 16:00:00, Sydney time, brokers enter orders into ASX Trade and ASX Trade matches the orders against each other, resulting in trades i.e in this phase ASX Trade automatically matches all trades in Price/Time Priority on a continuous basis."
+    after_market:
+      zh: "16:00起依次经过Pre-CSPA(16:00-16:10)、收盘集合竞价(16:10-16:11)、Post Close(16:11-16:21:30)、Adjust(16:21:30-16:42)等多阶段收盘流程，非单一「盘后连续交易」时段"
+      en: "From 16:00, a multi-phase closing sequence runs: Pre-CSPA (16:00-16:10), Closing Single Price Auction (16:10-16:11), Post Close (16:11-16:21:30), Adjust (16:21:30-16:42) — not a single continuous after-hours session"
+      quote: "Between 16:00:00 to 16:10:00, Sydney time, the market is placed in Pre-CSPA. Continuous matching ceases, brokers can enter, change and cancel orders in preparation for the market closing. The Closing Single Price Auction takes place between 16:10:00^ (randomised 30 seconds) to 16:11:00, Sydney time."
+    night_session:
+      zh: "无正式夜盘；16:42-18:50为Adjust ON阶段，经纪商可电话协商成交（称为overnight trading），须遵守ASX Market Rules保证有序"
+      en: "No formal night session; 16:42-18:50 is the 'Adjust ON' phase during which brokers may negotiate trades by telephone ('overnight trading'), subject to ASX Market Rules to ensure orderliness"
+      quote: "Brokers wishing to trade contact each other by telephone. ASX Market Rules ensure that trading takes place in an orderly fashion. Trading during the Adjust phase is referred to as overnight trading."
+      confidence: medium
+
+  holidays_note:
+    zh: ""
+    confidence: low
+
+  opening_mechanism:
+    zh: "开盘单一价格集合竞价（OSPA），09:59:00起随机15秒窗口触发，最早09:59:45转入连续交易"
+    en: "Opening Single Price Auction (OSPA), triggered within a randomised 15-second window from 09:59:00, earliest transition to continuous trading at 09:59:45"
+    sources:
+      - title: Cash market trading hours（ASX 官网）
+        url: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours
+        accessed: 2026-08-14
+    quote: "The Opening Auction takes place at 09:59:00® (randomised 15 seconds), Sydney time. The OSPA session state immediately follows the opening auction. This is a levelling/buffering period which will run for a minimum of 30 seconds."
+    confidence: high
+
+  closing_mechanism:
+    zh: "收盘单一价格集合竞价（CSPA），16:10起随机30秒窗口触发，16:11收盘"
+    en: "Closing Single Price Auction (CSPA), triggered within a randomised 30-second window from 16:10, closing at 16:11"
+    sources:
+      - title: Cash market trading hours（ASX 官网）
+        url: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours
+        accessed: 2026-08-14
+    quote: "The Closing Single Price Auction takes place between 16:10:00^ (randomised 30 seconds) to 16:11:00, Sydney time. ASX Trade calculates closing prices during this phase."
+    confidence: high
+
+  matching_principle:
+    zh: "价格优先、时间优先，连续竞价阶段由ASX Trade系统自动持续撮合"
+    en: "Price/time priority, continuously matched automatically by the ASX Trade system during continuous trading"
+    sources:
+      - title: Cash market trading hours（ASX 官网）
+        url: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours
+        accessed: 2026-08-14
+    quote: "ASX Trade automatically matches all trades in Price/Time Priority on a continuous basis."
+    confidence: high
+
+  order_types:
+    zh: ""
+    confidence: low
+    detail: "本轮抓取的Operating Rules第三节未包含订单类型的完整定义清单（篇幅未覆盖到该部分），留空待后续核实。"
+
+  tick_size:
+    zh: ""
+    confidence: low
+    detail: "ASX运营规则中提及交易须为「Price Steps」的整数倍，但具体分档表未在本轮抓取范围内（可能在单独的Procedures文件中），留空。"
+
+  board_lot_size:
+    zh: ""
+    confidence: low
+    detail: "未核实ASX是否仍保留传统意义上的标准交易单位/整手概念，留空。"
+
+  odd_lot_handling:
+    zh: ""
+    confidence: low
+
+  price_limits:
+    type:
+      enum: none
+      zh: "无逐日涨跌幅限制；改用订单级异常订单阈值机制（AOT）作为价格保护手段"
+      en: "No daily price limit band; ASX instead uses order-level Anomalous Order Thresholds (AOT) as a price safeguard"
+      detail: "AOT本质是拒绝偏离每分钟更新的基准价±10%以上的激进订单，是订单校验机制而非全天价格区间限制，两者功能定位不同，不应混同为「价格限制」的同类实现。"
+      sources:
+        - title: Market volatility FAQs（ASX 官网）
+          url: https://www.asx.com.au/markets/market-resources/market-volatility-faqs
+          accessed: 2026-08-14
+      quote: "ASX does not use circuit breakers like those employed by some other international exchanges. ... These rules include specifications about the use of Anomalous Order Thresholds (AOTs), rather than circuit breakers. ... The AOT Reference Price is updated every minute and prevents the placing of aggressive orders (an order +/-10% the reference price)."
+      confidence: high
+    main_board: ""
+    other_boards: ""
+
+  circuit_breaker:
+    enum: none
+    zh: "ASX不使用其他国际交易所常见的熔断机制；ASIC统一制定的市场诚信规则(MIR)改用AOT取代熔断"
+    en: "ASX does not use circuit breakers as employed by some other international exchanges; ASIC's Market Integrity Rules substitute AOTs for circuit breakers"
+    sources:
+      - title: Market volatility FAQs（ASX 官网）
+        url: https://www.asx.com.au/markets/market-resources/market-volatility-faqs
+        accessed: 2026-08-14
+    quote: "Why are circuit breakers not used in Australian exchanges such as ASX? ASX does not use circuit breakers like those employed by some other international exchanges. ASIC applies a common set of market integrity rules (MIRs) for all securities and futures markets in Australia that all local market operators and their participants are required to adhere to."
+    confidence: high
+
+  volatility_interruption:
+    zh: "极端成交区间机制（ETR）：成交价触及每只股票各自设定的区间即暂停该股交易2分钟，与AOT搭配构成组合机制"
+    en: "Extreme Trade Range (ETR) mechanism: trading in an individual stock is paused for two minutes if price triggers that stock's own ETR band, working alongside AOT"
+    detail: "AOT-ETR组合被ASX官方定位为在「限制大幅急促价格波动」与「允许自然市场力量引导交易」之间取得平衡的方案，功能上对应其他交易所的个股级波动性中断，但ASX强调这不是circuit breaker。"
+    sources:
+      - title: Market volatility FAQs（ASX 官网）
+        url: https://www.asx.com.au/markets/market-resources/market-volatility-faqs
+        accessed: 2026-08-14
+    quote: "We will also pause trading in individual stocks for two minutes if the price triggers the Extreme Trade Range (ETR) mechanism, which is unique for every stock. We believe the AOT-ETR mechanism promotes orderliness by striking a balance between restricting large and sudden price movements, while allowing natural market forces to guide trading."
+    confidence: high
+
+  trading_halt_mechanism:
+    zh: "上市实体可申请交易暂停（trading halt），须说明理由、期望时长及触发恢复交易的预期事件；单次暂停不得超过申请后第二个交易日正常交易开始，ASX亦可依职权在无序市场时强制暂停"
+    en: "A listed entity may request a trading halt, stating its reasons, desired duration and the expected triggering event for resumption; a single halt cannot exceed the commencement of normal trading on the second trading day after it is requested; ASX may also impose halts on its own initiative to prevent a disorderly market"
+    sources:
+      - title: ASX Listing Rules Chapter 17（ASX 官网 PDF）
+        url: https://www.asx.com.au/documents/rules/Chapter17.pdf
+        accessed: 2026-08-14
+    quote: "ASX may grant a trading halt at the request of an entity. ... ASX Operating Rule 16.4.2 says that a trading halt can be applied for a period not exceeding the commencement of normal trading on the second trading day following the day on which it is requested."
+    confidence: high
+
+  intraday_reversal:
+    enum: t0
+    zh: "未见针对当日回转交易（先买后卖）的结构性限制，交易层面近似T+0"
+    en: "No structural restriction on intraday buy-then-sell found in materials reviewed; effectively T+0 at the trading level"
+    detail: "本轮未找到类似上交所T+1式的当日回转禁止条款，判断依据是「未发现限制性规定」而非「找到明确允许条款」，故confidence标medium；结算层面为T+2，两者是不同层面的概念，见clearing.settlement_cycle。"
+    confidence: medium
+
+  short_selling:
+    enum: freely_allowed
+    zh: "覆盖式卖空（covered short selling）合法且受《公司法》认可为价格发现与流动性的正当机制，须遵守披露义务；裸卖空（naked short selling）除ASIC个别豁免情形外一律禁止；覆盖式卖空须于次一交易日上午9点前向市场运营商报告"
+    en: "Covered short selling is legal and recognised under the Corporations Act as a legitimate mechanism for price discovery and liquidity, subject to disclosure obligations; naked short selling is prohibited except where ASIC has granted relief; covered short sales must be reported to the market operator by 9am on the next trading day"
+    detail: "无美式报升规则（uptick rule），不限定特定证券名单，因此归为freely_allowed而非restricted_uptick，核心限制是强制披露与裸卖空禁令而非价格限制。"
+    sources:
+      - title: "Regulatory Guide 196 - Short Selling（ASIC 官网 PDF）"
+        url: https://download.asic.gov.au/media/4896780/rg196-published-8-october-2018.pdf
+        accessed: 2026-08-14
+    quote: "Covered short selling is permitted under the Corporations Act. This recognises covered short selling as a legitimate mechanism for price discovery and liquidity, subject to disclosure and subject to intervention by ASIC in exceptional cases. ... Naked short sales are prohibited except where ASIC has given relief ... to the market operator by 9 am on the next trading day (T+1)."
+    confidence: high
+
+  block_trade:
+    zh: "存在Crossings与Special Crossings机制（场内配对成交报告），具体门槛与流程未在本轮抓取范围内详细核实"
+    en: "Crossings and Special Crossings mechanisms exist for reporting matched trades; specific thresholds and process not fully verified in this round"
+    sources:
+      - title: ASX Operating Rules Section 3（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_section_03.pdf
+        accessed: 2026-08-14
+    quote: "all Crossings and Special Crossings"
+    confidence: medium
+
+  dark_pool:
+    zh: ""
+    confidence: low
+
+  market_maker_scheme:
+    zh: "ETF/权证等投资产品发行人须依AQUA/Warrant规则履行流动性支持（做市）义务；衍生品市场另设正式的做市商注册制度"
+    en: "Issuers of investment products (ETFs/warrants) must meet liquidity support (market making) obligations under the AQUA/Warrant Rules; the derivatives market has a separate formal Market Maker registration scheme"
+    sources:
+      - title: Matters regulated by ASIC vs matters regulated by ASX（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/about/matters-regulated-by-asic-vs-matters-regulated-by-asx.pdf
+        accessed: 2026-08-14
+      - title: ASX Operating Rules Section 3（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_section_03.pdf
+        accessed: 2026-08-14
+    quote: "compliance by issuers with their liquidity support requirements for an investment product ... ASX may register a Trading Participant as a Market Maker for one or more Derivatives Market Contracts in accordance with the procedure set out in the Procedures."
+    confidence: high
+
+  connect_schemes:
+    zh: ""
+    confidence: low
+    detail: "未见类似沪港通式的跨境互联互通机制；ASX Clear的Trade Acceptance Service(TAS)接受Cboe Australia、National Stock Exchange of Australia等其他本地市场运营商(AMO)的CHESS适格证券交易，属本地竞争市场间的清算互通，非跨境机制，与「互联互通」概念不完全对应，暂不作为该字段的正式内容填入。"
+
+# ═══════════════════════════════════════════════
+# 六｜上市、持续监管与退市
+# ═══════════════════════════════════════════════
+# 说明：与SSE/HKEX/JPX不同，ASX不设主板/创业板式的分层板块体系——准入标准单一（利润测试
+# 或资产测试二选一 + 股东分布/自由流通量门槛），"ASX Foreign Exempt Listing"是面向已在
+# 合格境外交易所上市公司的另一种准入路径（主要遵守母国规则），性质上是「豁免类别」而非
+# 「板块」。这是继Eurex（无"公司上市"概念）之后本项目遇到的第二种listing章节结构性不完全
+# 适配的样本，记入OPEN-QUESTIONS。
+listing:
+  _meta:
+    verified: 2026-08-14
+    confidence: high
+
+  boards:
+    - id: au-asx-official-list
+      name_zh: 官方上市名单（无板块分层）
+      name_native: "ASX Official List / ASX Listing"
+      financial_threshold: "利润测试：过去3年累计经营利润A$100万+最近12个月经营利润A$50万；或资产测试：净有形资产A$400万，或市值A$1500万；另需至少300名非关联股东各持有价值≥A$2,000的证券包，且上市时自由流通量不低于20%"
+      target_companies: "无板块分层结构，唯一的准入名单，覆盖各类规模与行业的企业"
+    - id: au-asx-foreign-exempt
+      name_zh: 外国获豁免上市
+      name_native: "ASX Foreign Exempt Listing"
+      target_companies: "已在合格境外交易所上市的公司（新西兰公司门槛更低），主要遵守母国上市地规则，豁免大部分ASX上市规则"
+
+  review_system:
+    zh: "披露为本的准入审核制度：满足量化门槛（利润或资产二选一）+股东分布/自由流通量要求即可申请，ASX对适合性另有实质审核权，不完全对应注册制/核准制的二分"
+    en: "Disclosure-based admission regime: applicants meeting quantitative thresholds (profit or assets test) plus spread/free-float requirements may apply; ASX retains substantive discretion over suitability, not a clean fit for the registration-based/approval-based dichotomy"
+    detail: "与港交所案例（见hk-hkex.yml review_system字段）相同，是矩阵受控词表`review_system`覆盖面不足的又一例证，记入OPEN-QUESTIONS。"
+    sources:
+      - title: ASX Listing Rules Chapter 1（ASX 官网 PDF）
+        url: https://www.asx.com.au/documents/rules/Chapter01.pdf
+        accessed: 2026-08-14
+    confidence: medium
+
+  listing_process_duration:
+    zh: ""
+    confidence: low
+
+  transfer_between_boards:
+    zh: "不适用：ASX无板块分层结构，仅ASX Listing与ASX Foreign Exempt Listing两类不同准入路径，两者间转换未见专门规则页说明"
+    en: "N/A: ASX has no tiered board structure; only two distinct admission categories (ASX Listing vs ASX Foreign Exempt Listing) exist, and no dedicated rule page on switching between them was located"
+    sources:
+      - title: ASX Listing Rules Chapter 1（ASX 官网 PDF，准入规则通篇未见板块间转换条款）
+        url: https://www.asx.com.au/documents/rules/Chapter01.pdf
+        accessed: 2026-08-14
+    confidence: medium
+
+  continuing_obligations:
+    zh: "持续披露（Listing Rule 3.1，见regulation.disclosure_requirements）；按年度/半年度（部分矿业及油气勘探公司加季度）提交财务报告；年度上市费须按期缴纳"
+    en: "Continuous disclosure (Listing Rule 3.1, see regulation.disclosure_requirements); annual/half-yearly (and for certain mining/oil & gas entities, quarterly) financial reporting; timely payment of annual listing fees"
+    sources:
+      - title: Matters regulated by ASIC vs matters regulated by ASX（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/about/matters-regulated-by-asic-vs-matters-regulated-by-asx.pdf
+        accessed: 2026-08-14
+    quote: "Chapter 3 for listed entities to disclose various matters to ASX in a timely manner including, importantly, their obligation under Listing Rule 3.1 ... Chapter 4 for listed entities to lodge annual, half-yearly and, in some cases, quarterly financial statements and reports with ASX by certain dates"
+    confidence: high
+
+  suspension_resumption:
+    zh: "ASX可依职权随时暂停证券报价，典型触发情形包括：为防止无序或信息不对称市场、实体未按期提交文件或未缴纳上市费（次一营业日起暂停）；暂停不等同于终止报价，可无需重新申请即恢复"
+    en: "ASX may suspend quotation of securities at any time on its own initiative, typically to prevent a disorderly or uninformed market, or where an entity fails to lodge documents or pay listing fees by the due date (suspension from the next business day); suspension is distinct from ending quotation and securities may be reinstated without a fresh application"
+    sources:
+      - title: ASX Listing Rules Chapter 17（ASX 官网 PDF）
+        url: https://www.asx.com.au/documents/rules/Chapter17.pdf
+        accessed: 2026-08-14
+    quote: "It is necessary to suspend quotation to prevent a disorderly or uninformed market. ... Securities that are suspended, or subject to a trading halt or interruption, may be reinstated to quotation without a fresh application."
+    confidence: high
+
+  delisting_conditions:
+    zh: "ASX可依职权将实体从官方上市名单移除，主要情形包括：实体无法或不愿遵守上市规则、已无任何报价证券，或ASX认为存在其他合理理由"
+    en: "ASX may remove an entity from the official list where, in ASX's opinion: the entity is unable or unwilling to comply with a Listing Rule, has no quoted securities, or removal is appropriate for some other reason"
+    sources:
+      - title: ASX Listing Rules Chapter 17（ASX 官网 PDF）
+        url: https://www.asx.com.au/documents/rules/Chapter17.pdf
+        accessed: 2026-08-14
+    quote: "ASX may remove an entity from the official list if, in ASX's opinion, any of the following applies. The entity is unable or unwilling to comply with, or breaks, a listing rule. ... The entity has no quoted securities. It is appropriate for some other reason."
+    confidence: high
+
+  delisting_process:
+    zh: "可依实体请求移除（ASX有权要求满足附加条件），或由ASX依职权移除；未按期缴纳年度上市费的，于到期日后第20个营业日收盘时自动移除；移除生效日通常为ASX指定日期的收盘时点"
+    en: "Removal may occur at the entity's request (subject to ASX's discretion to impose conditions) or on ASX's own initiative; failure to pay the annual listing fee triggers automatic removal at the close of trading on the 20th business day after the due date; removal generally takes effect at the close of trading on a date ASX determines"
+    sources:
+      - title: ASX Listing Rules Chapter 17（ASX 官网 PDF）
+        url: https://www.asx.com.au/documents/rules/Chapter17.pdf
+        accessed: 2026-08-14
+    quote: "ASX may at any time remove an entity from the official list at the request of the entity. ... If an entity does not pay an annual listing fee as required under rule 16.5, ASX will remove the entity from the official list at the close of trading on the 20th business day after the due date."
+    confidence: high
+
+  delisting_transition_period:
+    zh: ""
+    confidence: low
+
+  post_delisting_venue:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 七｜指数体系
+# ═══════════════════════════════════════════════
+indices:
+  _meta:
+    verified: 2026-08-14
+    sources:
+      - title: S&P/ASX indices 101（ASX 官网博客）
+        url: https://www.asx.com.au/blog/listed-at-asx/sandp-asx-indices-101
+        accessed: 2026-08-14
+    confidence: high
+  items:
+    - id: au-asx-xao
+      name_zh: 澳大利亚全普通股指数
+      name_native: "All Ordinaries (XAO)"
+      compiler: sp_dj
+      weighting_method: market_cap
+      review_frequency: "半年度（3月/9月）"
+      flagship: "no"
+      description: "以三个月平均总市值(TMC)衡量的市值最大500家公司，非自由流通量调整口径；常被视为「大盘」代名词但成分股数远小于ASX全部约2,000家上市公司"
+    - id: au-asx-xjo
+      name_zh: 标普/澳交所200指数
+      name_native: "S&P/ASX 200 (XJO)"
+      compiler: sp_dj
+      weighting_method: float_adjusted
+      review_frequency: "季度（3/6/9/12月）"
+      flagship: "yes"
+      description: "澳大利亚股市的「基准」指数，众多基金以此为业绩比较基准，亦是大型ETF的跟踪标的"
+    - id: au-asx-xko
+      name_zh: 标普/澳交所300指数
+      name_native: "S&P/ASX 300 (XKO)"
+      compiler: sp_dj
+      weighting_method: float_adjusted
+      review_frequency: "半年度（3月/9月）"
+      flagship: "no"
+      description: "在XJO 200家基础上再加100家规模较小但具流动性的公司"
+
+# ═══════════════════════════════════════════════
+# 八｜清算、结算与交割
+# ═══════════════════════════════════════════════
+clearing:
+  _meta:
+    verified: 2026-08-14
+    confidence: high
+
+  settlement_cycle:
+    enum: t2
+    zh: "T+2（自2016年起实行）。此后ASX成立T+1工作组研究进一步压缩至T+1的可行性，2024年4月23日发布行业白皮书；官方页面明确称之为「潜在改革」，处于征求行业反馈阶段，未见官方确认的正式切换日期"
+    en: "T+2, in effect since 2016. ASX has since run a T+1 Working Group studying a further move to T+1, publishing an industry whitepaper on 23 April 2024; the official page explicitly describes this as a 'potential' change under industry consultation, with no confirmed transition date found"
+    detail: "T+1相关页面（considerations for accelerating cash equities settlement）明确使用「potential move」「considerations」等用语，未见官方承诺具体生效日期，故本条不填写具体的T+1预期切换年份，仅记录现状与在研状态，避免把「在讨论」误标为「已确定」。"
+    sources:
+      - title: Cash market clearing（ASX 官网）
+        url: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear/cash-market-clearing
+        accessed: 2026-08-14
+      - title: T+1 Settlement Cycle（ASX 官网，改革研究现状说明）
+        url: https://www.asx.com.au/markets/clearing-and-settlement-services/t1-settlement-cycle
+        accessed: 2026-08-14
+      - title: History（ASX 官网，"2016 - T+2 settlement...commenced"）
+        url: https://www.asx.com.au/about/history.htm
+        accessed: 2026-08-14
+    quote: "2016 - T+2 settlement of sharemarket trades commenced. ... The resulting transactions are sent to ASX Settlement for settlement in CHESS on the morning of T+2. ... References to a potential move to T+1 settlement for the Australian cash equity market means settlement one business day after the trade date (T) (that is, T+1 is trade date plus one business day). ... On 23 April 2024, ASX published an industry whitepaper following on from the establishment of the T+1 Working Group."
+    confidence: high
+
+  ccp_name:
+    zh: "ASX Clear（现货市场证券/权证/结构性产品/计息证券的中央对手方）"
+    en: "ASX Clear (central counterparty for equities, warrants, structured products and interest rate securities)"
+    detail: "清算流程含新设(novation)：原交易双方合约被替换为清算参与者与ASX Clear之间的两笔独立合约，ASX Clear成为每笔买方交易的卖方、每笔卖方交易的买方。"
+    sources:
+      - title: Cash market clearing（ASX 官网）
+        url: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear/cash-market-clearing
+        accessed: 2026-08-14
+    quote: "Once accepted by ASX Clear, each cash market transaction or derivatives market contract is novated – replaced with two separate transactions or contracts between the clearing participants and ASX Clear as the Central Counterparty (CCP)."
+    confidence: high
+
+  csd_name:
+    zh: "ASX Settlement，透过结算与股权分登记电子系统（CHESS）运作"
+    en: "ASX Settlement, operating via the Clearing House Electronic Sub-register System (CHESS)"
+    detail: "CHESS将结算服务与电子分登记系统合二为一，投资者可选择CHESS分登记或发行人保荐分登记两种持有方式，前者以投资者本人名义直接持有证券。"
+    sources:
+      - title: ASX Settlement（ASX 官网）
+        url: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-settlement
+        accessed: 2026-08-14
+    quote: "The settlement system and electronic securities depository for cash equities, warrants and other equity related securities traded in Australia ... We conduct settlement through the Clearing House Electronic Sub-register System (CHESS)."
+    confidence: high
+
+  initial_margin_practice:
+    zh: ""
+    confidence: low
+
+  maintenance_margin_practice:
+    zh: ""
+    confidence: low
+
+  mark_to_market_frequency:
+    zh: ""
+    confidence: low
+
+  delivery_method:
+    enum: na
+    zh: "不适用（现货市场为主）"
+    en: "N/A (predominantly a cash/spot market)"
+    detail: "本文件聚焦ASX现货股票市场，products章节所列品类（股票/ETP/权证/A-REITs/LICs/计息证券）均为现货或现金结算的结构性产品；衍生品市场ASX 24的实物/现金交割规则不在本文件覆盖范围（见group_id说明）。这是对本文件自身products章节的内部推断，非逐产品交割规则页的直接证据。"
+    sources:
+      - title: Cash market trading hours（ASX 官网，页面标题本身即以"Cash market"指称本文件覆盖的现货市场）
+        url: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours
+        accessed: 2026-08-14
+    confidence: medium
+
+  last_trading_day_rule:
+    zh: ""
+    confidence: low
+
+  default_management:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 九｜市场参与者
+# ═══════════════════════════════════════════════
+participants:
+  _meta:
+    verified: 2026-08-14
+    confidence: medium
+
+  investor_structure:
+    zh: "以S&P/ASX 300成分股为例，约70%股本由机构投资者持有、30%为散户；其中45%的股本由境外机构投资者持有——该数字针对S&P/ASX 300成分股口径，非整个ASX市场的正式统计，仅作参考"
+    en: "Among S&P/ASX 300 constituents, roughly 70% of share capital is held by institutions vs 30% retail; of this, 45% of share capital is held by overseas institutions — this figure is specific to S&P/ASX 300 constituents, not an official whole-market statistic"
+    sources:
+      - title: S&P/ASX indices 101（ASX 官网博客）
+        url: https://www.asx.com.au/blog/listed-at-asx/sandp-asx-indices-101
+        accessed: 2026-08-14
+    quote: "70% of the share capital in the XKO is institutional vs 30% retail. Furthermore, 45% of the share capital is held by overseas institutions."
+    confidence: medium
+
+  account_opening_requirements:
+    zh: ""
+    confidence: low
+
+  suitability_management:
+    zh: ""
+    confidence: low
+
+  foreign_access_channel:
+    zh: "无类似QFII式的额度审批通道；境外投资者原则上可直接开户交易，仅在触及FIRB申报门槛（一般持股≥20%「实质利益」或外国政府投资者的任何直接投资）时须向财政部申报，见regulation.foreign_ownership_limit"
+    en: "No QFII-style quota approval channel; foreign investors may generally trade directly, with notification to the Treasurer required only once FIRB thresholds are triggered (generally a 20% 'substantial interest' for private investors, or any direct investment for foreign government investors), see regulation.foreign_ownership_limit"
+    sources:
+      - title: Guidance Note 7 - Business Investments（外国投资审查委员会 FIRB，PDF）
+        url: https://foreigninvestment.gov.au/sites/firb.gov.au/files/guidance-notes/gn07_business-20230531.pdf
+        accessed: 2026-08-14
+    confidence: medium
+
+  membership_structure:
+    zh: "分层参与者体系：Trading Participant（交易参与者）/ Clearing Participant（清算参与者）/ Settlement Participant（结算参与者），角色可分离亦可由同一机构兼任"
+    en: "Tiered participant structure: Trading Participant / Clearing Participant / Settlement Participant, which may be separate roles or held by the same institution"
+    detail: "1999年ASX引入第三方清算，允许市场参与者选择仅从事交易或仅从事清算，见overview.history。本条基于Operating Rules全篇反复出现的角色术语归纳，非某一条款的单一定义性引用。"
+    sources:
+      - title: ASX Operating Rules Section 3（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_section_03.pdf
+        accessed: 2026-08-14
+    confidence: medium
+
+  broker_landscape:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 十｜市场数据与技术基础设施
+# ═══════════════════════════════════════════════
+infrastructure:
+  _meta:
+    verified: 2026-08-14
+    confidence: medium
+
+  market_data_levels:
+    zh: ""
+    confidence: low
+
+  data_latency:
+    zh: ""
+    confidence: low
+
+  data_pricing_model:
+    zh: ""
+    confidence: low
+
+  historical_data_availability:
+    zh: ""
+    confidence: low
+
+  trading_system_name:
+    zh: "ASX Trade（现行交易系统）；1987年引入的前身系统为Stock Exchange Automated Trading System（SEATS），已被取代"
+    en: "ASX Trade (current trading system); predecessor Stock Exchange Automated Trading System (SEATS) introduced in 1987 has since been replaced"
+    sources:
+      - title: Cash market trading hours（ASX 官网）
+        url: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours
+        accessed: 2026-08-14
+      - title: History（ASX 官网）
+        url: https://www.asx.com.au/about/history.htm
+        accessed: 2026-08-14
+    quote: "Brokers enter orders into ASX Trade in preparation for the market opening. ... 1987 - The Australian Stock Exchange Limited (ASX) was formed on 1 April ... ASX's Stock Exchange Automated Trading System (SEATS) was introduced in October, the day before the global stock market crash."
+    confidence: high
+
+  access_methods:
+    zh: ""
+    confidence: low
+    detail: "官网导航提及ASX Net、ASX Colo OnDemand、Australian Liquidity Centre(ALC)等接入/托管服务名称，但本轮未深入抓取其各自专门说明页，留空。"
+
+  major_outage_history:
+    zh: "CHESS更换项目重大失败案例：2017年启动以分布式账本技术(Digital Asset)替换CHESS的项目，2022年11月17日叫停，注销约2.45-2.55亿澳元（税前）项目成本；2026年联邦法院裁定ASX因2022年2月10日「项目进展良好」的误导性市场公告需支付2050万澳元罚款（另加300万澳元诉讼费用），是ASIC对ASX自身提起并胜诉的执法案例"
+    en: "Major CHESS replacement project failure: a distributed-ledger (Digital Asset) based CHESS replacement project launched in 2017 was paused on 17 November 2022, derecognising approximately A$245-255 million (pre-tax) in project costs; in 2026 the Federal Court ordered ASX to pay a A$20.5 million penalty (plus A$3 million in ASIC's costs) for a misleading 10 February 2022 market announcement that the project was 'progressing well' — an ASIC enforcement action against ASX itself"
+    sources:
+      - title: 26-143MR ASX ordered to pay $20.5 million penalty for misleading conduct relating to CHESS replacement project（ASIC 官网）
+        url: https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-143mr-asx-ordered-to-pay-20-5-million-penalty-for-misleading-conduct-relating-to-chess-replacement-project/
+        accessed: 2026-08-14
+    quote: "The Federal Court has ordered ASX Limited (ASX) to pay a $20.5 million penalty for its misleading statement about the progress of its CHESS replacement project. The penalty decision follows ASX's admission that its 10 February 2022 market announcement stating the CHESS replacement project was “progressing well” was misleading and exposed market participants to the risk of financial harm. ... ASX was also ordered to pay $3 million toward ASIC's costs. ... On 17 November 2022, ASX paused the project and derecognised approximately $245-$255 million (pre-tax) in its own project costs."
+    confidence: high
+
+# ═══════════════════════════════════════════════
+# 十一｜交易成本与税费
+# ═══════════════════════════════════════════════
+costs:
+  _meta:
+    verified: 2026-08-14
+    confidence: medium
+
+  commission_structure:
+    zh: ""
+    confidence: low
+
+  exchange_fees:
+    zh: ""
+    confidence: low
+    detail: "本轮找到的费率数字集中在清算环节（见clearing_fees），未核实ASX Trade成交本身（非清算环节）的交易费率表具体数字，留空。"
+
+  clearing_fees:
+    zh: "现货市场股票及投资产品清算费：成交金额的0.225个基点（0.00225%），从价计费"
+    en: "Cash market clearing fee for equities and investment products: 0.225 basis points (0.00225%) of executed trade value, charged ad valorem"
+    detail: "权证、计息证券适用更高费率0.35个基点（0.0035%）；另有交叉盘登记费0.10个基点（$5封顶）；ASX运营现货市场清算结算收入分成机制，超年度增长门槛部分与清算结算参与者对半分享。"
+    sources:
+      - title: ASX Clear 现货市场清算费率表（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/clearing-and-settlement/asx-clear/schedule-of-fees.pdf
+        accessed: 2026-08-14
+    quote: "Transaction Clearing Fee for Equities and Investment Products Calculated at 0.00225% of executed Trade Value for message: 164 1-Jul-16 Ad valorem of 0.225 Basis Points"
+    confidence: high
+
+  regulatory_fees:
+    zh: ""
+    confidence: low
+
+  stamp_duty:
+    zh: ""
+    confidence: low
+    detail: "本轮未找到直接官方来源确认ASX二级市场股票交易本身的印花税现状（第三方检索线索显示上市证券转让印花税早在GST推行的1990年代末已获各州豁免，但未逐条核实原始州税务条例或政府间协议文本，不采信WebSearch摘要，留空待核实），见OPEN-QUESTIONS。"
+
+  financial_transaction_tax:
+    zh: ""
+    confidence: low
+
+  capital_gains_tax:
+    zh: ""
+    confidence: low
+
+  dividend_withholding_tax:
+    zh: ""
+    confidence: low
+    detail: "草稿印象：澳大利亚有股息预扣税但设有独特的「分红抵免」(franking credit/imputation)制度，已完全抵免的分红部分对本地居民无预扣税——一般性知识，未附官方来源核实具体税率与适用条件，留空。"
+
+  implicit_costs_note:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 十二｜风险与特殊考量
+# ═══════════════════════════════════════════════
+risks:
+  _meta:
+    verified: 2026-08-14
+    confidence: medium
+
+  fx_risk_note:
+    zh: "澳元为自由浮动货币，与大宗商品价格及利差交易情绪相关性较高，波动性通常高于美元/欧元等主要货币，但未附官方来源量化，属一般性知识"
+    en: "The Australian dollar floats freely and is relatively correlated with commodity prices and carry-trade sentiment, typically more volatile than major currencies such as USD/EUR; general knowledge, not sourced to an official quote"
+    confidence: low
+
+  political_risk_note:
+    zh: ""
+    confidence: low
+
+  liquidity_risk_note:
+    zh: ""
+    confidence: low
+
+  regulatory_change_risk_note:
+    zh: "CHESS更换项目自2017年启动、2022年叫停重启（现由TCS承接）、2026年ASX本身因误导性市场公告被联邦法院处以2050万澳元罚款——展示了本所核心结算基础设施改造项目的执行与信息披露风险，详见infrastructure.major_outage_history"
+    en: "The CHESS replacement saga (launched 2017, paused 2022, now with TCS) culminated in a 2026 Federal Court penalty of A$20.5 million against ASX itself for misleading market disclosure — illustrating execution and disclosure risk around the exchange's core settlement infrastructure overhaul, see infrastructure.major_outage_history"
+    sources:
+      - title: 26-143MR ASX ordered to pay $20.5 million penalty for misleading conduct relating to CHESS replacement project（ASIC 官网）
+        url: https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-143mr-asx-ordered-to-pay-20-5-million-penalty-for-misleading-conduct-relating-to-chess-replacement-project/
+        accessed: 2026-08-14
+    quote: "The Federal Court has ordered ASX Limited (ASX) to pay a $20.5 million penalty for its misleading statement about the progress of its CHESS replacement project."
+    confidence: high
+
+  enforcement_note:
+    zh: "ASIC对ASX自身提起并胜诉的2026年CHESS误导性陈述民事处罚案（2050万澳元）显示监管执法环境覆盖交易所运营商本身、并非只针对上市公司或市场参与者；法院同时强调该判罚旨在警示所有披露主体不得就重大项目进展做误导性陈述"
+    en: "ASIC's 2026 civil penalty action against ASX itself over misleading CHESS project disclosures (A$20.5m) shows the enforcement environment reaches the exchange operator, not only listed companies or market participants; the Court stressed the penalty was meant to deter misleading statements about major project progress across all disclosing entities"
+    sources:
+      - title: 26-143MR ASX ordered to pay $20.5 million penalty for misleading conduct relating to CHESS replacement project（ASIC 官网）
+        url: https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-143mr-asx-ordered-to-pay-20-5-million-penalty-for-misleading-conduct-relating-to-chess-replacement-project/
+        accessed: 2026-08-14
+    quote: "26-143MR ASX ordered to pay $20.5 million penalty for misleading conduct relating to CHESS replacement project ... The Federal Court has ordered ASX Limited (ASX) to pay a $20.5 million penalty for its misleading statement about the progress of its CHESS replacement project. ... it was 'also necessary that the market as a whole understands that misleading announcements made by disclosing entities about their operations will be the subject of significant penalties and there is a need to deter other listed entities from making misleading announcements about the progress of significant projects in which they may be engaging, including where the completion of that project involves third parties.'"
+    confidence: high
