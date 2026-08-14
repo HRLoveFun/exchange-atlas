@@ -7,6 +7,7 @@
 | 指数熔断 | Market-wide Circuit Breaker |  | 大盘指数触发阈值后全市场暂停交易的机制，区别于个股级的波动性中断 |
 | 波动性中断机制 | Volatility Control Mechanism (VCM) | en: Volatility Control Mechanism (VCM) | 港交所个股级机制，触发后进入冷静期，非全市场停牌 |
 | 波动性中断 | Volatility Interruption | en: Volatility Interruption | Eurex机制，预期成交价超出动态/静态价格区间即触发，以集合竞价恢复交易；官方英文名与港交所VCM不同，且身兼波动性中断与"涨跌停执行方式"双重角色，不与volatility-control-mechanism合并一条 |
+| 熔断冷静期机制 | Circuit Breaker / Cooling-Off Period | en: Circuit Breaker and Cooling-Off Period | SGX机制，个股/期货合约级别，以滚动参考价（一般为5分钟前成交价）为基准±10%价格带，超出即触发5分钟冷静期（非停牌，价格带内仍可继续交易），官方原文明确"not intended to halt price movement"、区别于固定每日涨跌停模式；与港交所VCM、Eurex波动性中断概念相近但触发机制/冷静期时长/覆盖范围（限STI/MSCI Singapore Free Index成分股及价格≥0.50的产品）均不同，不合并条目 |
 | 涨跌限价机制 | Limit Up-Limit Down (LULD) | en: Limit Up-Limit Down (LULD) | 美国证券市场的个股价格带机制，以过去5分钟均价为基准动态计算 |
 | 涨跌幅限制 | Price Limit (Percentage Band) |  | 以前收盘价为基准的百分比涨跌幅限制，如上交所主板 ±10% |
 | 值幅限制 | Price Limit (Absolute Tiered) | ja: 値幅制限 | 按价格区间分档规定绝对值幅（非百分比），日本市场典型做法；基准价称「基準値段」 |
@@ -19,6 +20,7 @@
 | 中央证券存管机构 | Central Securities Depository (CSD) |  |  |
 | 做市商制度 | Market Maker Scheme |  |  |
 | 指定做市商 | Designated Market Maker (DMM) | en: Designated Market Maker (DMM) | 纽交所特有的场内做市商角色，负责维持特定股票的公平有序市场 |
+| 指定做市商 | Designated Market-Maker | en: Designated Market-Maker | SGX机制（规则手册Chapter 6），须就获批品种在交易系统持续提供有约束力的双边报价，与纽交所DMM同名但不是同一制度——纽交所DMM是场内实体角色，SGX这是电子市场下的做市义务注册资格，不与designated-market-maker合并一条 |
 | 互联互通机制 | Stock Connect |  | 内地与香港市场间的跨境交易安排，如沪港通/深港通 |
 | 收盘集合竞价 | Closing Auction |  |  |
 | 开盘集合竞价 | Opening Auction |  |  |

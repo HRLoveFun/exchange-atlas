@@ -23,6 +23,9 @@
 15. **`us-nyse.short_selling` 的具体触发阈值（Reg SHO Alternative Uptick Rule 的"较前收盘价下跌几%触发"）未能确认。** 与第14条类似，`sec.gov` 与 `finra.org` 本次分别尝试抓取相关规则页均返回403，无法核实这个业内广为人知的具体数字（常识印象是10%，但没有当次抓取的原文，按铁律不采纳）。这三个域名（sec.gov/finra.org/dtcc.com）叠加起来构成了美股监管/清算类信息目前最大的抓取缺口，值得作为一个整体去想解决方案，而不是逐字段单独想办法绕过。
 16. **`jp-jpx` 是否存在独立于「特別気配」之外的全市场级熔断机制，本次未能确认。** TSE《业务规程》里明确的波动控制手段是个股级的「特別気配」（申报价超出值幅制限时不成交、改显示指示性价格），这本质是值幅制限的执行方式；本次抓取的官方英文文档中没有找到类似美股 MWCB（基于大盘指数跌幅触发全市场停牌）那种独立机制的条文，但也不能排除是本次检索范围没覆盖到相关规则（如更晚修订的规程或大阪交易所衍生品市场的规则）。`circuit_breaker` 字段的 `detail` 里已如实标注这一点为未确认状态，而不是断言"日本没有市场级熔断"。
 17. **`taxonomy.yml` 假设的「公司上市」范式在衍生品交易所（`de-eurex`）不成立，这是 ADR-009 当初就预期要压测的问题，现在有了真实结果。** 六｜上市章节的全部字段（`boards`/`review_system`/`delisting_conditions`等）对期货期权交易所都不适用——衍生品交易所没有公司上市，只有「交易员/交易参与者准入」（更接近 `participants` 章节）与「合约挂牌」（更接近 `products` 章节）两个概念，`de-eurex.yml` 对 `listing` 整章如实留空并在章节顶部注释说明，没有强行把交易员准入规则套进上市字段。同样不完全适用的还有三个具体字段：`clearing.settlement_cycle`（衍生品是"每日盯市+到期日交割"，不是"买入后T+N天收货"的时间结构）、`market_structure.short_selling`（衍生品"卖出开仓"不涉及股票式的借券，机制前提不同）、`market_structure.intraday_reversal`（衍生品开平仓当日自由进行，T+0/T+1式限制的设计前提不成立）——这三个字段 `de-eurex.yml` 都如实留空并在 `detail` 里说明"设计前提不适用"，没有强行选一个enum凑数。**结论：`taxonomy.yml` 目前是以现货股票市场为默认范式设计的，六｜上市章节与三个具体字段对衍生品交易所存在系统性不适配，比"受控词表不够用"（第3条）更严重——那是"选项不够"，这是"整章/整个字段的前提假设都不成立"。** 是否需要给 `taxonomy.yml` 引入按交易所类型（现货/衍生品）的章节级条件适用机制，还是继续用"留空+detail说明"的方式吸收这类差异，等 v0.2 五家标杆全部完成、有更多样本后再评估，不要现在就动 schema。
+18. **`sg-sgx` 是本项目第一个「一所同时运营现货+衍生品两条业务线、且只建一个条目」的样本，与第17条（纯衍生品所整章不适用）是不同的适配难题。** Eurex 是单一业务（纯衍生品）的独立实体，整章/整字段可以干脆判"不适用"；SGX-ST（现货）与 SGX-DT（衍生品）是同一「新交所」品牌下两个法人实体，但 v1.0 名单只规划一个 `sg-sgx` 条目覆盖两者（详见 `sg-sgx.yml` 文件顶部注释），于是像 `clearing.delivery_method` 这类字段被迫在"现货不适用交割概念"与"衍生品部分实物/部分现金"两种矛盾的取值之间，只能选一个近似枚举（本次选了 `either` 并在 detail 说明近似之处）。`listing` 章节因为 SGX-ST 现货业务本身有完整上市范式，改为正常按现货业务填写（不套用 Eurex 的整章留空处理）。这提示 `taxonomy.yml` 未来可能需要区分"整章不适用"（衍生品所）与"字段取值因业务线混合而模糊"（一所多业务合并建档）两种不同的不适配模式，等更多"一所多业务"或"多法人合并单条目"样本出现后再评估要不要给 schema 加相应机制。
+19. **`sg-sgx` 现货证券市场的费率表（`costs.exchange_fees`）、技术基础设施整章（`infrastructure`）本次留空，根源是 `www.sgx.com` 主站是 React/Next.js 单页应用（SPA），curl 抓到的全部是约14.5KB的`<title>`空壳，正文靠前端 JS 调 API 渲染——`investorrelations.sgx.com`、`sgxgroup.com` 同样如此（后者返回空壳，前者直接连接超时）。这是继 v0.2 NYSE 时"sec.gov/finra.org/dtcc.com 域名级403"之后，第二种"抓不到"的新模式：不是反爬拒绝，是内容压根不在服务端渲染的 HTML 里。规则手册子域名 `rulebook.sgx.com` 完全不受影响（服务端渲染，全部可抓），公司概况/费率/技术基础设施类页面若确实只能在主站找到，需要专门研究能否命中 SGX 主站背后的 API 端点（如浏览器 devtools 抓包看 XHR 请求），或找年报/监管备案文件替代，下次接手 `sg-sgx` 补全时优先看这条。
+20. **`sg-sgx` 上市规则手册里发现了一个此前完全不知道的第三上市板块「Global Listing Board」**（rulebook.sgx.com 导航栏与 Mainboard/Catalist 并列），准入门槛与定义章节大量绑定"Nasdaq"（如"Nasdaq Listing Rules"），推断是专为已在 Nasdaq 上市公司申请在 SGX 双重上市设计的新机制，与本次 WebSearch 到的"MAS 正推动 SGX-Nasdaq 双重上市新规"背景吻合。但该板块具体启用/生效日期本次未找到官方原文确认（`listing.boards` 里对应条目 `launched_year` 留空），且原 Mainboard 退市规则中的「Watch-List」整章（Part V，规则1310-1315）已于2025年10月29日被删除、删除后是否有替代的财务/流动性退市触发机制本次也未核实（`listing.delisting_transition_period` 留空并记录了这一点）——这两处短期内发生的结构性变动，建议下次有空时专门核实清楚，可能牵涉到新交所上市制度一次实质性改革，值得单独调查而不只是顺手记一笔。
 
 ## 具体数据悬案
 
@@ -42,6 +45,8 @@
 - `jp-jpx` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 制度变革风险（regulatory_change_risk_note）— confidence: low
+- `sg-sgx` 上市、持续监管与退市 / 停牌/复牌规则（suspension_resumption）— confidence: low
+- `sg-sgx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `us-nyse` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `us-nyse` 市场结构与交易机制 / 订单类型（order_types）— confidence: low
 - `us-nyse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low

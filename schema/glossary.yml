@@ -34,6 +34,12 @@ terms:
     natives: {en: "Volatility Interruption"}
     note: Eurex机制，预期成交价超出动态/静态价格区间即触发，以集合竞价恢复交易；官方英文名与港交所VCM不同，且身兼波动性中断与"涨跌停执行方式"双重角色，不与volatility-control-mechanism合并一条
 
+  - id: sgx-circuit-breaker-cooling-off
+    zh: 熔断冷静期机制
+    en: Circuit Breaker / Cooling-Off Period
+    natives: {en: "Circuit Breaker and Cooling-Off Period"}
+    note: SGX机制，个股/期货合约级别，以滚动参考价（一般为5分钟前成交价）为基准±10%价格带，超出即触发5分钟冷静期（非停牌，价格带内仍可继续交易），官方原文明确"not intended to halt price movement"、区别于固定每日涨跌停模式；与港交所VCM、Eurex波动性中断概念相近但触发机制/冷静期时长/覆盖范围（限STI/MSCI Singapore Free Index成分股及价格≥0.50的产品）均不同，不合并条目
+
   - id: limit-up-limit-down
     zh: 涨跌限价机制
     en: Limit Up-Limit Down (LULD)
@@ -91,6 +97,12 @@ terms:
     en: Designated Market Maker (DMM)
     natives: {en: "Designated Market Maker (DMM)"}
     note: 纽交所特有的场内做市商角色，负责维持特定股票的公平有序市场
+
+  - id: sgx-designated-market-maker
+    zh: 指定做市商
+    en: Designated Market-Maker
+    natives: {en: "Designated Market-Maker"}
+    note: SGX机制（规则手册Chapter 6），须就获批品种在交易系统持续提供有约束力的双边报价，与纽交所DMM同名但不是同一制度——纽交所DMM是场内实体角色，SGX这是电子市场下的做市义务注册资格，不与designated-market-maker合并一条
 
   - id: stock-connect
     zh: 互联互通机制
