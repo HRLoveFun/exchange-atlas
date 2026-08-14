@@ -1,0 +1,1460 @@
+{
+  "id": "us-nasdaq",
+  "name_zh": "纳斯达克证券交易所",
+  "name_native": {
+    "en": "The Nasdaq Stock Market (Nasdaq)"
+  },
+  "official_languages": [
+    "en"
+  ],
+  "source_lang": "en",
+  "group_id": "nasdaq-group",
+  "region": "americas",
+  "tier": "extended",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "America/New_York (ET)",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dst_rule": {
+        "zh": "实行夏令时（东部时间在 EST/EDT 间切换）",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "founded_year": {
+        "zh": "1971（作为美国证券商协会 NASD 旗下的电子报价系统子公司设立，世界首个全电子报价系统）",
+        "en": "1971 (established as a subsidiary of the National Association of Securities Dealers (NASD); the world's first fully electronic quotation system)",
+        "sources": [
+          {
+            "title": "Nasdaq Celebrates 50 Years of Innovation（新闻稿）",
+            "url": "https://www.nasdaq.com/press-release/nasdaq-celebrates-50-years-of-innovation-2021-02-08",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Nasdaq was founded in 1971 as the world's first fully electronic quotation system.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "history": {
+        "zh": "1971年由美国证券商协会（NASD）设立为电子报价系统子公司；此后经股权重组逐步脱离NASD，2005年以代码NDAQ完成上市；2007年收购北欧-波罗的海交易所运营商OMX，组建纳斯达克OMX集团（现同一法人体系下称 Nasdaq, Inc.，见各页版权声明）",
+        "en": "Founded 1971 as a subsidiary of the National Association of Securities Dealers (NASD); gained independence through a restructuring and went public under the symbol NDAQ in 2005; acquired OMX (the Nordic/Baltic exchange operator) in 2007, forming the NASDAQ OMX Group (the current corporate entity is Nasdaq, Inc., per site copyright notices)",
+        "detail": "2000年起NASD开始向FINRA会员、投资公司及上市公司出售Nasdaq股权、扩大股权分散度；\n抓取到的官网文章明确表述\"脱离创始机构NASD、于2005年以NDAQ代码上市\"这一因果关系，\n但具体\"NASD完全退出持股\"\"正式成为独立注册全国性证券交易所\"的确切年份（常见说法为\n2006/2007年）本次抓取页面未给出可摘引的逐字原文，故未写入 zh/en 正文，仅记于此处\n供后续核实。2007年收购OMX、组建\"NASDAQ OMX Group\"这一节点则有官网原文直接佐证\n（见 quote）；该集团后续更名回\"Nasdaq, Inc.\"的具体年份同样未在本次抓取页面中找到\n原文确认，只能用各页面版权声明\"© 2026, Nasdaq, Inc.\"佐证这是当前的法律实体名称。\n",
+        "sources": [
+          {
+            "title": "Nasdaq CEOs Recall 50 Years of Innovation（历史访谈文章）",
+            "url": "https://www.nasdaq.com/articles/nasdaq-ceos-recall-50-years-of-innovation",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "About Nordic Exchanges（欧洲子公司并购时间线）",
+            "url": "https://www.nasdaq.com/european-markets/about-nordic-exchanges",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "gain independence from its founding organization, the National Association of Securities Dealers (NASD), which allowed Nasdaq to go public in 2005 under the symbol NDAQ",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "organization_form": {
+        "enum": "demutualized_listed",
+        "zh": "公司制（由NASD旗下子公司改制为独立上市公司，2005年以NDAQ代码上市）",
+        "en": "Demutualized, listed (converted from an NASD subsidiary to an independent public company, listed under NDAQ in 2005)",
+        "detail": "与 NYSE 2006年由会员制改制为上市公司的路径不同：Nasdaq 起点不是传统会员制交易所，而是行业自律组织NASD旗下的电子报价系统子公司，走的是'子公司独立化上市'而非'会员制改制'路径，但落点同样是自身股票公开交易的公司制实体，故枚举值同取 demutualized_listed。",
+        "sources": [
+          {
+            "title": "Nasdaq CEOs Recall 50 Years of Innovation（历史访谈文章）",
+            "url": "https://www.nasdaq.com/articles/nasdaq-ceos-recall-50-years-of-innovation",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "gain independence from its founding organization, the National Association of Securities Dealers (NASD), which allowed Nasdaq to go public in 2005 under the symbol NDAQ",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "self_listed": {
+        "enum": "yes",
+        "zh": "Nasdaq, Inc. 自身普通股以代码NDAQ公开交易（与港交所模式类似，自身上市于自己的市场）",
+        "en": "Nasdaq, Inc.'s own common stock trades publicly under the symbol NDAQ",
+        "detail": "官方文章确认\"2005年以NDAQ代码上市\"，但抓取到的页面未见逐字写明挂牌交易所就是纳斯达克\n自身（nasdaq.com/market-activity/stocks/ 这个URL结构同时承载非纳斯达克上市股票的行情，\n不构成\"在纳斯达克挂牌\"的独立证据，故不采纳为佐证）。按行业惯例（自家集团公司几乎必然\n选择在自己市场挂牌，NYSE的母公司ICE同样选择在NYSE而非其他交易所上市）判断为\"yes\"，\n但因缺少直接原文逐字确认挂牌场所，confidence 定为 medium 而非 high。\n",
+        "sources": [
+          {
+            "title": "Nasdaq CEOs Recall 50 Years of Innovation（历史访谈文章）",
+            "url": "https://www.nasdaq.com/articles/nasdaq-ceos-recall-50-years-of-innovation",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "quote": null
+      },
+      "market_cap_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未在本次会话核实最新总市值统计口径与数字，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "listed_companies_count": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "Initial Listing Guide 提及'over 4,000 companies choose to list on Nasdaq's U.S., Nordic and Baltic exchanges'，但这是Nasdaq全球（美股+北欧+波罗的海）合计口径，不是本文件所记录的The Nasdaq Stock Market（美股现货主板）单一实体口径，不能直接采用，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "global_ranking": {
+        "zh": "按成交量计为美国最大的股票交易场所",
+        "en": "The largest U.S. equities exchange venue by volume",
+        "detail": "此为'按成交量计美国境内'的排名口径，不是全球市值排名——与 us-nyse.yml 记录的'全球市值第一'印象（该字段留空未采信）是不同维度，不构成矛盾。",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Nasdaq Stock Market (Nasdaq) is the largest U.S. equities exchange venue by volume.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "trading_currency": {
+        "zh": "美元 (USD)",
+        "en": "USD",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "settlement_currency": {
+        "zh": "美元 (USD)",
+        "en": "USD",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "美国证券交易委员会",
+        "en": "U.S. Securities and Exchange Commission (SEC)",
+        "detail": "Nasdaq 作为注册的全国性证券交易所受SEC监管；Corporate Governance 上市规则表中多处援引SEC规则条款（如审计委员会须满足SEC Rule 10A-3），是SEC对上市公司层面监管职权的进一步佐证。",
+        "sources": [
+          {
+            "title": "Regulation SHO（官网）",
+            "url": "https://www.nasdaqtrader.com/Trader.aspx?id=regsho",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Securities and Exchange Commission (SEC) has adopted amendments to Regulation SHO",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "self_regulatory_org": {
+        "zh": "Nasdaq自身监管职能部门（MarketWatch股票/期权市场监察、调查与执法、上市审核三大团队，独立于业务部门运作）；FINRA代表纳斯达克会员机构提供部分监管服务",
+        "en": "Nasdaq's own regulatory functions (MarketWatch equities/options surveillance, Investigations & Enforcement, Listing Qualifications — operating independently of Nasdaq's business units); FINRA provides regulatory services on Nasdaq's behalf for its members",
+        "detail": "与 NYSE\"NYSE Regulation自身部门 + 委托FINRA处理跨市场事务\"的组合结构基本一致；\nMarket Maker Process页面明确写明\"FINRA provides regulatory services for all NASDAQ\nmembers on behalf of The NASDAQ Stock Market LLC\"，是会员资格审核环节FINRA介入的\n直接佐证。\n",
+        "sources": [
+          {
+            "title": "Market Regulation（官网）",
+            "url": "https://www.nasdaq.com/market-regulation",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Market Maker Process（官网）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=marketmakerprocess",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "At Nasdaq, our regulatory functions operate independently of Nasdaq's business units to safeguard the integrity of our markets.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "clearing_regulator": {
+        "zh": "美国证券交易委员会",
+        "en": "SEC",
+        "detail": "与市场监管为同一机构；清算机构NSCC/DTCC本身的监管细节本次未专门核实，与us-nyse.yml记录的情况一致。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Market Regulation（官网）",
+            "url": "https://www.nasdaq.com/market-regulation",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "quote": null
+      },
+      "core_laws": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "us-nyse.yml 记录该所受《1934年证券交易法》管辖（NYSE官网有'Section 19(b) of the Securities and Exchange Act of 1934'的直接原文）；同一部法律理应对Nasdaq同等适用（两者同为SEC注册的全国性证券交易所），但本次抓取的nasdaq.com/nasdaqtrader.com页面未找到可摘引的逐字原文提及该法案，按铁律不凭'理应如此'的推断填入，留空。",
+        "sources": [
+          {
+            "title": "Market Regulation（官网）",
+            "url": "https://www.nasdaq.com/market-regulation",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Market Regulation（官网）",
+            "url": "https://www.nasdaq.com/market-regulation",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Market Regulation（官网）",
+            "url": "https://www.nasdaq.com/market-regulation",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "disclosure_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Market Regulation（官网）",
+            "url": "https://www.nasdaq.com/market-regulation",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Market Regulation（官网）",
+            "url": "https://www.nasdaq.com/market-regulation",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "Nasdaq Initial Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "us-nasdaq-equities",
+          "category": "equity",
+          "name_zh": "普通股/优先股",
+          "name_native": "Common & Preferred Stock",
+          "description": "三档市场（Global Select/Global/Capital Market）财务与流动性门槛见 listing 章节"
+        },
+        {
+          "id": "us-nasdaq-etp",
+          "category": "fund",
+          "name_zh": "交易所买卖产品",
+          "name_native": "Exchange Traded Products (ETP)",
+          "description": "官网设有独立的ETP上市流程与Tier 1清单页面，具体规模占比本次未核实"
+        },
+        {
+          "id": "us-nasdaq-cef",
+          "category": "fund",
+          "name_zh": "封闭式基金",
+          "name_native": "Closed-End Funds",
+          "description": "Initial Listing Guide 提及closed end funds有独立于普通股的上市规则，未逐条核实具体量化门槛"
+        },
+        {
+          "id": "us-nasdaq-structured",
+          "category": "structured",
+          "name_zh": "结构性产品",
+          "name_native": "Structured Products",
+          "description": "Initial Listing Guide 提及structured products有独立上市规则，未逐条核实具体门槛"
+        },
+        {
+          "id": "us-nasdaq-debt",
+          "category": "bond",
+          "name_zh": "债券",
+          "name_native": "Debt Securities",
+          "description": "Initial Listing Guide 提及debt securities有独立上市规则，未逐条核实具体门槛"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "4:00am起接受交易与订单录入（早盘时段）",
+          "en": "Trading and order entry begins at 4:00 a.m. ET",
+          "sources": [
+            {
+              "title": "The Nasdaq Opening and Closing Crosses（官网）",
+              "url": "https://www.nasdaqtrader.com/Trader.aspx?id=OpenClose",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "4:00 a.m. Trading and order entry begins",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "continuous_am": {
+          "zh": "官网未将4:00am-9:30am再细分为'挂单排队不成交'与'连续竞价'两个子阶段（与NYSE区分Pre-Opening Session/无早盘连续交易的做法不同）；本字段与pre_market指向同一时段，未见独立命名",
+          "en": "The official page does not further split 4:00am-9:30am into a queue-only phase and a separate continuous phase (unlike NYSE's Pre-Opening Session structure); this field overlaps with pre_market",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "The Nasdaq Stock Market（交易机制总览页）",
+              "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "lunch_break": {
+          "zh": "无",
+          "en": "None",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "The Nasdaq Stock Market（交易机制总览页）",
+              "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "continuous_pm": {
+          "zh": "常规交易时段（Regular Hours）9:30am-4:00pm连续交易，含开盘集合竞价",
+          "en": "Regular Hours: continuous trading 9:30 a.m.-4:00 p.m. ET, including the Opening Cross",
+          "sources": [
+            {
+              "title": "Price List - Trading（官网）",
+              "url": "https://www.nasdaqtrader.com/Trader.aspx?id=PriceListTrading2",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "Regular Hours Orders include GTC, IOC and DAY orders, executable between 9:30 a.m. and 4:00 p.m., Eastern Time, including during the Opening Cross.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "after_market": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "本次抓取的页面未找到盘后连续交易的具体收盘时间（如是否至8:00pm）的官方原文，留空不猜。",
+          "sources": [
+            {
+              "title": "The Nasdaq Stock Market（交易机制总览页）",
+              "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "night_session": {
+          "zh": "无",
+          "en": "None",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "The Nasdaq Stock Market（交易机制总览页）",
+              "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "holidays_note": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘集合竞价（Opening Cross），9:25-9:30am发布订单失衡信息，9:30am撮合成交",
+        "en": "Opening Cross at 9:30 a.m. ET, preceded by Net Order Imbalance Indicator dissemination from 9:25 a.m.",
+        "sources": [
+          {
+            "title": "The Nasdaq Opening and Closing Crosses（官网）",
+            "url": "https://www.nasdaqtrader.com/Trader.aspx?id=OpenClose",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "9:25 a.m. Dissemination of imbalance information begins / 9:30 a.m. The Opening Cross occurs",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价（Closing Cross），3:50pm起发布订单失衡信息，4:00pm撮合成交",
+        "en": "Closing Cross at 4:00 p.m. ET, preceded by Net Order Imbalance Indicator dissemination from 3:50 p.m.",
+        "sources": [
+          {
+            "title": "The Nasdaq Opening and Closing Crosses（官网）",
+            "url": "https://www.nasdaqtrader.com/Trader.aspx?id=OpenClose",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "3:50 p.m. Dissemination of imbalance information begins / 4:00 p.m. The Closing Cross occurs",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "价格/时间优先撮合：同一价位按订单到达先后顺序执行；显示订单（displayed）优先于非展示订单（non-displayed）成交",
+        "en": "Price/time priority: displayed limit orders at the same price execute in the order received; non-displayed shares execute after displayed shares at that price",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Nasdaq features a price/time priority model where the execution logic is fair and transparent for all market participants. All displayed limit orders are treated equally and executed in the order in which they were received at the same price. Non-displayed shares are executed after displayed shares in the order in which they were received at that price.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "order_types": {
+        "zh": "限价、市价及多种细分订单类型（如最小数量单、中点挂钩单Mid-Point Peg、只加单Post Only、自成交防范Self Match Prevention等）；完整订单类型矩阵见Order Types Guide",
+        "en": "Limit and market orders plus specialized types (Minimum Quantity, Mid-Point Peg, Post Only, Self Match Prevention, etc.); full matrix in the Order Types Guide",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Nasdaq offers popular orders and functionality such as Minimum Quantity, Mid-Point Peg and Post Only orders, Self Match Prevention and Order Modify functionality, a robust suite of innovative routing strategies and our award-winning opening and closing crosses.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "tick_size": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "board_lot_size": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "odd_lot_handling": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "dynamic_reference",
+          "zh": "涨跌限价机制（LULD），以过去5分钟均价为基准动态计算价格区间，与us-nyse.yml记录的机制相同（同一份跨市场NMS Plan联合规则）",
+          "en": "Limit Up-Limit Down (LULD)",
+          "sources": [
+            {
+              "title": "Limit Up-Limit Down FAQ（PDF）",
+              "url": "https://www.nasdaqtrader.com/content/MarketRegulation/LULD_FAQ.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "The Limit Up-Limit Down (LULD) mechanism is intended to prevent trades in National Market System (NMS) securities from occurring outside of specified price bands. The bands would be set at a percentage level above and below the average reference price of the security over the immediately preceding five-minute period.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "detail": null
+        },
+        "main_board": {
+          "zh": "常规时段（9:30am-3:35pm）按证券分层：Tier1（标普500/罗素1000/部分ETP，前收盘价>$3）5%；Tier2（其他NMS证券，前收盘价>$3）10%；前收盘价$0.75-3之间的Tier1&2证券20%；前收盘价低于$0.75者为$0.15或75%孰低。收盘前时段（3:35-4:00pm）各档带宽加倍（如Tier1变10%、$0.75-3档变40%）",
+          "en": "Tiered during Regular Hours (9:30am-3:35pm): Tier 1 (S&P 500/Russell 1000/select ETPs, prior close >$3) 5%; Tier 2 (other NMS securities, prior close >$3) 10%; Tier 1&2 securities priced $0.75-$3 use 20%; below $0.75 use the lesser of $0.15 or 75%. Bands double during the 3:35-4:00pm closing period",
+          "sources": [
+            {
+              "title": "Limit Up-Limit Down FAQ（PDF）",
+              "url": "https://www.nasdaqtrader.com/content/MarketRegulation/LULD_FAQ.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "Tier 1 Securities Previous close > $3.00 / During Market Open and Market Hours, excluding Close (9:30 AM to 3:35 PM) / 5%\nTier 2 NMS Securities Previous close > $3.00 / During Market Hours, including Open/Close (9:30 AM to 4:00 PM) / 10%\nTier 1 and Tier 2 NMS Securities Previous close equal to $0.75 to and including $3.00 / During Market Open and Market Hours, excluding Close (9:30 AM to 3:35 PM) / 20%\nTier 1 & 2 NMS Securities Previous close < $0.75 / During Market Open and Market Hours, excluding Close (9:30 AM to 3:35 PM) / The lesser of $0.15 or 75%\n",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "other_boards": {
+          "zh": "不适用：LULD的Tier1/Tier2分层已覆盖全部NMS证券，无另设的'其他板块'幅度",
+          "en": "Not applicable: the Tier 1/Tier 2 LULD structure already covers all NMS securities",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "The Nasdaq Stock Market（交易机制总览页）",
+              "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "index_level",
+        "zh": "全市场熔断（Market-Wide Circuit Breaker, MWCB），基于标普500指数单日跌幅：7%（一级）、13%（二级）、20%（三级）；与us-nyse.yml记录的机制相同（同一份跨市场联合计划）",
+        "en": "Market-Wide Circuit Breaker (MWCB) based on S&P 500 index decline: 7% (Level 1), 13% (Level 2), 20% (Level 3)",
+        "detail": "一级/二级：3:25pm前触发则暂停交易15分钟，3:25pm后触发不再暂停（除非同时触发三级）；三级：任何时段触发即暂停交易至当日收市。",
+        "sources": [
+          {
+            "title": "Market-Wide Circuit Breakers FAQ（PDF）",
+            "url": "https://www.nasdaqtrader.com/content/marketregulation/mwcb_faq.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Level 1 halt (7% decline in S&P 500 index) / Trading will halt for 15 minutes if drop occurs before 3:25 p.m. / Level 2 halt (13% decline in S&P 500 index) / Trading will halt for 15 minutes if drop occurs before 3:25 p.m. / Level 3 halt (20% decline in S&P 500 index) / At any time during the trading day-trading will halt for the remainder of the trading day.",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "volatility_interruption": {
+        "zh": "LULD个股级波动性中断：报价触及价格带边缘形成'Limit State'，持续15秒仍未消化即触发5分钟交易暂停",
+        "en": "LULD stock-level volatility interruption: an unresolved 15-second Limit State triggers a five-minute trading pause",
+        "sources": [
+          {
+            "title": "Limit Up-Limit Down FAQ（PDF）",
+            "url": "https://www.nasdaqtrader.com/content/MarketRegulation/LULD_FAQ.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "All NMS Stocks (once all phased in) will enter into a \"Limit State\" quotation period of 15 seconds if the NBO equals the Lower Price Band (without crossing the NBB), or the NBB equals the upper price band (without crossing the NBO)... If a limit state exists and trading continues to occur at the price band OR no trading occurs within the price band for more than 15 seconds, then a five-minute trading pause would be enacted.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "见circuit_breaker（全市场级MWCB）与volatility_interruption（个股级LULD）；另有因披露事项、系统故障等触发的监管性停牌，本次未逐条核实",
+        "en": "See circuit_breaker (market-wide MWCB) and volatility_interruption (stock-level LULD); regulatory halts (disclosure matters, technical issues, etc.) also exist but were not verified in detail this session",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "intraday_reversal": {
+        "enum": "t0",
+        "zh": "T+0（可当日回转），与结算层面T+1（见clearing.settlement_cycle）是两个不同概念",
+        "en": "T+0 (same-day round-trip trading allowed); distinct from the T+1 settlement cycle (see clearing.settlement_cycle)",
+        "detail": "与us-nyse.yml记录的判断依据一致：美股交易层面对当日买卖同一证券无交易所层面的特殊限制，Pattern Day Trader规则是针对保证金账户的监管要求而非交易所回转限制，本次未深入核实细节。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "quote": null
+      },
+      "short_selling": {
+        "enum": "restricted_uptick",
+        "zh": "受Regulation SHO监管，含卖空限制熔断机制（Rule 201报升规则，Alternative Uptick Rule）；具体触发跌幅阈值本次未在抓取页面中找到可摘引的官方原文",
+        "en": "Regulated under Regulation SHO, including the short sale-related circuit breaker (Rule 201, Alternative Uptick Rule)",
+        "detail": "与us-nyse.yml记录的情况一致：Regulation SHO是SEC统一规则，Nasdaq/NYSE/FINRA页面均只确认Rule 201存在，未给出'跌幅达到多少百分比触发'的逐字原文，按铁律不凭记忆填入具体数值。",
+        "sources": [
+          {
+            "title": "Regulation SHO（官网）",
+            "url": "https://www.nasdaqtrader.com/Trader.aspx?id=regsho",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Short Sale Circuit Breaker（官网）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=ShortSaleCircuitBreaker",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The SEC adopted amendments to Regulation SHO with a compliance date of November 10, 2010. Among the rule changes, the SEC introduced Rule 201 (Alternative Uptick Rule), a short sale-related circuit breaker that when triggered, will impose a restriction on prices at which securities may be sold short.",
+        "confidence": "medium",
+        "verified": "2026-08-14"
+      },
+      "block_trade": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "dark_pool": {
+        "zh": "纳斯达克自身撮合系统内设有非展示订单（Non-Displayed/Midpoint Peg等）机制，可提供不公开显示的流动性；这与传统意义上独立于交易所之外的第三方暗池是否算同一概念，本次未核实清楚",
+        "en": "Nasdaq's own matching system offers non-displayed order types (e.g. Midpoint Peg) providing hidden liquidity; whether this is the same concept as third-party off-exchange dark pools was not clarified this session",
+        "sources": [
+          {
+            "title": "Price List - Trading（官网）",
+            "url": "https://www.nasdaqtrader.com/Trader.aspx?id=PriceListTrading2",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Rebate to Add Other Non-Displayed Liquidity",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "market_maker_scheme": {
+        "zh": "竞争性做市商制度：任意数量的会员机构均可就同一证券登记为做市商、彼此报价竞争（区别于NYSE的单一指定做市商DMM在同一证券上独占价格发现职责，见us-nyse.yml）",
+        "en": "Competing market maker model: any number of member firms may register as market makers in the same security and compete on quotes (contrasted with NYSE's single Designated Market Maker, see us-nyse.yml)",
+        "detail": "术语见 schema/glossary.yml 的 `competing-market-maker` 条目。成为做市商须先是/申请成为Nasdaq会员，并经FINRA地区办公室（或非FINRA会员时由The NASDAQ Stock Market LLC自身）审核批准。",
+        "sources": [
+          {
+            "title": "Market Maker Process（官网）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=marketmakerprocess",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "A market maker is a NASDAQ member firm that buys and sells securities at prices it displays in NASDAQ for its own account (principal trades) and for customer accounts (agency trades).",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "connect_schemes": {
+        "zh": "无（美股市场无类似沪港通/深港通的跨境互联互通安排）",
+        "en": "None (no cross-border Connect-style scheme analogous to Stock Connect)",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "listing": {
+      "boards": [
+        {
+          "id": "nasdaq-global-select-market",
+          "name_zh": "全球精选市场",
+          "name_native": "Nasdaq Global Select Market",
+          "financial_threshold": "四选一初始财务标准（盈利/现金流+市值/市值+营收/资产+权益），最低买价$4；流通股市值门槛因情形不同约为$45M（IPO类，需满足其他条件）至$100-110M（存量交易类）",
+          "target_companies": "三档市场中量化门槛最高的旗舰层级",
+          "launched_year": ""
+        },
+        {
+          "id": "nasdaq-global-market",
+          "name_zh": "全球市场",
+          "name_native": "Nasdaq Global Market",
+          "financial_threshold": "四选一初始财务标准（税前利润标准/权益标准/市值标准/资产与营收标准），最低买价$4，流通股市值门槛$15-20M",
+          "target_companies": "门槛介于精选市场与资本市场之间的中间层级",
+          "launched_year": ""
+        },
+        {
+          "id": "nasdaq-capital-market",
+          "name_zh": "资本市场",
+          "name_native": "Nasdaq Capital Market",
+          "financial_threshold": "三选一初始财务标准（权益标准/市值标准/净利润标准），最低买价$4（部分条件下收盘价可低至$2-3）",
+          "target_companies": "三档市场中量化门槛最低的入门层级，面向早期/小型成长型公司",
+          "launched_year": ""
+        }
+      ],
+      "review_system": {
+        "zh": "披露为本，设有按市场层级分档的量化财务/流动性标准与统一的公司治理标准，由Listing Qualifications团队审核；与us-nyse.yml记录的NYSE审核制度属同一类型（美国交易所共有模式），受控词表registration/approval/hybrid均不能准确概括，故不填enum，见OPEN-QUESTIONS",
+        "en": "Disclosure-based, with tiered quantitative financial/liquidity standards by market tier plus uniform corporate governance standards, reviewed by the Listing Qualifications team; structurally the same category as NYSE's review system (see us-nyse.yml) — none of the registration/approval/hybrid enum values fit cleanly, left unset, see OPEN-QUESTIONS",
+        "detail": "与NYSE\"披露为本+量化/定性双重标准\"的表述几乎一致，两者同属\"美国式披露监管\"这一类型，\n与上交所注册制、港交所披露为本但上市委员会有实质审核权都不完全相同——这是受控词表\nreview_system\"够不够用\"问题的第五个真实案例（继上交所、港交所、NYSE、JPX之后，见\nOPEN-QUESTIONS.md 框架性问题第3条，本次已回写）。\n",
+        "sources": [
+          {
+            "title": "Market Regulation: Listings Review（官网）",
+            "url": "https://www.nasdaq.com/market-regulation/americas/listing-review",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The integrity of The Nasdaq Stock Market is dependent on the consistent and fair application of initial and continued listing standards. It is the responsibility of Nasdaq's Listing Qualifications (LQ) Team to review and approve companies applying to list securities on Nasdaq.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "listing_process_duration": {
+        "zh": "通常4-6周完成审核（第1周开始审核；第2-3周完成初步审核并出具意见函；第3-6周公司回应问题；第7-8周完成审核并批准上市），若无争议问题可能更短",
+        "en": "Typically 4-6 weeks (Week 1 review begins; Weeks 2-3 preliminary review and comment letter; Weeks 3-6 company responds; Weeks 7-8 review completed and approved), may be shorter if no issues arise",
+        "sources": [
+          {
+            "title": "Nasdaq Initial Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "While it generally takes four to six weeks to process a listing application, this time frame is variable and maybe shortened considerably, if the application raises no issues and the company responds quickly to Staff comments.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "transfer_between_boards": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Nasdaq Initial Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Nasdaq Continued Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "continuing_obligations": {
+        "zh": "持续上市财务、流动性与公司治理标准按市场层级分档，由Listing Qualifications团队监督；三档市场标准细节见boards字段",
+        "en": "Continued listing financial, liquidity and corporate governance standards are tiered by market segment and monitored by the Listing Qualifications team",
+        "sources": [
+          {
+            "title": "Nasdaq Continued Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "This document is designed to be a practical guide to being listed on Nasdaq, giving companies and their advisors important information about listing standards, disclosure and notification requirements and fees.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "suspension_resumption": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Nasdaq Initial Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Nasdaq Continued Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_conditions": {
+        "zh": "未达持续上市标准触发退市，如三档市场（Global Select/Global/Capital Market）项下最低买价均为1美元，低于该价格视为不达标",
+        "en": "Failure to meet continued listing standards, e.g. a minimum bid price of $1 across all three market tiers",
+        "sources": [
+          {
+            "title": "Nasdaq Continued Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Bid Price $1",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_process": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Nasdaq Initial Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Nasdaq Continued Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_transition_period": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Nasdaq Initial Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Nasdaq Continued Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Nasdaq Initial Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Nasdaq Continued Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "Nasdaq Composite Index（官网）",
+            "url": "https://www.nasdaq.com/solutions/global-indexes/nasdaq-composite",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Market Activity FAQ（官网）",
+            "url": "https://www.nasdaq.com/market-activity",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Nasdaq Index Methodology Guide（PDF，通用治理流程，不含逐指数基日/基点参数）",
+            "url": "https://indexes.nasdaqomx.com/docs/Nasdaq_Index_Methodology_Guide.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "nasdaq-composite",
+          "name_zh": "纳斯达克综合指数",
+          "name_native": "Nasdaq Composite®",
+          "compiler": "self",
+          "weighting_method": "market_cap",
+          "review_frequency": "所属方法论指南按年度审阅（治理层面的通用规则，非该指数专属审阅周期）",
+          "flagship": "yes",
+          "description": "覆盖纳斯达克市场全部3,000+上市普通股，1971年随交易所同步推出，市值加权；'The Nasdaq Composite® Index tracks all 3,000+ stocks listed on the Nasdaq Stock Market®... Launched in 1971, the index is market-cap weighted'（nasdaq.com官网原文，基日/基点等具体参数本次未在Index Methodology Guide中找到，留空）"
+        },
+        {
+          "id": "nasdaq-100",
+          "name_zh": "纳斯达克100指数",
+          "name_native": "Nasdaq-100®",
+          "compiler": "self",
+          "flagship": "yes",
+          "description": "按市值计纳斯达克上市的100家最大非金融类公司；'Nasdaq-100: Includes the 100 largest non-financial companies listed on Nasdaq by market capitalization'（nasdaq.com官网原文）。weighting_method留空：该描述是入选口径而非确认的加权方法（常见做法是设有个股权重上限的修正市值加权，但本次未找到逐字方法论原文，不凭常识填入）"
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "enum": "t1",
+        "zh": "T+1（2024年5月28日起，此前为T+2；此为SEC统一规则，适用于全国性证券交易所的多数经纪商交易，非纳斯达克自身单独设定）",
+        "en": "T+1 (effective May 28, 2024; previously T+2; a nationwide SEC rule applying to most broker-dealer transactions, not specific to Nasdaq)",
+        "detail": "与 us-nyse.yml 记录的是同一条SEC规则（Rule 15c6-1），来源同为第三方律所客户简报（本次针对 us-nasdaq 独立重新抓取确认），非交易所官方原文，故confidence维持medium。",
+        "sources": [
+          {
+            "title": "One-Day Settlement Cycle (T+1) To Begin May 28, 2024（Cahill Gordon & Reindel LLP 客户简报）",
+            "url": "https://www.cahill.com/publications/client-alerts/2024-04-29-one-day-settlement-cycle-t-1-to-begin-may-28-2024",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "in February 2023, the Securities and Exchange Commission adopted amendments to Rule 15c6-1 under the Securities Exchange Act of 1934 to shorten the standard settlement cycle for most broker-dealer transactions from two business days after the trade date (\"T+2\") to one business day after the trade date (\"T+1\")",
+        "confidence": "medium",
+        "verified": "2026-08-14"
+      },
+      "ccp_name": {
+        "zh": "全国证券清算公司（National Securities Clearing Corporation, NSCC，DTCC子公司）",
+        "en": "National Securities Clearing Corporation (NSCC), a DTCC subsidiary",
+        "detail": "官网做市商注册流程明确要求'致电NSCC确认清算安排'，是NSCC作为纳斯达克交易清算机构的官方原文佐证；DTCC子公司关系本身未在本次抓取页面中找到逐字确认，按行业公开信息补充在en/zh中，故confidence定为medium而非high。",
+        "sources": [
+          {
+            "title": "Market Maker Process（官网）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=marketmakerprocess",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Have your clearing agency call the National Securities Clearing Corporation (NSCC) at 212.412.8623 to ensure a clearing arrangement.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "csd_name": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象为DTC（Depository Trust Company），与us-nyse.yml记录的缺口一致：dtcc.com内容子页本次再次尝试仍403，未能拿到官方原文确认，留空不猜。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "initial_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delivery_method": {
+        "enum": "na",
+        "zh": "不适用（现货市场，无实物/现金交割概念）",
+        "en": "Not applicable (cash market; no physical/cash delivery concept)",
+        "detail": "推断依据：products章节所列品类（普通股/优先股、ETP、封闭式基金、结构性产品、债券）均为现货且以电子簿记形式结算，未见实物交割型衍生品，与us-nyse.yml的推断逻辑一致——下面的sources只笼统佐证Nasdaq以现货产品为主，不构成对本字段结论的独立证据。",
+        "sources": [
+          {
+            "title": "Nasdaq Initial Listing Guide（PDF，列出普通股/ETP/封闭式基金/结构性产品/债券等现货品种的上市标准，未见实物交割型衍生品）",
+            "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "quote": null
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "default_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "membership_structure": {
+        "zh": "会员制结构：做市商等参与方须先是或申请成为Nasdaq会员，并经FINRA（或Nasdaq自身，如该机构非FINRA会员）审核批准",
+        "en": "Membership-based structure: participants such as market makers must be or apply to become Nasdaq members, subject to approval by FINRA (or by Nasdaq itself if the firm is not a FINRA member)",
+        "sources": [
+          {
+            "title": "Market Maker Process（官网）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=marketmakerprocess",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "A prospective market making firm must be or must apply to be a NASDAQ member.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "基础行情之外另有TotalView全深度行情产品，覆盖每一价位的全部报价与订单，官方宣称其流动性覆盖是Level 2的20倍以上",
+        "en": "Beyond basic quotes, Nasdaq TotalView provides full order-book depth at every price level, claimed to offer 20x+ the liquidity coverage of Level 2",
+        "sources": [
+          {
+            "title": "Nasdaq TotalView（官网）",
+            "url": "https://www.nasdaq.com/solutions/data/equities/nasdaq-totalview",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Beyond Level 1, at more than 20x the liquidity of Level 2, Nasdaq offers the most complete market book with all the information you need to bring your investing decisions to the next level. Nasdaq TotalView — the standard Nasdaq data feed for serious traders — displays the full order book depth on Nasdaq, including every single quote and order at every price level",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "data_latency": {
+        "zh": "面向专业交易者/机构的直连数据为实时；面向公众展示的指数等数据通常至少延迟1分钟",
+        "en": "Real-time for direct professional/institutional feeds; public-facing displays (e.g. indices) carry at least a 1-minute delay",
+        "detail": "该quote针对的是指数数据的公开展示延时口径，一般行情（如TotalView）本身是付费实时直连产品，两者在'实时vs延时'的逻辑上一致但适用对象不同，本条合并概述。",
+        "sources": [
+          {
+            "title": "Market Activity FAQ（官网）",
+            "url": "https://www.nasdaq.com/market-activity",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Most Nasdaq indices are updated in real-time during market hours, with at least a 1-minute delay for public display.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "INET（原Instinet电子交易平台，2005年纳斯达克收购Instinet电子交易业务后整合为核心撮合系统）",
+        "en": "INET (originally Instinet's electronic trading platform, acquired by Nasdaq in 2005 and integrated as its core matching system)",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Nasdaq CEOs Recall 50 Years of Innovation（历史访谈文章）",
+            "url": "https://www.nasdaq.com/articles/nasdaq-ceos-recall-50-years-of-innovation",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "acquisition of INET, the electronic trading unit of Instinet in 2005. This transition offered Nasdaq traders improved quality of execution and increased speed at lower cost",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "access_methods": {
+        "zh": "FIX、OUCH、RASH、QIX等专有协议直连，及托管机房、Point of Presence网络接入服务",
+        "en": "Direct connectivity via proprietary protocols (FIX, OUCH, RASH, QIX); also via co-location and Point of Presence network access services",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The following connectivity options/protocols are available for accessing Nasdaq: FIX / FIX Lite (Flite) / Nasdaq QIX / OUCH / RASH / Service Bureaus",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "与us-nyse.yml记录的情况一致：美国经纪商佣金由市场自行竞争定价，交易所规则本身不规定经纪商向客户收取的佣金，留空不硬凑。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "exchange_fees": {
+        "zh": "做市商-吃单者模式（maker-taker）：为市场提供流动性的非展示订单可获返佣（如Tape C每股约$0.0005-0.0023区间，按月成交量与流动性类型分层），吃走流动性的一方付费；完整费率表按数十种精细条件分层",
+        "en": "Maker-taker pricing model",
+        "detail": "完整费率表（Price List - Trading）按是否合格做市商QMM、成交量档位、订单展示与否等数十种条件分层，本条只归纳整体模式与一个代表性档位，不逐条摘录。术语见 schema/glossary.yml 的 `maker-taker-pricing` 条目（本次新增，回填自 us-nyse 首次出现但未收录的缺口）。",
+        "sources": [
+          {
+            "title": "Price List - Trading（官网）",
+            "url": "https://www.nasdaqtrader.com/Trader.aspx?id=PriceListTrading2",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Firm adds greater than 0.03% of TCV of non-displayed liquidity, including midpoint orders / $0.0010 for Tape A & B Securities, $0.0005 for Tape C Securities",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "stamp_duty": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "与us-nyse.yml记录的情况一致：美国联邦层面无证券交易印花税的印象未附可引用来源，该字段volatility: volatile按铁律必须有sources才能填，本次没有，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "financial_transaction_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_gains_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "美元为全球主要储备货币，本币汇率风险对美国本土投资者而言较低；对以美元计价资产的境外投资者而言，汇率风险来自其本币兑美元波动",
+        "en": "USD is the world's primary reserve currency; domestic FX risk is low for U.S.-based investors. For foreign investors holding USD-denominated assets, FX risk arises from their home currency's fluctuation against the USD",
+        "detail": "与us-nyse.yml记录的通用美元市场表述一致，非纳斯达克专属，未附独立来源。",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "enforcement_note": {
+        "zh": "MarketWatch团队负责股票与期权市场监察；Investigations & Enforcement团队对潜在违规行为进行调查并采取纪律处分",
+        "en": "MarketWatch surveils equities and options markets; Investigations & Enforcement investigates potential violations and takes disciplinary action",
+        "sources": [
+          {
+            "title": "Market Regulation（官网）",
+            "url": "https://www.nasdaq.com/market-regulation",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "At Nasdaq, our regulatory functions operate independently of Nasdaq's business units to safeguard the integrity of our markets.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      }
+    }
+  }
+}
