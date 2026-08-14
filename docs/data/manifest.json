@@ -12,7 +12,19 @@
       "source_lang": "zh",
       "group_id": null,
       "region": "apac",
-      "tier": "pilot"
+      "tier": "pilot",
+      "trading_hours": {
+        "iana_tz": "Asia/Shanghai",
+        "utc_offset_hours": 8.0,
+        "open_local": "09:15",
+        "close_local": "15:30",
+        "lunch_start_local": "11:30",
+        "lunch_end_local": "13:00",
+        "open_utc": 1.25,
+        "close_utc": 7.5,
+        "lunch_start_utc": 3.5,
+        "lunch_end_utc": 5.0
+      }
     },
     {
       "id": "de-eurex",
@@ -28,7 +40,19 @@
       "source_lang": "en",
       "group_id": "deutsche-boerse-group",
       "region": "europe",
-      "tier": "standard"
+      "tier": "standard",
+      "trading_hours": {
+        "iana_tz": "Europe/Berlin",
+        "utc_offset_hours": 2.0,
+        "open_local": "01:00",
+        "close_local": "22:00",
+        "lunch_start_local": null,
+        "lunch_end_local": null,
+        "open_utc": -1.0,
+        "close_utc": 20.0,
+        "lunch_start_utc": null,
+        "lunch_end_utc": null
+      }
     },
     {
       "id": "hk-hkex",
@@ -44,7 +68,19 @@
       "source_lang": "zh",
       "group_id": null,
       "region": "apac",
-      "tier": "pilot"
+      "tier": "pilot",
+      "trading_hours": {
+        "iana_tz": "Asia/Hong_Kong",
+        "utc_offset_hours": 8.0,
+        "open_local": "09:00",
+        "close_local": "16:00",
+        "lunch_start_local": "12:00",
+        "lunch_end_local": "13:00",
+        "open_utc": 1.0,
+        "close_utc": 8.0,
+        "lunch_start_utc": 4.0,
+        "lunch_end_utc": 5.0
+      }
     },
     {
       "id": "jp-jpx",
@@ -59,7 +95,19 @@
       "source_lang": "en",
       "group_id": "jpx-group",
       "region": "apac",
-      "tier": "standard"
+      "tier": "standard",
+      "trading_hours": {
+        "iana_tz": "Asia/Tokyo",
+        "utc_offset_hours": 9.0,
+        "open_local": "09:00",
+        "close_local": "15:30",
+        "lunch_start_local": "11:30",
+        "lunch_end_local": "12:30",
+        "open_utc": 0.0,
+        "close_utc": 6.5,
+        "lunch_start_utc": 2.5,
+        "lunch_end_utc": 3.5
+      }
     },
     {
       "id": "us-nyse",
@@ -73,7 +121,19 @@
       "source_lang": "en",
       "group_id": "nyse-group",
       "region": "americas",
-      "tier": "standard"
+      "tier": "standard",
+      "trading_hours": {
+        "iana_tz": "America/New_York",
+        "utc_offset_hours": -4.0,
+        "open_local": "06:30",
+        "close_local": "16:00",
+        "lunch_start_local": null,
+        "lunch_end_local": null,
+        "open_utc": 10.5,
+        "close_utc": 20.0,
+        "lunch_start_utc": null,
+        "lunch_end_utc": null
+      }
     }
   ],
   "dimension_groups": [

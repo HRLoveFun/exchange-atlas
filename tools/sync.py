@@ -20,6 +20,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import yaml
 
@@ -194,11 +195,101 @@ def compute_freshness(exchange_id, taxonomy, expanded_chapters):
                     pass
             rows.append({
                 "exchange_id": exchange_id, "chapter": ch["id"],
-                "field_path": ".".join(path), "label_zh": fdef["label_zh"],
+                "chapter_label_zh": ch["label_zh"], "chapter_label_en": ch["label_en"],
+                "field_path": ".".join(path), "label_zh": fdef["label_zh"], "label_en": fdef["label_en"],
                 "volatility": vol, "verified": verified, "age_days": age_days,
                 "stale": stale, "confidence": env.get("confidence"),
             })
     return rows
+
+
+
+# ── 时区甘特条（v0.3）─────────────────────────────
+# 交易所 id → IANA 时区数据库标识符，只用来给甘特条算 UTC 对齐（含夏令时），
+# 不是一条需要 quote/来源的「事实」字段——同样的信息已经以说明性文字 + quote
+# 的形式记在 overview.timezone 里，这里只是工程实现，供 zoneinfo 查表用。
+EXCHANGE_IANA_TZ = {
+    "cn-sse": "Asia/Shanghai",
+    "hk-hkex": "Asia/Hong_Kong",
+    "us-nyse": "America/New_York",
+    "jp-jpx": "Asia/Tokyo",
+    "de-eurex": "Europe/Berlin",
+}
+
+# 交易时段字段目前都是自由文本（如 "13:00-15:00"、"9:30am-3:50pm连续交易..."）。
+# 抽取 H:MM 数字：带 am/pm 后缀按 12 小时制换算；不带后缀时按现有五家所实际
+# 文本直接当无歧义的 24 小时制数字处理（都已人工核对过，没有裸 12 小时制歧义
+# 值），取一个字段内出现的最小/最大值作为该字段的时间范围——足以覆盖"这个
+# 时段大致几点到几点"，不追求逐分钟精确，比如 SSE 收盘集合竞价的三段数字
+# 会被合并成 13:00-15:00 一整段。
+_TIME_TOKEN_RE = re.compile(r"(\d{1,2}):(\d{2})\s*(am|pm|a\.m\.|p\.m\.)?", re.IGNORECASE)
+
+
+def _parse_hour_tokens(text):
+    if not text:
+        return []
+    hours = []
+    for h, m, meridiem in _TIME_TOKEN_RE.findall(text):
+        hour, minute = int(h), int(m)
+        meridiem = (meridiem or "").lower().replace(".", "")
+        if meridiem == "pm" and hour < 12:
+            hour += 12
+        elif meridiem == "am" and hour == 12:
+            hour = 0
+        hours.append(hour + minute / 60)
+    return hours
+
+
+def _fmt_hour(h):
+    if h is None:
+        return None
+    h = h % 24
+    hh, mm = int(h), round((h - int(h)) * 60)
+    if mm == 60:
+        mm, hh = 0, (hh + 1) % 24
+    return f"{hh:02d}:{mm:02d}"
+
+
+def compute_trading_window(exchange_id, expanded_chapters):
+    """从 market_structure.trading_sessions 的自由文本导出一个近似的、UTC 对齐
+    的开收盘窗口，供前端时区甘特条视图渲染。查不到时段文本就返回 None——
+    甘特条视图据此把该所标成"时段数据不足"，不是拿这套推导凑一条假数据。
+    """
+    iana = EXCHANGE_IANA_TZ.get(exchange_id)
+    if not iana:
+        return None
+    sessions_path = ("trading_sessions",)
+
+    def session_text(field_id):
+        env = get_by_path(expanded_chapters.get("market_structure") or {}, sessions_path + (field_id,))
+        if not env:
+            return ""
+        return env.get("zh") or env.get("en") or ""
+
+    window_hours = []
+    for f in ("pre_market", "continuous_am", "continuous_pm", "after_market"):
+        window_hours += _parse_hour_tokens(session_text(f))
+    if not window_hours:
+        return None
+    open_local, close_local = min(window_hours), max(window_hours)
+
+    lunch_hours = _parse_hour_tokens(session_text("lunch_break"))
+    lunch_start_local = min(lunch_hours) if len(lunch_hours) >= 2 else None
+    lunch_end_local = max(lunch_hours) if len(lunch_hours) >= 2 else None
+
+    offset_hours = datetime.datetime.now(ZoneInfo(iana)).utcoffset().total_seconds() / 3600
+
+    def to_utc(local_h):
+        return None if local_h is None else local_h - offset_hours
+
+    return {
+        "iana_tz": iana,
+        "utc_offset_hours": offset_hours,
+        "open_local": _fmt_hour(open_local), "close_local": _fmt_hour(close_local),
+        "lunch_start_local": _fmt_hour(lunch_start_local), "lunch_end_local": _fmt_hour(lunch_end_local),
+        "open_utc": to_utc(open_local), "close_utc": to_utc(close_local),
+        "lunch_start_utc": to_utc(lunch_start_local), "lunch_end_utc": to_utc(lunch_end_local),
+    }
 
 
 def chapter_status(chapter_def, raw_chapter, expanded):
@@ -403,7 +494,10 @@ def main():
 
     manifest = {
         "exchanges": [
-            {f["id"]: ex.get(f["id"]) for f in taxonomy["exchange_identity"]["fields"]}
+            dict(
+                {f["id"]: ex.get(f["id"]) for f in taxonomy["exchange_identity"]["fields"]},
+                trading_hours=compute_trading_window(ex["id"], ex["chapters"]),
+            )
             for ex in exchanges_expanded.values()
         ],
         "dimension_groups": taxonomy.get("dimension_groups", []),

@@ -72,6 +72,17 @@
     if (state.langMode === "en" && env.en) return env.en;
     return env.zh || "";
   }
+  // 交易所显示名——同样是"数据值"，要服从 langMode。name_native 是 {语言代码: 名称}
+  // 对象，只有当 en 是其中一个键时才有真正的英文名（如 us-nyse/jp-jpx/de-eurex/hk-hkex）；
+  // 没有（如 cn-sse 目前只有 zh-Hans）就诚实回退 name_zh，不臆造英文名。
+  function exchangeDisplayName(identity) {
+    if (!identity) return "";
+    if (state.langMode === "en") {
+      var en = identity.name_native && identity.name_native.en;
+      if (en) return en;
+    }
+    return identity.name_zh || "";
+  }
   function isStale(exchangeId, fieldPath) {
     return cache.staleSet && cache.staleSet.has(exchangeId + "|" + fieldPath);
   }
@@ -133,6 +144,7 @@
     var groups = cache.taxonomy.dimension_groups;
     var activeGroup = groups.some(function (g) { return g.id === params.group; }) ? params.group : groups[0].id;
     var region = params.region || "all";
+    var tier = params.tier || "all";
     var q = (params.q || "").toLowerCase();
 
     var columns = [];
@@ -144,8 +156,10 @@
     });
 
     var regions = Array.from(new Set(cache.manifest.exchanges.map(function (e) { return e.region; })));
+    var tiers = Array.from(new Set(cache.manifest.exchanges.map(function (e) { return e.tier; })));
     var exchanges = cache.manifest.exchanges.slice();
     if (region !== "all") exchanges = exchanges.filter(function (e) { return e.region === region; });
+    if (tier !== "all") exchanges = exchanges.filter(function (e) { return e.tier === tier; });
     if (q) {
       exchanges = exchanges.filter(function (e) {
         return (e.name_zh || "").toLowerCase().indexOf(q) >= 0 ||
@@ -164,6 +178,13 @@
     html += '<option value="all"' + (region === "all" ? " selected" : "") + ">全部 All</option>";
     regions.forEach(function (r) {
       html += '<option value="' + esc(r) + '"' + (region === r ? " selected" : "") + ">" + esc(enumLabel("region", r)) + " " + esc(enumLabelEn("region", r)) + "</option>";
+    });
+    html += "</select>";
+    html += '<label for="tierFilter">标杆批次 Tier</label>';
+    html += '<select id="tierFilter" data-role="tier">';
+    html += '<option value="all"' + (tier === "all" ? " selected" : "") + ">全部 All</option>";
+    tiers.forEach(function (t) {
+      html += '<option value="' + esc(t) + '"' + (tier === t ? " selected" : "") + ">" + esc(enumLabel("tier", t)) + " " + esc(enumLabelEn("tier", t)) + "</option>";
     });
     html += "</select>";
     html += '<div class="spacer"></div>';
@@ -193,7 +214,7 @@
       exchanges.forEach(function (ex) {
         html += "<tr>";
         html += '<td class="col-exchange"><a class="exchange-link" href="#view=exchange&id=' + esc(ex.id) + '" data-role="goto-exchange" data-id="' + esc(ex.id) + '">' +
-          esc(ex.name_zh) + "</a><span class=\"exchange-region\">" + esc(enumLabel("region", ex.region)) + "</span></td>";
+          esc(exchangeDisplayName(ex)) + "</a><span class=\"exchange-region\">" + esc(enumDisplay("region", ex.region)) + "</span></td>";
         columns.forEach(function (col) {
           var cell = cellIndex[ex.id + "|" + col.path];
           if (!cell) {
@@ -225,7 +246,7 @@
       app.innerHTML = '<p style="color:var(--danger)">找不到交易所 `' + esc(id) + '`。</p>';
       return Promise.resolve();
     }
-    app.innerHTML = '<div class="loading">加载 ' + esc(identity.name_zh) + " 档案中…</div>";
+    app.innerHTML = '<div class="loading">加载 ' + esc(exchangeDisplayName(identity)) + " 档案中…</div>";
     return loadExchange(id).then(function (data) {
       var chapters = cache.taxonomy.chapters;
       var activeCh = chapters.some(function (c) { return c.id === params.ch; }) ? params.ch : chapters[0].id;
@@ -233,7 +254,7 @@
 
       var html = "";
       html += '<div class="archive-header">';
-      html += "<h2>" + esc(identity.name_zh) + "</h2>";
+      html += "<h2>" + esc(exchangeDisplayName(identity)) + "</h2>";
       html += '<span class="native-name">' + esc(nativeText(identity.name_native)) + "</span>";
       html += '<div class="archive-meta">';
       html += "<span>" + esc(enumLabel("region", identity.region)) + " " + esc(enumLabelEn("region", identity.region)) + "</span>";
@@ -327,7 +348,10 @@
   // ══════════════════════════════════════════════
   // 数据健康度视图
   // ══════════════════════════════════════════════
-  function renderHealth(app) {
+  function renderHealth(app, params) {
+    var exFilter = params.hex || "all";
+    var typeFilter = params.htype || "stale";
+
     var total = cache.freshness.length;
     var stale = cache.freshness.filter(function (f) { return f.stale; });
     var lowConf = cache.freshness.filter(function (f) { return f.confidence === "low"; });
@@ -340,17 +364,61 @@
     html += statTile(cache.manifest.exchanges.length, "交易所 Exchanges");
     html += "</div>";
 
-    var sorted = stale.slice().sort(function (a, b) { return (b.age_days || 0) - (a.age_days || 0); });
-    if (sorted.length) {
-      html += "<h3>复核队列（按超期天数排序）Review Queue</h3>";
-      html += '<div class="matrix-scroll"><table class="matrix"><thead><tr><th>交易所</th><th>章节</th><th>字段</th><th>时效等级</th><th>核实日期</th><th>超期天数</th></tr></thead><tbody>';
-      sorted.forEach(function (f) {
-        html += "<tr><td>" + esc(f.exchange_id) + "</td><td>" + esc(f.chapter) + "</td><td>" + esc(f.label_zh) + "</td><td>" + esc(f.volatility) +
-          "</td><td>" + esc(f.verified || "—") + "</td><td>" + esc(f.age_days == null ? "—" : f.age_days) + "</td></tr>";
+    html += '<div class="view-toolbar">';
+    html += '<label for="healthExchange">交易所 Exchange</label>';
+    html += '<select id="healthExchange" data-role="health-exchange">';
+    html += '<option value="all"' + (exFilter === "all" ? " selected" : "") + ">全部 All</option>";
+    cache.manifest.exchanges.forEach(function (e) {
+      html += '<option value="' + esc(e.id) + '"' + (exFilter === e.id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
+    });
+    html += "</select>";
+    html += '<label for="healthType">范围 Scope</label>';
+    html += '<select id="healthType" data-role="health-type">';
+    [["stale", "待复核 Stale"], ["low", "低置信度 Low Confidence"], ["all", "全部 All"]].forEach(function (opt) {
+      html += '<option value="' + opt[0] + '"' + (typeFilter === opt[0] ? " selected" : "") + ">" + esc(opt[1]) + "</option>";
+    });
+    html += "</select>";
+    html += "</div>";
+
+    var rows = cache.freshness.filter(function (f) {
+      if (exFilter !== "all" && f.exchange_id !== exFilter) return false;
+      if (typeFilter === "stale" && !f.stale) return false;
+      if (typeFilter === "low" && f.confidence !== "low") return false;
+      return true;
+    }).sort(function (a, b) { return (b.age_days || 0) - (a.age_days || 0); });
+
+    var headingMap = {
+      stale: "复核队列（按超期天数排序）Review Queue",
+      low: "低置信度字段 Low-Confidence Fields",
+      all: "全部已填字段（按超期天数排序）All Filled Fields",
+    };
+    html += "<h3>" + esc(headingMap[typeFilter] || headingMap.all) + "</h3>";
+    if (rows.length) {
+      html += '<div class="matrix-scroll"><table class="matrix"><thead><tr>' +
+        '<th><span class="th-label-zh">交易所</span><span class="th-label-en">Exchange</span></th>' +
+        '<th><span class="th-label-zh">章节</span><span class="th-label-en">Chapter</span></th>' +
+        '<th><span class="th-label-zh">字段</span><span class="th-label-en">Field</span></th>' +
+        '<th><span class="th-label-zh">时效等级</span><span class="th-label-en">Volatility</span></th>' +
+        '<th><span class="th-label-zh">置信度</span><span class="th-label-en">Confidence</span></th>' +
+        '<th><span class="th-label-zh">核实日期</span><span class="th-label-en">Verified</span></th>' +
+        '<th><span class="th-label-zh">超期天数</span><span class="th-label-en">Age (days)</span></th>' +
+        "</tr></thead><tbody>";
+      rows.forEach(function (f) {
+        var ex = cache.exchangeById[f.exchange_id];
+        html += "<tr data-role=\"goto-health-field\" data-exchange=\"" + esc(f.exchange_id) + "\" data-path=\"" + esc(f.field_path) +
+          "\" data-chapter=\"" + esc(f.chapter) + "\" style=\"cursor:pointer\">";
+        html += "<td>" + esc(ex ? exchangeDisplayName(ex) : f.exchange_id) + "</td>";
+        html += "<td>" + esc(f.chapter_label_zh) + " <span style=\"opacity:.6\">" + esc(f.chapter_label_en) + "</span></td>";
+        html += "<td>" + esc(f.label_zh) + " <span style=\"opacity:.6\">" + esc(f.label_en) + "</span></td>";
+        html += "<td>" + esc(f.volatility) + "</td>";
+        html += "<td>" + (f.confidence ? '<span class="badge ' + confBadgeClass(f.confidence) + '">' + confLabel(f.confidence) + "</span>" : "—") + "</td>";
+        html += "<td>" + esc(f.verified || "—") + "</td>";
+        html += "<td>" + esc(f.age_days == null ? "—" : f.age_days) + (f.stale ? '<span class="stale-dot" title="待复核 Stale"></span>' : "") + "</td>";
+        html += "</tr>";
       });
       html += "</tbody></table></div>";
     } else {
-      html += '<p style="color:var(--fg-muted)">目前没有超期待复核的字段。</p>';
+      html += '<p style="color:var(--fg-muted)">没有符合条件的字段。</p>';
     }
 
     app.innerHTML = html;
@@ -361,20 +429,110 @@
   }
 
   // ══════════════════════════════════════════════
+  // 时区甘特条视图
+  // trading_hours 由 tools/sync.py 从交易时段文本近似换算并按 UTC 对齐（见
+  // manifest.json 里的 compute_trading_window 注释），前端这里只管渲染，不
+  // 重新解析文本。
+  // ══════════════════════════════════════════════
+  function _fmtHourLabel(h) {
+    var hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+    if (mm === 60) { mm = 0; hh = (hh + 1) % 24; }
+    return (hh < 10 ? "0" : "") + hh + ":" + (mm < 10 ? "0" : "") + mm;
+  }
+  // 把一段可能跨 UTC 零点的 [start,end) 折成 24 小时轴上 1-2 段不跨界线段。
+  function normalizeSegment(startRaw, endRaw) {
+    if (startRaw == null || endRaw == null) return [];
+    var start = ((startRaw % 24) + 24) % 24;
+    var end = ((endRaw % 24) + 24) % 24;
+    if (end <= start) return [[start, 24], [0, end]];
+    return [[start, end]];
+  }
+  function tradingBarSegments(th) {
+    if (!th || th.open_utc == null || th.close_utc == null) return [];
+    if (th.lunch_start_utc != null && th.lunch_end_utc != null) {
+      return normalizeSegment(th.open_utc, th.lunch_start_utc).concat(normalizeSegment(th.lunch_end_utc, th.close_utc));
+    }
+    return normalizeSegment(th.open_utc, th.close_utc);
+  }
+  function renderTimezone(app, params) {
+    var now = new Date();
+    var nowUtc = now.getUTCHours() + now.getUTCMinutes() / 60;
+    var nowLocal = now.getHours() + now.getMinutes() / 60;
+
+    var rows = cache.manifest.exchanges.filter(function (e) { return e.trading_hours; }).slice();
+    rows.sort(function (a, b) {
+      return (((a.trading_hours.open_utc % 24) + 24) % 24) - (((b.trading_hours.open_utc % 24) + 24) % 24);
+    });
+    var missing = cache.manifest.exchanges.filter(function (e) { return !e.trading_hours; });
+
+    var html = "";
+    html += '<p style="color:var(--fg-muted);font-size:12.5px;margin:0 0 14px;max-width:72ch">';
+    html += "各所交易时段按 UTC 对齐展示，由「市场结构与交易机制」章节的交易时段文本近似换算而来（不保证分钟级精确，含夏令时的所已按今天的日期自动折算），精确时段与出处见各所档案页。当前 <strong>";
+    html += esc(_fmtHourLabel(nowUtc)) + " UTC</strong>（本地 " + esc(_fmtHourLabel(nowLocal)) + "）用竖线标出。</p>";
+
+    html += '<div class="tz-legend"><span><i class="tz-swatch tz-swatch-open"></i>连续交易 Continuous Trading</span><span><i class="tz-swatch tz-swatch-now"></i>当前时刻 Now</span></div>';
+
+    html += '<div class="tz-chart">';
+    html += '<div class="tz-axis"><span class="tz-axis-spacer"></span><span class="tz-axis-ticks">';
+    for (var h = 0; h <= 24; h += 3) {
+      html += '<i style="left:' + (h / 24 * 100) + '%">' + h + "</i>";
+    }
+    html += "</span></div>";
+
+    rows.forEach(function (e) {
+      var th = e.trading_hours;
+      var segs = tradingBarSegments(th);
+      html += '<div class="tz-row">';
+      html += '<a class="tz-label" href="#view=exchange&id=' + esc(e.id) + '&ch=market_structure">' + esc(exchangeDisplayName(e)) +
+        '<span class="tz-offset">UTC' + (th.utc_offset_hours >= 0 ? "+" : "") + th.utc_offset_hours + "</span></a>";
+      html += '<div class="tz-track">';
+      segs.forEach(function (seg) {
+        html += '<div class="tz-bar" style="left:' + (seg[0] / 24 * 100) + "%;width:" + ((seg[1] - seg[0]) / 24 * 100) + '%" title="' +
+          esc(th.open_local + "–" + th.close_local + " 本地 Local, UTC" + (th.utc_offset_hours >= 0 ? "+" : "") + th.utc_offset_hours) + '"></div>';
+      });
+      html += '<div class="tz-now-line" style="left:' + (nowUtc / 24 * 100) + '%"></div>';
+      html += "</div>";
+      html += '<span class="tz-times">' + esc(th.open_local) + "–" + esc(th.close_local) +
+        (th.lunch_start_local ? "（午休 Lunch " + esc(th.lunch_start_local) + "–" + esc(th.lunch_end_local) + "）" : "") + "</span>";
+      html += "</div>";
+    });
+    html += "</div>";
+
+    if (missing.length) {
+      html += '<p style="color:var(--fg-muted);font-size:12px;margin-top:14px">时段数据不足，未列入 Insufficient session data, excluded：' +
+        missing.map(function (e) { return esc(exchangeDisplayName(e)); }).join("、") + "</p>";
+    }
+
+    app.innerHTML = html;
+  }
+
+  // ══════════════════════════════════════════════
   // 出处浮层
   // ══════════════════════════════════════════════
   function openCellOverlay(exchangeId, fieldPath, chapterId) {
+    closeOverlay();
+    var backdrop = document.createElement("div");
+    backdrop.className = "overlay-backdrop";
+    backdrop.setAttribute("data-role", "overlay-backdrop");
+    backdrop.innerHTML = '<div class="overlay-panel"><button type="button" class="overlay-close" data-role="close-overlay">&times;</button>' +
+      '<div class="loading">加载中… Loading…</div></div>';
+    document.body.appendChild(backdrop);
+
     loadExchange(exchangeId).then(function (data) {
+      // 用户可能在这次抓取完成前已经点开了别的格子（closeOverlay 会把这个
+      // backdrop 从 DOM 移走）——这时不该再把旧请求的结果写进去，否则会有
+      // 极小概率把过期数据糊到新打开的浮层上。
+      if (!document.body.contains(backdrop)) return;
       var env = getByPath(data.chapters[chapterId], fieldPath);
       var identity = cache.exchangeById[exchangeId];
       var fieldDef = null;
       var chDef = cache.taxonomy.chapters.filter(function (c) { return c.id === chapterId; })[0];
       (chDef.fields || []).forEach(function (f) { if (f.path === fieldPath) fieldDef = f; });
 
-      var html = '<div class="overlay-panel">';
-      html += '<button type="button" class="overlay-close" data-role="close-overlay">&times;</button>';
-      html += "<h3>" + esc(fieldDef ? fieldDef.label_zh : fieldPath) + "</h3>";
-      html += '<div class="overlay-sub">' + esc(identity ? identity.name_zh : exchangeId) + " · " + esc(fieldPath) + "</div>";
+      var html = '<button type="button" class="overlay-close" data-role="close-overlay">&times;</button>';
+      html += "<h3>" + esc(fieldDef ? fieldDef.label_zh : fieldPath) +
+        ' <span style="font-weight:400;opacity:.6;font-size:13px">' + esc(fieldDef ? fieldDef.label_en : "") + "</span></h3>";
+      html += '<div class="overlay-sub">' + esc(identity ? exchangeDisplayName(identity) : exchangeId) + " · " + esc(chDef ? chDef.label_zh + " " + chDef.label_en : chapterId) + "</div>";
 
       if (env) {
         html += '<div class="overlay-section"><h4>中文 Chinese</h4><div>' + esc(env.zh || "—") + "</div></div>";
@@ -397,13 +555,14 @@
       } else {
         html += '<p style="color:var(--fg-muted)">此字段暂无数据。</p>';
       }
-      html += "</div>";
 
-      var backdrop = document.createElement("div");
-      backdrop.className = "overlay-backdrop";
-      backdrop.setAttribute("data-role", "overlay-backdrop");
-      backdrop.innerHTML = html;
-      document.body.appendChild(backdrop);
+      var panel = backdrop.querySelector(".overlay-panel");
+      if (panel) panel.innerHTML = html;
+    }).catch(function (e) {
+      if (!document.body.contains(backdrop)) return;
+      var panel = backdrop.querySelector(".overlay-panel");
+      if (panel) panel.innerHTML = '<button type="button" class="overlay-close" data-role="close-overlay">&times;</button>' +
+        '<p style="color:var(--danger)">加载失败 Failed to load: ' + esc(e.message) + "</p>";
     });
   }
   function closeOverlay() {
@@ -446,7 +605,8 @@
     updateActiveTab(view === "exchange" ? "matrix" : view);
     var app = $("#app");
     if (view === "exchange") renderExchange(app, params);
-    else if (view === "health") renderHealth(app);
+    else if (view === "health") renderHealth(app, params);
+    else if (view === "timezone") renderTimezone(app, params);
     else renderMatrix(app, params);
   }
 
@@ -464,7 +624,7 @@
     var t = e.target.closest("[data-role]");
     if (!t) return;
     var role = t.dataset.role;
-    if (role === "cell") {
+    if (role === "cell" || role === "goto-health-field") {
       openCellOverlay(t.dataset.exchange, t.dataset.path, t.dataset.chapter);
     } else if (role === "close-overlay") {
       closeOverlay();
@@ -482,10 +642,15 @@
     }
   });
   document.addEventListener("change", function (e) {
-    if (e.target.dataset && e.target.dataset.role === "region") {
+    var role = e.target.dataset && e.target.dataset.role;
+    if (role === "region" || role === "tier") {
       var params = parseHash();
-      params.region = e.target.value;
+      params[role] = e.target.value;
       setHash(params);
+    } else if (role === "health-exchange" || role === "health-type") {
+      var p3 = parseHash();
+      p3[role === "health-exchange" ? "hex" : "htype"] = e.target.value;
+      setHash(p3);
     }
   });
   document.addEventListener("input", function (e) {
