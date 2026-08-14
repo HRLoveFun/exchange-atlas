@@ -23,6 +23,8 @@
 15. **`us-nyse.short_selling` 的具体触发阈值（Reg SHO Alternative Uptick Rule 的"较前收盘价下跌几%触发"）未能确认。** 与第14条类似，`sec.gov` 与 `finra.org` 本次分别尝试抓取相关规则页均返回403，无法核实这个业内广为人知的具体数字（常识印象是10%，但没有当次抓取的原文，按铁律不采纳）。这三个域名（sec.gov/finra.org/dtcc.com）叠加起来构成了美股监管/清算类信息目前最大的抓取缺口，值得作为一个整体去想解决方案，而不是逐字段单独想办法绕过。
 16. **`jp-jpx` 是否存在独立于「特別気配」之外的全市场级熔断机制，本次未能确认。** TSE《业务规程》里明确的波动控制手段是个股级的「特別気配」（申报价超出值幅制限时不成交、改显示指示性价格），这本质是值幅制限的执行方式；本次抓取的官方英文文档中没有找到类似美股 MWCB（基于大盘指数跌幅触发全市场停牌）那种独立机制的条文，但也不能排除是本次检索范围没覆盖到相关规则（如更晚修订的规程或大阪交易所衍生品市场的规则）。`circuit_breaker` 字段的 `detail` 里已如实标注这一点为未确认状态，而不是断言"日本没有市场级熔断"。
 17. **`taxonomy.yml` 假设的「公司上市」范式在衍生品交易所（`de-eurex`）不成立，这是 ADR-009 当初就预期要压测的问题，现在有了真实结果。** 六｜上市章节的全部字段（`boards`/`review_system`/`delisting_conditions`等）对期货期权交易所都不适用——衍生品交易所没有公司上市，只有「交易员/交易参与者准入」（更接近 `participants` 章节）与「合约挂牌」（更接近 `products` 章节）两个概念，`de-eurex.yml` 对 `listing` 整章如实留空并在章节顶部注释说明，没有强行把交易员准入规则套进上市字段。同样不完全适用的还有三个具体字段：`clearing.settlement_cycle`（衍生品是"每日盯市+到期日交割"，不是"买入后T+N天收货"的时间结构）、`market_structure.short_selling`（衍生品"卖出开仓"不涉及股票式的借券，机制前提不同）、`market_structure.intraday_reversal`（衍生品开平仓当日自由进行，T+0/T+1式限制的设计前提不成立）——这三个字段 `de-eurex.yml` 都如实留空并在 `detail` 里说明"设计前提不适用"，没有强行选一个enum凑数。**结论：`taxonomy.yml` 目前是以现货股票市场为默认范式设计的，六｜上市章节与三个具体字段对衍生品交易所存在系统性不适配，比"受控词表不够用"（第3条）更严重——那是"选项不够"，这是"整章/整个字段的前提假设都不成立"。** 是否需要给 `taxonomy.yml` 引入按交易所类型（现货/衍生品）的章节级条件适用机制，还是继续用"留空+detail说明"的方式吸收这类差异，等 v0.2 五家标杆全部完成、有更多样本后再评估，不要现在就动 schema。
+18. **`organization_form` 受控词表的四个值（公司制上市/公司制未上市/会员制/国有事业单位制）覆盖不了「公法机构由独立私法运营公司运营」这第五种模式，`de-xetra` 是首个真实样本。** 法兰克福证券交易所（FWB）官方原文明确写道"a stock exchange, as a public law institution with limited legal capacity, cannot act as a legal entity under private law"——FWB 本身不是公司，运营公司（Trägerin）是另一层法律实体 Deutsche Börse AG。这与同集团 `de-eurex`（Eurex Deutschland，私法主体的公司，归入 `demutualized_unlisted`）是两种不同的法律形式，即使 `group_id` 相同；也不宜归为「国有事业单位制」（运营公司是跨国上市公司而非德国政府直接运营的国企），也不是「会员制」（1808年后即为公法机构而非会员合伙关系）。`de-xetra.yml` 的 `overview.organization_form` 已如实留空 `enum`、只写文字描述，不强行套用。与第3条（`review_system` 枚举退化为自由文本）性质相同：不是"这一个字段该不该进矩阵"的问题，而是受控词表本身需要评估是否新增一个"公法机构+独立运营公司"的枚举值，还是继续接受这个矩阵列在个别样本上留空——建议等更多欧陆交易所（如 Wave 2 的 `fr-euronext`）样本到位后一并评估，不要现在就为一个样本改 enums.yml。
+19. **`clearing.settlement_cycle`（结算周期，如 T+2）字段在 `de-xetra` 留空，不是因为不存在而是本次抓取材料未提供可摘引原文。** 欧盟 CSDR 框架下现货股票市场普遍施行 T+2 结算是常识性认知，但本次抓取的《交易所规则》（Börsenordnung）§119 只规定了清算/结算走哪些机构（Eurex Clearing AG/Cboe Clear Europe N.V. 清算、Clearstream Europe AG 结算），没有找到对"T+2"这个具体周期天数的正面陈述；`.cache/de-xetra/` 里也没有专门的结算周期说明页。下次有空应找 Clearstream 官网（`clearstream.com`，本次因 WebSearch 配额耗尽未展开搜索）或 ESMA/CSDR 官方文件核实后回填。
 
 ## 具体数据悬案
 
@@ -35,6 +37,7 @@
 - `cn-sse` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `cn-sse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `de-eurex` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
+- `de-xetra` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `hk-hkex` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `hk-hkex` 市场结构与交易机制 / 最小交易单位（board_lot_size）— confidence: low
 - `hk-hkex` 清算、结算与交割 / 交割方式（delivery_method）— confidence: low
