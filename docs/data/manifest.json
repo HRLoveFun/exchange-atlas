@@ -110,6 +110,21 @@
       }
     },
     {
+      "id": "uk-lse",
+      "name_zh": "伦敦证券交易所",
+      "name_native": {
+        "en": "London Stock Exchange (LSE)"
+      },
+      "official_languages": [
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": "lseg-group",
+      "region": "europe",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "us-nyse",
       "name_zh": "纽约证券交易所",
       "name_native": {
