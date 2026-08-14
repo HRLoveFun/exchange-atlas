@@ -8,7 +8,7 @@
 
 1. **交易所集团 vs 单个交易所的粒度** — CME 集团下辖 CBOT/NYMEX/COMEX，Euronext 下辖 7 个国家市场。当前方案：数据实体是「交易所/市场」本身，用 `group_id` 关联集团，矩阵未来可折叠成集团视图。**v0.2 填 NYSE 时首次真正用到**：`us-nyse.yml` 标了 `group_id: nyse-group`，因为 NYSE、NYSE American、NYSE Arca、NYSE National、NYSE Texas 是同集团下各自独立注册的 SEC 交易所实体（不是同一实体内部的板块）——这直接影响了 `listing.boards` 怎么填：不能把 NYSE American/Arca 当成 `us-nyse` 的板块塞进 `boards` 列表（那样会歪曲"哪个实体拥有哪条规则"这个事实），只能靠 `group_id` 表达"同集团、不同实体"的关系，`boards` 留空。矩阵折叠视图本身仍未实现（只是数据字段填了），等 CME 系交易所加入时可以再压测一次多层级集团（CME 是单一交易所法人下辖多个产品条线，与 NYSE Group「多个独立法人共享集团」不是同一种集团结构，两种情况 `group_id` 字段够不够表达还需要再观察）。
 2. ~~schema 会不会被列表型章节撑破~~ — **已验证，够用。** 上交所产品体系（6条）、指数体系（2条）用轻量列表条目填起来很顺，没有感到结构性约束。列表项不需要逐条 quote/confidence 这个简化是对的，继续沿用。
-3. **受控词表（enums.yml）够不够用** — 五家标杆的机制差异能否被现有枚举值（如 `price_limit_type`: none/percentage_band/absolute_tiered/dynamic_reference）概括，还是每家都要新增例外值。如果某个字段的例外多到枚举失去意义，结论应该是这个字段不适合进矩阵（改 `in_matrix: false`），而不是无限加枚举值。**`review_system` 已经积累了四个互不相同的真实案例**：上交所"注册制"（`registration`枚举）、港交所"披露为本但上市委员会有实质审核权"（未套用枚举，直接留 zh 文字说明）、NYSE"披露为本+非常具体的量化规则编号（如 Rule 102.01C(I)）+ 广泛自由裁量权"（同样未套枚举）、JPX"披露为本，交易所审核+重大事项另须向金融厅报告"（同样未套枚举）——四家没有一家能被现有 `review_system` 枚举值干净覆盖，这个字段目前实质上已经退化成自由文本描述而非可比较的枚举，值得考虑要么扩充枚举维度（如拆成"审核严格度"+"规则形式化程度"两个正交维度），要么承认这个字段不适合进矩阵横向比较，只适合放在档案页。
+3. **受控词表（enums.yml）够不够用** — 五家标杆的机制差异能否被现有枚举值（如 `price_limit_type`: none/percentage_band/absolute_tiered/dynamic_reference）概括，还是每家都要新增例外值。如果某个字段的例外多到枚举失去意义，结论应该是这个字段不适合进矩阵（改 `in_matrix: false`），而不是无限加枚举值。**`review_system` 已经积累了五个互不相同的真实案例**：上交所"注册制"（`registration`枚举）、港交所"披露为本但上市委员会有实质审核权"（未套用枚举，直接留 zh 文字说明）、NYSE"披露为本+非常具体的量化规则编号（如 Rule 102.01C(I)）+ 广泛自由裁量权"（同样未套枚举）、JPX"披露为本，交易所审核+重大事项另须向金融厅报告"（同样未套枚举）、NSE"披露为本+一组明确的量化财务门槛（实收股本/净资产/市值/营收）+交易所对申请的自由裁量驳回权（含'任何交易所认为合适的理由'这种兜底条款）"（v1.0 Wave 1 新增，同样未套枚举）——五家没有一家能被现有 `review_system` 枚举值干净覆盖，这个字段目前实质上已经退化成自由文本描述而非可比较的枚举，值得考虑要么扩充枚举维度（如拆成"审核严格度"+"规则形式化程度"两个正交维度），要么承认这个字段不适合进矩阵横向比较，只适合放在档案页。
 4. **`quote` 的粒度与成本——填 SSE 后确认这是真实瓶颈。** 十一章约 80 个可填的叶子字段（不含空章节骨架），实际只有约 20 个做到了 `confidence: high`+完整 quote；其余约 15 个因为"没有当次抓取到的原文可摘录"被迫清空转悬案（监管/参与者/风险等章节尤其明显）。这不是偷懒，是铁律生效的结果——但说明 v0.2 铺开更多交易所时，**每家所投入的检索时间要比"填一个字段"直觉上预期的更多**，排期要按此调整。
 5. **`taxonomy.yml` 单文件是否会失控** — 十一章 + 矩阵定义已经不短，未来加字段、加章节细分（如市场结构章节的产品适用范围差异）可能让单文件难以维护，或需要按章拆分成 `schema/chapters/*.yml` 由 sync.py 汇总。
 6. **「第三方来源 confidence 上限 medium」这条铁律目前没有被 `validate.py` 机器强制**，只写在 CLAUDE.md/SOURCES.md 里靠自觉遵守。填 SSE 时人工审计出 3 处字段引用第三方镜像（mgzq.com）却误标 `high`，已手工改正，但下次很可能再犯——这正是 CLAUDE.md 6.1 一直在提醒的「文档职责边界靠自觉 vs 靠机器」的活生生案例。v0.2 前应该给 `validate.py` 加一条：按 SOURCES.md 里登记的「官方/监管/第三方」标签反查每条 `sources[].url`，`confidence: high` 但来源标了「第三方」就直接 fail。
@@ -23,6 +23,10 @@
 15. **`us-nyse.short_selling` 的具体触发阈值（Reg SHO Alternative Uptick Rule 的"较前收盘价下跌几%触发"）未能确认。** 与第14条类似，`sec.gov` 与 `finra.org` 本次分别尝试抓取相关规则页均返回403，无法核实这个业内广为人知的具体数字（常识印象是10%，但没有当次抓取的原文，按铁律不采纳）。这三个域名（sec.gov/finra.org/dtcc.com）叠加起来构成了美股监管/清算类信息目前最大的抓取缺口，值得作为一个整体去想解决方案，而不是逐字段单独想办法绕过。
 16. **`jp-jpx` 是否存在独立于「特別気配」之外的全市场级熔断机制，本次未能确认。** TSE《业务规程》里明确的波动控制手段是个股级的「特別気配」（申报价超出值幅制限时不成交、改显示指示性价格），这本质是值幅制限的执行方式；本次抓取的官方英文文档中没有找到类似美股 MWCB（基于大盘指数跌幅触发全市场停牌）那种独立机制的条文，但也不能排除是本次检索范围没覆盖到相关规则（如更晚修订的规程或大阪交易所衍生品市场的规则）。`circuit_breaker` 字段的 `detail` 里已如实标注这一点为未确认状态，而不是断言"日本没有市场级熔断"。
 17. **`taxonomy.yml` 假设的「公司上市」范式在衍生品交易所（`de-eurex`）不成立，这是 ADR-009 当初就预期要压测的问题，现在有了真实结果。** 六｜上市章节的全部字段（`boards`/`review_system`/`delisting_conditions`等）对期货期权交易所都不适用——衍生品交易所没有公司上市，只有「交易员/交易参与者准入」（更接近 `participants` 章节）与「合约挂牌」（更接近 `products` 章节）两个概念，`de-eurex.yml` 对 `listing` 整章如实留空并在章节顶部注释说明，没有强行把交易员准入规则套进上市字段。同样不完全适用的还有三个具体字段：`clearing.settlement_cycle`（衍生品是"每日盯市+到期日交割"，不是"买入后T+N天收货"的时间结构）、`market_structure.short_selling`（衍生品"卖出开仓"不涉及股票式的借券，机制前提不同）、`market_structure.intraday_reversal`（衍生品开平仓当日自由进行，T+0/T+1式限制的设计前提不成立）——这三个字段 `de-eurex.yml` 都如实留空并在 `detail` 里说明"设计前提不适用"，没有强行选一个enum凑数。**结论：`taxonomy.yml` 目前是以现货股票市场为默认范式设计的，六｜上市章节与三个具体字段对衍生品交易所存在系统性不适配，比"受控词表不够用"（第3条）更严重——那是"选项不够"，这是"整章/整个字段的前提假设都不成立"。** 是否需要给 `taxonomy.yml` 引入按交易所类型（现货/衍生品）的章节级条件适用机制，还是继续用"留空+detail说明"的方式吸收这类差异，等 v0.2 五家标杆全部完成、有更多样本后再评估，不要现在就动 schema。
+
+18. **`official_languages` 字段在"国家有多个官方语言/网站有更多地方语言"的法域该取哪个口径，`in-nse`（v1.0 Wave 1）是第一个真正需要判断的样本。** NSE 官网界面本身提供英语+12种印度地方语言（印地语、马拉地语、古吉拉特语等），但只有英语承载实质性法规/规则内容。`in-nse.yml` 最终取了"印度宪法意义上的联盟官方语言"口径，填 `[en, hi]`，而不是把网站界面的12种语言都塞进去，也没有只填 `[en]`——这是一个未经充分论证的临时判断，下次遇到类似"网站界面语言 ≠ 机构官方语言 ≠ 实质法规语言"三层不一致的法域（如同样有多官方语言的加拿大、瑞士、比利时等）时，应该回头看这个字段的定义到底该锚定哪一层，可能需要在 `taxonomy.yml` 里把 `official_languages` 的 note 写得更精确。
+19. **`in-nse` 的全市场熔断机制是本项目第一个"联动竞争对手交易所指数"的样本。** NSE 的指数熔断由 NSE 自己的 Nifty 50 或竞争对手 BSE 的 Sensex 两个指数中先触发者共同决定（`market_structure.circuit_breaker` 字段已如实记录），这与此前所有样本"熔断只看自己市场的指数"的假设不同——`taxonomy.yml` 目前没有字段专门表达"熔断依据的指数是否跨交易所"，`circuit_breaker_type` 枚举（none/index_level/stock_level/both）也没有这个维度。暂未改 schema，先记录这个真实案例，待样本更多再评估是否值得加字段。
+20. **`in-nse` 的证券交易税（STT）来源页面只覆盖股票衍生品（F&O），不含现货股票交割/日内交易适用的税率表**——`costs.financial_transaction_tax` 字段的 `quote` 已在 `detail` 里标注这个覆盖范围限制，不是"埋着不说"。同一批还有一个类似但更严重的情况：`participants.foreign_access_channel` 引用的 FPI 说明页（`nseindia.com/static/invest/fpi/broad-parameters`）标题写"Broad Parameters"，实际正文却是招商性质的概述文字，不含具体的外资分类标准或持股比例上限数值——`overview.foreign_ownership_limit` 因此整体留空。这是"网页标题暗示有具体参数、实际打开是营销文案"这类来源质量问题的新样本，与 OPEN-QUESTIONS 第4条"quote 粒度与成本"是同一类问题的延伸，下次找到 SEBI FPI Regulations 的具体条款页后应替换掉这条来源。
 
 ## 具体数据悬案
 
@@ -39,6 +43,10 @@
 - `hk-hkex` 市场结构与交易机制 / 最小交易单位（board_lot_size）— confidence: low
 - `hk-hkex` 清算、结算与交割 / 交割方式（delivery_method）— confidence: low
 - `hk-hkex` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
+- `in-nse` 市场结构与交易机制 / 临时停牌与恢复（trading_halt_mechanism）— confidence: low
+- `in-nse` 上市、持续监管与退市 / 持续上市义务（continuing_obligations）— confidence: low
+- `in-nse` 市场参与者 / 外资参与通道（foreign_access_channel）— confidence: low
+- `in-nse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `jp-jpx` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 制度变革风险（regulatory_change_risk_note）— confidence: low

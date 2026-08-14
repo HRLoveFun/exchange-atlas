@@ -83,6 +83,22 @@
       }
     },
     {
+      "id": "in-nse",
+      "name_zh": "印度国家证券交易所",
+      "name_native": {
+        "en": "National Stock Exchange of India (NSE)"
+      },
+      "official_languages": [
+        "en",
+        "hi"
+      ],
+      "source_lang": "en",
+      "group_id": "nse-group",
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "jp-jpx",
       "name_zh": "东京证券交易所",
       "name_native": {

@@ -102,6 +102,28 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Admission Regulations for Exchange Traders（「Zulassungsordnung」，交易员准入资格，⚠️不是公司上市规则——衍生品交易所没有"公司上市"概念，这是与现货股票交易所的结构性差异，见 OPEN-QUESTIONS）PDF: https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf（HTTP 200，124KB）
   - Fee Regulations（「Gebührenordnung」）PDF: https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf（HTTP 200，95KB）
 
+### 印度国家证券交易所 National Stock Exchange of India (NSE) `in-nse`
+- `nseindia.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬/限流（连续抓 17 个页面无一次 403，是本项目目前最好抓的官网之一）；页面正文是服务端渲染的静态 HTML（非 SPA），关键词直接可 grep 到；导航栏占页面文本的大头（几百个重复菜单项），抓下来后建议先用 BeautifulSoup 转纯文本、跳到页面中部"About Us"之后的正文段落再读，效率更高 | ⚠️ NSE 官网本身没有官方中文版（`source_lang: en`，见下）；NSE 集团另有 `NSE Clearing Limited`（原 National Securities Clearing Corporation Limited, NSCCL，清算，全资子公司）、`NSE Indices Limited`（原 India Index Services & Products, IISL，指数编制，全资子公司）、`NSE IFSC Limited`（GIFT City 国际金融中心内的独立交易所实体，受 IFSCA 而非 SEBI 监管，是与本文件意义上"同集团下另一独立交易所实体"最接近的案例——参照 ADR 对 `group_id` 的判断标准，已标 `group_id: nse-group`；`listing.boards` 不收录 NSE IFSC 自己的板块规则，仅收录 NSE 本身/主板与 SME 平台）；⚠️ History & Milestones 页正文只写"NSE was incorporated in 1992"，未标具体月日——本节标题曾误记"1992年11月27日"，本轮核实后已删除这个未经原文支持的具体日期，只保留"1992年"
+  - History & Milestones（成立沿革：1992年注册成立/1993年4月经SEBI认定为证券交易所/1994年开始营业）: https://www.nseindia.com/static/national-stock-exchange/history-milestones（HTTP 200，306KB）
+  - NSE Group（集团结构，NSE Clearing/NSE Indices/NSE IFSC 等子公司列表）: https://www.nseindia.com/national-stock-exchange/our-group（HTTP 200，325KB）
+  - About NSE（组织定位简介，未涉及公司制/会员制或自身是否上市的明确表述）: https://www.nseindia.com/static/national-stock-exchange/about-nse-company（HTTP 200，295KB）
+  - Corporate Structure（集团子公司沿革列表，与 History & Milestones 内容高度重叠，未找到组织形式/自身上市状态的独立信息）: https://www.nseindia.com/structure-key-personnel/corporate-structure（HTTP 200，297KB）
+  - Market Timings（交易时段，含盘前/连续竞价/收盘时段/大宗交易窗口）: https://www.nseindia.com/static/market-data/market-timings（HTTP 200，315KB）
+  - Equity Market Circuit Breakers（全市场指数熔断，10%/15%/20%三级）: https://www.nseindia.com/products-services/equity-market-circuit-breakers（HTTP 200，336KB）
+  - Equity Market Price Bands（个股涨跌停价格带，2%/5%/10%/20%分档）: https://www.nseindia.com/static/products-services/equity-market-price-bands（HTTP 200，332KB）
+  - Raising Capital: Public Issues Eligibility（主板上市财务门槛）: https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt（HTTP 200，366KB）
+  - NSE Clearing / Clearing-Settlement（NSE Clearing Limited 清算结算总览，T+1 结算周期，另有 T+0 可选试点）: https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement（HTTP 200，133KB）
+  - Securities Transaction Tax（STT 证券交易税税率表，⚠️ 该页面只覆盖股票衍生品 F&O 的 STT，不含现货股票交割/日内 STT 税率表，见 OPEN-QUESTIONS）: https://www.nseindia.com/static/products-services/equity-derivatives-securities-transaction-tax（HTTP 200，359KB）
+  - Foreign Portfolio Investors: Broad Parameters（⚠️ 页面标题含"Broad Parameters"但实际正文是营销性简介，不含 FPI 分类与持股比例的具体数值，未达到本文件"精确到信息页"的标准——下次找到 SEBI FPI Regulations 具体条款页后应替换）: https://www.nseindia.com/static/invest/fpi/broad-parameters（HTTP 200，305KB）
+  - Categories of Membership（会员/经纪商类型：Trading Member/Clearing Member等）: https://www.nseindia.com/static/trade/membership-types（HTTP 200，332KB）
+  - Trading Protocols（NEAT 交易系统、行情数据层级、Colocation/MTBT 逐笔行情）: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols（HTTP 200，356KB）
+  - Nifty 50 Index（旗舰指数说明页）: https://www.nseindia.com/static/products-services/indices-nifty50-index（HTTP 200，294KB）
+- `nsearchives.nseindia.com` | 官方（NSE 官网文档归档子域） | en | curl 常规 UA 200，PDF 体积较大（3.2MB），用 `pdftotext -layout` 转纯文本再 grep 定位 | 存放规则/方法论类 PDF，与主站 `nseindia.com` 同属官方一手来源
+  - Methodology Document for NIFTY Equity Indices（含 Nifty 50 基日/基点/加权方式/成分股筛选规则）PDF: https://nsearchives.nseindia.com/content/indices/Method_NIFTY_Equity_Indices.pdf（HTTP 200，3.2MB）
+- `sebi.gov.in` | 监管 | en | curl 常规 UA 200，未见反爬；页面是服务端渲染的传统多页站（非 SPA），正文可直接 grep，比同为监管机构域名的 `sec.gov`（美国，v0.2 时实测 403）好抓得多 | 印度证券交易委员会（SEBI），NSE 的政府监管机构；本节只用于确认监管机构身份与核心法律名称，具体规则条款优先引用 NSE 官网转载/说明页
+  - About SEBI（设立沿革：1988年非法定机构成立/1992年成为法定机构）: https://www.sebi.gov.in/about-sebi.html（HTTP 200，8.5KB）
+  - Securities Contracts (Regulation) Act, 1956（核心法律之一，SCRA，确认法律名称与年份）: https://www.sebi.gov.in/legal/acts/feb-1957/securities-contracts-regulation-act-1956-as-amended-by-the-international-financial-services-centres-authority-act-2019-w-e-f-october-01-2020-_4.html（HTTP 200，8.6KB）
+
 ---
 
 ## 探测记录（v0.0 可达性探针，2026-08-12）

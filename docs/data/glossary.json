@@ -168,6 +168,24 @@
         "ja": "特別気配"
       },
       "note": "东证机制，申报价超出值幅制限时不成交、改为显示指示性价格，是值幅制限的执行方式而非独立于价格限制之外的冷静期，与港交所VCM那种独立机制不同类"
+    },
+    {
+      "id": "t0-settlement-pilot",
+      "zh": "T+0结算（试点）",
+      "en": "T+0 Settlement (Pilot)",
+      "note": "印度NSE 2024年起对部分股票试点的可选同日资金证券交收机制，与常规T+1结算并行、非强制；与\"当日回转交易\"（intraday-reversal-t0，指当日买入的证券当日可卖出，属交易层面）是两个不同维度的概念——一个是结算周期，一个是能否当日反向交易，不要混用"
+    },
+    {
+      "id": "foreign-portfolio-investor",
+      "zh": "合格境外投资者（FPI）",
+      "en": "Foreign Portfolio Investor (FPI)",
+      "note": "印度SEBI对境外投资者参与本地二级市场的注册分类框架，与QFII等其他新兴市场的外资准入分类属同类概念，比较时注意具体持股比例上限、审批流程等细节因市场而异"
+    },
+    {
+      "id": "securities-transaction-tax",
+      "zh": "证券交易税（STT）",
+      "en": "Securities Transaction Tax (STT)",
+      "note": "印度对证券及其衍生品交易征收的交易税，按买卖方向与交易品类分别设定税率，与印花税（stamp-duty）是并行但不同的税目，不要合并成一条"
     }
   ]
 }
