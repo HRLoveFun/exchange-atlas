@@ -38,6 +38,7 @@
 - `cn-sse` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
 - `cn-sse` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `cn-sse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
+- `cn-szse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `de-eurex` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `hk-hkex` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `hk-hkex` 市场结构与交易机制 / 最小交易单位（board_lot_size）— confidence: low

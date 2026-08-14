@@ -28,6 +28,28 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 `csrc.gov.cn` 一节已按这个约定标注；已知还有 2-3 处历史字段未达标，见
 `PROJECT/OPEN-QUESTIONS.md`。
 
+## 经验：「XXXX年修订」式规则文档 URL 会随修订版本更迭直接下线，不保留旧版直链
+
+`cn-szse` 建档时踩到的坑：上一轮子代理登记 SOURCES.md 时记录的是《深圳证券交易所股票上市规则
+（**2025年**修订）》与《深圳证券交易所创业板股票上市规则（**2025年**修订）》两个 PDF 直链，
+`make fetch` 时两条都返回 404。原因不是链接抄错或反爬，是深交所在两轮抓取之间（2026年4月）
+发布了**2026年修订版**并直接下线了 2025 版 PDF 的原文件（`docs.static.szse.cn` 不保留历史
+版本的旧直链，替换是静默的、无跳转、无 301）。WebSearch 重新定位到新版 URL 后才抓到。
+
+**教训**：
+1. 任何标题带「XXXX年修订」字样的中国交易所/监管规则 PDF，只要登记 URL 与实际抓取之间隔了
+   一段时间（哪怕只是几周），都要有心理预期该文件可能已被更新版本静默替换下线——`make fetch`
+   遇到 404 时，第一反应不该是"链接错了"，而应该是"先 WebSearch 一下同名文件是否出了新修订版"。
+   `深圳证券交易所交易规则` 本身也在 2026-07-06 生效了新版（第17次修订），本节其余条目登记的
+   URL 均为本次会话当场验证过的最新版，但下次会话抓取前仍应重新探测一遍，不要假设去年验证过
+   的 URL 依然有效。
+2. 这类文档的正文最后一条附则通常会自报"自 XXXX 年 X 月 X 日起施行，本所于 XXXX 年 X 月 X 日
+   发布的《……（XXXX年修订）》同时废止"——这是判断当前抓到的是不是最新有效版本最快的办法，
+   不用去查改版历史页。
+3. 与本条相对：`.pdf` 文件名里的哈希片段（如 `W020260424747613955674`）本身不随内容变化，
+   同一次修订发布后的直链是稳定的，会失效的只是"旧修订版对应的旧哈希文件被整个撤下"，不是
+   "同一文件的 URL 会漂移"——两种失效原因分开判断，遇到 404 先假设是第一种（更常见）。
+
 ---
 
 ### 上海证券交易所 Shanghai Stock Exchange (SSE) `cn-sse`
@@ -123,6 +145,33 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `sebi.gov.in` | 监管 | en | curl 常规 UA 200，未见反爬；页面是服务端渲染的传统多页站（非 SPA），正文可直接 grep，比同为监管机构域名的 `sec.gov`（美国，v0.2 时实测 403）好抓得多 | 印度证券交易委员会（SEBI），NSE 的政府监管机构；本节只用于确认监管机构身份与核心法律名称，具体规则条款优先引用 NSE 官网转载/说明页
   - About SEBI（设立沿革：1988年非法定机构成立/1992年成为法定机构）: https://www.sebi.gov.in/about-sebi.html（HTTP 200，8.5KB）
   - Securities Contracts (Regulation) Act, 1956（核心法律之一，SCRA，确认法律名称与年份）: https://www.sebi.gov.in/legal/acts/feb-1957/securities-contracts-regulation-act-1956-as-amended-by-the-international-financial-services-centres-authority-act-2019-w-e-f-october-01-2020-_4.html（HTTP 200，8.6KB）
+
+### 深圳证券交易所 Shenzhen Stock Exchange (SZSE) `cn-szse`
+- `szse.cn` | 官方 | zh / en（英文版路径 `/English/...`，非同页切换，独立 URL；页面同样带"仅供参考，中文文本为准"类免责声明——与 SSE 一致，佐证 `source_lang: zh` 的选择） | curl + 常规浏览器 UA 全程 200，未见反爬/限流（比 `english.sse.com.cn` 好抓，不需要加延时）；PDF 用 `pdftotext -layout` 提取纯文本再 grep 定位条款 | 与上交所同属会员制事业法人、同受中国证监会监管、同为 A 股主板注册制，`region`/`regulator`/`review_system` 等字段与 cn-sse 高度一致，可直接对照校验取值口径是否统一；压测点是主板 vs 创业板（对照 cn-sse 主板 vs 科创板）
+  - 本所简介（成立/开业日期、监管归属、职能）: https://www.szse.cn/aboutus/sse/introduction/index.html
+  - 交易规则（2026年修订）PDF: https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf
+  - 股票上市规则（2026年修订，主板；原登记的2025年修订版链接抓取时返回404——已被2026年4月第十七次修订替换下线，重新 WebSearch 定位到现行版）PDF: http://docs.static.szse.cn/www/lawrules/rule/allrules/bussiness/W020260424747613955674.pdf
+  - 创业板股票上市规则（2026年修订；同上，原2025年修订版链接已下线）PDF: https://docs.static.szse.cn/www/lawrules/rule/stock/supervision/chinext/W020260424688875101057.pdf
+  - 市场概况（上市公司数/总市值等统计）: https://www.szse.cn/market/overview/index.html
+  - 指数总览: https://www.szse.cn/market/exponent/pandect/index.html
+  - 会员与交易类规则入口: https://www.szse.cn/lawrules/service/member/index.html
+  - 关于下调股票交易经手费收费标准的通知（2023-08-18）: https://www.szse.cn/disclosure/notice/general/t20230818_602805.html
+- `english.szse.cn` / `szse.cn/English` | 官方（英文版） | en | 同域名下 `/English/` 路径，curl 常规 UA 200 | About Overview 与 Trading Overview 两页内容较薄，多为导航链接夹杂少量正文，摘引前需按关键词定位，不能直接取前 N 段
+  - About Overview: https://www.szse.cn/English/about/overview/index.html
+  - Trading Overview: https://www.szse.cn/English/services/trading/tradOverview/index.html
+  - Rules 索引页: https://www.szse.cn/English/rules/siteRule/
+  - Margin Trading: https://www.szse.cn/English/services/trading/marginTrading/index.html
+  - Suspension and Resumption of Trading PDF: https://www.szse.cn/www/English/rules/siteRule/P020190125614338960977.pdf （原登记 http:// 首次抓取连接失败，改 https:// 后 200）
+- `cnindex.com.cn` | 官方（深圳证券信息有限公司，SZSE 全资子公司，指数编制方） | zh | curl 常规 UA 200 | 深证成指官方编制方案，与 cn-sse 的"交易所自编"（上证综指）、hk-hkex 的"独立第三方"（恒生指数公司）并列第三种指数编制归属模式——SZSE 是"交易所全资子公司编制"，介于两者之间
+  - 深证成份指数编制方案 PDF: https://www.cnindex.com.cn/docs/gz_399002.pdf
+- `chinaclear.cn` | 官方（清算机构，与 cn-sse 共用同一登记结算法人，域名已在 cn-sse 一节登记） | zh | curl 常规 UA 可过 | 中国证券登记结算有限责任公司深圳分公司页面，确认其为 SZSE 上市证券提供登记结算服务、深港通相关登记存管结算业务
+  - 深圳分公司公告栏: http://www.chinaclear.cn/zdjs/szfgsgg/center_list.shtml
+- `people.com.cn` | 第三方（官方媒体，域名已在 cn-sse 一节登记） | zh | curl 需按 GBK 解码，常规 UA 可过 | 印花税为全国统一税率的国家税种，非交易所自定，与 cn-sse 引用同一篇报道确认 2023-08-28 减半征收
+  - 证券交易印花税8月28日起实施减半征收: http://finance.people.com.cn/n1/2023/0828/c1004-40065300.html
+- `csrc.gov.cn` | 监管（域名已在 cn-sse 一节登记） | zh/en | curl 常规 UA 可过 | 中国证监会官网，SZSE 与 SSE 共同的政府监管机构，本节独立抓取一次首页作为本所"当次抓取凭据"
+  - 官网首页: http://www.csrc.gov.cn/
+- `finance.sina.com.cn` | 第三方（财经媒体，全文转载深交所 2016-01-07 官方通知原文） | zh | curl 需按 GBK 解码（非 UTF-8），常规 UA 200 | 用于 circuit_breaker 字段：本次会话未抓到 szse.cn 自己的通知原页（WebSearch 未命中该页面的直链），退而用新浪财经转载的通知全文作为来源，quote 摘的是被转载的深交所官方通知原文本身，但因转载渠道是第三方，confidence 按铁律封顶 medium，不因转载内容是官方原文而破例标 high
+  - 三大交易所公告确认指数熔断制度暂停实施: http://finance.sina.com.cn/stock/y/20160107/223324126797.shtml
 
 ---
 
