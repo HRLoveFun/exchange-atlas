@@ -1,0 +1,1452 @@
+{
+  "id": "in-nse",
+  "name_zh": "印度国家证券交易所",
+  "name_native": {
+    "en": "National Stock Exchange of India (NSE)"
+  },
+  "official_languages": [
+    "en",
+    "hi"
+  ],
+  "source_lang": "en",
+  "group_id": "nse-group",
+  "region": "apac",
+  "tier": "extended",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "Asia/Kolkata (IST)",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dst_rule": {
+        "zh": "无夏令时（印度全年采用统一的印度标准时间 IST，UTC+5:30，不做季节性调整）",
+        "en": "No DST observed (India uses a single Indian Standard Time, UTC+5:30, year-round)",
+        "detail": "本次未找到 NSE 官网对\"印度本身是否实行夏令时\"的直接表述，以下为间接证据：官网\n商品衍生品交易时段表以\"美国夏令时开始/结束（Spring/Fall）\"作为调整收盘时间的\n参照点，说明需要调整的是\"与美国市场时差\"而非印度本地时间本身——这暗示印度本地\n时间是固定不变的，未直接断言。\n",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Trade End time after Start of US Day light Savings in Spring Season* / Trade End time after End of US Day light Savings in Fall Season*",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "founded_year": {
+        "zh": "1992（具体月日官网未标注）注册成立；1993年4月经SEBI认定为证券交易所；1994年开始运营",
+        "en": "Incorporated in 1992 (exact day not stated on the official page); recognised as a stock exchange by SEBI in April 1993; commenced operations in 1994",
+        "detail": "History & Milestones 页正文只写\"incorporated in 1992\"，未标具体月日——本节\nSOURCES.md 草稿此前曾记\"1992年11月27日\"，本轮核实后确认该具体日期没有原文支持，\n已从 SOURCES.md 中删除，只保留\"1992年\"这个有原文依据的粒度。\n",
+        "sources": [
+          {
+            "title": "History & Milestones（官网）",
+            "url": "https://www.nseindia.com/static/national-stock-exchange/history-milestones",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "NSE was incorporated in 1992. It was recognised as a stock exchange by SEBI in April 1993 and commenced operations in 1994 with the launch of the wholesale debt market, followed shortly after by the launch of the cash market segment.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "history": {
+        "zh": "1992年注册成立，1993年经SEBI认定为证券交易所，1994年开始运营（先上线批发债券\n市场，随后是现货市场），同年即实现电子/屏幕化交易，是印度首家采用电子交易系统\n的交易所。1996年开始与中央证券存管机构对接实现无纸化（dematerialised）证券结算。\n2000年上线股指期货，2001年上线股指期权；2007-2008年度成为印度首家提供货币期货\n交易的交易所。近年在衍生品合约成交量上按期货业协会（FIA）统计连续多个自然年\n（2019、2022-2024）位列全球第一。集团架构上，NSE 通过全资子公司 NSE IFSC Limited\n在古吉拉特邦GIFT City国际金融服务中心运营独立的国际交易所实体（受IFSCA监管），\n并与新加坡交易所（SGX）合作推出\"NSE IFSC-SGX Connect\"（2022年启用）。\n",
+        "en": "Incorporated in 1992, recognised as a stock exchange by SEBI in 1993, and commenced\noperations in 1994 (wholesale debt market first, followed by the cash market segment);\nNSE pioneered electronic/screen-based trading in India from the same year. Moved to\ndematerialised securities settlement via depositories from 1996. Launched index futures\nin 2000 and index options in 2001; became the first exchange in India to offer currency\nfutures trading in 2007-2008. In recent years NSE has repeatedly ranked as the world's\nlargest exchange by derivatives contract volume per Futures Industry Association (FIA)\nstatistics (calendar years 2019, 2022-2024). At the group level, NSE operates an\nindependent international exchange entity — NSE IFSC Limited, regulated by the IFSCA\nrather than SEBI — at the GIFT City international financial services centre in Gujarat,\nincluding the \"NSE IFSC-SGX Connect\" launched in partnership with the Singapore\nExchange (2022).\n",
+        "detail": "各里程碑年份来自 History & Milestones 页的年表条目，逐条对应见下方 quote 与 sources。",
+        "sources": [
+          {
+            "title": "History & Milestones（官网）",
+            "url": "https://www.nseindia.com/static/national-stock-exchange/history-milestones",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "NSE Group（官网）",
+            "url": "https://www.nseindia.com/national-stock-exchange/our-group",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Commenced electronic or screen-based trading / Became the first exchange in India to offer trading in Currency Futures / Largest volume of derivatives contracts traded in the world in the calendar year 2024 based on Futures Industry Association statistics / NSE IFSC-SGX Connect Inaugurated by Hon'ble Prime Minister of India Shri Narendra Modi",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "organization_form": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未能确认。NSE 自设立起即以公司形态运作（不同于传统会员制交易所），是业内常识，\n但本次专门核对了 About Us（about-nse-company）与 Corporate Structure 两个页面，\n均未找到对\"公司制/会员制\"或\"是否已改制（demutualised）\"的明确表述——两页内容\n高度侧重历史沿革与子公司列表，没有类似 us-nyse.yml 里 NYSE 官网那种直接说明\n改制过程的段落。按铁律不采纳未经本次核实的印象，留空。\n",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "self_listed": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未能确认。NSE 自身股票是否/何时在自己或其他交易所挂牌交易，本次未在官网找到\n直接表述（已排查 About Us、Corporate Structure、NSE Group 三个页面）。留空，\n不采纳未经核实的印象。\n",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "market_cap_usd_bn": {
+        "zh": "约5万亿美元（2024-2025财年首次突破 ₹416.57万亿卢比，为里程碑节点数值，非本次会话时点的最新实时统计）",
+        "en": "~$5 trillion (milestone first crossed in FY2024-2025, i.e. ₹416.57 trillion; not a current real-time figure as of this session)",
+        "sources": [
+          {
+            "title": "History & Milestones（官网）",
+            "url": "https://www.nseindia.com/static/national-stock-exchange/history-milestones",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Market capitalisation of NSE listed companies surpassed  ₹416.57 trillion ($5 trillion) for the first time",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "listed_companies_count": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "本次未在抓取页面中找到明确的当前上市公司总数统计。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "global_ranking": {
+        "zh": "衍生品合约成交量全球最大交易所（按期货业协会FIA统计，2019、2022-2024连续多个自然年蝉联）",
+        "en": "World's largest exchange by derivatives contracts traded (per Futures Industry Association statistics, calendar years 2019 and 2022-2024)",
+        "detail": "这是按'合约张数'口径的排名，不是按上市公司总市值口径；官网未见后者的官方排名表述，未混填。",
+        "sources": [
+          {
+            "title": "History & Milestones（官网）",
+            "url": "https://www.nseindia.com/static/national-stock-exchange/history-milestones",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Largest volume of derivatives contracts traded in the world in the calendar year 2024 based on Futures Industry Association statistics",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "trading_currency": {
+        "zh": "印度卢比 (INR)",
+        "en": "INR",
+        "sources": [
+          {
+            "title": "Methodology Document for NIFTY Equity Indices（官网归档PDF）",
+            "url": "https://nsearchives.nseindia.com/content/indices/Method_NIFTY_Equity_Indices.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Regulated prices received from the National Stock Exchange of India Ltd, in Indian Rupees.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "settlement_currency": {
+        "zh": "印度卢比 (INR)",
+        "en": "INR",
+        "detail": "现货市场资金交收以印度卢比为主；货币衍生品等特定品种以外币计价交易但按卢比交收保证金/损益，本次未逐条核实细则。",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "印度证券交易委员会 (SEBI)",
+        "en": "Securities and Exchange Board of India (SEBI)",
+        "detail": "SEBI 于1988年以非法定机构形式设立，1992年经《SEBI法》授权成为法定监管机构。",
+        "sources": [
+          {
+            "title": "About SEBI（sebi.gov.in 官网）",
+            "url": "https://www.sebi.gov.in/about-sebi.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Securities and Exchange Board of India was established as a statutory body in the year 1992 and the provisions of the Securities and Exchange Board of India Act, 1992 (15 of 1992) came into force on January 30, 1992.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "self_regulatory_org": {
+        "zh": "未见独立于SEBI/交易所之外的第三方自律组织；一线监管职能由NSE自身'Regulation'条线（含会员合规、市场监察、信息披露监督等）承担",
+        "en": "No separate third-party SRO distinct from SEBI/the Exchange identified; front-line regulatory functions are carried out within NSE's own Regulation division (member compliance, market surveillance, disclosure oversight)",
+        "detail": "证据来自官网导航结构本身（\"Regulation\"大类下设 Exchange/Market Rules & Regulations/\nMarket Surveillance/Exchange Disclosures，以及 Member/Member Compliance/Action\nagainst Members 等子项），而非一段专门介绍自律监管体制的说明文字，故 confidence\n定 medium 而非 high。与美股 NYSE Regulation + FINRA 的\"交易所自身+委托第三方\"\n组合、港交所\"交易所自身兼一线监管\"、上交所\"交易所+中国证券业协会\"均不完全相同，\n是这方面又一个真实样本。\n",
+        "sources": [
+          {
+            "title": "History & Milestones（官网，站内导航含 Regulation 大类）",
+            "url": "https://www.nseindia.com/static/national-stock-exchange/history-milestones",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Market Rules & Regulations / Market Surveillance / Exchange Disclosures / Defaulting Clients",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "clearing_regulator": {
+        "zh": "印度证券交易委员会 (SEBI)",
+        "en": "SEBI",
+        "detail": "与市场监管为同一机构；NSE Clearing Limited 作为清算机构本身是否受专门条例（如独立的《Clearing Corporation Regulations》）规管，本次未逐条核实。",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "core_laws": {
+        "zh": "《1956年证券合同（监管）法》(SCRA) 与《1992年印度证券交易委员会法》(SEBI Act)",
+        "en": "Securities Contracts (Regulation) Act, 1956 (SCRA); Securities and Exchange Board of India Act, 1992 (SEBI Act)",
+        "detail": "SCRA 1956 是印度证券合同与交易所监管的基础法律，SEBI Act 1992 则确立 SEBI 作为\n法定监管机构的地位与权力。两部法律均在 sebi.gov.in 官网确认了法律名称与年份，\n具体条款细则本次未逐条核实。\n",
+        "sources": [
+          {
+            "title": "Securities Contracts (Regulation) Act, 1956（sebi.gov.in 法律条目页，仅用于确认法律名称与年份，未读取全文条款）",
+            "url": "https://www.sebi.gov.in/legal/acts/feb-1957/securities-contracts-regulation-act-1956-as-amended-by-the-international-financial-services-centres-authority-act-2019-w-e-f-october-01-2020-_4.html",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "About SEBI（sebi.gov.in 官网）",
+            "url": "https://www.sebi.gov.in/about-sebi.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Securities Contracts (Regulation) Act, 1956 (As amended by the International Financial Services Centres Authority Act, 2019 w.e.f. October 01, 2020) / The Securities and Exchange Board of India Act, 1992 (15 of 1992) came into force on January 30, 1992.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未核实。NSE 官网的 FPI（Foreign Portfolio Investors）介绍页内容偏营销性质，未\n找到具体的外资持股比例上限数值或分类标准原文，见 SOURCES.md 该条目的备注。\n",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "disclosure_requirements": {
+        "zh": "上市公司持续披露义务受SEBI《上市义务与披露要求条例》(LODR) 等一组条例规管（另有ICDR/PIT/SAST等）；具体披露频率与渠道细则本次未逐条核实",
+        "en": "Continuing disclosure obligations for listed companies are governed by SEBI's Listing Obligations and Disclosure Requirements (LODR) Regulations, among others (ICDR/PIT/SAST); specific frequency/channel requirements not verified in detail this session",
+        "detail": "证据来自主板上市资格页面导航与正文里提到的合规检查条目，非专门的披露制度说明文字。",
+        "sources": [
+          {
+            "title": "Eligibility Criteria - Public Issues Main Board（官网）",
+            "url": "https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Compliance track record (including LODR , ICDR, PIT, SAST)",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "investor_protection": {
+        "zh": "设有投资者保护基金（Investor Protection Trust Fund）与在线争议解决机制（SMARTODR）等投资者保护安排；具体赔付规则与额度本次未逐条核实",
+        "en": "An Investor Protection Trust Fund and an Online Dispute Resolution mechanism (SMARTODR) exist among investor protection arrangements; specific compensation rules and caps not verified in detail this session",
+        "detail": "证据来自站内导航条目本身（Investor Protection Trust Fund、LOGIN TO SMARTODR 等），非专门说明文字。",
+        "sources": [
+          {
+            "title": "History & Milestones（官网，站内导航含投资者保护相关条目）",
+            "url": "https://www.nseindia.com/static/national-stock-exchange/history-milestones",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Investor Protection Trust Fund",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-14",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "in-nse-equities",
+          "category": "equity",
+          "name_zh": "普通股（现货市场）",
+          "name_native": "Equity Shares (Capital Market Segment)",
+          "description": "含 Normal Market、Odd Lot Market、T+0 Market（可选同日结算试点）、Auction Market 等细分市场，见 market_structure 章节"
+        },
+        {
+          "id": "in-nse-emerge",
+          "category": "equity",
+          "name_zh": "中小企业板（EMERGE）证券",
+          "name_native": "NSE EMERGE (SME Platform)",
+          "description": "面向中小企业的专属挂牌与交易平台，2011-2012财年推出，截至2024-2025财年累计突破600家SME挂牌"
+        },
+        {
+          "id": "in-nse-etf",
+          "category": "fund",
+          "name_zh": "交易所买卖基金",
+          "name_native": "Exchange Traded Funds (ETF)"
+        },
+        {
+          "id": "in-nse-mf",
+          "category": "fund",
+          "name_zh": "共同基金（MFSS平台）",
+          "name_native": "Mutual Fund Service System (MFSS)"
+        },
+        {
+          "id": "in-nse-reit-invit",
+          "category": "fund",
+          "name_zh": "房地产投资信托/基础设施投资信托",
+          "name_native": "REITs / InvITs"
+        },
+        {
+          "id": "in-nse-debt",
+          "category": "bond",
+          "name_zh": "公司债与政府证券",
+          "name_native": "Corporate Bonds / Government Securities (Debt Segment, incl. CBRICS/NDS-OM)"
+        },
+        {
+          "id": "in-nse-sgb",
+          "category": "bond",
+          "name_zh": "主权黄金债券",
+          "name_native": "Sovereign Gold Bonds (SGB)"
+        },
+        {
+          "id": "in-nse-egr",
+          "category": "other",
+          "name_zh": "电子黄金收据",
+          "name_native": "Electronic Gold Receipts (EGR)"
+        },
+        {
+          "id": "in-nse-equity-derivatives",
+          "category": "future",
+          "name_zh": "股票/股指衍生品（期货与期权）",
+          "name_native": "Equity Derivatives (Index & Stock Futures and Options)",
+          "description": "含 Nifty 50 等指数期货/期权及个股期货/期权，2000年上线股指期货、2001年上线股指期权"
+        },
+        {
+          "id": "in-nse-currency-derivatives",
+          "category": "future",
+          "name_zh": "货币衍生品",
+          "name_native": "Currency Derivatives",
+          "description": "含 USDINR/EURINR/GBPINR/JPYINR 及 EURUSD/GBPUSD/USDJPY 交叉货币对期货期权，2007-2008年度率先在印度推出货币期货"
+        },
+        {
+          "id": "in-nse-commodity-derivatives",
+          "category": "future",
+          "name_zh": "商品衍生品",
+          "name_native": "Commodity Derivatives",
+          "description": "分'非农产品'与'国际可参照的农产品'两类，交易时段延至美国交易时段收盘（跨美国夏令时调整），见 market_structure"
+        },
+        {
+          "id": "in-nse-interest-rate-derivatives",
+          "category": "future",
+          "name_zh": "利率衍生品",
+          "name_native": "Interest Rate Derivatives",
+          "description": "含政府证券利率期货、2019-2020财年上线的利率期权"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "大宗交易首场08:45-09:00；开盘集合竞价（Pre-open session）09:00-09:08（新股/复牌证券另有09:00-09:45的Special Pre-open session）",
+          "en": "Block Deal session 1: 08:45-09:00; Pre-open session (Regular): 09:00-09:08 (newly-listed/relisted securities use a Special Pre-open session, 09:00-09:45)",
+          "quote": "Block Deal session 1 Open 08:45 hrs / Block Deal session 1 Close 09:00 hrs / Pre-open session (Regular) Open 09:00 hrs / Pre-open session (Regular) Close 09:08 hrs / Special Pre-open session (SPOS) Close 09:45 hrs",
+          "sources": [
+            {
+              "title": "Market Timings（官网）",
+              "url": "https://www.nseindia.com/static/market-data/market-timings",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "confidence": "high",
+          "enum": null,
+          "detail": null
+        },
+        "continuous_am": {
+          "zh": "现货市场（普通/碎股市场）连续竞价09:15起，无独立「上午盘」与「下午盘」划分，与连续下午竞价属同一连续时段（见 continuous_pm）",
+          "en": "Continuous trading (Normal/Odd Lot market) begins at 09:15; not split into separate morning/afternoon sessions — see continuous_pm for the single continuous session",
+          "quote": "Normal / Odd lot market Open 09:15 hrs",
+          "sources": [
+            {
+              "title": "Market Timings（官网）",
+              "url": "https://www.nseindia.com/static/market-data/market-timings",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "confidence": "high",
+          "enum": null,
+          "detail": null
+        },
+        "lunch_break": {
+          "zh": "无（连续交易09:15-15:30中间不设午休）",
+          "en": "None (continuous trading 09:15-15:30 has no midday break)",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Market Timings（官网）",
+              "url": "https://www.nseindia.com/static/market-data/market-timings",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "continuous_pm": {
+          "zh": "连续交易09:15-15:30；14:00-14:30另设大宗成交撮合的Auction market；15:40-16:00为收盘集合竞价（Closing session/CAS）",
+          "en": "Continuous trading 09:15-15:30; a separate Auction Market runs 14:00-14:30; Closing session (Closing Auction Session, CAS) runs 15:40-16:00",
+          "quote": "Normal / Odd lot market Close 15:30 hrs / Auction market Open 14:00 hrs / Auction market Close 14:30 hrs / Closing session Open 15:40 hrs / Closing session Close 16:00 hrs",
+          "sources": [
+            {
+              "title": "Market Timings（官网）",
+              "url": "https://www.nseindia.com/static/market-data/market-timings",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "confidence": "high",
+          "enum": null,
+          "detail": null
+        },
+        "after_market": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "官网 Equities 时段表未见独立盘后连续交易时段；交易修改截止时间16:15不构成独立交易时段，未混填。",
+          "sources": [
+            {
+              "title": "Market Timings（官网）",
+              "url": "https://www.nseindia.com/static/market-data/market-timings",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "night_session": {
+          "zh": "商品衍生品时段延至境外市场收盘（非农品种最晚23:30/23:55），但本节字段针对现货市场，现货市场本身无夜盘",
+          "en": "None for the cash equity market (commodity derivatives extend late to track offshore market close, but that is a separate product segment)",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Market Timings（官网）",
+              "url": "https://www.nseindia.com/static/market-data/market-timings",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "holidays_note": {
+        "zh": "官网公布多年期交易日历与节假日安排，本次未逐年核实具体日期清单；一个值得记录的特色安排是排灯节（Diwali）当晚举行象征吉祥开局的'Muhurat Trading'特别交易时段，具体时间另行公告",
+        "en": "The official site publishes a multi-year trading calendar and holiday schedule; specific yearly dates not verified this session. Notably, NSE holds a special 'Muhurat Trading' session on Diwali evening (a traditional auspicious-opening session), with timing announced separately by circular",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "On account of Diwali Laxmi Pujan Muhurat trading shall be conducted, the market timings for the same shall be notified subsequently through a separate circular.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘集合竞价（Pre-open session），09:00-09:08收集订单并撮合确定开盘价，此后09:15转入连续竞价；新股/复牌证券另有09:00-09:45的Special Pre-open session",
+        "en": "Opening call auction (Pre-open session), 09:00-09:08 for order collection and matching to determine the opening price, followed by continuous trading from 09:15; newly-listed/relisted securities use a separate Special Pre-open session (09:00-09:45)",
+        "detail": "具体撮合算法（如价格发现规则细节）本次未在抓取页面中找到进一步说明文字，仅确认时段结构。",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Pre-open session (Regular) Open 09:00 hrs / Pre-open session (Regular) Close 09:08 hrs",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价（Closing session，官网导航称Closing Auction Session/CAS），15:40-16:00",
+        "en": "Closing call auction (Closing session, referred to elsewhere on the site as the Closing Auction Session/CAS), 15:40-16:00",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Closing session Open 15:40 hrs / Closing session Close 16:00 hrs",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网确认交易系统为电子撮合（NEAT），但本次未找到对具体撮合优先顺序（如价格优先/时间优先）逐条说明的官方原文，未采纳常识性印象。",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "order_types": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "本次抓取的 Trading Protocols 页聚焦连接协议（NEAT Adapter/Trimmed Protocol），未涉及订单类型清单本身，留空。",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "tick_size": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "board_lot_size": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "odd_lot_handling": {
+        "zh": "设有独立的'Odd Lot Market'交易时段（与Normal Market同时段09:15-15:30并行），碎股在此市场撮合",
+        "en": "A dedicated 'Odd Lot Market' session runs in parallel with the Normal Market (09:15-15:30) for odd-lot trading",
+        "detail": "证据来自时段表条目名称本身（'Normal / Odd lot market'），未找到该市场具体撮合规则的说明文字。",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Normal / Odd lot market Open 09:15 hrs / Normal / Odd lot market Close 15:30 hrs",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "percentage_band",
+          "zh": "百分比涨跌幅，按证券监察分类分档（2%/5%/10%/20%），非全市场统一单一幅度",
+          "en": "Percentage price bands, tiered by surveillance/liquidity category (2%/5%/10%/20%), not a single uniform band market-wide",
+          "sources": [
+            {
+              "title": "Price Bands（官网）",
+              "url": "https://www.nseindia.com/static/products-services/equity-market-price-bands",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "Daily price bands are applicable on securities as below: Daily price bands of 2% (either way) Daily price bands of 5% (either way) Daily price bands of 10% (either way) No price bands are applicable on scrips on which derivative products are available",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "detail": null
+        },
+        "main_board": {
+          "zh": "个股按分类适用2%/5%/10%（either way）；挂有衍生品的个股无每日涨跌停，改设10%的委托申报操作区间（防止非真实价格挂单）；其余证券（含债券、优先股）20%；限价实物市场与Normal Market同幅度；Auction market统一20%",
+          "en": "2%/5%/10% (either way) by security category; scrips with derivative products have no daily price band but a 10% order-entry operating range instead (to prevent non-genuine price orders); all remaining securities (incl. debentures, preference shares) 20%; the Limited Physical Market uses the same bands as the Normal Market; the Auction Market uses a flat 20%",
+          "sources": [
+            {
+              "title": "Price Bands（官网）",
+              "url": "https://www.nseindia.com/static/products-services/equity-market-price-bands",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "No price bands are applicable on scrips on which derivative products are available * ... Price bands of 20% (either way) on all remaining scrips (including debentures, preference shares etc). ... * In order to prevent members from entering orders at non-genuine prices in such securities, the Exchange has fixed operating range of 10%. ... For Auction market the price bands of 20% are applicable.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "other_boards": {
+          "zh": "",
+          "confidence": "low",
+          "sources": [
+            {
+              "title": "Market Timings（官网）",
+              "url": "https://www.nseindia.com/static/market-data/market-timings",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "index_level",
+        "zh": "全市场指数熔断（index-based market-wide circuit breaker），三级阈值10%/15%/20%，以印度国家证券交易所Nifty 50或竞争对手孟买证券交易所（BSE）Sensex两个指数中先触发者为准",
+        "en": "Index-based market-wide circuit breaker, three-tier thresholds at 10%/15%/20%, triggered by whichever of the Nifty 50 (NSE) or the BSE Sensex breaches first",
+        "detail": "2001年7月2日起实施（依SEBI Circular No. SMDRPD/Policy/Cir-37/2001），2013年经\nSEBI Circular no. CIR/MRD/DP/25/2013部分修订。触发后市场以开盘集合竞价方式恢复：\n10%——1:00pm前触发暂停45分钟+15分钟集合竞价恢复；1:00-2:30pm触发暂停15分钟+15分钟\n集合竞价；2:30pm后触发不暂停。15%——1:00pm前触发暂停1小时45分钟+15分钟集合竞价；\n1:00-2:00pm触发暂停45分钟+15分钟集合竞价；2:00pm后触发当日不再开市。20%——任意\n时段触发均直接休市至当日结束。**跨交易所协同熔断**（联动竞争对手BSE的指数）是本\n项目目前样本中的第一例，与其余交易所\"熔断只看自己市场指数\"的设计不同，值得记入\nOPEN-QUESTIONS。\nNifty 50 收盘价（2026-08-13）24,395.85，官网据此换算的次日（2026-08-14）三档\n绝对点位分别为±2,439.60/±3,659.35/±4,879.15——这是逐日滚动计算值，非固定阈值，\n未作为长期数据填入其他字段。\n",
+        "sources": [
+          {
+            "title": "Equity Market Circuit Breakers（官网）",
+            "url": "https://www.nseindia.com/products-services/equity-market-circuit-breakers",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The index-based market-wide circuit breaker system applies at 3 stages of the index movement, either way viz. at 10%, 15% and 20%. These circuit breakers when triggered bring about a coordinated trading halt in all equity and equity derivative markets nationwide. The market-wide circuit breakers are triggered by movement of either the BSE Sensex or the Nifty 50, whichever is breached earlier.",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "volatility_interruption": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "本次未找到独立于全市场熔断之外的个股级波动性中断机制（如港交所VCM、Eurex Volatility Interruption那类）的官方说明文字，不确定是否存在，未做'无'的断言，留空转 OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "见 circuit_breaker（全市场指数熔断）；个股级别的临时停牌/复牌具体规则本次未逐条核实",
+        "en": "See circuit_breaker (market-wide index circuit breaker); stock-level suspension/resumption rules not verified in detail this session",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "intraday_reversal": {
+        "enum": "t0",
+        "zh": "T+0（可当日回转）——现货市场为单一连续交易时段（09:15-15:30），未见对当日买入证券当日卖出的限制性表述",
+        "en": "T+0 (same-day round-trip trading permitted) — inferred from the single continuous trading session (09:15-15:30) with no same-day resale restriction found in the fetched pages",
+        "detail": "这是基于'市场结构未见限制性表述'的结构性推断，不是直接的规则原文断言，与 us-nyse.yml 对同字段的处理方式（同样是结构性推断，confidence: medium）保持一致的证据标准。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "quote": null
+      },
+      "short_selling": {
+        "zh": "设有证券借贷机制（Securities Lending and Borrowing Scheme, SLBS，2007-2008年度推出），但具体做空限制规则（如是否有报升规则、裸卖空禁令的条文表述）本次未能核实到直接原文",
+        "en": "A Securities Lending and Borrowing Scheme (SLBS) exists (introduced FY2007-2008), but the specific short-selling restriction rules (e.g. uptick-rule wording, naked short selling ban text) were not confirmed against direct source text this session",
+        "detail": "未设 enum 值——现有 short_selling_stance 枚举（freely_allowed/restricted_uptick/restricted_list/banned）哪个最贴切本次没有依据判断，强行选一个属于凑数，留空。",
+        "sources": [
+          {
+            "title": "History & Milestones（官网）",
+            "url": "https://www.nseindia.com/static/national-stock-exchange/history-milestones",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Introduced the Securities Lending and Borrowing Scheme (SLBS)",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "block_trade": {
+        "zh": "设有专门的大宗交易时段（Block Deal session），每日两场：08:45-09:00（开盘前）与14:05-14:20（盘中）",
+        "en": "Dedicated Block Deal sessions exist, twice daily: 08:45-09:00 (pre-open) and 14:05-14:20 (intraday)",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Block Deal session 1 Open 08:45 hrs / Block Deal session 1 Close 09:00 hrs / Block Deal session 2 Open 14:05 hrs / Block Deal session 2 Close 14:20 hrs",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "dark_pool": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "本次未找到暗池/场外交易相关的官方说明文字，不确定是否存在，未做'无'的断言，留空。",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "market_maker_scheme": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网导航含'Liquidity Enhancement Scheme'条目（衍生品流动性激励计划相关），但本次未抓取到该计划的具体说明页，无法判断是否等同于传统意义上的做市商制度，留空。",
+        "sources": [
+          {
+            "title": "Market Timings（官网）",
+            "url": "https://www.nseindia.com/static/market-data/market-timings",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "connect_schemes": {
+        "zh": "NSE IFSC-SGX Connect——NSE 与新加坡交易所（SGX）合作、通过 GIFT City 的 NSE IFSC 实体运行的跨境挂钩安排，2022年正式启用，此前双方在 Nifty 50 相关产品上已合作22年",
+        "en": "NSE IFSC-SGX Connect — a cross-border link between NSE and the Singapore Exchange (SGX), operated via the NSE IFSC entity at GIFT City, formally launched in 2022 following 22 years of prior NSE-SGX cooperation on Nifty 50-linked products",
+        "detail": "这与沪港通/深港通那种面向境内外二级市场投资者互联互通有结构性差异——NSE IFSC-SGX Connect 是把此前在SGX交易的Nifty衍生品迁移/联通至GIFT City的IFSC平台，具体运作机制本次未逐条核实。",
+        "sources": [
+          {
+            "title": "History & Milestones（官网）",
+            "url": "https://www.nseindia.com/static/national-stock-exchange/history-milestones",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "NSE IFSC-SGX Connect Inaugurated by Hon'ble Prime Minister of India Shri Narendra Modi / 22 years of partnership between NSE and SGX for NIFTY50",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      }
+    },
+    "listing": {
+      "boards": [
+        {
+          "id": "in-nse-main",
+          "name_zh": "主板",
+          "name_native": "Main Board",
+          "financial_threshold": "IPO：实收股本≥1000万卢比且发行后市值≥2500万卢比，另需3年经营记录、净资产为正（发行规模超5亿卢比可豁免）；已在其他交易所上市公司平移：实收股本≥1000万卢比+最近3年营收超10亿卢比或EBITDA为正+净资产超7500万卢比或6个月日均市值超15亿卢比+已上市满3年+公众股东≥1000人等",
+          "target_companies": "大中型成熟企业（含新股发行与已在其他交易所上市公司的平移上市）",
+          "launched_year": "1994（现货市场板块随交易所同步启用）"
+        },
+        {
+          "id": "in-nse-emerge",
+          "name_zh": "中小企业板（EMERGE）",
+          "name_native": "NSE EMERGE (SME Platform)",
+          "financial_threshold": "自身首次挂牌门槛本次未抓取核实；从EMERGE转主板需实收股本≥1000万卢比、市值≥2500万卢比、连续3年EBITDA为正且最近一年PAT为正、净资产≥7500万卢比、已挂牌满3年、公众股东≥1000人",
+          "target_companies": "中小企业（SME）专属板块",
+          "launched_year": "2012（官网仅标注2011-2012财年区间，未见具体月日）"
+        }
+      ],
+      "review_system": {
+        "zh": "披露为本，设有一组明确的量化财务门槛（实收股本/净资产/市值/营收等具体数值），叠加交易所对申请的自由裁量驳回权（如'6个月内曾被驳回'的冷静期条款、交易所可基于'任何交易所认为合适的理由'驳回申请）",
+        "en": "Disclosure-based, combining explicit quantitative financial thresholds (paid-up capital / net worth / market cap / revenue, etc.) with discretionary rejection powers reserved to the Exchange (e.g. a 6-month rejection cooling-off clause, and a catch-all 'any other reason as NSE may deem fit' rejection ground)",
+        "detail": "与上交所\"注册制\"（registration枚举）、港交所\"披露为本但上市委员会有实质审核权\"、\nNYSE\"披露为本+极具体的量化规则编号+广泛自由裁量权\"、JPX\"披露为本，交易所审核+\n重大事项另须向金融厅报告\"均不完全相同——这是 OPEN-QUESTIONS 第3条\"受控词表够\n不够用\"积累的第5个真实案例，未套用 review_system 枚举，见该条目更新。\n",
+        "sources": [
+          {
+            "title": "Eligibility Criteria - Public Issues Main Board（官网）",
+            "url": "https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Any other reason as NSE may deem fit. ... The application of the applicant company should not have been rejected by the exchange in last 6 complete months.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Eligibility Criteria - Public Issues Main Board（官网）",
+            "url": "https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "transfer_between_boards": {
+        "zh": "EMERGE（SME平台）向主板迁移设有明确条件：实收股本≥1000万卢比且市值≥2500万卢比、连续3年正EBITDA且最近一年正PAT、已在SME平台挂牌满3年、净资产≥7500万卢比、公众股东≥1000人等",
+        "en": "Migration from EMERGE (SME platform) to the Main Board requires: paid-up capital ≥ INR 10 crore and market capitalisation ≥ INR 25 crore; positive EBITDA for 3 preceding years and positive PAT in the latest year; listed on the SME platform for ≥ 3 years; net worth ≥ INR 75 crore; ≥ 1,000 public shareholders",
+        "sources": [
+          {
+            "title": "Eligibility Criteria - Public Issues Main Board（官网）",
+            "url": "https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The paid-up equity capital of the applicant shall not be less than 10 crores and the capitalisation of the applicant's equity shall not be less than 25 crores** ... The applicant should have been listed on SME platform of the Exchange for at least 3 years.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "continuing_obligations": {
+        "zh": "受SEBI《上市义务与披露要求条例》(LODR)等一组条例规管，具体条款本次未逐条核实",
+        "en": "Governed by SEBI's Listing Obligations and Disclosure Requirements (LODR) Regulations, among others; specific provisions not verified in detail this session",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Eligibility Criteria - Public Issues Main Board（官网）",
+            "url": "https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "suspension_resumption": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Eligibility Criteria - Public Issues Main Board（官网）",
+            "url": "https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_conditions": {
+        "zh": "",
+        "en": "",
+        "confidence": "low",
+        "detail": "官网设有'Delisting of Companies'/'Public Notice Compulsory Delisting'/'Orders of Delisting Committee'等导航条目，确认存在正式的退市委员会（Delisting Committee）建制，但本次未抓取到具体退市条件的说明页，留空。",
+        "sources": [
+          {
+            "title": "Eligibility Criteria - Public Issues Main Board（官网）",
+            "url": "https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "quote": null
+      },
+      "delisting_process": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Eligibility Criteria - Public Issues Main Board（官网）",
+            "url": "https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_transition_period": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Eligibility Criteria - Public Issues Main Board（官网）",
+            "url": "https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Eligibility Criteria - Public Issues Main Board（官网）",
+            "url": "https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-14",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "nifty-50",
+          "name_zh": "Nifty 50指数",
+          "name_native": "NIFTY 50",
+          "compiler": "self",
+          "weighting_method": "float_adjusted",
+          "review_frequency": "半年度（基于1月/7月各6个月数据评估，成分股调整分别于3月/9月最后交易日生效）",
+          "flagship": "yes",
+          "description": "NSE集团旗舰指数，50只蓝筹股，覆盖约66%的NSE自由流通调整市值。由NSE Indices\nLimited（原India Index Services & Products/IISL，NSE Strategic Investment\nCorporation旗下子公司）编制管理——鉴于该公司是NSE集团内部子公司（NSE对其的\n持股方向是\"NSE→子公司\"而非反向），归为 compiler: self 而非 other，这与\nus-nyse.yml 里\"NYSE Composite由母公司ICE旗下ICE Data Indices编制\"（持股方向\n相反，归为other）是刻意的区分对照，供未来样本参照。1996年4月开始交易；2009年\n6月26日起改用自由流通调整市值加权法（此前为全市值加权）。具体基日/基点数值\n本次未在方法论文档中找到 Nifty 50 本身专属的明确表述（文档对其余多数子指数\n逐一标注了基日/基点，唯独旗舰指数 Nifty 50 本身的这段落未见），故 base_date/\nbase_point 两个字段留空未填，不采纳\"约定俗成\"的印象数值。\n"
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "enum": "t1",
+        "zh": "T+1（标准结算周期）；另有面向部分股票的T+0可选同日结算试点，与常规T+1并行、非强制",
+        "en": "T+1 (standard settlement cycle); an optional T+0 same-day settlement pilot also runs in parallel for select stocks, non-mandatory",
+        "detail": "多边净额清算，会员的资金/证券收付义务在T日晚09:00PM暂定、T+1日上午09:00AM确定；\nT+0结算试点下，交易须在13:30前完成，义务于当日14:30确定并完成交收（详见 T+0\nSettlement 一节原文）。\"T+0结算\"（本条）与市场结构章节的\"T+0回转交易\"\n（intraday_reversal）是两个不同维度的概念，已在 schema/glossary.yml 新增\n`t0-settlement-pilot` 词条区分，避免未来样本混淆。\n",
+        "sources": [
+          {
+            "title": "Clearing & Settlement（官网）",
+            "url": "https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Currently all settlements are conducted on T+1 basis, T being the trade day. ... In a T+0 rolling settlement, trades are executed on trading day till 1:30 pm. The obligations are determined on the T day by 2:30 pm and settlement is completed thereafter.",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "ccp_name": {
+        "zh": "NSE Clearing Limited（NCL，原National Securities Clearing Corporation Limited/NSCCL），NSE全资子公司",
+        "en": "NSE Clearing Limited (NCL, formerly National Securities Clearing Corporation Limited/NSCCL), a wholly-owned NSE subsidiary",
+        "sources": [
+          {
+            "title": "Clearing & Settlement（官网）",
+            "url": "https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "NSE Group（官网）",
+            "url": "https://www.nseindia.com/national-stock-exchange/our-group",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "NSE Clearing Ltd carries out clearing and settlement of securities traded on the capital market segment of Exchanges.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "csd_name": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网原文只泛称'depositories'（复数），未点名具体的存管机构法人名称（业内常识为NSDL/CDSL两家，但本次未找到载明这两个名称的官方原文），按铁律不采纳未经核实的印象，留空。",
+        "sources": [
+          {
+            "title": "Clearing & Settlement（官网）",
+            "url": "https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "initial_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Clearing & Settlement（官网）",
+            "url": "https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Clearing & Settlement（官网）",
+            "url": "https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Clearing & Settlement（官网）",
+            "url": "https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delivery_method": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "NSE 同时运营现货市场（无实物/现金交割概念）与多类衍生品（股票/股指衍生品多数\n现金交割、商品衍生品/利率衍生品交割方式因品种而异），单一枚举值（physical/cash/\neither/na）无法干净覆盖这种多资产类别混合的产品体系，本次也未逐产品线核实交割\n方式细则，留空不强行归类。\n",
+        "sources": [
+          {
+            "title": "Clearing & Settlement（官网）",
+            "url": "https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Clearing & Settlement（官网）",
+            "url": "https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "default_management": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网导航含'Core SGF & Default Waterfall'条目，确认存在核心结算担保基金与违约瀑布处置框架，但本次未抓取到该机制的具体说明页，留空。",
+        "sources": [
+          {
+            "title": "Clearing & Settlement（官网）",
+            "url": "https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "境外投资者通过FPI（Foreign Portfolio Investor，外国证券投资者）渠道参与市场；具体分类标准、持股比例上限、审批流程等数值本次未能核实到具体条文原文",
+        "en": "Foreign investors access the market via the FPI (Foreign Portfolio Investor) route; specific classification criteria, shareholding caps and approval procedures were not confirmed against detailed source text this session",
+        "detail": "官网FPI介绍页内容偏向招商性质的概述文字，未含具体监管条款数值，见 SOURCES.md 该条目备注。",
+        "sources": [
+          {
+            "title": "Foreign Portfolio Investors (FPI) - Broad Parameters（官网）",
+            "url": "https://www.nseindia.com/static/invest/fpi/broad-parameters",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "FPI OVERVIEW - INDIA: A FINANCIAL POWERHOUSE",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "membership_structure": {
+        "zh": "会员按功能分为交易会员（Trading Member）、交易兼自结算会员（Trading cum Self Clearing Member）、交易兼结算会员（Trading cum Clearing Member）、专业结算会员（Professional Clearing Member）四类，另有'Normal Membership'与'Alpha Membership'两种整体会员类型，可按细分市场分段申请",
+        "en": "Members are categorised by function into Trading Member, Trading cum Self Clearing Member, Trading cum Clearing Member, and Professional Clearing Member; there are also two overall membership tracks ('Normal Membership' and 'Alpha Membership'), and membership can be taken per market segment",
+        "sources": [
+          {
+            "title": "Categories of Membership（官网）",
+            "url": "https://www.nseindia.com/static/trade/membership-types",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Membership of the Exchange/ NSE Clearing is open to corporate entities, limited liability partnerships, partnership firms and individuals who fulfill the eligibility criteria laid down by SEBI and NSE. ... Trading Member ... Trading Cum Self Clearing Member ... Trading Cum Clearing Member ... Professional Clearing Member",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网设有历史报表/历史指数数据/历史现货价等下载入口，但本次未核实具体可回溯年限。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "NEAT / NEAT Plus",
+        "en": "NEAT / NEAT Plus",
+        "detail": "确认系统名称来自交易协议文档命名（NEAT Adapter、NEAT/NEAT Plus前端），未找到对该系统本身（如'NEAT'全称展开、上线年份）的专门介绍文字，故无法进一步展开，confidence标medium。",
+        "sources": [
+          {
+            "title": "Trading Protocols（官网）",
+            "url": "https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Exchange provides trading front-ends \"NEAT\" / \"NEAT+\".",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "access_methods": {
+        "zh": "两种接入方式：使用官方提供的NEAT Adapter中间件连接NEAT/NEAT Plus前端；或通过Trimmed Protocol直连交易所主机（面向自建Non-NEAT前端的会员/供应商），另分Capital Market/期权期货/货币衍生品/商品衍生品四套协议文档",
+        "en": "Two connection methods: via the Exchange-provided NEAT Adapter middleware to the NEAT/NEAT Plus front-end; or a direct TCP socket connection using the Trimmed Protocol (for members/vendors building custom Non-NEAT front-ends), with separate protocol documents for the Capital Market, F&O, Currency Derivatives and Commodity Derivatives segments",
+        "sources": [
+          {
+            "title": "Trading Protocols（官网）",
+            "url": "https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Using Exchange provided NEAT Adapter application: ... Direct Connection using Trimmed Protocol: As the name suggests, members can connect directly to Exchange without any middle-ware application provided by the Exchange. Member systems must initiate a TCP socket connection to the address given by the exchange.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "exchange_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "stamp_duty": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "印度对证券交易另有印花税（Stamp Duty，按州/中央统一规则，与本节下方的证券交易税STT是并行不同税目），本次未找到具体税率原文，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "financial_transaction_tax": {
+        "zh": "证券交易税（STT）——按《2004年财政法》确立，经《2026年财政法》修订，仅针对股票期货/期权（F&O）：期权卖出0.15%（卖方承担）、期权行权时0.15%（买方承担）、期货卖出0.05%（卖方承担）；均为2026年4月1日起生效税率，此前分别为0.10%/0.125%/0.02%",
+        "en": "Securities Transaction Tax (STT) — established under the Finance Act 2004, as amended by the Finance Act 2026, applicable to equity F&O only: 0.15% on sale of an option (payable by seller), 0.15% on exercise of an option (payable by purchaser), 0.05% on sale of a futures contract (payable by seller); rates effective April 1, 2026 (previously 0.10%/0.125%/0.02% respectively)",
+        "detail": "本条来源页面（equity-derivatives-securities-transaction-tax）标题即注明只覆盖\n股票衍生品（F&O），不含现货股票交割/日内交易适用的STT税率表（那是另一张税率\n表，本次未抓取），见 OPEN-QUESTIONS。术语'证券交易税(STT)'已加入\nschema/glossary.yml，与'印花税(stamp-duty)'明确区分为两个不同税目。\n",
+        "sources": [
+          {
+            "title": "Securities Transaction Tax（官网）",
+            "url": "https://www.nseindia.com/static/products-services/equity-derivatives-securities-transaction-tax",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "As per the Finance Act 2004, and modified by Finance Act 2026 STT on the transactions executed on the Exchange shall be as under: ... Sale of an option in securities 0.15 per cent 0.10 per cent Seller ... Sale of an option in securities, where option is exercised 0.15 per cent 0.125 per cent Purchaser ... Sale of a futures in securities 0.05 per cent 0.02 per cent Seller",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "capital_gains_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "印度卢比非完全自由兑换货币，资本项目存在一定管制，实行有管理浮动汇率制度；对境外投资者而言汇率波动构成额外风险层——本次未找到官方原文逐条核实具体管制细则，以上为一般性认知，未采纳为高置信度断言",
+        "en": "The Indian Rupee is not fully convertible; capital account transactions are subject to certain controls under a managed float regime. FX volatility is an additional risk layer for foreign investors — the above is general market knowledge, not verified against detailed official source text this session, hence not asserted at high confidence",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "enforcement_note": {
+        "zh": "设有市场监察（Market Surveillance）、除牌会员名单（Debarred Entities）、对会员的处分行动（Action against Members）等执法建制；具体执法流程与处罚力度本次未逐条核实",
+        "en": "Enforcement apparatus includes Market Surveillance, a list of Debarred Entities, and formal Action against Members; specific enforcement procedures and penalty severity not verified in detail this session",
+        "detail": "证据来自站内导航条目本身，非专门说明执法流程的文字。",
+        "sources": [
+          {
+            "title": "History & Milestones（官网，站内导航含 Regulation 相关条目）",
+            "url": "https://www.nseindia.com/static/national-stock-exchange/history-milestones",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Debarred Entities / Action against Members / Complaint against Members",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      }
+    }
+  }
+}

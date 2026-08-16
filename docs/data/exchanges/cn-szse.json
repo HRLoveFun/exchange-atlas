@@ -1,0 +1,1464 @@
+{
+  "id": "cn-szse",
+  "name_zh": "深圳证券交易所",
+  "name_native": {
+    "zh-Hans": "深圳证券交易所"
+  },
+  "official_languages": [
+    "zh-Hans"
+  ],
+  "source_lang": "zh",
+  "group_id": null,
+  "region": "apac",
+  "tier": "extended",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "Asia/Shanghai (UTC+8)",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dst_rule": {
+        "zh": "不实行夏令时",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "founded_year": {
+        "zh": "1990（12月1日开业）",
+        "en": "1990 (opened 1 December 1990)",
+        "detail": "深圳证券交易所于1990年12月1日开始营业，经国务院批准设立。与上交所（1990年11月26日\n成立、12月19日开业）几乎同期设立，两所是中国内地仅有的两家证券交易所（另有主要服务\n中小企业的北交所，2021年设立，本次未纳入研究范围）。\n",
+        "sources": [
+          {
+            "title": "本所简介",
+            "url": "https://www.szse.cn/aboutus/sse/introduction/index.html",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — About Overview",
+            "url": "https://www.szse.cn/English/about/overview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "深圳证券交易所（以下简称深交所或本所）于1990年12月1日开始营业，是经国务院批准设立的全国性证券交易场所，受中国证监会监督管理。",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "history": {
+        "zh": "2004年5月设立中小企业板；2009年10月设立创业板；2021年中小企业板并入主板",
+        "en": "SME Board launched May 2004; ChiNext market inaugurated October 2009; SME Board merged into Main Board in 2021",
+        "detail": "与上交所\"主板+科创板\"的结构不同，深交所现行板块结构是\"主板+创业板\"——中小企业板已\n于2021年并入主板，不再独立存在。这是本次建档发现的一处与 cn-sse.yml 记录方式的结构性\n差异：cn-sse 的科创板（2019年设立）定位科技创新企业且保留至今，深交所的中小企业板则是\n\"设立后又被撤并\"的板块，历史沿革比 cn-sse 更曲折。\n",
+        "sources": [
+          {
+            "title": "SZSE English — About Overview",
+            "url": "https://www.szse.cn/English/about/overview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The SME Board was launched in May 2004. The ChiNext market was inaugurated in October 2009. In 2021, SZSE starts preparation for the merger between the Mainboard and the SME Board.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "organization_form": {
+        "enum": "member_owned",
+        "zh": "会员制",
+        "en": "Member-owned, Self-regulated Legal Entity",
+        "detail": "深交所是实行自律管理的会员制法人，现有122家会员和2家特别会员，建立了会员大会、理事会、经理层、监事会「三会一层」的治理结构。与上交所同为会员制，区别于已公司化改制的北交所、纽交所、港交所等。",
+        "sources": [
+          {
+            "title": "本所简介",
+            "url": "https://www.szse.cn/aboutus/sse/introduction/index.html",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — About Overview",
+            "url": "https://www.szse.cn/English/about/overview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "深交所是实行自律管理的会员制法人，现有122家会员和2家特别会员",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "self_listed": {
+        "enum": "no",
+        "zh": "否",
+        "detail": "会员制法人单位，自身未上市。",
+        "sources": [
+          {
+            "title": "本所简介",
+            "url": "https://www.szse.cn/aboutus/sse/introduction/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "en": null,
+        "quote": null
+      },
+      "market_cap_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网市场总貌页面（market/overview）实际统计数字由前端 JS/AJAX 动态渲染，curl 抓到的静态 HTML 只有导航栏，无具体数值，未能核实，留空。该字段已不在矩阵 in_matrix 范围内（见 DECISIONS.md ADR-014），留空不影响矩阵展示。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "listed_companies_count": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "同 market_cap_usd_bn，静态抓取拿不到 AJAX 渲染的统计数字，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "global_ranking": {
+        "zh": "2023年深市股票融资金额、成交金额、股票市价总值分别位列全球第2、第3、第6位（深交所官网现行表述，未逐年更新到最新数据）",
+        "detail": "官网本所简介页面这段表述截至本次抓取（2026-08-14）仍在使用2023年的排名数据，未见更新，如实按原文记录。",
+        "sources": [
+          {
+            "title": "本所简介",
+            "url": "https://www.szse.cn/aboutus/sse/introduction/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "2023年，深市股票融资金额、成交金额和股票市价总值分别位列世界第二、第三位和第六位。",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null
+      },
+      "trading_currency": {
+        "zh": "人民币（A股）；港元（B股，规模很小且趋于边缘化）",
+        "en": "RMB (A-shares); HKD (B-shares, small and marginal)",
+        "detail": "与上交所不同：SSE 的 B 股以美元计价，SZSE 的 B 股以港元计价——这是两所 B 股制度的一处具体差异。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第3.3.11条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "A 股交易的申报价格最小变动单位为 0.01 元人民币；基金的申报价格最小变动单位为 0.001 元人民币；B 股的申报价格最小变动单位为 0.01 港元。",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "settlement_currency": {
+        "zh": "人民币（B股为港元）",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "中国证券监督管理委员会",
+        "en": "China Securities Regulatory Commission (CSRC)",
+        "detail": "国务院直属正部级事业单位，统一监管全国证券期货市场；与上交所受同一机构监管。",
+        "sources": [
+          {
+            "title": "本所简介",
+            "url": "https://www.szse.cn/aboutus/sse/introduction/index.html",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — About Overview",
+            "url": "https://www.szse.cn/English/about/overview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Shenzhen Stock Exchange (SZSE), established on 1st December, 1990, is a self-regulated legal entity under the supervision of China Securities Regulatory Commission (CSRC).",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "self_regulatory_org": {
+        "zh": "中国证券业协会（券商层面）；深交所自身对上市公司与会员行使一线自律监管职能",
+        "en": "Securities Association of China (SAC); SZSE itself as front-line self-regulator",
+        "confidence": "medium",
+        "detail": "SAC 与交易所自律监管的职责边界未逐条核实，与 cn-sse.yml 记录的悬案相同（见 OPEN-QUESTIONS）；但交易所自身自律法人地位有直接官网原文佐证。",
+        "sources": [
+          {
+            "title": "SZSE English — About Overview",
+            "url": "https://www.szse.cn/English/about/overview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "self-regulated legal entity under the supervision of China Securities Regulatory Commission (CSRC)",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "clearing_regulator": {
+        "zh": "中国证券监督管理委员会（对中国结算的监管）",
+        "en": "CSRC",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "core_laws": {
+        "zh": "《中华人民共和国证券法》",
+        "en": "Securities Law of the People's Republic of China",
+        "detail": "本所《交易规则》《股票上市规则》等自律规则的效力位阶低于证券法，制定依据在规则正文\n开篇即列明。英文官方译名未在本次会话核实到 npc.gov.cn/csrc.gov.cn 英文站的直链，沿用\n与 cn-sse.yml 一致的通行译名，未独立验证，见 OPEN-QUESTIONS。\n",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第1.1条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "为规范证券市场交易行为，维护证券市场秩序，保护投资者合法权益，根据《中华人民共和国证券法》《证券交易所管理办法》等法律、行政法规、部门规章、规范性文件（以下统称法律法规）以及《深圳证券交易所章程》，制定本规则。",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "disclosure_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第2.1.2条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — About Overview",
+            "url": "https://www.szse.cn/English/about/overview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "cn-szse-stocks",
+          "category": "equity",
+          "name_zh": "股票",
+          "board": "主板 / 创业板",
+          "description": "含 A 股、B 股（港元计价，规模很小）"
+        },
+        {
+          "id": "cn-szse-dr",
+          "category": "equity",
+          "name_zh": "存托凭证",
+          "description": "含红筹企业存托凭证"
+        },
+        {
+          "id": "cn-szse-funds",
+          "category": "fund",
+          "name_zh": "基金",
+          "description": "含 ETF、LOF、REITs 等；债券型/货币型/黄金/跨境等部分品种实行 T+0 回转交易"
+        },
+        {
+          "id": "cn-szse-warrants",
+          "category": "structured",
+          "name_zh": "权证"
+        },
+        {
+          "id": "cn-szse-bonds",
+          "category": "bond",
+          "name_zh": "债券",
+          "description": "国债、地方政府债、公司债、可转换公司债等（一般知识，未逐条核实规模与品种清单）"
+        },
+        {
+          "id": "cn-szse-options",
+          "category": "option",
+          "name_zh": "期权",
+          "name_native": "CSI 300 ETF Options",
+          "description": "沪深300ETF期权；SZSE 英文官网 PRODUCTS 栏目列出，本次未独立核实上市细则"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "无独立盘前时段；9:15-9:25 为开盘集合竞价",
+          "sources": [
+            {
+              "title": "深圳证券交易所交易规则（2026年修订）",
+              "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "SZSE English — Trading Overview",
+              "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "confidence": "medium",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "continuous_am": {
+          "zh": "9:30-11:30",
+          "sources": [
+            {
+              "title": "深圳证券交易所交易规则（2026年修订）",
+              "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "SZSE English — Trading Overview",
+              "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "confidence": "medium",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "lunch_break": {
+          "zh": "11:30-13:00",
+          "sources": [
+            {
+              "title": "深圳证券交易所交易规则（2026年修订）",
+              "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "SZSE English — Trading Overview",
+              "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "confidence": "medium",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "continuous_pm": {
+          "zh": "13:00-15:00（13:00-14:57 连续竞价 + 14:57-15:00 收盘集合竞价）",
+          "quote": "9:30 至 11:30、13:00 至 14:57 为连续竞价时间，14:57 至 15:00 为收盘集合竞价时间。",
+          "sources": [
+            {
+              "title": "深圳证券交易所交易规则（2026年修订）",
+              "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "SZSE English — Trading Overview",
+              "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "confidence": "medium",
+          "en": null,
+          "enum": null,
+          "detail": null
+        },
+        "after_market": {
+          "zh": "盘后固定价格交易，15:05-15:30，按当日收盘价成交；适用范围为 A 股与交易型开放式基金（ETF），不限于特定板块",
+          "detail": "与上交所不同：SSE 的盘后固定价格交易仅限科创板股票，SZSE 的这项机制覆盖全市场 A 股和 ETF，不分板块——这是两所交易机制的一处具体差异。",
+          "quote": "投资者可以通过盘后固定价格交易方式买卖 A 股、交易型开放式基金。……每个交易日的 15:05 至 15:30 为盘后固定价格交易时间。",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "深圳证券交易所交易规则（2026年修订）",
+              "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "SZSE English — Trading Overview",
+              "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null
+        },
+        "night_session": {
+          "zh": "无",
+          "sources": [
+            {
+              "title": "深圳证券交易所交易规则（2026年修订）",
+              "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "SZSE English — Trading Overview",
+              "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "confidence": "medium",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "holidays_note": {
+        "zh": "每周一至周五交易，国家法定假日及本所公告的休市日休市",
+        "quote": "本所交易日为每周一至周五。国家法定假日和本所公告的休市日，本所市场休市。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — Trading Overview",
+            "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘集合竞价（9:15-9:25）",
+        "en": "Opening Call Auction (9:15-9:25)",
+        "quote": "证券采用竞价交易方式的，每个交易日的 9:15 至 9:25 为开盘集合竞价时间",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第2.3.2条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — Trading Overview",
+            "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价（14:57-15:00）",
+        "en": "Closing Call Auction (14:57-15:00)",
+        "detail": "9:20-9:25 开盘集合竞价阶段、14:57-15:00 收盘集合竞价阶段，交易主机不接受撤销申报。",
+        "quote": "每个交易日 9:20 至 9:25、14:57 至 15:00，本所交易主机不接受参与竞价交易的撤销申报",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第3.3.1条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — Trading Overview",
+            "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "matching_principle": {
+        "zh": "价格优先、时间优先",
+        "en": "Price priority and time priority",
+        "quote": "证券竞价交易按价格优先、时间优先的原则撮合成交。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第3.4.2条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — Trading Overview",
+            "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "order_types": {
+        "zh": "限价申报；市价申报（六种类型，仅限有价格涨跌幅限制证券的连续竞价阶段）",
+        "en": "Limit Order; Market Order (six sub-types, continuous auction only, price-limited securities)",
+        "detail": "市价申报含对手方最优价格、本方最优价格、最优五档即时成交剩余撤销、即时成交剩余撤销、全额成交或撤销等类型。",
+        "quote": "市价申报只适用于有价格涨跌幅限制证券连续竞价期间的交易。其他交易时间，交易主机不接受市价申报。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第3.3.3-3.3.5条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — Trading Overview",
+            "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "tick_size": {
+        "zh": "A股 0.01 元人民币；基金 0.001 元人民币；B股 0.01 港元",
+        "detail": "与上交所不同：SSE 的 B 股最小变动单位为 0.001 美元，SZSE 为 0.01 港元——计价货币不同（见 overview.trading_currency）。",
+        "quote": "A 股交易的申报价格最小变动单位为 0.01 元人民币；基金的申报价格最小变动单位为 0.001 元人民币；B 股的申报价格最小变动单位为 0.01 港元。",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — Trading Overview",
+            "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null
+      },
+      "board_lot_size": {
+        "zh": "买入须为 100 股（份）整数倍；单笔申报最大 100 万股（份）；创业板另有细分上限：限价申报单笔不超过 30 万股，市价申报单笔不超过 15 万股",
+        "detail": "创业板对单笔申报数量的细分上限是 SZSE 特有、SSE 现行交易规则文本中未见的额外限制，压测点之一。",
+        "quote": "通过竞价交易买入证券的，申报数量应当为 100 股（份）或其整数倍。／证券竞价交易单笔申报数量不得超过 100 万股（份）。创业板股票限价申报的单笔申报数量不得超过 30 万股，市价申报的单笔申报数量不得超过 15 万股。",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — Trading Overview",
+            "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null
+      },
+      "odd_lot_handling": {
+        "zh": "卖出时不足 100 股的余额可一次性申报卖出",
+        "quote": "卖出证券时，余额不足 100 股（份）部分，应当一次性申报卖出。",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — Trading Overview",
+            "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "percentage_band",
+          "zh": "百分比涨跌幅",
+          "sources": [
+            {
+              "title": "深圳证券交易所交易规则（2026年修订）",
+              "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "SZSE English — Trading Overview",
+              "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "confidence": "medium",
+          "en": null,
+          "detail": null,
+          "quote": null
+        },
+        "main_board": {
+          "zh": "±10%",
+          "quote": "主板股票的价格涨跌幅限制比例为 10%",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "深圳证券交易所交易规则（2026年修订）",
+              "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "SZSE English — Trading Overview",
+              "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "detail": null
+        },
+        "other_boards": {
+          "zh": "创业板 ±20%；风险警示（ST/*ST）与退市整理股票 ±5%（普通标准）；无涨跌幅限制情形：新股上市后前5个交易日、重新上市首日、退市整理期首日",
+          "detail": "涨跌幅限制价格 = 前收盘价 ×（1±涨跌幅限制比例）。跟踪创业板或其他20%涨跌幅限制股票\n的指数型基金也适用20%限制。压测点：SZSE 主板 vs 创业板 与 SSE 主板 vs 科创板结构一致\n（均为10% vs 20%），两所在这一维度取值口径完全对齐。\n",
+          "quote": "创业板股票的价格涨跌幅限制比例为 20%。／基金的价格涨跌幅限制比例为 10%。……价格涨跌幅限制比例为 20%。",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "深圳证券交易所交易规则（2026年修订）",
+              "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "SZSE English — Trading Overview",
+              "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "none",
+        "zh": "无指数级熔断（2016年1月8日起暂停实施）",
+        "en": "No index-level circuit breaker (suspended since 8 January 2016)",
+        "detail": "2015年12月本所曾在《交易规则》第四章第六节新增\"指数熔断\"机制（以沪深300指数为基准，\n与上交所联动），实施4个交易日后于2016年1月8日起与上交所、中金所同步暂停，此后未恢复。\n现行（2026年修订）《交易规则》全文搜索\"熔断\"无结果，与\"已暂停且未恢复\"的结论一致。\n本次会话未抓到 szse.cn 自身的暂停通知原页（WebSearch 未命中直链），退而用新浪财经转载\n的深交所通知全文作为来源——quote 摘的是被转载的官方通知原文，但因转载渠道是第三方媒体，\nconfidence 依 CLAUDE.md 铁律封顶 medium，不因转载内容是官方原文而破例标高。\n",
+        "sources": [
+          {
+            "title": "三大交易所公告确认指数熔断制度暂停实施（新浪财经，全文转载深交所2016-01-07公告）",
+            "url": "http://finance.sina.com.cn/stock/y/20160107/223324126797.shtml",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "深圳证券交易所交易规则（2026年修订，全文检索\"熔断\"无结果，佐证已暂停未恢复）",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "为维护市场平稳运行，经中国证监会批准，深圳证券交易所决定自2016年1月8日起暂停实施《深圳证券交易所交易规则》第四章第六节规定的「指数熔断」机制。特此通知。深圳证券交易所 2016年1月7日",
+        "confidence": "medium",
+        "verified": "2026-08-14"
+      },
+      "volatility_interruption": {
+        "zh": "主板/创业板股票、封闭式基金设「异常波动」与「严重异常波动」两级指标并公告交易信息，不中断交易",
+        "en": "Two-tier 'abnormal fluctuation' / 'severe abnormal fluctuation' indicators for Main Board / ChiNext stocks and closed-end funds, triggering disclosure but not a trading halt",
+        "detail": "异常波动：主板股票连续3个交易日内日收盘价涨跌幅偏离值累计达±20%；创业板股票同口径累计\n达±30%（阈值高于主板，与两板块涨跌幅限制比例10%/20%的差异对应）。\n严重异常波动：连续10个交易日内累计达+100%/-50%，或连续30个交易日内累计达+200%/-70%\n（两板块口径一致）。\n触发后本所公布相关信息（如异常交易营业部名单、投资者分类交易统计），不直接中断交易，\n属于信息披露与监控机制而非熔断，与上交所科创板的机制设计原则一致。\n",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第5.4.3-5.4.4条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "主板股票和封闭式基金连续三个交易日内日收盘价涨跌幅偏离值累计达到±20%的，创业板股票连续三个交易日内日收盘价涨跌幅偏离值累计达到±30%的。……连续十个交易日内日收盘价涨跌幅偏离值累计达到+100%（-50%）；……连续三十个交易日内日收盘价涨跌幅偏离值累计达到+200%（-70%）",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "无涨跌幅限制的股票盘中较开盘价首次涨跌达30%或60%，实施单次10分钟临时停牌；跨越14:57的临时停牌于14:57复牌并进行复牌集合竞价",
+        "quote": "无价格涨跌幅限制股票竞价交易出现下列情形之一的，本所实施盘中临时停牌，单次盘中临时停牌时间为10分钟：（一）盘中交易价格较当日开盘价格首次上涨或下跌达到或超过30%的；（二）……达到或超过60%的……临时停牌时间跨越14:57的，于14:57复牌并对已接受的申报进行复牌集合竞价，再进行收盘集合竞价。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第4.3.4条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null
+      },
+      "intraday_reversal": {
+        "enum": "t1",
+        "zh": "T+1（股票整体）；部分品种（债券ETF/货币基金/黄金ETF/跨境ETF与LOF/商品期货ETF）实行 T+0；B股次一交易日起回转",
+        "en": "T+1 (equities); T+0 for designated fund types; T+1 (from next trading day) for B-shares",
+        "detail": "与上交所口径一致：T+1为一般原则，特定基金品种例外实行T+0。",
+        "quote": "投资者买入的证券，在交收前不得卖出，但实行回转交易的除外。／下列证券品种实行当日回转交易：（一）债券交易型开放式基金；（二）上市交易的货币市场基金；（三）黄金交易型开放式基金；（四）跨境交易型开放式基金和跨境上市开放式基金；（五）商品期货交易型开放式基金。……B 股实行次交易日起回转交易。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第3.1.4-3.1.5条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "short_selling": {
+        "enum": "restricted_uptick",
+        "zh": "融资融券制度，限指定标的范围；卖空申报价格遵循「报升规则」，不得低于最近成交价（个别本所认可品种除外）",
+        "en": "Margin Trading and Securities Lending; short-sell orders subject to an uptick (tick) rule",
+        "detail": "与上交所记录方式的差异：cn-sse.yml 因未核实到报升规则的具体表述而将 confidence 维持\nlow；本次在 SZSE 英文版 Margin Trading 页面直接读到\"tick rule\"表述，中文交易规则第\n3.8条确认融资融券须限于本所认可标的范围，两者合并可支撑 medium（而非 high——因为\n\"报升规则\"这一具体机制点仅见于英文页面，未在本次抓取的中文规则原文中找到逐字对应表述，\n按 source_lang: zh 的锚定要求不升到 high）。\n",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第3.8条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — Margin Trading",
+            "url": "https://www.szse.cn/English/services/trading/marginTrading/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Observe \"tick rule\", i.e., the quotation price of a short selling order, except for certain security recognized by SZSE, shall not be lower than the last traded price, or previous closing price in the absence of last traded price, of the relevant security.",
+        "confidence": "medium",
+        "verified": "2026-08-14"
+      },
+      "block_trade": {
+        "zh": "大宗交易：协议大宗交易（意向申报9:15-11:30、13:00-15:30；成交确认15:00-15:30，创业板股票为9:30-11:30、13:00-15:30）；盘后定价大宗交易（15:05-15:30，以当日收盘价或成交量加权均价成交）",
+        "detail": "门槛：A股单笔≥30万股或≥200万元；B股单笔≥3万股或≥20万港元；基金单笔≥200万份或≥200万元。创业板股票的成交确认时段与其他证券不同（本所其他证券15:00-15:30，创业板9:30-11:30、13:00-15:30），是压测发现的板块间细则差异之一。",
+        "quote": "证券协议大宗交易的成交确认时间为每个交易日15:00至15:30，创业板股票除外。创业板股票协议大宗交易的成交确认时间为每个交易日9:30至11:30、13:00至15:30。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第3.5条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null
+      },
+      "dark_pool": {
+        "zh": "无西方意义上的暗池；大宗交易系统承担大额订单的类似功能",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SZSE English — Trading Overview",
+            "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "market_maker_scheme": {
+        "zh": "创业板股票交易可实行做市商机制，做市商提供双边持续报价、双边回应报价",
+        "en": "Market Making Mechanism (ChiNext)",
+        "quote": "创业板股票交易可以实行做市商机制。做市商应当遵守法律法规和本所相关业务规则，并按照做市协议的约定承担为创业板股票提供双边持续报价、双边回应报价等义务。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第3.7条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "connect_schemes": {
+        "zh": "深港通（与港交所互联互通）；盘后固定价格交易纳入深股通额度控制",
+        "detail": "深股通额度使用情况会影响本所盘后固定价格交易的买入申报接受，规则原文直接确认「深股通」机制在本所日常交易环节的具体嵌入方式，比 cn-sse.yml 对沪港通的记录（未核实到原始公告，仅一般知识）更具体一层，但开通日期等历史细节本次仍未独立核实，confidence 维持 medium。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第3.6.12条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "盘后固定价格交易纳入深股通额度控制，当日额度在本所盘后固定价格交易阶段使用完毕的，联交所证券交易服务公司停止接受当日后续的买入申报，但仍接受卖出申报。",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null
+      }
+    },
+    "listing": {
+      "boards": [
+        {
+          "id": "cn-szse-main",
+          "name_zh": "主板",
+          "target_companies": "大中型成熟企业；原中小企业板已于2021年并入主板"
+        },
+        {
+          "id": "cn-szse-chinext",
+          "name_zh": "创业板",
+          "name_native": "创业板",
+          "target_companies": "成长型创新创业企业，2009年设立",
+          "launched_year": 2009
+        }
+      ],
+      "review_system": {
+        "enum": "registration",
+        "zh": "注册制（主板与创业板均已实行注册制）",
+        "en": "Registration-based",
+        "detail": "2023年全面注册制改革后，沪深北交易所主板与科创板/创业板/北交所均实行注册制，取代此前的核准制。",
+        "sources": [
+          {
+            "title": "深圳证券交易所股票上市规则（2026年修订）第3.1.7条",
+            "url": "http://docs.static.szse.cn/www/lawrules/rule/allrules/bussiness/W020260424747613955674.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "深圳证券交易所创业板股票上市规则（2026年修订）",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/stock/supervision/chinext/W020260424688875101057.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "发行人首次公开发行股票经中国证监会予以注册并完成公开发行后，向本所提出上市申请的，应当提交下列文件：（一）上市申请书；（二）中国证监会予以注册的决定",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "transfer_between_boards": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未核实主板与创业板之间是否存在正式转板机制，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "continuing_obligations": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suspension_resumption": {
+        "zh": "长期停牌（因重大事项筹划等）须向本所申请，说明理由并尽量缩短停牌期；停牌期间每5个交易日至少披露一次进展；个股级临时停牌（价格异动触发的10分钟停牌）见 market_structure.trading_halt_mechanism",
+        "en": "Long-form suspension for material-matter planning requires application to the Exchange with justification; progress disclosure at least once every 5 trading days during suspension",
+        "detail": "来源仅为 SZSE 官方《信息披露业务备忘录第2号——停复牌》英文译本，本次会话未抓到对应中文原文（SOURCES.md 只登记了英文版 PDF），按 source_lang: zh 的锚定要求，quote 语言与原文语言不一致，confidence 不升至 high。",
+        "sources": [
+          {
+            "title": "Guidelines of Shenzhen Stock Exchange on Information Disclosure by Listed Companies No. 2: Suspension and Resumption of Trading — SZSE 官方英文译本，仅供参考，中文文本为准",
+            "url": "https://www.szse.cn/www/English/rules/siteRule/P020190125614338960977.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "During the trading suspension period, the company shall disclose in stages the progress of the material matters under planning and avoid rough and general disclosure. It shall, at least once every 5 trading days, release an announcement on the progress.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "delisting_conditions": {
+        "zh": "四类强制退市（交易类、财务类、规范类、重大违法类）+ 主动退市；主板「面值退市」标准为连续二十个交易日收盘价均低于1元，市值退市标准为连续二十个交易日收盘总市值均低于5亿元，股东人数标准为连续二十个交易日股东人数均少于2000人；创业板市值退市标准更低（3亿元），股东人数退市标准也更低（400人）",
+        "en": "Four categories of mandatory delisting (trading-based, financial, compliance, major violation) plus voluntary delisting; ChiNext applies lower market-cap and shareholder-count thresholds than the Main Board",
+        "detail": "财务类主要指标（主板）：最近一个会计年度净利润、利润总额、扣非净利润三者孰低为负且\n营业收入低于3亿元；期末净资产为负；审计报告被出具无法表示意见或否定意见。\n压测点：创业板的市值退市门槛（3亿元）、股东人数退市门槛（400人）均低于主板（5亿元/\n2000人），这是同一交易所内两个板块退市标准的量化差异，与上交所主板(1亿元营收门槛，\n来自第三方媒体二手信息)在同一财务类退市字段上不完全可比——SZSE 本条数据直接来自主板\n《股票上市规则》原文，比 cn-sse.yml 对应字段（来自财联社报道转述）更接近一手来源。\n",
+        "sources": [
+          {
+            "title": "深圳证券交易所股票上市规则（2026年修订）第九章第二、三节",
+            "url": "http://docs.static.szse.cn/www/lawrules/rule/allrules/bussiness/W020260424747613955674.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "深圳证券交易所创业板股票上市规则（2026年修订）",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/stock/supervision/chinext/W020260424688875101057.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "在本所仅发行A股股票或者既发行A股又发行B股股票的公司，连续二十个交易日在本所的股票收盘总市值均低于5亿元……公司连续二十个交易日股东人数均少于2000人……最近一个会计年度经审计的利润总额、净利润、扣除非经常性损益后的净利润三者孰低为负值，且扣除后的营业收入低于3亿元。（创业板对照条款：连续二十个交易日的股票收盘市值均低于3亿元；连续二十个交易日的公司股东人数均少于400人）",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "delisting_process": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delisting_transition_period": {
+        "zh": "财务类、规范类、重大违法类强制退市适用十五个交易日退市整理期；交易类强制退市不适用退市整理期（直接终止上市）",
+        "en": "Fifteen-trading-day delisting transition period applies to financial/compliance/major-violation delisting; not applicable to trading-based delisting",
+        "detail": "与 cn-sse.yml 记录的「交易类退市已取消退市整理期设置（2024年修订）」结论一致，本条在 SZSE 主板上市规则原文中读到更明确的适用范围划分（仅第三至五节情形适用第六节退市整理期，第二节交易类强制退市不适用）。",
+        "sources": [
+          {
+            "title": "深圳证券交易所股票上市规则（2026年修订）第9.6.1-9.6.2条",
+            "url": "http://docs.static.szse.cn/www/lawrules/rule/allrules/bussiness/W020260424747613955674.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "上市公司股票被本所根据本章第三节至第五节的规定作出终止上市决定的，自本所公告终止上市决定之日起五个交易日后的次一交易日复牌并进入退市整理期交易……退市整理期的交易期限为十五个交易日。",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "深证成份指数编制方案",
+            "url": "https://www.cnindex.com.cn/docs/gz_399002.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high"
+      },
+      "items": [
+        {
+          "id": "szse-component",
+          "name_zh": "深证成份指数",
+          "name_native": "深证成份指数（英文简称 Shenzhen Index）",
+          "compiler": "self",
+          "weighting_method": "float_adjusted",
+          "base_date": "1994-07-20",
+          "base_point": "1000",
+          "review_frequency": "每半年调整一次（每年6月、12月的第二个星期五的下一交易日实施，调整比例不超过样本总数10%）",
+          "flagship": "yes",
+          "description": "由深圳证券信息有限公司（SZSE全资子公司）编制，属\"交易所全资子公司编制\"模式，与 cn-sse（交易所自编）、hk-hkex（独立第三方恒生指数公司编制）并列第三种指数编制归属模式"
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "enum": "t1",
+        "zh": "T+1",
+        "en": "T+1",
+        "detail": "与回转交易制度（T+1不可当日回转，特定基金品种除外）相配套；具体交收流程细则未逐条核实。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第3.1.4条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "投资者买入的证券，在交收前不得卖出，但实行回转交易的除外。",
+        "confidence": "medium",
+        "verified": "2026-08-14"
+      },
+      "ccp_name": {
+        "zh": "中国证券登记结算有限责任公司",
+        "en": "China Securities Depository and Clearing Corporation Limited (ChinaClear)",
+        "detail": "设深圳分公司具体承担深市业务；与上交所共用同一登记结算法人，同时承担中央证券存管（CSD）职能。",
+        "sources": [
+          {
+            "title": "深圳分公司-中国证券登记结算有限责任公司",
+            "url": "http://www.chinaclear.cn/zdjs/szfgsgg/center_list.shtml",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "quote": null
+      },
+      "csd_name": {
+        "zh": "中国证券登记结算有限责任公司（与 CCP 为同一机构）",
+        "en": "ChinaClear",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "initial_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "现货市场无衍生品意义上的保证金；融资融券初始保证金比例由本所另行制定，具体档位未核实，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delivery_method": {
+        "enum": "na",
+        "zh": "不适用（现货市场，无实物/现金交割概念）",
+        "detail": "推断依据：products 章节所列品类（股票/存托凭证/基金/权证/债券）均为现货，交易规则第二章第一节未列出期货等衍生品种；期权（CSI 300 ETF Options）为本次新识别品种，其交割方式本次未核实，留待后续。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第2.1.2条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "en": null,
+        "quote": null
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "default_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "退市整理股票有专门的适当性门槛：个人投资者须具备两年以上股票交易经验，且申请权限开通前二十个交易日证券账户及资金账户内的资产日均不低于人民币50万元",
+        "en": "Investors trading delisting-transition-period stocks must have 2+ years of trading experience and RMB 500,000+ average daily assets over the preceding 20 trading days",
+        "detail": "这是「风险警示板」（退市整理股票专属交易板块）的准入门槛，不是全市场统一的适当性标准；全市场层面的适当性管理制度未核实，留空对应部分。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第4.5.3条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "参与退市整理股票买入交易的个人投资者，必须具备两年以上股票交易经验，申请权限开通前二十个交易日证券账户及资金账户内的资产日均不低于人民币50万元，其中不包括该投资者通过融资融券融入的证券和资金。",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "foreign_access_channel": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：QFII/RQFII、深港通北向资金等渠道——未核实细节，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "membership_structure": {
+        "zh": "会员制，现有122家会员和2家特别会员，会员大会为最高权力机关",
+        "en": "Member-owned; 122 members and 2 special members",
+        "quote": "深交所是实行自律管理的会员制法人，现有122家会员和2家特别会员",
+        "sources": [
+          {
+            "title": "本所简介",
+            "url": "https://www.szse.cn/aboutus/sse/introduction/index.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未核实现行核心交易系统的对外公开名称，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "access_methods": {
+        "zh": "交易参与人通过交易单元接入本所交易主机；行情与交易数据另有第三方数据商分发",
+        "detail": "「交易单元」是 SZSE 交易规则原文使用的术语（2.2.2条：参与本所证券交易与接受本所监管及服务的基本业务单位），与 cn-sse.yml 记录方式一致。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第2.2条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "券商佣金，费率市场化协商，无统一标准",
+        "quote": "投资者买卖证券成交的，应当按规定向会员交纳佣金。",
+        "sources": [
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第9.1条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null
+      },
+      "exchange_fees": {
+        "zh": "A股、B股交易经手费按成交金额 0.0341‰ 双边收取（2023年8月28日起下调；此前为0.0487‰）；大宗交易按下调后费率再下浮（A股30%、B股50%）；另有会员管理费用",
+        "en": "Transaction handling fee: 0.0341‰ of trade value, bilateral (reduced from 0.0487‰ effective 28 August 2023)",
+        "detail": "与上交所同步下调（同一次全国性降费政策，cn-sse.yml 未记录具体费率数字，本条是本次新增的更具体数据）。",
+        "sources": [
+          {
+            "title": "关于下调股票交易经手费收费标准的通知（深证上〔2023〕768号）",
+            "url": "https://www.szse.cn/disclosure/notice/general/t20230818_602805.html",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "深圳证券交易所交易规则（2026年修订）第9.2条",
+            "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "自2023年8月28日起，本所A股、B股交易经手费收费标准由按成交金额的0.0487‰双边收取下调至按成交金额的0.0341‰双边收取。A股、B股大宗交易按照本次下调后的标准费率分别下浮30%、50%收取。",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "stamp_duty": {
+        "zh": "0.05%（单边，卖方缴纳）",
+        "detail": "2023年8月28日起，证券交易印花税由此前的单边1‰减半下调至单边0.5‰，仅对卖方征收。\n印花税是全国统一税率的国家税种，非交易所自定，深交所与上交所适用同一税率——本条与\ncn-sse.yml 引用同一篇报道确认同一政策，信息来自新闻媒体对财政部、税务总局公告的转载，\n非财政部官方公告原页，confidence 标 medium。\n",
+        "sources": [
+          {
+            "title": "证券交易印花税8月28日起实施减半征收（人民网）",
+            "url": "http://finance.people.com.cn/n1/2023/0828/c1004-40065300.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "据财政部、税务总局公告，为活跃资本市场、提振投资者信心，自2023年8月28日起，证券交易印花税实施减半征收。……证券交易印花税由单边征收1‰下调至0.5‰",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null
+      },
+      "financial_transaction_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_gains_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "人民币非完全可自由兑换，外资参与需通过额度管理渠道，存在换汇与资金进出限制；与上交所面临相同的国家层面外汇管制环境",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "enforcement_note": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "已有来源的相关内容见 listing.delisting_conditions（重大违法强制退市情形）；本字段本身未附独立来源，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      }
+    }
+  }
+}

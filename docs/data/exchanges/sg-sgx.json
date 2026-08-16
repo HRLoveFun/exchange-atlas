@@ -1,0 +1,1415 @@
+{
+  "id": "sg-sgx",
+  "name_zh": "新加坡交易所（简称新交所）",
+  "name_native": {
+    "en": "Singapore Exchange Limited (SGX)"
+  },
+  "official_languages": [
+    "en"
+  ],
+  "source_lang": "en",
+  "group_id": null,
+  "region": "apac",
+  "tier": "extended",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "Asia/Singapore (UTC+8)",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dst_rule": {
+        "zh": "不实行夏令时",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "founded_year": {
+        "zh": "1999年12月1日（新加坡证券交易所SES、新加坡国际金融交易所SIMEX、证券结算与电脑服务公司SCCS三家法定合并成立）",
+        "en": "1 December 1999 (statutory merger of the Stock Exchange of Singapore (SES), the Singapore International Monetary Exchange (SIMEX) and Securities Clearing and Computer Services (Pte) Limited (SCCS))",
+        "detail": "合并依据是《交易所（公司化与合并）法》（Exchanges (Demutualisation and Merger) Act 1999，\n1999年10月8日制定，同年12月1日\"转移日\"生效），三家原会员制机构的股本、储备与业务一并转移\n给新设立的控股公司。SGX 本身于2000年11月在自身主板挂牌上市（见 self_listed）。\n",
+        "sources": [
+          {
+            "title": "Exchanges (Demutualisation and Merger) Act 1999（新加坡政府法规官方公布平台 Singapore Statutes Online）",
+            "url": "https://sso.agc.gov.sg/Act/EDMA1999",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The transfer date is 1 December 1999.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "history": {
+        "zh": "前身为1973年从马来西亚证券交易所分立而来的新加坡证券交易所（SES）与1984年成立的新加坡国际金融交易所（SIMEX，商品期货交易所）；1999年12月1日两者与证券结算与电脑服务公司（SCCS）依《交易所（公司化与合并）法》合并公司化，组成新加坡交易所；2000年11月在本所主板挂牌",
+        "en": "Predecessors: the Stock Exchange of Singapore (SES, split from the Stock Exchange of Malaysia in 1973) and the Singapore International Monetary Exchange (SIMEX, a commodities futures exchange founded in 1984); on 1 December 1999 SES, SIMEX and Securities Clearing and Computer Services (SCCS) merged and demutualised into SGX under the Exchanges (Demutualisation and Merger) Act 1999; SGX itself listed on its own Mainboard in November 2000",
+        "detail": "1973年分立与2000年11月挂牌两处细节本次未逐条核实官方原文（未找到 sgx.com 历史页的可抓取版本，见 SOURCES.md），仅 1999-12-01 合并日期有 EDMA1999 法律原文直接支持，故整条 confidence 标 medium 而非 high。",
+        "sources": [
+          {
+            "title": "Exchanges (Demutualisation and Merger) Act 1999",
+            "url": "https://sso.agc.gov.sg/Act/EDMA1999",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "quote": null
+      },
+      "organization_form": {
+        "enum": "demutualized_listed",
+        "zh": "公司制（自身上市）",
+        "en": "Demutualized, Listed",
+        "detail": "Singapore Exchange Limited 为控股公司，SGX-ST（现货证券）、SGX-DT（衍生品）、SGX-DC（衍生品\n清算）、CDP（证券清算/存管）均为其全资子公司（见 CFTC 就 SGX-DC 境外清算所注册披露的集团\n架构图）。SGX 自身于2000年11月在本所主板挂牌（股票代码 S68）是广为人知的公开事实，但本次\n未找到可 curl 抓取的官方原文正面确认挂牌日期与代码（sgx.com 相关页面均为 JS 渲染空壳，见\nSOURCES.md），故 confidence 标 medium。\n",
+        "sources": [
+          {
+            "title": "SGX Legal Entities Structure（CFTC 就 SGX-DC 境外清算所注册审查披露的集团架构图，PDF）",
+            "url": "https://www.cftc.gov/sites/default/files/stellent/groups/public/@otherif/documents/ifdocs/sgxdcdcoapplegalentstructure.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "quote": null
+      },
+      "self_listed": {
+        "enum": "yes",
+        "zh": "是（自2000年11月起在本所主板挂牌，股票代码 S68）",
+        "en": "Yes (listed on its own Mainboard since November 2000, ticker S68)",
+        "detail": "广为人知的公开事实（新交所是亚太首家自我挂牌的交易所），但本次未找到可 curl 抓取的官方原文逐字确认挂牌日期/代码，sgx.com 相关页面均为 JS 渲染空壳（见 SOURCES.md），故 confidence 标 medium，不标 high。",
+        "sources": [
+          {
+            "title": "SGX 官网首页（仅用于确认域名归属，不构成对挂牌日期/代码这一具体事实的独立原文证据，见本字段 detail）",
+            "url": "https://www.sgx.com/",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "quote": null
+      },
+      "market_cap_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官方月度统计报告（2026年4月）披露总市值为 S$1,120,293 百万（约1.12万亿新元），但该字段要求美元计价，本次未找到已核实的新元/美元汇率来源，不做未经引用的换算，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "listed_companies_count": {
+        "zh": "600（2026年4月，官方口径为「上市证券数量」Total Number of Listed Securities，非严格意义的「上市公司」数，可能含REITs/business trust等非公司制发行人及同一发行人的多类证券）",
+        "en": "600 (Apr 2026; official figure is \"Total Number of Listed Securities\", not strictly \"listed companies\" — may include REITs/business trusts and multiple securities per issuer)",
+        "sources": [
+          {
+            "title": "SGX Monthly Market Statistics — April 2026（SGX 官方月度统计报告 PDF）",
+            "url": "https://links.sgx.com/1.0.0/corporate-announcements/1DNTODDQ7XS4ENGJ/888606_SGX%20Monthly%20Statistics%20Report%20Update_Apr%202026.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Total Number of Listed Securities 600",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官方月度统计报告披露2026年4月单月股票市场成交额为 S$43,160 百万，但该字段要求年度、美元计价的口径，本次未找到年度汇总与汇率来源，不做推算，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "global_ranking": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_currency": {
+        "zh": "新元为主；部分证券可另以美元等外币计价交易（月度统计报告区分「SGX Mainboard (S$)」与「SGX Mainboard (Non S$)」两类统计口径）",
+        "en": "Singapore Dollar (SGD) primarily; some securities are also quoted in foreign currencies (the official monthly statistics report separates \"SGX Mainboard (S$)\" and \"SGX Mainboard (Non S$)\" turnover)",
+        "sources": [
+          {
+            "title": "SGX Monthly Market Statistics — April 2026",
+            "url": "https://links.sgx.com/1.0.0/corporate-announcements/1DNTODDQ7XS4ENGJ/888606_SGX%20Monthly%20Statistics%20Report%20Update_Apr%202026.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "SGX Mainboard (S$) ... SGX Mainboard (Non S$)",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "settlement_currency": {
+        "zh": "以交易货币结算，新元为主（见 trading_currency）",
+        "verified": "2026-08-14",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "新加坡金融管理局（MAS）",
+        "en": "Monetary Authority of Singapore (MAS)",
+        "detail": "MAS 依《证券期货法》（SFA 2001）核准 SGX-ST、SGX-DT 为「核准交易所」（Approved Exchange），并核准 CDP/SGX-DC 为「核准清算所」（Approved Clearing House）。",
+        "sources": [
+          {
+            "title": "Securities and Futures Act 2001（Singapore Statutes Online）",
+            "url": "https://sso.agc.gov.sg/act/sfa2001",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Approved Exchange (AE) or Recognised Market Operator (RMO) Licence（MAS 官网）",
+            "url": "https://www.mas.gov.sg/regulation/capital-markets/apply-for-licensing-or-registration-of-capital-market-entities/approved-exchange-ae-or-recognised-market-operator-rmo-licence",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Markets are licensed by MAS as approved exchanges (AEs) or recognised market operators (RMOs) under the Securities and Futures Act 2001.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "self_regulatory_org": {
+        "zh": "新加坡交易所监管公司（SGX RegCo），SGX 集团下独立子公司，承担前线监管职能",
+        "en": "Singapore Exchange Regulation Pte. Ltd. (SGX RegCo), a dedicated subsidiary of the SGX Group carrying out front-line regulatory functions",
+        "detail": "结构上类似 JPX 集团下的 Japan Exchange Regulation：交易所自身设独立法人实体专司监管职能，而非与商业运营部门混同。",
+        "sources": [
+          {
+            "title": "SGX-ST Rules — Definitions and Interpretation（rulebook.sgx.com）",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "\"SGX RegCo\" means Singapore Exchange Regulation Pte. Ltd.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "clearing_regulator": {
+        "zh": "新加坡金融管理局（MAS），依《证券期货法》核准清算所（Approved Clearing House）制度监管",
+        "en": "Monetary Authority of Singapore (MAS), under the Approved Clearing House regime of the Securities and Futures Act",
+        "sources": [
+          {
+            "title": "Securities and Futures Act 2001（Part 2 Organised Markets, Division 2 — Regulation of Approved Clearing Houses）",
+            "url": "https://sso.agc.gov.sg/act/sfa2001",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Division 2 — Regulation of Approved Clearing Houses",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "core_laws": {
+        "zh": "《证券期货法》（Securities and Futures Act 2001）",
+        "en": "Securities and Futures Act 2001 (SFA)",
+        "detail": "Part 2「有组织市场」（Organised Markets）章节规范核准交易所（Approved Exchange）与核准清算所（Approved Clearing House）；上市/持续披露另受各板块规则手册（Mainboard/Catalist/Global Listing Board Rules）约束，后者是 SGX-ST 依 SFA 授权自行制定的业务规则。",
+        "sources": [
+          {
+            "title": "Securities and Futures Act 2001（Table of Contents, Part 2 Organised Markets）",
+            "url": "https://sso.agc.gov.sg/act/sfa2001",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Securities and Futures Act 2001 ... Part 2 ORGANISED MARKETS",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：新元自由兑换，MAS 采用汇率政策（管理浮动，参考一篮子货币）而非资本管制作为货币政策工具——未附本次核实来源，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "disclosure_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "SGX-ST Rules 8.3.3（最小报价单位分类表，间接列出证券产品类别）",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Futures Trading Rules（衍生品合约总览）",
+            "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "sgx-equities",
+          "category": "equity",
+          "name_zh": "股票",
+          "name_native": "Stocks",
+          "board": "Mainboard / Catalist / Global Listing Board"
+        },
+        {
+          "id": "sgx-reits",
+          "category": "fund",
+          "name_zh": "房地产投资信托基金",
+          "name_native": "Real Estate Investment Trusts (REITs)"
+        },
+        {
+          "id": "sgx-business-trusts",
+          "category": "fund",
+          "name_zh": "商业信托",
+          "name_native": "Business Trusts",
+          "description": "新交所现货产品体系的特色品类，与REITs并列适用同一档最小报价单位规则"
+        },
+        {
+          "id": "sgx-etf",
+          "category": "fund",
+          "name_zh": "交易所买卖基金",
+          "name_native": "Exchange Traded Funds (ETF)"
+        },
+        {
+          "id": "sgx-structured-warrants",
+          "category": "structured",
+          "name_zh": "结构性权证",
+          "name_native": "Structured Warrants"
+        },
+        {
+          "id": "sgx-company-warrants",
+          "category": "structured",
+          "name_zh": "公司认股权证",
+          "name_native": "Company Warrants"
+        },
+        {
+          "id": "sgx-bonds",
+          "category": "bond",
+          "name_zh": "债券",
+          "name_native": "Debentures, Bonds and Loan Stocks"
+        },
+        {
+          "id": "sgx-equity-index-derivatives",
+          "category": "future",
+          "name_zh": "股指期货与期权",
+          "name_native": "Equity Index Futures & Options",
+          "description": "标的指数含MSCI系列等第三方编制指数（Futures Trading Rules 明确提及 MSCI Index Contracts），具体合约清单本次未逐一核实"
+        },
+        {
+          "id": "sgx-interest-rate-derivatives",
+          "category": "future",
+          "name_zh": "利率衍生品",
+          "name_native": "Interest Rate Futures"
+        },
+        {
+          "id": "sgx-fx-derivatives",
+          "category": "future",
+          "name_zh": "外汇期货",
+          "name_native": "FX Futures"
+        },
+        {
+          "id": "sgx-commodity-derivatives",
+          "category": "future",
+          "name_zh": "商品衍生品",
+          "name_native": "Commodity Derivatives"
+        },
+        {
+          "id": "sgx-equity-options",
+          "category": "option",
+          "name_zh": "股票期权",
+          "name_native": "Equity Options",
+          "description": "SGX-ST Rules Chapter 18 (Exchange Options Trading) 项下的股票期权，清算费率0.05%（上限S$200）由本章确认"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "开盘例行程序（Opening Routine）08:30-09:00，含 Pre-Open（08:30 至 08:58/59 随机结束）与 Non-Cancel（至09:00）两阶段单一价格集合竞价",
+          "en": "Opening Routine 08:30-09:00, comprising a Pre-Open Phase (08:30 to a random end at 08:58-08:59) and a Non-Cancel Phase (to 09:00), both single-price call auction phases",
+          "quote": "Pre-Open Phase (08:30 hours to 08:58–59 hours) ... This phase begins at 08:30 hours and ends randomly at any time from 08:58 hours to 08:59 hours.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "continuous_am": {
+          "zh": "09:00-12:00 连续竞价",
+          "en": "Continuous Trading Phase, 09:00-12:00",
+          "quote": "The morning trading session consists of a Trading Phase which begins at 09:00 hours and ends at 12:00 hours.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "lunch_break": {
+          "zh": "午休 12:00-13:00，含 Pre-Open（12:00至12:58/59随机结束）与 Non-Cancel（至13:00）两阶段单一价格集合竞价，计算下午开盘价",
+          "en": "Mid-Day Break 12:00-13:00, comprising a Pre-Open Phase (12:00 to a random end at 12:58-12:59) and a Non-Cancel Phase (to 13:00), computing the afternoon session's opening price",
+          "quote": "The Mid-Day Break is a 60-minute session that begins after the morning trading session ends at 12:00 hours, and ends before the afternoon trading session begins at 13:00 hours.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "continuous_pm": {
+          "zh": "13:00-17:00 连续竞价",
+          "en": "Continuous Trading Phase, 13:00-17:00",
+          "quote": "The afternoon trading session consists of a Trading Phase which begins at 13:00 hours and ends at 17:00 hours.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "after_market": {
+          "zh": "收盘例行程序（17:00-17:06，Pre-Close+Non-Cancel两阶段单一价格集合竞价计算收盘价）后接十分钟「Trade at Close」阶段（17:06-17:16，仅可按收盘均衡价成交），无独立盘后连续竞价时段",
+          "en": "Closing Routine (17:00-17:06, Pre-Close + Non-Cancel phases computing the closing price) followed by a ten-minute Trade at Close Phase (17:06-17:16, orders only at the Equilibrium Price); no separate after-hours continuous trading session",
+          "quote": "The Trade at Close Phase is a ten-minute session that begins after the Closing Routine ends at 17:06 hours (for normal day trading) ... Orders may be entered in this phase only at the Equilibrium Price determined at the end of the Closing Routine.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "night_session": {
+          "zh": "现货证券市场无夜盘",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "holidays_note": {
+        "zh": "半日交易日（Half-Day Trading）时段结构相应缩短：08:30起盘前例行程序，09:00-12:00单一交易时段，12:00起收盘例行程序（12:00-12:06）与Trade at Close（12:06-12:16）",
+        "quote": "Half-Day Trading Opens/Starts at: 08:30 hours Closes/Ends at: 12:16 hours",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘例行程序：Pre-Open阶段可自由报单/改单/撤单不撮合，Non-Cancel阶段不可再报单改单，按SGX-ST算法计算出成交量最大、失衡量最小的均衡价（Equilibrium Price）作为开盘价",
+        "en": "Opening Routine: order entry/amendment/withdrawal freely allowed without matching during Pre-Open; no new entry/amendment during Non-Cancel, where an Equilibrium Price (largest tradable volume, lowest imbalance) is computed as the opening price",
+        "sources": [
+          {
+            "title": "Regulatory Notice 8.2.1",
+            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Equilibrium Price is the price that has the largest tradable volume and the lowest imbalance.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘例行程序（Pre-Close+Non-Cancel，机制与开盘例行程序对称）计算收盘均衡价，随后Trade at Close阶段仅允许按该均衡价继续撮合十分钟",
+        "en": "Closing Routine (Pre-Close + Non-Cancel, mirroring the Opening Routine) computes the closing Equilibrium Price, followed by a ten-minute Trade at Close Phase where matching continues only at that price",
+        "quote": "The Closing Routine is designed to reduce the risk of manipulating closing prices with a single transaction at an unusually high or low price, just before the trading session ends.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "连续竞价阶段按价格优先、时间优先撮合；开收盘及午间例行程序按均衡价算法撮合（见开盘/收盘机制）",
+        "en": "Continuous Trading Phase matches by price priority then time priority; Opening/Mid-Day/Closing routines match via the Equilibrium Price algorithm (see opening/closing mechanism)",
+        "quote": "All orders are matched in accordance with price priority, subject to Rule 8.14, followed by time priority.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "order_types": {
+        "zh": "限价申报为主；交易系统亦支持市价申报（Market Order），均衡价算法专门处理市价盘造成的「市价盘剩余」情形；完整订单类型清单（如止损单、有效期类型）本次未逐条核实",
+        "en": "Primarily limit orders; the Trading System also supports Market Orders (the Equilibrium Price algorithm has a dedicated rule for a \"Market Order Surplus\"); a complete order-type/time-in-force enumeration was not individually verified this session",
+        "sources": [
+          {
+            "title": "Regulatory Notice 8.2.1（第4.3节 Market Order Surplus 算法）",
+            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "If market orders are present and the market order volume on one side exceeds the cumulative order volume on the opposite side there would be a Market Order Surplus.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "tick_size": {
+        "zh": "分三档：股价<S$0.20 为S$0.001；S$0.20–0.995 为S$0.005；S$1.00以上为S$0.01（结构性权证门槛为S$2而非S$1）；ETF/ETN为S$0.01或S$0.001（由SGX-ST另行指定）；债券/贷款股/优先股统一S$0.001",
+        "en": "Three tiers: below S$0.20 → S$0.001; S$0.20–0.995 → S$0.005; S$1.00 and above → S$0.01 (structured warrants use a S$2 threshold instead of S$1); ETFs/ETNs at S$0.01 or S$0.001 as SGX-ST determines; debentures/bonds/loan stocks/preference shares uniformly S$0.001",
+        "detail": "港元/人民币/日元计价的证券另按港交所/日本市场的最小报价单位对齐，不适用本表。",
+        "sources": [
+          {
+            "title": "SGX-ST Rules 8.3.3",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Below 0.20 0.001 0.20–0.995 0.005 1.00 and above 0.01 ... Structured warrants Below 0.20 0.001 0.20–1.995 0.005 2.00 and above 0.01",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "board_lot_size": {
+        "zh": "100股（自2015年1月19日起，由此前的1,000股下调）",
+        "en": "100 units (since 19 January 2015, reduced from 1,000)",
+        "detail": "第三方财经媒体提及2026年10月起对S$10以上高价股进一步降至10股/S$100以上降至1股，本次未找到官方原文确认具体日期与档位，不纳入本字段主体，仅记录于此供后续核实。",
+        "sources": [
+          {
+            "title": "SGX to introduce reduced board lot size from 19 January（SGX官方公告PDF，2014-08-25）",
+            "url": "https://links.sgx.com/1.0.0/corporate-announcements/7DQWR38YKAQKDCBE/312230_20140825_SGX_to_introduce_reduced_board_lot_size_from_19_January.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Singapore Exchange (SGX) will reduce the standard board lot size of securities listed on SGX from 1,000 to 100 units from 19 January 2015.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "odd_lot_handling": {
+        "zh": "设独立「碎股市场」（unit share market），订单可按低于1个board lot的任意数量成交，与整手市场分开撮合",
+        "en": "A separate unit share market allows orders in any quantity less than 1 board lot, matched apart from the round-lot market",
+        "sources": [
+          {
+            "title": "SGX-ST Rules 8.3.1-8.3.2",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "An order for the unit share market may be matched in any quantity of less than 1 board lot.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "dynamic_reference",
+          "zh": "动态参考价区间（Circuit Breaker）：非固定每日涨跌停，以滚动参考价±10%为价格带，官方原文明确区别于固定每日涨跌停模式",
+          "en": "Dynamic reference-price band (Circuit Breaker): not a fixed daily limit — a ±10% band around a rolling reference price; the rule text explicitly distinguishes this from a fixed daily price-limit model",
+          "sources": [
+            {
+              "title": "Regulatory Notice 8.14.1 — Circuit Breaker",
+              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-8141-circuit-breaker",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "It is not intended to halt price movement. A fundamental role of a capital market is timely and accurate price discovery; as such, the market should be allowed to determine its own prices so long as it remains fair and orderly. ... The upper threshold is 10% above the reference price and the lower threshold is 10% below the reference price.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "detail": null
+        },
+        "main_board": {
+          "zh": "上限为参考价+10%，下限为参考价-10%；参考价在交易阶段开始时取当节开盘价（缺失则取前值），此后每5分钟滚动更新为5分钟前成交价",
+          "en": "Upper threshold = reference price + 10%; lower threshold = reference price − 10%; the reference price starts as the session's opening price (falling back to prior values), then rolls every 5 minutes to the trade price from 5 minutes earlier",
+          "quote": "The upper threshold is 10% above the reference price and the lower threshold is 10% below the reference price.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "other_boards": {
+          "zh": "覆盖范围限于：海峡时报指数/MSCI Singapore Free Index成分股，以及在SGX-ST上市且当日参考价≥S$0.50（或等值外币，日元计价以¥500为界）的股票/REITs/商业信托/ETF/ETN等；新股上市首日豁免适用",
+          "en": "Coverage limited to: constituents of the Straits Times Index or MSCI Singapore Free Index, and stocks/REITs/business trusts/ETFs/ETNs listed on SGX-ST with a start-of-day reference price of S$0.50 or more (¥500 for yen-denominated instruments); new listings are exempt on their first trading day",
+          "quote": "have a reference price at the start of the Market Day of 0.50 or more in the underlying currency that Market Day. In the case of Yen-denominated instruments, Circuit Breakers are applied if the reference price at the start of the Market Day is ¥500 (denoted as \"0.50\" in the Trading System) or more that Market Day ... SGX-ST will exempt new listings from the circuit breaker on the first day of trading.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "stock_level",
+        "zh": "个股/期货合约级别的熔断冷静期机制（Circuit Breaker / Cooling-Off Period），非全市场级",
+        "en": "Circuit Breaker / Cooling-Off Period — applies at the individual security/futures contract level, not market-wide",
+        "detail": "详细机制见 volatility_interruption 字段与 price_limits。",
+        "sources": [
+          {
+            "title": "Regulatory Notice 8.14.1 — Circuit Breaker",
+            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-8141-circuit-breaker",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "SGX-ST may prescribe, for certain securities and futures contracts, Circuit Breakers which are designed to temporarily restrict trading in these securities and futures contracts.",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "volatility_interruption": {
+        "zh": "冷静期（Cooling-Off Period）持续5分钟：撮合价超出价格带的委托将被拒绝，冷静期内交易仍可在价格带内继续进行（非停牌）；冷静期结束后价格带随新参考价调整；冷静期若与午休/收盘前阶段/停牌/暂停交易重叠则提前结束",
+        "en": "The Cooling-Off Period lasts 5 minutes: an incoming order that would match outside the band is rejected while trading continues within the band (not a halt); after the period ends the band is recalculated from the new reference price; the period ends early if it coincides with the Mid-Day Break, Pre-Close Phase, a suspension or a trading halt",
+        "sources": [
+          {
+            "title": "Regulatory Notice 8.14.1 — Circuit Breaker",
+            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-8141-circuit-breaker",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The duration of the Cooling-Off Period is five minutes. The Cooling-Off Period will cease upon the commencement of any of the following, even if five minutes have not elapsed: (a) Pre-close Phase; (b) Mid-Day Break; (c) Suspension; and (d) Trading Halt.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "暂停交易后恢复时进入15分钟（可延长）的Adjust阶段，可报单改单撤单但不撮合，结束时按均衡价算法一次性撮合后恢复正常交易；一般性停牌权力条款本次未逐条核实",
+        "en": "Upon lifting a suspension, trading resumes via a 15-minute (extendable) Adjust Phase allowing order entry/amendment/withdrawal without matching, followed by a single Equilibrium-Price match before normal trading resumes; the general suspension-power provisions were not individually verified this session",
+        "sources": [
+          {
+            "title": "Regulatory Notice 8.2.1（2.4 Adjust）",
+            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "An Adjust Phase operates upon the lifting of a suspension of a security or futures contract pursuant to Rule 8.13.7 ... The Adjust Phase sets in for 15 minutes unless a longer time is specified.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "intraday_reversal": {
+        "enum": "t0",
+        "zh": "T+0（当日买入证券可当日卖出）——本次抓取的交易/结算规则未见任何限制当日买卖的条款，与T+2结算（见clearing.settlement_cycle）是两个独立层面",
+        "detail": "未找到正面声明「允许当日回转」的官方原文，是基于「规则通篇未见限制性条款」的消极推断，故 confidence 标 medium 而非 high。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "quote": null
+      },
+      "short_selling": {
+        "enum": "freely_allowed",
+        "zh": "基本无限制，但须标记卖单为「卖空/正常卖单」并申报数量；未见报升规则（uptick rule）或指定名单限制",
+        "en": "Largely unrestricted, subject to an order-marking/reporting regime (short sell orders must be flagged, with quantity disclosed); no uptick rule or designated-list restriction was found",
+        "detail": "「无报升规则/无指定名单」是基于本次抓取的 SGX-ST Rules 全文未见相关条款的消极推断，不是正面声明，故整条 confidence 标 medium。标记要求本身（引文出处）是可直接验证的正面事实。",
+        "sources": [
+          {
+            "title": "SGX-ST Rules Chapter 8A — Marking of Sell Orders",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Each sell order for Specified Capital Markets Products shall be marked to indicate to SGX-ST whether it is a Short Sell Order or a normal sell order.",
+        "confidence": "medium",
+        "verified": "2026-08-14"
+      },
+      "block_trade": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "dark_pool": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "market_maker_scheme": {
+        "zh": "指定做市商（Designated Market-Maker）制度：须就获批品种在交易系统持续提供有约束力的双边报价，报价须在SGX-ST规定的最大价差与最小数量范围内",
+        "en": "Designated Market-Maker scheme: must continuously provide binding two-way quotations on the Trading System for approved instruments, within SGX-ST-prescribed maximum spread and minimum quantity",
+        "sources": [
+          {
+            "title": "SGX-ST Rules Chapter 6 — Designated Market-Makers",
+            "url": "https://rulebook.sgx.com/rulebook/chapter-6-designated-market-makers",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "A Designated Market-Maker must provide on the Trading System competitive bid and offer quotations: (i) on a continuous basis or in such other manner as SGX-ST prescribes to provide for an adequately liquid market with suitable disclosure to investors.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "connect_schemes": {
+        "zh": "东盟交易联通机制（ASEAN Trading Linkage）：交易会员可透过该机制直接向境外东盟交易所市场下单（作为该所会员的客户），或接受境外会员的授权接入订单",
+        "en": "ASEAN Trading Linkage: an order-routing service allowing a Trading Member to enter orders directly into a Foreign ASEAN Exchange's market as a customer of a member there, or to receive routed orders from a Foreign ASEAN Exchange member",
+        "sources": [
+          {
+            "title": "SGX-ST Rules Chapter 10A — ASEAN Trading Linkage",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "\"ASEAN Trading Linkage\" Order-routing service provided by SGX-ST to Trading Members, whether directly or through any other person, through which: (a) a Trading Member may enter orders directly into a market of a Foreign ASEAN Exchange, as a customer of a member of such Foreign ASEAN Exchange.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      }
+    },
+    "listing": {
+      "boards": [
+        {
+          "id": "sgx-mainboard",
+          "name_zh": "主板",
+          "name_native": "Mainboard",
+          "financial_threshold": "三选一：①最近一年综合税前利润≥S$1,000万且三年经营记录；②最近一年盈利且三年经营记录且市值≥S$1.5亿；③最近一年有营业收入且市值≥S$3亿",
+          "target_companies": "大中型成熟企业"
+        },
+        {
+          "id": "sgx-catalist",
+          "name_zh": "凯利板",
+          "name_native": "Catalist",
+          "financial_threshold": "无量化门槛，改由保荐人（Sponsor）承担适合性审查主责",
+          "target_companies": "中小型/成长型企业；前身为SESDAQ二板，2007年前后改制为保荐人监管模式"
+        },
+        {
+          "id": "sgx-global-listing-board",
+          "name_zh": "全球上市板",
+          "name_native": "Global Listing Board",
+          "financial_threshold": "股东≥500名（全球）；市值≥S$20亿；另须满足以美元计的营收（近一年≥US$9,000万）或利润（近三年合计≥US$1,100万，且各年为正、最近一年≥US$220万）二选一测试",
+          "target_companies": "已在Nasdaq上市、寻求于新交所双重上市的公司——2026年新设的第三板块，规则条文大量出现「Nasdaq」「Nasdaq Listing Rules」定义，专为SGX-Nasdaq双重上市设计"
+        }
+      ],
+      "review_system": {
+        "enum": "hybrid",
+        "zh": "混合制：主板为交易所量化门槛审核（利润/市值三选一测试），凯利板为保荐人主导的披露为本制度（保荐人对适合性负主责），全球上市板锚定Nasdaq上市标准，三板块审核逻辑并不统一",
+        "en": "Hybrid: Mainboard uses Exchange-vetted quantitative admission tests; Catalist is a disclosure-based, sponsor-supervised regime where the sponsor bears primary responsibility for suitability; the Global Listing Board anchors to Nasdaq listing standards — the three boards do not share one review philosophy",
+        "detail": "分类判断本身是归纳而非直接引语，故标 medium；三条支撑引语各自 high。",
+        "sources": [
+          {
+            "title": "Mainboard Rules（Quantitative Criteria 条款）",
+            "url": "https://rulebook.sgx.com/rulebook/mainboard-rules",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Catalist Rules（Practice Note — Sponsor's Role）",
+            "url": "https://rulebook.sgx.com/rulebook/catalist-rules",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Global Listing Board Rules",
+            "url": "https://rulebook.sgx.com/rulebook/global-listing-board-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "A sponsor has the primary responsibility for assessing a listing applicant's suitability for listing.",
+        "confidence": "medium",
+        "verified": "2026-08-14"
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "transfer_between_boards": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "continuing_obligations": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suspension_resumption": {
+        "zh": "见 market_structure.trading_halt_mechanism（Adjust阶段）；因披露事项等原因的一般性停牌权力条款本次未逐条核实",
+        "sources": [
+          {
+            "title": "Regulatory Notice 8.2.1（2.4 Adjust，暂停解除后的Adjust阶段机制，即本字段引用的出处）",
+            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_conditions": {
+        "zh": "交易所可依职权将发行人从官方名单剔除的情形包括：无法/不愿遵守上市规则、维护公平有序透明市场所需、交易所认为适当、已无上市证券，或SPAC触发特定条款；发行人主动申请退市须获至少75%独立股东（按票数，出席并投票）批准",
+        "en": "The Exchange may remove an issuer from the Official List where the issuer is unable/unwilling to comply with a listing rule, it is necessary for a fair/orderly/transparent market, the Exchange considers it appropriate, the issuer has no listed securities, or (for SPACs) specified triggers occur; a voluntary delisting requires approval by at least 75% of independent shareholders present and voting",
+        "sources": [
+          {
+            "title": "Mainboard Rules 1305, 1307",
+            "url": "https://rulebook.sgx.com/rulebook/mainboard-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Exchange may remove an issuer from its Official List (without the agreement of the issuer) if:— (1) the issuer is unable or unwilling to comply with, or contravenes, a listing rule. ... the resolution to delist the issuer has been approved by a majority of at least 75% of the total number of issued shares excluding treasury shares and subsidiary holdings held by the shareholders present and voting, on a poll, either in person or by proxy at the meeting.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_process": {
+        "zh": "退市须向股东提出「公平合理」的退出要约，默认含现金选项，并须委任独立财务顾问就要约公平合理性发表意见——2019年7月11日改革后的标准（此前仅要求「合理」，未要求「公平」）",
+        "en": "Delisting requires an exit offer to shareholders that is fair and reasonable, with a cash alternative as the default, and appointment of an independent financial adviser to opine on fairness and reasonableness — the standard following the 11 July 2019 reform (previously only \"reasonable\" was required, not \"fair\")",
+        "sources": [
+          {
+            "title": "Mainboard Rules 1309",
+            "url": "https://rulebook.sgx.com/rulebook/mainboard-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "an exit offer must be made to the issuer's shareholders and holders of any other classes of listed securities to be delisted. The exit offer must: (a) be fair and reasonable; and (b) include a cash alternative as the default alternative ... Amended on 11 July 2019 11 July 2019 .",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_transition_period": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "2025年10月29日起，主板规则中原有的「财务观察名单/流动性观察名单」（Watch-List，Part V，规则1310-1315）整章被删除，具体删除后的替代安排（若有）本次未逐条核实，记入 OPEN-QUESTIONS。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-14",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "sti",
+          "name_zh": "海峡时报指数",
+          "name_native": "Straits Times Index (STI)",
+          "compiler": "ftse_russell",
+          "weighting_method": "float_adjusted",
+          "flagship": "yes",
+          "description": "由FTSE Russell、SPH Media（《海峡时报》母公司）、SGX Group三方联合编制（FTSE ST Index Series的旗舰指数），并非新交所独自编制或第三方独家编制，是与上证综指「交易所自编」、恒生指数「第三方独家编制」都不同的第三种模式；weighting_method 按FTSE通行的自由流通调整市值加权法填列，本次未针对STI逐条核实其编制方案原文，confidence 标 medium"
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "enum": "t2",
+        "zh": "T+2（现货证券「Ready market」）；可保证金交易的期货合约为「最后交易日+2」（LTD+2）；因结算失败而产生的强制补进（buying-in）市场为T+1",
+        "en": "T+2 for the securities Ready market; \"Last Trading Day + 2\" (LTD+2) for Marginable Futures Contracts; T+1 for the buying-in market arising from settlement failures",
+        "sources": [
+          {
+            "title": "SGX-ST Rules 9.1A.1",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Ready market (for securities other than wholesale corporate bonds) T+2 Eligible for clearing by CDP Market for Marginable Futures Contracts LTD+2 Eligible for clearing by CDP ... Buying-in market T+1 Eligible for clearing by CDP",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "detail": null
+      },
+      "ccp_name": {
+        "zh": "现货证券：新加坡中央存托私人有限公司（CDP）；衍生品：新加坡交易所衍生品结算有限公司（SGX-DC）",
+        "en": "Securities: The Central Depository (Pte) Limited (CDP); Derivatives: Singapore Exchange Derivatives Clearing Limited (SGX-DC)",
+        "sources": [
+          {
+            "title": "SGX-ST Rules — Definitions",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "SGX-DC Clearing Rules — Definitions",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "\"CDP\" The Central Depository (Pte) Limited; ... \"Clearing House\" means the Singapore Exchange Derivatives Clearing Limited by whatever name called or its successor and assigns.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "csd_name": {
+        "zh": "新加坡中央存托私人有限公司（CDP），身兼证券中央对手方与中央存管机构双重角色（与港交所HKSCC模式相同）",
+        "en": "The Central Depository (Pte) Limited (CDP), serving as both CCP and CSD for securities (the same combined-role model as HKEX's HKSCC)",
+        "sources": [
+          {
+            "title": "SGX-ST Rules — Definitions",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "\"CDP\" The Central Depository (Pte) Limited",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "initial_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "衍生品持仓按日盯市：以当日结算价（Daily Settlement Price）计算浮动盈亏，会员须与SGX-DC逐日清算",
+        "en": "Derivatives positions are marked to market daily against the Daily Settlement Price, with Clearing Members settling gains/losses with SGX-DC each day",
+        "sources": [
+          {
+            "title": "SGX-DC Clearing Rules 7.12.1",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "When a Clearing Member is long or short any amount of any Contract at the end of the day ... settlement shall be made with the Clearing House to the settlement price for that day, and such Clearing Member shall be liable to pay to, or entitled to collect from, the Clearing House any loss or profit.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "delivery_method": {
+        "enum": "either",
+        "zh": "现货证券市场不适用交割概念（na）；衍生品视合约而定，部分合约实物交割、部分现金结算——「either」是对两个业务面合并后的近似取值，不完全贴合任何一面，见 detail",
+        "en": "Not applicable to the securities market (na); for derivatives it varies by contract — some are physically delivered, others cash-settled. \"Either\" is an approximation combining both business lines and does not cleanly fit either alone (see detail)",
+        "detail": "taxonomy 的 delivery_method 枚举没有「按业务面分裂」这个选项，本所现货+衍生品合一建档（见文件顶部说明）导致这个字段被迫在两种截然不同的产品逻辑间选一个值——记入 OPEN-QUESTIONS 框架性问题，供未来遇到更多「一所多业务」样本时参考。",
+        "sources": [
+          {
+            "title": "SGX-DC Clearing Rules（实物交割/Alternative Delivery Procedure相关条款）",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "the minimum size prescribed under the relevant Contract Specifications for physical delivery",
+        "confidence": "medium",
+        "verified": "2026-08-14"
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "default_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "membership_structure": {
+        "zh": "现货证券市场为「交易会员」（Trading Member，经SGX-ST批准的实体，其雇员/授权代表为Trading Representative）；衍生品市场另设「结算会员」（Clearing Member）体系，与SGX-DC直接结算",
+        "en": "Securities market: \"Trading Member\" (an entity approved by SGX-ST, whose employees/authorised agents act as Trading Representatives); derivatives market has a separate \"Clearing Member\" tier settling directly with SGX-DC",
+        "sources": [
+          {
+            "title": "SGX-ST Rules — Definitions",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "\"Trading Member\" An entity that has been approved as Trading Member in accordance with SGX-ST Rules; \"Trading Representative\" A person who is employed by or acts for or by arrangement with a Trading Member to deal in securities or trade in futures contracts.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "本次抓取的规则文本仅以「Trading System」泛称交易系统，未找到对外公开的具体品牌名称（如是否为SGX Titan/Reach一类专名），未核实前不凭印象填写，留空。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "access_methods": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "exchange_fees": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "本次未抓取到现货证券交易费率表（费率页面疑似与 sgx.com 主站同为JS渲染，未在本节命中可直接抓取的静态费率表），见 OPEN-QUESTIONS。",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "clearing_fees": {
+        "zh": "股票期权清算费为期权金总额的0.05%，每笔上限S$200，向OCC缴纳——仅限股票期权市场（Chapter 18），非现货证券/期货市场的通用清算费率",
+        "en": "For equity options, a clearing fee of 0.05% of the aggregate Premium (capped at S$200 per transaction) is payable to the OCC — this is specific to the equity options market (Chapter 18), not a general securities/futures clearing fee",
+        "sources": [
+          {
+            "title": "SGX-ST Rules 18.12.2",
+            "url": "https://rulebook.sgx.com/rulebook/18122-clearing-fees",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "A clearing fee of 0.05% of the aggregate Premium, subject to a maximum fee of $200, shall be payable to the OCC.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "stamp_duty": {
+        "zh": "无纸化（scripless）股票经CDP电子过户免征印花税，依《印花税（豁免记录）规则》2018",
+        "en": "Electronic transfers of scripless shares via CDP are exempt from stamp duty under the Stamp Duties (Exempt Record) Rules 2018",
+        "sources": [
+          {
+            "title": "Stamp Duty for Shares — Basics（新加坡国内税务局IRAS官网）",
+            "url": "https://www.iras.gov.sg/taxes/stamp-duty/for-shares/basics-of-stamp-duty-for-shares/learning-the-basics-for-shares",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "No. The electronic entry made by CDP in its register to effect the transfer of scripless shares is exempt from stamp duty pursuant to the Stamp Duties (Exempt Record) Rules 2018.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "financial_transaction_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_gains_tax": {
+        "zh": "无资本利得税——买卖股票等金融工具产生的利润/损失一般视为个人投资行为，不征税",
+        "en": "No capital gains tax — profits or losses from buying and selling shares or other financial instruments are generally treated as personal investments and are not taxable",
+        "sources": [
+          {
+            "title": "Gains from Sale of Property, Shares and Financial Instruments（IRAS官网）",
+            "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/what-is-taxable-what-is-not/gains-from-sale-of-property-shares-and-financial-instruments",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Profits or losses derived from the buying and selling of shares or other financial instruments (including digital tokens) are generally viewed as personal investments.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "新加坡居民公司在单层企业税制下派发的股息，股东端免税（公司层面已缴纳的税款视为最终税负）",
+        "en": "Dividends paid by Singapore resident companies under the one-tier corporate tax system are not taxable to shareholders, as the tax paid at the company level is final",
+        "sources": [
+          {
+            "title": "Dividends（IRAS官网，个人所得税「应税/不应税」说明）",
+            "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/what-is-taxable-what-is-not/dividends",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Dividends paid to shareholders by a Singapore resident company under the one-tier corporate tax system (as the tax paid by a company is final), except co-operatives.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "新元实行管理浮动汇率制度，由MAS参考一篮子货币设定政策区间（而非盯住单一货币或自由浮动）——一般性市场认知，本次未附官方原文来源，confidence 标 low",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "2025年10月29日主板退市观察名单（Watch-List）规则整章被删除；2026年新设Global Listing Board专供Nasdaq双重上市——短期内两项结构性规则变动均发生在本次建档前后，显示上市/退市制度框架处于活跃调整期",
+        "en": "The Mainboard's delisting Watch-List rules (Part V) were deleted in their entirety on 29 October 2025; a new Global Listing Board for Nasdaq dual listings was introduced in 2026 — both are structural rule changes occurring shortly before this entry was compiled, indicating an actively evolving listing/delisting framework",
+        "sources": [
+          {
+            "title": "Mainboard Rules Part V (Watch-List) [Deleted]",
+            "url": "https://rulebook.sgx.com/rulebook/mainboard-rules",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Global Listing Board Rules",
+            "url": "https://rulebook.sgx.com/rulebook/global-listing-board-rules",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Part V Watch-List [Deleted] ... Amended on 1 March 2016 and 1 June 2020 and deleted on 29 October 2025.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "enforcement_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    }
+  }
+}

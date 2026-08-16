@@ -1,6 +1,21 @@
 {
   "exchanges": [
     {
+      "id": "au-asx",
+      "name_zh": "澳大利亚证券交易所（通称ASX）",
+      "name_native": {
+        "en": "Australian Securities Exchange (ASX)"
+      },
+      "official_languages": [
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "cn-sse",
       "name_zh": "上海证券交易所",
       "name_native": {
@@ -25,6 +40,21 @@
         "lunch_start_utc": 3.5,
         "lunch_end_utc": 5.0
       }
+    },
+    {
+      "id": "cn-szse",
+      "name_zh": "深圳证券交易所",
+      "name_native": {
+        "zh-Hans": "深圳证券交易所"
+      },
+      "official_languages": [
+        "zh-Hans"
+      ],
+      "source_lang": "zh",
+      "group_id": null,
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
     },
     {
       "id": "de-eurex",
@@ -55,6 +85,23 @@
       }
     },
     {
+      "id": "de-xetra",
+      "name_zh": "法兰克福证券交易所（Xetra电子交易系统）",
+      "name_native": {
+        "de": "Frankfurter Wertpapierbörse (FWB)",
+        "en": "Deutsche Börse Xetra"
+      },
+      "official_languages": [
+        "de",
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": "deutsche-boerse-group",
+      "region": "europe",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "hk-hkex",
       "name_zh": "香港交易及结算所（简称港交所）",
       "name_native": {
@@ -83,6 +130,22 @@
       }
     },
     {
+      "id": "in-nse",
+      "name_zh": "印度国家证券交易所",
+      "name_native": {
+        "en": "National Stock Exchange of India (NSE)"
+      },
+      "official_languages": [
+        "en",
+        "hi"
+      ],
+      "source_lang": "en",
+      "group_id": "nse-group",
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "jp-jpx",
       "name_zh": "东京证券交易所",
       "name_native": {
@@ -108,6 +171,66 @@
         "lunch_start_utc": 2.5,
         "lunch_end_utc": 3.5
       }
+    },
+    {
+      "id": "sa-tadawul",
+      "name_zh": "沙特交易所（塔达吾尔）",
+      "name_native": {
+        "en": "Saudi Exchange (Tadawul)"
+      },
+      "official_languages": [
+        "ar"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "mena_africa",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
+      "id": "sg-sgx",
+      "name_zh": "新加坡交易所（简称新交所）",
+      "name_native": {
+        "en": "Singapore Exchange Limited (SGX)"
+      },
+      "official_languages": [
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
+      "id": "uk-lse",
+      "name_zh": "伦敦证券交易所",
+      "name_native": {
+        "en": "London Stock Exchange (LSE)"
+      },
+      "official_languages": [
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": "lseg-group",
+      "region": "europe",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
+      "id": "us-nasdaq",
+      "name_zh": "纳斯达克证券交易所",
+      "name_native": {
+        "en": "The Nasdaq Stock Market (Nasdaq)"
+      },
+      "official_languages": [
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": "nasdaq-group",
+      "region": "americas",
+      "tier": "extended",
+      "trading_hours": null
     },
     {
       "id": "us-nyse",

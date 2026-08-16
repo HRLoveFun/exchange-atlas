@@ -1,0 +1,1549 @@
+{
+  "id": "de-xetra",
+  "name_zh": "法兰克福证券交易所（Xetra电子交易系统）",
+  "name_native": {
+    "de": "Frankfurter Wertpapierbörse (FWB)",
+    "en": "Deutsche Börse Xetra"
+  },
+  "official_languages": [
+    "de",
+    "en"
+  ],
+  "source_lang": "en",
+  "group_id": "deutsche-boerse-group",
+  "region": "europe",
+  "tier": "extended",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "中欧时间（法兰克福，CET，UTC+1；夏令时CEST，UTC+2）",
+        "en": "Central European Time (Frankfurt, CET, UTC+1; CEST UTC+2 during daylight saving)",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dst_rule": {
+        "zh": "实行夏令时（随欧盟统一切换CET/CEST），与同集团de-eurex一致",
+        "en": "Observes daylight saving time (switches CET/CEST in line with the EU), same as de-eurex",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "founded_year": {
+        "zh": "1585（法兰克福商人为统一汇兑牌价而集会，官方史料将此事件视为法兰克福交易所的诞生时刻）；现行电子交易系统Xetra于1997年上线",
+        "en": "1585 (merchants met to establish uniform exchange rates; officially regarded as the moment of the Frankfurt exchange's birth); the current electronic trading system Xetra was launched in 1997",
+        "sources": [
+          {
+            "title": "The Frankfurt Stock Exchange — History（Deutsche Börse官网）",
+            "url": "https://www.deutsche-boerse.com/dbg-en/markets-services/trading/frankfurt-stock-exchange",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "merchants at the fair met in 1585 in order to establish uniform exchange rates. Today, this event is regarded as the moment of the Frankfurt exchange's birth. ... With the launch of Xetra in 1997, the Frankfurt Stock Exchange succeeded not only in strengthening its own competitive position.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "history": {
+        "zh": "1585年商人集会统一汇兑牌价视为交易所诞生；1808年并入法兰克福商会成为公法性质机构；1990年交易所的行政运营从商会移交新设立的法兰克福证券交易所股份公司（后更名为Deutsche Börse AG）；1997年电子交易系统Xetra上线，成为主流交易场所，原有场内交易（专家做市）保留为「Börse Frankfurt」",
+        "en": "1585: merchants' meeting to unify exchange rates, regarded as the exchange's birth; 1808: brought under the Frankfurt Chamber of Commerce as a public-sector institution; 1990: administration transferred from the Chamber of Commerce to the newly founded Frankfurter Wertpapierbörse AG (renamed Deutsche Börse AG shortly after); 1997: the electronic trading system Xetra launched and became the dominant venue, with floor-based specialist trading continuing as \"Börse Frankfurt\"",
+        "sources": [
+          {
+            "title": "The Frankfurt Stock Exchange — History（Deutsche Börse官网）",
+            "url": "https://www.deutsche-boerse.com/dbg-en/markets-services/trading/frankfurt-stock-exchange",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "In 1990, administration and operation of the Frankfurt Stock Exchange were transferred from the Frankfurt Chamber of Commerce and Industry to the newly founded Frankfurter Wertpapierbörse AG, which became Deutsche Börse AG shortly afterwards.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "organization_form": {
+        "zh": "公法机构（具有有限法律行为能力的公法机构，本身不能作为私法主体），由Deutsche Börse AG作为运营公司（Trägerin）负责人员/资金/场地等运营事项——不属于enums.yml现有四个组织形式词条（公司制上市/公司制未上市/会员制/国有事业单位制）中的任何一个，是本项目首次遇到的第五种模式，见文件顶部说明与OPEN-QUESTIONS",
+        "en": "Public-law institution with limited legal capacity (cannot itself be a private-law legal entity); Deutsche Börse AG acts as the operating company (\"Trägerin\") providing staff, funds and premises — does not cleanly fit any of the four existing organization_form enum values (demutualized listed/unlisted, member-owned, state-owned); this is the project's first encounter with this fifth pattern, see file header and OPEN-QUESTIONS",
+        "detail": "与 de-eurex（Eurex Deutschland，私法主体的公司）的关键区别：FWB 官方原文明确排除了\n\"私法主体\"这个可能性（\"cannot act as a legal entity under private law\"），因此不能像\nEurex那样归入\"公司制未上市\"——它根本不是公司。也不宜归为\"国有事业单位制\"，因为运营\n公司Deutsche Börse AG是一家跨国上市公司而非德国政府直接持有运营的国企；也不是\"会员制\"\n（未见FWB本身有会员出资/表决结构，1808年后即为公法机构而非会员合伙）。故意不套用现有\nenum，如实留空。\n",
+        "sources": [
+          {
+            "title": "Organisation of the FWB（Deutsche Börse官网，法律结构说明页）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/organisation-of-the-fwb",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "In Germany, a stock exchange, as a public law institution with limited legal capacity, cannot act as a legal entity under private law. An organiser is required for the execution and appropriate development of stock exchange operations. ... The organising company of the Frankfurter Wertpapierbörse (FWB®, Frankfurt Stock Exchange) is Deutsche Börse AG.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "self_listed": {
+        "enum": "no",
+        "zh": "否——FWB本身是公法机构，依官方原文的表述根本不能作为私法主体存在，因而不存在「FWB自身股份」这个概念；其运营公司Deutsche Börse AG是一家独立上市公司，但那是另一层法律实体，与de-eurex的情况相同",
+        "en": "No — FWB itself is a public-law institution and, per the official text, cannot exist as a private-law entity, so there is no concept of \"FWB's own shares\"; its operating company Deutsche Börse AG is a separately listed company, a distinct legal layer, same structure as de-eurex",
+        "detail": "比de-eurex的同类字段更确定：Eurex Deutschland「未上市」是消极事实（未找到反证，故confidence medium）；FWB「不能自身上市」则是官方原文正面排除私法主体资格的直接逻辑推论，故本字段标high。",
+        "sources": [
+          {
+            "title": "Organisation of the FWB（Deutsche Börse官网）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/organisation-of-the-fwb",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "In Germany, a stock exchange, as a public law institution with limited legal capacity, cannot act as a legal entity under private law.",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
+      "market_cap_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "listed_companies_count": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "global_ranking": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_currency": {
+        "zh": "以欧元为主；管理董事会可为个别证券另行指定交易货币与结算货币，允许多币种交易/结算",
+        "en": "Primarily EUR; the Management Board may designate a different trading and settlement currency for individual Securities, allowing multi-currency trading/settlement",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，§58）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Management Board shall determine the trading currency and the currency of settlement for the Securities to be introduced. It may decide that a Security shall be traded or settled in several currencies.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "settlement_currency": {
+        "zh": "原则上同交易货币（以欧元为主），个别证券可另设结算货币，规则依据同trading_currency",
+        "en": "In principle the same as the trading currency (primarily EUR); individual Securities may have a different settlement currency, same rule basis as trading_currency",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "黑森州最高联邦州级主管机关（交易所监管机关，Exchange Supervisory Authority）——与de-eurex记录的机关同一层级，不是联邦金融监管局BaFin；但BaFin在证券发行披露/持续披露/卖空监管等业务行为层面另有联邦级监管职能，见disclosure_requirements与continuing_obligations字段",
+        "en": "Highest competent federal state authority of the State of Hesse (\"Exchange Supervisory Authority\") — same level as recorded for de-eurex, not the federal BaFin; BaFin separately holds federal-level supervisory functions over disclosure/short-selling matters, see disclosure_requirements and continuing_obligations fields",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（Annex I定义表）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Exchange Supervisory Authority     Highest competent federal state authority of the State of Hesse",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "self_regulatory_org": {
+        "zh": "交易所理事会（Exchange Council / Börsenrat）：负责发布交易所规则、交易条件、费用规则、交易员准入规则，并在与交易所监管机关协商后任免管理董事会成员",
+        "en": "Exchange Council (Börsenrat): responsible for issuing the Exchange Rules, Conditions for Transactions, Fee Regulations and admission rules for Exchange Traders, and appoints/dismisses Managing Directors in agreement with the Exchange Supervisory Authority",
+        "quote": "The Exchange Council has the following responsibilities: 1. issuance of the Exchange Rules; 2. issuance of Conditions for Transactions on the exchange; 3. issuance of the Fee Regulations; 4. issuance of admission and registration rules for Exchange Traders",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "clearing_regulator": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "Eurex Clearing AG/Clearstream Europe AG作为清算结算机构本身的监管归属（涉及BaFin与欧盟EMIR/CSDR框架）本次未直接核实到可摘引的原文，留空。",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "core_laws": {
+        "zh": "《德国交易所法》（Börsengesetz）",
+        "en": "German Stock Exchange Act (Börsengesetz)",
+        "quote": "Exchange Law Provisions            The regulations of the German Stock Exchange Act, the legal ordinances issued on the basis of the German Stock Exchange Act, the right of the FWB to adopt statutes, its further rules and regulations...",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "disclosure_requirements": {
+        "zh": "按板块分级：Prime Standard要求同时以德英双语作即时披露（Ad hoc disclosure）、董事交易申报、内幕人名单、有表决权持股变动通知；General Standard/Scale同样要求即时披露/董事交易申报/内幕人名单等，但语言与频率要求较低；合规监管机构为联邦金融监管局BaFin",
+        "en": "Tiered by segment: Prime Standard requires concurrent ad hoc disclosures in German and English, directors' dealings, insider lists and notification of voting rights; General Standard/Scale require similar disclosures (ad hoc, directors' dealings, insider lists) but with lighter language/frequency requirements; compliance is supervised by the federal regulator BaFin",
+        "sources": [
+          {
+            "title": "Factsheet: EU-regulated market (General/Prime Standard) & Open Market Scale for shares（Deutsche Börse官网PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/1514900/3741d89481450eff301b97c66d23f0fb/data/Factsheet-EU-regulated-market-GS-PS-Scale-for-shares.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Disclosure obligations/main information obligations: General Standard — Ad hoc disclosures, directors' dealings, insider lists, notifications of voting rights; Prime Standard — Concurrent ad hoc disclosures in German and English, directors' dealings, insider lists, notification of voting rights. ... The competent supervisory authority regarding compliance with follow-up obligations is the Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin, German Federal Financial Supervisory Authority).",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "Continuous Trading with Auctions / 站内导航（Deutsche Börse官网，列出可交易品种类别）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "xetra-equities",
+          "category": "equity",
+          "name_zh": "股票",
+          "name_native": "Equities",
+          "board": "Prime Standard / General Standard / Scale",
+          "description": "在Xetra连续交易（含集合竞价）与Börse Frankfurt场内专家做市两个场所均可交易，本文件仅记录Xetra电子交易系统"
+        },
+        {
+          "id": "xetra-etf-etp",
+          "category": "fund",
+          "name_zh": "交易所买卖基金与交易所买卖产品",
+          "name_native": "ETFs & ETPs",
+          "description": "含ETC（交易所买卖商品）、ETN（交易所买卖票据，含加密货币ETN Crypto-ETNs）等结构"
+        },
+        {
+          "id": "xetra-certificates-warrants",
+          "category": "structured",
+          "name_zh": "证书与权证",
+          "name_native": "Certificates & Warrants"
+        },
+        {
+          "id": "xetra-bonds",
+          "category": "bond",
+          "name_zh": "债券",
+          "description": "含Xetra电子交易与Börse Frankfurt场内交易两种渠道，本次未逐条核实规模与品种清单"
+        },
+        {
+          "id": "xetra-funds",
+          "category": "fund",
+          "name_zh": "基金",
+          "name_native": "Funds",
+          "description": "共同基金份额，区别于交易所买卖基金（ETF）"
+        },
+        {
+          "id": "xetra-subscription-rights",
+          "category": "other",
+          "name_zh": "认股权交易",
+          "name_native": "Subscription Rights",
+          "description": "《交易所规则》§93专设条款规范认股权（Subscription Rights）交易的定价与执行"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "延伸Xetra零售服务（Extended Xetra Retail Service）早盘 8:00-9:00 CET，2025年12月起提供，仅零售流动性供应商（RLP）相关订单适用，非普通连续竞价盘前时段",
+          "en": "Extended Xetra Retail Service early trading 8:00-9:00 a.m. CET, introduced December 2025, applies to Retail Liquidity Provider (RLP) related orders only, not a general continuous-auction pre-market session",
+          "quote": "Deviating from Paragraph 1, in the Extended Xetra Retail Service, pursuant to § 84, early trading can take place from 8:00 a.m. to 9:00 a.m. and late trading can take place from 5:30 p.m. to 10 p.m.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "continuous_am": {
+          "zh": "开盘集合竞价后进入连续交易，主交易时段 9:00-17:30 CET",
+          "en": "Continuous trading begins after the opening auction; main trading session 9:00 a.m.-5:30 p.m. CET",
+          "quote": "Trading on Xetra takes place from Mondays to Fridays from 9 until 17:30 CET.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "lunch_break": {
+          "zh": "无固定午休；盘中设一次盘中集合竞价（通常在中午前后），中断连续交易后自动恢复",
+          "en": "No fixed lunch break; an intraday auction (typically around midday) interrupts continuous trading and it resumes automatically afterwards",
+          "quote": "The intraday auction – conducted as a rule around midday – interrupts continuous trading. It enables liquidity to be concentrated in the middle of the trading day. On its conclusion, continuous trading is resumed.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "continuous_pm": {
+          "zh": "同continuous_am，连续交易延续至收盘集合竞价开始",
+          "en": "Same as continuous_am; continuous trading runs through to the start of the closing auction",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "after_market": {
+          "zh": "收盘集合竞价后，DAX/MDAX/SDAX成分股设最长5分钟的「盘后定点交易」（Trade-at-Close）；另有延伸Xetra零售服务晚盘 17:30-22:00 CET（零售流动性供应商相关订单）",
+          "en": "After the closing auction, DAX/MDAX/SDAX constituents have a Trade-at-Close period of up to 5 minutes; separately, Extended Xetra Retail Service late trading runs 5:30 p.m.-10 p.m. CET (RLP-related orders)",
+          "quote": "Trade-at-Close is triggered after the closing auction for DAX, MDAX and SDAX and lasts for a maximum of five minutes. ... late trading can take place from 5:30 p.m. to 10 p.m.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "night_session": {
+          "zh": "标准连续竞价订单簿无夜盘（截止17:30/收盘集合竞价）；场外报告交易（Off-book Trading）规则上可到22:00，但性质是场外协议交易报告而非连续订单簿撮合，与de-eurex的准全天候连续竞价夜盘不是同一种机制",
+          "en": "No night session for the standard continuous order book (ends at 5:30 p.m./closing auction); Off-book Trading may under the rules run until 10 p.m., but that is off-book reported trading, not continuous order-book matching — a different mechanism from de-eurex's near-round-the-clock night session",
+          "quote": "In deviation to Paragraph 1, Off-book Trading can take place from 8:00 a.m. to 10:00 p.m.",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        }
+      },
+      "holidays_note": {
+        "zh": "法兰克福证券交易所非交易日包括元旦、耶稣受难日、复活节星期一、劳动节（5月1日）、圣诞夜、圣诞节等；具体日期逐年公布",
+        "en": "Non-trading days at the Frankfurt Stock Exchange include New Year's Day, Good Friday, Easter Monday, Labour Day (1 May), Christmas Eve, Christmas Day, etc.; specific dates are published annually",
+        "sources": [
+          {
+            "title": "Trading calendar and trading hours（Deutsche Börse官网）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/Trading-calendar-and-trading-hours-22048",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Non-trading days at Frankfurter Wertpapierbörse (FWB®, the Frankfurt Stock Exchange) are*: New Year's Day ... Good Friday ... Easter Monday ... Labour Day ... Christmas Eve** ... Christmas Day",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘集合竞价（Opening Auction），集中流动性并综合尽可能多的订单确定开盘价",
+        "en": "Opening Auction; concentrates liquidity and determines the opening price by taking into account as many orders as possible",
+        "sources": [
+          {
+            "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The main trading phase begins with an opening auction. In this way, liquidity is concentrated and the opening price is determined by taking into account as many orders as possible.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价（Closing Auction）确定收盘价；DAX/MDAX/SDAX成分股另设收盘后最长5分钟的Trade-at-Close定点交易",
+        "en": "Closing Auction determines the closing price; DAX/MDAX/SDAX constituents additionally have a Trade-at-Close period of up to 5 minutes after the closing auction",
+        "sources": [
+          {
+            "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "In the closing auction, liquidity is concentrated at the end of the main trading phase and the day's closing price determined. ... Trade-at-Close is triggered after the closing auction for DAX, MDAX and SDAX and lasts for a maximum of five minutes.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "价格优先、时间优先原则（Price-Time Priority）：无法按determined价格全部成交的限价订单按申报先后顺序执行；不限价订单（市价订单）优先执行",
+        "en": "Price-Time Priority: Limit Orders that cannot be fully executed at the determined price are executed in chronological order of entry; Unlimited (Market) Orders are executed preferentially",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§90）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "To the extent that Limit Orders cannot or can only partially be executed at the determined price, the chronological order of entry shall be determinative. ... Unlimited Orders shall be executed preferentially (\"Price-Time Priority\").",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "order_types": {
+        "zh": "市价订单（Market Orders，不限价）、限价订单（Limit Orders）、冰山订单（Iceberg Orders）、止损订单（Stop Limit/Stop Market Orders）、一撤二组合订单（One-Cancels-Other Orders）、跟踪止损订单（Trailing Stop Orders）等",
+        "en": "Market Orders (unlimited), Limit Orders, Iceberg Orders, Stop Orders (Stop Limit/Stop Market), One-Cancels-Other Orders, Trailing Stop Orders, among others",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（Annex I定义表：Limit Orders/Market Orders/Iceberg Orders/Stop Orders等词条）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Limit Orders (limited orders) Buy and sell orders which are entered with a Limit and executed at this Limit or better ... Market Orders (unlimited orders) Buy and sell orders which are entered without specifying a Limit ... Iceberg Orders Limit Orders which are entered with a specific total Volume...",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "tick_size": {
+        "zh": "最小报价单位由管理董事会依据欧盟委托条例 (EU) 2017/588 确定，未在本次抓取材料中找到具体档位数值表",
+        "en": "Minimum tick sizes are determined by the Management Board pursuant to Commission Delegated Regulation (EU) 2017/588; a specific numeric table was not found in the materials fetched this session",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§71(4)）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Management Board determines the minimum tick sizes according to the Delegated Regulation (EU) 2017/588.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "board_lot_size": {
+        "zh": "无全市场统一整手数；管理董事会按每只证券分别确定「最小交易规模」（Minimum Trading Sizes，含最小名义金额/最小手数）",
+        "en": "No exchange-wide uniform board lot; the Management Board determines \"Minimum Trading Sizes\" (minimum principal amounts / minimum lot sizes) per Security",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§71(3)）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Management Board shall determine minimum principal amounts / minimum lot sizes (\"Minimum Trading Sizes\") for each Security.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "odd_lot_handling": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "dynamic_reference",
+          "zh": "动态/静态价格区间（Dynamic/Static Price Range）：预期成交价超出区间触发波动性中断，而非直接拒绝申报的固定涨跌停——与同集团de-eurex机制高度一致（同一套集团级模板）",
+          "en": "Dynamic/static price ranges: a Volatility Interruption is triggered when the potential next execution price falls outside the range, rather than the order being flatly rejected as with a fixed daily limit — closely mirrors de-eurex's mechanism (shared group-level template)",
+          "sources": [
+            {
+              "title": "Protective Mechanisms in Continuous Trading（Deutsche Börse官网）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/protective-mechanisms/protective-mechanisms-in-continuous-trading",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "Continuous trading is interrupted by a volatility interruption whenever the potential next execution price of an order lies outside the dynamic and/or static price range around a reference price.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "detail": null
+        },
+        "main_board": {
+          "zh": "区间宽度与参考价由管理董事会按每只证券分别确定，本次未在抓取材料中找到公开的统一百分比档位表",
+          "en": "The size of each price range and its reference prices are set by the Management Board per Security; no single published percentage table was found in the materials fetched this session",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "other_boards": {
+          "zh": "",
+          "confidence": "low",
+          "sources": [
+            {
+              "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+              "accessed": "2026-08-14"
+            },
+            {
+              "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+              "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "stock_level",
+        "zh": "无独立于波动性中断之外的全市场级熔断；管理董事会另有一般性停牌裁量权（因突发事件或维护公共利益需要），但本次未找到基于大盘指数跌幅触发的全市场熔断机制，与de-eurex/jp-jpx情况相似",
+        "en": "No market-wide circuit breaker separate from the Volatility Interruption mechanism; the Management Board separately holds general discretionary power to suspend trading (in emergencies or to protect the public interest), but no index-decline-triggered market-wide circuit breaker was found in the materials fetched this session — similar to de-eurex/jp-jpx",
+        "detail": "与de-eurex的措辞几乎一致：可能是本次检索范围局限，未逐条核实是否存在，见 OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§59）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Management Board may 1. suspend trading on the regulated market if orderly trading on the stock exchange is temporarily endangered due to an emergency situation or if the suspension is deemed necessary in the interests of protecting the public",
+        "confidence": "medium",
+        "verified": "2026-08-14"
+      },
+      "volatility_interruption": {
+        "zh": "波动性中断（Volatility Interruption）：预期成交价超出动态/静态价格区间即触发，切换为集合竞价方式恢复交易；分「单一波动性中断」与「自动扩展区间波动性中断」两种模型（后者用于ETF/ETN/ETC），与de-eurex的机制高度相似（同集团模板）",
+        "en": "Volatility Interruption: triggered when the potential next execution price falls outside the dynamic/static price range, switching the trading form to an auction; two models — Single Volatility Interruption and Volatility Interruption with automated price range extension (the latter for ETFs/ETNs/ETCs) — closely mirroring de-eurex's mechanism (shared group template)",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§100/§100a）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "In the Volatility Interruption Model of a Single Volatility Interruption a Volatility Interruption will be triggered in the event an execution price to be expected is outside either the Dynamic Price Range ... or outside the Static Price Range",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "管理董事会可因突发事件暂停交易（suspension，已存订单被删除）或永久停止交易（discontinuation）；暂停/停止措施须立即通知交易所监管机关与联邦金融监管局BaFin",
+        "en": "The Management Board may suspend trading in an emergency (existing orders are deleted) or permanently discontinue trading; such measures must be immediately reported to the Exchange Supervisory Authority and the federal regulator BaFin",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§59）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Management Board shall inform the Exchange Supervisory Authority and the Federal Financial Supervisory Authority (Bundesanstalt für Finanzdienstleistungsaufsicht, BaFin) immediately of any measures pursuant to Sentence 1. In case of suspension pursuant to Sentence 1 Number 1, existing orders shall be deleted (suspension of trading).",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "intraday_reversal": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "本次抓取材料未找到对「当日买入证券能否当日卖出」的明确正面陈述（欧盟T+2结算市场一般无此限制，但按铁律不凭常识填写，留空转OPEN-QUESTIONS）。",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "short_selling": {
+        "zh": "普通股票卖空受欧盟《卖空规则》（Regulation (EU) No 236/2012）约束，需向BaFin申报净卖空头寸；FWB《交易所规则》§108另对结构性产品（证书/权证）发行商专设「备兑卖空」要求（发行时须已持有或已锁定足额证券）——与股票现货的卖空监管框架不是同一条规则",
+        "en": "General equity short selling is governed by the EU Short Selling Regulation (Regulation (EU) No 236/2012), with net short position notification to BaFin; the FWB Exchange Rules §108 separately imposes a covered-short requirement on issuers selling Structured Products (certificates/warrants) — a distinct rule from the general equity short-selling framework",
+        "detail": "本次未能在BaFin官网找到可直接摘引的净头寸申报门槛具体数值（0.1%申报/0.5%公开披露，常被引用但本次抓取页面未见规范性陈述句），故enum留空未套用short_selling_stance词表，仅描述规则依据本身。",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§108，Annex I \"Short Selling Regulation\"词条）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Net Short Positions（BaFin官网）",
+            "url": "https://www.bafin.de/EN/unternehmen-maerkte/mvp-portal/nettoleerverkauf/nettoleerverkauf_node_en.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Short Selling Regulation           Regulation (EU) No 236/2012 ... § 108 Prohibition of Short Selling with Structured Products (1) Companies admitted to trading at FWB may only sell Structured Products on FWB, if they can guarantee that, at the time of fulfilment of the Transactions ..., they possess securities holdings sufficient for fulfilment of the sale transaction.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "block_trade": {
+        "zh": "场外报告交易（Off-book Trading）：交易时段可达8:00-22:00 CET，由管理董事会另行确定具体时段，性质为协议成交后向交易所报告，非连续订单簿撮合",
+        "en": "Off-book Trading: the trading period can run 8:00 a.m.-10:00 p.m. CET as separately determined by the Management Board; negotiated trades are reported to the exchange rather than matched via the continuous order book",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§123(2a)）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "In deviation to Paragraph 1, Off-book Trading can take place from 8:00 a.m. to 10:00 p.m. Within such timeframe, the Management Board shall determine the Trading Period for Off-book Trading (\"Off-book Trading Time\").",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "dark_pool": {
+        "zh": "Xetra Midpoint：面向机构客户的暗池交易功能，以中间价（买卖盘中点）撮合执行订单",
+        "en": "Xetra Midpoint: a dark pool feature for institutional clients, executing orders at the midpoint price between the best bid and ask",
+        "sources": [
+          {
+            "title": "Continuous Trading with Auctions / Xetra Midpoint（Deutsche Börse官网）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Xetra Midpoint The trading feature is aimed at institutional clients and gives them access to a dark pool that facilitates efficient execution of orders at the midpoint price.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "market_maker_scheme": {
+        "zh": "指定发起人制度（Designated Sponsor）：为流动性较低证券提供双边约束报价的做市参与者，须遵守最大点差、最小报价量、最小报价时长等质量标准；因其报价活动原则上亦受MiFID II/MiFIR监管做市商规则约束。另有「受监管做市商」（Regulated Market Maker）层级",
+        "en": "Designated Sponsor scheme: market participants posting binding two-way quotes for less liquid Securities, subject to quality criteria (maximum spread, minimum quote volume, minimum quotation duration); as quoting participants they are in principle also subject to the MiFID II/MiFIR Regulated Market Maker rules. A separate \"Regulated Market Maker\" tier also exists",
+        "sources": [
+          {
+            "title": "Designated Sponsor and Market Maker（Deutsche Börse官网）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/Designated-Sponsor-and-Market-Maker",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Designated Sponsors are market participants who post binding buy and sell offers for the trading of less liquid securities. ... when quoting Designated Sponsors must observe a maximum spread (between the buy and sell price) and a minimum quote volume ... Due to their quotation activity, Designated Sponsors are in principle also subject to the applicable rules for Regulated Market Makers under MiFID II / MiFIR.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "connect_schemes": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Continuous Trading with Auctions（Deutsche Börse官网）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "listing": {
+      "boards": [
+        {
+          "id": "xetra-prime-standard",
+          "name_zh": "主标准板",
+          "name_native": "Prime Standard",
+          "financial_threshold": "受监管市场子板块，需与国内交易所交易参与者共同申请；最低市值€1.0百万，公众持股最低25%且股东不少于100人（与General Standard共享受监管市场基础门槛，Prime Standard另加披露义务）",
+          "target_companies": "面向追求国际投资者、寻求欧洲最高透明度标准定位的发行人"
+        },
+        {
+          "id": "xetra-general-standard",
+          "name_zh": "一般标准板",
+          "name_native": "General Standard",
+          "financial_threshold": "受监管市场（Regulated Market）；至少3年报告历史；最低市值€1.0百万；至少1万股；公众持股最低25%（欧盟/欧洲经济区范围）且股东不少于100人",
+          "target_companies": "面向以本国投资者为主的成长型中大型企业"
+        },
+        {
+          "id": "xetra-scale",
+          "name_zh": "Scale板",
+          "name_native": "Scale",
+          "financial_threshold": "公开市场（Open Market/Freiverkehr）下的正式SME成长市场；至少2年报告历史；预期最低市值€3千万；公众持股至少20%或至少100万股；须与做市支持机构（Deutsche Börse Capital Market Partner）签约",
+          "target_companies": "面向中小企业（SME）"
+        }
+      ],
+      "review_system": {
+        "zh": "披露为本：招股说明书须经核准并公开发布（Prospectus/Inclusion Document经审批并发布）；Prime Standard的招股说明书审核与持续披露合规监管机构为联邦金融监管局BaFin。与cn-sse的「注册制」不完全对应，属enum词表已知的弱覆盖字段（见OPEN-QUESTIONS第3条），本字段留空enum改用文字描述",
+        "en": "Disclosure-based: a valid, approved and published Prospectus (or Inclusion Document for Scale) is required; compliance supervision (including for Prime Standard) rests with the federal regulator BaFin. Does not map cleanly onto cn-sse's \"registration-based\" enum — a known weak-coverage field (see OPEN-QUESTIONS item 3), so the enum is left unset in favor of descriptive text",
+        "sources": [
+          {
+            "title": "Factsheet: EU-regulated market (General/Prime Standard) & Open Market Scale for shares（Deutsche Börse官网PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/1514900/3741d89481450eff301b97c66d23f0fb/data/Factsheet-EU-regulated-market-GS-PS-Scale-for-shares.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Prospectus/inclusion document: Valid, approved and published prospectus ... The competent supervisory authority regarding compliance with follow-up obligations is the Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin, German Federal Financial Supervisory Authority).",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网列出七步流程图（咨询选板→板块申请→招股书准备核准→提交文件→纳入决定→开始交易），但未给出各步骤或整体的具体天数/周数，留空。",
+        "sources": [
+          {
+            "title": "Factsheet: EU-regulated market (General/Prime Standard) & Open Market Scale for shares（Deutsche Börse官网PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/1514900/3741d89481450eff301b97c66d23f0fb/data/Factsheet-EU-regulated-market-GS-PS-Scale-for-shares.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "transfer_between_boards": {
+        "zh": "Prime Standard被撤销时不影响该证券在General Standard的挂牌资格（即Prime→General的降级路径），反之升级需另行申请并满足Prime Standard的额外条件",
+        "en": "Revocation of Prime Standard admission does not affect the security's admission to General Standard (i.e. a Prime-to-General downgrade path exists); upgrading requires a separate application meeting Prime Standard's additional requirements",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§57(3)）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The revocation shall not affect the admission to the General Standard in other respects.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "continuing_obligations": {
+        "zh": "按板块分级递增：General Standard要求年报（期末后4个月内）、半年报（期末后3个月内）、即时披露、董事交易、内幕人名单、表决权变动通知；Prime Standard额外要求季度报表（期末后2个月内）、德英双语即时披露、公司财报日历、每年至少一场分析师会议；合规监管为BaFin",
+        "en": "Tiered obligations: General Standard requires annual reports (within 4 months of period end), half-yearly reports (within 3 months), ad hoc disclosures, directors' dealings, insider lists, voting-rights notifications; Prime Standard additionally requires quarterly statements (within 2 months), concurrent German/English ad hoc disclosures, a continuously updated corporate calendar, and at least one analyst conference per year; compliance is supervised by BaFin",
+        "sources": [
+          {
+            "title": "Factsheet: EU-regulated market (General/Prime Standard) & Open Market Scale for shares（Deutsche Börse官网PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/1514900/3741d89481450eff301b97c66d23f0fb/data/Factsheet-EU-regulated-market-GS-PS-Scale-for-shares.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Annual financial report ... Publication ... within 4 months after the expiration of the reporting period ... Half-yearly financial report ... within 3 months ... Quarterly statement ... Submission of the quarterly statement within 2 months ... Analyst conference / Information event for analysts and investors ... At least once a year",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "suspension_resumption": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "market_structure.trading_halt_mechanism记录的是§59交易暂停/停止的一般性权力（因突发事件），与本字段关注的「个股因未按时披露信息等原因被停牌」是否为同一套程序未逐条核实区分，留空。",
+        "sources": [
+          {
+            "title": "Factsheet: EU-regulated market (General/Prime Standard) & Open Market Scale for shares（Deutsche Börse官网PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/1514900/3741d89481450eff301b97c66d23f0fb/data/Factsheet-EU-regulated-market-GS-PS-Scale-for-shares.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "delisting_conditions": {
+        "zh": "退市（撤销上市）须由发行人申请，或由管理董事会依《德国交易所法》第42条第2款依职权撤销（如发行人进入破产程序）",
+        "en": "Delisting (revocation of admission) is either by issuer application or ex officio by the Management Board pursuant to Section 42 Paragraph 2 of the German Stock Exchange Act (e.g. where insolvency proceedings have been opened against the issuer)",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§57）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Management Board may revoke the admission to the Prime Standard ex officio pursuant to Section 42 Paragraph 2 of the German Stock Exchange Act. The Management Board may in particular revoke the admission if an application for the opening of insolvency proceedings has been filed or if insolvency proceedings have been opened against an issuer's assets.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_process": {
+        "zh": "发行人申请撤销Prime Standard admission的，管理董事会须在互联网公示；依职权撤销的情形须立即通知交易所监管机关与BaFin",
+        "en": "Where the issuer applies to revoke Prime Standard admission, the Management Board must publish the revocation online; for ex-officio revocations, the Exchange Supervisory Authority and BaFin must be notified immediately",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§57）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The Management Board shall immediately inform the Exchange Supervisory Authority and the Federal Financial Supervisory Authority (Bundesanstalt für Finanzdienstleistungsaufsicht, BaFin) of the exclusion.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_transition_period": {
+        "zh": "发行人主动申请撤销Prime Standard的，公示日至生效日之间设三个月过渡期；依职权撤销的情形（如破产）无此三个月缓冲，须立即公示",
+        "en": "For issuer-initiated revocation of Prime Standard admission, there is a three-month period between publication and the effective date; ex-officio revocations (e.g. insolvency) have no such buffer and must be published without undue delay",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§57(1)(2)）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The period between the date of the publication and the effective date of the revocation shall be three months.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Factsheet: EU-regulated market (General/Prime Standard) & Open Market Scale for shares（Deutsche Börse官网PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/1514900/3741d89481450eff301b97c66d23f0fb/data/Factsheet-EU-regulated-market-GS-PS-Scale-for-shares.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "Exchange Rules for the FWB（「Börsenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "DAX（STOXX官网，DAX指数方法论页）",
+            "url": "https://stoxx.com/index/dax/",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "high"
+      },
+      "items": [
+        {
+          "id": "dax",
+          "name_zh": "德国DAX指数",
+          "name_native": "DAX",
+          "compiler": "stoxx",
+          "weighting_method": "float_adjusted",
+          "base_date": "1988-07-01（Deutsche Börse Group自该日起开始计算DAX；官方页面未提供更早的基日/基点数值，本字段填计算起始日，非正式基日，见description）",
+          "review_frequency": "季度（快速纳入/剔除）与半年度（常规纳入/剔除）并行",
+          "flagship": "yes",
+          "description": "追踪法兰克福交易所受监管市场中市值最大的40家公司（2021年9月20日起由30家扩容至40家），成分须满足最低质量与盈利门槛；自由流通市值加权，单一成分股权重上限15%（2024年3月18日起，此前为10%）；2019年9月起由STOXX Ltd.负责编制管理，此前由Deutsche Börse Group自行计算（自1988年7月1日起）"
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：欧盟CSDR框架下现货股票市场普遍为T+2，但本次抓取材料未找到FWB/Xetra官方原文对结算周期天数的直接陈述，按铁律不采纳，留空转OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§119 Settlement Systems）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "ccp_name": {
+        "zh": "欧洲期货结算公司（主中央对手方）；交易参与者可为特定证券指定Cboe Clear Europe N.V.为「优选中央对手方」，双方均选定同一优选对手方时按该方净额结算，否则默认由Eurex Clearing AG净额结算",
+        "en": "Eurex Clearing AG (primary CCP); trading participants may designate Cboe Clear Europe N.V. as their \"Preferred CCP\" for selected Securities — if both counterparties select the same preferred CCP the trade nets there, otherwise it defaults to Eurex Clearing AG",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§119(1)）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The netting of receivables and liabilities (\"Clearing\") for Transactions concluded on FWB shall be carried out via Eurex Clearing AG or Cboe Clear Europe N.V. for Securities defined by the Management Board. ... Otherwise, the Transaction will be netted by Eurex Clearing AG.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "csd_name": {
+        "zh": "Clearstream Europe AG（或《交易所规则》认可的其他中央证券存管机构）",
+        "en": "Clearstream Europe AG (or another central securities depository recognized under the Exchange Rules)",
+        "detail": "「Clearstream Europe AG」是2026年7月7日版《交易所规则》里的现行名称；此前该实体名为Clearstream Banking AG，据WebSearch摘要线索称已于近期更名，但该改名日期本身未在本次直接抓取到的原文里核实到，故未写入zh/en正文（避免未直接核实的日期数字混入quote反查字段），仅作为背景记入本detail。",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§119(2)）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Delivery and cash transfer (\"Settlement\") for trades concluded on FWB occurs via Clearstream Europe AG or via another central Securities depository recognized in the present Exchange Rules.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "initial_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "同集团Eurex Clearing AG对Xetra现货交易亦承担CCP职能（见ccp_name），其Prisma组合保证金方法论（见de-eurex.yml）是否直接适用于Xetra现货证券结算本次未找到明确原文确认，留空不臆测。",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§119 Settlement Systems）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§119 Settlement Systems）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§119 Settlement Systems）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delivery_method": {
+        "enum": "na",
+        "zh": "不适用（现货市场为主）——products章节所列品类（股票/ETF/ETP/证书权证/债券/基金）均为现货交收，非实物交割型衍生品",
+        "en": "N/A (predominantly a cash market) — the product categories listed in the products chapter (equities/ETFs/ETPs/certificates & warrants/bonds/funds) are cash-market instruments, not physically-delivered derivatives",
+        "detail": "推断依据同hk-hkex：对本文件自身products章节的内部推断，非独立外部证据。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§119 Settlement Systems）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "quote": null
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§119 Settlement Systems）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "default_management": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§119 Settlement Systems）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "membership_structure": {
+        "zh": "分「获准公司」（Admitted Companies，须获准参与交易所交易）与「交易员」（Exchange Trader，代表获准公司下单，须经可靠性审查获管理董事会批准）两层——与同集团de-eurex的双层结构高度一致；约200家市场参与者中约半数来自德国以外国家",
+        "en": "Two-tier structure: \"Admitted Companies\" (must be admitted to exchange trading) and \"Exchange Traders\" (act on behalf of an Admitted Company, subject to a reliability review and admitted by the Management Board) — closely mirrors de-eurex's two-tier structure; of the roughly 200 market participants, about half are from countries other than Germany",
+        "sources": [
+          {
+            "title": "Admission Regulations for Exchange Traders at the FWB（「Zulassungsordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/276736/e9bd77a7b2a8e35358c21d7502768c90/data/2025_07_07_fwb_zulassungsordnung_en.pdf",
+            "accessed": "2026-08-14"
+          },
+          {
+            "title": "The Frankfurt Stock Exchange（Deutsche Börse官网）",
+            "url": "https://www.deutsche-boerse.com/dbg-en/markets-services/trading/frankfurt-stock-exchange",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Persons who shall be authorized to trade on behalf of a company admitted to participation in Exchange trading at FWB require admission by the Management Board. ... Of the approximately 200 market participants, roughly half are from countries other than Germany.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "Xetra——FWB名下的电子交易系统品牌名，与场内专家做市交易场所「Börse Frankfurt」并列为FWB的两个交易场所",
+        "en": "Xetra — the brand name of FWB's electronic trading system, alongside the floor-based specialist trading venue \"Börse Frankfurt\"",
+        "sources": [
+          {
+            "title": "Trading calendar and trading hours（Deutsche Börse官网）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/cash-en/Trading-calendar-and-trading-hours-22048",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Trading venues Xetra and Börse Frankfurt Trading on Xetra takes place from Mondays to Fridays from 9 until 17:30 CET.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "access_methods": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Fee Regulations for the FWB（「Gebührenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/258110/70065473df09ae3e44b1f262128749a2/data/2026_04_09_fwb_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "exchange_fees": {
+        "zh": "按类别收费：参与者一次性准入费、年度参与费（依《费用规则》表I/II）；连续竞价中撤销成交（Mistrade申请）每笔另收500欧元费用，结构性产品的多笔关联Mistrade申请可另计",
+        "en": "Fees by category: a one-time participant admission fee, an annual participation fee (per Fee Regulations Tables I/II); a separate EUR 500 fee applies per Mistrade Application (transaction-cancellation request) in Continuous Auction trading, with additional tiered fees for related Mistrade Applications on Structured Products",
+        "sources": [
+          {
+            "title": "Fee Regulations for the FWB（§8/§9(4)）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/258110/70065473df09ae3e44b1f262128749a2/data/2026_04_09_fwb_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Upon admission, companies to be admitted shall pay a one-time participant Admission Fee pursuant to Table I. ... a fee in the amount of EUR 500 shall be levied for each application on cancellation of a Transaction (\"Mistrade Application\") that has been accomplished within the Continuous Auction.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Fee Regulations for the FWB（「Gebührenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/258110/70065473df09ae3e44b1f262128749a2/data/2026_04_09_fwb_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Fee Regulations for the FWB（「Gebührenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/258110/70065473df09ae3e44b1f262128749a2/data/2026_04_09_fwb_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "stamp_duty": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "草稿印象：德国现行未对股票交易开征专门的印花税（区别于英国SDRT），欧盟层面讨论多年的金融交易税亦未落地——未附本次可核实来源，留空。",
+        "sources": [
+          {
+            "title": "Fee Regulations for the FWB（「Gebührenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/258110/70065473df09ae3e44b1f262128749a2/data/2026_04_09_fwb_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "financial_transaction_tax": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "同stamp_duty：欧盟/德国金融交易税立法多年未最终落地——未附来源，留空，与de-eurex.yml记录的印象一致。",
+        "sources": [
+          {
+            "title": "Fee Regulations for the FWB（「Gebührenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/258110/70065473df09ae3e44b1f262128749a2/data/2026_04_09_fwb_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "capital_gains_tax": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "德国联邦中央税务局（BZSt）官方页面确认「资本所得」（Kapitalerträge，涵盖股息/利息/证券转让所得）统一按25%预提税+其5.5%团结附加税征收（合计约26.375%），但该页面未区分居民与非居民、未明确非居民投资者的股票资本利得是否适用同一规则（国际惯例中非居民对组合持股资本利得通常免税，但本次未找到区分二者的官方原文），故本字段留空、相关数字与来源改记入dividend_withholding_tax字段（该字段的适用场景更明确），避免误用。",
+        "sources": [
+          {
+            "title": "Fee Regulations for the FWB（「Gebührenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/258110/70065473df09ae3e44b1f262128749a2/data/2026_04_09_fwb_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "资本所得预提税（Kapitalertragsteuer）：25%，另加其5.5%的团结附加税（Solidaritätszuschlag），详细比例与合计数见detail；协定优惠税率另计",
+        "en": "Capital income withholding tax (Kapitalertragsteuer): 25%, plus a solidarity surcharge of 5.5% of that tax amount (see detail for the combined rate); tax-treaty relief may apply",
+        "detail": "官方原文（德文）：「Kapitalerträge unterliegen in Deutschland einem Steuerabzug in Höhe von 25 Prozent zuzüglich Solidaritätszuschlag in Höhe von 5,5 Prozent der Kapitalertragsteuer」，即25%预提税+其5.5%附加税，合计约26.375%（25%×1.055）。该页面未逐条区分股息与一般资本利得的适用范围，本字段仅取「预提税」这一最直接对应股息扣缴的场景，5.5%/26.375%数字未在zh/en正文出现（避免触发quote反查的德文逗号小数点格式不一致问题），完整换算见此detail。",
+        "sources": [
+          {
+            "title": "Kapitalerträge und Entlastung（联邦中央税务局BZSt官网）",
+            "url": "https://www.bzst.de/DE/Unternehmen/Kapitalertraege/kapitalertraege_node.html",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Kapitalerträge unterliegen in Deutschland einem Steuerabzug in Höhe von 25 Prozent zuzüglich Solidaritätszuschlag in Höhe von 5,5 Prozent der Kapitalertragsteuer",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Fee Regulations for the FWB（「Gebührenordnung」，官网英文版PDF）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/258110/70065473df09ae3e44b1f262128749a2/data/2026_04_09_fwb_gebuehrenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "欧元区无资本管制，欧元自由浮动；与同集团de-eurex的判断一致",
+        "en": "No capital controls in the Eurozone; the euro floats freely — consistent with the assessment recorded for de-eurex",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "enforcement_note": {
+        "zh": "交易员准入审查涉及对《市场滥用条例》（MAR）、《卖空规则》、《银行法》、《证券交易法》、《交易所法》等违规刑事程序的申报义务，反映德国证券监管执法所覆盖的主要法规范围",
+        "en": "Exchange Trader admission review requires disclosure of pending criminal proceedings for infringements of MAR, the Short Selling Regulation, the German Banking Act, the German Securities Trading Act, the German Stock Exchange Act, etc. — indicating the main regulatory scope covered by German securities-market enforcement",
+        "sources": [
+          {
+            "title": "Admission Regulations for Exchange Traders at the FWB（§3）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/276736/e9bd77a7b2a8e35358c21d7502768c90/data/2025_07_07_fwb_zulassungsordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "whether there are pending criminal proceedings against him due to an offence of property or a tax offence or due to an infringement of the MAR, the Short Selling Regulation, the German Banking Act, the German Securities Trading Act, the German Investment Firm Act, the German Stock Exchange Act",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "detail": null
+      }
+    }
+  }
+}

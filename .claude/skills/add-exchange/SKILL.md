@@ -7,12 +7,29 @@ description: 给 exchange-atlas 项目新增一家交易所的数据，或补全
 
 本 skill 是 `CLAUDE.md` 「五、常用命令」与「二、防幻觉铁律」的可执行版本——**铁律的具体条文以 `CLAUDE.md` 为准，这里不重复**，只讲步骤。开始前默认你已经读过 `CLAUDE.md` 和 `PROJECT/ROADMAP.md`。
 
-本文档基于 v0.1（SSE/HKEX）与 v0.2（NYSE/JPX/Eurex）五次实操整理，步骤里标注的具体坑都是真实踩过的，不是预防性猜测。
+本文档基于 v0.1（SSE/HKEX）、v0.2（NYSE/JPX/Eurex）与 v1.0 Wave 1（8 个子代理并行跑
+us-nasdaq/cn-szse/uk-lse/de-xetra/sg-sgx/au-asx/in-nse/sa-tadawul）共十三次实操整理，步骤里
+标注的具体坑都是真实踩过的，不是预防性猜测。
 
 ## 何时用
 
 - 用户要求「加一家交易所」「填 XX 交易所的数据」
 - 用户要求「把 XX 交易所补完整」（`PROJECT/ROADMAP.md` 进度矩阵里该所某章是 🟡 或 ⬜）
+
+## 并行执行须知（仅当你是同一波多个子代理之一时适用）
+
+如果你是 orchestrator 按 [ADR-017] 派发的并行子代理之一（同一时刻还有其他子代理在跑别的交易所），
+有两条 v0.1/v0.2 单会话串行时不会遇到的坑：
+
+- **worktree 路径可能比 orchestrator 告知的路径多嵌套一层。** 如果 orchestrator 自己也在一个
+  worktree 里（如 `worktree-v1-wave1`），你的 `git worktree add` 实际落地路径会嵌套在它下面
+  （如 `.claude/worktrees/v1-wave1/.claude/worktrees/wave1-<id>`），不是干净的
+  `.claude/worktrees/wave1-<id>`。先跑 `git worktree list` 确认真实路径，再用 `EnterWorktree`
+  （传 `path`）或 `cd` 绝对路径进入，不要假设 orchestrator 给的路径字面正确。
+- **手动 curl 探测时不要用类似"/tmp/probe.html"这种通用文件名**——同一时刻其他子代理也在写
+  /tmp 下的同名文件，会互相覆盖（实测发生过：抓到的"SGX"页面内容其实是另一个子代理刚覆盖
+  进去的 NSE 页面）。改用你自己 worktree 内的路径，或者干脆跳过手动探测、直接靠 `make fetch`
+  写入 `.cache/<exchange-id>/`（这个目录在你自己的 worktree 里，天然隔离，是唯一保真的落盘凭据）。
 
 ## 步骤
 
@@ -58,6 +75,19 @@ description: 给 exchange-atlas 项目新增一家交易所的数据，或补全
 
   探测到能抓的 URL 后，**按 `PROJECT/SOURCES.md` 顶部的条目格式回写**（标题行带 `` `<exchange-id>` ``，域名行标官方/监管/第三方、语言、抓取备注、内容备注）。抓不到就如实记下试过什么方式，见第 6 步的降级方案。
 
+  **`tools/fetch.py` 的 URL 提取正则有两个已知坑，登记 URL 时要避开：**
+  1. URL 后面紧跟中文括注（如 `...pdf（HTTP 200）`）中间不能没有空格——正则只在遇到空格才
+     停止匹配，紧贴着写会把括注文字整个吃进 URL 里导致抓取失败。写法是 `<URL>（HTTP 200...）`
+     前面留一个空格。
+  2. 正则遇到半角右括号 `)` 就截断，文件名本身带 `(2)` 这类半角括号的 PDF（不罕见，官方偶尔
+     发布同名文件的修订版会加编号）必须在登记时把括号转成 `%28%29` URL 编码，否则抓到的是被
+     截断的坏链接。
+
+  另外，正则只识别完整的 `https://...` URL；如果你在抓取备注里提到一个裸域名或站内相对路径
+  （不是完整 URL，通常是反引号包起来做说明用），`fetch.py` 会直接跳过它，不会报错也不会抓——
+  这是符合预期的（避免把说明性文字误当抓取目标），但意味着"本节写了 N 条 URL"不能简单等于
+  "N 条都会被抓取"，写完之后过一眼确认真正要抓的都是完整 URL。
+
 ### 3. 抓取到 `.cache/`
 
 ```
@@ -65,6 +95,10 @@ make fetch EX=<exchange-id>
 ```
 
 这会读 `PROJECT/SOURCES.md` 里该所章节下的全部 URL，逐个 curl 到 `.cache/<exchange-id>/`。**后面填数据只能依据这些落盘的原始页，不能凭记忆**（CLAUDE.md 二 第1条）。PDF 用 `pdftotext -layout` 转纯文本再 `grep` 定位条款，比逐页看 PDF 快。
+
+如果某个官网页面导航栏特别重（几百个重复菜单项占了页面文本的大头，正文只是中间一小段，
+NSE 官网是典型例子），直接 grep 抓下来的 HTML 效率很低——先用 Python/BeautifulSoup 转纯文本、
+跳到正文标题（通常是页面 URL 对应的那个小节标题）之后再读，比对着原始 HTML 找快得多。
 
 ### 4. 建数据文件，逐章填
 
@@ -86,8 +120,26 @@ make fetch EX=<exchange-id>
      一整句描述，不是一个词组
    - 来源 URL 尽量精确到承载该事实的具体页面/PDF，不要停在网站首页（见 `SOURCES.md` 开头的说明）
    - 查不清、抓不到、没把握的，**`zh` 留空，`confidence: low`**，别猜（CLAUDE.md 二 第4条）——这不是失败，是诚实
+   - **章节级 `_meta.confidence`/`sources`/`verified` 会静默级联到没有自己单独设置这些字段的叶子
+     字段**（`tools/sync.py` 的 `expand_field` 回退逻辑）——v1.0 Wave 1 两个独立子代理（NSE、
+     Nasdaq）都踩到过：写了一个裸字符串/简单字段、没显式给它自己的 `confidence`，结果它继承了
+     章节顶部的 `confidence: high`，但这个字段根本没有自己的 `quote` 撑腰，`validate.py` 也查不出
+     这种情况。**只要字段没有自己的 quote，就必须显式给它单独的 `confidence`（通常是 `low`
+     或 `medium`），不要让它隐式继承章节级别的 high。**
+   - **`in_matrix: true` 的字段即使没标 `en_required`，也应该写成 `{zh, en}` 完整信封，不要写
+     裸字符串**（如 `trading_currency: "港元"`）——裸字符串在导出的 `matrix.json` 里会让 `en`
+     直接变成 `null`，`make check` 不会报错，但英文模式下这个格子会显示空白，属于人工浏览器验收
+     才能发现的静默 bug
 3. 引用的每个来源域名，如果还没在 `SOURCES.md` 登记过，回去补上（`validate.py` 会因未登记域名直接 fail）
-4. 如果某个字段甚至整个章节的设计前提对这类交易所根本不成立（如衍生品交易所没有"公司上市"概念，
+4. **两个 YAML 写法坑，v1.0 Wave 1 五个独立子代理（in-nse、au-asx、uk-lse、sa-tadawul、
+   us-nasdaq）都各自踩过至少一次，值得写数据前就留意：**
+   - 双引号包起来的 YAML 字符串里面，不要再用英文直角引号 `"..."` 做中文式引用——会被解析成
+     字符串提前结束，报错通常指向下一行而不是真正出错的那一行，很难对号入座。中文语境下的
+     引用一律用「」，本项目 `hk-hkex.yml` 已经是这个惯例。
+   - 未加引号的标量值里如果出现"英文冒号+空格"（如 `title: Article 38: Something`），YAML 会把
+     它解析成新的 mapping key，报 "mapping values are not allowed here"。整段值只要含有这种
+     冒号，就要给它套上引号。
+5. 如果某个字段甚至整个章节的设计前提对这类交易所根本不成立（如衍生品交易所没有"公司上市"概念，
    `listing` 章节整章不适用；`settlement_cycle`/`short_selling`/`intraday_reversal` 的设计假设
    都是现货股票市场的时间/借券结构），**如实留空 + 在 `detail` 里说明"设计前提不适用"，不要为了
    填满而强行套用**（比如把交易员资格考试硬填进上市审核字段）。这类发现比"查不到具体数值"更
