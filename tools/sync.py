@@ -266,6 +266,12 @@ def compute_trading_window(exchange_id, expanded_chapters):
             return ""
         return env.get("zh") or env.get("en") or ""
 
+    # 故意不把 night_session 的数字并进来取 min/max：夜盘通常与日盘不连续（如商品期货
+    # 夜盘 21:00-23:00，中间隔着日盘收盘到夜盘开盘的空档），一旦并入同一个 min/max 窗口，
+    # 会把这段空档也画成一条看似连续在交易的柱段。现有五家标杆都没有独立于日盘之外的
+    # 夜盘数据（Eurex 的 night_session 文本本身就是回指 pre_market，见该字段 detail），
+    # 这条限制尚未被触发；v1.0 若引入真正有夜盘的交易所，这里需要另外设计不相连的
+    # 第二段柱，而不是简单把 night_session 加进这个循环。
     window_hours = []
     for f in ("pre_market", "continuous_am", "continuous_pm", "after_market"):
         window_hours += _parse_hour_tokens(session_text(f))

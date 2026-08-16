@@ -51,6 +51,10 @@
 - **验收标准**：每家新交易所人工抽检 10 个字段核对 `quote` 与原始出处，通过率需 ≥95%（阈值不变，样本量比 v0.1 缩小，理由见 [ADR-017]）；未过阈值只暂停复核该家，不影响同批次其他交易所。每波结束后额外过一遍各子代理执行记录，把新教训回写 `add-exchange` skill，再开下一波。
 - **退出标准**：两波（15 家）全部完成且各自通过验收 → 总数达到 20 家；`region: mena_africa` 与 `americas` 不再是明显空白；至少新增一个"一所多国"结构样本（Euronext）供 `OPEN-QUESTIONS.md` 框架性问题第17条积累更多真实证据。
 
+### Wave 1 启动前置条件
+
+- [ ] `review_system` 矩阵列的枚举覆盖率问题需先解决——五家标杆里没有一家能被现有 registration/approval/hybrid 枚举干净覆盖（见 `PROJECT/OPEN-QUESTIONS.md` 框架性问题第3条），已定为阻塞项，不随 Wave 1 一起拖到以后，见 `PROJECT/DECISIONS.md` [ADR-018]。
+
 ### Wave 1（8 家，优先，待启动）
 
 | 交易所（草案 id） | 地区（初判，待建档时核实） | 压测点 |
