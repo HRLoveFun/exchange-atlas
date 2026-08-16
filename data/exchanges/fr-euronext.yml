@@ -426,13 +426,13 @@ market_structure:
     confidence: medium
 
   volatility_interruption:
-    zh: "预约期（Reservation period）：价格触及动态或静态区间阈值时，该品种由连续交易切换为集合竞价（Call Phase）一段预设时长，若到期时撮合价仍落在动态区间内才恢复连续交易，否则延长预约"
-    en: "Reservation period: when a price breaches the dynamic or static collar threshold, the instrument switches from continuous trading into a Call Phase for a preset duration; trading resumes only if the uncrossing price at expiry falls within the prevailing dynamic collars, otherwise the reservation is extended"
+    zh: "预约期（reservation period）：连续交易阶段理论撮合价触及适用阈值即触发预约期，至少持续3分钟；因动态区间触发的首次预约后，恢复交易有两种方式——由Euronext评估市场情况后人工设定参数，或按预约期内报价自动更新动态区间后自动撮合恢复；若自动方式仍在同方向再次触发预约，是否进一步调整区间/参考价须再经Euronext评估市场情况后决定"
+    en: "Reservation period: triggered when the theoretical matching price during continuous trading breaches the applicable thresholds, lasting at least 3 minutes; upon the first reservation caused by a dynamic collar breach, resumption may follow either a manual process (parameters set by Euronext after assessing market conditions) or an automatic process with updated dynamic collars; if the automatic process is breached again in the same direction, any further adjustment to the collars or reference price is decided by Euronext only after a fresh market assessment"
     sources:
-      - title: Trading safeguards on the Euronext markets
-        url: https://www.euronext.com/en/trading/market-quality/trading-safeguards-euronext-markets
+      - title: Notice n°4-01 Trading Manual
+        url: https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf
         accessed: 2026-08-16
-    quote: "When the interruption results from reservation, the Instrument impacted shall switch to a Call Phase for a programmed period of time and resumption shall take place only if the uncrossing price at expiration of that period falls in the prevailing dynamic collars."
+    quote: "Euronext initiates a reservation period if, during the continuous trading phase, the theoretical price at which a security can be traded breaches the applicable thresholds. The reservation period shall last at least 3 minutes. ... Upon the first reservation caused by dynamic collars breach, the attempt to resume trading may take place following two possible processes depending on the type of securities: - Manual process with parameters determined by Euronext after an assessment of market conditions; - Automatic process with updated dynamic collars using the interval for uncrossing process mentioned in the Appendix. If upon this first trading resumption attempt, the updated collars are breached in the same direction (i.e. second consecutive downwards or second consecutive upwards reservation), any decision to adjust the collars and the reference price before resuming continuous trading will be made after an assessment of market conditions."
     confidence: high
 
   trading_halt_mechanism:
