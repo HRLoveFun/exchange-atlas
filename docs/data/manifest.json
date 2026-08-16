@@ -55,6 +55,26 @@
       }
     },
     {
+      "id": "fr-euronext",
+      "name_zh": "泛欧交易所",
+      "name_native": {
+        "en": "Euronext N.V."
+      },
+      "official_languages": [
+        "en",
+        "nl",
+        "fr",
+        "pt",
+        "it",
+        "nb"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "europe",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "hk-hkex",
       "name_zh": "香港交易及结算所（简称港交所）",
       "name_native": {

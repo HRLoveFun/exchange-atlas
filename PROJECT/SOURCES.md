@@ -102,6 +102,25 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Admission Regulations for Exchange Traders（「Zulassungsordnung」，交易员准入资格，⚠️不是公司上市规则——衍生品交易所没有"公司上市"概念，这是与现货股票交易所的结构性差异，见 OPEN-QUESTIONS）PDF: https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf（HTTP 200，124KB）
   - Fee Regulations（「Gebührenordnung」）PDF: https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf（HTTP 200，95KB）
 
+### 泛欧交易所 Euronext `fr-euronext`
+- `euronext.com` | 官方 | en（官网默认英文；各地方市场页另有 fr/nl/pt/it/nb 等本地语言版本，本节只取英文版作 `source_lang: en` 的锚点） | curl + 常规 UA 全部 200，未见反爬（含多个 PDF，均可直接 curl 到） | ⚠️ **本所是本项目第一个"单一集团、多国法人实体"样本**：`Euronext`（集团整体）= `Euronext N.V.`（荷兰阿姆斯特丹注册的 naamloze vennootschap，集团控股实体，本身在 Euronext Paris 挂牌交易，代码 ENX，2025-09-22 起纳入 CAC 40 指数）+ 七个「Euronext Market Undertaking」（Euronext Amsterdam N.V. 荷兰法人、Euronext Brussels S.A./N.V. 比利时法人、Euronext Dublin/The Irish Stock Exchange plc 爱尔兰法人、Euronext Lisbon S.A. 葡萄牙法人、Euronext Paris S.A. 法国法人、Borsa Italiana 意大利法人、Oslo Børs 挪威法人），各自受本国法律与本国监管机构管辖（见 Harmonised Rulebook I Rule 1.7 Governing Law），但共享同一部《Harmonised Rulebook》（Book I）、同一交易平台 Optiq、同一中央订单簿。2025年7月新增第八个市场 Euronext Athens（收购 ATHEX），但截至本次抓取（2026-08）雅典尚未并入 Harmonised Rulebook/Optiq（计划2027-06迁移），regulated-markets 页原文明确写"Euronext Athens markets are scheduled to be integrated in the Euronext rulebooks upon the migration to Optiq (June 2027)"，故本次数据以七个已整合市场（不含雅典）为主，雅典相关事实单独注明未核实。清算方面 Euronext Clearing 是法定实体 Cassa di Compensazione e Garanzia S.p.A.（CC&G，意大利公司）的商业新名称；托管结算方面 Euronext Securities 是集团自有 CSD 网络，运营实体分布在哥本哈根/米兰/奥斯陆/波尔图四地，里斯本/米兰/奥斯陆三个市场现已用 Euronext Securities 托管结算，阿姆斯特丹/布鲁塞尔/巴黎计划2026-09起迁移过去，都柏林及迁移前的阿姆斯特丹/布鲁塞尔/巴黎具体托管机构本次未核实
+  - 首页: https://www.euronext.com/en（HTTP 200，456KB）
+  - Euronext Regulated Markets（各市场清单、Harmonised Rulebook I 最新版 PDF 直链、雅典未整合说明）: https://www.euronext.com/en/regulation/euronext-regulated-markets（HTTP 200，397KB）
+  - Regulatory Framework（分国监管机构：FSMA/BNB 比利时、ACP/AMF 法国、Central Bank of Ireland、CONSOB 意大利、Finanstilsynet 挪威、DNB/AFM 荷兰、CMVM 葡萄牙）: https://www.euronext.com/en/trading/membership/regulatory-framework（HTTP 200，397KB；⚠️ 页面法国监管机构一段仍写"Autorité de Contrôle Prudentiel (ACP)"，该机构已于2013年更名为ACPR，页面文本明显滞后未更新，引用时以 AMF 这个跨版本一致出现的证券监管机构名称为准，法国银行业监管机构名称改动不逐条核实）
+  - Trading Safeguards（动态/静态价格区间 collar 阈值：动态±5%/旗舰指数成分±3%，静态±10%/旗舰指数成分±8%）: https://www.euronext.com/en/trading/market-quality/trading-safeguards-euronext-markets（HTTP 200，402KB）
+  - Clearing 总览（Euronext Clearing = CC&G 法定实体新商业名）: https://www.euronext.com/en/clearing（HTTP 200，450KB）
+  - Choosing a Market（板块体系：Euronext regulated market 分ABC三档市值区间、Euronext Growth、Euronext Access/Access+，各自适用市场与门槛对照表）: https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market（HTTP 200，429KB）
+  - T+1 programme（当前结算周期T+2，欧盟统一定于2027-10-11起改T+1）: https://www.euronext.com/en/regulation/t1-programme（HTTP 200，434KB）
+  - Our Journey（集团历史沿革时间线2000-2025，含各并购年份原文）: https://www.euronext.com/en/about/our-journey（HTTP 200，580KB）
+  - Investor Relations Share Price（自身股价展示页，佐证self_listed）: https://www.euronext.com/en/investor-relations/share-price（HTTP 200，399KB）
+  - Trading Hours & Holidays（节假日安排逐市场对照表；⚠️本页只含节假日例外与半日交易安排，未含标准每日开收盘时刻表，标准时刻表本次未在静态可抓取页面中定位到，见 OPEN-QUESTIONS）: https://www.euronext.com/en/trading/trading-hours-holidays（HTTP 200，541KB）
+  - Fees & Charges 索引页（各类费率表PDF直链入口）: https://www.euronext.com/en/trading/fees-charges（HTTP 200）
+  - Euronext Rule Book Book I: Harmonised Rules（适用自2026-06-29版）PDF: https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf（HTTP 200，913KB；含 Rule 1.7 Governing Law 七法域分述条款、Chapter 2 Euronext Membership 会员资格条款、术语表里各 Market Undertaking 法律实体全称）
+  - Notice n°4-01 Trading Manual（生效日2025-12-08）PDF: https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf（HTTP 200，599KB；开盘/收盘集合竞价机制、连续交易撮合原则细节，不含逐市场标准时刻表）
+  - Euronext Cash Markets Trading Fee Guide（生效日2026-09-01）PDF: https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf（HTTP 200，642KB；标准股票交易费两种计价方式——按已执行订单笔数阶梯收费 + 按成交金额阶梯bps收费）
+- `live.euronext.com` | 官方（面向投资者的产品/行情子站，与 euronext.com 同集团不同子域名） | en | curl 常规 UA 200 | 用于确认旗舰指数清单（自编：AEX/CAC 40/BEL 20/ISEQ 20/PSI/OBX；FTSE MIB 由第三方 FTSE Russell 编制，未在本页出现，是唯一非自编的旗舰指数）
+  - Stock Indices: https://live.euronext.com/en/products/indices（HTTP 200，354KB）
+
 ---
 
 ## 探测记录（v0.0 可达性探针，2026-08-12）
