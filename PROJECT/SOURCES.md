@@ -102,6 +102,37 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Admission Regulations for Exchange Traders（「Zulassungsordnung」，交易员准入资格，⚠️不是公司上市规则——衍生品交易所没有"公司上市"概念，这是与现货股票交易所的结构性差异，见 OPEN-QUESTIONS）PDF: https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf（HTTP 200，124KB）
   - Fee Regulations（「Gebührenordnung」）PDF: https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf（HTTP 200，95KB）
 
+### B3 – Brasil, Bolsa, Balcão `br-b3`
+- `b3.com.br` | 官方 | pt-BR / en（官网原文是葡萄牙语，`en_us` 路径下有官方英文版，覆盖面广，多数规则/交易机制/非居民投资者页面均有对应英文版；本节 source_lang 取 en，见下方说明） | curl + 常规 UA 全部 200，未见反爬（全程无延时也未被拦，比 english.sse.com.cn/JPX 好抓得多）；PDF 用 `pdftotext -layout` 提取 | ⚠️ B3 官网英文版**没有**看到类似 SSE/JPX 那种"译本仅供参考，以原文为准"的免责声明（本次抓取页面未发现此类文字），但取源规则仍按 ADR-013："有可核实的官方中文原文就填 zh，没有就填 en"——B3 官网无中文版，故 source_lang: en，把英文版当溯源锚点，不因为找不到 zh 就退回葡萄牙语原文（葡萄牙语不是 zh/en 二选一之外的第三态，见 taxonomy.yml source_lang 字段说明）。B3 是巴西唯一的证券交易所，由 2017 年 BM&FBOVESPA 与 Cetip 合并而成（`name_native` 用此说明）；集团层面 B3 本身即为最终控股主体（B3 S.A.自身在自己的 Novo Mercado 板块挂牌，代码 B3SA3），未发现类似 NYSE Group/JPX Group 那样同集团下辖多个独立注册交易所法人实体的结构，故不设 `group_id`
+  - 首页: https://www.b3.com.br/en_us/（HTTP 200）
+  - 历史沿革（投资者关系站 History 页）: https://ri.b3.com.br/en/b3/history/（HTTP 200）
+  - Regulatory Framework – Trading（交易规则文档索引页）: https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/trading.htm（HTTP 200）
+  - Regulatory Framework – Listing（上市规则文档索引页）: https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/listing.htm（HTTP 200）
+  - Regulatory Framework – Clearing, Settlement and Risk Management（清算结算规则文档索引页）: https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/clearing-settlement-and-risk-management.htm（HTTP 200）
+  - Non-resident Investor – Operational Procedures and Regulation: https://www.b3.com.br/en_us/non-resident-investor/market-rules/operational-procedures-and-regulation.htm（HTTP 200）
+  - Non-resident Investor – Regulatory Environment: https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/regulatory-environment.htm（HTTP 200）
+  - Non-resident Investor – Trading Equities, Derivatives and Fixed Income (CMN 4.373/2014)（外资准入通道核心法规）: https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/trading-equities-derivatives-and-fixed-income-cmn-4-373-2014.htm（HTTP 200）
+  - Non-resident Investor – Taxation（外资资本利得税/股息预扣税/IOF）: https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm（HTTP 200）
+  - B3 Trading Characteristics and Rules（交易时段/最小单位/碎股市场等核心交易机制）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/b3-trading-characteristics-and-rules.htm（HTTP 200）
+  - Trading Hours – Equities（具体交易时段表，从上一条页面内"here"链接跳转定位到，非站内导航直接可达）: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/（HTTP 200）
+  - Project T+2 – Context（2019年结算周期从T+3缩短至T+2改革说明）: https://www.b3.com.br/en_us/project-t-2/context/（HTTP 200）
+  - Investor Relations – Corporate Information（B3自身作为上市公司的股票代码/板块归属，investor relations子站）: https://ri.b3.com.br/en/b3/corporate-information/（HTTP 200）
+  - Securities Lending, Equity and ETF Trades（证券借贷/融券机制页，做空机制的主要依据）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/securities-lending-equity-and-etf-trades.htm（HTTP 200）
+  - Trading Dynamics（撮合原则/订单类型）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm（HTTP 200）
+  - Circuit Breaker（熔断机制说明，Ibovespa跌幅阈值）: https://www.b3.com.br/en_us/news/circuit-breaker-8AE490CA70CB10030170CEECFCE05EAF.htm（HTTP 200）
+  - Market Maker – Regulation（做市商制度）: https://www.b3.com.br/en_us/products-and-services/trading/market-maker/join-in/regulation.htm（HTTP 200，本次抓取偶发一次超时，重试后200，非持续限流）
+  - About Listing Segments（板块体系总览：Novo Mercado / Nível 1 / Nível 2 / Bovespa Mais 等）: https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/about-listing-segments/（HTTP 200）
+  - Listing Segments – Novo Mercado（最高治理层级板块细则）: https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/novo-mercado/（HTTP 200）
+  - PUMA Trading System（交易撮合引擎，基于CME Globex技术）: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/（HTTP 200）
+  - Ibovespa（旗舰指数页）: https://www.b3.com.br/en_us/market-data-and-indices/indices/broad-indices/ibovespa.htm（HTTP 200）
+  - B3 Trading Procedures Manual（业务规程手册全文PDF，含价格限制/交易时段/订单类型等条款编号）: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf（HTTP 200，6.6MB，PDF文件名含空格已用%20编码，无括号无需%28%29）
+  - Novo Mercado Listing Regulation（Novo Mercado板块规则全文PDF，官方英文译本，标注"free translation"）: https://www.b3.com.br/data/files/43/E0/16/EF/F348F41054E072F492D828A8/SITE-NM-Listing-Regulation-2011.pdf（HTTP 200，416KB；⚠️ PDF首页自称"free translation"，与 SSE/JPX 类似的翻译免责声明，进一步佐证只把它当英文对照而非独立法律文本）
+  - Guide for Nonresident Investors（外资投资指南PDF，含CMN 4.373账户开户流程）: https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf（HTTP 200，1.7MB）
+- `www.gov.br` | 监管 | pt-BR / en | curl 常规 UA 200，未见反爬 | 巴西证券监督管理机构 Comissão de Valores Mobiliários（CVM，证券委员会）在联合政府门户 gov.br 下的英文栏目，B3 的政府监管机构；本条目仅登记 `www.gov.br` 而非更宽泛的 `gov.br`，因为实际抓取到的 URL netloc 就是 www 子域
+  - CVM 英文首页: https://www.gov.br/cvm/en（HTTP 200）
+- `bsmsupervisao.com.br` | 官方（B3自律监管子机构） | pt-BR / en | curl 常规 UA 200 | BSM Supervisão de Mercados，2007年由B3（原BM&FBOVESPA）设立的自律组织，负责对B3管理的市场及参与者进行一线监督、稽查与纪律处分，受CVM监督
+  - 英文首页: https://www.bsmsupervisao.com.br/en/us/home（HTTP 200）
+
 ---
 
 ## 探测记录（v0.0 可达性探针，2026-08-12）

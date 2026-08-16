@@ -1,6 +1,21 @@
 {
   "exchanges": [
     {
+      "id": "br-b3",
+      "name_zh": "巴西B3交易所",
+      "name_native": {
+        "pt": "B3 S.A. – Brasil, Bolsa, Balcão"
+      },
+      "official_languages": [
+        "pt-BR"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "americas",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "cn-sse",
       "name_zh": "上海证券交易所",
       "name_native": {

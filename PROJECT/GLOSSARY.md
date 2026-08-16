@@ -31,3 +31,5 @@
 | 股息预扣税 | Dividend Withholding Tax |  |  |
 | 印花税 | Stamp Duty |  |  |
 | 特别气配 | Special Quote | ja: 特別気配 | 东证机制，申报价超出值幅制限时不成交、改为显示指示性价格，是值幅制限的执行方式而非独立于价格限制之外的冷静期，与港交所VCM那种独立机制不同类 |
+| 交易隧道 | Trading Tunnel | pt: Túnel de negociação | B3机制，以最新成交价/最优报价动态计算基准价（PBT）、再加减法或乘除法算出带宽， 用于拒绝申报（rejection tunnel）、自动转入集合竞价（auction tunnel）与拍卖保护 （protection tunnel）三种用途；区别于固定百分比涨跌停（价涨跌幅限制）、日本式阶梯 绝对值幅，也不同于美股LULD以过去5分钟均价为基准 |
+| 平仓风险评估法 | Closeout Risk Evaluation (CORE) | pt: CORE | B3计算担保品/保证金需求的风险方法论，模拟违约后平仓过程中的现金流评估风险， 与Eurex Prisma同属"按方法论命名的保证金计算体系"，但计算逻辑不同，不与 portfolio-margining一条合并 |
