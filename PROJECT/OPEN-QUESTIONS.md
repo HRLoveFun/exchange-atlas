@@ -8,7 +8,7 @@
 
 1. **交易所集团 vs 单个交易所的粒度** — CME 集团下辖 CBOT/NYMEX/COMEX，Euronext 下辖 7 个国家市场。当前方案：数据实体是「交易所/市场」本身，用 `group_id` 关联集团，矩阵未来可折叠成集团视图。**v0.2 填 NYSE 时首次真正用到**：`us-nyse.yml` 标了 `group_id: nyse-group`，因为 NYSE、NYSE American、NYSE Arca、NYSE National、NYSE Texas 是同集团下各自独立注册的 SEC 交易所实体（不是同一实体内部的板块）——这直接影响了 `listing.boards` 怎么填：不能把 NYSE American/Arca 当成 `us-nyse` 的板块塞进 `boards` 列表（那样会歪曲"哪个实体拥有哪条规则"这个事实），只能靠 `group_id` 表达"同集团、不同实体"的关系，`boards` 留空。矩阵折叠视图本身仍未实现（只是数据字段填了），等 CME 系交易所加入时可以再压测一次多层级集团（CME 是单一交易所法人下辖多个产品条线，与 NYSE Group「多个独立法人共享集团」不是同一种集团结构，两种情况 `group_id` 字段够不够表达还需要再观察）。
 2. ~~schema 会不会被列表型章节撑破~~ — **已验证，够用。** 上交所产品体系（6条）、指数体系（2条）用轻量列表条目填起来很顺，没有感到结构性约束。列表项不需要逐条 quote/confidence 这个简化是对的，继续沿用。
-3. **受控词表（enums.yml）够不够用** — 标杆交易所的机制差异能否被现有枚举值（如 `price_limit_type`: none/percentage_band/absolute_tiered/dynamic_reference）概括，还是每家都要新增例外值。如果某个字段的例外多到枚举失去意义，结论应该是这个字段不适合进矩阵（改 `in_matrix: false`），而不是无限加枚举值。**`review_system` 已经积累了八个互不相同的真实案例**：上交所"注册制"（`registration`枚举）、港交所"披露为本但上市委员会有实质审核权"（未套用枚举，直接留 zh 文字说明）、NYSE"披露为本+非常具体的量化规则编号（如 Rule 102.01C(I)）+ 广泛自由裁量权"（同样未套枚举）、JPX"披露为本，交易所审核+重大事项另须向金融厅报告"（同样未套枚举）、NSE"披露为本+一组明确的量化财务门槛（实收股本/净资产/市值/营收）+交易所对申请的自由裁量驳回权（含'任何交易所认为合适的理由'这种兜底条款）"（v1.0 Wave 1 新增，同样未套枚举）、**LSE"披露为本+保荐人（Sponsor）在特定触发事件下向监管者背书，且与AIM市场另一套持续性质的Nominated Adviser把关机制并存"**（`uk-lse.yml`，v1.0 Wave 1 新增，同样未套枚举）、**ASX"披露为本，满足量化门槛（利润/资产测试二选一）+股东分布/自由流通量要求即可申请，交易所对适合性另有实质审核权"**（`au-asx.yml`，v1.0 Wave 1 新增，同样未套枚举）、**Nasdaq"披露为本，按三档市场层级分档的量化标准+统一公司治理标准"**（`us-nasdaq.yml`，v1.0 Wave 1 新增，同样未套枚举，与NYSE同属"美国式披露监管"但门槛结构不同）——八家没有一家能被现有 `review_system` 枚举值干净覆盖，这个字段目前实质上已经退化成自由文本描述而非可比较的枚举，值得考虑要么扩充枚举维度（如拆成"审核严格度"+"规则形式化程度"两个正交维度），要么承认这个字段不适合进矩阵横向比较，只适合放在档案页。
+3. **受控词表（enums.yml）够不够用** — 标杆交易所的机制差异能否被现有枚举值（如 `price_limit_type`: none/percentage_band/absolute_tiered/dynamic_reference）概括，还是每家都要新增例外值。如果某个字段的例外多到枚举失去意义，结论应该是这个字段不适合进矩阵（改 `in_matrix: false`），而不是无限加枚举值。**`review_system` 已经积累了九个互不相同的真实案例**：上交所"注册制"（`registration`枚举）、港交所"披露为本但上市委员会有实质审核权"（未套用枚举，直接留 zh 文字说明）、NYSE"披露为本+非常具体的量化规则编号（如 Rule 102.01C(I)）+ 广泛自由裁量权"（同样未套枚举）、JPX"披露为本，交易所审核+重大事项另须向金融厅报告"（同样未套枚举）、NSE"披露为本+一组明确的量化财务门槛（实收股本/净资产/市值/营收）+交易所对申请的自由裁量驳回权（含'任何交易所认为合适的理由'这种兜底条款）"（v1.0 Wave 1 新增，同样未套枚举）、**LSE"披露为本+保荐人（Sponsor）在特定触发事件下向监管者背书，且与AIM市场另一套持续性质的Nominated Adviser把关机制并存"**（`uk-lse.yml`，v1.0 Wave 1 新增，同样未套枚举）、**ASX"披露为本，满足量化门槛（利润/资产测试二选一）+股东分布/自由流通量要求即可申请，交易所对适合性另有实质审核权"**（`au-asx.yml`，v1.0 Wave 1 新增，同样未套枚举）、**Nasdaq"披露为本，按三档市场层级分档的量化标准+统一公司治理标准"**（`us-nasdaq.yml`，v1.0 Wave 1 新增，同样未套枚举，与NYSE同属"美国式披露监管"但门槛结构不同）、**KRX"交易所自身按量化门槛（经营年限/股本/股权分散/财务表现/审计意见等）独立审查上市资格，与之并行、证券发行本身另受FSC下的证券注册制度约束——上市审核（交易所）与发行注册（FSC）是两套并行制度"**（`kr-krx.yml`，v1.0 Wave 2 新增，同样未套枚举）——九家没有一家能被现有 `review_system` 枚举值干净覆盖，这个字段目前实质上已经退化成自由文本描述而非可比较的枚举，值得考虑要么扩充枚举维度（如拆成"审核严格度"+"规则形式化程度"两个正交维度），要么承认这个字段不适合进矩阵横向比较，只适合放在档案页。
 4. **`quote` 的粒度与成本——填 SSE 后确认这是真实瓶颈。** 十一章约 80 个可填的叶子字段（不含空章节骨架），实际只有约 20 个做到了 `confidence: high`+完整 quote；其余约 15 个因为"没有当次抓取到的原文可摘录"被迫清空转悬案（监管/参与者/风险等章节尤其明显）。这不是偷懒，是铁律生效的结果——但说明 v0.2 铺开更多交易所时，**每家所投入的检索时间要比"填一个字段"直觉上预期的更多**，排期要按此调整。
 5. **`taxonomy.yml` 单文件是否会失控** — 十一章 + 矩阵定义已经不短，未来加字段、加章节细分（如市场结构章节的产品适用范围差异）可能让单文件难以维护，或需要按章拆分成 `schema/chapters/*.yml` 由 sync.py 汇总。
 6. **「第三方来源 confidence 上限 medium」这条铁律目前没有被 `validate.py` 机器强制**，只写在 CLAUDE.md/SOURCES.md 里靠自觉遵守。填 SSE 时人工审计出 3 处字段引用第三方镜像（mgzq.com）却误标 `high`，已手工改正，但下次很可能再犯——这正是 CLAUDE.md 6.1 一直在提醒的「文档职责边界靠自觉 vs 靠机器」的活生生案例。v0.2 前应该给 `validate.py` 加一条：按 SOURCES.md 里登记的「官方/监管/第三方」标签反查每条 `sources[].url`，`confidence: high` 但来源标了「第三方」就直接 fail。
@@ -51,6 +51,7 @@
 - **`sa-tadawul.regulation.foreign_ownership_limit`（10%单一/49%合计外资持股上限、2026年2月起取消QFI制度）唯一来源是第三方律所客户简报（Latham & Watkins），未找到CMA官方规则原文或官方公告。** 本次 WebSearch 配额已用尽未能继续检索，下次应优先在 `cma.gov.sa` 站内找《外资证券投资规则》(Rules for Foreign Investment in Securities) 修订版原文或2026年1月6日的官方公告页，把 confidence 从 medium 升级为 high。
 - **`sa-tadawul.market_structure.short_selling` 的"合格卖空标的清单"具体范围与是否存在报升规则（uptick rule）未能确认。** 本次抓到的《交易与会员规程》只确认了"卖空须标记+须已借入证券覆盖"（备兑卖空），但完整的 Short Selling Regulations 全文本次未抓取，`enum` 暂定 `restricted_list` 属推断，下次应补抓该规则原文核实。
 - **`sa-tadawul.indices` 的 TASI（塔达吾尔全股指数）自身基日/基点未在官方《指数方法论》文档中找到明确数字**（该文档只给出了其下 GICS 行业分类指数的基日 2017年1月8日），故 `tasi` 条目的 `base_date`/`base_point` 留空，与常见的"TASI基日1985年"印象不同——按铁律不采纳未经核实的记忆数字，下次应找 Saudi Exchange 官方指数说明页或更早版本的方法论文档核实。
+- **`kr-krx` 列表型章节（`products`/`indices`/`listing.boards`）里也有查不清的具体条目，但列表项本身不带 `confidence` 字段，不会被下面的自动清单扫描到，手动记在这里**：(1) KONEX 市场自身的初始上市门槛数值本次未抓取到（只确认了 KONEX→KOSDAQ 的 5 条转板快速通道标准，见 `listing.transfer_between_boards`），`listing.boards` 里 KONEX 条目的 `financial_threshold` 留了文字说明代替数值；(2) KOSPI 综合指数（`indices.kospi`）自身的基日/基点本次未确认——只确认了 KOSPI200 的基日基点（1990年1月3日=100），两者不是同一个指数，不能相互替代；(3) KOSDAQ 综合指数同理未确认基日基点。下次有空可以专门找 KONEX 上市规则页与 KOSPI/KOSDAQ 指数方法论页补齐。
 
 <!-- BEGIN:GENERATED auto-issues -->
 - `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
@@ -78,6 +79,9 @@
 - `sg-sgx` 上市、持续监管与退市 / 停牌/复牌规则（suspension_resumption）— confidence: low
 - `sg-sgx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `us-nasdaq` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
+- `kr-krx` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
+- `kr-krx` 市场结构与交易机制 / 做市商制度（market_maker_scheme）— confidence: low
+- `kr-krx` 上市、持续监管与退市 / 持续上市义务（continuing_obligations）— confidence: low
 - `us-nyse` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `us-nyse` 市场结构与交易机制 / 订单类型（order_types）— confidence: low
 - `us-nyse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low

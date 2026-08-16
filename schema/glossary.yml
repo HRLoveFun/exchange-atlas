@@ -263,4 +263,15 @@ terms:
     en: Competing Market Maker
     natives: {en: "Market Maker"}
     note: Nasdaq 传统做市商模式——同一证券允许多家会员机构同时登记为做市商、彼此竞争报价，不同于 NYSE 的单一指定做市商（DMM）在同一证券上独占价格发现职责；与 designated-market-maker 是同一大类（做市商制度）下两种结构不同的具体实现，不合并
+  - id: krx-volatility-interruption
+    zh: 波动性中断
+    en: Volatility Interruption (VI)
+    natives: {en: "Volatility Interruption"}
+    note: 韩国交易所机制，分动态VI（以直前成交价为基准）与静态VI（以固定周期内的单一价格为基准）两种，触发后转为2分钟单一价格集合竞价；官方英文名与Eurex的Volatility Interruption相同，但触发比例与两段式动态/静态设计不同，不与eurex-volatility-interruption合并一条
+
+  - id: sidecar
+    zh: 备兑停止制度（Sidecar）
+    en: Sidecar
+    natives: {en: Sidecar}
+    note: 韩国交易所机制，KOSPI200或KOSDAQ150期货价格单方向剧烈变动达阈值时，暂停程序化交易挂单5分钟（每日单方向仅触发一次），与个股级的volatility-interruption、指数级的circuit-breaker-index是三套并行的稳定机制
 

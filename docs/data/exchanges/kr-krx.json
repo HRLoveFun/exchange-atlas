@@ -1,0 +1,1460 @@
+{
+  "id": "kr-krx",
+  "name_zh": "韩国交易所",
+  "name_native": {
+    "ko": "한국거래소"
+  },
+  "official_languages": [
+    "ko"
+  ],
+  "source_lang": "en",
+  "group_id": null,
+  "region": "apac",
+  "tier": "extended",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "韩国标准时间（KST，UTC+9）",
+        "en": "Korea Standard Time (KST, UTC+9)",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "History（KRX官网英文版年表）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "CEO Message（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "dst_rule": {
+        "zh": "不实行夏令时",
+        "en": "Does not observe daylight saving time",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "History（KRX官网英文版年表）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "CEO Message（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "founded_year": {
+        "zh": "1956（其前身「大韩证券交易所」3月3日设立，为韩国证券交易所KSE前身）；现行「韩国交易所」法人于2005年1月27日由KSE、KOSDAQ市场、韩国期货交易所（KOFEX）合并设立，初名「韩国证券期货交易所」，2008年2月4日更名为「韩国交易所」",
+        "en": "1956 (Mar. 3, the Daehan Stock Exchange, predecessor of the Korea Stock Exchange, established); the present-day Korea Exchange was formed Jan. 27, 2005 by consolidating KSE, the KOSDAQ market and the Korea Futures Exchange (KOFEX), initially named the Korea Stock and Futures Exchange, renamed Korea Exchange on Feb. 4, 2008",
+        "detail": "\"Established in 1956\" 是 KRX 官方 CEO Message 页给出的成立年份表述，对应的是其前身大韩\n证券交易所/韩国证券交易所（KSE）的设立年份，而不是现行统一法人的设立年份——现行 KRX\n法人实体是 2005 年三方合并的产物，2008 年才改用「韩国交易所」这个名称。这条历史链条与\n现在的多板块结构（KOSPI/KOSDAQ/KONEX）是同一件事的两面，见文件头注释。\n",
+        "sources": [
+          {
+            "title": "CEO Message（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "History（KRX官网英文版年表）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Established in 1956, the Korea Exchange (KRX) has contributed to Korea's economic development... / 1956 Mar.3 The Daehan Stock Exchange, the predecessor of the Korea Stock Exchange (KSE), established / 2005 Jan.27 Established the Korea Stock and Futures Exchange through consolidation of KSE, KOSDAQ, KOFEX / 2008 Feb.4 Company name change(Korea Stock and Futures Exchange → Korea Exchange)",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "history": {
+        "zh": "1956年大韩证券交易所（KSE前身）设立；1974年韩国证券存管院（KSD）设立；1996年KOSDAQ市场设立；1999年韩国期货交易所（KOFEX）设立；2005年1月27日KSE、KOSDAQ、KOFEX三方合并设立「韩国证券期货交易所」；2008年2月4日更名为「韩国交易所」（KRX）；2013年7月1日设立面向中小与创业企业的KONEX市场；2021年4月16日设立KRX清算部门",
+        "en": "1956 Daehan Stock Exchange (KSE's predecessor) established; 1974 Korea Securities Depository (KSD) established; 1996 KOSDAQ market established; 1999 Korea Futures Exchange (KOFEX) established; Jan. 27, 2005 KSE, KOSDAQ and KOFEX consolidated into the Korea Stock and Futures Exchange; Feb. 4, 2008 renamed Korea Exchange (KRX); Jul. 1, 2013 KONEX market launched for SMEs and startups; Apr. 16, 2021 KRX Clearing division established",
+        "sources": [
+          {
+            "title": "History（KRX官网英文版年表）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "1974 Dec.6 The Korea Securities Depository (KSD) established / 1996 May 17 The KOSDAQ Stock Market established / 1999 Feb.6 The KOFEX established / 2005 Jan.27 Established the Korea Stock and Futures Exchange through consolidation of KSE, KOSDAQ, KOFEX / 2008 Feb.4 Company name change(Korea Stock and Futures Exchange → Korea Exchange) / 2013 Jul.1 Launched KONEX Market",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "organization_form": {
+        "enum": "demutualized_unlisted",
+        "zh": "公司制（未上市）——依《资本市场与金融投资业法》(FSCMA)，交易所须为《商法》下的股份有限公司；股东名册全部为证券公司等金融机构与政府关联机构，非自身上市公司",
+        "en": "Demutualized (unlisted) — under the FSCMA, an Exchange must be a stock company under the Commercial Act; its shareholder registry consists entirely of securities firms and other financial/government-linked institutions, not a publicly listed entity",
+        "detail": "与上交所/深交所的传统会员制不同，KRX 法律形式已是股份有限公司（stock company，见FSCMA第373-2条），但股份未公开上市交易，由证券公司等会员机构持有——介于「会员制」与「公司制上市」之间，取 demutualized_unlisted。股东名册数据截至2019年末，见 self_listed 字段。",
+        "sources": [
+          {
+            "title": "Financial Investment Services and Capital Markets Act（FSCMA，第373-2条）",
+            "url": "https://elaw.klri.re.kr/eng_service/lawTwoView.do?hseq=31782",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Shareholder Status（KRX官网英文版，截至2019年末股东名册）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0104/0104030000/GLB0104030000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Any entity that wishes to obtain permission for Exchange under paragraph (1) shall satisfy all of the following requirements: 1. It shall be a stock company under the Commercial Act",
+        "confidence": "high",
+        "verified": "2026-08-16"
+      },
+      "self_listed": {
+        "enum": "no",
+        "zh": "否——股东名册（截至2019年末）由KB证券、Meritz证券、NH投资证券等国内证券公司及中小企业振兴公团等机构组成，未见自身股票代码或公开市场交易记录",
+        "en": "No — the shareholder registry (as of end-2019) is composed of domestic securities firms (KB Securities, Meritz Securities, NH Investment & Securities, etc.) and public agencies such as the Korea SMEs and Startups Agency; no own ticker or public trading record found",
+        "detail": "该股东名册页面标注日期为2019年末，是本次抓取材料里能找到的最新一份，不排除此后股权结构有变化；「未自身上市」是基于名册全为机构持有、且未在 products/indices 出现自身股票这一间接推断，非交易所官方明文声明「我们未上市」，故 confidence 标 medium。",
+        "sources": [
+          {
+            "title": "Shareholder Status（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0104/0104030000/GLB0104030000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "quote": null
+      },
+      "market_cap_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "History（KRX官网英文版年表）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "CEO Message（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "listed_companies_count": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "History（KRX官网英文版年表）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "CEO Message（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "History（KRX官网英文版年表）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "CEO Message（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "global_ranking": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "History（KRX官网英文版年表）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "CEO Message（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "trading_currency": {
+        "zh": "韩元 (KRW)",
+        "en": "KRW",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "History（KRX官网英文版年表）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "CEO Message（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "settlement_currency": {
+        "zh": "韩元 (KRW)",
+        "en": "KRW",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "History（KRX官网英文版年表）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "CEO Message（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "金融委员会（Financial Services Commission, FSC）",
+        "en": "Financial Services Commission (FSC)",
+        "detail": "金融监督院（Financial Supervisory Service, FSS）作为FSC的执行/检查机构协同监管，本次未找到单独描述FSS职责边界的官方原文，未展开。",
+        "sources": [
+          {
+            "title": "Financial Investment Services and Capital Markets Act（FSCMA，第373-2条）",
+            "url": "https://elaw.klri.re.kr/eng_service/lawTwoView.do?hseq=31782",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "An entity that wishes to establish or operate a financial investment instruments market shall... obtain permission from the Financial Services Commission for one Exchange",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "self_regulatory_org": {
+        "zh": "市场监督委员会（Market Oversight Commission）——KRX内设的自律监管机构",
+        "en": "Market Oversight Commission — an internal self-regulatory body of the KRX",
+        "sources": [
+          {
+            "title": "Market Oversight Commission（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0103/0103020500/GLB0103020500.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The Market Oversight Commission is an internal agency of the KRX pursuant to laws governing the Korea Exchange and performs self-regulation duties on securities and derivatives markets.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "clearing_regulator": {
+        "zh": "金融委员会（FSC）——与整体市场监管机构相同，交易所本身作为CCP的资质同样源于FSC批准的交易所许可",
+        "en": "Financial Services Commission (FSC) — same overall regulator; the Exchange's own CCP function is likewise grounded in the FSC-granted Exchange permission",
+        "detail": "本次未找到单独就「清算监管」职责划分的专门条款原文，是从373-2条整体交易所许可制度推断，故标 medium。",
+        "sources": [
+          {
+            "title": "Financial Investment Services and Capital Markets Act（FSCMA）",
+            "url": "https://elaw.klri.re.kr/eng_service/lawTwoView.do?hseq=31782",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "quote": null
+      },
+      "core_laws": {
+        "zh": "《资本市场与金融投资业法》（Financial Investment Services and Capital Markets Act, FSCMA）",
+        "en": "Financial Investment Services and Capital Markets Act (FSCMA)",
+        "detail": "现行版本编号 No.21448（2026-03-06生效），韩国法制研究院（KLRI）官方英译数据库同页堆叠了该法历年全部修正版本。",
+        "sources": [
+          {
+            "title": "Financial Investment Services and Capital Markets Act（FSCMA，第1条）",
+            "url": "https://elaw.klri.re.kr/eng_service/lawTwoView.do?hseq=31782",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The purpose of this Act is to contribute to the development of the national economy by facilitating financial innovation and fair competition in the capital market, as well as protecting investors and fostering the development of the financial investment business, thereby heightening the fairness, reliability, and efficiency of the capital market.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "disclosure_requirements": {
+        "zh": "官网将上市公司披露义务分为「定期披露」「即时披露」「公平披露」三类（KOSPI/KOSDAQ规则页各自的Disclosure小节均按此三分类组织），具体条文与频率本次未展开抓取",
+        "en": "The Exchange organizes listed-company disclosure obligations into three categories — Periodic Disclosure, Timely Disclosure and Fair Disclosure (mirrored in both the KOSPI and KOSDAQ regulation sections); specific provisions and frequency were not fetched in detail this session",
+        "sources": [
+          {
+            "title": "Regulation ‧ Stocks ‧ KOSPI Market ‧ Disclosure（KRX官网英文版，栏目导航）",
+            "url": "https://global.krx.co.kr/contents/GLB/06/0602/0602010102/GLB0602010102.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-16",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "kr-krx-stocks",
+          "category": "equity",
+          "name_zh": "股票",
+          "name_native": "Stocks",
+          "description": "按KOSPI/KOSDAQ/KONEX三板分类，见 listing.boards"
+        },
+        {
+          "id": "kr-krx-etf",
+          "category": "fund",
+          "name_zh": "交易所买卖基金",
+          "name_native": "ETF"
+        },
+        {
+          "id": "kr-krx-etn",
+          "category": "structured",
+          "name_zh": "交易所买卖票据",
+          "name_native": "ETN"
+        },
+        {
+          "id": "kr-krx-elw",
+          "category": "structured",
+          "name_zh": "权证",
+          "name_native": "ELW",
+          "description": "Equity Linked Warrant，交易单位为10份权证（其余股票/ETF/ETN为1股）"
+        },
+        {
+          "id": "kr-krx-bonds",
+          "category": "bond",
+          "name_zh": "债券",
+          "description": "含 KRX 国债（KTB）、KRX 流动性提供债券（LPB）、回购（Repo）市场"
+        },
+        {
+          "id": "kr-krx-kospi200-futures",
+          "category": "future",
+          "name_zh": "KOSPI200股指期货",
+          "name_native": "KOSPI 200 Futures",
+          "derivative_of": "kospi200",
+          "description": "KRX衍生品市场旗舰品种；KRX本身即衍生品市场运营方，非另设独立法人（与JPX/OSE结构不同，见文件头注释）"
+        },
+        {
+          "id": "kr-krx-kospi200-options",
+          "category": "option",
+          "name_zh": "KOSPI200股指期权",
+          "name_native": "KOSPI 200 Options",
+          "derivative_of": "kospi200"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "盘前时段 07:30-09:00（挂单接收与交易时间一致）",
+          "en": "Pre-hours session 07:30-09:00 (quotation receiving hours match trading hours)",
+          "quote": "Pre-hours 07:30-09:00 (1.5h) 07:30-09:00 (1.5h)",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+              "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "continuous_am": {
+          "zh": "常规交易时段全天连续竞价 09:00-15:30，不分上午盘/下午盘（无午休，见 lunch_break）",
+          "en": "Regular session is a single continuous auction 09:00-15:30, not split into morning/afternoon sessions (no lunch break, see lunch_break)",
+          "quote": "Regular Session 08:00-15:30 (7.5h) 09:00-15:30 (6.5h)",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+              "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "lunch_break": {
+          "zh": "无午休，09:00-15:30全天连续交易",
+          "en": "No lunch break; continuous trading 09:00-15:30",
+          "detail": "官方交易时段表未列出午休时段，仅有盘前/常规/盘后三段，故推断无午休。",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+              "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "quote": null
+        },
+        "continuous_pm": {
+          "zh": "同 continuous_am 字段——常规时段为单一连续竞价时段，不单独区分下午盘",
+          "en": "Same as continuous_am — the regular session is a single continuous auction, not split into a separate afternoon block",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+              "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "after_market": {
+          "zh": "盘后时段：挂单接收 15:30-18:00，实际盘后交易 15:40-18:00（15:30-15:40为收盘价盘后交易的挂单窗口）",
+          "en": "After-hours: quotation receiving 15:30-18:00, actual after-hours trading 15:40-18:00 (15:30-15:40 is the order-receiving window for after-hours closing-price trades)",
+          "quote": "After-hours 15:30-18:00 (2.5h) 15:40-18:00 (2h 20m)",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+              "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "night_session": {
+          "zh": "现货股票无夜盘；KOSPI200期货/期权在CME Globex（2009年起）与Eurex（2010年起）有夜盘挂牌交易安排，但那是境外交易所（CME/Eurex）自身运营的夜盘时段，不属于KRX自身现货或衍生品市场的夜盘",
+          "en": "No night session for cash equities; KOSPI200 futures/options have night-time listings on CME Globex (since 2009) and Eurex (since 2010), but those night sessions are operated by the foreign exchanges (CME/Eurex) themselves, not by KRX's own cash or derivatives market",
+          "sources": [
+            {
+              "title": "History（KRX官网英文版年表）",
+              "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "quote": "2009 Nov.16 Launched Nighttime Trading of KOSPI200 Futures on CME Globex / 2010 Aug.30 Launched Night-time Trading of KOSPI200 Options on Eurex",
+          "confidence": "medium",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        }
+      },
+      "holidays_note": {
+        "zh": "韩国证券市场周一至周五开市；劳动节（5月1日）、年末最后交易日等休市，具体年度日历未逐条核实",
+        "en": "The Korean securities markets are open Monday through Friday; closed on Labor Day (May 1), the last trading day of the year, etc.; the exact yearly calendar was not individually verified",
+        "quote": "The Korean securities markets are opened from Monday to Friday. However, the markets are closed on Labor Day (May 1), the last trading day of the year, etc.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘集合竞价（Periodic call auction）决定开盘价，其后转为连续竞价",
+        "en": "Opening price set by periodic call auction, then continuous auction begins",
+        "quote": "Opening/Closing auction session : Periodic call auction",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价（Periodic call auction）决定收盘价",
+        "en": "Closing price set by periodic call auction",
+        "quote": "Opening/Closing auction session : Periodic call auction",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "常规时段为连续竞价：新申报（或修改后申报）收到后，按价格优先、时间优先原则即时撮合成交（低流动性品种不适用）",
+        "en": "Regular session is continuous auction: when new (or modified) orders are received, trade is executed immediately based on price priority and time priority (not applied to issues with low liquidity)",
+        "quote": "Regular session : Continuous auction / When new (or modified) orders are received, trade is executed immediately based on the principles of price priority and time priority. (not applied to issues with low liquidity)",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "order_types": {
+        "zh": "限价申报、市价申报、限价转收盘价申报（Limit-to-market-On-close order）、即时可执行限价申报、最优限价申报、竞价型大宗交易申报，以及附带条件申报（FOK/IOC），各类型在开盘集合竞价/收盘集合竞价/盘前盘后/大宗交易等不同时段的可用性不同",
+        "en": "Limit Order, Market Order, Limit-to-market-On-close order, Immediately Executable Limit Order, Best Limit Order, Auction-based Block Trade Order, and Orders With Conditions (FOK, IOC) — availability of each type varies by session (opening/closing auction, pre/after-hours, block trade, etc.)",
+        "quote": "Limit Order / Market Order / Limit-to-market- On-close order / Immediately Execu-table Limit Order / Best Limit Order / Auction-based Block Trade Order / With Conditions (FOK, IOC)",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "tick_size": {
+        "zh": "按价格区间分档，KOSPI与KOSDAQ档位表不同（如1,000韩元以下均为1韩元；500,000韩元以上KOSPI为1,000韩元、KOSDAQ为100韩元）；ETF/ETN/ELW统一为5韩元，不分价格区间",
+        "en": "Tiered by price range, with separate tables for KOSPI and KOSDAQ markets (e.g. under 1,000 KRW both are 1 KRW tick; 500,000 KRW or higher KOSPI is 1,000 KRW while KOSDAQ is 100 KRW); ETFs/ETNs/ELWs use a flat 5 KRW tick regardless of price range",
+        "quote": "Less than 1,000 KRW 1 KRW 1 KRW ... 500,000 or higher 1,000 KRW 100 KRW / As for ETFs, ETNs, and ELWs, the tick size is 5 KRW regardless of price ranges due to the characteristics of the products.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "board_lot_size": {
+        "zh": "股票、ETF、ETN最小交易单位为1股；认股权证/认股权利证书/受益证券为1份；ELW为10份",
+        "en": "1 share for stocks, ETFs and ETNs; 1 warrant/certificate for subscription warrants, subscription right certificates and beneficiary certificates; 10 warrants for ELWs",
+        "quote": "Stocks, ETFs, ETNs 1 share / ...ELWs 10 warrants",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "odd_lot_handling": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "percentage_band",
+          "zh": "涨跌停幅度限制：基准价的正负30%，KOSPI与KOSDAQ市场统一适用同一比例",
+          "en": "Daily price limit: ±30% of the base price, applied uniformly across both the KOSPI and KOSDAQ markets",
+          "sources": [
+            {
+              "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+              "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "quote": "Daily Price limit ±30% of base prices",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "detail": null
+        },
+        "main_board": {
+          "zh": "±30%（见 type 字段），该官方指南未按KOSPI/KOSDAQ分别列出不同幅度，两板统一适用",
+          "en": "±30% (see the type field); the official guide does not list separate bands for KOSPI vs. KOSDAQ, both apply the same limit",
+          "sources": [
+            {
+              "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+              "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "quote": "Daily Price limit ±30% of base prices",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "other_boards": {
+          "zh": "KONEX市场的涨跌停幅度本次抓取材料（面向KOSPI/KOSDAQ的官方交易指南）未涉及，未能确认，见 OPEN-QUESTIONS",
+          "en": "The KONEX market's daily price limit band was not covered by the official guide fetched this session (which is scoped to KOSPI/KOSDAQ); not confirmed, see OPEN-QUESTIONS",
+          "confidence": "low",
+          "sources": [
+            {
+              "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+              "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "index_level",
+        "zh": "指数级三阶段熔断（Circuit Breakers）：第一阶段KOSPI（或KOSDAQ）指数较前日下跌8%以上（且持续1分钟），全市场暂停交易20分钟；第二阶段较前日下跌15%以上且较第一触发点再跌1%以上，熔断后以单一价格集合竞价10分钟恢复连续竞价；第三阶段较前日下跌20%以上且较第二触发点再跌1%以上，当日收市，所有申报（含撤单）不可再提交",
+        "en": "Three-phase index-level circuit breaker: Phase 1 — KOSPI (KOSDAQ) index falls 8% or more from the previous day (lasting one minute), entire market suspended 20 minutes; Phase 2 — falls 15% or more plus an additional 1% fall from the Phase-1 trigger, single-price call auction for 10 minutes after activation then resumes continuous auction; Phase 3 — falls 20% or more plus an additional 1% fall from the Phase-2 trigger, market closes for the day, no quotations (including cancellations) may be submitted",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "KOSPI (KOSDAQ) index falls by 8% or more compared to the previous day. (The fall lasts for one minute.) / The entire market is suspended for 20 minutes. ... The market is closed when the third phase is activated.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "detail": null
+      },
+      "volatility_interruption": {
+        "zh": "个股级波动性中断（Volatility Interruption, VI），分动态VI与静态VI：连续竞价阶段VI触发后转为2分钟单一价格集合竞价；触发价 = 基准价 ± (基准价 × 触发比率)，KOSPI200成份股/ETF等常规交易时段动态VI比率±3%、静态VI比率±10%，其余品种动态VI比率±6%",
+        "en": "Individual-issue Volatility Interruption (VI), split into Dynamic VI and Static VI: when triggered during continuous auction, trading switches to a 2-minute single-price call auction; activation price = reference price ± (reference price × activation rate); for KOSPI 200 constituents/ETFs etc. the dynamic VI rate is ±3% and static VI rate ±10% during the regular session, while other issues use a ±6% dynamic rate",
+        "detail": "此外还有「sidecar」机制（KOSPI200期货价格5分钟内单方向变动达5%，或KOSDAQ150期货价格变动6%以上且KOSDAQ150指数同向变动3%以上时，暂停程序化交易挂单5分钟），是与VI并行的另一套稳定机制，未单独设字段，写在此处备注，不计入zh/en正文（其涉及的具体比例本次未逐一配 quote）。",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "When VI is activated during continuous auction session, continuous auction is switched to single price call auction for two minutes. ... Activation price : reference price ± (reference price x activation price rate) ... KOSPI 200 constituents ... ±3% ... ±10% ... Other issues ... ±6%",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "个股停牌情形包括：上市公司披露重大信息后停牌30分钟；被指定为不实披露法人当日停牌；因传闻/报道引发交易量激增，须待澄清公告后方可复牌；公司未按要求答复问询（KOSPI从逾期到披露、KOSDAQ从逾期到披露后再加30分钟）；交易所认为有必要保护投资者时停牌1天；此外还有因退市事由、股票证书变更、结算会员未按期交收等其他停牌情形",
+        "en": "Individual-issue halts include: 30-minute suspension after a listed company discloses material information; one-day suspension upon designation as an unfaithful-disclosure corporation; suspension pending a clarifying announcement when a volume surge is likely due to rumors/news; suspension when a company fails to respond to a disclosure inquiry (KOSPI: from missed deadline to disclosure; KOSDAQ: from missed deadline to 30 minutes after disclosure); one-day suspension when the Exchange deems it necessary for investor protection; plus other grounds such as delisting causes, stock-certificate changes, and clearing-member settlement failures",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Disclosing material information of a listed company — for 30 minutes from the disclosure / Designation of unfaithful disclosure corporation (5 point penalty) — the designation day (one day)",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "intraday_reversal": {
+        "zh": "",
+        "detail": "本次抓取材料确认结算周期为T+2（见 clearing.settlement_cycle），但未找到明确说明现货股票「先买后卖是否可当日回转」的条文——结算周期与回转交易规则是两个不同维度，不能相互推断，按铁律留空不猜。",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "short_selling": {
+        "enum": "restricted_uptick",
+        "zh": "原则上禁止一切卖空，仅允许「担保卖空」（先借入证券再卖出）；担保卖空须遵守报升规则：卖空申报价格不得等于或低于最近成交价；投资者的净持仓卖空余额达到一定比例/金额须向交易所报告，达到另一（更高）比例须对外披露",
+        "en": "All types of short-selling are prohibited in principle; only covered short-selling (selling securities that have been borrowed) is permitted as an exception, subject to an uptick rule: short-selling orders may not be quoted at or under the most recently matched price; investors must report their net short-selling balance to the Exchange once it crosses certain ratio/value thresholds, and disclose publicly once it crosses a further (higher) threshold",
+        "detail": "枚举 restricted_uptick 是现有受控词表里与「禁止裸卖空+担保卖空另受报升规则约束」最接近的选项，但比典型的报升规则市场更严格（裸卖空整体禁止），这一细微差别写在此处不强行拆成新枚举值，见 OPEN-QUESTIONS 关于受控词表覆盖度的既有条目。",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "All types of short-selling are prohibited in principle; however, selling securities with borrowing(covered short-selling) is permitted exceptionally. ... Uptick rule : Short-selling orders may not be quoted at or under the most recently matched price.",
+        "confidence": "high",
+        "verified": "2026-08-16"
+      },
+      "block_trade": {
+        "zh": "大宗/篮子交易：KOSPI大宗交易最低数量为5,000倍交易单位（ETF/ETN为500倍）或1亿韩元以上；KOSDAQ为5000万韩元以上；篮子交易KOSPI须5只以上标的且合计10亿韩元以上，KOSDAQ须5只以上标的且合计2亿韩元以上；常规时段大宗交易价格须在申报当日已形成的最高价与最低价之间，盘前盘后大宗交易须在当日涨跌停范围内",
+        "en": "Block/basket trade minimums: KOSPI block trade requires at least 5,000× the trading unit (500× for ETFs/ETNs) or KRW 100 million or more; KOSDAQ requires KRW 50 million or more; basket trades require 5 or more issues and at least KRW 1 billion (KOSPI) or KRW 200 million (KOSDAQ) in aggregate; regular-session block trade prices must fall within the day's highest-to-lowest price range formed so far, while off-hours block trades must stay within the daily price limit",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "KOSPI: 5,000 times trading unit (500 times for ETFs and ETNs), or 100 million KRW or more / KOSDAQ : 50 million KRW or more",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "dark_pool": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "market_maker_scheme": {
+        "zh": "官网栏目中确认存在「流动性提供者」（Liquidity Provider, LP）制度（ETF另有专门的LP System栏目），具体资格与义务本次未展开抓取",
+        "en": "The official site confirms a Liquidity Provider (LP) scheme exists (ETFs have a dedicated LP System section), but specific qualification and obligation details were not fetched this session",
+        "sources": [
+          {
+            "title": "Regulation ‧ Stocks ‧ KOSPI Market ‧ Market Operation and Management（KRX官网英文版，栏目导航含\"Liquidity provider\"）",
+            "url": "https://global.krx.co.kr/contents/GLB/06/0602/0602010204/GLB0602010204.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "connect_schemes": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "listing": {
+      "boards": [
+        {
+          "id": "kr-krx-kospi",
+          "name_zh": "有价证券市场（主板）",
+          "name_native": "KOSPI Market",
+          "financial_threshold": "经营满3年；股本至少300亿韩元或至少100万股待上市股份；股权分散度、财务表现（营收/利润/ROE/市值等多组合择一满足）、审计意见、股份转让限制等多维度门槛，详见KOSPI Market Listing Requirements原文",
+          "target_companies": "面向大型成熟企业的主板市场",
+          "launched_year": "1956年（前身KSE设立）；2005年起为KRX法人内部的市场板块"
+        },
+        {
+          "id": "kr-krx-kosdaq",
+          "name_zh": "创业板市场",
+          "name_native": "KOSDAQ Market",
+          "financial_threshold": "分「标准企业（含创投企业）」与「技术成长企业」双轨，标准企业需满足盈利能力/营收或市场估值/成长性等组合条件之一；技术成长企业可凭技术评级（A级以上）豁免部分财务门槛",
+          "target_companies": "面向中小、创投与技术成长型企业",
+          "launched_year": "1996"
+        },
+        {
+          "id": "kr-krx-konex",
+          "name_zh": "中小企业市场",
+          "name_native": "KONEX Market",
+          "financial_threshold": "本次抓取材料未确认KONEX自身初始上市门槛的具体数值，仅确认其定位与转板KOSDAQ的5条快速通道标准（见 transfer_between_boards），见 OPEN-QUESTIONS",
+          "target_companies": "依《中小企业基本法》第2条定义的中小企业（面向创业与成长期中小企业的市场）",
+          "launched_year": "2013"
+        }
+      ],
+      "review_system": {
+        "zh": "由KRX交易所自身按量化门槛（经营年限、股本、股权分散度、财务表现、审计意见等多维标准，达标即可申请，非政府逐案审批）进行上市资格审查；与之并行，证券发行本身另受FSCMA下的证券注册制度约束（发行人向FSC提交证券申报书）——上市审核（交易所）与发行注册（FSC）是两套并行制度，不完全对应受控词表 review_system 现有的注册制/核准制二分，故未套用enum",
+        "en": "Listing eligibility is examined by the Exchange itself against quantitative thresholds (years in operation, equity capital, share distribution, financial performance, audit opinion, etc. — meeting the criteria enables application rather than case-by-case government approval); in parallel, the securities issuance itself is separately governed by FSCMA's registration regime (issuers file a securities registration statement with the FSC) — listing review (by the Exchange) and issuance registration (by the FSC) are two parallel systems that do not map cleanly onto the existing registration/approval enum, so no enum value is applied",
+        "detail": "这是 OPEN-QUESTIONS 框架性问题第3条（review_system枚举覆盖度）积累的第五个真实案例：上交所「注册制」、港交所「披露为本+上市委实质审核」、NYSE「披露为本+高度量化具体规则+广泛自由裁量权」、JPX「披露为本，交易所审核+重大事项另报金融厅」、现在KRX「交易所量化门槛审查+FSC独立证券注册」——五家没有一家能被现有枚举干净覆盖。",
+        "sources": [
+          {
+            "title": "KOSPI Market Listing Requirements — Criteria详情子页",
+            "url": "https://global.krx.co.kr/contents/GLB/03/0303/0303050100/GLB0303050100T1.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Years in operation since incorporation — At least 3 years / Equity Capital — At least KRW 30 billion / No. of Shares to be listed — At least 1 million shares",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "transfer_between_boards": {
+        "zh": "KONEX市场公司可通过5条「快速通道」（Fast-track）转入KOSDAQ市场，各通道标准不同，例如：通道1需在KONEX上市满1年、经保荐推荐、最近年度营业利润为正、销售额100亿韩元以上、基准市值300亿韩元以上；通道4需销售增长率20%以上、销售额200亿韩元以上、营业利润10亿韩元以上；通道5需少数股东持股10%以上、日均市值200亿韩元以上且超过股本、总基准市值3000亿韩元以上；另有并购后快速上市通道",
+        "en": "Companies on the KONEX market can move to KOSDAQ via 5 fast-track routes with differing criteria, e.g. Track 1 requires at least one year on KONEX, a designated advisor's recommendation, positive operating income in the latest year, at least KRW 10 billion in sales and at least KRW 30 billion in base market capitalization; Track 4 requires a 20%+ sales growth rate, at least KRW 20 billion in sales and at least KRW 1 billion in operating income; Track 5 requires at least 10% minority shareholders, average daily market cap of at least KRW 200 billion exceeding capital stock, and at least KRW 300 billion in total base market capitalization; a separate fast-track route also exists following a merger",
+        "sources": [
+          {
+            "title": "Listing Requirements for the KOSDAQ Market（含\"Fast-track Listing on the KONEX Market\"章节）",
+            "url": "https://global.krx.co.kr/contents/GLB/03/0303/0303060200/GLB0303060200.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Track 1 / At least one (1) year of elapse after being listed on the KONEX market / Recommendation from the designated advisor (listing sponsor) / Positive operating income in the latest business year / At least KRW 10 billion in sales for the latest business year / At least KRW 30 billion in base market capitalization",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "continuing_obligations": {
+        "zh": "见 regulation.disclosure_requirements 的定期披露/即时披露/公平披露三分类，本次未展开具体条文",
+        "en": "See regulation.disclosure_requirements for the Periodic/Timely/Fair Disclosure categories; specific provisions not fetched in detail this session",
+        "sources": [
+          {
+            "title": "Regulation ‧ Stocks ‧ KOSPI Market ‧ Disclosure（KRX官网英文版，栏目导航）",
+            "url": "https://global.krx.co.kr/contents/GLB/06/0602/0602010102/GLB0602010102.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "suspension_resumption": {
+        "zh": "个股停牌情形见 market_structure.trading_halt_mechanism（同一套官方材料同时覆盖交易机制与上市持续监管两个角度）",
+        "en": "See market_structure.trading_halt_mechanism for individual-issue suspension grounds (the same official material covers both the trading-mechanism and continuing-obligations angles)",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_conditions": {
+        "zh": "KOSPI市场设「管理股指定」与「退市」两级：管理股指定情形含未按期提交定期报告、审计意见为「保留/否定/无法表示意见」、资本侵蚀率50%以上、少数股东少于200人或持股比例低于5%、半年平均月成交量低于流通股1%、外部董事人数不足、不实披露累计扣分达10分以上、营收低于300亿韩元（2026年前为50亿、2026年为100亿、2027年为200亿韩元的过渡门槛，2027年起若最近年度平均市值达1000亿韩元以上可豁免）、市值连续30个交易日低于500亿韩元（2025年前为50亿、2026上半年为200亿、2026下半年为300亿韩元的过渡门槛）等；上述情形连续两年未解决或触发即时退市条款（如连续记录修正审计意见、逾期10日未交业务报告）则直接退市",
+        "en": "The KOSPI market uses a two-tier system — designation as an administrative issue, then delisting. Administrative-issue triggers include failure to submit periodic reports on time, a qualified/adverse/disclaimer audit opinion, a capital impairment ratio of 50% or more, fewer than 200 general shareholders or under 5% shareholding ratio, average monthly trading volume below 1% of free float for a half-year, an insufficient number of outside directors, 10+ accumulated penalty points for disclosure violations, sales below KRW 30 billion (phased-in thresholds of KRW 5bn until 2026, KRW 10bn in 2027, KRW 20bn in 2028), or market capitalization below KRW 50 billion for 30 consecutive trading days (phased-in thresholds of KRW 5bn until 2025, KRW 20bn in H1 2026, KRW 30bn in H2 2026); persistence of these conditions for two consecutive years, or immediate-delisting triggers (e.g. consecutive modified audit opinions, failure to submit a business report within 10 days of the deadline), lead directly to delisting",
+        "sources": [
+          {
+            "title": "Designation of Administrative Issues and Delisting Criteria for the KOSPI Market",
+            "url": "https://global.krx.co.kr/contents/GLB/03/0303/0303050500/GLB0303050500.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "When market capitalization drops below KRW 50 billion and remains so for 30 consecutive trading days. ... Less than KRW 30 billion at the end of the most recent fiscal year.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_process": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delisting_transition_period": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-16",
+        "sources": [
+          {
+            "title": "History（KRX官网英文版年表）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "kospi",
+          "name_zh": "韩国综合股价指数",
+          "name_native": "KOSPI (Korea Composite Stock Price Index)",
+          "compiler": "self",
+          "flagship": "yes",
+          "description": "KRX旗舰市场基准指数，覆盖KOSPI市场全部上市股票；基日/基点本次未在抓取材料中确认，未填写，见 OPEN-QUESTIONS"
+        },
+        {
+          "id": "kospi200",
+          "name_zh": "KOSPI200指数",
+          "name_native": "KOSPI 200 Index",
+          "compiler": "self",
+          "base_date": "1990年1月3日",
+          "base_point": "100",
+          "flagship": "no",
+          "description": "KOSPI成份股中精选200只大盘股编制，是KOSPI200期货/期权等衍生品的标的指数；1994年6月15日起由KSE开始发布"
+        },
+        {
+          "id": "kosdaq-index",
+          "name_zh": "KOSDAQ综合指数",
+          "name_native": "KOSDAQ Index",
+          "compiler": "self",
+          "description": "KOSDAQ市场基准指数；基日/基点本次未确认"
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "enum": "t2",
+        "zh": "T+2（净额交收）",
+        "en": "T+2 (netting settlement)",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Clearing/Settlement Netting payment for bid and ask, settlement on T+2",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "detail": null
+      },
+      "ccp_name": {
+        "zh": "韩国交易所（KRX）本身——KRX直接担任证券与衍生品市场的中央对手方（CCP）",
+        "en": "Korea Exchange (KRX) itself — KRX directly acts as the CCP for both the securities and derivatives markets",
+        "detail": "法律依据为FSCMA第378、393、394、397、399、400条（交易所设定结算方式、向会员收取共同补偿基金、以会员保证金/存款抵偿债务、承担会员违约赔偿责任、对违约会员享有优先受偿权等条款）。与JPX（靠JSCC）、NYSE（靠NSCC/DTCC）不同，KRX不把清算功能分给另一个法人，是本文件不设group_id的原因之一，见文件头注释。",
+        "sources": [
+          {
+            "title": "Concept of Clearing（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/02/0202/0202020102/GLB0202020102.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "KRX, as a CCP, intervenes for the trades executed among members by becoming a buyer to all sellers and a seller to all buyers, finalizing the settlement details through the netting process, issuing the settlement instruction to the settlement institution and providing the guarantee for the finalization of settlement.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "csd_name": {
+        "zh": "韩国证券存管院（Korea Securities Depository, KSD）——KRX持股70%的存管子公司，1974年设立",
+        "en": "Korea Securities Depository (KSD) — a depository subsidiary 70%-owned by KRX, established in 1974",
+        "sources": [
+          {
+            "title": "KRX Group Services（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102020000/GLB0102020000.jsp",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "History（KRX官网英文版年表）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "KSD 70% owned ⇒ Depository Subsidiary / 1974 Dec.6 The Korea Securities Depository (KSD) established",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "initial_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delivery_method": {
+        "enum": "na",
+        "zh": "不适用（现货市场部分）——现货证券通过KSD电子簿记完成交收，无实物交割；衍生品部分（KOSPI200期货/期权等）另有交割安排，本次未展开",
+        "en": "Not applicable (for the cash market segment) — cash securities settle via KSD's electronic book-entry system, no physical delivery; the derivatives segment (KOSPI200 futures/options etc.) has separate delivery arrangements not explored this session",
+        "detail": "推断依据：products章节列出的现货品类均无实物交割场景；KSD为电子簿记存管机构，见 clearing.csd_name。",
+        "sources": [
+          {
+            "title": "Concept of Settlement（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/02/0202/0202020103/GLB0202020103.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "quote": null
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "default_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "membership_structure": {
+        "zh": "持有FSCMA第12(1)条投资交易/投资经纪业务牌照的机构方可申请会员资格；会员按市场范围与产品种类分七类（证券会员/股票证券会员/集合投资证券会员/债务证券会员/衍生品会员/股票衍生品会员/货币利率衍生品会员），并按是否自行承担结算责任分为结算会员与交易会员；财务门槛举例：证券会员+衍生品会员需股本至少400亿韩元且净资本比率100%以上，证券会员+股票衍生品会员需股本至少300亿韩元",
+        "en": "Entities holding a license for investment trading or investment brokerage business under FSCMA Article 12(1) are eligible to apply for membership; members are classified into seven types by market scope and product coverage (Securities, Equity Securities, Collective Investment Securities, Debt Securities, Derivatives, Equity Derivatives, and Currency-interest Rate Derivatives members), and further split into Settlement Members and Trading Members depending on whether they bear settlement responsibility directly; example financial thresholds: Securities + Derivatives member requires equity capital of at least KRW 40 billion and a net capital ratio of 100%+, while Securities + Equity Derivatives member requires at least KRW 30 billion",
+        "sources": [
+          {
+            "title": "Members（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102070100/GLB0102070100.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Entities holding licenses for engaging in investment trading or investment brokerage businesses under Article 12(1) of the Financial Investment Services and Capital Markets Act are eligible to join the Exchange ... Equity Capital of 40 billion KRW or more",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "EXTURE+",
+        "en": "EXTURE+",
+        "detail": "KRX官网「Technology」栏目下以「EXTURE+ Trading」「EXTURE+ Market Surveillance」「EXTURE+清算/披露」等命名其技术方案品牌，本次仅从站内导航标签确认名称存在，未抓取到对该系统本身的专门介绍页面，故无独立quote。",
+        "sources": [
+          {
+            "title": "Global KRX 首页导航（Technology › KRX Solutions › EXTURE+ Trading）",
+            "url": "https://global.krx.co.kr/main/main.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "quote": null
+      },
+      "access_methods": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "exchange_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "stamp_duty": {
+        "zh": "韩国官方名称为「证券交易税」（Securities Transaction Tax，非「印花税」字面译法，但功能上是本项目该字段横向对比的对应项），该页表述股票证券交易税率为0.3%（并说明该税不适用于ETF）",
+        "en": "Officially the \"Securities Transaction Tax\" (not literally a stamp duty, but the functional equivalent for cross-exchange comparison in this field); this page states a 0.3% rate for stocks (and notes it is not charged on ETFs)",
+        "detail": "该页聚焦ETF为何免税的场景，顺带提及股票税率0.3%，并非专门介绍证券交易税的官方税率页，未标注版本/生效日期，也未说明KOSPI/KOSDAQ是否有差异化税率或近年是否曾调整——按此单一间接来源标 medium，不标 high。",
+        "sources": [
+          {
+            "title": "ETF Taxation Regulation ‧ Trading system（KRX官网英文版）",
+            "url": "https://global.krx.co.kr/contents/GLB/06/0605/0605010103/GLB0605010103.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "the securities transaction tax (0.3%) is not charged to an ETF",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "financial_transaction_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_gains_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "KOSPI退市/管理股财务门槛正处于多年分阶段调整期：营收门槛从「2026年底前50亿韩元」逐步提高到「2027年10亿韩元」「2028年200亿韩元」（最终门槛为300亿韩元，2027年起若市值达标可豁免）；市值门槛从「2025年底前50亿韩元」提高到「2026上半年200亿韩元」「2026下半年300亿韩元」（最终门槛为500亿韩元）——这意味着同一份退市规则在不同年份对应的实际数值门槛不同，横向比较或历史数据核对时要注意抓取时点",
+        "en": "KOSPI's delisting/administrative-issue financial thresholds are in a multi-year phase-in: the sales threshold rises from KRW 5bn (through 2026) to KRW 10bn (2027) to KRW 20bn (2028), with a final KRW 30bn threshold (waivable from 2027 if market cap qualifies); the market-cap threshold rises from KRW 5bn (through 2025) to KRW 20bn (H1 2026) to KRW 30bn (H2 2026), with a final KRW 50bn threshold — meaning the same delisting rule maps to different numeric thresholds depending on the year, which matters for cross-exchange comparison or historical fact-checking depending on when the data was fetched",
+        "sources": [
+          {
+            "title": "Designation of Administrative Issues and Delisting Criteria for the KOSPI Market",
+            "url": "https://global.krx.co.kr/contents/GLB/03/0303/0303050500/GLB0303050500.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Not applicable if the average market capitalization for the most recent fiscal year is KRW 100 billion or more (Effective from 2027 onwards). ... However, until 2028, the following thresholds apply based on the submission date of an audit report with an unqualified opinion",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "enforcement_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    }
+  }
+}
