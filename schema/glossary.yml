@@ -320,4 +320,18 @@ terms:
     en: Instantaneous Price Stabilization Measures
     natives: {zh-Hant: 瞬間價格穩定措施}
     note: 台湾证券交易所个股级机制，逐笔交易时段内任一试算成交价超出「前5分钟滚动加权平均价」±3.5%即暂缓该证券撮合2分钟，2分钟后以集合竞价恢复成交，随后恢复逐笔交易；不同于港交所VCM（触发后进入5分钟冷静期）与东证特别气配（不成交只挂指示价），是「延后撮合+以集合竞价出清」这一第三种触发效果，与eurex-volatility-interruption（预期成交价超出动态/静态价格区间即触发，以集合竞价恢复）机制结构最接近但触发基准（滚动均价 vs 静态/动态参考价）与所属市场类型（现货 vs 衍生品）不同，故不合并条目
+  - id: highest-executable-volume
+    zh: 最大可执行数量原则
+    en: Principle of Highest Executable Volume
+    note: SIX瑞士交易所集合竞价定价原则——按能撮合出最大成交量的单一价格确定开/收盘价；与Eurex"Netting"流程（同样以最大撮合量定价）是同一类集合竞价定价逻辑在不同交易所的对应表述，比较时可互相参照
+
+  - id: remote-member
+    zh: 远程会员
+    en: Remote Member
+    note: 境外证券商无需在本地设立实体、经监管机构授权即可直接成为交易所交易参与者的会员类别；SIX瑞士交易所（FINMA授权）是本项目首个明确记录该制度的样本，日后遇到其他交易所的同类"跨境直接会员"安排应统一使用这一译法比较
+
+  - id: remote-supervisory-authority
+    zh: 属地监管机关
+    en: Competent State Authority
+    note: 德国/瑞士等联邦制国家里，交易所设立与运作的监管职能可能落在邦/州一级（如Eurex的黑森州监管机关），而非全国性金融监管总局；与"金融业务行为监管"（如BaFin/FINMA）是两个不同层面的监管，比较跨国交易所监管框架时注意区分
 
