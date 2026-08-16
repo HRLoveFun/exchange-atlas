@@ -257,6 +257,21 @@
         "lunch_start_utc": null,
         "lunch_end_utc": null
       }
+    },
+    {
+      "id": "za-jse",
+      "name_zh": "约翰内斯堡证券交易所",
+      "name_native": {
+        "en": "JSE Limited (Johannesburg Stock Exchange)"
+      },
+      "official_languages": [
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "mena_africa",
+      "tier": "extended",
+      "trading_hours": null
     }
   ],
   "dimension_groups": [

@@ -284,4 +284,14 @@ terms:
     zh: 交易所运营实体
     en: Market Undertaking
     note: Euronext集团术语，指集团旗下各国分别注册、分别受本国法律与本国监管机构管辖的交易所法人实体（如Euronext Paris S.A.、Euronext Amsterdam N.V.），统一适用同一部Harmonised Rulebook；与NYSE Group/JPX Group那种"同一国家内多个独立法人"的集团结构不同，是"同一部规则、多个法域法人"的结构，见fr-euronext.yml顶部说明与OPEN-QUESTIONS框架性问题第1条
+  - id: volatility-auction-call
+    zh: 波动性拍卖冷静期
+    en: Volatility Auction (Call Session)
+    natives: {en: "Volatility Auction Call Session"}
+    note: 价格触及静态/动态参考价容忍阈值后，暂停连续交易转入集合竞价撮合的冷静机制；沙特Tadawul（Volatility Auction）与JSE（Volatility Auction Call Session）均使用这一表述，与港交所VCM、Eurex波动性中断属同一功能类别但各自命名与触发基准不同
+
+  - id: static-dynamic-reference-price
+    zh: 静态/动态参考价
+    en: Static / Dynamic Reference Price
+    note: 熔断与价格容忍阈值判定所依据的两类基准价——静态参考价一般为前收盘价（全天固定或按集合竞价更新），动态参考价随最新成交价滚动更新；JSE与sa-tadawul的Static/Static Limit、Eurex的dynamic/static price range均属此概念的不同实现
 
