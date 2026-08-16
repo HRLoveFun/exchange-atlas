@@ -274,4 +274,14 @@ terms:
     en: Sidecar
     natives: {en: Sidecar}
     note: 韩国交易所机制，KOSPI200或KOSDAQ150期货价格单方向剧烈变动达阈值时，暂停程序化交易挂单5分钟（每日单方向仅触发一次），与个股级的volatility-interruption、指数级的circuit-breaker-index是三套并行的稳定机制
+  - id: euronext-dynamic-static-collar
+    zh: 动态/静态价格区间机制
+    en: Dynamic/Static Collars
+    natives: {en: "Dynamic Collars / Static Collars"}
+    note: Euronext机制，两层阈值——动态区间基于逐笔更新的最新成交价，静态区间基于当日开盘价/前日收盘参考价；触及阈值触发预约期（reservation period），不是直接拒单的固定百分比涨跌停，与eurex-volatility-interruption、volatility-control-mechanism均不同类（三者机制细节各异，不合并）
+
+  - id: euronext-market-undertaking
+    zh: 交易所运营实体
+    en: Market Undertaking
+    note: Euronext集团术语，指集团旗下各国分别注册、分别受本国法律与本国监管机构管辖的交易所法人实体（如Euronext Paris S.A.、Euronext Amsterdam N.V.），统一适用同一部Harmonised Rulebook；与NYSE Group/JPX Group那种"同一国家内多个独立法人"的集团结构不同，是"同一部规则、多个法域法人"的结构，见fr-euronext.yml顶部说明与OPEN-QUESTIONS框架性问题第1条
 
