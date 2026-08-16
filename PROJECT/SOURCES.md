@@ -102,6 +102,44 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Admission Regulations for Exchange Traders（「Zulassungsordnung」，交易员准入资格，⚠️不是公司上市规则——衍生品交易所没有"公司上市"概念，这是与现货股票交易所的结构性差异，见 OPEN-QUESTIONS）PDF: https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf（HTTP 200，124KB）
   - Fee Regulations（「Gebührenordnung」）PDF: https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf（HTTP 200，95KB）
 
+### 台湾证券交易所 Taiwan Stock Exchange (TWSE) `tw-twse`
+- `twse.com.tw` | 官方 | zh-Hant / en（官方双语，各页各有独立 URL，非同页切换；英文版部分栏目滞后或缺失，细节不如中文版精确） | curl + 常规 UA 全部 200，未见反爬（含子域名 shl.twse.com.tw）；⚠️ 部分旧版路径（如网站首页导航曾指向的「pcversion 版放宽涨跌幅度专区」「旧版上市规章目录页」）已废弃，HTTP 状态码仍是 200，但正文是站内自定义 404 页（此網頁不存在，請回到本公司首頁）——不是抓取失败，是 URL 本身已失效，务必肉眼确认页面正文而非只看状态码，这两条已弃用未收录，不在下方列表中 | 台湾仅此一家股票集中交易市场；另有台湾期货交易所（TAIFEX，衍生品，`taifex.com.tw`）与证券柜台买卖中心（TPEx，OTC 市场，前身「柜买中心」，`tpex.org.tw`）为独立法人实体，规则不属于本文件收录范围
+  - 集中市场交易制度介绍（开盘/收盘机制、撮合原则、订单类型正文）: https://www.twse.com.tw/zh/products/system/trading.html
+  - Trading Mechanism Introduction（英文版，内容对应但部分细节比中文版简略）: https://www.twse.com.tw/en/products/system/trading.html
+  - 股价升降幅度（tick size 阶梯表）: https://www.twse.com.tw/zh/trading/delivery/twt84u.html
+  - 瞬间价格稳定措施（个股级波动中断机制，子域名）: https://shl.twse.com.tw/page/trading/6.html
+  - Fact Book（英文，市值/上市家数/成交额年度统计）: https://www.twse.com.tw/en/about/company/factbooks.html
+  - 平盘下得融（借）券卖出之证券名单页（做空平盘下限制说明）: https://www.twse.com.tw/zh/trading/margin/twt92u.html
+  - Regulations, Notices, Letters and Orders overview（英文，证券借贷相关规则入口）: https://www.twse.com.tw/en/products/sbl/law/overview.html
+  - 发行量加权股价指数（TAIEX）编制要点 PDF: https://www.twse.com.tw/downloads/zh/products/indices/IndexS02.pdf
+  - 股票造市制度专区: https://www.twse.com.tw/zh/products/system/stock-market.html
+  - 外资及陆资投资持股统计: https://www.twse.com.tw/zh/trading/foreign/mi-qfiis.html
+  - 侨外投资专区（FINI/FIDI 外资登记制度介绍）: https://www.twse.com.tw/zh/page/investor/foreign/03f.html
+  - 结算交割作业特色（多边净额结算、T+2）: https://www.twse.com.tw/zh/clearing/clearing/features.html
+  - 官网首页（英文，确认机构概况）: https://www.twse.com.tw/en/
+  - 官网首页（中文）: https://www.twse.com.tw/zh/
+  - 历史介绍（大事记，含成立/开业日期、历次涨跌幅调整、T+2交割制度实施等年表）: https://www.twse.com.tw/zh/about/company/history.html
+  - 首长欢迎词（公司概况页，未含股权结构细节）: https://www.twse.com.tw/zh/about/company/welcome.html
+- `twse-regulation.twse.com.tw` | 官方（法规分享知识库，独立子域名） | zh-Hant / en | curl + 常规 UA 200，未见反爬 | 官方法规原文（区别于 twse.com.tw 上的说明性文字）的主要来源；页面正文夹杂大量修订沿革记录，用关键词（而非取前 N 段）定位现行条款
+  - 台湾证券交易所股份有限公司营业细则（交易时段、升降单位、买卖单位、订单类型等核心交易规则条文）: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007304
+  - 同上英文版（Baker McKenzie 翻译，页面声明中英文有异议时中文本为准）: https://twse-regulation.twse.com.tw/ENG/EN/law/DAT0201.aspx?FLCODE=FL007304
+  - 有价证券上市审查准则（各板块财务门槛条文）: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007326
+  - 审查有价证券上市作业程序: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007327
+- `law.fsc.gov.tw` | 监管 | zh-Hant | curl + 常规 UA 200 | 金融监督管理委员会（FSC）主管法规共用系统，证券交易法、证券交易所管理规则原文出处
+  - 证券交易所管理规则: https://law.fsc.gov.tw/LawContent.aspx?id=FL007016
+  - 证券交易法: https://law.fsc.gov.tw/LawContent.aspx?id=FL007009
+- `law-out.mof.gov.tw` | 监管（财政部，税务主管机关，法规查询子站） | zh-Hant | curl + 常规 UA 200 | 证券交易税条例原文
+  - 证券交易税条例: https://law-out.mof.gov.tw/LawContent.aspx?id=FL006079
+- `mof.gov.tw` | 监管（财政部官网本站） | zh-Hant | curl + 常规 UA 200 | 非居住者股利扣缴率官方公告
+  - 非居住股利、利息及权利金扣缴率一览表: https://www.mof.gov.tw/singlehtml/191?cntId=82761
+- `etax.nat.gov.tw` | 监管（财政部税务入口网，官方税务问答） | zh-Hant | curl + 常规 UA 200 | 证券交易税课征范围、个人证券交易所得税停征现状的官方问答
+  - 证券交易税有无停征的规定: https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/securities-transaction-tax/taxation-scope/7r3MjNB
+  - 那些有价证券之交易所得应计入个人基本所得额（confirms 上市/上柜/兴柜股票交易所得免计入个人基本所得额）: https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/basic-tax-question/scope/eKN76QZ
+- `tdcc.com.tw` | 官方（清算/集中保管机构） | zh-Hant | curl + 常规 UA 200 | 台湾集中保管结算所（TDCC），中央证券存管机构，兼办结算交割
+  - 结算交割: https://www.tdcc.com.tw/portal/zh/equity/settlement
+- `twsa.org.tw` | 官方（自律组织） | zh-Hant | curl + 常规 UA 200 | 中华民国证券商业同业公会，证券商层面的自律组织；本次仅用于确认机构名称与职能定位，未逐条抓取其自律规章
+  - 首页: https://www.twsa.org.tw/
+
 ---
 
 ## 探测记录（v0.0 可达性探针，2026-08-12）

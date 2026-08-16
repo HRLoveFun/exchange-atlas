@@ -28,6 +28,11 @@
 
 （填数据时遇到查不清的，按下面格式加条目；`make sync` 会额外从 `data/` 里 `confidence: low` 或空字段生成一份自动清单，附在下面，不需要手动同步那部分）
 
+- **`tw-twse` 的市值/上市家数/年成交额三个字段（`overview.market_cap_usd_bn`/`listed_companies_count`/`annual_turnover_usd_bn`）留空。** TWSE 官网首页与「上市公司总市值」「个股日成交资讯」等统计模块均为 JavaScript 动态渲染，curl 抓到的静态 HTML 里数值均是占位符「---」；Fact Book 索引页（`https://www.twse.com.tw/en/about/company/factbooks.html`）本身只是历年 PDF 目录，不含可直接摘引的当期汇总数字。与 `cn-sse` 能找到一份静态的「沪市市场运行情况例行发布」PDF 周报不同，本次未在 TWSE 官网找到同类可直接 curl 到含具体数字的静态页面。下次有空可尝试直接下载某一年度 Fact Book PDF 用 `pdftotext` 提取，或寻找 TWSE 开放数据 API（如 `openapi.twse.com.tw`，本次未探测）。
+- **`tw-twse.market_structure.circuit_breaker` 标为 `none`（无指数级/全市场熔断），但这是「未找到相关条文」而非「确认没有」的绝对否定。** 与 `jp-jpx`（见框架性问题第16条）情况相同：本次检索的 TWSE 官方交易制度介绍页与《营业细则》均未见类似美股 MWCB 式的独立市场级熔断条文，仅见个股级「瞬间价格稳定措施」与因个别公司重大讯息而暂停交易的机制，但不排除检索范围未覆盖到的可能。
+- **术语映射提醒：`stamp_duty` 字段槽位不是所有交易所都字面对应「印花税」。** 台湾对证券交易课征的税种官方名称为「证券交易税」（税率千分之三/0.3%，日冲销减半至千分之一点五/0.15%），法律依据是《证券交易税条例》而非印花税条例；本项目 schema 里没有为「证券交易税」单独开字段，功能上与 `stamp_duty`（按成交金额课征的单边流转税）对应，故填入该槽位，已在 `tw-twse.yml` 该字段 `detail` 里注明。未来若某交易所同时存在「印花税」与「证券交易税」两种独立税种（而非互斥的同类税），需要重新评估 `costs` 章节字段是否够用。
+- **`tw-twse.listing.delisting_conditions`/`delisting_process` 未逐条抓取《营业细则》第50条之1（终止上市）原文。** 本次抓到的是第49条（变更交易方法）与第50条（停止买卖）的完整条文，两条均明确指出「情节未改善者得依第五十條之一規定申請終止上市」，但第50条之1本身的具体量化门槛（如净值转负、财报连续无法申报几次等终止上市的确切触发条件）未在本次会话中单独定位并抓取，`delisting_conditions` 因此标 `confidence: medium` 而非 `high`。下次有空应在 `https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007304` 页内定位第50-1条全文，逐条核实后可升级为 `high`。
+
 <!-- BEGIN:GENERATED auto-issues -->
 - `cn-sse` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `cn-sse` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
@@ -42,6 +47,10 @@
 - `jp-jpx` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 制度变革风险（regulatory_change_risk_note）— confidence: low
+- `tw-twse` 监管与法律环境 / 外资准入与持股比例限制（foreign_ownership_limit）— confidence: low
+- `tw-twse` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
+- `tw-twse` 清算、结算与交割 / 初始保证金制度（initial_margin_practice）— confidence: low
+- `tw-twse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `us-nyse` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `us-nyse` 市场结构与交易机制 / 订单类型（order_types）— confidence: low
 - `us-nyse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low

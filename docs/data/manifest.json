@@ -110,6 +110,21 @@
       }
     },
     {
+      "id": "tw-twse",
+      "name_zh": "台湾证券交易所",
+      "name_native": {
+        "zh-Hant": "臺灣證券交易所"
+      },
+      "official_languages": [
+        "zh-Hant"
+      ],
+      "source_lang": "zh",
+      "group_id": null,
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "us-nyse",
       "name_zh": "纽约证券交易所",
       "name_native": {
