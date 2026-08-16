@@ -31,3 +31,4 @@
 | 股息预扣税 | Dividend Withholding Tax |  |  |
 | 印花税 | Stamp Duty |  |  |
 | 特别气配 | Special Quote | ja: 特別気配 | 东证机制，申报价超出值幅制限时不成交、改为显示指示性价格，是值幅制限的执行方式而非独立于价格限制之外的冷静期，与港交所VCM那种独立机制不同类 |
+| 个股熔断机制 | Single-Stock Circuit Breaker (SSCB) | en: Single-Stock Circuit Breaker (SSCB) | 加拿大 CIRO 统一实施的个股级机制，价格在5分钟内波动达到固定阈值（如10%）即触发全市场范围内该股票的5分钟停牌，触发价外5%以上的成交事后撤销；与LULD的「持续价格带+触及后转停牌」结构不同，也与港交所VCM/东证特别气配的「不成交、显示指示性价格」结构不同，是第四种个股波动应对机制样本 |

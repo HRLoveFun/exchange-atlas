@@ -1,6 +1,23 @@
 {
   "exchanges": [
     {
+      "id": "ca-tsx",
+      "name_zh": "多伦多证券交易所",
+      "name_native": {
+        "en": "Toronto Stock Exchange (TSX)",
+        "fr": "Bourse de Toronto"
+      },
+      "official_languages": [
+        "en",
+        "fr"
+      ],
+      "source_lang": "en",
+      "group_id": "tmx-group",
+      "region": "americas",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "cn-sse",
       "name_zh": "上海证券交易所",
       "name_native": {
