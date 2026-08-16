@@ -110,6 +110,21 @@
       }
     },
     {
+      "id": "kr-krx",
+      "name_zh": "韩国交易所",
+      "name_native": {
+        "ko": "한국거래소"
+      },
+      "official_languages": [
+        "ko"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "us-nyse",
       "name_zh": "纽约证券交易所",
       "name_native": {

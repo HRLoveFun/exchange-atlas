@@ -102,6 +102,26 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Admission Regulations for Exchange Traders（「Zulassungsordnung」，交易员准入资格，⚠️不是公司上市规则——衍生品交易所没有"公司上市"概念，这是与现货股票交易所的结构性差异，见 OPEN-QUESTIONS）PDF: https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf（HTTP 200，124KB）
   - Fee Regulations（「Gebührenordnung」）PDF: https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf（HTTP 200，95KB）
 
+### 韩国交易所 Korea Exchange (KRX) `kr-krx`
+- `global.krx.co.kr` | 官方（英文版） | en | curl + 常规 UA 全部 200，未见反爬；站点是 JSP，导航结构可从任意页面（如首页 `main/main.jsp`）的静态 HTML 里 grep `href="[^"]*GLB[0-9]+[^"]*"` 批量拿到几乎全站 URL 清单，比逐级点导航快得多——**但很多栏目页（如 About KRX/Organization/Regulation 分类落地页）静态 HTML 里只有 tab 标题导航，没有实质段落**，真正的解释性文字要么在专门的详情子页（URL 尾缀带 `T1`/`T2`.jsp，如上市标准详情页），要么整份塞进官方 PDF 指南。抓到 120KB+ 的页面不代表有正文，先搜关键词（如年份数字、百分比）确认，没命中就换该栏目的 `T*.jsp` 子页再试 | KRX 是 2005 年由韩国证券交易所（KSE）、KOSDAQ 市场、韩国期货交易所（KOFEX）依《资本市场与金融投资业法》合并而成的单一法人交易所（股份有限公司，会员金融机构持股，自身不在自己市场上市）；KOSPI/KOSDAQ/KONEX 均为该法人内部的市场板块（非独立法人），衍生品市场同样由 KRX 本身运营（不同于 JPX/NYSE Group 那种"衍生品另设独立法人"的集团结构），因此本文件不设 `group_id`。KRX 本身即清算业务的中央对手方（CCP）；韩国证券存管院（KSD，KRX 持股70%）与韩国证券电算（KOSCOM，KRX 持股76%）是控股子公司而非交易所内部部门
+  - Guide to Trading in the Korean Stock Market（PDF，官方权威操作手册，含交易时段/最小报价单位/涨跌停±30%/熔断三阶段8-15-20%/sidecar/波动性中断VI/做空报升规则/大宗交易门槛/交易暂停情形，几乎覆盖第五章全部核心交易机制字段，是本次抓取信息密度最高的单一来源）: https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf（HTTP 200，308KB）
+  - CEO Message（"Established in 1956"表述）: https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp（HTTP 200，120KB）
+  - History（KRX完整年表，1956年大韩证券交易所设立、1974年KSD设立、1996年KOSDAQ设立、1999年KOFEX设立、2005年三方合并设立"韩国证券期货交易所"、2008年更名"韩国交易所"、2013年设立KONEX）: https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp（HTTP 200，131KB）
+  - KRX Group Services（KRX自身业务范围：交易/市场数据、市场监察、上市与披露、CCP、清算结算；两家控股子公司KSD/KOSCOM持股比例）: https://global.krx.co.kr/contents/GLB/01/0102/0102020000/GLB0102020000.jsp（HTTP 200，121KB）
+  - Market Oversight Commission（自律监管机构说明，KRX内设机构）: https://global.krx.co.kr/contents/GLB/01/0103/0103020500/GLB0103020500.jsp（HTTP 200，121KB）
+  - Shareholder Status（截至2019年末的股东名册，全部为证券公司/金融机构/政府关联机构，佐证会员制、非自身上市）: https://global.krx.co.kr/contents/GLB/01/0104/0104030000/GLB0104030000.jsp（HTTP 200，124KB）
+  - Members（会员资格法律依据/会员七种类型/结算会员与交易会员区分/财务门槛表）: https://global.krx.co.kr/contents/GLB/01/0102/0102070100/GLB0102070100.jsp（HTTP 200，137KB）
+  - Concept of Clearing（KRX自身作为CCP的法律依据，援引FSCMA第378/393/394/397/399/400条与多项KRX内部规则）: https://global.krx.co.kr/contents/GLB/02/0202/0202020102/GLB0202020102.jsp（HTTP 200，122KB）
+  - Concept of Settlement（结算定义，援引FSCMA第297/378条）: https://global.krx.co.kr/contents/GLB/02/0202/0202020103/GLB0202020103.jsp（HTTP 200，121KB）
+  - KOSPI Market Listing Requirements — Criteria 详情子页（量化上市标准全表：经营年限/股本/股权分散/财务表现/审计意见等）: https://global.krx.co.kr/contents/GLB/03/0303/0303050100/GLB0303050100T1.jsp（HTTP 200，11KB）
+  - Designation of Administrative Issues and Delisting Criteria for the KOSPI Market（退市/管理股条件全表，含未提交定期报告/审计意见/资本侵蚀/股权分散/交易量/公司治理/不实披露/营收/市值等逐项标准，含2026-2028年过渡期门槛）: https://global.krx.co.kr/contents/GLB/03/0303/0303050500/GLB0303050500.jsp（HTTP 200，138KB）
+  - Listing Requirements for the KOSDAQ Market（KOSDAQ量化上市标准，标准企业/技术成长企业双轨制，含KONEX转板快速通道5条track）: https://global.krx.co.kr/contents/GLB/03/0303/0303060200/GLB0303060200.jsp（HTTP 200，131KB）
+  - ETF Taxation Regulation（"证券交易税(0.3%)对ETF不适用"的表述，间接确认一般股票证券交易税税率；该页聚焦ETF豁免场景，未见明确标注版本/生效日期，作为一般股票税率引用时降级为medium）: https://global.krx.co.kr/contents/GLB/06/0605/0605010103/GLB0605010103.jsp（HTTP 200，123KB）
+- `www.krx.co.kr`（韩文版官网首页） | 官方（韩文版） | ko | curl 常规 UA 200，未见反爬；本次仅取 `<title>` 标签确认官方韩文名称，未深入抓取韩文正文内容（本项目 source_lang 判定为 en，韩文版仅用于确认 native name，不作为事实来源） | `<title>` 标签内容为「한국거래소」，即 KRX 官方韩文名称
+  - 首页（仅用于确认 `<title>` 韩文名称）: http://www.krx.co.kr/main/main.jsp（HTTP 200，186KB）
+- `elaw.klri.re.kr`（韩国法制研究院官方英译法律数据库） | 监管（政府法律译本） | en | curl 常规 UA 200，单页 4.8MB（含该法历年全部修正版本堆叠在同一页，需按关键词/条号 grep 定位，不要整页阅读）| 《资本市场与金融投资业法》(Financial Investment Services and Capital Markets Act, FSCMA) 官方英译全文，现行版本 20260306。第1条：立法目的；第373条：无许可不得设立市场；第373-2条：设立交易所须获金融委员会（Financial Services Commission, FSC）许可，且须为《商法》下的股份有限公司（stock company）；第297/378/393/394/397/399/400条：交易所本身担任证券与衍生品市场清算机构/CCP的法律依据
+  - Financial Investment Services and Capital Markets Act（全文，含历次修正版本堆叠）: https://elaw.klri.re.kr/eng_service/lawTwoView.do?hseq=31782（HTTP 200，4.8MB）
+
 ---
 
 ## 探测记录（v0.0 可达性探针，2026-08-12）

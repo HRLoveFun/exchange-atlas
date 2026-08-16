@@ -31,3 +31,5 @@
 | 股息预扣税 | Dividend Withholding Tax |  |  |
 | 印花税 | Stamp Duty |  |  |
 | 特别气配 | Special Quote | ja: 特別気配 | 东证机制，申报价超出值幅制限时不成交、改为显示指示性价格，是值幅制限的执行方式而非独立于价格限制之外的冷静期，与港交所VCM那种独立机制不同类 |
+| 波动性中断 | Volatility Interruption (VI) | en: Volatility Interruption | 韩国交易所机制，分动态VI（以直前成交价为基准）与静态VI（以固定周期内的单一价格为基准）两种，触发后转为2分钟单一价格集合竞价；官方英文名与Eurex的Volatility Interruption相同，但触发比例与两段式动态/静态设计不同，不与eurex-volatility-interruption合并一条 |
+| 备兑停止制度（Sidecar） | Sidecar | en: Sidecar | 韩国交易所机制，KOSPI200或KOSDAQ150期货价格单方向剧烈变动达阈值时，暂停程序化交易挂单5分钟（每日单方向仅触发一次），与个股级的volatility-interruption、指数级的circuit-breaker-index是三套并行的稳定机制 |
