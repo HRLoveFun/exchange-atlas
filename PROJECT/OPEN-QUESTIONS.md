@@ -46,6 +46,7 @@
 38. **`enums.yml` 的 `region` 枚举（americas/europe/apac/mena_africa 四档）在填 `za-jse`（约翰内斯堡证券交易所）时暴露出粒度过粗的问题。** `mena_africa` 目前同时装着 `sa-tadawul`（沙特，中东，阿语法域，CMA监管）与 `za-jse`（南非，撒哈拉以南非洲，英语法域，FSCA/Twin Peaks监管）——两者地理位置、监管传统、语言环境均相去甚远，被归入同一个地区桶纯粹是因为枚举里没有更细的选项，不是因为二者真的属于同一个"区域市场生态"。当前先按任务要求把 `za-jse.region` 定为 `mena_africa`（这是现有四档里唯一覆盖非洲的选项），**未擅自修改枚举**。是否需要拆分出独立的 `africa`（或更精确的 `sub_saharan_africa`）子分类，建议等这一区域再新增第三家交易所（如可能的 `eg-egx` 埃及交易所或 `ng-ngx` 尼日利亚交易所）后再评估——两个样本还不足以判断"拆分"比"维持粗粒度四档"更值得，避免为了一个样本就动枚举结构。
 39. **`enums.yml` 的 `short_selling_stance` 枚举（freely_allowed/restricted_uptick/restricted_list/banned）不能干净覆盖"允许备兑卖空、禁止裸卖空、无报升规则、无指定标的名单限制"这一常见规制模式**，这是继第3条 `review_system` 之后又一个受控词表实质已经装不下真实案例多样性的字段。`sa-tadawul`（Wave 1）当时遇到同类情况，暂定选用了 `restricted_list`（因为"合格证券清单"这个说法在其规程标题里出现过，但清单本身未逐条核实，事后看这个选择并不精确）；`za-jse`（Wave 2）遇到的是更典型的"通用备兑卖空义务，无名单限制也无报升规则"，本次选择不套用任何 enum、只写自由文本描述，避免重蹈 `sa-tadawul` 用不精确枚举凑数的覆辙。两个真实案例合并看，`short_selling_stance` 缺一档"允许但须备兑（covered-only，无报升规则、无名单限制）"，值得在样本积累到 4-5 家后与 `review_system` 一起评估是否要扩充枚举维度或承认该字段不适合矩阵横向比较。
 40. **`taxonomy.yml` 的 `clearing.ccp_name` 字段隐含假设"交易所存在单一中央对手方"，在 `za-jse` 不完全成立。** JSE 现货证券市场的清算保障靠 JSE 结算权威机构的多层"防线"机制（会员准入/资本充足/CSDP承诺/保证金/违约处置），不是传统 CCP 净额担保（novation）模式；衍生品市场则另设独立 CCP「JSE Clear」（2022年9月起持牌）。`za-jse.yml` 对 `ccp_name` 采用"如实分别说明现货与衍生品两种不同安排"的处理方式，而非在单一字段里编造一个笼统答案。这是继 `de-eurex`（"上市"范式不适配衍生品交易所，见第17条）之后，同一类"字段设计前提假设单一制度模式，但真实交易所是混合制"的又一个具体案例，暂不建议现在就为此拆分字段（如 `ccp_name_equity` / `ccp_name_derivatives`），先记录，等样本更多再评估是否值得拆分。
+41. **`overview.market_cap_usd_bn`/`overview.annual_turnover_usd_bn` 字段名假设单一美元计价，但多家交易所的官方统计只按本币披露，没有一手来源的美元折算数字可引用。** `cn-sse.yml` 最早遇到这个问题（人民币，`market_cap_usd_bn` 的 `detail` 里当时写"已记入 OPEN-QUESTIONS"，但实际一直没有对应条目——本条补上这笔欠账）；`ca-tsx.yml`（v1.0 Wave2）第二次遇到，官方新闻稿按加元披露 TSX 挂牌总市值与年成交额，同样选择"如实按原始口径记录原始数字，不做汇率换算引入额外误差"。两家的处理方式一致（字段名字面意思是 USD，实际存的是原始本币数字+说明），但这终究是字段命名与数据现实的错配，不是长期方案：要么把字段改名去掉"usd"、只表达"总市值/年成交额"，配合一个可选的"计价货币"字段；要么在 `sync.py`/前端接入实时汇率做展示层换算（但会引入"什么时点的汇率"这个新的可追溯性问题）。两条路径都没有实现，暂维持现状，下次再遇到第三家非美元官方披露口径的交易所时应该动手解决，不要让"如实记录本币+写detail说明"这个临时方案变成事实上的长期方案。
 
 ## 具体数据悬案
 
@@ -68,6 +69,7 @@
 - `br-b3` 基本信息 / 夏令时规则（dst_rule）— confidence: low
 - `br-b3` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
 - `br-b3` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
+- `ca-tsx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `cn-sse` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `cn-sse` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
 - `cn-sse` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low

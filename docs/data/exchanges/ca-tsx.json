@@ -1,0 +1,1383 @@
+{
+  "id": "ca-tsx",
+  "name_zh": "多伦多证券交易所",
+  "name_native": {
+    "en": "Toronto Stock Exchange (TSX)",
+    "fr": "Bourse de Toronto"
+  },
+  "official_languages": [
+    "en",
+    "fr"
+  ],
+  "source_lang": "en",
+  "group_id": "tmx-group",
+  "region": "americas",
+  "tier": "extended",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "东部时间（ET），与纽约同一时区",
+        "en": "Eastern Time (ET), same zone as New York",
+        "detail": "TSX 官方文档统一以「ET」标注交易时段（如「9:30 AM」开盘），本次抓取范围内未见对 IANA 时区标识（如 America/Toronto）的专门声明，此处按交易时段惯例填写。",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "dst_rule": {
+        "zh": "实行夏令时（东部时间在 EST/EDT 间切换），与美股同步",
+        "en": "Observes Daylight Saving Time (switches between EST/EDT), synchronized with U.S. markets",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "founded_year": {
+        "zh": "1852年7月26日「经纪人协会」（Association of Brokers）成立；1861年10月25日24名经纪人正式创立多伦多证券交易所",
+        "en": "Association of Brokers formed July 26, 1852; Toronto Stock Exchange formally created by 24 brokers on October 25, 1861",
+        "detail": "tsx.com/tmx.com 本次抓取范围内未找到对成立年份的官方专门陈述，此处采用 Wikipedia 词条转述的历史记载（第三方来源，confidence 上限 medium）。",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange（Wikipedia）",
+            "url": "https://en.wikipedia.org/wiki/Toronto_Stock_Exchange",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The Toronto Stock Exchange (known by the acronyms TSE until 2002 and TSX thereafter) likely descended from the Association of Brokers, a group formed by Toronto businessmen on July 26, 1852. No records of the group's transactions have survived. It is however known that on October 25, 1861, twenty-four brokers gathered at the Masonic Hall to create and participate in the Toronto Stock Exchange.",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "history": {
+        "zh": "1852年经纪人协会成立、1861年正式创立TSE；1999年起公司化改制（结束会员制），2001年收购Canadian Venture Exchange（更名TSX Venture Exchange）并成立母公司TSX Group Inc.；2007年12月同意收购蒙特利尔交易所（Montréal Exchange），2008年5月完成收购并更名为TMX Group Inc.；2012年7月被加拿大金融机构联合体Maple Group收购（获91%股份），Maple Group其后更名为现任母公司TMX Group Limited",
+        "en": "Founded as Association of Brokers in 1852, formally created as TSE in 1861; demutualized starting 1999 (ending member ownership); acquired the Canadian Venture Exchange in 2001 (renamed TSX Venture Exchange), creating parent TSX Group Inc.; agreed to acquire the Montréal Exchange in December 2007, completed May 2008 and renamed TMX Group Inc.; acquired by the Maple Group consortium of Canadian financial institutions in July 2012 (91% of shares tendered), with Maple Group subsequently renamed to the current parent TMX Group Limited",
+        "detail": "这条历史沿革综合了两个独立抓取的 Wikipedia 词条（Toronto Stock Exchange / TMX Group）与\nOSC 官网对「TMX Group Limited (formerly Maple Group Acquisition Corporation)」的表述\n互相印证；具体公司化年份、股份收购比例等细节未在 tsx.com/tmx.com 本次抓取的页面里找到\n对应的官方陈述，confidence 标 medium。\n",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange（Wikipedia）",
+            "url": "https://en.wikipedia.org/wiki/Toronto_Stock_Exchange",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "TMX Group（Wikipedia）",
+            "url": "https://en.wikipedia.org/wiki/TMX_Group",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The Montreal Exchange was acquired on December 10, 2007, for C$ 1.31 Billion. The acquisition was completed on May 1, 2008, and the corporation subsequently renamed to TMX Group Inc. On June 11, 2008, at a meeting of shareholders of TSX Group Inc, a resolution to change the name of the corporation to TMX Group Inc. was put forward.",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "organization_form": {
+        "enum": "demutualized_listed",
+        "zh": "公司制（1999年起改制，结束会员制）；现属 TMX Group Limited 集团架构，集团层面公开交易",
+        "en": "Demutualized (member ownership ended starting 1999); now part of the publicly traded TMX Group Limited",
+        "detail": "与NYSE同一种情形——改制后的公开交易主体几经并购（TSX Group→TMX Group Inc.→被Maple Group收购后的TMX Group Limited），是集团母公司而非TSX这个交易所实体本身独立挂牌，见 self_listed 字段。",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange（Wikipedia）",
+            "url": "https://en.wikipedia.org/wiki/Toronto_Stock_Exchange",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "In 1999, through a major realignment plan, the Toronto Stock Exchange became Canada's sole exchange for the trading of senior equities. ... In 2000, the Toronto Stock Exchange became a for-profit company. In 2002, its acronym was changed to TSX and it became a public company.",
+        "confidence": "medium",
+        "verified": "2026-08-16"
+      },
+      "self_listed": {
+        "enum": "partial",
+        "zh": "并非TSX Inc.实体本身上市，而是其母公司TMX Group Limited在TSX自身挂牌交易（股票代码 X）",
+        "en": "Not TSX Inc. itself; parent TMX Group Limited is listed on TSX itself (ticker X)",
+        "detail": "与NYSE/ICE是同一种结构（母公司反向在自己旗下交易所挂牌），与港交所「自身股票在自己主板\n挂牌」不是同一种情况。TMX Group Limited 股票代码「TSX: X」来自 Wikipedia 词条 infobox，\n本次未能直接抓取 investors.tmx.com 或 money.tmx.com 的实时行情页核实（investors.tmx.com\n返回 Cloudflare 403 质询页，money.tmx.com 报价数据由前端 JS 异步加载，静态 curl 拿不到），\n故 confidence 标 medium，未采纳为 high。\n",
+        "sources": [
+          {
+            "title": "TMX Group（Wikipedia）",
+            "url": "https://en.wikipedia.org/wiki/TMX_Group",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "quote": null
+      },
+      "market_cap_usd_bn": {
+        "zh": "TSX 挂牌证券总市值 $6,798,873,608,543 加元（2026年2月，约合6.8万亿加元）",
+        "en": "CAD $6,798,873,608,543 (TSX Market Cap Listed Issues, February 2026)",
+        "detail": "taxonomy 字段名假设单一美元数值，但该数据来自 TMX Group 官方新闻稿，按加元原始口径披露，\n未做统一美元折算——如实按原始口径记录，不做汇率换算引入额外误差（同 cn-sse.market_cap_usd_bn\n的处理方式，见 PROJECT/OPEN-QUESTIONS.md 框架性问题新增条目）。数字来自 TMX Group Equity\nFinancing Statistics 月度新闻稿里「Toronto Stock Exchange」专表（与同表 TSX Venture\nExchange 分开统计，未混用）。\n",
+        "sources": [
+          {
+            "title": "TMX Group Equity Financing Statistics – February 2026（官方新闻稿 PDF）",
+            "url": "https://s21.q4cdn.com/671813756/files/doc_news/TMX-Group-Equity-Financing-Statistics---February-2026-2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Toronto Stock Exchange\n\n                              February 2026           January 2026           February 2025\nIssuers Listed                                    2,132                  2,110                   1,861\nMarket Cap Listed Issues             $6,798,873,608,543     $6,363,991,181,783      $5,145,266,065,041\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "listed_companies_count": {
+        "zh": "2,132 家（2026年2月，TSX Issuers Listed）",
+        "en": "2,132 issuers listed (TSX, February 2026)",
+        "detail": "与 market_cap_usd_bn 同一份 TMX Group 官方新闻稿、同一张 TSX 专表。",
+        "sources": [
+          {
+            "title": "TMX Group Equity Financing Statistics – February 2026（官方新闻稿 PDF）",
+            "url": "https://s21.q4cdn.com/671813756/files/doc_news/TMX-Group-Equity-Financing-Statistics---February-2026-2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Toronto Stock Exchange\n\n                              February 2026           January 2026           February 2025\nIssuers Listed                                    2,132                  2,110                   1,861\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "TSX 2025全年成交额 $3,737,060,805,386 加元（未换算美元）",
+        "en": "CAD $3,737,060,805,386 (TSX full-year 2025 trading value; not converted to USD)",
+        "detail": "同 market_cap_usd_bn，taxonomy 字段名假设美元口径，此处按官方加元原始披露记录，不做汇率\n换算。数字来自 TMX Group Consolidated Trading Statistics 官方新闻稿（tsx.com 自行托管）\n「Toronto Stock Exchange」专表的 Year-to-date Statistics（2025全年，与 TSX Venture\nExchange/TSX Alpha Exchange/Montréal Exchange 分开统计）。\n",
+        "sources": [
+          {
+            "title": "TMX Group Consolidated Trading Statistics – December 2025（官方新闻稿 PDF，tsx.com 托管）",
+            "url": "https://www.tsx.com/en/resource/3443",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Toronto Stock Exchange\n\n                                      December 2025         November 2025          December 2024\n Volume                                  9,486,106,262          8,908,413,019         7,708,838,580\n Value                                $360,286,533,284       $325,825,113,125      $274,446,030,031\n\nYear-to-date Statistics\n\n                                       2025                  2024                  % Change\n Volume                                     104,297,850,627        87,435,483,020                 +19.3\n Value                                   $3,737,060,805,386     $2,897,631,310,745                +29.0\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "global_ranking": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "第三方综述常见说法为「全球第10大交易所、北美第3大」，但本次未找到对应统计口径与日期的官方一手来源，留空不采纳。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_currency": {
+        "zh": "加元（CAD）为主，另有以美元（USD）计价的双重货币挂牌证券（代码以「.U」结尾）",
+        "en": "Primarily CAD; also USD-denominated dual-currency listings (symbols ending in \".U\")",
+        "detail": "「.U」后缀识别规则来自 Order Types and Functionality Guide 第6.6节 USD-Denominated Securities。",
+        "sources": [
+          {
+            "title": "Order Types and Functionality Guide（PDF，TMX GROUP）",
+            "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "TSX, TSXV and TSX Alpha support trading of securities denominated in USD. USD-denominated securities are identified through the symbology with the security's symbol ending with an “.U” suffix.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "settlement_currency": {
+        "zh": "与交易货币一致：加元为主，USD计价证券以美元结算",
+        "en": "Same as trading currency: primarily CAD; USD-denominated securities settle in USD",
+        "detail": "推断自 trading_currency 字段，未找到专门针对结算货币的独立官方陈述。",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "安大略省证券委员会（Ontario Securities Commission, OSC）",
+        "en": "Ontario Securities Commission (OSC)",
+        "detail": "加拿大没有单一联邦证券监管机构，13个省/地区各自立法、各设证券监管机构，通过加拿大证券\n管理机构组织（Canadian Securities Administrators, CSA）协调统一规则（如 National\nInstrument 21-101 Marketplace Operation）。TSX 总部在安大略省多伦多，OSC 是其主要\n认定/监管机构；TSX 规则修订须依 Form 21-101F1 规定的程序经 OSC 核准（见 core_laws 的\ndetail）。TSX Inc. 与其母公司 TMX Group Limited 均被 OSC 单独认定为「recognized\nexchange」。\n",
+        "sources": [
+          {
+            "title": "Recognized Exchanges（OSC 官网）",
+            "url": "https://www.osc.ca/en/industry/market-regulation/marketplaces/exchanges/recognized-exchanges",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "TMX Group Limited and TSX Inc. The TSX Inc., together with its parent company, TMX Group Limited, is recognized as an exchange in Ontario.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "self_regulatory_org": {
+        "zh": "加拿大投资监管组织（Canadian Investment Regulatory Organization, CIRO）",
+        "en": "Canadian Investment Regulatory Organization (CIRO)",
+        "detail": "CIRO 由前身 IIROC（Investment Industry Regulatory Organization of Canada，交易行为一线\n监管，含 UMIR 跨市场统一交易操守规则）与 MFDA（Mutual Fund Dealers Association of\nCanada，基金经销商自律组织）于2023年1月合并为「New SRO」，2023年6月11日更名为 CIRO。\nTSX 自身的《Rule Book》把「UMIR」定义为「the Universal Market Integrity Rules as adopted\nby IIROC or a predecessor or successor organization」，交易操守类规则（如卖空、市场操纵）\n实际由 CIRO 而非 TSX 自订，这点在 short_selling 字段单列说明。\n",
+        "sources": [
+          {
+            "title": "Canadian Investment Regulatory Organization (CIRO)（OSC 官网说明页）",
+            "url": "https://www.osc.ca/en/industry/market-regulation/self-regulatory-organizations-sro/canadian-investment-regulatory-organization-ciro",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The Canadian Investment Regulatory Organization (CIRO) is a self-regulatory organization (SRO) that regulates investment dealers and mutual fund dealers, and acts as the regulation services provider for marketplaces that have retained it as such, including monitoring trading on those marketplaces for compliance with CIRO rules and securities legislation. ... The two predecessor SROs, the Investment Industry Regulatory Organization of Canada (IIROC) and the Mutual Fund Dealers Association of Canada (MFDA), amalgamated to continue as the New Self-Regulatory Organization of Canada (New SRO), effective January 1, 2023, which subsequently changed its name to CIRO on June 1, 2023.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "clearing_regulator": {
+        "zh": "安大略省证券委员会（OSC）——TSX规则手册将「Clearing Corporation」定义为经OSC认定的清算机构",
+        "en": "Ontario Securities Commission (OSC) — TSX's own Rule Book defines the eligible \"Clearing Corporation\" as one recognized by the Ontario Commission",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange Rule Book（PDF，Effective January 13, 2026）",
+            "url": "https://www.tsx.com/en/resource/1464",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "“Clearing Corporation” means The Canadian Depository for Securities Limited or such other person as recognized by the Ontario Commission as a clearing agency for the purposes of the Securities Act and which has been designated by the Exchange as an acceptable clearing agency.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "core_laws": {
+        "zh": "《安大略省证券法》（Securities Act, R.S.O. 1990, c. S.5）",
+        "en": "Securities Act, R.S.O. 1990, c. S.5 (Ontario)",
+        "detail": "TSX 规则修订依「Process for the Review and Approval of Rules and the Information\nContained in Form 21-101F1」向 OSC 报批——该表格是 CSA 统一的 National Instrument\n21-101 Marketplace Operation 体系下的规则审批文件，本次未单独抓取 NI 21-101 条文原文，\n仅确认其表格编号在 TSX 自身文件里被引用（见下方 quote）。\n",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange Rule Book（PDF，Effective January 13, 2026）",
+            "url": "https://www.tsx.com/en/resource/1464",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Notice of Approval – Amendments to the Toronto Stock Exchange Company Manual (November 6, 2025)（PDF，OSC 官网）",
+            "url": "https://www.osc.ca/sites/default/files/2025-11/tsx_20251106_noa-exchange-company-manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "“Securities Act” means the Securities Act, R.S.O. 1990, c. S.5 as amended from time to time.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未核实是否存在一般性外资持股限制（特定行业如银行/电信/航空可能另有联邦法律限制，本次未展开核实），留空。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "disclosure_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-16",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "ca-tsx-equities",
+          "category": "equity",
+          "name_zh": "普通股",
+          "name_native": "Common Shares",
+          "description": "高级股票市场（senior equities）为主，见 listing 章节量化上市标准"
+        },
+        {
+          "id": "ca-tsx-etf",
+          "category": "fund",
+          "name_zh": "交易所买卖基金",
+          "name_native": "Exchange Traded Funds (ETFs)",
+          "description": "2026年2月新上市28家issuer中22家为ETF，是当月新上市主力品类"
+        },
+        {
+          "id": "ca-tsx-cef",
+          "category": "fund",
+          "name_zh": "封闭式基金",
+          "name_native": "Closed-End Funds",
+          "description": "TSX Company Manual Section 1103单列监管要求"
+        },
+        {
+          "id": "ca-tsx-reit",
+          "category": "fund",
+          "name_zh": "房地产投资信托基金",
+          "name_native": "REITs",
+          "description": "对应 S&P/TSX Capped REIT Index 板块"
+        },
+        {
+          "id": "ca-tsx-structured",
+          "category": "structured",
+          "name_zh": "结构性产品",
+          "name_native": "Structured Products",
+          "description": "TSX Company Manual Section 1104单列监管要求"
+        },
+        {
+          "id": "ca-tsx-debentures",
+          "category": "bond",
+          "name_zh": "债券/信用债",
+          "name_native": "Debentures/Notes",
+          "description": "以1,000加元面值为增量交易，不分配给做市商/碎股经纪商（Odd Lot Dealer），碎股债券订单不自动执行"
+        },
+        {
+          "id": "ca-tsx-income-trust",
+          "category": "other",
+          "name_zh": "收益信托单位",
+          "name_native": "Income Trust Units",
+          "description": "S&P/TSX Composite Index方法论文件确认该指数纳入范围「includes common stocks and income trust units」"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "7:00am-9:30am 盘前挂单期（Pre Open），只排队不成交，参考开盘价（COP）持续更新显示",
+          "en": "7:00 a.m.–9:30 a.m. Pre Open: orders queue without executing; the Calculated Opening Price (COP) is displayed and continuously updated",
+          "quote": "7:00 AM - 9:30 AM Pre Open - Orders may be entered, but will not be executed. The COP is displayed and continuously updated",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Trading Hours（官网）",
+              "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "continuous_am": {
+          "zh": "无独立盘前连续交易时段与午休；9:30am开盘集合竞价（MOO）后直接进入全天连续交易",
+          "en": "No separate morning-only continuous session or lunch break; continuous trading begins immediately after the 9:30 a.m. Market on Open (MOO) auction and runs through the afternoon",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Trading Hours（官网）",
+              "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "lunch_break": {
+          "zh": "无",
+          "en": "None",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Trading Hours（官网）",
+              "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "continuous_pm": {
+          "zh": "9:30am-3:50pm连续交易；3:50pm-3:56pm为MOC失衡期（Imbalance Period）；3:56pm-4:00pm为冻结期（Freeze Period）；4:00pm收盘集合竞价（MOC）",
+          "en": "9:30 a.m.–3:50 p.m. continuous trading; 3:50–3:56 p.m. MOC Imbalance Period; 3:56–4:00 p.m. Freeze Period; 4:00 p.m. Market On Close (MOC) auction",
+          "quote": "3:50 PM - 4:00 PM Market On Close (MOC) - The MOC facility consists of 2 market states: 3:50 pm Imbalance Period - Allow entry of new Market on Close orders, with no cancels or amends. Allow entry of Limit on Close orders on either side and with any volume, with no cancels and aggressive price amends only. 3:56 pm Freeze Period - The Freeze Period begins simultaneously across all symbols at a random point between 3:56 pm and 3:57 pm.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Trading Hours（官网）",
+              "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "after_market": {
+          "zh": "4:15pm-5:00pm延时交易时段（Extended Trading Session），仅可在最后成交价（Last Sale Price）成交",
+          "en": "4:15–5:00 p.m. Extended Trading Session; trades may only occur at the Last Sale Price",
+          "detail": "4:00pm-4:10pm另有价格波动延展期（Price Movement Extension，见closing_mechanism），4:10pm-4:15pm为盘后撤单期（Post Market Cancel Session）。",
+          "quote": "4:15 PM - 5:00 PM Extended Trading Session - Orders at the last sale price are accepted, but trades may only occur at the last sale price except when the last sale price is an invalid tick and for regulatory approval of a specialty price cross.",
+          "confidence": "high",
+          "sources": [
+            {
+              "title": "Trading Hours（官网）",
+              "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null
+        },
+        "night_session": {
+          "zh": "无",
+          "en": "None",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Trading Hours（官网）",
+              "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "holidays_note": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网另有独立的多年交易日历页（Calendar），本次未展开逐年抓取核实具体假期日期，留空。",
+        "sources": [
+          {
+            "title": "Trading Hours（官网）",
+            "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘集合竞价（Market on Open, MOO），9:30am，所有可撮合订单以单一开盘价成交，未成交剩余订单（Limit on Open订单除外）转入连续限价订单簿",
+        "en": "Market on Open (MOO) auction at 9:30 a.m.; all matching orders execute at a single opening trade price, with unfilled residuals (except Limit on Open orders) carried into the continuous limit order book",
+        "quote": "9:30 AM Market on Open (MOO) - All matching orders are executed at a single opening trade price. Any remaining orders not filled during the opening, with the exception of Limit on Open orders, are carried through to the continuous limit order book.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Trading Hours（官网）",
+            "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价（Market on Close, MOC），4:00pm；若计算收盘价（CCP）超出价格波动延展（PME）范围，触发4:00-4:10pm价格波动延展期重新计算；TSX的PME参数为3%或5个最小报价单位（取较大者），收盘价接受度（CPA）参数为10%",
+        "en": "Market on Close (MOC) auction at 4:00 p.m.; if the Calculated Closing Price (CCP) exceeds the Price Movement Extension (PME) range, a 4:00–4:10 p.m. PME period is triggered to recalculate; for TSX the PME parameter is 3% or five trading increments (whichever is greater), with a 10% Closing Price Acceptance (CPA) parameter",
+        "sources": [
+          {
+            "title": "Trading Hours（官网）",
+            "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Order Types and Functionality Guide（PDF，TMX GROUP）",
+            "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The following parameters are in place to manage price volatility:\n\nMARKET & PRODUCT                                                                      PME %                                                            CPA\n\nTSX                                                                3% or five trading increments                                                       10%\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "电子连续限价订单簿（CLOB）撮合；同一经纪商的双方挂单可触发「经纪商优先撮合」（Broker Preferencing），不受订单簿原有排序位置限制，Jitney单与匿名单不适用此优先机制",
+        "en": "Electronic Central Limit Order Book (CLOB) matching; Broker Preferencing lets an incoming attributed order match another attributed order from the same broker regardless of order-book position, though Jitney and Anonymous orders are excluded",
+        "detail": "未找到对价格/时间优先顺序逐条列明的官方总纲式条文，本条基于Order Types页面的订单类型说明归纳。",
+        "sources": [
+          {
+            "title": "Order Types（官网）",
+            "url": "https://www.tsx.com/en/trading/toronto-stock-exchange/order-types-and-features/order-types",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Broker Preferencing An incoming attributed order from a broker will automatically be matched with another attributed order from the same broker in the same trading venue, regardless of its position in the order book. Jitney and Anonymous orders are excluded from broker preferencing opportunities.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "order_types": {
+        "zh": "限价单、市价单、冰山单（Iceberg）、暗盘单（Dark Pegged/Dark Limit）、绕过标记单（Bypass）、待触发单（On-Stop）等；另有MOC/LOC（Limit on Close）等收盘专用订单",
+        "en": "Limit Order, Market Order, Iceberg Order, Dark Order (Dark Pegged/Dark Limit), Bypass Marker, On-Stop Order, plus closing-specific MOC/LOC (Limit on Close) orders",
+        "sources": [
+          {
+            "title": "Order Types（官网）",
+            "url": "https://www.tsx.com/en/trading/toronto-stock-exchange/order-types-and-features/order-types",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Limit Order An order to buy or sell at a specified price or better. Market Order An order to buy or sell that is to be executed immediately at the best available price.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "tick_size": {
+        "zh": "$0.005-$0.495/股：最小报价单位$0.005；$0.50及以上：最小报价单位$0.01",
+        "en": "$0.005–$0.495/share: $0.005 increment; $0.50 and above: $0.01 increment",
+        "sources": [
+          {
+            "title": "Order Types and Functionality Guide（PDF，TMX GROUP，6.1.2节）",
+            "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "6.1.2 Standard Trading Price Increments\nStandard Trading Price Increments are based on the order's price level:\n\nSECURITY PRICE LEVEL                                            Standard Trading Price Per Share (Cents)\n\n              $0.005 - $0.495/share                                              $0.005\n\n                  $0.50 and above                                                 $0.01\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "board_lot_size": {
+        "zh": "按价格分层：$0.10以下1,000股；$0.10-$1.00（不含）500股；$1.00以上100股",
+        "en": "Tiered by price: 1,000 units below $0.10/unit; 500 units at $0.10–$0.99/unit; 100 units above $1.00/unit",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange Rule Book（PDF，Effective January 13, 2026）",
+            "url": "https://www.tsx.com/en/resource/1464",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "“board lot” means: 1,000 units of a security trading at less than $0.10 per unit; 500 units of a security trading at $0.10 or more per unit and less than $1.00 per unit; 100 units of a security trading at more than $1.00 per unit; and such other number of units of a security as may be specified by the Exchange from time to time in respect of a particular security or class of securities.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "odd_lot_handling": {
+        "zh": "碎股（Odd Lot）不进入常规CLOB；做市商及其「Registered Trader（RT）」在最优买卖价（Protected NBBO）提供自动全额成交保证，无RT或不可成交时进入独立的碎股订单簿，按All or None方式撮合",
+        "en": "Odd Lots do not trade in the regular CLOB; Market Making firms' Registered Traders (RTs) auto-execute a guaranteed complete fill at the Protected NBBO, otherwise orders rest in a separate Odd Lot book and trade All-or-None",
+        "sources": [
+          {
+            "title": "Order Types（官网）",
+            "url": "https://www.tsx.com/en/trading/toronto-stock-exchange/order-types-and-features/order-types",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Orders with volume less than a standard trading unit are considered Odd Lot and do not trade in the regular Central Limit Order Book (CLOB). On TSX, Market Making firms and their Registered Traders (RT's) perform auto execution of Odd Lots. The RT automatically guarantees a complete fill at the Protected NBBO for Odd Lot orders priced at or better than the opposite side's best price. ... Odd Lots only trade as \"All or None\" which means partial fills are not accepted.\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "dynamic_reference",
+          "zh": "非固定百分比/绝对值幅，而是以「Marketplace Threshold」（围绕National Last Sale Price动态计算的价格偏离限制）与「Bid/Ask Tick Limit」（按报价分层的穿透档位限制）两套机制组合构成的动态价格带",
+          "en": "Not a fixed percentage/absolute band; combines dynamic \"Marketplace Threshold\" price-deviation limits around the National Last Sale Price with tiered \"Bid/Ask Tick Limit\" sweep-depth limits",
+          "sources": [
+            {
+              "title": "Order Types and Functionality Guide（PDF，TMX GROUP，6.2.2/6.2.3节）",
+              "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "quote": "A marketplace threshold parameter is applied to each security, as a permissible price deviation limit from a pair of reference prices: The current National Last Sale Price (NLSP). The NLSP as of the beginning of the current minute. ... The price deviation limit varies from security to security, based on security type and price range, but will always be at or inside the limits specified by the CIRO Marketplace Threshold guidance.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "detail": null
+        },
+        "main_board": {
+          "zh": "Bid/Ask Tick Limit按报价起始价分档：$0.00起0.10个报价单位、$1.00起0.25、$5.00起0.50、$50.00起1.00、$100.00起5.00（股票；债券统一5.00）",
+          "en": "Bid/Ask Tick Limit tiers by starting price: 0.10 ticks from $0.00, 0.25 from $1.00, 0.50 from $5.00, 1.00 from $50.00, 5.00 from $100.00 (equities; debentures flat at 5.00)",
+          "sources": [
+            {
+              "title": "Order Types and Functionality Guide（PDF，TMX GROUP，6.2.3节）",
+              "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "quote": "START PRICE                             0.00           1.00            5.00            50.00          100.00\n\nEquities                                 0.10          0.25            0.50             1.00            5.00\n\nDebentures                               5.00          5.00            5.00             5.00            5.00\n",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "other_boards": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "TSX本身无其他板块，见 listing.boards 的说明。",
+          "sources": [
+            {
+              "title": "Trading Hours（官网）",
+              "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "en": null,
+          "enum": null,
+          "quote": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "index_level",
+        "zh": "全市场熔断（Market-Wide Circuit Breaker），三级阈值：一级7%（暂停15分钟）、二级13%（暂停15分钟）、三级20%（当日剩余时间停市）；基准为标普500指数，美股休市时改用标普/多伦多综指（S&P/TSX Composite Index）；由CIRO统一监管跨市场协调停牌",
+        "en": "Market-Wide Circuit Breaker with three levels: Level 1 at 7% (15-min halt), Level 2 at 13% (15-min halt), Level 3 at 20% (halts trading for the remainder of the day); benchmarked to the S&P 500, switching to the S&P/TSX Composite Index when U.S. markets are closed; coordinated cross-market halt regulated by CIRO",
+        "detail": "原始出处应是CIRO（ciro.ca）的Guidance on Market-wide Circuit Breakers，但ciro.ca本次\n多次尝试（不同UA/headers）均返回403，改用OSC投资者教育网站GetSmarterAboutMoney.ca的\n说明页作为替代来源——该站页脚署名「© Ontario Securities Commission」「Brought to you\nby the OSC Investor Office」，视为监管机构文件而非第三方，故confidence仍标high。\n",
+        "sources": [
+          {
+            "title": "Market-wide circuit breakers（GetSmarterAboutMoney.ca，OSC Investor Office）",
+            "url": "https://www.getsmarteraboutmoney.ca/learning-path/stocks/market-wide-circuit-breakers/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "1 7% 15 minutes* 2 13% 15 minutes* 3 20% Rest of the day *No trading halt if price decline happens after 3:25 p.m., unless there is Level 3 halt.",
+        "confidence": "high",
+        "verified": "2026-08-16"
+      },
+      "volatility_interruption": {
+        "zh": "个股熔断机制（Single Stock Circuit Breaker, SSCB）：5分钟内价格波动达10%以上，跨全体加拿大市场自动触发该股票5分钟停牌；停牌前触发价外5%以上的成交事后撤销；初期适用范围为标普/多伦多综指成份股及以其为主要持仓的ETF",
+        "en": "Single Stock Circuit Breakers (SSCB): a 10%-or-more price swing within a 5-minute period automatically triggers a 5-minute halt in that security across all Canadian marketplaces; trades executed more than 5% beyond the triggering price are cancelled; initially applies to S&P/TSX Composite Index constituents and ETFs comprised principally of listed securities",
+        "sources": [
+          {
+            "title": "Order Types and Functionality Guide（PDF，TMX GROUP，6.2.4节）",
+            "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Single-stock circuit breakers are an important tool to help mitigate short-term volatility in the trading of individual stocks. Recent regulatory changes introduced single stock circuit breakers. This means that a five-minute halt of trading in a security will now automatically trigger across all Canadian marketplaces if the price of the security swings 10% or more within a five-minute period.\n\nInitially, SSCBs will apply to all securities included in the S&P/TSX Composite Index, as well as to those exchange-traded funds (ETFs) which are comprised principally of listed securities. All trades executed at more than 5% beyond the price that triggered the SSCB will be cancelled.\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "分两类：「No Matching Halt」（多因监管方就发行人新闻等待发布施加，订单可挂但不撮合）与「Full Halt」（挂单/改单/撮合全部暂停，仍可撤单）；Rule Book另规定非本所上市证券（Other Securities）在受监管停牌或其上市所停牌时同步停牌",
+        "en": "Two types: \"No Matching Halt\" (typically imposed by regulators pending issuer news, orders may be entered but not matched) and \"Full Halt\" (order entry, amendment and matching all suspended, though cancellations remain allowed); the Rule Book separately requires TSX to halt an unlisted \"Other Security\" if it is subject to a regulatory halt or suspended by its home exchange",
+        "sources": [
+          {
+            "title": "Order Types and Functionality Guide（PDF，TMX GROUP，6.2.1节）",
+            "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "6.2 Trading Controls\n6.2.1 Halts\nHalts are manually applied and lifted by Trading Services, and notification messages are sent out on all public market data feeds. ... TSX and TSXV may employ either of the two types of halts that are described below (Matching Halt and Full Halt). ... No Matching Halt The majority of halts are “No Matching” Halts, and are imposed by Regulators pending news regarding the issuer of the security.\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "intraday_reversal": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "TSX Rule Book/Order Types Guide本次抓取范围内未找到对当日买卖回转是否受限的专门条款，留空不猜（区别于结算层面的T+1，见clearing.settlement_cycle）。",
+        "sources": [
+          {
+            "title": "Trading Hours（官网）",
+            "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "short_selling": {
+        "zh": "TSX规则手册本身已于2002年废除卖空定义与规则条款，相关卖空规则现由CIRO制定并统一执行的UMIR（Universal Market Integrity Rules）规范，非TSX自订；UMIR具体的卖空限制条款（如是否有报升规则）本次未能核实，见 OPEN-QUESTIONS",
+        "en": "TSX's own Rule Book repealed its short-sale definition and rules in 2002; short-selling conduct is instead governed by CIRO's Universal Market Integrity Rules (UMIR), not TSX-specific rules; the substantive current UMIR short-selling regime was not verifiable this session, see OPEN-QUESTIONS",
+        "detail": "ciro.ca（UMIR权威出处）本次多次尝试（不同UA/headers）均返回403，web.archive.org快照\n也一直503无法访问，未能核实UMIR卖空规则的具体条款（如是否存在报升规则、限制清单等），\n故enum留空不猜，仅记录「规则制定权归属CIRO而非TSX」这一结构性事实（该事实本身来自TSX\n官方规则手册，故标high）。\n",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange Rule Book（PDF，Effective January 13, 2026）",
+            "url": "https://www.tsx.com/en/resource/1464",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "“short sale” Repealed (April 1, 2002) ... “UMIR” means the Universal Market Integrity Rules as adopted by IIROC or a predecessor or successor organization and approved by the applicable securities regulatory authorities and in effect from time to time.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "block_trade": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网提及Cross Facilities（含Specialty Crosses：Basis/VWAP/Contingent/Special Trading Session/NAV/Internal crosses）与MGF Facility等相邻机制，但本次未找到「大宗交易」最低起点规模的专门条款，留空不猜。",
+        "sources": [
+          {
+            "title": "Trading Hours（官网）",
+            "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "dark_pool": {
+        "zh": "TSX自身内嵌暗盘单类型（Dark Pegged、Dark Limit），提供完全盘前匿名，与展示订单簿原生整合；未核实外部另类交易系统（ATS）如MATCHNow在TSX撮合体系外的暗池占比",
+        "en": "TSX has its own integrated dark order types (Dark Pegged, Dark Limit) offering full pre-trade anonymity, natively integrated with the displayed order book; external ATS dark pools (e.g. MATCHNow) outside TSX's own matching system were not verified this session",
+        "sources": [
+          {
+            "title": "Order Types（官网）",
+            "url": "https://www.tsx.com/en/trading/toronto-stock-exchange/order-types-and-features/order-types",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Dark Order Types On TSX and TSX Venture, dark order types include Dark Pegged orders and Dark Limit orders. These orders types provide full pre-trade anonymity and are introduced as native order features fully integrated with the two markets' displayed order book.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "market_maker_scheme": {
+        "zh": "做市商制度：经批准的「Market Maker Firm」为其负责证券（Securities of Responsibility）维持公平有序双向市场，由「Registered Trader」代表履行日常义务，兼管碎股自动执行",
+        "en": "Market Maker scheme: approved Market Maker Firms maintain a fair, orderly two-sided market in their assigned Securities of Responsibility, carried out day-to-day by a Registered Trader, who also handles Odd Lot auto-execution",
+        "detail": "上市公司在挂牌流程中须选定一名做市商，其角色见 Technical Guide to Listing FAQ：「a Market Maker is assigned to your stock to maintain a fair, orderly and continuous two-sided market」。",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange Rule Book（PDF，Effective January 13, 2026，Rule 4-603）",
+            "url": "https://www.tsx.com/en/resource/1464",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Technical Guide to Listing（PDF，©2023 TSX Inc.）",
+            "url": "https://www.tsx.com/ebooks/en/technical-guide-to-listing/files/assets/common/downloads/Technical%20Guide%20to%20Listing.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The primary responsibilities of a Market Maker are to maintain a fair and orderly market in its securities of responsibility and generally to make a positive contribution to the functioning of the market.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "connect_schemes": {
+        "zh": "无类似沪港通的跨境交易连接安排；加拿大证券管理机构（CSA）与美国SEC之间有「多法域披露制度」（Multi Jurisdictional Disclosure System, MJDS），允许符合条件的加拿大发行人以加拿大招股书披露文件满足部分美国发行/报告要求——这是披露互认安排，不是交易连接机制，不与Stock Connect混为一谈",
+        "en": "No cross-border trading-connectivity scheme analogous to Stock Connect; the CSA and the U.S. SEC operate the Multi Jurisdictional Disclosure System (MJDS), letting eligible Canadian issuers satisfy certain U.S. offering/reporting requirements via Canadian-compliant disclosure documents — a disclosure-equivalence regime, not a trading link",
+        "sources": [
+          {
+            "title": "Technical Guide to Listing（PDF，©2023 TSX Inc.）",
+            "url": "https://www.tsx.com/ebooks/en/technical-guide-to-listing/files/assets/common/downloads/Technical%20Guide%20to%20Listing.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Foreign companies listed in Canada may be able to access the Multi Jurisdictional Distribution System (MJDS), a reciprocal initiative by the Canadian Securities Administrators and the U.S. Securities Exchange Commission (the SEC). The MJDS allows eligible Canadian issuers to satisfy certain U.S. offering and reporting requirements by submitting disclosure documents that comply with the requirements in Canada.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      }
+    },
+    "listing": {
+      "boards": [],
+      "review_system": {
+        "zh": "披露为本，按发行人类型（Income & Revenue-Producing / Pre Income-Producing / New Enterprise / Mining / Oil and Gas Companies）分设量化上市资格路径，由TSX自行审核并须符合OSC核准的Company Manual规则",
+        "en": "Disclosure-based; TSX applies distinct quantitative eligibility tracks by issuer type (Income & Revenue-Producing / Pre Income-Producing / New Enterprise / Mining / Oil and Gas Companies), reviewed by TSX itself under OSC-approved Company Manual rules",
+        "detail": "与NYSE/JPX一样，不完全落入「注册制/核准制」二分——是受控词表第3条已积累的第五个真实案例。\nIncome & Revenue-Producing路径要求满足「Income Test」（税前净利润$750,000）或「Revenue\nTest」（营收$10,000,000）二选一，再叠加「Market Support」市值门槛$100,000,000；具体\n数字来自2025年11月6日OSC核准生效的Company Manual最新修订文本（取代了此前「Exempt/\nNon-Exempt Issuer」的分类标签，术语改为直接按上市路径命名）。\n",
+        "sources": [
+          {
+            "title": "Notice of Approval – Amendments to the Toronto Stock Exchange Company Manual (November 6, 2025)（PDF，OSC官网，Appendix D 最终清洁版文本）",
+            "url": "https://www.osc.ca/sites/default/files/2025-11/tsx_20251106_noa-exchange-company-manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Sec. 309. Requirements for Eligibility for Listing1\n\n         a)        Income & Revenue-Producing:\n\n                   i)        Operations: either (A) annual audited pre-tax net income from continuing operations of $750,000 in the\n                             fiscal year immediately preceding the filing of the listing application (the \"Income Test\"); or (B) annual\n                             audited revenue of $10,000,000 in the fiscal year immediately preceding the filing of the listing\n                             application (the \"Revenue Test\");\n                   ...\n                   iii)      Market Support: market capitalization of at least $100,000,000.\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "transfer_between_boards": {
+        "zh": "严格说不是同一实体内部板块转移，而是从姊妹交易所TSXV「毕业」转至TSX挂牌（Graduates from TSXV），2026年2月单月有2家公司完成此流程",
+        "en": "Strictly not an intra-entity board transfer, but a \"graduation\" from sister exchange TSXV to a TSX listing; 2 companies graduated in February 2026",
+        "detail": "与NYSE集团内部转板结构类似——是集团内跨交易所实体的流程，非同一法人内部换板，故本条zh特别强调不要和真正的「同实体转板」混淆。",
+        "sources": [
+          {
+            "title": "TMX Group Equity Financing Statistics – February 2026（官方新闻稿 PDF）",
+            "url": "https://s21.q4cdn.com/671813756/files/doc_news/TMX-Group-Equity-Financing-Statistics---February-2026-2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Toronto Stock Exchange\n\n                              February 2026           January 2026           February 2025\nIssuers Listed                                    2,132                  2,110                   1,861\nNew Issuers Listed                                   28                     23                      25\nIPOs                                                 22                     23                      14\nGraduates from TSXV                                   2                      0                       1\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "continuing_obligations": {
+        "zh": "持续上市要求包括适用于其上市类别的管理层要求（Diversified/Mining/Oil and Gas/ETP/Closed-end Fund/Structured Products各有对应条款）",
+        "en": "Continuing obligations include category-specific management requirements (separate provisions for Diversified, Mining, Oil and Gas, ETP, Closed-end Fund and Structured Product issuers)",
+        "sources": [
+          {
+            "title": "Notice of Approval – Amendments to the Toronto Stock Exchange Company Manual (November 6, 2025)（PDF，OSC官网）",
+            "url": "https://www.osc.ca/sites/default/files/2025-11/tsx_20251106_noa-exchange-company-manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "TSX requires that each listed issuer must meet on an ongoing basis the management requirements relevant to its category of listing that are described in Section 311 (for Diversified Issuers), Section 316 (for Mining Issuers), Section 321 (for Oil and Gas Issuers), Section 1102 (ETPs), Section 1103 (Closed-end Funds) and Section 1104 (Structured Products).",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "suspension_resumption": {
+        "zh": "退市审查程序启动前，上市公司均有权申请聆讯陈述意见（Opportunity to be Heard）——常规审查（Remedial Review Process）给予最长120天整改期，重大情形走加速审查（Expedited Review Process）约48小时内安排聆讯；若无法说服TSX，公司证券先被停牌，再于停牌日起第30个日历日正式退市",
+        "en": "Before delisting review concludes, the issuer is given an opportunity to be heard — the Remedial Review Process allows up to 120 days to cure deficiencies, while the Expedited Review Process schedules a hearing within about 48 hours for serious cases; if unpersuaded, TSX suspends the securities first, with delisting effective on the 30th calendar day after suspension",
+        "sources": [
+          {
+            "title": "Notice of Approval – Amendments to the Toronto Stock Exchange Company Manual (November 6, 2025)（PDF，OSC官网，Appendix D）",
+            "url": "https://www.osc.ca/sites/default/files/2025-11/tsx_20251106_noa-exchange-company-manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "A listed issuer that has been notified that it is under delisting review because of the applicability of any of the delisting criteria set out in Section 709, paragraphs (b) or (c) of Section 710, Section 711 or Section 712 will normally be given up to 120 days from the date of such notification (the \"delisting review period\") to correct the deficiencies that triggered the delisting review. ... TSX will determine to suspend the listed issuer's securities from trading as soon as practicable after such hearing and the listed issuer's securities will be delisted on the 30th calendar day after the suspension date.\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_conditions": {
+        "zh": "以Diversified Issuers为例：总资产低于$3,000,000或最近年度经营性收入低于$3,000,000（研发型发行人改用研发支出$1,000,000门槛）；另有违反上市协议（Listing Agreement）、未满足对应类别管理层要求等一般性退市事由",
+        "en": "For Diversified Issuers: total assets below $3,000,000 or annual operating revenue below $3,000,000 in the most recent year (R&D issuers instead face a $1,000,000 R&D-spend threshold); general grounds also include breach of the Listing Agreement or failure to meet category-specific management requirements",
+        "sources": [
+          {
+            "title": "Notice of Approval – Amendments to the Toronto Stock Exchange Company Manual (November 6, 2025)（PDF，OSC官网，Appendix D）",
+            "url": "https://www.osc.ca/sites/default/files/2025-11/tsx_20251106_noa-exchange-company-manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Sec. 710.\n\nSpecifically, securities of a listed issuer may be delisted if\n\nDiversified Issuers\n\n         (b)       the listed issuer fails to have:\n\n                   (i)       total assets of at least $3,000,000; and\n\n                   (ii)      annual revenue from ongoing operations of at least $3,000,000 in the most recent year.\n\n                   Criteria (b)(i) and (ii) above do not apply to a research and development listed issuer; however, such a company\n                   may be delisted if it has failed to spend at least $1,000,000 on research and development, acceptable to TSX,\n                   in the most recent year; or\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_process": {
+        "zh": "双轨制：常规审查（Remedial Review Process，最长120天整改期+聆讯）与加速审查（Expedited Review Process，约48小时内安排聆讯，适用于严重情形），两者结果均为先停牌后于停牌日起第30个日历日退市",
+        "en": "Two tracks: Remedial Review Process (up to 120 days to cure plus a hearing) and Expedited Review Process (hearing within about 48 hours, for serious cases); both converge on suspension followed by delisting on the 30th calendar day after suspension",
+        "sources": [
+          {
+            "title": "Notice of Approval – Amendments to the Toronto Stock Exchange Company Manual (November 6, 2025)（PDF，OSC官网，Appendix D）",
+            "url": "https://www.osc.ca/sites/default/files/2025-11/tsx_20251106_noa-exchange-company-manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The delisting review process will be conducted through either the \"Remedial Review Process\" or the \"Expedited Review Process\", as follows:\n\nRemedial Review Process\n\n         (a)      A listed issuer that has been notified that it is under delisting review because of the applicability of any of the\n                  delisting criteria set out in Section 709, paragraphs (b) or (c) of Section 710, Section 711 or Section 712 will\n                  normally be given up to 120 days from the date of such notification (the \"delisting review period\") to correct\n                  the deficiencies that triggered the delisting review.\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_transition_period": {
+        "zh": "停牌日起第30个日历日为退市生效日，期间发行人仍须遵守全部TSX要求（含第602条规定的义务）",
+        "en": "Delisting becomes effective on the 30th calendar day after the suspension date; during that window the issuer remains subject to all TSX requirements, including obligations under Section 602",
+        "sources": [
+          {
+            "title": "Notice of Approval – Amendments to the Toronto Stock Exchange Company Manual (November 6, 2025)（PDF，OSC官网，Appendix D）",
+            "url": "https://www.osc.ca/sites/default/files/2025-11/tsx_20251106_noa-exchange-company-manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "the listed issuer's securities will be delisted on the 30th calendar day after the suspension date. During the period between the suspension date and delisting date, the listed issuer remains subject to all TSX requirements, including compliance with the provisions of Section 602.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-16",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "sptsx-composite",
+          "name_zh": "标普/多伦多证交所综合指数",
+          "name_native": "S&P/TSX Composite Index",
+          "compiler": "other",
+          "weighting_method": "float_adjusted",
+          "flagship": "yes",
+          "description": "由第三方S&P Dow Jones Indices计算管理（非交易所自编，与NYSE Composite由ICE Data\nIndices编制是同一种模式），TMX Group拥有并分发全部S&P/TSX指数数据。基日/基点本次未在\n抓取的方法论文件（June 2016版本，tsx.com自行托管，版本较旧）中定位到明确数值，留空\n不猜；weighting_method按方法论文件\"float-adjusted market capitalization\"表述定为\nfloat_adjusted。\n"
+        },
+        {
+          "id": "sptsx-60",
+          "name_zh": "标普/多伦多证交所60指数",
+          "name_native": "S&P/TSX 60",
+          "compiler": "other",
+          "weighting_method": "float_adjusted",
+          "flagship": "no",
+          "description": "大盘蓝筹子指数，成份股取自S&P/TSX Composite"
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "enum": "t1",
+        "zh": "T+1（现行规则为「交易日后第一个结算日」；2024年5月27日前后该规则区块被修订/废除多项例外条款，与北美市场整体从T+2改为T+1的时点吻合）",
+        "en": "T+1 (current rule reads \"the first Settlement Day after the trade date\"; several exception provisions in the same rule area were repealed/amended around May 27, 2024, matching the broader North American T+2-to-T+1 migration date)",
+        "detail": "TSX规则手册Rule 5-103本身没有直接写「T+1」这个缩写，而是写「the first Settlement Day\nafter the trade date」，并在同一条款区块标注多处「Repealed (May 27, 2024)」——2024年\n5月27日是美股/加股同步从T+2改为T+1的公认生效日（见us-nyse.yml的settlement_cycle同一\n史实，来源为第三方律所简报）。这里改用TSX官方规则手册原文作为一手证据，比NYSE当初依赖\n第三方简报更直接。\n",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange Rule Book（PDF，Effective January 13, 2026，Rule 5-103）",
+            "url": "https://www.tsx.com/en/resource/1464",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "(1)       Exchange trades in securities shall settle on the first Settlement Day after the trade date, unless otherwise\n          provided by the Exchange or the parties to the trade by mutual agreement.\n(2)       Notwithstanding Rule 5-103(1), unless otherwise provided by the Exchange or the parties to the trade by\n          mutual agreement:\n                   trades on a when issued basis made:\n                            prior to the first Trading Day of the anticipated date of issue of the security shall be\n                            settled on the anticipated date of issue of such security, and\n                            on or after the first Trading Day before the anticipated date of issue of the security shall\n                            settle on the first settlement day after the trade date, provided if the security has not been\n                            issued on the date for settlement such trades shall be settled on the date that the security\n                            is actually issued;\n                   trades for rights, warrants and installment receipts made:\n                            Repealed (May 27, 2024)\n",
+        "confidence": "high",
+        "verified": "2026-08-16"
+      },
+      "ccp_name": {
+        "zh": "CDS Clearing and Depository Services Inc.",
+        "en": "CDS Clearing and Depository Services Inc.",
+        "detail": "CDS本身也是TMX Group旗下公司（tmx.com官网「TMX Group Companies」清单列有「CDS」），\n即清算/托管机构与交易所同属一个集团——这是与美国NSCC/DTCC（独立于NYSE集团之外）、\n中国ChinaClear（独立于交易所之外）都不同的结构，值得记入OPEN-QUESTIONS。\n详见tmx.com页面的集团公司清单quote。\n",
+        "sources": [
+          {
+            "title": "Order Types and Functionality Guide（PDF，TMX GROUP，6.7节）",
+            "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "TSX Regulatory Policies and Procedures（官网，含TMX Group Companies清单导航）",
+            "url": "https://www.tmx.com/en/tmx-group/regulatory-policies/toronto-stock-exchange-regulatory-policies-and-procedures",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "All transactions executed are reported to CDS Clearing and Depository Services Inc. at day end for clearing and settlement and management of counterparty and settlement risk. The CDS Participant Rules govern the operation of CDS clearing and settlement services, including risk management.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "csd_name": {
+        "zh": "加拿大证券存管公司（The Canadian Depository for Securities Limited, CDS）",
+        "en": "The Canadian Depository for Securities Limited (CDS)",
+        "detail": "TSX自身规则手册把「Clearing Corporation」明确定义为CDS，是CCP与CSD职能由同一法律实体承担的又一例证（与港交所CCASS/HKSCC类似的合一模式）。",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange Rule Book（PDF，Effective January 13, 2026）",
+            "url": "https://www.tsx.com/en/resource/1464",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "“Clearing Corporation” means The Canadian Depository for Securities Limited or such other person as recognized by the Ontario Commission as a clearing agency for the purposes of the Securities Act and which has been designated by the Exchange as an acceptable clearing agency.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "initial_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "现货股票市场无衍生品意义上的初始保证金；融资融券保证金细节未核实，留空。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delivery_method": {
+        "enum": "na",
+        "zh": "不适用（现货市场，无实物/现金交割概念）",
+        "en": "Not applicable (cash market; no physical/cash delivery concept)",
+        "detail": "推断依据：products章节所列品类（普通股/ETF/封闭式基金/REITs/结构性产品/债券/收益信托单位）均为现货且以电子簿记形式经CDS结算，未见实物交割型衍生品——对本文件自身products章节的内部推断，下面的sources只笼统佐证TSX以现货证券产品为主，不构成对本字段结论的独立证据。",
+        "sources": [
+          {
+            "title": "Technical Guide to Listing（PDF，©2023 TSX Inc.，列出TSX/TSXV经营的证券品类均为现货）",
+            "url": "https://www.tsx.com/ebooks/en/technical-guide-to-listing/files/assets/common/downloads/Technical%20Guide%20to%20Listing.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "quote": null
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "default_management": {
+        "zh": "由CDS Participant Rules规范清算参与人的风险管理与违约处置，具体违约瀑布/风险共担机制细节本次未展开核实",
+        "en": "Governed by the CDS Participant Rules for participant risk management; the specific default waterfall / loss-sharing mechanics were not verified in detail this session",
+        "sources": [
+          {
+            "title": "Order Types and Functionality Guide（PDF，TMX GROUP，6.7节）",
+            "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The CDS Participant Rules govern the operation of CDS clearing and settlement services, including risk management.",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "Technical Guide to Listing FAQ确认外国发行人在TSX上市无需在加拿大注册成立公司，但这是发行人（issuer）侧的规则，不是境外投资者（investor）参与本所交易的准入通道，两者不宜混为一谈，故此字段仍留空。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "membership_structure": {
+        "zh": "会员制：经批准的「Participating Organization（PO）」须同时保持在受认可自律组织（CIRO）的会员资格，一旦丧失CIRO会员资格，其TSX资格自动终止",
+        "en": "Membership structure: approved \"Participating Organizations\" (POs) must concurrently maintain membership in a recognized self-regulatory organization (CIRO); losing SRO membership automatically terminates PO status with the Exchange",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange Rule Book（PDF，Effective January 13, 2026，Rule 2-301）",
+            "url": "https://www.tsx.com/en/resource/1464",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "If a Participating Organization ceases to be a member of a recognized self-regulatory organization, its status with the Exchange shall be terminated automatically.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "站内导航（Products & Services栏目）多处出现「TMX Quantum XA」字样，疑为撮合引擎/技术产品名称，但本次未抓取到对该系统的专门介绍页面，未采纳为正式字段值，留空。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "access_methods": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "major_outage_history": {
+        "zh": "2008年12月17日，TSX历史上首次因技术故障全天停市",
+        "en": "On December 17, 2008, TSX was closed for a full trading day for the first time due to a technical glitch",
+        "detail": "第三方（Wikipedia）来源，未核实故障具体原因与官方说法，confidence标medium。",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange（Wikipedia）",
+            "url": "https://en.wikipedia.org/wiki/Toronto_Stock_Exchange",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "On December 17, 2008, for the first time, the TSX was closed for a full trading day due to a technical glitch.",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "exchange_fees": {
+        "zh": "做市商-吃单者模式（maker-taker）：以非美元计价、非跨挂牌股票为例，主动吃单费约每股$0.0027（$1及以上价位），提供流动性一方获返佣约每股$0.0023；不同价位/品类（跨挂牌股票、ETF、低价股）费率分层",
+        "en": "Maker-taker pricing model: for example, non-interlisted equities priced at $1.00 or above are charged roughly $0.0027/share for removing displayed liquidity, with a roughly $0.0023/share rebate for providing it; rates are further tiered by price level and security type (interlisted equities, ETFs, sub-$1 stocks)",
+        "detail": "完整费率表按会员机构分层（如DRK暗盘、Retail零售通道等）另有细分档位，本条只归纳主要档位，不逐条摘录。",
+        "sources": [
+          {
+            "title": "TSX Trading Fee Schedule effective July 2, 2026（PDF）",
+            "url": "https://www.tsx.com/en/resource/3521/tsx-trading-fee-schedule-effective-july-2-2026-en.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "TSX Post-Open Continuous Trades Involving Displayed Orders in Equities and Exchange Traded Funds (ETFs):\n\n                                                                                         Where trade price per share is:\n                                                                                                                  ≥$1.00\n                                                                 < $1.00         Non-Interlisted\n                                                                                                           Interlisted Equities             ETFs\n                                                                                   Equities\nRemoving Displayed with Displayed or Dark\n  Fee / share / side                                           $0.00020              $0.0015                     $0.0027                    $0.0017\nProviding Displayed\n  Fee / share / side                                               $0                ($0.0011)                  ($0.0023)                  ($0.0013)\n",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "stamp_duty": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "该字段volatility: volatile，按铁律必须有sources才能填；本次未找到对「加拿大联邦层面是否征收证券交易印花税」的官方一手确认，不凭常识填写，留空。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "financial_transaction_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_gains_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "以加元（CAD）计价为主，对加拿大本土投资者本币风险较低；境外投资者持有CAD计价资产时，汇率风险来自其本币兑加元的波动；另有部分USD计价双重货币挂牌证券（见overview.trading_currency）",
+        "en": "Primarily CAD-denominated; low domestic FX risk for Canadian investors. Foreign investors holding CAD-denominated assets face FX risk from their home currency's fluctuation against the CAD; a subset of dual-currency listings trade in USD (see overview.trading_currency)",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "近年最大的一次自律监管架构变革：IIROC与MFDA于2023年合并为CIRO（见regulation.self_regulatory_org），交易操守类规则（UMIR）的制定权随之整体转移",
+        "en": "The most significant recent SRO structural change: IIROC and MFDA merged into CIRO in 2023 (see regulation.self_regulatory_org), transferring UMIR rulemaking authority accordingly",
+        "sources": [
+          {
+            "title": "Canadian Investment Regulatory Organization (CIRO)（OSC官网说明页）",
+            "url": "https://www.osc.ca/en/industry/market-regulation/self-regulatory-organizations-sro/canadian-investment-regulatory-organization-ciro",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The two predecessor SROs, the Investment Industry Regulatory Organization of Canada (IIROC) and the Mutual Fund Dealers Association of Canada (MFDA), amalgamated to continue as the New Self-Regulatory Organization of Canada (New SRO), effective January 1, 2023, which subsequently changed its name to CIRO on June 1, 2023.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "enforcement_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    }
+  }
+}

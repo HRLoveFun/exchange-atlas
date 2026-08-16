@@ -310,4 +310,9 @@ terms:
     note: B3计算担保品/保证金需求的风险方法论，模拟违约后平仓过程中的现金流评估风险，
       与Eurex Prisma同属"按方法论命名的保证金计算体系"，但计算逻辑不同，不与
       portfolio-margining一条合并
+  - id: single-stock-circuit-breaker
+    zh: 个股熔断机制
+    en: Single-Stock Circuit Breaker (SSCB)
+    natives: {en: "Single-Stock Circuit Breaker (SSCB)"}
+    note: 加拿大 CIRO 统一实施的个股级机制，价格在5分钟内波动达到固定阈值（如10%）即触发全市场范围内该股票的5分钟停牌，触发价外5%以上的成交事后撤销；与LULD的「持续价格带+触及后转停牌」结构不同，也与港交所VCM/东证特别气配的「不成交、显示指示性价格」结构不同，是第四种个股波动应对机制样本
 
