@@ -315,4 +315,9 @@ terms:
     en: Single-Stock Circuit Breaker (SSCB)
     natives: {en: "Single-Stock Circuit Breaker (SSCB)"}
     note: 加拿大 CIRO 统一实施的个股级机制，价格在5分钟内波动达到固定阈值（如10%）即触发全市场范围内该股票的5分钟停牌，触发价外5%以上的成交事后撤销；与LULD的「持续价格带+触及后转停牌」结构不同，也与港交所VCM/东证特别气配的「不成交、显示指示性价格」结构不同，是第四种个股波动应对机制样本
+  - id: instantaneous-price-stabilization
+    zh: 瞬间价格稳定措施
+    en: Instantaneous Price Stabilization Measures
+    natives: {zh-Hant: 瞬間價格穩定措施}
+    note: 台湾证券交易所个股级机制，逐笔交易时段内任一试算成交价超出「前5分钟滚动加权平均价」±3.5%即暂缓该证券撮合2分钟，2分钟后以集合竞价恢复成交，随后恢复逐笔交易；不同于港交所VCM（触发后进入5分钟冷静期）与东证特别气配（不成交只挂指示价），是「延后撮合+以集合竞价出清」这一第三种触发效果，与eurex-volatility-interruption（预期成交价超出动态/静态价格区间即触发，以集合竞价恢复）机制结构最接近但触发基准（滚动均价 vs 静态/动态参考价）与所属市场类型（现货 vs 衍生品）不同，故不合并条目
 
