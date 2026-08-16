@@ -16,6 +16,57 @@
       "trading_hours": null
     },
     {
+      "id": "br-b3",
+      "name_zh": "巴西B3交易所",
+      "name_native": {
+        "pt": "B3 S.A. – Brasil, Bolsa, Balcão"
+      },
+      "official_languages": [
+        "pt-BR"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "americas",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
+      "id": "ca-tsx",
+      "name_zh": "多伦多证券交易所",
+      "name_native": {
+        "en": "Toronto Stock Exchange (TSX)",
+        "fr": "Bourse de Toronto"
+      },
+      "official_languages": [
+        "en",
+        "fr"
+      ],
+      "source_lang": "en",
+      "group_id": "tmx-group",
+      "region": "americas",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
+      "id": "ch-six",
+      "name_zh": "瑞士证券交易所",
+      "name_native": {
+        "de": "SIX Swiss Exchange AG",
+        "fr": "SIX Swiss Exchange SA",
+        "en": "SIX Swiss Exchange"
+      },
+      "official_languages": [
+        "de",
+        "fr",
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": "six-group",
+      "region": "europe",
+      "tier": "standard",
+      "trading_hours": null
+    },
+    {
       "id": "cn-sse",
       "name_zh": "上海证券交易所",
       "name_native": {
@@ -102,6 +153,26 @@
       "trading_hours": null
     },
     {
+      "id": "fr-euronext",
+      "name_zh": "泛欧交易所",
+      "name_native": {
+        "en": "Euronext N.V."
+      },
+      "official_languages": [
+        "en",
+        "nl",
+        "fr",
+        "pt",
+        "it",
+        "nb"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "europe",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "hk-hkex",
       "name_zh": "香港交易及结算所（简称港交所）",
       "name_native": {
@@ -173,6 +244,21 @@
       }
     },
     {
+      "id": "kr-krx",
+      "name_zh": "韩国交易所",
+      "name_native": {
+        "ko": "한국거래소"
+      },
+      "official_languages": [
+        "ko"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "sa-tadawul",
       "name_zh": "沙特交易所（塔达吾尔）",
       "name_native": {
@@ -197,6 +283,21 @@
         "en"
       ],
       "source_lang": "en",
+      "group_id": null,
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
+      "id": "tw-twse",
+      "name_zh": "台湾证券交易所",
+      "name_native": {
+        "zh-Hant": "臺灣證券交易所"
+      },
+      "official_languages": [
+        "zh-Hant"
+      ],
+      "source_lang": "zh",
       "group_id": null,
       "region": "apac",
       "tier": "extended",

@@ -53,3 +53,16 @@
 | 平行市场合格投资者 | Qualified Investor (Parallel Market) |  | 沙特Nomu平行市场准入限制——只有合格投资者可交易该板块证券，一般公众不可直接参与；与主板面向公众的开放准入形成对比，未来遇到其他市场的"合格投资者专属板块"设计可比对沿用此译法 |
 | 做市商-吃单者定价模式 | Maker-Taker Pricing |  | 为市场提供流动性的报单（maker）获返佣，吃走流动性的一方（taker）付费的交易所收费结构；NYSE、Nasdaq 等美国电子化市场的主流费率模式，回填自 us-nyse（首次出现时未收录，us-nasdaq 建档时补录） |
 | 竞争性做市商制度 | Competing Market Maker | en: Market Maker | Nasdaq 传统做市商模式——同一证券允许多家会员机构同时登记为做市商、彼此竞争报价，不同于 NYSE 的单一指定做市商（DMM）在同一证券上独占价格发现职责；与 designated-market-maker 是同一大类（做市商制度）下两种结构不同的具体实现，不合并 |
+| 波动性中断 | Volatility Interruption (VI) | en: Volatility Interruption | 韩国交易所机制，分动态VI（以直前成交价为基准）与静态VI（以固定周期内的单一价格为基准）两种，触发后转为2分钟单一价格集合竞价；官方英文名与Eurex的Volatility Interruption相同，但触发比例与两段式动态/静态设计不同，不与eurex-volatility-interruption合并一条 |
+| 备兑停止制度（Sidecar） | Sidecar | en: Sidecar | 韩国交易所机制，KOSPI200或KOSDAQ150期货价格单方向剧烈变动达阈值时，暂停程序化交易挂单5分钟（每日单方向仅触发一次），与个股级的volatility-interruption、指数级的circuit-breaker-index是三套并行的稳定机制 |
+| 动态/静态价格区间机制 | Dynamic/Static Collars | en: Dynamic Collars / Static Collars | Euronext机制，两层阈值——动态区间基于逐笔更新的最新成交价，静态区间基于当日开盘价/前日收盘参考价；触及阈值触发预约期（reservation period），不是直接拒单的固定百分比涨跌停，与eurex-volatility-interruption、volatility-control-mechanism均不同类（三者机制细节各异，不合并） |
+| 交易所运营实体 | Market Undertaking |  | Euronext集团术语，指集团旗下各国分别注册、分别受本国法律与本国监管机构管辖的交易所法人实体（如Euronext Paris S.A.、Euronext Amsterdam N.V.），统一适用同一部Harmonised Rulebook；与NYSE Group/JPX Group那种"同一国家内多个独立法人"的集团结构不同，是"同一部规则、多个法域法人"的结构，见fr-euronext.yml顶部说明与OPEN-QUESTIONS框架性问题第1条 |
+| 波动性拍卖冷静期 | Volatility Auction (Call Session) | en: Volatility Auction Call Session | 价格触及静态/动态参考价容忍阈值后，暂停连续交易转入集合竞价撮合的冷静机制；沙特Tadawul（Volatility Auction）与JSE（Volatility Auction Call Session）均使用这一表述，与港交所VCM、Eurex波动性中断属同一功能类别但各自命名与触发基准不同 |
+| 静态/动态参考价 | Static / Dynamic Reference Price |  | 熔断与价格容忍阈值判定所依据的两类基准价——静态参考价一般为前收盘价（全天固定或按集合竞价更新），动态参考价随最新成交价滚动更新；JSE与sa-tadawul的Static/Static Limit、Eurex的dynamic/static price range均属此概念的不同实现 |
+| 交易隧道 | Trading Tunnel | pt: Túnel de negociação | B3机制，以最新成交价/最优报价动态计算基准价（PBT）、再加减法或乘除法算出带宽， 用于拒绝申报（rejection tunnel）、自动转入集合竞价（auction tunnel）与拍卖保护 （protection tunnel）三种用途；区别于固定百分比涨跌停（价涨跌幅限制）、日本式阶梯 绝对值幅，也不同于美股LULD以过去5分钟均价为基准 |
+| 平仓风险评估法 | Closeout Risk Evaluation (CORE) | pt: CORE | B3计算担保品/保证金需求的风险方法论，模拟违约后平仓过程中的现金流评估风险， 与Eurex Prisma同属"按方法论命名的保证金计算体系"，但计算逻辑不同，不与 portfolio-margining一条合并 |
+| 个股熔断机制 | Single-Stock Circuit Breaker (SSCB) | en: Single-Stock Circuit Breaker (SSCB) | 加拿大 CIRO 统一实施的个股级机制，价格在5分钟内波动达到固定阈值（如10%）即触发全市场范围内该股票的5分钟停牌，触发价外5%以上的成交事后撤销；与LULD的「持续价格带+触及后转停牌」结构不同，也与港交所VCM/东证特别气配的「不成交、显示指示性价格」结构不同，是第四种个股波动应对机制样本 |
+| 瞬间价格稳定措施 | Instantaneous Price Stabilization Measures | zh-Hant: 瞬間價格穩定措施 | 台湾证券交易所个股级机制，逐笔交易时段内任一试算成交价超出「前5分钟滚动加权平均价」±3.5%即暂缓该证券撮合2分钟，2分钟后以集合竞价恢复成交，随后恢复逐笔交易；不同于港交所VCM（触发后进入5分钟冷静期）与东证特别气配（不成交只挂指示价），是「延后撮合+以集合竞价出清」这一第三种触发效果，与eurex-volatility-interruption（预期成交价超出动态/静态价格区间即触发，以集合竞价恢复）机制结构最接近但触发基准（滚动均价 vs 静态/动态参考价）与所属市场类型（现货 vs 衍生品）不同，故不合并条目 |
+| 最大可执行数量原则 | Principle of Highest Executable Volume |  | SIX瑞士交易所集合竞价定价原则——按能撮合出最大成交量的单一价格确定开/收盘价；与Eurex"Netting"流程（同样以最大撮合量定价）是同一类集合竞价定价逻辑在不同交易所的对应表述，比较时可互相参照 |
+| 远程会员 | Remote Member |  | 境外证券商无需在本地设立实体、经监管机构授权即可直接成为交易所交易参与者的会员类别；SIX瑞士交易所（FINMA授权）是本项目首个明确记录该制度的样本，日后遇到其他交易所的同类"跨境直接会员"安排应统一使用这一译法比较 |
+| 属地监管机关 | Competent State Authority |  | 德国/瑞士等联邦制国家里，交易所设立与运作的监管职能可能落在邦/州一级（如Eurex的黑森州监管机关），而非全国性金融监管总局；与"金融业务行为监管"（如BaFin/FINMA）是两个不同层面的监管，比较跨国交易所监管框架时注意区分 |
