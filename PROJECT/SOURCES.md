@@ -102,6 +102,46 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Admission Regulations for Exchange Traders（「Zulassungsordnung」，交易员准入资格，⚠️不是公司上市规则——衍生品交易所没有"公司上市"概念，这是与现货股票交易所的结构性差异，见 OPEN-QUESTIONS）PDF: https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf（HTTP 200，124KB）
   - Fee Regulations（「Gebührenordnung」）PDF: https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf（HTTP 200，95KB）
 
+### 瑞士证券交易所 SIX Swiss Exchange `ch-six`
+- `six-group.com` | 官方 | en（另有 de/fr/it 版本，本次统一取 en 版本，见 source_lang 说明） | curl + 常规 UA 全部 200，未见反爬，完全无限流（比多数标杆都好抓，唯一例外见下方 module-1 条目） | SIX Group 官网，交易所业务板块（`/en/products-services/the-swiss-stock-exchange/`）与集团公司页（`/en/company/`）分属不同栏目；`/dam/download/` 路径下是可直接抓取的 PDF 规则/指南文件
+  - Regulation 总览页（Trading Rules/Directives/Trading Guides 索引）: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/trading-provisions/regulation.html
+  - Trading Hours（交易时段结构）: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/trading-provisions/trading-hours.html
+  - Trading Guide（综合交易指南 PDF，含交易时段/订单类型/市场模式）: https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/trading-guide.pdf（HTTP 200，2.6MB）
+  - Product Guide - Equity Market（股票市场产品指南 PDF）: https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/product-guide-equities.pdf
+  - Monitoring and Regulation（FINMA 监管关系说明）: https://www.six-group.com/en/company/governance/monitoring-and-regulation.html
+  - Regulatory Affairs: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/site/regulatory-affairs.html
+  - Clearing and Settlement Provisions（清算结算条款，T+2）: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/trading-provisions/clearing-and-settlement.html
+  - About SIX SIS AG（CSD/ICSD 说明）: https://www.six-group.com/en/products-services/securities-services/settlement-and-custody/info-center/about-six-sis-ag.html
+  - SMI 系列指数编制方案 PDF: https://www.six-group.com/dam/download/market-data/indices/equity-indices/six-methodology-smi-equity-and-re-en.pdf（HTTP 200，1.6MB）
+  - Swiss Stock Exchange 业务总览页: https://www.six-group.com/en/products-services/the-swiss-stock-exchange.html
+  - Listing 总览页: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/listing.html
+  - SIX Exchanges Figures（2026年6月，市值/成交额月度公告）: https://www.six-group.com/en/newsroom/media-releases/2026/20260701-keyfigures-exchange-june-2026.html
+  - Company 总览页（集团沿革）: https://www.six-group.com/en/company.html
+  - Self-regulation of the Swiss Exchange（博客，自律监管架构说明）: https://www.six-group.com/en/blog/exchanges-self-regulation.html
+  - Trading on SIX Swiss Exchange Module 2 - Rules & Regulations（培训材料 PDF，逐条摘引官方规则条文，非泛泛而谈）: https://www.six-group.com/dam/download/sites/education/preparatory-documentation/trading-module/trading-on-ssx-module-2-rules-regulations-en.pdf（HTTP 200，1.0MB）
+  - Trading on SIX Swiss Exchange Module 1 - Trading（同系列培训材料 PDF，含波动性中断参数；⚠️4.8MB大文件，本次探测阶段20秒超时下载到4.6MB中断一次，`make fetch`默认60秒超时下过一次即200成功，已正式纳入清单）: https://www.six-group.com/dam/download/sites/education/preparatory-documentation/trading-module/trading-on-ssx-module-1-trading-en.pdf
+  - Become a Trading Participant: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/participation/trading-participants.html
+  - Exchange Membership 总览: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/participation.html
+- `handbooks.six-group.com` | 官方 | en | curl 常规 UA 200 | Relevant Regulators 页（列出 FINMA 与自律监管分工）
+  - Relevant Regulators: https://handbooks.six-group.com/en/investor-relations/regulatorisches-umfeld-regelwerk-und-reporting-six/relevante-regulatoren
+- `ser-ag.com` | 官方（SIX Exchange Regulation AG，法律上独立于交易所运营主体的自律监管法人，依瑞士法律要求分权设立，见 CLAUDE.md 二第2条「官方规则手册」优先级） | en | curl 常规 UA 200，未见反爬 | 托管《上市规则》《交易规则》正式 PDF 全文，是本所规则条文最权威的直接来源，优先于 six-group.com 的介绍性页面
+  - Listing Rules（LR，2024年11月6日版）PDF: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf（HTTP 200，1.15MB）
+  - Trading Rules（Rule Book，RB）PDF: https://www.ser-ag.com/dam/downloads/regulation/trading/rule-books/rb-en.pdf（HTTP 200，405KB）
+  - About SER（自律监管架构说明）: https://www.ser-ag.com/en/about.html
+  - Guideline "Trading Parameters"（GTP，各交易细分市场的波动性中断/价格监控参数）PDF: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf（HTTP 200，842KB）
+  - Directive 1: Admission of Participants PDF: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir01-en.pdf（HTTP 200，259KB）
+  - Directive 3: Trading PDF（交易机制核心条款：订单类型、执行优先级、集合竞价、卖空、透明度豁免等，是market_structure章节最主要的单一来源）: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf（HTTP 200，869KB；⚠️本条系研究过程中期发现后手工curl补抓，未随第一批`make fetch`一起跑，下次维护本节时若重跑`make fetch EX=ch-six`会自动补齐，属正常范围内的URL）
+- `finma.ch` | 监管 | en/de | curl 常规 UA 200 | 瑞士金融市场监管局（FINMA）官网
+  - Authorised Swiss Stock Exchanges（受批准交易所名录 PDF，含 SIX Swiss Exchange AG 与 SDX Trading AG 两个独立受批准交易所实体）: https://www.finma.ch/en/~/media/finma/dokumente/bewilligungstraeger/pdf/bourses.pdf（HTTP 200，326KB）
+  - FINMA issues first-ever approval for a stock exchange and a central securities depository for the trading of tokens（2021年批准SDX Trading AG为独立交易所的新闻稿，佐证`group_id`判断）: https://www.finma.ch/en/news/2021/09/finma-issues-first-ever-approval-for-a-stock-exchange-and-a-central-securities-depository-for-the-trading-of-tokens/
+- `estv.admin.ch` | 监管（联邦税务局 Federal Tax Administration，印花税与预扣税的法定征收机关） | en/de/fr/it | curl 常规 UA 200 | 用于印花税（Umsatzabgabe/transfer stamp tax）与股息预扣税（Verrechnungssteuer/anticipatory tax）的官方税率确认；⚠️ 预扣税页面直接给出35%具体税率数字（confidence可标high），但印花税总览页只确认税种法律性质，未给出0.15%/0.3%具体税率数字，该数字最终改用下方`taxsummaries.pwc.com`第三方来源（confidence上限medium），下次有空应在ESTV官网德/法/意语版或税率细则子页里找到载明具体税率的原始页面，替换掉第三方来源并升级confidence
+  - Stamp Duty 总览: https://www.estv.admin.ch/en/stamp-duty
+  - Anticipatory Tax（预扣税/预提税）总览: https://www.estv.admin.ch/estv/en/home/anticipatory-tax.html
+- `taxsummaries.pwc.com` | 第三方（四大会计师事务所税务简报） | en | curl 常规 UA 200 | 用于确认瑞士联邦证券交易印花税具体税率（0.15%本国证券/0.3%外国证券）；⚠️非官方原文，`confidence`上限medium，见上条estv.admin.ch的说明
+  - Switzerland - Corporate - Other taxes: https://taxsummaries.pwc.com/switzerland/corporate/other-taxes
+- `natlawreview.com` | 第三方（律所法律资讯平台） | en | curl 常规 UA 200 | 用于确认欧盟2017年认定瑞士交易所MiFID II「等效性」的具体决定内容（生效日期、有效期一年等）；⚠️非官方原文（欧盟官方 europa.eu/rapid 页面本次实测为纯JS渲染的SPA，curl只能拿到空壳，未能抓到正文，故退而求其次用此律所转述），`confidence`上限medium，欧盟官方Implementing Decision原文与该认定后续是否续期/失效仍待核实，见OPEN-QUESTIONS
+  - European Commission Adopts Implementing Decision on the Equivalence of Swiss Stock Exchanges Under MiFID II: https://natlawreview.com/article/european-commission-adopts-implementing-decision-equivalence-swiss-stock-exchanges
+
 ---
 
 ## 探测记录（v0.0 可达性探针，2026-08-12）

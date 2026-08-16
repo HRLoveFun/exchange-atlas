@@ -1,6 +1,25 @@
 {
   "exchanges": [
     {
+      "id": "ch-six",
+      "name_zh": "瑞士证券交易所",
+      "name_native": {
+        "de": "SIX Swiss Exchange AG",
+        "fr": "SIX Swiss Exchange SA",
+        "en": "SIX Swiss Exchange"
+      },
+      "official_languages": [
+        "de",
+        "fr",
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": "six-group",
+      "region": "europe",
+      "tier": "standard",
+      "trading_hours": null
+    },
+    {
       "id": "cn-sse",
       "name_zh": "上海证券交易所",
       "name_native": {

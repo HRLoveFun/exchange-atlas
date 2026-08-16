@@ -8,7 +8,7 @@
 
 1. **交易所集团 vs 单个交易所的粒度** — CME 集团下辖 CBOT/NYMEX/COMEX，Euronext 下辖 7 个国家市场。当前方案：数据实体是「交易所/市场」本身，用 `group_id` 关联集团，矩阵未来可折叠成集团视图。**v0.2 填 NYSE 时首次真正用到**：`us-nyse.yml` 标了 `group_id: nyse-group`，因为 NYSE、NYSE American、NYSE Arca、NYSE National、NYSE Texas 是同集团下各自独立注册的 SEC 交易所实体（不是同一实体内部的板块）——这直接影响了 `listing.boards` 怎么填：不能把 NYSE American/Arca 当成 `us-nyse` 的板块塞进 `boards` 列表（那样会歪曲"哪个实体拥有哪条规则"这个事实），只能靠 `group_id` 表达"同集团、不同实体"的关系，`boards` 留空。矩阵折叠视图本身仍未实现（只是数据字段填了），等 CME 系交易所加入时可以再压测一次多层级集团（CME 是单一交易所法人下辖多个产品条线，与 NYSE Group「多个独立法人共享集团」不是同一种集团结构，两种情况 `group_id` 字段够不够表达还需要再观察）。
 2. ~~schema 会不会被列表型章节撑破~~ — **已验证，够用。** 上交所产品体系（6条）、指数体系（2条）用轻量列表条目填起来很顺，没有感到结构性约束。列表项不需要逐条 quote/confidence 这个简化是对的，继续沿用。
-3. **受控词表（enums.yml）够不够用** — 五家标杆的机制差异能否被现有枚举值（如 `price_limit_type`: none/percentage_band/absolute_tiered/dynamic_reference）概括，还是每家都要新增例外值。如果某个字段的例外多到枚举失去意义，结论应该是这个字段不适合进矩阵（改 `in_matrix: false`），而不是无限加枚举值。**`review_system` 已经积累了四个互不相同的真实案例**：上交所"注册制"（`registration`枚举）、港交所"披露为本但上市委员会有实质审核权"（未套用枚举，直接留 zh 文字说明）、NYSE"披露为本+非常具体的量化规则编号（如 Rule 102.01C(I)）+ 广泛自由裁量权"（同样未套枚举）、JPX"披露为本，交易所审核+重大事项另须向金融厅报告"（同样未套枚举）——四家没有一家能被现有 `review_system` 枚举值干净覆盖，这个字段目前实质上已经退化成自由文本描述而非可比较的枚举，值得考虑要么扩充枚举维度（如拆成"审核严格度"+"规则形式化程度"两个正交维度），要么承认这个字段不适合进矩阵横向比较，只适合放在档案页。
+3. **受控词表（enums.yml）够不够用** — 五家标杆的机制差异能否被现有枚举值（如 `price_limit_type`: none/percentage_band/absolute_tiered/dynamic_reference）概括，还是每家都要新增例外值。如果某个字段的例外多到枚举失去意义，结论应该是这个字段不适合进矩阵（改 `in_matrix: false`），而不是无限加枚举值。**`review_system` 已经积累了五个互不相同的真实案例**：上交所"注册制"（`registration`枚举）、港交所"披露为本但上市委员会有实质审核权"（未套用枚举，直接留 zh 文字说明）、NYSE"披露为本+非常具体的量化规则编号（如 Rule 102.01C(I)）+ 广泛自由裁量权"（同样未套枚举）、JPX"披露为本，交易所审核+重大事项另须向金融厅报告"（同样未套枚举）、SIX瑞士交易所"披露为本，Regulatory Board依《上市规则》审核+批准，无需FINMA另行审批"（同样未套枚举）——五家没有一家能被现有 `review_system` 枚举值干净覆盖，这个字段目前实质上已经退化成自由文本描述而非可比较的枚举，值得考虑要么扩充枚举维度（如拆成"审核严格度"+"规则形式化程度"两个正交维度），要么承认这个字段不适合进矩阵横向比较，只适合放在档案页。
 4. **`quote` 的粒度与成本——填 SSE 后确认这是真实瓶颈。** 十一章约 80 个可填的叶子字段（不含空章节骨架），实际只有约 20 个做到了 `confidence: high`+完整 quote；其余约 15 个因为"没有当次抓取到的原文可摘录"被迫清空转悬案（监管/参与者/风险等章节尤其明显）。这不是偷懒，是铁律生效的结果——但说明 v0.2 铺开更多交易所时，**每家所投入的检索时间要比"填一个字段"直觉上预期的更多**，排期要按此调整。
 5. **`taxonomy.yml` 单文件是否会失控** — 十一章 + 矩阵定义已经不短，未来加字段、加章节细分（如市场结构章节的产品适用范围差异）可能让单文件难以维护，或需要按章拆分成 `schema/chapters/*.yml` 由 sync.py 汇总。
 6. **「第三方来源 confidence 上限 medium」这条铁律目前没有被 `validate.py` 机器强制**，只写在 CLAUDE.md/SOURCES.md 里靠自觉遵守。填 SSE 时人工审计出 3 处字段引用第三方镜像（mgzq.com）却误标 `high`，已手工改正，但下次很可能再犯——这正是 CLAUDE.md 6.1 一直在提醒的「文档职责边界靠自觉 vs 靠机器」的活生生案例。v0.2 前应该给 `validate.py` 加一条：按 SOURCES.md 里登记的「官方/监管/第三方」标签反查每条 `sources[].url`，`confidence: high` 但来源标了「第三方」就直接 fail。
@@ -28,7 +28,14 @@
 
 （填数据时遇到查不清的，按下面格式加条目；`make sync` 会额外从 `data/` 里 `confidence: low` 或空字段生成一份自动清单，附在下面，不需要手动同步那部分）
 
+- **`ch-six`（SIX瑞士交易所）当期官方总市值/上市公司数量/年成交额均未找到可用原始出处。** `six-group.com`的「SIX Exchanges Figures」月度公告只披露成交额/成交笔数/指数点位（且成交额是与集团旗下西班牙BME Exchange的合并口径，非本所单独口径），「Discover the market activity in Shares」页是动态渲染的新闻流，均未见汇总市值/上市公司数统计表。第三方法律实务资源（Baker McKenzie Cross-Border Listings Guide）给出的"截至2024年年中自由流通市值CHF1.8万亿""截至2025年2月237家上市公司"已滞后本次会话（2026-08）超过一年，未采纳为正式字段值。下次有空应找 SIX 官方年报（Annual Report）或"Statistical Monthly Report"（本次仅在页面中看到入口未点开）核实当期数字。
+- **欧盟对瑞士交易所的MiFID II"等效性"认定失效的具体条款与时间线未逐条核实。** `risks.regulatory_change_risk_note`基于WebSearch多篇第三方报道综述（2017年认定等效、2019年起失效），未抓取欧盟官方Implementing Decision原文或后续文件核实具体失效日期、是否有部分恢复、当前最新状态。这是本所与项目里已有/计划中的欧盟成员国交易所（如`de-xetra`）之间监管框架差异的核心数据点，值得下次专门核实。
+- **瑞士联邦证券交易印花税（Umsatzabgabe）0.15%/0.3%具体税率数字未能在`estv.admin.ch`官网英文版定位到原始页面**，只确认了税种法律性质（总览页），税率最终改用第三方PwC税务简报，`confidence`降级为medium。ESTV官网德/法/意语版或"Stamp duty rates"类子页可能有原始数字，下次有空可以补齐并升级confidence，详见`SOURCES.md` `estv.admin.ch`一节的说明。
+
 <!-- BEGIN:GENERATED auto-issues -->
+- `ch-six` 基本信息 / 夏令时规则（dst_rule）— confidence: low
+- `ch-six` 基本信息 / 结算货币（settlement_currency）— confidence: low
+- `ch-six` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `cn-sse` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `cn-sse` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
 - `cn-sse` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
