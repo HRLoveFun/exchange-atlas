@@ -31,3 +31,5 @@
 | 股息预扣税 | Dividend Withholding Tax |  |  |
 | 印花税 | Stamp Duty |  |  |
 | 特别气配 | Special Quote | ja: 特別気配 | 东证机制，申报价超出值幅制限时不成交、改为显示指示性价格，是值幅制限的执行方式而非独立于价格限制之外的冷静期，与港交所VCM那种独立机制不同类 |
+| 波动性拍卖冷静期 | Volatility Auction (Call Session) | en: Volatility Auction Call Session | 价格触及静态/动态参考价容忍阈值后，暂停连续交易转入集合竞价撮合的冷静机制；沙特Tadawul（Volatility Auction）与JSE（Volatility Auction Call Session）均使用这一表述，与港交所VCM、Eurex波动性中断属同一功能类别但各自命名与触发基准不同 |
+| 静态/动态参考价 | Static / Dynamic Reference Price |  | 熔断与价格容忍阈值判定所依据的两类基准价——静态参考价一般为前收盘价（全天固定或按集合竞价更新），动态参考价随最新成交价滚动更新；JSE与sa-tadawul的Static/Static Limit、Eurex的dynamic/static price range均属此概念的不同实现 |

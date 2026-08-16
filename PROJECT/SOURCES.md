@@ -102,6 +102,44 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Admission Regulations for Exchange Traders（「Zulassungsordnung」，交易员准入资格，⚠️不是公司上市规则——衍生品交易所没有"公司上市"概念，这是与现货股票交易所的结构性差异，见 OPEN-QUESTIONS）PDF: https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf（HTTP 200，124KB）
   - Fee Regulations（「Gebührenordnung」）PDF: https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf（HTTP 200，95KB）
 
+### 约翰内斯堡证券交易所 Johannesburg Stock Exchange (JSE) `za-jse`
+- `jse.co.za` | 官方 | en（南非无为JSE本身立法声明的"官方语言"，但全部规则/上市文件/技术规范均只有英文版，未见南非其他官方语言的对照版本，与美股NYSE同理按实际使用语言取 official_languages: [en]） | curl 常规 UA 全部 200，全程未见反爬/限流，比 sec.gov/saflii.org 好抓得多 | 官网横跨三个子域名：`www.jse.co.za`（产品/服务介绍页）、`group.jse.co.za`（集团概况、历史沿革、投资者关系）、`clientportal.jse.co.za`（规则文档/市场通知/技术规格 PDF 的实际托管域名，很多深层 PDF 链接指向这里，三者按 `validate.py` 的域名后缀匹配规则统一登记为 `jse.co.za` 一条即可覆盖）。⚠️ 部分关键 PDF（如权益市场交易时段表、熔断阈值表）正文数据是图片渲染，`pdftotext -layout` 抓不出表格数字；换成同信息的另一份《交易信息系统概念培训》PDF（`Conceptual Training_v2.pdf`）才拿到可摘引的纯文本版本（含 ZA01/ZA02 分段的静态/动态熔断阈值百分比表），这是本次抓取里唯一能完整摘引熔断具体数值的来源，下次抓类似"阈值表"类内容时优先找培训/说明类文档而非官方摘要通知
+  - 首页: https://www.jse.co.za/
+  - 现货股票市场总览: https://www.jse.co.za/trade/equities-market
+  - 主板: https://www.jse.co.za/raise-capital/equities-market/main-board
+  - AltX（另类市场）: https://www.jse.co.za/raise-capital/equities-market/altx
+  - 专项证券（ETF/AMETF/ETN/AMC/权证做市商制度介绍）: https://www.jse.co.za/raise-capital/specialist-securities
+  - 集团概况与历史沿革（1887年成立、2005年改制上市、2016年T+3、Millennium Exchange交易系统等关键年表，逐条注明年份可直接摘引）: https://group.jse.co.za/group-overview/history
+  - 公司信息页（JSE Limited自身股票代码JSE、ISIN ZAE000079711、注册号2005/022939/06）: https://group.jse.co.za/investor-relations/company-information
+  - T+3结算说明（含Lines of Defence多层结算保障机制，注意：现货证券市场靠此机制而非CCP净额担保，与衍生品市场的JSE Clear CCP模式不同）: https://www.jse.co.za/services/post-trade-services/t3settlement
+  - 清算结算服务总览: https://www.jse.co.za/services/clearing-and-settlement-operations
+  - 指数服务总览: https://www.jse.co.za/services/indices/ftsejse-africa-index-series
+  - JSE Clear（衍生品市场中央对手方）授牌新闻: https://www.jse.co.za/news/news/jse-clear-granted-independent-clearing-house-central-counterparty-licence
+  - 打击裸卖空市场通知（Market Notice 293/2021，引用交易规则10.50.1/10.50.2条）PDF: https://clientportal.jse.co.za/Content/JSENoticesandCircularsItems/JSE%20Market%20Notice%2029321%20EQM%20-%20Reminder%20on%20the%20Prohibition%20of%20Naked%20Short-Selling%20in%20JSE%20Equities%20Market.pdf
+  - 权益市场交易时段 PDF（仅含开收盘时刻，表格式）: https://clientportal.jse.co.za/Content/JSE%20Trading%20Dates%20and%20Calendars%20Items/EquityMarketTradingHours.pdf
+  - 熔断与拍卖机制摘要通知 PDF（阈值表为图片，仅正文定义可摘引）: https://clientportal.jse.co.za/Content/JSEHotlinesItems/JSE%20Service%20Hotline%2006220%20EQM%20and%20EDM%20-%20Upgrade%20Summary%20of%20JSE%20Circuit%20Breakers%20and%20Auctions.pdf
+  - 权益市场交易信息总览（Volume 00E，含撮合原则、订单类型、静态/动态参考价定义正文，114页）PDF: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.08.pdf
+  - 交易信息系统概念培训（含交易时段表与ZA01/ZA02熔断阈值百分比表的纯文本版）PDF: https://clientportal.jse.co.za/Content/JSE%20Technology%20Document%20Items/Equity%20Market_Trading%20%20Information%20System_Conceptual%20Training_v2.pdf
+  - 上市规则（简化版，2025年12月）PDF: https://www.jse.co.za/sites/default/files/media/documents/jse-listings-requirements-simplified/JSE_Listings_Requirements_Simplified_Final_@_12_December_2025_Final.pdf
+  - 权益市场指引（Equities Directives）PDF: https://www.jse.co.za/sites/default/files/media/documents/equities-directives/Equities%20Directives.pdf
+- `fsca.co.za` | 监管 | en | curl 常规 UA 200 | 金融部门行为监管局（Financial Sector Conduct Authority），南非"双峰"（Twin Peaks）监管架构下的市场行为监管方，2018年由原金融服务局（FSB）改制而来
+  - 关于我们: https://www.fsca.co.za/about-us/
+- `strate.co.za` | 官方（中央证券存管机构） | en | curl 常规 UA 200（575KB，内容较厚） | Strate Limited，南非法定中央证券存管机构（CSD），负责JSE现货证券市场的电子结算
+  - 关于我们: https://www.strate.co.za/about-us/
+- `sars.gov.za` | 监管（税务机关） | en | curl 常规 UA 200 | 南非税务局（South African Revenue Service），股息预扣税与证券转让税的法定征收与规则发布方
+  - 股息预扣税: https://www.sars.gov.za/types-of-tax/dividends-tax/
+  - 证券转让税: https://www.sars.gov.za/types-of-tax/securities-transfer-tax/
+- `lseg.com` | 第三方（伦敦证券交易所集团旗下 FTSE Russell，与JSE联合编制指数） | en | curl 常规 UA 200（586KB） | 《FTSE/JSE Africa Index Series Ground Rules》官方编制细则文档，JSE与FTSE Russell联合发布，用于确认指数编制方非JSE自编而是合资/授权模式
+  - FTSE/JSE Africa Index Series Ground Rules（v9.1，2026年2月）PDF: https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse-jse-africa-index-series-ground-rules.pdf
+
+---
+
+## 探测记录（za-jse 建档，2026-08-16）
+
+与 v0.2 填 NYSE 时的情况相似，本次也踩到"监管/立法类第三方数据库域名被拦"的坑：`saflii.org`（南非法律信息研究所，用于查《金融市场法》Financial Markets Act 19 of 2012 全文）与 `lawlibrary.org.za` 两个域名对同一份法律文本的 PDF/HTML 页面均返回 403（换 UA、加延时重试均无效，与 sec.gov/finra.org 的边缘防护特征类似）。绕过方式：改用 JSE 官方《上市规则》PDF 定义章节里对该法的引用原文（"FMA the Financial Markets Act No.19 of 2012, as amended"）作为 `core_laws` 的来源——足以确认法律全称与编号且来自 JSE 自己的官方文档（未降级为 medium），但未能拿到法律条文全文逐条核对其他章节（如做空/披露的具体法条编号），这部分留待下次专门解决 saflii/lawlibrary 的反爬问题时补齐。
+
+`jse.co.za` 三个子域名（`www.` / `group.` / `clientportal.`）加上 `fsca.co.za`、`strate.co.za`、`sars.gov.za`、`lseg.com` 全部一次性 curl 常规 UA 成功，无一例 403，是本项目目前抓取难度最低的交易所之一。
+
 ---
 
 ## 探测记录（v0.0 可达性探针，2026-08-12）
