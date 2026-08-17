@@ -6,7 +6,7 @@
 # （历史遗留，早于 ADR-013），部分字段的 zh 目前是从英文内容转译而来、未必逐字对照过中文官方页，
 # 已在迁移时逐条核实/标注；后续新增或复核字段应优先取中文版。
 id: hk-hkex
-name_zh: 香港交易及结算所（简称港交所）
+name_zh: 香港交易及结算所
 name_native: {zh-Hant: 香港交易及結算所有限公司, en: "Hong Kong Exchanges and Clearing Limited (HKEX)"}
 official_languages: [zh-Hant, en]
 source_lang: zh
