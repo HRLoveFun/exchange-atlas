@@ -28,7 +28,22 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 `csrc.gov.cn` 一节已按这个约定标注；已知还有 2-3 处历史字段未达标，见
 `PROJECT/OPEN-QUESTIONS.md`。
 
----
+## 经验：WebSearch 命中的独立 PDF 可能是过期存档，规则数字变动过的字段务必交叉核对
+
+补全 `hk-hkex` 主板/GEM 上市财务门槛时（2026-08-17）踩到的坑：WebSearch 命中的
+`cn-rules.hkex.com.hk` 中文版《上市规则》第八章单行本 PDF（`HKEXCN_TC_5088_VER2598.pdf`）
+抓下来后，「盈利测试」门槛显示为 2,000万／3,000万港元——但同一天抓取的英文版 Chapter 8 PDF
+（`en-rules.hkex.com.hk`）显示 3,500万／4,500万港元。两者本应是同一条规则的中英对照，数字却对不上，
+一查才发现主板盈利测试门槛在 2022-01-01 生效的规则修订中从 20/30 上调到 35/45（第三方法律简报可
+交叉确认这个日期，`confidence` 只能标 medium），说明搜索引擎索引到的是**修订前的旧版存档 PDF**，
+文件本身返回 HTTP 200、看起来"抓到了"，但内容已经不是现行规则——**HTTP 200 不等于内容是现行版本**，
+尤其是规则数值这类会随时间修订的字段。
+
+**做法**：交易所规则手册站点如果有「整章合并显示」页面（如本例 `entiresection/<id>`，服务端渲染、
+非独立托管 PDF、由规则手册导航体系直接生成），比孤立的单章 PDF 更可能反映当前生效版本，值得优先
+用来交叉核对数字，尤其是官方文档本身没有清楚标注修订日期/版本号的情况下。**能拿到官方双语版本的
+交易所，中英文数字应该逐字对得上——对不上是信号，不是噪音，一定要停下来查清楚哪个版本过期，不能
+两个数字里随便选一个填。**
 
 ### 上海证券交易所 Shanghai Stock Exchange (SSE) `cn-sse`
 - `sse.com.cn` | 官方 | zh | WebFetch 对规则总览页（`lawandrules/sselawsrules/overview/`）返回 403；换 `lawandrules/sselawsrules2025/overview/`（新版路径）+ curl 常规 UA 可过（HTTP 200）；PDF 用 `pdftotext -layout` 提取纯文本再 grep 定位条款，比逐页翻 PDF 快得多 | 规则总览页本身不含全文直链，需从站内导航多跳到具体规则文档；官网有《现行有效的业务规则清单》目录 PDF（见下）能确认某规则「现行有效」，但清单本身不含可点击的逐条直达链接，还没找到《交易规则》全文在 sse.com.cn 上的直接 URL——这是本节唯一的已知缺口，下次找到了请替换掉 mgzq.com 那条并把相关字段 confidence 升回 high
@@ -59,6 +74,14 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 卖空监管规则: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en
   - 结算总览（CCASS）: https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en
   - 上市规则总览: https://www.hkex.com.hk/Listing/Rules-and-Guidance/Listing-Rules?sc_lang=en
+- `en-rules.hkex.com.hk`（英文版规则手册，独立域名） | 官方 | en | curl 常规 UA 200，未见反爬；**单章节 Rulebook 落地页（如 `/rulebook/chapter-8-qualifications-listing`）本身是纯 JS 单页应用外壳，curl 只能拿到导航栏、抓不到正文（grep 不到任何规则数字）——真正含正文的是同一站点下的章节 PDF 直链**，需要先 WebSearch 定位具体 PDF URL（搜索关键词里带 `en-rules.hkex.com.hk` + 章节名，PDF 文件名形如 `HKEX4476_<element_id>_VER<version>.pdf`，无法直接从章节 slug 拼出，必须先搜到） | 用于补全 `listing.boards[].financial_threshold`（2026-08-17）
+  - Main Board Listing Rules Chapter 8《股本证券上市资格》PDF（8.05条盈利测试/市值收益现金流测试/市值收益测试三选一，8.09条一般市值门槛）: https://en-rules.hkex.com.hk/sites/default/files/net_file_store/HKEX4476_2301_VER24281.pdf（HTTP 200，86KB）
+  - GEM Listing Rules Chapter 11《股本证券上市资格》PDF（11.12A条现金流测试/市值收益研发测试二选一，11.23(6)条一般市值门槛）: https://en-rules.hkex.com.hk/sites/default/files/net_file_store/HKEX4476_567_VER38010.pdf（HTTP 200，74KB）
+  - GEM Listing Financial Eligibility（一页纸官方摘要，两套测试数字与 Chapter 11 正文完全对应，适合先核对再啃全文）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Getting-Started/GEM-Listing-Financial-Eligibility-eng.pdf（HTTP 200，59KB，域名归入 hkex.com.hk 一组）
+- `cn-rules.hkex.com.hk`（中文版规则手册，独立域名，与 en-rules 站点结构一致但非同一部署） | 官方 | zh-Hant | curl 常规 UA 200 | ⚠️**踩坑记录**：WebSearch 命中的单个章节 PDF（`HKEXCN_TC_5088_VER2598.pdf`，标题含「第八章 上市資格」）抓下来后发现「盈利測試」门槛是 2,000万/3,000万港元——与同一天抓取的英文版 Chapter 8 PDF（3,500万/4,500万港元）不一致。核对后确认**该中文单章 PDF 是未更新的旧版本**（页脚版本号明显早于英文版，很可能是主板盈利测试 2022-01-01 上调门槛前的存档件，搜索引擎索引到了旧文件未清理），**不能直接采信 WebSearch 命中的中文规则 PDF，必须用官网站内当前生效的整合页面交叉核对**。改用 `/entiresection/<id>` 这个「整章合并显示」页面（HTML 服务端渲染、非 JS 外壳，能 grep 到正文，比单章 PDF 更可能是当前生效版本，因为它是规则手册导航体系直接生成的页面而非独立托管的旧 PDF）验证，数字与英文版完全一致（3,500万/4,500万港元），已采信整合页版本，弃用单章旧 PDF
+  - 主板上市规则全章合并页（Entire Section，含第八章原文，已用于交叉核对盈利测试等数字，与英文版一致）: https://cn-rules.hkex.com.hk/entiresection/4416（HTTP 200，3.6MB，务必 grep 关键词定位，不要整页阅读）
+  - GEM上市规则全章合并页（Entire Section，含第十一章原文与 2.12 条 GEM 市场定位表述）: https://cn-rules.hkex.com.hk/entiresection/4417（HTTP 200，2.9MB）
+  - ⚠️ 已知过时、不要再引用：主板第八章中文单行本 PDF（盈利测试门槛为旧版 2,000万/3,000万港元）: https://cn-rules.hkex.com.hk/sites/default/files/net_file_store/HKEXCN_TC_5088_VER2598.pdf
 - `assets.kpmg.com` | 第三方（四大会计师事务所税务简报） | en | 未测试反爬，本次一次性 curl 成功 | 用于印花税税率调整确认；`confidence` 标 medium
 - `hsi.com.hk`（恒生指数公司官网） | 官方（第三方指数编制商，非交易所本身） | ⚠️ 纯 JS 单页应用（SPA），curl 只能拿到空壳 HTML，需改用可执行 JS 的方式（如 headless browser）才能抓到真实内容——本次未采用，指数体系相关字段改用第三方综述作为来源
 
