@@ -59,6 +59,10 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 上证综合指数编制方案 PDF: https://www.sse.com.cn/market/sseindex/indexlist/indexdetails/indexmethods/c1/000001_000001_CN.pdf
   - 指数熔断暂停通知（2016，上证发〔2016〕4号）: http://www.sse.com.cn/aboutus/mediacenter/hotandd/c/c_20160107_4033450.shtml
   - 沪市市场运行情况例行发布（周度市值/上市公司数统计，URL 每周变化，需重新搜索定位当期文件）: http://www.sse.com.cn/aboutus/mediacenter/conference/
+  - 《上海证券交易所股票上市规则（2026年4月修订）》公告页（上证发〔2026〕42号，2024年4月30日发布的原规则关于「上市条件」的条款未被本次修订变动，本次仅修订董事会秘书等治理条款，但附件为整合后现行有效全文）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/c_20260424_10816589.shtml
+  - 《上海证券交易所股票上市规则（2026年4月修订）》全文 DOCX（第三章第一节 3.1.1-3.1.6 为主板上市条件，含市值及财务指标三选一标准、红筹企业标准、差异表决权标准；⚠️ 该公告页挂了两个 docx，另一个 `beaf9e6b9ded4380a24ca148cc3902e2.docx`（20KB）只是本次修订的「修订说明」，不含完整条文，第一次误取过要注意区分）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx（HTTP 200，175KB，⚠️ `.docx` 格式，`tools/fetch.py` 会按扩展名规则误存为 `.html`，字节内容不受影响；用 macOS `textutil -convert txt` 转纯文本后可直接 grep，比转 PDF 更简单)
+  - 《上海证券交易所科创板股票上市规则（2026年4月修订）》公告页（上证发〔2026〕43号）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/c_20260424_10816592.shtml
+  - 《上海证券交易所科创板股票上市规则（2026年4月修订）》全文 DOCX（第二章第一节 2.1.1-2.1.4 为科创板上市条件，含市值及财务指标五选一标准、红筹企业标准、差异表决权标准；⚠️ 同一公告页下 `cc4a8a0e637144ea93285a3773e3965a.docx`（16KB）同样只是修订说明，不是全文）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/10816592/files/8d80222543f64159ac5d177b7aace71c.docx（HTTP 200，172KB，同上 `.docx` 注意事项）
 - `mgzq.com` | 第三方（券商网站镜像的官方文件） | zh | curl 常规 UA 可过（499KB） | 《上海证券交易所交易规则（2023年修订）》镜像件，内含第六章"科创板交易特别规定"。⚠️ 非交易所自有域名，按 CLAUDE.md 二第3条，仅凭此来源的字段 `confidence` 上限为 `medium`，不得标 `high`——即使摘录到了逐字 quote 也一样，因为无法排除镜像件被静默改动的风险
   - 交易规则（2023年修订）: https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf
 - `csrc.gov.cn` | 监管 | zh/en | curl 常规 UA 可过；`common_list.shtml` 类列表页有缓存滞后现象，仅用于确认机构名称与域名，不作为具体规则条款出处 | 中国证券监督管理委员会（CSRC），SSE 的政府监管机构
