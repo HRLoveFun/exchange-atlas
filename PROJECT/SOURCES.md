@@ -89,6 +89,12 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Regulations Regarding Margin Transactions and Loans for Margin Transactions PDF: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/regs_margin-loans_transactions_20250401.pdf（HTTP 200，175KB）
   - Clearing & Settlement Summary（JSCC/JASDEC 角色说明）: https://www.jpx.co.jp/english/equities/clearing-settlement/outline/index.html（HTTP 200）
   - T+2 结算周期改革说明（2019-07-16生效）: https://www.jpx.co.jp/english/equities/clearing-settlement/tplus2-settlement-cycle/index.html（HTTP 200）
+  - Initial Listing Criteria（三板初次上市门槛速查表，Prime/Standard/Growth 各一个 URL，含股东人数/流通股数/流通股市值/流通股比例/总市值/净资产/利润销售额门槛，与 Securities Listing Regulations Rule 205/211/217 的条文数值完全对应，可交叉核实）：
+    - Prime: https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html（HTTP 200，36KB）
+    - Standard: https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html（HTTP 200，36KB）
+    - Growth: https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html（HTTP 200，35KB）
+    - ⚠️ 页面视觉上是三个 tab 切换同一张表，但每个 tab 对应独立 URL 且该 tab 内容已服务端渲染进静态 HTML（不是纯 JS 异步加载），curl 三个 URL 各自都能拿到对应板块完整数值，不需要模拟点击
+  - Overview of Market Restructuring（2022年4月4日新三板体系改制说明，含新旧板块对应关系、每板"概念"定性表述、改制时间线）: https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html（HTTP 200，38KB）
 
 ### 欧洲期货交易所 Eurex `de-eurex`
 - `eurex.com` | 官方 | de / en（官方英文版为主，德文版覆盖度低于英文版） | curl + 常规 UA 200，未见反爬（全程无限流，比 english.sse.com.cn 好抓得多） | 保证金具体数值走在线计算器（JS 交互），静态页只有方法论说明，产品级保证金参数需要用 Prisma Margin Calculator 交互获取或找按品种的公开参数文件，不能只靠抓静态 HTML。⚠️ 法律实体名是「Eurex Deutschland」（德国法批准设立，注册地法兰克福，受黑森州最高监管机关监督，不是联邦金融监管局BaFin——这点容易凭常识猜错，本次已实测确认），品牌名"Eurex"，隶属 Deutsche Börse Group（`group_id: deutsche-boerse-group`）
