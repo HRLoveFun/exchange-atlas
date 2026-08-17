@@ -46,6 +46,11 @@ index_compiler:
     - {id: stoxx, label_zh: STOXX, label_en: STOXX}
     - {id: other, label_zh: 其他第三方, label_en: Other Third-party}
 
+index_scope:
+  values:
+    - {id: exchange, label_zh: 交易所自身指数, label_en: Exchange-scoped}
+    - {id: market, label_zh: 跨交易所市场基准, label_en: Cross-exchange Market Benchmark}
+
 weighting_method:
   values:
     - {id: market_cap, label_zh: 总市值加权, label_en: Market-cap Weighted}

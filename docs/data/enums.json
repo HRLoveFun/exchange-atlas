@@ -135,6 +135,20 @@
       }
     ]
   },
+  "index_scope": {
+    "values": [
+      {
+        "id": "exchange",
+        "label_zh": "交易所自身指数",
+        "label_en": "Exchange-scoped"
+      },
+      {
+        "id": "market",
+        "label_zh": "跨交易所市场基准",
+        "label_en": "Cross-exchange Market Benchmark"
+      }
+    ]
+  },
   "weighting_method": {
     "values": [
       {

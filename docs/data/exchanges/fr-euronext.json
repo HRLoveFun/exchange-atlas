@@ -902,6 +902,35 @@
         "enum": null,
         "detail": null,
         "quote": null
+      },
+      "derivatives": {
+        "trading_sessions": {
+          "pre_market": null,
+          "continuous_am": null,
+          "lunch_break": null,
+          "continuous_pm": null,
+          "after_market": null,
+          "night_session": null
+        },
+        "holidays_note": null,
+        "opening_mechanism": null,
+        "closing_mechanism": null,
+        "matching_principle": null,
+        "order_types": null,
+        "tick_size": null,
+        "contract_specs_note": null,
+        "price_limits": {
+          "type": null,
+          "main_board": null,
+          "other_boards": null
+        },
+        "circuit_breaker": null,
+        "volatility_interruption": null,
+        "trading_halt_mechanism": null,
+        "block_trade": null,
+        "market_maker_scheme": null,
+        "margin_practice_note": null,
+        "connect_schemes": null
       }
     },
     "listing": {

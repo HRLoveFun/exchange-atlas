@@ -339,6 +339,171 @@
             "object",
             "null"
           ]
+        },
+        "derivatives": {
+          "type": "object",
+          "properties": {
+            "_meta": {
+              "type": "object"
+            },
+            "trading_sessions": {
+              "type": "object",
+              "properties": {
+                "_meta": {
+                  "type": "object"
+                },
+                "pre_market": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                "continuous_am": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                "lunch_break": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                "continuous_pm": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                "after_market": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                "night_session": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "holidays_note": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "opening_mechanism": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "closing_mechanism": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "matching_principle": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "order_types": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "tick_size": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "contract_specs_note": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "price_limits": {
+              "type": "object",
+              "properties": {
+                "_meta": {
+                  "type": "object"
+                },
+                "type": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                "main_board": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                "other_boards": {
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "circuit_breaker": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "volatility_interruption": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "trading_halt_mechanism": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "block_trade": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "market_maker_scheme": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "margin_practice_note": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "connect_schemes": {
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false

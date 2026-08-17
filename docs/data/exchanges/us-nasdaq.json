@@ -779,6 +779,35 @@
         "enum": null,
         "detail": null,
         "quote": null
+      },
+      "derivatives": {
+        "trading_sessions": {
+          "pre_market": null,
+          "continuous_am": null,
+          "lunch_break": null,
+          "continuous_pm": null,
+          "after_market": null,
+          "night_session": null
+        },
+        "holidays_note": null,
+        "opening_mechanism": null,
+        "closing_mechanism": null,
+        "matching_principle": null,
+        "order_types": null,
+        "tick_size": null,
+        "contract_specs_note": null,
+        "price_limits": {
+          "type": null,
+          "main_board": null,
+          "other_boards": null
+        },
+        "circuit_breaker": null,
+        "volatility_interruption": null,
+        "trading_halt_mechanism": null,
+        "block_trade": null,
+        "market_maker_scheme": null,
+        "margin_practice_note": null,
+        "connect_schemes": null
       }
     },
     "listing": {
@@ -1006,6 +1035,7 @@
           "name_zh": "纳斯达克综合指数",
           "name_native": "Nasdaq Composite®",
           "compiler": "self",
+          "scope": "exchange",
           "weighting_method": "market_cap",
           "review_frequency": "所属方法论指南按年度审阅（治理层面的通用规则，非该指数专属审阅周期）",
           "flagship": "yes",
@@ -1016,8 +1046,27 @@
           "name_zh": "纳斯达克100指数",
           "name_native": "Nasdaq-100®",
           "compiler": "self",
+          "scope": "exchange",
           "flagship": "yes",
           "description": "按市值计纳斯达克上市的100家最大非金融类公司；'Nasdaq-100: Includes the 100 largest non-financial companies listed on Nasdaq by market capitalization'（nasdaq.com官网原文）。weighting_method留空：该描述是入选口径而非确认的加权方法（常见做法是设有个股权重上限的修正市值加权，但本次未找到逐字方法论原文，不凭常识填入）"
+        },
+        {
+          "id": "sp500",
+          "name_zh": "标普500指数",
+          "name_native": "S&P 500®",
+          "compiler": "sp_dj",
+          "scope": "market",
+          "flagship": "no",
+          "description": "跨交易所市场基准指数（ADR-018 引入的 scope: market 样本），详见 us-nyse.yml 同名条目——成分股横跨纽交所、纳斯达克等多个交易所的上市证券，不专属纳斯达克，不代表纳斯达克自编或自身指数体系的一部分。"
+        },
+        {
+          "id": "russell2000",
+          "name_zh": "罗素2000指数",
+          "name_native": "Russell 2000® Index",
+          "compiler": "ftse_russell",
+          "scope": "market",
+          "flagship": "no",
+          "description": "跨交易所市场基准指数（ADR-018 引入的 scope: market 样本）——衡量美股小市值股票表现，成分股同样不专属单一交易所，横跨纳斯达克与纽交所等多所上市证券。编制方为FTSE Russell（伦敦证券交易所集团旗下），官方页面确认'small cap'定位表述；按ADR-018精简条目设计，base_date/weighting_method/review_frequency留空。"
         }
       ]
     },

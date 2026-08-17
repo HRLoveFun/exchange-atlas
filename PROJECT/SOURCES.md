@@ -172,6 +172,11 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Market Maker Process（含"清算机构请致电 NSCC"字样，ccp_name 的官方原文依据）: https://www.nasdaqtrader.com/trader.aspx?id=marketmakerprocess（HTTP 200，55KB）
   - Regulation SHO: https://www.nasdaqtrader.com/Trader.aspx?id=regsho（HTTP 200，53KB）
   - Short Sale Circuit Breaker（Rule 201 报升规则）: https://www.nasdaqtrader.com/trader.aspx?id=ShortSaleCircuitBreaker（HTTP 200，47KB）
+- `lseg.com`（伦敦证券交易所集团旗下 FTSE Russell，第三方指数编制商） | 官方（第三方指数编制商官网） | en | curl 常规 UA 200 | 用于确认罗素2000指数（ADR-018 引入的 `scope: market` 跨交易所市场基准指数样本，成分股横跨 `us-nyse`/`us-nasdaq` 两所，不专属单一交易所）编制方为 FTSE Russell、指数定位与覆盖范围
+  - Russell 2000® Index: https://www.lseg.com/en/ftse-russell/indices/russell-2000-index（HTTP 200，202KB）
+- `spglobal.com`（S&P Dow Jones Indices，标普500指数编制方） | 官方（第三方指数编制商官网） | — | **全站被拦，任何路径（含首页、Index Finder、方法论 PDF）均返回 403**，换 UA/加 Accept-Language 头无效，与 `sec.gov`/`finra.org`/`spglobal.com` 同一类边缘防护拦截 | 无法直接抓取标普500官方页面确认编制方法论细节；`data/exchanges/us-nyse.yml`/`us-nasdaq.yml` 里的标普500条目按 ADR-018 只填最简字段（`id`/`name_zh`/`name_native`/`compiler`/`flagship`），`compiler: sp_dj` 与官方名称改用下方 `en.wikipedia.org` 交叉确认，未使用 WebSearch 摘要直接代入
+- `en.wikipedia.org` | 第三方 | en | curl 常规 UA 200 | 标普500官网（spglobal.com）被拦时的降级来源，仅用于确认标普500指数的编制方（S&P Dow Jones Indices）与官方全称这类基本事实，不用于任何规则性数值
+  - S&P 500: https://en.wikipedia.org/wiki/S%26P_500（HTTP 200）
 - `listingcenter.nasdaq.com` | 官方（上市规则站） | en | ⚠️ Rulebook 交互式条文页（`/rulebook/nasdaq/rules/...`）多次尝试均返回 403（含加 12 秒延时重试），疑似该子路径有独立 WAF，非限流性质（NYSE/JPX/Eurex 经验里的限流是"连续请求后开始 403"，这里是首次请求即 403，且延时重试无效）；但根目录下的静态 PDF 资源（`/assets/...`）可以正常 curl 到，200 | Initial Listing Guide + Continued Listing Guide 两份 PDF 已覆盖三档上市标准的初始与持续量化门槛，弥补了 Rulebook 页面抓不到的缺口，故未继续尝试破解 Rulebook 反爬
   - Nasdaq Initial Listing Guide（PDF，三档上市标准 Global Select/Global/Capital Market 财务与流动性量化门槛）: https://listingcenter.nasdaq.com/assets/initialguide.pdf（HTTP 200，559KB）
   - Nasdaq Continued Listing Guide（PDF，持续上市标准，含 $1 最低股价等退市触发门槛）: https://listingcenter.nasdaq.com/assets/continuedguide.pdf（HTTP 200，394KB）

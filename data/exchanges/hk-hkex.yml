@@ -402,6 +402,7 @@ indices:
       name_zh: 恒生指数
       name_native: "Hang Seng Index (HSI)"
       compiler: other
+      scope: exchange
       weighting_method: float_adjusted
       base_date: 1964-07-31
       review_frequency: "季度"
