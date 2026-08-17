@@ -347,12 +347,18 @@ chapters:
         label_zh: 衍生品市场机制（如适用）
         label_en: Derivatives Market Mechanics (if applicable)
         kind: object
+        optional: true
         note: >
           仅当该交易所实体自身运营重要的期货/期权等衍生品业务线时才填（判断标准：第四章「产品体系」
           是否已列出 future/option 类产品）。字段结构复用本章顶层字段集合，表达同一法人实体下现货与
           衍生品两条产品线的不同交易机制——顶层字段继续默认描述现货/主板市场，不因新增本字段而改变
           含义。纯衍生品交易所（如 de-eurex）不用本字段，直接把衍生品机制写在本章顶层字段即可（因为
           它没有现货业务，顶层字段本身就是在描述衍生品）。见 `PROJECT/DECISIONS.md` [ADR-019]。
+          `optional: true`：本组字段完全未填时不计入 `chapter_status()` 的完成度分母（见
+          `tools/sync.py` `count_chapter_leaves()`）——否则 11/20 家没有衍生品业务的现货交易所，
+          哪怕把所有适用字段填满，`market_structure` 章节也会因为这组永远填不了的字段被永久卡在 🟡，
+          把"设计上就不适用"误呈现成"没填完"。一旦组内有任意一个字段被填（说明该所确实用到这条
+          产品线），则整组正常计入分母，要求填完整。
         fields:
           - id: trading_sessions
             label_zh: 交易时段

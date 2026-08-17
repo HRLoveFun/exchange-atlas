@@ -298,22 +298,44 @@ def compute_trading_window(exchange_id, expanded_chapters):
     }
 
 
+def count_chapter_leaves(fields, expanded, prefix=()):
+    """递归统计一组字段的 (total, filled, low_conf)，按分组识别 `optional` 标记。
+
+    标了 `optional: true` 的分组字段（如 market_structure.derivatives）若组内一个
+    字段都没填，整组不计入分母——这类字段仅对部分交易所适用（见该字段在 taxonomy.yml
+    里的 note），不适用时留空是正确状态，不该被当成"没填完"拖累其余字段都已填好的
+    交易所的完成度。一旦组内至少有一个字段被填（说明该所确实用到这条产品线/机制），
+    则整组正常计入分母，要求填完整——不是永久豁免，只豁免"完全未启用"的情况。
+    """
+    total = filled = low_conf = 0
+    for f in fields or []:
+        path = prefix + (f["id"],)
+        if "item_schema" in f:
+            continue  # 嵌套 list 字段（如 listing.boards）不计入叶子统计
+        if "fields" in f:
+            sub_total, sub_filled, sub_low = count_chapter_leaves(f["fields"], expanded, path)
+            if f.get("optional") and sub_filled == 0:
+                continue
+            total += sub_total
+            filled += sub_filled
+            low_conf += sub_low
+        else:
+            total += 1
+            env = get_by_path(expanded, path)
+            if env and env.get("zh"):
+                filled += 1
+                if env.get("confidence") == "low":
+                    low_conf += 1
+    return total, filled, low_conf
+
+
 def chapter_status(chapter_def, raw_chapter, expanded):
     if chapter_def.get("kind") == "list":
         items = (raw_chapter or {}).get("items") or []
         if items:
             return "✅"
         return "🟡" if raw_chapter else "⬜"
-    total = filled = low_conf = 0
-    for kind, path, fdef in walk_chapter_fields(chapter_def.get("fields", [])):
-        if kind != "leaf":
-            continue
-        total += 1
-        env = get_by_path(expanded, path)
-        if env and env.get("zh"):
-            filled += 1
-            if env.get("confidence") == "low":
-                low_conf += 1
+    total, filled, low_conf = count_chapter_leaves(chapter_def.get("fields", []), expanded)
     if filled == 0:
         return "⬜"
     if filled == total and low_conf == 0:
