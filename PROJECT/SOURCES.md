@@ -81,8 +81,31 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 卖空监管规则: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en
   - 结算总览（CCASS）: https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en
   - 上市规则总览: https://www.hkex.com.hk/Listing/Rules-and-Guidance/Listing-Rules?sc_lang=en
+  - 衍生品市场交易时段（Derivatives Market Trading Hours）: https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=en（HTTP 200，405KB）
+  - 衍生品市场交易时段中文版: https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=zh-hk（HTTP 200，400KB）
+  - 衍生品市场交易机制总览（Trading Mechanism）: https://www.hkex.com.hk/Services/Trading/Derivatives/Overview/Trading-Mechanism?sc_lang=en（HTTP 200，368KB）
+  - 衍生品市场交易机制总览中文版: https://www.hkex.com.hk/Services/Trading/Derivatives/Overview/Trading-Mechanism?sc_lang=zh-hk（HTTP 200，379KB）
+  - HKATS（香港期货自动交易系统）介绍: https://www.hkex.com.hk/Services/Trading/Derivatives/Infrastructure/HKATS?sc_lang=en（HTTP 200，368KB）
+  - 收市后交易时段 FAQ（After-Hours Trading, AHT；⚠️ URL 路径本身含半角括号 `(AHT)`，本项目 `tools/fetch.py` 的 `URL_RE` 遇到半角 `)` 会误判为注释开始，把 URL 截断——这是本次新发现的 fetch.py 限制，本条按 %28/%29 百分号编码登记规避，见 add-exchange skill 回写）: https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/After-Hours-Trading-%28AHT%29?sc_lang=en（HTTP 200，404KB）
+  - 收市后交易时段 FAQ 中文版（含 T+1 时段 ±6%/±7% 价格上下限机制、短暫停牌機制 THM 的中文原文表述）: https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/After-Hours-Trading-%28AHT%29?sc_lang=zh-hk（HTTP 200，420KB）
+  - 衍生品市場波動調節機制 FAQ（Volatility Control Mechanism, VCM，与证券市场 VCM 是同名但独立的两套机制，触发阈值/覆盖品种不同；同样因 URL 含半角括号改用 %28/%29 编码登记）: https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/Volatility-Control-Mechanism-%28VCM%29?sc_lang=en（HTTP 200，370KB）
+  - 衍生品市場波動調節機制 FAQ 中文版: https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/Volatility-Control-Mechanism-%28VCM%29?sc_lang=zh-hk（HTTP 200，371KB）
+  - 衍生品市場 VCM 交易机制说明 PDF（同样因 URL 含半角括号改用 %28/%29 编码登记）: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Trading/Derivatives/Trading-Mechanism/Volatility-Control-Mechanism-%28VCM%29/Trading-Mechanism-for-VCM-141020221.pdf（HTTP 200，908KB）
+  - 恒指期货及期权产品页（HSI Futures & Options；同样因 URL 含半角括号改用 %28/%29 编码登记）: https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-Index-%28HSI%29/Hang-Seng-Index-Futures-Options?sc_lang=en（HTTP 200，439KB）
+  - 恒生科技指数期货及期权产品页（Hang Seng TECH Index Futures & Options）: https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-TECH-Index-Futures-and-Options/Hang-Seng-TECH-Index-Futures-Options?sc_lang=en（HTTP 200，269KB）
+  - 恒生中国企业指数期货及期权产品页（HSCEI Futures & Options）: https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-China-Enterprises-Index/Hang-Seng-China-Enterprises-Index-Futures-Options?sc_lang=en（HTTP 200，413KB）
+  - 股票期货产品页（Stock Futures）: https://www.hkex.com.hk/Products/Listed-Derivatives/Single-Stock/Stock-Futures?sc_lang=en（HTTP 200，578KB）
+  - 衍生品市场做市商计划（Market Maker Obligations and Incentives）: https://www.hkex.com.hk/Products/Listed-Derivatives/Market-Maker-Program/Market-Maker-Obligations-and-Incentives?sc_lang=en（HTTP 200，743KB）
+  - 衍生品市场做市商计划中文版: https://www.hkex.com.hk/Products/Listed-Derivatives/Market-Maker-Program/Market-Maker-Obligations-and-Incentives?sc_lang=zh-hk（HTTP 200，734KB）
+  - 衍生品结算风险管理／保证金（Margin）: https://www.hkex.com.hk/Services/Clearing/Listed-Derivatives/Risk-Management/Margin?sc_lang=en（HTTP 200，376KB）
+  - 衍生品结算风险管理／保证金中文版（含 PRiME/SPAN 兼容算法的中文表述，⚠️ 页面注明「结算所按金计算方法 – PRiME」条目本身只有英文版）: https://www.hkex.com.hk/Services/Clearing/Listed-Derivatives/Risk-Management/Margin?sc_lang=zh-hk（HTTP 200，387KB）
+  - HKFE 于 2000 年成为 HKEX 全资附属公司的新闻稿（"Hong Kong Futures Exchange becomes a subsidiary of Hong Kong Exchanges and Clearing Limited"）: https://www.hkex.com.hk/News/News-Release/2000-HKFE/p030600?sc_lang=en（HTTP 200，351KB；⚠️ 原文明确 HKFE 是 HKEX 的全资附属公司，法律上是集团内独立法人的子公司，不是与 HKEX 本身完全同一法人——与本文件先前"同一法人实体内业务线"的印象不完全一致，见 market_structure.derivatives 字段说明）
 - `assets.kpmg.com` | 第三方（四大会计师事务所税务简报） | en | 未测试反爬，本次一次性 curl 成功 | 用于印花税税率调整确认；`confidence` 标 medium
-- `hsi.com.hk`（恒生指数公司官网） | 官方（第三方指数编制商，非交易所本身） | ⚠️ 纯 JS 单页应用（SPA），curl 只能拿到空壳 HTML，需改用可执行 JS 的方式（如 headless browser）才能抓到真实内容——本次未采用，指数体系相关字段改用第三方综述作为来源
+- `hsi.com.hk`（恒生指数公司官网） | 官方（第三方指数编制商，非交易所本身） | ⚠️ 主站是纯 JS 单页应用（SPA），curl 只能拿到空壳 HTML；但 `/static/uploads/contents/...` 路径下的方法论 PDF 与 Factsheet 是静态资源，不受 SPA 限制，curl 常规 UA 可直接 200 抓到——2026-08-17 新发现，此前记录的"改用第三方综述"结论对这两类文件不再成立，指数方法论字段应优先用这些 PDF | 恒生中国企业指数、恒生科技指数两条新增指数条目的编制方法一手依据
+  - 恒生中国企业指数方法论（Hang Seng China Enterprises Index Methodology）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/methodologies/IM_hsceie.pdf（HTTP 200，177KB）
+  - 恒生中国企业指数 Factsheet（2026年6月版，含基本参数速览）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/factsheets/hsceie.pdf（HTTP 200，848KB）
+  - 恒生科技指数方法论（Hang Seng TECH Index Methodology）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/methodologies/IM_hsteche.pdf（HTTP 200，284KB）
+  - 恒生科技指数 Factsheet（2026年6月版）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/factsheets/hsteche.pdf（HTTP 200，1.03MB）
 
 ### 纽约证券交易所 New York Stock Exchange (NYSE) `us-nyse`
 - `nyse.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬；注意站内不少旧 URL 会 301/302 跳转到新路径（如 `/products/etp-limit-up-limit-down` 跳到 `/trade/trading-information`），curl 要带 `-L` 跟随重定向 | ⚠️ NYSE 集团旗下有 NYSE、NYSE American、NYSE Arca、NYSE National、NYSE Texas 多个 SEC 注册的独立交易所实体（`group_id: nyse-group`），很多页面把几个实体的信息混在一起讲，摘引时要看清楚是哪个实体（本文件只收 NYSE 本身/Tape A 的信息）
