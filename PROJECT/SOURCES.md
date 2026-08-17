@@ -142,6 +142,12 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Regulations Regarding Margin Transactions and Loans for Margin Transactions PDF: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/regs_margin-loans_transactions_20250401.pdf（HTTP 200，175KB）
   - Clearing & Settlement Summary（JSCC/JASDEC 角色说明）: https://www.jpx.co.jp/english/equities/clearing-settlement/outline/index.html（HTTP 200）
   - T+2 结算周期改革说明（2019-07-16生效）: https://www.jpx.co.jp/english/equities/clearing-settlement/tplus2-settlement-cycle/index.html（HTTP 200）
+  - Initial Listing Criteria（三板初次上市门槛速查表，Prime/Standard/Growth 各一个 URL，含股东人数/流通股数/流通股市值/流通股比例/总市值/净资产/利润销售额门槛，与 Securities Listing Regulations Rule 205/211/217 的条文数值完全对应，可交叉核实）：
+    - Prime: https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html（HTTP 200，36KB）
+    - Standard: https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html（HTTP 200，36KB）
+    - Growth: https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html（HTTP 200，35KB）
+    - ⚠️ 页面视觉上是三个 tab 切换同一张表，但每个 tab 对应独立 URL 且该 tab 内容已服务端渲染进静态 HTML（不是纯 JS 异步加载），curl 三个 URL 各自都能拿到对应板块完整数值，不需要模拟点击
+  - Overview of Market Restructuring（2022年4月4日新三板体系改制说明，含新旧板块对应关系、每板"概念"定性表述、改制时间线）: https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html（HTTP 200，38KB）
 
 ### 纳斯达克证券交易所 The Nasdaq Stock Market `us-nasdaq`
 - `nasdaq.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬 | Nasdaq Inc 集团层面的公司站，覆盖监管框架、公司概况/历史、市场数据产品说明、指数产品说明等叙述性内容；不含逐条规则条文（规则条文在 `nasdaqtrader.com`/`listingcenter.nasdaq.com`）
