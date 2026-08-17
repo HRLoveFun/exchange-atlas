@@ -81,6 +81,10 @@
 - **验收标准**：每家新交易所人工抽检 10 个字段核对 `quote` 与原始出处，通过率需 ≥95%（阈值不变，样本量比 v0.1 缩小，理由见 [ADR-017]）；未过阈值只暂停复核该家，不影响同批次其他交易所。每波结束后额外过一遍各子代理执行记录，把新教训回写 `add-exchange` skill，再开下一波。
 - **退出标准**：两波（15 家）全部完成且各自通过验收 → 总数达到 20 家；`region: mena_africa` 与 `americas` 不再是明显空白；至少新增一个"一所多国"结构样本（Euronext）供 `OPEN-QUESTIONS.md` 框架性问题第17条积累更多真实证据。
 
+### Wave 1 启动前置条件
+
+- [ ] `review_system` 矩阵列的枚举覆盖率问题需先解决——五家标杆里没有一家能被现有 registration/approval/hybrid 枚举干净覆盖（见 `PROJECT/OPEN-QUESTIONS.md` 框架性问题第3条），已定为阻塞项，不随 Wave 1 一起拖到以后，见 `PROJECT/DECISIONS.md` [ADR-018]。
+
 ### Wave 1（8 家，优先，待启动）
 
 | 交易所（草案 id） | 地区（初判，待建档时核实） | 压测点 |
@@ -113,4 +117,4 @@
 ### 当前进度
 
 - 20/20+ 已完成（v0.1/v0.2 五家标杆 `cn-sse`/`hk-hkex`/`us-nyse`/`jp-jpx`/`de-eurex` + v1.0 Wave 1 八家 `us-nasdaq`/`cn-szse`/`uk-lse`/`de-xetra`/`sg-sgx`/`au-asx`/`in-nse`/`sa-tadawul` + v1.0 Wave 2 七家 `fr-euronext`/`kr-krx`/`ca-tsx`/`br-b3`/`tw-twse`/`ch-six`/`za-jse`，见上方填充进度表）
-- v1.0 横向铺开阶段已完成，达成 20 家目标；下一步是否继续扩张（Wave 3）或转向数据深化（质量复核、字段补全、schema 结构性问题处理），待决策
+- v1.0 横向铺开阶段已完成，达成 20 家目标；`review_system` 枚举覆盖率问题（下方"Wave 1 启动前置条件"）未在 Wave 1 启动前解决，属流程疏漏，见 `PROJECT/DECISIONS.md` [ADR-018] 执行进度补记；市场结构/指数体系两处 schema 缺口已设计并示范填一家（[ADR-019]）。三者（枚举拆分、8 家衍生品机制补全、下一步是否 Wave 3）待决策

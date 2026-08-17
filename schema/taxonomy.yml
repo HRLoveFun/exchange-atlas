@@ -352,7 +352,7 @@ chapters:
           是否已列出 future/option 类产品）。字段结构复用本章顶层字段集合，表达同一法人实体下现货与
           衍生品两条产品线的不同交易机制——顶层字段继续默认描述现货/主板市场，不因新增本字段而改变
           含义。纯衍生品交易所（如 de-eurex）不用本字段，直接把衍生品机制写在本章顶层字段即可（因为
-          它没有现货业务，顶层字段本身就是在描述衍生品）。见 `PROJECT/DECISIONS.md` [ADR-018]。
+          它没有现货业务，顶层字段本身就是在描述衍生品）。见 `PROJECT/DECISIONS.md` [ADR-019]。
         fields:
           - id: trading_sessions
             label_zh: 交易时段
@@ -514,7 +514,7 @@ chapters:
       - {id: review_frequency, label_zh: 定期审核频率, label_en: Review Frequency}
       - {id: derivatives_ref, label_zh: 关联衍生品引用, label_en: Derivatives Ref}
       - {id: flagship, label_zh: 是否旗舰指数, label_en: Flagship, enum_ref: yes_no}
-      - {id: scope, label_zh: 指数口径, label_en: Scope, enum_ref: index_scope, note: "exchange=成分股基本来自本所上市证券；market=跨交易所市场基准指数（如标普500横跨纽交所/纳斯达克），成分股不专属本所，见 PROJECT/DECISIONS.md ADR-018。未标注默认按 exchange 理解，但新增条目应显式填写"}
+      - {id: scope, label_zh: 指数口径, label_en: Scope, enum_ref: index_scope, note: "exchange=成分股基本来自本所上市证券；market=跨交易所市场基准指数（如标普500横跨纽交所/纳斯达克），成分股不专属本所，见 PROJECT/DECISIONS.md ADR-019。未标注默认按 exchange 理解，但新增条目应显式填写"}
 
   # ── 八｜清算、结算与交割 ──
   - id: clearing

@@ -997,7 +997,7 @@
           "label_zh": "指数口径",
           "label_en": "Scope",
           "enum_ref": "index_scope",
-          "note": "exchange=成分股基本来自本所上市证券；market=跨交易所市场基准指数（如标普500横跨纽交所/纳斯达克），成分股不专属本所，见 PROJECT/DECISIONS.md ADR-018。未标注默认按 exchange 理解，但新增条目应显式填写"
+          "note": "exchange=成分股基本来自本所上市证券；market=跨交易所市场基准指数（如标普500横跨纽交所/纳斯达克），成分股不专属本所，见 PROJECT/DECISIONS.md ADR-019。未标注默认按 exchange 理解，但新增条目应显式填写"
         }
       ]
     },

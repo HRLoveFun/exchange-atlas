@@ -1057,7 +1057,7 @@
           "compiler": "sp_dj",
           "scope": "market",
           "flagship": "no",
-          "description": "跨交易所市场基准指数（ADR-018 引入的 scope: market 样本），详见 us-nyse.yml 同名条目——成分股横跨纽交所、纳斯达克等多个交易所的上市证券，不专属纳斯达克，不代表纳斯达克自编或自身指数体系的一部分。"
+          "description": "跨交易所市场基准指数（ADR-019 引入的 scope: market 样本），详见 us-nyse.yml 同名条目——成分股横跨纽交所、纳斯达克等多个交易所的上市证券，不专属纳斯达克，不代表纳斯达克自编或自身指数体系的一部分。"
         },
         {
           "id": "russell2000",
@@ -1066,7 +1066,7 @@
           "compiler": "ftse_russell",
           "scope": "market",
           "flagship": "no",
-          "description": "跨交易所市场基准指数（ADR-018 引入的 scope: market 样本）——衡量美股小市值股票表现，成分股同样不专属单一交易所，横跨纳斯达克与纽交所等多所上市证券。编制方为FTSE Russell（伦敦证券交易所集团旗下），官方页面确认'small cap'定位表述；按ADR-018精简条目设计，base_date/weighting_method/review_frequency留空。"
+          "description": "跨交易所市场基准指数（ADR-019 引入的 scope: market 样本）——衡量美股小市值股票表现，成分股同样不专属单一交易所，横跨纳斯达克与纽交所等多所上市证券。编制方为FTSE Russell（伦敦证券交易所集团旗下），官方页面确认'small cap'定位表述；按ADR-019精简条目设计，base_date/weighting_method/review_frequency留空。"
         }
       ]
     },
