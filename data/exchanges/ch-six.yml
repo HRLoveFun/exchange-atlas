@@ -1,0 +1,956 @@
+# 瑞士证券交易所 SIX Swiss Exchange（法律实体名 SIX Swiss Exchange AG）
+# 抓取来源见 PROJECT/SOURCES.md `ch-six` 一节；原始页缓存于 .cache/ch-six/
+# source_lang: en——Trading Rules §26「Binding nature」原文明确：规则同时以德/法/英三种
+# 语言发布，三者不一致时以德文本为准（"The German version alone of the Trading Rules...
+# is binding in the event of inconsistencies between the German, French and English
+# versions."）。本文件仍选英文为 source_lang（按 ADR-013「无中选英」，且本所英文版规则
+# 文件覆盖完整、可直接摘引），但这与 Eurex 的情况本质相同：德文法律上优先，英文是官方
+# 发布但非终局的语言版本，不是普通翻译展示，已在 regulation 章节如实记录这层关系。
+#
+# ⚠️ 瑞士不是欧盟成员国，SIX 不直接适用 MiFID II，监管框架是 FINMA + 瑞士《金融市场基础设施
+# 法》（FinMIA/FMIA）体系，与项目里已有的欧盟成员国交易所（如未来可能收录的 uk-lse 脱欧后
+# 情况不同、de-xetra 直接受 MiFID II 约束）构成有意义的对照点。欧盟曾于2017年认定瑞士交易所
+# 框架与 MiFID II「等效」，但该等效认定已到期未续（2019年起），这段"曾经等效、后失效"的
+# 历史本次通过 WebSearch 定位到多篇报道，但未逐条抓取欧盟官方决定原文核实细节，仅在
+# risks.regulatory_change_risk_note 留一句概述，不展开具体条款，详见 OPEN-QUESTIONS。
+#
+# ⚠️ SIX Group 除本所外，另有两类值得注意的姊妹实体：(1) SDX Trading AG——2021年由 FINMA
+# 批准的独立数字资产交易所法人（与本所同为 FINMA "Authorised Swiss Stock Exchanges" 名录
+# 上的两个交易所之一，另一为不属于本集团的 BX Swiss AG）；(2) BME Exchange（西班牙交易所
+# 集团，2020年并入 SIX Group）——本所官网多处将 SIX Swiss Exchange 与 BME Exchange 的运行
+# 数据合并披露。两者均是"同集团下其他独立交易所实体"，故设 group_id，boards 字段仍只记录
+# 本法律实体（SIX Swiss Exchange AG）自身的板块体系。
+
+id: ch-six
+name_zh: 瑞士证券交易所
+name_native: {de: "SIX Swiss Exchange AG", fr: "SIX Swiss Exchange SA", en: "SIX Swiss Exchange"}
+official_languages: [de, fr, en]
+source_lang: en
+group_id: six-group
+region: europe
+tier: standard
+
+# ═══════════════════════════════════════════════
+# 二｜基本信息
+# ═══════════════════════════════════════════════
+overview:
+  _meta:
+    verified: 2026-08-16
+    confidence: medium
+
+  timezone:
+    zh: "中欧时间（苏黎世，CET，UTC+1；夏令时CEST，UTC+2）"
+    en: "Central European Time (Zürich, CET, UTC+1; CEST UTC+2 during daylight saving)"
+    confidence: medium
+    detail: "推断依据：Trading Guide 全篇交易时段均以 CET 标注（如「06:00 CET Start of Business Day」），未见交易所官方对时区本身的单独声明原文，故 confidence 标 medium 而非 high。"
+
+  dst_rule:
+    zh: "实行夏令时（随欧盟/欧洲统一切换CET/CEST；瑞士非欧盟成员国，但夏令时切换日期与欧盟一致）"
+    en: "Observes daylight saving time (switches CET/CEST on the same dates as the EU, despite Switzerland not being an EU member)"
+    confidence: low
+    detail: "瑞士夏令时切换与欧盟同步是常识性事实，本次未找到官方原文明确声明，留 low 不升级。"
+
+  founded_year:
+    zh: "2008（现 SIX Group 成立年份；其前身可追溯至约1930年代及更早的多家瑞士金融机构合并，具体沿革本次未逐条核实原始出处）"
+    en: "2008 (formation of the current SIX Group; predecessor entities trace back to roughly the 1930s and earlier through a series of mergers among Swiss financial institutions, not individually verified this session)"
+    detail: |
+      六group.com 官方「History」栏目原文仅给出概述性表述，未列出具体合并年表（如常被引用的
+      1995年苏黎世/日内瓦/巴塞尔三地交易所合并组建 SWX Swiss Exchange 一事，本次经 WebSearch
+      查到多篇第三方综述提及，但未能在 six-group.com 或 ser-ag.com 上找到交易所自己发布的
+      逐条沿革页面加以核实），按 CLAUDE.md 二第1条不采信未核实的具体年份/合并细节，只记录
+      有官方原文直接支持的"2008"一个锚点。
+    sources:
+      - title: Company（SIX集团官网公司概览页，History小节）
+        url: https://www.six-group.com/en/company.html
+        accessed: 2026-08-16
+    quote: "SIX has stood for innovation and stability on the global financial markets since 2008. Our strength is founded on our history: SIX was formed from the merger of experienced financial companies – with their beginnings going back to around 1930."
+    confidence: high
+
+  history:
+    zh: "2008年由SWX集团、SIS集团、Telekurs集团合并组建现SIX Group；2020年并购西班牙交易所集团BME（Bolsas y Mercados Españoles），现同时运营瑞士与西班牙两国证券交易所业务"
+    en: "Formed in 2008 through the merger of the SWX Group, SIS Group and Telekurs Group into the current SIX Group; acquired the Spanish exchange group BME (Bolsas y Mercados Españoles) in 2020 and now operates stock exchange businesses in both Switzerland and Spain"
+    detail: "2008年三方合并的具体名称组合与2020年BME并购，均为第三方综述与本所官网新闻稿多处提及的常见表述，本次未逐条抓取合并/并购交易的原始公告文本核实细节（如交易金额、完成日期），confidence 相应标 medium。"
+    sources:
+      - title: SIX Exchanges Figures — June 2026（媒体稿，多处并列披露SIX Swiss Exchange与BME Exchange的合并运行数据，佐证BME归属同集团）
+        url: https://www.six-group.com/en/newsroom/media-releases/2026/20260701-keyfigures-exchange-june-2026.html
+        accessed: 2026-08-16
+    confidence: medium
+
+  organization_form:
+    enum: demutualized_unlisted
+    zh: "公司制（未上市）——SIX Swiss Exchange AG是股份公司（Aktiengesellschaft），由约120家瑞士及国际金融机构作为股东持有，自身未挂牌上市"
+    en: "Corporate form, unlisted — SIX Swiss Exchange AG is a stock corporation (Aktiengesellschaft) whose shares are held by around 120 Swiss and international financial institutions as owners; it is not itself listed"
+    detail: |
+      与上交所/深交所"会员制"（会员大会为最高权力机关）不同，SIX是已完成公司化改制的股份公司，
+      股东即主要使用者（银行），但官方原文用词是"owned by"（所有）而非"member"（会员），故归为
+      demutualized 而非 member_owned；"约120家机构"这一持股结构描述来自集团层面（SIX Group），
+      本所（SIX Swiss Exchange AG）是集团旗下运营主体，两者是否为同一持股结构本次未逐条区分
+      确认，按集团层面事实处理，confidence 标 medium。
+    sources:
+      - title: Company（SIX集团官网公司概览页）
+        url: https://www.six-group.com/en/company.html
+        accessed: 2026-08-16
+    quote: "SIX connects financial market participants in Switzerland, Spain and throughout the world. The company is owned by around 120 national and international financial institutions."
+    confidence: medium
+
+  self_listed:
+    enum: "no"
+    zh: "否，SIX Swiss Exchange AG自身未上市"
+    en: "No, SIX Swiss Exchange AG itself is not listed"
+    detail: "同organization_form，是从集团股权结构描述推出的消极事实，非官方原文正面声明「未上市」，confidence标medium。"
+    sources:
+      - title: Company（SIX集团官网公司概览页）
+        url: https://www.six-group.com/en/company.html
+        accessed: 2026-08-16
+    confidence: medium
+
+  market_cap_usd_bn:
+    zh: ""
+    confidence: low
+    detail: |
+      本次多方尝试均未能在 six-group.com 找到当期（2026年8月）官方发布的、单独针对 SIX Swiss
+      Exchange（不与BME合并统计）的总市值数字：「SIX Exchanges Figures」月度公告只披露成交额/
+      成交笔数/指数点位，不含市值；「Discover the market activity in Shares」页面为动态渲染的
+      新闻流，未见汇总统计表。第三方法律实务资源（Baker McKenzie Cross-Border Listings Guide）
+      给出"截至2024年年中自由流通市值约CHF 1.8万亿"，但该数字已滞后本次会话约2年，且是"自由
+      流通市值"而非"总市值"，口径与本项目其他交易所字段不完全对应，未采纳为正式字段值，
+      按CLAUDE.md二第4条留空，见OPEN-QUESTIONS。
+
+  listed_companies_count:
+    zh: ""
+    confidence: low
+    detail: |
+      同market_cap_usd_bn，第三方法律实务资源给出"截至2025年2月237家（本土200+外国37）"，
+      但已滞后本次会话约18个月，本所官网本次未找到更新的官方统计页，未采纳为正式字段值，
+      留空，见OPEN-QUESTIONS。
+
+  annual_turnover_usd_bn:
+    zh: ""
+    confidence: low
+    detail: |
+      「SIX Exchanges Figures」2026年6月公告披露的是"2026年上半年SIX Swiss Exchange与BME
+      Exchange合并成交额CHF 969.3十亿"（半年度、且与BME合并统计），既非年度口径也非本所单独
+      口径，未拆分出SIX Swiss Exchange单独的年成交额，故不采纳为该字段正式值，留空。
+
+  global_ranking:
+    zh: ""
+    confidence: low
+    detail: "第三方资料常称SIX为「欧洲第三大交易所」，本次未找到官方原文或权威第三方排名方法论逐条核实，留空。"
+
+  trading_currency:
+    zh: "瑞士法郎（CHF）为主；另有欧元、美元等外币计价品种（如非瑞郎债券「Bonds - Non CHF」、部分结构性产品与ETF）"
+    en: "Primarily Swiss francs (CHF); certain products are denominated in other currencies (e.g. the \"Bonds - Non CHF\" segment, and some structured products and ETFs)"
+    detail: "推断依据：Trading Guide《Business Day Overview》表格中列有独立的「Bonds – Non CHF」交易时段行，Trading Parameters Guideline多处出现「for securities which are traded in a foreign trading currency」表述，未见对多币种品种的完整清单，confidence标medium。"
+    sources:
+      - title: Trading Guide（综合交易指南PDF，Business Day Overview表）
+        url: https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/trading-guide.pdf
+        accessed: 2026-08-16
+    confidence: medium
+
+  settlement_currency:
+    zh: "与交易货币一致，按品种计价货币结算"
+    en: "Same as trading currency; settled in the currency each instrument is denominated in"
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 三｜监管与法律环境
+# ═══════════════════════════════════════════════
+regulation:
+  _meta:
+    verified: 2026-08-16
+    sources:
+      - title: Monitoring and Regulation（SIX集团官网，监管架构说明页）
+        url: https://www.six-group.com/en/company/governance/monitoring-and-regulation.html
+        accessed: 2026-08-16
+    confidence: high
+
+  regulator:
+    zh: "瑞士金融市场监管局（FINMA）——终局监管权；另有瑞士国家银行（SNB）对系统重要性基础设施（含SIX x-clear）的监测"
+    en: "Swiss Financial Market Supervisory Authority (FINMA) — ultimate supervisory authority; the Swiss National Bank (SNB) additionally monitors systemically important infrastructure (including SIX x-clear)"
+    detail: |
+      监管为三层结构：(1) SNB监测系统重要性法人实体（SIC、SECOM、SIX x-clear）；(2) FINMA对
+      从事证券交易与结算的全部SIX实体行使直接监管；(3) 自律监管由SIX Exchange Regulation
+      （见self_regulatory_org）承担。三层并存、职责不同，不是单一监管机构的简单对照。
+    quote: "All entities of SIX that are engaged in securities trading and securities settlement are subject to the direct supervision of FINMA. ... The legal framework is provided by the Federal Act on Financial Market Infrastructures and Market Conduct in Securities and Derivatives Trading (FinMIA). Ultimate supervisory authority lies with the Swiss Financial Market Supervisory Authority (FINMA)."
+    confidence: high
+
+  self_regulatory_org:
+    zh: "SIX Exchange Regulation（SER）——依《证券交易法》自律监管授权设立的独立实体，与SIX集团运营业务分离，直接向SIX董事会主席报告"
+    en: "SIX Exchange Regulation (SER) — an independent entity established under the self-regulatory mandate of the Stock Exchange Act, segregated from SIX's operational business and reporting directly to the Chairman of the Board of Directors of SIX"
+    detail: "SER法律上是独立法人（SIX Exchange Regulation AG，ser-ag.com为其独立域名），下设Regulatory Board（制定规则）、Surveillance & Enforcement（监督参与者/交易员）、Listing & Enforcement（监督发行人）、Sanction Commission/Appeals Board/Board of Arbitration（裁决），职权三分。"
+    sources:
+      - title: We regulate the swiss stock exchange（SER官网关于页）
+        url: https://www.ser-ag.com/en/about.html
+        accessed: 2026-08-16
+    quote: "On the basis of the self-regulatory mandate prescribed under the Stock Exchange Act, SIX performs regulatory functions in stock market trading and the admission of securities as well as associated follow-up obligations. The Exchange Regulation entity is segregated from the operational business of SIX and reports directly to the Chairman of the Board of Directors of SIX."
+    confidence: high
+
+  clearing_regulator:
+    zh: "瑞士金融市场监管局（FINMA）——SIX x-clear（中央对手方）与SIX SIS（中央证券存管机构）均持有FINMA依《金融市场基础设施法》（FMIA）颁发的牌照"
+    en: "Swiss Financial Market Supervisory Authority (FINMA) — both SIX x-clear (CCP) and SIX SIS (CSD) hold licences issued by FINMA under the Financial Market Infrastructure Act (FMIA)"
+    quote: "SIX x-clear is licensed by the Swiss Financial Market Supervisory Authority (FINMA) as a central counterparty according to the Swiss Financial Market Infrastructure Act (FMIA). SIX SIS possesses a license as central security depository under FMIA."
+    confidence: high
+
+  core_laws:
+    zh: "《联邦金融市场基础设施与证券衍生品交易市场行为法》（FinMIA/FMIA）"
+    en: "Federal Act on Financial Market Infrastructures and Market Conduct in Securities and Derivatives Trading (FinMIA / FMIA)"
+    detail: |
+      瑞士不是欧盟成员国，FinMIA是本国独立立法（2015年6月19日通过），不是MiFID II的国内转化法。
+      本所《交易规则》（Trading Rules）§26明确：规则以德/法/英三种语言发布，三者不一致时以
+      德文本为准——这一点与Eurex（Deutsche Börse Group旗下、同样以德文Börsenordnung为终局
+      文本）构成同类对照，但SIX的适用法律体系（瑞士FinMIA）与Eurex（德国《交易所法》
+      Börsengesetz）是两套不同的国家法律，不要混同。
+    sources:
+      - title: Trading Rules（SIX Exchange Regulation官网英文版PDF）§26 Binding nature
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/rule-books/rb-en.pdf
+        accessed: 2026-08-16
+    quote: "The Trading Rules, including the implementing provisions of the Exchange, are available in German, French and English. The German version alone of the Trading Rules including the execution provisions of the Exchange is binding in the event of inconsistencies between the German, French and English versions."
+    confidence: high
+
+  foreign_ownership_limit:
+    zh: ""
+    confidence: low
+    detail: "未核实瑞士对上市公司外资持股的一般性限制（作为非欧盟国家，瑞士对外资持股总体开放，但未找到官方原文逐条核实是否存在行业例外），留空，见OPEN-QUESTIONS。"
+
+  capital_controls:
+    zh: ""
+    confidence: low
+    detail: "瑞士法郎自由兑换、无外汇管制是常识性事实，但本次未附官方原文来源，按铁律留空不采纳。"
+
+  disclosure_requirements:
+    zh: ""
+    confidence: low
+    detail: "Listing Rules对定期报告（年报/半年报）有具体条款（Art. 49等），但本字段要求的是披露制度整体框架（语言/频率/渠道），本次未系统梳理，留空，见listing.continuing_obligations的部分相关内容。"
+
+  investor_protection:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 四｜产品体系
+# ═══════════════════════════════════════════════
+products:
+  _meta:
+    verified: 2026-08-16
+    sources:
+      - title: "\"Trading Parameters\" Guideline（GTP，各交易细分市场规则，含Annex A-U完整品类清单）"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf
+        accessed: 2026-08-16
+    confidence: medium
+  items:
+    - id: ch-six-blue-chip-shares
+      category: equity
+      name_zh: 蓝筹股
+      name_native: "Blue Chip Shares"
+      description: "SMI（瑞士市场指数）成份股等大盘股，波动性中断带宽1.5%"
+    - id: ch-six-mid-small-cap-shares
+      category: equity
+      name_zh: 中小盘股
+      name_native: "Mid-/Small-Cap Shares"
+      description: "含SMIM（瑞士中盘指数）成份股子分类，波动性中断带宽2%（SMIM/一般）或10%（被标记为「volatile securities」的个股）"
+    - id: ch-six-sparks-shares
+      category: equity
+      name_zh: Sparks板股票
+      name_native: "Sparks Shares"
+      description: "面向中小企业（SME）的成长板块，见listing.boards"
+    - id: ch-six-gdr
+      category: equity
+      name_zh: 全球存托凭证
+      name_native: "Global Depository Receipts"
+    - id: ch-six-secondary-listing
+      category: equity
+      name_zh: 第二上市股票
+      name_native: "Secondary Listing Shares"
+    - id: ch-six-sponsored-foreign-shares
+      category: equity
+      name_zh: 保荐外国股票
+      name_native: "Sponsored Foreign Shares"
+      description: "以Quote Driven Market市场模式交易，由保荐机构提供做市报价"
+    - id: ch-six-rights-options
+      category: structured
+      name_zh: 认股权与期权
+      name_native: "Rights and Options"
+    - id: ch-six-investment-funds
+      category: fund
+      name_zh: 投资基金
+      name_native: "Investment Funds"
+    - id: ch-six-etf
+      category: fund
+      name_zh: 交易所交易基金
+      name_native: "Exchange Traded Funds (ETF)"
+      description: "另有专门的「ETF on Bonds of the Swiss Confederation」子类"
+    - id: ch-six-sponsored-funds
+      category: fund
+      name_zh: 保荐基金
+      name_native: "Sponsored Funds"
+    - id: ch-six-bonds-chf-confederation
+      category: bond
+      name_zh: 瑞士联邦瑞郎债券
+      name_native: "Bonds - CHF Swiss Confederation"
+    - id: ch-six-bonds-chf-pfandbriefe
+      category: bond
+      name_zh: 瑞士抵押债券（瑞郎）
+      name_native: "Bonds - CHF Swiss Pfandbriefe"
+    - id: ch-six-bonds-chf
+      category: bond
+      name_zh: 瑞郎债券（一般）
+      name_native: "Bonds – CHF"
+    - id: ch-six-bonds-non-chf
+      category: bond
+      name_zh: 非瑞郎债券
+      name_native: "Bonds - Non CHF"
+      description: "结算可通过Euroclear Bank / Clearstream Luxembourg国际中央证券存管机构进行"
+    - id: ch-six-structured-products
+      category: structured
+      name_zh: 结构性产品
+      name_native: "Structured Products"
+      description: "2026年6月单月新增挂牌34,463只，是本所挂牌数量最大的品类之一"
+    - id: ch-six-structured-products-eth
+      category: structured
+      name_zh: 结构性产品（延长交易时段）
+      name_native: "Structured Products ETH (Extended Trading Hours)"
+      description: "08:00起交易，早于常规09:15开盘"
+    - id: ch-six-etp
+      category: structured
+      name_zh: 交易所交易产品
+      name_native: "Exchange Traded Products (ETP)"
+    - id: ch-six-etf-etp-qod-europe
+      category: fund
+      name_zh: 欧洲ETF/ETP按需报价
+      name_native: "ETF/ETP QOD Europe"
+      description: "Quote on Demand交易服务，非持续挂单簿"
+
+# ═══════════════════════════════════════════════
+# 五｜市场结构与交易机制
+# ═══════════════════════════════════════════════
+market_structure:
+  _meta:
+    verified: 2026-08-16
+    sources:
+      - title: Directive 3 — Trading（SER官网英文版PDF，交易机制核心条款）
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf
+        accessed: 2026-08-16
+      - title: Trading Guide（综合交易指南PDF）
+        url: https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/trading-guide.pdf
+        accessed: 2026-08-16
+      - title: "\"Trading Parameters\" Guideline（GTP，各细分市场波动性中断参数）"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  trading_sessions:
+    pre_market:
+      zh: "06:00 CET 交易日开始（Pre-Opening，可下单/改单但不成交，显示理论开盘价）"
+      en: "06:00 CET Start of Business Day (Pre-Opening — orders may be entered/amended but not executed; a theoretical opening price is displayed)"
+      quote: "06:00   Start of Business Day"
+      confidence: high
+    continuous_am:
+      zh: "蓝筹股/中小盘股09:00开盘（2分钟随机开盘时间），持续竞价至17:20"
+      en: "Blue Chip / Mid-/Small-Cap Shares open at 09:00 (2-minute random opening window), continuous trading runs until 17:20"
+      quote: "Blue Chip Shares  06:00  09:00  17:20  17:30  17:30  17:40  22:00  CLOB  P1  XSWX  Yes"
+      confidence: high
+    lunch_break:
+      zh: "无午休，全天连续交易"
+      en: "None — trading is continuous throughout the day with no lunch break"
+      confidence: medium
+    continuous_pm:
+      zh: "17:20收盘竞价开始，17:30收盘竞价完成并公布收盘价（含2分钟随机收盘时间窗口）"
+      en: "Closing auction starts at 17:20 and completes with the closing price published at 17:30 (with a 2-minute random end window)"
+      quote: "17:20   Start of Closing Auction ... 17:30   Run Auction and Close ... Random Time  Not applicable  2 minutes  Not applicable  None  2 minutes at Run Auction and Close"
+      confidence: high
+    after_market:
+      zh: "蓝筹股/中小盘股17:30-17:40另有Trading-At-Last（以收盘价撮合的盘后交易期），此后至22:00为Post Trading（挂单管理，不产生新成交）"
+      en: "Blue Chip / Mid-/Small-Cap Shares have a Trading-At-Last period 17:30-17:40 (execution at the closing price), followed by Post Trading until 22:00 (order management only, no new executions)"
+      quote: "17:30   Start of Trading-At-Last   Mid-/Small-Cap Shares ... 17:40   End of Trading-At-Last   Mid-/Small-Cap Shares ... 22:00   End of Clearing Day / End of Business Day"
+      confidence: high
+    night_session:
+      zh: "无独立夜盘；08:00-22:00覆盖全部交易活动，22:00-次日06:00为系统关闭期"
+      en: "No separate night session; all trading activity falls within 06:00-22:00 CET, with the system closed 22:00 to 06:00 the next day"
+      confidence: medium
+
+  holidays_note:
+    zh: ""
+    confidence: low
+    detail: "交易所公众假期安排未逐条核实，留空，见OPEN-QUESTIONS。"
+
+  opening_mechanism:
+    zh: "开盘集合竞价，随机时间窗口2分钟；按「最大可执行数量原则」确定开盘价，价格-时间优先原则下限价与不限价申报均纳入撮合"
+    en: "Opening auction with a 2-minute random time window; the opening price is determined according to the \"principle of highest executable volume\", with orders considered under price-time priority"
+    quote: "According to the principle of highest executable volume the largest possible quantity executable, orders and quotes shall be executed at a single price specified in the auction. ... a) Orders and quotes shall be considered in accordance with the price-time priority principle."
+    sources:
+      - title: Directive 3 — Trading §7 Auction and principle of highest executable volume
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  closing_mechanism:
+    zh: "收盘集合竞价（17:20起始，17:30随机窗口内完成），蓝筹股/中小盘股另有17:30-17:40的Trading-At-Last盘后交易期，以收盘价继续撮合"
+    en: "Closing auction (starts 17:20, completes within a random window around 17:30); Blue Chip and Mid-/Small-Cap Shares additionally have a Trading-At-Last period 17:30-17:40 that continues matching at the closing price"
+    quote: "17:20   Start of Closing Auction ... 17:30   Run Auction and Close ... 17:30   Start of Trading-At-Last   Mid-/Small-Cap Shares"
+    sources:
+      - title: Trading Guide — Business Day Overview
+        url: https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/trading-guide.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  matching_principle:
+    zh: "价格-时间优先原则：更优价格（买方最高限价、卖方最低限价）优先成交，不限价申报优先于限价申报，同价按接收先后顺序成交；集合竞价另按「最大可执行数量原则」确定单一成交价"
+    en: "Price-time priority: the order/quote with the better price (highest limit for buy side, lowest for sell side) is executed first, unlimited orders enjoy top priority, and orders at the same price are executed in order of receipt; auctions additionally apply the \"principle of highest executable volume\" to determine a single auction price"
+    quote: "As a rule, the price-time priority principle applies. This means that the order and quote with the better price (highest price limit for buy side, lowest price limit for sell side) is executed first. Unlimited orders enjoy top priority when consolidating orders and quotes."
+    sources:
+      - title: Directive 3 — Trading §6 Execution priority
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  order_types:
+    zh: "Normal order（普通订单，限价/不限价）；Iceberg order（冰山订单，逐笔披露可见数量）；Retail order（零售触发订单，含Stop Limit/Stop Loss两类，触发前不进入订单簿）；Auction Volume Discovery order（集合竞价隐藏订单，仅用于开/收盘竞价按数量-时间优先撮合）"
+    en: "Normal order (limited or unlimited price); Iceberg order (discloses only a visible tranche at a time); Retail order (trigger-based, not visible pre-trigger, with Stop Limit / Stop Loss variants); Auction Volume Discovery order (hidden order used only in opening/closing auctions, matched under quantity-time priority)"
+    quote: "The Exchange supports the order types: a) Normal order; ... b) Iceberg order; ... c) Retail order; ... d) Auction Volume Discovery order"
+    sources:
+      - title: Directive 3 — Trading §5.1.2 Order types
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  tick_size:
+    zh: "按价格区间与流动性带（Band A-F，依近90日日均成交笔数ANT分类）双维度分档：同一价格区间内流动性越高、最小报价单位越小，如价格1-2瑞郎档，Band A（低流动性）为0.01，Band F（高流动性）低至0.0002"
+    en: "Tiered by both price range and a liquidity band (Band A-F, classified by average number of trades — ANT); within the same price range, higher liquidity means a smaller tick, e.g. for the CHF 1-2 price band, Band A (low liquidity) is 0.01 while Band F (high liquidity) is as small as 0.0002"
+    quote: "1 ≤ price < 2                   0.01         0.005         0.002        0.001         0.0005       0.0002"
+    sources:
+      - title: Directive 3 — Trading, Annex D Price Steps (Tick Size)
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  board_lot_size:
+    zh: "未见最低整手（lot size）要求；订单以证券数量为单位申报，以单股为最小可交易单位"
+    en: "No minimum board-lot requirement found; orders are specified by number of securities, with a single share as the smallest tradable unit"
+    confidence: medium
+    detail: "推断依据：Directive 3 §5.1.3订单规范（Order volume: number of securities or nominal value for percent-listed instruments）未设最低股数门槛，是从条文「未设限」这一消极事实推出，非官方正面声明「无最低整手」，故confidence标medium而非high。"
+
+  odd_lot_handling:
+    zh: ""
+    confidence: low
+    detail: "既然未见整手/碎股概念区分（见board_lot_size），本字段的设计前提可能对本所不完全适用，留空，不强行套用，见OPEN-QUESTIONS。"
+
+  price_limits:
+    type:
+      enum: dynamic_reference
+      zh: "动态参考价区间——预期后续成交价偏离当前参考价超出阈值即触发交易中断（Trading Interruption），而非直接禁止申报的固定涨跌停"
+      en: "Dynamic reference-price range — trading is interrupted once the potential subsequent execution price deviates from the current reference price beyond a threshold, rather than orders being flatly barred by a fixed daily limit"
+      sources:
+        - title: "\"Trading Parameters\" Guideline, Annex A – Blue Chip Shares §4 Trading interruption"
+          url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf
+          accessed: 2026-08-16
+      quote: "Continuous trading shall be interrupted for 5 minutes if the potential subsequent price differs a) by 1.5% or more from the current reference price; b) by 1.5% or more from a reference price valid within 10 seconds (Avalanche Stop)."
+      confidence: high
+    main_board:
+      zh: "蓝筹股（Annex A）：偏离参考价±1.5%触发5分钟交易中断（另有10秒内价格骤变的Avalanche Stop机制，同阈值）"
+      en: "Blue Chip Shares (Annex A): a ±1.5% deviation from the reference price triggers a 5-minute trading interruption (an Avalanche Stop for rapid moves within 10 seconds applies the same threshold)"
+      quote: "Continuous trading shall be interrupted for 5 minutes if the potential subsequent price differs a) by 1.5% or more from the current reference price; b) by 1.5% or more from a reference price valid within 10 seconds (Avalanche Stop)."
+      confidence: high
+    other_boards:
+      zh: "中小盘股（Annex B）：一般个股±2%触发15分钟中断；SMIM成份股±2%触发5分钟中断；被标记为「volatile securities」的个股阈值放宽至±10%（触发5分钟中断）。开盘/收盘集合竞价另设「Delayed Auction」延时机制，计算价偏离参考价±2%~5%（按细分市场而异）即延长竞价时段5-15分钟"
+      en: "Mid-/Small-Cap Shares (Annex B): ±2% triggers a 15-minute interruption for ordinary constituents; ±2% triggers a 5-minute interruption for SMIM constituents; securities classified as \"volatile securities\" have a widened ±10% threshold (5-minute interruption). Opening/closing auctions separately have a \"Delayed Auction\" mechanism extending the auction by 5-15 minutes (varying by segment) if the calculated price deviates ±2%-5% from the reference price"
+      quote: "For securities of the Swiss Market Index Mid (SMIM®), the delay in the opening or the trading interruption shall be 5 minutes and the bandwidth shall be 2% or more ... For volatile securities, the delay in the opening or the trading interruption shall be 5 minutes and the bandwidth shall be 10% or more"
+      confidence: high
+
+  circuit_breaker:
+    enum: stock_level
+    zh: "无独立于个股级波动性中断之外、按指数跌幅自动触发的全市场熔断；极端情形下交易所依《交易规则》「非常规情形」/「紧急情形」条款拥有自由裁量权，可延迟开盘、限制/暂停个股连续交易、拒绝或删除订单，乃至暂停部分规则"
+    en: "No automatic market-wide circuit breaker triggered by index-level declines, separate from the per-security Volatility Interruption; in extreme situations the Exchange has discretionary powers under the Trading Rules' \"Extraordinary situations\" / \"Emergency situations\" provisions to delay openings, restrict or suspend continuous trading in a security, reject or delete orders, or even suspend rules in part"
+    detail: "与Eurex/JPX的情况相似（均未找到独立于个股价格机制之外的自动全市场熔断），可能是本次检索范围局限，未逐条核实是否存在，见OPEN-QUESTIONS。"
+    sources:
+      - title: Trading Rules §10.10.1/10.10.2 Extraordinary/Emergency situations
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/rule-books/rb-en.pdf
+        accessed: 2026-08-16
+    quote: "In order to ensure proper trading, should an extraordinary situation arise, the Exchange may institute all the measures which it deems necessary to maintain fair, efficient and orderly trading."
+    confidence: medium
+
+  volatility_interruption:
+    zh: "见price_limits——本所以「Trading Interruption」（交易中断）统一处理开盘延时与盘中波动，按细分市场设不同带宽（蓝筹股±1.5%/5分钟，中小盘股±2%/15分钟或5分钟，波动股±10%/5分钟），交易所可按短期通知调整参数"
+    en: "See price_limits — the Exchange uses a unified \"Trading Interruption\" mechanism for both delayed openings and intraday volatility, with bandwidths varying by segment (Blue Chip ±1.5%/5min; Mid-/Small-Cap ±2%/15min or 5min; volatile securities ±10%/5min); the Exchange may adjust these parameters at short notice"
+    quote: "Continuous trading shall be interrupted for 5 minutes if the potential subsequent price differs a) by 1.5% or more from the current reference price ... Continuous trading shall be interrupted for 15 minutes if the potential subsequent price differs a) by 2% or more ... the delay in the opening or the trading interruption shall be 5 minutes and the bandwidth shall be 10% or more"
+    sources:
+      - title: "\"Trading Parameters\" Guideline"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  trading_halt_mechanism:
+    zh: "交易中断后，交易所以「随机结束时间30秒内」重新开盘（集合竞价方式恢复交易）"
+    en: "After a trading interruption, the Exchange reopens trading via an auction with a random end within 30 seconds"
+    quote: "The Exchange shall open trading after a trading interruption with a random end within 30 seconds."
+    sources:
+      - title: "\"Trading Parameters\" Guideline"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  intraday_reversal:
+    zh: ""
+    confidence: low
+    detail: "本所结算周期为T+2（见clearing.settlement_cycle），但「当日买入当日可否卖出」这类回转交易限制本质是结算/借券层面的问题，本次未找到官方原文对此有专门表述（欧洲主流市场普遍无此限制，但未核实原文，不采信常识），留空，见OPEN-QUESTIONS。"
+
+  short_selling:
+    enum: freely_allowed
+    zh: "允许卖空，无需事先借券锁定；卖方须在成交时点即完成结算安排（与交收责任一致）；非常规情形下交易所经与FINMA协商可另行发布卖空限制规定"
+    en: "Short selling is permitted without a pre-borrow requirement; the seller must be able to settle the short sale by the time of trade execution; in special situations the Exchange may, after consultation with FINMA, issue additional short-selling restrictions"
+    detail: "与上交所/深交所式「限指定标的范围」的融资融券制度不同，瑞士本身没有专门的卖空立法（WebSearch确认：'no provisions to regulate short selling in terms of laws'），卖空规则完全由交易所自律规则承载，是与本项目其他市场结构性不同的一点。"
+    sources:
+      - title: Directive 3 — Trading, VI Short-selling §25/26
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf
+        accessed: 2026-08-16
+    quote: "The short-selling of securities traded on SIX Swiss Exchange AG is permitted. ... The seller must settle the short sale at the latest upon execution of the trade in accordance with Clause 15.1 Trading Rules. ... In special situations the Management Committee of the Exchange may issue regulations on short-selling."
+    confidence: high
+
+  block_trade:
+    zh: ""
+    confidence: low
+    detail: "「大宗交易」在本所对应概念可能是Off-order-book trades（场外成交报备）或SwissAtMid机制下的大额订单，但本次未找到官方对「大宗交易」专门量化门槛（如最低金额）的原文表述，留空，见dark_pool字段的相关说明。"
+
+  dark_pool:
+    zh: "SwissAtMid——不含盘前透明度的中点撮合交易服务，依瑞士《金融市场基础设施条例》（FMIO）第27条第4款相关豁免运作，最高订单价值CHF 250,000,000"
+    en: "SwissAtMid — a mid-point matching trading service exempted from pre-trade transparency, operating under the relevant exemptions of Art. 27 para. 4 FMIO; maximum order value CHF 250,000,000"
+    quote: "Iceberg orders, Retail orders and orders with at-the-close validity (namely also Auction Volume Discovery orders) which are executed using an order management facility of the Exchange are exempted from pre-trade transparency regulations according to Art. 27 para. 4 lit. c FMIO."
+    sources:
+      - title: Directive 3 — Trading §11 Exemptions from pre-trade transparency
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  market_maker_scheme:
+    zh: "做市商须与交易所签订书面「Market Maker Agreement」；具体按细分市场设定报价覆盖率与最大点差要求，如蓝筹股要求月均80%以上交易时段内维持不超过2.5%（或部分品种5%）的最大点差"
+    en: "Market makers must sign a written \"Market Maker Agreement\" with the Exchange; coverage and maximum-spread requirements vary by segment, e.g. Blue Chip Shares require quoting over 80% of trading hours (monthly average) with a maximum spread of 2.5% (or 5% for certain instruments)"
+    quote: "The Exchange may admit a participant as a market maker under a written agreement (Market Maker Agreement). ... The market maker contractually undertakes to meet the following requirements over 80% (on a monthly average) ... with a maximum trading spread of 2.5%; or ... prices with a maximum trading spread of 5%."
+    sources:
+      - title: "Directive 1: Admission of participants §4"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir01-en.pdf
+        accessed: 2026-08-16
+      - title: "\"Trading Parameters\" Guideline, Annex A"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  connect_schemes:
+    zh: ""
+    confidence: low
+    detail: "SIX Group同时运营本所与西班牙BME Exchange（见overview.history），但本次未找到两地市场之间存在类似「沪港通」式互联互通订单路由机制的官方原文——目前更像是「同集团分别运营两个独立市场」而非「互联互通」，该关系已通过group_id表达，不在本字段重复，留空，见OPEN-QUESTIONS。"
+
+# ═══════════════════════════════════════════════
+# 六｜上市、持续监管与退市
+# ═══════════════════════════════════════════════
+listing:
+  _meta:
+    verified: 2026-08-16
+    sources:
+      - title: Listing Rules（LR，2024年11月6日版，SER官网英文版PDF）
+        url: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  boards:
+    - id: ch-six-intl-reporting-standard
+      name_zh: 国际报告准则板
+      name_native: "International Reporting Standard"
+      target_companies: "适用IFRS或US GAAP财务报告准则的发行人，是本所股票主流监管标准"
+    - id: ch-six-swiss-reporting-standard
+      name_zh: 瑞士报告准则板
+      name_native: "Swiss Reporting Standard"
+      target_companies: "适用Swiss GAAP FER财务报告准则（瑞士银行法下的报告准则）的发行人"
+    - id: ch-six-investment-companies
+      name_zh: 投资公司板
+      name_native: "Standard for Investment Companies"
+    - id: ch-six-real-estate-companies
+      name_zh: 房地产公司板
+      name_native: "Standard for Real Estate Companies"
+    - id: ch-six-sparks
+      name_zh: Sparks（中小企业成长板）
+      name_native: "Standard Sparks"
+      target_companies: "面向中小企业（SME）的成长板块"
+    - id: ch-six-spacs
+      name_zh: SPAC板
+      name_native: "Standard for SPACs"
+    - id: ch-six-depository-receipts
+      name_zh: 存托凭证板
+      name_native: "Standard for Depository Receipts"
+    - id: ch-six-collective-investment-schemes
+      name_zh: 集合投资计划板
+      name_native: "Standard for Collective Investment Schemes"
+    - id: ch-six-bonds-standard
+      name_zh: 债券板
+      name_native: "Standard for Bonds"
+    - id: ch-six-derivatives-standard
+      name_zh: 衍生品板
+      name_native: "Standard for Derivatives"
+    - id: ch-six-etp-standard
+      name_zh: 交易所交易产品板
+      name_native: "Standard for Exchange Traded Products"
+
+  review_system:
+    zh: "披露为本：Regulatory Board依提交文件审核上市申请是否满足《上市规则》要求，符合即予批准（可附加条件），上市本身不构成对证券或发行人的价值判断；不套用受控词表registration/approval二分（见schema.OPEN-QUESTIONS对review_system字段的既有讨论），本所模式更接近「交易所自身审核、非政府预先审批」一类"
+    en: "Disclosure-based: the Regulatory Board reviews listing applications against the requirements of the Listing Rules and approves (possibly with conditions) if met; listing itself is not a value judgment on the securities or issuer. Does not map cleanly onto the registration/approval enum dichotomy — closer to an exchange self-review model without a separate government pre-approval step"
+    detail: "第三方法律实务资源（Baker McKenzie）确认「无需FINMA另行批准」（No additional approval from FINMA is required），与本所官方LR原文'Regulatory Board审核+批准'的两步流程一致，佐证性引用，confidence标medium的部分留在下方来源列表第二条。"
+    sources:
+      - title: Listing Rules Art. 46/47（审核与决定条款）
+        url: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf
+        accessed: 2026-08-16
+    quote: "Art. 46 Review of listing application: The Regulatory Board will review the listing application on the basis of the documents that have been submitted. Art. 47 Decision: The Regulatory Board will approve the listing application if it fulfils the requirements laid down in these Listing Rules. ... Listing does not constitute a value judgement about the securities or about the issuer."
+    confidence: high
+
+  listing_process_duration:
+    zh: ""
+    confidence: low
+
+  transfer_between_boards:
+    zh: ""
+    confidence: low
+    detail: "Listing Rules提及可「重新分配到不同监管标准」（reallocation to a different regulatory standard，见delisting_conditions同条上下文），但具体转板流程未逐条核实，留空。"
+
+  continuing_obligations:
+    zh: "发行人须按所适用财务报告准则（IFRS/US GAAP/Swiss GAAP FER等）发布经审计年度报告；Regulatory Board可要求补充公司治理结构与运作方式等信息"
+    en: "Issuers must publish an audited annual report under their applicable financial reporting standard (IFRS/US GAAP/Swiss GAAP FER etc.); the Regulatory Board may require additional disclosure on corporate management and governance structure"
+    quote: "The issuer is required to publish an annual report. This comprises the audited annual financial statements, in accordance with the applicable financial reporting standard, as well as the corresponding audit report."
+    sources:
+      - title: Listing Rules Art. 49 Annual reporting
+        url: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  suspension_resumption:
+    zh: "SIX Exchange Regulation可依发行人申请或依职权，在异常情形（尤其是发行人违反重大披露义务）下临时暂停交易"
+    en: "SIX Exchange Regulation may temporarily suspend trading, either at the issuer's request or on its own initiative, where unusual circumstances — in particular a breach of material disclosure obligations by the issuer — make suspension advisable"
+    quote: "SIX Exchange Regulation may temporarily suspend the trading of securities at the request of the issuer or on its own initiative if unusual circumstances, specifically the breach of important disclosure obligations by the issuer, indicate that such a suspension is advisable."
+    sources:
+      - title: Listing Rules Art. 57 Suspension of trading
+        url: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  delisting_conditions:
+    zh: "五类情形：(1)发行人依合理申请主动退市；(2)偿付能力存在重大疑虑或已进入破产/清算程序；(3)Regulatory Board认定证券市场流动性已不足；(4)连续停牌三个月且暂停原因持续存在；(5)不再满足上市要求"
+    en: "Five categories: (1) a justified application by the issuer; (2) serious doubt over solvency, or insolvency/liquidation proceedings already commenced; (3) the Regulatory Board deeming the market no longer sufficiently liquid; (4) trading suspended continuously for three months with the reasons persisting; (5) listing requirements no longer fulfilled"
+    quote: "The Regulatory Board may cancel the listing of securities in the following cases: 1. following a justified application by an issuer...; 2. if the solvency of the issuer is in serious doubt, or insolvency or liquidation proceedings have already commenced...; 3. if the Regulatory Board deems that there is no longer a sufficiently liquid market in the securities; 4. if trading has been suspended for a continuous three-month period, and the reasons for the suspension continue to exist; 5. if the listing requirements set out in Art. 26 are no longer fulfilled."
+    sources:
+      - title: Listing Rules Art. 58 Delisting
+        url: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  delisting_process:
+    zh: "主动退市须发行人负责机构签署书面同意声明；Regulatory Board可对退市附加通知期与合理等待期要求，审查退市决定是否符合公司法定程序（尤其涉及2023年起生效的新规——股东大会而非董事会才有权决定主动退市）"
+    en: "A voluntary delisting requires a signed declaration from the issuer's responsible bodies consenting to it; the Regulatory Board may make delisting conditional on due notice and appropriate waiting periods, and reviews whether the delisting decision was duly taken under corporate law (notably, since a 2023 legal reform it is the shareholders' meeting rather than the board of directors that has the power to decide on delisting)"
+    detail: "2023年起生效的「股东大会而非董事会决定退市」这一变化，来自WebSearch定位到的第三方法律资源（CapLaw等），本次未逐条抓取原始瑞士债法典（OR）条文核实，confidence标medium。"
+    sources:
+      - title: Listing Rules Art. 58
+        url: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf
+        accessed: 2026-08-16
+    confidence: medium
+
+  delisting_transition_period:
+    zh: ""
+    confidence: low
+    detail: "LR Art.58仅笼统要求「适当的通知与等待期」，未见统一的具体天数/交易日数规定（不同案例可能不同），本次未找到官方原文给出统一标准，留空。"
+
+  post_delisting_venue:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 七｜指数体系
+# ═══════════════════════════════════════════════
+indices:
+  _meta:
+    verified: 2026-08-16
+    sources:
+      - title: Swiss Index Methodology Rulebook Governing Equity and Real Estate Indices（SIX官网英文版PDF，Version 3.40）
+        url: https://www.six-group.com/dam/download/market-data/indices/equity-indices/six-methodology-smi-equity-and-re-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+  items:
+    - id: ch-six-smi
+      name_zh: 瑞士市场指数
+      name_native: "Swiss Market Index (SMI®)"
+      compiler: self
+      weighting_method: float_adjusted
+      review_frequency: "每年9月第3个周五进行年度定期审核（另设3月31日/9月30日/12月31日三个临时选样候补名单截止日）"
+      flagship: "yes"
+      description: "本所蓝筹旗舰指数，成份为本所交易的20只最大、流动性最好的股票，覆盖全市场自由流通市值75%以上，设权重上限（capping factor）以满足UCITS基金分散度要求"
+    - id: ch-six-spi
+      name_zh: 瑞士业绩指数
+      name_native: "Swiss Performance Index (SPI)"
+      compiler: self
+      weighting_method: float_adjusted
+      flagship: "no"
+      description: "流动性较好个股的广泛基准指数，是SMI等大多数派生指数的选样母指数（index universe）"
+    - id: ch-six-swiss-all-share
+      name_zh: 瑞士全股指数
+      name_native: "Swiss All Share Index"
+      compiler: self
+      weighting_method: float_adjusted
+      review_frequency: "连续动态审核（符合入选标准即随时纳入，不符合即随时剔除，非固定周期审核）"
+      flagship: "no"
+      description: "覆盖面最广的指数，成份为本所主板与Sparks板全部本土及外国股票"
+
+# ═══════════════════════════════════════════════
+# 八｜清算、结算与交割
+# ═══════════════════════════════════════════════
+clearing:
+  _meta:
+    verified: 2026-08-16
+    confidence: high
+
+  settlement_cycle:
+    enum: t2
+    zh: "T+2（成交后第二个交易日）"
+    en: "T+2 (the second exchange day following execution)"
+    quote: "Stock exchange transactions in securities listed or authorized for trading on SIX Swiss Exchange are as a general rule settled on the second exchange day (T+2) following execution."
+    sources:
+      - title: Clearing and Settlement Provisions for Trading Participants
+        url: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/trading-provisions/clearing-and-settlement.html
+        accessed: 2026-08-16
+    confidence: high
+
+  ccp_name:
+    zh: "SIX x-clear AG"
+    en: "SIX x-clear AG"
+    detail: "《交易规则》本身对CCP采用中性表述「recognised central counterparty」，允许存在多家受认可的中央对手方（欧洲CCP互操作性安排下），SIX x-clear是本所所属集团旗下的默认/主要CCP，非本所条文规定的唯一法定CCP，此处填写的是集团内该实体名称。"
+    sources:
+      - title: Monitoring and Regulation
+        url: https://www.six-group.com/en/company/governance/monitoring-and-regulation.html
+        accessed: 2026-08-16
+    quote: "SIX x-clear is licensed by the Swiss Financial Market Supervisory Authority (FINMA) as a central counterparty according to the Swiss Financial Market Infrastructure Act (FMIA)."
+    confidence: high
+
+  csd_name:
+    zh: "SIX SIS AG"
+    en: "SIX SIS AG"
+    detail: "SIX SIS同时承担瑞士本国中央证券存管机构（CSD）与国际中央证券存管机构（ICSD）职能，运营SECOM实时结算系统；非瑞郎证券可另经Euroclear Bank / Clearstream Luxembourg结算。"
+    sources:
+      - title: About SIX SIS AG
+        url: https://www.six-group.com/en/products-services/securities-services/settlement-and-custody/info-center/about-six-sis-ag.html
+        accessed: 2026-08-16
+    quote: "SIX SIS possesses a license as central security depository under FMIA."
+    confidence: high
+
+  initial_margin_practice:
+    zh: ""
+    confidence: low
+
+  maintenance_margin_practice:
+    zh: ""
+    confidence: low
+
+  mark_to_market_frequency:
+    zh: ""
+    confidence: low
+
+  delivery_method:
+    enum: na
+    zh: "不适用（本所记录的是现货证券市场；衍生品合约的交割方式在本所体系外，属另行运营的相关衍生品市场）"
+    en: "N/A (this record covers the cash securities market; derivatives delivery mechanics fall outside this entity)"
+    detail: "推断依据：products章节所列品类均为现货证券（股票/基金/债券/结构性产品/ETP等），Trading Rules正文未见对「交割」（delivery）作为衍生品到期履约概念的规定，与cn-sse/hk-hkex/us-nyse/jp-jpx四家现货标杆的处理一致。"
+    sources:
+      - title: Trading Rules（SIX Exchange Regulation官网英文版PDF，通篇未见衍生品式"交割"条款，佐证本所为现货市场）
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/rule-books/rb-en.pdf
+        accessed: 2026-08-16
+    confidence: medium
+
+  last_trading_day_rule:
+    zh: ""
+    confidence: low
+
+  default_management:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 九｜市场参与者
+# ═══════════════════════════════════════════════
+participants:
+  _meta:
+    verified: 2026-08-16
+    sources:
+      - title: "Directive 1: Admission of participants"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir01-en.pdf
+        accessed: 2026-08-16
+    confidence: high
+
+  investor_structure:
+    zh: ""
+    confidence: low
+
+  account_opening_requirements:
+    zh: "参与者须持有FINMA颁发的证券商牌照或「远程会员」（remote member）授权；具备接入交易系统的技术条件；是受认可清算机构与结算机构的参与者（或通过General Clearing Member/托管行间接接入）"
+    en: "Applicants must hold a FINMA licence as a securities firm or FINMA authorisation as a remote member; meet the technical requirements for connecting to the exchange system; and be a participant in a recognised clearing organisation and settlement organisation (directly or via a General Clearing Member / custodian)"
+    quote: "An applicant must fulfil the admission requirements according to Clause 3 Trading Rules, i.e. he must a) have a licence as a securities firm or remote member of the Exchange from FINMA; ... d) be a participant in a clearing organisation recognised by the Exchange or have access to such via a General Clearing Member; and e) be a participant in a settlement organisation recognised by the Exchange or have access to such via a custodian."
+    confidence: high
+
+  suitability_management:
+    zh: ""
+    confidence: low
+
+  foreign_access_channel:
+    zh: "「远程会员」（Remote Member）制度——境外证券商无需在瑞士设立实体，经FINMA授权即可直接成为本所交易参与者"
+    en: "\"Remote Member\" regime — foreign securities firms may become direct trading participants upon FINMA authorisation, without establishing a Swiss entity"
+    detail: "与cn-sse/hk-hkex等需经内地/香港持牌中介间接参与的模式不同，瑞士允许境外机构直接远程会员身份参与，是本所与亚洲现货标杆的一处结构性差异；PwC税务资料同时确认「remote members of a Swiss stock exchange」被纳入瑞士证券交易税「证券商」定义范围内（见costs.stamp_duty），侧面印证该制度确实存在且有实际法律后果，非仅名义规定。"
+    sources:
+      - title: "Directive 1: Admission of participants §2.1"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir01-en.pdf
+        accessed: 2026-08-16
+    quote: "have a licence as a securities firm or remote member of the Exchange from FINMA"
+    confidence: high
+
+  membership_structure:
+    zh: "参与者为持有FINMA证券商牌照的银行/证券商（含远程会员）；另有专门通过「Market Maker Agreement」认证的做市商类别（见market_structure.market_maker_scheme）"
+    en: "Participants are FINMA-licensed banks/securities firms (including remote members); a separate market-maker category exists via a certified \"Market Maker Agreement\" (see market_structure.market_maker_scheme)"
+    sources:
+      - title: "Directive 1: Admission of participants"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir01-en.pdf
+        accessed: 2026-08-16
+    confidence: medium
+
+  broker_landscape:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 十｜市场数据与技术基础设施
+# ═══════════════════════════════════════════════
+infrastructure:
+  _meta:
+    verified: 2026-08-16
+    confidence: medium
+
+  market_data_levels:
+    zh: ""
+    confidence: low
+
+  data_latency:
+    zh: ""
+    confidence: low
+
+  data_pricing_model:
+    zh: ""
+    confidence: low
+
+  historical_data_availability:
+    zh: ""
+    confidence: low
+
+  trading_system_name:
+    zh: "SWXess（本所交易平台）"
+    en: "SWXess (SIX Swiss Exchange trading platform)"
+    detail: "订单簿层面支持三种市场模式：CLOB（中央限价订单簿）、QDM（报价驱动市场）、PVM（价格验证市场），由同一「On-Book Matcher (OBM)」撮合引擎承载。"
+    sources:
+      - title: Trading on SIX Swiss Exchange — Module 2 Rules & Regulations（培训材料PDF，术语表）
+        url: https://www.six-group.com/dam/download/sites/education/preparatory-documentation/trading-module/trading-on-ssx-module-2-rules-regulations-en.pdf
+        accessed: 2026-08-16
+    quote: "SWXess                          SIX Swiss Exchange trading platform"
+    confidence: high
+
+  access_methods:
+    zh: ""
+    confidence: low
+
+  major_outage_history:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 十一｜交易成本与税费
+# ═══════════════════════════════════════════════
+costs:
+  _meta:
+    verified: 2026-08-16
+    confidence: medium
+
+  commission_structure:
+    zh: ""
+    confidence: low
+
+  exchange_fees:
+    zh: ""
+    confidence: low
+
+  clearing_fees:
+    zh: ""
+    confidence: low
+
+  regulatory_fees:
+    zh: ""
+    confidence: low
+
+  stamp_duty:
+    zh: "联邦证券交易印花税（Umsatzabgabe/transfer stamp tax）：瑞士本国证券0.15%，外国证券0.3%（由瑞士证券商作为交易方或中介参与时征收，实务上买卖双方各承担一半）"
+    en: "Federal securities transfer stamp tax (Umsatzabgabe): 0.15% for securities issued by a Swiss tax resident, 0.3% for securities issued by a foreign tax resident (levied where a Swiss securities dealer participates as a contracting party or intermediary; in practice split between buyer and seller)"
+    detail: "⚠️ 来源为第三方专业税务资源（PwC Tax Summaries），按CLAUDE.md二第3条第三方来源confidence上限为medium，即使摘录到逐字quote也不得标high。官方联邦税务局（ESTV）总览页（stamp-duty）确认了该税种的法律性质与征收依据，但本次未在ESTV官网上定位到载明具体0.15%/0.3%税率数字的原始页面（可能在德/法/意语版或税率细则子页），故税率数字仍需依赖第三方来源，见OPEN-QUESTIONS。"
+    sources:
+      - title: "Switzerland - Corporate - Other taxes（PwC Tax Summaries）"
+        url: https://taxsummaries.pwc.com/switzerland/corporate/other-taxes
+        accessed: 2026-08-16
+      - title: "Stamp duty（瑞士联邦税务局ESTV官网总览页，确认税种法律性质，未含具体税率数字）"
+        url: https://www.estv.admin.ch/en/stamp-duty
+        accessed: 2026-08-16
+    quote: "The ordinary tax rate of Swiss securities transfer tax is 0.15% for securities issued by a tax resident of Switzerland and 0.3% for securities issued by a tax resident of a foreign country."
+    confidence: medium
+
+  financial_transaction_tax:
+    zh: ""
+    confidence: low
+    detail: "瑞士证券交易印花税（见stamp_duty）本身即具有金融交易税性质，本字段与stamp_duty的边界如何区分本次未进一步厘清，留空避免重复计入。"
+
+  capital_gains_tax:
+    zh: ""
+    confidence: low
+    detail: "常识印象：瑞士对私人投资者的证券资本利得普遍免税（区别于职业交易者），但本次未附ESTV官方原文核实具体口径与例外情形，按铁律留空。"
+
+  dividend_withholding_tax:
+    zh: "联邦预扣税（Verrechnungssteuer/anticipatory tax）：投资收益（含股息）35%，人寿年金/养老金15%，其他保险给付8%；由境内债务人（如支付股息的公司/托管银行）代扣代缴，本国纳税人可通过申报全额抵扣/退还，非居民可按税收协定申请部分退还"
+    en: "Federal anticipatory tax (Verrechnungssteuer): 35% on investment income (including dividends), 15% on life annuities/pensions, 8% on other insurance benefits; withheld at source by the domestic debtor (e.g. the paying company/custodian bank); resident taxpayers can reclaim the full amount by declaring it, non-residents can reclaim part under applicable tax treaties"
+    quote: "The tax rate is 35% for investment income and lottery winnings 15% for life annuities and pensions 8% for other insurance benefits"
+    sources:
+      - title: "Anticipatory Tax (Swiss Withholding Tax) AT（瑞士联邦税务局ESTV官网）"
+        url: https://www.estv.admin.ch/estv/en/home/anticipatory-tax.html
+        accessed: 2026-08-16
+    confidence: high
+
+  implicit_costs_note:
+    zh: ""
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 十二｜风险与特殊考量
+# ═══════════════════════════════════════════════
+risks:
+  _meta:
+    verified: 2026-08-16
+    confidence: low
+
+  fx_risk_note:
+    zh: "瑞士法郎自由浮动、无外汇管制（常识性事实，本次未附ESTV/FINMA/SNB官方原文核实，confidence标low）；瑞士非欧元区，交易以瑞士法郎计价品种为主，非本币投资者需承担CHF汇率风险"
+    en: "The Swiss franc floats freely with no capital controls (commonly known, but not verified against an SNB/FINMA primary source this session); Switzerland is outside the Eurozone, and most instruments are CHF-denominated, exposing non-domestic investors to CHF exchange-rate risk"
+    confidence: low
+
+  political_risk_note:
+    zh: ""
+    confidence: low
+
+  liquidity_risk_note:
+    zh: ""
+    confidence: low
+
+  regulatory_change_risk_note:
+    zh: "瑞士作为非欧盟国家，其交易所监管框架与欧盟MiFID II的「等效性」认定存在政治不确定性——欧盟委员会2017年曾发布《实施决定》，认定SIX Swiss Exchange AG与BX Swiss AG两家瑞士交易所符合MiFID II/MiFIR股票交易义务下的「等效」标准，但该决定明确限定有效期一年（2017年12月24日生效、同年12月31日到期），此后是否续期、目前最新状态本次未逐条核实，是本所与已有的欧盟成员国交易所之间制度环境的核心差异点之一，见OPEN-QUESTIONS。"
+    en: "As a non-EU country, Switzerland's exchange regulatory framework faces political uncertainty over its MiFID II \"equivalence\" status — in 2017 the European Commission issued an Implementing Decision recognizing SIX Swiss Exchange AG and BX Swiss AG as equivalent for the MiFID II/MiFIR share trading obligation, but that Decision was expressly limited to one year (effective 24 December 2017, expiring 31 December of the same year); whether and how it was subsequently renewed was not individually verified this session — a core structural difference versus EU-member exchanges already in this project, see OPEN-QUESTIONS."
+    sources:
+      - title: "European Commission Adopts Implementing Decision on the Equivalence of Swiss Stock Exchanges Under MiFID II（律所法律资讯平台转述，欧盟官方europa.eu原页面本次为纯JS渲染无法抓取正文，见SOURCES.md说明）"
+        url: https://natlawreview.com/article/european-commission-adopts-implementing-decision-equivalence-swiss-stock-exchanges
+        accessed: 2026-08-16
+    quote: "Under the Implementation Decision, the EC recognizes the following share trading venues in Switzerland as eligible for compliance with the trading obligation for shares in MiFID II and MIFIR: SIX Swiss Exchange AG and BX Swiss AG. ... The Implementing Decision is limited to one year, expiring on December 31, and became effective on December 24, 2017."
+    confidence: medium
+
+  enforcement_note:
+    zh: ""
+    confidence: low

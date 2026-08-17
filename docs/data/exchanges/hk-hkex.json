@@ -1,6 +1,6 @@
 {
   "id": "hk-hkex",
-  "name_zh": "香港交易及结算所（简称港交所）",
+  "name_zh": "香港交易及结算所",
   "name_native": {
     "zh-Hant": "香港交易及結算所有限公司",
     "en": "Hong Kong Exchanges and Clearing Limited (HKEX)"
@@ -223,8 +223,25 @@
     },
     "products": {
       "meta": {
-        "verified": "2026-08-12",
-        "confidence": "medium"
+        "verified": "2026-08-17",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Derivatives Market Trading Hours（HKEX 官网，逐品种交易时段表，同时确认在售衍生品品类清单）",
+            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=en",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Hang Seng Index Futures Options 产品页（含合约规格）",
+            "url": "https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-Index-%28HSI%29/Hang-Seng-Index-Futures-Options?sc_lang=en",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Stock Futures 产品页",
+            "url": "https://www.hkex.com.hk/Products/Listed-Derivatives/Single-Stock/Stock-Futures?sc_lang=en",
+            "accessed": "2026-08-17"
+          }
+        ]
       },
       "items": [
         {
@@ -265,6 +282,90 @@
           "category": "bond",
           "name_zh": "债券",
           "description": "一般知识，未逐条核实规模与品种清单"
+        },
+        {
+          "id": "hkex-hsi-futures",
+          "category": "future",
+          "name_zh": "恒生指数期货（含小型恒指期货、恒指总回报指数期货）",
+          "name_native": "Hang Seng Index Futures (incl. Mini-HSI Futures, HSI Total/Net Total Return Index Futures)",
+          "derivative_of": "hsi",
+          "description": "港交所旗舰股指期货，1986年5月推出；合约乘数每指数点50港元，最小价格变动1个指数点（Contract Multiplier: HK$50 per index point; Minimum Fluctuation: One index point）"
+        },
+        {
+          "id": "hkex-hsi-options",
+          "category": "option",
+          "name_zh": "恒生指数期权（含每周期权、灵活期权、恒指期货期权）",
+          "name_native": "Hang Seng Index Options (incl. Weekly HSI Options, Flexible HSI Options, HSI Futures Options)",
+          "derivative_of": "hsi",
+          "description": "1993年3月推出；2021年8月23日起新增以实物（期货）交收的恒指期货期权（Options on Futures）品种，区别于原有的现金结算指数期权"
+        },
+        {
+          "id": "hkex-hscei-futures",
+          "category": "future",
+          "name_zh": "恒生中国企业指数期货（H股指数期货，含小型合约）",
+          "name_native": "Hang Seng China Enterprises Index (HSCEI/H-shares Index) Futures, incl. Mini-HSCEI Futures",
+          "derivative_of": "hscei"
+        },
+        {
+          "id": "hkex-hscei-options",
+          "category": "option",
+          "name_zh": "恒生中国企业指数期权（含期货期权、每周期权）",
+          "name_native": "Hang Seng China Enterprises Index Options, incl. Futures Options, Weekly Options",
+          "derivative_of": "hscei"
+        },
+        {
+          "id": "hkex-hstech-futures",
+          "category": "future",
+          "name_zh": "恒生科技指数期货",
+          "name_native": "Hang Seng TECH Index Futures",
+          "derivative_of": "hstech"
+        },
+        {
+          "id": "hkex-hstech-options",
+          "category": "option",
+          "name_zh": "恒生科技指数期权（含期货期权、每周期权）",
+          "name_native": "Hang Seng TECH Index Options, incl. Futures Options, Weekly Options",
+          "derivative_of": "hstech"
+        },
+        {
+          "id": "hkex-other-index-derivatives",
+          "category": "future",
+          "name_zh": "其他股指衍生品（恒生生物科技指数期货、MSCI系列指数期货期权、中华120指数期货、行业指数期货）",
+          "name_native": "Other Equity Index Derivatives: Hang Seng Biotech Index Futures, MSCI Index Futures & Options, CES China 120 Index Futures, Sector Index Futures",
+          "description": "MSCI系列含39只股票指数期货及期权合约（官网原文：\"HKEX launched 39 MSCI equity index futures and options contracts\"），标的覆盖亚太及新兴市场多个 MSCI 指数，第三方编制，非恒生指数公司或港交所自编"
+        },
+        {
+          "id": "hkex-stock-futures",
+          "category": "future",
+          "name_zh": "股票期货（个股期货）",
+          "name_native": "Stock Futures",
+          "derivative_of": "hkex-stocks",
+          "description": "现金结算，不涉及实物股票交收；合约乘数为相关股票的每手买卖单位（board lot size），最终结算价为相关股票在最后交易日港交所（SEHK）官方收市价；由 HKFE 全资附属的期货结算公司（HKCC）登记、结算及担保"
+        },
+        {
+          "id": "hkex-stock-options",
+          "category": "option",
+          "name_zh": "股票期权（个股期权，含每周期权）",
+          "name_native": "Stock Options, incl. Weekly Stock Options",
+          "derivative_of": "hkex-stocks"
+        },
+        {
+          "id": "hkex-currency-futures",
+          "category": "future",
+          "name_zh": "货币期货（以人民币货币对为主）",
+          "name_native": "Currency Futures: USD/CNH, Mini USD/CNH, EUR/CNH, JPY/CNH, AUD/CNH, CNH/USD Futures"
+        },
+        {
+          "id": "hkex-currency-options",
+          "category": "option",
+          "name_zh": "货币期权",
+          "name_native": "USD/CNH Options"
+        },
+        {
+          "id": "hkex-rates-commodity-derivatives",
+          "category": "future",
+          "name_zh": "利率及商品期货（5年期中国国债期货、香港银行同业拆息期货、黄金/白银/伦敦金属小型期货）",
+          "name_native": "Interest Rate & Commodity Futures: 5-Year China Government Bond Futures, HIBOR Futures, USD & CNH Gold/Silver Futures, USD & CNH London Metal Mini Futures"
         }
       ]
     },
@@ -698,6 +799,390 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null
+      },
+      "derivatives": {
+        "trading_sessions": {
+          "pre_market": {
+            "zh": "开市前议价时段（Pre-Market Opening Period）：早市 上午8時45分－上午9時15分；午市 中午12時30分－下午1時（仅部分主要合约适用，如恒生指数/恒生中国企业指数/恒生科技指数系列期货期权，标*号品种）",
+            "en": "Pre-Market Opening Period: Morning 8:45 a.m.-9:15 a.m.; Afternoon 12:30 p.m.-1:00 p.m. (applies only to selected major contracts marked with *, e.g. HSI/HSCEI/Hang Seng TECH Index futures & options)",
+            "sources": [
+              {
+                "title": "衍生品市场交易时段中文版（HKEX 官网）",
+                "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=zh-hk",
+                "accessed": "2026-08-17"
+              }
+            ],
+            "quote": "設開市前議價時段：早市：上午8時45分－上午9時15分 午市：中午12時30分－下午1時",
+            "confidence": "high",
+            "verified": "2026-08-12",
+            "enum": null,
+            "detail": null
+          },
+          "continuous_am": {
+            "zh": "上午9時15分 - 正午12時（以恒生指数系列期货期权为例）",
+            "en": "9:15 a.m. - 12:00 noon (Hang Seng Index series futures & options)",
+            "quote": "上午9時15分* - 正午12時",
+            "confidence": "high",
+            "sources": [
+              {
+                "title": "Trading Hours - Securities Market（HKEX 官网）",
+                "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+                "accessed": "2026-08-12"
+              }
+            ],
+            "verified": "2026-08-12",
+            "enum": null,
+            "detail": null
+          },
+          "lunch_break": {
+            "zh": "正午12時 - 下午1時：并非官方单独命名的「午休」时段，而是上午与下午交易时段之间的间隔，其中12:30-13:00是下午时段的开市前议价时段（见 pre_market）",
+            "confidence": "medium",
+            "sources": [
+              {
+                "title": "Trading Hours - Securities Market（HKEX 官网）",
+                "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+                "accessed": "2026-08-12"
+              }
+            ],
+            "verified": "2026-08-12",
+            "en": null,
+            "enum": null,
+            "detail": null,
+            "quote": null
+          },
+          "continuous_pm": {
+            "zh": "下午1時 - 下午4時30分；合约到期月（即月合约）最后交易日提前收市至下午4時",
+            "en": "1:00 p.m. - 4:30 p.m.; the spot-month contract's Last Trading Day closes earlier, at 4:00 p.m.",
+            "quote": "下午1時* - 下午4時30分",
+            "confidence": "high",
+            "sources": [
+              {
+                "title": "Trading Hours - Securities Market（HKEX 官网）",
+                "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+                "accessed": "2026-08-12"
+              }
+            ],
+            "verified": "2026-08-12",
+            "enum": null,
+            "detail": null
+          },
+          "after_market": {
+            "zh": "无独立盘后连续交易时段；下午4:30（即月合约最后交易日为4:00）收市后直接衔接收市后交易时段（AHT，见 night_session）",
+            "confidence": "medium",
+            "sources": [
+              {
+                "title": "Trading Hours - Securities Market（HKEX 官网）",
+                "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+                "accessed": "2026-08-12"
+              }
+            ],
+            "verified": "2026-08-12",
+            "en": null,
+            "enum": null,
+            "detail": null,
+            "quote": null
+          },
+          "night_session": {
+            "zh": "收市后交易时段（Extended/After-Hours Trading, AHT，业内俗称T+1時段）：恒生指数系列期货期权、黄金/白银期货、伦敦金属小型期货等 下午5時-翌日凌晨3時；货币期货及MSCI Late Close合约 下午7時-翌日凌晨3時；MSCI台湾（美元）指数期货 下午2:15-翌日凌晨3時",
+            "en": "After-Hours Trading (AHT, i.e. the \"T+1 Session\"): 5:00 p.m. to 3:00 a.m. the next day for Hang Seng Index series futures/options, Gold/Silver Futures, London Metal Mini Futures, etc.; 7:00 p.m. to 3:00 a.m. the next day for Currency Futures & MSCI Late Close Contracts; 2:15 p.m. to 3:00 a.m. the next day for MSCI Taiwan (USD) Index Futures",
+            "sources": [
+              {
+                "title": "Derivatives Market Trading Hours（HKEX 官网）",
+                "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=en",
+                "accessed": "2026-08-17"
+              }
+            ],
+            "quote": "5:00 p.m. - 03:00 a.m. the next day",
+            "confidence": "high",
+            "detail": "本 trading_sessions 子块整体以恒生指数/恒生中国企业指数/恒生科技指数期货期权为代表性样本；不同产品（如货币期货、商品期货、单一股票期权/期货）的具体时段有差异，已在各字段说明中标注，完整逐品种时段表见 sources 页面。",
+            "verified": "2026-08-12",
+            "enum": null
+          }
+        },
+        "holidays_note": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "衍生品市场节假日安排未见与证券市场（见顶层 holidays_note）存在实质差异的官方说明，本次未逐条核实，留空。",
+          "sources": [
+            {
+              "title": "Trading Hours - Securities Market（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "opening_mechanism": {
+          "zh": "开市前议价时段（Pre-Market Opening Period）：仅接受不设价格限制的竞价盘（競價盤），以「拟定开市价」（Calculated Opening Price, COP）撮合，按时间优先排序；未能配对的竞价盘于开市时转换为限价盘",
+          "en": "Pre-Market Opening Period: only unpriced Auction Orders are accepted, matched at the Calculated Opening Price (COP) on a time-priority basis; unmatched Auction Orders convert to Limit Orders at market open",
+          "sources": [
+            {
+              "title": "衍生产品市场交易机制总览中文版（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading/Derivatives/Overview/Trading-Mechanism?sc_lang=zh-hk",
+              "accessed": "2026-08-17"
+            }
+          ],
+          "quote": "競價盤只適用於開市前議價時段，是一種沒有限定價格並以「擬定開市價」作為成交價的買賣盤。所有競價盤會以時間的優先次序排列及配對。未能配對的競價盤會於開市時轉換成限價盤。",
+          "confidence": "high",
+          "verified": "2026-08-12",
+          "enum": null,
+          "detail": null
+        },
+        "closing_mechanism": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "本次抓取的官方页面（衍生品市场交易机制总览、交易时段表）未提及类似证券市场收市集合竞价（CAS）的独立收市机制，仅确认各合约每日交易时段的收盘时刻（如下午4:30，即月合约最后交易日提前至下午4:00）；不排除存在但本次未找到专门说明页，如实留空，记入 OPEN-QUESTIONS。",
+          "sources": [
+            {
+              "title": "Trading Hours - Securities Market（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "matching_principle": {
+          "zh": "HKATS 為香港交易所旗下衍生產品市場的電子交易系統，買賣盤會即時按價格及時間的優先次序進行配對",
+          "en": "HKATS, the trading system for HKEX's Derivatives Market, is an electronic system that automatically matches orders in real-time based on price/time priority",
+          "sources": [
+            {
+              "title": "衍生产品市场交易机制总览中文版（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading/Derivatives/Overview/Trading-Mechanism?sc_lang=zh-hk",
+              "accessed": "2026-08-17"
+            }
+          ],
+          "quote": "HKATS 為香港交易所旗下衍生產品市場的電子交易系統，買賣盤會即時按價格及時間的優先次序進行配對。",
+          "confidence": "high",
+          "verified": "2026-08-12",
+          "enum": null,
+          "detail": null
+        },
+        "order_types": {
+          "zh": "競價盤（僅限開市前議價時段）與限價盤兩大類；買賣盤可設「活躍」/「不動」狀態，另可附加 T+1 屬性（於收市後交易時段仍然有效）與轉移（Give Up）屬性；時間有效性含 Fok/Fak/Day/Exp/Date 五種；另支持標準組合與自選組合（Tailor-Made Combination, TMC）兩类组合交易，可跨月/跨品种设计价差策略",
+          "en": "Two main order types: Auction Orders (Pre-Market Opening Period only) and Limit Orders; orders can be Active or Inactive, with optional T+1 (valid through the After-Hours Trading Session) and Give Up attributes; five validities: Fok/Fak/Day/Exp/Date; also supports Standard Combinations and Tailor-Made Combinations (TMC) for calendar-spread/cross-product strategies",
+          "sources": [
+            {
+              "title": "衍生产品市场交易机制总览中文版（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading/Derivatives/Overview/Trading-Mechanism?sc_lang=zh-hk",
+              "accessed": "2026-08-17"
+            }
+          ],
+          "quote": "競價盤只適用於開市前議價時段⋯限價盤為設有價格限制的買賣盤⋯擁有T+1屬性的買賣盤於所有交易時段包括T+1時段（收市後期貨交易時段）有效⋯時間有效性：Fok - 全額或取消⋯Fak - 成交及取消⋯Day - 當日有效⋯Exp - 到期日有效⋯Date - 指定日期有效⋯HKATS提供兩類的組合交易機制供市場參與者使用，分別為標準組合和自選組合",
+          "confidence": "high",
+          "verified": "2026-08-12",
+          "enum": null,
+          "detail": null
+        },
+        "tick_size": {
+          "zh": "以恒生指数期货为例，最小价格变动为1个指数点（每指数点价值50港元）；其余产品的最小变动单位因合约而异，本次未找到统一档位表",
+          "en": "Example (Hang Seng Index Futures): minimum fluctuation is 1 index point (HK$50 per index point); tick sizes for other products vary by contract, no unified table was found this session",
+          "sources": [
+            {
+              "title": "Hang Seng Index Futures Options 产品页",
+              "url": "https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-Index-%28HSI%29/Hang-Seng-Index-Futures-Options?sc_lang=en",
+              "accessed": "2026-08-17"
+            }
+          ],
+          "quote": "Contract Multiplier / HK$50 per index point ⋯ Minimum Fluctuation / One index point.",
+          "confidence": "medium",
+          "verified": "2026-08-12",
+          "enum": null,
+          "detail": null
+        },
+        "contract_specs_note": {
+          "zh": "以恒生指数期货为例：合约乘数每指数点50港元，最小价格变动1个指数点。股票期货：合约乘数为相关股票的每手买卖单位（board lot size），现金结算（不涉及实物股票交收），最终结算价为相关股票在最后交易日港交所（SEHK）官方收市价",
+          "en": "Example (Hang Seng Index Futures): contract multiplier HK$50 per index point, minimum fluctuation 1 index point. Stock Futures: contract multiplier equals the underlying stock's board lot size; cash-settled with no physical delivery of shares, and the final settlement price equals SEHK's official closing price of the underlying stock on the Last Trading Day.",
+          "sources": [
+            {
+              "title": "Hang Seng Index Futures Options 产品页",
+              "url": "https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-Index-%28HSI%29/Hang-Seng-Index-Futures-Options?sc_lang=en",
+              "accessed": "2026-08-17"
+            },
+            {
+              "title": "Stock Futures 产品页",
+              "url": "https://www.hkex.com.hk/Products/Listed-Derivatives/Single-Stock/Stock-Futures?sc_lang=en",
+              "accessed": "2026-08-17"
+            }
+          ],
+          "quote": "Contract Multiplier / HK$50 per index point ⋯ As stock futures contracts are cash settled, there is no physical delivery of shares when the contract expires ⋯ The final settlement price is the official closing price of the underlying stock as quoted by SEHK on the Last Trading Day.",
+          "confidence": "high",
+          "verified": "2026-08-12",
+          "enum": null,
+          "detail": null
+        },
+        "price_limits": {
+          "type": {
+            "enum": "dynamic_reference",
+            "zh": "动态价格区间机制：T时段设「動態價格限制機制」（Dynamic Price Banding，浮动区间随参考价移动，当最后成交价偏离参考价超过更新参数时参考价随之调整，用以防止明显错价盘）；T+1（收市後交易）时段另设独立的「價格限制向上/向下機制」（Price Limit Up/Down Mechanism），以T时段即月合约最后成交价为基准的固定百分比区间",
+            "en": "Dynamic reference-price bands: during the T Session, a \"Dynamic Price Banding\" mechanism applies (a floating band around a reference price that shifts when the last traded price deviates from it by more than an update parameter, to prevent clearly erroneous orders); during the T+1 (After-Hours Trading) Session, a separate \"Price Limit Up/Down Mechanism\" applies a fixed-percentage band anchored to the T Session's spot-month contract last traded price",
+            "sources": [
+              {
+                "title": "衍生产品市场交易机制总览中文版（HKEX 官网）",
+                "url": "https://www.hkex.com.hk/Services/Trading/Derivatives/Overview/Trading-Mechanism?sc_lang=zh-hk",
+                "accessed": "2026-08-17"
+              },
+              {
+                "title": "收市后交易时段 FAQ 中文版（HKEX 官网）",
+                "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/After-Hours-Trading-%28AHT%29?sc_lang=zh-hk",
+                "accessed": "2026-08-17"
+              }
+            ],
+            "quote": "動態價格限制機制是為避免顯然是錯價的買賣盤出現於 HKATS 內之額外監管措施⋯如最後成交價偏離參考價的數值超過更新參數，參考價將調整至最後成交價⋯此機制旨在限制特定交易時段內的價格波動。",
+            "confidence": "high",
+            "verified": "2026-08-12",
+            "detail": null
+          },
+          "main_board": {
+            "zh": "T+1時段（收市后交易）价格上下限：卖盘价不得低于T时段即月合约最后成交价的94%，买盘价不得高于106%（即±6%，适用于指数期货；货币期货为±7%）",
+            "en": "T+1 Session price limit: sell orders cannot be priced below 94% and buy orders cannot be priced above 106% of the T Session spot-month contract's last traded price (i.e. ±6% for index futures; ±7% for currency futures)",
+            "sources": [
+              {
+                "title": "收市后交易时段 FAQ 中文版（HKEX 官网）",
+                "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/After-Hours-Trading-%28AHT%29?sc_lang=zh-hk",
+                "accessed": "2026-08-17"
+              }
+            ],
+            "quote": "在 T+1 時段內，賣盤價不得低於 T 時段現貨月合約最後成交價的94%，而買盤價不得高於 T 時段現貨月合約最後成交價的106%⋯6%（適用於指數期貨）和7%（適用於貨幣期貨）的價限會適時進行檢討。",
+            "confidence": "high",
+            "verified": "2026-08-12",
+            "enum": null,
+            "detail": null
+          },
+          "other_boards": {
+            "zh": "",
+            "confidence": "low",
+            "detail": "T时段「動態價格限制機制」浮动区间的具体百分比参数，本次抓取页面未披露具体数值，留空。",
+            "sources": [
+              {
+                "title": "Trading Hours - Securities Market（HKEX 官网）",
+                "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+                "accessed": "2026-08-12"
+              }
+            ],
+            "verified": "2026-08-12",
+            "en": null,
+            "enum": null,
+            "quote": null
+          }
+        },
+        "circuit_breaker": {
+          "enum": "stock_level",
+          "zh": "衍生品市場波動調節機制（VCM）：仅适用于恒生指数、小型恒指、恒生中国企业指数（H股指数）、小型H股指数、恒生科技指数、恒生生物科技指数六个期货品种的现月及次月合约，属逐合约级别而非全市场性质",
+          "en": "Derivatives Market Volatility Control Mechanism (VCM): applies only to the spot-month and next-calendar-month futures contracts of six products — HSI, Mini-HSI, HSCEI (H-shares Index), Mini-HSCEI, Hang Seng TECH Index and Hang Seng Biotech Index futures — i.e. at the individual-contract level, not market-wide",
+          "detail": "受控词表 `circuit_breaker_type` 目前只有 none/index_level/stock_level/both 四档，均以「股票」为设计语境；本字段的真实颗粒度是「逐合约」（部分期货品种的现月/次月合约），既非严格意义的「指数级」也非「个股级」，这里借用 stock_level 仅取其「非全市场」的含义，不代表真的是个股层面——是裁剪后字段集合复用现货枚举时一处不完全贴合，已记入 OPEN-QUESTIONS「框架性问题」。",
+          "sources": [
+            {
+              "title": "衍生产品市场波动调节机制 FAQ 中文版（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/Volatility-Control-Mechanism-%28VCM%29?sc_lang=zh-hk",
+              "accessed": "2026-08-17"
+            }
+          ],
+          "quote": "市調機制僅適用於恒生指數（HSI）期貨，小型恒生指數（MHI）期貨，Ｈ股指數（HHI）期貨，小型Ｈ股指數（MCH）期貨，恒生科技指數（HTI）期貨及恒生生物科技指數（HBI）期貨的首兩個合約月份。",
+          "confidence": "high",
+          "verified": "2026-08-12"
+        },
+        "volatility_interruption": {
+          "zh": "冷靜期觸發條件：期貨合約潛在成交價較5分鐘前最後成交價偏離達±5%即觸發，隨即開始5分鐘冷靜期，期間僅可在價格限制區間內交易；監測適用於持續交易時段，但不包括早市/午市首15分鐘及午市最後20分鐘，亦不適用於開市前議價時段及收市後交易時段",
+          "en": "Cooling-off trigger: when a futures contract's potential trade price deviates ±5% from the last traded price 5 minutes earlier, a 5-minute cooling-off period begins, during which trading is confined within the price band; monitoring applies to the continuous trading session, excluding the first 15 minutes of the morning/afternoon sessions and the last 20 minutes of the afternoon session, and does not apply to the Pre-Market Opening Period or the After-Hours Trading Session",
+          "sources": [
+            {
+              "title": "衍生产品市场波动调节机制 FAQ 中文版（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/Volatility-Control-Mechanism-%28VCM%29?sc_lang=zh-hk",
+              "accessed": "2026-08-17"
+            }
+          ],
+          "quote": "一旦期貨合約價格超出5 分鐘前最後一次交易價格的±5%，市調機制將被觸發，並隨即開始 5 分鐘的冷靜期⋯市調機制監測適用於持續交易時段，以下時間除外：早市與午市的首15分鐘、午市的最後20分鐘⋯市調機制適用於正常交易時段而不適用於開市前議價時段及收市後交易時段。",
+          "confidence": "high",
+          "verified": "2026-08-12",
+          "enum": null,
+          "detail": null
+        },
+        "trading_halt_mechanism": {
+          "zh": "短暫停牌機制（THM）：僅適用於收市後交易（T+1）時段的股指期權交易，當買盤最高價達到THM參考價上限或賣盤最低價達到下限（即相應現月期貨於T+1時段的價格限制）時觸發，觸發後該合約於T+1時段餘下時間暫停交易，至下一個T時段恢復",
+          "en": "Trading Halt Mechanism (THM): applies only to equity index options trading in the After-Hours Trading (T+1) Session; triggered when the highest bid reaches the upper THM reference price or the lowest ask reaches the lower THM reference price (i.e. the T+1 Session price limit of the corresponding spot-month futures contract); once triggered, the contract halts for the remainder of the T+1 Session and resumes trading in the next T Session",
+          "sources": [
+            {
+              "title": "收市后交易时段 FAQ 中文版（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/After-Hours-Trading-%28AHT%29?sc_lang=zh-hk",
+              "accessed": "2026-08-17"
+            }
+          ],
+          "quote": "短暫停牌機制只適用於T+1時段的期權交易。只有在參考合約 (即月期貨) 的現存買盤價(賣盤價)達短暫停牌機制參考價以上(以下)的5%時，短暫停牌機制才會被觸發。一旦短暫停牌機制被觸發，該短暫停牌的期權合約於剩餘 T+1時段的交易亦會暫停⋯股票指數期權合約的交易將於下一個 T 時段恢復。",
+          "confidence": "high",
+          "verified": "2026-08-12",
+          "enum": null,
+          "detail": null
+        },
+        "block_trade": {
+          "zh": "T及T+1時段均设大手交易安排（Block Trade Facility）；T+1時段大手交易须同样遵守当時段±6%/±7%的價格上下限，並適用特別大手交易按金（Special Block Trade Margin, SBTM）；因T+1時段並無銀行支援，若相關參與者抵押品不足以達到SBTM要求，大手交易及/或相關買賣調整會被拒絕",
+          "en": "Block Trade Facility is available in both the T and T+1 Sessions; T+1 Session block trades are subject to the same ±6%/±7% price limit and Special Block Trade Margin (SBTM); as there is no banking support during T+1, block trades or related trade adjustments will be rejected if collateral is insufficient to meet the SBTM",
+          "detail": "以上信息来自收市后交易时段（AHT）FAQ 页对大手交易机制的旁及说明；导航栏可见的专门 Block Trade Facility 规则页本次未抓取，可能载有最小交易量等更完整的门槛信息，留待后续补充，confidence 因此标 medium 而非 high。",
+          "sources": [
+            {
+              "title": "收市后交易时段 FAQ 中文版（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/After-Hours-Trading-%28AHT%29?sc_lang=zh-hk",
+              "accessed": "2026-08-17"
+            }
+          ],
+          "quote": "收市後交易時段的大手交易機制的交易安排與T時段相同，除了：大手交易價亦須符合T+1時段+/-6%的價格上下限規定；及特別大手交易按金會如常適用⋯由於T+1時段並無銀行支援，若相關參與者CCMS抵押品戶口的抵押品不足以達到特別大手交易按金的金額，大手交易及／或相關買賣調整會被拒絕。",
+          "confidence": "medium",
+          "verified": "2026-08-12",
+          "enum": null
+        },
+        "market_maker_scheme": {
+          "zh": "香港交易所衍生產品市場內的不同產品均設有市場莊家計劃及/或流通量提供者計劃：股票期貨、股指期貨及期權的莊家責任及獎勵已闡述於期交所規則內；股票期權的莊家責任及獎勵則闡述於聯交所期權交易規則；莊家分主要莊家（PMM）、持續報價莊家（CQMM）、回應詢價莊家（QRMM）三類；流通量提供者計劃（LP）是交易所為新產品流通量所作的商業安排，要求及獎勵較具彈性，不寫入交易所規則",
+          "en": "HKEX's derivatives market has both a Market Maker (MM) Program and/or a Liquidity Provider (LP) Program depending on the product: MM obligations/incentives for futures and index options are set out in the HKFE Rules; for stock options, in SEHK's Options Trading Rules. Three MM categories: Primary Market Maker (PMM), continuous-quote market maker (CQMM), and quote-request-response market maker (QRMM). The LP Program is a more flexible commercial arrangement for new products' liquidity, not codified in exchange rules.",
+          "sources": [
+            {
+              "title": "衍生品市场做市商计划中文版（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Products/Listed-Derivatives/Market-Maker-Program/Market-Maker-Obligations-and-Incentives?sc_lang=zh-hk",
+              "accessed": "2026-08-17"
+            }
+          ],
+          "quote": "香港交易所衍生產品市場內的不同產品均設有市場莊家計劃及或流通量提供者計劃。股票期貨、股指期貨及期權市場莊家計劃的責任及獎勵已闡述於期交所規則內；至於股票期權市場莊家計劃的責任及獎勵則闡述於期權交易規則⋯聯交所中。流通量提供者計劃是交易所與委任的流通量提供者為提供新產品流通量而作出的商業安排，其要求及獎勵可較具彈性並不會強制闡述於交易所的規則內。",
+          "confidence": "high",
+          "verified": "2026-08-12",
+          "enum": null,
+          "detail": null
+        },
+        "margin_practice_note": {
+          "zh": "結算所（期貨結算公司HKCC／聯交所期權結算所SEOCH）收取按金，是其用以減輕日後面對結算對手信貸風險的主要工具：按金要求透過評估個別期貨或期權合約又或組合在16個模擬情況下的單日最高潛在虧損，再按所設置信水平計算所得；具体算式採用組合風險按金系統 PRiME（Portfolio Risk Margining System，SPAN兼容），由DCASS用以計算期貨及期權產品的結算所按金；客戶按金＝結算所按金 × 客戶按金乘數（提增比例）",
+          "en": "The clearing houses (HKFE Clearing Corporation, HKCC, and SEHK Options Clearing House, SEOCH) collect margin as their main tool to mitigate future credit exposure to counterparties: margin requirement is calculated based on the maximum potential loss of a futures/options contract or portfolio over a one-day period under 16 simulated scenarios at a defined confidence level. The methodology used is PRiME (Portfolio Risk Margining System), a SPAN-compatible algorithm applied in DCASS to calculate margin requirements for futures and options products; client margin equals the clearing house margin scaled up by a client margin multiplier.",
+          "sources": [
+            {
+              "title": "衍生品结算风险管理／保证金中文版（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Clearing/Listed-Derivatives/Risk-Management/Margin?sc_lang=zh-hk",
+              "accessed": "2026-08-17"
+            }
+          ],
+          "quote": "結算所收取按金，是其用以減輕日後面對結算對手的信貸風險的主要工具。具體的按金要求，是透過評估個別期貨或期權合約又或期貨期權合約組合在16個不同的模擬情況下的單日最高潛在虧損，再加上所界設定置信水平計算所得⋯期貨結算公司及聯交所期權結算所的組合風險按金系統（PRiME）屬於SPAN相容的按金算式，是DCASS用以計算期貨及期權產品按金要求的按金計算方法⋯客戶按金應按照結算所風險系數檔案計算，再按一個乘數提增按金。",
+          "confidence": "high",
+          "verified": "2026-08-12",
+          "enum": null,
+          "detail": null
+        },
+        "connect_schemes": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "本次抓取的官方页面未见衍生品市场（HKATS 挂牌期货期权）本身有类似证券市场沪港通/深港通的南北向互联互通安排。HKEX集团另设「互換通」（Swap Connect），但那是场外利率掉期业务（OTC Clear业务线，非本子块讨论的HKATS挂牌衍生品），与顶层字段裁剪而来的「挂牌衍生品互联互通」语境不是同一件事，不应混填，如实留空，记入 OPEN-QUESTIONS。",
+          "sources": [
+            {
+              "title": "Trading Hours - Securities Market（HKEX 官网）",
+              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "en": null,
+          "enum": null,
+          "quote": null
+        }
       }
     },
     "listing": {
@@ -706,13 +1191,15 @@
           "id": "hkex-main",
           "name_zh": "主板",
           "name_native": "Main Board",
+          "financial_threshold": "三选一（均另需上市时预期市值≥HK$5亿，其中由公众持有部分≥HK$1.25亿，见《上市规则》8.09条）：①盈利测试（8.05(1)条）——三年营业记录，最近一年股东应占盈利≥HK$3,500万，前两年累计≥HK$4,500万；②市值/收益/现金流量测试（8.05(2)条）——三年营业记录，上市时市值≥HK$20亿，最近一年经审计收益≥HK$5亿，前三年经营现金流入合计≥HK$1亿；③市值/收益测试（8.05(3)条）——三年营业记录，上市时市值≥HK$40亿，最近一年经审计收益≥HK$5亿",
           "target_companies": "大中型成熟企业"
         },
         {
           "id": "hkex-gem",
           "name_zh": "GEM",
           "name_native": "GEM",
-          "target_companies": "中小型/成长型企业，2018年改革后定位调整"
+          "financial_threshold": "二选一（均另需上市时预期市值≥HK$1.5亿，见《GEM上市规则》11.23(6)条；2024年1月GEM改革后现行标准）：①现金流量测试（11.12A(1)条）——两年营业记录，前两年经营现金流入合计≥HK$3,000万；②市值/收益/研发测试（11.12A(4)条）——两年营业记录，上市时市值≥HK$2.5亿，前两年收益合计≥HK$1亿且按年增长，前两年研发开支合计≥HK$3,000万，且各年研发开支须占总营运开支≥15%",
+          "target_companies": "为中小型公司提供上市市场，此类公司相比主板上市公司风险较高（《GEM上市规则》2.12条）"
         }
       ],
       "review_system": {
@@ -814,8 +1301,20 @@
     },
     "indices": {
       "meta": {
-        "verified": "2026-08-12",
-        "confidence": "medium"
+        "verified": "2026-08-17",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Hang Seng China Enterprises Index Methodology（恒生指数公司官网，方法论 PDF）",
+            "url": "https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/methodologies/IM_hsceie.pdf",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Hang Seng TECH Index Methodology（恒生指数公司官网，方法论 PDF）",
+            "url": "https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/methodologies/IM_hsteche.pdf",
+            "accessed": "2026-08-17"
+          }
+        ]
       },
       "items": [
         {
@@ -823,11 +1322,40 @@
           "name_zh": "恒生指数",
           "name_native": "Hang Seng Index (HSI)",
           "compiler": "other",
+          "scope": "exchange",
           "weighting_method": "float_adjusted",
           "base_date": "1964-07-31",
           "review_frequency": "季度",
           "flagship": "yes",
-          "description": "由恒生指数公司（恒生银行全资子公司）编制，非港交所自编——与上证综指『交易所自编』形成直接对比；1969年11月24日起公开发布，单一成分股权重上限10%。本条来自第三方综述，未逐条核实原始编制方案，confidence 应视为 medium。"
+          "description": "由恒生指数公司（恒生银行全资子公司）编制，非港交所自编——与上证综指『交易所自编』形成直接对比；1969年11月24日起公开发布，单一成分股权重上限10%。本条来自第三方综述，未逐条核实原始编制方案，confidence 应视为 medium。scope: exchange——成分股来自港交所上市证券，2026-08-17 随 ADR-019 补标。"
+        },
+        {
+          "id": "hscei",
+          "name_zh": "恒生中国企业指数（国企指数／H股指数）",
+          "name_native": "Hang Seng China Enterprises Index (HSCEI)",
+          "compiler": "other",
+          "weighting_method": "float_adjusted",
+          "base_date": "2000-01-03",
+          "base_point": 2000,
+          "review_frequency": "季度（数据截止日：3/6/9/12月末）",
+          "derivatives_ref": "hkex-hscei-futures",
+          "flagship": "yes",
+          "scope": "exchange",
+          "description": "俗称『国企指数』『H股指数』，由恒生指数公司编制（与恒生指数同一编制方），反映在港上市内地企业证券（H股及部分红筹/民营企业）整体表现；成分股固定50只，自由流通市值加权，单一成分股权重上限8%，已剔除同股不同权（WVR）与特专科技公司（stock code 后缀 P）等类别。恒生指数公司官方方法论 PDF 原文：'Launch Date: 8 August 1994 / Base Date: 3 January 2000 / Base Value: 2,000 / Weighting: Freefloat-adjusted market capitalisation weighted / Capping: 8% on individual securities / Number of Constituents: Fixed at 50 / Review Frequency: Quarterly (Data cut-off end-March / June / September / December)'（来源见 _meta.sources，直接读取官方方法论 PDF，confidence: high）。"
+        },
+        {
+          "id": "hstech",
+          "name_zh": "恒生科技指数",
+          "name_native": "Hang Seng TECH Index",
+          "compiler": "other",
+          "weighting_method": "float_adjusted",
+          "base_date": "2014-12-31",
+          "base_point": 3000,
+          "review_frequency": "季度（数据截止日：3/6/9/12月末）",
+          "derivatives_ref": "hkex-hstech-futures",
+          "flagship": "yes",
+          "scope": "exchange",
+          "description": "追踪在港上市市值最大的30家科技公司，需满足恒生行业分类下工业/非必需消费品/医疗保健/金融/信息科技五大行业分类之一，且对互联网、金融科技、云端、电商、数码或自动化六大科技主题至少一项有高业务暴露；自由流通市值加权，非外国公司成分股权重上限8%，外国公司成分股单一4%/合计10%。与恒生指数、恒生中国企业指数同为恒生指数公司编制，成分股同样来自港交所上市证券。恒生指数公司官方方法论 PDF 原文：'Launch Date: 27 July 2020 / Base Date: 31 December 2014 / Base Value: 3,000 / Weighting: Freefloat-adjusted market capitalisation weighted / Capping: Non-Foreign Companies Constituent: 8% (individual); Foreign Companies Constituent: 4% (individual); 10% (aggregate) / Number of Constituents: Fixed at 30 / Review Frequency: Quarterly (Data cut-off end-March / June / September / December)'（来源见 _meta.sources，直接读取官方方法论 PDF，confidence: high）。"
         }
       ]
     },

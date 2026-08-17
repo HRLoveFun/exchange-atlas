@@ -479,7 +479,22 @@ indices:
       name_zh: 纽约证券交易所综合指数
       name_native: "NYSE Composite (NYA)"
       compiler: other
+      scope: exchange
       description: "由ICE Data Indices（NYSE母公司ICE旗下指数业务）编制，非交易所自编——与上证综指'交易所自编'形成对比；具体基日/基点/加权方式本次未逐条核实，留空不猜"
+    - id: sp500
+      name_zh: 标普500指数
+      name_native: "S&P 500®"
+      compiler: sp_dj
+      scope: market
+      flagship: "no"
+      description: "跨交易所市场基准指数（ADR-019 引入的 scope: market 样本）——成分股横跨纽交所、纳斯达克与Cboe BZX等多个交易所的上市证券，不专属本所，也不代表本所自编指数体系的一部分（与nyse-composite的'交易所自身指数'性质不同）。编制方为S&P Dow Jones Indices（S&P Global与CME Group合资）；官网spglobal.com本次全站403无法直接抓取（见SOURCES.md探测记录），编制方与基本定位改用en.wikipedia.org交叉确认，未逐条核实基日/基点/加权方法论原文，base_date/weighting_method/review_frequency按ADR-019的精简条目设计留空，不采纳WebSearch摘要给出的1957年基日说法。与us-nasdaq.yml登记同一条记录，细节说明只在本处写全，避免两处各写一份易失步的副本。"
+    - id: russell2000
+      name_zh: 罗素2000指数
+      name_native: "Russell 2000® Index"
+      compiler: ftse_russell
+      scope: market
+      flagship: "no"
+      description: "跨交易所市场基准指数（ADR-019 引入的 scope: market 样本），详见 us-nasdaq.yml 同名条目——成分股同样横跨纳斯达克与纽交所，不专属本所。"
 
 # ═══════════════════════════════════════════════
 # 八｜清算、结算与交割

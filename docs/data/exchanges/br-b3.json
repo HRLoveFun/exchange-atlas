@@ -1,0 +1,1595 @@
+{
+  "id": "br-b3",
+  "name_zh": "巴西B3交易所",
+  "name_native": {
+    "pt": "B3 S.A. – Brasil, Bolsa, Balcão"
+  },
+  "official_languages": [
+    "pt-BR"
+  ],
+  "source_lang": "en",
+  "group_id": null,
+  "region": "americas",
+  "tier": "extended",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "America/Sao_Paulo (BRT, UTC-3)",
+        "verified": "2026-08-16",
+        "confidence": "medium",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "dst_rule": {
+        "zh": "无夏令时：巴西自2019年起全国不再实行夏令时切换，全年固定使用UTC-3",
+        "confidence": "low",
+        "detail": "此说法来自本次会话的公开检索（非 b3.com.br 官网原文），未在本次抓取到的 B3 页面里\n找到直接确认该决令的官方原文，故未标 high。有意思的旁证：B3's Trading Procedures\nManual（2024年4月版）正文里仍保留\"during daylight saving time\"的备用时段条款（如\n收盘集合竞价在\"4:50-4:54:59 p.m.\"与\"5:50-5:49:59 p.m.*\"两套时刻表并存），但当前\nTrading Hours – Equities 页面给出的最新时段表只有一套时刻（16:55/17:00等），不再区分\n夏令时/非夏令时——这与\"巴西已取消夏令时\"的说法方向一致，但本次未做逐条比对确认。\n",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "founded_year": {
+        "zh": "2017（3月29日，由BM&FBOVESPA与Cetip完成合并）",
+        "en": "2017 (March 29, merger of BM&FBOVESPA and Cetip completed)",
+        "detail": "B3官方History页称其历史\"追溯超过100年\"，但未在本次抓取到的页面中给出具体的最早创立\n年份（第三方资料常引用1890年圣保罗交易所，本次未在 b3.com.br/ri.b3.com.br 找到该\n具体年份的官方原文，不采纳）。B3作为现在的法律实体形成于2017年——由证券/大宗商品/\n期货交易所BM&FBOVESPA（其自身是2008年BM&F与Bovespa Holding合并的产物）与场外市场\n基础设施公司Cetip合并而成。\n",
+        "sources": [
+          {
+            "title": "History - B3（投资者关系站）",
+            "url": "https://ri.b3.com.br/en/b3/history/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "B3 is the result of the merger between BM&FBOVESPA S.A. – Bolsa de Valores, Mercadorias e Futuros (“BM&FBOVESPA”) and Cetip S.A. – Mercados Organizados (“Cetip”), consummated on March 29, 2017.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "history": {
+        "zh": "2008年BM&F（衍生品交易所）与Bovespa Holding合并组成BM&FBOVESPA；2017年BM&FBOVESPA与Cetip（原场外市场基础设施公司）合并组成现在的B3",
+        "en": "2008: BM&F (derivatives exchange) merged with Bovespa Holding to form BM&FBOVESPA; 2017: BM&FBOVESPA merged with Cetip (former OTC market infrastructure company) to form today's B3",
+        "detail": "Cetip前身1984年作为非营利组织成立（有巴西央行支持），2008年转为营利性股份公司，2009年\n上市，2011年ICE入股。2016年BM&FBOVESPA与Cetip董事会批准合并方案，2017年获巴西央行、\nCVM与经济保护行政委员会（Cade）批准生效。这条并购路径与NYSE\"会员制改公司制后再被收购\"\n不同，是\"多家已各自公司化/上市的机构横向合并\"的模式。PUMA Trading System（现主撮合\n引擎）由BM&FBOVESPA与CME集团合作开发，2011年起分阶段上线，2016年BM&FBOVESPA与CME\n的战略合作关系终止。\n",
+        "sources": [
+          {
+            "title": "History - B3（投资者关系站）",
+            "url": "https://ri.b3.com.br/en/b3/history/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "BM&FBOVESPA 2008 BM&FBOVESPA is born, from the merger between BM&F and Bovespa Holding. ... 2017 The business combination between BM&FBOVESPA and Cetip is approved by the regulators: Central Bank, Brazilian Securities Commission (CVM) and Administrative Council for Economic Defense (Cade). Thus starts the history of B3.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "organization_form": {
+        "enum": "demutualized_listed",
+        "zh": "公司制（自身上市）：B3普通股在自己管理的Novo Mercado板块挂牌交易",
+        "en": "Demutualized, listed on its own market (Novo Mercado governance segment)",
+        "sources": [
+          {
+            "title": "Corporate Information（投资者关系站）",
+            "url": "https://ri.b3.com.br/en/b3/corporate-information/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Ticker: B3SA3 (common shares) / Corporate Governance listing segment: Novo Mercado",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "detail": null
+      },
+      "self_listed": {
+        "enum": "yes",
+        "zh": "是：B3自身股票（代码B3SA3）在自己管理的市场上市，属于Novo Mercado治理板块——与港交所自身股票在自己主板挂牌的模式相同，都不同于NYSE「母公司反向在自己交易所上市」的结构",
+        "en": "Yes: B3's own shares (ticker B3SA3) are listed on its own market, in the Novo Mercado governance segment — the same direction as HKEX (self-listed on own main board), unlike NYSE where the parent company is listed on the exchange it doesn't itself trade on",
+        "sources": [
+          {
+            "title": "Corporate Information（投资者关系站）",
+            "url": "https://ri.b3.com.br/en/b3/corporate-information/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "OFFICIAL NAME: B3 S.A. – BRASIL, BOLSA, BALCÃO / Stock Exchange listing: BM&FBOVESPA / Ticker: B3SA3 (common shares) / Corporate Governance listing segment: Novo Mercado",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "detail": null
+      },
+      "market_cap_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未在本次会话核实最新总市值统计口径与数字，留空。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "listed_companies_count": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "global_ranking": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未附具体统计口径与日期的来源，留空。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_currency": {
+        "zh": "巴西雷亚尔 (BRL)",
+        "en": "BRL",
+        "detail": "部分场外/远期市场品种以美元报价（如规程手册记载的美元即期市场轮盘「Roda de Dólar」，整手为5万美元），但绝大多数现货证券与衍生品以BRL计价交易。",
+        "verified": "2026-08-16",
+        "confidence": "medium",
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "settlement_currency": {
+        "zh": "巴西雷亚尔 (BRL)",
+        "en": "BRL",
+        "verified": "2026-08-16",
+        "confidence": "medium",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "巴西证券交易委员会（Comissão de Valores Mobiliários, CVM）",
+        "en": "Brazilian Securities and Exchange Commission (CVM)",
+        "detail": "CVM是具有全国管辖权的独立联邦监管机构。巴西金融市场监管架构分三层：国家货币委员会\n（Conselho Monetário Nacional, CMN）居最高层，制定货币/信贷/外汇政策方针；巴西央行\n（Banco Central do Brasil）负责本币购买力稳定与支付体系安全效率；CVM专责证券市场，\n对商品与金融衍生品市场亦有管辖权，但不含政府债券市场。\n",
+        "sources": [
+          {
+            "title": "Non-resident Investor – Regulatory Environment",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/regulatory-environment.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "CVM is an independent federal regulatory agency with nationwide jurisdiction over securities markets. Its responsibilities include commodities and financial derivatives markets and exclude government debt markets. Besides regulating and enforcing the related laws and its own rules, CVM is empowered to investigate market participants and apply sanctions.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "self_regulatory_org": {
+        "zh": "BSM Supervisão de Mercados（B3集团旗下的自律监管子机构）",
+        "en": "BSM Supervisão de Mercados",
+        "detail": "BSM对B3管理的市场参与者乃至B3自身进行稽查监督，拥有发起纪律处分程序的权力，受CVM监督。第三方资料常提及BSM设立于2007年，但本次抓取到的b3.com.br/bsmsupervisao.com.br页面均未给出该具体年份的官方原文，故不写入zh/en正文。",
+        "sources": [
+          {
+            "title": "Non-resident Investor – Regulatory Environment",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/regulatory-environment.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "4. BSM / Subsidiary of B3 group, inspects and supervise market participants and B3 itself and has the capability to establish and conduct disciplinary administrative proceedings.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "clearing_regulator": {
+        "zh": "巴西央行（Banco Central do Brasil）与CVM共同审批（视清算/托管系统类型而定）",
+        "en": "Central Bank of Brazil (BCB), jointly with CVM (depending on the type of clearing/custody system)",
+        "sources": [
+          {
+            "title": "Project T+2 – Context",
+            "url": "https://www.b3.com.br/en_us/project-t-2/context/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "on May 14, 2019, the Central Bank of Brazil (BCB) and the Securities and Exchange Commission of Brazil (CVM) granted B3 the authorizations necessary for implementation of the T+2 Settlement Cycle Project",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "core_laws": {
+        "zh": "《6.385号法律》（Law 6385）——B3就非居民投资者事务列为核心巴西联邦证券法规之一",
+        "en": "Law No. 6.385 – listed by B3 as one of the core Brazilian federal securities statutes",
+        "detail": "该法律常被认为是巴西证券市场基本法（Lei do Mercado de Capitais，1976年颁布并创设\nCVM），但本次抓取到的 B3 页面仅以法规名称链接形式列出（且指向的是可能已失效的CVM\n旧版英文子门户），未抓取到法律正文或对其历史作用的官方逐字表述——具体颁布年份与\n\"设立CVM\"这一表述未经本次抓取验证，故不写入 zh/en 正文，仅在此提示，待后续找到\nCVM官网现行英文页面核实后升级。\n",
+        "sources": [
+          {
+            "title": "Non-resident Investor – Operational Procedures and Regulation",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/market-rules/operational-procedures-and-regulation.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Brazilian Federal Laws and Resolutions / Law 6385",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未核实是否存在一般性外资持股比例限制，留空。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_controls": {
+        "zh": "外资须通过CMN 4.373号决议开立「4.373账户」进入市场：委托当地法定代表人、税务代表与托管机构并向CVM登记；资金汇入/汇出目前对交易所内股票与ETF交易适用0%金融操作税（IOF）",
+        "en": "Foreign investors must open a '4.373 Account' under CMN Resolution 4.373 (2014): appointing a local legal representative, tax representative and custodian, and registering with CVM; inbound/outbound FX for on-exchange stock and ETF trades currently carries a 0% Financial Transaction Tax (IOF)",
+        "sources": [
+          {
+            "title": "Trading equities, derivatives and fixed income - CMN 4.373/2014",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/trading-equities-derivatives-and-fixed-income-cmn-4-373-2014.htm",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Non-resident Investor – Taxation",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The very first step to start the operations in the Brazilian Financial and Capital Markets is to open a 4.373 Account.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "disclosure_requirements": {
+        "zh": "披露语言/渠道因上市板块而异：Novo Mercado要求重大信息、分红信息与业绩新闻稿以葡萄牙语和英语同步披露；基本板块（Basic）仅须遵循现行法律的一般披露要求，无强制英文披露义务",
+        "en": "Disclosure language/channel varies by listing segment: Novo Mercado requires simultaneous Portuguese/English disclosure of material information, benefit-distribution notices and results press releases; the Basic segment follows only the general statutory disclosure requirements, with no mandatory English disclosure",
+        "sources": [
+          {
+            "title": "About listing segments – Novo Mercado",
+            "url": "https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/novo-mercado/",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "About Listing Segments（板块对比表）",
+            "url": "https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/about-listing-segments/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Simultaneous disclosure, in Portuguese and English, of Material Information, benefit distribution information and results press releases;",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "investor_protection": {
+        "zh": "BSM设有举报通道（Whistleblower Channel）与投资者服务/建议渠道，并具备对市场参与者发起纪律处分程序的权力；CVM官网另设 Investors' Rights 栏目",
+        "en": "BSM operates a Whistleblower Channel and investor service/suggestion channels, and has authority to initiate disciplinary proceedings against market participants; CVM's site also has an Investors' Rights section",
+        "detail": "两处证据均为导航栏目名称，非描述性正文段落，故标medium而非high。",
+        "sources": [
+          {
+            "title": "BSM Supervisão de Mercados – 英文首页",
+            "url": "https://www.bsmsupervisao.com.br/en/us/home",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "CVM 英文门户",
+            "url": "https://www.gov.br/cvm/en",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "quote": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-16",
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "br-b3-equities",
+          "category": "equity",
+          "name_zh": "普通股/优先股",
+          "name_native": "Ações ON/PN",
+          "description": "ON=ordinárias普通股（有投票权），PN=preferenciais优先股；圆整手（round lot）由发行人设定，多数股票为100股，低于整手可在碎股市场交易"
+        },
+        {
+          "id": "br-b3-bdr",
+          "category": "equity",
+          "name_zh": "巴西存托凭证",
+          "name_native": "Brazilian Depositary Receipts (BDR)",
+          "description": "分Sponsored（有存托协议）与Unsponsored两类，均在交易时段表中列为独立品类"
+        },
+        {
+          "id": "br-b3-etf",
+          "category": "fund",
+          "name_zh": "交易所交易基金",
+          "name_native": "ETF",
+          "description": "含权益类（Equity ETF）与固定收益类（Fixed Income ETF）"
+        },
+        {
+          "id": "br-b3-fii",
+          "category": "fund",
+          "name_zh": "房地产投资基金",
+          "name_native": "Fundos de Investimento Imobiliário (FII)",
+          "description": "CVM官网设有专门的房地产投资基金登记栏目（Registry of Real Estate Investment Funds）"
+        },
+        {
+          "id": "br-b3-options",
+          "category": "option",
+          "name_zh": "期权",
+          "name_native": "Opções",
+          "description": "含个股/ETF期权与指数期权（Index Options），到期日有各自的自动履约规则"
+        },
+        {
+          "id": "br-b3-futures",
+          "category": "future",
+          "name_zh": "期货",
+          "name_native": "Futuros",
+          "description": "含Ibovespa期货、迷你指数期货、个股期货、S&P 500期货等；采用每日盯市结算（daily settlement）"
+        },
+        {
+          "id": "br-b3-otc-fixed-income",
+          "category": "bond",
+          "name_zh": "场外固定收益产品",
+          "name_native": "Renda Fixa (Cetip | Trader / CetipNet)",
+          "description": "原Cetip场外交易系统并入B3的OTC板块，主要品类含国债、农业信贷凭证(CRA)、不动产信贷凭证(CRI)、金融票据(CFF)等"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "09:30–09:45订单撤单阶段，09:45–10:00盘前集合竞价（确定开盘理论价，只挂单不成交）",
+          "en": "09:30–09:45 order cancellation phase; 09:45–10:00 pre-opening call (theoretical opening-price discovery; orders queue without matching)",
+          "quote": "Order cancellation Pre-opening Trading ... Cash Market, Odd lots market, Investment Funds and OTC Market 09:30 09:45 09:45 10:00 10:00 16:55",
+          "sources": [
+            {
+              "title": "Trading Hours – Equities",
+              "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+              "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "confidence": "high",
+          "enum": null,
+          "detail": null
+        },
+        "continuous_am": {
+          "zh": "10:00起进入连续竞价（Regular trading period），无独立的上午/下午分段",
+          "en": "Continuous trading (Regular trading period) begins at 10:00, with no separate morning/afternoon split",
+          "quote": "Cash Market, Odd lots market, Investment Funds and OTC Market 09:30 09:45 09:45 10:00 10:00 16:55",
+          "sources": [
+            {
+              "title": "Trading Hours – Equities",
+              "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+              "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "confidence": "high",
+          "enum": null,
+          "detail": null
+        },
+        "lunch_break": {
+          "zh": "无",
+          "en": "None",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Trading Hours – Equities",
+              "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+              "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "continuous_pm": {
+          "zh": "连续交易持续至16:55，随后16:55–17:00为收盘集合竞价（Closing Call）",
+          "en": "Continuous trading runs until 16:55, followed by the 16:55–17:00 Closing Call",
+          "quote": "Trading Closing Call ... 10:00 16:55 16:55 17:00",
+          "sources": [
+            {
+              "title": "Trading Hours – Equities",
+              "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+              "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "confidence": "high",
+          "enum": null,
+          "detail": null
+        },
+        "after_market": {
+          "zh": "17:25–17:30为撤单阶段，17:30–18:00为盘后交易（After-Market），18:25–18:45为另一撤单阶段（期权到期日等情形有专门调整）",
+          "en": "17:25–17:30 order cancellation, 17:30–18:00 after-market trading, 18:25–18:45 a further order-cancellation window (with special adjustments on options expiration dates etc.)",
+          "quote": "After-Market trading Order cancellation ... 17:25 17:30 17:30 18:00 18:25 18:45",
+          "sources": [
+            {
+              "title": "Trading Hours – Equities",
+              "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+              "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "confidence": "high",
+          "enum": null,
+          "detail": null
+        },
+        "night_session": {
+          "zh": "现货股票市场无夜盘",
+          "en": "No night session for the cash equities market",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Trading Hours – Equities",
+              "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+              "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "holidays_note": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网未见本次抓取到逐年节假日安排页面，留空。",
+        "sources": [
+          {
+            "title": "Trading Hours – Equities",
+            "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘集合竞价（Opening Call）：09:45–10:00为盘前阶段，只挂单不成交，用于形成开盘理论价格",
+        "en": "Opening Call: the 09:45–10:00 pre-opening phase accepts order entry without matching, used to form the theoretical opening price",
+        "quote": "Order cancellation Pre-opening Trading ... Cash Market, Odd lots market, Investment Funds and OTC Market 09:30 09:45 09:45 10:00 10:00 16:55 ... Pre-opening phase: precedes trading in an instrument, with a specific duration and designed to assure the opening of trading at a fair and transparent price. Order registration is allowed but no trades are matched. Orders are used only to define the theoretical opening price in accordance with auction rules.",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Trading Hours – Equities",
+            "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价（Closing Call）：16:55–17:00",
+        "en": "Closing Call: 16:55–17:00",
+        "quote": "Trading Closing Call After-Market trading ... 10:00 16:55 16:55 17:00",
+        "confidence": "high",
+        "sources": [
+          {
+            "title": "Trading Hours – Equities",
+            "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "连续交易按价格优先、报单先后时间顺序（chronological order of entry）撮合；集合竞价按能匹配最大成交量的价格确定理论价，价格相同再依失衡量最小与最近成交价接近程度决胜",
+        "en": "Continuous trading matches on price priority and chronological order of entry; auctions determine the theoretical price as the one matching the largest quantity, with ties broken by the smallest resulting imbalance and proximity to the last traded price",
+        "sources": [
+          {
+            "title": "B3 Trading Characteristics and Rules",
+            "url": "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/b3-trading-characteristics-and-rules.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "LOC orders do not have priority over other types of orders or order qualifiers and always compete based on price priority and chronological order of entry",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "order_types": {
+        "zh": "市价单、限价单、管理单（Managed Order）、竞争性管理单、自由裁量单（Discretionary Order）、联动单（Funding Order）、止损单（Stop Order）、配对单（Matched Order）八种基础类型；另有开盘市价单(MOA)、收盘市价单(MOC)、收盘限价单(LOC)等特殊撮合期订单，以及GTC/GTD等有效期修饰符",
+        "en": "Eight base order types: Market, Limit, Managed, Competing Managed, Discretionary, Funding, Stop, and Matched orders; plus auction-specific types Market-on-Auction (MOA), Market-on-Close (MOC), Limit-on-Close (LOC), and time-in-force qualifiers such as GTC/GTD",
+        "sources": [
+          {
+            "title": "B3's Trading Procedures Manual（PDF）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Market order: specifies only the quantity and characteristics of the assets and/or derivatives to be bought or sold, and must be executed as soon as it is received; II - Limit order: executed only at a price equal to or better than the price specified by the investor; ... VII - Stop order: an order to buy or sell an asset or derivative when a specified price is reached",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "tick_size": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "规程手册正文多处引用tick size概念（如「twice tick size」计算隧道带宽）但未给出固定数值，明确说明「Tick size is available from B3's portal」（按证券逐条维护），本次未抓取到该清单页面，留空不猜。",
+        "sources": [
+          {
+            "title": "Trading Hours – Equities",
+            "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "board_lot_size": {
+        "zh": "由发行人自行设定，多数股票为100股一手；低于整手可在碎股市场（odd-lot market）交易。ETF二级市场整手为10份，碎股市场为1份",
+        "en": "Set by the issuer; usually 100 shares for stocks. Amounts below the round lot trade in the odd-lot market. For ETFs, the secondary-market round lot is 10 shares (1 share in the odd-lot market)",
+        "sources": [
+          {
+            "title": "Securities Lending, Equity and ETF Trades",
+            "url": "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/securities-lending-equity-and-etf-trades.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Round Lot / Defined by the issuer, usually equal to 100 / Amounts below the round lot can be negotiated in the odd-lot market",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "odd_lot_handling": {
+        "zh": "碎股/零股在独立的碎股市场（odd-lot market）交易，行情代码沿用整手代码但结尾加字母F表示分数（fraction）",
+        "en": "Odd lots trade in a separate odd-lot market; tickers reuse the round-lot ticker with a trailing letter F (for fraction)",
+        "sources": [
+          {
+            "title": "B3's Trading Procedures Manual（PDF）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Tickers for equities traded in odd lot on the cash market are the same as the tickers for equities traded in standard lots on the cash market except that they end with the letter F (for fraction)",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "dynamic_reference",
+          "zh": "动态「交易隧道」（trading tunnels）机制：以最新成交价/最优报价等推导出的基准价（PBT，tunnel base price）为中心，用加法或乘法方式计算带宽，动态限制申报价与成交价区间，而非固定百分比涨跌停",
+          "en": "Dynamic 'trading tunnels' mechanism: bands computed additively or multiplicatively around a tunnel base price (PBT) derived from the last trade price / best bid-ask, rather than a fixed daily percentage limit",
+          "sources": [
+            {
+              "title": "B3's Trading Procedures Manual（PDF）",
+              "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "quote": "B3's trading tunnel module is composed of rejection, auction and protection tunnels... Independently of their purpose (rejection or auction), trading tunnels may be calculated either by the additive or the multiplicative method.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "detail": null
+        },
+        "main_board": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "隧道具体带宽数值（bandwidth）由B3官网逐品种维护，本次抓取到的规程手册正文未给出固定数值表，留空不猜。",
+          "sources": [
+            {
+              "title": "Trading Hours – Equities",
+              "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+              "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "other_boards": {
+          "zh": "",
+          "confidence": "low",
+          "sources": [
+            {
+              "title": "Trading Hours – Equities",
+              "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+              "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "index_level",
+        "zh": "指数级熔断：以Ibovespa较前一交易日收盘的跌幅触发，分三档——跌10%暂停全市场交易30分钟；恢复后再跌15%暂停1小时；恢复后再跌20%由B3自行决定暂停时长并公告",
+        "en": "Index-level circuit breaker triggered by Ibovespa's decline from the prior close, in three stages: -10% halts all trading for 30 minutes; upon resumption, -15% halts trading for 1 hour; upon resumption, -20% lets B3 determine and announce the suspension period",
+        "sources": [
+          {
+            "title": "Circuit breaker（官网新闻公告）",
+            "url": "https://www.b3.com.br/en_us/news/circuit-breaker-8AE490CA70CB10030170CEECFCE05EAF.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "I - If the Ibovespa falls ten per cent (10%) from its closing level on the previous day, all trading in assets, derivatives and private fixed-income instruments is interrupted for thirty (30) minutes; II - When trading resumes, if the Ibovespa falls fifteen per cent (15%) from its closing level on the previous day, all trading in assets, derivatives and private fixed-income instruments is interrupted for one hour; III - When trading resumes, if the Ibovespa falls twenty per cent (20%) from its closing level on the previous day, B3 may determine a suspension of trading in assets, derivatives and private fixed-income instruments for a certain period to be announced by B3.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "detail": null
+      },
+      "volatility_interruption": {
+        "zh": "品种级的「拍卖隧道」（auction tunnel）机制：撮合价若将突破基于最近成交价动态计算的价格区间，系统不直接成交，而是自动触发一次集合竞价",
+        "en": "Instrument-level 'auction tunnel' mechanism: when a prospective trade price would breach the dynamically computed band around the last traded price, the system does not execute directly but automatically triggers an auction",
+        "sources": [
+          {
+            "title": "B3's Trading Procedures Manual（PDF）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Auction tunnels are an enhancement of the current intraday fluctuation limits. After a trade is executed, while its conformity to the intraday fluctuation limits is verified, the auction tunnels activate, at the imminence of the trade execution, an automatic auction in the trading system if the trade price is not within the price interval defined by the tunnel.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "除熔断与隧道机制外，若发行人在交易时段内发布或即将发布重大事项公告，B3按公告发生的时点分五档窗口（如9:15前/9:15–9:29/9:30–9:59/10:00–16:09/16:10–16:49），分别延后撤单阶段、开盘集合竞价，或直接暂停交易20分钟后再进行撤单与重新开盘拍卖",
+        "en": "Beyond circuit breakers and tunnels, if an issuer publishes or is about to publish a material-event notice during a session, B3 applies a tiered procedure across five time windows that postpones order-cancellation phases and the opening call, or suspends trading for 20 minutes followed by an order-cancellation phase and a reopening auction",
+        "sources": [
+          {
+            "title": "B3's Trading Procedures Manual（PDF）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "9:15:00-9:29:59 a.m. Postponement of order cancellation phases for twenty (20) minutes, followed by: Order cancellation phase lasting five minutes / Opening call lasting at least five minutes",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "intraday_reversal": {
+        "enum": "t0",
+        "zh": "T+0：允许当日回转交易（day trade）；B3自身税务页面把「Day trade」列为独立的操作类别，交易所层面未见限制次日才可卖出的规则",
+        "en": "T+0: same-day round-trip (day) trading is permitted; B3's own taxation page lists 'Day trade' as a distinct operation category, and no exchange-level rule requiring next-day resale was found",
+        "detail": "该 quote 出自非居民投资者税务页，反映的是税率差异化对待（说明日内交易是B3认可的、有专门归类的操作），而非交易所层面对回转交易本身的禁止性条款；居民投资者的具体日内交易税率本次未纳入抓取范围。",
+        "sources": [
+          {
+            "title": "Non-resident Investor – Taxation",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Day trade / 1. In stock exchange: Exempt (e) 2. Outside the stock exchange: 15% (b)",
+        "confidence": "high",
+        "verified": "2026-08-16"
+      },
+      "short_selling": {
+        "zh": "存在证券出借/融券安排使做空成为可能（官网设「Securities Lending, Equity and ETF Trades」专栏），但本次抓取到的该页面正文只包含股票/ETF的代码、整手规格与结算周期，没有描述性正文说明具体限制规则（如是否有报升限制、裸卖空处理等），仅能确认功能入口存在",
+        "en": "A securities lending facility exists that enables short selling (the site has a page titled 'Securities Lending, Equity and ETF Trades'), but the content actually fetched on that page only covers ticker format, round-lot size and settlement period for stocks/ETFs — no descriptive text on specific restrictions (e.g. any uptick rule, treatment of naked short selling) was found; only the existence of the facility is confirmed",
+        "sources": [
+          {
+            "title": "Securities Lending, Equity and ETF Trades",
+            "url": "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/securities-lending-equity-and-etf-trades.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "block_trade": {
+        "zh": "存在独立的大宗交易簿（Book of Block），与常规委托簿分开维护；大宗交易时段为10:00–16:55，无盘前/盘后大宗交易窗口",
+        "en": "A separate Book of Block exists apart from the regular order book; block trades run 10:00–16:55, with no pre-/after-market block-trading window",
+        "sources": [
+          {
+            "title": "B3's Trading Procedures Manual（PDF）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Trading Hours – Equities",
+            "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The Book of Block constitutes a book separated from the respective market order book, with its own",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "dark_pool": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Trading Hours – Equities",
+            "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "market_maker_scheme": {
+        "zh": "分独立做市商、参与B3计划的独立做市商、受托做市商（Contracted Market Maker）三类注册；投资基金也可注册为独立做市商；获批后须在30日内开始履约，具体资产/衍生品可容纳的做市商数量上限由B3设定",
+        "en": "Three registration categories: independent market makers, independent market makers accredited for B3 programs, and contracted market makers; investment funds may also register as independent market makers; once approved, a market maker must begin acting within 30 days, and B3 caps the maximum number of market makers per asset/derivative",
+        "sources": [
+          {
+            "title": "B3's Trading Procedures Manual（PDF）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Independent market makers must begin acting as such not more than thirty (30) days after approval... The maximum number of market makers authorized to act for each type or class of derivative is...",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "connect_schemes": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未找到B3与其他交易所间类似沪港通式的正式互联互通安排。非居民投资者接入渠道（CMN 4.373号决议）性质不同——是准入通道而非交易所间连接，已记入participants.foreign_access_channel。",
+        "sources": [
+          {
+            "title": "Trading Hours – Equities",
+            "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "derivatives": {
+        "trading_sessions": {
+          "pre_market": null,
+          "continuous_am": null,
+          "lunch_break": null,
+          "continuous_pm": null,
+          "after_market": null,
+          "night_session": null
+        },
+        "holidays_note": null,
+        "opening_mechanism": null,
+        "closing_mechanism": null,
+        "matching_principle": null,
+        "order_types": null,
+        "tick_size": null,
+        "contract_specs_note": null,
+        "price_limits": {
+          "type": null,
+          "main_board": null,
+          "other_boards": null
+        },
+        "circuit_breaker": null,
+        "volatility_interruption": null,
+        "trading_halt_mechanism": null,
+        "block_trade": null,
+        "market_maker_scheme": null,
+        "margin_practice_note": null,
+        "connect_schemes": null
+      }
+    },
+    "listing": {
+      "boards": [
+        {
+          "id": "basic",
+          "name_zh": "基本板块",
+          "name_native": "Segmento Básico / Basic",
+          "financial_threshold": "无额外自由流通/治理门槛",
+          "target_companies": "遵循现行《巴西公司法》一般规则的发行人，不承诺额外公司治理规则"
+        },
+        {
+          "id": "bovespa-mais",
+          "name_zh": "Bovespa Mais板块",
+          "name_native": "Bovespa Mais",
+          "financial_threshold": "自由流通比例：上市第7年起25%",
+          "target_companies": "面向成长阶段公司，仅可发行普通股"
+        },
+        {
+          "id": "bovespa-mais-nivel-2",
+          "name_zh": "Bovespa Mais Nível 2板块",
+          "name_native": "Bovespa Mais Nível 2",
+          "financial_threshold": "自由流通比例：上市第7年起25%",
+          "target_companies": "成长阶段公司，允许发行普通股+优先股"
+        },
+        {
+          "id": "nivel-1",
+          "name_zh": "Nível 1板块（治理一级）",
+          "name_native": "Nível 1",
+          "financial_threshold": "一般规则自由流通20%；另有基于日均成交额(ADTV)或发行规模的15%替代规则",
+          "target_companies": "承诺额外信息披露义务的发行人，普通股+优先股"
+        },
+        {
+          "id": "nivel-2",
+          "name_zh": "Nível 2板块（治理二级）",
+          "name_native": "Nível 2",
+          "financial_threshold": "自由流通规则同Nível 1；100%普通股与优先股享有tag-along权利",
+          "target_companies": "承诺更高治理标准，允许优先股（附加额外权利）"
+        },
+        {
+          "id": "novo-mercado",
+          "name_zh": "新市场板块（最高治理标准）",
+          "name_native": "Novo Mercado",
+          "financial_threshold": "自由流通：一般规则20%，替代规则15%（须满足ADTV等条件）",
+          "target_companies": "仅可发行有投票权普通股的最高公司治理标准板块",
+          "launched_year": 2000
+        }
+      ],
+      "review_system": {
+        "zh": "发行人证券的挂牌/交易许可由B3依《发行人规则》（Issuer's Regulations）受理审核，另须完成CVM的「公众公司」注册；本次抓取到的页面未给出可直接归类为现有枚举值（注册制/核准制/混合制）的逐条描述，未强行套用枚举",
+        "en": "Admission of an issuer's securities to trading is handled by B3 under the Issuer's Regulations, alongside separate registration as a public company with CVM; the pages fetched this session did not provide text that cleanly maps to the existing review_system enum values (registration/approval/hybrid), so no enum value was forced",
+        "sources": [
+          {
+            "title": "Regulatory Framework – Listing",
+            "url": "https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/listing.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "One of the main activities of the BM&FBOVESPA Segment is to list issuers and admit securities of their issuance for trading. The rules regarding these processes are described in the following document: ISSUER'S REGULATIONS",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "About Listing Segments（板块对比表）",
+            "url": "https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/about-listing-segments/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "transfer_between_boards": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未核实各板块间转板的具体条件与流程，留空。",
+        "sources": [
+          {
+            "title": "About Listing Segments（板块对比表）",
+            "url": "https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/about-listing-segments/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "continuing_obligations": {
+        "zh": "按所属板块不同而有差异化的持续义务，例如Novo Mercado强制要求设立内部审计部门、合规部门与审计委员会（法定或非法定），须披露公司治理事项年度日历，控股股东证券交易须按月披露",
+        "en": "Continuing obligations differ by segment; e.g. Novo Mercado mandates an internal auditing department, a compliance department, an audit committee (statutory or non-statutory), disclosure of an annual corporate-events calendar, and monthly disclosure of controlling shareholders' securities trades",
+        "sources": [
+          {
+            "title": "About Listing Segments（板块对比表）",
+            "url": "https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/about-listing-segments/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Mandatory setting up of an audit committee or statutory audit committee in compliance with the requirements set forth in the Regulation",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "suspension_resumption": {
+        "zh": "因重大事项公告触发的停牌按发布时点分档处理（见market_structure.trading_halt_mechanism）；此外若标的证券在境外市场停牌，B3也可能联动暂停其在B3的交易",
+        "en": "Halts triggered by material-event disclosures follow the tiered procedure described under market_structure.trading_halt_mechanism; trading may also be suspended if the underlying is halted on a foreign market",
+        "sources": [
+          {
+            "title": "B3's Trading Procedures Manual（PDF）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "B3 may suspend trading in assets or derivatives if trading in their underlyings is suspended on the organized market on which they are traded abroad.",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_conditions": {
+        "zh": "退出治理板块（segment exit）或注销登记须发起强制公开要约收购（Public Tender Offer）；要约价格与最低受约比例因板块而异，例如Novo Mercado要求至少公允价格、且须获得至少1/3流通股股东接受",
+        "en": "Exiting a governance segment or deregistering requires a mandatory Public Tender Offer; the offer price and minimum acceptance threshold vary by segment — e.g. Novo Mercado requires at least fair value and acceptance by at least 1/3 of free-float shareholders",
+        "sources": [
+          {
+            "title": "About Listing Segments（板块对比表）",
+            "url": "https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/about-listing-segments/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Compulsory Public Tender Offer, at least for the fair price, with minimum acceptance quorum of 1/3 (or higher, as established in the bylaws) of the free float shareholders.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "delisting_process": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "About Listing Segments（板块对比表）",
+            "url": "https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/about-listing-segments/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_transition_period": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "About Listing Segments（板块对比表）",
+            "url": "https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/about-listing-segments/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "About Listing Segments（板块对比表）",
+            "url": "https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/about-listing-segments/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-16",
+        "confidence": "high"
+      },
+      "items": [
+        {
+          "id": "ibovespa",
+          "name_zh": "博维斯帕指数",
+          "name_native": "Ibovespa",
+          "compiler": "self",
+          "weighting_method": "float_adjusted",
+          "review_frequency": "每四个月一次的组合调整（1月/5月/9月）",
+          "flagship": "yes",
+          "derivatives_ref": "见products章节 br-b3-futures（Ibovespa期货/迷你指数期货）、br-b3-options（Ibovespa期权）",
+          "description": "1968年创立，是B3最主要的市场表现指标，成分股约占市场交易笔数与成交金额的80%。\n筛选标准：个股可交易性比率（IN）降序排名前85%以内、95%的交易日均有成交、成交额占\n现货市场（整手）总成交额比例≥0.1%、且不得为仙股（penny stock）；按自由流通市值加权。\n",
+          "sources": [
+            {
+              "title": "Ibovespa（指数页）",
+              "url": "https://www.b3.com.br/en_us/market-data-and-indices/indices/broad-indices/ibovespa.htm",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "quote": "Ibovespa is the main performance indicator of the stocks traded in B3 and lists major companies in the Brazilian capital market. It was created in 1968... Being amongst the eligible stocks that account for 85% in descending order by individual tradability ratio (IN); Traded in 95% of the trading sessions; 0,1% of the value traded on the cash equity market (round lots); and do not be a penny stock."
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "enum": "t2",
+        "zh": "T+2（现货证券市场，2019年5月27日起从T+3缩短为T+2）",
+        "en": "T+2 (cash equities market; shortened from T+3, effective May 27, 2019)",
+        "sources": [
+          {
+            "title": "Project T+2 – Context",
+            "url": "https://www.b3.com.br/en_us/project-t-2/context/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "on May 14, 2019, the Central Bank of Brazil (BCB) and the Securities and Exchange Commission of Brazil (CVM) granted B3 the authorizations necessary for implementation of the T+2 Settlement Cycle Project, which consist of reducing the settlement cycle of the cash equities market from T+3 to T+2... we will implement the T+2 settlement cycle on May 27, 2019",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "detail": null
+      },
+      "ccp_name": {
+        "zh": "B3 Clearinghouse（B3自身内设的中央对手方职能，非独立法人清算所）；外汇交易另由B3 Foreign Exchange Clearinghouse担任对手方",
+        "en": "B3 Clearinghouse (an in-house CCP function of B3 itself, not a separately incorporated clearing entity); FX trades are separately cleared by the B3 Foreign Exchange Clearinghouse",
+        "sources": [
+          {
+            "title": "Regulatory Framework – Clearing, Settlement and Risk Management",
+            "url": "https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/clearing-settlement-and-risk-management.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "B3 acts as a central counterparty (CCP) and securities settlement system (SSS) for trades executed in the PUMA Trading System, through the B3 Clearinghouse; as well as for FX trades registered directly at the B3 Foreign Exchange Clearinghouse.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "csd_name": {
+        "zh": "B3中央证券存管（B3's central securities depository），同样是B3自身内设机构而非独立法人——与美股DTCC作为独立法人清算所的模式不同",
+        "en": "B3's central securities depository — again an in-house function of B3 rather than a separately incorporated entity, unlike the DTCC model in the US",
+        "sources": [
+          {
+            "title": "B3's Trading Procedures Manual（PDF）",
+            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "a statement of the seller's position with B3's central securities depository",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "initial_margin_practice": {
+        "zh": "以CORE（Closeout Risk Evaluation）方法论计算所需担保品（保证金），分三个计算模块：CORE0（已分配至最终投资者的交易）、CORE1（未分配交易）、CORE2（分配至全权/结算参与者的交易）；担保品可用现金或多类金融资产（如国债、银行存单CDB、不动产信贷凭证LCI等）出质",
+        "en": "Required collateral (margin) is computed via the CORE (Closeout Risk Evaluation) methodology across three modules — CORE0 (allocated to the final investor), CORE1 (unallocated), CORE2 (allocated to the Full Trading Participant/settlement participant); collateral may be posted in cash or various financial assets (e.g. government bonds, bank CDs, real-estate credit notes)",
+        "sources": [
+          {
+            "title": "Guide for Nonresident Investors（PDF）",
+            "url": "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "the CORE methodology employs three different calculation modules: CORE0: risk calculation for transactions allocated to the final investor. CORE1: risk calculation for non-allocated transactions. CORE2: risk calculation for transactions allocated to the Full Trading Participant/settlement participant (on behalf of final investor).",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "逐日盯市（daily settlement）：衍生品持仓每个交易日按当日结算价计算盈亏并现金划转",
+        "en": "Daily mark-to-market (daily settlement): derivatives positions are revalued each trading day at the daily settlement price, with gains/losses cash-transferred",
+        "sources": [
+          {
+            "title": "Trading dynamics",
+            "url": "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The profit or loss that results from the investment is calculated and settled on a daily basis through daily settlement of accounts.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "delivery_method": {
+        "zh": "分品种不同：现货证券市场为「资金+证券」过户交收（并非衍生品意义上的实物/现金交割二选一）；衍生品市场多数合约现金结算，但个股期货等部分合约存在实物交割",
+        "en": "Varies by instrument: the cash equities market settles via funds-versus-securities transfer (not a derivatives-style physical-vs-cash delivery choice); in the derivatives market most contracts are cash-settled, though some (e.g. single-stock futures) can involve physical delivery",
+        "detail": "受控词表 delivery_method 的枚举（physical/cash/either/na）没有一个能干净覆盖「现货过户交收+衍生品分品种不同」这种混合状态，未强行套用，留 enum 空。",
+        "sources": [
+          {
+            "title": "Securities Lending, Equity and ETF Trades",
+            "url": "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/securities-lending-equity-and-etf-trades.htm",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Trading dynamics",
+            "url": "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Settlement / Financial and Physical / Settlement Period / T+2 from the trading date",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "last_trading_day_rule": {
+        "zh": "期权到期日的到期系列于15:45停止交易；到期日自动履约按标的现货参考价与行权价比较自动触发（个股/ETF期权自18:15起，指数期权自17:20起）",
+        "en": "For options, trading in the expiring series ends at 15:45 on the expiration date; automatic exercise is triggered by comparing the underlying's cash-market reference price to the strike (from 18:15 for single-stock/ETF options, from 17:20 for index options)",
+        "sources": [
+          {
+            "title": "Trading Hours – Equities",
+            "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Trading in expiring series ends at 15:45 on the expiration date.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "default_management": {
+        "zh": "「违约者先付、生存者分摊」（defaulters pay and survivors pay）的风险共担机制，依托CORE方法论计算的担保品与安全垫（含Liquidez Investment Fund等专项基金）应对结算参与者违约",
+        "en": "A 'defaulters pay, survivors pay' mutualized default-management structure, backed by CORE-methodology collateral and dedicated safeguard funds (including the Liquidez Investment Fund)",
+        "sources": [
+          {
+            "title": "Guide for Nonresident Investors（PDF）",
+            "url": "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Regulatory Framework – Clearing, Settlement and Risk Management",
+            "url": "https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/clearing-settlement-and-risk-management.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The amount of collateral required for guaranteeing the transactions/positions (defaulters pay and survivors pay) and the operational balance are based on the CORE methodology.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "官网首页新闻栏目提及个人投资者数量增长的零散报道，未找到系统性统计口径，留空。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "非居民投资者须依CMN 4.373号决议开立「4.373账户」：指定巴西本地法定代表人、税务代表、托管机构，并向CVM完成电子登记（获发CNPJ税号，一般在申请后24小时内下发），再通过本地经纪商开户方可交易",
+        "en": "Non-resident investors must open a '4.373 Account' under CMN Resolution 4.373: appointing a Brazil-based legal representative, tax representative and custodian, completing electronic registration with CVM (which issues a CNPJ tax ID typically within 24 hours), then opening an account with a local brokerage house",
+        "sources": [
+          {
+            "title": "Trading equities, derivatives and fixed income - CMN 4.373/2014",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/trading-equities-derivatives-and-fixed-income-cmn-4-373-2014.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The very first step to start the operations in the Brazilian Financial and Capital Markets is to open a 4.373 Account. ... To get broad access to the Brazilian financial and capital mar­kets, international investors are required to: Appoint a legal representative in Brazil to fill out the forms required by the Brazilian authorities... Hire custodial services in Brazil... Send the documents to the Brazilian Securities Commission... Choose a local broker ... The registration with the CVM is made electronically and it will provide the legal representative with a tax code (CNPJ) within 24 hours after the request.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "CMN 4.373号决议为主要通道，允许非居民投资者与本地投资者投资相同的产品组合；另有CMN 2.687号决议专门规范商品期货交易；简化登记（Rule 419，CVM于2005年颁布）适用于代表机构与境外代表存在正式关系、且所在国证券监管机构与CVM签有多边合作备忘录（MMOU）的合格投资者",
+        "en": "CMN Resolution 4.373 is the primary channel, giving non-resident investors access to the same range of products available to local investors; CMN Resolution 2.687 separately governs commodities trading; simplified registration (CVM Rule 419, issued 2005) is available for qualified investors whose local representatives have a formal relationship with overseas representatives, from jurisdictions whose securities regulators are signatories to the IOSCO MMOU with CVM",
+        "sources": [
+          {
+            "title": "Trading equities, derivatives and fixed income - CMN 4.373/2014",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/trading-equities-derivatives-and-fixed-income-cmn-4-373-2014.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "CMN Resolution 4.373/2014... allows Non-resident investors (1) to trade and invest in the same portfolio products available for resident investors in Brazil, besides regulates the Depository Receipts of any asset classes.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "membership_structure": {
+        "zh": "参与者分为全权交易参与者（Full Trading Participant, PNP）、交易参与者（Trading Participant, PN）与结算参与者（Settlement Participant, PL）三类，须通过LINE系统对客户设定交易前限额",
+        "en": "Participants are categorized as Full Trading Participants (PNP), Trading Participants (PN), and Settlement Participants (PL), and must set pre-trade limits for clients via the LINE system",
+        "sources": [
+          {
+            "title": "B3 Trading Characteristics and Rules",
+            "url": "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/b3-trading-characteristics-and-rules.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "LINE 5.0 is intended for Full Trading Participants (PNP), Trading Participants (PN) and Settlement Participants (PL) who need to set pre-trading limits for their clients.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "PUMA Trading System（与CME集团合作开发的多资产电子撮合平台）",
+        "en": "PUMA Trading System (a multi-asset electronic matching platform developed in partnership with CME Group)",
+        "sources": [
+          {
+            "title": "History - B3（投资者关系站）",
+            "url": "https://ri.b3.com.br/en/b3/history/",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The PUMA Trading System, an electronic trading platform created in partnership by BM&FBOVESPA and the CME Group, is launched in the derivatives and currency markets, making multimarket and multi-asset trading in Brazil more efficient.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "access_methods": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "exchange_fees": {
+        "zh": "按成交总金额收取一定比例的交易所费用（Exchange Fees），费率依交易类型（常规交易/超短线日内交易）、投资者类别（个人/基金/投资俱乐部）与投资金额分档",
+        "en": "Exchange Fees are charged as a percentage of total traded volume, varying by trade type (regular vs. very-short-term day trades), investor category (individual/funds/investment clubs), and amount invested",
+        "sources": [
+          {
+            "title": "B3 Trading Characteristics and Rules",
+            "url": "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/b3-trading-characteristics-and-rules.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Exchange Fees are fees charged by B3 on financial asset purchase and sale transactions. These fees are collected to pay for the costs involved in such transactions. The percentage value of the exchange fee is calculated on the total volume traded. The amount varies according to: Type of trade: regular or very short term (day trades) / Investor category: individual, funds or investment clubs / The amount invested",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "stamp_duty": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "巴西不对证券交易征收类似英国/香港式的印花税，是常见的对比印象，但本次未抓取到官方原文明确表述「一般不征」，按铁律不在zh断言，留空。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "financial_transaction_tax": {
+        "zh": "金融操作税（IOF, Imposto sobre Operações Financeiras）：现行对交易所内股票/ETF交易的资金汇入适用税率为0%（历史上曾有非零税率，本次仅确认当前状态）",
+        "en": "Financial Transaction Tax (IOF): the rate currently applicable to FX inflows related to on-exchange stock/ETF trading is 0% (rates have been non-zero historically; only the current 0% state was confirmed this session)",
+        "sources": [
+          {
+            "title": "Non-resident Investor – Taxation",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "IOF (Financial Transaction Tax) ... Stocks and ETF in stock exchange / 0% for incoming resources / 0%",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "capital_gains_tax": {
+        "zh": "针对非居民投资者：通过B3交易的股票、衍生品与公司债的资本利得免税；来自低税负辖区的非居民投资者则按15%征收（居民投资者的资本利得税制度本次未纳入抓取范围）",
+        "en": "For non-resident investors: capital gains from equities, derivatives and corporate bonds traded on B3 are tax-exempt; non-residents from low-tax jurisdictions are instead taxed at 15%. (The resident-investor capital gains tax regime was not covered by this session's fetches.)",
+        "sources": [
+          {
+            "title": "Non-resident Investor – Taxation",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Non-resident investors trading equities, derivatives and corporate bonds are exempted on capital gains; ... Capital Gains / Exempt / 15%**",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "B3官方非居民投资者税务页称「利润分配与股息免税」；但据本次会话检索到的第三方财经/税务媒体报道，巴西第15.270/2025号法律已对非居民股息设10%预扣税，自2026年1月1日起生效——本次抓取到的B3官方页面未反映此变化，两者存在冲突，未核实哪个反映当前实际状态，此处按官网原文摘录并标注该冲突，不采信未经抓取验证的第三方说法",
+        "en": "B3's official non-resident taxation page states dividends and profit distributions are tax-exempt; however, third-party tax/financial media found via this session's web search report that Brazilian Law No. 15.270/2025 imposed a 10% withholding tax on non-resident dividends effective January 1, 2026 — the B3 page fetched this session does not reflect this. The conflict is unresolved; the official page text is recorded as-is, without adopting the unverified third-party claim",
+        "sources": [
+          {
+            "title": "Non-resident Investor – Taxation",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Distributed profits and dividends are also exempted; ... Distributed profits and dividends / Exempt / Exempt",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "巴西雷亚尔（BRL）历史波动性较高，属新兴市场货币；以其他币种计价资产为主的境外投资者持有BRL计价资产存在汇率风险；B3的美元远期市场与美元期货是常见对冲工具",
+        "en": "The Brazilian real (BRL) is a historically volatile emerging-market currency; foreign investors holding BRL-denominated assets are exposed to FX risk against their home currency; B3's US Dollar forward market and US Dollar futures are common hedging instruments",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "2019年T+2结算周期改革、2025/2026年之交的非居民股息预扣税立法变化（见costs.dividend_withholding_tax的冲突说明）等显示巴西证券监管/税务规则存在较活跃的调整节奏",
+        "en": "Recent examples — the 2019 T+2 settlement-cycle reform and the reported 2025/2026 change to non-resident dividend withholding tax (see the conflict noted under costs.dividend_withholding_tax) — indicate an active pace of regulatory/tax rule change in the Brazilian market",
+        "sources": [
+          {
+            "title": "Project T+2 – Context",
+            "url": "https://www.b3.com.br/en_us/project-t-2/context/",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Non-resident Investor – Taxation",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "enforcement_note": {
+        "zh": "BSM作为B3集团的自律监管子机构，对市场参与者与B3自身进行稽查，具备发起纪律处分程序的权力，并设有举报通道（Whistleblower Channel）；CVM对整体市场保留调查权与制裁权",
+        "en": "BSM, B3 group's self-regulatory subsidiary, inspects market participants and B3 itself, has authority to initiate disciplinary proceedings, and operates a Whistleblower Channel; CVM retains investigatory and sanctioning powers over the market as a whole",
+        "sources": [
+          {
+            "title": "Non-resident Investor – Regulatory Environment",
+            "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/regulatory-environment.htm",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "4. BSM / Subsidiary of B3 group, inspects and supervise market participants and B3 itself and has the capability to establish and conduct disciplinary administrative proceedings.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      }
+    }
+  }
+}

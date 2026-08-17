@@ -2,7 +2,7 @@
   "exchanges": [
     {
       "id": "au-asx",
-      "name_zh": "澳大利亚证券交易所（通称ASX）",
+      "name_zh": "澳大利亚证券交易所",
       "name_native": {
         "en": "Australian Securities Exchange (ASX)"
       },
@@ -13,6 +13,57 @@
       "group_id": null,
       "region": "apac",
       "tier": "extended",
+      "trading_hours": null
+    },
+    {
+      "id": "br-b3",
+      "name_zh": "巴西B3交易所",
+      "name_native": {
+        "pt": "B3 S.A. – Brasil, Bolsa, Balcão"
+      },
+      "official_languages": [
+        "pt-BR"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "americas",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
+      "id": "ca-tsx",
+      "name_zh": "多伦多证券交易所",
+      "name_native": {
+        "en": "Toronto Stock Exchange (TSX)",
+        "fr": "Bourse de Toronto"
+      },
+      "official_languages": [
+        "en",
+        "fr"
+      ],
+      "source_lang": "en",
+      "group_id": "tmx-group",
+      "region": "americas",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
+      "id": "ch-six",
+      "name_zh": "瑞士证券交易所",
+      "name_native": {
+        "de": "SIX Swiss Exchange AG",
+        "fr": "SIX Swiss Exchange SA",
+        "en": "SIX Swiss Exchange"
+      },
+      "official_languages": [
+        "de",
+        "fr",
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": "six-group",
+      "region": "europe",
+      "tier": "standard",
       "trading_hours": null
     },
     {
@@ -86,7 +137,7 @@
     },
     {
       "id": "de-xetra",
-      "name_zh": "法兰克福证券交易所（Xetra电子交易系统）",
+      "name_zh": "法兰克福证券交易所",
       "name_native": {
         "de": "Frankfurter Wertpapierbörse (FWB)",
         "en": "Deutsche Börse Xetra"
@@ -102,8 +153,28 @@
       "trading_hours": null
     },
     {
+      "id": "fr-euronext",
+      "name_zh": "泛欧交易所",
+      "name_native": {
+        "en": "Euronext N.V."
+      },
+      "official_languages": [
+        "en",
+        "nl",
+        "fr",
+        "pt",
+        "it",
+        "nb"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "europe",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "hk-hkex",
-      "name_zh": "香港交易及结算所（简称港交所）",
+      "name_zh": "香港交易及结算所",
       "name_native": {
         "zh-Hant": "香港交易及結算所有限公司",
         "en": "Hong Kong Exchanges and Clearing Limited (HKEX)"
@@ -173,8 +244,23 @@
       }
     },
     {
+      "id": "kr-krx",
+      "name_zh": "韩国交易所",
+      "name_native": {
+        "ko": "한국거래소"
+      },
+      "official_languages": [
+        "ko"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
       "id": "sa-tadawul",
-      "name_zh": "沙特交易所（塔达吾尔）",
+      "name_zh": "沙特交易所",
       "name_native": {
         "en": "Saudi Exchange (Tadawul)"
       },
@@ -189,7 +275,7 @@
     },
     {
       "id": "sg-sgx",
-      "name_zh": "新加坡交易所（简称新交所）",
+      "name_zh": "新加坡交易所",
       "name_native": {
         "en": "Singapore Exchange Limited (SGX)"
       },
@@ -197,6 +283,21 @@
         "en"
       ],
       "source_lang": "en",
+      "group_id": null,
+      "region": "apac",
+      "tier": "extended",
+      "trading_hours": null
+    },
+    {
+      "id": "tw-twse",
+      "name_zh": "台湾证券交易所",
+      "name_native": {
+        "zh-Hant": "臺灣證券交易所"
+      },
+      "official_languages": [
+        "zh-Hant"
+      ],
+      "source_lang": "zh",
       "group_id": null,
       "region": "apac",
       "tier": "extended",
@@ -257,6 +358,21 @@
         "lunch_start_utc": null,
         "lunch_end_utc": null
       }
+    },
+    {
+      "id": "za-jse",
+      "name_zh": "约翰内斯堡证券交易所",
+      "name_native": {
+        "en": "JSE Limited (Johannesburg Stock Exchange)"
+      },
+      "official_languages": [
+        "en"
+      ],
+      "source_lang": "en",
+      "group_id": null,
+      "region": "mena_africa",
+      "tier": "extended",
+      "trading_hours": null
     }
   ],
   "dimension_groups": [

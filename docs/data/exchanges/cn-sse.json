@@ -738,6 +738,35 @@
         "en": null,
         "enum": null,
         "quote": null
+      },
+      "derivatives": {
+        "trading_sessions": {
+          "pre_market": null,
+          "continuous_am": null,
+          "lunch_break": null,
+          "continuous_pm": null,
+          "after_market": null,
+          "night_session": null
+        },
+        "holidays_note": null,
+        "opening_mechanism": null,
+        "closing_mechanism": null,
+        "matching_principle": null,
+        "order_types": null,
+        "tick_size": null,
+        "contract_specs_note": null,
+        "price_limits": {
+          "type": null,
+          "main_board": null,
+          "other_boards": null
+        },
+        "circuit_breaker": null,
+        "volatility_interruption": null,
+        "trading_halt_mechanism": null,
+        "block_trade": null,
+        "market_maker_scheme": null,
+        "margin_practice_note": null,
+        "connect_schemes": null
       }
     },
     "listing": {
@@ -745,12 +774,14 @@
         {
           "id": "cn-sse-main",
           "name_zh": "主板",
+          "financial_threshold": "发行后股本总额不低于5000万元，公开发行股份占公司股份总数25%以上（股本总额超4亿元的，比例为10%以上）；市值及财务指标三选一：①最近3年净利润均为正且累计不低于2亿元、最近一年净利润不低于1亿元，同时最近3年经营活动产生的现金流量净额累计不低于2亿元或营业收入累计不低于15亿元；②预计市值不低于50亿元，且最近一年净利润为正、营业收入不低于6亿元，最近3年经营活动现金流量净额累计不低于2.5亿元；③预计市值不低于100亿元，且最近一年净利润为正、营业收入不低于10亿元（以上净利润指扣除非经常性损益前后孰低者，均为经审计数值）；另有红筹企业、差异化表决权企业的专门标准（详见规则第3.1.4-3.1.6条），未逐条列入本摘要",
           "target_companies": "大中型成熟企业"
         },
         {
           "id": "cn-sse-star",
           "name_zh": "科创板",
           "name_native": "科创板",
+          "financial_threshold": "发行后股本总额不低于3000万元，公开发行股份占公司股份总数25%以上（股本总额超4亿元的，比例为10%以上）；市值及财务指标五选一：①预计市值不低于10亿元，最近两年净利润均为正且累计不低于5000万元，或预计市值不低于10亿元且最近一年净利润为正、营业收入不低于1亿元；②预计市值不低于15亿元，最近一年营业收入不低于2亿元，且最近三年累计研发投入占最近三年累计营业收入比例不低于15%；③预计市值不低于20亿元，最近一年营业收入不低于3亿元，且最近三年经营活动产生的现金流量净额累计不低于1亿元；④预计市值不低于30亿元，且最近一年营业收入不低于3亿元；⑤预计市值不低于40亿元，主要业务或产品需经国家有关部门批准、市场空间大、已取得阶段性成果（医药行业企业需至少一项核心产品获准开展二期临床试验，其他企业需具备明显技术优势）；另有红筹企业、差异化表决权企业的专门标准（详见规则第2.1.3-2.1.4条），未逐条列入本摘要",
           "target_companies": "科技创新型企业，2019年设立，注册制试点板块",
           "launched_year": 2019
         }
@@ -767,7 +798,7 @@
           }
         ],
         "confidence": "medium",
-        "verified": "2026-08-12",
+        "verified": "2026-08-17",
         "en": null,
         "quote": null
       },
@@ -775,41 +806,85 @@
         "zh": "",
         "confidence": "low",
         "detail": "未核实具体周期数据，留空。",
-        "verified": "2026-08-12",
+        "sources": [
+          {
+            "title": "上海证券交易所股票上市规则（2026年4月修订）全文，第三章第一节 3.1.1-3.1.6（主板上市条件）",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "上海证券交易所科创板股票上市规则（2026年4月修订）全文，第二章第一节 2.1.1-2.1.4（科创板上市条件）",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/10816592/files/8d80222543f64159ac5d177b7aace71c.docx",
+            "accessed": "2026-08-17"
+          }
+        ],
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "transfer_between_boards": {
         "zh": "",
         "confidence": "low",
         "detail": "未核实转板机制细节，留空。",
-        "verified": "2026-08-12",
+        "sources": [
+          {
+            "title": "上海证券交易所股票上市规则（2026年4月修订）全文，第三章第一节 3.1.1-3.1.6（主板上市条件）",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "上海证券交易所科创板股票上市规则（2026年4月修订）全文，第二章第一节 2.1.1-2.1.4（科创板上市条件）",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/10816592/files/8d80222543f64159ac5d177b7aace71c.docx",
+            "accessed": "2026-08-17"
+          }
+        ],
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "continuing_obligations": {
         "zh": "",
         "confidence": "low",
         "detail": "留空前的草稿印象：定期报告、临时信息披露、公司治理规范运作等持续义务——未核实来源，故未采纳为正式字段值。",
-        "verified": "2026-08-12",
+        "sources": [
+          {
+            "title": "上海证券交易所股票上市规则（2026年4月修订）全文，第三章第一节 3.1.1-3.1.6（主板上市条件）",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "上海证券交易所科创板股票上市规则（2026年4月修订）全文，第二章第一节 2.1.1-2.1.4（科创板上市条件）",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/10816592/files/8d80222543f64159ac5d177b7aace71c.docx",
+            "accessed": "2026-08-17"
+          }
+        ],
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "suspension_resumption": {
         "zh": "",
         "confidence": "low",
         "detail": "个股级临时停牌见 market_structure.trading_halt_mechanism（已有来源）；此字段特指因重大事项等的长期停牌规则，未核实，留空。",
-        "verified": "2026-08-12",
+        "sources": [
+          {
+            "title": "上海证券交易所股票上市规则（2026年4月修订）全文，第三章第一节 3.1.1-3.1.6（主板上市条件）",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "上海证券交易所科创板股票上市规则（2026年4月修订）全文，第二章第一节 2.1.1-2.1.4（科创板上市条件）",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/10816592/files/8d80222543f64159ac5d177b7aace71c.docx",
+            "accessed": "2026-08-17"
+          }
+        ],
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "delisting_conditions": {
         "zh": "四类强制退市（交易类、财务类、规范类、重大违法类）+ 主动退市",
@@ -822,7 +897,7 @@
           }
         ],
         "confidence": "medium",
-        "verified": "2026-08-12",
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
         "quote": null
@@ -830,12 +905,23 @@
       "delisting_process": {
         "zh": "",
         "confidence": "low",
-        "verified": "2026-08-12",
+        "sources": [
+          {
+            "title": "上海证券交易所股票上市规则（2026年4月修订）全文，第三章第一节 3.1.1-3.1.6（主板上市条件）",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "上海证券交易所科创板股票上市规则（2026年4月修订）全文，第二章第一节 2.1.1-2.1.4（科创板上市条件）",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/10816592/files/8d80222543f64159ac5d177b7aace71c.docx",
+            "accessed": "2026-08-17"
+          }
+        ],
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "delisting_transition_period": {
         "zh": "交易类退市已取消退市整理期设置（2024年修订）；财务类等其他类型是否保留整理期未逐条核实",
@@ -847,7 +933,7 @@
           }
         ],
         "confidence": "medium",
-        "verified": "2026-08-12",
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
         "detail": null,
@@ -856,12 +942,23 @@
       "post_delisting_venue": {
         "zh": "",
         "confidence": "low",
-        "verified": "2026-08-12",
+        "sources": [
+          {
+            "title": "上海证券交易所股票上市规则（2026年4月修订）全文，第三章第一节 3.1.1-3.1.6（主板上市条件）",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "上海证券交易所科创板股票上市规则（2026年4月修订）全文，第二章第一节 2.1.1-2.1.4（科创板上市条件）",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/10816592/files/8d80222543f64159ac5d177b7aace71c.docx",
+            "accessed": "2026-08-17"
+          }
+        ],
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "indices": {

@@ -811,6 +811,35 @@
         "enum": null,
         "detail": null,
         "quote": null
+      },
+      "derivatives": {
+        "trading_sessions": {
+          "pre_market": null,
+          "continuous_am": null,
+          "lunch_break": null,
+          "continuous_pm": null,
+          "after_market": null,
+          "night_session": null
+        },
+        "holidays_note": null,
+        "opening_mechanism": null,
+        "closing_mechanism": null,
+        "matching_principle": null,
+        "order_types": null,
+        "tick_size": null,
+        "contract_specs_note": null,
+        "price_limits": {
+          "type": null,
+          "main_board": null,
+          "other_boards": null
+        },
+        "circuit_breaker": null,
+        "volatility_interruption": null,
+        "trading_halt_mechanism": null,
+        "block_trade": null,
+        "market_maker_scheme": null,
+        "margin_practice_note": null,
+        "connect_schemes": null
       }
     },
     "listing": {
@@ -819,19 +848,25 @@
           "id": "jp-jpx-prime",
           "name_zh": "主市场",
           "name_native": "Prime Market（プライム市場）",
-          "target_companies": "面向具备全球投资者对话基础的大型企业，2022年4月市场重组后设立"
+          "financial_threshold": "股东人数（预计上市时）≥800人；流通股数≥2万单位、流通股市值≥100亿日元、且占已上市股份≥35%；总市值（预计上市时）≥250亿日元；合并净资产≥50亿日元（母公司净资产须为正）；最近两年合计利润≥25亿日元，或二选一满足最近一年销售额≥100亿日元且预计上市时市值≥1000亿日元；另须持续经营满3年",
+          "target_companies": "面向市值（流动性）达到可作为众多机构投资者投资标的的水平、具备更高治理水准、以与投资者建设性对话为核心持续提升中长期企业价值的企业",
+          "launched_year": 2022
         },
         {
           "id": "jp-jpx-standard",
           "name_zh": "标准市场",
           "name_native": "Standard Market（スタンダード市場）",
-          "target_companies": "面向具备一定市场流动性与治理水平的企业"
+          "financial_threshold": "股东人数（预计上市时）≥400人；流通股数≥2000单位、流通股市值≥10亿日元、且占已上市股份≥25%；持续经营满3年；净资产（预计上市时）为正；最近一年利润≥1亿日元",
+          "target_companies": "面向市值（流动性）达到可作为公开市场投资标的水平、具备上市公司应有基本治理水准、致力于持续增长与中长期企业价值提升的企业",
+          "launched_year": 2022
         },
         {
           "id": "jp-jpx-growth",
           "name_zh": "成长市场",
           "name_native": "Growth Market（グロース市場）",
-          "target_companies": "面向具高成长潜力的新兴企业"
+          "financial_threshold": "股东人数（预计上市时）≥150人；流通股数≥1000单位、流通股市值≥5亿日元、且占已上市股份≥25%；上市前须公开发售≥500个交易单位（若预计上市时市值≥250亿日元可豁免此项）；持续经营满1年",
+          "target_companies": "面向具一定市值、能够适当及时披露高成长潜力业务计划及其推进情况、但从经营记录角度看投资风险相对较高的新兴企业",
+          "launched_year": 2022
         }
       ],
       "review_system": {
@@ -847,7 +882,7 @@
         ],
         "quote": "Rule 101. Market Segments / The Exchange has established the market segments referred to in the following each item... (1) Standard Market (2) Prime Market (3) Growth Market",
         "confidence": "high",
-        "verified": "2026-08-13",
+        "verified": "2026-08-17",
         "enum": null
       },
       "listing_process_duration": {
@@ -855,12 +890,32 @@
         "confidence": "low",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-13"
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
+            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
+            "accessed": "2026-08-17"
           }
         ],
-        "verified": "2026-08-13",
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
         "detail": null,
@@ -871,12 +926,32 @@
         "confidence": "low",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-13"
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
+            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
+            "accessed": "2026-08-17"
           }
         ],
-        "verified": "2026-08-13",
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
         "detail": null,
@@ -887,12 +962,32 @@
         "confidence": "low",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-13"
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
+            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
+            "accessed": "2026-08-17"
           }
         ],
-        "verified": "2026-08-13",
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
         "detail": null,
@@ -903,12 +998,32 @@
         "confidence": "low",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-13"
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
+            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
+            "accessed": "2026-08-17"
           }
         ],
-        "verified": "2026-08-13",
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
         "detail": null,
@@ -919,12 +1034,32 @@
         "confidence": "low",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-13"
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
+            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
+            "accessed": "2026-08-17"
           }
         ],
-        "verified": "2026-08-13",
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
         "detail": null,
@@ -935,12 +1070,32 @@
         "confidence": "low",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-13"
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
+            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
+            "accessed": "2026-08-17"
           }
         ],
-        "verified": "2026-08-13",
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
         "detail": null,
@@ -951,12 +1106,32 @@
         "confidence": "low",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-13"
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
+            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
+            "accessed": "2026-08-17"
           }
         ],
-        "verified": "2026-08-13",
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
         "detail": null,
@@ -967,12 +1142,32 @@
         "confidence": "low",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF）",
+            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-13"
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
+            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
+            "accessed": "2026-08-17"
           }
         ],
-        "verified": "2026-08-13",
+        "verified": "2026-08-17",
         "en": null,
         "enum": null,
         "detail": null,
@@ -1382,20 +1577,25 @@
         "sources": null
       },
       "regulatory_change_risk_note": {
-        "zh": "现行Prime/Standard/Growth三板体系是市场结构改制的产物，草稿印象为2022年4月由旧「一部/二部/JASDAQ/Mothers」体系改制而来，但改制的具体日期与新旧对应关系本次未找到可引用的官方原文确认，故不写入正式表述，仅标注存在过近期重大结构变革",
-        "en": "The current Prime/Standard/Growth board structure resulted from a market restructuring; a draft impression places this around April 2022 replacing the former First/Second Section, JASDAQ, and Mothers structure, but the specific date and old-to-new mapping were not confirmed against an official source this session, so this detail is flagged as unverified rather than stated as fact",
+        "zh": "现行Prime/Standard/Growth三板体系于2022年4月4日由旧「本则市场（含一部/二部）、Mothers、JASDAQ」体系改制而来，是TSE近年最大的一次市场结构变革；已上市公司须于2021年9月1日至12月30日间在新旧三板间做出选择，2022年4月4日正式切换",
+        "en": "The current Prime/Standard/Growth board structure replaced the former Main Markets (First/Second Section), Mothers, and JASDAQ segments on April 4, 2022 — TSE's largest market-structure change in recent years; already-listed issuers selected their new segment between September 1 and December 30, 2021, with the switch taking effect April 4, 2022",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF）Rule 101",
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）Supplementary Provisions Article 1-2",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-13"
+            "accessed": "2026-08-17"
+          },
+          {
+            "title": "Overview of Market Restructuring（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
+            "accessed": "2026-08-17"
           }
         ],
-        "confidence": "low",
+        "quote": "These amendments shall be implemented on April 4, 2022 ... The issuer of a stock, etc. that is listed on the Main Markets, Mothers, or JASDAQ (hereinafter referred to as the \"old market segments\") as of December 30, 2021 ... shall select any of the Standard Market, Prime Market or Growth Market ... between September 1, 2021 to December 30, 2021",
+        "confidence": "high",
         "verified": "2026-08-13",
         "enum": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       },
       "enforcement_note": {
         "zh": "",

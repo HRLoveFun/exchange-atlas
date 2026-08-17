@@ -1,0 +1,1650 @@
+{
+  "id": "fr-euronext",
+  "name_zh": "泛欧交易所",
+  "name_native": {
+    "en": "Euronext N.V."
+  },
+  "official_languages": [
+    "en",
+    "nl",
+    "fr",
+    "pt",
+    "it",
+    "nb"
+  ],
+  "source_lang": "en",
+  "group_id": null,
+  "region": "europe",
+  "tier": "extended",
+  "chapters": {
+    "overview": {
+      "timezone": {
+        "zh": "以中欧时间（CET，UTC+1；夏令时CEST，UTC+2）为准，覆盖阿姆斯特丹/布鲁塞尔/里斯本/米兰/巴黎/奥斯陆；唯独都柏林所在爱尔兰实行西欧时间（比CET晚1小时），交易时刻表统一以CET标注，都柏林本地钟点相应减1小时",
+        "en": "Central European Time (CET, UTC+1; CEST UTC+2 in summer) applies to Amsterdam, Brussels, Lisbon, Milan, Paris and Oslo; Dublin (Ireland) alone runs on Western European Time, one hour behind CET — trading timetables are published in CET, with Dublin local clock time one hour earlier",
+        "sources": [
+          {
+            "title": "Trading hours & Holidays（Euronext官网）",
+            "url": "https://www.euronext.com/en/trading/trading-hours-holidays",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "For Dublin, Equity instruments will close between 13:28 – 13:30 CET/CEST (12:28 – 12:30 Dublin time). ETFs will close at 14:00 CET/CEST (13:00 Dublin time).",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "dst_rule": {
+        "zh": "各市场均随欧盟统一切换夏令时（3月最后一个周日至10月最后一个周日CEST，其余为CET）；都柏林同步切换GMT/IST，切换日期与欧盟一致，仅钟点比CET区少1小时",
+        "en": "All markets follow the EU-wide daylight saving switch (CEST from the last Sunday of March to the last Sunday of October, CET otherwise); Dublin switches GMT/IST on the same EU dates, one hour behind the CET markets",
+        "detail": "本条为欧盟统一夏令时安排的常识性推论（非交易所自设规则），未单独抓取欧盟夏令时立法原文核实，confidence 相应降级。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext官网，集团历史沿革时间线）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "quote": null
+      },
+      "founded_year": {
+        "zh": "2000年（阿姆斯特丹、布鲁塞尔、巴黎三家交易所合并成立Euronext N.V.，是首个泛欧交易所）；现在的独立上市实体Euronext N.V.则于2014年由ICE分拆重新IPO成立，两次成立事件性质不同，见history",
+        "en": "2000 (merger of the Amsterdam, Brussels and Paris exchanges to form Euronext N.V., the first pan-European exchange); the current independently-listed Euronext N.V. was re-established via a 2014 spin-off IPO from ICE — these are two distinct founding events, see history",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext官网）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "2000 The start: the first pan-European exchange, Euronext, is born Merger of the Amsterdam, Brussels and Paris exchanges to create Euronext N.V., the first pan-European exchange.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "history": {
+        "zh": "2000年阿姆斯特丹/布鲁塞尔/巴黎三所合并成立Euronext（首个泛欧交易所）；2001年收购LIFFE衍生品交易所并首次IPO（巴黎/阿姆斯特丹/布鲁塞尔三地同时挂牌）；2002年并入葡萄牙里斯本-波尔图交易所（成为Euronext Lisbon）；2007年与纽约证券交易所对等合并成NYSE Euronext；2013年ICE收购NYSE Euronext；2014年ICE保留LIFFE、将大陆欧洲业务拆分重新IPO为独立的Euronext N.V.（此后集团历史续接现在的法人实体）；2017年推出自有交易平台Optiq；2018年收购爱尔兰证券交易所（成为Euronext Dublin）；2019年收购Oslo Børs VPS（挪威交易所+挪威中央证券存管机构）；2020年收购丹麦中央证券存管机构VP Securities；2021年完成收购Borsa Italiana集团（米兰并入，同时成立跨国CSD网络Euronext Securities）；2023-2024年清算业务分阶段从LCH SA迁移至集团自有CCP Euronext Clearing（现货2023年11月、衍生品2024年9月完成）；2025年宣布并完成对希腊雅典交易所（ATHEX）的换股收购（成为第八个市场，但尚未并入统一规则手册与Optiq平台，计划2027年6月完成技术迁移）；同年9月Euronext N.V.自身股票纳入法国CAC 40指数",
+        "en": "2000: merger of Amsterdam, Brussels and Paris exchanges forms Euronext (first pan-European exchange). 2001: acquires LIFFE and completes first IPO (listed simultaneously in Paris/Amsterdam/Brussels). 2002: merges with the Portuguese exchange (becomes Euronext Lisbon). 2007: merger of equals with NYSE, forming NYSE Euronext. 2013: ICE acquires NYSE Euronext. 2014: ICE keeps LIFFE and spins off the continental European operations as a newly independent, re-IPO'd Euronext N.V. (the group's history continues under this legal entity). 2017: launches proprietary trading platform Optiq. 2018: acquires the Irish Stock Exchange (becomes Euronext Dublin). 2019: acquires Oslo Børs VPS (Norwegian exchange + Norwegian CSD). 2020: acquires VP Securities, the Danish CSD. 2021: completes acquisition of the Borsa Italiana Group (Milan joins; the cross-border CSD network Euronext Securities is launched). 2023-2024: clearing migrates in phases from LCH SA to the Group's own CCP, Euronext Clearing (cash markets November 2023, derivatives markets September 2024). 2025: announces and completes a share-exchange acquisition of the Athens Stock Exchange (ATHEX), becoming the eighth market — not yet integrated into the harmonised rulebook or Optiq, migration targeted for June 2027; in the same year (September 2025) Euronext N.V.'s own share joins the French CAC 40 Index",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext官网，历史时间线）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Regulated Markets（Euronext官网，雅典未整合说明）",
+            "url": "https://www.euronext.com/en/regulation/euronext-regulated-markets",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "2000 The start: the first pan-European exchange, Euronext, is born Merger of the Amsterdam, Brussels and Paris exchanges to create Euronext N.V., the first pan-European exchange. ... The company now covers eight local markets, five CSDs, and two clearing houses, supporting our customers throughout the entire capital markets value chain.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "organization_form": {
+        "enum": "demutualized_listed",
+        "zh": "公司制且自身上市——Euronext N.V.是2014年由ICE分拆重新独立IPO的上市公司，本身即在旗下Euronext Paris挂牌",
+        "en": "Corporate and self-listed — Euronext N.V. is the independently re-IPO'd public company spun off from ICE in 2014, and is itself listed on its own Euronext Paris market",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext官网）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Following the November 2013 acquisition of NYSE Euronext, ICE keeps LIFFE and spins off the continental European operations by launching a public offering for a newly formed, independent Euronext N.V. in June 2014.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "detail": null
+      },
+      "self_listed": {
+        "enum": "yes",
+        "zh": "是——Euronext N.V.本身在Euronext Paris挂牌交易，交易代码ENX，2025年9月起纳入法国CAC 40指数成分",
+        "en": "Yes — Euronext N.V. itself trades on Euronext Paris under ticker ENX, and was added to the French CAC 40 index constituents from September 2025",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext官网）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Share price（投资者关系页）",
+            "url": "https://www.euronext.com/en/investor-relations/share-price",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Amsterdam, Brussels, Dublin, Lisbon, Milan, Oslo and Paris – 12 September 2025 – Euronext, the leading European capital market infrastructure, is proud to highlight its upcoming inclusion in the CAC 40® Index (PX1), following the quarterly review of the CAC® Family indices performed by the Scientific Committee. Euronext's entry into the benchmark French index will take place after market close on Friday 19 September, and will be effective from Monday 22 September 2025.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "detail": null
+      },
+      "market_cap_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "本字段设计意图是「该所挂牌公司的总市值」，但本所存在歧义：overview.self_listed 记录的是Euronext N.V.自身作为一家上市公司的市值（2025-08-22约€14.5bn），与「七个市场上挂牌的全部公司总市值」是两个不同的数。本次抓取到的页面未见后者的官方口径汇总数字，为避免把两种不同的市值口径混为一谈，本字段留空，不代入前者凑数。",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext官网，集团历史沿革时间线）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "listed_companies_count": {
+        "zh": "约1,846家发行人（三个板块合计：Euronext regulated market 1,074家 + Euronext Growth 596家 + Euronext Access 176家），统计口径为2024年6月末、近4年平均、剔除并购交易",
+        "en": "approx. 1,846 issuers combined across three segments (Euronext regulated market 1,074 + Euronext Growth 596 + Euronext Access 176), as of end-June 2024, 4-year average, excluding merger transactions",
+        "detail": "1,074/596/176三个数字来自choosing-market页对比表格三栏，1,846为本文件手工相加所得，非官网直接给出的合计数——加总方式的可靠性弱于官网直接公布的单一数字，故confidence标medium而非high。",
+        "sources": [
+          {
+            "title": "Choosing a Market（Euronext官网，三板块对比表）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Number of issuers 1,074 596 176 ... EURONEXT: NUMBER OF ISSUERS AS OF THE END OF june 2024, AVERAGE DATA OVER 4Y (2020-2024 Ytd) EXCLUDING MERGER OPERATIONS.",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "annual_turnover_usd_bn": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext官网，集团历史沿革时间线）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "global_ranking": {
+        "zh": "官网多处自我定位为「欧洲领先的资本市场基础设施」及「欧洲最大的流动性池」，未找到独立第三方机构给出的具体排名数字佐证",
+        "en": "Officially describes itself as \"the leading European capital market infrastructure\" and \"the largest liquidity pool in Europe\"; no independent third-party ranking figure was found this session to corroborate a specific rank",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext官网）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Euronext confirms its position as the leading listing and trading venue, and the largest liquidity pool in Europe with superior market quality",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "trading_currency": {
+        "zh": "多币种，按各市场本国货币计价为主：阿姆斯特丹/布鲁塞尔/都柏林/里斯本/巴黎（欧元区五国）以欧元计价，米兰以欧元计价，奥斯陆以挪威克朗（NOK）计价——是本所与欧元区单一货币交易所最直接的结构性差异；部分产品另有美元/英镑等计价，未逐一核实",
+        "en": "Multi-currency, predominantly each market's home currency: Amsterdam/Brussels/Dublin/Lisbon/Paris/Milan (all euro-area) price in EUR; Oslo prices in Norwegian Krone (NOK) — the most direct structural contrast with a single-currency exchange; some products are denominated in USD/GBP etc., not individually verified",
+        "detail": "各国采用的法定货币（欧元区成员国用欧元、挪威用克朗）属基础地理经济常识，非交易所自设的具体规则数值，未单独抓取官方原文逐一核实，confidence标medium。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext官网，集团历史沿革时间线）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "quote": null
+      },
+      "settlement_currency": {
+        "zh": "原则上与交易货币一致，按各市场本国货币结算；具体是否存在跨市场结算货币统一安排（如是否可用单一欧元账户结算奥斯陆NOK计价证券）本次未核实",
+        "en": "In principle matches the trading currency, settled in each market's home currency; whether a unified cross-market settlement currency arrangement exists (e.g. settling Oslo NOK-denominated securities via a single EUR account) was not verified this session",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext官网，集团历史沿革时间线）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "regulation": {
+      "regulator": {
+        "zh": "无单一监管机构——七个市场运营实体分别受本国证券监管机构监管、适用本国法律：Euronext Amsterdam（荷兰，AFM/DNB）、Euronext Brussels（比利时，FSMA/BNB）、Euronext Paris（法国，AMF）、Euronext Dublin（爱尔兰，Central Bank of Ireland）、Euronext Lisbon（葡萄牙，CMVM）、Borsa Italiana（意大利，CONSOB）、Oslo Børs（挪威，Finanstilsynet）；六国监管机构就跨市场监管事项建立协调机制。这是本所与此前所有单一法域交易所样本最根本的结构差异",
+        "en": "No single regulator — each of the seven Market Undertakings is supervised by, and governed under the law of, its own jurisdiction: Euronext Amsterdam (Netherlands, AFM/DNB), Euronext Brussels (Belgium, FSMA/BNB), Euronext Paris (France, AMF), Euronext Dublin (Ireland, Central Bank of Ireland), Euronext Lisbon (Portugal, CMVM), Borsa Italiana (Italy, CONSOB), Oslo Børs (Norway, Finanstilsynet); regulators in six countries have established a coordination mechanism for cross-market supervisory matters. This is the most fundamental structural difference from every single-jurisdiction exchange sampled so far in this project",
+        "detail": "Regulatory Framework 页原文对法国监管机构一段仍写\"Autorité de Contrôle Prudentiel\n(ACP)\"，该机构已于2013年更名为ACPR（银行/保险审慎监管），页面文本明显滞后未更新；\n本条采信跨版本一致出现、专司证券市场监管的AMF（Autorité des Marchés Financiers）\n作为法国对应机构，不采信页面里过时的ACP表述。七个法域各自具体的证券监管细分\n（谁管上市、谁管交易行为、谁管清算）本次未逐一拆解核实。\n",
+        "sources": [
+          {
+            "title": "Regulatory Framework（Euronext官网，逐国监管机构列表）",
+            "url": "https://www.euronext.com/en/trading/membership/regulatory-framework",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 1.7 Governing Law逐法域条款）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "(i) in respect of Euronext Amsterdam, in accordance with the laws of the Netherlands ... (ii) in respect of Euronext Brussels, in accordance with the laws of Belgium ... (iii) in respect of Euronext Dublin, in accordance with the laws of Ireland ... (iv) in respect of Euronext Lisbon, in accordance with the laws of Portugal ... (v) in respect of Euronext Paris, in accordance with the laws of France ... (vi) in respect of Oslo Børs, in accordance with the laws of Norway ... (vii) in respect of Borsa Italiana, in accordance with the laws of Italy",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "self_regulatory_org": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "未找到跨集团统一的自律组织；各市场运营实体（Market Undertaking）本身兼具「市场运营者」与一定的自律监管职能（如上市审核、会员纪律），但这是运营职能而非独立于运营者之外的自律组织建制，是否存在类似NYSE/FINRA式的独立自律组织本次未核实。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "clearing_regulator": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "Euronext Clearing（法定实体Cassa di Compensazione e Garanzia S.p.A.，意大利公司）作为CCP依据EMIR（欧盟《欧洲市场基础设施监管条例》）监管，具体由哪国主管机构（意大利Banca d'Italia/CONSOB联合监管CCP是欧盟通行模式）对其监管本次未逐条核实原文确认，留空。",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "core_laws": {
+        "zh": "无单一核心法律——七个市场运营实体各自适用本国转化MiFID II（欧盟金融工具市场指令）后的国内法：荷兰《金融监督法》（Wet op het financieel toezicht）第5:26条、比利时2017年11月21日《金融工具市场基础设施法》、法国《货币与金融法典》第L.421-2条、葡萄牙2007年357-C号法令等；MiFID II/MiFIR是各国国内法背后共同的欧盟层级立法基础",
+        "en": "No single core law — each of the seven Market Undertakings operates under its own country's national implementation of MiFID II (the EU Markets in Financial Instruments Directive): the Netherlands' Financial Supervision Act (Wet op het financieel toezicht) Article 5:26, Belgium's Law of 21 November 2017 on market infrastructures, France's Monetary and Financial Code Article L.421-2, Portugal's Decree-Law 357-C/2007, etc.; MiFID II/MiFIR is the shared EU-level legislative basis behind each national law",
+        "sources": [
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules（1.1 Definitions，各Market Undertaking法律依据）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Euronext Amsterdam Euronext Amsterdam N.V., a corporation (\"naamloze vennootschap\") organized under the laws of the Netherlands, operator of a securities exchange (\"houder van een effectenbeurs\") authorised pursuant to Article 5:26 of the Dutch Financial Supervision Act (\"Wet op het financieel toezicht\")",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "capital_controls": {
+        "zh": "欧元区六个市场（阿姆斯特丹/布鲁塞尔/都柏林/里斯本/巴黎/米兰）内无资本管制，欧元自由浮动；挪威（奥斯陆）虽非欧元区但属欧洲经济区（EEA），资本自由流动原则同样适用；未单独抓取官方原文逐一核实",
+        "en": "No capital controls within the six euro-area markets (Amsterdam, Brussels, Dublin, Lisbon, Paris, Milan); the euro floats freely. Norway (Oslo), while outside the euro area, is part of the European Economic Area (EEA) and the free movement of capital principle applies equally; not individually verified against a primary source",
+        "detail": "同de-eurex.yml risks.fx_risk_note的处理方式：欧盟/EEA无资本管制属基础常识性事实，非交易所自设规则，未附强quote；sources仅用于佐证七个市场的国别归属，不是资本管制规则本身的出处。",
+        "sources": [
+          {
+            "title": "Regulatory Framework（Euronext官网，仅用于佐证各市场所属国别，非资本管制规则原文）",
+            "url": "https://www.euronext.com/en/trading/membership/regulatory-framework",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "quote": null
+      },
+      "disclosure_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "products": {
+      "meta": {
+        "verified": "2026-08-16",
+        "sources": [
+          {
+            "title": "Choosing a Market（Euronext官网）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Cash Markets Trading Fee Guide（产品分类章节标题）",
+            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "euronext-equity",
+          "category": "equity",
+          "name_zh": "股票",
+          "name_native": "Equities & Rights",
+          "description": "涵盖七个市场规则市场（Euronext）、Euronext Growth、Euronext Access/Access+三个板块的上市股票，见listing.boards"
+        },
+        {
+          "id": "euronext-etf",
+          "category": "fund",
+          "name_zh": "交易所交易基金",
+          "name_native": "ETFs, ETVs & ETNs"
+        },
+        {
+          "id": "euronext-fund",
+          "category": "fund",
+          "name_zh": "非ETF投资基金",
+          "name_native": "Investment Funds (non-ETF)"
+        },
+        {
+          "id": "euronext-bond",
+          "category": "bond",
+          "name_zh": "债券",
+          "name_native": "Bonds",
+          "description": "含各市场政府债/公司债，以及米兰MOT零售债券市场、EuroTLX等"
+        },
+        {
+          "id": "euronext-structured",
+          "category": "structured",
+          "name_zh": "结构性产品与权证",
+          "name_native": "Structured Products, Warrants & Certificates",
+          "description": "含米兰SeDeX/Cert-X等历史上Borsa Italiana的结构性产品细分市场"
+        },
+        {
+          "id": "euronext-equity-derivatives",
+          "category": "option",
+          "name_zh": "股票及股指衍生品",
+          "name_native": "Equity & Index Derivatives"
+        },
+        {
+          "id": "euronext-fixed-income-derivatives",
+          "category": "future",
+          "name_zh": "固定收益衍生品",
+          "name_native": "Fixed Income Derivatives",
+          "description": "2025年新推出，标的为主要欧洲主权债（意大利BTP、法国OAT、德国Bund、西班牙Bono）的迷你期货"
+        },
+        {
+          "id": "euronext-commodity",
+          "category": "future",
+          "name_zh": "商品衍生品（含电力）",
+          "name_native": "Commodity Derivatives incl. Nord Pool Power Futures",
+          "description": "含2020年收购的Nord Pool北欧电力市场"
+        },
+        {
+          "id": "euronext-fx",
+          "category": "other",
+          "name_zh": "外汇交易（Euronext FX）",
+          "name_native": "Euronext FX",
+          "description": "2017年收购FastMatch改名而来的场外即期外汇电子交易网络，非受监管市场（Regulated Market）产品"
+        },
+        {
+          "id": "euronext-repo",
+          "category": "other",
+          "name_zh": "回购交易（清算业务）",
+          "name_native": "Cleared Borrowing & Lending Market (CBLM) / Repo Clearing"
+        }
+      ]
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": {
+          "zh": "开盘前集合竞价（Pre-opening Call phase / 订单累积期），期间只接受订单录入不产生成交；具体各市场/各交易分组的确切钟点表未在本次抓取到的静态页面中找到，仅在节假日安排表等间接材料中出现片段时刻（如都柏林收盘13:28-13:30 CET），见 holidays_note",
+          "en": "Pre-opening Call phase (order accumulation period): orders are entered but no trades occur; the exact clock times per market/trading group were not found in the static pages fetched this session (only fragmentary times appear indirectly, e.g. Dublin's 13:28-13:30 CET close — see holidays_note)",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "Euronext Rule Book Book I - Harmonised Rules",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "continuous_am": {
+          "zh": "主交易时段（Main trading session）连续竞价，开盘集合竞价完成后即开始；标准逐市场每日开收盘钟点表本次未定位到官方静态页面，留空不猜（常见业内印象为09:00起，但未经当次抓取原文核实，不采纳）",
+          "en": "Main trading session (continuous trading) begins once the opening uncrossing completes; the standard daily open/close clock time table per market was not located in an official static page this session — a commonly-cited market impression (e.g. 09:00 start) was not verified against a primary source fetched this session and is therefore not adopted",
+          "confidence": "low",
+          "sources": [
+            {
+              "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "Euronext Rule Book Book I - Harmonised Rules",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "lunch_break": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "本次抓取材料中未见提及午休安排，欧洲主要现货市场惯例上全日连续交易无午休，但未逐一核实原文，留空。",
+          "sources": [
+            {
+              "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "Euronext Rule Book Book I - Harmonised Rules",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "continuous_pm": {
+          "zh": "",
+          "confidence": "low",
+          "sources": [
+            {
+              "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "Euronext Rule Book Book I - Harmonised Rules",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "en": null,
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "after_market": {
+          "zh": "收盘集合竞价（Closing uncrossing）后进入Trading-at-Last（TAL）阶段，只能以收盘价成交；部分产品另有Extended Trading Hours（结构性产品可延长至20:00或22:00 CET）",
+          "en": "After the Closing uncrossing, a Trading-at-Last (TAL) phase follows in which orders can only match at the closing price; certain products (Structured Products) additionally offer Extended Trading Hours until 20:00 or 22:00 CET",
+          "sources": [
+            {
+              "title": "Extended trading hours（Euronext Structured Products）",
+              "url": "https://live.euronext.com/en/products/structured-products/extended-trading-hours",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "confidence": "medium",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "night_session": {
+          "zh": "无——本所现货市场未见夜盘安排，与四家现货标杆（SSE/HKEX/NYSE/JPX）一致",
+          "en": "None — no night session found for the cash markets, consistent with the four cash-equity benchmarks (SSE/HKEX/NYSE/JPX)",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "Euronext Rule Book Book I - Harmonised Rules",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "holidays_note": {
+        "zh": "官网逐市场逐节假日公布对照表（阿姆斯特丹/布鲁塞尔/都柏林/里斯本/米兰/奥斯陆/巴黎），部分节假日各市场安排不一致（如爱尔兰5月银行假日仅都柏林休市，其余市场照常交易；圣灵降临周一仅奥斯陆休市），米兰另有「No TAH」（无盘后延长交易）的特殊标注",
+        "en": "The official site publishes a per-market, per-holiday comparison table (Amsterdam/Brussels/Dublin/Lisbon/Milan/Oslo/Paris); some holidays apply to only some markets (e.g. Ireland's May Bank Holiday closes only Dublin while other markets trade normally; Whit Monday closes only Oslo), and Milan carries a separate \"No TAH\" (no Trading After Hours) annotation",
+        "sources": [
+          {
+            "title": "Trading hours & Holidays（Euronext官网）",
+            "url": "https://www.euronext.com/en/trading/trading-hours-holidays",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Monday 4 May 2026 (Irish May Bank Holiday) Full Trading Day Full Trading Day Closed Full Trading Day Full Trading Day Full Trading Day Full Trading Day",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "opening_mechanism": {
+        "zh": "开盘集合竞价（Opening uncrossing）：订单累积期内只录入订单不成交，撮合算法启动时中央订单簿短暂冻结，以能实现最大成交量的理论开盘价定价；若无法撮合，则以主交易时段第一笔成交价作为开盘价",
+        "en": "Opening uncrossing: during the order-accumulation period orders are entered but not matched; when the matching algorithm runs the Central Order Book is briefly frozen and the opening price is set at the level that maximises matched volume; if no match occurs, the price of the first trade in the main trading session becomes the opening price",
+        "sources": [
+          {
+            "title": "Notice n°4-01 Trading Manual",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "At the opening, the Euronext Trading Platform seeks to match orders for each Security (the \"opening uncrossing\"). At the beginning of the price determination phase for a Security the Central Order Book is frozen momentarily ... while the matching algorithm is running. The opening price is the last theoretical opening price calculated before matching.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "closing_mechanism": {
+        "zh": "收盘集合竞价（Closing uncrossing）：机制与开盘集合竞价相同；收盘参考价通常即收盘集合竞价成交价，若集合竞价未产生成交价则退而采用主交易时段最后成交价",
+        "en": "Closing uncrossing: the same mechanism as the opening uncrossing; the closing reference price is generally the closing-uncrossing price, falling back to the last traded price of the main session if the uncrossing produces no price",
+        "sources": [
+          {
+            "title": "Notice n°4-01 Trading Manual",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Except for certain Securities where the closing reference price results from alternative methods described in Article 5.4, the closing reference price for Securities which are traded continuously shall in general be the price defined by the closing uncrossing. If no price is issued at the closing uncrossing, the closing reference price shall in general be the last traded price during the main trading session.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "matching_principle": {
+        "zh": "严格价格优先，同价位按时间优先（strict price/time priority）；对未公开披露的订单类型（大宗订单Large-in-Scale、中间价订单Mid-Point）另有独立的规模/时间优先规则",
+        "en": "Strict price priority, with strict time priority at the same price level; orders exempted from pre-trade transparency (Large-in-Scale orders, Mid-Point orders) follow separate size/time priority rules",
+        "sources": [
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 4401/1）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Orders in the Central Order Book shall be executed according to strict price priority. Orders at the same price are ranked and executed according to strict time priority",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "order_types": {
+        "zh": "市价单（Market）、限价单（Limit）、止损单（Stop）、冰山单（Iceberg）、中间价单（Mid-Point/Primary Peg）、最小成交量单、仅参与集合竞价的VFU/VFCU订单、拍卖量发现单（Auction Volume Discovery, AVD）等，具体适用哪些类型按交易分组（trading group）而异",
+        "en": "Market, Limit, Stop, Iceberg, Mid-Point/Primary Peg, Minimum-quantity, auction-only VFU/VFCU orders, Auction Volume Discovery (AVD) orders, etc.; the specific set of order types available varies by trading group",
+        "sources": [
+          {
+            "title": "Notice n°4-01 Trading Manual（第2章各订单类型定义）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "tick_size": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "欧盟MiFID II（RTS 11）对最小报价单位实行跨交易所统一的分层表（按品种日均成交笔数与价格区间分档），并非Euronext自行制定的规则——这与本所「无单一监管机构」的结构性特点呼应：本字段设计假设是「交易所自定tick size」，对适用MiFID II统一tick size体制的欧盟交易所不完全成立；本次未找到Euronext自己公布的、区别于MiFID II标准表的补充说明，留空。",
+        "sources": [
+          {
+            "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "board_lot_size": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "odd_lot_handling": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "price_limits": {
+        "type": {
+          "enum": "dynamic_reference",
+          "zh": "双层价格区间机制——动态区间（dynamic collar，基准价为逐笔更新的最新成交价）+ 静态区间（static collar，基准价为当日开盘价或前日收盘参考价），触及阈值即触发预约期（reservation period），不是直接拒单的固定百分比涨跌停",
+          "en": "Two-layer price-range mechanism — dynamic collars (reference price updated after each trade) plus static collars (reference price is the day's opening price or the previous day's closing reference price); breaching a threshold triggers a reservation period rather than flatly rejecting orders as with a fixed daily limit",
+          "sources": [
+            {
+              "title": "Trading safeguards on the Euronext markets",
+              "url": "https://www.euronext.com/en/trading/market-quality/trading-safeguards-euronext-markets",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "quote": "Dynamic and static collars constitute the first and second layers of Euronext's circuit-breaker mechanism, respectively. The dynamic reference price and the static reference price are used to calculate both collars. The dynamic reference price changes throughout the trading day after each trade, with the last traded price becoming the new reference. The static reference price remains the same during all trading sessions unless it is manually changed by Euronext's Market Operations team.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "detail": null
+        },
+        "main_board": {
+          "zh": "动态区间：普通股±5%，旗舰指数成分股±3%；静态区间：普通股±10%（对照前收盘价），旗舰指数成分股±8%——「旗舰指数」按fee guide定义为CAC 40/AEX/BEL 20/PSI/SBF 120/AMX/ISEQ 20/OBX/FTSE MIB成分股",
+          "en": "Dynamic collars: ±5% for ordinary shares, ±3% for flagship-index constituents; static collars: ±10% (vs previous close) for ordinary shares, ±8% for flagship-index constituents — \"flagship index\" per the fee guide covers constituents of CAC 40/AEX/BEL 20/PSI/SBF 120/AMX/ISEQ 20/OBX/FTSE MIB",
+          "sources": [
+            {
+              "title": "Trading safeguards on the Euronext markets",
+              "url": "https://www.euronext.com/en/trading/market-quality/trading-safeguards-euronext-markets",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "quote": "Dynamic collars are based on the dynamic reference price ... This safeguard threshold automatically halts trading on a stock if its price reaches +/−5% price variation (or +/-3% if the stock is part of a flagship index) on the dynamic collar reference price. Static collars are based on the static reference price ... This safeguard threshold automatically halts trading on a stock if its price reaches +/−10% price variation (or +/-8% if the stock is part of a flagship index) on the static collar reference price.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "other_boards": {
+          "zh": "Euronext Growth/Access板块及衍生品市场另有各自的静态/动态区间参数（衍生品市场机制与Eurex类似，另设Dynamic Collar Reference Price/DCRP与Static Collar Reference Price/SCRP），具体数值本次未逐一核实",
+          "en": "Euronext Growth/Access segments and the derivatives markets carry their own static/dynamic collar parameters (the derivatives-market mechanism resembles Eurex's, with its own Dynamic/Static Collar Reference Price — DCRP/SCRP); exact values not individually verified this session",
+          "confidence": "low",
+          "sources": [
+            {
+              "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "Euronext Rule Book Book I - Harmonised Rules",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
+      },
+      "circuit_breaker": {
+        "enum": "stock_level",
+        "zh": "无独立于价格区间机制之外的全市场级熔断；动态/静态区间（见price_limits）本身是个股级机制，触发后进入预约期（reservation period），未见覆盖全市场所有品种的指数级熔断安排",
+        "en": "No market-wide circuit breaker separate from the price-collar mechanism; the dynamic/static collars (see price_limits) are themselves a stock-level mechanism that triggers a reservation period upon breach — no index-level, market-wide halt covering all instruments was found",
+        "detail": "与Eurex（同样只找到个股/合约级机制、未发现独立的全市场级熔断）情况类似，可能是本次检索范围局限，未逐条核实是否存在，见OPEN-QUESTIONS。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "quote": null
+      },
+      "volatility_interruption": {
+        "zh": "预约期（reservation period）：连续交易阶段理论撮合价触及适用阈值即触发预约期，至少持续3分钟；因动态区间触发的首次预约后，恢复交易有两种方式——由Euronext评估市场情况后人工设定参数，或按预约期内报价自动更新动态区间后自动撮合恢复；若自动方式仍在同方向再次触发预约，是否进一步调整区间/参考价须再经Euronext评估市场情况后决定",
+        "en": "Reservation period: triggered when the theoretical matching price during continuous trading breaches the applicable thresholds, lasting at least 3 minutes; upon the first reservation caused by a dynamic collar breach, resumption may follow either a manual process (parameters set by Euronext after assessing market conditions) or an automatic process with updated dynamic collars; if the automatic process is breached again in the same direction, any further adjustment to the collars or reference price is decided by Euronext only after a fresh market assessment",
+        "sources": [
+          {
+            "title": "Notice n°4-01 Trading Manual",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Euronext initiates a reservation period if, during the continuous trading phase, the theoretical price at which a security can be traded breaches the applicable thresholds. The reservation period shall last at least 3 minutes. ... Upon the first reservation caused by dynamic collars breach, the attempt to resume trading may take place following two possible processes depending on the type of securities: - Manual process with parameters determined by Euronext after an assessment of market conditions; - Automatic process with updated dynamic collars using the interval for uncrossing process mentioned in the Appendix. If upon this first trading resumption attempt, the updated collars are breached in the same direction (i.e. second consecutive downwards or second consecutive upwards reservation), any decision to adjust the collars and the reference price before resuming continuous trading will be made after an assessment of market conditions.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "见volatility_interruption；另有针对单一异常订单/异常事件的独立停牌能力，具体触发条件与恢复流程本次未逐条核实",
+        "en": "See volatility_interruption; a separate capacity to halt an instrument in response to a single disruptive order or unusual event also exists, exact trigger conditions and resumption process not individually verified this session",
+        "sources": [
+          {
+            "title": "Trading safeguards on the Euronext markets",
+            "url": "https://www.euronext.com/en/trading/market-quality/trading-safeguards-euronext-markets",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "the capacity to halt instruments subject to single orders that might disrupt the market",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "intraday_reversal": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "本次抓取材料未见对「当日回转交易」这一概念的直接对应表述——欧盟现货市场惯例上买入证券当日即可卖出（无T+1式限制），但未找到Euronext官方原文明确声明，不凭常识代入enum，留空。",
+        "sources": [
+          {
+            "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "short_selling": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "卖空规则源自欧盟层面统一的《卖空规则》（Regulation (EU) No 236/2012），由各国监管机构（如法国AMF、荷兰AFM）而非Euronext交易所本身执行——这与本所「无单一监管机构」的结构性特点呼应，本次抓取材料中未见Euronext自己发布的卖空机制说明页，留空不代入enum。",
+        "sources": [
+          {
+            "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "block_trade": {
+        "zh": "官网术语为「Euronext Block」，作为独立的大宗交易设施存在（见products章节），具体门槛与流程本次未逐条核实",
+        "en": "Officially termed \"Euronext Block\", operated as a dedicated block-trading facility (see products chapter); exact thresholds and workflow not individually verified this session",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "dark_pool": {
+        "zh": "存在非公开披露（dark）交易安排——大宗订单（Large-in-Scale）与中间价订单（Mid-Point Orders）在独立的非展示订单簿中撮合，按规模/时间优先原则执行",
+        "en": "Non-pre-trade-transparent (dark) trading exists — Large-in-Scale orders and Mid-Point orders match in a dedicated non-displayed order book, executed on a size/time priority basis",
+        "sources": [
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 4401/1(ii)）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Mid-Point Orders shall only interact between each other in a dedicated non-displayed order book and are executed according to size/time priority.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "market_maker_scheme": {
+        "zh": "存在多类流动性提供者安排（统称Liquidity Provider），含针对ETF的做市商计划、针对结构性产品的做市商义务，以及「零售流动性厂商」（Retail Liquidity Firm）——后者的报价仅能与零售订单撮合，享有同价位优先权；具体各计划的量化义务（点差、报价时长占比）本次未逐一核实",
+        "en": "Multiple categories of liquidity provider exist (collectively \"Liquidity Providers\"), including ETF market-maker programmes, Structured Product market-maker obligations, and \"Retail Liquidity Firms\" — whose quotes can only match Retail Orders and are given precedence at the same price level; the quantitative obligations of each programme (spread, quoting-time coverage) were not individually verified this session",
+        "sources": [
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Retail Liquidity Firm Quotes条款）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "at identical price, Retail Liquidity Firm Quotes have precedence to match with Retail Orders.",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "connect_schemes": {
+        "zh": "本所自身即是「一个交易所横跨多国市场」的互联互通式结构（七个市场共享同一中央订单簿/同一交易平台Optiq），与其他交易所之间是否另有独立的跨境互联互通安排（如与LSE、Nasdaq等的对接）本次未核实",
+        "en": "The exchange itself already embodies a \"one exchange spanning multiple countries\" connected structure (seven markets share one Central Order Book / one Optiq trading platform); whether separate cross-border connect schemes exist with other exchanges (e.g. LSE, Nasdaq) was not verified this session",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "derivatives": {
+        "trading_sessions": {
+          "pre_market": null,
+          "continuous_am": null,
+          "lunch_break": null,
+          "continuous_pm": null,
+          "after_market": null,
+          "night_session": null
+        },
+        "holidays_note": null,
+        "opening_mechanism": null,
+        "closing_mechanism": null,
+        "matching_principle": null,
+        "order_types": null,
+        "tick_size": null,
+        "contract_specs_note": null,
+        "price_limits": {
+          "type": null,
+          "main_board": null,
+          "other_boards": null
+        },
+        "circuit_breaker": null,
+        "volatility_interruption": null,
+        "trading_halt_mechanism": null,
+        "block_trade": null,
+        "market_maker_scheme": null,
+        "margin_practice_note": null,
+        "connect_schemes": null
+      }
+    },
+    "listing": {
+      "boards": [
+        {
+          "id": "euronext-regulated",
+          "name_zh": "Euronext（受监管市场）",
+          "name_native": "Euronext®",
+          "financial_threshold": "按上市时市值分三档：A档＞€1bn，B档€150m–€1bn，C档＜€150m；IPO时平均市值约€2bn，平均融资规模约€312m",
+          "target_companies": "面向财务实力雄厚、能满足最挑剔大型投资者要求的成熟大型企业；受MiFID II定义的「EU受监管市场」（EU Regulated Market）监管标准约束，上市门槛最高"
+        },
+        {
+          "id": "euronext-growth",
+          "name_zh": "Euronext Growth",
+          "name_native": "Euronext Growth®",
+          "financial_threshold": "IPO时平均市值约€102m，平均融资规模约€29m",
+          "target_companies": "面向中小成长型企业（SME）；属「中小企业成长市场」（SME Growth Market），依MiFID II定义不属于「受监管市场」，上市与持续披露要求较Euronext板简化"
+        },
+        {
+          "id": "euronext-access",
+          "name_zh": "Euronext Access（含Access+）",
+          "name_native": "Euronext Access® & Access+®",
+          "financial_threshold": "IPO时平均市值约€60m，平均融资规模接近€0",
+          "target_companies": "面向初创与早期中小企业，是通往Euronext Growth/Euronext板块的跳板；不受MiFID II「受监管市场」框架约束，准入门槛最低；Euronext Access+是其中专为快速成长初创企业设的特别分层"
+        }
+      ],
+      "review_system": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "三个板块各自的具体审核制度（谁审、审什么、注册制/核准制光谱上处于什么位置）本次未逐一拆解核实；且「审核」本身在多法域结构下可能因市场而略有差异，需要更细的研究才能填，暂留空。",
+        "sources": [
+          {
+            "title": "Choosing a Market（Euronext官网，三板块对比）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Choosing a Market（Euronext官网，三板块对比）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "transfer_between_boards": {
+        "zh": "官网明确提及Euronext Access企业「做大后可考虑转往Euronext Access+或Euronext Growth，进而转往Euronext受监管市场」，是有明文设计的板块间上升通道，具体转板财务/时间条件本次未逐条核实",
+        "en": "The site explicitly states that Euronext Access companies, once large enough, are \"encouraged to consider transferring to Euronext Access+ or Euronext Growth, and later to the Euronext regulated market\" — an explicitly designed upward transfer path between segments; exact financial/time conditions for transfer not individually verified this session",
+        "sources": [
+          {
+            "title": "Choosing a Market（Euronext官网）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Once companies are big enough, they are encouraged to consider transferring to Euronext Access+ or Euronext Growth, and later to the Euronext regulated market.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "continuing_obligations": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Choosing a Market（Euronext官网，三板块对比）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "suspension_resumption": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Choosing a Market（Euronext官网，三板块对比）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_conditions": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Choosing a Market（Euronext官网，三板块对比）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_process": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Choosing a Market（Euronext官网，三板块对比）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_transition_period": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Choosing a Market（Euronext官网，三板块对比）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "post_delisting_venue": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Choosing a Market（Euronext官网，三板块对比）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "indices": {
+      "meta": {
+        "verified": "2026-08-16",
+        "sources": [
+          {
+            "title": "Stock Indices（Euronext产品站，旗舰指数清单）",
+            "url": "https://live.euronext.com/en/products/indices",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium"
+      },
+      "items": [
+        {
+          "id": "cac-40",
+          "name_zh": "CAC 40指数",
+          "name_native": "CAC 40®",
+          "compiler": "self",
+          "weighting_method": "float_adjusted",
+          "flagship": "yes",
+          "description": "法国旗舰指数，巴黎市场蓝筹股；Euronext N.V.自身股票2025年9月起为成分股之一"
+        },
+        {
+          "id": "aex",
+          "name_zh": "AEX指数",
+          "name_native": "AEX®",
+          "compiler": "self",
+          "weighting_method": "float_adjusted",
+          "flagship": "yes",
+          "description": "荷兰旗舰指数，阿姆斯特丹市场蓝筹股；2025年9月成分股数从25家扩至30家"
+        },
+        {
+          "id": "bel-20",
+          "name_zh": "BEL 20指数",
+          "name_native": "BEL 20®",
+          "compiler": "self",
+          "weighting_method": "float_adjusted",
+          "flagship": "yes",
+          "description": "比利时旗舰指数，布鲁塞尔市场20家龙头股"
+        },
+        {
+          "id": "iseq-20",
+          "name_zh": "ISEQ 20指数",
+          "name_native": "ISEQ 20®",
+          "compiler": "self",
+          "weighting_method": "float_adjusted",
+          "flagship": "yes",
+          "description": "爱尔兰旗舰指数，都柏林市场20家龙头股"
+        },
+        {
+          "id": "psi",
+          "name_zh": "PSI指数",
+          "name_native": "PSI®",
+          "compiler": "self",
+          "weighting_method": "float_adjusted",
+          "flagship": "yes",
+          "description": "葡萄牙基准指数，里斯本市场"
+        },
+        {
+          "id": "obx",
+          "name_zh": "OBX指数",
+          "name_native": "OBX®",
+          "compiler": "self",
+          "weighting_method": "float_adjusted",
+          "flagship": "yes",
+          "description": "挪威基准指数，奥斯陆市场"
+        },
+        {
+          "id": "ftse-mib",
+          "name_zh": "FTSE MIB指数",
+          "name_native": "FTSE MIB",
+          "compiler": "ftse_russell",
+          "weighting_method": "float_adjusted",
+          "flagship": "yes",
+          "description": "意大利基准指数，米兰市场；与其余六个旗舰指数不同，由第三方FTSE Russell编制（历史上Borsa Italiana并入前即由FTSE与Borsa Italiana合资的指数公司编制），未见于Euronext「自编旗舰指数」清单页"
+        }
+      ]
+    },
+    "clearing": {
+      "settlement_cycle": {
+        "enum": "t2",
+        "zh": "T+2（欧盟现行统一结算周期）；欧盟已定于2027年10月11日统一改为T+1，Euronext已成立跨业务条线的T+1项目组配合过渡",
+        "en": "T+2 (the EU's current uniform settlement cycle); the EU has set a Union-wide move to T+1 for 11 October 2027, and Euronext has established a cross-business T+1 programme to support the transition",
+        "sources": [
+          {
+            "title": "T+1 programme（Euronext官网）",
+            "url": "https://www.euronext.com/en/regulation/t1-programme",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The new T+1 model shortens the EU securities settlement cycle, which is currently set to T+2. Under the new model, the settlement of securities transactions ... is completed on the business day immediately following the trade date (T+1). The go-live for the transition to T+1 is scheduled for 11 October 2027.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "detail": null
+      },
+      "ccp_name": {
+        "zh": "欧洲期货清算所（商业名，法定实体为Cassa di Compensazione e Garanzia S.p.A.，意大利公司）",
+        "en": "Euronext Clearing (commercial name; the legal entity is Cassa di Compensazione e Garanzia S.p.A., an Italian company, formerly the CCP of Borsa Italiana known as CC&G)",
+        "detail": "Euronext Clearing自2023年11月起承接现货市场清算（原经LCH SA清算），2024年9月起承接全部衍生品市场清算，是集团旗下唯一CCP，覆盖全部七个已整合市场。",
+        "sources": [
+          {
+            "title": "Clearing总览（Euronext官网）",
+            "url": "https://www.euronext.com/en/clearing",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Euronext Clearing is the new commercial name for the legal entity Cassa di Compensazione e Garanzia S.p.A.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "csd_name": {
+        "zh": "Euronext Securities（集团自有CSD网络，运营实体分布在哥本哈根/米兰/奥斯陆/波尔图四地）；里斯本、米兰、奥斯陆三个市场现已由Euronext Securities提供托管结算，阿姆斯特丹/布鲁塞尔/巴黎计划自2026年9月起迁移至Euronext Securities Milan实体；都柏林及迁移前的阿姆斯特丹/布鲁塞尔/巴黎具体托管机构本次未核实（推测使用各自本国既有CSD，未找到官方原文明确点名）",
+        "en": "Euronext Securities (the Group's own CSD network, with operating entities in Copenhagen, Milan, Oslo and Porto); Lisbon, Milan and Oslo are already settled/custodied via Euronext Securities, while Amsterdam, Brussels and Paris are scheduled to migrate to the Euronext Securities Milan entity from September 2026; the CSD currently used by Dublin, and by Amsterdam/Brussels/Paris prior to migration, was not verified this session (likely each country's pre-existing national CSD, but no primary source explicitly named it)",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext官网，Euronext Securities结算整合说明）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Euronext Amsterdam, Brussels and Paris will designate Euronext Securities as the CSD for the settlement of equity trades from September 2026. These three markets will join the other Euronext markets in Lisbon, Milan and Oslo, already supported by Euronext Securities.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "initial_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "delivery_method": {
+        "enum": "na",
+        "zh": "现货市场为主，不适用衍生品式交割概念；集团旗下另有衍生品市场（见products章节）存在实物/现金交割安排，但本文件聚焦现货Securities Markets，衍生品市场交割方式本次未逐一核实",
+        "en": "Predominantly a cash-equity market — the physical/cash delivery concept does not apply; the Group's derivatives markets (see products chapter) do carry physical/cash delivery arrangements, but this file focuses on the Securities (cash) Markets and derivatives-market delivery terms were not individually verified this session",
+        "sources": [
+          {
+            "title": "Choosing a Market（Euronext官网，用于确认Euronext/Euronext Growth/Euronext Access三板块均为股票现货市场性质）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "detail": null,
+        "quote": null
+      },
+      "last_trading_day_rule": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "default_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "participants": {
+      "investor_structure": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "account_opening_requirements": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "suitability_management": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "foreign_access_channel": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "membership_structure": {
+        "zh": "统一的「Euronext Membership」资格体系：申请人须向拟加入的具体市场运营实体（Relevant Euronext Market Undertaking）申请并获书面批准，资质要求含本国监管机构授权/牌照、员工须具备英语或所在法域语言的业务能力、充足的组织与资源安排等；会籍不可转让；自然人与独资企业不得成为Euronext证券市场会员",
+        "en": "A unified \"Euronext Membership\" regime: an applicant must apply to, and receive the written approval of, the specific Market Undertaking it wishes to join, subject to eligibility criteria including home-regulator authorisation, staff fluency in English or the relevant jurisdiction's language, and adequate organisational/resource arrangements; membership is non-transferable; natural persons and sole proprietorships are not eligible to become Euronext Securities Members",
+        "sources": [
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Chapter 2 Euronext Membership）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Natural persons and sole proprietorships are not eligible to become Euronext Securities Members.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "broker_landscape": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "infrastructure": {
+      "market_data_levels": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_latency": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "data_pricing_model": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "historical_data_availability": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "trading_system_name": {
+        "zh": "Optiq",
+        "en": "Optiq®",
+        "detail": "2017年上线的自有交易平台，覆盖集团全部现货与衍生品市场（含2023-2024年分阶段完成的Borsa Italiana迁移），是七个市场共享统一中央订单簿的技术基础",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext官网）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "After 2 years in development, Euronext launches Optiq®, a new cutting-edge trading platform that gives investors access to trading across all asset classes available on Euronext's pan-European exchanges and its single order book, with maximum flexibility, simplified and harmonised messaging as well as high performance and stability.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
+      "access_methods": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "major_outage_history": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    },
+    "costs": {
+      "commission_structure": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "本字段指投资者向经纪商支付的佣金结构，未找到统一公开的经纪商佣金标准（属经纪商自定，非交易所规则），与exchange_fees（交易所本身向会员收取的费用）区分，留空。",
+        "sources": [
+          {
+            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
+            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "exchange_fees": {
+        "zh": "标准股票交易费提供两种计价方式（会员逐月二选一）：方式一（默认）按已执行订单笔数阶梯收费（前70万笔€0.13/笔，其后每笔递减至最低€0.05）+ 按月成交金额阶梯收费（从0.95个基点递减至0.45个基点）；方式二为「最低承诺费+更低单笔/按值费率」的替代方案，区分蓝筹股（CAC 40/AEX/BEL 20/PSI/SBF 120/AMX/ISEQ 20/OBX/FTSE MIB成分股）与其他证券两档费率",
+        "en": "Standard equity trading fees offer two pricing options (member groups choose monthly): Option 1 (default) combines a tiered per-executed-order charge (€0.13/order for the first 700,000 orders, declining to €0.05) with a tiered monthly value-based charge (declining from 0.95bps to 0.45bps); Option 2 is an alternative \"minimum commitment fee + lower per-order/value rate\" structure, with separate rates for blue-chip constituents (CAC 40/AEX/BEL 20/PSI/SBF 120/AMX/ISEQ 20/OBX/FTSE MIB) versus other securities",
+        "sources": [
+          {
+            "title": "Euronext Cash Markets Trading Fee Guide",
+            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "First 700,000 executed orders €0.13 Next 500,000 executed orders €0.08 All subsequent executed orders €0.05 ... First €0.84bn executed (≤€0.84bn) 0.95 bps",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "clearing_fees": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
+            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "regulatory_fees": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
+            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      },
+      "stamp_duty": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "印花税属各国税法事项而非交易所规则（如法国对本国大市值公司股票交易征收金融交易税，见financial_transaction_tax），本次未逐国核实，留空不混同。",
+        "sources": [
+          {
+            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
+            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "financial_transaction_tax": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "法国、意大利均对本国上市大市值公司股票交易开征金融交易税（法国FTT、意大利Tobin Tax式规则），荷兰/比利时/爱尔兰/葡萄牙/挪威税制安排各异；这是「一所多国」结构下税费类字段的典型难点——单一字段无法承接七国不同税制，本次未逐国核实具体税率与征收对象，留空不代入。",
+        "sources": [
+          {
+            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
+            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "capital_gains_tax": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "同financial_transaction_tax，七国资本利得税制各异，单一字段无法承接，留空。",
+        "sources": [
+          {
+            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
+            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "",
+        "confidence": "low",
+        "detail": "同上，七国股息预扣税率各异（且与投资者居民身份、双边税收协定相关），单一字段无法承接，留空。",
+        "sources": [
+          {
+            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
+            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "quote": null
+      },
+      "implicit_costs_note": {
+        "zh": "",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
+            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null
+      }
+    },
+    "risks": {
+      "fx_risk_note": {
+        "zh": "六个欧元区市场（阿姆斯特丹/布鲁塞尔/都柏林/里斯本/巴黎/米兰）无资本管制，欧元自由浮动；奥斯陆市场以非欧元的挪威克朗（NOK）计价结算，是本所内部唯一存在真实汇率敞口的市场，交易该市场证券对欧元区投资者构成汇率风险，其余六个市场之间无汇率风险",
+        "en": "The six euro-area markets (Amsterdam, Brussels, Dublin, Lisbon, Paris, Milan) have no capital controls and the euro floats freely; the Oslo market is priced and settled in Norwegian Krone (NOK), the only market within the group carrying genuine FX exposure — trading its securities poses FX risk to euro-area investors, while no FX risk exists among the other six markets",
+        "detail": "属结构性推论（基于各国法定货币这一基础事实），非交易所自设规则，未附强quote。",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "quote": null,
+        "sources": null
+      },
+      "political_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "liquidity_risk_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      },
+      "regulatory_change_risk_note": {
+        "zh": "正处于两项欧盟层面重大制度变革窗口期：（1）结算周期T+2→T+1（2027-10-11生效，见clearing.settlement_cycle）；（2）2025年新纳入的雅典市场尚未整合进统一规则手册与Optiq平台（计划2027-06完成），整合完成前雅典与其余七个市场在规则细节上仍不完全一致",
+        "en": "Currently in a window of two major EU-level structural changes: (1) the settlement cycle move from T+2 to T+1 (effective 11 October 2027, see clearing.settlement_cycle); (2) the newly-added Athens market (2025) has not yet been integrated into the harmonised rulebook or Optiq (integration targeted for June 2027) — until completion, Athens' detailed rules remain not fully aligned with the other seven markets",
+        "sources": [
+          {
+            "title": "Euronext Regulated Markets（Euronext官网）",
+            "url": "https://www.euronext.com/en/regulation/euronext-regulated-markets",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Euronext Athens markets are scheduled to be integrated in the Euronext rulebooks upon the migration to Optiq (June 2027).",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null,
+        "detail": null
+      },
+      "enforcement_note": {
+        "zh": "",
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "en": null,
+        "enum": null,
+        "detail": null,
+        "quote": null,
+        "sources": null
+      }
+    }
+  }
+}

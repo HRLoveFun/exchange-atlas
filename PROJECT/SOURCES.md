@@ -52,6 +52,25 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 
 ---
 
+## 经验：WebSearch 命中的独立 PDF 可能是过期存档，规则数字变动过的字段务必交叉核对
+
+补全 `hk-hkex` 主板/GEM 上市财务门槛时（2026-08-17）踩到的坑：WebSearch 命中的
+`cn-rules.hkex.com.hk` 中文版《上市规则》第八章单行本 PDF（`HKEXCN_TC_5088_VER2598.pdf`）
+抓下来后，「盈利测试」门槛显示为 2,000万／3,000万港元——但同一天抓取的英文版 Chapter 8 PDF
+（`en-rules.hkex.com.hk`）显示 3,500万／4,500万港元。两者本应是同一条规则的中英对照，数字却对不上，
+一查才发现主板盈利测试门槛在 2022-01-01 生效的规则修订中从 20/30 上调到 35/45（第三方法律简报可
+交叉确认这个日期，`confidence` 只能标 medium），说明搜索引擎索引到的是**修订前的旧版存档 PDF**，
+文件本身返回 HTTP 200、看起来"抓到了"，但内容已经不是现行规则——**HTTP 200 不等于内容是现行版本**，
+尤其是规则数值这类会随时间修订的字段。
+
+**做法**：交易所规则手册站点如果有「整章合并显示」页面（如本例 `entiresection/<id>`，服务端渲染、
+非独立托管 PDF、由规则手册导航体系直接生成），比孤立的单章 PDF 更可能反映当前生效版本，值得优先
+用来交叉核对数字，尤其是官方文档本身没有清楚标注修订日期/版本号的情况下。**能拿到官方双语版本的
+交易所，中英文数字应该逐字对得上——对不上是信号，不是噪音，一定要停下来查清楚哪个版本过期，不能
+两个数字里随便选一个填。**
+
+---
+
 ### 上海证券交易所 Shanghai Stock Exchange (SSE) `cn-sse`
 - `sse.com.cn` | 官方 | zh | WebFetch 对规则总览页（`lawandrules/sselawsrules/overview/`）返回 403；换 `lawandrules/sselawsrules2025/overview/`（新版路径）+ curl 常规 UA 可过（HTTP 200）；PDF 用 `pdftotext -layout` 提取纯文本再 grep 定位条款，比逐页翻 PDF 快得多 | 规则总览页本身不含全文直链，需从站内导航多跳到具体规则文档；官网有《现行有效的业务规则清单》目录 PDF（见下）能确认某规则「现行有效」，但清单本身不含可点击的逐条直达链接，还没找到《交易规则》全文在 sse.com.cn 上的直接 URL——这是本节唯一的已知缺口，下次找到了请替换掉 mgzq.com 那条并把相关字段 confidence 升回 high
   - 规则总览: https://www.sse.com.cn/lawandrules/sselawsrules2025/overview/
@@ -59,6 +78,10 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 上证综合指数编制方案 PDF: https://www.sse.com.cn/market/sseindex/indexlist/indexdetails/indexmethods/c1/000001_000001_CN.pdf
   - 指数熔断暂停通知（2016，上证发〔2016〕4号）: http://www.sse.com.cn/aboutus/mediacenter/hotandd/c/c_20160107_4033450.shtml
   - 沪市市场运行情况例行发布（周度市值/上市公司数统计，URL 每周变化，需重新搜索定位当期文件）: http://www.sse.com.cn/aboutus/mediacenter/conference/
+  - 《上海证券交易所股票上市规则（2026年4月修订）》公告页（上证发〔2026〕42号，2024年4月30日发布的原规则关于「上市条件」的条款未被本次修订变动，本次仅修订董事会秘书等治理条款，但附件为整合后现行有效全文）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/c_20260424_10816589.shtml
+  - 《上海证券交易所股票上市规则（2026年4月修订）》全文 DOCX（第三章第一节 3.1.1-3.1.6 为主板上市条件，含市值及财务指标三选一标准、红筹企业标准、差异表决权标准；⚠️ 该公告页挂了两个 docx，另一个 `beaf9e6b9ded4380a24ca148cc3902e2.docx`（20KB）只是本次修订的「修订说明」，不含完整条文，第一次误取过要注意区分）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx（HTTP 200，175KB，⚠️ `.docx` 格式，`tools/fetch.py` 会按扩展名规则误存为 `.html`，字节内容不受影响；用 macOS `textutil -convert txt` 转纯文本后可直接 grep，比转 PDF 更简单)
+  - 《上海证券交易所科创板股票上市规则（2026年4月修订）》公告页（上证发〔2026〕43号）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/c_20260424_10816592.shtml
+  - 《上海证券交易所科创板股票上市规则（2026年4月修订）》全文 DOCX（第二章第一节 2.1.1-2.1.4 为科创板上市条件，含市值及财务指标五选一标准、红筹企业标准、差异表决权标准；⚠️ 同一公告页下 `cc4a8a0e637144ea93285a3773e3965a.docx`（16KB）同样只是修订说明，不是全文）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/10816592/files/8d80222543f64159ac5d177b7aace71c.docx（HTTP 200，172KB，同上 `.docx` 注意事项）
 - `mgzq.com` | 第三方（券商网站镜像的官方文件） | zh | curl 常规 UA 可过（499KB） | 《上海证券交易所交易规则（2023年修订）》镜像件，内含第六章"科创板交易特别规定"。⚠️ 非交易所自有域名，按 CLAUDE.md 二第3条，仅凭此来源的字段 `confidence` 上限为 `medium`，不得标 `high`——即使摘录到了逐字 quote 也一样，因为无法排除镜像件被静默改动的风险
   - 交易规则（2023年修订）: https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf
 - `csrc.gov.cn` | 监管 | zh/en | curl 常规 UA 可过；`common_list.shtml` 类列表页有缓存滞后现象，仅用于确认机构名称与域名，不作为具体规则条款出处 | 中国证券监督管理委员会（CSRC），SSE 的政府监管机构
@@ -81,8 +104,40 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 卖空监管规则: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en
   - 结算总览（CCASS）: https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en
   - 上市规则总览: https://www.hkex.com.hk/Listing/Rules-and-Guidance/Listing-Rules?sc_lang=en
+- `en-rules.hkex.com.hk`（英文版规则手册，独立域名） | 官方 | en | curl 常规 UA 200，未见反爬；**单章节 Rulebook 落地页（如 `/rulebook/chapter-8-qualifications-listing`）本身是纯 JS 单页应用外壳，curl 只能拿到导航栏、抓不到正文（grep 不到任何规则数字）——真正含正文的是同一站点下的章节 PDF 直链**，需要先 WebSearch 定位具体 PDF URL（搜索关键词里带 `en-rules.hkex.com.hk` + 章节名，PDF 文件名形如 `HKEX4476_<element_id>_VER<version>.pdf`，无法直接从章节 slug 拼出，必须先搜到） | 用于补全 `listing.boards[].financial_threshold`（2026-08-17）
+  - Main Board Listing Rules Chapter 8《股本证券上市资格》PDF（8.05条盈利测试/市值收益现金流测试/市值收益测试三选一，8.09条一般市值门槛）: https://en-rules.hkex.com.hk/sites/default/files/net_file_store/HKEX4476_2301_VER24281.pdf（HTTP 200，86KB）
+  - GEM Listing Rules Chapter 11《股本证券上市资格》PDF（11.12A条现金流测试/市值收益研发测试二选一，11.23(6)条一般市值门槛）: https://en-rules.hkex.com.hk/sites/default/files/net_file_store/HKEX4476_567_VER38010.pdf（HTTP 200，74KB）
+  - GEM Listing Financial Eligibility（一页纸官方摘要，两套测试数字与 Chapter 11 正文完全对应，适合先核对再啃全文）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Getting-Started/GEM-Listing-Financial-Eligibility-eng.pdf（HTTP 200，59KB，域名归入 hkex.com.hk 一组）
+- `cn-rules.hkex.com.hk`（中文版规则手册，独立域名，与 en-rules 站点结构一致但非同一部署） | 官方 | zh-Hant | curl 常规 UA 200 | ⚠️**踩坑记录**：WebSearch 命中的单个章节 PDF（`HKEXCN_TC_5088_VER2598.pdf`，标题含「第八章 上市資格」）抓下来后发现「盈利測試」门槛是 2,000万/3,000万港元——与同一天抓取的英文版 Chapter 8 PDF（3,500万/4,500万港元）不一致。核对后确认**该中文单章 PDF 是未更新的旧版本**（页脚版本号明显早于英文版，很可能是主板盈利测试 2022-01-01 上调门槛前的存档件，搜索引擎索引到了旧文件未清理），**不能直接采信 WebSearch 命中的中文规则 PDF，必须用官网站内当前生效的整合页面交叉核对**。改用 `/entiresection/<id>` 这个「整章合并显示」页面（HTML 服务端渲染、非 JS 外壳，能 grep 到正文，比单章 PDF 更可能是当前生效版本，因为它是规则手册导航体系直接生成的页面而非独立托管的旧 PDF）验证，数字与英文版完全一致（3,500万/4,500万港元），已采信整合页版本，弃用单章旧 PDF
+  - 主板上市规则全章合并页（Entire Section，含第八章原文，已用于交叉核对盈利测试等数字，与英文版一致）: https://cn-rules.hkex.com.hk/entiresection/4416（HTTP 200，3.6MB，务必 grep 关键词定位，不要整页阅读）
+  - GEM上市规则全章合并页（Entire Section，含第十一章原文与 2.12 条 GEM 市场定位表述）: https://cn-rules.hkex.com.hk/entiresection/4417（HTTP 200，2.9MB）
+  - ⚠️ 已知过时、不要再引用：主板第八章中文单行本 PDF（盈利测试门槛为旧版 2,000万/3,000万港元）: https://cn-rules.hkex.com.hk/sites/default/files/net_file_store/HKEXCN_TC_5088_VER2598.pdf
+- `hkex.com.hk`（衍生品市场相关页面，与主站同域名，2026-08-17 补充登记）
+  - 衍生品市场交易时段（Derivatives Market Trading Hours）: https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=en（HTTP 200，405KB）
+  - 衍生品市场交易时段中文版: https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=zh-hk（HTTP 200，400KB）
+  - 衍生品市场交易机制总览（Trading Mechanism）: https://www.hkex.com.hk/Services/Trading/Derivatives/Overview/Trading-Mechanism?sc_lang=en（HTTP 200，368KB）
+  - 衍生品市场交易机制总览中文版: https://www.hkex.com.hk/Services/Trading/Derivatives/Overview/Trading-Mechanism?sc_lang=zh-hk（HTTP 200，379KB）
+  - HKATS（香港期货自动交易系统）介绍: https://www.hkex.com.hk/Services/Trading/Derivatives/Infrastructure/HKATS?sc_lang=en（HTTP 200，368KB）
+  - 收市后交易时段 FAQ（After-Hours Trading, AHT；⚠️ URL 路径本身含半角括号 `(AHT)`，本项目 `tools/fetch.py` 的 `URL_RE` 遇到半角 `)` 会误判为注释开始，把 URL 截断——这是本次新发现的 fetch.py 限制，本条按 %28/%29 百分号编码登记规避，见 add-exchange skill 回写）: https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/After-Hours-Trading-%28AHT%29?sc_lang=en（HTTP 200，404KB）
+  - 收市后交易时段 FAQ 中文版（含 T+1 时段 ±6%/±7% 价格上下限机制、短暫停牌機制 THM 的中文原文表述）: https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/After-Hours-Trading-%28AHT%29?sc_lang=zh-hk（HTTP 200，420KB）
+  - 衍生品市場波動調節機制 FAQ（Volatility Control Mechanism, VCM，与证券市场 VCM 是同名但独立的两套机制，触发阈值/覆盖品种不同；同样因 URL 含半角括号改用 %28/%29 编码登记）: https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/Volatility-Control-Mechanism-%28VCM%29?sc_lang=en（HTTP 200，370KB）
+  - 衍生品市場波動調節機制 FAQ 中文版: https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/Volatility-Control-Mechanism-%28VCM%29?sc_lang=zh-hk（HTTP 200，371KB）
+  - 衍生品市場 VCM 交易机制说明 PDF（同样因 URL 含半角括号改用 %28/%29 编码登记）: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Trading/Derivatives/Trading-Mechanism/Volatility-Control-Mechanism-%28VCM%29/Trading-Mechanism-for-VCM-141020221.pdf（HTTP 200，908KB）
+  - 恒指期货及期权产品页（HSI Futures & Options；同样因 URL 含半角括号改用 %28/%29 编码登记）: https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-Index-%28HSI%29/Hang-Seng-Index-Futures-Options?sc_lang=en（HTTP 200，439KB）
+  - 恒生科技指数期货及期权产品页（Hang Seng TECH Index Futures & Options）: https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-TECH-Index-Futures-and-Options/Hang-Seng-TECH-Index-Futures-Options?sc_lang=en（HTTP 200，269KB）
+  - 恒生中国企业指数期货及期权产品页（HSCEI Futures & Options）: https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-China-Enterprises-Index/Hang-Seng-China-Enterprises-Index-Futures-Options?sc_lang=en（HTTP 200，413KB）
+  - 股票期货产品页（Stock Futures）: https://www.hkex.com.hk/Products/Listed-Derivatives/Single-Stock/Stock-Futures?sc_lang=en（HTTP 200，578KB）
+  - 衍生品市场做市商计划（Market Maker Obligations and Incentives）: https://www.hkex.com.hk/Products/Listed-Derivatives/Market-Maker-Program/Market-Maker-Obligations-and-Incentives?sc_lang=en（HTTP 200，743KB）
+  - 衍生品市场做市商计划中文版: https://www.hkex.com.hk/Products/Listed-Derivatives/Market-Maker-Program/Market-Maker-Obligations-and-Incentives?sc_lang=zh-hk（HTTP 200，734KB）
+  - 衍生品结算风险管理／保证金（Margin）: https://www.hkex.com.hk/Services/Clearing/Listed-Derivatives/Risk-Management/Margin?sc_lang=en（HTTP 200，376KB）
+  - 衍生品结算风险管理／保证金中文版（含 PRiME/SPAN 兼容算法的中文表述，⚠️ 页面注明「结算所按金计算方法 – PRiME」条目本身只有英文版）: https://www.hkex.com.hk/Services/Clearing/Listed-Derivatives/Risk-Management/Margin?sc_lang=zh-hk（HTTP 200，387KB）
+  - HKFE 于 2000 年成为 HKEX 全资附属公司的新闻稿（"Hong Kong Futures Exchange becomes a subsidiary of Hong Kong Exchanges and Clearing Limited"）: https://www.hkex.com.hk/News/News-Release/2000-HKFE/p030600?sc_lang=en（HTTP 200，351KB；⚠️ 原文明确 HKFE 是 HKEX 的全资附属公司，法律上是集团内独立法人的子公司，不是与 HKEX 本身完全同一法人——与本文件先前"同一法人实体内业务线"的印象不完全一致，见 market_structure.derivatives 字段说明）
 - `assets.kpmg.com` | 第三方（四大会计师事务所税务简报） | en | 未测试反爬，本次一次性 curl 成功 | 用于印花税税率调整确认；`confidence` 标 medium
-- `hsi.com.hk`（恒生指数公司官网） | 官方（第三方指数编制商，非交易所本身） | ⚠️ 纯 JS 单页应用（SPA），curl 只能拿到空壳 HTML，需改用可执行 JS 的方式（如 headless browser）才能抓到真实内容——本次未采用，指数体系相关字段改用第三方综述作为来源
+- `hsi.com.hk`（恒生指数公司官网） | 官方（第三方指数编制商，非交易所本身） | ⚠️ 主站是纯 JS 单页应用（SPA），curl 只能拿到空壳 HTML；但 `/static/uploads/contents/...` 路径下的方法论 PDF 与 Factsheet 是静态资源，不受 SPA 限制，curl 常规 UA 可直接 200 抓到——2026-08-17 新发现，此前记录的"改用第三方综述"结论对这两类文件不再成立，指数方法论字段应优先用这些 PDF | 恒生中国企业指数、恒生科技指数两条新增指数条目的编制方法一手依据
+  - 恒生中国企业指数方法论（Hang Seng China Enterprises Index Methodology）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/methodologies/IM_hsceie.pdf（HTTP 200，177KB）
+  - 恒生中国企业指数 Factsheet（2026年6月版，含基本参数速览）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/factsheets/hsceie.pdf（HTTP 200，848KB）
+  - 恒生科技指数方法论（Hang Seng TECH Index Methodology）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/methodologies/IM_hsteche.pdf（HTTP 200，284KB）
+  - 恒生科技指数 Factsheet（2026年6月版）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/factsheets/hsteche.pdf（HTTP 200，1.03MB）
 
 ### 纽约证券交易所 New York Stock Exchange (NYSE) `us-nyse`
 - `nyse.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬；注意站内不少旧 URL 会 301/302 跳转到新路径（如 `/products/etp-limit-up-limit-down` 跳到 `/trade/trading-information`），curl 要带 `-L` 跟随重定向 | ⚠️ NYSE 集团旗下有 NYSE、NYSE American、NYSE Arca、NYSE National、NYSE Texas 多个 SEC 注册的独立交易所实体（`group_id: nyse-group`），很多页面把几个实体的信息混在一起讲，摘引时要看清楚是哪个实体（本文件只收 NYSE 本身/Tape A 的信息）
@@ -111,6 +166,50 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Regulations Regarding Margin Transactions and Loans for Margin Transactions PDF: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/regs_margin-loans_transactions_20250401.pdf（HTTP 200，175KB）
   - Clearing & Settlement Summary（JSCC/JASDEC 角色说明）: https://www.jpx.co.jp/english/equities/clearing-settlement/outline/index.html（HTTP 200）
   - T+2 结算周期改革说明（2019-07-16生效）: https://www.jpx.co.jp/english/equities/clearing-settlement/tplus2-settlement-cycle/index.html（HTTP 200）
+  - Initial Listing Criteria（三板初次上市门槛速查表，Prime/Standard/Growth 各一个 URL，含股东人数/流通股数/流通股市值/流通股比例/总市值/净资产/利润销售额门槛，与 Securities Listing Regulations Rule 205/211/217 的条文数值完全对应，可交叉核实）：
+    - Prime: https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html（HTTP 200，36KB）
+    - Standard: https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html（HTTP 200，36KB）
+    - Growth: https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html（HTTP 200，35KB）
+    - ⚠️ 页面视觉上是三个 tab 切换同一张表，但每个 tab 对应独立 URL 且该 tab 内容已服务端渲染进静态 HTML（不是纯 JS 异步加载），curl 三个 URL 各自都能拿到对应板块完整数值，不需要模拟点击
+  - Overview of Market Restructuring（2022年4月4日新三板体系改制说明，含新旧板块对应关系、每板"概念"定性表述、改制时间线）: https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html（HTTP 200，38KB）
+
+### 纳斯达克证券交易所 The Nasdaq Stock Market `us-nasdaq`
+- `nasdaq.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬 | Nasdaq Inc 集团层面的公司站，覆盖监管框架、公司概况/历史、市场数据产品说明、指数产品说明等叙述性内容；不含逐条规则条文（规则条文在 `nasdaqtrader.com`/`listingcenter.nasdaq.com`）
+  - Market Regulation（监管架构总览，Nasdaq Regulation 与 FINRA 关系）: https://www.nasdaq.com/market-regulation（HTTP 200，310KB）
+  - Market Regulation: Listings Review（上市审核团队职能）: https://www.nasdaq.com/market-regulation/americas/listing-review（HTTP 200，235KB）
+  - About（集团概况，多国交易所版图）: https://www.nasdaq.com/about（HTTP 200，287KB）
+  - Nasdaq TotalView（行情数据产品，Level 1/2/逐笔深度）: https://www.nasdaq.com/solutions/data/equities/nasdaq-totalview（HTTP 200，344KB）
+  - About Matching Engines（撮合引擎技术说明，未点名 Nasdaq 自身系统版本号）: https://www.nasdaq.com/solutions/fintech/marketplace-technology/about-matching-engines（HTTP 200，205KB）
+  - Nasdaq Composite 指数产品页: https://www.nasdaq.com/solutions/global-indexes/nasdaq-composite（HTTP 200，306KB）
+  - Nasdaq Celebrates 50 Years of Innovation（新闻稿，1971年成立、"世界首个全电子报价系统"）: https://www.nasdaq.com/press-release/nasdaq-celebrates-50-years-of-innovation-2021-02-08（HTTP 200，175KB）
+  - Nasdaq CEOs Recall 50 Years of Innovation（历史访谈文章，脱离NASD独立、2005年NDAQ挂牌细节）: https://www.nasdaq.com/articles/nasdaq-ceos-recall-50-years-of-innovation（HTTP 200，194KB）
+  - About Nordic Exchanges（欧洲子公司沿革，Nasdaq Stockholm/Copenhagen/Helsinki/Iceland/Baltic 各交易所并购时间线，group_id 依据）: https://www.nasdaq.com/european-markets/about-nordic-exchanges（HTTP 200，334KB）
+  - NDAQ 个股行情页（页面确认 Nasdaq, Inc. 普通股代码为 NDAQ，但页面本身未点名挂牌交易所是哪一家——nasdaq.com/market-activity/stocks/ 这一URL模式同时承载非纳斯达克上市股票的行情，不构成"在纳斯达克挂牌"的独立证据，仅供交叉核对代码）: https://www.nasdaq.com/market-activity/stocks/ndaq（HTTP 200，283KB）
+  - Market Activity（FAQ 形式说明 Composite 与 Nasdaq-100 定义区别、指数数据延时口径）: https://www.nasdaq.com/market-activity（HTTP 200，247KB）
+- `nasdaqtrader.com` | 官方（会员/交易者服务站，Nasdaq Inc 旗下） | en | curl + 常规 UA 全部 200，未见反爬；不少页面是历史悠久的旧版 ASP 站（`Trader.aspx`），内容仍在维护更新 | 交易机制细则的主要来源：交易时段、熔断、LULD、开收盘集合竞价、做市商、Reg SHO、价格表均在这里，比 `nasdaq.com` 集团站更贴近规则原文
+  - The Nasdaq Stock Market（交易时段总览）: https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities（HTTP 200，67KB）
+  - Market Wide Circuit Breaker: https://www.nasdaqtrader.com/trader.aspx?id=CircuitBreaker（HTTP 200，54KB）
+  - Market-Wide Circuit Breakers FAQ（PDF，与 NYSE 引用同一份跨市场联合计划文件，阈值 7/13/20% 三级）: https://www.nasdaqtrader.com/content/marketregulation/mwcb_faq.pdf（HTTP 200，160KB）
+  - Limit Up-Limit Down FAQ（PDF，含 Tier1/Tier2 按价格分层的具体百分比价格带表，比 us-nyse 抓到的更细）: https://www.nasdaqtrader.com/content/MarketRegulation/LULD_FAQ.pdf（HTTP 200，189KB）
+  - The Nasdaq Opening and Closing Crosses: https://www.nasdaqtrader.com/Trader.aspx?id=OpenClose（HTTP 200，61KB）
+  - Price List - Trading（连接/交易费率表）: https://www.nasdaqtrader.com/Trader.aspx?id=PriceListTrading2（HTTP 200，352KB）
+  - Market Maker Process（含"清算机构请致电 NSCC"字样，ccp_name 的官方原文依据）: https://www.nasdaqtrader.com/trader.aspx?id=marketmakerprocess（HTTP 200，55KB）
+  - Regulation SHO: https://www.nasdaqtrader.com/Trader.aspx?id=regsho（HTTP 200，53KB）
+  - Short Sale Circuit Breaker（Rule 201 报升规则）: https://www.nasdaqtrader.com/trader.aspx?id=ShortSaleCircuitBreaker（HTTP 200，47KB）
+- `lseg.com`（伦敦证券交易所集团旗下 FTSE Russell，第三方指数编制商） | 官方（第三方指数编制商官网） | en | curl 常规 UA 200 | 用于确认罗素2000指数（ADR-018 引入的 `scope: market` 跨交易所市场基准指数样本，成分股横跨 `us-nyse`/`us-nasdaq` 两所，不专属单一交易所）编制方为 FTSE Russell、指数定位与覆盖范围
+  - Russell 2000® Index: https://www.lseg.com/en/ftse-russell/indices/russell-2000-index（HTTP 200，202KB）
+- `spglobal.com`（S&P Dow Jones Indices，标普500指数编制方） | 官方（第三方指数编制商官网） | — | **全站被拦，任何路径（含首页、Index Finder、方法论 PDF）均返回 403**，换 UA/加 Accept-Language 头无效，与 `sec.gov`/`finra.org`/`spglobal.com` 同一类边缘防护拦截 | 无法直接抓取标普500官方页面确认编制方法论细节；`data/exchanges/us-nyse.yml`/`us-nasdaq.yml` 里的标普500条目按 ADR-018 只填最简字段（`id`/`name_zh`/`name_native`/`compiler`/`flagship`），`compiler: sp_dj` 与官方名称改用下方 `en.wikipedia.org` 交叉确认，未使用 WebSearch 摘要直接代入
+- `en.wikipedia.org` | 第三方 | en | curl 常规 UA 200 | 标普500官网（spglobal.com）被拦时的降级来源，仅用于确认标普500指数的编制方（S&P Dow Jones Indices）与官方全称这类基本事实，不用于任何规则性数值
+  - S&P 500: https://en.wikipedia.org/wiki/S%26P_500（HTTP 200）
+- `listingcenter.nasdaq.com` | 官方（上市规则站） | en | ⚠️ Rulebook 交互式条文页（`/rulebook/nasdaq/rules/...`）多次尝试均返回 403（含加 12 秒延时重试），疑似该子路径有独立 WAF，非限流性质（NYSE/JPX/Eurex 经验里的限流是"连续请求后开始 403"，这里是首次请求即 403，且延时重试无效）；但根目录下的静态 PDF 资源（`/assets/...`）可以正常 curl 到，200 | Initial Listing Guide + Continued Listing Guide 两份 PDF 已覆盖三档上市标准的初始与持续量化门槛，弥补了 Rulebook 页面抓不到的缺口，故未继续尝试破解 Rulebook 反爬
+  - Nasdaq Initial Listing Guide（PDF，三档上市标准 Global Select/Global/Capital Market 财务与流动性量化门槛）: https://listingcenter.nasdaq.com/assets/initialguide.pdf（HTTP 200，559KB）
+  - Nasdaq Continued Listing Guide（PDF，持续上市标准，含 $1 最低股价等退市触发门槛）: https://listingcenter.nasdaq.com/assets/continuedguide.pdf（HTTP 200，394KB）
+- `indexes.nasdaqomx.com` | 官方（指数编制业务站，Nasdaq Inc 旗下） | en | curl 常规 UA 200 | Nasdaq Index Methodology Guide，覆盖治理流程与通用方法论；⚠️ 未含 Nasdaq Composite/Nasdaq-100 各自的基日/基点等逐指数具体参数，那部分需要另外的逐指数方法论文件，本次未找到
+  - Nasdaq Index Methodology Guide（PDF）: https://indexes.nasdaqomx.com/docs/Nasdaq_Index_Methodology_Guide.pdf（HTTP 200，249KB）
+- `dtcc.com` | 监管/清算基础设施 | en | ⚠️ 与 `us-nyse` 一节记录的情况一致：首页 200 但内容子页（如 accelerated-settlement、understanding-settlement 等路径）403，本次针对 us-nasdaq 重新探测一次结果相同，不再重复尝试 | 未抓取到可引用内容，本节仅记录探测结果，不含可用 URL；`clearing.csd_name`（DTC 托管机构）仍留空，但 `ccp_name` 已从 `nasdaqtrader.com` 的 Market Maker Process 页找到官方原文佐证（NSCC），无需依赖 dtcc.com
+- `cahill.com` | 第三方（律所客户简报） | en | curl 常规 UA 200 | 与 us-nyse 一节引用同一份简报，说明SEC统一结算周期规则（Rule 15c6-1，2024-05-28起T+1）对全国性证券交易所（含纳斯达克）同等适用，非纳斯达克自身单独设定的规则；按 CLAUDE.md 二第3条，第三方来源 confidence 上限 medium
+  - One-Day Settlement Cycle (T+1) To Begin May 28, 2024: https://www.cahill.com/publications/client-alerts/2024-04-29-one-day-settlement-cycle-t-1-to-begin-may-28-2024（HTTP 200，23KB）
+- `ir.nasdaq.com` | 官方（投资者关系站） | en | ⚠️ 本次多次尝试均 HTTP/2 stream 报错或超时（`curl: (92) HTTP/2 stream 1 was not closed cleanly`／`curl: (28) Operation timed out`），换 `--http1.1` 仍超时，与 `nasdaq.com`/`nasdaqtrader.com` 的可达性形成对比——同集团不同子域名反爬/限流行为不一致，值得记录；Nasdaq, Inc. 自身股票在 Nasdaq 交易所挂牌（NDAQ）这一事实原打算从这里的"Stock Information"页确认，未能拿到，改用 `nasdaq.com/articles` 与 `nasdaq.com/market-activity` 两个可达页面间接佐证，`overview.self_listed` 因此定为 `confidence: medium` 而非 `high` | 未抓取到可引用内容
 
 ### 纳斯达克证券交易所 The Nasdaq Stock Market `us-nasdaq`
 - `nasdaq.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬 | Nasdaq Inc 集团层面的公司站，覆盖监管框架、公司概况/历史、市场数据产品说明、指数产品说明等叙述性内容；不含逐条规则条文（规则条文在 `nasdaqtrader.com`/`listingcenter.nasdaq.com`）
@@ -183,8 +282,8 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `szse.cn` | 官方 | zh / en（英文版路径 `/English/...`，非同页切换，独立 URL；页面同样带"仅供参考，中文文本为准"类免责声明——与 SSE 一致，佐证 `source_lang: zh` 的选择） | curl + 常规浏览器 UA 全程 200，未见反爬/限流（比 `english.sse.com.cn` 好抓，不需要加延时）；PDF 用 `pdftotext -layout` 提取纯文本再 grep 定位条款 | 与上交所同属会员制事业法人、同受中国证监会监管、同为 A 股主板注册制，`region`/`regulator`/`review_system` 等字段与 cn-sse 高度一致，可直接对照校验取值口径是否统一；压测点是主板 vs 创业板（对照 cn-sse 主板 vs 科创板）
   - 本所简介（成立/开业日期、监管归属、职能）: https://www.szse.cn/aboutus/sse/introduction/index.html
   - 交易规则（2026年修订）PDF: https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf
-  - 股票上市规则（2026年修订，主板；原登记的2025年修订版链接抓取时返回404——已被2026年4月第十七次修订替换下线，重新 WebSearch 定位到现行版）PDF: http://docs.static.szse.cn/www/lawrules/rule/allrules/bussiness/W020260424747613955674.pdf
-  - 创业板股票上市规则（2026年修订；同上，原2025年修订版链接已下线）PDF: https://docs.static.szse.cn/www/lawrules/rule/stock/supervision/chinext/W020260424688875101057.pdf
+  - 股票上市规则（2026年修订，主板；原登记的2025年修订版链接抓取时返回404——已被2026年4月第十七次修订替换下线，重新 WebSearch 定位到现行版）PDF: http://docs.static.szse.cn/www/lawrules/rule/allrules/bussiness/W020260424747613955674.pdf ← 财务门槛条款见第3.1.2条（境内企业三选一标准，`listing.boards[cn-szse-main].financial_threshold` 出处）；第3.1.4-3.1.6条另有红筹企业/差异表决权发行人专项标准，本次未摘入 boards（量大且是特殊类别企业，非板块通用标准）
+  - 创业板股票上市规则（2026年修订；同上，原2025年修订版链接已下线）PDF: https://docs.static.szse.cn/www/lawrules/rule/stock/supervision/chinext/W020260424688875101057.pdf ← 财务门槛条款见第2.1.2条（境内企业四选一标准，`listing.boards[cn-szse-chinext].financial_threshold` 出处）
   - 市场概况（上市公司数/总市值等统计）: https://www.szse.cn/market/overview/index.html
   - 指数总览: https://www.szse.cn/market/exponent/pandect/index.html
   - 会员与交易类规则入口: https://www.szse.cn/lawrules/service/member/index.html
@@ -360,6 +459,209 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `lw.com` | 第三方（Latham & Watkins 律所客户简报） | en | curl 常规 UA 200 | 用于确认 2026年2月1日起 CMA 取消 QFI（合格境外投资者）制度、开放主板予全体外资，但保留外资合计49%上限与单一外资10%上限的监管改革；`confidence` 标 medium——已尝试在 `cma.gov.sa` 站内寻找对应官方公告/新规则 PDF 未果（本次 WebSearch 配额已用尽，下次有空应补找 CMA 官方原文，见 OPEN-QUESTIONS）
   - Saudi CMA Broadens Main Market Access for Foreign Investors: https://www.lw.com/en/insights/saudi-cma-broadens-main-market-access-for-foreign-investors
 - `saudiexchange.sa`（⚠️ 本节唯一未攻克的域名，见 CLAUDE.md 三降级方案） | 官方（Saudi Exchange 运营实体自身官网，本应是最主要的一手来源） | — | **全站被 Akamai WAF 拦截，任何路径、任何 UA 组合均返回 403**（响应体含 `errors.edgesuite.net` 字样，确认是 Akamai Edge 防护，与 v0.2 探测记录里 `sec.gov`/`finra.org`/`dtcc.com` 同一类拦截）。已测试：①默认常规 UA 直连首页与深层 `/wps/portal/...` 路径均 403；②换 Safari UA + 加 `Accept-Language`/`Referer`（伪装成来自 Google 搜索跳转）头模拟真实浏览器仍 403；③直接请求站内 PDF 直链（如 `Trading and Membership Procedures.pdf`）同样 403，说明拦截是域名级而非仅拦网页；④尝试 `beta.saudiexchange.sa` 子域名，证书已过期（需 `-k` 跳过校验）且同样 403，判断是被弃用的旧站点，不值得继续尝试；⑤`web.archive.org` 可达但查询该域名快照时遇到限流（429/503），未能验证是否有可用快照。**降级方案**：改用同一 CMS 后端但未被拦截的 `tadawulgroup.sa` 域名（可抓到大量同源 PDF 规则文档与集团子公司页），配合监管方 `cma.gov.sa`、清算/存管子公司自己的域名 `edaa.sa`/`muqassa.sa` 作为一手来源替代，实测覆盖了监管、交易机制、上市、指数、清算五大章节的核心内容，缺口主要在 Saudi Exchange 自身网站上才有的实时市场数据类页面（如行情费率、历史数据可得性），这类字段本次相应留空或标 low confidence，见 OPEN-QUESTIONS
+### 韩国交易所 Korea Exchange (KRX) `kr-krx`
+- `global.krx.co.kr` | 官方（英文版） | en | curl + 常规 UA 全部 200，未见反爬；站点是 JSP，导航结构可从任意页面（如首页 `main/main.jsp`）的静态 HTML 里 grep `href="[^"]*GLB[0-9]+[^"]*"` 批量拿到几乎全站 URL 清单，比逐级点导航快得多——**但很多栏目页（如 About KRX/Organization/Regulation 分类落地页）静态 HTML 里只有 tab 标题导航，没有实质段落**，真正的解释性文字要么在专门的详情子页（URL 尾缀带 `T1`/`T2`.jsp，如上市标准详情页），要么整份塞进官方 PDF 指南。抓到 120KB+ 的页面不代表有正文，先搜关键词（如年份数字、百分比）确认，没命中就换该栏目的 `T*.jsp` 子页再试 | KRX 是 2005 年由韩国证券交易所（KSE）、KOSDAQ 市场、韩国期货交易所（KOFEX）依《资本市场与金融投资业法》合并而成的单一法人交易所（股份有限公司，会员金融机构持股，自身不在自己市场上市）；KOSPI/KOSDAQ/KONEX 均为该法人内部的市场板块（非独立法人），衍生品市场同样由 KRX 本身运营（不同于 JPX/NYSE Group 那种"衍生品另设独立法人"的集团结构），因此本文件不设 `group_id`。KRX 本身即清算业务的中央对手方（CCP）；韩国证券存管院（KSD，KRX 持股70%）与韩国证券电算（KOSCOM，KRX 持股76%）是控股子公司而非交易所内部部门
+  - Guide to Trading in the Korean Stock Market（PDF，官方权威操作手册，含交易时段/最小报价单位/涨跌停±30%/熔断三阶段8-15-20%/sidecar/波动性中断VI/做空报升规则/大宗交易门槛/交易暂停情形，几乎覆盖第五章全部核心交易机制字段，是本次抓取信息密度最高的单一来源）: https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf（HTTP 200，308KB）
+  - CEO Message（"Established in 1956"表述）: https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp（HTTP 200，120KB）
+  - History（KRX完整年表，1956年大韩证券交易所设立、1974年KSD设立、1996年KOSDAQ设立、1999年KOFEX设立、2005年三方合并设立"韩国证券期货交易所"、2008年更名"韩国交易所"、2013年设立KONEX）: https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp（HTTP 200，131KB）
+  - KRX Group Services（KRX自身业务范围：交易/市场数据、市场监察、上市与披露、CCP、清算结算；两家控股子公司KSD/KOSCOM持股比例）: https://global.krx.co.kr/contents/GLB/01/0102/0102020000/GLB0102020000.jsp（HTTP 200，121KB）
+  - Market Oversight Commission（自律监管机构说明，KRX内设机构）: https://global.krx.co.kr/contents/GLB/01/0103/0103020500/GLB0103020500.jsp（HTTP 200，121KB）
+  - Shareholder Status（截至2019年末的股东名册，全部为证券公司/金融机构/政府关联机构，佐证会员制、非自身上市）: https://global.krx.co.kr/contents/GLB/01/0104/0104030000/GLB0104030000.jsp（HTTP 200，124KB）
+  - Members（会员资格法律依据/会员七种类型/结算会员与交易会员区分/财务门槛表）: https://global.krx.co.kr/contents/GLB/01/0102/0102070100/GLB0102070100.jsp（HTTP 200，137KB）
+  - Concept of Clearing（KRX自身作为CCP的法律依据，援引FSCMA第378/393/394/397/399/400条与多项KRX内部规则）: https://global.krx.co.kr/contents/GLB/02/0202/0202020102/GLB0202020102.jsp（HTTP 200，122KB）
+  - Concept of Settlement（结算定义，援引FSCMA第297/378条）: https://global.krx.co.kr/contents/GLB/02/0202/0202020103/GLB0202020103.jsp（HTTP 200，121KB）
+  - KOSPI Market Listing Requirements — Criteria 详情子页（量化上市标准全表：经营年限/股本/股权分散/财务表现/审计意见等）: https://global.krx.co.kr/contents/GLB/03/0303/0303050100/GLB0303050100T1.jsp（HTTP 200，11KB）
+  - Designation of Administrative Issues and Delisting Criteria for the KOSPI Market（退市/管理股条件全表，含未提交定期报告/审计意见/资本侵蚀/股权分散/交易量/公司治理/不实披露/营收/市值等逐项标准，含2026-2028年过渡期门槛）: https://global.krx.co.kr/contents/GLB/03/0303/0303050500/GLB0303050500.jsp（HTTP 200，138KB）
+  - Listing Requirements for the KOSDAQ Market（KOSDAQ量化上市标准，标准企业/技术成长企业双轨制，含KONEX转板快速通道5条track）: https://global.krx.co.kr/contents/GLB/03/0303/0303060200/GLB0303060200.jsp（HTTP 200，131KB）
+  - ETF Taxation Regulation（"证券交易税(0.3%)对ETF不适用"的表述，间接确认一般股票证券交易税税率；该页聚焦ETF豁免场景，未见明确标注版本/生效日期，作为一般股票税率引用时降级为medium）: https://global.krx.co.kr/contents/GLB/06/0605/0605010103/GLB0605010103.jsp（HTTP 200，123KB）
+- `www.krx.co.kr`（韩文版官网首页） | 官方（韩文版） | ko | curl 常规 UA 200，未见反爬；本次仅取 `<title>` 标签确认官方韩文名称，未深入抓取韩文正文内容（本项目 source_lang 判定为 en，韩文版仅用于确认 native name，不作为事实来源） | `<title>` 标签内容为「한국거래소」，即 KRX 官方韩文名称
+  - 首页（仅用于确认 `<title>` 韩文名称）: http://www.krx.co.kr/main/main.jsp（HTTP 200，186KB）
+- `elaw.klri.re.kr`（韩国法制研究院官方英译法律数据库） | 监管（政府法律译本） | en | curl 常规 UA 200，单页 4.8MB（含该法历年全部修正版本堆叠在同一页，需按关键词/条号 grep 定位，不要整页阅读）| 《资本市场与金融投资业法》(Financial Investment Services and Capital Markets Act, FSCMA) 官方英译全文，现行版本 20260306。第1条：立法目的；第373条：无许可不得设立市场；第373-2条：设立交易所须获金融委员会（Financial Services Commission, FSC）许可，且须为《商法》下的股份有限公司（stock company）；第297/378/393/394/397/399/400条：交易所本身担任证券与衍生品市场清算机构/CCP的法律依据
+  - Financial Investment Services and Capital Markets Act（全文，含历次修正版本堆叠）: https://elaw.klri.re.kr/eng_service/lawTwoView.do?hseq=31782（HTTP 200，4.8MB）
+### 泛欧交易所 Euronext `fr-euronext`
+- `euronext.com` | 官方 | en（官网默认英文；各地方市场页另有 fr/nl/pt/it/nb 等本地语言版本，本节只取英文版作 `source_lang: en` 的锚点） | curl + 常规 UA 全部 200，未见反爬（含多个 PDF，均可直接 curl 到） | ⚠️ **本所是本项目第一个"单一集团、多国法人实体"样本**：`Euronext`（集团整体）= `Euronext N.V.`（荷兰阿姆斯特丹注册的 naamloze vennootschap，集团控股实体，本身在 Euronext Paris 挂牌交易，代码 ENX，2025-09-22 起纳入 CAC 40 指数）+ 七个「Euronext Market Undertaking」（Euronext Amsterdam N.V. 荷兰法人、Euronext Brussels S.A./N.V. 比利时法人、Euronext Dublin/The Irish Stock Exchange plc 爱尔兰法人、Euronext Lisbon S.A. 葡萄牙法人、Euronext Paris S.A. 法国法人、Borsa Italiana 意大利法人、Oslo Børs 挪威法人），各自受本国法律与本国监管机构管辖（见 Harmonised Rulebook I Rule 1.7 Governing Law），但共享同一部《Harmonised Rulebook》（Book I）、同一交易平台 Optiq、同一中央订单簿。2025年7月新增第八个市场 Euronext Athens（收购 ATHEX），但截至本次抓取（2026-08）雅典尚未并入 Harmonised Rulebook/Optiq（计划2027-06迁移），regulated-markets 页原文明确写"Euronext Athens markets are scheduled to be integrated in the Euronext rulebooks upon the migration to Optiq (June 2027)"，故本次数据以七个已整合市场（不含雅典）为主，雅典相关事实单独注明未核实。清算方面 Euronext Clearing 是法定实体 Cassa di Compensazione e Garanzia S.p.A.（CC&G，意大利公司）的商业新名称；托管结算方面 Euronext Securities 是集团自有 CSD 网络，运营实体分布在哥本哈根/米兰/奥斯陆/波尔图四地，里斯本/米兰/奥斯陆三个市场现已用 Euronext Securities 托管结算，阿姆斯特丹/布鲁塞尔/巴黎计划2026-09起迁移过去，都柏林及迁移前的阿姆斯特丹/布鲁塞尔/巴黎具体托管机构本次未核实
+  - 首页: https://www.euronext.com/en（HTTP 200，456KB）
+  - Euronext Regulated Markets（各市场清单、Harmonised Rulebook I 最新版 PDF 直链、雅典未整合说明）: https://www.euronext.com/en/regulation/euronext-regulated-markets（HTTP 200，397KB）
+  - Regulatory Framework（分国监管机构：FSMA/BNB 比利时、ACP/AMF 法国、Central Bank of Ireland、CONSOB 意大利、Finanstilsynet 挪威、DNB/AFM 荷兰、CMVM 葡萄牙）: https://www.euronext.com/en/trading/membership/regulatory-framework（HTTP 200，397KB；⚠️ 页面法国监管机构一段仍写"Autorité de Contrôle Prudentiel (ACP)"，该机构已于2013年更名为ACPR，页面文本明显滞后未更新，引用时以 AMF 这个跨版本一致出现的证券监管机构名称为准，法国银行业监管机构名称改动不逐条核实）
+  - Trading Safeguards（动态/静态价格区间 collar 阈值：动态±5%/旗舰指数成分±3%，静态±10%/旗舰指数成分±8%）: https://www.euronext.com/en/trading/market-quality/trading-safeguards-euronext-markets（HTTP 200，402KB）
+  - Clearing 总览（Euronext Clearing = CC&G 法定实体新商业名）: https://www.euronext.com/en/clearing（HTTP 200，450KB）
+  - Choosing a Market（板块体系：Euronext regulated market 分ABC三档市值区间、Euronext Growth、Euronext Access/Access+，各自适用市场与门槛对照表）: https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market（HTTP 200，429KB）
+  - T+1 programme（当前结算周期T+2，欧盟统一定于2027-10-11起改T+1）: https://www.euronext.com/en/regulation/t1-programme（HTTP 200，434KB）
+  - Our Journey（集团历史沿革时间线2000-2025，含各并购年份原文）: https://www.euronext.com/en/about/our-journey（HTTP 200，580KB）
+  - Investor Relations Share Price（自身股价展示页，佐证self_listed）: https://www.euronext.com/en/investor-relations/share-price（HTTP 200，399KB）
+  - Trading Hours & Holidays（节假日安排逐市场对照表；⚠️本页只含节假日例外与半日交易安排，未含标准每日开收盘时刻表，标准时刻表本次未在静态可抓取页面中定位到，见 OPEN-QUESTIONS）: https://www.euronext.com/en/trading/trading-hours-holidays（HTTP 200，541KB）
+  - Fees & Charges 索引页（各类费率表PDF直链入口）: https://www.euronext.com/en/trading/fees-charges（HTTP 200）
+  - Euronext Rule Book Book I: Harmonised Rules（适用自2026-06-29版）PDF: https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf（HTTP 200，913KB；含 Rule 1.7 Governing Law 七法域分述条款、Chapter 2 Euronext Membership 会员资格条款、术语表里各 Market Undertaking 法律实体全称）
+  - Notice n°4-01 Trading Manual（生效日2025-12-08）PDF: https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf（HTTP 200，599KB；开盘/收盘集合竞价机制、连续交易撮合原则细节，不含逐市场标准时刻表）
+  - Euronext Cash Markets Trading Fee Guide（生效日2026-09-01）PDF: https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf（HTTP 200，642KB；标准股票交易费两种计价方式——按已执行订单笔数阶梯收费 + 按成交金额阶梯bps收费）
+- `live.euronext.com` | 官方（面向投资者的产品/行情子站，与 euronext.com 同集团不同子域名） | en | curl 常规 UA 200 | 用于确认旗舰指数清单（自编：AEX/CAC 40/BEL 20/ISEQ 20/PSI/OBX；FTSE MIB 由第三方 FTSE Russell 编制，未在本页出现，是唯一非自编的旗舰指数）
+  - Stock Indices: https://live.euronext.com/en/products/indices（HTTP 200，354KB）
+### 约翰内斯堡证券交易所 Johannesburg Stock Exchange (JSE) `za-jse`
+- `jse.co.za` | 官方 | en（南非无为JSE本身立法声明的"官方语言"，但全部规则/上市文件/技术规范均只有英文版，未见南非其他官方语言的对照版本，与美股NYSE同理按实际使用语言取 official_languages: [en]） | curl 常规 UA 全部 200，全程未见反爬/限流，比 sec.gov/saflii.org 好抓得多 | 官网横跨三个子域名：`www.jse.co.za`（产品/服务介绍页）、`group.jse.co.za`（集团概况、历史沿革、投资者关系）、`clientportal.jse.co.za`（规则文档/市场通知/技术规格 PDF 的实际托管域名，很多深层 PDF 链接指向这里，三者按 `validate.py` 的域名后缀匹配规则统一登记为 `jse.co.za` 一条即可覆盖）。⚠️ 部分关键 PDF（如权益市场交易时段表、熔断阈值表）正文数据是图片渲染，`pdftotext -layout` 抓不出表格数字；换成同信息的另一份《交易信息系统概念培训》PDF（`Conceptual Training_v2.pdf`）才拿到可摘引的纯文本版本（含 ZA01/ZA02 分段的静态/动态熔断阈值百分比表），这是本次抓取里唯一能完整摘引熔断具体数值的来源，下次抓类似"阈值表"类内容时优先找培训/说明类文档而非官方摘要通知
+  - 首页: https://www.jse.co.za/
+  - 现货股票市场总览: https://www.jse.co.za/trade/equities-market
+  - 主板: https://www.jse.co.za/raise-capital/equities-market/main-board
+  - AltX（另类市场）: https://www.jse.co.za/raise-capital/equities-market/altx
+  - 专项证券（ETF/AMETF/ETN/AMC/权证做市商制度介绍）: https://www.jse.co.za/raise-capital/specialist-securities
+  - 集团概况与历史沿革（1887年成立、2005年改制上市、2016年T+3、Millennium Exchange交易系统等关键年表，逐条注明年份可直接摘引）: https://group.jse.co.za/group-overview/history
+  - 公司信息页（JSE Limited自身股票代码JSE、ISIN ZAE000079711、注册号2005/022939/06）: https://group.jse.co.za/investor-relations/company-information
+  - T+3结算说明（含Lines of Defence多层结算保障机制，注意：现货证券市场靠此机制而非CCP净额担保，与衍生品市场的JSE Clear CCP模式不同）: https://www.jse.co.za/services/post-trade-services/t3settlement
+  - 清算结算服务总览: https://www.jse.co.za/services/clearing-and-settlement-operations
+  - 指数服务总览: https://www.jse.co.za/services/indices/ftsejse-africa-index-series
+  - JSE Clear（衍生品市场中央对手方）授牌新闻: https://www.jse.co.za/news/news/jse-clear-granted-independent-clearing-house-central-counterparty-licence
+  - 打击裸卖空市场通知（Market Notice 293/2021，引用交易规则10.50.1/10.50.2条）PDF: https://clientportal.jse.co.za/Content/JSENoticesandCircularsItems/JSE%20Market%20Notice%2029321%20EQM%20-%20Reminder%20on%20the%20Prohibition%20of%20Naked%20Short-Selling%20in%20JSE%20Equities%20Market.pdf
+  - 权益市场交易时段 PDF（仅含开收盘时刻，表格式）: https://clientportal.jse.co.za/Content/JSE%20Trading%20Dates%20and%20Calendars%20Items/EquityMarketTradingHours.pdf
+  - 熔断与拍卖机制摘要通知 PDF（阈值表为图片，仅正文定义可摘引）: https://clientportal.jse.co.za/Content/JSEHotlinesItems/JSE%20Service%20Hotline%2006220%20EQM%20and%20EDM%20-%20Upgrade%20Summary%20of%20JSE%20Circuit%20Breakers%20and%20Auctions.pdf
+  - 权益市场交易信息总览（Volume 00E，含撮合原则、订单类型、静态/动态参考价定义正文，114页）PDF: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.08.pdf
+  - 交易信息系统概念培训（含交易时段表与ZA01/ZA02熔断阈值百分比表的纯文本版）PDF: https://clientportal.jse.co.za/Content/JSE%20Technology%20Document%20Items/Equity%20Market_Trading%20%20Information%20System_Conceptual%20Training_v2.pdf
+  - 上市规则（简化版，2025年12月）PDF: https://www.jse.co.za/sites/default/files/media/documents/jse-listings-requirements-simplified/JSE_Listings_Requirements_Simplified_Final_@_12_December_2025_Final.pdf
+  - 权益市场指引（Equities Directives）PDF: https://www.jse.co.za/sites/default/files/media/documents/equities-directives/Equities%20Directives.pdf
+- `fsca.co.za` | 监管 | en | curl 常规 UA 200 | 金融部门行为监管局（Financial Sector Conduct Authority），南非"双峰"（Twin Peaks）监管架构下的市场行为监管方，2018年由原金融服务局（FSB）改制而来
+  - 关于我们: https://www.fsca.co.za/about-us/
+- `strate.co.za` | 官方（中央证券存管机构） | en | curl 常规 UA 200（575KB，内容较厚） | Strate Limited，南非法定中央证券存管机构（CSD），负责JSE现货证券市场的电子结算
+  - 关于我们: https://www.strate.co.za/about-us/
+- `sars.gov.za` | 监管（税务机关） | en | curl 常规 UA 200 | 南非税务局（South African Revenue Service），股息预扣税与证券转让税的法定征收与规则发布方
+  - 股息预扣税: https://www.sars.gov.za/types-of-tax/dividends-tax/
+  - 证券转让税: https://www.sars.gov.za/types-of-tax/securities-transfer-tax/
+- `lseg.com` | 第三方（伦敦证券交易所集团旗下 FTSE Russell，与JSE联合编制指数） | en | curl 常规 UA 200（586KB） | 《FTSE/JSE Africa Index Series Ground Rules》官方编制细则文档，JSE与FTSE Russell联合发布，用于确认指数编制方非JSE自编而是合资/授权模式
+  - FTSE/JSE Africa Index Series Ground Rules（v9.1，2026年2月）PDF: https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse-jse-africa-index-series-ground-rules.pdf
+
+---
+
+## 探测记录（za-jse 建档，2026-08-16）
+
+与 v0.2 填 NYSE 时的情况相似，本次也踩到"监管/立法类第三方数据库域名被拦"的坑：`saflii.org`（南非法律信息研究所，用于查《金融市场法》Financial Markets Act 19 of 2012 全文）与 `lawlibrary.org.za` 两个域名对同一份法律文本的 PDF/HTML 页面均返回 403（换 UA、加延时重试均无效，与 sec.gov/finra.org 的边缘防护特征类似）。绕过方式：改用 JSE 官方《上市规则》PDF 定义章节里对该法的引用原文（"FMA the Financial Markets Act No.19 of 2012, as amended"）作为 `core_laws` 的来源——足以确认法律全称与编号且来自 JSE 自己的官方文档（未降级为 medium），但未能拿到法律条文全文逐条核对其他章节（如做空/披露的具体法条编号），这部分留待下次专门解决 saflii/lawlibrary 的反爬问题时补齐。
+
+`jse.co.za` 三个子域名（`www.` / `group.` / `clientportal.`）加上 `fsca.co.za`、`strate.co.za`、`sars.gov.za`、`lseg.com` 全部一次性 curl 常规 UA 成功，无一例 403，是本项目目前抓取难度最低的交易所之一。
+### B3 – Brasil, Bolsa, Balcão `br-b3`
+- `b3.com.br` | 官方 | pt-BR / en（官网原文是葡萄牙语，`en_us` 路径下有官方英文版，覆盖面广，多数规则/交易机制/非居民投资者页面均有对应英文版；本节 source_lang 取 en，见下方说明） | curl + 常规 UA 全部 200，未见反爬（全程无延时也未被拦，比 english.sse.com.cn/JPX 好抓得多）；PDF 用 `pdftotext -layout` 提取 | ⚠️ B3 官网英文版**没有**看到类似 SSE/JPX 那种"译本仅供参考，以原文为准"的免责声明（本次抓取页面未发现此类文字），但取源规则仍按 ADR-013："有可核实的官方中文原文就填 zh，没有就填 en"——B3 官网无中文版，故 source_lang: en，把英文版当溯源锚点，不因为找不到 zh 就退回葡萄牙语原文（葡萄牙语不是 zh/en 二选一之外的第三态，见 taxonomy.yml source_lang 字段说明）。B3 是巴西唯一的证券交易所，由 2017 年 BM&FBOVESPA 与 Cetip 合并而成（`name_native` 用此说明）；集团层面 B3 本身即为最终控股主体（B3 S.A.自身在自己的 Novo Mercado 板块挂牌，代码 B3SA3），未发现类似 NYSE Group/JPX Group 那样同集团下辖多个独立注册交易所法人实体的结构，故不设 `group_id`
+  - 首页: https://www.b3.com.br/en_us/（HTTP 200）
+  - 历史沿革（投资者关系站 History 页）: https://ri.b3.com.br/en/b3/history/（HTTP 200）
+  - Regulatory Framework – Trading（交易规则文档索引页）: https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/trading.htm（HTTP 200）
+  - Regulatory Framework – Listing（上市规则文档索引页）: https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/listing.htm（HTTP 200）
+  - Regulatory Framework – Clearing, Settlement and Risk Management（清算结算规则文档索引页）: https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/clearing-settlement-and-risk-management.htm（HTTP 200）
+  - Non-resident Investor – Operational Procedures and Regulation: https://www.b3.com.br/en_us/non-resident-investor/market-rules/operational-procedures-and-regulation.htm（HTTP 200）
+  - Non-resident Investor – Regulatory Environment: https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/regulatory-environment.htm（HTTP 200）
+  - Non-resident Investor – Trading Equities, Derivatives and Fixed Income (CMN 4.373/2014)（外资准入通道核心法规）: https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/trading-equities-derivatives-and-fixed-income-cmn-4-373-2014.htm（HTTP 200）
+  - Non-resident Investor – Taxation（外资资本利得税/股息预扣税/IOF）: https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm（HTTP 200）
+  - B3 Trading Characteristics and Rules（交易时段/最小单位/碎股市场等核心交易机制）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/b3-trading-characteristics-and-rules.htm（HTTP 200）
+  - Trading Hours – Equities（具体交易时段表，从上一条页面内"here"链接跳转定位到，非站内导航直接可达）: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/（HTTP 200）
+  - Project T+2 – Context（2019年结算周期从T+3缩短至T+2改革说明）: https://www.b3.com.br/en_us/project-t-2/context/（HTTP 200）
+  - Investor Relations – Corporate Information（B3自身作为上市公司的股票代码/板块归属，investor relations子站）: https://ri.b3.com.br/en/b3/corporate-information/（HTTP 200）
+  - Securities Lending, Equity and ETF Trades（证券借贷/融券机制页，做空机制的主要依据）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/securities-lending-equity-and-etf-trades.htm（HTTP 200）
+  - Trading Dynamics（撮合原则/订单类型）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm（HTTP 200）
+  - Circuit Breaker（熔断机制说明，Ibovespa跌幅阈值）: https://www.b3.com.br/en_us/news/circuit-breaker-8AE490CA70CB10030170CEECFCE05EAF.htm（HTTP 200）
+  - Market Maker – Regulation（做市商制度）: https://www.b3.com.br/en_us/products-and-services/trading/market-maker/join-in/regulation.htm（HTTP 200，本次抓取偶发一次超时，重试后200，非持续限流）
+  - About Listing Segments（板块体系总览：Novo Mercado / Nível 1 / Nível 2 / Bovespa Mais 等）: https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/about-listing-segments/（HTTP 200）
+  - Listing Segments – Novo Mercado（最高治理层级板块细则）: https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/novo-mercado/（HTTP 200）
+  - PUMA Trading System（交易撮合引擎，基于CME Globex技术）: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/（HTTP 200）
+  - Ibovespa（旗舰指数页）: https://www.b3.com.br/en_us/market-data-and-indices/indices/broad-indices/ibovespa.htm（HTTP 200）
+  - B3 Trading Procedures Manual（业务规程手册全文PDF，含价格限制/交易时段/订单类型等条款编号）: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf（HTTP 200，6.6MB，PDF文件名含空格已用%20编码，无括号无需%28%29）
+  - Novo Mercado Listing Regulation（Novo Mercado板块规则全文PDF，官方英文译本，标注"free translation"）: https://www.b3.com.br/data/files/43/E0/16/EF/F348F41054E072F492D828A8/SITE-NM-Listing-Regulation-2011.pdf（HTTP 200，416KB；⚠️ PDF首页自称"free translation"，与 SSE/JPX 类似的翻译免责声明，进一步佐证只把它当英文对照而非独立法律文本）
+  - Guide for Nonresident Investors（外资投资指南PDF，含CMN 4.373账户开户流程）: https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf（HTTP 200，1.7MB）
+- `www.gov.br` | 监管 | pt-BR / en | curl 常规 UA 200，未见反爬 | 巴西证券监督管理机构 Comissão de Valores Mobiliários（CVM，证券委员会）在联合政府门户 gov.br 下的英文栏目，B3 的政府监管机构；本条目仅登记 `www.gov.br` 而非更宽泛的 `gov.br`，因为实际抓取到的 URL netloc 就是 www 子域
+  - CVM 英文首页: https://www.gov.br/cvm/en（HTTP 200）
+- `bsmsupervisao.com.br` | 官方（B3自律监管子机构） | pt-BR / en | curl 常规 UA 200 | BSM Supervisão de Mercados，2007年由B3（原BM&FBOVESPA）设立的自律组织，负责对B3管理的市场及参与者进行一线监督、稽查与纪律处分，受CVM监督
+  - 英文首页: https://www.bsmsupervisao.com.br/en/us/home（HTTP 200）
+### 多伦多证券交易所 Toronto Stock Exchange (TSX) `ca-tsx`
+- `tsx.com` | 官方 | en / fr（`/en/` 与 `/fr/` 路径均可直接访问，法语版正文与英文版对应，如 `/fr/trading/calendars-and-trading-hours/trading-hours` 返回「Heures de négociation」正文；本次抓取全部走英文版，法语版未逐条比对） | curl + 常规 UA 全部 200，未见反爬，未加延时 | ⚠️ TSX 隶属 TMX Group（`group_id: tmx-group`），集团下还有 TSX Venture Exchange（TSXV，创业板，独立交易所实体非本文件板块）、TSX Alpha Exchange（另一撮合场所/marketplace）、Montréal Exchange（衍生品）、CDS（清算/托管）等实体，很多页面把 TSX/TSXV/Alpha 三个 marketplace 的规则并排列在同一张表里，摘引时要看清楚列头对应哪个实体——本文件只收 TSX 本身
+  - 交易时段（含 MOO/MOC/PME 收盘流程完整时间表）: https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours
+  - Toronto Stock Exchange Rule Book（PDF，全文，Effective January 13, 2026，含会员准入/交易时段/结算规则等 Part 1-8）: https://www.tsx.com/en/resource/1464
+  - Order Types 页面（订单类型/匿名单/Odd Lot Dealer 说明正文）: https://www.tsx.com/en/trading/toronto-stock-exchange/order-types-and-features/order-types
+  - Order Types and Functionality Guide（PDF，TMX GROUP，Version 1.75，2025-11-03，含 6.1.2 最小报价单位表、6.2.4 Single Stock Circuit Breakers、6.7 清算安排等章节）: https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf
+  - Technical Guide to Listing（PDF，©2023 TSX Inc.，含上市财务门槛表/300名公众股东要求/做市商角色说明，Appendix C 为 Industrial/Technology/R&D 上市要求表）: https://www.tsx.com/ebooks/en/technical-guide-to-listing/files/assets/common/downloads/Technical%20Guide%20to%20Listing.pdf
+  - TSX Trading Fee Schedule effective July 2, 2026（PDF，会员费/逐笔交易费率，maker-taker 结构）: https://www.tsx.com/en/resource/3521/tsx-trading-fee-schedule-effective-july-2-2026-en.pdf
+  - TMX Group Consolidated Trading Statistics – December 2025（PDF，官方新闻稿，含 TSX 单独统计口径的 2025 全年成交额/成交量）: https://www.tsx.com/en/resource/3443
+  - S&P/TSX Canadian Indices Methodology（PDF，S&P Dow Jones Indices 编制，June 2016 版本，tsx.com 自行托管；⚠️ 版本较旧，编制方/加权方式等稳定事实可用，具体数值门槛可能已更新，未找到 tsx.com 上更新版本的直链，spglobal.com 官网当前版 PDF 直链本次访问返回 403）: https://www.tsx.com/en/resource/1330
+- `tmx.com` | 官方（集团层面） | en | curl + 常规 UA 200 | 用于确认 TMX Group 旗下公司清单（Toronto Stock Exchange / TSX Venture Exchange / TSX Trust / Montréal Exchange / TSX Alpha Exchange / AlphaX US / Shorcan / CDCC / CDS / TMX Datalinx 等），佐证 group_id 判断；正文本身导航链接为主，实质内容薄
+  - TSX Regulatory Policies and Procedures（含 TMX Group Companies 清单导航）: https://www.tmx.com/en/tmx-group/regulatory-policies/toronto-stock-exchange-regulatory-policies-and-procedures
+- `s21.q4cdn.com` | 官方（TMX Group 自有投资者关系文件托管 CDN，Q4 Inc. 提供基础设施，内容标注 "Source: TMX Group Limited"，视同集团官方新闻稿原文） | en | curl 常规 UA 200 | TMX Group Equity Financing Statistics 月度新闻稿，含 TSX 当月新上市家数/挂牌总数/总市值（区分 TSX 与 TSXV 两张表，不要混用）
+  - TMX Group Equity Financing Statistics – February 2026（PDF，含 TSX Issuers Listed 2,132 家、Market Cap Listed Issues 逐笔数字）: https://s21.q4cdn.com/671813756/files/doc_news/TMX-Group-Equity-Financing-Statistics---February-2026-2026.pdf
+- `osc.ca` | 监管 | en | curl + 常规 UA 全部 200，未见反爬 | 安大略省证券委员会（Ontario Securities Commission），TSX Inc. 与其母公司 TMX Group Limited 均由 OSC 认定为「recognized exchange」；CIRO（Canadian Investment Regulatory Organization，自律组织）的官网 `ciro.ca` 本次多次尝试（不同 UA/headers）均返回 403，改用 OSC 关于 CIRO 的说明页作为替代来源，见下方「探测记录」
+  - Recognized Exchanges（TMX Group Limited and TSX Inc. 认定页，含关键原文「together with its parent company, TMX Group Limited, is recognized as an exchange in Ontario」）: https://www.osc.ca/en/industry/market-regulation/marketplaces/exchanges/recognized-exchanges
+  - Canadian Investment Regulatory Organization (CIRO) 说明页（CIRO 定位、IIROC/MFDA 合并沿革）: https://www.osc.ca/en/industry/market-regulation/self-regulatory-organizations-sro/canadian-investment-regulatory-organization-ciro
+  - Notice of Approval – Amendments to the Toronto Stock Exchange Company Manual (November 6, 2025)（PDF，OSC 托管的 TSX 规则修订核准公告，Appendix D 为最终 clean 版 Company Manual 正文，含 Part III 上市财务门槛与 Part VII 停牌/退市完整条文）: https://www.osc.ca/sites/default/files/2025-11/tsx_20251106_noa-exchange-company-manual.pdf
+- `getsmarteraboutmoney.ca` | 监管（OSC Investor Office 运营的投资者教育网站，页脚署名「© Ontario Securities Commission」「Brought to you by the OSC Investor Office」） | en | curl 常规 UA 200 | 用于确认加拿大全市场熔断（market-wide circuit breaker）三级阈值（7%/13%/20%），该机制由 CIRO 监管、参照 S&P 500（美股休市时改用 S&P/TSX Composite），原始出处应是 ciro.ca（已 403，见下）
+  - Market-wide circuit breakers: https://www.getsmarteraboutmoney.ca/learning-path/stocks/market-wide-circuit-breakers/
+- `en.wikipedia.org` | 第三方 | en | curl 常规 UA 200 | 用于交易所历史沿革背景叙述（1852年 Association of Brokers、1861年正式创立、1999-2000年公司化、2008年与 Montréal Exchange 合并组成 TMX Group 等）；`confidence` 相应标 medium，未逐条核对一手史料
+  - Toronto Stock Exchange: https://en.wikipedia.org/wiki/Toronto_Stock_Exchange
+  - TMX Group（含 TMX Group Limited 股票代码 TSX:X 信息）: https://en.wikipedia.org/wiki/TMX_Group
+### 台湾证券交易所 Taiwan Stock Exchange (TWSE) `tw-twse`
+- `twse.com.tw` | 官方 | zh-Hant / en（官方双语，各页各有独立 URL，非同页切换；英文版部分栏目滞后或缺失，细节不如中文版精确） | curl + 常规 UA 全部 200，未见反爬（含子域名 shl.twse.com.tw）；⚠️ 部分旧版路径（如网站首页导航曾指向的「pcversion 版放宽涨跌幅度专区」「旧版上市规章目录页」）已废弃，HTTP 状态码仍是 200，但正文是站内自定义 404 页（此網頁不存在，請回到本公司首頁）——不是抓取失败，是 URL 本身已失效，务必肉眼确认页面正文而非只看状态码，这两条已弃用未收录，不在下方列表中 | 台湾仅此一家股票集中交易市场；另有台湾期货交易所（TAIFEX，衍生品，`taifex.com.tw`）与证券柜台买卖中心（TPEx，OTC 市场，前身「柜买中心」，`tpex.org.tw`）为独立法人实体，规则不属于本文件收录范围
+  - 集中市场交易制度介绍（开盘/收盘机制、撮合原则、订单类型正文）: https://www.twse.com.tw/zh/products/system/trading.html
+  - Trading Mechanism Introduction（英文版，内容对应但部分细节比中文版简略）: https://www.twse.com.tw/en/products/system/trading.html
+  - 股价升降幅度（tick size 阶梯表）: https://www.twse.com.tw/zh/trading/delivery/twt84u.html
+  - 瞬间价格稳定措施（个股级波动中断机制，子域名）: https://shl.twse.com.tw/page/trading/6.html
+  - Fact Book（英文，市值/上市家数/成交额年度统计）: https://www.twse.com.tw/en/about/company/factbooks.html
+  - 平盘下得融（借）券卖出之证券名单页（做空平盘下限制说明）: https://www.twse.com.tw/zh/trading/margin/twt92u.html
+  - Regulations, Notices, Letters and Orders overview（英文，证券借贷相关规则入口）: https://www.twse.com.tw/en/products/sbl/law/overview.html
+  - 发行量加权股价指数（TAIEX）编制要点 PDF: https://www.twse.com.tw/downloads/zh/products/indices/IndexS02.pdf
+  - 股票造市制度专区: https://www.twse.com.tw/zh/products/system/stock-market.html
+  - 外资及陆资投资持股统计: https://www.twse.com.tw/zh/trading/foreign/mi-qfiis.html
+  - 侨外投资专区（FINI/FIDI 外资登记制度介绍）: https://www.twse.com.tw/zh/page/investor/foreign/03f.html
+  - 结算交割作业特色（多边净额结算、T+2）: https://www.twse.com.tw/zh/clearing/clearing/features.html
+  - 官网首页（英文，确认机构概况）: https://www.twse.com.tw/en/
+  - 官网首页（中文）: https://www.twse.com.tw/zh/
+  - 历史介绍（大事记，含成立/开业日期、历次涨跌幅调整、T+2交割制度实施等年表）: https://www.twse.com.tw/zh/about/company/history.html
+  - 首长欢迎词（公司概况页，未含股权结构细节）: https://www.twse.com.tw/zh/about/company/welcome.html
+- `twse-regulation.twse.com.tw` | 官方（法规分享知识库，独立子域名） | zh-Hant / en | curl + 常规 UA 200，未见反爬 | 官方法规原文（区别于 twse.com.tw 上的说明性文字）的主要来源；页面正文夹杂大量修订沿革记录，用关键词（而非取前 N 段）定位现行条款
+  - 台湾证券交易所股份有限公司营业细则（交易时段、升降单位、买卖单位、订单类型等核心交易规则条文）: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007304
+  - 同上英文版（Baker McKenzie 翻译，页面声明中英文有异议时中文本为准）: https://twse-regulation.twse.com.tw/ENG/EN/law/DAT0201.aspx?FLCODE=FL007304
+  - 有价证券上市审查准则（各板块财务门槛条文）: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007326
+  - 审查有价证券上市作业程序: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007327
+- `law.fsc.gov.tw` | 监管 | zh-Hant | curl + 常规 UA 200 | 金融监督管理委员会（FSC）主管法规共用系统，证券交易法、证券交易所管理规则原文出处
+  - 证券交易所管理规则: https://law.fsc.gov.tw/LawContent.aspx?id=FL007016
+  - 证券交易法: https://law.fsc.gov.tw/LawContent.aspx?id=FL007009
+- `law-out.mof.gov.tw` | 监管（财政部，税务主管机关，法规查询子站） | zh-Hant | curl + 常规 UA 200 | 证券交易税条例原文
+  - 证券交易税条例: https://law-out.mof.gov.tw/LawContent.aspx?id=FL006079
+- `mof.gov.tw` | 监管（财政部官网本站） | zh-Hant | curl + 常规 UA 200 | 非居住者股利扣缴率官方公告
+  - 非居住股利、利息及权利金扣缴率一览表: https://www.mof.gov.tw/singlehtml/191?cntId=82761
+- `etax.nat.gov.tw` | 监管（财政部税务入口网，官方税务问答） | zh-Hant | curl + 常规 UA 200 | 证券交易税课征范围、个人证券交易所得税停征现状的官方问答
+  - 证券交易税有无停征的规定: https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/securities-transaction-tax/taxation-scope/7r3MjNB
+  - 那些有价证券之交易所得应计入个人基本所得额（confirms 上市/上柜/兴柜股票交易所得免计入个人基本所得额）: https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/basic-tax-question/scope/eKN76QZ
+- `tdcc.com.tw` | 官方（清算/集中保管机构） | zh-Hant | curl + 常规 UA 200 | 台湾集中保管结算所（TDCC），中央证券存管机构，兼办结算交割
+  - 结算交割: https://www.tdcc.com.tw/portal/zh/equity/settlement
+- `twsa.org.tw` | 官方（自律组织） | zh-Hant | curl + 常规 UA 200 | 中华民国证券商业同业公会，证券商层面的自律组织；本次仅用于确认机构名称与职能定位，未逐条抓取其自律规章
+  - 首页: https://www.twsa.org.tw/
+### 瑞士证券交易所 SIX Swiss Exchange `ch-six`
+- `six-group.com` | 官方 | en（另有 de/fr/it 版本，本次统一取 en 版本，见 source_lang 说明） | curl + 常规 UA 全部 200，未见反爬，完全无限流（比多数标杆都好抓，唯一例外见下方 module-1 条目） | SIX Group 官网，交易所业务板块（`/en/products-services/the-swiss-stock-exchange/`）与集团公司页（`/en/company/`）分属不同栏目；`/dam/download/` 路径下是可直接抓取的 PDF 规则/指南文件
+  - Regulation 总览页（Trading Rules/Directives/Trading Guides 索引）: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/trading-provisions/regulation.html
+  - Trading Hours（交易时段结构）: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/trading-provisions/trading-hours.html
+  - Trading Guide（综合交易指南 PDF，含交易时段/订单类型/市场模式）: https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/trading-guide.pdf（HTTP 200，2.6MB）
+  - Product Guide - Equity Market（股票市场产品指南 PDF）: https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/product-guide-equities.pdf
+  - Monitoring and Regulation（FINMA 监管关系说明）: https://www.six-group.com/en/company/governance/monitoring-and-regulation.html
+  - Regulatory Affairs: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/site/regulatory-affairs.html
+  - Clearing and Settlement Provisions（清算结算条款，T+2）: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/trading-provisions/clearing-and-settlement.html
+  - About SIX SIS AG（CSD/ICSD 说明）: https://www.six-group.com/en/products-services/securities-services/settlement-and-custody/info-center/about-six-sis-ag.html
+  - SMI 系列指数编制方案 PDF: https://www.six-group.com/dam/download/market-data/indices/equity-indices/six-methodology-smi-equity-and-re-en.pdf（HTTP 200，1.6MB）
+  - Swiss Stock Exchange 业务总览页: https://www.six-group.com/en/products-services/the-swiss-stock-exchange.html
+  - Listing 总览页: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/listing.html
+  - SIX Exchanges Figures（2026年6月，市值/成交额月度公告）: https://www.six-group.com/en/newsroom/media-releases/2026/20260701-keyfigures-exchange-june-2026.html
+  - Company 总览页（集团沿革）: https://www.six-group.com/en/company.html
+  - Self-regulation of the Swiss Exchange（博客，自律监管架构说明）: https://www.six-group.com/en/blog/exchanges-self-regulation.html
+  - Trading on SIX Swiss Exchange Module 2 - Rules & Regulations（培训材料 PDF，逐条摘引官方规则条文，非泛泛而谈）: https://www.six-group.com/dam/download/sites/education/preparatory-documentation/trading-module/trading-on-ssx-module-2-rules-regulations-en.pdf（HTTP 200，1.0MB）
+  - Trading on SIX Swiss Exchange Module 1 - Trading（同系列培训材料 PDF，含波动性中断参数；⚠️4.8MB大文件，本次探测阶段20秒超时下载到4.6MB中断一次，`make fetch`默认60秒超时下过一次即200成功，已正式纳入清单）: https://www.six-group.com/dam/download/sites/education/preparatory-documentation/trading-module/trading-on-ssx-module-1-trading-en.pdf
+  - Become a Trading Participant: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/participation/trading-participants.html
+  - Exchange Membership 总览: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/participation.html
+- `handbooks.six-group.com` | 官方 | en | curl 常规 UA 200 | Relevant Regulators 页（列出 FINMA 与自律监管分工）
+  - Relevant Regulators: https://handbooks.six-group.com/en/investor-relations/regulatorisches-umfeld-regelwerk-und-reporting-six/relevante-regulatoren
+- `ser-ag.com` | 官方（SIX Exchange Regulation AG，法律上独立于交易所运营主体的自律监管法人，依瑞士法律要求分权设立，见 CLAUDE.md 二第2条「官方规则手册」优先级） | en | curl 常规 UA 200，未见反爬 | 托管《上市规则》《交易规则》正式 PDF 全文，是本所规则条文最权威的直接来源，优先于 six-group.com 的介绍性页面
+  - Listing Rules（LR，2024年11月6日版）PDF: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf（HTTP 200，1.15MB）
+  - Trading Rules（Rule Book，RB）PDF: https://www.ser-ag.com/dam/downloads/regulation/trading/rule-books/rb-en.pdf（HTTP 200，405KB）
+  - About SER（自律监管架构说明）: https://www.ser-ag.com/en/about.html
+  - Guideline "Trading Parameters"（GTP，各交易细分市场的波动性中断/价格监控参数）PDF: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf（HTTP 200，842KB）
+  - Directive 1: Admission of Participants PDF: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir01-en.pdf（HTTP 200，259KB）
+  - Directive 3: Trading PDF（交易机制核心条款：订单类型、执行优先级、集合竞价、卖空、透明度豁免等，是market_structure章节最主要的单一来源）: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf（HTTP 200，869KB；⚠️本条系研究过程中期发现后手工curl补抓，未随第一批`make fetch`一起跑，下次维护本节时若重跑`make fetch EX=ch-six`会自动补齐，属正常范围内的URL）
+- `finma.ch` | 监管 | en/de | curl 常规 UA 200 | 瑞士金融市场监管局（FINMA）官网
+  - Authorised Swiss Stock Exchanges（受批准交易所名录 PDF，含 SIX Swiss Exchange AG 与 SDX Trading AG 两个独立受批准交易所实体）: https://www.finma.ch/en/~/media/finma/dokumente/bewilligungstraeger/pdf/bourses.pdf（HTTP 200，326KB）
+  - FINMA issues first-ever approval for a stock exchange and a central securities depository for the trading of tokens（2021年批准SDX Trading AG为独立交易所的新闻稿，佐证`group_id`判断）: https://www.finma.ch/en/news/2021/09/finma-issues-first-ever-approval-for-a-stock-exchange-and-a-central-securities-depository-for-the-trading-of-tokens/
+- `estv.admin.ch` | 监管（联邦税务局 Federal Tax Administration，印花税与预扣税的法定征收机关） | en/de/fr/it | curl 常规 UA 200 | 用于印花税（Umsatzabgabe/transfer stamp tax）与股息预扣税（Verrechnungssteuer/anticipatory tax）的官方税率确认；⚠️ 预扣税页面直接给出35%具体税率数字（confidence可标high），但印花税总览页只确认税种法律性质，未给出0.15%/0.3%具体税率数字，该数字最终改用下方`taxsummaries.pwc.com`第三方来源（confidence上限medium），下次有空应在ESTV官网德/法/意语版或税率细则子页里找到载明具体税率的原始页面，替换掉第三方来源并升级confidence
+  - Stamp Duty 总览: https://www.estv.admin.ch/en/stamp-duty
+  - Anticipatory Tax（预扣税/预提税）总览: https://www.estv.admin.ch/estv/en/home/anticipatory-tax.html
+- `taxsummaries.pwc.com` | 第三方（四大会计师事务所税务简报） | en | curl 常规 UA 200 | 用于确认瑞士联邦证券交易印花税具体税率（0.15%本国证券/0.3%外国证券）；⚠️非官方原文，`confidence`上限medium，见上条estv.admin.ch的说明
+  - Switzerland - Corporate - Other taxes: https://taxsummaries.pwc.com/switzerland/corporate/other-taxes
+- `natlawreview.com` | 第三方（律所法律资讯平台） | en | curl 常规 UA 200 | 用于确认欧盟2017年认定瑞士交易所MiFID II「等效性」的具体决定内容（生效日期、有效期一年等）；⚠️非官方原文（欧盟官方 europa.eu/rapid 页面本次实测为纯JS渲染的SPA，curl只能拿到空壳，未能抓到正文，故退而求其次用此律所转述），`confidence`上限medium，欧盟官方Implementing Decision原文与该认定后续是否续期/失效仍待核实，见OPEN-QUESTIONS
+  - European Commission Adopts Implementing Decision on the Equivalence of Swiss Stock Exchanges Under MiFID II: https://natlawreview.com/article/european-commission-adopts-implementing-decision-equivalence-swiss-stock-exchanges
 
 ---
 
