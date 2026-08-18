@@ -472,6 +472,257 @@ market_structure:
     quote: "JSE (ZA01, ZA02, ZA03, ZA04, ZA06) NSX (ZA11, ZA12)"
     confidence: medium
 
+  # ─── 衍生品市场机制（如适用）见 schema/taxonomy.yml market_structure.derivatives 与
+  # PROJECT/DECISIONS.md [ADR-019]。以上顶层字段描述的是JSE现货证券市场；本节描述的是同一法人实体
+  # （JSE Limited）自身运营的衍生品业务线（2001年收购南非期货交易所SAFEX后取得金融衍生品交易能力，
+  # 2019年迁移至Millennium Exchange平台，即产品体系中的 za-jse-equity-derivatives 等四个衍生品条目），
+  # 由 JSE 的 Nutron/JSE Trading System 承载。字段取值以 FTSE/JSE Top40 股指期货（ALSI，权益衍生品
+  # 市场的旗舰合约）为代表性样本，个别产品（利率/货币/商品衍生品）的具体参数如有差异已在 detail 中说明。
+  # 现货市场靠多层防线机制结算（见 clearing.ccp_name），衍生品市场另设独立CCP「JSE Clear」
+  # （2022年9月起持牌）——两者制度设计不同，本节均指衍生品市场本身。
+  derivatives:
+    trading_sessions:
+      pre_market:
+        zh: "05h00–08h25 为系统下载专用时段（Download only period，可登录查看数据但不可交易）；08h25–08h30 为FTSE/JSE ALSI与ALMI Top40股指期货专属的开盘集合竞价（Opening Auction Call Session），仅适用此类合约，其余合约无独立开盘集合竞价，直接进入连续交易"
+        en: "05h00–08h25 Download-only period (login permitted, no trading); 08h25–08h30 Opening Auction Call Session applicable only to FTSE/JSE ALSI and ALMI Top 40 Index Futures — other contracts have no opening auction and move directly into continuous trading"
+        sources:
+          - title: "Equity Derivatives Market Trading Hours（clientportal.jse.co.za PDF）"
+            url: https://clientportal.jse.co.za/Content/JSE%20Trading%20Dates%20and%20Calendars%20Items/EquityDerivativesTradingHours.pdf
+            accessed: 2026-08-18
+          - title: "Volume 00D – Trading and Information Overview for the Derivative Markets v2.04（clientportal.jse.co.za PDF）"
+            url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+            accessed: 2026-08-18
+        quote: "05h00 - 08h25 Download only period Users may login ... 08h25 - 08h30 ALSI contract in opening auction All ALSI expiries in auction ／ The Opening Auction Call Session is only applicable for FTSE/JSE ALSI and ALMI Top 40 Index Futures and will be scheduled immediately after the Start of Trading session."
+        confidence: high
+      continuous_am:
+        zh: "08h30 起进入自动交易时段（\"Market open\"），全天为单一不间断的连续交易时段，不因上午/下午而拆分，与 continuous_pm 为同一时段（见该字段说明）"
+        en: "Automated trading begins at 08h30 (\"Market open\"); the entire day runs as a single uninterrupted continuous session, not split into morning/afternoon segments — same session as continuous_pm (see that field)"
+        sources:
+          - title: "Equity Derivatives Market Trading Hours（clientportal.jse.co.za PDF）"
+            url: https://clientportal.jse.co.za/Content/JSE%20Trading%20Dates%20and%20Calendars%20Items/EquityDerivativesTradingHours.pdf
+            accessed: 2026-08-18
+        quote: "08h30 - 17h30 Market open"
+        confidence: high
+      lunch_break:
+        zh: "无——盘中集合竞价（Intraday Auction Call Session）在当前规格文档中被明确标注功能停用，全日为单一连续交易时段，不像现货市场那样以集合竞价分隔上下午"
+        en: "None — the Intraday Auction Call Session is explicitly marked as disabled in the current specification, so the day runs as a single continuous session rather than being split by an intraday auction as in the cash equity market"
+        sources:
+          - title: "Volume 00D – Trading and Information Overview for the Derivative Markets v2.04（clientportal.jse.co.za PDF）"
+            url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+            accessed: 2026-08-18
+        quote: "5.7 Intraday Auction Call Session (functionality currently disabled)"
+        confidence: high
+      continuous_pm:
+        zh: "与上午连续交易为同一不间断时段，延续至17h30市场收市；收盘集合竞价（Closing Auction Call Session）机制在规则中有定义但当前版本同样标注功能停用，收市为连续交易直接停止而非集合竞价定价"
+        en: "Continuous with the morning session through to 17h30 market close; a Closing Auction Call Session mechanism is defined in the rules but likewise currently marked disabled — the market simply stops continuous trading at close rather than uncrossing via a closing auction"
+        sources:
+          - title: "Equity Derivatives Market Trading Hours（clientportal.jse.co.za PDF）"
+            url: https://clientportal.jse.co.za/Content/JSE%20Trading%20Dates%20and%20Calendars%20Items/EquityDerivativesTradingHours.pdf
+            accessed: 2026-08-18
+          - title: "Volume 00D – Trading and Information Overview for the Derivative Markets v2.04（clientportal.jse.co.za PDF）"
+            url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+            accessed: 2026-08-18
+        quote: "08h30 - 17h30 Market open ／ 5.8 Closing Auction Call Session (functionality currently disabled)"
+        confidence: high
+      after_market:
+        zh: "17h30–18h15 为管理时段（Administration period，仅限成交分配与报告，不可下单）；18h15至次日03h00 为系统下载专用时段"
+        en: "17h30–18h15 Administration period (allocations and reporting only, no order entry); 18h15 to 03h00 the next day is a download-only period"
+        sources:
+          - title: "Equity Derivatives Market Trading Hours（clientportal.jse.co.za PDF）"
+            url: https://clientportal.jse.co.za/Content/JSE%20Trading%20Dates%20and%20Calendars%20Items/EquityDerivativesTradingHours.pdf
+            accessed: 2026-08-18
+        quote: "17h30 - 18h15 Market is in admin period Allocations and report only ... 18h15 - 03h00 Download only period System available for downloads"
+        confidence: high
+      night_session:
+        zh: "无独立夜盘连续竞价交易时段；18h15至次日08h25之间均为管理/系统下载性质的非交易时段（见 after_market/pre_market），未见类似港交所收市后交易时段（AHT）的夜盘连续竞价安排"
+        en: "No separate night trading session; the window from 18h15 to 08h25 the next day is administrative/download-only (see after_market/pre_market), with no equivalent of an HKEX-style After-Hours Trading session found"
+        confidence: medium
+        detail: "货币衍生品市场（Currency Derivatives Market）另有一套独立运营时段（09h00–17h00自动交易），与本节以权益衍生品（EDM/ALSI）为代表样本的时段不同，已抓取但未逐条建模进本子块，见 Currency Derivatives Trading Hours PDF。"
+        sources:
+          - title: "Currency Derivatives Trading Hours（jse.co.za PDF）"
+            url: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Currency%20Derivatives/Currency%20Derivatives%20Trading%20Hours.pdf
+            accessed: 2026-08-18
+
+    holidays_note:
+      zh: ""
+      confidence: low
+      detail: "本次抓取的衍生品市场文档未见与现货市场（顶层 holidays_note，同样留空）存在实质差异的独立节假日安排说明，未逐条核实，如实留空，转 OPEN-QUESTIONS。"
+
+    opening_mechanism:
+      zh: "开盘集合竞价（Opening Auction Call Session）仅适用于FTSE/JSE ALSI与ALMI Top40股指期货，紧随「开始交易时段」（Start of Trading Session）之后，按成交量最大化算法（Volume Maximizing Algorithm）撮合定价，已有的隐藏单（Hidden Orders）参与撮合；其余合约无此环节，直接进入连续交易"
+      en: "The Opening Auction Call Session applies only to FTSE/JSE ALSI and ALMI Top 40 Index Futures, scheduled immediately after the Start of Trading Session, and is uncrossed via the Volume Maximizing Algorithm with existing Hidden Orders participating; other contracts have no opening auction and move directly into continuous trading"
+      sources:
+        - title: "Volume 00D – Trading and Information Overview for the Derivative Markets v2.04（clientportal.jse.co.za PDF，5.5节）"
+          url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+          accessed: 2026-08-18
+      quote: "The Opening Auction Call Session is only applicable for FTSE/JSE ALSI and ALMI Top 40 Index Futures and will be scheduled immediately after the Start of Trading session. ... The Orders accumulated during this session will be executed at the uncrossing, based on the Volume Maximizing Algorithm, following any Price Monitoring or Market Order Extensions. ... Any existing Hidden Orders will participate during the uncrossing of the auction."
+      confidence: high
+
+    closing_mechanism:
+      zh: "收盘集合竞价（Closing Auction Call Session）机制本身在规格文档中有完整定义（含提前收市阈值 Early Close Threshold 等规则），但现行规格文档明确标注该功能处于停用状态；实际收市为连续交易直接停止（收市时刻见 trading_sessions.continuous_pm），未观察到以集合竞价方式产生收盘价的安排"
+      en: "A Closing Auction Call Session mechanism (including an Early Close Threshold rule) is fully defined in the specification, but the current specification explicitly marks this functionality as disabled; in practice the market simply stops continuous trading at close (see trading_sessions.continuous_pm for the close time), with no auction-based close price observed"
+      sources:
+        - title: "Volume 00D – Trading and Information Overview for the Derivative Markets v2.04（clientportal.jse.co.za PDF，5.8节）"
+          url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+          accessed: 2026-08-18
+      quote: "5.8 Closing Auction Call Session (functionality currently disabled)"
+      confidence: high
+
+    matching_principle:
+      zh: "中央订单簿（Central Order Book）连续交易时段按价格-可见性-时间优先原则（price-visibility-time priority）连续撮合，与现货市场的撮合原则一致"
+      en: "The Central Order Book matches continuously on a price-visibility-time priority basis during the Continuous Trading Session, the same principle used in the cash equity market"
+      sources:
+        - title: "Volume 00D – Trading and Information Overview for the Derivative Markets v2.04（clientportal.jse.co.za PDF，定义表）"
+          url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+          accessed: 2026-08-18
+      quote: "The Continuous Trading Session defines a session where the orders are continuously executed on a price-visibility-time priority."
+      confidence: high
+
+    order_types:
+      zh: "市价单（Market Order, MO）、限价单（Limit Order, LO）、止损单（Stop Order, SO）、止损限价单（Stop Limit Order, SL）、触价单（Market If Touched, MIT，价格条件满足后才注入订单簿，用于锁定盈利而非止损）、市转限价单（Market to Limit, ML，先按市价盘方式吃单，剩余数量在撮合结束后转为限价盘）"
+      en: "Market Order (MO), Limit Order (LO), Stop Order (SO), Stop Limit Order (SL), Market If Touched (MIT — parked until a price condition is met, used to lock in profit rather than exit a loss), and Market to Limit (ML — behaves as a market order while aggressing, with any remainder converted to a limit order at the end)"
+      sources:
+        - title: "Volume 00D – Trading and Information Overview for the Derivative Markets v2.04（clientportal.jse.co.za PDF，6.1.3节）"
+          url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+          accessed: 2026-08-18
+      quote: "6.1.3.1 Market Order (MO) ... 6.1.3.2 Limit Order (LO) ... 6.1.3.3 Stop Order (SO) ... 6.1.3.4 Stop Limit Order (SL) ... 6.1.3.5 Market If Touched (MIT) Orders ... Market If Touched (MIT) orders allow an order to be parked up until a certain price condition is met. ... 6.1.3.6 Market to Limit Orders (ML) ... A Market To Limit (MTL) order allows the user to aggress the contra-side of an order book as a market order but convert the remaining quantity at the end of aggression to a limit order."
+      confidence: high
+
+    tick_size:
+      zh: "以FTSE/JSE Top40股指期货（ALSI）为例：最小价格变动为1个指数点（每点价值10兰特）"
+      en: "Example (FTSE/JSE Top 40 Index Future, ALSI): minimum price movement is 1 index point (R10 per point)"
+      sources:
+        - title: "SAFEX Equity Derivatives – Index Futures Contract Specifications（jse.co.za PDF，2012年8月版）"
+          url: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Equity%20Index%20Futures/ContractSpecifications.pdf
+          accessed: 2026-08-18
+      quote: "ALSI FTSE/JSE Top 40 Index (J200) R10 per point ... In whole index points ... One Index Point (R10) on screen"
+      confidence: medium
+      detail: "来源为2012年8月版官方Fact Sheet，本次未找到更新版本；合约乘数/最小变动单位一般是稳定的结构性事实，但因文档年代较久未能确认是否仍完全现行，如实标注medium而非high。"
+
+    contract_specs_note:
+      zh: "以FTSE/JSE Top40股指期货（ALSI）为例：合约乘数为每指数点10兰特，到期日为3/6/9/12月第三个星期四（如遇公众假期则提前至上一营业日），现金结算，到期结算价通过到期日12h00–12h15的盘中集合竞价（按成交量最大化算法）产生；利率衍生品另有Jibar期货（短期利率）、掉期期货（长期利率）及债券期货/期权/指数期货，货币衍生品另有货币期货/期权/Quanto期货期权，具体合约规格未逐一核实"
+      en: "Example (FTSE/JSE Top 40 Index Future, ALSI): contract multiplier R10 per index point; expiry on the 3rd Thursday of March/June/September/December (or the preceding business day if a public holiday); cash-settled, with the final settlement price derived from a 12h00–12h15 expiry-day intraday auction using the Volume Maximizing Algorithm. Interest rate derivatives also include Jibar Futures (short-term), Swap Futures (long-term), and Bond Futures/Options/Index Futures; currency derivatives include Currency Futures/Options and Quanto Futures/Options — specifications for these were not individually verified this session"
+      sources:
+        - title: "SAFEX Equity Derivatives – Index Futures Contract Specifications（jse.co.za PDF，2012年8月版）"
+          url: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Equity%20Index%20Futures/ContractSpecifications.pdf
+          accessed: 2026-08-18
+        - title: "Interest Rate Derivatives 概览页（jse.co.za）"
+          url: https://www.jse.co.za/trade/derivative-market/interest-rate-derivatives
+          accessed: 2026-08-18
+      quote: "ALSI FTSE/JSE Top 40 Index (J200) R10 per point An intraday auction that starts at noon 12h00 SA time on 3rd Thursday of Mar, Jun, Sep & Dec. (or previous business day if a public holiday) ... Cash Settled ... The intraday Auction is based on a volume maximizing algorithm ... between 12h00 and 12h15 ／ Futures and options on government debt and State-owned company debt: Bond Futures, Bond Options and Index Futures Short-term Interest Rate Futures (STIRs): Jibar Futures Long Term Interest Rate Futures (LTIRs): Swap Futures"
+      confidence: medium
+      detail: "合约乘数/到期日等结构性事实来自2012年版Fact Sheet（同 tick_size 字段的年代局限说明）；利率衍生品品类清单来自现行官网页面，属较新来源，两段引文分属不同文档、不同可信度，已分别标注。"
+
+    price_limits:
+      type:
+        enum: percentage_band
+        zh: "与现货市场同构的双阈值百分比机制：静态参考价（Static Reference Price，前收盘价或最近一次拍卖成交价）与动态参考价（Dynamic Reference Price，最新成交价）各设独立容忍百分比，任一阈值被突破即触发5分钟波动性拍卖冷静期（Volatility Auction Call Session），而非直接拒单式涨跌停；货币衍生品市场则采用另一套「价格区间」（Price Bands）机制，仅限制订单能否成交而非触发拍卖"
+        en: "Same dual-threshold percentage mechanism as the cash market: independent tolerance percentages for the Static Reference Price (previous close or latest auction trade) and Dynamic Reference Price (last traded price); breaching either triggers a 5-minute Volatility Auction Call Session rather than an outright order rejection. The Currency Derivatives Market instead applies a separate \"Price Bands\" mechanism that limits whether an order can execute, rather than triggering an auction"
+        sources:
+          - title: "Volume 00D – Trading and Information Overview for the Derivative Markets v2.04（clientportal.jse.co.za PDF，6.4节）"
+            url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+            accessed: 2026-08-18
+        quote: "Circuit breaker tolerance is defined as a percentage in relation to the Static Reference Price and / or Dynamic Reference Price. If the difference between the price of the next trade and the Static Reference Price or Dynamic Reference Price is equal or greater than that permitted by the circuit breaker tolerance defined for the relevant session the instrument will automatically be moved into a Volatility Auction Call session. ... Instruments trading in the Currency Market will be subject to Price Bands. These limit entry of an order that may breach certain thresholds set in the trading system."
+        confidence: high
+      main_board:
+        zh: "股票期货（Single Stock Futures）：连续交易/开盘/波动性拍卖/重开集合竞价各阶段均为静态±8%、动态±4%"
+        en: "Single Stock Futures: Static ±8% / Dynamic ±4% across the Continuous Trading, Opening, Volatility and Re-Opening Auction Call sessions"
+        sources:
+          - title: "Volume 00D – Trading and Information Overview for the Derivative Markets v2.04（clientportal.jse.co.za PDF，6.4节熔断阈值表）"
+            url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+            accessed: 2026-08-18
+        quote: "Single Stock Futures Trading Session Static Circuit Breaker % Dynamic Circuit Breaker % Continuous Trading 8% 4% Opening Auction Call 8% 4% Volatility Auction Call 8% 4% Re-Opening Auction Call 8% 4%"
+        confidence: high
+      other_boards:
+        zh: "指数期货（不含TOPI）与TOPI期货：各阶段均为静态±5%、动态±1%；货币衍生品市场另设「价格区间」机制，内层限制±4%、外层限制±8%（仅限制订单能否成交，不触发拍卖）"
+        en: "Index (excl. TOPI) Futures and TOPI Futures: Static ±5% / Dynamic ±1% across all sessions; the Currency Derivatives Market separately applies a Price Band mechanism with a ±4% inner limit and ±8% outer limit (limiting order execution rather than triggering an auction)"
+        sources:
+          - title: "Volume 00D – Trading and Information Overview for the Derivative Markets v2.04（clientportal.jse.co.za PDF，6.4节熔断阈值表）"
+            url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+            accessed: 2026-08-18
+        quote: "Index (excl. TOPI) Futures Continuous Trading 5% 1% ... TOPI Futures Continuous Trading 5% 1% ... Currency Derivatives Market Priceband Inner Limit % 4% Priceband Outer Limit % 8%"
+        confidence: high
+
+    circuit_breaker:
+      enum: stock_level
+      zh: "按合约类别（股票期货 / 指数期货 / TOPI期货）分别设定阈值的逐类别熔断，而非全市场统一熔断；触发后移入波动性拍卖冷静期（Volatility Auction Call Session，时长变更沿革见 volatility_interruption 字段）"
+      en: "Circuit breaker thresholds are set per contract category (Single Stock Futures / Index Futures / TOPI Futures) rather than as a uniform market-wide breaker; a breach moves the instrument into a Volatility Auction Call Session (see the volatility_interruption field for the history of its duration)"
+      detail: "受控词表 circuit_breaker_type 同样没有\"逐合约类别\"这一档，与本文件顶层 circuit_breaker 及 hk-hkex.derivatives.circuit_breaker 是同一处不完全贴合——这里借用 stock_level 仅取其\"非全市场统一\"的含义，真实颗粒度是按股票期货/指数期货/TOPI期货三个产品类别分别设阈值，不是逐个股。"
+      sources:
+        - title: "Volume 00D – Trading and Information Overview for the Derivative Markets v2.04（clientportal.jse.co.za PDF，6.4节）"
+          url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+          accessed: 2026-08-18
+        - title: "Service Hotline 062/2020 – Summary of JSE Circuit Breakers and Auctions（clientportal.jse.co.za PDF，已在顶层 circuit_breaker 引用过）"
+          url: https://clientportal.jse.co.za/Content/JSEHotlinesItems/JSE%20Service%20Hotline%2006220%20EQM%20and%20EDM%20-%20Upgrade%20Summary%20of%20JSE%20Circuit%20Breakers%20and%20Auctions.pdf
+          accessed: 2026-08-18
+      quote: "The following percentages have been defined for the Equity Derivatives Market: Single Stock Futures ... Index (excl. TOPI) Futures ... TOPI Futures ／ The duration of the volatility auction applicable for the Equity Derivatives Market has been increased from 2 minutes to 5 minutes."
+      confidence: high
+
+    volatility_interruption:
+      zh: "波动性拍卖冷静期（Volatility Auction Call Session）：仅当合约的静态或动态参考价容忍阈值被突破时触发，持续5分钟（2020年3月由2分钟延长至5分钟），随后可能追加一系列市价单/价格监察延期（Market Order/Price Monitoring Extensions）"
+      en: "Volatility Auction Call Session: triggered only when an instrument's Static or Dynamic Reference Price tolerance is breached, lasting 5 minutes (extended from 2 minutes in March 2020), and may be followed by a series of Market Order/Price Monitoring Extensions"
+      sources:
+        - title: "Volume 00D – Trading and Information Overview for the Derivative Markets v2.04（clientportal.jse.co.za PDF，5.6节）"
+          url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+          accessed: 2026-08-18
+        - title: "Service Hotline 062/2020 – Summary of JSE Circuit Breakers and Auctions（clientportal.jse.co.za PDF）"
+          url: https://clientportal.jse.co.za/Content/JSEHotlinesItems/JSE%20Service%20Hotline%2006220%20EQM%20and%20EDM%20-%20Upgrade%20Summary%20of%20JSE%20Circuit%20Breakers%20and%20Auctions.pdf
+          accessed: 2026-08-18
+      quote: "This session will only trigger when an instrument's 'circuit breaker tolerance level' has been breached. Volatility Auction Call sessions last for a scheduled period of 5 minutes. ／ 23 March 2020 ... A Price Monitoring extension of 3 minutes has been added to the volatility auction in the Equity Market for trading segments ZA01, ZA02 and ZA03. The duration of the volatility auction applicable for the Equity Derivatives Market has been increased from 2 minutes to 5 minutes."
+      confidence: high
+
+    trading_halt_mechanism:
+      zh: "监管性人工停牌：市场监管总监（Director: Market Regulation）会同首席执行官（或Issuer Services总监）认定某衍生品证券的交易活动涉及利用未公开价格敏感信息、操纵性/欺诈性交易行为，或可能导致虚假价格时，可宣布对该证券实施停牌；停牌期间会员不得交易该证券，但可撤单——性质上不同于顶层 trading_halt_mechanism 描述的、由JSE市场运营人员触发的操作性人工停牌"
+      en: "A regulatory (not purely operational) trading halt: the Director: Market Regulation, together with the CEO (or Director: Issuer Services), may declare a trading halt in a derivative security where trading activity may involve unpublished price-sensitive information, manipulative/deceptive practices, or may otherwise give rise to an artificial price; trading members may not trade that security during the halt but may still delete orders — distinct in nature from the operational halt described in the top-level trading_halt_mechanism field, which is triggered by JSE Market Operations"
+      sources:
+        - title: "Derivatives Rules（jse.co.za PDF，7.190条）"
+          url: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Trade/Derivative%20Market/Derivatives%20Market/DerivativesRules.pdf
+          accessed: 2026-08-18
+      quote: "The Director: Market Regulation or his deputy, in conjunction with the Chief Executive Officer or acting Chief Executive Officer or, failing the Chief Executive Officer or acting Chief Executive Officer, the Director: Issuer Services, may declare a trading halt in a derivative security in circumstances where the Director: Market Regulation determines that the trading activity in a derivative security – is being or could be undertaken by persons possessing unpublished price-sensitive information that relates to the underlying instrument to which the derivative security relates; or is being influenced by a manipulative or deceptive trading practice; or may otherwise give rise to an artificial price in that derivative security. No trading member may trade that derivative security for the duration of the trading halt but may delete orders from the JSE trading system."
+      confidence: high
+
+    block_trade:
+      zh: "场外协商交易（Off Book Trade）：符合《衍生品规则》7.115条件的交易类型（含指数/股票期权期货、单一股票期货期权、eCFD，以及实物对冲交易EFP、风险对冲交易EFR、展期交易Roll Trade、策略交易Strategy Trade）不必经中央订单簿撮合，由一方或双方会员协商后报告至JSE交易系统，且均须由JSE公开发布"
+      en: "Off Book Trades: transactions meeting Derivatives Rules 7.115 criteria (index/equity options and futures, single stock futures/options, eCFDs, plus Exchange for Physical, Exchange for Risk, Roll Trade and Strategy Trade types) need not be executed through the Central Order Book and may instead be negotiated between one or two members and reported to the JSE trading system, and are all published by the JSE"
+      sources:
+        - title: "Derivatives Rules（jse.co.za PDF，7.114/7.115条）"
+          url: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Trade/Derivative%20Market/Derivatives%20Market/DerivativesRules.pdf
+          accessed: 2026-08-18
+      quote: "Subject to members complying with the best execution principle in rule 7.15 when trading with or on behalf of clients, the transactions listed in rule 7.115 do not have to be executed through the central order book and may instead be submitted to the JSE trading system as off book trades. ... Index options, index futures, equity options, equity futures, single stock futures and single stock options ... Exchange for Physical ... Exchange for Risk ... Roll Trade ... Strategy Trade"
+      confidence: high
+
+    market_maker_scheme:
+      zh: "JSE指数期权做市商计划（Index Options Market-Making Scheme）：为ALSI Top40指数期权提供实时挂牌报价，分两阶段——第一阶段（Best Efforts Basis）面向所有市场参与者，无强制义务，采用挂单方零费率的做市-吃单（maker-taker）收费模式；第二阶段（正式做市商计划）仅限指定做市商，须满足最低在场时间（不含集合竞价时段≥50%双边报价）、最小报价量（100张指数合约，买卖量相当）、最小价差（2个波动率点）等量化要求，JSE持续监控并按月向做市商反馈合规情况"
+      en: "The JSE Index Options Market-Making Scheme provides real-time on-screen pricing for ALSI Top 40 Index Options, in two phases: Phase 1 (Best Efforts Basis) is open to all participants with no formal obligations, using a maker-taker fee model with zero fees for liquidity providers; Phase 2 (the formal Market Making Scheme) is limited to designated market makers, requiring minimum quoting presence (two-way quotes ≥50% of the time excluding auctions), minimum quote size (100 index contracts, comparable bid/offer size), and minimum spread (2 volatility points), with the JSE continuously monitoring and reporting monthly compliance to market makers"
+      sources:
+        - title: "Market Making Index Options（jse.co.za）"
+          url: https://www.jse.co.za/trade/derivatives-market/equity-derivatives/market-making-index-options
+          accessed: 2026-08-18
+      quote: "The JSE Index Options Market-Making Scheme in the Equity Derivatives Market provides real-time on-screen pricing for the ALSI Top 40 Index options contract. ... Traders can voluntarily post competitive bids and offers on-screen for various option strikes and expiries, with no obligations imposed on participants. The JSE has adopted a maker-taker fee model which automatically charges a zero fee on the liquidity providers' side of the trade on index options. ... Minimum Presence ... 50% with two-way quotes (excluding auctions) ... Minimum Quality ... 100 Index contracts, Bid and Offer size should be of comparable size ... Minimum Spread ... 2 Volatility points ... The compliance with the obligations will be continuously monitored by the JSE."
+      confidence: high
+
+    margin_practice_note:
+      zh: "所有场内衍生品持仓均须向JSE Clear缴纳保证金，含初始保证金（Initial Margin，风险敞口变化时缴付的\"善意保证金\"，平仓后连本带息退还）、逐日盯市产生的变动保证金（Variation Margin），以及清算会员/会员可视情况向下游追加要求的附加保证金（Additional Margin）与保留保证金（Retained Margin）。初始保证金的计算方法采用组合扫描（Portfolio Scanning）模型——对参与者整个持仓组合在一系列极端市场情景下重新估值，取最大潜在亏损作为保证金，情景宽度由风险管理委员会（RMCO）设定的风险参数（3.5个标准差）决定，本质是一种VaR方法；JSE Clear现行文件将该算法称为JSPAN（利率衍生品自2019年起改用Portfolio VaR方法）"
+      en: "All on-exchange derivatives positions must post margin to JSE Clear, comprising Initial Margin (a \"good faith deposit\" payable when risk of loss changes, repaid with interest at close-out), Variation Margin (from daily mark-to-market), and Additional Margin / Retained Margin that clearing members or members may additionally require from downstream parties. Initial margin is calculated under a Portfolio Scanning model — a participant's whole portfolio is revalued across a range of extreme market scenarios and margin is set to the greatest potential loss, with scenario width driven by the Risk Management Committee's (RMCO) Risk Parameter (3.5 standard deviations), a VaR-type approach; JSE Clear's current documentation names this algorithm JSPAN (interest rate derivatives moved to a Portfolio VaR methodology in 2019)"
+      detail: "三份来源分属不同年代（《衍生品规则》2019年4月版法律定义条款；《SAFCOM Margins Explained》2012年版方法论说明；《JSE Clear Margin Methodology》2019年2月版，同年将利率衍生品的方法论由JSPAN改为Portfolio VaR）——具体参数之外，\"组合扫描/情景估值\"这一框架性描述三份文件相互印证，视为稳定事实。本字段是交易端保证金义务与方法论摘要，与 clearing.initial_margin_practice（目前只记录现货证券市场T+2结算保证金）互补而非重复，不合并。"
+      sources:
+        - title: "Derivatives Rules（jse.co.za PDF，8.60/9.20条）"
+          url: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Trade/Derivative%20Market/Derivatives%20Market/DerivativesRules.pdf
+          accessed: 2026-08-18
+        - title: "SAFCOM Margins Explained（jse.co.za PDF，2012年10月版）"
+          url: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Post%20Trade%20Services/Regulatory%20Compliance/SAFCOM%20Margin%20Methodology.pdf
+          accessed: 2026-08-18
+        - title: "JSE Clear Margin Methodology（jse.co.za PDF，2019年2月版）"
+          url: https://www.jse.co.za/sites/default/files/media/documents/2020-08/JSE%20Clear%20Margin%20Methdology.pdf
+          accessed: 2026-08-18
+      quote: "Initial margin shall be paid to or by a member or client whenever the risk of loss, as determined by the JSE, changes with respect to the aggregate position of such member or client. ／ JSE's margining uses a Portfolio Scanning method. The basis of Portfolio Scanning is that the whole of a participant's portfolio on the Exchange is valued (\"scanned\") at a number of points over a wide range of market moves. ... His margin, due in cash on the next morning, is then set equal to this greatest loss. ... This is measured in standard deviations (\"Sds\") and has been set at 3.5 Sds since the margining methodology was introduced. ／ JSE CLEAR MARGIN METHODOLOGY February 2019 ... the JSPAN algorithm is used to determine account-level base IM requirements for all contracts cleared by JSEC ... a base IM requirement, calculated under the Portfolio VaR framework for interest rate derivatives, and the JSPAN framework for all other derivatives ... Adjusted to reflect the change in methodology for the interest rate derivatives market, from JSPAN to Portfolio VaR"
+      confidence: high
+
+    connect_schemes:
+      zh: ""
+      confidence: low
+      detail: "本次抓取的衍生品市场文档未见类似沪港通模式的投资者跨境互联互通安排；顶层 connect_schemes 字段提到的JSE与纳米比亚证券交易所（NSX）共享Millennium Exchange撮合引擎，是现货证券市场的基础设施共享安排，未见明确延伸至衍生品市场的官方说明，如实留空，转 OPEN-QUESTIONS。"
+
 # ═══════════════════════════════════════════════
 # 六｜上市、持续监管与退市
 # ═══════════════════════════════════════════════

@@ -516,6 +516,16 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 交易信息系统概念培训（含交易时段表与ZA01/ZA02熔断阈值百分比表的纯文本版）PDF: https://clientportal.jse.co.za/Content/JSE%20Technology%20Document%20Items/Equity%20Market_Trading%20%20Information%20System_Conceptual%20Training_v2.pdf
   - 上市规则（简化版，2025年12月）PDF: https://www.jse.co.za/sites/default/files/media/documents/jse-listings-requirements-simplified/JSE_Listings_Requirements_Simplified_Final_@_12_December_2025_Final.pdf
   - 权益市场指引（Equities Directives）PDF: https://www.jse.co.za/sites/default/files/media/documents/equities-directives/Equities%20Directives.pdf
+  - 衍生品市场总览（2026-08-18补充抓取，补齐market_structure.derivatives子块）: https://www.jse.co.za/trade/derivative-market
+  - 利率衍生品概览（含Jibar期货/掉期期货/债券期货期权说明）: https://www.jse.co.za/trade/derivative-market/interest-rate-derivatives
+  - 衍生品规则（Derivatives Rules，2019年4月29日版，含保证金8.60/9.20条、场外协商交易7.114/7.115条、监管性停牌7.190条）PDF: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Trade/Derivative%20Market/Derivatives%20Market/DerivativesRules.pdf
+  - 衍生品市场交易信息总览（Volume 00D，v2.04，2026年5月28日版，含交易时段/订单类型/熔断阈值表，112页；⚠️WebSearch摘要给出的clientportal旧版直链v2.03已失效，改经 clientportal.jse.co.za/technical-library/trading-and-market-data-documentation 落地页定位到当前版本v2.04）PDF: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+  - 权益衍生品市场交易时段 PDF: https://clientportal.jse.co.za/Content/JSE%20Trading%20Dates%20and%20Calendars%20Items/EquityDerivativesTradingHours.pdf
+  - 货币衍生品市场交易时段 PDF: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Currency%20Derivatives/Currency%20Derivatives%20Trading%20Hours.pdf
+  - 指数期权做市商计划说明页: https://www.jse.co.za/trade/derivatives-market/equity-derivatives/market-making-index-options
+  - 股指期货合约规格Fact Sheet（2012年8月版，ALSI/Mini等FTSE/JSE Top40系列期货；⚠️年代较久，本次未找到更新版本，合约乘数/最小变动单位等结构性事实按medium confidence处理）PDF: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Equity%20Index%20Futures/ContractSpecifications.pdf
+  - SAFCOM保证金方法论说明（Portfolio Scanning模型概述，2012年10月版）PDF: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Post%20Trade%20Services/Regulatory%20Compliance/SAFCOM%20Margin%20Methodology.pdf
+  - JSE Clear保证金方法论（JSPAN算法，2019年2月版）PDF: https://www.jse.co.za/sites/default/files/media/documents/2020-08/JSE%20Clear%20Margin%20Methdology.pdf
 - `fsca.co.za` | 监管 | en | curl 常规 UA 200 | 金融部门行为监管局（Financial Sector Conduct Authority），南非"双峰"（Twin Peaks）监管架构下的市场行为监管方，2018年由原金融服务局（FSB）改制而来
   - 关于我们: https://www.fsca.co.za/about-us/
 - `strate.co.za` | 官方（中央证券存管机构） | en | curl 常规 UA 200（575KB，内容较厚） | Strate Limited，南非法定中央证券存管机构（CSD），负责JSE现货证券市场的电子结算
