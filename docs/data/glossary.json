@@ -429,6 +429,24 @@
       "zh": "属地监管机关",
       "en": "Competent State Authority",
       "note": "德国/瑞士等联邦制国家里，交易所设立与运作的监管职能可能落在邦/州一级（如Eurex的黑森州监管机关），而非全国性金融监管总局；与\"金融业务行为监管\"（如BaFin/FINMA）是两个不同层面的监管，比较跨国交易所监管框架时注意区分"
+    },
+    {
+      "id": "span-margining",
+      "zh": "SPAN组合保证金算法",
+      "en": "Standard Portfolio Analysis of Risk (SPAN)",
+      "natives": {
+        "en": "Standard Portfolio Analysis of Risk (SPAN)"
+      },
+      "note": "芝加哥商业交易所（CME）研发并授权他方使用的具名组合保证金算法——以16档标准风险情景（价格扫描区间×波动率扫描区间）估算组合单日最大潜在亏损；与更泛化的\"组合保证金\"（见 portfolio-margining）是属种关系，SPAN是其中一种具体、可被不同交易所直接引用或做\"兼容\"改造的实现（in-nse 的 NSCCL SPAN 直接使用该算法；hk-hkex 的 PRiME 系统自称\"SPAN兼容\"但并非同一系统），比较不同交易所保证金方法论时注意区分\"直接用SPAN\"与\"仅兼容SPAN\""
+    },
+    {
+      "id": "derivatives-operating-range",
+      "zh": "（衍生品）操作区间",
+      "en": "Operating Range",
+      "natives": {
+        "en": "Operating Range"
+      },
+      "note": "in-nse 衍生品分部特有概念——不是严格意义的每日涨跌停（无硬性上下限），而是防止错价申报的订单过滤区间，超出区间的委托会被判定为\"价格冻结\"（price freeze）而非直接拒绝，区间本身可在盘中被放宽；与 static-dynamic-reference-price（熔断判定基准价）概念相关但用途不同——后者用于触发熔断，前者用于筛掉单笔错价委托，两者不合并"
     }
   ]
 }

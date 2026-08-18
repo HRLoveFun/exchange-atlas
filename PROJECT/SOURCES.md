@@ -272,6 +272,19 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Categories of Membership（会员/经纪商类型：Trading Member/Clearing Member等）: https://www.nseindia.com/static/trade/membership-types（HTTP 200，332KB）
   - Trading Protocols（NEAT 交易系统、行情数据层级、Colocation/MTBT 逐笔行情）: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols（HTTP 200，356KB）
   - Nifty 50 Index（旗舰指数说明页）: https://www.nseindia.com/static/products-services/indices-nifty50-index（HTTP 200，294KB）
+  - About Equity Derivatives（衍生品市场沿革：指数期货2000-06-12/指数期权2001-06-04/个股期权2001-07-02/个股期货2001-11-09上线）: https://www.nseindia.com/static/products-services/about-equity-derivatives（HTTP 200，355KB）
+  - Equity Derivatives Pre-Open Session（股票/股指期货开盘前集合竞价机制，09:00-09:15）: https://www.nseindia.com/static/products-services/equity-derivatives-pre-open-session（HTTP 200，338KB）
+  - Equity Derivatives Trading System（F&O撮合系统：价格-时间优先、订单簿、DAY/IOC时间条件、限价/市价/止损价格条件）: https://www.nseindia.com/static/products-services/equity-derivatives-trading-system（HTTP 200，306KB）
+  - Equity Derivatives Price Bands（衍生品分部无每日涨跌停，改设10%/delta动态操作区间防止错价申报）: https://www.nseindia.com/static/products-services/equity-derivatives-price-bands（HTTP 200，125KB）
+  - Equity Derivatives Margins（NSE Clearing 保证金体系总览：SPAN初始保证金/Extreme Loss Margin）: https://www.nseindia.com/static/products-services/equity-derivatives-margins（HTTP 200，372KB）
+  - NSCCL SPAN（SPAN组合保证金算法原理：16档情景扫描、Scanning Risk Charge、Calendar Spread Charge）: https://www.nseindia.com/products-services/equity-derivatives-nse-clearing-span（HTTP 200，355KB）
+  - Liquidity Enhancement Scheme（做市商/流动性提供者计划，含指定做市商利益冲突披露要求；目前已确认产品集中在商品衍生品分部，如白银期权/电力期货/迪拜原油期货）: https://www.nseindia.com/static/market-data/liquidity-enhancement-scheme（HTTP 200，326KB）
+  - NIFTY 50 F&O（Nifty50期货/期权合约规格：3个月交易周期、最后交易日为到期月最后一个周二、期货最小合约价值不低于1500万卢比、期权行权价间距表）: https://www.nseindia.com/static/products-services/equity-derivatives-nifty50（HTTP 200，369KB）
+  - Individual Securities F&O（个股期货/期权合约规格：最小合约价值不低于500万卢比、期权为欧式且实物交割）: https://www.nseindia.com/static/products-services/equity-derivatives-individual-securities（HTTP 200，371KB）
+  - ⚠️ Equity Derivatives Settlement Mechanism（页面标注"Updated on: 03/01/2023"，早于上面两条2025年更新的合约规格页；文字写期权"Exercise settlement is cash settled"未按标的区分指数/个股，与 Individual Securities F&O 页"Options contracts are European style and physically settled"直接冲突——本次判断后者（更新更晚、专门针对个股期权）更可信，前者疑似未随2019年SEBI个股衍生品实物交割新规同步更新，未采信其"个股期权现金结算"表述，两页均已记入 quote 供核查）: https://www.nseindia.com/static/products-services/equity-derivatives-settlement-mechanism（HTTP 200，364KB）
+  - Currency Derivatives Contract Specification - INR Pairs（USDINR/EURINR/GBPINR/JPYINR期货期权合约规格：最小价格变动0.25 paise即INR 0.0025）: https://www.nseindia.com/static/products-services/currency-derivatives-contract-specification-inr（HTTP 200，376KB）
+  - Commodity Derivatives Contract Specifications - Base Metals（非农商品每日价格限制6%，触发后冷静期15分钟放宽至9%，国际市场价格另按3%阶梯放宽）: https://www.nseindia.com/static/products-services/commodity-derivatives-contract-specifications-base-metals（HTTP 200，395KB）
+  - Interest Rate Derivatives Contract Specifications - Government Securities（国债期货：1手=200万卢比面值、最小报价单位0.0025、到期月最后交易日为最后一个周四、操作区间±3%可放宽两次）: https://www.nseindia.com/static/products-services/interest-rate-derivatives-contract-specifications-g-sec（HTTP 200，355KB）
 - `nsearchives.nseindia.com` | 官方（NSE 官网文档归档子域） | en | curl 常规 UA 200，PDF 体积较大（3.2MB），用 `pdftotext -layout` 转纯文本再 grep 定位 | 存放规则/方法论类 PDF，与主站 `nseindia.com` 同属官方一手来源
   - Methodology Document for NIFTY Equity Indices（含 Nifty 50 基日/基点/加权方式/成分股筛选规则）PDF: https://nsearchives.nseindia.com/content/indices/Method_NIFTY_Equity_Indices.pdf（HTTP 200，3.2MB）
 - `sebi.gov.in` | 监管 | en | curl 常规 UA 200，未见反爬；页面是服务端渲染的传统多页站（非 SPA），正文可直接 grep，比同为监管机构域名的 `sec.gov`（美国，v0.2 时实测 403）好抓得多 | 印度证券交易委员会（SEBI），NSE 的政府监管机构；本节只用于确认监管机构身份与核心法律名称，具体规则条款优先引用 NSE 官网转载/说明页

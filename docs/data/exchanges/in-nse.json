@@ -802,32 +802,412 @@
       },
       "derivatives": {
         "trading_sessions": {
-          "pre_market": null,
-          "continuous_am": null,
-          "lunch_break": null,
-          "continuous_pm": null,
-          "after_market": null,
-          "night_session": null
+          "pre_market": {
+            "zh": "开盘前集合竞价（Pre-open session），09:00-09:15，采用call auction机制；仅适用于当月合约（个股期货与指数期货均适用），到期前最后5个交易日扩展至下月合约；如遇全市场指数熔断触发或系统中断导致停牌，复牌时也会启用一次开盘前集合竞价，具体时段另行公告",
+            "en": "Pre-open session, 09:00-09:15, using a call auction mechanism; applies only to current-month futures contracts (both single-stock and index); extended to next-month contracts during the last 5 trading days before expiry. In case of an index-based market-wide circuit filter breach or a trading outage, the market also reopens with a pre-open session, with timing announced separately",
+            "sources": [
+              {
+                "title": "Equity Derivatives Pre-Open Session（官网）",
+                "url": "https://www.nseindia.com/static/products-services/equity-derivatives-pre-open-session",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "The pre-open session shall be conducted using call auction mechanism for duration of 15 minutes i.e., from 9:00 am to 9:15 am. / The pre-open shall be applicable for current months futures contracts only on both single stocks and indices. However, in the last five trading days before the current month expiry, this session shall be extended to next-month futures contracts.",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          },
+          "continuous_am": {
+            "zh": "股票/股指衍生品（Equity Derivatives）分部连续交易时段09:15起，与下午时段为同一连续时段，无独立上/下午划分（见 continuous_pm）",
+            "en": "The Equity Derivatives segment's continuous trading begins at 09:15; not split into separate morning/afternoon sessions (see continuous_pm)",
+            "sources": [
+              {
+                "title": "Market Timings（官网，Derivatives Market 折叠区块）",
+                "url": "https://www.nseindia.com/static/market-data/market-timings",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "Equity Derivatives / Trading sessions / Time / Normal Market Open Time / 09:15 hrs.",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          },
+          "lunch_break": {
+            "zh": "无（连续交易09:15-15:40中间不设午休，与现货市场一致）",
+            "en": "None (continuous trading 09:15-15:40 has no midday break, consistent with the cash market)",
+            "confidence": "medium",
+            "sources": [
+              {
+                "title": "Market Timings（官网）",
+                "url": "https://www.nseindia.com/static/market-data/market-timings",
+                "accessed": "2026-08-14"
+              }
+            ],
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null,
+            "quote": null
+          },
+          "continuous_pm": {
+            "zh": "股票/股指衍生品（Normal Market）连续交易09:15-15:40；交易修改截止16:15；未见类似现货市场收盘集合竞价（CAS）的独立衍生品收盘机制说明，见 closing_mechanism",
+            "en": "Equity Derivatives (Normal Market) continuous trading 09:15-15:40; trade modification cut-off 16:15; no dedicated derivatives closing-auction mechanism analogous to the cash market's CAS was found — see closing_mechanism",
+            "sources": [
+              {
+                "title": "Market Timings（官网，Derivatives Market 折叠区块）",
+                "url": "https://www.nseindia.com/static/market-data/market-timings",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "Equity Derivatives / Trading sessions / Time / Normal Market Open Time / 09:15 hrs. / Normal Market Close Time / 15:40 hrs. / Trade Modification End Time / 16:15 hrs.",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          },
+          "after_market": {
+            "zh": "",
+            "confidence": "low",
+            "detail": "官网 Market Timings 页「Equity Derivatives」折叠区块只列 Normal Market Open/Close 与 Trade Modification End 三行，未见独立盘后连续交易时段，未做「无」的断言，留空。",
+            "sources": [
+              {
+                "title": "Market Timings（官网）",
+                "url": "https://www.nseindia.com/static/market-data/market-timings",
+                "accessed": "2026-08-14"
+              }
+            ],
+            "verified": "2026-08-14",
+            "en": null,
+            "enum": null,
+            "quote": null
+          },
+          "night_session": {
+            "zh": "股票/股指衍生品本身无夜盘；但同为衍生品业务线的商品衍生品（非农品种）时段可延至夜间23:30/23:55（跨美国夏令时调整），跨货币货币衍生品（EURUSD/GBPUSD/USDJPY交叉盘）收市时间也明显晚于股票/股指衍生品，具体见 contract_specs_note",
+            "en": "No night session for equity/index derivatives themselves; but the commodity derivatives line (non-agri) extends to 23:30/23:55 (adjusted for US daylight-saving), and cross-currency derivatives (EURUSD/GBPUSD/USDJPY) close markedly later than equity derivatives — see contract_specs_note",
+            "sources": [
+              {
+                "title": "Market Timings（官网，Derivatives Market 折叠区块）",
+                "url": "https://www.nseindia.com/static/market-data/market-timings",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "Non – Agri Commodities / Market Time / 09:00 AM / 11:30 PM / 11:55 PM",
+            "confidence": "medium",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          }
         },
-        "holidays_note": null,
-        "opening_mechanism": null,
-        "closing_mechanism": null,
-        "matching_principle": null,
-        "order_types": null,
-        "tick_size": null,
-        "contract_specs_note": null,
+        "holidays_note": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "本次抓取页面未见衍生品市场节假日安排与现货市场（见顶层 holidays_note）存在实质差异的官方说明，未逐条核实，留空。",
+          "sources": [
+            {
+              "title": "Market Timings（官网）",
+              "url": "https://www.nseindia.com/static/market-data/market-timings",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "opening_mechanism": {
+          "zh": "开盘前集合竞价（Pre-open session）09:00-09:08收集订单，09:08-09:12为订单确认/取消窗口，09:12-09:15为价格发现与向连续交易过渡的窗口；期间会披露指示性均衡价（Indicative equilibrium price）、买卖挂单量及涨跌幅；集合竞价确定的均衡价即为当日开盘价，若未能形成价格则以Normal Market首笔成交价作为开盘价",
+          "en": "Pre-open session: 09:00-09:08 order collection, 09:08-09:12 order confirmation/cancellation window, 09:12-09:15 price discovery and transition to continuous trading; the indicative equilibrium price, aggregate buy/sell quantity and % change are disseminated during the session; the equilibrium price determined becomes the day's open price, or if no price is discovered, the first trade in the Normal Market becomes the open price",
+          "sources": [
+            {
+              "title": "Equity Derivatives Pre-Open Session（官网）",
+              "url": "https://www.nseindia.com/static/products-services/equity-derivatives-pre-open-session",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "9:00 am - 9:08 am (*) ... 9:12 am - 9:15 am / Transition from pre-open to continuous trading session / The information like Indicative equilibrium / opening price of contract, total buy and sell quantity of the contract and % change of indicative equilibrium price to previous close price shall be computed based on the orders in order book and will be disseminated during pre-open session. / The equilibrium price determined in pre-open session is considered as open price for the day. / In case of no price is discovered in pre-open session, the price of first trade in the normal market is the open price.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "closing_mechanism": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "本次抓取的官方页面（About Equity Derivatives、Pre-Open Session、Trading System、Market Timings）均未提及类似现货市场收盘集合竞价（CAS，15:40-16:00）的独立衍生品收盘机制；Market Timings 页「Equity Derivatives」区块只列 Normal Market Close 15:40 与 Trade Modification End 16:15，未见「Closing session」条目（对照现货 Equities 区块明确有该条目）。不排除存在但本次抓取范围内未找到专门说明页，如实留空，记入 OPEN-QUESTIONS。",
+          "sources": [
+            {
+              "title": "Market Timings（官网）",
+              "url": "https://www.nseindia.com/static/market-data/market-timings",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "matching_principle": {
+          "zh": "期货期权交易系统（Futures and Options Trading System）为全自动屏幕交易系统，订单按价格-时间优先顺序（先比价格，同价比时间）存入订单簿撮合；被动订单（先挂单）与主动订单（后到达并触发成交）区分，成交价格以被动订单价格为准",
+          "en": "The Futures and Options Trading System is a fully automated screen-based trading system; orders are stored and matched in price-time priority (best price first, then earliest time at that price); orders are classified as passive (resting) or active (newly arrived, triggering a match), and trades are always executed at the passive order's price",
+          "sources": [
+            {
+              "title": "Equity Derivatives Trading System（官网）",
+              "url": "https://www.nseindia.com/static/products-services/equity-derivatives-trading-system",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The Futures and Options Trading System provides a fully automated trading environment for screen-based, floor-less trading on a nationwide basis and an online monitoring and surveillance mechanism. The system supports an order driven market and provides complete transparency of trading operations. / Orders are stored in price-time priority in various books in the following sequence: Best Price / Within Price, by time priority. / Orders are always matched at the passive order price.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "order_types": {
+          "zh": "时间条件：DAY（当日有效，收盘未成交自动撤销）、IOC（立即成交剩余部分自动撤销）；价格条件：限价单（Limit）、市价单（Market）、止损单（Stop Loss，触及触发价后转为限价单挂入常规订单簿）；另在具体合约层面支持整手单（Regular lot order）、止损单（Stop Loss Order）、IOC 单与价差单（Spread order）",
+          "en": "Time conditions: DAY (valid for the trading day, auto-cancelled if unmatched at close) and IOC (Immediate or Cancel, unmatched portion cancelled immediately); price conditions: Limit Price/Order, Market Price/Order, and Stop Loss (SL) Price/Order (activated once the trigger price is reached, then enters the regular order book as a limit order); at the contract level, Regular lot order, Stop Loss Order, Immediate-or-Cancel, and Spread order are also supported",
+          "sources": [
+            {
+              "title": "Equity Derivatives Trading System（官网）",
+              "url": "https://www.nseindia.com/static/products-services/equity-derivatives-trading-system",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "NIFTY 50 F&O（官网，Order Type 节）",
+              "url": "https://www.nseindia.com/static/products-services/equity-derivatives-nifty50",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "DAY - A Day order, as the name suggests, is an order which is valid for the day on which it is entered. If the order is not matched during the day, the order gets cancelled automatically at the end of the trading day. / IOC - An Immediate or Cancel (IOC) order allows a Trading Member to buy or sell a security as soon as the order is released into the market, failing which the order will be removed from the market. / Stop Loss (SL) Price/Order - The one that allows the Trading Member to place an order which gets activated only when the market price of the relevant security reaches or crosses a threshold price. ／ Regular lot order ／ Stop Loss Order ／ Immediate or cancel ／ Spread order",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "tick_size": {
+          "zh": "以Nifty 50指数期权为例，最小报价单位（price step）为0.05卢比；期货的最小变动单位按指数点位分档设定，未见统一单一数值；国债利率期货最小报价单位为0.0025卢比；货币衍生品（INR货币对）最小变动0.25 paise（即0.0025卢比）",
+          "en": "Example (Nifty 50 index options): price step of Re. 0.05; futures tick sizes are tiered by index level with no single uniform value; government-securities interest rate futures tick size is Rs. 0.0025; currency derivatives (INR pairs) tick size is 0.25 paise (i.e. INR 0.0025)",
+          "sources": [
+            {
+              "title": "NIFTY 50 F&O（官网）",
+              "url": "https://www.nseindia.com/static/products-services/equity-derivatives-nifty50",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Interest Rate Derivatives Contract Specifications - Government Securities（官网）",
+              "url": "https://www.nseindia.com/static/products-services/interest-rate-derivatives-contract-specifications-g-sec",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Currency Derivatives Contract Specification - INR Pairs（官网）",
+              "url": "https://www.nseindia.com/static/products-services/currency-derivatives-contract-specification-inr",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The price step in respect of Nifty 50 index options contracts is Re.0.05. ／ Tick size / Rs.0.0025 ／ Tick size / 0.25 paise  or INR 0.0025",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "contract_specs_note": {
+          "zh": "股票/股指衍生品（代表样本 Nifty 50）：期货最长3个月交易周期（近月/次近月/远月同时挂牌），\n到期月最后一个周二为最后交易日；上市首日合约价值不低于1500万卢比；期权为欧式，除4档周度\n合约外另有3个月度、3个季度（3/6/9/12月）及8个半年度（6/12月）合约并存，任意时点保证\n至少5年期权可交易；行权价间距按指数点位分档（如全档位统一50点间距，覆盖35档实值-1档\n平值-35档虚值）。个股期货期权：上市首日合约价值不低于500万卢比，交易周期与到期日规则\n与指数期货相同；个股期权为欧式且官网原文明确\"physically settled\"（实物交割，即到期以标的\n股票现货交割，而非现金结算）。\n⚠️ 结算方式说明：本条个股期权\"实物交割\"表述引自 Individual Securities F&O 页（更新于\n2025-10-28），与印度2018-2019年SEBI个股衍生品逐步实物交割新规方向一致；但官网另有\nSettlement Mechanism 页（更新于2023-01-03，更新时间更早）写\"期权行权结算为现金结算\"\n且未按标的区分指数/个股，与前者直接冲突——本次判断个股期权实物交割的表述更可信（专门\n针对个股期权、更新更晚），指数期权（Nifty 50）本身官网原文虽也写\"physical settled\"，\n但与\"指数无法实物交割\"的常识及金融业界公开资料矛盾，怀疑是网页模板从个股期权段落\n误复制，未采信指数期权\"实物交割\"这一具体表述，指数期权结算方式本条不做断言，留待\n人工核实，已记入 OPEN-QUESTIONS。\n",
+          "en": "Equity/index derivatives (representative sample: Nifty 50): futures have a maximum 3-month\ntrading cycle (near/next/far month simultaneously listed), expiring on the last Tuesday of\nthe contract month; minimum contract value of Rs. 15 lakh on first-day listing. Options are\nEuropean-style; besides 4 weekly contracts, 3 monthly, 3 quarterly (Mar/Jun/Sep/Dec) and 8\nsemi-annual (Jun/Dec) contracts co-exist, guaranteeing at least 5 years of tradable option\ntenure at any time; strike intervals are tiered by index level (e.g. a flat 50-point interval\nacross all levels, covering 35 ITM/1 ATM/35 OTM strikes). Individual-securities futures/options:\nminimum contract value of Rs. 5 lakh on first-day listing, same trading-cycle and expiry rules\nas index futures; stock options are European-style and the official page explicitly states\n\"physically settled\" (delivery of the underlying shares at expiry, not cash settlement).\nCaveat on settlement style: this \"physically settled\" claim for individual-securities options\nis sourced from the Individual Securities F&O page (updated 2025-10-28) and is consistent with\nIndia's 2018-2019 SEBI mandate phasing in physical settlement for stock derivatives; but a\nseparate official Settlement Mechanism page (updated 2023-01-03, i.e. earlier) states \"exercise\nsettlement is cash settled\" without distinguishing index vs. individual-securities options,\ndirectly conflicting with the former. This session judges the individual-securities \"physically\nsettled\" wording as more credible (product-specific, more recently updated); the Nifty 50 page\nitself also literally states index options are \"physical settled\", which contradicts both common\npractice (an index cannot be physically delivered) and public industry sources — suspected to be\na copy-paste template error from the stock-options section, so this field does not assert a\nsettlement method for index options; left for manual verification, logged to OPEN-QUESTIONS.\n",
+          "sources": [
+            {
+              "title": "NIFTY 50 F&O（官网）",
+              "url": "https://www.nseindia.com/static/products-services/equity-derivatives-nifty50",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Individual Securities F&O（官网）",
+              "url": "https://www.nseindia.com/static/products-services/equity-derivatives-individual-securities",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "⚠️ Equity Derivatives Settlement Mechanism（官网，与上两份来源在个股期权结算方式表述上冲突，见 zh/en 说明）",
+              "url": "https://www.nseindia.com/static/products-services/equity-derivatives-settlement-mechanism",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Nifty 50 futures contracts have a maximum of 3-month trading cycle - the near month (one), the next month (two) and the far month (three). ／ value of the futures contracts on Nifty 50 may not be less than Rs. 15 lakhs at the time of introduction. ／ Nifty 50 futures contracts expire on the last Tuesday of the expiry month. ／ Nifty 50 index options contracts have 4 weekly expiry contracts, 3 consecutive monthly contracts, additionally 3 quarterly months of the cycle March / June / September / December and 8 following semi-annual months of the cycle June / December would be available, so that at any point in time there would be options contracts with atleast 5 year tenure available. ／ value of the futures contracts on individual securities may not be less than Rs. 5 lakhs at the time of introduction for the first time at any exchange. ／ Options contracts are European style and physically settled and are available on more than 200 securities stipulated by the Securities & Exchange Board of India (SEBI). ／ Exercise settlement is cash settled by debiting/ crediting of the clearing accounts of the relevant Clearing Members with the respective Clearing Bank.",
+          "confidence": "medium",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
         "price_limits": {
-          "type": null,
-          "main_board": null,
-          "other_boards": null
+          "type": {
+            "enum": "dynamic_reference",
+            "zh": "衍生品分部无每日固定涨跌停，改以「操作区间」（Operating Range）机制防止错价申报：超出区间的委托单会被交易所判定为「价格冻结」（price freeze）而拒收；区间本身可在盘中动态调整（个股期货按趋势方向每次放宽5%，跨机构协同），借用「动态参考价区间」枚举值仅取其「非固定硬性涨跌停」之近似含义，不代表与港交所式参考价联动机制完全等价",
+            "en": "The derivatives segment has no fixed daily price limit; instead an \"Operating Range\" mechanism screens out erroneous orders — orders priced beyond the range are rejected by the Exchange as a \"price freeze\". The range itself can be relaxed intraday (for stock futures, by 5% at a time in the direction of the market trend, coordinated across exchanges); the \"dynamic reference price\" enum value is borrowed only for its \"not a fixed hard limit\" sense, and does not imply an HKEX-style moving-reference-price mechanism",
+            "sources": [
+              {
+                "title": "Equity Derivatives Price Bands（官网）",
+                "url": "https://www.nseindia.com/static/products-services/equity-derivatives-price-bands",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "There are no day minimum/maximum price ranges applicable in the derivatives segment. However, in order to prevent erroneous order entry, operating ranges and day minimum/maximum ranges are kept as below: ... In view of this, orders placed at prices which are beyond the operating ranges would reach the Exchange as a price freeze.",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "detail": null
+          },
+          "main_board": {
+            "zh": "指数期货：操作区间为基准价（前一交易日结算价，首日为理论期货价）±10%；个股期货：无固定百分比，动态区间可按市场趋势方向每次放宽5%（与其他交易所协同）；指数期权/个股期权：按各合约delta值逐日计算区间，非固定百分比",
+            "en": "Index futures: operating range is ±10% of the base price (prior day's settlement price, or theoretical futures price on the first day); stock futures: no fixed percentage — the dynamic band can be relaxed by 5% at a time in the direction of the market trend (coordinated with other exchanges); index/stock options: a contract-specific range computed daily from each contract's delta value, not a fixed percentage",
+            "sources": [
+              {
+                "title": "Equity Derivatives Price Bands（官网）",
+                "url": "https://www.nseindia.com/static/products-services/equity-derivatives-price-bands",
+                "accessed": "2026-08-18"
+              },
+              {
+                "title": "Individual Securities F&O（官网）",
+                "url": "https://www.nseindia.com/static/products-services/equity-derivatives-individual-securities",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "For Index Futures: at 10% of the base price ／ For Index and Stock Options: A contract specific price range based on its delta value is computed and updated on a daily basis. ／ There shall be no fixed price band applicable for stock futures contracts. ... a dynamic price band for a futures contract shall be kept at a certain percentage of the base price as defined by Exchange from time to time. In the event of a market trend in either direction, the dynamic price band shall be relaxed by 5% at a time in the direction of the price movement during the day in co-ordination with the other Exchanges",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          },
+          "other_boards": {
+            "zh": "",
+            "confidence": "low",
+            "detail": "本字段用于表达同一板块内不同子板/子类别，衍生品业务按产品线（股票/货币/商品/利率）划分而非「板块」，为避免概念混淆此处不填；其他产品线的价格限制机制（如商品衍生品非农品种6%基准限幅、触发后冷静15分钟放宽至9%；国债利率期货操作区间±3%可放宽两次）已记入 contract_specs_note 与 detail 说明。",
+            "sources": [
+              {
+                "title": "Market Timings（官网）",
+                "url": "https://www.nseindia.com/static/market-data/market-timings",
+                "accessed": "2026-08-14"
+              }
+            ],
+            "verified": "2026-08-14",
+            "en": null,
+            "enum": null,
+            "quote": null
+          }
         },
-        "circuit_breaker": null,
-        "volatility_interruption": null,
-        "trading_halt_mechanism": null,
-        "block_trade": null,
-        "market_maker_scheme": null,
-        "margin_practice_note": null,
-        "connect_schemes": null
+        "circuit_breaker": {
+          "enum": "index_level",
+          "zh": "衍生品分部本身未见独立熔断机制；与现货市场共用同一套全市场指数熔断（10%/15%/20%三级，以Nifty 50或BSE Sensex先触发者为准），触发后同时暂停「所有股票现货及股票衍生品市场」（coordinated trading halt in all equity and equity derivative markets nationwide）",
+          "en": "No independent circuit breaker specific to the derivatives segment was found; it shares the same market-wide index-based circuit breaker as the cash market (three tiers at 10%/15%/20%, triggered by whichever of the Nifty 50 or BSE Sensex breaches first), which upon triggering halts \"all equity and equity derivative markets nationwide\" simultaneously",
+          "detail": "与顶层 market_structure.circuit_breaker 字段引用同一机制、同一来源，此处从「衍生品视角」重复确认其覆盖范围包含衍生品市场，避免读者误以为衍生品分部只受现货熔断的间接影响。",
+          "sources": [
+            {
+              "title": "Equity Market Circuit Breakers（官网）",
+              "url": "https://www.nseindia.com/products-services/equity-market-circuit-breakers",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The index-based market-wide circuit breaker system applies at 3 stages of the index movement, either way viz. at 10%, 15% and 20%. These circuit breakers when triggered bring about a coordinated trading halt in all equity and equity derivative markets nationwide. The market-wide circuit breakers are triggered by movement of either the BSE Sensex or the Nifty 50, whichever is breached earlier.",
+          "confidence": "high",
+          "verified": "2026-08-14"
+        },
+        "volatility_interruption": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "本次未找到独立于全市场熔断之外的衍生品合约级波动性中断机制（如港交所VCM、Eurex Volatility Interruption那类）的官方说明文字，不确定是否存在，未做「无」的断言，留空转 OPEN-QUESTIONS。",
+          "sources": [
+            {
+              "title": "Market Timings（官网）",
+              "url": "https://www.nseindia.com/static/market-data/market-timings",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "trading_halt_mechanism": {
+          "zh": "见 circuit_breaker（全市场指数熔断同时覆盖衍生品市场）；合约级别的临时停牌/复牌具体规则本次未逐条核实",
+          "en": "See circuit_breaker (the market-wide index circuit breaker also covers the derivatives market); contract-level suspension/resumption rules not verified in detail this session",
+          "confidence": "low",
+          "sources": [
+            {
+              "title": "Market Timings（官网）",
+              "url": "https://www.nseindia.com/static/market-data/market-timings",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "block_trade": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "现货市场设有专门的大宗交易时段（Block Deal session，08:45-09:00与14:05-14:20，见顶层 market_structure.block_trade），但 Market Timings 页「Equity Derivatives」折叠区块只列 Normal Market Open/Close 与 Trade Modification End 三行，未见衍生品分部有平行的 Block Deal 时段，不确定衍生品市场是否有对应机制（或走场外/其他申报渠道），本次未能进一步核实，如实留空。",
+          "sources": [
+            {
+              "title": "Market Timings（官网）",
+              "url": "https://www.nseindia.com/static/market-data/market-timings",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "market_maker_scheme": {
+          "zh": "设有流动性提升计划（Liquidity Enhancement Scheme, LES），面向指定做市商（Designated Market Maker）提供业务量/持仓量相关的分级激励，并要求做市商向客户披露其做市商身份以避免利益冲突；本次抓取页面明确列出的适用产品集中在商品衍生品分部（白银30公斤期权、电力期货、迪拜原油期货），未能确认股票/股指衍生品分部当前是否有正在运行的LES产品（页面同时显示「本月无做市商」提示，可能反映的是抓取当月的临时状态而非长期无该产品线LES）",
+          "en": "NSE runs a Liquidity Enhancement Scheme (LES) offering tiered order/trade/open-interest incentives to Designated Market Makers, who must disclose their market-maker status to clients to avoid conflicts of interest. The products confirmed as currently covered by LES on the fetched page are concentrated in the Commodity Derivatives segment (Silver 30Kg Options, Electricity Futures, Dated Brent Crude Oil Futures); this session could not confirm whether the Equity Derivatives segment currently has an active LES product (the page also showed a \"no market makers this month\" notice, which may reflect a temporary status for the month fetched rather than a permanent absence of LES for this product line)",
+          "sources": [
+            {
+              "title": "Liquidity Enhancement Scheme（官网）",
+              "url": "https://www.nseindia.com/static/market-data/liquidity-enhancement-scheme",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "No market makers for this month / Commodity in which LES is available - Silver (30Kgs) Options on Goods (Launched on 27th November 2023) , Electricity Futures Contract (Launched on 14th July 2025) and Dated Brent Crude Oil (Platts) Futures Contract (Launched on 17th June 2026). / Framework for Conflict of Interest - In order to avoid any conflict of interest that may arise between Member(s) (who is acting as designated Market Maker) and their clients, Market Maker is requested to apprise about its appointment as a Designated Market Maker to its clients by any means of communication such as display on their website, email, letters etc.",
+          "confidence": "medium",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "margin_practice_note": {
+          "zh": "NSE Clearing（NSCCL）对期货期权持仓采用 SPAN®（Standard Portfolio Analysis of Risk，经芝加哥商业交易所CME授权使用的组合保证金算法）逐日在线计收初始保证金：以16档标准风险情景（价格扫描区间×波动率扫描区间的组合）逐一计算组合在「盯市观察期」内的最大潜在亏损，取16档中最大者作为「扫描风险费用」（Scanning Risk Charge），另加跨月价差费用（Calendar Spread Charge）构成SPAN保证金总额；初始保证金以99%单日风险价值（VaR）为基准，期货合约（因次日开盘前可能来不及完成盯市结算）改按两日风险价值计算；此外对深度虚值空头期权等特殊持仓叠加「极端亏损保证金」（Extreme Loss Margin，指数期权虚值超10%为3%、剩余期限超9个月为5%，个股期权虚值超30%为5.25%）作为SPAN保证金之外的第二层缓冲",
+          "en": "NSE Clearing (NSCCL) collects initial margin online, daily, for futures & options positions using SPAN® (Standard Portfolio Analysis of Risk, a portfolio-margining algorithm used under license from the Chicago Mercantile Exchange): 16 standard risk scenarios (combinations of price-scan range × volatility-scan range) are each used to estimate the portfolio's worst one-day loss, and the largest of the 16 becomes the \"Scanning Risk Charge\"; a Calendar Spread Charge for inter-month risk is added on top to form the total SPAN margin. Initial margin is based on 99% one-day Value-at-Risk (VaR), except futures contracts (where same-day mark-to-market settlement may not complete before next-day trading starts) use a two-day VaR horizon instead. A second layer, the Extreme Loss Margin, is additionally levied on positions such as deep out-of-the-money short options (3% for index options OTM by more than 10%, 5% for index options with residual maturity over 9 months, 5.25% for single-stock options OTM by more than 30%)",
+          "sources": [
+            {
+              "title": "Equity Derivatives Margins（官网）",
+              "url": "https://www.nseindia.com/static/products-services/equity-derivatives-margins",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "NSCCL SPAN（官网）",
+              "url": "https://www.nseindia.com/products-services/equity-derivatives-nse-clearing-span",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "NSE Clearing uses the SPAN® (Standard Portfolio Analysis of Risk) system for the purpose of margining, which is a portfolio based system. / Initial margin requirements are based on 99% value at risk over a one day time horizon. However, in the case of futures contracts (on index or individual securities), where it may not be possible to collect mark to market settlement value, before the commencement of trading on the next day, the initial margin is computed over a two-day time horizon / SPAN constructs scenarios of probable changes in underlying prices and volatilities in order to identify the largest loss a portfolio might suffer from one day to the next. It then sets the margin requirement at a level sufficient to cover this one-day loss. / In case of short index options contracts that are deep out of the money (i.e., strikes out of the money by more than 10% from the previous day closing underlying price), the applicable Extreme Loss Margin is 3%. In case of short index option contracts with residual maturity of more than 9 months, the applicable Extreme Loss Margin is 5%. In case of short single stock options contracts that are deep out of the money (i.e., strikes out of the money by more than 30% from the previous day closing underlying price), the applicable Extreme Loss Margin is 5.25%.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "connect_schemes": {
+          "zh": "NSE IFSC-SGX Connect 严格来说是本节讨论的「NSE 挂牌衍生品业务」与「NSE IFSC 子公司」两个不同法人载体之间的迁移/联通安排——Nifty系列衍生品此前在SGX交易，2022年起通过GIFT City的NSE IFSC实体联通，国际投资者经SGX会员即可交易挂钩Nifty的产品；与顶层字段引用同一事实，此处仅从「这具体是哪条产品线」的角度补充说明是股指衍生品（而非现货）业务",
+          "en": "Strictly speaking, NSE IFSC-SGX Connect is a migration/linkage arrangement between the NSE-listed derivatives business discussed in this section and the separate NSE IFSC subsidiary entity — Nifty-linked derivatives previously traded on SGX have, since 2022, been linked via the NSE IFSC entity at GIFT City, letting international investors access Nifty-linked products through SGX membership; this references the same fact as the top-level field, adding only the clarification that it specifically concerns the index-derivatives product line (not the cash market)",
+          "detail": "具体条款、覆盖产品范围（是否仅Nifty 50，或也含Bank Nifty等其他指数衍生品）本次未逐条核实。",
+          "sources": [
+            {
+              "title": "History & Milestones（官网）",
+              "url": "https://www.nseindia.com/static/national-stock-exchange/history-milestones",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "NSE IFSC-SGX Connect Inaugurated by Hon'ble Prime Minister of India Shri Narendra Modi / 22 years of partnership between NSE and SGX for NIFTY50",
+          "confidence": "medium",
+          "verified": "2026-08-14",
+          "enum": null
+        }
       }
     },
     "listing": {
