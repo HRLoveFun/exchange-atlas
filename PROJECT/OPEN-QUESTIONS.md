@@ -75,6 +75,7 @@
 - **`ch-six`（SIX瑞士交易所）当期官方总市值/上市公司数量/年成交额均未找到可用原始出处。** `six-group.com`的「SIX Exchanges Figures」月度公告只披露成交额/成交笔数/指数点位（且成交额是与集团旗下西班牙BME Exchange的合并口径，非本所单独口径），「Discover the market activity in Shares」页是动态渲染的新闻流，均未见汇总市值/上市公司数统计表。第三方法律实务资源（Baker McKenzie Cross-Border Listings Guide）给出的"截至2024年年中自由流通市值CHF1.8万亿""截至2025年2月237家上市公司"已滞后本次会话（2026-08）超过一年，未采纳为正式字段值。下次有空应找 SIX 官方年报（Annual Report）或"Statistical Monthly Report"（本次仅在页面中看到入口未点开）核实当期数字。
 - **欧盟对瑞士交易所的MiFID II"等效性"认定失效的具体条款与时间线未逐条核实。** `risks.regulatory_change_risk_note`基于WebSearch多篇第三方报道综述（2017年认定等效、2019年起失效），未抓取欧盟官方Implementing Decision原文或后续文件核实具体失效日期、是否有部分恢复、当前最新状态。这是本所与项目里已有/计划中的欧盟成员国交易所（如`de-xetra`）之间监管框架差异的核心数据点，值得下次专门核实。
 - **瑞士联邦证券交易印花税（Umsatzabgabe）0.15%/0.3%具体税率数字未能在`estv.admin.ch`官网英文版定位到原始页面**，只确认了税种法律性质（总览页），税率最终改用第三方PwC税务简报，`confidence`降级为medium。ESTV官网德/法/意语版或"Stamp duty rates"类子页可能有原始数字，下次有空可以补齐并升级confidence，详见`SOURCES.md` `estv.admin.ch`一节的说明。
+- **`kr-krx` 顶层 `market_structure.night_session` 字段（现货章节，2026-08-16核实）与本次新增 `market_structure.derivatives.trading_sessions.night_session`（2026-08-18核实）之间存在事实出入，前者未随之更新。** 顶层字段仍按"KOSPI200期货/期权在CME Globex（2009年起）/Eurex（2010年起）挂牌夜盘交易，但那是境外交易所自身运营的夜盘"的旧联动模式表述；本次抓取《Guide to Night Session in KRX Derivatives Market》（2025年4月KRX衍生品市场官方发布）确认 KRX 已于2025年6月转为自主运营夜盘（原 Eurex 联动已于2025-06-05终止）。因超出本次任务范围（仅限 `market_structure.derivatives` 子块）未一并修订顶层字段，留待下次统一处理；处理时建议一并核对 `products` 章节 `kr-krx-kospi200-futures`/`kr-krx-kospi200-options` 两条描述是否也需要同步更新表述。
 
 <!-- BEGIN:GENERATED auto-issues -->
 - `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
