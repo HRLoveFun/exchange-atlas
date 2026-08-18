@@ -846,32 +846,397 @@
       },
       "derivatives": {
         "trading_sessions": {
-          "pre_market": null,
-          "continuous_am": null,
-          "lunch_break": null,
-          "continuous_pm": null,
-          "after_market": null,
-          "night_session": null
+          "pre_market": {
+            "zh": "常规时段开盘集合竞价挂单接收时段 08:30-08:45（以KOSPI200期货/期权等旗舰股指衍生品为代表；其他产品类别对应的开盘集合竞价窗口时点不同，见 detail）",
+            "en": "Regular-session opening call-auction quotation receiving window: 08:30-08:45 (using flagship index derivatives such as KOSPI 200 Futures/Options as the representative sample; other product categories use different opening call-auction windows, see detail)",
+            "sources": [
+              {
+                "title": "Regulation ‧ Derivatives ‧ Trading Hours（KRX官网英文版）",
+                "url": "https://global.krx.co.kr/contents/GLB/06/0603/0603010300/GLB0603010300.jsp",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "08:30 ~ 08:45 08:45 ~ 15:35 15:35 ~ 15:45",
+            "confidence": "high",
+            "detail": "该官方时段表另区分「所有其他产品（不含瘦肉猪期货）」「瘦肉猪期货」「最后交易日」等多组不同的开收盘集合竞价窗口，本字段仅取旗舰股指衍生品一组作代表，完整分组见 sources 页面原表。",
+            "verified": "2026-08-16",
+            "enum": null
+          },
+          "continuous_am": {
+            "zh": "常规交易日连续交易 08:45-15:35（旗舰股指衍生品，最后交易日提前至08:45-15:20且当日无收盘集合竞价）",
+            "en": "Continuous trading 08:45-15:35 on a normal trading day (flagship index derivatives; on the Last Trading Day it ends earlier at 08:45-15:20 with no closing call auction that day)",
+            "sources": [
+              {
+                "title": "Regulation ‧ Derivatives ‧ Trading Hours（KRX官网英文版）",
+                "url": "https://global.krx.co.kr/contents/GLB/06/0603/0603010300/GLB0603010300.jsp",
+                "accessed": "2026-08-18"
+              },
+              {
+                "title": "KRX Market ‧ Derivatives ‧ Stock Index ‧ KOSPI 200 Futures（产品规格表）",
+                "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201040201/GLB0201040201.jsp",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "08:30 ~ 08:45 08:45 ~ 15:35 15:35 ~ 15:45",
+            "confidence": "high",
+            "verified": "2026-08-16",
+            "enum": null,
+            "detail": null
+          },
+          "lunch_break": {
+            "zh": "无午休，全天单一连续交易时段（与现货市场一致）",
+            "en": "No lunch break; a single continuous trading session for the whole day (same structure as the cash market)",
+            "confidence": "medium",
+            "detail": "官方交易时段表（常规时段）未列出午休时段，仅有开盘集合竞价/连续交易/收盘集合竞价三段，故推断无午休，与顶层 trading_sessions.lunch_break 字段结论一致。",
+            "sources": [
+              {
+                "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+                "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+                "accessed": "2026-08-16"
+              }
+            ],
+            "verified": "2026-08-16",
+            "enum": null,
+            "quote": null
+          },
+          "continuous_pm": {
+            "zh": "同 continuous_am 字段——常规时段为单一连续竞价时段，不单独区分下午盘",
+            "en": "Same as continuous_am — the regular session is a single continuous auction, not split into a separate afternoon block",
+            "confidence": "medium",
+            "sources": [
+              {
+                "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+                "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+                "accessed": "2026-08-16"
+              }
+            ],
+            "verified": "2026-08-16",
+            "enum": null,
+            "detail": null,
+            "quote": null
+          },
+          "after_market": {
+            "zh": "收盘集合竞价挂单接收时段 15:35-15:45（旗舰股指衍生品）；衍生品市场没有独立于夜盘之外的「盘后」交易时段，收盘后下一个窗口即为夜盘挂单接收（17:50起，见 night_session）",
+            "en": "Closing call-auction quotation window 15:35-15:45 (flagship index derivatives); the derivatives market has no separate after-hours session apart from the Night-Session — the next window after the close is the Night-Session's quotation receiving period starting at 17:50 (see night_session)",
+            "sources": [
+              {
+                "title": "Regulation ‧ Derivatives ‧ Trading Hours（KRX官网英文版）",
+                "url": "https://global.krx.co.kr/contents/GLB/06/0603/0603010300/GLB0603010300.jsp",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "08:30 ~ 08:45 08:45 ~ 15:35 15:35 ~ 15:45",
+            "confidence": "high",
+            "verified": "2026-08-16",
+            "enum": null,
+            "detail": null
+          },
+          "night_session": {
+            "zh": "KRX自主运营的夜盘（Night-Session）：挂单接收17:50-18:00（开盘集合竞价）→ 连续交易18:00-次日05:50 → 收盘集合竞价挂单05:50-06:00；仅10只高流动性品种可交易：KOSPI200期货/期权/周期权（周一、周四合约）、Mini-KOSPI200期货/期权、KOSDAQ150期货/期权、3年期与10年期韩国国债期货、美元期货",
+            "en": "KRX's own in-house Night-Session: quotation receiving 17:50-18:00 (opening call auction) → continuous trading 18:00-05:50 the next day → closing call-auction quotation 05:50-06:00; only 10 high-liquidity products are tradable: KOSPI 200 Futures/Options/Weekly Options (Monday & Thursday contracts), Mini-KOSPI 200 Futures/Options, KOSDAQ 150 Futures/Options, 3-Year & 10-Year KTB Futures, and USD Futures",
+            "sources": [
+              {
+                "title": "Regulation ‧ Derivatives ‧ Trading Hours（KRX官网英文版）",
+                "url": "https://global.krx.co.kr/contents/GLB/06/0603/0603010300/GLB0603010300.jsp",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "17:50~18:00 18:00~05:50 05:50~6:00 ⋯ KOSPI200 Futures, KOSPI200 Options, KOSPI200 Weekly Options(Monday, Thursday), Mini-KOSPI200 Futures, Mini-Kospi200 Options, KOSDAQ150 Futures, KOSDAQ150 Options, 3-year KTB Futures, 10-year KTB Futures, USD Futures",
+            "confidence": "high",
+            "detail": "KRX已于2025年6月转为自主运营夜盘（此前为2009年起与CME联动、2010年起与Eurex联动的挂钩交易模式，Eurex联动已于2025-06-05终止），见《Guide to Night Session in KRX Derivatives Market》PDF（2025年4月发布）。本文件顶层 market_structure.night_session 字段（2026-08-16核实）仍按旧的CME/Eurex联动模式表述，与本次抓取材料确认的最新事实存在出入；因超出本次任务范围（仅限 market_structure.derivatives 子块）未一并修订，已在 PROJECT/OPEN-QUESTIONS.md「具体数据悬案」新增一条记录，留待后续统一处理。",
+            "verified": "2026-08-16",
+            "enum": null
+          }
         },
-        "holidays_note": null,
-        "opening_mechanism": null,
-        "closing_mechanism": null,
-        "matching_principle": null,
-        "order_types": null,
-        "tick_size": null,
-        "contract_specs_note": null,
+        "holidays_note": {
+          "zh": "夜盘休市与常规时段休市联动：以夜盘开始当天的常规交易是否休市为准——若夜盘开始日恰逢周末/公共假期，当晚夜盘休市；反之，只要当天常规交易照常开市，即使次日常规交易休市，当晚夜盘仍照常进行",
+          "en": "Night-session holidays follow the regular session: whether the night session opens is determined by whether the regular session opened on the day the night session begins — if the night session's start date falls on a holiday (weekend, public holiday, etc.), that night's session is cancelled; conversely, night trading proceeds as scheduled as long as the regular session opened that day, even if the regular session is closed the next day",
+          "sources": [
+            {
+              "title": "Guide to Night Session in KRX Derivatives Market（PDF，2025年4月，KRX衍生品市场官方发布）",
+              "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201041003/Guide_to_Night_Session_in_KRX_Derivatives_Market.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "As night trading is scheduled from Monday to Friday, if the night session's start date falls on a holiday (weekend, public holiday, etc.), that day's night trading is canceled. Conversely, even if regular trading is closed tomorrow, night trading is proceeded as scheduled if regular trading is conducted today.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "opening_mechanism": {
+          "zh": "开盘价由单一价格集合竞价（Single Price Auction / Call Auction）决定",
+          "en": "The opening price is determined by a single-price (call) auction",
+          "sources": [
+            {
+              "title": "Regulation ‧ Derivatives ‧ Method of Trade Execution（KRX官网英文版）",
+              "url": "https://global.krx.co.kr/contents/GLB/06/0603/0603010700/GLB0603010700.jsp",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The single price auction is used for determining the opening price, the closing price, and the first price resuming trading after a trading suspension.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "closing_mechanism": {
+          "zh": "收盘价同样由单一价格集合竞价决定；交易暂停后恢复交易的首笔价格也采用同一集合竞价机制确定",
+          "en": "The closing price is likewise determined by a single-price (call) auction; the same mechanism also sets the first price when trading resumes after a suspension",
+          "sources": [
+            {
+              "title": "Regulation ‧ Derivatives ‧ Method of Trade Execution（KRX官网英文版）",
+              "url": "https://global.krx.co.kr/contents/GLB/06/0603/0603010700/GLB0603010700.jsp",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The single price auction is used for determining the opening price, the closing price, and the first price resuming trading after a trading suspension.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "matching_principle": {
+          "zh": "连续交易阶段采用个别竞价、价格优先与时间优先原则：较低卖价优先于较高卖价，较高买价优先于较低买价，同价申报按接收先后排序；但在单一价格集合竞价中，若成交价落在涨跌停价，则不适用时间优先，改按数量优先分配成交（大额申报优先于小额申报，同数量再按时间优先）",
+          "en": "Continuous trading applies individual auction with price and time priority: a lower ask has priority over a higher ask, a higher bid has priority over a lower bid, and among same-priced orders the one received earlier has priority; however, in a single-price (call) auction, if the determined price is at the daily price limit, time priority is not applied — quantity priority is used instead (larger orders matched before smaller ones, with time priority applied among orders of equal quantity)",
+          "sources": [
+            {
+              "title": "Regulation ‧ Derivatives ‧ Method of Trade Execution（KRX官网英文版）",
+              "url": "https://global.krx.co.kr/contents/GLB/06/0603/0603010700/GLB0603010700.jsp",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Individual auction has price and time priorities for the orders to execute. That is, a lower ask has the priority over a higher ask and a higher bid has the priority over a lower bid. Among the orders with same prices, the order received earlier has the priority over those received later. However, in case of single price auction, if the price is determined at the upper or lower price limit, the time priority is not applied to those orders at the price limit. Orders are matched based on quantity priority where the larger order has the priority over the smaller order and the execution quantity is allocated from the larger ones to the smaller ones until the whole quantity is matched. Among the orders with same quantity, time priority is applied.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "order_types": {
+          "zh": "限价申报（指定价格与数量）、市价申报（仅指定数量，以市场最优价成交）、限价转收盘价申报（收盘前连续交易阶段未成交的限价申报转为市价申报并入收盘集合竞价）、即时可执行限价申报（申报时的最优价格即固定为成交价的一种市价类申报，未成交余量按最初最优价挂单排队）；另可附加FOK（Fill or Kill，全部成交或全部取消）、IOC（Immediate or Cancel，部分成交、剩余取消）两种条件",
+          "en": "Limit order (price and quantity both specified); Market order (only quantity specified, matched at the best available price); Limit-to-market-on-close order (an unexecuted limit order at the end of continuous trading converts to a market order and joins the closing single-price auction); Immediately executable limit order (a market-order variant whose matching price is fixed at the best price at input time, with any unexecuted balance queued in the order book at that initial best price); orders may also carry a Fill-or-Kill (FOK) or Immediate-or-Cancel (IOC) condition",
+          "sources": [
+            {
+              "title": "Regulation ‧ Derivatives ‧ Order Types（KRX官网英文版）",
+              "url": "https://global.krx.co.kr/contents/GLB/06/0603/0603010200/GLB0603010200.jsp",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The limit order is an order of which the price and quantity are specified. It is matched at prices better than the specified price or at the specified price. The market order is an order placed to buy or sell at the best available price. Whereas the quantity of order is specified, the price is not. The limit-to-market-on-close order is the limit order placed with an instruction to convert it to the market order and include it in the single price auction at the time when the closing price is determined, if the order remains unexecuted until the end of the continuous auction on a given trading day. The immediately executable limit order is the market order in the sense that its price is not specified, but it is different from the market order in that the matching price is fixed at the price that is the best at the time of input. Unexecuted best orders are queued in the order book at the initial best price. Fill or Kill : Orders are that all of the orders are cancelled, if not executed immediately after the enter thereof Immediate or Cancel : Orders are that any of the orders possible to execute is executed and the remaining order are cancelled",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "tick_size": {
+          "zh": "股指期货最小报价单位为0.05点（每点价值12,500韩元，以KOSPI200期货为例）",
+          "en": "Minimum tick for equity index futures is 0.05 point (KRW 12,500 per point, using KOSPI 200 Futures as the example)",
+          "sources": [
+            {
+              "title": "KRX Market ‧ Derivatives ‧ Stock Index ‧ KOSPI 200 Futures（产品规格表）",
+              "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201040201/GLB0201040201.jsp",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "0.05 point(KRW 12,500)",
+          "confidence": "high",
+          "detail": "期权按权利金档位分级报价（见KOSPI 200 Options产品页，未在zh/en正文重复列出具体数字，避免单一quote字段跨文档拼接）：权利金<10点时最小变动0.01点（2,500韩元），权利金≥10点时最小变动0.05点（12,500韩元，与期货相同）。其余产品类别（利率、货币、商品衍生品）最小报价单位本次未逐一核实，见 OPEN-QUESTIONS。",
+          "verified": "2026-08-16",
+          "enum": null
+        },
+        "contract_specs_note": {
+          "zh": "以KOSPI200期货为代表：标的资产为KOSPI200指数；合约规模＝KOSPI200期货价格×25万韩元；挂牌月份为4个季月＋2个半年月＋1个年月；最后交易日为合约月第二个星期四；最终结算日为最后交易日的次一交易日；最终结算方式为现金交割；持仓限额为个人1万张、其他（机构等）2万张",
+          "en": "Using KOSPI 200 Futures as the representative sample: underlying asset is the KOSPI 200 Index; contract size = KOSPI 200 Futures price × KRW 250,000; listed contract months are four quarterly + two half-yearly + one yearly month; the Last Trading Day is the second Thursday of the contract month; the Final Settlement Day is the day following the Last Trading Day; final settlement is by cash; position limits are 10,000 contracts for an individual and 20,000 contracts for others (e.g. institutions)",
+          "sources": [
+            {
+              "title": "KRX Market ‧ Derivatives ‧ Stock Index ‧ KOSPI 200 Futures（产品规格表）",
+              "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201040201/GLB0201040201.jsp",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "KRX Market ‧ Derivatives ‧ Stock Index ‧ KOSPI 200 Options（产品规格表，补充来源，见 detail）",
+              "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201040202/GLB0201040202.jsp",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "KOSPI 200 Futures price times KRW 250,000 ⋯ Four quarterly months + two half-yearly months + one yearly month ⋯ 0.05 point(KRW 12,500) ⋯ Second Thursday of the contract month ⋯ The following day of the last trading day ⋯ Cash ⋯ 10,000 contracts ⋯ 20,000 contracts",
+          "confidence": "high",
+          "detail": "KOSPI200期权合约结构与期货存在若干差异（数字见KOSPI 200 Options产品页原文，未在zh/en正文重复列出以避免quote字段跨文档拼接）：合约规模公式相同（期权价格×25万韩元）；除月度期权外另设周期权（每周一、周四各挂一份，到期日分别为下一个周一/周四，与月度期权到期周撞期的周期权不挂牌）；挂牌月份为6个连续月＋2个季月＋2个半年月＋1个年月（月度期权）；行权方式为欧式（仅到期日可行权）；行权价间距按合约月远近分3-4档；持仓限额按Delta计算（个人1万Delta、其他2万Delta）。",
+          "verified": "2026-08-16",
+          "enum": null
+        },
         "price_limits": {
-          "type": null,
-          "main_board": null,
-          "other_boards": null
+          "type": {
+            "enum": "percentage_band",
+            "zh": "逐级扩大的百分比涨跌停：股指类衍生品（KOSPI200期货/期权、Mini-KOSPI200期货/期权、KOSDAQ150期货/期权等）常规时段分三档 ①±8% ②±15% ③±20%（①档仅在开盘后08:45-09:00及夜盘时段适用）",
+            "en": "Tiered percentage price limits: for equity-index derivatives (KOSPI 200 Futures/Options, Mini-KOSPI 200 Futures/Options, KOSDAQ 150 Futures/Options, etc.) the regular session applies three phases — ① ±8% ② ±15% ③ ±20% (Phase ① applies only during 08:45-09:00 and during the Night-Session)",
+            "sources": [
+              {
+                "title": "KRX Market ‧ Derivatives ‧ Stock Index ‧ KOSPI 200 Futures（产品规格表）",
+                "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201040201/GLB0201040201.jsp",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "① ±8% ② ±15% ③ ±20% price limits are applied to the futures base price(①tier only during 08:45~09:00 and Night-Session)",
+            "confidence": "high",
+            "verified": "2026-08-16",
+            "detail": null
+          },
+          "main_board": {
+            "zh": "以KOSPI200期货/期权等旗舰股指衍生品为代表：常规时段涨跌停分三档±8%/±15%/±20%（随行情逐级触发扩大，档位数值与现货市场三阶段熔断的8%/15%/20%一致，见顶层 circuit_breaker 与本子块 circuit_breaker 字段）；夜盘统一收窄为单一档±8%",
+            "en": "Using KOSPI 200 Futures/Options etc. as the representative sample: the regular-session price limit widens through three phases — ±8%/±15%/±20% (the same 8%/15%/20% thresholds as the cash market's three-phase circuit breaker, see the top-level circuit_breaker field and this sub-block's circuit_breaker field); the Night-Session uses a single, narrower ±8% band throughout",
+            "sources": [
+              {
+                "title": "KRX Market ‧ Derivatives ‧ Stock Index ‧ KOSPI 200 Futures（产品规格表）",
+                "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201040201/GLB0201040201.jsp",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "① ±8% ② ±15% ③ ±20% price limits are applied to the futures base price(①tier only during 08:45~09:00 and Night-Session)",
+            "confidence": "high",
+            "verified": "2026-08-16",
+            "enum": null,
+            "detail": null
+          },
+          "other_boards": {
+            "zh": "FICC类衍生品（利率、货币期货）采用固定比例而非分级：美元期货±4.5%、3年期国债期货±1.5%、10年期国债期货±2.7%（常规与夜盘同一比例，不像股指类衍生品在夜盘收窄）；商品类（黄金、瘦肉猪期货）的涨跌停比例本次未核实",
+            "en": "FICC derivatives (interest-rate and currency futures) use a fixed percentage rather than a tiered structure: USD Futures ±4.5%, 3-Year KTB Futures ±1.5%, 10-Year KTB Futures ±2.7% (the same in both the regular session and the Night-Session, unlike equity-index derivatives which narrow at night); the price-limit percentages for commodity derivatives (Gold, Lean Hog futures) were not verified this session",
+            "sources": [
+              {
+                "title": "Guide to Night Session in KRX Derivatives Market（PDF，2025年4月，KRX衍生品市场官方发布）",
+                "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201041003/Guide_to_Night_Session_in_KRX_Derivatives_Market.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "USD Futures 4.5% ⋯ 3-Yr KTB Futures 1.5% ⋯ 10-Yr KTB Futures 2.7% ⋯ Same as regular trading",
+            "confidence": "high",
+            "verified": "2026-08-16",
+            "enum": null,
+            "detail": null
+          }
         },
-        "circuit_breaker": null,
-        "volatility_interruption": null,
-        "trading_halt_mechanism": null,
-        "block_trade": null,
-        "market_maker_scheme": null,
-        "margin_practice_note": null,
-        "connect_schemes": null
+        "circuit_breaker": {
+          "enum": "index_level",
+          "zh": "衍生品市场本身未单独设立熔断机制，而是与现货市场的三阶段指数熔断（具体档位见顶层 circuit_breaker 字段）联动：现货市场熔断第三阶段（触发全市场收市）当日触发后，包括当晚夜盘在内的全部衍生品交易当天不开展；夜盘期间因标的股指本身不交易、无价格波动，熔断机制在夜盘无法被触发",
+          "en": "The derivatives market has no independent circuit breaker of its own; it is instead linked to the cash market's three-phase index circuit breaker (see the top-level circuit_breaker field): once the cash market's Phase-3 circuit breaker (market closed for the day) is triggered, all derivatives trading — including that day's Night-Session — is not conducted; during the Night-Session itself, the circuit breaker cannot be triggered at all because the underlying stock index does not trade and therefore has no price movement at night",
+          "detail": "受控词表 circuit_breaker_type 各选项均以「熔断机制本身独立存在」为设计语境；本字段的真实情况是衍生品市场完全没有自己的熔断判定，只是被动跟随现货市场的指数级熔断结果，这里借用 index_level 仅取「触发基础是指数」的含义，与顶层字段共享同一枚举值，不代表衍生品市场另有一套独立的指数级判定逻辑——这是裁剪后字段集合复用现货枚举时一处不完全贴合，做法参照 hk-hkex.derivatives.circuit_breaker 的既有先例。",
+          "sources": [
+            {
+              "title": "Guide to Night Session in KRX Derivatives Market（PDF，2025年4月，KRX衍生品市场官方发布）",
+              "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201041003/Guide_to_Night_Session_in_KRX_Derivatives_Market.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "there is no price fluctuation in the stock index during night hours, so circuit breaker (CB) cannot be triggered. However, if trading in the stock market is terminated due to the activation of CB stage 3 during the regular session, night trading for all derivatives that open on the same day, including FICC derivatives, is not conducted.",
+          "confidence": "high",
+          "verified": "2026-08-16"
+        },
+        "volatility_interruption": {
+          "zh": "实时价格限制（Real-time Price Limits）：约束新成交价相对上一笔成交价的最大偏离幅度（区别于以当日基准价为准的每日涨跌停，见 price_limits），适用于夜盘可交易的10只品种中的8只；夜盘该限制较常规时段放宽一倍：KOSPI200期货/Mini-KOSPI200期货/KOSDAQ150期货及美元期货常规±1.0%、夜盘±2.0%（期货价差同幅度）；3年期国债期货常规±0.5%、夜盘±1.0%；10年期国债期货常规±0.9%、夜盘±1.8%；KOSPI200期权（含周期权）另按《衍生品市场业务规程施行细则》附件25单独规定",
+          "en": "Real-time Price Limits: constrain how far a new trade price may deviate from the immediately preceding trade price (distinct from the daily price_limits, which are set against the day's base price); applied to 8 of the 10 products tradable in the Night-Session. The night-session limit is doubled versus the regular session: KOSPI 200/Mini-KOSPI 200/KOSDAQ 150 Futures and USD Futures are ±1.0% (regular) / ±2.0% (night) — the same for futures spreads; 3-Year KTB Futures ±0.5% (regular) / ±1.0% (night); 10-Year KTB Futures ±0.9% (regular) / ±1.8% (night); KOSPI 200 Options (including Weekly Options) are separately governed by Annex 25 of the Enforcement Rules of the Derivatives Market Business Regulations",
+          "sources": [
+            {
+              "title": "Guide to Night Session in KRX Derivatives Market（PDF，2025年4月，KRX衍生品市场官方发布）",
+              "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201041003/Guide_to_Night_Session_in_KRX_Derivatives_Market.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Real-time price limits are applied to 8 products among the tradable products to night trading ⋯ KOSPI 200 Futures Mini-KOSPI 200 Futures 1.0% 2.0% 1.0% 2.0% ⋯ USD Futures 1.0% 2.0% 1.0% 2.0% ⋯ 3-Yr KTB Futures 0.5% 1.0% 0.5% 1.0% ⋯ 10-Yr KTB Futures 0.9% 1.8% 0.9% 1.8% ⋯ [Annex 25]",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "trading_halt_mechanism": {
+          "zh": "分强制暂停（Compulsory Suspension）与裁量暂停（Discretionary Suspension）两类：强制暂停即现货市场熔断触发时联动暂停衍生品交易（见 circuit_breaker），夜盘不适用此类暂停；裁量暂停指交易所/会员系统故障或异常交易情形导致的暂停，夜盘同样适用但触发条件因夜盘特性有所调整（如现货系统故障超过10分钟导致指数成分股大量无法交易的情形，因夜盘不计算股指而不适用；单一股票期货期权因标的股票停牌而暂停的情形，因该类产品夜盘本身不交易而不适用；交易所认定存在或可能存在异常交易情形时的裁量暂停则夜盘同样适用）；暂停后恢复交易同样以集合竞价方式确定首笔价格（见 opening_mechanism）",
+          "en": "Two categories: Compulsory Suspension — triggered in lockstep with the cash market's circuit breaker (see circuit_breaker), and not applicable to the Night-Session; and Discretionary Suspension — for Exchange/member system failures or abnormal trading conditions, which does apply to the Night-Session but with trigger conditions adjusted for the night session's characteristics (e.g. a cash-market system failure lasting over 10 minutes that leaves a large number of an index's constituents untradeable does not apply at night, since the index is not calculated then; a single-stock futures/options halt triggered by suspension of the underlying stock does not apply at night, since those products are not traded at night; Exchange-discretion halts for actual or potential abnormal trading conditions do apply at night). Trading resumes via the same call-auction mechanism used to set the opening/closing price (see opening_mechanism)",
+          "sources": [
+            {
+              "title": "Guide to Night Session in KRX Derivatives Market（PDF，2025年4月，KRX衍生品市场官方发布）",
+              "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201041003/Guide_to_Night_Session_in_KRX_Derivatives_Market.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The compulsory suspension refers to cases where the market can be operated but trading is suspended as needed, and does not apply to night trading. This is because there is no price fluctuation in the stock index during night hours, so circuit breaker (CB) cannot be triggered. ⋯ The discretionary suspension refers to suspension due to the impossibility of market operation or trading of a specific product, and includes Exchange and member system failures. The discretionary suspension also applies to night trading, with some exceptions. ⋯ When a system failure occurs in the stock market for more than 10 minutes and trading is not possible for a certain number of stock index constituents",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "block_trade": {
+          "zh": "协商大宗交易（Negotiated Block Trades）：买卖双方自行协商标的、价格、数量后经会员向交易所申请撮合成交，适用于绝大多数衍生品（例外：KOSPI200波动率指数期货、5年期国债期货、美元期权、瘦肉猪期货及其对应价差交易被排除在外）；另设期货转现货（EFP, Exchange of Futures for Physicals）交易方式，仅美元期货可用，且不适用于夜盘",
+          "en": "Negotiated Block Trades: counterparties privately negotiate the issue, price and quantity, then file the trade with the Exchange via a member for execution; available for the great majority of derivatives (exclusions: KOSPI 200 Volatility Index futures, 5-Year KTB futures, USD options, Lean Hog futures, and the corresponding spread trades). A separate Exchange of Futures for Physicals (EFP) mechanism also exists, available only for USD Futures and not applicable during the Night-Session",
+          "sources": [
+            {
+              "title": "Regulation ‧ Derivatives ‧ Method of Trade Execution（KRX官网英文版）",
+              "url": "https://global.krx.co.kr/contents/GLB/06/0603/0603010700/GLB0603010700.jsp",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Negotiated block trading is used for the convenience of the block traders like institutional investors who intend to trade a large amount of securities without any sudden impact on the market price. Trading parties negotiate the transaction details such as the issue, price and quantity and file an application with the exchange via members to execute the block trade. The following derivatives are availiable for negotiated block trading : 1. Equity derivatives trades. Provided that KOSPI 200 volatility index futures trades are excluded; 2. Interest futures trades. Provided that 5-year KTB futures trades are exclueded; 3. Currency derivatives trades. Provided that USD options trades are exclueded; 4. Commodity futures trades. Provided that Lean Hog futures trades are exclueded; 5. Futures spread trades. Provided that KOSPI 200 volatility index futures spread trades, 5-year KTB futures spread trades, Inter-KTB futures spread trades and Lean Hog futures spread trades are excluded ⋯ EFP trading is a method of block trading for the convenience of the block traders like institutional investors who intend to trade a large amount of EFPs avoiding sudden fluctuations in the market price from the large volume. ⋯ EFPs are available for USD futures. * EFPs are not applicable during night session",
+          "confidence": "high",
+          "detail": "未找到协商大宗交易的最低数量/金额门槛具体数值（现货市场对应门槛见顶层 block_trade 字段），本次抓取材料仅确认适用品种范围与交易方式，未展开具体门槛，已记入 PROJECT/OPEN-QUESTIONS.md。",
+          "verified": "2026-08-16",
+          "enum": null
+        },
+        "market_maker_scheme": {
+          "zh": "夜盘官方指南明确表示，因夜盘可交易品种本身流动性充足，暂不引入做市商制度，未来将视夜盘交易情况评估是否引入——该表述隐含常规时段衍生品市场存在做市商制度作为参照基准，但本次抓取材料未找到衍生品做市商资格/义务/激励条款的独立说明页，具体制度未展开",
+          "en": "The official Night-Session guide states that, because night-tradable products are already highly liquid, a market-maker system will not be introduced for the Night-Session (KRX will reassess after observing night-session trading trends) — this statement implies a market-maker system exists as the baseline for the regular session, but no dedicated official page describing the derivatives market's own market-maker qualifications/obligations/incentives was located this session; not further explored",
+          "sources": [
+            {
+              "title": "Guide to Night Session in KRX Derivatives Market（PDF，2025年4月，KRX衍生品市场官方发布）",
+              "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201041003/Guide_to_Night_Session_in_KRX_Derivatives_Market.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Since most products tradable in the night session are highly liquid products with sufficient demand, the market maker system will not be introduced. However, KRX plans to review whether to introduce it after observing the trading trends in the night session.",
+          "confidence": "medium",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "margin_practice_note": {
+          "zh": "按付款方分两级：客户保证金（投资者→会员）与结算会员保证金（会员→交易所）；引入夜盘后，结算会员保证金由原先每日算一次改为每日算两次（常规、夜盘收盘后各计算一次），缴纳截止时间相应缩短一小时（原T+1日12:00 → 现11:00）；若夜盘重算所得应缴保证金较前一常规时段末的保证金「显著更高」（增幅达120%以上，或增量达500亿韩元以上），须在11:00截止前补缴该重算金额",
+          "en": "Margin is split by payer into two tiers: customer margin (investor to member) and (clearing) member margin (member to Exchange). With the introduction of the Night-Session, member margin is now calculated twice each trading day (once after the regular session closes and once after the night session closes) instead of once, and the deposit deadline is shortened by one hour (from 12:00 to 11:00 on T+1 day). If the recalculated margin required after the night session is significantly higher than the amount at the end of the prior regular session — by 120% or more, or by KRW 50 billion or more — the account holder must deposit the recalculated amount by the 11:00 deadline",
+          "sources": [
+            {
+              "title": "Regulation ‧ Derivatives ‧ Margin ‧ Member Margin（KRX官网英文版）",
+              "url": "https://global.krx.co.kr/contents/GLB/06/0603/0603011003/GLB0603011003.jsp",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Regulation ‧ Derivatives ‧ Margin ‧ Customer Margin（KRX官网英文版，补充来源，见 detail）",
+              "url": "https://global.krx.co.kr/contents/GLB/06/0603/0603011002/GLB0603011002.jsp",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Clearing/Settlement ‧ Margin Management ‧ Exchange Market — Types and Composition of Margin（KRX官网英文版，补充来源，见 detail）",
+              "url": "https://global.krx.co.kr/contents/GLB/06/0608/0608030101/GLB0608030101.jsp",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "With the introduction of Night-Session, member margin will be calculated twice each trading day(After clsoings of 1) regular and 2) night sessions respectively) and the deadline for margin deposit is shortened by an hour(12:00 -> 11:00 on T+1 day). If the recalculated margin(for night session) required for deposit is significantly higher (by \"120% or more\" or \"50 billion KRW or more\") than that at the end of the previous day's regular session, the account holder must deposit the recalculated amount until the deposit deadline (11 am).",
+          "confidence": "high",
+          "detail": "整体保证金计算方法论（未直接体现具体数字，故未纳入zh/en正文）：KRX按标的资产特性相近的产品分组（股指、个股、债券、货币、商品等）分别计算组合净风险保证金，再加总各组得出总保证金要求，费率原则上依标的价格波动性、衍生品特性与市场状况厘定，并提供PC COMS教学软件辅助投资者理解（见 Types and Composition of Margin 页）。客户保证金进一步细分为新增未平仓部位所需的委托（初始）保证金与既有未平仓部位所需的保证金（净风险保证金+待结算损益）两部分，计算细节见 Customer Margin 页原文，未逐条摘引quote。",
+          "verified": "2026-08-16",
+          "enum": null
+        },
+        "connect_schemes": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "本次抓取材料未见衍生品市场（KRX自身运营）有类似证券市场沪港通/深港通式的互联互通安排；原CME/Eurex夜盘联动挂牌安排已于2025年终止并改为KRX自主运营夜盘（见 trading_sessions.night_session 的 detail 说明），目前未见与境外交易所之间新的联动挂牌安排，如实留空，记入 PROJECT/OPEN-QUESTIONS.md。",
+          "sources": [
+            {
+              "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
+              "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "en": null,
+          "enum": null,
+          "quote": null
+        }
       }
     },
     "listing": {
