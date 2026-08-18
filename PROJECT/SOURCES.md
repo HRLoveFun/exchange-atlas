@@ -579,6 +579,12 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - B3 Trading Procedures Manual（业务规程手册全文PDF，含价格限制/交易时段/订单类型等条款编号）: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf（HTTP 200，6.6MB，PDF文件名含空格已用%20编码，无括号无需%28%29）
   - Novo Mercado Listing Regulation（Novo Mercado板块规则全文PDF，官方英文译本，标注"free translation"）: https://www.b3.com.br/data/files/43/E0/16/EF/F348F41054E072F492D828A8/SITE-NM-Listing-Regulation-2011.pdf（HTTP 200，416KB；⚠️ PDF首页自称"free translation"，与 SSE/JPX 类似的翻译免责声明，进一步佐证只把它当英文对照而非独立法律文本）
   - Guide for Nonresident Investors（外资投资指南PDF，含CMN 4.373账户开户流程）: https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf（HTTP 200，1.7MB）
+  - Trading Hours – Derivatives, Indices（衍生品交易时段表·股指/利率分类：Ibovespa期货FUT IND、迷你指数期货FUT WIN、S&P 500期货FUT ISP/WSP等逐合约开盘/收盘/电子集合竞价时刻表，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/indices/（HTTP 200）
+  - Trading Hours – Derivatives, Single Stock and Units Futures（衍生品交易时段表·个股/份额期货分类，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/single-stock-and-units-futures/（HTTP 200）
+  - Ibovespa Futures（产品页标题为"Ibovespa Futures"，正文实际详述迷你指数期货WIN合约规格/保证金/每日盯市结算算例，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/ibovespa-futures.htm（HTTP 200）
+  - Futures Market（期货市场总览：利率/汇率/股指/大宗商品四大品类及对应ticker，多数合约现金结算少数实物交割，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/futures-market.htm（HTTP 200）
+  - Options on Ibovespa（Ibovespa指数期权合约规格：欧式行权、到期日自动履约规则，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/options-on-ibovespa.htm（HTTP 200）
+  - Stock Futures（个股期货合约规格：现金结算、最小报价单位0.01点，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/stock-futures.htm（HTTP 200）
 - `www.gov.br` | 监管 | pt-BR / en | curl 常规 UA 200，未见反爬 | 巴西证券监督管理机构 Comissão de Valores Mobiliários（CVM，证券委员会）在联合政府门户 gov.br 下的英文栏目，B3 的政府监管机构；本条目仅登记 `www.gov.br` 而非更宽泛的 `gov.br`，因为实际抓取到的 URL netloc 就是 www 子域
   - CVM 英文首页: https://www.gov.br/cvm/en（HTTP 200）
 - `bsmsupervisao.com.br` | 官方（B3自律监管子机构） | pt-BR / en | curl 常规 UA 200 | BSM Supervisão de Mercados，2007年由B3（原BM&FBOVESPA）设立的自律组织，负责对B3管理的市场及参与者进行一线监督、稽查与纪律处分，受CVM监督

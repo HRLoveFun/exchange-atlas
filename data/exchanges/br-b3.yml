@@ -475,6 +475,236 @@ market_structure:
     confidence: low
     detail: "未找到B3与其他交易所间类似沪港通式的正式互联互通安排。非居民投资者接入渠道（CMN 4.373号决议）性质不同——是准入通道而非交易所间连接，已记入participants.foreign_access_channel。"
 
+  # 衍生品市场机制：B3自身运营期货/期权业务线（见第四章products的br-b3-options/br-b3-futures），
+  # 本子块裁剪自本章顶层字段集合，见 schema/taxonomy.yml market_structure.derivatives 与
+  # PROJECT/DECISIONS.md [ADR-019]。样本以Ibovespa期货/迷你指数期货（FUT IND/WIN）、个股期货、
+  # Ibovespa指数期权为代表，均为第四章已列出的具体产品。
+  derivatives:
+    trading_sessions:
+      pre_market:
+        zh: "衍生品市场没有统一的「开市前议价」时段，具体因产品而异：指数期货类旗舰合约（Ibovespa期货FUT IND/迷你指数期货FUT WIN）在09:00常规时段开盘前5分钟（即08:55）设开盘前阶段；期权市场（个股/ETF/指数期权）则沿用现货市场同一套09:30–09:45撤单、09:45–10:00开盘前集合竞价的安排（见顶层trading_sessions.pre_market）"
+        en: "No unified pre-market period across the derivatives market as a whole; it varies by product: the flagship index futures (Ibovespa Futures FUT IND / Mini Ibovespa Futures FUT WIN) have a pre-opening phase starting 5 minutes before the 09:00 regular-session open (i.e. from 08:55); the options market (single-stock/ETF/index options) instead reuses the cash market's own 09:30-09:45 order-cancellation + 09:45-10:00 pre-opening call window (see top-level trading_sessions.pre_market)"
+        sources:
+          - title: Trading Hours – Derivatives, Indices（B3 官网）
+            url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/indices/
+            accessed: 2026-08-18
+        quote: "Ibovespa Futures FUT IND 09:00 (1) 18:25 (2) (4) - - 18:25 - - - - - - ... (1) The pre-opening phase starts 5 minutes before the trading phase."
+        confidence: high
+      continuous_am:
+        zh: "指数期货类旗舰合约（IND/WIN）自09:00起连续交易，无独立上午/下午分段，直至18:25收盘电子集合竞价（见continuous_pm）；B3官网概括性说法为多数衍生品合约交易时段在上午9时至下午6时之间，具体因合约类型而异"
+        en: "The flagship index futures (IND/WIN) trade continuously from 09:00, with no separate morning/afternoon split, through to the 18:25 electronic closing call (see continuous_pm); B3's own general statement is that most derivatives contracts trade between 9 AM and 6 PM, varying by contract type"
+        sources:
+          - title: Trading Hours – Derivatives, Indices（B3 官网）
+            url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/indices/
+            accessed: 2026-08-18
+          - title: Futures contracts trading dynamics（B3 官网，Trading Dynamics 页衍生品部分）
+            url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm
+            accessed: 2026-08-18
+        quote: "Ibovespa Futures FUT IND 09:00 (1) 18:25 (2) (4) - - 18:25 - - - - - -"
+        confidence: high
+      lunch_break:
+        zh: "无：指数期货、个股期货均为单一连续交易时段（09:00至收盘），不设午间休市；期权市场同样沿用现货市场无午休的连续交易安排（见顶层lunch_break）"
+        confidence: medium
+      continuous_pm:
+        zh: "延续continuous_am的单一连续时段直至电子集合竞价收盘：指数期货类旗舰合约（IND/WIN）18:25；个股/份额期货（Single Stock, Units and ETFs Futures）17:55；期权市场（个股/ETF期权）连续交易至16:55、指数期权至16:50，其后进入收盘集合竞价（见closing_mechanism）"
+        en: "Continues the single continuous session from continuous_am through to the electronic closing call: 18:25 for the flagship index futures (IND/WIN); 17:55 for Single Stock, Units and ETFs Futures; the options market (single-stock/ETF options) trades continuously to 16:55 and index options to 16:50, after which the closing call begins (see closing_mechanism)"
+        sources:
+          - title: Trading Hours – Derivatives, Indices（B3 官网）
+            url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/indices/
+            accessed: 2026-08-18
+          - title: Trading Hours – Derivatives, Single Stock and Units Futures（B3 官网）
+            url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/single-stock-and-units-futures/
+            accessed: 2026-08-18
+        quote: "Ibovespa Futures FUT IND 09:00 (1) 18:25 (2) (4) - - 18:25 - - - - - -"
+        confidence: high
+      after_market:
+        zh: "本文件已收录的旗舰合约（Ibovespa/迷你指数期货、个股期货、S&P 500期货）在B3官方交易时段表中「Extended hours (T+0)」栏位均为空，即无独立盘后延长时段；但部分挂钩欧洲股指的合约（如DAX期货/Euro Stoxx期货）确有12:40–18:00的延长时段用于衔接欧美市场；期权市场另有独立的盘后交易窗口17:25–18:45（AHT，与现货共用，见顶层after_market）"
+        en: "For the flagship contracts covered in this file (Ibovespa/Mini Ibovespa Futures, single-stock futures, S&P 500 Futures), B3's trading-hours table shows no populated 'Extended hours (T+0)' column, i.e. no separate after-market session; some other contracts tracking European indices (e.g. DAX Futures / Euro Stoxx Futures) do have a 12:40-18:00 extended window bridging into European/US hours; the options market has its own after-market window 17:25-18:45 (AHT, shared with the cash market, see top-level after_market)"
+        sources:
+          - title: Trading Hours – Derivatives, Indices（B3 官网）
+            url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/indices/
+            accessed: 2026-08-18
+        quote: "DAX Futures FUT DAX 09:00 (1)(2) 12:20 12:27 12:30 12:30 - - 12:40 18:00 - -"
+        confidence: high
+      night_session:
+        zh: "《交易规程手册》Title II「交易环境」定义了市场通用的三段式框架——常规交易时段/盘后延长时段/收市后T+1时段，T+1时段的成交于次一营业日登记、日盯市保证金于T+2现金结算；但本文件已收录的旗舰合约（Ibovespa/迷你指数期货IND/WIN、个股期货）在B3官方交易时段表中「After-hours (T+1)」栏位均为空，即未见对这些合约开放T+1夜盘交易，T+1机制主要见于利率、大宗商品等其他品类合约"
+        en: "Title II ('Trading Environment') of B3's Trading Procedures Manual defines a market-wide three-part session framework — regular trading period / after-market (extended-hours) period / after-hours (T+1) period — under which T+1 trades are registered on the next business day and daily variation margin is cash-settled on T+2; however, the flagship contracts covered in this file (Ibovespa/Mini Ibovespa Futures IND/WIN, single-stock futures) show no populated 'After-hours (T+1)' column in B3's trading-hours table, i.e. no T+1 night session for these contracts; the T+1 mechanism mainly applies to other segments such as interest-rate and commodity contracts"
+        sources:
+          - title: B3's Trading Procedures Manual（PDF）
+            url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+            accessed: 2026-08-18
+          - title: Trading Hours – Derivatives, Indices（B3 官网）
+            url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/indices/
+            accessed: 2026-08-18
+        quote: "Before the start of the after-hours period, all orders with validity for the day are canceled by B3. Trades executed during after-hours periods are registered on the business day subsequent to the day of their execution (T+1), and daily variation margin is cash-settled on the second business day after execution (T+2), in accordance with the clearinghouse's rules."
+        confidence: high
+
+    holidays_note:
+      zh: ""
+      confidence: low
+      detail: "未见衍生品市场节假日安排与现货市场（见顶层holidays_note）存在实质差异的官方说明，本次未逐条核实，留空。"
+
+    opening_mechanism:
+      zh: "沿用顶层市场通用的「开盘前阶段」（Pre-opening phase）机制定义——只接受挂单、不做撮合，仅用于确定理论开盘价；该定义见于《交易规程手册》Title II「交易环境」章节，明确适用于「各组资产与衍生品」（in each group of assets and derivatives），非现货专属。指数期货类旗舰合约的开盘前阶段时长为5分钟（具体时刻见trading_sessions.pre_market）"
+      en: "Reuses the same market-wide 'Pre-opening phase' definition as the top level — orders are accepted but not matched, used only to determine the theoretical opening price; this is defined in Title II ('Trading Environment') of the Trading Procedures Manual, explicitly applicable to 'each group of assets and derivatives', not cash-market-exclusive. For the flagship index futures, the pre-opening phase lasts 5 minutes (see trading_sessions.pre_market for the concrete clock time)"
+      sources:
+        - title: B3's Trading Procedures Manual（PDF）
+          url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+          accessed: 2026-08-18
+      quote: "Trading phases are previously defined periods for trading of various kinds in each group of assets and derivatives. ... Pre-opening phase: precedes trading in an instrument, with a specific duration and designed to assure the opening of trading at a fair and transparent price. Order registration is allowed but no trades are matched. Orders are used only to define the theoretical opening price in accordance with auction rules."
+      confidence: high
+
+    closing_mechanism:
+      zh: "沿用顶层「收盘集合竞价」（Closing call phase）机制定义——以现货市场收盘前几分钟同样的定价规则透明收盘；指数期货类旗舰合约（IND/WIN）的收盘电子集合竞价（Electronic call）在18:25进行，个股/份额期货在17:55，期权市场则在16:55（个股/ETF期权）或16:50（指数期权）进入收盘集合竞价"
+      en: "Reuses the top-level 'Closing call phase' definition — trading closes transparently using the same pricing rules as those used for the final minutes of regular trading; for the flagship index futures (IND/WIN) the closing Electronic call occurs at 18:25, for Single Stock, Units and ETFs Futures at 17:55, and the options market enters its closing call at 16:55 (single-stock/ETF options) or 16:50 (index options)"
+      sources:
+        - title: Trading Hours – Derivatives, Indices（B3 官网）
+          url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/indices/
+          accessed: 2026-08-18
+        - title: Trading Hours – Derivatives, Single Stock and Units Futures（B3 官网）
+          url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/single-stock-and-units-futures/
+          accessed: 2026-08-18
+      quote: "Ibovespa Futures FUT IND 09:00 (1) 18:25 (2) (4) - - 18:25 - - - - - -"
+      confidence: high
+
+    matching_principle:
+      zh: "与现货市场共用同一套「资产与衍生品」统一撮合框架（《交易规程手册》Title II「交易环境」）：买卖盘经B3交易系统撮合成交，遵循已获授权参与者依交易规则登记的报单/交叉盘规则，同一撮合引擎不区分现货与衍生品（见顶层matching_principle的价格优先/时间优先撮合原则）"
+      en: "Shares the same unified 'assets and derivatives' matching framework as the cash market (Title II, Trading Environment, of the Trading Procedures Manual): bids and asks are matched by B3's trading system per orders/cross orders registered by authorized participants under B3's trading rulebook; the same matching engine does not distinguish cash from derivatives (see top-level matching_principle for the price-priority/time-priority matching rule)"
+      sources:
+        - title: B3's Trading Procedures Manual（PDF）
+          url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+          accessed: 2026-08-18
+      quote: "Trading in assets and derivatives during trading sessions results from the matching of bids and asks or cross orders in B3's trading system registered by authorized participants in accordance with the provisions of B3's trading rulebook and this trading procedures manual."
+      confidence: high
+
+    order_types:
+      zh: "基础订单类型集合与现货市场共用（市价单/限价单/管理单/自由裁量单等八种基础类型+MOA/MOC/LOC特殊撮合期订单+GTC/GTD有效期修饰符，见顶层order_types），其中GTC/GTD明确写明「直至该衍生品到期」这一衍生品专属失效条件。衍生品市场另有现货没有的「结构化交易」（Structured Transaction）订单类型，由系统自动生成配对腿——例如美元期货与即期美元反向对冲的「美元联动」（U.S. Dollar Casado）交易、跨两个到期月份联动的展期（Rollover）交易，以及DI1/DAP/FRC等利率期货专用的DV01/PU中性联动交易"
+      en: "The base order-type set is shared with the cash market (Market/Limit/Managed/Discretionary etc. eight base types, plus auction-period MOA/MOC/LOC and GTC/GTD time-in-force qualifiers — see top-level order_types); GTC/GTD explicitly extend validity 'until the derivative expires', a derivatives-specific condition. The derivatives market additionally has 'Structured Transaction' order types not found in the cash market, which auto-generate paired legs — e.g. the 'U.S. Dollar Casado' (an inverse-hedge pairing of US Dollar Futures with US Spot Dollar), calendar-month Rollover transactions, and DV01/PU-neutral structured transactions on DI1/DAP/FRC interest-rate futures"
+      sources:
+        - title: B3's Trading Procedures Manual（PDF）
+          url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+          accessed: 2026-08-18
+      quote: "Good-till-cancel (GTC): remains active on the central order book until completely filled or canceled, until the occurrence of dividend distribution or other entitlements involving the asset, or until expiration (if a derivative); ... U.S. Dollar “Casado” creates an inverse nature execution in the first contract month available of the U.S. Dollar Futures (DOL) exchange rate, traded on the trading platform, and another execution of the same nature in the U.S. Spot Dollar with T+2 settlement, settled at the B3 Foreign Exchange Clearinghouse. ... The structured transaction of DV01 Neutral or PUA Neutral allows the simultaneous trading of two DI1, DAP or FRC maturities, in inverse nature (sell or buy), in quantities that neutralize the DV01 or PU measures of each of the two maturities of these contracts."
+      confidence: high
+
+    tick_size:
+      zh: "以旗舰产品为例：迷你指数期货（WIN）最小变动价位为5个指数点（每点0.20雷亚尔）；个股期货最小报价单位为0.01点（每点1.00雷亚尔）；Ibovespa指数期权最小变动价位同为5个指数点（每点0.01雷亚尔）"
+      en: "Flagship examples: Mini Ibovespa Futures (WIN) has a minimum price fluctuation of 5 index points (BRL0.20 per point); Stock Futures have a tick size of 0.01 points (BRL1.00 per point); Options on Ibovespa likewise have a minimum fluctuation of 5 index points (BRL0.01 per point)"
+      sources:
+        - title: Ibovespa Futures（B3 官网，正文详述迷你指数期货WIN合约规格）
+          url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/ibovespa-futures.htm
+          accessed: 2026-08-18
+        - title: Stock Futures（B3 官网）
+          url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/stock-futures.htm
+          accessed: 2026-08-18
+        - title: Options on Ibovespa（B3 官网）
+          url: https://www.b3.com.br/en_us/products-and-services/trading/equities/options-on-ibovespa.htm
+          accessed: 2026-08-18
+      quote: "The contract size is the amount of Ibovespa points multiplied by BRL0.20 and its minimum variation is 5 index points."
+      confidence: high
+
+    contract_specs_note:
+      zh: "三类旗舰产品举例：①迷你指数期货（WIN）——合约规模为Ibovespa点数×0.20雷亚尔/点，最小变动5个指数点，到期月份为双月（2/4/6/8/10/12月），到期日为合约月15日最近的星期三，整手为1张迷你合约；②个股期货——代码结构为「公司代码+品类+到期月+到期年」，合约规模为1股，以点数报价（每点1.00雷亚尔），最小报价单位0.01点，整手100张合约，逐月到期，现金结算（不涉及标的股票实物交收）；③Ibovespa指数期权——标的为Ibovespa指数，欧式行权，合约规模为指数点数×0.01雷亚尔/点，最小变动5个指数点，整手1张合约，到期日为合约月15日最近的星期三（遇假日顺延至次一营业日），全部月份均有合约挂牌；到期日的自动履约由B3执行——认购期权在Ibovespa结算价高于行权价时自动行权，认沽期权在结算价低于行权价时自动行权。更广义地，B3期货市场划分为利率/汇率/股指/大宗商品四大品类，多数合约现金结算，少数存在实物交割"
+      en: "Three flagship examples: (1) Mini Ibovespa Futures (WIN) — contract size is Ibovespa points x BRL0.20/point, minimum fluctuation 5 index points, expiration in even months (Feb/Apr/Jun/Aug/Oct/Dec), last trading day the Wednesday nearest the 15th of the contract month, round lot 1 minicontract; (2) Stock Futures — ticker structured as company code + type/class + contract month + contract year, contract size 1 share, quoted in points (BRL1.00 per point), tick size 0.01 points, round lot 100 contracts, monthly expiration, cash-settled (no physical delivery of the underlying share); (3) Options on Ibovespa — underlying is the Ibovespa index, European-style exercise, contract size is index points x BRL0.01/point, minimum fluctuation 5 index points, round lot 1 contract, last trading day the Wednesday nearest the 15th of the contract month (rolled to the next business day if a holiday), listed for all contract months; automatic exercise on the expiration date is carried out by B3 — calls are exercised automatically if the Ibovespa settlement price exceeds the strike, puts if the settlement price is below the strike. More broadly, B3's futures market spans four segments — interest rate, currencies, stock indices and commodities — with most contracts cash-settled and some physically delivered"
+      sources:
+        - title: Ibovespa Futures（B3 官网，正文详述迷你指数期货WIN合约规格）
+          url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/ibovespa-futures.htm
+          accessed: 2026-08-18
+        - title: Stock Futures（B3 官网）
+          url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/stock-futures.htm
+          accessed: 2026-08-18
+        - title: Options on Ibovespa（B3 官网）
+          url: https://www.b3.com.br/en_us/products-and-services/trading/equities/options-on-ibovespa.htm
+          accessed: 2026-08-18
+        - title: Futures Market（B3 官网，期货市场总览）
+          url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/futures-market.htm
+          accessed: 2026-08-18
+      quote: "Contract Size 1 share Quotation In points, each point value = BRL 1.00 Tick Size 0.01 Round Lot 100 contracts Expiration Monthly Settlement Cash settlement"
+      confidence: high
+
+    price_limits:
+      type:
+        enum: dynamic_reference
+        zh: "与现货市场共用同一套「交易隧道」（trading tunnels）动态参考价机制框架（拒绝隧道/拍卖隧道/保护隧道三类，见顶层price_limits.type），但衍生品的隧道中枢（tunnel center）采用「基准合约月」（pivot point）方法学动态更新：以流动性最高合约月份的实际成交价为基准，动态推算流动性较低合约月份的隧道中枢；期权隧道则改用波动率曲面（volatility surface）结合标的资产价格高低点代入认购/认沽期权定价公式得出隧道上下限"
+        en: "Shares the same dynamic-reference 'trading tunnels' framework as the cash market (rejection / auction / protection tunnels, see top-level price_limits.type), but the tunnel center for derivatives is dynamically updated using a 'pivot point' contract-month methodology: actual trade prices in the most liquid contract month serve as the basis for dynamically deriving the tunnel center for less liquid contract months; for options, tunnels instead use volatility surfaces combined with the underlying's period price highs/lows fed into call/put option pricing formulas to derive the upper/lower tunnel limits"
+        sources:
+          - title: B3's Trading Procedures Manual（PDF）
+            url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+            accessed: 2026-08-18
+        quote: "The methodology uses the prices of actual trades in the most liquid contract months as a basis for dynamic updating of the reference price (tunnel center) to calculate auction and rejection tunnels for the less liquid contract months, as follows: I - Pivot point: the contract month considered most liquid and used as a basis for updating the other contract months, considered less liquid."
+        confidence: high
+      main_board:
+        zh: ""
+        confidence: low
+        detail: "具体隧道带宽参数（更新百分比、最小带宽等）依合约类型逐一维护于B3官网，本次抓取到的规程手册正文未给出固定数值表，留空不猜（与顶层price_limits.main_board同一处理方式）。"
+      other_boards:
+        zh: ""
+        confidence: low
+
+    circuit_breaker:
+      enum: index_level
+      zh: "与顶层市场熔断机制（见market_structure.circuit_breaker）为同一套以Ibovespa跌幅触发的机制，规程原文明确写明覆盖范围包含衍生品：跌10%时全市场（含资产、衍生品与私募固定收益工具）暂停交易30分钟；恢复后再跌15%暂停1小时；恢复后再跌20%由B3自行决定暂停时长并公告"
+      en: "The same Ibovespa-decline-triggered circuit breaker described at the top level (see market_structure.circuit_breaker) explicitly covers derivatives per the rulebook text: a 10% decline halts all trading (assets, derivatives and private fixed-income instruments) for 30 minutes; upon resumption, a 15% decline halts trading for 1 hour; upon resumption, a 20% decline lets B3 determine and announce the suspension period"
+      sources:
+        - title: Circuit breaker（官网新闻公告）
+          url: https://www.b3.com.br/en_us/news/circuit-breaker-8AE490CA70CB10030170CEECFCE05EAF.htm
+          accessed: 2026-08-18
+      quote: "I - If the Ibovespa falls ten per cent (10%) from its closing level on the previous day, all trading in assets, derivatives and private fixed-income instruments is interrupted for thirty (30) minutes; II - When trading resumes, if the Ibovespa falls fifteen per cent (15%) from its closing level on the previous day, all trading in assets, derivatives and private fixed-income instruments is interrupted for one hour; III - When trading resumes, if the Ibovespa falls twenty per cent (20%) from its closing level on the previous day, B3 may determine a suspension of trading in assets, derivatives and private fixed-income instruments for a certain period to be announced by B3."
+      confidence: high
+
+    volatility_interruption:
+      zh: "与顶层「拍卖隧道」自动触发集合竞价机制（见market_structure.volatility_interruption）为同一套通用触发逻辑，本身不区分现货与衍生品；衍生品的特有之处在于隧道中枢的计算方法——见上方price_limits.type的「基准合约月」（pivot point）动态更新方法学：用最活跃合约月份的成交价格反推流动性较低合约月份的隧道中枢"
+      en: "Shares the same general auction-tunnel trigger logic as the top level (see market_structure.volatility_interruption), which does not itself distinguish cash from derivatives; the derivatives-specific distinction lies in how the tunnel center is calculated — see price_limits.type above for the 'pivot point' contract-month methodology, which derives the tunnel center for less-liquid contract months from the trade prices of the most liquid (pivot) contract month"
+      sources:
+        - title: B3's Trading Procedures Manual（PDF）
+          url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+          accessed: 2026-08-18
+      quote: "The methodology uses the prices of actual trades in the most liquid contract months as a basis for dynamic updating of the reference price (tunnel center) to calculate auction and rejection tunnels for the less liquid contract months, as follows: I - Pivot point: the contract month considered most liquid and used as a basis for updating the other contract months, considered less liquid."
+      confidence: high
+
+    trading_halt_mechanism:
+      zh: "个股期权（options on equities）与标的现货股票共用同一套因发行人重大事项公告触发的分档停牌/复牌机制（具体时间窗口分档表见顶层trading_halt_mechanism），规程手册原文明确将该机制的适用范围写为「资产或个股期权」（an asset or option on equities）。此外，电子交易总监有权对资产与衍生品实施停牌，B3并可对与已停牌标的挂钩的衍生品启用专门交易安排以便平仓了结未平仓头寸"
+      en: "Options on equities share the same tiered halt/resumption procedure triggered by an issuer's material-event notice as their underlying stocks (see the time-window table under the top-level trading_halt_mechanism); the Manual's own text frames this procedure's scope as 'an asset or option on equities'. Separately, B3's Director of Electronic Trading is empowered to suspend trading in assets and derivatives, and B3 may apply special trading procedures for derivatives referenced in suspended assets in order to close out open positions"
+      sources:
+        - title: B3's Trading Procedures Manual（PDF）
+          url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+          accessed: 2026-08-18
+      quote: "B3's Director of Electronic Trading, by delegation of its Chief Executive Officer (CEO), is empowered to suspend trading in assets and derivatives admitted to trading on organized markets in the situations specified by B3's rules and other normative documents. B3 may use special trading procedures for assets and derivatives referenced in suspended assets in order to close out open positions in derivatives, informing the market of the procedures to be used in notices. ... If trading in an asset or option on equities is suspended due to the publication or imminent publication of a material event notice during a trading session, in accordance with the provisions of B3's trading rulebook, issuer listing and securities admission for trading rulebook and issuer manual, the following procedures will apply."
+      confidence: high
+
+    block_trade:
+      zh: ""
+      confidence: low
+      detail: "规程手册「大宗交易解决方案」（Midpoint order/Request For Quote/Book of Block Trade）章节措辞泛指「assets」，未见衍生品专属的大手交易时段表或规则页；顶层block_trade的10:00–16:55时段来自现货市场交易时段页，未找到衍生品对应版本，如实留空。"
+
+    market_maker_scheme:
+      zh: "与顶层做市商制度（见market_structure.market_maker_scheme）为同一套注册体系（独立做市商/参与B3计划的独立做市商/受托做市商三类，投资基金亦可注册为独立做市商），规程手册原文明确将做市商数量上限单独按「各类别/各类衍生品」（each type or class of derivative）列出，即该体系本身就是资产与衍生品通用，未见衍生品另立一套规则"
+      en: "Shares the same registration regime as the top-level market_maker_scheme (independent market makers / independent market makers accredited for B3 programs / contracted market makers, with investment funds also eligible to register as independent market makers); the Manual's own text sets the market-maker headcount cap separately 'for each type or class of derivative', meaning this framework is itself asset-and-derivative-generic rather than the derivatives market running a distinct scheme"
+      sources:
+        - title: B3's Trading Procedures Manual（PDF）
+          url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+          accessed: 2026-08-18
+      quote: "The maximum number of market makers authorized to act for each type or class of derivative is..."
+      confidence: high
+
+    margin_practice_note:
+      zh: "开仓仅需按持仓总值的一定比例缴纳担保品（保证金），无需支付全额价值：担保品可用现金、政府债券、股票、银行存单（CDB）、信用证等形式缴纳，具体比例由B3按合约类型设定；日内交易的担保品比例由经纪商自行设定，隔夜持仓的担保品比例则由B3设定。本字段描述的是交易端投资者面对的担保品要求，区别于clearing.initial_margin_practice描述的CORE方法论清算端计算逻辑"
+      en: "Opening a position requires only a collateral deposit equal to a percentage of the total position value, not the full amount; collateral may be posted in cash, government bonds, stocks, Bank Certificate of Deposit (CDB), letters of credit, etc., with the exact percentage set by B3 per contract type; the day-trade collateral percentage is set by the brokerage house, while the percentage for overnight positions is set by B3. This field describes the trading-side collateral requirement facing investors, distinct from clearing.initial_margin_practice's CORE-methodology clearing-side calculation"
+      sources:
+        - title: Futures contracts trading dynamics（B3 官网，Trading Dynamics 页衍生品部分）
+          url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm
+          accessed: 2026-08-18
+        - title: Ibovespa Futures（B3 官网，正文详述迷你指数期货WIN合约规格）
+          url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/ibovespa-futures.htm
+          accessed: 2026-08-18
+      quote: "Initially, only a collateral deposit is needed equivalent to a percentage of the total value of the open position. Collateral can be posted in cash, government bonds, stocks, Bank Certificate of Deposit (CDB), letter of credit, etc. The amount of collateral posted is set by B3 and varies according to the contract type."
+      confidence: high
+
+    connect_schemes:
+      zh: ""
+      confidence: low
+      detail: "未找到衍生品市场与其他交易所之间类似互联互通的正式安排，与顶层market_structure.connect_schemes情况相同，如实留空。"
+
 # ═══════════════════════════════════════════════
 # 六｜上市、持续监管与退市
 # ═══════════════════════════════════════════════
