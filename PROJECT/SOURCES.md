@@ -288,6 +288,18 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 指数总览: https://www.szse.cn/market/exponent/pandect/index.html
   - 会员与交易类规则入口: https://www.szse.cn/lawrules/service/member/index.html
   - 关于下调股票交易经手费收费标准的通知（2023-08-18）: https://www.szse.cn/disclosure/notice/general/t20230818_602805.html
+  - 期权子网站首页（补全 market_structure.derivatives 时，2026-08-18 新增；`/option/` 路径下的公告详情页由服务端直出 HTML，与主站 `/lawrules/rule/...` 栏目的列表页不同——后者条目由前端 AJAX 异步加载（channelId 驱动的 CMS 组件），curl 拿不到列表内容，只能先 WebSearch 定位到具体 `t20YYMMDD_数字.html` 详情页直链，再用 curl 抓该详情页取得附件 PDF 真实链接；这是本次定位到期权交易规则原文 PDF 的关键方法）: https://www.szse.cn/option/
+  - 期权业务规则列表页（服务端直出，可直接 curl 拿到各条目详情页链接，与上条同一发现）: https://www.szse.cn/option/rules/optrules/
+  - 关于发布《深圳证券交易所股票期权试点交易规则》的通知（附件为交易规则原文 PDF，见下一条）: https://www.szse.cn/option/rules/optrules/t20191207_572478.html
+  - 深圳证券交易所股票期权试点交易规则（2019-12-07 发布，深证上〔2019〕800号，自发布之日起施行；本次 WebSearch 直接搜索该文件名多次未命中，最终通过上面的官方通知详情页取得附件真实链接；规则原文未见「XXXX年修订」字样，且未搜到任何后续修订通知，视为现行有效版本，但下次会话如需再次引用建议先按 SOURCES.md 开头教训 3 的方法重新探测一遍）PDF: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf ← market_structure.derivatives 除保证金公式外的绝大部分字段（交易时段/开收盘机制/撮合原则/订单类型/最小报价单位/涨跌停公式/熔断/交易异常情况处置/大宗交易/做市商）出处
+  - 深圳证券交易所 中国证券登记结算有限责任公司股票期权试点风险控制管理办法（第十四-二十条为开仓/维持保证金计算公式，ETF为标的12%/7%、股票为标的21%/10%与19%/10%两套）PDF: http://docs.static.szse.cn/www/option/rules/optrules/W020191207433397366259.pdf ← market_structure.derivatives.margin_practice_note 主要出处
+  - 关于嘉实沪深300ETF期权合约品种上市交易有关事项的通知（沪深300ETF期权2019-12-23上市、持仓限额分级表）: https://www.szse.cn/option/rules/optrules/t20191219_572722.html
+  - SZSE English — CSI 300 ETF Options（英文版合约条款页：合约乘数10,000/行权价间距表/涨跌停公式/保证金公式，均与上述中文来源交叉核对一致，仅作辅助佐证，未作为 derivatives 字段 quote 的主要来源，因 source_lang 为 zh）: https://www.szse.cn/English/products/options/etf/index.html
+- `investor.szse.cn` | 官方（深交所投资者教育／证券学院子站，与 szse.cn 同属深交所运营，页面均带"仅供投资者教育、不构成投资建议"免责声明） | zh | curl 常规 UA 200，未见反爬 | 补全 market_structure.derivatives 时（2026-08-18）新发现的官方来源；"期权入市手册"系列连载文章由深交所联合市场机构撰写，属"官网说明页"层级（非交易所规则原文本身），用于交易制度/做市商/风险控制等字段的补充与交叉印证
+  - 期权入市手册（十一）：深市期权交易制度（上）: https://investor.szse.cn/institute/rules/t20221108_597221.html
+  - 期权入市手册（十二）：深市期权交易制度（下）（合约单位10,000份的官方说明出处）: https://investor.szse.cn/institute/rules/t20221108_597223.html
+  - 期权入市手册（十三）：做市商制度: https://investor.szse.cn/institute/rules/t20221110_597273.html
+  - 期权入市手册（三十八）：交易所主要风险控制措施（下）（组合策略保证金/强行平仓触发机制）: https://investor.szse.cn/institute/rules/t20230227_598959.html
 - `english.szse.cn` / `szse.cn/English` | 官方（英文版） | en | 同域名下 `/English/` 路径，curl 常规 UA 200 | About Overview 与 Trading Overview 两页内容较薄，多为导航链接夹杂少量正文，摘引前需按关键词定位，不能直接取前 N 段
   - About Overview: https://www.szse.cn/English/about/overview/index.html
   - Trading Overview: https://www.szse.cn/English/services/trading/tradOverview/index.html
