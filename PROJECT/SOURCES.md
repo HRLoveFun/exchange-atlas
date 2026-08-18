@@ -434,6 +434,21 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 市场波动性 FAQ（Extreme Trade Range / Enhanced Volatility Interruption 机制说明）: https://www.asx.com.au/markets/market-resources/market-volatility-faqs（HTTP 200，148KB）
   - S&P/ASX 指数体系 101（博客，官方对第三方编制指数的说明）: https://www.asx.com.au/blog/listed-at-asx/sandp-asx-indices-101（HTTP 200，160KB）
   - 开收盘机制改革说明（博客）: https://www.asx.com.au/blog/listed-at-asx/changes-to-equity-market-structure（HTTP 200，159KB）
+  - ASX 24衍生品市场（期货市场）总览页: https://www.asx.com.au/markets/trade-our-derivatives-market/futures-market （HTTP 200，152KB）
+  - ASX 24指数衍生品交易时段: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/index-derivatives （HTTP 200，133KB）
+  - ASX 24利率衍生品交易时段: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/interest-rate-derivatives （HTTP 200，136KB）
+  - ASX 24农产品衍生品交易时段: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/agricultural-derivatives （HTTP 200，134KB）
+  - ASX 24合约规格总表 PDF: https://www.asx.com.au/content/dam/asx/participants/derivatives-market/ird/asx24-contract-specifications.pdf （HTTP 200，649KB）
+  - ASX 24 Operating Rules 第三节 PDF: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-24-operating-rules/rules/ASX-24-Operating-Rules-Section-03.pdf （HTTP 200，369KB）
+  - ASX 24 Operating Rules 第四节（订单录入与交易）PDF: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-24-operating-rules/rules/ASX-24-Operating-Rules-Section-04.pdf （HTTP 200，602KB）
+  - ASX 24 Trading Platform Guide PDF: https://www.asx.com.au/content/dam/asx/participants/trading-platforms/futures/asx-24-trading-platform-guide.pdf （HTTP 200，1237KB）
+  - ASX Clear (Futures) 保证金参数表 PDF: https://www.asx.com.au/content/dam/asx/participants/clearing-and-settlement/margin-rates.pdf （HTTP 200，657KB）
+  - 保证金机制说明页（Margining）: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear/risk-management/margining （HTTP 200，149KB）
+  - ASX Clear (Futures)（期货结算公司专页）: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear-futures （HTTP 200，169KB）
+  - ASX Clear (Futures) SPAN保证金算例 PDF: https://www.asx.com.au/documents/clearing/asx-clear-futures-examples.pdf （HTTP 200，125KB）
+  - 做市商安排总览页（Market maker arrangements）: https://www.asx.com.au/markets/market-resources/market-maker-arrangements （HTTP 200，137KB）
+  - 指数衍生品做市商安排（含SPI 200期货期权）: https://www.asx.com.au/markets/market-resources/market-maker-arrangements/index-derivatives-market-maker-arrangements （HTTP 200，140KB）
+  - 利率衍生品做市商安排: https://www.asx.com.au/markets/market-resources/market-maker-arrangements/interest-rate-derivatives-market-maker-arrangements （HTTP 200，145KB）
 - `asic.gov.au` | 监管 | en | curl 常规 UA 200，未见反爬 | 澳大利亚证券及投资委员会（ASIC），ASX 的政府监管机构；RG 196 是卖空监管的权威监管指引原文
   - Regulatory Guide 196 - Short Selling PDF: https://download.asic.gov.au/media/4896780/rg196-published-8-october-2018.pdf（HTTP 200，702KB）
   - RG 196 索引页: https://www.asic.gov.au/regulatory-resources/find-a-document/regulatory-guides/rg-196-short-selling/（HTTP 200，66KB）

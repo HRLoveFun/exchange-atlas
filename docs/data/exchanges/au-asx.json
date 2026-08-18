@@ -817,32 +817,392 @@
       },
       "derivatives": {
         "trading_sessions": {
-          "pre_market": null,
-          "continuous_am": null,
-          "lunch_break": null,
-          "continuous_pm": null,
-          "after_market": null,
-          "night_session": null
+          "pre_market": {
+            "zh": "夜盘（Night Session）与日盘（Day Session）开盘前均设10分钟的「开市前」（Pre-Open）状态：期货/期权合约可在此期间录入买卖盘但不撮合成交，直至转入Open状态后按「均衡价格」（Auction Equilibrium Price）算法一次性撮合未成交余额",
+            "en": "Both the Night Session and Day Session are preceded by a 10-minute Pre-Open state: bids and offers for futures/option contracts may be entered but are not matched until the market transitions to the Open state, when unmatched auction interest is matched at the Auction Equilibrium Price",
+            "sources": [
+              {
+                "title": "ASX 24 Trading Platform Guide（ASX 官网 PDF）",
+                "url": "https://www.asx.com.au/content/dam/asx/participants/trading-platforms/futures/asx-24-trading-platform-guide.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "Pre-Open: A period of 10 minutes prior to the Open in respect of a particular Futures Contract or Option Contract during which bids and offers may be entered into the system.",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          },
+          "continuous_am": {
+            "zh": "无「上午/下午」之分：一个交易日（Trading Day）由夜盘（Night Session）与日盘（Day Session）两段组成，夜盘固定先于日盘，可跨越两个日历日；平台以XSFE/NZFX市场为例按24/6近乎全周运作，每周一最早06:20开始首个产品的开市前时段，每周六08:00最后一个产品收盘",
+            "en": "There is no literal AM/PM split: a Trading Day consists of two sessions — a Night Session that always precedes a Day Session — which can span two calendar days; the Trading Platform operates the XSFE and NZFX markets on a near-continuous 24/6 basis, with the first product's Pre-Open as early as 06:20 each Monday and the last product closing at 08:00 each Saturday",
+            "sources": [
+              {
+                "title": "ASX 24 Trading Platform Guide（ASX 官网 PDF）",
+                "url": "https://www.asx.com.au/content/dam/asx/participants/trading-platforms/futures/asx-24-trading-platform-guide.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "The Trading Platform will operate the XSFE and NZFX markets on a 24/6 basis, with the first product pre-opening at 06:20 each Monday and the last product closing at 08:00 each Saturday. A Trading Day cycle consists of two trading sessions – a Night Session which always precedes a Day Session – on the same Trading Day but across consecutive business days.",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          },
+          "lunch_break": {
+            "zh": "日盘（Day Session）内部为单一连续交易时段，未见独立午休安排",
+            "en": "The Day Session is a single continuous trading block; no separate lunch break was found",
+            "detail": "推断依据：ASX 24合约规格表将日盘列为单一连续区间（如SPI 200为9.50am–4.30pm一段式，中间无间断记录），未见专门声明「无午休」的原文，confidence相应降级，做法与本文件顶层market_structure.lunch_break一致。",
+            "sources": [
+              {
+                "title": "ASX 24合约规格总表（ASX 官网 PDF）",
+                "url": "https://www.asx.com.au/content/dam/asx/participants/derivatives-market/ird/asx24-contract-specifications.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "confidence": "medium",
+            "verified": "2026-08-14",
+            "enum": null,
+            "quote": null
+          },
+          "continuous_pm": {
+            "zh": "日盘（Day Session）时段：以SPI 200股指期货为例，9.50am–4.30pm（悉尼时间）",
+            "en": "Day Session: for SPI 200 Index Futures, 9.50am–4.30pm Sydney time",
+            "sources": [
+              {
+                "title": "ASX 24合约规格总表（ASX 官网 PDF）",
+                "url": "https://www.asx.com.au/content/dam/asx/participants/derivatives-market/ird/asx24-contract-specifications.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "5.10pm – 7.00am and 9.50am – 4.30pm",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          },
+          "after_market": {
+            "zh": "无独立的「盘后」连续交易时段；日盘Close之后进入Maintenance（清算/换日）状态，随即衔接下一次夜盘的Pre-Open",
+            "en": "There is no separate after-hours continuous trading session; after the Day Session's Close, the platform enters a Maintenance state (order purge / Trade Date roll) before the next Night Session's Pre-Open begins",
+            "sources": [
+              {
+                "title": "ASX 24 Trading Platform Guide（ASX 官网 PDF）",
+                "url": "https://www.asx.com.au/content/dam/asx/participants/trading-platforms/futures/asx-24-trading-platform-guide.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "Maintenance: Relevant orders are purged. Expired instruments are deleted (including day only UDC contracts) and new instruments are added, the trading business day is incremented and pre-trade risk limits are reset.",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          },
+          "night_session": {
+            "zh": "夜盘（Night Session）时段：以SPI 200股指期货为例，夏令时（每年3月第二个周日至11月第一个周日）为5.10pm–次日7.00am，非夏令时为5.10pm–次日8.00am（均为悉尼时间）；夜盘固定先于日盘，与日盘共同构成一个交易日",
+            "en": "Night Session: for SPI 200 Index Futures, 5.10pm to 7.00am the next day during daylight saving (second Sunday in March to first Sunday in November), or to 8.00am the next day outside daylight saving (Sydney time); the Night Session always precedes the Day Session within a Trading Day",
+            "sources": [
+              {
+                "title": "ASX 24合约规格总表（ASX 官网 PDF）",
+                "url": "https://www.asx.com.au/content/dam/asx/participants/derivatives-market/ird/asx24-contract-specifications.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "5.10pm – 7.00am and 9.50am – 4.30pm3 (For period from second Sunday in March to first Sunday in November) 5.10pm – 8.00am and 9.50am – 4.30pm3 (For period from first Sunday in November to second Sunday in March)",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          }
         },
-        "holidays_note": null,
-        "opening_mechanism": null,
-        "closing_mechanism": null,
-        "matching_principle": null,
-        "order_types": null,
-        "tick_size": null,
-        "contract_specs_note": null,
+        "holidays_note": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "ASX 24另发布独立的Trading Calendar（如T24-trading-calendar系列PDF），与现货市场假期安排未必一致，本轮抓取范围未覆盖该日历PDF的具体条款，如实留空。",
+          "sources": [
+            {
+              "title": "Cash market trading hours（ASX 官网）",
+              "url": "https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "opening_mechanism": {
+          "zh": "开市前（Pre-Open）时段结束后转入Open状态，未成交的竞价盘按「均衡价格」（Equilibrium Price, EP）算法一次性撮合：算法依次以（1）最大成交量、（2）最小剩余量、（3）市场压力方向（买卖盈余符号）、（4）参照前一成交/结算价 四步择定均衡价",
+          "en": "After the Pre-Open state, the market transitions to Open, where unmatched auction orders are matched at an Equilibrium Price (EP) determined by a four-step algorithm: (1) maximum matched volume, (2) minimum surplus, (3) market pressure (the sign of the surplus), (4) reference to the last traded/settlement price",
+          "sources": [
+            {
+              "title": "ASX 24 Trading Platform Guide（ASX 官网 PDF）",
+              "url": "https://www.asx.com.au/content/dam/asx/participants/trading-platforms/futures/asx-24-trading-platform-guide.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Open: Session where orders on all contract types can be entered, overlapping orders from the Pre-Open (auction) will be matched at the equilibrium price. New orders can be matched and trades can be executed. ⋯ The Auction Equilibrium Price (EP) algorithm calculates potential matched volume and surplus at each overlapping price level and chooses the price that maximises the traded quantity and minimum surplus.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "closing_mechanism": {
+          "zh": "无独立的收盘集合竞价机制（不同于现货市场的CSPA）：Close状态仅代表当日交易结束，不再接受新订单或修改；各合约当日结算价按各自方法论确定（视产品而异，本轮未逐一核实），随后进入Maintenance完成清算与换日",
+          "en": "There is no dedicated closing auction (unlike the cash market's CSPA): the Close state simply means trading for the day has ended and no further order entry or modification is accepted; each contract's daily settlement price is determined by its own product-specific methodology (not exhaustively verified this round), after which the platform enters Maintenance to clear and roll to the next Trade Date",
+          "sources": [
+            {
+              "title": "ASX 24 Trading Platform Guide（ASX 官网 PDF）",
+              "url": "https://www.asx.com.au/content/dam/asx/participants/trading-platforms/futures/asx-24-trading-platform-guide.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Close: Trading day is over and the Market is closed, no orders can be entered or modified at this time.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "matching_principle": {
+          "zh": "价格-时间优先（Price-Time Priority）：连续交易阶段由撮合引擎自动配对买卖盘；修改价格、增加数量或变更账户类型会导致排队优先级重置并生成新的Public Order ID，其余类型的修改不影响原有优先级",
+          "en": "Price-Time Priority: the matching engine automatically pairs orders during continuous trading; a change in order price, an increase in order size, or a change of account type resets queue priority and generates a new Public Order ID, while other modifications leave existing priority unaffected",
+          "sources": [
+            {
+              "title": "ASX 24 Trading Platform Guide（ASX 官网 PDF）",
+              "url": "https://www.asx.com.au/content/dam/asx/participants/trading-platforms/futures/asx-24-trading-platform-guide.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The following modifications (if successful) will result in a change of price-time priority and a new Public Order ID: ⋯ All other modifications will not impact price-time priority and the existing Public Order ID will be maintained.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "order_types": {
+          "zh": "两种订单类型：限价盘（Limit）——可扫单成交至限价、未成交部分挂单；「市价转限价」盘（Market-to-Limit）——仅按对手方最优一档价格成交，未成交部分以该价挂单；有效期（Time in Force）含GFD（当日有效）/GTC（取消前有效）/GTD（指定日期前有效）/GTT（指定时间前有效）/FOK（全额成交或取消）/IOC（即时成交、剩余取消）共六种，未指定TIF默认按GFD处理；期权的GTC/GTD/GTT仅适用于双时段期权，不适用于单时段的日内/隔夜期权",
+          "en": "Two order types: Limit — sweeps resting liquidity up to its limit price, with unexecuted volume posted to the book; Market-to-Limit — executes only at the best opposing price level, with unexecuted volume posted at that price. Six Time in Force values: GFD (Day), GTC (Good Till Cancel), GTD (Good Till Date), GTT (Good Till Time), FOK (Fill or Kill), IOC (Immediate or Cancel); orders submitted with no TIF default to GFD. GTC/GTD/GTT are available only for dual-session options, not single-session Intraday/Overnight Options",
+          "sources": [
+            {
+              "title": "ASX 24 Trading Platform Guide（ASX 官网 PDF）",
+              "url": "https://www.asx.com.au/content/dam/asx/participants/trading-platforms/futures/asx-24-trading-platform-guide.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "ASX’s Trading Platform supports two order types, Limit and Market-to-Limit described in further detail below. ⋯ A Limit order is an order that executes against resting displayed liquidity at all permitted prices up to and including its Limit price. ⋯ A Market-to-Limit order is an order that executes against resting displayed liquidity only at the best opposing price. ⋯ Orders that are supplied with no TIF are defaulted to Day (GFD).",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "tick_size": {
+          "zh": "以SPI 200股指期货为例，最小价格变动为1个指数点（A$25）；其余产品各自设有独立的最小变动单位（见合约规格表），本次未整理成统一档位表",
+          "en": "Example (SPI 200 Index Futures): minimum price movement is one index point (A$25); other products each have their own minimum price movement (see contract specifications), not consolidated into a unified table this round",
+          "sources": [
+            {
+              "title": "ASX 24合约规格总表（ASX 官网 PDF）",
+              "url": "https://www.asx.com.au/content/dam/asx/participants/derivatives-market/ird/asx24-contract-specifications.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Minimum Price Movement: One index point (A$25)",
+          "confidence": "medium",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "contract_specs_note": {
+          "zh": "以SPI 200股指期货为代表：合约乘数每指数点A$25（例如6,000点时合约价值A$150,000）；到期月份按3/6/9/12月循环最多六个季月，另加最近两个非季月合约；现金结算，最终结算价为最后交易日标的S&P/ASX 200指数的「特别开市报价」（Special Opening Quotation，以各成分股在最后交易日的首笔成交价计算）",
+          "en": "Example (SPI 200 Index Futures): contract multiplier A$25 per index point (e.g. A$150,000 at 6,000 index points); expiry months follow a March/June/September/December quarterly cycle up to six quarter months ahead plus the nearest two non-quarterly expiry months; cash-settled, with the final settlement price being the Special Opening Quotation of the underlying S&P/ASX 200 Index on the Last Trading Day (calculated from each component stock's first traded price that day)",
+          "sources": [
+            {
+              "title": "ASX 24合约规格总表（ASX 官网 PDF）",
+              "url": "https://www.asx.com.au/content/dam/asx/participants/derivatives-market/ird/asx24-contract-specifications.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Contract Unit: Valued at A$25 per index point (e.g. A$150,000 at 6,000 index points). ⋯ Minimum Price Movement: One index point (A$25)",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
         "price_limits": {
-          "type": null,
-          "main_board": null,
-          "other_boards": null
+          "type": {
+            "enum": "none",
+            "zh": "无逐日/逐时段价格限制区间；改用订单级别的异常订单阈值（AOT）机制作为价格保护手段，与现货市场同源，统一见ASIC《市场诚信规则》（MIRs）",
+            "en": "No daily/session price-limit band; ASX's derivatives market instead uses order-level Anomalous Order Threshold (AOT) controls as its price safeguard — the same mechanism family as the cash market, under ASIC's common Market Integrity Rules (MIRs)",
+            "sources": [
+              {
+                "title": "Market volatility FAQs（ASX 官网）",
+                "url": "https://www.asx.com.au/markets/market-resources/market-volatility-faqs",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "ASX does not use circuit breakers like those employed by some other international exchanges. ASIC applies a common set of market integrity rules (MIRs) for all securities and futures markets in Australia that all local market operators and their participants are required to adhere to. These rules include specifications about the use of Anomalous Order Thresholds (AOTs), rather than circuit breakers.",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "detail": null
+          },
+          "main_board": {
+            "zh": "以SPI 200股指期货为例，AOT/NCR参考价为现货月合约30秒滚动成交量加权均价（SPI 200每15秒更新一次，其余合约每30秒更新一次）；QCR（合格撤销区间）下限>0.5%、上限<5%，超出5%即进入ETR（极端成交区间），触发交易所对该笔成交的强制复核/撤销",
+            "en": "For SPI 200 Index Futures, the AOT/NCR Reference Price is a rolling 30-second VWAP of the spot-month contract (updated every 15 seconds for SPI 200, every 30 seconds for other contracts); the Qualifying Cancellation Range (QCR) runs from >0.5% (lower) to <5% (upper), and the Extreme Trade Range (ETR) starts at 5% deviation, triggering the Market Operator's mandatory review/cancellation of the trade",
+            "sources": [
+              {
+                "title": "ASX 24 Operating Rules 第三节（ASX 官网 PDF）",
+                "url": "https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-24-operating-rules/rules/ASX-24-Operating-Rules-Section-03.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "there will be one VWAP (calculated over 30 seconds) Reference Price for each Contract dynamically updated every 15 seconds for the SPI 200 and 30 seconds for all other contracts. ⋯ SPI 200 See table above >0.5% < 5% 5%",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          },
+          "other_boards": {
+            "zh": "非指数类合约的NCR/QCR/ETR门槛以基点或绝对金额计（非百分比）：如90天银行承兑汇票期货 NCR 5.0基点、QCR 6.0–49.0基点、ETR起点50.0基点；东澳小麦期货 NCR A$5.00、QCR A$5.10–14.90、ETR起点A$15",
+            "en": "Non-index contracts' NCR/QCR/ETR thresholds are set in basis points or absolute currency amounts rather than percentages: e.g. 90 Day Bank Accepted Bill Futures — NCR 5.0 basis points, QCR 6.0–49.0 basis points, ETR starting at 50.0 basis points; Eastern Australia Wheat Futures — NCR A$5.00, QCR A$5.10–14.90, ETR starting at A$15",
+            "sources": [
+              {
+                "title": "ASX 24 Operating Rules 第三节（ASX 官网 PDF）",
+                "url": "https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-24-operating-rules/rules/ASX-24-Operating-Rules-Section-03.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "90 Day Bank Accepted Bill 5.0 Basis 6.0 Basis 49.0 Basis 50.0 Basis Futures Contract (Ranges Points Points Points Points",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          }
         },
-        "circuit_breaker": null,
-        "volatility_interruption": null,
-        "trading_halt_mechanism": null,
-        "block_trade": null,
-        "market_maker_scheme": null,
-        "margin_practice_note": null,
-        "connect_schemes": null
+        "circuit_breaker": {
+          "enum": "none",
+          "zh": "ASX不对现货或衍生品市场使用「熔断」机制；ASIC统一《市场诚信规则》（MIRs）覆盖「全澳所有证券及期货市场」；ASX的衍生品市场以「监管性暂停」（Regulatory Halt）作为价格异常时人工重置参考价的工具，而非自动触发的熔断",
+          "en": "ASX does not use 'circuit breakers' on either the cash or derivatives markets; ASIC's common Market Integrity Rules (MIRs) cover 'all securities and futures markets in Australia'; ASX's derivatives market instead uses a manually-invoked 'Regulatory Halt' to reset the reference price when prices become anomalous, rather than an automatic circuit breaker",
+          "sources": [
+            {
+              "title": "Market volatility FAQs（ASX 官网）",
+              "url": "https://www.asx.com.au/markets/market-resources/market-volatility-faqs",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "ASX does not use circuit breakers like those employed by some other international exchanges. ASIC applies a common set of market integrity rules (MIRs) for all securities and futures markets in Australia that all local market operators and their participants are required to adhere to.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "detail": null
+        },
+        "volatility_interruption": {
+          "zh": "触发条件：连续交易期间若NCR/AOT区间发生位移、导致成交将落入ETR（构成ASIC《市场诚信规则》下的「ETR事件」），交易所将启动监管性暂停（Regulatory Halt）以重置ETR参考价及ETR/NCR/AOT区间；暂停后固定进入2分钟的开市前（Pre-Open）状态，之后再恢复Open交易；暂停期间该产品名下所有到期月份的期货与期权合约同步暂停",
+          "en": "Trigger: if, during continuous trading, the NCR/AOT range shifts such that trades would occur within the ETR (an 'ETR Event' under the ASIC Market Integrity Rules), the Market Operator applies a Regulatory Halt to reset the ETR Reference Price and the ETR/NCR/AOT ranges; a fixed 2-minute Pre-Open state follows before Open trading resumes; the halt applies simultaneously to all expiry months of futures and options for that product",
+          "sources": [
+            {
+              "title": "ASX 24 Operating Rules 第三节（ASX 官网 PDF）",
+              "url": "https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-24-operating-rules/rules/ASX-24-Operating-Rules-Section-03.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "during continuous trading the NCR/AOT range has moved such that trades would occur in the ETR (an ETR Event under the ASIC Market Integrity Rules) so that the ETR Reference Price, ETR and NCR/AOT range may be reset. ⋯ Following the Regulatory Halt, a Pre_Open period of 2 minutes will be applied before open trading resumes. ⋯ A Regulatory Halt in any Contract month of a product will result in a Regulatory Halt in all other Contract months and the complement option Contracts (if option Contracts are defined).",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "trading_halt_mechanism": {
+          "zh": "监管性暂停（Regulatory Halt）会话状态：重置AOT参考价，随即转入2分钟的开市前（Pre-Open）状态；任一组合指令中若有一腿处于监管性暂停，该组合指令会被集中清空、新订单被拒绝；该状态由交易所（Market Operator）依职权发起，既用于ETR事件后的参考价重置，也用于开盘拍卖价或开盘成交价被判定无效时的补救——与现货市场中由上市实体依《上市规则》主动申请的交易暂停相比，触发主体与目的均不同",
+          "en": "Regulatory Halt session state: resets the AOT reference price and transitions into a fixed 2-minute Pre-Open state; combination orders with any leg subject to a Regulatory Halt are centrally purged and new orders rejected; the halt is invoked by the Market Operator at its own discretion, used both to reset the reference price after an ETR Event and as a remedy when the opening auction or opening transaction price is judged invalid — distinct in both trigger and purpose from the cash market's issuer-requested trading halt under the Listing Rules",
+          "sources": [
+            {
+              "title": "ASX 24 Trading Platform Guide（ASX 官网 PDF）",
+              "url": "https://www.asx.com.au/content/dam/asx/participants/trading-platforms/futures/asx-24-trading-platform-guide.pdf",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "ASX 24 Operating Rules 第三节（ASX 官网 PDF）",
+              "url": "https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-24-operating-rules/rules/ASX-24-Operating-Rules-Section-03.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Regulatory Halt: A pause in trading that resets the AOT reference price. Regulatory Halt transitions into a 2 minute Pre-Open state. Orders in any combination instrument with one or more legs in a Regulatory Halt will be centrally purged and new orders rejected.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "block_trade": {
+          "zh": "设Block Trade（大手交易）设施：以SPI 200股指期货为例，最低交易量200手（lots），可在日盘时段内及收盘后10分钟内协议成交，须于双方达成协议后10分钟内完成电子申报（夜盘时段协议成交则须在下一营业日悉尼时间上午9:30前申报）；其他合约品种各自设有独立最低门槛，如3年期国债期货2,000手、10年期国债期货750手、20年期国债期货500手",
+          "en": "ASX 24 has a Block Trade facility: for SPI 200 Index Futures, the minimum threshold is 200 lots; trades may be agreed during the Day Session and up to 10 minutes after its close, with electronic reporting required within 10 minutes of agreement (Night Session block trades must be reported by 9:30am Sydney time the next Business Day); other contracts carry their own minimum thresholds, e.g. 2,000 lots for 3-Year Bond Futures, 750 lots for 10-Year Bond Futures, 500 lots for 20-Year Bond Futures",
+          "sources": [
+            {
+              "title": "ASX 24 Operating Rules 第四节（订单录入与交易）（ASX 官网 PDF）",
+              "url": "https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-24-operating-rules/rules/ASX-24-Operating-Rules-Section-04.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "SPI 200 Index Closest quarterly Block trades may be agreed Block trades may be agreed 200 lots 0.1 ⋯ Electronic reporting must be completed within 10 minutes of agreement between the parties",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "market_maker_scheme": {
+          "zh": "ASX 24按产品类别设有正式的做市商安排（Market Maker Arrangements），由交易所与获委任做市商签订商业协议，规定报价时间占比、最低流动性与最大价差：以Mini SPI 200股指期货为例，要求在合约可交易时间的80%内于最近四个合约月持续双边报价，最优买卖价差不超过标的SPI 200股指期货1个指数点；SPI 200期权做市商则要求在一个日历月内累计70%时间提供报价（其中20个期权系列持续报价占50%时间、回应询价请求占50%时间），最低流动性15张合约",
+          "en": "ASX 24 has formal Market Maker Arrangements by product category, under commercial agreements between ASX and appointed market makers specifying quoting-time percentage, minimum liquidity and maximum spread: for Mini SPI 200 Index Futures, market makers must generally provide continuous two-way quotes in the front four months for 80% of the time the contract is tradeable, with a best bid/offer spread no wider than 1 index point around the SPI 200 Index Futures contract; for Options on SPI 200 Index Futures, market makers must generally quote for an aggregate of 70% of the time in a calendar month (providing continuous quotes in 20 option series per class for 50% of the time, and responding to 50% of quote requests), with minimum liquidity of 15 contracts in an options series",
+          "sources": [
+            {
+              "title": "做市商安排总览页（ASX 官网）",
+              "url": "https://www.asx.com.au/markets/market-resources/market-maker-arrangements",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "指数衍生品做市商安排（含SPI 200期货期权）（ASX 官网）",
+              "url": "https://www.asx.com.au/markets/market-resources/market-maker-arrangements/index-derivatives-market-maker-arrangements",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Generally, for an aggregate of 70% of the time in a calendar month: ⋯ provide continuous quotes in 20 option series per class for 50% of the time the contract is available for trading in a calendar month, and ⋯ respond to 50% of requests for quote during a calendar month ⋯ 15 contracts in an options series ⋯ Generally provide continuous two-way quotes in the front four months for 80% of the time that the contract is available to be traded ⋯ Best bid/offer spread of 1 index point above/below SPI 200 Index Futures contract",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "margin_practice_note": {
+          "zh": "衍生品端保证金与清算由ASX Clear (Futures)负责：采用SPAN（Standard Portfolio Analysis of Risk）组合风险方法计算初始保证金，基于「价格扫描范围」（PSR）与「波动率扫描范围」（VSR）构造16种「假设」情景逐日计算风险数组（risk array）；每个结算日终，对House账户与Client账户分别计收当日变动保证金（variation margin）及用于下一结算日的初始保证金（initial margin）；另设跨商品价差减让（inter-commodity spread concession）",
+          "en": "On the derivatives side, margining and clearing is handled by ASX Clear (Futures): it applies the SPAN (Standard Portfolio Analysis of Risk) portfolio-risk methodology to calculate initial margin, using a Price Scan Range (PSR) and Volatility Scan Range (VSR) to construct 16 'what if' scenarios and calculate a daily risk array; at the end of each clearing day, ASX Clear (Futures) charges the House and Client accounts a daily variation margin and an initial margin for the next settlement day; inter-commodity spread concessions are also available",
+          "sources": [
+            {
+              "title": "ASX Clear (Futures)（ASX 官网）",
+              "url": "https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear-futures",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "ASX Clear (Futures) SPAN保证金算例（ASX 官网 PDF）",
+              "url": "https://www.asx.com.au/documents/clearing/asx-clear-futures-examples.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "In calculating the profit or loss a portfolio will make, SPAN uses 16 'what if' scenarios where futures prices and volatilities are altered to varying degrees based on the 'Price Scan Range' and 'Volatility Scan Range' set by ASX Clear (Futures) and defined below.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "connect_schemes": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "未见ASX 24与境外衍生品交易所之间的正式互联互通/联合挂牌安排；ASX 24虽同时挂牌澳元与新西兰元计价合约（如NZ 90天银行汇票期货），但两者共用同一交易平台与同一结算主体ASX Clear (Futures)，属同一交易所内的多币种产品线，非跨交易所连接机制，不作为该字段内容填入。",
+          "sources": [
+            {
+              "title": "Cash market trading hours（ASX 官网）",
+              "url": "https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null
+        }
       }
     },
     "listing": {
