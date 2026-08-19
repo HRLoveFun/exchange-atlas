@@ -548,7 +548,11 @@ def main():
     # 前端友好的 taxonomy 视图（不含内部注释，扁平化 leaf 字段路径）。
     # 注意 object 章节里也可能嵌套 list 字段（如 listing.boards）——不只是叶子字段，
     # 否则前端拿不到 item_schema，这部分数据就会被悄悄漏渲染。
-    taxonomy_out = {"dimension_groups": taxonomy.get("dimension_groups", []), "chapters": []}
+    taxonomy_out = {
+        "dimension_groups": taxonomy.get("dimension_groups", []),
+        "default_chapter": taxonomy.get("default_chapter"),
+        "chapters": [],
+    }
     for ch in taxonomy["chapters"]:
         if ch.get("kind") == "list":
             fields_out = ch.get("item_schema", [])

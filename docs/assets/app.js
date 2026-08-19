@@ -249,7 +249,9 @@
     app.innerHTML = '<div class="loading">加载 ' + esc(exchangeDisplayName(identity)) + " 档案中…</div>";
     return loadExchange(id).then(function (data) {
       var chapters = cache.taxonomy.chapters;
-      var activeCh = chapters.some(function (c) { return c.id === params.ch; }) ? params.ch : chapters[0].id;
+      var defaultCh = cache.taxonomy.default_chapter;
+      if (!chapters.some(function (c) { return c.id === defaultCh; })) defaultCh = chapters[0].id;
+      var activeCh = chapters.some(function (c) { return c.id === params.ch; }) ? params.ch : defaultCh;
       var chDef = chapters.filter(function (c) { return c.id === activeCh; })[0];
 
       var html = "";

@@ -91,6 +91,11 @@ exchange_identity:
 # ══════════════════════════════════════════════════════════════
 # 十一个数据章节
 # ══════════════════════════════════════════════════════════════
+# 单所档案页默认打开的章节（见 app.js renderExchange）。不用 chapters[0]（那是
+# overview，背景资料，非交易决策入口）——见 DECISIONS.md ADR-022。chapter_no /
+# 导航顺序不变，只是默认选中项不同。
+default_chapter: market_structure
+
 chapters:
 
   # ── 二｜基本信息 ──
@@ -155,6 +160,7 @@ chapters:
         label_zh: 结算货币
         label_en: Settlement Currency(ies)
         volatility: stable
+        in_matrix: overview
 
   # ── 三｜监管与法律环境 ──
   - id: regulation
@@ -257,6 +263,7 @@ chapters:
         label_zh: 撮合原则
         label_en: Matching Principle
         volatility: stable
+        in_matrix: trading_mechanism
         en_required: true
       - id: order_types
         label_zh: 订单类型
@@ -312,6 +319,7 @@ chapters:
         label_zh: 临时停牌与恢复
         label_en: Trading Halt & Resumption
         volatility: moderate
+        in_matrix: trading_mechanism
       - id: intraday_reversal
         label_zh: 回转交易制度
         label_en: Intraday Reversal (T+N)
@@ -547,6 +555,7 @@ chapters:
         label_en: CSD/ICSD
         volatility: stable
         en_required: true
+        in_matrix: clearing_settlement
       - id: initial_margin_practice
         label_zh: 初始保证金制度
         label_en: Initial Margin
@@ -722,26 +731,44 @@ chapters:
         volatility: moderate
 
 # ══════════════════════════════════════════════════════════════
-# 对比矩阵维度组 —— 只定义组的身份和顺序
+# 对比矩阵维度组 —— 只定义组的身份、顺序与所属章节
 # 组内具体列不在此手写：sync.py 扫描上面所有 in_matrix 字段生成，
 # 避免矩阵列表与字段定义两处维护（见 CLAUDE.md 6.1 原则）
+#
+# 顺序即矩阵视图 tab 顺序，首项是矩阵默认打开的组（见 app.js groups[0]）。
+# 按「交易员决策路径」排序，而非机构介绍顺序（见 DECISIONS.md ADR-022）：
+# 怎么交易 → 怎么清算交收 → 多少钱 → 谁监管 → 上市退市规则 → 背景资料。
+#
+# `chapter:` 声明该组唯一对应哪个章节，供 tools/validate.py 校验组内每个字段
+# 的 `in_matrix` 取值与字段自身所在章节一致，防止 membership_structure 那类
+# 错配（字段定义在第九章却被标进 overview 组）再次静默发生。
+#
+# 一个字段选入矩阵需同时满足：①覆盖率 ≥16/20 家 ②横向对比才看得出差异的
+# 机制性事实，而非背景资料 ③所属章节与目标组匹配。覆盖率低于此线的字段
+# （如佣金结构、投资者结构）不是"没选对列"，是数据缺口，见 ADR-022。
 # ══════════════════════════════════════════════════════════════
 dimension_groups:
-  - id: overview
-    label_zh: 基本信息
-    label_en: Overview
   - id: trading_mechanism
     label_zh: 交易机制
     label_en: Trading Mechanism
-  - id: listing_delisting
-    label_zh: 上市与退市
-    label_en: Listing & Delisting
+    chapter: market_structure
   - id: clearing_settlement
     label_zh: 清算结算
     label_en: Clearing & Settlement
-  - id: regulation
-    label_zh: 监管环境
-    label_en: Regulation
+    chapter: clearing
   - id: costs_taxes
     label_zh: 成本税费
     label_en: Costs & Taxes
+    chapter: costs
+  - id: regulation
+    label_zh: 监管环境
+    label_en: Regulation
+    chapter: regulation
+  - id: listing_delisting
+    label_zh: 上市与退市
+    label_en: Listing & Delisting
+    chapter: listing
+  - id: overview
+    label_zh: 基本信息
+    label_en: Overview
+    chapter: overview

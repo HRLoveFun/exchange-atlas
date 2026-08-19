@@ -1,36 +1,43 @@
 {
   "dimension_groups": [
     {
-      "id": "overview",
-      "label_zh": "基本信息",
-      "label_en": "Overview"
-    },
-    {
       "id": "trading_mechanism",
       "label_zh": "交易机制",
-      "label_en": "Trading Mechanism"
-    },
-    {
-      "id": "listing_delisting",
-      "label_zh": "上市与退市",
-      "label_en": "Listing & Delisting"
+      "label_en": "Trading Mechanism",
+      "chapter": "market_structure"
     },
     {
       "id": "clearing_settlement",
       "label_zh": "清算结算",
-      "label_en": "Clearing & Settlement"
-    },
-    {
-      "id": "regulation",
-      "label_zh": "监管环境",
-      "label_en": "Regulation"
+      "label_en": "Clearing & Settlement",
+      "chapter": "clearing"
     },
     {
       "id": "costs_taxes",
       "label_zh": "成本税费",
-      "label_en": "Costs & Taxes"
+      "label_en": "Costs & Taxes",
+      "chapter": "costs"
+    },
+    {
+      "id": "regulation",
+      "label_zh": "监管环境",
+      "label_en": "Regulation",
+      "chapter": "regulation"
+    },
+    {
+      "id": "listing_delisting",
+      "label_zh": "上市与退市",
+      "label_en": "Listing & Delisting",
+      "chapter": "listing"
+    },
+    {
+      "id": "overview",
+      "label_zh": "基本信息",
+      "label_en": "Overview",
+      "chapter": "overview"
     }
   ],
+  "default_chapter": "market_structure",
   "chapters": [
     {
       "id": "overview",
@@ -157,7 +164,7 @@
           "volatility": "stable",
           "en_required": false,
           "enum_ref": null,
-          "in_matrix": false
+          "in_matrix": "overview"
         }
       ]
     },
@@ -401,7 +408,7 @@
           "volatility": "stable",
           "en_required": true,
           "enum_ref": null,
-          "in_matrix": false
+          "in_matrix": "trading_mechanism"
         },
         {
           "kind": "leaf",
@@ -501,7 +508,7 @@
           "volatility": "moderate",
           "en_required": false,
           "enum_ref": null,
-          "in_matrix": false
+          "in_matrix": "trading_mechanism"
         },
         {
           "kind": "leaf",
@@ -1036,7 +1043,7 @@
           "volatility": "stable",
           "en_required": true,
           "enum_ref": null,
-          "in_matrix": false
+          "in_matrix": "clearing_settlement"
         },
         {
           "kind": "leaf",
