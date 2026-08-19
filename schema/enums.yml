@@ -34,8 +34,10 @@ organization_form:
 review_system:
   values:
     - {id: registration, label_zh: 注册制, label_en: Registration-based}
+    - {id: disclosure_with_discretion, label_zh: 披露为本+交易所实质裁量, label_en: Disclosure-based, Exchange Discretion}
+    - {id: dual_track, label_zh: 交易所审核+监管机构平行注册, label_en: Exchange Review + Parallel Regulatory Registration}
     - {id: approval, label_zh: 核准制, label_en: Approval-based}
-    - {id: hybrid, label_zh: 混合制, label_en: Hybrid}
+    - {id: mixed_by_board, label_zh: 板块间审核逻辑不统一, label_en: Varies by Board}
 
 index_compiler:
   values:

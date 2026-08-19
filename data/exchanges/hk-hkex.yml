@@ -633,8 +633,9 @@ listing:
       target_companies: "为中小型公司提供上市市场，此类公司相比主板上市公司风险较高（《GEM上市规则》2.12条）"
 
   review_system:
+    enum: disclosure_with_discretion
     zh: "披露为本制度（非注册制/核准制的简单二分，上市委员会对适合性有实质审核权）"
-    detail: "与 cn-sse 的『注册制』、『核准制』二分不完全对应，这是矩阵『受控词表够不够用』待验证问题的一个真实案例，见 OPEN-QUESTIONS。"
+    detail: "披露为本+上市委员会对适合性有实质审核权，属 ADR-023 重新划分后的 `disclosure_with_discretion` 类（原三值枚举 registration/approval/hybrid 的中间地带，见该 ADR）。"
     sources:
       - title: Listing Rules（HKEX 官网）
         url: https://www.hkex.com.hk/Listing/Rules-and-Guidance/Listing-Rules?sc_lang=en

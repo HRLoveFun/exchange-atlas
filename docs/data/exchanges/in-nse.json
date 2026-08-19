@@ -1230,9 +1230,10 @@
         }
       ],
       "review_system": {
+        "enum": "disclosure_with_discretion",
         "zh": "披露为本，设有一组明确的量化财务门槛（实收股本/净资产/市值/营收等具体数值），叠加交易所对申请的自由裁量驳回权（如'6个月内曾被驳回'的冷静期条款、交易所可基于'任何交易所认为合适的理由'驳回申请）",
         "en": "Disclosure-based, combining explicit quantitative financial thresholds (paid-up capital / net worth / market cap / revenue, etc.) with discretionary rejection powers reserved to the Exchange (e.g. a 6-month rejection cooling-off clause, and a catch-all 'any other reason as NSE may deem fit' rejection ground)",
-        "detail": "与上交所\"注册制\"（registration枚举）、港交所\"披露为本但上市委员会有实质审核权\"、\nNYSE\"披露为本+极具体的量化规则编号+广泛自由裁量权\"、JPX\"披露为本，交易所审核+\n重大事项另须向金融厅报告\"均不完全相同——这是 OPEN-QUESTIONS 第3条\"受控词表够\n不够用\"积累的第5个真实案例，未套用 review_system 枚举，见该条目更新。\n",
+        "detail": "披露为本+一组量化财务门槛+交易所自由裁量驳回权，属 ADR-023 重新划分后的\n`disclosure_with_discretion` 类，与 hk-hkex/jp-jpx/us-nyse 等同属一类。\n",
         "sources": [
           {
             "title": "Eligibility Criteria - Public Issues Main Board（官网）",
@@ -1242,8 +1243,7 @@
         ],
         "quote": "Any other reason as NSE may deem fit. ... The application of the applicant company should not have been rejected by the exchange in last 6 complete months.",
         "confidence": "high",
-        "verified": "2026-08-14",
-        "enum": null
+        "verified": "2026-08-14"
       },
       "listing_process_duration": {
         "zh": "",
@@ -1495,9 +1495,11 @@
         "quote": null
       },
       "delivery_method": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "NSE 同时运营现货市场（无实物/现金交割概念）与多类衍生品（股票/股指衍生品多数\n现金交割、商品衍生品/利率衍生品交割方式因品种而异），单一枚举值（physical/cash/\neither/na）无法干净覆盖这种多资产类别混合的产品体系，本次也未逐产品线核实交割\n方式细则，留空不强行归类。\n",
+        "enum": "na",
+        "zh": "现货证券市场不适用实物/现金交割二选一；衍生品部分（股票/股指衍生品多数现金结算，商品/利率衍生品因品种而异）另见 clearing.derivatives.delivery_method",
+        "en": "Not applicable to the cash equities market; for derivatives (mostly cash-settled for equity/index derivatives, varies by instrument for commodity/interest-rate derivatives) see clearing.derivatives.delivery_method",
+        "detail": "ADR-023 新增 clearing.derivatives 子块后，顶层字段收窄为仅描述现货市场；衍生品部分本次未逐产品线核实交割方式细则，移入新子块留空，见 OPEN-QUESTIONS。",
+        "confidence": "medium",
         "sources": [
           {
             "title": "Clearing & Settlement（官网）",
@@ -1506,8 +1508,6 @@
           }
         ],
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
         "quote": null
       },
       "last_trading_day_rule": {
@@ -1541,6 +1541,24 @@
         "en": null,
         "enum": null,
         "quote": null
+      },
+      "derivatives": {
+        "delivery_method": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "ADR-023 新增字段，衍生品分产品线（股票/股指/商品/利率）的交割方式细则本次未逐条核实，留空转 OPEN-QUESTIONS。",
+          "sources": [
+            {
+              "title": "Clearing & Settlement（官网）",
+              "url": "https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null
+        }
       }
     },
     "participants": {

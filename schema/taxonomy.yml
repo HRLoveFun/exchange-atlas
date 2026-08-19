@@ -582,6 +582,27 @@ chapters:
         label_zh: 违约处置与风险共担
         label_en: Default Management
         volatility: moderate
+      - id: derivatives
+        label_zh: 衍生品交割方式（如适用）
+        label_en: Derivatives Delivery (if applicable)
+        kind: object
+        optional: true
+        note: >
+          仅当该交易所实体自身运营重要的期货/期权等衍生品业务线时才填（判断标准同
+          `market_structure.derivatives`，见 `PROJECT/DECISIONS.md` [ADR-019]）。顶层
+          `delivery_method` 字段的含义收窄为「描述现货/主板市场的交割方式」——对纯现货
+          交易所，"na" 表示不涉及实物/现金交割二选一（如证券记账过户）；对同时运营衍生品
+          业务线的交易所，衍生品部分单独在本字段描述，不再挤压顶层字段去表达两种矛盾的
+          产品逻辑。纯衍生品交易所（如 de-eurex）不用本字段，直接把衍生品交割方式写在
+          顶层 `delivery_method` 即可（它没有现货业务，顶层字段本身就是在描述衍生品）。
+          `optional: true`：本组字段完全未填时不计入 `chapter_status()` 的完成度分母，
+          与 `market_structure.derivatives` 用法一致。见 `PROJECT/DECISIONS.md` [ADR-023]。
+        fields:
+          - id: delivery_method
+            label_zh: 交割方式
+            label_en: Delivery Method
+            volatility: moderate
+            enum_ref: delivery_method
 
   # ── 九｜市场参与者 ──
   - id: participants

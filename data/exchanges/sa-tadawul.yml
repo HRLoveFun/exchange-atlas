@@ -678,7 +678,7 @@ listing:
     enum: approval
     zh: "交易所实质审核制：交易所对申请材料进行审核并可自由裁量批准/拒绝，需委任财务顾问，重大事项另需CMA批准"
     en: "Exchange-led approval-based review with substantive discretion; financial advisor mandatory, key matters require separate CMA approval"
-    detail: "上市申请提交给交易所（Article 14），发行人须先取得公司章程/公司法项下的所有必要内部批准（Article 15），并委任两名代表与财务顾问对接交易所（Article 16）；这一模式比单纯的「披露为本注册制」更接近核准制，但与SSE的科创板注册制、NYSE的规则化量化标准也不完全相同——与 hk-hkex/us-nyse/jp-jpx 一样，是 OPEN-QUESTIONS 第3条「review_system枚举不够用」积累的又一个真实案例。"
+    detail: "上市申请提交给交易所（Article 14），发行人须先取得公司章程/公司法项下的所有必要内部批准（Article 15），并委任两名代表与财务顾问对接交易所（Article 16）；交易所对申请材料的实质审核+自由裁量批准/拒绝，符合 ADR-023 里 `approval` 类的定义（区别于 `disclosure_with_discretion` 类——后者以披露合规为基础、裁量权是补充；本条以交易所主动实质判断为主导逻辑）。"
     sources:
       - title: Listing Rules（CMA/Saudi Exchange 官方上市规则 PDF，经 tadawulgroup.sa 分发）
         url: https://www.tadawulgroup.sa/wps/wcm/connect/e4bfbba8-4932-4b0c-b405-c922ac56d780/Listing+Rules.pdf?MOD=AJPERES&CVID=pfpotDY
@@ -825,9 +825,16 @@ clearing:
     confidence: low
 
   delivery_method:
-    zh: ""
-    confidence: low
-    detail: "MT30指数期货为现金结算，但股票现货为交割证券本身（记账式过户）——不完全等同 delivery_method 枚举定义的实物/现金二分，且本次未找到覆盖全品类的一手原文，暂留空，见 OPEN-QUESTIONS。"
+    enum: na
+    zh: "股票现货为交割证券本身（记账式过户），不适用实物/现金交割二选一；衍生品部分另见 clearing.derivatives.delivery_method"
+    en: "Cash equities settle via book-entry transfer of the securities themselves — not applicable to a physical/cash delivery choice; for derivatives see clearing.derivatives.delivery_method"
+    detail: "ADR-023 新增 clearing.derivatives 子块后，顶层字段收窄为仅描述现货市场；MT30指数期货为现金结算，但未找到覆盖全品类衍生品的一手原文，移入新子块留空，见 OPEN-QUESTIONS。与 settlement_cycle 字段引用同一份来源，佐证现货结算为证券记账过户而非实物/现金二选一。"
+    sources:
+      - title: Edaa Settlement（Edaa 官网）
+        url: https://www.edaa.sa/wps/portal/edaa/services/memberservices/settlement?locale=en
+        accessed: 2026-08-14
+    quote: "T+2 All types of securities' transactions are completed within settlement timing determined by the Exchange. Normal exchange transactions are settled two business days following the transaction execution date; i.e. (T+2)."
+    confidence: medium
 
   last_trading_day_rule:
     zh: ""
@@ -836,6 +843,12 @@ clearing:
   default_management:
     zh: ""
     confidence: low
+
+  derivatives:
+    delivery_method:
+      zh: ""
+      confidence: low
+      detail: "ADR-023 新增字段，MT30指数期货已知为现金结算，但覆盖全品类衍生品的一手原文本次未找到，留空转 OPEN-QUESTIONS。"
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者

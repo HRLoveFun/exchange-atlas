@@ -870,6 +870,12 @@ clearing:
     zh: ""
     confidence: low
 
+  derivatives:
+    delivery_method:
+      zh: ""
+      confidence: low
+      detail: "ADR-023 新增字段，深交所衍生品（股票期权）的实物/现金交割方式本次未核实，留空转 OPEN-QUESTIONS。"
+
 # ═══════════════════════════════════════════════
 # 九｜市场参与者
 # ═══════════════════════════════════════════════

@@ -876,8 +876,9 @@
         }
       ],
       "review_system": {
+        "enum": "disclosure_with_discretion",
         "zh": "交易所实质审查制：TWSE 依《有价证券上市审查准则》对设立年限、实收资本额、获利能力、股权分散等量化门槛进行审查，审定后与发行公司签订「有价证券上市契约」，报请金管会备查（非金管会逐案核准）；本国公司申请上市前一般须先在兴柜市场挂牌满6个月",
-        "detail": "与 hk-hkex/us-nyse/jp-jpx 类似，现有 review_system 枚举（registration/approval/hybrid）\n未能干净覆盖「交易所自身实质审查+主管机关事后备查」这一模式，故未套用枚举，直接以文字\n描述，呼应 OPEN-QUESTIONS 框架性问题第3条已积累的第五个真实案例。\n",
+        "detail": "交易所自身实质审查+主管机关事后备查（非逐案核准），属 ADR-023 重新划分后的\n`disclosure_with_discretion` 类——\"备查\"不构成监管机构独立审批，与 dual_track\n类（kr-krx/br-b3/de-xetra）的区别在此。\n",
         "quote": "本公司依據本準則暨本公司審查有價證券上市作業程序之規定審查之...本公司應依證券交易法第一百四十一條規定，與發行有價證券之機構，訂立有價證券上市契約，並應報請主管機關備查。",
         "sources": [
           {
@@ -893,8 +894,7 @@
         ],
         "confidence": "high",
         "verified": "2026-08-16",
-        "en": null,
-        "enum": null
+        "en": null
       },
       "listing_process_duration": {
         "zh": "",
@@ -1165,6 +1165,9 @@
         "verified": "2026-08-16",
         "enum": null,
         "detail": null
+      },
+      "derivatives": {
+        "delivery_method": null
       }
     },
     "participants": {

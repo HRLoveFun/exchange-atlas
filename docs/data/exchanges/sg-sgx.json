@@ -1213,7 +1213,7 @@
         }
       ],
       "review_system": {
-        "enum": "hybrid",
+        "enum": "mixed_by_board",
         "zh": "混合制：主板为交易所量化门槛审核（利润/市值三选一测试），凯利板为保荐人主导的披露为本制度（保荐人对适合性负主责），全球上市板锚定Nasdaq上市标准，三板块审核逻辑并不统一",
         "en": "Hybrid: Mainboard uses Exchange-vetted quantitative admission tests; Catalist is a disclosure-based, sponsor-supervised regime where the sponsor bears primary responsibility for suitability; the Global Listing Board anchors to Nasdaq listing standards — the three boards do not share one review philosophy",
         "detail": "分类判断本身是归纳而非直接引语，故标 medium；三条支撑引语各自 high。",
@@ -1445,18 +1445,18 @@
         "detail": null
       },
       "delivery_method": {
-        "enum": "either",
-        "zh": "现货证券市场不适用交割概念（na）；衍生品视合约而定，部分合约实物交割、部分现金结算——「either」是对两个业务面合并后的近似取值，不完全贴合任何一面，见 detail",
-        "en": "Not applicable to the securities market (na); for derivatives it varies by contract — some are physically delivered, others cash-settled. \"Either\" is an approximation combining both business lines and does not cleanly fit either alone (see detail)",
-        "detail": "taxonomy 的 delivery_method 枚举没有「按业务面分裂」这个选项，本所现货+衍生品合一建档（见文件顶部说明）导致这个字段被迫在两种截然不同的产品逻辑间选一个值——记入 OPEN-QUESTIONS 框架性问题，供未来遇到更多「一所多业务」样本时参考。",
+        "enum": "na",
+        "zh": "现货证券市场（SGX-ST）不适用实物/现金交割二选一（证券记账过户，由CDP清算）；衍生品部分（SGX-DT）另见 clearing.derivatives.delivery_method",
+        "en": "Not applicable to the securities market (SGX-ST) — settlement is book-entry securities transfer cleared by CDP, not a physical/cash delivery choice; for derivatives (SGX-DT) see clearing.derivatives.delivery_method",
+        "detail": "ADR-023 新增 clearing.derivatives 子块后，顶层字段收窄为仅描述现货市场，原先被迫合并两个业务面的近似值 either 已拆分。与 settlement_cycle 字段引用同一份来源。",
         "sources": [
           {
-            "title": "SGX-DC Clearing Rules（实物交割/Alternative Delivery Procedure相关条款）",
-            "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+            "title": "SGX-ST Rules 9.1A.1",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
             "accessed": "2026-08-14"
           }
         ],
-        "quote": "the minimum size prescribed under the relevant Contract Specifications for physical delivery",
+        "quote": "Ready market (for securities other than wholesale corporate bonds) T+2 Eligible for clearing by CDP",
         "confidence": "medium",
         "verified": "2026-08-14"
       },
@@ -1479,6 +1479,24 @@
         "detail": null,
         "quote": null,
         "sources": null
+      },
+      "derivatives": {
+        "delivery_method": {
+          "enum": "either",
+          "zh": "视合约而定，部分合约实物交割、部分现金结算",
+          "en": "Varies by contract — some are physically delivered, others cash-settled",
+          "sources": [
+            {
+              "title": "SGX-DC Clearing Rules（实物交割/Alternative Delivery Procedure相关条款）",
+              "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "quote": "the minimum size prescribed under the relevant Contract Specifications for physical delivery",
+          "confidence": "medium",
+          "verified": "2026-08-14",
+          "detail": null
+        }
       }
     },
     "participants": {

@@ -413,9 +413,10 @@ listing:
       launched_year: 2022
 
   review_system:
+    enum: disclosure_with_discretion
     zh: "披露为本，交易所设初次上市审查，重大事项另须向金融厅报告"
     en: "Disclosure-based; the Exchange conducts initial listing examinations, with major matters also reportable to the FSA"
-    detail: "与NYSE/港交所类似，同样不完全对应注册制/核准制的简单二分——这是受控词表'够不够用'问题的又一个真实案例（继上交所、港交所、NYSE之后第四个），记入 OPEN-QUESTIONS。"
+    detail: "披露为本+交易所审核，重大事项另须向金融厅报告——报告不等于金融厅独立审批，仍归入 ADR-023 的 `disclosure_with_discretion` 类而非 `dual_track`（后者要求监管机构对发行本身另有独立注册/审批程序，如 kr-krx/br-b3/de-xetra）。"
     sources:
       - title: Securities Listing Regulations（官网英文版PDF）Rule 1604
         url: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf

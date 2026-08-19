@@ -713,6 +713,7 @@ listing:
       target_companies: "已在合格境外交易所上市的公司（新西兰公司门槛更低），主要遵守母国上市地规则，豁免大部分ASX上市规则"
 
   review_system:
+    enum: disclosure_with_discretion
     zh: "披露为本的准入审核制度：满足量化门槛（利润或资产二选一）+股东分布/自由流通量要求即可申请，ASX对适合性另有实质审核权，不完全对应注册制/核准制的二分"
     en: "Disclosure-based admission regime: applicants meeting quantitative thresholds (profit or assets test) plus spread/free-float requirements may apply; ASX retains substantive discretion over suitability, not a clean fit for the registration-based/approval-based dichotomy"
     detail: "与港交所案例（见hk-hkex.yml review_system字段）相同，是矩阵受控词表`review_system`覆盖面不足的又一例证，记入OPEN-QUESTIONS。"
@@ -898,6 +899,12 @@ clearing:
   default_management:
     zh: ""
     confidence: low
+
+  derivatives:
+    delivery_method:
+      zh: ""
+      confidence: low
+      detail: "ADR-023 新增字段，ASX 24 衍生品各品种的实物/现金交割方式本次未核实，留空转 OPEN-QUESTIONS。"
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者

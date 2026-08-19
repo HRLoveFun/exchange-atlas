@@ -483,13 +483,12 @@ listing:
       launched_year: ""
 
   review_system:
-    zh: "披露为本，设有按市场层级分档的量化财务/流动性标准与统一的公司治理标准，由Listing Qualifications团队审核；与us-nyse.yml记录的NYSE审核制度属同一类型（美国交易所共有模式），受控词表registration/approval/hybrid均不能准确概括，故不填enum，见OPEN-QUESTIONS"
-    en: "Disclosure-based, with tiered quantitative financial/liquidity standards by market tier plus uniform corporate governance standards, reviewed by the Listing Qualifications team; structurally the same category as NYSE's review system (see us-nyse.yml) — none of the registration/approval/hybrid enum values fit cleanly, left unset, see OPEN-QUESTIONS"
+    enum: disclosure_with_discretion
+    zh: "披露为本，设有按市场层级分档的量化财务/流动性标准与统一的公司治理标准，由Listing Qualifications团队审核；与us-nyse.yml记录的NYSE审核制度属同一类型（美国交易所共有模式）"
+    en: "Disclosure-based, with tiered quantitative financial/liquidity standards by market tier plus uniform corporate governance standards, reviewed by the Listing Qualifications team; structurally the same category as NYSE's review system (see us-nyse.yml)"
     detail: |
       与NYSE"披露为本+量化/定性双重标准"的表述几乎一致，两者同属"美国式披露监管"这一类型，
-      与上交所注册制、港交所披露为本但上市委员会有实质审核权都不完全相同——这是受控词表
-      review_system"够不够用"问题的第五个真实案例（继上交所、港交所、NYSE、JPX之后，见
-      OPEN-QUESTIONS.md 框架性问题第3条，本次已回写）。
+      属 ADR-023 重新划分后的 `disclosure_with_discretion` 类。
     sources:
       - title: "Market Regulation: Listings Review（官网）"
         url: https://www.nasdaq.com/market-regulation/americas/listing-review

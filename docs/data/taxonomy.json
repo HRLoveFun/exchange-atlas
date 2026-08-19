@@ -1104,6 +1104,16 @@
           "en_required": false,
           "enum_ref": null,
           "in_matrix": false
+        },
+        {
+          "kind": "leaf",
+          "path": "derivatives.delivery_method",
+          "label_zh": "交割方式",
+          "label_en": "Delivery Method",
+          "volatility": "moderate",
+          "en_required": false,
+          "enum_ref": "delivery_method",
+          "in_matrix": false
         }
       ]
     },

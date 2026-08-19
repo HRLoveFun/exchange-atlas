@@ -1902,7 +1902,7 @@
       "verified": "2026-08-16",
       "age_days": 3,
       "stale": false,
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "exchange_id": "br-b3",
@@ -8906,6 +8906,20 @@
     },
     {
       "exchange_id": "in-nse",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "delivery_method",
+      "label_zh": "交割方式",
+      "label_en": "Delivery Method",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "age_days": 5,
+      "stale": false,
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "in-nse",
       "chapter": "participants",
       "chapter_label_zh": "市场参与者",
       "chapter_label_en": "Market Participants",
@@ -11384,6 +11398,20 @@
     },
     {
       "exchange_id": "sa-tadawul",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "delivery_method",
+      "label_zh": "交割方式",
+      "label_en": "Delivery Method",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "age_days": 5,
+      "stale": false,
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "sa-tadawul",
       "chapter": "participants",
       "chapter_label_zh": "市场参与者",
       "chapter_label_en": "Market Participants",
@@ -12298,6 +12326,20 @@
       "chapter_label_zh": "清算、结算与交割",
       "chapter_label_en": "Clearing, Settlement & Delivery",
       "field_path": "delivery_method",
+      "label_zh": "交割方式",
+      "label_en": "Delivery Method",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "age_days": 5,
+      "stale": false,
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "sg-sgx",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.delivery_method",
       "label_zh": "交割方式",
       "label_en": "Delivery Method",
       "volatility": "moderate",
@@ -16029,6 +16071,20 @@
       "age_days": 3,
       "stale": false,
       "confidence": "high"
+    },
+    {
+      "exchange_id": "za-jse",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "delivery_method",
+      "label_zh": "交割方式",
+      "label_en": "Delivery Method",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "age_days": 3,
+      "stale": false,
+      "confidence": "medium"
     },
     {
       "exchange_id": "za-jse",

@@ -1088,9 +1088,10 @@
         }
       ],
       "review_system": {
-        "zh": "披露为本：Regulatory Board依提交文件审核上市申请是否满足《上市规则》要求，符合即予批准（可附加条件），上市本身不构成对证券或发行人的价值判断；不套用受控词表registration/approval二分（见schema.OPEN-QUESTIONS对review_system字段的既有讨论），本所模式更接近「交易所自身审核、非政府预先审批」一类",
-        "en": "Disclosure-based: the Regulatory Board reviews listing applications against the requirements of the Listing Rules and approves (possibly with conditions) if met; listing itself is not a value judgment on the securities or issuer. Does not map cleanly onto the registration/approval enum dichotomy — closer to an exchange self-review model without a separate government pre-approval step",
-        "detail": "第三方法律实务资源（Baker McKenzie）确认「无需FINMA另行批准」（No additional approval from FINMA is required），与本所官方LR原文'Regulatory Board审核+批准'的两步流程一致，佐证性引用，confidence标medium的部分留在下方来源列表第二条。",
+        "enum": "disclosure_with_discretion",
+        "zh": "披露为本：Regulatory Board依提交文件审核上市申请是否满足《上市规则》要求，符合即予批准（可附加条件），上市本身不构成对证券或发行人的价值判断；无需FINMA另行批准",
+        "en": "Disclosure-based: the Regulatory Board reviews listing applications against the requirements of the Listing Rules and approves (possibly with conditions) if met; listing itself is not a value judgment on the securities or issuer. No additional FINMA approval required",
+        "detail": "交易所自身审核、非政府预先审批，属 ADR-023 重新划分后的 `disclosure_with_discretion` 类。第三方法律实务资源（Baker McKenzie）确认「无需FINMA另行批准」，与本所官方LR原文'Regulatory Board审核+批准'的两步流程一致，佐证性引用，confidence标medium的部分留在下方来源列表第二条。",
         "sources": [
           {
             "title": "Listing Rules Art. 46/47（审核与决定条款）",
@@ -1100,8 +1101,7 @@
         ],
         "quote": "Art. 46 Review of listing application: The Regulatory Board will review the listing application on the basis of the documents that have been submitted. Art. 47 Decision: The Regulatory Board will approve the listing application if it fulfils the requirements laid down in these Listing Rules. ... Listing does not constitute a value judgement about the securities or about the issuer.",
         "confidence": "high",
-        "verified": "2026-08-16",
-        "enum": null
+        "verified": "2026-08-16"
       },
       "listing_process_duration": {
         "zh": "",
@@ -1390,6 +1390,9 @@
         "detail": null,
         "quote": null,
         "sources": null
+      },
+      "derivatives": {
+        "delivery_method": null
       }
     },
     "participants": {
