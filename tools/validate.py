@@ -229,7 +229,7 @@ def validate_docs_data_fresh(taxonomy, glossary, enums, exchanges_expanded):
 # ── 10-11：文档内部引用 ────────────────────────────────────────
 
 def validate_path_references():
-    skip_dirs = {".git", ".cache", "node_modules"}
+    skip_dirs = {".git", ".cache", "node_modules", "worktrees"}
     md_files = [p for p in ROOT.rglob("*.md") if not any(part in skip_dirs for part in p.parts)]
     known_ext = (".yml", ".yaml", ".py", ".json", ".md", ".html", ".js", ".css", ".txt")
     for md in md_files:
@@ -255,7 +255,7 @@ def validate_adr_anchors():
         err(f"PROJECT/DECISIONS.md: ADR 编号重复 {sorted(dupes)}")
     defined_set = set(defined)
 
-    skip_dirs = {".git", ".cache", "node_modules"}
+    skip_dirs = {".git", ".cache", "node_modules", "worktrees"}
     for md in ROOT.rglob("*.md"):
         if any(part in skip_dirs for part in md.parts) or md == decisions_path:
             continue
