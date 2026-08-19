@@ -888,8 +888,10 @@
         }
       ],
       "review_system": {
-        "zh": "披露为本：招股说明书须经核准并公开发布（Prospectus/Inclusion Document经审批并发布）；Prime Standard的招股说明书审核与持续披露合规监管机构为联邦金融监管局BaFin。与cn-sse的「注册制」不完全对应，属enum词表已知的弱覆盖字段（见OPEN-QUESTIONS第3条），本字段留空enum改用文字描述",
-        "en": "Disclosure-based: a valid, approved and published Prospectus (or Inclusion Document for Scale) is required; compliance supervision (including for Prime Standard) rests with the federal regulator BaFin. Does not map cleanly onto cn-sse's \"registration-based\" enum — a known weak-coverage field (see OPEN-QUESTIONS item 3), so the enum is left unset in favor of descriptive text",
+        "enum": "dual_track",
+        "zh": "披露为本：招股说明书须经核准并公开发布（Prospectus/Inclusion Document经审批并发布）；Prime Standard的招股说明书审核与持续披露合规监管机构为联邦金融监管局BaFin",
+        "en": "Disclosure-based: a valid, approved and published Prospectus (or Inclusion Document for Scale) is required; compliance supervision (including for Prime Standard) rests with the federal regulator BaFin",
+        "detail": "招股说明书须经BaFin独立核准，属 ADR-023 新增的 `dual_track` 类（交易所准入 + 监管机构对披露文件的独立审批），与 kr-krx/br-b3 同属一类。",
         "sources": [
           {
             "title": "Factsheet: EU-regulated market (General/Prime Standard) & Open Market Scale for shares（Deutsche Börse官网PDF）",
@@ -899,9 +901,7 @@
         ],
         "quote": "Prospectus/inclusion document: Valid, approved and published prospectus ... The competent supervisory authority regarding compliance with follow-up obligations is the Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin, German Federal Financial Supervisory Authority).",
         "confidence": "medium",
-        "verified": "2026-08-14",
-        "enum": null,
-        "detail": null
+        "verified": "2026-08-14"
       },
       "listing_process_duration": {
         "zh": "",
@@ -1217,6 +1217,9 @@
         "enum": null,
         "detail": null,
         "quote": null
+      },
+      "derivatives": {
+        "delivery_method": null
       }
     },
     "participants": {

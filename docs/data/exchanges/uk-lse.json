@@ -189,7 +189,7 @@
       "self_regulatory_org": {
         "zh": "伦敦证券交易所本身作为“认可投资交易所”（Recognised Investment Exchange, RIE），对市场准入交易与市场运作承担一线监管职责，须遵守FCA就RIE制定的监管手册（sourcebook）要求",
         "en": "London Stock Exchange itself, as a Recognised Investment Exchange (RIE) under UK law, carries front-line responsibility for admission to trading and market operation, subject to the FCA's sourcebook for Recognised Investment Exchanges",
-        "detail": "与 UKLR（FCA作为官方名册/Listing Rules的监管者）是两套并行制度：RIE身份下交易所自身\n是Main Market/AIM/ISM/PSM等市场准入交易的一线监管方（体现在《Admission and\nDisclosure Standards》与《Rules of the London Stock Exchange》两份自订规则中），而\n官方名册（Official List）与上市持续义务由FCA依UKLR直接监管——这是\"交易所自身兼一线\n监管\"（如港交所）与\"纯由外部机构监管\"两种模式之外的第三种组合，与NYSE\"交易所自身\n设专责部门+委托FINRA\"的模式也不相同，值得记入OPEN-QUESTIONS第3条受控词表讨论增加\n一个真实样本。\n",
+        "detail": "与 UKLR（FCA作为官方名册/Listing Rules的监管者）是两套并行制度：RIE身份下交易所自身\n是Main Market/AIM/ISM/PSM等市场准入交易的一线监管方（体现在《Admission and\nDisclosure Standards》与《Rules of the London Stock Exchange》两份自订规则中），而\n官方名册（Official List）与上市持续义务由FCA依UKLR直接监管——这是\"交易所自身兼一线\n监管\"（如港交所）与\"纯由外部机构监管\"两种模式之外的第三种组合，与NYSE\"交易所自身\n设专责部门+委托FINRA\"的模式也不相同，是监管模式多样性的又一个真实样本（不是\nreview_system 字段本身，该字段已按 DECISIONS.md ADR-023 归入 disclosure_with_discretion，\n本条讨论的是 self_regulatory_org 这个不同字段）。\n",
         "sources": [
           {
             "title": "Admission and Disclosure Standards（官网）",
@@ -812,9 +812,10 @@
         }
       ],
       "review_system": {
+        "enum": "disclosure_with_discretion",
         "zh": "披露为本，2024年7月UKLR改革后以单一“股票证券（商业公司）”类别取代此前Premium/Standard两级架构；申请人须在多类触发事件（如须发布招股说明书、反向收购通函等）委任一名保荐人（Sponsor）向FCA确认其符合UKLR相关要求",
         "en": "Disclosure-based; following the July 2024 UKLR reform, a single 'equity shares (commercial companies)' category replaced the previous two-tier Premium/Standard structure. Issuers must appoint a Sponsor on multiple trigger events (e.g. when a prospectus or reverse-takeover circular is required) to confirm compliance with the relevant UKLR requirements to the FCA",
-        "detail": "这是OPEN-QUESTIONS第3条受控词表讨论的第五个真实样本：既不同于上交所\"注册制\"，也不同于\n港交所\"披露为本+上市委员会实质审核权\"，也不同于NYSE\"披露为本+高度形式化规则编号+\n广泛自由裁量权\"，也不同于JPX\"披露为本+另须向金融厅报告重大事项\"——英国这套\"披露为本+\n保荐人（Sponsor）在特定触发事件下向监管者背书\"的把关模式，是又一种不被现有三值枚举\n（registration/approval/hybrid）干净覆盖的组合，本条数据未套用enum，只留zh/en文字说明，\n与此前四家的处理方式一致。\n",
+        "detail": "披露为本+保荐人（Sponsor）在特定触发事件下向监管者背书的把关模式，属 ADR-023\n重新划分后的 `disclosure_with_discretion` 类（裁量权由保荐人代为行使，而非交易所\n自身委员会，但同属\"披露基础上仍有实质把关\"这一大类）。\n",
         "sources": [
           {
             "title": "UKLR UK Listing Rules sourcebook（FCA Handbook）",
@@ -824,8 +825,7 @@
         ],
         "quote": "UKLR 5 – Equity shares (commercial companies): requirements for admission to listing / Applies to applicants for admission to listing in the equity shares (commercial companies) category... An issuer with a listing of equity shares in... the equity shares (commercial companies) category... must appoint a sponsor on each occasion that the issuer: (1) is required to submit... a prospectus or supplementary prospectus... UKLR TP 2 applies from 29 July 2024.",
         "confidence": "high",
-        "verified": "2026-08-14",
-        "enum": null
+        "verified": "2026-08-14"
       },
       "listing_process_duration": {
         "zh": "",
@@ -1165,6 +1165,9 @@
         "detail": null,
         "quote": null,
         "sources": null
+      },
+      "derivatives": {
+        "delivery_method": null
       }
     },
     "participants": {

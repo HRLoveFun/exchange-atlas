@@ -413,13 +413,13 @@ listing:
   boards: []
 
   review_system:
+    enum: disclosure_with_discretion
     zh: "披露为本（非注册制/核准制二分），设有量化+定性双重上市标准，由Issuer Regulation团队审核"
     en: "Disclosure-based (not a simple registration/approval binary); combines quantitative and qualitative listing standards, reviewed by the Issuer Regulation team"
     detail: |
-      与上交所"注册制"、港交所"披露为本但上市委员会有实质审核权"都不完全相同——NYSE
-      的量化标准非常具体（按规则编号逐条列出，如Rule 102.01C(I)盈利测试、102.01C(II)
-      市值测试），另有定性标准赋予交易所较大裁量权。这是受控词表"够不够用"问题的第三个
-      真实案例（继上交所注册制、港交所披露为本之后），已记入 OPEN-QUESTIONS。
+      量化标准非常具体（按规则编号逐条列出，如Rule 102.01C(I)盈利测试、102.01C(II)
+      市值测试），另有定性标准赋予交易所较大裁量权，属 ADR-023 的 `disclosure_with_discretion`
+      类，与 us-nasdaq 同属"美国式披露监管"模式。
     sources:
       - title: Initial Listings（官网）
         url: https://www.nyse.com/regulation/initial-listings

@@ -1719,6 +1719,18 @@
         "detail": null,
         "quote": null,
         "sources": null
+      },
+      "derivatives": {
+        "delivery_method": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "ADR-023 新增字段，Euronext 衍生品各品种的实物/现金交割方式本次未核实，留空转 OPEN-QUESTIONS。",
+          "verified": "2026-08-16",
+          "en": null,
+          "enum": null,
+          "quote": null,
+          "sources": null
+        }
       }
     },
     "participants": {

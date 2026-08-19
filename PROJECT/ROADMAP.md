@@ -45,7 +45,7 @@
 ## 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
-共 1153 个已填字段，其中 0 个超过复核阈值待复核。
+共 1157 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
 |---|---|---|
@@ -59,16 +59,16 @@
 | `de-xetra` | 49 | 0 |
 | `fr-euronext` | 62 | 0 |
 | `hk-hkex` | 58 | 0 |
-| `in-nse` | 60 | 0 |
+| `in-nse` | 61 | 0 |
 | `jp-jpx` | 40 | 0 |
 | `kr-krx` | 70 | 0 |
-| `sa-tadawul` | 66 | 0 |
-| `sg-sgx` | 67 | 0 |
+| `sa-tadawul` | 67 | 0 |
+| `sg-sgx` | 68 | 0 |
 | `tw-twse` | 59 | 0 |
 | `uk-lse` | 44 | 0 |
 | `us-nasdaq` | 47 | 0 |
 | `us-nyse` | 41 | 0 |
-| `za-jse` | 76 | 0 |
+| `za-jse` | 77 | 0 |
 <!-- END:GENERATED health-summary -->
 
 ## v1.0 计划：横向铺开到 20+ 家
@@ -83,7 +83,7 @@
 
 ### Wave 1 启动前置条件
 
-- [ ] `review_system` 矩阵列的枚举覆盖率问题需先解决——五家标杆里没有一家能被现有 registration/approval/hybrid 枚举干净覆盖（见 `PROJECT/OPEN-QUESTIONS.md` 框架性问题第3条），已定为阻塞项，不随 Wave 1 一起拖到以后，见 `PROJECT/DECISIONS.md` [ADR-018]。
+- [x] `review_system` 矩阵列的枚举覆盖率问题——实际未在 Wave 1 启动前解决（见 [ADR-018] 执行进度补记），Wave 1/2 完成后作为高优先级待办于 2026-08-19 解决，枚举从 3 值扩到 5 值，见 `PROJECT/DECISIONS.md` [ADR-023]。
 
 ### Wave 1（8 家，优先，待启动）
 
@@ -117,4 +117,4 @@
 ### 当前进度
 
 - 20/20+ 已完成（v0.1/v0.2 五家标杆 `cn-sse`/`hk-hkex`/`us-nyse`/`jp-jpx`/`de-eurex` + v1.0 Wave 1 八家 `us-nasdaq`/`cn-szse`/`uk-lse`/`de-xetra`/`sg-sgx`/`au-asx`/`in-nse`/`sa-tadawul` + v1.0 Wave 2 七家 `fr-euronext`/`kr-krx`/`ca-tsx`/`br-b3`/`tw-twse`/`ch-six`/`za-jse`，见上方填充进度表）
-- v1.0 横向铺开阶段已完成，达成 20 家目标；`review_system` 枚举覆盖率问题（下方"Wave 1 启动前置条件"）未在 Wave 1 启动前解决，属流程疏漏，见 `PROJECT/DECISIONS.md` [ADR-018] 执行进度补记；市场结构/指数体系两处 schema 缺口已设计并示范填一家（[ADR-019]）。9 家交易所的衍生品市场机制已按 [ADR-017] 并行子代理模式补齐，人工抽检 90 字段全部通过，见 [ADR-021]。剩余两项（`review_system` 枚举拆分、下一步是否 Wave 3）待决策
+- v1.0 横向铺开阶段已完成，达成 20 家目标；`review_system` 枚举覆盖率问题（下方"Wave 1 启动前置条件"）未在 Wave 1 启动前解决，属流程疏漏，见 `PROJECT/DECISIONS.md` [ADR-018] 执行进度补记，已于 2026-08-19 解决（[ADR-023]，连带修了 `delivery_method` 同类问题）；市场结构/指数体系两处 schema 缺口已设计并示范填一家（[ADR-019]）。9 家交易所的衍生品市场机制已按 [ADR-017] 并行子代理模式补齐，人工抽检 90 字段全部通过，见 [ADR-021]。前端矩阵/章节结构审查见 [ADR-022]。剩余待决策：下一步是否开 Wave 3；[ADR-020] 分类出的 Category B ~21 字段真实数据缺口待排期

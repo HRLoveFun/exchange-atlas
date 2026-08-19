@@ -645,6 +645,21 @@
             "object",
             "null"
           ]
+        },
+        "derivatives": {
+          "type": "object",
+          "properties": {
+            "_meta": {
+              "type": "object"
+            },
+            "delivery_method": {
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false

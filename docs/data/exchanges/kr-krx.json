@@ -1267,9 +1267,10 @@
         }
       ],
       "review_system": {
-        "zh": "由KRX交易所自身按量化门槛（经营年限、股本、股权分散度、财务表现、审计意见等多维标准，达标即可申请，非政府逐案审批）进行上市资格审查；与之并行，证券发行本身另受FSCMA下的证券注册制度约束（发行人向FSC提交证券申报书）——上市审核（交易所）与发行注册（FSC）是两套并行制度，不完全对应受控词表 review_system 现有的注册制/核准制二分，故未套用enum",
-        "en": "Listing eligibility is examined by the Exchange itself against quantitative thresholds (years in operation, equity capital, share distribution, financial performance, audit opinion, etc. — meeting the criteria enables application rather than case-by-case government approval); in parallel, the securities issuance itself is separately governed by FSCMA's registration regime (issuers file a securities registration statement with the FSC) — listing review (by the Exchange) and issuance registration (by the FSC) are two parallel systems that do not map cleanly onto the existing registration/approval enum, so no enum value is applied",
-        "detail": "这是 OPEN-QUESTIONS 框架性问题第3条（review_system枚举覆盖度）积累的第五个真实案例：上交所「注册制」、港交所「披露为本+上市委实质审核」、NYSE「披露为本+高度量化具体规则+广泛自由裁量权」、JPX「披露为本，交易所审核+重大事项另报金融厅」、现在KRX「交易所量化门槛审查+FSC独立证券注册」——五家没有一家能被现有枚举干净覆盖。",
+        "enum": "dual_track",
+        "zh": "由KRX交易所自身按量化门槛（经营年限、股本、股权分散度、财务表现、审计意见等多维标准，达标即可申请，非政府逐案审批）进行上市资格审查；与之并行，证券发行本身另受FSCMA下的证券注册制度约束（发行人向FSC提交证券申报书）——上市审核（交易所）与发行注册（FSC）是两套并行制度",
+        "en": "Listing eligibility is examined by the Exchange itself against quantitative thresholds (years in operation, equity capital, share distribution, financial performance, audit opinion, etc. — meeting the criteria enables application rather than case-by-case government approval); in parallel, the securities issuance itself is separately governed by FSCMA's registration regime (issuers file a securities registration statement with the FSC) — listing review (by the Exchange) and issuance registration (by the FSC) are two parallel systems",
+        "detail": "上市审核（交易所）与发行注册（FSC）两套并行制度，属 ADR-023 新增的 `dual_track` 类，与 br-b3（B3受理+CVM注册）、de-xetra（交易所admission+BaFin核准招股说明书）同属一类。",
         "sources": [
           {
             "title": "KOSPI Market Listing Requirements — Criteria详情子页",
@@ -1279,8 +1280,7 @@
         ],
         "quote": "Years in operation since incorporation — At least 3 years / Equity Capital — At least KRW 30 billion / No. of Shares to be listed — At least 1 million shares",
         "confidence": "high",
-        "verified": "2026-08-16",
-        "enum": null
+        "verified": "2026-08-16"
       },
       "listing_process_duration": {
         "zh": "",
@@ -1546,6 +1546,18 @@
         "detail": null,
         "quote": null,
         "sources": null
+      },
+      "derivatives": {
+        "delivery_method": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "ADR-023 新增字段，KRX 衍生品各品种的实物/现金交割方式本次未核实，留空转 OPEN-QUESTIONS。",
+          "verified": "2026-08-16",
+          "en": null,
+          "enum": null,
+          "quote": null,
+          "sources": null
+        }
       }
     },
     "participants": {

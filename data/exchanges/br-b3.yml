@@ -751,8 +751,10 @@ listing:
       launched_year: 2000
 
   review_system:
-    zh: "发行人证券的挂牌/交易许可由B3依《发行人规则》（Issuer's Regulations）受理审核，另须完成CVM的「公众公司」注册；本次抓取到的页面未给出可直接归类为现有枚举值（注册制/核准制/混合制）的逐条描述，未强行套用枚举"
-    en: "Admission of an issuer's securities to trading is handled by B3 under the Issuer's Regulations, alongside separate registration as a public company with CVM; the pages fetched this session did not provide text that cleanly maps to the existing review_system enum values (registration/approval/hybrid), so no enum value was forced"
+    enum: dual_track
+    zh: "发行人证券的挂牌/交易许可由B3依《发行人规则》（Issuer's Regulations）受理审核，另须完成CVM的「公众公司」注册"
+    en: "Admission of an issuer's securities to trading is handled by B3 under the Issuer's Regulations, alongside separate registration as a public company with CVM"
+    detail: "B3受理审核+CVM独立完成注册的双层结构，属 ADR-023 新增的 `dual_track` 类，与 kr-krx（交易所审核+FSC注册）、de-xetra（交易所admission+BaFin核准招股说明书）同属一类。"
     sources:
       - title: Regulatory Framework – Listing
         url: https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/listing.htm
@@ -901,9 +903,10 @@ clearing:
     confidence: high
 
   delivery_method:
-    zh: "分品种不同：现货证券市场为「资金+证券」过户交收（并非衍生品意义上的实物/现金交割二选一）；衍生品市场多数合约现金结算，但个股期货等部分合约存在实物交割"
-    en: "Varies by instrument: the cash equities market settles via funds-versus-securities transfer (not a derivatives-style physical-vs-cash delivery choice); in the derivatives market most contracts are cash-settled, though some (e.g. single-stock futures) can involve physical delivery"
-    detail: "受控词表 delivery_method 的枚举（physical/cash/either/na）没有一个能干净覆盖「现货过户交收+衍生品分品种不同」这种混合状态，未强行套用，留 enum 空。"
+    enum: na
+    zh: "现货证券市场为「资金+证券」过户交收，不适用衍生品意义上的实物/现金交割二选一；衍生品部分另见 clearing.derivatives.delivery_method"
+    en: "The cash equities market settles via funds-versus-securities transfer — not a derivatives-style physical-vs-cash delivery choice; for derivatives see clearing.derivatives.delivery_method"
+    detail: "ADR-023 新增 clearing.derivatives 子块后，顶层字段收窄为仅描述现货市场。"
     sources:
       - title: Securities Lending, Equity and ETF Trades
         url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/securities-lending-equity-and-etf-trades.htm
@@ -912,7 +915,7 @@ clearing:
         url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm
         accessed: 2026-08-16
     quote: "Settlement / Financial and Physical / Settlement Period / T+2 from the trading date"
-    confidence: medium
+    confidence: high
 
   last_trading_day_rule:
     zh: "期权到期日的到期系列于15:45停止交易；到期日自动履约按标的现货参考价与行权价比较自动触发（个股/ETF期权自18:15起，指数期权自17:20起）"
@@ -936,6 +939,12 @@ clearing:
         accessed: 2026-08-16
     quote: "The amount of collateral required for guaranteeing the transactions/positions (defaulters pay and survivors pay) and the operational balance are based on the CORE methodology."
     confidence: high
+
+  derivatives:
+    delivery_method:
+      zh: ""
+      confidence: low
+      detail: "ADR-023 新增字段，衍生品分产品线的实物/现金交割细则本次未逐条核实，留空转 OPEN-QUESTIONS。"
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者

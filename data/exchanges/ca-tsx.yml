@@ -590,10 +590,12 @@ listing:
   boards: []
 
   review_system:
+    enum: disclosure_with_discretion
     zh: "披露为本，按发行人类型（Income & Revenue-Producing / Pre Income-Producing / New Enterprise / Mining / Oil and Gas Companies）分设量化上市资格路径，由TSX自行审核并须符合OSC核准的Company Manual规则"
     en: "Disclosure-based; TSX applies distinct quantitative eligibility tracks by issuer type (Income & Revenue-Producing / Pre Income-Producing / New Enterprise / Mining / Oil and Gas Companies), reviewed by TSX itself under OSC-approved Company Manual rules"
     detail: |
-      与NYSE/JPX一样，不完全落入「注册制/核准制」二分——是受控词表第3条已积累的第五个真实案例。
+      属 ADR-023 重新划分后的 `disclosure_with_discretion` 类（规则本身经 OSC 核准，
+      但逐案审核由 TSX 自行完成，OSC 不逐案审批，区别于 dual_track 类）。
       Income & Revenue-Producing路径要求满足「Income Test」（税前净利润$750,000）或「Revenue
       Test」（营收$10,000,000）二选一，再叠加「Market Support」市值门槛$100,000,000；具体
       数字来自2025年11月6日OSC核准生效的Company Manual最新修订文本（取代了此前「Exempt/

@@ -160,8 +160,9 @@ regulation:
       Disclosure Standards》与《Rules of the London Stock Exchange》两份自订规则中），而
       官方名册（Official List）与上市持续义务由FCA依UKLR直接监管——这是"交易所自身兼一线
       监管"（如港交所）与"纯由外部机构监管"两种模式之外的第三种组合，与NYSE"交易所自身
-      设专责部门+委托FINRA"的模式也不相同，值得记入OPEN-QUESTIONS第3条受控词表讨论增加
-      一个真实样本。
+      设专责部门+委托FINRA"的模式也不相同，是监管模式多样性的又一个真实样本（不是
+      review_system 字段本身，该字段已按 DECISIONS.md ADR-023 归入 disclosure_with_discretion，
+      本条讨论的是 self_regulatory_org 这个不同字段）。
     sources:
       - title: Admission and Disclosure Standards（官网）
         url: https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf
@@ -561,15 +562,13 @@ listing:
       launched_year: ""
 
   review_system:
+    enum: disclosure_with_discretion
     zh: "披露为本，2024年7月UKLR改革后以单一“股票证券（商业公司）”类别取代此前Premium/Standard两级架构；申请人须在多类触发事件（如须发布招股说明书、反向收购通函等）委任一名保荐人（Sponsor）向FCA确认其符合UKLR相关要求"
     en: "Disclosure-based; following the July 2024 UKLR reform, a single 'equity shares (commercial companies)' category replaced the previous two-tier Premium/Standard structure. Issuers must appoint a Sponsor on multiple trigger events (e.g. when a prospectus or reverse-takeover circular is required) to confirm compliance with the relevant UKLR requirements to the FCA"
     detail: |
-      这是OPEN-QUESTIONS第3条受控词表讨论的第五个真实样本：既不同于上交所"注册制"，也不同于
-      港交所"披露为本+上市委员会实质审核权"，也不同于NYSE"披露为本+高度形式化规则编号+
-      广泛自由裁量权"，也不同于JPX"披露为本+另须向金融厅报告重大事项"——英国这套"披露为本+
-      保荐人（Sponsor）在特定触发事件下向监管者背书"的把关模式，是又一种不被现有三值枚举
-      （registration/approval/hybrid）干净覆盖的组合，本条数据未套用enum，只留zh/en文字说明，
-      与此前四家的处理方式一致。
+      披露为本+保荐人（Sponsor）在特定触发事件下向监管者背书的把关模式，属 ADR-023
+      重新划分后的 `disclosure_with_discretion` 类（裁量权由保荐人代为行使，而非交易所
+      自身委员会，但同属"披露基础上仍有实质把关"这一大类）。
     sources:
       - title: UKLR UK Listing Rules sourcebook（FCA Handbook）
         url: https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf

@@ -748,9 +748,10 @@ listing:
       financial_threshold: "净资产（不含少数股东权益）至少200万兰特；公众持股至少占各类别股份10%；无强制利润门槛，可用经审计的上一财年报表或未来12个月盈利预测替代"
 
   review_system:
+    enum: disclosure_with_discretion
     zh: "以量化财务与股权分布门槛为主的交易所审核制：主板/AltX各设明确的利润、净资产、发行股数、公众持股比例等量化标准，达标申请由交易所审核后授予上市；同时保留对开发阶段公司、地产实体、矿业/油气公司、投资实体、SPAC等多类特殊申请人的例外条款与自由裁量权"
     en: "Exchange-led review anchored in quantitative financial and shareholder-spread thresholds (profit, net asset value, issued shares, free float) for the Main Board and AltX, with the JSE granting listings to compliant applicants while retaining discretionary exemptions for development-stage companies, property entities, mining/oil & gas companies, investment entities and SPACs"
-    detail: "受控词表 review_system（registration/approval/hybrid）三个值都不能干净覆盖这种\"高度量化的交易所主导审核+大量个案例外条款\"模式——继上交所/港交所/NYSE/JPX/sa-tadawul之后，这是第六个未能被现有枚举干净覆盖的真实案例，进一步印证 OPEN-QUESTIONS 第3条的判断（该字段实质已退化为自由文本描述）。"
+    detail: "高度量化的交易所主导审核+大量个案例外条款，属 ADR-023 重新划分后的 `disclosure_with_discretion` 类。"
     sources:
       - title: "JSE Listings Requirements Simplified（Section 2.4 Main Board）"
         url: https://www.jse.co.za/sites/default/files/media/documents/jse-listings-requirements-simplified/JSE_Listings_Requirements_Simplified_Final_@_12_December_2025_Final.pdf
@@ -917,9 +918,16 @@ clearing:
     confidence: low
 
   delivery_method:
-    zh: ""
-    confidence: low
-    detail: "现货证券交割为无纸化记账过户（经Strate电子结算），与该字段\"实物/现金\"的二分设计前提不完全对应；衍生品各品种的实物/现金交割方式本次未逐条核实，留空转 OPEN-QUESTIONS，处理方式同 sa-tadawul 的先例。"
+    enum: na
+    zh: "现货证券交割为无纸化记账过户（经Strate电子结算），不适用实物/现金交割二选一；衍生品部分另见 clearing.derivatives.delivery_method"
+    en: "Cash equities settle via dematerialised book-entry transfer through Strate — not applicable to a physical/cash delivery choice; for derivatives see clearing.derivatives.delivery_method"
+    detail: "ADR-023 新增 clearing.derivatives 子块后，顶层字段收窄为仅描述现货市场；衍生品各品种的实物/现金交割方式本次未逐条核实，移入新子块留空，见 OPEN-QUESTIONS。与 settlement_cycle 字段引用同一份来源。"
+    sources:
+      - title: Equity Market Risk Management（jse.co.za，T+3结算说明页）
+        url: https://www.jse.co.za/services/post-trade-services/t3settlement
+        accessed: 2026-08-16
+    quote: "sellers deliver securities in exchange for cash receipt (DvP), and buyers receive securities in exchange for cash payments (RvP)"
+    confidence: medium
 
   last_trading_day_rule:
     zh: ""
@@ -934,6 +942,12 @@ clearing:
         accessed: 2026-08-16
     quote: "The JSE provides settlement assurance for central order book trades in the cash equity market and employs various measures to affect this. These measures are listed below: Entry Requirements Capital Adequacy View of Assets CSDP Commits Margin Fails Transaction Management Process Default Management Governance"
     confidence: high
+
+  derivatives:
+    delivery_method:
+      zh: ""
+      confidence: low
+      detail: "ADR-023 新增字段，衍生品各品种的实物/现金交割方式本次未逐条核实，留空转 OPEN-QUESTIONS。"
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者
