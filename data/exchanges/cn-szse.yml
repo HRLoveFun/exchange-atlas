@@ -459,6 +459,225 @@ market_structure:
     quote: "盘后固定价格交易纳入深股通额度控制，当日额度在本所盘后固定价格交易阶段使用完毕的，联交所证券交易服务公司停止接受当日后续的买入申报，但仍接受卖出申报。"
     confidence: medium
 
+  derivatives:
+    trading_sessions:
+      pre_market:
+        zh: "无独立盘前时段；9:15-9:25 为开盘集合竞价，与现货主板/创业板集合竞价时段完全一致"
+        en: "No separate pre-market session; 9:15-9:25 a.m. is the opening call auction — identical to the cash equity market's opening auction window"
+        sources:
+          - title: 深圳证券交易所股票期权试点交易规则 第4.1.2条
+            url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+            accessed: 2026-08-18
+        quote: "期权合约的交易时间为每个交易日 9:15 至 9:25、9:30 至 11:30、13:00 至 15:00。其中，9:15 至 9:25 为开盘集合竞价时间，14:57 至 15:00 为收盘集合竞价时间，其余时段为连续竞价时间，本规则另有规定的除外。"
+        confidence: high
+      continuous_am:
+        zh: "9:30-11:30"
+        en: "9:30 a.m.-11:30 a.m."
+        sources:
+          - title: 深圳证券交易所股票期权试点交易规则 第4.1.2条
+            url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+            accessed: 2026-08-18
+        quote: "9:15 至 9:25、9:30 至 11:30、13:00 至 15:00"
+        confidence: high
+      lunch_break:
+        zh: "11:30-13:00，与现货主板/创业板一致"
+        confidence: medium
+        detail: "交易规则第4.1.2条枚举的交易时段中未包含11:30-13:00，属未列入交易时间的间隔段，与顶层 lunch_break 字段同一处理方式，未单独引用原文。"
+      continuous_pm:
+        zh: "13:00-15:00（13:00-14:57 连续竞价 + 14:57-15:00 收盘集合竞价），与现货主板/创业板时段完全一致"
+        en: "1:00 p.m.-3:00 p.m. (1:00-2:57 p.m. continuous auction + 2:57-3:00 p.m. closing call auction) — identical to the cash equity market"
+        sources:
+          - title: 深圳证券交易所股票期权试点交易规则 第4.1.2条
+            url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+            accessed: 2026-08-18
+        quote: "9:15 至 9:25、9:30 至 11:30、13:00 至 15:00。其中，9:15 至 9:25 为开盘集合竞价时间，14:57 至 15:00 为收盘集合竞价时间，其余时段为连续竞价时间"
+        confidence: high
+      after_market:
+        zh: "无盘后固定价格交易时段——第4.1.2条枚举的期权交易时间仅为9:15-9:25、9:30-11:30、13:00-15:00，未纳入现货市场15:05-15:30的盘后固定价格交易机制（对照本文件顶层 after_market 字段），是期权与现货交易机制的一处具体差异"
+        en: "No after-hours fixed-price trading session — Rule 4.1.2's exhaustive list of options trading hours (9:15-9:25, 9:30-11:30, 13:00-15:00) does not include the cash market's 15:05-15:30 after-hours fixed-price session (cf. the top-level `after_market` field); this is a concrete difference between the options and cash trading mechanisms"
+        confidence: medium
+        detail: "基于第4.1.2条对交易时间的穷举式表述作反向推断（该条未提及盘后固定价格交易），未见另有条文明确排除，故 confidence 定为 medium 而非 high。"
+      night_session:
+        zh: "无"
+        confidence: medium
+        detail: "同 after_market，基于第4.1.2条穷举交易时间的反向推断。"
+
+    holidays_note:
+      zh: "每周一至周五交易，国家法定假日及本所公告的休市日休市，与现货市场一致"
+      en: "Trading days are Monday to Friday; closed on national statutory holidays and days announced as closed by SZSE — same as the cash equity market"
+      sources:
+        - title: 深圳证券交易所股票期权试点交易规则 第4.1.1条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-18
+      quote: "本所期权交易日为每周一至周五。国家法定节假日和本所公告的休市日，本所市场休市。"
+      confidence: high
+
+    opening_mechanism:
+      zh: "开盘集合竞价（9:15-9:25）；开盘价为当日该合约第一笔成交价，集合竞价未能产生开盘价的，改以连续竞价方式产生"
+      en: "Opening call auction (9:15-9:25 a.m.); the opening price is the contract's first trade price of the day — if the call auction fails to produce a price, it is instead determined via continuous auction"
+      sources:
+        - title: 深圳证券交易所股票期权试点交易规则 第4.1.2条、第4.6.1条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-18
+      quote: "期权合约的交易时间为每个交易日 9:15 至 9:25、9:30 至 11:30、13:00 至 15:00。其中，9:15 至 9:25 为开盘集合竞价时间……期权合约的开盘价为当日该合约的第一笔成交价格。开盘价通过集合竞价方式产生，不能产生开盘价的，以连续竞价方式产生。"
+      confidence: high
+
+    closing_mechanism:
+      zh: "收盘集合竞价（14:57-15:00）；未能产生收盘价或未进行收盘集合竞价的，以当日最后一笔交易前一分钟内所有成交的成交量加权平均价（含最后一笔）为收盘价；全日无成交则以前收盘价为当日收盘价"
+      en: "Closing call auction (2:57-3:00 p.m.); if the closing auction fails to produce a price (or is not held), the closing price is the volume-weighted average price of all trades in the one minute before the day's last trade (inclusive of that trade); if there is no trade at all that day, the previous closing price is used"
+      sources:
+        - title: 深圳证券交易所股票期权试点交易规则 第4.1.2条、第4.6.1条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-18
+      quote: "14:57 至 15:00 为收盘集合竞价时间……期权合约的收盘价通过集合竞价方式产生。收盘集合竞价不能产生收盘价或未进行收盘集合竞价的，以当日该证券最后一笔交易前一分钟所有交易的成交量加权平均价（含最后一笔交易）为期权合约的收盘价。当日无成交的，以前收盘价为当日期权合约的收盘价。"
+      confidence: high
+
+    matching_principle:
+      zh: "价格优先、时间优先；连续竞价期间以涨跌停价格进行的申报另按平仓优先、时间优先原则撮合（涨停价的买入平仓申报优先于买入开仓申报，跌停价的卖出平仓申报优先于卖出开仓申报）"
+      en: "Price priority, then time priority; during continuous auction, orders submitted at the price limit are instead matched on a close-priority, then time-priority basis (at the up-limit price, closing buy orders take priority over opening buy orders; at the down-limit price, closing sell orders take priority over opening sell orders)"
+      sources:
+        - title: 深圳证券交易所股票期权试点交易规则 第4.4.2条、第4.4.3条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-18
+      quote: "期权竞价交易按价格优先、时间优先的原则撮合成交。……连续竞价期间，以涨跌停价格进行的申报，按照平仓优先、时间优先的原则撮合成交。平仓优先的原则为：以涨停价格进行的申报，买入平仓（含备兑平仓）申报优先于买入开仓申报；以跌停价格进行的申报，卖出平仓申报优先于卖出开仓申报。"
+      confidence: high
+
+    order_types:
+      zh: "买卖类型：买入开仓、买入平仓、卖出开仓、卖出平仓、备兑开仓、备兑平仓；委托类型分限价委托与市价委托，本所接受的申报指令含普通限价申报、全额成交或撤销限价申报、对手方最优价格市价申报、本方最优价格市价申报、最优五档即时成交剩余撤销市价申报、即时成交剩余撤销市价申报、全额成交或撤销市价申报等8类；申报数量为1张或其整数倍，限价申报单笔最大50张，市价申报单笔最大10张"
+      en: "Trading types: buy-to-open, buy-to-close, sell-to-open, sell-to-close, covered-call-open, covered-call-close; orders are either limit or market orders, with 8 accepted instruction types including ordinary limit orders, fill-or-kill limit orders, opposite-best-price market orders, same-best-price market orders, best-five-immediate-or-cancel market orders, immediate-or-cancel market orders, and fill-or-kill market orders; order size is 1 contract or a multiple thereof, capped at 50 contracts per limit order and 10 per market order"
+      sources:
+        - title: 深圳证券交易所股票期权试点交易规则 第4.3.3条、第4.3.14条、第4.3.17条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-18
+      quote: "前款第（三）项所称买卖类型，包括买入开仓、买入平仓、卖出开仓、卖出平仓、备兑开仓以及备兑平仓等。前款第（五）项所称委托类型，包括限价委托和市价委托。……期权交易的申报数量为 1 张或者其整数倍，限价申报的单笔申报最大数量为 50 张，市价申报的单笔申报最大数量为 10 张。"
+      confidence: high
+
+    tick_size:
+      zh: "0.0001元人民币（合约标的为交易型开放式基金ETF——深交所目前上市的全部期权品种均属此类）；规则原文另定有以股票为标的期权的最小报价单位0.001元人民币，因深交所尚未上市股票期权，目前未实际使用"
+      en: "RMB 0.0001 for ETF-underlying options (currently all SZSE-listed options); the rules separately provide for RMB 0.001 on stock-underlying options, not yet in actual use as SZSE has not listed any stock options"
+      sources:
+        - title: 深圳证券交易所股票期权试点交易规则 第4.3.18条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-18
+      quote: "合约标的为股票的，期权交易的委托、申报及成交价格为每股股票对应的权利金金额，申报价格最小变动单位为 0.001 元人民币；合约标的为交易型开放式基金的，期权交易的委托、申报及成交价格为每份交易型开放式基金对应的权利金金额，申报价格最小变动单位为 0.0001 元人民币。"
+      confidence: high
+
+    contract_specs_note:
+      zh: "以沪深300ETF期权（深交所首只期权品种，标的为嘉实沪深300ETF，代码159919，2019-12-23上市）为例：合约单位10,000份，合约标的除权除息时按公式调整；欧式行权，到期日/行权日为到期月份第四个星期三（遇法定节假日或本所休市日顺延至次一交易日），行权交收日为行权日次一交易日；到期月份为当月、下月及最近两个季月，共4个月同时挂牌；行权价格间距按标的价格分档（标的价≤3元对应0.05元，(3,5]元对应0.1元，(5,10]元对应0.25元，(10,20]元对应0.5元，(20,50]元对应1元，(50,100]元对应2.5元，>100元对应5元）；到期为实值合约的以标的收盘价与行权价确定结算价，虚值/平值合约结算价为0。深交所此后又上市了3只ETF期权（创业板ETF期权标的159915、中证500ETF期权标的159922、深证100ETF期权标的159901），本条目仅以规模最大的沪深300ETF期权为代表样本，未逐一核实其余三只的具体合约条款"
+      en: "Example (CSI 300 ETF Options — SZSE's first listed option, underlying Harvest CSI 300 ETF, code 159919, launched 2019-12-23): contract unit 10,000 units (adjusted by formula on the underlying's ex-rights/ex-dividend dates); European exercise; expiration/exercise date is the fourth Wednesday of the expiration month (deferred to the next trading day if a holiday), with exercise settlement on the next trading day after; 4 expiration months listed concurrently (spot month, next calendar month, and the next two calendar-quarter months); strike price intervals tiered by underlying price (RMB 0.05 at ≤RMB3, 0.1 at (3,5], 0.25 at (5,10], 0.5 at (10,20], 1 at (20,50], 2.5 at (50,100], 5 above RMB100); for in-the-money contracts, the expiration settlement price is set from the underlying's closing price and the strike; out-of-the-money/at-the-money contracts settle at 0. SZSE has since listed 3 more ETF options (ChiNext ETF Options on 159915, CSI 500 ETF Options on 159922, SZSE 100 ETF Options on 159901); this entry uses the flagship CSI 300 ETF Options as the representative sample and has not independently verified the other three products' contract terms"
+      sources:
+        - title: 期权入市手册（十二）：深市期权交易制度（下）（投资者教育，深交所官网）
+          url: https://investor.szse.cn/institute/rules/t20221108_597223.html
+          accessed: 2026-08-18
+        - title: 深圳证券交易所股票期权试点交易规则 第2.4-2.5条、第4.5.1-4.5.2条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-18
+        - title: SZSE English — CSI 300 ETF Options（合约条款，深交所官网英文版）
+          url: https://www.szse.cn/English/products/options/etf/index.html
+          accessed: 2026-08-18
+        - title: 关于嘉实沪深300ETF期权合约品种上市交易有关事项的通知
+          url: https://www.szse.cn/option/rules/optrules/t20191219_572722.html
+          accessed: 2026-08-18
+      quote: "一般情况下，深交所ETF期权的合约单位为10,000份，但当合约标的发生除权、除息时，为使期权合约的实虚值程度及整体价值保持不变，深交所会对期权合约单位进行调整，届时投资者可以及时关注相关公告。"
+      detail: "合约单位数值（10,000份）取自投资者教育页面（官网说明页级来源）；到期日「第四个星期三」规则、行权交收日、到期结算价确定原则取自交易规则原文第2.5条、第4.5条（未在同一段引文内并列，已分别核实，见 sources 列出的具体条款）；行权价格间距分档表、欧式行权、上市日期取自深交所英文官网产品条款页与嘉实沪深300ETF期权上市通知，均为深交所官方来源，非第三方，故整体仍标 high。"
+      confidence: high
+
+    price_limits:
+      type:
+        zh: "逐合约、公式化的当日固定区间机制：以合约前结算价格为基准，按认购/认沽方向分别代入公式（引用合约标的前收盘价与行权价格）计算当日涨跌幅上限，是基于期权定价逻辑（挂钩标的价与行权价）的当日固定区间，而非对合约自身前收盘价的简单百分比。受控词表 `price_limit_type` 的四个选项（无/百分比涨跌幅/阶梯绝对值幅/动态参考价区间）均不能干净覆盖这种「期权定价公式型」区间，故不填 enum，仅以文字描述，处理方式与 hk-hkex.circuit_breaker 因词表不贴切而借用近似值不同——这里选择不借用，直接留空"
+        en: "A per-contract, formula-based same-day-fixed band: the daily limit is calculated from the contract's previous settlement price using a formula referencing the underlying's previous close and the strike price (separate formulas for calls and puts) — an options-pricing-logic-based band, not a simple percentage of the contract's own prior close. None of the four `price_limit_type` values (none/percentage band/absolute tiered/dynamic reference) cleanly covers this option-pricing-formula type, so `enum` is left blank rather than forced to an approximate value."
+        sources:
+          - title: 深圳证券交易所股票期权试点交易规则 第4.3.20条
+            url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+            accessed: 2026-08-18
+        quote: "合约涨跌停价格=合约前结算价格±最大涨跌幅 认购期权最大涨幅=max｛合约标的前收盘价×0.5%，min [（2×合约标的前收盘价－行权价格），合约标的前收盘价]×10%｝ 认购期权最大跌幅=合约标的前收盘价×10% 认沽期权最大涨幅=max｛行权价格×0.5%，min [（2×行权价格－合约标的前收盘价），合约标的前收盘价]×10%｝ 认沽期权最大跌幅=合约标的前收盘价×10%"
+        confidence: high
+      main_board:
+        zh: "以ETF为标的的期权（深交所目前全部上市品种）：认购期权最大涨幅=max{标的前收盘价×0.5%，min[(2×标的前收盘价－行权价)，标的前收盘价]×10%}，最大跌幅=标的前收盘价×10%；认沽期权最大涨幅=max{行权价×0.5%，min[(2×行权价－标的前收盘价)，标的前收盘价]×10%}，最大跌幅=标的前收盘价×10%；计算出的幅度按最小报价单位整数倍四舍五入取值，跌停价格低于最小报价单位的以最小报价单位为跌停价；合约最后交易日不设跌幅限制"
+        en: "For ETF-underlying options (currently all SZSE-listed products): call max upside = max{underlying prior close×0.5%, min[(2×underlying prior close − strike), underlying prior close]×10%}, max downside = underlying prior close×10%; put max upside = max{strike×0.5%, min[(2×strike − underlying prior close), underlying prior close]×10%}, max downside = underlying prior close×10%; the computed band is rounded to a multiple of the tick size (a downside limit below one tick is set to one tick); no downside limit applies on the contract's last trading day"
+        sources:
+          - title: 深圳证券交易所股票期权试点交易规则 第4.3.19-4.3.22条
+            url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+            accessed: 2026-08-18
+        quote: "认购期权最大涨幅=max｛合约标的前收盘价×0.5%，min [（2×合约标的前收盘价－行权价格），合约标的前收盘价]×10%｝ 认购期权最大跌幅=合约标的前收盘价×10%……根据前条规定计算出的合约涨跌幅，按照四舍五入原则取最小价格变动单位的整数倍。计算出的合约跌停价格低于最小价格变动单位的，合约跌停价格为最小价格变动单位。……期权合约的最后交易日，合约价格不设跌幅限制。"
+        confidence: high
+      other_boards:
+        zh: "价格涨跌停公式不区分「板块」，深交所目前仅ETF一类标的实际挂牌（无股票为标的的期权），故不存在与 main_board 并列的第二档；与保证金公式（第4.3.20条价格涨跌停公式不分标的类型，但保证金公式——见 margin_practice_note——确有区分股票/ETF两套百分比）形成对照"
+        confidence: medium
+        detail: "留空 enum/未单列 quote，因本字段实质是「不适用」——不是查不清，是该市场目前只有一类合约标的、无第二档可记录，与主板/创业板并列关系不同。"
+
+    circuit_breaker:
+      enum: stock_level
+      zh: "熔断机制：连续竞价期间，单个合约盘中交易价格较最近参考价格上涨或下跌达到或超过50%，且价格涨跌绝对值达到或超过该合约最小报价单位10倍的，该合约进入3分钟集合竞价阶段，集合竞价结束后恢复连续竞价；盘中集合竞价时间跨越14:57的，于14:57恢复交易并进行收盘集合竞价。属逐合约级别，非指数级/全市场熔断"
+      en: "Circuit breaker: during continuous auction, if a single contract's intraday trading price moves up or down by 50% or more from the latest reference price, and the absolute price change is at least 10x the contract's tick size, that contract enters a 3-minute call auction, then resumes continuous auction; if the call auction window crosses 2:57 p.m., trading resumes at 2:57 p.m. straight into the closing call auction. This operates at the individual-contract level, not index-wide or market-wide."
+      detail: "受控词表 `circuit_breaker_type` 的四个选项均以「指数级/个股级」这组现货语境的二分为设计出发点；本机制的真实颗粒度是「单一期权合约」，比 hk-hkex.derivatives.circuit_breaker 当初借用 stock_level 表达的「部分期货合约月份」更贴近字面的「个股（单一标的）」含义，故沿用同一 stock_level 借用手法，仅取其「非全市场」含义。"
+      sources:
+        - title: 深圳证券交易所股票期权试点交易规则 第4.6.4-4.6.5条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-18
+      quote: "期权交易实行熔断制度。连续竞价交易期间，合约盘中交易价格较最近参考价格上涨、下跌达到或者超过 50%，且价格涨跌绝对值达到或者超过该合约最小报价单位 10 倍的，该合约进入 3 分钟的集合竞价交易阶段。集合竞价交易结束后，合约继续进行连续竞价交易。盘中集合竞价时间跨越 14:57 的，于 14:57 恢复交易并进行收盘集合竞价。"
+      confidence: high
+
+    volatility_interruption:
+      zh: "本次抓取的交易规则未见与「熔断」（见 circuit_breaker 字段）相独立的另一层波动性中断机制——规则第4.6节仅规定了「±50%且绝对涨跌幅≥10倍最小报价单位→3分钟集合竞价」这一套机制，兼具通常语境下「熔断」与「波动性中断」两层含义，不像部分市场（如 hk-hkex 衍生品市场区分动态价格限制机制 VCM 与单独的5分钟冷静期两层）拆成两套规则"
+      en: "This session's fetch of the trading rules found no second, separate volatility-interruption layer distinct from the circuit breaker (see `circuit_breaker`) — Rule 4.6 defines only the single '±50% move and absolute change ≥10x tick size → 3-minute call auction' mechanism, which folds together what other markets sometimes split into two layers (cf. hk-hkex's derivatives market, which separates a Dynamic Price Banding/VCM mechanism from an independent 5-minute cooling-off period)"
+      confidence: medium
+      detail: "非「查不清」而是结构性发现——该市场用同一套机制覆盖了 circuit_breaker 与 volatility_interruption 两个字段通常分别描述的场景，故本字段不重复引用同一段原文作 quote，仅作说明性交叉引用。"
+
+    trading_halt_mechanism:
+      zh: "无与现货主板/创业板类似的固定量化阈值停牌机制（现货市场按开盘价首次涨跌幅度触发临时停牌，见顶层 trading_halt_mechanism 字段）。期权交易规则另设「交易异常情况处置」：因不可抗力、意外事件、技术故障、重大差错或市场操纵，或合约标的连续涨跌停等原因导致或可能导致期权市场出现重大风险的，本所可按规定权限与程序采取暂时停止交易、临时停市等多类风险控制措施之一并报中国证监会；具体启动情形（如交易价格出现重大异常波动）由本所认定，暂停与恢复交易的时间由本所决定并公告，不是自动触发的量化规则"
+      en: "No fixed quantitative-threshold halt mechanism analogous to the cash equity market's (a first intraday move from the day's open of a set magnitude triggers a temporary halt — see the top-level `trading_halt_mechanism` field). The options trading rules instead provide for discretionary 'abnormal-circumstance handling': where force majeure, technical failure, material error, market manipulation, or continuous underlying limit-up/down could pose material risk to the options market, SZSE may adopt one of several listed risk-control measures — including temporarily halting trading or a market-wide suspension — and report to the CSRC; the trigger (e.g., 'material abnormal price volatility') is at SZSE's discretion, and suspension/resumption timing is decided and announced by SZSE case by case rather than governed by a fixed automatic rule"
+      sources:
+        - title: 深圳证券交易所股票期权试点交易规则 第4.7.1-4.7.3条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-18
+      quote: "因不可抗力、意外事件、技术故障、重大差错或者市场操纵等原因，导致或者可能导致部分或者全部期权交易不能正常进行，或者因合约标的连续涨跌停等原因导致或者可能导致期权市场出现重大风险的，本所可以按照规定的权限与程序采取下列风险控制措施，并立即报告中国证监会：（一）暂时停止交易；（二）临时停市；……暂停及恢复交易的时间由本所决定，并予以公告。"
+      confidence: high
+
+    block_trade:
+      zh: "股票期权交易可采用大宗交易方式；规则原文该条仅为一句原则性授权条款，未见具体的最低数量/金额门槛、专门申报时段等实施细则。本次未抓到深交所期权大宗交易的配套实施细则文件，留待后续补充"
+      en: "Block trading is permitted for stock options; the rule text is a one-line enabling provision only, without minimum size/value thresholds or a dedicated reporting-window schedule. This session did not locate SZSE's implementing rules for options block trades — left for future follow-up"
+      sources:
+        - title: 深圳证券交易所股票期权试点交易规则 第4.6.8条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-18
+      quote: "股票期权交易可采用大宗交易方式。"
+      confidence: medium
+
+    market_maker_scheme:
+      zh: "期权做市商制度：做市商对深交所挂牌交易的期权合约提供双边持续报价、双边回应报价等流动性服务，享有交易费用减免、激励等权利，具体做市资格、权利义务由本所另行规定。做市商分主做市商（须提供双边持续报价+双边回应报价+其他约定服务全部三项）与一般做市商（仅提供双边回应报价及其他约定服务，不强制持续报价）两类；做市商报价订单与普通投资者订单同样按「价格优先、时间优先」原则撮合，不享有成交优先权"
+      en: "Options Market Maker Scheme: market makers provide liquidity services for SZSE-listed option contracts — continuous two-way quoting and two-way quote-request response — in exchange for trading-fee rebates and other incentives; specific market-making qualifications and obligations are set separately by SZSE. Market makers fall into two categories: Primary Market Makers (must provide all three services — continuous two-way quoting, quote-request response, and other agreed services) and General Market Makers (only quote-request response and other agreed services, with continuous quoting not mandatory); market-maker quotes are matched under the same price-priority-then-time-priority rule as ordinary investor orders and receive no execution priority"
+      sources:
+        - title: 深圳证券交易所股票期权试点交易规则 第4.1.13条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-18
+        - title: 期权入市手册（十三）：做市商制度（投资者教育，深交所官网）
+          url: https://investor.szse.cn/institute/rules/t20221110_597273.html
+          accessed: 2026-08-18
+      quote: "期权做市商对本所挂牌交易的期权合约提供双边持续报价、双边回应报价等服务，并享有交易费用减免、激励等权利。期权做市商的做市资格、权利、义务以及考核等事宜，由本所另行规定。"
+      confidence: high
+
+    margin_practice_note:
+      zh: "保证金分为结算准备金与交易保证金（交易保证金再分开仓保证金、维持保证金），以现金或深交所/中国结算认可的证券交纳，实行分级收取（中国结算向结算参与人、结算参与人向委托其结算的期权经营机构、期权经营机构向客户，下级向上级收取的标准不得低于上级标准）。以深交所目前全部品种（ETF为标的）为例：认购期权义务仓开仓保证金=[合约前结算价+Max(12%×标的前收盘价－认购期权虚值，7%×标的前收盘价)]×合约单位；认沽期权义务仓开仓保证金=Min[合约前结算价+Max(12%×标的前收盘价－认沽期权虚值，7%×行权价)，行权价]×合约单位；虚值＝Max(行权价－标的前收盘价，0)（认购）或Max(标的前收盘价－行权价，0)（认沽）；维持保证金公式同构，仅将「前收盘价/前结算价」替换为「收盘价/结算价」。规则原文另定有以股票为标的的公式（21%/10%对认购、19%/10%对认沽），因深交所尚未上市股票期权，目前未实际使用。另设组合策略保证金机制（如认购/认沽牛熊价差、跨式空头、宽跨式空头等6种可构建组合，部分组合免收保证金），以及基于客户实时风险值/维持保证金比例触发的强行平仓机制"
+      en: "Margin comprises settlement reserve and trading margin (the latter split into opening margin and maintenance margin), payable in cash or securities recognized by SZSE/China Clear, and collected in a tiered structure (China Clear from clearing participants, clearing participants from the options firms that clear through them, and options firms from clients — each tier's requirement no lower than the tier above). For SZSE's current products (all ETF-underlying): short-call opening margin = [prior settlement price + Max(12%×underlying prior close − call's out-of-the-money value, 7%×underlying prior close)] × contract multiplier; short-put opening margin = Min[prior settlement price + Max(12%×underlying prior close − put's out-of-the-money value, 7%×strike price), strike price] × contract multiplier; out-of-the-money value = Max(strike − underlying prior close, 0) for calls or Max(underlying prior close − strike, 0) for puts; maintenance margin uses the same formulas with 'prior close/prior settlement price' replaced by 'close/settlement price'. The rules separately define stock-underlying formulas (21%/10% for calls, 19%/10% for puts) not yet in actual use since SZSE has not listed any stock options. A portfolio-strategy margining scheme also exists (6 constructible strategies such as call/put bull and bear spreads, short straddles and short strangles, some exempt from margin), alongside a forced-liquidation mechanism triggered by real-time client risk ratios / maintenance margin ratios"
+      sources:
+        - title: 深圳证券交易所 中国证券登记结算有限责任公司股票期权试点风险控制管理办法 第十四-二十条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207433397366259.pdf
+          accessed: 2026-08-18
+        - title: 深圳证券交易所股票期权试点交易规则 第六章「风险控制」
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-18
+        - title: 期权入市手册（三十八）：交易所主要风险控制措施（下）（投资者教育，深交所官网）
+          url: https://investor.szse.cn/institute/rules/t20230227_598959.html
+          accessed: 2026-08-18
+      quote: "合约标的为交易型开放式指数基金（以下简称交易型开放式基金）的，每张合约的开仓保证金的计算公式为：（一）认购期权义务仓开仓保证金＝ [合约前结算价+Max（12%×合约标的前收盘价-认购期权虚值，7%×合约标的前收盘价）]×合约单位。（二）认沽期权义务仓开仓保证金＝Min[合约前结算价+Max（12%×合约标的前收盘价-认沽期权虚值，7%×行权价），行权价]×合约单位。"
+      confidence: high
+
+    connect_schemes:
+      zh: ""
+      confidence: low
+      detail: "本次抓取的期权交易规则原文及投资者教育资料均未提及深港通/QFII/RQFII 等跨境机制覆盖深交所挂牌期权；深港通机制本身以现货股票通道为设计对象（见顶层 connect_schemes 字段），本次未找到官方文件明确说明期权是否被排除或纳入，如实留空，记入 OPEN-QUESTIONS。"
+
 # ═══════════════════════════════════════════════
 # 六｜上市、持续监管与退市
 # ═══════════════════════════════════════════════

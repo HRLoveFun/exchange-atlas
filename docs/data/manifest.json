@@ -377,34 +377,40 @@
   ],
   "dimension_groups": [
     {
-      "id": "overview",
-      "label_zh": "基本信息",
-      "label_en": "Overview"
-    },
-    {
       "id": "trading_mechanism",
       "label_zh": "交易机制",
-      "label_en": "Trading Mechanism"
-    },
-    {
-      "id": "listing_delisting",
-      "label_zh": "上市与退市",
-      "label_en": "Listing & Delisting"
+      "label_en": "Trading Mechanism",
+      "chapter": "market_structure"
     },
     {
       "id": "clearing_settlement",
       "label_zh": "清算结算",
-      "label_en": "Clearing & Settlement"
-    },
-    {
-      "id": "regulation",
-      "label_zh": "监管环境",
-      "label_en": "Regulation"
+      "label_en": "Clearing & Settlement",
+      "chapter": "clearing"
     },
     {
       "id": "costs_taxes",
       "label_zh": "成本税费",
-      "label_en": "Costs & Taxes"
+      "label_en": "Costs & Taxes",
+      "chapter": "costs"
+    },
+    {
+      "id": "regulation",
+      "label_zh": "监管环境",
+      "label_en": "Regulation",
+      "chapter": "regulation"
+    },
+    {
+      "id": "listing_delisting",
+      "label_zh": "上市与退市",
+      "label_en": "Listing & Delisting",
+      "chapter": "listing"
+    },
+    {
+      "id": "overview",
+      "label_zh": "基本信息",
+      "label_en": "Overview",
+      "chapter": "overview"
     }
   ],
   "chapters": [

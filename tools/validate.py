@@ -71,6 +71,24 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
             if kind == "leaf" and fdef.get("enum_ref") and fdef["enum_ref"] not in enum_ids:
                 err(f"taxonomy.yml: 字段 {ch['id']}.{'.'.join(path)} 的 enum_ref `{fdef['enum_ref']}` 在 enums.yml 里不存在")
 
+    # in_matrix 指向的维度组必须存在，且该组声明的 chapter 必须与字段自身所在
+    # 章节一致——防止字段被标进不属于自己章节的矩阵组（如 membership_structure
+    # 定义在 participants 章却被标进 overview 组，ADR-022 之前的真实事故）
+    group_chapter = {g["id"]: g.get("chapter") for g in taxonomy.get("dimension_groups", [])}
+    for ch in taxonomy["chapters"]:
+        if ch.get("kind") == "list":
+            continue
+        for kind, path, fdef in sync.walk_chapter_fields(ch.get("fields", [])):
+            if kind != "leaf" or not fdef.get("in_matrix"):
+                continue
+            group_id = fdef["in_matrix"]
+            field_path = f"{ch['id']}.{'.'.join(path)}"
+            if group_id not in group_chapter:
+                err(f"taxonomy.yml: 字段 {field_path} 的 in_matrix `{group_id}` 在 dimension_groups 里不存在")
+            elif group_chapter[group_id] != ch["id"]:
+                err(f"taxonomy.yml: 字段 {field_path} 的 in_matrix `{group_id}` 属于章节 `{group_chapter[group_id]}`，"
+                    f"与字段自身所在章节 `{ch['id']}` 不一致")
+
     for eid, raw in raw_exchanges.items():
         ex = exchanges_expanded[eid]
 

@@ -272,6 +272,19 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Categories of Membership（会员/经纪商类型：Trading Member/Clearing Member等）: https://www.nseindia.com/static/trade/membership-types（HTTP 200，332KB）
   - Trading Protocols（NEAT 交易系统、行情数据层级、Colocation/MTBT 逐笔行情）: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols（HTTP 200，356KB）
   - Nifty 50 Index（旗舰指数说明页）: https://www.nseindia.com/static/products-services/indices-nifty50-index（HTTP 200，294KB）
+  - About Equity Derivatives（衍生品市场沿革：指数期货2000-06-12/指数期权2001-06-04/个股期权2001-07-02/个股期货2001-11-09上线）: https://www.nseindia.com/static/products-services/about-equity-derivatives（HTTP 200，355KB）
+  - Equity Derivatives Pre-Open Session（股票/股指期货开盘前集合竞价机制，09:00-09:15）: https://www.nseindia.com/static/products-services/equity-derivatives-pre-open-session（HTTP 200，338KB）
+  - Equity Derivatives Trading System（F&O撮合系统：价格-时间优先、订单簿、DAY/IOC时间条件、限价/市价/止损价格条件）: https://www.nseindia.com/static/products-services/equity-derivatives-trading-system（HTTP 200，306KB）
+  - Equity Derivatives Price Bands（衍生品分部无每日涨跌停，改设10%/delta动态操作区间防止错价申报）: https://www.nseindia.com/static/products-services/equity-derivatives-price-bands（HTTP 200，125KB）
+  - Equity Derivatives Margins（NSE Clearing 保证金体系总览：SPAN初始保证金/Extreme Loss Margin）: https://www.nseindia.com/static/products-services/equity-derivatives-margins（HTTP 200，372KB）
+  - NSCCL SPAN（SPAN组合保证金算法原理：16档情景扫描、Scanning Risk Charge、Calendar Spread Charge）: https://www.nseindia.com/products-services/equity-derivatives-nse-clearing-span（HTTP 200，355KB）
+  - Liquidity Enhancement Scheme（做市商/流动性提供者计划，含指定做市商利益冲突披露要求；目前已确认产品集中在商品衍生品分部，如白银期权/电力期货/迪拜原油期货）: https://www.nseindia.com/static/market-data/liquidity-enhancement-scheme（HTTP 200，326KB）
+  - NIFTY 50 F&O（Nifty50期货/期权合约规格：3个月交易周期、最后交易日为到期月最后一个周二、期货最小合约价值不低于1500万卢比、期权行权价间距表）: https://www.nseindia.com/static/products-services/equity-derivatives-nifty50（HTTP 200，369KB）
+  - Individual Securities F&O（个股期货/期权合约规格：最小合约价值不低于500万卢比、期权为欧式且实物交割）: https://www.nseindia.com/static/products-services/equity-derivatives-individual-securities（HTTP 200，371KB）
+  - ⚠️ Equity Derivatives Settlement Mechanism（页面标注"Updated on: 03/01/2023"，早于上面两条2025年更新的合约规格页；文字写期权"Exercise settlement is cash settled"未按标的区分指数/个股，与 Individual Securities F&O 页"Options contracts are European style and physically settled"直接冲突——本次判断后者（更新更晚、专门针对个股期权）更可信，前者疑似未随2019年SEBI个股衍生品实物交割新规同步更新，未采信其"个股期权现金结算"表述，两页均已记入 quote 供核查）: https://www.nseindia.com/static/products-services/equity-derivatives-settlement-mechanism（HTTP 200，364KB）
+  - Currency Derivatives Contract Specification - INR Pairs（USDINR/EURINR/GBPINR/JPYINR期货期权合约规格：最小价格变动0.25 paise即INR 0.0025）: https://www.nseindia.com/static/products-services/currency-derivatives-contract-specification-inr（HTTP 200，376KB）
+  - Commodity Derivatives Contract Specifications - Base Metals（非农商品每日价格限制6%，触发后冷静期15分钟放宽至9%，国际市场价格另按3%阶梯放宽）: https://www.nseindia.com/static/products-services/commodity-derivatives-contract-specifications-base-metals（HTTP 200，395KB）
+  - Interest Rate Derivatives Contract Specifications - Government Securities（国债期货：1手=200万卢比面值、最小报价单位0.0025、到期月最后交易日为最后一个周四、操作区间±3%可放宽两次）: https://www.nseindia.com/static/products-services/interest-rate-derivatives-contract-specifications-g-sec（HTTP 200，355KB）
 - `nsearchives.nseindia.com` | 官方（NSE 官网文档归档子域） | en | curl 常规 UA 200，PDF 体积较大（3.2MB），用 `pdftotext -layout` 转纯文本再 grep 定位 | 存放规则/方法论类 PDF，与主站 `nseindia.com` 同属官方一手来源
   - Methodology Document for NIFTY Equity Indices（含 Nifty 50 基日/基点/加权方式/成分股筛选规则）PDF: https://nsearchives.nseindia.com/content/indices/Method_NIFTY_Equity_Indices.pdf（HTTP 200，3.2MB）
 - `sebi.gov.in` | 监管 | en | curl 常规 UA 200，未见反爬；页面是服务端渲染的传统多页站（非 SPA），正文可直接 grep，比同为监管机构域名的 `sec.gov`（美国，v0.2 时实测 403）好抓得多 | 印度证券交易委员会（SEBI），NSE 的政府监管机构；本节只用于确认监管机构身份与核心法律名称，具体规则条款优先引用 NSE 官网转载/说明页
@@ -288,6 +301,18 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 指数总览: https://www.szse.cn/market/exponent/pandect/index.html
   - 会员与交易类规则入口: https://www.szse.cn/lawrules/service/member/index.html
   - 关于下调股票交易经手费收费标准的通知（2023-08-18）: https://www.szse.cn/disclosure/notice/general/t20230818_602805.html
+  - 期权子网站首页（补全 market_structure.derivatives 时，2026-08-18 新增；`/option/` 路径下的公告详情页由服务端直出 HTML，与主站 `/lawrules/rule/...` 栏目的列表页不同——后者条目由前端 AJAX 异步加载（channelId 驱动的 CMS 组件），curl 拿不到列表内容，只能先 WebSearch 定位到具体 `t20YYMMDD_数字.html` 详情页直链，再用 curl 抓该详情页取得附件 PDF 真实链接；这是本次定位到期权交易规则原文 PDF 的关键方法）: https://www.szse.cn/option/
+  - 期权业务规则列表页（服务端直出，可直接 curl 拿到各条目详情页链接，与上条同一发现）: https://www.szse.cn/option/rules/optrules/
+  - 关于发布《深圳证券交易所股票期权试点交易规则》的通知（附件为交易规则原文 PDF，见下一条）: https://www.szse.cn/option/rules/optrules/t20191207_572478.html
+  - 深圳证券交易所股票期权试点交易规则（2019-12-07 发布，深证上〔2019〕800号，自发布之日起施行；本次 WebSearch 直接搜索该文件名多次未命中，最终通过上面的官方通知详情页取得附件真实链接；规则原文未见「XXXX年修订」字样，且未搜到任何后续修订通知，视为现行有效版本，但下次会话如需再次引用建议先按 SOURCES.md 开头教训 3 的方法重新探测一遍）PDF: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf ← market_structure.derivatives 除保证金公式外的绝大部分字段（交易时段/开收盘机制/撮合原则/订单类型/最小报价单位/涨跌停公式/熔断/交易异常情况处置/大宗交易/做市商）出处
+  - 深圳证券交易所 中国证券登记结算有限责任公司股票期权试点风险控制管理办法（第十四-二十条为开仓/维持保证金计算公式，ETF为标的12%/7%、股票为标的21%/10%与19%/10%两套）PDF: http://docs.static.szse.cn/www/option/rules/optrules/W020191207433397366259.pdf ← market_structure.derivatives.margin_practice_note 主要出处
+  - 关于嘉实沪深300ETF期权合约品种上市交易有关事项的通知（沪深300ETF期权2019-12-23上市、持仓限额分级表）: https://www.szse.cn/option/rules/optrules/t20191219_572722.html
+  - SZSE English — CSI 300 ETF Options（英文版合约条款页：合约乘数10,000/行权价间距表/涨跌停公式/保证金公式，均与上述中文来源交叉核对一致，仅作辅助佐证，未作为 derivatives 字段 quote 的主要来源，因 source_lang 为 zh）: https://www.szse.cn/English/products/options/etf/index.html
+- `investor.szse.cn` | 官方（深交所投资者教育／证券学院子站，与 szse.cn 同属深交所运营，页面均带"仅供投资者教育、不构成投资建议"免责声明） | zh | curl 常规 UA 200，未见反爬 | 补全 market_structure.derivatives 时（2026-08-18）新发现的官方来源；"期权入市手册"系列连载文章由深交所联合市场机构撰写，属"官网说明页"层级（非交易所规则原文本身），用于交易制度/做市商/风险控制等字段的补充与交叉印证
+  - 期权入市手册（十一）：深市期权交易制度（上）: https://investor.szse.cn/institute/rules/t20221108_597221.html
+  - 期权入市手册（十二）：深市期权交易制度（下）（合约单位10,000份的官方说明出处）: https://investor.szse.cn/institute/rules/t20221108_597223.html
+  - 期权入市手册（十三）：做市商制度: https://investor.szse.cn/institute/rules/t20221110_597273.html
+  - 期权入市手册（三十八）：交易所主要风险控制措施（下）（组合策略保证金/强行平仓触发机制）: https://investor.szse.cn/institute/rules/t20230227_598959.html
 - `english.szse.cn` / `szse.cn/English` | 官方（英文版） | en | 同域名下 `/English/` 路径，curl 常规 UA 200 | About Overview 与 Trading Overview 两页内容较薄，多为导航链接夹杂少量正文，摘引前需按关键词定位，不能直接取前 N 段
   - About Overview: https://www.szse.cn/English/about/overview/index.html
   - Trading Overview: https://www.szse.cn/English/services/trading/tradOverview/index.html
@@ -422,6 +447,21 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 市场波动性 FAQ（Extreme Trade Range / Enhanced Volatility Interruption 机制说明）: https://www.asx.com.au/markets/market-resources/market-volatility-faqs（HTTP 200，148KB）
   - S&P/ASX 指数体系 101（博客，官方对第三方编制指数的说明）: https://www.asx.com.au/blog/listed-at-asx/sandp-asx-indices-101（HTTP 200，160KB）
   - 开收盘机制改革说明（博客）: https://www.asx.com.au/blog/listed-at-asx/changes-to-equity-market-structure（HTTP 200，159KB）
+  - ASX 24衍生品市场（期货市场）总览页: https://www.asx.com.au/markets/trade-our-derivatives-market/futures-market （HTTP 200，152KB）
+  - ASX 24指数衍生品交易时段: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/index-derivatives （HTTP 200，133KB）
+  - ASX 24利率衍生品交易时段: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/interest-rate-derivatives （HTTP 200，136KB）
+  - ASX 24农产品衍生品交易时段: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/agricultural-derivatives （HTTP 200，134KB）
+  - ASX 24合约规格总表 PDF: https://www.asx.com.au/content/dam/asx/participants/derivatives-market/ird/asx24-contract-specifications.pdf （HTTP 200，649KB）
+  - ASX 24 Operating Rules 第三节 PDF: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-24-operating-rules/rules/ASX-24-Operating-Rules-Section-03.pdf （HTTP 200，369KB）
+  - ASX 24 Operating Rules 第四节（订单录入与交易）PDF: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-24-operating-rules/rules/ASX-24-Operating-Rules-Section-04.pdf （HTTP 200，602KB）
+  - ASX 24 Trading Platform Guide PDF: https://www.asx.com.au/content/dam/asx/participants/trading-platforms/futures/asx-24-trading-platform-guide.pdf （HTTP 200，1237KB）
+  - ASX Clear (Futures) 保证金参数表 PDF: https://www.asx.com.au/content/dam/asx/participants/clearing-and-settlement/margin-rates.pdf （HTTP 200，657KB）
+  - 保证金机制说明页（Margining）: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear/risk-management/margining （HTTP 200，149KB）
+  - ASX Clear (Futures)（期货结算公司专页）: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear-futures （HTTP 200，169KB）
+  - ASX Clear (Futures) SPAN保证金算例 PDF: https://www.asx.com.au/documents/clearing/asx-clear-futures-examples.pdf （HTTP 200，125KB）
+  - 做市商安排总览页（Market maker arrangements）: https://www.asx.com.au/markets/market-resources/market-maker-arrangements （HTTP 200，137KB）
+  - 指数衍生品做市商安排（含SPI 200期货期权）: https://www.asx.com.au/markets/market-resources/market-maker-arrangements/index-derivatives-market-maker-arrangements （HTTP 200，140KB）
+  - 利率衍生品做市商安排: https://www.asx.com.au/markets/market-resources/market-maker-arrangements/interest-rate-derivatives-market-maker-arrangements （HTTP 200，145KB）
 - `asic.gov.au` | 监管 | en | curl 常规 UA 200，未见反爬 | 澳大利亚证券及投资委员会（ASIC），ASX 的政府监管机构；RG 196 是卖空监管的权威监管指引原文
   - Regulatory Guide 196 - Short Selling PDF: https://download.asic.gov.au/media/4896780/rg196-published-8-october-2018.pdf（HTTP 200，702KB）
   - RG 196 索引页: https://www.asic.gov.au/regulatory-resources/find-a-document/regulatory-guides/rg-196-short-selling/（HTTP 200，66KB）
@@ -444,6 +484,9 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Indices Methodology 2024（指数方法论）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/93482491-9528-4979-8e6e-f11691e35bf6/Indices+Methodology+2024.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-93482491-9528-4979-8e6e-f11691e35bf6-o.tGnQ1
   - Market Making Regulations（做市商制度）PDF（⚠️ 文件名本身含半角括号"(2)"，URL 里必须用 `%282%29` 转义，否则 `tools/fetch.py` 的 `URL_RE` 会在半角 `)` 处截断——已实测转义后可正常抓取）: https://www.tadawulgroup.sa/wps/wcm/connect/2fc1a74f-4357-4843-9b50-0edbc06296b3/Market+Making+Regulations+%282%29.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-2fc1a74f-4357-4843-9b50-0edbc06296b3-oqd5Wba
   - Derivatives Market Brochures（衍生品市场介绍）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/0e0e1657-e035-4172-a4e6-943c4dfce80d/Derivatives+Market+Brochures.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-0e0e1657-e035-4172-a4e6-943c4dfce80d-oW9oJ-.
+  - MT30 Index Futures Contract Specifications（MT30指数期货合约规格表：合约代码/合约乘数/最小变动价位/每日涨跌停/合约月份/结算方式/交易时段等）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/f5716373-65f9-4a6c-961c-f1f76f351138/MT30.pdf?MOD=AJPERES&CVID=pmfpIF7（HTTP 200）
+  - Derivatives Exchange Trading and Membership Procedures（衍生品交易与会员程序：交易时段表/订单类型/订单条件/订单有效期/撮合原则与开盘价算法/涨跌停/协商交易/暂停机制等条文密度最高的单一衍生品来源）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp（HTTP 200）
+  - Derivatives Exchange Trading and Membership Rules（衍生品交易与会员规则：会员资格/做市商/保证金/协商交易/紧急情况等条款层级更高的规则文本，与上面的 Procedures 是同一体系的两份文件）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/89982883-848c-485e-9b94-5ef5ce0c27ce/Derivatives+Exchange+Trading+and+Membership+Rules+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-89982883-848c-485e-9b94-5ef5ce0c27ce-pfkI-F7（HTTP 200）
 - `cma.gov.sa` | 监管 | ar/en | curl + 常规 UA 全部 200，未见反爬 | 沙特资本市场管理局（Capital Market Authority, CMA），Saudi Exchange 的政府监管机构；官方确认域名是 `cma.gov.sa`（`.gov.sa` 而非旧域名 `cma.org.sa`，后者仍能 200 但已非最新权威站点，本次未采用）
   - About CMA: https://cma.gov.sa/en/AboutCMA/Pages/AboutCMA.aspx
   - Capital Market Law 索引页: https://cma.gov.sa/en/RulesRegulations/CMALaw/Pages/default.aspx
@@ -454,6 +497,7 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Settlement 服务页: https://www.edaa.sa/wps/portal/edaa/services/memberservices/settlement?locale=en
 - `muqassa.sa` | 官方（证券清算中心，Saudi Tadawul Group 旗下子公司，CCP） | en | curl + 常规 UA 200，未见反爬 | 首页含公司成立年份（2018）与最新公告列表，本身即含正文，未见明显反爬
   - 首页: https://www.muqassa.sa/wps/portal/muqassa/home
+  - Derivatives Index Brochure（MT30指数期货合约规格与保证金乘数表，含Institutions/Tier1 Individual/Tier2 Individual三档保证金乘数）PDF: https://www.muqassa.sa/wps/wcm/connect/6a41fc1e-3ace-40de-a42c-9c1ac8ec97bc/Derivatives_Index_Brochure_Digital_EN.pdf?MOD=AJPERES&CVID=oMhahw8（HTTP 200）
 - `annualreport2018.tadawul.com.sa` | 官方（2018 年度报告站点存档，静态站点，非现行 WebSphere Portal 系统） | en | curl + 常规 UA 200，未见反爬；⚠️ 是历史存档页（2018年报），仅用于确认「2007年3月19日依据资本市场法第20条成立为股份公司」这条历史成立事实，不代表当前最新股权/上市结构（Tadawul 已于2021年改制为控股集团并完成IPO，见 regulation/overview 相关字段 detail 说明）
   - About Tadawul: https://annualreport2018.tadawul.com.sa/Resources/AnnualReport/company_profile/about_tadawul.html
 - `lw.com` | 第三方（Latham & Watkins 律所客户简报） | en | curl 常规 UA 200 | 用于确认 2026年2月1日起 CMA 取消 QFI（合格境外投资者）制度、开放主板予全体外资，但保留外资合计49%上限与单一外资10%上限的监管改革；`confidence` 标 medium——已尝试在 `cma.gov.sa` 站内寻找对应官方公告/新规则 PDF 未果（本次 WebSearch 配额已用尽，下次有空应补找 CMA 官方原文，见 OPEN-QUESTIONS）
@@ -474,6 +518,18 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Designation of Administrative Issues and Delisting Criteria for the KOSPI Market（退市/管理股条件全表，含未提交定期报告/审计意见/资本侵蚀/股权分散/交易量/公司治理/不实披露/营收/市值等逐项标准，含2026-2028年过渡期门槛）: https://global.krx.co.kr/contents/GLB/03/0303/0303050500/GLB0303050500.jsp（HTTP 200，138KB）
   - Listing Requirements for the KOSDAQ Market（KOSDAQ量化上市标准，标准企业/技术成长企业双轨制，含KONEX转板快速通道5条track）: https://global.krx.co.kr/contents/GLB/03/0303/0303060200/GLB0303060200.jsp（HTTP 200，131KB）
   - ETF Taxation Regulation（"证券交易税(0.3%)对ETF不适用"的表述，间接确认一般股票证券交易税税率；该页聚焦ETF豁免场景，未见明确标注版本/生效日期，作为一般股票税率引用时降级为medium）: https://global.krx.co.kr/contents/GLB/06/0605/0605010103/GLB0605010103.jsp（HTTP 200，123KB）
+  - ⚠️ 以下新增条目为补齐 market_structure.derivatives（衍生品市场机制）子块所抓，2026-08-18；导航路径提示：`main/main.jsp` 静态 HTML 里全站菜单含逐级 `data-menu-id` 标注，比逐栏目试探更快定位「KRX Market」（02/0201，产品规格）与「Regulation」（06/0603，衍生品交易规则）两个分支下的具体子页
+  - Guide to Night Session in KRX Derivatives Market（PDF，2025年4月，KRX衍生品市场官方发布，覆盖夜盘交易时段/挂单价格限制分级表/实时价格限制/交易暂停分类/做市商制度/会员保证金双重计算等，信息密度最高的衍生品单一来源；同时确认KRX已于2025年6月转为自主运营夜盘、原CME/Eurex联动已终止，与本文件顶层night_session字段所述旧联动模式不一致，见data/exchanges/kr-krx.yml的detail说明与OPEN-QUESTIONS新增条目）: https://global.krx.co.kr/contents/GLB/02/0201/0201041003/Guide_to_Night_Session_in_KRX_Derivatives_Market.pdf（HTTP 200，2.4MB，pdftotext转出偶有"Missing 'endstream'"语法警告但正文可正常提取）
+  - KRX Market ‧ Derivatives ‧ Stock Index ‧ KOSPI 200 Futures（产品规格表：标的/合约规模/挂牌月份/交易时段/最小报价单位/最后交易日/最终结算/涨跌停分级/持仓限额）: https://global.krx.co.kr/contents/GLB/02/0201/0201040201/GLB0201040201.jsp（HTTP 200，124KB）
+  - KRX Market ‧ Derivatives ‧ Stock Index ‧ KOSPI 200 Options（产品规格表，另含周期权/行权价间距/欧式行权）: https://global.krx.co.kr/contents/GLB/02/0201/0201040202/GLB0201040202.jsp（HTTP 200，127KB）
+  - Regulation ‧ Derivatives ‧ Order Types（限价/市价/限价转收盘价/即时可执行限价四类申报与FOK/IOC条件定义）: https://global.krx.co.kr/contents/GLB/06/0603/0603010200/GLB0603010200.jsp（HTTP 200，121KB）
+  - Regulation ‧ Derivatives ‧ Trading Hours（常规时段按产品类别分组的开盘/连续/收盘集合竞价时刻表，另附夜盘时刻表与夜盘可交易10品种清单）: https://global.krx.co.kr/contents/GLB/06/0603/0603010300/GLB0603010300.jsp（HTTP 200，125KB）
+  - Regulation ‧ Derivatives ‧ Method of Trade Execution（个别竞价价格/时间优先原则、集合竞价与连续交易定义、协商大宗交易适用品种与例外、EFP机制；⚠️ 此页未出现在主导航菜单，是从「Order Placement」页(0603010600)按URL序号规律试探到的相邻页0603010700，登记备查）: https://global.krx.co.kr/contents/GLB/06/0603/0603010700/GLB0603010700.jsp（HTTP 200，125KB）
+  - Regulation ‧ Derivatives ‧ Margin ‧ Definition（客户保证金/会员保证金定义与可充抵保证金的外币种类）: https://global.krx.co.kr/contents/GLB/06/0603/0603011001/GLB0603011001.jsp（HTTP 200，122KB）
+  - Regulation ‧ Derivatives ‧ Margin ‧ Customer Margin（委托保证金与既有部位保证金计算逻辑）: https://global.krx.co.kr/contents/GLB/06/0603/0603011002/GLB0603011002.jsp（HTTP 200，125KB）
+  - Regulation ‧ Derivatives ‧ Margin ‧ Member Margin（引入夜盘后会员保证金每日两次计算、缴纳截止时间由12:00缩短至11:00、120%/500亿韩元触发补缴阈值）: https://global.krx.co.kr/contents/GLB/06/0603/0603011003/GLB0603011003.jsp（HTTP 200，122KB）
+  - Clearing/Settlement ‧ Margin Management ‧ Exchange Market — Types and Composition of Margin（KRX按标的资产分组计算组合净风险保证金的方法论总览，PC COMS教学软件）: https://global.krx.co.kr/contents/GLB/06/0608/0608030101/GLB0608030101.jsp（HTTP 200，126KB）
+  - KRX Market ‧ Derivatives ‧ List of Products（衍生品全品种清单，按标的资产分股指/个股/ETF/利率/货币/商品六组，并标注夜盘可交易品种）: https://global.krx.co.kr/contents/GLB/02/0201/0201040101/GLB0201040101.jsp（HTTP 200，126KB）
 - `www.krx.co.kr`（韩文版官网首页） | 官方（韩文版） | ko | curl 常规 UA 200，未见反爬；本次仅取 `<title>` 标签确认官方韩文名称，未深入抓取韩文正文内容（本项目 source_lang 判定为 en，韩文版仅用于确认 native name，不作为事实来源） | `<title>` 标签内容为「한국거래소」，即 KRX 官方韩文名称
   - 首页（仅用于确认 `<title>` 韩文名称）: http://www.krx.co.kr/main/main.jsp（HTTP 200，186KB）
 - `elaw.klri.re.kr`（韩国法制研究院官方英译法律数据库） | 监管（政府法律译本） | en | curl 常规 UA 200，单页 4.8MB（含该法历年全部修正版本堆叠在同一页，需按关键词/条号 grep 定位，不要整页阅读）| 《资本市场与金融投资业法》(Financial Investment Services and Capital Markets Act, FSCMA) 官方英译全文，现行版本 20260306。第1条：立法目的；第373条：无许可不得设立市场；第373-2条：设立交易所须获金融委员会（Financial Services Commission, FSC）许可，且须为《商法》下的股份有限公司（stock company）；第297/378/393/394/397/399/400条：交易所本身担任证券与衍生品市场清算机构/CCP的法律依据
@@ -494,8 +550,16 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Euronext Rule Book Book I: Harmonised Rules（适用自2026-06-29版）PDF: https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf（HTTP 200，913KB；含 Rule 1.7 Governing Law 七法域分述条款、Chapter 2 Euronext Membership 会员资格条款、术语表里各 Market Undertaking 法律实体全称）
   - Notice n°4-01 Trading Manual（生效日2025-12-08）PDF: https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf（HTTP 200，599KB；开盘/收盘集合竞价机制、连续交易撮合原则细节，不含逐市场标准时刻表）
   - Euronext Cash Markets Trading Fee Guide（生效日2026-09-01）PDF: https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf（HTTP 200，642KB；标准股票交易费两种计价方式——按已执行订单笔数阶梯收费 + 按成交金额阶梯bps收费）
-- `live.euronext.com` | 官方（面向投资者的产品/行情子站，与 euronext.com 同集团不同子域名） | en | curl 常规 UA 200 | 用于确认旗舰指数清单（自编：AEX/CAC 40/BEL 20/ISEQ 20/PSI/OBX；FTSE MIB 由第三方 FTSE Russell 编制，未在本页出现，是唯一非自编的旗舰指数）
+  - Euronext Derivatives Markets: Trading Procedures（生效2025-02-25，衍生品交易机制正文——价格/成交量限制、动态静态区间、每日结算价、订单类型、撮合优先原则、大宗交易LiS/EFS/EOO/Against Actuals等场外设施）PDF: https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf（HTTP 200，398KB）
+  - Euronext Derivatives Markets Annexe One of the Trading Procedures - Trading Arrangements（更新2026-06-29，逐合约交易时段/撮合优先原则/LiS门槛适用范围对照表，覆盖阿姆斯特丹/布鲁塞尔/里斯本/米兰/奥斯陆/巴黎六个衍生品市场，不含都柏林）PDF: https://www.euronext.com/sites/default/files/2026-06/Euronext%20Trading%20Procedures%20-%20Annexe%20One%20-%20EN%20-%2020260629.pdf（HTTP 200，707KB）
+  - Euronext Clearing Risk Management（官网，权益/权益衍生品/FIRE政府债/商品衍生品的VaR类与SPAN类保证金方法论说明）: https://www.euronext.com/en/clearing/risk-management（HTTP 200，426KB）
+  - Fixed Income Derivatives 现行产品页（BTP/OAT/Bund/BONO迷你期货，米兰市场挂牌，合约规模€25,000）: https://www.euronext.com/en/for-investors/financial-derivatives/fixed-income（HTTP 200，254KB）
+  - Euronext successful expansion of Euronext Clearing to all Euronext financial derivatives markets（新闻稿，2024-09-17，确认Euronext Clearing于2024年9月取代LCH S.A.成为全部衍生品市场CCP）: https://www.euronext.com/en/about/media/euronext-press-releases/successful-expansion-euronext-clearing-all-euronext-financial（HTTP 200，403KB）
+- `live.euronext.com` | 官方（面向投资者的产品/行情子站，与 euronext.com 同集团不同子域名） | en | curl 常规 UA 200 | 用于确认旗舰指数清单（自编：AEX/CAC 40/BEL 20/ISEQ 20/PSI/OBX；FTSE MIB 由第三方 FTSE Russell 编制，未在本页出现，是唯一非自编的旗舰指数）；⚠️ 该子域名下 `/en/products/...` 等目录页多为JS渲染的前端应用外壳，curl抓到的静态HTML里没有实质内容（仅导航栏），本次未采用，只用 `/media/` 路径下可直接下载的PDF
   - Stock Indices: https://live.euronext.com/en/products/indices（HTTP 200，354KB）
+- `connect.euronext.com` | 官方（面向会员/技术对接方的文档托管子域名，与 euronext.com 同集团） | en | curl 常规 UA 200 | 托管衍生品市场的技术性通知（Info-Flash）与详细的会员培训文档（"How the Market Works"），比 euronext.com 正文页更细颗粒度，衍生品合约规格/跳动点表机制/做市商角色体系等细节主要来自此域名
+  - Euronext Derivatives – How the Market Works（v5.4，2025，114页会员培训文档，含Optiq Tick Table机制、Market Making框架MMA/MMS/MME角色、Nord Pool电力衍生品到期结算价说明等章节）PDF: https://connect.euronext.com/sites/default/files/it-documentation/Euronext%20Derivatives_How%20the%20Market%20Work_v5.4.pdf（HTTP 200，1.9MB）
+  - Euronext Derivatives – Introduction of Fixed Income Derivatives on main European government bonds（Info-Flash，2024-12-16，BTP/OAT/Bund/BONO迷你期货上线前技术通知，Appendix含拟议合约规格表——合约规模/跳动点位/到期月序列/可交割券标准；⚠️ 原文标注为"proposed"规格，产品已于2025-09正式上线，主要参数经现行产品页交叉核实一致）PDF: https://connect.euronext.com/sites/default/files/2024-12/IF241216DE%20Euronext%20Derivatives%20%E2%80%93%20Introduction%20of%20Fixed%20Income%20Derivatives%20on%20main%20European%20government%20bonds.pdf（HTTP 200，165KB）
 ### 约翰内斯堡证券交易所 Johannesburg Stock Exchange (JSE) `za-jse`
 - `jse.co.za` | 官方 | en（南非无为JSE本身立法声明的"官方语言"，但全部规则/上市文件/技术规范均只有英文版，未见南非其他官方语言的对照版本，与美股NYSE同理按实际使用语言取 official_languages: [en]） | curl 常规 UA 全部 200，全程未见反爬/限流，比 sec.gov/saflii.org 好抓得多 | 官网横跨三个子域名：`www.jse.co.za`（产品/服务介绍页）、`group.jse.co.za`（集团概况、历史沿革、投资者关系）、`clientportal.jse.co.za`（规则文档/市场通知/技术规格 PDF 的实际托管域名，很多深层 PDF 链接指向这里，三者按 `validate.py` 的域名后缀匹配规则统一登记为 `jse.co.za` 一条即可覆盖）。⚠️ 部分关键 PDF（如权益市场交易时段表、熔断阈值表）正文数据是图片渲染，`pdftotext -layout` 抓不出表格数字；换成同信息的另一份《交易信息系统概念培训》PDF（`Conceptual Training_v2.pdf`）才拿到可摘引的纯文本版本（含 ZA01/ZA02 分段的静态/动态熔断阈值百分比表），这是本次抓取里唯一能完整摘引熔断具体数值的来源，下次抓类似"阈值表"类内容时优先找培训/说明类文档而非官方摘要通知
   - 首页: https://www.jse.co.za/
@@ -516,6 +580,16 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 交易信息系统概念培训（含交易时段表与ZA01/ZA02熔断阈值百分比表的纯文本版）PDF: https://clientportal.jse.co.za/Content/JSE%20Technology%20Document%20Items/Equity%20Market_Trading%20%20Information%20System_Conceptual%20Training_v2.pdf
   - 上市规则（简化版，2025年12月）PDF: https://www.jse.co.za/sites/default/files/media/documents/jse-listings-requirements-simplified/JSE_Listings_Requirements_Simplified_Final_@_12_December_2025_Final.pdf
   - 权益市场指引（Equities Directives）PDF: https://www.jse.co.za/sites/default/files/media/documents/equities-directives/Equities%20Directives.pdf
+  - 衍生品市场总览（2026-08-18补充抓取，补齐market_structure.derivatives子块）: https://www.jse.co.za/trade/derivative-market
+  - 利率衍生品概览（含Jibar期货/掉期期货/债券期货期权说明）: https://www.jse.co.za/trade/derivative-market/interest-rate-derivatives
+  - 衍生品规则（Derivatives Rules，2019年4月29日版，含保证金8.60/9.20条、场外协商交易7.114/7.115条、监管性停牌7.190条）PDF: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Trade/Derivative%20Market/Derivatives%20Market/DerivativesRules.pdf
+  - 衍生品市场交易信息总览（Volume 00D，v2.04，2026年5月28日版，含交易时段/订单类型/熔断阈值表，112页；⚠️WebSearch摘要给出的clientportal旧版直链v2.03已失效，改经 clientportal.jse.co.za/technical-library/trading-and-market-data-documentation 落地页定位到当前版本v2.04）PDF: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000D%20-%20Trading%20and%20Information%20Overview%20for%20Derivative%20Markets%20v2.04.pdf
+  - 权益衍生品市场交易时段 PDF: https://clientportal.jse.co.za/Content/JSE%20Trading%20Dates%20and%20Calendars%20Items/EquityDerivativesTradingHours.pdf
+  - 货币衍生品市场交易时段 PDF: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Currency%20Derivatives/Currency%20Derivatives%20Trading%20Hours.pdf
+  - 指数期权做市商计划说明页: https://www.jse.co.za/trade/derivatives-market/equity-derivatives/market-making-index-options
+  - 股指期货合约规格Fact Sheet（2012年8月版，ALSI/Mini等FTSE/JSE Top40系列期货；⚠️年代较久，本次未找到更新版本，合约乘数/最小变动单位等结构性事实按medium confidence处理）PDF: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Equity%20Index%20Futures/ContractSpecifications.pdf
+  - SAFCOM保证金方法论说明（Portfolio Scanning模型概述，2012年10月版）PDF: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Post%20Trade%20Services/Regulatory%20Compliance/SAFCOM%20Margin%20Methodology.pdf
+  - JSE Clear保证金方法论（JSPAN算法，2019年2月版）PDF: https://www.jse.co.za/sites/default/files/media/documents/2020-08/JSE%20Clear%20Margin%20Methdology.pdf
 - `fsca.co.za` | 监管 | en | curl 常规 UA 200 | 金融部门行为监管局（Financial Sector Conduct Authority），南非"双峰"（Twin Peaks）监管架构下的市场行为监管方，2018年由原金融服务局（FSB）改制而来
   - 关于我们: https://www.fsca.co.za/about-us/
 - `strate.co.za` | 官方（中央证券存管机构） | en | curl 常规 UA 200（575KB，内容较厚） | Strate Limited，南非法定中央证券存管机构（CSD），负责JSE现货证券市场的电子结算
@@ -559,6 +633,12 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - B3 Trading Procedures Manual（业务规程手册全文PDF，含价格限制/交易时段/订单类型等条款编号）: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf（HTTP 200，6.6MB，PDF文件名含空格已用%20编码，无括号无需%28%29）
   - Novo Mercado Listing Regulation（Novo Mercado板块规则全文PDF，官方英文译本，标注"free translation"）: https://www.b3.com.br/data/files/43/E0/16/EF/F348F41054E072F492D828A8/SITE-NM-Listing-Regulation-2011.pdf（HTTP 200，416KB；⚠️ PDF首页自称"free translation"，与 SSE/JPX 类似的翻译免责声明，进一步佐证只把它当英文对照而非独立法律文本）
   - Guide for Nonresident Investors（外资投资指南PDF，含CMN 4.373账户开户流程）: https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf（HTTP 200，1.7MB）
+  - Trading Hours – Derivatives, Indices（衍生品交易时段表·股指/利率分类：Ibovespa期货FUT IND、迷你指数期货FUT WIN、S&P 500期货FUT ISP/WSP等逐合约开盘/收盘/电子集合竞价时刻表，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/indices/（HTTP 200）
+  - Trading Hours – Derivatives, Single Stock and Units Futures（衍生品交易时段表·个股/份额期货分类，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/single-stock-and-units-futures/（HTTP 200）
+  - Ibovespa Futures（产品页标题为"Ibovespa Futures"，正文实际详述迷你指数期货WIN合约规格/保证金/每日盯市结算算例，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/ibovespa-futures.htm（HTTP 200）
+  - Futures Market（期货市场总览：利率/汇率/股指/大宗商品四大品类及对应ticker，多数合约现金结算少数实物交割，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/futures-market.htm（HTTP 200）
+  - Options on Ibovespa（Ibovespa指数期权合约规格：欧式行权、到期日自动履约规则，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/options-on-ibovespa.htm（HTTP 200）
+  - Stock Futures（个股期货合约规格：现金结算、最小报价单位0.01点，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/stock-futures.htm（HTTP 200）
 - `www.gov.br` | 监管 | pt-BR / en | curl 常规 UA 200，未见反爬 | 巴西证券监督管理机构 Comissão de Valores Mobiliários（CVM，证券委员会）在联合政府门户 gov.br 下的英文栏目，B3 的政府监管机构；本条目仅登记 `www.gov.br` 而非更宽泛的 `gov.br`，因为实际抓取到的 URL netloc 就是 www 子域
   - CVM 英文首页: https://www.gov.br/cvm/en（HTTP 200）
 - `bsmsupervisao.com.br` | 官方（B3自律监管子机构） | pt-BR / en | curl 常规 UA 200 | BSM Supervisão de Mercados，2007年由B3（原BM&FBOVESPA）设立的自律组织，负责对B3管理的市场及参与者进行一线监督、稽查与纪律处分，受CVM监督

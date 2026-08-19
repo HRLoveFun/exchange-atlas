@@ -66,3 +66,5 @@
 | 最大可执行数量原则 | Principle of Highest Executable Volume |  | SIX瑞士交易所集合竞价定价原则——按能撮合出最大成交量的单一价格确定开/收盘价；与Eurex"Netting"流程（同样以最大撮合量定价）是同一类集合竞价定价逻辑在不同交易所的对应表述，比较时可互相参照 |
 | 远程会员 | Remote Member |  | 境外证券商无需在本地设立实体、经监管机构授权即可直接成为交易所交易参与者的会员类别；SIX瑞士交易所（FINMA授权）是本项目首个明确记录该制度的样本，日后遇到其他交易所的同类"跨境直接会员"安排应统一使用这一译法比较 |
 | 属地监管机关 | Competent State Authority |  | 德国/瑞士等联邦制国家里，交易所设立与运作的监管职能可能落在邦/州一级（如Eurex的黑森州监管机关），而非全国性金融监管总局；与"金融业务行为监管"（如BaFin/FINMA）是两个不同层面的监管，比较跨国交易所监管框架时注意区分 |
+| SPAN组合保证金算法 | Standard Portfolio Analysis of Risk (SPAN) | en: Standard Portfolio Analysis of Risk (SPAN) | 芝加哥商业交易所（CME）研发并授权他方使用的具名组合保证金算法——以16档标准风险情景（价格扫描区间×波动率扫描区间）估算组合单日最大潜在亏损；与更泛化的"组合保证金"（见 portfolio-margining）是属种关系，SPAN是其中一种具体、可被不同交易所直接引用或做"兼容"改造的实现（in-nse 的 NSCCL SPAN 直接使用该算法；hk-hkex 的 PRiME 系统自称"SPAN兼容"但并非同一系统），比较不同交易所保证金方法论时注意区分"直接用SPAN"与"仅兼容SPAN" |
+| （衍生品）操作区间 | Operating Range | en: Operating Range | in-nse 衍生品分部特有概念——不是严格意义的每日涨跌停（无硬性上下限），而是防止错价申报的订单过滤区间，超出区间的委托会被判定为"价格冻结"（price freeze）而非直接拒绝，区间本身可在盘中被放宽；与 static-dynamic-reference-price（熔断判定基准价）概念相关但用途不同——后者用于触发熔断，前者用于筛掉单笔错价委托，两者不合并 |

@@ -420,6 +420,240 @@ market_structure:
     zh: ""
     confidence: low
 
+  # ─── 衍生品市场机制（如适用）2026-08-18 新增，见 schema/taxonomy.yml market_structure.derivatives
+  # 与 PROJECT/DECISIONS.md [ADR-019]。以上顶层字段描述的是本所现货证券市场；本节描述的是同一法人
+  # 实体（Saudi Exchange Company）自身运营、受《衍生品交易与会员规则》（Derivatives Exchange Trading
+  # and Membership Rules）与《衍生品交易与会员程序》（...Procedures）管辖的衍生品交易系统（Derivatives
+  # Trading System）——两份规则文本明确排除现货市场规则适用于挂牌衍生品（Rules Article 1(d)）。目前
+  # 本所唯一已上市衍生品产品为 MT30 指数期货（tadawul-mt30-futures，见 products 章节），故本节字段
+  # 取值均以该产品为样本；官方文本预留了未来新增单一股票期货/期权（SSF/SSO）的框架条款，届时如与
+  # 本节现有取值不同需另行核实更新。
+  derivatives:
+    trading_sessions:
+      pre_market:
+        zh: "第一时段（开盘前集合竞价 Pre-Open / Opening Auction）09:00–09:30"
+        en: "First Session: Pre-Open (Opening Auction) 09:00–09:30"
+        sources:
+          - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+            url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+            accessed: 2026-08-18
+        quote: "First Session: Pre-Open (Opening Auction) 09:00 – 09:30"
+        confidence: high
+      continuous_am:
+        zh: "第二时段（连续交易 Market Open - Trading，全天单一连续时段）9:30–15:30"
+        en: "Second Session: Market Open - Trading 9:30–15:30"
+        sources:
+          - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+            url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+            accessed: 2026-08-18
+        quote: "Second Session: Market Open - Trading 9:30 – 15:30"
+        confidence: high
+      lunch_break:
+        zh: "无午休；第二时段为单一连续交易时段，与现货市场结构一致"
+        sources:
+          - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+            url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+            accessed: 2026-08-18
+        confidence: medium
+        detail: "Table(1)交易时段表仅列三段（开盘前/连续交易/休市），未见独立午休时段，属对表格结构的推断而非直接原文陈述，故标 medium 而非 high。"
+      continuous_pm:
+        zh: "同第二时段（9:30–15:30为单一连续交易时段，未按上午/下午拆分）"
+        sources:
+          - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+            url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+            accessed: 2026-08-18
+        confidence: medium
+      after_market:
+        zh: "第三时段（休市 Market Closed）15:30–16:00：不可新增/撮合订单，仅允许修改订单有效期、撤单、停用挂单"
+        en: "Third Session: Market Closed 15:30–16:00 (no new orders or matching; only order-validity amendment, cancellation, and deactivation are allowed)"
+        sources:
+          - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+            url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+            accessed: 2026-08-18
+        quote: "Third Session: Market Closed 15:30 – 16:00 ... When market is closed Derivatives Exchange Members may amend order validity and cancel orders; and they may deactivate outstanding orders during the Second and Third sessions."
+        confidence: high
+      night_session:
+        zh: "无独立夜盘/收市后交易时段；官方交易时段表仅列三个时段（开盘前、连续交易、休市），未见类似港交所AHT的延伸交易安排"
+        sources:
+          - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+            url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+            accessed: 2026-08-18
+        confidence: medium
+        detail: "与 hk-hkex.derivatives.night_session（设有收市后交易时段 AHT）不同，本次抓取的《衍生品交易与会员程序》Table(1)仅列三个时段，未见延伸交易时段的官方说明，如实按无处理。"
+
+    holidays_note:
+      zh: "周日至周四交易，遇王国官方节假日休市，与现货市场规则一致"
+      en: "Traded Sunday to Thursday, closed on official Kingdom holidays"
+      sources:
+        - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+          accessed: 2026-08-18
+      quote: "Listed Derivatives products are traded from Sunday to Thursday, except for official holidays in the Kingdom."
+      confidence: high
+
+    opening_mechanism:
+      zh: "第一时段（09:00–09:30）开盘前集合竞价：以能撮合最大成交量的价位作为理论开盘价，若剩余量相同再按买卖不平衡方向取最优价或均价（四舍五入至最小价位）；市场于09:30:00–09:30:30区间内随机时点开盘揭示（uncross）；第一时段最后一次理论开盘价即为正式开盘价"
+      en: "First Session (09:00–09:30) Opening Auction: the price at which the maximum quantity might trade is assigned as the Theoretical Opening Price, with tie-breaking by minimum residual and imbalance direction; the market opens and uncrosses at a random point between 09:30:00 and 09:30:30; the last Theoretical Opening Price of the First Session becomes the Opening Price"
+      sources:
+        - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+          accessed: 2026-08-18
+      quote: "Open: Opening of the market takes place by an auction for Futures and Options Contracts. The auction shall be based on the bids and asks entered during the Opening Auction. The market will open and uncross on a variable basis between 09:30:00am and 09:30:30am every Trading Day. ... The Derivatives Trading System will assign a price at which the maximum quantity of Listed Derivatives Products might be traded. ... The last Theoretical Opening Price of the First Session will be the Opening Price, provided that it is formed with orders that, when matched, result in at least one trade on the Main Market."
+      confidence: high
+
+    closing_mechanism:
+      zh: "无独立收盘集合竞价；收盘价即最后成交价（Last Traded Price, LTP）；15:30后进入休市状态（Third Session: Market Closed，至16:00）"
+      en: "No separate closing auction; Close is the Last Traded Price (LTP); the market enters the Third Session (Market Closed) from 15:30 to 16:00"
+      sources:
+        - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+          accessed: 2026-08-18
+      quote: "Close: Last traded price (LTP). ... Third Session: Market Closed 15:30 – 16:00"
+      confidence: high
+
+    matching_principle:
+      zh: "按价格与时间优先原则撮合：买盘价格从高到低、卖盘价格从低到高享有优先权；同价位按进入交易系统的时间先后排序；市价盘始终享有最高优先权"
+      en: "Matching takes place based on price and time priority: the highest buy order prices and the lowest sell order prices get the highest priority; orders at the same price are prioritized by entry time; market orders always receive the highest priority"
+      sources:
+        - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+          accessed: 2026-08-18
+      quote: "Intraday: Matching takes place based on price and time priority. ... The Derivatives Trading System assigns order priority based on price and time of entry to the Derivatives Trading System. It gives the highest buy order prices the highest priority. Conversely, it gives the lowest sell order prices the highest priority. ... The Derivatives Trading System always gives market orders the highest priority."
+      confidence: high
+
+    order_types:
+      zh: "限价盘（Limit Order）：若对手方有更优价格，系统按更优价成交，否则按限价成交；市价盘（Market Order）：第二时段内按当前最优价全部/部分成交，未成交部分转为限价盘；另设订单条件（Order Conditions）：FoK（全额成交否则撤单）、FaK（部分成交、未成交部分即撤）、Hidden Quantity（冰山单，每次仅披露部分数量）、Cancel on Disconnect（连线中断自动撤单）；订单有效期分四种：第一时段内有效、当日有效（Day，至第二时段结束）、GTC（最长30天）、GTD（可指定日期，最长30天）"
+      en: "Limit Order: executed at a better price when available on the opposite side, otherwise at the limit price; Market Order: executed partially or fully at the best price during the Second Session, with unmatched portions converted to limit orders; Order Conditions: FoK (full execution or cancel), FaK (partial execution, remainder cancelled), Hidden Quantity (iceberg, discloses only part of the quantity at a time), Cancel on Disconnect; Order Validity: First Session, Day (until end of Second Session), GTC (up to 30 days), GTD (a specified date, up to 30 days)"
+      sources:
+        - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+          accessed: 2026-08-18
+      detail: |
+        订单渠道（Order Channels，§6）另设六类：T（衍生品注册交易员专用）、I（客户网站/App自助下单）、
+        A（ATM）、V（电话）、S（短信）、G（算法交易自动化下单）。订单修改会影响优先级：修改价格/增加数量/
+        增加披露数量会丧失优先级，减少数量或仅修改有效期不丧失优先级（§11.1.3 Table 2）。
+      quote: "7.1.1 The Derivatives Trading System will improve the execution prices of limit orders (by reducing them for buyers or increasing them for sellers) whenever the price is better than the order's price limit on the opposite side ... In the absence of a better price on the opposite side, the order will be executed at the limit price. ... 7.2.2 During the Second Session, the Derivatives Trading System will execute market orders partially or fully at one price and convert the unmatched parts of partially matched market orders into limit orders at their traded prices. ... 8.1.1 Fill or Kill (“FoK”) means the complete order quantity must be executed as soon as it becomes available for matching; otherwise the order will be immediately cancelled ... 9.1.3 Good till Cancelled (“GTC”): means that orders are subject to full execution with a validity period of up to (30) days from the transmission of the order."
+      confidence: high
+
+    tick_size:
+      zh: "以现有唯一产品MT30指数期货为例：最小价格变动0.5点，每点价值50里亚尔（Minimum Price Fluctuation 0.5 points valued at SAR 50）；其余未来新增产品的最小变动价位将由各自的产品规格单独公布"
+      en: "MT30 Index Futures (the only listed product to date): Minimum Price Fluctuation is 0.5 points, valued at SAR 50 per point; tick sizes for future new products will be disclosed in their own Product Specifications"
+      sources:
+        - title: MT30 Index Futures Contract Specifications（Saudi Exchange 官方合约规格表 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f5716373-65f9-4a6c-961c-f1f76f351138/MT30.pdf?MOD=AJPERES&CVID=pmfpIF7
+          accessed: 2026-08-18
+      quote: "Minimum Price Fluctuation (Tick) / 0.5 points valued at 50"
+      confidence: high
+
+    contract_specs_note:
+      zh: "以MT30指数期货为例：产品代码SF30，标的为MT30（MSCI Tadawul 30指数）；合约乘数为SF30×100；可交易合约月份为当月、下月及其后两个季月；到期日为到期月第三个星期四（如遇非交易日顺延至前一交易日）；现金结算，T+0盯市/T+1划付变动保证金；投机性持仓限额为全部月份合计净多/净空10,000张合约（套保需求经交易所批准可突破限额）；报价精度2位小数；支持协商交易（Negotiated Deals）与做市商（Market Making）"
+      en: "MT30 Index Futures: Product Code SF30, underlying MT30 (MSCI Tadawul 30 Index); Contract Size = SF30 × 100; tradable Contract Months are the current month, next month, and the next two quarters; Contract Expiration Date is the third Thursday of the expiry month (or the preceding trading day if that is not a trading day); cash-settled, T+0 mark-to-market with T+1 variation margin payment; Speculative Position Limit is 10,000 contracts net long/short across all months combined (hedgers may exceed this with Exchange approval); Price Decimals 2; Negotiated Deals and Market Making both supported"
+      sources:
+        - title: MT30 Index Futures Contract Specifications（Saudi Exchange 官方合约规格表 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f5716373-65f9-4a6c-961c-f1f76f351138/MT30.pdf?MOD=AJPERES&CVID=pmfpIF7
+          accessed: 2026-08-18
+      quote: "Product Code / SF30 ... Underlying Index / MT30 (MSCI Tadawul) ... Contract Size / SF30 multiplied by 100 ... Contract Months / Current month, next month and the next two quarters. ... Contract Expiration Date / The third Thursday of the expiry month. ... Speculative Position Limit / The maximum allowable net long or net short position across all months is 10,000 contracts. ... Settlement / Cash settled, T+0 ... Price Decimals / 2 ... Negotiated Deals / Yes ... Market Making / Yes"
+      confidence: high
+
+    price_limits:
+      type:
+        enum: percentage_band
+        zh: "固定百分比涨跌幅限制（Daily Fluctuation Limit）：以官方公布的每日涨跌幅参数设定买卖区间，基准价为前一交易日的每日结算价（新合约首个交易日为理论期货价格）；超出区间的订单直接被交易系统拒绝执行，不设盘中动态再拍卖/冷静期"
+        en: "Fixed-percentage Daily Fluctuation Limit set against a reference price (the previous Trading Day's daily settlement price, or the theoretical futures price on a new contract's first day); orders priced outside the band are simply rejected by the Trading System, with no intraday re-auction or cooling-off mechanism"
+        sources:
+          - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+            url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+            accessed: 2026-08-18
+        quote: "15.1.1 ... the Exchange only allows order execution on Listed Derivatives Products at a price within the daily fluctuation limits. The Exchange sets these limits against the reference price and they remain valid during the Trading Day. ... 15.1.3 The reference price for any other Trading Day is the previous Trading Day's daily settlement price, including any other adjustments, when applicable."
+        confidence: high
+      main_board:
+        zh: "MT30指数期货：±20%（Daily Price Limits 20%）"
+        en: "MT30 Index Futures: ±20% (Daily Price Limits 20%)"
+        sources:
+          - title: MT30 Index Futures Contract Specifications（Saudi Exchange 官方合约规格表 PDF，经 tadawulgroup.sa 分发）
+            url: https://www.tadawulgroup.sa/wps/wcm/connect/f5716373-65f9-4a6c-961c-f1f76f351138/MT30.pdf?MOD=AJPERES&CVID=pmfpIF7
+            accessed: 2026-08-18
+        quote: "Daily Price Limits / 20 %"
+        confidence: high
+      other_boards:
+        zh: ""
+        confidence: low
+        detail: "本所衍生品市场目前仅 MT30 指数期货一条产品线（见 products 章节），无其他板块/品类可比较；官方规则文本预留了未来新增单一股票期货/期权（SSF/SSO）的框架，届时如涨跌幅参数不同需另行核实补充，不为凑填而假设。"
+
+    circuit_breaker:
+      enum: none
+      zh: "未见独立的熔断/触发式停牌机制；波动控制仅依赖每日涨跌幅限制（详见 price_limits 字段），超出区间的订单被系统直接拒绝，不触发停牌或再拍卖，属硬性价格区间而非『触发-暂停-恢复』意义上的熔断"
+      en: "No separate circuit-breaker or triggered trading-halt mechanism was found; volatility control relies solely on the Daily Fluctuation Limit (see price_limits) — orders outside the band are simply rejected by the system rather than triggering a halt or re-auction, making this a hard price band rather than a trigger-pause-resume circuit breaker"
+      detail: "与现货市场『静态限制±10%触发5分钟波动性拍卖』（见顶层 circuit_breaker/volatility_interruption 字段）不同，衍生品规则文本（Procedures §15、Rules Article 28）均只描述『不允许超出涨跌幅区间的订单成交』，未见任何冷静期/再拍卖条款；如实按 none 处理，避免像 hk-hkex 那样借用不完全贴合的枚举值凑数。"
+      sources:
+        - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+          accessed: 2026-08-18
+      quote: "15.1.1 ... the Exchange only allows order execution on Listed Derivatives Products at a price within the daily fluctuation limits."
+      confidence: high
+
+    volatility_interruption:
+      zh: ""
+      confidence: low
+      detail: "本次抓取的《衍生品交易与会员规则》与《衍生品交易与会员程序》全文均未见类似现货市场『波动性拍卖（Volatility Auction）』的盘中冷静期/再撮合机制，如实留空；参见 circuit_breaker 字段说明。"
+
+    trading_halt_mechanism:
+      zh: "标的资产暂停交易或不可得时，交易所可对相应衍生品产品暂停交易，暂停期与标的资产暂停期相同；若暂停期恰逢到期日，未平仓头寸按交易所公布的公允价值现金结算平仓；紧急情况下（如系统故障）交易所可暂停、缩短、延长或调整任一交易时段的时间"
+      en: "If the underlying asset is suspended or unavailable, the Exchange may suspend the corresponding Listed Derivatives Product for the same period; if the suspension falls on an expiry date, Open Positions are cash-settled and closed at a Fair Value announced by the Exchange; in emergency situations (e.g. system failure) the Exchange may suspend, shorten, extend, or otherwise alter the timing of any trading session"
+      sources:
+        - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+          accessed: 2026-08-18
+        - title: Derivatives Exchange Trading and Membership Rules（Saudi Exchange 官方规则 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/89982883-848c-485e-9b94-5ef5ce0c27ce/Derivatives+Exchange+Trading+and+Membership+Rules+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-89982883-848c-485e-9b94-5ef5ce0c27ce-pfkI-F7
+          accessed: 2026-08-18
+      quote: "18. Suspension of Listed Derivatives Products ... In case of suspension or unavailability of the underlying asset, the Exchange may suspend the relevant Listed Derivatives Product for the same period of underlying asset suspension. If the suspension period falls on an expiry date, Open Positions will be cash settled and closed at a Fair Value announced by the Exchange. ... Article 4 Emergency Situations ... the Exchange has the right to: 1. Suspend any trading session or reduce, extend, or otherwise alter the time of any trading session;"
+      confidence: high
+
+    block_trade:
+      zh: "设有协商交易（Negotiated Deals）机制：买卖双方自行约定数量与价格（可在场外协商或通过交易系统内建的询价服务 Request for Quote 达成），须达到交易所公布的最低规模门槛，且成交价须落在当日涨跌幅区间内；协商交易不计入合约当日最高/最低价，也不影响最终结算价的计算"
+      en: "Negotiated Deals are available: buyer and seller agree on quantity and price (either off-system or via the built-in Request for Quote service), subject to a minimum size threshold published by the Exchange and to the Daily Fluctuation Limits; Negotiated Deals do not affect the contract's daily high/low or the Final Settlement Price calculation"
+      sources:
+        - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
+          accessed: 2026-08-18
+      detail: "与现货市场 block_trade 字段（协商交易可展期至T+0至T+5结算）语境不同：衍生品的 Negotiated Deals 描述的是交易撮合来源渠道（场外议价/RFQ服务后转入交易系统撮合成交），本身仍遵循与普通订单相同的T+0盯市/T+1变动保证金结算节奏（见 margin_practice_note），未见针对协商交易另设独立结算周期的条款。"
+      quote: "16.1.1 Negotiated Deals requires both sellers and buyers to agree on the quantity and price of the Listed Derivatives Product contract involved in their transaction. 16.1.2 Negotiated Deals are allowed according to a minimum size threshold, the minimum size threshold is published on the Exchange's website. ... 16.1.6 Negotiated Deals do not impact, the open high, low prices of the contract, neither the final settlement price calculation."
+      confidence: high
+
+    market_maker_scheme:
+      zh: "衍生品交易会员须遵守交易所制定、经资本市场管理局（CMA）批准的做市要求（如适用）；MT30指数期货本身的产品规格明确标注支持做市（Market Making: Yes）"
+      en: "Derivatives Exchange Members must comply with the market making requirements (where applicable) as specified by the Exchange and approved by the CMA; the MT30 Index Futures Product Specification itself confirms Market Making support (Market Making: Yes)"
+      sources:
+        - title: Derivatives Exchange Trading and Membership Rules（Saudi Exchange 官方规则 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/89982883-848c-485e-9b94-5ef5ce0c27ce/Derivatives+Exchange+Trading+and+Membership+Rules+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-89982883-848c-485e-9b94-5ef5ce0c27ce-pfkI-F7
+          accessed: 2026-08-18
+        - title: MT30 Index Futures Contract Specifications（Saudi Exchange 官方合约规格表 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f5716373-65f9-4a6c-961c-f1f76f351138/MT30.pdf?MOD=AJPERES&CVID=pmfpIF7
+          accessed: 2026-08-18
+      detail: "本次抓取的两份规则文本仅确认『做市要求由交易所制定、经CMA批准』与『MT30期货支持做市』两点，具体的做市商义务/奖励细则（报价价差、在场时间、豁免情形等）未见公开条款或独立说明页，可能与 Market Making Regulations（现货市场做市商规则，见顶层 market_maker_scheme 字段引用的 PDF）共用或另有专门文件，本次未找到，如需补充见 OPEN-QUESTIONS。"
+      quote: "Article 10 Market Makers ... Derivatives Exchange Members must comply with the market making requirements (where applicable) as specified by the Exchange and approved by the Authority. ... MT30 Index Futures Contract Specifications ... Market Making / Yes"
+      confidence: high
+
+    margin_practice_note:
+      zh: "衍生品交易保证金实行按客户类型分档的保证金乘数制度：机构类客户（含个人全权委托账户DPM）乘数100%；一级合格个人客户（Tier 1 Individual，需满足最近12个月季度交易额≥4,000万里亚尔且每季度≥10笔、或持仓均值≥500万里亚尔、或3年以上证券相关金融从业经验、或持有交易所认可的证券从业资格证书等条件之一）乘数133%；二级个人客户（Tier 2，不满足以上任一条件）乘数200%；最低初始保证金比例由Muqassa设定并按客户类型浮动；持仓按日盯市（Mark to Market），以当日结算价计算，盯市结果为T+0，变动保证金须由结算会员在下一交易日（T+1）规定时限内划付给Muqassa"
+      en: "Margin uses a client-tier Margin Multiplier: Institutions (including individual DPM accounts) 100%; Tier 1 Individual (qualified clients meeting any of: ≥SAR 40m in transactions with ≥10 trades per quarter over the last 12 months, ≥SAR 5m average portfolio size, ≥3 years relevant financial-sector experience, or a recognized securities qualification) 133%; Tier 2 Individual (clients not meeting Tier 1 criteria) 200%; the minimum initial margin percentage is set by Muqassa and varies by client type; positions are Marked to Market daily based on the Daily Settlement Price (T+0), with Variation Margin remitted by clearing members to Muqassa by the next trading day (T+1) within a prescribed time"
+      sources:
+        - title: Derivatives Index Brochure（Muqassa 官方 MT30 指数期货合约规格与保证金乘数表 PDF）
+          url: https://www.muqassa.sa/wps/wcm/connect/6a41fc1e-3ace-40de-a42c-9c1ac8ec97bc/Derivatives_Index_Brochure_Digital_EN.pdf?MOD=AJPERES&CVID=oMhahw8
+          accessed: 2026-08-18
+        - title: Derivatives Exchange Trading and Membership Rules（Saudi Exchange 官方规则 PDF，经 tadawulgroup.sa 分发）
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/89982883-848c-485e-9b94-5ef5ce0c27ce/Derivatives+Exchange+Trading+and+Membership+Rules+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-89982883-848c-485e-9b94-5ef5ce0c27ce-pfkI-F7
+          accessed: 2026-08-18
+      detail: "本字段是交易端（Derivatives Exchange Member 向客户收取）的保证金要求；清算端（Muqassa 向结算会员收取的保证金方法论，是否采用 SPAN 兼容算法等）本文件 clearing.initial_margin_practice 字段本次留空未核实，两者呼应但视角不同，不合并，参照 hk-hkex.yml 同名字段的处理方式。"
+      quote: "Margin Multiplier / Type of client / Institutions* / Tier 1 Individual** / Tier 2 Individual*** / Margin Multiplier / 100% / 133% / 200% ... Daily Margin/Premium Settlement / All outstanding positions are Mark to Market based on daily settlement price at the end of the day T+0 / Variation margin has to be settled by the clearing members to Muqassa by next day (T+1) by a prescribed time as outlined in Muqassa Procedures ... The minimum initial margin requirements is set by Muqassa and its varies depending on the type of customer"
+      confidence: high
+
+    connect_schemes:
+      zh: ""
+      confidence: low
+      detail: "未见衍生品市场与其他司法辖区/交易所存在互联互通安排的官方说明，如实留空。"
+
 # ═══════════════════════════════════════════════
 # 六｜上市、持续监管与退市
 # ═══════════════════════════════════════════════

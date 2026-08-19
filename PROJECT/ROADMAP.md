@@ -45,30 +45,30 @@
 ## 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
-共 978 个已填字段，其中 0 个超过复核阈值待复核。
+共 1153 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
 |---|---|---|
-| `au-asx` | 52 | 0 |
-| `br-b3` | 58 | 0 |
+| `au-asx` | 73 | 0 |
+| `br-b3` | 76 | 0 |
 | `ca-tsx` | 54 | 0 |
 | `ch-six` | 50 | 0 |
 | `cn-sse` | 52 | 0 |
-| `cn-szse` | 54 | 0 |
+| `cn-szse` | 76 | 0 |
 | `de-eurex` | 33 | 0 |
 | `de-xetra` | 49 | 0 |
-| `fr-euronext` | 42 | 0 |
+| `fr-euronext` | 62 | 0 |
 | `hk-hkex` | 58 | 0 |
-| `in-nse` | 43 | 0 |
+| `in-nse` | 60 | 0 |
 | `jp-jpx` | 40 | 0 |
-| `kr-krx` | 48 | 0 |
-| `sa-tadawul` | 46 | 0 |
-| `sg-sgx` | 53 | 0 |
+| `kr-krx` | 70 | 0 |
+| `sa-tadawul` | 66 | 0 |
+| `sg-sgx` | 67 | 0 |
 | `tw-twse` | 59 | 0 |
 | `uk-lse` | 44 | 0 |
 | `us-nasdaq` | 47 | 0 |
 | `us-nyse` | 41 | 0 |
-| `za-jse` | 55 | 0 |
+| `za-jse` | 76 | 0 |
 <!-- END:GENERATED health-summary -->
 
 ## v1.0 计划：横向铺开到 20+ 家
@@ -117,4 +117,4 @@
 ### 当前进度
 
 - 20/20+ 已完成（v0.1/v0.2 五家标杆 `cn-sse`/`hk-hkex`/`us-nyse`/`jp-jpx`/`de-eurex` + v1.0 Wave 1 八家 `us-nasdaq`/`cn-szse`/`uk-lse`/`de-xetra`/`sg-sgx`/`au-asx`/`in-nse`/`sa-tadawul` + v1.0 Wave 2 七家 `fr-euronext`/`kr-krx`/`ca-tsx`/`br-b3`/`tw-twse`/`ch-six`/`za-jse`，见上方填充进度表）
-- v1.0 横向铺开阶段已完成，达成 20 家目标；`review_system` 枚举覆盖率问题（下方"Wave 1 启动前置条件"）未在 Wave 1 启动前解决，属流程疏漏，见 `PROJECT/DECISIONS.md` [ADR-018] 执行进度补记；市场结构/指数体系两处 schema 缺口已设计并示范填一家（[ADR-019]）。三者（枚举拆分、8 家衍生品机制补全、下一步是否 Wave 3）待决策
+- v1.0 横向铺开阶段已完成，达成 20 家目标；`review_system` 枚举覆盖率问题（下方"Wave 1 启动前置条件"）未在 Wave 1 启动前解决，属流程疏漏，见 `PROJECT/DECISIONS.md` [ADR-018] 执行进度补记；市场结构/指数体系两处 schema 缺口已设计并示范填一家（[ADR-019]）。9 家交易所的衍生品市场机制已按 [ADR-017] 并行子代理模式补齐，人工抽检 90 字段全部通过，见 [ADR-021]。剩余两项（`review_system` 枚举拆分、下一步是否 Wave 3）待决策

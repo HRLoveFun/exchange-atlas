@@ -31,6 +31,25 @@ us-nasdaq/cn-szse/uk-lse/de-xetra/sg-sgx/au-asx/in-nse/sa-tadawul）与 v1.0 Wav
   /tmp 下的同名文件，会互相覆盖（实测发生过：抓到的"SGX"页面内容其实是另一个子代理刚覆盖
   进去的 NSE 页面）。改用你自己 worktree 内的路径，或者干脆跳过手动探测、直接靠 `make fetch`
   写入 `.cache/<exchange-id>/`（这个目录在你自己的 worktree 里，天然隔离，是唯一保真的落盘凭据）。
+- **不要假设你真的拿到了独立 worktree——先自己确认一次。** [ADR-021]（补齐 9 家衍生品机制那波）
+  实测：9 个子代理里只有 2 个真正落到了独立 worktree/分支，另外 7 个全部落进了 orchestrator
+  自己所在的共享目录，同时对同一份 `data/exchanges/*.yml`（各自不同文件，问题不大）和
+  `PROJECT/SOURCES.md`（**同一份文件**，问题很大）并发读写。根因与"orchestrator 自身已在
+  worktree 内、且过程中因账号会话限额中断后经消息恢复"有关，恢复路径大概率没有重新走一遍
+  worktree 创建。**开工前先跑 `git worktree list` 或 `pwd`/`git branch --show-current` 确认
+  自己是不是在一个专属分支上**；如果发现自己和 orchestrator 或别的子代理共享同一个工作目录，
+  当作默认假设去防：
+  1. 改动 `PROJECT/SOURCES.md`、`PROJECT/OPEN-QUESTIONS.md` 这类会被多个子代理同时追加内容的
+     共享文件时，**不要用 `git add <file>` 加整个文件**（会连同邻居尚未提交的改动一起暂存/
+     误删）——改用 `git apply --cached` 配合你自己手写的单一 hunk patch，或 `git diff` 后手工
+     核对只保留自己那部分再 `git add -p` 逐块选择。
+  2. 提交时用 `git commit -- <你自己改的文件列表>`，不要用 `git commit -a` 或裸 `git commit`
+     （后两者会把邻居留在工作目录里、尚未提交的改动一并卷入你的提交）。
+  3. **提交前用 `git diff HEAD~1 -- PROJECT/SOURCES.md`（或你改的那份共享文件）肉眼过一遍
+     diff，确认只有增删了自己的内容，没有删掉不属于自己那一段的既有行**——[ADR-021] 实测
+     出过一次真实事故：某子代理给 SOURCES.md 打补丁时依据了过期快照，直接静默删除了另一个
+     子代理几分钟前刚提交的 10 行内容，事后是 orchestrator 合并阶段逐行核对才发现补回的，
+     肇事的子代理自己完全没意识到。
 
 ## 步骤
 

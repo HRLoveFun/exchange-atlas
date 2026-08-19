@@ -905,32 +905,457 @@
       },
       "derivatives": {
         "trading_sessions": {
-          "pre_market": null,
-          "continuous_am": null,
-          "lunch_break": null,
-          "continuous_pm": null,
-          "after_market": null,
-          "night_session": null
+          "pre_market": {
+            "zh": "开盘集合竞价阶段（Call Phase）：以旗舰股指期货为例（CAC 40/AEX-Index期货）07:30-08:00，期权/固定收益迷你期货/部分成分股期货等07:30-09:01（或07:30-09:00/09:30，因合约而异）；阶段内只累积订单不撮合，阶段结束时有长达30秒的随机时点撮合（防止时点被预测利用）；具体钟点逐合约不同，衍生品市场覆盖阿姆斯特丹/布鲁塞尔/里斯本/米兰/奥斯陆/巴黎六个市场（不含都柏林——都柏林只运营现货证券市场，未见运营衍生品市场）",
+            "en": "Call Phase (opening auction accumulation): e.g. 07:30-08:00 CET for flagship index futures (CAC 40/AEX-Index); 07:30-09:01 (or 07:30-09:00/09:30 depending on contract) for options/fixed income mini-futures/some single-stock futures; orders accumulate without matching during the phase, followed by a random uncrossing of up to 30 seconds at the end to prevent timing gaming; exact times vary per contract. The Derivatives Markets cover six of the seven Euronext markets — Amsterdam, Brussels, Lisbon, Milan, Oslo and Paris — Dublin operates only the Securities (cash) Market, with no Derivatives Market found",
+            "sources": [
+              {
+                "title": "Euronext Derivatives Markets Annexe One of the Trading Procedures - Trading Arrangements（生效/更新 2026-06-29）",
+                "url": "https://www.euronext.com/sites/default/files/2026-06/Euronext%20Trading%20Procedures%20-%20Annexe%20One%20-%20EN%20-%2020260629.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "AEX-Index® KF.FTI 07:30 - 08:00 08:00 - 22:00 08:00 - 16:00 07:30 – 22:00 07:30 – 16:00 ... CAC 40® Index JF.FCE 07:30 - 08:00 08:00 - 22:00 08:00 - 16:00 07:30 – 22:00 07:30 – 16:00 ... AEX-Index® KO.AEX 07:30 - 09:01 09:01 - 17:30 ... 10. At the end of the Call Phase, there is a random uncrossing of up to 30 seconds.",
+            "confidence": "high",
+            "verified": "2026-08-16",
+            "enum": null,
+            "detail": null
+          },
+          "continuous_am": {
+            "zh": "中央订单簿（Central Order Book, COB）连续交易：无午间休市，全天单一连续时段，与现货市场一致；以CAC 40/AEX-Index旗舰股指期货为例08:00-22:00（到期日提前收市至16:00）；期权/固定收益迷你期货等COB时段普遍为09:01-17:30左右（各合约不同，详见Annexe One逐合约时刻表）",
+            "en": "Central Order Book (COB) continuous trading: a single continuous session all day with no lunch break, consistent with the cash market; e.g. 08:00-22:00 CET for CAC 40/AEX-Index flagship futures (closing earlier at 16:00 on the Last Trading Day); options/fixed income mini-futures etc. generally run COB around 09:01-17:30 (varies by contract, see Annexe One's per-contract table)",
+            "sources": [
+              {
+                "title": "Euronext Derivatives Markets Annexe One of the Trading Procedures - Trading Arrangements（生效/更新 2026-06-29）",
+                "url": "https://www.euronext.com/sites/default/files/2026-06/Euronext%20Trading%20Procedures%20-%20Annexe%20One%20-%20EN%20-%2020260629.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "AEX-Index® KF.FTI 07:30 - 08:00 08:00 - 22:00 08:00 - 16:00 ... CAC 40® Index JF.FCE 07:30 - 08:00 08:00 - 22:00 08:00 - 16:00 ... AEX-Index® KO.AEX 07:30 - 09:01 09:01 - 17:30 09:01 - 16:00",
+            "confidence": "high",
+            "verified": "2026-08-16",
+            "enum": null,
+            "detail": null
+          },
+          "lunch_break": {
+            "zh": "无——中央订单簿全天单一连续时段运行（如CAC 40/AEX期货08:00至22:00不间断），期间无午休间隔，与现货市场一致",
+            "en": "None — the Central Order Book runs as a single continuous session all day (e.g. 08:00-22:00 CET for CAC 40/AEX futures without a break), consistent with the cash market",
+            "confidence": "medium",
+            "detail": "未见规则文本对『无午休』有专门声明；本字段结论系从Annexe One逐合约连续时段无间隔的时刻表直接推得，非规则原文的明文陈述，故标medium而非high。",
+            "sources": [
+              {
+                "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+                "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+                "accessed": "2026-08-16"
+              },
+              {
+                "title": "Euronext Rule Book Book I - Harmonised Rules",
+                "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+                "accessed": "2026-08-16"
+              }
+            ],
+            "verified": "2026-08-16",
+            "enum": null,
+            "quote": null
+          },
+          "continuous_pm": {
+            "zh": "与 continuous_am 为同一段连续交易时段（中央订单簿不设AM/PM切分），不重复列出具体钟点",
+            "en": "Same continuous session as continuous_am (the Central Order Book is not split into AM/PM segments); see continuous_am for times",
+            "confidence": "medium",
+            "sources": [
+              {
+                "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+                "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+                "accessed": "2026-08-16"
+              },
+              {
+                "title": "Euronext Rule Book Book I - Harmonised Rules",
+                "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+                "accessed": "2026-08-16"
+              }
+            ],
+            "verified": "2026-08-16",
+            "enum": null,
+            "detail": null,
+            "quote": null
+          },
+          "after_market": {
+            "zh": "晚间交易时段（Evening Trading Session）：CAC 40/AEX-Index等部分旗舰股指期货/期权合约在18:30-22:00（期货）区间内的成交按T+1（次一交易日）而非当日（T）清算；该时段仍在同一中央订单簿连续运行区间内，不是收盘后另开的独立市场阶段，客户如不希望订单在晚间时段内成交需在落单时特别声明",
+            "en": "Evening Trading Session: for certain flagship index futures/options (e.g. CAC 40, AEX-Index), trades executed within the 18:30-22:00 window are cleared T+1 (the next business day) rather than T (same day); this window still sits inside the same continuous Central Order Book session rather than being a separate post-close market phase — a client who does not want an order executed during the evening session must state this when placing the order",
+            "sources": [
+              {
+                "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25）",
+                "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+                "accessed": "2026-08-18"
+              },
+              {
+                "title": "Euronext Derivatives Markets Annexe One of the Trading Procedures - Trading Arrangements（生效/更新 2026-06-29）",
+                "url": "https://www.euronext.com/sites/default/files/2026-06/Euronext%20Trading%20Procedures%20-%20Annexe%20One%20-%20EN%20-%2020260629.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "Evening session: 18:30 - 22:00: all trades will be cleared on the following business day (T+1) ... A client who does not wish his order to be executed in the evening session must stipulate this condition when placing the order with the intermediary",
+            "confidence": "high",
+            "verified": "2026-08-16",
+            "enum": null,
+            "detail": null
+          },
+          "night_session": {
+            "zh": "",
+            "confidence": "low",
+            "detail": "22:00 CET中央订单簿收盘后未见独立的隔夜/夜盘交易安排（不同于HKEX衍生品市场的T+1收市后交易时段那种真正另开的独立场次）；18:30-22:00的『晚间交易时段』仍属同一连续COB区间，已归入 after_market 字段，此处如实留空。以上 trading_sessions 各字段均以指数/股票类衍生品（Index and Equity Products，如CAC 40/AEX-Index）为代表性样本；商品衍生品（农产品/运费/电力期货）另有不同的时段体系（如巴黎市场农产品期货Call Phase 07:30-10:45、COB 10:45-18:30；阿姆斯特丹市场电力期货Call Phase 07:30-08:00、COB 08:00-16:00），差异已在 contract_specs_note 字段中说明，此处不重复展开逐时段数字。",
+            "sources": [
+              {
+                "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+                "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+                "accessed": "2026-08-16"
+              },
+              {
+                "title": "Euronext Rule Book Book I - Harmonised Rules",
+                "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+                "accessed": "2026-08-16"
+              }
+            ],
+            "verified": "2026-08-16",
+            "en": null,
+            "enum": null,
+            "quote": null
+          }
         },
-        "holidays_note": null,
-        "opening_mechanism": null,
-        "closing_mechanism": null,
-        "matching_principle": null,
-        "order_types": null,
-        "tick_size": null,
-        "contract_specs_note": null,
+        "holidays_note": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "未找到衍生品市场专属的节假日安排页面；衍生品市场与现货市场共享同一交易平台Optiq及同一集团法律实体架构，节假日安排大概率与顶层 holidays_note 一致，但本次未见官方原文明确声明『衍生品市场节假日安排与现货市场相同』，不代入猜测，如实留空。",
+          "sources": [
+            {
+              "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "Euronext Rule Book Book I - Harmonised Rules",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "opening_mechanism": {
+          "zh": "Call Phase（开盘集合竞价累积阶段）结束后由撮合引擎运行揭示（uncrossing）算法；若开盘时出现价格倒挂（买价高于卖价）或买卖同价（choice price），撮合引擎将计算能实现最大成交量的价格并自动执行相应成交，成交价格不劣于原始委托价，未成交的买卖盘继续留在市场",
+          "en": "After the Call Phase (order-accumulation period) ends, the matching engine runs an uncrossing algorithm; where backwardation (bids higher than offers) or choice prices (bids equal to offers) exist at Market Open, the engine calculates the price at which maximum volume can be traded and automatically executes trades accordingly, at a price no worse than the order's entered price, with any untraded bids/offers remaining in the market",
+          "sources": [
+            {
+              "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 3.3.2）",
+              "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Where backwardation (bids higher than offers) or choice prices (bids equal to offers) exist at Market Open, the matching engine will run an uncrossing algorithm to calculate the price at which the maximum volume can be traded and automatically executes trades accordingly: any orders executed in this way will be traded at a price equal to or better than that at which they were entered and any untraded bids and/or offers will remain in the market.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "closing_mechanism": {
+          "zh": "每日结算价（Daily Settlement Price, DSP）机制：期货合约按『中央订单簿价格法』（结算时点前不少于2分钟的『结算区间』内的成交价/成交量加权均价/买卖盘中间价/公允价值，按优先顺序取值）或『官方收盘价法』二者之一确定，具体某合约采用哪种方法见Annexe One；其中股票期货（所有市场）与股指期货（所有市场，但股指总回报期货与股指分红期货除外）统一采用官方收盘价法，其余期货合约采用中央订单簿价格法",
+          "en": "Daily Settlement Price (DSP) mechanism: for futures contracts, DSP is set by either the Central Order Book price method (a hierarchy of last traded price / volume-weighted average / mid-BBO / fair value, calculated over a Settlement Range of no less than 2 minutes before the settlement time) or the official closing price method — which applies to which contract is set out in Annexe One; Single Stock Futures (all markets) and Index Futures (all markets, except Index Total Return Futures and Index Dividend Futures) uniformly use the official closing price method, while other futures contracts use the Central Order Book price method",
+          "sources": [
+            {
+              "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 2.2）",
+              "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Euronext Derivatives Markets Annexe One of the Trading Procedures - Trading Arrangements（生效/更新 2026-06-29，注6）",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/Euronext%20Trading%20Procedures%20-%20Annexe%20One%20-%20EN%20-%2020260629.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The Daily Settlement Price for Futures Contracts is calculated using one of the following two methods: (a) Central Order Book price method ...; or (b) official closing price method ... Daily Settlement price (TP2.2): the Official Closing Price method is used for Single Stock Futures Contracts (all markets) and for Index Futures (all markets) except Index Total Return Futures and Index Dividend Futures. The Central Order Book method is used for all other Futures Contracts.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "matching_principle": {
+          "zh": "逐合约设定为『价格/时间优先』或『按比例分配（Pro-rata）』二者之一（具体见Annexe One逐合约对照表）：价格/时间优先——同一合约/交割月/组合中，最高买价与最低卖价优先，同价位按接受时间先后排序；按比例分配——最优价位的全部买卖盘按比例算法分配成交量，具体细节见Annex 3",
+          "en": "Each contract is assigned either \"Price/Time priority\" or \"Pro-rata priority\" (see Annexe One for the per-contract mapping): Price/Time priority — within the same contract/delivery month/strategy, the highest bid and lowest offer take priority, ranked by acceptance time at the same price; Pro-rata priority — all bids/offers at the best price in the same contract/delivery month/strategy trade according to a pro-rata algorithm, detailed in Annex 3",
+          "sources": [
+            {
+              "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 3.3.1）",
+              "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The following order prioritisation criteria will determine trade priority. ... (a) Price/Time priority: (i) best price. A buy order at the highest price and a sell order at the lowest price has priority over orders in the same contract/delivery month/strategy; and (ii) oldest time-stamp. ... (b) Pro-rata priority: (i) best price ...; (ii) pro-rata. All buy orders at the highest price and all sell orders at the lowest price in the same contract/delivery month/strategy are traded in accordance with the pro-rata algorithm",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "order_types": {
+          "zh": "限价单（Limit）、市价单（Market）、止损单（Stop，含Stop Limit/Stop Market两类，不参与Call Phase）三大类，可附加Day/Good Till Cancelled(GTC)/Good Till Date(GTD)/Immediate or Cancel(IOC)/Fill or Kill(FOK)/Minimum Quantity(MQ)六种有效期/执行方式设计；具体哪些订单功能适用于某一合约按市场/合约而异，见Annexe One逐合约对照表（Part II）",
+          "en": "Three main order types: Limit Order, Market Order, and Stop Order (Stop Limit / Stop Market, not participating in the Call Phase), which can carry six validity/execution designations: Day, Good Till Cancelled (GTC), Good Till Date (GTD), Immediate or Cancel (IOC), Fill or Kill (FOK), and Minimum Quantity (MQ); which order functionality applies to a given contract varies by market/contract, see Annexe One's per-contract table (Part II)",
+          "sources": [
+            {
+              "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 3.2.3-3.2.4）",
+              "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "(a) Limit Order ... (b) Market Order ... (c) Stop Orders ... (i) Stop Limit Orders ... (ii) Stop Market Orders ... The designations set out in (a) to (f) below can be added to Limit, Market Orders and/or Stop Orders: (a) Day ... (b) Good Till Cancelled (GTC) ... (c) Good Till Date (GTD) ... (d) Immediate or Cancel (IOC) ... (e) Fill or Kill (FOK) ... and (f) Minimum Quantity (MQ)",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "tick_size": {
+          "zh": "由Optiq的『Tick Table（跳动点表）』机制统一定义：每张Tick Table含一组按价格区间分档的跳动点位，并为Front Month（最活跃到期月）及到期日更近的合约（日度/周度）另设一个跳动点位收窄比例；Tick Table按合约（Contract）分配，每日通过统一的参考数据文件下发，同一Tick Table可被多个合约及多种交易机制（COB/Wholesale/RFC）共用；不同产品线（股指期货期权/固定收益迷你期货/商品期货）跳动点位差异很大，例如固定收益迷你期货（BTP/OAT/Bund/BONO）中央订单簿跳动点位为票面值0.01%（对应€2.5/张，其中BTP 30年期为0.02%/€5），大宗交易设施（LiS）跳动点位更细至0.001%（€0.25/张）",
+          "en": "Tick sizes are defined uniformly via Optiq's \"Tick Table\" mechanism: each Tick Table contains a set of price ranges with associated tick sizes, plus a narrower tick-size ratio for the Front Month (most active expiry) and expiries closer to maturity (daily/weekly); a Tick Table is assigned per Contract and distributed daily via a common reference-data file, and one Tick Table may be shared across multiple contracts and market mechanisms (COB/Wholesale/RFC). Tick sizes vary greatly across product lines — e.g. Fixed Income Mini-futures (BTP/OAT/Bund/BONO) have a Central Order Book tick of 0.01% of par value (€2.5 per contract; 0.02%/€5 for BTP 30yr), with the Large-in-Scale (LiS) facility ticking finer at 0.001% (€0.25 per contract)",
+          "sources": [
+            {
+              "title": "Euronext Derivatives – How the Market Works（v5.4, 2025, §4.9 Optiq Tick Table Mechanism）",
+              "url": "https://connect.euronext.com/sites/default/files/it-documentation/Euronext%20Derivatives_How%20the%20Market%20Work_v5.4.pdf",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Euronext Derivatives – Introduction of Fixed Income Derivatives on main European government bonds（Info-Flash, 2024-12-16, Appendix）",
+              "url": "https://connect.euronext.com/sites/default/files/2024-12/IF241216DE%20Euronext%20Derivatives%20%E2%80%93%20Introduction%20of%20Fixed%20Income%20Derivatives%20on%20main%20European%20government%20bonds.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Optiq® uses the Tick Table to provide the rules applied on a given instrument for the order entry. Each Tick Table contains: A pre-defined set of price ranges with the related tick size. A Front Month ratio to be used for front month ... The Tick Table is the sole definition of ticks used by Optiq®. A Tick Table is assigned at Contract level ... provided to clients through a single dedicated daily referential file ... TICK SIZE (AND VALUE) COB: 0.01% (€ 2.5) ... COB: 0.02% (€ 5) ... LIS Facility: 0.001% (€ 0.25)",
+          "confidence": "high",
+          "detail": "固定收益迷你期货的具体跳动点位数字来自2024年12月发布的技术上线通知（Info-Flash），文中原文标注为『proposed contract specifications』（拟议规格，产品于2025年9月正式上线）；结合已上线的官网现行产品页（www.euronext.com/en/for-investors/financial-derivatives/fixed-income）确认合约规模€25,000等主要参数与该通知一致，未见修订公告，故仍按high处理，但保留此vintage提示。",
+          "verified": "2026-08-16",
+          "enum": null
+        },
+        "contract_specs_note": {
+          "zh": "衍生品业务线分三大类，产品体系章节已列出：①股票及股指衍生品（euronext-equity-derivatives）——阿姆斯特丹/布鲁塞尔/里斯本/米兰/奥斯陆/巴黎六市场旗舰股指（AEX/BEL 20/PSI/FTSE MIB/OBX/CAC 40等）及成分股期货期权，合约乘数、到期月序列（月度/季度/半年度不等）因产品而异；②固定收益衍生品（euronext-fixed-income-derivatives）——2025年9月上线，标的为意大利BTP（10年/30年）、法国OAT（10年）、德国Bund（10年）、西班牙BONO（10年）的迷你期货，合约规模统一为€25,000票面值，现金结算，到期结算价=最便宜可交割券（CTD）价格/转换因子，但**全部挂牌于米兰（Borsa Italiana IDEM）市场**，尽管标的横跨四国主权债——是『标的泛欧、挂牌单一法域』的结构性特例；③商品衍生品（euronext-commodity，含电力）——农产品期货（小麦/油菜籽/玉米/硬粒小麦等，巴黎市场）、运费期货、电力期货（阿姆斯特丹市场挂牌，到期结算价参照Nord Pool发布的现货均价，Nord Pool本身系2020年收购的独立子公司，担任标的现货价格『发布方』角色而非另一交易平台）。清算方面，2024年9月起Euronext Clearing已完成对全部Euronext衍生品市场的接管，取代此前的LCH S.A.，是集团『多资产统一清算』整合的最后一步",
+          "en": "The derivatives business comprises three product lines (already listed in the Products chapter): (1) Equity & Index Derivatives — futures/options on flagship indices (AEX/BEL 20/PSI/FTSE MIB/OBX/CAC 40 etc.) and single stocks across the Amsterdam/Brussels/Lisbon/Milan/Oslo/Paris markets, with contract multipliers and expiry cycles (monthly/quarterly/half-yearly) varying by product; (2) Fixed Income Derivatives — launched September 2025, mini-futures on Italian BTP (10yr/30yr), French OAT (10yr), German Bund (10yr) and Spanish BONO (10yr), all with a uniform €25,000 notional contract size, cash-settled, with the settlement price = Cheapest-to-Deliver (CTD) bond price / Conversion Factor — but **all listed on the Milan (Borsa Italiana IDEM) market only**, despite underlyings spanning four sovereign issuers — a structural case of \"pan-European underlying, single-jurisdiction listing venue\"; (3) Commodity Derivatives (incl. power) — agricultural futures (Milling Wheat/Rapeseed/Corn/Durum Wheat etc., Paris market), freight futures, and power futures (listed on the Amsterdam market, with the expiry settlement price referencing the average spot price published by Nord Pool — Nord Pool itself, acquired in 2020, acts as the price-publishing \"issuer\" of the underlying rather than a separate trading venue). On clearing: Euronext Clearing completed its takeover of all Euronext derivatives markets in September 2024, replacing the previous CCP LCH S.A., the final step of the group's multi-asset clearing consolidation",
+          "sources": [
+            {
+              "title": "Euronext Derivatives – Introduction of Fixed Income Derivatives on main European government bonds（Info-Flash, 2024-12-16）",
+              "url": "https://connect.euronext.com/sites/default/files/2024-12/IF241216DE%20Euronext%20Derivatives%20%E2%80%93%20Introduction%20of%20Fixed%20Income%20Derivatives%20on%20main%20European%20government%20bonds.pdf",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Fixed Income Derivatives 现行产品页（euronext.com）",
+              "url": "https://www.euronext.com/en/for-investors/financial-derivatives/fixed-income",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Euronext Derivatives Markets Annexe One of the Trading Procedures - Trading Arrangements（生效/更新 2026-06-29）",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/Euronext%20Trading%20Procedures%20-%20Annexe%20One%20-%20EN%20-%2020260629.pdf",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Euronext Derivatives – How the Market Works（v5.4, 2025）",
+              "url": "https://connect.euronext.com/sites/default/files/it-documentation/Euronext%20Derivatives_How%20the%20Market%20Work_v5.4.pdf",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Euronext successful expansion of Euronext Clearing to all Euronext financial derivatives markets（新闻稿，2024-09-17）",
+              "url": "https://www.euronext.com/en/about/media/euronext-press-releases/successful-expansion-euronext-clearing-all-euronext-financial",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Contract size of €25,000 ... Listed on the Euronext Derivatives Milan market ... EXCHANGE MARKET Euronext Derivatives Milan ... EDSP = Cheapest to Deliver (CTD) bond price / Conversion Factor (CF) ... for monthly, weekly and daily Power Derivatives the exchange determines an EDSP on the Expiration Date by using the average of the applicable Spot Prices published in the Delivery period by the issuer (Nord Pool) of the relevant Contract Underlying ... Euronext, the leading pan-European market infrastructure, is pleased to announce the successful completion of the expansion of Euronext Clearing activities to all Euronext financial derivatives markets. This milestone marks the conclusion of the migration from LCH SA to Euronext Clearing and the end of the contractual relationship with LCH SA.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
         "price_limits": {
-          "type": null,
-          "main_board": null,
-          "other_boards": null
+          "type": {
+            "enum": "dynamic_reference",
+            "zh": "与现货市场类似的双层价格区间机制——动态区间（Dynamic Collar，基准价为动态参考价DCRP，随行情实时更新）+ 静态区间（Static Collar，基准价为静态参考价SCRP，日内一般不变，但交易所可人工调整），触及区间边界即拒单或转入预约（reservation），不是直接的固定百分比涨跌停；此外还有专门应对短时极端行情的Future Spike Protection（收窄区间但仍允许在合理范围内继续交易）与Future Limit Interruption Protection（触发后直接转入预约期）两种叠加保护",
+            "en": "A two-layer price-band mechanism similar to the cash market — dynamic collars (reference price is the Dynamic Collar Reference Price, DCRP, updated in real time) plus static collars (reference price is the Static Collar Reference Price, SCRP, generally unchanged intraday but adjustable by the Exchange); breaching either band results in order rejection or a reservation, not a flat percentage limit-up/down. Two further overlapping safeguards specifically target short, extreme price moves: Future Spike Protection (narrows the band while still allowing trading within a reasonable range) and Future Limit Interruption Protection (triggers a reservation directly)",
+            "sources": [
+              {
+                "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 2.1）",
+                "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+                "accessed": "2026-08-18"
+              },
+              {
+                "title": "Trading safeguards on the Euronext markets（Derivatives trading safeguards 一节）",
+                "url": "https://www.euronext.com/en/trading/market-quality/trading-safeguards-euronext-markets",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "Throughout each trading session and during the Call Phase, dynamic collars will be calculated to define the spread of acceptable prices for trading a given Instrument ... the dynamic collar reference price (hereafter \"DCRP\") ... For certain futures contracts, static collars shall be applicable ... Future Spike Protection (FSP) provides protection for the futures markets from extreme price movements within a short timeframe ... Future Limit Protection (FLIP) works similarly to FSP, but once triggered it will instead reserve the instrument on which the boundaries were breached.",
+            "confidence": "high",
+            "verified": "2026-08-16",
+            "detail": null
+          },
+          "main_board": {
+            "zh": "主力合约（『Blue Month』，即成交量/持仓量最活跃的到期月，由交易所认定）：以『未来市场价格法』（future market price）确定动态参考价DCRP时，直接由该合约的中央订单簿行情算出；具体区间幅度（价差值）未见以百分比等明文形式列示于规则正文，而是逐合约通过标准数据文件（Reference Spread参考表）分发，本次未获取到该数据文件的实际数值",
+            "en": "The Main Contract (the \"Blue Month\" — the most actively traded expiry by volume/open interest, as determined by the Exchange): when using the \"future market price\" method, its Dynamic Collar Reference Price (DCRP) is derived directly from that contract's own Central Order Book activity. The actual band width is not disclosed as a plain percentage in the rulebook text — it is distributed per contract via a standing-data Reference Spread file; the actual figures were not obtained this session",
+            "sources": [
+              {
+                "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 2.1.3）",
+                "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+                "accessed": "2026-08-18"
+              },
+              {
+                "title": "Trading safeguards on the Euronext markets（Derivatives trading safeguards / Dynamic Collar Determination 一节）",
+                "url": "https://www.euronext.com/en/trading/market-quality/trading-safeguards-euronext-markets",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "In respect of the \"future market price\" method, a DCRP is established for the most actively traded (\"blue\") contract maturity and, for all other contract maturities, the DCRP is derived from outright and implied spread relationships with the blue maturity DCRP. ... Obtain the MQS and AQS Multiplier from the Reference Spread table",
+            "confidence": "medium",
+            "verified": "2026-08-16",
+            "enum": null,
+            "detail": null
+          },
+          "other_boards": {
+            "zh": "其他到期月合约：动态参考价DCRP不独立计算，而是依据与主力合约（Blue Month）DCRP之间的正常/隐含价差关系（outright and implied spread relationships）推导得出；静态区间方面，Call Phase阶段的静态参考价取上一官方收盘价或最后结算价，Call Phase结束后更新为开盘揭示价或开盘时的DCRP值，其他到期月的静态参考价同样按上述『与主力合约的价差关系』方法计算",
+            "en": "Other expiry months: the Dynamic Collar Reference Price (DCRP) is not calculated independently but derived from outright and implied spread relationships with the Blue Month's DCRP. For static collars, the static reference price during the Call Phase is the last official closing price or last daily settlement price, updated after the Call Phase to the opening uncrossing price (or the DCRP value at opening); static reference prices for other maturities are likewise derived using the same spread-relationship method",
+            "sources": [
+              {
+                "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 2.1.3, 2.1.8A）",
+                "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "for all other contract maturities, the DCRP is derived from outright and implied spread relationships with the blue maturity DCRP ... The static reference price for the blue maturity during the Call Phase is the last official closing price or failing this the last daily settlement price. Following the Call Phase, the static reference price is updated to become the opening uncrossing price, if any, or the DCRP value at opening. The reference prices for the other maturities are calculated as defined in Trading Procedure 2.1.3.",
+            "confidence": "high",
+            "verified": "2026-08-16",
+            "enum": null,
+            "detail": null
+          }
         },
-        "circuit_breaker": null,
-        "volatility_interruption": null,
-        "trading_halt_mechanism": null,
-        "block_trade": null,
-        "market_maker_scheme": null,
-        "margin_practice_note": null,
-        "connect_schemes": null
+        "circuit_breaker": {
+          "zh": "未见独立于价格区间机制之外的全市场/指数级熔断；个股级（此处即『逐合约级』）的动态/静态区间（见price_limits）与Future Spike/Limit Interruption Protection已构成主要保护手段，触发后进入预约（reservation）而非直接停牌，与本所现货市场（同样未发现独立的全市场级熔断）情况一致。受控词表 circuit_breaker_type 的既有选项（none/index_level/stock_level/both）均以『股票』为设计语境，与衍生品『逐合约』颗粒度不完全对应，本字段因此不代入 enum，仅作文字描述",
+          "en": "No market-wide or index-level circuit breaker separate from the price-band mechanism was found; contract-level (i.e. per-instrument) dynamic/static collars (see price_limits) plus Future Spike/Limit Interruption Protection are the main safeguards, triggering a reservation rather than a flat halt — consistent with this exchange's cash market (which likewise showed no separate market-wide circuit breaker). The existing `circuit_breaker_type` enum options (none/index_level/stock_level/both) are all designed around a stock-market context and do not cleanly map onto derivatives' \"per-contract\" granularity, so no enum value is assigned here — text description only",
+          "sources": [
+            {
+              "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 2.1, 2.4）",
+              "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "attempts to trade outside the prevailing dynamic collars will be blocked by the matching engine ... reservation of trading ... 'reservation' that refers to interruption on a given Instrument due to the potential matching of orders outside prevailing dynamic or static, where appropriate, collars",
+          "confidence": "medium",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "volatility_interruption": {
+          "zh": "预约（Reservation）机制：连续交易阶段若潜在撮合价触及动态或静态区间边界即触发预约，标的合约转入一段程序化的Call Phase重新集合竞价；因动态区间触发的首次预约，恢复方式分两种——自动方式（系统按更新后的动态区间尝试重新揭示，对特定合约类别在达到最大尝试次数后可撤销引发预约的订单）或人工方式（针对静态区间触发的预约，由Market Services评估市场情况后决定是否恢复）；若自动方式重新揭示后同方向再次触发预约，是否进一步调整区间/参考价同样须转交人工评估",
+          "en": "Reservation mechanism: during continuous trading, if the theoretical matching price breaches the dynamic or static collar boundary, a reservation is triggered and the instrument switches to a timed Call Phase for re-uncrossing; for the first reservation caused by a dynamic-collar breach, resumption follows one of two processes — an automated process (the system attempts to reopen using updated dynamic collars, and for certain contract categories the order causing the reservation can be cancelled after a maximum number of attempts) or a manual process (for static-collar-triggered reservations, Market Services decides whether to resume after assessing market conditions); if the automated reopening breaches again in the same direction, any further adjustment to the collars/reference price likewise requires manual assessment",
+          "sources": [
+            {
+              "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 2.4.1-2.4.2）",
+              "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "'reservation' that refers to interruption on a given Instrument due to the potential matching of orders outside prevailing dynamic or static, where appropriate, collars ... When the interruption results from reservation, the Instrument impacted shall switch to a Call Phase for a programmed period of time ... For attempts to match outside dynamic collars or Future Limit Interruption Protection, automated attempts to reopen trading are conducted by the system ... For attempts to match outside static collars, a manual process is followed whereby Market Services can determine to reopen based on their assessment of market conditions.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "trading_halt_mechanism": {
+          "zh": "除价格区间触发的『预约』（见volatility_interruption）外，另有『暂停』（suspension，因监管性质原因、标的临时中断或维持公平有序市场而触发）与『技术性停牌』（halt，因技术故障触发）两类独立于价格机制的干预手段；若中断发生在每日结算价/官方收盘价确定前后，交易所可自行决定改期确定时点或以其认定的公允价格直接设定结算价；若中断预计无法在收盘前或收盘前足够时间内恢复，交易所可推迟收盘时点，或决定顺延至下一交易日甚至更晚的交易日恢复交易，相关决定可撤销并可另行公告替代性交易安排",
+          "en": "Beyond the price-band-triggered \"reservation\" (see volatility_interruption), two further intervention types exist independent of the price mechanism: \"suspension\" (triggered by regulatory reasons, a temporary interruption in the underlying, or to maintain a fair and orderly market) and \"halt\" (triggered by a technical failure). If an interruption occurs around the time the Daily Settlement Price/official closing price is due to be set, the Exchange may either change the timing for that Trading Day or set the price at a level it determines to be a fair reflection of the market. If an interruption cannot be resolved before, or with sufficient time before, Market Close, the Exchange may delay the closing time, or resume trading on a later Trading Day (or an even later one); such determinations may be revoked and alternative trading arrangements published separately",
+          "sources": [
+            {
+              "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 2.4.1, 2.4.3-2.4.7）",
+              "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "'suspension' that refers to interruption of regulatory nature, or due to temporary interruption of the underlying, or to maintain a fair and orderly market; 'halt' that refers to interruption of technical nature ... the Relevant Euronext Market Undertaking may in its absolute discretion determine either: (a) to change such times for that Trading Day; or (b) to set such prices at levels determined by them as being a fair reflection of the market ... it may determine that the conduct of business in one or more Exchange Contracts should be resumed but that the relevant scheduled closing time should be delayed to a later time.",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "block_trade": {
+          "zh": "股票/股指/固定收益迷你期货等适用『大宗交易设施』（Large-in-Scale Trade Facility, LiS）：交易时段通常早于/长于中央订单簿正常时段（如CAC 40期货LiS为07:30-22:00，早于COB的08:00-22:00），最小交易量门槛逐合约公布于官网，策略交易（含跨合约价差）每条腿原则上须独立达标（流动性差的组合策略可仅一条腿达标，判定标准援引MiFIR相关条款）；交易须由执行会员以其认定的『公允价值』申报价格，经交易所核准后方可完成；商品衍生品另设独立命名的『Block Trade Facility』（含Block Standard/Block NFC Auction/Block Historical等子类型），规则细节与LiS不完全相同，本次未逐条核实；此外还有EFS/EOO（合约与场外掉期/期权互换）、Against Actuals（合约与实货互换）等专门的场外/技术性交易设施",
+          "en": "Equity/index/fixed-income mini-futures etc. are eligible for the Large-in-Scale Trade Facility (LiS): its trading window is generally earlier/longer than the normal Central Order Book session (e.g. CAC 40 futures LiS runs 07:30-22:00 vs COB's 08:00-22:00); minimum volume thresholds are published per contract on the Exchange website; for strategy trades (including inter-contract spreads), in principle each leg must independently meet the threshold (illiquid strategies, per MiFIR criteria, need only one leg to qualify). Trades must be reported by the Executing Member at a price the Member considers \"Fair Value\" and require Exchange authorisation to complete. Commodity derivatives instead use a separately-named \"Block Trade Facility\" (with sub-types including Block Standard/Block NFC Auction/Block Historical), whose detailed rules were not individually verified this session and are not identical to LiS. Dedicated off-book/technical facilities also exist: EFS/EOO (Exchange for Swaps / Exchange of Options for Options) and Against Actuals (exchange against physical)",
+          "sources": [
+            {
+              "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 4.1-4.5）",
+              "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Euronext Derivatives Markets Annexe One of the Trading Procedures - Trading Arrangements（生效/更新 2026-06-29，注8）",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/Euronext%20Trading%20Procedures%20-%20Annexe%20One%20-%20EN%20-%2020260629.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The Large-in-Scale Trade Facility allows Members to negotiate and execute Transactions involving Large-in-Scale Trades ... the minimum volume thresholds applying to Large-in-Scale Trades are published on the Euronext website ... the price assigned must represent a fair value for that trade, as determined by the Relevant Euronext Market Undertaking ... Block Trade Facility ... Block Standard (Power Derivatives) ... Block NFC Auction (Power Derivatives) ... Block Historical (Power Derivatives) ... CAC 40® Index JF.FCE 07:30 - 08:00 08:00 - 22:00 08:00 - 16:00 07:30 – 22:00 07:30 – 16:00",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "market_maker_scheme": {
+          "zh": "做市商角色分三类：MMA（Market Maker Agreement，标准做市协议）、MMS（Market Maker Scheme，做市商计划）、MME（Market Maker for Extended Hours，仅适用于部分股指期货的晚间交易时段）；同一会员（按Firm ID）在同一合约同一（日间）场次只能担任MMA或MMS其中之一，但可在不同合约分别担任不同角色；做市商须在每个交易场次开始前于Optiq逐合约『签到』（MM Sign-In），未获授权的合约签到会被单独拒绝；做市商在其报价的各合约订单簿中须维持买卖双边报价以满足流动性提供义务，并可配置做市商保护（Market Maker Protection, MMP）机制以在被连续扫单成交时获得一定保护",
+          "en": "Three Market Maker (MM) role types exist: MMA (Market Maker Agreement, the standard MM agreement), MMS (Market Maker Scheme), and MME (Market Maker for Extended Hours, available only for the evening trading session on certain index futures). The same member (by Firm ID) can hold only one of MMA or MMS on a given contract during the same (daytime) session, but may hold different roles on different contracts. MMs must \"sign in\" per contract on Optiq before each trading session (MM Sign-In); sign-in attempts on unauthorised contracts are individually rejected. MMs must maintain two-sided (bid/offer) quotes in each order book they quote, to fulfil their liquidity-provision obligations, and can configure Market Maker Protection (MMP) for a degree of protection against being repeatedly \"swept\"",
+          "sources": [
+            {
+              "title": "Euronext Derivatives – How the Market Works（v5.4, 2025, §8 Market Making）",
+              "url": "https://connect.euronext.com/sites/default/files/it-documentation/Euronext%20Derivatives_How%20the%20Market%20Work_v5.4.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Market Makers (MMs) are required to maintain bid and offer prices in all individual order books of the contract for which they are obliged to provide liquidity ... Examples of MM roles in the Euronext Derivatives Markets are i) Market Maker Agreement (MMA), ii) Market Maker Scheme (MMS) and iii) Market Maker for Extended Hours (MME, on some index futures only). A Euronext derivatives member (identified by a Member Firm ID) can either be MMA or MMS, on a given contract, during the daily session ... MMs sign in before their trading session on Optiq®... Any sign-in attempt on a contract on which the Firm does not have Market making authorisation will be individually rejected. ... Market Maker Protection (MMP): facility that offers registered Market Makers (MM) and Liquidity Providers (LP) a degree of protection against being traded out",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "margin_practice_note": {
+          "zh": "结算所层面：2024年9月，Euronext Clearing完成对全部Euronext衍生品市场的清算接管，取代此前的中央对手方LCH S.A.，是集团多资产统一清算整合（收购Borsa Italiana集团三年后）的最后一步；按资产类别采用不同保证金方法论——权益及权益衍生品、意大利/西班牙/爱尔兰/葡萄牙政府债（FIRE）、农产品衍生品采用『类VaR』动态保证金方法论（基于现金流映射的历史模拟预期尾部损失Expected Shortfall，并辅以EWMA波动率缩放及针对特异性/流动性/集中度/结算/回购风险的附加保证金）；公司债及FIRE覆盖以外的政府债仍沿用『类SPAN』保证金方法论（MVP）；权益及权益衍生品的VaR方法论于2023年10月上线替代此前的SPAN类方法（MARS）",
+          "en": "At the CCP level: in September 2024, Euronext Clearing completed the takeover of clearing for all Euronext derivatives markets, replacing the previous CCP LCH S.A. — the final step of the group's multi-asset clearing consolidation (three years after acquiring the Borsa Italiana Group). Margin methodology differs by asset class: equities & equity derivatives, Italian/Spanish/Irish/Portuguese government bonds (FIRE), and agricultural commodity derivatives use a dynamic (auto-updating) \"VaR-like\" methodology (a historical-simulation Expected Shortfall based on cash-flow mapping, with EWMA volatility scaling and add-ons for idiosyncratic/liquidity/concentration/settlement/repo risks); corporate bonds and government bonds outside the FIRE scope still use a \"SPAN-like\" methodology (MVP). The VaR-like methodology for equities & equity derivatives went live in October 2023, replacing the prior SPAN-like methodology (MARS)",
+          "sources": [
+            {
+              "title": "Euronext Clearing Risk Management（官网）",
+              "url": "https://www.euronext.com/en/clearing/risk-management",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Euronext successful expansion of Euronext Clearing to all Euronext financial derivatives markets（新闻稿，2024-09-17）",
+              "url": "https://www.euronext.com/en/about/media/euronext-press-releases/successful-expansion-euronext-clearing-all-euronext-financial",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Margins are a fundamental risk management tool adopted by Euronext Clearing. Each Clearing Member must post margins to cover the theoretical costs which Euronext Clearing would incur in the event of the CM's default and the clearing of its open position. ... Margins are calculated using efficient, reliable and accurate systems: VaR-like margin methodologies for Italian, Spanish, Irish and Portuguese government bonds (FIRE), equities and equity derivatives, agricultural commodity derivatives; SPAN-like margin methodology for corporate bonds and government bonds other than the abovementioned (MVP) ... In October 2023 Euronext Clearing replaced its longstanding SPAN-like margin methodology with a new dynamic (i.e. auto-updating) VaR-like margin methodology ... Euronext, the leading pan-European market infrastructure, is pleased to announce the successful completion of the expansion of Euronext Clearing activities to all Euronext financial derivatives markets. This milestone marks the conclusion of the migration from LCH SA to Euronext Clearing",
+          "confidence": "high",
+          "verified": "2026-08-16",
+          "enum": null,
+          "detail": null
+        },
+        "connect_schemes": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "未见衍生品市场专属的跨境互联互通安排说明；与顶层 connect_schemes 字段同理，本所自身即是跨多国市场的一体化结构，是否另有其他交易所之间的连接安排本次未核实，如实留空。",
+          "sources": [
+            {
+              "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
+              "accessed": "2026-08-16"
+            },
+            {
+              "title": "Euronext Rule Book Book I - Harmonised Rules",
+              "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "verified": "2026-08-16",
+          "en": null,
+          "enum": null,
+          "quote": null
+        }
       }
     },
     "listing": {

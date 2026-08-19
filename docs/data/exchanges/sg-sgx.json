@@ -800,32 +800,392 @@
       },
       "derivatives": {
         "trading_sessions": {
-          "pre_market": null,
-          "continuous_am": null,
-          "lunch_break": null,
-          "continuous_pm": null,
-          "after_market": null,
-          "night_session": null
+          "pre_market": {
+            "zh": "",
+            "confidence": "low",
+            "detail": "Rule 4.1.5 仅说明「开盘/收盘例行程序」由交易所为每个合约另行制定，未见类似 SGX-ST 那样的通用时段切分说明，具体结构因合约而异，本次未能逐合约核实，如实留空。",
+            "sources": [
+              {
+                "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+                "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+                "accessed": "2026-08-14"
+              }
+            ],
+            "verified": "2026-08-14",
+            "en": null,
+            "enum": null,
+            "quote": null
+          },
+          "continuous_am": {
+            "zh": "「T时段」（T Session，即合约的正常交易时段）：具体开收盘钟点因合约而异，规则原文未给出统一时间表，仅确认「T时段」这一划分本身存在——用以区分「T日成交」与「T+1时段成交」两类协商大宗交易（NLT）的适用规则（见 night_session）；具体钟点载于各合约独立的 Contract Specifications 文件（sgx.com 前端渲染，本次未能抓取）",
+            "en": "\"T Session\" (the Contract's normal trading hours): exact opening/closing clock times vary by contract and are not tabulated in the Rules text; only the existence of the \"T\" session designation itself is confirmed — used to distinguish \"T Trades\" from \"T+1 Trades\" for Negotiated Large Trade (NLT) purposes (see night_session); exact times live in each Contract's separate Contract Specifications document (client-rendered on sgx.com, not fetchable this session)",
+            "sources": [
+              {
+                "title": "Regulatory Notice 2.1.3A(4); 4.1.11 — Negotiated Large Trades（3.1 Trading Hours，\"T\"/\"T+1\" 时段划分定义处）",
+                "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "All NLTs executed during or before the Contract \"T\" trading hours shall be \"T Trades\" while NLTs executed after the Contract \"T\" trading hours shall be \"T+1 Trades\".",
+            "confidence": "medium",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          },
+          "lunch_break": {
+            "zh": "",
+            "confidence": "low",
+            "detail": "「T时段」内部是否统一设午间休市，本次抓取的规则文本未见说明，未核实，如实留空。",
+            "sources": [
+              {
+                "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+                "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+                "accessed": "2026-08-14"
+              }
+            ],
+            "verified": "2026-08-14",
+            "en": null,
+            "enum": null,
+            "quote": null
+          },
+          "continuous_pm": {
+            "zh": "",
+            "confidence": "low",
+            "detail": "见 continuous_am 说明——「T时段」未见按上午/下午拆分的官方统一描述，如实留空。",
+            "sources": [
+              {
+                "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+                "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+                "accessed": "2026-08-14"
+              }
+            ],
+            "verified": "2026-08-14",
+            "en": null,
+            "enum": null,
+            "quote": null
+          },
+          "after_market": {
+            "zh": "",
+            "confidence": "low",
+            "sources": [
+              {
+                "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+                "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+                "accessed": "2026-08-14"
+              }
+            ],
+            "verified": "2026-08-14",
+            "en": null,
+            "enum": null,
+            "detail": null,
+            "quote": null
+          },
+          "night_session": {
+            "zh": "「T+1时段」（T+1 Session，收市后/延长交易时段）：与「T时段」并列存在，规则原文在错误交易撤销时限（T或T+1时段收盘后15分钟内不得再申请撤销）等条款中明确区分两个时段的处理方式，但具体起止钟点同样未见统一时间表，因合约而异",
+            "en": "\"T+1 Session\" (after-hours/extended trading session): exists alongside the \"T\" Session — the Rules text explicitly distinguishes the two sessions' treatment (e.g. no error-trade cancellation may be requested beyond 15 minutes after the close of the T or T+1 session), but exact clock times are likewise not tabulated and vary by contract",
+            "sources": [
+              {
+                "title": "Regulatory Notice 4.1.8 — SGX-DT Market Error Trade Policy（2.6.2(b)，T/T+1 时段区别处理条款）",
+                "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "There will be no trade cancellation beyond 15 minutes after the close of T or T+1 session, as the case may be.",
+            "confidence": "medium",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          }
         },
-        "holidays_note": null,
-        "opening_mechanism": null,
-        "closing_mechanism": null,
-        "matching_principle": null,
-        "order_types": null,
-        "tick_size": null,
-        "contract_specs_note": null,
+        "holidays_note": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "本次抓取页面未见衍生品市场（SGX-DT）节假日安排与现货市场存在实质差异的官方说明，未逐条核实，如实留空。",
+          "sources": [
+            {
+              "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "opening_mechanism": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "Rule 4.1.5 仅授权交易所「为每个合约另行制定开盘/收盘例行程序」，未见类似 SGX-ST 均衡价（Equilibrium Price）算法那样的统一开盘机制说明；具体算法载于 Contract Specifications（规则原文明确声明为独立文件），本次未能抓取，如实留空。",
+          "sources": [
+            {
+              "title": "4.1.5 Trading Hours, Opening and Closing Routines and Closing Range（Futures Trading Rules）",
+              "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "closing_mechanism": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "同 opening_mechanism——Rule 4.1.5 仅提及「收盘例行程序」与「收市价格区间（Closing Range）」由交易所逐合约另行制定，未见统一机制说明，如实留空。",
+          "sources": [
+            {
+              "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "verified": "2026-08-14",
+          "en": null,
+          "enum": null,
+          "quote": null
+        },
+        "matching_principle": {
+          "zh": "价格优先、时间优先为基本原则；交易所可为特定合约启用「价格点开创者」（Price Point Maker, PPM）、「做市商」（Market Maker, MM）或「按比例分配」（Pro-Rata Order）三种算法之一或组合，启用后同价位订单改按相应算法优先分配，而非单纯时间优先",
+          "en": "Price priority then time priority as the baseline; the Exchange may activate one or more of three algorithms for a given Contract — Price Point Maker (\"PPM\"), Market Maker (\"MM\"), or Pro-Rata Order allocation — in which case orders at the same price are allocated per that algorithm rather than by simple time priority",
+          "sources": [
+            {
+              "title": "Regulatory Notice 4.1.6 — Trade Matching Algorithms Applicable to the SGX-DT Market",
+              "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "All orders entered into the Trading System will be matched in a manner that gives priority to price; i.e. orders at the best price (highest bid/lowest offer) receive priority over other orders in the same Contract Month/spreads. ... For orders at the same price point, the time priority would apply ... unless any one (1) or more of the trade matching algorithms (PPM, MM and Pro-Rata Order) is applicable.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "order_types": {
+          "zh": "审计留痕相关监管通告举例列出的订单类型包括：市价盘（Market Order）、限价盘（Limit Order）、止损盘（Stop Order）；组合型订单如「市价触发」（Market-If-Touched）、「市价收盘」（Market-On-Close）、「一撤一」（One-Cancels-the-Other）；有效期类型含当日有效（day order）、全部成交否则取消（fill or kill）、撤销前有效（good-till-cancelled）、指定日期前有效（good-till-date）、指定时段内有效（good-till-session）——该清单以「例如」形式出现在审计留痕规定中，未必穷尽 SGX-DT 支持的全部订单类型",
+          "en": "Order types listed as examples in the audit-trail regulatory notice include: Market Order, Limit Order, Stop Order; combined order types such as Market-If-Touched, Market-On-Close, One-Cancels-the-Other; validity types including day order, fill or kill, good-till-cancelled, good-till-date, good-till-session — this list appears illustratively (\"e.g.\") within an audit-trail record-keeping notice and may not be an exhaustive enumeration of every order type SGX-DT supports",
+          "sources": [
+            {
+              "title": "Regulatory Notice 2.6.4 — Audit Trails and Records（3.2.1 Record of Orders 留痕字段清单）",
+              "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Order type (e.g. Market Order, Limit Order, Stop Order) ... Combined order type (e.g. Market — If — Touched order, Market — On — Close order, One — Cancels — the — Other Order) ... Order qualifier (e.g. day order, fill or kill, good — till — cancelled, good — till — date, good — till — session)",
+          "confidence": "medium",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "tick_size": {
+          "zh": "因合约而异，逐合约在 Contract Specifications 中规定；以《Regulatory Notice 4.1.11》附录公布的「一般市场最小报价单位」（Market Tick Size，区别于协商大宗交易适用的更细「NLT Tick Size」）为例：MSCI新加坡指数期货与期权为0.05指数点（合S$5）；日经225指数期货为5指数点（合¥2,500）；澳元/美元期货为US$0.0001（合US$2.50）；10年期日本国债期货为每¥100面值¥0.01（合¥10,000）——该表随监管通告定期更新（本次抓取版本注明适用期为2026年7月20日至8月23日），仅作举例，不代表长期不变或穷尽全部合约",
+          "en": "Varies by contract, set in each Contract's Contract Specifications; illustrative examples from the standard \"Market Tick Size\" table published as an appendix to Regulatory Notice 4.1.11 (distinct from the finer \"NLT Tick Size\" used for negotiated large trades): MSCI Singapore Index Futures and Options 0.05 index points (S$5); Nikkei 225 Index Futures 5 index points (¥2,500); AUD/USD Futures US$0.0001 (US$2.50); 10-Year Japanese Government Bond Futures ¥0.01 per ¥100 face value (¥10,000) — this table is periodically revised via regulatory notice (the fetched version states it is effective 20 Jul 2026 to 23 Aug 2026); illustrative only, not a stable long-term figure nor an exhaustive list",
+          "sources": [
+            {
+              "title": "Appendix B To Regulatory Notice 4.1.11 — Minimum Tick Schedule for Negotiated Large Trades",
+              "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "MINIMUM TICK SCHEDULE FOR NEGOTIATED LARGE TRADES Contract Market Tick Size NLT Tick Size ... MSCI Singapore Index Futures and Options 0.05 index points (S$5) 0.01 index points (S$1) ... Nikkei 225 Index Futures 5 index points (¥2,500) 0.01 index points (¥5) ... SGX AUD/USD Futures US$0.0001 (US$2.50) US$0.0001 (US$2.50) ... SGX 10-Year Japanese Government Bond Futures ¥0.01 per ¥100 face value (¥10,000) ¥0.01 per ¥100 face value (¥10,000)",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "contract_specs_note": {
+          "zh": "「合约规格」（Contract Specifications）被规则原文明确定义为独立于本 Rules 之外的另一份文件（含合约规模、合约月份、交易时段、标的、行使价、最小报价单位、最后交易日、结算方式等），托管于 sgx.com（纯前端渲染，本项目本次未能抓取），故本字段只能给出可从最小报价单位表反推的合约乘数示例：MSCI新加坡指数期货/期权每指数点价值约S$100（由0.05指数点=S$5反推）；日经225指数期货每指数点约¥500（由5指数点=¥2,500反推）；10年期日本国债期货合约面值约¥1亿（由每¥100面值¥0.01报价单位=¥10,000反推）——以上乘数为算术推算而非规则原文直接声明的数字，故本字段 confidence 标 medium",
+          "en": "\"Contract Specifications\" is explicitly defined in the Rules as a document separate from the Rules themselves (covering contract size, Contract Month, trading hours, Underlying, exercise price, minimum price fluctuation, Last Trading Day, settlement basis, etc.), hosted on sgx.com (client-rendered, not fetchable this session) — so this field can only offer contract-multiplier examples arithmetically derived from the tick-size table: MSCI Singapore Index Futures/Options ≈ S$100 per index point (from 0.05 points = S$5); Nikkei 225 Index Futures ≈ ¥500 per index point (from 5 points = ¥2,500); 10-Year JGB Futures ≈ ¥100 million face value (from ¥0.01 per ¥100 face value = ¥10,000) — these multipliers are arithmetic inferences, not numbers stated verbatim in the Rules, hence confidence: medium",
+          "sources": [
+            {
+              "title": "Contract Specifications 定义（Futures Trading Rules — Definitions and Interpretation）",
+              "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "Appendix B To Regulatory Notice 4.1.11 — Minimum Tick Schedule for Negotiated Large Trades",
+              "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Contract Specifications Refers to the commercial and technical terms of a Contract, including the Contract size, Contract Month, trading hours, Underlying, exercise price, minimum price fluctuation, Last Trading Day, settlement basis and method of exercise; Unless otherwise stated, Contract Specifications are distinct and separate documents which are not part of this Rules.",
+          "confidence": "medium",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
         "price_limits": {
-          "type": null,
-          "main_board": null,
-          "other_boards": null
+          "type": {
+            "zh": "「价格限制」（Price Limit）：交易所可为特定合约设置，指某交易时段内允许的最大涨跌幅，一旦触及即可能触发「冷静期」（Cooling Off Period）；规则原文未限定这个「最大涨跌幅」是百分比还是绝对点数/价位（因合约而异，载于 Contract Specifications），故不套用受控词表任何一个选项，留空 enum",
+            "en": "\"Price Limit\": the Exchange may prescribe, for a given Contract, the maximum price advance or decline permitted during a trading session, breach of which may trigger a \"Cooling Off Period\"; the Rules text does not specify whether this is a percentage band or an absolute point/price band (varies by contract, set in Contract Specifications), so no `price_limit_type` enum value is applied here",
+            "sources": [
+              {
+                "title": "4.1.15 Price Limits and Cooling Off（Futures Trading Rules）",
+                "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+                "accessed": "2026-08-18"
+              }
+            ],
+            "quote": "The Exchange may prescribe, for certain Contracts, Price Limits which are designed to temporarily restrict trading when the Market(s) becomes volatile. \"Price Limit\" refers to the maximum price advance or decline during any trading session(s), as provided under the relevant Contract Specifications, upon which the Exchange may signal a Cooling Off Period.",
+            "confidence": "high",
+            "verified": "2026-08-14",
+            "enum": null,
+            "detail": null
+          },
+          "main_board": {
+            "zh": "",
+            "confidence": "low",
+            "detail": "具体档位（百分比或点数）逐合约载于 Contract Specifications，本次未能抓取，如实留空。",
+            "sources": [
+              {
+                "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+                "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+                "accessed": "2026-08-14"
+              }
+            ],
+            "verified": "2026-08-14",
+            "en": null,
+            "enum": null,
+            "quote": null
+          },
+          "other_boards": {
+            "zh": "",
+            "confidence": "low",
+            "sources": [
+              {
+                "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
+                "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
+                "accessed": "2026-08-14"
+              }
+            ],
+            "verified": "2026-08-14",
+            "en": null,
+            "enum": null,
+            "detail": null,
+            "quote": null
+          }
         },
-        "circuit_breaker": null,
-        "volatility_interruption": null,
-        "trading_halt_mechanism": null,
-        "block_trade": null,
-        "market_maker_scheme": null,
-        "margin_practice_note": null,
-        "connect_schemes": null
+        "circuit_breaker": {
+          "enum": "stock_level",
+          "zh": "逐合约级别的「价格限制/冷静期」机制（非全市场性质）：交易所可为特定合约单独设置价格限制并触发冷静期；期权合约在其标的期货合约冷静期内同步暂停交易——与港交所衍生品市场VCM同样是「逐合约」颗粒度，借用 stock_level 仅取其「非全市场」含义（沿用 hk-hkex.derivatives.circuit_breaker 先例的处理方式），不代表真的是个股层面",
+          "en": "A per-contract \"Price Limit / Cooling Off\" mechanism (not market-wide): the Exchange may prescribe Price Limits for specific Contracts that trigger a Cooling Off Period; an Option Contract halts in sync with its underlying Futures Contract's Cooling Off Period — the same per-contract granularity as HKEX derivatives' VCM; `stock_level` is borrowed only for its \"not market-wide\" sense (following the hk-hkex.derivatives.circuit_breaker precedent), not a literal single-stock-level claim",
+          "sources": [
+            {
+              "title": "4.1.15 Price Limits and Cooling Off（Futures Trading Rules）",
+              "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The Exchange may prescribe, for certain Contracts, Price Limits which are designed to temporarily restrict trading when the Market(s) becomes volatile. ... With respect to an Option Contract, trading in the Option Contract shall be halted: (a) for the duration of the Cooling Off Period in the underlying Futures Contract; or (b) as prescribed in the Contract Specifications.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "detail": null
+        },
+        "volatility_interruption": {
+          "zh": "「冷静期」（Cooling Off Period）：持续时长载于各合约的 Contract Specifications（规则原文未统一规定），期间该合约可在价格限制区间内继续交易；冷静期届满后恢复正常交易，直至当个交易日结束或 Contract Specifications 另行规定的其他期间",
+          "en": "\"Cooling Off Period\": duration is set in each Contract's Contract Specifications (not uniformly prescribed in the Rules text); during the period the Contract may continue trading within its Price Limits; trading resumes normally upon the period's lapse, for the remainder of the Trading Day or such other period as the Contract Specifications prescribe",
+          "sources": [
+            {
+              "title": "4.1.15 Price Limits and Cooling Off（Futures Trading Rules）",
+              "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "\"Cooling Off Period\" means such period as set forth in the relevant Contract Specifications during which each Contract may be traded at or within its Price Limits. Trading may resume upon the lapse of the Cooling Off Period, for the remainder of the Trading Day, or such other period as may be prescribed in the relevant Contract Specifications.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "trading_halt_mechanism": {
+          "zh": "标的暂停交易时，或市场出现无明显基本面/经济原因支撑的重大异动时，交易所可对相关合约宣布交易暂停（Trading Halt）——无论该合约是否已触及价格限制，交易所均有权行使该权力，二者是相互独立的机制",
+          "en": "The Exchange may declare a Trading Halt in a Contract where trading in the Underlying is halted, or where there has been a major market movement without any apparent economic or fundamental basis — this power applies irrespective of whether the Contract has reached its Price Limits, i.e. the two mechanisms are independent",
+          "sources": [
+            {
+              "title": "4.1.16 Trading Halt（Futures Trading Rules）",
+              "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "In the event that trading in the Underlying is halted, or where there has been a major market movement without any apparent economic or fundamental basis for the movement to have occurred, the Exchange may declare a trading halt in the relevant Contract. This is irrespective of whether trading in the Contract has reached the Price Limits.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "block_trade": {
+          "zh": "协商大宗交易机制（Negotiated Large Trade, NLT）：经交易所核准的合约可进行场外协商的大宗交易，须符合交易所规定的最低成交量门槛（逐合约不同，如日经225指数期货为5手，MSCI新加坡指数期货为50手，见附录A）及相关申报要求；成交后须依清算规则登记，按执行时点分为「T日成交」与「T+1时段成交」两类分别处理",
+          "en": "Negotiated Large Trade (NLT) facility: contracts designated by the Exchange may be traded off-order-book subject to a minimum volume threshold prescribed per contract (e.g. 5 lots for Nikkei 225 Index Futures, 50 lots for MSCI Singapore Index Futures, per Appendix A) and related notification requirements; executed NLTs must be registered per the Clearing Rules and are classified as \"T Trades\" or \"T+1 Trades\" depending on execution timing",
+          "sources": [
+            {
+              "title": "4.1.11 Negotiated Large Trades（Futures Trading Rules）与 Regulatory Notice 2.1.3A(4); 4.1.11 — Negotiated Large Trades（含 Appendix A 最低成交量门槛表）",
+              "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The Exchange may, from time to time, designate and approve a Contract for Negotiated Large Trade transactions. Contracts eligible for Negotiated Large Trade transactions shall comply with the minimum volume thresholds, related notification requirements and such other procedures as prescribed by the Exchange from time to time. ... All NLTs executed during or before the Contract \"T\" trading hours shall be \"T Trades\" while NLTs executed after the Contract \"T\" trading hours shall be \"T+1 Trades\". ... MINIMUM VOLUME THRESHOLDS FOR NLTS ... Micro Nikkei 225 Index Futures 50 MSCI Singapore Index Futures 50 MSCI Singapore Index Options 25 Nikkei 225 Index Futures 5 Nikkei 225 Index Options 5",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "market_maker_scheme": {
+          "zh": "SGX-DT 认可「指定做市商」（designated market maker）身份：交易撮合算法可对其订单启用「做市商优先分配」（MM Allocation），使同价位下做市商订单优先于其他订单成交；做市商的报价请求（RFQ）不构成「预先约定交易」（pre-arranged trade）的禁止情形——但本次抓取的规则文本未找到类似 SGX-ST Chapter 6（现货市场指定做市商制度）那样完整的资格认定/义务/激励条款，衍生品市场做市商计划的具体细节可能载于未能抓取的商业性文件，confidence 因此标 medium",
+          "en": "SGX-DT recognises \"designated market maker\" status: the trade matching algorithm can activate \"Market Maker Allocation\" (MM), giving a designated market maker's orders priority over other orders at the same price; a request for a quote from a designated market maker does not fall foul of the pre-arranged-trade prohibition — however, this session's fetch did not turn up a full DMM eligibility/obligations/incentive chapter comparable to SGX-ST Chapter 6 for the securities market; the derivatives market maker programme's fuller details may live in commercial documentation not fetched this session, hence confidence: medium",
+          "sources": [
+            {
+              "title": "Regulatory Notice 4.1.6 — Trade Matching Algorithms Applicable to the SGX-DT Market",
+              "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "4.1.13 Pre-arranged Trades Prohibited（Futures Trading Rules）",
+              "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Market Maker Allocation (\"MM\"). Orders of designated market makers would receive priority over other orders at the same price. ... For the avoidance of doubt, a request for a quote from a designated market maker approved by the Exchange does not constitute a pre-arranged trade.",
+          "confidence": "medium",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "margin_practice_note": {
+          "zh": "结算所（SGX-DC）采用标准组合风险分析系统（SPAN）作为最低保证金要求的风险保证金算法：以风险参数文件（至少每日更新）计算持仓组合的最低整体保证金需求，由期货合约的风险成分与期权合约按当日结算价盯市的权益成分两部分构成；结算会员须向其客户（含第三方）收取初始保证金，并确保客户按结算所要求持续满足维持保证金",
+          "en": "The Clearing House (SGX-DC) adopts the Standard Portfolio Analysis of Risk Margin System (SPAN) as its minimum-margin risk algorithm: SPAN computes minimum overall margin requirements for a portfolio of positions using risk parameter files updated at least daily, comprising a risk component (Futures Contracts) and an equity component (Option Contracts marked to the current day's settlement price); Clearing Members must procure initial margins from their Customers (including Third Parties) and ensure Customers continually meet maintenance margins as required by the Clearing House",
+          "sources": [
+            {
+              "title": "Practice Note 7.22 — Margins of Third Parties（2.1 Margin System，SPAN 说明）",
+              "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+              "accessed": "2026-08-18"
+            },
+            {
+              "title": "7.22.1 Margins of Third Parties（SGX-DC Clearing Rules，初始/维持保证金条款）",
+              "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The Standard Portfolio Analysis of Risk Margin System (\"SPAN\") is the risk margin system adopted by the Exchange and the Clearing House. ... SPAN is a risk-based, portfolio approach margining system used to compute minimum overall margin requirements for a portfolio of positions in Contracts. ... A Clearing Member shall procure initial margins from its Third Parties (including Customers), and ensure that its Third Parties comply with maintenance margins for such amounts as required by the Clearing House.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        },
+        "connect_schemes": {
+          "zh": "NSE IFSC—SGX Connect：与印度 NSE IFSC（National Stock Exchange International Financial Services Centre，设于印度GIFT City）之间的互联互通安排，便利交易会员在「Connect Market」（NSE IFSC在GIFT运营的市场，经Connect Broker「SGX India Connect IFSC Private Limited」接入）交易「Connect合约」；产品体系中的NSE IFSC Nifty系列指数期货/期权即为该安排下的挂牌合约",
+          "en": "NSE IFSC – SGX Connect: a cross-border linkage with India's NSE IFSC (National Stock Exchange International Financial Services Centre, in India's GIFT City), facilitating Trading Members' access to trade \"Connect Contracts\" on the \"Connect Market\" (the market NSE IFSC operates in GIFT, accessed via the Connect Broker, SGX India Connect IFSC Private Limited); the NSE IFSC Nifty-series index futures/options in the product line-up are contracts listed under this arrangement",
+          "sources": [
+            {
+              "title": "SGX-DC Clearing Rules — Definitions（\"Connect\"/\"Connect Market\"/\"Connect Broker\"/\"Connect Contract\" 定义）",
+              "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "\"Connect\" means the NSE IFSC - SGX Connect, an arrangement established for the purpose of facilitating access to trading of Connect Contracts on the Connect Market by Trading Members. ... \"Connect Broker\" means SGX India Connect IFSC Private Limited. ... \"Connect Market\" means the market operated by the NSE IFSC in GIFT and accessed via the Connect Broker.",
+          "confidence": "high",
+          "verified": "2026-08-14",
+          "enum": null,
+          "detail": null
+        }
       }
     },
     "listing": {
