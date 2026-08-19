@@ -104,6 +104,8 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 卖空监管规则: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en
   - 结算总览（CCASS）: https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en
   - 上市规则总览: https://www.hkex.com.hk/Listing/Rules-and-Guidance/Listing-Rules?sc_lang=en
+  - 证券市场交易机制（Orion Trading Platform，含撮合原则/订单类型正文，2026-08-19 补登记——此前只登记了衍生品市场同名页面，两者内容不同，之前误当同一页处理）: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Trading-Mechanism?sc_lang=en
+  - 同上（中文版）: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Trading-Mechanism?sc_lang=zh-hk
 - `en-rules.hkex.com.hk`（英文版规则手册，独立域名） | 官方 | en | curl 常规 UA 200，未见反爬；**单章节 Rulebook 落地页（如 `/rulebook/chapter-8-qualifications-listing`）本身是纯 JS 单页应用外壳，curl 只能拿到导航栏、抓不到正文（grep 不到任何规则数字）——真正含正文的是同一站点下的章节 PDF 直链**，需要先 WebSearch 定位具体 PDF URL（搜索关键词里带 `en-rules.hkex.com.hk` + 章节名，PDF 文件名形如 `HKEX4476_<element_id>_VER<version>.pdf`，无法直接从章节 slug 拼出，必须先搜到） | 用于补全 `listing.boards[].financial_threshold`（2026-08-17）
   - Main Board Listing Rules Chapter 8《股本证券上市资格》PDF（8.05条盈利测试/市值收益现金流测试/市值收益测试三选一，8.09条一般市值门槛）: https://en-rules.hkex.com.hk/sites/default/files/net_file_store/HKEX4476_2301_VER24281.pdf（HTTP 200，86KB）
   - GEM Listing Rules Chapter 11《股本证券上市资格》PDF（11.12A条现金流测试/市值收益研发测试二选一，11.23(6)条一般市值门槛）: https://en-rules.hkex.com.hk/sites/default/files/net_file_store/HKEX4476_567_VER38010.pdf（HTTP 200，74KB）
