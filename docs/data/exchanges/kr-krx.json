@@ -1261,7 +1261,7 @@
           "id": "kr-krx-konex",
           "name_zh": "中小企业市场",
           "name_native": "KONEX Market",
-          "financial_threshold": "本次抓取材料未确认KONEX自身初始上市门槛的具体数值，仅确认其定位与转板KOSDAQ的5条快速通道标准（见 transfer_between_boards），见 OPEN-QUESTIONS",
+          "financial_threshold": "官方原文明确说明KONEX市场制度设计上不设营收/净利等财务数值门槛（原文：\"KONEX market does not apply the financial criteria such as sales amount and net profit so that the startups and venture businesses which do not have outstanding business performance yet can list their shares on the KONEX market\"）；量化标准仅五项非财务要求——股份转让不受限制、最近一期审计意见须为无保留意见、须与指定顾问签约、须符合《中小企业基本法》第2条中小企业身份、面值须为100/200/500/1000/2500/5000韩元之一；另有一套定性标准（管理层市场诚信记录、公司治理透明度、会计信息透明度、投资风险揭示等），同样不涉及具体数值门槛。2026-08-21核实，来源见 SOURCES.md 该所一节 KONEX Listing Criteria — Quantitative/Qualitative 两条",
           "target_companies": "依《中小企业基本法》第2条定义的中小企业（面向创业与成长期中小企业的市场）",
           "launched_year": "2013"
         }
@@ -1389,12 +1389,17 @@
     },
     "indices": {
       "meta": {
-        "verified": "2026-08-16",
+        "verified": "2026-08-21",
         "sources": [
           {
             "title": "History（KRX官网英文版年表）",
             "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
             "accessed": "2026-08-16"
+          },
+          {
+            "title": "Introduction of KOSPI Market（KOSPI综合指数基日基点原文出处）",
+            "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201010100/GLB0201010100.jsp",
+            "accessed": "2026-08-21"
           }
         ],
         "confidence": "medium"
@@ -1405,8 +1410,10 @@
           "name_zh": "韩国综合股价指数",
           "name_native": "KOSPI (Korea Composite Stock Price Index)",
           "compiler": "self",
+          "base_date": "1980年1月4日",
+          "base_point": "100",
           "flagship": "yes",
-          "description": "KRX旗舰市场基准指数，覆盖KOSPI市场全部上市股票；基日/基点本次未在抓取材料中确认，未填写，见 OPEN-QUESTIONS"
+          "description": "KRX旗舰市场基准指数，覆盖KOSPI市场全部上市股票，按市值加权计算；基日基点2026-08-21核实于「Introduction of KOSPI Market」页原文（\"KOSPI is calculated based on the market capitalization with its base index at 100 on January 4, 1980.\"），来源见 SOURCES.md。⚠️ KRX 官网另一份「KRX Index Business」历史年表页写「1972 KCSPI(Korea Composite Stock Price Index) launched」「1983 KOSPI(Korea Composite Stock Price Index) launched」，即该指数早年名为KCSPI、1983年才更名KOSPI，但两份官方材料均未说明1980年基日与1972/1983两个年份之间的换算关系是否连续，本条目仅采信「Introduction of KOSPI Market」页对基日基点的直接陈述，不代表已核实清楚KCSPI→KOSPI换名前后的指数连续性"
         },
         {
           "id": "kospi200",
@@ -1423,7 +1430,7 @@
           "name_zh": "KOSDAQ综合指数",
           "name_native": "KOSDAQ Index",
           "compiler": "self",
-          "description": "KOSDAQ市场基准指数；基日/基点本次未确认"
+          "description": "KOSDAQ市场基准指数；基日/基点仍未确认（2026-08-21再次尝试，见 OPEN-QUESTIONS 具体说明本次新试过的路径与卡住的原因）"
         }
       ]
     },
