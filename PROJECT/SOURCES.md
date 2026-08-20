@@ -647,6 +647,12 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Stock Futures（个股期货合约规格：现金结算、最小报价单位0.01点，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/stock-futures.htm（HTTP 200）
 - `www.gov.br` | 监管 | pt-BR / en | curl 常规 UA 200，未见反爬 | 巴西证券监督管理机构 Comissão de Valores Mobiliários（CVM，证券委员会）在联合政府门户 gov.br 下的英文栏目，B3 的政府监管机构；本条目仅登记 `www.gov.br` 而非更宽泛的 `gov.br`，因为实际抓取到的 URL netloc 就是 www 子域
   - CVM 英文首页: https://www.gov.br/cvm/en（HTTP 200）
+  - CVM 机构简介"Sobre a CVM"页（葡萄牙语，核实CVM设立法律依据与历史地位，OPEN-QUESTIONS 悬案第2条用）: https://www.gov.br/cvm/pt-br/acesso-a-informacao-cvm/institucional/sobre-a-cvm
+  - Receita Federal（巴西联邦税务总局）官方新闻公告——关于第15.270/2025号法律利润/股息预扣所得税征收程序（OPEN-QUESTIONS 悬案第1条用）: https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2025/dezembro/receita-federal-orienta-sobre-os-procedimentos-para-o-recolhimento-do-imposto-de-renda-retido-na-fonte-sobre-lucros-e-dividendos
+- `conteudo.cvm.gov.br` | 官方（CVM自有法规库子域） | pt-BR | curl 常规 UA 200，未见反爬 | CVM 官网法规文库子站，托管历年法律/法令条目页；⚠️ 该子站是纯前端JS门户外壳的旧式CMS页面，条目页本身只给出法律标题/日期/一句话摘要，未附法律逐条正文（正文需另找 planalto.gov.br 等门户）
+  - Lei 6385/76 条目页（CVM法规库自有页面，标注1976-12-07与摘要"Cria a CVM e disciplina o mercado de capitais"，OPEN-QUESTIONS 悬案第2条用）: https://conteudo.cvm.gov.br/legislacao/leis-decretos/lei6385.html
+- `www.planalto.gov.br` | 官方（巴西联邦立法门户，总统府法务顾问办公室 Casa Civil 维护） | pt-BR | curl 常规 UA 200，未见反爬；⚠️ 页面无 `charset` 声明，实际编码为 Windows-1252（非UTF-8），用 python3 解析需显式指定 `encoding='cp1252'` 否则重音字符会乱码 | 巴西联邦法律现行有效文本的权威发布门户（`ccivil_03` 子路径），不是监管机构本身，但是法律原文/生效状态的一手来源
+  - Lei nº 15.270, de 26 de novembro de 2025 全文（OPEN-QUESTIONS 悬案第1条用，第3条修订《9.249/1995号法律》第10条新增非居民股息10%预扣税条款，第8条规定2026-01-01生效）: https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm
 - `bsmsupervisao.com.br` | 官方（B3自律监管子机构） | pt-BR / en | curl 常规 UA 200 | BSM Supervisão de Mercados，2007年由B3（原BM&FBOVESPA）设立的自律组织，负责对B3管理的市场及参与者进行一线监督、稽查与纪律处分，受CVM监督
   - 英文首页: https://www.bsmsupervisao.com.br/en/us/home（HTTP 200）
 ### 多伦多证券交易所 Toronto Stock Exchange (TSX) `ca-tsx`
