@@ -5647,13 +5647,13 @@
       "field_path": "delisting_conditions",
       "label_zh": "退市条件",
       "label_en": "Delisting Conditions",
-      "zh": "触发停止买卖之情事（未依限申报财报、净值低于实收资本额二分之一、查核报告为无法表示意见或否定意见、重大讯息违规且情节重大等）持续未改善者，上市公司得依《营业细则》第50条之1规定申请终止上市；具体的终止上市财务量化门槛条文本次未逐条抓取原文，见 OPEN-QUESTIONS",
-      "en": "Delisting follows a two-stage process: designation as a 'changed trading method' security, then suspension under Securities and Exchange Act Art. 147, and finally termination of listing under Business Operation Rules Art. 50-1",
+      "zh": "《营业细则》第五十条之一规定十九款终止上市法定情事，本公司应终止其上市并报请主管机关备查。其中主要量化门槛包括：最近期财务报告显示净值为负数者；上市特别股发行总额低于新台币二亿元或发行股数低于二千万股者；依第五十条规定停止买卖连续满六个月仍未恢复其买卖者；营业全面停顿六个月无法恢复，或连续六个月公告之营业收入为零或负数者；为另一已上市（柜）公司持有股份逾其已发行股份总数或实收资本额百分之七十以上者；自上市挂牌日起届满一年后该股票已在证券柜台买卖中心上柜者。此外还包括公司经裁定解散、宣告破产确定、裁定准予重整确定等公司主体消灭情事，以及经主管机关命令停止全部有价证券买卖达三个月以上等重大违规情事，合计十九款，全文见 quote",
+      "en": "Business Operation Rules Article 50-1 sets out nineteen statutory grounds on which TWSE must terminate a company's listing and report it to the regulator. Key quantitative triggers include: negative net worth per the most recent financial report; total issued preferred stock below New Taiwan dollars two hundred million, or fewer than twenty million shares; a trading suspension under Article 50 that remains unresolved for six consecutive months; a full business halt for six months with no resumption, or reported operating revenue at zero or negative for six consecutive months; more than seventy percent of issued shares or paid-in capital held by another listed/OTC-listed company; and remaining OTC-listed for over one year after the TWSE listing date. Other grounds include company dissolution, bankruptcy, or court-approved reorganization, and a regulator-ordered suspension of all securities trading lasting three months or more",
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
       "verified": "2026-08-16",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "exchange_id": "tw-twse",

@@ -678,7 +678,9 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Trading Mechanism Introduction（英文版，内容对应但部分细节比中文版简略）: https://www.twse.com.tw/en/products/system/trading.html
   - 股价升降幅度（tick size 阶梯表）: https://www.twse.com.tw/zh/trading/delivery/twt84u.html
   - 瞬间价格稳定措施（个股级波动中断机制，子域名）: https://shl.twse.com.tw/page/trading/6.html
-  - Fact Book（英文，市值/上市家数/成交额年度统计）: https://www.twse.com.tw/en/about/company/factbooks.html
+  - Fact Book（英文，市值/上市家数/成交额年度统计，索引页本身只是历年目录，不含可直接摘引的当期数字，见下方两条具体章节页）: https://www.twse.com.tw/en/about/company/factbooks.html
+  - Fact Book 2026（涵盖2025年度数据）Listing Statistics for Stock 章节（2021-2025年逐年上市公司家数/上市股票家数/上市股数/总市值统计表，URL 路径含 zh 但页面内容本身是英文，与 Fact Book 索引页的双语结构一致）: https://www.twse.com.tw/downloads/zh/about/company/factbook/2026/1.01.html
+  - Fact Book 2026（涵盖2025年度数据）Stock Trading Volume and Value 章节（2021-2025年逐年成交金额/成交量/周转率统计表）: https://www.twse.com.tw/downloads/zh/about/company/factbook/2026/3.01.html
   - 平盘下得融（借）券卖出之证券名单页（做空平盘下限制说明）: https://www.twse.com.tw/zh/trading/margin/twt92u.html
   - Regulations, Notices, Letters and Orders overview（英文，证券借贷相关规则入口）: https://www.twse.com.tw/en/products/sbl/law/overview.html
   - 发行量加权股价指数（TAIEX）编制要点 PDF: https://www.twse.com.tw/downloads/zh/products/indices/IndexS02.pdf
