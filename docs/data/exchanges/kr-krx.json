@@ -506,20 +506,20 @@
           "detail": null
         },
         "night_session": {
-          "zh": "现货股票无夜盘；KOSPI200期货/期权在CME Globex（2009年起）与Eurex（2010年起）有夜盘挂牌交易安排，但那是境外交易所（CME/Eurex）自身运营的夜盘时段，不属于KRX自身现货或衍生品市场的夜盘",
-          "en": "No night session for cash equities; KOSPI200 futures/options have night-time listings on CME Globex (since 2009) and Eurex (since 2010), but those night sessions are operated by the foreign exchanges (CME/Eurex) themselves, not by KRX's own cash or derivatives market",
+          "zh": "现货股票无夜盘；衍生品市场夜盘已于2025年6月转为KRX自主运营（KRX in-house Night Session），此前分两段境外联动均已终止：与CME联动（2009年8月至2020年4月，KOSPI200期货/美元期货）、与Eurex联动（2010年8月至2025年6月终止，KOSPI200期货/期权/周期权、Mini-KOSPI200期货、美元期货）。自主运营夜盘的具体时段、可交易品种详见 market_structure.derivatives.trading_sessions.night_session",
+          "en": "No night session for cash equities; the derivatives market's night session transitioned to KRX's own in-house operation in June 2025. It was previously linked with CME (August 2009-April 2020, KOSPI 200 Futures/USD Futures) and with Eurex (August 2010-terminated June 2025, KOSPI 200 Futures/Options/Weekly Options, Mini-KOSPI 200 Futures, USD Futures), both foreign-exchange-operated arrangements now ended. See market_structure.derivatives.trading_sessions.night_session for the current self-operated session's hours and tradable products",
           "sources": [
             {
-              "title": "History（KRX官网英文版年表）",
-              "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
-              "accessed": "2026-08-16"
+              "title": "Guide to Night Session in KRX Derivatives Market（PDF，2025年4月，KRX衍生品市场官方发布）",
+              "url": "https://global.krx.co.kr/contents/GLB/02/0201/0201041003/Guide_to_Night_Session_in_KRX_Derivatives_Market.pdf",
+              "accessed": "2026-08-20"
             }
           ],
-          "quote": "2009 Nov.16 Launched Nighttime Trading of KOSPI200 Futures on CME Globex / 2010 Aug.30 Launched Night-time Trading of KOSPI200 Options on Eurex",
-          "confidence": "medium",
+          "quote": "KRX is now transitioning to its own night session. The launch is targeted for early June 2025 / * (CME-linked trading) August 2009~April 2020 / (Eurex-linked trading) August 2010~June 2025",
+          "confidence": "high",
+          "detail": "2026-08-20核实并订正：此前（2026-08-16）本字段仅提及CME/Eurex夜盘联动仍在进行，未反映KRX已于2025年6月转自主运营、且CME联动实际已于2020年4月（早于Eurex）终止的事实；本次改用《Guide to Night Session in KRX Derivatives Market》官方PDF重新核实。与 market_structure.derivatives.trading_sessions.night_session（2026-08-18核实的衍生品子块，同一份PDF来源）此前存在的表述不一致已解决，见 PROJECT/OPEN-QUESTIONS.md 相关条目（已删除）。",
           "verified": "2026-08-16",
-          "enum": null,
-          "detail": null
+          "enum": null
         }
       },
       "holidays_note": {
@@ -943,7 +943,7 @@
             ],
             "quote": "17:50~18:00 18:00~05:50 05:50~6:00 ⋯ KOSPI200 Futures, KOSPI200 Options, KOSPI200 Weekly Options(Monday, Thursday), Mini-KOSPI200 Futures, Mini-Kospi200 Options, KOSDAQ150 Futures, KOSDAQ150 Options, 3-year KTB Futures, 10-year KTB Futures, USD Futures",
             "confidence": "high",
-            "detail": "KRX已于2025年6月转为自主运营夜盘（此前为2009年起与CME联动、2010年起与Eurex联动的挂钩交易模式，Eurex联动已于2025-06-05终止），见《Guide to Night Session in KRX Derivatives Market》PDF（2025年4月发布）。本文件顶层 market_structure.night_session 字段（2026-08-16核实）仍按旧的CME/Eurex联动模式表述，与本次抓取材料确认的最新事实存在出入；因超出本次任务范围（仅限 market_structure.derivatives 子块）未一并修订，已在 PROJECT/OPEN-QUESTIONS.md「具体数据悬案」新增一条记录，留待后续统一处理。",
+            "detail": "KRX已于2025年6月转为自主运营夜盘（此前为2009年8月起与CME联动、2010年8月起与Eurex联动的挂钩交易模式，CME联动已于2020年4月先行终止、Eurex联动已于2025年6月终止），见《Guide to Night Session in KRX Derivatives Market》PDF（2025年4月发布）。顶层 market_structure.night_session 字段此前（2026-08-16核实）仍按旧的CME/Eurex联动模式表述，已于2026-08-20按同一份PDF重新核实更新，两处表述已一致。",
             "verified": "2026-08-16",
             "enum": null
           }
