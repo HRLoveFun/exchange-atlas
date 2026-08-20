@@ -144,8 +144,6 @@
     var groups = cache.taxonomy.dimension_groups;
     var activeGroup = groups.some(function (g) { return g.id === params.group; }) ? params.group : groups[0].id;
     var region = params.region || "all";
-    var tier = params.tier || "all";
-    var q = (params.q || "").toLowerCase();
 
     var columns = [];
     cache.taxonomy.chapters.forEach(function (ch) {
@@ -156,17 +154,8 @@
     });
 
     var regions = Array.from(new Set(cache.manifest.exchanges.map(function (e) { return e.region; })));
-    var tiers = Array.from(new Set(cache.manifest.exchanges.map(function (e) { return e.tier; })));
     var exchanges = cache.manifest.exchanges.slice();
     if (region !== "all") exchanges = exchanges.filter(function (e) { return e.region === region; });
-    if (tier !== "all") exchanges = exchanges.filter(function (e) { return e.tier === tier; });
-    if (q) {
-      exchanges = exchanges.filter(function (e) {
-        return (e.name_zh || "").toLowerCase().indexOf(q) >= 0 ||
-          e.id.toLowerCase().indexOf(q) >= 0 ||
-          nativeText(e.name_native).toLowerCase().indexOf(q) >= 0;
-      });
-    }
 
     var cellIndex = {};
     cache.matrix.forEach(function (c) { cellIndex[c.exchange_id + "|" + c.field_path] = c; });
@@ -180,16 +169,6 @@
       html += '<option value="' + esc(r) + '"' + (region === r ? " selected" : "") + ">" + esc(enumLabel("region", r)) + " " + esc(enumLabelEn("region", r)) + "</option>";
     });
     html += "</select>";
-    html += '<label for="tierFilter">标杆批次 Tier</label>';
-    html += '<select id="tierFilter" data-role="tier">';
-    html += '<option value="all"' + (tier === "all" ? " selected" : "") + ">全部 All</option>";
-    tiers.forEach(function (t) {
-      html += '<option value="' + esc(t) + '"' + (tier === t ? " selected" : "") + ">" + esc(enumLabel("tier", t)) + " " + esc(enumLabelEn("tier", t)) + "</option>";
-    });
-    html += "</select>";
-    html += '<div class="spacer"></div>';
-    html += '<label for="searchBox">搜索 Search</label>';
-    html += '<input type="search" id="searchBox" data-role="search" placeholder="交易所名称 / ID" value="' + esc(params.q || "") + '" />';
     html += "</div>";
 
     html += '<div class="group-tabs">';
@@ -450,11 +429,14 @@
     return [[start, end]];
   }
   function tradingBarSegments(th) {
-    if (!th || th.open_utc == null || th.close_utc == null) return [];
+    if (!th || th.open_utc == null || th.close_utc == null) return { open: [], lunch: [] };
     if (th.lunch_start_utc != null && th.lunch_end_utc != null) {
-      return normalizeSegment(th.open_utc, th.lunch_start_utc).concat(normalizeSegment(th.lunch_end_utc, th.close_utc));
+      return {
+        open: normalizeSegment(th.open_utc, th.lunch_start_utc).concat(normalizeSegment(th.lunch_end_utc, th.close_utc)),
+        lunch: normalizeSegment(th.lunch_start_utc, th.lunch_end_utc),
+      };
     }
-    return normalizeSegment(th.open_utc, th.close_utc);
+    return { open: normalizeSegment(th.open_utc, th.close_utc), lunch: [] };
   }
   function renderTimezone(app, params) {
     var now = new Date();
@@ -472,7 +454,7 @@
     html += "各所交易时段按 UTC 对齐展示，由「市场结构与交易机制」章节的交易时段文本近似换算而来（不保证分钟级精确，含夏令时的所已按今天的日期自动折算），精确时段与出处见各所档案页。当前 <strong>";
     html += esc(_fmtHourLabel(nowUtc)) + " UTC</strong>（本地 " + esc(_fmtHourLabel(nowLocal)) + "）用竖线标出。</p>";
 
-    html += '<div class="tz-legend"><span><i class="tz-swatch tz-swatch-open"></i>连续交易 Continuous Trading</span><span><i class="tz-swatch tz-swatch-now"></i>当前时刻 Now</span></div>';
+    html += '<div class="tz-legend"><span><i class="tz-swatch tz-swatch-open"></i>连续交易 Continuous Trading</span><span><i class="tz-swatch tz-swatch-lunch"></i>午休 Lunch Break</span><span><i class="tz-swatch tz-swatch-now"></i>当前时刻 Now</span></div>';
 
     html += '<div class="tz-chart">';
     html += '<div class="tz-axis"><span class="tz-axis-spacer"></span><span class="tz-axis-ticks">';
@@ -488,14 +470,17 @@
       html += '<a class="tz-label" href="#view=exchange&id=' + esc(e.id) + '&ch=market_structure">' + esc(exchangeDisplayName(e)) +
         '<span class="tz-offset">UTC' + (th.utc_offset_hours >= 0 ? "+" : "") + th.utc_offset_hours + "</span></a>";
       html += '<div class="tz-track">';
-      segs.forEach(function (seg) {
-        html += '<div class="tz-bar" style="left:' + (seg[0] / 24 * 100) + "%;width:" + ((seg[1] - seg[0]) / 24 * 100) + '%" title="' +
+      segs.open.forEach(function (seg) {
+        html += '<div class="tz-bar tz-bar-open" style="left:' + (seg[0] / 24 * 100) + "%;width:" + ((seg[1] - seg[0]) / 24 * 100) + '%" title="' +
           esc(th.open_local + "–" + th.close_local + " 本地 Local, UTC" + (th.utc_offset_hours >= 0 ? "+" : "") + th.utc_offset_hours) + '"></div>';
+      });
+      segs.lunch.forEach(function (seg) {
+        html += '<div class="tz-bar tz-bar-lunch" style="left:' + (seg[0] / 24 * 100) + "%;width:" + ((seg[1] - seg[0]) / 24 * 100) + '%" title="' +
+          esc("午休 Lunch Break " + th.lunch_start_local + "–" + th.lunch_end_local + " 本地 Local") + '"></div>';
       });
       html += '<div class="tz-now-line" style="left:' + (nowUtc / 24 * 100) + '%"></div>';
       html += "</div>";
-      html += '<span class="tz-times">' + esc(th.open_local) + "–" + esc(th.close_local) +
-        (th.lunch_start_local ? "（午休 Lunch " + esc(th.lunch_start_local) + "–" + esc(th.lunch_end_local) + "）" : "") + "</span>";
+      html += '<span class="tz-times">' + esc(th.open_local) + "–" + esc(th.close_local) + "</span>";
       html += "</div>";
     });
     html += "</div>";
@@ -645,7 +630,7 @@
   });
   document.addEventListener("change", function (e) {
     var role = e.target.dataset && e.target.dataset.role;
-    if (role === "region" || role === "tier") {
+    if (role === "region") {
       var params = parseHash();
       params[role] = e.target.value;
       setHash(params);
@@ -653,22 +638,6 @@
       var p3 = parseHash();
       p3[role === "health-exchange" ? "hex" : "htype"] = e.target.value;
       setHash(p3);
-    }
-  });
-  document.addEventListener("input", function (e) {
-    if (e.target.dataset && e.target.dataset.role === "search") {
-      var params = parseHash();
-      if (e.target.value) params.q = e.target.value; else delete params.q;
-      setHash(params, true);
-      // renderMatrix 整体重绘 #app，会连搜索框本身一起换成新 DOM 节点，
-      // 不手动还原焦点和光标位置的话，每敲一个字符输入框就会丢焦点。
-      var cursor = e.target.selectionStart;
-      renderMatrix($("#app"), params);
-      var newBox = $("#searchBox");
-      if (newBox) {
-        newBox.focus();
-        try { newBox.setSelectionRange(cursor, cursor); } catch (err) { /* 部分浏览器 search input 不支持，忽略 */ }
-      }
     }
   });
   document.addEventListener("keydown", function (e) {
