@@ -2931,6 +2931,34 @@
       "chapter": "overview",
       "chapter_label_zh": "基本信息",
       "chapter_label_en": "Overview",
+      "field_path": "listed_companies_count",
+      "label_zh": "上市公司数量",
+      "label_en": "Listed Companies",
+      "volatility": "volatile",
+      "verified": "2026-08-16",
+      "age_days": 5,
+      "stale": false,
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "ch-six",
+      "chapter": "overview",
+      "chapter_label_zh": "基本信息",
+      "chapter_label_en": "Overview",
+      "field_path": "annual_turnover_usd_bn",
+      "label_zh": "年成交额（十亿美元）",
+      "label_en": "Annual Turnover (USD bn)",
+      "volatility": "volatile",
+      "verified": "2026-08-16",
+      "age_days": 5,
+      "stale": false,
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "ch-six",
+      "chapter": "overview",
+      "chapter_label_zh": "基本信息",
+      "chapter_label_en": "Overview",
       "field_path": "trading_currency",
       "label_zh": "交易货币",
       "label_en": "Trading Currency(ies)",
@@ -3498,7 +3526,7 @@
       "verified": "2026-08-16",
       "age_days": 5,
       "stale": false,
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "exchange_id": "ch-six",
@@ -3540,7 +3568,7 @@
       "verified": "2026-08-16",
       "age_days": 5,
       "stale": false,
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "exchange_id": "cn-sse",

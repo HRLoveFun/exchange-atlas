@@ -1462,13 +1462,13 @@
       "field_path": "stamp_duty",
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
-      "zh": "联邦证券交易印花税（Umsatzabgabe/transfer stamp tax）：瑞士本国证券0.15%，外国证券0.3%（由瑞士证券商作为交易方或中介参与时征收，实务上买卖双方各承担一半）",
-      "en": "Federal securities transfer stamp tax (Umsatzabgabe): 0.15% for securities issued by a Swiss tax resident, 0.3% for securities issued by a foreign tax resident (levied where a Swiss securities dealer participates as a contracting party or intermediary; in practice split between buyer and seller)",
+      "zh": "联邦证券交易印花税（Umsatzabgabe/transfer stamp tax）：本国证券1.5‰（合0.15%），外国证券3.0‰（合0.3%）——按证券买卖对价计算，由境内证券商作为交易方或中介参与时征收，实务上买卖双方各承担一半",
+      "en": "Federal securities transfer stamp tax (Umsatzabgabe): 1.5‰ (0.15%) for securities issued by a Swiss tax resident, 3.0‰ (0.3%) for securities issued by a foreign tax resident — calculated on the consideration paid, levied where a Swiss securities dealer participates as a contracting party or intermediary; in practice split between buyer and seller",
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
       "verified": "2026-08-16",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "exchange_id": "cn-sse",
