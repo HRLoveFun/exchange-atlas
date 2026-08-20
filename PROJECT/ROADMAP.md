@@ -2,7 +2,7 @@
 
 进度状态放这里；「为什么这么排」去 `DECISIONS.md`，这里不重复。
 
-## 当前阶段：v1.0 Wave 1 + Wave 2（20 家）均已完成，达成 20+ 目标
+## 当前阶段：v1.0 已完成（20 家），转入 v1.1 Category B 数据深耕（规划中，待启动）
 
 ## 阶段路线
 
@@ -120,4 +120,39 @@
 - 20/20+ 已完成（v0.1/v0.2 五家标杆 `cn-sse`/`hk-hkex`/`us-nyse`/`jp-jpx`/`de-eurex` + v1.0 Wave 1 八家 `us-nasdaq`/`cn-szse`/`uk-lse`/`de-xetra`/`sg-sgx`/`au-asx`/`in-nse`/`sa-tadawul` + v1.0 Wave 2 七家 `fr-euronext`/`kr-krx`/`ca-tsx`/`br-b3`/`tw-twse`/`ch-six`/`za-jse`，见上方填充进度表）
 - v1.0 横向铺开阶段已完成，达成 20 家目标；`review_system` 枚举覆盖率问题（下方"Wave 1 启动前置条件"）未在 Wave 1 启动前解决，属流程疏漏，见 `PROJECT/DECISIONS.md` [ADR-018] 执行进度补记，已于 2026-08-19 解决（[ADR-023]，连带修了 `delivery_method` 同类问题）；市场结构/指数体系两处 schema 缺口已设计并示范填一家（[ADR-019]）。9 家交易所的衍生品市场机制已按 [ADR-017] 并行子代理模式补齐，人工抽检 90 字段全部通过，见 [ADR-021]。前端矩阵/章节结构审查见 [ADR-022]。
 - **英文版审查（2026-08-20 启动）**：走查发现"中英夹杂"症状，拆成两层——① `en_required` 字段真违规（9 处，`cn-sse`/`hk-hkex`/`tw-twse`），已补齐数据并给 `validate.py` 加永久机器校验，附带查出并修正一处 `hk-hkex` 撮合规则误引衍生品市场规则的数据错误，见 [ADR-024]；② 114 个非强制双语字段在英文模式下仍回退显示中文，按用户决定暂只记录规模与候选方案，见 `PROJECT/OPEN-QUESTIONS.md` 第45条，未处理。
-- 剩余待决策：下一步是否开 Wave 3；[ADR-020] 分类出的 Category B ~21 字段真实数据缺口待排期；`OPEN-QUESTIONS.md` 第45条（114 字段英文回退显示）处理方向待定
+- **下一步方向已定：深度优先（v1.1 Category B 数据深耕），Wave 3 暂缓**，见 `PROJECT/DECISIONS.md` [ADR-026]。`OPEN-QUESTIONS.md` 第45条（114 字段英文回退显示）随 v1.1 一并处理，不单独开工。详见下方「v1.1 计划」一节。
+
+## v1.1 计划：Category B 数据深耕（规划中，待启动执行）
+
+依据与规模估计见 `PROJECT/DECISIONS.md` [ADR-026]，本节只管任务清单与进度，不重复决策理由。
+
+### 前置事项（批量执行前必须先解决，否则会重演 [ADR-018] 的教训）
+
+- [ ] **`clearing.initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency`/`last_trading_day_rule` 四字段语义歧义澄清**——`de-eurex`/`br-b3` 已按"衍生品CCP保证金方法论"填写，`tw-twse` 却按"现货融资融券"填写同一字段，两套不相干的制度共用一个字段。需先定下方案（如仿照 `delivery_method` 拆出 `clearing.derivatives.*` 镜像字段）再批量填充，见 [ADR-026]。
+
+### 候选字段清单（36 个确定 Category B 字段 + 4 个待澄清语义的 `clearing` 字段，2026-08-21 审计）
+
+| 章节 | 填充率 | 字段（括号内为当前 X/20） |
+|---|---|---|
+| `regulation` | 57% | `capital_controls`(2)、`foreign_ownership_limit`(3)、`investor_protection`(5)、`disclosure_requirements`(7) |
+| `listing` | 42% | `post_delisting_venue`(0)、`listing_process_duration`(1)、`delisting_transition_period`(4)、`delisting_process`(7)、`suspension_resumption`(10)、`continuing_obligations`(11) |
+| `clearing` | 43% | `default_management`(4)；另 4 个见上方前置事项 |
+| `participants` | 27% | `broker_landscape`(0)、`investor_structure`(1)、`suitability_management`(1)、`account_opening_requirements`(3)、`foreign_access_channel`(7) |
+| `infrastructure` | 18% | `data_pricing_model`(0)、`historical_data_availability`(0)、`data_latency`(1)、`market_data_levels`(1)、`major_outage_history`(2)、`access_methods`(8)、`trading_system_name`(13) |
+| `costs` | 19% | `implicit_costs_note`(0)、`regulatory_fees`(0，预期多数合理留空)、`clearing_fees`(2)、`commission_structure`(2)、`financial_transaction_tax`(2)、`capital_gains_tax`(3)、`dividend_withholding_tax`(6)、`stamp_duty`(9)、`exchange_fees`(10) |
+| `risks` | 35% | `liquidity_risk_note`(0)、`political_risk_note`(0)、`enforcement_note`(6)、`regulatory_change_risk_note`(11) |
+
+### 顺带处理（同一批交易所研究窗口内一起做，不单独开工）
+
+- 英文缺失字段回填（`OPEN-QUESTIONS.md` 框架性问题第45条，114 个非强制双语字段，集中在 `cn-sse`/`tw-twse`/`hk-hkex`/`cn-szse`；`en_required` 真违规部分已由 [ADR-024] 解决，这里指剩余部分）
+- `sec.gov`/`finra.org`/`dtcc.com` 反爬突破尝试（框架性问题14/15/32条，集中影响 `us-nyse`/`us-nasdaq`）
+
+### 执行设计（草案，启动时确认）
+
+- 按交易所分批（非按字段），沿用 [ADR-017] 并行子代理模式，7-8 家/批分 2-3 批
+- 质量门槛沿用 [CLAUDE.md 四]（≥95%），抽检量比照 [ADR-017]（10 字段/所）
+- 退出标准：8 个当前 0/20 的字段（`implicit_costs_note`/`regulatory_fees`/`data_pricing_model`/`historical_data_availability`/`post_delisting_venue`/`broker_landscape`/`liquidity_risk_note`/`political_risk_note`）全部转为"有值+来源"或"明确 detail 说明不适用/查不到"；其余字段填充率显著提升，不强求 100%
+
+### 进度
+
+- 尚未启动，等待前置事项（`clearing` 字段语义澄清）解决后开第一批

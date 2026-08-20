@@ -288,3 +288,36 @@
 **验证：** `node --check docs/assets/app.js` 语法通过；`make check` 全量校验通过（20 家交易所，0 警告 0 错误，未改 `schema/`/`data/`，`make sync` 无需重跑）；本环境无可用无头浏览器，改用 Node `vm` 搭建的 DOM 桩加载真实 `app.js` + 真实 `docs/data/*.json`，跑矩阵/时区/健康度视图的路由渲染，确认 Tier 筛选框与搜索框已从渲染输出消失、地区筛选仍可用、`tz-bar-lunch` 正确渲染（以 `jp-jpx` 11:30–12:30 午休为例）、右侧不再出现"（午休...)"文字、渲染过程无未捕获异常；**未做真人浏览器可视化验收**，尤其明暗主题下新增 `--info` 蓝色的对比度，留待 `make serve` 人工过一遍。
 
 **日期：** 2026-08-20
+
+### ADR-026 — 下一阶段方向定为"深度优先"（Category B 数据深耕），并刷新 [ADR-020] 的字段清单与规模估计
+
+**背景：** [ADR-023]/[ADR-024] 相继解决了 `review_system`/`delivery_method` 枚举问题与 `en_required` 违规后，`ROADMAP.md`「v1.0 计划」一节遗留的"下一步待决策"仍未拍板：是开 Wave 3（新增交易所）还是排期 [ADR-020] 点名的 Category B 数据缺口。用户就此拍板：**深度优先**——先把现有 20 家交易所做扎实，Wave 3 暂缓。
+
+**实测依据（复用 `tools/sync.py` 的 `expand_exchange`/`walk_chapter_fields`，对全部 115 个非衍生品叶子字段重新审计在 20 家交易所的填充率，方法与 [ADR-020]/[ADR-022] 相同，这次跑出完整清单而非举例）：**
+
+按章节汇总（排除 `market_structure.derivatives`/`clearing.derivatives` 这类 `optional` 子块——9-10 家已启用的填充率本身已经健康，不算缺口）：
+
+| 章节 | 填充率 | 字段数 |
+|---|---|---|
+| `infrastructure` | 18% | 7 |
+| `costs` | 19% | 9 |
+| `participants` | 27% | 6 |
+| `risks` | 35% | 5 |
+| `listing` | 42% | 9 |
+| `clearing` | 43% | 10（含下述有语义歧义的4个） |
+| `regulation` | 57% | 8 |
+
+**规模比 [ADR-020] 当初"~21 个字段"的举例性描述（原文以"等"结尾，非穷举）更大**：完整清单是 36 个字段（`regulation` 4 个、`listing` 6 个、`clearing.default_management` 1 个、`participants` 5 个、`infrastructure` 7 个、`costs` 9 个、`risks` 4 个），另有 4 个 `clearing` 字段因下述歧义单独处理。按 20 家计约 720 个字段位，虽不少已有部分填充，仍接近 1.5-2 个 Wave 的规模（对照 [ADR-017] 单个 Wave 7-8 家 × 全 11 章的工作量级）。`costs.regulatory_fees` 沿用 [ADR-020] 已有判断——多数法域没有独立于交易所费用之外的"监管费"概念，预期填充后大部分仍是合理留空，不强求。
+
+**新发现：`clearing.initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency`/`last_trading_day_rule` 四个字段存在真实的语义歧义，填充前必须先定义清楚，否则会重演 [ADR-018] 的教训。** 逐一读取现有取值确认：`de-eurex.initial_margin_practice` 填的是 Eurex Clearing Prisma——CCP 层面对衍生品持仓组合的保证金方法论；`br-b3` 同一字段填的是 CORE 方法论（同类语义），且 `mark_to_market_frequency`/`last_trading_day_rule` 两个字段也都填的是衍生品持仓每日盯市、期权到期日自动履约——四个字段在这两家都明确锚定"衍生品 CCP 清算"语境。但 `tw-twse` 对同一对字段（`initial_margin_practice`/`maintenance_margin_practice`）填的是完全不同的概念：现货信用交易（融资融券）的自备款/担保维持率（130%），这是"券商对客户的现货保证金交易"语境，与前两家的"CCP 对衍生品持仓的保证金方法论"是两套不相干的制度，只是恰好共享了"保证金"这个中文词。这与 [ADR-019]/[ADR-023] 已经处理过的"顶层字段隐含单一产品线假设"是同一根问题——目前只有 `clearing.delivery_method` 在 [ADR-023] 时新增了 `clearing.derivatives.delivery_method` 子块分流，这四个字段当时未一并处理。
+
+**定了什么：**
+1. 下一阶段（`v1.1`）方向确定为 Category B 数据深耕，Wave 3（新增交易所）推迟，具体重启时机留待深耕告一段落后再评估，不在本条锁定日期。
+2. 上述 36 个字段 + 4 个待厘清语义的 `clearing` 字段，作为 `v1.1` 的完整候选清单，取代 [ADR-020] 原先举例性的"~21 个"表述——本条不废止 [ADR-020] 的分类结论（Category A/B 判断依然成立），只是把规模估计做实。
+3. `clearing` 那四个字段的歧义**在批量填充前必须先解决**，具体方案（如仿照 `delivery_method` 拆出 `clearing.derivatives.*` 四个镜像字段承接衍生品语义、顶层字段收窄为"现货保证金交易"语境；或反过来）留给动手时依据更多样本判断，本条只锁定"必须先处理、不能像 [ADR-018] 那样拖到批量执行完才发现"这个时点决策——这正是 [ADR-013]/[ADR-018] 反复验证过的教训：模型级改动要趁样本少时做。
+
+**执行设计建议（留待启动 v1.1 时确认，非本条锁定）：** 按"交易所"而非"字段"分批更省检索成本——同一交易所研究监管环境时，`regulation`/`participants`/`costs`/`risks` 几章的信息源高度重合（监管机构官网、交易所 Investor Relations 页），比逐字段切换交易所抓取更连贯。建议沿用 [ADR-017] 的并行子代理模式，仍按 7-8 家一批分 2-3 批处理 20 家；质量门槛沿用 [CLAUDE.md 四] 的 ≥95%，抽检量比照 [ADR-017] 先例（10 字段/所）。同一批顺带处理该交易所名下已知的英文缺失字段（`OPEN-QUESTIONS.md` 框架性问题第45条，114 个字段集中在 `cn-sse`/`tw-twse`/`hk-hkex`/`cn-szse`，[ADR-024] 已解决其中真违规部分，这里指剩余非强制双语字段）与已知的 `sec.gov`/`finra.org`/`dtcc.com` 反爬突破尝试（框架性问题14/15/32条，集中影响 `us-nyse`/`us-nasdaq` 的 `regulation`/`clearing` 字段）——都是同一批交易所、同一次检索窗口内可以顺手做的事，不必单独开工。
+
+**退出标准（草案）：** 不追求 36 个字段在 20 家全部填满——大量留空预期本就是 Category A（如 `costs.regulatory_fees`）。追求"消灭完全没碰过的 0/20 字段"（`implicit_costs_note`/`regulatory_fees`/`data_pricing_model`/`historical_data_availability`/`post_delisting_venue`/`broker_landscape`/`liquidity_risk_note`/`political_risk_note` 八个目前挂零的字段，逐一变成"有值+来源"或"明确 detail 说明为什么该所查不到/不适用"），其余字段填充率显著提升但不强求 100%。
+
+**日期：** 2026-08-21
