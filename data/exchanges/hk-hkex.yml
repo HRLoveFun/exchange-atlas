@@ -297,12 +297,32 @@ market_structure:
     quote: "Closing Auction Session / 4:00 p.m. to a random closing between 4:08 p.m. and 4:10 p.m."
 
   matching_principle:
-    zh: "价格优先、时间优先（一般知识，未在本次抓取的页面中直接摘引条文）"
-    confidence: medium
+    zh: "现时 OTP-C（证券市场交易平台）以严格的价格及时间优先次序持续进行配对：较早时间输入系统的买卖盘必须完全执行，才可处理同等价格但较迟输入的买卖盘"
+    en: "Under the current OTP-C (Orion Trading Platform – Securities Market), orders are continuously executed in strict price and time priority: an order entered into the system at an earlier time must be executed in full before an order at the same price entered at a later time is executed"
+    detail: "2026-08-20 改用官方中英文对照页核实，取代此前未逐条摘引的'一般知识'表述。"
+    sources:
+      - title: "Trading Mechanism – Securities Market (Orion Trading Platform, sc_lang=zh-hk)"
+        url: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Trading-Mechanism?sc_lang=zh-hk
+        accessed: 2026-08-20
+      - title: "Trading Mechanism – Securities Market (Orion Trading Platform, sc_lang=en)"
+        url: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Trading-Mechanism?sc_lang=en
+        accessed: 2026-08-20
+    quote: "現時 OTP-C 以嚴格的價格及時間優先次序持續進行配對。較早時間輸入系統的買賣盤必須要完全執行，才可處理同等價格但較遲輸入的買賣盤。／Orders are continuously executed in strict price and time priority. An order entered into the system at an earlier time must be executed in full before an order at the same price entered at a later time is executed."
+    confidence: high
 
   order_types:
-    zh: "限价盘为主；VCM 触发后冷静期内仅可在价格区间内报价"
-    confidence: medium
+    zh: "开市前时段及收市竞价时段只接受竞价盘及竞价限价盘；持续交易时段只接受限价盘、增强限价盘及特别限价盘，可选择附加「全数执行或立刻取消」指示"
+    en: "The Pre-opening Session and the Closing Auction Session accept at-auction and at-auction limit orders only; the Continuous Trading Session accepts limit, enhanced limit and special limit orders only, with an optional \"All-or-Nothing Qualifier\""
+    detail: "2026-08-20 改用官方中英文对照页核实，取代此前把 VCM 报价限制误当作订单类型说明的表述——VCM 是另一套独立机制（见 volatility_interruption 字段），不应与订单类型混填。"
+    sources:
+      - title: "Trading Mechanism – Securities Market (Orion Trading Platform, sc_lang=zh-hk)"
+        url: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Trading-Mechanism?sc_lang=zh-hk
+        accessed: 2026-08-20
+      - title: "Trading Mechanism – Securities Market (Orion Trading Platform, sc_lang=en)"
+        url: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Trading-Mechanism?sc_lang=en
+        accessed: 2026-08-20
+    quote: "在持續交易時段，系統只以限價盤、增強限價盤及特別限價盤進行買賣。／During the Continuous Trading Session, the system accepts limit, enhanced limit and special limit orders only, with an option for an \"All-or-Nothing Qualifier\""
+    confidence: high
 
   tick_size:
     zh: ""
@@ -736,7 +756,8 @@ clearing:
   settlement_cycle:
     enum: t2
     zh: "T+2"
-    detail: "与交易层面的 T+0（可当日回转）是两回事：T+0 指「能否当日卖出买入的证券」，T+2 指「结算交收在几天后完成」。"
+    en: "T+2"
+    detail: "与交易层面的 T+0（可当日回转）是两回事：T+0 指「能否当日卖出买入的证券」，T+2 指「结算交收在几天后完成」。en 与 zh 同为语言无关的记号，直接复用。"
     sources:
       - title: HKEX Clearing - Securities Overview（CCASS）
         url: https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en

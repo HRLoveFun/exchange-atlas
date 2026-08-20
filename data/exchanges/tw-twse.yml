@@ -376,16 +376,21 @@ market_structure:
   circuit_breaker:
     enum: none
     zh: "无指数级/全市场熔断机制；仅有个股级「瞬间价格稳定措施」（延后撮合而非全面停止交易）"
+    en: "No index-level/market-wide circuit breaker; only a stock-level \"price stabilization\" measure (delays matching rather than halting trading market-wide)"
     detail: |
       本次检索 TWSE 官方交易制度介绍页与营业细则均未见类似美股 MWCB（大盘指数跌幅触发全市场
       停牌）式的独立市场级熔断条文，仅见个股级机制（volatility_interruption 字段）与因个别
       上市公司重大讯息而个别暂停交易的机制（trading_halt_mechanism 字段）。与 jp-jpx 情况
       类似，这是「未找到相关条文」而非「确认没有」，不排除检索范围未覆盖到的可能，如实标注
-      为未完全确认，见 OPEN-QUESTIONS。
+      为未完全确认，见 OPEN-QUESTIONS。en 字段 2026-08-20 据官方英文版交易制度页核实——该页
+      同样只见"price stabilization"个股级表述，未见"circuit breaker"字样，与中文版结论一致。
     sources:
       - title: 集中市场交易制度介绍
         url: https://www.twse.com.tw/zh/products/system/trading.html
         accessed: 2026-08-16
+      - title: Introduction to the Centralized Market Trading System（官方英文版）
+        url: https://www.twse.com.tw/en/products/system/trading.html
+        accessed: 2026-08-20
     confidence: medium
 
   volatility_interruption:

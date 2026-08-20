@@ -121,6 +121,13 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                     if env["enum"] not in enum_ids.get(enum_ref, set()):
                         err(f"{loc}: enum 值 `{env['enum']}` 不在词表 `{enum_ref}` 里")
 
+                # en_required 字段必须填 en——此前这个 taxonomy 标记从未被机器校验过，
+                # 导致标了 en_required 的专有名词类字段（机制名/板块名/法规名等）静默
+                # 缺英文，英文模式下前端会回退显示中文（见 app.js 的 langMode 回退逻辑），
+                # 这正是「中英夹杂」问题的根源之一，2026-08-20 补上强制校验
+                if fdef.get("en_required") and not env.get("en"):
+                    err(f"{loc}: en_required 但没有 en（英文模式下会回退显示中文，见 CLAUDE.md/ADR-013）")
+
                 # volatile/moderate 必须有 sources
                 vol = fdef.get("volatility", "moderate")
                 if vol in ("moderate", "volatile") and not env.get("sources"):

@@ -116,14 +116,20 @@ regulation:
 
   core_laws:
     zh: "《中华人民共和国证券法》"
+    en: "Securities Law of the People's Republic of China"
     detail: "另有《上海证券交易所交易规则》《股票上市规则》等交易所自律规则体系，效力位阶低于证券法。
-      英文官方译名未在本次会话核实（曾尝试 npc.gov.cn 与 csrc.gov.cn 英文站均未能定位到该法英译本
-      直链），留空不猜，见 OPEN-QUESTIONS。"
+      英文官方译名此前未核实（曾尝试 npc.gov.cn 与 csrc.gov.cn 英文站均未能定位到该法英译本直链），
+      2026-08-20 改从 SSE 官方《交易规则》英文译本（2026年修订版）第1.1条法律依据条款核实到官方
+      英译名，见下方 quote。"
     sources:
       - title: 中华人民共和国证券法（全国人大官网）
         url: http://www.npc.gov.cn/npc///c2/c30834/201912/t20191231_304436.html
         accessed: 2026-08-12
-    confidence: medium
+      - title: "Trading Rules of Shanghai Stock Exchange (2026 Revision) — Article 1.1"
+        url: https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf
+        accessed: 2026-08-20
+    quote: "these Rules are formulated in accordance with the Securities Law of the People's Republic of China"
+    confidence: high
 
   # 以下四个字段：写作时手头没有实际核实过的来源，按 CLAUDE.md 二第4条「查不清就留空」
   # 处理，不用未核实的印象拼凑内容。悬案见 PROJECT/OPEN-QUESTIONS.md。
@@ -285,30 +291,35 @@ market_structure:
   circuit_breaker:
     enum: none
     zh: "无指数级熔断（2016年1月8日起暂停实施）"
+    en: "No index-level circuit breaker (suspended since 8 January 2016)"
     detail: |
       2015年12月本所曾在《交易规则》第四章第五节新增"指数熔断"机制（以沪深300指数为基准，
       5%/7%两档阈值），实施4个交易日后于2016年1月8日起暂停，此后未恢复。现行规则中已无该章节。
       个股级另有临时停牌机制，见 volatility_interruption / trading_halt_mechanism。
       交叉核实：SSE 官方《交易规则》英文译本（2026年修订版）修订历史里"Circuit Breaker"仅在
-      2015年12月4日新增该节的记录中出现一次，正文再无相关章节，与"已暂停且未恢复"的结论一致。
-      该英文译本未提供可直接摘引的"暂停"表述，故本字段 en 留空。
+      2015年12月4日新增该节的记录中出现一次（"the sixth time on December 4, 2015 by the Notice
+      of Adding Chapter IV Section 5 'Circuit Breaker' to the Trading Rules"），正文再无相关章节
+      （现行第四章标题为"Other Trading-Related Matters"，不含"Circuit Breaker"字样），与"已暂停
+      且未恢复"的结论一致，en 字段 2026-08-20 据此补上。
     sources:
       - title: 关于暂停实施指数熔断机制的通知（上证发〔2016〕4号）
         url: http://www.sse.com.cn/aboutus/mediacenter/hotandd/c/c_20160107_4033450.shtml
         accessed: 2026-08-12
       - title: "Trading Rules of Shanghai Stock Exchange (2026 Revision) 修订历史 — SSE 官方英文译本，仅供参考，中文本为准"
         url: https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf
-        accessed: 2026-08-13
-    quote: "上证发〔2016〕4号 各市场参与人：为维护市场平稳运行，经中国证监会批准，上海证券交易所决定自2016年1月8日起暂停实施《上海证券交易所交易规则》第四章第五节规定的「指数熔断」机制。"
+        accessed: 2026-08-20
+    quote: "上证发〔2016〕4号 各市场参与人：为维护市场平稳运行，经中国证监会批准，上海证券交易所决定自2016年1月8日起暂停实施《上海证券交易所交易规则》第四章第五节规定的「指数熔断」机制。／the sixth time on December 4, 2015 by the Notice of Adding Chapter IV Section 5 \"Circuit Breaker\" to the Trading Rules of Shanghai Stock Exchange"
 
   volatility_interruption:
     zh: "科创板设「异常波动」与「严重异常波动」两级指标并公告，不中断交易；无涨跌幅限制股票另有盘中30%/60%触发的10分钟临时停牌"
+    en: "STAR Market has two tiers of public disclosure triggers — \"abnormal fluctuation\" and \"severe abnormal fluctuation\" — that do not interrupt trading; stocks without a price-limit band separately have a 10-minute intraday trading halt triggered at 30%/60% price moves"
     detail: |
       科创板异常波动：连续3个交易日内日收盘价涨跌幅偏离值累计达±30%。
       严重异常波动：连续10个交易日内累计达+100%/-50%，或连续30个交易日内累计达+200%/-70%。
       触发后本所公布相关信息（如异常交易营业部名单），不直接中断交易，属于信息披露与监控机制而非熔断。
-      英文对照未在本次会话核实到官方译本中的对应条款（SSE 英文版《交易规则》第六章科创板专章未见
-      "abnormal fluctuation" 类表述），留空不猜，见 OPEN-QUESTIONS。
+      英文对照此前未核实到官方译本中的对应条款（SSE 英文版《交易规则》第六章科创板专章未见
+      "abnormal fluctuation" 类表述），2026-08-20 改为直接翻译已核实的中文 quote，未采用官方
+      译本原文（因其确实没有对应条款可摘引）。
     quote: "连续 3 个交易日内日收盘价格涨跌幅偏离值累计达到±30%／连续 10 个交易日内日收盘价格涨跌幅偏离值累计达到＋100%（-50%）；连续 30 个交易日内日收盘价格涨跌幅偏离值累计达到＋200%（-70%）"
 
   trading_halt_mechanism:
@@ -418,11 +429,13 @@ listing:
 
   delisting_conditions:
     zh: "四类强制退市（交易类、财务类、规范类、重大违法类）+ 主动退市"
+    en: "Four categories of mandatory delisting (trading-based, financial, compliance, major-violation) plus voluntary delisting"
     detail: |
       财务类主要指标：最近一个会计年度净利润为负且营业收入低于1亿元；期末净资产为负；
       审计报告被出具无法表示意见或否定意见。上市公司连续两年触及财务类指标即终止上市。
       2024年修订取消了交易类退市的退市整理期设置。
-      本条来自第三方财经媒体综述，非交易所规则原文，confidence 标 medium。
+      本条来自第三方财经媒体综述，非交易所规则原文，confidence 标 medium；en 为对已核实中文的
+      直接翻译，非另一份官方英文来源。
     sources:
       - title: 上交所：拓宽重大违法强制退市适用范围 新增三种规范类退市情形（财联社）
         url: https://www.cls.cn/detail/1645334
@@ -484,7 +497,9 @@ clearing:
   settlement_cycle:
     enum: t1
     zh: "T+1"
-    detail: "与回转交易制度（T+1不可当日回转）相配套；具体交收流程细则未逐条核实。"
+    en: "T+1"
+    detail: "与回转交易制度（T+1不可当日回转）相配套；具体交收流程细则未逐条核实。en 与 zh 同为
+      语言无关的记号，直接复用。"
     sources:
       - title: 上海证券交易所交易规则（2023年修订）第3.1.4条，经 mgzq.com 镜像获取，见 SOURCES.md 说明
         url: https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf
