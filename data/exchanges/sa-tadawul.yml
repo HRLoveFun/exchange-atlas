@@ -19,12 +19,11 @@
 # 不是姊妹交易所），集团内没有第二家可比的证券交易所，故不设 group_id，这点与 NYSE Group
 # （旗下有多个各自独立注册的姊妹交易所）不同类。
 #
-# self_listed 的结构性细节：Saudi Exchange（运营实体本身）并未独立上市；据集团公开的组织
-# 结构（Saudi Tadawul Group 官网子公司列表页），其母公司 Saudi Tadawul Group Holding
-# Company 于2021年改制为控股集团后完成上市，在 Saudi Exchange 运营的主板挂牌交易——但本次
-# 未能抓取到直接确认母公司上市日期/代码的一手原文（仅有 WebSearch 摘要印象，按 skill 规则
-# 摘要不能当引用来源），故 self_listed 标 low confidence，具体日期/代码留待下次核实，
-# 见 OPEN-QUESTIONS。
+# self_listed 的结构性细节：Saudi Exchange（运营实体本身）并未独立上市；母公司 Saudi
+# Tadawul Group Holding Company 经股东特别大会决议（2021年4月6日）于2021年5月20日改制为
+# 控股集团，同年12月8日完成IPO并在其自身运营的交易所挂牌交易——已从 CMA 备案的官方招股
+# 说明书与集团官方2021年报「The IPO」页核实，故 self_listed 标 confidence: high，
+# 具体见 overview.self_listed 字段。
 
 id: sa-tadawul
 name_zh: 沙特交易所
@@ -48,7 +47,7 @@ overview:
   founded_year:
     zh: "2007年3月19日，依据《资本市场法》第20条注册成立为股份公司"
     en: "Formed on 19 March 2007 as a joint stock company in accordance with Article 20 of the Capital Market Law"
-    detail: "Tadawul 是王国境内唯一被授权运营证券交易所的实体（'the sole entity in the Kingdom authorized to act as a securities exchange'）。2021年5月起改制为控股集团结构（Saudi Tadawul Group），成为 Saudi Exchange/Muqassa/Edaa/Wamid 四家子公司的母公司——具体改制日期与母公司上市细节本次未找到可直接摘引的一手原文，留待核实，见 OPEN-QUESTIONS。"
+    detail: "Tadawul 是王国境内唯一被授权运营证券交易所的实体（'the sole entity in the Kingdom authorized to act as a securities exchange'）。2021年改制为控股集团结构（Saudi Tadawul Group Holding Company），成为 Saudi Exchange/Muqassa/Edaa/Wamid 四家子公司的母公司——改制生效日期、股东大会决议日期与母公司上市细节现已核实到官方一手原文，见 self_listed 字段。"
     sources:
       - title: "About Tadawul（2018年度报告存档站点，官方历史资料）"
         url: https://annualreport2018.tadawul.com.sa/Resources/AnnualReport/company_profile/about_tadawul.html
@@ -70,14 +69,18 @@ overview:
 
   self_listed:
     enum: partial
-    zh: "运营实体本身未独立上市；母公司 Saudi Tadawul Group 据信已在本所主板挂牌，但本次未核实到可直接摘引的一手原文确认具体上市日期/代码"
-    en: "Not directly self-listed; parent Saudi Tadawul Group is believed to trade on the Exchange it operates, but no primary source confirming exact listing date/ticker was captured this round"
-    detail: "母公司/子公司四家（Saudi Exchange、Muqassa、Edaa、Wamid）的组织结构已在集团官网子公司列表页确认，但该页面本身不含母公司自身上市状态的正文说明（是JS单页应用，静态抓取正文很薄）。"
+    zh: "运营实体本身（Saudi Exchange Company）未独立上市；母公司 Saudi Tadawul Group Holding Company 经股东特别大会决议（决议日期2021年4月6日）于2021年5月20日改制为控股集团，同年12月8日完成首次公开发行并在其自身运营的交易所挂牌交易（发行3600万股，占股本30%，发行价每股105里亚尔，发行后市值约126亿里亚尔）"
+    en: "The operating entity (Saudi Exchange Company) is not itself listed; parent Saudi Tadawul Group Holding Company was converted into a holding company on 20 May 2021G pursuant to an Extraordinary General Assembly resolution dated 6 April 2021G, and completed its IPO on 8 December 2021, listing on the Exchange it operates (36,000,000 shares offered, 30% of share capital, at SAR 105 per share, implying a market cap of SAR 12.6bn at listing)"
+    detail: "两份官方一手文件互相印证：CMA备案的招股说明书（577页全文，含审计财务报表）确认改制生效日期与股东大会决议日期，且明确公开发售股份将在Company自身运营的Exchange挂牌交易；集团官方2021年报「The IPO」页确认发行细节与IPO完成日期。母公司架构：Saudi Tadawul Group Holding Company 为上市控股实体，其下 Saudi Exchange Company（交易所运营实体本身）、Muqassa（清算）、Edaa（存管）、Wamid（技术服务）四家全资子公司均未独立上市——故本字段取 partial 而非 yes：交易所运营法人本身不在自己市场挂牌，但同集团的控股母公司在挂牌。"
     sources:
-      - title: "Saudi Exchange 集团子公司页（tadawulgroup.sa，正文单薄的 JS 单页应用，仅作组织结构佐证）"
-        url: https://www.tadawulgroup.sa/wps/portal/tadawulgroup/portfolio/saudi-exchange
-        accessed: 2026-08-14
-    confidence: low
+      - title: "Saudi Tadawul Group Holding Company Prospectus（CMA官方备案招股说明书）"
+        url: https://cma.gov.sa/en/Market/Prospectuses/Documents/Saudi_Tadawul_Group_en.pdf
+        accessed: 2026-08-20
+      - title: "The IPO（Saudi Tadawul Group 官方2021年报，Company Profile章节）"
+        url: https://annualreport.tadawulgroup.sa/Resources/AnnualReport2021/company_profile/the_ipo.html
+        accessed: 2026-08-20
+    quote: "The Company was converted into a holding company on 08/10/1442H (corresponding to 20 May 2021G) pursuant to the resolution of the Extraordinary General Assembly of the Company in its meeting dated 24/08/1442H (corresponding to 6 April 2021G). [Prospectus, Section 4-1] ... The transformation of the Group into a holding structure earlier this year paved the way for the successful IPO of Saudi Tadawul Group Holding Company on 8 December 2021. Saudi Tadawul Group floated 36,000,000 shares, representing 30% of its issued share capital. ... The offering shares were priced at SAR 105 per share at the top of the Company's initial price range, implying a market capitalization of SAR 12.6 Bn at the time of listing. [Annual Report 2021, The IPO]"
+    confidence: high
 
   market_cap_usd_bn:
     zh: ""
@@ -152,15 +155,18 @@ regulation:
     confidence: high
 
   foreign_ownership_limit:
-    zh: "非居民境外投资者单一持股不得达到或超过10%；全体境外投资者（不含外国战略投资者）合计持股上限49%"
-    en: "Non-resident foreign investors individually capped below 10% of a listed issuer; aggregate foreign ownership (excluding Foreign Strategic Investors) capped at 49%"
-    detail: "2026年1月6日CMA宣布修订外资准入框架，取消QFI（合格境外投资者）资格制度，自2026年2月1日起允许全体境外投资者不受资格分类限制直接投资主板，但10%单一上限与49%合计上限两条限制维持不变。⚠️ 本条来源为第三方律所客户简报（Latham & Watkins），非CMA官方规则原文——本次 WebSearch 检索配额已用尽，未能在 cma.gov.sa 站内定位到对应的官方公告或修订后的《外资证券投资规则》原文，按 CLAUDE.md 二第3条第三方来源上限 medium，下次有空应补找CMA官方原文升级来源，见 OPEN-QUESTIONS。"
+    zh: "非居民境外投资者（外国战略投资者除外）单一持股不得达到或超过10%；全体境外投资者（不含外国战略投资者）合计持股上限49%"
+    en: "A non-residing foreign investor (except a Foreign Strategic Investor) may not own 10% or more of the shares of any listed issuer; aggregate ownership by all foreign investors (excluding Foreign Strategic Investors) is capped at 49%"
+    detail: "已从CMA官方《外资证券投资规则》（Rules for Foreign Investment in Securities）2026年1月5日修订版原文核实，Article 6 (Investment Restrictions) 逐字确认10%/49%两项上限；QFI（合格境外投资者）制度取消一事亦从CMA官方公告页（CMA_N_3974，发布日期2026年1月6日）核实——公告确认自2026年2月1日起取消QFI资格分类，全体境外投资者可直接投资主板；修订后的规则原文全文亦不再出现'Qualified Foreign Investor'定义，与官方公告互相印证。原引用的第三方律所简报（Latham & Watkins）已不再作为来源。"
     sources:
-      - title: "Saudi CMA Broadens Main Market Access for Foreign Investors（Latham & Watkins 客户简报）"
-        url: https://www.lw.com/en/insights/saudi-cma-broadens-main-market-access-for-foreign-investors
-        accessed: 2026-08-14
-    quote: "Foreign investors may now invest directly in shares listed on the Main Market without the need to fall within specified investor categories. The QFI framework has been removed. The existing 10% individual cap for non-resident foreign investors and 49% aggregate cap for all foreign investors remain in force."
-    confidence: medium
+      - title: "Rules for Foreign Investment in Securities（CMA官方规则，2026年1月5日修订版，Article 6）"
+        url: https://cma.gov.sa/en/RulesRegulations/Regulations/Documents/Rules_for_Foreign_Investment_in_Securities_en.pdf
+        accessed: 2026-08-20
+      - title: "The CMA Opens the Capital Market to All Categories of Foreign Investors（CMA官方公告，发布日期2026-01-06）"
+        url: https://cma.gov.sa/en/MediaCenter/NEWS/Pages/CMA_N_3974.aspx
+        accessed: 2026-08-20
+    quote: "Article 6: Investment Restrictions a) Investments of foreign investors shall be subject to the following restrictions: 1) A non-residing foreign investor (except the foreign strategic investor), may not own (10%) or more of the shares of any issuer whose shares are listed or convertible debt instrument of the issuer. 2) The maximum proportion of the shares of any issuer whose shares are listed or convertible debt instrument of the issuer that may be owned by all foreign investors (in all categories, whether residents or non-residents, except the foreign strategic investors) in aggregate is (49%). [Rules for Foreign Investment in Securities] ... The Capital Market Authority (CMA) announces the opening of the capital market to all categories of foreign investors and enabling them to invest directly therein as of 1 February 2026 ... The approved amendments eliminated the concept of the Qualified Foreign Investor (QFI) in the Main Market. [CMA_N_3974]"
+    confidence: high
 
   capital_controls:
     zh: ""
@@ -381,15 +387,18 @@ market_structure:
     detail: "本次抓取的规程文本未直接给出「当日买入证券当日可否卖出」的明文条款，未找到可摘引原文，留空转 OPEN-QUESTIONS。"
 
   short_selling:
-    enum: restricted_list
-    zh: "受监管的备兑卖空：卖空订单须在交易系统中标记，且须已通过证券借贷协议借入相应证券方可卖空（不允许裸卖空）"
-    en: "Regulated covered short selling: orders must be flagged, and short sellers must have borrowed the securities under a securities lending agreement"
-    detail: "具体哪些证券属于可卖空的「合格证券」清单本次未找到独立的一手原文（Short Selling Regulations 全文本次未抓取），故 enum 暂定 restricted_list（限指定标的）而非 restricted_uptick，待补充验证是否另有报升规则，见 OPEN-QUESTIONS。"
+    enum: restricted_uptick
+    zh: "受监管的备兑卖空（禁止裸卖空）：卖空订单须标记且已通过证券借贷协议锁定证券；默认覆盖除衍生品外全部上市证券（非指定清单），但须满足价格条件（卖出价须高于该证券当前最优买价，类报升规则）与两项动态限额（净空头持仓/最近60日日均成交量之比不超10日；净空头持仓不超过该证券自由流通量10%），触及限额的证券次一交易日禁止卖空"
+    en: "Regulated covered short selling (naked short selling prohibited): orders must be flagged and covered under a securities borrowing and lending agreement; eligible by default for all listed securities except Derivatives (not a curated list), subject to a price condition (sale price must exceed the security's current best bid — an uptick-like rule) and two dynamic caps (net short position / 60-day average daily traded volume must not exceed 10 days; net short position must not exceed 10% of free float) — securities breaching either cap are barred from short selling the next Trading Day"
+    detail: "已从 Short Selling Regulations 全文（Article 3 短卖交易定义/Article 4 合资格参与人/Article 5 合资格上市证券）核实，此前的悬案本次已澄清：(a) 不存在静态「合格证券清单」，Article 5(a) 明确默认覆盖除衍生品外全部上市证券（'Unless the Exchange specifies otherwise, a short selling transaction may be entered into in respect of all listed securities (except for Derivatives)'），交易所仅保留另行指定例外的权力，故此前暂定的 restricted_list（限指定标的）判断不准确；(b) 确实存在类报升规则的价格条件——Article 3(b)(4) 要求卖空订单价格须高于标的证券当前最优买价（不同于传统美股式「较上一笔成交价上涨」，而是「高于当前最优买价」），据此改判 enum 为 restricted_uptick；(c) 另有两项量化动态限额（10日空头量/日均成交量之比、10%自由流通量上限），触及限额次日禁止卖空，属报升规则之外的补充限制。"
     sources:
       - title: Trading and Membership Procedures（§12 Short Selling）
         url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
         accessed: 2026-08-14
-    quote: "When an Exchange Member transmits a short selling order either as an agent or principal, the transmitted order must be flagged as a short sell order in the Trading System. ... The Exchange Member or the lending agent has borrowed/lent Securities to the client to cover the short selling transactions."
+      - title: "Short Selling Regulations（Saudi Exchange官方卖空监管规则全文，Article 3/4/5）"
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1300edb3-6987-4d93-9515-138e1e7343e8/Short+Selling+Regulations.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1300edb3-6987-4d93-9515-138e1e7343e8-oV2AOMl
+        accessed: 2026-08-20
+    quote: "Article 3 Short selling transactions ... b. A person must not enter into as seller ... a short selling order in respect of a listed security unless all of the following conditions are met: ... 4) the price of selling the security, underlying the transaction, is higher than the price of the best bid of that security. ... Article 5 Eligible listed securities a. Unless the Exchange specifies otherwise, a short selling transaction may be entered into in respect of all listed securities (except for Derivatives) in accordance with the following limits: 1) The short ratio to Average Daily Traded Volume of the relevant security (total net short positions / Average Daily Traded Volume of the last 60 days) must not exceed 10 days; and 2) The total net short positions must not exceed 10% of the free floated securities of the relevant security."
     confidence: high
 
   block_trade:
@@ -879,13 +888,13 @@ participants:
   foreign_access_channel:
     zh: "2026年2月1日起取消QFI资格制度，境外投资者可不受投资者类别限制直接投资主板，但仍受10%单一持股与49%合计持股上限约束（见 regulation.foreign_ownership_limit）"
     en: "QFI framework abolished effective Feb 1, 2026; foreign investors may now access the Main Market directly, subject to existing 10%/49% ownership caps"
-    detail: "本条与 regulation.foreign_ownership_limit 同源，来自第三方律所简报，confidence 同标 medium。"
+    detail: "本条与 regulation.foreign_ownership_limit 同源，已升级为CMA官方公告一手来源，confidence 同步升级为 high。"
     sources:
-      - title: "Saudi CMA Broadens Main Market Access for Foreign Investors（Latham & Watkins 客户简报）"
-        url: https://www.lw.com/en/insights/saudi-cma-broadens-main-market-access-for-foreign-investors
-        accessed: 2026-08-14
-    quote: "Foreign investors no longer need to structure investments through specific investor classifications or arrangements. On January 6, 2026, Saudi Arabia's Capital Market Authority (CMA) announced amendments to the regulatory framework governing foreign investment in securities listed on the Main Market of the Saudi Exchange (Tadawul). Effective February 1, 2026, the amendments allow all foreign investors [direct access]."
-    confidence: medium
+      - title: "The CMA Opens the Capital Market to All Categories of Foreign Investors（CMA官方公告，发布日期2026-01-06）"
+        url: https://cma.gov.sa/en/MediaCenter/NEWS/Pages/CMA_N_3974.aspx
+        accessed: 2026-08-20
+    quote: "The Capital Market Authority (CMA) announces the opening of the capital market to all categories of foreign investors and enabling them to invest directly therein as of 1 February 2026, following the CMA Board's approval of the regulatory framework allowing non-resident foreign investors to invest directly in the Main Market. ... The approved amendments eliminated the concept of the Qualified Foreign Investor (QFI) in the Main Market, thereby allowing all categories of foreign investors to access the market without the need to meet qualification requirements."
+    confidence: high
 
   membership_structure:
     zh: "交易所会员（经纪商）须在王国境内设立并持有CMA有效牌照；CMA另按业务类型（自营Dealing/托管Custody/资产管理Managing/安排Arranging/顾问Advising）分类颁发牌照，各类别设不同最低资本要求"
@@ -1016,10 +1025,11 @@ risks:
     zh: "2026年2月起取消QFI制度、放开主板外资准入，属近期重大监管变革，详见 regulation.foreign_ownership_limit"
     en: "QFI framework abolition (Feb 2026) is a recent major regulatory reform"
     sources:
-      - title: "Saudi CMA Broadens Main Market Access for Foreign Investors（Latham & Watkins 客户简报）"
-        url: https://www.lw.com/en/insights/saudi-cma-broadens-main-market-access-for-foreign-investors
-        accessed: 2026-08-14
-    confidence: medium
+      - title: "The CMA Opens the Capital Market to All Categories of Foreign Investors（CMA官方公告，发布日期2026-01-06）"
+        url: https://cma.gov.sa/en/MediaCenter/NEWS/Pages/CMA_N_3974.aspx
+        accessed: 2026-08-20
+    quote: "The Capital Market Authority (CMA) announces the opening of the capital market to all categories of foreign investors and enabling them to invest directly therein as of 1 February 2026 ... The approved amendments eliminated the concept of the Qualified Foreign Investor (QFI) in the Main Market."
+    confidence: high
 
   enforcement_note:
     zh: ""
