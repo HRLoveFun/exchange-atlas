@@ -208,18 +208,28 @@
         "detail": null
       },
       "core_laws": {
-        "zh": "《6.385号法律》（Law 6385）——B3就非居民投资者事务列为核心巴西联邦证券法规之一",
-        "en": "Law No. 6.385 – listed by B3 as one of the core Brazilian federal securities statutes",
-        "detail": "该法律常被认为是巴西证券市场基本法（Lei do Mercado de Capitais，1976年颁布并创设\nCVM），但本次抓取到的 B3 页面仅以法规名称链接形式列出（且指向的是可能已失效的CVM\n旧版英文子门户），未抓取到法律正文或对其历史作用的官方逐字表述——具体颁布年份与\n\"设立CVM\"这一表述未经本次抓取验证，故不写入 zh/en 正文，仅在此提示，待后续找到\nCVM官网现行英文页面核实后升级。\n",
+        "zh": "《6.385号法律》（Lei 6.385/76，1976年12月7日颁布）——CVM官网现行「Sobre a CVM」（关于CVM）页面官方原文确认：该法律创设了CVM（巴西证券委员会），赋予其监管、规范、纪律处分与发展巴西证券市场的职能",
+        "en": "Law No. 6.385/76 (enacted 7 December 1976) — CVM's own current 'Sobre a CVM' (About CVM) page states the law created the CVM (Brazil's securities commission), tasked with supervising, regulating, disciplining, and developing the Brazilian securities market",
+        "detail": "本条此前的证据（B3 非居民投资者页面上一个法规名称超链接，指向可能已失效的CVM旧版\n英文子门户）已升级替换。本次改抓 CVM 自己在新版政府门户 gov.br 下的现行\"Sobre a\nCVM\"页面（www.gov.br/cvm，页面标注最后更新 2024-12-13），其官方原文一句话直接给出\n颁布日期（1976年12月7日）与该法律的历史作用（创设CVM并规范证券市场），此前悬案里\n\"具体颁布年份与'设立CVM'表述未经验证\"的缺口已解决。另交叉核对 CVM 自有法规库子域\nconteudo.cvm.gov.br 的《Lei 6385/76》条目页，标注日期同为 1976-12-07，摘要\"Cria a\nCVM e disciplina o mercado de capitais\"（创设CVM并规范资本市场），与\"Sobre a CVM\"\n页面一致，可互相佐证。该法律现行有效状态未见到官方\"已废止/已修订失效\"的表述，结合\nCVM 现行官网仍以此法律作为自身法律依据在使用，判断为现行有效。\n",
         "sources": [
+          {
+            "title": "Sobre a CVM（CVM机构简介，官方现行页面）",
+            "url": "https://www.gov.br/cvm/pt-br/acesso-a-informacao-cvm/institucional/sobre-a-cvm",
+            "accessed": "2026-08-20"
+          },
+          {
+            "title": "Lei 6385/76（CVM法规库条目页，交叉核对用）",
+            "url": "https://conteudo.cvm.gov.br/legislacao/leis-decretos/lei6385.html",
+            "accessed": "2026-08-20"
+          },
           {
             "title": "Non-resident Investor – Operational Procedures and Regulation",
             "url": "https://www.b3.com.br/en_us/non-resident-investor/market-rules/operational-procedures-and-regulation.htm",
             "accessed": "2026-08-16"
           }
         ],
-        "quote": "Brazilian Federal Laws and Resolutions / Law 6385",
-        "confidence": "medium",
+        "quote": "A Comissão de Valores Mobiliários (CVM) foi criada em 07/12/1976 pela Lei 6.385/76, com o objetivo de fiscalizar, normatizar, disciplinar e desenvolver o mercado de valores mobiliários no Brasil.",
+        "confidence": "high",
         "verified": "2026-08-16",
         "enum": null
       },
@@ -1933,20 +1943,25 @@
         "detail": null
       },
       "dividend_withholding_tax": {
-        "zh": "B3官方非居民投资者税务页称「利润分配与股息免税」；但据本次会话检索到的第三方财经/税务媒体报道，巴西第15.270/2025号法律已对非居民股息设10%预扣税，自2026年1月1日起生效——本次抓取到的B3官方页面未反映此变化，两者存在冲突，未核实哪个反映当前实际状态，此处按官网原文摘录并标注该冲突，不采信未经抓取验证的第三方说法",
-        "en": "B3's official non-resident taxation page states dividends and profit distributions are tax-exempt; however, third-party tax/financial media found via this session's web search report that Brazilian Law No. 15.270/2025 imposed a 10% withholding tax on non-resident dividends effective January 1, 2026 — the B3 page fetched this session does not reflect this. The conflict is unresolved; the official page text is recorded as-is, without adopting the unverified third-party claim",
+        "zh": "官方法律原文（巴西联邦立法门户 planalto.gov.br 刊载的《第15.270/2025号法律》全文）第3条修订《9.249/1995号法律》第10条，新增第4款明确规定：支付、记入、交付、使用或汇往国外的利润或股息，须按10%税率缴纳预扣所得税；第8条规定该法自公布之日起施行、自2026年1月1日起产生效力。B3官网非居民投资者税务页（本次同一时点重新抓取核实，内容未变）仍写「利润分配与股息免税」，两者存在冲突——按CLAUDE.md来源优先级（官方法律原文 > 交易所官网说明页），且法律原文属一手立法文本，故以法律原文为准：非居民股息预扣税税率为10%，自2026年1月1日起施行，B3官网页面尚未更新反映这一变化",
+        "en": "The official law text (Law No. 15.270/2025, full text hosted on Brazil's federal legislation portal planalto.gov.br) amends Law No. 9.249/1995 Art. 10 via its Art. 3, adding a new §4 stating that profits or dividends paid, credited, delivered, used, or remitted abroad are subject to withholding income tax at a rate of 10%; Art. 8 states the law enters into force on its publication date and takes effect from 1 January 2026. B3's official non-resident taxation page (re-fetched this session, unchanged) still states dividends and profit distributions are tax-exempt — the two sources conflict. Per CLAUDE.md's source-priority rule (official law text ranks above an exchange's own explainer page), and given the law text is a first-hand legislative document, the law text is adopted as authoritative: the non-resident dividend withholding tax rate is 10%, effective 1 January 2026; B3's own page has not yet been updated to reflect this",
+        "detail": "本条此前的悬案（B3官网称免税、第三方税务简报称已立法10%预扣税，未逐条核实）已解决。\n本次直接 curl 抓取巴西总统府法务顾问办公室（Casa Civil）维护的联邦法律现行文本门户\nwww.planalto.gov.br 上《第15.270/2025号法律》全文（该门户是巴西联邦法律正式公布/\n现行文本的权威来源，非第三方转述），法律原文第3条对《9.249/1995号法律》第10条的\n修订新增了针对汇往境外利润/股息的10%预扣税条款（第4款），并列出了过渡期豁免情形\n（第5款：2025年12月31日前已批准分配、且计入2025及以前年度经营成果的部分予以豁免，\n过渡期至2028年；以及外国政府、主权基金、境外养老金管理机构等特定对象豁免）。第8条\n明确生效时点为2026年1月1日。B3官方页面未见更新，判断为交易所说明页滞后于最新立法，\n而非法律尚未生效。\n",
         "sources": [
           {
-            "title": "Non-resident Investor – Taxation",
+            "title": "Lei nº 15.270, de 26 de novembro de 2025（联邦法律现行文本，权威来源）",
+            "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm",
+            "accessed": "2026-08-20"
+          },
+          {
+            "title": "Non-resident Investor – Taxation（B3官网原文，与法律原文冲突的一方，用于说明差异）",
             "url": "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm",
-            "accessed": "2026-08-16"
+            "accessed": "2026-08-20"
           }
         ],
-        "quote": "Distributed profits and dividends are also exempted; ... Distributed profits and dividends / Exempt / Exempt",
-        "confidence": "medium",
+        "quote": "§ 4º Os lucros ou dividendos pagos, creditados, entregues, empregados ou remetidos ao exterior ficarão sujeitos à incidência do imposto de renda na fonte à alíquota de 10% (dez por cento). [...] Art. 8º Esta Lei entra em vigor na data de sua publicação e produzirá efeitos a partir de 1º de janeiro de 2026.",
+        "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null,
-        "detail": null
+        "enum": null
       },
       "implicit_costs_note": {
         "zh": "",
@@ -1991,8 +2006,8 @@
         "sources": null
       },
       "regulatory_change_risk_note": {
-        "zh": "2019年T+2结算周期改革、2025/2026年之交的非居民股息预扣税立法变化（见costs.dividend_withholding_tax的冲突说明）等显示巴西证券监管/税务规则存在较活跃的调整节奏",
-        "en": "Recent examples — the 2019 T+2 settlement-cycle reform and the reported 2025/2026 change to non-resident dividend withholding tax (see the conflict noted under costs.dividend_withholding_tax) — indicate an active pace of regulatory/tax rule change in the Brazilian market",
+        "zh": "2019年T+2结算周期改革、2025/2026年之交由《第15.270/2025号法律》实施的非居民股息预扣税立法变化（见costs.dividend_withholding_tax，官方法律原文已核实生效，但交易所官网说明页尚未同步更新）等显示巴西证券监管/税务规则存在较活跃的调整节奏",
+        "en": "Recent examples — the 2019 T+2 settlement-cycle reform and the 2025/2026 non-resident dividend withholding tax change enacted by Law No. 15.270/2025 (see costs.dividend_withholding_tax — confirmed via the official law text, though the exchange's own page has not yet been updated to reflect it) — indicate an active pace of regulatory/tax rule change in the Brazilian market",
         "sources": [
           {
             "title": "Project T+2 – Context",

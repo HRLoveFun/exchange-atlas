@@ -442,13 +442,13 @@
       "field_path": "core_laws",
       "label_zh": "核心法律法规体系",
       "label_en": "Core Laws & Regulations",
-      "zh": "《6.385号法律》（Law 6385）——B3就非居民投资者事务列为核心巴西联邦证券法规之一",
-      "en": "Law No. 6.385 – listed by B3 as one of the core Brazilian federal securities statutes",
+      "zh": "《6.385号法律》（Lei 6.385/76，1976年12月7日颁布）——CVM官网现行「Sobre a CVM」（关于CVM）页面官方原文确认：该法律创设了CVM（巴西证券委员会），赋予其监管、规范、纪律处分与发展巴西证券市场的职能",
+      "en": "Law No. 6.385/76 (enacted 7 December 1976) — CVM's own current 'Sobre a CVM' (About CVM) page states the law created the CVM (Brazil's securities commission), tasked with supervising, regulating, disciplining, and developing the Brazilian securities market",
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
       "verified": "2026-08-16",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "exchange_id": "br-b3",
@@ -1462,13 +1462,13 @@
       "field_path": "stamp_duty",
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
-      "zh": "联邦证券交易印花税（Umsatzabgabe/transfer stamp tax）：瑞士本国证券0.15%，外国证券0.3%（由瑞士证券商作为交易方或中介参与时征收，实务上买卖双方各承担一半）",
-      "en": "Federal securities transfer stamp tax (Umsatzabgabe): 0.15% for securities issued by a Swiss tax resident, 0.3% for securities issued by a foreign tax resident (levied where a Swiss securities dealer participates as a contracting party or intermediary; in practice split between buyer and seller)",
+      "zh": "联邦证券交易印花税（Umsatzabgabe/transfer stamp tax）：本国证券1.5‰（合0.15%），外国证券3.0‰（合0.3%）——按证券买卖对价计算，由境内证券商作为交易方或中介参与时征收，实务上买卖双方各承担一半",
+      "en": "Federal securities transfer stamp tax (Umsatzabgabe): 1.5‰ (0.15%) for securities issued by a Swiss tax resident, 3.0‰ (0.3%) for securities issued by a foreign tax resident — calculated on the consideration paid, levied where a Swiss securities dealer participates as a contracting party or intermediary; in practice split between buyer and seller",
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
       "verified": "2026-08-16",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "exchange_id": "cn-sse",
@@ -3217,11 +3217,11 @@
       "field_path": "csd_name",
       "label_zh": "托管机构",
       "label_en": "CSD/ICSD",
-      "zh": "Euronext Securities（集团自有CSD网络，运营实体分布在哥本哈根/米兰/奥斯陆/波尔图四地）；里斯本、米兰、奥斯陆三个市场现已由Euronext Securities提供托管结算，阿姆斯特丹/布鲁塞尔/巴黎计划自2026年9月起迁移至Euronext Securities Milan实体；都柏林及迁移前的阿姆斯特丹/布鲁塞尔/巴黎具体托管机构本次未核实（推测使用各自本国既有CSD，未找到官方原文明确点名）",
-      "en": "Euronext Securities (the Group's own CSD network, with operating entities in Copenhagen, Milan, Oslo and Porto); Lisbon, Milan and Oslo are already settled/custodied via Euronext Securities, while Amsterdam, Brussels and Paris are scheduled to migrate to the Euronext Securities Milan entity from September 2026; the CSD currently used by Dublin, and by Amsterdam/Brussels/Paris prior to migration, was not verified this session (likely each country's pre-existing national CSD, but no primary source explicitly named it)",
+      "zh": "里斯本、米兰、奥斯陆三个市场已用集团自有的Euronext Securities托管结算；阿姆斯特丹（荷兰法人Euronext Amsterdam N.V.）目前使用Euroclear Nederland，布鲁塞尔（比利时法人）目前使用Euroclear Belgium，巴黎（法国法人）目前使用Euroclear France（官方规则手册逐字点名，见detail）——三者合称ESES（Euroclear Settlement of Euronext-zone Securities）平台，均计划自2026年9月21日起迁移至Euronext Securities Milan实体；都柏林（爱尔兰法人）自2021年3月起已由CREST（原Euroclear UK & Ireland运营）迁移至Euroclear Bank（国际中央证券存管机构，比利时法人），且都柏林不在2026年9月的迁移范围内（European Offering官方页面明确只覆盖阿姆斯特丹/布鲁塞尔/米兰/巴黎四个市场）",
+      "en": "Lisbon, Milan and Oslo are already settled/custodied via the Group's own Euronext Securities; Amsterdam (Dutch legal entity, Euronext Amsterdam N.V.) currently uses Euroclear Nederland, Brussels (Belgian legal entity) currently uses Euroclear Belgium, and Paris (French legal entity) currently uses Euroclear France (explicitly named in the official rulebook — see detail) — together known as the ESES (Euroclear Settlement of Euronext-zone Securities) platform, all three scheduled to migrate to the Euronext Securities Milan entity from 21 September 2026; Dublin (Irish legal entity) migrated from CREST (then operated by Euroclear UK & Ireland) to Euroclear Bank (an International CSD, a Belgian legal entity) in March 2021, and Dublin is confirmed NOT included in the September 2026 migration scope (the official European Offering page covers only Amsterdam, Brussels, Milan and Paris)",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-16",
       "confidence": "high"
     },
@@ -4612,13 +4612,13 @@
       "field_path": "self_listed",
       "label_zh": "自身是否上市",
       "label_en": "Self-listed",
-      "zh": "运营实体本身未独立上市；母公司 Saudi Tadawul Group 据信已在本所主板挂牌，但本次未核实到可直接摘引的一手原文确认具体上市日期/代码",
-      "en": "Not directly self-listed; parent Saudi Tadawul Group is believed to trade on the Exchange it operates, but no primary source confirming exact listing date/ticker was captured this round",
+      "zh": "运营实体本身（Saudi Exchange Company）未独立上市；母公司 Saudi Tadawul Group Holding Company 经股东特别大会决议（决议日期2021年4月6日）于2021年5月20日改制为控股集团，同年12月8日完成首次公开发行并在其自身运营的交易所挂牌交易（发行3600万股，占股本30%，发行价每股105里亚尔，发行后市值约126亿里亚尔）",
+      "en": "The operating entity (Saudi Exchange Company) is not itself listed; parent Saudi Tadawul Group Holding Company was converted into a holding company on 20 May 2021G pursuant to an Extraordinary General Assembly resolution dated 6 April 2021G, and completed its IPO on 8 December 2021, listing on the Exchange it operates (36,000,000 shares offered, 30% of share capital, at SAR 105 per share, implying a market cap of SAR 12.6bn at listing)",
       "enum": "partial",
       "enum_ref": "yes_no",
       "has_detail": true,
       "verified": "2026-08-14",
-      "confidence": "low"
+      "confidence": "high"
     },
     {
       "exchange_id": "sa-tadawul",
@@ -4837,9 +4837,9 @@
       "field_path": "short_selling",
       "label_zh": "做空机制",
       "label_en": "Short Selling",
-      "zh": "受监管的备兑卖空：卖空订单须在交易系统中标记，且须已通过证券借贷协议借入相应证券方可卖空（不允许裸卖空）",
-      "en": "Regulated covered short selling: orders must be flagged, and short sellers must have borrowed the securities under a securities lending agreement",
-      "enum": "restricted_list",
+      "zh": "受监管的备兑卖空（禁止裸卖空）：卖空订单须标记且已通过证券借贷协议锁定证券；默认覆盖除衍生品外全部上市证券（非指定清单），但须满足价格条件（卖出价须高于该证券当前最优买价，类报升规则）与两项动态限额（净空头持仓/最近60日日均成交量之比不超10日；净空头持仓不超过该证券自由流通量10%），触及限额的证券次一交易日禁止卖空",
+      "en": "Regulated covered short selling (naked short selling prohibited): orders must be flagged and covered under a securities borrowing and lending agreement; eligible by default for all listed securities except Derivatives (not a curated list), subject to a price condition (sale price must exceed the security's current best bid — an uptick-like rule) and two dynamic caps (net short position / 60-day average daily traded volume must not exceed 10 days; net short position must not exceed 10% of free float) — securities breaching either cap are barred from short selling the next Trading Day",
+      "enum": "restricted_uptick",
       "enum_ref": "short_selling_stance",
       "has_detail": true,
       "verified": "2026-08-14",
@@ -5647,13 +5647,13 @@
       "field_path": "delisting_conditions",
       "label_zh": "退市条件",
       "label_en": "Delisting Conditions",
-      "zh": "触发停止买卖之情事（未依限申报财报、净值低于实收资本额二分之一、查核报告为无法表示意见或否定意见、重大讯息违规且情节重大等）持续未改善者，上市公司得依《营业细则》第50条之1规定申请终止上市；具体的终止上市财务量化门槛条文本次未逐条抓取原文，见 OPEN-QUESTIONS",
-      "en": "Delisting follows a two-stage process: designation as a 'changed trading method' security, then suspension under Securities and Exchange Act Art. 147, and finally termination of listing under Business Operation Rules Art. 50-1",
+      "zh": "《营业细则》第五十条之一规定十九款终止上市法定情事，本公司应终止其上市并报请主管机关备查。其中主要量化门槛包括：最近期财务报告显示净值为负数者；上市特别股发行总额低于新台币二亿元或发行股数低于二千万股者；依第五十条规定停止买卖连续满六个月仍未恢复其买卖者；营业全面停顿六个月无法恢复，或连续六个月公告之营业收入为零或负数者；为另一已上市（柜）公司持有股份逾其已发行股份总数或实收资本额百分之七十以上者；自上市挂牌日起届满一年后该股票已在证券柜台买卖中心上柜者。此外还包括公司经裁定解散、宣告破产确定、裁定准予重整确定等公司主体消灭情事，以及经主管机关命令停止全部有价证券买卖达三个月以上等重大违规情事，合计十九款，全文见 quote",
+      "en": "Business Operation Rules Article 50-1 sets out nineteen statutory grounds on which TWSE must terminate a company's listing and report it to the regulator. Key quantitative triggers include: negative net worth per the most recent financial report; total issued preferred stock below New Taiwan dollars two hundred million, or fewer than twenty million shares; a trading suspension under Article 50 that remains unresolved for six consecutive months; a full business halt for six months with no resumption, or reported operating revenue at zero or negative for six consecutive months; more than seventy percent of issued shares or paid-in capital held by another listed/OTC-listed company; and remaining OTC-listed for over one year after the TWSE listing date. Other grounds include company dissolution, bankruptcy, or court-approved reorganization, and a regulator-ordered suspension of all securities trading lasting three months or more",
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
       "verified": "2026-08-16",
-      "confidence": "medium"
+      "confidence": "high"
     },
     {
       "exchange_id": "tw-twse",
