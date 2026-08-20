@@ -1639,20 +1639,40 @@
         "enum": null
       },
       "csd_name": {
-        "zh": "Euronext Securities（集团自有CSD网络，运营实体分布在哥本哈根/米兰/奥斯陆/波尔图四地）；里斯本、米兰、奥斯陆三个市场现已由Euronext Securities提供托管结算，阿姆斯特丹/布鲁塞尔/巴黎计划自2026年9月起迁移至Euronext Securities Milan实体；都柏林及迁移前的阿姆斯特丹/布鲁塞尔/巴黎具体托管机构本次未核实（推测使用各自本国既有CSD，未找到官方原文明确点名）",
-        "en": "Euronext Securities (the Group's own CSD network, with operating entities in Copenhagen, Milan, Oslo and Porto); Lisbon, Milan and Oslo are already settled/custodied via Euronext Securities, while Amsterdam, Brussels and Paris are scheduled to migrate to the Euronext Securities Milan entity from September 2026; the CSD currently used by Dublin, and by Amsterdam/Brussels/Paris prior to migration, was not verified this session (likely each country's pre-existing national CSD, but no primary source explicitly named it)",
+        "zh": "里斯本、米兰、奥斯陆三个市场已用集团自有的Euronext Securities托管结算；阿姆斯特丹（荷兰法人Euronext Amsterdam N.V.）目前使用Euroclear Nederland，布鲁塞尔（比利时法人）目前使用Euroclear Belgium，巴黎（法国法人）目前使用Euroclear France（官方规则手册逐字点名，见detail）——三者合称ESES（Euroclear Settlement of Euronext-zone Securities）平台，均计划自2026年9月21日起迁移至Euronext Securities Milan实体；都柏林（爱尔兰法人）自2021年3月起已由CREST（原Euroclear UK & Ireland运营）迁移至Euroclear Bank（国际中央证券存管机构，比利时法人），且都柏林不在2026年9月的迁移范围内（European Offering官方页面明确只覆盖阿姆斯特丹/布鲁塞尔/米兰/巴黎四个市场）",
+        "en": "Lisbon, Milan and Oslo are already settled/custodied via the Group's own Euronext Securities; Amsterdam (Dutch legal entity, Euronext Amsterdam N.V.) currently uses Euroclear Nederland, Brussels (Belgian legal entity) currently uses Euroclear Belgium, and Paris (French legal entity) currently uses Euroclear France (explicitly named in the official rulebook — see detail) — together known as the ESES (Euroclear Settlement of Euronext-zone Securities) platform, all three scheduled to migrate to the Euronext Securities Milan entity from 21 September 2026; Dublin (Irish legal entity) migrated from CREST (then operated by Euroclear UK & Ireland) to Euroclear Bank (an International CSD, a Belgian legal entity) in March 2021, and Dublin is confirmed NOT included in the September 2026 migration scope (the official European Offering page covers only Amsterdam, Brussels, Milan and Paris)",
+        "detail": "Paris=Euroclear France 是唯一一个在Euronext自己的分市场规则手册（Book II, French regulated markets）里逐字点名的（Article P 2.3.3：\"the primary central depositary is Euroclear France\"）；阿姆斯特丹=Euroclear Nederland、布鲁塞尔=Euroclear Belgium 未能在对应的Book II（Amsterdam/Brussels）里找到同等逐字点名，改由另两份官方文档间接但可靠地佐证：(1) 2026-03-06新闻稿明确阿姆斯特丹/布鲁塞尔/巴黎三个市场自2026年9月21日起的『替代CSD』选项包含Euroclear Belgium/France/Nederland；(2)《Euronext Securities - Place of Settlement change guidelines》V.3（2026年3月）明确写『Today, Euroclear CSDs are designated for settlement...on Euronext's markets in Amsterdam, Brussels and Paris』，同文件附表按国别（FR/BE/NL）列出Euroclear France/Belgium/Nederland为对应CSD——市场与国别的对应关系（布鲁塞尔=比利时法人Euronext Brussels S.A./N.V.、阿姆斯特丹=荷兰法人Euronext Amsterdam N.V.）本文件regulator字段已确认，非本次新引入的假设。`euroclear.com`主域名及`/services/en/provider-homepage/euroclear-*.html`子页面本次实测对常规UA同样返回403（与OPEN-QUESTIONS第21条`uk-lse`案例一致），故未能直接抓取Euroclear自己官网作为来源，改用Euronext自己官网发布的规则手册/新闻稿/技术指引达成核实。都柏林Euroclear Bank一节来自2021年官方新闻稿，本次未找到2021年后都柏林CSD再次变更的官方原文，按现有可查最新状态记录。",
         "sources": [
           {
             "title": "Our Journey（Euronext官网，Euronext Securities结算整合说明）",
             "url": "https://www.euronext.com/en/about/our-journey",
             "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Rule Book Book II：Specific rules applicable to the French regulated markets（生效 2 July 2019，Article P 2.3.3 明确点名Euroclear France）PDF",
+            "url": "https://www.euronext.com/sites/default/files/2020-02/Book%20II%20_2%20July%202019_UK.PDF",
+            "accessed": "2026-08-21"
+          },
+          {
+            "title": "Confirmation of the go-live of Euronext's new settlement model in September 2026（新闻稿，2026-03-06）",
+            "url": "https://www.euronext.com/en/news/confirmation-go-live-euronexts-new-settlement-model-september-2026",
+            "accessed": "2026-08-21"
+          },
+          {
+            "title": "Euronext Securities - Place of Settlement change guidelines（V.3，2026年3月，含CSD国别对照表：FR=Euroclear France/BE=Euroclear Belgium/NL=Euroclear Nederland）PDF",
+            "url": "https://www.euronext.com/sites/default/files/2026-03/Euronext%20Securities%20-%20Place%20of%20Settlement%20change%20guidelines%20-%20V.3%20March%202026.pdf",
+            "accessed": "2026-08-21"
+          },
+          {
+            "title": "Successful migration of issuer CSD services for Irish securities from Euroclear UK & Ireland to Euroclear Bank（新闻稿，2021-03-18）",
+            "url": "https://www.euronext.com/en/about/media/euronext-press-releases/successful-migration-issuer-csd-services-for-irish-securities",
+            "accessed": "2026-08-21"
           }
         ],
-        "quote": "Euronext Amsterdam, Brussels and Paris will designate Euronext Securities as the CSD for the settlement of equity trades from September 2026. These three markets will join the other Euronext markets in Lisbon, Milan and Oslo, already supported by Euronext Securities.",
+        "quote": "Where the primary central depositary is Euroclear France, dividends are detached as follows on the market operated by Euronext Paris. ... Euronext confirms that, starting 21 September 2026, Euronext Amsterdam, Brussels and Paris will designate Euronext Securities as the default Central Securities Depository (CSD) for the settlement of equity transactions and ETP euro transactions executed on these markets ... starting 21 September 2026, clients will be able to use either Euronext Securities or Clearstream Europe AG, Euroclear Bank, Euroclear Belgium, Euroclear France and Euroclear Nederland as alternative CSDs if they wish to do so. ... Today, Euroclear CSDs are designated for settlement of equity and exchange-traded products trades executed in euros on Euronext's markets in Amsterdam, Brussels and Paris. ... Dublin and Brussels – 18 March 2021 – Euronext and Euroclear Bank today announced the successful migration of issuer CSD services for 50 Irish corporate issuers and listed companies from CREST (operated by Euroclear UK & Ireland) to Euroclear Bank (an International Central Securities Depository)",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null,
-        "detail": null
+        "enum": null
       },
       "initial_margin_practice": {
         "zh": "",
