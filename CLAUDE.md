@@ -73,7 +73,16 @@ exchange-atlas《全球交易所图鉴》：用统一框架横向记录全球主
 
 ---
 
-## 六、目录地图（简要，详细结构见各目录内文件）
+## 六、Git 推送方式
+
+个人独立维护的仓库，GitHub 上 `main` 无分支保护、无强制 CI 卡点，走 PR 只是多一次手动点 merge，没有额外价值。**默认直接推 main，不必开 PR、不必等审核**：
+
+- **交互式会话**（终端里逐轮对话）：改完后跑一遍 `make build`（`sync` + `check`）确认无误，直接 `git add` + `git commit` + `git push origin main`。本条即为 CLAUDE.md 对自动 push 的授权，不必每次都问"要不要 push"。仍然遵守：`make check` 不过不推、不 force push、不改写已推送的历史。
+- **后台任务（background job）**：Claude Code 平台对后台任务有硬性限制——不能直接 push/merge 到 main，只能建分支开 PR，这是运行环境层面的限制，CLAUDE.md 管不到，改不了。后台任务做完仓库改动后会照常留一个 PR，需要手动 `gh pr merge` 或在网页点一下——这一步目前没有能从项目侧省掉的办法。想要免 PR 的直接推送体验，走交互式会话。
+
+---
+
+## 七、目录地图（简要，详细结构见各目录内文件）
 
 ```
 schema/       数据结构、术语表、枚举表的权威（YAML）
