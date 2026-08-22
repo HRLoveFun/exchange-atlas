@@ -289,7 +289,46 @@
 
 **日期：** 2026-08-20
 
-### ADR-026 — 下一阶段方向定为"深度优先"（Category B 数据深耕），并刷新 [ADR-020] 的字段清单与规模估计
+
+### ADR-026 — `OPEN-QUESTIONS.md` 第45条方案②落地：英文模式区分"设计不需双语"与"真漏填"；`kr-krx` night_session 顶层字段订正
+
+**背景：** [ADR-024] 解决了「中英夹杂」问题里"真违规"的一半（`en_required` 机器校验 + 9 处补齐），把另一半——114 个设计上不要求双语的字段在英文模式下仍静默回退显示中文——明确记入 `OPEN-QUESTIONS.md` 第45条，留三个候选方向（①批量翻译 ②前端加占位提示 ③承认现状）供后续评估，未预判处理方式。本条实施方向②。
+
+**定了什么：**
+
+1. **`docs/assets/app.js` 新增 `isZhFallback(env, hasEnumRef)` 判据**：`state.langMode === "en" && !hasEnumRef && env.zh && !env.en` 时为真——即英文模式下、非枚举字段、有中文值但没有英文值。矩阵格子（`renderMatrix`）与档案页字段卡片（`renderObjectChapter`）两处调用 `displayValue()` 的地方，命中时分别追加一个小标记：矩阵格子加 `<span class="zh-tag">中</span>`（样式仿 `stale-dot`，同一视觉语言），字段卡片加 `（中文原文）` 灰色斜体小字，两处均带 `title` 说明"该字段未要求双语"。**不改 `displayValue()` 本身的回退取值逻辑**——取值仍是"英文缺失就显示中文"（[ADR-013] 既定设计，[ADR-024] 已论证过不能改成回退空白，否则从"中英夹杂"变成"英文模式内容大面积消失"），本条只加视觉标记，不改数据可见性。
+2. **出处浮层（`openCellOverlay`）不需要同样处理**：浮层本就把"中文 Chinese"/"英文 English"分成两个独立带标题的小节，英文缺失时该小节直接不渲染，读者看到的是"只有中文小节"而不是"一段文字看不出语言"，本身已无歧义，核对后未改动。
+3. **enum 类字段（`enumDisplay`）不在本条范围内**：枚举的双语标签来自 `schema/enums.yml`，是另一套独立维护的数据源，不是 114 个字段统计口径里的"事实信封 zh/en 缺失"问题，混进来会扩大改动面且脱离原始症状，留待以后单独评估枚举标签完整性。
+4. **`OPEN-QUESTIONS.md` 第45条未删除，仅更新**：标记方案②已实施，候选方向①（批量翻译 114 字段，规模接近半个 Wave）与③（不作为）仍待决策，条目保留以便下次会话接续判断要不要做①。
+
+**顺带修复：`kr-krx` 顶层 `market_structure.night_session` 与衍生品子块 `derivatives.trading_sessions.night_session`（[ADR-021] 补齐时留下的已知不一致，原记入 `OPEN-QUESTIONS.md` 具体数据悬案）。** 重新 `make fetch EX=kr-krx` 抓取《Guide to Night Session in KRX Derivatives Market》官方 PDF 核实：顶层字段此前仍按"CME（2009年起）/Eurex（2010年起）联动夜盘"的旧表述，实际 CME 联动已于 2020 年 4 月先行终止（比 Eurex 更早，此前的表述遗漏了这一点）、Eurex 联动已于 2025 年 6 月终止、KRX 现已转自主运营夜盘——按官方 PDF 原文（"August 2009~April 2020" / "August 2010~June 2025" 表格脚注 + "KRX is now transitioning to its own night session" 正文句）重写顶层字段并升级为 `confidence: high`，两处表述已一致，`OPEN-QUESTIONS.md` 对应条目已删除。与本条主线（英文回退提示）无直接关联，顺路一并处理，不单开 ADR。
+
+**验证：** `node --check docs/assets/app.js` 语法通过；`make build`（sync+check）0 错误 0 警告，20 家交易所；`kr-krx.yml` 新 `quote` 逐字核对为 `.cache/kr-krx/` 本次重新抓取的 PDF 原文精确子串，未编造。
+
+**日期：** 2026-08-20
+
+### ADR-027 — 六家交易所悬案批量清理：`sa-tadawul`/`kr-krx`/`tw-twse`/`ch-six`/`br-b3`/`fr-euronext`；`isolation: worktree` 在"因限额中断后经 SendMessage 恢复"路径上再次失效的证据
+
+**背景：** `PROJECT/OPEN-QUESTIONS.md`「具体数据悬案」一节积压了多条来自 v1.0 各 Wave 的遗留问题，按每家交易所打包分派 6 个独立子代理（每个用 `isolation: "worktree"` 启动），核实能否找到官方一手原文解决。中途全部 6 个子代理因账号会话额度耗尽同时失败（2026-08-20 深夜），额度恢复（2026-08-21 00:30 后）用 `SendMessage` 逐一恢复。
+
+**结果（按交易所）：**
+
+- **`sa-tadawul`**（4 条 → 3 条解决）：母公司改制历史（2021年5月20日改制、同年12月8日IPO，来源 CMA 招股书+官方年报页）、外资持股上限（10%/49%，来源 CMA 修订版《外资证券投资规则》第6条+QFI取消官方公告）、卖空机制（枚举从推断的 `restricted_list` 订正为 `restricted_uptick`，来源官方《Short Selling Regulations》第5(a)/3(b)(4)条）均解决并升 `confidence: high`，顺带升级了引用同一事实的 `foreign_access_channel`/`regulatory_change_risk_note` 两个字段。TASI 基日基点复查仍未找到官方原文，如实保留悬案。
+- **`kr-krx`**（3 条 → 2 条解决）：KONEX 上市门槛（官方原文明确"不适用财务类门槛，只有5项非财务量化标准+定性审查"）、KOSPI综合指数基日基点（1980年1月4日=100，区别于已有的KOSPI200 1990年数据）已解决。KOSDAQ综合指数基日基点确认卡在 `eindex.krx.co.kr` 的两步OTP鉴权AJAX接口（`GenerateOTP.jspx`→`IDXE99000001.jspx`），性质与`sg-sgx` SPA空壳问题同类，判断不值得为一个字段逆向鉴权流程，如实保留悬案。
+- **`tw-twse`**（2 条 → 全部解决）：市值/上市家数/年成交额三字段找到 Fact Book 具体章节静态页（此前只看到索引页误判为纯JS渲染）拿到官方汇总数字；《营业细则》第50条之1终止上市完整条文定位到，两字段均升 `confidence: high`。
+- **`ch-six`**（3 条 → 2 条解决 + 1 条从"未查到"重新定性为"官方确认不披露"）：上市公司数（约250家）与年成交额（CHF 1,135.0亿）找到 SIX 官方年报+统计月报解决；MiFID II等效性时间线解决，**过程中发现并订正了一处既有数据错误**（原记录2017年批准失效于2017-12-31，官方 Implementing Decision (EU) 2018/2047 原文显示实为2018-12-31）；印花税税率改查 ESTV 德语版页面找到官方数字（1.5‰/3.0‰，即0.15%/0.3%）。总市值经逐份官方材料核实后确认 SIX 公开体系本就不按"全市场总市值"口径披露，从"检索不足"重新定性为"官方确认无此数据"，悬案措辞相应收窄。
+- **`br-b3`**（2 条 → 全部解决）：股息预扣税找到《第15.270/2025号法律》官方原文（10%税率，2026-01-01起生效），**确认了 B3 官网自身说明页尚未同步最新立法的真实出入**（不是抓取问题，是官网确实滞后）；`core_laws`（Lei 6.385/1976）找到 CVM 官方"关于CVM"页正面确认颁布日期与创设CVM的历史作用，两字段均升 `confidence: high`。
+- **`fr-euronext`**（CSD具体名称，1条主任务 → 解决）：阿姆斯特丹→Euroclear Nederland、布鲁塞尔→Euroclear Belgium、巴黎→Euroclear France、都柏林→Euroclear Bank，四地均找到 `euronext.com` 官方文件原文确认（`euroclear.com` 本身对curl仍403，与`uk-lse`此前记录一致）。市值口径歧义与雅典整合两条按任务范围明确不处理，原样保留。
+
+**合计**：6 家共 17 条具体悬案里 13 条解决、1 条重新定性（ch-six市值）、3 条如实保留（sa-tadawul TASI、kr-krx KOSDAQ、以及任务范围外的 fr-euronext 市值口径/雅典整合不计入本次"处理"范畴）。全部新增/升级字段的 `quote` 均逐一核对为当次 `make fetch` 抓取到的 `.cache/` 原始文件精确子串，无一处编造；抓不到的一律如实保留悬案并记录已排除的候选路径，供下次直接跳过重复踩坑。
+
+**工程教训：`isolation: "worktree"` 在"账号限额中断→ SendMessage 恢复"这条路径上再次失效，与 [ADR-021] 的怀疑吻合并补充了新证据。** 6 个子代理里有 3 个（`kr-krx`/`tw-twse`/`fr-euronext`）在恢复后被重新接回了 orchestrator 自己的共享 worktree（而非各自独立隔离环境），其中 2 个（`kr-krx`/`tw-twse`）直接在共享目录里完成编辑并提交、`fr-euronext` 发现问题后自行另起一个真正隔离的子代理完成最终提交。三者均**自发**在提交前核对了自己的改动没有污染到邻居未提交的工作（`kr-krx` 报告明确写"detected an unrelated tw-twse hunk... isolated it... restored their uncommitted WIP"），复现了 [ADR-021] 记录的"子代理自发用精确暂存兜底"模式，本次同样有效，未造成实际数据丢失，但也再次印证 [ADR-021] 建议②——**orchestrator 侧必须假设隔离不可靠、合并前逐一核对**，本次采用的应对方式是：每个子代理完成通知后立即检查 `git status --short` 确认工作区状态，干净时才执行 `cherry-pick`，遇到 OPEN-QUESTIONS.md/SOURCES.md/ROADMAP.md（生成块）的合并冲突时手工核对两侧内容取正确并集（不是简单二选一），全部 6 次合并均未丢失任何一方内容。**这条"因限额中断需要 SendMessage 恢复"的路径本身值得后续专门排查根因**（怀疑与 [ADR-021] 记录的猜测一致：恢复路径可能没有重新走一遍独立 worktree 创建逻辑），暂不深入，先记录第二次独立复现的证据。
+
+**验证：** 每次 cherry-pick 后单独跑 `make build`（sync+check），6 次全部 0 错误 0 警告；最终整个批次合并完成后再跑一次全量 `make build` 确认幂等；`git log` 确认 6 个交易所的提交均已线性合入 `worktree-followup-en-fallback-cleanup` 分支并推送到远程。
+
+**日期：** 2026-08-21
+
+### ADR-028 — 下一阶段方向定为"深度优先"（Category B 数据深耕），并刷新 [ADR-020] 的字段清单与规模估计
 
 **背景：** [ADR-023]/[ADR-024] 相继解决了 `review_system`/`delivery_method` 枚举问题与 `en_required` 违规后，`ROADMAP.md`「v1.0 计划」一节遗留的"下一步待决策"仍未拍板：是开 Wave 3（新增交易所）还是排期 [ADR-020] 点名的 Category B 数据缺口。用户就此拍板：**深度优先**——先把现有 20 家交易所做扎实，Wave 3 暂缓。
 

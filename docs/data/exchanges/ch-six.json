@@ -104,7 +104,7 @@
       "market_cap_usd_bn": {
         "zh": "",
         "confidence": "low",
-        "detail": "本次多方尝试均未能在 six-group.com 找到当期（2026年8月）官方发布的、单独针对 SIX Swiss\nExchange（不与BME合并统计）的总市值数字：「SIX Exchanges Figures」月度公告只披露成交额/\n成交笔数/指数点位，不含市值；「Discover the market activity in Shares」页面为动态渲染的\n新闻流，未见汇总统计表。第三方法律实务资源（Baker McKenzie Cross-Border Listings Guide）\n给出\"截至2024年年中自由流通市值约CHF 1.8万亿\"，但该数字已滞后本次会话约2年，且是\"自由\n流通市值\"而非\"总市值\"，口径与本项目其他交易所字段不完全对应，未采纳为正式字段值，\n按CLAUDE.md二第4条留空，见OPEN-QUESTIONS。\n",
+        "detail": "2026-08-21 按 OPEN-QUESTIONS 建议，专门找到并逐页核对了 SIX Annual Report 2025 全文\nPDF（six-group.com，2026-03-24发布，覆盖2025财年）与 SIX Key Figures 2025 独立PDF、以及\n2026年7月刊 Statistical Monthly Report（`.../smr/2026/statistical-monthly-report-\n202607.zip`，逐个CSV核对）——三份材料合计覆盖了年报叙事、Key Figures财务速览表、月度\n统计明细三个不同层级，均未见\"SIX Swiss Exchange总市值/市值\"这一汇总数字：年报只披露了\n\"约250家上市公司\"与分部成交额；月度统计只有分品类成交额/成交笔数/挂牌证券数与指数（非\n全市场）市值。可以确认这不是本次检索遗漏，而是SIX官方公开材料体系本身未按\"全市场总\n市值\"这一口径披露数据。第三方法律实务资源（Baker McKenzie Cross-Border Listings Guide）\n给出\"截至2024年年中自由流通市值约CHF 1.8万亿\"，但该数字已滞后本次会话约2年，且是\"自由\n流通市值\"而非\"总市值\"，口径与本项目其他交易所字段不完全对应，未采纳为正式字段值，\n按CLAUDE.md二第4条留空，见OPEN-QUESTIONS。\n",
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
@@ -112,24 +112,41 @@
         "sources": null
       },
       "listed_companies_count": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "同market_cap_usd_bn，第三方法律实务资源给出\"截至2025年2月237家（本土200+外国37）\"，\n但已滞后本次会话约18个月，本所官网本次未找到更新的官方统计页，未采纳为正式字段值，\n留空，见OPEN-QUESTIONS。\n",
+        "zh": "约250家公司在SIX Swiss Exchange挂牌上市（官方原文用词为约数「around 250」，未给出精确整数；口径为SIX Swiss Exchange单一实体，不含同集团西班牙BME Exchange的挂牌公司）",
+        "en": "Around 250 companies are listed on SIX Swiss Exchange (the Annual Report states this as an approximate figure, not an exact integer; scoped to SIX Swiss Exchange as a single entity, excluding companies listed on the group's Spanish exchange, BME Exchange)",
+        "detail": "2026-08-21 在 SIX Annual Report 2025（PDF，2026-03-24发布，覆盖截至2025年12月31日的\n2025财年）\"Report on the Business Year\"章节\"Main Markets\"一节找到官方原文表述，替换掉\n此前滞后约18个月的第三方法律实务资源数字（\"截至2025年2月237家，本土200+外国37\"）。\n官方原文本身即为约数（\"around 250\"），未提供精确到个位的整数，故本字段也如实保留约数\n表述，不强行精确化。\n",
+        "sources": [
+          {
+            "title": "SIX Annual Report 2025，Report on the Business Year / Main Markets",
+            "url": "https://www.six-group.com/dam/download/company/report/annual/2025/six-annual-report-2025-en.pdf",
+            "accessed": "2026-08-21"
+          }
+        ],
+        "quote": "SIX Swiss Exchange in Zurich is one of the leading trading venues in Europe. It lists some of Europe's largest publicly traded companies in the pharmaceutical, food, industrial machinery, and specialty chemicals sectors. In total, around 250 companies are listed on SIX Swiss Exchange.",
+        "confidence": "high",
         "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "annual_turnover_usd_bn": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "「SIX Exchanges Figures」2026年6月公告披露的是\"2026年上半年SIX Swiss Exchange与BME\nExchange合并成交额CHF 969.3十亿\"（半年度、且与BME合并统计），既非年度口径也非本所单独\n口径，未拆分出SIX Swiss Exchange单独的年成交额，故不采纳为该字段正式值，留空。\n",
+        "zh": "2025财年（SIX Annual Report 2025，覆盖截至2025年12月31日止年度）SIX Swiss Exchange单一实体年成交额CHF 1,135.0十亿（不含非瑞郎债券），较2024年CHF 1,006.0十亿（同口径重述数）增长12.8%；其中股票板块CHF 874.8十亿（+10.5%），瑞士ETF板块CHF 124.3十亿（+47.7%）。原始披露为瑞士法郎，本字段未做汇率折算为美元（避免引入汇率时点误差，同类处理见OPEN-QUESTIONS框架性问题第41条）",
+        "en": "For fiscal year 2025 (SIX Annual Report 2025, covering the year ended 31 December 2025), SIX Swiss Exchange as a single entity recorded turnover of CHF 1,135.0 billion (excluding non-CHF bonds), up 12.8% from CHF 1,006.0 billion in 2024 (restated on the same basis); of which equities contributed CHF 874.8 billion (+10.5%) and the Swiss ETF segment CHF 124.3 billion (+47.7%). Disclosed in Swiss francs; not converted to USD here to avoid introducing exchange-rate-timing distortion (see OPEN-QUESTIONS framework item 41 for the same treatment elsewhere in this project)",
+        "detail": "2026-08-21 找到并核实：不同于此前唯一可用的「SIX Exchanges Figures」月度公告（半年度、且\n与集团旗下西班牙BME Exchange合并披露），SIX Annual Report 2025 正文与其附属的 SIX Key\nFigures 2025 独立PDF均单列\"Turnover SIX Swiss Exchange\"一行（与\"Turnover BME Exchange\"\n分开列示），是本所单独口径、且为完整财年（非半年）数据，替换掉此前留空的处理。\n",
+        "sources": [
+          {
+            "title": "SIX Annual Report 2025，Report on the Business Year（\"Double-Digit Growth in Turnover\"一节）",
+            "url": "https://www.six-group.com/dam/download/company/report/annual/2025/six-annual-report-2025-en.pdf",
+            "accessed": "2026-08-21"
+          },
+          {
+            "title": "SIX Key Figures 2025（Operating Key Figures表，\"Turnover SIX Swiss Exchange\"单独一行，注明\"Excluding non-CHF bonds\"）",
+            "url": "https://www.six-group.com/dam/download/company/report/annual/2025/six-key-figures-2025.pdf",
+            "accessed": "2026-08-21"
+          }
+        ],
+        "quote": "On SIX Swiss Exchange, overall turnover was up 12.8% to reach CHF 1,135.0 billion, with the equities segment up 10.5% to reach CHF 874.8 billion. With an increase of 47.7%, the Swiss ETF segment reached a turnover of CHF 124.3 billion",
+        "confidence": "high",
         "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "global_ranking": {
         "zh": "",
@@ -1613,23 +1630,28 @@
         "sources": null
       },
       "stamp_duty": {
-        "zh": "联邦证券交易印花税（Umsatzabgabe/transfer stamp tax）：瑞士本国证券0.15%，外国证券0.3%（由瑞士证券商作为交易方或中介参与时征收，实务上买卖双方各承担一半）",
-        "en": "Federal securities transfer stamp tax (Umsatzabgabe): 0.15% for securities issued by a Swiss tax resident, 0.3% for securities issued by a foreign tax resident (levied where a Swiss securities dealer participates as a contracting party or intermediary; in practice split between buyer and seller)",
-        "detail": "⚠️ 来源为第三方专业税务资源（PwC Tax Summaries），按CLAUDE.md二第3条第三方来源confidence上限为medium，即使摘录到逐字quote也不得标high。官方联邦税务局（ESTV）总览页（stamp-duty）确认了该税种的法律性质与征收依据，但本次未在ESTV官网上定位到载明具体0.15%/0.3%税率数字的原始页面（可能在德/法/意语版或税率细则子页），故税率数字仍需依赖第三方来源，见OPEN-QUESTIONS。",
+        "zh": "联邦证券交易印花税（Umsatzabgabe/transfer stamp tax）：本国证券1.5‰（合0.15%），外国证券3.0‰（合0.3%）——按证券买卖对价计算，由境内证券商作为交易方或中介参与时征收，实务上买卖双方各承担一半",
+        "en": "Federal securities transfer stamp tax (Umsatzabgabe): 1.5‰ (0.15%) for securities issued by a Swiss tax resident, 3.0‰ (0.3%) for securities issued by a foreign tax resident — calculated on the consideration paid, levied where a Swiss securities dealer participates as a contracting party or intermediary; in practice split between buyer and seller",
+        "detail": "2026-08-21 按 OPEN-QUESTIONS 建议改抓 ESTV 官网德语版子页（英文版总览页 `estv.admin.ch/\nen/stamp-duty` 此前及本次均只确认税种法律性质，未给出具体税率数字），在《Umsatzabgabe\nkurz erklärt》页找到官方原文，以千分比（‰）计价\"1,5 ‰\"/\"3,0 ‰\"，与常用的0.15%/0.3%\n百分比表述在数学上完全等价（1.5‰=0.15%，3.0‰=0.3%），非另一套不同数字。zh/en为便于\n与本项目其他交易所同类字段对照，采用百分比表述；quote同时保留德文官方原始千分比表述与\n第三方PwC税务简报的百分比转述作为交叉印证。confidence 由此前的 medium（仅第三方来源）\n升级为 high（已有官方原文撑腰）。\n",
         "sources": [
           {
-            "title": "Switzerland - Corporate - Other taxes（PwC Tax Summaries）",
+            "title": "Umsatzabgabe kurz erklärt（瑞士联邦税务局ESTV官网德语版说明页，税率官方原文出处）",
+            "url": "https://www.estv.admin.ch/estv/de/home/bundesabgaben/stempelabgaben/sta-fachinformationen/umsatzabgabe.html",
+            "accessed": "2026-08-21"
+          },
+          {
+            "title": "Switzerland - Corporate - Other taxes（PwC Tax Summaries，百分比表述交叉印证，非本字段主要依据）",
             "url": "https://taxsummaries.pwc.com/switzerland/corporate/other-taxes",
             "accessed": "2026-08-16"
           },
           {
-            "title": "Stamp duty（瑞士联邦税务局ESTV官网总览页，确认税种法律性质，未含具体税率数字）",
+            "title": "Stamp duty（瑞士联邦税务局ESTV官网英文版总览页，确认税种法律性质，未含具体税率数字）",
             "url": "https://www.estv.admin.ch/en/stamp-duty",
             "accessed": "2026-08-16"
           }
         ],
-        "quote": "The ordinary tax rate of Swiss securities transfer tax is 0.15% for securities issued by a tax resident of Switzerland and 0.3% for securities issued by a tax resident of a foreign country.",
-        "confidence": "medium",
+        "quote": "Die Abgabe beträgt 1,5 ‰ für inländische Wertpapiere und 3,0 ‰ für ausländische Wertpapiere. ... The ordinary tax rate of Swiss securities transfer tax is 0.15% for securities issued by a tax resident of Switzerland and 0.3% for securities issued by a tax resident of a foreign country.",
+        "confidence": "high",
         "verified": "2026-08-16",
         "enum": null
       },
@@ -1712,20 +1734,30 @@
         "sources": null
       },
       "regulatory_change_risk_note": {
-        "zh": "瑞士作为非欧盟国家，其交易所监管框架与欧盟MiFID II的「等效性」认定存在政治不确定性——欧盟委员会2017年曾发布《实施决定》，认定SIX Swiss Exchange AG与BX Swiss AG两家瑞士交易所符合MiFID II/MiFIR股票交易义务下的「等效」标准，但该决定明确限定有效期一年（2017年12月24日生效、同年12月31日到期），此后是否续期、目前最新状态本次未逐条核实，是本所与已有的欧盟成员国交易所之间制度环境的核心差异点之一，见OPEN-QUESTIONS。",
-        "en": "As a non-EU country, Switzerland's exchange regulatory framework faces political uncertainty over its MiFID II \"equivalence\" status — in 2017 the European Commission issued an Implementing Decision recognizing SIX Swiss Exchange AG and BX Swiss AG as equivalent for the MiFID II/MiFIR share trading obligation, but that Decision was expressly limited to one year (effective 24 December 2017, expiring 31 December of the same year); whether and how it was subsequently renewed was not individually verified this session — a core structural difference versus EU-member exchanges already in this project, see OPEN-QUESTIONS.",
+        "zh": "瑞士作为非欧盟国家，其交易所监管框架能否获欧盟MiFID II/MiFIR「等效性」认定存在政治不确定性，且已实际发生过一次认定失效。时间线：(1) 欧盟委员会《实施决定》(EU) 2017/2441（2017年12月21日通过）首次认定SIX Swiss Exchange AG与BX Swiss AG符合等效标准，有效期至2018年12月31日；(2) 《实施决定》(EU) 2018/2047（2018年12月20日通过）将认定延长至2019年6月30日；(3) 此后欧盟未再续期，等效认定自2019年7月1日起失效；(4) 瑞士随即针对欧盟启动「交易所基础设施保护措施」反制（禁止外国交易场所未经认可交易瑞士股票），该措施已于2024年1月1日转入《金融市场基础设施法》（FinMIA）正式立法；(5) 随欧盟2024年修订相关法律基础，瑞士联邦委员会2025年1月29日决定，自2025年5月1日起将欧盟从保护措施适用名单中移除。截至本次核实（2026年8月），欧盟层面的正式「等效性」认定本身尚未恢复，双方仅通过瑞士单方面解除反制措施使市场准入恢复常态。",
+        "en": "As a non-EU country, whether Switzerland's exchange regulatory framework retains MiFID II/MiFIR \"equivalence\" recognition has been a source of political uncertainty, and equivalence has in fact already lapsed once. Timeline: (1) Commission Implementing Decision (EU) 2017/2441 (adopted 21 December 2017) first recognised SIX Swiss Exchange AG and BX Swiss AG as equivalent, expiring 31 December 2018; (2) Implementing Decision (EU) 2018/2047 (adopted 20 December 2018) extended recognition to 30 June 2019; (3) the EU did not renew it thereafter, and equivalence lapsed with effect from 1 July 2019; (4) Switzerland responded by activating a \"stock exchange infrastructure protective measure\" against the EU (barring unrecognised foreign trading venues from trading Swiss shares), which was incorporated into ordinary law (the Financial Market Infrastructure Act, FinMIA) on 1 January 2024; (5) following an EU revision of the underlying legal basis in 2024, the Swiss Federal Council decided on 29 January 2025 to remove the EU from the list of jurisdictions subject to the protective measure, effective 1 May 2025. As of this review (August 2026), formal EU-level \"equivalence\" recognition itself has not been reinstated — market access has instead normalised only through Switzerland's unilateral withdrawal of its countermeasure.",
+        "detail": "2026-08-21 已用欧盟官方Implementing Decision原文（eur-lex.europa.eu）与瑞士联邦财政部国际金融事务秘书处（SIF）官方说明页逐条核实完整时间线，替换掉此前仅第三方律所转述、且把第一次决定的到期日期误记为「2017年12月31日」（实际为2018年12月31日）的旧版本。欧盟官方新闻稿页面（europa.eu/rapid）本身仍为纯JS渲染SPA无法抓取；`admin.ch`两条联邦委员会新闻稿页面本次curl返回403（反爬），但SIF说明页本身已完整转述其内容，不影响本条结论。",
         "sources": [
           {
-            "title": "European Commission Adopts Implementing Decision on the Equivalence of Swiss Stock Exchanges Under MiFID II（律所法律资讯平台转述，欧盟官方europa.eu原页面本次为纯JS渲染无法抓取正文，见SOURCES.md说明）",
-            "url": "https://natlawreview.com/article/european-commission-adopts-implementing-decision-equivalence-swiss-stock-exchanges",
-            "accessed": "2026-08-16"
+            "title": "Commission Implementing Decision (EU) 2017/2441 of 21 December 2017, Article 2 & Annex",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017D2441",
+            "accessed": "2026-08-21"
+          },
+          {
+            "title": "Commission Implementing Decision (EU) 2018/2047 of 20 December 2018, Article 2",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018D2047",
+            "accessed": "2026-08-21"
+          },
+          {
+            "title": "Measure to protect Swiss stock exchange infrastructure（瑞士联邦财政部国际金融事务秘书处SIF官方说明页）",
+            "url": "https://www.sif.admin.ch/en/protect-swiss-stock-exchange-infrastructure",
+            "accessed": "2026-08-21"
           }
         ],
-        "quote": "Under the Implementation Decision, the EC recognizes the following share trading venues in Switzerland as eligible for compliance with the trading obligation for shares in MiFID II and MIFIR: SIX Swiss Exchange AG and BX Swiss AG. ... The Implementing Decision is limited to one year, expiring on December 31, and became effective on December 24, 2017.",
-        "confidence": "medium",
+        "quote": "Article 2 This Decision shall enter into force on the day following that of its publication in the Official Journal of the European Union. It shall expire on 31 December 2018. ... ANNEX Stock exchanges in Switzerland considered equivalent ...: (a) SIX Swiss Exchange AG (b) BX Swiss AG ... Article 2 ... It shall apply from 1 January 2019. It shall expire on 30 June 2019. ... The EU granted Switzerland stock market equivalence only until the end of June 2019, but did not extend it beyond that date. ... the safeguard measure was transferred to ordinary law on 1 January 2024. ... On 29 January 2025, the Federal Council decided to remove the European Union (EU) from the list of jurisdictions affected by the measure to protect the Swiss stock exchange infrastructure (protective measure) with effect from 1 May 2025.",
+        "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null,
-        "detail": null
+        "enum": null
       },
       "enforcement_note": {
         "zh": "",

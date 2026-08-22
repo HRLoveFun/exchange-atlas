@@ -46,14 +46,14 @@
 ## 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
-共 1157 个已填字段，其中 0 个超过复核阈值待复核。
+共 1162 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
 |---|---|---|
 | `au-asx` | 73 | 0 |
 | `br-b3` | 76 | 0 |
 | `ca-tsx` | 54 | 0 |
-| `ch-six` | 50 | 0 |
+| `ch-six` | 52 | 0 |
 | `cn-sse` | 52 | 0 |
 | `cn-szse` | 76 | 0 |
 | `de-eurex` | 33 | 0 |
@@ -65,7 +65,7 @@
 | `kr-krx` | 70 | 0 |
 | `sa-tadawul` | 67 | 0 |
 | `sg-sgx` | 68 | 0 |
-| `tw-twse` | 59 | 0 |
+| `tw-twse` | 62 | 0 |
 | `uk-lse` | 44 | 0 |
 | `us-nasdaq` | 47 | 0 |
 | `us-nyse` | 41 | 0 |
@@ -119,16 +119,17 @@
 
 - 20/20+ 已完成（v0.1/v0.2 五家标杆 `cn-sse`/`hk-hkex`/`us-nyse`/`jp-jpx`/`de-eurex` + v1.0 Wave 1 八家 `us-nasdaq`/`cn-szse`/`uk-lse`/`de-xetra`/`sg-sgx`/`au-asx`/`in-nse`/`sa-tadawul` + v1.0 Wave 2 七家 `fr-euronext`/`kr-krx`/`ca-tsx`/`br-b3`/`tw-twse`/`ch-six`/`za-jse`，见上方填充进度表）
 - v1.0 横向铺开阶段已完成，达成 20 家目标；`review_system` 枚举覆盖率问题（下方"Wave 1 启动前置条件"）未在 Wave 1 启动前解决，属流程疏漏，见 `PROJECT/DECISIONS.md` [ADR-018] 执行进度补记，已于 2026-08-19 解决（[ADR-023]，连带修了 `delivery_method` 同类问题）；市场结构/指数体系两处 schema 缺口已设计并示范填一家（[ADR-019]）。9 家交易所的衍生品市场机制已按 [ADR-017] 并行子代理模式补齐，人工抽检 90 字段全部通过，见 [ADR-021]。前端矩阵/章节结构审查见 [ADR-022]。
-- **英文版审查（2026-08-20 启动）**：走查发现"中英夹杂"症状，拆成两层——① `en_required` 字段真违规（9 处，`cn-sse`/`hk-hkex`/`tw-twse`），已补齐数据并给 `validate.py` 加永久机器校验，附带查出并修正一处 `hk-hkex` 撮合规则误引衍生品市场规则的数据错误，见 [ADR-024]；② 114 个非强制双语字段在英文模式下仍回退显示中文，按用户决定暂只记录规模与候选方案，见 `PROJECT/OPEN-QUESTIONS.md` 第45条，未处理。
-- **下一步方向已定：深度优先（v1.1 Category B 数据深耕），Wave 3 暂缓**，见 `PROJECT/DECISIONS.md` [ADR-026]。`OPEN-QUESTIONS.md` 第45条（114 字段英文回退显示）随 v1.1 一并处理，不单独开工。详见下方「v1.1 计划」一节。
+- **英文版审查（2026-08-20 启动）**：走查发现"中英夹杂"症状，拆成两层——① `en_required` 字段真违规（9 处，`cn-sse`/`hk-hkex`/`tw-twse`），已补齐数据并给 `validate.py` 加永久机器校验，附带查出并修正一处 `hk-hkex` 撮合规则误引衍生品市场规则的数据错误，见 [ADR-024]；② 114 个非强制双语字段在英文模式下仍回退显示中文，方案②（前端加视觉标记区分"设计不需双语"与"真漏填"）已实施，见 [ADR-026]，方案①（批量翻译114字段）随 v1.1 一并评估，不单独开工。
+- **悬案批量清理（2026-08-20/21）**：`sa-tadawul`/`kr-krx`/`tw-twse`/`ch-six`/`br-b3`/`fr-euronext` 六家共 17 条 `PROJECT/OPEN-QUESTIONS.md` 具体数据悬案，13 条解决、1 条重新定性为"官方确认不披露"、3 条如实保留（sa-tadawul TASI基日、kr-krx KOSDAQ基日、fr-euronext市值口径不在本次任务范围），见 [ADR-027]。
+- **下一步方向已定：深度优先（v1.1 Category B 数据深耕），Wave 3 暂缓**，见 `PROJECT/DECISIONS.md` [ADR-028]。详见下方「v1.1 计划」一节。
 
 ## v1.1 计划：Category B 数据深耕（规划中，待启动执行）
 
-依据与规模估计见 `PROJECT/DECISIONS.md` [ADR-026]，本节只管任务清单与进度，不重复决策理由。
+依据与规模估计见 `PROJECT/DECISIONS.md` [ADR-028]，本节只管任务清单与进度，不重复决策理由。
 
 ### 前置事项（批量执行前必须先解决，否则会重演 [ADR-018] 的教训）
 
-- [ ] **`clearing.initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency`/`last_trading_day_rule` 四字段语义歧义澄清**——`de-eurex`/`br-b3` 已按"衍生品CCP保证金方法论"填写，`tw-twse` 却按"现货融资融券"填写同一字段，两套不相干的制度共用一个字段。需先定下方案（如仿照 `delivery_method` 拆出 `clearing.derivatives.*` 镜像字段）再批量填充，见 [ADR-026]。
+- [ ] **`clearing.initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency`/`last_trading_day_rule` 四字段语义歧义澄清**——`de-eurex`/`br-b3` 已按"衍生品CCP保证金方法论"填写，`tw-twse` 却按"现货融资融券"填写同一字段，两套不相干的制度共用一个字段。需先定下方案（如仿照 `delivery_method` 拆出 `clearing.derivatives.*` 镜像字段）再批量填充，见 [ADR-028]。
 
 ### 候选字段清单（36 个确定 Category B 字段 + 4 个待澄清语义的 `clearing` 字段，2026-08-21 审计）
 

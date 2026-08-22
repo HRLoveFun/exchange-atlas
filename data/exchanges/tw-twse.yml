@@ -70,23 +70,47 @@ overview:
     confidence: medium
 
   market_cap_usd_bn:
-    zh: ""
-    confidence: low
+    zh: "新台币94,358,927百万元（2025年底，据TWSE官方Fact Book《上市股票挂牌统计》表）"
+    en: "NTD 94,358,927 million (end of 2025, per TWSE official Fact Book 'Listing Statistics for Stock' table)"
     detail: |
-      TWSE 官网首页与「上市公司总市值」等统计模块均为 JavaScript 动态渲染（curl 抓取到的静态
-      HTML 里数值均为占位符「---」），Fact Book 索引页本身只是历年 PDF 的目录，不含可直接摘引
-      的当期汇总数字。未在本次会话找到可静态抓取、含具体市值数字的官方页面，如实留空，见
-      OPEN-QUESTIONS。
+      taxonomy 字段名假设单一美元数值，但 TWSE 官方 Fact Book 只按新台币百万元披露市值
+      （Unit: NTD million），未提供美元换算口径——此处如实按原始口径记录，不做汇率换算引入
+      额外误差（与 cn-sse 处理方式一致，见该字段说明）。94,358,927 百万新台币约合新台币
+      9.44万亿元（此约数未做美元折算，折算需另行核实汇率来源，暂不纳入正式字段值）。
+      此前会话曾判断官网统计模块为 JS 动态渲染、Fact Book 索引页只是目录，故留空；本次改用
+      Fact Book 具体章节页（1.01.html，静态 HTML 表格，非 JS 渲染）找到当期数字，一并探测过
+      TWSE 开放数据 API openapi.twse.com.tw（纯 JSON 接口，curl 可直接访问，含逐笔个股数据），
+      但该 API 未见汇总市值/上市家数的现成端点，若要用它算总市值需自行加总全部个股「收盘价 ×
+      发行股数」，属自行计算而非官方已发布数字，故未采用，改用 Fact Book 官方已计算好的汇总值。
+    sources:
+      - title: TWSE Fact Book 2026 - Listing Statistics for Stock (2021-2025)
+        url: https://www.twse.com.tw/downloads/zh/about/company/factbook/2026/1.01.html
+        accessed: 2026-08-21
+    quote: "Listing Statistics for Stock (2021-2025) Unit: million shares, NTD million ／ Year: 2025 ／ No. of Listed Companies: 1063 ／ No. of Listed Stocks: 1091 ／ No. of Listed Shares: 793,745 ／ Market Capitalization: 94,358,927"
+    confidence: high
 
   listed_companies_count:
-    zh: ""
-    confidence: low
-    detail: "原因同 market_cap_usd_bn：官网统计模块为动态渲染，未找到可静态抓取的当期数字页面。"
+    zh: "1063（截至2025年底，计入普通股/特别股上市公司，不含台湾存托凭证TDR发行人）"
+    en: "1063 (as of end-2025; ordinary/preferred stock listings only, excludes TDR issuers)"
+    sources:
+      - title: TWSE Fact Book 2026 - Listing Statistics for Stock (2021-2025)
+        url: https://www.twse.com.tw/downloads/zh/about/company/factbook/2026/1.01.html
+        accessed: 2026-08-21
+    quote: "Listing Statistics for Stock (2021-2025) Unit: million shares, NTD million ／ Year: 2025 ／ No. of Listed Companies: 1063 ／ No. of Listed Stocks: 1091 ／ No. of Listed Shares: 793,745 ／ Market Capitalization: 94,358,927"
+    confidence: high
 
   annual_turnover_usd_bn:
-    zh: ""
-    confidence: low
-    detail: "原因同上。"
+    zh: "新台币93,259,320百万元（2025年全年，243个交易日合计上市股票成交金额，据TWSE官方Fact Book《上市股票成交量值》表）"
+    en: "NTD 93,259,320 million (full-year 2025 aggregate trading value of TWSE-listed stocks over 243 trading days, per TWSE official Fact Book 'Stock Trading Volume and Value' table)"
+    detail: |
+      与 market_cap_usd_bn 同样的 schema-美元假设与官方原始口径（新台币）不一致的问题，未做汇率
+      换算。93,259,320 百万新台币约合新台币9.33万亿元（未做美元折算的约数，仅供数量级参考）。
+    sources:
+      - title: TWSE Fact Book 2026 - Stock Trading Volume and Value (2021-2025)
+        url: https://www.twse.com.tw/downloads/zh/about/company/factbook/2026/3.01.html
+        accessed: 2026-08-21
+    quote: "Stock Trading Volume and Value (2021-2025) Year: 2025 ／ No. of Trading Days: 243 ／ Volume (Unit: million shares) Total: 921,859 ／ Value (Unit: NTD million) Total: 93,259,320"
+    confidence: high
 
   global_ranking:
     zh: ""
@@ -534,22 +558,24 @@ listing:
     confidence: high
 
   delisting_conditions:
-    zh: "触发停止买卖之情事（未依限申报财报、净值低于实收资本额二分之一、查核报告为无法表示意见或否定意见、重大讯息违规且情节重大等）持续未改善者，上市公司得依《营业细则》第50条之1规定申请终止上市；具体的终止上市财务量化门槛条文本次未逐条抓取原文，见 OPEN-QUESTIONS"
-    en: "Delisting follows a two-stage process: designation as a 'changed trading method' security, then suspension under Securities and Exchange Act Art. 147, and finally termination of listing under Business Operation Rules Art. 50-1"
-    quote: "或得由該上市公司依第五十條之一第五項規定申請終止上市。"
+    zh: "《营业细则》第五十条之一规定十九款终止上市法定情事，本公司应终止其上市并报请主管机关备查。其中主要量化门槛包括：最近期财务报告显示净值为负数者；上市特别股发行总额低于新台币二亿元或发行股数低于二千万股者；依第五十条规定停止买卖连续满六个月仍未恢复其买卖者；营业全面停顿六个月无法恢复，或连续六个月公告之营业收入为零或负数者；为另一已上市（柜）公司持有股份逾其已发行股份总数或实收资本额百分之七十以上者；自上市挂牌日起届满一年后该股票已在证券柜台买卖中心上柜者。此外还包括公司经裁定解散、宣告破产确定、裁定准予重整确定等公司主体消灭情事，以及经主管机关命令停止全部有价证券买卖达三个月以上等重大违规情事，合计十九款，全文见 quote"
+    en: "Business Operation Rules Article 50-1 sets out nineteen statutory grounds on which TWSE must terminate a company's listing and report it to the regulator. Key quantitative triggers include: negative net worth per the most recent financial report; total issued preferred stock below New Taiwan dollars two hundred million, or fewer than twenty million shares; a trading suspension under Article 50 that remains unresolved for six consecutive months; a full business halt for six months with no resumption, or reported operating revenue at zero or negative for six consecutive months; more than seventy percent of issued shares or paid-in capital held by another listed/OTC-listed company; and remaining OTC-listed for over one year after the TWSE listing date. Other grounds include company dissolution, bankruptcy, or court-approved reorganization, and a regulator-ordered suspension of all securities trading lasting three months or more"
+    quote: "或得由該上市公司依第五十條之一第五項規定申請終止上市。第50-1條上市公司有下列情事之一者，本公司對其上市之有價證券，應依證券交易法第一百四十四條規定終止其上市，並報請主管機關備查：……六、其上市特別股發行總額低於新台幣二億元或發行股數低於二千萬股者。……九、依證券交易法第三十六條規定公告並申報之最近期財務報告顯示其淨值為負數者。……十、公司營業全面停頓六個月無法恢復或連續六個月公告之營業收入為零或負數者。……十五、為另一已上市（櫃）之公司持有股份逾其已發行股份總數或實收資本額百分之七十以上者。……十八、自上市掛牌日起屆滿一年後，該股票已在櫃檯買賣中心上櫃者。"
     sources:
-      - title: 台湾证券交易所股份有限公司营业细则 第49-50条
+      - title: 台湾证券交易所股份有限公司营业细则 第50条之1（终止上市，法规分享知识库）
         url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007304
-        accessed: 2026-08-16
-    confidence: medium
+        accessed: 2026-08-21
+    confidence: high
 
   delisting_process:
-    zh: "分阶段处理：先列为「变更交易方法有价证券」（类似其他市场的ST/风险警示处置）→ 情节持续或加重则依证交法相关规定停止买卖 → 仍未改善者依营业细则第五十条之一规定终止上市；具体终止上市的审议与公告流程本次未逐条抓取第五十条之一原文"
+    zh: "分阶段处理：先依《营业细则》第四十九条列为「变更交易方法有价证券」（类似其他市场的ST/风险警示处置）；情节持续或加重者，依第五十条规定停止其买卖，并报请主管机关备查；停止买卖后仍未改善，或触及第五十条之一所列十九款法定情事之一者（如净值转负、停止买卖满六个月未恢复、营业全面停顿满六个月、被另一已上市公司持股逾实收资本额百分之七十等），本公司终止其上市，并报请主管机关备查"
+    en: "A staged process: a security is first designated as a 'changed trading method' security under Business Operation Rules Article 49 (similar to an ST/risk-alert flag on other markets); if the issue persists or worsens, trading is suspended under Article 50 and reported to the regulator; if still unresolved, or if one of the nineteen statutory grounds under Article 50-1 is met (e.g. negative net worth, a suspension unresolved for six consecutive months, a full six-month business halt, or over seventy percent of shares held by another listed company), TWSE terminates the listing and reports it to the regulator"
+    quote: "第49條上市公司有下列情事之一者，本公司對其上市之有價證券得列為變更交易方法有價證券：……第50條上市公司有下列情事之一者，對其上市之有價證券應由本公司依證券交易法第一百四十七條規定停止其買賣，並報請主管機關備查；或得由該上市公司依第五十條之一第五項規定申請終止上市。……第50-1條上市公司有下列情事之一者，本公司對其上市之有價證券，應依證券交易法第一百四十四條規定終止其上市，並報請主管機關備查：……六、其上市特別股發行總額低於新台幣二億元或發行股數低於二千萬股者。……九、依證券交易法第三十六條規定公告並申報之最近期財務報告顯示其淨值為負數者。……十、公司營業全面停頓六個月無法恢復或連續六個月公告之營業收入為零或負數者。……十五、為另一已上市（櫃）之公司持有股份逾其已發行股份總數或實收資本額百分之七十以上者。"
     sources:
-      - title: 台湾证券交易所股份有限公司营业细则 第49-50条
+      - title: 台湾证券交易所股份有限公司营业细则 第49-50条之1（变更交易方法/停止买卖/终止上市，法规分享知识库）
         url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007304
-        accessed: 2026-08-16
-    confidence: medium
+        accessed: 2026-08-21
+    confidence: high
 
   delisting_transition_period:
     zh: ""

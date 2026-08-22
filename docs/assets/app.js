@@ -72,6 +72,14 @@
     if (state.langMode === "en" && env.en) return env.en;
     return env.zh || "";
   }
+  // 区分"这个字段设计上不要求双语（数字/日期类），回退显示中文是正常状态"与
+  // "en_required 字段真漏填"——后者现在由 validate.py 机器校验拦截，不会出现
+  // 在已发布数据里；前端只需要在英文模式下把回退显示的中文标出来，别让读者
+  // 误以为是漏译（见 OPEN-QUESTIONS.md 框架性问题第45条）。enum 字段不受影响：
+  // 它们的双语标签来自 enums.yml，走 enumDisplay，不经过这里。
+  function isZhFallback(env, hasEnumRef) {
+    return state.langMode === "en" && !hasEnumRef && !!(env && env.zh && !env.en);
+  }
   // 交易所显示名——同样是"数据值"，要服从 langMode。name_native 是 {语言代码: 名称}
   // 对象，只有当 en 是其中一个键时才有真正的英文名（如 us-nyse/jp-jpx/de-eurex/hk-hkex）；
   // 没有（如 cn-sse 目前只有 zh-Hans）就诚实回退 name_zh，不臆造英文名。
@@ -203,8 +211,10 @@
           var label = col.enum_ref && cell.enum ? enumDisplay(col.enum_ref, cell.enum) : displayValue(cell);
           var stale = isStale(ex.id, col.path);
           var lowConf = cell.confidence === "low";
+          var zhFallback = isZhFallback(cell, !!col.enum_ref);
           html += '<td><button type="button" class="cell-btn' + (lowConf ? " low-conf" : "") + '" data-role="cell" data-exchange="' + esc(ex.id) +
             '" data-path="' + esc(col.path) + '" data-chapter="' + esc(col.chapter) + '">' + esc(label || "（空）") +
+            (zhFallback ? '<span class="zh-tag" title="该字段未要求双语，此处为中文原文 ZH source, not translated">中</span>' : "") +
             (stale ? '<span class="stale-dot" title="待复核"></span>' : "") + "</button></td>";
         });
         html += "</tr>";
@@ -306,9 +316,11 @@
       var env = getByPath(chapterData, f.path);
       var hasValue = env && env.zh;
       var value = f.enum_ref && env && env.enum ? enumDisplay(f.enum_ref, env.enum) : displayValue(env);
+      var zhFallback = isZhFallback(env, !!f.enum_ref);
       html += '<div class="field-card">';
       html += '<div class="field-label">' + esc(f.label_zh) + " · " + esc(f.label_en) + "</div>";
-      html += '<div class="field-value' + (hasValue ? "" : " empty") + '">' + esc(hasValue ? value : "（暂缺，见 OPEN-QUESTIONS）") + "</div>";
+      html += '<div class="field-value' + (hasValue ? "" : " empty") + '">' + esc(hasValue ? value : "（暂缺，见 OPEN-QUESTIONS）") +
+        (zhFallback ? ' <span class="zh-fallback-note" title="该字段未要求双语，此处为中文原文 ZH source, not translated">（中文原文）</span>' : "") + "</div>";
       if (env && env.detail) html += '<div class="field-detail">' + esc(env.detail) + "</div>";
       if (hasValue) {
         html += '<div class="field-foot">';
