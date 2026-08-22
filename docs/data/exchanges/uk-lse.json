@@ -1167,7 +1167,11 @@
         "sources": null
       },
       "derivatives": {
-        "delivery_method": null
+        "initial_margin_practice": null,
+        "maintenance_margin_practice": null,
+        "mark_to_market_frequency": null,
+        "delivery_method": null,
+        "last_trading_day_rule": null
       }
     },
     "participants": {

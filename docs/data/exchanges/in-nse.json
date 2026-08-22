@@ -1543,6 +1543,9 @@
         "quote": null
       },
       "derivatives": {
+        "initial_margin_practice": null,
+        "maintenance_margin_practice": null,
+        "mark_to_market_frequency": null,
         "delivery_method": {
           "zh": "",
           "confidence": "low",
@@ -1558,7 +1561,8 @@
           "en": null,
           "enum": null,
           "quote": null
-        }
+        },
+        "last_trading_day_rule": null
       }
     },
     "participants": {

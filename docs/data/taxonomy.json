@@ -1107,12 +1107,52 @@
         },
         {
           "kind": "leaf",
+          "path": "derivatives.initial_margin_practice",
+          "label_zh": "初始保证金制度",
+          "label_en": "Initial Margin",
+          "volatility": "moderate",
+          "en_required": false,
+          "enum_ref": null,
+          "in_matrix": false
+        },
+        {
+          "kind": "leaf",
+          "path": "derivatives.maintenance_margin_practice",
+          "label_zh": "维持保证金制度",
+          "label_en": "Maintenance Margin",
+          "volatility": "moderate",
+          "en_required": false,
+          "enum_ref": null,
+          "in_matrix": false
+        },
+        {
+          "kind": "leaf",
+          "path": "derivatives.mark_to_market_frequency",
+          "label_zh": "盯市频率",
+          "label_en": "Mark-to-market Frequency",
+          "volatility": "moderate",
+          "en_required": false,
+          "enum_ref": null,
+          "in_matrix": false
+        },
+        {
+          "kind": "leaf",
           "path": "derivatives.delivery_method",
           "label_zh": "交割方式",
           "label_en": "Delivery Method",
           "volatility": "moderate",
           "en_required": false,
           "enum_ref": "delivery_method",
+          "in_matrix": false
+        },
+        {
+          "kind": "leaf",
+          "path": "derivatives.last_trading_day_rule",
+          "label_zh": "最后交易日规则",
+          "label_en": "Last Trading Day Rule",
+          "volatility": "moderate",
+          "en_required": false,
+          "enum_ref": null,
           "in_matrix": false
         }
       ]

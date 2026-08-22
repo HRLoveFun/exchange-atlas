@@ -652,7 +652,31 @@
             "_meta": {
               "type": "object"
             },
+            "initial_margin_practice": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "maintenance_margin_practice": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "mark_to_market_frequency": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
             "delivery_method": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "last_trading_day_rule": {
               "type": [
                 "object",
                 "null"
