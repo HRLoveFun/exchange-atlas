@@ -157,7 +157,7 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
 
 1. 先查 `schema/glossary.yml` 里有没有已收录的术语译法，有就直接用；**新术语按 glossary.yml 顶部的字段说明加一条**（回写）
 2. 逐字段填：
-   - `confidence: high` 的字段必须有 `quote`（原文照抄）且 `zh`/`en` 里的数字要能在 quote 里找到
+   - `confidence: high` 的字段必须有 `quote` 且数字须在 quote 里找到（CLAUDE.md 二 第5条）
    - `volatility: moderate`/`volatile` 的字段必须有 `sources`
    - `quote` 应该是 `source_lang` 声明的那种语言的原文；另一种语言字段（`en_required: true` 的
      字段才需要填）是翻译展示，没有独立 quote 也没关系，但别把和 zh 内容重复的另一语言硬塞进去——
