@@ -889,28 +889,18 @@ clearing:
     confidence: high
 
   initial_margin_practice:
-    zh: "以CORE（Closeout Risk Evaluation）方法论计算所需担保品（保证金），分三个计算模块：CORE0（已分配至最终投资者的交易）、CORE1（未分配交易）、CORE2（分配至全权/结算参与者的交易）；担保品可用现金或多类金融资产（如国债、银行存单CDB、不动产信贷凭证LCI等）出质"
-    en: "Required collateral (margin) is computed via the CORE (Closeout Risk Evaluation) methodology across three modules — CORE0 (allocated to the final investor), CORE1 (unallocated), CORE2 (allocated to the Full Trading Participant/settlement participant); collateral may be posted in cash or various financial assets (e.g. government bonds, bank CDs, real-estate credit notes)"
-    sources:
-      - title: Guide for Nonresident Investors（PDF）
-        url: https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf
-        accessed: 2026-08-16
-    quote: "the CORE methodology employs three different calculation modules: CORE0: risk calculation for transactions allocated to the final investor. CORE1: risk calculation for non-allocated transactions. CORE2: risk calculation for transactions allocated to the Full Trading Participant/settlement participant (on behalf of final investor)."
-    confidence: high
+    zh: ""
+    confidence: low
+    detail: "ADR-030 新增 clearing.derivatives 保证金/盯市/最后交易日字段后，顶层收窄为仅描述现货市场。原内容（CORE方法论）经复核疑似锚定衍生品/CCP整体保证金语境，已迁移至 clearing.derivatives.initial_margin_practice；B3现货证券市场自身是否存在可比的保证金/信用交易概念本次未核实，留空转 OPEN-QUESTIONS。"
 
   maintenance_margin_practice:
     zh: ""
     confidence: low
 
   mark_to_market_frequency:
-    zh: "逐日盯市（daily settlement）：衍生品持仓每个交易日按当日结算价计算盈亏并现金划转"
-    en: "Daily mark-to-market (daily settlement): derivatives positions are revalued each trading day at the daily settlement price, with gains/losses cash-transferred"
-    sources:
-      - title: Trading dynamics
-        url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm
-        accessed: 2026-08-16
-    quote: "The profit or loss that results from the investment is calculated and settled on a daily basis through daily settlement of accounts."
-    confidence: high
+    zh: ""
+    confidence: low
+    detail: "ADR-030 新增 clearing.derivatives 保证金/盯市/最后交易日字段后，顶层收窄为仅描述现货市场。原内容（衍生品持仓逐日盯市）已迁移至 clearing.derivatives.mark_to_market_frequency；B3现货证券市场是否存在可比的盯市机制本次未核实，留空转 OPEN-QUESTIONS。"
 
   delivery_method:
     enum: na
@@ -928,14 +918,9 @@ clearing:
     confidence: high
 
   last_trading_day_rule:
-    zh: "期权到期日的到期系列于15:45停止交易；到期日自动履约按标的现货参考价与行权价比较自动触发（个股/ETF期权自18:15起，指数期权自17:20起）"
-    en: "For options, trading in the expiring series ends at 15:45 on the expiration date; automatic exercise is triggered by comparing the underlying's cash-market reference price to the strike (from 18:15 for single-stock/ETF options, from 17:20 for index options)"
-    sources:
-      - title: Trading Hours – Equities
-        url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/
-        accessed: 2026-08-16
-    quote: "Trading in expiring series ends at 15:45 on the expiration date."
-    confidence: high
+    zh: ""
+    confidence: low
+    detail: "ADR-030 新增 clearing.derivatives 保证金/盯市/最后交易日字段后，顶层收窄为仅描述现货市场。原内容（期权到期日规则）已迁移至 clearing.derivatives.last_trading_day_rule；现货证券本身无「最后交易日」概念，顶层预期长期留空不适用。"
 
   default_management:
     zh: "「违约者先付、生存者分摊」（defaulters pay and survivors pay）的风险共担机制，依托CORE方法论计算的担保品与安全垫（含Liquidez Investment Fund等专项基金）应对结算参与者违约"
@@ -951,10 +936,45 @@ clearing:
     confidence: high
 
   derivatives:
+    initial_margin_practice:
+      zh: "以CORE（Closeout Risk Evaluation）方法论计算所需担保品（保证金），分三个计算模块：CORE0（已分配至最终投资者的交易）、CORE1（未分配交易）、CORE2（分配至全权/结算参与者的交易）；担保品可用现金或多类金融资产（如国债、银行存单CDB、不动产信贷凭证LCI等）出质"
+      en: "Required collateral (margin) is computed via the CORE (Closeout Risk Evaluation) methodology across three modules — CORE0 (allocated to the final investor), CORE1 (unallocated), CORE2 (allocated to the Full Trading Participant/settlement participant); collateral may be posted in cash or various financial assets (e.g. government bonds, bank CDs, real-estate credit notes)"
+      sources:
+        - title: Guide for Nonresident Investors（PDF）
+          url: https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf
+          accessed: 2026-08-16
+      quote: "the CORE methodology employs three different calculation modules: CORE0: risk calculation for transactions allocated to the final investor. CORE1: risk calculation for non-allocated transactions. CORE2: risk calculation for transactions allocated to the Full Trading Participant/settlement participant (on behalf of final investor)."
+      confidence: high
+      detail: "由顶层字段迁移而来（ADR-030）。原引文本身未逐字标注「仅适用于衍生品」，B3 CORE是否为覆盖现货+衍生品的统一CCP风险模型、还是仅衍生品适用，本次未逐条核实，暂按 ADR-028 既有判断归入衍生品语境，留待下次专项核实。"
+
+    maintenance_margin_practice:
+      zh: ""
+      confidence: low
+
+    mark_to_market_frequency:
+      zh: "逐日盯市（daily settlement）：衍生品持仓每个交易日按当日结算价计算盈亏并现金划转"
+      en: "Daily mark-to-market (daily settlement): derivatives positions are revalued each trading day at the daily settlement price, with gains/losses cash-transferred"
+      sources:
+        - title: Trading dynamics
+          url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm
+          accessed: 2026-08-16
+      quote: "The profit or loss that results from the investment is calculated and settled on a daily basis through daily settlement of accounts."
+      confidence: high
+
     delivery_method:
       zh: ""
       confidence: low
       detail: "ADR-023 新增字段，衍生品分产品线的实物/现金交割细则本次未逐条核实，留空转 OPEN-QUESTIONS。"
+
+    last_trading_day_rule:
+      zh: "期权到期日的到期系列于15:45停止交易；到期日自动履约按标的现货参考价与行权价比较自动触发（个股/ETF期权自18:15起，指数期权自17:20起）"
+      en: "For options, trading in the expiring series ends at 15:45 on the expiration date; automatic exercise is triggered by comparing the underlying's cash-market reference price to the strike (from 18:15 for single-stock/ETF options, from 17:20 for index options)"
+      sources:
+        - title: Trading Hours – Equities
+          url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/
+          accessed: 2026-08-16
+      quote: "Trading in expiring series ends at 15:45 on the expiration date."
+      confidence: high
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者

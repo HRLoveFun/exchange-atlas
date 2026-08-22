@@ -129,15 +129,15 @@
 
 ### 前置事项（批量执行前必须先解决，否则会重演 [ADR-018] 的教训）
 
-- [ ] **`clearing.initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency`/`last_trading_day_rule` 四字段语义歧义澄清**——`de-eurex`/`br-b3` 已按"衍生品CCP保证金方法论"填写，`tw-twse` 却按"现货融资融券"填写同一字段，两套不相干的制度共用一个字段。需先定下方案（如仿照 `delivery_method` 拆出 `clearing.derivatives.*` 镜像字段）再批量填充，见 [ADR-028]。
+- [x] **`clearing.initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency`/`last_trading_day_rule` 四字段语义歧义澄清**——已于 2026-08-22 解决，见 [ADR-030]：仿照 `delivery_method` 先例扩容 `clearing.derivatives` 子块，顶层收窄为「现货语境」、衍生品语境统一移到子块；`tw-twse` 数据本就符合收窄后的顶层语义无需改动，`de-eurex`（纯衍生品）无需改动，`br-b3` 三个字段已完成迁移（`quote`/`sources` 原样搬移，未新造事实）。批量填充的前置阻塞已清除。
 
-### 候选字段清单（36 个确定 Category B 字段 + 4 个待澄清语义的 `clearing` 字段，2026-08-21 审计）
+### 候选字段清单（36 个确定 Category B 字段，2026-08-21 审计；另 4 个原待澄清语义的 `clearing` 字段已于 2026-08-22 解决语义歧义，见 [ADR-030]，现并入候选范围，合计 40 个）
 
 | 章节 | 填充率 | 字段（括号内为当前 X/20） |
 |---|---|---|
 | `regulation` | 57% | `capital_controls`(2)、`foreign_ownership_limit`(3)、`investor_protection`(5)、`disclosure_requirements`(7) |
 | `listing` | 42% | `post_delisting_venue`(0)、`listing_process_duration`(1)、`delisting_transition_period`(4)、`delisting_process`(7)、`suspension_resumption`(10)、`continuing_obligations`(11) |
-| `clearing` | 43% | `default_management`(4)；另 4 个见上方前置事项 |
+| `clearing` | 43% | `default_management`(4)；另 4 个字段的语义歧义已解决（[ADR-030]），`clearing.derivatives.*` 镜像字段已就绪，可与 `default_management` 一并纳入批量填充范围 |
 | `participants` | 27% | `broker_landscape`(0)、`investor_structure`(1)、`suitability_management`(1)、`account_opening_requirements`(3)、`foreign_access_channel`(7) |
 | `infrastructure` | 18% | `data_pricing_model`(0)、`historical_data_availability`(0)、`data_latency`(1)、`market_data_levels`(1)、`major_outage_history`(2)、`access_methods`(8)、`trading_system_name`(13) |
 | `costs` | 19% | `implicit_costs_note`(0)、`regulatory_fees`(0，预期多数合理留空)、`clearing_fees`(2)、`commission_structure`(2)、`financial_transaction_tax`(2)、`capital_gains_tax`(3)、`dividend_withholding_tax`(6)、`stamp_duty`(9)、`exchange_fees`(10) |
@@ -156,4 +156,5 @@
 
 ### 进度
 
-- 尚未启动，等待前置事项（`clearing` 字段语义澄清）解决后开第一批
+- 前置事项已解决（2026-08-22，见 [ADR-030]），批量填充的阻塞已清除。
+- 尚未启动第一批数据填充——执行设计（按交易所分批、7-8家/批分2-3批、[ADR-017] 并行子代理模式、质量门槛≥95%）已是可直接采用的成熟草案，但具体哪 7-8 家进第一批尚未选定（40 个候选字段在 20 家交易所上分布基本均匀，没有强信号指向某几家该优先），留给启动第一批时再定，不在本条预先锁定一个缺乏依据的名单。

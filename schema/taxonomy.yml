@@ -446,7 +446,7 @@ chapters:
             label_zh: 保证金制度摘要
             label_en: Margin Practice
             volatility: moderate
-            note: "初始/维持保证金计算方法论概要（如 SPAN/Prisma/CORE）——衍生品特有，与 clearing 章节的 initial_margin_practice 字段呼应但视角不同（本字段是交易端的保证金要求，clearing 那条是清算端的保证金方法论），不合并"
+            note: "初始/维持保证金计算方法论概要（如 SPAN/Prisma/CORE）——衍生品特有，与 clearing.derivatives.initial_margin_practice 字段呼应但视角不同（本字段是交易端的保证金要求，clearing 那条是清算端 CCP 保证金方法论），不合并，见 PROJECT/DECISIONS.md [ADR-030]"
           - id: connect_schemes
             label_zh: 互联互通/跨境安排
             label_en: Connect / Cross-border Schemes
@@ -583,26 +583,49 @@ chapters:
         label_en: Default Management
         volatility: moderate
       - id: derivatives
-        label_zh: 衍生品交割方式（如适用）
-        label_en: Derivatives Delivery (if applicable)
+        label_zh: 衍生品保证金、盯市与交割（如适用）
+        label_en: Derivatives Margin, Mark-to-Market & Delivery (if applicable)
         kind: object
         optional: true
         note: >
           仅当该交易所实体自身运营重要的期货/期权等衍生品业务线时才填（判断标准同
           `market_structure.derivatives`，见 `PROJECT/DECISIONS.md` [ADR-019]）。顶层
-          `delivery_method` 字段的含义收窄为「描述现货/主板市场的交割方式」——对纯现货
-          交易所，"na" 表示不涉及实物/现金交割二选一（如证券记账过户）；对同时运营衍生品
-          业务线的交易所，衍生品部分单独在本字段描述，不再挤压顶层字段去表达两种矛盾的
-          产品逻辑。纯衍生品交易所（如 de-eurex）不用本字段，直接把衍生品交割方式写在
-          顶层 `delivery_method` 即可（它没有现货业务，顶层字段本身就是在描述衍生品）。
-          `optional: true`：本组字段完全未填时不计入 `chapter_status()` 的完成度分母，
-          与 `market_structure.derivatives` 用法一致。见 `PROJECT/DECISIONS.md` [ADR-023]。
+          `initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency`/
+          `delivery_method`/`last_trading_day_rule` 五个字段的含义统一收窄为「描述现货/
+          主板市场的对应制度」——如该所现货市场有融资融券/信用交易等保证金机制（如
+          `tw-twse`），顶层照填；纯现货市场没有对应概念（如现货没有"最后交易日"），
+          顶层如实留空并在 `detail` 说明"不适用于现货"，不强行套用衍生品语境的数值。
+          对同时运营衍生品业务线的交易所，衍生品部分的这五个概念统一单独在本字段描述，
+          不再挤压顶层字段去表达两种不相干的制度（`clearing` 层面的 CCP 保证金方法论
+          与 `market_structure.derivatives.margin_practice_note`——交易端保证金要求——
+          视角不同，不合并，见该字段 note）。纯衍生品交易所（如 de-eurex）不用本字段，
+          直接把衍生品保证金/盯市/交割写在顶层对应字段即可（它没有现货业务，顶层字段
+          本身就是在描述衍生品）。`optional: true`：本组字段完全未填时不计入
+          `chapter_status()` 的完成度分母，与 `market_structure.derivatives` 用法一致。
+          见 `PROJECT/DECISIONS.md` [ADR-023]（`delivery_method` 先例）与 [ADR-030]
+          （本次扩展的四个保证金/盯市字段）。
         fields:
+          - id: initial_margin_practice
+            label_zh: 初始保证金制度
+            label_en: Initial Margin
+            volatility: moderate
+          - id: maintenance_margin_practice
+            label_zh: 维持保证金制度
+            label_en: Maintenance Margin
+            volatility: moderate
+          - id: mark_to_market_frequency
+            label_zh: 盯市频率
+            label_en: Mark-to-market Frequency
+            volatility: moderate
           - id: delivery_method
             label_zh: 交割方式
             label_en: Delivery Method
             volatility: moderate
             enum_ref: delivery_method
+          - id: last_trading_day_rule
+            label_zh: 最后交易日规则
+            label_en: Last Trading Day Rule
+            volatility: moderate
 
   # ── 九｜市场参与者 ──
   - id: participants

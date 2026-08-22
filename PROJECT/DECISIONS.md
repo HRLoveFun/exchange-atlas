@@ -375,3 +375,23 @@
 **验证：** 两处冲突文件手工解决后跑 `make build`（sync+check），0 错误 0 警告；`gh pr view 15` 确认 `mergeStateStatus` 从 `DIRTY`/`CONFLICTING` 变为 `CLEAN`/`MERGEABLE`；合并后本地 `git pull` + 再跑一次 `make build` 确认幂等；`git log` 确认历史无重写，PR 分支只多了一个 merge 提交。
 
 **日期：** 2026-08-22
+
+### ADR-030 — v1.1 前置事项解决：`clearing` 四个保证金/盯市字段的语义歧义，仿照 `delivery_method` 拆出 `clearing.derivatives.*` 镜像字段
+
+**背景：** [ADR-028] 把 `clearing.initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency`/`last_trading_day_rule` 四字段的语义歧义定为 v1.1 批量填充前必须先解决的前置事项——`de-eurex`/`br-b3` 按"衍生品CCP保证金方法论"填写，`tw-twse` 按"现货融资融券"填写同一字段，两套不相干的制度共用一个字段。本条解决该前置事项，`ROADMAP.md`「v1.1 计划」的前置事项勾选项据此标记完成。
+
+**定了什么：**
+
+1. **`schema/taxonomy.yml` 的 `clearing.derivatives` 子块（[ADR-023] 为 `delivery_method` 新增的既有子块）扩容，新增四个镜像字段** `initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency`/`last_trading_day_rule`，字段定义（`label_zh`/`label_en`/`volatility`）与顶层同名字段一致，插入顺序对齐顶层字段顺序。子块本身的 `label_zh`/`label_en` 相应从"衍生品交割方式（如适用）"改为"衍生品保证金、盯市与交割（如适用）"以反映扩容后的范围；`note` 同步扩写，统一说明五个字段（含既有的 `delivery_method`）的收窄规则：**顶层字段收窄为「描述现货/主板市场的对应制度」**——现货有可比概念（如 `tw-twse` 的融资融券保证金）则顶层照填；纯现货市场没有对应概念（如现货没有"最后交易日"）则顶层如实留空+`detail`说明"不适用于现货"；衍生品部分统一移到 `clearing.derivatives.*` 描述。纯衍生品交易所（`de-eurex`）不用子块，直接用顶层字段描述衍生品——与 `delivery_method` 完全同构的处理方式，不新增机制，只复用既有模式（`optional: true`，未启用时不计入 `chapter_status()` 完成度分母，逻辑见 [ADR-020] 的 `count_chapter_leaves()`）。
+2. **`market_structure.derivatives.margin_practice_note` 字段的交叉引用文字更新**，从"与 clearing 章节的 initial_margin_practice 字段呼应"改为明确指向 `clearing.derivatives.initial_margin_practice`（子块新增后，交叉引用需要精确到子字段，避免后来者分不清指的是顶层还是子块）。
+3. **迁移已知受影响的交易所数据**（复用既有 `quote`/`sources`/`confidence`，不重新抓取、不新造事实）：
+   - **`tw-twse`**：`initial_margin_practice`/`maintenance_margin_practice`（融资融券自备款/维持担保率130%）本就是"现货信用交易"语境，恰好符合收窄后的顶层语义，**不改**——原先被误判为"与 br-b3/de-eurex 共用字段但语义冲突"，现在有了明确的顶层='现货'语义后，这条数据本来就是对的。
+   - **`de-eurex`**：纯衍生品交易所，无 `clearing.derivatives` 子块，顶层字段继续直接描述衍生品，**不改**。
+   - **`br-b3`**（现货+衍生品双业务，实际需要migration的唯一样本）：顶层 `initial_margin_practice`（CORE方法论）、`mark_to_market_frequency`（衍生品逐日盯市）、`last_trading_day_rule`（期权到期日规则）三处内容原样迁移到 `clearing.derivatives.*` 对应字段（`quote`/`sources`/`confidence` 逐字不变）；顶层三字段清空，`detail` 注明迁移原因与"B3现货证券市场自身是否有可比保证金/盯市/最后交易日概念本次未核实"，避免用留空暗示"确认不适用"（`last_trading_day_rule` 例外——现货证券本身无"最后交易日"概念，这条明确写"预期长期留空不适用"）。**`initial_margin_practice` 迁移时额外标注一处遗留不确定性**：原始 `quote`（CORE方法论三个计算模块的说明）本身未逐字限定"仅适用于衍生品"，B3 的 CORE 是否是覆盖现货+衍生品的统一CCP风险模型、还是仅衍生品适用，本次未重新抓取核实，暂沿用 [ADR-028] 已作出的"衍生品语境"判断迁移，但在 `detail` 里如实记录这一判断未被重新验证，留给下次专项抓取核实（不排除结论是"顶层也该保留一份"而非"整体移空"）。
+4. **不处理的部分**：`clearing.derivatives.delivery_method` 与 [ADR-023] 已完成的迁移（`sg-sgx`/`au-asx`/`cn-szse`/`fr-euronext`/`kr-krx`/`za-jse`/`sa-tadawul`/`in-nse`）不受影响，未改动；这些交易所在新增的四个字段上暂不补空占位（`br-b3`除外，因其确有迁移数据）——按 `optional: true` 的设计，完全不填不影响任何一家的章节完成度分母，留给 v1.1 批量执行阶段按需补齐，不在本条 ADR 里为所有 20 家逐一造占位，那是数据填充工作不是 schema 决策。
+
+**为什么方案是"镜像四个字段"而不是拆成正交维度或改用 enum：** 沿用 [ADR-023] 已验证过的 `delivery_method` 模式是成本最低的选择——四字段与 `delivery_method` 面对的是同一根问题（顶层字段隐含单一产品线假设），`delivery_method` 已经证明"顶层收窄+衍生品子块镜像"能干净解决，没有必要为同一类问题发明第二套机制；且四字段本身是自由文本（无 `enum_ref`），不存在"枚举装不下"的问题（那是 [ADR-023] 解决的 `review_system` 类问题），不需要走枚举扩容路线。
+
+**验证：** `make build`（sync+check）0 错误 0 警告，20 家交易所；`make sync` 二次幂等（`docs/data/*.json` 逐文件 md5 比对，连续两次运行输出完全一致）；`br-b3.yml` 新迁移的三处字段 `quote`/`sources`/`confidence` 逐字核对为原内容原样搬移，未新造或修改任何事实性内容。
+
+**日期：** 2026-08-22

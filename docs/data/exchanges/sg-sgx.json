@@ -1481,6 +1481,9 @@
         "sources": null
       },
       "derivatives": {
+        "initial_margin_practice": null,
+        "maintenance_margin_practice": null,
+        "mark_to_market_frequency": null,
         "delivery_method": {
           "enum": "either",
           "zh": "视合约而定，部分合约实物交割、部分现金结算",
@@ -1496,7 +1499,8 @@
           "confidence": "medium",
           "verified": "2026-08-14",
           "detail": null
-        }
+        },
+        "last_trading_day_rule": null
       }
     },
     "participants": {
