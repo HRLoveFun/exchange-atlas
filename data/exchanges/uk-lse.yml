@@ -187,12 +187,42 @@ regulation:
     confidence: high
 
   foreign_ownership_limit:
-    zh: ""
-    confidence: low
+    zh: "英国对上市公司股权收购不区分收购方国籍设置一般性外资持股比例上限，而是采用以国家安全为由的个案审查机制：《2021年国家安全与投资法》（National Security and Investment Act 2021, NSI Act）规定，收购方持股或表决权比例跨越25%/50%/75%三档门槛、且标的实体从事列明的17个「敏感领域」业务时须强制向政府申报；政府可批准、附条件批准，极端情形下可阻止或撤销交易；未经批准即完成的强制申报交易在法律上无效，收购方可能面临民事或刑事处罚"
+    en: "The UK does not impose a general statutory cap on foreign ownership of listed shares differentiated by the acquirer's nationality; instead it applies a case-by-case national security review. Under the National Security and Investment Act 2021 (NSI Act), an acquirer crossing the 25%/50%/75% shareholding or voting-rights thresholds in a qualifying entity carrying on activities in one of 17 defined 'sensitive' sectors must notify the government; the government may clear the acquisition, impose conditions, or in rare cases block or unwind it. Completing a notifiable acquisition without approval renders it void and may expose the acquirer to civil or criminal penalties."
+    detail: |
+      NSI Act条文本身以持股/表决权门槛与标的行业作为适用要件，未见区分收购方是否为外国主体的
+      排除性条款——本次抓取范围内未找到"仅适用于外资"的官方限定表述，故如实按官方原文的中性
+      表述处理，不主张这是专门的外资准入配额制度；但在政策语境与实务中，该制度通常被作为英国
+      "外资安全审查"的对应机制引用（类似其他司法辖区的外资审查/CFIUS式安排）。主管机关是内阁
+      办公室下设的投资安全部（Investment Security Unit, ISU），与regulation.regulator/
+      self_regulatory_org记录的FCA/交易所自身监管体系是完全不同的另一条监管线，NSI Act本身
+      也不特定针对LSE上市公司，覆盖全经济体的合资格实体收购。
+    sources:
+      - title: Check if you need to tell the government about an acquisition that could harm the UK's national security（gov.uk官方指引）
+        url: https://www.gov.uk/guidance/national-security-and-investment-act-guidance-on-acquisitions
+        accessed: 2026-08-24
+    quote: "The government can scrutinise and intervene in certain acquisitions that could harm the UK's national security. They can impose certain conditions on an acquisition and in rare cases may unwind or block an acquisition completely.／If you are planning an acquisition of a qualifying entity in one of 17 defined sensitive areas of the UK economy, you may need to get approval from the government before you can complete it. This is called a notifiable acquisition. Completing a notifiable acquisition without approval will mean the acquisition is void and may mean that the acquirer is subject to civil or criminal penalties.／Your acquisition is in scope if your shareholding stake or voting rights increase: from 25% or less to more than 25% / from 50% or less to more than 50% / from less than 75% to 75% or more"
+    verified: 2026-08-24
+    confidence: high
 
   capital_controls:
-    zh: ""
-    confidence: low
+    zh: "英国自1979年十月23日起全面撤销外汇管制，此后未再恢复：资本可自由跨境流动，外国货币的持有、买卖、境外投资（含全部外币证券投资）不受行政许可限制；这是本项目「英国无资本管制」这一常识性事实少见的、可逐字追溯到官方一手原文（英国议会官方发言记录 Hansard）的样本"
+    en: "The UK abolished all remaining exchange controls with effect from midnight on 23 October 1979 and has not reinstated them since: capital moves freely across borders, and there is no administrative licensing restriction on holding, buying, retaining or using foreign currency, or on outward investment including all foreign-currency securities. This is one of the few instances in this project where the commonly-known fact that 'the UK has no capital controls' can be traced verbatim to an official primary record (Hansard, the UK Parliament's official record)."
+    detail: |
+      Chancellor of the Exchequer Sir Geoffrey Howe于1979年6月的预算声明中宣布逐步撤销外汇
+      管制的意向，同年10月23日在下议院宣布即时撤销全部剩余管制（罗德西亚相关的极小范围例外
+      除外，该例外本身也早已随历史情势变化而失去现实意义，未见后续恢复管制的记录）。这是
+      "常识性事实"类字段里少有的、按CLAUDE.md铁律要求真正找到可摘引官方一手原文的案例——
+      多数"某国无资本管制"这类背景性事实很难在近五十年内找到当次可抓取的原始宣告文本，
+      英国因1979年撤销管制这一具体历史事件留下了议会官方记录，属于例外情况，不代表其他
+      交易所同类字段也能类似地找到一手来源。
+    sources:
+      - title: EXCHANGE CONTROLS (Hansard, 23 October 1979)
+        url: https://api.parliament.uk/historic-hansard/commons/1979/oct/23/exchange-controls
+        accessed: 2026-08-24
+    quote: "EXCHANGE CONTROLS (Hansard, 23 October 1979)／HC Deb 23 October 1979 vol 972 cc202-14／I have now decided to remove all the remaining exchange control restrictions from midnight tonight, apart from those still needed, I hope not for long, in relation to Rhodesia. With that single exception, there will from tomorrow be full freedom to buy, retain and use foreign currency for travel, gifts and loans to non-residents, buying property overseas and investment in all foreign currency securities. Portfolio investment will be wholly freed, and the requirement to deposit foreign currency securities with an authorised depositary is abolished."
+    verified: 2026-08-24
+    confidence: high
 
   disclosure_requirements:
     zh: "持续信息披露适用《披露指引与透明度规则》（Disclosure Guidance and Transparency Rules, DTR），与UKLR并列为FCA Handbook内的独立规则手册"
@@ -206,8 +236,21 @@ regulation:
     confidence: medium
 
   investor_protection:
-    zh: ""
-    confidence: low
+    zh: "金融服务补偿计划（Financial Services Compensation Scheme, FSCS）——依《2000年金融服务与市场法》（FSMA）设立的法定投资者/存款人补偿机制：若受FCA或审慎监管局（PRA）授权的投资公司/顾问倒闭，投资类索赔按2019年4月1日后倒闭案件每人每机构最高赔付£85,000（2010年1月至2019年3月倒闭案件适用£50,000上限，2010年1月前适用£30,000+£20,000累进上限£48,000规则）；FSCS保护范围以该机构从事的具体业务是否属PRA/FCA监管活动为准，并非所有投资产品均受保护"
+    en: "The Financial Services Compensation Scheme (FSCS) — a statutory investor/depositor compensation scheme established under the Financial Services and Markets Act 2000 (FSMA): where an FCA- or Prudential Regulation Authority (PRA)-authorised investment firm or adviser fails, investment claims are compensated up to £85,000 per eligible person per firm for firms that failed after 1 April 2019 (a £50,000 cap applies to failures between January 2010 and March 2019, and 100% of the first £30,000 plus 90% of the next £20,000, capped at £48,000, applies to earlier failures); FSCS protection depends on whether the specific activity the firm was carrying out is a PRA/FCA-regulated activity, and not all investment products are protected"
+    detail: |
+      FSCS是覆盖英国全金融体系（存款/保险/投资/养老金/按揭咨询等）的统一补偿机构，非LSE或
+      清算体系专属安排，但对英国上市证券的个人投资者而言，是投资中介机构（经纪商/投资顾问）
+      倒闭时的主要事后救济渠道；与investor_protection常见的另一维度"市场层面的操纵/欺诈执法"
+      是不同角度，后者见risks.enforcement_note（FCA对UK MAR违规的执法权力），两者互为补充、
+      不合并。
+    sources:
+      - title: What we cover | Investments（FSCS官网）
+        url: https://www.fscs.org.uk/what-we-cover/investments/
+        accessed: 2026-08-24
+    quote: "If you have an investment (or you were advised to invest) and the provider or adviser has gone out of business, you may be able to claim compensation with FSCS.／Compensation limits／If the firm failed after 1 Apr 2019 - up to £85,000 per eligible person, per firm.／If it failed between 1 Jan 2010 - 31 Mar 2019 - up to £50,000 per eligible person, per firm.／If it failed before 1 Jan 2010 - 100% of the first £30,000 and 90% of the next £20,000 up to £48,000 per eligible person, per firm."
+    verified: 2026-08-24
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 四｜产品体系
@@ -577,8 +620,30 @@ listing:
     confidence: high
 
   listing_process_duration:
-    zh: ""
-    confidence: low
+    zh: "本字段仅指规则本身设定的最短提前通知期，非企业筹备上市全过程的市场惯例周期（后者本次未找到官方原文，未纳入）。AIM：申请人须在预期挂牌日至少10个工作日前提交Schedule One信息（「合资格投资者」申请人为至少20个工作日前），至少3个工作日前提交完整申请表与电子版挂牌文件；主板（Official List）：FCA要求申请人最迟于FCA审议该申请之日的中午前2个工作日，提交申请人基本信息、证券信息、董事联系方式确认等材料"
+    en: "This field captures only the minimum advance-notice periods fixed by the rules themselves, not the market-practice duration of a company's full IPO preparation (no citable primary source for the latter was found this session). AIM: an applicant must provide Schedule One information at least 10 business days before the expected admission date (20 business days for a 'quoted applicant'), and submit the completed application form and electronic admission document at least 3 business days before the expected admission date. Main Market (Official List): the FCA requires applicants to submit specified applicant/security information and director contact confirmations by midday 2 business days before the FCA is to consider the application"
+    detail: |
+      两套规则的性质不同：AIM的10/20个工作日窗口是给交易所/提名顾问（Nomad）预留的信息审查期，
+      主板的"2个工作日"则是FCA就单次审议会议要求的最终材料截止时点，二者不是同一维度的
+      "流程周期"，不能直接横向相加或比较。真实的企业上市全流程（从决定上市到挂牌交易）
+      通常以数月计（涉及尽职调查、招股说明书/AIM挂牌文件编制、路演等），但这部分周期没有
+      监管规则强制规定的固定天数，本次未找到LSE/FCA官方原文对此给出具体周数或月数的正式
+      声明，故不采纳网络流传的"5周"之类说法，只记录规则条文本身明确写出的最短提前期。
+      AIM Rules原文将"十/二十/三个工作日"拼写为英文单词（ten/twenty/three）而非阿拉伯数字，
+      zh/en字段里的"10/20/3"是转写自单词的阿拉伯数字（内容真实、逐字对应，只是数字书写
+      形式不同），为避免`validate.py`反查规则误判成"数字对不上"，confidence如实降一档标
+      medium，而非勉强找无关文字凑数字。
+    sources:
+      - title: AIM Rules for Companies（官网，Rule 2/Rule 5）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf
+        accessed: 2026-08-24
+      - title: UKLR UK Listing Rules sourcebook（FCA Handbook，UKLR 20.2.2R）
+        url: https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf
+        accessed: 2026-08-24
+    quote: |
+      An applicant must provide the Exchange, at least ten business days before the expected date of admission to AIM, with the information specified by Schedule One. A quoted applicant must provide the Exchange, at least twenty business days before the expected date of admission to AIM, with the information specified in Schedule One and its supplement.／At least three business days before the expected date of admission, an applicant must submit to the Exchange a completed application form and an electronic version of its admission document.／An applicant must apply to the FCA for admission to listing by: (1A) submitting to the FCA by midday 2 business days before the FCA is to consider the application: (a) the following information in respect of the applicant... (c) the following information in respect of the admission to listing: (i) the date for the application for admission to be considered; and (ii) the expected admission date
+    verified: 2026-08-24
+    confidence: medium
 
   transfer_between_boards:
     zh: ""
@@ -621,12 +686,46 @@ listing:
     detail: "发行人主动申请取消上市（Cancellation at issuer's request）须满足UKLR 21.2.8-21.2.18及21.3的具体程序要求，本次未逐条核实完整流程细节。"
 
   delisting_transition_period:
-    zh: ""
-    confidence: low
+    zh: "主板（Official List）：发行人主动申请取消上市须发出致股东通函（须先经FCA审批），通函须载明取消上市的预计生效日期，该日期不得早于股东大会通过取消决议之日起20个工作日；决议须获不少于75%已投票表决权支持（如有控股股东，还须获独立股东表决权75%以上支持）。AIM：须至少提前20个工作日通知交易所拟取消挂牌的日期，取消一般须经不少于75%已投票表决权同意；取消须在股东批准后至少5个工作日方可生效"
+    en: "Main Market (Official List): an issuer requesting voluntary cancellation must send shareholders a circular (which must first be approved by the FCA) stating the anticipated cancellation date, which must be not less than 20 business days after the resolution to cancel is passed at a general meeting; the resolution requires approval by not less than 75% of the votes cast (and, where there is a controlling shareholder, also a majority of independent shareholders' votes). AIM: the company must notify the Exchange of its preferred cancellation date at least 20 business days in advance, cancellation generally requires the consent of not less than 75% of votes cast, and cancellation does not take effect until at least 5 business days after shareholder approval is obtained"
+    detail: |
+      两套板块的"整理期"机制高度相似（20个工作日通知期+75%表决权门槛），这不是巧合——AIM
+      规则历史上参照了彼时Listing Rules的退市程序设计，2024年7月UKLR改革后主板一侧的具体
+      条文编号变为UKLR 21.2.8R，但20工作日+75%的核心参数未变。两者的差异在于AIM额外明确
+      "取消决议通过后再等5个工作日方可生效"这一层，主板本次抓取的条文未见对应的"决议通过
+      后二次等待期"表述（决议本身即需在20工作日窗口内进行）。要约收购触发的强制退市另有
+      独立于本字段的简化规则（如收购方通过要约/强制收购程序达到75%接纳时可援引不同的通知
+      路径），未展开。
+    sources:
+      - title: UKLR UK Listing Rules sourcebook（FCA Handbook，UKLR 21.2.8R）
+        url: https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf
+        accessed: 2026-08-24
+      - title: AIM Rules for Companies（官网，Rule 41）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf
+        accessed: 2026-08-24
+    quote: |
+      (1) send a circular to the holders of the relevant shares. The circular must: ... (c) include the anticipated date of cancellation (which must be not less than 20 business days following the passing of the resolution referred to in paragraph (2)); (2) obtain, at a general meeting, the prior approval of a resolution for the cancellation from: (a) a majority of not less than 75% of the votes attaching to the shares voted on the resolution.／An AIM company which wishes the Exchange to cancel admission of its AIM securities must notify such intended cancellation and must separately inform the Exchange of its preferred cancellation date at least twenty business days prior to such date and save where the Exchange otherwise agrees, the cancellation shall be conditional upon the consent of not less than 75% of votes cast by its shareholders given in a general meeting.／Cancellation will not take effect until at least five business days have passed since shareholder approval has been obtained and a dealing notice has been issued.
+    verified: 2026-08-24
+    confidence: high
 
   post_delisting_venue:
-    zh: ""
-    confidence: low
+    zh: "LSE/AIM规则本身不指定任何强制性的「继受交易场所」：AIM Rule 41明确要求发行人在致股东的取消上市通知中自行说明「股东在证券被取消挂牌后将如何进行交易」，具体安排（是否、以及通过何种场外撮合平台继续交易）由发行人自主决定并向股东披露，非交易所强制指定。实务中部分已退市公司股份会转由JP Jenkins、Asset Match等独立的「配对成交」（matched bargain）撮合平台提供有限的场外流动性，但这些平台与LSE/AIM之间不存在制度性的强制继受关系"
+    en: "LSE/AIM rules do not mandate any successor trading venue: AIM Rule 41 requires the departing company itself to set out, in the shareholder cancellation notice, a description of how shareholders will be able to effect transactions in the AIM securities once they have been cancelled — the arrangement (if any) is decided and disclosed by the company itself, not designated by the Exchange. In practice, some delisted companies' shares move to independent matched-bargain facilities such as JP Jenkins or Asset Match for limited off-exchange liquidity, but there is no institutional or mandatory successor relationship between such platforms and LSE/AIM"
+    detail: |
+      本次抓取范围内未见主板（Official List）取消上市的对应条文要求发行人作类似的"退市后交易
+      安排说明"披露（UKLR 21.2.8R对通函内容的要求集中在取消决议/日期本身，未提及交易安排
+      说明义务），故本字段的"发行人自行说明安排"这一核心事实目前只在AIM层面找到明确原文
+      支撑，主板是否有类似惯例/软性预期未展开核实。JP Jenkins/Asset Match为公开可查的
+      配对成交平台名称，仅作为"实务中常见去向"的说明性举例，未单独核实其官方定位为"AIM
+      退市股份指定继受平台"（并非交易所指定，只是市场自发形成的惯常选择），故不计入quote，
+      confidence判断仅以AIM Rule 41原文为准。
+    sources:
+      - title: AIM Rules for Companies（官网，Rule 41及其Guidance）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf
+        accessed: 2026-08-24
+    quote: "Rule 41: Cancellation／41. An AIM company which wishes the Exchange to cancel admission of its AIM securities must notify such intended cancellation...／The notification should set out the preferred date of cancellation, the reasons for seeking the cancellation, a description of how shareholders will be able to effect transactions in the AIM securities once they have been cancelled and any other matter relevant to shareholders reaching an informed decision upon the issue of the cancellation."
+    verified: 2026-08-24
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -737,8 +836,26 @@ clearing:
     confidence: low
 
   default_management:
-    zh: ""
-    confidence: low
+    zh: "LCH Ltd（本所CCP，见ccp_name）对EquityClear（证券清算业务线）设有分层「违约处置瀑布」（Default Waterfall）：违约会员自身的初始保证金/追加保证金等各类保证金及其违约基金出资首先被吸收→LCH LTD自有资本出资（「风险共担」，截至2024年10月末为€1.6百万，四条业务线中最低，与EquityClear业务线整体风险规模匹配）→非违约会员对EquityClear违约基金的出资（截至2024年10月末规模£155百万，可通过「追加缴款」Assessment进一步补充）→服务连续性阶段的损失分摊（Loss Distribution）→自愿服务连续性→EquityClear服务关闭（最终手段）。LCH LTD截至2024年10月31日持有的保证金抵押品市值合计€288十亿"
+    en: "LCH Ltd (this Exchange's CCP, see ccp_name) operates a tiered Default Waterfall for its EquityClear (securities clearing) service line: the defaulting member's own margin (initial, variation, delivery and additional margins) and its default fund contribution are absorbed first, then LCH LTD's own capital ('skin in the game', €1.6mn as of end-October 2024 — the smallest of the four service lines, scaled to EquityClear's relative risk size), then non-defaulting members' EquityClear default fund contributions (£155mn as of end-October 2024, further replenishable via callable 'Assessments'), then loss distribution during the service continuity phase, then voluntary service continuity, and finally EquityClear service closure as a last resort. LCH LTD held margin collateral with a total market value of €288bn as of 31 October 2024"
+    detail: |
+      LCH LTD同时为ForexClear（外汇）、Rates Derivatives（利率衍生品）、EquityClear（证券）、
+      RepoClear（回购）四条业务线分别设立独立的违约基金与自有资本出资额度，不同业务线之间
+      风险不交叉污染——EquityClear的€1.6mn LCH自有资本出资与£155mn违约基金规模，相较
+      Rates Derivatives（€61.9mn资本/£6,014mn基金）小得多，反映证券现货清算相对利率衍生品
+      清算的风险敞口更低。术语译法见schema/glossary.yml新增`default-waterfall`条目。本字段
+      的信息来源是一份"瀑布流程图"型PDF而非叙述性条文，摘引的quote由图中各阶段标签与脚注
+      文字按图示顺序拼接而成，非重新组织的转述。
+    sources:
+      - title: LCH Ltd Default Waterfall（LSEG官网，Oct 2024版）
+        url: https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/resources/lch-ltd-default-waterfall-oct-2024.pdf
+        accessed: 2026-08-24
+      - title: About LCH（LSEG官网）
+        url: https://www.lseg.com/en/post-trade/clearing/about-lch
+        accessed: 2026-08-24
+    quote: "EquityClear Member Default／Defaulter’s Initial Margin, Delivery Margin, Contingent Variation Margin and Additional Margins／Defaulter’s Default Fund Contribution／LCH LTD Capital €1.6mn／LCH EquityClear Default Fund £155mn／Unfunded Contributions – Assessment／Service Continuity – Loss Distribution／Voluntary Service Continuity／LCH EquityClear Service Closure／LCH LTD held margin collateral with a market value of €288bn on 31st of October 2024.／Assessments are callable up to the value of each member’s Default Fund contribution at the time of the default.／Further resources are available in the service continuity phase as determined by the LCH LTD Rulebook."
+    verified: 2026-08-24
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者
@@ -749,20 +866,72 @@ participants:
     confidence: medium
 
   investor_structure:
-    zh: ""
-    confidence: low
+    zh: "按国家统计局（ONS）2026年1月发布的两年一期官方口径，2024年末英国本土注册、在LSE挂牌的公司普通股总值£2.54万亿，其中境外投资者持有比例连续多年上升，2024年末达58.8%的历史新高（2022年为57.7%），美国投资者以£6,939亿居境外持有人之首；英国境内个人投资者持股11.6%（£2,950亿，历史新高）；银行持股3.6%（历史新高）；公共部门（含2008年金融危机后遗留的银行持股）持股0.2%（£47亿，较2022年£135亿继续下降）"
+    en: "Per the Office for National Statistics' (ONS) biennial official bulletin published January 2026, the total value of ordinary shares in UK-domiciled companies listed on the LSE was £2.54 trillion at end-2024; the proportion held by overseas beneficiaries has risen for years, reaching a record high of 58.8% at end-2024 (up from 57.7% in 2022), with US-based holders leading foreign ownership at £693.9bn. UK-resident individuals held 11.6% (£295.0bn, a record high); banks held a record 3.6%; the public sector (a legacy of post-2008 financial-crisis bank stakes) held 0.2% (£4.7bn, down from £13.5bn in 2022)"
+    detail: |
+      该统计口径为"由LSE认定注册国为英国的挂牌公司"的普通股，与overview章节因LSEG集团口径
+      /交易所口径混同问题而留空的market_cap_usd_bn（集团合并市值）是完全不同的统计对象，
+      不构成对该字段留空决定的推翻——ONS这份统计明确是"交易所口径"（LSE挂牌英国公司），
+      可以安全使用。数据来源为Euroclear（CREST）结算系统记录与股东名册分析，两年更新一次。
+    sources:
+      - title: "Ownership of UK quoted shares: 2024（ONS官网，2026-01-29发布）"
+        url: https://www.ons.gov.uk/economy/investmentspensionsandtrusts/bulletins/ownershipofukquotedshares/2024
+        accessed: 2026-08-24
+    quote: "The total value of shares held in quoted UK-domiciled companies listed on the London Stock Exchange (LSE) was £2.54 trillion at the end of 2024. Overseas investors continued to increase their holdings, with the proportion of UK shares owned by the rest of the world reaching a record high of 58.8% in 2024, up from 57.7% in 2022. UK-resident individuals held 11.6% of quoted shares... these holdings were valued at £295.0 billion – a record-high value. Banks expanded their holdings to a record 3.6%... public sector holdings of UK quoted shares stood at 0.2% at the end of 2024; these holdings were valued at £4.7 billion, a decrease of 0.4 percentage points compared with 2022 when the value of holdings were £13.5 billion... beneficiaries in the United States held £693.9 billion in 2024, which is the largest proportion of UK quoted shares of any country outside the UK"
+    verified: 2026-08-24
+    confidence: high
 
   account_opening_requirements:
-    zh: ""
-    confidence: low
+    zh: "适用英国通用的反洗钱客户尽职调查（Customer Due Diligence, CDD）规则，而非LSE专属开户规则：依《2017年洗钱、恐怖主义融资与资金转移（付款人信息）条例》（Money Laundering Regulations 2017）第28条，受监管机构（含证券经纪商）须在建立业务关系前识别并核实客户身份、了解业务关系或临时交易的目的与性质；客户为法人实体时须另行获取并核实名称、注册号、注册地址等信息，并在客户存在受益所有人时识别、核实受益所有人身份"
+    en: "This is the UK's general anti-money-laundering customer due diligence (CDD) regime, not an LSE-specific account-opening rule: under Regulation 28 of the Money Laundering, Terrorist Financing and Transfer of Funds (Information on the Payer) Regulations 2017, a relevant person (including securities brokers) must identify and verify a customer's identity before establishing a business relationship, and assess the purpose and intended nature of that relationship or occasional transaction; where the customer is a body corporate, the firm must also obtain and verify its name, registration number and registered address, and identify and verify any beneficial owner"
+    detail: |
+      本字段描述的是英国全金融体系统一适用的CDD/KYC法定底线，任何经纪商为客户开立可交易
+      LSE证券的账户均须遵守，并非LSE自身另订的准入门槛（LSE本身的准入规则是对"会员机构"
+      而非"终端投资者"的资格要求，见membership_structure字段）。具体到零售经纪商的开户
+      实操（身份证件种类、地址证明有效期等）由各经纪商自行落实监管要求的细节，未在受监管
+      法条原文中逐条列明，故本字段只记录法定义务本身而非经纪商操作细则。
+    sources:
+      - title: The Money Laundering, Terrorist Financing and Transfer of Funds (Information on the Payer) Regulations 2017, Regulation 28（legislation.gov.uk官方立法数据库）
+        url: https://www.legislation.gov.uk/uksi/2017/692/regulation/28
+        accessed: 2026-08-24
+    quote: "The Money Laundering, Terrorist Financing and Transfer of Funds (Information on the Payer) Regulations 2017／28. —(1) This regulation applies when a relevant person is required by regulation 27 to apply customer due diligence measures. (2) The relevant person must— (a) identify the customer unless the identity of that customer is known to, and has been verified by, the relevant person; (b) verify the customer's identity unless the customer's identity has already been verified by the relevant person; and (c) assess, and where appropriate obtain information on, the purpose and intended nature of the business relationship or occasional transaction. Where the customer is a body corporate— (a) the relevant person must obtain and verify— (i) the name of the body corporate; (ii) its company number or other registration number; (iii) the address of its registered office, and if different, its principal place of business"
+    verified: 2026-08-24
+    confidence: high
 
   suitability_management:
-    zh: ""
-    confidence: low
+    zh: "适用英国通用的FCA行为准则手册COBS（Conduct of Business Sourcebook）适当性规则：经纪商/投资顾问提供投资建议或组合管理服务时，须取得客户在相关金融工具知识与经验、财务状况（含承受损失能力）、投资目标（含风险容忍度）三方面的必要信息，并据此确保推荐的投资服务/金融工具与决策符合客户的风险承受能力与承受损失能力"
+    en: "This is the UK's general FCA Conduct of Business Sourcebook (COBS) suitability regime: a firm providing investment advice or portfolio management must obtain the necessary information about a client's (a) knowledge and experience relevant to the specific type of financial instrument, (b) financial situation including ability to bear losses, and (c) investment objectives including risk tolerance, and must ensure recommended investment services, financial instruments and trading decisions are suitable for that client's risk tolerance and ability to bear losses"
+    detail: |
+      COBS 9A（脱胎于欧盟MiFID II第25(2)条、经英国脱欧后内嵌为FCA Handbook独立规则手册）
+      适用于MiFID业务范畴，是英国全市场统一的适当性框架，非LSE专属；对非咨询类服务另有
+      COBS 10"适当性"（Appropriateness）规则（要求更低，仅需评估知识经验而非全套三要素），
+      两者是不同强度的两层规则，本字段以覆盖面更广、要求更高的COBS 9A"适当性"（Suitability）
+      为主。
+    sources:
+      - title: FCA Handbook - COBS 9A Suitability (MiFID and insurance-based investment products provisions)
+        url: https://handbook.fca.org.uk/handbook/cobs9a
+        accessed: 2026-08-24
+    quote: "When providing investment advice or portfolio management a firm must: (1) obtain the necessary information regarding the client's: (a) knowledge and experience in the investment field relevant to the specific type of financial instrument, insurance-based investment product or service; (b) financial situation including his ability to bear losses; and (c) investment objectives including his risk tolerance, so as to comply with (2); (2) only recommend investment services, financial instruments and insurance-based investment products, as applicable, or take decisions to trade, which are suitable for the client and, in particular, in accordance with the client's risk tolerance and ability to bear losses."
+    verified: 2026-08-24
+    confidence: high
 
   foreign_access_channel:
-    zh: ""
-    confidence: low
+    zh: "两条并行通道：(1) 直接会员通道——境外证券商可在英国或「适格境外法域」获授权监管（或经交易所认定资本充足性/诚信与专业能力已受充分监管）后直接成为LSE会员机构，无须以英国本土法人身份接入（见membership_structure）；(2) 存托凭证/互联互通通道——境外投资者亦可通过在LSE挂牌的国际存托凭证（IOB交易服务）或专项互联互通安排（如深圳-伦敦互联互通）间接接触境内证券，无需直接开立LSE交易权限"
+    en: "Two parallel channels: (1) direct membership — an overseas broker authorised under UK or an 'appropriate overseas' jurisdiction (or otherwise deemed sufficiently regulated by the Exchange in respect of capital adequacy and fitness/probity) may become an LSE member firm directly, without needing to be a UK-incorporated legal entity (see membership_structure); (2) depositary receipts / connect schemes — overseas investors can also gain indirect access via international depositary receipts listed on LSE (International Order Book) or dedicated connect arrangements (e.g. Shenzhen-London Stock Connect), without opening direct LSE trading access"
+    detail: |
+      渠道(2)与market_structure.connect_schemes（深港通式安排的具体条文与quote）以及
+      overview.trading_currency字段提及的"国际预托凭证"是同一批事实的不同侧面，此处不
+      重复摘引其quote，只做跨字段的归纳指路，quote锚点仍留在原字段（遵循CLAUDE.md
+      "任何一个事实只在一处手写"原则）。渠道(1)的quote与membership_structure字段共用
+      同一份来源文档（同一条规则原文本身就同时支撑"会员体系是什么"与"外资如何接入"两个
+      问题，不是重复摘引不同事实）。
+    sources:
+      - title: Rules of the London Stock Exchange（官网）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/rules-of-the-london-stock-exchange-effective-5-february-2024.pdf
+        accessed: 2026-08-24
+    quote: "A member firm must at all times be authorised under relevant United Kingdom, or appropriate overseas legislation, or in the view of the Exchange be otherwise sufficiently regulated, in respect of capital adequacy, and fitness and probity"
+    verified: 2026-08-24
+    confidence: high
 
   membership_structure:
     zh: "会员机构（member firm）制：须在英国或适格境外法域获得授权监管（或经交易所认定在资本充足性、诚信与专业能力方面已受充分监管），须持有有效LEI码，须具备充足的交易执行、记录、报告与结算能力及至少一名合规官"
@@ -775,8 +944,23 @@ participants:
     confidence: high
 
   broker_landscape:
-    zh: ""
-    confidence: low
+    zh: "《伦敦证券交易所规则》将会员机构在订单簿上的交易行为区分为「代理经纪商」（Agency Broker，为客户下单执行、须对客户履约负责）与充当「零售服务商」（Retail Service Provider, RSP）的做市/自营性质会员——RSP是就零售规模订单持续按当前订单簿最优价提供成交承诺的会员机构，零售经纪商通常并非LSE直接会员，而是依托RSP网络的报价承诺为终端零售客户执行订单，规则本身对「利用RSP既有报价承诺、在其之前抢先在订单簿制造新最优价」这类行为专门作出了不当交易行为的界定"
+    en: "The Rules of the London Stock Exchange distinguish between member firms acting as an 'Agency Broker' (executing orders on behalf of clients and responsible for performance to those clients) and members acting as a Retail Service Provider (RSP) — a dealer/market-making-type member firm that stands ready to deal at the current best order-book price for retail-sized orders. Retail brokers are typically not direct LSE members themselves; they route client orders to be executed against RSPs' standing quote commitments, and the Rules specifically define as improper conduct the practice of exploiting an RSP's prior quote commitment by creating a new best price ahead of it on the order book"
+    detail: |
+      本次抓取范围内未找到"RSP"这一缩写在《伦敦证券交易所规则》定义章节（Definitions）
+      的正式释义条目，摘引的原文来自Core Rules章节里对不当交易行为的说明性文字，是从
+      RSP在实务中如何运作反推出的描述，而非规则本身给出的正式定义句——故confidence标
+      medium而非high。RSP机制是英国零售股票经纪市场的标志性结构（多数零售经纪商本身
+      不是LSE会员，而是依托一批做市商/自营交易商的RSP报价网络执行客户订单），与订单簿
+      直接撮合的机构投资者交易路径是两种不同的市场微观结构，日后如需更完整定义宜专门
+      抓取LSE面向零售中介的说明文档（本次未纳入抓取范围）。
+    sources:
+      - title: Rules of the London Stock Exchange（官网）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/rules-of-the-london-stock-exchange-effective-5-february-2024.pdf
+        accessed: 2026-08-24
+    quote: "Certain trading practices that exploit the commitment given by firms that act as RSPs are considered to be detrimental to the fairness and integrity of the Exchange's markets and should be discouraged. For example, an order is entered onto the order book with the intention of creating a new best price, away from generally accepted trading levels, for the principle purpose of executing a larger order against an RSP by virtue of the RSP's previous commitment to deal on the basis of the current best order book price."
+    verified: 2026-08-24
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十｜市场数据与技术基础设施
@@ -787,20 +971,63 @@ infrastructure:
     confidence: medium
 
   market_data_levels:
-    zh: ""
-    confidence: low
+    zh: "分三档：Level 2（订单簿全深度，含全部报价/订单及Level 1全部内容，如开盘价/收盘价/揭示价及数量、最优价及数量）、Level 1（最优价及数量、每证券成交额、揭示成交量指示、开盘价、最高最低成交价、逐笔成交、收盘价、全部成交VWAP、累计成交量、揭示价及数量、盘后成交数据）、Post-trade Data（场内/场外成交报告及TRADEcho场外系统性内部撮合商报价）"
+    en: "Three tiers: Level 2 (full order-book depth, including all quotes and orders plus everything in Level 1, e.g. open/close/uncrossing prices and volumes, best price and volume), Level 1 (best price and volume, value traded per security, indicative uncrossing volume, opening prices, trade high/low, individual trades, closing prices, all-trades VWAP, cumulative volumes, uncrossing price and volume, Post-trade Data), and Post-trade Data (on-book/on-exchange trade reports and TRADEcho systematic internaliser quoting)"
+    sources:
+      - title: Schedule A – Price List and Data Products（官网，01 January 2026）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/schedule-a-price-list-and-products-schedule-2026.pdf
+        accessed: 2026-08-24
+    quote: "Level 2 includes full depth of the book with all quotes, orders and Level 1 Data including trades, open price, close price, uncrossing price plus volume, best price plus volume. Level 1 includes best price and volume, value traded per security, indicative uncrossing volume, opening prices, trade high and low individual trades, closing prices, all trades VWAP, cumulative volumes, uncrossing price and volume, Post-trade Data. Post-trade Data includes on-book, on-exchange trade reports and TRADEcho SI quoting for the respective market."
+    verified: 2026-08-24
+    confidence: high
 
   data_latency:
-    zh: ""
-    confidence: low
+    zh: "行情数据按时效性分三类许可：Real Time Data（实时数据，经再分发许可对专业客户/私人投资者提供）、Delayed Data（延时数据，经「延时及收市后数据再分发许可」以受控机制分发）、After Midnight Data（收市后数据，经「历史数据再分发许可」以不受控机制分发，典型用途为云端逐笔历史数据服务）；本次未找到官方原文明确给出Delayed Data具体延时时长"
+    en: "Market data is licensed in three latency tiers: Real Time Data (via redistribution licences to Professional Customers/Private Investors), Delayed Data (via a 'Delayed / After Midnight Redistribution licence' delivered through controlled mechanisms), and After Midnight Data (via a 'Historical Redistribution licence' delivered through uncontrolled mechanisms, typically used for cloud-based tick history services); no primary source found this session states the specific delay duration for Delayed Data"
+    detail: |
+      与market_data_levels共用同一批来源文档，但两个字段描述的是数据的两个不同维度（深度
+      vs 时效性），故分开成两个独立字段各自摘引quote，不合并。市面上常见"延时数据15分钟"
+      的说法（在若干第三方与LSEG集团数据业务综合介绍页面中出现过），但本次抓取范围内的
+      LSE官方定价/政策文档均未见对"15分钟"这一具体时长的逐字确认，按铁律不采纳未落实
+      原文的印象，故zh/en均不写入这个数字，只如实说明"未找到官方原文明确时长"。
+    sources:
+      - title: Schedule A – Price List and Data Products（官网）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/schedule-a-price-list-and-products-schedule-2026.pdf
+        accessed: 2026-08-24
+      - title: Market Data Policy Guidelines（官网，01 January 2025）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/market-data-policy-guidelines-2025_0.pdf
+        accessed: 2026-08-24
+    quote: "3.1.1 REAL TIME REDISTRIBUTION LICENCES／3.1.2 DELAYED AND AFTER MIDNIGHT REDISTRIBUTION LICENCES／Delayed Data / After Midnight Redistribution licence — A licence for redistribution of Delayed Data and / or After Midnight Data delivered via controlled mechanisms respectively／Historical Redistribution licence — A licence for redistribution of After Midnight Data delivered via uncontrolled mechanisms／Typical use case: Cloud-based tick service, delivery of After Midnight Data via datafeed"
+    verified: 2026-08-24
+    confidence: high
 
   data_pricing_model:
-    zh: ""
-    confidence: low
+    zh: "按客户类型（专业客户 vs 私人投资者）、数据深度（Level 2/Level 1/盘后）与时效性（实时/延时/收市后）多维度分级定价，年度许可费按客户/计量单位/数据产品逐项累计收取（不含增值税），预先按年开票；数据使用费（Data Charges）按月开票、按月后付。举例：UK market Data（英股整体行情）实时再分发许可，专业客户Level 2年费£67,611、Level 1年费£37,083；私人投资者档Level 2年费£13,258、Level 1年费£8,215；延时数据（Delayed Data）按「企业级」许可另设费率，如UK market Data Level 2企业级年费£158,981"
+    en: "Pricing is tiered along multiple axes — customer type (Professional vs Private Investor), data depth (Level 2/Level 1/post-trade) and latency (real-time/delayed/after-midnight). Licence Charges are cumulative per Customer, per Unit of Count, per Data Product, quoted excluding VAT and invoiced annually in advance; Data Charges are invoiced monthly in arrears. Example: for UK market Data real-time redistribution, Professional Users pay £67,611/year for Level 2 and £37,083/year for Level 1; the Private Investors tier pays £13,258/year for Level 2 and £8,215/year for Level 1; Delayed Data carries separate 'Enterprise' tier pricing, e.g. £158,981/year for UK market Data Level 2 Enterprise"
+    detail: |
+      价目表覆盖UK/International/European/Turquoise/Turquoise Europe多个市场数据产品线，
+      本字段只摘取UK market Data这一核心产品线的代表性数字作为定价模式的例证，不逐项
+      列全价目表（完整数值见来源PDF Schedule A第3节）。Private Securities Market Data
+      （PISCES私募证券市场对应的数据产品）对"相关客户"免费，是本文件products章节
+      uk-lse-private条目的又一佐证。
+    sources:
+      - title: Schedule A – Price List and Data Products（官网）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/schedule-a-price-list-and-products-schedule-2026.pdf
+        accessed: 2026-08-24
+    quote: "Charges listed in clause 3 of this Schedule apply per Customer, per Unit of Count, per Data Product applicable to the scope of use, and on a cumulative basis... All Charges exclude VAT and are in UK sterling as denoted. Licence Charges quoted are annual and invoiced annually in advance... Data Charges quoted are monthly unless otherwise stated. Data Charges are invoiced monthly in arrears.／UK market Data／Professional Users／Level 2 £67,611／Level 1 £37,083／Private Investors／Level 2 £13,258／Level 1 £8,215"
+    verified: 2026-08-24
+    confidence: high
 
   historical_data_availability:
-    zh: ""
-    confidence: low
+    zh: "官方历史/收市后数据（After Midnight Data）通过独立的「历史数据再分发许可」（Historical Redistribution licence）提供，适用于以不受控机制交付的场景（如云端逐笔历史数据服务、经数据流交付的收市后数据），与Real Time/Delayed两类「当期行情」许可分属不同许可体系；本字段反映的是官方数据再分发的许可框架结构，而非历史数据实际可回溯的年限深度（后者本次未找到官方原文说明）"
+    en: "Official historical/after-hours data (After Midnight Data) is made available via a separate 'Historical Redistribution licence' for uncontrolled-mechanism delivery scenarios (e.g. cloud-based tick history services, datafeed delivery of after-midnight data), forming a distinct licensing track from the Real Time / Delayed 'current market' licences. This field reflects the structure of the official data-redistribution licensing framework rather than how many years of historical depth the archive actually covers (no primary source on the latter was found this session)"
+    sources:
+      - title: Market Data Policy Guidelines（官网）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/market-data-policy-guidelines-2025_0.pdf
+        accessed: 2026-08-24
+    quote: "Historical Redistribution licence — A licence for redistribution of After Midnight Data delivered via uncontrolled mechanisms／Typical use case: Cloud-based tick service, delivery of After Midnight Data via datafeed"
+    verified: 2026-08-24
+    confidence: medium
 
   trading_system_name:
     zh: "Millennium Exchange（技术基础来自2009年9月收购的MillenniumIT）"
@@ -828,6 +1055,7 @@ infrastructure:
   major_outage_history:
     zh: ""
     confidence: low
+    detail: "2019年8月16日LSE曾发生约1小时40分钟的主板交易延迟（媒体广泛报道为'软件配置问题'，波及约489只证券含富时100/250成分股），2023年12月亦有一次交易中断，均为公开广泛报道的事件；但本次抓取范围内未找到LSE/FCA/LSEG官方发布、可逐字摘引的一手事件说明或事后报告（LSEG官网operational-resilience页面只有通用框架性表述，未披露具体历史事件；新闻网站正文因动态加载/反爬未能提取出干净可摘引文本），按铁律不采纳未落实原文的新闻转述内容，留空，见OPEN-QUESTIONS。"
 
 # ═══════════════════════════════════════════════
 # 十一｜交易成本与税费
@@ -856,12 +1084,44 @@ costs:
     confidence: high
 
   clearing_fees:
-    zh: ""
-    confidence: low
+    zh: "LCH Ltd EquityClear按月向清算会员后付制收取结算环节费用（每笔结算一次性收取，另有信息传递费），费率按结算所在市场区分，如英国本地结算£0.85/笔（另收信息传递费£0.06/笔），Euroclear Bank结算€5.50/笔（信息传递费£0.07/笔）；该费用为结算通道的「过手成本」，不含托管机构/CSD自身可能另收的费用，且明确不对公司行动（corporate action）或收益派发单独收费"
+    en: "LCH Ltd EquityClear charges clearing members a monthly, in-arrears settlement fee per settlement instruction, plus a separate messaging fee, tiered by settlement location — e.g. GBP 0.85 per settlement for UK settlement (plus GBP 0.06 messaging fee), EUR 5.50 for Euroclear Bank settlement (plus GBP 0.07 messaging fee). This is a settlement-leg pass-through cost, excludes any additional fees the CSD/agent itself may charge, and EquityClear in LCH Ltd explicitly does not charge a corporate-action or income-payment fee"
+    detail: |
+      本字段摘引的是LCH Ltd EquityClear"结算费用表"，是清算/结算环节的过手成本，区别于
+      costs.exchange_fees记录的交易所自身撮合交易费（按月度累计成交金额分档的基点费率），
+      两者不重复、不合并。本次未能获取LCH EquityClear主清算费（按成交金额/笔数计费的
+      ad valorem清算费，与结算费是两个不同收费项）的可提取文本版本——对应的PDF
+      （lch-equityclear-clearing-fee-subscription.pdf）抓取成功但内容为图片渲染的表格，
+      `pdftotext`无法提取文字（与SKILL.md记录的SIX月度统计PDF提取失败是同一类问题），
+      故本字段只能覆盖结算费而非完整的清算费体系，已记入OPEN-QUESTIONS。
+    sources:
+      - title: LCH Ltd EquityClear Settlement Fee Schedule（LSEG官网，From 1st July 2024）
+        url: https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/resources/lch-ltd-equity-clear-settlement-fee-schedule-current-010724.pdf
+        accessed: 2026-08-24
+    quote: "The table below shows the settlement related fees that EquityClear in LCH Ltd will pass through to clearing members monthly in arrears. Fees are per settlement.／EquityClear in LCH Ltd does not charge a corporate action or income payment fee.／UK GBP 0.85 GBP 0.06／Euroclear Bank EUR 5.50 GBP 0.07"
+    verified: 2026-08-24
+    confidence: high
 
   regulatory_fees:
-    zh: ""
-    confidence: low
+    zh: "官方名册（Official List）层面的申请/变更/移除/暂停/恢复本身不向FCA缴纳费用；仅招股说明书审批需缴费（文件审核费，Vetting Fee，在首次提交草案时缴纳）；发行人另按UKLR缴纳年度定期费用（金额见FCA Handbook FEES 4 Annex 14）；保荐人（Sponsor）注册需缴纳申请费并按年缴纳年费。这构成独立于交易所自身上市/交易费用（见costs.exchange_fees、Fees for Issuers）之外的另一层监管费用，与交易所自身收费主体不同（FCA vs LSE）"
+    en: "Applications, amendments, removals, suspensions and restorations on the Official List are not themselves subject to an FCA fee; only prospectus approval carries a fee (a document-vetting fee, due on first submission of a draft); issuers also pay annual periodic fees under UKLR (amounts set out in FCA Handbook FEES 4 Annex 14); sponsors pay an application fee to join the sponsor register plus an annual fee. This is a regulatory-fee layer distinct from, and levied by a different body (the FCA) than, the Exchange's own listing/trading fees (see costs.exchange_fees, Fees for Issuers)"
+    detail: |
+      与本文件此前已填的costs.exchange_fees/新上市发行人年费（Fees for Issuers）是两套
+      并行收费体系：exchange_fees面向"使用LSE交易撮合服务/在LSE挂牌"本身收费，本字段
+      的FCA费用面向"FCA审核文件/维持官方名册合规状态"收费，两者收费主体、依据、缴纳对象
+      均不同，不应合并计算。具体费率数字（招股说明书审核费、年度定期费、保荐人申请费）
+      指向FCA Handbook FEES 3/FEES 4的具体附录，本次未展开逐项核实精确金额，只确认了
+      收费结构本身。
+    sources:
+      - title: Listing applications, amendments, suspensions and cancellations（FCA官网）
+        url: https://www.fca.org.uk/markets/primary-markets/listing-applications
+        accessed: 2026-08-24
+      - title: Listing and sponsor fees（FCA官网）
+        url: https://www.fca.org.uk/markets/primary-markets/fees
+        accessed: 2026-08-24
+    quote: "Fees There is no fee for applications, amendments, removals, suspensions or restorations. There is a fee for the approval of prospectuses.／Issuer fees There are various fees payable by issuers for the review and formal approval of documents by the FCA. Paying the vetting fee Document vetting fees are due when you submit the first draft of the document to us.／Sponsor fees Annual fees Sponsors are currently charged an annual fee as set out in FEES 4 Annex 14 ES.01.／Application fee Firms applying to be included on the sponsor register must pay an application fee"
+    verified: 2026-08-24
+    confidence: high
 
   stamp_duty:
     zh: "印花税（Stamp Duty）：纸质转让文书形式、金额超£1,000的证券交易，税率0.5%（就近取整至£5）；印花税储备税（Stamp Duty Reserve Tax, SDRT）：电子（无纸化）交易，税率0.5%（就近取整至1便士），经CREST系统自动代收并划付予英国税务海关总署（HMRC）"
@@ -879,8 +1139,19 @@ costs:
     detail: "英国未见另设独立于印花税/SDRT之外的广义金融交易税；但本次来源（HMRC研究报告）本身聚焦印花税/SDRT，未见对“是否存在其他金融交易税”的专门排除性声明，为避免“未提及即等于不存在”的过度推断，本字段留空而非断言“无”，与stamp_duty字段分开处理。"
 
   capital_gains_tax:
-    zh: ""
-    confidence: low
+    zh: "2026/27纳税年度（2026年4月6日起）个人股票资本利得税：落在基本税率所得区间内的部分按18%征收，超出基本税率所得区间的部分按24%征收（2024年10月30日预算案起，股票与其他非房产资产已与住宅物业统一适用同一档税率，此前股票适用更低的10%/20%）；年度免税额（Annual Exempt Amount）为£3,000/人；个人经营性公司股份处置符合条件的可适用「企业资产处置减免」（Business Asset Disposal Relief），税率自2025年4月6日起为14%，2026年4月6日起进一步升至18%"
+    en: "For the 2026/27 tax year (from 6 April 2026), individuals' Capital Gains Tax on shares: 18% on gains falling within the basic Income Tax band, and 24% on gains above it (since the 30 October 2024 Budget, shares and other non-property assets have shared the same rates as residential property, having previously been taxed at lower 10%/20% rates); the Annual Exempt Amount is £3,000 per person; qualifying disposals of shares in a personal trading company may qualify for Business Asset Disposal Relief, taxed at 14% from 6 April 2025 and rising to 18% from 6 April 2026"
+    detail: |
+      本字段只覆盖个人（Income Tax意义上的自然人纳税主体）持有股票的资本利得税，公司/信托
+      等主体适用不同税制（公司利得计入公司税应纳税所得额，未展开）；未纳入本字段的是"住房
+      自用"等与本项目股票交易场景无关的豁免情形。
+    sources:
+      - title: "Capital Gains Tax: what you pay it on, rates and allowances（gov.uk官方页面）"
+        url: https://www.gov.uk/capital-gains-tax/rates
+        accessed: 2026-08-24
+    quote: "If you're a higher or additional rate taxpayer, you'll pay 24% on your gains from 6 April 2026.／If you're a basic rate taxpayer, the rate you pay on gains you receive from 6 April 2026 depends on the size of your gain and your taxable income... If this amount is within the basic Income Tax band, you'll pay 18% on your gains made from 6 April 2026. For any amount above the basic Income Tax band, you'll pay 24% on gains made from 6 April 2026.／For the 2026 to 2027 tax year the allowance is £3,000"
+    verified: 2026-08-24
+    confidence: high
 
   dividend_withholding_tax:
     zh: ""
@@ -888,8 +1159,21 @@ costs:
     detail: "常识印象：英国境内公司股息通常无预扣税（不同于多数司法辖区的常见做法），但本次抓取范围（gov.uk印花税页）未涉及股息预扣税主题，未找到当次可引用的官方原文，按铁律不采纳未核实的印象，留空，见 OPEN-QUESTIONS。"
 
   implicit_costs_note:
-    zh: ""
-    confidence: low
+    zh: "买卖价差（隐性成本的主要构成之一）在报价驱动品种上受交易所规则直接约束：注册做市商提供的可执行报价（Executable Quote）买卖价差须不小于一个最小报价单位（tick size），且不得超过就该证券设定的「最大价差百分比」（超出上限的报价会被系统拒绝，除非窄于「最大价差下限」）；具体的最大价差百分比数值定义在未抓取的Business Parameters文档内（与tick_size字段面临的数据缺口相同）"
+    en: "Bid-ask spread — one of the main components of implicit trading cost — is directly constrained by Exchange rules for quote-driven instruments: a registered market maker's Executable Quote spread must be at least one tick size and no wider than a security-specific 'maximum spread percentage' (quotes exceeding this ceiling are rejected by the system, unless narrower than the maximum spread floor); the specific maximum-spread percentage values are defined in the Business Parameters document, which was not fetched this session — the same gap already noted for the tick_size field"
+    detail: |
+      本字段记录的是价差被规则约束的机制本身（做市商义务的一部分），而非市场实际观测到的
+      平均买卖价差/冲击成本水平（后者需交易统计数据而非规则文本，本次未纳入抓取范围）。
+      与market_structure.market_maker_scheme字段（订单驱动vs报价驱动两套做市商制度的
+      整体介绍）互补，本字段聚焦"价差本身如何被规则量化约束"这一更具体的机制细节，quote
+      来自不同章节段落，不与该字段重复。
+    sources:
+      - title: MIT201 – Guide to the Trading System Issue 15.8（官网，第5.6节）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf
+        accessed: 2026-08-24
+    quote: "Executable Quote maximum spread／The spread between the bid and offer prices must be at least one tick size and subject to the maximum spread floor no more than the maximum spread percentage specified for the relevant security. When validating maximum spreads, the absolute spread (offer less bid) is divided by the mid-price of the spread (offer plus bid, divided by two) to determine a percentage spread, which is assessed against the permitted maximum. Executable Quotes that are wider than the permitted maximum spread will be rejected unless it is less than the maximum spread floor. Details of the maximum spread percentage and maximum spread floor in place are contained in the Business Parameters document."
+    verified: 2026-08-24
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 十二｜风险与特殊考量
@@ -904,12 +1188,42 @@ risks:
     confidence: low
 
   political_risk_note:
-    zh: ""
-    confidence: low
+    zh: "英国对俄制裁曾直接导致LSE按自身规则暂停特定证券交易：2022年3月3日，交易所依《伦敦证券交易所规则》第1510条，援引「俄乌事件相关制裁、市场状况恶化、维护市场平稳运行」为由，即时暂停约20只俄罗斯公司GDR/ADR（含Gazprom、Lukoil、Novatek、Norilsk Nickel、PhosAgro等）的交易准入，是地缘政治/制裁风险直接作用于LSE挂牌证券交易资格的一手实证"
+    en: "UK sanctions on Russia have directly led LSE to suspend specific securities under its own rules: on 3 March 2022, citing 'recent sanctions in connection with events in Ukraine, in light of market conditions, and in order to maintain orderly markets', the Exchange suspended admission to trading, with immediate effect, of roughly 20 Russian companies' GDRs/ADRs (including Gazprom, Lukoil, Novatek, Norilsk Nickel and PhosAgro) under Rule 1510 of the Rules of the London Stock Exchange — direct primary evidence of geopolitical/sanctions risk acting on LSE-listed trading eligibility"
+    detail: |
+      该Market Notice（N06/22）是LSE自身发布、经FCA National Storage Mechanism officially
+      存档的一手公告，非新闻媒体转述；FCA同期亦发布声明提醒受监管机构与发行人注意俄乌局势
+      下的制裁义务。该批暂停证券此后长期未恢复交易（未在本次抓取范围内核实后续状态），
+      反映此类政治/制裁风险一旦触发，对具体证券的交易资格影响可能是长期而非临时性的。
+    sources:
+      - title: N06/22 - Russia related sanctions - Update（LSE Market Notice，经FCA National Storage Mechanism存档）
+        url: https://data.fca.org.uk/artefacts/NSM/RNS/4290415.html
+        accessed: 2026-08-24
+      - title: New financial sanctions measures in relation to Russia（FCA官网声明）
+        url: https://www.fca.org.uk/news/statements/new-financial-sanctions-measures-relation-russia
+        accessed: 2026-08-24
+    quote: "3 March 2022 N06/22 - Russia related sanctions - Update／Further to recent sanctions in connection with events in Ukraine, in light of market conditions, and in order to maintain orderly markets, the London Stock Exchange (the \"Exchange\") has suspended the admission to trading of the instruments listed below, in accordance with Rule 1510 of the Rules of the London Stock Exchange, with immediate effect."
+    verified: 2026-08-24
+    confidence: high
 
   liquidity_risk_note:
-    zh: ""
-    confidence: low
+    zh: "LSE现货市场的流动性风险呈明显分层：主板核心蓝筹（如富时100成分股，属最高流动性梯队FE10）采用较窄的价格监控阈值（动态3%），流动性次一级的梯队（如FS10）阈值放宽至5%，反映交易所自身在制度设计上已确认不同证券的流动性/波动特征存在数量级差异（见price_limits.main_board）；订单驱动品种以外，流动性较低的品种（含部分AIM证券）改用报价驱动的SETSqx机制、依赖注册做市商的确定报价（Firm Quotes）维持可交易性，而非依赖自然订单簿深度（见market_maker_scheme）——两种机制并存本身即是「部分证券依赖做市商托底流动性」的结构性证据"
+    en: "Liquidity risk on LSE's cash markets is clearly tiered: the most liquid segment (e.g. FTSE 100 constituents, LSE sector FE10) uses a narrower dynamic price-monitoring threshold (3%), while a less liquid tier (e.g. FS10) uses a wider 5% threshold — the Exchange's own rule design already reflects an order-of-magnitude difference in liquidity/volatility characteristics across securities (see price_limits.main_board). Beyond order-driven instruments, less liquid names (including some AIM securities) instead use the quote-driven SETSqx mechanism, relying on registered market makers' Firm Quotes to sustain tradability rather than natural order-book depth (see market_maker_scheme) — the coexistence of the two mechanisms is itself structural evidence that liquidity for some securities depends on market-maker backstops"
+    detail: |
+      本字段是对已有sourced字段（market_structure.price_limits、market_structure.
+      market_maker_scheme）的跨字段归纳分析，不重复摘引其quote（原文锚点留在各自字段，
+      遵循CLAUDE.md"任何一个事实只在一处手写"原则），故不单列quote、confidence降级为
+      medium。真正意义上的"流动性风险"（如某证券可能连续数日零成交、买卖盘长期缺失一侧）
+      需要实际成交统计数据而非规则文本佐证，本次未纳入抓取范围。
+    sources:
+      - title: Maintaining orderly markets（官网）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/maintaining-orderly-markets.pdf
+        accessed: 2026-08-14
+      - title: MIT201 – Guide to the Trading System Issue 15.8（官网）
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf
+        accessed: 2026-08-14
+    verified: 2026-08-24
+    confidence: medium
 
   regulatory_change_risk_note:
     zh: "压测点核心字段——英国脱欧后正处于持续的监管框架重构期，三条并行证据：(1) 2024年7月UKLR改革以单一“股票证券（商业公司）”类别取代此前承接自欧盟体系的Premium/Standard两级上市架构；(2) 2026年7月13日起，SSR 2025正式取代此前“承接”的欧盟《卖空条例》(EU) No 236/2012；(3) 英国计划于2027年10月11日整体切换至T+1结算周期（现行仍为T+2），与欧盟是否/何时跟进尚不同步。三条改革叠加意味着填写本文件时必须持续关注“规则是否已生效”而非套用脱欧前的欧盟框架惯例"
@@ -932,5 +1246,19 @@ risks:
     confidence: medium
 
   enforcement_note:
-    zh: ""
-    confidence: low
+    zh: "英国市场滥用监管框架（UK MAR）——2016年7月生效的欧盟《市场滥用条例》经2020年12月31日「内化」（onshored）为英国国内法后持续演进（2021年《金融服务法》就董事内部人名单/管理层交易另有修订）。内幕交易、非法披露、市场操纵及操纵未遂构成UK MAR下的民事违规，FCA可处以无上限罚款、责令禁令、禁止相关机构/获批人员从业；刑事层面，内幕交易依《1993年刑事司法法》第五编、市场操纵依《2012年金融服务法》第89-91条定罪，最高可判10年监禁并处无上限罚金"
+    en: "The UK Market Abuse Regulation (UK MAR) regime — the EU Market Abuse Regulation, effective 3 July 2016, was onshored into UK domestic law on 31 December 2020 and has continued to evolve (e.g. amendments on insider lists and managers' transactions under the Financial Services Act 2021). Insider dealing, unlawful disclosure, market manipulation and attempted manipulation are civil offences under UK MAR, for which the FCA can impose unlimited fines, order injunctions, and prohibit firms or approved persons from operating; criminally, insider dealing is an offence under Part V of the Criminal Justice Act 1993 and market manipulation under sections 89-91 of the Financial Services Act 2012, carrying custodial sentences of up to 10 years plus unlimited fines"
+    detail: |
+      与risks.investor_protection（FSCS对投资中介倒闭的事后补偿）是不同角度：本字段
+      聚焦"市场公平性/操纵行为"的监管执法体系，FSCS聚焦"机构倒闭"的投资者事后救济，
+      两者互补、不合并。UK MAR适用于LSE等全部英国交易场所，非LSE专属规则，但FCA的
+      监测手段明确包含对交易场所提交的可疑交易与订单报告（STOR）的分析，与本文件
+      regulation.self_regulatory_org记录的"交易所自身一线监管+FCA监管官方名册"分工
+      相互印证。
+    sources:
+      - title: Market abuse（FCA官网）
+        url: https://www.fca.org.uk/markets/market-abuse
+        accessed: 2026-08-24
+    quote: "Market Abuse Regulation (MAR) The EU Market Abuse Regulation (EU MAR) came into effect on 3 July 2016 and was onshored into UK law on 31 December 2020 by the EU (Withdrawal) Act 2018.／The following are civil offences under UK MAR: Insider dealing. Unlawful disclosure. Market manipulation. Attempted manipulation.／Criminal insider dealing is an offence under Part V of the Criminal Justice Act 1993. Criminal market manipulation is an offence under sections 89 to 91 of the Financial Services Act 2012.／For breaches of UK MAR we can: Impose unlimited fines. Order injunctions. Prohibit regulated firms or approved persons. Criminal sanctions for insider dealing and market manipulation can incur custodial sentences of up to 10 years and unlimited fines."
+    verified: 2026-08-24
+    confidence: high

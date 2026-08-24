@@ -308,19 +308,42 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - AIM Rules for Companies（January 2026，AIM 板块上市与持续义务规则）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf
   - Fees for Issuers（Effective 01 January 2026，主板/AIM 发行人年费）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/fees-for-issuers-jan-2026-01.pdf
   - Trading Services Price List（Excludes TRADEcho，Effective 01 January 2025，交易费率表）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/trading-services-price-list-january-2025.pdf
+  - Schedule A – Price List and Data Products（01 January 2026，市场数据 Level 1/Level 2/Post-trade 分级定义与实时/延时/收市后再分发许可价目表，补全 `infrastructure` 章节用）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/schedule-a-price-list-and-products-schedule-2026.pdf
+  - Market Data Policy Guidelines（01 January 2025，Real Time/Delayed/After Midnight Data 各类再分发许可定义）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/market-data-policy-guidelines-2025_0.pdf
 - `lseg.com`（集团官网，与 `www.londonstockexchange.com` 是不同站点，非 SPA） | 官方（母公司 London Stock Exchange Group plc） | en | curl 常规 UA 200，未见反爬 | 历史沿革、清算（LCH）、指数方法论（FTSE Russell）、集团财报
   - The history of LSEG（历史沿革，含1801年正式成立、1986 Big Bang、2001年自身挂牌上市、2007年与 Borsa Italiana 合并组成 LSEG 集团等关键节点）: https://www.lseg.com/en/about-us/history
   - About LCH（清算/中央对手方）: https://www.lseg.com/en/post-trade/clearing/about-lch
   - LSE 24（延长交易时段计划，2026年新闻稿，压测点"独立监管框架下机制持续演进"的证据）: https://www.lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-to-launch-lse-24
   - FTSE UK Index Series Ground Rules（指数编制方法论）PDF: https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse-uk-index-series-ground-rules.pdf
   - LSEG plc 2025年度业绩初步公告（Preliminary Results RNS，市值/财务数据）PDF: https://www.lseg.com/content/dam/lseg/en_us/documents/investor-relations/financial-results/preliminary-results/rns/lseg-2025-preliminary-results-rns-26feb2026.pdf
+  - LCH Ltd Default Waterfall（Oct 2024，违约处置资源瀑布图，含 EquityClear 违约基金/LCH自有资本出资规模）PDF: https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/resources/lch-ltd-default-waterfall-oct-2024.pdf
+  - LCH Ltd EquityClear Settlement Fee Schedule（From 1st July 2024，证券结算环节费率表，区别于交易所自身交易费）PDF: https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/resources/lch-ltd-equity-clear-settlement-fee-schedule-current-010724.pdf
 - `fca.org.uk` | 监管 | en | curl 常规 UA 200，未见反爬 | 英国金融行为监管局（FCA），脱欧后 UK Listing Rules 与卖空监管的独立规则制定机关——压测点核心来源
   - UKLR（UK Listing Rules）sourcebook 全文 PDF: https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf
   - Short selling（卖空监管，SSR 2025 新制度说明）: https://www.fca.org.uk/markets/short-selling
   - About T+1 settlement（结算周期改革现状，关键事实：本次会话核实时点 2026-08-14，英国仍是T+2，T+1定于2027年10月11日才生效，目前尚未发生）: https://www.fca.org.uk/markets/about-t1-settlement
+  - Market abuse（UK MAR 执法框架、罚则、STOR报告要求）: https://www.fca.org.uk/markets/market-abuse
+  - Listing and sponsor fees（发行人/保荐人向FCA缴纳的文件审核费与年费，区别于交易所自身费用）: https://www.fca.org.uk/markets/primary-markets/fees
+  - Listing applications, amendments, suspensions and cancellations（明确"上市申请/变更/暂停/取消本身不收费，仅招股说明书审批收费"）: https://www.fca.org.uk/markets/primary-markets/listing-applications
+  - New financial sanctions measures in relation to Russia（2022年俄乌事件后FCA声明，为下方LSE Market Notice N06/22提供监管背景）: https://www.fca.org.uk/news/statements/new-financial-sanctions-measures-relation-russia
+- `data.fca.org.uk` | 官方（National Storage Mechanism，FCA托管的RNS/交易所公告官方存档） | en | curl 常规 UA 200 | LSE Market Notice N06/22（2022-03-03，依据Rules of the London Stock Exchange Rule 1510暂停约20只俄罗斯公司GDR/ADR交易，政治/制裁风险压测点的一手证据）
+  - N06/22 - Russia related sanctions - Update: https://data.fca.org.uk/artefacts/NSM/RNS/4290415.html
 - `euroclear.com` | 官方（清算/托管机构） | en | ⚠️ curl 常规 UA 对根域名与内容页均返回 403（间隔12秒重试后仍 403，非限流，是真实拦截），未能抓到——Euroclear UK & International（原 CREST）作为 LSE 中央证券存管机构的角色改用第三方转述来源确认，见下 | —
-- `gov.uk` | 监管（税务机关 HMRC） | en | curl 常规 UA 200，未见反爬 | 印花税储备税（SDRT）官方说明，含 CREST 代收 SDRT 的机制描述
+- `gov.uk` | 监管（税务机关 HMRC；国家安全与投资法审查亦发布于此） | en | curl 常规 UA 200，未见反爬 | 印花税储备税（SDRT）官方说明，含 CREST 代收 SDRT 的机制描述；国家安全与投资法（外资并购国家安全审查）指引；资本利得税税率官方页
   - Stamp Duty and Stamp Duty Reserve Tax: https://www.gov.uk/government/publications/stamp-duty-and-stamp-duty-reserve-tax/stamp-duty-and-stamp-duty-reserve-tax
+  - National Security and Investment Act guidance on acquisitions（NSI Act 2021外资/内资并购国家安全审查制度，25%/50%/75%持股门槛，17个敏感行业）: https://www.gov.uk/guidance/national-security-and-investment-act-guidance-on-acquisitions
+  - Capital Gains Tax: what you pay it on, rates and allowances（2026/27税率：基本税率18%、较高税率24%，年度免税额£3,000）: https://www.gov.uk/capital-gains-tax/rates
+- `fscs.org.uk` | 监管（金融服务补偿计划，FSMA 2000下设立的法定投资者/存款人补偿机构） | en | curl 常规 UA 200 | 投资类索赔补偿限额（2019年4月后失败机构：每人每机构最高£85,000）
+  - What we cover | Investments: https://www.fscs.org.uk/what-we-cover/investments/
+- `api.parliament.uk` | 官方（Hansard，英国议会官方历史发言记录） | en | curl 常规 UA 200 | 1979年10月23日财政大臣Geoffrey Howe在下议院宣布即时撤销全部剩余外汇管制的官方发言记录，是`capital_controls`字段"英国无资本管制"这一常识性事实少有的可逐字摘引的一手原文
+  - EXCHANGE CONTROLS (Hansard, 23 October 1979): https://api.parliament.uk/historic-hansard/commons/1979/oct/23/exchange-controls
+- `ons.gov.uk` | 官方（国家统计局，Office for National Statistics） | en | curl 常规 UA 200 | Ownership of UK quoted shares 两年一期统计公报，按持有人部门（境外/个人/银行/公共部门等）拆分的LSE上市公司股权结构官方口径数据
+  - Ownership of UK quoted shares: 2024（2026-01-29发布）: https://www.ons.gov.uk/economy/investmentspensionsandtrusts/bulletins/ownershipofukquotedshares/2024
+- `handbook.fca.org.uk` | 监管（FCA Handbook，与 `api-handbook.fca.org.uk`/`fca.org.uk` 为不同子域名，需单独登记） | en | curl 常规 UA 200 | COBS（Conduct of Business Sourcebook）适当性/适合性管理规则原文
+  - FCA Handbook - COBS 9A Suitability (MiFID and insurance-based investment products provisions): https://handbook.fca.org.uk/handbook/cobs9a
+  - FCA Handbook - COBS 10 Appropriateness (for non-advised services): https://handbook.fca.org.uk/handbook/cobs10
+- `legislation.gov.uk` | 官方（英国立法官方数据库） | en | curl 常规 UA 200 | 《2017年洗钱、恐怖主义融资与资金转移条例》（Money Laundering Regulations 2017）第28条客户尽职调查（开户KYC）要求原文
+  - The Money Laundering, Terrorist Financing and Transfer of Funds (Information on the Payer) Regulations 2017, Regulation 28: https://www.legislation.gov.uk/uksi/2017/692/regulation/28
 
 ### 法兰克福证券交易所 / Xetra Frankfurt Stock Exchange (FWB) / Deutsche Börse Xetra `de-xetra`
 - `cashmarket.deutsche-boerse.com` | 官方 | de/en（本节实测抓取的全部是英文页；同集团站群，抓取体验与 `de-eurex` 一致） | curl + 常规 UA 全部 200，未见反爬 | ⚠️ 法律实体是「法兰克福证券交易所」（Frankfurter Wertpapierbörse，FWB®），官方原文明确写它是「具有有限法律行为能力的公法机构，不能作为私法主体」（"a stock exchange, as a public law institution with limited legal capacity, cannot act as a legal entity under private law"），Deutsche Börse AG 是负责运营的「Trägerin/organising company」——这与 `de-eurex.yml`（Eurex Deutschland 是私法主体的公司）是两种不同的法律形式，即使同属 `deutsche-boerse-group`。「Xetra」是 FWB 名下的电子交易系统（品牌名），FWB 名下另有场内专家做市交易场所「Börse Frankfurt」（主要服务零售），站内很多页面把两个交易场所的信息混排，摘引时要看清楚具体指哪个。规则体系与 Eurex 平行但独立：Börsenordnung（交易所规则）/Handelsordnung（交易规则）/Zulassungsordnung（准入规则）/Gebührenordnung（费用规则）/Bedingungen für Geschäfte（交易条件）五份官方英文版 PDF，直链可从 Rules and Regulations 索引页的静态 HTML 里 grep 出来（同 Eurex 经验）
