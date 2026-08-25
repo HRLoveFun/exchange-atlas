@@ -35,6 +35,7 @@
       },
       "founded_year": {
         "zh": "1990（11月26日成立，12月19日开业）",
+        "en": "1990 (established 26 November; commenced operations 19 December)",
         "detail": "上海证券交易所于1990年11月26日成立，同年12月19日正式开业。\n上证综合指数以1990年12月19日为基日，与开业日一致。\n",
         "sources": [
           {
@@ -46,13 +47,13 @@
         "quote": "该指数以 1990 年 12 月 19 日为基日，以 100 点为基点。",
         "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null
       },
       "history": null,
       "organization_form": {
         "enum": "member_owned",
         "zh": "会员制",
+        "en": "Member-owned",
         "detail": "上交所会员为经中国证监会依法批准设立、取得会员资格的证券公司；最高权力机关为会员大会而非股东大会。上交所、深交所目前均为会员制，区别于已公司化改制的北交所、纽交所、港交所等。",
         "sources": [
           {
@@ -63,12 +64,12 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "quote": null
       },
       "self_listed": {
         "enum": "no",
         "zh": "否",
+        "en": "No",
         "detail": "会员制事业法人单位，自身未上市。",
         "sources": [
           {
@@ -79,11 +80,11 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "quote": null
       },
       "market_cap_usd_bn": {
         "zh": "主板 52.2 万亿元 + 科创板 17.0 万亿元 人民币（合计约 69.2 万亿元，未换算美元）",
+        "en": "Main Board RMB 52.2 trillion + STAR Market RMB 17.0 trillion (combined approx. RMB 69.2 trillion; not converted to USD)",
         "detail": "taxonomy 字段名假设单一美元数值，但 SSE 官方周报按板块（主板/科创板）分别披露人民币市值，\n未做统一美元折算——这里如实按原始口径记录，不做汇率换算引入额外误差。\n这是一处 schema 与数据现实的错配，已记入 OPEN-QUESTIONS。\n",
         "sources": [
           {
@@ -95,11 +96,11 @@
         "quote": "主板 市价总值（万亿元）52.2 ／ 科创板 市价总值（万亿元）17.0",
         "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null
       },
       "listed_companies_count": {
         "zh": "2314（主板 1702 + 科创板 612）",
+        "en": "2,314 (Main Board 1,702 + STAR Market 612)",
         "sources": [
           {
             "title": "沪市市场运行情况例行发布（2026年8月3日至8月7日）",
@@ -110,7 +111,6 @@
         "quote": "主板 上市公司数 1702 ／ 科创板 上市公司数 612",
         "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "detail": null
       },
@@ -118,6 +118,7 @@
       "global_ranking": null,
       "trading_currency": {
         "zh": "人民币（A股）；美元（B股，规模很小且趋于边缘化）",
+        "en": "Renminbi (A-shares); US dollar (B-shares, very small and increasingly marginal in scale)",
         "sources": [
           {
             "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
@@ -128,7 +129,6 @@
         "quote": "A 股的申报价格最小变动单位为 0.01 元人民币，基金、权证交易为 0.001 元人民币，B 股交易为 0.001 美元。",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "detail": null
       },
@@ -202,44 +202,68 @@
         "enum": null
       },
       "foreign_ownership_limit": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "单个境外投资者持有单个上市公司股份不得超过该公司股份总数的10%；全部境外投资者合计持股不得超过30%；对上市公司战略投资的持股不受此比例限制",
+        "en": "A single foreign investor may not hold more than 10% of a listed company's total shares; all foreign investors combined may not exceed 30%; strategic-investment stakes in listed companies are exempt from this cap",
+        "detail": "适用于合格境外机构投资者（QFII）与人民币合格境外机构投资者（RQFII）及其他境外投资者的境内证券投资，为2020年11月1日起施行的现行版本。",
+        "sources": [
+          {
+            "title": "关于实施《合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法》有关问题的规定",
+            "url": "https://www.sse.com.cn/lawandrules/regulations/csrcannoun/c/10117179/files/9cdbd4b41fc3453e8f8a036719ea8e24.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "七、合格境外投资者及其他境外投资者的境内证券投资，应当遵循下列持股比例限制：（一）单个合格境外投资者或其他境外投资者持有单个上市公司或者挂牌公司的股份，不得超过该公司股份总数的10%；（二）全部合格境外投资者及其他境外投资者持有单个公司A股或者境内挂牌股份的总和，不得超过该公司股份总数的30%。合格境外投资者及其他境外投资者依法对上市公司战略投资的，其战略投资的持股不受前款规定的比例限制。",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "capital_controls": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "境外投资者须通过合格境外投资者（QFII/RQFII）等渠道并委托境内托管人参与境内证券投资，跨境资金流动纳入中国证监会、央行、外汇局联合监管协调机制；人民币资本项下尚未完全可自由兑换",
+        "en": "Foreign investors must access the domestic securities market via qualified-investor channels (QFII/RQFII) through a domestic custodian; cross-border fund flows are subject to coordinated oversight by the CSRC, the People's Bank of China and the State Administration of Foreign Exchange (SAFE); the renminbi is not yet fully convertible under the capital account",
+        "detail": "本条聚焦证券投资渠道下的跨境资金监管框架；具体购汇/结汇额度、锁定期等操作性细节本次未核实到明确条款——现行（2020年11月起施行）版本的规定条文中未见相关限制表述，不排除是此前额度管理已被简化，但未找到明文废止/确认的条款，故 zh/en 均不断言「额度已取消」，只描述已核实到的托管+联合监管机制。",
+        "sources": [
+          {
+            "title": "关于实施《合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法》有关问题的规定",
+            "url": "https://www.sse.com.cn/lawandrules/regulations/csrcannoun/c/10117179/files/9cdbd4b41fc3453e8f8a036719ea8e24.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "中国证监会、人民银行、外汇局就合格境外投资者投资境内证券期货的情况加强监管协调，建立信息共享机制。",
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "disclosure_requirements": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "披露文本以中文为准；同时采用外文文本的，两种文本发生歧义时以中文文本为准。定期报告含年度报告（会计年度结束后4个月内）、半年度报告（上半年结束后2个月内）、季度报告（前3个月/前9个月结束后1个月内），另有重大事项临时报告义务",
+        "en": "Disclosures must be made in Chinese as the authoritative text — if a foreign-language version is also issued and the two differ, the Chinese text prevails. Periodic reports comprise the annual report (within 4 months after fiscal year-end), the semi-annual report (within 2 months after the first half-year ends) and quarterly reports (within 1 month after the first 3/9 months end), in addition to ad hoc disclosure duties for material events",
+        "detail": "出处为《上海证券交易所股票上市规则（2026年4月修订）》第二章「信息披露的基本原则和一般规定」2.2.1条与第五章「定期报告」5.2.1-5.2.2条；与 CSRC 层面《上市公司信息披露管理办法》（第226号令，2025年7月1日起施行，本次仅核实到公告元数据未核实到全文，见 SOURCES.md）并行适用，本条聚焦交易所自律规则层面可摘引的条文。",
+        "sources": [
+          {
+            "title": "上海证券交易所股票上市规则（2026年4月修订）全文，第二章 2.2.1条、第五章 5.2.1-5.2.2条",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "前款所述公告和材料应当采用中文文本。同时采用外文文本的，信息披露义务人应当保证两种文本的内容一致。两种文本发生歧义时，以中文文本为准。／上市公司应当在每个会计年度结束后4个月内披露年度报告，应当在每个会计年度的上半年结束后2个月内披露半年度报告，应当在每个会计年度前3个月、前9个月结束后1个月内披露季度报告。",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "investor_protection": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "设有国务院出资、归口证监会管理的中国证券投资者保护基金有限责任公司，证券公司被撤销/关闭/破产或被行政接管、托管经营时，按规定用基金对债权人（投资者）予以偿付；基金来源包括交易所经手费的一定比例、证券公司按营业收入0.5%-5%缴纳等",
+        "en": "China Securities Investor Protection Fund Corporation Ltd — funded by the State Council and supervised by the CSRC — pays compensation to creditors (investors) out of the fund when a securities company is revoked, closed, goes bankrupt, or is placed under administrative takeover/custodial management; the fund is financed by, among other sources, a share of exchange handling fees and contributions from securities companies set at 0.5%-5% of their operating revenue",
+        "detail": "出处为《证券投资者保护基金管理办法》（2016年修订，中国证监会令第124号），托管于基金公司自身官网 sipf.com.cn；该办法针对的是证券公司风险处置场景下的投资者偿付机制，不同于交易所层面的投资者纠纷调解/教育类工作（后者未在本条核实）。",
+        "sources": [
+          {
+            "title": "证券投资者保护基金管理办法（2016年修订，中国证监会令第124号）",
+            "url": "http://www.sipf.com.cn/tbfg/2020/03/12872.shtml",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "第二条 证券投资者保护基金（以下简称基金）是指按照本办法筹集形成的、在防范和处置证券公司风险中用于保护证券投资者利益的资金。设立国有独资的中国证券投资者保护基金有限责任公司（以下简称基金公司），负责基金的筹集、管理和使用。／第十四条 基金的来源：（一）上海、深圳证券交易所在风险基金分别达到规定的上限后，交易经手费的20%纳入基金；（二）所有在中国境内注册的证券公司，按其营业收入的0.5–5%缴纳基金",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       }
     },
     "products": {
@@ -345,6 +369,7 @@
         },
         "continuous_pm": {
           "zh": "13:00-15:00（普通证券 13:00-14:57 连续竞价 + 14:57-15:00 收盘集合竞价；基金交易 13:00-15:00 全程连续竞价，无独立收盘集合竞价）",
+          "en": "13:00-15:00 (ordinary securities: 13:00-14:57 continuous auction + 14:57-15:00 closing call auction; fund trading: continuous auction throughout 13:00-15:00, with no separate closing call auction)",
           "quote": "9:30 至 11:30、13:00 至 14:57 为连续竞价时间，14:57 至 15:00 为收盘集合竞价时间。基金交易，每个交易日的 9:15 至 9:25 为开盘集合竞价时间，9:30 至 11:30、13:00 至 15:00 为连续竞价时间。",
           "sources": [
             {
@@ -355,12 +380,12 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "en": null,
           "enum": null,
           "detail": null
         },
         "after_market": {
           "zh": "科创板股票另有盘后固定价格交易，15:05-15:30，按当日收盘价成交",
+          "en": "STAR Market stocks additionally have an after-hours fixed-price trading session, 15:05-15:30, executed at that day's closing price",
           "quote": "每个交易日的 15:05 至 15:30 为盘后固定价格交易时间，当日 15:00 仍处于停牌状态的股票不进行盘后固定价格交易。",
           "sources": [
             {
@@ -371,7 +396,6 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "en": null,
           "enum": null,
           "detail": null
         },
@@ -394,6 +418,7 @@
       },
       "holidays_note": {
         "zh": "每周一至周五交易，国家法定假日及本所公告的休市日休市",
+        "en": "Trading runs Monday to Friday; the market is closed on national statutory holidays and other days announced by the Exchange",
         "quote": "本所交易日为每周一至周五。国家法定假日和本所公告的休市日，本所市场休市。",
         "sources": [
           {
@@ -404,7 +429,6 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null
       },
@@ -494,6 +518,7 @@
       },
       "tick_size": {
         "zh": "A股 0.01 元人民币；基金/权证 0.001 元人民币；B股 0.001 美元",
+        "en": "A-shares RMB 0.01; funds/warrants RMB 0.001; B-shares USD 0.001",
         "quote": "A 股的申报价格最小变动单位为 0.01 元人民币，基金、权证交易为 0.001 元人民币，B 股交易为 0.001 美元。",
         "sources": [
           {
@@ -504,12 +529,12 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null
       },
       "board_lot_size": {
         "zh": "买入须为 100 股（份）整数倍；单笔申报最大 100 万股（份）",
+        "en": "Buy orders must be in board lots of 100 shares (units) or integer multiples thereof; the maximum single order size is 1,000,000 shares (units)",
         "quote": "通过竞价交易买入证券的，申报数量应当为 100 股（份）或其整数倍。",
         "sources": [
           {
@@ -520,12 +545,12 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null
       },
       "odd_lot_handling": {
         "zh": "卖出时不足 100 股的余额可一次性申报卖出",
+        "en": "A remaining balance of fewer than 100 shares may be sold in a single sell order when selling",
         "quote": "卖出证券时，余额不足 100 股（份）的部分，应当一次性申报卖出。",
         "sources": [
           {
@@ -536,7 +561,6 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null
       },
@@ -544,6 +568,7 @@
         "type": {
           "enum": "percentage_band",
           "zh": "百分比涨跌幅",
+          "en": "Percentage price-limit band",
           "sources": [
             {
               "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
@@ -553,12 +578,12 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "en": null,
           "detail": null,
           "quote": null
         },
         "main_board": {
           "zh": "±10%",
+          "en": "±10%",
           "quote": "本所对股票、基金交易实行价格涨跌幅限制，涨跌幅限制比例为 10%。",
           "sources": [
             {
@@ -569,12 +594,12 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "en": null,
           "enum": null,
           "detail": null
         },
         "other_boards": {
           "zh": "科创板 ±20%；风险警示（ST/*ST）股票 ±5%；退市整理期股票 ±10%；新股上市后前5个交易日、退市整理期首日、重新上市首日不设涨跌幅限制",
+          "en": "STAR Market ±20%; risk-warning (ST/*ST) stocks ±5%; stocks in the delisting transition period ±10%; no price-limit band applies for the first 5 trading days after a new listing, on the first day of the delisting transition period, or on the first day of resumed listing",
           "detail": "涨跌幅限制价格 = 前收盘价 ×（1±涨跌幅限制比例），四舍五入到最小变动单位。\n",
           "quote": "本所对科创板股票交易实行价格涨跌幅限制，涨跌幅限制比例为 20%。／风险警示股票价格的涨跌幅限制为 5%，退市整理股票价格的涨跌幅限制为 10%。",
           "sources": [
@@ -586,7 +611,6 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "en": null,
           "enum": null
         }
       },
@@ -629,6 +653,7 @@
       },
       "trading_halt_mechanism": {
         "zh": "无涨跌幅限制的股票盘中较开盘价首次涨跌达30%或60%，实施单次10分钟临时停牌；另有因违规嫌疑的特别停牌",
+        "en": "For stocks without a price-limit band, a single 10-minute intraday trading halt is triggered the first time the intraday price rises or falls 30% or 60% from that day's opening price; a separate special halt applies where rule violations are suspected",
         "quote": "本所股票竞价交易出现下列情形之一的，本所实施盘中临时停牌，单次盘中临时停牌时间为 10 分钟：（一）无价格涨跌幅限制的股票盘中交易价格较当日开盘价格首次上涨或下跌达到或超过 30%的；（二）……达到或超过 60%的",
         "sources": [
           {
@@ -639,13 +664,13 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null
       },
       "intraday_reversal": {
         "enum": "t1",
         "zh": "T+1（股票整体）；部分品种（跨境/商品/货币/黄金ETF、权证等）实行 T+0",
+        "en": "T+1 for stocks overall; certain products (cross-border/commodity/currency/gold ETFs, warrants, etc.) trade T+0",
         "detail": "投资者买入证券在交收前不得卖出（T+1），但债券型ETF、货币型ETF、黄金ETF、商品期货ETF、跨境ETF、跨境上市开放式基金、权证等品种实行当日回转交易（T+0）。",
         "quote": "投资者买入的证券，在交收前不得卖出，但实行回转交易的除外。／下列品种实行当日回转交易：（一）债券交易型开放式指数基金；……（七）权证",
         "sources": [
@@ -656,8 +681,7 @@
           }
         ],
         "verified": "2026-08-12",
-        "confidence": "medium",
-        "en": null
+        "confidence": "medium"
       },
       "short_selling": {
         "enum": "restricted_list",
@@ -677,6 +701,7 @@
       },
       "block_trade": {
         "zh": "大宗交易：意向申报 9:30-11:30、13:00-15:30；确认申报另可延至 16:00-17:00；固定价格申报 15:00-15:30",
+        "en": "Block trades: indicative bids accepted 9:30-11:30 and 13:00-15:30; confirmation bids may additionally be accepted 16:00-17:00; fixed-price bids accepted 15:00-15:30",
         "quote": "（一）9:30 至 11:30、13:00 至 15:30 接受意向申报；（二）9:30 至 11:30、13:00 至 15:30、16:00 至 17:00 接……（三）15:00 至 15:30 接受固定价格申报。",
         "sources": [
           {
@@ -687,12 +712,12 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null
       },
       "dark_pool": {
         "zh": "无西方意义上的暗池；大宗交易系统承担大额订单的类似功能",
+        "en": "No dark pool in the Western sense; the block-trade system serves an analogous function for large orders",
         "confidence": "medium",
         "sources": [
           {
@@ -702,7 +727,6 @@
           }
         ],
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null
@@ -730,6 +754,7 @@
       },
       "connect_schemes": {
         "zh": "沪港通（与港交所互联互通，2014年11月开通）",
+        "en": "Shanghai-Hong Kong Stock Connect (interconnection with HKEX, launched November 2014)",
         "confidence": "low",
         "detail": "开通日期等细节为一般知识，未在本次会话重新核实原始公告，留待与 hk-hkex 数据交叉核对时补充来源。",
         "sources": [
@@ -740,7 +765,6 @@
           }
         ],
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "quote": null
       },
@@ -794,6 +818,7 @@
       "review_system": {
         "enum": "registration",
         "zh": "注册制（主板与科创板均已实行注册制）",
+        "en": "Registration-based system (both the Main Board and the STAR Market now operate under the registration-based system)",
         "detail": "2023年全面注册制改革后，沪深北交易所主板与科创板/创业板/北交所均实行注册制，取代此前的核准制。",
         "sources": [
           {
@@ -804,7 +829,6 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-17",
-        "en": null,
         "quote": null
       },
       "listing_process_duration": {
@@ -908,28 +932,24 @@
         "quote": null
       },
       "delisting_process": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "本所上市审核委员会审议后，本所决定是否终止上市；决定作出后2个交易日内通知公司并公告，同时报中国证监会备案；强制终止上市后进入退市整理期（触及交易类退市情形的除外）；决定公告之日后5个交易日内予以摘牌；摘牌后须聘请主办券商安排转入退市板块，保证摘牌之日起45个交易日内可转让",
+        "en": "The Exchange's Listing Review Committee deliberates and the Exchange then decides whether to terminate listing; within 2 trading days of the decision it notifies the company, announces publicly, and files with the CSRC; mandatory delisting (except trading-based delisting) is followed by a delisting transition period; the stock is delisted within 5 trading days after the decision is announced; after delisting, a sponsor securities firm must be engaged to arrange the stock's transfer to the delisting board, ensuring it can be traded within 45 trading days of delisting",
+        "detail": "出处为《上海证券交易所股票上市规则（2026年4月修订）》第九章「退市与风险警示」9.1.10/9.1.13/9.1.14/9.1.15/9.2.9条；与 delisting_transition_period（整理期时长）、post_delisting_venue（摘牌后去向）互为补充，避免重复摘引同一章节内容。",
         "sources": [
           {
-            "title": "上海证券交易所股票上市规则（2026年4月修订）全文，第三章第一节 3.1.1-3.1.6（主板上市条件）",
+            "title": "上海证券交易所股票上市规则（2026年4月修订）全文，第九章 9.1.10/9.1.13/9.1.14/9.1.15/9.2.9条",
             "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "上海证券交易所科创板股票上市规则（2026年4月修订）全文，第二章第一节 2.1.1-2.1.4（科创板上市条件）",
-            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/10816592/files/8d80222543f64159ac5d177b7aace71c.docx",
-            "accessed": "2026-08-17"
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "9.1.10 本所上市审核委员会（以下简称上市委员会）对上市公司股票终止上市事宜进行审议，作出独立的专业判断并形成审议意见。本所根据上市委员会的意见，作出是否终止股票上市的决定。／9.1.13 本所作出上市公司股票终止上市决定的，在2个交易日内通知公司并披露相关公告，同时报中国证监会备案。／9.1.14 上市公司股票被本所强制终止上市后，进入退市整理期，因触及交易类退市情形终止上市的除外。／9.1.15 上市公司股票被强制终止上市后，应当聘请具有主办券商业务资格的证券公司，在本所作出终止其股票上市决定后立即安排股票转入全国中小企业股份转让系统等证券交易场所进行股份转让相关事宜，保证公司股票在摘牌之日起45个交易日内可以转让。／9.2.9 本所在公告上市公司股票或者存托凭证终止上市决定之日后5个交易日内对其予以摘牌。",
+        "confidence": "high",
         "verified": "2026-08-17",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "delisting_transition_period": {
         "zh": "交易类退市已取消退市整理期设置（2024年修订）；财务类等其他类型是否保留整理期未逐条核实",
+        "en": "The delisting transition period has been eliminated for trading-based delisting (per the 2024 revision); whether it is retained for other categories such as financial-based delisting was not verified item by item",
         "sources": [
           {
             "title": "上交所：拓宽重大违法强制退市适用范围 新增三种规范类退市情形（财联社）",
@@ -939,31 +959,25 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-17",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null
       },
       "post_delisting_venue": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "摘牌后转入退市板块挂牌转让（依托全国中小企业股份转让系统），由主办券商办理转入手续",
+        "en": "After delisting, shares are transferred to the delisting board for over-the-counter trading (hosted on the National Equities Exchange and Quotations), with a sponsor securities firm handling the transfer",
+        "detail": "《关于退市公司进入退市板块挂牌转让的实施办法》由上交所、深交所、北交所、全国股转系统、中国结算五方联合制定，2022年4月29日发布施行，公告页标注「现行有效」；具体挂牌交易规则（如涨跌幅、投资者适当性）本次未逐条核实。",
         "sources": [
           {
-            "title": "上海证券交易所股票上市规则（2026年4月修订）全文，第三章第一节 3.1.1-3.1.6（主板上市条件）",
-            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "上海证券交易所科创板股票上市规则（2026年4月修订）全文，第二章第一节 2.1.1-2.1.4（科创板上市条件）",
-            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/10816592/files/8d80222543f64159ac5d177b7aace71c.docx",
-            "accessed": "2026-08-17"
+            "title": "关于发布《关于退市公司进入退市板块挂牌转让的实施办法》的通知（股转系统公告〔2022〕166号）",
+            "url": "http://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/c_20250516_10779154.shtml",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "为了适应注册制改革和常态化退市的要求，顺畅退市公司进入退市板块挂牌转让，完善退市公司管理……上海证券交易所、深圳证券交易所、北京证券交易所（以下统称交易所）、全国中小企业股份转让系统有限责任公司和中国证券登记结算有限责任公司联合制定了《关于退市公司进入退市板块挂牌转让的实施办法》（以下简称《实施办法》）。经中国证监会批准，现予以发布，自发布之日起施行。",
+        "confidence": "high",
         "verified": "2026-08-17",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       }
     },
     "indices": {
@@ -1076,6 +1090,7 @@
       "delivery_method": {
         "enum": "na",
         "zh": "不适用（现货市场，无实物/现金交割概念）",
+        "en": "Not applicable (a cash market; no physical/cash delivery concept)",
         "detail": "推断依据：products 章节所列品类（股票/基金/权证/存托凭证/债券/REITs）均为现货，交易规则第二章第三节未列出期货、期权等衍生品种。",
         "sources": [
           {
@@ -1086,7 +1101,6 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "quote": null
       },
       "last_trading_day_rule": {
@@ -1100,14 +1114,25 @@
         "sources": null
       },
       "default_management": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "结算参与人资金交收违约时，中国结算按顺序动用：违约方担保物中的现金部分→证券结算保证金中违约方缴纳部分→证券结算保证金中其他参与人缴纳及公司划拨部分；仍不足的可动用证券结算风险基金、商业银行等机构授信支持等；证券交收违约的可用违约方提交的同种证券或以专用清偿账户资金买入的同种证券冲抵；违约方逾期未补足的，公司可处分其担保物、回购质押券及专用清偿账户内资产以补足欠付，并继续向其追偿",
+        "en": "When a settlement participant defaults on a cash settlement obligation, ChinaClear draws on, in order: the cash portion of the defaulter's collateral, then the defaulter's own contribution to the securities settlement deposit, then other participants' contributions and the company's allocation within that deposit; if still insufficient, it may draw on the Securities Settlement Risk Fund or commercial-bank credit facilities; for a securities settlement default, it may offset using identical securities submitted by the defaulter or bought with funds in a dedicated clearing account; if the defaulter fails to make up the shortfall within the required period, the company may dispose of the defaulter's collateral, repo-pledged securities and dedicated-account assets to cover the shortfall, and continues to pursue recovery from the defaulter",
+        "detail": "出处为《证券登记结算管理办法》（中国证监会令第29号）第七章「风险防范和交收违约处理」第65-73条；《证券结算风险基金管理办法》（证监会、财政部联合发布，托管于财政部官网）进一步规定风险基金本身用于垫付/弥补违约交收、技术故障、操作失误损失，两份规章配合构成完整的违约处置与风险共担体系，本条 quote 仅摘自第一份文件，第二份作为背景补充列入 sources。",
+        "sources": [
+          {
+            "title": "证券登记结算管理办法（中国证监会令第29号）第七章第65-73条",
+            "url": "http://www.sse.com.cn/lawandrules/regulations/csrcorder/c/10116597/files/f2bae870b188483eae343f735c141cf6.pdf",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "证券结算风险基金管理办法",
+            "url": "http://m.mof.gov.cn/zcfb/202511/P020251107701444228151.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "第六十八条 结算参与人发生资金交收违约的，证券登记结算机构应当按照下列顺序动用担保物和证券结算保证金，完成与对手方结算参与人的资金交收：（一）违约结算参与人的担保物中的现金部分；（二）证券结算保证金中违约结算参与人交纳的部分；（三）证券结算保证金中其他结算参与人交纳的及证券登记结算机构划拨的部分。按前款处理仍不能弥补结算参与人资金交收违约的，证券登记结算机构还可以动用下列资金：（一）证券结算风险基金；（二）商业银行等机构的授信支持；（三）其他资金。",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "derivatives": {
         "initial_margin_practice": null,
@@ -1129,14 +1154,20 @@
         "sources": null
       },
       "account_opening_requirements": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "符合法律、行政法规及国务院证券监督管理机构、中国结算有关规定的自然人、法人、合伙企业及其他投资者可申请开立证券账户；账户体系为「一码通账户」统驭下的A股账户、B股账户、股转系统账户、开放式/封闭式基金账户等子账户；投资者须以本人名义开户，不得冒用他人名义或使用虚假证件",
+        "en": "Natural persons, legal entities, partnerships and other investors who meet the requirements of laws, administrative regulations and the rules of the State Council securities regulator and ChinaClear may apply to open a securities account; the account structure consists of a unified \"one-code\" master account governing sub-accounts such as the A-share account, B-share account, NEEQ (share-transfer system) account, and open-ended/closed-ended fund accounts; investors must open accounts under their own name, and impersonation or use of fraudulent identification documents is prohibited",
+        "detail": "出处为《中国证券登记结算有限责任公司证券账户管理规则》第三章「证券账户业务」第17/19/23条；具体年龄门槛（如是否满18周岁）等更细颗粒度要求本次未在该份文件中核实到，可能载于配套的《证券账户业务指南》，本次未抓取，如需补充见 OPEN-QUESTIONS。科创板等特定板块另有更高的投资者适当性门槛，见 suitability_management 字段（该字段本身尚未核实，留空）。",
+        "sources": [
+          {
+            "title": "中国证券登记结算有限责任公司证券账户管理规则（修订通知附件）第三章第17/19/23条",
+            "url": "http://www.chinaclear.cn/zdjs/editor_file/20141008102818122.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "第十七条 符合法律、行政法规、国务院证券监督管理机构及本公司有关规定的自然人、法人、合伙企业以及其他投资者，可以申请开立证券账户。／第十九条 子账户包括人民币普通股票账户（以下称为A股账户）、人民币特种股票账户（以下称为B股账户）、全国中小企业股份转让系统账户（以下简称股转系统账户）、封闭式基金账户、开放式基金账户以及本公司根据业务需要设立的其他证券账户。／第二十三条 投资者应当以本人名义申请开立证券账户，不得冒用他人名义或使用虚假证件开立证券账户。",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "suitability_management": {
         "zh": "",
@@ -1160,65 +1191,105 @@
       },
       "membership_structure": {
         "zh": "会员制，会员为证券公司等持牌机构",
+        "en": "Member-owned system; members are licensed institutions such as securities companies",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
         "sources": null
       },
       "broker_landscape": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "全国持牌证券公司共150家（截至2026年6月，中国证监会《证券公司名录》），符合会员条件即可申请成为本所会员",
+        "en": "150 licensed securities companies nationwide (as of June 2026, per the CSRC's official Securities Company Directory), any of which may apply for Exchange membership upon meeting the membership criteria",
+        "detail": "「150家」为对官方名录XLS数据行逐行清点得出（表头1行+150条公司记录），不是名录原文里以文字形式直接陈述的汇总数字，属于对官方一手数据的直接计数而非转述，故仍标 high；行业集中度、头部券商市场份额等定性描述本次未附具体数据来源，未纳入本字段正式表述。",
+        "sources": [
+          {
+            "title": "证券公司名录（2026年6月）",
+            "url": "http://www.csrc.gov.cn/csrc/c101900/c1029659/1029659/files/证券公司名录（2026年6月）.xls",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "上海证券交易所会员制介绍",
+            "url": "https://biz.sse.com.cn/sseportal/ps/zhs/sczn/hyzq.jsp",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "quote": "序号／公司名称／辖区（注册地）（表头行）；1／爱建证券有限责任公司／上海（首条数据行）；……；150／国信证券资产管理有限公司／深圳（末条数据行，第150条）",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       }
     },
     "infrastructure": {
       "market_data_levels": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "分 Level-1（基本行情）与 Level-2（深度行情）两档，均由上证所信息网络有限公司统一经营发布",
+        "en": "Two tiers — Level-1 (basic market data) and Level-2 (in-depth market data) — both distributed exclusively by SSE Infonet Co., Ltd.",
+        "detail": "上证所信息网络有限公司是上海证券交易所出资设立的全资子公司，是SSE证券信息境内外经营的独家全权机构；境外客户实时行情另由其香港子公司中国投资信息有限公司负责发售。",
+        "sources": [
+          {
+            "title": "上证所Level-1行情产品说明",
+            "url": "https://www.sseinfo.com/services/assortment/level1/",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "上证所信息网络有限公司公司介绍",
+            "url": "https://www.sseinfo.com/aboutus/introduction/",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "上证所Level-1行情是上海证券交易所基本行情，指根据《上海证券交易所交易规则》规定发布的即时行情信息……／目前提供上证所Level-1及Level-2行情两种行情信息服务。",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "data_latency": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "上证所官方行情产品（Level-1/Level-2）为「即时行情信息」（实时行情），通过持牌信息商/数据用户分发；本次未找到官方公开的延时行情产品说明",
+        "en": "The Exchange's official market-data products (Level-1/Level-2) are described as \"instant\" (i.e. real-time) market data, distributed via licensed information vendors and data users; no officially published delayed-data product was found this round",
+        "detail": "「即时行情信息」为上证所信息网络官方原文表述；未找到官方公开的「延时行情」（如15分钟延时）产品说明，故不在 zh/en 中断言存在延时层级，避免无源臆测。",
+        "sources": [
+          {
+            "title": "上证所Level-1行情产品说明",
+            "url": "https://www.sseinfo.com/services/assortment/level1/",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "上证所Level-1行情是上海证券交易所基本行情，指根据《上海证券交易所交易规则》规定发布的即时行情信息；数据格式包括基于BINARY、STEP等多协议的接口。",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "data_pricing_model": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "行情数据按许可经营模式收费，由上证所信息网络有限公司统一制定并发布价目表（如《Level-1行情许可经营价格表》《Level-2行情展示许可价目表》等），区分展示许可与非展示数据许可等类别",
+        "en": "Market data is licensed on a paid basis, with SSE Infonet Co., Ltd. setting and publishing unified price lists (e.g. the Level-1 Market Data Licensing Price List and the Level-2 Display Licence Price List), distinguishing between display-licence and non-display data-licence categories",
+        "detail": "本次仅确认收费模式为「许可经营」并核实存在多份正式价目表文件标题，未逐项摘引具体单价数字（各价目表本身为独立PDF公告，未逐份展开抓取内页数值）。",
+        "sources": [
+          {
+            "title": "上证所信息网络有限公司行情服务首页（产品价目表列表）",
+            "url": "https://www.sseinfo.com/services/assortment/market/",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "上证行情服务是上证所信息网络有限公司为信息服务商或其投资者提供的信息服务及许可管理，涵盖上证所Level-1行情、上证所Level-2行情、智能数据服务、指数编制许可等内容。",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "historical_data_availability": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "上证所信息网络提供付费历史行情数据产品，涵盖Level-1/Level-2行情快照、逐笔成交、日K线、分钟K线、集合竞价等，按证券打包在文件中提供，另有证券基本信息文件",
+        "en": "SSE Infonet offers paid historical market-data products covering Level-1/Level-2 quote snapshots, tick-by-tick trade records, daily and minute K-line bars, and call-auction data, packaged by security into data files, alongside a basic securities information file",
+        "sources": [
+          {
+            "title": "上证所信息网络有限公司行情历史数据产品说明",
+            "url": "https://www.sseinfo.com/services/assortment/historical/",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "行情历史数据产品主要提供与证券行情相关的历史数据服务，从市场划分来看，包括上证所竞价系统的上证所Level-1行情和上证所Level-2行情、衍生品系统的股票期权等；从数据内容来看，包括快照数据、逐笔成交、日K线、分钟K线和集合竞价，同时还提供证券基本信息文件。",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "trading_system_name": {
         "zh": "",
@@ -1232,28 +1303,35 @@
       },
       "access_methods": {
         "zh": "会员通过交易单元接入；行情与交易数据另有第三方数据商分发",
+        "en": "Members connect via trading units; market and trading data are also distributed by third-party data vendors",
         "confidence": "low",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
         "sources": null
       },
       "major_outage_history": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "2024年9月27日，本所股票竞价交易出现成交确认缓慢的异常情况并影响交易，经处置于11点13分起逐步恢复交易，本所随后发布公告致歉",
+        "en": "On 27 September 2024, the Exchange's equity call-auction trading experienced slow trade confirmations that affected trading; the issue was resolved and trading gradually normalised from 11:13, and the Exchange subsequently issued a public apology",
+        "detail": "本次仅核实到2024-09-27这一起有官方公告存档的事件，历史上是否还有其他重大系统故障（如更早年份）未逐条排查，如需完整故障史见 OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "关于本所股票竞价交易异常情况的公告（上证公告〔2024〕32号）",
+            "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20240927_10762482.shtml",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "今日开盘后，本所股票竞价交易出现成交确认缓慢的异常情况，并导致交易受到影响。经处置，股票竞价交易于11点13分起逐步恢复。对于该异常情况的发生，本所深表歉意。",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       }
     },
     "costs": {
       "commission_structure": {
         "zh": "券商佣金，费率市场化协商，无统一标准",
+        "en": "Brokerage commission, with rates negotiated on a market basis; no uniform standard",
         "quote": "投资者买卖证券成交的，应当按规定向代其进行证券买卖的会员交纳佣金。",
         "sources": [
           {
@@ -1264,12 +1342,12 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "detail": null
       },
       "exchange_fees": {
         "zh": "交易经手费等，由交易参与人向交易所缴纳",
+        "en": "Trading handling fees, etc., paid by trading participants to the Exchange",
         "quote": "交易参与人应当按规定向本所交纳交易经手费及其他费用；会员还应当按规定向本所交纳会员费。",
         "sources": [
           {
@@ -1280,32 +1358,44 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "detail": null
       },
       "clearing_fees": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "中国结算收取的过户费，2022年4月29日起沪深市场A股统一按成交金额0.01‰双向收取（此前为0.02‰）",
+        "en": "The share-transfer fee charged by ChinaClear; effective 29 April 2022, it was unified at 0.01‰ of transaction value, charged on both the buy and sell sides, for Shanghai/Shenzhen A-shares (previously 0.02‰)",
+        "detail": "信息来自第三方财经媒体（财联社）对中国结算通知的转述，非中国结算官方公告原页，confidence 标 medium。",
+        "sources": [
+          {
+            "title": "中国结算：4月29日起将股票交易过户费总体下调50%（财联社）",
+            "url": "https://www.cls.cn/detail/1001120",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "财联社4月28日讯，中国证券登记结算有限责任公司发布通知，4月29日起，将股票交易过户费总体下调50%，即股票交易过户费由现行沪深市场A股按照成交金额0.02‰、北京市场A股和挂牌公司股份按照成交金额0.025‰双向收取，统一下调为按照成交金额0.01‰双向收取。",
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "regulatory_fees": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "存在独立于交易所经手费之外的「证券交易监管费」，由中国证监会向交易所收取（2012年起对股票按年交易额0.02‰收取，基金/债券免收）；该费率是否为现行值本次未核实到更新的官方文件",
+        "en": "An independent \"securities trading regulatory fee\" exists on top of the Exchange's own handling fee, collected by the CSRC from the exchanges (set in 2012 at 0.02‰ of annual trading value for stocks, with funds and bonds exempt); whether this rate remains current was not confirmed against a more recent official document this round",
+        "detail": "出处为国家发展改革委、财政部联合发布的《关于降低证券、期货市场监管费收费标准等问题的通知》（发改价格〔2012〕2119号），托管于财政部官网。该通知明确「有效期3年」（至2015年），本次未找到后续重新审批/延续的官方公告，故 confidence 标 medium 而非 high——不确定现行费率是否仍为0.02‰，这不属于「没有独立监管费概念」的情形，而是「存在但现行费率未再核实」。",
+        "sources": [
+          {
+            "title": "关于降低证券、期货市场监管费收费标准等问题的通知（发改价格〔2012〕2119号）",
+            "url": "https://www.mof.gov.cn/zhengwuxinxi/zhengcefabu/201207/t20120714_666369.htm",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "一、你会向上海、深圳证券交易所收取的证券交易监管费收费标准，对股票由按年交易额的0.04‰调整为按年交易额的0.02‰收取；对证券投资基金和债券免收证券交易监管费。",
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "stamp_duty": {
         "zh": "0.05%（单边，卖方缴纳）",
+        "en": "0.05% (one-sided, paid by the seller)",
         "detail": "2023年8月28日起，证券交易印花税由此前的单边1‰减半下调至单边0.5‰，仅对卖方征收。\n信息来自新闻媒体对财政部、税务总局公告的转载，非财政部官方公告原页，confidence 标 medium。\n",
         "sources": [
           {
@@ -1317,7 +1407,6 @@
         "quote": "据财政部、税务总局公告，为活跃资本市场、提振投资者信心，自2023年8月28日起，证券交易印花税实施减半征收。……证券交易印花税由单边征收1‰下调至0.5‰",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null
       },
       "financial_transaction_tax": {
@@ -1351,22 +1440,28 @@
         "sources": null
       },
       "implicit_costs_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "隐性成本主要来自买卖价差与市场冲击成本；A股最小价格变动单位为0.01元人民币，叠加百分比涨跌幅限制（主板±10%、科创板±20%）在极端行情下可能加剧流动性缺口、扩大有效价差",
+        "en": "Implicit costs stem mainly from the bid-ask spread and market-impact cost; the RMB 0.01 minimum tick size for A-shares, combined with the percentage price-limit bands (±10% on the Main Board, ±20% on the STAR Market), can widen effective spreads and worsen liquidity gaps during extreme price moves",
+        "detail": "本条为综合 market_structure.tick_size 与 market_structure.price_limits（均已有独立来源）的分析性归纳，并非某一份文档专门论述「隐性成本」这一概念本身，故 confidence 标 medium。",
+        "sources": [
+          {
+            "title": "上海证券交易所交易规则（2023年修订），经 mgzq.com 镜像获取，见 SOURCES.md 说明",
+            "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "risks": {
       "fx_risk_note": {
         "zh": "人民币非完全可自由兑换，外资参与需通过额度管理渠道，存在换汇与资金进出限制",
+        "en": "The renminbi is not fully freely convertible; foreign participation requires quota-managed channels, and restrictions exist on currency conversion and cross-border fund movement",
         "confidence": "low",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1375,22 +1470,28 @@
       "political_risk_note": {
         "zh": "",
         "confidence": "low",
+        "detail": "地缘政治/外国制裁与出口管制风险（如外国政府对部分沪市上市公司的投资/融资限制清单）是明显相关的风险维度，但本次会话未能实际 curl 到任何一手官方原始文件（美方监管机构官网或中方对应回应文件）存入 .cache/，此前一度掌握的相关线索仅来自 WebSearch 摘要、未经落地验证，按 CLAUDE.md 二第1/4条不采纳、不凭摘要填写。已记入 PROJECT/OPEN-QUESTIONS.md。",
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
-        "detail": null,
         "quote": null,
         "sources": null
       },
       "liquidity_risk_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "个股层面：被实施风险警示（ST/*ST）或处于退市整理期的股票流动性通常显著下降；交易类强制退市本身设有成交量门槛（如仅发行A股的公司连续90个交易日累计成交量低于375万股，即应披露终止上市风险提示），成交低迷本身就是触发强制退市的情形之一，反映流动性枯竭与强制退市机制的直接联动",
+        "en": "At the individual-stock level, liquidity typically drops sharply once a stock is placed under risk warning (ST/*ST) or enters the delisting transition period; trading-based mandatory delisting itself uses a turnover threshold (e.g. for a company that has issued only A-shares, cumulative trading volume below 3.75 million shares over 90 consecutive trading days triggers a disclosure of possible delisting risk) — illustrating that depressed trading volume is itself one of the triggers for mandatory delisting",
+        "detail": "成交量触发退市风险提示的具体门槛出处为《上海证券交易所股票上市规则（2026年4月修订）》第九章第二节「交易类强制退市」9.2.2条，与 listing.delisting_conditions（退市条件总览，第三方来源）互补；本条聚焦交易类退市中与流动性直接相关的量化触发线，直接引自交易所规则原文。",
+        "sources": [
+          {
+            "title": "上海证券交易所股票上市规则（2026年4月修订）全文，第九章第二节 9.2.2条",
+            "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "在本所仅发行A股股票的上市公司，出现连续90个交易日（不包含公司股票停牌日）通过本所交易系统实现的累计股票成交量低于375万股的，应当在次一交易日披露公司股票可能被终止上市的风险提示公告",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "regulatory_change_risk_note": {
         "zh": "",
