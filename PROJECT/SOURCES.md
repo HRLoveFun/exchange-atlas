@@ -307,6 +307,7 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Nasdaq TotalView（行情数据产品，Level 1/2/逐笔深度）: https://www.nasdaq.com/solutions/data/equities/nasdaq-totalview（HTTP 200，344KB）
   - About Matching Engines（撮合引擎技术说明，未点名 Nasdaq 自身系统版本号）: https://www.nasdaq.com/solutions/fintech/marketplace-technology/about-matching-engines（HTTP 200，205KB）
   - Nasdaq Composite 指数产品页: https://www.nasdaq.com/solutions/global-indexes/nasdaq-composite（HTTP 200，306KB）
+  - Historical Data（2026-08-24新增，`infrastructure.historical_data_availability` 出处，免费公开历史行情产品说明"最多10年"表述）: https://www.nasdaq.com/market-activity/quotes/historical（HTTP 200，约38KB）
   - Nasdaq Celebrates 50 Years of Innovation（新闻稿，1971年成立、"世界首个全电子报价系统"）: https://www.nasdaq.com/press-release/nasdaq-celebrates-50-years-of-innovation-2021-02-08（HTTP 200，175KB）
   - Nasdaq CEOs Recall 50 Years of Innovation（历史访谈文章，脱离NASD独立、2005年NDAQ挂牌细节）: https://www.nasdaq.com/articles/nasdaq-ceos-recall-50-years-of-innovation（HTTP 200，194KB）
   - About Nordic Exchanges（欧洲子公司沿革，Nasdaq Stockholm/Copenhagen/Helsinki/Iceland/Baltic 各交易所并购时间线，group_id 依据）: https://www.nasdaq.com/european-markets/about-nordic-exchanges（HTTP 200，334KB）
@@ -322,6 +323,8 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Market Maker Process（含"清算机构请致电 NSCC"字样，ccp_name 的官方原文依据）: https://www.nasdaqtrader.com/trader.aspx?id=marketmakerprocess（HTTP 200，55KB）
   - Regulation SHO: https://www.nasdaqtrader.com/Trader.aspx?id=regsho（HTTP 200，53KB）
   - Short Sale Circuit Breaker（Rule 201 报升规则）: https://www.nasdaqtrader.com/trader.aspx?id=ShortSaleCircuitBreaker（HTTP 200，47KB）
+  - Equity Trader Alert #2026-18: Regulatory Transaction Fee Rate Adjustment per SEC Section 31（2026-08-24新增，`costs.regulatory_fees` 出处，SEC Section 31费率具体数字$20.60/百万美元）: https://www.nasdaqtrader.com/TraderNews.aspx?id=ETA2026-18（HTTP 200，约60KB）
+  - Nasdaq US Equities Price List 2025（PDF，2026-08-24新增，`infrastructure.data_pricing_model` 出处，Professional/Non-Professional分层订阅费率）: https://www.nasdaqtrader.com/content/ProductsServices/PriceList/Nasdaq_US_Equities_Price_List_2025.pdf（HTTP 200，约250KB）
 - `lseg.com`（伦敦证券交易所集团旗下 FTSE Russell，第三方指数编制商） | 官方（第三方指数编制商官网） | en | curl 常规 UA 200 | 用于确认罗素2000指数（ADR-018 引入的 `scope: market` 跨交易所市场基准指数样本，成分股横跨 `us-nyse`/`us-nasdaq` 两所，不专属单一交易所）编制方为 FTSE Russell、指数定位与覆盖范围
   - Russell 2000® Index: https://www.lseg.com/en/ftse-russell/indices/russell-2000-index（HTTP 200，202KB）
 - `spglobal.com`（S&P Dow Jones Indices，标普500指数编制方） | 官方（第三方指数编制商官网） | — | **全站被拦，任何路径（含首页、Index Finder、方法论 PDF）均返回 403**，换 UA/加 Accept-Language 头无效，与 `sec.gov`/`finra.org`/`spglobal.com` 同一类边缘防护拦截 | 无法直接抓取标普500官方页面确认编制方法论细节；`data/exchanges/us-nyse.yml`/`us-nasdaq.yml` 里的标普500条目按 ADR-018 只填最简字段（`id`/`name_zh`/`name_native`/`compiler`/`flagship`），`compiler: sp_dj` 与官方名称改用下方 `en.wikipedia.org` 交叉确认，未使用 WebSearch 摘要直接代入
@@ -331,6 +334,7 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `listingcenter.nasdaq.com` | 官方（上市规则站） | en | ⚠️ Rulebook 交互式条文页（`/rulebook/nasdaq/rules/...`）多次尝试均返回 403（含加 12 秒延时重试），疑似该子路径有独立 WAF，非限流性质（NYSE/JPX/Eurex 经验里的限流是"连续请求后开始 403"，这里是首次请求即 403，且延时重试无效）；但根目录下的静态 PDF 资源（`/assets/...`）可以正常 curl 到，200 | Initial Listing Guide + Continued Listing Guide 两份 PDF 已覆盖三档上市标准的初始与持续量化门槛，弥补了 Rulebook 页面抓不到的缺口，故未继续尝试破解 Rulebook 反爬
   - Nasdaq Initial Listing Guide（PDF，三档上市标准 Global Select/Global/Capital Market 财务与流动性量化门槛）: https://listingcenter.nasdaq.com/assets/initialguide.pdf（HTTP 200，559KB）
   - Nasdaq Continued Listing Guide（PDF，持续上市标准，含 $1 最低股价等退市触发门槛）: https://listingcenter.nasdaq.com/assets/continuedguide.pdf（HTTP 200，394KB）
+  - Nasdaq Listing and Hearing Review Council Charter（PDF，2026-08-24新增，`listing.delisting_process` 出处，上市与听证复核理事会治理章程，Panel→Council 二级上诉结构佐证）: https://listingcenter.nasdaq.com/assets/NLHRC_Charter.pdf（HTTP 200，约112KB）
 - `indexes.nasdaqomx.com` | 官方（指数编制业务站，Nasdaq Inc 旗下） | en | curl 常规 UA 200 | Nasdaq Index Methodology Guide，覆盖治理流程与通用方法论；⚠️ 未含 Nasdaq Composite/Nasdaq-100 各自的基日/基点等逐指数具体参数，那部分需要另外的逐指数方法论文件，本次未找到
   - Nasdaq Index Methodology Guide（PDF）: https://indexes.nasdaqomx.com/docs/Nasdaq_Index_Methodology_Guide.pdf（HTTP 200，249KB）
 - `dtcc.com` | 监管/清算基础设施 | en | ⚠️ HTML 内容子页（如 accelerated-settlement、understanding-settlement 等路径）持续 403，与 `us-nyse` 一节记录的情况一致；**但 2026-08-24 补全空缺字段时发现其静态资产托管路径（`~/media/Files/Downloads/...`）不受此拦截影响**——该路径本质是文件服务器直出（很可能走不同的 CDN/源站配置），不经过拦截 HTML 页面的那层 WAF/反爬规则，同类静态 PDF 资产链接理论上都值得一试，不必因为该域名主站被拦就放弃全部路径 | `clearing.csd_name`（DTC 托管机构）仍留空（HTML 内容页确实无法访问），但 `costs.clearing_fees` 已从下方新增的官方 NSCC 费率指南 PDF 找到具体费率佐证
@@ -353,8 +357,9 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `irs.gov`（美国国税局，2026-08-24 新增登记） | 官方（税务机关） | en | curl 常规 UA 200，全程未见反爬 | `costs.dividend_withholding_tax`/`costs.capital_gains_tax` 出处；⚠️ 部分栏目首页（如 `/individuals/international-taxpayers/nonresident-aliens`）本身是导航壳、正文很少，需要定位到更具体的专题页（如 `/nra-withholding`、`/taxtopics/tc409`）才有实质条文
   - NRA withholding: https://www.irs.gov/individuals/international-taxpayers/nra-withholding（HTTP 200）
   - Topic no. 409, Capital gains and losses: https://www.irs.gov/taxtopics/tc409（HTTP 200）
-- `home.treasury.gov` / `ofac.treasury.gov`（美国财政部及其海外资产控制办公室，2026-08-24 新增登记） | 官方（监管机构） | en | curl 常规 UA 200 | `regulation.foreign_ownership_limit`/`regulation.capital_controls` 出处，用于确认CFIUS国家安全审查与OFAC定向制裁两套机制的官方定性；⚠️ 两字段最终仍以"结构性推论"而非"逐字否定性表述"入库，因防幻觉铁律不能凭沉默/未提及来证明"不存在"，详见字段 detail
+- `home.treasury.gov`（美国财政部，2026-08-24 us-nasdaq 一节补充登记；域名本身已在本文件其他章节注册过，这里补记 us-nasdaq 专属用途） | 官方（监管机构） | en | curl 常规 UA 200 | `regulation.foreign_ownership_limit` 出处，用于确认CFIUS国家安全审查机制的官方定性；⚠️ 该字段最终仍以"结构性推论"而非"逐字否定性表述"入库，因防幻觉铁律不能凭沉默/未提及来证明"不存在"，详见字段 detail
   - Committee on Foreign Investment in the United States (CFIUS): https://home.treasury.gov/policy-issues/international/the-committee-on-foreign-investment-in-the-united-states-cfius（HTTP 200）
+- `ofac.treasury.gov`（美国财政部海外资产控制办公室，2026-08-24 新增登记；⚠️ SOURCES_DOMAIN_RE 每行只捕获开头第一个反引号 token，与 `home.treasury.gov` 不可写在同一行，须各自单独开一行——见 SKILL.md 已知坑） | 官方（监管机构） | en | curl 常规 UA 200 | `regulation.capital_controls` 出处，用于确认OFAC定向制裁（而非普遍性资本管制）机制的官方定性；⚠️ 该字段同样以"结构性推论"入库，详见字段 detail
   - About OFAC: https://ofac.treasury.gov/about-ofac（HTTP 200）
   - OFAC FAQ 1055（俄罗斯相关定向制裁示例）: https://ofac.treasury.gov/faqs/1055（HTTP 200）
 - `sifma.org`（美国证券业与金融市场协会，2026-08-24 新增登记） | 第三方（行业自律性贸易协会，按CLAUDE.md二第3条confidence上限medium） | en | curl 常规 UA 200 | `participants.investor_structure`/`participants.broker_landscape` 出处，年度《资本市场年鉴》汇编美联储家庭金融调查与FINRA经纪商注册统计
