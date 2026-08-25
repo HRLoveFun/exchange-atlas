@@ -71,6 +71,7 @@ overview:
   self_listed:
     enum: "no"
     zh: "否"
+    en: "No"
     detail: "会员制法人单位，自身未上市。"
     sources:
       - title: 本所简介
@@ -94,6 +95,7 @@ overview:
 
   global_ranking:
     zh: "2023年深市股票融资金额、成交金额、股票市价总值分别位列全球第2、第3、第6位（深交所官网现行表述，未逐年更新到最新数据）"
+    en: "In 2023, the Shenzhen market ranked 2nd globally by equity financing amount, 3rd by trading value, and 6th by market capitalization (per SZSE's own current website copy, which has not been updated to a more recent year's figures)"
     detail: "官网本所简介页面这段表述截至本次抓取（2026-08-14）仍在使用2023年的排名数据，未见更新，如实按原文记录。"
     sources:
       - title: 本所简介
@@ -167,22 +169,51 @@ regulation:
     quote: "为规范证券市场交易行为，维护证券市场秩序，保护投资者合法权益，根据《中华人民共和国证券法》《证券交易所管理办法》等法律、行政法规、部门规章、规范性文件（以下统称法律法规）以及《深圳证券交易所章程》，制定本规则。"
     confidence: high
 
-  # 以下四个字段：本次会话未核实到可靠来源，按 CLAUDE.md 二第4条「查不清就留空」处理。
   foreign_ownership_limit:
-    zh: ""
-    confidence: low
+    zh: "单个合格境外投资者（QFII/RQFII）或其他境外投资者持有单个上市公司的股份，不得超过该公司股份总数的10%；全部合格境外投资者及其他境外投资者持有单个公司A股股份的总和，不得超过该公司股份总数的30%；因上市公司减少注册资本等原因导致合计持股比例被动超过30%的，可继续持有但不得增持，直至回落至30%以下方可恢复增持；战略投资持股不受此比例限制"
+    en: "A single QFII/RQFII or other foreign investor may not hold more than 10% of a single listed company's total shares; all qualified foreign investors and other foreign investors combined may not hold more than 30% of a single company's A-share total; if the combined stake passively exceeds 30% (e.g. due to the company reducing registered capital), holders may keep the excess but may not add to it until the combined stake falls back below 30%; shares held under a lawful strategic investment are exempt from this cap"
+    detail: "该细则为深交所自身发布的业务规则，与中国证监会/人民银行/外汇局2020年发布的《合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法》第十五条「合格境外投资者开展境内证券投资，应当遵守中国证监会规定的证券投资比例限制」衔接——后者未直接给出具体比例数字，具体10%/30%门槛由本细则明确。"
+    sources:
+      - title: 深圳证券交易所合格境外机构投资者和人民币合格境外机构投资者证券交易实施细则（2020年修订）第十一条
+        url: https://docs.static.szse.cn/www/disclosure/notice/general/W020201030604374968707.pdf
+        accessed: 2026-08-24
+    quote: "第十一条 合格境外投资者及其他境外投资者的境内证券投资，应当遵循下列持股比例限制：（一）单个合格境外投资者或其他境外投资者持有单个上市公司的股份，不得超过该公司股份总数的 10%；（二）全部合格境外投资者及其他境外投资者持有单个公司 A 股股份的总和，不得超过该公司股份总数的 30%。"
+    confidence: high
 
   capital_controls:
-    zh: ""
-    confidence: low
+    zh: "合格境外投资者（QFII/RQFII）须委托境内托管人办理资产托管，并依法委托境内证券公司办理境内证券交易；须在托管人处开立外汇账户和/或人民币专用存款账户，收支范围须符合人民银行、外汇局规定；本金汇入与投资收益汇出均须按人民银行、外汇局相关规定办理，以外汇形式汇入的本金须为境内外汇市场可挂牌交易货币；托管人须对合格境外投资者的自有资产与受托资产分账托管"
+    en: "QFII/RQFII investors must appoint an onshore custodian to hold assets in custody and must trade through licensed onshore securities firms; they must open a foreign-exchange account and/or a dedicated RMB deposit account with the custodian, subject to PBOC/SAFE rules on permitted receipts and payments; both inbound principal and outbound proceeds must be handled per PBOC/SAFE requirements, and foreign-currency principal must be in a currency tradable on China's FX market; custodians must keep QFII/RQFII assets segregated from the custodian's own assets"
+    detail: "本字段引用的是中国证监会、人民银行、外汇局联合发布的全国性规章，非深交所自定规则，与上交所（cn-sse）适用同一套资本管制框架；深交所自身的《合格境外机构投资者和人民币合格境外机构投资者证券交易实施细则》（见 foreign_ownership_limit 字段来源）在此基础上另订持股比例、减持等交易端安排，但汇兑、跨境收付等资本项目管制事项仍以本办法为准。"
+    sources:
+      - title: 合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法（2020年证监会、人民银行、外汇局令第176号，自2020年11月1日起施行）第十九、二十条
+        url: http://www.csrc.gov.cn/csrc/c106256/c1653823/content.shtml
+        accessed: 2026-08-24
+    quote: "第十九条 合格境外投资者应当在托管人处开立外汇账户和（或）人民币专用存款账户，收支范围应当符合人民银行、外汇局的有关规定。第二十条 合格境外投资者应当按照人民银行、外汇局相关规定汇入本金，以外汇形式汇入的本金应当是在中国外汇市场可挂牌交易的货币。合格境外投资者可以按照人民银行、外汇局相关规定汇出资金。"
+    confidence: high
 
   disclosure_requirements:
-    zh: ""
-    confidence: low
+    zh: "基本框架为《证券法》《上市公司信息披露管理办法》与深交所《股票上市规则》，深交所另订《上市公司自律监管指引第5号——信息披露事务管理》细化落实；核心原则是信息披露须及时、公平、真实、准确、完整，上市公司须指定董事会秘书统筹信息披露事务管理部门，披露形式含定期报告（年报/半年报/季报）与临时报告两类"
+    en: "The framework rests on the Securities Law, the CSRC's Administrative Measures for Information Disclosure by Listed Companies, and SZSE's own Stock Listing Rules, with SZSE Self-Regulatory Guideline No. 5 — Information Disclosure Administration providing implementation detail; the core principle is that disclosure must be timely, fair, truthful, accurate and complete, each listed company must designate a board secretary to head its disclosure-administration department, and disclosure takes the form of periodic reports (annual/semi-annual/quarterly) plus ad hoc reports"
+    sources:
+      - title: 深圳证券交易所上市公司自律监管指引第5号——信息披露事务管理（2025年修订）第一条
+        url: https://docs.static.szse.cn/www/lawrules/rule/stock/supervision/currency/W020250327591142579433.pdf
+        accessed: 2026-08-24
+      - title: 深圳证券交易所股票上市规则（2026年修订）第2.1.1条
+        url: http://docs.static.szse.cn/www/lawrules/rule/allrules/bussiness/W020260424747613955674.pdf
+        accessed: 2026-08-24
+    quote: "第一条 为规范上市公司及相关信息披露义务人的信息披露行为，提高公司信息披露管理水平和信息披露质量，引导和督促公司做好信息披露及相关工作，保护投资者合法权益，根据《证券法》《上市公司信息披露管理办法》和《深圳证券交易所股票上市规则》《深圳证券交易所创业板股票上市规则》（以下统称《股票上市规则》）等规定，制定本指引。／2.1.1 上市公司及相关信息披露义务人应当根据法律法规、本规则及本所其他规定，及时、公平地披露信息，并保证所披露的信息真实、准确、完整，简明清晰、通俗易懂，不得有虚假记载、误导性陈述或者重大遗漏。"
+    confidence: high
 
   investor_protection:
-    zh: ""
-    confidence: low
+    zh: "全国性专业投资者保护机构为中证中小投资者服务中心（投服中心），提供持股行权、纠纷调解、支持诉讼、股东诉讼及特别代表人诉讼等服务；特别代表人诉讼依据《证券法》第九十五条第三款，由投服中心受五十名以上投资者委托作为代表人参加证券民事诉讼；该机构服务覆盖沪深两所上市公司，非深交所专属机制"
+    en: "The national specialized investor-protection body is the China Securities Investor Services Center (ISC), which offers shareholder-rights exercise, dispute mediation, litigation support, shareholder litigation and special representative litigation; special representative litigation, based on Article 95(3) of the Securities Law, lets the ISC act as representative in a securities civil suit on behalf of 50-plus investors who have entrusted it; this mechanism covers listed companies on both SSE and SZSE and is not SZSE-specific"
+    detail: "投服中心是中国证监会体系下的全国性机构，本字段所述职能与机制适用全国沪深两所，未见深交所自身另立专属的投资者保护机构或补充安排，本次会话也未核实具体涉及深市上市公司的特别代表人诉讼/支持诉讼案例，confidence 因此定为 medium 而非 high。"
+    sources:
+      - title: 维权服务 - 中证中小投资者服务中心
+        url: http://www.isc.com.cn/tsyw/wqfw/
+        accessed: 2026-08-24
+    quote: "维权服务主要包括证券特别代表人诉讼、支持诉讼、股东诉讼。特别代表人诉讼是指依据《证券法》第九十五条第三款和《最高人民法院关于证券纠纷代表人诉讼若干问题的规定》第三十七条规定，投服中心受五十名以上投资者委托，作为代表人参加的证券民事诉讼。"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 四｜产品体系
@@ -246,9 +277,11 @@ market_structure:
     lunch_break: "11:30-13:00"
     continuous_pm:
       zh: "13:00-15:00（13:00-14:57 连续竞价 + 14:57-15:00 收盘集合竞价）"
+      en: "1:00 p.m.-3:00 p.m. (1:00-2:57 p.m. continuous auction + 2:57-3:00 p.m. closing call auction)"
       quote: "9:30 至 11:30、13:00 至 14:57 为连续竞价时间，14:57 至 15:00 为收盘集合竞价时间。"
     after_market:
       zh: "盘后固定价格交易，15:05-15:30，按当日收盘价成交；适用范围为 A 股与交易型开放式基金（ETF），不限于特定板块"
+      en: "After-hours fixed-price trading, 3:05-3:30 p.m., executed at the day's closing price; applies to A-shares and exchange-traded funds (ETFs) market-wide, not limited to a specific board"
       detail: "与上交所不同：SSE 的盘后固定价格交易仅限科创板股票，SZSE 的这项机制覆盖全市场 A 股和 ETF，不分板块——这是两所交易机制的一处具体差异。"
       quote: "投资者可以通过盘后固定价格交易方式买卖 A 股、交易型开放式基金。……每个交易日的 15:05 至 15:30 为盘后固定价格交易时间。"
       confidence: high
@@ -256,6 +289,7 @@ market_structure:
 
   holidays_note:
     zh: "每周一至周五交易，国家法定假日及本所公告的休市日休市"
+    en: "Trading days are Monday to Friday; the market closes on national statutory holidays and on days announced as closed by SZSE"
     quote: "本所交易日为每周一至周五。国家法定假日和本所公告的休市日，本所市场休市。"
 
   opening_mechanism:
@@ -314,18 +348,21 @@ market_structure:
 
   tick_size:
     zh: "A股 0.01 元人民币；基金 0.001 元人民币；B股 0.01 港元"
+    en: "A-shares RMB 0.01; funds RMB 0.001; B-shares HKD 0.01"
     detail: "与上交所不同：SSE 的 B 股最小变动单位为 0.001 美元，SZSE 为 0.01 港元——计价货币不同（见 overview.trading_currency）。"
     quote: "A 股交易的申报价格最小变动单位为 0.01 元人民币；基金的申报价格最小变动单位为 0.001 元人民币；B 股的申报价格最小变动单位为 0.01 港元。"
     confidence: high
 
   board_lot_size:
     zh: "买入须为 100 股（份）整数倍；单笔申报最大 100 万股（份）；创业板另有细分上限：限价申报单笔不超过 30 万股，市价申报单笔不超过 15 万股"
+    en: "Buy orders must be in multiples of 100 shares/units; a single order may not exceed 1,000,000 shares/units; ChiNext has additional per-order caps: 300,000 shares for limit orders, 150,000 shares for market orders"
     detail: "创业板对单笔申报数量的细分上限是 SZSE 特有、SSE 现行交易规则文本中未见的额外限制，压测点之一。"
     quote: "通过竞价交易买入证券的，申报数量应当为 100 股（份）或其整数倍。／证券竞价交易单笔申报数量不得超过 100 万股（份）。创业板股票限价申报的单笔申报数量不得超过 30 万股，市价申报的单笔申报数量不得超过 15 万股。"
     confidence: high
 
   odd_lot_handling:
     zh: "卖出时不足 100 股的余额可一次性申报卖出"
+    en: "An odd-lot balance of fewer than 100 shares may be sold off in a single order"
     quote: "卖出证券时，余额不足 100 股（份）部分，应当一次性申报卖出。"
     confidence: high
 
@@ -333,12 +370,15 @@ market_structure:
     type:
       enum: percentage_band
       zh: "百分比涨跌幅"
+      en: "Percentage price band"
     main_board:
       zh: "±10%"
+      en: "±10%"
       quote: "主板股票的价格涨跌幅限制比例为 10%"
       confidence: high
     other_boards:
       zh: "创业板 ±20%；风险警示（ST/*ST）与退市整理股票 ±5%（普通标准）；无涨跌幅限制情形：新股上市后前5个交易日、重新上市首日、退市整理期首日"
+      en: "ChiNext ±20%; risk-warned (ST/*ST) and delisting-transition-period stocks ±5% (standard case); no price-limit cap applies for the first 5 trading days after a new listing, the first day back after a re-listing, or the first day of the delisting transition period"
       detail: |
         涨跌幅限制价格 = 前收盘价 ×（1±涨跌幅限制比例）。跟踪创业板或其他20%涨跌幅限制股票
         的指数型基金也适用20%限制。压测点：SZSE 主板 vs 创业板 与 SSE 主板 vs 科创板结构一致
@@ -386,6 +426,7 @@ market_structure:
 
   trading_halt_mechanism:
     zh: "无涨跌幅限制的股票盘中较开盘价首次涨跌达30%或60%，实施单次10分钟临时停牌；跨越14:57的临时停牌于14:57复牌并进行复牌集合竞价"
+    en: "For a stock with no price limit, a first intraday move of 30% or 60% from the day's open price triggers a single 10-minute trading halt; if the halt window crosses 2:57 p.m., trading resumes at 2:57 p.m. with a resumption call auction"
     quote: "无价格涨跌幅限制股票竞价交易出现下列情形之一的，本所实施盘中临时停牌，单次盘中临时停牌时间为10分钟：（一）盘中交易价格较当日开盘价格首次上涨或下跌达到或超过30%的；（二）……达到或超过60%的……临时停牌时间跨越14:57的，于14:57复牌并对已接受的申报进行复牌集合竞价，再进行收盘集合竞价。"
     sources:
       - title: 深圳证券交易所交易规则（2026年修订）第4.3.4条
@@ -427,6 +468,7 @@ market_structure:
 
   block_trade:
     zh: "大宗交易：协议大宗交易（意向申报9:15-11:30、13:00-15:30；成交确认15:00-15:30，创业板股票为9:30-11:30、13:00-15:30）；盘后定价大宗交易（15:05-15:30，以当日收盘价或成交量加权均价成交）"
+    en: "Block trades: negotiated block trades (indication of interest 9:15-11:30 a.m. and 1:00-3:30 p.m.; trade confirmation 3:00-3:30 p.m., or 9:30-11:30 a.m. and 1:00-3:30 p.m. for ChiNext stocks); after-hours fixed-price block trades (3:05-3:30 p.m., executed at the day's closing price or volume-weighted average price)"
     detail: "门槛：A股单笔≥30万股或≥200万元；B股单笔≥3万股或≥20万港元；基金单笔≥200万份或≥200万元。创业板股票的成交确认时段与其他证券不同（本所其他证券15:00-15:30，创业板9:30-11:30、13:00-15:30），是压测发现的板块间细则差异之一。"
     quote: "证券协议大宗交易的成交确认时间为每个交易日15:00至15:30，创业板股票除外。创业板股票协议大宗交易的成交确认时间为每个交易日9:30至11:30、13:00至15:30。"
     sources:
@@ -437,6 +479,7 @@ market_structure:
 
   dark_pool:
     zh: "无西方意义上的暗池；大宗交易系统承担大额订单的类似功能"
+    en: "No dark pool in the Western sense; the block trading system serves an analogous function for large orders"
     confidence: medium
 
   market_maker_scheme:
@@ -451,6 +494,7 @@ market_structure:
 
   connect_schemes:
     zh: "深港通（与港交所互联互通）；盘后固定价格交易纳入深股通额度控制"
+    en: "Shenzhen-Hong Kong Stock Connect (mutual market access with HKEX); after-hours fixed-price trading is subject to the Shenzhen Connect northbound quota (Hong Kong/overseas investors trading SZSE-listed shares)"
     detail: "深股通额度使用情况会影响本所盘后固定价格交易的买入申报接受，规则原文直接确认「深股通」机制在本所日常交易环节的具体嵌入方式，比 cn-sse.yml 对沪港通的记录（未核实到原始公告，仅一般知识）更具体一层，但开通日期等历史细节本次仍未独立核实，confidence 维持 medium。"
     sources:
       - title: 深圳证券交易所交易规则（2026年修订）第3.6.12条
@@ -481,6 +525,7 @@ market_structure:
         confidence: high
       lunch_break:
         zh: "11:30-13:00，与现货主板/创业板一致"
+        en: "11:30 a.m.-1:00 p.m., same as the cash Main Board/ChiNext market"
         confidence: medium
         detail: "交易规则第4.1.2条枚举的交易时段中未包含11:30-13:00，属未列入交易时间的间隔段，与顶层 lunch_break 字段同一处理方式，未单独引用原文。"
       continuous_pm:
@@ -499,6 +544,7 @@ market_structure:
         detail: "基于第4.1.2条对交易时间的穷举式表述作反向推断（该条未提及盘后固定价格交易），未见另有条文明确排除，故 confidence 定为 medium 而非 high。"
       night_session:
         zh: "无"
+        en: "None"
         confidence: medium
         detail: "同 after_market，基于第4.1.2条穷举交易时间的反向推断。"
 
@@ -603,6 +649,7 @@ market_structure:
         confidence: high
       other_boards:
         zh: "价格涨跌停公式不区分「板块」，深交所目前仅ETF一类标的实际挂牌（无股票为标的的期权），故不存在与 main_board 并列的第二档；与保证金公式（第4.3.20条价格涨跌停公式不分标的类型，但保证金公式——见 margin_practice_note——确有区分股票/ETF两套百分比）形成对照"
+        en: "The price-limit formula does not distinguish by 'board' — SZSE currently lists only ETF-underlying contracts (no stock-underlying options), so there is no second tier alongside main_board; this contrasts with the margin formula (Rule 4.3.20's price-limit formula is underlying-type-agnostic, but the margin formula — see margin_practice_note — does have separate stock/ETF parameter sets)"
         confidence: medium
         detail: "留空 enum/未单列 quote，因本字段实质是「不适用」——不是查不清，是该市场目前只有一类合约标的、无第二档可记录，与主板/创业板并列关系不同。"
 
@@ -719,8 +766,15 @@ listing:
     confidence: high
 
   listing_process_duration:
-    zh: ""
-    confidence: low
+    zh: "自受理发行上市申请文件之日起，深交所审核与中国证监会注册的时间总计不超过3个月（发行人及中介机构回复审核问询所耗用的时间不计入，回复问询时间总计另有3个月上限）；受理后深交所须在20个工作日内发出首轮审核问询"
+    en: "From acceptance of the listing application, SZSE's own review plus CSRC's registration decision must together take no more than 3 months (time the issuer and intermediaries spend responding to review inquiries is excluded from this clock, and is itself capped separately at 3 months in total); SZSE must issue its first round of review inquiries within 20 working days of acceptance"
+    sources:
+      - title: 深圳证券交易所股票发行上市审核规则（2024年修订）第三十六条、第四十四条
+        url: http://docs.static.szse.cn/www/lawrules/rule/stock/W020240430572636488364.pdf
+        accessed: 2026-08-24
+    quote: "第三十六条 对股票首次发行上市申请，本所发行上市审核机构自受理之日起二十个工作日内，通过保荐人向发行人提出首轮审核问询。……第四十四条 申请股票首次发行上市的，本所在规定的时限内出具发行人符合发行条件、上市条件和信息披露要求的审核意见或者作出终止发行上市审核的决定，但发行人及其保荐人、证券服务机构回复本所审核问询的时间不计算在内。发行人及其保荐人、证券服务机构回复本所审核问询的时间总计不超过三个月。自受理发行上市申请文件之日起，本所审核和中国证监会注册的时间总计不超过三个月。"
+    detail: "原文条款用汉字数字「二十个工作日」，zh/en 摘要为便于横向阅读换成阿拉伯数字「20」，quote 已逐字保留原文汉字数字未做改写；confidence 因 make check 的数字反查规则识别不到「二十」对应「20」而降为 medium，非数据准确性问题。"
+    confidence: medium
 
   transfer_between_boards:
     zh: ""
@@ -728,8 +782,14 @@ listing:
     detail: "未核实主板与创业板之间是否存在正式转板机制，留空。"
 
   continuing_obligations:
-    zh: ""
-    confidence: low
+    zh: "《股票上市规则》第二至八章统一规定上市公司持续义务：信息披露须及时、公平、真实、准确、完整；须按期披露年度/半年度/季度定期报告及重大事项临时报告；须维持公司治理架构（董事会秘书、独立董事等）；重大交易、股票及衍生品种变动、停复牌等事宜均须依规操作；上市前须与本所签订上市协议明确双方权利义务"
+    en: "Chapters 2 through 8 of the Stock Listing Rules set out a listed company's ongoing obligations as a package: disclosure must be timely, fair, truthful, accurate and complete; periodic reports (annual/semi-annual/quarterly) and ad hoc reports on material events must be filed on schedule; a governance structure (board secretary, independent directors, etc.) must be maintained; material transactions, changes to shares and derivative securities, and trading suspensions/resumptions must all follow the rules; and the issuer must sign a listing agreement with SZSE before listing that spells out both parties' rights and obligations"
+    sources:
+      - title: 深圳证券交易所股票上市规则（2026年修订）第1.2条、第1.3条、第2.1.1条
+        url: http://docs.static.szse.cn/www/lawrules/rule/allrules/bussiness/W020260424747613955674.pdf
+        accessed: 2026-08-24
+    quote: "1.2 在深圳证券交易所（以下简称本所）主板上市的股票及其衍生品种的上市、信息披露、停牌、复牌、退市等事宜，适用本规则。……1.3 发行人申请股票及其衍生品种在本所上市的，应当经本所审核同意。发行人首次公开发行股票或者存托凭证在本所上市的，应当在上市前与本所签订上市协议，明确双方的权利、义务和其他事项。／2.1.1 上市公司及相关信息披露义务人应当根据法律法规、本规则及本所其他规定，及时、公平地披露信息，并保证所披露的信息真实、准确、完整。"
+    confidence: high
 
   suspension_resumption:
     zh: "长期停牌（因重大事项筹划等）须向本所申请，说明理由并尽量缩短停牌期；停牌期间每5个交易日至少披露一次进展；个股级临时停牌（价格异动触发的10分钟停牌）见 market_structure.trading_halt_mechanism"
@@ -763,8 +823,14 @@ listing:
     confidence: high
 
   delisting_process:
-    zh: ""
-    confidence: low
+    zh: "强制退市程序：本所在规定期限内向公司发出拟终止上市事先告知书→公司可在5个交易日内提出听证要求，或10个交易日内提交书面陈述和申辩（逾期视为放弃）→未申请听证的，本所上市委员会在陈述申辩期届满后15个交易日内形成审议意见；申请听证的，听证会后15个交易日内形成意见→本所依据上市委员会意见作出是否终止上市的决定，2个交易日内公告并报中国证监会备案"
+    en: "Mandatory delisting procedure: SZSE issues a prior notice of intent to terminate listing within a prescribed period → the company may, within 5 trading days, request a hearing, or within 10 trading days submit a written statement and defense (failure to do either within the deadline is treated as a waiver) → if no hearing was requested, SZSE's Listing Review Committee forms its opinion within 15 trading days of the statement/defense deadline; if a hearing was held, within 15 trading days of the hearing's conclusion → SZSE decides whether to terminate the listing based on the Committee's opinion, announcing the decision within 2 trading days and filing it with the CSRC"
+    sources:
+      - title: 深圳证券交易所股票上市规则（2026年修订）第9.1.9-9.1.13条
+        url: http://docs.static.szse.cn/www/lawrules/rule/allrules/bussiness/W020260424747613955674.pdf
+        accessed: 2026-08-24
+    quote: "9.1.9 上市公司出现本所规定的强制退市情形之一的，本所在规定期限内向公司发出拟终止其股票上市的事先告知书。……9.1.10 上市公司可以在收到或者本所公告送达终止上市事先告知书之日……起五个交易日内，以书面形式向本所提出听证要求……公司对终止上市有异议的，可以在收到或者本所公告终止上市事先告知书之日起十个交易日内，向本所提交相关书面陈述和申辩……9.1.11……上市公司在本规则第9.1.10条规定期限内提出听证要求的，由本所上市委员会按照有关规定组织召开听证会，并在听证程序结束后十五个交易日内就是否终止公司股票上市事宜形成审议意见。公司未在规定期限内提出听证申请的，本所上市委员会在陈述和申辩提交期限届满后十五个交易日内，就是否终止公司股票上市事宜形成审议意见。本所根据上市委员会的审议意见，作出是否终止股票上市的决定。……9.1.13 本所在作出终止上市公司股票上市决定之日起两个交易日内，通知上市公司并以交易所公告形式发布相关决定，同时报中国证监会备案。"
+    confidence: high
 
   delisting_transition_period:
     zh: "财务类、规范类、重大违法类强制退市适用十五个交易日退市整理期；交易类强制退市不适用退市整理期（直接终止上市）"
@@ -778,8 +844,15 @@ listing:
     confidence: high
 
   post_delisting_venue:
-    zh: ""
-    confidence: low
+    zh: "强制退市公司须在终止上市决定作出后立即安排股票转入全国中小企业股份转让系统（新三板）等证券交易场所，保证摘牌之日起45个交易日内可转让；退市前须与主办券商签约提供股份转让服务，并授权其办理股份退出登记、重新确认及登记结算事宜；主动终止上市公司可自主选择在股转系统交易/转让或另作安排"
+    en: "A mandatorily delisted company must, immediately after its delisting decision, arrange for its shares to transfer into the National Equities Exchange and Quotations (NEEQ, a.k.a. the 'New Third Board') or a similar trading venue, ensuring the shares are transferable within 45 trading days of being struck off; before delisting it must sign an agreement with a sponsoring securities firm to provide share-transfer services and authorize it to handle deregistration, re-confirmation and clearing of the shares; a voluntarily delisted company may instead choose whether to trade/transfer on NEEQ or make other lawful arrangements"
+    sources:
+      - title: 深圳证券交易所股票上市规则（2026年修订）第9.1.16条
+        url: http://docs.static.szse.cn/www/lawrules/rule/allrules/bussiness/W020260424747613955674.pdf
+        accessed: 2026-08-24
+    quote: "9.1.16 上市公司股票被本所强制退市后，进入退市整理期，因触及交易类强制退市情形而终止上市的除外。强制退市公司应当在本所作出终止其股票上市决定后立即安排股票转入全国中小企业股份转让系统等证券交易场所转让的相关事宜，保证公司股票在摘牌之日起四十五个交易日内可以转让。强制退市公司在股票被摘牌前，应当与符合规定条件的证券公司（以下简称主办券商）签订协议，聘请该机构在公司股票被终止上市后为公司提供股份转让服务……主动终止上市公司可以选择在全国中小企业股份转让系统等证券交易场所交易或转让其股票，或者依法作出其他安排。"
+    detail: "原文条款用汉字数字「四十五个交易日」，zh/en 摘要为便于横向阅读换成阿拉伯数字「45」，quote 已逐字保留原文汉字数字未做改写；confidence 因 make check 的数字反查规则识别不到「四十五」对应「45」而降为 medium，非数据准确性问题。"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -855,6 +928,7 @@ clearing:
   delivery_method:
     enum: na
     zh: "不适用（现货市场，无实物/现金交割概念）"
+    en: "Not applicable (a cash equity market, with no physical/cash delivery concept)"
     detail: "推断依据：products 章节所列品类（股票/存托凭证/基金/权证/债券）均为现货，交易规则第二章第一节未列出期货等衍生品种；期权（CSI 300 ETF Options）为本次新识别品种，其交割方式本次未核实，留待后续。"
     sources:
       - title: 深圳证券交易所交易规则（2026年修订）第2.1.2条
@@ -867,14 +941,66 @@ clearing:
     confidence: low
 
   default_management:
-    zh: ""
-    confidence: low
+    zh: "中国结算作为CCP以分层财务资源应对结算参与人交收违约：先动用违约方担保物中的现金部分、结算保证金，不足部分动用证券结算风险基金及一般风险准备金；对逾期无法追偿的证券/资金，可依法动用结算保证金与结算风险基金予以弥补，之后继续向违约方追偿；程序上可采取扣划证券、处置证券等措施完成违约处置"
+    en: "As CCP, ChinaClear meets a clearing participant's settlement default with tiered financial resources: first the defaulting party's own cash collateral and settlement margin, then (if insufficient) the securities settlement risk fund and general risk reserve; for securities or funds that cannot be recovered within the prescribed period, it may draw on the settlement margin and risk fund to cover the shortfall and then continue pursuing recovery from the defaulter; procedurally it may debit or dispose of the defaulter's securities to make up the shortfall"
+    detail: "本字段为中国结算的全国性违约处置框架，同等适用于沪深两所清算的证券，非深交所专属机制；与上交所（cn-sse）共用同一登记结算法人（见 clearing.ccp_name）。"
+    sources:
+      - title: 中国证券登记结算有限责任公司遵循《金融市场基础设施原则》信息披露报告（2022年6月）
+        url: http://www.chinaclear.cn/zdjs/xxxpl/202307/e8fcc5f599a34963b5c83c8ac07ece1d/files/中国结算遵循《金融市场基础设施原则》信息披露报告（2022）.pdf
+        accessed: 2026-08-24
+    quote: "发生交收违约时，中国结算可以动用的财务资源包括违约结算参与人的担保物中的现金部分、结算保证金、结算风险基金以及包括一般风险准备金在内的其他资金。……《结算规则》规定，违约结算参与人未在规定的期间内补足资金、证券的，证券登记结算机构可以处分违约结算参与人所提供的担保物、质押品保管库中的回购质押券、卖出专用清偿账户内的证券。在规定期限内无法追偿的证券或资金，证券登记结算机构可以依法动用结算保证金和结算风险基金予以弥补。……中国结算可依照《结算规则》规定的程序，通过采取扣划证券、处置证券等措施，进行结算参与人交收违约处置，弥补违约金额。"
+    confidence: high
 
   derivatives:
+    initial_margin_practice:
+      zh: "期权保证金实行分级收取：中国结算向结算参与人、结算参与人向委托其结算的期权经营机构、期权经营机构向客户逐级收取，下级收取标准不得低于上级标准；开仓保证金以现金或中国结算认可的证券交纳，按公式计算（以深交所目前全部品种——ETF为标的为例：认购期权义务仓开仓保证金=[合约前结算价+Max(12%×标的前收盘价-认购期权虚值,7%×标的前收盘价)]×合约单位，认沽公式对称，详细公式与股票标的的另一套参数见 market_structure.derivatives.margin_practice_note）"
+      en: "Option margin is collected in a tiered structure: ChinaClear collects from clearing participants, clearing participants from the options firms that clear through them, and options firms from clients — each tier's requirement no lower than the tier above; opening margin is payable in cash or securities recognized by ChinaClear and is formula-based (for SZSE's current products, all ETF-underlying: short-call opening margin = [prior settlement price + Max(12%×underlying prior close − call's out-of-the-money value, 7%×underlying prior close)] × contract multiplier, with a symmetric put formula; the stock-underlying parameter set is not yet in use — see market_structure.derivatives.margin_practice_note for the full formulas)"
+      detail: "本字段是 clearing（清算/CCP）层面对同一保证金制度的视角，与 market_structure.derivatives.margin_practice_note（交易端保证金要求）描述同一套规则但视角不同，两者不合并，见 PROJECT/DECISIONS.md [ADR-030]。"
+      sources:
+        - title: 深圳证券交易所 中国证券登记结算有限责任公司股票期权试点风险控制管理办法 第十四、十五条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207433397366259.pdf
+          accessed: 2026-08-24
+      quote: "合约标的为交易型开放式指数基金（以下简称交易型开放式基金）的，每张合约的开仓保证金的计算公式为：（一）认购期权义务仓开仓保证金＝ [合约前结算价+Max（12%×合约标的前收盘价-认购期权虚值，7%×合约标的前收盘价）]×合约单位。（二）认沽期权义务仓开仓保证金＝Min[合约前结算价+Max（12%×合约标的前收盘价-认沽期权虚值，7%×行权价），行权价]×合约单位。"
+      confidence: high
+
+    maintenance_margin_practice:
+      zh: "每个交易日日终，中国结算按深交所公布的合约结算价格计算并收取结算参与人应交纳的维持保证金；结算准备金小于零、或开盘时结算准备金大于零但低于最低余额的，不得进行买入开仓、卖出开仓；维持保证金计算公式与开仓保证金同构，仅将「前收盘价/前结算价」替换为「收盘价/结算价」"
+      en: "At the end of every trading day, ChinaClear calculates and collects the maintenance margin owed by each clearing participant, based on the contract settlement price published by SZSE; a participant whose settlement reserve is negative — or positive but below the minimum balance at the open — may not open new long or short option positions; the maintenance-margin formula mirrors the opening-margin formula, substituting the prior close/prior settlement price with the current close/settlement price"
+      detail: "同 initial_margin_practice，本字段是清算/CCP层面视角，与市场结构章节的交易端保证金说明不合并，见 [ADR-030]。"
+      sources:
+        - title: 深圳证券交易所 中国证券登记结算有限责任公司股票期权试点风险控制管理办法 第十六至十九条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207433397366259.pdf
+          accessed: 2026-08-24
+      quote: "第十六条 结算参与人结算准备金最低余额应当达到中国结算的要求。结算准备金最低余额由结算参与人以自有资金交纳。结算参与人结算准备金小于零，或者开盘时结算准备金大于零但低于结算准备金最低余额的，不得进行买入开仓、卖出开仓。第十七条 每个交易日日终，中国结算按深交所公布的合约结算价格计算并收取结算参与人应当交纳的维持保证金。合约结算价格计算方式由深交所及中国结算另行规定。"
+      confidence: high
+
+    mark_to_market_frequency:
+      zh: "逐日盯市：每个交易日日终由中国结算按深交所公布的合约结算价格核算并收取维持保证金缺口；非最后交易日的合约结算价格为该合约当日收盘价，最后交易日的结算价格另有实值/虚值合约的专门计算方式（见 market_structure.derivatives.closing_mechanism）"
+      en: "Mark-to-market is performed daily: at the end of every trading day, ChinaClear calculates and collects any maintenance-margin shortfall based on the contract settlement price published by SZSE; on days other than the last trading day, the settlement price is that day's closing price, while the last trading day uses a separate calculation for in-the-money versus out-of-the-money contracts (see market_structure.derivatives.closing_mechanism)"
+      sources:
+        - title: 深圳证券交易所 中国证券登记结算有限责任公司股票期权试点风险控制管理办法 第十七条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207433397366259.pdf
+          accessed: 2026-08-24
+        - title: 深圳证券交易所股票期权试点交易规则 第4.5.2-4.5.3条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-24
+      quote: "第十七条 每个交易日日终，中国结算按深交所公布的合约结算价格计算并收取结算参与人应当交纳的维持保证金。合约结算价格计算方式由深交所及中国结算另行规定。／4.5.3 在非最后交易日，期权合约的结算价格为该合约当日收盘价。"
+      confidence: high
+
     delivery_method:
       zh: ""
       confidence: low
       detail: "ADR-023 新增字段，深交所衍生品（股票期权）的实物/现金交割方式本次未核实，留空转 OPEN-QUESTIONS。"
+
+    last_trading_day_rule:
+      zh: "期权合约到期日为到期月份的第四个星期三（遇国家法定节假日、本所休市日顺延至次一交易日）；最后交易日与行权日同其到期日，到期日提前或顺延时随之调整；合约标的除权除息、配股缴款复牌、合约暂停交易或取消交易等情形另有专门的顺延安排，且原则上最后交易日、到期日、行权日不因该合约当日停牌/临时停牌而顺延"
+      en: "An option contract's expiration date is the fourth Wednesday of the expiration month (deferred to the next trading day if that falls on a statutory holiday or an SZSE non-trading day); the last trading day and the exercise day coincide with the expiration date and move together with it; corporate actions on the underlying (ex-rights/ex-dividend, resumption after a rights-issue payment period) and contract-level trading suspensions or cancelled-trade measures trigger their own separate deferral rules, and — as a general rule — a same-day suspension or intraday halt of the contract itself does NOT defer the last trading day/expiration/exercise day"
+      sources:
+        - title: 深圳证券交易所股票期权试点交易规则 第2.5条、第5.11-5.13条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-24
+      quote: "2.5 期权合约的到期日为到期月份的第四个星期三。该日为国家法定节假日、本所休市日的，顺延至次一交易日。期权合约的最后交易日和行权日，同其到期日；到期日提前或者顺延的，最后交易日和行权日随之调整。……5.11 期权合约最后交易日，期权合约发生全天停牌或者盘中临时停牌的，期权合约的行权申报照常进行，期权合约最后交易日、到期日、行权日不作顺延。5.12 期权合约最后交易日出现下列情形的，期权合约最后交易日、到期日、行权日相应调整：（一）期权合约最后交易日处于合约标的配股股权登记日与配股缴款日后复牌首日之间且停牌的……（二）合约标的将在期权合约最后交易日的次一交易日进行除权、除息的……"
+      confidence: high
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者
@@ -885,12 +1011,28 @@ participants:
     confidence: low
 
   investor_structure:
-    zh: ""
-    confidence: low
+    zh: "按证券账户数计，个人投资者占绝对多数（第三方分析显示2024年末个人投资者账户占比超99.7%）；按A股持股市值计，机构与产业资本占比明显高于账户数占比——第三方分析将2024年末沪深A股整体持股市值划分为产业资本34.4%、政府持股7.6%、专业机构投资者19.2%、个人大股东6.4%、一般个人投资者32.3%（以上均为沪深A股市场整体口径，非深交所单独统计，深交所自身逐年发布的《市场统计年鉴》理论上含更精确口径，本次未及逐份核对）"
+    en: "By number of securities accounts, individual investors are the overwhelming majority (third-party analysis put individual accounts at over 99.7% of all accounts at end-2024); by A-share holding value the institutional/corporate share is markedly higher than its account-count share — third-party analysis splits end-2024 combined SSE+SZSE A-share holding value into 34.4% corporate capital, 7.6% government holdings, 19.2% professional institutional investors, 6.4% individual controlling shareholders, and 32.3% general individual investors (all figures are market-wide for both exchanges combined, not an SZSE-specific breakdown; SZSE's own annually published Market Statistical Yearbook likely has a more precise SZSE-only figure, not cross-checked this session)"
+    detail: "以上数字来自第三方财经媒体对官方统计年鉴的二次分析整理，非直接读到深交所/上交所年鉴原文，故 confidence 依 CLAUDE.md 铁律封顶 medium；且口径为沪深两市合计，非深交所单独数据，留待后续直接核对《深圳证券交易所市场统计年鉴》原文。"
+    sources:
+      - title: 从投资者结构变化看资本市场投资端改革——2024年投资者结构全景分析（新浪财经转载）
+        url: https://finance.sina.com.cn/jjxw/2025-06-23/doc-infcanva9299037.shtml
+        accessed: 2026-08-24
+      - title: A股投资者首超2.4亿，个人投资者超99%，占比逐年递增（财联社）
+        url: https://www.cls.cn/detail/2086830
+        accessed: 2026-08-24
+    confidence: medium
 
   account_opening_requirements:
-    zh: ""
-    confidence: low
+    zh: "年满18周岁的中国公民（含16-18周岁以自身劳动收入为主要生活来源者）、获得中国永久居留资格的外国人，以及普通机构投资者，可申请开立A股账户等证券账户；在中国大陆工作生活的港澳台居民可持港澳台居住证或来往内地/大陆通行证（须附就业证明等材料）申请开立A股账户；纯境外自然人/机构（未在大陆工作生活）原则上仅可开立B股等特定账户；开立股转系统账户、信用证券账户等另需符合投资者适当性管理要求"
+    en: "Chinese citizens aged 18 or older (including those aged 16-18 whose main livelihood is their own labor income), foreigners with permanent Chinese residency, and ordinary institutional investors may apply to open A-share and other securities accounts; Hong Kong/Macao/Taiwan residents living and working in mainland China may open A-share accounts using their mainland residence permit or mainland travel permit (plus proof of employment); foreign natural persons or institutions without mainland residency/work status may generally only open B-share and certain other specified accounts; opening a NEEQ account, a margin-trading securities account, etc. additionally requires meeting investor-suitability requirements"
+    detail: "来源为中国结算《证券账户业务指南》，文档版本落款「二〇一六年十月」，本次未核实2016年10月之后是否另有修订版本，账户开立资格这类结构性规则变动概率较低但未逐一验证最新状态，故 confidence 定 medium 而非 high；该指南通过中国证监会陕西监管局官网留存获取，非中国结算官网当次直接抓取，属间接留存件。"
+    sources:
+      - title: 中国证券登记结算有限责任公司证券账户业务指南（二〇一六年十月）第1.4、1.5条
+        url: http://www.csrc.gov.cn/shanxi/c1055540/c1609332/1609332/files/中国证券登记结算有限责任公司证券账户业务指南.pdf
+        accessed: 2026-08-24
+    quote: "1.4【境内投资者开户资格】……（1）年满十八周岁的中国公民（含境内十六周岁以上不满十八周岁，以自己的劳动收入为主要生活来源的中国公民）可以申请开立一码通账户、A股账户……（2）获得中国永久居留资格的外国人可以申请开立一码通账户、A股账户……1.5【境外投资者开户资格】……（1）外国的自然人以及中国香港、澳门特别行政区和台湾地区的自然人，持有中国护照并获得境外国家或者地区永久居留签证的中国公民可以申请开立一码通账户、B股账户……在大陆工作和生活的中国香港、澳门特别行政区和台湾地区的居民还可以申请开立A股账户……"
+    confidence: medium
 
   suitability_management:
     zh: "退市整理股票有专门的适当性门槛：个人投资者须具备两年以上股票交易经验，且申请权限开通前二十个交易日证券账户及资金账户内的资产日均不低于人民币50万元"
@@ -919,8 +1061,17 @@ participants:
     confidence: high
 
   broker_landscape:
-    zh: ""
-    confidence: low
+    zh: "深交所自身层面：现有122家会员及2家特别会员，均为持牌证券/期货类经营机构（见 membership_structure）。全国行业层面（非深交所专属统计）：第三方行业报告显示截至2022年末全国证券公司约140家，行业集中度（CR4）约42%，中信证券、国泰君安、广发证券、海通证券等头部公司资产规模领先"
+    en: "At the SZSE level: 122 members plus 2 special members, all licensed securities/futures firms (see membership_structure). At the national industry level (not an SZSE-specific figure): third-party industry research put the number of Chinese securities firms at roughly 140 as of end-2022, with industry concentration (CR4) around 42%, led by firms such as CITIC Securities, Guotai Junan, GF Securities and Haitong Securities by asset size"
+    detail: "未核实到深交所经纪业务市场份额的交易所层面独立统计（如「深市成交额前十大会员占比」），本条只能以深交所自身会员总数（一手来源）搭配全国证券业协会/行业研究机构的全国口径集中度数据（第三方）合成，两段口径不同，读者不应将全国集中度数字误认为深市专属数据。"
+    sources:
+      - title: 本所简介
+        url: https://www.szse.cn/aboutus/sse/introduction/index.html
+        accessed: 2026-08-14
+      - title: 【行业深度】洞察2023：中国证券行业竞争格局及市场份额（前瞻网，行业研究报告）
+        url: https://www.qianzhan.com/analyst/detail/220/230518-3f033ad2.html
+        accessed: 2026-08-24
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十｜市场数据与技术基础设施
@@ -931,20 +1082,47 @@ infrastructure:
     confidence: low
 
   market_data_levels:
-    zh: ""
-    confidence: low
+    zh: "基本行情（Level-1）：五档买卖盘等基础数据；增强行情（俗称Level-2）：在基本行情基础上，实时买卖盘由五档扩展到十档，并增加最佳价位前50个分档明细、逐笔委托、逐笔成交等信息，覆盖主板/创业板全市场、全品种（股票/基金/指数/债券）；两级行情均由深交所全资子公司深圳证券信息有限公司统一授权对外许可"
+    en: "Basic Market Data (Level-1): core data including a five-level bid/ask book; Enhanced Market Data (commonly called Level-2): on top of the basic feed, the real-time bid/ask book is expanded from 5 to 10 price levels, plus the top-50 price-tier detail, order-by-order and trade-by-trade data, covering the full Main Board/ChiNext market across all instrument types (equities, funds, indices, bonds); both tiers are licensed exclusively through SZSE's wholly-owned data subsidiary, Shenzhen Securities Information Co."
+    sources:
+      - title: 深市行情授权 - 增强行情介绍（深圳证券信息有限公司官网）
+        url: http://www.szsi.cn/cpfw/fwsq/hq/yw-2.htm
+        accessed: 2026-08-24
+      - title: 深交所行情互联网接入服务说明（深圳证券信息有限公司）
+        url: http://www.szsi.cn/cpfw/fwsq/hq/深交所行情互联网接入服务说明.pdf
+        accessed: 2026-08-24
+    quote: "增强行情指在基本行情的基础上，实时买卖盘由五档扩展到十档，并增加最佳价位的前50个分档明细、逐笔委托、逐笔成交等信息。"
+    confidence: high
 
   data_latency:
-    zh: ""
-    confidence: low
+    zh: "官方行情商业分发以实时为主：基本行情与增强行情均通过与深圳证券信息有限公司MDC网关建立TCP/IP长连接实时推送，官方资料强调服务「行情稳定、低时延、低成本」；本次抓取到的资料未见针对公众的免费延时行情（如常见的15分钟延时）安排说明，留待后续核实"
+    en: "Commercial distribution of official market data is real-time by default: both the basic and enhanced feeds are streamed in real time over a persistent TCP/IP connection to Shenzhen Securities Information's MDC gateway, and official materials emphasize 'stable, low-latency, low-cost' service; this session's sources did not describe any free delayed-quote arrangement for the general public (e.g. the common 15-minute delay), left for future verification"
+    sources:
+      - title: 深交所行情互联网接入服务说明（深圳证券信息有限公司）
+        url: http://www.szsi.cn/cpfw/fwsq/hq/深交所行情互联网接入服务说明.pdf
+        accessed: 2026-08-24
+    quote: "深交所行情互联网接入服务按 MDC 数量年度计费……行情稳定、低时延、低成本、方式灵活。"
+    confidence: medium
 
   data_pricing_model:
-    zh: ""
-    confidence: low
+    zh: "行情数据按「基础服务+增值服务」商业授权模式收费，以MDC（行情客户端网关）数量计年费：深市Binary基础行情50000元/年/MDC（每客户首套免费）；深市DBF行情、深市行情API、沪市API行情、沪市TXT行情各30000元/年；增加本地接入10000元/路；由深交所全资子公司深圳证券信息有限公司统一制定并对外许可"
+    en: "Market data is licensed on a 'basic service + value-added services' commercial model, billed annually per MDC (market-data client gateway): basic SZSE Binary feed RMB 50,000/year/MDC (each customer's first unit free); SZSE DBF feed, SZSE market-data API, SSE API feed and SSE TXT feed each RMB 30,000/year; additional local access RMB 10,000/connection; the pricing is set and licensed exclusively by SZSE's wholly-owned data subsidiary, Shenzhen Securities Information Co."
+    sources:
+      - title: 深交所行情互联网接入服务说明（深圳证券信息有限公司）第七节「收费标准」
+        url: http://www.szsi.cn/cpfw/fwsq/hq/深交所行情互联网接入服务说明.pdf
+        accessed: 2026-08-24
+    quote: "深交所行情互联网接入服务按 MDC 数量年度计费，MDC 默认包含深市二进制格式流行情作为基础服务，客户可根据自身使用需要选配增值服务。……基础服务(深市 Binary 行情) 50000 1、每个客户首套 MDC 基础服务免费 2、含深市静态数据文件的落地。……深市 DBF 行情 30000 四版 DBF 文件行情 深市行情 API 30000 1、解析深市 Binary 行情的 API 服务 2、支持多 MDC 使用 沪市 API 行情 30000……沪市 TXT 行情 30000……增加本地接入 10000/路"
+    confidence: high
 
   historical_data_availability:
-    zh: ""
-    confidence: low
+    zh: "深交所官网市场数据栏目按品类（股票/基金/债券/期权等）提供日度、周度、月度、年度统计概况，并逐年发布《深圳证券交易所市场统计年鉴》（公开可查年份至少覆盖2019-2024年）；具体逐笔历史行情的商业化获取渠道及可回溯的最早年份本次未逐一核实"
+    en: "SZSE's own market-data section provides daily, weekly, monthly and annual statistical summaries by instrument category (equities, funds, bonds, options, etc.), and it publishes an annual Market Statistical Yearbook (publicly available editions found span at least 2019-2024); the commercial channel for obtaining tick-level historical data and the earliest year it covers were not individually verified this session"
+    sources:
+      - title: 深圳证券交易所 - 统计年鉴（市场数据导航页）
+        url: https://www.szse.cn/market/periodical/year/index.html
+        accessed: 2026-08-24
+    quote: "市场数据 / 统计资料 / 统计年鉴……股票数据 基本概况 成交概况 日度概况 周度概况 月度概况 年度概况……基金数据 成交概况 日度概况 周度概况 月度概况 年度概况……期权数据 日度概况 周度概况 月度概况 年度概况"
+    confidence: medium
 
   trading_system_name:
     zh: ""
@@ -953,6 +1131,7 @@ infrastructure:
 
   access_methods:
     zh: "交易参与人通过交易单元接入本所交易主机；行情与交易数据另有第三方数据商分发"
+    en: "Trading participants connect to the exchange's trading host via a 'trading unit'; market and trade data are also distributed through third-party data vendors"
     detail: "「交易单元」是 SZSE 交易规则原文使用的术语（2.2.2条：参与本所证券交易与接受本所监管及服务的基本业务单位），与 cn-sse.yml 记录方式一致。"
     sources:
       - title: 深圳证券交易所交易规则（2026年修订）第2.2条
@@ -961,8 +1140,15 @@ infrastructure:
     confidence: medium
 
   major_outage_history:
-    zh: ""
-    confidence: low
+    zh: "2002年7月5日上午，深圳证券通信公司租用的亚太卫星1号7A转发器受不明强信号干扰，导致917家证券营业部通信全部中断，深交所依《交易规则》及《异常情况处理规定》作出紧急停市决定，通信系统于当日中午11:15恢复正常，下午交易恢复正常；更早期还有1992年8月10-11日因新股认购抽签表发售引发风波（「8·10事件」），深圳证券市场领导小组决定停市半天"
+    en: "On the morning of 5 July 2002, the Asiapac-1 satellite transponder (channel 7A) leased by Shenzhen Securities Communication Co. suffered unexplained strong-signal interference, cutting off communications with all 917 securities branch offices; SZSE declared an emergency trading halt under its Trading Rules and Abnormal-Circumstance Handling Provisions, restored communications by 11:15am the same day, and resumed normal trading that afternoon; an earlier case was the 10-11 August 1992 disruption around the sale of new-share subscription lottery slips (the '8-10 Incident'), after which the Shenzhen securities-market leading group halted trading for half a day"
+    detail: "来源为中文维基百科「深圳证券交易所」条目「大事记」章节，属第三方百科来源，本次会话未核实到深交所官方对这两起事件的原始公告存档，confidence 依 CLAUDE.md 铁律封顶 medium。"
+    sources:
+      - title: 深圳证券交易所 - 维基百科（大事记章节）
+        url: https://zh.wikipedia.org/zh-hans/%E6%B7%B1%E5%9C%B3%E8%AF%81%E5%88%B8%E4%BA%A4%E6%98%93%E6%89%80
+        accessed: 2026-08-24
+    quote: "2002年7月5日上午，因深圳证券通信公司租用的亚太卫星1号7A转发器受到不明强信号干扰，导致917家证券营业部通信全部中断，根据《交易规则》和《深交所异常情况处理规定》等办法，深交所作出紧急停市的决定。通信系统于当日中午11:15恢复正常，下午深圳证券市场正常交易。／1992年8月9、10、11日深圳发售1992年新股认购抽签表，发生风波，史称……。11日受发售新股抽签表影响，深圳证券市场领导小组决定深圳证券交易所停市半天。"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十一｜交易成本与税费
@@ -974,6 +1160,7 @@ costs:
 
   commission_structure:
     zh: "券商佣金，费率市场化协商，无统一标准"
+    en: "Brokerage commission, market-negotiated with no uniform standard rate"
     quote: "投资者买卖证券成交的，应当按规定向会员交纳佣金。"
     sources:
       - title: 深圳证券交易所交易规则（2026年修订）第9.1条
@@ -996,15 +1183,24 @@ costs:
     confidence: high
 
   clearing_fees:
-    zh: ""
-    confidence: low
+    zh: "股票交易过户费由中国结算统一收取（不由证券公司留存），现行标准为按成交金额0.01‰双向收取（2022年4月29日起执行；此前沪深市场A股为0.02‰，北京市场A股及挂牌公司股份为0.025‰）"
+    en: "The stock transfer fee is collected uniformly by ChinaClear (not retained by securities firms); the current rate is 0.01‰ of trade value, charged bilaterally, effective 29 April 2022 (previously 0.02‰ for SSE/SZSE A-shares and 0.025‰ for Beijing Stock Exchange A-shares and NEEQ-listed shares)"
+    detail: "该费用是与交易所自身经手费（见 exchange_fees）平行的另一项独立费用，由中国结算这一登记结算机构收取，非深交所收取；来源为第三方媒体转载中国结算官网公告，非本次直接抓取到 chinaclear.cn 官网原始公告页，confidence 依铁律封顶 medium。"
+    sources:
+      - title: 4月29日起股票交易过户费总体下调50%（人民网，转载中国结算官网公告）
+        url: http://finance.people.com.cn/n1/2022/0429/c1004-32411923.html
+        accessed: 2026-08-24
+    quote: "据中国证券登记结算有限责任公司（以下简称\"中国结算\"）网站消息，自2022年4月29日起，将股票交易过户费总体下调50%。据悉，中国结算决定将股票交易过户费由现行沪深市场A股按照成交金额0.02‰、北京市场A股和挂牌公司股份按照成交金额0.025‰双向收取，统一下调为按照成交金额0.01‰双向收取。……交易过户费为中国结算收费，证券经营机构不予留存。"
+    confidence: medium
 
   regulatory_fees:
     zh: ""
     confidence: low
+    detail: "未核实到深交所或中国证监会体系下、独立于交易所经手费（exchange_fees）与清算过户费（clearing_fees）之外、以「监管费」命名且现行有效征收的费用项目。历史上曾存在「证券监管费」（证管费）项目，本次会话未能确认其当前是否仍在征收及现行费率，留空并转 OPEN-QUESTIONS，不排除中国大陆现行收费体系确实不单列此类费用（与 CLAUDE.md 任务说明的预期一致）。"
 
   stamp_duty:
     zh: "0.05%（单边，卖方缴纳）"
+    en: "0.05% (one-sided, paid by the seller)"
     detail: |
       2023年8月28日起，证券交易印花税由此前的单边1‰减半下调至单边0.5‰，仅对卖方征收。
       印花税是全国统一税率的国家税种，非交易所自定，深交所与上交所适用同一税率——本条与
@@ -1018,20 +1214,44 @@ costs:
     confidence: medium
 
   financial_transaction_tax:
-    zh: ""
+    zh: "本次会话未见独立于证券交易印花税（见 stamp_duty 字段）之外、以「金融交易税」单独命名的税种；中国大陆对证券交易征收的国家层面税收目前以证券交易印花税（单边0.05%，卖方缴纳）为主体"
+    en: "This session found no tax separately labelled a 'financial transaction tax' distinct from the securities transaction stamp duty (see stamp_duty); mainland China's national-level tax on securities trading is currently, in substance, the stamp duty alone (0.05%, one-sided, paid by the seller)"
     confidence: low
+    detail: "本条为基于已核实的 stamp_duty 字段与本次检索未发现另一独立税种的推断说明，非独立数据来源；sources 复用 stamp_duty 字段的同一篇报道，作为「现行税种即印花税」这一判断的背景支撑，而非本字段本身的直接出处。"
+    sources:
+      - title: 证券交易印花税8月28日起实施减半征收（人民网）
+        url: http://finance.people.com.cn/n1/2023/0828/c1004-40065300.html
+        accessed: 2026-08-14
 
   capital_gains_tax:
-    zh: ""
-    confidence: low
+    zh: "境内个人投资者转让境内上市公司股票所得，自1997年1月1日起持续暂免征收个人所得税，该项豁免延续至今未见废止；境内企业投资者的股票转让所得则依法计入企业应纳税所得额，按企业所得税相关规定征收（一般规定，本次未就上市公司股票转让单独核实企业所得税税率或优惠安排）"
+    en: "Gains that domestic individual investors realize from transferring shares of domestic listed companies have been exempt from individual income tax on a continuing basis since 1 January 1997, and this exemption remains in force with no repeal found; gains realized by domestic corporate investors, by contrast, are included in taxable corporate income and taxed under the ordinary corporate income tax rules (general principle only — this session did not separately verify any listed-share-specific corporate tax rate or preferential treatment)"
+    sources:
+      - title: 财政部 国家税务总局关于个人转让股票所得继续暂免征收个人所得税的通知（财税字〔1998〕61号，1997年1月1日起施行；国家税务总局广东省税务局官网转发，标注来源为国家税务总局）
+        url: https://guangdong.chinatax.gov.cn/gdsw/grsdsgg_hmqsc_pyzbsc_ssgs/2021-08/31/content_0515931e3f044baf9a26bbe53e85eb38.shtml
+        accessed: 2026-08-24
+    quote: "为了配合企业改制，促进股票市场的稳健发展，经报国务院批准，从1997年1月1日起，对个人转让上市公司股票取得的所得继续暂免征收个人所得税。"
+    confidence: high
 
   dividend_withholding_tax:
-    zh: ""
-    confidence: low
+    zh: "个人投资者持有上市公司股票的股息红利所得实行持股期限差别化征税：持股1个月以内（含）全额计入应纳税所得额；1个月以上至1年（含）暂减按50%计入；持股超过1年暂免征收个人所得税；应纳部分统一按20%税率计征，由证券登记结算公司根据持股期限计算并代扣代缴"
+    en: "Individual investors' dividend income on listed-company shares is taxed on a holding-period-differentiated basis: for shares held 1 month or less, dividend income is included in taxable income in full; for shares held more than 1 month up to 1 year, only 50% is included; for shares held over 1 year, dividend income is exempt from individual income tax; where tax is due it is levied at a flat 20% rate, calculated by holding period and withheld by the securities depository and clearing corporation"
+    sources:
+      - title: 财政部 国家税务总局 证监会关于上市公司股息红利差别化个人所得税政策有关问题的通知（财税〔2015〕101号，通知抬头列明直接下发对象含"上海、深圳证券交易所"）
+        url: https://www.chinatax.gov.cn/n810341/n810755/c1797427/content.html
+        accessed: 2026-08-24
+    quote: "一、个人从公开发行和转让市场取得的上市公司股票，持股期限超过1年的，股息红利所得暂免征收个人所得税。个人从公开发行和转让市场取得的上市公司股票，持股期限在1个月以内（含1个月）的，其股息红利所得全额计入应纳税所得额；持股期限在1个月以上至1年（含1年）的，暂减按50%计入应纳税所得额；上述所得统一适用20%的税率计征个人所得税。二、上市公司派发股息红利时，对个人持股1年以内（含1年）的，上市公司暂不扣缴个人所得税；待个人转让股票时，证券登记结算公司根据其持股期限计算应纳税额……"
+    confidence: high
 
   implicit_costs_note:
-    zh: ""
+    zh: "隐性成本主要体现为买卖价差与冲击成本：A股最小报价单位0.01元人民币、基金0.001元人民币（见 market_structure.tick_size），涨跌幅限制（主板±10%/创业板±20%）与临时停牌机制客观上约束了单日价格冲击的上限，但本次未见官方就买卖价差、冲击成本的独立统计披露"
+    en: "Implicit costs chiefly take the form of the bid-ask spread and market-impact cost: the tick size is RMB 0.01 for A-shares and RMB 0.001 for funds (see market_structure.tick_size), and the price-limit bands (±10% Main Board / ±20% ChiNext) plus the trading-halt mechanism objectively cap the ceiling on same-day price impact, though this session found no official standalone statistics on bid-ask spreads or impact cost"
     confidence: low
+    detail: "本条为基于已核实的 market_structure.tick_size / price_limits 等结构性字段的推断说明，非独立数据来源；sources 复用支撑 tick_size/price_limits 两个字段的同一份交易规则，作为背景支撑，而非本字段本身的直接出处。"
+    sources:
+      - title: 深圳证券交易所交易规则（2026年修订）第3.3.11条、第4.3.1-4.3.3条
+        url: https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf
+        accessed: 2026-08-14
 
 # ═══════════════════════════════════════════════
 # 十二｜风险与特殊考量
@@ -1043,19 +1263,38 @@ risks:
 
   fx_risk_note:
     zh: "人民币非完全可自由兑换，外资参与需通过额度管理渠道，存在换汇与资金进出限制；与上交所面临相同的国家层面外汇管制环境"
+    en: "The RMB is not fully convertible; foreign participation must go through quota-managed channels, and FX conversion and cross-border fund movement are subject to restrictions — the same national-level FX control environment faced by SSE"
     confidence: low
 
   political_risk_note:
-    zh: ""
+    zh: "深交所受中国证监会统一监管，跨境资金流动、外资持股比例、信息披露合规边界均受国家层面资本管制与外汇管理政策约束（见 regulation.capital_controls、regulation.foreign_ownership_limit）；地缘政治环境变化可能通过跨境资本流动限制、境外投资者准入政策调整等渠道传导至深市，与上交所面临同一国家层面的政治与监管环境"
+    en: "SZSE is regulated uniformly by the CSRC, and cross-border capital flows, foreign ownership limits, and the boundaries of disclosure compliance are all constrained by national-level capital and FX controls (see regulation.capital_controls, regulation.foreign_ownership_limit); shifts in the geopolitical environment could transmit to the Shenzhen market through channels such as cross-border capital flow restrictions or changes to foreign-investor access policy — the same national-level political and regulatory environment faced by SSE"
     confidence: low
+    detail: "本条为基于已核实的 regulation.capital_controls / foreign_ownership_limit 等结构性字段的推断说明，非独立数据来源；sources 复用支撑 capital_controls 字段的同一份规章，作为背景支撑，而非本字段本身的直接出处。"
+    sources:
+      - title: 合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法（2020年证监会、人民银行、外汇局令第176号）
+        url: http://www.csrc.gov.cn/csrc/c106256/c1653823/content.shtml
+        accessed: 2026-08-24
 
   liquidity_risk_note:
-    zh: ""
+    zh: "深市个股流动性分层明显：主板蓝筹与创业板龙头交投活跃，但风险警示（ST/*ST）与退市整理股票因涨跌幅收窄至±5%、叠加适当性门槛（两年以上交易经验、开通前20个交易日日均资产不低于50万元，见 participants.suitability_management）等制度安排，实际流动性显著低于普通股票"
+    en: "Liquidity is markedly stratified across Shenzhen-listed stocks: Main Board blue chips and ChiNext leaders trade actively, but risk-warned (ST/*ST) and delisting-transition-period stocks — subject to a narrowed ±5% price-limit band plus suitability-management thresholds (2+ years' trading experience, RMB 500,000+ average daily assets over the preceding 20 trading days; see participants.suitability_management) — have materially lower actual liquidity than ordinary stocks"
     confidence: low
+    detail: "本条为基于已核实的 market_structure.price_limits、participants.suitability_management 等结构性字段的推断说明，非独立数据来源；官方就深交所整体或分层的换手率、买卖价差公开统计本次未核实到；sources 复用支撑 suitability_management 字段的同一份交易规则，作为背景支撑，而非本字段本身的直接出处。"
+    sources:
+      - title: 深圳证券交易所交易规则（2026年修订）第4.5.3条
+        url: https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf
+        accessed: 2026-08-14
 
   regulatory_change_risk_note:
-    zh: ""
-    confidence: low
+    zh: "深交所核心业务规则修订频繁：现行《股票上市规则》自1998年1月实施以来已历经十七次修订（最近一次为2026年4月）；《交易规则》自2001年11月30日实施以来同样历经多次修订。本项目建档过程中也直接观测到这种高频修订节奏——上一轮抓取登记的2025年修订版《股票上市规则》PDF链接在本轮抓取时已返回404，经核实是被2026年4月发布的新修订版静默替换下线（详见 PROJECT/SOURCES.md 本节开头记录）"
+    en: "SZSE's core business rules are revised frequently: the current Stock Listing Rules, in effect since January 1998, have already undergone seventeen revisions (the most recent in April 2026); the Trading Rules, in effect since 30 November 2001, have likewise been revised repeatedly. This project's own data-gathering process observed this high revision cadence directly — the 2025-revision Stock Listing Rules PDF registered during a prior fetch returned a 404 on this round, and was confirmed to have been silently superseded and taken offline by the new revision published in April 2026 (see the note at the top of this file's section in PROJECT/SOURCES.md)"
+    sources:
+      - title: 深圳证券交易所股票上市规则（2026年修订）封面页（修订历史列表）
+        url: http://docs.static.szse.cn/www/lawrules/rule/allrules/bussiness/W020260424747613955674.pdf
+        accessed: 2026-08-24
+    quote: "深圳证券交易所股票上市规则（2026 年修订）（1998 年 1 月实施；2000 年 5 月第一次修订；2001 年6 月第二次修订；2002 年 2 月第三次修订；2004 年 12 月第四次修订；2006 年 5 月第五次修订；2008 年 9 月第六次修订；2012 年 7 月第七次修订；2014 年 10 月第八次修订；2018 年 4 月第九次修订；2018 年 11 月第十次修订；2020 年 12 月第十一次修订；2022 年 1 月第十二次修订；2023 年 2 月第十三次修订；2023 年 8 月第十四次修订；2024 年 4 月第十五次修订；2025 年 4 月第十六次修订；2026 年 4 月第十七次修订）"
+    confidence: high
 
   enforcement_note:
     zh: ""

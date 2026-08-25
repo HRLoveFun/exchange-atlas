@@ -224,84 +224,89 @@
         "quote": null
       },
       "core_laws": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "us-nyse.yml 记录该所受《1934年证券交易法》管辖（NYSE官网有'Section 19(b) of the Securities and Exchange Act of 1934'的直接原文）；同一部法律理应对Nasdaq同等适用（两者同为SEC注册的全国性证券交易所），但本次抓取的nasdaq.com/nasdaqtrader.com页面未找到可摘引的逐字原文提及该法案，按铁律不凭'理应如此'的推断填入，留空。",
+        "zh": "《1934年证券交易法》（Securities Exchange Act of 1934）——纳斯达克作为SEC注册的全国性证券交易所须依据该法第6条完成注册",
+        "en": "Securities Exchange Act of 1934 — Nasdaq is registered as a national securities exchange under Section 6 of this Act",
+        "detail": "本文件先前因 nasdaq.com/nasdaqtrader.com 页面未见逐字原文而留空（见旧版 detail）；本次\n改用 govinfo.gov 官方汇编版制定法全文（美国政府出版局/众议院法律修订顾问办公室发布的\n\"Compilation of Statutes\"，非扫描件，可直接 curl 抓取纯文本 PDF）找到该法第6条\"全国性\n证券交易所注册\"条文原文，佐证 Nasdaq 与 us-nyse 等其他全国性证券交易所同受本法管辖。\ngovinfo.gov 与 sec.gov 是不同域名/基础设施，未触发 sec.gov 的反爬拦截，详见\nSOURCES.md 本节反爬突破记录。\n",
         "sources": [
           {
-            "title": "Market Regulation（官网）",
-            "url": "https://www.nasdaq.com/market-regulation",
-            "accessed": "2026-08-14"
+            "title": "Securities Exchange Act of 1934（govinfo.gov 官方汇编全文 PDF，Compilation of Statutes, current through P.L. 119-60）",
+            "url": "https://www.govinfo.gov/content/pkg/COMPS-1885/pdf/COMPS-1885.pdf",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "SECURITIES EXCHANGE ACT OF 1934 ... NATIONAL SECURITIES EXCHANGES SEC. 6. An exchange may be registered as a national securities exchange under the terms and conditions hereinafter provided in this section and in accordance with the provisions of section 19(a) of this title, by filing with the Commission an application for registration in such form as the Commission, by rule, may prescribe containing the rules of the exchange and such other information and documents as the Commission, by rule, may prescribe as necessary or appropriate in the public interest or for the protection of investors.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "quote": null
+        "enum": null
       },
       "foreign_ownership_limit": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "无针对纳斯达克上市公司整体的统一外资持股比例上限；外国投资以「个案国家安全审查」（CFIUS，外国投资委员会）而非固定比例上限的形式管控，特定受监管行业（如航空、广播电视等）另有行业专属的法定持股比例限制，本次未逐一核实",
+        "en": "No blanket foreign-ownership percentage cap applies market-wide to Nasdaq-listed companies; foreign investment is instead subject to case-by-case national-security review (CFIUS) rather than a fixed ownership ceiling. Select regulated industries (e.g. airlines, broadcasting) carry their own statutory ownership caps, not individually verified this session",
+        "detail": "推断依据：美国财政部官网将CFIUS定性为审查\"特定\"涉及外国投资美国企业交易的跨部门\n委员会，其审查对象是逐笔\"交易\"，不是设定一条全市场统一的持股比例红线，这与常见的\n\"外资持股不得超过X%\"式限制在制度设计上是两类不同机制。未找到官方原文直接断言\"无\n持股比例上限\"这一否定性表述（防幻觉铁律不能证明否定），故本字段confidence定为\nmedium，以CFIUS机制本身的官方定性作为可引用的正面事实，\"无统一比例上限\"是结构性\n推论而非逐字引用。\n",
         "sources": [
           {
-            "title": "Market Regulation（官网）",
-            "url": "https://www.nasdaq.com/market-regulation",
-            "accessed": "2026-08-14"
+            "title": "Committee on Foreign Investment in the United States (CFIUS)（美国财政部官网）",
+            "url": "https://home.treasury.gov/policy-issues/international/the-committee-on-foreign-investment-in-the-united-states-cfius",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "an interagency committee authorized to review certain transactions involving foreign investment into United States businesses and certain transactions by foreign persons involving real estate in the United States, in order to determine the effect of such transactions on the national security of the United States",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "capital_controls": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "无统一的资本/外汇管制制度；对外国投资者资金进出的限制以「特定国家/主体定向制裁」（OFAC，外国资产控制办公室）为主要渠道，而非普遍性资本管制——例如对俄罗斯关联实体的新增投资限制并不禁止向非美国人出售/剥离既有证券持仓",
+        "en": "No general capital/FX control regime; restrictions on foreign investors' funds are instead administered through targeted, country/entity-specific sanctions programs (OFAC) rather than blanket capital controls — e.g. the new-investment restrictions on Russia-connected entities do not prohibit selling or divesting existing securities holdings to a non-U.S. person",
+        "detail": "OFAC官网历史沿革页说明其前身可追溯至二战时期防止纳粹利用被占领国外汇/证券资产的\n「外国资金控制办公室」，现职能定位为对特定国家、政权、恐怖组织等实施定向经济制裁；\nFAQ 1055（俄罗斯相关制裁）具体示例进一步说明限制针对特定交易类型/特定对手方（新增\n对俄关联实体的投资），而非笼统限制外国人买卖美国证券或汇出收益，普通二级市场剥离/\n出售交易明确不受影响。与foreign_ownership_limit字段相同的方法论限制：未找到\"美国无\n一般性资本管制\"这一表述的逐字官方原文（防幻觉铁律不能证明否定），confidence定为\nmedium，仅以OFAC职能范围与具体制裁条款的运作方式作为正面可引用事实。\n",
         "sources": [
           {
-            "title": "Market Regulation（官网）",
-            "url": "https://www.nasdaq.com/market-regulation",
-            "accessed": "2026-08-14"
+            "title": "About OFAC（美国财政部海外资产控制办公室官网）",
+            "url": "https://ofac.treasury.gov/about-ofac",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "OFAC FAQ 1055（俄罗斯相关定向制裁示例）",
+            "url": "https://ofac.treasury.gov/faqs/1055",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "OFAC notes, however, the new investment prohibitions of the respective E.O.s do not prohibit U.S. persons from selling or divesting debt or equity securities issued by such entities to a non-U.S. person. Moreover, U.S. financial institutions may clear and settle, or otherwise serve as market intermediaries in, such divestment transactions on the secondary market — including transactions between non-U.S. persons.",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "disclosure_requirements": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "联邦层面公平披露规则（Regulation FD，§ 243.100）：发行人向经纪商/投资顾问/机构投资经理等特定对象披露重大非公开信息时，须同步（故意披露）或及时（非故意披露）向公众披露同一信息",
+        "en": "Federal-level Regulation FD (Fair Disclosure, § 243.100): when an issuer discloses material nonpublic information to specified persons (broker-dealers, investment advisers, institutional investment managers, etc.), it must simultaneously (intentional disclosure) or promptly (non-intentional disclosure) make the same information public",
+        "detail": "Regulation FD是SEC统一规则，适用于全体在美上市发行人，非纳斯达克自身单独设定的披露\n要求；纳斯达克自身上市规则（Rule 5250(d)，见Continued Listing Guide已核实内容）另要求\n上市公司通过邮寄或官网电子方式向股东提供年度/中期报告，属于交易所上市规则层面的\n补充性披露义务。两者是\"SEC联邦证券法层面\"与\"交易所上市规则层面\"两套并存的披露要求，\n本字段以更基础的Regulation FD为主。本次通过 ecfr.gov 的 versioner API（而非该站面向\n用户的前端页面，那是纯JS外壳、curl抓不到正文）拿到Title 17 Part 243的官方汇编纯文本，\n详见SOURCES.md本节反爬突破记录。\n",
         "sources": [
           {
-            "title": "Market Regulation（官网）",
-            "url": "https://www.nasdaq.com/market-regulation",
-            "accessed": "2026-08-14"
+            "title": "17 CFR 243.100 Regulation FD（eCFR 官方汇编全文，versioner API 纯文本接口）",
+            "url": "https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=243",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "§ 243.100 General rule regarding selective disclosure. ... Whenever an issuer, or any person acting on its behalf, discloses any material nonpublic information regarding that issuer or its securities to any person described in paragraph (b)(1) of this section, the issuer shall make public disclosure of that information as provided in § 243.101(e): (1) Simultaneously, in the case of an intentional disclosure; and (2) Promptly, in the case of a non-intentional disclosure.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "investor_protection": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "证券投资者保护公司（SIPC）：SIPC会员经纪商破产清算时，为客户账户中缺失的现金和证券提供保护，保护限额50万美元（其中现金子限额25万美元）；保护对象不区分投资者国籍或居住地",
+        "en": "Securities Investor Protection Corporation (SIPC): protects against the loss of cash and securities held at a failed SIPC-member brokerage, up to a limit of $500,000 (including a $250,000 sub-limit for cash); protection applies regardless of the customer's nationality or residency",
+        "detail": "SIPC不是政府机构，而是国会依据《1970年证券投资者保护法》设立的会员制非营利公司，\n具有法定强制性（受监管的经纪商必须加入）；官网原文明确SIPC不保护证券市值下跌造成的\n损失，只保护经纪商破产清算时账户中\"缺失\"的现金和证券，与银行存款保险（FDIC）的保障\n范围不同。\n",
         "sources": [
           {
-            "title": "Market Regulation（官网）",
-            "url": "https://www.nasdaq.com/market-regulation",
-            "accessed": "2026-08-14"
+            "title": "What SIPC Protects（sipc.org 官网）",
+            "url": "https://www.sipc.org/for-investors/what-sipc-protects",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "SIPC protects against the loss of cash and securities – such as stocks and bonds – held by a customer at a financially-troubled SIPC-member brokerage firm. The limit of SIPC protection is $500,000, which includes a $250,000 limit for cash. ... There is no requirement that a customer reside in or be a citizen of the United States.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       }
     },
     "products": {
@@ -697,23 +702,28 @@
       },
       "short_selling": {
         "enum": "restricted_uptick",
-        "zh": "受Regulation SHO监管，含卖空限制熔断机制（Rule 201报升规则，Alternative Uptick Rule）；具体触发跌幅阈值本次未在抓取页面中找到可摘引的官方原文",
-        "en": "Regulated under Regulation SHO, including the short sale-related circuit breaker (Rule 201, Alternative Uptick Rule)",
-        "detail": "与us-nyse.yml记录的情况一致：Regulation SHO是SEC统一规则，Nasdaq/NYSE/FINRA页面均只确认Rule 201存在，未给出'跌幅达到多少百分比触发'的逐字原文，按铁律不凭记忆填入具体数值。",
+        "zh": "受Regulation SHO监管，含卖空限制熔断机制（Rule 201报升规则，Alternative Uptick Rule）：当某证券较其上一交易日常规交易时段收盘价（由其上市市场认定）下跌达10%或以上时触发，触发后当日剩余时段及次一交易日，卖空单价格须高于当前全国最优买价方可成交（展示卖空单在触发前已优于最优买价挂出的除外，另有标记为short exempt的例外情形）",
+        "en": "Regulated under Regulation SHO, including the short sale-related circuit breaker (Rule 201, Alternative Uptick Rule): triggered when a security's price decreases by 10% or more from its closing price on the prior day (as determined by its listing market), after which short sale orders for the remainder of that day and the following day may only execute at a price above the current national best bid (subject to exceptions for displayed orders already priced above the NBB before the trigger, and orders marked \"short exempt\")",
+        "detail": "先前留空理由：Nasdaq/NYSE/FINRA页面均只确认Rule 201存在，未给出触发跌幅百分比的逐字\n原文，按铁律不凭记忆填入具体数值。本次改用ecfr.gov的官方汇编条文原文（Electronic Code\nof Federal Regulations，17 CFR 242.201，Regulation SHO的官方法规文本），成功取得\"10%\"\n这一具体阈值的逐字条文。ecfr.gov面向用户的前端页面（如\necfr.gov/current/title-17/.../section-242.201）是纯JS渲染的SPA外壳，curl直接抓取\n拿不到正文；本次改用其公开的versioner API（无需鉴权，返回官方汇编XML/纯文本全文）\n成功绕过，详见SOURCES.md本节反爬突破记录。该API URL按eCFR\"issue date\"锁定版本\n（本次用2026-08-17，17 CFR Title 17当时的最新汇编日期），属于稳定可复现的历史快照\n引用方式，不会因未来法规再修订而失效或内容漂移。\n",
         "sources": [
           {
-            "title": "Regulation SHO（官网）",
+            "title": "Regulation SHO（nasdaqtrader.com官网）",
             "url": "https://www.nasdaqtrader.com/Trader.aspx?id=regsho",
             "accessed": "2026-08-14"
           },
           {
-            "title": "Short Sale Circuit Breaker（官网）",
+            "title": "Short Sale Circuit Breaker（nasdaqtrader.com官网）",
             "url": "https://www.nasdaqtrader.com/trader.aspx?id=ShortSaleCircuitBreaker",
             "accessed": "2026-08-14"
+          },
+          {
+            "title": "17 CFR 242.201 Circuit breaker（eCFR 官方汇编全文，versioner API 纯文本接口，Regulation SHO官方法规原文）",
+            "url": "https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=242",
+            "accessed": "2026-08-24"
           }
         ],
-        "quote": "The SEC adopted amendments to Regulation SHO with a compliance date of November 10, 2010. Among the rule changes, the SEC introduced Rule 201 (Alternative Uptick Rule), a short sale-related circuit breaker that when triggered, will impose a restriction on prices at which securities may be sold short.",
-        "confidence": "medium",
+        "quote": "A trading center shall establish, maintain, and enforce written policies and procedures reasonably designed to: (i) Prevent the execution or display of a short sale order of a covered security at a price that is less than or equal to the current national best bid if the price of that covered security decreases by 10% or more from the covered security's closing price as determined by the listing market for the covered security as of the end of regular trading hours on the prior day; and (ii) Impose the requirements of paragraph (b)(1)(i) of this section for the remainder of the day and the following day...",
+        "confidence": "high",
         "verified": "2026-08-14"
       },
       "block_trade": {
@@ -907,25 +917,20 @@
         "detail": null
       },
       "suspension_resumption": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "公司收到Staff Delisting Determination（职员退市决定）后如及时提出Hearings Panel（听证小组）复核请求，通常将中止暂停交易/退市程序直至书面决定作出为止；但特定情形（如二次180天买价合规宽限期届满仍未达标）下，提出听证请求不再中止暂停，证券在听证程序期间转入场外市场（OTC）交易，听证小组仍保留在公司恢复达标后裁定其恢复纳斯达克交易的权限",
+        "en": "A timely request for Hearings Panel review of a Staff Delisting Determination ordinarily stays the suspension and delisting action pending a written Panel decision; however, in specified circumstances (e.g. a company that received a second 180-day bid-price compliance period and still failed to regain compliance), the stay does not apply, and the security trades in the OTC market pending the appeal — the Hearings Panel retains authority to reinstate Nasdaq trading if the company regains compliance during that period",
+        "detail": "两项细节分别来自同一份SEC命令的正文与脚注：正文确认\"一般规则\"是听证请求通常中止\n暂停（stay）；脚注说明该次规则修改所涉及的例外情形下证券改在OTC市场交易，且听证\n小组仍可在公司后续达标时裁定恢复纳斯达克交易（如通过反向股票分割恢复至少10个连续\n交易日收盘价达1美元）。来源为federalregister.gov官方转载的SEC批准令（Order Granting\nApproval），而非listingcenter.nasdaq.com被拦截的Rulebook交互页，详见SOURCES.md本节\n反爬突破记录。\n",
         "sources": [
           {
-            "title": "Nasdaq Initial Listing Guide（PDF）",
-            "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "Nasdaq Continued Listing Guide（PDF）",
-            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
-            "accessed": "2026-08-14"
+            "title": "SEC Order Granting Approval of a Proposed Rule Change to Modify the Application of the Minimum Bid Price Compliance Periods and the Delisting Appeals Process（SR-NASDAQ-2024-031，federalregister.gov官方转载）",
+            "url": "https://www.federalregister.gov/documents/2025/01/23/2025-01621/self-regulatory-organizations-the-nasdaq-stock-market-llc-order-granting-approval-of-a-proposed-rule",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "notwithstanding the general rule that a timely request for a hearing shall ordinarily stay the suspension and delisting action pending the issuance of a written Hearings Panel decision, a request for a hearing shall not stay the suspension of the securities from trading where the matter relates to a request made by a company that was afforded the second 180-day compliance period ... and that failed to regain compliance with the Bid Price Requirement during that period.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "delisting_conditions": {
         "zh": "未达持续上市标准触发退市，如三档市场（Global Select/Global/Capital Market）项下最低买价均为1美元，低于该价格视为不达标",
@@ -944,67 +949,57 @@
         "detail": null
       },
       "delisting_process": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "三级流程：(1) Listing Qualifications Department（上市审核部门）认定公司未达上市标准后出具Staff Delisting Determination（职员退市决定，或视情形出具Public Reprimand Letter公开谴责函）；(2) 公司可请求Hearings Panel（听证小组，由非纳斯达克关联人士组成）就书面记录及口头听证进行复核并作出裁决；(3) 听证小组裁决可上诉至Nasdaq Listing and Hearing Review Council（上市与听证复核理事会），该理事会亦可依职权主动调取案件复核",
+        "en": "Three-tier process: (1) the Listing Qualifications Department issues a Staff Delisting Determination (or, in some cases, a Public Reprimand Letter) upon finding a company fails to meet listing standards; (2) the company may request review by a Hearings Panel (composed of persons unaffiliated with Nasdaq), which issues a decision after reviewing the written record and holding an oral hearing if requested; (3) the Panel's decision may be appealed to, or called for review by, the Nasdaq Listing and Hearing Review Council (the Listing Council)",
+        "detail": "来源是SEC就纳斯达克SR-NASDAQ-2024-037规则修改申请发布的官方通知（federalregister.gov\n转载的Federal Register正式出版内容），其\"Purpose\"背景部分完整复述了Nasdaq Listing Rule\n5810（职员认定）/5815（听证小组复核）/5820（理事会上诉）三级结构的现行设计——该次\n具体修法提案后续于2024年10月撤回，但背景部分对现行规则结构的描述不受撤回影响。\nListing Council由非纳斯达克关联的产业与非产业背景人士组成、经Nasdaq董事会提名委员会\n批准，这一治理细节另有Nasdaq Listing and Hearing Review Council Charter（托管于\nlistingcenter.nasdaq.com/assets/的静态PDF，未走被拦截的Rulebook交互页）佐证。\n",
         "sources": [
           {
-            "title": "Nasdaq Initial Listing Guide（PDF）",
-            "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
-            "accessed": "2026-08-14"
+            "title": "SEC Notice of Filing of Proposed Rule Change To Amend Rule 5820（SR-NASDAQ-2024-037，federalregister.gov官方转载）",
+            "url": "https://www.federalregister.gov/documents/2024/07/23/2024-16105/self-regulatory-organizations-the-nasdaq-stock-market-llc-notice-of-filing-of-proposed-rule-change",
+            "accessed": "2026-08-24"
           },
           {
-            "title": "Nasdaq Continued Listing Guide（PDF）",
-            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
-            "accessed": "2026-08-14"
+            "title": "Nasdaq Listing and Hearing Review Council Charter（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/NLHRC_Charter.pdf",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "When the Listing Qualifications Department determines that a company does not meet the requirements to remain listed, the Listing Qualifications Department will issue a Staff Delisting Determination. ... Upon receipt of a Staff Delisting Determination or a Public Reprimand Letter, or when its application for initial listing is denied, a company may request that a Hearings Panel review the matter. ... After reviewing the written record and holding an oral hearing, if one is requested, a Hearings Panel will issue a decision, which is reviewed by the Nasdaq Listing and Hearing Review Council (the \"Listing Council\"), either on appeal or on its own initiative.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "delisting_transition_period": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "买价（Bid Price Requirement）等特定持续上市标准不达标时，公司通常先获得180天合规宽限期；若已通知拟通过反向股票分割解决买价问题，可再获第二个180天宽限期（两期合计最长360天），宽限期满仍未达标才触发Staff Delisting Determination（职员退市决定），进入listing.delisting_process所述的听证/上诉程序",
+        "en": "For specified continued-listing deficiencies such as the Bid Price Requirement, a company is ordinarily afforded a 180-day compliance period; if it notifies Nasdaq of an intent to cure via reverse stock split, a second 180-day period may be granted (up to 360 days combined). Only after these periods lapse without regaining compliance does Nasdaq issue a Staff Delisting Determination, triggering the hearing/appeal process described in listing.delisting_process",
+        "detail": "与suspension_resumption/delisting_process同一份SEC命令（federalregister.gov转载），\n描述的是\"进入正式退市决定程序之前\"的合规整改期，概念上对应本项目其他交易所记录的\n\"退市整理期\"，但美国的设计是\"决定退市之前给整改期\"而非\"决定退市之后给整理期交易\"——\n与部分交易所\"先摘牌公告、再给一段时间内继续交易\"的整理期模式在时序上不同，特此说明\n避免与其他交易所同名字段的含义产生混淆。该180天数字仅适用于买价（Bid Price）类不\n达标情形，其他类型持续上市缺陷（如市值、股东人数）的宽限期长度本次未逐一核实。\n",
         "sources": [
           {
-            "title": "Nasdaq Initial Listing Guide（PDF）",
-            "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "Nasdaq Continued Listing Guide（PDF）",
-            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
-            "accessed": "2026-08-14"
+            "title": "SEC Order Granting Approval of a Proposed Rule Change to Modify the Application of the Minimum Bid Price Compliance Periods and the Delisting Appeals Process（SR-NASDAQ-2024-031，federalregister.gov官方转载）",
+            "url": "https://www.federalregister.gov/documents/2025/01/23/2025-01621/self-regulatory-organizations-the-nasdaq-stock-market-llc-order-granting-approval-of-a-proposed-rule",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "a company that was afforded the second 180-day compliance period described in Nasdaq Rule 5810(c)(3)(A)(ii) ... The Exchange states in its proposal that it believes that two consecutive compliance periods for a total of 360 days is a sufficient period of time for a company to regain compliance with the Bid Price Requirement.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "post_delisting_venue": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "场外市场（OTC market）——公司证券在退市听证/上诉程序进行期间或正式退市后转入OTC市场交易；若公司在此期间恢复达标（如通过反向股票分割使收盘价连续10个交易日达1美元以上），听证小组可裁定恢复其在纳斯达克的交易",
+        "en": "Over-the-counter (OTC) market — the security trades OTC during the delisting hearing/appeal process or after formal delisting; if the company regains compliance during that period (e.g. via a reverse stock split maintaining a $1.00 closing bid price for at least 10 consecutive trading days), the Hearings Panel may reinstate trading on Nasdaq",
         "sources": [
           {
-            "title": "Nasdaq Initial Listing Guide（PDF）",
-            "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "Nasdaq Continued Listing Guide（PDF）",
-            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
-            "accessed": "2026-08-14"
+            "title": "SEC Order Granting Approval of a Proposed Rule Change to Modify the Application of the Minimum Bid Price Compliance Periods and the Delisting Appeals Process（SR-NASDAQ-2024-031，federalregister.gov官方转载）",
+            "url": "https://www.federalregister.gov/documents/2025/01/23/2025-01621/self-regulatory-organizations-the-nasdaq-stock-market-llc-order-granting-approval-of-a-proposed-rule",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "The Exchange states that a company that is suspended under the proposed rule could appeal the Delisting Determination to a Hearings Panel, but its securities would trade in the over-the-counter (\"OTC\") market while that appeal is pending. ... the Hearings Panel will continue to have the authority to find the company in compliance with all applicable listing standards and reinstate the trading of the company's securities on Nasdaq (e.g., if the company effects a reverse stock split and maintains a $1.00 closing bid price for at least 10 consecutive days while trading in the OTC market).",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       }
     },
     "indices": {
@@ -1170,14 +1165,20 @@
         "sources": null
       },
       "default_management": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "清算对手方NSCC（National Securities Clearing Corporation）设有「结算基金」（Clearing Fund，即其违约基金）：每个会员按每日风险测算缴纳「应缴基金保证金」（Required Fund Deposit，个体层面即为该会员的保证金），全体会员保证金汇总构成结算基金；若某会员违约（NSCC终止为其行为）且该会员自身保证金不足以弥补清算其持仓所造成的损失，NSCC动用结算基金弥补差额",
+        "en": "NSCC (the CCP for Nasdaq trades) maintains a Clearing Fund functioning as its default fund: each member deposits a daily risk-based Required Fund Deposit (individually, the member's margin); the aggregate of all members' deposits is the Clearing Fund. If a Member defaults (NSCC ceases to act for it) and that member's own deposit is insufficient to cover losses from liquidating its portfolio, NSCC draws on the Clearing Fund to cover the shortfall",
+        "detail": "来源是SEC就NSCC（本文件clearing.ccp_name已确认的清算对手方，DTCC子公司）\"结算基金\n方法论优化\"规则修改申请发布的官方通知，federalregister.gov转载。文中列出结算基金\n保证金的多个构成分项（波动性费用/盯市费用/未交割费用/家族发行证券费用/保证金流动性\n调整等），本字段只摘取\"违约\"定义与基金机制本身，未逐项摘录各分项算法。该机制性质上\n与本项目其他交易所记录的\"违约处置与风险共担\"字段（如设有会员分摊损失的Loss\nAllocation机制）概念对应，但本次未找到NSCC具体损失分摊（向非违约会员摊派）触发条件\n与比例的逐字原文，故未写入正文，留待后续核实。\n",
+        "sources": [
+          {
+            "title": "SEC Notice of Filing of Proposed Rule Change To Enhance NSCC's Clearing Fund Methodology（federalregister.gov官方转载）",
+            "url": "https://www.federalregister.gov/documents/2026/06/04/2026-11144/self-regulatory-organizations-national-securities-clearing-corporation-notice-of-filing-of-proposed",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "The objective of a Member's Required Fund Deposit is to mitigate potential losses to NSCC associated with liquidating a Member's portfolio in the event NSCC ceases to act for that Member (hereinafter referred to as a \"default\"). Required Fund Deposits operate, individually, as the Member's margin, and the aggregate of all such Members' deposits is referred to, collectively, as the Clearing Fund, which operates as NSCC's default fund. NSCC would access the Clearing Fund should a defaulting Member's own Required Fund Deposit be insufficient to satisfy losses to NSCC caused by the liquidation of that Member's portfolio.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "derivatives": {
         "initial_margin_practice": null,
@@ -1189,44 +1190,73 @@
     },
     "participants": {
       "investor_structure": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "美股市场整体（非纳斯达克单一实体口径）：根据美联储最新消费者金融调查，58.0%的美国家庭持有权益类资产（直接或通过基金间接持有）；权益类资产占美国家庭流动金融资产的54.5%（2024年数据）",
+        "en": "US equity market overall (not a Nasdaq-specific figure): per the latest Federal Reserve Survey of Consumer Finances, 58.0% of US households own equities (directly or indirectly); equities represent 54.5% of US households' liquid financial assets (2024 data)",
+        "detail": "数据来自SIFMA（美国证券业与金融市场协会，行业自律性贸易协会）编制的《2025年资本\n市场年鉴》（Capital Markets Fact Book），原始数据来源标注为美联储调查，按CLAUDE.md\n第二节第三条第三方来源confidence上限medium处理。该统计口径是\"美国证券市场整体\"而非\n\"纳斯达克单一交易所\"的投资者结构，纳斯达克专属的机构/散户成交占比本次未找到可引用\n的官方原文，故本字段以市场整体口径呈现并在此说明局限性。\n",
+        "sources": [
+          {
+            "title": "2025 SIFMA Capital Markets Fact Book（PDF）",
+            "url": "https://www.sifma.org/wp-content/uploads/2024/07/2025-SIFMA-Capital-Markets-Factbook.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "According to the latest Federal Reserve survey, 58.0% of households own equities, +5.3 pps from the prior survey. ... The breakout of liquid financial assets held by U.S. households was: Equities 54.5% Mutual funds 17.1% Deposits (bank deposits and CDs) 13.7% Bonds (UST, agency, munis, and corporates) 8.2% Money market funds 6.5%",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "account_opening_requirements": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "联邦《客户身份识别程序》（Customer Identification Program, CIP）规则：经纪商须建立书面CIP，开户前至少须获取客户姓名、（自然人）出生日期、地址、身份证明号码（美国人为纳税人识别号；非美国人可用护照号及签发国、外国人身份证号或其他政府签发证件号）",
+        "en": "Federal Customer Identification Program (CIP) rule: a broker-dealer must establish a written CIP and, at minimum, obtain each customer's name, date of birth (for an individual), address, and identification number before opening an account (a U.S. taxpayer ID for U.S. persons; for non-U.S. persons, a taxpayer ID, passport number and country of issuance, alien ID card number, or another government-issued document number)",
+        "detail": "该规则是《爱国者法案》第326条的落地规则，由财政部金融犯罪执法网络（FinCEN）发布\n（31 CFR 1023.220），是反洗钱合规程序的一部分，适用于全美经纪商（含纳斯达克会员\n经纪商），非纳斯达克交易所自身单独设定的开户要求。规则明确允许非美国人以护照等身份\n证件代替纳税人识别号完成身份核验，是participants.foreign_access_channel\"境外投资者可\n通过普通经纪商开户、无需特殊资质\"判断的直接依据之一。本次通过ecfr.gov的versioner\nAPI拿到该条文官方汇编纯文本，详见SOURCES.md本节反爬突破记录。\n",
+        "sources": [
+          {
+            "title": "31 CFR 1023.220 Customer Identification Program（eCFR 官方汇编全文，versioner API 纯文本接口）",
+            "url": "https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-31.xml?part=1023",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "A broker-dealer must establish, document, and maintain a written Customer Identification Program (\"CIP\") ... Except as permitted by paragraph (a)(2)(i)(B) of this section, the broker-dealer must obtain, at a minimum, the following information prior to opening an account: (1) Name; (2) Date of birth, for an individual; (3) Address ...; and (4) Identification number, which shall be: (i) For a U.S. person, a taxpayer identification number; or (ii) for a non-U.S. person, one or more of the following: A taxpayer identification number, a passport number and country of issuance, an alien identification card number, or the number and country of issuance of any other government-issued document evidencing nationality or residence and bearing a photograph or similar safeguard.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "suitability_management": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "SEC《最佳利益规则》（Regulation Best Interest, Reg BI，§ 240.15l-1）：经纪商及其关联自然人向散户客户就证券交易/投资策略提出建议时，须以散户客户利益为先，不得将自身或第三方利益置于客户利益之上；须履行披露、审慎、利益冲突管理、合规四项义务",
+        "en": "SEC's Regulation Best Interest (Reg BI, § 240.15l-1): a broker-dealer and its associated persons, when recommending any securities transaction or investment strategy to a retail customer, must act in the customer's best interest and not place their own or a third party's interest ahead of the customer's — satisfied through four component obligations: Disclosure, Care, Conflict of Interest, and Compliance",
+        "detail": "Reg BI是SEC统一规则，2020年6月30日生效，取代此前经纪商适用的\"适合性\"（suitability）\n单一标准，适用于全美经纪商（含纳斯达克会员经纪商），非纳斯达克交易所自身单独设定的\n适当性管理制度；纳斯达克交易所本身对会员的资格审核见participants.membership_structure。\n本次通过ecfr.gov的versioner API（subject_group过滤参数）拿到该条文官方汇编纯文本，\n详见SOURCES.md本节反爬突破记录。\n",
+        "sources": [
+          {
+            "title": "17 CFR 240.15l-1 Regulation Best Interest（eCFR 官方汇编全文，versioner API 纯文本接口）",
+            "url": "https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=240&subject_group=ECFR64f52d737aea1ed",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "§ 240.15l-1 Regulation best interest. ... A broker, dealer, or a natural person who is an associated person of a broker or dealer, when making a recommendation of any securities transaction or investment strategy involving securities (including account recommendations) to a retail customer, shall act in the best interest of the retail customer at the time the recommendation is made, without placing the financial or other interest of the broker, dealer, or natural person who is an associated person of a broker or dealer making the recommendation ahead of the interest of the retail customer.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "foreign_access_channel": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "无类似QFII/沪深港通式的境外投资者专属准入通道；境外投资者通过在美（或跨境提供服务的）持牌经纪商开立账户即可直接交易纳斯达克上市证券，开户身份核验程序与美国本土投资者相同（见account_opening_requirements），仅身份证明文件类型因是否美国人而有所区分",
+        "en": "No QFII- or Stock-Connect-style dedicated access channel for foreign investors; foreign investors trade Nasdaq-listed securities by opening an account with a licensed broker-dealer (U.S.-based or cross-border), subject to the same Customer Identification Program as domestic investors (see account_opening_requirements), differing only in which identity documents are accepted",
+        "detail": "本字段是从account_opening_requirements（31 CFR 1023.220允许非美国人以护照等证件\n完成身份核验，未设额外的资质审批环节）与investor_protection（SIPC保护\"不要求客户是\n美国居民或公民\"）两个已核实字段的制度设计反向推出的结构性判断，未找到\"境外投资者可\n直接开户、无需特殊通道\"这一表述的逐字官方原文（防幻觉铁律不能证明否定），故confidence\n定为medium。非居民投资者买卖美股涉及的税务处理（如W-8BEN表格、股息预扣税）见\ncosts.dividend_withholding_tax。本字段无独立于下列两份来源之外的新增引用。\n",
+        "sources": [
+          {
+            "title": "31 CFR 1023.220 Customer Identification Program（eCFR 官方汇编全文，与participants.account_opening_requirements同一来源）",
+            "url": "https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-31.xml?part=1023",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "What SIPC Protects（sipc.org 官网，与regulation.investor_protection同一来源）",
+            "url": "https://www.sipc.org/for-investors/what-sipc-protects",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "membership_structure": {
         "zh": "会员制结构：做市商等参与方须先是或申请成为Nasdaq会员，并经FINRA（或Nasdaq自身，如该机构非FINRA会员）审核批准",
@@ -1245,14 +1275,20 @@
         "detail": null
       },
       "broker_landscape": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "全美（非纳斯达克单一实体口径）FINRA注册经纪商数量呈长期下降趋势：2024年3,249家，较2010年的4,577家下降约29%；同期投资顾问公司数量则持续增长（2024年32,090家，2010年为26,159家）",
+        "en": "Nationwide (not a Nasdaq-specific figure), the number of FINRA-registered broker-dealers has been in long-term decline: 3,249 firms in 2024, down about 29% from 4,577 in 2010; over the same period the number of investment adviser firms has grown (32,090 in 2024, up from 26,159 in 2010)",
+        "detail": "数据来源同investor_structure字段：SIFMA《2025年资本市场年鉴》，原始数据标注来源为\nFINRA，按第三方来源confidence上限medium处理。统计口径为\"全美在美经营的FINRA注册\n经纪商\"，非纳斯达克会员经纪商的专属子集（纳斯达克会员资格审核流程见\nmarket_structure.market_maker_scheme / participants.membership_structure，\n但纳斯达克自身会员经纪商总数本次未找到可引用的官方统计）。\n",
+        "sources": [
+          {
+            "title": "2025 SIFMA Capital Markets Fact Book（PDF）",
+            "url": "https://www.sifma.org/wp-content/uploads/2024/07/2025-SIFMA-Capital-Markets-Factbook.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Broker-                                     Investment            Registered\nDealers            Branch Offices          Advisor Firms        Representatives\n2010                     4,577                162,711                 26,159               628,440\n2024                     3,249                148,994                 32,090               634,508\nSource: FINRA\n",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       }
     },
     "infrastructure": {
@@ -1289,24 +1325,36 @@
         "enum": null
       },
       "data_pricing_model": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "按订阅者类型分层定价（Professional/Corporate专业机构用户 vs Non-Professional非专业个人用户，后者费率显著更低）：以TotalView全深度行情为例，2025年1月起专业/机构用户每订阅账号月费80.50美元，非专业用户15美元；另有面向数据分销商的内部/外部分发费与交易平台费等附加费率",
+        "en": "Tiered by subscriber category (Professional/Corporate vs. Non-Professional, with materially lower rates for the latter): e.g. for Nasdaq TotalView, effective January 2025, Professional/Corporate subscribers pay $80.50/subscriber/month vs. $15/subscriber/month for Non-Professional; additional distributor and trading-platform fees apply on top",
+        "sources": [
+          {
+            "title": "Nasdaq US Equities Price List 2025（nasdaqtrader.com官方PDF，market data entitlement fees）",
+            "url": "https://www.nasdaqtrader.com/content/ProductsServices/PriceList/Nasdaq_US_Equities_Price_List_2025.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Nasdaq TotalView  Nasdaq, NYSE, and Other Regional Issues  Professional/Corporate: $80.50 per subscriber\nNon-Professional: $15 per subscriber\n",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "historical_data_availability": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "面向公众的免费网页产品提供每只股票最多10年的每日历史股价与成交量；另有Nasdaq Data Link（原Quandl）面向机构/专业用户提供更广口径的付费历史与另类数据集，具体覆盖年限与定价本次未核实",
+        "en": "The free public-facing web product provides up to 10 years of daily historical stock prices and volumes per stock; Nasdaq Data Link (formerly Quandl) additionally offers broader paid historical and alternative datasets for institutional/professional users, coverage years and pricing not verified this session",
+        "detail": "Nasdaq Data Link产品线本次仅通过WebSearch摘要得知其存在（data.nasdaq.com），未实际curl抓取核实具体内容，故未写入正文，仅记于此供后续核实。",
+        "sources": [
+          {
+            "title": "Historical Data（nasdaq.com官网）",
+            "url": "https://www.nasdaq.com/market-activity/quotes/historical",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Historical data provides up to 10 years of daily historical stock prices and volumes for each stock. Historical price trends can indicate the future direction of a stock.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "trading_system_name": {
         "zh": "INET（原Instinet电子交易平台，2005年纳斯达克收购Instinet电子交易业务后整合为核心撮合系统）",
@@ -1346,14 +1394,20 @@
         "detail": null
       },
       "major_outage_history": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "2013年8月22日「闪冻」（Flash Freeze）事件：纳斯达克交易于当日12:14pm暂停，3:25pm恢复，暂停时长近3小时（距当日收盘仅剩35分钟）；事后纳斯达克OMX将原因归结为证券信息处理器（SIP）因与NYSE Arca连接反复中断/重连而过载",
+        "en": "August 22, 2013 \"Flash Freeze\": Nasdaq trading halted at 12:14 pm and resumed at 3:25 pm, a suspension of nearly three hours (with only 35 minutes left in the trading day); Nasdaq OMX later attributed the cause to the Securities Information Processor (SIP) being overloaded by repeated connect/disconnect issues with NYSE Arca",
+        "detail": "纳斯达克官方对该事件的更新声明托管于ir.nasdaq.com，本次多次尝试抓取仍持续超时/连接\n异常（HTTP/2 stream 报错、--http1.1 回退仍超时），与SOURCES.md既有记录一致，改用\n维基百科条目作为第三方来源，按CLAUDE.md第二节第三条第三方来源confidence上限medium\n处理。\n",
+        "sources": [
+          {
+            "title": "August 2013 NASDAQ flash freeze（en.wikipedia.org）",
+            "url": "https://en.wikipedia.org/wiki/August_2013_NASDAQ_flash_freeze",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "For three hours on August 22, 2013, trading was halted on the Nasdaq Stock Market. Trading on the exchange stopped at 12:14 pm and resumed at 3:25 pm, with 35 minutes left of trading for the day. One week after the trading halt NASDAQ OMX credited the freeze to an overloading of the Securities Information Processor (SIP) caused by reconnection issues with the New York Stock Exchange Arca.",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       }
     },
     "costs": {
@@ -1384,24 +1438,36 @@
         "enum": null
       },
       "clearing_fees": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "NSCC官方费率指南（Guide to the NSCC Fee Schedule）列示的现货证券清算相关费用示例：CNS买入平仓（Buy-in）每次通知5.00美元（原始方与空头经纪商双方均收取）；未交割入CNS每笔0.25美元（短缺1-30天）/3.00美元（超过30天）；净额清算「计入净值」每百万美元0.44美元、「计出净值」每百万美元2.16美元；另设按月按账户收取的300美元清算账户费",
+        "en": "Sample fees from NSCC's official Guide to the Fee Schedule for equity clearing: CNS buy-in $5.00 per notice of intent (charged to both originator and short broker); fail to deliver to CNS $0.25/item (short 1-30 days) or $3.00/item (short more than 30 days); clearance activity $0.44 per million dollars (into the net value) / $2.16 per million dollars (out of the net value); plus a $300/month per-account clearance account fee",
+        "detail": "dtcc.com主站内容页此前多次尝试均403（见SOURCES.md既有记录），但本次发现其静态资产\n路径（\"~/media/Files/Downloads/...\"托管的PDF文件）不受该拦截影响，成功抓到DTCC官方\n发布的《2026年NSCC费率指南》完整PDF——该指南明确声明\"仅供参考，官方费率以NSCC\nRules & Procedures附录A为准\"，本字段引用的是指南列示的说明性费率样本，非全部费率表。\n详见SOURCES.md本节反爬突破记录。\n",
+        "sources": [
+          {
+            "title": "Guide to the 2026 NSCC Fee Schedule（DTCC官方PDF，Effective January 1, 2026, Updated January 15, 2026）",
+            "url": "https://www.dtcc.com/~/media/Files/Downloads/legal/fee-guides/nsccfeeguide.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "CNS buy-in 5.00 Per notice of intent and retransmission; charged to both originator and short broker\nFail to deliver to CNS 0.25 Per item short in CNS for 1 to 30 days at close of business / 3.00 Per item short in CNS for more than 30 days at close of business\nInto the net value 0.44 Per million dollars, calculated as value of gross positions prior to netting / Out of the net value 2.16 Per million dollars, calculated as value of net positions after netting\nClearance account fee 300.00 Per month, per account\n",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "regulatory_fees": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "SEC Section 31交易费（Regulatory Transaction Fee）：现行费率为每百万美元成交额20.60美元，2026年4月4日起生效（此前一段时期费率为0，见detail）；由交易所代收后转付SEC，是本项目防幻觉铁律中明确点名的美国市场费率反例（费率随SEC每年度公告周期性调整，非固定不变）",
+        "en": "SEC Section 31 Regulatory Transaction Fee: currently $20.60 per million dollars of covered securities transactions, effective April 4, 2026 (the rate was $0.00 for a preceding period — see detail); collected by the exchange and remitted to the SEC. This fee is periodically re-set by SEC fee-rate advisories (annually), so the rate is not fixed",
+        "detail": "纳斯达克官方Equity Trader Alert明确写明\"直至该生效日期前，现行费率为每百万美元0.00\n美元\"（Until that date, the prevailing rate of $0.00 per million dollars will remain in\neffect）——这一\"费率一度为零\"的表述本身依据的是SEC官方《2026财年费率公告》（Fee Rate\nAdvisory for Fiscal Year 2026），具体为何一度归零（如国会预算授权周期性因素）本次未\n深入核实，仅如实转述纳斯达克官方提醒原文。该费率按SEC财年周期性调整，属于\"数值会变\"\n的字段，引用时应连同生效日一并核对，不可视为长期固定值。\n",
+        "sources": [
+          {
+            "title": "Equity Trader Alert #2026-18: Regulatory Transaction Fee Rate Adjustment per SEC Section 31（nasdaqtrader.com官网）",
+            "url": "https://www.nasdaqtrader.com/TraderNews.aspx?id=ETA2026-18",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Pursuant to the SEC's Fee Rate Advisory for Fiscal Year 2026, the Securities and Exchange Commission has announced that the Section 31 transaction fee rate applicable to securities transactions on national securities exchanges and over-the-counter markets will be set at $20.60 per million dollars, effective April 4, 2026. Until that date, the prevailing rate of $0.00 per million dollars will remain in effect.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "stamp_duty": {
         "zh": "",
@@ -1414,44 +1480,68 @@
         "sources": null
       },
       "financial_transaction_tax": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "美国联邦层面目前无广义证券交易税/金融交易税；历史上曾有股票转让税（Stock Transfer Tax），1914-1966年间实施后废止，其后续遗留形式即为costs.regulatory_fees记录的SEC Section 31交易费（性质是为SEC运作筹资的小额规费，非广义交易税）；此后历次国会层面广义证券交易税提案均未获通过立法",
+        "en": "No broad-based securities/financial transaction tax currently exists at the U.S. federal level; a historical federal Stock Transfer Tax was in effect from 1914 to 1966 before repeal. Its present-day successor is the SEC Section 31 transaction fee recorded under costs.regulatory_fees (a small fee funding SEC operations, not a broad-based transaction tax); various broad-based securities transaction tax proposals since have not been enacted",
+        "detail": "来源为国会研究服务处（Congressional Research Service, CRS）报告《Transaction Tax:\nGeneral Overview》，congress.gov本身对本次curl返回403，改用everycrsreport.com（第三方\n托管的CRS报告归档站）镜像获取原文，按CLAUDE.md第二节第三条第三方来源confidence上限\nmedium处理。该报告年代较早（文中\"目前费率\"引用的是2000年前后的SEC费率数字，与本\n文件costs.regulatory_fees记录的2026年现行费率$20.60/百万美元不是同一时期数字，不可\n混用），本字段仅采信其\"历史沿革\"与\"无广义交易税立法\"两点结构性事实，不采信其具体\n费率数字。\n",
+        "sources": [
+          {
+            "title": "Transaction Tax: General Overview（CRS Report RL32266，everycrsreport.com镜像）",
+            "url": "https://www.everycrsreport.com/reports/RL32266.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "At the federal level one of the historical examples of a transaction tax was a stock transfer tax (STT) effective from 1914 to 1966. ... At the present time the federal government still levies a small tax on share issuance and transfers ... for the primary purpose of financing the activities of the Securities and Exchange Commission (SEC).",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "capital_gains_tax": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "属于投资者个人所得税范畴，非交易所/市场层面收费。美国本土个人投资者：长期资本利得（持有超过1年）适用0%/15%/20%三档优惠税率（按应纳税所得额分档，2025纳税年度门槛见detail）；短期资本利得按累进的普通所得税税率征收。非美国居民境外投资者买卖美股产生的资本利得的具体待遇本次未找到可引用的官方原文逐字确认，故未写入zh/en正文",
+        "en": "A matter of investor personal income tax, not an exchange/market-level charge. For U.S. domestic individual investors: long-term capital gains (holdings over 1 year) are taxed at preferential 0%/15%/20% rates depending on taxable income (2025 tax-year thresholds in detail); short-term gains are taxed at ordinary progressive income tax rates. The specific treatment of nonresident alien investors' capital gains from trading U.S. stocks was not verified with a citable official source this session and is therefore omitted from the zh/en fields",
+        "detail": "2025纳税年度门槛（原文）：单身报税者应纳税所得额≤$48,350、已婚合并报税≤$96,700、\n户主报税≤$64,750适用0%档；超过该门槛且未超过$533,400（单身）/$600,050（已婚合并）/\n$566,700（户主）适用15%档；再往上适用20%档。另有合格小企业股票（Section 1202）、\n收藏品等最高28%及未收回1250条款利得最高25%的例外情形，本字段未逐条摘录。常见说法是\n非居民外国人买卖美股资本利得一般不属于美国联邦所得税应税范围（与dividend_withholding_tax\n记录的股息预扣待遇不同），但本次未独立抓取irs.gov对应页面逐字确认，按铁律不凭记忆\n填入，仅记于此供后续核实。\n",
+        "sources": [
+          {
+            "title": "Topic no. 409, Capital gains and losses（irs.gov官网）",
+            "url": "https://www.irs.gov/taxtopics/tc409",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Net capital gains are taxed at different rates depending on overall taxable income, although some or all net capital gain may be taxed at 0%. For taxable years beginning in 2025, the tax rate on most net capital gain is no higher than 15% for most individuals. A capital gains rate of 0% applies if your taxable income is less than or equal to: $48,350 for single and married filing separately; $96,700 for married filing jointly and qualifying surviving spouse; and $64,750 for head of household. ... However, a capital gains rate of 20% applies to the extent that your taxable income exceeds the thresholds set for the 15% capital gain rate.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "dividend_withholding_tax": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "境外投资者（非美国居民/外国实体）取得美国来源股息等收入，一般按30%的法定税率由付款方（经纪商/托管机构）代扣代缴（NRA Withholding，Internal Revenue Code第1441-1443条）；若投资者所在国与美国订有税收协定，可申请按协定优惠税率代扣（需提交W-8BEN等证明文件）；美国本土居民投资者取得股息则按其个人所得税税率征税（合格股息适用与长期资本利得相同的优惠税率档），不涉及预扣",
+        "en": "Foreign investors (nonresident aliens/foreign entities) receiving U.S.-source dividend income are generally subject to a statutory 30% withholding at source (NRA Withholding under Internal Revenue Code Sections 1441-1443), withheld by the payer (broker/custodian); a reduced treaty rate may apply if the investor's home country has a tax treaty with the U.S. (requires filing Form W-8BEN etc.). U.S. resident investors' dividends are instead taxed at their personal income tax rate (qualified dividends receive the same preferential rates as long-term capital gains), with no withholding involved",
+        "sources": [
+          {
+            "title": "NRA withholding（irs.gov官网）",
+            "url": "https://www.irs.gov/individuals/international-taxpayers/nra-withholding",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Generally, a foreign person is subject to U.S. tax on its U.S. source income. Most types of U.S. source income received by a foreign person are subject to U.S. tax of 30%. A reduced rate, including exemption, may apply if an Internal Revenue Code Section provides for a lower rate, or there is a tax treaty between the foreign person's country of residence and the United States. The tax is generally withheld (NRA withholding) from the payment made to the foreign person.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "implicit_costs_note": {
-        "zh": "",
+        "zh": "本次未找到纳斯达克官方/权威机构公开的买卖价差、市场冲击成本等隐性成本统计数据；间接信号：持续上市标准中做市商数量最低要求随所选子标准而异——Nasdaq Capital Market（入门层级）三个可选子标准均只需2家做市商，Global Select/Global Market的权益标准同样只需2家，但其市值标准/总资产标准则需4家。做市商数量下限越低，理论上买卖价差与隐性成本越高，但这是从持续上市量化标准反推的结构性信号，非直接的价差实测数据",
+        "en": "No official Nasdaq or authoritative statistics on bid-ask spread or market-impact cost were found this session. An indirect signal: the minimum market-maker count for continued listing varies by sub-standard — Nasdaq Capital Market's (entry-tier) three alternative sub-standards each require only 2 market makers, and Global Select/Global Market's Equity Standard also requires only 2, but their Market Value/Total Assets standards require 4. A lower market-maker floor is generally associated with wider spreads and higher implicit costs, but this is a structural inference from listing standards, not a direct spread measurement",
+        "detail": "与costs.exchange_fees记录的做市商-吃单者（maker-taker）费率模式有关联但概念不同：exchange_fees是交易所向会员收取的显性费用，implicit_costs_note是投资者因价差/冲击成本承担的隐性成本，两者不可混同。",
+        "sources": [
+          {
+            "title": "Nasdaq Continued Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "For Nasdaq Global Select Market and Nasdaq Global Market Companies ... Market Makers 2 4 4\nFor Nasdaq Capital Market Companies ... Market Makers 2 2 2\n",
         "confidence": "low",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       }
     },
     "risks": {
@@ -1466,34 +1556,57 @@
         "sources": null
       },
       "political_risk_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "《外国公司问责法》（Holding Foreign Companies Accountable Act, HFCAA，2020年签署生效）：若上市公司使用的会计师事务所因所在辖区当局限制，连续3年无法接受美国上市公司会计监督委员会（PCAOB）检查，SEC须禁止该公司证券在美全国性证券交易所（含纳斯达克）及场外市场交易——该法是近年在美上市外国发行人（尤以中国大陆背景发行人为代表）面临的主要政治/地缘风险来源之一",
+        "en": "Holding Foreign Companies Accountable Act (HFCAA, enacted 2020): if a listed issuer's auditor cannot be inspected by the PCAOB for 3 consecutive years because of restrictions imposed by authorities in the auditor's jurisdiction, the SEC must prohibit that issuer's securities from trading on U.S. national securities exchanges (including Nasdaq) and OTC markets — a leading source of political/geopolitical risk in recent years for foreign issuers listed in the U.S., particularly those with mainland China ties",
+        "detail": "来源为govinfo.gov托管的官方公法（Public Law 116-222）全文PDF，非扫描件、可直接curl\n抓取纯文本，详见SOURCES.md本节反爬突破记录，法案签署日期为2020年12月18日\n（原文\"Approved December 18, 2020.\"，见quote）。WebSearch过程中另见到\"2022年12月29日\n《综合拨款法案》将连续不可核查年限从3年缩短为2年\"的说法，但本次未独立抓取该修正案\n原文逐字核实，故zh/en正文仍以HFCAA原始法条\"3年\"表述为准，2年修正说法仅记于此供\n后续核实，不作为已核实事实写入正文。\n",
+        "sources": [
+          {
+            "title": "Holding Foreign Companies Accountable Act, Public Law 116-222（govinfo.gov官方公法全文PDF）",
+            "url": "https://www.govinfo.gov/content/pkg/PLAW-116publ222/pdf/PLAW-116publ222.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "TRADING PROHIBITION AFTER 3 YEARS OF NON-INSPECTION ... a covered issuer has 3 consecutive non-inspection years, the Commission shall prohibit the securities of the covered issuer ... Approved December 18, 2020.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "liquidity_risk_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "持续上市标准中做市商数量最低要求随所选子标准不同而有别：Nasdaq Capital Market（入门层级）三个可选子标准（权益/上市证券市值/净利润标准）均只需2家做市商；Nasdaq Global Select Market与Global Market的权益标准同样只需2家，但市值标准与总资产/营收标准则需4家。做市商数量下限越低，理论上流动性风险越高，尤以Capital Market层级的小型成长型公司为甚",
+        "en": "The minimum market-maker count required for continued listing varies by sub-standard: Nasdaq Capital Market's (entry-tier) three alternative sub-standards (Equity/Market Value of Listed Securities/Net Income) each require only 2 market makers; Global Select Market and Global Market's Equity Standard also requires only 2, but their Market Value Standard and Total Assets/Total Revenue Standard require 4. A lower market-maker floor is generally associated with higher liquidity risk, particularly for small growth companies on the Capital Market tier",
+        "detail": "该判断是从listing.boards已核实的量化上市门槛（Continued Listing Guide列示的做市商数量最低要求）反向推出的结构性信号，非独立的流动性风险专项统计或研报，与costs.implicit_costs_note的推理逻辑一致、引用同一份来源文档。",
+        "sources": [
+          {
+            "title": "Nasdaq Continued Listing Guide（PDF）",
+            "url": "https://listingcenter.nasdaq.com/assets/continuedguide.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "For Nasdaq Global Select Market and Nasdaq Global Market Companies ... Market Makers 2 4 4\nFor Nasdaq Capital Market Companies ... Market Makers 2 2 2\n",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "regulatory_change_risk_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "纳斯达克上市规则处于持续修订状态：仅退市听证/上诉相关的Rule 5810/5815/5820就在2024-2026年间经历多轮SEC规则修改申请（如2024年拟修改上诉标准后撤回、2025年通过买价二次合规期与退市听证例外规则）；NSCC结算基金方法论、持续上市新增要求等亦在2026年内多次修订，反映美国证券市场监管规则处于常态化、高频次的动态调整中，而非一经制定长期不变",
+        "en": "Nasdaq's listing rules are under continuous revision: Rules 5810/5815/5820 (delisting hearings/appeals) alone went through multiple SEC rule-change filings in 2024-2026 (e.g. a 2024 proposal to change the appeal standard was later withdrawn; a 2025 change added a second bid-price compliance period and hearing-stay exceptions); NSCC's Clearing Fund methodology and new continued-listing requirements were also amended multiple times within 2026 — reflecting that U.S. securities market rules are subject to routine, high-frequency change rather than being fixed once adopted",
+        "detail": "该判断综合自本次研究过程中检索到的多份federalregister.gov官方转载SEC通知/命令（详见listing.delisting_process/suspension_resumption/delisting_transition_period与clearing.default_management各字段引用的具体文件），下方sources只列代表性的两份，属于对已核实事实的横向归纳，无独立于这些已引用文件之外的新增来源。",
+        "sources": [
+          {
+            "title": "SEC Notice of Filing of Proposed Rule Change To Amend Rule 5820（SR-NASDAQ-2024-037，与listing.delisting_process同一来源）",
+            "url": "https://www.federalregister.gov/documents/2024/07/23/2024-16105/self-regulatory-organizations-the-nasdaq-stock-market-llc-notice-of-filing-of-proposed-rule-change",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "SEC Notice of Filing of Proposed Rule Change To Enhance NSCC's Clearing Fund Methodology（与clearing.default_management同一来源）",
+            "url": "https://www.federalregister.gov/documents/2026/06/04/2026-11144/self-regulatory-organizations-national-securities-clearing-corporation-notice-of-filing-of-proposed",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "enforcement_note": {
         "zh": "MarketWatch团队负责股票与期权市场监察；Investigations & Enforcement团队对潜在违规行为进行调查并采取纪律处分",

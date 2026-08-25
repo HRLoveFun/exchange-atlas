@@ -37,10 +37,10 @@
       },
       "founded_year": {
         "zh": "1891（前身香港经纪协会）／2000年3月6日（现HKEX集团经公司化改制成立，同年6月27日上市）",
+        "en": "1891 (predecessor Hong Kong Stockbrokers' Association) / 6 March 2000 (present-day HKEX Group formed via demutualisation, listed on its own Main Board on 27 June 2000)",
         "detail": "交易所前身可追溯至1891年成立的香港经纪协会，1914年更名为香港证券交易所。\n2000年3月6日，香港联合交易所、香港期货交易所与香港中央结算公司公司化合并，\n组成现在的香港交易及结算所有限公司，同年6月27日在本所主板上市。\n本条来自第三方综述（MarketsWiki/维基百科等），未逐条核对港交所官方\"关于我们\"页原文，confidence 标 medium。\n",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "quote": null,
         "sources": null
@@ -49,6 +49,7 @@
       "organization_form": {
         "enum": "demutualized_listed",
         "zh": "公司制（自身上市）",
+        "en": "Demutualised, listed company (self-listed)",
         "detail": "2000年由会员制的联交所/期交所公司化改制而来，是本项目 v0.1 两家标杆中与上交所会员制形成直接对比的样本。",
         "sources": [
           {
@@ -59,12 +60,12 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "quote": null
       },
       "self_listed": {
         "enum": "yes",
         "zh": "是（股票代码 0388.HK，即在自己的主板上市）",
+        "en": "Yes (stock code 0388.HK, i.e. listed on its own Main Board)",
         "sources": [
           {
             "title": "HKEX 官网首页",
@@ -74,7 +75,6 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "detail": null,
         "quote": null
       },
@@ -211,14 +211,25 @@
         "sources": null
       },
       "investor_protection": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "《证券及期货条例》设立投资者赔偿基金，由证监会全资附属的投资者赔偿有限公司（ICC）管理，就持牌中介人/认可财务机构因无力偿债、破产清盘、违反信托、亏空、欺诈或渎职而违责导致的证券期货交易损失作出赔偿，2020年1月1日起每名投资者赔偿上限由15万港元提升至50万港元（联名户口每名户口持有人各享50万港元上限），2020年起并将沪深港通北向交易纳入保障范围；另设「合适性规定」（操守准则第5.2段），要求持牌人在提供建议或招揽时须确保在所有情况下均属合理",
+        "en": "The SFO established the Investor Compensation Fund, administered by the Investor Compensation Company Limited (ICC, a wholly-owned SFC subsidiary), to compensate investors for pecuniary losses arising from defaults (insolvency, bankruptcy, winding up, breach of trust, defalcation, fraud or misfeasance) of licensed intermediaries or authorized financial institutions; the per-investor compensation limit was raised from HK$150,000 to HK$500,000 for defaults on/after 1 January 2020 (each joint-account holder is subject to a separate HK$500,000 limit), and since 2020 coverage was extended to Northbound Stock Connect trades; separately, the Suitability Requirement (Code of Conduct, paragraph 5.2) requires licensed/registered persons to ensure any recommendation or solicitation is reasonable in all the circumstances",
+        "detail": "两处制度性设计合并陈述：一是事后资金赔偿（Investor Compensation Fund），二是事前行为规范（合适性规定，见 participants.suitability_management 有更完整独立摘引）。两者同属 SFC 投资者保护体系但机制层面不同，此处合并是为呼应 taxonomy.yml 对本字段'投资者保护机制'的笼统定义，具体条文各自的独立佐证见 participants.suitability_management 与本字段 sources。",
+        "sources": [
+          {
+            "title": "Investor compensation FAQ（SFC 官网）",
+            "url": "https://www.sfc.hk/en/faqs/Investor-compensation",
+            "accessed": "2026-08-23"
+          },
+          {
+            "title": "Suitability requirement（SFC 官网英文版）",
+            "url": "https://www.sfc.hk/en/Rules-and-standards/Suitability-requirement",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "The SFO provided for the establishment of the Investor Compensation Fund to compensate investors who suffer pecuniary losses as a result of defaults of licensed intermediaries or authorized financial institutions occurring on or after 1 April 2003 in relation to exchange-traded products in Hong Kong. ... For defaults occurring on or after 1 January 2020, the compensation limit is raised from HK$150,000 to HK$500,000 per investor ... For joint accounts, each account holder is subject to a maximum compensation limit of HK$500,000.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       }
     },
     "products": {
@@ -389,6 +400,7 @@
         },
         "continuous_am": {
           "zh": "9:30-12:00",
+          "en": "9:30 a.m. - 12:00 noon",
           "quote": "Continuous Trading Session / Morning Session / 9:30 a.m. - 12:00 noon",
           "sources": [
             {
@@ -399,12 +411,12 @@
           ],
           "verified": "2026-08-12",
           "confidence": "high",
-          "en": null,
           "enum": null,
           "detail": null
         },
         "lunch_break": {
           "zh": "延长午市 12:00-13:00（非正式连续交易，圣诞夜/元旦夜/农历年夜前不设）",
+          "en": "Extended Morning Session 12:00 noon - 1:00 p.m. (not formal continuous trading; not held on the eves of Christmas, New Year and Lunar New Year)",
           "quote": "Extended Morning Session / 12:00 noon - 1:00 p.m.",
           "sources": [
             {
@@ -415,12 +427,12 @@
           ],
           "verified": "2026-08-12",
           "confidence": "high",
-          "en": null,
           "enum": null,
           "detail": null
         },
         "continuous_pm": {
           "zh": "13:00-16:00",
+          "en": "1:00 p.m. - 4:00 p.m.",
           "quote": "Afternoon Session / 1:00 p.m. - 4:00 p.m.",
           "sources": [
             {
@@ -431,12 +443,12 @@
           ],
           "verified": "2026-08-12",
           "confidence": "high",
-          "en": null,
           "enum": null,
           "detail": null
         },
         "after_market": {
           "zh": "无独立盘后连续交易时段；16:00 起进入收盘集合竞价",
+          "en": "No separate after-hours continuous trading session; the Closing Auction Session begins at 4:00 p.m.",
           "confidence": "medium",
           "sources": [
             {
@@ -446,13 +458,13 @@
             }
           ],
           "verified": "2026-08-12",
-          "en": null,
           "enum": null,
           "detail": null,
           "quote": null
         },
         "night_session": {
           "zh": "无",
+          "en": "None",
           "detail": "官方交易时段表未列出夜盘时段，属推断而非逐字摘引，confidence 相应降级。",
           "confidence": "medium",
           "sources": [
@@ -463,13 +475,13 @@
             }
           ],
           "verified": "2026-08-12",
-          "en": null,
           "enum": null,
           "quote": null
         }
       },
       "holidays_note": {
         "zh": "香港公众假期休市；圣诞夜/元旦夜/农历新年夜等半日市安排下无延长午市",
+        "en": "Closed on Hong Kong public holidays; no Extended Morning Session on the half-day-trading eves of Christmas, New Year and Lunar New Year",
         "quote": "There is no Extended Morning Session and Afternoon Session on the eves of Christmas, New Year and Lunar New Year.",
         "sources": [
           {
@@ -480,7 +492,6 @@
         ],
         "verified": "2026-08-12",
         "confidence": "high",
-        "en": null,
         "enum": null,
         "detail": null
       },
@@ -576,6 +587,7 @@
       },
       "board_lot_size": {
         "zh": "各股票各自设定board lot（非全市场统一，如100股/500股/1000股不等）",
+        "en": "Set individually per stock (not standardised market-wide, e.g. 100/500/1,000 shares)",
         "confidence": "low",
         "sources": [
           {
@@ -585,7 +597,6 @@
           }
         ],
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null
@@ -610,6 +621,7 @@
         "type": {
           "enum": "none",
           "zh": "无涨跌幅限制（无 daily price limit）",
+          "en": "No daily price limit",
           "quote": "it also does not work the same way as the daily price limit model which sets a specific daily price range for securities trading as seen in some markets",
           "confidence": "high",
           "sources": [
@@ -620,7 +632,6 @@
             }
           ],
           "verified": "2026-08-12",
-          "en": null,
           "detail": null
         },
         "main_board": {
@@ -700,6 +711,7 @@
       },
       "trading_halt_mechanism": {
         "zh": "无涨跌停亦无个股熔断停牌，VCM 触发后不停牌只限价（见上）；另有因披露事项的停牌机制未逐条核实",
+        "en": "No daily price limit and no stock-level circuit-breaker halt; when VCM is triggered trading continues within a price band rather than being halted (see above); a separate suspension mechanism triggered by disclosure matters exists but has not been verified in detail",
         "confidence": "medium",
         "sources": [
           {
@@ -709,7 +721,6 @@
           }
         ],
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null
@@ -717,6 +728,7 @@
       "intraday_reversal": {
         "enum": "t0",
         "zh": "T+0（可当日回转，无 SSE 式 T+1 限制）",
+        "en": "T+0 (same-day round-trip trading permitted; no SSE-style T+1 restriction)",
         "detail": "港股交易层面无「买入证券交收前不得卖出」的限制，可当日买卖；与结算层面 T+2 是两回事，不要混淆（见 clearing.settlement_cycle）。",
         "confidence": "medium",
         "sources": [
@@ -727,7 +739,6 @@
           }
         ],
         "verified": "2026-08-12",
-        "en": null,
         "quote": null
       },
       "short_selling": {
@@ -796,6 +807,7 @@
       },
       "connect_schemes": {
         "zh": "沪港通/深港通北向、南向交易；北向 SSE/SZSE 交易时段与港股不同步，需专门对照表",
+        "en": "Northbound and Southbound trading via Shanghai-Hong Kong Stock Connect and Shenzhen-Hong Kong Stock Connect; Northbound trading follows SSE/SZSE session times, which do not align with HKEX's own sessions and require a dedicated cross-reference table",
         "detail": "北向（买内地股票）：开盘集合竞价 9:15-9:25，连续竞价 9:30-11:30、13:00-14:57，收盘集合竞价 14:57-15:00\n（对照上交所自身规则，见 cn-sse market_structure.trading_sessions，两边应彼此一致）。\n",
         "sources": [
           {
@@ -807,7 +819,6 @@
         "quote": "Stock Connect (Northbound) ... Opening Call Auction 9:15 a.m. - 9:25 a.m. ... Continuous Auction (Morning) 9:30 a.m. - 11:30 a.m. ... Continuous Auction (Afternoon) 1:00 p.m. - 2:57 p.m. ... Closing Call Auction 2:57 p.m. - 3:00 p.m.",
         "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null
       },
       "derivatives": {
@@ -846,6 +857,7 @@
           },
           "lunch_break": {
             "zh": "正午12時 - 下午1時：并非官方单独命名的「午休」时段，而是上午与下午交易时段之间的间隔，其中12:30-13:00是下午时段的开市前议价时段（见 pre_market）",
+            "en": "12:00 noon - 1:00 p.m.: not an officially separately-named \"lunch break\" but the interval between the morning and afternoon sessions, of which 12:30-13:00 is the afternoon session's Pre-Market Opening Period (see pre_market)",
             "confidence": "medium",
             "sources": [
               {
@@ -855,7 +867,6 @@
               }
             ],
             "verified": "2026-08-12",
-            "en": null,
             "enum": null,
             "detail": null,
             "quote": null
@@ -878,6 +889,7 @@
           },
           "after_market": {
             "zh": "无独立盘后连续交易时段；下午4:30（即月合约最后交易日为4:00）收市后直接衔接收市后交易时段（AHT，见 night_session）",
+            "en": "No separate after-market continuous trading session; after the 4:30 p.m. close (4:00 p.m. on the spot-month contract's Last Trading Day) the market rolls directly into the After-Hours Trading Session (AHT, see night_session)",
             "confidence": "medium",
             "sources": [
               {
@@ -887,7 +899,6 @@
               }
             ],
             "verified": "2026-08-12",
-            "en": null,
             "enum": null,
             "detail": null,
             "quote": null
@@ -1215,6 +1226,7 @@
       "review_system": {
         "enum": "disclosure_with_discretion",
         "zh": "披露为本制度（非注册制/核准制的简单二分，上市委员会对适合性有实质审核权）",
+        "en": "Disclosure-based regime (not a simple registration/merit-review dichotomy — the Listing Committee retains substantive discretion over suitability for listing)",
         "detail": "披露为本+上市委员会对适合性有实质审核权，属 ADR-023 重新划分后的 `disclosure_with_discretion` 类（原三值枚举 registration/approval/hybrid 的中间地带，见该 ADR）。",
         "sources": [
           {
@@ -1225,18 +1237,23 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "quote": null
       },
       "listing_process_duration": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "2024年10月18日起证监会与港交所推行「优化后申请时限」：申请材料一次性符合全部适用规定的个案，两个监管机构各自最多经两轮监管意见后，须在不超过40个营业日内确认有否重大监管关注；申请人及保荐人配合处理意见通常另需约60个营业日，整个审批流程预期在六个月申请有效期内完成；符合资格的A股上市公司可适用加速审批时限，缩短为30个营业日（较标准40个营业日快）",
+        "en": "Since 18 October 2024, under the SFC/HKEX Enhanced Application Timeframe, for applications that fully meet requirements, each regulator will confirm whether there are material regulatory concerns within a maximum of 40 business days after at most two rounds of regulatory comments; applicants and sponsors are expected to take a total of around 60 business days to address comments, with the whole process expected to complete within the six-month application validity window; eligible A-share listed companies qualify for an Accelerated Timeframe of 30 business days (instead of 40)",
+        "detail": "本条为「预期时限」而非法定强制期限——联合声明原文用词是expected/will，附注说明该40营业日计算的是监管机构手上的天数，不含申请人回复所占用的时间。",
+        "sources": [
+          {
+            "title": "Joint Statement on Enhanced Timeframe for New Listing Application Process（HKEX/SFC联合声明）",
+            "url": "https://www.hkex.com.hk/News/Regulatory-Announcements/2024/241018news?sc_lang=en",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "the time taken by each regulator to confirm whether there are any material regulatory concerns will be no more than 40 business days ... The applicant and its sponsor are expected to take a total of around 60 business days to satisfactorily address regulators’ comments. Subject to obtaining approvals from the Listing Committee and other authorities or regulators, the application process would be completed within the six-month application validity window. ... Under the Accelerated Timeframe ... 30 business days (instead of 40 business days).",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "transfer_between_boards": {
         "zh": "",
@@ -1249,24 +1266,36 @@
         "sources": null
       },
       "continuing_obligations": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "《主板上市规则》第13章：发行人自证券获批上市起须持续遵守《上市规则》，董事共同及个别负责确保发行人全面合规；核心是维持公平有序市场及信息同时对称披露，第13.05条明确交易所根据《证券及期货条例》第21条负有确保市场有序、知情、公平的法定职责，发行人及其董事另按《证券及期货条例》「内幕消息条文」承担披露内幕消息的法定责任；违反持续责任除可能触发纪律处分外，交易所亦可动用暂停或撤销上市地位的权力",
+        "en": "Main Board Listing Rules Chapter 13: an issuer must comply with the Listing Rules on an ongoing basis once its securities are admitted to listing, with directors collectively and individually responsible for ensuring full compliance. The continuing obligations are primarily to maintain a fair and orderly market and simultaneous access to information; Rule 13.05 confirms the Exchange's statutory duty under section 21 of the SFO to ensure an orderly, informed and fair market, and issuers/directors separately bear statutory duties to disclose inside information under the SFO's Inside Information Provisions; breach of a continuing obligation may lead to disciplinary action in addition to the Exchange's power to suspend or cancel a listing",
+        "detail": "本条来源为 HKEX 官网托管的 Chapter 13 PDF，本次未找到对应中文整合页（cn-rules.hkex.com.hk 未见 Chapter 13 独立条目），quote 为英文原文，zh 为忠实翻译，非逐字对照中文官方文本。",
+        "sources": [
+          {
+            "title": "Chapter 13 EQUITY SECURITIES CONTINUING OBLIGATIONS（HKEX官网PDF）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Rules-and-Guidance/Other-Resources/Continuing-Obligations-and-Annual-Listing-Fees/Continuing-Obligation-Fee/chapter_13.pdf?la=en",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "13.03 The continuing obligations in this Chapter are primarily to ensure the maintenance of a fair and orderly market in securities and that all users of the market have simultaneous access to the same information. Failure by an issuer to comply with a continuing obligation may result in the Exchange taking disciplinary action in addition to its power to suspend or cancel a listing. 13.04 An issuer’s directors are collectively and individually responsible for ensuring the issuer’s full compliance with the Listing Rules.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "suspension_resumption": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "停牌须由发行人或其授权代表/财务顾问向交易所提出申请并附具体理由；交易所拥有酌情决定权，仅在认为理由充分时才批准停牌，否则倾向要求发行人改以公告澄清；停牌/停牌期间应为绝对必要的最短时间，发行人有责任确保在适当公告刊发后尽快复牌；复牌方向由交易所指示，可要求发行人先刊发复牌公告，其后交易所才指示恢复交易；若停牌拖延且发行人未采取足够行动争取复牌，可能导致交易所进一步启动撤销上市程序",
+        "en": "A trading halt or suspension request must be made to the Exchange by the issuer or its authorised representative/financial adviser, supported by specific reasons; the Exchange has discretion and will only accept the request if the reasons given warrant it, otherwise it will normally expect a clarifying announcement instead; any halt or suspension should be for the shortest possible period, and it is the issuer's responsibility to ensure trading resumes as soon as practicable after an appropriate announcement; the Exchange directs resumption, which may require the issuer to publish a resumption announcement first; prolonged suspension without adequate remedial action by the issuer may lead the Exchange to proceed towards cancellation of listing",
+        "detail": "本条摘引自 GEM 上市规则第六章「Trading Halt, Suspension, Cancellation and Withdrawal of Listing」Entire Section 合并页，主板对应条文为《主板上市规则》第九章，两板机制结构一致，本次以能grep到完整正文的GEM章节为准；quote为英文原文（该entiresection页面本身即为英文版规则手册）。",
+        "sources": [
+          {
+            "title": "Trading halt or suspension - Entire Section（GEM上市规则第六章，Rulebook合并页）",
+            "url": "https://en-rules.hkex.com.hk/entiresection/2235",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "Any request for a trading halt or suspension must be made to the Exchange by the issuer or its authorised representative or financial adviser and must be supported by the specific reasons which the issuer wishes the Exchange to take into account ... The duration of any trading halt or suspension should be for the shortest possible period. It is the issuer's responsibility to ensure that trading in its securities resumes as soon as practicable following the publication of an appropriate announcement ... The Exchange shall have the power to direct the resumption of trading of halted or suspended securities.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "delisting_conditions": {
         "zh": "",
@@ -1279,34 +1308,52 @@
         "sources": null
       },
       "delisting_process": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "《主板上市规则》第6.01/6.01A(1)/6.10条：就已触发退市条件的发行人，交易所可(a)发出退市通知并订明补救期限（remedial period），若发行人未能在期限届满前补救问题并恢复交易，交易所可撤销其上市地位；或(b)在触发退市条件的事项属根本性且无法补救的例外情况下直接撤销上市；若6.01与6.01A(1)两条同时可适用，交易所倾向按6.01订立较短的「特定补救期限」（specific remedial period，例如6个月），而非套用18个月的「订明补救期限」（prescribed remedial period）",
+        "en": "Main Board Listing Rules 6.01/6.01A(1)/6.10: for an issuer that has triggered a delisting criterion, the Exchange may (a) issue a delisting notice specifying a remedial period — if the issuer fails to remedy the issues and resume trading before the period ends, the Exchange may cancel its listing; or (b) delist the issuer immediately, only in exceptional circumstances where the triggering matters are fundamental and beyond remedy; where both Rule 6.01 and 6.01A(1) apply, the Exchange will tend to impose a shorter specific remedial period under Rule 6.10 (e.g. 6 months) rather than the 18-month prescribed remedial period",
+        "detail": "本条与 delisting_transition_period 共用同一份来源文件（GL95-18指引信），前者说明程序本身，后者聚焦补救期限的具体时长与延期规则，避免重复摘引同一段落。",
+        "sources": [
+          {
+            "title": "HKEX-GL95-18《Guidance on long suspension and delisting》（2025年2月版）",
+            "url": "https://en-rules.hkex.com.hk/sites/default/files/pdf_documents/GL95-18_202502.pdf",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "Under Rule 6.10 which sets out the procedures for delisting an issuer under Rule 6.01, the Exchange may, (a) issue a delisting notice specifying a remedial period (specific remedial period). If the issuer fails to remedy the issues and resume trading before the end of the remedial period, the Exchange may cancel its listing; or (b) delist the issuer immediately. ... The Exchange may delist an issuer immediately under Rule 6.01 only in exceptional circumstances where the matters triggering the application of a delisting criterion are fundamental to the general principles for listing and are beyond remedy.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "delisting_transition_period": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "强制除牌前的「补救期限」（remedial period）：按《主板上市规则》6.01A(1)条，发行人自停牌之日起18个月内（「订明补救期限」）仍未补救导致停牌的问题并恢复交易，交易所可将其除牌；交易所亦可按6.10条为个案酌情订立更短的「特定补救期限」（如6个月）；补救期限届满时若获批延期，一般不会再获第二次延期",
+        "en": "The remedial period before mandatory delisting: under Main Board Listing Rule 6.01A(1), the Exchange may delist a suspended issuer that fails to remedy the issues causing its suspension and resume trading within 18 months from the date the suspension begins (the prescribed remedial period); the Exchange may instead impose a shorter specific remedial period under Rule 6.10 on a case-by-case basis (e.g. 6 months); if an extension is granted upon expiry of the remedial period, the Listing Committee would not normally extend it a second time",
+        "sources": [
+          {
+            "title": "HKEX-GL95-18《Guidance on long suspension and delisting》（2025年2月版）",
+            "url": "https://en-rules.hkex.com.hk/sites/default/files/pdf_documents/GL95-18_202502.pdf",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "the Exchange may delist a suspended issuer which fails to remedy the issues causing its suspension of trading and resume trading within 18 months from the date on which the trading suspension begins (prescribed remedial period). ... if an extension of time is given on the expiry of the remedial period, the Listing Committee would not normally extend the remedial period for a second time.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "post_delisting_venue": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "香港目前没有承接已除牌证券交易的场外（OTC）替代平台——港交所2025年8月发表的咨询总结文件确认，设立此类OTC市场仍在与市场持份者商讨可行性阶段、尚未落地；文件将「为已除牌发行人股东提供退出机会」列为设立OTC市场若干潜在效益之一，反面印证现状下退市股东缺乏交易所层面的退出渠道",
+        "en": "Hong Kong currently has no over-the-counter (OTC) alternative platform for trading delisted securities — HKEX's August 2025 consultation conclusions confirm that establishing such an OTC market remains under discussion with stakeholders on feasibility and has not yet been implemented; the paper lists 'providing an exit opportunity for shareholders of delisted issuers' as one potential benefit of an OTC market, which by implication confirms delisted shareholders currently lack an exchange-level exit channel",
+        "detail": "本条为「否定性事实」（不存在该去向），依据是官方咨询文件对OTC市场倡议的现状描述而非直接一句断言，quote 摘取该文件对潜在效益与后续跟进承诺两段拼合佐证，两段均出自同一份文件同一小节（B. Potential OTC Market），未跨文件拼接。",
+        "sources": [
+          {
+            "title": "IPO价格发现及公众持股量优化咨询总结及进一步咨询文件（2025年8月）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/News/Market-Consultations/2016-Present/December-2024-Optimise-IPO-Price/Conclusions-Aug-2025/cp202412cc.pdf",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "an OTC market would, in principle, provide the shareholders of delisted issuers with an exit opportunity ... We will continue to work with various stakeholders on the viability of an OTC market in Hong Kong and will update the market on progress in due course.",
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       }
     },
     "indices": {
@@ -1451,6 +1498,7 @@
       "delivery_method": {
         "enum": "na",
         "zh": "不适用（现货市场为主）",
+        "en": "Not applicable (primarily a cash/spot market)",
         "detail": "推断依据：products 章节所列品类（股票/ETF/REITs/权证/牛熊证/债券）均为现货或现金结算的结构性产品， 未见实物交割型衍生品——这是对本文件自身 products 章节的内部推断，sources 里的官网首页不构成对 这个具体结论的独立证据，只是笼统佐证 HKEX 现货业务为主，是本项目「网址精确到信息页」要求 尚未满足的已知案例，见 OPEN-QUESTIONS。",
         "sources": [
           {
@@ -1461,7 +1509,6 @@
         ],
         "confidence": "low",
         "verified": "2026-08-12",
-        "en": null,
         "quote": null
       },
       "last_trading_day_rule": {
@@ -1475,53 +1522,147 @@
         "sources": null
       },
       "default_management": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "以 HKCC（期货结算公司）为例：结算所设立结算所违约管理执行小组（DMEG，由 HKEX 集团首席风险官、首席营运官等高层组成）统筹违约处置，委任特定结算参与者作为「获授权经纪商」协助平仓/对冲/拍卖违约方持仓，每年进行违约演习并至少每年检讨《违约管理手册》；损失分摊按《期货结算公司规则》706条设定的「违约损失分摊阶梯」（default waterfall）依次动用：①违约方自身向结算基金（RF）的出资；②授予违约方的可变出资信用额；③RF累计利息收入；④保险赔付（目前未有相关保险安排）；⑤结算所自身拨入RF的资源；⑥非违约参与者的固定出资；⑦担保或信贷安排所得；⑧非违约参与者的可变出资及可变出资信用额（按比例分摊）",
+        "en": "Using HKCC (HKFE Clearing Corporation) as the example: HKEX has established a Default Management Executive Group (DMEG, comprising senior executives including HKEX Group's chief risk officer and chief operating officer) to manage the default process, appoints designated Clearing Participants as \"authorised brokers\" to assist in closing-out, hedging and auctioning a defaulter's positions, conducts annual default drills, and reviews the Default Management Manual at least annually. Loss allocation follows the default waterfall under HKFE Clearing Corporation Rule 706, applied in order: (1) the defaulter's own Reserve Fund (RF) contributions; (2) Variable Contribution Credit granted to the defaulter; (3) RF accumulated interest income; (4) proceeds of any insurance policies (none currently arranged); (5) HKCC's own resources appropriated to the RF; (6) Fixed Contributions of non-defaulting Participants; (7) proceeds of any guarantees or facilities arranged; and (8) Variable Contributions and Variable Contribution Credits of non-defaulting Participants on a pro-rata basis",
+        "detail": "现货市场（HKSCC/CCASS）另设结构相近的「保证基金」（Guarantee Fund，《香港中央结算通用规则》第25章，最低现金基本出资额每名直接结算参与者5万港元或每持有一个联交所交易权5万港元，以较高者为准），本次未逐条摘引其独立瀑布顺序，二者原理相近但规则条文各自独立，如需精确比较现货/衍生品两套违约处置机制的顺序差异，应分别摘引 HKSCC 通用规则第25章与本字段引用的 HKCC 规则706条，本条暂以衍生品/HKCC一侧为代表性样本。",
+        "sources": [
+          {
+            "title": "HKCC（期货结算公司）PFMI 信息披露文件（2025年2月版）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Listed-Derivatives/PFMI/HKCC_PFMI_Disclosure_2025_Feb.pdf",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "HKEX has established a Default Management Executive Group (DMEG), comprising senior executives from various divisions of HKEX including HKEX group chief risk officer and chief operating officer, to manage the default management process. ... HKCC conducts default drills annually with the DMEG. ... Under HKCC Rule 706, the order of application of the RF is as follows: (a) RF contributions (including Fixed Contribution and Variable Contribution) of the defaulting HKCC Participant; (b) Variable Contribution Credit granted to the defaulting HKCC Participant; (c) RF accumulated interest income; (d) the proceeds of any insurance policies arranged [Currently there is no insurance arrangement]; (e) the resources of HKCC appropriated to the RF; (f) the Fixed Contributions made by all non-defaulting HKCC Participants; (g) the proceeds of any guarantees or facilities arranged; and (h) the Variable Contributions and Variable Contribution Credits of all non-defaulting HKCC Participants on a pro-rata basis.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "derivatives": {
-        "initial_margin_practice": null,
-        "maintenance_margin_practice": null,
-        "mark_to_market_frequency": null,
+        "initial_margin_practice": {
+          "zh": "结算所（HKCC）以组合风险按金系统 PRiME（SPAN兼容）每日两次计算结算所按金要求：基于对单一期货/期权合约或组合在16个模拟市场情景、既定置信水平下、一日风险边际期（margin period of risk）内的最大潜在亏损进行评估；若任何HKCC产品的结算所按金于正常交易时段内被侵蚀达25%，另触发临时性的日间按金（IDM）追缴；实物交收合约于最后结算日前另加收现货月按金/实物交收合约按金以缓释交收风险",
+          "en": "The clearing house (HKCC) calculates CH Margin requirements twice daily using the Portfolio Risk Management System (PRiME, SPAN-compatible), based on an assessment of the maximum potential loss of a futures/options contract or portfolio over a one-day margin period of risk under 16 simulated market scenarios at a defined confidence level; an ad hoc intra-day margin (IDM) call is also triggered when CH Margin erosion of 25% occurs in any HKCC product during normal trading sessions; a spot month/physical delivery contract charge is additionally imposed prior to the final settlement day of physically settled contracts to mitigate delivery risk",
+          "sources": [
+            {
+              "title": "HKCC（期货结算公司）PFMI 信息披露文件（2025年2月版）",
+              "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Listed-Derivatives/PFMI/HKCC_PFMI_Disclosure_2025_Feb.pdf",
+              "accessed": "2026-08-23"
+            }
+          ],
+          "quote": "To cover its future credit exposure, HKCC calculates the CH Margin requirements of HKCC Participants twice daily using the Portfolio Risk Management System of HKEX (\"PRiME\") based on its assessment of the maximum potential losses of a futures or an options contract or a portfolio of futures and options contracts over the margin period of risk (currently one day) under 16 simulated market scenarios and a defined confidence level. Ad hoc intra-day margin (IDM) will also be triggered when there is a CH Margin erosion of 25% in any HKCC product during normal trading sessions.",
+          "confidence": "high",
+          "verified": "2026-08-12",
+          "enum": null,
+          "detail": null
+        },
+        "maintenance_margin_practice": {
+          "zh": "结算所（HKCC）不采用固定「维持保证金」门槛的表述，而是以「日间按金（IDM）」机制动态追补：正常交易时段内任何HKCC产品的结算所按金一旦被市场波动侵蚀达25%，即时触发临时追缴，不待日终盯市；另就HKCC参与者在单一产品组按结算基金压力测试假设计算的净预计亏损（Net Projected Loss）超过全体参与者净预计亏损总额30%、且该产品组净预计亏损总额超过5亿港元时，加征集中风险按金（Concentration Risk Margin）",
+          "en": "HKCC does not use a fixed \"maintenance margin\" threshold; instead it tops up dynamically via intra-day margin (IDM): an ad hoc call is triggered immediately, without waiting for end-of-day mark-to-market, whenever CH Margin erosion of 25% occurs in any HKCC product during normal trading sessions; HKCC also imposes Concentration Risk Margin on a Participant when its Net Projected Loss in a product group (based on Reserve Fund stress assumptions) exceeds 30% of all Participants' total Net Projected Loss and the product group's total Net Projected Loss exceeds HK$500 million",
+          "sources": [
+            {
+              "title": "HKCC（期货结算公司）PFMI 信息披露文件（2025年2月版）",
+              "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Listed-Derivatives/PFMI/HKCC_PFMI_Disclosure_2025_Feb.pdf",
+              "accessed": "2026-08-23"
+            }
+          ],
+          "quote": "Ad hoc intra-day margin (IDM) will also be triggered when there is a CH Margin erosion of 25% in any HKCC product during normal trading sessions. ... HKCC also imposes Concentration Risk Margin on an HKCC Participant if the projected aggregate loss (less any CH Margin) of that HKCC Participant in any product group based on the Reserve Fund (RF) stress assumptions (Net Projected Loss) is greater than 30% of the total Net Projected Loss of all HKCC Participants and the total Net Projected Loss of the product group concerned is in excess of HK$500 million.",
+          "confidence": "high",
+          "verified": "2026-08-12",
+          "enum": null,
+          "detail": null
+        },
+        "mark_to_market_frequency": {
+          "zh": "每日两次盯市：所有期货/期权未平仓合约按各自结算价盯市，计算每个结算账户的浮动盈亏（VA），分别于T时段（正常交易时段）与收市后交易（AHT）时段结束后各计算一次",
+          "en": "Twice daily: all open futures/options positions are marked to market based on their respective settlement prices to calculate the variation adjustment (VA) for each Clearing Account, once after the end of the normal (T) trading session and once after the After-hours Trading (AHT) session",
+          "sources": [
+            {
+              "title": "HKCC（期货结算公司）PFMI 信息披露文件（2025年2月版）",
+              "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Listed-Derivatives/PFMI/HKCC_PFMI_Disclosure_2025_Feb.pdf",
+              "accessed": "2026-08-23"
+            }
+          ],
+          "quote": "All outstanding positions resulting from Market Contracts are marked to market and subject to margin calculation on daily basis. ... To cover its current credit exposure, HKCC marks all open positions to market based on their respective settlement prices to calculate the VA for each Clearing Account. The VA calculation is conducted twice daily after the end of the normal trading session and the After-hours Trading (AHT) session.",
+          "confidence": "high",
+          "verified": "2026-08-12",
+          "enum": null,
+          "detail": null
+        },
         "delivery_method": null,
-        "last_trading_day_rule": null
+        "last_trading_day_rule": {
+          "zh": "因产品而异，无统一规则：以股票期货为例，最后交易日为合约月份的倒数第二个交易日，最后结算日为最后交易日后第一个交易日，最终结算价采相关股票在最后交易日港交所（SEHK）官方收市价；恒生指数系列期货/期权则以「到期日」（Expiry Day）表述——合约月份第三个星期五（如非交易日则顺延至前一交易日），到期日下午收市前另设官方结算价计算窗口",
+          "en": "Varies by product, with no single unified rule: for Stock Futures, the Last Trading Day is the second-last Trading Day of the Contract Month and the Final Settlement Day is the first Trading Day after it, with the Final Settlement Price being the underlying stock's official SEHK closing price on the Last Trading Day; the HSI-series index futures/options instead use \"Expiry Day\" — the third Friday of the Contract Month (or the preceding Trading Day if that is not a Trading Day) — with an official settlement-price calculation window before close on the Expiry Day",
+          "detail": "两类产品官方页面各自使用「Last Trading Day」（个股期货）与「Expiry Day」（恒指系列期货期权）两套不同术语描述功能相同的概念，本字段综合两份产品页说明，未强行统一措辞，以免掩盖港交所自身产品文档间的实际用词差异。",
+          "sources": [
+            {
+              "title": "Stock Futures 产品页（含Last Trading Day/Final Settlement Day定义）",
+              "url": "https://www.hkex.com.hk/Products/Listed-Derivatives/Single-Stock/Stock-Futures?sc_lang=en",
+              "accessed": "2026-08-23"
+            },
+            {
+              "title": "Hang Seng Index Futures Options 产品页（含Expiry Day定义）",
+              "url": "https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-Index-%28HSI%29/Hang-Seng-Index-Futures-Options?sc_lang=en",
+              "accessed": "2026-08-17"
+            }
+          ],
+          "quote": "Last Trading Day / The second last Trading Day of the Contract Month ... Final Settlement Day / The first Trading Day after the Last Trading Day ... Final Settlement Price ... The official closing price of the underlying stock as quoted by SEHK on the Last Trading Day.／Expiry Day / The third Friday of the Contract Month and if it is not a Trading Day, the Expiry Day shall be the preceding Trading Day",
+          "confidence": "high",
+          "verified": "2026-08-12",
+          "enum": null
+        }
       }
     },
     "participants": {
       "investor_structure": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "按港交所《2019年现货市场交易调查》：机构投资者（本地+境外合计）贡献2019年总成交额53%（2018年为55%），散户投资者（本地+境外合计）贡献20%；境外投资者整体贡献2019年总成交额43%，其中境外机构37%、境外散户7%；本地投资者交易在机构与散户间分布相对均衡（各占总成交额17%与14%）",
+        "en": "Per HKEX's 2019 Cash Market Transaction Survey: institutional investors (local + overseas combined) contributed 53% of total market turnover in 2019 (55% in 2018), while retail investors (local + overseas combined) contributed 20%; overseas investors overall contributed 43% of total turnover, comprising 37% from overseas institutions and 7% from overseas retail; local investor trading was relatively evenly split between institutions (17%) and retail (14%) of total turnover",
+        "detail": "数据来自港交所定期编制的现货市场交易调查系列，本次抓取到的是2019年调查（发布于2020年11月），是本会话找到的最新一期；港交所后续年份可能有更新版本本次未检索到，如需最新占比应优先查证是否有更近期版本。",
+        "sources": [
+          {
+            "title": "Cash Market Transaction Survey 2019（港交所现货市场交易调查报告）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/News/Research-Reports/HKEX-Surveys/Cash-Market-Transaction-Survey-2019/CMTS2019_e.pdf?la=en",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "In 2019, overseas investors’ contribution to the total market turnover was 43% ... Overseas investor trading came mainly from institutions – 37% of the total market turnover (up from 35% in 2018), compared to 7% from overseas retail investors (6% in 2018). ... local investor trading is relatively more evenly contributed by institutional investors and retail investors (17% and 14% of total market [turnover]) ... Institutional investors (local and overseas) contributed 53% to total market turnover in 2019 (55% in 2018). Contribution from retail investors (local and overseas) increased to 20% in [2019].",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "account_opening_requirements": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "证监会《持牌人或注册人操守准则》第5.1段：证监会认可两类开户核实方式——「面对面」（开户文件在持牌人/注册人雇员在场情况下签立）与「非面对面」（客户协议书签署及身份文件核对须由持牌/注册人士、其联属机构、太平绅士，或银行经理/执业会计师/律师/公证人/特许秘书等专业人士见证核实）；非面对面开户亦可通过「电子支票认证」（客户签立协议书+身份文件+以本人名义在香港持牌银行账户开立支票核实签名一致）或「iAM Smart」数字身份认证完成",
+        "en": "SFC Code of Conduct paragraph 5.1: the SFC recognises two account opening verification approaches — \"Face-to-face\" (documents executed in the presence of a licensed/registered person's employee) and \"Non-face-to-face\" (the client agreement and identity documents must instead be certified by another licensed/registered person, an affiliate, a Justice of the Peace, or a professional such as a bank branch manager, certified public accountant, lawyer, notary public or chartered secretary); non-face-to-face opening can also be completed via a \"cheque authentication\" process (client sends a signed client agreement plus identity document, then a cheque drawn on their own Hong Kong bank account to verify the signature) or via the \"iAM Smart\" digital identity service",
+        "sources": [
+          {
+            "title": "Acceptable account opening approaches（SFC官网）",
+            "url": "https://www.sfc.hk/en/Rules-and-standards/Account-opening/Acceptable-account-opening-approaches",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "For the purposes of paragraph 5.1 of the Code of Conduct for Persons Licensed by or Registered with the Securities and Futures Commission (Code of Conduct), the SFC considers the following account opening approaches acceptable: Face-to-face / The account opening documents are executed in the presence of an employee of the licensed or registered person. Non-face-to-face / Where the account opening documents are not executed in the presence of an employee of the licensed or registered person, the signing of the client agreement ... and sighting of related identity documents should be certified by any other licensed or registered person, an affiliate of a licensed or registered person, a JP (Justice of the Peace), or a professional person such as a branch manager of a bank, certified public accountant, lawyer, notary public or chartered secretary",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "suitability_management": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "「合适性规定」载于证监会《持牌人或注册人操守准则》第5.2段：持牌人或注册人在作出投资建议或招揽行为时，须在考虑其所察悉或经审慎调查理应察悉的客户资料后，确保该建议/招揽在所有情况下均属合理；官方定位为「投资者保障的基石」，适用于任何分销/意见提供渠道（含网上分销及投资谘询平台），证监会另就产品尽职审查、金钱利益披露等销售手法层面提供配套指引",
+        "en": "The Suitability Requirement is set out in Paragraph 5.2 of the Code of Conduct for Persons Licensed by or Registered with the Securities and Futures Commission (SFC). It requires a licensed or registered person to, when making a recommendation or solicitation, ensure the suitability of the recommendation or solicitation for the client is reasonable in all the circumstances, having regard to information about the client of which the licensed or registered person is or should be aware through the exercise of due diligence. It is officially described as the cornerstone of investor protection, applies to any distribution/advisory channel (including online platforms), and is accompanied by SFC guidance on product due diligence and disclosure of monetary benefits",
+        "sources": [
+          {
+            "title": "合適性規定（SFC官网中文版）",
+            "url": "https://www.sfc.hk/TC/Rules-and-standards/Suitability-requirement",
+            "accessed": "2026-08-23"
+          },
+          {
+            "title": "Suitability requirement（SFC官网英文版）",
+            "url": "https://www.sfc.hk/en/Rules-and-standards/Suitability-requirement",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "合適性規定載於《證券及期貨事務監察委員會持牌人或註冊人操守準則》第5.2段，當中規定持牌人或註冊人經考慮其所察覺的或經適當查證後理應察覺的關於客戶的資料後，持牌人或註冊人在作出建議或招攬行為時，應確保其向該客戶作出的建議或招攬行為，在所有情況下都是合理的。合適性規定是投資者保障的基石／The Suitability Requirement is set out in Paragraph 5.2 of the Code of Conduct for Persons Licensed by or Registered with the Securities and Futures Commission (SFC). ... The Suitability Requirement is the cornerstone of investor protection",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "foreign_access_channel": {
         "zh": "",
@@ -1535,65 +1676,95 @@
       },
       "membership_structure": {
         "zh": "交易所参与者（Exchange Participant）制度，须为持牌法团或注册机构",
+        "en": "Exchange Participant system; must be a licensed corporation or registered institution",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
         "sources": null
       },
       "broker_landscape": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "截至2026年7月31日：证券市场（联交所）共600个交易权持有人（合共持有921个交易权），其中508家为交易所参与者（Trading EP，合共806个交易权）、81家为非交易交易所参与者（Non-trading EP，合共104个交易权）、另有11个交易权持有人非交易所参与者（合共11个交易权）；期货市场（期交所）共193个交易权持有人（合共210个交易权），其中146家为交易交易所参与者（合共162个交易权）、47个交易权持有人非交易所参与者（合共48个交易权）",
+        "en": "As of 31 July 2026: the Stock Exchange has 600 Trading Right Holders (921 trading rights in total), comprising 508 Trading Exchange Participants (806 trading rights), 81 Non-trading Exchange Participants (104 trading rights), and 11 Non-Exchange-Participant Trading Right Holders (11 trading rights); the Futures Exchange has 193 Trading Right Holders (210 trading rights in total), comprising 146 Trading Exchange Participants (162 trading rights) and 47 Non-Exchange-Participant Trading Right Holders (48 trading rights)",
+        "detail": "「Exchange Participant」官方定义为获《证券及期货条例》发牌经营证券/期货/期权交易活动、可在交易所或经交易所进行买卖的法团。",
+        "sources": [
+          {
+            "title": "Exchange Participant Data（港交所官网统计页，含逐月更新的交易权持有人数目）",
+            "url": "https://www.hkex.com.hk/Market-Data/Statistics/Participant/Exchange-Participant-Data?sc_lang=en",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "No. of Trading Right Holders (No. of trading rights held) / Stock Exchange: 600 (921) / Futures Exchange: 193 (210) ... Exchange Participants* - Trading / 508 (806) / 146 (162) - Non-trading / 81 (104) / N/A (N/A) ... Non-Exchange Participants / 11 (11) / 47 (48) ... * An Exchange Participant is a corporation who may trade on or through the Exchange and is licensed under the Securities and Futures Ordinance to carry on securities/futures/options dealing activity. Updated 31 Jul 2026",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       }
     },
     "infrastructure": {
       "market_data_levels": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "证券市场行情经Orion市场数据平台（OMD-C，2013年9月上线）分三档产品：Securities Standard（SS，浓缩市场深度价格数据）、Securities Premium（SP，实时流式市场深度价格数据）、Securities FullTick（SF，实时流式逐笔委托数据）；衍生品市场另有对应的OMD-D平台",
+        "en": "Securities market data is offered via the Orion Market Data Platform (OMD-C, launched September 2013) in three product tiers: Securities Standard (SS, conflated market-by-price), Securities Premium (SP, streaming market-by-price), and Securities FullTick (SF, streaming market-by-order); the derivatives market has an equivalent OMD-D platform",
+        "sources": [
+          {
+            "title": "HKEX Orion Market Data Platform – Securities Market (OMD-C) 介绍页",
+            "url": "https://www.hkex.com.hk/Services/Market-Data-Services/Infrastructure/HKEX-Orion-Market-Data-Platform-Securities-Market-OMD-C?sc_lang=en",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "The HKEX Orion Market Data Platform – Securities Market (OMD-C) launched in September 2013. A suite of datafeed products under OMD-C for securities market include conflated market-by-price datafeeds (Securities Standard), streaming market-by-price datafeeds (Securities Premium) and streaming market-by-order datafeeds (Securities FullTick).",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "data_latency": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "实时数据（Real-time Data）按信息供应商/终端用户牌照收费；另设15分钟或以上延时数据（Delayed Data），前两个延时数据来源免费提供，第三个起每季度收取HK$7,000（以SS产品为例）",
+        "en": "Real-time data is licensed on a paid basis (per information vendor / end-user); delayed data (delay of 15 minutes or more) is also offered, free for the first two data sources and charged HK$7,000 per quarter for each additional source (SS product tier example)",
+        "sources": [
+          {
+            "title": "Fee Schedule – Securities Market Datafeeds Licence Fees（OMD收费表）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/Market-Data-Fees/SEHK_Market-Data-Fees-for-Retail-Participation.pdf",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "Redistribution Fee – Real-time Data / HK$51,000 [SS] ... Redistribution Fee – Delayed Data only (on a delay basis of 15 minutes or more) / $15,000 ... 6) Delayed Data only (on a delay basis of 15 minutes or more) First two data sources / HK$0 Additional data source / HK$7,000",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "data_pricing_model": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "按数据产品档次（Standard/Premium/FullTick）与用户类型（信息供应商转发/终端用户/流通量提供者及做市商）分别按季度收取牌照费，另设直连/间连接入费、延伸转发权费、一次性连接费等；证券市场流通量提供者或做市商适用End-User牌照优惠费率（例如SS档HK$15,000/季，低于一般终端用户的HK$33,300/季）",
+        "en": "Licence fees are charged quarterly by data-product tier (Standard/Premium/FullTick) and user type (information-vendor redistribution / end-user / liquidity provider or market maker), plus separate direct/indirect connection fees, extension-of-redistribution-rights fees, and a one-time connection fee; Securities Market Liquidity Providers or Market Makers receive a discounted End-User rate (e.g. HK$15,000/quarter for the SS tier, versus HK$33,300/quarter for a general end-user)",
+        "sources": [
+          {
+            "title": "Fee Schedule – Securities Market Datafeeds Licence Fees（OMD收费表）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/Market-Data-Fees/SEHK_Market-Data-Fees-for-Retail-Participation.pdf",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "End-User Licence Fee / HK$33,300 [SS] ... For Securities Market Liquidity Providers or Market Makers / End-User (Liquidity Provider or Market Maker) Licence Fee / HK$15,000 [SS] ... 1) Direct connection Fee – Real-time Data ... 2) Indirect connection Fee – Real-time Data ... 3) Extension of redistribution rights to Related Companies ... 4) One-time connection fee / HK$10,000",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "historical_data_availability": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "港交所设有「HKEX Data Marketplace」数据市场平台，提供CCASS持股数据（汇总及明细）、证券市场逐笔历史全量数据（Historical Full Book，CSV格式，含每笔委托及成交）、衍生品市场逐笔历史全量数据（股票期权/非股票期权）等历史数据产品",
+        "en": "HKEX offers historical data products through the \"HKEX Data Marketplace\" platform, including CCASS shareholding data (aggregated and detailed), Historical Full Book tick-by-tick data for the securities market (CSV format, covering every order and trade), and Historical Full Book data for the derivatives market (Stock Options & Non-Stock Options)",
+        "sources": [
+          {
+            "title": "Historical Data Services（港交所历史数据服务总览页）",
+            "url": "https://www.hkex.com.hk/Services/Market-Data-Services/Historical-Data-Services?sc_lang=en",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "HKEX Data Marketplace offers a streamlined interface that puts a deep pool of data at your fingertips – straight from the source. ... CCASS Shareholding Data / Comprehensive shareholding data, aggregated summaries and detailed breakdowns ... Historical Full Book - Securities Market / Comprehensive tick-by-tick data for all HKEX securities orders and trades in CSV format ... Historical Full Book - Derivatives Market (Stock Options & Non-Stock Options) / Detailed tick data for every HKEX derivatives order and trade, available in CSV format",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "trading_system_name": {
         "zh": "",
@@ -1606,24 +1777,41 @@
         "sources": null
       },
       "access_methods": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "行情数据支持直连（Direct Connection，含首套标准连接及可加购的额外连接）与间连（Indirect Connection，即通过资讯供应商/终端整合商取得数据，前两个数据来源免费、第三个起收费）两种接入方式；另设Co-location（主机托管，于港交所主机托管中心HDC内自建服务器直连交易/行情系统）与内地市场数据枢纽（Mainland Market Data Hub）等专门连接方案，实时数据经许可后须缴付方案对应的连接费",
+        "en": "Market data access supports both Direct Connection (a first standard connection plus optional additional connections) and Indirect Connection (via information vendors/aggregators, free for the first two data sources and charged from the third onward); dedicated arrangements also include Co-location (hosting one's own servers within HKEX's Host Data Centre for direct connection to trading/market-data systems) and the Mainland Market Data Hub, with connection fees payable for licensed real-time data access",
+        "sources": [
+          {
+            "title": "Fee Schedule – Securities Market Datafeeds Licence Fees（OMD收费表，含直连/间连/主机托管收费结构）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/Market-Data-Fees/SEHK_Market-Data-Fees-for-Retail-Participation.pdf",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "1) Direct connection Fee – Real-time Data / First set of standard connection / HK$45,000 [SS] / Additional set of standard connection / HK$70,000 [SS] ... 2) Indirect connection Fee – Real-time Data / First two data sources / HK$0 / Additional data source / HK$30,000 [SS] ... 5) Mainland Market Data Hub / Double the Connection Fee",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "major_outage_history": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "2019年9月5日：因香港期货自动交易系统（HKATS）供应商提供的撮合引擎分区出现逻辑错误导致连接中断，港交所自当日下午2时起暂停衍生品市场下午交易时段及收市后交易时段（清算系统当日下午时段仍维持开放），翌日（9月6日）交易恢复正常；港交所其后于2020年12月28日发布事故复盘公告，公布在事故预防、系统监测、事故处置与市场沟通四方面的强化措施",
+        "en": "On 5 September 2019, connectivity issues caused by erroneous logic in a vendor-supplied Matching Engine partition disrupted the Hong Kong Futures Automatic Trading System (HKATS); HKEX suspended derivatives market trading for the afternoon and After-hours Trading sessions from 2:00pm that day (the clearing system remained open for the afternoon session), with trading resuming normally the next day (6 September); HKEX published a public incident-review report on 28 December 2020 setting out enhancement measures across incident prevention, system monitoring, incident handling, and market communication",
+        "sources": [
+          {
+            "title": "HKEX Statement on Derivatives Market Suspension（港交所官方声明，2019-09-05）",
+            "url": "https://www.hkex.com.hk/news/market-communications/2019/190905news?sc_lang=en",
+            "accessed": "2026-08-23"
+          },
+          {
+            "title": "Conclusion of Incident Review: Derivatives Market Suspension on 5 September 2019（事故复盘结论新闻稿，2020-12-28）",
+            "url": "https://www.hkex.com.hk/News/News-Release/2020/2012282news?sc_lang=en",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "In order to preserve an orderly market, Hong Kong Exchanges and Clearing Limited (HKEX) has suspended trading in its derivatives market for the afternoon and After-hours Trading sessions at 2 pm on 5 September due to prolonged connectivity issues on the Hong Kong Futures Automatic Trading System. The clearing system for derivatives will remain open for the afternoon session only. ... [subsequently identified to have been] caused by an erroneous logic in a vendor-supplied Matching Engine (ME) partition that led to disconnections ... trading resumed successfully in the derivatives market on 6 September 2019.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       }
     },
     "costs": {
@@ -1638,37 +1826,56 @@
         "sources": null
       },
       "exchange_fees": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "港交所自身收取的「交易费」（Trading Fee）：每宗证券交易按代价金额单边0.00565%（四舍五入至分）向交易所缴付；对不同类别交易所买卖基金的证券市场做市商（SMM）交易另设不同宽免比率",
+        "en": "The Exchange's own \"Trading Fee\": 0.00565% per side of the consideration of a transaction (rounded to the nearest cent) is payable to the Exchange for each security transaction; different exemption rates apply to Securities Market Maker (SMM) transactions in different categories of Exchange Traded Products",
+        "detail": "与 regulatory_fees（SFC/AFRC等监管机构征费，交易所仅代收代缴）区分：本字段仅指港交所自身作为运营方留存的交易费，两者同一来源页面并列列示，摘引时已按归属机构拆分。",
+        "sources": [
+          {
+            "title": "Trading Fee / Trading Tariff / SFC Transaction Levy 费率页（港交所官网）",
+            "url": "https://www.hkex.com.hk/Services/Rules-and-Forms-and-Fees/Fees/Securities-%28Hong-Kong%29/Trading/Transaction?sc_lang=en",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "A Trading Fee of 0.00565% per side of the consideration of a transaction (rounded to the nearest cent) is payable to the Exchange. Different rate of exemption of the Trading Fee will apply to the SMM transactions in different categories of Exchange Traded Products.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "clearing_fees": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "股票结算费（Stock settlement fee）：经CCASS清算结算的交易所交易，每名结算参与者/结算代理参与者按成交金额单边0.0042%缴付（合资格ETF做市商交易适用0.002%优惠税率）；同一交易所参与者自行对盘的「交叉盘」交易另按单边0.0021%计收；结算所本身不另收「结算清算费」（Stock clearing fee列明为NIL）",
+        "en": "Stock settlement fee: for Exchange Trades cleared and settled through CCASS, each Clearing Participant/Clearing Agency Participant pays 0.0042% per side of gross trade value (a preferential 0.002% rate applies to eligible ETF Securities Market Maker transactions); crossed trades handled by the same Exchange Participant on both sides are charged 0.0021% per side instead; a separate \"stock clearing fee\" is not charged (listed as NIL)",
+        "sources": [
+          {
+            "title": "HKSCC Operational Procedures Section 21《Costs and Expenses》（CCASS结算费率官方文件）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/HKSCC/Operational-Procedures/SEC21.pdf",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "Stock clearing fee / NIL ... Stock settlement fee payable by each Clearing Participant and each Clearing Agency Participant for each Exchange Trade cleared and settled through CCASS. / 0.0042% per side of gross value of an Exchange Trade, except for such Exchange Trade in Designated Exchange Traded Funds conducted by a Securities Market Maker which meets such eligibility requirements ... in which case a rate of 0.002% shall apply. ... Stock settlement fee payable by the Clearing Participant for each crossed Exchange Trade ... 0.0021% per side of gross value of a crossed Exchange Trade",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "regulatory_fees": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "香港有独立于交易所费用外的监管性征费，均由交易所代收后划付相应机构：证监会交易征费（SFC Transaction Levy）0.0027%/单边（2014年11月1日起，证券市场做市商交易豁免）；会计及财务汇报局征费（AFRC Transaction Levy）0.00015%/单边（2022年1月1日起，证券市场做市商交易豁免）；投资者赔偿征费（Investor Compensation Levy）原定0.002%/单边，自2005年12月19日起由证监会暂停征收（尚未恢复）",
+        "en": "Hong Kong does have regulatory levies distinct from the Exchange's own fee, all collected by the Exchange and remitted to the respective bodies: SFC Transaction Levy 0.0027% per side (effective 1 Nov 2014, exempt for Securities Market Maker transactions); Accounting and Financial Reporting Council (AFRC) Transaction Levy 0.00015% per side (effective 1 Jan 2022, exempt for Securities Market Maker transactions); Investor Compensation Levy originally 0.002% per side, suspended by the SFC since 19 December 2005 (not yet reinstated)",
+        "detail": "任务说明提示需先查证香港是否有独立于交易所费用外的『监管费』概念再判断——本次核实结果是确实存在（SFC征费+AFRC征费+暂停中的投资者赔偿征费），与最初『香港可能没有』的预设不同，属查证后推翻预设的案例。",
+        "sources": [
+          {
+            "title": "Trading Fee / Trading Tariff / SFC Transaction Levy 费率页（港交所官网）",
+            "url": "https://www.hkex.com.hk/Services/Rules-and-Forms-and-Fees/Fees/Securities-%28Hong-Kong%29/Trading/Transaction?sc_lang=en",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "SFC Transaction Levy / Effective 1 November 2014, a SFC Transaction Levy of 0.0027% (rounded to the nearest cent) is charged per side of the consideration of a transaction, and the amount is collected for the SFC. ... Investor Compensation Levy / Effective 19 December 2005, the payment of Investor Compensation Levy (i.e. 0.002% per side of the consideration of a transaction, rounded to the nearest cent) has been suspended by the SFC. ... AFRC Transaction Levy / Effective 1 January 2022, an AFRC Transaction Levy of 0.00015% (rounded to the nearest cent) is charged per side of the consideration of a transaction, and the amount is collected for the Accounting and Financial Reporting Council (AFRC).",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "stamp_duty": {
         "zh": "0.1%（买卖双方各自缴纳，2023年11月17日起由0.13%下调）",
+        "en": "0.1% (payable by both the buyer and the seller separately; reduced from 0.13% effective 17 November 2023)",
         "detail": "从价印花税（ad valorem stamp duty），交易双方各付0.1%，与上交所『仅卖方缴纳』的单边征收方式不同——值得在矩阵中标注这一结构性差异。",
         "sources": [
           {
@@ -1679,19 +1886,24 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "quote": null
       },
       "financial_transaction_tax": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "不适用：香港未另立独立于印花税之外的「金融交易税」税目，证券买卖的从价交易税负体现为印花税（见 costs.stamp_duty，交易双方各0.1%），另有代收代缴性质的证监会/会计及财务汇报局征费（见 costs.regulatory_fees），两者功能上合计构成港股的交易税费负担，但港交所/税务局官方材料均未使用「金融交易税」这一独立税目名称",
+        "en": "Not applicable: Hong Kong has no separately-named \"financial transaction tax\" distinct from stamp duty. The ad valorem transaction tax burden on securities trading is expressed as Stamp Duty (see costs.stamp_duty, 0.1% each side) plus the pass-through SFC/AFRC regulatory levies (see costs.regulatory_fees); together these functionally constitute Hong Kong's securities transaction tax burden, but neither HKEX nor the Inland Revenue Department uses a distinct \"financial transaction tax\" label",
+        "detail": "本条是结构性判断（该税目在港未独立存在）而非某个具体数值，主要依据是本次抓取到的官方费率页（stamp_duty/regulatory_fees 两字段共用来源）逐项列示的税费种类里没有第三个独立税目，未见反例；confidence 定 medium 是因为『未见』不等于穷尽性地排除了所有可能命名，留有不确定性。",
+        "sources": [
+          {
+            "title": "Trading Fee / Trading Tariff / SFC Transaction Levy 费率页（港交所官网，逐项列出证券交易涉及的全部税费名目）",
+            "url": "https://www.hkex.com.hk/Services/Rules-and-Forms-and-Fees/Fees/Securities-%28Hong-Kong%29/Trading/Transaction?sc_lang=en",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "capital_gains_tax": {
         "zh": "",
@@ -1704,32 +1916,49 @@
         "sources": null
       },
       "dividend_withholding_tax": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "香港利得税制度下，已缴付香港利得税的法团所分派的股息，在计算应评税利润时予以豁免（不计入应课税利润）；《税务条例》未设有股息预扣税条款，与利得税豁免条文合并推断港股股息不适用预扣税",
+        "en": "Under the Profits Tax regime, dividends distributed by a corporation that has already paid Hong Kong Profits Tax are excluded from assessable profits (exempt); the Inland Revenue Ordinance contains no dividend withholding tax provision, and combined with the profits-tax exemption clause this supports the conclusion that HKEX-listed dividends are not subject to withholding tax",
+        "detail": "税务局官网原文只直接确认『豁免应评税利润』这一条文，未见页面正面使用『不设预扣税』的措辞；『无股息预扣税』是从该豁免条文+《税务条例》通篇未见预扣税条款两点合并推断得出，非逐字摘引的正面陈述，confidence 因此定 medium 而非 high。",
+        "sources": [
+          {
+            "title": "利得税（税务局官网中文版，豁免条文）",
+            "url": "https://www.ird.gov.hk/chi/tax/bus_pft.htm",
+            "accessed": "2026-08-23"
+          },
+          {
+            "title": "Profits Tax（税务局官网英文版）",
+            "url": "https://www.ird.gov.hk/eng/tax/bus_pft.htm",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "豁免／應評税利潤並不包括以下項目的款項：－已繳付香港利得税的法團所分派的股息／Exemption / The following sums are excluded from the assessable profits:- dividends received from a corporation which is subject to Hong Kong Profits Tax",
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "implicit_costs_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "港交所2024年6月发表的最小价差检讨咨询文件官方确认：港股买卖价差（bid-ask spread，隐性交易成本之一）水平相对国际同类市场偏高；文件由香港特区政府2023年8月成立的「促进股票市场流动性专责小组」建议推动，提出分阶段调整最小价差以缩窄买卖价差——第一阶段（$10-$50价格带）拟降低最小价差50%-60%，第二阶段（$0.5-$10价格带）拟降低50%",
+        "en": "HKEX's June 2024 consultation paper on minimum spread reform officially confirms that Hong Kong's bid-ask spread (one component of implicit trading cost) is relatively higher than the average of international peer markets; the reform was recommended by the Task Force on Enhancing Stock Market Liquidity set up by the HKSAR Government in August 2023, proposing a phased reduction of minimum spreads to narrow bid-ask spreads — Phase 1 (price bands $10-$50) proposes a 50%-60% reduction, Phase 2 (price bands $0.5-$10) proposes a 50% reduction",
+        "sources": [
+          {
+            "title": "Consultation Paper June 2024《Proposed Reduction of Minimum Spreads in the Securities Market》",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/News/Market-Consultations/2016-Present/June-2024-Review-of-Minimum-Spreads/Consultation-Paper/cp202406.pdf",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "The spread cost as represented by the bid-ask spread is one of the implicit transaction costs, thus minimum spread is considered to impact transaction cost and trading liquidity. ... The spread cost when trading securities on The Stock Exchange of Hong Kong Limited (the “Exchange”) is relatively higher than the average of international peer markets, and reducing minimum spread is one way to help lower this cost. ... a reduction of minimum spreads ... Phase 1 will cover price bands between $10 and $50 and it is proposed to reduce the minimum spreads by 50% - 60%; while in phase 2, the minimum spread of the price band of $0.5 - $10 is proposed to be reduced by 50%.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       }
     },
     "risks": {
       "fx_risk_note": {
         "zh": "港元联系汇率制度下汇率波动相对可控，但联系汇率制度本身的可持续性存在长期讨论",
+        "en": "Under the HKD's Linked Exchange Rate System, exchange-rate volatility is relatively contained, though the long-term sustainability of the peg itself remains a subject of ongoing debate",
         "confidence": "low",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -1738,42 +1967,69 @@
       "political_risk_note": {
         "zh": "",
         "confidence": "low",
+        "detail": "本次检索到的多为第三方律所简报/媒体报道对《国安法》与美国制裁交叉合规风险的评论（如 Lexology/Reed Smith/US-China Business Council），未找到港交所或证监会自身对这类地缘政治风险的正面官方表述可供逐字摘引，按铁律不采纳第三方推断性内容，留空。",
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
-        "detail": null,
         "quote": null,
         "sources": null
       },
       "liquidity_risk_note": {
         "zh": "",
         "confidence": "low",
+        "detail": "未找到港交所官方对『流动性风险』本身的正面说明性文字（如成交集中度、大市值股票占比等结构性流动性特征的官方论述）；overview.market_cap_usd_bn/listed_companies_count 等相关基础数据本身也留空，暂无法据此合成有质量的流动性风险描述，留空。",
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
-        "detail": null,
         "quote": null,
         "sources": null
       },
       "regulatory_change_risk_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "香港上市/交易制度近年处于活跃调整期，官方样本包括：①2023年6月19日推出港元-人民币双柜台模式（Dual Counter Model）及双柜台做市商计划；②2023年3月31日《上市规则》新增第18C章「特专科技公司」上市规则，2024年8月23日证监会与港交所联合公布为期三年（至2027年8月31日）的临时性宽免措施；③2024年10月18日起证监会与港交所推行「优化后申请时限」，为新上市申请审批设定更明确的监管意见轮次与时限；④2024年6月港交所就下调最小价差（买卖价差改革）展开市场咨询",
+        "en": "Hong Kong's listing/trading regime has been in a period of active reform in recent years, with official examples including: (1) the HKD-RMB Dual Counter Model and Dual Counter Market Making Programme launched on 19 June 2023; (2) new Chapter 18C 'Specialist Technology Companies' listing rules effective 31 March 2023, with the SFC and HKEX jointly announcing temporary relief measures for a fixed three-year period (to 31 August 2027) on 23 August 2024; (3) the SFC/HKEX Enhanced Application Timeframe for new listing applications, effective 18 October 2024, setting clearer regulatory-comment rounds and deadlines; and (4) HKEX's June 2024 market consultation on reducing minimum spreads (bid-ask spread reform)",
+        "sources": [
+          {
+            "title": "HKEX to Launch HKD-RMB Dual Counter Model on 19 June 2023",
+            "url": "https://www.hkex.com.hk/News/News-Release/2023/230519news?sc_lang=en",
+            "accessed": "2026-08-23"
+          },
+          {
+            "title": "Chapter 18C《Specialist Technology Companies》全文",
+            "url": "https://en-rules.hkex.com.hk/sites/default/files/net_file_store/HKEX4476_6059_VER24275.pdf",
+            "accessed": "2026-08-23"
+          },
+          {
+            "title": "Joint Statement on Enhanced Timeframe for New Listing Application Process",
+            "url": "https://www.hkex.com.hk/News/Regulatory-Announcements/2024/241018news?sc_lang=en",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "HKD-RMB Dual Counter Model to be launched in Hong Kong securities market on 19 June 2023 ... This new model and programme will further support the trading and settlement of RMB-denominated securities in Hong Kong.／This Chapter sets out rules and modifications to existing rules applicable to Specialist Technology Companies that seek to list on the basis that they are unable to satisfy either the profit test in rule 8.05(1), the market capitalisation/revenue/cash flow test in rule 8.05(2), or the market capitalisation/revenue test in rule 8.05(3).／the time taken by each regulator to confirm whether there are any material regulatory concerns will be no more than 40 business days",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "enforcement_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "香港市场执法为多轨并行架构：①上市规则层面——港交所上市部下设「上市监管及执法科」负责调查违反《上市规则》的行为并按需采取纪律处分，可动用暂停/撤销上市地位等权力；②持牌中介人层面——证监会根据《证券及期货条例》第九部对持牌法团、注册机构及其负责人员/主管行使纪律处分权（谴责、罚款、暂缓/撤销牌照等）；③此外证监会亦可就市场失当行为（内幕交易、虚假交易、操纵股价等）诉诸市场失当行为审裁处，或提请刑事检控（裁判法院）及民事诉讼（高等法院），四条执法路径彼此独立、互不替代",
+        "en": "Hong Kong market enforcement is a multi-track architecture: (1) at the Listing Rules level, HKEX's Listing Regulation and Enforcement Department investigates possible Listing Rule breaches and takes disciplinary action as needed, including the power to suspend or cancel a listing; (2) at the licensed-intermediary level, the SFC exercises disciplinary powers under Part IX of the SFO over licensed corporations, registered institutions and their responsible officers/executives (reprimand, fines, licence suspension/revocation, etc.); (3) the SFC may separately pursue market misconduct (insider dealing, false trading, price rigging, etc.) before the Market Misconduct Tribunal, or pursue criminal prosecution (Magistrates' Court) or civil proceedings (High Court) — these four enforcement tracks are independent of one another and not mutually substitutable",
+        "sources": [
+          {
+            "title": "Disciplinary & Enforcement Overview（港交所上市部执法总览页）",
+            "url": "https://www.hkex.com.hk/Listing/Disciplinary-and-Enforcement/Overview?sc_lang=en",
+            "accessed": "2026-08-23"
+          },
+          {
+            "title": "Disciplinary proceedings（证监会纪律处分程序说明）",
+            "url": "https://www.sfc.hk/en/Regulatory-functions/Enforcement/Disciplinary-proceedings",
+            "accessed": "2026-08-23"
+          }
+        ],
+        "quote": "The Listing Regulation and Enforcement Department of the Listing Division is responsible for enforcing the Listing Rules, including investigating possible breaches and implementing the appropriate regulatory response, through disciplinary action if necessary.／Under Part IX of the Securities and Futures Ordinance (SFO), the SFC is given power to discipline those that it licenses or registers ... This section does not concern other actions the SFC may take such as civil proceedings before the High Court, criminal proceedings before the Magistrates’ Court or proceedings before the Market Misconduct Tribunal.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       }
     }
   }

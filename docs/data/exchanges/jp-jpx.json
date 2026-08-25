@@ -266,7 +266,7 @@
         ],
         "quote": "the Exchange shall report the details to the Commissioner of the Financial Services Agency without delay",
         "confidence": "high",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "enum": null
       },
       "self_regulatory_org": {
@@ -281,7 +281,7 @@
         ],
         "quote": "Apr. 1, 2014 Tokyo Stock Exchange Regulation is renamed Japan Exchange Regulation",
         "confidence": "high",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "enum": null,
         "detail": null
       },
@@ -289,7 +289,7 @@
         "zh": "金融厅",
         "en": "FSA",
         "confidence": "medium",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "enum": null,
         "detail": null,
         "quote": null,
@@ -308,48 +308,87 @@
         ],
         "quote": "the Transaction Restriction Ordinance ... the Financial Instruments and Exchange Act",
         "confidence": "high",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "enum": null
       },
       "foreign_ownership_limit": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "对上市公司无笼统的外资持股比例上限；《外汇及外国贸易法》（FEFTA）要求外国投资者在「核心业务领域」（含半导体、国防装备、网络安全等指定行业）持有上市公司股份达1%以上时须事前申报并接受国家安全审查，未获豁免前30天（可延至4个月）内不得完成投资，而非设定持股比例封顶",
+        "en": "No blanket foreign-ownership percentage cap on listed companies; under the Foreign Exchange and Foreign Trade Act (FEFTA), foreign investors acquiring 1% or more of a listed company operating in a \"Core Business Sector\" (e.g. semiconductors, defense equipment, cybersecurity) must submit a prior notification and clear a national-security review, with a 30-day (extendable to four months) investment-prohibition period — this is a notification/screening threshold, not an ownership ceiling",
+        "detail": "「1%」是触发事前申报义务的门槛，不是禁止超过的上限；审查方向是国家安全而非产业保护式的外资限权。",
+        "sources": [
+          {
+            "title": "Foreign investors are required to submit a prior notification（MOF官网，制度概述PDF，2023年5月版）",
+            "url": "https://www.mof.go.jp/english/policy/international_policy/fdi/Overview/outline1.pdf",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "Mandatory Notification of Foreign Investors: Outline of the system（MOF官网，制度概述PDF）",
+            "url": "https://www.mof.go.jp/english/policy/international_policy/fdi/Overview/outline2.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Acquiring 1% or more of stocks of a listed company ... the foreign investors must submit a prior notification via a resident in Japan acting as an agent ... the foreign investor cannot make the investment or take similar actions within 30 days after the ministers receiving the prior notification. This period is called \"investment prohibition period\" and could be extended to four months.",
+        "confidence": "high",
+        "verified": "2026-08-24",
+        "enum": null
       },
       "capital_controls": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "1998年修订后的《外汇及外国贸易法》已全面放开跨境资本交易（原则自由）；此后叠加的唯一实质性管制层是FEFTA对「核心业务领域」外资并购的国家安全事前申报制度（见foreign_ownership_limit），而非传统意义的外汇/资本流动限制",
+        "en": "The 1998 revision of the Foreign Exchange and Foreign Trade Act totally liberalized cross-border capital transactions in principle; the only substantive control layer added since is FEFTA's national-security prior-notification regime for foreign acquisitions in \"Core Business Sectors\" (see foreign_ownership_limit), not a traditional FX/capital-flow restriction",
+        "detail": "两份来源合并使用：Big Bang改革说明确认1998年资本项目自由化的历史背景；FEFTA说明页确认现行审查制度的性质是国家安全导向而非资本管制导向。",
+        "sources": [
+          {
+            "title": "On Financial System Reform（MOF官网，1998年金融改革Big Bang历史说明，2000年1月发布）",
+            "url": "https://www.fsa.go.jp/p_mof/english/big-bang/ebb37.htm",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "Foreign investors are required to submit a prior notification（MOF官网，制度概述PDF）",
+            "url": "https://www.mof.go.jp/english/policy/international_policy/fdi/Overview/outline1.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "the revised Foreign Exchange Law was changed to totally liberalize cross-border transactions in April 1998. / As various challenges are on the rise both in economy and security territories, it is necessary for the government to collectively strengthen its economic security initiatives.",
+        "confidence": "high",
+        "verified": "2026-08-24",
+        "enum": null
       },
       "disclosure_requirements": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "以《有价证券上市规程》第402条「适时披露」为核心：上市公司发生对投资者决策有重大影响的事项须立即披露；决算须逐季（含累计季度）结算后立即披露财务业绩；披露一律通过交易所运营的TDnet系统向QUICK、路透、彭博等信息商同步分发，2025年4月起主板（Prime）上市的境内公司须日英双语同步披露决算与适时披露信息",
+        "en": "Centered on Rule 402 (\"Timely Disclosure\") of the Securities Listing Regulations: a listed company must disclose immediately any matter likely to have a significant impact on investors' decisions; quarterly (cumulative) earnings must be disclosed immediately once settled (Rule 404); disclosure is carried out through the Exchange's TDnet system for simultaneous dissemination to information vendors such as QUICK, Jiji Press, FactSet and Bloomberg (Rule 414); from April 2025 domestic Prime Market issuers must disclose financial results and timely-disclosure information simultaneously in Japanese and English",
+        "detail": "TDnet为强制披露渠道之一（Rule 414也允许书面通知等替代方式，仅在系统故障等例外情形使用）；双语同步义务目前仅覆盖Prime市场境内公司，Standard/Growth市场暂不强制。",
+        "sources": [
+          {
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）Rule 402/404/414",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "Overview of Timely Disclosure（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/disclosure/overview/index.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Where a listed company falls under any of the following items ... the listed company must disclose details immediately ... Where details of the financial results for a business year or an interim accounting period ... are settled, a listed company must disclose such details immediately. / Disclosure of corporate information on the basis of the provisions of Rules 402 through 411-3 shall be carried out using TDnet",
+        "confidence": "high",
+        "verified": "2026-08-24",
+        "enum": null
       },
       "investor_protection": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "日本投资者保护基金（JIPF，1998年12月依据《金融商品交易法》设立的会员制法人）：证券公司须与自有资产分离管理客户资产（客户资产分离保管制度）为第一道防线；若证券公司因破产等原因无法返还客户资产，JIPF对每位客户最高赔付1000万日元；截至2025财年末基金余额约584亿日元；成立以来仅两次实际赔付（2000年南证券、2012年丸大证券）",
+        "en": "Japan Investor Protection Fund (JIPF), a nonprofit membership corporation established December 1, 1998 under the Financial Instruments and Exchange Act: securities firms must keep customer assets segregated from their own as the first line of protection; if a firm cannot return customer cash/securities (e.g. due to bankruptcy), JIPF compensates up to ¥10 million per customer; the Fund balance was approximately ¥58.4 billion at the end of fiscal 2025; JIPF has paid compensation in only two cases since its founding (Minami Securities, 2000; Marudai Securities, 2012)",
+        "sources": [
+          {
+            "title": "About Us（日本投资者保护基金JIPF官网）",
+            "url": "https://jipf.or.jp/en/about/index.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Japan Investor Protection Fund (\"JIPF\") was established on December 1, 1998, as a nonprofit membership corporation under the Financial Instruments and Exchange Act. JIPF will provide investor protection by paying up to 10 million yen in compensation to each customer in the event that a securities firm is unable to return the customer's cash or securities due to a problem with the separation of customers' assets",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       }
     },
     "products": {
@@ -883,43 +922,23 @@
         ],
         "quote": "Rule 101. Market Segments / The Exchange has established the market segments referred to in the following each item... (1) Standard Market (2) Prime Market (3) Growth Market",
         "confidence": "high",
-        "verified": "2026-08-17"
+        "verified": "2026-08-24"
       },
       "listing_process_duration": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "境外公司申请上市：审核约需3个月，审核通过后公开发售（IPO）程序约需1个月，合计原则上自申请日至上市首日约需4个月；若计入公司内部筹备（含须完成两个会计年度的审计），从启动到上市整体约需1年",
+        "en": "For a foreign applicant: the listing examination takes about three months, and public-offering (IPO) procedures after approval take about one more month — an applicant needs about four months, as a rule, from the listing application date to the first day of listing; including internal preparation (the company must be audited for two business years), the overall process from kick-off to listing takes about one year",
+        "detail": "官网原文以境外公司申请为例给出精确月数；境内公司流程结构相同，官网未单独给出境内公司的月数拆分。",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
-            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
-            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
-            "accessed": "2026-08-17"
+            "title": "Listing Schedule（JPX官网，IPO概览）",
+            "url": "https://www.jpx.co.jp/english/equities/listing-on-tse/new/basic/02.html",
+            "accessed": "2026-08-24"
           }
         ],
-        "verified": "2026-08-17",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "quote": "Depending on the internal systems of the company, it takes about one year from kick-off to listing. Note that the company needs to be audited for two business years. ... When a foreign company files an application for listing on TSE, the listing examination will require about three months. After listing approval by TSE, about one month will be required for public offering procedures (the IPO). An applicant therefore needs four months, as a rule, from the listing application date to the first day of listing.",
+        "confidence": "high",
+        "verified": "2026-08-24",
+        "enum": null
       },
       "transfer_between_boards": {
         "zh": "",
@@ -951,83 +970,53 @@
             "accessed": "2026-08-17"
           }
         ],
-        "verified": "2026-08-17",
+        "verified": "2026-08-24",
         "en": null,
         "enum": null,
         "detail": null,
         "quote": null
       },
       "continuing_obligations": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "上市公司持续义务的两大支柱：其一，公司治理报告（Corporate Governance Report）——须以交易所规定格式披露公司治理状况并保持信息更新，交易所在网站集中公开以便投资者横向比较；其二，适时披露义务的持续履行（见disclosure_requirements），任何影响投资者决策的重大事项须持续、即时披露，不因上市完成而终止",
+        "en": "Two pillars of continuing obligations: (1) the Corporate Governance Report — listed companies must disclose their corporate governance status in a TSE-prescribed format and keep it updated whenever changes occur, made centrally available on the JPX website for cross-company comparison; (2) the ongoing performance of the timely-disclosure duty (see disclosure_requirements) — the duty to disclose material information immediately continues indefinitely after listing, not just at the IPO stage",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
+            "title": "Corporate Governance Report（JPX官网，Enhancing Corporate Governance）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/cg/01.html",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）Rule 419",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
-            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
-            "accessed": "2026-08-17"
+            "accessed": "2026-08-24"
           }
         ],
-        "verified": "2026-08-17",
-        "en": null,
+        "quote": "TSE decided to collect corporate governance-related information in the form of reports from each company and make this available to view at any time in one place, on the TSE website. / Where there has occurred any change in the information in a report including the matters regarding corporate governance specified by the Enforcement Rules ... a listed company shall submit a report after the change without delay.",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       },
       "suspension_resumption": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "交易所可依《业务规程》第29条对个股实施停牌，情形包括：涉及证券或发行人、可能对投资者决策有重大影响的信息已披露但细节尚不明朗；交易状态异常或从监管角度不宜继续交易；交易系统故障等。停牌时长视具体事项而定，实践中多数个股停牌（如并购、公开发行公告）在停牌当日内数十分钟至数小时后即恢复交易；此外第4/5条允许交易所在必要时对整个交易时段临时全体停牌或加开时段，并须提前通知交易参与者",
+        "en": "Under Rule 29 of the Business Regulations, the Exchange may halt trading in a security where: information likely to have a significant effect on investors' decisions has emerged but its details remain unclear; the state of trading is deemed abnormal or continuing trading is inappropriate from a supervisory standpoint; or a trading-system malfunction occurs. Duration varies by case — most individual-issue halts (e.g. merger or public-offering announcements) resume within tens of minutes to a few hours the same day per the Exchange's own halt records; separately, Rules 4/5 let the Exchange temporarily halt or extend a trading session market-wide when necessary, with advance notice to trading participants",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
-            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-17"
+            "title": "Business Regulations（TSE官网英文版PDF）Rule 4/5/29",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-24"
           },
           {
-            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
-            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
-            "accessed": "2026-08-17"
+            "title": "Trading Halts（JPX官网，个股停牌实时记录）",
+            "url": "https://www.jpx.co.jp/english/markets/equities/suspended/index.html",
+            "accessed": "2026-08-24"
           }
         ],
-        "verified": "2026-08-17",
-        "en": null,
+        "quote": "Rule 29. Trading Halt / In cases referred to in each of the following items, the Exchange may halt trading of a security as prescribed by the Exchange ... Where information on a certain security or issuer that may have a significant effect on investors' investment decisions is revealed and details of such information are not clear and/or the Exchange deems it necessary to make details aware to the public ... Rule 4. Temporary Halt and Temporary Conducting of Trading Session / The Exchange may temporarily halt a trading session in whole or in part or temporarily conduct an additional trading session in whole or in part, when it deems this necessary.",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       },
       "delisting_conditions": {
         "zh": "",
@@ -1059,87 +1048,48 @@
             "accessed": "2026-08-17"
           }
         ],
-        "verified": "2026-08-17",
+        "verified": "2026-08-24",
         "en": null,
         "enum": null,
         "detail": null,
         "quote": null
       },
       "delisting_process": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "退市流程分四步：①退市申请（公司主动申请退市须提交指定退市申请表，Rule 606）；②在决定退市前，若某证券有可能被退市，交易所可将其指定为「监理股份」（Securities Under Supervision）以提示投资者（Rule 608）；③一旦决定退市，交易所将其指定为「整理股份」（Securities to Be Delisted），指定持续至退市日前一天（Rule 609）；④退市日当天从上市证券登记簿中注销（Rule 610）。因未达持续上市标准而触发的退市，另有一年（交易量类指标为六个月）整改期，整改期内须提交并汇报整改计划（见delisting_transition_period）",
+        "en": "Delisting follows four steps: (1) Delisting Application — a company voluntarily delisting must submit the prescribed application form (Rule 606); (2) before delisting is decided, the Exchange may designate a security likely to be delisted as \"Securities Under Supervision\" to alert investors (Rule 608); (3) once delisting is decided, the Exchange designates the security as \"Securities to be Delisted\" for the period until the day before the delisting date (Rule 609); (4) on the delisting date the Exchange erases the security from the listed security registry (Rule 610). Delisting triggered by failing to meet Continued Listing Criteria carries a separate one-year (six months for trading-volume criteria) improvement period during which the company must disclose and report on a conformance plan (see delisting_transition_period)",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
+            "title": "Securities Listing Regulations（TSE官网英文版PDF）Rule 606-610",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
-            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
-            "accessed": "2026-08-17"
+            "accessed": "2026-08-24"
           }
         ],
-        "verified": "2026-08-17",
-        "en": null,
+        "quote": "Rule 606. Delisting Application ... Rule 608. Designation of Securities Under Supervision / Where a listed stock, etc. is likely to be delisted, the Exchange may designate such listed stock, etc. as a security under supervision to make investors aware of that fact ... Rule 609. Designation of Securities to be Delisted / Where a listed stock, etc. is decided to be delisted, the Exchange may designate such listed stock, etc. as a security to be delisted for a period until the day before the delisting date ... Rule 610. Erasure from the Registry / Where the Exchange delists a listed stock, etc., it shall delete descriptions in the listed security registry on the delisting date.",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       },
       "delisting_transition_period": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "因未达持续上市标准触发退市的公司：先经一年（交易量类指标为六个月）整改期未能达标，随后被指定为「监理股份」与「整理股份」，两阶段合计原则上共六个月，期满仍未达标即正式退市；「整理股份」指定期本身持续至退市日前一天（见delisting_process）",
+        "en": "For delisting triggered by failing Continued Listing Criteria: after a one-year (six months for trading-volume criteria) improvement period without meeting the criteria, the company is designated as Securities Under Supervision and then Securities to be Delisted — the two designations together last a total of six months in principle before delisting takes effect; the Securities-to-be-Delisted designation itself runs until the day before the delisting date (see delisting_process)",
+        "detail": "「六个月」是监理+整理两阶段合计的原则性时长，出自Issues in an Improvement Period说明页；具体到某一只股票的整理股份指定天数由交易所按Enforcement Rules另行确定，本次未抓取到Enforcement Rules条文核实固定天数。",
         "sources": [
           {
-            "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
-            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Prime Market)（JPX官网，含标准/成长市场标签页，2023-04-01数值版本）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Standard Market)（同上页面 Standard Market 标签页）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Initial Listing Criteria (Growth Market)（同上页面 Growth Market 标签页）",
-            "url": "https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html",
-            "accessed": "2026-08-17"
-          },
-          {
-            "title": "Overview of Market Restructuring（JPX官网，三板概念定义与2022年4月4日重组时间线）",
-            "url": "https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html",
-            "accessed": "2026-08-17"
+            "title": "Companies in an Improvement Period（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/listing/market-alerts/improvement-period/index.html",
+            "accessed": "2026-08-24"
           }
         ],
-        "verified": "2026-08-17",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "quote": "When a listed company does not meet the Continued Listing Criteria within one year (six months for trading volume criteria of the Continued Listing Criteria) after failing to meet the Continued Listing Criteria, the listed company will be delisted after being designated as Securities Under Supervision and as Securities to be Delisted (total of six month in principle).",
+        "confidence": "high",
+        "verified": "2026-08-24",
+        "enum": null
       },
       "post_delisting_venue": {
         "zh": "",
         "confidence": "low",
+        "detail": "日本历史上曾有两类正式的退市后交易安排——日本证券业协会运营的「Phoenix」制度（已于2008年3月31日废止）与「绿单市场」Green Sheet（因交易清淡已于2018年3月底废止），均已不再存在；本次抓取范围（jpx.co.jp/mof.go.jp/fsa.go.jp/nta.go.jp）未找到官方原文说明当前是否存在替代性的正式退市后交易场所（第三方信息显示存在Japannext等私设交易系统PTS及新兴的非上市股票交易平台，但均为第三方来源且未明确其是否专门承接退市股票，未采纳），按铁律留空，已记入OPEN-QUESTIONS。",
         "sources": [
           {
             "title": "Securities Listing Regulations（TSE官网英文版PDF，Rule 205/211/217 三板初次上市门槛条文）",
@@ -1167,10 +1117,9 @@
             "accessed": "2026-08-17"
           }
         ],
-        "verified": "2026-08-17",
+        "verified": "2026-08-24",
         "en": null,
         "enum": null,
-        "detail": null,
         "quote": null
       }
     },
@@ -1212,7 +1161,7 @@
         ],
         "quote": "it was decided to implement T+2 settlements effective July 16, 2019 (Tues.) (for executed trades), which means the date of delivery of shares and other securities occurs one business day earlier from the date of transaction than previously, and delivery is made two business days after the trade date.",
         "confidence": "high",
-        "verified": "2026-08-13"
+        "verified": "2026-08-24"
       },
       "ccp_name": {
         "zh": "日本证券结算公司",
@@ -1226,7 +1175,7 @@
         ],
         "quote": "Clearing services for all securities transactions on these markets are provided by Japan Securities Clearing Corporation (JSCC).",
         "confidence": "high",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "enum": null,
         "detail": null
       },
@@ -1242,14 +1191,14 @@
         ],
         "quote": "Japan Securities Depository Center, Inc. (Stocks and convertible bonds etc.)",
         "confidence": "high",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "enum": null,
         "detail": null
       },
       "initial_margin_practice": {
         "zh": "",
         "confidence": "low",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "en": null,
         "enum": null,
         "detail": null,
@@ -1259,7 +1208,7 @@
       "maintenance_margin_practice": {
         "zh": "",
         "confidence": "low",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "en": null,
         "enum": null,
         "detail": null,
@@ -1269,7 +1218,7 @@
       "mark_to_market_frequency": {
         "zh": "",
         "confidence": "low",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "en": null,
         "enum": null,
         "detail": null,
@@ -1289,13 +1238,13 @@
           }
         ],
         "confidence": "medium",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "quote": null
       },
       "last_trading_day_rule": {
         "zh": "",
         "confidence": "low",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "en": null,
         "enum": null,
         "detail": null,
@@ -1303,14 +1252,20 @@
         "sources": null
       },
       "default_management": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "JSCC（清算机构）持续监控清算参与者以避免违约；一旦其管理层判定某参与者已经或可能无法履行义务，即宣告违约，随即停止为其清算新交易并处置其持仓——上市产品的处置方式为在市场上做对冲平仓交易；客户持仓与担保品在可行情况下可转移给未违约的清算参与者；违约造成的损失依JSCC自身的损失补偿（清算基金等）财务资源规则消化；即使发生违约，JSCC仍按既定时间表完成结算，为此维持流动性供应设施",
+        "en": "JSCC (the CCP) continuously monitors Clearing Participants to avoid defaults; if its senior management determines a participant is, or is likely to be, unable to perform its obligations, JSCC declares a default, halts clearing of new transactions from the defaulter, and liquidates the defaulter's positions — for listed products, by offsetting transactions in the market. Customer positions and collateral can, where feasible, be transferred (ported) to non-defaulting Clearing Participants. Losses arising from the default process are absorbed using JSCC's loss-compensation financial resources per its rules; even when a default occurs, JSCC still fulfills settlement on the regular schedule, maintaining Liquidity Supply Facilities for this purpose",
+        "sources": [
+          {
+            "title": "Default Management（JSCC官网，Risk Management栏目）",
+            "url": "https://www.jpx.co.jp/jscc/en/risk/default.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "JSCC will declare that a Clearing Participant is in default if such participant is, or is likely to be, unable to perform its obligations, according to the determination of JSCC's senior management. If a default is declared, JSCC can take actions to contain losses by halting clearing of new transactions from the defaulter and liquidating the defaulter's positions. ... Even when a Clearing Participant default occurs, JSCC will fulfill settlement according to the regular schedule.",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "derivatives": {
         "initial_margin_practice": null,
@@ -1322,44 +1277,78 @@
     },
     "participants": {
       "investor_structure": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "JPX按周/月/年定期公布「投资者类型别交易统计」（Trading by Type of Investors），将成交量与成交额划分为境外投资者、个人、金融机构（含证券公司自营）、事业法人、投资信托等类别，另有「非居民投资者持股情况（按地区）」月度调查；本次抓取到的是统计栏目框架页面本身，具体各类别当期占比数字未随页面文本一并抓取到（数据以可下载的Excel文件形式提供），故不在此断言具体百分比",
+        "en": "JPX regularly publishes \"Trading by Type of Investors\" statistics (weekly/monthly/annual), breaking down trading volume and value by category — nonresident (foreign) investors, individuals, financial institutions (including securities companies' proprietary trading), business corporations, investment trusts, etc. — plus a monthly \"Investments in Listed Stocks by Nonresidential Investors (by region)\" survey; this session fetched the statistics landing pages themselves, not the underlying downloadable Excel figures, so no specific current percentage is asserted here",
+        "detail": "字段留白具体占比是刻意的：常识印象是境外投资者常年占TSE成交额六成以上，但本次未抓取到承载该具体数字的原始表格文件（页面正文只是索引，数字在Excel附件里），按铁律不采纳未核实的印象数字。",
+        "sources": [
+          {
+            "title": "Trading by Type of Investors（Weekly，JPX官网统计栏目）",
+            "url": "https://www.jpx.co.jp/english/markets/statistics-equities/investor-type/index.html",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "Trading by Type of Investors（Annual，JPX官网统计栏目）",
+            "url": "https://www.jpx.co.jp/english/markets/statistics-equities/investor-type/00-02.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "account_opening_requirements": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "客户向交易参与者（券商）委托证券交易前，须依《受托契约准则》第3条向该交易参与者通知：（1）个人或法人名称；（2）地址或营业场所；（3）指定接收通讯的地点名称（如已指定）；（4）如已委任代理人，代理人的名称、地址及被授予的权限范围。此外开立保证金交易账户、外国证券交易账户等特定账户类型另需分别签署对应的专门契约",
+        "en": "Before entrusting securities trading to a Trading Participant (broker), a customer must, under Rule 3 of the Brokerage Agreement Standards, notify the Trading Participant of: (1) personal or corporate name; (2) address or office location; (3) the name of a designated place to receive communications, if any; and (4) where an agent has been appointed, the agent's name, address, and scope of authority. Opening specific account types — such as a margin transaction account or a foreign securities trading account — requires signing the corresponding separate agreement",
+        "sources": [
+          {
+            "title": "Brokerage Agreement Standards（TSE官网英文版PDF）Rule 3",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/brokerage_agreement_standards_20260401.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Rule 3. Notification Matters of Customers / A customer who entrusts securities trading with a trading participant shall notify such trading participant of information referred to in each of the following items: (1) Personal or corporate name; (2) Address or office location; (3) Name of the place designated to receive communications, if such place has been designated; and (4) In cases where an agent has been appointed, the personal or corporate name and the address or office location thereof and the scope of powers assigned thereto.",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "suitability_management": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "《金融商品交易法》第40条第1项确立「适合性原则」：金融商品交易业者不得进行鉴于客户知识、经验、财产状况及订立金融商品交易合同目的而被认定为不适当的劝诱。该原则包含「狭义适合性原则」（对特定客户完全不得劝诱销售特定商品，无论说明多详细）与「广义适合性原则」（劝诱方式须与客户知识/经验/财产状况相匹配），并延伸出订立合同前须按客户属性进行充分说明的义务；仅适用于「一般投资者」，对「专业投资者」原则上不适用，但一般投资者若被劝诱转为专业投资者，转换劝诱本身仍受适合性原则约束",
+        "en": "Article 40(i) of the Financial Instruments and Exchange Act establishes the \"principle of suitability\": a business operator must not conduct sales/solicitation that is found to be inappropriate in light of the customer's knowledge, experience, financial situation, and purpose of concluding a financial instruments transaction contract. It comprises the \"principle of suitability in the narrow sense\" (a rule against soliciting certain instruments to specific users regardless of how detailed the explanation) and \"in the broad sense\" (solicitation must suit the user's knowledge/experience/property), extending into a pre-contract explanation obligation tailored to customer attributes; it applies to \"General Investors\" but not, in principle, to \"Professional Investors\" — though the act of soliciting a General Investor to become a Professional Investor is itself still subject to the suitability principle",
+        "sources": [
+          {
+            "title": "FAQ on Financial Instruments and Exchange Act, Section 6（金融厅FSA官网）",
+            "url": "https://www.fsa.go.jp/en/laws_regulations/faq_on_fiea/section06.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "While the principle of suitability (Article 40(i) of the FIEA) is not applied when making solicitation of transactions to Professional Investors, the principle will apply when General Investors shift their status to Professional Investors by choice. ... The principle of suitability is a principle that should constitute a pillar of sales/solicitation rules for protection of users ... there is the \"principle of suitability in the narrow sense\" (a rule that a business operator must not conduct sales/solicitation of certain instruments to specific users regardless of how much detailed explanation the business operator provides) and the \"principle of suitability in the broad sense\" (a rule that a business operator must conduct sales/solicitation in a way that suits the knowledge/experience/property, etc. of the users).",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "foreign_access_channel": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "境外投资者接入TSE主要有两条渠道：其一，与境内其他投资者相同，通过在境内交易参与者（证券公司）开立账户委托交易（见account_opening_requirements）；其二，境外证券公司本身可申请成为「远程交易参与者/远程经纪参与者」（Remote Trading/Broker Participant）直接接入交易系统，交易参与者名录中已列有多家此类机构（如香港Citadel Securities、Susquehanna等）。跨境股权投资另受FEFTA事前申报制度约束（见capital_controls/foreign_ownership_limit），但该制度本身不构成交易渠道，只是投资行为的国家安全审查前提",
+        "en": "Foreign investors access TSE mainly through two channels: (1) the same route as domestic investors — opening an account with a domestic Trading Participant (broker) to entrust trading (see account_opening_requirements); (2) overseas securities firms may themselves qualify as \"Remote Trading Participants / Remote Broker Participants\" and connect to the trading system directly — the List of Trading Participants already includes several such firms (e.g. Citadel Securities (Hong Kong), Susquehanna Hong Kong). Cross-border equity investment is separately subject to the FEFTA prior-notification regime (see capital_controls/foreign_ownership_limit), which is a national-security screening precondition on the investment itself, not a trading channel",
+        "sources": [
+          {
+            "title": "List of Trading Participants（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/participants/list/index.html",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "Brokerage Agreement Standards（TSE官网英文版PDF）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/brokerage_agreement_standards_20260401.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Citadel Securities (Hong Kong) Limited (Remote Trading Participant) ... Susquehanna Hong Kong Limited (Remote Trading Participant)",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "membership_structure": {
         "zh": "交易参与者（Trading Participant）制度，须通过资格审查取得交易资格",
@@ -1372,132 +1361,207 @@
           }
         ],
         "confidence": "medium",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "enum": null,
         "detail": null,
         "quote": null
       },
       "broker_landscape": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "东京证券交易所现货市场的一般交易参与者（General Trading Participants）共87家；同属JPX集团的大阪交易所（衍生品）期货类交易参与者68家、政府债券期货类交易参与者另计20家；名录中含多家以「远程交易参与者/远程经纪参与者」身份直接接入的境外证券公司（如香港Citadel Securities、Susquehanna）",
+        "en": "The Tokyo Stock Exchange cash market has 87 General Trading Participants; the JPX Group's Osaka Exchange (derivatives) separately lists 68 Futures Trading Participants and 20 Government Bond Futures Trading Participants; the roster includes several overseas securities firms connected directly as \"Remote Trading Participants / Remote Broker Participants\" (e.g. Citadel Securities (Hong Kong), Susquehanna Hong Kong)",
+        "sources": [
+          {
+            "title": "List of Trading Participants（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/participants/list/index.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Tokyo Stock Exchange / General Trading Participants:87 / Osaka Exchange / Futures, etc. Trading Participants:68, Government bond futures, etc. Trading Participants:20, Commodity futures, etc. Trading Participants:7",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       }
     },
     "infrastructure": {
       "market_data_levels": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "分为两档：FLEX Standard（相当于Level 1/2综合行情，含开高低收价、成交量额、VWAP、十档最优买卖价位及数量、市价申报数量等）与FLEX MBO（订单簿逐笔明细，含已登记订单的价格/数量/订单编号/订单条件、改单/撤单、成交/失效等全部订单事件，另有限制带宽版FLEX MBO BC）；两档均可另外获取TOPIX等JPX系列指数行情",
+        "en": "Two tiers: FLEX Standard (Level 1/2-equivalent consolidated data — O/H/L/C prices, trading volume/value, VWAP, 10 best quote prices/sizes and accumulated sizes beyond the 10th, market-order size, etc.) and FLEX MBO (full market-by-order data — price, quantity, Order ID and Order Condition of all registered orders, modification/cancel orders, and execution/invalidation events, with a bandwidth-limited FLEX MBO BC variant); both tiers can additionally include JPX Index information such as TOPIX",
+        "sources": [
+          {
+            "title": "Outline（JPX官网，Real Time Market Data栏目）",
+            "url": "https://www.jpx.co.jp/english/markets/paid-info-equities/realtime/index.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "TSE provides market information on orders, executions, trading volume, trading value, and indices as well as other related information as a paid service. / FLEX Standard ... Open/high/low/close prices (per session), trading volume, trading value, VWAP, pre-open/quote prices/sizes (10 best quote prices/sizes and accumulated quote sizes beyond 10th best quotes), market order size ... FLEX MBO ... Information (price, quantity, Order ID (an identifier to specify each order), Order Condition etc.) of all orders registered on the order book, modification/cancel orders, executed/invalidation orders",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "data_latency": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "两档并行：实时数据（Real-Time，直连交易所专线或通过信息商）为付费服务；15分钟延时数据（15 Minute-Delayed）通过API免费/低成本提供，涵盖TSE、福冈证交所、札幌证交所全部上市证券（不含直接债券、可转债、TOKYO PRO-BOND市场品种），每1分钟更新一次",
+        "en": "Two parallel tiers: Real-Time data (via a dedicated line direct to TSE or through market information providers) is a paid service; 15-Minute-Delayed data is distributed via a free/low-cost API covering all listed issues on TSE, Fukuoka Stock Exchange and Sapporo Securities Exchange (excluding straight bonds, convertible bonds and TOKYO PRO-BOND Market issues), updated at 1-minute intervals",
+        "sources": [
+          {
+            "title": "Outline（JPX官网，Real Time Market Data栏目）",
+            "url": "https://www.jpx.co.jp/english/markets/paid-info-equities/realtime/index.html",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "15 Minute-Delayed Stock Price Information (API)（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/markets/paid-info-equities/realtime/06.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Last Sales Information (information for which 15 minutes or more has elapsed since distribution from TSE market information system ...) of listed company shares on the TSE, Fukuoka Stock Exchange and Sapporo Securities Exchange is provided in API ... O/H/L/C prices for the day are output after 15 minutes has elapsed after TSE distributes from the market information system. The update interval is 1 minute.",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "data_pricing_model": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "以「授权费+使用费+终端费」的订阅制为主，视用途（自用/对外再分发）与获取渠道（直连TSE专线/经由信息商）分级计费；例如接收全订单信息并对外再分发，月度授权费153万日元、外部分发基本使用费145万日元，另加实时终端费与用量费；15分钟延时/收盘数据再分发费率显著更低（授权+使用费各19万或14万日元/月）；直连TSE另须另付专线费、系统基础设施费、接入服务费；2026年1月起另设促销费率鼓励境内外机构分发实时行情，最长可享4年",
+        "en": "Primarily a \"license fee + usage fee + terminal fee\" subscription model, tiered by use (internal vs. external redistribution) and access channel (direct dedicated line to TSE vs. via market information providers) — e.g. receiving and redistributing Full Order Information costs a monthly license fee of JPY1,530,000 plus an external-distribution basic fee of JPY1,450,000, plus a real-time terminal fee and volume charge; redistributing 15-minute-delayed or closing (EOD) data is priced much lower (JPY190,000 or JPY140,000 per month for each of license/usage fee); connecting directly to TSE also incurs separate dedicated-line, system-infrastructure and connectivity-service fees; from January 2026 promotional rates (up to 4 years) apply to encourage both domestic and overseas entities to distribute real-time information",
+        "sources": [
+          {
+            "title": "Fees（JPX官网，Real Time Market Data栏目）",
+            "url": "https://www.jpx.co.jp/english/markets/paid-info-equities/realtime/01.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Receiving Full Order Information directly from TSE or through market information providers and redistributing to third parties / JPY 1,530,000 / JPY 1,450,000 ... Receiving 15 minute-Delayed Last Sales Information from a market information provider and redistributing to third parties / JPY 190,000 / JPY 190,000 ... Receiving Closing Information (EOD) from a market information provider and redistributing to third parties / JPY 140,000 / JPY 140,000 ... For New Promotional Program Users which complete the necessary procedures starting in January 2026, the promotional rates below will apply for up to 4 years.",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "historical_data_availability": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "由JPX Market Innovation & Research（JPXI）提供，涵盖历史逐笔行情（Historical Real-Time Market Data，基于FLEX Standard/FLEX MBO/ToSTNeT/TOPIX的历史数据）、十档订单簿历史重建数据、股价与JPX系列指数历史信息、多类统计数据（月度行情、月末个股/行业市值、TOPIX β值等）；分发渠道分三档：面向个人/企业的J-Quants DataCube（按文件购买）、面向个人的J-Quants API（含免费方案）、面向企业的J-Quants Pro（API/SFTP，可再分发）",
+        "en": "Provided by JPX Market Innovation & Research (JPXI), covering historical real-time market data (based on FLEX Standard/FLEX MBO/ToSTNeT/TOPIX), 10-level order-book reconstruction data, historical stock price and JPX index information, and various statistics data (monthly quotations, month-end market capitalization by stock/sector, TOPIX β value, etc.); delivered via three channels — J-Quants DataCube (file purchase, for individuals/corporates), J-Quants API (for individuals, with a free plan), and J-Quants Pro (API/SFTP, redistribution allowed, for corporates)",
+        "sources": [
+          {
+            "title": "Outline（JPX官网，Historical Data栏目）",
+            "url": "https://www.jpx.co.jp/english/markets/paid-info-equities/historical/index.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "JPX Market Innovation & Research, Inc. (JPXI) provides historical data such as stock price information, statistics, data and daily accumulated real-time information. / 10-level Order Book Historical Data / Data processed and edited based on FLEX to facilitate the reconstruction of order books ... Stock Price Information, Statistics Data, and TOPIX β Value can be purchased on \"J-Quants DataCube\" ... Free Plan JPY 0 / Light Plan JPY 1,650/month / Standard Plan JPY 3,300/month / Premium Plan JPY 16,500/month",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "trading_system_name": {
         "zh": "arrowhead",
         "en": "arrowhead",
         "detail": "TSE现货股票撮合引擎名称，本次仅在术语层面确认名称存在，未抓取到对该系统本身的专门介绍页面，故无独立quote，confidence标medium。",
         "confidence": "medium",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "enum": null,
         "quote": null,
         "sources": null
       },
       "access_methods": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "行情/交易接入分三条渠道：①直连TSE专线（Dedicated Connection Line）；②经由信息商（Market Information Providers，如QUICK、路透、彭博等）间接获取；③托管/邻近服务——JPX Co-Location（在JPX主机房设置交易程序设备，可将行情获取与订单提交时延降至约几微秒单程）与关西邻近服务（Kansai Proximity Service，服务大阪地区、兼具大地震等广域灾害下的业务连续性功能）；另有历史数据专用的J-Quants API/SFTP渠道（见historical_data_availability）",
+        "en": "Three access channels: (1) a dedicated connection line directly to TSE; (2) indirectly through Market Information Providers (e.g. QUICK, Reuters, Bloomberg); (3) hosting/proximity services — the JPX Co-Location Service (installing trading-program devices at the JPX Primary Site, reducing quote-acquisition and order-submission latency to about a few microseconds one-way) and the Kansai Proximity Service (serving the Kansai region, with a business-continuity function under wide-area disasters such as the Tokyo Inland Earthquake); a separate J-Quants API/SFTP channel exists for historical data (see historical_data_availability)",
+        "sources": [
+          {
+            "title": "Overview（JPX官网，Connectivity Services栏目）",
+            "url": "https://www.jpx.co.jp/english/systems/connectivity/index.html",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "Outline（JPX官网，Real Time Market Data栏目）",
+            "url": "https://www.jpx.co.jp/english/markets/paid-info-equities/realtime/index.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Market data can be acquired by directly connecting to TSE via dedicated connection lines or indirectly from market information providers. / The Co-Location service provides trading participants, information vendors and ISVs, among others, with spaces to install devices with trading programs, etc., and networks at the JPX Primary Site. ... reduce the time it takes to obtain quote information and submit orders to about a few microseconds (one-way).",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "major_outage_history": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "2020年10月1日，现货交易系统arrowhead发生故障：共享磁盘设备（Shared Disk Device）1号机内存模组故障，且未能按预期自动切换至2号机，TSE为此向投资者及市场相关方致歉并公开发布事件经过、故障原因与再发防止措施报告。TSE官方于10月5日公布直接原因（内存模组故障场景下自动切换功能未生效）及应对措施（10月4日已完成设备设置变更并确认切换功能恢复正常），并成立由市场参与者组成的「故障再发防止对策委员会」检讨规则与应对机制",
+        "en": "On October 1, 2020, the cash equity trading system arrowhead suffered a failure: a memory-module failure occurred in Device 1 of its Shared Disk Device, and automatic switchover to Device 2 did not function as expected; TSE apologized to investors and market participants and published a report on the sequence of events, cause, and recurrence-prevention measures. TSE published the direct cause on October 5 (automatic switching does not function for a memory-module-failure scenario) and the remedial measure (the device settings were changed on October 4 and switchover was confirmed working), and established a market-user \"Council for Recurrence Prevention Measures\" to review its rules and response",
+        "detail": "多家第三方媒体（Reuters/FT等）当时报道此次故障导致TSE当天全天停市，是该所自1999年全面电子化交易以来首次全日停牌；但本次抓取的JPX官方新闻稿与10月5日官方报告原文均未在文本中明确出现「全日/whole day」这一表述，按铁律不把第三方转述的具体停市时长细节写进confidence:high的正文，仅在此说明。",
+        "sources": [
+          {
+            "title": "The Failure of Equity Trading System on October 1, 2020（JPX官网新闻稿）",
+            "url": "https://www.jpx.co.jp/english/corporate/news/news-releases/0060/20201019-01.html",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "The Cause of the Recent Failure in arrowhead and Measures Implemented（TSE官方报告PDF，2020-10-05）",
+            "url": "https://www.jpx.co.jp/english/corporate/news/news-releases/0060/b5b4pj000003qm41-att/arrowhead_e.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "TSE would like to express our sincerest apologies to investors and the people related to the market for any inconvenience caused by the failure of the equity trading system, arrowhead on October 1, 2020. / A failure occurred in a memory module in Device 1 of the Shared Disk Device in arrowhead. Operations were supposed to switch automatically to Device 2, but switching did not function as expected. ... We implemented the settings into the system on October 4 and have confirmed that automatic switching functions as expected.",
+        "confidence": "high",
+        "verified": "2026-08-24",
+        "enum": null
       }
     },
     "costs": {
       "commission_structure": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "「日本金融大爆炸」（Big Bang，1996年11月启动的金融体制改革）全面放开经纪佣金管制，此前长期实行固定费率；自由化后佣金转为各证券公司自行议定，并直接带动了网上交易（在线证券交易）的扩张，目前主流网上券商多提供极低或零佣金的现货股票交易服务（本次未抓取到某一家具体券商的费率表，故不展开列举具体数字）",
+        "en": "Brokerage commissions were fully liberalized as part of Japan's \"Big Bang\" financial system reform (commenced November 1996), replacing the long-standing fixed-rate regime; since liberalization, commissions are freely negotiated between securities companies and customers, and this liberalization directly drove the expansion of online (internet) securities trading, with mainstream online brokers today commonly offering very low or zero-commission cash-equity trading (no single broker's current rate table was fetched this session, so no specific figure is asserted)",
+        "detail": "本条描述的是制度层面的「佣金已自由化」这一事实，不是任何一家具体券商的现行费率；后者随时间/券商变化快，不适合作为交易所层面的稳定事实记录。",
+        "sources": [
+          {
+            "title": "On Financial System Reform（MOF官网，Big Bang历史说明，2000年1月发布）",
+            "url": "https://www.fsa.go.jp/p_mof/english/big-bang/ebb37.htm",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "The Financial System Reform, \"Japanese Big Bang,\" was commenced in November 1996 ... switching from the licensing system to a registration system for securities companies, liberalizing cross-border capital transactions and foreign exchange business, fully liberalizing brokerage commissions, and eliminating the obligation to use premium rates set by the non-life insurance rating organization. ... Furthermore, the full liberalization of brokerage commissions has led to expansion of trading of securities through the internet (online trading).",
+        "confidence": "high",
+        "verified": "2026-08-24",
+        "enum": null
       },
       "exchange_fees": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "TSE向交易参与者（证券公司）收取的交易参与费用由四部分构成：基本费用（Basic fees）、交易费用（Trading fees，按成交金额/量计）、接入费用（Access fees，按下单笔数计）、交易系统设施使用费（按交易系统使用状况计）；这是交易所向会员（而非终端投资者）收取的费用，终端投资者实际负担的部分通常已隐含在券商佣金中",
+        "en": "TSE's trading participation fees, paid by Trading Participants (brokers), are composed of four elements: Basic fees; Trading fees (based on trading value/volume); Access fees (based on the number of orders placed); and Trading system facility usage fees (based on the status of use of trading systems). These are fees the Exchange charges its members, not end investors directly — the investor-borne portion is typically embedded within broker commissions",
+        "sources": [
+          {
+            "title": "Trading Participation Fees（JPX官网）",
+            "url": "https://www.jpx.co.jp/english/rules-participants/participants/fees/index.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "TSE's trading participation fees, paid by trading participants, are composed of: Basic fees / Trading fees (based on trading value (volume)) / Access fees (based on the number of orders placed) / Trading system facility usage fees (based on the status of use of trading systems)",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "clearing_fees": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "JSCC（日本证券结算公司）向证券清算参与者收取月度基本费与清算费两部分：月度基本费——一般清算参与者50万日元（仅当该参与者当月承担义务占全市场份额超3%且单位义务价值低于市场平均时收取）、ETF特别清算参与者/注册ETF信托银行各5万日元；清算费——按当月「每日清算金额（单边）」分级累进费率计算（不超过1万亿日元部分费率0.000007，超过4万亿日元部分降至0.0000044），债券另按面值0.000004或每笔2.95日元计",
+        "en": "JSCC (Japan Securities Clearing Corporation) charges Clearing Participants a monthly fee plus a clearing fee: monthly fee — JPY500,000 for a Securities Clearing Participant (charged only when its monthly share of assumed obligation count exceeds 3% of the market and its unit value per assumed obligation is below the market average), JPY50,000 each for an ETF Special Clearing Participant or Registered ETF Trust Bank; clearing fee — a tiered rate applied to the month's Daily Clearing Value (one way), starting at 0.000007 for the portion up to JPY1 trillion and stepping down to 0.0000044 above JPY4 trillion; bonds are charged separately at 0.000004 per face value of ¥1 or ¥2.95 per contract",
+        "sources": [
+          {
+            "title": "Clearing Fee（JSCC官网，Equities and Bonds栏目）",
+            "url": "https://www.jpx.co.jp/jscc/en/cash/cash/fee.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "(1) Securities Clearing Participant: \\5,000,000 ... (2) ETF Special Clearing Participant: \\50,000 (3) Registered ETF Trust Bank: \\50,000 ... Up to JPY1tril. / 0.000007 ... More than JPY4tril. / 0.0000044 ... (2)Bonds (bonds exclude CBs and exchangeable corporate bonds) (a)Clearing value base:¥0.000004 per face value of ¥1 (b)Contract number base: ¥2.95 per contract cleared",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "regulatory_fees": {
         "zh": "",
         "confidence": "low",
-        "verified": "2026-08-13",
+        "detail": "任务前置预期日本可能没有独立于交易所/清算费用之外的「监管费」概念，本次抓取范围（jpx.co.jp/fsa.go.jp/mof.go.jp/nta.go.jp）未找到FSA/SESC向市场参与者或投资者直接征收、独立于costs.exchange_fees（交易所对会员收取）与costs.clearing_fees（JSCC对清算参与者收取）之外的「监管费」条文或费率表；未找到不等于确认不存在，故如实留空而非断言「不存在」，也不把交易所/清算费重复记一遍。",
+        "verified": "2026-08-24",
         "en": null,
         "enum": null,
-        "detail": null,
         "quote": null,
         "sources": null
       },
@@ -1505,49 +1569,72 @@
         "zh": "",
         "confidence": "low",
         "detail": "草稿印象：日本1999年已废止有价证券交易税——与上交所0.05%单边、港交所0.1%双边形成对比的重要字段，但本次未找到可引用的官方来源确认，留空不凭常识填写（该字段volatility: volatile，按铁律必须有sources才能填，本次没有）。",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "en": null,
         "enum": null,
         "quote": null,
         "sources": null
       },
       "financial_transaction_tax": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "原有的有价证券交易税（对证券转让课征）与交易所税（对期货期权等交易所交易课征）已于1999年3月31日废止，属1999年度税制改正的一部分；此后日本对现货股票买卖本身不再征收独立于所得税/资本利得税之外的交易税",
+        "en": "The former Securities Transaction Tax (levied on securities transfers) and Bourse Tax (levied on exchange-traded futures/options transactions) were abolished on March 31, 1999, as part of the FY1999 tax reform; since then Japan has not levied a transaction tax on cash-equity trades separate from income/capital-gains tax",
+        "detail": "与stamp_duty字段（本次未在本任务范围内，仍留空）描述的是同一段历史事实，但schema里是两个独立字段；本字段专门确认「废止」这一节点，stamp_duty字段的既有detail草稿印象可留待下次专项核实时一并回填，本次不越界代填。",
+        "sources": [
+          {
+            "title": "Gist of the Tax Reform for FY 1999（MOF官网）",
+            "url": "https://www.mof.go.jp/english/about_mof/councils/tax_commission/ts001.htm",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Securities Transaction Tax and Bourse Tax will be abolished on March31, 1999. The special measure for listed stocks to allow the option of being taxed by 1.05% on proceeds of sales in lieu of being taxed by 26% on capital will continue to be applied until March 31, 2001, and then, will be abolished.",
+        "confidence": "high",
+        "verified": "2026-08-24",
+        "enum": null
       },
       "capital_gains_tax": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "个人投资者出售上市股票的转让所得适用「申告分离课税」（与其他所得分开单独计税），税率为所得税15%+住民税5%（另加相应的复兴特别所得税），与股息所得选择分离课税时的税率结构一致；持有于「特定账户（源泉徵收）」的上市股票，转让损益可与同账户内的利息/股息损益相互冲抵",
+        "en": "Individual investors' gains from selling listed shares are taxed under \"separate self-assessment taxation\" (isolated from other income), at a combined rate of 15% national income tax plus 5% local inhabitant tax (plus the special income tax for reconstruction) — the same rate structure that applies when dividend income elects separate self-assessment taxation; for shares held in a \"specified account with withholding\", capital gains/losses may be aggregated against interest/dividend income within the same account",
+        "detail": "NTA英文指南原文中「15%+5%（住民税）」的费率注记直接依附在股息分离课税段落，但同一文件明确说明持仓账户内转让所得（capital gains）与股息按同一套分离课税/合并申报机制运作，二者适用同一税率结构，故据此推定资本利得税率与该注记一致；未见该指南单独给转让所得再列一次税率数字。",
+        "sources": [
+          {
+            "title": "Selection of the Aggregate Taxation and the Separate Self-Assessment Taxation System（国税厅NTA官网英文所得税指南PDF）",
+            "url": "https://www.nta.go.jp/english/taxes/individual/pdf/incometax_2023/17.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "In case of the separate self-assessment taxation, the applicable income tax rate is at 15% (inhabitant tax 5%). In addition, the special income tax for reconstruction (see page 47) is imposed in addition to income tax. ... Dividends and other payments from listed stocks received in withholding accounts may be subject to aggregation of profits and losses with capital gains of listed stocks in the same account",
+        "confidence": "high",
+        "verified": "2026-08-24",
+        "enum": null
       },
       "dividend_withholding_tax": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
+        "zh": "境内个人投资者持有上市股票（非大股东，持股低于3%）取得的股息，来源扣缴所得税等15.315%+住民税5%，合计20.315%；若为非上市股票股息或大股东（持股3%以上）取得的上市股票股息，仅扣缴所得税等20.42%（不含住民税）；非居民/外国法人取得的股息另按《所得税法》分离源泉课税规则处理，一般情形税率20.42%，但可能因日本与投资者居住国的税收协定而降低，具体协定税率因国而异未逐一核实",
+        "en": "For resident individual investors holding listed shares who are not \"major shareholders\" (i.e. below the 3% ownership threshold), dividends are withheld at 15.315% income tax plus 5% inhabitant tax, totaling 20.315%; dividends from unlisted stocks, or from listed stocks held by major shareholders (3% or more), are withheld at 20.42% income tax only (no inhabitant tax); non-resident individuals/foreign corporations are subject to separate withholding-at-source rules under the Income Tax Act, generally at 20.42%, though this may be reduced under an applicable Japan tax treaty — treaty-specific rates were not individually verified",
+        "sources": [
+          {
+            "title": "Selection of the Aggregate Taxation and the Separate Self-Assessment Taxation System（国税厅NTA官网英文所得税指南PDF）",
+            "url": "https://www.nta.go.jp/english/taxes/individual/pdf/incometax_2023/17.pdf",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "No.12006 Tax on the income of an individual as a non-resident in Japan for tax purposes（国税厅NTA官网英文页）",
+            "url": "https://www.nta.go.jp/english/taxes/individual/12006.htm",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Income tax etc.(15.315%) and inhabitant tax (5%) of the amounts paid are withheld at the source. (2) Dividend income from dividends for unlisted stocks and listed stocks (paid out to major shareholders(*)) Only income tax etc.(20.42%) of the amount paid is withheld at the source. / a tax rate of 20.42% (15.315% for incomes mentioned in 2(8) and (15) above) is applied on the amount to be paid for each income.",
+        "confidence": "high",
+        "verified": "2026-08-24",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "implicit_costs_note": {
         "zh": "",
         "confidence": "low",
-        "verified": "2026-08-13",
+        "detail": "隐性成本（买卖价差、冲击成本）需依赖高频逐笔行情或做市商价差统计才能量化，本次抓取范围（JPX官方叙述性页面）未包含此类可引用的定量说明；infrastructure.market_data_levels已确认逐笔订单簿数据本身是存在的付费产品（FLEX MBO），理论上可用于计算价差，但计算结果本身不是官网直接给出的数字，如实留空。",
+        "verified": "2026-08-24",
         "en": null,
         "enum": null,
-        "detail": null,
         "quote": null,
         "sources": null
       }
@@ -1557,31 +1644,43 @@
         "zh": "日元汇率波动相对自由浮动，无资本管制；对以日元计价资产的境外投资者而言，汇率风险来自其本币兑日元波动",
         "en": "JPY floats freely with no capital controls; for foreign investors holding JPY-denominated assets, FX risk arises from their home currency's fluctuation against the JPY",
         "confidence": "low",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "enum": null,
         "detail": null,
         "quote": null,
         "sources": null
       },
       "political_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "日本自身作为七国集团成员国，未发现制裁/资本冻结类地缘政治风险的官方信号；本次抓取范围内识别到的、与「政治」相关性最强的实际制度动向是《外汇及外国贸易法》（FEFTA）近年针对半导体、国防装备、网络安全等「核心业务领域」持续扩大国家安全审查范围（见regulation.capital_controls/foreign_ownership_limit）——即政治风险主要体现为对外资并购上市公司「核心业务领域」标的的国家安全审查趋严，而非日本国内政局不稳定或对既有境外持仓的征收/冻结风险",
+        "en": "As a G7 member, Japan itself shows no official signal of sanctions- or asset-freeze-type geopolitical risk in the material fetched. The most politically-relevant real regulatory trend found this session is the Foreign Exchange and Foreign Trade Act's (FEFTA) recent and ongoing expansion of national-security screening over \"Core Business Sectors\" such as semiconductors, defense equipment and cybersecurity (see regulation.capital_controls / foreign_ownership_limit) — i.e. political risk here manifests mainly as tightening national-security review of foreign acquisitions in sensitive sectors, not domestic political instability or expropriation/freeze risk to existing foreign holdings",
+        "detail": "本条是对已抓取到的FEFTA制度事实做「政治风险」角度的归纳解读，不是引用了一份专门讨论「政治风险」的官方文件；归纳本身可能带主观框架选择，故未标high。",
+        "sources": [
+          {
+            "title": "Foreign investors are required to submit a prior notification（MOF官网，制度概述PDF）",
+            "url": "https://www.mof.go.jp/english/policy/international_policy/fdi/Overview/outline1.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "As various challenges are on the rise both in economy and security territories, it is necessary for the government to collectively strengthen its economic security initiatives. While further promoting sound inward investment into Japan, one of the aims of the Foreign Exchange and Foreign Trade Act (\"FEFTA\") is to prevent technology leakage involving national security.",
+        "confidence": "medium",
+        "verified": "2026-08-24",
+        "enum": null
       },
       "liquidity_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "流动性风险随板块显著分化：Prime市场对流通股市值/流通股数设有最高门槛（见listing.boards），是三板中流动性要求最严格的一档；Growth市场流通股市值最低门槛仅2.5亿日元、流通股数最低仅500单位（过渡期标准），显著低于Prime，意味着Growth市场个股面临更高的流动性风险（买卖价差更宽、大额交易冲击成本更高）；TOPIX等旗舰指数的成分股集中在Prime市场也从侧面反映这一分层",
+        "en": "Liquidity risk varies markedly by market segment: the Prime Market sets the highest thresholds among the three boards for tradable-share market capitalization and tradable-share count (see listing.boards); the Growth Market's transitional tradable-share market-cap floor is only JPY0.25 billion and its tradable-share-count floor only 500 units, far below Prime — implying materially higher liquidity risk (wider bid-ask spreads, larger price impact for sizable trades) for Growth-listed issues; the concentration of flagship-index (e.g. TOPIX) constituents in the Prime Market is a further reflection of this stratification",
+        "detail": "本条基于listing.boards/transitional measures两页已抓取到的分板门槛数字做的推断性归纳，不是官网对「流动性风险」的直接定性表述；未找到JPX官方专门讨论买卖价差/冲击成本的量化说明页，故未标high。",
+        "sources": [
+          {
+            "title": "Transitional Measures（JPX官网，Outline of Delisting Criteria栏目，含分板流通股门槛表）",
+            "url": "https://www.jpx.co.jp/english/equities/listing/delisting/outline/02.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Tradable share market capitalization: JPY 1 billion or more (Prime) ... Tradable share market capitalization: JPY 0.25 billion or more (Standard/Growth) ... Number of tradable shares: 500 units or more (Standard/Growth)",
+        "confidence": "medium",
+        "verified": "2026-08-24",
+        "enum": null
       },
       "regulatory_change_risk_note": {
         "zh": "现行Prime/Standard/Growth三板体系于2022年4月4日由旧「本则市场（含一部/二部）、Mothers、JASDAQ」体系改制而来，是TSE近年最大的一次市场结构变革；已上市公司须于2021年9月1日至12月30日间在新旧三板间做出选择，2022年4月4日正式切换",
@@ -1600,19 +1699,25 @@
         ],
         "quote": "These amendments shall be implemented on April 4, 2022 ... The issuer of a stock, etc. that is listed on the Main Markets, Mothers, or JASDAQ (hereinafter referred to as the \"old market segments\") as of December 30, 2021 ... shall select any of the Standard Market, Prime Market or Growth Market ... between September 1, 2021 to December 30, 2021",
         "confidence": "high",
-        "verified": "2026-08-13",
+        "verified": "2026-08-24",
         "enum": null,
         "detail": null
       },
       "enforcement_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "证券取引等监视委员会（SESC，隶属金融厅）负责市场执法：委员长与两名委员由内阁总理大臣任命、作为独立行使职权的行政委员会（任期3年）；职能覆盖对金融商品业者的检查、对内幕交易/操纵市场等市场不正当行为的调查、对上市公司披露违规的检查；发现违法后可建议对金融厅长官发出行政处分或课征金缴纳命令、提出政策建议，或对特别严重恶劣案件移送刑事立案",
+        "en": "The Securities and Exchange Surveillance Commission (SESC), under the FSA, is the market-enforcement body: a Chairman and two Commissioners are appointed by the Prime Minister and function as independent agents (three-year terms). Its functions cover inspections of Financial Instruments Business Operators, investigations of market misconduct such as insider trading and market manipulation, and inspections of listed companies' disclosure violations. Upon finding a violation, SESC can recommend administrative actions or administrative monetary penalty payment orders, make policy proposals, or file criminal charges for particularly serious and malicious cases",
+        "detail": "本次WebSearch检索到fsa.go.jp/sesc/english/news/reco/栏目下存在大量具名课征金建议公开案例（如涉及野村证券、三菱UFJ摩根士丹利证券的国债期货操纵案），但本次未实际curl抓取任何一篇具体案例页面，按铁律不把仅见于搜索结果标题的案例名称写进正文，只在此说明存在这类公开执法记录栏目。",
+        "sources": [
+          {
+            "title": "About SESC（金融厅FSA官网，SESC职能介绍PDF）",
+            "url": "https://www.fsa.go.jp/sesc/english/aboutsesc/all.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "A Chairman and two Commissioners are appointed by the Prime Minister and function as independent agents. (Term of office: 3 years) / The SESC aims to ensure the fairness and transparency of markets and to protect investors. / Inspections of violations of laws and regulations related to securities business by Financial Instruments Business Operators (FIBOs) ... Investigations of market misconduct, including insider trading and market manipulation ... Inspections of violations of disclosure requirements by listed companies ... Recommendations for administrative actions or administrative monetary penalty payment orders, policy proposal, or filing criminal charges",
+        "confidence": "high",
+        "verified": "2026-08-24",
+        "enum": null
       }
     }
   }

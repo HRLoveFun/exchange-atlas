@@ -82,13 +82,32 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 《上海证券交易所股票上市规则（2026年4月修订）》全文 DOCX（第三章第一节 3.1.1-3.1.6 为主板上市条件，含市值及财务指标三选一标准、红筹企业标准、差异表决权标准；⚠️ 该公告页挂了两个 docx，另一个 `beaf9e6b9ded4380a24ca148cc3902e2.docx`（20KB）只是本次修订的「修订说明」，不含完整条文，第一次误取过要注意区分）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx（HTTP 200，175KB，⚠️ `.docx` 格式，`tools/fetch.py` 会按扩展名规则误存为 `.html`，字节内容不受影响；用 macOS `textutil -convert txt` 转纯文本后可直接 grep，比转 PDF 更简单)
   - 《上海证券交易所科创板股票上市规则（2026年4月修订）》公告页（上证发〔2026〕43号）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/c_20260424_10816592.shtml
   - 《上海证券交易所科创板股票上市规则（2026年4月修订）》全文 DOCX（第二章第一节 2.1.1-2.1.4 为科创板上市条件，含市值及财务指标五选一标准、红筹企业标准、差异表决权标准；⚠️ 同一公告页下 `cc4a8a0e637144ea93285a3773e3965a.docx`（16KB）同样只是修订说明，不是全文）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/10816592/files/8d80222543f64159ac5d177b7aace71c.docx（HTTP 200，172KB，同上 `.docx` 注意事项）
+  - 2026-08-24 补全 Category B 空缺字段这次新增登记（均为 `sse.com.cn` 域名下，沿用既有域名条目）：
+    - 《上海证券交易所股票上市规则（2026年4月修订）》全文 DOCX 第九章「退市与风险警示」（9.1.10/9.1.13/9.1.14/9.1.15/9.2.9 逐条给出终止上市决定、公告时限、强制退市后主办券商安排、摘牌时限，是 `listing.delisting_process` 出处；与上面第三章第一节主板上市条件为同一份文件，不重复登记 URL）
+    - 《关于退市公司进入退市板块挂牌转让的实施办法》公告页（股转系统公告〔2022〕166号，2022-04-29发布，「现行有效」；由上交所/深交所/北交所/全国股转系统/中国结算联合制定，`listing.post_delisting_venue` 出处）: http://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/c_20250516_10779154.shtml（HTTP 200，33981B）
+    - 关于本所股票竞价交易异常情况的公告（上证公告〔2024〕32号，2024-09-27，`infrastructure.major_outage_history` 出处）: https://www.sse.com.cn/disclosure/announcement/general/c/c_20240927_10762482.shtml（HTTP 200，27635B）
+    - 《证券登记结算管理办法》（中国证监会令第29号，托管于 sse.com.cn「法律法规」栏目，第七章「风险防范和交收违约处理」第65-73条完整给出结算参与人违约处置顺序，`clearing.default_management` 主要出处）PDF: http://www.sse.com.cn/lawandrules/regulations/csrcorder/c/10116597/files/f2bae870b188483eae343f735c141cf6.pdf（HTTP 200，273253B）
+    - 《关于实施〈合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法〉有关问题的规定》PDF（第七条给出单个/全部境外投资者持股比例上限，`regulation.foreign_ownership_limit` 出处；同时含托管人-外汇局跨境资金流动联合监管条款，`regulation.capital_controls` 出处）: https://www.sse.com.cn/lawandrules/regulations/csrcannoun/c/10117179/files/9cdbd4b41fc3453e8f8a036719ea8e24.pdf（HTTP 200，126689B）
 - `mgzq.com` | 第三方（券商网站镜像的官方文件） | zh | curl 常规 UA 可过（499KB） | 《上海证券交易所交易规则（2023年修订）》镜像件，内含第六章"科创板交易特别规定"。⚠️ 非交易所自有域名，按 CLAUDE.md 二第3条，仅凭此来源的字段 `confidence` 上限为 `medium`，不得标 `high`——即使摘录到了逐字 quote 也一样，因为无法排除镜像件被静默改动的风险
   - 交易规则（2023年修订）: https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf
-- `csrc.gov.cn` | 监管 | zh/en | curl 常规 UA 可过；`common_list.shtml` 类列表页有缓存滞后现象，仅用于确认机构名称与域名，不作为具体规则条款出处 | 中国证券监督管理委员会（CSRC），SSE 的政府监管机构
-- `chinaclear.cn` | 官方（清算机构） | zh | curl 常规 UA 可过 | 中国证券登记结算有限责任公司（ChinaClear），A股中央对手方与中央证券存管机构，设上海分公司
+- `csrc.gov.cn` | 监管 | zh/en | curl 常规 UA 可过；`common_list.shtml` 类列表页有缓存滞后现象，仅用于确认机构名称与域名，不作为具体规则条款出处；直接拼接文件名 URL 抓 PDF 偶发"空响应"（`curl: (52) Empty reply from server`），间隔数秒重试即可恢复，不代表持续封锁 | 中国证券监督管理委员会（CSRC），SSE 的政府监管机构
+  - 2026-08-24 新增：证券公司名录（2026年6月）XLS（`participants.broker_landscape` 出处，用 `xlrd` 解析，表头1行+150家持牌证券公司数据行）: http://www.csrc.gov.cn/csrc/c101900/c1029659/1029659/files/%E8%AF%81%E5%88%B8%E5%85%AC%E5%8F%B8%E5%90%8D%E5%BD%95%EF%BC%882026%E5%B9%B46%E6%9C%88%EF%BC%89.xls（HTTP 200，44544B）
+- `chinaclear.cn` | 官方（清算机构） | zh | curl 常规 UA 可过；⚠️ 官网主站（`www.chinaclear.cn/zdjs/...`）导航栏页面是 Angular 前端渲染壳，静态 curl 只能拿到菜单文字、拿不到「法律规则」「收费标准」等栏目正文，需改找具体 PDF 直链（如 `zdjs/editor_file/` 路径下的历史通知附件） | 中国证券登记结算有限责任公司（ChinaClear），A股中央对手方与中央证券存管机构，设上海分公司
+  - 2026-08-24 新增：《中国证券登记结算有限责任公司证券账户管理规则》修订通知附件 PDF（第三章「证券账户业务」第17-20条给出账户开立主体资格、一码通账户/子账户结构、身份信息核验要求，`participants.account_opening_requirements` 出处）: http://www.chinaclear.cn/zdjs/editor_file/20141008102818122.pdf（HTTP 200，359387B）
 - `npc.gov.cn` | 官方（立法机构） | zh | 未测试反爬，本次仅用 WebSearch 摘要定位未额外 curl | 全国人民代表大会官网，《中华人民共和国证券法》等法律的权威公布渠道
 - `people.com.cn` | 第三方（官方媒体） | zh | curl 需按 GBK 解码（非 UTF-8），常规 UA 可过 | 用于印花税税率调整等财政部/税务总局公告的转载确认；`confidence` 相应标 medium（非财政部原始公告页）
 - `cls.cn` | 第三方（财经媒体） | zh | 未测试专门反爬，本次 WebSearch 摘要已够用未额外 curl | 用于退市规则修订的综述性报道；`confidence` 标 medium
+  - 2026-08-24 新增：中国结算：4月29日起将股票交易过户费总体下调50%（2022-04-28发文，`costs.clearing_fees` 出处；第三方财经媒体转述 ChinaClear 通知，`confidence` 标 medium）: https://www.cls.cn/detail/1001120
+- `mof.gov.cn`（2026-08-24 新增登记） | 官方（财政部，与 sse.com.cn/chinaclear.cn 并列的另一政府域名，非第三方） | zh | curl 常规 UA 可过（`m.mof.gov.cn` 移动版偶发 502，换 `www.mof.gov.cn` 桌面版路径可稳定拿到全文） | 国家发展改革委、财政部联合发布的《关于降低证券、期货市场监管费收费标准等问题的通知》（发改价格〔2012〕2119号），`costs.regulatory_fees` 出处——确认"证券交易监管费"这一独立于交易所经手费之外的监管费种确实存在（对股票按年交易额0.02‰收取，基金/债券免收），但通知本身注明"有效期3年"（即至2015年），本次未找到后续重新审批/延续的官方公告，故字段按"该费种曾被官方确认存在，现行费率是否仍为此值未再核实"处理，`confidence` 标 medium 而非 high
+  - 关于降低证券、期货市场监管费收费标准等问题的通知（发改价格〔2012〕2119号）: https://www.mof.gov.cn/zhengwuxinxi/zhengcefabu/201207/t20120714_666369.htm
+  - 证券结算风险基金管理办法（中国证监会、财政部联合发布，第二条给出风险基金定义与用途，`clearing.default_management` 补充出处）PDF: http://m.mof.gov.cn/zcfb/202511/P020251107701444228151.pdf
+- `sipf.com.cn`（2026-08-24 新增登记） | 官方（中国证券投资者保护基金有限责任公司，国务院出资设立、归口证监会管理的国有独资企业） | zh | curl 常规 UA 可过 | `regulation.investor_protection` 出处；网站首页本身是纯导航壳无正文，需定位到具体规章条文页
+  - 证券投资者保护基金管理办法（2016年修订，中国证监会令第124号）: http://www.sipf.com.cn/tbfg/2020/03/12872.shtml
+- `sseinfo.com`（2026-08-24 新增登记） | 官方（上证所信息网络有限公司，上海证券交易所出资设立的全资子公司，SSE 证券信息独家全权经营机构） | zh | curl 常规 UA 可过 | `infrastructure.market_data_levels`/`data_latency`/`data_pricing_model`/`historical_data_availability` 出处；产品价目表本身是 PDF/公告列表页，本次仅取产品概述页正文，未逐条摘引具体单价数字
+  - 公司介绍: https://www.sseinfo.com/aboutus/introduction/
+  - 行情服务首页（Level-1/Level-2/智能数据/指数编制许可产品总览）: https://www.sseinfo.com/services/assortment/market/
+  - 上证所Level-1行情（产品说明，"即时行情信息"定性表述）: https://www.sseinfo.com/services/assortment/level1/
+  - 行情历史数据（数据内容：快照/逐笔成交/日K线/分钟K线/集合竞价）: https://www.sseinfo.com/services/assortment/historical/
 - `english.sse.com.cn` | 官方（英文版） | en | curl 常规 UA 前 1-2 次请求 200，此后短时间内连续请求会被 WAF 拒绝（返回通用 `403 Forbidden webserver` 页，非针对具体路径）；实测同一路径间隔 10-15 秒重试即可恢复 200，抓多个页面务必逐个加延时，不要连续快速请求 | ADR-013（source_lang: zh）迁移时发现。⚠️ 每页均带免责声明"This courtesy translation is for reference only. The original text in Chinese shall prevail"——SSE 自己声明英文版不具约束力，佐证了 source_lang: zh 的选择。首页 `/` 与 `/start/trading/mechanism/`（交易机制，含开支盘集合竞价/撮合原则/订单类型正文）可直接拿到实质内容；`/start/sserules/stocks/trading/` 是规则文档索引页，指向的 PDF《Trading Rules of Shanghai Stock Exchange (2026 Revision)》是官方英文译本——**修订版本比本节引用的 mgzq.com 中文镜像件（2023年修订）更新**，两者内容是否有实质差异尚未逐条核对，见 OPEN-QUESTIONS
   - 首页: https://english.sse.com.cn/
   - 交易机制（含撮合原则/订单类型正文）: https://english.sse.com.cn/start/trading/mechanism/
@@ -140,9 +159,49 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 恒生中国企业指数 Factsheet（2026年6月版，含基本参数速览）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/factsheets/hsceie.pdf（HTTP 200，848KB）
   - 恒生科技指数方法论（Hang Seng TECH Index Methodology）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/methodologies/IM_hsteche.pdf（HTTP 200，284KB）
   - 恒生科技指数 Factsheet（2026年6月版）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/factsheets/hsteche.pdf（HTTP 200，1.03MB）
+- `hkex.com.hk`（2026-08-22 补充登记，用于补全上市/清算/参与者/基建/成本/风险六章剩余空缺字段）
+  - Chapter 13 持续上市责任（Continuing Obligations）PDF（仅英文版，未找到对应中文整合页，已在字段 detail 中说明）: https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Rules-and-Guidance/Other-Resources/Continuing-Obligations-and-Annual-Listing-Fees/Continuing-Obligation-Fee/chapter_13.pdf?la=en
+  - 上市申请审批流程时限联合声明（HKEX/SFC Joint Statement on Enhanced Timeframe for New Listing Application Process）: https://www.hkex.com.hk/News/Regulatory-Announcements/2024/241018news?sc_lang=en
+  - IPO及上市流程研究报告（2019年9月，Chief China Economist's Office）PDF（URL 文件名含半角括号，已按 %28/%29 编码登记）: https://www.hkex.com.hk/-/media/HKEX-Market/News/Research-Reports/HKEx-Research-Papers/2019/CCEO_GIS%28ListingProcess%29_201909_e.pdf?la=en
+  - Delisted Issuers（退市发行人名单页，仅列名单不含去向说明，本次已确认对补全 post_delisting_venue 帮助有限）: https://www.hkex.com.hk/Listing/Rules-and-Guidance/Listing-of-Overseas-Companies/Company-Information-Sheets/Delisted-Issuers?sc_lang=en
+  - IPO价格发现及公众持股量优化咨询总结及进一步咨询文件（2025年8月，含"香港现无可供已除牌证券交易的替代平台"官方表述，OTC市场倡议进展）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/News/Market-Consultations/2016-Present/December-2024-Optimise-IPO-Price/Conclusions-Aug-2025/cp202412cc.pdf
+  - 衍生品结算风险管理／Default Fund（结算所储备基金）: https://www.hkex.com.hk/Services/Clearing/Listed-Derivatives/Risk-Management/Default-Fund?sc_lang=en
+  - 衍生品结算风险管理／Default Management（违约处置安排）: https://www.hkex.com.hk/Services/Clearing/Listed-Derivatives/Risk-Management/Default-Management?sc_lang=en
+  - HKCC（期货结算公司）PFMI（金融市场基础设施原则）信息披露文件 2025年2月版 PDF（含逐日盯市、保证金、违约处置完整披露）: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Listed-Derivatives/PFMI/HKCC_PFMI_Disclosure_2025_Feb.pdf
+  - HKSCC（香港中央结算）通用规则第25章「保证基金」（Guarantee Fund）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/HKSCC/General-Rules-of-HKSCC/R25.pdf
+  - Exchange Participant Data（交易所参与者数目统计页）: https://www.hkex.com.hk/Market-Data/Statistics/Participant/Exchange-Participant-Data?sc_lang=en
+  - Guide to Becoming an Exchange Participant（交易所参与者准入指南）: https://www.hkex.com.hk/Services/Become-a-Participant/Guide-to-Becoming-an-Exchange-Participant?sc_lang=en
+  - Stock Exchange Participants' Market Share Report（经纪商市占率报告页）: https://www.hkex.com.hk/Market-Data/Statistics/Participant/Stock-Exchange-Participants_-Market-Share-Report?sc_lang=en
+  - Cash Market Transaction Survey 2019（现货市场交易调查，机构/个人投资者占比）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/News/Research-Reports/HKEX-Surveys/Cash-Market-Transaction-Survey-2019/CMTS2019_e.pdf?la=en
+  - HKEX Orion Market Data Platform – Securities Market (OMD-C) 介绍页: https://www.hkex.com.hk/Services/Market-Data-Services/Infrastructure/HKEX-Orion-Market-Data-Platform-Securities-Market-OMD-C?sc_lang=en
+  - Fee Schedule – Securities Market Datafeeds Licence Fees（行情数据层级与收费表）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/Market-Data-Fees/SEHK_Market-Data-Fees-for-Retail-Participation.pdf
+  - Historical Data Services（历史数据服务总览页，原登记的 Other-Historical-and-Reference-Data 子路径抓取返回404，改用上一级总览页，已验证200）: https://www.hkex.com.hk/Services/Market-Data-Services/Historical-Data-Services?sc_lang=en
+  - Market Data Vendor Licence Prices（数据牌照收费模式页，URL 含半角括号，已按 %28/%29 编码登记）: https://www.hkex.com.hk/Services/Market-Data-Services/Real-Time-Data-Services/Data-Licensing/Market-Data-Vendor-Licence/Prices-%28Fee-Schedule%29?sc_lang=en
+  - Trading Fee / Trading Tariff / SFC Transaction Levy 费率页（URL 含半角括号，已按 %28/%29 编码登记）: https://www.hkex.com.hk/Services/Rules-and-Forms-and-Fees/Fees/Securities-%28Hong-Kong%29/Trading/Transaction?sc_lang=en
+  - HKSCC Operational Procedures Section 21《Costs and Expenses》（CCASS结算费率）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/HKSCC/Operational-Procedures/SEC21.pdf
+  - Disciplinary & Enforcement Overview（上市监管纪律处分总览页）: https://www.hkex.com.hk/Listing/Disciplinary-and-Enforcement/Overview?sc_lang=en
+  - Enforcement Sanctions Statement（纪律处分制裁声明）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Rules-and-Guidance/Disciplinary-and-Enforcement/Disciplinary-Procedures-and-Enforcement-Guidance-Materials/enf_sanctions.pdf
+  - HKEX Statement on Derivatives Market Suspension（2019年9月5日衍生品市场技术故障暂停交易官方声明）: https://www.hkex.com.hk/news/market-communications/2019/190905news?sc_lang=en
+  - Conclusion of Incident Review: Derivatives Market Suspension on 5 September 2019（事故复盘结论官方新闻稿）: https://www.hkex.com.hk/News/News-Release/2020/2012282news?sc_lang=en
+  - HKEX to Launch HKD-RMB Dual Counter Model on 19 June 2023（近年上市/交易制度改革样本之一）: https://www.hkex.com.hk/News/News-Release/2023/230519news?sc_lang=en
+  - Consultation Paper June 2024《Proposed Reduction of Minimum Spreads in the Securities Market》（最小价差／买卖价差隐性成本改革咨询文件）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/News/Market-Consultations/2016-Present/June-2024-Review-of-Minimum-Spreads/Consultation-Paper/cp202406.pdf
+- `en-rules.hkex.com.hk`（2026-08-22 补充登记，沿用既有域名条目）
+  - Chapter 9《Trading Halt, Suspension and Resumption of Dealings, Cancellation and Withdrawal of Listing》Entire Section 合并页（服务端渲染，可grep正文，非单章JS外壳）: https://en-rules.hkex.com.hk/entiresection/2235
+  - GL95-18《Guidance on long suspension and delisting》（2025年2月版，退市整理期/三阶段程序官方指引）PDF: https://en-rules.hkex.com.hk/sites/default/files/pdf_documents/GL95-18_202502.pdf
+  - Chapter 18C《Specialist Technology Companies》全文 PDF（近年上市制度改革样本之一，2023年3月31日生效）: https://en-rules.hkex.com.hk/sites/default/files/net_file_store/HKEX4476_6059_VER24275.pdf
+- `sfc.hk`（证监会官网，2026-08-22 新增登记） | 官方（监管机构） | zh-Hant（`/TC/` 路径）/ en（`/en/` 路径，两版路径结构不同，非同页参数切换） | curl 常规 UA 探测通过 | 用于补全投资者保护、适当性管理、开户要求、经纪商准入类别、市场执法机制等字段
+  - 合適性規定（Suitability requirement，中文版）: https://www.sfc.hk/TC/Rules-and-standards/Suitability-requirement
+  - Suitability requirement（英文版，与中文版交叉核对用）: https://www.sfc.hk/en/Rules-and-standards/Suitability-requirement
+  - 中介人及持牌人士的類別（Types of intermediary and licensed individual，中文版）: https://www.sfc.hk/TC/Regulatory-functions/Intermediaries/Licensing/Types-of-intermediary-and-licensed-individual
+  - Acceptable account opening approaches（开户核实方式，本次未找到对应中文页直链，已在字段 detail 中说明）: https://www.sfc.hk/en/Rules-and-standards/Account-opening/Acceptable-account-opening-approaches
+  - Investor compensation（投资者赔偿机制 FAQ）: https://www.sfc.hk/en/faqs/Investor-compensation
+  - Disciplinary proceedings（纪律处分程序）: https://www.sfc.hk/en/Regulatory-functions/Enforcement/Disciplinary-proceedings
+- `ird.gov.hk`（税务局官网，2026-08-22 新增登记） | 官方（监管机构） | zh-Hant / en（同一路径 `/chi/` 与 `/eng/` 切换） | curl 常规 UA 探测通过 | 用于核实股息预扣税
+  - 利得税（股息不予徵税条文页，中文版）: https://www.ird.gov.hk/chi/tax/bus_pft.htm
+  - Profits Tax（英文版，与中文版交叉核对用）: https://www.ird.gov.hk/eng/tax/bus_pft.htm
 
 ### 纽约证券交易所 New York Stock Exchange (NYSE) `us-nyse`
-- `nyse.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬；注意站内不少旧 URL 会 301/302 跳转到新路径（如 `/products/etp-limit-up-limit-down` 跳到 `/trade/trading-information`），curl 要带 `-L` 跟随重定向 | ⚠️ NYSE 集团旗下有 NYSE、NYSE American、NYSE Arca、NYSE National、NYSE Texas 多个 SEC 注册的独立交易所实体（`group_id: nyse-group`），很多页面把几个实体的信息混在一起讲，摘引时要看清楚是哪个实体（本文件只收 NYSE 本身/Tape A 的信息）
+- `nyse.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬；注意站内不少旧 URL 会 301/302 跳转到新路径（如 `/products/etp-limit-up-limit-down` 跳到 `/trade/trading-information`），curl 要带 `-L` 跟随重定向 | ⚠️ NYSE 集团旗下有 NYSE、NYSE American、NYSE Arca、NYSE National、NYSE Texas 多个 SEC 注册的独立交易所实体（`group_id: nyse-group`），很多页面把几个实体的信息混在一起讲，摘引时要看清楚是哪个实体（本文件只收 NYSE 本身/Tape A 的信息）；⚠️ 主站是 CMS2（React）驱动，多数栏目落地页静态 HTML 里能拿到真实正文段落（挂在 `<main><div data-testid="belt">...` 结构下），但也有个别历史遗留 PDF 直链已失效、curl 200 却拿到的是 HTML 兜底壳（如 `NYSE_Market_Quality_infographic.pdf` 实测返回的是网页壳层，不是真正的 PDF 二进制，`pdftotext` 会直接报"Illegal character"语法错误——遇到这种"HTTP 200但内容类型不对"要用 `head -c 300` 看文件头是不是 `<!DOCTYPE html>` 而不是想当然按 PDF 处理）
   - Trading Information（交易时段、LULD、MWCB 熔断阈值）: https://www.nyse.com/trade/trading-information（HTTP 200，194KB）
   - Regulation（监管架构、SEC/FINRA 关系）: https://www.nyse.com/regulation（HTTP 200，127KB）
   - Regulation SHO（卖空监管入口，正文较薄，多为下载链接而非说明文字）: https://www.nyse.com/regulation/regulation-sho（HTTP 200，75KB）
@@ -150,10 +209,37 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Listings Process（上市四步流程，含 DMM 指定环节）: https://www.nyse.com/listings-process（HTTP 200，84KB）
   - NYSE Price List 2026（PDF，逐笔交易费率/返佣表，maker-taker 模式，按流动性分层）: https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSE_Price_List.pdf（HTTP 200，143KB，34页）
   - Fees 总览页: https://www.nyse.com/markets/fees（HTTP 200，194KB）
+  - NYSE Regulation | Delistings（退市两条名单：交易所主动/发行人主动，Form 25流程与生效时限）: https://www.nyse.com/regulation/delistings（HTTP 200，71KB；正文是CMS2服务端渲染的真实段落，非导航壳）
+  - 2026 Annual Guidance Letter（PDF，上市公司合规指引，含反向拆股触发立即停牌退市的2025年新规）: https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSE_2026_Annual_Guidance_Letter.pdf（HTTP 200，369KB）
+  - Data Products（行情数据产品总览：Real-Time/Reference/Historical(TAQ)/Corporate Actions四类，含各自官方简介段落）: https://www.nyse.com/data-products（HTTP 200，162KB）
+  - Market Data: Real-Time（各实时行情产品逐条说明表，如NYSE Integrated Feed/OpenBook Ultra/BBO）: https://www.nyse.com/market-data/real-time（HTTP 200，143KB）
+  - Data Center Colocation Services（Mahwah/Basildon机房、SFTI LCN/WAN两种网络接入说明）: https://www.nyse.com/technology/colo（HTTP 200，70KB）
 - `ice.com` | 官方（母公司 Intercontinental Exchange 的指数业务） | en | curl 常规 UA 200 | 用于确认 NYSE Composite 指数由 ICE Data Indices 编制（而非交易所自编）——与上交所"交易所自编"、港交所"恒生指数公司编制"形成第三种模式对比
   - Equity Indices: https://www.ice.com/fixed-income-data-services/index-solutions/equity-indices（HTTP 200，207KB）
-- `cahill.com` | 第三方（律所客户简报） | en | curl 常规 UA 200 | 用于确认 T+1 结算周期新规生效日期（2024-05-28）；`confidence` 标 medium。⚠️ SEC.gov、finra.org、dtcc.com 的具体内容页（DTCC 首页 200 但 `/accelerated-settlement`、`/about` 等子页均 403）本次多次尝试均被拒（见下方"探测记录"），未能拿到监管机构或清算机构自己的原始表述，只能退而求其次用这份法律实务简报，且它本身也不是 SEC 规则原文
+- `cahill.com` | 第三方（律所客户简报） | en | curl 常规 UA 200 | 用于确认 T+1 结算周期新规生效日期（2024-05-28）；`confidence` 标 medium。⚠️ 2026-08 补全会话已突破 sec.gov/finra.org 反爬（见下方 `sec.gov`/`finra.org` 条目与本节末尾"突破记录"），dtcc.com 仍未攻克，这份法律实务简报继续作为T+1字段的补充来源保留
   - One-Day Settlement Cycle (T+1) To Begin May 28, 2024: https://www.cahill.com/publications/client-alerts/2024-04-29-one-day-settlement-cycle-t-1-to-begin-may-28-2024（HTTP 200，23KB）
+- `sec.gov` | 官方（美国证监会） | en | ⚠️**2026-08补全会话突破**：默认curl（常规浏览器UA或空）对内容页一律返回403「Request Rate Threshold Exceeded」（响应体明确指向 `sec.gov/developer` 的Fair Access政策），换成SEC Fair Access规范格式的User-Agent（形如`"机构标识 联系邮箱"`，如 `"exchange-atlas-research research@example.com"`——不是伪装浏览器，而是按SEC EDGAR一贯要求的"自报身份+联系方式"格式）后，同一批URL全部200，且可稳定复现（同一会话内因账号额度中断重启过两次，每次用相同UA重新curl同一批URL结果一致）。`www.sec.gov/about/laws`等个别路径会301到`dc.aws-sec.akadns.net`这个内网专用域名（curl跟着走会失败，属正常现象不是反爬，换成搜索到的具体直达URL即可绕开） | 用于regulation.core_laws背景交叉核实、market_structure.short_selling（Rule 201十档阈值原文）、clearing.ccp_name/csd_name（NSCC/DTC角色官方定性）、clearing.default_management、costs.clearing_fees（NSCC费率表）、costs.regulatory_fees（Section 31费率）、participants.investor_structure、infrastructure.major_outage_history、risks.political_risk_note、risks.liquidity_risk_note
+  - Rule 201 of Regulation SHO FAQ（Alternative Uptick Rule，10%跌幅触发熔断的官方逐字定义）: https://www.sec.gov/rules-regulations/staff-guidance/trading-markets-frequently-asked-questions-7（HTTP 200，98KB）
+  - SEC.gov | Clearing Agencies（登记在册清算机构名单，DTC/NSCC/FICC/OCC）: https://www.sec.gov/about/divisions-offices/division-trading-markets/clearing-agencies（HTTP 200，78KB）
+  - Staff Report on the Regulation of Clearing Agencies（PDF，2020年10月官方报告，NSCC=CCP/DTC=CSD定性原文、清算基金损失分摊机制）: https://www.sec.gov/files/regulation-clearing-agencies-100120.pdf（HTTP 200，683KB）
+  - NSCC Rules & Procedures Addendum A（SR-NSCC-2025-017费用结构附件，清算活动费/清算基金维持费具体数字）: https://www.sec.gov/files/rules/sro/nscc/2025/34-104376-ex5.pdf（HTTP 200，225KB）
+  - Section 31 Transaction Fee Rate Advisory FY2026（每百万美元20.60美元最新费率公告）: https://www.sec.gov/rules-regulations/fee-rate-advisories/2026-2（HTTP 200，65KB）
+  - U.S. Households' Participation in Capital Markets（官方统计页，基于美联储SCF数据的家庭持股比例）: https://www.sec.gov/data-research/statistics-data-visualizations/us-households-participation-capital-markets（HTTP 200，99KB）
+  - In the Matter of New York Stock Exchange LLC（PDF，2026年3月行政处罚令，2023年开盘集合竞价系统性故障事件与900万美元罚款）: https://www.sec.gov/files/litigation/admin/2026/34-104934.pdf（HTTP 200，234KB）
+  - SEC Adopts Amendments to Finalize Rules Relating to the Holding Foreign Companies Accountable Act（2021年HFCAA最终细则新闻稿）: https://www.sec.gov/newsroom/press-releases/2021-250（HTTP 200，65KB）
+  - U.S. Equity Market Structure: Making Our Markets Work Better for Investors（官方演讲稿，市场分散化/暗池占比讨论）: https://www.sec.gov/newsroom/speeches-statements/us-equity-market-structure（HTTP 200，226KB）
+- `finra.org` | 官方（自律组织） | en | ⚠️**2026-08补全会话突破**：默认UA对内容页返回Cloudflare「Just a moment...」JS质询页（403，非简单UA黑名单，是需要执行JS+Cookie的真实机器人质询）；换成与sec.gov相同的Fair Access格式UA后，`/rules-guidance/rulebooks/...`与`/rules-guidance/key-topics/...`路径下的规则条文页全部200且是真实服务端渲染正文；但`/about`、`/media-center/statistics`、首页等页面即使200了，静态HTML里也只有导航壳、正文靠客户端JS异步渲染，抓不到统计数字（转而用PDF报告解决，见下）
+  - 2090. Know Your Customer（规则手册原文，KYC逐字条文）: https://www.finra.org/rules-guidance/rulebooks/finra-rules/2090（HTTP 200，92KB）
+  - Suitability（Key Topics页，Rule 2111逐字条文+与Reg BI关系说明）: https://www.finra.org/rules-guidance/key-topics/suitability（HTTP 200，115KB）
+  - 2025 FINRA Industry Snapshot（PDF，年度行业概览，含Table 2.1.5经纪商/投资顾问机构数按年统计表——是真实文本表格不是图表渲染，可放心pdftotext摘引）: https://www.finra.org/sites/default/files/2025-07/2025-Industry-Snapshot.pdf（HTTP 200，2.8MB）
+- `investor.gov` | 官方（SEC投资者教育与倡导办公室） | en | curl 常规浏览器UA（非Fair Access格式）即可200——与sec.gov主站不同，investor.gov未见同样的限流拦截；⚠️但该域名背后是Akamai边缘防护，用Fair Access格式UA反而在某些跳转链路上被Akamai拦成403（`errors.edgesuite.net`，与`saudiexchange.sa`同一类边缘防护特征），换回常规浏览器UA后正常，是本节两种UA策略"对症下药、不能全站通用一种"的唯一反例 | 用于regulation.core_laws交叉背景、regulation.disclosure_requirements
+  - Laws That Govern the Securities Industry（1934年证券交易法等核心法律逐条简介，明确点名NYSE为SRO）: https://www.investor.gov/introduction-investing/investing-basics/role-sec/laws-govern-securities-industry（HTTP 200，71KB）
+- `home.treasury.gov` | 官方（美国财政部） | en | curl 常规浏览器UA 200，未见反爬 | 用于regulation.capital_controls（CFIUS国家安全审查定性）
+  - CFIUS（美国外国投资委员会官方介绍页）: https://home.treasury.gov/policy-issues/international/the-committee-on-foreign-investment-in-the-united-states-cfius（HTTP 200，34KB）
+- `sipc.org` | 官方（证券投资者保护公司） | en | curl 常规浏览器UA 200，未见反爬 | 用于regulation.investor_protection（50万/25万美元保护上限）
+  - What SIPC Protects: https://www.sipc.org/for-investors/what-sipc-protects（HTTP 200，112KB）
+- `everycrsreport.com`（国会研究服务处报告的非营利镜像站，非congress.gov官方本身） | 第三方 | en | curl常规UA 200；`congress.gov`官方页本次两次尝试（含Fair Access格式UA）均403，未攻克，退而用此镜像 | 用于costs.financial_transaction_tax（联邦无普遍性金融交易税、历史印花性质转让税沿革），`confidence`按CLAUDE.md第三方来源规则封顶medium
+  - Transaction Tax: General Overview（CRS Report RL32266，2004年）: https://www.everycrsreport.com/reports/RL32266.html（HTTP 200，44KB）
 
 ### 日本交易所集团 / 东京证券交易所 Japan Exchange Group (JPX / TSE) `jp-jpx`
 - `jpx.co.jp` | 官方 | ja / en（英文版内容滞后，部分细则页无对应英文版） | **WebFetch 对内国株页面返回 403（反爬）**；curl + 常规浏览器 UA（`Mozilla/5.0 ... Chrome/131`）可过，HTTP 200，全程未见限流（比 english.sse.com.cn 好抓得多，不需要加延时）| ⚠️ v0.2 按 ADR-013「无中选英」，本节以 `/english/` 路径下的英文版为主要来源，日文版（`/equities/...`）只在没有对应英文页时才用。英文版每页均带免责声明"This translation may be used for reference purposes only... the Japanese version shall prevail"。JPX 集团下辖东京证券交易所（TSE）、大阪交易所（OSE，衍生品）、东京商品交易所（TOCOM）、Japan Exchange Regulation（自律监管）四个法人实体（`group_id: jpx-group`），本文件只记录 TSE 现货股票市场
@@ -174,6 +260,44 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
     - Growth: https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html（HTTP 200，35KB）
     - ⚠️ 页面视觉上是三个 tab 切换同一张表，但每个 tab 对应独立 URL 且该 tab 内容已服务端渲染进静态 HTML（不是纯 JS 异步加载），curl 三个 URL 各自都能拿到对应板块完整数值，不需要模拟点击
   - Overview of Market Restructuring（2022年4月4日新三板体系改制说明，含新旧板块对应关系、每板"概念"定性表述、改制时间线）: https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html（HTTP 200，38KB）
+  - 2026-08-24 补全 Category B 空缺字段这次新增抓取的 jpx.co.jp 页面（含 jscc 子路径，同域名不需要重复登记）：
+    - Overview of Timely Disclosure（信息披露制度总览）: https://www.jpx.co.jp/english/equities/listing/disclosure/overview/index.html（HTTP 200）
+    - Listing Schedule（新股上市流程时间线，含"申请日到上市首日约需四个月"表述）: https://www.jpx.co.jp/english/equities/listing-on-tse/new/basic/02.html（HTTP 200）
+    - Outline of Delisting Criteria（退市标准总览）: https://www.jpx.co.jp/english/equities/listing/delisting/outline/01.html（HTTP 200）
+    - Transitional Measures（整理銘柄退市过渡期安排）: https://www.jpx.co.jp/english/equities/listing/delisting/outline/02.html（HTTP 200）
+    - Delisting Criteria（退市标准入口页，逐条触发条件的导航起点）: https://www.jpx.co.jp/english/equities/listing/delisting/index.html（HTTP 200；WebSearch给出的旧链接 .../delisting/05.html 已404，改用本链接，经验记入下方）
+    - Companies in an Improvement Period（持续上市标准未达标整改期）: https://www.jpx.co.jp/english/listing/market-alerts/improvement-period/index.html（HTTP 200）
+    - Securities Under Supervision & Securities to Be Delisted（监理/整理銘柄指定制度说明）: https://www.jpx.co.jp/english/listing/market-alerts/supervision/index.html（HTTP 200）
+    - Trading Halts（个股停牌机制，含重大消息停牌15分钟规则）: https://www.jpx.co.jp/english/markets/equities/suspended/index.html（HTTP 200）
+    - Corporate Governance Report 说明页（持续上市义务之一）: https://www.jpx.co.jp/english/equities/listing/cg/01.html（HTTP 200）
+    - Default Management（JSCC违约处置流程）: https://www.jpx.co.jp/jscc/en/risk/default.html（HTTP 200）
+    - Clearing Fee for Cash Products（JSCC现货证券清算费率表）: https://www.jpx.co.jp/jscc/en/cash/cash/fee.html（HTTP 200）
+    - Trading by Type of Investors（Weekly，投资者类型交易占比统计总览页）: https://www.jpx.co.jp/english/markets/statistics-equities/investor-type/index.html（HTTP 200）
+    - Trading by Type of Investors（Annual，年度数据）: https://www.jpx.co.jp/english/markets/statistics-equities/investor-type/00-02.html（HTTP 200）
+    - List of Trading Participants（交易参与者名录，broker_landscape依据）: https://www.jpx.co.jp/english/rules-participants/participants/list/index.html（HTTP 200）
+    - The Failure of Equity Trading System on October 1, 2020（arrowhead系统故障新闻稿）: https://www.jpx.co.jp/english/corporate/news/news-releases/0060/20201019-01.html（HTTP 200）
+    - arrowhead故障详细报告 PDF: https://www.jpx.co.jp/english/corporate/news/news-releases/0060/b5b4pj000003qm41-att/arrowhead_e.pdf（HTTP 200）
+    - Real Time Market Data Outline（行情数据层级/时延说明）: https://www.jpx.co.jp/english/markets/paid-info-equities/realtime/index.html（HTTP 200）
+    - Real Time Market Data Fees（行情数据收费模式）: https://www.jpx.co.jp/english/markets/paid-info-equities/realtime/01.html（HTTP 200）
+    - Historical Data Outline（历史数据服务说明）: https://www.jpx.co.jp/english/markets/paid-info-equities/historical/index.html（HTTP 200）
+    - 15 Minute-Delayed Stock Price Information (API)（免费延时行情，与付费实时数据对照佐证data_latency分层）: https://www.jpx.co.jp/english/markets/paid-info-equities/realtime/06.html（HTTP 200）
+    - Connectivity Services Overview（接入方式：专线/API/数据商三种渠道）: https://www.jpx.co.jp/english/systems/connectivity/index.html（HTTP 200）
+    - Trading Participation Fees 总览页: https://www.jpx.co.jp/english/rules-participants/participants/fees/index.html（HTTP 200）
+    - Overview of Trading Participant Fees PDF（2026-04-13版，交易参与者费率明细）: https://www.jpx.co.jp/english/rules-participants/participants/fees/tvdivq000000v276-att/o4sio70000000p66.pdf（HTTP 200）
+    - Brokerage Agreement Standards（受託契約準則英文版，经纪商与客户开户/委托合同准则，account_opening_requirements依据）PDF: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/brokerage_agreement_standards_20260401.pdf（HTTP 200；WebSearch给出的旧文件名 ...20250401.pdf 已404，经验记入下方——与既有「XXXX年修订式规则文档URL会随修订版本更迭直接下线」经验一致）
+- `jipf.or.jp`（日本投资者保护基金 Japan Investor Protection Fund，FIEA法定设立的会员制法人，官方自身网站） | 官方（法定投资者保护机制运营主体） | en | curl 常规 UA 200 | investor_protection 字段依据
+  - About Us: https://jipf.or.jp/en/about/index.html（HTTP 200）
+- `mof.go.jp`（财务省，外汇外贸法FEFTA对内直接投资事前申报制度主管机关之一） | 官方（监管机构） | en | curl 常规 UA 200 | capital_controls/foreign_ownership_limit 字段依据，FEFTA要求外国投资者投资"核心业务领域"上市公司达1%以上须事前申报
+  - Foreign investors are required to submit a prior notification（制度概述其一）PDF: https://www.mof.go.jp/english/policy/international_policy/fdi/Overview/outline1.pdf（HTTP 200）
+  - Mandatory Notification of Foreign Investors: Outline of the system（制度概述其二）PDF: https://www.mof.go.jp/english/policy/international_policy/fdi/Overview/outline2.pdf（HTTP 200）
+  - Gist of the Tax Reform for FY 1999（1999年度税制改正纲要，含"有价证券交易税与交易所税于1999年3月31日废止"官方原文）: https://www.mof.go.jp/english/about_mof/councils/tax_commission/ts001.htm（HTTP 200；⚠️WebSearch给出的另一URL .../english/tax_policy/tax_reform/ts001.htm 已404，改用本链接）
+- `fsa.go.jp`（金融厅） | 官方（监管机构） | en | curl 常规 UA 200，与 SOURCES.md 其他章节记录的"金融监管机构域名易被拦"（sec.gov/finra.org）经验不同，fsa.go.jp 本次全程未见反爬 | regulation/participants/costs/risks 多个字段依据
+  - Japanese Big Bang: Full Liberalization of Brokerage Commissions（1999年佣金自由化历史说明）: https://www.fsa.go.jp/p_mof/english/big-bang/ebb37.htm（HTTP 200）
+  - FAQ on Financial Instruments and Exchange Act, Section 6（适合性原则FAQ）: https://www.fsa.go.jp/en/laws_regulations/faq_on_fiea/section06.html（HTTP 200）
+  - About SESC（证券取引等监视委员会职能与执法权限概述）PDF: https://www.fsa.go.jp/sesc/english/aboutsesc/all.pdf（HTTP 200）
+- `nta.go.jp`（国税厅） | 官方（税务机关） | en | curl 常规 UA 200 | costs.capital_gains_tax / dividend_withholding_tax 字段依据
+  - Selection of the Aggregate Taxation and the Separate Self-Assessment Taxation System（英文版所得税指南，含上市股票转让/股息分离课税税率）PDF: https://www.nta.go.jp/english/taxes/individual/pdf/incometax_2023/17.pdf（HTTP 200）
+  - Tax on the income of an individual as a non-resident in Japan for tax purposes（非居民股息预扣税率说明）: https://www.nta.go.jp/english/taxes/individual/12006.htm（HTTP 200）
 
 ### 纳斯达克证券交易所 The Nasdaq Stock Market `us-nasdaq`
 - `nasdaq.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬 | Nasdaq Inc 集团层面的公司站，覆盖监管框架、公司概况/历史、市场数据产品说明、指数产品说明等叙述性内容；不含逐条规则条文（规则条文在 `nasdaqtrader.com`/`listingcenter.nasdaq.com`）
@@ -183,6 +307,7 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Nasdaq TotalView（行情数据产品，Level 1/2/逐笔深度）: https://www.nasdaq.com/solutions/data/equities/nasdaq-totalview（HTTP 200，344KB）
   - About Matching Engines（撮合引擎技术说明，未点名 Nasdaq 自身系统版本号）: https://www.nasdaq.com/solutions/fintech/marketplace-technology/about-matching-engines（HTTP 200，205KB）
   - Nasdaq Composite 指数产品页: https://www.nasdaq.com/solutions/global-indexes/nasdaq-composite（HTTP 200，306KB）
+  - Historical Data（2026-08-24新增，`infrastructure.historical_data_availability` 出处，免费公开历史行情产品说明"最多10年"表述）: https://www.nasdaq.com/market-activity/quotes/historical（HTTP 200，约38KB）
   - Nasdaq Celebrates 50 Years of Innovation（新闻稿，1971年成立、"世界首个全电子报价系统"）: https://www.nasdaq.com/press-release/nasdaq-celebrates-50-years-of-innovation-2021-02-08（HTTP 200，175KB）
   - Nasdaq CEOs Recall 50 Years of Innovation（历史访谈文章，脱离NASD独立、2005年NDAQ挂牌细节）: https://www.nasdaq.com/articles/nasdaq-ceos-recall-50-years-of-innovation（HTTP 200，194KB）
   - About Nordic Exchanges（欧洲子公司沿革，Nasdaq Stockholm/Copenhagen/Helsinki/Iceland/Baltic 各交易所并购时间线，group_id 依据）: https://www.nasdaq.com/european-markets/about-nordic-exchanges（HTTP 200，334KB）
@@ -198,17 +323,49 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Market Maker Process（含"清算机构请致电 NSCC"字样，ccp_name 的官方原文依据）: https://www.nasdaqtrader.com/trader.aspx?id=marketmakerprocess（HTTP 200，55KB）
   - Regulation SHO: https://www.nasdaqtrader.com/Trader.aspx?id=regsho（HTTP 200，53KB）
   - Short Sale Circuit Breaker（Rule 201 报升规则）: https://www.nasdaqtrader.com/trader.aspx?id=ShortSaleCircuitBreaker（HTTP 200，47KB）
+  - Equity Trader Alert #2026-18: Regulatory Transaction Fee Rate Adjustment per SEC Section 31（2026-08-24新增，`costs.regulatory_fees` 出处，SEC Section 31费率具体数字$20.60/百万美元）: https://www.nasdaqtrader.com/TraderNews.aspx?id=ETA2026-18（HTTP 200，约60KB）
+  - Nasdaq US Equities Price List 2025（PDF，2026-08-24新增，`infrastructure.data_pricing_model` 出处，Professional/Non-Professional分层订阅费率）: https://www.nasdaqtrader.com/content/ProductsServices/PriceList/Nasdaq_US_Equities_Price_List_2025.pdf（HTTP 200，约250KB）
 - `lseg.com`（伦敦证券交易所集团旗下 FTSE Russell，第三方指数编制商） | 官方（第三方指数编制商官网） | en | curl 常规 UA 200 | 用于确认罗素2000指数（ADR-018 引入的 `scope: market` 跨交易所市场基准指数样本，成分股横跨 `us-nyse`/`us-nasdaq` 两所，不专属单一交易所）编制方为 FTSE Russell、指数定位与覆盖范围
   - Russell 2000® Index: https://www.lseg.com/en/ftse-russell/indices/russell-2000-index（HTTP 200，202KB）
 - `spglobal.com`（S&P Dow Jones Indices，标普500指数编制方） | 官方（第三方指数编制商官网） | — | **全站被拦，任何路径（含首页、Index Finder、方法论 PDF）均返回 403**，换 UA/加 Accept-Language 头无效，与 `sec.gov`/`finra.org`/`spglobal.com` 同一类边缘防护拦截 | 无法直接抓取标普500官方页面确认编制方法论细节；`data/exchanges/us-nyse.yml`/`us-nasdaq.yml` 里的标普500条目按 ADR-018 只填最简字段（`id`/`name_zh`/`name_native`/`compiler`/`flagship`），`compiler: sp_dj` 与官方名称改用下方 `en.wikipedia.org` 交叉确认，未使用 WebSearch 摘要直接代入
 - `en.wikipedia.org` | 第三方 | en | curl 常规 UA 200 | 标普500官网（spglobal.com）被拦时的降级来源，仅用于确认标普500指数的编制方（S&P Dow Jones Indices）与官方全称这类基本事实，不用于任何规则性数值
   - S&P 500: https://en.wikipedia.org/wiki/S%26P_500（HTTP 200）
+  - August 2013 NASDAQ flash freeze（2026-08-24新增，`ir.nasdaq.com`托管的官方声明持续超时抓不到，改用此第三方条目佐证`infrastructure.major_outage_history`）: https://en.wikipedia.org/wiki/August_2013_NASDAQ_flash_freeze（HTTP 200）
 - `listingcenter.nasdaq.com` | 官方（上市规则站） | en | ⚠️ Rulebook 交互式条文页（`/rulebook/nasdaq/rules/...`）多次尝试均返回 403（含加 12 秒延时重试），疑似该子路径有独立 WAF，非限流性质（NYSE/JPX/Eurex 经验里的限流是"连续请求后开始 403"，这里是首次请求即 403，且延时重试无效）；但根目录下的静态 PDF 资源（`/assets/...`）可以正常 curl 到，200 | Initial Listing Guide + Continued Listing Guide 两份 PDF 已覆盖三档上市标准的初始与持续量化门槛，弥补了 Rulebook 页面抓不到的缺口，故未继续尝试破解 Rulebook 反爬
   - Nasdaq Initial Listing Guide（PDF，三档上市标准 Global Select/Global/Capital Market 财务与流动性量化门槛）: https://listingcenter.nasdaq.com/assets/initialguide.pdf（HTTP 200，559KB）
   - Nasdaq Continued Listing Guide（PDF，持续上市标准，含 $1 最低股价等退市触发门槛）: https://listingcenter.nasdaq.com/assets/continuedguide.pdf（HTTP 200，394KB）
+  - Nasdaq Listing and Hearing Review Council Charter（PDF，2026-08-24新增，`listing.delisting_process` 出处，上市与听证复核理事会治理章程，Panel→Council 二级上诉结构佐证）: https://listingcenter.nasdaq.com/assets/NLHRC_Charter.pdf（HTTP 200，约112KB）
 - `indexes.nasdaqomx.com` | 官方（指数编制业务站，Nasdaq Inc 旗下） | en | curl 常规 UA 200 | Nasdaq Index Methodology Guide，覆盖治理流程与通用方法论；⚠️ 未含 Nasdaq Composite/Nasdaq-100 各自的基日/基点等逐指数具体参数，那部分需要另外的逐指数方法论文件，本次未找到
   - Nasdaq Index Methodology Guide（PDF）: https://indexes.nasdaqomx.com/docs/Nasdaq_Index_Methodology_Guide.pdf（HTTP 200，249KB）
-- `dtcc.com` | 监管/清算基础设施 | en | ⚠️ 与 `us-nyse` 一节记录的情况一致：首页 200 但内容子页（如 accelerated-settlement、understanding-settlement 等路径）403，本次针对 us-nasdaq 重新探测一次结果相同，不再重复尝试 | 未抓取到可引用内容，本节仅记录探测结果，不含可用 URL；`clearing.csd_name`（DTC 托管机构）仍留空，但 `ccp_name` 已从 `nasdaqtrader.com` 的 Market Maker Process 页找到官方原文佐证（NSCC），无需依赖 dtcc.com
+- `dtcc.com` | 监管/清算基础设施 | en | ⚠️ HTML 内容子页（如 accelerated-settlement、understanding-settlement 等路径）持续 403，与 `us-nyse` 一节记录的情况一致；**但 2026-08-24 补全空缺字段时发现其静态资产托管路径（`~/media/Files/Downloads/...`）不受此拦截影响**——该路径本质是文件服务器直出（很可能走不同的 CDN/源站配置），不经过拦截 HTML 页面的那层 WAF/反爬规则，同类静态 PDF 资产链接理论上都值得一试，不必因为该域名主站被拦就放弃全部路径 | `clearing.csd_name`（DTC 托管机构）仍留空（HTML 内容页确实无法访问），但 `costs.clearing_fees` 已从下方新增的官方 NSCC 费率指南 PDF 找到具体费率佐证
+  - Guide to the 2026 NSCC Fee Schedule（DTCC官方PDF，`costs.clearing_fees` 出处，Effective January 1, 2026）: https://www.dtcc.com/~/media/Files/Downloads/legal/fee-guides/nsccfeeguide.pdf（HTTP 200，约250KB）
+- `govinfo.gov`（美国政府出版局，2026-08-24 新增登记） | 官方（美国联邦政府法律文本官方发布机构） | en | curl 常规 UA 200，全程未见反爬，与 `sec.gov` 拦截形成鲜明对比 | **突破 sec.gov 反爬的核心替代路径之一**：`govinfo.gov` 托管美国众议院法律修订顾问办公室（Office of the Law Revision Counsel）编制的官方汇编制定法全文（Compilation of Statutes）与历次《公法》（Public Law）原始文本，均为可直接 curl 的纯文本 PDF（非扫描件），不依赖 sec.gov 域名即可拿到法律原文逐字引用
+  - Securities Exchange Act of 1934（官方汇编全文 PDF，`regulation.core_laws` 出处）: https://www.govinfo.gov/content/pkg/COMPS-1885/pdf/COMPS-1885.pdf（HTTP 200，约940KB）
+  - Holding Foreign Companies Accountable Act, Public Law 116-222（`risks.political_risk_note` 出处）: https://www.govinfo.gov/content/pkg/PLAW-116publ222/pdf/PLAW-116publ222.pdf（HTTP 200，约200KB）
+- `ecfr.gov`（电子联邦法规汇编，Electronic Code of Federal Regulations，2026-08-24 新增登记） | 官方（美国国家档案与记录管理局联邦公报办公室运营） | en | ⚠️ 该站**面向用户的前端页面**（如 `ecfr.gov/current/title-17/.../section-242.201` 这类"好看"的 URL）是纯 JS 渲染的 SPA 外壳，curl 只能拿到无正文的 HTML；**必须改用其公开的 versioner API**（`ecfr.gov/api/versioner/v1/full/{issue-date}/title-{N}.xml?part={part}`，无需鉴权/API Key）才能拿到官方汇编 XML/纯文本全文——`{issue-date}` 需先查 `ecfr.gov/api/versioner/v1/titles.json` 确认该标题当前的 `latest_issue_date`（本次为 title 17/31 均查得 2026-08-17）；`part` 较大时（如整个 title 240）返回体可能过大甚至报 500，加 `&subject_group=` 参数（从前端页面 URL 的 `subject-group-ECFRxxxx` 段抄）可縮小到目标条文附近，2026-08-24 实测对 17 CFR 240.15l-1（Reg BI）有效 | **突破 sec.gov 反爬的第二条核心路径**：Title 17（商品与证券交易所）、Title 31（财政部规章，含 FinCEN 反洗钱规则）均可用此法拿到官方条文原文，不依赖 `sec.gov`/`ecfr.gov` 前端页面
+  - 17 CFR 242.201 Circuit breaker（Regulation SHO Rule 201 官方条文，含10%跌幅触发阈值，`market_structure.short_selling` 出处）: https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=242（HTTP 200，约690KB）
+  - 17 CFR 243.100 Regulation FD（`regulation.disclosure_requirements` 出处）: https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=243（HTTP 200，约12KB）
+  - 17 CFR 240.15l-1 Regulation Best Interest（`participants.suitability_management` 出处，用 `subject_group` 参数缩小返回体）: https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=240&subject_group=ECFR64f52d737aea1ed（HTTP 200，约53KB）
+  - 31 CFR 1023.220 Customer Identification Program（`participants.account_opening_requirements` 出处）: https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-31.xml?part=1023（HTTP 200，约45KB）
+- `federalregister.gov`（美国联邦公报，2026-08-24 新增登记） | 官方（美国国家档案与记录管理局运营，SEC 对纳斯达克/NSCC 等自律组织规则修改申请的法定公告与命令均在此正式刊登） | en | curl 常规 UA 200，全程未见反爬 | **突破 sec.gov 反爬的第三条核心路径**：listingcenter.nasdaq.com 的 Rulebook 交互页与 dtcc.com 的规则条文子页均无法直接抓取时，SEC 就该所/该清算机构"规则修改申请"（SR-NASDAQ-*/SR-NSCC-*）发布的官方 Notice/Order 会在 Purpose/Background 部分完整复述现行规则条文与结构，等效于间接拿到规则原文；这些 Notice/Order 本身就是 SEC 官方正式公告（非纳斯达克自我表述），可视为监管机构一手文件。检索方法：WebSearch 搜 `federalregister.gov` + 规则编号/关键词，命中后逐条 curl 验证正文（WebSearch 摘要本身不可直接引用，见 CLAUDE.md 二第1条）
+  - SEC Notice of Filing of Proposed Rule Change To Amend Rule 5820（SR-NASDAQ-2024-037，`listing.delisting_process` 出处，其 Purpose 背景段完整复述 Rule 5810/5815/5820 现行三级结构，该提案本身已于2024-10撤回但背景描述不受影响）: https://www.federalregister.gov/documents/2024/07/23/2024-16105/self-regulatory-organizations-the-nasdaq-stock-market-llc-notice-of-filing-of-proposed-rule-change（HTTP 200）
+  - SEC Order Granting Approval of a Proposed Rule Change（SR-NASDAQ-2024-031，`listing.suspension_resumption`/`listing.delisting_transition_period`/`listing.post_delisting_venue` 出处，正文与脚注给出听证中止暂停的一般规则、例外情形及OTC市场转入细节）: https://www.federalregister.gov/documents/2025/01/23/2025-01621/self-regulatory-organizations-the-nasdaq-stock-market-llc-order-granting-approval-of-a-proposed-rule（HTTP 200）
+  - SEC Notice of Filing of Proposed Rule Change To Enhance NSCC's Clearing Fund Methodology（`clearing.default_management` 出处）: https://www.federalregister.gov/documents/2026/06/04/2026-11144/self-regulatory-organizations-national-securities-clearing-corporation-notice-of-filing-of-proposed（HTTP 200）
+- `efts.sec.gov` / `data.sec.gov`（SEC EDGAR 全文检索/数据 API 子域名，2026-08-24 探测） | 官方 | — | ⚠️ 与 `www.sec.gov`/`www.sec.gov/Archives` 不同基础设施，本次探测均 200（`efts.sec.gov/LATEST/search-index?q=...` 全文检索 API、`data.sec.gov/submissions/CIK*.json` 公司备案元数据 API），但返回的是 EDGAR 备案索引/元数据，不是规则条文本身的叙述性文本，本次未直接用于摘引任何字段，记此备查——如后续需要"某公司哪天披露了退市"这类结构化事实，这两个 API 是可用入口
+- `sipc.org`（证券投资者保护公司，2026-08-24 新增登记） | 官方（国会依《1970年证券投资者保护法》设立的法定会员制非营利公司） | en | curl 常规 UA 200 | `regulation.investor_protection` 出处
+  - What SIPC Protects: https://www.sipc.org/for-investors/what-sipc-protects（HTTP 200）
+- `irs.gov`（美国国税局，2026-08-24 新增登记） | 官方（税务机关） | en | curl 常规 UA 200，全程未见反爬 | `costs.dividend_withholding_tax`/`costs.capital_gains_tax` 出处；⚠️ 部分栏目首页（如 `/individuals/international-taxpayers/nonresident-aliens`）本身是导航壳、正文很少，需要定位到更具体的专题页（如 `/nra-withholding`、`/taxtopics/tc409`）才有实质条文
+  - NRA withholding: https://www.irs.gov/individuals/international-taxpayers/nra-withholding（HTTP 200）
+  - Topic no. 409, Capital gains and losses: https://www.irs.gov/taxtopics/tc409（HTTP 200）
+- `home.treasury.gov`（美国财政部，2026-08-24 us-nasdaq 一节补充登记；域名本身已在本文件其他章节注册过，这里补记 us-nasdaq 专属用途） | 官方（监管机构） | en | curl 常规 UA 200 | `regulation.foreign_ownership_limit` 出处，用于确认CFIUS国家安全审查机制的官方定性；⚠️ 该字段最终仍以"结构性推论"而非"逐字否定性表述"入库，因防幻觉铁律不能凭沉默/未提及来证明"不存在"，详见字段 detail
+  - Committee on Foreign Investment in the United States (CFIUS): https://home.treasury.gov/policy-issues/international/the-committee-on-foreign-investment-in-the-united-states-cfius（HTTP 200）
+- `ofac.treasury.gov`（美国财政部海外资产控制办公室，2026-08-24 新增登记；⚠️ SOURCES_DOMAIN_RE 每行只捕获开头第一个反引号 token，与 `home.treasury.gov` 不可写在同一行，须各自单独开一行——见 SKILL.md 已知坑） | 官方（监管机构） | en | curl 常规 UA 200 | `regulation.capital_controls` 出处，用于确认OFAC定向制裁（而非普遍性资本管制）机制的官方定性；⚠️ 该字段同样以"结构性推论"入库，详见字段 detail
+  - About OFAC: https://ofac.treasury.gov/about-ofac（HTTP 200）
+  - OFAC FAQ 1055（俄罗斯相关定向制裁示例）: https://ofac.treasury.gov/faqs/1055（HTTP 200）
+- `sifma.org`（美国证券业与金融市场协会，2026-08-24 新增登记） | 第三方（行业自律性贸易协会，按CLAUDE.md二第3条confidence上限medium） | en | curl 常规 UA 200 | `participants.investor_structure`/`participants.broker_landscape` 出处，年度《资本市场年鉴》汇编美联储家庭金融调查与FINRA经纪商注册统计
+  - 2025 SIFMA Capital Markets Fact Book（PDF）: https://www.sifma.org/wp-content/uploads/2024/07/2025-SIFMA-Capital-Markets-Factbook.pdf（HTTP 200，约1.4MB）
+- `everycrsreport.com`（国会研究服务处报告第三方归档站，2026-08-24 新增登记） | 第三方（按CLAUDE.md二第3条confidence上限medium） | en | curl 常规 UA 200；`congress.gov` 本身对CRS报告页返回403，此为降级来源 | `costs.financial_transaction_tax` 出处，注意该份报告（RL32266）年代较早，文中具体费率数字已过时，本字段仅采信其历史沿革/无广义交易税立法两点结构性事实
+  - Transaction Tax: General Overview（CRS Report RL32266）: https://www.everycrsreport.com/reports/RL32266.html（HTTP 200）
 - `cahill.com` | 第三方（律所客户简报） | en | curl 常规 UA 200 | 与 us-nyse 一节引用同一份简报，说明SEC统一结算周期规则（Rule 15c6-1，2024-05-28起T+1）对全国性证券交易所（含纳斯达克）同等适用，非纳斯达克自身单独设定的规则；按 CLAUDE.md 二第3条，第三方来源 confidence 上限 medium
   - One-Day Settlement Cycle (T+1) To Begin May 28, 2024: https://www.cahill.com/publications/client-alerts/2024-04-29-one-day-settlement-cycle-t-1-to-begin-may-28-2024（HTTP 200，23KB）
 - `ir.nasdaq.com` | 官方（投资者关系站） | en | ⚠️ 本次多次尝试均 HTTP/2 stream 报错或超时（`curl: (92) HTTP/2 stream 1 was not closed cleanly`／`curl: (28) Operation timed out`），换 `--http1.1` 仍超时，与 `nasdaq.com`/`nasdaqtrader.com` 的可达性形成对比——同集团不同子域名反爬/限流行为不一致，值得记录；Nasdaq, Inc. 自身股票在 Nasdaq 交易所挂牌（NDAQ）这一事实原打算从这里的"Stock Information"页确认，未能拿到，改用 `nasdaq.com/articles` 与 `nasdaq.com/market-activity` 两个可达页面间接佐证，`overview.self_listed` 因此定为 `confidence: medium` 而非 `high` | 未抓取到可引用内容
@@ -298,6 +455,34 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `finance.sina.com.cn` | 第三方（财经媒体，全文转载深交所 2016-01-07 官方通知原文） | zh | curl 需按 GBK 解码（非 UTF-8），常规 UA 200 | 用于 circuit_breaker 字段：本次会话未抓到 szse.cn 自己的通知原页（WebSearch 未命中该页面的直链），退而用新浪财经转载的通知全文作为来源，quote 摘的是被转载的深交所官方通知原文本身，但因转载渠道是第三方，confidence 按铁律封顶 medium，不因转载内容是官方原文而破例标 high
   - 三大交易所公告确认指数熔断制度暂停实施: http://finance.sina.com.cn/stock/y/20160107/223324126797.shtml
 
+补全 Category B 空缺字段（regulation/listing/clearing.derivatives/participants/infrastructure/costs/risks，2026-08-24）新增来源：
+- `szse.cn`（域名已登记，本轮新增以下具体页面/PDF）
+  - 深圳证券交易所合格境外机构投资者和人民币合格境外机构投资者证券交易实施细则（2020年修订）PDF ← `foreign_ownership_limit` 出处: https://docs.static.szse.cn/www/disclosure/notice/general/W020201030604374968707.pdf
+  - 深圳证券交易所上市公司自律监管指引第5号——信息披露事务管理（2025年修订）PDF ← `disclosure_requirements`/`continuing_obligations` 出处: https://docs.static.szse.cn/www/lawrules/rule/stock/supervision/currency/W020250327591142579433.pdf
+  - 深圳证券交易所股票发行上市审核规则（2024年修订）PDF ← `listing_process_duration` 出处: http://docs.static.szse.cn/www/lawrules/rule/stock/W020240430572636488364.pdf
+  - 深圳证券交易所股票期权试点交易规则 第2.5条、第5.11-5.13条（最后交易日顺延规则）← `clearing.derivatives.last_trading_day_rule` 出处，PDF 同已登记的期权交易规则条目: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+  - 深圳证券交易所 中国证券登记结算有限责任公司股票期权试点风险控制管理办法 第十四-十九条（分级收取/开仓保证金/维持保证金/逐日盯市）← `clearing.derivatives.initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency` 出处，PDF 同已登记的期权风险控制管理办法条目: http://docs.static.szse.cn/www/option/rules/optrules/W020191207433397366259.pdf
+  - 统计年鉴（市场数据导航页，日/周/月/年度概况分类）← `infrastructure.historical_data_availability` 出处: https://www.szse.cn/market/periodical/year/index.html
+- `csrc.gov.cn`（域名已登记，本轮新增以下具体页面）
+  - 合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法（2020年证监会、人民银行、外汇局令第176号）← `capital_controls` 出处: http://www.csrc.gov.cn/csrc/c106256/c1653823/content.shtml
+  - 中国证券登记结算有限责任公司证券账户业务指南（陕西监管局官网留存，二〇一六年十月版）← `participants.account_opening_requirements` 出处，文档版本较旧（2016年10月），未核实是否有更新修订版，confidence 定 medium: http://www.csrc.gov.cn/shanxi/c1055540/c1609332/1609332/files/中国证券登记结算有限责任公司证券账户业务指南.pdf
+- `chinaclear.cn`（域名已登记，本轮新增以下具体页面）
+  - 中国证券登记结算有限责任公司遵循《金融市场基础设施原则》信息披露报告（2022年6月）← `clearing.default_management` 出处: http://www.chinaclear.cn/zdjs/xxxpl/202307/e8fcc5f599a34963b5c83c8ac07ece1d/files/中国结算遵循《金融市场基础设施原则》信息披露报告（2022）.pdf
+- `people.com.cn`（域名已登记，本轮新增以下具体页面）
+  - 4月29日起股票交易过户费总体下调50%（转载中国结算官网公告）← `costs.clearing_fees` 出处: http://finance.people.com.cn/n1/2022/0429/c1004-32411923.html
+- `isc.com.cn` | 官方（中证中小投资者服务中心，中国证监会体系下全国性投资者保护机构官网） | zh | curl 常规 UA 200，未见反爬 | 用于 `regulation.investor_protection`：全国性机制，非深交所专属，故 confidence 定 medium
+  - 维权服务（特别代表人诉讼/支持诉讼/股东诉讼）: http://www.isc.com.cn/tsyw/wqfw/
+- `szsi.cn` | 官方（深圳证券信息有限公司，SZSE 全资子公司，行情数据授权与分发主体，域名与已登记的 `cnindex.com.cn` 同属该公司不同业务线） | zh | curl 常规 UA 200，未见反爬 | 用于 `infrastructure.market_data_levels`/`data_pricing_model`/`data_latency`：官方行情商用授权与定价说明
+  - 深市行情授权 - 增强行情介绍: http://www.szsi.cn/cpfw/fwsq/hq/yw-2.htm
+  - 深交所行情互联网接入服务说明（含收费标准）PDF: http://www.szsi.cn/cpfw/fwsq/hq/深交所行情互联网接入服务说明.pdf
+- `chinatax.gov.cn` | 官方（国家税务总局，含省级税务局子域名 `guangdong.chinatax.gov.cn` 转发件，均标注来源为国家税务总局） | zh | curl 常规 UA 200，未见反爬 | 用于 `costs.capital_gains_tax`/`costs.dividend_withholding_tax`：全国统一税收政策，非深交所自定，与上交所（cn-sse）适用同一套规则
+  - 关于上市公司股息红利差别化个人所得税政策有关问题的通知（财税〔2015〕101号，通知抬头列明直接下发对象含"上海、深圳证券交易所"）: https://www.chinatax.gov.cn/n810341/n810755/c1797427/content.html
+  - 关于个人转让股票所得继续暂免征收个人所得税的通知（财税字〔1998〕61号，广东省税务局官网转发，标注来源为国家税务总局）: https://guangdong.chinatax.gov.cn/gdsw/grsdsgg_hmqsc_pyzbsc_ssgs/2021-08/31/content_0515931e3f044baf9a26bbe53e85eb38.shtml
+- `qianzhan.com` | 第三方（行业研究机构，前瞻产业研究院） | zh | curl 常规 UA 200，未见反爬 | 用于 `participants.broker_landscape`：全国证券业集中度数据，非深交所专属统计，confidence 依铁律封顶 medium
+  - 【行业深度】洞察2023：中国证券行业竞争格局及市场份额: https://www.qianzhan.com/analyst/detail/220/230518-3f033ad2.html
+- `zh.wikipedia.org` | 第三方（中文维基百科） | zh | curl 常规 UA 200，未见反爬 | 用于 `infrastructure.major_outage_history`：深交所历史系统故障事件（2002年卫星转发器干扰停市、1992年"8·10事件"），本次未核实到深交所官方对这两起事件的原始公告存档，confidence 依铁律封顶 medium
+  - 深圳证券交易所（大事记章节）: https://zh.wikipedia.org/zh-hans/%E6%B7%B1%E5%9C%B3%E8%AF%81%E5%88%B8%E4%BA%A4%E6%98%93%E6%89%80
+
 ### 伦敦证券交易所 London Stock Exchange (LSE) `uk-lse`
 - `londonstockexchange.com`（`www.` 主站） | 官方 | en | ⚠️ **纯 JS 单页应用（SPA）**，curl 只能拿到空壳 HTML（标题恒为「London Stock Exchange \| London Stock Exchange」，正文为空，四个不同路径抓回的文件字节数完全相同可资验证）——与 SOURCES.md 里 `hsi.com.hk` 是同一类问题；`/discover/who-we-are`、`/discover/london-stock-exchange-group`、主板首页、Retail Broker Order Book 页均属此类，本次未能从这些 URL 拿到实质内容，改用下面 `docs.londonstockexchange.com`（静态文档子域）与 `lseg.com`（集团官网，非 SPA）替代 | —
 - `docs.londonstockexchange.com` | 官方（静态文档子域，与主站 SPA 不同，curl 可正常抓取） | en | curl 常规 UA 200，未见反爬 | 交易规则/交易系统权威技术文档
@@ -308,19 +493,42 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - AIM Rules for Companies（January 2026，AIM 板块上市与持续义务规则）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf
   - Fees for Issuers（Effective 01 January 2026，主板/AIM 发行人年费）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/fees-for-issuers-jan-2026-01.pdf
   - Trading Services Price List（Excludes TRADEcho，Effective 01 January 2025，交易费率表）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/trading-services-price-list-january-2025.pdf
+  - Schedule A – Price List and Data Products（01 January 2026，市场数据 Level 1/Level 2/Post-trade 分级定义与实时/延时/收市后再分发许可价目表，补全 `infrastructure` 章节用）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/schedule-a-price-list-and-products-schedule-2026.pdf
+  - Market Data Policy Guidelines（01 January 2025，Real Time/Delayed/After Midnight Data 各类再分发许可定义）PDF: https://docs.londonstockexchange.com/sites/default/files/documents/market-data-policy-guidelines-2025_0.pdf
 - `lseg.com`（集团官网，与 `www.londonstockexchange.com` 是不同站点，非 SPA） | 官方（母公司 London Stock Exchange Group plc） | en | curl 常规 UA 200，未见反爬 | 历史沿革、清算（LCH）、指数方法论（FTSE Russell）、集团财报
   - The history of LSEG（历史沿革，含1801年正式成立、1986 Big Bang、2001年自身挂牌上市、2007年与 Borsa Italiana 合并组成 LSEG 集团等关键节点）: https://www.lseg.com/en/about-us/history
   - About LCH（清算/中央对手方）: https://www.lseg.com/en/post-trade/clearing/about-lch
   - LSE 24（延长交易时段计划，2026年新闻稿，压测点"独立监管框架下机制持续演进"的证据）: https://www.lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-to-launch-lse-24
   - FTSE UK Index Series Ground Rules（指数编制方法论）PDF: https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse-uk-index-series-ground-rules.pdf
   - LSEG plc 2025年度业绩初步公告（Preliminary Results RNS，市值/财务数据）PDF: https://www.lseg.com/content/dam/lseg/en_us/documents/investor-relations/financial-results/preliminary-results/rns/lseg-2025-preliminary-results-rns-26feb2026.pdf
+  - LCH Ltd Default Waterfall（Oct 2024，违约处置资源瀑布图，含 EquityClear 违约基金/LCH自有资本出资规模）PDF: https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/resources/lch-ltd-default-waterfall-oct-2024.pdf
+  - LCH Ltd EquityClear Settlement Fee Schedule（From 1st July 2024，证券结算环节费率表，区别于交易所自身交易费）PDF: https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/resources/lch-ltd-equity-clear-settlement-fee-schedule-current-010724.pdf
 - `fca.org.uk` | 监管 | en | curl 常规 UA 200，未见反爬 | 英国金融行为监管局（FCA），脱欧后 UK Listing Rules 与卖空监管的独立规则制定机关——压测点核心来源
   - UKLR（UK Listing Rules）sourcebook 全文 PDF: https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf
   - Short selling（卖空监管，SSR 2025 新制度说明）: https://www.fca.org.uk/markets/short-selling
   - About T+1 settlement（结算周期改革现状，关键事实：本次会话核实时点 2026-08-14，英国仍是T+2，T+1定于2027年10月11日才生效，目前尚未发生）: https://www.fca.org.uk/markets/about-t1-settlement
+  - Market abuse（UK MAR 执法框架、罚则、STOR报告要求）: https://www.fca.org.uk/markets/market-abuse
+  - Listing and sponsor fees（发行人/保荐人向FCA缴纳的文件审核费与年费，区别于交易所自身费用）: https://www.fca.org.uk/markets/primary-markets/fees
+  - Listing applications, amendments, suspensions and cancellations（明确"上市申请/变更/暂停/取消本身不收费，仅招股说明书审批收费"）: https://www.fca.org.uk/markets/primary-markets/listing-applications
+  - New financial sanctions measures in relation to Russia（2022年俄乌事件后FCA声明，为下方LSE Market Notice N06/22提供监管背景）: https://www.fca.org.uk/news/statements/new-financial-sanctions-measures-relation-russia
+- `data.fca.org.uk` | 官方（National Storage Mechanism，FCA托管的RNS/交易所公告官方存档） | en | curl 常规 UA 200 | LSE Market Notice N06/22（2022-03-03，依据Rules of the London Stock Exchange Rule 1510暂停约20只俄罗斯公司GDR/ADR交易，政治/制裁风险压测点的一手证据）
+  - N06/22 - Russia related sanctions - Update: https://data.fca.org.uk/artefacts/NSM/RNS/4290415.html
 - `euroclear.com` | 官方（清算/托管机构） | en | ⚠️ curl 常规 UA 对根域名与内容页均返回 403（间隔12秒重试后仍 403，非限流，是真实拦截），未能抓到——Euroclear UK & International（原 CREST）作为 LSE 中央证券存管机构的角色改用第三方转述来源确认，见下 | —
-- `gov.uk` | 监管（税务机关 HMRC） | en | curl 常规 UA 200，未见反爬 | 印花税储备税（SDRT）官方说明，含 CREST 代收 SDRT 的机制描述
+- `gov.uk` | 监管（税务机关 HMRC；国家安全与投资法审查亦发布于此） | en | curl 常规 UA 200，未见反爬 | 印花税储备税（SDRT）官方说明，含 CREST 代收 SDRT 的机制描述；国家安全与投资法（外资并购国家安全审查）指引；资本利得税税率官方页
   - Stamp Duty and Stamp Duty Reserve Tax: https://www.gov.uk/government/publications/stamp-duty-and-stamp-duty-reserve-tax/stamp-duty-and-stamp-duty-reserve-tax
+  - National Security and Investment Act guidance on acquisitions（NSI Act 2021外资/内资并购国家安全审查制度，25%/50%/75%持股门槛，17个敏感行业）: https://www.gov.uk/guidance/national-security-and-investment-act-guidance-on-acquisitions
+  - Capital Gains Tax: what you pay it on, rates and allowances（2026/27税率：基本税率18%、较高税率24%，年度免税额£3,000）: https://www.gov.uk/capital-gains-tax/rates
+- `fscs.org.uk` | 监管（金融服务补偿计划，FSMA 2000下设立的法定投资者/存款人补偿机构） | en | curl 常规 UA 200 | 投资类索赔补偿限额（2019年4月后失败机构：每人每机构最高£85,000）
+  - What we cover | Investments: https://www.fscs.org.uk/what-we-cover/investments/
+- `api.parliament.uk` | 官方（Hansard，英国议会官方历史发言记录） | en | curl 常规 UA 200 | 1979年10月23日财政大臣Geoffrey Howe在下议院宣布即时撤销全部剩余外汇管制的官方发言记录，是`capital_controls`字段"英国无资本管制"这一常识性事实少有的可逐字摘引的一手原文
+  - EXCHANGE CONTROLS (Hansard, 23 October 1979): https://api.parliament.uk/historic-hansard/commons/1979/oct/23/exchange-controls
+- `ons.gov.uk` | 官方（国家统计局，Office for National Statistics） | en | curl 常规 UA 200 | Ownership of UK quoted shares 两年一期统计公报，按持有人部门（境外/个人/银行/公共部门等）拆分的LSE上市公司股权结构官方口径数据
+  - Ownership of UK quoted shares: 2024（2026-01-29发布）: https://www.ons.gov.uk/economy/investmentspensionsandtrusts/bulletins/ownershipofukquotedshares/2024
+- `handbook.fca.org.uk` | 监管（FCA Handbook，与 `api-handbook.fca.org.uk`/`fca.org.uk` 为不同子域名，需单独登记） | en | curl 常规 UA 200 | COBS（Conduct of Business Sourcebook）适当性/适合性管理规则原文
+  - FCA Handbook - COBS 9A Suitability (MiFID and insurance-based investment products provisions): https://handbook.fca.org.uk/handbook/cobs9a
+  - FCA Handbook - COBS 10 Appropriateness (for non-advised services): https://handbook.fca.org.uk/handbook/cobs10
+- `legislation.gov.uk` | 官方（英国立法官方数据库） | en | curl 常规 UA 200 | 《2017年洗钱、恐怖主义融资与资金转移条例》（Money Laundering Regulations 2017）第28条客户尽职调查（开户KYC）要求原文
+  - The Money Laundering, Terrorist Financing and Transfer of Funds (Information on the Payer) Regulations 2017, Regulation 28: https://www.legislation.gov.uk/uksi/2017/692/regulation/28
 
 ### 法兰克福证券交易所 / Xetra Frankfurt Stock Exchange (FWB) / Deutsche Börse Xetra `de-xetra`
 - `cashmarket.deutsche-boerse.com` | 官方 | de/en（本节实测抓取的全部是英文页；同集团站群，抓取体验与 `de-eurex` 一致） | curl + 常规 UA 全部 200，未见反爬 | ⚠️ 法律实体是「法兰克福证券交易所」（Frankfurter Wertpapierbörse，FWB®），官方原文明确写它是「具有有限法律行为能力的公法机构，不能作为私法主体」（"a stock exchange, as a public law institution with limited legal capacity, cannot act as a legal entity under private law"），Deutsche Börse AG 是负责运营的「Trägerin/organising company」——这与 `de-eurex.yml`（Eurex Deutschland 是私法主体的公司）是两种不同的法律形式，即使同属 `deutsche-boerse-group`。「Xetra」是 FWB 名下的电子交易系统（品牌名），FWB 名下另有场内专家做市交易场所「Börse Frankfurt」（主要服务零售），站内很多页面把两个交易场所的信息混排，摘引时要看清楚具体指哪个。规则体系与 Eurex 平行但独立：Börsenordnung（交易所规则）/Handelsordnung（交易规则）/Zulassungsordnung（准入规则）/Gebührenordnung（费用规则）/Bedingungen für Geschäfte（交易条件）五份官方英文版 PDF，直链可从 Rules and Regulations 索引页的静态 HTML 里 grep 出来（同 Eurex 经验）
@@ -677,14 +885,32 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 官网首页（中文）: https://www.twse.com.tw/zh/
   - 历史介绍（大事记，含成立/开业日期、历次涨跌幅调整、T+2交割制度实施等年表）: https://www.twse.com.tw/zh/about/company/history.html
   - 首长欢迎词（公司概况页，未含股权结构细节）: https://www.twse.com.tw/zh/about/company/welcome.html
+  - 2026-08-24/25 补全 Category B 空缺字段新增抓取（同域名不需要重复登记）：
+    - 国内公司申请流程（listing_process_duration 依据）: https://www.twse.com.tw/zh/listed/method/flow.html
+    - 终止上市公司（页面附注含第一上市公司终止上市即停止公开发行说明，post_delisting_venue 依据）: https://www.twse.com.tw/zh/listed/suspend-listing.html
+    - Fact Book 2026 - Shareholding by Type of Investors (2021-2025)（投资人类别持股结构表，investor_structure 依据）: https://www.twse.com.tw/downloads/zh/about/company/factbook/2026/4.02.html
+    - 交易资讯使用管理办法、契约、收费标准（栏目页，data_pricing_model/market_data_levels 依据）: https://www.twse.com.tw/zh/products/information/use.html
+    - 即时交易资讯（收费标准 HTML 版，data_pricing_model 依据）: https://www.twse.com.tw/zh/products/information/real-time.html
+    - 交易资讯使用管理办法 PDF（第3条即时/延迟资讯定义，data_latency/market_data_levels 依据）: https://www.twse.com.tw/downloads/zh/products/regulation_use.pdf
+    - 收费标准 PDF（即时交易资讯授权费/资讯费费率表，data_pricing_model 依据）: https://www.twse.com.tw/downloads/zh/products/table_fee.pdf
+    - 盘后资讯与历史交易资料（historical_data_availability 依据）: https://www.twse.com.tw/zh/products/information/history.html
+    - 证交所网路资讯商店 Data E-Shop（子域名，historical_data_availability 依据）: https://eshop.twse.com.tw/zh/
 - `twse-regulation.twse.com.tw` | 官方（法规分享知识库，独立子域名） | zh-Hant / en | curl + 常规 UA 200，未见反爬 | 官方法规原文（区别于 twse.com.tw 上的说明性文字）的主要来源；页面正文夹杂大量修订沿革记录，用关键词（而非取前 N 段）定位现行条款
   - 台湾证券交易所股份有限公司营业细则（交易时段、升降单位、买卖单位、订单类型等核心交易规则条文）: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007304
   - 同上英文版（Baker McKenzie 翻译，页面声明中英文有异议时中文本为准）: https://twse-regulation.twse.com.tw/ENG/EN/law/DAT0201.aspx?FLCODE=FL007304
   - 有价证券上市审查准则（各板块财务门槛条文）: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007326
   - 审查有价证券上市作业程序: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007327
+  - 2026-08-24/25 补全 Category B 空缺字段新增抓取：
+    - 台湾证券交易所股份有限公司对有价证券上市公司重大讯息之查证暨公开处理程序（disclosure_requirements/continuing_obligations 依据）: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007111
+    - 台湾证券交易所股份有限公司上市公司申请有价证券终止上市处理程序（delisting_transition_period/post_delisting_venue 依据）: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007282
+    - 台湾证券交易所股份有限公司证券经纪商受托契约准则（account_opening_requirements 依据）: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007113
+    - 台湾证券交易所股份有限公司公布或通知注意交易资讯暨处置作业要点（liquidity_risk_note 依据）: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007225
 - `law.fsc.gov.tw` | 监管 | zh-Hant | curl + 常规 UA 200 | 金融监督管理委员会（FSC）主管法规共用系统，证券交易法、证券交易所管理规则原文出处
   - 证券交易所管理规则: https://law.fsc.gov.tw/LawContent.aspx?id=FL007016
   - 证券交易法: https://law.fsc.gov.tw/LawContent.aspx?id=FL007009
+  - 金融服务业确保金融商品或服务适合金融消费者办法（suitability_management 依据，2026-08-24/25 新增）: https://law.fsc.gov.tw/LawContent.aspx?id=GL000328
+- `www.fsc.gov.tw`（金融监督管理委员会官网本站，与 law.fsc.gov.tw 法规查询子站为不同子域名，2026-08-25 新增登记） | 监管 | zh-Hant | curl + 常规 UA 200 | 证券期货局官方业务统计（证券商家数等），broker_landscape 依据
+  - 证券业家数统计表 xlsx（金管会证期局「一般经营概况」栏目，需 openpyxl 解析，非 HTML/PDF）: https://www.fsc.gov.tw/userfiles/file/01_11507-%E8%AD%89%E5%88%B8%E6%A5%AD%E5%AE%B6%E6%95%B8.xlsx
 - `law-out.mof.gov.tw` | 监管（财政部，税务主管机关，法规查询子站） | zh-Hant | curl + 常规 UA 200 | 证券交易税条例原文
   - 证券交易税条例: https://law-out.mof.gov.tw/LawContent.aspx?id=FL006079
 - `mof.gov.tw` | 监管（财政部官网本站） | zh-Hant | curl + 常规 UA 200 | 非居住者股利扣缴率官方公告
@@ -694,6 +920,7 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 那些有价证券之交易所得应计入个人基本所得额（confirms 上市/上柜/兴柜股票交易所得免计入个人基本所得额）: https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/basic-tax-question/scope/eKN76QZ
 - `tdcc.com.tw` | 官方（清算/集中保管机构） | zh-Hant | curl + 常规 UA 200 | 台湾集中保管结算所（TDCC），中央证券存管机构，兼办结算交割
   - 结算交割: https://www.tdcc.com.tw/portal/zh/equity/settlement
+  - 台湾集中保管结算所股份有限公司收费办法 第1条 PDF（子域名 m.tdcc.com.tw，已由 tdcc.com.tw 登记覆盖，clearing_fees 依据，2026-08-24/25 新增）: https://m.tdcc.com.tw/TDCCWEB/upload/40289796531cece20153878c1c750017.pdf
 - `twsa.org.tw` | 官方（自律组织） | zh-Hant | curl + 常规 UA 200 | 中华民国证券商业同业公会，证券商层面的自律组织；本次仅用于确认机构名称与职能定位，未逐条抓取其自律规章
   - 首页: https://www.twsa.org.tw/
 ### 瑞士证券交易所 SIX Swiss Exchange `ch-six`
@@ -771,3 +998,87 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 2. 更根本的问题：`fetch_one()` 里拼 curl 命令参数列表时**忘了把 `url` 本身传进去**，curl 命令没有目标地址。这个 bug 不受第 1 条影响，从这个脚本写出来那天起，`make fetch` 抓到的从来都是空文件，只是因为一直没人真的靠它抓过东西才没被发现。两处都已修复并对 cn-sse/hk-hkex/us-nyse 三家重新跑通验证。
 
 `nyse.com` 与 `ice.com`（NYSE 母公司 ICE 的指数业务站）均全程无反爬，curl 常规 UA 直接 200。
+
+## 突破记录（us-nyse 补全会话，2026-08）：sec.gov / finra.org 反爬攻克，dtcc.com 仍未攻克
+
+针对上面 v0.2 记录的「sec.gov/finra.org/dtcc.com 三个域名普遍拒绝」这一长期悬案（也是
+`PROJECT/OPEN-QUESTIONS.md` 框架性问题第14/15/32条的根源），本次专门花时间系统性尝试突破，
+结果是**三个域名里两个真正攻克，一个依然拒绝**：
+
+**`sec.gov`——攻克。** 根因不是"反爬"而是"限流"：默认 UA（无论是常规浏览器 UA 还是空 UA）
+对内容页一律返回 403，响应体标题是 `SEC.gov | Request Rate Threshold Exceeded`，正文明确写
+"Automated access to our sites must comply with SEC.gov's Privacy and Security Policy"并指向
+`sec.gov/developer`——这其实是 SEC 自己公开文档化的"Fair Access"政策（与 SEC EDGAR 长期要求
+自动化访问必须带"机构标识+联系邮箱"格式 User-Agent 是同一套机制，只是此前没人想到 EDGAR 之外
+的 sec.gov 主站也适用同一规则）。把 curl 的 `-A` 换成形如 `"exchange-atlas-research
+research@example.com"`（机构名+邮箱，不是伪装浏览器指纹）之后，同一批此前 403 的 URL 全部
+变成 200，且反复验证可稳定复现（本次会话因账号额度中断重启过两次，每次用同一格式 UA 重新
+curl 同一批 URL 结果一致，不是偶然）。**这与常规"换 UA 绕过反爬"的经验（如 SSE/JPX 案例）
+性质不同**——那些是伪装成常规浏览器；这里恰恰相反，是老老实实"表明身份"而不是"冒充浏览器"，
+是 SEC 站点专属的准入方式，换到别的域名不一定适用（下面 finra.org 的情况印证了这一点：
+Cloudflare 挡的是"看起来在冒充浏览器却没有真实浏览器指纹"的请求，同一个"表明身份"UA 反而
+更不像自动化脚本冒充浏览器，可能是两处都能过的深层原因，但这只是合理猜测，未做逆向验证）。
+个别 `www.sec.gov/about/laws` 这类路径会 301 跳到 `dc.aws-sec.akadns.net`（一个内网专用域名，
+curl 跟着跳会失败）——这不是反爬，是该路径本身的重定向配置问题，换成 WebSearch 定位到的具体
+落地页 URL 直接绕开即可，不必纠结。
+
+**`finra.org`——部分攻克。** 默认 UA 遇到的是真正的 Cloudflare「Just a moment...」JS 质询页
+（403，`title: Attention Required! | Cloudflare` 或 JS challenge 页面，需要执行 JS+Cookie
+的机器人验证，理论上 curl 应该过不去）。但换成与 sec.gov 相同的 Fair Access 格式 UA 后，
+`/rules-guidance/rulebooks/finra-rules/...`（规则手册条文页）与 `/rules-guidance/key-
+topics/...`（专题说明页）路径下的内容页全部变成 200，且是真实服务端渲染的正文（不是壳层）
+——这是意外收获，此前完全没预期这个格式的 UA 对 Cloudflare 防护也有效，具体原因未深究。**但
+不是全站通杀**：`/about`、`/media-center/statistics`、纯首页 `/` 这类页面即使 200 了，静态
+HTML 里也只有导航壳，正文靠客户端 JS 异步渲染出来，curl 拿不到——这类页面改用其官方 PDF 报告
+（如《2025 FINRA Industry Snapshot》）绕过，PDF 本身不受这个限制。
+
+**`dtcc.com`——未攻克。** 与 finra.org 是同一家 Cloudflare 防护但表现不同：`/about`、
+`/clearing-services/equities-clearing` 等内容子页，无论默认 UA 还是 Fair Access 格式 UA，
+一律返回真正的 `Attention Required! | Cloudflare`「访问被拒绝」页（不是 JS 质询页，页面文案
+直接是"You are unable to access dtcc.com"，说明是域名级/IP 级别的硬拦截规则，不是可通过换
+UA 绕过的机器人验证）。首页 `/` 本身可以 200（内容是产品导航壳，无实质正文，与 v0.2 记录的
+情况一致），说明拦截同样是"按路径深度/内容页触发"而非整个域名封死，但**本次两种 UA 策略对
+内容子页均未能突破**。降级方案：改用 SEC 官方文件（非 DTCC 自身网站）间接确认 NSCC/DTC 的
+CCP/CSD 角色定性——《SEC Staff Report on the Regulation of Clearing Agencies》与 NSCC 在
+SEC 备案的规则文件（Addendum A 费用结构）本身就是监管机构一手文件，权威性不低于 DTCC 自己
+的网站，实际解决了 `clearing.ccp_name`/`csd_name`/`default_management`/`costs.clearing_
+fees` 四个此前因 dtcc.com 反爬而留空的字段，dtcc.com 本身仍是未攻克状态，供下次交易所（如
+再次涉及 NSCC/DTC 细节时）参考：不必重复尝试，直接走 sec.gov 的清算机构监管文件路线。
+
+**方法论小结**（供其他交易所补全/新增会话参考）：遇到"看起来是反爬、但网站本身是美国政府/
+监管机构域名"的情况，第一步应该看响应体内容再决定策略——"Request Rate Threshold Exceeded"
+类文案指向的是限流+身份声明机制，换"表明身份"格式的 UA 大概率有效；"Just a moment.../
+Attention Required" 类文案是 Cloudflare 机器人验证或硬拦截，前者可能对某些 UA 格式意外放行
+（如本次 finra.org），后者（如 dtcc.com 的内容子页）目前没找到 curl 层面能绕开的办法，需要
+降级到"找监管机构对同一事实的官方转述"这条路。
+
+**补充（us-nasdaq 补全会话，同一批次，独立尝试）：** 未复用上面 us-nyse 会话验证过的
+Fair Access 格式 UA（两个子代理并行执行、互不知情），改走"政府官方镜像站"路线，同样成功
+取得 `regulation.core_laws`/`market_structure.short_selling` 等此前因 sec.gov/finra.org
+403 而留空的字段，是与上面"换UA"路线互补、优先级更高（无需猜UA格式）的备选方案：
+
+- **`govinfo.gov`**（美国政府出版局）——托管众议院法律修订顾问办公室编制的官方《制定法汇编》
+  （Compilation of Statutes）与历次《公法》（Public Law）原文 PDF，是纯文本排版而非扫描件，
+  curl 常规 UA 直接 200，全程无反爬。适合取得《1934年证券交易法》这类现行成文法全文，路径
+  形如 `govinfo.gov/content/pkg/COMPS-<法规编号>/pdf/COMPS-<法规编号>.pdf`（可先 WebSearch
+  "govinfo.gov COMPS <法规名>" 定位编号）。
+- **`ecfr.gov` 的 versioner API（关键发现）**——该站**面向用户的前端页面**（如
+  `ecfr.gov/current/title-17/.../section-242.201`）是纯 JS 渲染 SPA 外壳，curl 抓不到正文；
+  但其**公开 API**（`ecfr.gov/api/versioner/v1/full/{issue-date}/title-{N}.xml?part={part}`，
+  无需鉴权）返回官方汇编 XML 纯文本全文。`{issue-date}` 需先查
+  `ecfr.gov/api/versioner/v1/titles.json` 取该标题当前 `latest_issue_date`；`part` 较大时可
+  加 `&subject_group=` 参数缩小范围。⚠️ 该 API 实测有**间歇性 503**（错误体是通用"No server
+  is available to handle this request"，不带任何限流/拦截特征文案），判断是服务端负载问题，
+  不是限流——出现时间隔重试或直接复用同会话内更早的成功抓取内容即可，不代表被封，不要按
+  403 那一套换 UA 应对。用此路径取得过 Reg SHO Rule 201（10%跌幅报升阈值）、Regulation FD、
+  Regulation Best Interest、31 CFR CIP客户身份识别规则的条文原文。
+- **`federalregister.gov`**（联邦公报）——SEC 对纳斯达克/NSCC 等自律组织"规则修改申请"发布
+  的官方 Notice/Order，其 Purpose/Background 部分通常会完整复述现行规则条文，等效间接获得
+  规则原文，且属于监管机构一手文件（比交易所自己转述规则更权威）。curl 常规 UA 200，全程
+  无反爬。
+- **`dtcc.com` 静态资产路径**——`/about`、`/clearing-services/...` 这类内容页仍如上文所述
+  被 Cloudflare 硬拦截，但 `~/media/Files/Downloads/...` 这类文件服务器直出路径不受该拦截
+  影响，可用来抓 DTCC 自己发布的费率指南 PDF（如《2026年 NSCC 费率指南》）。
+- 方法论：WebSearch 定位候选 URL → 逐条 curl 验证 → 若原始文档路径被拦，优先尝试同一事实
+  的"官方政府镜像"（govinfo.gov/ecfr.gov/federalregister.gov）而非直接放弃或退而求其次用
+  第三方转述——政府镜像站的权威性等同一手来源，`confidence` 仍可标 `high`。

@@ -240,52 +240,52 @@
         "quote": null
       },
       "capital_controls": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "联邦层面没有一般性资本管制或外汇管制；外国对美投资受CFIUS（美国外国投资委员会）以国家安全为由的审查，审查对象是特定交易本身，不是资本跨境流动的额度或审批",
+        "en": "No general federal capital or foreign-exchange controls; inbound foreign investment is instead subject to national-security review by CFIUS (the Committee on Foreign Investment in the United States) on a transaction-by-transaction basis, not a capital-flow quota or approval regime",
+        "detail": "CFIUS由财政部牵头的跨部门委员会，依据《外国投资风险审查现代化法案》（FIRRMA）审查可能导致\n外国方控制美国企业的交易，以及外国人涉及美国不动产的特定交易，判断依据是国家安全影响而非\n外汇/资本管制考量；不覆盖大多数普通证券二级市场买卖。OFAC制裁名单（详见 risks.political_\nrisk_note）是另一套独立机制，限制特定被制裁主体的交易对手资格，也不构成一般性资本管制。\n",
         "sources": [
           {
-            "title": "NYSE Regulation（官网）",
-            "url": "https://www.nyse.com/regulation",
-            "accessed": "2026-08-13"
+            "title": "The Committee on Foreign Investment in the United States (CFIUS)（美国财政部官网）",
+            "url": "https://home.treasury.gov/policy-issues/international/the-committee-on-foreign-investment-in-the-united-states-cfius",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "an interagency committee authorized to review certain transactions involving foreign investment into United States businesses and certain transactions by foreign persons involving real estate in the United States, in order to determine the effect of such transactions on the national security of the United States",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "disclosure_requirements": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "披露制度以持续性定期报告为核心：资产超过1000万美元且股东超过500人的公司须提交年度与定期报告（如10-K/10-Q等），信息通过SEC的EDGAR数据库向公众公开；征集股东投票所用的委托材料（proxy materials）须在征集前向SEC备案",
+        "en": "Disclosure centers on ongoing periodic reporting: companies with more than $10 million in assets and more than 500 holders of record must file annual and other periodic reports, made public via the SEC's EDGAR database; proxy materials used to solicit shareholder votes must be filed with the SEC in advance of solicitation",
+        "detail": "本条概括自 investor.gov（SEC投资者教育官网）对《1934年证券交易法》信息披露条款的说明；具体\n报告语言（英文）、频率（10-K年报/10-Q季报/8-K重大事项即时披露）等细分规则未在本次抓取的\n页面中逐条核实，量化门槛（资产/股东人数）以quote为准。\n",
         "sources": [
           {
-            "title": "NYSE Regulation（官网）",
-            "url": "https://www.nyse.com/regulation",
-            "accessed": "2026-08-13"
+            "title": "Laws That Govern the Securities Industry（Investor.gov，SEC投资者教育官网）",
+            "url": "https://www.investor.gov/introduction-investing/investing-basics/role-sec/laws-govern-securities-industry",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "Companies with more than $10 million in assets whose securities are held by more than 500 owners must file annual and other periodic reports. These reports are available to the public through the SEC's EDGAR database... The Securities Exchange Act also governs the disclosure in materials used to solicit shareholders' votes in annual or special meetings held for the election of directors and the approval of other corporate action. This information, contained in proxy materials, must be filed with the Commission in advance of any solicitation to ensure compliance with the disclosure rules.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "investor_protection": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "证券投资者保护公司（SIPC）为SIPC会员经纪商破产后客户账户中缺失的现金与证券提供有限保护，保护上限50万美元（含现金部分上限25万美元）；SIPC不保护证券价值下跌造成的损失，也不是针对投资建议不当的赔偿机制",
+        "en": "The Securities Investor Protection Corporation (SIPC) provides limited protection for missing cash and securities in a customer's account at a failed SIPC-member brokerage firm, capped at $500,000 (including a $250,000 limit for cash); SIPC does not protect against a decline in the value of securities or against losses from bad investment advice",
+        "detail": "SIPC由《1970年证券投资者保护法》设立，是会员经纪商出资的非营利公司，功能类似银行储蓄的\nFDIC存款保险，但性质不同——只保障经纪商托管环节的资产完整性（经纪商倒闭时找回客户资产），\n不承保市场价格风险。SIPC本身不是政府机构，但由国会立法设立并受SEC监督。\n",
         "sources": [
           {
-            "title": "NYSE Regulation（官网）",
-            "url": "https://www.nyse.com/regulation",
-            "accessed": "2026-08-13"
+            "title": "What SIPC Protects（sipc.org 官网）",
+            "url": "https://www.sipc.org/for-investors/what-sipc-protects",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "SIPC protects against the loss of cash and securities – such as stocks and bonds – held by a customer at a financially-troubled SIPC-member brokerage firm. The limit of SIPC protection is $500,000, which includes a $250,000 limit for cash... SIPC does not protect against the decline in value of your securities.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       }
     },
     "products": {
@@ -683,9 +683,9 @@
       },
       "short_selling": {
         "enum": "restricted_uptick",
-        "zh": "受Regulation SHO监管，含卖空限制熔断机制（SSR）；具体触发阈值（如报升规则的百分比）本次未能在NYSE/SEC/FINRA官网核实到直接原文",
-        "en": "Regulated under Regulation SHO, incl. Short Sale Restriction (SSR) circuit breaker",
-        "detail": "NYSE 官网 Regulation SHO 页面确认该框架存在（含逐日\"Threshold Securities\"清单），但\n页面本身正文很薄，多是下载链接而非说明文字；SEC.gov/FINRA.org 的相关规则页本次多次\n尝试均返回403（见 SOURCES.md 探测记录），未能拿到\"下跌10%触发\"这类具体数值的官方\n原文，按铁律不凭记忆填入具体百分比。\n",
+        "zh": "Regulation SHO第201条（'另类报升规则'/空头卖出熔断）：当某证券当日价格较前一交易日常规交易时段收盘价下跌10%或以上时，触发熔断，该证券自当时起至次一交易日收盘前，禁止以低于或等于当前全国最优买价（NBB）的价格执行或展示卖空订单",
+        "en": "Rule 201 of Regulation SHO (the \"Alternative Uptick Rule\" / short sale circuit breaker): once a covered security's price declines 10% or more intraday from its prior day's regular-trading-hours closing price, a circuit breaker is triggered, and for the remainder of that day and the following day, trading centers must prevent execution or display of a short sale order at a price at or below the current national best bid",
+        "detail": "本条2026年经突破sec.gov反爬后，直接从SEC官方FAQ原文核实到具体10%阈值数字，取代此前\nconfidence: medium的定性描述（详见 PROJECT/OPEN-QUESTIONS.md 第15条的解决记录）。NYSE\n官网Regulation SHO页面本身正文很薄，此前多次尝试sec.gov/finra.org均403，本次改用\nSEC Fair Access规范格式的User-Agent（形如\"机构标识 联系邮箱\"，而非常规浏览器UA字符串）\n成功绕过sec.gov的\"Request Rate Threshold Exceeded\"限流拦截。\n",
         "sources": [
           {
             "title": "Regulation SHO（官网）",
@@ -693,14 +693,14 @@
             "accessed": "2026-08-13"
           },
           {
-            "title": "Trading Information（官网，SSR Circuit Breakers 提及）",
-            "url": "https://www.nyse.com/trade/trading-information",
-            "accessed": "2026-08-13"
+            "title": "Division of Trading and Markets: Responses to Frequently Asked Questions Concerning Rule 201 of Regulation SHO（sec.gov 官方FAQ）",
+            "url": "https://www.sec.gov/rules-regulations/staff-guidance/trading-markets-frequently-asked-questions-7",
+            "accessed": "2026-08-24"
           }
         ],
-        "confidence": "medium",
-        "verified": "2026-08-13",
-        "quote": null
+        "quote": "Among other things, Rule 201 requires that a trading center establish, maintain, and enforce written policies and procedures reasonably designed to prevent the execution or display of a short sale order of a covered security at a price that is less than or equal to the current national best bid if the price of that covered security decreases by 10% or more from the covered security's closing price as of the end of regular trading hours on the prior day.",
+        "confidence": "high",
+        "verified": "2026-08-13"
       },
       "block_trade": {
         "zh": "",
@@ -863,20 +863,20 @@
         "detail": null
       },
       "suspension_resumption": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "交易所可自行裁量、可不经事先通知即暂停证券交易并启动退市程序（如触发反向拆股相关的最低股价规则时'立即暂停交易并启动退市程序'）；具体的合规整改期/申诉听证等复牌路径的完整规则文本本次未逐条核实到",
+        "en": "The Exchange has discretion to suspend trading and commence delisting proceedings, with or without prior notice (e.g., breaching the reverse-split-related minimum price rule triggers 'immediate suspension of trading and delisting proceedings'); the full rules on compliance cure periods or appeal hearings that could lead to resumption were not verified to a citable primary text this session",
+        "detail": "已核实的具体案例：2025年NYSE修订《上市公司手册》802.01C条，若公司未达1美元最低股价标准且\n过去一年内已实施反向拆股（或两年内累计比例达200:1以上反向拆股），则不再享有整改宽限期，\n交易所将立即暂停交易并启动退市程序。这是\"暂停即摘牌\"的特例，不代表所有停牌情形都无缓冲期\n——一般性的持续上市合规整改期（如常见的6/18个月整改期）本次未找到NYSE官网可摘引原文，仅在\n第三方检索摘要中见到\"六个月整改期\"等说法，未采纳。\n",
         "sources": [
           {
-            "title": "Initial Listings（官网）",
-            "url": "https://www.nyse.com/regulation/initial-listings",
-            "accessed": "2026-08-13"
+            "title": "2026 Annual Guidance Letter（NYSE官网PDF）",
+            "url": "https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSE_2026_Annual_Guidance_Letter.pdf",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "if a company fails to meet the $1.00 Price Criteria and has (i) effected a reverse stock split over the prior one-year period or (ii) effected one or more reverse stock splits over the prior two-year period with a cumulative ratio of 200 shares or more to one, then the company would not be eligible for any compliance period and the Exchange would immediately commence suspension of trading and delisting proceedings.",
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "delisting_conditions": {
         "zh": "未达持续上市定量/定性标准触发退市；具体阈值（如最低股价规则）本次未逐条核实",
@@ -895,36 +895,36 @@
         "enum": null
       },
       "delisting_process": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "退市分两种发起路径：交易所主动退市——交易所向SEC提交Form 25后列入'交易所主动退市待处理'名单，直至退市申请对SEC生效；发行人主动退市——发行人通知交易所拟自愿撤回上市后一个工作日列入'发行人主动退市待处理'名单，同样以Form 25对SEC生效为准",
+        "en": "NYSE publishes two lists of issues pending delisting, tracking two distinct initiation paths: Exchange-Initiated Delisting — added upon the Exchange's filing of a Form 25 with the SEC, remaining posted until the delisting application becomes effective with the SEC; Issuer-Initiated Delisting — added one business day after the Exchange is notified of the issuer's intent to voluntarily withdraw its listing by filing a Form 25, remaining posted until that application becomes effective",
+        "detail": "Form 25是发行人或交易所向SEC提交的证券除牌/取消注册申请表；退市生效以SEC受理该表格后的效力发生日为准，而非交易所自身宣布之日。",
         "sources": [
           {
-            "title": "Initial Listings（官网）",
-            "url": "https://www.nyse.com/regulation/initial-listings",
-            "accessed": "2026-08-13"
+            "title": "NYSE Regulation | Delistings（官网）",
+            "url": "https://www.nyse.com/regulation/delistings",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "The NYSE publishes two lists of issues pending delisting from the Exchange: Exchange-Initiated Delisting: An issue is added to this list upon the Exchange's filing of a Form 25 with the SEC and remains posted until the application to delist the issue becomes effective with the SEC (generally 10 days). Issuer-Initiated Delisting: An issue is added to this list one business day after the exchange is notified of the issuer's intent to voluntarily withdraw its listing by filing a Form 25 with the SEC, and remains posted until the issuer's application to delist becomes effective with the SEC.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "delisting_transition_period": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "交易所主动退市：自NYSE提交Form 25起，一般约10个工作日后对SEC生效（即证券注销挂牌的最终生效期）；发行人主动退市则以其自身Form 25对SEC的生效日为准，未见统一的固定天数",
+        "en": "For Exchange-Initiated Delisting, the Form 25 filing generally becomes effective with the SEC approximately 10 days after filing; for Issuer-Initiated Delisting, effectiveness instead tracks the issuer's own Form 25 filing with no single fixed number of days documented",
+        "detail": "本字段与delisting_process共享同一处原文；'退市整理期'在NYSE语境下体现为Form 25从提交到对SEC生效之间的等待期，而非另设一段可继续挂牌交易的独立缓冲期——这点与部分市场'摘牌前设整理期继续交易'的设计不同，未见NYSE官网对此差异有专门说明，留意后续核实。",
         "sources": [
           {
-            "title": "Initial Listings（官网）",
-            "url": "https://www.nyse.com/regulation/initial-listings",
-            "accessed": "2026-08-13"
+            "title": "NYSE Regulation | Delistings（官网）",
+            "url": "https://www.nyse.com/regulation/delistings",
+            "accessed": "2026-08-24"
           }
         ],
+        "quote": "An issue is added to this list upon the Exchange's filing of a Form 25 with the SEC and remains posted until the application to delist the issue becomes effective with the SEC (generally 10 days).",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "post_delisting_venue": {
         "zh": "",
@@ -995,24 +995,41 @@
         "verified": "2026-08-13"
       },
       "ccp_name": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：全国证券清算公司（National Securities Clearing Corporation, NSCC，DTCC子公司）——dtcc.com 内容子页本次多次尝试均403（首页可访问但无实质内容），未能拿到官方原文确认，留空不猜，见 OPEN-QUESTIONS。",
+        "zh": "全国证券清算公司（National Securities Clearing Corporation, NSCC），DTCC旗下子公司；对涉及股票、公司债与市政债、美国存托凭证、交易所买卖基金及单位投资信托的几乎所有经纪商间交易提供中央对手方（CCP）服务",
+        "en": "National Securities Clearing Corporation (NSCC), a subsidiary of DTCC; serves as the CCP for virtually all broker-to-broker trades involving equities, corporate and municipal debt, American depositary receipts, exchange-traded funds, and unit investment trusts",
+        "detail": "此前因dtcc.com内容子页持续403，本字段留空（见 PROJECT/OPEN-QUESTIONS.md 框架性问题第14\n条）。本次改用SEC官方文件（非DTCC自身网站）核实：SEC《清算机构监管情况工作人员报告》\n明确将NSCC定位为CCP、DTC定位为CSD（见csd_name），二者均为DTCC子公司、均在SEC注册为\n清算机构。\n",
+        "sources": [
+          {
+            "title": "Staff Report on the Regulation of Clearing Agencies（美国证监会官方报告，2020年10月）",
+            "url": "https://www.sec.gov/files/regulation-clearing-agencies-100120.pdf",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "SEC.gov | Clearing Agencies（官网，登记清算机构列表）",
+            "url": "https://www.sec.gov/about/divisions-offices/division-trading-markets/clearing-agencies",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "NSCC serves as a CCP for virtually all broker-to-broker trades involving equities, corporate and municipal debt, American depositary receipts, exchange-traded funds, and unit investment trusts.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "csd_name": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "同上，草稿印象为DTCC（Depository Trust Company），未核实，留空。",
+        "zh": "存管信托公司（The Depository Trust Company, DTC），DTCC旗下子公司；为美国证券交易提供中央证券存管（CSD）服务，覆盖股票、认股权证、公司债券及票据、市政债券、政府证券、资产支持证券、存托凭证及货币市场工具等多类合格证券",
+        "en": "The Depository Trust Company (DTC), a subsidiary of DTCC; provides central securities depository (CSD) services for U.S. securities transactions across eligible security types including equities, warrants, rights, corporate debt and notes, municipal bonds, government securities, asset-backed securities, depositary receipts, and money market instruments",
+        "detail": "见ccp_name字段说明，二者同一来源、同一次突破反爬所得。",
+        "sources": [
+          {
+            "title": "Staff Report on the Regulation of Clearing Agencies（美国证监会官方报告，2020年10月）",
+            "url": "https://www.sec.gov/files/regulation-clearing-agencies-100120.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "DTC provides CSD services for U.S. securities transactions in various types of eligible securities including, among others, equities, warrants, rights, corporate debt and notes, municipal bonds, government securities, asset-backed securities, depositary receipts, and money market instruments.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "initial_margin_practice": {
         "zh": "",
@@ -1071,14 +1088,20 @@
         "sources": null
       },
       "default_management": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "NSCC/DTC/FICC共享统一的清算基金压力测试框架、信用风险评级矩阵与流动性风险管理框架，并各自制定了'恢复与清算处置计划'（RWP）；损失分摊规则经过强化协调，缩短了NSCC向退出会员退还清算基金保证金的时限",
+        "en": "NSCC, DTC and FICC share a common Clearing Agency Stress Testing Framework, Credit Risk Rating Matrix and Liquidity Risk Management Framework, and each has adopted a Recovery and Wind-Down Plan (RWP); enhanced loss allocation rules harmonize the loss allocation process across the clearing agencies and shorten the time within which NSCC must return a former member's Clearing Fund deposit",
+        "detail": "NSCC对会员的信用暴露由其\"清算基金\"（Clearing Fund，会员按规则缴纳的保证金池）承接，违约\n处置遵循损失分摊规则；具体的分摊比例、瀑布结构（waterfall）先后顺序等条款细节本次未逐条\n核实，仅确认框架存在与总体设计方向（见quote）。\n",
+        "sources": [
+          {
+            "title": "SEC Staff Report on the Regulation of Clearing Agencies（美国证监会官方报告，2020年10月）",
+            "url": "https://www.sec.gov/files/regulation-clearing-agencies-100120.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "DTC, FICC, and NSCC adopted the Clearing Agency Stress Testing Framework... DTC, FICC, and NSCC adopted recovery and wind-down plans (\"RWPs\") and related rules... Loss Allocation. DTC, FICC, and NSCC adopted enhanced loss allocation rules designed to (i) modify each respective clearing agency's loss allocation processes, (ii) harmonize the loss allocation processes among the clearing agencies, (iii) reduce the time within which NSCC is required to return a former member's Clearing Fund deposit",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "derivatives": {
         "initial_margin_practice": null,
@@ -1090,34 +1113,52 @@
     },
     "participants": {
       "investor_structure": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "美国家庭直接/间接持有股票的比例呈上升趋势：2022年有58.0%的美国家庭持有股票（2019年为52.6%），数据来自美联储消费者金融调查（SCF），每三年更新一次；机构投资者持有的占比未在本次核实到可引用的官方口径，留待补充",
+        "en": "The share of U.S. households holding stock has been rising: 58.0% of U.S. households held stock in 2022 (up from 52.6% in 2019), per Federal Reserve Survey of Consumer Finances (SCF) data updated every three years; the institutional-investor share of total holdings was not verified to a citable official source this session",
+        "detail": "数据源为SEC官方统计页面，基于美联储SCF数据整理，覆盖1989–2022年，每三年更新。该页还区分了\n\"持有股票/债券\"、\"持有储蓄债券/货币市场基金\"等口径，本条只摘取\"持有股票\"这一最常用口径。\n",
+        "sources": [
+          {
+            "title": "U.S. Households' Participation in Capital Markets（sec.gov 官方统计）",
+            "url": "https://www.sec.gov/data-research/statistics-data-visualizations/us-households-participation-capital-markets",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "U.S. households with stock holdings ... Number of U.S. households (in Millions)  67.73 76.14      Percentage of U.S. households  52.6% 58.0%",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "account_opening_requirements": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "FINRA第2090条（了解你的客户，KYC）要求会员在开户及账户维护环节，尽合理注意义务了解并留存每位客户的核心事实，包括：有效服务该账户所需的信息、按特殊指示处理账户所需的信息、了解代理人权限，以及遵守适用法律法规所需的信息",
+        "en": "FINRA Rule 2090 (Know Your Customer) requires that every member use reasonable diligence, in regard to the opening and maintenance of every account, to know and retain the essential facts concerning each customer — those needed to service the account, follow special handling instructions, understand the authority of persons acting on the customer's behalf, and comply with applicable laws and rules",
+        "detail": "该规则2012年7月9日生效（SR-FINRA-2010-039，后经SR-FINRA-2011-016修订）；具体开户所需证件类型、反洗钱身份核实（如《爱国者法案》客户身份识别程序CIP）等操作层面要求本次未逐条核实，留待补充。",
+        "sources": [
+          {
+            "title": "2090. Know Your Customer（finra.org 官方规则手册）",
+            "url": "https://www.finra.org/rules-guidance/rulebooks/finra-rules/2090",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "2090. Know Your Customer ... Every member shall use reasonable diligence, in regard to the opening and maintenance of every account, to know (and retain) the essential facts concerning every customer and concerning the authority of each person acting on behalf of such customer... facts \"essential\" to \"knowing the customer\" are those required to (a) effectively service the customer's account, (b) act in accordance with any special handling instructions for the account, (c) understand the authority of each person acting on behalf of the customer, and (d) comply with applicable laws, regulations, and rules.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "suitability_management": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "经纪商向零售客户提出投资建议时，如涉及《证券交易法》15l-1规则（Regulation Best Interest，简称Reg BI），须遵守'最优利益标准'，FINRA第2111条的一般适当性规则则不适用于受Reg BI约束的建议；第2111条要求经纪商/关联人员基于对客户投资画像（年龄、财务状况、税务状况、投资目标、投资经验、时间horizon、流动性需求、风险承受力等）的合理尽职调查，有合理依据相信推荐的交易或投资策略适合该客户",
+        "en": "For recommendations to retail customers subject to SEA Rule 15l-1 (Regulation Best Interest, \"Reg BI\"), broker-dealers must meet the Best Interest standard, and FINRA's general suitability rule (Rule 2111) does not apply to those Reg BI-covered recommendations; Rule 2111 itself requires a firm or associated person to have a reasonable basis — based on reasonable diligence into the customer's investment profile (age, other investments, financial situation, tax status, investment objectives, experience, time horizon, liquidity needs, risk tolerance) — to believe a recommended transaction or strategy is suitable",
+        "detail": "Reg BI于2020年生效，是SEC层面对经纪商向零售客户提出证券推荐时的行为标准（取代原先较宽松的\n单纯\"适当性\"框架，适用范围与FINRA第2111条部分重叠但不完全等同——两套规则如何分工适用的\n细节本次未逐条核实）。第2111条列出三项具体适当性义务（合理基础适当性/客户特定适当性/量化\n适当性），本条只摘取总体要求，未逐条展开三项子义务。\n",
+        "sources": [
+          {
+            "title": "Suitability（finra.org 官网，Key Topics）",
+            "url": "https://www.finra.org/rules-guidance/key-topics/suitability",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "FINRA Rule 2111 does not apply to recommendations subject to SEA Rule 15l-1 (Regulation Best Interest)... FINRA Rule 2111 requires that a firm or associated person have a reasonable basis to believe a recommended transaction or investment strategy involving a security or securities is suitable for the customer. This is based on the information obtained through reasonable diligence of the firm or associated person to ascertain the customer's investment profile... the customer's investment profile \"includes, but is not limited to, the customer's age, other investments, financial situation and needs, tax status, investment objectives, investment experience, investment time horizon, liquidity needs [and] risk tolerance\"",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "foreign_access_channel": {
         "zh": "",
@@ -1140,36 +1181,54 @@
         "sources": null
       },
       "broker_landscape": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "截至2024年末，FINRA注册的经纪商共3,249家（其中仅注册经纪商2,840家，同时注册经纪商与投资顾问的双重注册机构409家）；另有32,090家机构仅注册为投资顾问（由SEC或州监管机构监管，非FINRA经纪商会员），全行业注册机构合计35,339家",
+        "en": "As of year-end 2024, there were 3,249 FINRA-registered broker-dealer firms (2,840 broker-dealer-only firms plus 409 dually registered broker-dealer/investment-adviser firms); a further 32,090 firms were registered as investment advisers only (overseen by the SEC or state regulators rather than as FINRA broker-dealer members), for 35,339 total registered firms across the securities industry",
+        "detail": "数据来自FINRA《2025年行业概览》报告，按年度统计（2015–2024逐年数据），经纪商可进一步按规模分层（大型≥500名注册代表人/中型151–499名/小型1–150名），具体分层机构数量本次未逐条摘引。",
+        "sources": [
+          {
+            "title": "2025 FINRA Industry Snapshot（finra.org 官方PDF报告）",
+            "url": "https://www.finra.org/sites/default/files/2025-07/2025-Industry-Snapshot.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Broker-Dealer Firms Only ... 2,867   2,840 / Dual Broker-Dealer and Investment Adviser Firms ... 431    409 / All FINRA-Registered Broker-Dealer Firms ... 3,298   3,249 / Investment Adviser Firms Only ... 31,971 32,090 / Total Registered Firms ... 35,269 35,339",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       }
     },
     "infrastructure": {
       "market_data_levels": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "NYSE专有行情产品按颗粒度分层，包括：NYSE Integrated Feed（逐笔整合订单簿与成交的高性能产品，提供更具确定性和透明度的订单簿视图）、NYSE OpenBook Ultra（基于事件的深度行情，含逐笔量、方向与价格信息的所有买卖报价）等，大致对应其他市场'Level 1/Level 2/逐笔深度'的分层概念，但NYSE自身不采用'Level 1/2'这一命名",
+        "en": "NYSE's proprietary data feeds are tiered by granularity, including the NYSE Integrated Feed (a single high-performance product that integrates orders and trades in sequence for a more deterministic, transparent order-book view) and NYSE OpenBook Ultra (an event-based depth-of-book feed with event-by-event volume, action and price information for all bid/offer prices) — broadly analogous to the \"Level 1/Level 2/full depth\" tiering used in other markets, though NYSE itself does not use that naming",
+        "detail": "官网另列有NYSE BBO（最优买卖报价）等更多细分产品，本条只摘取两个代表性产品的官方描述作为分层示例，未逐条列全完整产品矩阵。",
+        "sources": [
+          {
+            "title": "NYSE Market Data: Real-Time（官网）",
+            "url": "https://www.nyse.com/market-data/real-time",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "The NYSE Integrated Feed provides a comprehensive order-by-order view of events in the NYSE equities market. This single high-performance product integrates orders and trades in sequence, providing a more deterministic and transparent view of the order book and related activity... NYSE Openbook Ultra is an event-based depth of book feed that contains aggregate limit-order volume and individual event-by-event volume, action and price information for all bid and offer prices",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "data_latency": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "NYSE的专有行情产品定位为'实时'（real-time），与'参考数据'（reference，覆盖公司行为/合约规格等非实时信息）并列区分，但本次未找到具体延迟数值（如微秒级时间戳精度）的官方原文，故只确认实时/参考的定性区分，未采纳具体延迟数字",
+        "en": "NYSE's proprietary market data products are positioned as \"real-time\" as distinct from its \"reference\" data products (covering non-time-sensitive information such as corporate actions and instrument specifications), but no specific latency figure (e.g., microsecond-level timestamp precision) was found in an official page fetched this session",
+        "detail": "见 market_data_levels 字段中 Integrated Feed / OpenBook Ultra 等具体实时产品描述；SIP（跨市场合并行情）与交易所专有直连行情之间通常存在延迟差异，是美股市场结构讨论中的常见议题，但本次未找到NYSE官网对此差异的具体量化说明。",
+        "sources": [
+          {
+            "title": "NYSE Data Products（官网）",
+            "url": "https://www.nyse.com/data-products",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "The NYSE supports high-performance trading and investment applications with a simple and consistent line of real-time market data feeds across our trading venues, including depth of book, top of book, trades and auction imbalances.",
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "data_pricing_model": {
         "zh": "",
@@ -1182,14 +1241,20 @@
         "sources": null
       },
       "historical_data_availability": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "NYSE以'TAQ'品牌提供历史数据产品，覆盖NYSE各类实时专有数据产品及CTA/UTP两个跨市场合并行情（consolidated tape）的逐笔（tick-by-tick）历史记录，用于事后分析与策略回测",
+        "en": "NYSE's \"TAQ\"-branded historical data products provide tick-by-tick historical records of its real-time proprietary products as well as of the CTA and UTP consolidated tape feeds, supporting post-trade analysis and back-testing",
+        "detail": "历史数据可通过AWS云平台分发（第三方检索摘要提及但本次未逐字核实该表述的官方原文，未纳入quote）；具体数据起始年份、颗粒度等细节本次未展开。",
+        "sources": [
+          {
+            "title": "NYSE Data Products（官网）",
+            "url": "https://www.nyse.com/data-products",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "NYSE's \"TAQ\" branded historical data products support post-trade analysis and back testing strategies with a tick-by-tick records of each of our real-time proprietary products, as well as of the CTA and UTP consolidated feeds.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "trading_system_name": {
         "zh": "NYSE Pillar",
@@ -1208,24 +1273,36 @@
         "quote": null
       },
       "access_methods": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "接入方式包括机房托管（colocation）与SFTI专网两类：NYSE在美国Mahwah（新泽西）与英国Basildon两地自有'流动性中心'（Liquidity Center）机房提供托管服务（非交易前提条件）；通过高性能SFTI Liquidity Center Network（SFTI LCN，机柜直连行情与交易网关）或覆盖面更广、成本更低的SFTI广域网（SFTI WAN）两种网络接入生产环境，端口容量1Gb至40Gb不等",
+        "en": "Access is via colocation and the SFTI network: NYSE operates its own \"Liquidity Center\" data centers in Mahwah, New Jersey (US) and Basildon, Essex (UK) offering colocation (not a prerequisite for trading on NYSE markets); customers reach the production environment either via the high-performance SFTI Liquidity Center Network (SFTI LCN, direct cabinet-to-gateway connectivity) or the more cost-effective SFTI wide-area network (SFTI WAN), at port capacities from 1Gb to 40Gb",
+        "detail": "官网另说明可通过既有SFTI连接、承运商电路或专用SFTI Optic DWDM服务从其他地点接入托管环境，本条未逐条展开这些间接接入选项。",
+        "sources": [
+          {
+            "title": "NYSE Data Center Colocation Services（官网）",
+            "url": "https://www.nyse.com/technology/colo",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "NYSE owned Liquidity Centers in the US (Mahwah, New Jersey) and UK (Basildon, Essex)... Colocation at any of the NYSE Liquidity Centers provides a level playing field for firms wishing to host near NYSE exchanges but is not a requirement for trading on NYSE markets... Customers can choose how to access the production environment inside the Liquidity Center via two distinct, resilient network services at port capacities ranging from 1Gb to 40Gb: The high performance SFTI Liquidity Center Network (SFTI LCN) offers fast, dedicated connectivity from the colo cabinet to market data and trading gateways. The SFTI Network wide area network provides a cost-effective connection to NYSE markets",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "major_outage_history": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "2023年1月24日，NYSE因关键系统故障（主用交易系统与备用交易系统同时运行导致系统误判开盘集合竞价已完成）未能为2,824只NYSE上市证券执行开盘集合竞价、转为直接连续交易，引发价格触发型交易限制、84只证券的市场级交易暂停及数千笔交易被取消；SEC于2026年3月认定NYSE违反Regulation SCI（系统合规与完整性条例）第1001(a)(2)(vii)条及《证券交易法》第19(g)(1)条，NYSE同意支付900万美元民事罚款，此前已向会员机构支付超过577万美元的相关索赔",
+        "en": "On January 24, 2023, NYSE failed to run opening auctions for 2,824 NYSE-listed securities — instead initiating continuous trading for them — due to a critical systems disruption (its backup trading system remained running alongside the primary system after planned maintenance, causing the primary system to incorrectly treat the opening auctions as having occurred); this caused price-triggered trading restrictions, market-wide trading pauses in 84 securities, and thousands of busted trades. In March 2026 the SEC found NYSE violated Rule 1001(a)(2)(vii) of Regulation SCI and Exchange Act Section 19(g)(1), and NYSE agreed to pay a $9,000,000 civil penalty, having already paid over $5.77 million to member organizations for related claims",
+        "detail": "来源为SEC对NYSE的正式行政处罚令（Cease-and-Desist Order，Release No. 104934，2026年3月\n6日），是本次会话通过突破sec.gov反爬直接拿到的一手监管文件，非新闻转述。2015年7月8日\nNYSE因技术故障全天停牌约3.5小时的更早期事件，本次未找到同等权威的官方文件原文，未纳入\n本条。\n",
+        "sources": [
+          {
+            "title": "SEC Administrative Proceeding File No. 3-22608, In the Matter of New York Stock Exchange LLC（sec.gov 官方处罚令PDF）",
+            "url": "https://www.sec.gov/files/litigation/admin/2026/34-104934.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "This matter arises out of a January 24, 2023 event in which NYSE failed to run opening auctions for 2,824 NYSE-listed securities (\"the 2,824 Securities\") due to a critical systems disruption. Instead, NYSE initiated continuous trading for those securities. NYSE's failures caused market-wide impacts, including price-triggered restrictions on trading, market-wide trading pauses in 84 of the securities, and ultimately thousands of busted trades... Respondent shall, within 14 days of the entry of this Order, pay a civil money penalty in the amount of $9,000,000.00",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       }
     },
     "costs": {
@@ -1256,24 +1333,36 @@
         "enum": null
       },
       "clearing_fees": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "NSCC（美股主要中央对手方，见clearing.ccp_name）对非证券融资交易（Non-SFT）的清算活动费为'纳入净额'费每百万处理价值0.4644美元，加'流出净额'费每百万结算价值2.16美元；此外按月计收清算基金维持费，费率为会员现金保证金余额（不含SFT账户及补充流动性保证金部分）月均值的0.35%（年化，按360天折算）",
+        "en": "NSCC (the primary equities CCP; see clearing.ccp_name) charges Non-SFT clearance activity fees of $0.4644 per million of processed value (\"value into the net\") plus $2.16 per million of settling value (\"value out of the net\"); it also assesses a monthly Clearing Fund Maintenance Fee equal to 0.35% of a member's average cash deposit balance in the Clearing Fund (excluding SFT-account and Supplemental Liquidity Deposit balances), annualized on a 360-day basis",
+        "detail": "以上为NSCC《规则与程序》附录A（Addendum A，费用结构）经SR-NSCC-2025-017修订、2026年1月1\n日生效的条款；这是NSCC对结算会员的清算费，不等同于NYSE交易所自身的交易费（见exchange_\nfees）。DTC（存管环节）自身独立收费的具体费率本次未找到可引用原文，留空。\n",
+        "sources": [
+          {
+            "title": "NSCC Rules & Procedures, Addendum A — Fee Structure（SEC规则备案文件SR-NSCC-2025-017附件，sec.gov托管）",
+            "url": "https://www.sec.gov/files/rules/sro/nscc/2025/34-104376-ex5.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Non-SFT – The sum of: (a) a \"value into the net\" fee of $0.4644 per million of processed value (i.e. for CNS and Balance Order netting, the sum of the contract amount and any CNS fail value), plus (b) a \"value out of the net\" fee of $2.16 per million of settling value... Clearing Fund Maintenance Fee A monthly fee calculated, in arrears, as the product of (A) 0.35% and (B) the average of each Member's cash deposit balance in the Clearing Fund",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "regulatory_fees": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：SEC依据《证券交易法》第31条向交易所征收的交易类监管费，最终转嫁至交易环节——未附来源核实具体费率，留空。",
+        "zh": "SEC依据《证券交易法》第31条向交易所征收的交易类监管费，自2026年4月4日起费率为每百万美元交易额20.60美元（此前2026财年初至4月3日暂为每百万美元0美元）；该费用逐年由SEC按预算需要调整并转嫁给交易环节；证券期货交易的对应评估费维持每笔round-turn交易0.0042美元不变",
+        "en": "The Section 31 transaction fee that the SEC assesses on national securities exchanges is set at $20.60 per million dollars of covered sales effective April 4, 2026 (a rate of $0.00 per million applied for charge dates from the start of FY2026 through April 3, 2026); the rate is readjusted annually by the SEC to match its appropriation needs and is passed through to the trading process; the assessment on security futures transactions remains unchanged at $0.0042 per round-turn transaction",
+        "detail": "Section 31费由SEC定期发布\"Fee Rate Advisory\"调整，本条数字为2026财年（FY2026）4月起\n生效的最新费率，具体历史费率变化（如2025财年费率）本次未逐年核实，只取当前生效值。\n",
+        "sources": [
+          {
+            "title": "Section 31 Transaction Fee Rate Advisory for Fiscal Year 2026（sec.gov 官方费率公告）",
+            "url": "https://www.sec.gov/rules-regulations/fee-rate-advisories/2026-2",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "Feb. 27, 2026 — The Securities and Exchange Commission today announced that starting on April 4, 2026, the fee rates applicable to most securities transactions will be set at $20.60 per million dollars. Consequently, each SRO will continue to pay the Commission a rate of $0.00 per million for covered sales occurring on charge dates through April 3, 2026, and a rate of $20.60 per million for covered sales occurring on charge dates on or after April 4, 2026... The assessment on security futures transactions will remain unchanged at $0.0042 for each round turn transaction.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "stamp_duty": {
         "zh": "",
@@ -1286,14 +1375,20 @@
         "sources": null
       },
       "financial_transaction_tax": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "联邦层面没有对证券买卖普遍征收的金融交易税；历史上1914–1966年曾对股票发行与转让征收印花性质的转让税（1966年税率为发行0.1%、转让0.04%），该税种已废止。目前联邦仍保留一项与SEC经费挂钩的证券发行/转让小额收费（费率约发行0.028%、转让0.0033%），性质更接近监管经费而非普遍性交易税，与本文件costs.regulatory_fees所述SEC第31条交易费属同一类别的不同计费环节",
+        "en": "There is no broad-based federal financial transaction tax on securities trading; a federal stock transfer tax existed from 1914 to 1966 (rates of 0.1% on issuance and 0.04% on transfer by the time of repeal), since abolished. A small residual federal charge on share issuance/transfer tied to funding SEC operations still exists (roughly 0.028% on issuance, 0.0033% on transfer) — this is more akin to a regulatory funding fee than a general transaction tax, and sits in the same category as the Section 31 fee described under costs.regulatory_fees",
+        "detail": "来源是国会研究服务处（CRS）2004年报告《Transaction Tax: General Overview》，经非营利机构\neverycrsreport.com托管（第三方镜像站，非congress.gov官方页面本身——本次尝试直接抓取\ncongress.gov两次均返回403，退而求其次用该镜像，按CLAUDE.md第三方来源上限medium处理）。\n报告本身发布于2004年，\"目前\"（at the present time）指报告写作时点，具体费率是否有后续\n变化未在本次逐条核实，纽约州层面历史上曾有独立的股票转让税（现已100%返还实质失效）本次\n也未纳入，留待后续补充。\n",
+        "sources": [
+          {
+            "title": "Transaction Tax: General Overview（CRS Report RL32266，everycrsreport.com 镜像托管）",
+            "url": "https://www.everycrsreport.com/reports/RL32266.html",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "one of the historical examples of a transaction tax was a stock transfer tax (STT) effective from 1914 to 1966. In 1966 the rates were 0.1% at security issuance and 0.04% on transfer. At the present time the federal government still levies a small tax on share issuance and transfers at the rates of 0.028% and 0.0033%, respectively, for the primary purpose of financing the activities of the Securities and Exchange Commission (SEC).",
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "capital_gains_tax": {
         "zh": "",
@@ -1316,14 +1411,20 @@
         "sources": null
       },
       "implicit_costs_note": {
-        "zh": "",
+        "zh": "隐性成本（买卖价差、冲击成本）未在本次会话找到可摘引的官方原文——曾尝试抓取NYSE官网一份'市场质量信息图'PDF，但该链接实际返回的是网页壳层而非PDF内容（属已知的'HTTP 200但非目标内容'情形），未采纳第三方检索摘要中关于价差数值的说法；exchange_fees字段中的做市商-吃单者费率结构（maker-taker）与隐性成本存在间接关联（返佣设计本身是为激励报价方收窄价差），但不能替代对实际价差/冲击成本的直接测度",
+        "en": "No citable primary text on implicit costs (bid-ask spread, market impact) was found this session — an attempt to fetch a NYSE \"Market Quality\" infographic PDF instead resolved to an HTML page shell (a known \"HTTP 200 but not the target content\" pattern), so third-party search-summary claims about specific spread figures were not adopted; the maker-taker rebate structure described under exchange_fees is indirectly related (rebates are designed to incentivize quoting that narrows spreads) but is not a substitute for a direct measure of realized spread or market impact",
+        "detail": "留作后续补全线索：可尝试NYSE Data Insights栏目（如'credit-to-those-in-the-arena-enhanced-quoted-spread'一类文章）或SEC市场结构统计页面，本次未展开抓取核实。",
+        "sources": [
+          {
+            "title": "NYSE Market Quality infographic（官网PDF直链，本次实测已失效，返回HTML壳层而非PDF内容，见detail）",
+            "url": "https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSE_Market_Quality_infographic.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
         "confidence": "low",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "risks": {
@@ -1338,34 +1439,62 @@
         "sources": null
       },
       "political_risk_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "对特定外国（尤其中国大陆/香港）发行人而言，存在因《外国公司问责法》（HFCAA）触发的强制退市/停止交易政治风险：若SEC认定某发行人连续三年由PCAOB无法完成检查的会计师事务所出具审计报告，SEC将禁止其证券在美国全国性证券交易所或场外市场交易；此外OFAC经济制裁名单也会限制特定被制裁主体的证券交易资格，这两类风险独立于交易所自身监管框架，源自更广泛的美国对外政策与国家安全立法",
+        "en": "For certain foreign issuers (particularly those based in mainland China/Hong Kong), there is a political/legislative delisting risk under the Holding Foreign Companies Accountable Act (HFCAA): if the SEC determines an issuer has filed audit reports from a PCAOB-uninspectable accounting firm for three consecutive years, the SEC must prohibit the securities from trading on a national securities exchange or OTC market in the U.S.; separately, OFAC sanctions lists restrict trading eligibility for specific sanctioned parties — both risks arise from broader U.S. foreign-policy and national-security legislation independent of the exchange's own regulatory framework",
+        "detail": "HFCAA于2020年12月18日签署成法，起因是PCAOB此前无法检查中国大陆/香港注册会计师事务所出具的\n审计底稿；2021年12月2日SEC通过最终实施细则。触发交易禁令需要连续三年被认定为\"Commission-\nIdentified Issuer\"，最早可能的禁令生效时点本次未逐条核实标注具体年份。该风险对本文件\nregulation.core_laws所述SEC监管框架构成延伸，但触发机制来自HFCAA这部专门立法而非交易所\n自身规则。\n",
+        "sources": [
+          {
+            "title": "SEC Adopts Amendments to Finalize Rules Relating to the Holding Foreign Companies Accountable Act（sec.gov 官方新闻稿 2021-250）",
+            "url": "https://www.sec.gov/newsroom/press-releases/2021-250",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "The Securities and Exchange Commission today adopted amendments to finalize rules implementing the submission and disclosure requirements in the Holding Foreign Companies Accountable Act (HFCAA). The rules apply to registrants the SEC identifies as having filed an annual report with an audit report issued by a registered public accounting firm that is located in a foreign jurisdiction and that the Public Company Accounting Oversight Board (PCAOB) is unable to inspect or investigate (Commission-Identified Issuers).",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "liquidity_risk_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "美股整体呈现高度分散化的多元交易场所格局，非展示型订单（non-displayed order types）约占交易所内成交量的11%–14%；学术研究发现暗池/非展示交易占比存在一个'临界点'（有研究估计约46.7%），超过该临界点后继续分散化交易场所可能损害价格发现与整体市场质量，但截至相关SEC讨论撰写时尚未观察到已越过该临界点的证据",
+        "en": "U.S. equity trading is highly fragmented across a growing web of venues; non-displayed order types account for roughly 11%–14% of exchange-based volume. Academic research has identified a potential \"tipping point\" for dark/non-displayed trading (one study estimated around 46.7%) beyond which further fragmentation could impair price discovery and overall market quality, though the SEC noted that available evidence at the time of writing did not show that threshold had yet been crossed",
+        "detail": "来源为SEC官方演讲稿《U.S. Equity Market Structure: Making Our Markets Work Better for\nInvestors》，是对市场结构性流动性风险（而非NYSE单一机构流动性）的整体性讨论，反映的是\n美股市场整体格局而非NYSE特有情况；具体发表时间与演讲人本次未逐条核实标注。\n",
+        "sources": [
+          {
+            "title": "U.S. Equity Market Structure: Making Our Markets Work Better for Investors（sec.gov 官方演讲稿）",
+            "url": "https://www.sec.gov/newsroom/speeches-statements/us-equity-market-structure",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "non-displayed order types are the most commonly used order types on exchanges, and these order types may account for as much as 11% to 14% of exchange-based volume... This study found that 46.7% could be the tipping point for all stocks... while there may come a point when dark venues capture too much order flow, the evidence currently available to us suggests that we have not yet crossed that threshold.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "regulatory_change_risk_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "美国证券监管规则处于持续演进状态，且改动经常直接影响交易/结算机制本身：例如2024年5月28日起证券结算周期从T+2缩短至T+1（见clearing.settlement_cycle）；SEC对交易所的Section 31监管费费率逐年（有时逐半年）重新核定（见costs.regulatory_fees）；针对特定外国发行人的HFCAA强制退市立法2020年通过、2021年实施细则落地（见political_risk_note）。交易所自身规则的任何新增/修订也须按《证券交易法》第19(b)条向SEC备案并经批准（见regulation.core_laws），意味着规则变更节奏部分取决于SEC自身的审批流程而非交易所单方面决定",
+        "en": "U.S. securities regulation is in continuous flux, with changes that often directly reshape trading/settlement mechanics: e.g., the settlement cycle shortened from T+2 to T+1 effective May 28, 2024 (see clearing.settlement_cycle); the SEC's Section 31 fee rate on exchanges is re-set annually, sometimes semi-annually (see costs.regulatory_fees); the HFCAA's forced-delisting regime for certain foreign issuers was enacted in 2020 with implementing rules finalized in 2021 (see political_risk_note). Any new or amended exchange rule must itself be filed with and approved by the SEC under Exchange Act Section 19(b) (see regulation.core_laws), meaning the pace of rule change partly depends on the SEC's own approval process rather than the exchange acting unilaterally",
+        "detail": "本条为综合本文件其他章节已核实事实的归纳性风险陈述，三条来源分别对应T+1结算周期改革、Section 31费率年度调整、HFCAA立法节点三个具体例证，quote留空（避免拼接多份文档制造看似统一实则跨文档的引文，见 SKILL.md 第4步第6条）；具体量化的'年度规则变更数量'等统计本次未核实。",
+        "sources": [
+          {
+            "title": "One-Day Settlement Cycle (T+1) To Begin May 28, 2024（Cahill Gordon & Reindel LLP 客户简报）",
+            "url": "https://www.cahill.com/publications/client-alerts/2024-04-29-one-day-settlement-cycle-t-1-to-begin-may-28-2024",
+            "accessed": "2026-08-13"
+          },
+          {
+            "title": "Section 31 Transaction Fee Rate Advisory for Fiscal Year 2026（sec.gov 官方费率公告）",
+            "url": "https://www.sec.gov/rules-regulations/fee-rate-advisories/2026-2",
+            "accessed": "2026-08-24"
+          },
+          {
+            "title": "SEC Adopts Amendments to Finalize Rules Relating to the Holding Foreign Companies Accountable Act（sec.gov 官方新闻稿 2021-250）",
+            "url": "https://www.sec.gov/newsroom/press-releases/2021-250",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "enforcement_note": {
         "zh": "NYSE Regulation下设监察调查组（Surveillance and Investigations）与执法组（Enforcement），后者可通过和解（AWC）或诉讼程序对会员及其关联人员进行纪律处分，重大案件可能移交FINRA听证办公室审理",
