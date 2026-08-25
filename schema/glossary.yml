@@ -353,11 +353,11 @@ terms:
     natives: {en: "Remedial Period"}
     note: 港交所强制退市前给予发行人补救问题并恢复交易的窗口期——分「订明补救期限」（prescribed remedial period，自停牌之日起18个月，Rule 6.01A(1)）与「特定补救期限」（specific remedial period，交易所按个案在6.10条下酌情订立、可短于18个月）两类，期满未补救即可能被除牌；与本项目既有的 delisting-transition-period（若已收录，指退市生效后的整理期）是不同阶段——本字段发生在"停牌后、退市决定作出前"，不要混淆
 
-  - id: ccp-default-waterfall
-    zh: 违约损失分摊阶梯
+  - id: default-waterfall
+    zh: 违约处置瀑布（亦见"违约损失分摊阶梯"）
     en: Default Waterfall
     natives: {en: "Default Waterfall"}
-    note: CCP处置结算参与者违约损失时依次动用各类资源的先后顺序——典型排序为：违约方自身保证金/结算基金出资在先，其次是CCP自有资本注资（Skin in the Game），最后才动用非违约参与者按比例分摊的结算基金出资；港交所HKCC按其规则第706条的8步排序是本项目首次完整记录的样本（见 hk-hkex.yml clearing.default_management），日后遇到其他交易所披露类似"default waterfall"文件时统一用此译法比较各所排序细节异同
+    note: CCP处置结算参与者违约损失时依次动用各类资源的先后顺序——典型排序为：违约方自身保证金/结算基金出资在先，其次是CCP自有资本注资（Skin in the Game），最后才动用非违约参与者按比例分摊的结算基金出资。本条系 v1.1 Batch 1 并行补全时被两个子代理各自独立造词后合并：hk-hkex 子代理按 HKCC 规则第706条的8步排序造了"违约损失分摊阶梯"（id曾为ccp-default-waterfall，已并入本条），uk-lse 子代理按 LCH Ltd 官方瀑布图造了"违约处置瀑布"（id default-waterfall，本条保留），彼此不知情，合并时才发现重名概念的两种译法。两家 `data/exchanges/*.yml` 的 `zh` 字段正文均已写入各自当时的措辞（未回改，因内容已过 quote/confidence 抽检，不作事后编辑），故当前两种中文表述在库内并存；**日后新增交易所填写该概念时统一使用"违约处置瀑布"**，ca-tsx（CDS Participant Rules）、in-nse（Core SGF & Default Waterfall）此前已用英文原词但未核实细节、也未统一中文译法，可参照此译法补齐
 
   - id: delisting-transition-period
     zh: 退市整理期
