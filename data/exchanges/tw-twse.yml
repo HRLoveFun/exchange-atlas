@@ -22,6 +22,7 @@ overview:
 
   founded_year:
     zh: "1961（民国50年10月23日成立；1962年〔民国51年〕2月9日正式开业）"
+    en: "1961 (established 23 Oct 1961, ROC year 50; formally opened for business 9 Feb 1962, ROC year 51)"
     detail: |
       官方历史沿革页以民国纪年逐年列出大事记，「50年10.23 台湾证券交易所成立」
       「51年02.09 台湾证券交易所正式开业」为该页最早两条记录。
@@ -34,6 +35,7 @@ overview:
 
   history:
     zh: "1961年成立、1962年开业；1988年上市股票全面纳入电脑辅助撮合，1993年全面电脑自动竞价；2009年实施T+2款券划拨交割(DVP)；2015年涨跌幅由7%放宽至10%；2021年实施股票造市者制度"
+    en: "Established 1961, opened for business 1962; all listed stocks moved to computer-assisted matching in 1988 and full computerized auction trading in 1993; T+2 book-entry delivery-versus-payment (DVP) settlement implemented in 2009; daily price limit widened from 7% to 10% in 2015; Stock Market Maker Scheme implemented in 2021"
     detail: |
       历史沿革页以年表形式记录逾60项制度里程碑，此处仅摘录与本档案其他字段直接相关的关键节点；
       完整年表见来源页。
@@ -47,6 +49,7 @@ overview:
   organization_form:
     enum: demutualized_unlisted
     zh: "公司制（股份有限公司，未上市）"
+    en: "Corporate/demutualized form (a company limited by shares; itself unlisted)"
     detail: |
       《证券交易法》第94条规定证券交易所之组织分「会员制」及「公司制」两种；台湾证券交易所
       法定名称为「臺灣證券交易所股份有限公司」，属公司制交易所，由45家公民营金融与产业机构
@@ -62,6 +65,7 @@ overview:
   self_listed:
     enum: "no"
     zh: "否"
+    en: "No"
     detail: "台湾证券交易所股份有限公司本身未在自己经营的集中交易市场挂牌，未找到官网逐条明述此点的独立页面，依公司概况与股东结构（官民合资法人持股，非公开发行上市公司）推断。"
     sources:
       - title: 首长欢迎词（TWSE 公司概况页）
@@ -185,6 +189,7 @@ regulation:
 
   foreign_ownership_limit:
     zh: "外资投资台湾上市证券整体已无总额度限制，境外外国机构投资人(FINI)登记后即可投资；个别产业（如电信、航运等）依产业主管法规仍有外资持股比例上限，未在本次会话逐一核实"
+    en: "No aggregate ceiling applies to foreign investment in TWSE-listed securities overall; a registered Foreign Institutional Investor (FINI) may invest once registration is complete. Individual sectors (e.g. telecommunications, shipping) remain subject to foreign-shareholding caps under their own industry-specific regulations, which were not individually verified this session"
     detail: "本次仅确认 FINI/FIDI 登记表格存在于 TWSE 官网，「整体无总额度限制」的具体表述来自第三方检索摘要，未逐条核对金管会原文，confidence 相应降级。"
     sources:
       - title: 侨外投资专区（登记表格列表，含 FINI/FIDI 各式申请表）
@@ -198,8 +203,20 @@ regulation:
     detail: "未核实新台币资本管制、外资结购汇具体作业规定的官方原文，留空，见 OPEN-QUESTIONS。"
 
   disclosure_requirements:
-    zh: ""
-    confidence: low
+    zh: "上市公司须将重大讯息内容依规定期限输入本公司指定之网际网路资讯申报系统（即「公开资讯观测站」）：一般情事应于事实发生日起次一营业日交易时间开始前二小时内输入，若先发布新闻稿则应同时输入；发现媒体报导相关情事者至迟不得逾发现后二小时；申报内容或说明应同时以中文及英文方式输入"
+    en: "Listed companies must input material information into TWSE's designated internet-based reporting system (the Market Observation Post System) within prescribed deadlines: for most triggering events, by two hours before the start of trading on the business day following the event (or simultaneously if a press release is issued first); within two hours of discovering related media coverage; filings must be submitted in both Chinese and English simultaneously"
+    detail: |
+      来源为《台湾证券交易所股份有限公司对有价证券上市公司重大讯息之查证暨公开处理程序》
+      第6条，本文件此前抓取清单未含该法规，本次新增登记（见 SOURCES.md `tw-twse` 一节）。
+      该处理程序同时也是 continuing_obligations 字段所引用来源之一，两字段视角不同：本字段
+      聚焦揭露的渠道/时限/语言要求本身，continuing_obligations 聚焦上市公司须履行哪些持续性
+      申报义务（含本机制与定期财报申报）。
+    quote: "上市公司應依下列各款所定申報期限，將重大訊息內容或說明輸入本公司指定之網際網路資訊申報系統：一、有第四條第一項各款規定情事者，除該條項第四十款應於本公司公告暫停或恢復其有價證券交易後一小時內輸入外，餘各款規定情事應於事實發生日起次一營業日交易時間開始二小時前輸入。但於其前發布新聞稿者，則應同時輸入。二、發現大眾傳播媒體報導第四條第一項各款情事……應立即輸入重大訊息說明，至遲不得逾發現後二小時。……申報內容或說明應同時以中文及英文方式輸入本公司指定之網際網路資訊申報系統。"
+    sources:
+      - title: 台湾证券交易所股份有限公司对有价证券上市公司重大讯息之查证暨公开处理程序 第6条
+        url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007111
+        accessed: 2026-08-24
+    confidence: high
 
   investor_protection:
     zh: ""
@@ -266,6 +283,7 @@ market_structure:
   trading_sessions:
     pre_market:
       zh: "开盘前委托时段8:30-9:00，仅接受限价当日有效(限价ROD)委托并试算参考行情，9:00以集合竞价开盘（试算成交价于收盘前1分钟波动超逾3.5%的个股延后2分钟至9:02开盘）"
+      en: "Pre-open order-entry window 08:30-09:00; only Limit-ROD orders accepted, with trial reference prices calculated; opens at 09:00 via call auction (a stock whose trial price moves more than 3.5% in the final minute is delayed 2 minutes, opening at 09:02)"
       quote: "開盤 (08:30~09:00) 集合競價 僅接受限價當日有效(ROD)委託 使用市價單、IOC及FOK委託將會被退單"
     continuous_am:
       zh: "9:00-13:25全程逐笔交易（无午间休市），价格优先、时间优先撮合；13:25起转为收盘集合竞价"
@@ -282,11 +300,13 @@ market_structure:
     continuous_pm: ""
     after_market:
       zh: "盘后定价交易14:00-14:30委托、14:30以当日上午收盘价集合竞价撮合；另有盘后零股交易13:40-14:30委托、14:30集合竞价一次撮合"
+      en: "Post-market Fixed-price Trading: orders accepted 14:00-14:30, matched at 14:30 by call auction at the same day's closing price; a separate Post-market Odd-lot Trading session accepts orders 13:40-14:30, matched once by call auction at 14:30"
       quote: "交易時間：委託申報時間自14:00至14:30，當日14:30採電腦自動交易撮合成交。"
     night_session: "无"
 
   holidays_note:
     zh: "周一至周五交易，休市日与银行业通行假日相同（国定假日等）；遇台北市因天然灾害（如台风）宣布公教机关停止上班时，集中市场比照休市"
+    en: "Trading Monday to Friday; market holidays follow the general banking-industry holiday calendar (national holidays etc.); when Taipei City announces suspension of government/school offices due to a natural disaster (e.g. typhoon), the centralized market is closed accordingly"
     quote: "本公司市場之休假日與銀行業通行假日相同，但本公司認為必要時或應證券商業同業公會之建議，得報請主管機關變更之。"
     sources:
       - title: 台湾证券交易所股份有限公司营业细则 第4条
@@ -354,6 +374,7 @@ market_structure:
 
   board_lot_size:
     zh: "1,000股（份）为一交易单位；转换公司债、中央登录公债、公司债、附认股权公司债以面额10万元为一交易单位；外国股票第二上市及境外ETF不限1,000股（份）"
+    en: "1,000 shares (units) per board lot; convertible bonds, central government bonds registered book-entry, corporate bonds and bonds with warrants use a NT$100,000 face-value board lot; secondary-listed foreign stocks and offshore ETFs are not restricted to the 1,000-share lot"
     quote: "股票、外國股票第一上市、新股權利證書、股款繳納憑證、債券換股權利證書、附認股權特別股 1,000股"
     sources:
       - title: 集中市场交易制度介绍
@@ -362,6 +383,7 @@ market_structure:
 
   odd_lot_handling:
     zh: "盘中零股交易（9:00-13:30委托，9:10起第一次撮合，其后每5秒以集合竞价撮合成交）与盘后零股交易（13:40-14:30委托，14:30集合竞价一次撮合）两种机制并行，交易单位1股至999股"
+    en: "Two parallel mechanisms: Intraday Odd-lot Trading (orders 09:00-13:30, first match at 09:10, then matched by call auction every 5 seconds) and Post-market Odd-lot Trading (orders 13:40-14:30, matched once by call auction at 14:30); odd-lot size ranges from 1 to 999 shares"
     quote: "盤中零股交易自109年10月26日起實施。買賣申報時間：上午9時至下午1時30分...上午9:10起第一次撮合，進而每5秒鐘以集合競價撮合。"
     sources:
       - title: 集中市场交易制度介绍
@@ -372,6 +394,7 @@ market_structure:
     type:
       enum: percentage_band
       zh: "百分比涨跌幅"
+      en: "Percentage-based price band"
     main_board:
       zh: "±10%，以当市开盘竞价基准（通常为前一交易日收盘价）为计算基准，非以前收盘价直接乘幅度；2015年6月1日起由±7%放宽至±10%"
       en: "±10% of the auction reference price at market opening of the current trading session"
@@ -432,6 +455,7 @@ market_structure:
 
   trading_halt_mechanism:
     zh: "讯息面暂停/恢复交易机制（2016年1月15日起实施）：上市公司预计于交易时间内公开重大事项应主动申请暂停交易，相关讯息充分揭露后再申请恢复；另有台湾存托凭证(TDR)因所表彰证券于原上市市场公告暂停交易而联动暂停之机制"
+    en: "Information-driven halt/resumption mechanism (effective since 15 Jan 2016): a listed company that expects to disclose a material matter during trading hours must proactively apply to halt trading, then apply for resumption once the information has been adequately disclosed; Taiwan Depositary Receipts (TDRs) are also halted in tandem when the underlying security is suspended on its original home market"
     quote: "自105年1月15日起實施，規範上市公司預計於營業日交易時間內(下午5時前)公開或召開董事會決議特定重大事項時，應主動向證交所申請暫停交易，並於相關訊息充分公開或說明後，再行申請恢復交易。"
     sources:
       - title: 集中市场交易制度介绍
@@ -441,6 +465,7 @@ market_structure:
   intraday_reversal:
     enum: mixed
     zh: "一般交割周期为T+2，但现股当日冲销交易（先买后卖自2014年1月6日、先卖后买自2014年6月30日起开放）允许同一帐户同日买卖同种类同数量股票以差额净沖，不必等待T+2交割完成；沖销标的以公告之信用交易/当沖标的清单为限，非全市场无差别适用"
+    en: "Regular settlement is T+2, but same-day (day-trading) offsetting transactions in cash stock — buy-then-sell opened 6 Jan 2014, sell-then-buy opened 30 Jun 2014 — allow the same account to buy and sell the same class and quantity of shares on the same day and net the difference, without waiting for T+2 settlement; eligible securities are limited to the published margin-trading/day-trading-eligible list, not applied indiscriminately market-wide"
     detail: "官方称此机制为「当日沖销交易」（非「当日回转交易」），与本项目其余交易所惯用的T+0/T+1标签体系概念相通但正式名称不同，故 zh 字段保留 TWSE 官方用语。"
     quote: "自103年1月6日起投資人得以現股從事先買後賣之當日沖銷交易，並自103年6月30日開放先賣後買當日沖銷交易。"
     sources:
@@ -466,6 +491,7 @@ market_structure:
 
   block_trade:
     zh: "鉅额交易：配对交易(08:00-08:30及09:00-17:00)与逐笔交易(09:00-17:00)两种方式；单一证券达500交易单位以上或金额达1,500万元以上，股票组合5种以上且总金额达1,500万元以上；采T+2交割"
+    en: "Block Trading: two methods — pre-negotiated matched trading (08:00-08:30 and 09:00-17:00) and continuous trading (09:00-17:00); minimum threshold is 500 trading units or NT$15 million for a single security, or 5+ securities in a basket totalling NT$15 million or more; settled T+2"
     quote: "鉅額交易最低數額標準 單一證券：數量達500交易單位以上或金額達1,500萬元以上。股票組合：5種股票以上且總金額達1,500萬元以上。"
     sources:
       - title: 集中市场交易制度介绍
@@ -475,6 +501,12 @@ market_structure:
 
   dark_pool:
     zh: "无西方意义上的暗池；鉅额交易制度承担大宗订单的类似功能"
+    en: "No dark pool in the Western sense; the Block Trading system serves an analogous function for large orders"
+    detail: "本条目原缺 sources，依 schema volatility: moderate 规则须补——引用与 block_trade 字段相同的官方交易制度介绍页，本次一并补上，未改动 zh 原有判断。"
+    sources:
+      - title: 集中市场交易制度介绍
+        url: https://www.twse.com.tw/zh/products/system/trading.html
+        accessed: 2026-08-16
     confidence: medium
 
   market_maker_scheme:
@@ -489,6 +521,7 @@ market_structure:
 
   connect_schemes:
     zh: "无类似沪港通/深港通的股票互联互通机制；外资统一透过境外外国机构投资人(FINI)与境外华侨及外国自然人(FIDI)登记制参与，2003年起已取消QFII式总额度限制"
+    en: "No stock-connect scheme analogous to Shanghai-Hong Kong Stock Connect or Shenzhen-Hong Kong Stock Connect; foreign investors participate uniformly through the Foreign Institutional Investor (FINI) and Overseas Chinese/Foreign Natural Person (FIDI) registration regimes, with the QFII-style aggregate quota abolished since 2003"
     detail: "「已取消总额度限制」的具体表述来自第三方检索摘要，本次未逐条核对金管会/证期局原文，confidence 相应降级。"
     sources:
       - title: 侨外投资专区（FINI/FIDI 登记表格）
@@ -517,6 +550,7 @@ listing:
   review_system:
     enum: disclosure_with_discretion
     zh: "交易所实质审查制：TWSE 依《有价证券上市审查准则》对设立年限、实收资本额、获利能力、股权分散等量化门槛进行审查，审定后与发行公司签订「有价证券上市契约」，报请金管会备查（非金管会逐案核准）；本国公司申请上市前一般须先在兴柜市场挂牌满6个月"
+    en: "Substantive review by the exchange itself: TWSE reviews applicants against quantitative thresholds — years in operation, paid-in capital, profitability, and shareholding dispersion — under the Listing Review Standards; once approved it enters into a listing agreement with the issuer and reports it to the FSC for the record (not case-by-case FSC approval); domestic companies generally must first be registered on the Emerging Stock (Rotan) market for at least 6 months before applying to list"
     detail: |
       交易所自身实质审查+主管机关事后备查（非逐案核准），属 ADR-023 重新划分后的
       `disclosure_with_discretion` 类——"备查"不构成监管机构独立审批，与 dual_track
@@ -532,11 +566,25 @@ listing:
     confidence: high
 
   listing_process_duration:
-    zh: ""
-    confidence: low
+    zh: "官方页面列出七个步骤：申请公司提出申请→本公司承办人员查核→有价证券上市审议委员会及董事会审查→通过后转报金融监督管理委员会→委托证券承销商办理承销手续→向本公司洽定上市日期→正式挂牌买卖；但未见官方公开披露的标准总耗时（如「平均X个月」）数字。已确认的具体期限数据点：依《审查有价证券上市作业程序》第7-2条，免提报审议委员会审议之案件（如转板案件）经理部门应于收件后一个月内决议，因申请公司请求得延长一个月；另中央目的事业主管机关之评估意见函自发文之日起一年内有效，须于此期间内提出上市申请，逾期须重新申请"
+    en: "TWSE's official flow lists seven steps: application filed with TWSE, staff review, Listing Review Committee and Board review, referral to the Financial Supervisory Commission, underwriting by the lead securities underwriter, agreeing the listing date with TWSE, and formal listing — but no official aggregate duration figure (e.g. an average number of months) was found. Two concrete duration data points are confirmed: under Article 7-2 of the Listing Review Operating Procedures, the Handling Department must decide on cases exempted from Committee review (e.g. board-transfer applications) within one month of receipt, extendable by one further month at the applicant's request; separately, a central competent authority's evaluation opinion remains valid for one year from its issue date, within which the listing application must be filed or a fresh application is required"
+    detail: |
+      「总天数」这一综合数字本次未在 TWSE 官方来源中找到，本条目呈现的是官方原文确认的
+      流程步骤与两个局部时限数据点，而非端到端标准工期。若日后找到官方披露的整体平均耗时，
+      应回来补上并调高该部分的 confidence。
+    quote: "申請公司需向臺灣證券交易所提出申請 臺灣證券交易所承辦人員查核 臺灣證券交易所有價證券上市審議委員會及董事會審查 通過後轉報金融監督管理委員會 委託證券承銷商辦理承銷手續 向臺灣證券交易所洽定上市日期 正式掛牌買賣／第 7-2 條 依前條免提報審議委員會審議案件於收件後一個月內由經理部門決議，但遇有特殊情形者……因申請公司之請求而延長之審查期限以一個月為限。／申請公司應於前項中央目的事業主管機關之評估意見函發文之日起一年內提出上市之申請，逾期則應向本公司重新申請之。"
+    sources:
+      - title: 国内公司申请流程（TWSE 官网）
+        url: https://www.twse.com.tw/zh/listed/method/flow.html
+        accessed: 2026-08-24
+      - title: 审查有价证券上市作业程序 第3、7-2条
+        url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007327
+        accessed: 2026-08-16
+    confidence: high
 
   transfer_between_boards:
     zh: "本国发行公司申请一般板/创新板上市前，除已在证券柜台买卖中心(TPEx)上柜或为公营事业外，一般须先申请股票登录兴柜柜台买卖满6个月，本公司方受理上市申请（属上市公司子公司等情形可豁免或缩短）"
+    en: "Before applying to list on the Main Board or the Taiwan Innovation Board, a domestic issuer must generally first have its shares registered and traded on the Emerging Stock (Rotan) market for at least 6 months before TWSE will accept the listing application, unless it is already OTC-listed on the Taipei Exchange (TPEx) or is a state-run enterprise (exemptions or shortened periods apply in cases such as being a subsidiary of an already-listed company)"
     quote: "均應先申請其股票登錄為興櫃股票櫃檯買賣屆滿六個月，本公司始受理其申請上市案。"
     sources:
       - title: 有价证券上市审查准则 第2-1条
@@ -545,11 +593,19 @@ listing:
     confidence: high
 
   continuing_obligations:
-    zh: ""
-    confidence: low
+    zh: "依《证券交易法》第36条，上市公司须定期公告并申报财务与营运信息：年度财务报告须于每会计年度终了后三个月内完成，第一、二、三季财务报告须于季度终了后四十五日内完成，每月并须于次月十日前公告申报上月营运情形；股东常会须于每会计年度终了后六个月内召开。另须依《对有价证券上市公司重大讯息之查证暨公开处理程序》即时揭露重大讯息（见 disclosure_requirements 字段）"
+    en: "Under Securities and Exchange Act Article 36, a listed company must periodically disclose: an annual financial report within three months after each fiscal year-end, first/second/third-quarter reports within forty-five days after each quarter-end, and a monthly operating report by the tenth day of the following month; an annual shareholders' meeting must be convened within six months after each fiscal year-end. It must also make immediate material-information disclosures under TWSE's Material Information Verification and Disclosure Procedures (see disclosure_requirements)"
+    detail: "与 disclosure_requirements 字段引用同一份重大讯息处理程序，但本字段聚焦上市公司须履行哪些持续性申报义务本身（定期财报＋即时重大讯息＋股东会），disclosure_requirements 聚焦揭露渠道/时限/语言要求，两者不重复。"
+    quote: "第 36 條 已依本法發行有價證券之公司，除情形特殊，經主管機關另予規定者外，應依下列規定公告並向主管機關申報：一、於每會計年度終了後三個月內，公告並申報由董事長、經理人及會計主管簽名或蓋章，並經會計師查核簽證、董事會通過及監察人承認之年度財務報告。二、於每會計年度第一季、第二季及第三季終了後四十五日內，公告並申報……財務報告。三、於每月十日以前，公告並申報上月份營運情形。……股票已在證券交易所上市或於證券商營業處所買賣之公司股東常會，應於每會計年度終了後六個月內召開"
+    sources:
+      - title: 证券交易法 第36条（金融监督管理委员会主管法规共用系统）
+        url: https://law.fsc.gov.tw/LawContent.aspx?id=FL007009
+        accessed: 2026-08-16
+    confidence: high
 
   suspension_resumption:
     zh: "上市公司出现财报未如期申报、净值低于实收资本额二分之一等多类情事之一，先列为「变更交易方法」证券（类似其他市场的处置/风险警示机制）；情形未改善或涉及无法表示意见/否定意见之查核报告、重大讯息违规等更严重情事，本公司依《证券交易法》相关规定停止其买卖并报请金管会备查，改善后得公告恢复买卖"
+    en: "A listed company that fails to file its financial report on schedule, whose net worth falls below half its paid-in capital, or that meets one of several other statutory triggers, is first designated a 'changed trading method' security (similar to a disposal/risk-alert flag on other markets); if the issue is not resolved, or more serious matters arise — such as a disclaimer or adverse audit opinion, or a material-information violation — TWSE suspends trading under the relevant Securities and Exchange Act provisions and reports it to the FSC for the record, with trading resumable by announcement once the issue is remedied"
     quote: "上市公司有下列情事之一者，對其上市之有價證券應由本公司依證券交易法第一百四十七條規定停止其買賣，並報請主管機關備查；或得由該上市公司依第五十條之一第五項規定申請終止上市。"
     sources:
       - title: 台湾证券交易所股份有限公司营业细则 第49-50条
@@ -578,12 +634,27 @@ listing:
     confidence: high
 
   delisting_transition_period:
-    zh: ""
-    confidence: low
+    zh: "台湾未见与沪深『退市整理板』同类的统一整理期制度；已确认的官方安排局限于自愿终止上市个案：依《上市公司申请有价证券终止上市处理程序》，本公司董事会核议通过后，须于实施日二十日前公告；同时，同意终止上市决议之董事须负连带责任，承诺以不低于股东会╱董事会决议日前一个月股价简单算术平均数孰高者、且不低于每股净值之价格，于五十日收购期间内收购公司股票，收购期间届满后办理交割。因触及《营业细则》第五十条之一列举法定情事而被强制终止上市者，本次未见与自愿终止上市案件相同的固定天数整理期条文"
+    en: "No unified delisting-transition-period regime analogous to the Shanghai/Shenzhen exchanges' dedicated delisting-transition board was found. The only confirmed official mechanism applies to voluntary delistings: under the Procedures for Handling a Listed Company's Application to Terminate the Listing of its Securities, TWSE's Board must announce the delisting at least twenty days before it takes effect, and the directors who voted for the resolution are jointly liable to buy back the company's shares — at a price no lower than the higher of the one-month simple average closing price before the shareholders'/board resolution date, or the most recent per-share net asset value — over a mandatory fifty-day buyback period, with settlement after the period ends. For forced delistings triggered by the statutory grounds in the Business Operation Rules, no equivalent fixed-day transition-period provision was found this session"
+    quote: "上市公司申請有價證券終止上市案經本公司董事會核議通過後，由本公司於實施日二十日前公告之，並即通知該上市公司。／前項收購起始日為終止上市之日，收購期間應為五十日，且應於收購期間屆滿後辦理交割，收購價格不得低於股東會決議日或董事會決議日前一個月股票收盤價之簡單算術平均數之孰高者，且不得低於該公司最近期經會計師查核或核閱財務報告之每股淨值。"
+    sources:
+      - title: 台湾证券交易所股份有限公司上市公司申请有价证券终止上市处理程序 第3、6条
+        url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007282
+        accessed: 2026-08-24
+    confidence: high
 
   post_delisting_venue:
-    zh: ""
-    confidence: low
+    zh: "官方原文仅明确规定两类特定情形的下市后去向：(a) 已上市之可转换公司债申请终止上市，得转往证券柜台买卖中心(TPEx)买卖，且不受终止上市须经股东会特别决议之限制；(b) 第一上市（外国公司来台第一上市）股票，自终止上市日起同日亦停止公开发行（金管会民国111年10月13日公告委托本公司办理，自111年10月15日起实施）。本国普通股下市后是否登录兴柜或列为管理股票等一般去向，本次检索官方原文未见统一明文规定，留待后续核实（见 OPEN-QUESTIONS）"
+    en: "TWSE's own rule texts confirm the post-delisting venue for two specific categories only: (a) a listed convertible bond applying to terminate its listing may transfer to trading on the Taipei Exchange (TPEx), exempted from the shareholders'-meeting special-resolution requirement otherwise applicable to voluntary delistings; (b) a Secondary-Listed (foreign) company's shares also cease to be publicly offered on the same day their listing terminates, per an FSC notice dated 13 October ROC 111 (2022) delegating this matter to TWSE, effective from 15 October ROC 111. No unified official statement on the general post-delisting venue for ordinary domestic common shares (e.g. whether they move to the Emerging Stock market or are designated 'managed stock') was found this session (see OPEN-QUESTIONS)"
+    quote: "但如係已上市之可轉換公司債，申請終止上市而轉往櫃檯買賣中心買賣者，得不受此限。（上市公司申請有價證券終止上市處理程序第2條）／金融監督管理委員會111年10月13日金管證字第11101415943號公告，委託本公司「辦理停止第一上市公司股票公開發行相關事宜，並自中華民國111年10月15日實施」（終止上市公司頁附註）"
+    sources:
+      - title: 台湾证券交易所股份有限公司上市公司申请有价证券终止上市处理程序 第2条
+        url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007282
+        accessed: 2026-08-24
+      - title: 终止上市公司（TWSE 官网页面附注）
+        url: https://www.twse.com.tw/zh/listed/suspend-listing.html
+        accessed: 2026-08-24
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -666,6 +737,7 @@ clearing:
 
   initial_margin_practice:
     zh: "现货股票买卖无衍生品意义上的初始保证金；信用交易（融资融券）须收足融资自备款或融券保证金，具体成数依主管机关规定按标的分类调整，本次未逐条核实费率表"
+    en: "No initial margin in the derivatives sense for cash stock trading; margin trading (融資融券) requires full collection of the margin-purchase own-funds contribution or short-sale margin, with the exact percentage set by the regulator and varying by security category — the specific rate schedule was not verified article-by-article this session"
     quote: "信用交易則收足融資自備款或融券保證金"
     sources:
       - title: 集中市场交易制度介绍
@@ -675,6 +747,7 @@ clearing:
 
   maintenance_margin_practice:
     zh: "信用交易（融资融券）担保维持率标准，2015年5月4日起调整为130%"
+    en: "The account collateral maintenance ratio for margin trading (融資融券) has been set at 130% since 4 May 2015"
     detail: "此数字仅在 TWSE 官网英文版交易机制页找到明确表述，对应中文原文页面本次未定位到同等清晰的条文，故 confidence 未标 high。"
     quote: "account collateral maintenance ratio of margin trading has been adjusted to 130% since May 4th, 2015."
     sources:
@@ -691,6 +764,7 @@ clearing:
   delivery_method:
     enum: na
     zh: "不适用（现货市场，无实物/现金交割概念；采款券帐簿划拨方式完成结算）"
+    en: "Not applicable (a cash market with no physical-/cash-delivery concept in the derivatives sense; settlement is completed via book-entry transfer of funds and securities)"
     detail: "推断依据：products 章节所列均为现货股票、ETF、债券、权证、REITs、ETN，交易规则未见期货、期权等衍生品种。"
     quote: "自1995年起，證券經紀商收受委託人(投資人)之有價證券或價金，應透過委託人開設之有價證券帳戶及在證券經紀商指定之金融機構開立之存款帳戶以劃撥方式辦理。"
     sources:
@@ -723,16 +797,34 @@ participants:
     confidence: low
 
   investor_structure:
-    zh: ""
-    confidence: low
+    zh: "依 TWSE 官方 Fact Book 2026 统计，2025年底持股结构：境内个人投资者持股占38.38%、境内企业法人24.55%、境外信托基金11.09%、境外法人8.84%、境内金融机构4.88%、境内政府4.67%、境内其他法人2.47%、境内信托基金4.08%、境外金融机构0.49%、境外个人0.43%、库藏股0.12%（境内合计约78.65%，境外合计约20.85%）"
+    en: "Per TWSE's official Fact Book 2026, year-end-2025 shareholding by investor type: domestic individuals 38.38%, domestic corporations 24.55%, foreign trust funds 11.09%, foreign juridical persons 8.84%, domestic financial institutions 4.88%, domestic government 4.67%, domestic other juridical persons 2.47%, domestic trust funds 4.08%, foreign financial institutions 0.49%, foreign individuals 0.43%, and share buy-backs 0.12% (domestic investors together ~78.65%, foreign investors together ~20.85%)"
+    quote: "Shareholding by Type of Investors (2021-2025) Unit: % ／2025／Domestic Investors: Government 4.67 Financial Institutions 4.88 Trust Fund 4.08 Corporations 24.55 Other Juridical Persons 2.47 Individuals 38.38／Foreigners: Trust Fund 11.09 Financial Institutions 0.49 Juridical Persons 8.84 Individuals 0.43／Share Buy-backs 0.12／Total 100.00"
+    sources:
+      - title: TWSE Fact Book 2026 - Shareholding by Type of Investors (2021-2025)
+        url: https://www.twse.com.tw/downloads/zh/about/company/factbook/2026/4.02.html
+        accessed: 2026-08-24
+    confidence: high
 
   account_opening_requirements:
-    zh: ""
-    confidence: low
+    zh: "依《台湾证券交易所股份有限公司证券经纪商受托契约准则》第3条，证券经纪商与委托人签订受托契约前须先完成开户：自然人委托人原则上须亲持身分证正本，当场签章办理开户并留存身分证影本，另须留存印鉴卡或签名样式卡以凭同式印鉴或签名办理委托买卖与交割相关手续；法人委托人须由被授权人检附法人登记证明文件、税捐机构统一编号通知单、授权书暨代表人与被授权人身分证影本办理；委托人并须先开设有价证券集中保管帐户及在指定金融机构开立存款帐户，方得受托买卖（部分境外华侨及外国人、信托业等身分依规定得以匯撥方式收付价金者除外）；另依第3-1条，开户须检附金融机构防制洗钱办法规定辨识身分之必要文件"
+    en: "Under Article 3 of TWSE's Standards for Securities Brokers' Brokerage Agreements, a securities broker must complete account opening before signing a brokerage agreement: a natural-person client must generally appear in person with an original ID card, sign the agreement on the spot, and leave a photocopy of the ID, and must also register a seal or signature specimen used to authenticate every subsequent order and settlement instruction; a corporate client's authorized agent must submit the corporate registration certificate, the tax-authority withholding-unit registration notice, a power of attorney, and photo-ID copies of both the legal representative and the authorized agent; the client must also open a securities central depository account and a bank settlement account at a designated institution before the broker may accept orders (certain categories such as overseas Chinese/foreign investors and trust enterprises may remit funds by wire transfer instead). Article 3-1 additionally requires the documentation needed for anti-money-laundering identity verification at account opening"
+    quote: "委託人為自然人者，除下列情形外，應親持身分證正本並於受託契約當場簽章辦理開戶及留存身分證影本……委託人或其法定代理人或被授權人於簽訂受託契約時，應留存本人或其法定代理人或被授權人印鑑卡或簽名樣式卡，憑同式印鑑或簽名當面委託買賣、申購有價證券，或辦理交割相關手續。……證券經紀商應於委託人開設有價證券集中保管帳戶及在其指定之金融機構開立存款帳戶後，始得受其委託辦理買賣證券。／第 3-1 條 證券經紀商受理開戶，委託人應檢附金融機構防制洗錢辦法規定辨識身分之必要文件。"
+    sources:
+      - title: 台湾证券交易所股份有限公司证券经纪商受托契约准则 第3、3-1条
+        url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007113
+        accessed: 2026-08-24
+    confidence: high
 
   suitability_management:
-    zh: ""
-    confidence: low
+    zh: "证券期货业提供『投资型』金融商品或服务前，依《金融服务业确保金融商品或服务适合金融消费者办法》第4条，须充分了解客户身份、财务背景、所得与资金来源、风险偏好、过往投资经验等资料（KYC），并综合评估客户资金操作状况与专业能力、投资属性与风险承受度、服务合适性以核实商品适合度。惟本办法第5条所列适用商品以信托、衍生性商品、结构型商品、全权委托等『投资型』商品为主，明文排除受托买卖集中市场或柜台买卖市场交易之证券╱基金本身，故一般股票买卖之适当性管理另循证券经纪商开户徵信等既有机制（见 account_opening_requirements 字段），本次未见与本办法同等级的专章规定"
+    en: "Under Article 4 of the Regulations Governing the Suitability of Financial Products or Services Offered by Financial Service Enterprises, before offering an 'investment-type' financial product or service, a securities/futures enterprise must fully understand the customer's identity, financial background, income and source of funds, risk preference and past investment experience (KYC), and assess the customer's fund-management status and expertise, investment profile and risk tolerance, and service suitability. However, Article 5's list of covered products centres on trust, derivatives, structured and discretionary-management products, and explicitly excludes securities/funds traded on the centralized or over-the-counter market itself — so suitability management for ordinary stock trading instead relies on the securities broker's existing account-opening due-diligence mechanisms (see account_opening_requirements) rather than a dedicated chapter equivalent to this regulation"
+    quote: "銀行業及證券期貨業提供投資型金融商品或服務，於訂立契約前，應充分瞭解金融消費者之相關資料，其內容至少應包括下列事項：……二、瞭解金融消費者審查原則：應訂定瞭解金融消費者審查作業程序，及留存之基本資料，包括金融消費者之身分、財務背景、所得與資金來源、風險偏好、過往投資經驗及簽訂契約目的與需求等……三、評估金融消費者投資能力：……（一）金融消費者資金操作狀況及專業能力。（二）金融消費者之投資屬性、對風險之瞭解及風險承受度。（三）金融消費者服務之合適性……第 5 條 前條所稱投資型金融商品或服務……十、證券投資信託基金及境外基金。但不包括受託買賣集中市場或櫃檯買賣市場交易之證券投資信託基金。"
+    sources:
+      - title: 金融服务业确保金融商品或服务适合金融消费者办法 第4、5条（金融监督管理委员会主管法规共用系统）
+        url: https://law.fsc.gov.tw/LawContent.aspx?id=GL000328
+        accessed: 2026-08-24
+    confidence: high
 
   foreign_access_channel:
     zh: "境外外国机构投资人（FINI）与境外华侨及外国自然人（FIDI）登记制：以各类申请登记表向本公司办理登记后即可投资国内有价证券；FIDI另含次保管机构登记等配套表格"
@@ -756,8 +848,14 @@ participants:
     confidence: high
 
   broker_landscape:
-    zh: ""
-    confidence: low
+    zh: "依金融监督管理委员会证券期货局官方统计，截至2026年7月（民国115年7月）底，国内证券商（含专营及兼营）共102家；同期另有证券投资信托业36家、证券投资顾问业89家、证券金融业1家；证券商须先与本公司订立「使用市场契约」（见 membership_structure 字段）并加入中华民国证券商业同业公会方得开业"
+    en: "Per official statistics from the FSC's Securities and Futures Bureau, as of end-July 2026 (ROC year 115, month 7) there were 102 domestic securities firms (specialised and concurrently-operating combined), alongside 36 securities investment trust enterprises, 89 securities investment consulting enterprises, and 1 securities finance company; a securities firm must both execute a market-use contract with TWSE (see membership_structure) and join the Taiwan Securities Association before commencing business"
+    quote: "證券業家數統計表／年(月)：11507／證券商(註1)：102／證券投資信託業：36／證券投資顧問業：89／證券金融業：1／證券交易所：1／證券櫃檯買賣中心：1／證券集中保管事業：1／註1：係統計國內證券商家數(含專營及兼營證券商)"
+    sources:
+      - title: 证券业家数统计表（金融监督管理委员会证券期货局官方统计）
+        url: https://www.fsc.gov.tw/userfiles/file/01_11507-%E8%AD%89%E5%88%B8%E6%A5%AD%E5%AE%B6%E6%95%B8.xlsx
+        accessed: 2026-08-24
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 十｜市场数据与技术基础设施
@@ -768,20 +866,50 @@ infrastructure:
     confidence: low
 
   market_data_levels:
-    zh: ""
-    confidence: low
+    zh: "TWSE未采用国际常见之『Level 1/Level 2』行情分级用语，而依《交易资讯使用管理办法》第3条自订以下分类：按时效分「即时资讯」「延迟资讯」（较即时资讯延迟二十分钟以上）「盘后资讯」三类；按连线方式分「直接连线」（与本公司电脑设备直接连线）与「间接连线」（经由其他申请使用者间接取得）；按用途分「揭示」与「非揭示」（不作揭示用途）。收费标准另将传输内容分为「即时交易资讯」与「即时指数资讯」（如TAIEX等系列指数）两大类商品。本次未见官方文件披露逐档报价深度（如五档╱十档）层级划分的对外说明"
+    en: "TWSE does not use the internationally common 'Level 1/Level 2' market-data terminology. Instead, Article 3 of its Trading Information Usage Management Measures defines its own categories: by timeliness — 'real-time information', 'delayed information' (delayed twenty minutes or more relative to real-time) and 'post-market information'; by connection method — 'direct connection' (connected directly to TWSE's computer equipment) versus 'indirect connection' (obtained via another applicant); and by purpose — 'display use' versus 'non-display use'. Its fee schedule separately divides transmitted content into two product categories, 'real-time trading information' and 'real-time index information' (e.g. the TAIEX series). No official document was found this session disclosing an order-book depth tiering (e.g. five-level/ten-level quotes) equivalent to Level 1/2"
+    quote: "六、即時資訊與延遲資訊：市場交易時間中所傳送之交易資訊為即時資訊，較即時資訊延遲二十分鐘以上之交易資訊為延遲資訊。七、盤後資訊：市場交易時間以後所傳播之當日證券行情資訊為盤後資訊。八、直接連線與間接連線：申請使用者直接與本公司電腦設備連線取得交易資訊為直接連線，申請使用者經由其他申請使用者間接取得交易資訊為間接連線。……十、非揭示：指使用交易資訊不作揭示用途。／貳、即時指數資訊：一、臺灣證券交易所發行量加權股價指數（TAIEX）等系列指數"
+    sources:
+      - title: 台湾证券交易所股份有限公司交易资讯使用管理办法 第3条 PDF
+        url: https://www.twse.com.tw/downloads/zh/products/regulation_use.pdf
+        accessed: 2026-08-24
+      - title: 交易资讯使用管理办法、契约、收费标准（TWSE 官网栏目页）
+        url: https://www.twse.com.tw/zh/products/information/use.html
+        accessed: 2026-08-24
+    confidence: high
 
   data_latency:
-    zh: ""
-    confidence: low
+    zh: "依《交易资讯使用管理办法》第3条用词定义：市场交易时间中所传送之交易资讯为「即时资讯」；较即时资讯延迟二十分钟以上之交易资讯为「延迟资讯」；市场交易时间以后所传播之当日证券行情资讯则为「盘后资讯」"
+    en: "Under Article 3 of the Trading Information Usage Management Measures, trading information transmitted during market trading hours is defined as 'real-time information'; information delayed twenty minutes or more relative to real-time information is defined as 'delayed information'; and same-day quote information disseminated after market trading hours is 'post-market information'"
+    quote: "六、即時資訊與延遲資訊：市場交易時間中所傳送之交易資訊為即時資訊，較即時資訊延遲二十分鐘以上之交易資訊為延遲資訊。七、盤後資訊：市場交易時間以後所傳播之當日證券行情資訊為盤後資訊。"
+    sources:
+      - title: 台湾证券交易所股份有限公司交易资讯使用管理办法 第3条 PDF
+        url: https://www.twse.com.tw/downloads/zh/products/regulation_use.pdf
+        accessed: 2026-08-24
+    confidence: high
 
   data_pricing_model:
-    zh: ""
-    confidence: low
+    zh: "依《交易资讯使用管理办法》与其《收费标准》，使用者（含证券商╱期货商及一般资讯业者）须与本公司签订使用交易资讯契约并按月缴费：非证券商╱期货商申请人月缴传输授权费新台币6万元，另按经营规模缴纳资讯费（如以自动更新型态经公众网际网路传输者，0至5,000户按月10万元，5,001户以上每增1户加收12元╱月；非自动更新型态则按注册会员数分级收取5万或10万元╱月）；证券商╱期货商另按设备数量或成交户数级距缴费；相关费用应于次月十五日前缴纳，以每月最后一个营业日申报数量为计算基准"
+    en: "Under TWSE's Trading Information Usage Management Measures and its associated Fee Schedule, users (including securities/futures firms and general information vendors) must sign a data-usage contract and pay monthly fees: a non-broker/dealer applicant pays a monthly transmission authorization fee of NT$60,000, plus an information fee scaled to its scope of operations (e.g. for automatically-refreshing transmission via the public Internet, NT$100,000/month for 0-5,000 users and an additional NT$12/user/month above 5,000; non-automatically-refreshing transmission is charged NT$50,000 or NT$100,000/month depending on registered membership size); securities/futures firms are instead charged on tiers based on equipment count or the number of settled accounts; fees are due by the 15th of the following month, calculated on the quantity reported as of the last business day of each month"
+    quote: "壹、即時交易資訊：……申請使用者非證券商及期貨商 （一）授權費：1、傳輸授權費：每月新台幣陸萬元整……（二）資訊費：……0 至 5,000 戶，繳付每月新台幣壹拾萬元整。……5,001 戶（含）以上每增加 1 戶，每月收費新台幣壹拾貳元。……每一網站註冊使用會員低於二十萬戶者，繳付每月新台幣伍萬元整固定金額資訊費；每一網站註冊使用會員達二十萬戶（含）以上者，繳付每月新台幣壹拾萬元整固定金額資訊費。／申請使用者應依照本標準繳付本公司每月費用，並應於次月十五日前繳付"
+    sources:
+      - title: 交易资讯使用管理办法、契约、收费标准（TWSE 官网栏目页）
+        url: https://www.twse.com.tw/zh/products/information/use.html
+        accessed: 2026-08-24
+      - title: 收费标准 PDF
+        url: https://www.twse.com.tw/downloads/zh/products/table_fee.pdf
+        accessed: 2026-08-24
+    confidence: high
 
   historical_data_availability:
-    zh: ""
-    confidence: low
+    zh: "TWSE透过官方『网路资讯商店』（Data E-Shop）提供付费历史交易资料商品，含委托档、成交档、揭示档等历史交易资料，另有盘后资讯、指数资讯、买卖日报表等商品，交付方式含电子邮件、下载及API，付款方式含ATM、信用卡、Apple Pay；免费部分则透过『公开资讯观测站』(MOPS)查询上市(柜)公司财务、业务、股权及重大讯息等资料"
+    en: "TWSE makes paid historical data products available through its official Data E-Shop (网路资讯商店), including order-book, trade, and quote-disclosure historical data files, alongside post-market data, index data, and buy/sell daily reports; delivery is by email, download, or API, with payment via ATM, credit card, or Apple Pay. Free access to listed(-OTC) companies' financial, business, shareholding and material-information disclosures is separately available via the Market Observation Post System (MOPS)"
+    quote: "我們提供資訊業者、專業機構法人及一般投資大眾本公司產製之盤後資訊商品，包括盤後資訊、指數資訊、買賣日報表及歷史交易資料。……歷史交易資料 提供委託檔、成交檔、揭示檔…等歷史交易資料。……系統會將您訂購之資訊商品寄送至Email，也可透過API或URL的方式下載資料。"
+    sources:
+      - title: 证交所网路资讯商店（Data E-Shop）
+        url: https://eshop.twse.com.tw/zh/
+        accessed: 2026-08-24
+    confidence: high
 
   trading_system_name:
     zh: "新一代交易系统（2014年3月10日上线启用）"
@@ -796,6 +924,7 @@ infrastructure:
 
   access_methods:
     zh: "证券商透过交易单元电脑自动交易系统接入，买卖申报得自市场交易时间开始前30分钟起输入；另建有FIX通讯协定作业平台（2010年上线）供机构客户接入"
+    en: "Securities firms connect via the automated trading system at their trading units, with orders acceptable from 30 minutes before market trading hours begin; a FIX protocol operating platform (launched 2010) is also available for institutional client connectivity"
     quote: "FIX通訊協定作業平台」上線"
     sources:
       - title: 历史介绍（TWSE 官网大事记）
@@ -806,6 +935,7 @@ infrastructure:
   major_outage_history:
     zh: ""
     confidence: low
+    detail: "本次检索仅找到本公司『因应重大灾变查询证券相关业务问答』页——内容是天然灾害导致休市时的交割/除权息作业应变安排，属营运持续/灾变应变程序，不是历史技术故障事件记录；另检索到的证券商(非TWSE本身)App当机新闻属不同法人实体，不采用。未找到与jp-jpx 2020年10月arrowhead系统故障同等级的TWSE官方故障复盘声明，如实留空，见 OPEN-QUESTIONS。"
 
 # ═══════════════════════════════════════════════
 # 十一｜交易成本与税费
@@ -826,12 +956,19 @@ costs:
     detail: "证券商须向本公司缴纳交易经手费及会员费等费用属一般知识，但本次抓取的来源页均未包含具体费率表原文，依 CLAUDE.md 二第1/4条不凭记忆填写、查不清就留空，如实留空，见 OPEN-QUESTIONS。"
 
   clearing_fees:
-    zh: ""
-    confidence: low
+    zh: "依台湾集中保管结算所（TDCC）《收费办法》第1条（现行条文版本经民国104年12月16日金管会核准修订），主要向交易所收取『清算交割服务费』：按每日成交金额（议价交易及兴柜股票及开放式受益凭证部分除外）计收，费率为买卖金额万分之0.14625，付费者为台湾证券交易所、证券柜台买卖中心；另向证券经纪商收取『帐簿划拨处理服务费』，按每日成交金额计收，费率为买卖金额万分之0.1425；此外尚有依成交单位数分级收费之『买卖交割处理服务费』（付费者为证券自营商）及送存╱领回╱转帐手续费、帐户维护费等项目"
+    en: "Under Article 1 of the Taiwan Depository & Clearing Corporation's (TDCC) Fee Measures (current text as amended per FSC approval dated ROC 104/12/16), TDCC charges TWSE and the Taipei Exchange a 'clearing and settlement service fee' on daily trading value (excluding negotiated trades and Emerging-Stock/open-end fund transactions) at a rate of 0.14625 basis points of trade value; it separately charges securities brokers a 'book-entry transfer processing service fee' at 0.1425 basis points of daily trading value; additional items include a tiered 'trade settlement processing service fee' charged to securities dealers based on the number of trading units settled, plus deposit/withdrawal/transfer handling fees and account maintenance fees"
+    quote: "第一條 股票、受益憑證、存託憑證……收費標準：一、清算交割服務費：(一)收費方式：按每日成交金額（議價交易及興櫃股票及開放式受益憑證部分除外）計收，每月計算一次。(二)費率：按買賣金額各萬分之○．一四六二五計收。(三)付費者：臺灣證券交易所、證券櫃檯買賣中心。……三、帳簿劃撥處理服務費：(一)收費方式：按每日成交金額計收，每月計算一次。(二)費率：按買賣金額各萬分之○．一四二五計收。(三)付費者：證券紀經商。／臺灣集中保管結算所股份有限公司104年12月16日經「金融監督管理委員會」金管證投字第1040049870號函准予修訂"
+    sources:
+      - title: 台湾集中保管结算所股份有限公司收费办法 第1条 PDF
+        url: https://m.tdcc.com.tw/TDCCWEB/upload/40289796531cece20153878c1c750017.pdf
+        accessed: 2026-08-24
+    confidence: high
 
   regulatory_fees:
     zh: ""
     confidence: low
+    detail: "本次检索《证券交易所管理规则》全文及《证券交易法》均未见独立于交易所本身收费（经手费等，见 exchange_fees 字段）或证券交易税（见 stamp_duty 字段）之外的『监管费╱监理费』概念条文；金管会证期局之运作经费机制本次未见官方明文规定的『向交易所╱证券商另行收取年费』条款。如实留空，避免与已有的 stamp_duty、exchange_fees 重复或臆测，处理方式与 financial_transaction_tax 字段一致。"
 
   stamp_duty:
     zh: "证券交易税（税率千分之三，即0.3%，向出卖人按每次成交金额单边课征）；现股当日冲销交易减半课征至千分之一点五（0.15%），优惠期限延长至民国116年（2027年）12月31日止"
@@ -879,6 +1016,7 @@ costs:
   implicit_costs_note:
     zh: ""
     confidence: low
+    detail: "本次未找到 TWSE 官方发布之买卖价差╱冲击成本量化统计或专门说明页。已确认与隐性成本相关的结构性因素分散记录在其他字段：tick_size（分级累退最小报价单位，低价股相对价差较大）、market_structure.价格限制章节下 FL007225『处置』机制（个股被列为处置有价证券后改为人工管制撮合，约每2-60分钟撮合一次，见 liquidity_risk_note）会显著放大该股票的有效价差与冲击成本。因缺官方量化数字，本字段如实留空，不做无出处的定性断言，见 OPEN-QUESTIONS。"
 
 # ═══════════════════════════════════════════════
 # 十二｜风险与特殊考量
@@ -890,6 +1028,7 @@ risks:
 
   fx_risk_note:
     zh: "新台币非完全自由兑换货币，外资参与须透过FINI/FIDI登记及银行结购汇作业进行，存在汇兑与资金进出相关限制；具体结购汇额度与作业规定本次未核实官方原文"
+    en: "The New Taiwan Dollar is not a fully freely convertible currency; foreign participation requires going through FINI/FIDI registration and bank foreign-exchange settlement procedures, which carry currency-conversion and fund-flow restrictions. The specific settlement quotas and operating rules were not verified against official source text this session"
     confidence: low
 
   political_risk_note:
@@ -898,11 +1037,19 @@ risks:
     detail: "本次未就地缘政治/两岸关系等风险维度进行专门检索与核实，如实留空，避免未经查证的臆测性描述。"
 
   liquidity_risk_note:
-    zh: ""
-    confidence: low
+    zh: "台湾并无与沪深『退市整理板』同类的独立市场，但设有『注意╱处置』交易资讯揭露机制：个股符合成交价振幅、周转率异常等标准且连续╱累计达一定营业日数者，本公司即公告其为『处置有价证券』，对该股票以人工管制之撮合终端机执行撮合（约每2分钟撮合一次，视处置次数与情节可延长至约每六十分钟一次），并要求证券商就投资人委托收足全额价金或证券（含信用交易自备款╱保证金），必要时另限缩各证券商每日买卖申报金额上限（总公司不逾新台币6千万元、分支机构不逾1千万元）、暂停融资融券。处置期间该股票之流动性与撮合频率将明显低于正常交易时段，是本地市场结构性的流动性风险来源之一"
+    en: "Taiwan has no independent market segment equivalent to the Shanghai/Shenzhen exchanges' dedicated delisting-transition board, but operates an 'Attention/Disposal' securities disclosure mechanism: a stock that meets abnormal price-swing or turnover-rate thresholds for a specified number of consecutive or cumulative trading days is announced as a 'Disposal Security'. Its matching is then switched to a manually-controlled matching terminal (roughly every 2 minutes, extendable to roughly every sixty minutes depending on the number and severity of prior disposal designations), brokers must collect full payment or securities upfront from investors placing orders (including margin-trading own-funds/collateral), and — where necessary — each broker's daily order value is capped (sixty million New Taiwan dollars per head office, ten million New Taiwan dollars per branch) and margin trading is suspended. During a Disposal period, the stock's liquidity and matching frequency fall well below normal trading levels, making this a structural source of liquidity risk in the local market"
+    detail: "（现行条文版本发布日期民国115年8月3日）"
+    quote: "本公司於每日收盤後，即分析上市有價證券……發現有下列情形之一時，公告其交易資訊……有價證券之交易有下列情形之一時，本公司即發布為處置之有價證券……本公司於次一營業日起五個營業日內，同時採行下列之措施：一、對該有價證券以人工管制之撮合終端機執行撮合作業（約每二分鐘撮合一次……）。二、通知各證券經紀商……應就其當日已委託之買賣，向該投資人收取全部之買進價金或賣出證券，信用交易部分，則收足融資自備款或融券保證金……各證券商每日買進或賣出該有價證券之申報金額，總公司不得超過新臺幣六千萬元，每一分支機構不得超過新臺幣一千萬元……暫停該有價證券融資融券交易。／臺灣證券交易所股份有限公司公布或通知注意交易資訊暨處置作業要點（115.08.03）"
+    sources:
+      - title: 台湾证券交易所股份有限公司公布或通知注意交易资讯暨处置作业要点 第4、6条
+        url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007225
+        accessed: 2026-08-24
+    confidence: high
 
   regulatory_change_risk_note:
     zh: "现股当日冲销交易的证券交易税减半优惠（千分之一点五）属定期立法延长之优惠税率，现行延长至2027年12月31日止，到期后是否延续需视立法院修法而定，存在政策不确定性"
+    en: "The halved securities transaction tax rate (0.15%) for same-day (day-trading) offsetting transactions is a preferential rate subject to periodic legislative extension, currently extended through 31 December 2027; whether it continues beyond that date depends on further amendment by the Legislative Yuan, creating policy uncertainty"
     quote: "自中華民國一百零六年四月二十八日起至一百十六年十二月三十一日止...按每次交易成交價格依千分之一點五稅率課徵證券交易稅"
     sources:
       - title: 证券交易税条例 第2-2条（财政部主管法规共用系统）
@@ -911,5 +1058,11 @@ risks:
     confidence: medium
 
   enforcement_note:
-    zh: ""
-    confidence: low
+    zh: "《证券交易法》第155条禁止操纵市场行为（如意图抬高╱压低价格通谋买卖、连续高买低卖影响市场秩序、散布流言或不实资料等）；第157条之1禁止内线交易（公司董监事、经理人、持股逾10%股东、职务上获悉消息之人等，于重大消息公开前后十八小时内买卖该公司股票）；违反上述规定者，依第171条处3年以上10年以下有期徒刑，得併科新台币1千万元以上2亿元以下罚金，若犯罪所得达新台币1亿元以上，加重至7年以上有期徒刑，併科2千5百万元以上5亿元以下罚金；金管会并得对违规行为人为吊销、停止或限制证券执业资格等行政处分"
+    en: "Securities and Exchange Act Article 155 prohibits market manipulation (e.g. collusive trading intended to raise or depress prices, continuous high-buy/low-sell activity affecting market order, or spreading rumours or false information); Article 157-1 prohibits insider trading by company directors, supervisors, managers, shareholders holding over 10%, and persons who learn material information through their position, from trading the company's stock within eighteen hours before or after the material information becomes public. Violations are punishable under Article 171 by three to ten years' imprisonment plus a fine of NT$10 million to NT$200 million; where illicit gains reach NT$100 million or more, the penalty increases to at least seven years' imprisonment plus a fine of NT$25 million to NT$500 million. The FSC may additionally impose administrative sanctions such as revoking, suspending, or restricting a person's qualification to engage in the securities business"
+    quote: "第 155 條 對於在證券交易所上市之有價證券，不得有下列各款之行為：……三、意圖抬高或壓低集中交易市場某種有價證券之交易價格，與他人通謀……四、……連續以高價買入或以低價賣出……六、意圖影響集中交易市場有價證券交易價格，而散布流言或不實資料。／第 157-1 條 下列各款之人，實際知悉發行股票公司有重大影響其股票價格之消息時，在該消息明確後，未公開前或公開後十八小時內，不得……自行或以他人名義買入或賣出：一、該公司之董事、監察人、經理人……二、持有該公司之股份超過百分之十之股東。……／第 171 條 有下列情事之一者，處三年以上十年以下有期徒刑，得併科新臺幣一千萬元以上二億元以下罰金：一、違反第二十條第一項、第二項、第一百五十五條第一項、第二項、第一百五十七條之一第一項或第二項規定。……犯前項之罪，其因犯罪獲取之財物或財產上利益金額達新臺幣一億元以上者，處七年以上有期徒刑，得併科新臺幣二千五百萬元以上五億元以下罰金。"
+    sources:
+      - title: 证券交易法 第155、157-1、171条（金融监督管理委员会主管法规共用系统）
+        url: https://law.fsc.gov.tw/LawContent.aspx?id=FL007009
+        accessed: 2026-08-16
+    confidence: high
