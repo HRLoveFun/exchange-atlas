@@ -347,7 +347,20 @@ terms:
     natives: {en: "Operating Range"}
     note: in-nse 衍生品分部特有概念——不是严格意义的每日涨跌停（无硬性上下限），而是防止错价申报的订单过滤区间，超出区间的委托会被判定为"价格冻结"（price freeze）而非直接拒绝，区间本身可在盘中被放宽；与 static-dynamic-reference-price（熔断判定基准价）概念相关但用途不同——后者用于触发熔断，前者用于筛掉单笔错价委托，两者不合并
 
+  - id: delisting-remedial-period
+    zh: 退市补救期限
+    en: Remedial Period
+    natives: {en: "Remedial Period"}
+    note: 港交所强制退市前给予发行人补救问题并恢复交易的窗口期——分「订明补救期限」（prescribed remedial period，自停牌之日起18个月，Rule 6.01A(1)）与「特定补救期限」（specific remedial period，交易所按个案在6.10条下酌情订立、可短于18个月）两类，期满未补救即可能被除牌；与本项目既有的 delisting-transition-period（若已收录，指退市生效后的整理期）是不同阶段——本字段发生在"停牌后、退市决定作出前"，不要混淆
+
+  - id: ccp-default-waterfall
+    zh: 违约损失分摊阶梯
+    en: Default Waterfall
+    natives: {en: "Default Waterfall"}
+    note: CCP处置结算参与者违约损失时依次动用各类资源的先后顺序——典型排序为：违约方自身保证金/结算基金出资在先，其次是CCP自有资本注资（Skin in the Game），最后才动用非违约参与者按比例分摊的结算基金出资；港交所HKCC按其规则第706条的8步排序是本项目首次完整记录的样本（见 hk-hkex.yml clearing.default_management），日后遇到其他交易所披露类似"default waterfall"文件时统一用此译法比较各所排序细节异同
+
   - id: delisting-transition-period
     zh: 退市整理期
     en: Delisting Transition Period
     note: 退市决定作出之后、正式除牌生效之前，发行人证券被特殊标记但仍可继续交易的过渡窗口——与 delisting-remedial-period（补救期限，发生在"停牌后、退市决定作出前"，目的是给发行人机会恢复合规）是不同阶段，不要混淆。JPX 的做法是先设「监理股份」（Securities Under Supervision，退市决定前的预警标记）、决定退市后再设「整理股份」（Securities to be Delisted，直至退市日前一天），两阶段合计原则上共六个月（见 jp-jpx.yml listing.delisting_transition_period）；沪深交易所的"退市整理期"概念名称与此完全对应，但具体交易日数与投资者适当性门槛按各所规则单独核实，不假定数值一致，仅统一术语译法
+
