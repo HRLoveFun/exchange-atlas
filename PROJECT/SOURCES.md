@@ -1051,3 +1051,34 @@ fees` 四个此前因 dtcc.com 反爬而留空的字段，dtcc.com 本身仍是�
 Attention Required" 类文案是 Cloudflare 机器人验证或硬拦截，前者可能对某些 UA 格式意外放行
 （如本次 finra.org），后者（如 dtcc.com 的内容子页）目前没找到 curl 层面能绕开的办法，需要
 降级到"找监管机构对同一事实的官方转述"这条路。
+
+**补充（us-nasdaq 补全会话，同一批次，独立尝试）：** 未复用上面 us-nyse 会话验证过的
+Fair Access 格式 UA（两个子代理并行执行、互不知情），改走"政府官方镜像站"路线，同样成功
+取得 `regulation.core_laws`/`market_structure.short_selling` 等此前因 sec.gov/finra.org
+403 而留空的字段，是与上面"换UA"路线互补、优先级更高（无需猜UA格式）的备选方案：
+
+- **`govinfo.gov`**（美国政府出版局）——托管众议院法律修订顾问办公室编制的官方《制定法汇编》
+  （Compilation of Statutes）与历次《公法》（Public Law）原文 PDF，是纯文本排版而非扫描件，
+  curl 常规 UA 直接 200，全程无反爬。适合取得《1934年证券交易法》这类现行成文法全文，路径
+  形如 `govinfo.gov/content/pkg/COMPS-<法规编号>/pdf/COMPS-<法规编号>.pdf`（可先 WebSearch
+  "govinfo.gov COMPS <法规名>" 定位编号）。
+- **`ecfr.gov` 的 versioner API（关键发现）**——该站**面向用户的前端页面**（如
+  `ecfr.gov/current/title-17/.../section-242.201`）是纯 JS 渲染 SPA 外壳，curl 抓不到正文；
+  但其**公开 API**（`ecfr.gov/api/versioner/v1/full/{issue-date}/title-{N}.xml?part={part}`，
+  无需鉴权）返回官方汇编 XML 纯文本全文。`{issue-date}` 需先查
+  `ecfr.gov/api/versioner/v1/titles.json` 取该标题当前 `latest_issue_date`；`part` 较大时可
+  加 `&subject_group=` 参数缩小范围。⚠️ 该 API 实测有**间歇性 503**（错误体是通用"No server
+  is available to handle this request"，不带任何限流/拦截特征文案），判断是服务端负载问题，
+  不是限流——出现时间隔重试或直接复用同会话内更早的成功抓取内容即可，不代表被封，不要按
+  403 那一套换 UA 应对。用此路径取得过 Reg SHO Rule 201（10%跌幅报升阈值）、Regulation FD、
+  Regulation Best Interest、31 CFR CIP客户身份识别规则的条文原文。
+- **`federalregister.gov`**（联邦公报）——SEC 对纳斯达克/NSCC 等自律组织"规则修改申请"发布
+  的官方 Notice/Order，其 Purpose/Background 部分通常会完整复述现行规则条文，等效间接获得
+  规则原文，且属于监管机构一手文件（比交易所自己转述规则更权威）。curl 常规 UA 200，全程
+  无反爬。
+- **`dtcc.com` 静态资产路径**——`/about`、`/clearing-services/...` 这类内容页仍如上文所述
+  被 Cloudflare 硬拦截，但 `~/media/Files/Downloads/...` 这类文件服务器直出路径不受该拦截
+  影响，可用来抓 DTCC 自己发布的费率指南 PDF（如《2026年 NSCC 费率指南》）。
+- 方法论：WebSearch 定位候选 URL → 逐条 curl 验证 → 若原始文档路径被拦，优先尝试同一事实
+  的"官方政府镜像"（govinfo.gov/ecfr.gov/federalregister.gov）而非直接放弃或退而求其次用
+  第三方转述——政府镜像站的权威性等同一手来源，`confidence` 仍可标 `high`。

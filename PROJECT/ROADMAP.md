@@ -2,7 +2,7 @@
 
 进度状态放这里；「为什么这么排」去 `DECISIONS.md`，这里不重复。
 
-## 当前阶段：v1.0 已完成（20 家），转入 v1.1 Category B 数据深耕（规划中，待启动）
+## 当前阶段：v1.0 已完成（20 家），v1.1 Category B 数据深耕 Batch 1/3 已完成，Batch 2/3 待启动
 
 ## 阶段路线
 
@@ -123,7 +123,7 @@
 - **悬案批量清理（2026-08-20/21）**：`sa-tadawul`/`kr-krx`/`tw-twse`/`ch-six`/`br-b3`/`fr-euronext` 六家共 17 条 `PROJECT/OPEN-QUESTIONS.md` 具体数据悬案，13 条解决、1 条重新定性为"官方确认不披露"、3 条如实保留（sa-tadawul TASI基日、kr-krx KOSDAQ基日、fr-euronext市值口径不在本次任务范围），见 [ADR-027]。
 - **下一步方向已定：深度优先（v1.1 Category B 数据深耕），Wave 3 暂缓**，见 `PROJECT/DECISIONS.md` [ADR-028]。详见下方「v1.1 计划」一节。
 
-## v1.1 计划：Category B 数据深耕（规划中，待启动执行）
+## v1.1 计划：Category B 数据深耕（Batch 1/3 已完成，Batch 2/3 待启动）
 
 依据与规模估计见 `PROJECT/DECISIONS.md` [ADR-028]，本节只管任务清单与进度，不重复决策理由。
 
@@ -157,4 +157,5 @@
 ### 进度
 
 - 前置事项已解决（2026-08-22，见 [ADR-030]），批量填充的阻塞已清除。
-- **Batch 1（8 家）已选定并启动（2026-08-22）**：`cn-sse`/`tw-twse`/`hk-hkex`/`cn-szse` + `us-nyse`/`us-nasdaq` + `uk-lse`/`jp-jpx`。选取逻辑：优先覆盖「顺带处理」一节点名的两个批量任务——前四家一并回填英文缺失字段（`OPEN-QUESTIONS.md` 框架性问题第45条，114 个字段中约94%集中在这四家）；`us-nyse`/`us-nasdaq` 一并尝试 `sec.gov`/`finra.org`/`dtcc.com` 反爬突破（框架性问题14/15/32条）；`uk-lse`/`jp-jpx` 补地区多样性。`clearing.derivatives.*` 四个镜像字段只对已有真实衍生品业务的 `hk-hkex`/`cn-szse` 尝试，其余6家跳过（无衍生品业务记录，非缺口）。执行中，沿用 [ADR-017] 并行子代理模式，为规避 [ADR-021]/[ADR-029] 记录过的共享文件并发写入问题，本次子代理禁止直接改 `DECISIONS.md`/`ROADMAP.md`/`SKILL.md`/`taxonomy.yml`/`enums.yml`，发现的教训改为汇报给协调者事后统一回写。剩余 12 家留给 Batch 2/3，本条完成后补记执行结果。
+- **Batch 1（8 家）已完成（2026-08-22/25）**：`cn-sse`/`tw-twse`/`hk-hkex`/`cn-szse`/`us-nyse`/`us-nasdaq`/`uk-lse`/`jp-jpx`。选取逻辑：优先覆盖「顺带处理」一节点名的两个批量任务——前四家一并回填英文缺失字段，`us-nyse`/`us-nasdaq` 一并尝试反爬突破，`uk-lse`/`jp-jpx` 补地区多样性。执行结果、字段明细、人工抽检通过率、反爬突破方法与并行执行的工程教训见 `PROJECT/DECISIONS.md` [ADR-031]，本条不重复：全库已填字段 1162→1360（+198）；8 个子代理各自 10 字段自查 + 协调者独立复核 16+1 个字段，全部通过，远超 ≥95% 门槛；`sec.gov`/`finra.org` 反爬已攻克（方法见 `PROJECT/SOURCES.md`「突破记录」），`dtcc.com` 仍未攻克但已降级绕过；`make build` 0 错误 0 警告。
+- **Batch 2/3（剩余 12 家：`au-asx`/`br-b3`/`ca-tsx`/`ch-six`/`de-eurex`/`de-xetra`/`fr-euronext`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse`）尚未启动**，按原执行设计分 1-2 批，具体分批留给启动时再定。

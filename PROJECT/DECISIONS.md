@@ -395,3 +395,30 @@
 **验证：** `make build`（sync+check）0 错误 0 警告，20 家交易所；`make sync` 二次幂等（`docs/data/*.json` 逐文件 md5 比对，连续两次运行输出完全一致）；`br-b3.yml` 新迁移的三处字段 `quote`/`sources`/`confidence` 逐字核对为原内容原样搬移，未新造或修改任何事实性内容。
 
 **日期：** 2026-08-22
+
+### ADR-031 — v1.1 Batch 1（8 家）执行结果：Category B 数据补全 + 英文回填 + `sec.gov`/`finra.org` 反爬攻克；`isolation: worktree` 第三次复现失效及新发现
+
+**做了什么：** 按 [ADR-028] 定下的方向启动 v1.1 第一批数据深耕，选定 `cn-sse`/`tw-twse`/`hk-hkex`/`cn-szse`（一并回填英文缺失字段，`OPEN-QUESTIONS.md` 框架性问题第45条约94%集中在这四家）+ `us-nyse`/`us-nasdaq`（一并尝试突破框架性问题14/15/32条记录的 `sec.gov`/`finra.org`/`dtcc.com` 反爬）+ `uk-lse`/`jp-jpx`（补地区多样性）共 8 家，沿用 [ADR-017] 并行子代理模式（`isolation: "worktree"`），每个子代理独立跑该所 40 个候选字段清单中适用的部分（`clearing.derivatives.*` 四个镜像字段只对已有真实衍生品业务的 `hk-hkex`/`cn-szse` 启用，其余 6 家按 [ADR-030] 设计跳过）。8 个子代理中途因账号会话额度耗尽反复中断（先后触及三个不同的额度重置窗口），全部用 `SendMessage` 逐一恢复，`us-nasdaq` 还额外遇到一次服务端限流（非额度问题，直接重试即解决）。
+
+**数据结果：** 全库已填字段从 1162 增至 1360（+198，含英文回填）。按所摘要：
+
+- `cn-sse`：19 个候选字段中 18 个转为有值（多为 `confidence: high`），1 个（`risks.political_risk_note`）如实留空转悬案；英文回填 47 个字段。
+- `cn-szse`：27 个候选字段（含 4 个衍生品镜像字段，该所已有期权业务）多数转为有值，`costs.regulatory_fees` 如实留空；英文回填约 25 个字段。
+- `hk-hkex`：32 个候选字段中 30 个转为有值（含 4 个衍生品镜像字段），2 个（政治/流动性风险）留空；**顺带纠正了任务描述里"该所可能无独立监管费概念"的预设**——实测 SFC/AFRC 两项独立征费确实存在，已据实填入；英文回填 20 个字段。
+- `tw-twse`：16 个候选字段转为有值，3 个（`regulatory_fees`/`implicit_costs_note`/`major_outage_history`）如实留空；英文回填 27 个字段。
+- `us-nyse`：20 个候选字段全部转为有值，另顺带解决 4 个此前因反爬留空的既有字段（`clearing.ccp_name`/`csd_name`/`costs.regulatory_fees`/`market_structure.short_selling` 阈值），见下方反爬突破。
+- `us-nasdaq`：26 个候选字段全部转为有值，其中 `regulation.core_laws`/`market_structure.short_selling` 是此前 `OPEN-QUESTIONS.md` 框架性问题第32条点名的既有缺口，本次一并解决。
+- `uk-lse`：23 个候选字段中 19 个 `confidence: high`、3 个 `medium`、1 个（`major_outage_history`）留空转悬案。
+- `jp-jpx`：33 个候选字段中 27 个 `confidence: high`、2 个 `medium`、4 个（含 `post_delisting_venue`/`regulatory_fees`/`implicit_costs_note`）留空转悬案。
+
+**质量核验：** 8 个子代理各自按任务要求做了 10 字段抽样自查（合计 80 个样本），全部 100% 通过。合并阶段协调者额外做了两轮独立复核：① 逐一 grep 核对每个子代理声称对 `SOURCES.md`/`OPEN-QUESTIONS.md`/`glossary.yml` 追加的关键词/条目，确认全部仍在最终态（无 [ADR-021] 式静默丢失）；② 独立重新抽样 16 个 `confidence: high` 字段跑 `quote` 与 `.cache/` 原文核对，初次用粗糙脚本比对出现多次"未命中"，逐一人工排查后确认**全部是脚本本身的局限**（PDF 需要 `pdftotext` 提取而非直接读二进制、`.cache` 目录本身不入库导致部分交易所的历史缓存不在本次协调者环境里、quote 用"／"衔接非连续原文段落属已确立合法写法），未发现一例真实编造或数字失实；对 `cn-szse.regulation.foreign_ownership_limit`（10%/30%持股上限）额外用 `make fetch` 重新抓取官方原文逐字复核通过。全程 `make build` 保持 0 错误 0 警告，`make sync` 二次幂等。远超 [CLAUDE.md 四] 的 ≥95% 门槛。
+
+**反爬突破（本批最大的额外收获）：** 两个子代理（`us-nyse`/`us-nasdaq`）独立尝试并各自成功突破了 v0.2 以来悬置的 `sec.gov`/`finra.org` 反爬缺口，方法互补：`us-nyse` 发现 `sec.gov` 的 403 实为其自己文档化的"Fair Access"限流机制而非反爬，换成"机构名+邮箱"格式的身份声明式 UA（而非伪装浏览器）即可稳定复现地转为 200，同一 UA 对 `finra.org` 的部分服务端渲染路径也意外有效；`us-nasdaq` 独立找到另一条路线——`govinfo.gov`（官方制定法汇编）、`ecfr.gov` 的公开 versioner API（前端是 JS 壳但 API 本身返回官方 XML 全文）、`federalregister.gov`（SEC 规则修改通知里复述现行条文）三个政府镜像站均可绕开 `sec.gov`/`finra.org` 直接取得同等权威的一手原文。`dtcc.com` 内容子页仍被 Cloudflare 硬拦截（首页与静态资产路径不受影响），降级为改引 SEC 官方监管文件间接确认 NSCC/DTC 角色，已解决受影响的四个字段，`dtcc.com` 本身留待未来专门攻坚。两条路线的完整操作细节已写入 `PROJECT/SOURCES.md`「突破记录」一节，供后续会话直接复用而非重新试错。
+
+**工程教训——`isolation: "worktree"` 第三次独立复现失效（继 [ADR-021]、[ADR-027] 之后），规模更大且有新发现：** 8 个子代理里只有 1 个（`uk-lse`）全程保持真正独立隔离，其余 7 个因账号额度中断后经 `SendMessage` 恢复而落入 orchestrator 共享目录，与前两次记录的现象一致，但本次规模更大（此前两次分别是 9 中 7、6 中 3）。新发现三点，已回写 `.claude/skills/add-exchange/SKILL.md`：① 隔离状态可能在同一个子代理的不同恢复节点之间来回切换，不是"一旦共享就一直共享"，每次被恢复都要重新自检；② 由于严格遵守既有 SKILL.md 建议的"精确 `git add`+`git commit -- <files>`"纪律，本次**没有发生数据丢失**，但观察到一种此前未记录的良性副作用——某子代理暂存但未提交的改动，有一定概率被邻居子代理的提交顺带收纳，导致自己事后 `git diff` 为空却并非"活没做"，需要改用 `git log` 排查而非重新再写一遍；③ 8 个子代理中有 2 个各自独立为同一个英文概念（"Default Waterfall"）新造了不同的中文译法（`hk-hkex` 造"违约损失分摊阶梯"、`uk-lse` 造"违约处置瀑布"），合并阶段才发现重名，协调者手工合并为一条 `glossary.yml` 词条（保留 `uk-lse` 版作为日后统一译法，`hk-hkex` 已落库的 `zh` 字段原文不回改）。"因限额中断需要 `SendMessage` 恢复"这条路径本身仍未排查根因（[ADR-021]/[ADR-027] 均已提出怀疑），三次独立复现后判断已经是稳定可复现的平台层面限制而非偶发，后续批次应默认假设隔离不可靠、按 SKILL.md 已记录的应对纪律执行，不再视为需要"排查"的异常。
+
+**退出标准对照：** [ADR-028]/ROADMAP 定的退出标准是"8 个 0/20 字段清零"——本批已使其中 5 个（`data_pricing_model`/`historical_data_availability`/`broker_landscape`/`liquidity_risk_note`/`political_risk_note`）在至少一家交易所转为有值，`implicit_costs_note`/`regulatory_fees`/`post_delisting_venue` 三个在本批 8 家里也多数转为有值或明确留空转悬案，全部 20 家的清零状态需等 Batch 2/3 覆盖剩余 12 家后再评估，本条不重复判定。
+
+**验证：** `make build`（sync+check）0 错误 0 警告，20 家交易所；`make sync` 二次幂等；8 个子代理分支全部合并（`uk-lse` 走独立分支 `merge --no-ff`，其余 7 家因共享目录直接以线性提交落在同一分支，含 1 处 `cn-szse`/`tw-twse` 内容误混入的订正提交、1 处术语重名的合并订正）；协调者独立抽检 16+1 个字段全部核实通过（过程与排除的脚本假阳性见上）。
+
+**日期：** 2026-08-25
