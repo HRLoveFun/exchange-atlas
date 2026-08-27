@@ -1489,21 +1489,6 @@
       "exchange_id": "ch-six",
       "chapter": "clearing",
       "group": "clearing_settlement",
-      "field_path": "csd_name",
-      "label_zh": "托管机构",
-      "label_en": "CSD/ICSD",
-      "zh": "SIX SIS AG",
-      "en": "SIX SIS AG",
-      "enum": null,
-      "enum_ref": null,
-      "has_detail": true,
-      "verified": "2026-08-16",
-      "confidence": "high"
-    },
-    {
-      "exchange_id": "ch-six",
-      "chapter": "clearing",
-      "group": "clearing_settlement",
       "field_path": "delivery_method",
       "label_zh": "交割方式",
       "label_en": "Delivery Method",
@@ -3718,7 +3703,7 @@
       "enum_ref": null,
       "has_detail": false,
       "verified": "2026-08-12",
-      "confidence": "high"
+      "confidence": "medium"
     },
     {
       "exchange_id": "hk-hkex",
@@ -5737,13 +5722,13 @@
       "field_path": "closing_mechanism",
       "label_zh": "收盘机制",
       "label_en": "Closing Mechanism",
-      "zh": "收盘集合竞价：13:25-13:30汇集一段时间内所有申报以集合竞价方式决定收盘价；收盘前1分钟(13:29-13:30)模拟成交价较前次波动超逾3.5%者，延后2分钟至13:33收盘",
+      "zh": "收盘集合竞价：13:25-13:30汇集一段时间内所有申报以集合竞价方式决定收盘价；收盘前最后1分钟若模拟成交价较前次波动超逾3.5%者，延后2分钟至13:33收盘",
       "en": "Closing Call Auction: orders accumulated 13:25-13:30 are matched by call auction; certain volatile stocks are delayed to 13:33",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-16",
-      "confidence": "high"
+      "confidence": "medium"
     },
     {
       "exchange_id": "tw-twse",
@@ -7271,9 +7256,9 @@
       "en": "Opening Auction Call (08:30–09:00); orders may be entered, cancelled or amended, with the uncrossing price determined by the Volume Maximising Algorithm",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-27",
-      "confidence": "high"
+      "confidence": "medium"
     },
     {
       "exchange_id": "za-jse",

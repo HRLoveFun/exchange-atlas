@@ -462,19 +462,14 @@
           "en": "After-hours fixed-price trading, 3:05-3:30 p.m., executed at the day's closing price; applies to A-shares and exchange-traded funds (ETFs) market-wide, not limited to a specific board",
           "detail": "与上交所不同：SSE 的盘后固定价格交易仅限科创板股票，SZSE 的这项机制覆盖全市场 A 股和 ETF，不分板块——这是两所交易机制的一处具体差异。",
           "quote": "投资者可以通过盘后固定价格交易方式买卖 A 股、交易型开放式基金。……每个交易日的 15:05 至 15:30 为盘后固定价格交易时间。",
-          "confidence": "high",
           "sources": [
             {
-              "title": "深圳证券交易所交易规则（2026年修订）",
+              "title": "深圳证券交易所交易规则（2026年修订）第3.6.1、3.6.3条",
               "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
-              "accessed": "2026-08-14"
-            },
-            {
-              "title": "SZSE English — Trading Overview",
-              "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
               "accessed": "2026-08-14"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-14",
           "enum": null
         },
@@ -610,19 +605,14 @@
         "en": "A-shares RMB 0.01; funds RMB 0.001; B-shares HKD 0.01",
         "detail": "与上交所不同：SSE 的 B 股最小变动单位为 0.001 美元，SZSE 为 0.01 港元——计价货币不同（见 overview.trading_currency）。",
         "quote": "A 股交易的申报价格最小变动单位为 0.01 元人民币；基金的申报价格最小变动单位为 0.001 元人民币；B 股的申报价格最小变动单位为 0.01 港元。",
-        "confidence": "high",
         "sources": [
           {
-            "title": "深圳证券交易所交易规则（2026年修订）",
+            "title": "深圳证券交易所交易规则（2026年修订）第3.3.11条",
             "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "SZSE English — Trading Overview",
-            "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
             "accessed": "2026-08-14"
           }
         ],
+        "confidence": "high",
         "verified": "2026-08-14",
         "enum": null
       },
@@ -631,19 +621,14 @@
         "en": "Buy orders must be in multiples of 100 shares/units; a single order may not exceed 1,000,000 shares/units; ChiNext has additional per-order caps: 300,000 shares for limit orders, 150,000 shares for market orders",
         "detail": "创业板对单笔申报数量的细分上限是 SZSE 特有、SSE 现行交易规则文本中未见的额外限制，压测点之一。",
         "quote": "通过竞价交易买入证券的，申报数量应当为 100 股（份）或其整数倍。／证券竞价交易单笔申报数量不得超过 100 万股（份）。创业板股票限价申报的单笔申报数量不得超过 30 万股，市价申报的单笔申报数量不得超过 15 万股。",
-        "confidence": "high",
         "sources": [
           {
-            "title": "深圳证券交易所交易规则（2026年修订）",
+            "title": "深圳证券交易所交易规则（2026年修订）第3.3.8、3.3.9条",
             "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "SZSE English — Trading Overview",
-            "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
             "accessed": "2026-08-14"
           }
         ],
+        "confidence": "high",
         "verified": "2026-08-14",
         "enum": null
       },
@@ -651,19 +636,14 @@
         "zh": "卖出时不足 100 股的余额可一次性申报卖出",
         "en": "An odd-lot balance of fewer than 100 shares may be sold off in a single order",
         "quote": "卖出证券时，余额不足 100 股（份）部分，应当一次性申报卖出。",
-        "confidence": "high",
         "sources": [
           {
-            "title": "深圳证券交易所交易规则（2026年修订）",
+            "title": "深圳证券交易所交易规则（2026年修订）第3.3.8条",
             "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "SZSE English — Trading Overview",
-            "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
             "accessed": "2026-08-14"
           }
         ],
+        "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
         "detail": null
@@ -694,19 +674,14 @@
           "zh": "±10%",
           "en": "±10%",
           "quote": "主板股票的价格涨跌幅限制比例为 10%",
-          "confidence": "high",
           "sources": [
             {
-              "title": "深圳证券交易所交易规则（2026年修订）",
+              "title": "深圳证券交易所交易规则（2026年修订）第3.3.13条",
               "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
-              "accessed": "2026-08-14"
-            },
-            {
-              "title": "SZSE English — Trading Overview",
-              "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
               "accessed": "2026-08-14"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
           "detail": null
@@ -716,19 +691,14 @@
           "en": "ChiNext ±20%; risk-warned (ST/*ST) and delisting-transition-period stocks ±5% (standard case); no price-limit cap applies for the first 5 trading days after a new listing, the first day back after a re-listing, or the first day of the delisting transition period",
           "detail": "涨跌幅限制价格 = 前收盘价 ×（1±涨跌幅限制比例）。跟踪创业板或其他20%涨跌幅限制股票\n的指数型基金也适用20%限制。压测点：SZSE 主板 vs 创业板 与 SSE 主板 vs 科创板结构一致\n（均为10% vs 20%），两所在这一维度取值口径完全对齐。\n",
           "quote": "创业板股票的价格涨跌幅限制比例为 20%。／基金的价格涨跌幅限制比例为 10%。……价格涨跌幅限制比例为 20%。",
-          "confidence": "high",
           "sources": [
             {
-              "title": "深圳证券交易所交易规则（2026年修订）",
+              "title": "深圳证券交易所交易规则（2026年修订）第3.3.13条",
               "url": "https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf",
-              "accessed": "2026-08-14"
-            },
-            {
-              "title": "SZSE English — Trading Overview",
-              "url": "https://www.szse.cn/English/services/trading/tradOverview/index.html",
               "accessed": "2026-08-14"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-14",
           "enum": null
         }

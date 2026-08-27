@@ -294,12 +294,20 @@ market_structure:
   closing_mechanism:
     zh: "收盘集合竞价，15:25-15:30，15:30执行成交"
     en: "Closing call auction, 3:25-3:30 p.m., executed at 3:30 p.m."
+    sources:
+      - title: Business Regulations（官网英文版PDF）Rule 10/12
+        url: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf
+        accessed: 2026-08-13
     quote: "3:25 p.m. to 3:30 p.m. will be a closing auction session, with trades being executed at 3:30 p.m."
     confidence: high
 
   matching_principle:
     zh: "价格优先、时间优先；市价申报优先于指值申报"
     en: "Price priority, then time priority; market orders take precedence over limit orders"
+    sources:
+      - title: Business Regulations（官网英文版PDF）Rule 10
+        url: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf
+        accessed: 2026-08-13
     quote: "A lower offer shall have precedence over higher offers, and a higher bid shall have precedence over lower bids... Market orders shall have precedence over bids and offers other than those of market orders in terms of price."
     confidence: high
 

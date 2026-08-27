@@ -457,7 +457,6 @@
           "zh": "盘前时段 07:30-09:00（挂单接收与交易时间一致）",
           "en": "Pre-hours session 07:30-09:00 (quotation receiving hours match trading hours)",
           "quote": "Pre-hours 07:30-09:00 (1.5h) 07:30-09:00 (1.5h)",
-          "confidence": "high",
           "sources": [
             {
               "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
@@ -465,6 +464,7 @@
               "accessed": "2026-08-16"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
           "detail": null
@@ -472,8 +472,7 @@
         "continuous_am": {
           "zh": "常规交易时段全天连续竞价 09:00-15:30，不分上午盘/下午盘（无午休，见 lunch_break）",
           "en": "Regular session is a single continuous auction 09:00-15:30, not split into morning/afternoon sessions (no lunch break, see lunch_break)",
-          "quote": "Regular Session 08:00-15:30 (7.5h) 09:00-15:30 (6.5h)",
-          "confidence": "high",
+          "quote": "08:00-15:30 (7.5h) / 09:00-15:30 (6.5h)",
           "sources": [
             {
               "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
@@ -481,6 +480,7 @@
               "accessed": "2026-08-16"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
           "detail": null
@@ -521,7 +521,6 @@
           "zh": "盘后时段：挂单接收 15:30-18:00，实际盘后交易 15:40-18:00（15:30-15:40为收盘价盘后交易的挂单窗口）",
           "en": "After-hours: quotation receiving 15:30-18:00, actual after-hours trading 15:40-18:00 (15:30-15:40 is the order-receiving window for after-hours closing-price trades)",
           "quote": "After-hours 15:30-18:00 (2.5h) 15:40-18:00 (2h 20m)",
-          "confidence": "high",
           "sources": [
             {
               "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
@@ -529,6 +528,7 @@
               "accessed": "2026-08-16"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
           "detail": null
@@ -570,7 +570,6 @@
         "zh": "开盘集合竞价（Periodic call auction）决定开盘价，其后转为连续竞价",
         "en": "Opening price set by periodic call auction, then continuous auction begins",
         "quote": "Opening/Closing auction session : Periodic call auction",
-        "confidence": "high",
         "sources": [
           {
             "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
@@ -578,6 +577,7 @@
             "accessed": "2026-08-16"
           }
         ],
+        "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
         "detail": null
@@ -586,7 +586,6 @@
         "zh": "收盘集合竞价（Periodic call auction）决定收盘价",
         "en": "Closing price set by periodic call auction",
         "quote": "Opening/Closing auction session : Periodic call auction",
-        "confidence": "high",
         "sources": [
           {
             "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
@@ -594,6 +593,7 @@
             "accessed": "2026-08-16"
           }
         ],
+        "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
         "detail": null
@@ -617,8 +617,7 @@
       "order_types": {
         "zh": "限价申报、市价申报、限价转收盘价申报（Limit-to-market-On-close order）、即时可执行限价申报、最优限价申报、竞价型大宗交易申报，以及附带条件申报（FOK/IOC），各类型在开盘集合竞价/收盘集合竞价/盘前盘后/大宗交易等不同时段的可用性不同",
         "en": "Limit Order, Market Order, Limit-to-market-On-close order, Immediately Executable Limit Order, Best Limit Order, Auction-based Block Trade Order, and Orders With Conditions (FOK, IOC) — availability of each type varies by session (opening/closing auction, pre/after-hours, block trade, etc.)",
-        "quote": "Limit Order / Market Order / Limit-to-market- On-close order / Immediately Execu-table Limit Order / Best Limit Order / Auction-based Block Trade Order / With Conditions (FOK, IOC)",
-        "confidence": "high",
+        "quote": "Limit Order / Market Order / Limit-to-marketOn-close order / Immediately Executable Limit Order / Best Limit Order / Auction-based Block Trade Order / With Conditions (FOK, IOC)",
         "sources": [
           {
             "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
@@ -626,6 +625,7 @@
             "accessed": "2026-08-16"
           }
         ],
+        "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
         "detail": null
@@ -649,8 +649,7 @@
       "board_lot_size": {
         "zh": "股票、ETF、ETN最小交易单位为1股；认股权证/认股权利证书/受益证券为1份；ELW为10份",
         "en": "1 share for stocks, ETFs and ETNs; 1 warrant/certificate for subscription warrants, subscription right certificates and beneficiary certificates; 10 warrants for ELWs",
-        "quote": "Stocks, ETFs, ETNs 1 share / ...ELWs 10 warrants",
-        "confidence": "high",
+        "quote": "Stocks, ETFs, ETNs 1 share / Subscription Warrants, Subscription Right Certificates, 1 warrant(certificate) / Beneficiary Certificates / ELWs 10 warrants",
         "sources": [
           {
             "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）",
@@ -658,6 +657,7 @@
             "accessed": "2026-08-16"
           }
         ],
+        "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
         "detail": null

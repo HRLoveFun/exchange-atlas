@@ -387,7 +387,6 @@
           "zh": "7:00am-9:30am 盘前挂单期（Pre Open），只排队不成交，参考开盘价（COP）持续更新显示",
           "en": "7:00 a.m.–9:30 a.m. Pre Open: orders queue without executing; the Calculated Opening Price (COP) is displayed and continuously updated",
           "quote": "7:00 AM - 9:30 AM Pre Open - Orders may be entered, but will not be executed. The COP is displayed and continuously updated",
-          "confidence": "high",
           "sources": [
             {
               "title": "Trading Hours（官网）",
@@ -395,6 +394,7 @@
               "accessed": "2026-08-16"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
           "detail": null
@@ -435,7 +435,6 @@
           "zh": "9:30am-3:50pm连续交易；3:50pm-3:56pm为MOC失衡期（Imbalance Period）；3:56pm-4:00pm为冻结期（Freeze Period）；4:00pm收盘集合竞价（MOC）",
           "en": "9:30 a.m.–3:50 p.m. continuous trading; 3:50–3:56 p.m. MOC Imbalance Period; 3:56–4:00 p.m. Freeze Period; 4:00 p.m. Market On Close (MOC) auction",
           "quote": "3:50 PM - 4:00 PM Market On Close (MOC) - The MOC facility consists of 2 market states: 3:50 pm Imbalance Period - Allow entry of new Market on Close orders, with no cancels or amends. Allow entry of Limit on Close orders on either side and with any volume, with no cancels and aggressive price amends only. 3:56 pm Freeze Period - The Freeze Period begins simultaneously across all symbols at a random point between 3:56 pm and 3:57 pm.",
-          "confidence": "high",
           "sources": [
             {
               "title": "Trading Hours（官网）",
@@ -443,6 +442,7 @@
               "accessed": "2026-08-16"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
           "detail": null
@@ -452,7 +452,6 @@
           "en": "4:15–5:00 p.m. Extended Trading Session; trades may only occur at the Last Sale Price",
           "detail": "4:00pm-4:10pm另有价格波动延展期（Price Movement Extension，见closing_mechanism），4:10pm-4:15pm为盘后撤单期（Post Market Cancel Session）。",
           "quote": "4:15 PM - 5:00 PM Extended Trading Session - Orders at the last sale price are accepted, but trades may only occur at the last sale price except when the last sale price is an invalid tick and for regulatory approval of a specialty price cross.",
-          "confidence": "high",
           "sources": [
             {
               "title": "Trading Hours（官网）",
@@ -460,6 +459,7 @@
               "accessed": "2026-08-16"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-16",
           "enum": null
         },
@@ -500,7 +500,6 @@
         "zh": "开盘集合竞价（Market on Open, MOO），9:30am，所有可撮合订单以单一开盘价成交，未成交剩余订单（Limit on Open订单除外）转入连续限价订单簿",
         "en": "Market on Open (MOO) auction at 9:30 a.m.; all matching orders execute at a single opening trade price, with unfilled residuals (except Limit on Open orders) carried into the continuous limit order book",
         "quote": "9:30 AM Market on Open (MOO) - All matching orders are executed at a single opening trade price. Any remaining orders not filled during the opening, with the exception of Limit on Open orders, are carried through to the continuous limit order book.",
-        "confidence": "high",
         "sources": [
           {
             "title": "Trading Hours（官网）",
@@ -508,6 +507,7 @@
             "accessed": "2026-08-16"
           }
         ],
+        "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
         "detail": null

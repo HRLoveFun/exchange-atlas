@@ -366,13 +366,21 @@ market_structure:
   opening_mechanism:
     zh: "开盘集合竞价（Opening Auction Call，08:30–09:00），订单可提交/撤销/修改，竞价结束时按成交量最大化算法（Volume Maximising Algorithm）统一定价撮合"
     en: "Opening Auction Call (08:30–09:00); orders may be entered, cancelled or amended, with the uncrossing price determined by the Volume Maximising Algorithm"
-    quote: "OPENING AUCTION CALL SESSION Start: 08:30 End: 09:00 ... The orders accumulated during this session will be executed at the uncrossing based on the Volume Maximising Algorithm, following any extension period(s)."
-    confidence: high
+    sources:
+      - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（clientportal.jse.co.za PDF）"
+        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
+        accessed: 2026-08-28
+    confidence: medium
+    detail: "v4.09 正文确认存在 Opening Auction Call Session 且撮合采用 Volume Maximising algorithm（8.4 章），但具体时段 08:30–09:00 在 v4.09 文本中未逐字列出（原 v4.08 的 session-times 表曾含该时间，现已 404 无法取回），故由 high 降为 medium 并移除非逐字 quote。"
 
   closing_mechanism:
     zh: "收盘集合竞价（Closing Auction Call，16:50–17:00），同样按成交量最大化算法撮合定价；不同交易分段收盘价计算方法不同（如ZA01/ZA02/ZA03用成交量加权平均价VWAP法，ZA04/ZA06用中间价Mid-point法）"
     en: "Closing Auction Call (16:50–17:00), also uncrossed via the Volume Maximising Algorithm; the closing-price methodology varies by segment (e.g. ZA01/ZA02/ZA03 use VWAP, ZA04/ZA06 use a mid-point method)"
-    quote: "ZA01 Closing Auction VWAP Methodology 1 ... ZA04 Mid-point None Methodology 2"
+    sources:
+      - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（clientportal.jse.co.za PDF）"
+        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
+        accessed: 2026-08-28
+    quote: "Closing Auction Call Session (16:50* - 17:00*) ... ZA01 Closing Auction VWAP Methodology 1 ... ZA02 Closing Auction VWAP Methodology 1 ... ZA03 Closing Auction VWAP Methodology 1 ... ZA04 Mid-point None Methodology 2 ... ZA06 Mid-point Last AT/UT Methodology 3"
     confidence: high
 
   matching_principle:
@@ -388,18 +396,30 @@ market_structure:
   order_types:
     zh: "市价单（Market Order）、限价单（Limit Order）、止损单（Stop Order）、止损限价单（Stop Limit Order）、钉住隐藏单/钉住隐藏限价单（Pegged Hidden Order / Pegged Hidden Limit Order）、冰山单（Iceberg Order）"
     en: "Market Order, Limit Order, Stop Order, Stop Limit Order, Pegged Hidden Order / Pegged Hidden Limit Order, and Iceberg Order"
+    sources:
+      - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（clientportal.jse.co.za PDF）"
+        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
+        accessed: 2026-08-28
     quote: "Limit order An order where the number of shares and price is specified. ... Market Order Is an order where no limit price is specified and only the volume of shares to be executed is specified ... Iceberg Order Identifies an order that is partially visible to the market."
     confidence: high
 
   tick_size:
     zh: "统一为1个最小报价单位（按南非分计价，无论价格档位均为1分，不设阶梯式档位）"
     en: "A uniform tick size of 1 (in South African cents) for every instrument, with no tiered price bands"
+    sources:
+      - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（clientportal.jse.co.za PDF）"
+        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
+        accessed: 2026-08-28
     quote: "Tick Size The minimum possible price/price increment which can be used for an order. This is set to 1 for the JSE and NSX markets."
     confidence: high
 
   board_lot_size:
     zh: "统一为1股，不设整手/最小交易单位限制"
     en: "A uniform lot size of 1 share for every instrument, with no minimum board-lot requirement"
+    sources:
+      - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（clientportal.jse.co.za PDF）"
+        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
+        accessed: 2026-08-28
     quote: "Lot size of 1 for every instrument"
     confidence: high
 

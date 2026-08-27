@@ -540,20 +540,15 @@
       "closing_mechanism": {
         "zh": "收盘集合竞价（Closing Call）：16:55–17:00",
         "en": "Closing Call: 16:55–17:00",
-        "quote": "Trading Closing Call After-Market trading ... 10:00 16:55 16:55 17:00",
-        "confidence": "high",
         "sources": [
           {
-            "title": "Trading Hours – Equities",
+            "title": "Trading Hours – Equities（B3 官网）",
             "url": "https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/",
-            "accessed": "2026-08-16"
-          },
-          {
-            "title": "B3's Trading Procedures Manual（PDF，2024年4月版）",
-            "url": "https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf",
-            "accessed": "2026-08-16"
+            "accessed": "2026-08-28"
           }
         ],
+        "quote": "Trading Closing Call After-Market trading ... 10:00 16:55 16:55 17:00",
+        "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
         "detail": null
@@ -944,8 +939,8 @@
             "detail": null
           },
           "after_market": {
-            "zh": "本文件已收录的旗舰合约（Ibovespa/迷你指数期货、个股期货、S&P 500期货）在B3官方交易时段表中「Extended hours (T+0)」栏位均为空，即无独立盘后延长时段；但部分挂钩欧洲股指的合约（如DAX期货/Euro Stoxx期货）确有12:40–18:00的延长时段用于衔接欧美市场；期权市场另有独立的盘后交易窗口17:25–18:45（AHT，与现货共用，见顶层after_market）",
-            "en": "For the flagship contracts covered in this file (Ibovespa/Mini Ibovespa Futures, single-stock futures, S&P 500 Futures), B3's trading-hours table shows no populated 'Extended hours (T+0)' column, i.e. no separate after-market session; some other contracts tracking European indices (e.g. DAX Futures / Euro Stoxx Futures) do have a 12:40-18:00 extended window bridging into European/US hours; the options market has its own after-market window 17:25-18:45 (AHT, shared with the cash market, see top-level after_market)",
+            "zh": "本文件已收录的旗舰合约（Ibovespa/迷你指数期货、个股期货、S&P 500期货）在B3官方交易时段表中「Extended hours (T+0)」栏位均为空，即无独立盘后延长时段；但部分挂钩欧洲股指的合约（如DAX期货/Euro Stoxx期货）确有12:40–18:00的延长时段用于衔接欧美市场；期权市场另有独立的盘后交易窗口（AHT，与现货共用，具体时刻见顶层after_market）",
+            "en": "For the flagship contracts covered in this file (Ibovespa/Mini Ibovespa Futures, single-stock futures, S&P 500 Futures), B3's trading-hours table shows no populated 'Extended hours (T+0)' column, i.e. no separate after-market session; some other contracts tracking European indices (e.g. DAX Futures / Euro Stoxx Futures) do have a 12:40-18:00 extended window bridging into European/US hours; the options market has its own after-market window (AHT, shared with the cash market, see top-level after_market for the clock times)",
             "sources": [
               {
                 "title": "Trading Hours – Derivatives, Indices（B3 官网）",

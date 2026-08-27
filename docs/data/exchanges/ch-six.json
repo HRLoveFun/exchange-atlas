@@ -458,24 +458,14 @@
           "zh": "06:00 CET 交易日开始（Pre-Opening，可下单/改单但不成交，显示理论开盘价）",
           "en": "06:00 CET Start of Business Day (Pre-Opening — orders may be entered/amended but not executed; a theoretical opening price is displayed)",
           "quote": "06:00   Start of Business Day",
-          "confidence": "high",
           "sources": [
             {
-              "title": "Directive 3 — Trading（SER官网英文版PDF，交易机制核心条款）",
-              "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf",
-              "accessed": "2026-08-16"
-            },
-            {
-              "title": "Trading Guide（综合交易指南PDF）",
+              "title": "Trading Guide（综合交易指南PDF，Business Day Overview表）",
               "url": "https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/trading-guide.pdf",
-              "accessed": "2026-08-16"
-            },
-            {
-              "title": "\"Trading Parameters\" Guideline（GTP，各细分市场波动性中断参数）",
-              "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf",
               "accessed": "2026-08-16"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
           "detail": null
@@ -483,25 +473,15 @@
         "continuous_am": {
           "zh": "蓝筹股/中小盘股09:00开盘（2分钟随机开盘时间），持续竞价至17:20",
           "en": "Blue Chip / Mid-/Small-Cap Shares open at 09:00 (2-minute random opening window), continuous trading runs until 17:20",
-          "quote": "Blue Chip Shares  06:00  09:00  17:20  17:30  17:30  17:40  22:00  CLOB  P1  XSWX  Yes",
-          "confidence": "high",
+          "quote": "Blue Chip Shares 06:00 09:00 17:20 17:30 17:30 17:40 22:00 CLOB P1 XSWX Yes",
           "sources": [
             {
-              "title": "Directive 3 — Trading（SER官网英文版PDF，交易机制核心条款）",
-              "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf",
-              "accessed": "2026-08-16"
-            },
-            {
-              "title": "Trading Guide（综合交易指南PDF）",
+              "title": "Trading Guide（综合交易指南PDF，Business Day Overview表，Blue Chip Shares行）",
               "url": "https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/trading-guide.pdf",
-              "accessed": "2026-08-16"
-            },
-            {
-              "title": "\"Trading Parameters\" Guideline（GTP，各细分市场波动性中断参数）",
-              "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf",
               "accessed": "2026-08-16"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
           "detail": null
@@ -535,28 +515,18 @@
         "continuous_pm": {
           "zh": "17:20收盘竞价开始，17:30收盘竞价完成并公布收盘价（含2分钟随机收盘时间窗口）",
           "en": "Closing auction starts at 17:20 and completes with the closing price published at 17:30 (with a 2-minute random end window)",
-          "quote": "17:20   Start of Closing Auction ... 17:30   Run Auction and Close ... Random Time  Not applicable  2 minutes  Not applicable  None  2 minutes at Run Auction and Close",
-          "confidence": "high",
+          "detail": "Trading Guide 原文分处记载：\"17:20 Start of Closing Auction\"、\"17:30 Run Auction and Close\"，以及收盘竞价随机结束时间\"Randomized Closing 2 minutes 17:30 - 17:32 CET\"；因上述时间分散在不同表格行、无单一连续原文同时含17:20/17:30/2分钟，无法给出单一逐字 quote，故 confidence 标 medium。",
           "sources": [
             {
-              "title": "Directive 3 — Trading（SER官网英文版PDF，交易机制核心条款）",
-              "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf",
-              "accessed": "2026-08-16"
-            },
-            {
-              "title": "Trading Guide（综合交易指南PDF）",
+              "title": "Trading Guide（综合交易指南PDF，Business Day Overview表与Randomized Closing行）",
               "url": "https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/trading-guide.pdf",
-              "accessed": "2026-08-16"
-            },
-            {
-              "title": "\"Trading Parameters\" Guideline（GTP，各细分市场波动性中断参数）",
-              "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf",
               "accessed": "2026-08-16"
             }
           ],
+          "confidence": "medium",
           "verified": "2026-08-16",
           "enum": null,
-          "detail": null
+          "quote": null
         },
         "after_market": {
           "zh": "蓝筹股/中小盘股17:30-17:40另有Trading-At-Last（以收盘价撮合的盘后交易期），此后至22:00为Post Trading（挂单管理，不产生新成交）",
@@ -790,24 +760,14 @@
           "zh": "蓝筹股（Annex A）：偏离参考价±1.5%触发5分钟交易中断（另有10秒内价格骤变的Avalanche Stop机制，同阈值）",
           "en": "Blue Chip Shares (Annex A): a ±1.5% deviation from the reference price triggers a 5-minute trading interruption (an Avalanche Stop for rapid moves within 10 seconds applies the same threshold)",
           "quote": "Continuous trading shall be interrupted for 5 minutes if the potential subsequent price differs a) by 1.5% or more from the current reference price; b) by 1.5% or more from a reference price valid within 10 seconds (Avalanche Stop).",
-          "confidence": "high",
           "sources": [
             {
-              "title": "Directive 3 — Trading（SER官网英文版PDF，交易机制核心条款）",
-              "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf",
-              "accessed": "2026-08-16"
-            },
-            {
-              "title": "Trading Guide（综合交易指南PDF）",
-              "url": "https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/trading-guide.pdf",
-              "accessed": "2026-08-16"
-            },
-            {
-              "title": "\"Trading Parameters\" Guideline（GTP，各细分市场波动性中断参数）",
+              "title": "\"Trading Parameters\" Guideline, Annex A – Blue Chip Shares §4 Trading interruption",
               "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf",
               "accessed": "2026-08-16"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
           "detail": null
@@ -815,25 +775,15 @@
         "other_boards": {
           "zh": "中小盘股（Annex B）：一般个股±2%触发15分钟中断；SMIM成份股±2%触发5分钟中断；被标记为「volatile securities」的个股阈值放宽至±10%（触发5分钟中断）。开盘/收盘集合竞价另设「Delayed Auction」延时机制，计算价偏离参考价±2%~5%（按细分市场而异）即延长竞价时段5-15分钟",
           "en": "Mid-/Small-Cap Shares (Annex B): ±2% triggers a 15-minute interruption for ordinary constituents; ±2% triggers a 5-minute interruption for SMIM constituents; securities classified as \"volatile securities\" have a widened ±10% threshold (5-minute interruption). Opening/closing auctions separately have a \"Delayed Auction\" mechanism extending the auction by 5-15 minutes (varying by segment) if the calculated price deviates ±2%-5% from the reference price",
-          "quote": "For securities of the Swiss Market Index Mid (SMIM®), the delay in the opening or the trading interruption shall be 5 minutes and the bandwidth shall be 2% or more ... For volatile securities, the delay in the opening or the trading interruption shall be 5 minutes and the bandwidth shall be 10% or more",
-          "confidence": "high",
+          "quote": "Continuous trading shall be interrupted for 15 minutes if the potential subsequent price differs\na) by 2% or more from the current reference price; or\nb) by 2% or more from a reference price valid within 10 seconds (Avalanche Stop).\nFor securities of the Swiss Market Index Mid (SMIM®), the delay in the opening or the trading interruption\nshall be 5 minutes and the bandwidth shall be 2% or more in accordance with letters a and b above.\nFor volatile securities, the delay in the opening or the trading interruption shall be 5 minutes and the\nbandwidth shall be 10% or more in accordance with letters a and b above.\n",
           "sources": [
             {
-              "title": "Directive 3 — Trading（SER官网英文版PDF，交易机制核心条款）",
-              "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf",
-              "accessed": "2026-08-16"
-            },
-            {
-              "title": "Trading Guide（综合交易指南PDF）",
-              "url": "https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/trading-guide.pdf",
-              "accessed": "2026-08-16"
-            },
-            {
-              "title": "\"Trading Parameters\" Guideline（GTP，各细分市场波动性中断参数）",
+              "title": "\"Trading Parameters\" Guideline, Annex B – Mid-/Small-Cap Shares §4 Trading interruption",
               "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf",
               "accessed": "2026-08-16"
             }
           ],
+          "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
           "detail": null
@@ -1328,25 +1278,24 @@
         ],
         "quote": "SIX x-clear is licensed by the Swiss Financial Market Supervisory Authority (FINMA) as a central counterparty according to the Swiss Financial Market Infrastructure Act (FMIA).",
         "confidence": "high",
+        "csd_name": {
+          "zh": "SIX SIS AG",
+          "en": "SIX SIS AG",
+          "detail": "SIX SIS同时承担瑞士本国中央证券存管机构（CSD）与国际中央证券存管机构（ICSD）职能，运营SECOM实时结算系统；非瑞郎证券可另经Euroclear Bank / Clearstream Luxembourg结算。",
+          "sources": [
+            {
+              "title": "About SIX SIS AG",
+              "url": "https://www.six-group.com/en/products-services/securities-services/settlement-and-custody/info-center/about-six-sis-ag.html",
+              "accessed": "2026-08-16"
+            }
+          ],
+          "quote": "SIX SIS is the national Central Securities Depository (CSD) of the Swiss financial market and an International Central Securities Depository",
+          "confidence": "high"
+        },
         "verified": "2026-08-16",
         "enum": null
       },
-      "csd_name": {
-        "zh": "SIX SIS AG",
-        "en": "SIX SIS AG",
-        "detail": "SIX SIS同时承担瑞士本国中央证券存管机构（CSD）与国际中央证券存管机构（ICSD）职能，运营SECOM实时结算系统；非瑞郎证券可另经Euroclear Bank / Clearstream Luxembourg结算。",
-        "sources": [
-          {
-            "title": "About SIX SIS AG",
-            "url": "https://www.six-group.com/en/products-services/securities-services/settlement-and-custody/info-center/about-six-sis-ag.html",
-            "accessed": "2026-08-16"
-          }
-        ],
-        "quote": "SIX SIS possesses a license as central security depository under FMIA.",
-        "confidence": "high",
-        "verified": "2026-08-16",
-        "enum": null
-      },
+      "csd_name": null,
       "initial_margin_practice": {
         "enum": "na",
         "zh": "不适用——SIX Swiss Exchange是现货证券市场，不运营衍生品交易板块；SMI等指数期货/期权在Eurex挂牌，由SIX x-clear（集团CCP）以独立业务线清算衍生品，故不适用于本所自身的交易机制。",

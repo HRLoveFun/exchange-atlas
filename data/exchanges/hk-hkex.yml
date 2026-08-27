@@ -468,11 +468,15 @@ market_structure:
           - title: 衍生品市场交易时段中文版（HKEX 官网）
             url: https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=zh-hk
             accessed: 2026-08-17
-        quote: "設開市前議價時段：早市：上午8時45分－上午9時15分 午市：中午12時30分－下午1時"
+        quote: "設開市前議價時段： 早市：上午 8 時 45 分－上午 9 時 15 分 午市：中午 12 時 30 分－下午 1 時"
         confidence: high
       continuous_am:
         zh: "上午9時15分 - 正午12時（以恒生指数系列期货期权为例）"
         en: "9:15 a.m. - 12:00 noon (Hang Seng Index series futures & options)"
+        sources:
+          - title: 衍生品市场交易时段中文版（HKEX 官网）
+            url: https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=zh-hk
+            accessed: 2026-08-17
         quote: "上午9時15分* - 正午12時"
         confidence: high
       lunch_break:
@@ -482,6 +486,10 @@ market_structure:
       continuous_pm:
         zh: "下午1時 - 下午4時30分；合约到期月（即月合约）最后交易日提前收市至下午4時"
         en: "1:00 p.m. - 4:30 p.m.; the spot-month contract's Last Trading Day closes earlier, at 4:00 p.m."
+        sources:
+          - title: 衍生品市场交易时段中文版（HKEX 官网）
+            url: https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=zh-hk
+            accessed: 2026-08-17
         quote: "下午1時* - 下午4時30分"
         confidence: high
       after_market:
@@ -839,8 +847,7 @@ clearing:
       - title: HKEX Clearing - Securities Overview（CCASS）
         url: https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en
         accessed: 2026-08-12
-    quote: "HKSCC opens and maintains an omnibus stock account with CSDC and holds SSE securities on behalf of CCASS participants"
-    confidence: high
+    confidence: medium
 
   csd_name:
     zh: "香港中央结算有限公司（透过 CCASS 系统）"

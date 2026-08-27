@@ -455,8 +455,6 @@
         "zh": "第一时段开盘集合竞价（09:30–10:00，单一理论开盘价撮合）",
         "en": "First Session Opening Auction (09:30–10:00)",
         "detail": "9.9条：第一时段最后的理论开盘价即为开盘价（Opening Price）。",
-        "quote": "First Session: 09:30 – 10:00 / Opening Auction",
-        "confidence": "high",
         "sources": [
           {
             "title": "Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）",
@@ -464,6 +462,8 @@
             "accessed": "2026-08-14"
           }
         ],
+        "quote": "First Session: 09:30 – 10:00 / Opening Auction",
+        "confidence": "high",
         "verified": "2026-08-14",
         "enum": null
       },
@@ -471,8 +471,6 @@
         "zh": "第三时段收盘集合竞价（15:00–15:10），随后第四时段（15:10–15:20）允许会员按收盘价继续按盘撮合（Trade at Last）",
         "en": "Third Session Closing Auction (15:00–15:10), followed by Fourth Session Trade at Last (15:10–15:20)",
         "detail": "会员在第四时段可提交订单，按收盘价撮合买卖双方（2:30 PM – 3:00 PM 附近原文另有类似机制描述，属旧版页码残留，未纳入 quote）。",
-        "quote": "Fourth Session: Listed securities (except for Debt Instruments and ETFs): 15:10 – 15:20 / Trade at Last",
-        "confidence": "high",
         "sources": [
           {
             "title": "Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）",
@@ -480,6 +478,8 @@
             "accessed": "2026-08-14"
           }
         ],
+        "quote": "Fourth Session: Listed securities (except for Debt Instruments and ETFs): 15:10 – 15:20 / Trade at Last",
+        "confidence": "high",
         "verified": "2026-08-14",
         "enum": null
       },

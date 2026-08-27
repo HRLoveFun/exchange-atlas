@@ -66,8 +66,7 @@ overview:
       - title: 沪市市场运行情况例行发布（2026年8月3日至8月7日）
         url: http://www.sse.com.cn/aboutus/mediacenter/conference/c/10828308/files/2c803b09152c48bdbad6b3db41f71746.pdf
         accessed: 2026-08-12
-    quote: "主板 市价总值（万亿元）52.2 ／ 科创板 市价总值（万亿元）17.0"
-    confidence: high
+    confidence: medium
 
   listed_companies_count:
     zh: "2314（主板 1702 + 科创板 612）"
@@ -76,8 +75,7 @@ overview:
       - title: 沪市市场运行情况例行发布（2026年8月3日至8月7日）
         url: http://www.sse.com.cn/aboutus/mediacenter/conference/c/10828308/files/2c803b09152c48bdbad6b3db41f71746.pdf
         accessed: 2026-08-12
-    quote: "主板 上市公司数 1702 ／ 科创板 上市公司数 612"
-    confidence: high
+    confidence: medium
 
   trading_currency:
     zh: "人民币（A股）；美元（B股，规模很小且趋于边缘化）"
@@ -167,7 +165,7 @@ regulation:
       - title: 上海证券交易所股票上市规则（2026年4月修订）全文，第二章 2.2.1条、第五章 5.2.1-5.2.2条
         url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx
         accessed: 2026-08-24
-    quote: "前款所述公告和材料应当采用中文文本。同时采用外文文本的，信息披露义务人应当保证两种文本的内容一致。两种文本发生歧义时，以中文文本为准。／上市公司应当在每个会计年度结束后4个月内披露年度报告，应当在每个会计年度的上半年结束后2个月内披露半年度报告，应当在每个会计年度前3个月、前9个月结束后1个月内披露季度报告。"
+    quote: "上市公司应当在每个会计年度结束后4个月内披露年度报告，应当在每个会计年度的上半年结束后2个月内披露半年度报告，应当在每个会计年度前3个月、前9个月结束后1个月内披露季度报告。"
     confidence: high
 
   investor_protection:
@@ -497,8 +495,7 @@ listing:
       - title: 上海证券交易所股票上市规则（2026年4月修订）全文，第九章 9.1.10/9.1.13/9.1.14/9.1.15/9.2.9条
         url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx
         accessed: 2026-08-24
-    quote: "9.1.10 本所上市审核委员会（以下简称上市委员会）对上市公司股票终止上市事宜进行审议，作出独立的专业判断并形成审议意见。本所根据上市委员会的意见，作出是否终止股票上市的决定。／9.1.13 本所作出上市公司股票终止上市决定的，在2个交易日内通知公司并披露相关公告，同时报中国证监会备案。／9.1.14 上市公司股票被本所强制终止上市后，进入退市整理期，因触及交易类退市情形终止上市的除外。／9.1.15 上市公司股票被强制终止上市后，应当聘请具有主办券商业务资格的证券公司，在本所作出终止其股票上市决定后立即安排股票转入全国中小企业股份转让系统等证券交易场所进行股份转让相关事宜，保证公司股票在摘牌之日起45个交易日内可以转让。／9.2.9 本所在公告上市公司股票或者存托凭证终止上市决定之日后5个交易日内对其予以摘牌。"
-    confidence: high
+    confidence: medium
 
   delisting_transition_period:
     zh: "交易类退市已取消退市整理期设置（2024年修订）；财务类等其他类型是否保留整理期未逐条核实"

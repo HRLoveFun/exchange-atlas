@@ -21,11 +21,12 @@ overview:
   dst_rule: "不实行夏令时"
 
   founded_year:
-    zh: "1961（民国50年10月23日成立；1962年〔民国51年〕2月9日正式开业）"
-    en: "1961 (established 23 Oct 1961, ROC year 50; formally opened for business 9 Feb 1962, ROC year 51)"
+    zh: "民国50年10月23日成立；民国51年2月9日正式开业（民國50年／51年）"
+    en: "Established 23 Oct ROC year 50; formally opened 9 Feb ROC year 51"
     detail: |
-      官方历史沿革页以民国纪年逐年列出大事记，「50年10.23 台湾证券交易所成立」
-      「51年02.09 台湾证券交易所正式开业」为该页最早两条记录。
+      官方历史页以民国纪年逐年列大事记，原文（繁体）最早两条为
+      「50年 10.23 臺灣證券交易所成立」「51年 02.09 臺灣證券交易所正式開業」。
+      民國50年 = 西元1961年，民國51年 = 西元1962年，故本档 founded_year 取西元1961。
     sources:
       - title: 历史介绍（TWSE 官网大事记）
         url: https://www.twse.com.tw/zh/about/company/history.html
@@ -327,14 +328,22 @@ market_structure:
     confidence: high
 
   closing_mechanism:
-    zh: "收盘集合竞价：13:25-13:30汇集一段时间内所有申报以集合竞价方式决定收盘价；收盘前1分钟(13:29-13:30)模拟成交价较前次波动超逾3.5%者，延后2分钟至13:33收盘"
+    zh: "收盘集合竞价：13:25-13:30汇集一段时间内所有申报以集合竞价方式决定收盘价；收盘前最后1分钟若模拟成交价较前次波动超逾3.5%者，延后2分钟至13:33收盘"
     en: "Closing Call Auction: orders accumulated 13:25-13:30 are matched by call auction; certain volatile stocks are delayed to 13:33"
-    quote: "收盤 (13:25~13:30) 集合競價 僅接受限價當日有效(ROD)委託／有價證券收盤前1分鐘（13:29-13:30），如任一次模擬撮合成交價格與前一次模擬撮合成交價格漲跌超逾3.5%時...該證券13:30不進行收盤撮合，於13:31起暫緩2分鐘收盤...至13:33停止接受委託並收盤"
+    detail: |
+      收盤採集合競價，時段為13:25~13:30（TWSE「集中市场交易制度介绍」表列：
+      「收盤(13:25~13:30) 集合競價 僅接受限價當日有效(ROD)委託」）。
+      收盤前最後1分鐘實施暫緩收盤作業：達標準者不於13:30收盤撮合，投資人可於13:31起
+      持續增刪改委託，至13:33分收盤（同页「交易方式彙總」）。波動門檻3.5%見營業細則
+      第58-3条（漲跌超逾參考價格百分之三點五時延緩撮合二分鐘）。
     sources:
+      - title: 集中市场交易制度介绍
+        url: https://www.twse.com.tw/zh/products/system/trading.html
+        accessed: 2026-08-16
       - title: 台湾证券交易所股份有限公司营业细则 第58-3条
         url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007304
         accessed: 2026-08-16
-    confidence: high
+    confidence: medium
 
   matching_principle:
     zh: "价格优先、时间优先"
