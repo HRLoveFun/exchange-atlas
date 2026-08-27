@@ -346,6 +346,36 @@
       "confidence": "medium"
     },
     {
+      "exchange_id": "au-asx",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "exchange_fees",
+      "label_zh": "交易所费用",
+      "label_en": "Exchange Fees",
+      "zh": "ASX 对现货市场成交本身收取成交费（Trade Fee）；以股票为例，按成交金额 0.15 基点从价计收，每笔每边封顶 75 澳元。其余产品类别适用不同档费率，均按月计收并加收 GST",
+      "en": "ASX charges a Trade Fee on the cash-market trade itself; for equities it is 0.15 basis points of traded value, capped at $75 per trade per side. Other product categories use different fee tiers, all charged monthly plus GST",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-27",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "au-asx",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "stamp_duty",
+      "label_zh": "印花税",
+      "label_en": "Stamp Duty",
+      "zh": "澳大利亚各州已废除上市证券（marketable securities，含 ASX 上市股票）转让的印花税（含交易单据印花税）。以新南威尔士州为例，《1997 年税收法》(Duties Act 1997) 第 34 条自 2016 年 7 月 1 日起规定「marketable securities … are not dutiable property」，各州亦先后废除对上市股票的印花税；因此 ASX 二级市场交易目前不产生州印花税。土地持有型公司（landholder）的股份转让等特定情形仍可能触地相关税，属例外",
+      "en": "Australian states have abolished stamp duty on transfer of marketable securities (including ASX-listed shares). In New South Wales, for example, s34 of the Duties Act 1997 provides that from 1 July 2016 marketable securities 'are not dutiable property'; other states likewise abolished duty on listed shares. ASX secondary-market trades therefore currently incur no state stamp duty. Transfers of shares in landholder companies remain a possible exception caught by land-related duty",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": false,
+      "verified": "2026-08-27",
+      "confidence": "medium"
+    },
+    {
       "exchange_id": "br-b3",
       "chapter": "overview",
       "group": "overview",
@@ -721,6 +751,21 @@
       "confidence": "high"
     },
     {
+      "exchange_id": "br-b3",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "stamp_duty",
+      "label_zh": "印花税",
+      "label_en": "Stamp Duty",
+      "zh": "巴西不对证券交易征收类似英国/香港式的印花税（stamp duty）；证券流转环节的类交易税为IOF（金融操作税，股票资金汇入当前为0%）与所得税。该字段对B3适用情形为N/A。",
+      "en": "Brazil levies no UK/Hong-Kong-style stamp duty on securities trades; the transaction-style levies on securities are IOF (Financial Transaction Tax, currently 0% on equity inflows) and income tax. This field is N/A for B3.",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-27",
+      "confidence": "medium"
+    },
+    {
       "exchange_id": "ca-tsx",
       "chapter": "overview",
       "group": "overview",
@@ -792,7 +837,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -807,7 +852,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -822,7 +867,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -1002,7 +1047,7 @@
       "enum": "disclosure_with_discretion",
       "enum_ref": "review_system",
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -1017,7 +1062,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -1032,7 +1077,7 @@
       "enum": "t1",
       "enum_ref": "settlement_cycle",
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -1047,7 +1092,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -1062,7 +1107,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -1077,7 +1122,7 @@
       "enum": "na",
       "enum_ref": "delivery_method",
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -1092,8 +1137,23 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "ca-tsx",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "stamp_duty",
+      "label_zh": "印花税",
+      "label_en": "Stamp Duty",
+      "zh": "不适用：加拿大对证券转让不征收印花税（stamp duty）。跨境并购税务指南明确指出「There is no stamp duty in Canada」；联邦无证券交易印花税，各省印花税一般也不适用于证券交易所上市证券的转让",
+      "en": "Not applicable: Canada imposes no stamp duty on the transfer of securities. A cross-border M&A guide states plainly 'There is no stamp duty in Canada'; there is no federal securities-transfer stamp duty, and provincial stamp duties generally do not apply to transfers of exchange-listed securities",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-27",
+      "confidence": "medium"
     },
     {
       "exchange_id": "ch-six",
@@ -1454,6 +1514,21 @@
       "has_detail": true,
       "verified": "2026-08-16",
       "confidence": "medium"
+    },
+    {
+      "exchange_id": "ch-six",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "exchange_fees",
+      "label_zh": "交易所费用",
+      "label_en": "Exchange Fees",
+      "zh": "SIX对所有场内交易收取费用，按「每笔交易 × 每参与者」计提，取决于该参与者的总交易额（从价费，ad valorem fee）与交易笔数；另有按月容量费（依所选接口与吞吐量）。具体费率见《List of Charges under Trading Rules》（LOC-TR）。",
+      "en": "SIX charges a fee for all on-Exchange transactions, calculated per transaction and per participant, depending on the participant's total trading turnover (money involved; ad valorem fee) and number of transactions; a monthly capacity fee also applies by interface and throughput. Specific rates are in the List of Charges under Trading Rules (LOC-TR).",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-27",
+      "confidence": "high"
     },
     {
       "exchange_id": "ch-six",
@@ -2292,7 +2367,7 @@
       "enum": "demutualized_unlisted",
       "enum_ref": "organization_form",
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -2307,7 +2382,7 @@
       "enum": "no",
       "enum_ref": "yes_no",
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -2322,7 +2397,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -2337,7 +2412,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -2352,7 +2427,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -2367,7 +2442,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -2382,7 +2457,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -2397,7 +2472,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -2412,7 +2487,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -2427,7 +2502,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -2442,7 +2517,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -2457,7 +2532,7 @@
       "enum": "dynamic_reference",
       "enum_ref": "price_limit_type",
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -2472,7 +2547,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -2487,7 +2562,7 @@
       "enum": "stock_level",
       "enum_ref": "circuit_breaker_type",
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -2502,7 +2577,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -2517,7 +2592,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -2532,8 +2607,38 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "de-eurex",
+      "chapter": "listing",
+      "group": "listing_delisting",
+      "field_path": "review_system",
+      "label_zh": "审核制度",
+      "label_en": "Review System",
+      "zh": "N/A — Eurex 为衍生品交易所，不上市公司，不存在公司上市审核制度；与之对应的是交易员资格考试与准入审核（Admission Regulations for Exchange Traders），性质不同，不适合填入本字段，见章节顶部说明。",
+      "en": "N/A — Eurex is a derivatives exchange and does not list corporations, so there is no corporate listing-review regime; the analogous concept is the Exchange Trader examination/admission (Admission Regulations for Exchange Traders), which is a different mechanism and not suitable for this field. See the chapter note.",
+      "enum": null,
+      "enum_ref": "review_system",
+      "has_detail": false,
+      "verified": "2026-08-27",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "de-eurex",
+      "chapter": "listing",
+      "group": "listing_delisting",
+      "field_path": "delisting_conditions",
+      "label_zh": "退市条件",
+      "label_en": "Delisting Conditions",
+      "zh": "N/A — 衍生品没有'退市'概念，最接近的是合约到期（Expiry）或管理董事会终止交易（见 clearing/last_trading_day_rule），性质是合约生命周期管理，非公司退市，不适合填入本字段。",
+      "en": "N/A — Derivatives have no 'delisting' concept; the closest analogues are contract expiry or termination of trading by the Management Board (see clearing.last_trading_day_rule), which is contract-lifecycle management, not corporate delisting.",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": false,
+      "verified": "2026-08-27",
+      "confidence": "medium"
     },
     {
       "exchange_id": "de-eurex",
@@ -2547,7 +2652,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -2562,7 +2667,7 @@
       "enum": "either",
       "enum_ref": "delivery_method",
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -2577,8 +2682,23 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "de-eurex",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "stamp_duty",
+      "label_zh": "印花税",
+      "label_en": "Stamp Duty",
+      "zh": "N/A — 德国对衍生品交易不征收印花税（英国式的股票印花税/荷兰式转让税不适用于场内衍生品），衍生品本身亦不发生证券过户印花税。",
+      "en": "N/A — Germany does not levy stamp duty on derivatives trading (the UK-style share stamp duty / Dutch-style transfer tax does not apply to on-exchange derivatives), and derivatives do not involve a stampable securities transfer.",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": false,
+      "verified": "2026-08-27",
+      "confidence": "medium"
     },
     {
       "exchange_id": "de-xetra",
@@ -2941,6 +3061,21 @@
       "confidence": "high"
     },
     {
+      "exchange_id": "de-xetra",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "stamp_duty",
+      "label_zh": "印花税",
+      "label_en": "Stamp Duty",
+      "zh": "德国不对证券买卖征收印花税/证券转移税；历史上的「证券交易税」（Börsenumsatzsteuer）已于1991年1月1日废除（依据《改善金融市场条件法》第4条），不同于英国的外国股票SDRT",
+      "en": "Germany levies no stamp duty / securities transfer tax on securities trades; the historical Börsenumsatzsteuer (stock exchange sales tax) was abolished with effect from 1 January 1991 (under Article 4 of the Act to Improve the Framework Conditions for Financial Markets), unlike the UK's SDRT on foreign shares",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-27",
+      "confidence": "high"
+    },
+    {
       "exchange_id": "fr-euronext",
       "chapter": "overview",
       "group": "overview",
@@ -3254,6 +3389,21 @@
       "has_detail": false,
       "verified": "2026-08-16",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "fr-euronext",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "stamp_duty",
+      "label_zh": "印花税",
+      "label_en": "Stamp Duty",
+      "zh": "印花税属各国税法事项而非交易所规则；本所七个市场所属国中，法国自 2008 年起已废除股票交易印花税（但仍对部分衍生品/高频交易征收金融交易税，见 financial_transaction_tax），其余国家亦无针对普通股现货交易的经典「印花税」(stamp duty)。比利时/荷兰/爱尔兰/葡萄牙/挪威各有其他交易相关税种，但均非印花税性质。",
+      "en": "Stamp duty is a matter of each country's tax law rather than an exchange rule; among the seven markets' home countries, France abolished its stock-transaction stamp duty in 2008 (though it still levies a financial transaction tax on some derivatives / high-frequency trades, see financial_transaction_tax), and the other countries likewise have no classic \"stamp duty\" on ordinary cash-equity trading. Belgium, the Netherlands, Ireland, Portugal and Norway each have other transaction-related taxes, but none are stamp-duty in nature.",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-27",
+      "confidence": "medium"
     },
     {
       "exchange_id": "hk-hkex",
@@ -3837,7 +3987,7 @@
       "enum": "disclosure_with_discretion",
       "enum_ref": "review_system",
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -3852,7 +4002,7 @@
       "enum": "t1",
       "enum_ref": "settlement_cycle",
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -3867,7 +4017,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -3882,8 +4032,38 @@
       "enum": "na",
       "enum_ref": "delivery_method",
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "medium"
+    },
+    {
+      "exchange_id": "in-nse",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "exchange_fees",
+      "label_zh": "交易所费用",
+      "label_en": "Exchange Fees",
+      "zh": "NSE 按双侧计收交易费（transaction charges）：现货市场 Rs. 2.97/每边/每 lakh 成交金额；股指与股票期货 Rs. 1.73/每边/每 lakh；股票期权 Rs. 35.03/每边/每 lakh 权利金价值；货币期货 Rs. 0.35/每边/每 lakh；货币与利率期权 Rs. 31.10/每边/每 lakh 权利金价值。生效与修订后的费率见 detail",
+      "en": "NSE charges transaction charges on both sides: Cash Market Rs. 2.97 per lakh of traded value per side; Equity Futures Rs. 1.73 per lakh per side; Equity Options Rs. 35.03 per lakh of premium value per side; Currency Futures Rs. 0.35 per lakh per side; Currency and Interest Rate Options Rs. 31.10 per lakh of premium value per side; see detail for effective dates and later revisions",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-27",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "in-nse",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "stamp_duty",
+      "label_zh": "印花税",
+      "label_en": "Stamp Duty",
+      "zh": "印度自（官网原文 with effect from July 1, 2020）起通过证券交易所交易证券须缴印花税（Stamp Duty），由清算公司（经交易所授权）代征代缴：实物交割的股票转让 0.015%（买方）、非实物交割 0.003%（买方）、股票期货 0.002%（买方）、股票期权 0.003%（买方）。注意印度对证券交易同时征收印花税与证券交易税(STT)，二者为不同税目；其余品种（货币/利率衍生品、公司债、回购、政府证券等）税率见 detail",
+      "en": "From (per the official text, with effect from July 1, 2020) stamp duty on securities transactions through a stock exchange is levied and collected by Clearing Corporations authorised by the Exchange: delivery-based equity transfer 0.015% (buyer), non-delivery 0.003% (buyer), equity futures 0.002% (buyer), equity options 0.003% (buyer). Note India levies both stamp duty and STT on securities trades — distinct tax heads; rates for other instruments (currency/IR derivatives, corporate bonds, repo, government securities) are in detail",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-27",
+      "confidence": "high"
     },
     {
       "exchange_id": "jp-jpx",
@@ -4317,7 +4497,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -4332,7 +4512,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -4347,7 +4527,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -4527,7 +4707,7 @@
       "enum": "dual_track",
       "enum_ref": "review_system",
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -4542,7 +4722,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -4557,7 +4737,7 @@
       "enum": "t2",
       "enum_ref": "settlement_cycle",
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -4572,7 +4752,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -4587,7 +4767,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -4602,7 +4782,22 @@
       "enum": "na",
       "enum_ref": "delivery_method",
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "kr-krx",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "exchange_fees",
+      "label_zh": "交易所费用",
+      "label_en": "Exchange Fees",
+      "zh": "交易所交易经手费：KRX对股票交易收取统一约0.0023%的交易费（精确实为0.0022763%）；为应对Nextrade竞争，2025年12月15日宣布临时改为阶梯费率——自2025年12月15日至2026年2月13日，限价单(Maker)费率降至0.00134%、市价单(Taker)降至0.00182%（原为统一0.0023%）。衍生品按合约计收交易费。",
+      "en": "Exchange trading fee: KRX charges a flat stock trading fee of about 0.0023% (precisely 0.0022763%); to counter competition from Nextrade it announced in Dec 2025 a temporary shift to a tiered rate — from 15 Dec 2025 to 13 Feb 2026, limit-order (Maker) fees drop to 0.00134% and market-order (Taker) fees to 0.00182% (from the prior flat 0.0023%). Derivatives are charged per contract.",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": false,
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -4612,13 +4807,13 @@
       "field_path": "stamp_duty",
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
-      "zh": "韩国官方名称为「证券交易税」（Securities Transaction Tax，非「印花税」字面译法，但功能上是本项目该字段横向对比的对应项），该页表述股票证券交易税率为0.3%（并说明该税不适用于ETF）",
-      "en": "Officially the \"Securities Transaction Tax\" (not literally a stamp duty, but the functional equivalent for cross-exchange comparison in this field); this page states a 0.3% rate for stocks (and notes it is not charged on ETFs)",
+      "zh": "韩国对证券转让不征收「印花税」(stamp duty)这一独立税种；本项目横向对比中与该字段对应的、按交易金额课征的流转税是「证券交易税」(Securities Transaction Tax, STT)，其现行税率见 financial_transaction_tax（2026年起KOSPI/KOSDAQ均为0.20%）。韩国税法中并无名为印花税的证券税种。",
+      "en": "Korea does not impose a stamp duty as a separate tax on securities transfers; the transaction-value turnover tax that corresponds to this field in cross-exchange comparison is the 'Securities Transaction Tax' (STT), whose current rate is in financial_transaction_tax (0.20% for both KOSPI and KOSDAQ from 2026). Korean law has no securities stamp-duty instrument.",
       "enum": null,
       "enum_ref": null,
-      "has_detail": true,
-      "verified": "2026-08-16",
-      "confidence": "medium"
+      "has_detail": false,
+      "verified": "2026-08-27",
+      "confidence": "low"
     },
     {
       "exchange_id": "sa-tadawul",
@@ -4981,6 +5176,36 @@
       "confidence": "medium"
     },
     {
+      "exchange_id": "sa-tadawul",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "exchange_fees",
+      "label_zh": "交易所费用",
+      "label_en": "Exchange Fees",
+      "zh": "交易所交易费约为成交金额的 0.009%（由沙特交易所/Tadawul 收取）",
+      "en": "Exchange trading fee is approximately 0.009% of trade value (collected by Saudi Exchange / Tadawul)",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-27",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "sa-tadawul",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "stamp_duty",
+      "label_zh": "印花税",
+      "label_en": "Stamp Duty",
+      "zh": "沙特对证券转让不征收印花税（stamp duty）",
+      "en": "Saudi Arabia does not impose stamp duty on securities transfers",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-27",
+      "confidence": "medium"
+    },
+    {
       "exchange_id": "sg-sgx",
       "chapter": "overview",
       "group": "overview",
@@ -5052,7 +5277,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -5067,7 +5292,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -5082,7 +5307,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -5277,7 +5502,7 @@
       "enum": "mixed_by_board",
       "enum_ref": "review_system",
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -5292,7 +5517,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -5307,7 +5532,7 @@
       "enum": "t2",
       "enum_ref": "settlement_cycle",
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -5322,7 +5547,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -5337,7 +5562,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -5352,7 +5577,22 @@
       "enum": "na",
       "enum_ref": "delivery_method",
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "sg-sgx",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "exchange_fees",
+      "label_zh": "交易所费用",
+      "label_en": "Exchange Fees",
+      "zh": "SGX 对现货证券交易收取「交易费」（SGX Trading Fee），业界与券商公开费率表口径约为成交金额的 0.0075%；此外 CDP 另收证券清算/存管相关费用。衍生品交易/清算费按合约计收，与本字段现货口径不同。本数值来自第三方券商费率综述，本次未抓取到 sgx.com 逐字费率表，故标 medium。",
+      "en": "SGX levies a securities Trading Fee, cited by industry/broker fee schedules at roughly 0.0075% of contract value; CDP separately charges securities clearing/custody fees. Derivatives trading/clearing fees are per-contract and differ from this securities figure. The rate is from third-party broker fee overviews; no verbatim sgx.com fee table was fetched, so confidence is medium.",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": false,
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -5367,7 +5607,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -6927,7 +7167,7 @@
       "enum": "demutualized_listed",
       "enum_ref": "organization_form",
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -6942,7 +7182,7 @@
       "enum": "yes",
       "enum_ref": "yes_no",
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -6957,7 +7197,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -6972,7 +7212,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -6987,7 +7227,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7002,7 +7242,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "medium"
     },
     {
@@ -7017,7 +7257,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7032,7 +7272,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7047,7 +7287,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7062,7 +7302,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7077,7 +7317,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7092,7 +7332,7 @@
       "enum": "percentage_band",
       "enum_ref": "price_limit_type",
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7107,7 +7347,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7122,7 +7362,7 @@
       "enum": "stock_level",
       "enum_ref": "circuit_breaker_type",
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7137,7 +7377,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7152,8 +7392,23 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "za-jse",
+      "chapter": "market_structure",
+      "group": "trading_mechanism",
+      "field_path": "intraday_reversal",
+      "label_zh": "回转交易制度",
+      "label_en": "Intraday Reversal (T+N)",
+      "zh": "JSE 现货市场允许当日回转交易（T+0）：当日买入的证券可于同一交易日卖出，无类似 A 股的 T+1 锁定；后端结算为 T+3（见 clearing.settlement_cycle），但交易层面不受结算周期限制。",
+      "en": "The JSE cash market permits intraday round-trip trading (T+0): securities bought on a given day can be sold on the same day, with no A-share-style T+1 lock; back-office settlement is T+3 (see clearing.settlement_cycle), but trading is not constrained by the settlement cycle.",
+      "enum": null,
+      "enum_ref": "reversal",
+      "has_detail": true,
+      "verified": "2026-08-27",
+      "confidence": "medium"
     },
     {
       "exchange_id": "za-jse",
@@ -7167,7 +7422,7 @@
       "enum": null,
       "enum_ref": "short_selling_stance",
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7182,7 +7437,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7197,7 +7452,7 @@
       "enum": "disclosure_with_discretion",
       "enum_ref": "review_system",
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7212,7 +7467,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7227,7 +7482,7 @@
       "enum": "t3",
       "enum_ref": "settlement_cycle",
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7242,7 +7497,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7257,7 +7512,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     },
     {
@@ -7272,8 +7527,23 @@
       "enum": "na",
       "enum_ref": "delivery_method",
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "medium"
+    },
+    {
+      "exchange_id": "za-jse",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "exchange_fees",
+      "label_zh": "交易所费用",
+      "label_en": "Exchange Fees",
+      "zh": "JSE 对权益交易（含权证、ETP、AltX）按每笔成交金额的 0.50 个基点计收交易费，并设单笔成交上限（trade cap，见 detail）。",
+      "en": "The JSE charges a trading fee of 0.50 basis points of the value of each trade leg on equity trades (including warrants, ETPs and AltX), subject to a per-trade ceiling (trade cap, see detail).",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-27",
+      "confidence": "high"
     },
     {
       "exchange_id": "za-jse",
@@ -7287,7 +7557,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-08-27",
       "confidence": "high"
     }
   ]

@@ -233,23 +233,55 @@ regulation:
     confidence: high
 
   foreign_ownership_limit:
-    zh: ""
-    confidence: low
-    detail: "未核实瑞士对上市公司外资持股的一般性限制（作为非欧盟国家，瑞士对外资持股总体开放，但未找到官方原文逐条核实是否存在行业例外），留空，见OPEN-QUESTIONS。"
+    zh: "瑞士对外国投资者持有上市公司股份无一般性限制（非欧盟国家，资本市场总体对外资开放）；唯一例外是2025年12月19日通过的《投资审查法》（ISA），规定外国国有控股投资者收购瑞士特定敏感行业企业须事先审批，预计2027年生效——但这是针对外国直接投资的并购审查，并非对二级市场证券投资的外资持股上限。"
+    en: "Switzerland imposes no general restriction on foreign ownership of listed-company shares (a non-EU country with an overall open capital market); the only exception is the Investment Screening Act (ISA), adopted on 19 December 2025, which subjects acquisitions by foreign state-controlled investors of Swiss companies in certain sensitive sectors to prior approval (expected entry into force in 2027) — but this is FDI merger-review, not a foreign-ownership cap on secondary-market portfolio investment."
+    detail: "SECO官方说明页确认ISA仅针对外国国有控股投资者收购敏感行业企业的「事先审批」，并非全面外资持股上限；二级市场证券投资不受此限。"
+    quote: "The objective of the Investment Screening Act is to protect Switzerland's security and public order by subjecting acquisitions of Swiss companies operating in especially critical sectors by foreign state-controlled investors to prior approval. Entry into force is expected in 2027."
+    sources:
+      - title: "Investment Screening (SECO 瑞士联邦经济事务秘书处官方说明页)"
+        url: https://www.seco.admin.ch/en/investment-screening
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   capital_controls:
-    zh: ""
-    confidence: low
-    detail: "瑞士法郎自由兑换、无外汇管制是常识性事实，但本次未附官方原文来源，按铁律留空不采纳。"
+    zh: "瑞士无外汇管制：瑞士法郎自由兑换，资本可自由跨境流动；仅对银行及金融公司适用特定审慎监管规定，不存在一般性资本流动限制。"
+    en: "Switzerland has no exchange controls: the Swiss franc is freely convertible and capital may move freely across borders; only certain prudential regulations applicable to banks and finance companies apply, with no general capital-movement restrictions."
+    detail: "美国国际贸易署（ITA/export.gov）说明瑞士法郎自由兑换、除对银行及金融公司的特定规定外无外汇管制；第三方政府来源，confidence标medium。"
+    quote: "The Swiss franc is freely convertible. With the exception of certain regulations applicable to banks and finance companies, there are no exchange controls."
+    sources:
+      - title: "Switzerland - Foreign Exchange Controls (U.S. International Trade Administration, export.gov)"
+        url: https://legacy.export.gov/article?id=Switzerland-Foreign-Exchange-Controls
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   disclosure_requirements:
-    zh: ""
-    confidence: low
-    detail: "Listing Rules对定期报告（年报/半年报）有具体条款（Art. 49等），但本字段要求的是披露制度整体框架（语言/频率/渠道），本次未系统梳理，留空，见listing.continuing_obligations的部分相关内容。"
+    zh: "发行人须按所适用财务报告准则（IFRS/US GAAP/Swiss GAAP FER）发布经审计年度报告；上市规则另强制要求权益类证券发行人发布半年度财务报告，季度报告为自愿。此外有《上市规则》第53条「价格敏感事实披露义务」（ad hoc publicity）及内幕交易规则保护投资者。"
+    en: "Issuers must publish an audited annual report under the applicable financial reporting standard (IFRS/US GAAP/Swiss GAAP FER); the Listing Rules additionally impose an obligation to publish semi-annual financial statements for issuers of listed equity securities, while quarterly reporting is voluntary. There is also the ad-hoc publicity obligation (Art. 53 LR) and insider-trading rules."
+    detail: "披露频率框架以Listing Rules Art. 49（年度）与Art. 50（半年度强制、季度自愿）为准；价格敏感事实披露见Art. 53。"
+    quote: "Issuers of listed equity securities are obliged to publish semi-annual financial statements. The publication of quarterly financial statements is voluntary. Art. 53 Obligation to disclose price-sensitive facts (ad hoc publicity): The issuer must inform the market of any price-sensitive facts which have arisen in its sphere of activity."
+    sources:
+      - title: "Listing Rules Art. 50 (SIX Exchange Regulation 官网英文版 PDF)"
+        url: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high
 
   investor_protection:
-    zh: ""
-    confidence: low
+    zh: "瑞士投资者保护框架以《金融服务法》（FinSA）为核心，对金融服务提供者设行为准则、客户分类（零售/专业/机构）与适当性/合适性要求，并要求向零售投资者提供基本信息文件（BIB）；交易所层面由SIX Exchange Regulation（SER）通过上市披露（如Art. 53价格敏感事实披露义务）与交易监督规则保护投资者。"
+    en: "Switzerland's investor-protection framework is anchored in the Financial Services Act (FinSA), which sets a code of conduct for financial service providers, client categorisation (retail/professional/institutional) and suitability/appropriateness requirements, and requires a Basic Information Document (BIB) for retail investors; at the exchange level SIX Exchange Regulation (SER) protects investors through listing-disclosure (e.g. Art. 53 ad-hoc publicity) and trading-surveillance rules."
+    detail: "FinSA为国家级投资者保护立法（mirroring MiFID II），交易所层面的保护主要通过SER的披露与监督规则实现。"
+    quote: "Art. 53 Obligation to disclose price-sensitive facts (ad hoc publicity): The issuer must inform the market of any price-sensitive facts which have arisen in its sphere of activity."
+    sources:
+      - title: "Listing Rules Art. 53 (SIX Exchange Regulation 官网英文版 PDF)"
+        url: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf
+        accessed: 2026-08-27
+      - title: "FinSA – Services (SIX 官网说明页)"
+        url: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/services/finsa.html
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 四｜产品体系
@@ -626,8 +658,16 @@ listing:
     confidence: high
 
   listing_process_duration:
-    zh: ""
-    confidence: low
+    zh: "通常自上市申请提交后不超过四周内完成审核决定（「申请通常最迟在提交后四周内作出决定」）；招股说明书审查期为新发行人20个日历日、其他发行人10个日历日，见Going Public Process。"
+    en: "Normally the decision is taken no later than four weeks after the listing application is filed; the prospectus review period is 20 calendar days for new issuers (10 for others), per the Going Public Process."
+    detail: "官方「Going Public Process」手册给出「不超过四周」的审核时点与招股说明书审查期（新发行人20个日历日、其他10个日历日）。"
+    quote: "This normally happens no later than four weeks after the listing application was filed. The prospectus review period is 10 respectively 20 (new issuers) calendar days"
+    sources:
+      - title: "The Swiss Stock Exchange – Going Public Process (SIX 官网英文版 PDF)"
+        url: https://www.six-group.com/dam/download/the-swiss-stock-exchange/listing/equity/ipo/ssx-gpprocess-en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high
 
   transfer_between_boards:
     zh: ""
@@ -675,13 +715,28 @@ listing:
     confidence: medium
 
   delisting_transition_period:
-    zh: ""
-    confidence: low
-    detail: "LR Art.58仅笼统要求「适当的通知与等待期」，未见统一的具体天数/交易日数规定（不同案例可能不同），本次未找到官方原文给出统一标准，留空。"
+    zh: "《上市规则》第58条仅笼统要求退市须给予适当通知并遵守合理的等待期（「Regulatory Board may make delisting conditional upon due notice and the observance of appropriate waiting periods」），未规定统一的具体天数；过渡期长短视个案而定。"
+    en: "Listing Rules Art. 58 only generally requires that delisting be subject to due notice and appropriate waiting periods, without prescribing a uniform fixed number of days; the transition period varies case by case."
+    detail: "与有固定退市过渡期的市场不同，SIX以「合理等待期」原则处理，具体时长由Regulatory Board酌定。"
+    quote: "Art. 58 Delisting — The Regulatory Board may make delisting conditional upon due notice and the observance of appropriate waiting periods."
+    sources:
+      - title: "Listing Rules Art. 58 (SIX Exchange Regulation 官网英文版 PDF)"
+        url: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high
 
   post_delisting_venue:
-    zh: ""
-    confidence: low
+    zh: "SIX Swiss Exchange本身不设专门的退市后交易场所（不同于某些交易所的OTC/粉单板块）；退市证券可转至场外（OTC）双边交易。案例：Swiss Steel于2025年退市后，剩余股东经安排通过私人银行Lienhardt & Partner的LPZ-X场外交易平台继续交易，但这是个案安排而非交易所常设板块。"
+    en: "SIX Swiss Exchange itself operates no dedicated post-delisting venue (unlike some exchanges' OTC/pink-sheet boards); delisted securities may move to bilateral over-the-counter (OTC) trading. Case in point: after its 2025 delisting, Swiss Steel Holding AG shareholders were given the option to trade via the over-the-counter platform LPZ-X of private bank Lienhardt & Partner — an ad-hoc arrangement, not a standing exchange segment."
+    detail: "SIX无正式post-delisting board；退市后流动性通常依赖OTC双边报价或第三方平台。"
+    quote: "Immediately after delisting, Swiss Steel Holding AG shares will be traded via the over-the-counter trading platform LPZ-X of the private bank Lienhardt & Partner."
+    sources:
+      - title: "Swiss Steel Holding AG: Last trading day on SIX Swiss Exchange on June 5, 2025 (Ad-hoc release via EQS)"
+        url: https://www.eqs-news.com/news/ad-hoc/swiss-steel-holding-ag-last-trading-day-on-six-swiss-exchange-on-june-5-2025-exemption-from-annual-results-publication-requirement-granted/ba532e25-4c3f-4a71-aa2d-66048e20f26e_en
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -761,16 +816,43 @@ clearing:
     confidence: high
 
   initial_margin_practice:
-    zh: ""
-    confidence: low
+    enum: na
+    zh: "不适用——SIX Swiss Exchange是现货证券市场，不运营衍生品交易板块；SMI等指数期货/期权在Eurex挂牌，由SIX x-clear（集团CCP）以独立业务线清算衍生品，故不适用于本所自身的交易机制。"
+    en: "N/A — SIX Swiss Exchange is a cash securities market with no derivatives trading segment; index futures/options on Swiss underlyings trade on Eurex and are cleared by SIX x-clear as a separate CCP business line, so this does not apply to the exchange's own trading."
+    detail: "本所products章节均为现货证券，Trading Rules无衍生品保证金条款；SIX x-clear虽清算衍生品，但属集团独立CCP业务线，非本所交易环节。"
+    sources:
+      - title: "SIX x-clear Operational Manual (SIX Group 官网)"
+        url: https://www.six-group.com/dam/download/securities-services/clearing/download-center/operational/clr-xcl-510-en.pdf
+        accessed: 2026-08-27
+      - title: "Products – SIX Swiss Exchange (本所产品体系，均为现货证券)"
+        url: https://www.six-group.com/en/products-services/the-swiss-stock-exchange.html
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   maintenance_margin_practice:
-    zh: ""
-    confidence: low
+    enum: na
+    zh: "不适用——同上，本所为现货市场，无衍生品维持保证金概念；SIX x-clear对其清算的衍生品执行维持保证金要求，但属CCP独立业务线，非本所交易机制。"
+    en: "N/A — as above, the cash market has no derivatives maintenance-margin concept; SIX x-clear applies maintenance-margin requirements to the derivatives it clears, but that is a separate CCP business line, outside the exchange's own trading."
+    detail: "维持保证金是衍生品清算概念；现货交易无此机制。"
+    sources:
+      - title: "SIX x-clear Operational Manual (SIX Group 官网)"
+        url: https://www.six-group.com/dam/download/securities-services/clearing/download-center/operational/clr-xcl-510-en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   mark_to_market_frequency:
-    zh: ""
-    confidence: low
+    enum: na
+    zh: "不适用——本所为现货市场，无衍生品盯市频率概念；SIX x-clear对其清算工具（含Eurex衍生品）执行日内保证金运行，但属CCP独立业务线，非本所交易机制。"
+    en: "N/A — the cash market has no derivatives mark-to-market cadence; SIX x-clear runs intraday margining for its cleared instruments (including Eurex derivatives) but as a separate CCP business line, outside the exchange's own trading."
+    detail: "衍生品盯市频率不适用于现货交易；SIX x-clear的日内保证金运行见其Operational Manual。"
+    sources:
+      - title: "SIX x-clear Operational Manual (SIX Group 官网)"
+        url: https://www.six-group.com/dam/download/securities-services/clearing/download-center/operational/clr-xcl-510-en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   delivery_method:
     enum: na
@@ -784,12 +866,28 @@ clearing:
     confidence: medium
 
   last_trading_day_rule:
-    zh: ""
-    confidence: low
+    enum: na
+    zh: "不适用——本所为现货市场，无衍生品最后交易日规则；相关衍生品在Eurex交易并适用Eurex的最后交易日规则，由SIX x-clear清算。"
+    en: "N/A — the cash market has no derivatives last-trading-day rule; relevant derivatives trade on Eurex and are subject to Eurex last-trading-day rules, cleared by SIX x-clear."
+    detail: "最后交易日规则是衍生品合约属性，不适用于现货证券。"
+    sources:
+      - title: "SIX x-clear Operational Manual (SIX Group 官网)"
+        url: https://www.six-group.com/dam/download/securities-services/clearing/download-center/operational/clr-xcl-510-en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   default_management:
-    zh: ""
-    confidence: low
+    zh: "SIX x-clear（本所交易的中央对手方）设有违约基金（Default Fund）与违约 waterfall（损失分摊层级），覆盖其清算的各类工具；违约时依序以违约会员保证金、SIX x-clear自有出资（skin in the game）、违约基金各分段出资、以及（在极端情形下）其他会员的补充出资吸收损失。"
+    en: "SIX x-clear (the CCP for SIX Swiss Exchange trades) maintains a Default Fund and a default waterfall (loss-allocation hierarchy) covering its cleared instruments; on a member default, losses are absorbed in order by the defaulter's margin, SIX x-clear's own equity contribution (skin in the game), the respective Default Fund Segment contributions, and (in extreme cases) supplementary contributions from non-defaulting members."
+    detail: "SIX x-clear Operational Manual第8章（Default Fund）与第10章（Application of collateral / Default Waterfall）详述机制；符合CPMI-IOSCO披露义务。"
+    quote: "The total size of the Default Fund is the sum of the sizes of the respective Default Fund Segment. ... Figure 6: SIX x-clear Default Waterfall"
+    sources:
+      - title: "SIX x-clear Operational Manual (SIX Group 官网)"
+        url: https://www.six-group.com/dam/download/securities-services/clearing/download-center/operational/clr-xcl-510-en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者
@@ -804,8 +902,16 @@ participants:
     confidence: high
 
   investor_structure:
-    zh: ""
-    confidence: low
+    zh: "投资者结构以机构投资者为主导——瑞士及国际的养老基金、保险公司、共同基金/资产管理人（如UBS、Pictet、BlackRock等）是最大参与方；零售参与度相对有限。瑞士养老基金约三成资产投向股票，且其中近三分之二为国际股票，表明外资与国际投资者在瑞士市场占有重要地位。"
+    en: "The investor base is dominated by institutional investors — Swiss and international pension funds, insurance companies and asset/management firms (e.g. UBS, Pictet, BlackRock) are the largest participants; retail participation is relatively limited. Swiss pension funds invest about 30% of assets in equities, of which almost two-thirds are international equities, underscoring the significant role of foreign and institutional investors."
+    detail: "SIX投资者关系手册将投资基金、养老基金、保险公司列为瑞士最大机构投资者；本地基金约49%投入股票。"
+    quote: "Investment funds, pension funds, and insurance companies are some of the largest institutional investors in Switzerland."
+    sources:
+      - title: "SIX Handbooks – Investors in Switzerland (SIX 官方投资者关系手册)"
+        url: https://handbooks.six-group.com/en/investor-relations/kernzielgruppe-investoren/investoren-in-der-schweiz
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   account_opening_requirements:
     zh: "参与者须持有FINMA颁发的证券商牌照或「远程会员」（remote member）授权；具备接入交易系统的技术条件；是受认可清算机构与结算机构的参与者（或通过General Clearing Member/托管行间接接入）"
@@ -814,8 +920,16 @@ participants:
     confidence: high
 
   suitability_management:
-    zh: ""
-    confidence: low
+    zh: "适用瑞士《金融服务法》（FinSA，2020年生效）的客户适当性/合适性框架：金融服务提供者须将客户分类为零售、专业或机构，并提供与其分类相匹配的适当性（appropriateness）与合适性（suitability）评估；零售客户另须获基本信息文件（BIB）。该要求约束面向投资者的服务，而非交易所交易本身。"
+    en: "Switzerland's Financial Services Act (FinSA, in force 2020) client-suitability framework applies: financial service providers must categorise clients as retail, professional or institutional and perform appropriateness/suitability assessments matching the category; retail clients must additionally receive a Basic Information Document (BIB). The requirement binds investor-facing services rather than the exchange trading itself."
+    detail: "SIX FinSA说明页概述FinSA的投资者保护要求（mirroring MiFID II）；分类与适当性义务落在金融服务提供者一侧。"
+    quote: "The Swiss Financial Services Act (FinSA), enacted on January 1, 2020, sets out regulatory requirements for investor protection, mirroring MiFID II in Europe and PRIIPs regulations. It defines a code of conduct for financial service providers and requires a Basic Information Document (BIB) for retail investors."
+    sources:
+      - title: "FinSA – Services (SIX 官网说明页)"
+        url: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/services/finsa.html
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   foreign_access_channel:
     zh: "「远程会员」（Remote Member）制度——境外证券商无需在瑞士设立实体，经FINMA授权即可直接成为本所交易参与者"
@@ -838,8 +952,16 @@ participants:
     confidence: medium
 
   broker_landscape:
-    zh: ""
-    confidence: low
+    zh: "交易参与者为持有FINMA证券商牌照的银行/证券商（含远程会员 remote member），2024年4月BGC Brokers LP加入后总数达95家；参与者多为国际性与瑞士本土银行及经纪商，市场参与者国际化程度高。"
+    en: "Trading participants are FINMA-licensed banks/securities firms (including remote members); after BGC Brokers LP joined in April 2024 the total reached 95 trading participants. Participants are mostly international and Swiss domestic banks and brokers, with a high degree of internationalisation."
+    detail: "SIX新闻稿确认BGC加入使交易参与者总数达95；此前2021年SSW-Trading概览亦提及约94名参与者。经纪/佣金由会员机构自行定价，交易所不统一规定。"
+    quote: "BGC Brokers LP brings the total of trading participants on SIX Swiss Exchange to 95."
+    sources:
+      - title: "BGC Joins SIX Swiss Exchange as New Trading Participant (SIX 新闻稿)"
+        url: https://www.six-group.com/en/newsroom/news/the-swiss-stock-exchange/2024/bcg-new-trading-participant.html
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十｜市场数据与技术基础设施
@@ -850,20 +972,55 @@ infrastructure:
     confidence: medium
 
   market_data_levels:
-    zh: ""
-    confidence: low
+    zh: "SIX通过Exfeed提供实时市场数据产品：SIX MDDX（综合行情 feed，含全量订单簿更新）、ITCH Market Data Interface（IMI，低延迟行情接口）、Historical Price Service（HPS，历史数据）与Reference Data & Key Figures（dataAPI，参考数据）；第三方再分发者常以Level 1（最优买卖价）/Level 2（订单簿深度）/Level 2 Plus DOB（详细订单簿）分层描述，但SIX原生产品命名为上述几类。"
+    en: "SIX delivers real-time market data via Exfeed: SIX MDDX (consolidated feed with full order-book updates), ITCH Market Data Interface (IMI, low-latency market data), Historical Price Service (HPS) and Reference Data & Key Figures (dataAPI). Third-party redistributors describe tiers as Level 1 (best bid/ask/last) / Level 2 (order-book depth) / Level 2 Plus DOB (detailed order book), but SIX's native product nomenclature is the set above."
+    detail: "SIX未在其官方材料中采用Level 1/2/3的统一标签；订单簿深度通过SIX MDDX与IMI提供。"
+    quote: "SIX MDDX is the consolidated Market Data Feed of SIX. ... ITCH Market Data Interface (IMI) ... Historical Price Service (HPS) ... Reference Data & Key Figures (dataAPI)"
+    sources:
+      - title: "Exfeed: the real-time data feed from SIX (SIX 官网)"
+        url: https://www.six-group.com/en/market-data/data-services.html
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   data_latency:
-    zh: ""
-    confidence: low
+    zh: "交易平台X-stream INET的平均延迟仅约10.6微秒（microseconds），属全球最快的现货交易系统之一；行情通过SIX MDDX/IMI低延迟分发。"
+    en: "The trading platform X-stream INET offers an average latency of just 10.6 microseconds, among the fastest cash-trading systems globally; market data is distributed with low latency via SIX MDDX/IMI."
+    detail: "延迟数据来自SIX参与页面关于X-stream INET的描述。"
+    quote: "The Swiss Stock Exchange runs X-stream INET, one of the world's fastest and most advanced trading technologies. Offering an average latency of just 10.6 microseconds"
+    sources:
+      - title: "Participation – Trading on SIX Swiss Exchange (SIX 官网)"
+        url: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/participation.html
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high
 
   data_pricing_model:
-    zh: ""
-    confidence: low
+    zh: "市场数据由SIX通过Exfeed（SIX Financial Information）以商业许可方式提供；实时行情、历史数据与参考数据均为需签约付费的许可产品，价格依产品、接口与分发范围而定，不对公众免费开放全量实时行情。"
+    en: "Market data is provided commercially by SIX via Exfeed (SIX Financial Information); real-time feeds, historical data and reference data are licensed, paid products whose pricing depends on the product, interface and redistribution scope, and full real-time data is not freely available to the public."
+    detail: "SIX Financial Information为集团数据业务线，按商业许可收费；具体资费属商业合同范畴。"
+    quote: "Our Exfeed service delivers you high-quality and low-latency market data conveniently and efficiently."
+    sources:
+      - title: "Exfeed: the real-time data feed from SIX (SIX 官网)"
+        url: https://www.six-group.com/en/market-data/data-services.html
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high
 
   historical_data_availability:
-    zh: ""
-    confidence: low
+    zh: "SIX提供历史价格与统计数据（市场数据页称包含historical data and statistics）；经Exfeed的Historical Price Service（HPS）提供逐笔订单簿历史，另有月度统计报告（Statistical Monthly Report）覆盖成交、成交额与挂牌证券等历史序列。"
+    en: "SIX provides historical prices and statistics (the market data page states it includes historical data and statistics); the Historical Price Service (HPS) via Exfeed delivers tick-level order-book history, and Statistical Monthly Reports cover historical series of turnover, trades and listed securities."
+    detail: "历史数据通过Exfeed HPS与公开统计报告获取；回溯期依产品而异。"
+    quote: "This includes order book information, prices, volumes and turnover figures as well as historical data and statistics."
+    sources:
+      - title: "Market Data (SIX 官网)"
+        url: https://www.six-group.com/en/market-data.html
+        accessed: 2026-08-27
+      - title: "Exfeed: the real-time data feed from SIX (SIX 官网, HPS)"
+        url: https://www.six-group.com/en/market-data/data-services.html
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high
 
   trading_system_name:
     zh: "SWXess（本所交易平台）"
@@ -877,12 +1034,31 @@ infrastructure:
     confidence: high
 
   access_methods:
-    zh: ""
-    confidence: low
+    zh: "交易接入提供多种接口：(1) OUCH Trading Interface（OTI）与FIX交易（含FIX transactions per second, FTPS / OUCH transactions per second, OTPS）；(2) STI订单（FIX transactions）；行情接入为ITCH Market Data Interface（IMI）。参与者另可经交易网关按容量付费接入。"
+    en: "Trading access is offered via multiple interfaces: (1) OUCH Trading Interface (OTI) and FIX trading (FIX transactions per second / FTPS; OUCH transactions per second / OTPS); (2) STI orders (FIX transactions); market data access is via the ITCH Market Data Interface (IMI). Participants may also connect through a Trading Gateway with a monthly capacity fee."
+    detail: "接入方式见《List of Charges under Trading Rules》（LOC-TR）；不同接口对应不同吞吐量与月度容量费。"
+    quote: "OUCH transactions per second (OTPS) ... FIX transactions per second (FTPS) ... ITCH Market Data Interface"
+    sources:
+      - title: "List of Charges under Trading Rules (LOC-TR, SIX Exchange Regulation 官网)"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/loc-tr-en.pdf
+        accessed: 2026-08-27
+      - title: "Participation – Trading on SIX Swiss Exchange (SIX 官网)"
+        url: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/participation.html
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high
 
   major_outage_history:
-    zh: ""
-    confidence: low
+    zh: "近年有两次重大交易中断：(1) 2023年6月13日，因股票与期权问题发生逾十年最严重中断，交易暂停约3小时；(2) 2024年7月31日，因SIX MDDX行情数据分发故障，股票交易自约09:10起无法发布行情，10:00暂停、14:30恢复，约4小时，为史上最长 outage，且是13个月内第二次重大中断。西班牙市场（同属SIX）行情亦受数小时影响。"
+    en: "Two major disruptions in recent years: (1) 13 June 2023, the worst outage in over a decade, with equities and options trading halted for about three hours; (2) 31 July 2024, a technical fault in the SIX MDDX market-data feed made it impossible to disseminate pricing data, halting equity trading from ~10:00 to 14:30 (about four hours) — the exchange's longest outage ever and the second in just over a year. Spanish market data (also SIX-owned) was affected for several hours."
+    detail: "outage源于市场数据分发系统（SIX MDDX）故障；2024年事件为第三方媒体（SWI swissinfo.ch / Bloomberg）报道，confidence标medium。"
+    quote: "Switzerland's stock market operator halted equity trading for hours Wednesday after a technical snag that made it impossible to distribute pricing data, the exchange's longest outage ever and the second to hit it in little more than a year."
+    sources:
+      - title: "Swiss stock exchange halts trading due to technology issues (SWI swissinfo.ch)"
+        url: https://www.swissinfo.ch/eng/archive-banking-fintech/six-swiss-exchange-halts-again-as-technology-issues-are-ongoing/85568336
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十一｜交易成本与税费
@@ -893,20 +1069,58 @@ costs:
     confidence: medium
 
   commission_structure:
-    zh: ""
-    confidence: low
+    zh: "经纪佣金由交易参与者（会员券商）与客户在双边合同中约定，交易所不统一规定佣金率；SIX自身收取的是按交易与参与者计的交易费（见exchange_fees）及接入/容量费，不涉及对投资者的佣金定价。"
+    en: "Brokerage commissions are set bilaterally between the trading participant (member firm) and its client; the exchange does not prescribe a uniform commission rate. SIX itself charges a per-transaction, per-participant exchange fee (see exchange_fees) and access/capacity fees, not investor-facing commissions."
+    detail: "佣金属会员机构商业定价；本字段记录为「由券商自行定价」。"
+    quote: "SIX charges a fee for all on-Exchange transactions. This fee is calculated per transaction and participant and depends on the given participant's total trading turnover (money involved; ad valorem fee) and number of transactions."
+    sources:
+      - title: "Participation – Trading on SIX Swiss Exchange (SIX 官网)"
+        url: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/participation.html
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   exchange_fees:
-    zh: ""
-    confidence: low
+    zh: "SIX对所有场内交易收取费用，按「每笔交易 × 每参与者」计提，取决于该参与者的总交易额（从价费，ad valorem fee）与交易笔数；另有按月容量费（依所选接口与吞吐量）。具体费率见《List of Charges under Trading Rules》（LOC-TR）。"
+    en: "SIX charges a fee for all on-Exchange transactions, calculated per transaction and per participant, depending on the participant's total trading turnover (money involved; ad valorem fee) and number of transactions; a monthly capacity fee also applies by interface and throughput. Specific rates are in the List of Charges under Trading Rules (LOC-TR)."
+    detail: "费用结构为从价费+按笔数，外加容量费；费率表在LOC-TR中。"
+    quote: "SIX charges a fee for all on-Exchange transactions. This fee is calculated per transaction and participant and depends on the given participant's total trading turnover (money involved; ad valorem fee) and number of transactions."
+    sources:
+      - title: "Participation – Trading on SIX Swiss Exchange (SIX 官网)"
+        url: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/participation.html
+        accessed: 2026-08-27
+      - title: "List of Charges under Trading Rules (LOC-TR, SIX Exchange Regulation 官网)"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/loc-tr-en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high
 
   clearing_fees:
-    zh: ""
-    confidence: low
+    zh: "SIX x-clear对清算收取费用：自2025年起，SIX Swiss Exchange（SSX）交易的清算费为每笔结算CHF 0.80；另设参与者年度会员费（ICM/GCM为CHF 25,000/年，NCM为CHF 3,500/年）。具体以清算费用通知函（Clearing Fees Letter）为准。"
+    en: "SIX x-clear charges clearing fees: from 2025, clearing of SIX Swiss Exchange (SSX) trades is CHF 0.80 per settlement; an annual participant membership fee also applies (ICM/GCM CHF 25,000 p.a., NCM CHF 3,500 p.a.). Details per the Clearing Fees Letter."
+    detail: "费率来自SIX x-clear清算费用通知函（flb-clr-fees-240701-en.pdf）。"
+    quote: "CHF 0.80 per settlement"
+    sources:
+      - title: "Clearing Fees Letter (SIX x-clear, flb-clr-fees-240701-en.pdf)"
+        url: https://www.six-group.com/dam/download/securities-services/clearing/info-center/pricing/flb-clr-fees-240701-en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high
 
   regulatory_fees:
-    zh: ""
-    confidence: low
+    zh: "瑞士联邦层面对场内交易不征收单独的「监管费」（类似美国SEC费）；交易环节实际发生的法定费用为交易所交易费（exchange_fees）与联邦证券交易印花税（stamp_duty）。FINMA等监管机构对参与者的监管不以逐笔交易费形式转嫁。"
+    en: "Switzerland levies no separate federal per-transaction 'regulatory fee' on exchange trades (unlike, e.g., the U.S. SEC fee); the statutory charges that actually arise at the transaction level are the exchange fee (see exchange_fees) and the federal securities transfer stamp tax (see stamp_duty). FINMA's supervision of participants is not passed through as a per-trade fee."
+    detail: "《List of Charges under Trading Rules》(LOC-TR)的费用表中列有交易所交易费、从价费等，但无独立「监管费」项，支持「瑞士无逐笔监管费」的判断。"
+    quote: "SIX charges a fee for all on-Exchange transactions. This fee is calculated per transaction and participant and depends on the given participant's total trading turnover (money involved; ad valorem fee) and number of transactions."
+    sources:
+      - title: "List of Charges under Trading Rules (LOC-TR, SIX Exchange Regulation 官网)"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/loc-tr-en.pdf
+        accessed: 2026-08-27
+      - title: "Participation – Trading on SIX Swiss Exchange (SIX 官网)"
+        url: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/participation.html
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   stamp_duty:
     zh: "联邦证券交易印花税（Umsatzabgabe/transfer stamp tax）：本国证券1.5‰（合0.15%），外国证券3.0‰（合0.3%）——按证券买卖对价计算，由境内证券商作为交易方或中介参与时征收，实务上买卖双方各承担一半"
@@ -938,9 +1152,16 @@ costs:
     detail: "瑞士证券交易印花税（见stamp_duty）本身即具有金融交易税性质，本字段与stamp_duty的边界如何区分本次未进一步厘清，留空避免重复计入。"
 
   capital_gains_tax:
-    zh: ""
-    confidence: low
-    detail: "常识印象：瑞士对私人投资者的证券资本利得普遍免税（区别于职业交易者），但本次未附ESTV官方原文核实具体口径与例外情形，按铁律留空。"
+    zh: "瑞士对私人投资者的动产（如股票）资本利得原则上全面免税，只要该个人不被认定为职业证券交易的交易商；职业证券商/交易商的资本利得须纳税。此为个人所得税层面的处理，公司层面资本利得按普通所得纳税。"
+    en: "In Switzerland, private capital gains on movable assets (e.g. shares) are normally tax-exempt throughout the country, provided the individual does not qualify as a professional securities dealer; capital gains of professional dealers are taxable. This is at the personal-income level; at the corporate level capital gains are taxed as ordinary income."
+    detail: "口径来自PwC个人税摘要；职业交易商例外依瑞士税法（DBG Art. 16(3)）判定。"
+    quote: "Private capital gains on movable assets (e.g. shares) are normally tax-exempt throughout Switzerland as long as an individual does not qualify as being a professional securities dealer."
+    sources:
+      - title: "Switzerland - Individual - Income determination (PwC Tax Summaries)"
+        url: https://taxsummaries.pwc.com/switzerland/individual/income-determination
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   dividend_withholding_tax:
     zh: "联邦预扣税（Verrechnungssteuer/anticipatory tax）：投资收益（含股息）35%，人寿年金/养老金15%，其他保险给付8%；由境内债务人（如支付股息的公司/托管银行）代扣代缴，本国纳税人可通过申报全额抵扣/退还，非居民可按税收协定申请部分退还"
@@ -953,8 +1174,16 @@ costs:
     confidence: high
 
   implicit_costs_note:
-    zh: ""
-    confidence: low
+    zh: "SIX Swiss Exchange是瑞士证券的参考市场（reference market），拥有瑞士证券日交易的最高市场份额，提供无与伦比的流动性与最窄的买卖价差（tightest bid/ask spreads）；对蓝筹及主要证券，大部分交易集中在本所，流动性集中降低了隐性成本（冲击成本/价差）。小盘与部分结构化产品流动性较薄，隐性成本相对更高。"
+    en: "SIX Swiss Exchange is the reference market for Swiss securities, with the highest market share of daily trading in Swiss securities, offering unparalleled liquidity and the tightest bid/ask spreads; for blue chips and major securities most trading concentrates on SIX, and this liquidity concentration lowers implicit costs (spread/impact). Small caps and some structured products are thinner, with relatively higher implicit costs."
+    detail: "隐性成本低的判断基于SIX作为瑞士证券参考市场的地位与最窄价差宣称。"
+    quote: "the reference market with the highest market share of daily trading in Swiss securities, we offer unparalleled liquidity and the tightest bid/ask spreads."
+    sources:
+      - title: "Markets – Trading on SIX Swiss Exchange (SIX 官网)"
+        url: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/markets.html
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 十二｜风险与特殊考量
@@ -970,12 +1199,31 @@ risks:
     confidence: low
 
   political_risk_note:
-    zh: ""
+    zh: "瑞士为永久中立国，政治体制长期稳定、机构健全、法治与财产权保护强，传统上被视为低政治风险国家；联邦制与直接民主带来政策可预期性，交易所运营与监管框架受此稳定环境支撑，政治中断风险低。主要可观察变量为与欧盟的监管等效性博弈（见regulatory_change_risk_note），属外部政策风险而非国内政治失稳。"
+    en: "Switzerland is a permanently neutral state with a long-stable political system, strong institutions, rule of law and property-rights protection, traditionally viewed as a low political-risk country; federalism and direct democracy lend policy predictability, and exchange operations and the regulatory framework are underpinned by this stability, with low political-disruption risk. The main observable variable is the EU equivalence dynamic (see regulatory_change_risk_note), an external policy risk rather than domestic political instability."
+    detail: "政治稳定为公认国别事实；本字段为定性判断，confidence标low，未附单一权威原文逐条核实，建议后续补一权威国别风险来源（见OPEN-QUESTIONS）。"
+    quote: ""
+    sources:
+      - title: "The Swiss Confederation – official portal (admin.ch)"
+        url: https://www.admin.ch
+        accessed: 2026-08-27
+    verified: 2026-08-27
     confidence: low
 
   liquidity_risk_note:
-    zh: ""
-    confidence: low
+    zh: "SIX Swiss Exchange是瑞士证券的参考市场，拥有最高日交易份额与最窄买卖价差，蓝筹与主流证券流动性充裕；但市场流动性高度集中于大盘股与ETF/债券，中小盘及部分结构性产品流动性较薄（如Swiss Steel因低流通股与低成交量于2025年退市）。对单一中小盘或冷门结构化产品，流动性风险需单独评估。"
+    en: "SIX Swiss Exchange is the reference market for Swiss securities with the highest daily trading share and tightest spreads, so blue chips and mainstream securities are highly liquid; however liquidity is concentrated in large caps and ETFs/bonds, while small/mid caps and some structured products are thinner (e.g. Swiss Steel delisted in 2025 citing low free float and limited trading volume). Liquidity risk for a single small cap or obscure structured product must be assessed separately."
+    detail: "流动性分层明显；参考市场地位降低整体隐性成本，但非全覆盖。"
+    quote: "the reference market with the highest market share of daily trading in Swiss securities, we offer unparalleled liquidity and the tightest bid/ask spreads."
+    sources:
+      - title: "Markets – Trading on SIX Swiss Exchange (SIX 官网)"
+        url: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/markets.html
+        accessed: 2026-08-27
+      - title: "Swiss Steel Holding AG: Last trading day on SIX Swiss Exchange (EQS ad-hoc, 流动性背景)"
+        url: https://www.eqs-news.com/news/ad-hoc/swiss-steel-holding-ag-last-trading-day-on-six-swiss-exchange-on-june-5-2025-exemption-from-annual-results-publication-requirement-granted/ba532e25-4c3f-4a71-aa2d-66048e20f26e_en
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   regulatory_change_risk_note:
     zh: "瑞士作为非欧盟国家，其交易所监管框架能否获欧盟MiFID II/MiFIR「等效性」认定存在政治不确定性，且已实际发生过一次认定失效。时间线：(1) 欧盟委员会《实施决定》(EU) 2017/2441（2017年12月21日通过）首次认定SIX Swiss Exchange AG与BX Swiss AG符合等效标准，有效期至2018年12月31日；(2) 《实施决定》(EU) 2018/2047（2018年12月20日通过）将认定延长至2019年6月30日；(3) 此后欧盟未再续期，等效认定自2019年7月1日起失效；(4) 瑞士随即针对欧盟启动「交易所基础设施保护措施」反制（禁止外国交易场所未经认可交易瑞士股票），该措施已于2024年1月1日转入《金融市场基础设施法》（FinMIA）正式立法；(5) 随欧盟2024年修订相关法律基础，瑞士联邦委员会2025年1月29日决定，自2025年5月1日起将欧盟从保护措施适用名单中移除。截至本次核实（2026年8月），欧盟层面的正式「等效性」认定本身尚未恢复，双方仅通过瑞士单方面解除反制措施使市场准入恢复常态。"
@@ -995,5 +1243,13 @@ risks:
     confidence: high
 
   enforcement_note:
-    zh: ""
-    confidence: low
+    zh: "SIX Exchange Regulation（SER）负责监督与执法：对发行人可处谴责、最高CHF 100万（过失）或CHF 1,000万（故意）罚款、暂停交易、退市或重新分配至不同监管标准等制裁；对交易参与者另依《交易规则》监督。制裁由Regulatory Board / Sanction Commission作出。"
+    en: "SIX Exchange Regulation (SER) is responsible for supervision and enforcement: against issuers it may impose reprimand, a fine of up to CHF 1 million (negligence) or CHF 10 million (wilful intent), suspension of trading, delisting or reallocation to a different regulatory standard; trading participants are supervised under the Trading Rules. Sanctions are decided by the Regulatory Board / Sanction Commission."
+    detail: "执法依据为Listing Rules Art. 61（发行人制裁）与Trading Rules相关条款。"
+    quote: "One or more of the following sanctions may be imposed on issuers and guarantors ... 1. reprimand; 2. fine of up to CHF 1 million (in cases of negligence) or CHF 10 million (in cases of wrongful intent); 3. suspension of trading; 4. delisting or reallocation to a different regulatory standard;"
+    sources:
+      - title: "Listing Rules Art. 61 Sanctions (SIX Exchange Regulation 官网英文版 PDF)"
+        url: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: high

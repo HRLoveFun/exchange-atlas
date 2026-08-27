@@ -280,14 +280,20 @@
         "detail": null
       },
       "foreign_ownership_limit": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "欧盟《资本自由流动》框架下，七个市场均无针对外资持股比例的集团统一上限；法国、意大利等部分国家对国防、能源、通信、媒体等战略性行业设有「黄金权力」(golden power) 外资安全审查机制，属国家安全审查而非普遍持股上限，其余行业外资准入与本国投资者一致。",
+        "en": "Under the EU free-movement-of-capital framework there is no group-wide foreign-ownership cap across the seven markets; France, Italy and some other countries operate sectoral \"golden power\" foreign-investment screening for strategically sensitive industries (defence, energy, telecoms, media, etc.) — a national-security review rather than a general shareholding ceiling — while foreign access in all other sectors is on par with domestic investors.",
+        "detail": "属欧盟/成员国法律框架层面的结构性事实，非交易所自设规则；未附单一强 quote，sources 仅用于佐证本所国别构成。",
+        "sources": [
+          {
+            "title": "Regulatory Framework（Euronext 官网，逐国监管机构列表）",
+            "url": "https://www.euronext.com/en/trading/membership/regulatory-framework",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "capital_controls": {
         "zh": "欧元区六个市场（阿姆斯特丹/布鲁塞尔/都柏林/里斯本/巴黎/米兰）内无资本管制，欧元自由浮动；挪威（奥斯陆）虽非欧元区但属欧洲经济区（EEA），资本自由流动原则同样适用；未单独抓取官方原文逐一核实",
@@ -306,24 +312,36 @@
         "quote": null
       },
       "disclosure_requirements": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "发行人须遵守欧盟法律（透明指令）规定的披露与报告义务，向市场提供必要信息以保障投资者透明与市场的公允有序；具体含及时发布定期财务信息（年度与半年度报告，适用时经审计），以及持续披露可能影响证券定价的重大信息。规则手册统一要求发行人应平等、及时地向所有证券持有人提供其行使权利所需信息。",
+        "en": "Issuers must comply with the disclosure and reporting obligations under Union law (Transparency Directive) to ensure investor transparency and market integrity, providing the market with all necessary information; specifically this includes the timely publication of periodic financial information (annual and half-yearly reports, audited where applicable) and the ongoing disclosure of material information that may affect the pricing of their securities. The rulebook uniformly requires that an issuer shall make all information necessary for holders to exercise their rights available to all holders equally and in a timely manner.",
+        "sources": [
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 61003/2 持续披露义务）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "An Issuer shall provide the market all necessary information to enable holders of its Securities to exercise their rights. This requirement includes, inter alia, the need to publish periodic financial information (including annual and half-yearly reports), audited where applicable, in a timely manner, in accordance with Union Law or National Regulations.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "investor_protection": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "投资者保护主要由各成员国法律与本国监管机构（如法国 AMF、荷兰 AFM、意大利 CONSOB 等）依欧盟 MiFID II 与《投资者补偿计划指令》(ICS) 实施，各市场设有法定投资者补偿基金（如法国 FGDR、荷兰 Beleggerscompensatie-fonds、比利时 Fonds de protection des dépôts et des instruments financiers 等）；交易所层面通过统一的持续披露义务、市场监控与会员纪律间接保护投资者，但本所并非独立的投资者保护机构。",
+        "en": "Investor protection is primarily delivered by each member state's law and its home regulator (e.g. AMF in France, AFM in the Netherlands, CONSOB in Italy) under EU MiFID II and the Investor Compensation Scheme Directive (ICS): each market has a statutory investor-compensation fund (e.g. FGDR in France, Beleggerscompensatie-fonds in the Netherlands, the Belgian Fonds de protection des dépôts et des instruments financiers, etc.). At the exchange level, investors are indirectly protected through the harmonised continuing-disclosure obligations, market surveillance and member discipline, but the exchange itself is not a standalone investor-protection authority.",
+        "detail": "属欧盟/成员国监管框架事实，非交易所自设规则，未附强 quote；具体补偿基金名称覆盖不全，confidence 标 medium。",
+        "sources": [
+          {
+            "title": "Regulatory Framework（Euronext 官网，逐国监管机构列表）",
+            "url": "https://www.euronext.com/en/trading/membership/regulatory-framework",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "products": {
@@ -1399,20 +1417,25 @@
         "quote": null
       },
       "listing_process_duration": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "上市周期因板块而异：受监管市场（Euronext）IPO 通常约 8 周；Euronext Growth 板块在奥斯陆市场的标准流程为 15 个工作日，其余市场参照各自时间表。具体时长在发行人保荐人与相关市场运营实体共同商定的上市时间表（timetable）中明确，规则手册仅要求双方对上市安排达成共同认可的时间表，未规定统一最短/最长天数。",
+        "en": "Time-to-listing varies by segment: an IPO on the regulated Euronext market typically takes about 8 weeks; the Euronext Growth segment runs a standard 15 business days in the Oslo market, with other markets following their own schedules. The precise duration is set out in the timetable jointly agreed between the issuer's sponsor and the relevant Market Undertaking; the rulebook merely requires the two parties to agree on a joint timetable and does not prescribe a uniform minimum/maximum number of days.",
         "sources": [
           {
-            "title": "Choosing a Market（Euronext官网，三板块对比）",
-            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "title": "Euronext IPO Journey（官网，各板块上市时长）",
+            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/ipo-journey",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 6402 上市时间表）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "quote": "Normal duration 8 weeks ... Normal timeframe 15 business days",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       },
       "transfer_between_boards": {
         "zh": "官网明确提及Euronext Access企业「做大后可考虑转往Euronext Access+或Euronext Growth，进而转往Euronext受监管市场」，是有明文设计的板块间上升通道，具体转板财务/时间条件本次未逐条核实",
@@ -1431,36 +1454,36 @@
         "detail": null
       },
       "continuing_obligations": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "上市后发行人须持续履行欧盟法/本国法规定的披露义务：及时发布定期财务信息（年报与半年报，适用时经审计），且任何可能影响证券定价的重大信息须平等、及时地提供给所有证券持有人，使其得以行使权利。此外，发行人对拟进行的重大公司行为须提前通知相关市场运营实体。",
+        "en": "Post-admission, an issuer must continuously meet its disclosure obligations under Union/National law: it shall publish periodic financial information (annual and half-yearly reports, audited where applicable) in a timely manner, and shall make any material information that may affect the pricing of its securities available to all holders equally and in a timely manner so they can exercise their rights. In addition, for any planned material corporate action the issuer must give advance notice to the relevant Market Undertaking.",
         "sources": [
           {
-            "title": "Choosing a Market（Euronext官网，三板块对比）",
-            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 61003/2 持续义务；Rule 61004/1 公司行为通知）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "quote": "An Issuer shall provide the market all necessary information to enable holders of its Securities to exercise their rights. This requirement includes, inter alia, the need to publish periodic financial information (including annual and half-yearly reports), audited where applicable, in a timely manner, in accordance with Union Law or National Regulations.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       },
       "suspension_resumption": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "市场运营实体可主动（依其自主裁量）或在发行人有理由请求下，为防范或制止无序市场状况而暂停任一证券的交易；此外，应主管机关（Competent Authority）请求亦必须暂停。恢复交易采用集合竞价（auction）方式，在预定的下一轮集合竞价时点重新撮合恢复，而非连续竞价即时恢复。",
+        "en": "The relevant Market Undertaking may, on its own initiative (in its sole discretion) or at the reasoned request of the relevant issuer, suspend trading in any security in order to prevent or halt disorderly market conditions; it must also suspend trading upon the request of a Competent Authority. Resumption is effected through an auction: trading resumes at the next scheduled auction, rather than being restored instantaneously in continuous trading.",
         "sources": [
           {
-            "title": "Choosing a Market（Euronext官网，三板块对比）",
-            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 4403/2 停牌与恢复）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "quote": "The Relevant Euronext Market Undertaking may suspend trading in any Security in order to prevent or halt disorderly market conditions, either on its own initiative, and in its sole discretion, or at the reasoned request of the relevant Issuer. In addition, the Relevant Euronext Market Undertaking shall suspend trading in any Security upon the request of a Competent Authority. ... the trading resumption process shall consist of a postponement to the next auction planned.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       },
       "delisting_conditions": {
         "zh": "",
@@ -1479,52 +1502,52 @@
         "quote": null
       },
       "delisting_process": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "证券的移除（delisting/removal）可由三类情形触发：应相关发行人申请；应主管机关（Competent Authority）依本国法规提出的请求；或市场运营实体作为市场运营者/上市主管机关依职权主动移除。此外，市场运营实体还可基于多种适当理由主动移除证券，包括发行人明显未履行规则或申请表项下义务、发行人法人主体清算/合并/解散、发行人破产、或认为无法维持该证券的公允有序市场等。",
+        "en": "Removal of securities (delisting/removal) may be triggered by three grounds: at the request of the relevant issuer; at the request of the competent authority pursuant to National Regulations; or on the Market Undertaking's own initiative as market operator or as the competent authority in terms of listing. In addition, the Market Undertaking may remove securities on its own initiative on any appropriate grounds, including the issuer's manifest failure to comply with the Rules or Application Form, liquidation/merger/dissolution of the issuing entity, bankruptcy of the issuer, or the opinion that a fair, orderly and efficient market cannot be maintained.",
         "sources": [
           {
-            "title": "Choosing a Market（Euronext官网，三板块对比）",
-            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 6905/1 移除）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "quote": "Subject to National Regulations, each Relevant Euronext Market Undertaking may remove Securities admitted to listing and/or trading on its markets: (i) at the request of the relevant Issuer; or (ii) on its own initiative as market operator or as competent authority in terms of listing, as the case maybe; or (iii) at the request of the competent authority pursuant to National Regulations.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       },
       "delisting_transition_period": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "统一的《Harmonised Rulebook》对证券的移除（delisting/removal）未规定统一的过渡期或最短提前通知窗口——规则仅列明移除的触发情形，未像部分成员国市场规则那样设定「移除前须提前若干交易日公告」的统一期限。各市场运营实体可能在各自的 Book II 细则中追加通知要求，本次未逐市场核实。",
+        "en": "The harmonised rulebook does not prescribe a uniform transition period or minimum advance-notice window for the removal of securities (delisting/removal) — it sets out only the triggering grounds, without a group-wide \"must give X trading days' notice before removal\" deadline. Individual Market Undertakings may add notice requirements in their own Book II rules; these were not verified market-by-market this session.",
+        "detail": "属「规则统一但法人与监管分立」结构下的真实留白：统一规则手册不辖此细节；未断言不存在，仅说明在 harmonised 层面无统一规定，故不填具体天数，标 medium。",
         "sources": [
           {
-            "title": "Choosing a Market（Euronext官网，三板块对比）",
-            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 6905/1 移除）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
         "quote": null
       },
       "post_delisting_venue": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "统一规则手册未规定退市后证券必须迁移至某一特定场所；实践中，拟从 Euronext 受监管市场摘牌、但希望继续在具有类似特征的市场挂牌的发行人，须遵循「销售便利程序」(sales facility procedure)——例如 AdUX 从 Euronext 受监管市场退市后转入 Euronext Growth Paris 继续交易。各市场运营实体（如 Euronext Access Paris 规则手册）对「转至另一多边交易设施/受监管市场/第三国市场」设有明确的销售便利程序。",
+        "en": "The harmonised rulebook does not mandate migration to any specific venue after delisting; in practice, an issuer wishing to leave the Euronext regulated market but continue trading on a market with equivalent characteristics must follow a \"sales facility procedure\" — for example, AdUX moved from the Euronext regulated market to Euronext Growth Paris to keep trading. Each Market Undertaking's rulebook (e.g. the Euronext Access Paris rulebook) sets out an explicit sales-facility procedure for transfers to another MTF, regulated market or third-country market.",
         "sources": [
           {
-            "title": "Choosing a Market（Euronext官网，三板块对比）",
-            "url": "https://www.euronext.com/en/listing/raise-capital/how-go-public/choosing-market",
-            "accessed": "2026-08-16"
+            "title": "Euronext Access Paris Rulebook II（退市销售便利程序）",
+            "url": "https://www.euronext.com/sites/default/files/2024-04/euronext_access_rulebook_ii_-_paris.pdf",
+            "accessed": "2026-08-27"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "quote": "an Issuer that applies to delist its equity securities but that intends to remain listed on another multilateral trading facility, regulated market or on a third-country market with equivalent characteristics shall follow a sales facility procedure",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       }
     },
     "indices": {
@@ -1731,72 +1754,168 @@
         "sources": null
       },
       "default_management": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "Euronext Clearing 采用多层风险防护：每日向清算会员（Clearing Member）收取保证金以覆盖其违约及平仓的 theoretical 成本；此外设立「违约基金」(Default Fund) 作为额外、互助式的保护层，覆盖超出保证金的极端但合理的风险。违约处置按 EMIR 框架下的损失分担层级（保证金→违约基金→CCP 自有资本）进行，但具体逐层参数本次未逐条核实。",
+        "en": "Euronext Clearing applies a multi-layered risk framework: margins are called on a daily basis to cover the theoretical costs it would incur in the event of a Clearing Member's default and the clearing of its open positions; in addition, a Default Fund provides an additional, mutualistic layer of protection aimed at covering extreme but plausible risks not captured by margins. Default handling follows the EMIR loss-waterfall hierarchy (margins → Default Fund → CCP own capital), but the exact per-tranche parameters were not individually verified this session.",
+        "sources": [
+          {
+            "title": "Euronext Clearing Risk Management（官网）",
+            "url": "https://www.euronext.com/en/clearing/risk-management",
+            "accessed": "2026-08-18"
+          }
+        ],
+        "quote": "Margins are called on a daily basis to cover the theoretical costs which Euronext Clearing would incur in the event of the CM's default and the clearing of its open positions. Default Funds are an additional, mutualistic layer of protection aimed at protecting the CCP from extreme but plausible risks, not captured by margins.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "derivatives": {
-        "initial_margin_practice": null,
-        "maintenance_margin_practice": null,
-        "mark_to_market_frequency": null,
-        "delivery_method": {
-          "zh": "",
-          "confidence": "low",
-          "detail": "ADR-023 新增字段，Euronext 衍生品各品种的实物/现金交割方式本次未核实，留空转 OPEN-QUESTIONS。",
-          "verified": "2026-08-16",
-          "en": null,
+        "initial_margin_practice": {
+          "zh": "Euronext Clearing 按资产类别采用不同保证金方法论：权益及权益衍生品、意大利/西班牙/爱尔兰/葡萄牙政府债（FIRE）、农产品衍生品采用动态（自动更新）的「类 VaR」方法论（基于现金流映射的历史模拟预期尾部损失 Expected Shortfall，辅以 EWMA 波动率缩放及特异性/流动性/集中度/结算/回购风险附加保证金）；公司债及 FIRE 覆盖以外的政府债沿用「类 SPAN」方法论（MVP）。权益及权益衍生品的 VaR 方法论已上线，取代原 SPAN 类方法（MARS）。",
+          "en": "Euronext Clearing applies different margin methodologies by asset class: equities & equity derivatives, Italian/Spanish/Irish/Portuguese government bonds (FIRE) and agricultural commodity derivatives use a dynamic (auto-updating) \"VaR-like\" methodology (a historical-simulation Expected Shortfall based on cash-flow mapping, with EWMA volatility scaling and add-ons for idiosyncratic/liquidity/concentration/settlement/repo risks); corporate bonds and government bonds outside FIRE still use a \"SPAN-like\" methodology (MVP). The VaR-like methodology for equities & equity derivatives has gone live, replacing the prior SPAN-like methodology (MARS).",
+          "sources": [
+            {
+              "title": "Euronext Clearing Risk Management（官网）",
+              "url": "https://www.euronext.com/en/clearing/risk-management",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Margins are calculated using efficient, reliable and accurate systems: VaR-like margin methodologies for Italian, Spanish, Irish and Portuguese government bonds (FIRE), equities and equity derivatives, agricultural commodity derivatives; SPAN-like margin methodology for corporate bonds and government bonds other than the abovementioned (MVP)",
+          "confidence": "high",
+          "verified": "2026-08-27",
           "enum": null,
-          "quote": null,
-          "sources": null
+          "detail": null
         },
-        "last_trading_day_rule": null
+        "maintenance_margin_practice": {
+          "zh": "Euronext Clearing 逐日收取变动保证金（variation margin），覆盖清算会员持仓随市价变动的每日损益，使其保证金账户始终反映当前风险敞口；即「每日盯市、逐日追保」的维持机制，与初始保证金（覆盖极端但合理风险）共同构成双层防护。",
+          "en": "Euronext Clearing collects variation margin on a daily basis to cover the daily profit/loss of a Clearing Member's open positions, keeping the margin account continuously reflective of current risk exposure — a \"daily mark-to-market, daily top-up\" maintenance mechanism that, together with initial margin (covering extreme but plausible risk), forms the two-layer protection.",
+          "sources": [
+            {
+              "title": "Euronext Clearing Risk Management（官网）",
+              "url": "https://www.euronext.com/en/clearing/risk-management",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "Margins are called on a daily basis to cover the theoretical costs which Euronext Clearing would incur in the event of the CM's default and the clearing of its open positions.",
+          "confidence": "high",
+          "verified": "2026-08-27",
+          "enum": null,
+          "detail": null
+        },
+        "mark_to_market_frequency": {
+          "zh": "衍生品合约每日进行盯市：期货合约的每日结算价（Daily Settlement Price, DSP）按「中央订单簿价格法」或「官方收盘价法」二者之一计算（具体某合约采用哪种方法见 Annexe One）；结算价用于逐日计提变动保证金。",
+          "en": "Derivatives contracts are marked to market daily: for futures, the Daily Settlement Price (DSP) is calculated using either the Central Order Book price method or the official closing price method (which method applies to which contract is set out in Annexe One); the settlement price is used to compute variation margin on a daily basis.",
+          "sources": [
+            {
+              "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 2.2）",
+              "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "The Daily Settlement Price for Futures Contracts is calculated using one of the following two methods: (a) Central Order Book price method ...; or (b) official closing price method",
+          "confidence": "high",
+          "verified": "2026-08-27",
+          "enum": null,
+          "detail": null
+        },
+        "delivery_method": {
+          "zh": "Euronext 衍生品多为现金结算；其市场运作文件说明，对电力等衍生品，交易所在到期日（Expiration Date）依据相关合约标的在交割期内发布的适用现货价格均值确定 EDSP（到期结算价）。",
+          "en": "Euronext derivatives are predominantly cash-settled; the market-operations document states that for (e.g. Power) derivatives the exchange determines an EDSP on the Expiration Date using the average of the applicable Spot Prices published in the Delivery period by the issuer of the relevant Contract Underlying.",
+          "sources": [
+            {
+              "title": "Euronext Derivatives – How the Market Works（v5.4, 2025, § contract specs）",
+              "url": "https://connect.euronext.com/sites/default/files/it-documentation/Euronext%20Derivatives_How%20the%20Market%20Work_v5.4.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "For monthly, weekly and daily Power Derivatives the exchange determines an EDSP on the Expiration Date by using the average of the applicable Spot Prices published in the Delivery period by the issuer (Nord Pool) of the relevant Contract Underlying",
+          "confidence": "high",
+          "verified": "2026-08-27",
+          "enum": null,
+          "detail": null
+        },
+        "last_trading_day_rule": {
+          "zh": "衍生品合约在最后交易日（Last Trading Day）收盘时，所有未成交订单（含 GTC 与 GTD 订单）将被取消；最后交易日的具体日期逐合约列于 Annexe One，股票/股指类通常早于标的现货到期。",
+          "en": "On the Last Trading Day of a derivatives contract, all resting orders — including GTC and GTD orders — are cancelled at the close of business; the exact Last Trading Day date is set out per contract in Annexe One, and for equity/index products it typically falls earlier than the underlying cash expiry.",
+          "sources": [
+            {
+              "title": "Euronext Derivatives Markets - Trading Procedures（生效 2025-02-25，TP 3.2.9）",
+              "url": "https://www.euronext.com/sites/default/files/2025-02/trading_procedures_for_derivatives_-_dsp_fair_value_and_deferred_publication.pdf",
+              "accessed": "2026-08-18"
+            }
+          ],
+          "quote": "All orders, including GTC and GTD orders, will be cancelled at close of business on the Last Trading Day of the delivery month to which they relate",
+          "confidence": "high",
+          "verified": "2026-08-27",
+          "enum": null,
+          "detail": null
+        }
       }
     },
     "participants": {
       "investor_structure": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "投资者结构以机构为主，零售参与度近年受欧盟 Retail Investment Strategy 推动受到更多关注；Euronext 定期发布投资者结构统计（零售 vs 机构），但具体各市场细分比例本次未逐一核实。",
+        "en": "The investor base is predominantly institutional, with retail participation receiving increased attention in recent years under the EU Retail Investment Strategy; Euronext publishes periodic investor-structure statistics (retail vs institutional), but the exact per-market breakdown was not individually verified this session.",
+        "detail": "属市场结构层面的定性判断，非交易所自设规则；具体零售/机构占比数字未逐一核实，confidence 标 medium。",
+        "sources": [
+          {
+            "title": "Euronext Investor Relations（官网，投资者结构统计入口）",
+            "url": "https://www.euronext.com/en/investor-relations",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "account_opening_requirements": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "个人投资者无法直接在 Euronext 交易平台上开户交易，必须通过银行、经纪商或私人财富管理公司（broker / bank / private wealth manager）作为中介下单；开户的具体身份与资金要求由各中介依其本国 KYC/反洗钱规则执行，交易所层面不向终端投资者直接开户。",
+        "en": "Private investors cannot trade directly with the Exchange; they require a bank, broker or private wealth manager to execute their order on the Euronext trading platform. The specific identity and funding requirements for opening an account are set by each intermediary under its home-country KYC / anti-money-laundering rules; the exchange does not open accounts directly for end investors.",
+        "sources": [
+          {
+            "title": "Euronext Amsterdam — Markets（官网，投资者参与方式）",
+            "url": "https://www.euronext.com/en/markets/amsterdam",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Private investors cannot trade directly with the Exchange. You require a bank, broker or private wealth manager to execute your order on the Euronext trading platform. Our broker list provides you with an overview of accredited intermediaries.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "suitability_management": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "投资者适当性（suitability / appropriateness）管理由会员（经纪商/银行）依欧盟 MiFID II 对客户分类与产品适当性要求执行，交易所层面不直接对终端投资者做适当性评估；Euronext 作为市场运营者通过会员纪律与市场监控间接保障市场秩序。",
+        "en": "Suitability / appropriateness management is performed by members (brokers / banks) under EU MiFID II client-classification and product-governance requirements; the exchange does not assess suitability for end investors directly, and indirectly safeguards market order through member discipline and market surveillance.",
+        "detail": "属会员合规职责，非交易所自设规则；未附强 quote，confidence 标 medium。",
+        "sources": [
+          {
+            "title": "Regulatory Framework（Euronext 官网，逐国监管机构列表）",
+            "url": "https://www.euronext.com/en/trading/membership/regulatory-framework",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "foreign_access_channel": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "境外投资者参与 Euronext 有两条路径：(1) 成为 Euronext 会员（需获本国监管授权，EEA 内依 MiFID II 护照便利，第三国 firm 亦可在满足条件下申请）；(2) 通过已入会的本地经纪商/银行下单。集团统一的「Euronext Membership」体系使一家会员可交易横跨七个市场的现货与衍生品，降低了跨境接入门槛。",
+        "en": "Foreign investors can access Euronext through two routes: (1) becoming a Euronext Member (requires home-regulator authorisation; within the EEA this is eased by the MiFID II passport, and third-country firms may also apply subject to conditions); or (2) routing orders through an already-admitted local broker / bank. The group's unified \"Euronext Membership\" regime lets one member trade across all seven markets' cash and derivatives, lowering the cross-border access barrier.",
+        "detail": "属会员资格/监管框架事实，非交易所自设规则；具体某国投资者最便捷通道取决于其本国中介是否在会员之列，confidence 标 medium。",
+        "sources": [
+          {
+            "title": "Euronext Membership — Admission process（官网）",
+            "url": "https://www.euronext.com/en/trading/membership/admission-process-and-application",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "membership_structure": {
         "zh": "统一的「Euronext Membership」资格体系：申请人须向拟加入的具体市场运营实体（Relevant Euronext Market Undertaking）申请并获书面批准，资质要求含本国监管机构授权/牌照、员工须具备英语或所在法域语言的业务能力、充足的组织与资源安排等；会籍不可转让；自然人与独资企业不得成为Euronext证券市场会员",
@@ -1815,56 +1934,86 @@
         "detail": null
       },
       "broker_landscape": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "Euronext 采用统一的「Euronext Membership」会员体系，当前获授权在现货及/或衍生品市场交易的交易会员共 293 家（截至 2026 年官网更新）；会员含银行、经纪商、自营交易公司等，分布横跨七个市场所属国及部分第三国。终端投资者须通过这些会员（见 account_opening_requirements）间接参与。",
+        "en": "Euronext operates a unified \"Euronext Membership\" regime; currently 293 trading members are authorised to trade on the cash and/or derivatives markets (as of the 2026 website update). Members include banks, brokers and proprietary trading firms, spanning the seven Market Undertakings' home countries and a number of third countries. End investors must access the market indirectly through these members (see account_opening_requirements).",
+        "sources": [
+          {
+            "title": "Euronext Trading Members list（connect2.euronext.com）",
+            "url": "https://connect2.euronext.com/en/membership/resources/member-list",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "LAST UPDATE 25 Aug 2026 ... List of the Euronext Trading Members currently authorized to trade on the Cash/or Derivatives markets ... Displaying 1 - 20 of 293",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       }
     },
     "infrastructure": {
       "market_data_levels": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "Euronext 市场数据按深度分四档：Level 3（完整订单簿深度，逐笔更新/修改/取消）、Level 2（聚合深度的买一卖一及笔数）、Level 1（最佳买卖价及量，含 Last Price）、Last Price（成交价量、开高低收）。各档按月收费，费率因资产类别（如 CASH / Euronext Funds）而异。",
+        "en": "Euronext market data is offered at four depth levels: Level 3 (the full depth of the order book with updates for each new order, modification or cancellation), Level 2 (the full depth of the order book with aggregated volumes and associated number of orders), Level 1 (the best bid and offer per instrument, i.e. prices and quantities, including Last Price), and Last Price (the traded prices and quantities, open, high, low and closing prices). Each level is charged monthly, with fees varying by asset class (e.g. CASH / Euronext Funds).",
+        "sources": [
+          {
+            "title": "Euronext Information Product Fee Schedule（V21.1，effective 1 October 2026）",
+            "url": "https://connect2.euronext.com/sites/default/files/documentation/data/Information%20Product%20Fee%20Schedule%20%28effective%201%20October%202026%29%20V21.1.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Level 3 ■ The full depth of the order book with updates for each new order, modification or cancellation ... Level 2 ■ The full depth of the order book with aggregated volumes and associated number of orders ... Level 1 ■ The best bid and offer per financial instrument, i.e., prices and quantities ... Last Price ■ The traded prices and quantities, open, high, low and closing prices",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "data_latency": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "Euronext 交易平台 Optiq 的平均性能延迟低至 15 微秒（order roundtrip 及市场数据均适用），是高频低延迟交易的技术基础。",
+        "en": "Euronext's Optiq trading platform demonstrates an average performance latency as low as 15 micro-seconds for order roundtrip as well as for market data, providing the technical basis for high-frequency, low-latency trading.",
+        "sources": [
+          {
+            "title": "Euronext launches Optiq®（新闻稿，2018-07-10）",
+            "url": "https://www.euronext.com/en/about/media/euronext-press-releases/euronext-introduces-optiq-new-technology-platform-powering-cash",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Optiq® has demonstrated an average performance latency of as low as 15 micro-seconds for order roundtrip as well as for market data",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "data_pricing_model": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "Euronext 市场数据采用分级定价：实时数据通常按用户类别（如专业/非专业、分发范围）收费；延迟数据（delayed）若仅用于内部用途则免费。具体各档费率见信息产品费率表（按 Euro 计、按月收取）。",
+        "en": "Euronext market data uses tiered pricing: real-time data is generally charged by user category (e.g. professional/non-professional, distribution scope); delayed market data is free of charge if used for internal purposes only. Exact per-level fees are set out in the Information Product Fee Schedule (stated in Euro, per month).",
+        "sources": [
+          {
+            "title": "Euronext Market Data Pricing Policies（官网）",
+            "url": "https://www.euronext.com/en/data/market-data-pricing-policies",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Please note, the use of delayed market data is free of charge if it is used for internal purposes only.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "historical_data_availability": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "Euronext 通过 NextHistory 提供历史市场数据，产品含：End of Day Summary (EOD)（每日市场摘要，含开高低收、成交量与成交额）；Trade Data（中央订单簿与 TCS 场外申报成交，并含 EOD）；Best Bid and Offer (BBO)（最佳买卖价及盘口快照，第一层，附 Trade 与 EOD 摘要）；Full Order Book（全部 Euronext 市场现货与衍生品的完整订单簿，含 new/modify/fill/cancel/reload 全事件类型）。",
+        "en": "Euronext provides historical market data via NextHistory, with products including: End of Day Summary (EOD) (daily market summaries featuring open, high, low, and last prices, volumes, and turnover); Trade Data (central order book and TCS reported off-market trades, along with the EOD); Best Bid and Offer (BBO) (the best bid and offer with a book snapshot at the first level, supplemented by Trade and EOD Summary Data); and Full Order Book (a complete view of the order book for all Euronext cash and derivatives markets, covering all event types such as new, modify, fill, cancel and reload).",
+        "sources": [
+          {
+            "title": "Euronext NextHistory（历史数据产品页）",
+            "url": "https://www.euronext.com/en/products-services/nexthistory",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "End of Day Summary (EOD): Receive daily market summaries featuring open, high, low, and last prices, volumes, and turnover. ... Trade Data: Access central order book and TCS (reported off-market) trades, along with the EOD for a deeper market understanding. ... Best Bid and Offer (BBO): Obtain the best bid and offer with a book snapshot (first level), supplemented by Trade and EOD Summary Data. ... Full Order Book: Gain a complete view of the order book for all Euronext markets, available for both Cash and Derivatives.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "trading_system_name": {
         "zh": "Optiq",
@@ -1883,40 +2032,52 @@
         "enum": null
       },
       "access_methods": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "接入市场数据有两种主要方式：其一，通过 Optiq MDG 直连，获取低延迟实时数据（批量推送，Euronext 不做前置过滤）；其二，经由数据商（data vendors）间接获取——超过 40 家数据商分发 Euronext 实时市场数据。交易接入则通过会员（Euronext Membership）经 Optiq 协议连接。",
+        "en": "There are two main ways to access market data: first, direct access through Optiq® MDG, which provides low-latency real-time market data (bulk information, with Euronext not filtering any data before dispatch); and second, indirect access via data vendors — more than 40 data vendors distribute Euronext real-time market data. Trading access is via Euronext Membership over the Optiq protocol.",
+        "sources": [
+          {
+            "title": "Euronext — How to access market data（官网）",
+            "url": "https://www.euronext.com/en/data/how-access-market-data",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Direct access through Optiq® MDG provides clients access to low latency real-time market data, with maximum flexibility, simplified and harmonized messaging as well as high performance and stability. ... More than 40 data vendors distribute Euronext real-time market data.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "major_outage_history": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "2020 年 10 月 19 日，Euronext 因一个数据管理系统发生故障，导致阿姆斯特丹/布鲁塞尔/里斯本/巴黎/都柏林的现货市场停牌逾三小时（奥斯陆未受影响）；为近年最严重的一次全市场级技术中断。此后 Euronext 强化了监控与灾备能力。",
+        "en": "On 19 October 2020, a failure in one of Euronext's data management systems halted trading for more than three hours across the Amsterdam, Brussels, Lisbon, Paris and Dublin cash markets (Oslo was unaffected) — the most severe market-wide technical outage in recent years. Euronext has since strengthened its monitoring and business-continuity capabilities.",
+        "detail": "来源为第三方媒体（Reuters/Bloomberg）报道，非交易所官方事后报告，confidence 标 medium（第三方来源上限）。",
+        "sources": [
+          {
+            "title": "Reuters — Euronext resumes trading as outage raises concentration concerns（2020-10-19）",
+            "url": "https://www.reuters.com/article/business/euronext-resumes-trading-as-outage-raises-concentration-concerns-idUSKBN27530F/",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Trading in those locations came to standstill for more than three hours on Monday morning due to a technical failure impacting one of its data management systems.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       }
     },
     "costs": {
       "commission_structure": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "本字段指投资者向经纪商支付的佣金结构，未找到统一公开的经纪商佣金标准（属经纪商自定，非交易所规则），与exchange_fees（交易所本身向会员收取的费用）区分，留空。",
+        "zh": "投资者向经纪商支付的佣金由各家经纪商自定，非交易所统一规则；Euronext 仅向会员收取交易费（见 exchange_fees），不向终端投资者直接收费，故无统一佣金表。结构通常为按笔/按金额的比例佣金或固定费用，因经纪商与账户类型而异。",
+        "en": "The commission an investor pays to a broker is set by each broker individually, not by a unified exchange rule; Euronext only charges trading fees to its members (see exchange_fees) and does not charge end investors directly, so there is no single commission schedule. The structure is typically a per-trade or ad-valorem percentage commission or a fixed fee, varying by broker and account type.",
+        "detail": "属经纪商商业条款，非交易所规则；未附强 quote，confidence 标 medium。",
         "sources": [
           {
-            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
-            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
-            "accessed": "2026-08-16"
+            "title": "Euronext Markets — Amsterdam（官网，投资者参与方式）",
+            "url": "https://www.euronext.com/en/markets/amsterdam",
+            "accessed": "2026-08-27"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "quote": null
       },
@@ -1937,116 +2098,116 @@
         "detail": null
       },
       "clearing_fees": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "清算费由 Euronext Clearing（CCP，法定实体 Cassa di Compensazione e Garanzia S.p.A.）按其自有清算费率表另行收取，不在本次核实的现货交易费指南（Cash Markets Trading Fee Guide）范围内；具体逐产品清算费率本次未逐一核实。",
+        "en": "Clearing fees are charged separately by Euronext Clearing (the CCP, legal entity Cassa di Compensazione e Garanzia S.p.A.) under its own clearing fee schedule, outside the scope of the cash-market trading fee guide verified this session; the exact per-product clearing fees were not individually verified this session.",
+        "detail": "属清算所独立费率，非交易所交易费；未附强 quote，confidence 标 medium。",
         "sources": [
           {
-            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
-            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "title": "Euronext Clearing（官网总览）",
+            "url": "https://www.euronext.com/en/clearing",
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
         "quote": null
       },
       "regulatory_fees": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "Euronext 作为交易所/市场运营者，不直接代征「监管费」(regulatory fee) 性质的统一收费；其向会员收取的费用为交易费、做市商费、连接费等（见 exchange_fees 及现金市场费率指南），监管性收费（如各国金融监管机构对发行人/中介的规费）由各本国主管机关另行计征，不通过交易所统一代收。",
+        "en": "As an exchange / market operator, Euronext does not levy a unified \"regulatory fee\" on behalf of any authority; the fees it charges members are trading fees, market-maker fees, connectivity fees, etc. (see exchange_fees and the cash-market fee guide). Regulatory levies (e.g. fees charged by each national financial regulator to issuers/intermediaries) are collected separately by the relevant home authority, not consolidated through the exchange.",
+        "detail": "属交易所 vs 监管机构的职责边界说明；现金市场费率指南列出的均为交易所自身费用项目，未见统一的监管费代收项，confidence 标 medium。",
         "sources": [
           {
-            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
+            "title": "Euronext Cash Markets Trading Fee Guide（生效 2026-09-01，费用项目清单）",
             "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
         "quote": null
       },
       "stamp_duty": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "印花税属各国税法事项而非交易所规则（如法国对本国大市值公司股票交易征收金融交易税，见financial_transaction_tax），本次未逐国核实，留空不混同。",
+        "zh": "印花税属各国税法事项而非交易所规则；本所七个市场所属国中，法国自 2008 年起已废除股票交易印花税（但仍对部分衍生品/高频交易征收金融交易税，见 financial_transaction_tax），其余国家亦无针对普通股现货交易的经典「印花税」(stamp duty)。比利时/荷兰/爱尔兰/葡萄牙/挪威各有其他交易相关税种，但均非印花税性质。",
+        "en": "Stamp duty is a matter of each country's tax law rather than an exchange rule; among the seven markets' home countries, France abolished its stock-transaction stamp duty in 2008 (though it still levies a financial transaction tax on some derivatives / high-frequency trades, see financial_transaction_tax), and the other countries likewise have no classic \"stamp duty\" on ordinary cash-equity trading. Belgium, the Netherlands, Ireland, Portugal and Norway each have other transaction-related taxes, but none are stamp-duty in nature.",
+        "detail": "属成员国税法，非交易所规则；法国废除股票印花税为公开常识性事实，confidence 标 medium。",
         "sources": [
           {
-            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
-            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "title": "Euronext Markets — Paris（官网）",
+            "url": "https://www.euronext.com/en/markets/paris",
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "quote": null
       },
       "financial_transaction_tax": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "法国、意大利均对本国上市大市值公司股票交易开征金融交易税（法国FTT、意大利Tobin Tax式规则），荷兰/比利时/爱尔兰/葡萄牙/挪威税制安排各异；这是「一所多国」结构下税费类字段的典型难点——单一字段无法承接七国不同税制，本次未逐国核实具体税率与征收对象，留空不代入。",
+        "zh": "法国、意大利对本国上市大市值公司股票交易开征金融交易税。法国 FTT 适用于在受监管市场（法国或外国）交易的、由法国注册实体发行的、市值超过 €1 billion 的股票收购；意大利则另有类 Tobin Tax 式的股票交易税。荷兰/比利时/爱尔兰/葡萄牙/挪威税制各异，部分无此税。这是「一所多国」结构下税费类字段的典型难点——单一字段无法承接七国不同税制。",
+        "en": "France and Italy levy financial transaction taxes on trades in large-cap domestic listed equities. The French FTT applies to acquisitions of shares traded on a regulated market (French or foreign), issued by French-incorporated entities with a market capitalisation of more than €1 billion. Italy has a separate Tobin-Tax-style equity transaction tax. The Netherlands, Belgium, Ireland, Portugal and Norway have varied regimes, some without such a tax. This is a typical difficulty of tax-type fields under the 'one exchange, many countries' structure — a single field cannot capture seven different tax regimes.",
         "sources": [
           {
-            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
-            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
-            "accessed": "2026-08-16"
+            "title": "Euronext — French Financial Transaction Tax Issuer CSD（服务说明文档，2025-06-23）",
+            "url": "https://www.euronext.com/sites/default/files/2025-06/EE_Documentation_Service%20Description%20Document%20-%20French%20Financial%20Transaction%20Tax%20Issuer%20CSD_20250623.pdf",
+            "accessed": "2026-08-27"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "quote": "The French FTT is applicable to the acquisitions (which may also result from corporate actions) of shares traded on a regulated market, French or foreign, issued by French entities (headquartered in France) with a market capitalisation of more than €1 billion on 1 December of the previous year.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "quote": null
+        "detail": null
       },
       "capital_gains_tax": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "同financial_transaction_tax，七国资本利得税制各异，单一字段无法承接，留空。",
+        "zh": "七国资本利得税制各异（如法国对居民实行 30% 一揽子税率 PFU，其他国家各有规则），且与投资者居民身份、双边税收协定相关，单一字段无法承接。本字段留作结构性 N/A，具体国别税率见各国税法。",
+        "en": "Capital-gains tax regimes differ across the seven countries (e.g. France applies a 30% flat \"PFU\" rate for residents, while others have their own rules) and depend on the investor's tax residency and bilateral tax treaties, so a single field cannot capture them. This field is left as a structural N/A; country-specific rates are set by each jurisdiction's tax law.",
+        "detail": "属成员国税法，非交易所规则；法国 PFU 30% 为公开常识性事实，confidence 标 medium。",
         "sources": [
           {
-            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
-            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "title": "Euronext Markets — Paris（官网）",
+            "url": "https://www.euronext.com/en/markets/paris",
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "quote": null
       },
       "dividend_withholding_tax": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "同上，七国股息预扣税率各异（且与投资者居民身份、双边税收协定相关），单一字段无法承接，留空。",
+        "zh": "股息预扣税率因发行人所属国与投资者居民身份而异；以 Euronext 净回报指数采用的各市场所属国标准预扣税率为：法国 25.00%、比利时 30.00%、荷兰 15.00%、葡萄牙 25.00%、爱尔兰 25.00%、意大利 26.00%、挪威 25.00%（自 2026 年 1 月 1 日起适用）。实际到手税率还受双边税收协定与退税程序影响。",
+        "en": "Dividend withholding tax rates vary by the issuer's home country and the investor's tax residency; the standard rates used by Euronext's net-return indices for each market's home country are: France 25.00%, Belgium 30.00%, Netherlands 15.00%, Portugal 25.00%, Ireland 25.00%, Italy 26.00%, Norway 25.00% (applied from 1 January 2026). The effective rate is also affected by bilateral tax treaties and refund procedures.",
         "sources": [
           {
-            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
-            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
-            "accessed": "2026-08-16"
+            "title": "Euronext Withholding Tax Table（January 2026，净回报指数适用预扣税率表）",
+            "url": "https://live.euronext.com/sites/default/files/documentation/index-rules/Withholding%20tax%20table%20January%202026.pdf",
+            "accessed": "2026-08-27"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "quote": "WITHHOLDING TAX RELEVANT FOR THE NET RETURN INDICES OF EURONEXT APPLIED FROM 1 JANUARY 2026 ... France 25.00% ... Belgium 30.00% ... Netherlands 15.00% ... Portugal 25.00% ... Ireland 25.00% ... Italy 26.00% ... Norway 25.00%",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "quote": null
+        "detail": null
       },
       "implicit_costs_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "除显性费用外，投资者还承担买卖价差（bid-ask spread）、市场冲击等隐性成本；Euronext 官网定位自身为「欧洲最大的流动性池」(largest liquidity pool in Europe)，整体流动性较好，主要指数成分股价差较窄，但 Euronext Access/Growth 等小市值板块及部分流动性较弱的证券隐性成本显著更高。",
+        "en": "Beyond explicit fees, investors bear implicit costs such as the bid-ask spread and market impact; Euronext describes itself as \"the largest liquidity pool in Europe\", so overall liquidity is good and spreads on major index constituents are tight, but on smaller-cap segments such as Euronext Access/Growth and on less-liquid names the implicit cost is materially higher.",
         "sources": [
           {
-            "title": "Euronext Cash Markets Trading Fee Guide（生效2026-09-01）",
-            "url": "https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf",
+            "title": "Our Journey（Euronext 官网，集团定位）",
+            "url": "https://www.euronext.com/en/about/our-journey",
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "quote": "Euronext confirms its position as the leading listing and trading venue, and the largest liquidity pool in Europe with superior market quality",
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       }
     },
     "risks": {
@@ -2061,24 +2222,36 @@
         "sources": null
       },
       "political_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "政治/监管风险具「多法域」两面性：一方面，七个市场分属多国监管，单一国家的政策冲击（如法国黄金权力审查、意大利新税）只局部影响，地理分散降低了单一主权风险；另一方面，集团受欧盟层面规则（MiFID II、EMIR、T+1 结算改革、MiFIR 修订）的统一牵引，欧盟级监管变动会同时波及全部市场，且跨市场整合（雅典迁移、CSD 整合）本身带来执行风险。",
+        "en": "The political/regulatory risk has a 'multi-jurisdiction' double edge: on one hand, the seven markets sit under several national regulators, so a policy shock in any single country (e.g. France's golden-power screening, Italy's new taxes) is only locally affecting, and geographic diversification lowers single-sovereign risk; on the other hand, the group is uniformly bound by EU-level rules (MiFID II, EMIR, the T+1 settlement reform, MiFIR review), so an EU-level regulatory change hits all markets at once, and the cross-market integration (Athens migration, CSD consolidation) itself carries execution risk.",
+        "detail": "属结构性定性判断，非交易所自设规则；未附强 quote，confidence 标 medium。",
+        "sources": [
+          {
+            "title": "Regulatory Framework（Euronext 官网，逐国监管机构列表）",
+            "url": "https://www.euronext.com/en/trading/membership/regulatory-framework",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "liquidity_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "整体流动性充足（Euronext 自称为欧洲最大流动性池），但流动性高度集中于 CAC 40/AEX/FTSE MIB 等旗舰指数成分股与大型蓝筹；Euronext Access/Growth 等中小市值板块、以及部分低流动性证券，买卖价差与冲击成本显著更高，存在结构性流动性分层风险。",
+        "en": "Overall liquidity is ample (Euronext describes itself as the largest liquidity pool in Europe), but liquidity is highly concentrated in flagship-index constituents such as CAC 40, AEX and FTSE MIB and in large blue chips; on smaller-cap segments such as Euronext Access/Growth and on less-liquid names, bid-ask spreads and impact cost are materially higher, creating a structural liquidity-tiering risk.",
+        "sources": [
+          {
+            "title": "Our Journey（Euronext 官网，集团定位）",
+            "url": "https://www.euronext.com/en/about/our-journey",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Euronext confirms its position as the leading listing and trading venue, and the largest liquidity pool in Europe with superior market quality",
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "regulatory_change_risk_note": {
         "zh": "正处于两项欧盟层面重大制度变革窗口期：（1）结算周期T+2→T+1（2027-10-11生效，见clearing.settlement_cycle）；（2）2025年新纳入的雅典市场尚未整合进统一规则手册与Optiq平台（计划2027-06完成），整合完成前雅典与其余七个市场在规则细节上仍不完全一致",
@@ -2097,14 +2270,20 @@
         "detail": null
       },
       "enforcement_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "市场运营实体对会员违规拥有分级惩戒权：可要求整改、处以固定金额 Liquidated Damages（按公告级距 EUR 500 至 EUR 250.000）、暂停部分或全部交易/会员权利（最长六个月）、终止会员资格，并可公布处分决定；对发行人违规则依持续义务章节处理。若会员违规威胁市场公允有序，Euronext 可立即采取包括暂停其部分交易权在内的即时措施。",
+        "en": "The Market Undertaking has a graduated enforcement toolkit against member violations: it may require rectification, impose liquidated damages of a fixed amount (between EUR 500 and EUR 250.000 per a published scale), suspend some or all of a member's trading/membership rights (for no more than six months), terminate the member's Euronext Membership, and/or publish the decision; issuer violations are handled under the continuing-obligations chapter. Where a member's violation threatens a fair, orderly and efficient market, Euronext may take immediate measures including suspending some of the member's trading rights.",
+        "sources": [
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 9301/1 违规处分；Rule 9103 即时措施）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "If a Rule has been violated, Euronext may: ... require from the Member liquidated damages for the violation of the Rule, of a fixed amount between EUR 500 and EUR 250.000 according to a scale published in a Notice; ... suspend some of the Member's trading or membership rights for no more than six months; ... terminate the Member's Euronext Membership; and/or publish all or part of the decision taken by Euronext under this Rule.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       }
     }
   }

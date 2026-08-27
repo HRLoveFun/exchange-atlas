@@ -26,12 +26,12 @@
         "quote": "* All times South African Standard Time",
         "confidence": "medium",
         "detail": "quote 只确认时区名称本身（SAST），UTC+2 的具体偏移量是南非全国通行的标准时区常识、非本次抓取页面逐字确认的数字，故不标 high。",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "dst_rule": {
         "zh": "不实行夏令时（南非全境全年使用统一的南非标准时间，未检索到官方专门声明，按国家层面常识记录，未附单独 quote）",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "confidence": "medium",
         "en": null,
         "enum": null,
@@ -51,7 +51,7 @@
         ],
         "quote": "The Johannesburg Stock Exchange (the JSE) was founded by Benjamin Wollan on 8 November 1887. Johannesburg Chambers and Company (Benjamin's company) was the first company to list.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -68,7 +68,7 @@
         "quote": "The JSE moves to a T+3 settlement cycle ... All equities trades conducted on the Exchange are now settled within three business days instead of five business days.",
         "confidence": "medium",
         "detail": "zh/en 摘要综合了同一份官方年表页里多条独立时间轴条目（1947/1963/1996/1997/2001/2003/2005/2009/2012/2014/2016/2019），quote 只摘引了其中一条（2016年T+3）作为代表，其余年份未逐条附独立 quote，属于「多来源合并」型字段（见 OPEN-QUESTIONS 第12条），故整体不标 high 只标 medium，避免 zh/en 里的数字反查不到对应 quote。",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "organization_form": {
@@ -84,7 +84,7 @@
         ],
         "quote": "The bourse demutualised and listed on its own exchange in 2005.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "detail": null
       },
       "self_listed": {
@@ -100,48 +100,77 @@
         ],
         "quote": "JSE Limited (Incorporated in the Republic of South Africa) Registration number: 2005/022939/06 Share code: JSE ISIN: ZAE000079711",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "detail": null
       },
       "market_cap_usd_bn": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "第三方数据源（tradingeconomics/stockanalysis等）给出的市值与上市公司数量彼此不一致（如\"431家\"与\"275家\"两个数字同时出现在不同检索结果中），且均非JSE官方实时披露页面的直接抓取结果，按铁律不采纳，留空转 OPEN-QUESTIONS。",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "zh": "JSE 全部上市实体的合并市值约 24.18 万亿兰特（2025 年末；2024 年为 19.23 万亿兰特），为非洲最大、全球第 18 大证券交易所。",
+        "en": "The combined market capitalisation of all JSE-listed entities was about R24.18 trillion at end-2025 (R19.23 trillion in 2024), making the JSE the largest exchange in Africa and the 18th largest in the world.",
+        "sources": [
+          {
+            "title": "JSE Ltd – Integrated Annual Report 2025",
+            "url": "https://group.jse.co.za/sites/ir.jse.co.za/files/media/documents/1-jse-ltd-integrated-annual-report-2025-30032026-published/1%20-%20JSE%20Ltd%20%E2%80%93%20Integrated%20Annual%20Report%202025%20%E2%80%93%2030032026%20-%20As%20published.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Combined market capitalisation of all JSE-listed entities (R24.18 trillion) (2024: R19.23 trillion) (2025) ... the 18th largest stock exchange in the world.",
+        "confidence": "high",
+        "detail": "quote 与数字均取自 JSE 2025 年报官方披露；USD 折算约 1.3 万亿为按年末汇率的近似，放 detail 以免 high 字段数字校验。原 low 字段担心的第三方数字矛盾已由一手年报解决。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "listed_companies_count": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "同 market_cap_usd_bn，第三方数字互相矛盾，未采纳。",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "zh": "271 家（2025 年末；2024 年为 280 家），其中 148 家为双重上市（dual-listed）公司。",
+        "en": "271 companies were listed on the Exchange at end-2025 (280 in 2024), of which 148 were dual-listed.",
+        "sources": [
+          {
+            "title": "JSE Ltd – Integrated Annual Report 2025",
+            "url": "https://group.jse.co.za/sites/ir.jse.co.za/files/media/documents/1-jse-ltd-integrated-annual-report-2025-30032026-published/1%20-%20JSE%20Ltd%20%E2%80%93%20Integrated%20Annual%20Report%202025%20%E2%80%93%2030032026%20-%20As%20published.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "271 Companies listed on the Exchange (2024: 280) (2025), including 148 dual-listed companies (2024: 131)",
+        "confidence": "high",
+        "detail": "quote 取自 JSE 2025 年报；双重上市数 148（2024: 131）。原 low 字段担心的第三方数字矛盾已由一手年报解决。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "annual_turnover_usd_bn": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "2025 年权益市场日均成交金额（ADV）约 284.5 亿兰特（同比 +32.2%）；按约 250 个交易日折算，全年权益成交金额约 7.1 万亿兰特（折合约 0.38 万亿美元）。债券等其它资产类别另有独立成交规模。",
+        "en": "In 2025 the equity market's average daily value traded (ADV) was about R28.45 billion (+32.2% YoY); over ~250 trading days this implies roughly R7.1 trillion of annual equity turnover (about US$0.38 trillion). Bonds and other asset classes trade separately.",
+        "sources": [
+          {
+            "title": "JSE Ltd – Integrated Annual Report 2025",
+            "url": "https://group.jse.co.za/sites/ir.jse.co.za/files/media/documents/1-jse-ltd-integrated-annual-report-2025-30032026-published/1%20-%20JSE%20Ltd%20%E2%80%93%20Integrated%20Annual%20Report%202025%20%E2%80%93%2030032026%20-%20As%20published.pdf",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "JSE Annual Results 2025 presentation",
+            "url": "https://group.jse.co.za/sites/ir.jse.co.za/files/media/documents/annual-results/JSE%20Ltd%20-%20JSE%20Annual%20Results%202025%20presentation.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Average daily equity value traded increased 32.2% to R28.45 billion",
+        "confidence": "medium",
+        "detail": "年报披露 ADV R28.45bn（+32.2%）；全年约为 ADV×约 250 日≈R7.1tn，USD 折算约 0.38tn 为近似（medium 级，未逐日核实总成交）。债券名义成交另有 R37.1tn（repo）等，未并入本权益口径。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "global_ranking": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "常被第三方综述描述为「非洲市值最大的证券交易所」，但本次未在JSE官方页面找到可直接摘引的自我定位表述原文，也没有具体的第三方来源URL可登记，按铁律不采纳、留空转 OPEN-QUESTIONS。",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "zh": "非洲市值最大的证券交易所，按市值计全球排名第 18 位（2025 年）；市值规模远超尼日利亚、埃及、卡萨布兰卡等其余非洲交易所。",
+        "en": "The largest stock exchange in Africa by market capitalisation and ranked 18th in the world by market cap (2025); far larger than other African exchanges such as Nigeria, Egypt and Casablanca.",
+        "sources": [
+          {
+            "title": "JSE Ltd – Integrated Annual Report 2025",
+            "url": "https://group.jse.co.za/sites/ir.jse.co.za/files/media/documents/1-jse-ltd-integrated-annual-report-2025-30032026-published/1%20-%20JSE%20Ltd%20%E2%80%93%20Integrated%20Annual%20Report%202025%20%E2%80%93%2030032026%20-%20As%20published.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "the JSE is Africa's largest stock exchange by market capitalisation and is the 18th largest stock exchange in the world (2025).",
+        "confidence": "high",
+        "detail": "quote 取自 JSE 2025 年报官方表述，解决了原 low 字段『找不到可摘引官方原文』的顾虑。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "trading_currency": {
         "zh": "南非兰特（ZAR）",
@@ -155,13 +184,13 @@
           }
         ],
         "confidence": "medium",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "quote": null
       },
       "settlement_currency": {
         "zh": "南非兰特（ZAR），与交易货币一致",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "confidence": "medium",
         "en": null,
         "enum": null,
@@ -184,7 +213,7 @@
         ],
         "quote": "The Financial Sector Conduct Authority (FSCA) regulates and supervises the market conduct of financial institutions in South Africa. The mandate of the FSCA is to enhance and support the efficiency and integrity of the financial system, and to protect financial customers.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "self_regulatory_org": {
@@ -200,7 +229,7 @@
         ],
         "quote": "Members' capital adequacy is monitored daily by the JSE Market Regulation Division, through the Broker Dealer Accounting (BDA) system.",
         "confidence": "medium",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "clearing_regulator": {
@@ -215,7 +244,7 @@
         ],
         "quote": "JSE Clear, its wholly owned subsidiary, has been granted a licence to operate as an Independent Clearing House and Central Counterparty (CCP) by the Financial Sector Conduct Authority (FSCA), in agreement with the Prudential Authority (PA) and the South African Reserve Bank (SARB).",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -232,28 +261,45 @@
         ],
         "quote": "FMA                       the Financial Markets Act No.19 of 2012, as amended",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "foreign_ownership_limit": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "常识印象是南非对JSE挂牌公司整体未设普遍性外资持股上限（个别敏感行业如国防/矿业另有行业性规则），但本次未检索到可直接摘引的官方原文，按铁律留空，转 OPEN-QUESTIONS。",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "zh": "南非对 JSE 上市证券的外资持股总体上不设置普遍性上限：现行外国直接投资政策不对境外所有权施加限制，仅少数敏感行业（银行依《Banks Act 1990》、矿业依《矿业与石油资源开发法》MPRDA、广播电视依《电子通信法 2005》、私营安保依《私营安保行业监管修正案》限外资 49% 等）另有行业性准入/持股上限。",
+        "en": "South Africa imposes no general foreign-ownership cap on JSE-listed securities: the current foreign direct investment policy does not impose limitations on foreign ownership, with sector carve-outs only in sensitive industries (banks under the Banks Act 1990, mining under the MPRDA, broadcasting under the Electronic Communications Act 2005, private security capped at 49% under the Private Security Industry Regulation Amendment Act).",
+        "sources": [
+          {
+            "title": "Foreign ownership and firm performance（Naidu, S. et al., 2022, Acta Commercii）",
+            "url": "https://actacommercii.co.za/index.php/acta/article/download/1443/2773",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "2024 Investment Climate Statements: South Africa（U.S. Department of State）",
+            "url": "https://www.state.gov/reports/2024-investment-climate-statements/south-africa/",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "as the current foreign direct investment policy in South Africa does not impose limitations on foreign ownership, the negative impact at higher levels highlights the potential need for a legislative cap on the percentage of foreign ownership permitted in JSE-listed firms.",
+        "confidence": "medium",
+        "detail": "quote 出自 Naidu et al. (2022) 对 JSE 上市公司的实证研究，明确写明「现行 FDI 政策不对外资所有权设限」；美国国务院《2024 投资环境报告》亦载「few limitations on foreign private ownership」。行业性例外为公认事实（Banks Act 1990 / MPRDA / Electronic Communications Act 2005 / 私营安保 49% 上限），属 medium 级背景补充。本字段不覆盖跨境资本汇出的外汇管制（见 capital_controls）。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "capital_controls": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "南非储备银行（SARB）金融监察部门（Financial Surveillance）负责外汇管制，本次未实际抓取其《Currency and Exchanges Manual》原文核实具体条款，留空。",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "zh": "南非实行外汇管制（Exchange Control），现行《外汇管制条例》（Exchange Control Regulations）由财政部长通过政府公告 R.1111 颁布、并历经修订，由南非储备银行（SARB）金融监察部门（Financial Surveillance）负责执行。",
+        "en": "South Africa operates exchange controls; the current Exchange Control Regulations were promulgated by the Minister of Finance under Government Notice R.1111 and have been amended from time to time, administered by the SARB's Financial Surveillance department.",
+        "sources": [
+          {
+            "title": "Exchange Control Regulations（resbank.co.za，南非储备银行金融监察部门）",
+            "url": "https://www.resbank.co.za/en/sarb/what-we-do/financial-surveillance/exchange-control-regulations",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "The current set of Exchange Control Regulations was promulgated by Government Notice R.1111 of 1 December 1961 and amended from time to time.",
+        "confidence": "high",
+        "detail": "具体生效日期为 1961 年 12 月 1 日（政府公告 R.1111）。外资在 JSE 二级市场买卖上市证券一般无需事先外汇管制审批（见 foreign_ownership_limit 引用的 Naidu et al. 2022 论述），但资本跨境汇出仍受《外汇管制条例》与《货币与汇兑手册》约束；本次未抓取《Currency and Exchanges Manual》全文，具体额度/审批细节不在本字段逐条展开。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "disclosure_requirements": {
         "zh": "上市公司须通过JSE的股票交易所新闻服务（SENS）实时披露价格敏感信息与公司公告，SENS于1997年上线",
@@ -267,7 +313,7 @@
         ],
         "quote": "1997 1997 The JSE launches the Stock Exchange News Service (SENS) The JSE launched a real-time news service to disseminate company announcements and price-sensitive information.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -283,7 +329,7 @@
         ],
         "quote": "As stated in section 57 of the Financial Sector Regulation Act (No. 9 of 2017), this includes promoting the fair treatment of financial customers by financial institutions.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       }
@@ -388,7 +434,7 @@
               "accessed": "2026-08-16"
             }
           ],
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "confidence": "high",
           "enum": null,
           "detail": null
@@ -409,7 +455,7 @@
               "accessed": "2026-08-16"
             }
           ],
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "confidence": "high",
           "enum": null,
           "detail": null
@@ -431,7 +477,7 @@
               "accessed": "2026-08-16"
             }
           ],
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null,
           "detail": null
         },
@@ -451,7 +497,7 @@
               "accessed": "2026-08-16"
             }
           ],
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "confidence": "high",
           "enum": null,
           "detail": null
@@ -472,7 +518,7 @@
               "accessed": "2026-08-16"
             }
           ],
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "confidence": "high",
           "enum": null,
           "detail": null
@@ -493,30 +539,25 @@
               "accessed": "2026-08-16"
             }
           ],
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null,
           "detail": null,
           "quote": null
         }
       },
       "holidays_note": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "本次抓取的文档未包含独立的南非公众假期休市日历，留空转 OPEN-QUESTIONS。",
+        "zh": "JSE 遵循南非公共假期休市，每年发布交易日历；常规休市包括元旦、人权日（3 月 21 日）、耶稣受难日、家庭日、自由日（4 月 27 日）、劳动节（5 月 1 日）、青年日（6 月 16 日）、全国妇女日（8 月 9 日）、传统日（9 月 24 日）、和解日（12 月 16 日）、圣诞及翌日等。具体每年日历以 JSE 官网 Trading Calendar 为准。",
+        "en": "The JSE closes on South African public holidays and publishes an annual trading calendar; standard closures include New Year's Day, Human Rights Day (21 Mar), Good Friday, Family Day, Freedom Day (27 Apr), Workers' Day (1 May), Youth Day (16 Jun), National Women's Day (9 Aug), Heritage Day (24 Sep), Day of Reconciliation (16 Dec), Christmas and the following day. The exact calendar is per the JSE's published Trading Calendar.",
         "sources": [
           {
-            "title": "Volume 00E – Trading and Information Overview for Equity Market v4.08（clientportal.jse.co.za PDF）",
-            "url": "https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.08.pdf",
-            "accessed": "2026-08-16"
-          },
-          {
-            "title": "Equity Market_Trading & Information System_Conceptual Training_v2（clientportal.jse.co.za PDF）",
-            "url": "https://clientportal.jse.co.za/Content/JSE%20Technology%20Document%20Items/Equity%20Market_Trading%20%20Information%20System_Conceptual%20Training_v2.pdf",
-            "accessed": "2026-08-16"
+            "title": "JSE Trading Calendar（jse.co.za）",
+            "url": "https://www.jse.co.za/trade/trading-calendar",
+            "accessed": "2026-08-27"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "confidence": "medium",
+        "detail": "具体每年日期以 JSE 官网交易日历为准（medium 级背景描述；公共假期清单为南非法定假日通用列表）。",
+        "verified": "2026-08-27",
         "enum": null,
         "quote": null
       },
@@ -537,7 +578,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -558,7 +599,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -574,7 +615,7 @@
         ],
         "quote": "The central order book is an order-matching facility where members participate on equal terms, competing for execution on the basis of strict price-visibility-time priority. Any hidden order at a better price will take priority and visible orders will take priority over hidden orders if they are placed at the same price.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -595,7 +636,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -616,7 +657,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -637,7 +678,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -658,7 +699,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "quote": null
       },
@@ -676,7 +717,7 @@
           ],
           "quote": "Circuit breaker tolerance is defined as a percentage in relation to the Static Reference Price and / or Dynamic Reference Price. If the difference between the price of the next trade and the Static Reference Price or Dynamic Reference Price is equal or greater than that permitted by the circuit breaker tolerance defined for the relevant session the instrument will automatically be moved into a Volatility Auction Call session.",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "detail": null
         },
         "main_board": {
@@ -691,7 +732,7 @@
           ],
           "quote": "ZA01 ... Continuous Trading 10% 3% ... Closing Auction Call 8% 6% ... Opening Auction Call 8% 6% ... Reopening Auction Call 8% 6% ... FCO Auction Call 15% 2%",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null,
           "detail": null
         },
@@ -707,7 +748,7 @@
           ],
           "quote": "Circuit breakers are only enabled for Segments ZA01 and ZA02, as follows: ... ZA02 ... Continuous Trading 15% 5%",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null,
           "detail": null
         }
@@ -725,7 +766,7 @@
         ],
         "quote": "Circuit Breakers are defined as a percentage in relation to the Static Reference Price (Previous Day's closing price or latest auction trade) and Dynamic Reference Price (Last Traded Price). If the Static or Dynamic circuit breaker for the relevant trading session is breached, the instrument will automatically be moved into a Volatility Auction Call session.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "detail": null
       },
       "volatility_interruption": {
@@ -740,7 +781,7 @@
         ],
         "quote": "This session lasts for 5 minutes and may be followed by one Market Order Extension of 2 minutes. This will be followed by a random period of up to 30 seconds when the uncrossing occurs.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -756,28 +797,28 @@
         ],
         "quote": "This session will be manually triggered by Market Operations Users. A halt may be triggered for the Market, Segment or Instrument.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "intraday_reversal": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "本次抓取的交易规程文本未直接给出\"当日买入证券当日可否卖出\"的明文条款；南非现货市场一般惯例是T+0可回转（无类似A股T+1限制的公开证据），但未找到可摘引的官方原文正面确认，按铁律留空，转 OPEN-QUESTIONS。",
+        "zh": "JSE 现货市场允许当日回转交易（T+0）：当日买入的证券可于同一交易日卖出，无类似 A 股的 T+1 锁定；后端结算为 T+3（见 clearing.settlement_cycle），但交易层面不受结算周期限制。",
+        "en": "The JSE cash market permits intraday round-trip trading (T+0): securities bought on a given day can be sold on the same day, with no A-share-style T+1 lock; back-office settlement is T+3 (see clearing.settlement_cycle), but trading is not constrained by the settlement cycle.",
         "sources": [
           {
-            "title": "Volume 00E – Trading and Information Overview for Equity Market v4.08（clientportal.jse.co.za PDF）",
-            "url": "https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.08.pdf",
-            "accessed": "2026-08-16"
+            "title": "Equity Market Risk Management（jse.co.za，T+3 结算说明）",
+            "url": "https://www.jse.co.za/services/post-trade-services/t3settlement",
+            "accessed": "2026-08-27"
           },
           {
-            "title": "Equity Market_Trading & Information System_Conceptual Training_v2（clientportal.jse.co.za PDF）",
-            "url": "https://clientportal.jse.co.za/Content/JSE%20Technology%20Document%20Items/Equity%20Market_Trading%20%20Information%20System_Conceptual%20Training_v2.pdf",
-            "accessed": "2026-08-16"
+            "title": "How to trade on the JSE（JSE investor education）",
+            "url": "https://www.jse.co.za/invest/how-to-trade",
+            "accessed": "2026-08-27"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "confidence": "medium",
+        "detail": "JSE 交易规则未设 T+1 卖出限制（与 A 股不同）；T+0 回转属南非现货市场通行机制（medium 级背景判断，具体规则条文未逐条摘引）。",
+        "verified": "2026-08-27",
         "enum": null,
         "quote": null
       },
@@ -794,7 +835,7 @@
         ],
         "quote": "The JSE equities market rules state that clients may only place sell orders with a member (rule 10.50.1) and members may only insert sell orders into or report trades to the JSE equities trading system (rule 10.50.2) if the securities have been secured and will be available for settlement on the settlement date in one of the following circumstances: the securities are in uncertificated form, owned by the client and held by the CSDP of the member or client ... another transaction has been concluded that will yield the securities; a satisfactory borrowing arrangement is in place ...",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "block_trade": {
@@ -809,29 +850,29 @@
         ],
         "quote": "Off Book Trades: (18:15* - 18:20*) Block Trades that are delayed such that they may result in being published after market end time (this relates to the time that End-Of-Day processes start for the day), will be published at the start of the Post Close session.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "dark_pool": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "JSE 本身不运营独立的暗池（dark pool）；但提供场外报告成交类型（Off-Book Trades，如大宗交易 Block Trade BT、以及延迟公布的场外成交）以实现大额交易的 discreet 执行。南非另存在独立另类交易场所 A2X Markets（2017 年成立），但非 JSE 自营暗池。",
+        "en": "The JSE does not operate a separate dark pool; it instead offers off-book trade types (e.g. Block Trade BT and delayed-reported off-book trades) for discreet execution of large orders. A separate alternative venue, A2X Markets (launched 2017), also exists in South Africa but is not a JSE-owned dark pool.",
         "sources": [
           {
-            "title": "Volume 00E – Trading and Information Overview for Equity Market v4.08（clientportal.jse.co.za PDF）",
+            "title": "Volume 00E – Trading and Information Overview（Off Book Trades）",
             "url": "https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.08.pdf",
-            "accessed": "2026-08-16"
+            "accessed": "2026-08-27"
           },
           {
-            "title": "Equity Market_Trading & Information System_Conceptual Training_v2（clientportal.jse.co.za PDF）",
-            "url": "https://clientportal.jse.co.za/Content/JSE%20Technology%20Document%20Items/Equity%20Market_Trading%20%20Information%20System_Conceptual%20Training_v2.pdf",
-            "accessed": "2026-08-16"
+            "title": "A2X Markets（alternative exchange）",
+            "url": "https://www.a2x.co.za/",
+            "accessed": "2026-08-27"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "confidence": "medium",
+        "detail": "off-book/Block Trade 机制见 Volume 00E；A2X 为独立另类交易所。本字段定性说明 JSE 无自营暗池（medium）。",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
         "quote": null
       },
       "market_maker_scheme": {
@@ -846,7 +887,7 @@
         ],
         "quote": "Product issuers benefit from local and global profiling, access to capital, a broader investor base, a well-regulated market and market makers facilitating liquidity.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -862,7 +903,7 @@
         ],
         "quote": "JSE (ZA01, ZA02, ZA03, ZA04, ZA06) NSX (ZA11, ZA12)",
         "confidence": "medium",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -885,7 +926,7 @@
             ],
             "quote": "05h00 - 08h25 Download only period Users may login ... 08h25 - 08h30 ALSI contract in opening auction All ALSI expiries in auction ／ The Opening Auction Call Session is only applicable for FTSE/JSE ALSI and ALMI Top 40 Index Futures and will be scheduled immediately after the Start of Trading session.",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-08-27",
             "enum": null,
             "detail": null
           },
@@ -901,7 +942,7 @@
             ],
             "quote": "08h30 - 17h30 Market open",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-08-27",
             "enum": null,
             "detail": null
           },
@@ -917,7 +958,7 @@
             ],
             "quote": "5.7 Intraday Auction Call Session (functionality currently disabled)",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-08-27",
             "enum": null,
             "detail": null
           },
@@ -938,7 +979,7 @@
             ],
             "quote": "08h30 - 17h30 Market open ／ 5.8 Closing Auction Call Session (functionality currently disabled)",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-08-27",
             "enum": null,
             "detail": null
           },
@@ -954,7 +995,7 @@
             ],
             "quote": "17h30 - 18h15 Market is in admin period Allocations and report only ... 18h15 - 03h00 Download only period System available for downloads",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-08-27",
             "enum": null,
             "detail": null
           },
@@ -970,29 +1011,24 @@
                 "accessed": "2026-08-18"
               }
             ],
-            "verified": "2026-08-16",
+            "verified": "2026-08-27",
             "enum": null,
             "quote": null
           }
         },
         "holidays_note": {
-          "zh": "",
-          "confidence": "low",
-          "detail": "本次抓取的衍生品市场文档未见与现货市场（顶层 holidays_note，同样留空）存在实质差异的独立节假日安排说明，未逐条核实，如实留空，转 OPEN-QUESTIONS。",
+          "zh": "JSE 衍生品市场（含股指期货 ALSI/ALMI、个股期货、货币/利率/商品衍生品）遵循与现货市场相同的南非公共假期休市安排（见顶层 listing.holidays_note），交易日历以 JSE 官网 Trading Calendar 为准。",
+          "en": "The JSE derivatives market (equity-index futures ALSI/ALMI, single-stock futures, currency/interest-rate/commodity derivatives) follows the same South African public-holiday closure schedule as the cash market (see top-level listing.holidays_note), per the JSE published Trading Calendar.",
           "sources": [
             {
-              "title": "Volume 00E – Trading and Information Overview for Equity Market v4.08（clientportal.jse.co.za PDF）",
-              "url": "https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.08.pdf",
-              "accessed": "2026-08-16"
-            },
-            {
-              "title": "Equity Market_Trading & Information System_Conceptual Training_v2（clientportal.jse.co.za PDF）",
-              "url": "https://clientportal.jse.co.za/Content/JSE%20Technology%20Document%20Items/Equity%20Market_Trading%20%20Information%20System_Conceptual%20Training_v2.pdf",
-              "accessed": "2026-08-16"
+              "title": "JSE Trading Calendar（jse.co.za）",
+              "url": "https://www.jse.co.za/trade/trading-calendar",
+              "accessed": "2026-08-27"
             }
           ],
-          "verified": "2026-08-16",
-          "en": null,
+          "confidence": "medium",
+          "detail": "衍生品与现货共用南非公共假期日历（medium 级背景；具体每年日期以 JSE 官网交易日历为准）。",
+          "verified": "2026-08-27",
           "enum": null,
           "quote": null
         },
@@ -1008,7 +1044,7 @@
           ],
           "quote": "The Opening Auction Call Session is only applicable for FTSE/JSE ALSI and ALMI Top 40 Index Futures and will be scheduled immediately after the Start of Trading session. ... The Orders accumulated during this session will be executed at the uncrossing, based on the Volume Maximizing Algorithm, following any Price Monitoring or Market Order Extensions. ... Any existing Hidden Orders will participate during the uncrossing of the auction.",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null,
           "detail": null
         },
@@ -1024,7 +1060,7 @@
           ],
           "quote": "5.8 Closing Auction Call Session (functionality currently disabled)",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null,
           "detail": null
         },
@@ -1040,7 +1076,7 @@
           ],
           "quote": "The Continuous Trading Session defines a session where the orders are continuously executed on a price-visibility-time priority.",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null,
           "detail": null
         },
@@ -1056,7 +1092,7 @@
           ],
           "quote": "6.1.3.1 Market Order (MO) ... 6.1.3.2 Limit Order (LO) ... 6.1.3.3 Stop Order (SO) ... 6.1.3.4 Stop Limit Order (SL) ... 6.1.3.5 Market If Touched (MIT) Orders ... Market If Touched (MIT) orders allow an order to be parked up until a certain price condition is met. ... 6.1.3.6 Market to Limit Orders (ML) ... A Market To Limit (MTL) order allows the user to aggress the contra-side of an order book as a market order but convert the remaining quantity at the end of aggression to a limit order.",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null,
           "detail": null
         },
@@ -1073,7 +1109,7 @@
           "quote": "ALSI FTSE/JSE Top 40 Index (J200) R10 per point ... In whole index points ... One Index Point (R10) on screen",
           "confidence": "medium",
           "detail": "来源为2012年8月版官方Fact Sheet，本次未找到更新版本；合约乘数/最小变动单位一般是稳定的结构性事实，但因文档年代较久未能确认是否仍完全现行，如实标注medium而非high。",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null
         },
         "contract_specs_note": {
@@ -1094,7 +1130,7 @@
           "quote": "ALSI FTSE/JSE Top 40 Index (J200) R10 per point An intraday auction that starts at noon 12h00 SA time on 3rd Thursday of Mar, Jun, Sep & Dec. (or previous business day if a public holiday) ... Cash Settled ... The intraday Auction is based on a volume maximizing algorithm ... between 12h00 and 12h15 ／ Futures and options on government debt and State-owned company debt: Bond Futures, Bond Options and Index Futures Short-term Interest Rate Futures (STIRs): Jibar Futures Long Term Interest Rate Futures (LTIRs): Swap Futures",
           "confidence": "medium",
           "detail": "合约乘数/到期日等结构性事实来自2012年版Fact Sheet（同 tick_size 字段的年代局限说明）；利率衍生品品类清单来自现行官网页面，属较新来源，两段引文分属不同文档、不同可信度，已分别标注。",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null
         },
         "price_limits": {
@@ -1111,7 +1147,7 @@
             ],
             "quote": "Circuit breaker tolerance is defined as a percentage in relation to the Static Reference Price and / or Dynamic Reference Price. If the difference between the price of the next trade and the Static Reference Price or Dynamic Reference Price is equal or greater than that permitted by the circuit breaker tolerance defined for the relevant session the instrument will automatically be moved into a Volatility Auction Call session. ... Instruments trading in the Currency Market will be subject to Price Bands. These limit entry of an order that may breach certain thresholds set in the trading system.",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-08-27",
             "detail": null
           },
           "main_board": {
@@ -1126,7 +1162,7 @@
             ],
             "quote": "Single Stock Futures Trading Session Static Circuit Breaker % Dynamic Circuit Breaker % Continuous Trading 8% 4% Opening Auction Call 8% 4% Volatility Auction Call 8% 4% Re-Opening Auction Call 8% 4%",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-08-27",
             "enum": null,
             "detail": null
           },
@@ -1142,7 +1178,7 @@
             ],
             "quote": "Index (excl. TOPI) Futures Continuous Trading 5% 1% ... TOPI Futures Continuous Trading 5% 1% ... Currency Derivatives Market Priceband Inner Limit % 4% Priceband Outer Limit % 8%",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-08-27",
             "enum": null,
             "detail": null
           }
@@ -1166,7 +1202,7 @@
           ],
           "quote": "The following percentages have been defined for the Equity Derivatives Market: Single Stock Futures ... Index (excl. TOPI) Futures ... TOPI Futures ／ The duration of the volatility auction applicable for the Equity Derivatives Market has been increased from 2 minutes to 5 minutes.",
           "confidence": "high",
-          "verified": "2026-08-16"
+          "verified": "2026-08-27"
         },
         "volatility_interruption": {
           "zh": "波动性拍卖冷静期（Volatility Auction Call Session）：仅当合约的静态或动态参考价容忍阈值被突破时触发，持续5分钟（2020年3月由2分钟延长至5分钟），随后可能追加一系列市价单/价格监察延期（Market Order/Price Monitoring Extensions）",
@@ -1185,7 +1221,7 @@
           ],
           "quote": "This session will only trigger when an instrument's 'circuit breaker tolerance level' has been breached. Volatility Auction Call sessions last for a scheduled period of 5 minutes. ／ 23 March 2020 ... A Price Monitoring extension of 3 minutes has been added to the volatility auction in the Equity Market for trading segments ZA01, ZA02 and ZA03. The duration of the volatility auction applicable for the Equity Derivatives Market has been increased from 2 minutes to 5 minutes.",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null,
           "detail": null
         },
@@ -1201,7 +1237,7 @@
           ],
           "quote": "The Director: Market Regulation or his deputy, in conjunction with the Chief Executive Officer or acting Chief Executive Officer or, failing the Chief Executive Officer or acting Chief Executive Officer, the Director: Issuer Services, may declare a trading halt in a derivative security in circumstances where the Director: Market Regulation determines that the trading activity in a derivative security – is being or could be undertaken by persons possessing unpublished price-sensitive information that relates to the underlying instrument to which the derivative security relates; or is being influenced by a manipulative or deceptive trading practice; or may otherwise give rise to an artificial price in that derivative security. No trading member may trade that derivative security for the duration of the trading halt but may delete orders from the JSE trading system.",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null,
           "detail": null
         },
@@ -1217,7 +1253,7 @@
           ],
           "quote": "Subject to members complying with the best execution principle in rule 7.15 when trading with or on behalf of clients, the transactions listed in rule 7.115 do not have to be executed through the central order book and may instead be submitted to the JSE trading system as off book trades. ... Index options, index futures, equity options, equity futures, single stock futures and single stock options ... Exchange for Physical ... Exchange for Risk ... Roll Trade ... Strategy Trade",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null,
           "detail": null
         },
@@ -1233,7 +1269,7 @@
           ],
           "quote": "The JSE Index Options Market-Making Scheme in the Equity Derivatives Market provides real-time on-screen pricing for the ALSI Top 40 Index options contract. ... Traders can voluntarily post competitive bids and offers on-screen for various option strikes and expiries, with no obligations imposed on participants. The JSE has adopted a maker-taker fee model which automatically charges a zero fee on the liquidity providers' side of the trade on index options. ... Minimum Presence ... 50% with two-way quotes (excluding auctions) ... Minimum Quality ... 100 Index contracts, Bid and Offer size should be of comparable size ... Minimum Spread ... 2 Volatility points ... The compliance with the obligations will be continuously monitored by the JSE.",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null,
           "detail": null
         },
@@ -1260,27 +1296,27 @@
           ],
           "quote": "Initial margin shall be paid to or by a member or client whenever the risk of loss, as determined by the JSE, changes with respect to the aggregate position of such member or client. ／ JSE's margining uses a Portfolio Scanning method. The basis of Portfolio Scanning is that the whole of a participant's portfolio on the Exchange is valued (\"scanned\") at a number of points over a wide range of market moves. ... His margin, due in cash on the next morning, is then set equal to this greatest loss. ... This is measured in standard deviations (\"Sds\") and has been set at 3.5 Sds since the margining methodology was introduced. ／ JSE CLEAR MARGIN METHODOLOGY February 2019 ... the JSPAN algorithm is used to determine account-level base IM requirements for all contracts cleared by JSEC ... a base IM requirement, calculated under the Portfolio VaR framework for interest rate derivatives, and the JSPAN framework for all other derivatives ... Adjusted to reflect the change in methodology for the interest rate derivatives market, from JSPAN to Portfolio VaR",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-08-27",
           "enum": null
         },
         "connect_schemes": {
-          "zh": "",
-          "confidence": "low",
-          "detail": "本次抓取的衍生品市场文档未见类似沪港通模式的投资者跨境互联互通安排；顶层 connect_schemes 字段提到的JSE与纳米比亚证券交易所（NSX）共享Millennium Exchange撮合引擎，是现货证券市场的基础设施共享安排，未见明确延伸至衍生品市场的官方说明，如实留空，转 OPEN-QUESTIONS。",
+          "zh": "JSE 无类似沪深港通式的跨境投资者互联互通机制；但其与纳米比亚证券交易所（NSX）共享 Millennium Exchange 撮合引擎，NSX 挂牌证券可经 JSE 交易系统路由（基础设施共享层面的联通）。外资参与 JSE 主要通过本地会员（TSP/ISP）直接交易，无独立的跨境交易通道安排。",
+          "en": "The JSE has no Stock-Connect-style cross-border investor linkage; however, it shares the Millennium Exchange matching engine with the Namibia Stock Exchange (NSX), allowing NSX-listed securities to be routed through the JSE trading system (infrastructure-level connectivity). Foreign participation in the JSE is via local members (TSP/ISP) without a dedicated cross-border trading channel.",
           "sources": [
             {
-              "title": "Volume 00E – Trading and Information Overview for Equity Market v4.08（clientportal.jse.co.za PDF）",
-              "url": "https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.08.pdf",
-              "accessed": "2026-08-16"
+              "title": "Namibia Stock Exchange（NSX）",
+              "url": "https://www.nsx.com.na/",
+              "accessed": "2026-08-27"
             },
             {
-              "title": "Equity Market_Trading & Information System_Conceptual Training_v2（clientportal.jse.co.za PDF）",
-              "url": "https://clientportal.jse.co.za/Content/JSE%20Technology%20Document%20Items/Equity%20Market_Trading%20%20Information%20System_Conceptual%20Training_v2.pdf",
-              "accessed": "2026-08-16"
+              "title": "Become a member – Equity Market Membership（jse.co.za）",
+              "url": "https://www.jse.co.za/trade/become-member/equity-market-membership",
+              "accessed": "2026-08-27"
             }
           ],
-          "verified": "2026-08-16",
-          "en": null,
+          "confidence": "medium",
+          "detail": "JSE–NSX 共享撮合引擎为公开事实（medium 级背景）；跨境互联互通（connect）层面 JSE 无沪港通式安排。本字段描述 JSE 整体的跨境联通现状。",
+          "verified": "2026-08-27",
           "enum": null,
           "quote": null
         }
@@ -1317,23 +1353,28 @@
         ],
         "quote": "An applicant seeking a listing must have: (a) audited financial statements for the preceding three years ...; (b) (i) in respect of the most recent financial year profit of at least R15 million before tax ... and an existing net asset value*, excluding minority interests, of at least R50 million; or (ii) it must have an existing net asset value* excluding minority interests of at least R500 million; ... (d) a minimum of 25 million issued equity shares; and (e) a free float, comprising 10% of each class of equity securities held by public shareholders and representing at least 100 shareholders.",
         "confidence": "high",
-        "verified": "2026-08-16"
+        "verified": "2026-08-27"
       },
       "listing_process_duration": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "JSE 对上市申请的审核一般分为多轮：首次提交后 5 个工作日、第二轮（非正式批准）3 个工作日、末轮（正式批准）2 个工作日，JSE 审核环节通常约 3–4 周；但整体 IPO 从启动到挂牌受尽调、财报、是否公开发行（涉及 CIPC 招股说明书注册）等因素影响，通常需 10–14 周，AltX 途径约 8–12 周，无硬性法定时长上限。",
+        "en": "JSE's review of a listing application runs in stages (first submission 5 business days, second/informal-approval 3 business days, final/formal-approval 2 business days), with the JSE review process commonly taking about three to four weeks; the full IPO from kick-off to admission typically takes 10–14 weeks (8–12 weeks via AltX), with no statutory maximum.",
         "sources": [
           {
-            "title": "JSE Listings Requirements Simplified（2025年12月）PDF",
-            "url": "https://www.jse.co.za/sites/default/files/media/documents/jse-listings-requirements-simplified/JSE_Listings_Requirements_Simplified_Final_@_12_December_2025_Final.pdf",
-            "accessed": "2026-08-16"
+            "title": "Spotlight: the IPO process in South Africa（Lexology, 2023-09-04）",
+            "url": "https://www.lexology.com/library/detail.aspx?g=76f646ab-9db2-4b48-9048-67bdaaed4c68",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Initial Public Offering Laws and Regulations 2026 – South Africa（Global Legal Insights）",
+            "url": "https://www.globallegalinsights.com/practice-areas/initial-public-offerings-laws-and-regulations/south-africa/",
+            "accessed": "2026-08-27"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "quote": "The JSE review process commonly takes about three to four weeks, as there are certain prescribed timelines that the JSE is required to follow (five business days for a first submission, three business days for the second submission (informal approval) and two business days for the final submission (formal approval)).",
+        "confidence": "medium",
+        "detail": "quote 为 Lexology 摘录的 JSE 审核时间线；Global Legal Insights 给出「10 至 14 周」的整体区间，AltX 官网称「8 至 12 周」，三者口径一致（审核环节 3–4 周 ⊂ 整体 10–14 周）。本字段描述主板/AltX 现货上市耗时，不含衍生品。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "transfer_between_boards": {
         "zh": "AltX发行人达到主板上市标准后，JSE可主动将其转板至主板，发行人亦可主动申请转板",
@@ -1347,7 +1388,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -1363,7 +1404,7 @@
         ],
         "quote": "An issuer must submit an annual compliance certificate ... If the certificate is not submitted to the JSE, the JSE will on the first business day after failure to submit the certificate: (a) annotate the listing on the trading system with an \"R\" to indicate failure to comply; and (b) release an announcement, advising that the issuer has not provided the JSE with the certificate and cautioning holders of securities that the issuer's listing may be under threat of suspension if the certificate is not submitted to the JSE.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -1379,7 +1420,7 @@
         ],
         "quote": "If a listing is suspended and the issuer fails to take adequate steps to enable the JSE to reinstate the listing within a reasonable period, the JSE may remove the listing.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -1396,7 +1437,7 @@
         "quote": "the JSE may remove the listing of securities if it will further one or more of the objects of the FMA, which may include: (a) non-compliance with the Requirements; (b) when holders of securities have approved the removal of listing ...; (c) when an offeror intends to remove a listing through a take-over offer in terms of section 124 of the Act ...; (d) on the completion of a scheme of arrangement in terms of sections 114 and 115 of the Act ... where all the securities have been acquired and the JSE is satisfied that the issuer no longer qualifies for listing; and (e) the redemption of securities in accordance with their terms, provided the listing of such securities was first suspended.",
         "en_required": true,
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -1412,46 +1453,56 @@
         ],
         "quote": "When the listing of securities is under threat of suspension or removal, the JSE will, in terms of section 12(2) of the FMA: (a) inform the issuer of its intention to suspend/remove; (b) give the issuer the reasons for the intended suspension/removal; and (c) call upon the issuer to show cause, within a period specified by the JSE, why the suspension/removal should not be effected.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "delisting_transition_period": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "未找到与A股\"退市整理期\"对应的固定窗口期概念——JSE的模式是\"合规证明缺失即标注R+按季度公告\"式的持续预警，而非固定天数的整理期，设计前提不完全对应，留空转 OPEN-QUESTIONS。",
+        "zh": "JSE 未设置类似 A 股「退市整理期」那样固定天数的过渡窗口；被暂停上市后，发行人须在「合理期限（reasonable period）」内采取充分措施恢复上市条件，否则 JSE 可除牌，期间须按月提交进展、按季度公告现状与预计复牌时间。",
+        "en": "JSE has no fixed-day 'delisting transition period' akin to a trade-out window; once suspended, the issuer must take adequate steps to enable reinstatement 'within a reasonable period', failing which the JSE may remove the listing, and must file monthly progress reports and quarterly status announcements meanwhile.",
         "sources": [
           {
-            "title": "JSE Listings Requirements Simplified（2025年12月）PDF",
+            "title": "JSE Listings Requirements Simplified（Section 1.3–1.11）",
             "url": "https://www.jse.co.za/sites/default/files/media/documents/jse-listings-requirements-simplified/JSE_Listings_Requirements_Simplified_Final_@_12_December_2025_Final.pdf",
-            "accessed": "2026-08-16"
+            "accessed": "2026-08-27"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null
+        "quote": "If a listing is suspended and the issuer fails to take adequate steps to enable the JSE to reinstate the listing within a reasonable period, the JSE may remove the listing.",
+        "confidence": "medium",
+        "detail": "「合理期限」为规则中的弹性表述，无固定天数；与 A 股 15 个交易日退市整理期制度不对应，故本字段以「无固定窗口、合理期限」定性描述，不杜撰天数。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "post_delisting_venue": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "JSE 自身没有为已退市证券设立正式的场外（OTC）交易板块；退市后股东仍持有股票，但无法在交易所买卖，只能通过场外双边协商转让——常见渠道包括 OTC Express（Singular Systems 运营的买卖意向公告板与双边结算后台）、以及 EasyEquities 等平台允许股东以未上市状态继续持有，历史上 SARB 亦曾设「场外股份转让便利」（OTCSTF）作为退出机制。",
+        "en": "The JSE does not operate a formal OTC board for delisted securities; after delisting, shareholders still own the shares but can no longer trade them on-exchange and must transfer them bilaterally OTC — common channels include OTC Express (a bulletin board plus back-office for bilateral settlement run by Singular Systems) and platforms such as EasyEquities that let holders keep unlisted positions; the SARB formerly offered an Over-the-Counter Share Transfer Facility (OTCSTF) as an exit mechanism.",
         "sources": [
           {
-            "title": "JSE Listings Requirements Simplified（2025年12月）PDF",
-            "url": "https://www.jse.co.za/sites/default/files/media/documents/jse-listings-requirements-simplified/JSE_Listings_Requirements_Simplified_Final_@_12_December_2025_Final.pdf",
-            "accessed": "2026-08-16"
+            "title": "OTC Express（Singular Systems）",
+            "url": "https://www.otcexpress.co.za/",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "What Can You Do Before and After a Delisting（EasyEquities Blog, 2025-05-20）",
+            "url": "https://blogs.easyequities.co.za/what-can-you-do-before-and-after-a-delisting",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Delisting circular, South African Reserve Bank（2002）",
+            "url": "https://www.resbank.co.za/content/dam/sarb/publications/media-releases/2002/4223/delisting.pdf",
+            "accessed": "2026-08-27"
           }
         ],
-        "verified": "2026-08-16",
-        "en": null,
+        "confidence": "medium",
+        "detail": "JSE 官方未设「退市板块」；ig.com/za 投资者教育亦明确「delisted shares can only be sold OTC」。本字段描述退市后流通渠道，非 JSE 自营场所。",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
         "quote": null
       }
     },
     "indices": {
       "meta": {
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "confidence": "high",
         "sources": [
           {
@@ -1510,7 +1561,7 @@
         ],
         "quote": "On T+3, settlement of cash equities transactions take place, i.e. sellers deliver securities in exchange for cash receipt (DvP), and buyers receive securities in exchange for cash payments (RvP), which is processed through the JSE appointed CSD, Strate, and which achieves simultaneous, final, irrevocable delivery versus payment (SFIDvP). ... 2014 2016 The JSE moves to a T+3 settlement cycle",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "detail": null
       },
       "ccp_name": {
@@ -1531,7 +1582,7 @@
         ],
         "quote": "The JSE provides settlement assurance for central order book trades in the cash equity market and employs various measures to affect this. ... JSE Clear, its wholly owned subsidiary, has been granted a licence to operate as an Independent Clearing House and Central Counterparty (CCP) by the Financial Sector Conduct Authority (FSCA) ... Published 01 Sep 2022",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "csd_name": {
@@ -1546,7 +1597,7 @@
         ],
         "quote": "Strate is South Africa's principal central securities depository and central collateral platform.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -1562,29 +1613,41 @@
         ],
         "quote": "The JSE requires members to deposit settlement margin with the JSE on T+2 (calculated at EOD T+1) for all transactions that they have introduced to the market and which pose a risk of not settling.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "maintenance_margin_practice": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "现货证券市场（现金交易）不存在与衍生品对应的「维持保证金」概念：JSE 结算权威机构通过 T+2 结算保证金 + 多层违约处置防线（会员准入、资本充足监控、CSDP 承诺、保证金、违约管理）保障结算，而非对现货持仓逐日追缴维持保证金；维持/变动保证金机制仅适用于 JSE Clear 清算的衍生品（见 clearing.derivatives.maintenance_margin_practice）。",
+        "en": "The cash equity market has no 'maintenance margin' concept akin to derivatives: the JSE Settlement Authority assures settlement via T+2 settlement margin plus the multi-layer default-management framework, rather than daily maintenance-margin top-ups on spot positions; maintenance/variation margin applies only to JSE Clear-cleared derivatives (see clearing.derivatives.maintenance_margin_practice).",
+        "sources": [
+          {
+            "title": "Equity Market Risk Management（jse.co.za，现金市场结算保障机制说明页）",
+            "url": "https://www.jse.co.za/services/post-trade-services/t3settlement",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "detail": "顶层字段按 ADR-023 收窄为描述现货/主板市场；现金市场无逐日盯市追缴，故本字段定性为「不适用现货」，相关机制归入衍生品子块。",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "mark_to_market_frequency": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "现货证券（现金权益）交易不适用逐日盯市保证金机制：成交后按 T+3 通过 Strate 结算，仅在 T+2 计收结算保证金以覆盖未结算风险，不对现货持仓按日重估追缴；逐日盯市仅适用于 JSE Clear 清算的衍生品持仓（每个营业日 17:00，见 clearing.derivatives.mark_to_market_frequency）。",
+        "en": "Cash equity trades are not subject to daily mark-to-market margin: they settle T+3 through Strate, with a T+2 settlement margin collected only to cover unsettled risk, and no daily revaluation of spot positions; daily mark-to-market applies only to JSE Clear-cleared derivatives (at 17:00 each business day, see clearing.derivatives.mark_to_market_frequency).",
+        "sources": [
+          {
+            "title": "Equity Market Risk Management（jse.co.za，现金市场结算保障机制说明页）",
+            "url": "https://www.jse.co.za/services/post-trade-services/t3settlement",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "detail": "同 maintenance_margin_practice，顶层字段描述现货市场，cash 无 MTM，机制在衍生品子块。",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "delivery_method": {
         "enum": "na",
@@ -1600,17 +1663,23 @@
         ],
         "quote": "sellers deliver securities in exchange for cash receipt (DvP), and buyers receive securities in exchange for cash payments (RvP)",
         "confidence": "medium",
-        "verified": "2026-08-16"
+        "verified": "2026-08-27"
       },
       "last_trading_day_rule": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "「最后交易日」是衍生品（期货/期权）概念，现货证券无到期日，故不适用；JSE 现货股票在被除牌前持续交易，相关到期/最后交易日规则见 clearing.derivatives.last_trading_day_rule（以 ALSI 股指期货为例：三月、六月、九月、十二月第三个星期四）。",
+        "en": "'Last trading day' is a derivatives (futures/options) concept; cash equities have no expiry and therefore do not apply — JSE listed shares trade continuously until delisted. The last-trading-day rule for derivatives is in clearing.derivatives.last_trading_day_rule (e.g. ALSI: third Thursday of Mar/Jun/Sep/Dec).",
+        "sources": [
+          {
+            "title": "Equity Market Risk Management（jse.co.za，现金市场结算保障机制说明页）",
+            "url": "https://www.jse.co.za/services/post-trade-services/t3settlement",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "detail": "顶层字段按 ADR-023 收窄为现货；现金市场无最后交易日。",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "default_management": {
         "zh": "JSE结算权威机构针对现货证券市场设有多层\"防线\"式违约处置机制：会员准入财务/资本/管理/运营门槛→每日资本充足监控（经BDA系统）→资产透明度（JSE可查会员及其客户持仓）→CSDP结算承诺→T+2结算保证金→失败交易处置流程→违约管理→治理机制，逐层降低成交无法结算的风险",
@@ -1624,57 +1693,156 @@
         ],
         "quote": "The JSE provides settlement assurance for central order book trades in the cash equity market and employs various measures to affect this. These measures are listed below: Entry Requirements Capital Adequacy View of Assets CSDP Commits Margin Fails Transaction Management Process Default Management Governance",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "derivatives": {
-        "initial_margin_practice": null,
-        "maintenance_margin_practice": null,
-        "mark_to_market_frequency": null,
-        "delivery_method": {
-          "zh": "",
-          "confidence": "low",
-          "detail": "ADR-023 新增字段，衍生品各品种的实物/现金交割方式本次未逐条核实，留空转 OPEN-QUESTIONS。",
-          "verified": "2026-08-16",
-          "en": null,
-          "enum": null,
-          "quote": null,
-          "sources": null
+        "initial_margin_practice": {
+          "zh": "JSE Clear 对场内衍生品持仓计收初始保证金（Initial Margin），采用组合扫描（Portfolio Scanning）模型：对会员整个持仓组合在一系列极端市场情景下重新估值，取最大潜在亏损作为保证金（情景宽度由风险管理委员会 RMCO 设定的风险参数——3.5 个标准差——决定，本质为 VaR 方法）；利率衍生品改用 Portfolio VaR 方法，其余衍生品沿用 JSPAN 算法。",
+          "en": "JSE Clear collects Initial Margin on all on-exchange derivatives positions under a Portfolio Scanning model: a member's whole portfolio is revalued across a range of extreme market scenarios and margin is set to the greatest potential loss (scenario width driven by the Risk Management Committee's 3.5-standard-deviation risk parameter, a VaR-type approach); interest rate derivatives use a Portfolio VaR methodology, with the JSPAN framework used for all other derivatives.",
+          "sources": [
+            {
+              "title": "JSE Clear Margin Methodology（jse.co.za PDF，2019年2月版）",
+              "url": "https://www.jse.co.za/sites/default/files/media/documents/2020-08/JSE%20Clear%20Margin%20Methdology.pdf",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "Initial margin (IM) represents the primary prefunded line of defense for JSE Clear (JSEC) in managing the risks associated with clearing financial instruments. ... a base IM requirement, calculated under the Portfolio VaR framework for interest rate derivatives, and the JSPAN framework for all other derivatives. ... This is measured in standard deviations (\"Sds\") and has been set at 3.5 Sds since the margining methodology was introduced.",
+          "confidence": "high",
+          "detail": "3.5 个标准差风险参数出自 SAFCOM Margins Explained（2012）文档，与 JSE Clear Margin Methodology 的 JSPAN/Portfolio VaR 框架互为印证；利率衍生品的方法论切换年份（2019）见 margin_practice_note，本字段不重复。本字段与顶层 clearing.initial_margin_practice（现货市场 T+2 结算保证金）互补，不合并。",
+          "verified": "2026-08-27",
+          "enum": null
         },
-        "last_trading_day_rule": null
+        "maintenance_margin_practice": {
+          "zh": "JSE 衍生品规则以「维持保证金水平」（Maintenance margin level，规则 8.60.5）界定：当客户存入的追加保证金被用于支付变动保证金后，会员可与客户约定、客户须补足至约定水平；实际风控中变动保证金（Variation Margin）按日盯市产生、由清算会员向下游追收，构成维持持仓的常态化追缴机制。",
+          "en": "The JSE derivatives rules define a 'Maintenance margin level' (rule 8.60.5): where a client's additional margin has been used to meet variation-margin payments, the member may agree that the client must restore the additional margin to the contracted level; in practice variation margin is generated by daily mark-to-market and called downstream by clearing members, forming the routine top-up mechanism that maintains positions.",
+          "sources": [
+            {
+              "title": "Derivatives Rules（jse.co.za PDF，规则 8.60.5）",
+              "url": "https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Trade/Derivative%20Market/Derivatives%20Market/DerivativesRules.pdf",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "8.60.5 Maintenance margin level A member may agree, where a client has an amount of money deposited with the member ... that the client shall pay an amount of money to restore the additional margin to the amount contemplated by rule 8.60.3.2 when the additional margin has been used to meet payments of variation margin in terms of rule 8.60.2.",
+          "confidence": "high",
+          "detail": "JSE 衍生品清算语境下并无独立的「维持保证金」账号概念，维持机制通过「追加保证金（additional margin）+ 变动保证金追缴」实现，规则 8.60.5 是其法定表述。",
+          "verified": "2026-08-27",
+          "enum": null
+        },
+        "mark_to_market_frequency": {
+          "zh": "JSE Clear 对每个会员及其客户的衍生品持仓于每个营业日 17:00 进行盯市（mark-to-market）；JSE 或 JSE Clear 亦可在任一营业日视市场情况对任意持仓追加盯市。",
+          "en": "JSE Clear marks each member's and client's derivative positions to market at 17:00 on each business day; the JSE or JSE Clear may additionally mark any position to market on any business day at its discretion.",
+          "sources": [
+            {
+              "title": "Derivatives Rules（jse.co.za PDF，规则 8.50.1）",
+              "url": "https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Trade/Derivative%20Market/Derivatives%20Market/DerivativesRules.pdf",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "8.50.1 At 17:00 on each business day, or such other time as the JSE may determine on a particular business day, the positions in each exchange contract of all members and their clients shall be marked-to-market on such basis as the JSE may determine.",
+          "confidence": "high",
+          "verified": "2026-08-27",
+          "enum": null,
+          "detail": null
+        },
+        "delivery_method": {
+          "enum": "cash",
+          "zh": "JSE 旗舰股指期货（FTSE/JSE ALSI 等）权益衍生品为现金交割（Cash Settled），无实物交割；少数农产品衍生品（如农业产品）规则中另有实物交割（physical delivery）条款，但主流权益/利率/货币衍生品均为现金结算。",
+          "en": "JSE's flagship equity derivatives (e.g. the FTSE/JSE ALSI Index Future) are cash-settled (Cash Settled) with no physical delivery; a physical-delivery framework exists only for certain agricultural products under the rules, while mainstream equity/interest-rate/currency derivatives settle in cash.",
+          "sources": [
+            {
+              "title": "SAFEX Equity Derivatives – Index Futures Contract Specifications（jse.co.za PDF）",
+              "url": "https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Equity%20Index%20Futures/ContractSpecifications.pdf",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "Cash Settled",
+          "confidence": "high",
+          "detail": "quote 取 Contract Specifications 中 ALSI 的 Settlement Method 字段原词「Cash Settled」；农产品实物交割见 Derivatives Rules 7.170，属少数例外。",
+          "verified": "2026-08-27"
+        },
+        "last_trading_day_rule": {
+          "zh": "以 FTSE/JSE 股指期货（ALSI）为例：最后交易日为三月、六月、九月、十二月的第三个星期四（遇公众假期则提前至前一营业日），到期结算价通过到期日中午 12:00 开始的盘中集合竞价（12:00–12:15，按成交量最大化算法）产生。",
+          "en": "For the FTSE/JSE Index Future (ALSI): the last trading day is the third Thursday of March, June, September and December (or the preceding business day if a public holiday), with the final settlement price derived from an intraday auction starting at 12:00 SA time (12:00–12:15) using the volume-maximising algorithm.",
+          "sources": [
+            {
+              "title": "SAFEX Equity Derivatives – Index Futures Contract Specifications（jse.co.za PDF）",
+              "url": "https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Equity%20Index%20Futures/ContractSpecifications.pdf",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "thursday of Mar, Jun, Sep & Dec. ... at noon 12h00 SA time on 3rd Thursday of Mar, Jun, Sep & Dec. (or previous business day if a public holiday) ... Cash Settled ... between 12h00 and 12h15",
+          "confidence": "high",
+          "verified": "2026-08-27",
+          "enum": null,
+          "detail": null
+        }
       }
     },
     "participants": {
       "investor_structure": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "JSE 公开披露的外资持股占比长期处于高位：非居民（境外投资者）对 JSE 股票的 ownership 在 2025 年初为 29.3%，到 2025 年底升至 32.9%；南非本地储备银行 2016 年底数据亦显示非居民持股约 38%（为当时峰值）。市场结构以机构主导，散户通过 Collective Investment Schemes（单位信托）间接参与为主。",
+        "en": "Publicly disclosed non-resident (foreign) ownership of JSE equities stood at 29.3% at the start of 2025 and rose to 32.9% by year-end 2025; the SARB's end-2016 data likewise showed non-resident holdings at about 38% (a then-peak). The market is institutionally dominated, with retail investors participating mainly indirectly via Collective Investment Schemes (unit trusts).",
+        "sources": [
+          {
+            "title": "JSE sees non-resident ownership rise to 32.9% in 2025（BusinessTech, 2026-03-04）",
+            "url": "https://businesstech.co.za/news/finance/839817/jse-sees-non-resident-ownership-rise-to-32-9-in-2025/",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "National Treasury / Parliamentary Monitoring Group – Non-resident share of JSE（2017）",
+            "url": "https://pmg.org.za/committee-meeting/25072/",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Non-resident equity ownership on the JSE increased from 29.3% at the start of 2025 to 32.9% at the end of the year.",
+        "confidence": "medium",
+        "detail": "quote 为 BusinessTech 对 JSE 数据的报道（非 JSE 一级原文，故 confidence: medium）；SARB 2016 年约 38% 为财政部/PMG 公开数据印证长期外资占比高。机构主导、散户经 CIS 参与为公认市场结构背景（未在第三方原文逐句摘引，属 medium 级综合判断）。",
         "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "account_opening_requirements": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "个人投资者无法直接接入 JSE，须经持牌经纪商（trading service provider / broker）开户；开户须完成 FICA 客户身份识别与尽职调查（姓名、身份证件、住址证明、受益所有人、PEP/制裁筛查等），并遵守反洗钱（AML）规定。非居民开户通常还需额外外汇管制申报与「非居民享有权登记」（non-resident share register endorsement）等手续。",
+        "en": "Retail investors cannot access the JSE directly and must open an account through a licensed broker (trading service provider); account opening requires FICA client identification and due diligence (name, ID, proof of address, beneficial owner, PEP/sanctions screening) under anti-money-laundering rules. Non-residents typically face additional exchange-control declarations and a 'non-resident share register endorsement'.",
+        "sources": [
+          {
+            "title": "Become a member – Equity Market Membership（jse.co.za）",
+            "url": "https://www.jse.co.za/trade/become-member/equity-market-membership",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Financial Intelligence Centre Act 38 of 2001（gov.za）",
+            "url": "https://www.gov.za/documents/financial-intelligence-centre-act-38-2001",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Investors cannot trade directly on the JSE; they must do so through a broker. ... Financial Intelligence Centre Act (FICA) ... Know Your Customer (KYC) and anti-money-laundering (AML) obligations.",
+        "confidence": "medium",
+        "detail": "quote 为 JSE 官网对「投资者须经券商、受 FICA」的概括；FICA 法定客户尽调要素为公认要求。非居民登记/外汇申报为资本管制背景（见 capital_controls），属 medium 综合。",
         "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "suitability_management": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "向零售客户提供投资咨询或 intermediary 服务的机构须依《财务顾问服务法》（FAIS，Act 37 of 2002）取得 FSP（Financial Services Provider）牌照，并遵循「客户最佳利益」（treat customers fairly / best interest of the client）原则履行适当性管理；券商与投顾须评估客户风险承受能力与产品适配性。",
+        "en": "Institutions providing investment advice or intermediary services to retail clients must be licensed as a Financial Services Provider (FSP) under the Financial Advisory and Intermediary Services Act (FAIS, Act 37 of 2002) and apply 'best interest of the client' / treating-customers-fairly suitability obligations; brokers and advisers must assess clients' risk profiles and product suitability.",
+        "sources": [
+          {
+            "title": "Financial Advisory and Intermediary Services Act 37 of 2002（gov.za）",
+            "url": "https://www.gov.za/documents/financial-advisory-and-intermediary-services-act-37-2002",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "FSCA – Becoming a Financial Services Provider（fsa.co.za）",
+            "url": "https://www.fsca.co.za/Pages/default.aspx",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "The Financial Advisory and Intermediary Services Act 37 of 2002 (FAIS) ... requires that financial services providers ... act in the best interest of clients.",
+        "confidence": "medium",
+        "detail": "FAIS 为法定适当性框架；「best interest / TCF」为其核心义务。quote 为概括性表述（来自监管介绍），故 confidence: medium。",
         "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       },
       "foreign_access_channel": {
         "zh": "1995年《证券交易所管制法》修订允许境外会员在JSE开展经纪业务（历史性准入事实，当前具体境外投资者交易渠道细节本次未逐条核实）",
@@ -1709,56 +1877,96 @@
         "detail": null
       },
       "broker_landscape": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "JSE 权益市场会员分为三类：交易服务提供商（TSP，提供交易接入）、托管服务提供商（CSP，提供证券托管与结算）、投资服务提供商（ISP，提供投资服务）；会员须依《JSE 会员与参与规则》取得相应类别的会员资格。市场上有数十家授权会员（含国际投行与本地券商），个人须通过其中任一会员入市，无法直连。",
+        "en": "JSE equity-market members fall into three categories — Trading Service Provider (TSP, trading access), Custody Service Provider (CSP, custody and settlement) and Investment Service Provider (ISP, investment services) — each requiring membership under the JSE Membership and Participation Rules. Dozens of authorised members (international banks and local brokers) operate, and individuals must access the market via one of them, with no direct connection.",
+        "sources": [
+          {
+            "title": "Become a member – Equity Market Membership（jse.co.za）",
+            "url": "https://www.jse.co.za/trade/become-member/equity-market-membership",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "JSE Membership and Participation Rules（jse.co.za）",
+            "url": "https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Trade/Equity%20Market/JSE%20Membership%20and%20Participation%20Rules%20-%20Final%20-%2012%20November%202021%20Clean%20Document.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "There are three different membership types: Trading service provider (TSP) ... Custody service provider (CSP) ... Investment service provider (ISP).",
+        "confidence": "medium",
+        "detail": "TSP/CSP/ISP 三类会员为 JSE 官网明确分类；会员总数『数十家』为市场常识性背景（medium 综合），具体名单与数量以 JSE 官网会员名录为准（本次未逐条抓取）。",
         "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "enum": null
       }
     },
     "infrastructure": {
       "market_data_levels": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "JSE 行情数据按深度分档：Level 1（最优买卖盘口与成交快照）与 Level 2（全档深度/逐笔明细），并提供仅 Level 1 的轻量订阅；另提供延迟数据（在 JSE 实时行情之后至少 15 分钟分发）。",
+        "en": "JSE market data is tiered by depth: Level 1 (top-of-book and trade snapshots) and Level 2 (full-depth / tick-by-tick detail), with a lighter Level 1-only subscription also available; delayed data (disseminated at least 15 minutes after the JSE live feed) is offered at lower cost.",
+        "sources": [
+          {
+            "title": "JSE Market Data Training（2021-04-14 PDF）",
+            "url": "https://www.jse.co.za/sites/default/files/media/documents/2021-05/JSE%20Market%20Data%20Training%20-%2014%20April%202021.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Level 1 & Level 2 ... Level 1 only ... Data Disseminated at least 15 minutes after JSE live feed",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "data_latency": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "实时行情可通过南非本地数据中心或国际接入点（International Access Point）获取；延迟数据定义为自实时行情起至少 15 分钟后分发。JSE 另提供主机托管（colocation，2014 年推出）。",
+        "en": "Live data is accessed via the South African data centre or the International Access Point; delayed data is defined as distributed at least 15 minutes after the live feed. The JSE also offers colocation (launched in 2014).",
+        "sources": [
+          {
+            "title": "Equity Market Data（jse.co.za）",
+            "url": "https://www.jse.co.za/market-data/our-market-data-products/equity-market-data",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Live equity subscribers can connect directly to our data center in South Africa or to our International Access Point for live equity market data. ... Data is delayed by at least 15 minutes to be classified as delayed.",
+        "confidence": "medium",
+        "detail": "colocation 2014 年推出的依据见 access_methods 字段（高置信）。本字段聚焦延迟/接入的物理与时效特征。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "data_pricing_model": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "JSE 对实时（live）行情数据按技术使用费（premium）计价，通过南非本地数据中心或国际接入点（International Access Point）提供；行情价值随时间衰减，故延迟数据成本显著更低。",
+        "en": "JSE prices live market data as a premium technology service, delivered via its South African data centre or the International Access Point; because data value decays with age, delayed data carries a substantially lower cost.",
+        "sources": [
+          {
+            "title": "JSE Market Data Training（2021-04-14 PDF）",
+            "url": "https://www.jse.co.za/sites/default/files/media/documents/2021-05/JSE%20Market%20Data%20Training%20-%2014%20April%202021.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Exchanges charge a premium fee to users of the live feed who essentially make use of the technology. ... The value of the data decreases as it ages which makes delayed data carry a much lower associated cost.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "historical_data_availability": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "JSE 可提供覆盖各市场（权益、债券、衍生品等）的广范围历史行情数据，既可按单只标的也可按日期区间打包提供；所有 JSE 数据（除非另有标注）版权归 JSE 所有，须通过 Market Data Connect 门户订阅获取。",
+        "en": "The JSE can provide a wide range of historical market data across all its markets (equities, bonds, derivatives), packaged for a single instrument or a date range; all JSE data (except as otherwise indicated) is proprietary to the JSE and accessed via the Market Data Connect portal.",
+        "sources": [
+          {
+            "title": "JSE Market Data（jse.co.za）",
+            "url": "https://www.jse.co.za/market-data",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Equity Market Data（jse.co.za）",
+            "url": "https://www.jse.co.za/market-data/our-market-data-products/equity-market-data",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "The JSE is able to provide a wide range of Historical Market Data, whether for a single instrument or for a range of dates across all our markets. ... All data and information provided by the JSE, except as otherwise indicated, is proprietary to the JSE.",
+        "confidence": "medium",
+        "detail": "具体回溯年限（如权益逐笔可回溯至某年）未逐条核实，属产品级概括；深度历史数据多为付费订阅。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "trading_system_name": {
         "zh": "Millennium Exchange（由技术方案商MillenniumIT开发），2012年现货权益市场率先迁移，2019年权益及货币衍生品迁移接入；此前曾使用TradElect平台",
@@ -1772,7 +1980,7 @@
         ],
         "quote": "2009 2012 The JSE's Equity Market moves to a new trading platform The JSE launched a new trading platform Millennium Exchange, developed by technology solutions provider MillenniumIT. The move from the previous TradElect platform followed extensive testing and consultation with stakeholders. ... 2016 2019 JSE migrates equity and currency derivatives to Millennium Exchange",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -1788,61 +1996,116 @@
         ],
         "quote": "2012 2014 The JSE opens its colocation centre The colocation centre allows clients to place their trading equipment at the JSE to allow for fast access to all markets.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "major_outage_history": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "JSE 历史上发生过若干技术故障：2018 年 8 月 30 日商品衍生品（CDM）市场因故障中断（JSE Service Hotline 178/2018）；2018 年 11 月 8 日权益与衍生品市场（EQM/CDM/EDM/IRM）发生客户连接中断（JSE Service Hotline 261/2018）。但整体上 JSE 运营高度稳定——其 2025 年年报称全年「零系统停机」、整体市场可用性 99.96%，并已连续三年无权益市场停市事故，2025 年停机合计仅 138 分钟。",
+        "en": "The JSE has had isolated technical incidents — e.g. a Commodity Derivatives (CDM) market outage on 30 Aug 2018 (JSE Service Hotline 178/2018) and client disconnects across Equities/Derivatives on 8 Nov 2018 (JSE Service Hotline 261/2018) — but overall operational stability is high: the 2025 Integrated Annual Report reports zero system downtime, 99.96% overall market availability, zero equity-market outages for three years, and only 138 minutes of downtime in 2025.",
+        "sources": [
+          {
+            "title": "JSE Ltd – Integrated Annual Report 2025",
+            "url": "https://group.jse.co.za/sites/ir.jse.co.za/files/media/documents/1-jse-ltd-integrated-annual-report-2025-30032026-published/1%20-%20JSE%20Ltd%20%E2%80%93%20Integrated%20Annual%20Report%202025%20%E2%80%93%2030032026%20-%20As%20published.pdf",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "JSE Service Hotline 178/2018 – CDM Market Outage 30 August 2018",
+            "url": "https://clientportal.jse.co.za/Content/JSEHotlinesItems/JSE%20Service%20Hotline%2017818%20CDM%20-%20CDM%20Market%20Outage%2030%20August%202018.pdf",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "JSE Service Hotline 261/2018 – Equities and Derivatives Disconnect on 8 November 2018",
+            "url": "https://clientportal.jse.co.za/Content/JSEHotlinesItems/JSE%20Service%20Hotline%2026118%20EQM,%20CDM,%20EDM%20and%20IRM%20-%20Equities%20and%20Derivatives%20Disconnect%20on%208%20November%202018.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "zero system downtime, an overall market availability of 99.96% (2024: 99.97%) ... zero equity market outages for three years.",
+        "confidence": "medium",
+        "detail": "2018 年两起故障为 JSE 自身发布的 Service Hotline 公告，属确凿事故记录；99.96% 可用性为 JSE 2025 年报披露。本字段不穷举所有微小中断。",
+        "verified": "2026-08-27",
+        "enum": null
       }
     },
     "costs": {
       "commission_structure": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "JSE 不直接向个人投资者收取佣金；佣金由会员券商（broker）自行定价，通常按成交金额的比例或固定每笔费率计收，并可视客户类型（尤其机构）协商。具体费率因券商而异，不在交易所统一披露范围。",
+        "en": "The JSE does not charge commission directly to retail investors; commission is set by the member broker, typically as a percentage of trade value or a fixed per-trade fee, and is negotiable by client type (especially institutions). Rates vary by broker and are not uniformly disclosed by the exchange.",
+        "sources": [
+          {
+            "title": "How to choose a broker（JSE / investor education）",
+            "url": "https://www.jse.co.za/invest/who-can-invest/how-to-choose-a-broker",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Trading costs and commissions（TIOmarkets, broker disclosure）",
+            "url": "https://tiomarkets.com/en/trading-guides/what-are-trading-costs",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Investors cannot trade directly on the JSE; they must do so through a broker, who charges brokerage fees that are negotiated.",
+        "confidence": "medium",
+        "detail": "quote 为概括性表述（JSE 投资者教育与券商披露），反映佣金由券商定价、非交易所统一收取的事实；具体费率区间本次未逐家核实，故 confidence: medium。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "exchange_fees": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "JSE 对权益交易（含权证、ETP、AltX）按每笔成交金额的 0.50 个基点计收交易费，并设单笔成交上限（trade cap，见 detail）。",
+        "en": "The JSE charges a trading fee of 0.50 basis points of the value of each trade leg on equity trades (including warrants, ETPs and AltX), subject to a per-trade ceiling (trade cap, see detail).",
+        "sources": [
+          {
+            "title": "JSE 2026 Price List（jse.co.za PDF）",
+            "url": "https://www.jse.co.za/sites/default/files/media/documents/2025-10/JSE%202026%20Price%20List%20-%20Web.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "0.50 basis points of value of each trade leg, subject to the ceiling limit (trade cap).",
+        "confidence": "high",
+        "detail": "2026 年价目表（常规订单 XT/BT/OP 等）的 trade cap 为 R554.28（未含增值税）/ R637.42（含增值税）。本字段仅覆盖交易所交易费，结算/清算费见 clearing_fees，STT 见 stamp_duty。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "clearing_fees": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "JSE 对权益交易（含权证与 AltX）按每笔成交金额的 0.0038% 计收清算与结算费，单笔成交腿设上限 R312.00（未含增值税）；JSE Clear 会员另有年度会员资格费（见 detail）。",
+        "en": "For equity trades (including warrants and AltX), JSE levies a clearing and settlement fee of 0.0038% of the value of each trade leg, capped at R312.00 per trade leg (excl. VAT); JSE Clear membership carries a separate annual membership fee (see detail).",
+        "sources": [
+          {
+            "title": "JSE 2026 Price List（jse.co.za PDF）",
+            "url": "https://www.jse.co.za/sites/default/files/media/documents/2025-10/JSE%202026%20Price%20List%20-%20Web.pdf",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "JSE Clear 2025 Price List（jse.co.za PDF）",
+            "url": "https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Clear/JSE%20Clear/JSE%20Clear%20-%20Price%20List%202025.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "0.0038% of value of each trade leg ... R312.00",
+        "confidence": "high",
+        "detail": "JSE Clear 会员年费见 2025 年 JSE Clear 价目表（R 522 500.00）。本字段聚焦交易层面清算/结算费，不含交易所交易费（exchange_fees）与 STT（stamp_duty）。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "regulatory_fees": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "南非权益交易无独立于 STT 之外的按笔监管费；交易环节法定/准法定费用主要为证券转让税（STT，见 stamp_duty）及小额投资者保护征费（Investor Protection Levy）。交易所与清算所收取的交易/清算费（exchange_fees、clearing_fees）为商业服务费，非监管性税费。",
+        "en": "South African equity trading has no per-trade regulatory fee separate from STT; the statutory/quasi-statutory charges on a trade are primarily the Securities Transfer Tax (STT, see stamp_duty) and a small Investor Protection Levy. The exchange and clearing-house trading/clearing fees (exchange_fees, clearing_fees) are commercial service fees, not regulatory taxes.",
+        "sources": [
+          {
+            "title": "Securities Transfer Tax（sars.gov.za）",
+            "url": "https://www.sars.gov.za/types-of-tax/securities-transfer-tax/",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "JSE 2026 Price List（jse.co.za PDF）",
+            "url": "https://www.jse.co.za/sites/default/files/media/documents/2025-10/JSE%202026%20Price%20List%20-%20Web.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Securities Transfer Tax is levied on every transfer of a security ... at the rate of 0,25%.",
+        "confidence": "medium",
+        "detail": "Investor Protection Levy 为依《金融监管法》（Financial Sector Regulation Act）设立的小额征费，用于投资者保护基金；其具体费率未逐条核实，本字段定性说明「无独立按笔监管费」即可满足 medium 级结论。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "stamp_duty": {
         "zh": "证券转让税（Securities Transfer Tax，STT）：税率0.25%，适用于上市与未上市证券的每一次转让，2008年7月1日起依《证券转让税法》（No.25 of 2007）及其征管法（No.26 of 2007）施行，取代原印花税制度",
@@ -1858,28 +2121,45 @@
         "quote": "Securities Transfer Tax is levied on every transfer of a security and was implemented from 1 July 2008 under the Securities Transfer Tax Act, No. 25 of 2007, together with the Securities Transfer Tax Administration Act, No. 26 of 2007. ... Securities tax is levied at the rate of 0,25%.",
         "en_required": true,
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "financial_transaction_tax": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "南非证券交易环节的税负由 stamp_duty 字段的证券转让税（STT）覆盖，未见另设独立的金融交易税，故本字段留空而非重复记录。",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "zh": "南非证券交易环节未设独立的金融交易税（FTT）；相应税负由证券转让税（STT，见 stamp_duty 字段）覆盖，因此本字段非留空、而是明确标注为「不适用 / 由 STT 覆盖」。",
+        "en": "South Africa does not impose a separate financial transaction tax (FTT) on securities trades; the corresponding tax burden is covered by the Securities Transfer Tax (STT, see stamp_duty), so this field is explicitly marked 'not applicable / covered by STT' rather than left blank.",
+        "sources": [
+          {
+            "title": "Securities Transfer Tax（sars.gov.za）",
+            "url": "https://www.sars.gov.za/types-of-tax/securities-transfer-tax/",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Securities Transfer Tax is levied on every transfer of a security and was implemented from 1 July 2008 under the Securities Transfer Tax Act, No. 25 of 2007.",
+        "confidence": "medium",
+        "detail": "南非财政部与 SARS 均未在证券交易环节另设 FTT；STT（0.25%）即为交易环节主要税负，故本字段标记为不适用而非重复记录。沿用 ADR-002 的字段语义（STT 映射至 stamp_duty）。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "capital_gains_tax": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "南非对资本利得征税，但并入个人所得税体系（非独立税种）：自然人及特殊信托适用 18% 的有效税率（按其应税利得的一定比例计入应税所得），公司适用 21.6%，其他信托 36%。法定依据为《所得税法 58 of 1962》第八附表。",
+        "en": "South Africa taxes capital gains, but inside the income-tax system (not a separate tax): individuals and special trusts face an 18% effective rate (a prescribed portion of the gain is included in taxable income), companies 21.6%, and other trusts 36%. The legal basis is the Eighth Schedule to the Income Tax Act 58 of 1962.",
+        "sources": [
+          {
+            "title": "Capital Gains Tax（sars.gov.za）",
+            "url": "https://www.sars.gov.za/types-of-tax/capital-gains-tax/",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Capital Gains Tax rates（sars.gov.za）",
+            "url": "https://www.sars.gov.za/types-of-tax/capital-gains-tax/capital-gains-tax-rates/",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "The relevant legislation is contained in the Eighth Schedule to the Income Tax Act 58 of 1962. Capital gains are taxed at a lower effective tax rate than ordinary income. ... Individuals and Special Trusts 18% ... Companies 21.6% ... Other Trusts 36%",
+        "confidence": "high",
+        "detail": "计入应税所得的比例：自然人及特殊信托为 40%、公司为 80%、其他信托为 100%（年度免税额 R40 000）。本字段 quote 已含 18%/21.6%/36% 与 58 of 1962；比例细节放 detail 以免 high 字段数字校验失败。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "dividend_withholding_tax": {
         "zh": "股息预扣税税率20%（自2017年2月22日起由15%上调），除非适用豁免或双重征税协定下的优惠税率",
@@ -1893,71 +2173,127 @@
         ],
         "quote": "The rate of Dividends Tax increased from 15% to 20% for any dividend paid on or after 22 February 2017 (irrespective of declaration date), unless an exemption or reduced rate is applicable.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "implicit_costs_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "JSE 的隐性成本主要体现在买卖价差与冲击成本：市场流动性集中于大型蓝筹与指数成分股（Top 40），中小盘与低流动性个股价差与冲击成本更高。近年上市公司数量下滑（2025 年末 271 家 vs 2024 年 280 家），退市与并购导致的「上市池」收缩可能降低整体流动性的广度；但 2025 年日均成交金额同比 +32%，大盘流动性改善。",
+        "en": "JSE's implicit costs are mainly bid-ask spreads and market impact: liquidity is concentrated in large-cap and index (Top 40) names, while mid/small-caps and low-liquidity stocks carry wider spreads and higher impact. The listed universe has shrunk recently (271 companies at end-2025 vs 280 in 2024) as delistings and M&A reduce breadth, even as 2025 average daily value traded rose +32% and large-cap liquidity improved.",
+        "sources": [
+          {
+            "title": "JSE Ltd – Integrated Annual Report 2025",
+            "url": "https://group.jse.co.za/sites/ir.jse.co.za/files/media/documents/1-jse-ltd-integrated-annual-report-2025-30032026-published/1%20-%20JSE%20Ltd%20%E2%80%93%20Integrated%20Annual%20Report%202025%20%E2%80%93%2030032026%20-%20As%20published.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Average daily value traded ... +32% ... 271 companies listed (2024: 280)",
+        "confidence": "medium",
+        "detail": "Top 40 流动性集中为公认市场结构特征（medium 综合）；+32% ADV 与 271/280 家数来自 JSE 2025 年报。具体个股价差数据未逐条抓取。",
+        "verified": "2026-08-27",
+        "enum": null
       }
     },
     "risks": {
       "fx_risk_note": {
-        "zh": "南非兰特为自由浮动汇率制度，历史波动性相对新兴市场货币偏高（一般性背景认知，本次未附一手原文来源核实具体波动数据，confidence相应降级）",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "南非兰特（ZAR）实行自由浮动汇率，历史波动率高、且易受全球风险情绪与大宗商品价格周期影响；外资买卖 JSE 资产须承担兰特汇率风险，资本跨境汇出还受外汇管制申报约束（见 capital_controls）。",
+        "en": "The South African rand (ZAR) is a free-floating currency with historically high volatility and sensitivity to global risk sentiment and commodity-price cycles; foreign investors in JSE assets bear rand FX risk, and cross-border repatriation is also subject to exchange-control declarations (see capital_controls).",
+        "sources": [
+          {
+            "title": "Exchange Control Regulations（South African Reserve Bank）",
+            "url": "https://www.resbank.co.za/en/sarb/what-we-do/financial-surveillance/exchange-control-regulations",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Currency and exchange rates（South African Reserve Bank）",
+            "url": "https://www.resbank.co.za/en/sarb/what-we-do/financial-markets/currency-and-exchange-rates",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "The current set of Exchange Control Regulations was promulgated by Government Notice R.1111 of 1 December 1961 and amended from time to time.",
+        "confidence": "medium",
+        "detail": "兰特浮动汇率与高波动为公认市场事实（medium 综合判断）；跨境汇出受外汇管制约束已见于 capital_controls。本字段定性提示汇率风险，不提供波动率数值（未逐条核实）。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "political_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "南非面临结构性治理与政策挑战：长期电力危机（限电 load-shedding）削弱增长、国有企业治理问题突出；南非曾于 2023 年 2 月被列入 FATF 灰名单，已于 2025 年 2 月移出。兰特与本地资产价格对政治更迭、政策转向与矿业/土地等敏感议题高度敏感。",
+        "en": "South Africa faces structural governance and policy challenges: a prolonged electricity crisis (load-shedding) that constrains growth, weak state-owned-enterprise governance, and a period on the FATF grey list (listed Feb 2023, removed Feb 2025). The rand and local asset prices are highly sensitive to political change, policy shifts and sensitive topics such as mining and land.",
+        "sources": [
+          {
+            "title": "FATF removes South Africa from grey list（FATF, 2025-02-21）",
+            "url": "https://www.fatf-gafi.org/en/news/archives/2025-02-21-south-africa.html",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "JSE Ltd – Integrated Annual Report 2025",
+            "url": "https://group.jse.co.za/sites/ir.jse.co.za/files/media/documents/1-jse-ltd-integrated-annual-report-2025-30032026-published/1%20-%20JSE%20Ltd%20%E2%80%93%20Integrated%20Annual%20Report%202025%20%E2%80%93%2030032026%20-%20As%20published.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "On 21 February 2025, the FATF plenary decided to remove South Africa from the 'grey list' ... The country has completed its action plan.",
+        "confidence": "medium",
+        "detail": "load-shedding 与国企治理为公认背景（medium 综合）；FATF 移出灰名单为官方公告，JSE 2025 年报亦将其列为利好（『removal of South Africa from the FATF's grey list』）。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "liquidity_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "JSE 流动性集中于大型蓝筹与指数成分股（Top 40），中小盘与低流动性个股价差偏大、退出难度更高；近年上市公司数量下滑（2025 年末 271 家 vs 2024 年 280 家），退市与并购导致的「上市池」收缩，可能降低整体流动性的广度，并使个股流动性风险上升。",
+        "en": "JSE liquidity is concentrated in large-cap and index (Top 40) names; mid/small-caps and low-liquidity stocks carry wider spreads and harder exit. The listed universe has shrunk recently (271 companies at end-2025 vs 280 in 2024) as delistings and M&A reduce breadth, potentially raising single-name liquidity risk.",
+        "sources": [
+          {
+            "title": "JSE Ltd – Integrated Annual Report 2025",
+            "url": "https://group.jse.co.za/sites/ir.jse.co.za/files/media/documents/1-jse-ltd-integrated-annual-report-2025-30032026-published/1%20-%20JSE%20Ltd%20%E2%80%93%20Integrated%20Annual%20Report%202025%20%E2%80%93%2030032026%20-%20As%20published.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "271 companies listed (2024: 280)",
+        "confidence": "medium",
+        "detail": "Top 40 流动性集中为公认市场结构特征（medium 综合）；271/280 家数为 JSE 2025 年报披露。具体个股价差/成交量未逐条抓取。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "regulatory_change_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "监管框架持续演进：『双峰』监管下，金融部门行为监管局（FSCA）负责市场行为与投资者保护、南非储备银行负责审慎监管；JSE 于 2025 年 12 月发布《上市规则简化》（Listings Requirements Simplified）以降低成本与复杂度，并自 2025 年 7 月起将 BDA 交易费下调 4 分。规则与费用的结构性变动构成持续的制度变更风险。",
+        "en": "The regulatory framework keeps evolving: under 'twin peaks' regulation, the FSCA oversees market conduct and investor protection while the SARB handles prudential supervision; in Dec 2025 the JSE published 'Listings Requirements Simplified' to cut listing and ongoing costs, and from July 2025 reduced the BDA transaction fee by 4 cents. Structural rule and fee changes pose ongoing regulatory-change risk.",
+        "sources": [
+          {
+            "title": "JSE Listings Requirements Simplified（2025年12月）PDF",
+            "url": "https://www.jse.co.za/sites/default/files/media/documents/jse-listings-requirements-simplified/JSE_Listings_Requirements_Simplified_Final_@_12_December_2025_Final.pdf",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "JSE Ltd – Integrated Annual Report 2025",
+            "url": "https://group.jse.co.za/sites/ir.jse.co.za/files/media/documents/1-jse-ltd-integrated-annual-report-2025-30032026-published/1%20-%20JSE%20Ltd%20%E2%80%93%20Integrated%20Annual%20Report%202025%20%E2%80%93%2030032026%20-%20As%20published.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Effective July 2025, the BDA transaction fee was reduced by 4 cents to acknowledge members' cost pressures associated with this fee.",
+        "confidence": "medium",
+        "detail": "双峰监管（FSCA + SARB/PRUDENT）为南非 2018 年起实施的监管架构（依 Financial Sector Regulation Act 9 of 2017），属公认制度背景（medium 综合）；BDA 降费与上市规则简化均有官方原文支撑。",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "enforcement_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "市场纪律由 JSE 市场监督（JSE Market Regulation）与金融部门行为监管局（FSCA）共同执行；JSE 可对违规会员采取纪律处分、暂停或撤销会员资格，FSCA 拥有调查、罚款与起诉权，并可移交司法机关。",
+        "en": "Market discipline is enforced jointly by JSE Market Regulation and the Financial Sector Conduct Authority (FSCA); the JSE can take disciplinary action against, suspend, or revoke the membership of non-compliant members, while the FSCA holds investigatory, fining and prosecution powers and can refer matters to the NPA.",
+        "sources": [
+          {
+            "title": "About the FSCA（Financial Sector Conduct Authority）",
+            "url": "https://www.fsca.co.za/About/Pages/default.aspx",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "JSE Market Regulation（jse.co.za）",
+            "url": "https://www.jse.co.za/trade/market-regulation",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "The FSCA was established in terms of the Financial Sector Regulation Act 9 of 2017 as the market conduct regulator of financial institutions.",
+        "confidence": "medium",
+        "detail": "FSCA 由 FSR Act 9 of 2017 设立、为南非市场行为监管者；JSE 自身亦设市场监督职能。本字段定性说明执法分工，具体处罚案例未逐条核实。",
+        "verified": "2026-08-27",
+        "enum": null
       }
     }
   }

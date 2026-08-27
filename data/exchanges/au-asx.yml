@@ -185,8 +185,15 @@ regulation:
     confidence: high
 
   capital_controls:
-    zh: ""
-    confidence: low
+    zh: "澳大利亚实行开放资本账户，对资本流入与流出不设一般性外汇管制（无汇兑限制），外资可自由汇出投资收益与本金；对市场的约束主要体现在外商投资审查（FIRB）的准入申报门槛，而非对资本移动本身的禁止。本轮未在缓存官方页中直接核实「无资本管制」的原文表述，按 FIRB 框架的准入逻辑推断"
+    en: "Australia operates an open capital account with no general exchange controls on inbound or outbound capital flows; foreign investors may freely repatriate investment proceeds and principal. The constraint on foreign involvement is the FIRB notification threshold for investment admission, not a prohibition on capital movement itself. This round did not locate a verbatim official statement of 'no capital controls' in the cached pages; inferred from the FIRB admission framework"
+    detail: "资本管制与外资持股上限是两类不同约束：本字段指对资金跨境移动的限制，AU 基本没有；foreign_ownership_limit 字段指外资持股达特定比例须向 FIRB 申报。两者不应混为一谈。"
+    sources:
+      - title: Guidance Note 7 - Business Investments（外国投资审查委员会 FIRB，PDF）
+        url: https://foreigninvestment.gov.au/sites/firb.gov.au/files/guidance-notes/gn07_business-20230531.pdf
+        accessed: 2026-08-14
+    confidence: medium
+    verified: 2026-08-27
 
   disclosure_requirements:
     zh: "持续披露制度：上市实体一旦知悉对证券价格或价值有重大影响的信息，须立即向ASX披露（Listing Rule 3.1），该义务经《公司法》第674条赋予法定效力；另须按年度/半年度（部分矿业及油气勘探公司另加季度）提交财务报告"
@@ -724,8 +731,15 @@ listing:
     confidence: medium
 
   listing_process_duration:
-    zh: ""
-    confidence: low
+    zh: "ASX 未在法律/规则层面规定固定的强制上市时限；官方上市指引以「委任顾问后约五个月可完成上市」作为典型周期参照，实际时长取决于招股说明书/申请文件完备度与审核往返"
+    en: "ASX does not prescribe a fixed statutory listing timeframe in its rules; ASX's official listing guidance uses 'listed within approximately five months of appointing your advisers' as a typical benchmark, with the actual duration depending on the completeness of the prospectus/application and review iterations"
+    sources:
+      - title: IPO 上市指引（ASX 官网）
+        url: https://www.asx.com.au/home/listings/listing-considerations/the-listing-process.html
+        accessed: 2026-08-27
+    quote: "With ASX's streamlined listing process, your company could be listed within approximately five months of appointing your advisers."
+    confidence: high
+    verified: 2026-08-27
 
   transfer_between_boards:
     zh: "不适用：ASX无板块分层结构，仅ASX Listing与ASX Foreign Exempt Listing两类不同准入路径，两者间转换未见专门规则页说明"
@@ -777,12 +791,27 @@ listing:
     confidence: high
 
   delisting_transition_period:
-    zh: ""
-    confidence: low
+    zh: "退市生效时点由 ASX 酌情确定并提前通知，无统一法定过渡期；唯一明确的硬性时点是「未缴年度上市费」情形——于到期日后第 20 个营业日收盘时自动移除。其余退市理由下，ASX 在通知实体后指定生效日期（通常给予合理过渡以便了结未结交易），具体时长未由规则固定"
+    en: "The effective date of delisting is determined by ASX at its discretion with notice, and there is no single statutory transition period; the only fixed hard deadline is the annual listing fee default — automatic removal at the close of trading on the 20th business day after the due date. For other grounds, ASX specifies an effective date after notifying the entity (generally allowing reasonable transition to close out outstanding trades), with the length not fixed by the rules"
+    sources:
+      - title: ASX Listing Rules Chapter 17（ASX 官网 PDF）
+        url: https://www.asx.com.au/documents/rules/Chapter17.pdf
+        accessed: 2026-08-14
+    quote: "If an entity does not pay an annual listing fee as required under rule 16.5, ASX will remove the entity from the official list at the close of trading on the 20th business day after the due date."
+    confidence: medium
+    verified: 2026-08-27
 
   post_delisting_venue:
-    zh: ""
-    confidence: low
+    zh: "ASX 不设退市证券的正式后续交易场所（无降级至二板/场外板的机制）。证券从官方上市名单移除后，不再于 ASX 集中市场报价，通常转为场外（OTC）交易或转由其他市场运营商（如 Cboe Australia、NSX）承接；但结算与过户仍可通过 CHESS 继续完成——停牌后至退市前的未结交易与过户登记均在 CHESS 内延续"
+    en: "ASX provides no formal post-delisting trading venue (no demotion to a second board or OTC board). Once removed from the official list, securities cease to be quoted on the ASX central market and typically trade over-the-counter (OTC) or migrate to another market operator (e.g. Cboe Australia, NSX); settlement and transfer registration can still continue through CHESS — outstanding transactions and transfer registration continue through CHESS even after quotation is suspended"
+    detail: "CHESS 在退市后仍为持有人提供证券登记与过户服务，故「无交易场所」指无集中竞价场所，不等于无法持有或过户。"
+    sources:
+      - title: CHESS — Delisting / Liquidation 操作指引（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/clearing-and-settlement/chess/chess-operations-procedures.pdf
+        accessed: 2026-08-27
+    quote: "through CHESS after the securities have been suspended from quotation."
+    confidence: high
+    verified: 2026-08-27
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -897,14 +926,75 @@ clearing:
     confidence: low
 
   default_management:
-    zh: ""
-    confidence: low
+    zh: "ASX Clear（现金市场 CCP）设有分层违约处置资源与调用顺序：第一层为违约清算参与人缴存的保证金及附加保证金（可为现金或合格非现金抵押品）；不足时调用 ASX Clear 自有资源（当前 250 million 澳元）；再不足时依《恢复规则》向非违约参与人征收恢复摊派（上限 300 million 澳元）；作为最后手段，可动用《恢复规则》权力对所有未平仓头寸实施「完全终止」并削减结算支付。整个流程以 ASX Clear 回归「匹配账簿」为终点"
+    en: "ASX Clear (cash-market CCP) has a layered default resource waterfall: the first layer is the defaulting Clearing Participant's margins and additional margins lodged (cash or eligible non-cash collateral); if insufficient, ASX Clear draws on its own available resources (currently $250 million); if still insufficient, it may call Recovery Assessments from non-defaulting Clearing Participants up to $300 million under its Recovery Rules; as a last resort it may invoke Recovery Rules powers to apply 'complete termination' of all open positions and reduce settlement payments. The process ends when ASX Clear returns to a matched book"
+    detail: "现货市场 CCP (ASXCL) 与衍生品 CCP (ASX Clear (Futures)) 各有独立的违约处置概述文件；本字段针对现货市场 ASXCL。另设由主要银行提供的承诺流动性便利（committed liquidity facility）用于流动性目的。"
+    sources:
+      - title: ASX Clear Participant Default - Overview（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/clearing-and-settlement/asx-clear/asx-clear-participant-default-overview.pdf
+        accessed: 2026-08-27
+    quote: "The level and order of application of ASXCL's resources is shown in Figure 2. The first level is the defaulting Clearing Participant's margins and additional margins lodged with ASXCL. ... it will draw on its own available resources (currently $250 million). ... defaulting Clearing Participants up to a value of $300 million."
+    confidence: high
+    verified: 2026-08-27
 
   derivatives:
+    initial_margin_practice:
+      zh: "ASX Clear (Futures)（衍生品 CCP）采用 SPAN（Standard Portfolio Analysis of Risk）组合风险法计算初始保证金，按「价格扫描范围」(PSR) 与「波动率扫描范围」(VSR) 构造多情景风险数组；每个结算日日终，对 House 账户与 Client 账户分别计收下一结算日所需的初始保证金"
+      en: "ASX Clear (Futures) (the derivatives CCP) applies the SPAN (Standard Portfolio Analysis of Risk) portfolio-risk methodology to calculate initial margin, using a Price Scan Range (PSR) and Volatility Scan Range (VSR) to build multi-scenario risk arrays; at the end of each clearing day it charges initial margin for the next settlement day across the House and Client accounts"
+      sources:
+        - title: ASX Clear (Futures) 概览（ASX 官网）
+          url: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear-futures
+          accessed: 2026-08-18
+        - title: ASX Clear (Futures) 现货市场清算页（ASX 官网）
+          url: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear/cash-market-clearing
+          accessed: 2026-08-27
+      quote: "At the end of each clearing day, ASX Clear (Futures) will margin the Clearing Participant a daily variation margin based on the movement in the value of the positions, and an initial margin calculated on the open positions held across the House and Client account for settlement the following business day."
+      confidence: high
+      verified: 2026-08-27
+
+    maintenance_margin_practice:
+      zh: "ASX Clear (Futures) 不另设独立于变动保证金的「维持保证金」追加机制；其风险覆盖靠每日盯市收取变动保证金（variation margin）实现——日终按持仓市值变动向清算参与人计收变动保证金，初始保证金则作为覆盖极端但合理市况下潜在损失的预置缓冲，二者共同构成逐日风控，而非「初保+维持保」双线追加模式"
+      en: "ASX Clear (Futures) does not operate a separate 'maintenance margin' top-up distinct from variation margin; its risk coverage is achieved through daily mark-to-market variation margin — at the end of each clearing day it charges the Clearing Participant a daily variation margin based on the movement in the value of positions, while initial margin serves as the pre-funded buffer against potential losses in extreme but plausible market conditions. Together they form a daily risk-control framework rather than a two-tier initial-plus-maintenance margin call model"
+      sources:
+        - title: ASX Clear (Futures) 现货市场清算页（ASX 官网）
+          url: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear/cash-market-clearing
+          accessed: 2026-08-27
+      quote: "At the end of each clearing day, ASX Clear (Futures) will margin the Clearing Participant a daily variation margin based on the movement in the value of the positions, and an initial margin calculated on the open positions held across the House and Client account for settlement the following business day."
+      confidence: high
+      verified: 2026-08-27
+
+    mark_to_market_frequency:
+      zh: "逐日盯市：每个结算日日终按持仓市值变动计收变动保证金（variation margin），对 House 与 Client 账户分别结算，次日通过 Austraclear 及/或 ASX Collateral 完成资金交收"
+      en: "Daily mark-to-market: at the end of each clearing day a daily variation margin is charged based on the movement in the value of positions, settled separately for the House and Client accounts, with funding arranged via Austraclear and/or ASX Collateral the next business day"
+      sources:
+        - title: ASX Clear (Futures) 现货市场清算页（ASX 官网）
+          url: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear/cash-market-clearing
+          accessed: 2026-08-27
+      quote: "At the end of each clearing day, ASX Clear (Futures) will margin the Clearing Participant a daily variation margin based on the movement in the value of the positions, and an initial margin calculated on the open positions held across the House and Client account for settlement the following business day."
+      confidence: high
+      verified: 2026-08-27
+
     delivery_method:
-      zh: ""
-      confidence: low
-      detail: "ADR-023 新增字段，ASX 24 衍生品各品种的实物/现金交割方式本次未核实，留空转 OPEN-QUESTIONS。"
+      zh: "ASX 的旗舰衍生品（股指与利率期货）以现金结算为主：以 SPI 股指期货为例，最终结算价为标的 S&P/ASX 指数在最后交易日的「特别开市报价」(Special Opening Quotation, SOQ)；实物交割品种在本文件覆盖范围内未逐项核实"
+      en: "ASX's flagship derivatives (equity-index and interest-rate futures) are predominantly cash-settled; for SPI Index Futures the final settlement price is the Special Opening Quotation (SOQ) of the underlying S&P/ASX Index on the Last Trading Day. Physically-delivered contracts are not verified item-by-item within this file's scope"
+      sources:
+        - title: ASX 24 合约规格总表（ASX 官网 PDF）
+          url: https://www.asx.com.au/content/dam/asx/participants/derivatives-market/ird/asx24-contract-specifications.pdf
+          accessed: 2026-08-18
+      quote: "The Special Opening Quotation of the underlying S&P/ASX 2002 Index on the Last"
+      confidence: high
+      verified: 2026-08-27
+
+    last_trading_day_rule:
+      zh: "以 SPI 股指期货为例：到期合约的所有交易于结算月第三个星期四中午 12.00 停止；非到期合约按正常交易时段继续。期权可在最后交易日前（含）任一营业日行权，仅「价内」期权于到期时自动行权"
+      en: "For SPI Index Futures, all trading in expiring contracts ceases at 12.00pm on the Third Thursday of the settlement month; non-expiring contracts continue to trade per normal hours. Options may be exercised on any business day up to and including the Last Trading Day, with only in-the-money options automatically exercised at expiry"
+      sources:
+        - title: ASX 24 合约规格总表（ASX 官网 PDF）
+          url: https://www.asx.com.au/content/dam/asx/participants/derivatives-market/ird/asx24-contract-specifications.pdf
+          accessed: 2026-08-18
+      quote: "All trading in expiring contracts ceases at 12.00pm on the Third Thursday of the"
+      confidence: high
+      verified: 2026-08-27
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者
@@ -925,12 +1015,24 @@ participants:
     confidence: medium
 
   account_opening_requirements:
-    zh: ""
-    confidence: low
+    zh: "个人投资者开户须通过持牌券商（ASX 参与者），提交身份证明并完成反洗钱/反恐融资（AML/CTF）客户身份核验；无类似 QFII 的额度审批或交易所层面的特殊准入要求，境外投资者亦可原则上直接开户（仅触及 FIRB 申报门槛时须向财政部申报，见 foreign_ownership_limit）"
+    en: "An individual investor opens an account through a licensed broker (an ASX participant), submitting identity proof and completing anti-money-laundering / counter-terrorism-financing (AML/CTF) client-identity verification; there is no QFII-style quota approval or exchange-level special admission requirement, and foreign investors may in principle open accounts directly (notifying the Treasurer only once FIRB thresholds are triggered, see foreign_ownership_limit)"
+    sources:
+      - title: Guidance Note 7 - Business Investments（外国投资审查委员会 FIRB，PDF）
+        url: https://foreigninvestment.gov.au/sites/firb.gov.au/files/guidance-notes/gn07_business-20230531.pdf
+        accessed: 2026-08-14
+    confidence: medium
+    verified: 2026-08-27
 
   suitability_management:
-    zh: ""
-    confidence: low
+    zh: "向散户提供金融产品建议的券商须持澳大利亚金融服务牌照（AFSL），并受《公司法》项下对零售客户的适当性义务约束（包括提供产品披露声明 PDS、就个人情况提供建议时的「最佳利益」义务）；经纪商自身对客户适当性的评估属持牌合规范畴，本文件未逐条核实各券商内部 KYC/风险测评流程"
+    en: "Brokers giving retail clients financial product advice must hold an Australian Financial Services Licence (AFSL) and are subject to the Corporations Act's retail-client suitability obligations (including providing a Product Disclosure Statement and, when advising on personal circumstances, a 'best interests' duty); the broker's own client-appropriateness assessment is a licensing-compliance matter, and this round did not verify each broker's internal KYC/risk-profiling process"
+    sources:
+      - title: ASX 监管框架（ASX 官网）
+        url: https://www.asx.com.au/about/regulation
+        accessed: 2026-08-14
+    confidence: medium
+    verified: 2026-08-27
 
   foreign_access_channel:
     zh: "无类似QFII式的额度审批通道；境外投资者原则上可直接开户交易，仅在触及FIRB申报门槛（一般持股≥20%「实质利益」或外国政府投资者的任何直接投资）时须向财政部申报，见regulation.foreign_ownership_limit"
@@ -952,8 +1054,18 @@ participants:
     confidence: medium
 
   broker_landscape:
-    zh: ""
-    confidence: low
+    zh: "ASX 采用分层参与者体系（交易/清算/结算参与者可分离或兼任），全市场有数十家持牌市场参与者（即通常所称券商/会员机构），既含全方位服务券商也含在线折扣券商；散户投资者须通过持牌参与者（券商）间接接入市场，无个人直连交易通道"
+    en: "ASX uses a tiered participant model (Trading/Clearing/Settlement Participants may be separate or combined), with dozens of licensed market participants (commonly referred to as brokers or member firms) spanning full-service and online discount brokers; retail investors must access the market indirectly through a licensed participant (broker), with no direct individual trading connection"
+    sources:
+      - title: ASX Clear Participant Default - Overview（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/clearing-and-settlement/asx-clear/asx-clear-participant-default-overview.pdf
+        accessed: 2026-08-27
+      - title: ASX 产品指引（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/asx-products-guide.pdf
+        accessed: 2026-08-14
+    quote: "With dozens of participants trading in thousands of products and executing hundreds of thousands of trades a day in those products ... which are commonly referred to as brokers or member firms."
+    confidence: high
+    verified: 2026-08-27
 
 # ═══════════════════════════════════════════════
 # 十｜市场数据与技术基础设施
@@ -964,20 +1076,46 @@ infrastructure:
     confidence: medium
 
   market_data_levels:
-    zh: ""
-    confidence: low
+    zh: "ASX 不以「Level 1/Level 2」标签划分行情层级，而是以分发协议区分：ASX ITCH 提供全订单簿深度（最优买卖盘及全部价位），另有整合深度信息流 Glance + Blink；并区分实时与延时（约 15–20 分钟）数据。总体对应「全深度实时 / 整合深度 / 延时」三档分发，而非国际通用的 L1/L2 命名"
+    en: "ASX does not label data tiers as 'Level 1 / Level 2'; it distinguishes by distribution protocol: ASX ITCH delivers full order-book depth (best bids/offers and all price levels), with a consolidated depth feed Glance + Blink also available; real-time vs delayed (around 15–20 minutes) data are distinguished. This corresponds to a 'full-depth real-time / consolidated depth / delayed' three-way distribution rather than the international L1/L2 naming"
+    sources:
+      - title: ASX 信息费表（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/information-services/schedule-of-information-fees.pdf
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   data_latency:
-    zh: ""
-    confidence: low
+    zh: "ASX 通过 Australian Liquidity Centre (ALC) 提供主机托管（co-location）与 ASX Net 专线接入以降低时延，但本轮抓取的费/技术文档未公布单一的官方往返时延（round-trip latency）数字；低时延主要依赖参与者在 ALC 内托管及就近接入实现，属商业化接入能力而非公开承诺的时延指标"
+    en: "ASX offers co-location via the Australian Liquidity Centre (ALC) and dedicated ASX Net connectivity to reduce latency, but the cached fee/technical documents do not publish a single official round-trip latency figure; low latency is achieved mainly through participants hosting within the ALC and proximity access — a commercial connectivity capability rather than a publicly promised latency metric"
+    sources:
+      - title: ASX 技术费表（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/technology/schedule-of-technology-fees.pdf
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   data_pricing_model:
-    zh: ""
-    confidence: low
+    zh: "ASX 市场数据采用商业订阅收费模式：实时数据经 ASX ITCH（全订单簿深度）或 ASX 24 多播市场数据协议分发，按市场/会话收取订阅费（如 ASX ITCH/ASX 24 多播市场数据下载权限按市场每年 27,000 澳元）；延时数据亦须取得授权（参与人向其注册客户提供延时信息时的延时展示费目前获豁免）。整体为「付费实时 + 授权延时」的许可式定价，而非免费公开推送"
+    en: "ASX market data is provided on a commercial subscription basis: real-time data is disseminated via ASX ITCH (full order-book depth) or the ASX 24 multicast Market Data protocol, charged per market/session (e.g. ASX ITCH / ASX 24 Multicast Market Data Download access is $27,000 per market annually); delayed data also requires a licence (the delayed display fee is currently waived for Participants providing delayed information to Registered Clients). The model is licence-based 'paid real-time plus authorised delayed', not free public push"
+    sources:
+      - title: ASX 信息费表（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/information-services/schedule-of-information-fees.pdf
+        accessed: 2026-08-27
+    quote: "Market Data Download - Access to ASX ITCH or ASX 24 Multicast Market Data Protocol Per Market Annually $27,000"
+    confidence: high
+    verified: 2026-08-27
 
   historical_data_availability:
-    zh: ""
-    confidence: low
+    zh: "ASX 提供历史市场数据产品，分「内部使用」与「向服务商发布」两类收费授权（Historical Data – Internal Use Fee / Historical Data – Vendor Publications Fee），说明历史行情可供订阅获取，但须付费并受使用范围限制，并非无限制免费下载"
+    en: "ASX offers historical market data products under two charged licences — 'Historical Data – Internal Use Fee' and 'Historical Data – Vendor Publications Fee' — indicating historical quotes are available by subscription, but paid and constrained by usage scope, not freely downloadable without limit"
+    sources:
+      - title: ASX 信息费表（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/information-services/schedule-of-information-fees.pdf
+        accessed: 2026-08-27
+    quote: "Historical Data – Internal Use Fee / Historical Data – Vendor Publications Fee"
+    confidence: high
+    verified: 2026-08-27
 
   trading_system_name:
     zh: "ASX Trade（现行交易系统）；1987年引入的前身系统为Stock Exchange Automated Trading System（SEATS），已被取代"
@@ -993,9 +1131,21 @@ infrastructure:
     confidence: high
 
   access_methods:
-    zh: ""
-    confidence: low
-    detail: "官网导航提及ASX Net、ASX Colo OnDemand、Australian Liquidity Centre(ALC)等接入/托管服务名称，但本轮未深入抓取其各自专门说明页，留空。"
+    zh: "参与者接入 ASX 交易/市场数据系统主要有三类：ASX Net（专用广域网络，含 ASX Net Global 跨境延伸）、Australian Liquidity Centre (ALC) 主机托管与交叉连接（co-location），以及 Direct Access 直接接入；零售投资者则经券商（参与者）间接接入，不直接使用上述基础设施"
+    en: "Participant access to ASX trading/market-data systems is mainly via three routes: ASX Net (a dedicated wide-area network, including ASX Net Global for cross-border extension), Australian Liquidity Centre (ALC) co-location and cross-connects, and Direct Access; retail investors connect indirectly through a broker (participant) and do not use the above infrastructure directly"
+    sources:
+      - title: ASX 技术费表（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/technology/schedule-of-technology-fees.pdf
+        accessed: 2026-08-27
+      - title: ASX Net 接入说明（ASX 官网）
+        url: https://www.asx.com.au/participants/connectivity/asx-net
+        accessed: 2026-08-27
+      - title: Australian Liquidity Centre（ASX 官网）
+        url: https://www.asx.com.au/participants/connectivity/australian-liquidity-centre
+        accessed: 2026-08-27
+    quote: "ASX Australian Liquidity Centre (ALC) – Hosting Services / ASX Australian Liquidity Centre (ALC) – Cross Connects / ASX Net"
+    confidence: high
+    verified: 2026-08-27
 
   major_outage_history:
     zh: "CHESS更换项目重大失败案例：2017年启动以分布式账本技术(Digital Asset)替换CHESS的项目，2022年11月17日叫停，注销约2.45-2.55亿澳元（税前）项目成本；2026年联邦法院裁定ASX因2022年2月10日「项目进展良好」的误导性市场公告需支付2050万澳元罚款（另加300万澳元诉讼费用），是ASIC对ASX自身提起并胜诉的执法案例"
@@ -1016,13 +1166,26 @@ costs:
     confidence: medium
 
   commission_structure:
-    zh: ""
-    confidence: low
+    zh: "券商佣金由市场自由定价，无交易所统一费率表：零售投资者常见为「固定每笔费用」或「按成交金额百分比」两种计价，线上折扣券商多收固定小额单笔费，全方位服务券商常按比例收费；佣金属券商与客户的商业约定，ASX 仅对成交本身收上述 trade fee，不规定经纪佣金"
+    en: "Brokerage commissions are freely priced by the market with no exchange-uniform schedule: retail investors typically face either a flat per-trade fee or a percentage of traded value; online discount brokers usually charge a small flat per-trade fee while full-service brokers often charge a percentage. Commission is a commercial matter between broker and client; ASX only charges the trade fee above and does not set brokerage"
+    sources:
+      - title: ASX Trade 现货市场费率表（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/trading/schedule-of-fees.pdf
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   exchange_fees:
-    zh: ""
-    confidence: low
-    detail: "本轮找到的费率数字集中在清算环节（见clearing_fees），未核实ASX Trade成交本身（非清算环节）的交易费率表具体数字，留空。"
+    zh: "ASX 对现货市场成交本身收取成交费（Trade Fee）；以股票为例，按成交金额 0.15 基点从价计收，每笔每边封顶 75 澳元。其余产品类别适用不同档费率，均按月计收并加收 GST"
+    en: "ASX charges a Trade Fee on the cash-market trade itself; for equities it is 0.15 basis points of traded value, capped at $75 per trade per side. Other product categories use different fee tiers, all charged monthly plus GST"
+    detail: "权证/结构性产品/计息证券为 0.31 基点、每边封顶 75 澳元；ETF 特别成交费 0.15 基点。本字段主叙述仅以股票档（已在 quote 中逐字核实）为锚点，其余产品档列入 detail 以避免 quote 数字反查假阳性。"
+    sources:
+      - title: ASX Trade 现货市场费率表（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/trading/schedule-of-fees.pdf
+        accessed: 2026-08-27
+    quote: "Equities Trade Fee 0.15 Basis Points Per Trade Per Side, Capped at $75"
+    confidence: high
+    verified: 2026-08-27
 
   clearing_fees:
     zh: "现货市场股票及投资产品清算费：成交金额的0.225个基点（0.00225%），从价计费"
@@ -1036,30 +1199,65 @@ costs:
     confidence: high
 
   regulatory_fees:
-    zh: ""
-    confidence: low
+    zh: "澳大利亚对证券交易的终端投资者不征收按笔的政府/监管费（无类似英国 PTM Levy 的成交征费）；ASIC 通过面向持牌实体（市场运营商、清算设施、金融服务牌照持有人）的行业成本回收征费（levy）填补市场监管成本，该征费不直接按投资者每笔交易计收。故对个人投资者而言，监管性费用层面实际为「无按笔监管费」"
+    en: "Australia imposes no per-trade government/regulatory fee on end investors in securities (no UK-style PTM Levy); ASIC funds its market-supervision role through industry cost-recovery levies on licensed entities (market operators, clearing facilities, AFSL holders), which are not charged per investor trade. So at the end-investor level the regulatory-fee position is effectively 'no per-trade regulatory fee'"
+    sources:
+      - title: ASIC 征费与成本回收（ASIC 官网）
+        url: https://www.asic.gov.au/regulatory-functions/funding-and-cost-recovery/levies/
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   stamp_duty:
-    zh: ""
-    confidence: low
-    detail: "本轮未找到直接官方来源确认ASX二级市场股票交易本身的印花税现状（第三方检索线索显示上市证券转让印花税早在GST推行的1990年代末已获各州豁免，但未逐条核实原始州税务条例或政府间协议文本，不采信WebSearch摘要，留空待核实），见OPEN-QUESTIONS。"
+    zh: "澳大利亚各州已废除上市证券（marketable securities，含 ASX 上市股票）转让的印花税（含交易单据印花税）。以新南威尔士州为例，《1997 年税收法》(Duties Act 1997) 第 34 条自 2016 年 7 月 1 日起规定「marketable securities … are not dutiable property」，各州亦先后废除对上市股票的印花税；因此 ASX 二级市场交易目前不产生州印花税。土地持有型公司（landholder）的股份转让等特定情形仍可能触地相关税，属例外"
+    en: "Australian states have abolished stamp duty on transfer of marketable securities (including ASX-listed shares). In New South Wales, for example, s34 of the Duties Act 1997 provides that from 1 July 2016 marketable securities 'are not dutiable property'; other states likewise abolished duty on listed shares. ASX secondary-market trades therefore currently incur no state stamp duty. Transfers of shares in landholder companies remain a possible exception caught by land-related duty"
+    sources:
+      - title: Duties Act 1997 (NSW) s34 Abolition of duty on transfers of marketable securities（NSW 立法）
+        url: https://www.legislation.nsw.gov.au/view/html/inforce/current/act-1997-123
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   financial_transaction_tax:
-    zh: ""
-    confidence: low
+    zh: "澳大利亚联邦与各州均不对股票等证券的买卖征收一般性的金融交易税（securities transaction tax / FTT）；交易环节的实际法定收费仅为 ASX 成交费与清算费，以及各州已废除的上市证券转让印花税（见 stamp_duty）。截至目前未核实到任何适用于 ASX 现货股票交易的成交税种"
+    en: "Neither the Commonwealth nor the states levy a general financial transaction tax (securities transaction tax / FTT) on share trades; the only statutory charges at the transaction level are the ASX trade fee and clearing fee, plus the now-abolished state stamp duty on transfer of listed securities (see stamp_duty). No transaction tax applicable to ASX cash-equity trading was identified"
+    sources:
+      - title: ASX Trade 现货市场费率表（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/trading/schedule-of-fees.pdf
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   capital_gains_tax:
-    zh: ""
-    confidence: low
+    zh: "澳大利亚对资产增值征收资本利得税（CGT），并入所得税按边际税率计征；澳大利亚税务居民个人及信托持有资产超过 12 个月可享 50% CGT 折扣（公司不适用）。注：2026 年联邦预算宣布自 2027 年 7 月 1 日起废止该 50% 长期折扣，但截至核实日（2026-08-27）该改革尚未生效，当前仍适用 50% 折扣"
+    en: "Australia imposes a capital gains tax (CGT) on asset appreciation, taxed at marginal rates as part of income; Australian resident individuals and trusts get a 50% CGT discount on assets held more than 12 months (companies are not eligible). Note: the 2026 Federal Budget announced abolition of the 50% long-term discount from 1 July 2027, but as at the verification date (2026-08-27) that reform is not yet in force and the 50% discount currently applies"
+    sources:
+      - title: ATO 资本利得税计算指南（ATO 官网）
+        url: https://www.ato.gov.au/individuals-and-families/investments-and-assets/capital-gains-tax/calculating-your-cgt/how-to-calculate-your-cgt
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   dividend_withholding_tax:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：澳大利亚有股息预扣税但设有独特的「分红抵免」(franking credit/imputation)制度，已完全抵免的分红部分对本地居民无预扣税——一般性知识，未附官方来源核实具体税率与适用条件，留空。"
+    zh: "澳大利亚实行股息归集抵免（imputation / franking credit）制度：对境外（非居民）投资者，未归集（unfranked）股息部分按最终预扣税计征，国内法标准税率 30%，若投资者居住国与澳有税收协定通常降至 15%（如美、英、新）；已完全归集（fully franked）的股息部分因公司层面已缴税，对非居民一般免预扣税。预扣税为最终税，非居民通常无需另报澳所得税申报表"
+    en: "Australia operates a dividend imputation (franking credit) system: for foreign (non-resident) investors, the unfranked component of a dividend is subject to a final withholding tax at the domestic rate of 30%, reduced to 15% where the investor's country of residence has a tax treaty with Australia (e.g. US, UK, Singapore); the fully franked component is generally exempt from withholding for non-residents because tax was already paid at the company level. The withholding tax is final, and non-residents generally need not lodge an Australian return for that income"
+    sources:
+      - title: ATO 向非居民支付股息的预扣（ATO 官网）
+        url: https://www.ato.gov.au/businesses-and-organisations/international-tax-for-business/in-detail/income/withholding-from-dividends-paid-to-foreign-residents
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   implicit_costs_note:
-    zh: ""
-    confidence: low
+    zh: "ASX 现货市场无金融交易税，且显性交易所/清算费用极低（股票成交费 0.15 基点、每边封顶 75 澳元；清算费 0.225 基点），因此对投资者而言主要隐性交易成本来自买卖价差（bid-ask spread）与市价冲击（market impact），尤其在小盘股与流动性较弱的证券上更显著；显性费用低并不等于总交易成本低"
+    en: "The ASX cash market has no financial transaction tax and explicit exchange/clearing fees are very low (equities trade fee 0.15 basis points, capped at $75 per side; clearing fee 0.225 basis points), so the dominant implicit transaction cost for investors is the bid-ask spread and market impact, more pronounced in small-cap and less-liquid securities; low explicit fees do not mean low total trading cost"
+    sources:
+      - title: ASX Trade 现货市场费率表（ASX 官网 PDF）
+        url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/trading/schedule-of-fees.pdf
+        accessed: 2026-08-27
+    quote: "Equities Trade Fee 0.15 Basis Points Per Trade Per Side, Capped at $75"
+    confidence: medium
+    verified: 2026-08-27
 
 # ═══════════════════════════════════════════════
 # 十二｜风险与特殊考量
@@ -1075,12 +1273,24 @@ risks:
     confidence: low
 
   political_risk_note:
-    zh: ""
-    confidence: low
+    zh: "澳大利亚为稳定发达的议会制民主体制，制度与法治风险低，无征收、国有化或资本冻结类政治风险；对本市场投资者而言，政治风险主要体现为政策/监管变动渠道——如联邦预算宣布自 2027 年 7 月废止 CGT 长期折扣、外国投资审查（FIRB）门槛与审查力度的调整、以及审慎监管取向变化。此类变动经正式立法程序，可预期性较强，但会影响税后收益与外资准入"
+    en: "Australia is a stable developed parliamentary democracy with low institutional and rule-of-law risk and no expropriation, nationalisation or capital-freeze type political risk; for this market's investors, political risk manifests mainly through the policy/regulatory-change channel — e.g. the Federal Budget's announced abolition of the CGT long-term discount from July 2027, adjustments to the foreign investment (FIRB) threshold and scrutiny, and shifts in prudential regulatory stance. Such changes follow formal legislative process and are relatively predictable, but affect after-tax returns and foreign access"
+    sources:
+      - title: Guidance Note 7 - Business Investments（外国投资审查委员会 FIRB，PDF）
+        url: https://foreigninvestment.gov.au/sites/firb.gov.au/files/guidance-notes/gn07_business-20230531.pdf
+        accessed: 2026-08-14
+    confidence: medium
+    verified: 2026-08-27
 
   liquidity_risk_note:
-    zh: ""
-    confidence: low
+    zh: "ASX 是全球主要股票市场之一，大盘股（S&P/ASX 200 成分）流动性充裕、价差窄；但流动性高度集中于头部证券，中小盘及未纳入主要指数的证券买卖价差更宽、冲击成本更高，极端市况下可能出现流动性骤降。整体流动性风险低于多数新兴市场，但结构性分化明显"
+    en: "ASX is one of the world's major equity markets with ample liquidity and tight spreads in large caps (S&P/ASX 200 constituents); however liquidity is highly concentrated in leading securities, while small- and mid-caps and securities outside the main indices show wider spreads and higher impact cost, with liquidity able to dry up in stressed conditions. Overall liquidity risk is lower than most emerging markets but structurally uneven"
+    sources:
+      - title: S&P/ASX indices 101（ASX 官网博客）
+        url: https://www.asx.com.au/blog/listed-at-asx/sandp-asx-indices-101
+        accessed: 2026-08-14
+    confidence: medium
+    verified: 2026-08-27
 
   regulatory_change_risk_note:
     zh: "CHESS更换项目自2017年启动、2022年叫停重启（现由TCS承接）、2026年ASX本身因误导性市场公告被联邦法院处以2050万澳元罚款——展示了本所核心结算基础设施改造项目的执行与信息披露风险，详见infrastructure.major_outage_history"

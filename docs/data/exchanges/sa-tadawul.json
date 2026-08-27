@@ -223,24 +223,46 @@
         "enum": null
       },
       "capital_controls": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "沙特实行开放资本账户，对证券投资组合资本一般无资本管制；境外投资者可自由汇入、汇出资金及投资收益，唯须通过 CMA 许可的渠道（如经交易所会员）并遵守反洗钱与外商投资披露要求。2026年2月取消 QFI 资格后外资可直接投资主板，进一步降低准入壁垒",
+        "en": "Saudi Arabia maintains an open capital account with no general capital controls on portfolio capital; foreign investors may freely repatriate capital and investment returns through CMA-permitted channels, subject to AML and foreign-ownership disclosure rules. The Feb-2026 abolition of the QFI framework further lowered access barriers",
+        "detail": "未发现明文'无资本管制'的一手条款；以 CMA 外资规则与 QFI 改革为背景推断，属综述性结论，故 confidence 降为 medium",
+        "sources": [
+          {
+            "title": "Rules for Foreign Investment in Securities（CMA，2026-01-05 修订版）",
+            "url": "https://cma.gov.sa/en/RulesRegulations/Regulations/Documents/Rules_for_Foreign_Investment_in_Securities_en.pdf",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "The CMA Opens the Capital Market to All Categories of Foreign Investors（CMA_N_3974，2026-01-06）",
+            "url": "https://cma.gov.sa/en/MediaCenter/NEWS/Pages/CMA_N_3974.aspx",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "The Capital Market Authority (CMA) announces the opening of the capital market to all categories of foreign investors and enabling them to invest directly therein as of 1 February 2026 ... eliminating the concept of the Qualified Foreign Investor (QFI).",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "disclosure_requirements": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "发行人须按《资本市场法》及其实施细则、《交易所规则》持续、充分披露；所有对公众披露须完整、清晰、准确、不具误导性。交易所可要求提供进一步信息，价格敏感事项须即时披露。CMA 的法定职责包括'监管并确保证券及其发行人的信息充分披露'",
+        "en": "Issuers must make ongoing, adequate disclosures under the CMA Law, its Implementing Regulations and the Exchange Rules; all public disclosures must be complete, clear, accurate and not misleading. The Exchange may require further information; price-sensitive events must be disclosed promptly. CMA's statutory mandate includes regulating and monitoring full disclosure",
+        "detail": "持续义务集中在 Listing Rules Part 5（Articles 27–33）；披露监督为 CMA 法定职责（CMA Law Article 182）",
+        "sources": [
+          {
+            "title": "Listing Rules（Article 27: Obligation to make disclosures in accordance with applicable requirements）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/e4bfbba8-4932-4b0c-b405-c922ac56d780/Listing+Rules.pdf?MOD=AJPERES&CVID=pfpotDY",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Capital Market Law（Article 182）",
+            "url": "https://cma.gov.sa/en/RulesRegulations/Laws/Documents/CapitalMarketLaw.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "All disclosures made by an issuer to the public must be complete, clear, accurate, not misleading and shall comply with all disclosure requirements prescribed by the Capital Market Law, its Implementing Regulations and the Exchange Rules. [Listing Rules Art 27] ... Regulate and monitor the full disclosure of information regarding the securities and their issuers. [CMA Law Art 182]",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "investor_protection": {
         "zh": "CMA 的法定使命包括保护投资者、确保上市公司充分披露与透明",
@@ -1164,14 +1186,20 @@
         "verified": "2026-08-14"
       },
       "listing_process_duration": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "主板（Main Market）IPO 通常自启动至开始交易约需 6–12 个月：先向 CMA 提交申请，CMA 审核通过后再经最长约 6 个月完成上市流程与开始交易；平行市场（Nomu）流程显著更短",
+        "en": "A Main Market IPO typically takes about 6–12 months from launch to first trading: file with the CMA, then up to a further ~6 months to complete the listing process and commence trading; the Parallel Market (Nomu) process is significantly shorter",
+        "detail": "时间为律所实务指引的估计区间，非法定硬性时限；具体因个案与监管问答节奏而异",
+        "sources": [
+          {
+            "title": "Global Equity Insights 2026: A guide to listing on the Saudi Exchange（Baker McKenzie，2026-02-01 更新）",
+            "url": "https://www.bakermckenzie.com/en/insight/publications/2026/02/global-equity-insights-2026-saudi-arabia",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "It takes around 6 months to file with the CMA, then up to a further 6 months for the processing and trading to commence.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "transfer_between_boards": {
         "zh": "平行市场（Nomu）挂牌满两个日历年后可申请转往主板，另须最近一期财报无保留意见、无累计亏损、申请前十二个月内无因第38条导致的停牌记录",
@@ -1190,24 +1218,36 @@
         "enum": null
       },
       "continuing_obligations": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "上市后持续义务集中于 Listing Rules Part 5（Articles 27–33）：发行人须按适用要求持续披露，所有披露须完整、清晰、准确、不误导；须披露可能影响证券价格的行为；交易所可要求提供进一步信息；并须遵守持续上市标准（如最低平均收盘价等）",
+        "en": "Post-listing continuing obligations are set out in Listing Rules Part 5 (Articles 27–33): issuers must make ongoing disclosures as required, all disclosures complete/clear/accurate/not misleading; disclose price-sensitive actions; the Exchange may require further information; and meet continued-listing standards (e.g. minimum average closing price)",
+        "detail": "Article 27 为总纲性持续披露义务；Part 5 还涵盖重大事项披露、持续上市条件等",
+        "sources": [
+          {
+            "title": "Listing Rules（Part 5 Continuing Obligations, Articles 27–33）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/e4bfbba8-4932-4b0c-b405-c922ac56d780/Listing+Rules.pdf?MOD=AJPERES&CVID=pfpotDY",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Article 27: Obligation to make disclosures in accordance with applicable requirements — All disclosures made by an issuer to the public must be complete, clear, accurate, not misleading and shall comply with all disclosure requirements prescribed by the Capital Market Law, its Implementing Regulations and the Exchange Rules.",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "suspension_resumption": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "交易所可应要求或主动实施临时停牌（Article 40 临时停牌机制）；若停牌情形消除，交易所将在停牌情形结束后的不超过五个交易日内恢复交易",
+        "en": "The Exchange may impose a temporary trading halt on request or suo motu (Article 40 temporary trading halt); where the suspension circumstances end, the Exchange will lift the suspension within a period not exceeding five trading sessions following the end of those circumstances",
+        "detail": "Article 38 另赋予 CMA 暂停交易或取消上市的权限；恢复以'情形消除后≤5个交易日'为操作口径",
+        "sources": [
+          {
+            "title": "Listing Rules（Article 38(g)/(h) 及 Article 40: Temporary trading halt）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/e4bfbba8-4932-4b0c-b405-c922ac56d780/Listing+Rules.pdf?MOD=AJPERES&CVID=pfpotDY",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Article 40: Temporary trading halt. An issuer may request from the Exchange a temporary trading halt upon the occurrence of an event that occurs during trading hours which requires immediate disclosure under the Capital Market Law, its Implementing Regulations and the Exchange Rules and the issuer cannot maintain the confidentiality of this information until the end of the trading period, the trading halt of that issuer's securities will be made by the Exchange immediately upon receiving the request. [Listing Rules Art 40] ... The Exchange will lift the suspension within a period not exceeding five trading sessions following the end of the suspension circumstances. [Listing Rules Art 38]",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "delisting_conditions": {
         "zh": "CMA可在多种情形下随时暂停交易或取消上市，包括：为保护投资者/维护市场秩序认为有必要；发行人重大违反《资本市场法》/实施细则/交易所规则；未按时缴纳费用或罚款；发行人业务/资产已不再适合继续上市；累计亏损达资本50%以上并已向法院申请破产重整程序等",
@@ -1227,34 +1267,52 @@
         "detail": null
       },
       "delisting_process": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "自愿退市须事先取得 CMA 批准：发行人须向 CMA 提交退市申请并同时通知交易所，说明退市理由等；CMA 亦可在多种情形下主动取消上市（Article 38）。强制退市多见于持续违反规则、suitability 不再适合上市或累计亏损达资本 50% 以上并进入破产重整等",
+        "en": "Voluntary delisting requires prior CMA approval: the issuer must submit a cancellation request to the CMA with simultaneous notice to the Exchange stating the reasons; the CMA may also cancel listing on its own initiative (Article 38) for material breaches, unsuitability, or accumulated losses ≥50% of capital with bankruptcy restructuring",
+        "detail": "Article 39 规定自愿退市须 CMA 事前批准 + 相关披露；Article 38 为 CMA 主动取消上市的权力基础",
+        "sources": [
+          {
+            "title": "Listing Rules（Article 39: Voluntary cancellation of listing；Article 38: Power to suspend trading or cancel listing）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/e4bfbba8-4932-4b0c-b405-c922ac56d780/Listing+Rules.pdf?MOD=AJPERES&CVID=pfpotDY",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Article 38: Power to suspend trading or cancel listing. The Authority may at any time suspend the trading of securities or cancel their listing as it deems fit, in any of the following circumstances: ... 13) upon the registration of the application for the commencement of a financial restructuring procedure of the issuer, whose accumulated losses reached 50% or more of its capital with the court in accordance with the Bankruptcy Law. [Listing Rules Art 38] ... Article 39(a): An issuer whose securities have been listed may not cancel the listing of its securities on the Exchange without the prior approval of the Authority. In order to obtain the Authority's approval, the issuer must submit a request of the cancelation to the Authority with a simultaneous notification to the Exchange... [Listing Rules Art 39]",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "delisting_transition_period": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "若发行人证券被暂停交易后连续六个月未采取适当行动消除暂停原因，CMA 可取消其上市证券。即停牌→强制退市的过渡期阈值为约六个月",
+        "en": "Where the suspension of an issuer continues for six months without the issuer taking appropriate action to resolve the reasons that lead to the suspension, the Authority may cancel that issuer's listed securities — i.e. the suspension-to-compulsory-delisting threshold is about six months",
+        "detail": "该六个月为 Listing Rules Article 38(g) 的硬性阈值；自愿退市则无固定过渡期，取决于 CMA 审批节奏",
+        "sources": [
+          {
+            "title": "Listing Rules（Article 38(g): Power to suspend trading or cancel listing）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/e4bfbba8-4932-4b0c-b405-c922ac56d780/Listing+Rules.pdf?MOD=AJPERES&CVID=pfpotDY",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Where the suspension of an issuer continues for six months without the issuer taking appropriate action to resolve the reasons that lead to the suspension, the Authority may cancel that issuer's listed securities.",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "post_delisting_venue": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "被暂停/退市的证券可在 Tadawul 的 OTC Trading（场外交易）平台继续交易；该平台面向'暂停/退市的公司与基金'。退市完成后证券若未转入 OTC 则不再在主板挂牌",
+        "en": "Suspended/delisted securities may continue to trade on Tadawul's OTC Trading platform, which is designated for suspended/delisted companies and funds; once delisting is completed and not transferred to OTC, the security is no longer listed on the Main Market",
+        "detail": "OTC Trading 入口见于交易所官网'Issuers Trading Information'下的'Suspended/Delisted/Companies and Funds OTC Trading'；未在抓取到的一手规则里找到更细的 OTC 交易规则，故 confidence 为 medium",
+        "sources": [
+          {
+            "title": "Saudi Exchange — Issuers Trading Information（Suspended/Delisted/Companies and Funds OTC Trading）",
+            "url": "https://www.saudiexchange.sa/wps/portal/tadawul/markets/issuers-trading-information",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Issuers Trading Information ... Suspended/Delisted/Companies and Funds OTC Trading",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       }
     },
     "indices": {
@@ -1356,40 +1414,58 @@
         "enum": null
       },
       "initial_margin_practice": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "衍生品交易端由会员向客户收取初始保证金，用以覆盖客户持仓价值的潜在不利变动；清算端（Muqassa 对结算会员）设最低初始保证金，结算会员可在此最低保证金基础上按合约类别适用各自的保证金乘数（Margin Multiplier）向客户加收。总保证金 = 初始保证金 + 适用的变动保证金 + Muqassa/结算会员认定的追加保证金",
+        "en": "On the trading side, Exchange Members collect Initial Margin from clients to cover potential adverse changes in the value of each client position; on the clearing side Muqassa sets a minimum Initial Margin, and clearing members may apply their own contract-class-specific margin multiplier (Margin Multiplier) on top when collecting from clients. Total Margin = Initial Margin + applicable Variation Margin + any additional margin determined by Muqassa and the clearing member",
+        "detail": "此处为衍生品保证金框架；现货市场无保证金（见 settlement_cycle / clearing.derivatives）。保证金乘数为结算会员在 Muqassa 最低保证金之上自行适用的加收系数，官方 brochure 未给出各合约类别的具体乘数数值，故不臆造百分比。引文来自 Tadawul Derivatives Market Brochures",
+        "sources": [
+          {
+            "title": "Tadawul Derivatives Market Brochures（Initial Margin / Margin Multiplier / Total Margin）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/0e1657-e035-4172-a4e6-943c4dfce80d/Tadawul+Derivatives+Market+Brochures.pdf?MOD=AJPERES&CVID=oW9oJ",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Initial Margin — The margin that is collected to cover potential changes in the value of each client position. ... Margin Multiplier — Is the number by which the minimum percentage margin, required by the Muqassa, have to be multiplied to form the margin required by the clearing member from his clients for newly entered positions. ... Total Margin ... includes Initial Margin, any applicable Variation Margin and any additional margin determined by Muqassa and the clearing member.",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "maintenance_margin_practice": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "变动保证金（Variation Margin）按市值计价（MTM）每日计收，用于覆盖未平仓头寸当日的实际盈亏；当保证金低于维持水平时会员向客户追收",
+        "en": "Variation Margin (VM) is mark-to-market (MTM), collected on a daily basis to cover the current losses on open positions; members make margin calls when the balance falls below the maintenance level",
+        "detail": "与初始保证金共同构成总保证金；变动保证金为每日盯市盈亏的现金结算",
+        "sources": [
+          {
+            "title": "Tadawul Derivatives Market Brochures（Variation Margin / MTM）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/0e1657-e035-4172-a4e6-943c4dfce80d/Tadawul+Derivatives+Market+Brochures.pdf?MOD=AJPERES&CVID=oW9oJ",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Variation Margin (VM) is MTM, meaning that margin is collected on a daily basis to cover the current losses on open positions on daily basis.",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "mark_to_market_frequency": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "每日盯市：交易每日结束时按当日结算价进行市值重估与保证金结算",
+        "en": "Daily mark-to-market: positions are revalued and margin is settled at the end of each trading day based on the daily settlement price",
+        "detail": "衍生品与清算会员间的每日结算在交易日终按逐日盯市进行",
+        "sources": [
+          {
+            "title": "Tadawul Derivatives Market Brochures（Daily settlement / mark to market）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/0e1657-e035-4172-a4e6-943c4dfce80d/Tadawul+Derivatives+Market+Brochures.pdf?MOD=AJPERES&CVID=oW9oJ",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Daily settlement takes place end of day on a daily mark to market basis.",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "delivery_method": {
         "enum": "na",
         "zh": "股票现货为交割证券本身（记账式过户），不适用实物/现金交割二选一；衍生品部分另见 clearing.derivatives.delivery_method",
         "en": "Cash equities settle via book-entry transfer of the securities themselves — not applicable to a physical/cash delivery choice; for derivatives see clearing.derivatives.delivery_method",
-        "detail": "ADR-023 新增 clearing.derivatives 子块后，顶层字段收窄为仅描述现货市场；MT30指数期货为现金结算，但未找到覆盖全品类衍生品的一手原文，移入新子块留空，见 OPEN-QUESTIONS。与 settlement_cycle 字段引用同一份来源，佐证现货结算为证券记账过户而非实物/现金二选一。",
+        "detail": "顶层字段描述现货市场：股票现货为证券记账过户（book-entry），不适用实物/现金交割二选一，故 enum: na。衍生品交割方式见 clearing.derivatives.delivery_method（MT30 指数期货为现金结算 T+0）。与 settlement_cycle 字段引用同一份来源，佐证现货结算为证券记账过户。",
         "sources": [
           {
             "title": "Edaa Settlement（Edaa 官网）",
@@ -1402,52 +1478,81 @@
         "verified": "2026-08-14"
       },
       "last_trading_day_rule": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "以旗舰衍生品 MT30 指数期货为例，最后交易日为合约到期月的第三个星期四（当日 15:30 结束交易）；现货市场无'最后交易日'概念，每个交易日均可交易",
+        "en": "For the flagship MT30 index futures, the Last Trading Day is the third Thursday of the expiry month (trading ends at 15:30); the spot cash market has no 'last trading day' concept and trades every business day",
+        "detail": "该规则来自 MT30 合约规格（交易所官网）；属衍生品层面，现货不适用",
+        "sources": [
+          {
+            "title": "Saudi Exchange — MT30 Index Futures contract specifications",
+            "url": "https://www.saudiexchange.sa/wps/portal/tadawul/markets/derivatives/products/mt30",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Last Trading Day: The third Thursday of the expiry month (trading ends at 15:30).",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "default_management": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "衍生品清算由 Muqassa（Saudi Exchange 全资子公司）中央对手方（CCP）承担，为 Tadawul 全资产类别的成交提供清算服务并'保证所有交易的结算与履约'；Muqassa 设有风险管理框架（会员准入、保证金、违约处置），具体违约基金/瀑布式损失分摊细则见其规则与风险管理办法",
+        "en": "Derivatives clearing is performed by Muqassa (a wholly-owned subsidiary of Saudi Exchange) as the central counterparty (CCP), providing clearing services and 'guaranteeing the settlement and fulfilment of obligations for all trades executed on Tadawul across all asset classes under its coverage'; Muqassa operates a risk-management framework (membership, margin, default handling) with default-fund / loss-waterfall details set out in its rules and risk-management methodology",
+        "detail": "Muqassa 同时清算现货与衍生品；违约处置的具体分层（违约基金、追加保证金、瀑布）未在一手抓取页完整呈现，故 confidence 定为 medium",
+        "sources": [
+          {
+            "title": "Tadawul Derivatives Market Brochures（Muqassa clearing & guarantee）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/0e1657-e035-4172-a4e6-943c4dfce80d/Tadawul+Derivatives+Market+Brochures.pdf?MOD=AJPERES&CVID=oW9oJ",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Muqassa — Home / Risk Management",
+            "url": "https://www.muqassa.sa/wps/portal/muqassa/home",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "by facilitating clearing services and guaranteeing the settlement and fulfilment of obligations for all trades executed on Tadawul across all asset classes under its coverage.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "derivatives": {
         "initial_margin_practice": null,
         "maintenance_margin_practice": null,
         "mark_to_market_frequency": null,
         "delivery_method": {
-          "zh": "",
-          "confidence": "low",
-          "detail": "ADR-023 新增字段，MT30指数期货已知为现金结算，但覆盖全品类衍生品的一手原文本次未找到，留空转 OPEN-QUESTIONS。",
-          "verified": "2026-08-14",
-          "en": null,
-          "enum": null,
-          "quote": null,
-          "sources": null
+          "zh": "衍生品以 MT30 指数期货为代表为现金结算（Cash settled），交割方式为 T+0 现金差额结算，不涉及实物交割",
+          "en": "Represented by the MT30 index futures, derivatives are cash-settled (Cash settled) with T+0 cash differential settlement; no physical delivery",
+          "detail": "引文来自 MT30 合约规格（交易所官网）；其它衍生品品类交割方式以各自合约规格为准",
+          "sources": [
+            {
+              "title": "Saudi Exchange — MT30 Index Futures contract specifications",
+              "url": "https://www.saudiexchange.sa/wps/portal/tadawul/markets/derivatives/products/mt30",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "Settlement: Cash settled, T+0.",
+          "confidence": "medium",
+          "verified": "2026-08-27",
+          "enum": null
         },
         "last_trading_day_rule": null
       }
     },
     "participants": {
       "investor_structure": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "市场参与者包含散户与机构；沙特市场以散户参与度高著称，同时机构投资者（含政府相关实体、本地基金与境外投资者）占比重要。截至 2026年5月底，境外投资者持有市值约 1,219 亿美元（约 4,570 亿沙特里亚尔），占总市值约 17%",
+        "en": "The investor base comprises retail and institutional participants; the Saudi market is known for high retail participation alongside significant institutional holdings (government-related entities, local funds and foreign investors). As of end-May 2026, foreign investors held about USD 121.9 billion (≈ SAR 457 billion), roughly 17% of total market cap",
+        "detail": "境外持股市值为沙特交易所官网披露；散户/机构精确占比本次未抓到一手统计，按官网定性描述 + 外资持仓数据呈现，confidence 定为 medium",
+        "sources": [
+          {
+            "title": "Saudi Exchange — Home / Market data（foreign ownership, end May 2026）",
+            "url": "https://www.saudiexchange.sa/wps/portal/tadawul/home",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Foreign investors' ownership in the Saudi market reached SAR 457 billion (about USD 121.9 billion) by the end of May 2026.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "account_opening_requirements": {
         "zh": "投资者须先通过交易所会员（经纪商）开立投资账户方可交易",
@@ -1466,14 +1571,20 @@
         "detail": null
       },
       "suitability_management": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "资本市场机构（经纪商/投行等）须执行了解你的客户（KYC）与适当性管理：在开展证券业务前须收集客户财务、投资经验与目标信息；提供的建议或交易须适合该客户",
+        "en": "Capital market institutions (brokers/dealers) must perform Know-Your-Client (KYC) and suitability management: obtain client financial situation, investment experience and objectives before providing services; any advice or transaction must be suitable for that client",
+        "detail": "KYC 见 Capital Market Institutions Regulations Article 39；适当性见 Article 43；两处均为 CMA 官方规则原文",
+        "sources": [
+          {
+            "title": "Capital Market Institutions Regulations（Article 39 Know Your Client；Article 43 Suitability）",
+            "url": "https://cma.gov.sa/en/RulesRegulations/Regulations/Documents/CapitalMarketInstitutionsRegulations.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Article 39(a): Before a capital market institution carries out any securities business for a client ... it must obtain information from the client concerning the client's financial situation, investment experience and investment objectives ... Article 43(a): A capital market Institution must not deal, advise, offer a security ... unless the advice or transaction is suitable for that client having regard to the facts disclosed by that client...",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "foreign_access_channel": {
         "zh": "2026年2月1日起取消QFI资格制度，境外投资者可不受投资者类别限制直接投资主板，但仍受10%单一持股与49%合计持股上限约束（见 regulation.foreign_ownership_limit）",
@@ -1513,66 +1624,117 @@
         "enum": null
       },
       "broker_landscape": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "零售与机构客户须通过持有 CMA 有效牌照的交易所会员（Exchange Members / 经纪商）进行交易；交易所公布会员名录，本地主要经纪商包括 Al Rajhi Capital、SNB Capital、Riyad Capital、Alinma、Aljazira 等。会员须于沙特境内设立并持 CMA 牌照，按业务类别（Dealing/Custody/Managing/Arranging/Advising）分类",
+        "en": "Retail and institutional clients trade through Exchange Members (brokers) holding a valid CMA license; the Exchange publishes a Members Directory, with major local brokers including Al Rajhi Capital, SNB Capital, Riyad Capital, Alinma and Aljazira. Members must be established in the Kingdom with a CMA license, categorized by activity (Dealing/Custody/Managing/Arranging/Advising)",
+        "detail": "经纪商精确数量以交易所会员名录为准，本次未抓到确切家数，故以'持牌会员 + 主要名录'定性描述，confidence 定为 medium",
+        "sources": [
+          {
+            "title": "Saudi Exchange — Exchange Members / Membership",
+            "url": "https://www.tadawulgroup.sa/wps/portal/tadawulgroup/portfolio/saudi-exchange",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Capital Market Institutions Regulations（membership / licensing）",
+            "url": "https://cma.gov.sa/en/RulesRegulations/Regulations/Documents/CapitalMarketInstitutionsRegulations.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Applicants must be established in the Kingdom and hold a valid license from the CMA. Once CMA authorization is obtained, applicants need to complete the Saudi Exchange membership requirements.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       }
     },
     "infrastructure": {
       "market_data_levels": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "沙特交易所提供分层市场数据产品：Best Price（最优买卖价，Level 1）、Market Depth（最优五档）、Premium（完整订单簿深度）、Full Order Book（全量委托簿），以及延迟的网站行情（Ticker）",
+        "en": "Saudi Exchange offers tiered market data products: Best Price (top-of-book, Level 1), Market Depth (best five levels), Premium (full order book depth), Full Order Book (complete order book), plus delayed website ticker",
+        "detail": "层级命名来自交易所市场数据服务页面（官网）；属商业数据产品分级",
+        "sources": [
+          {
+            "title": "Saudi Exchange — Market Data services",
+            "url": "https://www.saudiexchange.sa/wps/portal/tadawul/markets/market-data",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Market Data products include Best Price, Market Depth (best 5 levels), Premium (full depth) and Full Order Book...",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "data_latency": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "交易系统 X-stream INET 订单处理延迟低于 40 微秒；交易所同时提供实时与延迟（官网 Ticker 延迟≥5 分钟）行情。具体端到端延迟以数据产品等级而定",
+        "en": "The X-stream INET trading engine processes orders with latency under 40 microseconds; the Exchange offers both real-time and delayed (website ticker delayed ≥5 minutes) market data. End-to-end latency depends on the data product tier",
+        "detail": "40 微秒来自 Nasdaq X-stream INET 上线报道（第三方新闻）；官网 Ticker 延迟≥5 分钟来自市场数据服务页",
+        "sources": [
+          {
+            "title": "Fintech Futures — Tadawul goes live with Nasdaq trading platform（2015）",
+            "url": "https://www.fintechfutures.com/2015/07/saudi-stock-exchange-tadawul-launches-nasdaq-trading-platform",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Saudi Exchange — Market Data services（delayed ticker）",
+            "url": "https://www.saudiexchange.sa/wps/portal/tadawul/markets/market-data",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "The X-stream INET trading engine ... latency of less than 40 microseconds.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "data_pricing_model": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "市场数据按商业授权收费：Best Price 约 30 沙特里亚尔/月，Market Depth 50–75，Premium 75–100，Full Order Book 300 沙特里亚尔/月；机构级 Market Data Feed（MDF）连接年费约 30,000 里亚尔，非显示型授权（Non-display）年费按档 80k/50k/100k 里亚尔。整体为付费授权模式，分实时/延迟产品",
+        "en": "Market data is licensed commercially: Best Price ≈ SAR 30/month, Market Depth SAR 50–75, Premium SAR 75–100, Full Order Book SAR 300/month; institutional Market Data Feed (MDF) connectivity ≈ SAR 30,000/year, non-display licences SAR 80k/50k/100k/year by tier. Overall a paid-licensing model with real-time/delayed tiers",
+        "detail": "具体费率为交易所市场数据费用页（官网）披露；以沙特里亚尔计价",
+        "sources": [
+          {
+            "title": "Saudi Exchange — Market Data Fees",
+            "url": "https://www.saudiexchange.sa/wps/portal/tadawul/markets/market-data-fees",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Best Price SAR 30/month; Market Depth SAR 50–75; Premium SAR 75–100; Full Order Book SAR 300/month; MDF connection SAR 30,000/year; Non-display licences SAR 80,000/50,000/100,000/year.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "historical_data_availability": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "交易所提供覆盖所有上市工具的历史数据；日终（End-of-Day）数据可回溯过去 5 年，跨股票、ETF、债券、基金等资产类别",
+        "en": "The Exchange provides historical data across all listed instruments; End-of-Day data is available for the past five years across equities, ETFs, bonds, funds and other asset classes",
+        "detail": "五年 EOD 回溯来自市场数据服务页（官网）；更长历史可通过数据产品/授权获取",
+        "sources": [
+          {
+            "title": "Saudi Exchange — Market Data services（historical / End-of-Day）",
+            "url": "https://www.saudiexchange.sa/wps/portal/tadawul/markets/market-data",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "End-of-Day data for the past 5 years for all listed instruments across asset classes.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "trading_system_name": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "Tadawul 使用 Nasdaq 的 X-stream INET 交易系统，于 2015 年上线，为其提供极速撮合与全资产类别交易能力",
+        "en": "Tadawul runs Nasdaq's X-stream INET trading system, launched in 2015, providing ultra-low-latency matching across asset classes",
+        "detail": "系统名称来自纳斯达克 X-stream FAQ（交易所官网静态页）；因官网直连被 Akamai 拦截（403），本次以官网内容经检索呈现，confidence 定为 medium",
+        "sources": [
+          {
+            "title": "Saudi Exchange — X-stream INET FAQ（static PDF, Akamai-blocked）",
+            "url": "https://www.saudiexchange.sa/static/innerpages/XstreamFAQ.pdf",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Fintech Futures — Tadawul launches Nasdaq trading platform（2015）",
+            "url": "https://www.fintechfutures.com/2015/07/saudi-stock-exchange-tadawul-launches-nasdaq-trading-platform",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "X-Stream INET is the latest in trading solutions and is the fastest recorded trading engine in the world.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "access_methods": {
         "zh": "订单须经三种渠道之一提交：T Channel（面向注册交易员）、I Channel（面向经会员网站/在线应用下单的客户）",
@@ -1591,106 +1753,181 @@
         "enum": null
       },
       "major_outage_history": {
-        "zh": "",
+        "zh": "本次研究未核实到 Tadawul 重大停机的逐例记录；X-stream INET 平台设计具备业务连续性与灾备（disaster recovery）能力，单点故障风险由冗余架构缓解",
+        "en": "No specific major outage incident was verified in this research; the X-stream INET platform is designed with business-continuity and disaster-recovery capabilities, mitigating single-point failure risk via redundant architecture",
+        "detail": "按'查不清就留空'原则，未找到一手重大停机案例，故 zh 仅作定性说明、未编造具体事件；平台灾备能力来自 X-stream FAQ（官网，经检索）",
+        "sources": [
+          {
+            "title": "Saudi Exchange — X-stream INET FAQ（business continuity / disaster recovery）",
+            "url": "https://www.saudiexchange.sa/static/innerpages/XstreamFAQ.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "X-stream INET incorporates rigorous business continuity and disaster recovery arrangements.",
         "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "verified": "2026-08-27",
+        "enum": null
       }
     },
     "costs": {
       "commission_structure": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "经纪佣金由各家会员（经纪商）自行设定，费率不一；部分线上平台（如 Derayah、Al Rajhi 的某些账户）提供零佣金或极低佣金，无统一定价。监管层未设佣金上限",
+        "en": "Brokerage commissions are set by each Exchange Member and vary; some online platforms (e.g. Derayah, certain Al Rajhi accounts) offer zero or very low commissions, with no uniform pricing and no statutory cap",
+        "detail": "佣金为市场化定价，具体费率以各家经纪商公示为准；本结论来自第三方经纪商页面综述，confidence 定为 medium",
+        "sources": [
+          {
+            "title": "Derayah / Al Rajhi Capital 经纪佣金页面（第三方）",
+            "url": "https://www.derayah.com/en",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Brokerage commissions in Saudi are set by individual brokers and may be zero on some platforms.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "exchange_fees": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "交易所交易费约为成交金额的 0.009%（由沙特交易所/Tadawul 收取）",
+        "en": "Exchange trading fee is approximately 0.009% of trade value (collected by Saudi Exchange / Tadawul)",
+        "detail": "费率来自第三方券商手续费综述（sahmcapital）；属交易所端收费，与 CMA 规费、Edaa 结算费、Muqassa 清算费分列",
+        "sources": [
+          {
+            "title": "Sahm Capital — Tadawul trading fees overview（第三方）",
+            "url": "https://sahmcapital.com/en/trading-fees",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Exchange Fee: 0.009% of the traded value.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "clearing_fees": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "清算费约 0.005%（由 Muqassa 中央对手方收取）",
+        "en": "Clearing fee is approximately 0.005% (collected by Muqassa, the central counterparty)",
+        "detail": "费率来自第三方券商手续费综述（sahmcapital）；与结算费（Edaa 0.005%）分列",
+        "sources": [
+          {
+            "title": "Sahm Capital — Tadawul trading fees overview（第三方）",
+            "url": "https://sahmcapital.com/en/trading-fees",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Clearing Fee: 0.005% of the traded value (Muqassa).",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "regulatory_fees": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "监管规费约 0.030%（由资本市场管理局 CMA 收取）；此外相关服务费适用 15% 增值税（VAT）",
+        "en": "Regulatory fee is approximately 0.030% (collected by the Capital Market Authority, CMA); applicable service fees are also subject to 15% VAT",
+        "detail": "费率来自第三方券商手续费综述（sahmcapital）；与交易/清算/结算费并列构成综合交易成本",
+        "sources": [
+          {
+            "title": "Sahm Capital — Tadawul trading fees overview（第三方）",
+            "url": "https://sahmcapital.com/en/trading-fees",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "CMA Fee: 0.030% of the traded value.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "stamp_duty": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "沙特对证券转让不征收印花税（stamp duty）",
+        "en": "Saudi Arabia does not impose stamp duty on securities transfers",
+        "detail": "来自律所/贸易促进机构对市场税费的综述；属无此税项",
+        "sources": [
+          {
+            "title": "HMCO Law Firm — Saudi Arabia capital market taxes（综述，第三方）",
+            "url": "https://www.hmco.com.sa",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "New Zealand Trade & Enterprise — Saudi market profile（第三方）",
+            "url": "https://www.nzte.govt.nz",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "There is no stamp duty on the transfer of securities in Saudi Arabia.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "financial_transaction_tax": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "沙特不对证券交易征收金融交易税（FTT）",
+        "en": "Saudi Arabia does not impose a financial transaction tax (FTT) on securities trades",
+        "detail": "来自 CEPR 对各国 FTT 的清单（第三方综述）；属无此税项",
+        "sources": [
+          {
+            "title": "CEPR — Financial Transaction Taxes around the world（第三方综述）",
+            "url": "https://cepr.org",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Saudi Arabia is not listed among jurisdictions imposing a financial transaction tax.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "capital_gains_tax": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "在沙特市场上市的股票，其资本利得免税（对非居民通过合格渠道投资于上市市场的处置亦豁免）；非居民企业持有非上市沙特公司股权处置的收益按 20% 企业所得税计征",
+        "en": "Capital gains from disposal of shares listed on the Saudi market are tax-exempt (including for non-residents disposing via qualified channels of listed-market holdings); capital gains realised by a non-resident corporate shareholder on disposal of shares in a non-listed Saudi company are subject to 20% corporate income tax",
+        "detail": "上市股票资本利得豁免来自 PwC / taxonimo 税务综述（第三方）；非上市部分适用 20% CIT",
+        "sources": [
+          {
+            "title": "PwC — Saudi Arabia corporate tax / capital gains（第三方综述）",
+            "url": "https://taxsummaries.pwc.com/saudi-arabia",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "taxonimo — Saudi capital gains tax（第三方综述）",
+            "url": "https://taxonimo.com",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Capital gains realised from disposal of shares in Saudi stock companies listed in the Saudi market are tax exempt.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "dividend_withholding_tax": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "向非居民支付的股息按 5% 预提所得税（withholding tax）征收；沙特/GCC 居民股东则就其 zakat（天课，约 2.5%）而非所得税负",
+        "en": "Dividends paid to non-residents are subject to 5% withholding tax; Saudi/GCC resident shareholders are instead subject to zakat (approximately 2.5%) rather than income tax",
+        "detail": "5% WHT 来自 PwC / jurisdb 税务综述（第三方）；属沙特所得税法下股息预提规则",
+        "sources": [
+          {
+            "title": "PwC — Saudi Arabia withholding tax（第三方综述）",
+            "url": "https://taxsummaries.pwc.com/saudi-arabia",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "jurisdb — Saudi dividend withholding（第三方综述）",
+            "url": "https://jurisdb.com",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Dividends distributed to non-residents are subject to a 5% withholding tax.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "implicit_costs_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "除显性费用外，隐性成本主要为买卖价差（bid-ask spread）与市场冲击（market impact）。沙特市场散户参与度高、流动性集中于大盘蓝筹（如 Aramco、SABIC、银行股），中小盘价差可能较宽、冲击成本更高；深度流动性在大盘品种更充足",
+        "en": "Beyond explicit fees, implicit costs are mainly bid-ask spread and market impact. The Saudi market has high retail participation and liquidity concentrated in large-cap blue chips (e.g. Aramco, SABIC, bank stocks); smaller names may show wider spreads and higher impact cost, while deep liquidity is concentrated in large caps",
+        "detail": "属市场微观结构定性判断，结合交易所'MENA 最流动市场'的定性表述与散户结构；无逐笔价差一手统计，confidence 定为 medium",
+        "sources": [
+          {
+            "title": "Tadawul Derivatives Market Brochures（'largest and most liquid in the MENA region'）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/0e1657-e035-4172-a4e6-943c4dfce80d/Tadawul+Derivatives+Market+Brochures.pdf?MOD=AJPERES&CVID=oW9oJ",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "the largest and most liquid in the MENA region.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       }
     },
     "risks": {
@@ -1705,24 +1942,41 @@
         "sources": null
       },
       "political_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "沙特为君主制、政治稳定，正推进'Vision 2030'经济多元化改革；市场面临区域地缘政治风险与油价敏感度，但国家维持稳定且改革导向的监管环境。外资准入已于 2026年2月进一步开放",
+        "en": "Saudi Arabia is a stable monarchy pursuing the 'Vision 2030' economic-diversification reform; the market is exposed to regional geopolitical risk and oil-price sensitivity, but the state maintains a stable, reform-oriented regulatory environment. Foreign access was further liberalised in Feb 2026",
+        "detail": "属宏观/制度定性判断，基于公开改革议程与外资开放事实；非单一事件性风险",
+        "sources": [
+          {
+            "title": "Vision 2030（沙特官方改革议程）",
+            "url": "https://vision2030.gov.sa",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "The CMA Opens the Capital Market to All Categories of Foreign Investors（CMA_N_3974，2026-01-06）",
+            "url": "https://cma.gov.sa/en/MediaCenter/NEWS/Pages/CMA_N_3974.aspx",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Vision 2030 aims to diversify the economy ... The CMA announces the opening of the capital market to all categories of foreign investors as of 1 February 2026.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "liquidity_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "Tadawul 是 MENA 地区规模最大、流动性最高的市场，但流动性高度集中于大盘蓝筹（Aramco、SABIC、主要银行）；中小盘及部分债券/基金流动性较薄，极端行情下可能出现流动性骤降与价差扩大",
+        "en": "Tadawul is the largest and most liquid market in MENA, but liquidity is highly concentrated in large-cap blue chips (Aramco, SABIC, major banks); mid/small-caps and some bonds/funds are thinner, and liquidity can drop sharply with wider spreads in stress conditions",
+        "detail": "集中度风险为市场结构共性判断，结合交易所'MENA 最流动'定性；无逐券流动性一手统计",
+        "sources": [
+          {
+            "title": "Tadawul Derivatives Market Brochures（'largest and most liquid in the MENA region'）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/0e1657-e035-4172-a4e6-943c4dfce80d/Tadawul+Derivatives+Market+Brochures.pdf?MOD=AJPERES&CVID=oW9oJ",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "the largest and most liquid in the MENA region.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "regulatory_change_risk_note": {
         "zh": "2026年2月起取消QFI制度、放开主板外资准入，属近期重大监管变革，详见 regulation.foreign_ownership_limit",
@@ -1741,14 +1995,25 @@
         "detail": null
       },
       "enforcement_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "CMA 拥有执法权，可对重大违反《资本市场法》/实施细则/交易所规则的行为采取暂停交易、取消上市、罚款与制裁等措施；交易所亦可要求发行人补充披露或实施临时停牌",
+        "en": "The CMA holds enforcement powers and may, for material breaches of the CMA Law, its Implementing Regulations or the Exchange Rules, suspend trading, cancel listing, impose fines and sanctions; the Exchange may also require additional disclosure or impose a temporary trading halt",
+        "detail": "执法与暂停/取消上市权见 Listing Rules Article 38 与 CMA 法定职责；属制度性安排",
+        "sources": [
+          {
+            "title": "Listing Rules（Article 38: Power to suspend trading or cancel listing）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/e4bfbba8-4932-4b0c-b405-c922ac56d780/Listing+Rules.pdf?MOD=AJPERES&CVID=pfpotDY",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Capital Market Law（CMA 执法职责）",
+            "url": "https://cma.gov.sa/en/RulesRegulations/Laws/Documents/CapitalMarketLaw.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "The Authority may at any time suspend the trading of securities or cancel their listing as it deems fit ... 2) the issuer fails, in a manner which the Authority considers material, to comply with the Capital Market Law, its Implementing Regulations or the Exchange Rules...",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       }
     }
   }

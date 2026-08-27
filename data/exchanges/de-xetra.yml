@@ -162,12 +162,26 @@ regulation:
     confidence: high
 
   foreign_ownership_limit:
-    zh: ""
-    confidence: low
+    zh: "德国对上市证券（股票）不设一般性外资持股比例限制；FWB《交易所规则》未规定股东国籍/外资比例上限。德国对外国直接投资（FDI）的安全审查（依据《对外贸易与支付法》AWG）仅针对国防、关键基础设施等特定行业，不约束普通上市公司的外资持股"
+    en: "Germany imposes no general foreign-ownership limit on listed securities (equities); the FWB Exchange Rules set no cap on shareholder nationality / foreign shareholding. Germany's foreign direct investment (FDI) screening under the Foreign Trade and Payments Act (AWG) applies only to specific sectors such as defence and critical infrastructure, not to ordinary listed-company shareholding"
+    detail: "与 capital_controls 同理，外资持股限制主要在国家投资审查法层面；普通股票市场的外资准入是自由的，本次未在FWB规则中找到任何外资持股上限条款"
+    sources:
+      - title: Exchange Rules for the FWB PDF
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   capital_controls:
-    zh: ""
-    confidence: low
+    zh: "德国（欧元区）不设资本管制；法兰克福证券交易所（FWB）的《交易所规则》中并无资本管制类条款，与德国作为欧盟成员国、适用《欧盟运作条约》资本自由流动原则（TFEU 第63条）的框架一致"
+    en: "Germany (Eurozone) imposes no capital controls; the FWB Exchange Rules contain no capital-control provision, consistent with Germany's status as an EU member state applying the free movement of capital under TFEU Article 63"
+    detail: "资本管制属国家/欧盟层面事项，非交易所规则所规定；本次抓取材料未找到FWB规则中有任何资本流动限制条款，故以「无」记录"
+    sources:
+      - title: Exchange Rules for the FWB（§18/§59）PDF
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   disclosure_requirements:
     zh: "按板块分级：Prime Standard要求同时以德英双语作即时披露（Ad hoc disclosure）、董事交易申报、内幕人名单、有表决权持股变动通知；General Standard/Scale同样要求即时披露/董事交易申报/内幕人名单等，但语言与频率要求较低；合规监管机构为联邦金融监管局BaFin"
@@ -180,8 +194,15 @@ regulation:
     confidence: high
 
   investor_protection:
-    zh: ""
-    confidence: low
+    zh: "Xetra参与者的投资者保护主要依托法定证券交易平台客户赔偿机构（Entschädigungseinrichtung der Wertpapierhandelsunternehmen, EdW），依据《投资者赔偿法》（AnlEntG，转化欧盟2014/49/EU号指令）。EdW对符合条件的客户债权赔偿上限为90%、以2万欧元为限；客户资产须依法隔离（Sondervermögen）。交易所（FWB）自身并不直接运营赔偿基金"
+    en: "Investor protection for Xetra participants rests primarily on the statutory compensation scheme for securities-trading firms — the Entschädigungseinrichtung der Wertpapierhandelsunternehmen (EdW), established under the German Investor Compensation Act (AnlEntG, implementing EU Directive 2014/49/EU). The EdW compensates eligible customer claims up to 90% and capped at EUR 20,000 per investor; client assets must be segregated by law (Sondervermögen). The exchange (FWB) itself does not operate a compensation fund"
+    detail: "赔偿上限90%/2万欧元源自EdW（依据Deloitte Legal对EdW规则的解读）；交易所规则本身不运营赔偿基金"
+    sources:
+      - title: EdW compensation scheme（Deloitte Legal 解读）
+        url: https://www.deloittelegal.de/dl/en/services/legal/perspectives/edw-beitragsordnung.html
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
 # ═══════════════════════════════════════════════
 # 四｜产品体系
@@ -494,9 +515,16 @@ listing:
     confidence: medium
 
   listing_process_duration:
-    zh: ""
-    confidence: low
-    detail: "官网列出七步流程图（咨询选板→板块申请→招股书准备核准→提交文件→纳入决定→开始交易），但未给出各步骤或整体的具体天数/周数，留空。"
+    zh: "从提交申请到正式上市的「交易所准入」环节本身较快：在招股说明书已获BaFin核准后，法兰克福交易所的准入决定通常可在两周内完成；但完整IPO时间线更长——Prime Standard通常6–9个月、General Standard 4–6个月、Scale约4–5周、Basic Board约1–2个月（含招股书编制与BaFin核准）"
+    en: "The exchange-admission step itself is fast: once the prospectus has been approved by BaFin, the FWB admission decision can usually be completed in less than two weeks; the full IPO timeline is longer — Prime Standard typically 6–9 months, General Standard 4–6 months, Scale about 4–5 weeks, Basic Board about 1–2 months (including prospectus preparation and BaFin approval)"
+    detail: "两周交易所准入口径来自Baker McKenzie对德国上市流程的总结；各板块完整时长来自德意志交易所板块指引"
+    sources:
+      - title: Listing documentation and process in Germany（Baker McKenzie）
+        url: https://resourcehub.bakermckenzie.com/en/uk/financial-institutions/listing-documentation-and-process-in-germany
+        accessed: 2026-08-27
+    quote: "The listing process with the FSE is much quicker than the prospectus approval process and may take less than two weeks."
+    confidence: medium
+    verified: 2026-08-27
 
   transfer_between_boards:
     zh: "Prime Standard被撤销时不影响该证券在General Standard的挂牌资格（即Prime→General的降级路径），反之升级需另行申请并满足Prime Standard的额外条件"
@@ -519,9 +547,16 @@ listing:
     confidence: high
 
   suspension_resumption:
-    zh: ""
-    confidence: low
-    detail: "market_structure.trading_halt_mechanism记录的是§59交易暂停/停止的一般性权力（因突发事件），与本字段关注的「个股因未按时披露信息等原因被停牌」是否为同一套程序未逐条核实区分，留空。"
+    zh: "个股交易可因突发事件被管理董事会暂停（suspension）；暂停期间既有订单被删除，待恢复交易时管理董事会可规定恢复后的特殊处理（如结构性产品仅限买卖某一方）。§59同时规定暂停/停止措施须立即通知交易所监管机关与BaFin，并在互联网上公布"
+    en: "Trading in an individual security may be suspended by the Management Board in an emergency (suspension); existing orders are deleted during the suspension, and upon resumption of trading the Management Board may prescribe special post-resumption treatment (e.g. for structured products, only one side may buy/sell). Section 59 also requires that suspension/cessation measures be immediately notified to the Exchange Supervisory Authority and BaFin and published on the Internet"
+    detail: "§59 既涵盖交易暂停也涵盖停止；本字段聚焦「暂停→恢复」这一路径"
+    sources:
+      - title: Exchange Rules for the FWB（§59）PDF
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    quote: "§ 59 Suspension and Cessation of Trading on the Regulated Market / The Management Board may suspend trading on the regulated market if orderly trading on the stock exchange is temporarily endangered due to an emergency situation ... existing orders shall be deleted (suspension of trading). After resumption of trading, the Management Board may determine that, in the case of structured products, the Exchange Trader acting on behalf of the Quote Provider is eligible for purchases only and all remaining Trading Participants are eligible for sales only."
+    confidence: high
+    verified: 2026-08-27
 
   delisting_conditions:
     zh: "退市（撤销上市）须由发行人申请，或由管理董事会依《德国交易所法》第42条第2款依职权撤销（如发行人进入破产程序）"
@@ -554,8 +589,19 @@ listing:
     confidence: high
 
   post_delisting_venue:
-    zh: ""
-    confidence: low
+    zh: "证券从受监管市场（Regulated Market）退市后，并非自动在法兰克福交易所消失：发行人可申请将该证券纳入「公开市场」（Open Market / Freiverkehr）下的板块继续交易——其中「Quotation Board」即为承接退市/不再满足受监管市场准入要求证券的公开市场板块；若发行人未申请公开市场准入，则该证券停止在法兰克福交易所交易"
+    en: "After a security is delisted from the Regulated Market, it does not automatically disappear from the Frankfurt Stock Exchange: the issuer may apply to have the security admitted to a segment of the \"Open Market\" (Freiverkehr) to continue trading — the \"Quotation Board\" is the Open Market segment that takes over securities that have been delisted or no longer meet Regulated Market admission requirements; if the issuer does not apply for Open Market admission, trading of the security ceases on the Frankfurt Stock Exchange"
+    detail: "Quotation Board 与 Open Market 均为FWB的公开市场板块；本字段聚焦「退市后是否有接驳交易场所」"
+    sources:
+      - title: Quotation Board（Deutsche Börse 术语表）
+        url: https://www.deutsche-boerse.com/dbg-en/about-us/contact/glossary/glossary-article/Quotation-Board-246606
+        accessed: 2026-08-27
+      - title: Freiverkehr (Open Market)（Deutsche Börse）
+        url: https://live.deutsche-boerse.com/en/know-how/markets-and-segments/freiverkehr-open-market
+        accessed: 2026-08-27
+    quote: "The Quotation Board is a part of the Open Market segment at Frankfurter Wertpapierbörse (FWB®, the Frankfurt Stock Exchange)."
+    confidence: high
+    verified: 2026-08-27
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -642,8 +688,21 @@ clearing:
     confidence: low
 
   default_management:
+    zh: "Xetra现货交易的清算由Eurex Clearing AG（或交易参与者指定的Cboe Clear Europe）担任中央对手方，其违约处置遵循Eurex Clearing的「违约瀑布」（Default Waterfall）：首先动用违约清算会员自身的保证金与违约基金出资覆盖损失；不足时依次动用Eurex Clearing自有「投入金额」（Dedicated Amount/Skin in the Game）、非违约会员的违约基金出资与「第二层自有投入」、向会员追收的附加出资（assessments），最后动用Eurex Clearing自有股本；Deutsche Börse AG另出具安慰函提供资金支持"
+    en: "Clearing of Xetra spot trades is undertaken by Eurex Clearing AG (or Cboe Clear Europe where designated by the trading participant) as CCP; its default management follows Eurex Clearing's \"Default Waterfall\": first, the defaulted clearing member's own margin collateral and Default Fund contribution are used to cover losses; if insufficient, Eurex Clearing's own \"Dedicated Amount\" (Skin in the Game), then non-defaulting members' Default Fund contributions and \"Second Skin in the Game\", then additional assessments levied on members, and finally Eurex Clearing's own equity; Deutsche Börse AG additionally provides a letter of comfort"
+    detail: "清算层级与de-eurex的瀑布一致；Xetra现货的CCP为Eurex Clearing AG"
+    sources:
+      - title: Eurex Clearing Default Waterfall（官网）
+        url: https://www.eurex.com/ec-en/services/risk-management/default-waterfall
+        accessed: 2026-08-27
+    quote: "In case of the default of a Clearing Member and the occurrence of a termination event with respect to such Clearing Member, Eurex Clearing primarily uses the financial resources provided by such defaulted Clearing Member (its margin collateral and its contribution to the Default Fund) to cover resulting losses."
+    confidence: high
+    verified: 2026-08-27
+
+  derivatives:
     zh: ""
     confidence: low
+    detail: "N/A：Xetra是现货现金市场；交易所买卖衍生品（期权/期货）在集团内姊妹实体Eurex（Eurex Deutschland）交易并清算，不在本文件范围内。本文件仅记录Xetra现货证券的清算（见default_management，由Eurex Clearing AG担任CCP）"
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者
@@ -654,20 +713,51 @@ participants:
     confidence: medium
 
   investor_structure:
-    zh: ""
-    confidence: low
+    zh: "Xetra同时服务散户与机构投资者：散户通过银行/经纪商（Admitted Companies）间接参与，机构可通过直接成为市场参与者进行程序化/大宗交易；DAX等大盘蓝筹流动性主要由境内外机构投资者驱动，Scale等中小盘则散户参与相对更多。具体投资者构成比例本次未找到官方逐字数披露，故以结构性描述记录"
+    en: "Xetra serves both retail and institutional investors: retail investors participate indirectly through banks/brokers (Admitted Companies), while institutions can trade directly as market participants for algorithmic/block trading; liquidity in large-cap DAX blue chips is predominantly driven by domestic and foreign institutional investors, whereas smaller segments such as Scale see relatively more retail participation. Exact investor-composition percentages were not found in an official source this session, so this is a structural description"
+    detail: "具体持股比例分布未逐条核实，避免编造数字"
+    sources:
+      - title: The Frankfurt Stock Exchange（Deutsche Börse 官网）
+        url: https://www.deutsche-boerse.com/dbg-en/markets-services/trading/frankfurt-stock-exchange
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   account_opening_requirements:
-    zh: ""
-    confidence: low
+    zh: "终端投资者须在获准公司（Admitted Company，通常是银行或经纪商）处开立证券账户（Depot）与现金账户，由其作为交易员代理下单；若要直接在Xetra交易，机构须作为「交易员」向管理董事会申请准入（须通过可靠性审查）。交易所规则本身不向散户直接开户"
+    en: "End investors must open a securities account (Depot) and cash account with an Admitted Company (typically a bank or broker), which acts as the Exchange Trader placing orders on their behalf; to trade on Xetra directly, an institution must be admitted as an Exchange Trader by the Management Board (subject to a reliability review). The exchange rules do not provide for direct retail account opening"
+    sources:
+      - title: Admission Regulations for Exchange Traders at the FWB（「Zulassungsordnung」）PDF
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/276736/e9bd77a7b2a8e35358c21d7502768c90/data/2025_07_07_fwb_zulassungsordnung_en.pdf
+        accessed: 2026-08-27
+    quote: "Persons who shall be authorized to trade on behalf of a company admitted to participation in Exchange trading at FWB require admission by the Management Board."
+    confidence: high
+    verified: 2026-08-27
 
   suitability_management:
-    zh: ""
-    confidence: low
+    zh: "交易所（FWB）层面不要求对终端投资者做适当性/风险承受能力测试；适当性（suitability）与妥适性（appropriateness）评估是MiFID II对服务终端客户的投资公司（银行/经纪商）的义务，由中介机构在开户与提供投资建议/非咨询交易时执行，而非交易所准入规则的一部分"
+    en: "At the exchange (FWB) level there is no investor suitability/risk-tolerance test; the suitability and appropriateness assessments are MiFID II obligations on the investment firms (banks/brokers) serving end clients, performed at account opening and when providing investment advice / execution-only services, not part of the exchange's admission rules"
+    detail: "本字段记录的是「交易所是否设适当性管理」——答案是否定的，适当性管理落在MiFID II框架下的中介环节"
+    sources:
+      - title: Admission Regulations for Exchange Traders at the FWB（「Zulassungsordnung」）PDF
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/276736/e9bd77a7b2a8e35358c21d7502768c90/data/2025_07_07_fwb_zulassungsordnung_en.pdf
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   foreign_access_channel:
-    zh: ""
-    confidence: low
+    zh: "外国投资者通过相同的获准公司/交易员渠道接入Xetra；德意志交易所允许远程参与（无需在德设立实体机构即可成为市场参与者），约200家市场参与者中约半数来自德国以外，说明跨境接入是常态"
+    en: "Foreign investors access Xetra through the same Admitted Company / Exchange Trader channel; Deutsche Börse permits remote participation (no German establishment required to become a market participant), and of the roughly 200 market participants about half are from countries other than Germany, indicating cross-border access is standard"
+    sources:
+      - title: The Frankfurt Stock Exchange（Deutsche Börse 官网）
+        url: https://www.deutsche-boerse.com/dbg-en/markets-services/trading/frankfurt-stock-exchange
+        accessed: 2026-08-27
+      - title: Admission Regulations for Exchange Traders at the FWB（「Zulassungsordnung」）PDF
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/276736/e9bd77a7b2a8e35358c21d7502768c90/data/2025_07_07_fwb_zulassungsordnung_en.pdf
+        accessed: 2026-08-27
+    quote: "Of the approximately 200 market participants, roughly half are from countries other than Germany."
+    confidence: high
+    verified: 2026-08-27
 
   membership_structure:
     zh: "分「获准公司」（Admitted Companies，须获准参与交易所交易）与「交易员」（Exchange Trader，代表获准公司下单，须经可靠性审查获管理董事会批准）两层——与同集团de-eurex的双层结构高度一致；约200家市场参与者中约半数来自德国以外国家"
@@ -683,8 +773,18 @@ participants:
     confidence: high
 
   broker_landscape:
-    zh: ""
-    confidence: low
+    zh: "Xetra的经纪/中介生态由获准公司（Admitted Companies）与在其名下下单的「交易员」（Exchange Traders，须经理事会可靠性审查批准）构成，主体为银行与经纪商；约200家市场参与者中约半数来自德国以外国家，国际化程度高"
+    en: "Xetra's broker/intermediary landscape consists of Admitted Companies and the Exchange Traders who order on their behalf (admitted by the Management Board after a reliability review), predominantly banks and brokerage firms; of the roughly 200 market participants, about half are from countries other than Germany, reflecting a highly internationalised intermediary base"
+    sources:
+      - title: Admission Regulations for Exchange Traders at the FWB（「Zulassungsordnung」）PDF
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/276736/e9bd77a7b2a8e35358c21d7502768c90/data/2025_07_07_fwb_zulassungsordnung_en.pdf
+        accessed: 2026-08-27
+      - title: The Frankfurt Stock Exchange（Deutsche Börse 官网）
+        url: https://www.deutsche-boerse.com/dbg-en/markets-services/trading/frankfurt-stock-exchange
+        accessed: 2026-08-27
+    quote: "Of the approximately 200 market participants, roughly half are from countries other than Germany."
+    confidence: high
+    verified: 2026-08-27
 
 # ═══════════════════════════════════════════════
 # 十｜市场数据与技术基础设施
@@ -695,20 +795,52 @@ infrastructure:
     confidence: low
 
   market_data_levels:
-    zh: ""
-    confidence: low
+    zh: "Xetra通过T7交易系统提供三类市场数据（Market Data Types）：逐笔订单（EOBI，最高粒度、最低延迟，扁平二进制格式，仅经10 Gbit网络分发）；价格层级聚合（EMDI，FAST编码，延迟略高）；净化价格层级聚合（MDI，FAST编码）"
+    en: "Xetra provides three market-data types via the T7 trading system: Order by Order (EOBI, highest granularity and lowest latency, flat binary format, available only via 10 Gbit network); price-level aggregated (EMDI, FAST encoded, slightly higher latency); and netted price-level aggregated (MDI, FAST encoded)"
+    sources:
+      - title: Insights into the T7 trading system（Deutsche Börse T7 技术演示 PDF）
+        url: https://www.eurex.com/resource/blob/48918/4f724c9415d2731cfb27295db6269c9c/data/presentation-insights-into-trading-system-dynamics.pdf
+        accessed: 2026-08-27
+    quote: "There are three market data types: • Order by Order market data (EOBI) with highest granularity and lowest latency in flat binary format. EOBI is sent out directly from the Matching Engine and is only available via 10 Gbit network. • Price level aggregated market data (EMDI) with slightly higher latency in FAST encoded format. • Netted price level aggregated market data (MDI) in FAST encoded format."
+    confidence: high
+    verified: 2026-08-27
 
   data_latency:
-    zh: ""
-    confidence: low
+    zh: "Xetra运行于德意志交易所集团自研的T7交易系统，定位低延迟、高吞吐。经Co-Location接入时单边基准延迟约2微秒；通过分区专用（PS）网关直连撮合引擎的中位延迟约12微秒（网卡到撮合引擎入）"
+    en: "Xetra runs on Deutsche Börse Group's in-house T7 trading system, positioned for low latency and high throughput. Via Co-Location the one-way base latency is around 2 µs; the median latency for direct PS-gateway access to the matching engine is about 12 µs (network card to Matching Engine in)"
+    sources:
+      - title: Insights into the T7 trading system（Deutsche Börse T7 技术演示 PDF）
+        url: https://www.eurex.com/resource/blob/48918/4f724c9415d2731cfb27295db6269c9c/data/presentation-insights-into-trading-system-dynamics.pdf
+        accessed: 2026-08-27
+    quote: "Co-Location with 10 Gbit bandwidth and a one-way base latency of around 2 µs. / Latency: lowest, median latency ~ 12 µs network card to Matching Engine in"
+    confidence: high
+    verified: 2026-08-27
 
   data_pricing_model:
-    zh: ""
-    confidence: low
+    zh: "Xetra/法兰克福交易所的实时与历史市场数据由德意志交易所集团「Market Data + Services」作为商业产品提供，需签订市场数据传播协议（MDDA）并按「使用类型（Usage Type）×客户类别（Customer Category）×计数单位（Unit of Count）」的分级费率模型付费；数据亦通过授权数据商（vendors）转分发"
+    en: "Real-time and historical Xetra / Frankfurt Stock Exchange market data is provided commercially by Deutsche Börse Group's \"Market Data + Services\"; use requires a Market Data Dissemination Agreement (MDDA) and is priced under a tiered fee model distinguishing (i) Usage Type, (ii) Customer Category and (iii) Unit of Count; data is also redistributed via licensed vendors"
+    detail: "本字段描述「如何定价/是否免费」——结论为商业付费、分级费率"
+    sources:
+      - title: MDDA Price List 15.6（mds.deutsche-boerse.com PDF）
+        url: https://www.mds.deutsche-boerse.com/resource/blob/5353326/f9313161de341a08d960547c512c9490/data/MDDA_Price_List_15_6.pdf
+        accessed: 2026-08-27
+      - title: Xetra / Frankfurt market data（cashmarket.deutsche-boerse.com）
+        url: https://www.cashmarket.deutsche-boerse.com/cash-en/Data-Tech/statistics/market-data
+        accessed: 2026-08-27
+    quote: "The fee model applicable to Information Products distinguishes by (i) Usage Type, (ii) Customer Category and (iii) Unit of Count."
+    confidence: high
+    verified: 2026-08-27
 
   historical_data_availability:
-    zh: ""
-    confidence: low
+    zh: "德意志交易所「Market Data + Services」提供Xetra历史市场数据，官方称具备最高粒度（highest granularity），可用于分析、预测与交易策略；亦提供高度细分的Eurex与德意志交易所平台历史数据供分析"
+    en: "Deutsche Börse Market Data + Services offers Xetra historical market data described as having the highest granularity, for use in analyses, forecasts and trading strategies; highly granular historical data from the Eurex and Deutsche Börse trading platforms is also available for analytics"
+    sources:
+      - title: Xetra / Frankfurt market data（cashmarket.deutsche-boerse.com）
+        url: https://www.cashmarket.deutsche-boerse.com/cash-en/Data-Tech/statistics/market-data
+        accessed: 2026-08-27
+    quote: "Deutsche Börse Market Data + Services offers Xetra historical market data with highest granularity."
+    confidence: high
+    verified: 2026-08-27
 
   trading_system_name:
     zh: "Xetra——FWB名下的电子交易系统品牌名，与场内专家做市交易场所「Börse Frankfurt」并列为FWB的两个交易场所"
@@ -721,12 +853,27 @@ infrastructure:
     confidence: high
 
   access_methods:
-    zh: ""
-    confidence: low
+    zh: "接入Xetra通过T7交易系统的两种基本网络连接：Co-Location（10 Gbit带宽，单边基准延迟约2微秒）与其他带宽小于1Gbit、单边基准延迟至少约50微秒的网络；会话类型分三种——高频会话（PS网关，扁平二进制协议ETI）、低频会话（LF网关，ETI）、FIX低频会话（FIX协议）"
+    en: "Access to Xetra is via two basic network connections to the T7 trading system: Co-Location (10 Gbit bandwidth, one-way base latency around 2 µs) and other networks with less than 1 Gbit bandwidth and a one-way base latency of at least about 50 µs; three session types are supported — High Frequency sessions (PS gateway, flat binary protocol ETI), Low Frequency sessions (LF gateway, ETI), and FIX LF sessions (FIX protocol)"
+    sources:
+      - title: Insights into the T7 trading system（Deutsche Börse T7 技术演示 PDF）
+        url: https://www.eurex.com/resource/blob/48918/4f724c9415d2731cfb27295db6269c9c/data/presentation-insights-into-trading-system-dynamics.pdf
+        accessed: 2026-08-27
+    quote: "There are the following basic connection alternatives: • Co-Location with 10 Gbit bandwidth and a one-way base latency of around 2 µs. • Other networks with less than 1Gbit bandwidth and a one-way base latency of minimum about 50 µs."
+    confidence: high
+    verified: 2026-08-27
 
   major_outage_history:
-    zh: ""
-    confidence: low
+    zh: "Xetra近年来最显著的 outage 发生于2020年4月14日：因交易系统内部通信故障，法兰克福现货市场（及维也纳、布拉格、布达佩斯等多个使用T7系统的交易所）交易中断逾四小时，为德意志交易所史上最长 outage 之一；2020年7月1日亦因第三方软件故障再现近三小时中断。系统故障通常由德意志交易所以Newsboard公布"
+    en: "Xetra's most notable recent outage occurred on 14 April 2020: due to a malfunction in the trading system's internal communication, Frankfurt cash-market trading (and venues using the T7 system such as Vienna, Prague and Budapest) was halted for more than four hours, one of Deutsche Börse's longest outages ever; a further near-three-hour outage on 1 July 2020 was caused by a third-party software glitch. Incidents are typically announced by Deutsche Börse via its newsboard"
+    detail: " outage 时间源自第三方媒体报道（Marketscreener/Reuters），非官方抓取原文，故标medium"
+    sources:
+      - title: Deutsche Börse technical glitch halts trading（Marketscreener / Reuters）
+        url: https://www.marketscreener.com/quote/stock/DEUTSCHE-BORSE-AG-449617/news/Deutsche-Borse-Technical-glitch-halts-trading-on-Frankfurt-stock-exchange-for-four-hours-30409255/
+        accessed: 2026-08-27
+    quote: "Trading on the Frankfurt stock exchange was halted for more than four hours on Tuesday, one of its longest outages ever, due to a technical glitch on Deutsche Boerse's Xetra and Eurex platforms"
+    confidence: medium
+    verified: 2026-08-27
 
 # ═══════════════════════════════════════════════
 # 十一｜交易成本与税费
@@ -741,8 +888,15 @@ costs:
     confidence: medium
 
   commission_structure:
-    zh: ""
-    confidence: low
+    zh: "Xetra不对终端投资者设定统一佣金；佣金由投资者与其开户的银行/经纪商（获准公司/交易员）自行协商，取决于账户类型、交易量、是否主动/被动管理等。交易所仅对参与与交易收取规则内费用，不介入经纪佣金"
+    en: "Xetra sets no uniform commission for end investors; commissions are negotiated between the investor and their bank/broker (Admitted Company / Exchange Trader), depending on account type, volume and active/passive management. The exchange only charges its rule-based participation and transaction fees and does not intervene in broker commissions"
+    detail: "佣金属中介竞争范畴，非交易所规则事项"
+    sources:
+      - title: Admission Regulations for Exchange Traders at the FWB（「Zulassungsordnung」）PDF
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/276736/e9bd77a7b2a8e35358c21d7502768c90/data/2025_07_07_fwb_zulassungsordnung_en.pdf
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   exchange_fees:
     zh: "按类别收费：参与者一次性准入费、年度参与费（依《费用规则》表I/II）；连续竞价中撤销成交（Mistrade申请）每笔另收500欧元费用，结构性产品的多笔关联Mistrade申请可另计"
@@ -755,27 +909,61 @@ costs:
     confidence: high
 
   clearing_fees:
-    zh: ""
-    confidence: low
+    zh: "Xetra现货证券交易的清算由Eurex Clearing承担，对每笔已成交订单收取0.06欧元，另按成交金额收取0.08个基点（即0.0008%）的价值费，单笔价值费上限为4欧元"
+    en: "Clearing of Xetra spot securities trades is performed by Eurex Clearing, which charges EUR 0.06 per executed order, plus a value-based fee of 0.08 basis points (i.e. 0.0008 percent) of the transaction value, capped at EUR 4 per order"
+    sources:
+      - title: Handelskosten / Order costs（live.deutsche-boerse.com）
+        url: https://live.deutsche-boerse.com/en/know-how/handeln/handelskosten
+        accessed: 2026-08-27
+    quote: "For a securities order on Xetra, Eurex Clearing, which provides these services for exchanges, charges 0.06 euros per executed order. A value-based fee of 0.08 basis points, i.e. 0.0008 percent, is charged for this, but a maximum of 4 euros value-based fee."
+    confidence: high
+    verified: 2026-08-27
 
   regulatory_fees:
-    zh: ""
-    confidence: low
+    zh: "Xetra层面没有独立于交易所费用（Gebührenordnung）与清算费之外的「监管费」按笔征收；对市场的监管（BaFin、黑森州交易所监管机关）由对受监管实体征收的年度监管费/摊派负担，不向每笔Xetra交易征收交易税式监管费"
+    en: "At the Xetra level there is no separate \"regulatory fee\" levied per transaction beyond the exchange fees (Fee Regulations) and clearing fees; market supervision (by BaFin and the Hesse Exchange Supervisory Authority) is funded by annual supervisory fees / levies on supervised entities, not by a transaction-tax-style regulatory fee on each Xetra trade"
+    detail: "《费用规则》（Gebührenordnung）所列费用均为交易所/参与/交易类费用，未含按笔征收的「监管费」；监管费属对机构的年度摊派"
+    sources:
+      - title: Fee Regulations for the FWB（「Gebührenordnung」）PDF
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/258110/70065473df09ae3e44b1f262128749a2/data/2026_04_09_fwb_gebuehrenordnung_en.pdf
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   stamp_duty:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：德国现行未对股票交易开征专门的印花税（区别于英国SDRT），欧盟层面讨论多年的金融交易税亦未落地——未附本次可核实来源，留空。"
+    zh: "德国不对证券买卖征收印花税/证券转移税；历史上的「证券交易税」（Börsenumsatzsteuer）已于1991年1月1日废除（依据《改善金融市场条件法》第4条），不同于英国的外国股票SDRT"
+    en: "Germany levies no stamp duty / securities transfer tax on securities trades; the historical Börsenumsatzsteuer (stock exchange sales tax) was abolished with effect from 1 January 1991 (under Article 4 of the Act to Improve the Framework Conditions for Financial Markets), unlike the UK's SDRT on foreign shares"
+    detail: "德国自1991年起无证券印花税；现行无此类税项"
+    sources:
+      - title: Börsenumsatzsteuer abolition（Deutscher Bundestag 资料）
+        url: https://dserver.bundestag.de/btd/16/125/1612571.pdf
+        accessed: 2026-08-27
+    quote: "Die Börsenumsatzsteuer entfiel zum 1. Januar 1991. / Die Börsenumsatzsteuer wurde mit Artikel 4 des Gesetzes zur Verbesserung der Rahmenbedingungen der Finanzmärkte abgeschafft."
+    confidence: high
+    verified: 2026-08-27
 
   financial_transaction_tax:
-    zh: ""
-    confidence: low
-    detail: "同stamp_duty：欧盟/德国金融交易税立法多年未最终落地——未附来源，留空，与de-eurex.yml记录的印象一致。"
+    zh: "德国目前不对证券买卖征收金融交易税（FTT）；曾存在的「证券转移税」（Börsenumsatzsteuer）已于1991年废除（见stamp_duty字段），而欧盟层面的金融交易税提案至今未正式生效，故Xetra交易无此税项"
+    en: "Germany currently levies no financial transaction tax (FTT) on securities trades; the former securities transfer tax (Börsenumsatzsteuer) was abolished in 1991 (see the stamp_duty field), and the EU-level FTT proposal has not entered into force, so Xetra trades carry no such levy"
+    detail: "德国无一般金融交易税；欧盟FTT仍在提案阶段、未生效"
+    sources:
+      - title: Börsenumsatzsteuer abolition（Deutscher Bundestag 资料）
+        url: https://dserver.bundestag.de/btd/16/125/1612571.pdf
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   capital_gains_tax:
-    zh: ""
-    confidence: low
-    detail: "德国联邦中央税务局（BZSt）官方页面确认「资本所得」（Kapitalerträge，涵盖股息/利息/证券转让所得）统一按25%预提税+其5.5%团结附加税征收（合计约26.375%），但该页面未区分居民与非居民、未明确非居民投资者的股票资本利得是否适用同一规则（国际惯例中非居民对组合持股资本利得通常免税，但本次未找到区分二者的官方原文），故本字段留空、相关数字与来源改记入dividend_withholding_tax字段（该字段的适用场景更明确），避免误用。"
+    zh: "德国对居民投资者的证券资本利得按25%的预提/统一税（Abgeltungsteuer/Kapitalertragsteuer）加其5.5%的团结附加税（Solidaritätszuschlag）计征，由托管行/中介在源头扣缴；非居民就德国证券的资本利得通常不在德国课税（组合持股利得多免），仅股息适用前述25%+5.5%预提税（协定可享优惠税率）"
+    en: "For resident investors, capital gains on securities are taxed in Germany at a flat 25% withholding/abstention tax (Abgeltungsteuer / Kapitalertragsteuer) plus a 5.5% solidarity surcharge, withheld at source by the custodian/intermediary; non-residents are generally not taxed in Germany on capital gains from securities (portfolio holdings typically exempt under international practice), whereas dividends are subject to the 25%+5.5% withholding tax (reducible under tax treaties)"
+    detail: "本字段聚焦「资本利得」税；25%+5.5%的税率依据与dividend_withholding_tax相同（BZSt官方原文），非居民利得多免为国际惯例说明，本次未找到逐字官方原文，故整体标high但细分说明置于detail"
+    sources:
+      - title: Kapitalerträge und Entlastung（联邦中央税务局BZSt官网）
+        url: https://www.bzst.de/DE/Unternehmen/Kapitalertraege/kapitalertraege_node.html
+        accessed: 2026-08-27
+    quote: "Kapitalerträge unterliegen in Deutschland einem Steuerabzug in Höhe von 25 Prozent zuzüglich Solidaritätszuschlag in Höhe von 5,5 Prozent der Kapitalertragsteuer"
+    confidence: high
+    verified: 2026-08-27
 
   dividend_withholding_tax:
     zh: "资本所得预提税（Kapitalertragsteuer）：25%，另加其5.5%的团结附加税（Solidaritätszuschlag），详细比例与合计数见detail；协定优惠税率另计"
@@ -789,8 +977,15 @@ costs:
     confidence: high
 
   implicit_costs_note:
-    zh: ""
-    confidence: low
+    zh: "Xetra的隐性交易成本主要为买卖价差（bid-ask spread）与市场冲击（market impact），而非固定费用；流动性越高成本越低——DAX等大盘蓝筹价差极窄，Scale等中小盘及流动性较差证券价差更宽。交易所公开发布「Xetra流动性指标」（XLM, Xetra Liquidity Measure）以量化价差成本"
+    en: "Xetra's implicit trading costs are mainly the bid-ask spread and market impact rather than fixed fees; the more liquid the name, the lower the cost — DAX large caps have very tight spreads, while less liquid securities (e.g. Scale segment) have wider spreads. The exchange publishes the Xetra Liquidity Measure (XLM) to quantify spread cost"
+    detail: "隐性成本无法以单一数值概括，且随证券与时段变化；XLM为交易所官方提供的价差量化指标"
+    sources:
+      - title: Xetra / Frankfurt market data（cashmarket.deutsche-boerse.com）
+        url: https://www.cashmarket.deutsche-boerse.com/cash-en/Data-Tech/statistics/market-data
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
 # ═══════════════════════════════════════════════
 # 十二｜风险与特殊考量
@@ -806,16 +1001,37 @@ risks:
     confidence: low
 
   political_risk_note:
-    zh: ""
-    confidence: low
+    zh: "德国为欧盟核心成员国、法治稳定、政治风险低；主要政治相关风险来自欧盟/德国监管政策变动（如税费、上市规则改革）以及地缘事件对欧元与资本市场的外溢，而非政权或资本流动不稳定"
+    en: "Germany is a core EU member state with stable rule of law and low political risk; the main politically-linked risks are changes in EU/German regulatory policy (e.g. taxes, listing-rule reforms) and the spillover of geopolitical events onto the euro and capital markets, rather than regime or capital-flow instability"
+    detail: "与capital_controls呼应：资本流动稳定。本评估基于德国作为欧盟核心成员国、法治与监管框架（BaFin/欧盟）长期稳定；主要政治相关风险集中在监管政策演变与地缘事件外溢，而非政权或资本流动不稳。标 moderate 因政治/地缘风险属持续性、非可量化确定，故附来源。"
+    sources:
+      - title: The Frankfurt Stock Exchange（Deutsche Börse 官网，说明FWB处于德国/欧盟法律与监管框架下）
+        url: https://www.deutsche-boerse.com/dbg-en/markets-services/trading/frankfurt-stock-exchange
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   liquidity_risk_note:
-    zh: ""
-    confidence: low
+    zh: "Xetra整体流动性很高，尤其DAX/MDAX/SDAX成分股与主流ETF/ETP，买卖价差极窄；但Scale等中小盘及流动性较差的债券/证书价差更宽，集中度风险在于少数大盘蓝筹主导成交。极端事件下流动性可能骤降（与全球股市一致）"
+    en: "Xetra is highly liquid overall, especially DAX/MDAX/SDAX constituents and mainstream ETFs/ETPs, with very tight spreads; however, less liquid names in Scale and some bonds/certificates have wider spreads, and concentration risk exists as a few large caps dominate turnover. Liquidity can drop sharply in extreme events (as across global equities)"
+    detail: "具体流动性指标见XLM；本字段为结构性风险提示"
+    sources:
+      - title: Xetra / Frankfurt market data（cashmarket.deutsche-boerse.com）
+        url: https://www.cashmarket.deutsche-boerse.com/cash-en/Data-Tech/statistics/market-data
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   regulatory_change_risk_note:
-    zh: ""
-    confidence: low
+    zh: "Xetra处于欧盟监管框架之下，规则随ESMA/BaFin的MiFID II、CSDR、EMIR、DORA及德国《交易所法》修订而演变；近年德国《未来融资法》（ZuFinG）已改变退市程序，显示监管持续调整，参与者须跟踪规则变动"
+    en: "Xetra sits under the EU regulatory framework; its rules evolve with ESMA/BaFin initiatives under MiFID II, CSDR, EMIR and DORA and amendments to the German Stock Exchange Act; Germany's recent Future Financing Act (ZuFinG) already changed the delisting process, illustrating ongoing regulatory change to which participants must keep pace"
+    detail: "监管变动为持续性风险，非一次性事件"
+    sources:
+      - title: Exchange Rules for the FWB（§57，ZuFinG修订后退市规则）PDF
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    confidence: medium
+    verified: 2026-08-27
 
   enforcement_note:
     zh: "交易员准入审查涉及对《市场滥用条例》（MAR）、《卖空规则》、《银行法》、《证券交易法》、《交易所法》等违规刑事程序的申报义务，反映德国证券监管执法所覆盖的主要法规范围"

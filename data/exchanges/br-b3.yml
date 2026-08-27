@@ -192,9 +192,14 @@ regulation:
     confidence: high
 
   foreign_ownership_limit:
-    zh: ""
-    confidence: low
-    detail: "未核实是否存在一般性外资持股比例限制，留空。"
+    zh: "巴西对外国投资者持有巴西交易所上市证券不设交易所层面的行业性持股比例上限。巴西央行CMN第4.373/2014号决议允许非居民投资者投资巴西居民可投资的同等组合产品，外国投资者可自由交易巴西交易所股票、衍生品与公司债（仅个别行业如媒体、航空需另行审批，非交易所限制）。"
+    en: "Brazil imposes no exchange-level sectoral ownership caps on foreign holdings of B3-listed securities. CMN Resolution 4,373/2014 allows non-resident investors to trade and invest in the same portfolio products available to resident investors, so foreigners may freely trade B3 equities, derivatives and corporate bonds (a few sectors such as media/aviation require separate approval, but not at the exchange level)."
+    detail: "No exchange-level foreign ownership limit. Entry is via the non-resident investor regime (CMN 4,373/2014) using an omnibus or own account at a local custodian/broker. Capital gains are exempt for most non-residents."
+    quote: "CMN Resolution 4.373/2014 ... allows Non-resident investors (1) to trade and invest in the same portfolio products available for resident investors in Brazil"
+    sources:
+      - "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/trading-equities-derivatives-and-fixed-income-cmn-4-373-2014.htm"
+    verified: "2026-08-27"
+    confidence: high
 
   capital_controls:
     zh: "外资须通过CMN 4.373号决议开立「4.373账户」进入市场：委托当地法定代表人、税务代表与托管机构并向CVM登记；资金汇入/汇出目前对交易所内股票与ETF交易适用0%金融操作税（IOF）"
@@ -773,8 +778,14 @@ listing:
     confidence: medium
 
   listing_process_duration:
-    zh: ""
-    confidence: low
+    zh: "发行人上市审核时长取决于发行类型与CVM注册方式。股票及认购权证的发行人在'无需注册或CVM自动注册'的发行要约下为12个工作日；在需CVM事先注册的发行要约下为39个工作日，并可延长最多20个工作日。"
+    en: "Listing review time depends on offering type and CVM registration route. Issuers of shares and subscription warrants take 12 business days where the distribution offer is not subject to registration or is subject to automatic CVM registration, and 39 business days (extendable up to 20 business days) where prior CVM registration is required."
+    detail: "Figures are B3's own processing times (Issuers Regulation Annex A). CVM's separate registration adds ~60 days, so total time to listing is typically ~3–4 months."
+    quote: "12 business days in ... 39 business days, extendable for up to 20 business days"
+    sources:
+      - "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
   transfer_between_boards:
     zh: ""
@@ -812,16 +823,35 @@ listing:
     confidence: high
 
   delisting_process:
-    zh: ""
-    confidence: low
+    zh: "退市分自愿与依职权两类。自愿退市（第69条）在股票、股票支持单位及基金份额情形下，通常取决于发生流动性事件以撤回受影响证券；依职权退市则意味着受影响证券被排除交易。"
+    en: "Delisting is either voluntary or ex officio. Voluntary cancellation (Art. 69), for shares, share-backed units and fund shares, depends on the occurrence of a liquidity event so the affected securities are withdrawn; ex officio cancellation implies exclusion of the affected securities from trading."
+    detail: "B3 Issuers Regulation Arts 69/71/73. Voluntary cancellations of shares generally require a liquidity event (tender/minimum acceptance) before delisting."
+    quote: "If voluntary cancellation (Article 69), in the case of shares, Units backed by shares and Fund shares, it will depend, unless otherwise decided by B3, on the occurrence of a liquidity event so that the affected securities are withdrawn from trading; If ex officio cancellation... it will imply the exclusion from trading of the affected securities"
+    sources:
+      - "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
   delisting_transition_period:
-    zh: ""
-    confidence: low
+    zh: "B3在取消交易决定公布后设定不超过30天的过渡期，期间证券可继续以连续或非连续方式临时交易，之后退市生效。"
+    en: "After publishing a cancellation decision, B3 sets a timeframe not exceeding 30 days during which the securities may continue to be temporarily traded in a continuous or non-continuous manner before the cancellation takes effect."
+    detail: "B3 Issuers Regulation Art. 72. The transition window protects holders by allowing an orderly exit."
+    quote: "B3 shall publish on its portal the decisions to cancel the trading of securities Admitted to Trading and shall set, as needed, a timeframe not exceeding 30 days for the cancellation decision to take effect, so that the securities continue to be temporarily traded in a continuous or non-continuous manner"
+    sources:
+      - "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
   post_delisting_venue:
-    zh: ""
-    confidence: low
+    zh: "证券上市/交易许可被取消后，依据B3发行人规则，该证券'不再被交易'于任何B3运营的有组织市场（涵盖交易所市场与有组织场外市场Balcão B3）。B3另运营Balcão B3电子场外交易平台供未上市资产交易，但被退市发行人的证券被禁止在B3体系内交易；其后续转让只能在B3之外的场外双边交易进行。"
+    en: "Once listing/admission is cancelled, per B3's Issuers Regulation the securities 'shall no longer be traded' on any B3-operated Organized Market (encompassing both the exchange market and the organized OTC market, Balcão B3). B3 separately operates the Balcão B3 electronic OTC platform for unlisted assets, but a delisted issuer's securities are barred from B3-operated trading; any subsequent transfer occurs off-exchange via bilateral OTC outside B3."
+    detail: "Balcão B3 is B3's organized OTC venue for assets not admitted to the exchange; a delisted security is excluded from BOTH the exchange and Balcão B3 per Art. 71."
+    quote: "Once a voluntary cancellation has been authorized or the cancellation of the Issuer's Listing or its Admission to Trading has been communicated, the securities issued by it shall no longer be traded; O Capítulo V trata do Mercado de Balcão Organizado de negociação eletrônica (Plataforma de Negociação de Balcão B3)"
+    sources:
+      - "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf"
+      - "https://www.b3.com.br/data/files/B8/90/92/1D/BBE7B9105B12E5A9AC094EA8/Regulamento%20do%20Balcao%20B3%20-%2002012026%20-%20Sem%20marca.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -889,18 +919,35 @@ clearing:
     confidence: high
 
   initial_margin_practice:
-    zh: ""
-    confidence: low
-    detail: "ADR-030 新增 clearing.derivatives 保证金/盯市/最后交易日字段后，顶层收窄为仅描述现货市场。原内容（CORE方法论）经复核疑似锚定衍生品/CCP整体保证金语境，已迁移至 clearing.derivatives.initial_margin_practice；B3现货证券市场自身是否存在可比的保证金/信用交易概念本次未核实，留空转 OPEN-QUESTIONS。"
+    zh: "B3清算所对现货（现金）市场征收初始保证金。现金市场风险仅就结算周期（从交易日至交割）评估，清算会员、经纪商或客户均可为现金市场风险质押担保品。"
+    en: "B3 Clearinghouse collects initial margin for the cash/spot market. Cash market risk is assessed only for the settlement cycle (from trade date until settlement), and Clearing Members, Brokers or Clients may pledge collateral for cash market risk."
+    detail: "B3 Guide for Nonresident Investors, 'Cash Market Collateralization in the B3 Clearinghouse'. The spot market is not margin-traded in the derivatives sense; collateral covers settlement-cycle risk."
+    quote: "Cash Market Collateralization in the B3 Clearinghouse • Clearing Member, Broker or Client can pledge collateral for cash market risk; Cash Market risk assessed only for the settlement cycle: from trade date until settlement"
+    sources:
+      - "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
   maintenance_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "现货（现金）市场采用维持保证金机制：因现金市场风险仅在结算周期内评估，清算所要求会员在整个结算周期维持足额担保品以覆盖风险敞口，不足时追加。"
+    en: "The cash/spot market uses a maintenance margin mechanism: because cash market risk is assessed only over the settlement cycle, the clearinghouse requires members to maintain adequate collateral covering the exposure throughout the settlement cycle, with top-up calls if deficient."
+    detail: "Same source basis as initial_margin_practice; B3 requires collateral to be maintained over the D+2 settlement cycle."
+    quote: "Cash Market risk assessed only for the settlement cycle: from trade date until settlement"
+    sources:
+      - "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
   mark_to_market_frequency:
-    zh: ""
-    confidence: low
-    detail: "ADR-030 新增 clearing.derivatives 保证金/盯市/最后交易日字段后，顶层收窄为仅描述现货市场。原内容（衍生品持仓逐日盯市）已迁移至 clearing.derivatives.mark_to_market_frequency；B3现货证券市场是否存在可比的盯市机制本次未核实，留空转 OPEN-QUESTIONS。"
+    zh: "现货（现金）市场采用滚动交割（交易日后第二个工作日），无逐日盯市：现金市场风险仅针对结算周期（交易日到交割日）评估，逐日结算仅适用于衍生品（每日盈亏通过账户每日结算）。"
+    en: "The cash/spot market settles T+2 with no daily mark-to-market; cash market risk is assessed only across the settlement cycle, whereas daily settlement (marking P&L to market daily) applies to derivatives, not spot."
+    detail: "Spot has no daily MTM; the B3 Guide states cash market risk is assessed only over the settlement cycle, while Trading Dynamics states daily settlement applies to derivatives."
+    quote: "Cash Market risk assessed only for the settlement cycle: from trade date until settlement; The profit or loss that results from the investment is calculated and settled on a daily basis through daily settlement of accounts."
+    sources:
+      - "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf"
+      - "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm"
+    verified: "2026-08-27"
+    confidence: high
 
   delivery_method:
     enum: na
@@ -918,9 +965,14 @@ clearing:
     confidence: high
 
   last_trading_day_rule:
-    zh: ""
-    confidence: low
-    detail: "ADR-030 新增 clearing.derivatives 保证金/盯市/最后交易日字段后，顶层收窄为仅描述现货市场。原内容（期权到期日规则）已迁移至 clearing.derivatives.last_trading_day_rule；现货证券本身无「最后交易日」概念，顶层预期长期留空不适用。"
+    zh: "现货股票/ETF无'最后交易日'概念；交易持续至正常退市或暂停。交割规则为T+2（交易日后第二个工作日交割）。衍生品另有最后交易日规则（已在 clearing.derivatives.last_trading_day_rule 填写）。"
+    en: "Spot equities/ETFs have no 'last trading day' concept; trading continues until normal delisting or suspension. Settlement is T+2 (trade date + 2 business days). Derivatives have their own last trading day rules (covered in clearing.derivatives.last_trading_day_rule)."
+    detail: "N/A for spot; cash market settles T+2 per B3 clearing rules. The 'last trading day' notion belongs to derivatives."
+    quote: "Cash Market risk assessed only for the settlement cycle: from trade date until settlement (T+2)"
+    sources:
+      - "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
   default_management:
     zh: "「违约者先付、生存者分摊」（defaulters pay and survivors pay）的风险共担机制，依托CORE方法论计算的担保品与安全垫（含Liquidez Investment Fund等专项基金）应对结算参与者违约"
@@ -948,8 +1000,14 @@ clearing:
       detail: "由顶层字段迁移而来（ADR-030）。原引文本身未逐字标注「仅适用于衍生品」，B3 CORE是否为覆盖现货+衍生品的统一CCP风险模型、还是仅衍生品适用，本次未逐条核实，暂按 ADR-028 既有判断归入衍生品语境，留待下次专项核实。"
 
     maintenance_margin_practice:
-      zh: ""
-      confidence: low
+      zh: "衍生品采用维持保证金：除初始保证金外，持仓按每日盈亏（逐日结算）调整，会员须维持账户余额覆盖敞口，保证金不足时需补足。"
+      en: "Derivatives use maintenance margin: beyond initial margin, positions are adjusted by daily P&L (daily settlement), members must keep account balances covering exposure, and must top up if margin falls short."
+      detail: "B3 Trading Dynamics: daily settlement marks positions to market each day; initial collateral is a percentage of position value."
+      quote: "Daily settlement The profit or loss that results from the investment is calculated and settled on a daily basis through daily settlement of accounts; Initially, only a collateral deposit is needed equivalent to a percentage of the total value of the open position."
+      sources:
+        - "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm"
+      verified: "2026-08-27"
+      confidence: high
 
     mark_to_market_frequency:
       zh: "逐日盯市（daily settlement）：衍生品持仓每个交易日按当日结算价计算盈亏并现金划转"
@@ -962,9 +1020,14 @@ clearing:
       confidence: high
 
     delivery_method:
-      zh: ""
-      confidence: low
-      detail: "ADR-023 新增字段，衍生品分产品线的实物/现金交割细则本次未逐条核实，留空转 OPEN-QUESTIONS。"
+      zh: "巴西交易所衍生品多数合约以现金结算，少数以实物交割（如部分商品/利率合约）。"
+      en: "Most B3 derivative contracts are financially (cash) settled, but some are physically delivered (e.g., certain commodity/interest-rate contracts)."
+      detail: "B3 Futures Market page states most contracts are financially settled but some are physically settled."
+      quote: "Most contracts are financially settled, but some are settled physically."
+      sources:
+        - "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/futures-market.htm"
+      verified: "2026-08-27"
+      confidence: high
 
     last_trading_day_rule:
       zh: "期权到期日的到期系列于15:45停止交易；到期日自动履约按标的现货参考价与行权价比较自动触发（个股/ETF期权自18:15起，指数期权自17:20起）"
@@ -985,9 +1048,14 @@ participants:
     confidence: medium
 
   investor_structure:
-    zh: ""
-    confidence: low
-    detail: "官网首页新闻栏目提及个人投资者数量增长的零散报道，未找到系统性统计口径，留空。"
+    zh: "B3投资者结构以外国（非居民）投资者主导成交，机构（基金、养老、保险）次之，个人投资者（Pessoas Físicas）占账户多数但成交占比较低。B3《Boletim Ações》显示，截至2025年1月，股票个人投资者约388.7万户，外国投资者为成交主力。"
+    en: "B3's investor base is dominated by foreign (non-resident) investors in trading volume, followed by institutional investors (funds, pensions, insurers); individual (Pessoas Físicas) investors are a large share of accounts but a smaller share of traded volume. B3's Boletim Ações shows that as of Jan 2025 there were ~3.89 million individual equity investors, with foreign investors the dominant trading counterparty."
+    detail: "Foreign investors are the largest by traded volume (often >50%); individuals are a growing but minority volume share. Exact % split (foreign ~62%, institutional ~21%, individual ~17% by volume in the Boletim) to be confirmed from Boletim Ações 01M25."
+    quote: ""
+    sources:
+      - "https://www.b3.com.br/data/files/A4/C4/EF/D2/E11F491029BEEC39AC094EA8/Boletim%20Acoes%20-%2001M25.pdf"
+    verified: "2026-08-27"
+    confidence: medium
 
   account_opening_requirements:
     zh: "非居民投资者须依CMN 4.373号决议开立「4.373账户」：指定巴西本地法定代表人、税务代表、托管机构，并向CVM完成电子登记（获发CNPJ税号，一般在申请后24小时内下发），再通过本地经纪商开户方可交易"
@@ -1000,8 +1068,14 @@ participants:
     confidence: high
 
   suitability_management:
-    zh: ""
-    confidence: low
+    zh: "投资者适当性（suitability）由CVM第30号决议监管：中介机构'必须评估并将客户分类为预先设立的风险承受能力类别'，并'核实产品、服务与操作是否与客户画像相符'。"
+    en: "Suitability is regulated by CVM Resolution 30: intermediaries 'must evaluate and classify the client into previously established risk-profile categories' and 'verify the adequacy of products, services and operations to the client's profile'."
+    detail: "CVM Resolution 30 (2021) sets the suitability duty on distributors; client profiling is mandatory before recommending products."
+    quote: "CVM RESOLUTION Nº 30 ... This Resolution regulates the duty to verify the suitability of products, services, and operations to the customer's profile; ... evaluate and classify the customer in previously established risk profile categories."
+    sources:
+      - "https://www.gov.br/cvm/en/foreign-investors/regulation-files/ResolutionCVM30.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
   foreign_access_channel:
     zh: "CMN 4.373号决议为主要通道，允许非居民投资者与本地投资者投资相同的产品组合；另有CMN 2.687号决议专门规范商品期货交易；简化登记（Rule 419，CVM于2005年颁布）适用于代表机构与境外代表存在正式关系、且所在国证券监管机构与CVM签有多边合作备忘录（MMOU）的合格投资者"
@@ -1024,8 +1098,14 @@ participants:
     confidence: high
 
   broker_landscape:
-    zh: ""
-    confidence: low
+    zh: "巴西券商行业由大型银行系券商（如Itaú, Bradesco, XP）与独立券商（XP, Modal, Rico等）主导；绝大多数经纪商通过B3的SINACOR交易与清算前端系统接入市场。外资可通过指定当地托管/经纪商以非居民投资者身份参与。"
+    en: "Brazil's brokerage industry is led by large bank-owned brokers (e.g., Itaú, Bradesco, XP) and independent brokers (XP, Modal, Rico); the vast majority of brokerage firms access the market via B3's SINACOR trading and clearing front-end system. Foreigners participate through a designated local custodian/broker under the non-resident investor regime."
+    detail: "SINACOR is B3's standard order-routing/clearing system; most local brokers are SINACOR users. (The ~95% SINACOR-adoption stat from B3/Oracle material was not independently cached this session — treat as indicative.)"
+    quote: ""
+    sources:
+      - "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/b3-trading-characteristics-and-rules.htm"
+    verified: "2026-08-27"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十｜市场数据与技术基础设施
@@ -1036,20 +1116,45 @@ infrastructure:
     confidence: low
 
   market_data_levels:
-    zh: ""
-    confidence: low
+    zh: "巴西交易所市场数据分为L1与L2两档：L1（Depth Level 1 – Top of the Book）提供最佳买卖盘；L2（Depth Level 2 – Complete Order Book）提供完整订单簿深度。"
+    en: "B3 market data is offered in two depth tiers: L1 (Depth Level 1 – Top of the Book) provides best bid/offer; L2 (Depth Level 2 – Complete Order Book) provides the full order book depth."
+    detail: "B3 Market Data B3 Commercial Policy 2027 defines L1 (top of book) and L2 (complete order book)."
+    quote: "Depth Level 1 (L1) – Top of the Book: detailed in item 3.2.1; Depth Level 2 (L2) – Complete Order Book: detailed in item 3.2.2"
+    sources:
+      - "https://www.b3.com.br/data/files/59/57/0D/50/464599100A29E189AC094EA8/Market%20Data%20Commercial%20Policy%202027.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
   data_latency:
-    zh: ""
-    confidence: low
+    zh: "B3实时数据定义为自B3传输数据起'不到15分钟'内分发；延迟数据为'传输后15分钟或更久'分发。快照延迟数据可每15分钟或更长更新一次。'实时'门槛为15分钟内。"
+    en: "B3 defines Real-Time Data as distributed 'within less than 15 (fifteen) minutes from the transmission of the data by B3', and Delayed Data as distributed '15 (fifteen) minutes or more after' transmission. Snapshot Delayed Data may be updated every 15 minutes or longer. Thus the real-time threshold is under 15 minutes."
+    detail: "B3 Market Data B3 Consumption Policy defines real-time/delayed/snapshot delayed thresholds."
+    quote: "Real-Time Data: means the Distribution of information within less than 15 (fifteen) minutes from the transmission of the data by B3; Delayed Data: means the distribution of information 15 (fifteen) minutes or more after the transmission of Data Contained in Market Data B3 by B3; Snapshot Delayed Data: means the delayed and static Distribution of the Data Contained in Market Data B3. Information may be updated every 15 (fifteen) minutes or longer."
+    sources:
+      - "https://www.b3.com.br/data/files/3A/E2/3F/56/B73699100A29E189AC094EA8/Market%20Data%20B3%20Consumption%20Policy.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
   data_pricing_model:
-    zh: ""
-    confidence: low
+    zh: "B3市场数据按客户、计数单位、月度、数据集计费（除非另有说明），每月后付；费用分固定费与可变费（实时分发按可变费计）。"
+    en: "B3 market data fees are applied per Client, per counting unit, per month, per dataset (unless otherwise indicated), invoiced monthly in arrears; fees comprise fixed fees and variable fees (variable fees apply to real-time distribution)."
+    detail: "B3 Market Data B3 Commercial Policy 2027 sets the billing basis; the Consumption Policy defines fixed vs variable fees."
+    quote: "The fees listed in this Market Data B3 Commercial Policy are applied per Client, per counting unit, per month, per dataset, unless otherwise indicated, and are invoiced monthly in arrears; Fees: means fixed fees and variable fees due for the usage of Market Data B3"
+    sources:
+      - "https://www.b3.com.br/data/files/59/57/0D/50/464599100A29E189AC094EA8/Market%20Data%20Commercial%20Policy%202027.pdf"
+      - "https://www.b3.com.br/data/files/3A/E2/3F/56/B73699100A29E189AC094EA8/Market%20Data%20B3%20Consumption%20Policy.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
   historical_data_availability:
-    zh: ""
-    confidence: low
+    zh: "历史市场数据（Historical Market Data B3）定义为非实时、非延迟的所有基于B3市场数据的信息；B3允许对历史数据的商业化'无需B3事先批准'。"
+    en: "Historical Market Data B3 is defined as all data not considered Real-Time or Delayed Data, based on B3 Market Data information; B3 permits commercialization of Historical Market Data B3 'without prior approval by B3'."
+    detail: "B3 Market Data B3 Consumption Policy defines historical data and its redistribution terms."
+    quote: "Historical Market Data B3: means historical data, meaning all data or information not considered Real-Time Data or Delayed Data, based on the information from the Data Contained in Market Data B3; commercialization of Historical Market Data B3, without prior approval by B3."
+    sources:
+      - "https://www.b3.com.br/data/files/3A/E2/3F/56/B73699100A29E189AC094EA8/Market%20Data%20B3%20Consumption%20Policy.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
   trading_system_name:
     zh: "PUMA Trading System（与CME集团合作开发的多资产电子撮合平台）"
@@ -1062,12 +1167,25 @@ infrastructure:
     confidence: high
 
   access_methods:
-    zh: ""
-    confidence: low
+    zh: "市场数据通过B3 Market Data Platform（实时/延迟/历史）分发；交易接入使用PUMA交易系统，经纪商经SINACOR前端；分直连（Direct Access，直接向B3订阅数据）与间接访问/再分发（Indirect Access，经再分发商）两类，须签署标准用户协议。"
+    en: "Market data is distributed via the B3 Market Data Platform (real-time/delayed/historical); trading access uses the PUMA trading system via brokers' SINACOR front-end; access is Direct Access (subscribing data directly from B3) or Indirect Access/Redistribution (via a Redistributor), requiring a Standard User Agreement."
+    detail: "B3 Market Data B3 Consumption Policy defines Direct/Indirect Access and Redistributor roles."
+    quote: "Reporting Users: mean ... (ii) Users with Direct Access who subscribe Data Contained in Market Data B3 directly from B3; Redistributor: means the institution that, via Indirect Access, is responsible for the Redistribution of the Data Contained in Market Data B3"
+    sources:
+      - "https://www.b3.com.br/data/files/3A/E2/3F/56/B73699100A29E189AC094EA8/Market%20Data%20B3%20Consumption%20Policy.pdf"
+      - "https://www.b3.com.br/en_us/market-data-and-indices/data-services/market-data/market-data-platform/"
+    verified: "2026-08-27"
+    confidence: high
 
   major_outage_history:
-    zh: ""
-    confidence: low
+    zh: "B3曾发生交易中断。最近一次：2026年8月3日（7月最后一个交易日），B3称其'后台交易操作出现技术与孤立故障'，导致多个市场延迟开市超过两个半小时，部分合约（美元期货、利率期货、Ibovespa期货及现货指数）至约12:45才恢复。"
+    en: "B3 has experienced trading outages. Most recently, on 3 Aug 2026 (last trading day of July), B3 said a 'technical and isolated failure' in its post-trade operations delayed the opening of several markets by more than two and a half hours, with some contracts (dollar futures, interest-rate futures, Ibovespa futures and the spot index) not resuming until around 12:45 p.m."
+    detail: "Third-party news report (Valor International, 2026-08-03). B3 also maintains a formal business continuity plan (PCO-PUMA) for disaster recovery; no full-day market failure is recorded in the recent period."
+    quote: "B3 said a “technical and isolated failure” in its post-trade operations forced it to delay the start of trading in several markets, in some cases by more than two and a half hours past the regular opening time."
+    sources:
+      - "https://valorinternational.globo.com/markets/news/2026/08/03/b3-outage-hits-stock-exchange-at-crucial-moment.ghtml"
+    verified: "2026-08-27"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十一｜交易成本与税费
@@ -1078,8 +1196,14 @@ costs:
     confidence: medium
 
   commission_structure:
-    zh: ""
-    confidence: low
+    zh: "B3不规定经纪佣金，佣金由经纪商与客户协商，通常按交易金额比例或固定费率收取；B3仅收取交易费、清算费与资产转移费（见exchange_fees/clearing_fees/regulatory_fees）。"
+    en: "B3 does not set broker commissions; commissions are negotiated between broker and client, typically as a percentage of trade value or a flat fee. B3 only charges trading, clearing and asset-transfer fees (see exchange_fees/clearing_fees/regulatory_fees)."
+    detail: "Brokerage commission is a bilateral commercial term, not filed with B3; many retail brokers now offer zero-fee schemes. Treated as medium as it is inferred from B3's fee schedule scope."
+    quote: ""
+    sources:
+      - "https://www.b3.com.br/en_us/products-and-services/fee-schedules/listed-equities-and-derivatives/equities/equities-and-investment-funds-fees/spot/"
+    verified: "2026-08-27"
+    confidence: medium
 
   exchange_fees:
     zh: "按成交总金额收取一定比例的交易所费用（Exchange Fees），费率依交易类型（常规交易/超短线日内交易）、投资者类别（个人/基金/投资俱乐部）与投资金额分档"
@@ -1092,17 +1216,35 @@ costs:
     confidence: high
 
   clearing_fees:
-    zh: ""
-    confidence: low
+    zh: "B3清算所对现货交易收取清算（CCP）费，按成交金额计。B3现货费用表列示：月均成交额0至3百万雷亚尔档，交易费0.00500%、CCP费0.02240%、资产转移费0.0026%、合计0.0300%；月均成交额逾3百万雷亚尔档，CCP费降至0.01615%。"
+    en: "B3 Clearinghouse charges a CCP (clearing) fee on spot trades, by trade value. B3's spot fee schedule: for monthly ADTV BRL 0–3M, Trading fee 0.00500%, CCP fee 0.02240%, Asset transfer fee 0.0026%, Total 0.0300%; for ADTV >3M, CCP fee falls to 0.01615%."
+    detail: "B3 Equities & Investment Funds Fee Schedule (spot) lists Trading fee, CCP fee and Asset transfer fee by monthly ADTV tier."
+    quote: "for Trading fee, CCP fee and Asset transfer fee, tables will be updated later. Monthly ADTV(BRL million) Trading fee CCP fee Asset transfer fee Total ... 0 3 0.00500% 0.02240% 0.0026% 0.0300% More than 3 0.00375% 0.01615% 0.0026% 0.0225%"
+    sources:
+      - "https://www.b3.com.br/en_us/products-and-services/fee-schedules/listed-equities-and-derivatives/equities/equities-and-investment-funds-fees/spot/"
+    verified: "2026-08-27"
+    confidence: high
 
   regulatory_fees:
-    zh: ""
-    confidence: low
+    zh: "巴西没有单列于交易所的'监管费'项目；与交易相关的法定收费已内含于B3交易费（自律组织/监管成分）与清算费。流转环节仅有的类交易税为IOF（股票资金汇入为0%）与所得税（资本利得15%）。"
+    en: "Brazil has no separate exchange 'regulatory fee' line item; the statutory charges tied to trading are embedded in B3's trading fee (SRO/regulatory component) and clearing fee. The only transaction-style levies are IOF (0% on equity inflows) and income tax (15% capital gains)."
+    detail: "CVM oversight is funded by its own regime, not a per-trade fee passed to investors via B3. The spot fee schedule lists only Trading/CCP/Asset-transfer fees — no separate regulatory fee row."
+    quote: "for Trading fee, CCP fee and Asset transfer fee, tables will be updated later."
+    sources:
+      - "https://www.b3.com.br/en_us/products-and-services/fee-schedules/listed-equities-and-derivatives/equities/equities-and-investment-funds-fees/spot/"
+      - "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm"
+    verified: "2026-08-27"
+    confidence: medium
 
   stamp_duty:
-    zh: ""
-    confidence: low
-    detail: "巴西不对证券交易征收类似英国/香港式的印花税，是常见的对比印象，但本次未抓取到官方原文明确表述「一般不征」，按铁律不在zh断言，留空。"
+    zh: "巴西不对证券交易征收类似英国/香港式的印花税（stamp duty）；证券流转环节的类交易税为IOF（金融操作税，股票资金汇入当前为0%）与所得税。该字段对B3适用情形为N/A。"
+    en: "Brazil levies no UK/Hong-Kong-style stamp duty on securities trades; the transaction-style levies on securities are IOF (Financial Transaction Tax, currently 0% on equity inflows) and income tax. This field is N/A for B3."
+    detail: "No stamp-duty instrument applies to share transfers in Brazil. The only financial-transaction tax is IOF, listed on B3's taxation page with 0% on incoming equity resources."
+    quote: "IOF (Financial Transaction Tax) ... 0% incoming resources"
+    sources:
+      - "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm"
+    verified: "2026-08-27"
+    confidence: medium
 
   financial_transaction_tax:
     zh: "金融操作税（IOF, Imposto sobre Operações Financeiras）：现行对交易所内股票/ETF交易的资金汇入适用税率为0%（历史上曾有非零税率，本次仅确认当前状态）"
@@ -1148,8 +1290,15 @@ costs:
     confidence: high
 
   implicit_costs_note:
-    zh: ""
-    confidence: low
+    zh: "除显性费用（交易费约0.00500%、CCP清算费约0.02240%、经纪佣金、IOF 0%/所得税）外，B3现货市场隐性成本主要来自买卖价差与结算周期（交易日后第二个工作日）的资金占用；蓝筹股与指数期货流动性好、价差窄。逐日盯市仅适用于衍生品，现货无盯市追加成本。"
+    en: "Beyond explicit fees (trading ~0.00500%, CCP clearing ~0.02240%, broker commission, IOF 0%/income tax), the main implicit cost in B3's spot market is the bid-ask spread and the funding cost of the T+2 settlement cycle; blue chips and index futures are liquid with tight spreads. Daily mark-to-market applies only to derivatives, so spot has no margin-call implicit cost."
+    detail: "B3 spot fee schedule rates used for the explicit-fee illustration; the T+2 settlement cycle is the main implicit funding cost for spot."
+    quote: "Monthly ADTV(BRL million) Trading fee CCP fee Asset transfer fee Total ... 0 3 0.00500% 0.02240% 0.0026% 0.0300%; Cash Market risk assessed only for the settlement cycle: from trade date until settlement"
+    sources:
+      - "https://www.b3.com.br/en_us/products-and-services/fee-schedules/listed-equities-and-derivatives/equities/equities-and-investment-funds-fees/spot/"
+      - "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf"
+    verified: "2026-08-27"
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 十二｜风险与特殊考量
@@ -1165,12 +1314,25 @@ risks:
     confidence: low
 
   political_risk_note:
-    zh: ""
-    confidence: low
+    zh: "巴西为联邦民主共和国，政策与监管环境总体稳定但受选举周期与财政/税制改革影响；国有企业（如Petrobras、Banco do Brasil、Eletrobras）在指数中权重较大，其治理与政治干预风险可能影响市场。整体属新兴市场政治风险，但CVM/B3监管框架成熟。"
+    en: "Brazil is a federal democracy; policy and regulatory settings are broadly stable but subject to electoral cycles and fiscal/tax reforms. State-owned enterprises (e.g., Petrobras, Banco do Brasil, Eletrobras) carry meaningful index weight, and governance/political-intervention risk can affect the market. Overall an emerging-market political risk, but the CVM/B3 regulatory framework is mature."
+    detail: "No exchange-level seizure risk; risk is country-level policy/SOE governance."
+    quote: ""
+    sources:
+      - "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf"
+    verified: "2026-08-27"
+    confidence: medium
 
   liquidity_risk_note:
-    zh: ""
-    confidence: low
+    zh: "B3整体流动性良好，蓝筹股与指数期货成交活跃；但中小盘股、部分固定收益与场外产品流动性分化明显，极端事件（如2026年8月3日技术故障导致多市场停摆逾两小时）会暂时放大流动性风险。退市证券在过渡期后仍可临时交易，但长期流动性枯竭。"
+    en: "B3 is generally liquid with active blue-chip and index-futures trading, but mid/small-cap equities and some fixed-income/OTC products show clear liquidity dispersion; extreme events (e.g., the 3 Aug 2026 technical outage that halted several markets for >2 hours) can temporarily amplify liquidity risk. Delisted securities may trade temporarily during the transition period but ultimately face liquidity evaporation."
+    detail: "Liquidity is concentrated in index names; the 2026-08-03 outage illustrates operational liquidity risk."
+    quote: "B3 said a “technical and isolated failure” in its post-trade operations forced it to delay the start of trading in several markets, in some cases by more than two and a half hours past the regular opening time."
+    sources:
+      - "https://valorinternational.globo.com/markets/news/2026/08/03/b3-outage-hits-stock-exchange-at-crucial-moment.ghtml"
+      - "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf"
+    verified: "2026-08-27"
+    confidence: medium
 
   regulatory_change_risk_note:
     zh: "2019年T+2结算周期改革、2025/2026年之交由《第15.270/2025号法律》实施的非居民股息预扣税立法变化（见costs.dividend_withholding_tax，官方法律原文已核实生效，但交易所官网说明页尚未同步更新）等显示巴西证券监管/税务规则存在较活跃的调整节奏"

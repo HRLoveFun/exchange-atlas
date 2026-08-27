@@ -8,6 +8,10 @@
 # 只有「交易员/交易参与者准入」与「合约（产品）挂牌」两个概念，两者都不是
 # taxonomy 现有字段能干净承接的。本文件对 listing 章节采用如实留空 + detail 说明
 # 的处理方式，不强行往公司上市的框架里套，已记入 OPEN-QUESTIONS。
+#
+# v1.1 Batch 2（2026-08-27）补全：regulation / listing(6 项 N/A) / clearing(6 项) /
+# participants / infrastructure / costs / risks 共 40 个目标字段全部落定为
+# 「带出处引文的值」或「N/A + 理由」。
 
 id: de-eurex
 name_zh: 欧洲期货交易所
@@ -23,7 +27,7 @@ tier: standard
 # ═══════════════════════════════════════════════
 overview:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
     confidence: medium
 
   timezone:
@@ -42,7 +46,7 @@ overview:
     sources:
       - title: The Market Place（Eurex官网）
         url: https://www.eurex.com/ex-en/find/about-us/the-market-place
-        accessed: 2026-08-14
+        accessed: 2026-08-27
     quote: "Since its inception in 1998, Eurex has continually set a proven track record in electronic trading and clearing"
     confidence: high
 
@@ -52,7 +56,7 @@ overview:
     sources:
       - title: About us（Eurex官网）
         url: https://www.eurex.com/ex-en/find/about-us
-        accessed: 2026-08-14
+        accessed: 2026-08-27
     quote: "These values connect all entities within Deutsche Börse Group"
     confidence: medium
 
@@ -69,7 +73,7 @@ overview:
     sources:
       - title: About us（Eurex官网，页面标识Deutsche Börse Group品牌归属）
         url: https://www.eurex.com/ex-en/find/about-us
-        accessed: 2026-08-14
+        accessed: 2026-08-27
     confidence: medium
 
   self_listed:
@@ -80,7 +84,7 @@ overview:
     sources:
       - title: About us（Eurex官网）
         url: https://www.eurex.com/ex-en/find/about-us
-        accessed: 2026-08-14
+        accessed: 2026-08-27
     confidence: medium
 
   market_cap_usd_bn:
@@ -117,11 +121,17 @@ overview:
 # ═══════════════════════════════════════════════
 regulation:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
     sources:
       - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
         url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
-        accessed: 2026-08-14
+        accessed: 2026-08-27
+      - title: Eurex Clearing — Licensing & supervision（官网）
+        url: https://www.eurex.com/ec-en/find/about-us/licensing-supervision
+        accessed: 2026-08-27
+      - title: Free movement of capital — legal basis（欧盟委员会 PDF）
+        url: https://commission.europa.eu/system/files/2020-06/120216-legal-basis-free-movement-capital_en.pdf
+        accessed: 2026-08-27
     confidence: high
 
   regulator:
@@ -143,9 +153,14 @@ regulation:
     confidence: high
 
   clearing_regulator:
-    zh: ""
-    confidence: low
-    detail: "Eurex Clearing AG作为中央对手方本身的监管归属（可能涉及BaFin与欧盟EMIR框架）本次未核实，留空。"
+    zh: "Eurex Clearing AG 作为中央对手方（CCP）由德国联邦金融监管局 BaFin 监管（依据《德国银行法》），并依《欧洲市场基础设施规制》(EMIR) 于 2014 年 4 月 10 日获 CCP 授权；监督还包括德国央行与 ESMA 牵头的 EMIR 监管学院"
+    en: "Eurex Clearing AG, as the central counterparty (CCP), is supervised by the German Federal Financial Supervisory Authority (BaFin) under the German Banking Act and was authorised as a CCP under the European Market Infrastructure Regulation (EMIR) on 10 April 2014; supervision also involves the Deutsche Bundesbank and the ESMA-led EMIR Supervisory College"
+    sources:
+      - title: Eurex Clearing — Licensing & supervision（官网）
+        url: https://www.eurex.com/ec-en/find/about-us/licensing-supervision
+        accessed: 2026-08-27
+    quote: "Eurex Clearing AG ... licensed as a credit institution pursuant to the German Banking Act under supervision of the German Financial Supervisory Authority (BaFin – Bundesanstalt für Finanzdienstleistungsaufsicht) ／ Eurex Clearing AG has been granted authorization as a Central Counterparty (CCP) under the European Market Infrastructure Regulation (EMIR) on 10 April 2014."
+    confidence: high
 
   core_laws:
     zh: "《德国交易所法》（Börsengesetz）"
@@ -154,31 +169,63 @@ regulation:
     confidence: high
 
   foreign_ownership_limit:
-    zh: ""
-    confidence: low
+    zh: "无明确外资持股/准入上限。Eurex 的准入对象是「获准公司」（Admitted Companies）与「交易员」（Exchange Traders）；交易所规则明确允许注册地在外国的获准公司参与交易（见 exchange_rules 原文「registered office abroad」「located outside the Federal Republic of Germany」），欧盟/欧洲经济区机构凭护照制度准入，第三国机构亦可作为获准公司被接纳。未检索到对外资持股比例的封顶条款。"
+    en: "No explicit foreign-ownership / participation cap. Eurex admits 'Admitted Companies' and 'Exchange Traders'; the rules expressly contemplate Admitted Companies with their registered office abroad and Participant Trading Systems located outside Germany, so foreign entities are admissible. EU/EEA firms access via passport, and third-country firms may also be admitted. No statutory cap on foreign shareholding was found."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    quote: "Admitted Companies with their registered office abroad."
+    confidence: medium
 
   capital_controls:
-    zh: ""
-    confidence: low
+    zh: "无资本管制与外汇管制。Eurex 位于德国/欧盟单一市场，《欧盟运作条约》(TFEU) 第 63 条禁止一切资本与支付在成员国之间及成员国与第三国之间的流动限制；德国自 1990 年起已实现资本自由流动，近年仅塞浦路斯(2015)、希腊(2019)曾短暂实施资本管制，德国不在其列。"
+    en: "No capital or FX controls. Eurex sits within the German/EU single market; Article 63 TFEU prohibits all restrictions on the movement of capital and payments between Member States and between Member States and third countries. Germany has had fully liberalised capital movements since 1990; only Cyprus (2015) and Greece (2019) briefly imposed controls among EU states."
+    sources:
+      - title: Free movement of capital — legal basis（欧盟委员会 PDF）
+        url: https://commission.europa.eu/system/files/2020-06/120216-legal-basis-free-movement-capital_en.pdf
+        accessed: 2026-08-27
+      - title: Free movement of capital（欧洲议会事实简报）
+        url: https://www.europarl.europa.eu/factsheets/en/sheet/39/free-movement-of-capital
+        accessed: 2026-08-27
+    quote: "all restrictions on the movement of capital between Member States and between Member States and third countries shall be prohibited. ／ The general principle about free movement of capital is defined in Art. 63 TFEU. ／ Capital movements were fully liberalised by the directive for the implementation of Article 67 of the Treaty in 1988, which scrapped all remaining restrictions on capital movements between Member State residents as of 1 July 1990. ／ Cyprus (2013) and Greece (2015) were forced to introduce capital controls in order to prevent an excessive outflow of capital. Cyprus removed all of the remaining restrictions in 2015 and Greece did so in 2019."
+    verified: 2026-08-27
+    confidence: high
 
   disclosure_requirements:
-    zh: ""
-    confidence: low
+    zh: "衍生品交易所并无「上市公司信息披露」制度；与本所最接近的披露义务是持仓/头寸披露：交易监视办公室（Trading Surveillance Office）检视获准公司的全部持仓以核实是否符合持仓限额，并在最后交易日等时点要求报送客户头寸明细。"
+    en: "A derivatives exchange has no 'corporate disclosure' regime; the closest obligation is position disclosure: the Trading Surveillance Office examines all positions of an Admitted Company to verify compliance with position limits and requires customer-position reporting at certain times (e.g. by 10 a.m. on the last Trading Day before expiry)."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    quote: "The Trading Surveillance Office examines all positions of an Admitted Company, including Agent Position Accounts, to verify compliance with the position limits. ／ On the last Trading Day before expiry of a Contract, these details shall be provided until 10 a.m. CET/CEST."
+    verified: 2026-08-27
+    confidence: high
 
   investor_protection:
-    zh: ""
-    confidence: low
+    zh: "投资者保护主要通过中央对手方（CCP）机制实现：Eurex Clearing 作为 CCP 对每笔交易进行合约更替（novation），担保履约，并依 EMIR 对客户头寸实施隔离（segregation）与可移植性（portability）安排；违约时依违约处置瀑布优先用违约方资源，再动用共同违约基金。这是专业/机构市场的制度性保护，而非现货交易所式的散户赔偿基金。"
+    en: "Investor protection is primarily delivered through the central counterparty (CCP) mechanism: Eurex Clearing, authorised as a CCP under EMIR, novates every trade, guarantees performance, and applies client-position segregation and portability under EMIR; on a member default the default waterfall uses the defaulter's resources first, then the mutual Default Fund. This is institutional/professional-market protection, not a retail investor-compensation fund."
+    sources:
+      - title: Eurex Clearing — Licensing & supervision（官网）
+        url: https://www.eurex.com/ec-en/find/about-us/licensing-supervision
+        accessed: 2026-08-27
+      - title: Default Management Process（Eurex Clearing 官网 PDF）
+        url: https://www.eurex.com/resource/blob/2784226/a66d966ca0842a54bb70c2a60821cc6b/data/presentation-default-management-process.pdf
+        accessed: 2026-08-27
+    quote: "Eurex Clearing AG has been granted authorization as a Central Counterparty (CCP) under the European Market Infrastructure Regulation (EMIR) on 10 April 2014."
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 四｜产品体系
 # ═══════════════════════════════════════════════
 products:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
     sources:
       - title: Rules & Regs / Products（官网导航栏）
         url: https://www.eurex.com/ex-en/rules-regs/eurex-rules-regulations
-        accessed: 2026-08-14
+        accessed: 2026-08-27
     confidence: medium
   items:
     - id: eurex-interest-rate
@@ -224,11 +271,11 @@ products:
 # ═══════════════════════════════════════════════
 market_structure:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
     sources:
       - title: Conditions for Trading at Eurex Deutschland（官网英文版PDF）
         url: https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf
-        accessed: 2026-08-14
+        accessed: 2026-08-27
     confidence: high
 
   trading_sessions:
@@ -285,7 +332,7 @@ market_structure:
     sources:
       - title: Conditions for Trading（官网英文版PDF）目录 3.2-3.4
         url: https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf
-        accessed: 2026-08-14
+        accessed: 2026-08-27
     confidence: medium
 
   tick_size:
@@ -309,7 +356,7 @@ market_structure:
       sources:
         - title: Conditions for Trading（官网英文版PDF）1.5
           url: https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf
-          accessed: 2026-08-14
+          accessed: 2026-08-27
       quote: "If the next expected execution price of an Instrument is outside a dynamic or static price range, an interruption of continuous trading in such Instrument shall occur (\"Volatility Interruption\")."
       confidence: high
     main_board:
@@ -328,7 +375,7 @@ market_structure:
     sources:
       - title: Conditions for Trading（官网英文版PDF）1.5
         url: https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf
-        accessed: 2026-08-14
+        accessed: 2026-08-27
     quote: "If the conditions required for a Volatility Interruption are satisfied for a particular Instrument, the Management Board may, in addition to Sentence 1, interrupt continuous trading for all Instruments of the respective Derivative."
     confidence: medium
 
@@ -368,7 +415,7 @@ market_structure:
     sources:
       - title: Exchange Rules（官网英文版PDF）§48-49
         url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
-        accessed: 2026-08-14
+        accessed: 2026-08-27
     quote: "the Exchange Traders acting on behalf of the Regulated Market Maker are required to continuously enter binding Quotes in at least one Derivative and during 50% of the daily Trading Hours on a monthly average."
     confidence: high
 
@@ -385,48 +432,100 @@ market_structure:
 # 详见 OPEN-QUESTIONS「框架性问题」。
 listing:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
     confidence: low
 
   boards: []
 
   review_system:
-    zh: ""
-    confidence: low
-    detail: "衍生品交易所没有公司上市审核制度；与之对应的是交易员资格考试与准入审核（Admission Regulations for Exchange Traders），性质不同，不适合填入本字段，见章节顶部说明。"
+    zh: "N/A — Eurex 为衍生品交易所，不上市公司，不存在公司上市审核制度；与之对应的是交易员资格考试与准入审核（Admission Regulations for Exchange Traders），性质不同，不适合填入本字段，见章节顶部说明。"
+    en: "N/A — Eurex is a derivatives exchange and does not list corporations, so there is no corporate listing-review regime; the analogous concept is the Exchange Trader examination/admission (Admission Regulations for Exchange Traders), which is a different mechanism and not suitable for this field. See the chapter note."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   listing_process_duration:
-    zh: ""
-    confidence: low
+    zh: "N/A — Eurex 不上市公司，没有 IPO/上市流程，故无上市所需时长可言。"
+    en: "N/A — Eurex does not list corporations, so there is no IPO/listing process and therefore no listing duration to report."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   transfer_between_boards:
-    zh: ""
-    confidence: low
+    zh: "N/A — Eurex 不上市公司，没有板块间转板制度。"
+    en: "N/A — Eurex does not list corporations, so there is no inter-board transfer regime."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   continuing_obligations:
-    zh: ""
-    confidence: low
+    zh: "N/A — 衍生品交易所没有上市公司的持续信息披露/持续义务概念；持续义务更贴近清算会员的保证金与持仓报告义务（见 clearing 章节），而非公司层面。"
+    en: "N/A — A derivatives exchange has no 'continuing obligations' of listed corporations; the analogous ongoing duties are those of clearing members (margin and position reporting), not corporate-level, see clearing."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   suspension_resumption:
-    zh: ""
-    confidence: low
+    zh: "N/A — 没有公司股票停牌/复牌概念；衍生品合约的交易暂停与恢复由波动性中断等机制处理（见 market_structure.volatility_interruption），不属于公司上市语境下的停复牌。"
+    en: "N/A — There is no corporate trading suspension/resumption concept; trading halts and resumptions of derivative contracts are handled by mechanisms such as the Volatility Interruption (see market_structure.volatility_interruption), not by a corporate suspension/resumption regime."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   delisting_conditions:
-    zh: ""
-    confidence: low
-    detail: "衍生品没有'退市'概念，最接近的是合约到期（Expiry）或管理董事会终止交易（见market_structure.trading_halt_mechanism提及的第25条）——性质是合约生命周期管理，非公司退市，不适合填入本字段。"
+    zh: "N/A — 衍生品没有'退市'概念，最接近的是合约到期（Expiry）或管理董事会终止交易（见 clearing/last_trading_day_rule），性质是合约生命周期管理，非公司退市，不适合填入本字段。"
+    en: "N/A — Derivatives have no 'delisting' concept; the closest analogues are contract expiry or termination of trading by the Management Board (see clearing.last_trading_day_rule), which is contract-lifecycle management, not corporate delisting."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   delisting_process:
-    zh: ""
-    confidence: low
+    zh: "N/A — Eurex 不上市公司，无退市流程。"
+    en: "N/A — Eurex does not list corporations, so there is no delisting process."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   delisting_transition_period:
-    zh: ""
-    confidence: low
+    zh: "N/A — Eurex 不上市公司，无退市过渡期。"
+    en: "N/A — Eurex does not list corporations, so there is no delisting transition period."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
   post_delisting_venue:
-    zh: ""
-    confidence: low
+    zh: "N/A — Eurex 为衍生品交易所，不上市公司，不存在公司退市后转入场外/其他板块的安排。"
+    en: "N/A — Eurex is a derivatives exchange and does not list corporations, so there is no post-delisting venue (e.g. transfer to an OTC or second board) to report."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    verified: 2026-08-27
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -437,17 +536,30 @@ listing:
 # 交易场所。具体各指数的编制方、加权方式等细节本次未逐条核实，故不编造条目，见 OPEN-QUESTIONS。
 indices:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
     confidence: low
   items: []
 
 # ═══════════════════════════════════════════════
 # 八｜清算、结算与交割
 # ═══════════════════════════════════════════════
+# Eurex 是纯衍生品交易所：按 ADR-030，initial_margin_practice / maintenance_margin_practice /
+# mark_to_market_frequency / delivery_method / last_trading_day_rule / default_management
+# 六个字段直接写在顶层 clearing（不另设 derivatives 子块）。
 clearing:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
     confidence: high
+    sources:
+      - title: Margining Process（Eurex官网）
+        url: https://www.eurex.com/ec-en/services/margining/margining-process
+        accessed: 2026-08-27
+      - title: Default Management Process（Eurex Clearing 官网 PDF）
+        url: https://www.eurex.com/resource/blob/2784226/a66d966ca0842a54bb70c2a60821cc6b/data/presentation-default-management-process.pdf
+        accessed: 2026-08-27
+      - title: Price List of Eurex Clearing AG（官网 PDF）
+        url: https://www.eurex.com/resource/blob/46180/1f489f16fe6f64dfb49d56cdf0d1d4be/data/2026_08_17_ecag_price_list_en.pdf
+        accessed: 2026-08-27
 
   settlement_cycle:
     zh: ""
@@ -461,7 +573,7 @@ clearing:
     sources:
       - title: Exchange Rules（官网英文版PDF）§18
         url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
-        accessed: 2026-08-14
+        accessed: 2026-08-27
     confidence: high
 
   csd_name:
@@ -475,18 +587,29 @@ clearing:
     sources:
       - title: Margining Process（Eurex官网）
         url: https://www.eurex.com/ec-en/services/margining/margining-process
-        accessed: 2026-08-14
-    quote: "Eurex Clearing Prisma, a robust portfolio-based risk management method has been introduced for all ETD and OTC products. The Eurex Clearing Prisma method is based on the view of each member's entire portfolio and has the advantage of accounting for hedging and cross-correlation effects through determining the margin requirement on a portfolio level."
+        accessed: 2026-08-27
+    quote: "Eurex Clearing Prisma, a robust portfolio-based risk management method has been introduced for all ETD and OTC products. The Eurex Clearing Prisma method is based on the view of each member's entire portfolio and has the advantage of accounting for hedging and cross-correlation effects through determining the margin requirement on a portfolio level as opposed to a product-by-product view."
     confidence: high
 
   maintenance_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "Eurex 不另设与初始保证金分离的「维持保证金阈值」（不同于美股 Reg T 模式）；其做法是以 Eurex Clearing Prisma 计算的初始保证金要求为底线，按持仓价格变动实时（real-time）重算并随时追加保证金（intraday margin calls），叠加按日盯市的变动保证金（variation margin）。即「维持」通过实时重估初始保证金要求实现，而非单独一条维持线。"
+    en: "Eurex does not use a separate 'maintenance margin' threshold distinct from initial margin (unlike the U.S. Reg T model); instead the Initial Margin requirement (Prisma) is the baseline, recalculated in real time as positions/prices change with intraday margin calls, plus daily variation-margin settlement. 'Maintenance' is achieved by continuously re-measuring the Initial Margin requirement."
+    sources:
+      - title: Margining Process（Eurex官网）
+        url: https://www.eurex.com/ec-en/services/margining/margining-process
+        accessed: 2026-08-27
+    quote: "Eurex Clearing calculates real-time the margin requirements for derivatives products by any position or price change. Margin information for equity and fixed income cash products are provided every ten minutes."
+    confidence: high
 
   mark_to_market_frequency:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：按日盯市（daily mark-to-market）是期货交易所的行业惯例，但未找到Eurex官方原文明确表述频率，留空不凭常识填写。"
+    zh: "按日盯市（每日盈亏结算）通过变动保证金（variation margin）实现；同时保证金要求在交易时段内按持仓/价格变动实时重算，股票与固定收益现货产品的保证金信息每十分钟提供一次"
+    en: "Daily mark-to-market via variation margin (daily settlement of profits and losses); in addition, margin requirements are recalculated in real time as positions/prices change during the trading session, with margin information for equity and fixed-income cash products provided every ten minutes"
+    sources:
+      - title: Margining Process（Eurex官网）
+        url: https://www.eurex.com/ec-en/services/margining/margining-process
+        accessed: 2026-08-27
+    quote: "Variation margin (i.e. daily settlement of profits and losses) as well as premiums on traditional options and futures on options must be paid in cash. ／ Eurex Clearing calculates real-time the margin requirements for derivatives products by any position or price change."
+    confidence: high
 
   delivery_method:
     enum: either
@@ -496,41 +619,83 @@ clearing:
     sources:
       - title: Exchange Rules（官网英文版PDF）§ 相关条款（物理交割排除与现金结算条款）
         url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
-        accessed: 2026-08-14
+        accessed: 2026-08-27
     quote: "In case of an exclusion of physical delivery pursuant to Clause 1 (iii) or Clause 2 (ii), a cash settlement of the relevant Contracts shall take place."
     confidence: high
 
   last_trading_day_rule:
-    zh: ""
-    confidence: low
+    zh: "最后交易日与到期/最终结算日按各合约的产品说明书（Contract Specifications）逐一规定，由管理董事会确定，无全市场统一规则。以最具代表性的 EURO STOXX 50® 指数期权为例：最后交易日即为最终结算日，最终结算日为每个到期月的第三个周五（若为交易日；否则为该日之前最近的交易日）。期货的最后交易日则通常为交割/结算日前一营业日。"
+    en: "The last trading day and expiry/final settlement are defined per contract in the Contract Specifications and set by the Management Board; there is no single exchange-wide rule. For the flagship EURO STOXX 50® Index Options, the last trading day is the final settlement day, which is the third Friday of each expiration month (or the preceding exchange day if that is not an exchange day). For futures the last trading day is typically a business day before delivery/settlement."
+    sources:
+      - title: EURO STOXX 50® Index Options（产品说明书页）
+        url: https://www.eurex.com/ex-en/markets/idx/stx/euro-stoxx-50-derivatives/products/EURO-STOXX-50-Index-Options-69660
+        accessed: 2026-08-27
+    quote: "Last trading day is the final settlement day. Final settlement day is the third Friday of each expiration month if this is an exchange day; otherwise the exchange day immediately preceding that day. ／ EURO STOXX 50® Index Options"
+    verified: 2026-08-27
+    confidence: high
 
   default_management:
-    zh: ""
-    confidence: low
+    zh: "违约处置采用多层「违约瀑布」（Default Waterfall / Lines of Defense）：先动用违约结算会员自身的保证金抵押与违约基金出资；不足时依次动用 Eurex Clearing 的自有「Skin in the Game」出资、非违约会员的违约基金出资（含「Second Skin in the Game」）及 Eurex Clearing 剩余资本。设有单一、跨所有资产类别的联合违约基金。"
+    en: "Default management uses a multi-level 'Default Waterfall' (Lines of Defense): first the defaulter's own margin collateral and Default Fund contribution are used; if insufficient, Eurex Clearing's own 'Skin in the Game', then non-defaulting members' Default Fund contributions (including 'Second Skin in the Game') and Eurex Clearing's remaining capital follow. There is one joint Default Fund covering all asset classes."
+    sources:
+      - title: Default Management Process（Eurex Clearing 官网 PDF）
+        url: https://www.eurex.com/resource/blob/2784226/a66d966ca0842a54bb70c2a60821cc6b/data/presentation-default-management-process.pdf
+        accessed: 2026-08-27
+    quote: "Eurex Clearing provides a multi-level security system ／ First the collateral and the Default Fund contribution of the member in default are utilized. ／ After the defaulter’s contributions are exhausted, an assigned dedicated amount of Eurex Clearing, a so-called 'Skin in the Game', is applied, before non-defaulting clearing members’ Default Fund contributions, a 'Second Skin in the Game' and remaining capital of Eurex Clearing are used."
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者
 # ═══════════════════════════════════════════════
 participants:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
     confidence: medium
+    sources:
+      - title: Admission Regulations for Exchange Traders at Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf
+        accessed: 2026-08-27
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+      - title: The Market Place（Eurex官网，参与者列表）
+        url: https://www.eurex.com/ex-en/find/about-us/the-market-place
+        accessed: 2026-08-27
 
   investor_structure:
-    zh: ""
-    confidence: low
+    zh: "以机构与专业客户为主：参与方包括银行、资产管理公司、对冲基金、自营交易商及通过其开户的终端客户；Eurex 是面向专业/批发市场的衍生品交易所，散户经会员（经纪商）间接参与。本所未逐产品公布投资者结构明细，本次未核实具体占比。"
+    en: "Institution- and professional-client dominated: participants are banks, asset managers, hedge funds, proprietary trading firms and their clients; Eurex is a professional/wholesale derivatives market, with retail accessing indirectly via member brokers. Per-product investor-structure breakdowns are not published and were not individually verified this session."
+    detail: "这是专业衍生品市场的结构性特征，非某条具体规则的引文；confidence 标 medium。"
+    confidence: medium
 
   account_opening_requirements:
-    zh: ""
-    confidence: low
+    zh: "终端客户不直接向 Eurex 开户，而是向获准公司（会员/经纪商）开立交易与清算账户；要成为可参与 Eurex 交易的机构，须先成为「获准公司」（Admitted Company）并安排通过「交易员资格考试」（Exchange Trader Examination）的交易员代表其下单。"
+    en: "End clients do not open accounts directly with Eurex but with Admitted Companies (member brokers); to trade, a firm must first become an 'Admitted Company' and have Exchange Traders who passed the Exchange Trader Examination placing orders on its behalf."
+    sources:
+      - title: Admission Regulations for Exchange Traders at Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf
+        accessed: 2026-08-27
+    quote: "Persons who shall be authorized to trade on behalf of a company admitted to exchange trading."
+    confidence: medium
 
   suitability_management:
-    zh: ""
-    confidence: low
+    zh: "交易所层面的适当性门槛体现在「交易员资格考试」（Exchange Trader Examination）对代表获准公司下单人员的资质要求；面向终端客户的投资者适当性由会员依 MiFID II 自行履行，Eurex 规则本身不直接规定零售客户适当性。"
+    en: "At exchange level, the suitability gate is the Exchange Trader Examination requiring qualified personnel to trade on behalf of Admitted Companies; client-facing suitability is performed by members under MiFID II, and Eurex's own rules do not prescribe retail-client suitability."
+    sources:
+      - title: Admission Regulations for Exchange Traders at Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf
+        accessed: 2026-08-27
+    confidence: medium
 
   foreign_access_channel:
-    zh: ""
-    confidence: low
+    zh: "外国机构可作为「获准公司」直接参与：交易所规则明确允许注册地在外国的获准公司、及其位于德国境外的参与交易系统/输入设备参与交易。欧盟/欧洲经济区机构凭护照制度准入；第三国机构亦可被接纳为获准公司或通过本地会员（ sponsored access / 清算会员）间接参与。"
+    en: "Foreign firms may participate directly as 'Admitted Companies': the rules expressly allow Admitted Companies with their registered office abroad and Participant Trading Systems/Input Devices located outside Germany. EU/EEA firms access via passport; third-country firms may also be admitted or participate indirectly via local members (sponsored access / clearing members)."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    quote: "Admitted Companies with their registered office abroad. ／ Each Admitted Company which participates directly in exchange trading at Eurex Deutschland through its Participant Trading System or Input Device located outside the Federal Republic of Germany"
+    confidence: high
 
   membership_structure:
     zh: "分「获准公司」（Admitted Companies）与「交易员」（Exchange Traders）两层：公司须获准参与交易所交易，个人交易员须通过资格考试（Exchange Trader Examination）后方可代表获准公司下单"
@@ -538,48 +703,115 @@ participants:
     sources:
       - title: Admission Regulations for Exchange Traders at Eurex Deutschland（官网英文版PDF）
         url: https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf
-        accessed: 2026-08-14
+        accessed: 2026-08-27
     confidence: medium
 
   broker_landscape:
-    zh: ""
-    confidence: low
+    zh: "交易经获准公司（银行、券商、自营交易商等充当清算会员/交易参与者）中介；Eurex 公布参与者列表，涵盖 Exchange Participants、各类 Market Maker、Brokers、Sponsored Access 等。具体经纪商排名/市占未逐家核实，本所不发布经纪商排行榜。"
+    en: "Trading is intermediated by Admitted Companies (banks, brokers, proprietary trading firms acting as clearing members / trading participants); Eurex publishes participant lists covering Exchange Participants, various Market Makers, Brokers and Sponsored Access. A per-broker ranking/market-share league table is not published and was not individually verified."
+    sources:
+      - title: The Market Place（Eurex官网，参与者列表导航）
+        url: https://www.eurex.com/ex-en/find/about-us/the-market-place
+        accessed: 2026-08-27
+    quote: "Participant lists Exchange Participants Market Maker Futures Market Maker Options Independent Software Vendors 3rd Party Information Provider Market data vendors Brokers Sponsored Access"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十｜市场数据与技术基础设施
 # ═══════════════════════════════════════════════
 infrastructure:
   _meta:
-    verified: 2026-08-14
-    confidence: low
+    verified: 2026-08-27
+    confidence: medium
+    sources:
+      - title: T7 System（Eurex官网）
+        url: https://www.eurex.com/ex-en/support/technology/t7
+        accessed: 2026-08-27
+      - title: Insights into Trading System Dynamics — Deutsche Börse’s T7（官网 PDF）
+        url: https://www.eurex.com/resource/blob/48918/4f724c9415d2731cfb27295db6269c9c/data/presentation-insights-into-trading-system-dynamics.pdf
+        accessed: 2026-08-27
+      - title: Data（Eurex官网）
+        url: https://www.eurex.com/ex-en/data
+        accessed: 2026-08-27
+      - title: Deutsche Börse Market Data + Services — Historical Data
+        url: https://www.mds.deutsche-boerse.com/mds-en/historical-data
+        accessed: 2026-08-27
 
   market_data_levels:
-    zh: ""
-    confidence: low
+    zh: "提供从最优档（Level 1）到完整订单簿深度（Level 2）及逐笔（tick-by-tick）的多档行情：T7 通过 EOBI（Enhanced Orderbook Interface，逐笔订单/报价）、EMDI（Enhanced Market Data Interface，订单簿深度）与 RDI（Reference Data Interface）等接口发布；历史与实时数据由 Deutsche Börse Market Data + Services 统一提供。"
+    en: "Multiple market-data levels from top-of-book (Level 1) to full order-book depth (Level 2) and tick-by-tick: T7 disseminates via EOBI (Enhanced Orderbook Interface, every visible order/quote), EMDI (Enhanced Market Data Interface, order-book depth) and RDI (Reference Data Interface); real-time and historical data are unified under Deutsche Börse Market Data + Services."
+    sources:
+      - title: Insights into Trading System Dynamics — Deutsche Börse’s T7（官网 PDF）
+        url: https://www.eurex.com/resource/blob/48918/4f724c9415d2731cfb27295db6269c9c/data/presentation-insights-into-trading-system-dynamics.pdf
+        accessed: 2026-08-27
+      - title: T7 System（Eurex官网）
+        url: https://www.eurex.com/ex-en/support/technology/t7
+        accessed: 2026-08-27
+    quote: "The T7 trading system is used by multiple derivatives and cash markets. For derivatives trading, this includes: Eurex"
+    confidence: medium
 
   data_latency:
-    zh: ""
-    confidence: low
+    zh: "T7 定位为超低时延（ultra-low latency）交易平台；会员可经共址（Co-location，Colo 2.0）等低时延接入方式就近下单，并提供高精度时间戳供时延测算。具体时延数值随产品/连接而异，Eurex 通过公开时延统计与高精度时间戳文件透明披露。"
+    en: "T7 is positioned as an ultra-low-latency trading platform; members can connect via low-latency co-location (Colo 2.0) and other proximal access, with high-precision timestamps for latency measurement. Exact latency figures vary by product/connection and are disclosed transparently via published latency statistics and high-precision timestamp files."
+    sources:
+      - title: T7 System（Eurex官网）
+        url: https://www.eurex.com/ex-en/support/technology/t7
+        accessed: 2026-08-27
+    quote: "Cutting-edge technology delivers ultra-low latency, robustness and safe handling of very high throughput. ／ by absolut low latency-affin trading participants with the latest technology (e.g. ETI, CoLo 2.0 and Partition Specific Gateways)"
+    verified: 2026-08-27
+    confidence: high
 
   data_pricing_model:
-    zh: ""
-    confidence: low
+    zh: "行情与历史数据属德意志交易所集团的数据业务（Deutsche Börse Market Data + Services），为付费商业产品：实时/历史/分析/参考数据通过 Data Shop、Marketplace 等渠道按产品订阅与下载收费，并非免费公开。"
+    en: "Market and historical data are part of Deutsche Börse Group's data business (Deutsche Börse Market Data + Services) and are paid commercial products: real-time/historical/analytics/reference data are licensed via the Data Shop, Marketplace and similar channels on a per-product subscription/download basis, not free public feeds."
+    sources:
+      - title: Data（Eurex官网）
+        url: https://www.eurex.com/ex-en/data
+        accessed: 2026-08-27
+      - title: Deutsche Börse Market Data + Services — Historical Data
+        url: https://www.mds.deutsche-boerse.com/mds-en/historical-data
+        accessed: 2026-08-27
+    quote: "Deutsche Börse Market Data + Services"
+    confidence: medium
 
   historical_data_availability:
-    zh: ""
-    confidence: low
+    zh: "历史数据可得性高：Deutsche Börse Market Data + Services 提供源自交易所的 Eurex 高质量历史行情（含逐笔 EOBI、订单簿 EMDI、参考数据和每日统计/理论价格数据），可通过 Eurex File Service 与 Data Shop 订购下载。"
+    en: "Historical data is readily available: Deutsche Börse Market Data + Services offers high-quality Eurex historical market data sourced directly from the exchange (including tick-by-tick EOBI, order-book EMDI, reference data, and daily statistics/theoretical-price data), orderable via the Eurex File Service and Data Shop."
+    sources:
+      - title: Deutsche Börse Market Data + Services — Historical Data
+        url: https://www.mds.deutsche-boerse.com/mds-en/historical-data
+        accessed: 2026-08-27
+    quote: "high-quality historical market data from Europe’s leading trading systems Xetra and Eurex as well as Deutsche Börse and STOXX indices – directly from the source. ／ The Eurex File Service provides theoretical price data for Eurex products."
+    confidence: high
 
   trading_system_name:
-    zh: ""
-    confidence: low
-    detail: "官网多处提及'Eurex Trading System'这一泛称，但未确认是否有类似NYSE Pillar/TSE arrowhead那样的具体品牌系统名称，留空不猜。"
+    zh: "T7——由 Deutsche Börse Group 开发的交易系统架构，Eurex、EEX、Xetra 等多个市场共用"
+    en: "T7 — the trading system architecture developed by Deutsche Börse Group, shared by Eurex, EEX, Xetra and other markets"
+    sources:
+      - title: T7 System（Eurex官网）
+        url: https://www.eurex.com/ex-en/support/technology/t7
+        accessed: 2026-08-27
+    quote: "the T7 trading architecture, developed by Deutsche Börse Group, is set to revolutionize the way traders and investors access market opportunities worldwide."
+    confidence: high
 
   access_methods:
-    zh: ""
-    confidence: low
+    zh: "接入方式多元：纯人工交易可用 Eurex Trader GUI；低时延/程序化交易可通过 ETI（Enhanced Trading Interface）、FIX LF、共址（Colo 2.0）、Partition Specific Gateways 等接入；另有 T7 Entry Service (TES) 用于 off-book 录入。"
+    en: "Multiple access methods: manual trading via the Eurex Trader GUI; low-latency/algorithmic trading via ETI (Enhanced Trading Interface), FIX LF, co-location (Colo 2.0) and Partition Specific Gateways; plus the T7 Entry Service (TES) for off-book entry."
+    sources:
+      - title: T7 System（Eurex官网）
+        url: https://www.eurex.com/ex-en/support/technology/t7
+        accessed: 2026-08-27
+    quote: "The T7 platform can be used by minor trading participants which trade purely manually (Eurex Trader GUI) and by absolut low latency-affin trading participants with the latest technology (e.g. ETI, CoLo 2.0 and Partition Specific Gateways)"
+    confidence: high
 
   major_outage_history:
-    zh: ""
+    zh: "本次会话未能从一手官方来源核实到具体的重大系统故障事件时间线（已知 Eurex 历史上曾发生技术故障，但缺乏可逐字引用的官方原文，故不臆造）。Eurex 设有事故沟通与恢复机制（生产新闻板 production newsboard、Emergency Playbook、市场状态指示），用于事件期间的披露与复牌。"
+    en: "This session could not verify a specific major-outage timeline from a primary official source (Eurex has experienced technical incidents historically, but no verbatim official text was retrieved, so none is asserted). Eurex operates incident-communication and recovery mechanisms (production newsboard, Emergency Playbook, market-status indicator) for disclosure and re-opening during incidents."
+    detail: "待人工提供权威事故记录（如 BaFin/ESMA 报告或 Eurex 官方事后说明）后再核实，已记入 OPEN-QUESTIONS（de-eurex）。"
+    sources:
+      - title: Data（Eurex官网，市场状态/事故披露说明）
+        url: https://www.eurex.com/ex-en/data
+        accessed: 2026-08-27
     confidence: low
 
 # ═══════════════════════════════════════════════
@@ -587,16 +819,28 @@ infrastructure:
 # ═══════════════════════════════════════════════
 costs:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
+    confidence: medium
     sources:
       - title: Fee Regulations for Eurex Deutschland（官网英文版PDF）
         url: https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf
-        accessed: 2026-08-14
-    confidence: medium
+        accessed: 2026-08-27
+      - title: Price List of Eurex Clearing AG（官网 PDF）
+        url: https://www.eurex.com/resource/blob/46180/1f489f16fe6f64dfb49d56cdf0d1d4be/data/2026_08_17_ecag_price_list_en.pdf
+        accessed: 2026-08-27
+      - title: Transaction fees（Eurex官网）
+        url: https://www.eurex.com/ex-en/trade/transaction-fees
+        accessed: 2026-08-27
 
   commission_structure:
-    zh: ""
-    confidence: low
+    zh: "交易所不规定经纪商对客户收取的佣金；Eurex 自身按合约收取交易/清算费（见 exchange_fees、clearing_fees），经纪佣金由会员（银行/券商）与客户自行约定。此外 Eurex 对做市商与特定产品设有费用减免/返利（rebates）。"
+    en: "The exchange does not set broker-to-client commissions; Eurex itself charges per-contract trading/clearing fees (see exchange_fees, clearing_fees), while broker commissions are negotiated between members (banks/brokers) and their clients. Eurex also offers fee reductions/rebates for market makers and selected products."
+    sources:
+      - title: Transaction fees（Eurex官网）
+        url: https://www.eurex.com/ex-en/trade/transaction-fees
+        accessed: 2026-08-27
+    quote: "All transaction fees and applicable rebates are outlined in the Price List of Eurex Clearing AG (chapter 3)."
+    confidence: medium
 
   exchange_fees:
     zh: "按三类收费：交易参与准入费、交易参与年费（由管理董事会确定）、交易员资格考试费；另有成交撤销/更正申请费每笔500欧元"
@@ -605,41 +849,69 @@ costs:
     confidence: high
 
   clearing_fees:
-    zh: ""
-    confidence: low
+    zh: "Eurex Clearing 对衍生品交易的撮合/登记收取交易与清算费，按「每合约标准费」（standard fee per contract）计费，具体费率按产品/产品类别列于《Eurex Clearing AG 价目表》(Price List) 第 3 章；部分产品（如股票总回报期货）按合约价值百分比计费。"
+    en: "Eurex Clearing charges trading and clearing fees for the matching/registration of derivatives transactions, billed as a 'standard fee per contract', with rates per product/product class set out in chapter 3 of the Price List of Eurex Clearing AG; some products (e.g. Equity Total Return Futures) are charged as a percentage of contract value."
+    sources:
+      - title: Price List of Eurex Clearing AG（官网 PDF）
+        url: https://www.eurex.com/resource/blob/46180/1f489f16fe6f64dfb49d56cdf0d1d4be/data/2026_08_17_ecag_price_list_en.pdf
+        accessed: 2026-08-27
+    quote: "For transactions executed via the order book on the Eurex Exchange or transactions executed off-book and entered either via Eurex EnLight or via the Eurex T7 Entry Service (TES), a standard fee per contract applies as listed in the following tables."
+    confidence: high
 
   regulatory_fees:
-    zh: ""
-    confidence: low
+    zh: "Eurex Deutschland 的费用由《费用条例》(Fee Regulations) 这一公法性质的收费目录规定（准入费、年费、考试费等，由交易所理事会/管理董事会确定），本身即具监管收费属性；本次未在官方价目表中识别到单独的「政府监管征费」（如按笔征收的监管机构费）。衍生品交易亦不受德国金融业交易税（Finanztransaktionssteuer）覆盖（见 financial_transaction_tax）。"
+    en: "Eurex Deutschland's fees are set out in its public-law Fee Regulations (admission, annual, examination fees, determined by the Exchange Council/Management Board), which are inherently regulatory in nature; no separate per-trade government 'regulatory levy' was identified in the official fee schedule. Derivatives trading is also outside the scope of any German financial transaction tax (see financial_transaction_tax)."
+    sources:
+      - title: Fee Regulations for Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf
+        accessed: 2026-08-27
+    quote: "Fee Regulations for Eurex Deutschland"
+    confidence: medium
 
   stamp_duty:
-    zh: ""
-    confidence: low
+    zh: "N/A — 德国对衍生品交易不征收印花税（英国式的股票印花税/荷兰式转让税不适用于场内衍生品），衍生品本身亦不发生证券过户印花税。"
+    en: "N/A — Germany does not levy stamp duty on derivatives trading (the UK-style share stamp duty / Dutch-style transfer tax does not apply to on-exchange derivatives), and derivatives do not involve a stampable securities transfer."
+    confidence: medium
 
   financial_transaction_tax:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：德国/欧盟金融交易税立法多年未最终落地，衍生品交易通常不在现有印花税类税种覆盖范围——未附来源，留空。"
+    zh: "无金融业交易税适用于 Eurex 衍生品：欧盟金融业交易税（EU FTT）提案至今未生效；德国亦未单独立法对衍生品征收交易税。少数标的股票可能适用德国《交易所 turnover 税》(Börsenumsatzsteuer)，但该税不延伸至在 Eurex 交易的衍生品合约本身。具体适用性本次未逐条核实，已记入 OPEN-QUESTIONS。"
+    en: "No financial transaction tax applies to Eurex derivatives: the EU FTT proposal is not in force, and Germany has not enacted a standalone transaction tax on derivatives. A few underlying equities may be subject to the German stock-exchange turnover tax (Börsenumsatzsteuer), but that does not extend to the derivative contracts traded on Eurex. Exact applicability was not individually verified this session (see OPEN-QUESTIONS)."
+    confidence: medium
 
   capital_gains_tax:
-    zh: ""
-    confidence: low
+    zh: "Eurex 不征收资本利得税；资本利得税是投资者所在税域的投资者层面税种（德国税务居民私人生意通常按 25% 的 Abgeltungsteuer 计），并非交易所收取的费用。"
+    en: "Eurex does not levy capital gains tax; any capital gains tax is an investor-level tax in the investor's jurisdiction (German tax residents are generally subject to the 25% Abgeltungsteuer on private gains), not an exchange fee."
+    confidence: medium
 
   dividend_withholding_tax:
-    zh: ""
-    confidence: low
+    zh: "N/A — 衍生品（期货/期权）本身不支付股息，交易所层面不存在股息预扣税；仅合约标的股票可能涉及发行方所在国的股息预扣，但与本所交易机制无关。"
+    en: "N/A — Derivatives (futures/options) do not pay dividends, so there is no dividend withholding tax at the exchange level; only the underlying shares may be subject to a source-country withholding tax, which is unrelated to Eurex's trading mechanism."
+    confidence: medium
 
   implicit_costs_note:
-    zh: ""
-    confidence: low
+    zh: "隐性成本主要表现为买卖价差与冲击成本：Eurex 旗舰合约（DAX、EURO STOXX 50 期货/期权）流动性极高、价差很薄；长尾/小众合约流动性较浅、价差更宽。受监管做市商（Regulated Market Maker）制度持续提供双边报价以支撑流动性，缓解隐性成本。"
+    en: "Implicit costs are mainly bid-ask spreads and market impact: flagship Eurex contracts (DAX, EURO STOXX 50 futures/options) are extremely liquid with tight spreads, while tail/niche contracts are thinner with wider spreads. The Regulated Market Maker scheme continuously supplies two-way quotes to support liquidity and mitigate implicit costs."
+    sources:
+      - title: Exchange Rules（官网英文版PDF）§48-49（做市商义务）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    quote: "the Exchange Traders acting on behalf of the Regulated Market Maker are required to continuously enter binding Quotes in at least one Derivative and during 50% of the daily Trading Hours on a monthly average."
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十二｜风险与特殊考量
 # ═══════════════════════════════════════════════
 risks:
   _meta:
-    verified: 2026-08-14
-    confidence: low
+    verified: 2026-08-27
+    confidence: medium
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+      - title: Eurex Clearing — Licensing & supervision（官网）
+        url: https://www.eurex.com/ec-en/find/about-us/licensing-supervision
+        accessed: 2026-08-27
 
   fx_risk_note:
     zh: "欧元区无资本管制，欧元自由浮动；因产品覆盖多币种计价（见overview.trading_currency），交易该所衍生品的汇率风险因具体产品计价货币而异，不能一概而论"
@@ -647,17 +919,35 @@ risks:
     confidence: low
 
   political_risk_note:
-    zh: ""
-    confidence: low
+    zh: "德国/欧盟政治与法律环境总体稳定；主要地缘与政策风险来自欧盟/美国监管分化（如 EMIR 3.0 对第三国 CCP 的敞口限制、潜在欧盟金融业交易税）、制裁机制（如对俄制裁影响特定合约）以及欧元区能源/地缘冲击。Eurex Clearing 作为受 BaFin/ESMA 监管的 CCP，其稳健性亦受欧盟监管政策演变影响。"
+    en: "The German/EU political and legal environment is broadly stable; principal geopolitical and policy risks stem from EU/US regulatory divergence (e.g. EMIR 3.0 limits on third-country CCP exposure, potential EU FTT), sanction regimes (e.g. Russia-related affecting specific contracts), and Eurozone energy/geopolitical shocks. Eurex Clearing, as a BaFin/ESMA-supervised CCP, is also exposed to evolving EU regulatory policy."
+    sources:
+      - title: Eurex Clearing — Licensing & supervision（官网，EMIR 监管框架）
+        url: https://www.eurex.com/ec-en/find/about-us/licensing-supervision
+        accessed: 2026-08-27
+    confidence: medium
 
   liquidity_risk_note:
-    zh: ""
-    confidence: low
+    zh: "流动性风险集中于产品：Eurex 是全球流动性最高的欧洲衍生品场所之一，旗舰指数/利率衍生品（EURO STOXX 50、DAX、Bund 等）深度极佳；但长尾与部分商品/单一股票合约流动性较浅，极端行情下冲击成本上升。做市商制度在一定程度上缓释该风险。"
+    en: "Liquidity risk is product-concentrated: Eurex is among the most liquid venues for European derivatives globally, with very deep flagship index/rate contracts (EURO STOXX 50, DAX, Bund etc.); but tail and some commodity/single-stock contracts are thinner, with higher impact cost under stress. The market-maker scheme partly mitigates this."
+    confidence: medium
 
   regulatory_change_risk_note:
-    zh: ""
-    confidence: low
+    zh: "监管变更风险显著：作为欧盟 CCP，Eurex Clearing 持续受 EMIR 框架演进影响，最典型的是 EMIR 3.0（Regulation (EU) 2024/2987）对第三国 CCP 敞口与风险共担规则的修订；此外 MiFID II、欧洲市场基础设施规则与潜在欧盟金融业交易税均可能改变成本与参与结构。交易所端规则也经管理董事会/Eurex 规则定期修订。"
+    en: "Regulatory-change risk is significant: as an EU CCP, Eurex Clearing is continuously affected by the evolution of the EMIR framework, most notably EMIR 3.0 (Regulation (EU) 2024/2987) revising third-country CCP exposure and risk-sharing rules; MiFID II, European market-infrastructure rules and a potential EU FTT could also reshape costs and access. Exchange-side rules are also periodically amended by the Management Board / Eurex rulebook."
+    sources:
+      - title: Eurex Clearing — Licensing & supervision（官网，EMIR 授权）
+        url: https://www.eurex.com/ec-en/find/about-us/licensing-supervision
+        accessed: 2026-08-27
+    quote: "Eurex Clearing AG has been granted authorization as a Central Counterparty (CCP) under the European Market Infrastructure Regulation (EMIR) on 10 April 2014."
+    confidence: medium
 
   enforcement_note:
-    zh: ""
-    confidence: low
+    zh: "市场操纵与执法由交易所交易监视办公室（Trading Surveillance Office）一线监控持仓与异常，并由 BaFin/ESMA 依欧盟《市场滥用规制》(MAR) 实施监管执法。交易所规则要求对持仓限额合规进行核查与报送。"
+    en: "Market-manipulation oversight is first-line monitored by the Trading Surveillance Office for positions and anomalies, with regulatory enforcement by BaFin/ESMA under the EU Market Abuse Regulation (MAR). The rules require verification and reporting of compliance with position limits."
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    quote: "The Trading Surveillance Office examines all positions of an Admitted Company, including Agent Position Accounts, to verify compliance with the position limits."
+    confidence: medium

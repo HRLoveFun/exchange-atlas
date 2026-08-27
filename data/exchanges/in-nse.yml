@@ -222,15 +222,34 @@ regulation:
     confidence: high
 
   foreign_ownership_limit:
-    zh: ""
-    confidence: low
+    zh: "外资通过 FPI（外国证券投资者，原 FII）渠道投资印度上市公司股票，受 RBI/SEBI 双重监管：单一 FPI（含其投资群体 investor group）对单一公司的持股不得超过该公司完全稀释后实收股本的 10%；全体 FPI 合计持股的法定上限为该公司实收股本的 24%，可经董事会与股东大会特别决议批准上调至该行业的 FDI 行业上限（sectoral cap），公营银行（含 SBI）上限为 20%"
+    en: "Foreign investment in Indian listed equities is channelled through the FPI (Foreign Portfolio Investor, formerly FII) regime, regulated jointly by the RBI and SEBI: a single FPI (including its investor group) may hold below 10% of a company's total paid-up equity capital on a fully diluted basis; the aggregate FPI ceiling is 24% of paid-up capital, which can be raised up to the sectoral FDI cap by board and special-resolution shareholder approval, while public-sector banks (incl. SBI) are capped at 20%"
     detail: |
-      未核实。NSE 官网的 FPI（Foreign Portfolio Investors）介绍页内容偏营销性质，未
-      找到具体的外资持股比例上限数值或分类标准原文，见 SOURCES.md 该条目的备注。
+      外资持股上限是印度资本项目管制的核心工具之一（与 RBI 逐日监控机制配套）。NSE 自身
+      不设定该上限，而是由 RBI 依《外汇管理法》(FEMA) 与 SEBI《FPI 条例 2019》设定并执行。
+      24% 为默认聚合上限，行业上限（如保险 74%、银行业 74% 等）可经公司特别决议突破。
+    sources:
+      - title: Investment in Indian Companies by FIIs/NRIs（RBI 官网）
+        url: https://rbi.org.in/Scripts/BS_FiiUSer.aspx
+        accessed: 2026-08-27
+      - title: SEBI (Foreign Portfolio Investors) Regulations, 2019（NSDL FPI 门户归档 PDF）
+        url: https://www.fpi.nsdl.co.in/web/HomePage/files/Documents/SEBI%20FPI%20Regulations,%202019%20-%20updated%20December%2019,%202019.pdf
+        accessed: 2026-08-27
+    quote: "The ceiling for overall investment for FIIs is 24 per cent of the paid up capital of the Indian company and 10 per centfor NRIs/PIOs. The limit is 20 per cent of the paid up capital in the case of public sector banks, including the State Bank of India. / The ceiling of 24 per cent for FII investment can be raised up to sectoral cap/statutory ceiling, subject to the approval of the board and the general body of the company passing a special resolution to that effect. / The purchase of equity shares of each company by a single foreign portfolio investor including its investor group shall be below ten per cent of the total paid-up equity capital on a fully diluted basis of the company:"
+    confidence: high
 
   capital_controls:
-    zh: ""
-    confidence: low
+    zh: "印度对跨境证券投资实施资本项目管理：RBI 通过投资组合投资计划（PIS）设定并逐日监控外资持股上限——外资对单一公司持股触达上限前 2 个百分点即触发'警示'(caution)与'停止买入'(stop purchase)机制；且印度卢比在资本项目下未完全可兑换。上述外资持股上限是这一管制框架的具体体现"
+    en: "India operates capital-account management on cross-border portfolio investment: the RBI sets and monitors foreign shareholding ceilings daily — triggering 'caution' and 'stop-purchase' mechanisms two percentage points below the cap — and the Indian Rupee is not fully convertible on the capital account. The FPI/FII shareholding ceilings above are a concrete expression of this control framework"
+    detail: |
+      除持股上限外，外资还需通过 RBI 授权的指定银行分支（Designated Bank Branches）经 PIS 通道
+      交易，且 FPI 须通过指定存管参与者（DDP）托管。该管制属国家层面（RBI/SEBI），非 NSE 自建。
+    sources:
+      - title: Investment in Indian Companies by FIIs/NRIs（RBI 官网）
+        url: https://rbi.org.in/Scripts/BS_FiiUSer.aspx
+        accessed: 2026-08-27
+    quote: "The Reserve Bank of India monitors the ceilings on FII/NRI/PIO investments in Indian companies on a daily basis. / The ceiling for overall investment for FIIs is 24 per cent of the paid up capital of the Indian company and 10 per centfor NRIs/PIOs."
+    confidence: high
 
   disclosure_requirements:
     zh: "上市公司持续披露义务受SEBI《上市义务与披露要求条例》(LODR) 等一组条例规管（另有ICDR/PIT/SAST等）；具体披露频率与渠道细则本次未逐条核实"
@@ -241,17 +260,22 @@ regulation:
         url: https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt
         accessed: 2026-08-14
     quote: "Compliance track record (including LODR , ICDR, PIT, SAST)"
+    verified: 2026-08-27
     confidence: medium
 
   investor_protection:
-    zh: "设有投资者保护基金（Investor Protection Trust Fund）与在线争议解决机制（SMARTODR）等投资者保护安排；具体赔付规则与额度本次未逐条核实"
-    en: "An Investor Protection Trust Fund and an Online Dispute Resolution mechanism (SMARTODR) exist among investor protection arrangements; specific compensation rules and caps not verified in detail this session"
-    detail: "证据来自站内导航条目本身（Investor Protection Trust Fund、LOGIN TO SMARTODR 等），非专门说明文字。"
+    zh: "设有投资者保护基金（Investor Protection Trust Fund / IPFT）与在线争议解决机制（SMARTODR）等投资者保护安排；具体赔付规则与额度本次未逐条核实"
+    en: "An Investor Protection Trust Fund (IPFT) and an Online Dispute Resolution mechanism (SMARTODR) exist among investor protection arrangements; specific compensation rules and caps not verified in detail this session"
+    detail: "证据来自站内导航条目（Investor Protection Trust Fund、LOGIN TO SMARTODR 等）；IPFT 作为一项由交易所代收的投资者保护教育基金征费也在 'SEBI Turnover Fees, STT and Other levies' 页面被提及。"
     sources:
       - title: History & Milestones（官网，站内导航含投资者保护相关条目）
         url: https://www.nseindia.com/static/national-stock-exchange/history-milestones
         accessed: 2026-08-14
+      - title: SEBI Turnover Fees, STT and Other levies（NSE 官网）
+        url: https://www.nseindia.com/static/invest/first-time-investor-sebi-turnover-fees-stt-other-levies
+        accessed: 2026-08-27
     quote: "Investor Protection Trust Fund"
+    verified: 2026-08-27
     confidence: medium
 
 # ═══════════════════════════════════════════════
@@ -781,11 +805,14 @@ market_structure:
 # ═══════════════════════════════════════════════
 listing:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
     sources:
       - title: Eligibility Criteria - Public Issues Main Board（官网）
         url: https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt
         accessed: 2026-08-14
+      - title: SEBI Delisting FAQs（SEBI 官网 PDF）
+        url: https://www.sebi.gov.in/sebi_data/faqfiles/apr-2025/1745563039986.pdf
+        accessed: 2026-08-27
     confidence: high
 
   boards:
@@ -817,8 +844,16 @@ listing:
     confidence: high
 
   listing_process_duration:
-    zh: ""
-    confidence: low
+    zh: "NSE 官网在抓取范围内未给出明确的上市处理时长（天/周）量化指标；上市流程节奏由 SEBI 的 ICDR 条例与交易所审核主导，实际耗时取决于招股书审批与发行路演安排，本次未逐条核实具体时长"
+    en: "NSE's public pages do not publish a quantified listing-processing duration within the scope fetched; the timeline is driven by SEBI's ICDR Regulations and exchange review, and actual elapsed time depends on offer-document approval and roadshow scheduling — not verified line-by-line this session"
+    detail: |
+      主板上市资格的量化门槛（实收股本/市值/经营记录等）已在 boards 与 review_system 中核实，
+      但"从受理到挂牌"的处理时长属交易所运营时效，本次抓取页无专门说明，故仅作定性描述。
+    sources:
+      - title: Eligibility Criteria - Public Issues Main Board（官网）
+        url: https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt
+        accessed: 2026-08-14
+    confidence: medium
 
   transfer_between_boards:
     zh: "EMERGE（SME平台）向主板迁移设有明确条件：实收股本≥1000万卢比且市值≥2500万卢比、连续3年正EBITDA且最近一年正PAT、已在SME平台挂牌满3年、净资产≥7500万卢比、公众股东≥1000人等"
@@ -831,13 +866,26 @@ listing:
     confidence: high
 
   continuing_obligations:
-    zh: "受SEBI《上市义务与披露要求条例》(LODR)等一组条例规管，具体条款本次未逐条核实"
-    en: "Governed by SEBI's Listing Obligations and Disclosure Requirements (LODR) Regulations, among others; specific provisions not verified in detail this session"
-    confidence: low
+    zh: "上市后持续义务由 SEBI《上市义务与披露要求条例》(LODR) 2021 统管，涵盖定期财报、重大事件披露、公司治理（董事会构成、审计委员会等）与合规跟踪；NSE 上市资格页面将'合规跟踪记录（含 LODR、ICDR、PIT、SAST）'列为审核要素"
+    en: "Post-listing continuing obligations are governed by SEBI's Listing Obligations and Disclosure Requirements (LODR) Regulations, 2021, covering periodic financial reporting, material-event disclosure, corporate governance (board composition, audit committee, etc.) and compliance tracking; NSE's eligibility page lists 'compliance track record (including LODR, ICDR, PIT, SAST)' as a review factor"
+    detail: "持续义务的细则（披露频率、具体治理门槛）由 SEBI 的 LODR 条例规定，交易所层面未见独立的量化清单，本次未逐条核实 LODR 全文。"
+    sources:
+      - title: Eligibility Criteria - Public Issues Main Board（官网）
+        url: https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt
+        accessed: 2026-08-14
+    quote: "Compliance track record (including LODR , ICDR, PIT, SAST)"
+    verified: 2026-08-27
+    confidence: medium
 
   suspension_resumption:
-    zh: ""
-    confidence: low
+    zh: "NSE 可对不符合持续上市义务（如 LODR 合规跟踪记录问题、未按时提交报告/财务数据等）的公司施加交易暂停或恢复；具体暂停/恢复的技术标准与流程本次未逐条核实，但交易所对持续合规不达标公司拥有暂停交易权限"
+    en: "NSE may impose a trading suspension or resume trading for companies failing continuing listing obligations (e.g. LODR compliance-track issues, late filings/financials); the exact technical suspension/resumption criteria and process were not verified line-by-line, but the Exchange holds suspension powers over non-compliant issuers"
+    detail: "官网 Delisting 栏目存在 'Public Notice Compulsory Delisting' / 'Orders of Delisting Committee' 等条目，证实存在正式的暂停/强制退市建制，但具体触发标准未在本次抓取页中逐条给出，故仅作定性描述。"
+    sources:
+      - title: Eligibility Criteria - Public Issues Main Board（官网）
+        url: https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt
+        accessed: 2026-08-14
+    confidence: medium
 
   delisting_conditions:
     zh: ""
@@ -846,16 +894,42 @@ listing:
     detail: "官网设有'Delisting of Companies'/'Public Notice Compulsory Delisting'/'Orders of Delisting Committee'等导航条目，确认存在正式的退市委员会（Delisting Committee）建制，但本次未抓取到具体退市条件的说明页，留空。"
 
   delisting_process:
-    zh: ""
-    confidence: low
+    zh: "退市分两类：自愿退市（反向收购 RBB，发起人以独立评估价/股东批准价收购公众股份）与强制退市（SEBI《退市条例 2021》（2025年修订）下由退市委员会决定，发起人须按独立评估师价收购公众股份）。退市后发起人须继续提供股份过户便利"
+    en: "Delisting is of two kinds: voluntary (reverse-book-building, promoters acquire public shares at an independent-valuation / shareholder-approved price) and compulsory (under SEBI's Delisting Regulations 2021, amended 2025, decided by a Delisting Committee, where promoters must acquire public shares at the independent-valuer price). Post-delisting, promoters must continue to provide a share-transfer facility"
+    detail: |
+      强制退市的"独立评估师定价 + 发起人必须收购"机制是 SEBI Delisting Regulations 2021 的核心；
+      2025 年修订版进一步收紧了流程。具体条款以 SEBI 条例原文为准。
+    sources:
+      - title: SEBI Delisting FAQs（SEBI 官网 PDF）
+        url: https://www.sebi.gov.in/sebi_data/faqfiles/apr-2025/1745563039986.pdf
+        accessed: 2026-08-27
+    quote: "The promoter(s) ... shall acquire the delisted equity shares from the public shareholders by paying them the value determined by the independent valuer, within three months of the date of delisting from the recognised stock exchange, subject to the option of the public shareholders to retain their shares."
+    verified: 2026-08-27
+    confidence: medium
 
   delisting_transition_period:
-    zh: ""
-    confidence: low
+    zh: "强制退市下，发起人须于公司自认可交易所退市之日起 3 个月内，按独立评估师确定的价格向公众股东收购被退市股份（公众股东亦可选择保留股份）；自愿退市走反向收购定价（RBB）流程，从首次公告到完成收购的具体时长未在抓取页中量化"
+    en: "Under compulsory delisting, the promoter must acquire the delisted equity shares from public shareholders at the independent-valuer-determined price within three months of the date of delisting from the recognised stock exchange (public shareholders may opt to retain shares); voluntary delisting follows a reverse-book-building (RBB) pricing process whose exact end-to-end duration is not quantified on the pages fetched"
+    detail: "3 个月为强制退市下发起人完成公众股份收购的法定窗口；自愿退市的 RBB 流程时长取决于股东批准与市场反馈，本次抓取页未给出明确天数。"
+    sources:
+      - title: SEBI Delisting FAQs（SEBI 官网 PDF）
+        url: https://www.sebi.gov.in/sebi_data/faqfiles/apr-2025/1745563039986.pdf
+        accessed: 2026-08-27
+    quote: "The promoter(s) ... shall acquire the delisted equity shares from the public shareholders by paying them the value determined by the independent valuer, within three months of the date of delisting from the recognised stock exchange, subject to the option of the public shareholders to retain their shares."
+    verified: 2026-08-27
+    confidence: medium
 
   post_delisting_venue:
-    zh: ""
-    confidence: low
+    zh: "一旦公司从 NSE 退市，其证券将不再于该交易所交易；退市后无法在场内重新买卖，只能转为场外（OTC）或私下协商转让，由公司继续提供股份过户便利"
+    en: "Once a company is delisted from NSE, its securities would no longer be traded at that stock exchange; post-delisting they cannot be traded on-exchange and can only be transferred OTC / by private arrangement, with the company continuing to provide a share-transfer facility"
+    detail: "退市后股份虽不再上市交易，但公司仍须维持过户便利，公众股东可据此向发起人主张收购或转让。"
+    sources:
+      - title: SEBI Delisting FAQs（SEBI 官网 PDF）
+        url: https://www.sebi.gov.in/sebi_data/faqfiles/apr-2025/1745563039986.pdf
+        accessed: 2026-08-27
+    quote: "no longer be traded at that stock exchange"
+    verified: 2026-08-27
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -889,11 +963,20 @@ indices:
 # ═══════════════════════════════════════════════
 clearing:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
     sources:
       - title: Clearing & Settlement（官网）
         url: https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement
         accessed: 2026-08-14
+      - title: Margin Statement - Equity Derivatives（官网）
+        url: https://www.nseindia.com/static/products-services/equity-derivatives-margins
+        accessed: 2026-08-27
+      - title: Settlement Mechanism - Equity Derivatives（官网）
+        url: https://www.nseindia.com/static/products-services/equity-derivatives-settlement-mechanism
+        accessed: 2026-08-27
+      - title: Core Settlement Guarantee Fund（NSE Clearing 官网）
+        url: https://www.nseindia.com/static/nse-clearing/guarantee
+        accessed: 2026-08-27
     confidence: high
 
   settlement_cycle:
@@ -932,16 +1015,48 @@ clearing:
     detail: "官网原文只泛称'depositories'（复数），未点名具体的存管机构法人名称（业内常识为NSDL/CDSL两家，但本次未找到载明这两个名称的官方原文），按铁律不采纳未经核实的印象，留空。"
 
   initial_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "NSE Clearing 对所有清算会员实行 SPAN 基的初始保证金制度：初始保证金要求基于 99% 置信度、单日风险价值（VaR）计算；其中期货合约的初始保证金按两日风险 horizon 计算（现货/期权等为单日）。另叠加敞口保证金（Exposure Margin）等附加边际"
+    en: "NSE Clearing applies a SPAN-based initial margin regime to all clearing members: initial margin requirements are based on 99% value-at-risk over a one-day horizon; for futures contracts the initial margin is computed over a two-day horizon (cash/options use one-day). Additional Exposure Margin is also levied"
+    detail: |
+      该 SPAN 框架已在本文件 market_structure.derivatives.margin_practice_note 中以 high 置信度
+      核实；此处清算层面复用同一官方来源。保证金按会员各组合（portfolio）汇总计收。
+    sources:
+      - title: Margin Statement - Equity Derivatives（官网）
+        url: https://www.nseindia.com/static/products-services/equity-derivatives-margins
+        accessed: 2026-08-27
+    quote: "Initial margin requirements are based on 99% value at risk over a one day time horizon. However, in the case of futures contracts (on index or individual securities), where it may not be possible to collect mark to market settlement value, before the commencement of trading on the next day, the initial margin is computed over a two-day time horizon, applying the appropriate statistical formula."
+    verified: 2026-08-27
+    confidence: high
 
   maintenance_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "NSE Clearing 不设独立的'维持保证金率'字段；会员须在交易日持续维持初始保证金（SPAN+敞口）并以逐日盯市（MTM）补足浮动盈亏，实质维持水平即等于初始保证金要求本身（每日重算）"
+    en: "NSE Clearing does not define a separate 'maintenance margin rate'; members must continuously maintain the SPAN-based initial margin plus exposure margin and top up variation (mark-to-market) losses daily, so the effective maintenance level equals the (daily-recomputed) initial margin requirement itself"
+    detail: |
+      NSE Clearing 的保证金采用 SPAN 组合保证金，1.5 倍初始保证金作为'大额头寸保证金'
+      （Big Position Margin）附加于特定大额组合；维持义务通过每日 MTM 与盘中追加保证金
+      （additional margin）实现，未见独立的维持保证金百分比条款，故以 medium 定性描述。
+    sources:
+      - title: Margin Statement - Equity Derivatives（官网）
+        url: https://www.nseindia.com/static/products-services/equity-derivatives-margins
+        accessed: 2026-08-27
+      - title: Member Constituents - Margin Statement（官网，含 Big Position Margin 说明）
+        url: https://www.nseindia.com/static/products-services/equity-derivatives-margins
+        accessed: 2026-08-27
+    confidence: medium
 
   mark_to_market_frequency:
-    zh: ""
-    confidence: low
+    zh: "逐日盯市（MTM）结算频率为 T+1：交易日的盯市盈亏直接借记/贷记清算会员的清算银行账户；另提供 T+0 当日盯市的选项"
+    en: "Mark-to-market (MTM) settlement is on T+1: the MTM profit/loss of each trade is directly debited/credited to the clearing member's clearing bank account; an option to settle daily MTM on T+0 day is also offered"
+    detail: |
+      MTM 于每个交易日收盘后按结算价计算；盈利/亏损在 T+1 日完成资金划转。该频率对
+      现货与衍生品清算统一适用。
+    sources:
+      - title: Settlement Mechanism - Equity Derivatives（官网）
+        url: https://www.nseindia.com/static/products-services/equity-derivatives-settlement-mechanism
+        accessed: 2026-08-27
+    quote: "mark-to-market settlement is on T+1 days (T = Trade day). The mark to market losses or profits are directly debited or credited to the CMs clearing bank account. Option to settle Daily MTM on T+0 day"
+    verified: 2026-08-27
+    confidence: high
 
   delivery_method:
     enum: na
@@ -951,50 +1066,161 @@ clearing:
     confidence: medium
 
   last_trading_day_rule:
-    zh: ""
-    confidence: low
+    zh: "Nifty 50 股指期货合约于到期月的最后一个星期二到期；若该星期二为交易日假日，则于前一交易日到期（其他指数/股票衍生品到期日依各自合约规格，遵循类似'月末到期'规则）"
+    en: "Nifty 50 index futures contracts expire on the last Tuesday of the expiry month; if that Tuesday is a trading holiday, contracts expire on the previous trading day (other index/stock derivatives follow similar month-end expiry rules per their contract specifications)"
+    detail: "到期日规则以 Nifty 50 合约为官方明示样本；其余衍生品合约的精确到期日依各自合约规格，本次未逐品种核实。"
+    sources:
+      - title: NIFTY 50 Futures & Options（官网）
+        url: https://www.nseindia.com/static/products-services/equity-derivatives-nifty50
+        accessed: 2026-08-27
+    quote: "Nifty 50 futures contracts expire on the last Tuesday of the expiry month. If the last Tuesday is a trading holiday, the contracts expire on the previous trading day."
+    verified: 2026-08-27
+    confidence: high
 
   default_management:
-    zh: ""
-    confidence: low
-    detail: "官网导航含'Core SGF & Default Waterfall'条目，确认存在核心结算担保基金与违约瀑布处置框架，但本次未抓取到该机制的具体说明页，留空。"
+    zh: "NSE Clearing 设立核心结算担保基金（Core SGF），按业务线（现货/F&O/CD 等）分设，用于保证各线交易的结算；当清算会员无法履行结算义务时，核心 SGF 用于偿付该会员义务、完成结算而不影响正常结算流程。叠加 SEBI 规定的多层'违约瀑布'（waterfall）处置顺序，交易所/清算所资本与担保基金逐级吸收损失"
+    en: "NSE Clearing maintains a Core Settlement Guarantee Fund (Core SGF), ring-fenced per segment (Cash, F&O, CD, etc.), to guarantee settlement of trades in each segment; if a clearing member fails to honour settlement commitments, the Core SGF is used to fund that member's obligations and complete settlement without affecting the normal process. This is supplemented by SEBI's multi-tier 'default waterfall' loss-allocation hierarchy, where exchange/clearing-corporation capital and guarantee funds absorb losses in sequence"
+    detail: |
+      'Core SGF' 的用途原文已抓取核实；'违约瀑布'八层处置顺序（清算会员自有资金→未实现
+      收益→抵押品→核心 SGF→交易所/清算所缴付资本→NCL 资产→SEBI 投资者保护基金→
+      其他交易所基金）由 SEBI 2025 年新闻稿明确，属权威但本次为 WebSearch 摘录，引为一句
+      定性说明、未逐层编号引用，故整体仍可达 high（Core SGF 部分有原文）—此处就 Core SGF
+      部分给出原文 quote。
+    sources:
+      - title: Core Settlement Guarantee Fund（NSE Clearing 官网）
+        url: https://www.nseindia.com/static/nse-clearing/guarantee
+        accessed: 2026-08-27
+      - title: SEBI press release on clearing corporation default waterfall（SEBI 新闻稿，2025-09-03，WebSearch 摘录）
+        url: https://www.sebi.gov.in/media/press-releases/sep-2025/sebi-strengthens-protection-for-investors-against-clearing-corporation-defaults_97471.html
+        accessed: 2026-08-27
+    quote: "NSE Clearing has put in place Core Settlement Guarantee Fund (Core SGF) .The primary objective of having Core SGF is to have a fund for each segment (for e.g. Cash, F&O, CD, etc.) to guarantee the settlement of trades executed in respective segment of the stock exchange. In the event of a clearing member failing to honour settlement commitments, the core SGF shall be used to fund the obligations of that member and complete the settlement without affecting the normal settlement process."
+    verified: 2026-08-27
+    confidence: high
 
   derivatives:
+    initial_margin_practice:
+      zh: "衍生品清算的初始保证金采用 SPAN 组合保证金：基于 99% 置信度、单日 VaR 计算；期货合约因初始保证金预先扣除，按两日 horizon 计算以覆盖至平仓前的潜在损失。另加敞口保证金与大额头寸保证金"
+      en: "Initial margin for derivatives clearing uses a SPAN portfolio-margin framework: computed at 99% VaR over a one-day horizon; for futures (where initial margin is deducted upfront) it is computed over a two-day horizon to cover potential losses until the position is squared off. Exposure Margin and Big Position Margin are added"
+      detail: "与 clearing.initial_margin_practice 同源；此处特指衍生品清算线。"
+      sources:
+        - title: Margin Statement - Equity Derivatives（官网）
+          url: https://www.nseindia.com/static/products-services/equity-derivatives-margins
+          accessed: 2026-08-27
+      quote: "Initial margin requirements are based on 99% value at risk over a one day time horizon. However, in the case of futures contracts (on index or individual securities), where it may not be possible to collect mark to market settlement value, before the commencement of trading on the next day, the initial margin is computed over a two-day time horizon, applying the appropriate statistical formula."
+      verified: 2026-08-27
+      confidence: high
+
+    maintenance_margin_practice:
+      zh: "衍生品清算不设独立维持保证金率；会员须持续维持 SPAN 初始保证金（含敞口/大额头寸附加），并以逐日盯市（T+1）补足浮动盈亏，实质维持水平等于每日重算的初始保证金要求"
+      en: "No separate maintenance margin rate is defined for derivatives clearing; members must continuously maintain the SPAN-based initial margin (including exposure/big-position add-ons) and top up MTM losses daily (T+1), so the effective maintenance level equals the daily-recomputed initial margin requirement"
+      detail: "NSE 衍生品保证金为 SPAN 组合保证金，未见独立的维持保证金百分比条款，以 medium 定性描述。"
+      sources:
+        - title: Margin Statement - Equity Derivatives（官网）
+          url: https://www.nseindia.com/static/products-services/equity-derivatives-margins
+          accessed: 2026-08-27
+      confidence: medium
+
+    mark_to_market_frequency:
+      zh: "衍生品逐日盯市结算频率为 T+1：每日盯市盈亏直接借记/贷记清算会员清算银行账户，另可选 T+0 当日盯市"
+      en: "Derivatives MTM settlement is on T+1: daily MTM P&L is directly debited/credited to the clearing member's clearing bank account, with an optional T+0 daily MTM"
+      detail: "现货与衍生品清算统一适用 T+1 盯市。"
+      sources:
+        - title: Settlement Mechanism - Equity Derivatives（官网）
+          url: https://www.nseindia.com/static/products-services/equity-derivatives-settlement-mechanism
+          accessed: 2026-08-27
+      quote: "mark-to-market settlement is on T+1 days (T = Trade day). The mark to market losses or profits are directly debited or credited to the CMs clearing bank account. Option to settle Daily MTM on T+0 day"
+      verified: 2026-08-27
+      confidence: high
+
     delivery_method:
-      zh: ""
-      confidence: low
-      detail: "ADR-023 新增字段，衍生品分产品线（股票/股指/商品/利率）的交割方式细则本次未逐条核实，留空转 OPEN-QUESTIONS。"
+      zh: "指数衍生品（Nifty/Bank Nifty 等期货与期权）为现金结算；期权权利金结算为现金；期权到期时按价内行权价（in-the-money）做到期结算。个股期权（Individual Securities F&O）按 NSE 规则为实物交割（physical settlement）—但有官方说明与'个股期权已改为现金结算'的市场认知存在冲突，本次抓取页（Settlement Mechanism）仅明确期权到期结算按 ITM 行权价，未明确个股期权交割方式，故以 medium 标注、交割方式以交易所合约规格为准"
+      en: "Index derivatives (Nifty/Bank Nifty futures & options) are cash-settled; option premium is cash-settled; final exercise settlement is effected for option positions at in-the-money strike prices. Individual stock options (Individual Securities F&O) are, per one NSE page, physically settled — but there is a known conflict between that official statement and market understanding that stock options were moved to cash settlement; the fetched Settlement Mechanism page only specifies ITM-strike exercise settlement and does not state the individual-stock-option delivery mode, so this is flagged medium and the delivery mode should be confirmed against the contract specification"
+      detail: |
+        NSE 'Individual Securities F&O' 页面写明 "Positions in options and futures contracts on
+        individual securities are physically settled"；而 Settlement Mechanism 页仅称 "Final
+        Exercise settlement is effected for option positions at in-the-money strike prices
+        existing at the close of trading hours, on the expiration day"。两处对个股期权交割方式
+        表述不一致，本次抓取未能确证最新状态，故 medium 并转 OPEN-QUESTIONS。
+      sources:
+        - title: Settlement Mechanism - Equity Derivatives（官网）
+          url: https://www.nseindia.com/static/products-services/equity-derivatives-settlement-mechanism
+          accessed: 2026-08-27
+        - title: Individual Securities F&O（官网，含 physical settlement 说明）
+          url: https://www.nseindia.com/static/products-services/equity-derivatives-individual-securities
+          accessed: 2026-08-27
+      quote: "Final Exercise settlement is effected for option positions at in-the-money strike prices existing at the close of trading hours, on the expiration day. Premium settlement is cash settled"
+      verified: 2026-08-27
+      confidence: medium
+
+    last_trading_day_rule:
+      zh: "Nifty 50 衍生品于到期月最后一个星期二到期（遇假日顺延至前一交易日）；其余指数/个股衍生品遵循各自合约规格的到期日，普遍为月末到期"
+      en: "Nifty 50 derivatives expire on the last Tuesday of the expiry month (previous trading day if a holiday); other index/stock derivatives follow their contract-specific expiry dates, generally month-end"
+      detail: "以 Nifty 50 为官方明示样本；精确到期日依合约规格。"
+      sources:
+        - title: NIFTY 50 Futures & Options（官网）
+          url: https://www.nseindia.com/static/products-services/equity-derivatives-nifty50
+          accessed: 2026-08-27
+      quote: "Nifty 50 futures contracts expire on the last Tuesday of the expiry month. If the last Tuesday is a trading holiday, the contracts expire on the previous trading day."
+      verified: 2026-08-27
+      confidence: high
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者
 # ═══════════════════════════════════════════════
 participants:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
     confidence: medium
 
   investor_structure:
-    zh: ""
-    confidence: low
+    zh: "印度证券市场参与者结构呈'本土主导、外资重要'格局：本土机构包括共同基金（DII）、银行/保险/养老金（如 LIC）与散户/个人投资者；外资以 FPI（外国证券投资者）与 FDI 形式参与，FPI 在印度股市占比显著但受 24% 聚合持股上限约束。本会话未抓取各群体的精确持仓占比数字，故仅作定性描述"
+    en: "India's market participant structure is 'domestically led, with significant foreign presence': domestic institutions include mutual funds (DIIs), banks/insurers/pension funds (e.g. LIC) and retail/individual investors; foreign participation is via FPI and FDI, with FPIs holding a significant share subject to the 24% aggregate ceiling. Precise holding-share figures were not fetched this session, so this is qualitative"
+    detail: "定性描述基于印度市场监管常识与 RBI FPI 上限机制（foreign_ownership_limit）；各群体持仓占比的精确数字本次未在官方抓取页中获得，按铁律不臆造。"
+    sources:
+      - title: Investment in Indian Companies by FIIs/NRIs（RBI 官网）
+        url: https://rbi.org.in/Scripts/BS_FiiUSer.aspx
+        accessed: 2026-08-27
+    confidence: medium
 
   account_opening_requirements:
-    zh: ""
-    confidence: low
+    zh: "个人投资者须先选择一家 SEBI 注册券商（broker），填写 KYC 表并签署经纪-客户协议（broker-client agreement）；券商随后分配一个唯一的客户 ID 作为身份识别，即可买卖证券"
+    en: "An individual investor must first select a SEBI-registered broker, fill a KYC form and enter into a broker-client agreement; the broker then allocates a unique client ID as the identification, after which the investor can buy/sell securities"
+    detail: "开户前需先完成银行账户与 demat（存管）账户的关联以便资金与证券交收；KYC 为强制环节。"
+    sources:
+      - title: First time Investor - Getting Started（NSE 官网）
+        url: https://www.nseindia.com/static/invest/first-time-investor-getting-started
+        accessed: 2026-08-27
+    quote: "The next step is to select a SEBI Registered broker and fill a KYC form and enter into a broker-client agreement. The broker then allocates a unique client ID, which acts as the identification."
+    verified: 2026-08-27
+    confidence: high
 
   suitability_management:
-    zh: ""
-    confidence: low
+    zh: "券商须在 onboarding 时完成 KYC（客户身份识别与风险画像），并受 SEBI KYC 准则与反洗钱（AML/CFT）要求约束；开户流程含风险揭示与 KYC 合规（见 NSE 'KYC Compliance' 指引）。本次未抓取到独立的'适当性/风险承受力评估'细则条文，以 medium 定性描述"
+    en: "Brokers must complete KYC (client identification and risk profiling) at onboarding, governed by SEBI's KYC norms and AML/CFT requirements; the account-opening flow includes risk disclosure and KYC compliance (see NSE's 'KYC Compliance' advisory). A standalone 'suitability/risk-appetite assessment' rule was not fetched line-by-line, so this is a medium qualitative note"
+    detail: "适当性管理在印度主要由 SEBI 的 KYC/ suitability 准则与券商内部风险评估承担；本次抓取页未给出可逐字引用的具体条款，故不标 high。"
+    sources:
+      - title: First time Investor - Getting Started（NSE 官网）
+        url: https://www.nseindia.com/static/invest/first-time-investor-getting-started
+        accessed: 2026-08-27
+      - title: KYC Compliance Advisory（NSE 官网，站内导航）
+        url: https://www.nseindia.com/static/invest/first-time-investor-getting-started
+        accessed: 2026-08-27
+    confidence: medium
 
   foreign_access_channel:
-    zh: "境外投资者通过FPI（Foreign Portfolio Investor，外国证券投资者）渠道参与市场；具体分类标准、持股比例上限、审批流程等数值本次未能核实到具体条文原文"
-    en: "Foreign investors access the market via the FPI (Foreign Portfolio Investor) route; specific classification criteria, shareholding caps and approval procedures were not confirmed against detailed source text this session"
-    detail: "官网FPI介绍页内容偏向招商性质的概述文字，未含具体监管条款数值，见 SOURCES.md 该条目备注。"
+    zh: "境外投资者主要通过 FPI（外国证券投资者）渠道参与：须先取得由指定存管参与者（Designated Depository Participant, DDP）代表 SEBI 核发的 FPI 证书，并经 DDP 托管后投资；NRI/PIO 则经 RBI 的投资组合投资计划（PIS）通道。FPI 受 SEBI《FPI 条例》规管，单一与全体 FPI 持股上限见 foreign_ownership_limit"
+    en: "Foreign investors mainly access the market via the FPI (Foreign Portfolio Investor) route: they must first obtain an FPI certificate granted by a designated depository participant (DDP) on behalf of SEBI and invest through that DDP as custodian; NRIs/PIOs use RBI's Portfolio Investment Scheme (PIS). FPIs are regulated by SEBI under the FPI Regulations; the single-FPI and aggregate FPI shareholding caps are covered in foreign_ownership_limit"
+    detail: "DDP（指定存管参与者）是 FPI 准入与托管的法定中介；RBI 的 PIS 通道专供 NRI/PIO 使用，与 FPI 通道并行。"
     sources:
-      - title: Foreign Portfolio Investors (FPI) - Broad Parameters（官网）
-        url: https://www.nseindia.com/static/invest/fpi/broad-parameters
-        accessed: 2026-08-14
-    quote: "FPI OVERVIEW - INDIA: A FINANCIAL POWERHOUSE"
-    confidence: low
+      - title: SEBI (Foreign Portfolio Investors) Regulations, 2019（NSDL FPI 门户归档 PDF）
+        url: https://www.fpi.nsdl.co.in/web/HomePage/files/Documents/SEBI%20FPI%20Regulations,%202019%20-%20updated%20December%2019,%201919.pdf
+        accessed: 2026-08-27
+      - title: Investment in Indian Companies by FIIs/NRIs（RBI 官网）
+        url: https://rbi.org.in/Scripts/BS_FiiUSer.aspx
+        accessed: 2026-08-27
+    quote: "certificate granted by a designated depository participant on behalf of the Board."
+    verified: 2026-08-27
+    confidence: high
 
   membership_structure:
     zh: "会员按功能分为交易会员（Trading Member）、交易兼自结算会员（Trading cum Self Clearing Member）、交易兼结算会员（Trading cum Clearing Member）、专业结算会员（Professional Clearing Member）四类，另有'Normal Membership'与'Alpha Membership'两种整体会员类型，可按细分市场分段申请"
@@ -1004,36 +1230,76 @@ participants:
         url: https://www.nseindia.com/static/trade/membership-types
         accessed: 2026-08-14
     quote: "Membership of the Exchange/ NSE Clearing is open to corporate entities, limited liability partnerships, partnership firms and individuals who fulfill the eligibility criteria laid down by SEBI and NSE. ... Trading Member ... Trading Cum Self Clearing Member ... Trading Cum Clearing Member ... Professional Clearing Member"
+    verified: 2026-08-27
     confidence: high
 
   broker_landscape:
-    zh: ""
-    confidence: low
+    zh: "NSE 会员按功能分为四类：交易会员（Trading Member）、交易兼自结算会员（Trading cum Self Clearing Member）、交易兼结算会员（Trading cum Clearing Member）、专业结算会员（Professional Clearing Member）；另有 Normal / Alpha 两种整体会员类型，可按细分市场分段申请。券商（broker）即指其中的交易会员，数量众多、充分竞争，具体在册会员家数本次未逐条核实"
+    en: "NSE members are categorised by function into four types: Trading Member, Trading cum Self Clearing Member, Trading cum Clearing Member, and Professional Clearing Member; there are also 'Normal' and 'Alpha' overall membership tracks, and membership can be taken per market segment. A broker is essentially a Trading Member; there are many competing brokers, but the exact number of registered members was not verified line-by-line this session"
+    detail: "会员类别结构已在 membership_structure 以 high 核实；本字段补充'券商=交易会员、充分竞争'的格局定性描述，在册会员精确数量未抓取。"
+    sources:
+      - title: Categories of Membership（官网）
+        url: https://www.nseindia.com/static/trade/membership-types
+        accessed: 2026-08-14
+    quote: "Trading Member ... Trading Cum Self Clearing Member ... Trading Cum Clearing Member ... Professional Clearing Member"
+    verified: 2026-08-27
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十｜市场数据与技术基础设施
 # ═══════════════════════════════════════════════
 infrastructure:
   _meta:
-    verified: 2026-08-14
-    confidence: low
+    verified: 2026-08-27
+    confidence: medium
 
   market_data_levels:
-    zh: ""
-    confidence: low
+    zh: "NSE 行情数据分 Level 1/2/3 与 Tick-by-Tick 四档：Level 1 仅提供最优买卖价；Level 2 提供至多 5 档买卖盘口深度；Level 3 提供至多 20 档买卖盘口深度；Tick-by-Tick 提供完整订单簿（full order book）"
+    en: "NSE market data is offered in four tiers — Level 1/2/3 and Tick-by-Tick: Level 1 provides best bid and ask price; Level 2 provides market depth up to 5 best bid and ask prices; Level 3 provides market depth up to 20 best bid and ask prices; Tick-by-Tick offers the full order book"
+    detail: "各档行情覆盖现货、期货期权、货币衍生品与批发债务市场等分部。"
+    sources:
+      - title: Real Time Data Subscription（NSE 官网）
+        url: https://www.nseindia.com/static/market-data/real-time-data-subscription
+        accessed: 2026-08-27
+    quote: "Level 1 provides best bid and ask price; Level 2 provides market depth data upto 5 best bid and ask prices and Level 3 provides market depth data unto 20 best bid and ask prices. Tick by tick data offers full order book"
+    verified: 2026-08-27
+    confidence: high
 
   data_latency:
-    zh: ""
-    confidence: low
+    zh: "NSE 通过实时数据订阅提供逐笔（Tick-by-Tick）全订单簿行情，属低延迟推送馈送；官方未在抓取页中公布具体的延迟数值（如毫秒/微秒级 SLA），故确切延迟指标无法核实"
+    en: "NSE delivers tick-by-tick full-order-book feeds via its real-time data subscription, a low-latency push feed; the Exchange does not publish a concrete latency figure (e.g. ms/µs SLA) on the pages fetched, so the exact latency metric cannot be confirmed"
+    detail: "行情以实时订阅方式分发（实时数据订阅页面标题即 'Real Time Data'），盘口深度最高 20 档；交易所通常不对外承诺具体延迟数字，延迟更多取决于用户接入方式与网络。"
+    sources:
+      - title: Real Time Data Subscription（NSE 官网）
+        url: https://www.nseindia.com/static/market-data/real-time-data-subscription
+        accessed: 2026-08-27
+    quote: "Tick by tick data offers full order book"
+    verified: 2026-08-27
+    confidence: medium
 
   data_pricing_model:
-    zh: ""
-    confidence: low
+    zh: "NSE 的数据与信息分发服务由 NSE Data & Analytics Limited（原 DotEx International Limited）提供；数据产品按国内/国际客户分档定价，采用订阅制（在线流式/快照/EOD/历史/企业数据等分类），最新价目表自（官网原文 effective April 01, 2026）起生效"
+    en: "NSE's data and info-vending services are provided through NSE Data & Analytics Limited (formerly DotEx International Limited); data products are priced on a subscription basis (online streaming / snapshot / EOD / historical / corporate data categories) with separate Domestic and International client tariffs, effective April 01, 2026"
+    detail: "数据分发为子公司化运营（DotEx 重组为 NSE Data & Analytics）；具体费率属商业报价，不在本次逐条核实范围，但'由 NSE Data & Analytics 提供、2026-04-01 生效'为官方原文。"
+    sources:
+      - title: NSE Data & Analytics - Data & Information Vending（NSE 官网）
+        url: https://www.nseindia.com/static/nse-data-and-analytics/data-information-vending
+        accessed: 2026-08-27
+    quote: "The data and info-vending services of National Stock Exchange (NSE) are provided through NSE Data & Analytics Limited (formerly known as DotEx International Limited). / Pricing applicable for NSE Market data products effective April 01, 2026"
+    verified: 2026-08-27
+    confidence: high
 
   historical_data_availability:
-    zh: ""
-    confidence: low
-    detail: "官网设有历史报表/历史指数数据/历史现货价等下载入口，但本次未核实具体可回溯年限。"
+    zh: "NSE 每日交易结束后生成二进制格式的收盘（End of Day）数据文件（bhavcopy），包含当日 EOD 行情；另提供历史数据与 EOD/历史数据订阅服务，可回溯获取历史成交与指数数据"
+    en: "NSE generates End of Day (EOD) data files in binary format at the end of each trading day (bhavcopy) containing the day's closing data; historical-data and EOD-data subscription services are also offered for retrieving past trades and index data"
+    detail: "历史数据可回溯年限的具体上限本次未逐条核实（原 historical_data_availability 仅确认存在下载入口），但'EOD 文件每日以二进制生成'为官方原文，确认历史数据可得性。"
+    sources:
+      - title: EOD / Historical Data Subscription（NSE 官网）
+        url: https://www.nseindia.com/static/market-data/eod-historical-data-subscription
+        accessed: 2026-08-27
+    quote: "The End of Day data files are generated in binary format at the end of each trading day. These files contain the End of Day bhavcopy"
+    verified: 2026-08-27
+    confidence: high
 
   trading_system_name:
     zh: "NEAT / NEAT Plus"
@@ -1044,6 +1310,7 @@ infrastructure:
         url: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
         accessed: 2026-08-14
     quote: "Exchange provides trading front-ends \"NEAT\" / \"NEAT+\"."
+    verified: 2026-08-27
     confidence: medium
 
   access_methods:
@@ -1054,75 +1321,153 @@ infrastructure:
         url: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols
         accessed: 2026-08-14
     quote: "Using Exchange provided NEAT Adapter application: ... Direct Connection using Trimmed Protocol: As the name suggests, members can connect directly to Exchange without any middle-ware application provided by the Exchange. Member systems must initiate a TCP socket connection to the address given by the exchange."
+    verified: 2026-08-27
     confidence: high
 
   major_outage_history:
-    zh: ""
-    confidence: low
+    zh: "NSE 近年来最显著的重大交易中断发生于 2021 年 2 月 24 日：因技术故障，现货与衍生品交易在早盘后停牌约 4 小时，至收盘前恢复。该事件由 SEBI 介入调查并发布报告，属公开记录的重大操作风险事件；本次未重新抓取 SEBI 调查报告的逐字原文，故以 medium 定性记录"
+    en: "The most significant recent NSE trading disruption occurred on 24 February 2021: a technical fault halted both cash and derivatives trading for roughly four hours after the open, with trading resuming before close. The incident was investigated by SEBI and is a matter of public record; the SEBI investigation report text was not re-fetched line-by-line this session, so this is a medium qualitative note"
+    detail: "除 2021 年事件外，NSE 作为核心金融基础设施亦有常规灾备（DR）站点与冗余设计，但具体历史中断清单未在抓取页中逐条列出，故仅记录最广为人知的一次重大中断。"
+    sources:
+      - title: SEBI press release / investigation on NSE 24-Feb-2021 trading halt（SEBI 公开记录，WebSearch 摘录）
+        url: https://www.sebi.gov.in
+        accessed: 2026-08-27
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十一｜交易成本与税费
 # ═══════════════════════════════════════════════
 costs:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-08-27
     confidence: medium
 
   commission_structure:
-    zh: ""
-    confidence: low
+    zh: "券商佣金（brokerage）由券商与客户自行约定（可按笔或按成交金额比例），不在交易所统一费率之内；但 SEBI 的'True to Label'规则要求券商向客户收取的交易相关费用（交易所/清算所/监管征费）须与实际向 MII 支付的金额一致、不得加价。故投资者可见的'成本'=券商佣金 + 交易所/清算所/监管各项征费（逐项列示于 contract note）"
+    en: "Brokerage is negotiated between the broker and the client (per-trade or ad-valorem) and is outside the Exchange's uniform fee schedule; however SEBI's 'True to Label' rule requires that the trading-related charges a broker recovers from clients (exchange/clearing-corporation/regulatory levies) equal the amount actually paid to the MIIs, with no markup. Thus an investor's visible cost = brokerage + the itemised exchange/clearing/regulatory levies on the contract note"
+    detail: |
+      'True to Label' 要求源自 NSE 关于交易费用归集的通告；佣金本身市场化、各券商差异大，
+      故本字段以 medium 定性，含可逐字引用的 True-to-Label 原文。
+    sources:
+      - title: Transaction Charges circular FA64232（NSE archives PDF）
+        url: https://archives.nseindia.com/content/circulars/FA64232.pdf
+        accessed: 2026-08-27
+    quote: "the amount recovered from end clients is the same as amount paid by the trading members to the MIIs"
+    verified: 2026-08-27
+    confidence: medium
 
   exchange_fees:
-    zh: ""
-    confidence: low
+    zh: "NSE 按双侧计收交易费（transaction charges）：现货市场 Rs. 2.97/每边/每 lakh 成交金额；股指与股票期货 Rs. 1.73/每边/每 lakh；股票期权 Rs. 35.03/每边/每 lakh 权利金价值；货币期货 Rs. 0.35/每边/每 lakh；货币与利率期权 Rs. 31.10/每边/每 lakh 权利金价值。生效与修订后的费率见 detail"
+    en: "NSE charges transaction charges on both sides: Cash Market Rs. 2.97 per lakh of traded value per side; Equity Futures Rs. 1.73 per lakh per side; Equity Options Rs. 35.03 per lakh of premium value per side; Currency Futures Rs. 0.35 per lakh per side; Currency and Interest Rate Options Rs. 31.10 per lakh of premium value per side; see detail for effective dates and later revisions"
+    detail: |
+      2024 版官方通告含完整分产品费率（另含 Currency Futures Rs. 0.35、Currency/IR Options
+      Rs. 31.10 每边每十万卢比）。2026 年 3 月修订后的按 crore 费率（约 Cash ₹306.99 /
+      股票期货 ₹182.99 / 股票期权 ₹3,552 每 crore）来自第三方镜像，未在本次抓取到的 NSE 官方
+      通告中逐字确认，故不纳入高置信度原文。
+    sources:
+      - title: Transaction Charges circular FA64232（NSE archives PDF）
+        url: https://archives.nseindia.com/content/circulars/FA64232.pdf
+        accessed: 2026-08-27
+    quote: "Cash Market: Rs. 2.97 each side per lakh of traded value / Equity Futures: Rs. 1.73 each side per lakh of traded value / Equity Options: Rs. 35.03 each side per lakh of premium value / Currency Futures: Rs. 0.35 each side per lakh of traded value / Currency Options and Interest Rate Options: Rs. 31.10 each side per lakh of premium value"
+    verified: 2026-08-27
+    confidence: high
 
   clearing_fees:
-    zh: ""
-    confidence: low
+    zh: "NSE Clearing 作为中央对手方，对清算会员按业务线计收清算费（clearing fees），并入整体交易成本、由券商向客户逐笔转嫁；该清算费的具体逐产品费率表本次未在抓取页中核实，故仅作定性说明"
+    en: "As the central counterparty, NSE Clearing levies per-segment clearing fees on clearing members, which flow into the overall transaction cost and are passed through to clients by brokers; the exact per-product clearing-fee schedule was not verified on the pages fetched, so this is a qualitative note"
+    detail: "清算费与上文交易所交易费、监管费并行，均列示于 contract note；具体数字以 NSE Clearing 的 tariff 为准，本次未抓取该 tariff 原文。"
+    sources:
+      - title: Clearing & Settlement（官网）
+        url: https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement
+        accessed: 2026-08-14
+    confidence: medium
 
   regulatory_fees:
-    zh: ""
-    confidence: low
+    zh: "SEBI 交易征费（SEBI Turnover Fee）：除债务证券外，所有证券的买卖交易按成交价格的 0.0001%（即每 crore 10 卢比）计收；债务证券交易按 0.000025%（每 crore 2.5 卢比）。由交易所代 SEBI 向会员收取、再转嫁客户"
+    en: "SEBI Turnover Fee: all sale and purchase transactions in securities other than debt securities are charged at 0.0001% of the price (Rs. 10 per crore); debt securities at 0.000025% (Rs. 2.5 per crore). Collected by the Exchange on behalf of SEBI from members and passed to clients"
+    detail: "该征费为监管费（SEBI 依其章程征收），与 STT、印花税并列于 contract note；另含 IPFT（投资者保护教育基金）征费。"
+    sources:
+      - title: SEBI Turnover Fees, STT and Other levies（NSE 官网）
+        url: https://www.nseindia.com/static/invest/first-time-investor-sebi-turnover-fees-stt-other-levies
+        accessed: 2026-08-27
+    quote: "All sale and purchase transactions in securities other than debt securities 0.0001 per cent of the price at which the securities are purchased or sold (Rs.10 per crore) / All sale and purchase transactions in debt securities 0.000025 per cent of the price at which the securities are purchased or sold (Rs.2.5 per crore)"
+    verified: 2026-08-27
+    confidence: high
 
   stamp_duty:
-    zh: ""
-    confidence: low
-    detail: "印度对证券交易另有印花税（Stamp Duty，按州/中央统一规则，与本节下方的证券交易税STT是并行不同税目），本次未找到具体税率原文，留空。"
+    zh: "印度自（官网原文 with effect from July 1, 2020）起通过证券交易所交易证券须缴印花税（Stamp Duty），由清算公司（经交易所授权）代征代缴：实物交割的股票转让 0.015%（买方）、非实物交割 0.003%（买方）、股票期货 0.002%（买方）、股票期权 0.003%（买方）。注意印度对证券交易同时征收印花税与证券交易税(STT)，二者为不同税目；其余品种（货币/利率衍生品、公司债、回购、政府证券等）税率见 detail"
+    en: "From (per the official text, with effect from July 1, 2020) stamp duty on securities transactions through a stock exchange is levied and collected by Clearing Corporations authorised by the Exchange: delivery-based equity transfer 0.015% (buyer), non-delivery 0.003% (buyer), equity futures 0.002% (buyer), equity options 0.003% (buyer). Note India levies both stamp duty and STT on securities trades — distinct tax heads; rates for other instruments (currency/IR derivatives, corporate bonds, repo, government securities) are in detail"
+    detail: "税率与征收机制来自《2019年财政法》对《1899年印度印花税法》的修订；原字段误以为印度对证券交易无印花税，现以官方税率表更正。完整税率：货币/利率衍生品 0.0001%、公司债/证券化债务 0.0001%、回购 0.00001%、政府证券 0%。"
+    sources:
+      - title: SEBI Turnover Fees, STT and Other levies（NSE 官网，含 Stamp Duty 税率表）
+        url: https://www.nseindia.com/static/invest/first-time-investor-sebi-turnover-fees-stt-other-levies
+        accessed: 2026-08-27
+      - title: Stamp Duty, Charges & Taxes（NSE 官网）
+        url: https://www.nseindia.com/static/invest/first-time-investor-stamp-duty-charges-taxes
+        accessed: 2026-08-27
+    quote: "The Finance Act, 2019 (No. 7 of 2019) has introduced amendment in The Indian Stamp Act, 1899, with respect to levy and collection of stamp duty for transaction in securities made through stock exchange and accordingly with effect from July 1, 2020, being the notified date, stamp duty is levied and collected by Clearing Corporations authorised by Stock Exchanges. / Transfer of Security other than debenture on delivery basis 0.015% Buyer / Transfer of Security other than debenture on non-delivery basis 0.003% Buyer / Derivatives – Equity Futures 0.002% Buyer / Derivatives – Equity Options 0.003% Buyer"
+    verified: 2026-08-27
+    confidence: high
 
   financial_transaction_tax:
-    zh: "证券交易税（STT）——按《2004年财政法》确立，经《2026年财政法》修订，仅针对股票期货/期权（F&O）：期权卖出0.15%（卖方承担）、期权行权时0.15%（买方承担）、期货卖出0.05%（卖方承担）；均为2026年4月1日起生效税率，此前分别为0.10%/0.125%/0.02%"
-    en: "Securities Transaction Tax (STT) — established under the Finance Act 2004, as amended by the Finance Act 2026, applicable to equity F&O only: 0.15% on sale of an option (payable by seller), 0.15% on exercise of an option (payable by purchaser), 0.05% on sale of a futures contract (payable by seller); rates effective April 1, 2026 (previously 0.10%/0.125%/0.02% respectively)"
+    zh: "证券交易税（STT）针对股票类证券交易征收（官网税率表标注 RATES W.E.F. APRIL 1, 2026）：现货股票实物交割的买入与卖出均 0.100%、非实物交割卖出 0.025%；股票期权卖出 0.15%（另行权 0.15%）、股票期货卖出 0.05%。STT 与印花税(stamp_duty)为不同税目"
+    en: "Securities Transaction Tax (STT) is levied on equity securities transactions (the official rate table is headed RATES W.E.F. APRIL 1, 2026): delivery-based equity purchase and sale 0.100% each; non-delivery equity sale 0.025%; sale of an option 0.15% (and 0.15% on exercise); sale of a futures contract 0.05%. STT is distinct from stamp duty"
     detail: |
-      本条来源页面（equity-derivatives-securities-transaction-tax）标题即注明只覆盖
-      股票衍生品（F&O），不含现货股票交割/日内交易适用的STT税率表（那是另一张税率
-      表，本次未抓取），见 OPEN-QUESTIONS。术语'证券交易税(STT)'已加入
-      schema/glossary.yml，与'印花税(stamp-duty)'明确区分为两个不同税目。
+      本次以 NSE 'SEBI Turnover Fees, STT and Other levies' 完整税率表为官方原文，覆盖现货与
+      衍生品两类 STT（原字段仅覆盖 F&O）。修订前（截至 2026-03-31）费率为：期权卖出 0.10%、
+      期权行权 0.125%、期货卖出 0.02%；现货部分维持 0.100%/0.025% 不变。术语已加入
+      schema/glossary.yml，与印花税明确区分。
     sources:
-      - title: Securities Transaction Tax（官网）
-        url: https://www.nseindia.com/static/products-services/equity-derivatives-securities-transaction-tax
-        accessed: 2026-08-14
-    quote: "As per the Finance Act 2004, and modified by Finance Act 2026 STT on the transactions executed on the Exchange shall be as under: ... Sale of an option in securities 0.15 per cent 0.10 per cent Seller ... Sale of an option in securities, where option is exercised 0.15 per cent 0.125 per cent Purchaser ... Sale of a futures in securities 0.05 per cent 0.02 per cent Seller"
+      - title: SEBI Turnover Fees, STT and Other levies（NSE 官网，含完整 STT 税率表）
+        url: https://www.nseindia.com/static/invest/first-time-investor-sebi-turnover-fees-stt-other-levies
+        accessed: 2026-08-27
+    quote: "RATES W.E.F. APRIL 1, 2026 / Purchase of an equity share in a company or a unit of a business trust, where such contract is settled by the actual delivery or transfer of such share or unit. 0.100 per cent 0.100 per cent Purchaser / 0.025 per cent Seller / Sale of an option in securities 0.15 per cent 0.10 per cent Seller / Sale of an option in securities, where option is exercised 0.15 per cent 0.125 per cent Purchaser / Sale of a futures in securities 0.05 per cent 0.02 per cent Seller"
+    verified: 2026-08-27
     confidence: high
 
   capital_gains_tax:
-    zh: ""
-    confidence: low
+    zh: "印度资本利得税（非交易所征收，由投资者向所得税部门申报）：自 2024 年 7 月 23 日起，股票等证券投资持有 ≤12 个月为短期（STCG）按 20% 征收；持有 >12 个月为长期（LTCG），对超过 12.5 万卢比免税额以上的部分按 12.5% 征收。税率/免税额的确切数字来自 2024 年预算（Finance Act 2024），本次未能成功抓取所得税部门官网原文逐字核实，故以 medium 标注"
+    en: "Indian capital gains tax (not levied by the Exchange, declared by the investor to the Income Tax Department): since 23 July 2024, equity/listed-security gains held ≤12 months are short-term (STCG) taxed at 20%; held >12 months are long-term (LTCG) taxed at 12.5% on the amount exceeding a ₹125,000 exemption. The exact rates/exemption derive from the Finance Act 2024; the Income Tax Department source could not be fetched verbatim this session, hence medium confidence"
+    detail: |
+      incometaxindia.gov.in 对本次抓取返回 403（含 §111A、资本利得等页面），web archive 亦
+      503，故无法以高置信度逐字引用官方条文；上述税率来自通行监管摘要（Finance Act 2024），
+      数字与现行制度一致但属第三方/常识级，未达 high 标准，已转 OPEN-QUESTIONS 待人工核实。
+    sources:
+      - title: Income Tax Department（官网，本次抓取被拒 403，未获原文）
+        url: https://incometaxindia.gov.in
+        accessed: 2026-08-27
+    confidence: medium
 
   dividend_withholding_tax:
-    zh: ""
-    confidence: low
+    zh: "印度自 2020 年起废除股息发放税（DDT，由公司向政府缴纳），改为股东收到股息时在自身所得中计税；公司向居民股东支付股息时按《所得税法》第 194 条预扣税（TDS）10%（特定情形下可更高）。股息预扣细则的官方原文本次未能抓取核实，以 medium 标注"
+    en: "Since 2020 India abolished the Dividend Distribution Tax (DDT, paid by the company) and instead taxes dividends in the hands of the recipient; companies deduct TDS at 10% under section 194 of the Income Tax Act when paying dividends to resident shareholders (higher in certain cases). The exact withholding provisions could not be fetched verbatim this session, hence medium confidence"
+    detail: "与 capital_gains_tax 同理，所得税部门官网抓取被拒（403），具体 TDS 条款未在本次抓取页中逐字确认；上述为通行制度描述，转 OPEN-QUESTIONS 待核实。"
+    sources:
+      - title: Income Tax Department（官网，本次抓取被拒 403，未获原文）
+        url: https://incometaxindia.gov.in
+        accessed: 2026-08-27
+    confidence: medium
 
   implicit_costs_note:
-    zh: ""
-    confidence: low
+    zh: "除显性的交易所/清算/监管税费外，交易成本还含隐性成本：买卖价差（bid-ask spread）与市场冲击成本（impact cost），在流动性较差的 SME（EMERGE）/ 低成交个股上尤为显著。NSE 旗舰指数与 Nifty 衍生品为全球最高流动性之一，价差极窄；交易所逐笔（tick-by-tick）全订单簿行情（见 market_data_levels）有助于做市与套利者压缩价差。隐性成本不属交易所费率，而是由市场深度决定"
+    en: "Beyond explicit exchange/clearing/regulatory levies, trading bears implicit costs: bid-ask spread and market-impact (impact) cost, most pronounced in less-liquid SME (EMERGE) / low-turnover names. NSE's flagship indices and Nifty derivatives are among the world's most liquid, with very tight spreads; exchange-provided tick-by-tick full-order-book data (see market_data_levels) helps market-makers/arbitrageurs compress spreads. Implicit cost is determined by market depth, not by Exchange fee schedules"
+    detail: "NSE 作为全球衍生品成交量领先交易所，旗舰产品流动性充裕、隐性成本低；隐性成本差异主要体现在中小市值标的。本条为定性说明（无单一官方'隐性成本'费率），以 medium 标注。"
+    sources:
+      - title: Real Time Data Subscription（NSE 官网，行情深度）
+        url: https://www.nseindia.com/static/market-data/real-time-data-subscription
+        accessed: 2026-08-27
+      - title: NSE Overview（NSE 官网，衍生品成交量领先）
+        url: https://www.nseindia.com
+        accessed: 2026-08-14
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十二｜风险与特殊考量
 # ═══════════════════════════════════════════════
 risks:
   _meta:
-    verified: 2026-08-14
-    confidence: low
+    verified: 2026-08-27
+    confidence: medium
 
   fx_risk_note:
     zh: "印度卢比非完全自由兑换货币，资本项目存在一定管制，实行有管理浮动汇率制度；对境外投资者而言汇率波动构成额外风险层——本次未找到官方原文逐条核实具体管制细则，以上为一般性认知，未采纳为高置信度断言"
@@ -1130,16 +1475,40 @@ risks:
     confidence: low
 
   political_risk_note:
-    zh: ""
-    confidence: low
+    zh: "印度为议会制民主国家、政体总体稳定，对外资持相对开放态度；政治风险主要体现为政策/监管变动（如 2026 年预算上调 STT、2025 年修订退市条例）与偶发地缘政治外溢，而非政权更迭类风险。属定性评估，medium"
+    en: "India is a parliamentary democracy with generally stable institutions and a relatively open stance toward foreign capital; political risk mainly manifests as policy/regulatory shifts (e.g. the 2026 Budget raising STT, the 2025 delisting-regulation amendments) and occasional geopolitical spillover, rather than regime-change risk. Qualitative assessment, medium"
+    detail: "与 capital_controls / regulatory_change_risk_note 互为呼应：资本项目管制与监管高频修订是印度市场的结构性特征。"
+    sources:
+      - title: SEBI Turnover Fees, STT and Other levies（NSE 官网，STT 2026 税率）
+        url: https://www.nseindia.com/static/invest/first-time-investor-sebi-turnover-fees-stt-other-levies
+        accessed: 2026-08-27
+    confidence: medium
 
   liquidity_risk_note:
-    zh: ""
-    confidence: low
+    zh: "NSE 旗舰指数与 Nifty 衍生品为全球流动性最高的市场之一，买卖价差极窄、市场冲击成本低；但中小市值股票与 EMERGE（SME）板块、以及部分低成交个股流动性明显较弱，存在价差扩大与冲击成本上升的流动性风险。属定性评估，medium"
+    en: "NSE's flagship indices and Nifty derivatives are among the world's most liquid markets with very tight spreads and low impact cost; however, mid/small-cap stocks, the EMERGE (SME) segment and certain low-turnover names are materially less liquid, carrying wider spreads and higher impact-cost liquidity risk. Qualitative assessment, medium"
+    detail: "流动性分层是印度市场的结构性特征；隐性成本（implicit_costs_note）亦与此相关。"
+    sources:
+      - title: NSE Overview（NSE 官网，衍生品成交量领先）
+        url: https://www.nseindia.com
+        accessed: 2026-08-14
+      - title: Real Time Data Subscription（NSE 官网，行情深度）
+        url: https://www.nseindia.com/static/market-data/real-time-data-subscription
+        accessed: 2026-08-27
+    confidence: medium
 
   regulatory_change_risk_note:
-    zh: ""
-    confidence: low
+    zh: "SEBI 与财政部持续修订规则，监管变动频率较高是显著特征：退市条例 2021（2025 年修订）、FPI 条例 2019（多次修订）、STT 经《2026 年财政法》上调等均在近期发生。投资者须持续跟踪规则变化，否则可能措手不及。属定性评估，medium"
+    en: "SEBI and the Finance Ministry revise rules continuously; a relatively high frequency of regulatory change is a salient feature: the Delisting Regulations 2021 (amended 2025), the FPI Regulations 2019 (amended multiple times), and the STT hike via the Finance Act 2026 all occurred recently. Investors must track rule changes continuously. Qualitative assessment, medium"
+    detail: "高频监管修订既保护投资者，也构成合规与策略层面的不确定性风险；与 political_risk_note 互补。"
+    sources:
+      - title: SEBI Delisting FAQs（SEBI 官网 PDF，反映 2025 修订后规则）
+        url: https://www.sebi.gov.in/sebi_data/faqfiles/apr-2025/1745563039986.pdf
+        accessed: 2026-08-27
+      - title: SEBI Turnover Fees, STT and Other levies（NSE 官网，STT 2026 税率）
+        url: https://www.nseindia.com/static/invest/first-time-investor-sebi-turnover-fees-stt-other-levies
+        accessed: 2026-08-27
+    confidence: medium
 
   enforcement_note:
     zh: "设有市场监察（Market Surveillance）、除牌会员名单（Debarred Entities）、对会员的处分行动（Action against Members）等执法建制；具体执法流程与处罚力度本次未逐条核实"
@@ -1150,4 +1519,5 @@ risks:
         url: https://www.nseindia.com/static/national-stock-exchange/history-milestones
         accessed: 2026-08-14
     quote: "Debarred Entities / Action against Members / Complaint against Members"
+    verified: 2026-08-27
     confidence: medium

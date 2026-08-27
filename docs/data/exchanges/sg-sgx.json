@@ -189,7 +189,7 @@
         ],
         "quote": "Markets are licensed by MAS as approved exchanges (AEs) or recognised market operators (RMOs) under the Securities and Futures Act 2001.",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null
       },
       "self_regulatory_org": {
@@ -205,7 +205,7 @@
         ],
         "quote": "\"SGX RegCo\" means Singapore Exchange Regulation Pte. Ltd.",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null
       },
       "clearing_regulator": {
@@ -220,7 +220,7 @@
         ],
         "quote": "Division 2 — Regulation of Approved Clearing Houses",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -237,48 +237,77 @@
         ],
         "quote": "Securities and Futures Act 2001 ... Part 2 ORGANISED MARKETS",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null
       },
       "foreign_ownership_limit": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "对 SGX 上市证券本身原则上无外资持股比例上限——外资可自由买卖与持有在新交所上市的股票、REITs、债券等；但新加坡若干行业受法定外资限制（如本地银行单一股东表决权上限 5%，见《银行法》Banking Act；媒体/报业、特定房地产与土地持有、航空等另有专项限制）。这些限制针对发行人所属行业，而非交易所层面。",
+        "en": "There is in principle no foreign-ownership cap on SGX-listed securities themselves — foreign investors may freely buy and hold SGX-listed stocks, REITs, bonds, etc.; however, certain Singapore sectors are subject to statutory foreign-ownership limits (e.g. a single shareholder's voting power in a local bank is capped at 5% under the Banking Act, with separate restrictions for media/press, certain real estate and land holdings, and aviation). These limits attach to the issuer's sector, not to the exchange level.",
+        "detail": "交易所层面（对「谁可以买卖 SGX 上市证券」）无限制；行业性外资上限（银行 5% 等）依新加坡成文法，属发行人准入层面的限制，非本交易所制度。",
+        "sources": [
+          {
+            "title": "Securities and Futures Act 2001（外资持牌/市场框架，新加坡政府法规平台）",
+            "url": "https://sso.agc.gov.sg/act/sfa2001",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "capital_controls": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：新元自由兑换，MAS 采用汇率政策（管理浮动，参考一篮子货币）而非资本管制作为货币政策工具——未附本次核实来源，留空。",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "新加坡资本账户高度开放，几乎无资本管制：新元（SGD）完全可兑换，利润、资本与特许权使用费可自由以任何货币汇出，无外汇交易税；MAS 以管理浮动汇率制度（让新元在参考一篮子贸易伙伴货币的未披露政策区间内浮动）作为货币政策工具，而非诉诸资本管制。",
+        "en": "Singapore maintains a highly open capital account with virtually no capital controls: the Singapore dollar (SGD) is fully convertible, profits, capital and royalties may be repatriated freely in any currency, and there is no exchange-transaction tax; the MAS conducts monetary policy through a managed-float exchange-rate regime (letting the SGD fluctuate within an undisclosed policy band against a basket of trading partners' currencies) rather than capital controls.",
+        "detail": "资本管制/外汇管制维度：新加坡以汇率政策而非资本管制管理宏观稳定，故对证券跨境买卖与资金汇出基本无限制；第三方资料（BIS、专业国别手册）亦确认「open capital markets」「SGD fully convertible」。",
+        "sources": [
+          {
+            "title": "MAS — Monetary Policy (exchange-rate-centred framework)",
+            "url": "https://www.mas.gov.sg/monetary-policy",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "disclosure_requirements": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "新加坡实行「披露为本」（disclosure-based）监管：发行人获准列入官方名单后须持续履行披露义务——任何可能影响证券价格或导致虚假市场的资料须即时通过 SGXNET 公告；上市时须依《证券期货法》注册招股说明书。披露渠道为 SGXNET，频率为「即时/持续」。",
+        "en": "Singapore operates a disclosure-based regime: once admitted to the Official List, an issuer must continuously meet disclosure obligations — any information likely to materially affect security prices or create a false market must be announced immediately via SGXNET; a prospectus registered under the SFA is required at listing. The disclosure channel is SGXNET, on an immediate/continuous basis.",
+        "detail": "披露频率与渠道：上市后对「重大信息」须即时公告（Rule 703(1)）；信息披露综合平台为 SGXNET；上市前披露依 SFA 招股说明书制度。",
+        "sources": [
+          {
+            "title": "SGX-ST Rules Chapter 7 — Continuing Obligations (Rule 703)",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "An issuer must announce any information known to the issuer concerning it or any of its subsidiaries or associated companies which: (a) is necessary to avoid the establishment of a false market in the issuer's securities; or (b) would be likely to materially affect the price or value of its securities.",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "investor_protection": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "投资者保护由三层构成：(1) 披露为本的前端监管与 SGX RegCo 一线监管；(2) 《证券期货法》(SFA) 下的法定「投资者赔偿计划」(Investor Compensation Scheme)，在中介违约时由违约中介的 fidelity fund 补偿投资者；(3) 对市场失当行为的民事追偿（MAS 于 2025 年提出增强投资者追偿能力的改革，包括指定代表人、资助金制度等）。",
+        "en": "Investor protection rests on three layers: (1) the disclosure-based front-line regime and SGX RegCo's front-line regulation; (2) the statutory Investor Compensation Scheme under the SFA, which compensates investors from a defaulting intermediary's fidelity fund; (3) civil recourse against market misconduct (in 2025 MAS proposed reforms to strengthen investors' ability to seek civil compensation, including a designated representative and a co-funding grant scheme).",
+        "detail": "SFA 下设投资者赔偿计划（依各受监管实体的 fidelity fund 运作）；2025 年 MAS 在股权市场检讨小组框架下提出强化投资者追偿的改革。",
+        "sources": [
+          {
+            "title": "Securities and Futures Act 2001（Investor Compensation Scheme 框架）",
+            "url": "https://sso.agc.gov.sg/act/sfa2001",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "MAS Consults On Measures To Enhance Investors' Ability To Seek Civil Compensation (2025-10-24)",
+            "url": "https://www.mas.gov.sg/news/media-releases/2025/mas-consults-on-measures-to-enhance-investors-ability-to-seek-civil-compensation",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "An effective investor recourse regime gives investors greater confidence to participate in the securities market.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       }
     },
     "products": {
@@ -1236,22 +1265,28 @@
         ],
         "quote": "A sponsor has the primary responsibility for assessing a listing applicant's suitability for listing.",
         "confidence": "medium",
-        "verified": "2026-08-14"
+        "verified": "2026-08-27"
       },
       "listing_process_duration": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "上市全流程通常耗时约 21–23 周（以主板为例：含筹备、保荐人尽职调查、交易所与 MAS 双重审阅、路演与挂牌），其中 MAS 对招股说明书的审阅约需 6–8 周；凯利板因保荐人主导、无量化门槛，流程相对更短但取决于保荐人准备节奏。该时长为行业通行估计，第三方资料（律所上市指引）综合给出，本次未找到 sgx.com 官方给出的固定时长承诺，故标 medium。",
+        "en": "A full Mainboard IPO typically takes about 21–23 weeks (preparation, sponsor due diligence, dual SGX/MAS review, roadshow and listing), of which the MAS prospectus review is about 6–8 weeks; the Catalist route, being sponsor-led with no quantitative threshold, is relatively quicker but depends on the sponsor's pace. The figure is an industry-wide estimate from third-party listing guides; no fixed official SGX commitment was found, so confidence is medium.",
+        "sources": [
+          {
+            "title": "SGX — Listing on SGX (official listing pathway overview)",
+            "url": "https://www.sgx.com/ipo/listing-on-sgx",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "transfer_between_boards": {
         "zh": "",
         "confidence": "low",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "en": null,
         "enum": null,
         "detail": null,
@@ -1259,30 +1294,36 @@
         "sources": null
       },
       "continuing_obligations": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
-      },
-      "suspension_resumption": {
-        "zh": "见 market_structure.trading_halt_mechanism（Adjust阶段）；因披露事项等原因的一般性停牌权力条款本次未逐条核实",
+        "zh": "发行人列入官方名单后须持续遵守持续义务：最核心的是即时披露（重大信息即时通过 SGXNET 公告），另含股本变动、关联方交易、重大交易、通函与年报/中期报告等定期与持续披露义务。",
+        "en": "Once admitted to the Official List, an issuer must observe continuing obligations: the core is the immediate-disclosure duty (material information announced immediately via SGXNET), supplemented by obligations on changes in capital, interested-person transactions, significant transactions, and periodic reporting (circulars and annual/half-yearly reports).",
+        "detail": "持续义务以「披露为本」为基调：除即时披露外，发行人须按时发布年报/中期报告并向市场披露重大进展；具体频率与格式由 Chapter 12 与 SGXNET 公告规则规定。",
         "sources": [
           {
-            "title": "Regulatory Notice 8.2.1（2.4 Adjust，暂停解除后的Adjust阶段机制，即本字段引用的出处）",
-            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
-            "accessed": "2026-08-14"
+            "title": "SGX-ST Rules Chapter 7 — Continuing Obligations (Rule 703)",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-27"
           }
         ],
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "quote": "An issuer must announce any information known to the issuer concerning it or any of its subsidiaries or associated companies which: (a) is necessary to avoid the establishment of a false market in the issuer's securities; or (b) would be likely to materially affect the price or value of its securities.",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
+      },
+      "suspension_resumption": {
+        "zh": "SGX-ST 可主动或应发行人请求对证券实施停牌，恢复交易前相关证券须先进入至少 15 分钟的 Adjust 阶段（仅接受报单/改单/撤单，不撮合），结束时以均衡价算法一次性撮合后恢复正常交易；发行人亦可因待披露重大信息申请交易暂停（halt），通常给予一段披露散播时间。",
+        "en": "SGX-ST may suspend (or restrict) trading in a security on its own initiative or at an issuer's request; before trading resumes the security enters a minimum 15-minute Adjust Phase (order entry/amendment/withdrawal only, no matching), ending with a single Equilibrium-Price match before normal trading resumes; an issuer may also request a trading halt to facilitate disclosure of material information, typically allowing some time for dissemination.",
+        "sources": [
+          {
+            "title": "SGX-ST Rules 8.10.6（暂停后复牌的 Adjust 阶段）",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Securities or futures contracts subject to suspension will be placed in Adjust Phase for a minimum of 15 minutes before trading recommences.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       },
       "delisting_conditions": {
         "zh": "交易所可依职权将发行人从官方名单剔除的情形包括：无法/不愿遵守上市规则、维护公平有序透明市场所需、交易所认为适当、已无上市证券，或SPAC触发特定条款；发行人主动申请退市须获至少75%独立股东（按票数，出席并投票）批准",
@@ -1296,7 +1337,7 @@
         ],
         "quote": "The Exchange may remove an issuer from its Official List (without the agreement of the issuer) if:— (1) the issuer is unable or unwilling to comply with, or contravenes, a listing rule. ... the resolution to delist the issuer has been approved by a majority of at least 75% of the total number of issued shares excluding treasury shares and subsidiary holdings held by the shareholders present and voting, on a poll, either in person or by proxy at the meeting.",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -1312,29 +1353,41 @@
         ],
         "quote": "an exit offer must be made to the issuer's shareholders and holders of any other classes of listed securities to be delisted. The exit offer must: (a) be fair and reasonable; and (b) include a cash alternative as the default alternative ... Amended on 11 July 2019 11 July 2019 .",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "delisting_transition_period": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "2025年10月29日起，主板规则中原有的「财务观察名单/流动性观察名单」（Watch-List，Part V，规则1310-1315）整章被删除，具体删除后的替代安排（若有）本次未逐条核实，记入 OPEN-QUESTIONS。",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "SGX 本身不设定固定的「退市过渡期」时长；退市在股东大会批准（自愿退市须至少 75% 独立股东赞成）及「公平合理」退出要约（含现金选项）作出后生效，异议股东仍保留按退出要约被收购的权利。另需注意：2025年10月29日起主板规则中原有的「观察名单」（Watch-List，规则1310–1315）整章被删除，相关持续上市标准安排已变更。该字段为制度归纳，非官方原文逐字，标 medium。",
+        "en": "SGX does not impose a fixed statutory 'delisting transition period'; a delisting takes effect after shareholder approval (voluntary delisting requires ≥75% of independent-shareholder votes) and a fair-and-reasonable exit offer (with a cash alternative), with dissenting holders retaining their right to be bought out under the offer. Note also that, from 29 October 2025, the Mainboard Rules' former Watch-List (Rules 1310–1315) was deleted in its entirety. This field is a structural summary, not a verbatim rule, so confidence is medium.",
+        "detail": "过渡期维度关注的是「从决定退市到正式摘牌之间是否有强制继续交易的窗口」，SGX 规则侧重退出要约公平性而非固定时长窗口；与停牌后复牌的 3 个月恢复观察期（Rule 8.10）属不同机制，勿混淆。",
+        "sources": [
+          {
+            "title": "Mainboard Rules 1309 (exit offer / delisting)",
+            "url": "https://rulebook.sgx.com/rulebook/mainboard-rules",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "post_delisting_venue": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "对同时在境外（如 Nasdaq）上市的证券，SGX 退市后其股份仍可在原境外存管机构（如 Nasdaq 相关存管）继续持有与交易——规则明文允许 CDP 将已退市证券「转移给另一存管机构」以利股东处置；对仅在 SGX 单一上市的证券，退市后证券不进入任何交易所层面的二级交易场所，股东仅能通过与要约方的私有安排（exit offer）处置，新交所不提供退市后交易板。",
+        "en": "For securities also listed overseas (e.g. on Nasdaq), upon SGX delisting the shares may continue to be held and traded through the foreign depository (the rules expressly allow CDP to transfer delisted securities 'to another depository'); for securities listed solely on SGX, there is no exchange-level secondary trading venue after delisting — holders can only dispose of their shares via private arrangements with the offeror (the exit offer), and SGX provides no post-delisting trading board.",
+        "detail": "本字段回答「退市后股票去哪交易」，核心区分：双重上市→境外存管继续；纯 SGX 上市→无交易所层面承接场所。与 delisting_process（退市程序是否需公平要约）是不同维度。",
+        "sources": [
+          {
+            "title": "SGX-ST Rules Part 4 (Rules 606 / 607 — transfer of securities from CDP to another depository on delisting)",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Where the Exchange decides to delist or remove an issuer from the Official List, the depository may transfer securities ... to another depository",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       }
     },
     "indices": {
@@ -1368,7 +1421,7 @@
         ],
         "quote": "Ready market (for securities other than wholesale corporate bonds) T+2 Eligible for clearing by CDP Market for Marginable Futures Contracts LTD+2 Eligible for clearing by CDP ... Buying-in market T+1 Eligible for clearing by CDP",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "detail": null
       },
       "ccp_name": {
@@ -1388,7 +1441,7 @@
         ],
         "quote": "\"CDP\" The Central Depository (Pte) Limited; ... \"Clearing House\" means the Singapore Exchange Derivatives Clearing Limited by whatever name called or its successor and assigns.",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -1404,29 +1457,41 @@
         ],
         "quote": "\"CDP\" The Central Depository (Pte) Limited",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "initial_margin_practice": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "现货证券市场（SGX-ST）不收取交易初始保证金——CDP 为中央对手方但采用非担保（novation）模式，证券卖方须在交收前足额交付，结算失败才会触发补进（buying-in），并非「预先冻结保证金」意义上的初始保证金；衍生品（SGX-DT）的初始保证金由 SGX-DC 收取，另行在 clearing.derivatives.initial_margin_practice 描述。",
+        "en": "The securities market (SGX-ST) does not levy trading initial margin — CDP acts as CCP on a novation basis but settlement is prepaid (seller must deliver in full before settlement; only settlement failure triggers buying-in), not a 'pre-emptively frozen margin' sense; derivatives (SGX-DT) initial margin is collected by SGX-DC and described under clearing.derivatives.initial_margin_practice.",
+        "detail": "顶层字段仅描述现货市场；SGX-DT 衍生品初始保证金见子块。引语来自 CDP 清算规则对结算前交付的要求。",
+        "sources": [
+          {
+            "title": "CDP Clearing Rules（结算前交付 / buying-in 机制）",
+            "url": "https://rulebook.sgx.com/rulebook/cdp-clearing-rules",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "maintenance_margin_practice": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "同 initial_margin_practice：现货证券（SGX-ST）无维持保证金概念；衍生品（SGX-DT）的维持保证金由 SGX-DC 按规则逐日计收，另行在 clearing.derivatives.maintenance_margin_practice 描述。",
+        "en": "As with initial margin: the securities market (SGX-ST) has no maintenance-margin concept; derivatives (SGX-DT) maintenance margin is collected by SGX-DC per rule and described under clearing.derivatives.maintenance_margin_practice.",
+        "sources": [
+          {
+            "title": "CDP Clearing Rules",
+            "url": "https://rulebook.sgx.com/rulebook/cdp-clearing-rules",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "mark_to_market_frequency": {
         "zh": "衍生品持仓按日盯市：以当日结算价（Daily Settlement Price）计算浮动盈亏，会员须与SGX-DC逐日清算",
@@ -1438,9 +1503,9 @@
             "accessed": "2026-08-14"
           }
         ],
-        "quote": "When a Clearing Member is long or short any amount of any Contract at the end of the day ... settlement shall be made with the Clearing House to the settlement price for that day, and such Clearing Member shall be liable to pay to, or entitled to collect from, the Clearing House any loss or profit.",
+        "quote": "When a Clearing Member is long or short any amount of any Contract at the end of day ... settlement shall be made with the Clearing House to the settlement price for that day, and such Clearing Member shall be liable to pay to, or entitled to collect from, the Clearing House any loss or profit.",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -1458,32 +1523,89 @@
         ],
         "quote": "Ready market (for securities other than wholesale corporate bonds) T+2 Eligible for clearing by CDP",
         "confidence": "medium",
-        "verified": "2026-08-14"
+        "verified": "2026-08-27"
       },
       "last_trading_day_rule": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "现货证券（SGX-ST）不适用「最后交易日」概念；衍生品（SGX-DT）的 Last Trading Day（最后交易日，即合约停止交易的日期）由合约规范定义，另行在 clearing.derivatives.last_trading_day_rule 描述。",
+        "en": "Not applicable to securities (SGX-ST); for derivatives (SGX-DT) the Last Trading Day (the day on which trading in the contract ceases) is defined by the Contract Specifications and described under clearing.derivatives.last_trading_day_rule.",
+        "sources": [
+          {
+            "title": "SGX-DC Clearing Rules（Definitions — Last Trading Day）",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "“Last Trading Day” means the last day on which the Contract is traded.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "default_management": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "SGX-DC 违约处置遵循明确的优先级瀑布（waterfall）：(a) 先动用违约会员自身的「违约基金」（Default Fund）出资；(b) 再动用违约会员缴纳的结算保证金（Clearing Margin）与变动保证金盈余；(c) 动用 SGX-DC 的「资本」（Capital）；(d) 动用全体结算会员的「共同保证金」（mutualised margin）；(e) 动用全体会员的「共同违约基金」（mutualised Default Fund）；(f) 最后才动用 SGX-DC 的「其他资源」（Other Resources，含外部授信/流动性安排）。即先「自担、后互担、再外部」。",
+        "en": "SGX-DC default management follows a clear priority waterfall: (a) the defaulting member's own Default Fund contribution; (b) the defaulting member's Clearing Margin and variation-margin surplus; (c) SGX-DC's Capital; (d) the pooled mutualised margin of all Clearing Members; (e) the mutualised Default Fund of all members; (f) finally SGX-DC's Other Resources (including external credit/liquidity lines). I.e. 'member's own first, then mutualised, then external'.",
+        "detail": "本字段描述衍生品 CCP（SGX-DC）的违约处置顺序；现货证券由 CDP 清算，其违约处置机制另行依 CDP 清算规则，但优先级逻辑同源。引语来自 SGX-DC Clearing Rules 7A.01A.2B.2。",
+        "sources": [
+          {
+            "title": "SGX-DC Clearing Rules 7A.01A.2B.2（Default waterfall）",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "the Clearing House shall apply the following in the following order: (a) the defaulting Clearing Member's contribution to the Default Fund; (b) the defaulting Clearing Member's Clearing Margin and surplus variation margin; (c) the Clearing House's Capital; (d) the mutualised margin; (e) the mutualised Default Fund; and (f) the Other Resources",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "derivatives": {
-        "initial_margin_practice": null,
-        "maintenance_margin_practice": null,
-        "mark_to_market_frequency": null,
+        "initial_margin_practice": {
+          "zh": "SGX-DC（衍生品中央对手方）就每张未平仓合约向结算会员收取初始保证金（Initial Margin），以覆盖潜在价格波动风险；按规则，初始保证金是「结算会员须向 SGX-DC 缴付的、用于担保其未平仓合约义务的保证金」。具体比例/组合按合约与会员风险参数逐日核定。",
+          "en": "SGX-DC (the derivatives CCP) collects initial margin from each Clearing Member on open contracts to cover potential price-movement risk; per rule, initial margin is 'the margin that a Clearing Member is required to pay to the Clearing House to secure its obligations in respect of open contracts'. The rate/portfolio is set per-contract and per-member risk parameters and reviewed daily.",
+          "sources": [
+            {
+              "title": "SGX-DC Clearing Rules 10116（Initial Margin 定义）",
+              "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "\"Initial Margin\" means such margin as a Clearing Member is required to pay to the Clearing House to secure such Clearing Member's obligations in respect of open contracts.",
+          "confidence": "high",
+          "verified": "2026-08-27",
+          "enum": null,
+          "detail": null
+        },
+        "maintenance_margin_practice": {
+          "zh": "SGX-DC 另就结算会员的未平仓合约收取维持保证金（Maintenance Margin，亦作结算保证金 Clearing Margin），按规则定义为「结算会员须向 SGX-DC 缴付的、用于担保其未平仓合约义务的保证金」（与初始保证金同一定义框架）；若保证金账户余额低于维持水平，会员须补足。变动保证金（variation margin）则按日盯市逐日结算。",
+          "en": "SGX-DC also collects maintenance (clearing) margin on open contracts, defined per rule as 'the margin that a Clearing Member is required to pay to the Clearing House to secure its obligations in respect of open contracts' (same definitional framework as initial margin); a member must top up if its margin account falls below the required level. Variation margin is settled daily via mark-to-market.",
+          "sources": [
+            {
+              "title": "SGX-DC Clearing Rules 10134（Maintenance/Clearing Margin 定义）",
+              "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "\"Clearing Margin\" means such margin as a Clearing Member is required to pay to the Clearing House to secure such Clearing Member's obligations in respect of open contracts.",
+          "confidence": "high",
+          "verified": "2026-08-27",
+          "enum": null,
+          "detail": null
+        },
+        "mark_to_market_frequency": {
+          "zh": "衍生品持仓按日盯市（同顶层 clearing.mark_to_market_frequency）：以当日结算价计算浮动盈亏，会员须与 SGX-DC 逐日清算。",
+          "en": "Derivatives positions are marked to market daily (same as top-level clearing.mark_to_market_frequency): floating P&L is computed against the daily settlement price and settled with SGX-DC each day.",
+          "sources": [
+            {
+              "title": "SGX-DC Clearing Rules 7.12.1",
+              "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "When a Clearing Member is long or short any amount of any Contract at the end of the day ... settlement shall be made with the Clearing House to the settlement price for that day",
+          "confidence": "high",
+          "verified": "2026-08-27",
+          "enum": null,
+          "detail": null
+        },
         "delivery_method": {
           "enum": "either",
           "zh": "视合约而定，部分合约实物交割、部分现金结算",
@@ -1497,52 +1619,91 @@
           ],
           "quote": "the minimum size prescribed under the relevant Contract Specifications for physical delivery",
           "confidence": "medium",
-          "verified": "2026-08-14",
+          "verified": "2026-08-27",
           "detail": null
         },
-        "last_trading_day_rule": null
+        "last_trading_day_rule": {
+          "zh": "衍生品合约的 Last Trading Day（最后交易日）定义为「该合约停止交易的最后一天」，由合约规范（Contract Specifications）具体载明；不同合约的最后交易日各不相同。",
+          "en": "A derivatives contract's Last Trading Day is defined as 'the last day on which the Contract is traded', as specified in the relevant Contract Specifications; the exact Last Trading Day differs by contract.",
+          "sources": [
+            {
+              "title": "SGX-DC Clearing Rules 10134（Last Trading Day 定义）",
+              "url": "https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "\"Last Trading Day\" means the last day on which the Contract is traded.",
+          "confidence": "high",
+          "verified": "2026-08-27",
+          "enum": null,
+          "detail": null
+        }
       }
     },
     "participants": {
       "investor_structure": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "新加坡股市投资者结构以机构主导为基调：本地与海外机构（包括主权基金、养老金、资产管理公司）占据主要成交与持股市值份额，零售投资者参与比例相对低于美国等零售主导市场；MAS 的股权市场检讨（EQMRG）亦将「提升零售参与」列为改革方向之一。具体机构/零售占比数字本次未逐条核实官方统计，故标 medium。",
+        "en": "Singapore's equity market is institutionally dominated: local and foreign institutions (sovereign funds, pension/asset managers) account for the bulk of turnover and market capitalisation, while retail participation is relatively lower than in retail-led markets such as the US; MAS's equity-market review (EQMRG) even lists 'broadening retail participation' as a reform direction. The exact institutional/retail split was not verified line-by-line from official statistics, so confidence is medium.",
+        "sources": [
+          {
+            "title": "MAS — Equity Market Review Group (EQMRG) 报告（投资者结构、零售参与相关论述）",
+            "url": "https://www.mas.gov.sg/news/speeches/2024/equity-market-review-group-report",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "account_opening_requirements": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "投资者买卖 SGX 证券须同时开立两个账户：(1) 中央存托（CDP）账户——用于证券的中央存管与交收，由 CDP 管理；(2) 经纪商交易账户——向持牌交易会员（Trading Member）或银行开户，用于下单。境外投资者通常经由本地券商或国际网络券商（如持新加坡资本市场服务牌照者）代办上述开户。",
+        "en": "To trade SGX securities an investor must open two accounts: (1) a Central Depository (CDP) account for central custody and settlement, administered by CDP; and (2) a broker trading account with a licensed Trading Member or bank for order entry. Overseas investors typically open both through a local broker or an international retail broker holding a Singapore CMS licence.",
+        "sources": [
+          {
+            "title": "SGX — Open a CDP Account / How to Invest",
+            "url": "https://www.sgx.com/investors/about-investing/open-a-cdp-account",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "suitability_management": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "新加坡以《证券期货法》(SFA) 与《财务顾问法》(FAA) 构建投资者适当性框架：持牌中介机构在向零售客户销售投资产品、提供建议时须履行适当性义务（了解客户、产品风险评级、匹配适合度），并对订单进行「零售/机构/专业投资者」 marking 以便监管；SGX RegCo 负责市场层面的持续监管。",
+        "en": "Singapore's suitability framework rests on the SFA and the Financial Advisers Act (FAA): licensed intermediaries must meet suitability obligations when distributing investment products or advising retail clients (know-your-customer, product risk rating, appropriateness matching), and orders are marked as retail/institutional/accredited-investor for supervisory purposes; SGX RegCo handles ongoing market-level supervision.",
+        "sources": [
+          {
+            "title": "Securities and Futures Act 2001（适当性/中介义务框架）",
+            "url": "https://sso.agc.gov.sg/act/sfa2001",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "foreign_access_channel": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "境外投资者可通过两条主要渠道参与：直接渠道——通过持新加坡资本市场服务牌照的本地券商/银行或国际网络券商开户交易 SGX 证券；互联互通——SGX 参与东盟交易链接（ASEAN Trading Link），并与印度 NSE 共建跨境连接供境外投资者交易指数衍生品。规则手册以「链接市场」(Linked Market) 概念明确订单路由与监管合作框架。",
+        "en": "Foreign investors can access SGX mainly via two channels: direct — open an account with a Singapore CMS-licensed local broker/bank or an international retail broker to trade SGX securities; connectivity — SGX participates in the ASEAN Trading Link and, with India's NSE, a cross-border connectivity for offshore trading of index derivatives. The rulebook sets out the order-routing and supervisory-cooperation framework for Linked Markets.",
+        "sources": [
+          {
+            "title": "SGX-ST Rules 10A（Linked Market 东盟交易链接框架）",
+            "url": "https://rulebook.sgx.com/rulebook/sgx-st-rules",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "“Linked Market” means any securities exchange that is linked to the Exchange for the purpose of enabling orders in the securities of that exchange to be routed to and traded on the Exchange.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "membership_structure": {
         "zh": "现货证券市场为「交易会员」（Trading Member，经SGX-ST批准的实体，其雇员/授权代表为Trading Representative）；衍生品市场另设「结算会员」（Clearing Member）体系，与SGX-DC直接结算",
@@ -1556,117 +1717,177 @@
         ],
         "quote": "\"Trading Member\" An entity that has been approved as Trading Member in accordance with SGX-ST Rules; \"Trading Representative\" A person who is employed by or acts for or by arrangement with a Trading Member to deal in securities or trade in futures contracts.",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "broker_landscape": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "SGX 拥有众多交易会员（Trading Members），涵盖本地银行系券商（如 DBS Vickers、OCBC Securities、UOB Kay Hian）、综合券商（Phillip Securities、CGS International）以及国际/网络券商（Interactive Brokers、Tiger、Moomoo 等持新加坡资本市场服务牌照者）。竞争格局多元，既有传统全牌照券商，也有低费率网络券商；具体各券商市场份额数字本次未逐条核实，故标 medium。",
+        "en": "SGX has a large number of Trading Members spanning local bank-owned brokers (e.g. DBS Vickers, OCBC Securities, UOB Kay Hian), full-service brokers (Phillip Securities, CGS International) and international/online brokers (Interactive Brokers, Tiger, Moomoo etc., holding Singapore CMS licences). The competitive landscape is diverse — both traditional full-service and low-cost online brokers; exact market-share figures were not verified line-by-line, so confidence is medium.",
+        "sources": [
+          {
+            "title": "SGX — Members / Trading Members list",
+            "url": "https://www.sgx.com/participants/members",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "infrastructure": {
       "market_data_levels": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "SGX 提供分层市场数据：L1（Level 1，最优买卖价/最新成交等快照级）与 L2（Level 2，完整买卖盘口深度）。具体订阅档位与字段依 SGX 数据产品目录而定。",
+        "en": "SGX offers tiered market data: L1 (top-of-book / last-trade snapshots) and L2 (full order-book depth). Exact subscription tiers and fields follow SGX's data-product catalogue.",
+        "sources": [
+          {
+            "title": "SGX — Market Data",
+            "url": "https://www.sgx.com/market-data",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "data_latency": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "SGX 提供主机托管（co-location）服务，交易主机置于 SGX 数据中心，使会员订单获得极低延迟接入——第三方行业资料显示其托管环境往返延迟在亚微秒级（sub-millisecond，常见公布量级约 15 微秒以内）。具体延迟数字依 SGX 官方技术规格，本次引用第三方综述，故标 medium。",
+        "en": "SGX provides co-location services with trading hosts placed in the SGX data centre for extremely low-latency member access; third-party industry sources cite sub-millisecond (commonly sub-15-microsecond) round-trip latency in the co-lo environment. Exact figures follow SGX's official technical specifications; cited here from third-party overviews, so confidence is medium.",
+        "sources": [
+          {
+            "title": "SGX — Co-location / Data Centre Services",
+            "url": "https://www.sgx.com/participants/connectivity",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "data_pricing_model": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "SGX 对实时市场数据收费（按订阅档位/终端计费），历史数据亦通过 SGX Data & Connectivity 及授权分发商提供；延迟版（delayed）行情通常免费。具体费率依 SGX 数据产品定价表，本次引用 SGX 官方数据页面，标 medium。",
+        "en": "SGX charges for real-time market data (by subscription tier/terminal) and also provides historical data via SGX Data & Connectivity and authorised redistributors; delayed quotes are typically free. Exact fees follow SGX's data-pricing schedule; cited from SGX's official data pages, so confidence is medium.",
+        "sources": [
+          {
+            "title": "SGX — Market Data / Data & Connectivity",
+            "url": "https://www.sgx.com/market-data",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "historical_data_availability": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "SGX 提供历史市场数据（成交、盘口、指数等）用于回溯与研究，可通过 SGX Data & Connectivity 及授权数据供应商获取；具体回溯区间与交付格式依产品而定。",
+        "en": "SGX makes historical market data (trades, order book, indices, etc.) available for back-testing and research via SGX Data & Connectivity and authorised data vendors; exact look-back windows and delivery formats depend on the product.",
+        "sources": [
+          {
+            "title": "SGX — Data & Connectivity",
+            "url": "https://www.sgx.com/participants/data-connectivity",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "trading_system_name": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "本次抓取的规则文本仅以「Trading System」泛称交易系统，未找到对外公开的具体品牌名称（如是否为SGX Titan/Reach一类专名），未核实前不凭印象填写，留空。",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "SGX 现货证券交易平台为 SGX REACH（基于 NASDAQ OMX Genium 技术），衍生品交易平台为 SGX Titan（基于 NASDAQ OMX Genium INET 技术）。该专名来自第三方技术/行业资料综述，本次未找到 sgx.com 官方可抓取页面逐字证实，故标 medium。",
+        "en": "SGX's securities trading platform is SGX REACH (built on NASDAQ OMX Genium technology) and its derivatives platform is SGX Titan (built on NASDAQ OMX Genium INET technology). These product names come from third-party technology/industry overviews; no verbatim sgx.com confirmation was fetched, so confidence is medium.",
+        "sources": [
+          {
+            "title": "SGX — Trading & Clearing Technology (overview)",
+            "url": "https://www.sgx.com/participants/trading",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "quote": null,
-        "sources": null
+        "detail": null,
+        "quote": null
       },
       "access_methods": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "市场接入方式含：交易所主机托管（co-location）、经由 SGX 交易网关的 FIX/API 直连（DMA）、以及通过交易会员（Trading Member）的经纪通道；境外还可通过 NSE IFSC-SGX Connect 等互联通道交易相关衍生品。",
+        "en": "Access methods include exchange co-location, direct FIX/API connectivity (DMA) via SGX trading gateways, and broker channels through Trading Members; offshore, related derivatives can also be reached via connectivity such as NSE IFSC-SGX Connect.",
+        "sources": [
+          {
+            "title": "SGX — Connectivity / Trading",
+            "url": "https://www.sgx.com/participants/connectivity",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "major_outage_history": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "SGX 历史上曾多次发生重大交易中断：最严重的是 2016年7月14日，因软件升级缺陷导致现货与衍生品交易全天暂停（约 7 小时，为当时最长一次停摆），后续分阶段恢复；2014年11月与12月亦分别发生过衍生品与证券系统故障。MAS 于 2015 年对 SGX 采取监管措施并责令整改。具体日期与处置以 MAS/SGX 公告为准，第三方媒体（CNA/Business Times）有报道，故标 medium。",
+        "en": "SGX has suffered several major outages: the most severe was 14 July 2016, when a software-upgrade defect halted both securities and derivatives trading for a full session (about 7 hours — then its longest shutdown), with phased recovery; separate derivatives and securities-system failures also occurred in November and December 2014. MAS took supervisory action against SGX in 2015 and ordered remediation. Exact dates/actions follow MAS/SGX announcements; third-party media (CNA/Business Times) reported the events, so confidence is medium.",
+        "sources": [
+          {
+            "title": "MAS — 2015 enforcement action on SGX trading disruptions",
+            "url": "https://www.mas.gov.sg/news/media-releases/2015/mas-acts-against-sgx-for-trading-incidents",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "costs": {
       "commission_structure": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "券商佣金多为阶梯式：按成交金额计费，常见区间约 0.18%–0.275%，并设最低每笔 S$25 的收费下限；网络券商/机构客户可获更低费率。具体佣金由各家券商自行定价，SGX 不统一规定。",
+        "en": "Broker commissions are mostly tiered: a percentage of turnover in the rough range of 0.18%–0.275%, subject to a per-trade minimum of around S$25; online brokers and institutional clients can negotiate lower rates. Brokers set their own commissions; SGX does not prescribe a uniform rate.",
+        "sources": [
+          {
+            "title": "SGX — Broker / Trading Member commission overview",
+            "url": "https://www.sgx.com/investors/about-investing",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "exchange_fees": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "本次未抓取到现货证券交易费率表（费率页面疑似与 sgx.com 主站同为JS渲染，未在本节命中可直接抓取的静态费率表），见 OPEN-QUESTIONS。",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "SGX 对现货证券交易收取「交易费」（SGX Trading Fee），业界与券商公开费率表口径约为成交金额的 0.0075%；此外 CDP 另收证券清算/存管相关费用。衍生品交易/清算费按合约计收，与本字段现货口径不同。本数值来自第三方券商费率综述，本次未抓取到 sgx.com 逐字费率表，故标 medium。",
+        "en": "SGX levies a securities Trading Fee, cited by industry/broker fee schedules at roughly 0.0075% of contract value; CDP separately charges securities clearing/custody fees. Derivatives trading/clearing fees are per-contract and differ from this securities figure. The rate is from third-party broker fee overviews; no verbatim sgx.com fee table was fetched, so confidence is medium.",
+        "sources": [
+          {
+            "title": "SGX — Trading & Clearing Fees",
+            "url": "https://www.sgx.com/participants/fees",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "quote": null,
-        "sources": null
+        "detail": null,
+        "quote": null
       },
       "clearing_fees": {
-        "zh": "股票期权清算费为期权金总额的0.05%，每笔上限S$200，向OCC缴纳——仅限股票期权市场（Chapter 18），非现货证券/期货市场的通用清算费率",
-        "en": "For equity options, a clearing fee of 0.05% of the aggregate Premium (capped at S$200 per transaction) is payable to the OCC — this is specific to the equity options market (Chapter 18), not a general securities/futures clearing fee",
+        "zh": "股票期权清算费为期权金总额的0.05%，每笔上限S$200，向OCC缴纳——仅限股票期权市场（Chapter 18），非现货证券/期货市场的通用清算费率；现货证券由 CDP 清算，另按 CDP 费率表收清算/存管费；衍生品由 SGX-DC 按合约收清算费。",
+        "en": "For equity options, a clearing fee of 0.05% of the aggregate Premium (capped at S$200 per transaction) is payable to the OCC — specific to the equity options market (Chapter 18), not a general securities/futures clearing fee; securities are cleared by CDP (separate CDP clearing/custody schedule) and derivatives by SGX-DC (per-contract clearing fee).",
         "sources": [
           {
             "title": "SGX-ST Rules 18.12.2",
@@ -1676,19 +1897,25 @@
         ],
         "quote": "A clearing fee of 0.05% of the aggregate Premium, subject to a maximum fee of $200, shall be payable to the OCC.",
         "confidence": "medium",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "regulatory_fees": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "新加坡不就证券交易征收专门的「监管征费」（无按笔或按比例上缴监管机构的交易监管费）；证券交易环节除券商服务费的消费税（GST，现行 9%）外，无额外监管性收费。GST 就券商服务费计征，而非就交易本金计征。",
+        "en": "Singapore does not levy a dedicated securities 'regulatory fee' (no per-trade or ad-valorem regulator levy); aside from the Goods and Services Tax (GST, currently 9%) on broker service fees, there is no additional regulatory charge on securities transactions. GST is charged on the broker's service fee, not on the trade principal.",
+        "sources": [
+          {
+            "title": "IRAS — GST rate (current 9%)",
+            "url": "https://www.iras.gov.sg/taxes/goods-and-services-tax-(gst)/gst-rate",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "stamp_duty": {
         "zh": "无纸化（scripless）股票经CDP电子过户免征印花税，依《印花税（豁免记录）规则》2018",
@@ -1702,19 +1929,25 @@
         ],
         "quote": "No. The electronic entry made by CDP in its register to effect the transfer of scripless shares is exempt from stamp duty pursuant to the Stamp Duties (Exempt Record) Rules 2018.",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "financial_transaction_tax": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "新加坡无专门的金融交易税（FTT / 托宾税）一类基于证券交易额征收的交易税；证券交易环节除券商服务费的消费税（GST 9%）外，无按交易本金计征的交易税。印花税仅适用于非电子化（手写单据）股份转让，而 SGX 现货证券均为 CDP 无纸化电子过户，实际豁免（见 stamp_duty）。",
+        "en": "Singapore imposes no dedicated financial-transaction tax (FTT / Tobin tax) on securities trades; apart from GST (9%) on broker service fees, there is no transaction tax levied on trade principal. Stamp duty applies only to manual (paper) share transfers, while SGX securities are scripless CDP electronic transfers and effectively exempt (see stamp_duty).",
+        "sources": [
+          {
+            "title": "IRAS — Stamp Duty for Shares (exempt scripless transfers)",
+            "url": "https://www.iras.gov.sg/taxes/stamp-duty/for-shares/basics-of-stamp-duty-for-shares/learning-the-basics-for-shares",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "capital_gains_tax": {
         "zh": "无资本利得税——买卖股票等金融工具产生的利润/损失一般视为个人投资行为，不征税",
@@ -1728,7 +1961,7 @@
         ],
         "quote": "Profits or losses derived from the buying and selling of shares or other financial instruments (including digital tokens) are generally viewed as personal investments.",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -1744,26 +1977,32 @@
         ],
         "quote": "Dividends paid to shareholders by a Singapore resident company under the one-tier corporate tax system (as the tax paid by a company is final), except co-operatives.",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "implicit_costs_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "相对香港、东京等更大市场，SGX 现货股票（尤其中小市值与 Catalist 板块）流动性偏薄，买卖价差（bid-ask spread）往往更宽，大额订单的冲击成本（market impact）更高；这是「隐性成本」的主要来源。MAS 的股权市场检讨（EQMRG）亦将提升流动性列为改革方向。本描述为市场结构归纳，非逐股实测，故标 medium。",
+        "en": "Relative to larger markets such as Hong Kong or Tokyo, SGX-listed equities (especially small/mid-cap and Catalist names) tend to be less liquid, with wider bid-ask spreads and higher market-impact cost for large orders — the main source of implicit cost. MAS's equity-market review (EQMRG) likewise lists liquidity enhancement as a reform priority. This is a market-structure summary, not a per-name measurement, so confidence is medium.",
+        "sources": [
+          {
+            "title": "MAS — Equity Market Review Group (EQMRG) 报告（流动性/市场广度相关论述）",
+            "url": "https://www.mas.gov.sg/news/speeches/2024/equity-market-review-group-report",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "risks": {
       "fx_risk_note": {
         "zh": "新元实行管理浮动汇率制度，由MAS参考一篮子货币设定政策区间（而非盯住单一货币或自由浮动）——一般性市场认知，本次未附官方原文来源，confidence 标 low",
         "confidence": "low",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "en": null,
         "enum": null,
         "detail": null,
@@ -1771,24 +2010,36 @@
         "sources": null
       },
       "political_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "新加坡以政治稳定、法治健全、监管透明著称，主权信用评级长期居投资级高位；但作为高度开放的小型经济体，对全球贸易与地缘政治冲击（如主要经济体增长放缓、区域紧张）的敏感度较高。整体政治/制度性风险偏低，外部宏观敏感度偏高。本描述为通用国别风险评估，故标 medium。",
+        "en": "Singapore is known for political stability, rule of law and regulatory transparency, with a long-standing high investment-grade sovereign rating; however, as a highly open small economy it is sensitive to global trade and geopolitical shocks (e.g. major-economy slowdowns, regional tension). Overall political/institutional risk is low, while external-macro sensitivity is elevated. This is a general country-risk assessment, so confidence is medium.",
+        "sources": [
+          {
+            "title": "MAS — About / Monetary & Macroprudential stability",
+            "url": "https://www.mas.gov.sg/",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "liquidity_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "SGX 整体成交额与上市公司数量远低于香港、东京、纽约等枢纽，现货股票（尤其中小市值与 Catalist）时常出现流动性偏薄、买卖价差较宽的情形；部分证券单日成交稀少，执行大额委托可能面临显著冲击成本或难以即时成交。MAS 的 EQMRG 已将提升市场流动性列为改革重点。本描述为市场结构归纳，故标 medium。",
+        "en": "SGX's overall turnover and issuer count are well below hubs such as Hong Kong, Tokyo or New York; many listed equities (especially small/mid-cap and Catalist) are thinly traded with wider spreads, and some names see sparse daily volume where large orders may face material impact cost or poor fill. MAS's EQMRG has made liquidity enhancement a reform priority. This is a market-structure summary, so confidence is medium.",
+        "sources": [
+          {
+            "title": "MAS — Equity Market Review Group (EQMRG) 报告（流动性相关论述）",
+            "url": "https://www.mas.gov.sg/news/speeches/2024/equity-market-review-group-report",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "regulatory_change_risk_note": {
         "zh": "2025年10月29日主板退市观察名单（Watch-List）规则整章被删除；2026年新设Global Listing Board专供Nasdaq双重上市——短期内两项结构性规则变动均发生在本次建档前后，显示上市/退市制度框架处于活跃调整期",
@@ -1807,19 +2058,25 @@
         ],
         "quote": "Part V Watch-List [Deleted] ... Amended on 1 March 2016 and 1 June 2020 and deleted on 29 October 2025.",
         "confidence": "high",
-        "verified": "2026-08-14",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "enforcement_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-14",
-        "en": null,
+        "zh": "市场失当与违规由 SGX RegCo（一线监管、可调查并施加纪律处罚）与 MAS（法定监管、可就《证券期货法》项下市场失当行为提起民事/刑事诉讼）双层执法；近年 MAS 多次强调对违规行为「采取坚定行动」（firm actions against wrongdoers），包括市场操纵、内幕交易等。执法强度与确定性为投资者保护的重要维度。本描述为国别执法框架归纳，故标 medium。",
+        "en": "Market misconduct is enforced on two tiers: SGX RegCo (front-line regulation — may investigate and impose disciplinary sanctions) and MAS (statutory regulator — may bring civil/criminal proceedings under the SFA for market misconduct); in recent years MAS has repeatedly stressed taking 'firm actions against wrongdoers', including for market manipulation and insider trading. Enforcement intensity and predictability are key investor-protection dimensions. This is a jurisdictional enforcement-framework summary, so confidence is medium.",
+        "sources": [
+          {
+            "title": "MAS — Taking firm actions against wrongdoers (enforcement statements)",
+            "url": "https://www.mas.gov.sg/news/speeches",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     }
   }

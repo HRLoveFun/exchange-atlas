@@ -342,7 +342,7 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `govinfo.gov`（美国政府出版局，2026-08-24 新增登记） | 官方（美国联邦政府法律文本官方发布机构） | en | curl 常规 UA 200，全程未见反爬，与 `sec.gov` 拦截形成鲜明对比 | **突破 sec.gov 反爬的核心替代路径之一**：`govinfo.gov` 托管美国众议院法律修订顾问办公室（Office of the Law Revision Counsel）编制的官方汇编制定法全文（Compilation of Statutes）与历次《公法》（Public Law）原始文本，均为可直接 curl 的纯文本 PDF（非扫描件），不依赖 sec.gov 域名即可拿到法律原文逐字引用
   - Securities Exchange Act of 1934（官方汇编全文 PDF，`regulation.core_laws` 出处）: https://www.govinfo.gov/content/pkg/COMPS-1885/pdf/COMPS-1885.pdf（HTTP 200，约940KB）
   - Holding Foreign Companies Accountable Act, Public Law 116-222（`risks.political_risk_note` 出处）: https://www.govinfo.gov/content/pkg/PLAW-116publ222/pdf/PLAW-116publ222.pdf（HTTP 200，约200KB）
-- `ecfr.gov`（电子联邦法规汇编，Electronic Code of Federal Regulations，2026-08-24 新增登记） | 官方（美国国家档案与记录管理局联邦公报办公室运营） | en | ⚠️ 该站**面向用户的前端页面**（如 `ecfr.gov/current/title-17/.../section-242.201` 这类"好看"的 URL）是纯 JS 渲染的 SPA 外壳，curl 只能拿到无正文的 HTML；**必须改用其公开的 versioner API**（`ecfr.gov/api/versioner/v1/full/{issue-date}/title-{N}.xml?part={part}`，无需鉴权/API Key）才能拿到官方汇编 XML/纯文本全文——`{issue-date}` 需先查 `ecfr.gov/api/versioner/v1/titles.json` 确认该标题当前的 `latest_issue_date`（本次为 title 17/31 均查得 2026-08-17）；`part` 较大时（如整个 title 240）返回体可能过大甚至报 500，加 `&subject_group=` 参数（从前端页面 URL 的 `subject-group-ECFRxxxx` 段抄）可縮小到目标条文附近，2026-08-24 实测对 17 CFR 240.15l-1（Reg BI）有效 | **突破 sec.gov 反爬的第二条核心路径**：Title 17（商品与证券交易所）、Title 31（财政部规章，含 FinCEN 反洗钱规则）均可用此法拿到官方条文原文，不依赖 `sec.gov`/`ecfr.gov` 前端页面
+- `ecfr.gov`（电子联邦法规汇编，Electronic Code of Federal Regulations，2026-08-24 新增登记） | 官方（美国国家档案与记录管理局联邦公报办公室运营） | en | ⚠️ 该站**面向用户的前端页面**（如 `ecfr.gov/current/title-17/.../section-242.201` 这类"好看"的 URL）是纯 JS 渲染的 SPA 外壳，curl 只能拿到无正文的 HTML；**必须改用其公开的 versioner API**（`ecfr.gov/api/versioner/v1/full/{issue-date}/title-{N}.xml?part={part}`，无需鉴权/API Key）才能拿到官方汇编 XML/纯文本全文——`{issue-date}` 需先查 `https://www.ecfr.gov/api/versioner/v1/titles.json` 确认该标题当前的 `latest_issue_date`（本次为 title 17/31 均查得 2026-08-17）；`part` 较大时（如整个 title 240）返回体可能过大甚至报 500，加 `&subject_group=` 参数（从前端页面 URL 的 `subject-group-ECFRxxxx` 段抄）可縮小到目标条文附近，2026-08-24 实测对 17 CFR 240.15l-1（Reg BI）有效 | **突破 sec.gov 反爬的第二条核心路径**：Title 17（商品与证券交易所）、Title 31（财政部规章，含 FinCEN 反洗钱规则）均可用此法拿到官方条文原文，不依赖 `sec.gov`/`ecfr.gov` 前端页面
   - 17 CFR 242.201 Circuit breaker（Regulation SHO Rule 201 官方条文，含10%跌幅触发阈值，`market_structure.short_selling` 出处）: https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=242（HTTP 200，约690KB）
   - 17 CFR 243.100 Regulation FD（`regulation.disclosure_requirements` 出处）: https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=243（HTTP 200，约12KB）
   - 17 CFR 240.15l-1 Regulation Best Interest（`participants.suitability_management` 出处，用 `subject_group` 参数缩小返回体）: https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=240&subject_group=ECFR64f52d737aea1ed（HTTP 200，约53KB）
@@ -1066,7 +1066,7 @@ Fair Access 格式 UA（两个子代理并行执行、互不知情），改走"�
   `ecfr.gov/current/title-17/.../section-242.201`）是纯 JS 渲染 SPA 外壳，curl 抓不到正文；
   但其**公开 API**（`ecfr.gov/api/versioner/v1/full/{issue-date}/title-{N}.xml?part={part}`，
   无需鉴权）返回官方汇编 XML 纯文本全文。`{issue-date}` 需先查
-  `ecfr.gov/api/versioner/v1/titles.json` 取该标题当前 `latest_issue_date`；`part` 较大时可
+   `https://www.ecfr.gov/api/versioner/v1/titles.json` 取该标题当前 `latest_issue_date`；`part` 较大时可
   加 `&subject_group=` 参数缩小范围。⚠️ 该 API 实测有**间歇性 503**（错误体是通用"No server
   is available to handle this request"，不带任何限流/拦截特征文案），判断是服务端负载问题，
   不是限流——出现时间隔重试或直接复用同会话内更早的成功抓取内容即可，不代表被封，不要按
@@ -1082,3 +1082,100 @@ Fair Access 格式 UA（两个子代理并行执行、互不知情），改走"�
 - 方法论：WebSearch 定位候选 URL → 逐条 curl 验证 → 若原始文档路径被拦，优先尝试同一事实
   的"官方政府镜像"（govinfo.gov/ecfr.gov/federalregister.gov）而非直接放弃或退而求其次用
   第三方转述——政府镜像站的权威性等同一手来源，`confidence` 仍可标 `high`。
+
+---
+
+## Batch 2 补充登记（2026-08-27，v1.1 Category B 深耕）
+
+以下域名由 v1.1 Batch 2 各子代理在补全 Category B 字段时引用，集中补登记以满足 `validate.py` 的域名登记校验。各域名的原始抓取页 URL 见各子代理回写记录；`.cache/<exchange-id>/` 存有落盘原始页。
+
+### Australian Securities Exchange (ASX) `au-asx`（补充）
+- `asxonline.com` | 官方（ASX 文档库） | en | curl 常规 UA 200 | ASX 信息费/交易费价目表、CHESS 交收程序等 PDF
+- `www.asxonline.com` | 官方（ASX 文档库，同上域名 www 前缀） | en | curl 常规 UA 200 | 同上
+- `firb.gov.au` | 官方（外国投资审查委员会） | en | curl 常规 UA 200 | 外资投资审查框架（foreign_ownership_limit 出处）
+- `legislation.nsw.gov.au` | 官方（新南威尔士州立法库） | en | curl 常规 UA 200 | 印花税废除立法（stamp_duty 出处）
+- `www.ato.gov.au` | 官方（澳大利亚税务局） | en | curl 常规 UA 200 | 资本利得税/股息预扣税（costs 出处）
+- `www.austrac.gov.au` | 官方（AML/CTF 监管） | en | curl 常规 UA 200 | 客户身份识别（account_opening_requirements 出处）
+- `cepr.org` | 第三方（金融交易税研究库） | en | curl 常规 UA 200 | 澳大利亚无金融交易税佐证（costs.financial_transaction_tax，confidence 封顶 medium）
+
+### Toronto Stock Exchange (TSX) `ca-tsx`（补充）
+- `www.tmxinfoservices.com` | 官方（TMX Datalinx 行情数据） | en | curl 常规 UA 200 | Level 1/2/QuantumFeed 行情产品与定价（infrastructure 出处）
+- `www.cipf.ca` | 官方（加拿大投资者保护基金） | en | curl 常规 UA 200 | 投资者保护上限（participants.investor_protection 出处）
+- `ised-isde.canada.ca` | 官方（加拿大创新科学与经济发展部） | en | WebSearch 定位 | Investment Canada Act 仅审查控制权取得，无一般资本管制（capital_controls 出处）
+- `www.gov.mb.ca` | 官方（曼尼托巴省） | en | WebSearch 定位 | 银行业 Bank Act 10% / 电信 Telecom Act 20% 外资上限（foreign_ownership_limit 出处）
+- `www.mondaq.com` | 第三方（法律简报库） | en | WebSearch 定位 | 持续披露 NI 51-102、非居民预扣税（confidence 封顶 medium）
+- `taxspecialty.com` | 第三方（税务分析） | en | WebSearch 定位 | 资本利得税计入比例（confidence 封顶 medium）
+- `tradingeconomics.com` | 第三方（宏观数据） | en | WebSearch 定位 | 加美贸易摩擦政治风险（confidence 封顶 medium）
+- `cepr.net` | 第三方（CEPR 金融交易税汇编） | en | WebSearch 定位 | 加拿大无金融交易税（costs.financial_transaction_tax，confidence 封顶 medium）
+
+### SIX Swiss Exchange `ch-six`（补充）
+- `www.seco.admin.ch` | 官方（瑞士经济事务秘书处） | en | curl 常规 UA 200 | 投资审查（foreign_ownership_limit 出处）
+- `legacy.export.gov` | 官方（美国 ITA 历史站） | en | curl 常规 UA 200 | 瑞士外汇管制现状（capital_controls 出处，建议后续换 SNB/FINMA 一手来源）
+- `www.eqs-news.com` | 第三方（公告分发） | en | curl 常规 UA 200 | Swiss Steel 退市 ad-hoc 公告（post_delisting_venue/liquidity_risk_note 出处，confidence medium）
+- `www.swissinfo.ch` | 第三方（瑞士资讯） | en | curl 常规 UA 200 | SIX 交易中断报道（major_outage_history 出处，confidence medium）
+- `www.admin.ch` | 官方（瑞士联邦） | en | curl 常规 UA 200 | 政治风险背景（risks.political_risk_note 出处，建议补一手国家风险来源）
+
+### Eurex `de-eurex`（补充）
+- `commission.europa.eu` | 官方（欧盟委员会） | en | curl 常规 UA 200 | 资本自由流动法律基础（capital_controls 出处）
+- `www.europarl.europa.eu` | 官方（欧洲议会） | en | curl 常规 UA 200 | 资本自由流动事实说明（capital_controls 交叉核对）
+
+### Xetra (Frankfurt Cash Market) `de-xetra`（补充）
+- `dserver.bundestag.de` | 官方（德国联邦议会文件库） | de | curl 常规 UA 200 | Börsenumsatzsteuer 1991 废除立法（stamp_duty/financial_transaction_tax 出处）
+- `www.deloittelegal.de` | 第三方（律所） | de | WebSearch 定位 | EdW 投资者赔偿方案（investor_protection 出处，confidence medium）
+- `resourcehub.bakermckenzie.com` | 第三方（律所资源库） | en | WebSearch 定位 | 上市流程文件（listing_process_duration 出处，confidence medium）
+- `www.marketscreener.com` | 第三方（财经媒体） | en | curl 常规 UA 200 | Xetra 交易中断报道（major_outage_history 出处，confidence medium）
+
+### Euronext `fr-euronext`（补充）
+- `www.reuters.com` | 第三方（财经通讯社） | en | WebSearch 定位 | 政治/市场背景（risks.*，confidence 封顶 medium）
+
+### National Stock Exchange of India `in-nse`（补充）
+- `incometaxindia.gov.in` | 官方（印度所得税局） | en | curl 常规 UA 200 | 资本利得税/股息预扣税（costs 出处）
+- `rbi.org.in` | 官方（印度储备银行） | en | curl 常规 UA 200 | 外资准入/账户开立（foreign_access_channel/account_opening_requirements 出处）
+- `www.fpi.nsdl.co.in` | 官方（NSDL FPI 登记处） | en | curl 常规 UA 200 | 外资参与者登记（foreign_ownership_limit 出处）
+
+### Korea Exchange `kr-krx`（补充）
+- `data.krx.co.kr` | 官方（KRX 数据门户） | ko | curl 常规 UA 200 | 市场数据/成交统计（infrastructure 出处）
+- `openapi.krx.co.kr` | 官方（KRX OpenAPI） | ko | curl 常规 UA 200 | 行情接口/数据延迟（data_latency 出处）
+- `www.openapi.krx.co.kr` | 官方（KRX OpenAPI，同上 www 前缀） | ko | curl 常规 UA 200 | 同上
+- `fss.or.kr` | 官方（金融监督院 FSS） | ko | curl 常规 UA 200 | 投资者保护/ suitability（investor_protection 出处）
+- `www.fss.or.kr` | 官方（FSS www 前缀） | ko | curl 常规 UA 200 | 同上
+- `www.fsc.go.kr` | 官方（金融委员会 FSC） | ko | curl 常规 UA 200 | 监管框架（regulation 出处）
+- `law.kofia.or.kr` | 官方（韩国证券业协会 KOFIA） | ko | curl 常规 UA 200 | 自律规则/适当性（suitability_management 出处）
+- `www.kcmi.re.kr` | 官方（资本市场研究院 KCMI） | ko | curl 常规 UA 200 | 市场结构研究（market_structure 出处）
+- `www.k-otc.or.kr` | 官方（K-OTC 场外市场） | ko | curl 常规 UA 200 | 退市后场外转移（post_delisting_venue 出处）
+- `www.clearstream.com` | 官方（Clearstream 国际中央存托） | en | curl 常规 UA 200 | 国际存托/交收（clearing 出处）
+- `en.sedaily.com` | 第三方（韩国经济日报英文） | en | WebSearch 定位 | 市场背景（confidence 封顶 medium）
+- `en.yna.co.kr` | 第三方（韩联社英文） | en | WebSearch 定位 | 政治/流动性风险（confidence 封顶 medium）
+- `www.koreaherald.com` | 第三方（韩国先驱报） | en | WebSearch 定位 | 流动性/政治风险（confidence 封顶 medium）
+- `www.asiae.co.kr` | 第三方（亚洲经济） | ko | WebSearch 定位 | 流动性风险（confidence 封顶 medium）
+- `www.kedglobal.com` | 第三方（KED 全球） | en | WebSearch 定位 | 政治风险（confidence 封顶 medium）
+- `www.kchipnews.com` | 第三方（半导体新闻） | ko | WebSearch 定位 | 市场背景（confidence 封顶 medium）
+- `taxnews.ey.com` | 第三方（EY 税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
+- `www.mondovisione.com` | 第三方（交易所资讯） | en | WebSearch 定位 | 市场结构背景（confidence 封顶 medium）
+
+### Saudi Exchange (Tadawul) `sa-tadawul`（补充）
+- `vision2030.gov.sa` | 官方（沙特 Vision 2030） | en | curl 常规 UA 200 | 改革/政治风险背景（political_risk_note 出处）
+- `www.hmco.com.sa` | 第三方（Herbert Smith Freehills 沙特） | en | WebSearch 定位 | 印花税/费用（confidence 封顶 medium）
+- `www.nzte.govt.nz` | 官方（新西兰贸易发展局） | en | WebSearch 定位 | 跨境费用交叉核对（confidence medium）
+- `www.derayah.com` | 第三方（Derayah 券商） | en | curl 常规 UA 200 | 佣金结构（commission_structure 出处，confidence medium）
+- `sahmcapital.com` | 第三方（券商） | en | WebSearch 定位 | 费用/手续费（confidence 封顶 medium）
+- `jurisdb.com` | 第三方（法律数据库） | en | WebSearch 定位 | 股息预扣税（confidence 封顶 medium）
+- `taxonimo.com` | 第三方（税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
+- `www.bakermckenzie.com` | 第三方（律所） | en | WebSearch 定位 | 上市流程（listing_process_duration 出处，confidence medium）
+- `www.fintechfutures.com` | 第三方（金融科技媒体） | en | WebSearch 定位 | 交易系统/延迟（trading_system_name/data_latency 出处，confidence medium）
+
+### Johannesburg Stock Exchange `za-jse`（补充）
+- `www.resbank.co.za` | 官方（南非储备银行 SARB） | en | curl 常规 UA 200 | 资本管制/外汇/退市后转移（capital_controls/post_delisting_venue 出处）
+- `www.gov.za` | 官方（南非政府） | en | curl 常规 UA 200 | 账户开立/ suitability 监管（account_opening_requirements 出处）
+- `www.state.gov` | 官方（美国国务院投资环境报告） | en | WebSearch 定位 | 外资准入/政治风险（foreign_ownership_limit/political_risk_note 出处）
+- `www.fatf-gafi.org` | 官方（FATF） | en | WebSearch 定位 | 政治/合规风险（political_risk_note 出处）
+- `www.a2x.co.za` | 官方（A2X 交易所） | en | curl 常规 UA 200 | 另类交易场所/暗池背景（market_structure 出处）
+- `www.nsx.com.na` | 官方（纳米比亚证券交易所） | en | WebSearch 定位 | 区域连接方案（market_structure.derivatives.connect_schemes 出处）
+- `www.otcexpress.co.za` | 第三方（OTC 平台） | en | WebSearch 定位 | 退市后 OTC 转移（post_delisting_venue 出处，confidence medium）
+- `blogs.easyequities.co.za` | 第三方（券商博客） | en | WebSearch 定位 | 退市后转移（confidence medium）
+- `actacommercii.co.za` | 第三方（学术期刊） | en | WebSearch 定位 | 外资限制研究（confidence medium）
+- `businesstech.co.za` | 第三方（科技财经媒体） | en | WebSearch 定位 | 投资者结构（confidence medium）
+- `pmg.org.za` | 第三方（议会监测组织） | en | WebSearch 定位 | 投资者结构（confidence medium）
+- `tiomarkets.com` | 第三方（券商） | en | WebSearch 定位 | 佣金结构（commission_structure 出处，confidence medium）
+- `www.globallegalinsights.com` | 第三方（法律指南） | en | WebSearch 定位 | 上市流程（listing_process_duration 出处，confidence medium）
+- `www.lexology.com` | 第三方（法律资讯） | en | WebSearch 定位 | 上市流程（confidence medium）

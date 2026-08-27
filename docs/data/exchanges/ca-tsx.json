@@ -203,7 +203,7 @@
         ],
         "quote": "TMX Group Limited and TSX Inc. The TSX Inc., together with its parent company, TMX Group Limited, is recognized as an exchange in Ontario.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "self_regulatory_org": {
@@ -219,7 +219,7 @@
         ],
         "quote": "The Canadian Investment Regulatory Organization (CIRO) is a self-regulatory organization (SRO) that regulates investment dealers and mutual fund dealers, and acts as the regulation services provider for marketplaces that have retained it as such, including monitoring trading on those marketplaces for compliance with CIRO rules and securities legislation. ... The two predecessor SROs, the Investment Industry Regulatory Organization of Canada (IIROC) and the Mutual Fund Dealers Association of Canada (MFDA), amalgamated to continue as the New Self-Regulatory Organization of Canada (New SRO), effective January 1, 2023, which subsequently changed its name to CIRO on June 1, 2023.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "clearing_regulator": {
@@ -234,7 +234,7 @@
         ],
         "quote": "“Clearing Corporation” means The Canadian Depository for Securities Limited or such other person as recognized by the Ontario Commission as a clearing agency for the purposes of the Securities Act and which has been designated by the Exchange as an acceptable clearing agency.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -256,48 +256,72 @@
         ],
         "quote": "“Securities Act” means the Securities Act, R.S.O. 1990, c. S.5 as amended from time to time.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "foreign_ownership_limit": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "未核实是否存在一般性外资持股限制（特定行业如银行/电信/航空可能另有联邦法律限制，本次未展开核实），留空。",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "zh": "对 TSX 上市证券本身无一刀切的外资持股上限——任何外国投资者均可自由持有 TSX 股票。但特定行业发行人受联邦行业法限制：根据《银行法》（Bank Act）任何人不得拥有或控制 Schedule 1 银行 10% 以上股份；根据《电信法》（Telecommunications Act）外资对电信公共运营商有表决权股份上限 20%；广播、保险等行业亦有类似限制。这些是针对「发行人所在行业」的限制，不是对交易所交易的一般限制",
+        "en": "No blanket foreign-ownership cap applies to TSX-listed securities as such — any foreign investor may freely hold TSX shares. However, issuers in certain sectors are subject to federal sectoral limits: under the Bank Act no person may own or control more than 10% of the shares of a Schedule I bank; under the Telecommunications Act foreign ownership and control of voting shares of a telecommunications common carrier is capped at 20%; broadcasting and insurance are similarly restricted. These are limits on the issuer's sector, not on exchange trading generally",
+        "detail": "TSX 作为交易所不设置外资持股比例；行业限制来自联邦立法，且仅在投资者试图取得受监管行业公司「控制权」时触发。外国发行人（如美国公司）在 TSX 双重上市不受此类限制。",
+        "sources": [
+          {
+            "title": "Sectoral Limitations on Foreign Ownership of Canadian Businesses（Manitoba Government）",
+            "url": "https://www.gov.mb.ca/jec/mbadvantage/businessforeignownership.html",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Under the federal Bank Act no person may own and control more than 10% of the shares of a bank listed in Schedule 1. ... The federal Telecommunications Act restricts foreign ownership and control to 20% of the voting shares of a telecommunications common carrier.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "capital_controls": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "加拿大对证券投资跨境资金流动不设一般性资本管制（无外汇锁定、无本金跨境流动限制）；外国投资者可自由买卖 TSX 上市证券。联邦层面仅《投资加拿大法》（Investment Canada Act, ICA）对「取得加拿大企业控制权」的外国投资进行净利益/国家安全审查，不触及二级市场交易",
+        "en": "Canada imposes no general capital controls on cross-border portfolio flows (no exchange controls or restrictions on moving principal across borders); foreign investors may freely buy and sell TSX-listed securities. At the federal level only the Investment Canada Act (ICA) reviews foreign investments that acquire control of a Canadian business for net benefit and national security, which does not extend to secondary-market trading",
+        "detail": "结构性事实：加拿大无外汇管制，证券投资可自由跨境。ICA 审查门槛针对的是「取得企业控制权」的并购交易（WTO 成员国私人投资者 2026 年门槛约 13.86 亿加元），而非在交易所买卖证券。本字段记录「无一般性资本管制」这一结论，而非某条具体限额。",
+        "sources": [
+          {
+            "title": "Investment Canada Act（Innovation, Science and Economic Development Canada）",
+            "url": "https://ised-isde.canada.ca/site/investment-canada-act/en",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "The Act also allows the government to review foreign investments of any size to ensure they are not harmful to Canada's national security.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "disclosure_requirements": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "TSX 上市发行人须持续遵守 CSA 统一的《国家文书 51-102 持续披露》（NI 51-102）以及 TSX 自身的《Company Manual》持续上市义务，包括按期提交财务报表、管理层讨论与分析（MD&A）、重大事项的即时披露等",
+        "en": "TSX-listed issuers must continuously comply with the CSA-harmonized National Instrument 51-102 Continuous Disclosure (NI 51-102) as well as the TSX Company Manual's ongoing listing obligations, including periodic financial statements, management's discussion and analysis (MD&A), and timely disclosure of material changes",
+        "detail": "NI 51-102 是加拿大各省证券委员会协调的持续披露基准规则；TSX 在 Company Manual 中对其上市类别施加附加的持续义务（见 listing.continuing_obligations）。本字段记录披露义务框架，具体条款数字不在本字段范围。",
+        "sources": [
+          {
+            "title": "Going Public In Canada – Listing On The TSX, TSX V, CSE Or Cboe Canada（WeirFoulds LLP / Mondaq）",
+            "url": "https://www.mondaq.com/canada/shareholders/1536042/going-public-in-canada-listing-on-the-tsx-tsx-v-cse-or-cboe-canada",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "investor_protection": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "加拿大投资者保护基金（Canadian Investor Protection Fund, CIPF）为 CIRO 会员券商的违约提供有限保护：一般账户（现金/保证金/TFSA/FHSA 合计）最高 1 million 加元，注册退休账户（RRSP/RRIF/LIF 合计）最高 1 million 加元，注册教育储蓄计划（RESP）合计最高 1 million 加元",
+        "en": "The Canadian Investor Protection Fund (CIPF) provides limited protection if a CIRO member firm becomes insolvent: up to $1 million for all general accounts combined (cash, margin, TFSA, FHSA), up to $1 million for all registered retirement accounts combined (RRSP, RRIF, LIF), and up to $1 million for all registered education savings plans (RESPs) combined",
+        "detail": "CIPF 由 CIRO 会员（投资交易商/互惠基金交易商）出资，保护的是「券商破产导致客户资产缺失」的托管风险，不覆盖投资本身的市值损失。覆盖以客户类别分池计算。",
+        "sources": [
+          {
+            "title": "About CIPF Coverage（Canadian Investor Protection Fund）",
+            "url": "https://www.cipf.ca/cipf-coverage/about-cipf-coverage",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "$1 million for all general accounts combined (such as cash accounts, margin accounts, TFSAs and FHSAs), plus\n$1 million for all registered retirement accounts combined (such as RRSPs, RRIFs and LIFs), plus\n$1 million for all registered education savings plans (RESPs) combined where the client is the subscriber of the plan.\n",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       }
     },
     "products": {
@@ -834,17 +858,23 @@
         ],
         "quote": "Sec. 309. Requirements for Eligibility for Listing1\n\n         a)        Income & Revenue-Producing:\n\n                   i)        Operations: either (A) annual audited pre-tax net income from continuing operations of $750,000 in the\n                             fiscal year immediately preceding the filing of the listing application (the \"Income Test\"); or (B) annual\n                             audited revenue of $10,000,000 in the fiscal year immediately preceding the filing of the listing\n                             application (the \"Revenue Test\");\n                   ...\n                   iii)      Market Support: market capitalization of at least $100,000,000.\n",
         "confidence": "high",
-        "verified": "2026-08-16"
+        "verified": "2026-08-27"
       },
       "listing_process_duration": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "TSX 未公布法定固定上市时长；流程为提交上市申请 + 各省证券监管机构（如 OSC）招股书审阅 + TSX 审核至附条件批准，之后定价、交割、于定价后约 2–3 个交易日挂牌。第三方实务指南估计典型 IPO 自启动至挂牌约 6–12 个月（招股书意见轮次与审计为关键路径）",
+        "en": "TSX publishes no fixed statutory listing timeline; the process is application filing + prospectus review by the principal securities regulator (e.g., OSC) + TSX review to conditional approval, then pricing, closing and listing about 2–3 business days after pricing. Third-party practice guides estimate a typical IPO takes about 6–12 months from kickoff to listing day, with prospectus comment rounds and the audit as the critical path",
+        "detail": "本字段记录的是流程性时长区间，而非某条规则硬性规定的天数；具体时长取决于发行人准备度与监管意见轮次。",
+        "sources": [
+          {
+            "title": "TSX Listing Process（TMX）",
+            "url": "https://www.tsx.com/en/listings/listing-with-us/listing-guides/tsx-listing-process",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "transfer_between_boards": {
         "zh": "严格说不是同一实体内部板块转移，而是从姊妹交易所TSXV「毕业」转至TSX挂牌（Graduates from TSXV），2026年2月单月有2家公司完成此流程",
@@ -859,7 +889,7 @@
         ],
         "quote": "Toronto Stock Exchange\n\n                              February 2026           January 2026           February 2025\nIssuers Listed                                    2,132                  2,110                   1,861\nNew Issuers Listed                                   28                     23                      25\nIPOs                                                 22                     23                      14\nGraduates from TSXV                                   2                      0                       1\n",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "continuing_obligations": {
@@ -874,7 +904,7 @@
         ],
         "quote": "TSX requires that each listed issuer must meet on an ongoing basis the management requirements relevant to its category of listing that are described in Section 311 (for Diversified Issuers), Section 316 (for Mining Issuers), Section 321 (for Oil and Gas Issuers), Section 1102 (ETPs), Section 1103 (Closed-end Funds) and Section 1104 (Structured Products).",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -890,7 +920,7 @@
         ],
         "quote": "A listed issuer that has been notified that it is under delisting review because of the applicability of any of the delisting criteria set out in Section 709, paragraphs (b) or (c) of Section 710, Section 711 or Section 712 will normally be given up to 120 days from the date of such notification (the \"delisting review period\") to correct the deficiencies that triggered the delisting review. ... TSX will determine to suspend the listed issuer's securities from trading as soon as practicable after such hearing and the listed issuer's securities will be delisted on the 30th calendar day after the suspension date.\n",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -906,7 +936,7 @@
         ],
         "quote": "Sec. 710.\n\nSpecifically, securities of a listed issuer may be delisted if\n\nDiversified Issuers\n\n         (b)       the listed issuer fails to have:\n\n                   (i)       total assets of at least $3,000,000; and\n\n                   (ii)      annual revenue from ongoing operations of at least $3,000,000 in the most recent year.\n\n                   Criteria (b)(i) and (ii) above do not apply to a research and development listed issuer; however, such a company\n                   may be delisted if it has failed to spend at least $1,000,000 on research and development, acceptable to TSX,\n                   in the most recent year; or\n",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -922,7 +952,7 @@
         ],
         "quote": "The delisting review process will be conducted through either the \"Remedial Review Process\" or the \"Expedited Review Process\", as follows:\n\nRemedial Review Process\n\n         (a)      A listed issuer that has been notified that it is under delisting review because of the applicability of any of the\n                  delisting criteria set out in Section 709, paragraphs (b) or (c) of Section 710, Section 711 or Section 712 will\n                  normally be given up to 120 days from the date of such notification (the \"delisting review period\") to correct\n                  the deficiencies that triggered the delisting review.\n",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
@@ -938,19 +968,30 @@
         ],
         "quote": "the listed issuer's securities will be delisted on the 30th calendar day after the suspension date. During the period between the suspension date and delisting date, the listed issuer remains subject to all TSX requirements, including compliance with the provisions of Section 602.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "post_delisting_venue": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "TSX 本身不设摘牌证券专用交易厅；证券被 TSX 摘牌后，若发行人仍希望保留加拿大上市地位，通常转至姊妹交易所 TSX Venture Exchange 的 NEX 板（面向低于持续上市标准的低效/不活跃公司），或转至加拿大证券交所（CSE）；许多发行人转至美国 OTC 市场（如 OTCQX/OTC Pink）或直接私有化。NEX 是 TSXV 的板块而非 TSX 自身板块",
+        "en": "TSX itself provides no dedicated trading venue for delisted securities; once delisted from TSX, an issuer wishing to retain a Canadian listing typically moves to the NEX board of sister exchange TSX Venture Exchange (for inactive/low-activity companies that fell below TSXV continued listing standards), or to the Canadian Securities Exchange (CSE); many move to U.S. OTC markets (e.g., OTCQX/OTC Pink) or go private. NEX is a TSXV board, not a TSX board",
+        "detail": "TSX 摘牌后并无类似港交所「 OTC 市场」那样的官方替代平台；NEX 的资格要求是「曾于 TSX 或 TSXV 上市且未能满足 TSXV 持续上市标准」。本字段说明去向机制，并非承诺某只具体证券的去向。",
+        "sources": [
+          {
+            "title": "NEX（TMX TSX | TSXV）",
+            "url": "https://www.tsx.com/en/listings/tsx-and-tsxv-issuer-resources/tsx-venture-exchange-issuer-resources/nex",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "Going Public In Canada – Listing On The TSX, TSX V, CSE Or Cboe Canada（Mondaq）",
+            "url": "https://www.mondaq.com/canada/shareholders/1536042/going-public-in-canada-listing-on-the-tsx-tsx-v-cse-or-cboe-canada",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "NEX provides a trading forum for listed companies that have fallen below TSX Venture's Continued Listing Requirements.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       }
     },
     "indices": {
@@ -994,7 +1035,7 @@
         ],
         "quote": "(1)       Exchange trades in securities shall settle on the first Settlement Day after the trade date, unless otherwise\n          provided by the Exchange or the parties to the trade by mutual agreement.\n(2)       Notwithstanding Rule 5-103(1), unless otherwise provided by the Exchange or the parties to the trade by\n          mutual agreement:\n                   trades on a when issued basis made:\n                            prior to the first Trading Day of the anticipated date of issue of the security shall be\n                            settled on the anticipated date of issue of such security, and\n                            on or after the first Trading Day before the anticipated date of issue of the security shall\n                            settle on the first settlement day after the trade date, provided if the security has not been\n                            issued on the date for settlement such trades shall be settled on the date that the security\n                            is actually issued;\n                   trades for rights, warrants and installment receipts made:\n                            Repealed (May 27, 2024)\n",
         "confidence": "high",
-        "verified": "2026-08-16"
+        "verified": "2026-08-27"
       },
       "ccp_name": {
         "zh": "CDS Clearing and Depository Services Inc.",
@@ -1014,7 +1055,7 @@
         ],
         "quote": "All transactions executed are reported to CDS Clearing and Depository Services Inc. at day end for clearing and settlement and management of counterparty and settlement risk. The CDS Participant Rules govern the operation of CDS clearing and settlement services, including risk management.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "csd_name": {
@@ -1030,14 +1071,14 @@
         ],
         "quote": "“Clearing Corporation” means The Canadian Depository for Securities Limited or such other person as recognized by the Ontario Commission as a clearing agency for the purposes of the Securities Act and which has been designated by the Exchange as an acceptable clearing agency.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "initial_margin_practice": {
         "zh": "",
         "confidence": "low",
         "detail": "现货股票市场无衍生品意义上的初始保证金；融资融券保证金细节未核实，留空。",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "en": null,
         "enum": null,
         "quote": null,
@@ -1046,7 +1087,7 @@
       "maintenance_margin_practice": {
         "zh": "",
         "confidence": "low",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "en": null,
         "enum": null,
         "detail": null,
@@ -1056,7 +1097,7 @@
       "mark_to_market_frequency": {
         "zh": "",
         "confidence": "low",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "en": null,
         "enum": null,
         "detail": null,
@@ -1076,13 +1117,13 @@
           }
         ],
         "confidence": "medium",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "quote": null
       },
       "last_trading_day_rule": {
         "zh": "",
         "confidence": "low",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "en": null,
         "enum": null,
         "detail": null,
@@ -1090,20 +1131,25 @@
         "sources": null
       },
       "default_management": {
-        "zh": "由CDS Participant Rules规范清算参与人的风险管理与违约处置，具体违约瀑布/风险共担机制细节本次未展开核实",
-        "en": "Governed by the CDS Participant Rules for participant risk management; the specific default waterfall / loss-sharing mechanics were not verified in detail this session",
+        "zh": "TSX 现货市场的中央对手方清算由 CDS Clearing and Depository Services Inc.（CDS）通过「CDS Participant Rules」规范，涵盖参与人风险管理与违约处置；CDS 设有 CNS Participant Default Fund 作为违约损失共担的准备金，具体违约瀑布（default waterfall）层级由 CDS 规则规定",
+        "en": "Central-counterparty clearing of the TSX spot market is governed by CDS Clearing and Depository Services Inc. (CDS) through the CDS Participant Rules, covering participant risk management and default handling; CDS maintains a CNS Participant Default Fund as the loss-sharing reserve, with the specific default waterfall tiers set out in CDS rules",
+        "detail": "CDS 同时是 CSD 与 CCP，违约处置细节（如清算基金分摊、损失递进顺序）在其 Participant Rules / Risk Procedures 中规定，并经 OSC 批准（见 OSC CDS rule review 历年备案）。本文件不逐条摘引瀑布层级，仅确认框架归属 CDS。",
         "sources": [
           {
             "title": "Order Types and Functionality Guide（PDF，TMX GROUP，6.7节）",
             "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
             "accessed": "2026-08-16"
+          },
+          {
+            "title": "Canadian Depository for Securities Limited (CDS) rule review（OSC）",
+            "url": "https://www.osc.ca/en/industry/market-regulation/clearing-agencies-and-clearing-houses/recognized-clearing-agencies/cds-rule-review",
+            "accessed": "2026-08-27"
           }
         ],
         "quote": "The CDS Participant Rules govern the operation of CDS clearing and settlement services, including risk management.",
         "confidence": "medium",
-        "verified": "2026-08-16",
-        "enum": null,
-        "detail": null
+        "verified": "2026-08-27",
+        "enum": null
       },
       "derivatives": {
         "initial_margin_practice": null,
@@ -1115,44 +1161,68 @@
     },
     "participants": {
       "investor_structure": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "TSX 以机构主导，同时有零售与外国投资者参与；TMX 官方称「估计 TSX 与 TSXV 约 40% 的交易量来自加拿大境外」。加拿大本土投资者结构（散户 vs 机构占比）无交易所单一官方汇总数字，但养老基金、保险公司、共同基金等机构是重要持有方",
+        "en": "TSX is institution-dominated, with retail and foreign investors also participating; TMX states that an estimated 40% of all trading volume on TSX and TSXV originates from outside Canada. Canada's domestic investor mix (retail vs institutional share) is not published as a single official aggregate figure, but pension funds, insurers and mutual funds are significant holders",
+        "detail": "本字段记录可得的境外参与比例（TMX 官方）与机构主导特征；精确的散户/机构持仓占比需另查 TMX 或 IIROC 统计，本次未逐条核实。",
+        "sources": [
+          {
+            "title": "TMX Equity Markets – Trading（TMX）",
+            "url": "https://www.tsx.com/en/trading",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "an estimated 40% of all trading on TSX and TSXV originates from outside Canada",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "account_opening_requirements": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "在 CIRO 会员券商开户须履行「了解你的客户」（KYC）义务：注册交易商须采取合理步骤获取并定期更新客户信息（财务情况、投资目标、风险承受度等），以支持适当性评估；开户本身无交易所设定的特殊门槛，外国人亦可开户（见 foreign_access_channel）",
+        "en": "Opening an account with a CIRO-member dealer carries Know-Your-Client (KYC) obligations: registrants must take reasonable steps to obtain and periodically update client information (financial situation, investment objectives, risk tolerance, etc.) to support suitability determinations; there is no exchange-imposed special account-opening threshold, and non-residents may also open accounts",
+        "detail": "KYC 义务源自 NI 31-103（Client Focused Reforms 强化），由 CIRO 执行；开户门槛属券商-客户合同与监管合规范畴，非 TSX 交易所规则。",
+        "sources": [
+          {
+            "title": "Joint CSA/CIRO Staff Notice 31-368 Client Focused Reforms（OSC）",
+            "url": "https://www.osc.ca/en/securities-law/instruments-rules-policies/3/31-103",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "suitability_management": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "开户与适当性由《国家文书 31-103 注册要求、豁免与持续义务》（NI 31-103）规范，并由 CIRO 执行；注册交易商在采取投资行动前须依据客户 KYC 信息、产品认知等评估适当性，且须持续重新评估",
+        "en": "Account opening and suitability are governed by National Instrument 31-103 Registration Requirements, Exemptions and Ongoing Registrant Obligations (NI 31-103) and enforced by CIRO; before taking an investment action a registered dealer must assess its suitability for the client considering the client's KYC information, the firm's product knowledge and other factors, and must reassess periodically",
+        "detail": "CIRO 由 IIROC/MFDA 合并而来，其 IDPC Rules / MFD Rules 与 NI 31-103 对应；Client Focused Reforms（CFR）强化了 KYC/KYP/适当性义务。",
+        "sources": [
+          {
+            "title": "Joint CSA/CIRO Staff Notice 31-368 Client Focused Reforms（OSC）",
+            "url": "https://www.osc.ca/en/securities-law/instruments-rules-policies/3/31-103",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "foreign_access_channel": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "Technical Guide to Listing FAQ确认外国发行人在TSX上市无需在加拿大注册成立公司，但这是发行人（issuer）侧的规则，不是境外投资者（investor）参与本所交易的准入通道，两者不宜混为一谈，故此字段仍留空。",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "zh": "境外投资者通过加拿大 CIRO 监管的投资交易商（或其海外关联券商）参与 TSX；TMX 官方称约 40% 的 TSX/TSXV 交易量来自加拿大境外，且外国发行人（如美国公司）可在 TSX 双重上市。无 residency 限制，外国投资者可自由持有 TSX 证券（行业限制见 foreign_ownership_limit）",
+        "en": "Foreign investors access TSX through CIRO-regulated Canadian investment dealers (or their overseas affiliate brokers); TMX states an estimated 40% of TSX/TSXV trading volume originates from outside Canada, and foreign issuers (e.g., U.S. companies) may interlist on TSX. There is no residency restriction; foreign investors may freely hold TSX securities (sectoral limits see foreign_ownership_limit)",
+        "detail": "加拿大无类似 QFII 的准入配额机制；外国投资者与加拿大居民走同一条券商开户通道（KYC 要求相同）。",
+        "sources": [
+          {
+            "title": "TMX Equity Markets – Trading（TMX）",
+            "url": "https://www.tsx.com/en/trading",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "an estimated 40% of all trading on TSX and TSXV originates from outside Canada",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "membership_structure": {
         "zh": "会员制：经批准的「Participating Organization（PO）」须同时保持在受认可自律组织（CIRO）的会员资格，一旦丧失CIRO会员资格，其TSX资格自动终止",
@@ -1166,81 +1236,123 @@
         ],
         "quote": "If a Participating Organization ceases to be a member of a recognized self-regulatory organization, its status with the Exchange shall be terminated automatically.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "broker_landscape": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "TSX 的买卖参与方为经认可的「Participating Organization（PO）」，依 TSX 规则须同时保持 CIRO 会员资格；执行经纪与自营交易均通过这些 CIRO 监管的投资交易商完成。TSX 不直接公布「券商家数」单一数字，实际参与券商以 CIRO 会员名录为准",
+        "en": "Trading access to TSX is through approved Participating Organizations (POs) which under TSX rules must concurrently maintain CIRO membership; execution and proprietary trading are conducted via these CIRO-regulated investment dealers. TSX does not publish a single 'broker count' figure; the actual participating dealers are listed in the CIRO membership registry",
+        "detail": "TSX 的会员结构见 participants.membership_structure（已 high）。券商竞争格局由 CIRO 监管，本字段仅描述结构，不引用未经核实的精确家数。",
+        "sources": [
+          {
+            "title": "Toronto Stock Exchange Rule Book（PDF，Effective January 13, 2026，Rule 2-301）",
+            "url": "https://www.tsx.com/en/resource/1464",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "infrastructure": {
       "market_data_levels": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "TMX 行情数据分 Level 1（TL1，多伦多证券交易所 Level 1）与 Level 2（TL2，多伦多证券交易所 Level 2），另有整合 L1&L2 的 TMX QuantumFeed® 实时数据产品",
+        "en": "TMX market data is provided in Level 1 (TL1, Toronto Stock Exchange Level 1) and Level 2 (TL2, Toronto Stock Exchange Level 2), plus TMX QuantumFeed® bundling Level 1 & Level 2 real-time data",
+        "sources": [
+          {
+            "title": "TMX | Market Insights - Pricing and Contract Documents（TMX Datalinx）",
+            "url": "https://www.tmxinfoservices.com/market-data/pricing-and-contract-documents",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Toronto Stock Exchange Level 1 (TL1) / TSX Venture Exchange Level 1 (CL1) ... Toronto Stock Exchange Level 2 (TL2) / TSX Venture Exchange Level 2 (CL2) TMX QuantumFeed ® (Level 1 & Level 2)",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "data_latency": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "撮合引擎 TMX Quantum XA 订单执行中位时延较旧系统降低二十倍、至 100 微秒以内（网络边缘响应时间低于 100 微秒），单服务器吞吐高于 130,000 笔订单/秒；行情分发通过 TMX QuantumFeed 及共址服务实现低时延接入",
+        "en": "The TMX Quantum XA matching engine cuts median order-execution latency twenty-fold versus the prior system to sub-100 microseconds (response times under 100 microseconds measured at the network edge), with throughput above 130,000 orders/sec per server; market data is distributed via TMX QuantumFeed with low-latency co-location access",
+        "sources": [
+          {
+            "title": "TMX Quantum XA（TMX）",
+            "url": "https://www.tsx.com/en/trading/products-and-services/tmx-quantum-xa",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "representing a twenty-fold reduction in median latency over the current system to sub-100 microseconds on order executions. ... with throughput above 130,000 orders/sec. per server.",
+        "confidence": "high",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "data_pricing_model": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "TMX 行情数据采用订阅/再分发许可收费模式，由 TMX Datalinx 运营；以 TSX/TSXV 为例，Level 1 内部分发月费 1,109 加元、外部分发 3,327 加元，Level 2 内部分发 1,663 加元、外部分发 3,881 加元（数字来自 TMX Datalinx Price List，经 Cboe Canada 监管备案文件引用）",
+        "en": "TMX market data uses a subscription/redistribution licensing model operated by TMX Datalinx; for TSX/TSXV, Level 1 internal distribution is $1,109/month and external $3,327/month, Level 2 internal $1,663/month and external $3,881/month (per the 2024 TMX Datalinx Price List, as quoted in a Cboe Canada regulatory filing)",
+        "detail": "数据定价由 TMX Datalinx 制定，须经 OSC 等批准备案；上述数字来自 Cboe Canada 向 OSC 提交的《Real Time Market Data Fees》备案文件对 TMX 价目的引用，属同一权威价目。",
+        "sources": [
+          {
+            "title": "Notice and Request for Feedback – Real Time Market Data Fees – Cboe Canada Inc.（OSC 备案 PDF，引用 TMX Datalinx Price List）",
+            "url": "https://www.osc.ca/sites/default/files/2024-12/cboe_20241201_market-data-fees.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "TSX/TSXV (Level 1)                        $1,109                        $3,327\nTSX/TSXV (Level 2)                        $1,663                        $3,881\n",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "historical_data_availability": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "TMX Datalinx 提供历史行情数据产品（Historical Data Products），含逐笔成交/报价、日 K 线、分钟 K 线、集合竞价及公司行动等历史数据，可按产品页订阅",
+        "en": "TMX Datalinx offers historical market data products (Historical Data Products) including time-and-sales, daily/minute candles, auction data and corporate actions, available by subscription per the product pages",
+        "detail": "具体历史数据回溯年限与样本格式需按 TMX Datalinx 各产品页确认；本字段仅确认历史数据作为付费产品可得，未逐产品核实回溯深度。",
+        "sources": [
+          {
+            "title": "TMX | Market Insights - Pricing and Contract Documents（TMX Datalinx）",
+            "url": "https://www.tmxinfoservices.com/market-data/pricing-and-contract-documents",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "trading_system_name": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "TSX 的撮合引擎为 TMX Quantum XA®（TMX Quantum 专有股票交易平台的次世代版本），服务于多伦多证券交易所（TSX）、TSX Venture Exchange（TSXV）与 TSX Alpha Exchange",
+        "en": "TSX's matching engine is TMX Quantum XA® (the next generation of the proprietary TMX Quantum equity trading platform), serving the Toronto Stock Exchange (TSX), TSX Venture Exchange (TSXV) and TSX Alpha Exchange",
+        "sources": [
+          {
+            "title": "TMX Quantum XA（TMX）",
+            "url": "https://www.tsx.com/en/trading/products-and-services/tmx-quantum-xa",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "TMX Quantum XA ® is the next generation of our current TMX Quantum proprietary equity trading platform for the Toronto Stock Exchange (TSX), TSX Venture Exchange (TSXV) and TSX Alpha Exchange (TSXA).",
+        "confidence": "high",
         "detail": "站内导航（Products & Services栏目）多处出现「TMX Quantum XA」字样，疑为撮合引擎/技术产品名称，但本次未抓取到对该系统的专门介绍页面，未采纳为正式字段值，留空。",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "verified": "2026-08-27",
+        "enum": null
       },
       "access_methods": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "市场参与方经授权的 Participating Organization 连接交易；行情数据通过 TMX QuantumFeed 实时数据馈送直接接入，或经 TMX Datalinx 授权的外部再分发商（external redistributors）以内部/外部分发许可协议获取",
+        "en": "Market participants connect to trade through authorized Participating Organizations; market data is accessed via TMX QuantumFeed real-time feeds directly, or through TMX Datalinx-authorized external redistributors under internal/external distribution licensing agreements",
+        "detail": "TMX Datalinx 提供数据许可协议（区分内部/外部分发），具体接入端口与协议（如 FIX/ITCH）规范见 TMX Datalinx 产品文档；共址（co-location）等低时延接入由 TMX 另行提供。",
+        "sources": [
+          {
+            "title": "TMX | Market Insights - Pricing and Contract Documents（TMX Datalinx）",
+            "url": "https://www.tmxinfoservices.com/market-data/pricing-and-contract-documents",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "major_outage_history": {
         "zh": "2008年12月17日，TSX历史上首次因技术故障全天停市",
@@ -1255,20 +1367,26 @@
         ],
         "quote": "On December 17, 2008, for the first time, the TSX was closed for a full trading day due to a technical glitch.",
         "confidence": "medium",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       }
     },
     "costs": {
       "commission_structure": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "TSX 本身不规定经纪佣金费率；佣金由 CIRO 监管的投资交易商自行设定（可协商），常见为按笔固定费或按交易金额比例，线上折扣券商多采用按笔低费模式。佣金与交易所经手费（exchange_fees）是分开的两类成本",
+        "en": "TSX does not set broker commission rates; commissions are set by CIRO-regulated investment dealers (negotiable), commonly a flat per-trade fee or a percentage of trade value, with online discount brokers typically charging low flat per-trade fees. Commissions are distinct from the exchange trading fee (exchange_fees)",
+        "detail": "佣金属券商-客户之间的商业安排，受 CIRO 行为准则（NI 31-103 适当性等）约束但不设统一价目；本字段定性描述，无交易所统一佣金数字可引。",
+        "sources": [
+          {
+            "title": "TMX Equity Markets – Trading（TMX）",
+            "url": "https://www.tsx.com/en/trading",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "exchange_fees": {
         "zh": "做市商-吃单者模式（maker-taker）：以非美元计价、非跨挂牌股票为例，主动吃单费约每股$0.0027（$1及以上价位），提供流动性一方获返佣约每股$0.0023；不同价位/品类（跨挂牌股票、ETF、低价股）费率分层",
@@ -1283,78 +1401,125 @@
         ],
         "quote": "TSX Post-Open Continuous Trades Involving Displayed Orders in Equities and Exchange Traded Funds (ETFs):\n\n                                                                                         Where trade price per share is:\n                                                                                                                  ≥$1.00\n                                                                 < $1.00         Non-Interlisted\n                                                                                                           Interlisted Equities             ETFs\n                                                                                   Equities\nRemoving Displayed with Displayed or Dark\n  Fee / share / side                                           $0.00020              $0.0015                     $0.0027                    $0.0017\nProviding Displayed\n  Fee / share / side                                               $0                ($0.0011)                  ($0.0023)                  ($0.0013)\n",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null
       },
       "clearing_fees": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "TSX 现货交易的中央对手方清算由 CDS 提供，费用按《CDS Participant Fee Schedule》（经 OSC 批准）向 CDS Participant（即券商）收取，并非直接向投资者逐笔征收；具体逐笔清算费率（如 CCP 失败收受费等）在 CDS 价目表中分服务列示",
+        "en": "Central-counterparty clearing of TSX spot trades is provided by CDS, with fees charged to CDS Participants (dealers) under the OSC-approved CDS Participant Fee Schedule rather than billed per-trade to investors; specific per-trade clearing rates (e.g., CCP failure-to-receive) are itemized by service in the CDS fee schedule",
+        "detail": "CDS 费率表历年经 OSC 备案修订（见 OSC CDS rule review）；逐笔清算费数字未在本次逐条摘引，投资人端实际承担的清算成本已内含于券商佣金/价差。",
+        "sources": [
+          {
+            "title": "Canadian Depository for Securities Limited (CDS) rule review（OSC）",
+            "url": "https://www.osc.ca/en/industry/market-regulation/clearing-agencies-and-clearing-houses/recognized-clearing-agencies/cds-rule-review",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "regulatory_fees": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "加拿大联邦层面对证券交易不征收类似美国 SEC Section 31 的按交易额「监管费」；TSX 层面唯一的交易相关费用即交易所经手费（maker-taker，见 exchange_fees），并无独立名为「regulatory fee」的征费。因此本字段记为不适用（无独立的联邦/省级证券交易监管费）",
+        "en": "At the Canadian federal level there is no per-trade 'regulatory fee' analogous to the U.S. SEC Section 31 fee on securities transactions; the only transaction-level charge at TSX is the exchange trading fee (maker-taker, see exchange_fees), and there is no separately named 'regulatory fee' levy. This field is therefore not applicable (no standalone federal/provincial securities transaction regulatory fee)",
+        "detail": "加拿大没有联邦证券交易税/监管费这一费种（见 financial_transaction_tax / stamp_duty 同为不适用）。若未来省或联邦新设该类费，需重新核实。",
+        "sources": [
+          {
+            "title": "Financial Transactions Taxes Around the World（CEPR）",
+            "url": "https://cepr.net/publications/financial-transactions-taxes-around-the-world/",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "stamp_duty": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "不适用：加拿大对证券转让不征收印花税（stamp duty）。跨境并购税务指南明确指出「There is no stamp duty in Canada」；联邦无证券交易印花税，各省印花税一般也不适用于证券交易所上市证券的转让",
+        "en": "Not applicable: Canada imposes no stamp duty on the transfer of securities. A cross-border M&A guide states plainly 'There is no stamp duty in Canada'; there is no federal securities-transfer stamp duty, and provincial stamp duties generally do not apply to transfers of exchange-listed securities",
+        "sources": [
+          {
+            "title": "Stamp duty and tax | Canada | Global Private M&A Guide（Baker McKenzie）",
+            "url": "https://resourcehub.bakermckenzie.com/en/resources/global-private-ma-guide-limited/north-america/canada/topics/agreeing-the-acquisition-agreement/stamp-duty-and-tax",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "There is no stamp duty in Canada.",
+        "confidence": "medium",
         "detail": "该字段volatility: volatile，按铁律必须有sources才能填；本次未找到对「加拿大联邦层面是否征收证券交易印花税」的官方一手确认，不凭常识填写，留空。",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "quote": null,
-        "sources": null
+        "verified": "2026-08-27",
+        "enum": null
       },
       "financial_transaction_tax": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "不适用：加拿大联邦层面对证券买卖不征收金融交易税（FTT）。学术研究汇编《Financial Transactions Taxes Around the World》明确列示「Canada – No Financial Transaction Tax Currently Found」",
+        "en": "Not applicable: Canada imposes no federal financial transaction tax (FTT) on securities purchases and sales. The research compilation 'Financial Transactions Taxes Around the World' lists 'Canada – No Financial Transaction Tax Currently Found'",
+        "sources": [
+          {
+            "title": "Financial Transactions Taxes Around the World（CEPR）",
+            "url": "https://cepr.net/publications/financial-transactions-taxes-around-the-world/",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Canada – No Financial Transaction Tax Currently Found.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "capital_gains_tax": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "资本利得须纳税；个人资本利得计入应税所得的比例为 50%（2026 年仍适用，此前拟上调至 2/3 的提案已被取消），公司/信托一般按 2/3 计入。实际税负按边际税率计算，非单一比例",
+        "en": "Capital gains are taxable; for individuals 50% of a capital gain is included in taxable income (still applicable in 2026; the proposed increase to two-thirds was cancelled), while corporations and trusts are generally included at two-thirds. The actual tax is at the marginal rate, not a flat rate",
+        "detail": "此为公司制/个人投资者的联邦所得税层面规则（Income Tax Act s.38），非交易所征收；安省等省份另加省税。本字段记录加拿大的资本利得税框架，具体边际税率每年调整。",
+        "sources": [
+          {
+            "title": "Canada Capital Gains Inclusion Rate 2026（TaxSpecialty）",
+            "url": "https://taxspecialty.com/canada-capital-gains-inclusion-rate-2026/",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Canada's capital gains inclusion rate for 2026 is currently 50%, meaning one-half of a capital gain is included in taxable income.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "dividend_withholding_tax": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "zh": "加拿大对支付给非居民的股息按《所得税法》Part XIII 预扣税，基准税率为支付总额的 25% 平率，若加拿大与受益所有人所在国订有税收协定可降至 15%（或直接持股 10% 以上降至 5%）等；加拿大居民收取股息享「可归额股息税务抵免」（eligible dividend tax credit），非居民不适用",
+        "en": "Canada withholds tax on dividends paid to non-residents under Part XIII of the Income Tax Act at a flat statutory rate of 25% of the gross payment, reducible to 15% (or 5% where the beneficial owner holds 10%+ of voting stock) under a tax treaty; Canadian-resident recipients get an eligible dividend tax credit, which non-residents cannot use",
+        "detail": "25% 平率源自《所得税法》及其条例的最高预扣率；具体适用以 CRA 规定与税收协定为准。本字段记录预扣税框架，非某只具体证券的到手收益率。",
+        "sources": [
+          {
+            "title": "Non-Resident Tax Returns | A Canadian Tax Lawyer's Analysis（Mondaq）",
+            "url": "https://www.mondaq.com/canada/withholding-tax/771896/non-resident-tax-returns-%7C-a-canadian-tax-lawyers-analysis",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "The withholding tax under Part XIII of the Act is set at flat rate of 25% of the payment made to a non-resident unless the payment is eligible for a reduced withholding rate pursuant to a tax treaty.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null
       },
       "implicit_costs_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "TSX 现货市场的隐性成本主要为买卖价差（bid-ask spread）与市价冲击（market impact）；采用做市商-吃单者（maker-taker）收费模式（见 exchange_fees），流动性由 Registered Trader 在最优买卖价提供自动全额成交保证（见 market_structure.odd_lot_handling）。无交易所统一公布的「隐性成本率」数字",
+        "en": "The main implicit cost in the TSX spot market is the bid-ask spread and market impact; TSX uses a maker-taker fee model (see exchange_fees), with liquidity provided by Registered Traders guaranteeing complete fills at the Protected NBBO (see market_structure.odd_lot_handling). No exchange-published single 'implicit cost rate' figure exists",
+        "detail": "隐性成本因证券流动性差异很大：大盘股价差极窄，NEX/低价股价差宽。本字段定性描述，不引用具体价差百分比。",
+        "sources": [
+          {
+            "title": "TSX Trading Fee Schedule effective July 2, 2026（PDF）",
+            "url": "https://www.tsx.com/en/resource/3521/tsx-trading-fee-schedule-effective-july-2-2026-en.pdf",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "TMX | Market Insights - Pricing and Contract Documents（TMX Datalinx）",
+            "url": "https://www.tmxinfoservices.com/market-data/pricing-and-contract-documents",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "verified": "2026-08-27",
+        "confidence": "medium",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "risks": {
@@ -1362,31 +1527,48 @@
         "zh": "以加元（CAD）计价为主，对加拿大本土投资者本币风险较低；境外投资者持有CAD计价资产时，汇率风险来自其本币兑加元的波动；另有部分USD计价双重货币挂牌证券（见overview.trading_currency）",
         "en": "Primarily CAD-denominated; low domestic FX risk for Canadian investors. Foreign investors holding CAD-denominated assets face FX risk from their home currency's fluctuation against the CAD; a subset of dual-currency listings trade in USD (see overview.trading_currency)",
         "confidence": "low",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null,
         "quote": null,
         "sources": null
       },
       "political_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "加拿大为联邦制稳定民主体，证券市场运行的政治风险整体低；主要潜在政治风险来自加美贸易政策摩擦（近年加拿大曾对美钢铝加征报复性关税），可能间接影响资源/工业板块情绪与跨境发行，但不直接威胁 TSX 作为交易所的持续运营",
+        "en": "Canada is a stable federal democracy and the political risk to securities-market operation is generally low; the main potential political risk is Canada–U.S. trade-policy friction (Canada has at times imposed retaliatory tariffs on U.S. steel and aluminum), which may indirectly affect resource/industrial-sector sentiment and cross-border listings but does not directly threaten TSX's continued operation as an exchange",
+        "detail": "本字段为定性政治风险评估；未引用具体政治事件数字，置信度中等。",
+        "sources": [
+          {
+            "title": "Canada's main stock market index, the TSX（Trading Economics）",
+            "url": "https://tradingeconomics.com/canada/stock-market",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "liquidity_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "TSX 高级股票整体流动性充裕（大盘金融/能源/矿业股成交活跃），但 NEX 板与低价/小微市值证券流动性很薄，买卖价差宽、冲击成本高；个别名面临停牌/退市后完全丧失流动性的风险。集中度高（金融、能源、材料占指数权重较大）亦放大板块流动性联动风险",
+        "en": "TSX senior equities are generally liquid (large-cap financials, energy and mining names trade actively), but NEX-board and low-priced/small-cap securities are thinly traded with wide spreads and high impact cost; individual names risk losing all liquidity upon halt/delisting. Concentration in financials, energy and materials also amplifies sector liquidity co-movement risk",
+        "detail": "流动性风险因证券而异，无交易所统一的流动性风险评级；本字段为结构性定性描述。",
+        "sources": [
+          {
+            "title": "Canada's main stock market index, the TSX（Trading Economics）",
+            "url": "https://tradingeconomics.com/canada/stock-market",
+            "accessed": "2026-08-27"
+          },
+          {
+            "title": "TMX | Market Insights - Pricing and Contract Documents（TMX Datalinx）",
+            "url": "https://www.tmxinfoservices.com/market-data/pricing-and-contract-documents",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "verified": "2026-08-27",
+        "confidence": "medium",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "regulatory_change_risk_note": {
         "zh": "近年最大的一次自律监管架构变革：IIROC与MFDA于2023年合并为CIRO（见regulation.self_regulatory_org），交易操守类规则（UMIR）的制定权随之整体转移",
@@ -1400,19 +1582,25 @@
         ],
         "quote": "The two predecessor SROs, the Investment Industry Regulatory Organization of Canada (IIROC) and the Mutual Fund Dealers Association of Canada (MFDA), amalgamated to continue as the New Self-Regulatory Organization of Canada (New SRO), effective January 1, 2023, which subsequently changed its name to CIRO on June 1, 2023.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-08-27",
         "enum": null,
         "detail": null
       },
       "enforcement_note": {
-        "zh": "",
-        "confidence": "low",
-        "verified": "2026-08-16",
-        "en": null,
+        "zh": "市场行为与适当性由 CIRO 执行（前 IIROC/MFDA），对违规会员可处以纪律处分、罚款乃至注销注册；发行人持续义务由 TSX 依 Company Manual 监督，严重不合规可启动退市审查（见 listing.suspension_resumption）。OSC 作为省级监管机构亦对资本市场违法进行执法",
+        "en": "Market conduct and suitability are enforced by CIRO (formerly IIROC/MFDA), which can discipline, fine or revoke registration of non-compliant members; issuer ongoing obligations are supervised by TSX under the Company Manual, with serious non-compliance triggering delisting review (see listing.suspension_resumption). The OSC as provincial regulator also conducts enforcement against capital-markets misconduct",
+        "detail": "CIRO 由 IIROC 与 MFDA 于 2023 年合并（见 regulation.self_regulatory_org），其执法权力源自证券法规及会员规则；本字段记录执法框架。",
+        "sources": [
+          {
+            "title": "Canadian Investment Regulatory Organization (CIRO)（OSC 官网说明页）",
+            "url": "https://www.osc.ca/en/industry/market-regulation/self-regulatory-organizations-sro/canadian-investment-regulatory-organization-ciro",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-08-27",
         "enum": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     }
   }

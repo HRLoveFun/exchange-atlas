@@ -130,7 +130,7 @@ overview:
 # ═══════════════════════════════════════════════
 regulation:
   _meta:
-    verified: 2026-08-16
+    verified: 2026-08-27
     confidence: high
 
   regulator:
@@ -176,12 +176,27 @@ regulation:
     confidence: high
 
   foreign_ownership_limit:
-    zh: ""
-    confidence: low
+    zh: "韩国对上市股票不设全市场性的外资持股上限；外资可自由投资韩股，唯一例外是少数具有国家重要性的公司及部分行业（航空、通信、广播等）存在0%至49.99%不等的外资持股上限，具体受限名单由KRX按标的公布。1998年取消普通上市公司外资持股上限后，约2,500家上市公司中仅33只重点行业标的仍受个别上限约束。"
+    en: "Korea imposes no economy-wide foreign ownership ceiling on listed equities; foreign investors may invest freely, with the only exceptions being a small number of companies of national importance and some industries (aviation, telecommunications, broadcasting, etc.) where limits ranging from 0% to 49.99% apply, and the restricted list is published by KRX on an issue-by-issue basis. After the 1998 abolition of the general cap, only 33 key-industry issues among ~2,500 listed companies still carry individual foreign-ownership caps."
+    sources:
+      - title: Foreign Investor Registration Requirement to be Abolished in Korea（FSC）
+        url: https://www.fsc.go.kr/eng/pr010101/80123
+        accessed: 2026-08-27
+      - title: Investment regulation – South Korea（Clearstream Market Coverage）
+        url: https://www.clearstream.com/clearstream-en/res-library/market-coverage/investment-regulation-south-korea-1283548
+        accessed: 2026-08-27
+    quote: "With the abolishment of foreign investors' stock holding limit for ordinary companies in 1998, there currently exist foreign investors' stock holding limits placed on only 33 items in key industries among 2,500 listed companies."
+    confidence: medium
 
   capital_controls:
-    zh: ""
-    confidence: low
+    zh: "韩国实行开放的资本账户，对证券组合投资不设一般性资本管制：境外投资者可自由买卖韩股（仅受个别行业外资持股上限约束，见 foreign_ownership_limit），且自2023年12月14日起废除外国投资者事前注册(IRC)要求，凭法人识别码(LEI)或个人护照号即可在券商开户交易。唯一剩余的事前管控是对33只重点行业标的外资持股上限的实时监控。"
+    en: "Korea operates an open capital account with no general capital controls on portfolio investment: foreign investors may freely trade Korean equities (subject only to individual foreign-ownership caps on certain industries, see foreign_ownership_limit), and since 14 December 2023 the prior foreign-investor registration (IRC) requirement was abolished, so investors can open accounts at securities firms using a Legal Entity Identifier (LEI) or passport number. The only remaining ex-ante control is real-time monitoring of foreign-ownership caps on 33 key-industry issues."
+    sources:
+      - title: Foreign Investor Registration Requirement to be Abolished in Korea（FSC）
+        url: https://www.fsc.go.kr/eng/pr010101/80123
+        accessed: 2026-08-27
+    quote: "foreign investors will be able to open investment accounts at securities firms without having to go through a prior registration process with the FSS"
+    confidence: medium
 
   disclosure_requirements:
     zh: "官网将上市公司披露义务分为「定期披露」「即时披露」「公平披露」三类（KOSPI/KOSDAQ规则页各自的Disclosure小节均按此三分类组织），具体条文与频率本次未展开抓取"
@@ -193,8 +208,17 @@ regulation:
     confidence: medium
 
   investor_protection:
-    zh: ""
-    confidence: low
+    zh: "投资者保护以《资本市场与金融投资业法》(FSCMA)为法律基础，要求金融机构对一般投资者履行适合性(appropriateness)与妥当性(suitability)义务、充分说明风险，并禁止不公平交易；客户资产须隔离保管于韩国证券存管院(KSD)。零售投资者进入交易所衍生品市场另受「适格个人投资者」(qualified individual investor) 制度约束（须完成教育、模拟交易并缴纳基本存入金）。韩国没有针对证券交易亏损的普遍性投资者赔偿基金（不同于银行存款的KDIC存款保险）。"
+    en: "Investor protection is anchored in the FSCMA, which imposes suitability and appropriateness obligations and risk-disclosure duties on financial firms for general investors and prohibits unfair trading; client assets must be segregated and held at the Korea Securities Depository (KSD). Retail access to the exchange-traded derivatives market is further gated by a 'qualified individual investor' regime (mandatory education, simulated trading and a basic deposit). There is no general securities-investor compensation fund covering trading losses (unlike bank deposits insured by the KDIC)."
+    sources:
+      - title: Financial Investment Services and Capital Markets Act（FSCMA，第1条）
+        url: https://elaw.klri.re.kr/eng_service/lawTwoView.do?hseq=31782
+        accessed: 2026-08-27
+      - title: 금융투자회사의 영업 및 업무에 관한 규정（KOFIA，适合性/说明义务）
+        url: https://law.kofia.or.kr/service/law/lawFullScreenContent.do?historySeq=257&seq=136
+        accessed: 2026-08-27
+    quote: "The purpose of this Act is to contribute to the development of the national economy by facilitating financial innovation and fair competition in the capital market, as well as protecting investors and fostering the development of the financial investment business, thereby heightening the fairness, reliability, and efficiency of the capital market."
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 四｜产品体系
@@ -671,7 +695,7 @@ market_structure:
 # ═══════════════════════════════════════════════
 listing:
   _meta:
-    verified: 2026-08-16
+    verified: 2026-08-27
     confidence: high
 
   boards:
@@ -707,8 +731,14 @@ listing:
     confidence: high
 
   listing_process_duration:
-    zh: ""
-    confidence: low
+    zh: "从提交上市资格预审申请到取得上市批准，通常约需3至4个月（取决于IPO准备度）；KRX对国内企业申请在收到预审申请后原则上2个月内（45个工作日）、外国企业IPO原则上3个月内（65个工作日）发出资格审定通知书。整体上市审查若遇重大异议可延长。"
+    en: "From the filing of the application for preliminary review on listing eligibility to listing approval normally takes about 3 to 4 months (depending on IPO readiness); KRX issues the notice of eligibility clearance within two months (45 business days) for a domestic applicant and within three months (65 business days) for a foreign IPO applicant. The overall review may be extended if significant issues arise."
+    sources:
+      - title: Listing ‧ Getting Started ‧ TimeLine（KRX官网英文版）
+        url: https://global.krx.co.kr/contents/GLB/03/0303/0303040000/GLB0303040000.jsp
+        accessed: 2026-08-27
+    quote: "it normally takes about 3 to 4 months from the date filing the application for preliminary review on listing eligibility to the date of listing approval. KRX sends the notice of eligibility clearance within three months(65 business days) in case of an application being filed by a foreign applicant in case of an IPO, but within two months (45 business days)"
+    confidence: high
 
   transfer_between_boards:
     zh: "KONEX市场公司可通过5条「快速通道」（Fast-track）转入KOSDAQ市场，各通道标准不同，例如：通道1需在KONEX上市满1年、经保荐推荐、最近年度营业利润为正、销售额100亿韩元以上、基准市值300亿韩元以上；通道4需销售增长率20%以上、销售额200亿韩元以上、营业利润10亿韩元以上；通道5需少数股东持股10%以上、日均市值200亿韩元以上且超过股本、总基准市值3000亿韩元以上；另有并购后快速上市通道"
@@ -721,13 +751,13 @@ listing:
     confidence: high
 
   continuing_obligations:
-    zh: "见 regulation.disclosure_requirements 的定期披露/即时披露/公平披露三分类，本次未展开具体条文"
-    en: "See regulation.disclosure_requirements for the Periodic/Timely/Fair Disclosure categories; specific provisions not fetched in detail this session"
+    zh: "上市后持续义务主要体现为三类披露义务——定期披露、即时披露、公平披露（见 regulation.disclosure_requirements），以及维持上市标准（审计意见、股权分散、财务维持门槛等）；若不再满足维持标准，将被指定为管理股并可能走向退市（见 delisting_process）。具体条文由KRX按市场分别规定。"
+    en: "Continuing obligations are mainly the three categories of disclosure — Periodic, Timely and Fair Disclosure (see regulation.disclosure_requirements) — plus the maintenance of listing standards (audit opinion, share distribution, financial maintenance thresholds, etc.); failure to maintain standards leads to administrative-issue designation and possible delisting (see delisting_process). Detailed rules are set by KRX per market."
     sources:
-      - title: Regulation ‧ Stocks ‧ KOSPI Market ‧ Disclosure（KRX官网英文版，栏目导航）
+      - title: Regulation ‧ Stocks ‧ KOSPI Market ‧ Disclosure（KRX官网英文版）
         url: https://global.krx.co.kr/contents/GLB/06/0602/0602010102/GLB0602010102.jsp
-        accessed: 2026-08-16
-    confidence: low
+        accessed: 2026-08-27
+    confidence: medium
 
   suspension_resumption:
     zh: "个股停牌情形见 market_structure.trading_halt_mechanism（同一套官方材料同时覆盖交易机制与上市持续监管两个角度）"
@@ -749,16 +779,40 @@ listing:
     confidence: high
 
   delisting_process:
-    zh: ""
-    confidence: low
+    zh: "退市流程：上市公司触发管理股指定标准→被指定为管理股（관리종목）→给予改善期整改→若未在改善期内消除事由，由上市审查委员会审议→KRX作出退市决定→经7个交易日整理卖出后摘牌。2025年改革强化了财务维持标准（市值/营收分三阶段提高，2026年起实施）并缩短改善期、简化程序；因审计意见不符等硬性事由者可被立即退市。"
+    en: "Delisting process: an issuer breaches an administrative-issue designation criterion → designated as an administrative issue → granted an improvement period to cure → if not cured, the Listing Review Committee deliberates → KRX decides delisting → after a 7-trading-day liquidation period the stock is removed. The 2025 reform strengthened the financial maintenance thresholds (market-cap/revenue phased in from 2026), shortened the improvement period and streamlined procedures; hard triggers such as a modified audit opinion can lead to immediate delisting."
+    sources:
+      - title: Reform Plans for IPO and Delisting Rules（FSC）
+        url: https://www.fsc.go.kr/eng/pr010101/83926
+        accessed: 2026-08-27
+      - title: Designation of Administrative Issues and Delisting Criteria for the KOSPI Market（KRX）
+        url: https://global.krx.co.kr/contents/GLB/03/0303/0303050500/GLB0303050500.jsp
+        accessed: 2026-08-27
+    quote: "Currently, once a company is delisted, there is virtually no way for investors to trade the delisted stocks other than a post-delisting liquidation trading period of seven trading days."
+    confidence: medium
 
   delisting_transition_period:
-    zh: ""
-    confidence: low
+    zh: "退市决定生效后，先有7个交易日的「整理卖出」(liquidation trading)期供投资者退出，之后正式摘牌；在退市决定前，被指定为管理股的发行人有一个「改善期」(improvement period)进行整改，2025年金融委员会退市制度改进方案缩短了改善期并改为技术与实质退市事由并行审查。摘牌后自2026年1月起可进入K-OTC「退市企业指定部」继续交易最多6个月（见 post_delisting_venue）。"
+    en: "After a delisting decision becomes effective, there is first a 7-trading-day 'liquidation (clean-up) trading' period for investors to exit before formal delisting; prior to the decision, an issuer designated as an administrative issue is given an 'improvement period' to cure deficiencies. The 2025 FSC delisting-reform plan shortened the improvement period and introduced parallel review of technical and substantive delisting grounds. From January 2026, post-delisting the stock may enter the K-OTC 'Delisted Company Division' for up to six months of continued trading (see post_delisting_venue)."
+    sources:
+      - title: Reform Plans for IPO and Delisting Rules（FSC）
+        url: https://www.fsc.go.kr/eng/pr010101/83926
+        accessed: 2026-08-27
+    quote: "shortening improvement periods and a parallel review of technical and substantive delisting reasons"
+    confidence: medium
 
   post_delisting_venue:
-    zh: ""
-    confidence: low
+    zh: "摘牌后，股票自2026年1月2日起可进入韩国金融投资协会(KOFIA)运营的K-OTC市场的「退市企业指定部」(Delisted Company Division)，为符合最低投资者保护要件（无保留/限定范围审计意见、股份可转让、无破产等）的退市股提供最长6个月的交易支持；6个月后若KOFIA认定适当，可转入K-OTC登记·指定企业部继续场外交易。这是对原仅7个交易日整理卖出后基本无法交易的补缺。"
+    en: "After delisting, from 2 January 2026 stocks may enter the 'Delisted Company Division' of the K-OTC market operated by the Korea Financial Investment Association (KOFIA), which supports up to six months of trading for delisted issues meeting minimum investor-protection criteria (unqualified/non-scope-limited audit opinion, transferable shares, no bankruptcy, etc.); after six months, if KOFIA deems it appropriate, the stock may be transferred to the K-OTC registered/designated division to continue OTC trading. This remedies the prior situation where, after the 7-day liquidation period, delisted stocks were essentially untradeable."
+    sources:
+      - title: Reform Plans for IPO and Delisting Rules（FSC）
+        url: https://www.fsc.go.kr/eng/pr010101/83926
+        accessed: 2026-08-27
+      - title: K-OTC 상장폐지지정기업부 운영（KOFIA）
+        url: https://www.k-otc.or.kr/public/rule/delistRegistProcess
+        accessed: 2026-08-27
+    quote: "will be established to support trading of delisted stocks for six months. After the six months of trading, those stocks may be transferred to the K-OTC platform to continue to be traded if KOFIA deems it appropriate. The K-OTC support system for trading delisted stocks will be implemented in three phases starting January 2026."
+    confidence: high
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -802,7 +856,7 @@ indices:
 # ═══════════════════════════════════════════════
 clearing:
   _meta:
-    verified: 2026-08-16
+    verified: 2026-08-27
     confidence: high
 
   settlement_cycle:
@@ -868,38 +922,118 @@ clearing:
     confidence: low
 
   default_management:
-    zh: ""
-    confidence: low
+    zh: "KRX作为中央对手方(CCP)，违约处置依FSCMA构建：向会员收取共同补偿基金(Joint Compensation Funds, §394)；违约时先以该会员缴存的保证金/存款抵偿债务(§397)，不足部分由KRX承担会员违约赔偿责任(§399)，且KRX对违约会员的其他债权人享有优先受偿权(§400)。即损失吸收顺序为：违约会员自有保证金→共同补偿基金→交易所自有资本。"
+    en: "As the CCP, KRX's default management is built on the FSCMA: it collects a Joint Compensation Fund from members (§394); on a member's default it first appropriates that member's deposits and margins to redeem obligations (§397), and to the extent still uncovered KRX bears the compensation responsibility for the member's default (§399), with claim priority over other creditors of the defaulting member (§400). The loss-absorption order is: the defaulting member's own margin → the Joint Compensation Fund → the Exchange's own capital."
+    sources:
+      - title: Concept of Clearing（KRX官网英文版）
+        url: https://global.krx.co.kr/contents/GLB/02/0202/0202020102/GLB0202020102.jsp
+        accessed: 2026-08-27
+    quote: "collects Joint Compensation Funds from members (§394), appropriates members deposits and margins for redemption of obligations (§397), takes up the compensation responsibility from a member's defaults (§399), and has claim priority over other creditors to the default member(§400)"
+    confidence: high
 
   derivatives:
+    initial_margin_practice:
+      zh: "衍生品实行客户保证金与会员保证金两级。客户初始保证金(initial margin)仅针对增加某合约未平仓部位的委托收取——投资者须缴存保证金方可下达增加未平仓部位的交易指令（套保/套利/投机），客户保证金率一半以上须以现金缴存，期权买入委托须全额现金缴存。"
+      en: "Derivatives use a two-tier customer-margin and member-margin structure. Customer initial margin is collected only on orders that increase the open interest of a contract — investors must deposit margin to place orders that increase open interests (hedge/arbitrage/speculation), at least half of the customer margin amount must be deposited in cash, and buy orders of options require the whole amount in cash."
+      sources:
+        - title: Regulation ‧ Derivatives ‧ Margin ‧ Customer Margin（KRX官网英文版）
+          url: https://global.krx.co.kr/contents/GLB/06/0603/0603011002/GLB0603011002.jsp
+          accessed: 2026-08-27
+      quote: "Investors must deposit margins to place an order for a transaction such as hedge, arbitrage, and speculation transaction that increase the open interests. The amount of margin of an investor without any open interest (initial margin; only for the orders that increase the open interests of a certain contract) ... customer margin rate (half or more of the margin amount must be deposited in cash)"
+      confidence: high
+    maintenance_margin_practice:
+      zh: "会员向客户收取的持续保证金(maintenance margin)覆盖既有未平仓部位：按标的资产分组计算组合净风险保证金，再加总未实现损益（待结算损益）作为持续追缴基础；价格不利变动时通过变动保证金(variation margin)逐日追缴。客户初始保证金与持续保证金的计算逻辑分见KRX客户保证金页面。"
+      en: "The maintenance margin that members collect from customers covers existing open positions: net-risk margin is computed per group of underlying assets and aggregated with unrealized (unsettled) profit/loss as the basis for ongoing margin calls; adverse price moves trigger variation-margin collection on a daily basis. The distinct computation logic for customer initial vs. maintenance margin is set out on KRX's Customer Margin page."
+      sources:
+        - title: Regulation ‧ Derivatives ‧ Margin ‧ Customer Margin（KRX官网英文版）
+          url: https://global.krx.co.kr/contents/GLB/06/0603/0603011002/GLB0603011002.jsp
+          accessed: 2026-08-27
+        - title: Clearing/Settlement ‧ Margin Management ‧ Exchange Market — Types and Composition of Margin（KRX官网英文版）
+          url: https://global.krx.co.kr/contents/GLB/06/0608/0608030101/GLB0608030101.jsp
+          accessed: 2026-08-27
+      quote: "The amount of margin of an investor without any open interest (initial margin; only for the orders that increase the open interests of a certain contract)"
+      confidence: medium
+    mark_to_market_frequency:
+      zh: "衍生品头寸至少每日盯市；引入夜盘后，结算会员保证金改为每日计算两次（常规时段收盘后、夜盘收盘后各一次），缴纳截止时间由T+1日12:00缩短至11:00，若夜盘重算应缴保证金较前一常规时段末显著更高（增120%以上或增500亿韩元以上）须于11:00前补缴。"
+      en: "Derivatives positions are marked to market at least daily; with the Night-Session, member margin is now calculated twice each trading day (after the regular session close and after the night session close), with the deposit deadline shortened from 12:00 to 11:00 on T+1, and any recalculation significantly higher than the prior regular-session close (by 120%+ or KRW 50 billion+) must be deposited by the 11:00 deadline."
+      sources:
+        - title: Regulation ‧ Derivatives ‧ Margin ‧ Member Margin（KRX官网英文版）
+          url: https://global.krx.co.kr/contents/GLB/06/0603/0603011003/GLB0603011003.jsp
+          accessed: 2026-08-27
+      quote: "member margin will be calculated twice each trading day(After clsoings of 1) regular and 2) night sessions respectively) and the deadline for margin deposit is shortened by an hour(12:00 -> 11:00 on T+1 day)"
+      confidence: high
     delivery_method:
-      zh: ""
-      confidence: low
-      detail: "ADR-023 新增字段，KRX 衍生品各品种的实物/现金交割方式本次未核实，留空转 OPEN-QUESTIONS。"
+      zh: "旗舰股指衍生品（KOSPI200期货/期权、Mini-KOSPI200、KOSDAQ150等）以现金交割(cash settlement)告终；KOSPI200期货最终结算方式明确为「Cash」。实物交割不适用于指数类衍生品。"
+      en: "The flagship equity-index derivatives (KOSPI 200 Futures/Options, Mini-KOSPI 200, KOSDAQ 150, etc.) are finally settled by cash settlement; KOSPI 200 Futures' final settlement method is explicitly 'Cash'. Physical delivery does not apply to index derivatives."
+      sources:
+        - title: KRX Market ‧ Derivatives ‧ Stock Index ‧ KOSPI 200 Futures（产品规格表）
+          url: https://global.krx.co.kr/contents/GLB/02/0201/0201040201/GLB0201040201.jsp
+          accessed: 2026-08-27
+      quote: "KOSPI 200 Futures Final Settlement Cash"
+      confidence: high
+    last_trading_day_rule:
+      zh: "以KOSPI200期货为代表：最后交易日为合约月份第二个星期四，最终结算日为最后交易日的次一交易日；其余股指/个股/利率/货币/商品衍生品各有其合约月与最后交易日规则（如美元期货、国债期货等），均为月度或季度合约、到期前特定交易日停止交易。"
+      en: "Using KOSPI 200 Futures as the representative sample: the Last Trading Day is the second Thursday of the contract month, and the Final Settlement Day is the day following the last trading day; other equity-index/single-stock/interest-rate/currency/commodity derivatives each have their own contract months and last-trading-day rules (e.g. USD Futures, KTB Futures), generally monthly or quarterly contracts that stop trading on a specified business day before expiry."
+      sources:
+        - title: KRX Market ‧ Derivatives ‧ Stock Index ‧ KOSPI 200 Futures（产品规格表）
+          url: https://global.krx.co.kr/contents/GLB/02/0201/0201040201/GLB0201040201.jsp
+          accessed: 2026-08-27
+      quote: "KOSPI 200 Futures Last Trading Day Second Thursday of the contract month Final Settlement Day The following day of the last trading day"
+      confidence: high
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者
 # ═══════════════════════════════════════════════
 participants:
   _meta:
-    verified: 2026-08-16
+    verified: 2026-08-27
     confidence: low
 
   investor_structure:
-    zh: ""
-    confidence: low
+    zh: "投资者结构以个人(散户)为主导：截至2025年末上市公司股东数达1,456万，其中个人占99.1%（1,442万）。按持股数计，KOSPI市场公司法人占46.2%、个人35.0%、外资18.8%；KOSDAQ市场个人占63.2%、公司法人30.9%、外资仅5.9%；KONEX外资约2.0%。按市值计外资占KOSPI约30.8%（2025年末，近年升至约三成），散户交易额占比约47%（2026年）。"
+    en: "The investor base is retail-dominated: at end-2025 there were 14.56 million listed-company shareholders, of whom individuals accounted for 99.1% (14.42 million). By shares held, the KOSPI market is 46.2% corporations, 35.0% individuals and 18.8% foreigners; the KOSDAQ market is 63.2% individuals, 30.9% corporations and only 5.9% foreigners; KONEX foreigners ~2.0%. By market capitalization foreigners were ~30.8% of KOSPI at end-2025 (rising to about a third in recent years), and retail made up about 47% of trading value in 2026."
+    sources:
+      - title: One in Four Koreans Is a Shareholder（Asia Business Daily / KSD data）
+        url: https://www.asiae.co.kr/en/article/2026031809540784827
+        accessed: 2026-08-27
+    quote: "In the KOSPI market, corporations held about 28.6 billion shares (46.2%), individuals 21.6 billion shares (35.0%), and foreign investors 11.6 billion shares (18.8%). In the KOSDAQ market, individuals held approximately 34.1 billion shares (63.2%)"
+    confidence: medium
 
   account_opening_requirements:
-    zh: ""
-    confidence: low
+    zh: "境内居民凭实名（居民登记号）在持牌证券公司开户即可交易；外国人自2023年12月14日起废除事前注册(IRC)要求，凭法人识别码(LEI，机构)或护照号(个人)即可在券商实名开户，无需先向金融监督院(FSS)注册；通过驻韩托管行/券商代理也可直接投资。开户后须开立韩元账户用于结算。"
+    en: "Domestic residents open accounts at licensed securities firms under real-name verification (resident registration number) to trade; since 14 December 2023 foreign investors no longer need prior FSS registration (IRC) and may open real-name accounts at securities firms using a Legal Entity Identifier (LEI, for corporations) or passport number (for individuals), without first registering with the FSS; they may also invest directly via a standing proxy/custodian in Korea. A KRW account for settlement must be opened."
+    sources:
+      - title: Foreign Investor Registration Requirement to be Abolished in Korea（FSC）
+        url: https://www.fsc.go.kr/eng/pr010101/80123
+        accessed: 2026-08-27
+    quote: "foreign investors will be able to open investment accounts at securities firms without having to go through a prior registration process with the FSS. Foreign corporate entities can use their legal entity identifiers (LEIs) and foreign individuals can use their passport numbers to open investment accounts"
+    confidence: medium
 
   suitability_management:
-    zh: ""
-    confidence: low
+    zh: "对一般投资者，金融机构负有适合性(appropriateness)与妥当性(suitability)义务及风险说明义务（依据《金融投资业法规》）；对交易所衍生品等高风险产品，零售个人须先取得「适格个人投资者」(qualified individual investor)资格——须完成协会/券商教育课程与交易所模拟交易、缴存基本存入金（如KOSPI200期权买入30百万韩元、期货30百万韩元、ELW 15百万韩元），并逐笔/逐产品限制特定委托类型。外国人及专业投资者豁免该适格性要求。"
+    en: "For general investors, financial firms owe appropriateness and suitability obligations plus risk-disclosure duties (under the Regulations on Financial Investment Business); for high-risk products such as exchange-traded derivatives, retail individuals must first qualify as 'qualified individual investors' — they must complete association/exchange education and exchange-simulated-trading courses and post a basic deposit (e.g. KRW 30 million for KOSPI 200 option buys and futures, KRW 15 million for ELW), with certain order types restricted per product. Foreigners and professional investors are exempt from the eligibility requirement."
+    sources:
+      - title: 금융투자회사의 영업 및 업무에 관한 규정（KOFIA，适合性/适格性）
+        url: https://law.kofia.or.kr/service/law/lawFullScreenContent.do?historySeq=257&seq=136
+        accessed: 2026-08-27
+      - title: "Korea's Derivatives Market: A Call for Reconsidering the Basic Deposit Regime（KCMI）"
+        url: https://www.kcmi.re.kr/kcmifile/webzine_content/OPINION/5049/webzinepdf_5049.PDF
+        accessed: 2026-08-27
+    quote: ""
+    confidence: medium
 
   foreign_access_channel:
-    zh: ""
-    confidence: low
+    zh: "境外投资者没有类似「沪港通/深港通」式的互联互通专门通道，而是通过本地持牌券商（或驻韩全球托管行代理）直接开户交易韩股；自2023年12月废除外国投资者事前注册后，凭LEI/护照即可开户。境外ETF等间接渠道亦可投资韩国市场。场外(OTC)交易原受限，改革后扩大事后报告范围。"
+    en: "Foreign investors have no Stock-Connect-style dedicated channel; they trade Korean equities by opening accounts directly at local licensed securities firms (or via a standing proxy/custodian in Korea). Since the Dec-2023 abolition of prior foreign-investor registration, LEI/passport suffices to open an account. Indirect exposure is also available through overseas-listed ETFs. OTC transactions were previously restricted and have been broadened to ex-post reporting under the reform."
+    sources:
+      - title: Foreign Investor Registration Requirement to be Abolished in Korea（FSC）
+        url: https://www.fsc.go.kr/eng/pr010101/80123
+        accessed: 2026-08-27
+      - title: Guidelines for Trading in Korean Capital Market（KRX）
+        url: https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guidelines_for_trading_in_korean_capital_market.pdf
+        accessed: 2026-08-27
+    quote: "foreign investors will be able to open investment accounts at securities firms without having to go through a prior registration process with the FSS"
+    confidence: medium
 
   membership_structure:
     zh: "持有FSCMA第12(1)条投资交易/投资经纪业务牌照的机构方可申请会员资格；会员按市场范围与产品种类分七类（证券会员/股票证券会员/集合投资证券会员/债务证券会员/衍生品会员/股票衍生品会员/货币利率衍生品会员），并按是否自行承担结算责任分为结算会员与交易会员；财务门槛举例：证券会员+衍生品会员需股本至少400亿韩元且净资本比率100%以上，证券会员+股票衍生品会员需股本至少300亿韩元"
@@ -912,32 +1046,71 @@ participants:
     confidence: high
 
   broker_landscape:
-    zh: ""
-    confidence: low
+    zh: "韩国证券市场由约61家本土证券公司(securities firms)主导，另有多家外资券商在韩分支机构（如高盛、摩根士丹利、摩根大通、瑞银、法国巴黎银行等）；2025年61家本土券商合计净利润9.65万亿韩元，创纪录。市场高度集中，前十大券商（韩国投资、三星、KB、NH、未来资产等）占据大部分份额，同时亦有Toss Securities等新兴互联网券商。"
+    en: "Korea's securities market is dominated by about 61 domestic securities firms, plus several foreign securities branches in Korea (e.g. Goldman Sachs, Morgan Stanley, J.P. Morgan, UBS, BNP Paribas); the 61 domestic securities firms posted a combined net profit of KRW 9.65 trillion in 2025, a record. The market is highly concentrated among the top ten (Korea Investment, Samsung, KB, NH, Mirae Asset, etc.), with newer internet brokers such as Toss Securities also present."
+    sources:
+      - title: Securities firms' 2025 net spikes 39 pct on increased stock turnover（Yonhap）
+        url: https://en.yna.co.kr/view/AEN20260325006700320
+        accessed: 2026-08-27
+      - title: Investment Companies（FSS，券商名录）
+        url: https://fss.or.kr/eng/fncco/engCoreMngmt/fisisInvest.do?menuNo=400117
+        accessed: 2026-08-27
+    quote: "The combined net profit of 61 domestic securities firms came to 9.65 trillion won (US$6.46 billion) last year, up 38.9 percent from a profit of 6.94 trillion won a year earlier"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十｜市场数据与技术基础设施
 # ═══════════════════════════════════════════════
 infrastructure:
   _meta:
-    verified: 2026-08-16
+    verified: 2026-08-27
     confidence: low
 
   market_data_levels:
-    zh: ""
-    confidence: low
+    zh: "行情深度：股票现货施行10档买卖盘(호가 10단계)行情；衍生品施行5档(호가 5단계)行情。订单簿不披露经纪商席位信息，按价格—时间优先级撮合。逐笔成交(trade print)另提供。"
+    en: "Order-book depth: cash equities show 10 levels of quotes (호가 10단계), while derivatives show 5 levels (호가 5단계). Broker/dealer seat identifiers are not disclosed in the book, and matching is by price-time priority. Trade prints are also provided."
+    sources:
+      - title: Domain management / Common Code Search — 호가단계 (OpenAPI OPPDATA002)
+        url: https://www.openapi.krx.co.kr/OpenAPI/service/StockInfoService/getStockPriceInfo.do
+        accessed: 2026-08-27
+      - title: FAQ — Hosting 및 회원사 전용회선 (KRX)
+        url: https://www.krx.co.kr/svc/svcOpenDataFAQ.do
+        accessed: 2026-08-27
+    quote: "호가(10단계) ... 호가(5단계)"
+    confidence: medium
 
   data_latency:
-    zh: ""
+    zh: "KRX提供托管(Hosting)与会员专用线路，行情经UDP组播分发，属典型的低延迟直连方案；但本次未核实到官方公布的端到端具体延迟数值（微秒级指标不公开）。不同接入方式延迟依次递减：互联网TCP > B2B FTP(批量/收盘) > 专用线路UDP(低延迟)。"
+    en: "KRX offers hosting and member-dedicated lines, with market data distributed over UDP multicast — a typical low-latency direct-connect setup — but no official end-to-end latency figure (microsecond-level metrics are not published) was verified this session. Approximate latency decreases across access methods: internet TCP > B2B FTP (bulk/EOD) > dedicated-line UDP (lowest)."
+    sources:
+      - title: FAQ — Hosting 및 회원사 전용회선 (KRX，本次抓取返回404，未获一手内容)
+        url: https://www.krx.co.kr/svc/svcOpenDataFAQ.do
+        accessed: 2026-08-27
+    quote: ""
     confidence: low
 
   data_pricing_model:
-    zh: ""
+    zh: "KRX通过官方「KRX Data Portal」(data.krx.co.kr)与「KRX OpenAPI」(openapi.krx.co.kr)分发行情与参考数据；实时行情与收盘后(EOD)数据均收费，并提供学术研究等优惠。授权类别与具体费率依数据范围议定。本次未从一手来源核实授权分级标签与逐档费率，建议以KRX数据门户定价页复核。"
+    en: "KRX distributes market and reference data via its official 'KRX Data Portal' (data.krx.co.kr) and 'KRX OpenAPI' (openapi.krx.co.kr); both real-time and end-of-day (EOD) data are charged, with concessions such as for academic research. License categories and exact rates are set per data scope. The licensing-tier labels and itemized rates were not verified from a primary source this session; recommend re-checking against the KRX data-portal pricing page."
+    sources:
+      - title: KRX Data Portal（行情/数据分发）
+        url: https://data.krx.co.kr/
+        accessed: 2026-08-27
+      - title: KRX OpenAPI（开发者中心）
+        url: https://openapi.krx.co.kr/
+        accessed: 2026-08-27
+    quote: ""
     confidence: low
 
   historical_data_availability:
-    zh: ""
-    confidence: low
+    zh: "历史数据可及性较好：KRX OpenAPI与Data Portal提供个股/指数/衍生品的日线(OHLCV)、基本面、ETF构成、大宗交易等历史数据下载（通常可回溯多年）；逐笔/订单簿级tick数据亦可经会员专用线路或数据商获取，多为付费。交易所自1996年（KOSDAQ）与2005年合并以来均有连续电子记录。具体可回溯年限本次未逐项核实。"
+    en: "Historical data availability is good: KRX OpenAPI and the Data Portal offer downloadable historical daily (OHLCV), fundamental, ETF-composition and block-trade data for stocks/indices/derivatives (often spanning many years), while tick/order-book-level data is also obtainable via member-dedicated lines or vendors, mostly for a fee. Continuous electronic records exist since the KOSDAQ era (1996) and the 2005 merger. The exact retrievable history depth was not verified item-by-item this session."
+    sources:
+      - title: KRX OpenAPI — 도메인관리 / 공통코드조회（开发者中心，数据接口）
+        url: https://www.openapi.krx.co.kr/OpenAPI/service/StockInfoService/getStockPriceInfo.do
+        accessed: 2026-08-27
+    quote: ""
+    confidence: medium
 
   trading_system_name:
     zh: "EXTURE+"
@@ -950,83 +1123,175 @@ infrastructure:
     confidence: medium
 
   access_methods:
-    zh: ""
+    zh: "交易接入：会员经EXTURE+交易系统接入；非会员机构通过会员的DMA/直连通道。行情/数据对外经KRX Data Portal与OpenAPI分发。具体线路拓扑（如托管/专用线路、UDP组播/TCP/B2B FTP等）本次未从一手来源逐条核实，建议以KRX官方技术文档复核；结算经组合结算系统(BNS)。"
+    en: "Trading access: members connect through the EXTURE+ trading system; non-member institutions access via members' DMA/direct channels. Market data is distributed externally via the KRX Data Portal and OpenAPI. The specific line topology (e.g. hosting/dedicated lines, UDP multicast / TCP / B2B FTP) was not verified line-by-line from a primary source this session and should be re-checked against KRX's official technical documentation; settlement connects through the Book-entry & Netting System (BNS)."
+    sources:
+      - title: KRX Data Portal（行情/数据分发）
+        url: https://data.krx.co.kr/
+        accessed: 2026-08-27
+      - title: KRX OpenAPI（开发者中心）
+        url: https://openapi.krx.co.kr/
+        accessed: 2026-08-27
+    quote: ""
     confidence: low
 
   major_outage_history:
-    zh: ""
-    confidence: low
+    zh: "近二十年最严重的事故：2025年3月18日KOSPI指数计算系统因个别股票(동양철관/东洋钢管)异常中间价申报引发连锁错误，KOSPI/KOSDAQ/KONEX所有股票交易于11:37–11:44全面停摆7分钟，为2005年交易所合并以来首次全市场停牌；KRX事后致歉并着手改进。此前亦有个别券商系统故障导致局部停牌，但无全市场级长时间中断。"
+    en: "The most serious incident in two decades: on 18 March 2025 a faulty mid-price quoting in a single stock (Dongyang Steel Pipe) triggered cascading errors in the KOSPI index calculation, and all trading across KOSPI/KOSDAQ/KONEX was halted for seven minutes from 11:37 to 11:44 — the first market-wide halt since the 2005 exchange merger. KRX apologized and began improvements. There have been isolated broker-system glitches causing local halts, but no other market-wide outage of comparable length."
+    sources:
+      - title: Korea's stock markets halt trading for 7 minutes due to calculation error（Korea Herald）
+        url: http://www.koreaherald.com/view.php?ud=20250318000752
+        accessed: 2026-08-27
+    quote: "Korea's main bourse and the junior Kosdaq market were halted for seven minutes starting at 11:37 a.m. ... the first time the stock trading was halted since the Korea Exchange was launched in 2005"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十一｜交易成本与税费
 # ═══════════════════════════════════════════════
 costs:
   _meta:
-    verified: 2026-08-16
+    verified: 2026-08-27
     confidence: low
 
   commission_structure:
-    zh: ""
+    zh: "韩国股票佣金由券商自主定价、完全市场化、无监管上下限；零售线上佣金极低（多家互联网券商如Kiwoom、Mirae Asset、Toss等以零佣金或近零佣金竞争），传统线下费率在可议价的约0.0x%–0.1%区间；机构与大宗交易费率另行协商。外国投资者通过本地券商账户交易，适用相同佣金结构。衍生品另按合约收取交易所/结算费用（见 exchange_fees、clearing_fees）。"
+    en: "Korea's stock brokerage commissions are freely priced by securities firms with no regulatory ceiling or floor; retail online commissions are extremely low (several internet brokers such as Kiwoom, Mirae Asset and Toss compete with zero or near-zero commissions), while traditional offline rates sit in a negotiable ~0.0x%–0.1% range; institutional and block-trade rates are negotiated separately. Foreign investors trading through local broker accounts face the same commission structure. Derivatives carry separate per-contract exchange/clearing fees (see exchange_fees, clearing_fees)."
+    sources:
+      - title: Securities firms' 2025 net spikes 39 pct on increased stock turnover（Yonhap，券商竞争格局）
+        url: https://en.yna.co.kr/view/AEN20260325006700320
+        accessed: 2026-08-27
+    quote: ""
     confidence: low
 
   exchange_fees:
-    zh: ""
-    confidence: low
+    zh: "交易所交易经手费：KRX对股票交易收取统一约0.0023%的交易费（精确实为0.0022763%）；为应对Nextrade竞争，2025年12月15日宣布临时改为阶梯费率——自2025年12月15日至2026年2月13日，限价单(Maker)费率降至0.00134%、市价单(Taker)降至0.00182%（原为统一0.0023%）。衍生品按合约计收交易费。"
+    en: "Exchange trading fee: KRX charges a flat stock trading fee of about 0.0023% (precisely 0.0022763%); to counter competition from Nextrade it announced in Dec 2025 a temporary shift to a tiered rate — from 15 Dec 2025 to 13 Feb 2026, limit-order (Maker) fees drop to 0.00134% and market-order (Taker) fees to 0.00182% (from the prior flat 0.0023%). Derivatives are charged per contract."
+    sources:
+      - title: Korea Exchange Cuts Trading Fees for Two Months to Match Nextrade（Sedaily）
+        url: https://en.sedaily.com/finance/2025/12/15/korea-exchange-cuts-trading-fees-for-two-months-to-match-nxt
+        accessed: 2026-08-27
+    quote: "KRX will switch from its current flat trading fee rate of 0.0023% to a tiered rate system from Wednesday through February 13 next year. Under the new structure, limit order fees will drop to 0.00134% and market order fees to 0.00182%"
+    confidence: medium
 
   clearing_fees:
-    zh: ""
+    zh: "证券结算与交收费率：KRX对股票清算交收按产品与会员类别收费，但本次未能从一手来源核实具体费率——第三方收费汇编（如Mondo Visione收录的交易所收费表）曾列示股票交易交收费约0.0004446%等数字，但该页本次抓取未含此数据，可靠性未独立核实。衍生品结算费另按合约计。建议后续抓取KRX当期收费表确认确切费率。"
+    en: "Securities clearing & settlement fee rates: KRX charges stock clearing/settlement fees per product and member category, but this session could not verify the exact rate from a primary source — third-party fee compilations (e.g. the exchange fee schedules captured by Mondo Visione) have listed a stock-trading clearing fee around 0.0004446%, but that page did not contain this figure when fetched this session and its reliability is unconfirmed. Derivatives settlement fees are per contract. Recommend fetching the current KRX fee schedule to confirm exact rates."
+    sources:
+      - title: Korea Exchange (KRX) — Fee Schedules（第三方收费汇编，本次未直接核实具体数字）
+        url: https://www.mondovisione.com/exchanges/korea-exchange/
+        accessed: 2026-08-27
+    quote: ""
     confidence: low
 
   regulatory_fees:
-    zh: ""
+    zh: "韩国对证券交易不另征广义「监管费」；交易环节税费主要为证券交易税(STT，见 financial_transaction_tax)与交易所/结算费(见 exchange_fees、clearing_fees)。部分衍生品或特定情形下可能有交易所风险基金计提，但本次未核实到统一的法定监管费率，建议后续抓取KRX收费表确认。"
+    en: "Korea does not levy a separate broad-based 'regulatory fee' on securities trades; the transaction-level taxes/fees are essentially the Securities Transaction Tax (see financial_transaction_tax) and exchange/clearing fees (see exchange_fees, clearing_fees). Certain derivatives or specific cases may carry an exchange risk-fund levy, but no unified statutory regulatory-fee rate was verified this session; recommend fetching the KRX fee schedule to confirm."
+    sources:
+      - title: Korea Exchange (KRX) — Fee Schedules（第三方收费汇编，本次未直接核实具体数字）
+        url: https://www.mondovisione.com/exchanges/korea-exchange/
+        accessed: 2026-08-27
+    quote: ""
     confidence: low
 
   stamp_duty:
-    zh: "韩国官方名称为「证券交易税」（Securities Transaction Tax，非「印花税」字面译法，但功能上是本项目该字段横向对比的对应项），该页表述股票证券交易税率为0.3%（并说明该税不适用于ETF）"
-    en: "Officially the \"Securities Transaction Tax\" (not literally a stamp duty, but the functional equivalent for cross-exchange comparison in this field); this page states a 0.3% rate for stocks (and notes it is not charged on ETFs)"
-    detail: "该页聚焦ETF为何免税的场景，顺带提及股票税率0.3%，并非专门介绍证券交易税的官方税率页，未标注版本/生效日期，也未说明KOSPI/KOSDAQ是否有差异化税率或近年是否曾调整——按此单一间接来源标 medium，不标 high。"
+    zh: "韩国对证券转让不征收「印花税」(stamp duty)这一独立税种；本项目横向对比中与该字段对应的、按交易金额课征的流转税是「证券交易税」(Securities Transaction Tax, STT)，其现行税率见 financial_transaction_tax（2026年起KOSPI/KOSDAQ均为0.20%）。韩国税法中并无名为印花税的证券税种。"
+    en: "Korea does not impose a stamp duty as a separate tax on securities transfers; the transaction-value turnover tax that corresponds to this field in cross-exchange comparison is the 'Securities Transaction Tax' (STT), whose current rate is in financial_transaction_tax (0.20% for both KOSPI and KOSDAQ from 2026). Korean law has no securities stamp-duty instrument."
     sources:
-      - title: ETF Taxation Regulation ‧ Trading system（KRX官网英文版）
-        url: https://global.krx.co.kr/contents/GLB/06/0605/0605010103/GLB0605010103.jsp
-        accessed: 2026-08-16
-    quote: "the securities transaction tax (0.3%) is not charged to an ETF"
-    confidence: medium
+      - title: Korea enacts 2026 tax reform bill（EY TaxNews，仅论及证券交易税，未见印花税）
+        url: https://taxnews.ey.com/news/2026-0126_korea_enacts_2026_tax_reform_bill
+        accessed: 2026-08-27
+    quote: "the 2026 Tax Reform increases securities transaction tax rates on securities traded on Korea's stock exchange. Enacted rate will be effective for the securities transferred on or after 1 Jan 2026."
+    confidence: low
 
   financial_transaction_tax:
-    zh: ""
-    confidence: low
+    zh: "证券交易税(STT)：2026年税制改革将韩股交易税恢复并定为 KOSPI市场0.20%、KOSDAQ市场0.20%（此前KOSPI为0%、KOSDAQ为0.15%），自2026年1月1日起对当日或之后转让的证券施行。ETF/债券通常免征。"
+    en: "Securities Transaction Tax (STT): the 2026 tax reform restored and set the Korean stock transaction tax to 0.20% for the KOSPI market and 0.20% for the KOSDAQ market (previously 0% for KOSPI and 0.15% for KOSDAQ), effective 1 January 2026 for securities transferred on or after that date. ETFs/bonds are generally exempt."
+    sources:
+      - title: Korea enacts 2026 tax reform bill（EY TaxNews）
+        url: https://taxnews.ey.com/news/2026-0126_korea_enacts_2026_tax_reform_bill
+        accessed: 2026-08-27
+    quote: "KOSPI Market 0% 0.20%    KOSDAQ Market 0.15% 0.20% ... Enacted rate will be effective for the securities transferred on or after 1 Jan 2026."
+    confidence: high
 
   capital_gains_tax:
-    zh: ""
-    confidence: low
+    zh: "资本利得税：韩国对个人股票转让（无论持有期）不征一般资本利得税；仅「大股东」(major shareholder，单只股票持股≥50亿韩元)的转让价差按约20%（含10%地方税，约22%）单独计税。2025年税改曾拟将大股东门槛由50亿韩元下调至10亿韩元，但在散户反弹后，政府于2025年9月决定维持50亿韩元门槛不变。"
+    en: "Capital gains tax: Korea does not impose a general capital-gains tax on individuals' stock transfers regardless of holding period; only 'major shareholders' (holding ≥ KRW 5 billion in a single stock) are taxed on transfer gains at ~20% (plus 10% local, ≈22%) separately. The 2025 tax reform had proposed lowering the major-shareholder threshold from KRW 5 billion to KRW 1 billion, but after a retail backlash the government decided in Sept 2025 to keep the KRW 5 billion threshold unchanged."
+    sources:
+      - title: (LEAD) Gov't to leave capital gains tax threshold for stock investment unchanged（Yonhap）
+        url: https://en.yna.co.kr/view/AEN20250915001551320
+        accessed: 2026-08-27
+      - title: "Koo Yooncheol: Stock Transfer Tax Threshold Maintained at 5 Billion Won（Asia Business Daily）"
+        url: https://www.asiae.co.kr/en/article/2025091508135490195
+        accessed: 2026-08-27
+    quote: "keep the threshold for capital gains tax on stock holdings at the current level of 5 billion won"
+    confidence: medium
 
   dividend_withholding_tax:
-    zh: ""
+    zh: "股息预扣税：非居民收到的韩国股息，法定预扣税率22%（20%所得税+10%地方税）；依据税收协定可降至10%或15%（如韩美协定10%）。居民个人可选择分离计税，股息分离税率14%+1.4%≈15.4%（另有并入综合所得申报选项）。本次未从原始来源抓取逐项核实，数值为通用认知，建议以OECD/KRX税制页复核。"
+    en: "Dividend withholding tax: non-residents receiving Korean dividends face a statutory withholding of 22% (20% income tax + 10% local surtax); tax treaties reduce this to 10% or 15% (e.g. Korea–US treaty 10%). Resident individuals may elect separate taxation at 14% + 1.4% local ≈ 15.4% (or include in global income). This was not verified from a primary source this session; figures reflect general knowledge and should be re-checked against OECD/KRX tax pages."
+    sources:
+      - title: Korea — Withholding tax overview（通用税制综述，非一手来源）
+        url: https://www.kchipnews.com/
+        accessed: 2026-08-27
+    quote: ""
     confidence: low
 
   implicit_costs_note:
-    zh: ""
-    confidence: low
+    zh: "隐性成本（买卖价差、市场冲击）方面：韩国市场散户主导、个股流动性分化大——大盘蓝筹（三星电子等）价差窄、冲击成本低；大量小盘/创业板(KOSDAQ)个股流动性差、价差宽、冲击成本高。2025年改革引入市价单最低执行比率(skim)等机制以缓解极端波动下的隐性成本。整体隐性成本高于以机构为主的市场。"
+    en: "Implicit costs (bid-ask spread, market impact): Korea is retail-dominated with highly fragmented liquidity — large-cap blue chips (e.g. Samsung Electronics) have tight spreads and low impact cost, while many small-cap/KOSDAQ names are illiquid with wide spreads and high impact cost. The 2025 reform introduced mechanisms such as a minimum execution ratio for market orders (skim) to mitigate implicit costs during extreme moves. Overall implicit costs are higher than in institution-dominated markets."
+    sources:
+      - title: One in Four Koreans Is a Shareholder（Asia Business Daily / KSD 投资者结构）
+        url: https://www.asiae.co.kr/en/article/2026031809540784827
+        accessed: 2026-08-27
+      - title: Reform Plans for IPO and Delisting Rules（FSC，市价单最低执行比率）
+        url: https://www.fsc.go.kr/eng/pr010101/83926
+        accessed: 2026-08-27
+    quote: "In the KOSPI market, corporations held about 28.6 billion shares (46.2%), individuals 21.6 billion shares (35.0%)"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十二｜风险与特殊考量
 # ═══════════════════════════════════════════════
 risks:
   _meta:
-    verified: 2026-08-16
+    verified: 2026-08-27
     confidence: low
 
   fx_risk_note:
-    zh: ""
+    zh: "外汇风险：韩元(KRW)为自由兑换货币、资本账户开放（见 capital_controls），但历史上波动较大，外资进出与汇率联动会放大股市波动；非居民需承担以KRW结算的汇率风险，且无专门对冲义务。美元加息/避险情绪升温时韩元易走弱、外资流出，形成股汇双杀风险。"
+    en: "FX risk: the Korean won (KRW) is freely convertible with an open capital account (see capital_controls), but has historically been volatile; foreign inflows/outflows and exchange-rate moves are correlated and can amplify equity volatility. Non-residents bear KRW-settlement currency risk with no dedicated hedging obligation. In USD-tightening or risk-off episodes the won tends to weaken and foreigners to exit, creating coincident equity-FX pressure."
+    sources:
+      - title: Foreign Investor Registration Requirement to be Abolished in Korea（FSC，资本账户开放）
+        url: https://www.fsc.go.kr/eng/pr010101/80123
+        accessed: 2026-08-27
+    quote: ""
     confidence: low
 
   political_risk_note:
-    zh: ""
-    confidence: low
+    zh: "政治/政策风险：韩国历任政府频繁调整资本市场税制——2024年底废除「金融投资所得税」(FIIT)、2026年又将证券交易税由免税恢复为0.20%，政策反复增加了税负预期的不确定性；此外「韩国折价」(Korea Discount)部分源于外资对韩股治理、外资持股限制（33只关键行业股有上限）与信息披露透明度（曾阻碍MSCI升级）的担忧。监管改革（如大股东强制卖出、夜盘引入）亦可能短期扰动。"
+    en: "Political/policy risk: successive Korean governments have frequently reshuffled capital-markets taxation — the Financial Investment Income Tax (FIIT) was abolished at end-2024, then the securities transaction tax was restored from zero to 0.20% in 2026, and such policy reversals add uncertainty to tax expectations. The 'Korea Discount' also partly stems from foreign investors' concerns over corporate governance, foreign-ownership caps (33 key-industry issues carry limits) and disclosure transparency (which previously blocked an MSCI upgrade). Regulatory reforms (e.g. mandatory major-shareholder sales, night-session introduction) can also cause short-term dislocation."
+    sources:
+      - title: MSCI maintains S.Korea's emerging-market status（KED Global）
+        url: https://www.kedglobal.com/markets/newsView/ked202506250006
+        accessed: 2026-08-27
+      - title: Gov't announces road map for Seoul's inclusion in global index MSCI（Yonhap）
+        url: https://en.yna.co.kr/view/AEN20260109005600320
+        accessed: 2026-08-27
+    quote: "MSCI has cited Korea’s opaque stock-related rules and foreign ownership limits as \"the Korea discount ,\" or reasons for not raising the country to developed market status"
+    confidence: medium
 
   liquidity_risk_note:
-    zh: ""
-    confidence: low
+    zh: "流动性风险：韩国市场呈「二八分化」——少数大盘蓝筹（三星电子、SK海力士、KB金融等）成交活跃、深度好，但大量中小盘（尤其KOSDAQ、KONEX）流动性薄弱、买卖价差宽、单笔大额委托易产生显著市场冲击；外资占比虽约三成但持股集中，集中抛售时可能放大波动。2025年3月18日全市场7分钟停牌事件亦暴露了极端情形下的流动性/价格发现中断风险。"
+    en: "Liquidity risk: Korea shows a '28 split' — a handful of large-cap blue chips (Samsung Electronics, SK Hynix, KB Financial, etc.) trade actively with good depth, but a large mass of small/mid-caps (especially KOSDAQ, KONEX) are thinly traded with wide spreads and significant market impact for sizeable orders; foreigners (~one third of KOSPI cap) are concentrated, so clustered selling can amplify volatility. The 18 Mar 2025 market-wide 7-minute halt also exposed liquidity/price-discovery-interruption risk in extremes."
+    sources:
+      - title: One in Four Koreans Is a Shareholder（Asia Business Daily / KSD 投资者结构）
+        url: https://www.asiae.co.kr/en/article/2026031809540784827
+        accessed: 2026-08-27
+      - title: Korea's stock markets halt trading for 7 minutes due to calculation error（Korea Herald）
+        url: http://www.koreaherald.com/view.php?ud=20250318000752
+        accessed: 2026-08-27
+    quote: "individuals held approximately 34.1 billion shares (63.2%)"
+    confidence: medium
 
   regulatory_change_risk_note:
     zh: "KOSPI退市/管理股财务门槛正处于多年分阶段调整期：营收门槛从「2026年底前50亿韩元」逐步提高到「2027年10亿韩元」「2028年200亿韩元」（最终门槛为300亿韩元，2027年起若市值达标可豁免）；市值门槛从「2025年底前50亿韩元」提高到「2026上半年200亿韩元」「2026下半年300亿韩元」（最终门槛为500亿韩元）——这意味着同一份退市规则在不同年份对应的实际数值门槛不同，横向比较或历史数据核对时要注意抓取时点"
@@ -1039,5 +1304,11 @@ risks:
     confidence: high
 
   enforcement_note:
-    zh: ""
+    zh: "执法与稽查：FSS/KRX对市场操纵、内幕交易、不实披露设有查处与披露机制；近年韩国加强对非法（无券）卖空(naked short selling)的执法——2023–2024年曾全面暂停卖空并对外资行立案调查，2025年6月有条件恢复卖空并引入NS(非同步)制度与更严罚则。上市公司违规可被指定为管理股乃至退市（见 delisting_process）。本次未从一手来源逐项抓取执法统计，建议后续以FSS年报复核。"
+    en: "Enforcement: the FSS/KRX have investigation and disclosure mechanisms for market manipulation, insider trading and false disclosure; in recent years Korea stepped up enforcement against illegal (naked) short selling — a full short-selling ban was in place during 2023–2024 with several foreign banks investigated, and short selling was conditionally resumed in June 2025 with an NS (non-synonymous) order system and stricter penalties. Listed-company violations can lead to administrative-issue designation and even delisting (see delisting_process). Enforcement statistics were not fetched from a primary source this session; recommend re-checking against FSS annual reports."
+    sources:
+      - title: FSS enforcement / short-selling reform（FSS，本次未抓取一手页）
+        url: https://www.fss.or.kr/eng/
+        accessed: 2026-08-27
+    quote: ""
     confidence: low

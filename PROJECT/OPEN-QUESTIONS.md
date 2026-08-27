@@ -93,6 +93,7 @@
 - `ch-six` 基本信息 / 夏令时规则（dst_rule）— confidence: low
 - `ch-six` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `ch-six` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
+- `ch-six` 风险与特殊考量 / 政治、地缘与制裁风险（political_risk_note）— confidence: low
 - `cn-sse` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `cn-sse` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
 - `cn-sse` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
@@ -103,6 +104,7 @@
 - `cn-szse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `cn-szse` 风险与特殊考量 / 政治、地缘与制裁风险（political_risk_note）— confidence: low
 - `cn-szse` 风险与特殊考量 / 流动性风险（liquidity_risk_note）— confidence: low
+- `de-eurex` 市场数据与技术基础设施 / 历史系统故障事件（major_outage_history）— confidence: low
 - `de-eurex` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `de-xetra` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `fr-euronext` 基本信息 / 结算货币（settlement_currency）— confidence: low
@@ -116,16 +118,23 @@
 - `hk-hkex` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（trading_halt_mechanism）— confidence: low
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（derivatives.trading_halt_mechanism）— confidence: low
-- `in-nse` 上市、持续监管与退市 / 持续上市义务（continuing_obligations）— confidence: low
-- `in-nse` 市场参与者 / 外资参与通道（foreign_access_channel）— confidence: low
 - `in-nse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `jp-jpx` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 做市商制度（market_maker_scheme）— confidence: low
-- `kr-krx` 上市、持续监管与退市 / 持续上市义务（continuing_obligations）— confidence: low
+- `kr-krx` 市场数据与技术基础设施 / 实时/延时（data_latency）— confidence: low
+- `kr-krx` 市场数据与技术基础设施 / 数据收费模式（data_pricing_model）— confidence: low
+- `kr-krx` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
+- `kr-krx` 交易成本与税费 / 佣金结构（commission_structure）— confidence: low
+- `kr-krx` 交易成本与税费 / 清算费用（clearing_fees）— confidence: low
+- `kr-krx` 交易成本与税费 / 监管费用（regulatory_fees）— confidence: low
+- `kr-krx` 交易成本与税费 / 印花税（stamp_duty）— confidence: low
+- `kr-krx` 交易成本与税费 / 股息预扣税（dividend_withholding_tax）— confidence: low
+- `kr-krx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
+- `kr-krx` 风险与特殊考量 / 市场操纵与监管执法环境（enforcement_note）— confidence: low
+- `sa-tadawul` 市场数据与技术基础设施 / 历史系统故障事件（major_outage_history）— confidence: low
 - `sa-tadawul` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `sg-sgx` 上市、持续监管与退市 / 停牌/复牌规则（suspension_resumption）— confidence: low
 - `sg-sgx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `tw-twse` 监管与法律环境 / 外资准入与持股比例限制（foreign_ownership_limit）— confidence: low
 - `tw-twse` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
@@ -137,5 +146,4 @@
 - `us-nyse` 市场结构与交易机制 / 订单类型（order_types）— confidence: low
 - `us-nyse` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `us-nyse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `za-jse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 <!-- END:GENERATED auto-issues -->

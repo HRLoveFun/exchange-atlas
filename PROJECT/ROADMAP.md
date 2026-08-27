@@ -2,7 +2,7 @@
 
 进度状态放这里；「为什么这么排」去 `DECISIONS.md`，这里不重复。
 
-## 当前阶段：v1.0 已完成（20 家），v1.1 Category B 数据深耕 Batch 1/3 已完成，Batch 2/3 待启动
+## 当前阶段：v1.0 已完成（20 家），v1.1 Category B 数据深耕 Batch 1/3 与 Batch 2/3 已完成，Batch 3/3 待启动
 
 ## 阶段路线
 
@@ -19,26 +19,26 @@
 <!-- BEGIN:GENERATED progress-matrix -->
 | 交易所 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| `au-asx` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
-| `br-b3` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
-| `ca-tsx` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
-| `ch-six` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
+| `au-asx` | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | 🟡 |
+| `br-b3` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 |
+| `ca-tsx` | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | 🟡 |
+| `ch-six` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | 🟡 |
 | `cn-sse` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
 | `cn-szse` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
-| `de-eurex` | 🟡 | 🟡 | ✅ | 🟡 | ⬜ | 🟡 | 🟡 | 🟡 | ⬜ | 🟡 | 🟡 |
-| `de-xetra` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
-| `fr-euronext` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
+| `de-eurex` | 🟡 | ✅ | ✅ | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | 🟡 |
+| `de-xetra` | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | 🟡 |
+| `fr-euronext` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ |
 | `hk-hkex` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
-| `in-nse` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
+| `in-nse` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | ✅ | 🟡 |
 | `jp-jpx` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | 🟡 | 🟡 |
-| `kr-krx` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
-| `sa-tadawul` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | ⬜ | 🟡 |
-| `sg-sgx` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ⬜ | 🟡 | 🟡 |
+| `kr-krx` | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | 🟡 | 🟡 | 🟡 |
+| `sa-tadawul` | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | 🟡 | ✅ | 🟡 |
+| `sg-sgx` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 |
 | `tw-twse` | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | 🟡 | 🟡 | 🟡 |
 | `uk-lse` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | 🟡 | 🟡 | 🟡 |
 | `us-nasdaq` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | 🟡 | 🟡 |
 | `us-nyse` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
-| `za-jse` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
+| `za-jse` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 列说明：2 基本信息、3 监管与法律环境、4 产品体系、5 市场结构与交易机制、6 上市、持续监管与退市、7 指数体系、8 清算、结算与交割、9 市场参与者、10 市场数据与技术基础设施、11 交易成本与税费、12 风险与特殊考量
 <!-- END:GENERATED progress-matrix -->
@@ -46,30 +46,30 @@
 ## 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
-共 1360 个已填字段，其中 0 个超过复核阈值待复核。
+共 1766 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
 |---|---|---|
-| `au-asx` | 73 | 0 |
-| `br-b3` | 76 | 0 |
-| `ca-tsx` | 54 | 0 |
-| `ch-six` | 52 | 0 |
+| `au-asx` | 101 | 0 |
+| `br-b3` | 103 | 0 |
+| `ca-tsx` | 82 | 0 |
+| `ch-six` | 82 | 0 |
 | `cn-sse` | 70 | 0 |
 | `cn-szse` | 105 | 0 |
-| `de-eurex` | 33 | 0 |
-| `de-xetra` | 49 | 0 |
-| `fr-euronext` | 62 | 0 |
+| `de-eurex` | 75 | 0 |
+| `de-xetra` | 77 | 0 |
+| `fr-euronext` | 99 | 0 |
 | `hk-hkex` | 88 | 0 |
-| `in-nse` | 61 | 0 |
+| `in-nse` | 98 | 0 |
 | `jp-jpx` | 70 | 0 |
-| `kr-krx` | 70 | 0 |
-| `sa-tadawul` | 67 | 0 |
-| `sg-sgx` | 68 | 0 |
+| `kr-krx` | 106 | 0 |
+| `sa-tadawul` | 102 | 0 |
+| `sg-sgx` | 104 | 0 |
 | `tw-twse` | 78 | 0 |
 | `uk-lse` | 67 | 0 |
 | `us-nasdaq` | 74 | 0 |
 | `us-nyse` | 66 | 0 |
-| `za-jse` | 77 | 0 |
+| `za-jse` | 119 | 0 |
 <!-- END:GENERATED health-summary -->
 
 ## v1.0 计划：横向铺开到 20+ 家
@@ -123,7 +123,7 @@
 - **悬案批量清理（2026-08-20/21）**：`sa-tadawul`/`kr-krx`/`tw-twse`/`ch-six`/`br-b3`/`fr-euronext` 六家共 17 条 `PROJECT/OPEN-QUESTIONS.md` 具体数据悬案，13 条解决、1 条重新定性为"官方确认不披露"、3 条如实保留（sa-tadawul TASI基日、kr-krx KOSDAQ基日、fr-euronext市值口径不在本次任务范围），见 [ADR-027]。
 - **下一步方向已定：深度优先（v1.1 Category B 数据深耕），Wave 3 暂缓**，见 `PROJECT/DECISIONS.md` [ADR-028]。详见下方「v1.1 计划」一节。
 
-## v1.1 计划：Category B 数据深耕（Batch 1/3 已完成，Batch 2/3 待启动）
+## v1.1 计划：Category B 数据深耕（Batch 1/3 与 Batch 2/3 已完成，Batch 3/3 待启动）
 
 依据与规模估计见 `PROJECT/DECISIONS.md` [ADR-028]，本节只管任务清单与进度，不重复决策理由。
 
@@ -158,4 +158,4 @@
 
 - 前置事项已解决（2026-08-22，见 [ADR-030]），批量填充的阻塞已清除。
 - **Batch 1（8 家）已完成（2026-08-22/25）**：`cn-sse`/`tw-twse`/`hk-hkex`/`cn-szse`/`us-nyse`/`us-nasdaq`/`uk-lse`/`jp-jpx`。选取逻辑：优先覆盖「顺带处理」一节点名的两个批量任务——前四家一并回填英文缺失字段，`us-nyse`/`us-nasdaq` 一并尝试反爬突破，`uk-lse`/`jp-jpx` 补地区多样性。执行结果、字段明细、人工抽检通过率、反爬突破方法与并行执行的工程教训见 `PROJECT/DECISIONS.md` [ADR-031]，本条不重复：全库已填字段 1162→1360（+198）；8 个子代理各自 10 字段自查 + 协调者独立复核 16+1 个字段，全部通过，远超 ≥95% 门槛；`sec.gov`/`finra.org` 反爬已攻克（方法见 `PROJECT/SOURCES.md`「突破记录」），`dtcc.com` 仍未攻克但已降级绕过；`make build` 0 错误 0 警告。
-- **Batch 2/3（剩余 12 家：`au-asx`/`br-b3`/`ca-tsx`/`ch-six`/`de-eurex`/`de-xetra`/`fr-euronext`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse`）尚未启动**，按原执行设计分 1-2 批，具体分批留给启动时再定。
+- **Batch 2/3（剩余 12 家：`au-asx`/`br-b3`/`ca-tsx`/`ch-six`/`de-eurex`/`de-xetra`/`fr-euronext`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse`）已完成（2026-08-27）**。按原执行设计分两批（各 6 家）并行子代理执行，沿用 [ADR-017] 模式但收紧隔离：子代理只写各自 `data/exchanges/<id>.yml` 并把来源落盘到 `.cache/<id>/`，`PROJECT/SOURCES.md`/`OPEN-QUESTIONS.md`/`schema/glossary.yml` 由协调者统一合并，避免共享文件冲突。`make build` 0 错误 0 警告；全库已填字段 1360→1766（+406）。8 个原 0/20 字段（`implicit_costs_note`/`regulatory_fees`/`data_pricing_model`/`historical_data_availability`/`post_delisting_venue`/`broker_landscape`/`liquidity_risk_note`/`political_risk_note`）在 12 家中全部转为有值（个别 `low` 置信度，属"查不清已如实标注"，见 `OPEN-QUESTIONS.md` auto-issues）。质量关：协调者用脚本对全部 40 个 Category B 高置信字段做"quote 是否在落盘来源原文中"反查，命中 19/22 不匹配后逐一核实——其中 19 个实为来源页未落盘（现场抓取官方页均可命中原文），仅 3 个确属 quote 与原文不符（`ca-tsx` 两个 participants 字段引用的 OSC NI 31-103 着陆页无规则正文；`fr-euronext` `clearing.derivatives.delivery_method` 的 "EDSP=CTD/CF" 公式原文未出现），已修正（前两例降级 `medium` 保留官方来源、后一例改为 PDF 中真实存在的 EDSP 措辞并重新 verbatim 引用）。`kr-krx` 多处 costs/infrastructure 字段仍 `low`，属真实未核实，已记入悬案。
