@@ -1238,8 +1238,9 @@ costs:
       - title: Korea enacts 2026 tax reform bill（EY TaxNews）
         url: https://taxnews.ey.com/news/2026-0126_korea_enacts_2026_tax_reform_bill
         accessed: 2026-08-27
-    quote: "KOSPI Market 0% 0.20%    KOSDAQ Market 0.15% 0.20% ... Enacted rate will be effective for the securities transferred on or after 1 Jan 2026."
-    confidence: high
+    quote: ""
+    confidence: medium
+    detail: "原引用文本（未能从缓存源逐字核实，故降级为 medium）：\"KOSPI Market 0% 0.20% KOSDAQ Market 0.15% 0.20% ... Enacted rate will be effective for the securities transferred on or after 1 Jan 2026.\" 缓存的 EY 页面仅为 JS/登录墙外壳，未含文章正文，无法逐字核验，需重新抓取原始正文或改用官方税法来源坐实 2026 年税率。"
 
   capital_gains_tax:
     zh: "资本利得税：韩国对个人股票转让（无论持有期）不征一般资本利得税；仅「大股东」(major shareholder，单只股票持股≥50亿韩元)的转让价差按约20%（含10%地方税，约22%）单独计税。2025年税改曾拟将大股东门槛由50亿韩元下调至10亿韩元，但在散户反弹后，政府于2025年9月决定维持50亿韩元门槛不变。"

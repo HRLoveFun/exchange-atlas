@@ -258,7 +258,7 @@
       "disclosure_requirements": {
         "zh": "披露制度以持续性定期报告为核心：资产超过1000万美元且股东超过500人的公司须提交年度与定期报告（如10-K/10-Q等），信息通过SEC的EDGAR数据库向公众公开；征集股东投票所用的委托材料（proxy materials）须在征集前向SEC备案",
         "en": "Disclosure centers on ongoing periodic reporting: companies with more than $10 million in assets and more than 500 holders of record must file annual and other periodic reports, made public via the SEC's EDGAR database; proxy materials used to solicit shareholder votes must be filed with the SEC in advance of solicitation",
-        "detail": "本条概括自 investor.gov（SEC投资者教育官网）对《1934年证券交易法》信息披露条款的说明；具体\n报告语言（英文）、频率（10-K年报/10-Q季报/8-K重大事项即时披露）等细分规则未在本次抓取的\n页面中逐条核实，量化门槛（资产/股东人数）以quote为准。\n",
+        "detail": "本条概括自 investor.gov（SEC投资者教育官网）对《1934年证券交易法》信息披露条款的说明；具体\n报告语言（英文）、频率（10-K年报/10-Q季报/8-K重大事项即时披露）等细分规则未在本次抓取的\n页面中逐条核实。\n注意：本次抓取 investor.gov 该页面时返回 Akamai「Access Denied」拦截页（见 .cache/us-nyse/\nrole-sec-laws-govern-securities-industry-f54da8e541.html），无法取得原文逐字核验；下方量化\n门槛（资产/股东人数）为第三方概括，非官方原文 quote，故 confidence 降为 medium，待人工提供\n原文（或换用 SEC 官方规则手册）后复核。原拟引用文本（非 verbatim 核验）：\"Companies with more\nthan $10 million in assets whose securities are held by more than 500 owners must file annual and\nother periodic reports... proxy materials must be filed with the Commission in advance of any\nsolicitation.\"\n",
         "sources": [
           {
             "title": "Laws That Govern the Securities Industry（Investor.gov，SEC投资者教育官网）",
@@ -266,10 +266,10 @@
             "accessed": "2026-08-24"
           }
         ],
-        "quote": "Companies with more than $10 million in assets whose securities are held by more than 500 owners must file annual and other periodic reports. These reports are available to the public through the SEC's EDGAR database... The Securities Exchange Act also governs the disclosure in materials used to solicit shareholders' votes in annual or special meetings held for the election of directors and the approval of other corporate action. This information, contained in proxy materials, must be filed with the Commission in advance of any solicitation to ensure compliance with the disclosure rules.",
-        "confidence": "high",
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "quote": null
       },
       "investor_protection": {
         "zh": "证券投资者保护公司（SIPC）为SIPC会员经纪商破产后客户账户中缺失的现金与证券提供有限保护，保护上限50万美元（含现金部分上限25万美元）；SIPC不保护证券价值下跌造成的损失，也不是针对投资建议不当的赔偿机制",

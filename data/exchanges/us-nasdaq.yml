@@ -606,15 +606,22 @@ listing:
       两项细节分别来自同一份SEC命令的正文与脚注：正文确认"一般规则"是听证请求通常中止
       暂停（stay）；脚注说明该次规则修改所涉及的例外情形下证券改在OTC市场交易，且听证
       小组仍可在公司后续达标时裁定恢复纳斯达克交易（如通过反向股票分割恢复至少10个连续
-      交易日收盘价达1美元）。来源为federalregister.gov官方转载的SEC批准令（Order Granting
+      交易日收盘价达1美元）。      来源为federalregister.gov官方转载的SEC批准令（Order Granting
       Approval），而非listingcenter.nasdaq.com被拦截的Rulebook交互页，详见SOURCES.md本节
       反爬突破记录。
+      ⚠️ 降级说明：本次抓取到的 .cache/us-nasdaq 下该 federalregister.gov 页面实为反爬验证页
+      （标题「Request Access」、reCAPTCHA 拦截），并非文档正文，无法逐字核验下列引文，故
+      confidence 由 high 降为 medium；原拟引用文字移入此处备查：notwithstanding the general rule
+      that a timely request for a hearing shall ordinarily stay the suspension and delisting action
+      pending the issuance of a written Hearings Panel decision, a request for a hearing shall not
+      stay the suspension of the securities from trading where the matter relates to a request made by
+      a company that was afforded the second 180-day compliance period ... and that failed to regain
+      compliance with the Bid Price Requirement during that period.
     sources:
       - title: "SEC Order Granting Approval of a Proposed Rule Change to Modify the Application of the Minimum Bid Price Compliance Periods and the Delisting Appeals Process（SR-NASDAQ-2024-031，federalregister.gov官方转载）"
         url: https://www.federalregister.gov/documents/2025/01/23/2025-01621/self-regulatory-organizations-the-nasdaq-stock-market-llc-order-granting-approval-of-a-proposed-rule
         accessed: 2026-08-24
-    quote: "notwithstanding the general rule that a timely request for a hearing shall ordinarily stay the suspension and delisting action pending the issuance of a written Hearings Panel decision, a request for a hearing shall not stay the suspension of the securities from trading where the matter relates to a request made by a company that was afforded the second 180-day compliance period ... and that failed to regain compliance with the Bid Price Requirement during that period."
-    confidence: high
+    confidence: medium
 
   delisting_conditions:
     zh: "未达持续上市标准触发退市，如三档市场（Global Select/Global/Capital Market）项下最低买价均为1美元，低于该价格视为不达标"
@@ -657,12 +664,18 @@ listing:
       与部分交易所"先摘牌公告、再给一段时间内继续交易"的整理期模式在时序上不同，特此说明
       避免与其他交易所同名字段的含义产生混淆。该180天数字仅适用于买价（Bid Price）类不
       达标情形，其他类型持续上市缺陷（如市值、股东人数）的宽限期长度本次未逐一核实。
+      ⚠️ 降级说明：本次抓取到的 .cache/us-nasdaq 下该 federalregister.gov 页面实为反爬验证页
+      （标题「Request Access」、reCAPTCHA 拦截），并非文档正文，无法逐字核验下列引文，故
+      confidence 由 high 降为 medium；原拟引用文字移入此处备查：a company that was afforded the
+      second 180-day compliance period described in Nasdaq Rule 5810(c)(3)(A)(ii) ... The Exchange
+      states in its proposal that it believes that two consecutive compliance periods for a total of
+      360 days is a sufficient period of time for a company to regain compliance with the Bid Price
+      Requirement.
     sources:
       - title: "SEC Order Granting Approval of a Proposed Rule Change to Modify the Application of the Minimum Bid Price Compliance Periods and the Delisting Appeals Process（SR-NASDAQ-2024-031，federalregister.gov官方转载）"
         url: https://www.federalregister.gov/documents/2025/01/23/2025-01621/self-regulatory-organizations-the-nasdaq-stock-market-llc-order-granting-approval-of-a-proposed-rule
         accessed: 2026-08-24
-    quote: "a company that was afforded the second 180-day compliance period described in Nasdaq Rule 5810(c)(3)(A)(ii) ... The Exchange states in its proposal that it believes that two consecutive compliance periods for a total of 360 days is a sufficient period of time for a company to regain compliance with the Bid Price Requirement."
-    confidence: high
+    confidence: medium
 
   post_delisting_venue:
     zh: "场外市场（OTC market）——公司证券在退市听证/上诉程序进行期间或正式退市后转入OTC市场交易；若公司在此期间恢复达标（如通过反向股票分割使收盘价连续10个交易日达1美元以上），听证小组可裁定恢复其在纳斯达克的交易"
@@ -671,8 +684,17 @@ listing:
       - title: "SEC Order Granting Approval of a Proposed Rule Change to Modify the Application of the Minimum Bid Price Compliance Periods and the Delisting Appeals Process（SR-NASDAQ-2024-031，federalregister.gov官方转载）"
         url: https://www.federalregister.gov/documents/2025/01/23/2025-01621/self-regulatory-organizations-the-nasdaq-stock-market-llc-order-granting-approval-of-a-proposed-rule
         accessed: 2026-08-24
-    quote: "The Exchange states that a company that is suspended under the proposed rule could appeal the Delisting Determination to a Hearings Panel, but its securities would trade in the over-the-counter (\"OTC\") market while that appeal is pending. ... the Hearings Panel will continue to have the authority to find the company in compliance with all applicable listing standards and reinstate the trading of the company's securities on Nasdaq (e.g., if the company effects a reverse stock split and maintains a $1.00 closing bid price for at least 10 consecutive days while trading in the OTC market)."
-    confidence: high
+    detail: |
+      ⚠️ 降级说明：本次抓取到的 .cache/us-nasdaq 下该 federalregister.gov 页面实为反爬验证页
+      （标题「Request Access」、reCAPTCHA 拦截），并非文档正文，无法逐字核验下列引文，故
+      confidence 由 high 降为 medium；原拟引用文字移入此处备查：The Exchange states that a company
+      that is suspended under the proposed rule could appeal the Delisting Determination to a Hearings
+      Panel, but its securities would trade in the over-the-counter ("OTC") market while that appeal is
+      pending. ... the Hearings Panel will continue to have the authority to find the company in
+      compliance with all applicable listing standards and reinstate the trading of the company's
+      securities on Nasdaq (e.g., if the company effects a reverse stock split and maintains a $1.00
+      closing bid price for at least 10 consecutive days while trading in the OTC market).
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -797,12 +819,21 @@ clearing:
       与本项目其他交易所记录的"违约处置与风险共担"字段（如设有会员分摊损失的Loss
       Allocation机制）概念对应，但本次未找到NSCC具体损失分摊（向非违约会员摊派）触发条件
       与比例的逐字原文，故未写入正文，留待后续核实。
+      ⚠️ 降级说明：本次抓取到的 .cache/us-nasdaq 下该 federalregister.gov 页面（SR-NSCC-2026-11144）
+      实为反爬验证页（标题「Request Access」、reCAPTCHA 拦截），并非文档正文，无法逐字核验下列
+      引文，故 confidence 由 high 降为 medium；原拟引用文字移入此处备查：The objective of a Member's
+      Required Fund Deposit is to mitigate potential losses to NSCC associated with liquidating a
+      Member's portfolio in the event NSCC ceases to act for that Member (hereinafter referred to as a
+      "default"). Required Fund Deposits operate, individually, as the Member's margin, and the aggregate
+      of all such Members' deposits is referred to, collectively, as the Clearing Fund, which operates as
+      NSCC's default fund. NSCC would access the Clearing Fund should a defaulting Member's own Required
+      Fund Deposit be insufficient to satisfy losses to NSCC caused by the liquidation of that Member's
+      portfolio.
     sources:
       - title: "SEC Notice of Filing of Proposed Rule Change To Enhance NSCC's Clearing Fund Methodology（federalregister.gov官方转载）"
         url: https://www.federalregister.gov/documents/2026/06/04/2026-11144/self-regulatory-organizations-national-securities-clearing-corporation-notice-of-filing-of-proposed
         accessed: 2026-08-24
-    quote: "The objective of a Member's Required Fund Deposit is to mitigate potential losses to NSCC associated with liquidating a Member's portfolio in the event NSCC ceases to act for that Member (hereinafter referred to as a \"default\"). Required Fund Deposits operate, individually, as the Member's margin, and the aggregate of all such Members' deposits is referred to, collectively, as the Clearing Fund, which operates as NSCC's default fund. NSCC would access the Clearing Fund should a defaulting Member's own Required Fund Deposit be insufficient to satisfy losses to NSCC caused by the liquidation of that Member's portfolio."
-    confidence: high
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者

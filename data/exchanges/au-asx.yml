@@ -737,8 +737,11 @@ listing:
       - title: IPO 上市指引（ASX 官网）
         url: https://www.asx.com.au/home/listings/listing-considerations/the-listing-process.html
         accessed: 2026-08-27
-    quote: "With ASX's streamlined listing process, your company could be listed within approximately five months of appointing your advisers."
-    confidence: high
+    detail: |
+      所引URL（the-listing-process.html）缓存为 ASX 404 错误页（`<title>404</title>`），无法核验 verbatim quote。
+      原 quote「With ASX's streamlined listing process, your company could be listed within approximately five months of appointing your advisers.」
+      确见于 ASX 上市指引页（缓存 14-listing-guides.html），但该缓存未纳入 manifest、且非本字段所引 URL，故降为 medium；待重新抓取该 URL 拿到正文后可恢复 high。
+    confidence: medium
     verified: 2026-08-27
 
   transfer_between_boards:
@@ -804,13 +807,15 @@ listing:
   post_delisting_venue:
     zh: "ASX 不设退市证券的正式后续交易场所（无降级至二板/场外板的机制）。证券从官方上市名单移除后，不再于 ASX 集中市场报价，通常转为场外（OTC）交易或转由其他市场运营商（如 Cboe Australia、NSX）承接；但结算与过户仍可通过 CHESS 继续完成——停牌后至退市前的未结交易与过户登记均在 CHESS 内延续"
     en: "ASX provides no formal post-delisting trading venue (no demotion to a second board or OTC board). Once removed from the official list, securities cease to be quoted on the ASX central market and typically trade over-the-counter (OTC) or migrate to another market operator (e.g. Cboe Australia, NSX); settlement and transfer registration can still continue through CHESS — outstanding transactions and transfer registration continue through CHESS even after quotation is suspended"
-    detail: "CHESS 在退市后仍为持有人提供证券登记与过户服务，故「无交易场所」指无集中竞价场所，不等于无法持有或过户。"
+    detail: |
+      CHESS 在退市后仍为持有人提供证券登记与过户服务，故「无交易场所」指无集中竞价场所，不等于无法持有或过户。
+      所引来源（chess-operations-procedures.pdf）缓存为图像型 PDF（无文本层），verify_quotes 无法抽取原文核验 verbatim quote；
+      原 quote「through CHESS after the securities have been suspended from quotation.」保留供人工复核，因无法程序化核实故 confidence 降为 medium。
     sources:
       - title: CHESS — Delisting / Liquidation 操作指引（ASX 官网 PDF）
         url: https://www.asx.com.au/content/dam/asx/participants/clearing-and-settlement/chess/chess-operations-procedures.pdf
         accessed: 2026-08-27
-    quote: "through CHESS after the securities have been suspended from quotation."
-    confidence: high
+    confidence: medium
     verified: 2026-08-27
 
 # ═══════════════════════════════════════════════
@@ -928,13 +933,15 @@ clearing:
   default_management:
     zh: "ASX Clear（现金市场 CCP）设有分层违约处置资源与调用顺序：第一层为违约清算参与人缴存的保证金及附加保证金（可为现金或合格非现金抵押品）；不足时调用 ASX Clear 自有资源（当前 250 million 澳元）；再不足时依《恢复规则》向非违约参与人征收恢复摊派（上限 300 million 澳元）；作为最后手段，可动用《恢复规则》权力对所有未平仓头寸实施「完全终止」并削减结算支付。整个流程以 ASX Clear 回归「匹配账簿」为终点"
     en: "ASX Clear (cash-market CCP) has a layered default resource waterfall: the first layer is the defaulting Clearing Participant's margins and additional margins lodged (cash or eligible non-cash collateral); if insufficient, ASX Clear draws on its own available resources (currently $250 million); if still insufficient, it may call Recovery Assessments from non-defaulting Clearing Participants up to $300 million under its Recovery Rules; as a last resort it may invoke Recovery Rules powers to apply 'complete termination' of all open positions and reduce settlement payments. The process ends when ASX Clear returns to a matched book"
-    detail: "现货市场 CCP (ASXCL) 与衍生品 CCP (ASX Clear (Futures)) 各有独立的违约处置概述文件；本字段针对现货市场 ASXCL。另设由主要银行提供的承诺流动性便利（committed liquidity facility）用于流动性目的。"
+    detail: |
+      现货市场 CCP (ASXCL) 与衍生品 CCP (ASX Clear (Futures)) 各有独立的违约处置概述文件；本字段针对现货市场 ASXCL。另设由主要银行提供的承诺流动性便利（committed liquidity facility）用于流动性目的。
+      所引来源（asx-clear-participant-default-overview.pdf）缓存为图像型 PDF（无文本层），verify_quotes 无法抽取原文核验 verbatim quote；
+      原 quote（含「currently $250 million」「up to a value of $300 million」）保留供人工复核，因无法程序化核实故 confidence 降为 medium。
     sources:
       - title: ASX Clear Participant Default - Overview（ASX 官网 PDF）
         url: https://www.asx.com.au/content/dam/asx/participants/clearing-and-settlement/asx-clear/asx-clear-participant-default-overview.pdf
         accessed: 2026-08-27
-    quote: "The level and order of application of ASXCL's resources is shown in Figure 2. The first level is the defaulting Clearing Participant's margins and additional margins lodged with ASXCL. ... it will draw on its own available resources (currently $250 million). ... defaulting Clearing Participants up to a value of $300 million."
-    confidence: high
+    confidence: medium
     verified: 2026-08-27
 
   derivatives:
@@ -1063,8 +1070,10 @@ participants:
       - title: ASX 产品指引（ASX 官网 PDF）
         url: https://www.asx.com.au/content/dam/asx/participants/asx-products-guide.pdf
         accessed: 2026-08-14
-    quote: "With dozens of participants trading in thousands of products and executing hundreds of thousands of trades a day in those products ... which are commonly referred to as brokers or member firms."
-    confidence: high
+    detail: |
+      所引两份来源（asx-clear-participant-default-overview.pdf、asx-products-guide.pdf）缓存均为图像型 PDF（无文本层）或 0 字节 .txt，verify_quotes 无法抽取原文核验 verbatim quote；
+      原 quote「With dozens of participants trading in thousands of products and executing hundreds of thousands of trades a day in those products ... which are commonly referred to as brokers or member firms.」保留供人工复核，因无法程序化核实故 confidence 降为 medium。
+    confidence: medium
     verified: 2026-08-27
 
 # ═══════════════════════════════════════════════
@@ -1102,8 +1111,10 @@ infrastructure:
       - title: ASX 信息费表（ASX 官网 PDF）
         url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/information-services/schedule-of-information-fees.pdf
         accessed: 2026-08-27
-    quote: "Market Data Download - Access to ASX ITCH or ASX 24 Multicast Market Data Protocol Per Market Annually $27,000"
-    confidence: high
+    detail: |
+      所引来源（schedule-of-information-fees.pdf）缓存为图像型 PDF（无文本层），verify_quotes 无法抽取原文核验 verbatim quote；
+      原 quote「Market Data Download - Access to ASX ITCH or ASX 24 Multicast Market Data Protocol Per Market Annually $27,000」保留供人工复核，因无法程序化核实故 confidence 降为 medium。
+    confidence: medium
     verified: 2026-08-27
 
   historical_data_availability:
@@ -1113,8 +1124,10 @@ infrastructure:
       - title: ASX 信息费表（ASX 官网 PDF）
         url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/information-services/schedule-of-information-fees.pdf
         accessed: 2026-08-27
-    quote: "Historical Data – Internal Use Fee / Historical Data – Vendor Publications Fee"
-    confidence: high
+    detail: |
+      所引来源（schedule-of-information-fees.pdf）缓存为图像型 PDF（无文本层），verify_quotes 无法抽取原文核验 verbatim quote；
+      原 quote「Historical Data – Internal Use Fee / Historical Data – Vendor Publications Fee」保留供人工复核，因无法程序化核实故 confidence 降为 medium。
+    confidence: medium
     verified: 2026-08-27
 
   trading_system_name:
@@ -1178,13 +1191,15 @@ costs:
   exchange_fees:
     zh: "ASX 对现货市场成交本身收取成交费（Trade Fee）；以股票为例，按成交金额 0.15 基点从价计收，每笔每边封顶 75 澳元。其余产品类别适用不同档费率，均按月计收并加收 GST"
     en: "ASX charges a Trade Fee on the cash-market trade itself; for equities it is 0.15 basis points of traded value, capped at $75 per trade per side. Other product categories use different fee tiers, all charged monthly plus GST"
-    detail: "权证/结构性产品/计息证券为 0.31 基点、每边封顶 75 澳元；ETF 特别成交费 0.15 基点。本字段主叙述仅以股票档（已在 quote 中逐字核实）为锚点，其余产品档列入 detail 以避免 quote 数字反查假阳性。"
+    detail: |
+      权证/结构性产品/计息证券为 0.31 基点、每边封顶 75 澳元；ETF 特别成交费 0.15 基点。本字段主叙述仅以股票档为锚点，其余产品档列入 detail 以避免数字反查假阳性。
+      所引来源（trading/schedule-of-fees.pdf）缓存为图像型 PDF（无文本层），verify_quotes 无法抽取原文核验 verbatim quote；
+      原 quote「Equities Trade Fee 0.15 Basis Points Per Trade Per Side, Capped at $75」保留供人工复核，因无法程序化核实故 confidence 降为 medium。
     sources:
       - title: ASX Trade 现货市场费率表（ASX 官网 PDF）
         url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/trading/schedule-of-fees.pdf
         accessed: 2026-08-27
-    quote: "Equities Trade Fee 0.15 Basis Points Per Trade Per Side, Capped at $75"
-    confidence: high
+    confidence: medium
     verified: 2026-08-27
 
   clearing_fees:

@@ -59,6 +59,65 @@ def norm(s):
     return s.lower()
 
 
+def file_text(p):
+    """把各类落盘来源文件转成可比对规范文本：PDF/HTML/.docx/.xlsx/.xls。"""
+    import io
+    import zipfile
+    try:
+        b = open(p, "rb").read()
+    except Exception:
+        return ""
+    head = b[:4]
+    low = str(p).lower()
+    if head.startswith(b"%PDF") or low.endswith(".pdf"):
+        t = p.with_suffix(".txt")
+        if t.exists():
+            return norm(open(t, encoding="utf-8", errors="ignore").read())
+        try:
+            out = subprocess.run(["pdftotext", "-layout", str(p), "-"],
+                                 capture_output=True, text=True).stdout
+            return norm(out)
+        except Exception:
+            return ""
+    if head.startswith(b"PK"):
+        try:
+            z = zipfile.ZipFile(io.BytesIO(b))
+        except Exception:
+            return norm(open(p, encoding="utf-8", errors="ignore").read())
+        names = z.namelist()
+        if "word/document.xml" in names:
+            xml = z.read("word/document.xml").decode("utf-8", "ignore")
+            return norm(xml)
+        if any(n.startswith("xl/") for n in names):
+            try:
+                import openpyxl
+                wb = openpyxl.load_workbook(io.BytesIO(b), data_only=True,
+                                            read_only=True)
+                cells = []
+                for ws in wb.worksheets:
+                    for row in ws.iter_rows(values_only=True):
+                        for c in row:
+                            if c is not None:
+                                cells.append(str(c))
+                return norm(" ".join(cells))
+            except Exception:
+                return ""
+    if low.endswith(".xls"):  # 旧版 OLE 格式
+        try:
+            import pandas as pd
+            df = pd.read_excel(io.BytesIO(b), sheet_name=None)
+            cells = []
+            for v in df.values():
+                for row in v.itertuples(index=False):
+                    for c in row:
+                        if c is not None:
+                            cells.append(str(c))
+            return norm(" ".join(cells))
+        except Exception:
+            return ""
+    return norm(open(p, encoding="utf-8", errors="ignore").read())
+
+
 def manifest_map(ex):
     """返回 {url: 规范正文文本}（仅含实际落盘的 fetch 来源）。"""
     mfile = CACHE / ex / "_manifest.json"
@@ -77,12 +136,7 @@ def manifest_map(ex):
         p = ROOT / f
         if not p.exists():
             continue
-        if str(p).endswith(".pdf"):
-            t = p.with_suffix(".txt")
-            if t.exists():
-                out[url] = norm(open(t, encoding="utf-8", errors="ignore").read())
-            continue
-        out[url] = norm(open(p, encoding="utf-8", errors="ignore").read())
+        out[url] = file_text(p)
     return out
 
 

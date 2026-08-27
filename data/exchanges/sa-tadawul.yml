@@ -905,9 +905,9 @@ clearing:
     detail: "此处为衍生品保证金框架；现货市场无保证金（见 settlement_cycle / clearing.derivatives）。保证金乘数为结算会员在 Muqassa 最低保证金之上自行适用的加收系数，官方 brochure 未给出各合约类别的具体乘数数值，故不臆造百分比。引文来自 Tadawul Derivatives Market Brochures"
     sources:
       - title: "Tadawul Derivatives Market Brochures（Initial Margin / Margin Multiplier / Total Margin）"
-        url: https://www.tadawulgroup.sa/wps/wcm/connect/0e1657-e035-4172-a4e6-943c4dfce80d/Tadawul+Derivatives+Market+Brochures.pdf?MOD=AJPERES&CVID=oW9oJ
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/0e0e1657-e035-4172-a4e6-943c4dfce80d/Derivatives+Market+Brochures.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-0e0e1657-e035-4172-a4e6-943c4dfce80d-oW9oJ-.
         accessed: 2026-08-27
-    quote: "Initial Margin — The margin that is collected to cover potential changes in the value of each client position. ... Margin Multiplier — Is the number by which the minimum percentage margin, required by the Muqassa, have to be multiplied to form the margin required by the clearing member from his clients for newly entered positions. ... Total Margin ... includes Initial Margin, any applicable Variation Margin and any additional margin determined by Muqassa and the clearing member."
+    quote: "The margin that is collected to cover potential changes in the value of each client position. ... Is the number by which the minimum percentage margin, required by the Muqassa, have to be multiplied to form the margin required by the clearing member from his clients for newly entered positions. ... Means total Margin and it includes Initial Margin, any applicable Variation Margin and any additional margin determined by Muqassa and the clearing member."
     confidence: high
     verified: 2026-08-27
 
@@ -917,9 +917,9 @@ clearing:
     detail: "与初始保证金共同构成总保证金；变动保证金为每日盯市盈亏的现金结算"
     sources:
       - title: "Tadawul Derivatives Market Brochures（Variation Margin / MTM）"
-        url: https://www.tadawulgroup.sa/wps/wcm/connect/0e1657-e035-4172-a4e6-943c4dfce80d/Tadawul+Derivatives+Market+Brochures.pdf?MOD=AJPERES&CVID=oW9oJ
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/0e0e1657-e035-4172-a4e6-943c4dfce80d/Derivatives+Market+Brochures.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-0e0e1657-e035-4172-a4e6-943c4dfce80d-oW9oJ-.
         accessed: 2026-08-27
-    quote: "Variation Margin (VM) is MTM, meaning that margin is collected on a daily basis to cover the current losses on open positions on daily basis."
+    quote: "Variation Margin (VM) is MTM, meaning that margin is collected on a daily basis to cover the current exposure resulting from actual changes in market prices for each position. VM is the unrealized profits / losses on open positions on daily basis."
     confidence: high
     verified: 2026-08-27
 
@@ -929,9 +929,9 @@ clearing:
     detail: "衍生品与清算会员间的每日结算在交易日终按逐日盯市进行"
     sources:
       - title: "Tadawul Derivatives Market Brochures（Daily settlement / mark to market）"
-        url: https://www.tadawulgroup.sa/wps/wcm/connect/0e1657-e035-4172-a4e6-943c4dfce80d/Tadawul+Derivatives+Market+Brochures.pdf?MOD=AJPERES&CVID=oW9oJ
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/0e0e1657-e035-4172-a4e6-943c4dfce80d/Derivatives+Market+Brochures.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-0e0e1657-e035-4172-a4e6-943c4dfce80d-oW9oJ-.
         accessed: 2026-08-27
-    quote: "Daily settlement takes place end of day on a daily mark to market basis."
+    quote: "Daily settlement takes place end of day on a daily mark to market basis until final settlement on expiration day."
     confidence: high
     verified: 2026-08-27
 
@@ -965,7 +965,7 @@ clearing:
     detail: "Muqassa 同时清算现货与衍生品；违约处置的具体分层（违约基金、追加保证金、瀑布）未在一手抓取页完整呈现，故 confidence 定为 medium"
     sources:
       - title: "Tadawul Derivatives Market Brochures（Muqassa clearing & guarantee）"
-        url: https://www.tadawulgroup.sa/wps/wcm/connect/0e1657-e035-4172-a4e6-943c4dfce80d/Tadawul+Derivatives+Market+Brochures.pdf?MOD=AJPERES&CVID=oW9oJ
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/0e0e1657-e035-4172-a4e6-943c4dfce80d/Derivatives+Market+Brochures.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-0e0e1657-e035-4172-a4e6-943c4dfce80d-oW9oJ-.
         accessed: 2026-08-27
       - title: "Muqassa — Home / Risk Management"
         url: https://www.muqassa.sa/wps/portal/muqassa/home

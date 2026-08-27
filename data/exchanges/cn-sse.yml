@@ -665,7 +665,7 @@ participants:
   broker_landscape:
     zh: "全国持牌证券公司共150家（截至2026年6月，中国证监会《证券公司名录》），符合会员条件即可申请成为本所会员"
     en: "150 licensed securities companies nationwide (as of June 2026, per the CSRC's official Securities Company Directory), any of which may apply for Exchange membership upon meeting the membership criteria"
-    detail: "「150家」为对官方名录XLS数据行逐行清点得出（表头1行+150条公司记录），不是名录原文里以文字形式直接陈述的汇总数字，属于对官方一手数据的直接计数而非转述，故仍标 high；行业集中度、头部券商市场份额等定性描述本次未附具体数据来源，未纳入本字段正式表述。"
+    detail: "「150家」为对官方名录XLS（二进制OLE2，缓存于 .cache/cn-sse/101900-c1029659-1029659-files-2026-6-xls-a70a03e678.html）数据行逐行清点得出（表头1行+150条公司记录），属对官方一手数据的直接计数，非名录原文以文字陈述的汇总数字；原 quote 为按表结构构造的释义（表头行/首行「1／爱建证券有限责任公司／上海」/末行「150／国信证券资产管理有限公司／深圳」），并非源文件逐字原文，故下调为 medium。行业集中度、头部券商市场份额等定性描述本次未附具体数据来源，未纳入本字段正式表述。"
     sources:
       - title: 证券公司名录（2026年6月）
         url: http://www.csrc.gov.cn/csrc/c101900/c1029659/1029659/files/证券公司名录（2026年6月）.xls
@@ -673,8 +673,7 @@ participants:
       - title: 上海证券交易所会员制介绍
         url: https://biz.sse.com.cn/sseportal/ps/zhs/sczn/hyzq.jsp
         accessed: 2026-08-12
-    quote: "序号／公司名称／辖区（注册地）（表头行）；1／爱建证券有限责任公司／上海（首条数据行）；……；150／国信证券资产管理有限公司／深圳（末条数据行，第150条）"
-    confidence: high
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十｜市场数据与技术基础设施

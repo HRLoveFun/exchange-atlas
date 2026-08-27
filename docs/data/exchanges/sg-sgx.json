@@ -36,7 +36,7 @@
       "founded_year": {
         "zh": "1999年12月1日（新加坡证券交易所SES、新加坡国际金融交易所SIMEX、证券结算与电脑服务公司SCCS三家法定合并成立）",
         "en": "1 December 1999 (statutory merger of the Stock Exchange of Singapore (SES), the Singapore International Monetary Exchange (SIMEX) and Securities Clearing and Computer Services (Pte) Limited (SCCS))",
-        "detail": "合并依据是《交易所（公司化与合并）法》（Exchanges (Demutualisation and Merger) Act 1999，\n1999年10月8日制定，同年12月1日\"转移日\"生效），三家原会员制机构的股本、储备与业务一并转移\n给新设立的控股公司。SGX 本身于2000年11月在自身主板挂牌上市（见 self_listed）。\n",
+        "detail": "合并依据是《交易所（公司化与合并）法》（Exchanges (Demutualisation and Merger) Act 1999，\n1999年10月8日制定，同年12月1日\"转移日\"生效），三家原会员制机构的股本、储备与业务一并转移\n 给新设立的控股公司。SGX 本身于2000年11月在自身主板挂牌上市（见 self_listed）。\n",
         "sources": [
           {
             "title": "Exchanges (Demutualisation and Merger) Act 1999（新加坡政府法规官方公布平台 Singapore Statutes Online）",
@@ -44,10 +44,11 @@
             "accessed": "2026-08-14"
           }
         ],
-        "quote": "The transfer date is 1 December 1999.",
-        "confidence": "high",
+        "detail_note": "原引文「The transfer date is 1 December 1999.」本次无法逐字核实：缓存的 sso.agc.gov.sg/Act/EDMA1999 实为 CloudFront 403 错误页（见 .cache/sg-sgx/sso-agc-gov-sg-Act-EDMA1999-479bff70f2.html），不含正文，故由 high 降为 medium，留待人工提供原文后再升级。",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "quote": null
       },
       "history": {
         "zh": "前身为1973年从马来西亚证券交易所分立而来的新加坡证券交易所（SES）与1984年成立的新加坡国际金融交易所（SIMEX，商品期货交易所）；1999年12月1日两者与证券结算与电脑服务公司（SCCS）依《交易所（公司化与合并）法》合并公司化，组成新加坡交易所；2000年11月在本所主板挂牌",
@@ -187,10 +188,11 @@
             "accessed": "2026-08-14"
           }
         ],
-        "quote": "Markets are licensed by MAS as approved exchanges (AEs) or recognised market operators (RMOs) under the Securities and Futures Act 2001.",
-        "confidence": "high",
+        "detail_note": "原引文「Markets are licensed by MAS as approved exchanges (AEs) or recognised market operators (RMOs) under the Securities and Futures Act 2001.」本次无法逐字核实：缓存的 sso.agc.gov.sg/act/sfa2001 实为 CloudFront 403 错误页（见 .cache/sg-sgx/sso-agc-gov-sg-act-sfa2001-607b3817a2.html），不含正文，故由 high 降为 medium，留待人工提供原文后再升级。",
+        "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "quote": null
       },
       "self_regulatory_org": {
         "zh": "新加坡交易所监管公司（SGX RegCo），SGX 集团下独立子公司，承担前线监管职能",
@@ -218,11 +220,12 @@
             "accessed": "2026-08-14"
           }
         ],
-        "quote": "Division 2 — Regulation of Approved Clearing Houses",
-        "confidence": "high",
+        "detail_note": "原引文「Division 2 — Regulation of Approved Clearing Houses」本次无法逐字核实：缓存的 sso.agc.gov.sg/act/sfa2001 实为 CloudFront 403 错误页（见 .cache/sg-sgx/sso-agc-gov-sg-act-sfa2001-607b3817a2.html），不含正文，故由 high 降为 medium，留待人工提供原文后再升级。",
+        "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
-        "detail": null
+        "detail": null,
+        "quote": null
       },
       "core_laws": {
         "zh": "《证券期货法》（Securities and Futures Act 2001）",
@@ -235,10 +238,11 @@
             "accessed": "2026-08-14"
           }
         ],
-        "quote": "Securities and Futures Act 2001 ... Part 2 ORGANISED MARKETS",
-        "confidence": "high",
+        "detail_note": "原引文「Securities and Futures Act 2001 ... Part 2 ORGANISED MARKETS」本次无法逐字核实：缓存的 sso.agc.gov.sg/act/sfa2001 实为 CloudFront 403 错误页（见 .cache/sg-sgx/sso-agc-gov-sg-act-sfa2001-607b3817a2.html），不含正文，故由 high 降为 medium，留待人工提供原文后再升级。",
+        "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "quote": null
       },
       "foreign_ownership_limit": {
         "zh": "对 SGX 上市证券本身原则上无外资持股比例上限——外资可自由买卖与持有在新交所上市的股票、REITs、债券等；但新加坡若干行业受法定外资限制（如本地银行单一股东表决权上限 5%，见《银行法》Banking Act；媒体/报业、特定房地产与土地持有、航空等另有专项限制）。这些限制针对发行人所属行业，而非交易所层面。",

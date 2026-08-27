@@ -227,9 +227,8 @@ regulation:
       - title: "Exchange Control Regulations（resbank.co.za，南非储备银行金融监察部门）"
         url: https://www.resbank.co.za/en/sarb/what-we-do/financial-surveillance/exchange-control-regulations
         accessed: 2026-08-27
-    quote: "The current set of Exchange Control Regulations was promulgated by Government Notice R.1111 of 1 December 1961 and amended from time to time."
-    confidence: high
-    detail: "具体生效日期为 1961 年 12 月 1 日（政府公告 R.1111）。外资在 JSE 二级市场买卖上市证券一般无需事先外汇管制审批（见 foreign_ownership_limit 引用的 Naidu et al. 2022 论述），但资本跨境汇出仍受《外汇管制条例》与《货币与汇兑手册》约束；本次未抓取《Currency and Exchanges Manual》全文，具体额度/审批细节不在本字段逐条展开。"
+    confidence: medium
+    detail: "南非储备银行（SARB）Exchange Control Regulations 页面（resbank.co.za 的 exchange-control-regulations）在缓存中为 404，本次无法从该确切 URL 取得可核查原文；逐字内容「The current set of Exchange Control Regulations was promulgated by Government Notice R.1111 of 1 December 1961 and amended from time to time」实际出现在 SARB 的 exchange-control 母页缓存（sarb_excon.html）中，但该页未登记进 .cache manifest，故无法机器反查。按防幻觉铁律二.5（引用页无逐字原文）本字段降为 medium：具体生效日期为 1961 年 12 月 1 日（政府公告 R.1111）。外资在 JSE 二级市场买卖上市证券一般无需事先外汇管制审批（见 foreign_ownership_limit 引用的 Naidu et al. 2022 论述），但资本跨境汇出仍受《外汇管制条例》与《货币与汇兑手册》约束；本次未抓取《Currency and Exchanges Manual》全文，具体额度/审批细节不在本字段逐条展开。"
 
   disclosure_requirements:
     zh: "上市公司须通过JSE的股票交易所新闻服务（SENS）实时披露价格敏感信息与公司公告，SENS于1997年上线"
@@ -387,9 +386,9 @@ market_structure:
     zh: "中央订单簿按价格-可见性-时间优先原则连续撮合：会员在同等条件下竞争成交，同价位隐藏单排在可见单之后成交"
     en: "Central order book matching on strict price-visibility-time priority; members compete on equal terms, with hidden orders yielding priority to visible orders at the same price"
     sources:
-      - title: "Volume 00E – Trading and Information Overview（8.6.1 Central Order Book）"
-        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.08.pdf
-        accessed: 2026-08-16
+      - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（8.6.1 Central Order Book）"
+        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
+        accessed: 2026-08-28
     quote: "The central order book is an order-matching facility where members participate on equal terms, competing for execution on the basis of strict price-visibility-time priority. Any hidden order at a better price will take priority and visible orders will take priority over hidden orders if they are placed at the same price."
     confidence: high
 
@@ -435,9 +434,9 @@ market_structure:
       zh: "双阈值百分比机制：以前收盘价为基准的静态参考价（Static Reference Price）与以最新成交价动态更新的动态参考价（Dynamic Reference Price）各设独立的百分比容忍阈值，任一阈值被突破即触发波动性拍卖（不是直接拒单的固定涨跌停）"
       en: "Dual percentage-band mechanism: independent tolerance percentages are set against a Static Reference Price (previous close, updated after each auction) and a Dynamic Reference Price (last traded price); breaching either triggers a Volatility Auction rather than an outright order rejection"
       sources:
-        - title: "Volume 00E – Trading and Information Overview（8.5/8.6.5）"
-          url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.08.pdf
-          accessed: 2026-08-16
+      - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（8.5/8.6.5）"
+        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
+        accessed: 2026-08-28
       quote: "Circuit breaker tolerance is defined as a percentage in relation to the Static Reference Price and / or Dynamic Reference Price. If the difference between the price of the next trade and the Static Reference Price or Dynamic Reference Price is equal or greater than that permitted by the circuit breaker tolerance defined for the relevant session the instrument will automatically be moved into a Volatility Auction Call session."
       confidence: high
     main_board:
@@ -484,9 +483,9 @@ market_structure:
     zh: "人工停牌（Halt Session）：由JSE市场运营人员手动触发，可针对全市场/交易分段/单一品种；恢复交易通过手动触发的重开集合竞价（Re-Opening Auction Call Session）完成"
     en: "Manually invoked Halt Session, triggered by JSE Market Operations at the market/segment/instrument level; resumption is via a manually invoked Re-Opening Auction Call Session"
     sources:
-      - title: "Volume 00E – Trading and Information Overview（8.4.14/8.4.17）"
-        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.08.pdf
-        accessed: 2026-08-16
+      - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（8.4.14/8.4.17）"
+        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
+        accessed: 2026-08-28
     quote: "This session will be manually triggered by Market Operations Users. A halt may be triggered for the Market, Segment or Instrument."
     confidence: high
 
@@ -518,11 +517,11 @@ market_structure:
     zh: "存在场外报告成交类别中的大宗交易（Block Trade，交易类型代码BT），可延迟至收盘后处理时段（18:15后）公布"
     en: "Block Trade is a defined off-book trade type (code BT); trades that would otherwise be reported after market close may be delayed and published at the start of the Post Close session"
     sources:
-      - title: "Volume 00E – Trading and Information Overview（8.4.11/Off Book Trades）"
-        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.08.pdf
-        accessed: 2026-08-16
-    quote: "Off Book Trades: (18:15* - 18:20*) Block Trades that are delayed such that they may result in being published after market end time (this relates to the time that End-Of-Day processes start for the day), will be published at the start of the Post Close session."
-    confidence: high
+      - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（8.4.11/Off Book Trades）"
+        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
+        accessed: 2026-08-28
+    confidence: medium
+    detail: "volume00E v4.09 缓存文本（view-…v4-09-pdf-a1edecdc63.txt）在 Off Book Trades 这一段存在文本抽取伪影：该段前后出现一对「<…>」字符跨度，经 verify_quotes 的 norm（去 HTML 标签）后被整段吞掉，导致逐字原文「Off Book Trades: (18:15* - 18:20*) Block Trades that are delayed such that they may result in being published after market end time (this relates to the time that End-Of-Day processes start for the day), will be published at the start of the Post Close session.」无法在缓存中机器定位；另一缓存副本 volume00e_v409.txt 未在 manifest 登记。按防幻觉铁律二.5 本字段降为 medium。逐字内容确属 v4.09 PDF 第 8.4.11 节 Off Book Trades，事实无误。"
 
   dark_pool:
     zh: "JSE 本身不运营独立的暗池（dark pool）；但提供场外报告成交类型（Off-Book Trades，如大宗交易 Block Trade BT、以及延迟公布的场外成交）以实现大额交易的 discreet 执行。南非另存在独立另类交易场所 A2X Markets（2017 年成立），但非 JSE 自营暗池。"
@@ -1128,9 +1127,8 @@ clearing:
         - title: "SAFEX Equity Derivatives – Index Futures Contract Specifications（jse.co.za PDF）"
           url: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Equity%20Index%20Futures/ContractSpecifications.pdf
           accessed: 2026-08-27
-      quote: "Cash Settled"
-      confidence: high
-      detail: "quote 取 Contract Specifications 中 ALSI 的 Settlement Method 字段原词「Cash Settled」；农产品实物交割见 Derivatives Rules 7.170，属少数例外。"
+      confidence: medium
+      detail: "Contract Specifications（ALSI 等指数期货）的 Settlement Method 列逐字为「Cash」/「Settled」分两行排布，缓存文本层里不是连续子串，无法机器反查逐字原文，故本字段按防幻觉铁律二.5 降为 medium；现货权益指数期货为现金交割（Cash Settled）的事实成立，农产品实物交割见 Derivatives Rules 7.170，属少数例外。"
 
     last_trading_day_rule:
       zh: "以 FTSE/JSE 股指期货（ALSI）为例：最后交易日为三月、六月、九月、十二月的第三个星期四（遇公众假期则提前至前一营业日），到期结算价通过到期日中午 12:00 开始的盘中集合竞价（12:00–12:15，按成交量最大化算法）产生。"
@@ -1241,8 +1239,8 @@ infrastructure:
       - title: "JSE Market Data Training（2021-04-14 PDF）"
         url: https://www.jse.co.za/sites/default/files/media/documents/2021-05/JSE%20Market%20Data%20Training%20-%2014%20April%202021.pdf
         accessed: 2026-08-27
-    quote: "Level 1 & Level 2 ... Level 1 only ... Data Disseminated at least 15 minutes after JSE live feed"
-    confidence: high
+    confidence: medium
+    detail: "JSE 2021-04-14 Market Data Training PDF 在 .cache manifest 中登记的那一份（ta-…Training…2021 版）与该文档另一缓存副本（market_data_training.txt，未在 manifest 登记）内容不同：后者确有「Level 1 & Level 2」「Level 1 only」等行情深度分档的逐字原文，但 manifest 登记版不含这些文字，无法机器反查，按防幻觉铁律二.5 降为 medium。行情按深度分档为 Level 1（最优买卖盘口与成交快照）与 Level 2（全档深度/逐笔明细），另提供仅 Level 1 的轻量订阅；延迟数据「至少 15 分钟」的口径见 data_latency 字段（引用 Equity Market Data 页）。"
 
   data_latency:
     zh: "实时行情可通过南非本地数据中心或国际接入点（International Access Point）获取；延迟数据定义为自实时行情起至少 15 分钟后分发。JSE 另提供主机托管（colocation，2014 年推出）。"
@@ -1262,8 +1260,8 @@ infrastructure:
       - title: "JSE Market Data Training（2021-04-14 PDF）"
         url: https://www.jse.co.za/sites/default/files/media/documents/2021-05/JSE%20Market%20Data%20Training%20-%2014%20April%202021.pdf
         accessed: 2026-08-27
-    quote: "Exchanges charge a premium fee to users of the live feed who essentially make use of the technology. ... The value of the data decreases as it ages which makes delayed data carry a much lower associated cost."
-    confidence: high
+    confidence: medium
+    detail: "JSE 2021-04-14 Market Data Training PDF 在 .cache manifest 中登记的那一份（ta-…Training…2021 版）不含「Exchanges charge a premium fee to users of the live feed who essentially make use of the technology」这句逐字原文——该句仅见于未在 manifest 登记的另一缓存副本（market_data_training.txt），故无法机器反查，按防幻觉铁律二.5 降为 medium。实时行情按技术使用费（premium）计价、延迟数据成本显著更低的事实成立；同页另载明「The value of the data in terms of trading and display diminishes over time which makes delayed data carry a much lower associated cost」，已并入 zh/en 表述。"
 
   historical_data_availability:
     zh: "JSE 可提供覆盖各市场（权益、债券、衍生品等）的广范围历史行情数据，既可按单只标的也可按日期区间打包提供；所有 JSE 数据（除非另有标注）版权归 JSE 所有，须通过 Market Data Connect 门户订阅获取。"
@@ -1345,9 +1343,8 @@ costs:
       - title: "JSE 2026 Price List（jse.co.za PDF）"
         url: https://www.jse.co.za/sites/default/files/media/documents/2025-10/JSE%202026%20Price%20List%20-%20Web.pdf
         accessed: 2026-08-27
-    quote: "0.50 basis points of value of each trade leg, subject to the ceiling limit (trade cap)."
-    confidence: high
-    detail: "2026 年价目表（常规订单 XT/BT/OP 等）的 trade cap 为 R554.28（未含增值税）/ R637.42（含增值税）。本字段仅覆盖交易所交易费，结算/清算费见 clearing_fees，STT 见 stamp_duty。"
+    confidence: medium
+    detail: "JSE 2026 Price List PDF 缓存文本层为空（image-only，pdftotext 无法抽取），无法机器反查逐字原文，按防幻觉铁律二.5 降为 medium；PDF 中权益交易（含权证、ETP、AltX）交易费为每笔成交金额 0.50 个基点（0.50 basis points of value of each trade leg），并设单笔成交上限（trade cap，2026 年价目表常规订单 XT/BT/OP 等 trade cap 为 R554.28 未含增值税 / R637.42 含增值税）。本字段仅覆盖交易所交易费，结算/清算费见 clearing_fees，STT 见 stamp_duty。"
 
   clearing_fees:
     zh: "JSE 对权益交易（含权证与 AltX）按每笔成交金额的 0.0038% 计收清算与结算费，单笔成交腿设上限 R312.00（未含增值税）；JSE Clear 会员另有年度会员资格费（见 detail）。"
@@ -1359,9 +1356,8 @@ costs:
       - title: "JSE Clear 2025 Price List（jse.co.za PDF）"
         url: https://www.jse.co.za/sites/default/files/jse_document_manager/RW/Internal/Clear/JSE%20Clear/JSE%20Clear%20-%20Price%20List%202025.pdf
         accessed: 2026-08-27
-    quote: "0.0038% of value of each trade leg ... R312.00"
-    confidence: high
-    detail: "JSE Clear 会员年费见 2025 年 JSE Clear 价目表（R 522 500.00）。本字段聚焦交易层面清算/结算费，不含交易所交易费（exchange_fees）与 STT（stamp_duty）。"
+    confidence: medium
+    detail: "JSE 2026 Price List 与 JSE Clear 2025 Price List 两份 PDF 缓存文本层均为空（image-only，pdftotext 无法抽取），无法机器反查逐字原文，按防幻觉铁律二.5 降为 medium；PDF 中权益交易（含权证与 AltX）清算与结算费为每笔成交金额 0.0038%（0.0038% of value of each trade leg），单笔成交腿上限 R312.00（未含增值税）。JSE Clear 会员另收年度会员资格费（2025 年 JSE Clear 价目表 R522 500.00）。本字段聚焦交易层面清算/结算费，不含交易所交易费（exchange_fees）与 STT（stamp_duty）。"
 
   regulatory_fees:
     zh: "南非权益交易无独立于 STT 之外的按笔监管费；交易环节法定/准法定费用主要为证券转让税（STT，见 stamp_duty）及小额投资者保护征费（Investor Protection Levy）。交易所与清算所收取的交易/清算费（exchange_fees、clearing_fees）为商业服务费，非监管性税费。"
