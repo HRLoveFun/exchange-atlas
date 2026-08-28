@@ -381,6 +381,9 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Admission Regulations for Exchange Traders（「Zulassungsordnung」，交易员准入资格，⚠️不是公司上市规则——衍生品交易所没有"公司上市"概念，这是与现货股票交易所的结构性差异，见 OPEN-QUESTIONS）PDF: https://www.eurex.com/resource/blob/3354190/02b3ede980a95392ae1001a592930a81/data/2025-07-07_eurex_d_zulassungsordnung_en.pdf（HTTP 200，124KB）
   - Fee Regulations（「Gebührenordnung」）PDF: https://www.eurex.com/resource/blob/311122/413cca981529493937c4c381408291e7/data/2022_12_01_eurex_d_gebuehrenordnung_en.pdf（HTTP 200，95KB）
 
+- `commission.europa.eu` | 官方（欧盟委员会） | en | curl 常规 UA 200 | 资本自由流动法律基础（capital_controls 出处）
+- `www.europarl.europa.eu` | 官方（欧洲议会） | en | curl 常规 UA 200 | 资本自由流动事实说明（capital_controls 交叉核对）
+
 ### 印度国家证券交易所 National Stock Exchange of India (NSE) `in-nse`
 - `nseindia.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬/限流（连续抓 17 个页面无一次 403，是本项目目前最好抓的官网之一）；页面正文是服务端渲染的静态 HTML（非 SPA），关键词直接可 grep 到；导航栏占页面文本的大头（几百个重复菜单项），抓下来后建议先用 BeautifulSoup 转纯文本、跳到页面中部"About Us"之后的正文段落再读，效率更高 | ⚠️ NSE 官网本身没有官方中文版（`source_lang: en`，见下）；NSE 集团另有 `NSE Clearing Limited`（原 National Securities Clearing Corporation Limited, NSCCL，清算，全资子公司）、`NSE Indices Limited`（原 India Index Services & Products, IISL，指数编制，全资子公司）、`NSE IFSC Limited`（GIFT City 国际金融中心内的独立交易所实体，受 IFSCA 而非 SEBI 监管，是与本文件意义上"同集团下另一独立交易所实体"最接近的案例——参照 ADR 对 `group_id` 的判断标准，已标 `group_id: nse-group`；`listing.boards` 不收录 NSE IFSC 自己的板块规则，仅收录 NSE 本身/主板与 SME 平台）；⚠️ History & Milestones 页正文只写"NSE was incorporated in 1992"，未标具体月日——本节标题曾误记"1992年11月27日"，本轮核实后已删除这个未经原文支持的具体日期，只保留"1992年"
   - History & Milestones（成立沿革：1992年注册成立/1993年4月经SEBI认定为证券交易所/1994年开始营业）: https://www.nseindia.com/static/national-stock-exchange/history-milestones（HTTP 200，306KB）
@@ -415,6 +418,10 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `sebi.gov.in` | 监管 | en | curl 常规 UA 200，未见反爬；页面是服务端渲染的传统多页站（非 SPA），正文可直接 grep，比同为监管机构域名的 `sec.gov`（美国，v0.2 时实测 403）好抓得多 | 印度证券交易委员会（SEBI），NSE 的政府监管机构；本节只用于确认监管机构身份与核心法律名称，具体规则条款优先引用 NSE 官网转载/说明页
   - About SEBI（设立沿革：1988年非法定机构成立/1992年成为法定机构）: https://www.sebi.gov.in/about-sebi.html（HTTP 200，8.5KB）
   - Securities Contracts (Regulation) Act, 1956（核心法律之一，SCRA，确认法律名称与年份）: https://www.sebi.gov.in/legal/acts/feb-1957/securities-contracts-regulation-act-1956-as-amended-by-the-international-financial-services-centres-authority-act-2019-w-e-f-october-01-2020-_4.html（HTTP 200，8.6KB）
+
+- `incometaxindia.gov.in` | 官方（印度所得税局） | en | curl 常规 UA 200 | 资本利得税/股息预扣税（costs 出处）
+- `rbi.org.in` | 官方（印度储备银行） | en | curl 常规 UA 200 | 外资准入/账户开立（foreign_access_channel/account_opening_requirements 出处）
+- `www.fpi.nsdl.co.in` | 官方（NSDL FPI 登记处） | en | curl 常规 UA 200 | 外资参与者登记（foreign_ownership_limit 出处）
 
 ### 深圳证券交易所 Shenzhen Stock Exchange (SZSE) `cn-szse`
 - `szse.cn` | 官方 | zh / en（英文版路径 `/English/...`，非同页切换，独立 URL；页面同样带"仅供参考，中文文本为准"类免责声明——与 SSE 一致，佐证 `source_lang: zh` 的选择） | curl + 常规浏览器 UA 全程 200，未见反爬/限流（比 `english.sse.com.cn` 好抓，不需要加延时）；PDF 用 `pdftotext -layout` 提取纯文本再 grep 定位条款 | 与上交所同属会员制事业法人、同受中国证监会监管、同为 A 股主板注册制，`region`/`regulator`/`review_system` 等字段与 cn-sse 高度一致，可直接对照校验取值口径是否统一；压测点是主板 vs 创业板（对照 cn-sse 主板 vs 科创板）
@@ -562,6 +569,11 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `stoxx.com` | 官方（集团关联指数商 Qontigo/STOXX，法人实体与交易所本身不同，但同属 Deutsche Börse Group 品牌矩阵） | en | curl 常规 UA 200 | DAX指数页：确认STOXX自2019年9月起为编制/管理方、自由流通市值加权、单一成分股权重上限15%（2024年3月18日起，此前为10%）
   - DAX: https://stoxx.com/index/dax/（HTTP 200，878KB）
 
+- `dserver.bundestag.de` | 官方（德国联邦议会文件库） | de | curl 常规 UA 200 | Börsenumsatzsteuer 1991 废除立法（stamp_duty/financial_transaction_tax 出处）
+- `www.deloittelegal.de` | 第三方（律所） | de | WebSearch 定位 | EdW 投资者赔偿方案（investor_protection 出处，confidence medium）
+- `resourcehub.bakermckenzie.com` | 第三方（律所资源库） | en | WebSearch 定位 | 上市流程文件（listing_process_duration 出处，confidence medium）
+- `www.marketscreener.com` | 第三方（财经媒体） | en | curl 常规 UA 200 | Xetra 交易中断报道（major_outage_history 出处，confidence medium）
+
 ### 新加坡交易所 Singapore Exchange (SGX) `sg-sgx`
 - `rulebook.sgx.com` | 官方（规则手册独立域名） | en | curl + 常规 UA 全部 200，未见反爬；页面正文夹杂大量导航/相关链接文字，抓到后按关键词定位正文 | ⚠️ SGX 集团下 SGX-ST（Singapore Exchange Securities Trading Limited，现货证券）与 SGX-DT（Singapore Exchange Derivatives Trading Limited，衍生品）是 MAS 分别核准的两个独立"Approved Exchange"法人实体（另有 SGX-DC 衍生品清算、CDP 证券清算/存管，见下 cftc.gov 一条），但本项目只建一个 `sg-sgx` 条目覆盖整个 SGX 品牌的现货+衍生品业务（Wave 1/2 名单未规划把 SGX-DT 拆成姊妹交易所另行建档），**不设 `group_id`**——与 NYSE/JPX/Eurex 那种"本文件只记一个实体、集团内确有其他姊妹交易所品牌"的情况不同，这里是刻意合并单一条目代表整个可识别品牌，详见数据文件顶部注释
   - SGX-ST Rules（现货证券交易规则总览）: https://rulebook.sgx.com/rulebook/sgx-st-rules（HTTP 200，2.1MB）
@@ -650,6 +662,14 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Corporations Act 2001 目录索引: https://www.legislation.gov.au/C2004A00818/latest/text（HTTP 200，2.8MB，仅目录非正文）
 - `spglobal.com` | 第三方（指数编制商 S&P Dow Jones Indices 官网） | en | ⚠️ curl 常规 UA 及加 Referer 均返回 403（反爬，非限流，两次不同 UA/头部尝试均失败）——按 CLAUDE.md 三启用降级：指数体系章节改用 asx.com.au 自身对 S&P/ASX 200 等指数的说明博客作为来源（`confidence` 上限 medium，因非编制方原始方法论文档），方法论 PDF 具体条款留空，见 OPEN-QUESTIONS | S&P Dow Jones Indices，编制 S&P/ASX 200 等旗舰指数（第三方编制，非交易所自编，与上交所"自编"、港交所"恒生指数公司"形成第三种对比模式）
 
+- `asxonline.com` | 官方（ASX 文档库） | en | curl 常规 UA 200 | ASX 信息费/交易费价目表、CHESS 交收程序等 PDF
+- `www.asxonline.com` | 官方（ASX 文档库，同上域名 www 前缀） | en | curl 常规 UA 200 | 同上
+- `firb.gov.au` | 官方（外国投资审查委员会） | en | curl 常规 UA 200 | 外资投资审查框架（foreign_ownership_limit 出处）
+- `legislation.nsw.gov.au` | 官方（新南威尔士州立法库） | en | curl 常规 UA 200 | 印花税废除立法（stamp_duty 出处）
+- `www.ato.gov.au` | 官方（澳大利亚税务局） | en | curl 常规 UA 200 | 资本利得税/股息预扣税（costs 出处）
+- `www.austrac.gov.au` | 官方（AML/CTF 监管） | en | curl 常规 UA 200 | 客户身份识别（account_opening_requirements 出处）
+- `cepr.org` | 第三方（金融交易税研究库） | en | curl 常规 UA 200 | 澳大利亚无金融交易税佐证（costs.financial_transaction_tax，confidence 封顶 medium）
+
 ### 沙特交易所 Saudi Exchange (Tadawul) `sa-tadawul`
 - `tadawulgroup.sa` | 官方（集团控股公司站点，与被封锁的 saudiexchange.sa 共用同一套 IBM WebSphere Portal 内容管理后端） | ar/en（阿拉伯语为唯一官方语言，英文版为官方提供的对照译本；部分 PDF 首页标注"Arabic is the official language of the Saudi Exchange"或"unofficial translation"字样） | curl + 常规 UA 全部 200，未见反爬；⚠️ `/wps/portal/tadawulgroup/...` 命名空间下的集团公司页可正常抓取，但把 `saudiexchange`/`edaa` 等其他子品牌的 portal 路径直接拼到 `tadawulgroup.sa` 域名下会被应用层拒绝返回 403（如 `tadawulgroup.sa/wps/portal/saudiexchange/...`），只有 `wcm/connect/...`（内容仓库直链，通常是 PDF）路径不受这条限制、任意命名空间前缀都能抓到 | 规则类 PDF 大多是集团整体维护的内容仓库资源，即使标题写"Saudi Exchange Company"也通过 tadawulgroup.sa 域名分发；`Trading and Membership Procedures` 一份 PDF 信息密度最高，交易时段/订单类型/订单条件/最小报价单位/涨跌停与波动性拍卖机制均有精确条文可摘引
   - Saudi Exchange 集团子公司页: https://www.tadawulgroup.sa/wps/portal/tadawulgroup/portfolio/saudi-exchange
@@ -688,6 +708,16 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `lw.com`（⚠️ 2026-08-20起已不再被 `data/exchanges/sa-tadawul.yml` 任何字段引用，保留本条仅作查证过程记录） | 第三方（Latham & Watkins 律所客户简报） | en | curl 常规 UA 200 | 曾用于确认 2026年2月1日起 CMA 取消 QFI（合格境外投资者）制度、保留外资合计49%上限与单一外资10%上限；已找到并改用 `cma.gov.sa` 官方原文（Rules for Foreign Investment in Securities 修订版 + CMA_N_3974 官方公告，见上方 `cma.gov.sa` 条目），相关字段 confidence 已从 medium 升级为 high，第三方来源不再需要
   - Saudi CMA Broadens Main Market Access for Foreign Investors: https://www.lw.com/en/insights/saudi-cma-broadens-main-market-access-for-foreign-investors
 - `saudiexchange.sa`（⚠️ 本节唯一未攻克的域名，见 CLAUDE.md 三降级方案） | 官方（Saudi Exchange 运营实体自身官网，本应是最主要的一手来源） | — | **全站被 Akamai WAF 拦截，任何路径、任何 UA 组合均返回 403**（响应体含 `errors.edgesuite.net` 字样，确认是 Akamai Edge 防护，与 v0.2 探测记录里 `sec.gov`/`finra.org`/`dtcc.com` 同一类拦截）。已测试：①默认常规 UA 直连首页与深层 `/wps/portal/...` 路径均 403；②换 Safari UA + 加 `Accept-Language`/`Referer`（伪装成来自 Google 搜索跳转）头模拟真实浏览器仍 403；③直接请求站内 PDF 直链（如 `Trading and Membership Procedures.pdf`）同样 403，说明拦截是域名级而非仅拦网页；④尝试 `beta.saudiexchange.sa` 子域名，证书已过期（需 `-k` 跳过校验）且同样 403，判断是被弃用的旧站点，不值得继续尝试；⑤`web.archive.org` 可达但查询该域名快照时遇到限流（429/503），未能验证是否有可用快照。**降级方案**：改用同一 CMS 后端但未被拦截的 `tadawulgroup.sa` 域名（可抓到大量同源 PDF 规则文档与集团子公司页），配合监管方 `cma.gov.sa`、清算/存管子公司自己的域名 `edaa.sa`/`muqassa.sa` 作为一手来源替代，实测覆盖了监管、交易机制、上市、指数、清算五大章节的核心内容，缺口主要在 Saudi Exchange 自身网站上才有的实时市场数据类页面（如行情费率、历史数据可得性），这类字段本次相应留空或标 low confidence，见 OPEN-QUESTIONS
+- `vision2030.gov.sa` | 官方（沙特 Vision 2030） | en | curl 常规 UA 200 | 改革/政治风险背景（political_risk_note 出处）
+- `www.hmco.com.sa` | 第三方（Herbert Smith Freehills 沙特） | en | WebSearch 定位 | 印花税/费用（confidence 封顶 medium）
+- `www.nzte.govt.nz` | 官方（新西兰贸易发展局） | en | WebSearch 定位 | 跨境费用交叉核对（confidence medium）
+- `www.derayah.com` | 第三方（Derayah 券商） | en | curl 常规 UA 200 | 佣金结构（commission_structure 出处，confidence medium）
+- `sahmcapital.com` | 第三方（券商） | en | WebSearch 定位 | 费用/手续费（confidence 封顶 medium）
+- `jurisdb.com` | 第三方（法律数据库） | en | WebSearch 定位 | 股息预扣税（confidence 封顶 medium）
+- `taxonimo.com` | 第三方（税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
+- `www.bakermckenzie.com` | 第三方（律所） | en | WebSearch 定位 | 上市流程（listing_process_duration 出处，confidence medium）
+- `www.fintechfutures.com` | 第三方（金融科技媒体） | en | WebSearch 定位 | 交易系统/延迟（trading_system_name/data_latency 出处，confidence medium）
+
 ### 韩国交易所 Korea Exchange (KRX) `kr-krx`
 - `global.krx.co.kr` | 官方（英文版） | en | curl + 常规 UA 全部 200，未见反爬；站点是 JSP，导航结构可从任意页面（如首页 `main/main.jsp`）的静态 HTML 里 grep `href="[^"]*GLB[0-9]+[^"]*"` 批量拿到几乎全站 URL 清单，比逐级点导航快得多——**但很多栏目页（如 About KRX/Organization/Regulation 分类落地页）静态 HTML 里只有 tab 标题导航，没有实质段落**，真正的解释性文字要么在专门的详情子页（URL 尾缀带 `T1`/`T2`.jsp，如上市标准详情页），要么整份塞进官方 PDF 指南。抓到 120KB+ 的页面不代表有正文，先搜关键词（如年份数字、百分比）确认，没命中就换该栏目的 `T*.jsp` 子页再试 | KRX 是 2005 年由韩国证券交易所（KSE）、KOSDAQ 市场、韩国期货交易所（KOFEX）依《资本市场与金融投资业法》合并而成的单一法人交易所（股份有限公司，会员金融机构持股，自身不在自己市场上市）；KOSPI/KOSDAQ/KONEX 均为该法人内部的市场板块（非独立法人），衍生品市场同样由 KRX 本身运营（不同于 JPX/NYSE Group 那种"衍生品另设独立法人"的集团结构），因此本文件不设 `group_id`。KRX 本身即清算业务的中央对手方（CCP）；韩国证券存管院（KSD，KRX 持股70%）与韩国证券电算（KOSCOM，KRX 持股76%）是控股子公司而非交易所内部部门
   - Guide to Trading in the Korean Stock Market（PDF，官方权威操作手册，含交易时段/最小报价单位/涨跌停±30%/熔断三阶段8-15-20%/sidecar/波动性中断VI/做空报升规则/大宗交易门槛/交易暂停情形，几乎覆盖第五章全部核心交易机制字段，是本次抓取信息密度最高的单一来源）: https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf（HTTP 200，308KB）
@@ -723,6 +753,25 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - 首页（仅用于确认 `<title>` 韩文名称）: http://www.krx.co.kr/main/main.jsp（HTTP 200，186KB）
 - `elaw.klri.re.kr`（韩国法制研究院官方英译法律数据库） | 监管（政府法律译本） | en | curl 常规 UA 200，单页 4.8MB（含该法历年全部修正版本堆叠在同一页，需按关键词/条号 grep 定位，不要整页阅读）| 《资本市场与金融投资业法》(Financial Investment Services and Capital Markets Act, FSCMA) 官方英译全文，现行版本 20260306。第1条：立法目的；第373条：无许可不得设立市场；第373-2条：设立交易所须获金融委员会（Financial Services Commission, FSC）许可，且须为《商法》下的股份有限公司（stock company）；第297/378/393/394/397/399/400条：交易所本身担任证券与衍生品市场清算机构/CCP的法律依据
   - Financial Investment Services and Capital Markets Act（全文，含历次修正版本堆叠）: https://elaw.klri.re.kr/eng_service/lawTwoView.do?hseq=31782（HTTP 200，4.8MB）
+- `data.krx.co.kr` | 官方（KRX 数据门户） | ko | curl 常规 UA 200 | 市场数据/成交统计（infrastructure 出处）
+- `openapi.krx.co.kr` | 官方（KRX OpenAPI） | ko | curl 常规 UA 200 | 行情接口/数据延迟（data_latency 出处）
+- `www.openapi.krx.co.kr` | 官方（KRX OpenAPI，同上 www 前缀） | ko | curl 常规 UA 200 | 同上
+- `fss.or.kr` | 官方（金融监督院 FSS） | ko | curl 常规 UA 200 | 投资者保护/ suitability（investor_protection 出处）
+- `www.fss.or.kr` | 官方（FSS www 前缀） | ko | curl 常规 UA 200 | 同上
+- `www.fsc.go.kr` | 官方（金融委员会 FSC） | ko | curl 常规 UA 200 | 监管框架（regulation 出处）
+- `law.kofia.or.kr` | 官方（韩国证券业协会 KOFIA） | ko | curl 常规 UA 200 | 自律规则/适当性（suitability_management 出处）
+- `www.kcmi.re.kr` | 官方（资本市场研究院 KCMI） | ko | curl 常规 UA 200 | 市场结构研究（market_structure 出处）
+- `www.k-otc.or.kr` | 官方（K-OTC 场外市场） | ko | curl 常规 UA 200 | 退市后场外转移（post_delisting_venue 出处）
+- `www.clearstream.com` | 官方（Clearstream 国际中央存托） | en | curl 常规 UA 200 | 国际存托/交收（clearing 出处）
+- `en.sedaily.com` | 第三方（韩国经济日报英文） | en | WebSearch 定位 | 市场背景（confidence 封顶 medium）
+- `en.yna.co.kr` | 第三方（韩联社英文） | en | WebSearch 定位 | 政治/流动性风险（confidence 封顶 medium）
+- `www.koreaherald.com` | 第三方（韩国先驱报） | en | WebSearch 定位 | 流动性/政治风险（confidence 封顶 medium）
+- `www.asiae.co.kr` | 第三方（亚洲经济） | ko | WebSearch 定位 | 流动性风险（confidence 封顶 medium）
+- `www.kedglobal.com` | 第三方（KED 全球） | en | WebSearch 定位 | 政治风险（confidence 封顶 medium）
+- `www.kchipnews.com` | 第三方（半导体新闻） | ko | WebSearch 定位 | 市场背景（confidence 封顶 medium）
+- `taxnews.ey.com` | 第三方（EY 税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
+- `www.mondovisione.com` | 第三方（交易所资讯） | en | WebSearch 定位 | 市场结构背景（confidence 封顶 medium）
+
 ### 泛欧交易所 Euronext `fr-euronext`
 - `euronext.com` | 官方 | en（官网默认英文；各地方市场页另有 fr/nl/pt/it/nb 等本地语言版本，本节只取英文版作 `source_lang: en` 的锚点） | curl + 常规 UA 全部 200，未见反爬（含多个 PDF，均可直接 curl 到） | ⚠️ **本所是本项目第一个"单一集团、多国法人实体"样本**：`Euronext`（集团整体）= `Euronext N.V.`（荷兰阿姆斯特丹注册的 naamloze vennootschap，集团控股实体，本身在 Euronext Paris 挂牌交易，代码 ENX，2025-09-22 起纳入 CAC 40 指数）+ 七个「Euronext Market Undertaking」（Euronext Amsterdam N.V. 荷兰法人、Euronext Brussels S.A./N.V. 比利时法人、Euronext Dublin/The Irish Stock Exchange plc 爱尔兰法人、Euronext Lisbon S.A. 葡萄牙法人、Euronext Paris S.A. 法国法人、Borsa Italiana 意大利法人、Oslo Børs 挪威法人），各自受本国法律与本国监管机构管辖（见 Harmonised Rulebook I Rule 1.7 Governing Law），但共享同一部《Harmonised Rulebook》（Book I）、同一交易平台 Optiq、同一中央订单簿。2025年7月新增第八个市场 Euronext Athens（收购 ATHEX），但截至本次抓取（2026-08）雅典尚未并入 Harmonised Rulebook/Optiq（计划2027-06迁移），regulated-markets 页原文明确写"Euronext Athens markets are scheduled to be integrated in the Euronext rulebooks upon the migration to Optiq (June 2027)"，故本次数据以七个已整合市场（不含雅典）为主，雅典相关事实单独注明未核实。清算方面 Euronext Clearing 是法定实体 Cassa di Compensazione e Garanzia S.p.A.（CC&G，意大利公司）的商业新名称；托管结算方面 Euronext Securities 是集团自有 CSD 网络，运营实体分布在哥本哈根/米兰/奥斯陆/波尔图四地，里斯本/米兰/奥斯陆三个市场现已用 Euronext Securities 托管结算，阿姆斯特丹/布鲁塞尔/巴黎计划2026-09起迁移过去，都柏林及迁移前的阿姆斯特丹/布鲁塞尔/巴黎具体托管机构本次未核实（⚠️ 2026-08-21已补充核实并回填：巴黎=Euroclear France（Book II Article P 2.3.3逐字点名）、阿姆斯特丹=Euroclear Nederland、布鲁塞尔=Euroclear Belgium（新闻稿+Place of Settlement change guidelines两份官方文档间接但可靠佐证）、都柏林=Euroclear Bank（2021-03migration新闻稿），详见下方新增4条来源与`data/exchanges/fr-euronext.yml`的`clearing.csd_name`字段；`euroclear.com`主域名及`/services/en/provider-homepage/euroclear-*.html`子页面本次实测对常规UA同样403，与`uk-lse`一节`euroclear.com`踩坑案例一致，故本次改用Euronext自己官网发布的分市场规则手册/新闻稿/技术指引达成核实，未能直接抓取Euroclear自己官网）
   - 首页: https://www.euronext.com/en（HTTP 200，456KB）
@@ -753,6 +802,8 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `connect.euronext.com` | 官方（面向会员/技术对接方的文档托管子域名，与 euronext.com 同集团） | en | curl 常规 UA 200 | 托管衍生品市场的技术性通知（Info-Flash）与详细的会员培训文档（"How the Market Works"），比 euronext.com 正文页更细颗粒度，衍生品合约规格/跳动点表机制/做市商角色体系等细节主要来自此域名
   - Euronext Derivatives – How the Market Works（v5.4，2025，114页会员培训文档，含Optiq Tick Table机制、Market Making框架MMA/MMS/MME角色、Nord Pool电力衍生品到期结算价说明等章节）PDF: https://connect.euronext.com/sites/default/files/it-documentation/Euronext%20Derivatives_How%20the%20Market%20Work_v5.4.pdf（HTTP 200，1.9MB）
   - Euronext Derivatives – Introduction of Fixed Income Derivatives on main European government bonds（Info-Flash，2024-12-16，BTP/OAT/Bund/BONO迷你期货上线前技术通知，Appendix含拟议合约规格表——合约规模/跳动点位/到期月序列/可交割券标准；⚠️ 原文标注为"proposed"规格，产品已于2025-09正式上线，主要参数经现行产品页交叉核实一致）PDF: https://connect.euronext.com/sites/default/files/2024-12/IF241216DE%20Euronext%20Derivatives%20%E2%80%93%20Introduction%20of%20Fixed%20Income%20Derivatives%20on%20main%20European%20government%20bonds.pdf（HTTP 200，165KB）
+- `www.reuters.com` | 第三方（财经通讯社） | en | WebSearch 定位 | 政治/市场背景（risks.*，confidence 封顶 medium）
+
 ### 约翰内斯堡证券交易所 Johannesburg Stock Exchange (JSE) `za-jse`
 - `jse.co.za` | 官方 | en（南非无为JSE本身立法声明的"官方语言"，但全部规则/上市文件/技术规范均只有英文版，未见南非其他官方语言的对照版本，与美股NYSE同理按实际使用语言取 official_languages: [en]） | curl 常规 UA 全部 200，全程未见反爬/限流，比 sec.gov/saflii.org 好抓得多 | 官网横跨三个子域名：`www.jse.co.za`（产品/服务介绍页）、`group.jse.co.za`（集团概况、历史沿革、投资者关系）、`clientportal.jse.co.za`（规则文档/市场通知/技术规格 PDF 的实际托管域名，很多深层 PDF 链接指向这里，三者按 `validate.py` 的域名后缀匹配规则统一登记为 `jse.co.za` 一条即可覆盖）。⚠️ 部分关键 PDF（如权益市场交易时段表、熔断阈值表）正文数据是图片渲染，`pdftotext -layout` 抓不出表格数字；换成同信息的另一份《交易信息系统概念培训》PDF（`Conceptual Training_v2.pdf`）才拿到可摘引的纯文本版本（含 ZA01/ZA02 分段的静态/动态熔断阈值百分比表），这是本次抓取里唯一能完整摘引熔断具体数值的来源，下次抓类似"阈值表"类内容时优先找培训/说明类文档而非官方摘要通知
   - 首页: https://www.jse.co.za/
@@ -794,6 +845,21 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - FTSE/JSE Africa Index Series Ground Rules（v9.1，2026年2月）PDF: https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse-jse-africa-index-series-ground-rules.pdf
 
 ---
+
+- `www.resbank.co.za` | 官方（南非储备银行 SARB） | en | curl 常规 UA 200 | 资本管制/外汇/退市后转移（capital_controls/post_delisting_venue 出处）
+- `www.gov.za` | 官方（南非政府） | en | curl 常规 UA 200 | 账户开立/ suitability 监管（account_opening_requirements 出处）
+- `www.state.gov` | 官方（美国国务院投资环境报告） | en | WebSearch 定位 | 外资准入/政治风险（foreign_ownership_limit/political_risk_note 出处）
+- `www.fatf-gafi.org` | 官方（FATF） | en | WebSearch 定位 | 政治/合规风险（political_risk_note 出处）
+- `www.a2x.co.za` | 官方（A2X 交易所） | en | curl 常规 UA 200 | 另类交易场所/暗池背景（market_structure 出处）
+- `www.nsx.com.na` | 官方（纳米比亚证券交易所） | en | WebSearch 定位 | 区域连接方案（market_structure.derivatives.connect_schemes 出处）
+- `www.otcexpress.co.za` | 第三方（OTC 平台） | en | WebSearch 定位 | 退市后 OTC 转移（post_delisting_venue 出处，confidence medium）
+- `blogs.easyequities.co.za` | 第三方（券商博客） | en | WebSearch 定位 | 退市后转移（confidence medium）
+- `actacommercii.co.za` | 第三方（学术期刊） | en | WebSearch 定位 | 外资限制研究（confidence medium）
+- `businesstech.co.za` | 第三方（科技财经媒体） | en | WebSearch 定位 | 投资者结构（confidence medium）
+- `pmg.org.za` | 第三方（议会监测组织） | en | WebSearch 定位 | 投资者结构（confidence medium）
+- `tiomarkets.com` | 第三方（券商） | en | WebSearch 定位 | 佣金结构（commission_structure 出处，confidence medium）
+- `www.globallegalinsights.com` | 第三方（法律指南） | en | WebSearch 定位 | 上市流程（listing_process_duration 出处，confidence medium）
+- `www.lexology.com` | 第三方（法律资讯） | en | WebSearch 定位 | 上市流程（confidence medium）
 
 ## 探测记录（za-jse 建档，2026-08-16）
 
@@ -865,6 +931,15 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `en.wikipedia.org` | 第三方 | en | curl 常规 UA 200 | 用于交易所历史沿革背景叙述（1852年 Association of Brokers、1861年正式创立、1999-2000年公司化、2008年与 Montréal Exchange 合并组成 TMX Group 等）；`confidence` 相应标 medium，未逐条核对一手史料
   - Toronto Stock Exchange: https://en.wikipedia.org/wiki/Toronto_Stock_Exchange
   - TMX Group（含 TMX Group Limited 股票代码 TSX:X 信息）: https://en.wikipedia.org/wiki/TMX_Group
+- `www.tmxinfoservices.com` | 官方（TMX Datalinx 行情数据） | en | curl 常规 UA 200 | Level 1/2/QuantumFeed 行情产品与定价（infrastructure 出处）
+- `www.cipf.ca` | 官方（加拿大投资者保护基金） | en | curl 常规 UA 200 | 投资者保护上限（participants.investor_protection 出处）
+- `ised-isde.canada.ca` | 官方（加拿大创新科学与经济发展部） | en | WebSearch 定位 | Investment Canada Act 仅审查控制权取得，无一般资本管制（capital_controls 出处）
+- `www.gov.mb.ca` | 官方（曼尼托巴省） | en | WebSearch 定位 | 银行业 Bank Act 10% / 电信 Telecom Act 20% 外资上限（foreign_ownership_limit 出处）
+- `www.mondaq.com` | 第三方（法律简报库） | en | WebSearch 定位 | 持续披露 NI 51-102、非居民预扣税（confidence 封顶 medium）
+- `taxspecialty.com` | 第三方（税务分析） | en | WebSearch 定位 | 资本利得税计入比例（confidence 封顶 medium）
+- `tradingeconomics.com` | 第三方（宏观数据） | en | WebSearch 定位 | 加美贸易摩擦政治风险（confidence 封顶 medium）
+- `cepr.net` | 第三方（CEPR 金融交易税汇编） | en | WebSearch 定位 | 加拿大无金融交易税（costs.financial_transaction_tax，confidence 封顶 medium）
+
 ### 台湾证券交易所 Taiwan Stock Exchange (TWSE) `tw-twse`
 - `twse.com.tw` | 官方 | zh-Hant / en（官方双语，各页各有独立 URL，非同页切换；英文版部分栏目滞后或缺失，细节不如中文版精确） | curl + 常规 UA 全部 200，未见反爬（含子域名 shl.twse.com.tw）；⚠️ 部分旧版路径（如网站首页导航曾指向的「pcversion 版放宽涨跌幅度专区」「旧版上市规章目录页」）已废弃，HTTP 状态码仍是 200，但正文是站内自定义 404 页（此網頁不存在，請回到本公司首頁）——不是抓取失败，是 URL 本身已失效，务必肉眼确认页面正文而非只看状态码，这两条已弃用未收录，不在下方列表中 | 台湾仅此一家股票集中交易市场；另有台湾期货交易所（TAIFEX，衍生品，`taifex.com.tw`）与证券柜台买卖中心（TPEx，OTC 市场，前身「柜买中心」，`tpex.org.tw`）为独立法人实体，规则不属于本文件收录范围
   - 集中市场交易制度介绍（开盘/收盘机制、撮合原则、订单类型正文）: https://www.twse.com.tw/zh/products/system/trading.html
@@ -979,6 +1054,12 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 
 ---
 
+- `www.seco.admin.ch` | 官方（瑞士经济事务秘书处） | en | curl 常规 UA 200 | 投资审查（foreign_ownership_limit 出处）
+- `legacy.export.gov` | 官方（美国 ITA 历史站） | en | curl 常规 UA 200 | 瑞士外汇管制现状（capital_controls 出处，建议后续换 SNB/FINMA 一手来源）
+- `www.eqs-news.com` | 第三方（公告分发） | en | curl 常规 UA 200 | Swiss Steel 退市 ad-hoc 公告（post_delisting_venue/liquidity_risk_note 出处，confidence medium）
+- `www.swissinfo.ch` | 第三方（瑞士资讯） | en | curl 常规 UA 200 | SIX 交易中断报道（major_outage_history 出处，confidence medium）
+- `www.admin.ch` | 官方（瑞士联邦） | en | curl 常规 UA 200 | 政治风险背景（risks.political_risk_note 出处，建议补一手国家风险来源）
+
 ## 探测记录（v0.0 可达性探针，2026-08-12）
 
 上述五家标杆逐一测试：WebSearch 定位官方页均准确命中；WebFetch 直接抓取在 SSE 规则总览页与 JPX 值幅制限页均遇 403，换用 `curl` + 常规浏览器 UA 后全部转为 200。**结论：本项目的抓取一律走 `tools/fetch.py`（curl 封装），不要用 WebFetch 直连交易所官网。** 尚未遇到强反爬到 curl 也过不去、或只有付费规则库/扫描件 PDF 的情况——五家标杆全部可达，`CLAUDE.md` §三的降级方案暂未被触发。
@@ -1004,178 +1085,3 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 针对上面 v0.2 记录的「sec.gov/finra.org/dtcc.com 三个域名普遍拒绝」这一长期悬案（也是
 `PROJECT/OPEN-QUESTIONS.md` 框架性问题第14/15/32条的根源），本次专门花时间系统性尝试突破，
 结果是**三个域名里两个真正攻克，一个依然拒绝**：
-
-**`sec.gov`——攻克。** 根因不是"反爬"而是"限流"：默认 UA（无论是常规浏览器 UA 还是空 UA）
-对内容页一律返回 403，响应体标题是 `SEC.gov | Request Rate Threshold Exceeded`，正文明确写
-"Automated access to our sites must comply with SEC.gov's Privacy and Security Policy"并指向
-`sec.gov/developer`——这其实是 SEC 自己公开文档化的"Fair Access"政策（与 SEC EDGAR 长期要求
-自动化访问必须带"机构标识+联系邮箱"格式 User-Agent 是同一套机制，只是此前没人想到 EDGAR 之外
-的 sec.gov 主站也适用同一规则）。把 curl 的 `-A` 换成形如 `"exchange-atlas-research
-research@example.com"`（机构名+邮箱，不是伪装浏览器指纹）之后，同一批此前 403 的 URL 全部
-变成 200，且反复验证可稳定复现（本次会话因账号额度中断重启过两次，每次用同一格式 UA 重新
-curl 同一批 URL 结果一致，不是偶然）。**这与常规"换 UA 绕过反爬"的经验（如 SSE/JPX 案例）
-性质不同**——那些是伪装成常规浏览器；这里恰恰相反，是老老实实"表明身份"而不是"冒充浏览器"，
-是 SEC 站点专属的准入方式，换到别的域名不一定适用（下面 finra.org 的情况印证了这一点：
-Cloudflare 挡的是"看起来在冒充浏览器却没有真实浏览器指纹"的请求，同一个"表明身份"UA 反而
-更不像自动化脚本冒充浏览器，可能是两处都能过的深层原因，但这只是合理猜测，未做逆向验证）。
-个别 `www.sec.gov/about/laws` 这类路径会 301 跳到 `dc.aws-sec.akadns.net`（一个内网专用域名，
-curl 跟着跳会失败）——这不是反爬，是该路径本身的重定向配置问题，换成 WebSearch 定位到的具体
-落地页 URL 直接绕开即可，不必纠结。
-
-**`finra.org`——部分攻克。** 默认 UA 遇到的是真正的 Cloudflare「Just a moment...」JS 质询页
-（403，`title: Attention Required! | Cloudflare` 或 JS challenge 页面，需要执行 JS+Cookie
-的机器人验证，理论上 curl 应该过不去）。但换成与 sec.gov 相同的 Fair Access 格式 UA 后，
-`/rules-guidance/rulebooks/finra-rules/...`（规则手册条文页）与 `/rules-guidance/key-
-topics/...`（专题说明页）路径下的内容页全部变成 200，且是真实服务端渲染的正文（不是壳层）
-——这是意外收获，此前完全没预期这个格式的 UA 对 Cloudflare 防护也有效，具体原因未深究。**但
-不是全站通杀**：`/about`、`/media-center/statistics`、纯首页 `/` 这类页面即使 200 了，静态
-HTML 里也只有导航壳，正文靠客户端 JS 异步渲染出来，curl 拿不到——这类页面改用其官方 PDF 报告
-（如《2025 FINRA Industry Snapshot》）绕过，PDF 本身不受这个限制。
-
-**`dtcc.com`——未攻克。** 与 finra.org 是同一家 Cloudflare 防护但表现不同：`/about`、
-`/clearing-services/equities-clearing` 等内容子页，无论默认 UA 还是 Fair Access 格式 UA，
-一律返回真正的 `Attention Required! | Cloudflare`「访问被拒绝」页（不是 JS 质询页，页面文案
-直接是"You are unable to access dtcc.com"，说明是域名级/IP 级别的硬拦截规则，不是可通过换
-UA 绕过的机器人验证）。首页 `/` 本身可以 200（内容是产品导航壳，无实质正文，与 v0.2 记录的
-情况一致），说明拦截同样是"按路径深度/内容页触发"而非整个域名封死，但**本次两种 UA 策略对
-内容子页均未能突破**。降级方案：改用 SEC 官方文件（非 DTCC 自身网站）间接确认 NSCC/DTC 的
-CCP/CSD 角色定性——《SEC Staff Report on the Regulation of Clearing Agencies》与 NSCC 在
-SEC 备案的规则文件（Addendum A 费用结构）本身就是监管机构一手文件，权威性不低于 DTCC 自己
-的网站，实际解决了 `clearing.ccp_name`/`csd_name`/`default_management`/`costs.clearing_
-fees` 四个此前因 dtcc.com 反爬而留空的字段，dtcc.com 本身仍是未攻克状态，供下次交易所（如
-再次涉及 NSCC/DTC 细节时）参考：不必重复尝试，直接走 sec.gov 的清算机构监管文件路线。
-
-**方法论小结**（供其他交易所补全/新增会话参考）：遇到"看起来是反爬、但网站本身是美国政府/
-监管机构域名"的情况，第一步应该看响应体内容再决定策略——"Request Rate Threshold Exceeded"
-类文案指向的是限流+身份声明机制，换"表明身份"格式的 UA 大概率有效；"Just a moment.../
-Attention Required" 类文案是 Cloudflare 机器人验证或硬拦截，前者可能对某些 UA 格式意外放行
-（如本次 finra.org），后者（如 dtcc.com 的内容子页）目前没找到 curl 层面能绕开的办法，需要
-降级到"找监管机构对同一事实的官方转述"这条路。
-
-**补充（us-nasdaq 补全会话，同一批次，独立尝试）：** 未复用上面 us-nyse 会话验证过的
-Fair Access 格式 UA（两个子代理并行执行、互不知情），改走"政府官方镜像站"路线，同样成功
-取得 `regulation.core_laws`/`market_structure.short_selling` 等此前因 sec.gov/finra.org
-403 而留空的字段，是与上面"换UA"路线互补、优先级更高（无需猜UA格式）的备选方案：
-
-- **`govinfo.gov`**（美国政府出版局）——托管众议院法律修订顾问办公室编制的官方《制定法汇编》
-  （Compilation of Statutes）与历次《公法》（Public Law）原文 PDF，是纯文本排版而非扫描件，
-  curl 常规 UA 直接 200，全程无反爬。适合取得《1934年证券交易法》这类现行成文法全文，路径
-  形如 `govinfo.gov/content/pkg/COMPS-<法规编号>/pdf/COMPS-<法规编号>.pdf`（可先 WebSearch
-  "govinfo.gov COMPS <法规名>" 定位编号）。
-- **`ecfr.gov` 的 versioner API（关键发现）**——该站**面向用户的前端页面**（如
-  `ecfr.gov/current/title-17/.../section-242.201`）是纯 JS 渲染 SPA 外壳，curl 抓不到正文；
-  但其**公开 API**（`ecfr.gov/api/versioner/v1/full/{issue-date}/title-{N}.xml?part={part}`，
-  无需鉴权）返回官方汇编 XML 纯文本全文。`{issue-date}` 需先查
-   `https://www.ecfr.gov/api/versioner/v1/titles.json` 取该标题当前 `latest_issue_date`；`part` 较大时可
-  加 `&subject_group=` 参数缩小范围。⚠️ 该 API 实测有**间歇性 503**（错误体是通用"No server
-  is available to handle this request"，不带任何限流/拦截特征文案），判断是服务端负载问题，
-  不是限流——出现时间隔重试或直接复用同会话内更早的成功抓取内容即可，不代表被封，不要按
-  403 那一套换 UA 应对。用此路径取得过 Reg SHO Rule 201（10%跌幅报升阈值）、Regulation FD、
-  Regulation Best Interest、31 CFR CIP客户身份识别规则的条文原文。
-- **`federalregister.gov`**（联邦公报）——SEC 对纳斯达克/NSCC 等自律组织"规则修改申请"发布
-  的官方 Notice/Order，其 Purpose/Background 部分通常会完整复述现行规则条文，等效间接获得
-  规则原文，且属于监管机构一手文件（比交易所自己转述规则更权威）。curl 常规 UA 200，全程
-  无反爬。
-- **`dtcc.com` 静态资产路径**——`/about`、`/clearing-services/...` 这类内容页仍如上文所述
-  被 Cloudflare 硬拦截，但 `~/media/Files/Downloads/...` 这类文件服务器直出路径不受该拦截
-  影响，可用来抓 DTCC 自己发布的费率指南 PDF（如《2026年 NSCC 费率指南》）。
-- 方法论：WebSearch 定位候选 URL → 逐条 curl 验证 → 若原始文档路径被拦，优先尝试同一事实
-  的"官方政府镜像"（govinfo.gov/ecfr.gov/federalregister.gov）而非直接放弃或退而求其次用
-  第三方转述——政府镜像站的权威性等同一手来源，`confidence` 仍可标 `high`。
-
----
-
-## Batch 2 补充登记（2026-08-27，v1.1 Category B 深耕）
-
-以下域名由 v1.1 Batch 2 各子代理在补全 Category B 字段时引用，集中补登记以满足 `validate.py` 的域名登记校验。各域名的原始抓取页 URL 见各子代理回写记录；`.cache/<exchange-id>/` 存有落盘原始页。
-
-### Australian Securities Exchange (ASX) `au-asx`（补充）
-- `asxonline.com` | 官方（ASX 文档库） | en | curl 常规 UA 200 | ASX 信息费/交易费价目表、CHESS 交收程序等 PDF
-- `www.asxonline.com` | 官方（ASX 文档库，同上域名 www 前缀） | en | curl 常规 UA 200 | 同上
-- `firb.gov.au` | 官方（外国投资审查委员会） | en | curl 常规 UA 200 | 外资投资审查框架（foreign_ownership_limit 出处）
-- `legislation.nsw.gov.au` | 官方（新南威尔士州立法库） | en | curl 常规 UA 200 | 印花税废除立法（stamp_duty 出处）
-- `www.ato.gov.au` | 官方（澳大利亚税务局） | en | curl 常规 UA 200 | 资本利得税/股息预扣税（costs 出处）
-- `www.austrac.gov.au` | 官方（AML/CTF 监管） | en | curl 常规 UA 200 | 客户身份识别（account_opening_requirements 出处）
-- `cepr.org` | 第三方（金融交易税研究库） | en | curl 常规 UA 200 | 澳大利亚无金融交易税佐证（costs.financial_transaction_tax，confidence 封顶 medium）
-
-### Toronto Stock Exchange (TSX) `ca-tsx`（补充）
-- `www.tmxinfoservices.com` | 官方（TMX Datalinx 行情数据） | en | curl 常规 UA 200 | Level 1/2/QuantumFeed 行情产品与定价（infrastructure 出处）
-- `www.cipf.ca` | 官方（加拿大投资者保护基金） | en | curl 常规 UA 200 | 投资者保护上限（participants.investor_protection 出处）
-- `ised-isde.canada.ca` | 官方（加拿大创新科学与经济发展部） | en | WebSearch 定位 | Investment Canada Act 仅审查控制权取得，无一般资本管制（capital_controls 出处）
-- `www.gov.mb.ca` | 官方（曼尼托巴省） | en | WebSearch 定位 | 银行业 Bank Act 10% / 电信 Telecom Act 20% 外资上限（foreign_ownership_limit 出处）
-- `www.mondaq.com` | 第三方（法律简报库） | en | WebSearch 定位 | 持续披露 NI 51-102、非居民预扣税（confidence 封顶 medium）
-- `taxspecialty.com` | 第三方（税务分析） | en | WebSearch 定位 | 资本利得税计入比例（confidence 封顶 medium）
-- `tradingeconomics.com` | 第三方（宏观数据） | en | WebSearch 定位 | 加美贸易摩擦政治风险（confidence 封顶 medium）
-- `cepr.net` | 第三方（CEPR 金融交易税汇编） | en | WebSearch 定位 | 加拿大无金融交易税（costs.financial_transaction_tax，confidence 封顶 medium）
-
-### SIX Swiss Exchange `ch-six`（补充）
-- `www.seco.admin.ch` | 官方（瑞士经济事务秘书处） | en | curl 常规 UA 200 | 投资审查（foreign_ownership_limit 出处）
-- `legacy.export.gov` | 官方（美国 ITA 历史站） | en | curl 常规 UA 200 | 瑞士外汇管制现状（capital_controls 出处，建议后续换 SNB/FINMA 一手来源）
-- `www.eqs-news.com` | 第三方（公告分发） | en | curl 常规 UA 200 | Swiss Steel 退市 ad-hoc 公告（post_delisting_venue/liquidity_risk_note 出处，confidence medium）
-- `www.swissinfo.ch` | 第三方（瑞士资讯） | en | curl 常规 UA 200 | SIX 交易中断报道（major_outage_history 出处，confidence medium）
-- `www.admin.ch` | 官方（瑞士联邦） | en | curl 常规 UA 200 | 政治风险背景（risks.political_risk_note 出处，建议补一手国家风险来源）
-
-### Eurex `de-eurex`（补充）
-- `commission.europa.eu` | 官方（欧盟委员会） | en | curl 常规 UA 200 | 资本自由流动法律基础（capital_controls 出处）
-- `www.europarl.europa.eu` | 官方（欧洲议会） | en | curl 常规 UA 200 | 资本自由流动事实说明（capital_controls 交叉核对）
-
-### Xetra (Frankfurt Cash Market) `de-xetra`（补充）
-- `dserver.bundestag.de` | 官方（德国联邦议会文件库） | de | curl 常规 UA 200 | Börsenumsatzsteuer 1991 废除立法（stamp_duty/financial_transaction_tax 出处）
-- `www.deloittelegal.de` | 第三方（律所） | de | WebSearch 定位 | EdW 投资者赔偿方案（investor_protection 出处，confidence medium）
-- `resourcehub.bakermckenzie.com` | 第三方（律所资源库） | en | WebSearch 定位 | 上市流程文件（listing_process_duration 出处，confidence medium）
-- `www.marketscreener.com` | 第三方（财经媒体） | en | curl 常规 UA 200 | Xetra 交易中断报道（major_outage_history 出处，confidence medium）
-
-### Euronext `fr-euronext`（补充）
-- `www.reuters.com` | 第三方（财经通讯社） | en | WebSearch 定位 | 政治/市场背景（risks.*，confidence 封顶 medium）
-
-### National Stock Exchange of India `in-nse`（补充）
-- `incometaxindia.gov.in` | 官方（印度所得税局） | en | curl 常规 UA 200 | 资本利得税/股息预扣税（costs 出处）
-- `rbi.org.in` | 官方（印度储备银行） | en | curl 常规 UA 200 | 外资准入/账户开立（foreign_access_channel/account_opening_requirements 出处）
-- `www.fpi.nsdl.co.in` | 官方（NSDL FPI 登记处） | en | curl 常规 UA 200 | 外资参与者登记（foreign_ownership_limit 出处）
-
-### Korea Exchange `kr-krx`（补充）
-- `data.krx.co.kr` | 官方（KRX 数据门户） | ko | curl 常规 UA 200 | 市场数据/成交统计（infrastructure 出处）
-- `openapi.krx.co.kr` | 官方（KRX OpenAPI） | ko | curl 常规 UA 200 | 行情接口/数据延迟（data_latency 出处）
-- `www.openapi.krx.co.kr` | 官方（KRX OpenAPI，同上 www 前缀） | ko | curl 常规 UA 200 | 同上
-- `fss.or.kr` | 官方（金融监督院 FSS） | ko | curl 常规 UA 200 | 投资者保护/ suitability（investor_protection 出处）
-- `www.fss.or.kr` | 官方（FSS www 前缀） | ko | curl 常规 UA 200 | 同上
-- `www.fsc.go.kr` | 官方（金融委员会 FSC） | ko | curl 常规 UA 200 | 监管框架（regulation 出处）
-- `law.kofia.or.kr` | 官方（韩国证券业协会 KOFIA） | ko | curl 常规 UA 200 | 自律规则/适当性（suitability_management 出处）
-- `www.kcmi.re.kr` | 官方（资本市场研究院 KCMI） | ko | curl 常规 UA 200 | 市场结构研究（market_structure 出处）
-- `www.k-otc.or.kr` | 官方（K-OTC 场外市场） | ko | curl 常规 UA 200 | 退市后场外转移（post_delisting_venue 出处）
-- `www.clearstream.com` | 官方（Clearstream 国际中央存托） | en | curl 常规 UA 200 | 国际存托/交收（clearing 出处）
-- `en.sedaily.com` | 第三方（韩国经济日报英文） | en | WebSearch 定位 | 市场背景（confidence 封顶 medium）
-- `en.yna.co.kr` | 第三方（韩联社英文） | en | WebSearch 定位 | 政治/流动性风险（confidence 封顶 medium）
-- `www.koreaherald.com` | 第三方（韩国先驱报） | en | WebSearch 定位 | 流动性/政治风险（confidence 封顶 medium）
-- `www.asiae.co.kr` | 第三方（亚洲经济） | ko | WebSearch 定位 | 流动性风险（confidence 封顶 medium）
-- `www.kedglobal.com` | 第三方（KED 全球） | en | WebSearch 定位 | 政治风险（confidence 封顶 medium）
-- `www.kchipnews.com` | 第三方（半导体新闻） | ko | WebSearch 定位 | 市场背景（confidence 封顶 medium）
-- `taxnews.ey.com` | 第三方（EY 税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
-- `www.mondovisione.com` | 第三方（交易所资讯） | en | WebSearch 定位 | 市场结构背景（confidence 封顶 medium）
-
-### Saudi Exchange (Tadawul) `sa-tadawul`（补充）
-- `vision2030.gov.sa` | 官方（沙特 Vision 2030） | en | curl 常规 UA 200 | 改革/政治风险背景（political_risk_note 出处）
-- `www.hmco.com.sa` | 第三方（Herbert Smith Freehills 沙特） | en | WebSearch 定位 | 印花税/费用（confidence 封顶 medium）
-- `www.nzte.govt.nz` | 官方（新西兰贸易发展局） | en | WebSearch 定位 | 跨境费用交叉核对（confidence medium）
-- `www.derayah.com` | 第三方（Derayah 券商） | en | curl 常规 UA 200 | 佣金结构（commission_structure 出处，confidence medium）
-- `sahmcapital.com` | 第三方（券商） | en | WebSearch 定位 | 费用/手续费（confidence 封顶 medium）
-- `jurisdb.com` | 第三方（法律数据库） | en | WebSearch 定位 | 股息预扣税（confidence 封顶 medium）
-- `taxonimo.com` | 第三方（税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
-- `www.bakermckenzie.com` | 第三方（律所） | en | WebSearch 定位 | 上市流程（listing_process_duration 出处，confidence medium）
-- `www.fintechfutures.com` | 第三方（金融科技媒体） | en | WebSearch 定位 | 交易系统/延迟（trading_system_name/data_latency 出处，confidence medium）
-
-### Johannesburg Stock Exchange `za-jse`（补充）
-- `www.resbank.co.za` | 官方（南非储备银行 SARB） | en | curl 常规 UA 200 | 资本管制/外汇/退市后转移（capital_controls/post_delisting_venue 出处）
-- `www.gov.za` | 官方（南非政府） | en | curl 常规 UA 200 | 账户开立/ suitability 监管（account_opening_requirements 出处）
-- `www.state.gov` | 官方（美国国务院投资环境报告） | en | WebSearch 定位 | 外资准入/政治风险（foreign_ownership_limit/political_risk_note 出处）
-- `www.fatf-gafi.org` | 官方（FATF） | en | WebSearch 定位 | 政治/合规风险（political_risk_note 出处）
-- `www.a2x.co.za` | 官方（A2X 交易所） | en | curl 常规 UA 200 | 另类交易场所/暗池背景（market_structure 出处）
-- `www.nsx.com.na` | 官方（纳米比亚证券交易所） | en | WebSearch 定位 | 区域连接方案（market_structure.derivatives.connect_schemes 出处）
-- `www.otcexpress.co.za` | 第三方（OTC 平台） | en | WebSearch 定位 | 退市后 OTC 转移（post_delisting_venue 出处，confidence medium）
-- `blogs.easyequities.co.za` | 第三方（券商博客） | en | WebSearch 定位 | 退市后转移（confidence medium）
-- `actacommercii.co.za` | 第三方（学术期刊） | en | WebSearch 定位 | 外资限制研究（confidence medium）
-- `businesstech.co.za` | 第三方（科技财经媒体） | en | WebSearch 定位 | 投资者结构（confidence medium）
-- `pmg.org.za` | 第三方（议会监测组织） | en | WebSearch 定位 | 投资者结构（confidence medium）
-- `tiomarkets.com` | 第三方（券商） | en | WebSearch 定位 | 佣金结构（commission_structure 出处，confidence medium）
-- `www.globallegalinsights.com` | 第三方（法律指南） | en | WebSearch 定位 | 上市流程（listing_process_duration 出处，confidence medium）
-- `www.lexology.com` | 第三方（法律资讯） | en | WebSearch 定位 | 上市流程（confidence medium）

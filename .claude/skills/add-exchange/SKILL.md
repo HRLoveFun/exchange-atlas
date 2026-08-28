@@ -319,6 +319,13 @@ make serve       # 本地预览，浏览器打开 http://localhost:8000
 
 `make check` 报错就照着错误信息改——每一条错误都对应一条铁律或一致性规则，不要绕过去。
 
+**verbatim-quote 反查（v1.1 Batch 2 后必做）**：`make check` 现在内含 `tools/verify_quotes.py`——它把每个 `confidence: high` 字段的 `quote` 与 `.cache/<id>/_manifest.json` 中实际落盘的引用来源逐字比对（剥离 HTML 标签 + PDF/Office 文本提取）。任一 `high` 字段的 `quote` 不在已抓来源里即报错并阻断构建。填完一家后建议显式跑一遍确认：
+```
+python3 tools/verify_quotes.py --ex <id>     # 离线，只看这家
+make verify-quotes-live                       # 现场抓取所有引用来源再比对（JS 页/被反爬拦的记 LIVE_ERR，信息性）
+```
+反查 FAIL 的处置（与 CLAUDE.md 二一致）：若 `quote` 其实在来源里只是被换行/空白打断，改写成来源里一段连续 verbatim 子串即可；若来源正文确无 verbatim 措辞（**抓到的是 404 页 / JS 渲染壳 / 纯图片 PDF 无文字层 / 仅第三方 paraphrase**），则**降级 `confidence: medium`**：保留 `sources`、删掉 `quote`（或把旧文字移入 `detail`），并加一行 `detail` 说明来源不可机器核验。绝不为过 check 而硬凑 quote——来源根本没抓到的，按 CLAUDE.md 三 记进 `SOURCES.md` 与 `OPEN-QUESTIONS.md`。要让更多来源可被反查，先 `python3 tools/fetch_sources.py` 把 yml 里所有 `sources` URL 落盘 `.cache`（sec.gov 走 Fair Access 格式 UA）。
+
 浏览器里确认：矩阵新增了一行、点格子能看到刚填的出处、切到「English」模式该所的 `en` 字段显示正确、档案页十一章能逐章翻。
 
 如果当前环境没有浏览器工具，用 Python 直接读 `docs/data/matrix.json` 和

@@ -2,7 +2,7 @@
 
 进度状态放这里；「为什么这么排」去 `DECISIONS.md`，这里不重复。
 
-## 当前阶段：v1.0 已完成（20 家），v1.1 Category B 数据深耕 Batch 1/3 与 Batch 2/3 已完成，Batch 3/3 待启动
+## 当前阶段：v1.0 已完成（20 家），v1.1 Category B 数据深耕 Batch 1/3、Batch 2/3、Batch 3/3 均已完成（2026-08-27）
 
 ## 阶段路线
 
@@ -123,7 +123,7 @@
 - **悬案批量清理（2026-08-20/21）**：`sa-tadawul`/`kr-krx`/`tw-twse`/`ch-six`/`br-b3`/`fr-euronext` 六家共 17 条 `PROJECT/OPEN-QUESTIONS.md` 具体数据悬案，13 条解决、1 条重新定性为"官方确认不披露"、3 条如实保留（sa-tadawul TASI基日、kr-krx KOSDAQ基日、fr-euronext市值口径不在本次任务范围），见 [ADR-027]。
 - **下一步方向已定：深度优先（v1.1 Category B 数据深耕），Wave 3 暂缓**，见 `PROJECT/DECISIONS.md` [ADR-028]。详见下方「v1.1 计划」一节。
 
-## v1.1 计划：Category B 数据深耕（Batch 1/3 与 Batch 2/3 已完成，Batch 3/3 待启动）
+## v1.1 计划：Category B 数据深耕（Batch 1/3 / Batch 2/3 / Batch 3/3 均已完成，2026-08-27）
 
 依据与规模估计见 `PROJECT/DECISIONS.md` [ADR-028]，本节只管任务清单与进度，不重复决策理由。
 
@@ -161,3 +161,4 @@
 - **Batch 2/3（剩余 12 家：`au-asx`/`br-b3`/`ca-tsx`/`ch-six`/`de-eurex`/`de-xetra`/`fr-euronext`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse`）已完成（2026-08-27）**。按原执行设计分两批（各 6 家）并行子代理执行，沿用 [ADR-017] 模式但收紧隔离：子代理只写各自 `data/exchanges/<id>.yml` 并把来源落盘到 `.cache/<id>/`，`PROJECT/SOURCES.md`/`OPEN-QUESTIONS.md`/`schema/glossary.yml` 由协调者统一合并，避免共享文件冲突。`make build` 0 错误 0 警告；全库已填字段 1360→1766（+406）。8 个原 0/20 字段（`implicit_costs_note`/`regulatory_fees`/`data_pricing_model`/`historical_data_availability`/`post_delisting_venue`/`broker_landscape`/`liquidity_risk_note`/`political_risk_note`）在 12 家中全部转为有值（个别 `low` 置信度，属"查不清已如实标注"，见 `OPEN-QUESTIONS.md` auto-issues）。质量关：协调者用脚本对全部 40 个 Category B 高置信字段做"quote 是否在落盘来源原文中"反查，命中 19/22 不匹配后逐一核实——其中 19 个实为来源页未落盘（现场抓取官方页均可命中原文），仅 3 个确属 quote 与原文不符（`ca-tsx` 两个 participants 字段引用的 OSC NI 31-103 着陆页无规则正文；`fr-euronext` `clearing.derivatives.delivery_method` 的 "EDSP=CTD/CF" 公式原文未出现），已修正（前两例降级 `medium` 保留官方来源、后一例改为 PDF 中真实存在的 EDSP 措辞并重新 verbatim 引用）。`kr-krx` 多处 costs/infrastructure 字段仍 `low`，属真实未核实，已记入悬案。
 - **Repo 级 verbatim-quote 反查（2026-08-27，接续 Batch 2）**：用脚本对全库 20 家共 ~671 个 `confidence: high` 字段的 `quote` 逐一比对落盘 `.cache/<id>/` 原文与现场抓取来源，先发现 48 处 quote 与来源不符（多为缺 `sources` 或 quote 为改写/编造），分 11 个交易所并行子代理修复——其中确属编造/改写并已修正的代表：`fr-euronext` `clearing.derivatives.delivery_method`（"EDSP=CTD/CF" 公式原文无）、`ch-six` `clearing.csd_name`（quote 指非 CSD 内容）、`ca-tsx` 两 participants 字段（引 OSC NI 31-103 着陆页无规则正文）、`hk-hkex` `clearing.ccp_name`（quote 指 CSDC 非 HKSCC）、`tw-twse` `market_structure.closing_mechanism`、`cn-sse` 若干（数字跨表格行无法成连续 verbatim）。修复后重查，可证伪的失配降至 0；残留"未命中"均为 JS 渲染页（curl 拿不到正文）或来源页未落盘，属检查器局限非数据缺陷。教训：verify 脚本必须做 HTML 标签剥离+PDF 文本提取，否则表格单元/标签会制造大量假阴性。该反查已固化为 `tools/verify_quotes.py`：离线只比对 `.cache/<id>/_manifest.json` 中实际落盘的引用来源（没抓过的来源记为 CACHE_MISS 不误判），`--live` 额外现场抓取（JS 页/被拦记为 LIVE_ERR）；已接入 `make check`（仅 FAIL 才非零退出），并加 `make verify-quotes` / `make verify-quotes-live` 两个独立命令。
 - **落盘全部引用来源 + 复核（2026-08-27，接续上条）**：新增 `tools/fetch_sources.py`（收割 yml 里所有 `sources` URL 落盘 `.cache`，按内容类型定扩展名、为 PDF/Office 生成 `.txt` 伴随文本、sec.gov 用 Fair Access UA），批量抓得 632 个来源。重跑反查后 OK 由 27 升到 929、FAIL 由 44 暴露并归零——其中确属"quote 非 verbatim / 引用错页 / 抓到 404/JS 壳/图片 PDF"的 34 处，分 11 个交易所并行子代理修复（重引正确来源并改写 verbatim quote，或降级 `medium` 保留 sources）。最终 `make build` 全绿：validate 0/0、verify_quotes OK=929 FAIL=0。残 61 个 CACHE_MISS 为引用来源未落盘或错误页，按 CLAUDE.md §四 留人工抽检。
+- **Batch 3/3 收尾（2026-08-27，v1.1 全部完成）**：① `SOURCES.md` 末尾「Batch 2 补充登记」堆块已按交易所 id 去重并入各 `### <exchange>` 小节；② Batch B 并行执行教训回写 `.claude/skills/add-exchange/SKILL.md`（verbatim 反查步骤、不可核验即降级 `medium` 的规则）；③ 每家抽 10 个「全部引用来源已落盘」的 `high` 字段做 quote-vs-来源 核验，20 家共 200/200 通过（100%，≥95% 阈值），报告见 `PROJECT/SPOT-CHECK-v1.1.md`；④ `OPEN-QUESTIONS.md` 与 glossary 经 `make sync` 重新生成；⑤ 上述 verbatim-quote 机器化反查 + 来源全量落盘的决策记入 `PROJECT/DECISIONS.md` [ADR-032]。`make build` 全绿（validate 0/0、verify_quotes OK=929 FAIL=0）。v1.1 至此收口。
