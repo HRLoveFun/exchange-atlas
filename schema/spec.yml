@@ -1,0 +1,37 @@
+# schema/spec.yml — 结构化 spec 层的形状定义（权威）
+#
+# 见 PROJECT/DECISIONS.md [ADR-035] B 节。`spec` 是事实信封的一个键，存该字段
+# 量化机制的机器可读形式，驱动 v2.0 的「交易日平面图」等图形。
+#
+#   - `spec` 是量化事实的机器形式；`zh`/`detail` 是同一事实的人读渲染 + 语境
+#     （同构于既有的 `enum` + `zh` 关系）。驱动图的量化值只在 `spec` 手写。
+#   - `quote` 仍是 verbatim 底稿；`spec` 是"从 quote 提取、被 quote 反查"的派生值。
+#     validate.py 校验 5b（[ADR-033]）：confidence:high 字段 spec 里每个数值都必须
+#     能在 quote 里逐字找到。
+#   - 三态：spec 值为 null（+ note）= 机制存在数值查不到；spec 里 type: none =
+#     机制确实不存在；spec 键缺省 = 尚未填。前端必须能区分（[ADR-035] D 节）。
+#
+# 本文件按 `<chapter>.<field path>` 列出每个字段 spec 的可用键与类型。Phase 1
+# （market_structure 结构化）填充第五章条目并给 validate.py 加结构校验；在那之前
+# 只有下面这一条示范条目，其余章节 Phase 3 逐步补。
+
+fields:
+  market_structure.price_limits.main_board:
+    doc: >
+      现货主板 / 主力合约的每日价格限制。四种形态之一：
+      (1) 百分比幅度  { limit_pct: <number>, reference: prev_close|prev_settlement, symmetric: <bool> }
+      (2) 无涨跌停    { type: none }
+      (3) 阶梯绝对值幅（JPX 式）{ type: stepwise, ladder: [...] }  —— ladder 结构 Phase 1 定
+      (4) 机制存在、档位数值未公布  { limit_pct: null, note: "<说明>" }
+    keys:
+      limit_pct: "number | null —— 单边百分比（10 表示 ±10%）"
+      reference: "prev_close | prev_settlement —— y 轴基准，喂给 [ADR-035] E 的 y 轴标签"
+      symmetric: "bool —— 涨跌幅度是否对称"
+      type: "none | stepwise —— 见 doc"
+      ladder: "list —— type: stepwise 时的绝对值档位表"
+      note: "string —— limit_pct: null 时说明为何查不到"
+    example:
+      spec: {limit_pct: 10, reference: prev_close, symmetric: true}
+      zh: "±10%（风险警示股票 ±5%，科创板见 other_boards）"
+      quote: "涨跌幅限制比例为 10%"
+      confidence: high

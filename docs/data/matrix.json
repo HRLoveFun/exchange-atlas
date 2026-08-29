@@ -7419,7 +7419,7 @@
       "label_en": "Short Selling",
       "zh": "允许备兑卖空（covered short selling），禁止裸卖空（naked short selling）：客户下达卖空指令、会员向JSE交易系统录入卖空订单或报告卖空成交前，须满足证券已实际持有（非证书化形式，由会员或客户的CSDP托管）、已有另一笔交易将取得该证券、已落实借券安排、公司行动将产生该证券、或证券将从境外登记簿过户至本地登记簿等条件之一",
       "en": "Covered short selling is permitted; naked short selling is prohibited. Before a client places a short-sell order or a member enters/reports one, the securities must be secured via one of: uncertificated holding with the member's/client's CSDP, another transaction that will yield the securities, a satisfactory borrowing arrangement, a corporate action, or transfer from a foreign register",
-      "enum": null,
+      "enum": "covered_only",
       "enum_ref": "short_selling_stance",
       "has_detail": true,
       "verified": "2026-08-27",

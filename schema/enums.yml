@@ -96,6 +96,7 @@ delivery_method:
 short_selling_stance:
   values:
     - {id: freely_allowed, label_zh: 基本无限制, label_en: Largely Unrestricted}
+    - {id: covered_only, label_zh: 仅限备兑（禁裸卖空、无报升无名单）, label_en: Covered-only (naked banned, no uptick/list)}
     - {id: restricted_uptick, label_zh: 报升规则限制, label_en: Uptick-rule Restricted}
     - {id: restricted_list, label_zh: 限指定标的, label_en: Restricted to Designated List}
     - {id: banned, label_zh: 禁止, label_en: Banned}

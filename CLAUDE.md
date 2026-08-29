@@ -10,14 +10,17 @@ exchange-atlas《全球交易所图鉴》：用统一框架横向记录全球主
 
 **核心原则：任何一个事实只在一处手写，其余位置要么生成、要么引用、要么被校验。** 发现自己在两个文件写同一件事，说明这张表哪里划错了，先改表，别继续复制。
 
+同一事实允许有多种「渲染」而不算"写两遍"：`data/` 字段里 `enum`（受控词表值）、`spec`（量化机制的机器形式，见 [ADR-035]）、`zh`/`en`（人读散文）是同一事实的不同渲染，`quote` 是它们共同的 verbatim 底稿。纪律：驱动图形的量化值只在 `spec` 手写，`zh`/`detail` 可复述但不得携带 `spec` 没有的量化事实（`make check` 校验 5b 反查 `spec` 数字 ⊆ `quote`）。
+
 | 文件 | 唯一负责 | 绝不写（改为指向） |
 |---|---|---|
 | `CLAUDE.md`（本文件） | 铁律、职责边界、降级方案 | 决策理由 → `DECISIONS.md`；命令列表 → `Makefile`（跑 `make help`） |
 | `README.md` | 对外定位、免责声明、授权 | 干活流程 → skill；进度 → `ROADMAP.md` |
 | `Makefile` | **命令的唯一权威** | — |
-| `schema/taxonomy.yml` | 字段结构、双语标签、矩阵列归属、时效等级、原文要求 | 具体数据值 → `data/` |
+| `schema/taxonomy.yml` | 字段结构、双语标签、矩阵列归属、时效等级、原文要求 | 具体数据值 → `data/`；字段 `spec` 的形状 → `schema/spec.yml` |
 | `schema/glossary.yml` | 术语译法唯一裁决 | 字段结构 → `taxonomy.yml` |
 | `schema/enums.yml` | 受控词表唯一裁决 | — |
+| `schema/spec.yml` | 字段 `spec`（量化机制的机器可读形式）的形状定义 —— 见 `DECISIONS.md` [ADR-035] | 具体数据值 → `data/` |
 | `PROJECT/SOURCES.md` | 资料入口、抓取方式、查证经验 | 从来源抄来的事实 → `data/` |
 | `PROJECT/ROADMAP.md` | 进度状态 | 为什么这么排 → `DECISIONS.md` |
 | `PROJECT/DECISIONS.md` | **为什么这么定** | 是什么 → 各自权威文件 |
