@@ -34,8 +34,12 @@ overview:
     verified: 2026-08-14
     confidence: medium
 
-  timezone: "America/New_York (ET)"
-  dst_rule: "实行夏令时（东部时间在 EST/EDT 间切换）"
+  timezone:
+    zh: "America/New_York (ET)"
+    en: "America/New_York (ET)"
+  dst_rule:
+    zh: "实行夏令时（东部时间在 EST/EDT 间切换）"
+    en: "Observes daylight saving time (Eastern Time switches between EST and EDT)"
 
   founded_year:
     zh: "1971（作为美国证券商协会 NASD 旗下的电子报价系统子公司设立，世界首个全电子报价系统）"

@@ -17,8 +17,12 @@ overview:
     verified: 2026-08-16
     confidence: medium
 
-  timezone: "Asia/Taipei (UTC+8)"
-  dst_rule: "不实行夏令时"
+  timezone:
+    zh: "Asia/Taipei (UTC+8)"
+    en: "Asia/Taipei (UTC+8)"
+  dst_rule:
+    zh: "不实行夏令时"
+    en: "No daylight saving time"
 
   founded_year:
     zh: "民国50年10月23日成立；民国51年2月9日正式开业（民國50年／51年）"
@@ -131,7 +135,9 @@ overview:
     quote: "資本額：申請上市時之實收資本額達新台幣六億元以上且募集發行普通股股數達三千萬股以上。"
     confidence: high
 
-  settlement_currency: "新台币"
+  settlement_currency:
+    zh: "新台币"
+    en: "New Taiwan dollar (TWD)"
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境
@@ -297,13 +303,17 @@ market_structure:
         - title: 台湾证券交易所股份有限公司营业细则 第3条
           url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007304
           accessed: 2026-08-16
-    lunch_break: "无（9:00-13:30全程连续交易，仅开收盘各有一段集合竞价）"
+    lunch_break:
+      zh: "无（9:00-13:30全程连续交易，仅开收盘各有一段集合竞价）"
+      en: "None (continuous trading throughout 9:00-13:30, with only an opening and a closing call auction)"
     continuous_pm: ""
     after_market:
       zh: "盘后定价交易14:00-14:30委托、14:30以当日上午收盘价集合竞价撮合；另有盘后零股交易13:40-14:30委托、14:30集合竞价一次撮合"
       en: "Post-market Fixed-price Trading: orders accepted 14:00-14:30, matched at 14:30 by call auction at the same day's closing price; a separate Post-market Odd-lot Trading session accepts orders 13:40-14:30, matched once by call auction at 14:30"
       quote: "交易時間：委託申報時間自14:00至14:30，當日14:30採電腦自動交易撮合成交。"
-    night_session: "无"
+    night_session:
+      zh: "无"
+      en: "None"
 
   holidays_note:
     zh: "周一至周五交易，休市日与银行业通行假日相同（国定假日等）；遇台北市因天然灾害（如台风）宣布公教机关停止上班时，集中市场比照休市"

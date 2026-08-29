@@ -279,14 +279,26 @@ market_structure:
     confidence: high
 
   trading_sessions:
+    # 三段时刻表的原文在 Eurex 官网「Trading hours」页，不在本章 _meta 指向的
+    # 《Conditions for Trading》PDF 里——逐字段显式登记正确出处（A2，2026-08-30）。
     pre_market:
       zh: "亚洲时段 01:00-08:00 CET（部分流动性较好的期货品种，属'延长交易时段'性质）"
       en: "Asian hours 01:00-08:00 CET (for selected liquid futures, as extended trading hours)"
       quote: "In addition to regular trading hours, Eurex is offering extended (Asian) trading hours for selected liquid futures. 01:00 CET (02:00 CEST) – 08:00 CET (Asian hours)"
+      confidence: high
+      sources:
+        - title: "Eurex — Trading hours"
+          url: https://www.eurex.com/ex-en/trade/trading-hours
+          accessed: 2026-08-30
     continuous_am:
       zh: "欧洲时段 08:00-17:30 CET"
       en: "European hours 08:00-17:30 CET"
       quote: "08:00 CET – 17:30 CET (European hours)"
+      confidence: high
+      sources:
+        - title: "Eurex — Trading hours"
+          url: https://www.eurex.com/ex-en/trade/trading-hours
+          accessed: 2026-08-30
     lunch_break:
       zh: "无"
       en: "None"
@@ -295,6 +307,11 @@ market_structure:
       zh: "美国时段 17:30-22:00 CET"
       en: "U.S. hours 17:30-22:00 CET"
       quote: "17:30 CET – 22:00 CET (U.S. hours)"
+      confidence: high
+      sources:
+        - title: "Eurex — Trading hours"
+          url: https://www.eurex.com/ex-en/trade/trading-hours
+          accessed: 2026-08-30
     after_market:
       zh: "常规交易日 08:00-22:00 CET 整体已覆盖欧洲+美国时段，22:00后即衔接次日亚洲时段，无独立盘后连续交易时段"
       en: "Regular trading runs 08:00-22:00 CET covering European+U.S. hours; after 22:00 it rolls directly into the next day's Asian hours, with no separate after-hours continuous session"

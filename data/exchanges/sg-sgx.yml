@@ -32,8 +32,12 @@ overview:
     verified: 2026-08-14
     confidence: medium
 
-  timezone: "Asia/Singapore (UTC+8)"
-  dst_rule: "不实行夏令时"
+  timezone:
+    zh: "Asia/Singapore (UTC+8)"
+    en: "Asia/Singapore (UTC+8)"
+  dst_rule:
+    zh: "不实行夏令时"
+    en: "No daylight saving time"
 
   founded_year:
     zh: "1999年12月1日（新加坡证券交易所SES、新加坡国际金融交易所SIMEX、证券结算与电脑服务公司SCCS三家法定合并成立）"
@@ -120,7 +124,9 @@ overview:
     quote: "SGX Mainboard (S$) ... SGX Mainboard (Non S$)"
     confidence: medium
 
-  settlement_currency: "以交易货币结算，新元为主（见 trading_currency）"
+  settlement_currency:
+    zh: "以交易货币结算，新元为主（见 trading_currency）"
+    en: "Settled in the trading currency, predominantly Singapore dollars (see trading_currency)"
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境
@@ -332,10 +338,12 @@ market_structure:
       confidence: high
     night_session:
       zh: "现货证券市场无夜盘"
+      en: "No night session in the cash securities market"
       confidence: medium
 
   holidays_note:
     zh: "半日交易日（Half-Day Trading）时段结构相应缩短：08:30起盘前例行程序，09:00-12:00单一交易时段，12:00起收盘例行程序（12:00-12:06）与Trade at Close（12:06-12:16）"
+    en: "On Half-Day Trading days the session structure is shortened accordingly: pre-open routines from 08:30, a single trading session 09:00-12:00, then closing routines (12:00-12:06) and Trade at Close (12:06-12:16)"
     quote: "Half-Day Trading Opens/Starts at: 08:30 hours Closes/Ends at: 12:16 hours"
     confidence: high
 
@@ -424,6 +432,10 @@ market_structure:
       en: "Coverage limited to: constituents of the Straits Times Index or MSCI Singapore Free Index, and stocks/REITs/business trusts/ETFs/ETNs listed on SGX-ST with a start-of-day reference price of S$0.50 or more (¥500 for yen-denominated instruments); new listings are exempt on their first trading day"
       quote: "have a reference price at the start of the Market Day of 0.50 or more in the underlying currency that Market Day. In the case of Yen-denominated instruments, Circuit Breakers are applied if the reference price at the start of the Market Day is ¥500 (denoted as \"0.50\" in the Trading System) or more that Market Day ... SGX-ST will exempt new listings from the circuit breaker on the first day of trading."
       confidence: high
+      sources:
+        - title: Regulatory Notice 8.14.1 — Circuit Breaker
+          url: https://rulebook.sgx.com/rulebook/regulatory-notice-8141-circuit-breaker
+          accessed: 2026-08-30
 
   circuit_breaker:
     enum: stock_level
@@ -1237,6 +1249,7 @@ risks:
 
   fx_risk_note:
     zh: "新元实行管理浮动汇率制度，由MAS参考一篮子货币设定政策区间（而非盯住单一货币或自由浮动）——一般性市场认知，本次未附官方原文来源，confidence 标 low"
+    en: "The Singapore dollar operates under a managed-float regime in which MAS sets a policy band against a basket of currencies (rather than a single-currency peg or a free float) — general market knowledge; no official source cited this session, hence low confidence"
     confidence: low
 
   political_risk_note:

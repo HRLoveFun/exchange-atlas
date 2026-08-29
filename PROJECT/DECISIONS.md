@@ -460,3 +460,27 @@
 **验证：** `make check` 全绿（20 家，0/0）；四项校验各构造一个反例（`matching_principle` 引 mgzq.com 标 high / `main_board.zh` 全编造数字 / `main_board.spec.limit_pct: 77` / `.md` 里写坏仓库路径）确认能拦下，站内路径 `res/pc/js/func.js`、绝对路径 `/tmp/x.html`、真实路径 `tools/validate.py` 确认放行；`spec` 正例（`limit_pct: 10`，quote 含「10%」）放行。`docs/data/freshness.json` 的日期漂移（`age_days` 按当天重算）是既有现象、与本条无关，未纳入本 PR。
 
 **日期：** 2026-08-29
+
+### ADR-034 — A2：v1.1 尾巴收口（verify_quotes 走 expand / br-b3 裸串 source 归一 / 英文回填 #45 清零 / 61 CACHE_MISS 归零）
+
+**背景：** v2.0 前置加固第二步（A1 见 [ADR-033]）。清 v1.1 收口时明确留下的两条尾巴——`OPEN-QUESTIONS.md` 框架性问题 #45（英文模式"中英夹杂"）与 [ADR-032] 残留的 61 个 `verify_quotes` `CACHE_MISS`。
+
+**定了什么：**
+
+1. **`tools/verify_quotes.py` 的 walk 改走 `sync.expand_exchange` 后的数据**（跟 `validate.py` 一致），跳过 `_meta` 键本身。此前它读原始 YAML，只看字段自己的 `sources`，看不到章节级 `_meta.sources` 级联——导致 ~40 个"字段有自己的 quote + 章节 `_meta` 提供 sources"的字段被误报 `CACHE_MISS`。改后 `OK` 929→1017（同一批数据），并**暴露 6 个此前被 `_meta` 级联掩盖的真实 FAIL**：3 个 `de-eurex` 交易时段字段的 quote 出自 Eurex 官网「Trading hours」页而非章节 `_meta` 指向的《Conditions for Trading》PDF；`hk-hkex.price_limits.type` 出自 VCM FAQ；`sg-sgx.price_limits.other_boards` 出自 Circuit Breaker 通知 8.14.1；`us-nyse.listing.continuing_obligations` 出自 `nyse.com/regulation`。均逐字段补显式 `sources`（指向 quote 真实所在页，都已在 `.cache` 里）后转 OK。
+
+2. **`br-b3.yml` 的 34 处裸字符串 `sources`（`- "https://…"`）统一转成 `- {url, accessed}` 字典**。裸串是 br-b3 独有的非标准写法（其余 19 家都是字典形式），后果是一连串工具静默漏处理：`fetch_sources.py` 的 `cited_urls()` 只认字典→从不抓这些 URL；`validate.py` 的"域名已登记"与 [ADR-033] 的"第三方封顶"校验对裸串取 `url=None`→整个跳过。归一后 `fetch_sources.py` 正常收割，`valorinternational.globo.com`（第三方新闻，两处 `confidence: medium` 字段引用）被"域名未登记"校验抓出→补登记 `SOURCES.md`。`fetch_sources.py` 的 `cited_urls()` 同时加了防御性兼容（两种写法都收），防同类问题复发。
+
+3. **英文回填 #45 全库清零**：扫全部 20 家的"`zh` 已填 / `en` 空 / 非枚举 / 非 `en_required`"叶子字段，逐个补 `en`（多为 `dst_rule`、`settlement_currency`、`trading_sessions.*`、`fx_risk_note` 这类短字段；纯时刻区间如"9:30-11:30"补相同值消除前端"（中文原文）"误标）。此前 [ADR-031] 的方案①只覆盖了四家中文源的 `{zh,en}` 信封字段，漏了裸字符串字段与 `sa-tadawul`/`za-jse`/`au-asx`/`uk-lse`/`us-*` 等 `source_lang: en` 家的散字段。补完后全库该类字段 = 0，#45 按文件头规则删除。
+
+4. **61 个 `CACHE_MISS` → 0**：#1 消化 42（`_meta` 级联可见），#2 + `fetch_sources.py` 消化 ~13（br-b3 裸串归一后可抓），4 个 python-requests 走本机代理 SSL/Proxy 失败的域名（`planalto.gov.br`/`szse.cn`/`jipf.or.jp` + `in-nse` 的 SEBI FPI PDF）改用 curl 手工落盘，1 个（`in-nse.participants.foreign_access_channel`）是 URL 里 `1919` typo（应为 `2019`）导致抓到 404 壳——修正 URL 后 verbatim 命中。最终 `verify_quotes` OK=1024 FAIL=0 CACHE_MISS=0（在 `.cache/` 已由 `fetch_sources.py` 落盘的前提下——`.cache/` 不入库 [ADR-002]，新克隆需先 `python3 tools/fetch_sources.py`）。
+
+**为什么改工具而不是逐字段补 `sources`：** ~40 个"(no sources)"字段本就靠 `_meta` 级联拿到 sources（CLAUDE.md 一节的 DRY 机制），逐个复制一份 `sources` 到字段级正是该原则反对的"同一件事两处手写"。让 `verify_quotes` 跟 `validate.py` 一样看展开后数据，是把两个校验器对齐到同一套语义。
+
+顺带：`validate.py` 的路径引用校验（[ADR-033] ③）把 `skip_dirs` 也从"顶层条目"集合里减掉——文档里写 `.cache/<id>/_manifest.json` 这类示意路径不再被当作"仓库应存在此文件"误报。
+
+**未处理 / 留给后续：** `.cache/<id>/_manifest.json` 是否入库（入库则 `verify_quotes` 离线校验在 CI / 新克隆才有意义）是 [ADR-002]"零 CI 部署 / `.cache` 不入库"的再评估，属 Phase 0 范畴，本条不动。`OPEN-QUESTIONS.md` #20（`in-nse` STT 税率表覆盖面 / `overview.foreign_ownership_limit` 留空）只顺带订正了其中 `foreign_access_channel` 的来源 URL，STT 与外资持股上限两处仍如实保留。
+
+**验证：** `make build` 全绿（validate 0/0、verify_quotes OK=1024 FAIL=0 CACHE_MISS=0）；`make sync` 两次连续运行产物 md5 一致（幂等）；6 个新暴露 FAIL 逐一核对补入的 `sources` 页正文含该 quote 的 verbatim 窗口；英文回填字段的数字与既有 `zh`/`quote` 一致（[ADR-033] 的散文数字反查通过）。
+
+**日期：** 2026-08-30

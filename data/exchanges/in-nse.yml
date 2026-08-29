@@ -33,7 +33,9 @@ overview:
     verified: 2026-08-14
     confidence: medium
 
-  timezone: "Asia/Kolkata (IST)"
+  timezone:
+    zh: "Asia/Kolkata (IST)"
+    en: "Asia/Kolkata (IST)"
 
   dst_rule:
     zh: "无夏令时（印度全年采用统一的印度标准时间 IST，UTC+5:30，不做季节性调整）"
@@ -1213,8 +1215,8 @@ participants:
     detail: "DDP（指定存管参与者）是 FPI 准入与托管的法定中介；RBI 的 PIS 通道专供 NRI/PIO 使用，与 FPI 通道并行。"
     sources:
       - title: SEBI (Foreign Portfolio Investors) Regulations, 2019（NSDL FPI 门户归档 PDF）
-        url: https://www.fpi.nsdl.co.in/web/HomePage/files/Documents/SEBI%20FPI%20Regulations,%202019%20-%20updated%20December%2019,%201919.pdf
-        accessed: 2026-08-27
+        url: https://www.fpi.nsdl.co.in/web/HomePage/files/Documents/SEBI%20FPI%20Regulations,%202019%20-%20updated%20December%2019,%202019.pdf
+        accessed: 2026-08-30
       - title: Investment in Indian Companies by FIIs/NRIs（RBI 官网）
         url: https://rbi.org.in/Scripts/BS_FiiUSer.aspx
         accessed: 2026-08-27

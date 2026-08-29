@@ -15,9 +15,9 @@
     "overview": {
       "timezone": {
         "zh": "Asia/Singapore (UTC+8)",
+        "en": "Asia/Singapore (UTC+8)",
         "verified": "2026-08-14",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -25,9 +25,9 @@
       },
       "dst_rule": {
         "zh": "不实行夏令时",
+        "en": "No daylight saving time",
         "verified": "2026-08-14",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -162,9 +162,9 @@
       },
       "settlement_currency": {
         "zh": "以交易货币结算，新元为主（见 trading_currency）",
+        "en": "Settled in the trading currency, predominantly Singapore dollars (see trading_currency)",
         "verified": "2026-08-14",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -494,6 +494,7 @@
         },
         "night_session": {
           "zh": "现货证券市场无夜盘",
+          "en": "No night session in the cash securities market",
           "confidence": "medium",
           "sources": [
             {
@@ -503,7 +504,6 @@
             }
           ],
           "verified": "2026-08-14",
-          "en": null,
           "enum": null,
           "detail": null,
           "quote": null
@@ -511,6 +511,7 @@
       },
       "holidays_note": {
         "zh": "半日交易日（Half-Day Trading）时段结构相应缩短：08:30起盘前例行程序，09:00-12:00单一交易时段，12:00起收盘例行程序（12:00-12:06）与Trade at Close（12:06-12:16）",
+        "en": "On Half-Day Trading days the session structure is shortened accordingly: pre-open routines from 08:30, a single trading session 09:00-12:00, then closing routines (12:00-12:06) and Trade at Close (12:06-12:16)",
         "quote": "Half-Day Trading Opens/Starts at: 08:30 hours Closes/Ends at: 12:16 hours",
         "confidence": "high",
         "sources": [
@@ -521,7 +522,6 @@
           }
         ],
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "detail": null
       },
@@ -677,9 +677,9 @@
           "confidence": "high",
           "sources": [
             {
-              "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
-              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
-              "accessed": "2026-08-14"
+              "title": "Regulatory Notice 8.14.1 — Circuit Breaker",
+              "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-8141-circuit-breaker",
+              "accessed": "2026-08-30"
             }
           ],
           "verified": "2026-08-14",
@@ -2005,9 +2005,9 @@
     "risks": {
       "fx_risk_note": {
         "zh": "新元实行管理浮动汇率制度，由MAS参考一篮子货币设定政策区间（而非盯住单一货币或自由浮动）——一般性市场认知，本次未附官方原文来源，confidence 标 low",
+        "en": "The Singapore dollar operates under a managed-float regime in which MAS sets a policy band against a basket of currencies (rather than a single-currency peg or a free float) — general market knowledge; no official source cited this session, hence low confidence",
         "confidence": "low",
         "verified": "2026-08-27",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,

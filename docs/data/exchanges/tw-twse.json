@@ -15,9 +15,9 @@
     "overview": {
       "timezone": {
         "zh": "Asia/Taipei (UTC+8)",
+        "en": "Asia/Taipei (UTC+8)",
         "verified": "2026-08-16",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -25,9 +25,9 @@
       },
       "dst_rule": {
         "zh": "不实行夏令时",
+        "en": "No daylight saving time",
         "verified": "2026-08-16",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -173,9 +173,9 @@
       },
       "settlement_currency": {
         "zh": "新台币",
+        "en": "New Taiwan dollar (TWD)",
         "verified": "2026-08-16",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -409,6 +409,7 @@
         },
         "lunch_break": {
           "zh": "无（9:00-13:30全程连续交易，仅开收盘各有一段集合竞价）",
+          "en": "None (continuous trading throughout 9:00-13:30, with only an opening and a closing call auction)",
           "sources": [
             {
               "title": "集中市场交易制度介绍（TWSE 官网）",
@@ -423,7 +424,6 @@
           ],
           "verified": "2026-08-16",
           "confidence": "medium",
-          "en": null,
           "enum": null,
           "detail": null,
           "quote": null
@@ -472,6 +472,7 @@
         },
         "night_session": {
           "zh": "无",
+          "en": "None",
           "sources": [
             {
               "title": "集中市场交易制度介绍（TWSE 官网）",
@@ -486,7 +487,6 @@
           ],
           "verified": "2026-08-16",
           "confidence": "medium",
-          "en": null,
           "enum": null,
           "detail": null,
           "quote": null

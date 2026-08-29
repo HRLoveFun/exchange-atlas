@@ -54,9 +54,11 @@ def cited_urls(ex):
     def walk(o):
         if isinstance(o, dict):
             for u in (o.get("sources") or []):
-                if isinstance(u, dict) and u.get("url"):
-                    if u["url"] not in seen:
-                        seen.add(u["url"]); out.append(u["url"])
+                # 标准写法是 {title,url,accessed}；个别数据用过裸 URL 字符串
+                # （br-b3 曾有 34 处，已在 A2 统一转成字典）——两种都收，别漏抓。
+                url = u.get("url") if isinstance(u, dict) else (u if isinstance(u, str) else None)
+                if url and url not in seen:
+                    seen.add(url); out.append(url)
             for v in o.values():
                 walk(v)
         elif isinstance(o, list):

@@ -17,8 +17,12 @@ overview:
     verified: 2026-08-12
     confidence: medium
 
-  timezone: "Asia/Shanghai (UTC+8)"
-  dst_rule: "不实行夏令时"
+  timezone:
+    zh: "Asia/Shanghai (UTC+8)"
+    en: "Asia/Shanghai (UTC+8)"
+  dst_rule:
+    zh: "不实行夏令时"
+    en: "No daylight saving time"
 
   founded_year:
     zh: "1990（11月26日成立，12月19日开业）"
@@ -87,7 +91,9 @@ overview:
     quote: "A 股的申报价格最小变动单位为 0.01 元人民币，基金、权证交易为 0.001 元人民币，B 股交易为 0.001 美元。"
     confidence: medium
 
-  settlement_currency: "人民币（B股为美元）"
+  settlement_currency:
+    zh: "人民币（B股为美元）"
+    en: "Renminbi (US dollars for B-shares)"
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境
@@ -229,9 +235,15 @@ market_structure:
     confidence: medium
 
   trading_sessions:
-    pre_market: "无独立盘前时段；9:15-9:25 为开盘集合竞价"
-    continuous_am: "9:30-11:30"
-    lunch_break: "11:30-13:00"
+    pre_market:
+      zh: "无独立盘前时段；9:15-9:25 为开盘集合竞价"
+      en: "No separate pre-market session; 9:15-9:25 is the opening call auction"
+    continuous_am:
+      zh: "9:30-11:30"
+      en: "9:30-11:30"
+    lunch_break:
+      zh: "11:30-13:00"
+      en: "11:30-13:00"
     continuous_pm:
       zh: "13:00-15:00（普通证券 13:00-14:57 连续竞价 + 14:57-15:00 收盘集合竞价；基金交易 13:00-15:00 全程连续竞价，无独立收盘集合竞价）"
       en: "13:00-15:00 (ordinary securities: 13:00-14:57 continuous auction + 14:57-15:00 closing call auction; fund trading: continuous auction throughout 13:00-15:00, with no separate closing call auction)"
@@ -240,7 +252,9 @@ market_structure:
       zh: "科创板股票另有盘后固定价格交易，15:05-15:30，按当日收盘价成交"
       en: "STAR Market stocks additionally have an after-hours fixed-price trading session, 15:05-15:30, executed at that day's closing price"
       quote: "每个交易日的 15:05 至 15:30 为盘后固定价格交易时间，当日 15:00 仍处于停牌状态的股票不进行盘后固定价格交易。"
-    night_session: "无"
+    night_session:
+      zh: "无"
+      en: "None"
 
   holidays_note:
     zh: "每周一至周五交易，国家法定假日及本所公告的休市日休市"

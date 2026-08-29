@@ -15,9 +15,9 @@
     "overview": {
       "timezone": {
         "zh": "America/New_York (ET)",
+        "en": "America/New_York (ET)",
         "verified": "2026-08-13",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -25,9 +25,9 @@
       },
       "dst_rule": {
         "zh": "实行夏令时（东部时间在 EST/EDT 间切换）",
+        "en": "Observes daylight saving time (Eastern Time switches between EST and EDT)",
         "verified": "2026-08-13",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -853,9 +853,9 @@
         "confidence": "high",
         "sources": [
           {
-            "title": "Initial Listings（官网）",
-            "url": "https://www.nyse.com/regulation/initial-listings",
-            "accessed": "2026-08-13"
+            "title": "NYSE Regulation（官网，Continued Listing group 说明）",
+            "url": "https://www.nyse.com/regulation",
+            "accessed": "2026-08-30"
           }
         ],
         "verified": "2026-08-13",

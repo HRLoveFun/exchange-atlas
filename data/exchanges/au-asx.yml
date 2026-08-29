@@ -26,8 +26,12 @@ overview:
     verified: 2026-08-14
     confidence: medium
 
-  timezone: "Australia/Sydney (AEST UTC+10 / AEDT UTC+11)"
-  dst_rule: "实行夏令时（新南威尔士州随全国东部大部分州10月至次年4月使用AEDT）"
+  timezone:
+    zh: "Australia/Sydney (AEST UTC+10 / AEDT UTC+11)"
+    en: "Australia/Sydney (AEST UTC+10 / AEDT UTC+11)"
+  dst_rule:
+    zh: "实行夏令时（新南威尔士州随全国东部大部分州10月至次年4月使用AEDT）"
+    en: "Observes daylight saving time (New South Wales, with most of eastern Australia, uses AEDT from October to the following April)"
 
   founded_year:
     zh: "1987年4月1日（澳大利亚联邦议会立法批准，六个州级交易所合并组建Australian Stock Exchange Limited）；最早可追溯渊源为1871年悉尼证券交易所（Sydney Stock Exchange）成立"

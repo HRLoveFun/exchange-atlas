@@ -15,9 +15,9 @@
     "overview": {
       "timezone": {
         "zh": "Asia/Shanghai (UTC+8)",
+        "en": "Asia/Shanghai (UTC+8)",
         "verified": "2026-08-14",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -25,9 +25,9 @@
       },
       "dst_rule": {
         "zh": "不实行夏令时",
+        "en": "No daylight saving time",
         "verified": "2026-08-14",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -171,9 +171,9 @@
       },
       "settlement_currency": {
         "zh": "人民币（B股为港元）",
+        "en": "Renminbi (Hong Kong dollars for B-shares)",
         "verified": "2026-08-14",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -375,6 +375,7 @@
       "trading_sessions": {
         "pre_market": {
           "zh": "无独立盘前时段；9:15-9:25 为开盘集合竞价",
+          "en": "No separate pre-market session; 9:15-9:25 is the opening call auction",
           "sources": [
             {
               "title": "深圳证券交易所交易规则（2026年修订）",
@@ -389,13 +390,13 @@
           ],
           "verified": "2026-08-14",
           "confidence": "medium",
-          "en": null,
           "enum": null,
           "detail": null,
           "quote": null
         },
         "continuous_am": {
           "zh": "9:30-11:30",
+          "en": "9:30-11:30",
           "sources": [
             {
               "title": "深圳证券交易所交易规则（2026年修订）",
@@ -410,13 +411,13 @@
           ],
           "verified": "2026-08-14",
           "confidence": "medium",
-          "en": null,
           "enum": null,
           "detail": null,
           "quote": null
         },
         "lunch_break": {
           "zh": "11:30-13:00",
+          "en": "11:30-13:00",
           "sources": [
             {
               "title": "深圳证券交易所交易规则（2026年修订）",
@@ -431,7 +432,6 @@
           ],
           "verified": "2026-08-14",
           "confidence": "medium",
-          "en": null,
           "enum": null,
           "detail": null,
           "quote": null
@@ -475,6 +475,7 @@
         },
         "night_session": {
           "zh": "无",
+          "en": "None",
           "sources": [
             {
               "title": "深圳证券交易所交易规则（2026年修订）",
@@ -489,7 +490,6 @@
           ],
           "verified": "2026-08-14",
           "confidence": "medium",
-          "en": null,
           "enum": null,
           "detail": null,
           "quote": null

@@ -17,9 +17,9 @@
     "overview": {
       "timezone": {
         "zh": "Asia/Hong_Kong (UTC+8)",
+        "en": "Asia/Hong_Kong (UTC+8)",
         "verified": "2026-08-12",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -27,9 +27,9 @@
       },
       "dst_rule": {
         "zh": "不实行夏令时",
+        "en": "No daylight saving time",
         "verified": "2026-08-12",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -118,9 +118,9 @@
       },
       "settlement_currency": {
         "zh": "港元（双柜台人民币柜台以人民币结算）",
+        "en": "Hong Kong dollars (the renminbi counter under the dual-counter model settles in renminbi)",
         "verified": "2026-08-12",
         "confidence": "medium",
-        "en": null,
         "enum": null,
         "detail": null,
         "quote": null,
@@ -626,9 +626,9 @@
           "confidence": "high",
           "sources": [
             {
-              "title": "Trading Hours - Securities Market（HKEX 官网）",
-              "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
-              "accessed": "2026-08-12"
+              "title": "VCM FAQ（HKEX 官网英文版）",
+              "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Securities-Market/Trading/VCM?sc_lang=en",
+              "accessed": "2026-08-30"
             }
           ],
           "verified": "2026-08-12",

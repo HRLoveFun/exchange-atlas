@@ -406,15 +406,15 @@
           "zh": "亚洲时段 01:00-08:00 CET（部分流动性较好的期货品种，属'延长交易时段'性质）",
           "en": "Asian hours 01:00-08:00 CET (for selected liquid futures, as extended trading hours)",
           "quote": "In addition to regular trading hours, Eurex is offering extended (Asian) trading hours for selected liquid futures. 01:00 CET (02:00 CEST) – 08:00 CET (Asian hours)",
+          "confidence": "high",
           "sources": [
             {
-              "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
-              "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
-              "accessed": "2026-08-27"
+              "title": "Eurex — Trading hours",
+              "url": "https://www.eurex.com/ex-en/trade/trading-hours",
+              "accessed": "2026-08-30"
             }
           ],
           "verified": "2026-08-27",
-          "confidence": "high",
           "enum": null,
           "detail": null
         },
@@ -422,15 +422,15 @@
           "zh": "欧洲时段 08:00-17:30 CET",
           "en": "European hours 08:00-17:30 CET",
           "quote": "08:00 CET – 17:30 CET (European hours)",
+          "confidence": "high",
           "sources": [
             {
-              "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
-              "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
-              "accessed": "2026-08-27"
+              "title": "Eurex — Trading hours",
+              "url": "https://www.eurex.com/ex-en/trade/trading-hours",
+              "accessed": "2026-08-30"
             }
           ],
           "verified": "2026-08-27",
-          "confidence": "high",
           "enum": null,
           "detail": null
         },
@@ -454,15 +454,15 @@
           "zh": "美国时段 17:30-22:00 CET",
           "en": "U.S. hours 17:30-22:00 CET",
           "quote": "17:30 CET – 22:00 CET (U.S. hours)",
+          "confidence": "high",
           "sources": [
             {
-              "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
-              "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
-              "accessed": "2026-08-27"
+              "title": "Eurex — Trading hours",
+              "url": "https://www.eurex.com/ex-en/trade/trading-hours",
+              "accessed": "2026-08-30"
             }
           ],
           "verified": "2026-08-27",
-          "confidence": "high",
           "enum": null,
           "detail": null
         },

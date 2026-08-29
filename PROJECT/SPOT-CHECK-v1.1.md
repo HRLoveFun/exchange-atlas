@@ -1,5 +1,7 @@
 # v1.1 Category B 抽检报告（quote vs 落盘来源）
 
+> **已归档**：v1.1 于 2026-08-27 收口；尾巴收口（英文回填 #45 清零、61 个 CACHE_MISS 归零、verify_quotes 走 expand）于 2026-08-30 完成，见 [ADR-034]。本报告保留作 v1.1 抽检记录，不再更新。
+
 自动抽检：每家从**全部引用来源均已落盘 `.cache/<id>/`** 的 `confidence: high` 字段中随机抽取 10 个，将其 `quote` 与来源逐字比对（复用 `tools/verify_quotes.py` 的同一套逻辑：剥离 HTML 标签 + PDF/Office 文本提取，PDF 无伴随文本时现场 pdftotext）。
 
 **汇总**：可确定性核验字段共抽检 200 个，通过 200，失败 0；通过率 = 100.0%（>=95% 阈值 ✅）。其余 high 字段因引用来源未落盘（需先 `fetch_sources` 或人工提供）属"不可自动核验"，按 CLAUDE.md §四 留人工抽检，不计入本自动通过率。

@@ -33,8 +33,12 @@ overview:
     verified: 2026-08-14
     confidence: medium
 
-  timezone: "Europe/London (GMT/BST)"
-  dst_rule: "实行英国夏令时（British Summer Time, BST），在格林尼治标准时间（GMT）与BST之间切换"
+  timezone:
+    zh: "Europe/London (GMT/BST)"
+    en: "Europe/London (GMT/BST)"
+  dst_rule:
+    zh: "实行英国夏令时（British Summer Time, BST），在格林尼治标准时间（GMT）与BST之间切换"
+    en: "Observes British Summer Time (BST), switching between Greenwich Mean Time (GMT) and BST"
 
   founded_year:
     zh: "1801（第一家受监管的交易所在伦敦成立，现代意义上的证券交易所由此诞生）；渊源可上溯至1698年 Jonathan's Coffee House 内 John Castaing 开始发布证券商品价格清单"

@@ -46,6 +46,11 @@ CACHE = ROOT / ".cache"
 DATA = ROOT / "data" / "exchanges"
 URLTEXT_CACHE = Path(tempfile.gettempdir()) / "verify_quotes_urltext.json"
 
+sys.path.insert(0, str(ROOT / "tools"))
+import sync  # noqa: E402  —— 复用 expand_exchange，让本脚本看到的 confidence/sources
+              #    与 validate.py 一致（含 _meta 级联），否则靠章节级 _meta.sources
+              #    的字段会被误判为"无来源"（CACHE_MISS）。
+
 WINDOW = 14          # 要求 quote 里至少存在这么长的连续窗口出现在来源中
 MIN_WIN = 8          # 短 quote 整体匹配的最小长度下限
 
@@ -192,11 +197,14 @@ def quote_in(target, sources):
 
 
 def walk(o, path):
-    """递归产出 (path, node)，其中 node 为 confidence:high 且带 quote 的字段。"""
+    """递归产出 (path, node)，其中 node 为 confidence:high 且带 quote 的字段。
+    在 expand_exchange 展开后的数据上跑——`_meta` 已被级联进各叶子，跳过它本身。"""
     if isinstance(o, dict):
         if o.get("confidence") == "high" and o.get("quote"):
             yield path, o
         for k, v in o.items():
+            if k == "_meta":
+                continue
             yield from walk(v, f"{path}.{k}" if path else k)
     elif isinstance(o, list):
         for i, v in enumerate(o):
@@ -211,10 +219,12 @@ def main():
     args = ap.parse_args()
 
     exs = [args.ex] if args.ex else sorted(p.name[:-4] for p in DATA.glob("*.yml"))
+    taxonomy = sync.load_all()[0]
 
     fails, cache_miss, live_err, oks = [], [], [], []
     for ex in exs:
-        d = yaml.safe_load(open(DATA / f"{ex}.yml", encoding="utf-8"))
+        raw = yaml.safe_load(open(DATA / f"{ex}.yml", encoding="utf-8"))
+        d = sync.expand_exchange(taxonomy, raw).get("chapters", {})
         mmap = manifest_map(ex)  # url -> 规范正文
         for path, node in walk(d, ""):
             q = norm(node.get("quote", ""))
