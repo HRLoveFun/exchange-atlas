@@ -387,6 +387,7 @@ market_structure:
     confidence: high
 
   matching_principle:
+    enum: price_display_time
     zh: "中央订单簿按价格-可见性-时间优先原则连续撮合：会员在同等条件下竞争成交，同价位隐藏单排在可见单之后成交"
     en: "Central order book matching on strict price-visibility-time priority; members compete on equal terms, with hidden orders yielding priority to visible orders at the same price"
     sources:
@@ -663,6 +664,7 @@ market_structure:
       confidence: high
 
     matching_principle:
+      enum: price_display_time
       zh: "中央订单簿（Central Order Book）连续交易时段按价格-可见性-时间优先原则（price-visibility-time priority）连续撮合，与现货市场的撮合原则一致"
       en: "The Central Order Book matches continuously on a price-visibility-time priority basis during the Continuous Trading Session, the same principle used in the cash equity market"
       sources:

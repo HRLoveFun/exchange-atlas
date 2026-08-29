@@ -634,6 +634,7 @@
         "detail": null
       },
       "matching_principle": {
+        "enum": "price_time",
         "zh": "价格优先、时间优先；市价申报优先于指值申报",
         "en": "Price priority, then time priority; market orders take precedence over limit orders",
         "sources": [
@@ -646,7 +647,6 @@
         "quote": "A lower offer shall have precedence over higher offers, and a higher bid shall have precedence over lower bids... Market orders shall have precedence over bids and offers other than those of market orders in terms of price.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null,
         "spec": null,
         "detail": null
       },

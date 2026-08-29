@@ -265,6 +265,7 @@ chapters:
         volatility: stable
         in_matrix: trading_mechanism
         en_required: true
+        enum_ref: matching_principle
       - id: order_types
         label_zh: 订单类型
         label_en: Order Types
@@ -397,6 +398,7 @@ chapters:
             label_en: Matching Principle
             volatility: stable
             en_required: true
+            enum_ref: matching_principle
           - id: order_types
             label_zh: 订单类型
             label_en: Order Types

@@ -323,6 +323,7 @@ market_structure:
     confidence: high
 
   matching_principle:
+    enum: price_time
     zh: "价格优先、时间优先原则（Price-Time Priority）：无法按determined价格全部成交的限价订单按申报先后顺序执行；不限价订单（市价订单）优先执行"
     en: "Price-Time Priority: Limit Orders that cannot be fully executed at the determined price are executed in chronological order of entry; Unlimited (Market) Orders are executed preferentially"
     sources:

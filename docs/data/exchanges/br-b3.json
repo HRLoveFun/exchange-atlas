@@ -586,6 +586,7 @@
         "detail": null
       },
       "matching_principle": {
+        "enum": "price_time",
         "zh": "连续交易按价格优先、报单先后时间顺序（chronological order of entry）撮合；集合竞价按能匹配最大成交量的价格确定理论价，价格相同再依失衡量最小与最近成交价接近程度决胜",
         "en": "Continuous trading matches on price priority and chronological order of entry; auctions determine the theoretical price as the one matching the largest quantity, with ties broken by the smallest resulting imbalance and proximity to the last traded price",
         "sources": [
@@ -598,7 +599,6 @@
         "quote": "LOC orders do not have priority over other types of orders or order qualifiers and always compete based on price priority and chronological order of entry",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null,
         "spec": null,
         "detail": null
       },
@@ -1093,6 +1093,7 @@
           "detail": null
         },
         "matching_principle": {
+          "enum": "price_time",
           "zh": "与现货市场共用同一套「资产与衍生品」统一撮合框架（《交易规程手册》Title II「交易环境」）：买卖盘经B3交易系统撮合成交，遵循已获授权参与者依交易规则登记的报单/交叉盘规则，同一撮合引擎不区分现货与衍生品（见顶层matching_principle的价格优先/时间优先撮合原则）",
           "en": "Shares the same unified 'assets and derivatives' matching framework as the cash market (Title II, Trading Environment, of the Trading Procedures Manual): bids and asks are matched by B3's trading system per orders/cross orders registered by authorized participants under B3's trading rulebook; the same matching engine does not distinguish cash from derivatives (see top-level matching_principle for the price-priority/time-priority matching rule)",
           "sources": [
@@ -1105,7 +1106,6 @@
           "quote": "Trading in assets and derivatives during trading sessions results from the matching of bids and asks or cross orders in B3's trading system registered by authorized participants in accordance with the provisions of B3's trading rulebook and this trading procedures manual.",
           "confidence": "high",
           "verified": "2026-08-16",
-          "enum": null,
           "spec": null,
           "detail": null
         },

@@ -554,6 +554,7 @@
         "detail": null
       },
       "matching_principle": {
+        "enum": "price_time",
         "zh": "现时 OTP-C（证券市场交易平台）以严格的价格及时间优先次序持续进行配对：较早时间输入系统的买卖盘必须完全执行，才可处理同等价格但较迟输入的买卖盘",
         "en": "Under the current OTP-C (Orion Trading Platform – Securities Market), orders are continuously executed in strict price and time priority: an order entered into the system at an earlier time must be executed in full before an order at the same price entered at a later time is executed",
         "detail": "2026-08-20 改用官方中英文对照页核实，取代此前未逐条摘引的'一般知识'表述。",
@@ -572,7 +573,6 @@
         "quote": "現時 OTP-C 以嚴格的價格及時間優先次序持續進行配對。較早時間輸入系統的買賣盤必須要完全執行，才可處理同等價格但較遲輸入的買賣盤。／Orders are continuously executed in strict price and time priority. An order entered into the system at an earlier time must be executed in full before an order at the same price entered at a later time is executed.",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null,
         "spec": null
       },
       "order_types": {
@@ -1021,6 +1021,7 @@
           "quote": null
         },
         "matching_principle": {
+          "enum": "price_time",
           "zh": "HKATS 為香港交易所旗下衍生產品市場的電子交易系統，買賣盤會即時按價格及時間的優先次序進行配對",
           "en": "HKATS, the trading system for HKEX's Derivatives Market, is an electronic system that automatically matches orders in real-time based on price/time priority",
           "sources": [
@@ -1033,7 +1034,6 @@
           "quote": "HKATS 為香港交易所旗下衍生產品市場的電子交易系統，買賣盤會即時按價格及時間的優先次序進行配對。",
           "confidence": "high",
           "verified": "2026-08-12",
-          "enum": null,
           "spec": null,
           "detail": null
         },

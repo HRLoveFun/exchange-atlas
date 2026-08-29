@@ -310,6 +310,7 @@ market_structure:
     confidence: high
 
   matching_principle:
+    enum: price_time
     zh: "价格优先、时间优先；市价申报优先于指值申报"
     en: "Price priority, then time priority; market orders take precedence over limit orders"
     sources:

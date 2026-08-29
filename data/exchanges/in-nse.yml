@@ -642,6 +642,7 @@ market_structure:
       detail: "本次抓取的官方页面（About Equity Derivatives、Pre-Open Session、Trading System、Market Timings）均未提及类似现货市场收盘集合竞价（CAS，15:40-16:00）的独立衍生品收盘机制；Market Timings 页「Equity Derivatives」区块只列 Normal Market Close 15:40 与 Trade Modification End 16:15，未见「Closing session」条目（对照现货 Equities 区块明确有该条目）。不排除存在但本次抓取范围内未找到专门说明页，如实留空，记入 OPEN-QUESTIONS。"
 
     matching_principle:
+      enum: price_time
       zh: "期货期权交易系统（Futures and Options Trading System）为全自动屏幕交易系统，订单按价格-时间优先顺序（先比价格，同价比时间）存入订单簿撮合；被动订单（先挂单）与主动订单（后到达并触发成交）区分，成交价格以被动订单价格为准"
       en: "The Futures and Options Trading System is a fully automated screen-based trading system; orders are stored and matched in price-time priority (best price first, then earliest time at that price); orders are classified as passive (resting) or active (newly arrived, triggering a match), and trades are always executed at the passive order's price"
       sources:

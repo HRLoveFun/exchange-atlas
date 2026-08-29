@@ -214,7 +214,18 @@
       "group_id": "nse-group",
       "region": "apac",
       "tier": "extended",
-      "trading_hours": null
+      "trading_hours": {
+        "iana_tz": "Asia/Kolkata",
+        "utc_offset_hours": 5.5,
+        "open_local": "09:00",
+        "close_local": "15:30",
+        "lunch_start_local": null,
+        "lunch_end_local": null,
+        "open_utc": 3.5,
+        "close_utc": 10.0,
+        "lunch_start_utc": null,
+        "lunch_end_utc": null
+      }
     },
     {
       "id": "jp-jpx",

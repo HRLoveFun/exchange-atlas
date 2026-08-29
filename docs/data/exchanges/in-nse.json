@@ -1081,6 +1081,7 @@
           "quote": null
         },
         "matching_principle": {
+          "enum": "price_time",
           "zh": "期货期权交易系统（Futures and Options Trading System）为全自动屏幕交易系统，订单按价格-时间优先顺序（先比价格，同价比时间）存入订单簿撮合；被动订单（先挂单）与主动订单（后到达并触发成交）区分，成交价格以被动订单价格为准",
           "en": "The Futures and Options Trading System is a fully automated screen-based trading system; orders are stored and matched in price-time priority (best price first, then earliest time at that price); orders are classified as passive (resting) or active (newly arrived, triggering a match), and trades are always executed at the passive order's price",
           "sources": [
@@ -1093,7 +1094,6 @@
           "quote": "The Futures and Options Trading System provides a fully automated trading environment for screen-based, floor-less trading on a nationwide basis and an online monitoring and surveillance mechanism. The system supports an order driven market and provides complete transparency of trading operations. / Orders are stored in price-time priority in various books in the following sequence: Best Price / Within Price, by time priority. / Orders are always matched at the passive order price.",
           "confidence": "high",
           "verified": "2026-08-14",
-          "enum": null,
           "spec": null,
           "detail": null
         },

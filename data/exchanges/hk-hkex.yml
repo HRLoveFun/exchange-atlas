@@ -322,6 +322,7 @@ market_structure:
     quote: "Closing Auction Session / 4:00 p.m. to a random closing between 4:08 p.m. and 4:10 p.m."
 
   matching_principle:
+    enum: price_time
     zh: "现时 OTP-C（证券市场交易平台）以严格的价格及时间优先次序持续进行配对：较早时间输入系统的买卖盘必须完全执行，才可处理同等价格但较迟输入的买卖盘"
     en: "Under the current OTP-C (Orion Trading Platform – Securities Market), orders are continuously executed in strict price and time priority: an order entered into the system at an earlier time must be executed in full before an order at the same price entered at a later time is executed"
     detail: "2026-08-20 改用官方中英文对照页核实，取代此前未逐条摘引的'一般知识'表述。"
@@ -538,6 +539,7 @@ market_structure:
       detail: "本次抓取的官方页面（衍生品市场交易机制总览、交易时段表）未提及类似证券市场收市集合竞价（CAS）的独立收市机制，仅确认各合约每日交易时段的收盘时刻（如下午4:30，即月合约最后交易日提前至下午4:00）；不排除存在但本次未找到专门说明页，如实留空，记入 OPEN-QUESTIONS。"
 
     matching_principle:
+      enum: price_time
       zh: "HKATS 為香港交易所旗下衍生產品市場的電子交易系統，買賣盤會即時按價格及時間的優先次序進行配對"
       en: "HKATS, the trading system for HKEX's Derivatives Market, is an electronic system that automatically matches orders in real-time based on price/time priority"
       sources:

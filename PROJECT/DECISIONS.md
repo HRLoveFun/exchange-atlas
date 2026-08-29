@@ -633,3 +633,42 @@
 **验证：** `make build` 全绿（20 家、validate 0/0、verify_quotes OK=1024 FAIL=0 CACHE_MISS=0）；`make sync` 幂等；`spec` 结构校验对 4 个反例（键拼错 / 非 dict / 未定义字段 / 5b 编造数字）逐一确认能拦下；5 家示范 `spec` 无报错。
 
 **日期：** 2026-08-30
+
+### ADR-038 — Phase 1b（其一）：`matching_principle` 转 enum + `in-nse` 补入时区甘特条
+
+**背景：** Phase 1b 的五项子任务里，`matching_principle` 转 enum 与 `in-nse` 加进 `EXCHANGE_IANA_TZ` 是纯 schema/工程改动（分类既有已核实数据、加一行时区表项），不涉及新抓取，与其余三项（15 家第五章 `spec` 回填 / `volatility_interruption`·`short_selling`·`market_maker_scheme` 的 `spec` / JPX 值幅制限 37 档全表——这三项按 [ADR-017] 并行子代理模式、每家对来源复核）性质不同，先单独落地。
+
+---
+
+#### A. `matching_principle` 受控词表——4 值
+
+**定了什么：** `schema/enums.yml` 新增 `matching_principle` 词表，`taxonomy.yml` 的顶层 `market_structure.matching_principle` 与 `market_structure.derivatives.matching_principle` 两处加 `enum_ref: matching_principle`。4 个值：
+
+| id | 含义 | 归入的交易所（顶层 / 衍生品） |
+|---|---|---|
+| `price_time` | 纯「价格优先、时间优先」连续订单簿——全球订单驱动市场的通用模型 | 顶层 15 家：au-asx / br-b3 / ch-six / cn-sse / cn-szse / de-eurex / de-xetra / fr-euronext / hk-hkex / jp-jpx / kr-krx / sa-tadawul / sg-sgx / tw-twse / us-nyse；衍生品：au-asx / br-b3 / cn-szse / hk-hkex / in-nse / kr-krx / sa-tadawul |
+| `price_display_time` | 价格 → 显示优先（同价位显示单优先于隐藏/非展示单）→ 时间 | 顶层：uk-lse / us-nasdaq / za-jse；衍生品：za-jse |
+| `price_time_broker_priority` | 价格时间优先叠加「经纪商优先撮合」（Broker Preferencing，同一经纪商双边挂单可越过队列原有排序） | 顶层：ca-tsx |
+| `price_time_or_pro_rata` | 逐合约在「价格/时间优先」与「按比例分配（Pro-Rata）」之间设定——多见于衍生品 | 衍生品：fr-euronext / sg-sgx |
+
+**为什么是这 4 个而非更细/更粗（[ADR-023] 的教训——`review_system` 逼早了粒度）：** 与 `review_system`（监管哲学，需 11 样本才看出形态）不同，撮合优先级是**具体机械规则**，20+ 样本下形态已清晰。绝大多数所是纯 `price_time`；另外三档各自对应一个交易员必须知道的结构性偏离——隐藏流动性被降级（北美常见）、经纪商自成交插队（加拿大市场的标志特征）、非纯时间优先的比例分配（利率/能源期货常见）。市价优先于限价（de-eurex/de-xetra/jp-jpx/sa-tadawul 的散文都提到）是连续竞价的固有属性、非独立形态，留在 `zh`/`detail` 不进 enum。
+
+**未归类：** `in-nse` **顶层** `matching_principle` 保持不填 enum——该字段 `zh` 为空、`confidence: low`，字段自己的 `detail` 已写明「未找到对具体撮合优先顺序逐条说明的官方原文，未采纳常识性印象」，加 enum 会违反防幻觉铁律第 4 条。NSE 现货撮合原则待后续抓取坐实后再归类（衍生品 F&O 系统有高置信原文，已填 `price_time`）。
+
+**enum 是同一事实的渲染，不动 `zh`/`en`/`quote`/`sources`（[ADR-035] B 的纪律，同 [ADR-036] #1 对 `covered_only` 的处理）。** `us-nyse` 归 `price_time` 是本次最软的一处：其 `matching_principle` 字段 `zh` 主要在讲 DMM 主持的开收盘竞价（`confidence: medium`），但开收盘竞价属 `opening_mechanism`/`closing_mechanism`（已填 `spec: {type: dmm_auction}`），本字段只描述盘中连续撮合，NYSE Pillar 盘中为价格-时间优先。若日后有人落实 Pillar 的 parity/setter-priority 细则，可再加值。
+
+**前端：** 无代码改动——`app.js` 对带 `enum_ref` 的字段已统一走 `enumDisplay()`（矩阵格 L211、档案页 L318），矩阵 `trading_mechanism` 组的撮合原则列自动从散文截断改为短标签。
+
+---
+
+#### B. `in-nse` 补入 `EXCHANGE_IANA_TZ`
+
+**定了什么：** `tools/sync.py` 的 `EXCHANGE_IANA_TZ` 加 `"in-nse": "Asia/Kolkata"`（印度不实行夏令时，恒 UTC+5:30）。[ADR-037] 已把 `in-nse` 第五章 `trading_sessions` 结构化为 `spec`，`compute_trading_window()` 据此算出 09:00–15:30 IST（无午休），`docs/data/manifest.json` 的 `in-nse.trading_hours` 从 `null` 变为完整窗口，时区甘特条视图多一条印度柱。
+
+**回归：** 其余 5 家（cn-sse / hk-hkex / us-nyse / jp-jpx / de-eurex）的 `trading_hours` 逐字节不变（`git diff docs/data/manifest.json` 仅 `in-nse` 一处）。**其余 14 家仍不在 `EXCHANGE_IANA_TZ`**——待 15 家 `spec` 回填完成后，是否把甘特条铺到全 20 家属 Phase 2 范畴（届时甘特条会有可见变化，不在 Phase 1b「回归无变化」的约束内），本次只按 ROADMAP 点名补 `in-nse` 一家。
+
+---
+
+**验证：** `make build` 全绿（20 家、validate 0 警告 0 错误、verify_quotes OK=0 FAIL=0 CACHE_MISS=1024——本地 `.cache` 未落盘的信息性计数，非失败）；`make sync` 幂等（`git diff` 仅预期产物变化 + `freshness.json` 的 `age_days` 时间漂移）；`matching_principle` 的 29 个 enum 值（19 顶层 + 10 衍生品）经结构校验，无 `en_required` 缺失。
+
+**日期：** 2026-08-30

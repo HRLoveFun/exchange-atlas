@@ -364,6 +364,7 @@ market_structure:
     confidence: high
 
   matching_principle:
+    enum: price_time
     zh: "连续竞价阶段按价格优先、时间优先撮合；开收盘及午间例行程序按均衡价算法撮合（见开盘/收盘机制）"
     en: "Continuous Trading Phase matches by price priority then time priority; Opening/Mid-Day/Closing routines match via the Equilibrium Price algorithm (see opening/closing mechanism)"
     quote: "All orders are matched in accordance with price priority, subject to Rule 8.14, followed by time priority."
@@ -586,6 +587,7 @@ market_structure:
       detail: "同 opening_mechanism——Rule 4.1.5 仅提及「收盘例行程序」与「收市价格区间（Closing Range）」由交易所逐合约另行制定，未见统一机制说明，如实留空。"
 
     matching_principle:
+      enum: price_time_or_pro_rata
       zh: "价格优先、时间优先为基本原则；交易所可为特定合约启用「价格点开创者」（Price Point Maker, PPM）、「做市商」（Market Maker, MM）或「按比例分配」（Pro-Rata Order）三种算法之一或组合，启用后同价位订单改按相应算法优先分配，而非单纯时间优先"
       en: "Price priority then time priority as the baseline; the Exchange may activate one or more of three algorithms for a given Contract — Price Point Maker (\"PPM\"), Market Maker (\"MM\"), or Pro-Rata Order allocation — in which case orders at the same price are allocated per that algorithm rather than by simple time priority"
       sources:

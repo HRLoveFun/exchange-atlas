@@ -563,6 +563,7 @@
         "detail": null
       },
       "matching_principle": {
+        "enum": "price_time_broker_priority",
         "zh": "电子连续限价订单簿（CLOB）撮合；同一经纪商的双方挂单可触发「经纪商优先撮合」（Broker Preferencing），不受订单簿原有排序位置限制，Jitney单与匿名单不适用此优先机制",
         "en": "Electronic Central Limit Order Book (CLOB) matching; Broker Preferencing lets an incoming attributed order match another attributed order from the same broker regardless of order-book position, though Jitney and Anonymous orders are excluded",
         "detail": "未找到对价格/时间优先顺序逐条列明的官方总纲式条文，本条基于Order Types页面的订单类型说明归纳。",
@@ -576,7 +577,6 @@
         "quote": "Broker Preferencing An incoming attributed order from a broker will automatically be matched with another attributed order from the same broker in the same trading venue, regardless of its position in the order book. Jitney and Anonymous orders are excluded from broker preferencing opportunities.",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null,
         "spec": null
       },
       "order_types": {

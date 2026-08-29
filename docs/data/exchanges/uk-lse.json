@@ -524,6 +524,7 @@
         "detail": null
       },
       "matching_principle": {
+        "enum": "price_display_time",
         "zh": "价格优先原则（Millennium Exchange以价格优先为基础运作）；同价位内展示订单优先于非展示订单（冰山订单非展示部分＞完全隐藏订单＞中间价挂钩订单），除冰山订单非展示部分外，各类别内部再按提交时间优先排序",
         "en": "Price priority (Millennium Exchange operates on a price priority basis); at the same price, displayed order portions take precedence over non-displayed portions (iceberg non-display > fully hidden orders > mid-price pegged orders), each category then time-prioritised except for the non-displayed iceberg portion",
         "sources": [
@@ -536,7 +537,6 @@
         "quote": "Millennium Exchange operates on a price priority basis. Displayed parts of orders take precedence over non-displayed parts at any price point. With non-display portions of icebergs taking precedence over fully Hidden Orders, which in turn take precedence over Mid-Price Pegged Orders.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null,
         "spec": null,
         "detail": null
       },
