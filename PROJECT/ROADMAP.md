@@ -2,7 +2,7 @@
 
 进度状态放这里；「为什么这么排」去 `DECISIONS.md`，这里不重复。
 
-## 当前阶段：v1.0 已完成（20 家），v1.1 Category B 数据深耕 Batch 1/3、Batch 2/3、Batch 3/3 均已完成（2026-08-27）
+## 当前阶段：v1.1 已收口（20 家 × 11 章，2026-08-27）。下一步方向已校准为 **v2.0 高度可视化转向**（2026-08-29，见下方「v2.0 计划」与 [ADR-033] 起）——主视图从对比矩阵改为单市场「交易日平面图」，新增结构化 `spec` 层。已完成前置加固 A1（防幻觉机器校验补完，[ADR-033]）。
 
 ## 阶段路线
 
@@ -13,6 +13,7 @@
 - [x] **v0.3 前端完善** — 修复语言模式切换的遗留 bug：交易所名称（矩阵行/档案页标题/浮层）、矩阵行地区标签、健康度视图字段名此前都不随模式切换，只是英文模式下用 `en_required` 字段本身的回退掩盖了部分（见 [ADR-013] 的回退设计），这几处是取值路径完全绕过了 langMode 判断；格子浮层加双语标题、章节面包屑、加载态；健康度视图加交易所/类型筛选并支持点行跳出处；矩阵加标杆批次筛选；新增时区甘特条视图（`#view=timezone`），推导方式见 `PROJECT/DECISIONS.md` [ADR-015]
 - [x] **v1.0 横向铺开** — 按 Tier 扩到 20+ 家；Wave 1（8 家）+ Wave 2（7 家）均已完成，加上 v0.1/v0.2 五家标杆共 20 家；计划任务/工程设计/验收标准/进度见下方「v1.0 计划」一节
 - [x] **前端阅读性优化**（v1.0 收尾后）— 矩阵工具栏去掉「标杆批次 Tier」筛选框与搜索框（v0.3 加的两个交互，20 家规模下地区筛选已够用，搜索是冗余项；`v0.3` 那条历史记录不改，此处记录后续变更）；时区甘特条午休时段从"柱状条空白+右侧括号文字"改为独立蓝色色块；正文字号/行高、矩阵斑马纹与悬停高亮、档案页字段卡片间距与长文本限宽等一轮可读性调整，见 `PROJECT/DECISIONS.md` [ADR-025]
+- [x] **v2.0 前置加固 A1**（2026-08-29）— `tools/validate.py` 补完防幻觉铁律的机器强制：第三方来源 `confidence` 封顶、`NUMBER_RE` 收紧杜绝垃圾 token、路径引用校验收窄到仓库内路径、结构化 `spec` 值的逐字反查（Phase 1 前 no-op）。0 存量违规，均为 preventive；`OPEN-QUESTIONS` 框架性问题 #6/#35 已解决删除、#12 更新为"此路不通"路标。见 `PROJECT/DECISIONS.md` [ADR-033]
 
 ## 交易所填充进度
 
@@ -162,3 +163,15 @@
 - **Repo 级 verbatim-quote 反查（2026-08-27，接续 Batch 2）**：用脚本对全库 20 家共 ~671 个 `confidence: high` 字段的 `quote` 逐一比对落盘 `.cache/<id>/` 原文与现场抓取来源，先发现 48 处 quote 与来源不符（多为缺 `sources` 或 quote 为改写/编造），分 11 个交易所并行子代理修复——其中确属编造/改写并已修正的代表：`fr-euronext` `clearing.derivatives.delivery_method`（"EDSP=CTD/CF" 公式原文无）、`ch-six` `clearing.csd_name`（quote 指非 CSD 内容）、`ca-tsx` 两 participants 字段（引 OSC NI 31-103 着陆页无规则正文）、`hk-hkex` `clearing.ccp_name`（quote 指 CSDC 非 HKSCC）、`tw-twse` `market_structure.closing_mechanism`、`cn-sse` 若干（数字跨表格行无法成连续 verbatim）。修复后重查，可证伪的失配降至 0；残留"未命中"均为 JS 渲染页（curl 拿不到正文）或来源页未落盘，属检查器局限非数据缺陷。教训：verify 脚本必须做 HTML 标签剥离+PDF 文本提取，否则表格单元/标签会制造大量假阴性。该反查已固化为 `tools/verify_quotes.py`：离线只比对 `.cache/<id>/_manifest.json` 中实际落盘的引用来源（没抓过的来源记为 CACHE_MISS 不误判），`--live` 额外现场抓取（JS 页/被拦记为 LIVE_ERR）；已接入 `make check`（仅 FAIL 才非零退出），并加 `make verify-quotes` / `make verify-quotes-live` 两个独立命令。
 - **落盘全部引用来源 + 复核（2026-08-27，接续上条）**：新增 `tools/fetch_sources.py`（收割 yml 里所有 `sources` URL 落盘 `.cache`，按内容类型定扩展名、为 PDF/Office 生成 `.txt` 伴随文本、sec.gov 用 Fair Access UA），批量抓得 632 个来源。重跑反查后 OK 由 27 升到 929、FAIL 由 44 暴露并归零——其中确属"quote 非 verbatim / 引用错页 / 抓到 404/JS 壳/图片 PDF"的 34 处，分 11 个交易所并行子代理修复（重引正确来源并改写 verbatim quote，或降级 `medium` 保留 sources）。最终 `make build` 全绿：validate 0/0、verify_quotes OK=929 FAIL=0。残 61 个 CACHE_MISS 为引用来源未落盘或错误页，按 CLAUDE.md §四 留人工抽检。
 - **Batch 3/3 收尾（2026-08-27，v1.1 全部完成）**：① `SOURCES.md` 末尾「Batch 2 补充登记」堆块已按交易所 id 去重并入各 `### <exchange>` 小节；② Batch B 并行执行教训回写 `.claude/skills/add-exchange/SKILL.md`（verbatim 反查步骤、不可核验即降级 `medium` 的规则）；③ 每家抽 10 个「全部引用来源已落盘」的 `high` 字段做 quote-vs-来源 核验，20 家共 200/200 通过（100%，≥95% 阈值），报告见 `PROJECT/SPOT-CHECK-v1.1.md`；④ `OPEN-QUESTIONS.md` 与 glossary 经 `make sync` 重新生成；⑤ 上述 verbatim-quote 机器化反查 + 来源全量落盘的决策记入 `PROJECT/DECISIONS.md` [ADR-032]。`make build` 全绿（validate 0/0、verify_quotes OK=929 FAIL=0）。v1.1 至此收口。
+
+## v2.0 计划：高度可视化转向
+
+方向定案见 [ADR-033] 起（`spec` 层规则、ADR-005 修订、零构建确认、诚实渲染、非现货降级等 ADR 由 Phase 0 落）。目标：主视图从对比矩阵改为单市场「交易日平面图」（x=日内时间/分钟，y=涨跌幅），让交易员首次接触一个市场即 30 秒看懂其微观结构。本节只记进度，工程设计与取舍见 DECISIONS。
+
+- [x] **立即执行 · A1 防幻觉机器校验补完**（2026-08-29，[ADR-033]）— 见上方「阶段路线」。
+- [ ] **立即执行 · A2 v1.1 尾巴收口** — 英文回填 `OPEN-QUESTIONS` #45 剩余（`sa-tadawul`/`sg-sgx`/`br-b3` 约 13 字段）+ 61 个 `verify_quotes` CACHE_MISS 降零或注明。
+- [ ] **Phase 0 · 范式与数据模型定案** — 修订 ADR-005；新增 `spec` 层 / 零构建 / 诚实渲染 / 非现货降级等 ADR；搭车裁定 `OPEN-QUESTIONS` 框架性问题 #38/#39 等。
+- [ ] **Phase 1 · market_structure 结构化** — `taxonomy.yml` 加第五章 `spec` 子结构，`matching_principle` 转 enum，`validate.py` 5b 接 `spec`，20 家现货所回填 `spec` 并对来源复核；`sync.py` `compute_trading_window()` 改吃 `spec`。
+- [ ] **Phase 2 · 交易日平面图** — 新默认首屏（手写 SVG），矩阵移到 `#view=matrix`。交付后停下评估「30 秒看懂」是否达成。
+- [ ] **Phase 3 · 其余章节可视化** — 成本瀑布 → 交割管线 → …按交易员价值迭代；B 组（`fx_risk_note`/`kr-krx` low 簇）在第十一/十二章就地清。
+- [ ] **Phase 4 · Wave 3 广度扩张（搁置）** — Phase 1–2 稳定后解冻，候选见 [ADR-016] 思路 + 东南亚/中东/非洲/拉美补白。
