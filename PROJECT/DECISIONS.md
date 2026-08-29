@@ -262,7 +262,7 @@
 
 **定了什么：**
 
-1. **`validate.py` 新增机器校验**：`validate_data()` 逐字段循环里加一条——`fdef.get("en_required")` 为真但 `env.get("en")` 为空即 `err()`。这类"taxonomy 标记了但从未被校验"的漏洞与 `OPEN-QUESTIONS.md` 框架性问题第6条（"第三方来源 confidence 上限 medium"同样长期未被机器强制）是同一类问题，本条只解决 `en_required` 这一处，第6条仍待办。
+1. **`validate.py` 新增机器校验**：`validate_data()` 逐字段循环里加一条——`fdef.get("en_required")` 为真但 `env.get("en")` 为空即 `err()`。这类"taxonomy 标记了但从未被校验"的漏洞与 `OPEN-QUESTIONS.md` 框架性问题第6条（"第三方来源 confidence 上限 medium"同样长期未被机器强制）是同一类问题，本条只解决 `en_required` 这一处，第6条仍待办。（第6条已由 [ADR-033] 解决。）
 2. **9 处违规字段的补齐口径，按用户明确指示定为**：核查交易所原语言是中文还是英文，优先用交易所官方原语言文本（中文优先、英文次之、其他语言再次之）；若交易所自身提供中英双语官方内容，直接采用官方译文，不自己翻译；只有查无官方对应语言版本时才由已核实的另一语言内容转译。实际执行：`cn-sse` 的 `core_laws`/`circuit_breaker`/`volatility_interruption`/`delisting_conditions` 四处 找到 SSE 官方英文版交易规则原文直接引用（`core_laws`/`circuit_breaker` 因此升级为 `confidence: high`）；`settlement_cycle`（"T+1"）内容本身语言无关，直接复用；`tw-twse.circuit_breaker` 同样以 TWSE 官方英文页交叉核实结论；`hk-hkex` 三处，`matching_principle`/`order_types` 见下条，`clearing.settlement_cycle`（"T+2"）与 `cn-sse.settlement_cycle` 同理，属语言无关的记号，直接复用无需另查来源。
 3. **`hk-hkex.market_structure.matching_principle`/`order_types` 补齐过程中顺带查出一处实质性数据错误，不只是补翻译**：这两个字段此前内容一个未摘引任何原文，另一个经核实是把**衍生品市场（HKATS 期货期权交易系统）的撮合规则误当成了证券现货市场规则**——`SOURCES.md` 此前只登记了同名的"衍生品市场"交易机制页面 URL，未意识到证券市场有独立的同名页面。本次定位到港交所证券市场自己的官方交易机制页（`sc_lang=en`/`sc_lang=zh-hk` 双语对照），补登 `SOURCES.md`，重新核实两个字段并升级为 `confidence: high`。**教训**：字段内容与 `SOURCES.md` 登记的 URL 是否真的对应同一业务线，不能只看页面标题相似就当作已核实。
 4. **不处理的部分（用户明确决定"先只报告规模，不处理"）**：`en_required` 之外，还有 114 个字段是设计上不要求双语（数字/日期/描述性文本）但英文模式仍回退显示中文，集中在 `cn-sse`/`tw-twse`/`hk-hkex`/`cn-szse` 四家中文源交易所（约占94%）。规模与候选处理方向记入 `OPEN-QUESTIONS.md` 第45条，本条不展开、不预判处理方式。
@@ -436,3 +436,27 @@
 **验证：** `make build` 全绿（validate 0/0、verify_quotes OK=929 FAIL=0）；`PROJECT/SPOT-CHECK-v1.1.md` 记录 20 家各 10 字段抽检 100% 通过；残 61 个 `CACHE_MISS` 为引用来源未落盘或错误页，按 CLAUDE.md §四 留人工抽检。
 
 **日期：** 2026-08-27
+
+### ADR-033 — A1：防幻觉机器校验补完（第三方来源封顶 + 数值反查收紧 + 路径引用收窄 + spec 反查预埋）
+
+**背景：** v2.0 可视化转向前的加固任务（见 `ROADMAP.md`「v2.0 计划」/ 记忆 `v2-visualization-pivot`）。CLAUDE.md 二节的防幻觉铁律里，verbatim-quote 已由 [ADR-032] 机器化，但还有三条只靠自觉：第三方来源 `confidence` 上限 medium（`OPEN-QUESTIONS.md` 框架性问题 #6）、数字反查可被绕过（#12）、路径引用校验会误报站外路径（#35）。Phase 1 要给 `market_structure` 加结构化 `spec` 层并用并行子代理回填，这几条届时是硬拦截，必须先补。
+
+**定了什么（`tools/validate.py` 四项改动，均 0 存量违规——preventive）：**
+
+1. **第三方来源封顶（#6）**：新增 `SOURCES_TAG_RE` 解析 `PROJECT/SOURCES.md` 每条域名行的「官方/监管/第三方」标签（标签后可跟括注，取首词判定），`main()` 构建 `domain → {primary|third_party}` 映射。`validate_data()` 里：某 `confidence: high` 字段若**全部**来源域名在 SOURCES.md 都标为「第三方」→ `err()`。取宽松并集——有任意一个官方/监管/未标签来源即放行（`mgzq.com` + `english.sse.com.cn` 这种混合仍可 high）。标签格式不符的域名按「非第三方」处理，不制造假报错。
+
+2. **数值反查收紧但不改判据语义（#12）**：`NUMBER_RE` 从 `\d[\d,]*\.?\d*` 收紧为 `\d+(?:,\d{3})*(?:\.\d+)?`（严格千分位分组），杜绝 `45,`、`15:30,15:30`、`6.385/76，1976` 被切成 `45,197`/`3015`/`761976` 这类垃圾 token 混进数字集合、在 `quote` 里制造假命中。**散文 `zh`/`en` 仍用「至少一个数字命中」判据**——实测把它改成「全部命中」在真实数据上产生 223 处假阳性（12/24 小时制改写、中文数字、含数字的产品名如 MT30/Nifty 50、小数点与千分位习惯、多来源综合的叙述性字段），收窄到「量化章节 + 短 zh + 无多段引用」后仍有 14 处、几乎全是时间记法与名称噪声——**「全部命中」对散文是死路，不再尝试**。
+
+3. **结构化 spec 值按「全部命中」严判（新增 5b，#12 的真正出口）**：`confidence: high` 且带 `spec` 子块的字段，`spec` 里每个数值（递归收集 int/float/纯数字串叶子）都必须能在 `quote` 里找到，缺一个即 `err()`。`spec` 是精确定型值（`limit_pct: 10`、`threshold_pct: 7`），没有散文那些噪声，可以严。**Phase 1 给 `market_structure` 加 `spec` 后这条才有对象，在那之前 `spec_number_strings()` 返回空、是 no-op。**
+
+4. **路径引用收窄（#35）**：`validate_path_references()` 只对「首段是仓库顶层条目（`ROOT.iterdir()` 的名字）且不含 `..`」的反引号 token 校验。站内相对路径片段（`res/pc/js/func.js`）、绝对路径示例（`/tmp/x.html`）、别的仓库/网站的路径不再是校验对象——此前会误报，靠「文档里别用行内反引号包非仓库路径」的约定绕，现在从校验侧根治。
+
+**复用工具**：抽出 `numbers_in(text)` / `numbers_missing_from_quote(value_texts, quote)` / `spec_number_strings(spec)` 三个纯函数，散文反查与 `spec` 反查共用同一套数字提取逻辑（对应 A1 提案的「④ spec 反查框架预埋」）。
+
+**为什么不为 #12 的散文场景发明豁免机制：** 提案原设想「改全部命中 + `detail` 标注豁免」，实测豁免面是 223 → 即使全部标注，校验也退化成「几乎全部字段都豁免」，没有信号。散文里「显示值是否忠实呈现 quote」本质是语义问题，数字子串匹配逼近得很差；这层交给 [ADR-032] 的 verbatim-quote 反查（quote ⊆ 来源）+ 未来 `spec` 层（typed 值 ⊆ quote）两道关卡，散文数字检查维持「挡整条编造」的下限即可。
+
+**OPEN-QUESTIONS 处置：** #6、#35 已解决 → 按文件头规则删除，结论转本条。#12 **不删除**——散文场景的绕过空间仍在（本条只关掉垃圾 token 通道、把严判移到 `spec`），条目更新为记录「全部命中已实测否决、真正出口是 `spec` 层 + verbatim 反查」，避免下一个会话重走这条死路。[ADR-024] 里「第6条仍待办」一句加了已解决指向。
+
+**验证：** `make check` 全绿（20 家，0/0）；四项校验各构造一个反例（`matching_principle` 引 mgzq.com 标 high / `main_board.zh` 全编造数字 / `main_board.spec.limit_pct: 77` / `.md` 里写坏仓库路径）确认能拦下，站内路径 `res/pc/js/func.js`、绝对路径 `/tmp/x.html`、真实路径 `tools/validate.py` 确认放行；`spec` 正例（`limit_pct: 10`，quote 含「10%」）放行。`docs/data/freshness.json` 的日期漂移（`age_days` 按当天重算）是既有现象、与本条无关，未纳入本 PR。
+
+**日期：** 2026-08-29

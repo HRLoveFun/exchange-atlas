@@ -11,12 +11,17 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
   2. exchange_identity 必填字段齐全
   3. 枚举合法：data 里的 enum 值、taxonomy 里的 enum_ref 都必须在 enums.yml 里
   4. volatile/moderate 字段必须有 sources
-  5. confidence: high 必须有 quote，且 zh/en 里的数字要能在 quote 里找到
+  5. confidence: high 必须有 quote，且 zh/en 里的数字要能在 quote 里找到（散文按"至少一个
+     数字命中"判——挡整条编造；结构化 spec 值按"每个都要命中"判，见第 5b 条）
+  5b. confidence: high 且带 spec 子块的字段，spec 里的每个数值都必须能在 quote 里找到
+     （spec 是精确定型值，没有 12/24 小时改写、中文数字、含数字的产品名这类噪声，可严判）
   6. verified 不得是未来日期
-  7. 来源域名已在 SOURCES.md 登记
+  7. 来源域名已在 SOURCES.md 登记；且若某 confidence: high 字段的全部来源域名在
+     SOURCES.md 都标为「第三方」，直接 fail（CLAUDE.md 二第3条：第三方来源 confidence 上限 medium）
   8. 生成块新鲜度：五处 GENERATED 块内容 == 用 sync.py 同一批函数重新算出来的内容
   9. docs/data/*.json 新鲜度：磁盘内容 == 重新生成的内容（忘了跑 make sync 时报错）
-  10. 路径引用：文档里形如反引号包住的仓库内路径必须存在
+  10. 路径引用：文档里反引号包住、首段是仓库顶层条目的路径必须存在（非仓库路径片段
+      如站内相对路径 res/pc/js/x.js 或绝对路径 /tmp/x.html 不属校验对象）
   11. ADR 锚点：DECISIONS.md 里的 ADR 编号不重复；引用处能找到对应编号
 """
 import datetime
@@ -39,11 +44,19 @@ DOCS_DATA = sync.DOCS_DATA
 PROJECT_DIR = sync.PROJECT_DIR
 TODAY = sync.TODAY
 
-NUMBER_RE = re.compile(r"\d[\d,]*\.?\d*")
+# 千分位分组 + 可选小数——刻意收紧，避免把 "45,"、"15:30,15:30"、"6.385/76，1976"
+# 这类切成 "45,197"、"3015"、"761976" 之类的垃圾 token 混进数字集合（那会让
+# quote 反查产生假命中，反而削弱防幻觉能力）。
+NUMBER_RE = re.compile(r"\d+(?:,\d{3})*(?:\.\d+)?")
 PATH_TOKEN_RE = re.compile(r"`([A-Za-z0-9_.\-/]+(?:/[A-Za-z0-9_.\-]+)+)`")
 ADR_DEF_RE = re.compile(r"^### (ADR-\d{3})\b", re.M)
 ADR_REF_RE = re.compile(r"\[?(ADR-\d{3})\]?")
 SOURCES_DOMAIN_RE = re.compile(r"^-\s+`([a-z0-9.\-]+\.[a-z]{2,})`", re.M)
+# 域名行含「官方/监管/第三方」标签的形式：- `domain`（可选括注） | 标签 | 语言 | ...
+# 部分"补充登记"行只有域名没有后续管道分隔，靠上面的 SOURCES_DOMAIN_RE 收录、
+# 这条匹配不到——不影响：没标签的域名按"非第三方"处理（宽松），不会误报。
+SOURCES_TAG_RE = re.compile(
+    r"^-\s+`([a-z0-9.\-]+\.[a-z]{2,})`(?:（[^）]*）)?\s*\|\s*([^|]+?)\s*\|", re.M)
 
 errors = []
 warnings = []
@@ -57,9 +70,68 @@ def warn(msg):
     warnings.append(msg)
 
 
+# ── 数值反查复用工具（CLAUDE.md 二.5）─────────────────────────
+# A1 (2026-08) 抽出来给两处共用：散文 zh/en 与结构化 spec 值。sync/verify_quotes
+# 各有自己的文本规范化，这里只管"从一段文本里抠出可比对的数字集合"。
+
+def numbers_in(text):
+    """文本里 ≥2 位有效数字的集合（去千分位逗号后比较）。个位数（T+0/T+1 这类
+    受控词表记号）不计——法规原文几乎不会照抄这种写法，拿它反查只会制造噪声。"""
+    out = set()
+    for m in NUMBER_RE.findall(str(text if text is not None else "")):
+        core = m.replace(",", "")
+        if len(core.replace(".", "")) >= 2:
+            out.add(core)
+    return out
+
+
+def numbers_missing_from_quote(value_texts, quote):
+    """value_texts（可迭代的字符串）里出现、但 quote 里找不到的数字集合，
+    以及全部数字集合。调用方按场景决定"一个都没命中才报错"还是"缺一个就报错"。"""
+    q = str(quote or "").replace(",", "")
+    nums = set()
+    for t in value_texts:
+        nums |= numbers_in(t)
+    missing = {n for n in nums if n not in q}
+    return nums, missing
+
+
+def spec_number_strings(spec):
+    """递归收集 spec 子块里所有数值型叶子（int/float/纯数字串），转成字符串集合。
+    Phase 1 给 market_structure 加 spec 后这条校验才有对象；在那之前是 no-op。"""
+    out = []
+
+    def walk(v):
+        if isinstance(v, bool):
+            return
+        if isinstance(v, (int, float)):
+            out.append(repr(v) if isinstance(v, float) else str(v))
+        elif isinstance(v, str):
+            if re.fullmatch(r"-?\d+(?:\.\d+)?%?", v.strip()):
+                out.append(v.strip().rstrip("%"))
+        elif isinstance(v, dict):
+            for x in v.values():
+                walk(x)
+        elif isinstance(v, (list, tuple)):
+            for x in v:
+                walk(x)
+
+    walk(spec)
+    return out
+
+
+def source_domain_classes(domain, domain_tags):
+    """domain 在 SOURCES.md 的标签分类集合：{'primary'} / {'third_party'} / 混合 / 空。
+    子域名沿用父域名登记（与"来源域名已登记"校验一致）。"""
+    for d, classes in domain_tags.items():
+        if domain == d or domain.endswith("." + d):
+            return classes
+    return set()
+
+
 # ── 1-7：数据层校验 ──────────────────────────────────────────
 
-def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered_domains):
+def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered_domains, domain_tags):
     schema = sync.build_json_schema(taxonomy)
     enum_ids = {name: {v["id"] for v in table.get("values", [])} for name, table in enums.items()}
 
@@ -138,15 +210,41 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                     if not env.get("quote"):
                         err(f"{loc}: confidence: high 但缺 quote（见 CLAUDE.md 二 第5条）")
                     else:
-                        # 只查 2 位数以上的数字：T+0/T+1 这类记号里的个位数是受控词表
-                        # （enum_ref）记号，不是原文会照抄的具体数值，法规原文几乎从不会
-                        # 写"T+1"这种写法，拿它反查 quote 只会制造噪音而非抓真实错漏。
-                        # zh/en 两边都查——不只是 source_lang 声明的那一边，顺带校验翻译
-                        # 有没有把数字翻丢，不需要为哪边是源语言额外分支判断。
-                        raw_nums = set(NUMBER_RE.findall(env.get("zh") or "")) | set(NUMBER_RE.findall(str(env.get("en") or "")))
-                        nums = {n for n in raw_nums if len(n.replace(",", "").replace(".", "")) >= 2}
-                        if nums and not any(n in env["quote"] for n in nums):
+                        # 散文 zh/en：只要求"至少一个 ≥2 位数字在 quote 里能找到"。
+                        # 挡的是"整条数值都与原文对不上"（编造/张冠李戴）。改成"每个数字都
+                        # 要命中"实测在真实数据上会产生 200+ 假阳性——12/24 小时制改写、
+                        # 中文数字、含数字的产品名（MT30、Nifty 50）、小数点/千分位习惯、
+                        # 多来源综合的叙述性字段都会中招（见 OPEN-QUESTIONS #12）。真正
+                        # 精确的数值反查放在 spec 子块（下方 5b），那里没有这些噪声。
+                        nums, missing = numbers_missing_from_quote(
+                            [env.get("zh"), env.get("en")], env["quote"])
+                        if nums and missing == nums:
                             err(f"{loc}: zh/en 里的数字 {sorted(nums)} 在 quote 里一个都找不到——数值可能与原文对不上")
+
+                        # 5b：结构化 spec 值按"每个都要命中"严判。spec 是精确定型值
+                        # （limit_pct: 10、threshold_pct: 7 …），不含时间改写/中文数字/
+                        # 含数字的名称这类噪声，可以严。Phase 1 给 market_structure 加
+                        # spec 后这条才有对象，在那之前 spec_number_strings() 返回空。
+                        if env.get("spec") is not None:
+                            spec_nums = spec_number_strings(env["spec"])
+                            _, spec_missing = numbers_missing_from_quote(spec_nums, env["quote"])
+                            if spec_missing:
+                                err(f"{loc}: spec 里的数值 {sorted(spec_missing)} 在 quote 里找不到"
+                                    f"——结构化值必须逐字有原文支撑（CLAUDE.md 二.5）")
+
+                    # 第三方来源封顶：CLAUDE.md 二第3条——只有直接读到官方原始文本才能标
+                    # high。若某 high 字段的"每个"来源域名在 SOURCES.md 都标为「第三方」，
+                    # 就是违规（有一个官方/监管/未标签来源即放行，宽松取并集）。
+                    src_domains = [
+                        urlparse(s["url"]).netloc.lower()
+                        for s in (env.get("sources") or [])
+                        if isinstance(s, dict) and s.get("url")
+                    ]
+                    if src_domains:
+                        per = [source_domain_classes(d, domain_tags) for d in src_domains]
+                        if all(c == {"third_party"} for c in per):
+                            err(f"{loc}: confidence: high 但全部来源域名在 SOURCES.md 标为「第三方」"
+                                f"（CLAUDE.md 二第3条：第三方来源 confidence 上限为 medium）")
 
                 # verified 不得是未来日期
                 verified = env.get("verified")
@@ -239,12 +337,20 @@ def validate_path_references():
     skip_dirs = {".git", ".cache", "node_modules", "worktrees"}
     md_files = [p for p in ROOT.rglob("*.md") if not any(part in skip_dirs for part in p.parts)]
     known_ext = (".yml", ".yaml", ".py", ".json", ".md", ".html", ".js", ".css", ".txt")
+    # 只把"首段是仓库顶层条目"的 token 当作仓库内路径校验。反引号里以已知扩展名结尾的
+    # 字符串还有别的来源：站内相对路径片段（res/pc/js/func.js）、别的网站/仓库的路径、
+    # 绝对路径示例（/tmp/x.html）——这些不是本校验的对象，此前会被误报（见 OPEN-QUESTIONS
+    # 已删除的 #35 与 ADR-029 顺带修复）。
+    top_level = {p.name for p in ROOT.iterdir()}
     for md in md_files:
         text = md.read_text(encoding="utf-8")
         for token in PATH_TOKEN_RE.findall(text):
             if token.startswith(("http:", "https:")) or " " in token:
                 continue
             if not (token.endswith(known_ext) or token.endswith("/")):
+                continue
+            segs = [s for s in token.rstrip("/").split("/") if s]
+            if not segs or ".." in segs or segs[0] not in top_level:
                 continue
             candidate = ROOT / token.rstrip("/")
             if not candidate.exists():
@@ -280,7 +386,20 @@ def main():
     sources_text = (PROJECT_DIR / "SOURCES.md").read_text(encoding="utf-8") if (PROJECT_DIR / "SOURCES.md").exists() else ""
     registered_domains = set(SOURCES_DOMAIN_RE.findall(sources_text))
 
-    validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered_domains)
+    # domain -> {'primary'} / {'third_party'} / 混合。标签形如「官方」「监管」「第三方」，
+    # 后面可跟括注（「官方（清算机构）」「第三方（官方媒体）」等），取首词判定。
+    domain_tags = {}
+    for dom, tag in SOURCES_TAG_RE.findall(sources_text):
+        tag = tag.strip()
+        if tag.startswith("第三方"):
+            cls = "third_party"
+        elif tag.startswith(("官方", "监管")):
+            cls = "primary"
+        else:
+            cls = "primary"  # 标签格式不符时按宽松处理，不制造假的第三方封顶报错
+        domain_tags.setdefault(dom, set()).add(cls)
+
+    validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered_domains, domain_tags)
     validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchanges_expanded)
     validate_docs_data_fresh(taxonomy, glossary, enums, exchanges_expanded)
     validate_path_references()
