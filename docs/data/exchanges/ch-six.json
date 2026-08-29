@@ -1278,24 +1278,25 @@
         ],
         "quote": "SIX x-clear is licensed by the Swiss Financial Market Supervisory Authority (FINMA) as a central counterparty according to the Swiss Financial Market Infrastructure Act (FMIA).",
         "confidence": "high",
-        "csd_name": {
-          "zh": "SIX SIS AG",
-          "en": "SIX SIS AG",
-          "detail": "SIX SIS同时承担瑞士本国中央证券存管机构（CSD）与国际中央证券存管机构（ICSD）职能，运营SECOM实时结算系统；非瑞郎证券可另经Euroclear Bank / Clearstream Luxembourg结算。",
-          "sources": [
-            {
-              "title": "About SIX SIS AG",
-              "url": "https://www.six-group.com/en/products-services/securities-services/settlement-and-custody/info-center/about-six-sis-ag.html",
-              "accessed": "2026-08-16"
-            }
-          ],
-          "quote": "SIX SIS is the national Central Securities Depository (CSD) of the Swiss financial market and an International Central Securities Depository",
-          "confidence": "high"
-        },
         "verified": "2026-08-16",
         "enum": null
       },
-      "csd_name": null,
+      "csd_name": {
+        "zh": "SIX SIS AG",
+        "en": "SIX SIS AG",
+        "detail": "SIX SIS同时承担瑞士本国中央证券存管机构（CSD）与国际中央证券存管机构（ICSD）职能，运营SECOM实时结算系统；非瑞郎证券可另经Euroclear Bank / Clearstream Luxembourg结算。",
+        "sources": [
+          {
+            "title": "About SIX SIS AG",
+            "url": "https://www.six-group.com/en/products-services/securities-services/settlement-and-custody/info-center/about-six-sis-ag.html",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "SIX SIS is the national Central Securities Depository (CSD) of the Swiss financial market and an International Central Securities Depository",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
       "initial_margin_practice": {
         "enum": "na",
         "zh": "不适用——SIX Swiss Exchange是现货证券市场，不运营衍生品交易板块；SMI等指数期货/期权在Eurex挂牌，由SIX x-clear（集团CCP）以独立业务线清算衍生品，故不适用于本所自身的交易机制。",
