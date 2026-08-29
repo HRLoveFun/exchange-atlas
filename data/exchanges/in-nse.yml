@@ -357,26 +357,32 @@ market_structure:
 
   trading_sessions:
     pre_market:
+      spec: {start: "09:00", end: "09:08", kind: opening_auction, note: "大宗交易首场 08:45-09:00；新股/复牌证券 Special Pre-open 09:00-09:45"}
       zh: "大宗交易首场08:45-09:00；开盘集合竞价（Pre-open session）09:00-09:08（新股/复牌证券另有09:00-09:45的Special Pre-open session）"
       en: "Block Deal session 1: 08:45-09:00; Pre-open session (Regular): 09:00-09:08 (newly-listed/relisted securities use a Special Pre-open session, 09:00-09:45)"
       quote: "Block Deal session 1 Open 08:45 hrs / Block Deal session 1 Close 09:00 hrs / Pre-open session (Regular) Open 09:00 hrs / Pre-open session (Regular) Close 09:08 hrs / Special Pre-open session (SPOS) Close 09:45 hrs"
     continuous_am:
+      spec: {start: "09:15", end: "15:30", kind: continuous, note: "单一连续时段，无上午/下午分段"}
       zh: "现货市场（普通/碎股市场）连续竞价09:15起，无独立「上午盘」与「下午盘」划分，与连续下午竞价属同一连续时段（见 continuous_pm）"
       en: "Continuous trading (Normal/Odd Lot market) begins at 09:15; not split into separate morning/afternoon sessions — see continuous_pm for the single continuous session"
       quote: "Normal / Odd lot market Open 09:15 hrs"
     lunch_break:
+      spec: {kind: none}
       zh: "无（连续交易09:15-15:30中间不设午休）"
       en: "None (continuous trading 09:15-15:30 has no midday break)"
       confidence: medium
     continuous_pm:
+      spec: {kind: none, note: "无上午/下午分段，连续时段见 continuous_am；另有 14:00-14:30 Auction market、15:40-16:00 收盘集合竞价"}
       zh: "连续交易09:15-15:30；14:00-14:30另设大宗成交撮合的Auction market；15:40-16:00为收盘集合竞价（Closing session/CAS）"
       en: "Continuous trading 09:15-15:30; a separate Auction Market runs 14:00-14:30; Closing session (Closing Auction Session, CAS) runs 15:40-16:00"
       quote: "Normal / Odd lot market Close 15:30 hrs / Auction market Open 14:00 hrs / Auction market Close 14:30 hrs / Closing session Open 15:40 hrs / Closing session Close 16:00 hrs"
     after_market:
+      spec: {kind: none, note: "官网 Equities 时段表未见独立盘后连续交易时段（交易修改截止 16:15 不构成独立时段）"}
       zh: ""
       confidence: low
       detail: "官网 Equities 时段表未见独立盘后连续交易时段；交易修改截止时间16:15不构成独立交易时段，未混填。"
     night_session:
+      spec: {kind: none, note: "现货市场；商品衍生品另有延时时段，属另一产品条线"}
       zh: "商品衍生品时段延至境外市场收盘（非农品种最晚23:30/23:55），但本节字段针对现货市场，现货市场本身无夜盘"
       en: "None for the cash equity market (commodity derivatives extend late to track offshore market close, but that is a separate product segment)"
       confidence: medium
@@ -392,6 +398,7 @@ market_structure:
     confidence: medium
 
   opening_mechanism:
+    spec: {type: call_auction, auction_start: "09:00", auction_end: "09:08"}
     zh: "开盘集合竞价（Pre-open session），09:00-09:08收集订单并撮合确定开盘价，此后09:15转入连续竞价；新股/复牌证券另有09:00-09:45的Special Pre-open session"
     en: "Opening call auction (Pre-open session), 09:00-09:08 for order collection and matching to determine the opening price, followed by continuous trading from 09:15; newly-listed/relisted securities use a separate Special Pre-open session (09:00-09:45)"
     detail: "具体撮合算法（如价格发现规则细节）本次未在抓取页面中找到进一步说明文字，仅确认时段结构。"
@@ -403,6 +410,7 @@ market_structure:
     confidence: high
 
   closing_mechanism:
+    spec: {type: call_auction, auction_start: "15:40", auction_end: "16:00"}
     zh: "收盘集合竞价（Closing session，官网导航称Closing Auction Session/CAS），15:40-16:00"
     en: "Closing call auction (Closing session, referred to elsewhere on the site as the Closing Auction Session/CAS), 15:40-16:00"
     sources:
@@ -453,6 +461,7 @@ market_structure:
       quote: "Daily price bands are applicable on securities as below: Daily price bands of 2% (either way) Daily price bands of 5% (either way) Daily price bands of 10% (either way) No price bands are applicable on scrips on which derivative products are available"
       confidence: high
     main_board:
+      spec: {limit_pct: null, note: "非单一幅度：个股按证券监察分类分档 2%/5%/10%（either way）；挂衍生品的个股无每日涨跌停，改设 10% 委托申报操作区间；其余证券（含债券、优先股）及 Auction market 统一 20%。完整分档见 price_limits.type 字段"}
       zh: "个股按分类适用2%/5%/10%（either way）；挂有衍生品的个股无每日涨跌停，改设10%的委托申报操作区间（防止非真实价格挂单）；其余证券（含债券、优先股）20%；限价实物市场与Normal Market同幅度；Auction market统一20%"
       en: "2%/5%/10% (either way) by security category; scrips with derivative products have no daily price band but a 10% order-entry operating range instead (to prevent non-genuine price orders); all remaining securities (incl. debentures, preference shares) 20%; the Limited Physical Market uses the same bands as the Normal Market; the Auction Market uses a flat 20%"
       sources:
@@ -467,6 +476,16 @@ market_structure:
 
   circuit_breaker:
     enum: index_level
+    spec:
+      type: index_level
+      reference:
+        - {index: "Nifty 50", exchange: self}
+        - {index: "BSE Sensex", exchange: "bse"}
+      levels:
+        - {threshold_pct: 10}
+        - {threshold_pct: 15}
+        - {threshold_pct: 20}
+      note: "跨交易所联动：Nifty 50（NSE 自身）或 BSE Sensex 先触发者为准（[ADR-036] #6 / OPEN-QUESTIONS #19）。各档停牌时长与恢复方式见 detail（逐时段不同，10%/15% 停牌 + 15 分钟集合竞价恢复、20% 当日休市），未逐字入 spec，Phase 1b 补 halt_minutes"
     zh: "全市场指数熔断（index-based market-wide circuit breaker），三级阈值10%/15%/20%，以印度国家证券交易所Nifty 50或竞争对手孟买证券交易所（BSE）Sensex两个指数中先触发者为准"
     en: "Index-based market-wide circuit breaker, three-tier thresholds at 10%/15%/20%, triggered by whichever of the Nifty 50 (NSE) or the BSE Sensex breaches first"
     detail: |

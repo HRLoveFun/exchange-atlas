@@ -27,7 +27,8 @@
         "confidence": "medium",
         "detail": "quote 只确认时区名称本身（SAST），UTC+2 的具体偏移量是南非全国通行的标准时区常识、非本次抓取页面逐字确认的数字，故不标 high。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "dst_rule": {
         "zh": "不实行夏令时（南非全境全年使用统一的南非标准时间，未检索到官方专门声明，按国家层面常识记录，未附单独 quote）",
@@ -35,6 +36,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -53,6 +55,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "history": {
@@ -69,7 +72,8 @@
         "confidence": "medium",
         "detail": "zh/en 摘要综合了同一份官方年表页里多条独立时间轴条目（1947/1963/1996/1997/2001/2003/2005/2009/2012/2014/2016/2019），quote 只摘引了其中一条（2016年T+3）作为代表，其余年份未逐条附独立 quote，属于「多来源合并」型字段（见 OPEN-QUESTIONS 第12条），故整体不标 high 只标 medium，避免 zh/en 里的数字反查不到对应 quote。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "organization_form": {
         "enum": "demutualized_listed",
@@ -85,6 +89,7 @@
         "quote": "The bourse demutualised and listed on its own exchange in 2005.",
         "confidence": "high",
         "verified": "2026-08-27",
+        "spec": null,
         "detail": null
       },
       "self_listed": {
@@ -101,6 +106,7 @@
         "quote": "JSE Limited (Incorporated in the Republic of South Africa) Registration number: 2005/022939/06 Share code: JSE ISIN: ZAE000079711",
         "confidence": "high",
         "verified": "2026-08-27",
+        "spec": null,
         "detail": null
       },
       "market_cap_usd_bn": {
@@ -117,7 +123,8 @@
         "confidence": "high",
         "detail": "quote 与数字均取自 JSE 2025 年报官方披露；USD 折算约 1.3 万亿为按年末汇率的近似，放 detail 以免 high 字段数字校验。原 low 字段担心的第三方数字矛盾已由一手年报解决。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "listed_companies_count": {
         "zh": "271 家（2025 年末；2024 年为 280 家），其中 148 家为双重上市（dual-listed）公司。",
@@ -133,7 +140,8 @@
         "confidence": "high",
         "detail": "quote 取自 JSE 2025 年报；双重上市数 148（2024: 131）。原 low 字段担心的第三方数字矛盾已由一手年报解决。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "annual_turnover_usd_bn": {
         "zh": "2025 年权益市场日均成交金额（ADV）约 284.5 亿兰特（同比 +32.2%）；按约 250 个交易日折算，全年权益成交金额约 7.1 万亿兰特（折合约 0.38 万亿美元）。债券等其它资产类别另有独立成交规模。",
@@ -154,7 +162,8 @@
         "confidence": "medium",
         "detail": "年报披露 ADV R28.45bn（+32.2%）；全年约为 ADV×约 250 日≈R7.1tn，USD 折算约 0.38tn 为近似（medium 级，未逐日核实总成交）。债券名义成交另有 R37.1tn（repo）等，未并入本权益口径。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "global_ranking": {
         "zh": "非洲市值最大的证券交易所，按市值计全球排名第 18 位（2025 年）；市值规模远超尼日利亚、埃及、卡萨布兰卡等其余非洲交易所。",
@@ -170,7 +179,8 @@
         "confidence": "high",
         "detail": "quote 取自 JSE 2025 年报官方表述，解决了原 low 字段『找不到可摘引官方原文』的顾虑。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_currency": {
         "zh": "南非兰特（ZAR）",
@@ -186,6 +196,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "settlement_currency": {
@@ -194,6 +205,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -214,7 +226,8 @@
         "quote": "The Financial Sector Conduct Authority (FSCA) regulates and supervises the market conduct of financial institutions in South Africa. The mandate of the FSCA is to enhance and support the efficiency and integrity of the financial system, and to protect financial customers.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "self_regulatory_org": {
         "zh": "JSE自身兼具前线监管职能：设Issuer Regulation（发行人监管）与Market Regulation（市场监管）两个内部部门，负责上市审核、持续监管、成员合规与市场纪律，重大规则修订与授权则需FMA框架下向FSCA备案/批准",
@@ -230,7 +243,8 @@
         "quote": "Members' capital adequacy is monitored daily by the JSE Market Regulation Division, through the Broker Dealer Accounting (BDA) system.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_regulator": {
         "zh": "金融部门行为监管局（FSCA），就系统重要性清算基础设施（如JSE Clear）的牌照与JSE审慎监管局（Prudential Authority，隶属南非储备银行SARB）联合作出决定",
@@ -246,6 +260,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "core_laws": {
@@ -262,7 +277,8 @@
         "quote": "FMA                       the Financial Markets Act No.19 of 2012, as amended",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_ownership_limit": {
         "zh": "南非对 JSE 上市证券的外资持股总体上不设置普遍性上限：现行外国直接投资政策不对境外所有权施加限制，仅少数敏感行业（银行依《Banks Act 1990》、矿业依《矿业与石油资源开发法》MPRDA、广播电视依《电子通信法 2005》、私营安保依《私营安保行业监管修正案》限外资 49% 等）另有行业性准入/持股上限。",
@@ -283,7 +299,8 @@
         "confidence": "medium",
         "detail": "quote 出自 Naidu et al. (2022) 对 JSE 上市公司的实证研究，明确写明「现行 FDI 政策不对外资所有权设限」；美国国务院《2024 投资环境报告》亦载「few limitations on foreign private ownership」。行业性例外为公认事实（Banks Act 1990 / MPRDA / Electronic Communications Act 2005 / 私营安保 49% 上限），属 medium 级背景补充。本字段不覆盖跨境资本汇出的外汇管制（见 capital_controls）。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_controls": {
         "zh": "南非实行外汇管制（Exchange Control），现行《外汇管制条例》（Exchange Control Regulations）由财政部长通过政府公告 R.1111 颁布、并历经修订，由南非储备银行（SARB）金融监察部门（Financial Surveillance）负责执行。",
@@ -299,6 +316,7 @@
         "detail": "南非储备银行（SARB）Exchange Control Regulations 页面（resbank.co.za 的 exchange-control-regulations）在缓存中为 404，本次无法从该确切 URL 取得可核查原文；逐字内容「The current set of Exchange Control Regulations was promulgated by Government Notice R.1111 of 1 December 1961 and amended from time to time」实际出现在 SARB 的 exchange-control 母页缓存（sarb_excon.html）中，但该页未登记进 .cache manifest，故无法机器反查。按防幻觉铁律二.5（引用页无逐字原文）本字段降为 medium：具体生效日期为 1961 年 12 月 1 日（政府公告 R.1111）。外资在 JSE 二级市场买卖上市证券一般无需事先外汇管制审批（见 foreign_ownership_limit 引用的 Naidu et al. 2022 论述），但资本跨境汇出仍受《外汇管制条例》与《货币与汇兑手册》约束；本次未抓取《Currency and Exchanges Manual》全文，具体额度/审批细节不在本字段逐条展开。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "disclosure_requirements": {
@@ -315,6 +333,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "investor_protection": {
@@ -331,6 +350,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -437,6 +457,7 @@
           "verified": "2026-08-27",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "continuous_am": {
@@ -458,6 +479,7 @@
           "verified": "2026-08-27",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "lunch_break": {
@@ -479,6 +501,7 @@
           ],
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "continuous_pm": {
@@ -500,6 +523,7 @@
           "verified": "2026-08-27",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "after_market": {
@@ -521,6 +545,7 @@
           "verified": "2026-08-27",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "night_session": {
@@ -541,6 +566,7 @@
           ],
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -559,6 +585,7 @@
         "detail": "具体每年日期以 JSE 官网交易日历为准（medium 级背景描述；公共假期清单为南非法定假日通用列表）。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "opening_mechanism": {
@@ -575,6 +602,7 @@
         "detail": "v4.09 正文确认存在 Opening Auction Call Session 且撮合采用 Volume Maximising algorithm（8.4 章），但具体时段 08:30–09:00 在 v4.09 文本中未逐字列出（原 v4.08 的 session-times 表曾含该时间，现已 404 无法取回），故由 high 降为 medium 并移除非逐字 quote。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "closing_mechanism": {
@@ -591,6 +619,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "matching_principle": {
@@ -607,6 +636,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "order_types": {
@@ -623,6 +653,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "tick_size": {
@@ -639,6 +670,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "board_lot_size": {
@@ -655,6 +687,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "odd_lot_handling": {
@@ -676,6 +709,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "price_limits": {
@@ -693,6 +727,7 @@
           "quote": "Circuit breaker tolerance is defined as a percentage in relation to the Static Reference Price and / or Dynamic Reference Price. If the difference between the price of the next trade and the Static Reference Price or Dynamic Reference Price is equal or greater than that permitted by the circuit breaker tolerance defined for the relevant session the instrument will automatically be moved into a Volatility Auction Call session.",
           "confidence": "high",
           "verified": "2026-08-27",
+          "spec": null,
           "detail": null
         },
         "main_board": {
@@ -709,6 +744,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -725,6 +761,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         }
       },
@@ -742,6 +779,7 @@
         "quote": "Circuit Breakers are defined as a percentage in relation to the Static Reference Price (Previous Day's closing price or latest auction trade) and Dynamic Reference Price (Last Traded Price). If the Static or Dynamic circuit breaker for the relevant trading session is breached, the instrument will automatically be moved into a Volatility Auction Call session.",
         "confidence": "high",
         "verified": "2026-08-27",
+        "spec": null,
         "detail": null
       },
       "volatility_interruption": {
@@ -758,6 +796,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -774,6 +813,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "intraday_reversal": {
@@ -795,6 +835,7 @@
         "detail": "JSE 交易规则未设 T+1 卖出限制（与 A 股不同）；T+0 回转属南非现货市场通行机制（medium 级背景判断，具体规则条文未逐条摘引）。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "short_selling": {
@@ -811,7 +852,8 @@
         ],
         "quote": "The JSE equities market rules state that clients may only place sell orders with a member (rule 10.50.1) and members may only insert sell orders into or report trades to the JSE equities trading system (rule 10.50.2) if the securities have been secured and will be available for settlement on the settlement date in one of the following circumstances: the securities are in uncertificated form, owned by the client and held by the CSDP of the member or client ... another transaction has been concluded that will yield the securities; a satisfactory borrowing arrangement is in place ...",
         "confidence": "high",
-        "verified": "2026-08-27"
+        "verified": "2026-08-27",
+        "spec": null
       },
       "block_trade": {
         "zh": "存在场外报告成交类别中的大宗交易（Block Trade，交易类型代码BT），可延迟至收盘后处理时段（18:15后）公布",
@@ -827,6 +869,7 @@
         "detail": "volume00E v4.09 缓存文本（view-…v4-09-pdf-a1edecdc63.txt）在 Off Book Trades 这一段存在文本抽取伪影：该段前后出现一对「<…>」字符跨度，经 verify_quotes 的 norm（去 HTML 标签）后被整段吞掉，导致逐字原文「Off Book Trades: (18:15* - 18:20*) Block Trades that are delayed such that they may result in being published after market end time (this relates to the time that End-Of-Day processes start for the day), will be published at the start of the Post Close session.」无法在缓存中机器定位；另一缓存副本 volume00e_v409.txt 未在 manifest 登记。按防幻觉铁律二.5 本字段降为 medium。逐字内容确属 v4.09 PDF 第 8.4.11 节 Off Book Trades，事实无误。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "dark_pool": {
@@ -848,6 +891,7 @@
         "detail": "off-book/Block Trade 机制见 Volume 00E；A2X 为独立另类交易所。本字段定性说明 JSE 无自营暗池（medium）。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "market_maker_scheme": {
@@ -864,6 +908,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "connect_schemes": {
@@ -880,6 +925,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "derivatives": {
@@ -903,6 +949,7 @@
             "confidence": "high",
             "verified": "2026-08-27",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "continuous_am": {
@@ -919,6 +966,7 @@
             "confidence": "high",
             "verified": "2026-08-27",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "lunch_break": {
@@ -935,6 +983,7 @@
             "confidence": "high",
             "verified": "2026-08-27",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "continuous_pm": {
@@ -956,6 +1005,7 @@
             "confidence": "high",
             "verified": "2026-08-27",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "after_market": {
@@ -972,6 +1022,7 @@
             "confidence": "high",
             "verified": "2026-08-27",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "night_session": {
@@ -988,6 +1039,7 @@
             ],
             "verified": "2026-08-27",
             "enum": null,
+            "spec": null,
             "quote": null
           }
         },
@@ -1005,6 +1057,7 @@
           "detail": "衍生品与现货共用南非公共假期日历（medium 级背景；具体每年日期以 JSE 官网交易日历为准）。",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "opening_mechanism": {
@@ -1021,6 +1074,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "closing_mechanism": {
@@ -1037,6 +1091,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "matching_principle": {
@@ -1053,6 +1108,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "order_types": {
@@ -1069,6 +1125,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "tick_size": {
@@ -1085,7 +1142,8 @@
           "confidence": "medium",
           "detail": "来源为2012年8月版官方Fact Sheet，本次未找到更新版本；合约乘数/最小变动单位一般是稳定的结构性事实，但因文档年代较久未能确认是否仍完全现行，如实标注medium而非high。",
           "verified": "2026-08-27",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "contract_specs_note": {
           "zh": "以FTSE/JSE Top40股指期货（ALSI）为例：合约乘数为每指数点10兰特，到期日为3/6/9/12月第三个星期四（如遇公众假期则提前至上一营业日），现金结算，到期结算价通过到期日12h00–12h15的盘中集合竞价（按成交量最大化算法）产生；利率衍生品另有Jibar期货（短期利率）、掉期期货（长期利率）及债券期货/期权/指数期货，货币衍生品另有货币期货/期权/Quanto期货期权，具体合约规格未逐一核实",
@@ -1106,7 +1164,8 @@
           "confidence": "medium",
           "detail": "合约乘数/到期日等结构性事实来自2012年版Fact Sheet（同 tick_size 字段的年代局限说明）；利率衍生品品类清单来自现行官网页面，属较新来源，两段引文分属不同文档、不同可信度，已分别标注。",
           "verified": "2026-08-27",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "price_limits": {
           "type": {
@@ -1123,6 +1182,7 @@
             "quote": "Circuit breaker tolerance is defined as a percentage in relation to the Static Reference Price and / or Dynamic Reference Price. If the difference between the price of the next trade and the Static Reference Price or Dynamic Reference Price is equal or greater than that permitted by the circuit breaker tolerance defined for the relevant session the instrument will automatically be moved into a Volatility Auction Call session. ... Instruments trading in the Currency Market will be subject to Price Bands. These limit entry of an order that may breach certain thresholds set in the trading system.",
             "confidence": "high",
             "verified": "2026-08-27",
+            "spec": null,
             "detail": null
           },
           "main_board": {
@@ -1139,6 +1199,7 @@
             "confidence": "high",
             "verified": "2026-08-27",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "other_boards": {
@@ -1155,6 +1216,7 @@
             "confidence": "high",
             "verified": "2026-08-27",
             "enum": null,
+            "spec": null,
             "detail": null
           }
         },
@@ -1177,7 +1239,8 @@
           ],
           "quote": "The following percentages have been defined for the Equity Derivatives Market: Single Stock Futures ... Index (excl. TOPI) Futures ... TOPI Futures ／ The duration of the volatility auction applicable for the Equity Derivatives Market has been increased from 2 minutes to 5 minutes.",
           "confidence": "high",
-          "verified": "2026-08-27"
+          "verified": "2026-08-27",
+          "spec": null
         },
         "volatility_interruption": {
           "zh": "波动性拍卖冷静期（Volatility Auction Call Session）：仅当合约的静态或动态参考价容忍阈值被突破时触发，持续5分钟（2020年3月由2分钟延长至5分钟），随后可能追加一系列市价单/价格监察延期（Market Order/Price Monitoring Extensions）",
@@ -1198,6 +1261,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "trading_halt_mechanism": {
@@ -1214,6 +1278,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "block_trade": {
@@ -1230,6 +1295,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "market_maker_scheme": {
@@ -1246,6 +1312,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "margin_practice_note": {
@@ -1272,7 +1339,8 @@
           "quote": "Initial margin shall be paid to or by a member or client whenever the risk of loss, as determined by the JSE, changes with respect to the aggregate position of such member or client. ／ JSE's margining uses a Portfolio Scanning method. The basis of Portfolio Scanning is that the whole of a participant's portfolio on the Exchange is valued (\"scanned\") at a number of points over a wide range of market moves. ... His margin, due in cash on the next morning, is then set equal to this greatest loss. ... This is measured in standard deviations (\"Sds\") and has been set at 3.5 Sds since the margining methodology was introduced. ／ JSE CLEAR MARGIN METHODOLOGY February 2019 ... the JSPAN algorithm is used to determine account-level base IM requirements for all contracts cleared by JSEC ... a base IM requirement, calculated under the Portfolio VaR framework for interest rate derivatives, and the JSPAN framework for all other derivatives ... Adjusted to reflect the change in methodology for the interest rate derivatives market, from JSPAN to Portfolio VaR",
           "confidence": "high",
           "verified": "2026-08-27",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "connect_schemes": {
           "zh": "JSE 无类似沪深港通式的跨境投资者互联互通机制；但其与纳米比亚证券交易所（NSX）共享 Millennium Exchange 撮合引擎，NSX 挂牌证券可经 JSE 交易系统路由（基础设施共享层面的联通）。外资参与 JSE 主要通过本地会员（TSP/ISP）直接交易，无独立的跨境交易通道安排。",
@@ -1293,6 +1361,7 @@
           "detail": "JSE–NSX 共享撮合引擎为公开事实（medium 级背景）；跨境互联互通（connect）层面 JSE 无沪港通式安排。本字段描述 JSE 整体的跨境联通现状。",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "quote": null
         }
       }
@@ -1328,7 +1397,8 @@
         ],
         "quote": "An applicant seeking a listing must have: (a) audited financial statements for the preceding three years ...; (b) (i) in respect of the most recent financial year profit of at least R15 million before tax ... and an existing net asset value*, excluding minority interests, of at least R50 million; or (ii) it must have an existing net asset value* excluding minority interests of at least R500 million; ... (d) a minimum of 25 million issued equity shares; and (e) a free float, comprising 10% of each class of equity securities held by public shareholders and representing at least 100 shareholders.",
         "confidence": "high",
-        "verified": "2026-08-27"
+        "verified": "2026-08-27",
+        "spec": null
       },
       "listing_process_duration": {
         "zh": "JSE 对上市申请的审核一般分为多轮：首次提交后 5 个工作日、第二轮（非正式批准）3 个工作日、末轮（正式批准）2 个工作日，JSE 审核环节通常约 3–4 周；但整体 IPO 从启动到挂牌受尽调、财报、是否公开发行（涉及 CIPC 招股说明书注册）等因素影响，通常需 10–14 周，AltX 途径约 8–12 周，无硬性法定时长上限。",
@@ -1349,7 +1419,8 @@
         "confidence": "medium",
         "detail": "quote 为 Lexology 摘录的 JSE 审核时间线；Global Legal Insights 给出「10 至 14 周」的整体区间，AltX 官网称「8 至 12 周」，三者口径一致（审核环节 3–4 周 ⊂ 整体 10–14 周）。本字段描述主板/AltX 现货上市耗时，不含衍生品。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "transfer_between_boards": {
         "zh": "AltX发行人达到主板上市标准后，JSE可主动将其转板至主板，发行人亦可主动申请转板",
@@ -1365,6 +1436,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "continuing_obligations": {
@@ -1381,6 +1453,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suspension_resumption": {
@@ -1397,6 +1470,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_conditions": {
@@ -1414,6 +1488,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_process": {
@@ -1430,6 +1505,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_transition_period": {
@@ -1446,7 +1522,8 @@
         "confidence": "medium",
         "detail": "「合理期限」为规则中的弹性表述，无固定天数；与 A 股 15 个交易日退市整理期制度不对应，故本字段以「无固定窗口、合理期限」定性描述，不杜撰天数。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "post_delisting_venue": {
         "zh": "JSE 自身没有为已退市证券设立正式的场外（OTC）交易板块；退市后股东仍持有股票，但无法在交易所买卖，只能通过场外双边协商转让——常见渠道包括 OTC Express（Singular Systems 运营的买卖意向公告板与双边结算后台）、以及 EasyEquities 等平台允许股东以未上市状态继续持有，历史上 SARB 亦曾设「场外股份转让便利」（OTCSTF）作为退出机制。",
@@ -1472,6 +1549,7 @@
         "detail": "JSE 官方未设「退市板块」；ig.com/za 投资者教育亦明确「delisted shares can only be sold OTC」。本字段描述退市后流通渠道，非 JSE 自营场所。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -1537,6 +1615,7 @@
         "quote": "On T+3, settlement of cash equities transactions take place, i.e. sellers deliver securities in exchange for cash receipt (DvP), and buyers receive securities in exchange for cash payments (RvP), which is processed through the JSE appointed CSD, Strate, and which achieves simultaneous, final, irrevocable delivery versus payment (SFIDvP). ... 2014 2016 The JSE moves to a T+3 settlement cycle",
         "confidence": "high",
         "verified": "2026-08-27",
+        "spec": null,
         "detail": null
       },
       "ccp_name": {
@@ -1558,7 +1637,8 @@
         "quote": "The JSE provides settlement assurance for central order book trades in the cash equity market and employs various measures to affect this. ... JSE Clear, its wholly owned subsidiary, has been granted a licence to operate as an Independent Clearing House and Central Counterparty (CCP) by the Financial Sector Conduct Authority (FSCA) ... Published 01 Sep 2022",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "csd_name": {
         "zh": "证券存管中心Strate Limited，南非法定的中央证券存管机构与中央质押品平台",
@@ -1574,6 +1654,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "initial_margin_practice": {
@@ -1590,6 +1671,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "maintenance_margin_practice": {
@@ -1606,6 +1688,7 @@
         "detail": "顶层字段按 ADR-023 收窄为描述现货/主板市场；现金市场无逐日盯市追缴，故本字段定性为「不适用现货」，相关机制归入衍生品子块。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "mark_to_market_frequency": {
@@ -1622,6 +1705,7 @@
         "detail": "同 maintenance_margin_practice，顶层字段描述现货市场，cash 无 MTM，机制在衍生品子块。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "delivery_method": {
@@ -1638,7 +1722,8 @@
         ],
         "quote": "sellers deliver securities in exchange for cash receipt (DvP), and buyers receive securities in exchange for cash payments (RvP)",
         "confidence": "medium",
-        "verified": "2026-08-27"
+        "verified": "2026-08-27",
+        "spec": null
       },
       "last_trading_day_rule": {
         "zh": "「最后交易日」是衍生品（期货/期权）概念，现货证券无到期日，故不适用；JSE 现货股票在被除牌前持续交易，相关到期/最后交易日规则见 clearing.derivatives.last_trading_day_rule（以 ALSI 股指期货为例：三月、六月、九月、十二月第三个星期四）。",
@@ -1654,6 +1739,7 @@
         "detail": "顶层字段按 ADR-023 收窄为现货；现金市场无最后交易日。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "default_management": {
@@ -1670,6 +1756,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "derivatives": {
@@ -1687,7 +1774,8 @@
           "confidence": "high",
           "detail": "3.5 个标准差风险参数出自 SAFCOM Margins Explained（2012）文档，与 JSE Clear Margin Methodology 的 JSPAN/Portfolio VaR 框架互为印证；利率衍生品的方法论切换年份（2019）见 margin_practice_note，本字段不重复。本字段与顶层 clearing.initial_margin_practice（现货市场 T+2 结算保证金）互补，不合并。",
           "verified": "2026-08-27",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "maintenance_margin_practice": {
           "zh": "JSE 衍生品规则以「维持保证金水平」（Maintenance margin level，规则 8.60.5）界定：当客户存入的追加保证金被用于支付变动保证金后，会员可与客户约定、客户须补足至约定水平；实际风控中变动保证金（Variation Margin）按日盯市产生、由清算会员向下游追收，构成维持持仓的常态化追缴机制。",
@@ -1703,7 +1791,8 @@
           "confidence": "high",
           "detail": "JSE 衍生品清算语境下并无独立的「维持保证金」账号概念，维持机制通过「追加保证金（additional margin）+ 变动保证金追缴」实现，规则 8.60.5 是其法定表述。",
           "verified": "2026-08-27",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "mark_to_market_frequency": {
           "zh": "JSE Clear 对每个会员及其客户的衍生品持仓于每个营业日 17:00 进行盯市（mark-to-market）；JSE 或 JSE Clear 亦可在任一营业日视市场情况对任意持仓追加盯市。",
@@ -1719,6 +1808,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "delivery_method": {
@@ -1735,6 +1825,7 @@
           "confidence": "medium",
           "detail": "Contract Specifications（ALSI 等指数期货）的 Settlement Method 列逐字为「Cash」/「Settled」分两行排布，缓存文本层里不是连续子串，无法机器反查逐字原文，故本字段按防幻觉铁律二.5 降为 medium；现货权益指数期货为现金交割（Cash Settled）的事实成立，农产品实物交割见 Derivatives Rules 7.170，属少数例外。",
           "verified": "2026-08-27",
+          "spec": null,
           "quote": null
         },
         "last_trading_day_rule": {
@@ -1751,6 +1842,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         }
       }
@@ -1775,7 +1867,8 @@
         "confidence": "medium",
         "detail": "quote 为 BusinessTech 对 JSE 数据的报道（非 JSE 一级原文，故 confidence: medium）；SARB 2016 年约 38% 为财政部/PMG 公开数据印证长期外资占比高。机构主导、散户经 CIS 参与为公认市场结构背景（未在第三方原文逐句摘引，属 medium 级综合判断）。",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "account_opening_requirements": {
         "zh": "个人投资者无法直接接入 JSE，须经持牌经纪商（trading service provider / broker）开户；开户须完成 FICA 客户身份识别与尽职调查（姓名、身份证件、住址证明、受益所有人、PEP/制裁筛查等），并遵守反洗钱（AML）规定。非居民开户通常还需额外外汇管制申报与「非居民享有权登记」（non-resident share register endorsement）等手续。",
@@ -1796,7 +1889,8 @@
         "confidence": "medium",
         "detail": "quote 为 JSE 官网对「投资者须经券商、受 FICA」的概括；FICA 法定客户尽调要素为公认要求。非居民登记/外汇申报为资本管制背景（见 capital_controls），属 medium 综合。",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "suitability_management": {
         "zh": "向零售客户提供投资咨询或 intermediary 服务的机构须依《财务顾问服务法》（FAIS，Act 37 of 2002）取得 FSP（Financial Services Provider）牌照，并遵循「客户最佳利益」（treat customers fairly / best interest of the client）原则履行适当性管理；券商与投顾须评估客户风险承受能力与产品适配性。",
@@ -1817,7 +1911,8 @@
         "confidence": "medium",
         "detail": "FAIS 为法定适当性框架；「best interest / TCF」为其核心义务。quote 为概括性表述（来自监管介绍），故 confidence: medium。",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_access_channel": {
         "zh": "1995年《证券交易所管制法》修订允许境外会员在JSE开展经纪业务（历史性准入事实，当前具体境外投资者交易渠道细节本次未逐条核实）",
@@ -1833,6 +1928,7 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "membership_structure": {
@@ -1849,6 +1945,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "broker_landscape": {
@@ -1870,7 +1967,8 @@
         "confidence": "medium",
         "detail": "TSP/CSP/ISP 三类会员为 JSE 官网明确分类；会员总数『数十家』为市场常识性背景（medium 综合），具体名单与数量以 JSE 官网会员名录为准（本次未逐条抓取）。",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "infrastructure": {
@@ -1888,6 +1986,7 @@
         "detail": "JSE 2021-04-14 Market Data Training PDF 在 .cache manifest 中登记的那一份（ta-…Training…2021 版）与该文档另一缓存副本（market_data_training.txt，未在 manifest 登记）内容不同：后者确有「Level 1 & Level 2」「Level 1 only」等行情深度分档的逐字原文，但 manifest 登记版不含这些文字，无法机器反查，按防幻觉铁律二.5 降为 medium。行情按深度分档为 Level 1（最优买卖盘口与成交快照）与 Level 2（全档深度/逐笔明细），另提供仅 Level 1 的轻量订阅；延迟数据「至少 15 分钟」的口径见 data_latency 字段（引用 Equity Market Data 页）。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "data_latency": {
@@ -1904,7 +2003,8 @@
         "confidence": "medium",
         "detail": "colocation 2014 年推出的依据见 access_methods 字段（高置信）。本字段聚焦延迟/接入的物理与时效特征。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "data_pricing_model": {
         "zh": "JSE 对实时（live）行情数据按技术使用费（premium）计价，通过南非本地数据中心或国际接入点（International Access Point）提供；行情价值随时间衰减，故延迟数据成本显著更低。",
@@ -1920,6 +2020,7 @@
         "detail": "JSE 2021-04-14 Market Data Training PDF 在 .cache manifest 中登记的那一份（ta-…Training…2021 版）不含「Exchanges charge a premium fee to users of the live feed who essentially make use of the technology」这句逐字原文——该句仅见于未在 manifest 登记的另一缓存副本（market_data_training.txt），故无法机器反查，按防幻觉铁律二.5 降为 medium。实时行情按技术使用费（premium）计价、延迟数据成本显著更低的事实成立；同页另载明「The value of the data in terms of trading and display diminishes over time which makes delayed data carry a much lower associated cost」，已并入 zh/en 表述。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "historical_data_availability": {
@@ -1941,7 +2042,8 @@
         "confidence": "medium",
         "detail": "具体回溯年限（如权益逐笔可回溯至某年）未逐条核实，属产品级概括；深度历史数据多为付费订阅。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_system_name": {
         "zh": "Millennium Exchange（由技术方案商MillenniumIT开发），2012年现货权益市场率先迁移，2019年权益及货币衍生品迁移接入；此前曾使用TradElect平台",
@@ -1957,6 +2059,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "access_methods": {
@@ -1973,6 +2076,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "major_outage_history": {
@@ -1999,7 +2103,8 @@
         "confidence": "medium",
         "detail": "2018 年两起故障为 JSE 自身发布的 Service Hotline 公告，属确凿事故记录；99.96% 可用性为 JSE 2025 年报披露。本字段不穷举所有微小中断。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "costs": {
@@ -2022,7 +2127,8 @@
         "confidence": "medium",
         "detail": "quote 为概括性表述（JSE 投资者教育与券商披露），反映佣金由券商定价、非交易所统一收取的事实；具体费率区间本次未逐家核实，故 confidence: medium。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "exchange_fees": {
         "zh": "JSE 对权益交易（含权证、ETP、AltX）按每笔成交金额的 0.50 个基点计收交易费，并设单笔成交上限（trade cap，见 detail）。",
@@ -2038,6 +2144,7 @@
         "detail": "JSE 2026 Price List PDF 缓存文本层为空（image-only，pdftotext 无法抽取），无法机器反查逐字原文，按防幻觉铁律二.5 降为 medium；PDF 中权益交易（含权证、ETP、AltX）交易费为每笔成交金额 0.50 个基点（0.50 basis points of value of each trade leg），并设单笔成交上限（trade cap，2026 年价目表常规订单 XT/BT/OP 等 trade cap 为 R554.28 未含增值税 / R637.42 含增值税）。本字段仅覆盖交易所交易费，结算/清算费见 clearing_fees，STT 见 stamp_duty。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "clearing_fees": {
@@ -2059,6 +2166,7 @@
         "detail": "JSE 2026 Price List 与 JSE Clear 2025 Price List 两份 PDF 缓存文本层均为空（image-only，pdftotext 无法抽取），无法机器反查逐字原文，按防幻觉铁律二.5 降为 medium；PDF 中权益交易（含权证与 AltX）清算与结算费为每笔成交金额 0.0038%（0.0038% of value of each trade leg），单笔成交腿上限 R312.00（未含增值税）。JSE Clear 会员另收年度会员资格费（2025 年 JSE Clear 价目表 R522 500.00）。本字段聚焦交易层面清算/结算费，不含交易所交易费（exchange_fees）与 STT（stamp_duty）。",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "regulatory_fees": {
@@ -2080,7 +2188,8 @@
         "confidence": "medium",
         "detail": "Investor Protection Levy 为依《金融监管法》（Financial Sector Regulation Act）设立的小额征费，用于投资者保护基金；其具体费率未逐条核实，本字段定性说明「无独立按笔监管费」即可满足 medium 级结论。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "stamp_duty": {
         "zh": "证券转让税（Securities Transfer Tax，STT）：税率0.25%，适用于上市与未上市证券的每一次转让，2008年7月1日起依《证券转让税法》（No.25 of 2007）及其征管法（No.26 of 2007）施行，取代原印花税制度",
@@ -2097,7 +2206,8 @@
         "en_required": true,
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "financial_transaction_tax": {
         "zh": "南非证券交易环节未设独立的金融交易税（FTT）；相应税负由证券转让税（STT，见 stamp_duty 字段）覆盖，因此本字段非留空、而是明确标注为「不适用 / 由 STT 覆盖」。",
@@ -2113,7 +2223,8 @@
         "confidence": "medium",
         "detail": "南非财政部与 SARS 均未在证券交易环节另设 FTT；STT（0.25%）即为交易环节主要税负，故本字段标记为不适用而非重复记录。沿用 ADR-002 的字段语义（STT 映射至 stamp_duty）。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_gains_tax": {
         "zh": "南非对资本利得征税，但并入个人所得税体系（非独立税种）：自然人及特殊信托适用 18% 的有效税率（按其应税利得的一定比例计入应税所得），公司适用 21.6%，其他信托 36%。法定依据为《所得税法 58 of 1962》第八附表。",
@@ -2134,7 +2245,8 @@
         "confidence": "high",
         "detail": "计入应税所得的比例：自然人及特殊信托为 40%、公司为 80%、其他信托为 100%（年度免税额 R40 000）。本字段 quote 已含 18%/21.6%/36% 与 58 of 1962；比例细节放 detail 以免 high 字段数字校验失败。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "dividend_withholding_tax": {
         "zh": "股息预扣税税率20%（自2017年2月22日起由15%上调），除非适用豁免或双重征税协定下的优惠税率",
@@ -2150,6 +2262,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "implicit_costs_note": {
@@ -2166,7 +2279,8 @@
         "confidence": "medium",
         "detail": "Top 40 流动性集中为公认市场结构特征（medium 综合）；+32% ADV 与 271/280 家数来自 JSE 2025 年报。具体个股价差数据未逐条抓取。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "risks": {
@@ -2189,7 +2303,8 @@
         "confidence": "medium",
         "detail": "兰特浮动汇率与高波动为公认市场事实（medium 综合判断）；跨境汇出受外汇管制约束已见于 capital_controls。本字段定性提示汇率风险，不提供波动率数值（未逐条核实）。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "political_risk_note": {
         "zh": "南非面临结构性治理与政策挑战：长期电力危机（限电 load-shedding）削弱增长、国有企业治理问题突出；南非曾于 2023 年 2 月被列入 FATF 灰名单，已于 2025 年 2 月移出。兰特与本地资产价格对政治更迭、政策转向与矿业/土地等敏感议题高度敏感。",
@@ -2210,7 +2325,8 @@
         "confidence": "medium",
         "detail": "load-shedding 与国企治理为公认背景（medium 综合）；FATF 移出灰名单为官方公告，JSE 2025 年报亦将其列为利好（『removal of South Africa from the FATF's grey list』）。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "liquidity_risk_note": {
         "zh": "JSE 流动性集中于大型蓝筹与指数成分股（Top 40），中小盘与低流动性个股价差偏大、退出难度更高；近年上市公司数量下滑（2025 年末 271 家 vs 2024 年 280 家），退市与并购导致的「上市池」收缩，可能降低整体流动性的广度，并使个股流动性风险上升。",
@@ -2226,7 +2342,8 @@
         "confidence": "medium",
         "detail": "Top 40 流动性集中为公认市场结构特征（medium 综合）；271/280 家数为 JSE 2025 年报披露。具体个股价差/成交量未逐条抓取。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_change_risk_note": {
         "zh": "监管框架持续演进：『双峰』监管下，金融部门行为监管局（FSCA）负责市场行为与投资者保护、南非储备银行负责审慎监管；JSE 于 2025 年 12 月发布《上市规则简化》（Listings Requirements Simplified）以降低成本与复杂度，并自 2025 年 7 月起将 BDA 交易费下调 4 分。规则与费用的结构性变动构成持续的制度变更风险。",
@@ -2247,7 +2364,8 @@
         "confidence": "medium",
         "detail": "双峰监管（FSCA + SARB/PRUDENT）为南非 2018 年起实施的监管架构（依 Financial Sector Regulation Act 9 of 2017），属公认制度背景（medium 综合）；BDA 降费与上市规则简化均有官方原文支撑。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "enforcement_note": {
         "zh": "市场纪律由 JSE 市场监督（JSE Market Regulation）与金融部门行为监管局（FSCA）共同执行；JSE 可对违规会员采取纪律处分、暂停或撤销会员资格，FSCA 拥有调查、罚款与起诉权，并可移交司法机关。",
@@ -2268,7 +2386,8 @@
         "confidence": "medium",
         "detail": "FSCA 由 FSR Act 9 of 2017 设立、为南非市场行为监管者；JSE 自身亦设市场监督职能。本字段定性说明执法分工，具体处罚案例未逐条核实。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     }
   }

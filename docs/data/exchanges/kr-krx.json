@@ -31,6 +31,7 @@
         ],
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -52,6 +53,7 @@
         ],
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -74,7 +76,8 @@
         "quote": "Established in 1956, the Korea Exchange (KRX) has contributed to Korea's economic development... / 1956 Mar.3 The Daehan Stock Exchange, the predecessor of the Korea Stock Exchange (KSE), established / 2005 Jan.27 Established the Korea Stock and Futures Exchange through consolidation of KSE, KOSDAQ, KOFEX / 2008 Feb.4 Company name change(Korea Stock and Futures Exchange → Korea Exchange)",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "history": {
         "zh": "1956年大韩证券交易所（KSE前身）设立；1974年韩国证券存管院（KSD）设立；1996年KOSDAQ市场设立；1999年韩国期货交易所（KOFEX）设立；2005年1月27日KSE、KOSDAQ、KOFEX三方合并设立「韩国证券期货交易所」；2008年2月4日更名为「韩国交易所」（KRX）；2013年7月1日设立面向中小与创业企业的KONEX市场；2021年4月16日设立KRX清算部门",
@@ -90,6 +93,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "organization_form": {
@@ -111,7 +115,8 @@
         ],
         "quote": "Any entity that wishes to obtain permission for Exchange under paragraph (1) shall satisfy all of the following requirements: 1. It shall be a stock company under the Commercial Act",
         "confidence": "high",
-        "verified": "2026-08-16"
+        "verified": "2026-08-16",
+        "spec": null
       },
       "self_listed": {
         "enum": "no",
@@ -127,6 +132,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-16",
+        "spec": null,
         "quote": null
       },
       "market_cap_usd_bn": {
@@ -147,6 +153,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -168,6 +175,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -189,6 +197,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -210,6 +219,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -231,6 +241,7 @@
         ],
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -252,6 +263,7 @@
         ],
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       }
@@ -271,7 +283,8 @@
         "quote": "An entity that wishes to establish or operate a financial investment instruments market shall... obtain permission from the Financial Services Commission for one Exchange",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "self_regulatory_org": {
         "zh": "市场监督委员会（Market Oversight Commission）——KRX内设的自律监管机构",
@@ -287,6 +300,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "clearing_regulator": {
@@ -303,6 +317,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "core_laws": {
@@ -319,7 +334,8 @@
         "quote": "The purpose of this Act is to contribute to the development of the national economy by facilitating financial innovation and fair competition in the capital market, as well as protecting investors and fostering the development of the financial investment business, thereby heightening the fairness, reliability, and efficiency of the capital market.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_ownership_limit": {
         "zh": "韩国对上市股票不设全市场性的外资持股上限；外资可自由投资韩股，唯一例外是少数具有国家重要性的公司及部分行业（航空、通信、广播等）存在0%至49.99%不等的外资持股上限，具体受限名单由KRX按标的公布。1998年取消普通上市公司外资持股上限后，约2,500家上市公司中仅33只重点行业标的仍受个别上限约束。",
@@ -340,6 +356,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "capital_controls": {
@@ -356,6 +373,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "disclosure_requirements": {
@@ -371,6 +389,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -393,6 +412,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -467,6 +487,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "continuous_am": {
@@ -483,6 +504,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "lunch_break": {
@@ -499,6 +521,7 @@
           ],
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "continuous_pm": {
@@ -514,6 +537,7 @@
           ],
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -531,6 +555,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "night_session": {
@@ -547,7 +572,8 @@
           "confidence": "high",
           "detail": "2026-08-20核实并订正：此前（2026-08-16）本字段仅提及CME/Eurex夜盘联动仍在进行，未反映KRX已于2025年6月转自主运营、且CME联动实际已于2020年4月（早于Eurex）终止的事实；本次改用《Guide to Night Session in KRX Derivatives Market》官方PDF重新核实。与 market_structure.derivatives.trading_sessions.night_session（2026-08-18核实的衍生品子块，同一份PDF来源）此前存在的表述不一致已解决，见 PROJECT/OPEN-QUESTIONS.md 相关条目（已删除）。",
           "verified": "2026-08-16",
-          "enum": null
+          "enum": null,
+          "spec": null
         }
       },
       "holidays_note": {
@@ -564,6 +590,7 @@
         ],
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "opening_mechanism": {
@@ -580,6 +607,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "closing_mechanism": {
@@ -596,6 +624,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "matching_principle": {
@@ -612,6 +641,7 @@
         ],
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "order_types": {
@@ -628,6 +658,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "tick_size": {
@@ -644,6 +675,7 @@
         ],
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "board_lot_size": {
@@ -660,6 +692,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "odd_lot_handling": {
@@ -675,6 +708,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -693,6 +727,7 @@
           "quote": "Daily Price limit ±30% of base prices",
           "confidence": "high",
           "verified": "2026-08-16",
+          "spec": null,
           "detail": null
         },
         "main_board": {
@@ -709,6 +744,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -724,6 +760,7 @@
           ],
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -742,6 +779,7 @@
         "quote": "KOSPI (KOSDAQ) index falls by 8% or more compared to the previous day. (The fall lasts for one minute.) / The entire market is suspended for 20 minutes. ... The market is closed when the third phase is activated.",
         "confidence": "high",
         "verified": "2026-08-16",
+        "spec": null,
         "detail": null
       },
       "volatility_interruption": {
@@ -758,7 +796,8 @@
         "quote": "When VI is activated during continuous auction session, continuous auction is switched to single price call auction for two minutes. ... Activation price : reference price ± (reference price x activation price rate) ... KOSPI 200 constituents ... ±3% ... ±10% ... Other issues ... ±6%",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_halt_mechanism": {
         "zh": "个股停牌情形包括：上市公司披露重大信息后停牌30分钟；被指定为不实披露法人当日停牌；因传闻/报道引发交易量激增，须待澄清公告后方可复牌；公司未按要求答复问询（KOSPI从逾期到披露、KOSDAQ从逾期到披露后再加30分钟）；交易所认为有必要保护投资者时停牌1天；此外还有因退市事由、股票证书变更、结算会员未按期交收等其他停牌情形",
@@ -774,6 +813,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "intraday_reversal": {
@@ -790,6 +830,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "short_selling": {
@@ -806,7 +847,8 @@
         ],
         "quote": "All types of short-selling are prohibited in principle; however, selling securities with borrowing(covered short-selling) is permitted exceptionally. ... Uptick rule : Short-selling orders may not be quoted at or under the most recently matched price.",
         "confidence": "high",
-        "verified": "2026-08-16"
+        "verified": "2026-08-16",
+        "spec": null
       },
       "block_trade": {
         "zh": "大宗/篮子交易：KOSPI大宗交易最低数量为5,000倍交易单位（ETF/ETN为500倍）或1亿韩元以上；KOSDAQ为5000万韩元以上；篮子交易KOSPI须5只以上标的且合计10亿韩元以上，KOSDAQ须5只以上标的且合计2亿韩元以上；常规时段大宗交易价格须在申报当日已形成的最高价与最低价之间，盘前盘后大宗交易须在当日涨跌停范围内",
@@ -822,6 +864,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "dark_pool": {
@@ -837,6 +880,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -853,6 +897,7 @@
         "confidence": "low",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -869,6 +914,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -888,7 +934,8 @@
             "confidence": "high",
             "detail": "该官方时段表另区分「所有其他产品（不含瘦肉猪期货）」「瘦肉猪期货」「最后交易日」等多组不同的开收盘集合竞价窗口，本字段仅取旗舰股指衍生品一组作代表，完整分组见 sources 页面原表。",
             "verified": "2026-08-16",
-            "enum": null
+            "enum": null,
+            "spec": null
           },
           "continuous_am": {
             "zh": "常规交易日连续交易 08:45-15:35（旗舰股指衍生品，最后交易日提前至08:45-15:20且当日无收盘集合竞价）",
@@ -909,6 +956,7 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "lunch_break": {
@@ -925,6 +973,7 @@
             ],
             "verified": "2026-08-16",
             "enum": null,
+            "spec": null,
             "quote": null
           },
           "continuous_pm": {
@@ -940,6 +989,7 @@
             ],
             "verified": "2026-08-16",
             "enum": null,
+            "spec": null,
             "detail": null,
             "quote": null
           },
@@ -957,6 +1007,7 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "night_session": {
@@ -973,7 +1024,8 @@
             "confidence": "high",
             "detail": "KRX已于2025年6月转为自主运营夜盘（此前为2009年8月起与CME联动、2010年8月起与Eurex联动的挂钩交易模式，CME联动已于2020年4月先行终止、Eurex联动已于2025年6月终止），见《Guide to Night Session in KRX Derivatives Market》PDF（2025年4月发布）。顶层 market_structure.night_session 字段此前（2026-08-16核实）仍按旧的CME/Eurex联动模式表述，已于2026-08-20按同一份PDF重新核实更新，两处表述已一致。",
             "verified": "2026-08-16",
-            "enum": null
+            "enum": null,
+            "spec": null
           }
         },
         "holidays_note": {
@@ -990,6 +1042,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "opening_mechanism": {
@@ -1006,6 +1059,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "closing_mechanism": {
@@ -1022,6 +1076,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "matching_principle": {
@@ -1038,6 +1093,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "order_types": {
@@ -1054,6 +1110,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "tick_size": {
@@ -1070,7 +1127,8 @@
           "confidence": "high",
           "detail": "期权按权利金档位分级报价（见KOSPI 200 Options产品页，未在zh/en正文重复列出具体数字，避免单一quote字段跨文档拼接）：权利金<10点时最小变动0.01点（2,500韩元），权利金≥10点时最小变动0.05点（12,500韩元，与期货相同）。其余产品类别（利率、货币、商品衍生品）最小报价单位本次未逐一核实，见 OPEN-QUESTIONS。",
           "verified": "2026-08-16",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "contract_specs_note": {
           "zh": "以KOSPI200期货为代表：标的资产为KOSPI200指数；合约规模＝KOSPI200期货价格×25万韩元；挂牌月份为4个季月＋2个半年月＋1个年月；最后交易日为合约月第二个星期四；最终结算日为最后交易日的次一交易日；最终结算方式为现金交割；持仓限额为个人1万张、其他（机构等）2万张",
@@ -1091,7 +1149,8 @@
           "confidence": "high",
           "detail": "KOSPI200期权合约结构与期货存在若干差异（数字见KOSPI 200 Options产品页原文，未在zh/en正文重复列出以避免quote字段跨文档拼接）：合约规模公式相同（期权价格×25万韩元）；除月度期权外另设周期权（每周一、周四各挂一份，到期日分别为下一个周一/周四，与月度期权到期周撞期的周期权不挂牌）；挂牌月份为6个连续月＋2个季月＋2个半年月＋1个年月（月度期权）；行权方式为欧式（仅到期日可行权）；行权价间距按合约月远近分3-4档；持仓限额按Delta计算（个人1万Delta、其他2万Delta）。",
           "verified": "2026-08-16",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "price_limits": {
           "type": {
@@ -1108,6 +1167,7 @@
             "quote": "① ±8% ② ±15% ③ ±20% price limits are applied to the futures base price(①tier only during 08:45~09:00 and Night-Session)",
             "confidence": "high",
             "verified": "2026-08-16",
+            "spec": null,
             "detail": null
           },
           "main_board": {
@@ -1124,6 +1184,7 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "other_boards": {
@@ -1140,6 +1201,7 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
+            "spec": null,
             "detail": null
           }
         },
@@ -1157,7 +1219,8 @@
           ],
           "quote": "there is no price fluctuation in the stock index during night hours, so circuit breaker (CB) cannot be triggered. However, if trading in the stock market is terminated due to the activation of CB stage 3 during the regular session, night trading for all derivatives that open on the same day, including FICC derivatives, is not conducted.",
           "confidence": "high",
-          "verified": "2026-08-16"
+          "verified": "2026-08-16",
+          "spec": null
         },
         "volatility_interruption": {
           "zh": "实时价格限制（Real-time Price Limits）：约束新成交价相对上一笔成交价的最大偏离幅度（区别于以当日基准价为准的每日涨跌停，见 price_limits），适用于夜盘可交易的10只品种中的8只；夜盘该限制较常规时段放宽一倍：KOSPI200期货/Mini-KOSPI200期货/KOSDAQ150期货及美元期货常规±1.0%、夜盘±2.0%（期货价差同幅度）；3年期国债期货常规±0.5%、夜盘±1.0%；10年期国债期货常规±0.9%、夜盘±1.8%；KOSPI200期权（含周期权）另按《衍生品市场业务规程施行细则》附件25单独规定",
@@ -1173,6 +1236,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "trading_halt_mechanism": {
@@ -1189,6 +1253,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "block_trade": {
@@ -1205,7 +1270,8 @@
           "confidence": "high",
           "detail": "未找到协商大宗交易的最低数量/金额门槛具体数值（现货市场对应门槛见顶层 block_trade 字段），本次抓取材料仅确认适用品种范围与交易方式，未展开具体门槛，已记入 PROJECT/OPEN-QUESTIONS.md。",
           "verified": "2026-08-16",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "market_maker_scheme": {
           "zh": "夜盘官方指南明确表示，因夜盘可交易品种本身流动性充足，暂不引入做市商制度，未来将视夜盘交易情况评估是否引入——该表述隐含常规时段衍生品市场存在做市商制度作为参照基准，但本次抓取材料未找到衍生品做市商资格/义务/激励条款的独立说明页，具体制度未展开",
@@ -1221,6 +1287,7 @@
           "confidence": "medium",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "margin_practice_note": {
@@ -1247,7 +1314,8 @@
           "confidence": "high",
           "detail": "整体保证金计算方法论（未直接体现具体数字，故未纳入zh/en正文）：KRX按标的资产特性相近的产品分组（股指、个股、债券、货币、商品等）分别计算组合净风险保证金，再加总各组得出总保证金要求，费率原则上依标的价格波动性、衍生品特性与市场状况厘定，并提供PC COMS教学软件辅助投资者理解（见 Types and Composition of Margin 页）。客户保证金进一步细分为新增未平仓部位所需的委托（初始）保证金与既有未平仓部位所需的保证金（净风险保证金+待结算损益）两部分，计算细节见 Customer Margin 页原文，未逐条摘引quote。",
           "verified": "2026-08-16",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "connect_schemes": {
           "zh": "",
@@ -1263,6 +1331,7 @@
           "verified": "2026-08-16",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         }
       }
@@ -1308,7 +1377,8 @@
         ],
         "quote": "Years in operation since incorporation — At least 3 years / Equity Capital — At least KRW 30 billion / No. of Shares to be listed — At least 1 million shares",
         "confidence": "high",
-        "verified": "2026-08-27"
+        "verified": "2026-08-27",
+        "spec": null
       },
       "listing_process_duration": {
         "zh": "从提交上市资格预审申请到取得上市批准，通常约需3至4个月（取决于IPO准备度）；KRX对国内企业申请在收到预审申请后原则上2个月内（45个工作日）、外国企业IPO原则上3个月内（65个工作日）发出资格审定通知书。整体上市审查若遇重大异议可延长。",
@@ -1324,6 +1394,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "transfer_between_boards": {
@@ -1340,6 +1411,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "continuing_obligations": {
@@ -1355,6 +1427,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1371,6 +1444,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1388,6 +1462,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_process": {
@@ -1409,6 +1484,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_transition_period": {
@@ -1425,6 +1501,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "post_delisting_venue": {
@@ -1446,6 +1523,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -1511,6 +1589,7 @@
         "quote": "Clearing/Settlement Netting payment for bid and ask, settlement on T+2",
         "confidence": "high",
         "verified": "2026-08-27",
+        "spec": null,
         "detail": null
       },
       "ccp_name": {
@@ -1527,7 +1606,8 @@
         "quote": "KRX, as a CCP, intervenes for the trades executed among members by becoming a buyer to all sellers and a seller to all buyers, finalizing the settlement details through the netting process, issuing the settlement instruction to the settlement institution and providing the guarantee for the finalization of settlement.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "csd_name": {
         "zh": "韩国证券存管院（Korea Securities Depository, KSD）——KRX持股70%的存管子公司，1974年设立",
@@ -1548,6 +1628,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "initial_margin_practice": {
@@ -1556,6 +1637,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1566,6 +1648,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1576,6 +1659,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1594,6 +1678,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-27",
+        "spec": null,
         "quote": null
       },
       "last_trading_day_rule": {
@@ -1602,6 +1687,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1620,6 +1706,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "derivatives": {
@@ -1637,6 +1724,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "maintenance_margin_practice": {
@@ -1658,6 +1746,7 @@
           "confidence": "medium",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "mark_to_market_frequency": {
@@ -1674,6 +1763,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "delivery_method": {
@@ -1690,6 +1780,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "last_trading_day_rule": {
@@ -1706,6 +1797,7 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "detail": null
         }
       }
@@ -1725,6 +1817,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "account_opening_requirements": {
@@ -1741,6 +1834,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suitability_management": {
@@ -1762,6 +1856,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "foreign_access_channel": {
@@ -1783,6 +1878,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "membership_structure": {
@@ -1799,6 +1895,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "broker_landscape": {
@@ -1820,6 +1917,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -1843,6 +1941,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_latency": {
@@ -1859,6 +1958,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_pricing_model": {
@@ -1880,6 +1980,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "historical_data_availability": {
@@ -1896,6 +1997,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_system_name": {
@@ -1912,6 +2014,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "access_methods": {
@@ -1933,6 +2036,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "major_outage_history": {
@@ -1949,6 +2053,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -1967,6 +2072,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "exchange_fees": {
@@ -1983,6 +2089,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "clearing_fees": {
@@ -1999,6 +2106,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "regulatory_fees": {
@@ -2015,6 +2123,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "stamp_duty": {
@@ -2031,6 +2140,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "financial_transaction_tax": {
@@ -2047,7 +2157,8 @@
         "confidence": "medium",
         "detail": "原引用文本（未能从缓存源逐字核实，故降级为 medium）：\"KOSPI Market 0% 0.20% KOSDAQ Market 0.15% 0.20% ... Enacted rate will be effective for the securities transferred on or after 1 Jan 2026.\" 缓存的 EY 页面仅为 JS/登录墙外壳，未含文章正文，无法逐字核验，需重新抓取原始正文或改用官方税法来源坐实 2026 年税率。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_gains_tax": {
         "zh": "资本利得税：韩国对个人股票转让（无论持有期）不征一般资本利得税；仅「大股东」(major shareholder，单只股票持股≥50亿韩元)的转让价差按约20%（含10%地方税，约22%）单独计税。2025年税改曾拟将大股东门槛由50亿韩元下调至10亿韩元，但在散户反弹后，政府于2025年9月决定维持50亿韩元门槛不变。",
@@ -2068,6 +2179,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "dividend_withholding_tax": {
@@ -2084,6 +2196,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "implicit_costs_note": {
@@ -2105,6 +2218,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -2123,6 +2237,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "political_risk_note": {
@@ -2144,6 +2259,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "liquidity_risk_note": {
@@ -2165,6 +2281,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "regulatory_change_risk_note": {
@@ -2181,6 +2298,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "enforcement_note": {
@@ -2197,6 +2315,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     }

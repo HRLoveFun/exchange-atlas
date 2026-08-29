@@ -22,6 +22,7 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -31,6 +32,7 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -49,7 +51,8 @@
         "quote": "The Toronto Stock Exchange (known by the acronyms TSE until 2002 and TSX thereafter) likely descended from the Association of Brokers, a group formed by Toronto businessmen on July 26, 1852. No records of the group's transactions have survived. It is however known that on October 25, 1861, twenty-four brokers gathered at the Masonic Hall to create and participate in the Toronto Stock Exchange.",
         "confidence": "medium",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "history": {
         "zh": "1852年经纪人协会成立、1861年正式创立TSE；1999年起公司化改制（结束会员制），2001年收购Canadian Venture Exchange（更名TSX Venture Exchange）并成立母公司TSX Group Inc.；2007年12月同意收购蒙特利尔交易所（Montréal Exchange），2008年5月完成收购并更名为TMX Group Inc.；2012年7月被加拿大金融机构联合体Maple Group收购（获91%股份），Maple Group其后更名为现任母公司TMX Group Limited",
@@ -70,7 +73,8 @@
         "quote": "The Montreal Exchange was acquired on December 10, 2007, for C$ 1.31 Billion. The acquisition was completed on May 1, 2008, and the corporation subsequently renamed to TMX Group Inc. On June 11, 2008, at a meeting of shareholders of TSX Group Inc, a resolution to change the name of the corporation to TMX Group Inc. was put forward.",
         "confidence": "medium",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "organization_form": {
         "enum": "demutualized_listed",
@@ -86,7 +90,8 @@
         ],
         "quote": "In 1999, through a major realignment plan, the Toronto Stock Exchange became Canada's sole exchange for the trading of senior equities. ... In 2000, the Toronto Stock Exchange became a for-profit company. In 2002, its acronym was changed to TSX and it became a public company.",
         "confidence": "medium",
-        "verified": "2026-08-16"
+        "verified": "2026-08-16",
+        "spec": null
       },
       "self_listed": {
         "enum": "partial",
@@ -102,6 +107,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-16",
+        "spec": null,
         "quote": null
       },
       "market_cap_usd_bn": {
@@ -118,7 +124,8 @@
         "quote": "Toronto Stock Exchange\n\n                              February 2026           January 2026           February 2025\nIssuers Listed                                    2,132                  2,110                   1,861\nMarket Cap Listed Issues             $6,798,873,608,543     $6,363,991,181,783      $5,145,266,065,041\n",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "listed_companies_count": {
         "zh": "2,132 家（2026年2月，TSX Issuers Listed）",
@@ -134,7 +141,8 @@
         "quote": "Toronto Stock Exchange\n\n                              February 2026           January 2026           February 2025\nIssuers Listed                                    2,132                  2,110                   1,861\n",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "annual_turnover_usd_bn": {
         "zh": "TSX 2025全年成交额 $3,737,060,805,386 加元（未换算美元）",
@@ -150,7 +158,8 @@
         "quote": "Toronto Stock Exchange\n\n                                      December 2025         November 2025          December 2024\n Volume                                  9,486,106,262          8,908,413,019         7,708,838,580\n Value                                $360,286,533,284       $325,825,113,125      $274,446,030,031\n\nYear-to-date Statistics\n\n                                       2025                  2024                  % Change\n Volume                                     104,297,850,627        87,435,483,020                 +19.3\n Value                                   $3,737,060,805,386     $2,897,631,310,745                +29.0\n",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "global_ranking": {
         "zh": "",
@@ -159,6 +168,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -176,7 +186,8 @@
         "quote": "TSX, TSXV and TSX Alpha support trading of securities denominated in USD. USD-denominated securities are identified through the symbology with the security's symbol ending with an “.U” suffix.",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "settlement_currency": {
         "zh": "与交易货币一致：加元为主，USD计价证券以美元结算",
@@ -185,6 +196,7 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       }
@@ -204,7 +216,8 @@
         "quote": "TMX Group Limited and TSX Inc. The TSX Inc., together with its parent company, TMX Group Limited, is recognized as an exchange in Ontario.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "self_regulatory_org": {
         "zh": "加拿大投资监管组织（Canadian Investment Regulatory Organization, CIRO）",
@@ -220,7 +233,8 @@
         "quote": "The Canadian Investment Regulatory Organization (CIRO) is a self-regulatory organization (SRO) that regulates investment dealers and mutual fund dealers, and acts as the regulation services provider for marketplaces that have retained it as such, including monitoring trading on those marketplaces for compliance with CIRO rules and securities legislation. ... The two predecessor SROs, the Investment Industry Regulatory Organization of Canada (IIROC) and the Mutual Fund Dealers Association of Canada (MFDA), amalgamated to continue as the New Self-Regulatory Organization of Canada (New SRO), effective January 1, 2023, which subsequently changed its name to CIRO on June 1, 2023.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_regulator": {
         "zh": "安大略省证券委员会（OSC）——TSX规则手册将「Clearing Corporation」定义为经OSC认定的清算机构",
@@ -236,6 +250,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "core_laws": {
@@ -257,7 +272,8 @@
         "quote": "“Securities Act” means the Securities Act, R.S.O. 1990, c. S.5 as amended from time to time.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_ownership_limit": {
         "zh": "对 TSX 上市证券本身无一刀切的外资持股上限——任何外国投资者均可自由持有 TSX 股票。但特定行业发行人受联邦行业法限制：根据《银行法》（Bank Act）任何人不得拥有或控制 Schedule 1 银行 10% 以上股份；根据《电信法》（Telecommunications Act）外资对电信公共运营商有表决权股份上限 20%；广播、保险等行业亦有类似限制。这些是针对「发行人所在行业」的限制，不是对交易所交易的一般限制",
@@ -273,7 +289,8 @@
         "quote": "Under the federal Bank Act no person may own and control more than 10% of the shares of a bank listed in Schedule 1. ... The federal Telecommunications Act restricts foreign ownership and control to 20% of the voting shares of a telecommunications common carrier.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_controls": {
         "zh": "加拿大对证券投资跨境资金流动不设一般性资本管制（无外汇锁定、无本金跨境流动限制）；外国投资者可自由买卖 TSX 上市证券。联邦层面仅《投资加拿大法》（Investment Canada Act, ICA）对「取得加拿大企业控制权」的外国投资进行净利益/国家安全审查，不触及二级市场交易",
@@ -289,7 +306,8 @@
         "quote": "The Act also allows the government to review foreign investments of any size to ensure they are not harmful to Canada's national security.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "disclosure_requirements": {
         "zh": "TSX 上市发行人须持续遵守 CSA 统一的《国家文书 51-102 持续披露》（NI 51-102）以及 TSX 自身的《Company Manual》持续上市义务，包括按期提交财务报表、管理层讨论与分析（MD&A）、重大事项的即时披露等",
@@ -305,6 +323,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "investor_protection": {
@@ -321,7 +340,8 @@
         "quote": "$1 million for all general accounts combined (such as cash accounts, margin accounts, TFSAs and FHSAs), plus\n$1 million for all registered retirement accounts combined (such as RRSPs, RRIFs and LIFs), plus\n$1 million for all registered education savings plans (RESPs) combined where the client is the subscriber of the plan.\n",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "products": {
@@ -397,6 +417,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "continuous_am": {
@@ -412,6 +433,7 @@
           ],
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -428,6 +450,7 @@
           ],
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -445,6 +468,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "after_market": {
@@ -461,7 +485,8 @@
           ],
           "confidence": "high",
           "verified": "2026-08-16",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "night_session": {
           "zh": "无",
@@ -476,6 +501,7 @@
           ],
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -494,6 +520,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "opening_mechanism": {
@@ -510,6 +537,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "closing_mechanism": {
@@ -531,6 +559,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "matching_principle": {
@@ -547,7 +576,8 @@
         "quote": "Broker Preferencing An incoming attributed order from a broker will automatically be matched with another attributed order from the same broker in the same trading venue, regardless of its position in the order book. Jitney and Anonymous orders are excluded from broker preferencing opportunities.",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "order_types": {
         "zh": "限价单、市价单、冰山单（Iceberg）、暗盘单（Dark Pegged/Dark Limit）、绕过标记单（Bypass）、待触发单（On-Stop）等；另有MOC/LOC（Limit on Close）等收盘专用订单",
@@ -563,6 +593,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "tick_size": {
@@ -579,6 +610,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "board_lot_size": {
@@ -595,6 +627,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "odd_lot_handling": {
@@ -611,6 +644,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "price_limits": {
@@ -628,6 +662,7 @@
           "quote": "A marketplace threshold parameter is applied to each security, as a permissible price deviation limit from a pair of reference prices: The current National Last Sale Price (NLSP). The NLSP as of the beginning of the current minute. ... The price deviation limit varies from security to security, based on security type and price range, but will always be at or inside the limits specified by the CIRO Marketplace Threshold guidance.",
           "confidence": "high",
           "verified": "2026-08-16",
+          "spec": null,
           "detail": null
         },
         "main_board": {
@@ -644,6 +679,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -660,6 +696,7 @@
           "verified": "2026-08-16",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         }
       },
@@ -677,7 +714,8 @@
         ],
         "quote": "1 7% 15 minutes* 2 13% 15 minutes* 3 20% Rest of the day *No trading halt if price decline happens after 3:25 p.m., unless there is Level 3 halt.",
         "confidence": "high",
-        "verified": "2026-08-16"
+        "verified": "2026-08-16",
+        "spec": null
       },
       "volatility_interruption": {
         "zh": "个股熔断机制（Single Stock Circuit Breaker, SSCB）：5分钟内价格波动达10%以上，跨全体加拿大市场自动触发该股票5分钟停牌；停牌前触发价外5%以上的成交事后撤销；初期适用范围为标普/多伦多综指成份股及以其为主要持仓的ETF",
@@ -693,6 +731,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -709,6 +748,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "intraday_reversal": {
@@ -725,6 +765,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "short_selling": {
@@ -741,7 +782,8 @@
         "quote": "“short sale” Repealed (April 1, 2002) ... “UMIR” means the Universal Market Integrity Rules as adopted by IIROC or a predecessor or successor organization and approved by the applicable securities regulatory authorities and in effect from time to time.",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "block_trade": {
         "zh": "",
@@ -757,6 +799,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "dark_pool": {
@@ -773,6 +816,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "market_maker_scheme": {
@@ -794,7 +838,8 @@
         "quote": "The primary responsibilities of a Market Maker are to maintain a fair and orderly market in its securities of responsibility and generally to make a positive contribution to the functioning of the market.",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "connect_schemes": {
         "zh": "无类似沪港通的跨境交易连接安排；加拿大证券管理机构（CSA）与美国SEC之间有「多法域披露制度」（Multi Jurisdictional Disclosure System, MJDS），允许符合条件的加拿大发行人以加拿大招股书披露文件满足部分美国发行/报告要求——这是披露互认安排，不是交易连接机制，不与Stock Connect混为一谈",
@@ -810,6 +855,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "derivatives": {
@@ -858,7 +904,8 @@
         ],
         "quote": "Sec. 309. Requirements for Eligibility for Listing1\n\n         a)        Income & Revenue-Producing:\n\n                   i)        Operations: either (A) annual audited pre-tax net income from continuing operations of $750,000 in the\n                             fiscal year immediately preceding the filing of the listing application (the \"Income Test\"); or (B) annual\n                             audited revenue of $10,000,000 in the fiscal year immediately preceding the filing of the listing\n                             application (the \"Revenue Test\");\n                   ...\n                   iii)      Market Support: market capitalization of at least $100,000,000.\n",
         "confidence": "high",
-        "verified": "2026-08-27"
+        "verified": "2026-08-27",
+        "spec": null
       },
       "listing_process_duration": {
         "zh": "TSX 未公布法定固定上市时长；流程为提交上市申请 + 各省证券监管机构（如 OSC）招股书审阅 + TSX 审核至附条件批准，之后定价、交割、于定价后约 2–3 个交易日挂牌。第三方实务指南估计典型 IPO 自启动至挂牌约 6–12 个月（招股书意见轮次与审计为关键路径）",
@@ -874,6 +921,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "transfer_between_boards": {
@@ -890,7 +938,8 @@
         "quote": "Toronto Stock Exchange\n\n                              February 2026           January 2026           February 2025\nIssuers Listed                                    2,132                  2,110                   1,861\nNew Issuers Listed                                   28                     23                      25\nIPOs                                                 22                     23                      14\nGraduates from TSXV                                   2                      0                       1\n",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "continuing_obligations": {
         "zh": "持续上市要求包括适用于其上市类别的管理层要求（Diversified/Mining/Oil and Gas/ETP/Closed-end Fund/Structured Products各有对应条款）",
@@ -906,6 +955,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suspension_resumption": {
@@ -922,6 +972,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_conditions": {
@@ -938,6 +989,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_process": {
@@ -954,6 +1006,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_transition_period": {
@@ -970,6 +1023,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "post_delisting_venue": {
@@ -991,7 +1045,8 @@
         "quote": "NEX provides a trading forum for listed companies that have fallen below TSX Venture's Continued Listing Requirements.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "indices": {
@@ -1035,7 +1090,8 @@
         ],
         "quote": "(1)       Exchange trades in securities shall settle on the first Settlement Day after the trade date, unless otherwise\n          provided by the Exchange or the parties to the trade by mutual agreement.\n(2)       Notwithstanding Rule 5-103(1), unless otherwise provided by the Exchange or the parties to the trade by\n          mutual agreement:\n                   trades on a when issued basis made:\n                            prior to the first Trading Day of the anticipated date of issue of the security shall be\n                            settled on the anticipated date of issue of such security, and\n                            on or after the first Trading Day before the anticipated date of issue of the security shall\n                            settle on the first settlement day after the trade date, provided if the security has not been\n                            issued on the date for settlement such trades shall be settled on the date that the security\n                            is actually issued;\n                   trades for rights, warrants and installment receipts made:\n                            Repealed (May 27, 2024)\n",
         "confidence": "high",
-        "verified": "2026-08-27"
+        "verified": "2026-08-27",
+        "spec": null
       },
       "ccp_name": {
         "zh": "CDS Clearing and Depository Services Inc.",
@@ -1056,7 +1112,8 @@
         "quote": "All transactions executed are reported to CDS Clearing and Depository Services Inc. at day end for clearing and settlement and management of counterparty and settlement risk. The CDS Participant Rules govern the operation of CDS clearing and settlement services, including risk management.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "csd_name": {
         "zh": "加拿大证券存管公司（The Canadian Depository for Securities Limited, CDS）",
@@ -1072,7 +1129,8 @@
         "quote": "“Clearing Corporation” means The Canadian Depository for Securities Limited or such other person as recognized by the Ontario Commission as a clearing agency for the purposes of the Securities Act and which has been designated by the Exchange as an acceptable clearing agency.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "initial_margin_practice": {
         "zh": "",
@@ -1081,6 +1139,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1090,6 +1149,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1100,6 +1160,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1118,6 +1179,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-27",
+        "spec": null,
         "quote": null
       },
       "last_trading_day_rule": {
@@ -1126,6 +1188,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1149,7 +1212,8 @@
         "quote": "The CDS Participant Rules govern the operation of CDS clearing and settlement services, including risk management.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "derivatives": {
         "initial_margin_practice": null,
@@ -1174,7 +1238,8 @@
         "quote": "an estimated 40% of all trading on TSX and TSXV originates from outside Canada",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "account_opening_requirements": {
         "zh": "在 CIRO 会员券商开户须履行「了解你的客户」（KYC）义务：注册交易商须采取合理步骤获取并定期更新客户信息（财务情况、投资目标、风险承受度等），以支持适当性评估；开户本身无交易所设定的特殊门槛，外国人亦可开户（见 foreign_access_channel）",
@@ -1190,6 +1255,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "suitability_management": {
@@ -1206,6 +1272,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "foreign_access_channel": {
@@ -1222,7 +1289,8 @@
         "quote": "an estimated 40% of all trading on TSX and TSXV originates from outside Canada",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "membership_structure": {
         "zh": "会员制：经批准的「Participating Organization（PO）」须同时保持在受认可自律组织（CIRO）的会员资格，一旦丧失CIRO会员资格，其TSX资格自动终止",
@@ -1238,6 +1306,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "broker_landscape": {
@@ -1254,6 +1323,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -1272,6 +1342,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_latency": {
@@ -1288,6 +1359,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_pricing_model": {
@@ -1304,7 +1376,8 @@
         "quote": "TSX/TSXV (Level 1)                        $1,109                        $3,327\nTSX/TSXV (Level 2)                        $1,663                        $3,881\n",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "historical_data_availability": {
         "zh": "TMX Datalinx 提供历史行情数据产品（Historical Data Products），含逐笔成交/报价、日 K 线、分钟 K 线、集合竞价及公司行动等历史数据，可按产品页订阅",
@@ -1320,6 +1393,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "trading_system_name": {
@@ -1336,7 +1410,8 @@
         "confidence": "high",
         "detail": "站内导航（Products & Services栏目）多处出现「TMX Quantum XA」字样，疑为撮合引擎/技术产品名称，但本次未抓取到对该系统的专门介绍页面，未采纳为正式字段值，留空。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "access_methods": {
         "zh": "市场参与方经授权的 Participating Organization 连接交易；行情数据通过 TMX QuantumFeed 实时数据馈送直接接入，或经 TMX Datalinx 授权的外部再分发商（external redistributors）以内部/外部分发许可协议获取",
@@ -1352,6 +1427,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "major_outage_history": {
@@ -1368,7 +1444,8 @@
         "quote": "On December 17, 2008, for the first time, the TSX was closed for a full trading day due to a technical glitch.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "costs": {
@@ -1386,6 +1463,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "exchange_fees": {
@@ -1402,7 +1480,8 @@
         "quote": "TSX Post-Open Continuous Trades Involving Displayed Orders in Equities and Exchange Traded Funds (ETFs):\n\n                                                                                         Where trade price per share is:\n                                                                                                                  ≥$1.00\n                                                                 < $1.00         Non-Interlisted\n                                                                                                           Interlisted Equities             ETFs\n                                                                                   Equities\nRemoving Displayed with Displayed or Dark\n  Fee / share / side                                           $0.00020              $0.0015                     $0.0027                    $0.0017\nProviding Displayed\n  Fee / share / side                                               $0                ($0.0011)                  ($0.0023)                  ($0.0013)\n",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_fees": {
         "zh": "TSX 现货交易的中央对手方清算由 CDS 提供，费用按《CDS Participant Fee Schedule》（经 OSC 批准）向 CDS Participant（即券商）收取，并非直接向投资者逐笔征收；具体逐笔清算费率（如 CCP 失败收受费等）在 CDS 价目表中分服务列示",
@@ -1418,6 +1497,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "regulatory_fees": {
@@ -1434,6 +1514,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "stamp_duty": {
@@ -1450,7 +1531,8 @@
         "confidence": "medium",
         "detail": "该字段volatility: volatile，按铁律必须有sources才能填；本次未找到对「加拿大联邦层面是否征收证券交易印花税」的官方一手确认，不凭常识填写，留空。",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "financial_transaction_tax": {
         "zh": "不适用：加拿大联邦层面对证券买卖不征收金融交易税（FTT）。学术研究汇编《Financial Transactions Taxes Around the World》明确列示「Canada – No Financial Transaction Tax Currently Found」",
@@ -1466,6 +1548,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "capital_gains_tax": {
@@ -1482,7 +1565,8 @@
         "quote": "Canada's capital gains inclusion rate for 2026 is currently 50%, meaning one-half of a capital gain is included in taxable income.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "dividend_withholding_tax": {
         "zh": "加拿大对支付给非居民的股息按《所得税法》Part XIII 预扣税，基准税率为支付总额的 25% 平率，若加拿大与受益所有人所在国订有税收协定可降至 15%（或直接持股 10% 以上降至 5%）等；加拿大居民收取股息享「可归额股息税务抵免」（eligible dividend tax credit），非居民不适用",
@@ -1498,7 +1582,8 @@
         "quote": "The withholding tax under Part XIII of the Act is set at flat rate of 25% of the payment made to a non-resident unless the payment is eligible for a reduced withholding rate pursuant to a tax treaty.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "implicit_costs_note": {
         "zh": "TSX 现货市场的隐性成本主要为买卖价差（bid-ask spread）与市价冲击（market impact）；采用做市商-吃单者（maker-taker）收费模式（见 exchange_fees），流动性由 Registered Trader 在最优买卖价提供自动全额成交保证（见 market_structure.odd_lot_handling）。无交易所统一公布的「隐性成本率」数字",
@@ -1519,6 +1604,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -1529,6 +1615,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1547,6 +1634,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "liquidity_risk_note": {
@@ -1568,6 +1656,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "regulatory_change_risk_note": {
@@ -1584,6 +1673,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "enforcement_note": {
@@ -1600,6 +1690,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     }

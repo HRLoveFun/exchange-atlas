@@ -19,6 +19,7 @@
         "verified": "2026-08-14",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -29,6 +30,7 @@
         "verified": "2026-08-14",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -47,7 +49,8 @@
         "quote": "Formed on 19 March 2007 as a joint stock company in accordance with article 20 of the Capital Market Law, Tadawul is the sole entity in the Kingdom authorized to act as a securities exchange.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "history": null,
       "organization_form": {
@@ -64,7 +67,8 @@
         ],
         "quote": "It shall be prohibited for any person to carry out any activities of the Exchange, the Depository Center, or the Clearing Center, or establish or operate any of them without obtaining a license from the Authority, provided that such person takes the legal form of a joint stock company.",
         "confidence": "high",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "self_listed": {
         "enum": "partial",
@@ -85,7 +89,8 @@
         ],
         "quote": "The Company was converted into a holding company on 08/10/1442H (corresponding to 20 May 2021G) pursuant to the resolution of the Extraordinary General Assembly of the Company in its meeting dated 24/08/1442H (corresponding to 6 April 2021G). [Prospectus, Section 4-1] ... The transformation of the Group into a holding structure earlier this year paved the way for the successful IPO of Saudi Tadawul Group Holding Company on 8 December 2021. Saudi Tadawul Group floated 36,000,000 shares, representing 30% of its issued share capital. ... The offering shares were priced at SAR 105 per share at the top of the Company's initial price range, implying a market capitalization of SAR 12.6 Bn at the time of listing. [Annual Report 2021, The IPO]",
         "confidence": "high",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "market_cap_usd_bn": {
         "zh": "",
@@ -93,6 +98,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -103,6 +109,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -123,7 +130,8 @@
         "quote": "Debt Instruments are priced in percentage terms over their par value.",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "settlement_currency": {
         "zh": "沙特里亚尔（SAR）",
@@ -131,6 +139,7 @@
         "verified": "2026-08-14",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -151,7 +160,8 @@
         "quote": "The current Capital Market Law is promulgated and pursuant to Royal Decree No. (M/30) dated 2/6/1424H, which formally brought the Capital Market Authority (CMA) into existence. The CMA is a government organization applying full financial, legal, and administrative independence, and has direct links with the Prime Minister.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "self_regulatory_org": {
         "zh": "Saudi Exchange 本身兼具前线监管职能（提出上市与交易相关规则、信息披露要求，报请CMA批准后实施）",
@@ -167,7 +177,8 @@
         "quote": "the board of directors of the Exchange shall propose regulations, rules and instructions regarding: the conditions for listing and trading of Securities; the immediate and regular publication of the information related to executed transactions of the Securities traded on the Exchange; the obligations of Issuers, shareholders and members to disclose to the Exchange the information that the Exchange believes to be necessary...",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_regulator": {
         "zh": "资本市场管理局（对清算中心 Muqassa、存管中心 Edaa 同样行使许可与监管权）",
@@ -183,6 +194,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "core_laws": {
@@ -199,7 +211,8 @@
         "quote": "The current Capital Market Law is promulgated and pursuant to Royal Decree No. (M/30) dated 2/6/1424H, which formally brought the Capital Market Authority (CMA) into existence.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_ownership_limit": {
         "zh": "非居民境外投资者（外国战略投资者除外）单一持股不得达到或超过10%；全体境外投资者（不含外国战略投资者）合计持股上限49%",
@@ -220,7 +233,8 @@
         "quote": "Article 6: Investment Restrictions a) Investments of foreign investors shall be subject to the following restrictions: 1) A non-residing foreign investor (except the foreign strategic investor), may not own (10%) or more of the shares of any issuer whose shares are listed or convertible debt instrument of the issuer. 2) The maximum proportion of the shares of any issuer whose shares are listed or convertible debt instrument of the issuer that may be owned by all foreign investors (in all categories, whether residents or non-residents, except the foreign strategic investors) in aggregate is (49%). [Rules for Foreign Investment in Securities] ... The Capital Market Authority (CMA) announces the opening of the capital market to all categories of foreign investors and enabling them to invest directly therein as of 1 February 2026 ... The approved amendments eliminated the concept of the Qualified Foreign Investor (QFI) in the Main Market. [CMA_N_3974]",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_controls": {
         "zh": "沙特实行开放资本账户，对证券投资组合资本一般无资本管制；境外投资者可自由汇入、汇出资金及投资收益，唯须通过 CMA 许可的渠道（如经交易所会员）并遵守反洗钱与外商投资披露要求。2026年2月取消 QFI 资格后外资可直接投资主板，进一步降低准入壁垒",
@@ -241,7 +255,8 @@
         "quote": "The Capital Market Authority (CMA) announces the opening of the capital market to all categories of foreign investors and enabling them to invest directly therein as of 1 February 2026 ... eliminating the concept of the Qualified Foreign Investor (QFI).",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "disclosure_requirements": {
         "zh": "发行人须按《资本市场法》及其实施细则、《交易所规则》持续、充分披露；所有对公众披露须完整、清晰、准确、不具误导性。交易所可要求提供进一步信息，价格敏感事项须即时披露。CMA 的法定职责包括'监管并确保证券及其发行人的信息充分披露'",
@@ -262,7 +277,8 @@
         "quote": "All disclosures made by an issuer to the public must be complete, clear, accurate, not misleading and shall comply with all disclosure requirements prescribed by the Capital Market Law, its Implementing Regulations and the Exchange Rules. [Listing Rules Art 27] ... Regulate and monitor the full disclosure of information regarding the securities and their issuers. [CMA Law Art 182]",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "investor_protection": {
         "zh": "CMA 的法定使命包括保护投资者、确保上市公司充分披露与透明",
@@ -278,6 +294,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -352,6 +369,7 @@
           "verified": "2026-08-14",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "continuous_am": {
@@ -368,6 +386,7 @@
           "verified": "2026-08-14",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "lunch_break": {
@@ -383,6 +402,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -399,6 +419,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -416,6 +437,7 @@
           "verified": "2026-08-14",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "night_session": {
@@ -431,6 +453,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -449,6 +472,7 @@
         ],
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "opening_mechanism": {
@@ -465,7 +489,8 @@
         "quote": "First Session: 09:30 – 10:00 / Opening Auction",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "closing_mechanism": {
         "zh": "第三时段收盘集合竞价（15:00–15:10），随后第四时段（15:10–15:20）允许会员按收盘价继续按盘撮合（Trade at Last）",
@@ -481,7 +506,8 @@
         "quote": "Fourth Session: Listed securities (except for Debt Instruments and ETFs): 15:10 – 15:20 / Trade at Last",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "matching_principle": {
         "zh": "限价盘在同价位按订单进入顺序撮合；连续交易时段（第二时段）市价盘可部分/全部按单一价格成交",
@@ -496,6 +522,7 @@
         ],
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -513,7 +540,8 @@
         "quote": "5.1.1 The Trading System will improve the execution prices of limit orders ... 5.2.1 During the Second Session, the Trading System will execute market orders partially or fully at one price, and convert the unmatched parts of partially matched market orders into limit orders at their traded prices.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "tick_size": {
         "zh": "股票按价格分层：25里亚尔以下0.01；25–49.98为0.02；50–99.95为0.05；100–249.90为0.10；250–499.80为0.20；500里亚尔及以上为0.50；债券类按票面值0.001%计",
@@ -529,6 +557,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "board_lot_size": {
@@ -544,6 +573,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -560,6 +590,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -578,7 +609,8 @@
               "accessed": "2026-08-14"
             }
           ],
-          "verified": "2026-08-14"
+          "verified": "2026-08-14",
+          "spec": null
         },
         "main_board": {
           "zh": "±10%（新股上市首3个交易日为±30%，第4日起收窄为±10%；ETF自上市首日起即为±10%）",
@@ -594,6 +626,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -610,6 +643,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         }
       },
@@ -627,7 +661,8 @@
         ],
         "quote": "Volatility auctions are triggered intraday for 5 minutes (during the Second session), whenever an order (regardless of its size) can potentially match an opposite side order at the upper end of the Static Limit or lower end of the Static Limit (±10%). The order that triggers the volatility auction is not executed and moves to participate in the volatility auction...",
         "confidence": "high",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "volatility_interruption": {
         "zh": "波动性拍卖（Volatility Auction）：盘中订单可能以静态限制±10%边界成交时触发，5分钟集合竞价冷静期，触发价成为新的静态基准价",
@@ -643,6 +678,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -659,6 +695,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "intraday_reversal": {
@@ -675,6 +712,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "short_selling": {
@@ -696,7 +734,8 @@
         ],
         "quote": "Article 3 Short selling transactions ... b. A person must not enter into as seller ... a short selling order in respect of a listed security unless all of the following conditions are met: ... 4) the price of selling the security, underlying the transaction, is higher than the price of the best bid of that security. ... Article 5 Eligible listed securities a. Unless the Exchange specifies otherwise, a short selling transaction may be entered into in respect of all listed securities (except for Derivatives) in accordance with the following limits: 1) The short ratio to Average Daily Traded Volume of the relevant security (total net short positions / Average Daily Traded Volume of the last 60 days) must not exceed 10 days; and 2) The total net short positions must not exceed 10% of the free floated securities of the relevant security.",
         "confidence": "high",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "block_trade": {
         "zh": "存在场外协商交易（Negotiated Deals），结算周期默认T+2，经买卖双方另行约定可在T+0至T+5间调整",
@@ -712,6 +751,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "dark_pool": {
@@ -727,6 +767,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -744,6 +785,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "connect_schemes": {
@@ -759,6 +801,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -778,6 +821,7 @@
             "confidence": "high",
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "continuous_am": {
@@ -794,6 +838,7 @@
             "confidence": "high",
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "lunch_break": {
@@ -810,6 +855,7 @@
             "detail": "Table(1)交易时段表仅列三段（开盘前/连续交易/休市），未见独立午休时段，属对表格结构的推断而非直接原文陈述，故标 medium 而非 high。",
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "quote": null
           },
           "continuous_pm": {
@@ -825,6 +871,7 @@
             "confidence": "medium",
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "detail": null,
             "quote": null
           },
@@ -842,6 +889,7 @@
             "confidence": "high",
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "night_session": {
@@ -858,6 +906,7 @@
             "detail": "与 hk-hkex.derivatives.night_session（设有收市后交易时段 AHT）不同，本次抓取的《衍生品交易与会员程序》Table(1)仅列三个时段，未见延伸交易时段的官方说明，如实按无处理。",
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "quote": null
           }
         },
@@ -875,6 +924,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "opening_mechanism": {
@@ -891,6 +941,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "closing_mechanism": {
@@ -907,6 +958,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "matching_principle": {
@@ -923,6 +975,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "order_types": {
@@ -939,7 +992,8 @@
           "quote": "7.1.1 The Derivatives Trading System will improve the execution prices of limit orders (by reducing them for buyers or increasing them for sellers) whenever the price is better than the order's price limit on the opposite side ... In the absence of a better price on the opposite side, the order will be executed at the limit price. ... 7.2.2 During the Second Session, the Derivatives Trading System will execute market orders partially or fully at one price and convert the unmatched parts of partially matched market orders into limit orders at their traded prices. ... 8.1.1 Fill or Kill (“FoK”) means the complete order quantity must be executed as soon as it becomes available for matching; otherwise the order will be immediately cancelled ... 9.1.3 Good till Cancelled (“GTC”): means that orders are subject to full execution with a validity period of up to (30) days from the transmission of the order.",
           "confidence": "high",
           "verified": "2026-08-14",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "tick_size": {
           "zh": "以现有唯一产品MT30指数期货为例：最小价格变动0.5点，每点价值50里亚尔（Minimum Price Fluctuation 0.5 points valued at SAR 50）；其余未来新增产品的最小变动价位将由各自的产品规格单独公布",
@@ -955,6 +1009,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "contract_specs_note": {
@@ -971,6 +1026,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "price_limits": {
@@ -988,6 +1044,7 @@
             "quote": "15.1.1 ... the Exchange only allows order execution on Listed Derivatives Products at a price within the daily fluctuation limits. The Exchange sets these limits against the reference price and they remain valid during the Trading Day. ... 15.1.3 The reference price for any other Trading Day is the previous Trading Day's daily settlement price, including any other adjustments, when applicable.",
             "confidence": "high",
             "verified": "2026-08-14",
+            "spec": null,
             "detail": null
           },
           "main_board": {
@@ -1004,6 +1061,7 @@
             "confidence": "high",
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "other_boards": {
@@ -1020,6 +1078,7 @@
             "verified": "2026-08-14",
             "en": null,
             "enum": null,
+            "spec": null,
             "quote": null
           }
         },
@@ -1037,7 +1096,8 @@
           ],
           "quote": "15.1.1 ... the Exchange only allows order execution on Listed Derivatives Products at a price within the daily fluctuation limits.",
           "confidence": "high",
-          "verified": "2026-08-14"
+          "verified": "2026-08-14",
+          "spec": null
         },
         "volatility_interruption": {
           "zh": "",
@@ -1053,6 +1113,7 @@
           "verified": "2026-08-14",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "trading_halt_mechanism": {
@@ -1074,6 +1135,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "block_trade": {
@@ -1090,7 +1152,8 @@
           "quote": "16.1.1 Negotiated Deals requires both sellers and buyers to agree on the quantity and price of the Listed Derivatives Product contract involved in their transaction. 16.1.2 Negotiated Deals are allowed according to a minimum size threshold, the minimum size threshold is published on the Exchange's website. ... 16.1.6 Negotiated Deals do not impact, the open high, low prices of the contract, neither the final settlement price calculation.",
           "confidence": "high",
           "verified": "2026-08-14",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "market_maker_scheme": {
           "zh": "衍生品交易会员须遵守交易所制定、经资本市场管理局（CMA）批准的做市要求（如适用）；MT30指数期货本身的产品规格明确标注支持做市（Market Making: Yes）",
@@ -1111,7 +1174,8 @@
           "quote": "Article 10 Market Makers ... Derivatives Exchange Members must comply with the market making requirements (where applicable) as specified by the Exchange and approved by the Authority. ... MT30 Index Futures Contract Specifications ... Market Making / Yes",
           "confidence": "high",
           "verified": "2026-08-14",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "margin_practice_note": {
           "zh": "衍生品交易保证金实行按客户类型分档的保证金乘数制度：机构类客户（含个人全权委托账户DPM）乘数100%；一级合格个人客户（Tier 1 Individual，需满足最近12个月季度交易额≥4,000万里亚尔且每季度≥10笔、或持仓均值≥500万里亚尔、或3年以上证券相关金融从业经验、或持有交易所认可的证券从业资格证书等条件之一）乘数133%；二级个人客户（Tier 2，不满足以上任一条件）乘数200%；最低初始保证金比例由Muqassa设定并按客户类型浮动；持仓按日盯市（Mark to Market），以当日结算价计算，盯市结果为T+0，变动保证金须由结算会员在下一交易日（T+1）规定时限内划付给Muqassa",
@@ -1132,7 +1196,8 @@
           "quote": "Margin Multiplier / Type of client / Institutions* / Tier 1 Individual** / Tier 2 Individual*** / Margin Multiplier / 100% / 133% / 200% ... Daily Margin/Premium Settlement / All outstanding positions are Mark to Market based on daily settlement price at the end of the day T+0 / Variation margin has to be settled by the clearing members to Muqassa by next day (T+1) by a prescribed time as outlined in Muqassa Procedures ... The minimum initial margin requirements is set by Muqassa and its varies depending on the type of customer",
           "confidence": "high",
           "verified": "2026-08-14",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "connect_schemes": {
           "zh": "",
@@ -1148,6 +1213,7 @@
           "verified": "2026-08-14",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         }
       }
@@ -1183,7 +1249,8 @@
         ],
         "quote": "An issuer who is applying for listing of its securities must submit an application to the Exchange which contains the information and documents required under these Rules and pay the fee... An issuer may not submit an application for listing of shares or debt instruments or convertible debt instruments without obtaining all approvals required pursuant to its bylaws, the Companies Law and its Implementing Regulations.",
         "confidence": "high",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "listing_process_duration": {
         "zh": "主板（Main Market）IPO 通常自启动至开始交易约需 6–12 个月：先向 CMA 提交申请，CMA 审核通过后再经最长约 6 个月完成上市流程与开始交易；平行市场（Nomu）流程显著更短",
@@ -1199,7 +1266,8 @@
         "quote": "It takes around 6 months to file with the CMA, then up to a further 6 months for the processing and trading to commence.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "transfer_between_boards": {
         "zh": "平行市场（Nomu）挂牌满两个日历年后可申请转往主板，另须最近一期财报无保留意见、无累计亏损、申请前十二个月内无因第38条导致的停牌记录",
@@ -1215,7 +1283,8 @@
         "quote": "An issuer whose shares are listed on the Parallel Market may only make an application to transfer to the Main Market after two calendar years from the day on which its shares were listed on the Parallel Market. ... The absence of a suspension case in accordance with Article 38 of these Rules to the Issuer's shares, within the twelve months prior to the submission of the application for transfer to the Main Market...",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "continuing_obligations": {
         "zh": "上市后持续义务集中于 Listing Rules Part 5（Articles 27–33）：发行人须按适用要求持续披露，所有披露须完整、清晰、准确、不误导；须披露可能影响证券价格的行为；交易所可要求提供进一步信息；并须遵守持续上市标准（如最低平均收盘价等）",
@@ -1231,7 +1300,8 @@
         "quote": "Article 27: Obligation to make disclosures in accordance with applicable requirements — All disclosures made by an issuer to the public must be complete, clear, accurate, not misleading and shall comply with all disclosure requirements prescribed by the Capital Market Law, its Implementing Regulations and the Exchange Rules.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "suspension_resumption": {
         "zh": "交易所可应要求或主动实施临时停牌（Article 40 临时停牌机制）；若停牌情形消除，交易所将在停牌情形结束后的不超过五个交易日内恢复交易",
@@ -1247,7 +1317,8 @@
         "quote": "Article 40: Temporary trading halt. An issuer may request from the Exchange a temporary trading halt upon the occurrence of an event that occurs during trading hours which requires immediate disclosure under the Capital Market Law, its Implementing Regulations and the Exchange Rules and the issuer cannot maintain the confidentiality of this information until the end of the trading period, the trading halt of that issuer's securities will be made by the Exchange immediately upon receiving the request. [Listing Rules Art 40] ... The Exchange will lift the suspension within a period not exceeding five trading sessions following the end of the suspension circumstances. [Listing Rules Art 38]",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delisting_conditions": {
         "zh": "CMA可在多种情形下随时暂停交易或取消上市，包括：为保护投资者/维护市场秩序认为有必要；发行人重大违反《资本市场法》/实施细则/交易所规则；未按时缴纳费用或罚款；发行人业务/资产已不再适合继续上市；累计亏损达资本50%以上并已向法院申请破产重整程序等",
@@ -1264,6 +1335,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_process": {
@@ -1280,7 +1352,8 @@
         "quote": "Article 38: Power to suspend trading or cancel listing. The Authority may at any time suspend the trading of securities or cancel their listing as it deems fit, in any of the following circumstances: ... 13) upon the registration of the application for the commencement of a financial restructuring procedure of the issuer, whose accumulated losses reached 50% or more of its capital with the court in accordance with the Bankruptcy Law. [Listing Rules Art 38] ... Article 39(a): An issuer whose securities have been listed may not cancel the listing of its securities on the Exchange without the prior approval of the Authority. In order to obtain the Authority's approval, the issuer must submit a request of the cancelation to the Authority with a simultaneous notification to the Exchange... [Listing Rules Art 39]",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delisting_transition_period": {
         "zh": "若发行人证券被暂停交易后连续六个月未采取适当行动消除暂停原因，CMA 可取消其上市证券。即停牌→强制退市的过渡期阈值为约六个月",
@@ -1296,7 +1369,8 @@
         "quote": "Where the suspension of an issuer continues for six months without the issuer taking appropriate action to resolve the reasons that lead to the suspension, the Authority may cancel that issuer's listed securities.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "post_delisting_venue": {
         "zh": "被暂停/退市的证券可在 Tadawul 的 OTC Trading（场外交易）平台继续交易；该平台面向'暂停/退市的公司与基金'。退市完成后证券若未转入 OTC 则不再在主板挂牌",
@@ -1312,7 +1386,8 @@
         "quote": "Issuers Trading Information ... Suspended/Delisted/Companies and Funds OTC Trading",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "indices": {
@@ -1379,6 +1454,7 @@
         "quote": "T+2 All types of securities' transactions are completed within settlement timing determined by the Exchange. Normal exchange transactions are settled two business days following the transaction execution date; i.e. (T+2). Negotiated deals can have different settlement cycles that can range from T+0 up to T+5...",
         "confidence": "high",
         "verified": "2026-08-14",
+        "spec": null,
         "detail": null
       },
       "ccp_name": {
@@ -1395,7 +1471,8 @@
         "quote": "Muqassa was established in 2018 as part of Saudi Arabia's Financial Sector Development Program. We offer robust clearing services that can handle multiple asset classes.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "csd_name": {
         "zh": "证券存管中心公司（Edaa）",
@@ -1411,7 +1488,8 @@
         "quote": "The Securities Depository Center Company 'Edaa' was established in 2016 and is fully owned by Saudi Exchange (Tadawul). ... Edaa operates and maintain the Depository and Settlement System (DSS), an electronic book-entry system used to record and maintain securities and to register the ownership of securities.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "initial_margin_practice": {
         "zh": "衍生品交易端由会员向客户收取初始保证金，用以覆盖客户持仓价值的潜在不利变动；清算端（Muqassa 对结算会员）设最低初始保证金，结算会员可在此最低保证金基础上按合约类别适用各自的保证金乘数（Margin Multiplier）向客户加收。总保证金 = 初始保证金 + 适用的变动保证金 + Muqassa/结算会员认定的追加保证金",
@@ -1427,7 +1505,8 @@
         "quote": "The margin that is collected to cover potential changes in the value of each client position. ... Is the number by which the minimum percentage margin, required by the Muqassa, have to be multiplied to form the margin required by the clearing member from his clients for newly entered positions. ... Means total Margin and it includes Initial Margin, any applicable Variation Margin and any additional margin determined by Muqassa and the clearing member.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "maintenance_margin_practice": {
         "zh": "变动保证金（Variation Margin）按市值计价（MTM）每日计收，用于覆盖未平仓头寸当日的实际盈亏；当保证金低于维持水平时会员向客户追收",
@@ -1443,7 +1522,8 @@
         "quote": "Variation Margin (VM) is MTM, meaning that margin is collected on a daily basis to cover the current exposure resulting from actual changes in market prices for each position. VM is the unrealized profits / losses on open positions on daily basis.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "mark_to_market_frequency": {
         "zh": "每日盯市：交易每日结束时按当日结算价进行市值重估与保证金结算",
@@ -1459,7 +1539,8 @@
         "quote": "Daily settlement takes place end of day on a daily mark to market basis until final settlement on expiration day.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delivery_method": {
         "enum": "na",
@@ -1475,7 +1556,8 @@
         ],
         "quote": "T+2 All types of securities' transactions are completed within settlement timing determined by the Exchange. Normal exchange transactions are settled two business days following the transaction execution date; i.e. (T+2).",
         "confidence": "medium",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "last_trading_day_rule": {
         "zh": "以旗舰衍生品 MT30 指数期货为例，最后交易日为合约到期月的第三个星期四（当日 15:30 结束交易）；现货市场无'最后交易日'概念，每个交易日均可交易",
@@ -1491,7 +1573,8 @@
         "quote": "Last Trading Day: The third Thursday of the expiry month (trading ends at 15:30).",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "default_management": {
         "zh": "衍生品清算由 Muqassa（Saudi Exchange 全资子公司）中央对手方（CCP）承担，为 Tadawul 全资产类别的成交提供清算服务并'保证所有交易的结算与履约'；Muqassa 设有风险管理框架（会员准入、保证金、违约处置），具体违约基金/瀑布式损失分摊细则见其规则与风险管理办法",
@@ -1512,7 +1595,8 @@
         "quote": "by facilitating clearing services and guaranteeing the settlement and fulfilment of obligations for all trades executed on Tadawul across all asset classes under its coverage.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "derivatives": {
         "initial_margin_practice": null,
@@ -1532,7 +1616,8 @@
           "quote": "Settlement: Cash settled, T+0.",
           "confidence": "medium",
           "verified": "2026-08-27",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "last_trading_day_rule": null
       }
@@ -1552,7 +1637,8 @@
         "quote": "Foreign investors' ownership in the Saudi market reached SAR 457 billion (about USD 121.9 billion) by the end of May 2026.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "account_opening_requirements": {
         "zh": "投资者须先通过交易所会员（经纪商）开立投资账户方可交易",
@@ -1568,6 +1654,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suitability_management": {
@@ -1584,7 +1671,8 @@
         "quote": "Article 39(a): Before a capital market institution carries out any securities business for a client ... it must obtain information from the client concerning the client's financial situation, investment experience and investment objectives ... Article 43(a): A capital market Institution must not deal, advise, offer a security ... unless the advice or transaction is suitable for that client having regard to the facts disclosed by that client...",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_access_channel": {
         "zh": "2026年2月1日起取消QFI资格制度，境外投资者可不受投资者类别限制直接投资主板，但仍受10%单一持股与49%合计持股上限约束（见 regulation.foreign_ownership_limit）",
@@ -1600,7 +1688,8 @@
         "quote": "The Capital Market Authority (CMA) announces the opening of the capital market to all categories of foreign investors and enabling them to invest directly therein as of 1 February 2026, following the CMA Board's approval of the regulatory framework allowing non-resident foreign investors to invest directly in the Main Market. ... The approved amendments eliminated the concept of the Qualified Foreign Investor (QFI) in the Main Market, thereby allowing all categories of foreign investors to access the market without the need to meet qualification requirements.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "membership_structure": {
         "zh": "交易所会员（经纪商）须在王国境内设立并持有CMA有效牌照；CMA另按业务类型（自营Dealing/托管Custody/资产管理Managing/安排Arranging/顾问Advising）分类颁发牌照，各类别设不同最低资本要求",
@@ -1621,7 +1710,8 @@
         "quote": "Applicants must be established in the Kingdom and hold a valid license from the CMA. Once CMA authorization is obtained, applicants need to complete the Saudi Exchange membership requirements.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "broker_landscape": {
         "zh": "零售与机构客户须通过持有 CMA 有效牌照的交易所会员（Exchange Members / 经纪商）进行交易；交易所公布会员名录，本地主要经纪商包括 Al Rajhi Capital、SNB Capital、Riyad Capital、Alinma、Aljazira 等。会员须于沙特境内设立并持 CMA 牌照，按业务类别（Dealing/Custody/Managing/Arranging/Advising）分类",
@@ -1642,7 +1732,8 @@
         "quote": "Applicants must be established in the Kingdom and hold a valid license from the CMA. Once CMA authorization is obtained, applicants need to complete the Saudi Exchange membership requirements.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "infrastructure": {
@@ -1660,7 +1751,8 @@
         "quote": "Market Data products include Best Price, Market Depth (best 5 levels), Premium (full depth) and Full Order Book...",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "data_latency": {
         "zh": "交易系统 X-stream INET 订单处理延迟低于 40 微秒；交易所同时提供实时与延迟（官网 Ticker 延迟≥5 分钟）行情。具体端到端延迟以数据产品等级而定",
@@ -1681,7 +1773,8 @@
         "quote": "The X-stream INET trading engine ... latency of less than 40 microseconds.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "data_pricing_model": {
         "zh": "市场数据按商业授权收费：Best Price 约 30 沙特里亚尔/月，Market Depth 50–75，Premium 75–100，Full Order Book 300 沙特里亚尔/月；机构级 Market Data Feed（MDF）连接年费约 30,000 里亚尔，非显示型授权（Non-display）年费按档 80k/50k/100k 里亚尔。整体为付费授权模式，分实时/延迟产品",
@@ -1697,7 +1790,8 @@
         "quote": "Best Price SAR 30/month; Market Depth SAR 50–75; Premium SAR 75–100; Full Order Book SAR 300/month; MDF connection SAR 30,000/year; Non-display licences SAR 80,000/50,000/100,000/year.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "historical_data_availability": {
         "zh": "交易所提供覆盖所有上市工具的历史数据；日终（End-of-Day）数据可回溯过去 5 年，跨股票、ETF、债券、基金等资产类别",
@@ -1713,7 +1807,8 @@
         "quote": "End-of-Day data for the past 5 years for all listed instruments across asset classes.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_system_name": {
         "zh": "Tadawul 使用 Nasdaq 的 X-stream INET 交易系统，于 2015 年上线，为其提供极速撮合与全资产类别交易能力",
@@ -1734,7 +1829,8 @@
         "quote": "X-Stream INET is the latest in trading solutions and is the fastest recorded trading engine in the world.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "access_methods": {
         "zh": "订单须经三种渠道之一提交：T Channel（面向注册交易员）、I Channel（面向经会员网站/在线应用下单的客户）",
@@ -1750,7 +1846,8 @@
         "quote": "Orders must be submitted using only the following channels: 4.1.1 T Channel: A channel specifically designed for Registered Traders to submit orders; 4.1.2 I Channel: A channel specifically designed for clients to submit orders via Exchange Members' websites and online applications;",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "major_outage_history": {
         "zh": "本次研究未核实到 Tadawul 重大停机的逐例记录；X-stream INET 平台设计具备业务连续性与灾备（disaster recovery）能力，单点故障风险由冗余架构缓解",
@@ -1766,7 +1863,8 @@
         "quote": "X-stream INET incorporates rigorous business continuity and disaster recovery arrangements.",
         "confidence": "low",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "costs": {
@@ -1784,7 +1882,8 @@
         "quote": "Brokerage commissions in Saudi are set by individual brokers and may be zero on some platforms.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "exchange_fees": {
         "zh": "交易所交易费约为成交金额的 0.009%（由沙特交易所/Tadawul 收取）",
@@ -1800,7 +1899,8 @@
         "quote": "Exchange Fee: 0.009% of the traded value.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_fees": {
         "zh": "清算费约 0.005%（由 Muqassa 中央对手方收取）",
@@ -1816,7 +1916,8 @@
         "quote": "Clearing Fee: 0.005% of the traded value (Muqassa).",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_fees": {
         "zh": "监管规费约 0.030%（由资本市场管理局 CMA 收取）；此外相关服务费适用 15% 增值税（VAT）",
@@ -1832,7 +1933,8 @@
         "quote": "CMA Fee: 0.030% of the traded value.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "stamp_duty": {
         "zh": "沙特对证券转让不征收印花税（stamp duty）",
@@ -1853,7 +1955,8 @@
         "quote": "There is no stamp duty on the transfer of securities in Saudi Arabia.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "financial_transaction_tax": {
         "zh": "沙特不对证券交易征收金融交易税（FTT）",
@@ -1869,7 +1972,8 @@
         "quote": "Saudi Arabia is not listed among jurisdictions imposing a financial transaction tax.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_gains_tax": {
         "zh": "在沙特市场上市的股票，其资本利得免税（对非居民通过合格渠道投资于上市市场的处置亦豁免）；非居民企业持有非上市沙特公司股权处置的收益按 20% 企业所得税计征",
@@ -1890,7 +1994,8 @@
         "quote": "Capital gains realised from disposal of shares in Saudi stock companies listed in the Saudi market are tax exempt.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "dividend_withholding_tax": {
         "zh": "向非居民支付的股息按 5% 预提所得税（withholding tax）征收；沙特/GCC 居民股东则就其 zakat（天课，约 2.5%）而非所得税负",
@@ -1911,7 +2016,8 @@
         "quote": "Dividends distributed to non-residents are subject to a 5% withholding tax.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "implicit_costs_note": {
         "zh": "除显性费用外，隐性成本主要为买卖价差（bid-ask spread）与市场冲击（market impact）。沙特市场散户参与度高、流动性集中于大盘蓝筹（如 Aramco、SABIC、银行股），中小盘价差可能较宽、冲击成本更高；深度流动性在大盘品种更充足",
@@ -1927,7 +2033,8 @@
         "quote": "the largest and most liquid in the MENA region.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "risks": {
@@ -1937,6 +2044,7 @@
         "confidence": "low",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1960,7 +2068,8 @@
         "quote": "Vision 2030 aims to diversify the economy ... The CMA announces the opening of the capital market to all categories of foreign investors as of 1 February 2026.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "liquidity_risk_note": {
         "zh": "Tadawul 是 MENA 地区规模最大、流动性最高的市场，但流动性高度集中于大盘蓝筹（Aramco、SABIC、主要银行）；中小盘及部分债券/基金流动性较薄，极端行情下可能出现流动性骤降与价差扩大",
@@ -1976,7 +2085,8 @@
         "quote": "the largest and most liquid in the MENA region.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_change_risk_note": {
         "zh": "2026年2月起取消QFI制度、放开主板外资准入，属近期重大监管变革，详见 regulation.foreign_ownership_limit",
@@ -1992,6 +2102,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "enforcement_note": {
@@ -2013,7 +2124,8 @@
         "quote": "The Authority may at any time suspend the trading of securities or cancel their listing as it deems fit ... 2) the issuer fails, in a manner which the Authority considers material, to comply with the Capital Market Law, its Implementing Regulations or the Exchange Rules...",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     }
   }

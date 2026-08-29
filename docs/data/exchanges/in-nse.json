@@ -20,6 +20,7 @@
         "verified": "2026-08-14",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -38,7 +39,8 @@
         "quote": "Trade End time after Start of US Day light Savings in Spring Season* / Trade End time after End of US Day light Savings in Fall Season*",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "founded_year": {
         "zh": "1992（具体月日官网未标注）注册成立；1993年4月经SEBI认定为证券交易所；1994年开始运营",
@@ -54,7 +56,8 @@
         "quote": "NSE was incorporated in 1992. It was recognised as a stock exchange by SEBI in April 1993 and commenced operations in 1994 with the launch of the wholesale debt market, followed shortly after by the launch of the cash market segment.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "history": {
         "zh": "1992年注册成立，1993年经SEBI认定为证券交易所，1994年开始运营（先上线批发债券\n市场，随后是现货市场），同年即实现电子/屏幕化交易，是印度首家采用电子交易系统\n的交易所。1996年开始与中央证券存管机构对接实现无纸化（dematerialised）证券结算。\n2000年上线股指期货，2001年上线股指期权；2007-2008年度成为印度首家提供货币期货\n交易的交易所。近年在衍生品合约成交量上按期货业协会（FIA）统计连续多个自然年\n（2019、2022-2024）位列全球第一。集团架构上，NSE 通过全资子公司 NSE IFSC Limited\n在古吉拉特邦GIFT City国际金融服务中心运营独立的国际交易所实体（受IFSCA监管），\n并与新加坡交易所（SGX）合作推出\"NSE IFSC-SGX Connect\"（2022年启用）。\n",
@@ -75,7 +78,8 @@
         "quote": "Commenced electronic or screen-based trading / Became the first exchange in India to offer trading in Currency Futures / Largest volume of derivatives contracts traded in the world in the calendar year 2024 based on Futures Industry Association statistics / NSE IFSC-SGX Connect Inaugurated by Hon'ble Prime Minister of India Shri Narendra Modi",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "organization_form": {
         "zh": "",
@@ -84,6 +88,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -94,6 +99,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -111,6 +117,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "listed_companies_count": {
@@ -120,6 +127,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -129,6 +137,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -147,7 +156,8 @@
         "quote": "Largest volume of derivatives contracts traded in the world in the calendar year 2024 based on Futures Industry Association statistics",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_currency": {
         "zh": "印度卢比 (INR)",
@@ -163,6 +173,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "settlement_currency": {
@@ -172,6 +183,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       }
@@ -191,7 +203,8 @@
         "quote": "The Securities and Exchange Board of India was established as a statutory body in the year 1992 and the provisions of the Securities and Exchange Board of India Act, 1992 (15 of 1992) came into force on January 30, 1992.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "self_regulatory_org": {
         "zh": "未见独立于SEBI/交易所之外的第三方自律组织；一线监管职能由NSE自身'Regulation'条线（含会员合规、市场监察、信息披露监督等）承担",
@@ -207,7 +220,8 @@
         "quote": "Market Rules & Regulations / Market Surveillance / Exchange Disclosures / Defaulting Clients",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_regulator": {
         "zh": "印度证券交易委员会 (SEBI)",
@@ -216,6 +230,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -238,7 +253,8 @@
         "quote": "Securities Contracts (Regulation) Act, 1956 (As amended by the International Financial Services Centres Authority Act, 2019 w.e.f. October 01, 2020) / The Securities and Exchange Board of India Act, 1992 (15 of 1992) came into force on January 30, 1992.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_ownership_limit": {
         "zh": "外资通过 FPI（外国证券投资者，原 FII）渠道投资印度上市公司股票，受 RBI/SEBI 双重监管：单一 FPI（含其投资群体 investor group）对单一公司的持股不得超过该公司完全稀释后实收股本的 10%；全体 FPI 合计持股的法定上限为该公司实收股本的 24%，可经董事会与股东大会特别决议批准上调至该行业的 FDI 行业上限（sectoral cap），公营银行（含 SBI）上限为 20%",
@@ -259,7 +275,8 @@
         "quote": "The ceiling for overall investment for FIIs is 24 per cent of the paid up capital of the Indian company and 10 per centfor NRIs/PIOs. The limit is 20 per cent of the paid up capital in the case of public sector banks, including the State Bank of India. / The ceiling of 24 per cent for FII investment can be raised up to sectoral cap/statutory ceiling, subject to the approval of the board and the general body of the company passing a special resolution to that effect. / The purchase of equity shares of each company by a single foreign portfolio investor including its investor group shall be below ten per cent of the total paid-up equity capital on a fully diluted basis of the company:",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_controls": {
         "zh": "印度对跨境证券投资实施资本项目管理：RBI 通过投资组合投资计划（PIS）设定并逐日监控外资持股上限——外资对单一公司持股触达上限前 2 个百分点即触发'警示'(caution)与'停止买入'(stop purchase)机制；且印度卢比在资本项目下未完全可兑换。上述外资持股上限是这一管制框架的具体体现",
@@ -275,7 +292,8 @@
         "quote": "The Reserve Bank of India monitors the ceilings on FII/NRI/PIO investments in Indian companies on a daily basis. / The ceiling for overall investment for FIIs is 24 per cent of the paid up capital of the Indian company and 10 per centfor NRIs/PIOs.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "disclosure_requirements": {
         "zh": "上市公司持续披露义务受SEBI《上市义务与披露要求条例》(LODR) 等一组条例规管（另有ICDR/PIT/SAST等）；具体披露频率与渠道细则本次未逐条核实",
@@ -291,7 +309,8 @@
         "quote": "Compliance track record (including LODR , ICDR, PIT, SAST)",
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "investor_protection": {
         "zh": "设有投资者保护基金（Investor Protection Trust Fund / IPFT）与在线争议解决机制（SMARTODR）等投资者保护安排；具体赔付规则与额度本次未逐条核实",
@@ -312,7 +331,8 @@
         "quote": "Investor Protection Trust Fund",
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "products": {
@@ -404,6 +424,12 @@
     "market_structure": {
       "trading_sessions": {
         "pre_market": {
+          "spec": {
+            "start": "09:00",
+            "end": "09:08",
+            "kind": "opening_auction",
+            "note": "大宗交易首场 08:45-09:00；新股/复牌证券 Special Pre-open 09:00-09:45"
+          },
           "zh": "大宗交易首场08:45-09:00；开盘集合竞价（Pre-open session）09:00-09:08（新股/复牌证券另有09:00-09:45的Special Pre-open session）",
           "en": "Block Deal session 1: 08:45-09:00; Pre-open session (Regular): 09:00-09:08 (newly-listed/relisted securities use a Special Pre-open session, 09:00-09:45)",
           "quote": "Block Deal session 1 Open 08:45 hrs / Block Deal session 1 Close 09:00 hrs / Pre-open session (Regular) Open 09:00 hrs / Pre-open session (Regular) Close 09:08 hrs / Special Pre-open session (SPOS) Close 09:45 hrs",
@@ -420,6 +446,12 @@
           "detail": null
         },
         "continuous_am": {
+          "spec": {
+            "start": "09:15",
+            "end": "15:30",
+            "kind": "continuous",
+            "note": "单一连续时段，无上午/下午分段"
+          },
           "zh": "现货市场（普通/碎股市场）连续竞价09:15起，无独立「上午盘」与「下午盘」划分，与连续下午竞价属同一连续时段（见 continuous_pm）",
           "en": "Continuous trading (Normal/Odd Lot market) begins at 09:15; not split into separate morning/afternoon sessions — see continuous_pm for the single continuous session",
           "quote": "Normal / Odd lot market Open 09:15 hrs",
@@ -436,6 +468,9 @@
           "detail": null
         },
         "lunch_break": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无（连续交易09:15-15:30中间不设午休）",
           "en": "None (continuous trading 09:15-15:30 has no midday break)",
           "confidence": "medium",
@@ -452,6 +487,10 @@
           "quote": null
         },
         "continuous_pm": {
+          "spec": {
+            "kind": "none",
+            "note": "无上午/下午分段，连续时段见 continuous_am；另有 14:00-14:30 Auction market、15:40-16:00 收盘集合竞价"
+          },
           "zh": "连续交易09:15-15:30；14:00-14:30另设大宗成交撮合的Auction market；15:40-16:00为收盘集合竞价（Closing session/CAS）",
           "en": "Continuous trading 09:15-15:30; a separate Auction Market runs 14:00-14:30; Closing session (Closing Auction Session, CAS) runs 15:40-16:00",
           "quote": "Normal / Odd lot market Close 15:30 hrs / Auction market Open 14:00 hrs / Auction market Close 14:30 hrs / Closing session Open 15:40 hrs / Closing session Close 16:00 hrs",
@@ -468,6 +507,10 @@
           "detail": null
         },
         "after_market": {
+          "spec": {
+            "kind": "none",
+            "note": "官网 Equities 时段表未见独立盘后连续交易时段（交易修改截止 16:15 不构成独立时段）"
+          },
           "zh": "",
           "confidence": "low",
           "detail": "官网 Equities 时段表未见独立盘后连续交易时段；交易修改截止时间16:15不构成独立交易时段，未混填。",
@@ -484,6 +527,10 @@
           "quote": null
         },
         "night_session": {
+          "spec": {
+            "kind": "none",
+            "note": "现货市场；商品衍生品另有延时时段，属另一产品条线"
+          },
           "zh": "商品衍生品时段延至境外市场收盘（非农品种最晚23:30/23:55），但本节字段针对现货市场，现货市场本身无夜盘",
           "en": "None for the cash equity market (commodity derivatives extend late to track offshore market close, but that is a separate product segment)",
           "confidence": "medium",
@@ -514,9 +561,15 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "opening_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "09:00",
+          "auction_end": "09:08"
+        },
         "zh": "开盘集合竞价（Pre-open session），09:00-09:08收集订单并撮合确定开盘价，此后09:15转入连续竞价；新股/复牌证券另有09:00-09:45的Special Pre-open session",
         "en": "Opening call auction (Pre-open session), 09:00-09:08 for order collection and matching to determine the opening price, followed by continuous trading from 09:15; newly-listed/relisted securities use a separate Special Pre-open session (09:00-09:45)",
         "detail": "具体撮合算法（如价格发现规则细节）本次未在抓取页面中找到进一步说明文字，仅确认时段结构。",
@@ -533,6 +586,11 @@
         "enum": null
       },
       "closing_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "15:40",
+          "auction_end": "16:00"
+        },
         "zh": "收盘集合竞价（Closing session，官网导航称Closing Auction Session/CAS），15:40-16:00",
         "en": "Closing call auction (Closing session, referred to elsewhere on the site as the Closing Auction Session/CAS), 15:40-16:00",
         "sources": [
@@ -562,6 +620,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "order_types": {
@@ -578,6 +637,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "tick_size": {
@@ -593,6 +653,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -609,6 +670,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -626,7 +688,8 @@
         "quote": "Normal / Odd lot market Open 09:15 hrs / Normal / Odd lot market Close 15:30 hrs",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "price_limits": {
         "type": {
@@ -643,9 +706,14 @@
           "quote": "Daily price bands are applicable on securities as below: Daily price bands of 2% (either way) Daily price bands of 5% (either way) Daily price bands of 10% (either way) No price bands are applicable on scrips on which derivative products are available",
           "confidence": "high",
           "verified": "2026-08-14",
+          "spec": null,
           "detail": null
         },
         "main_board": {
+          "spec": {
+            "limit_pct": null,
+            "note": "非单一幅度：个股按证券监察分类分档 2%/5%/10%（either way）；挂衍生品的个股无每日涨跌停，改设 10% 委托申报操作区间；其余证券（含债券、优先股）及 Auction market 统一 20%。完整分档见 price_limits.type 字段"
+          },
           "zh": "个股按分类适用2%/5%/10%（either way）；挂有衍生品的个股无每日涨跌停，改设10%的委托申报操作区间（防止非真实价格挂单）；其余证券（含债券、优先股）20%；限价实物市场与Normal Market同幅度；Auction market统一20%",
           "en": "2%/5%/10% (either way) by security category; scrips with derivative products have no daily price band but a 10% order-entry operating range instead (to prevent non-genuine price orders); all remaining securities (incl. debentures, preference shares) 20%; the Limited Physical Market uses the same bands as the Normal Market; the Auction Market uses a flat 20%",
           "sources": [
@@ -674,12 +742,38 @@
           "verified": "2026-08-14",
           "en": null,
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
       },
       "circuit_breaker": {
         "enum": "index_level",
+        "spec": {
+          "type": "index_level",
+          "reference": [
+            {
+              "index": "Nifty 50",
+              "exchange": "self"
+            },
+            {
+              "index": "BSE Sensex",
+              "exchange": "bse"
+            }
+          ],
+          "levels": [
+            {
+              "threshold_pct": 10
+            },
+            {
+              "threshold_pct": 15
+            },
+            {
+              "threshold_pct": 20
+            }
+          ],
+          "note": "跨交易所联动：Nifty 50（NSE 自身）或 BSE Sensex 先触发者为准（[ADR-036] #6 / OPEN-QUESTIONS #19）。各档停牌时长与恢复方式见 detail（逐时段不同，10%/15% 停牌 + 15 分钟集合竞价恢复、20% 当日休市），未逐字入 spec，Phase 1b 补 halt_minutes"
+        },
         "zh": "全市场指数熔断（index-based market-wide circuit breaker），三级阈值10%/15%/20%，以印度国家证券交易所Nifty 50或竞争对手孟买证券交易所（BSE）Sensex两个指数中先触发者为准",
         "en": "Index-based market-wide circuit breaker, three-tier thresholds at 10%/15%/20%, triggered by whichever of the Nifty 50 (NSE) or the BSE Sensex breaches first",
         "detail": "2001年7月2日起实施（依SEBI Circular No. SMDRPD/Policy/Cir-37/2001），2013年经\nSEBI Circular no. CIR/MRD/DP/25/2013部分修订。触发后市场以开盘集合竞价方式恢复：\n10%——1:00pm前触发暂停45分钟+15分钟集合竞价恢复；1:00-2:30pm触发暂停15分钟+15分钟\n集合竞价；2:30pm后触发不暂停。15%——1:00pm前触发暂停1小时45分钟+15分钟集合竞价；\n1:00-2:00pm触发暂停45分钟+15分钟集合竞价；2:00pm后触发当日不再开市。20%——任意\n时段触发均直接休市至当日结束。**跨交易所协同熔断**（联动竞争对手BSE的指数）是本\n项目目前样本中的第一例，与其余交易所\"熔断只看自己市场指数\"的设计不同，值得记入\nOPEN-QUESTIONS。\nNifty 50 收盘价（2026-08-13）24,395.85，官网据此换算的次日（2026-08-14）三档\n绝对点位分别为±2,439.60/±3,659.35/±4,879.15——这是逐日滚动计算值，非固定阈值，\n未作为长期数据填入其他字段。\n",
@@ -708,6 +802,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "trading_halt_mechanism": {
@@ -723,6 +818,7 @@
         ],
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -740,6 +836,7 @@
           }
         ],
         "verified": "2026-08-14",
+        "spec": null,
         "quote": null
       },
       "short_selling": {
@@ -756,7 +853,8 @@
         "quote": "Introduced the Securities Lending and Borrowing Scheme (SLBS)",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "block_trade": {
         "zh": "设有专门的大宗交易时段（Block Deal session），每日两场：08:45-09:00（开盘前）与14:05-14:20（盘中）",
@@ -772,6 +870,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "dark_pool": {
@@ -788,6 +887,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "market_maker_scheme": {
@@ -804,6 +904,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "connect_schemes": {
@@ -820,7 +921,8 @@
         "quote": "NSE IFSC-SGX Connect Inaugurated by Hon'ble Prime Minister of India Shri Narendra Modi / 22 years of partnership between NSE and SGX for NIFTY50",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "derivatives": {
         "trading_sessions": {
@@ -838,6 +940,7 @@
             "confidence": "high",
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "continuous_am": {
@@ -854,6 +957,7 @@
             "confidence": "high",
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "lunch_break": {
@@ -869,6 +973,7 @@
             ],
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "detail": null,
             "quote": null
           },
@@ -886,6 +991,7 @@
             "confidence": "high",
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "after_market": {
@@ -902,6 +1008,7 @@
             "verified": "2026-08-14",
             "en": null,
             "enum": null,
+            "spec": null,
             "quote": null
           },
           "night_session": {
@@ -918,6 +1025,7 @@
             "confidence": "medium",
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "detail": null
           }
         },
@@ -935,6 +1043,7 @@
           "verified": "2026-08-14",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "opening_mechanism": {
@@ -951,6 +1060,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "closing_mechanism": {
@@ -967,6 +1077,7 @@
           "verified": "2026-08-14",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "matching_principle": {
@@ -983,6 +1094,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "order_types": {
@@ -1004,6 +1116,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "tick_size": {
@@ -1030,6 +1143,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "contract_specs_note": {
@@ -1056,6 +1170,7 @@
           "confidence": "medium",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "price_limits": {
@@ -1073,6 +1188,7 @@
             "quote": "There are no day minimum/maximum price ranges applicable in the derivatives segment. However, in order to prevent erroneous order entry, operating ranges and day minimum/maximum ranges are kept as below: ... In view of this, orders placed at prices which are beyond the operating ranges would reach the Exchange as a price freeze.",
             "confidence": "high",
             "verified": "2026-08-14",
+            "spec": null,
             "detail": null
           },
           "main_board": {
@@ -1094,6 +1210,7 @@
             "confidence": "high",
             "verified": "2026-08-14",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "other_boards": {
@@ -1110,6 +1227,7 @@
             "verified": "2026-08-14",
             "en": null,
             "enum": null,
+            "spec": null,
             "quote": null
           }
         },
@@ -1127,7 +1245,8 @@
           ],
           "quote": "The index-based market-wide circuit breaker system applies at 3 stages of the index movement, either way viz. at 10%, 15% and 20%. These circuit breakers when triggered bring about a coordinated trading halt in all equity and equity derivative markets nationwide. The market-wide circuit breakers are triggered by movement of either the BSE Sensex or the Nifty 50, whichever is breached earlier.",
           "confidence": "high",
-          "verified": "2026-08-14"
+          "verified": "2026-08-14",
+          "spec": null
         },
         "volatility_interruption": {
           "zh": "",
@@ -1143,6 +1262,7 @@
           "verified": "2026-08-14",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "trading_halt_mechanism": {
@@ -1158,6 +1278,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -1175,6 +1296,7 @@
           "verified": "2026-08-14",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "market_maker_scheme": {
@@ -1191,6 +1313,7 @@
           "confidence": "medium",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "margin_practice_note": {
@@ -1212,6 +1335,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "connect_schemes": {
@@ -1228,7 +1352,8 @@
           "quote": "NSE IFSC-SGX Connect Inaugurated by Hon'ble Prime Minister of India Shri Narendra Modi / 22 years of partnership between NSE and SGX for NIFTY50",
           "confidence": "medium",
           "verified": "2026-08-14",
-          "enum": null
+          "enum": null,
+          "spec": null
         }
       }
     },
@@ -1265,7 +1390,8 @@
         ],
         "quote": "Any other reason as NSE may deem fit. ... The application of the applicant company should not have been rejected by the exchange in last 6 complete months.",
         "confidence": "high",
-        "verified": "2026-08-27"
+        "verified": "2026-08-27",
+        "spec": null
       },
       "listing_process_duration": {
         "zh": "NSE 官网在抓取范围内未给出明确的上市处理时长（天/周）量化指标；上市流程节奏由 SEBI 的 ICDR 条例与交易所审核主导，实际耗时取决于招股书审批与发行路演安排，本次未逐条核实具体时长",
@@ -1281,6 +1407,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "transfer_between_boards": {
@@ -1297,6 +1424,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "continuing_obligations": {
@@ -1313,7 +1441,8 @@
         "quote": "Compliance track record (including LODR , ICDR, PIT, SAST)",
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "suspension_resumption": {
         "zh": "NSE 可对不符合持续上市义务（如 LODR 合规跟踪记录问题、未按时提交报告/财务数据等）的公司施加交易暂停或恢复；具体暂停/恢复的技术标准与流程本次未逐条核实，但交易所对持续合规不达标公司拥有暂停交易权限",
@@ -1329,6 +1458,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "delisting_conditions": {
@@ -1350,6 +1480,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "delisting_process": {
@@ -1366,7 +1497,8 @@
         "quote": "The promoter(s) ... shall acquire the delisted equity shares from the public shareholders by paying them the value determined by the independent valuer, within three months of the date of delisting from the recognised stock exchange, subject to the option of the public shareholders to retain their shares.",
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delisting_transition_period": {
         "zh": "强制退市下，发起人须于公司自认可交易所退市之日起 3 个月内，按独立评估师确定的价格向公众股东收购被退市股份（公众股东亦可选择保留股份）；自愿退市走反向收购定价（RBB）流程，从首次公告到完成收购的具体时长未在抓取页中量化",
@@ -1382,7 +1514,8 @@
         "quote": "The promoter(s) ... shall acquire the delisted equity shares from the public shareholders by paying them the value determined by the independent valuer, within three months of the date of delisting from the recognised stock exchange, subject to the option of the public shareholders to retain their shares.",
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "post_delisting_venue": {
         "zh": "一旦公司从 NSE 退市，其证券将不再于该交易所交易；退市后无法在场内重新买卖，只能转为场外（OTC）或私下协商转让，由公司继续提供股份过户便利",
@@ -1398,7 +1531,8 @@
         "quote": "no longer be traded at that stock exchange",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "indices": {
@@ -1434,7 +1568,8 @@
         ],
         "quote": "Currently all settlements are conducted on T+1 basis, T being the trade day. ... In a T+0 rolling settlement, trades are executed on trading day till 1:30 pm. The obligations are determined on the T day by 2:30 pm and settlement is completed thereafter.",
         "confidence": "high",
-        "verified": "2026-08-27"
+        "verified": "2026-08-27",
+        "spec": null
       },
       "ccp_name": {
         "zh": "NSE Clearing Limited（NCL，原National Securities Clearing Corporation Limited/NSCCL），NSE全资子公司",
@@ -1455,6 +1590,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "csd_name": {
@@ -1486,6 +1622,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "initial_margin_practice": {
@@ -1502,7 +1639,8 @@
         "quote": "Initial margin requirements are based on 99% value at risk over a one day time horizon. However, in the case of futures contracts (on index or individual securities), where it may not be possible to collect mark to market settlement value, before the commencement of trading on the next day, the initial margin is computed over a two-day time horizon, applying the appropriate statistical formula.",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "maintenance_margin_practice": {
         "zh": "NSE Clearing 不设独立的'维持保证金率'字段；会员须在交易日持续维持初始保证金（SPAN+敞口）并以逐日盯市（MTM）补足浮动盈亏，实质维持水平即等于初始保证金要求本身（每日重算）",
@@ -1523,6 +1661,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "mark_to_market_frequency": {
@@ -1539,7 +1678,8 @@
         "quote": "mark-to-market settlement is on T+1 days (T = Trade day). The mark to market losses or profits are directly debited or credited to the CMs clearing bank account. Option to settle Daily MTM on T+0 day",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delivery_method": {
         "enum": "na",
@@ -1570,6 +1710,7 @@
           }
         ],
         "verified": "2026-08-27",
+        "spec": null,
         "quote": null
       },
       "last_trading_day_rule": {
@@ -1586,7 +1727,8 @@
         "quote": "Nifty 50 futures contracts expire on the last Tuesday of the expiry month. If the last Tuesday is a trading holiday, the contracts expire on the previous trading day.",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "default_management": {
         "zh": "NSE Clearing 设立核心结算担保基金（Core SGF），按业务线（现货/F&O/CD 等）分设，用于保证各线交易的结算；当清算会员无法履行结算义务时，核心 SGF 用于偿付该会员义务、完成结算而不影响正常结算流程。叠加 SEBI 规定的多层'违约瀑布'（waterfall）处置顺序，交易所/清算所资本与担保基金逐级吸收损失",
@@ -1607,7 +1749,8 @@
         "quote": "NSE Clearing has put in place Core Settlement Guarantee Fund (Core SGF) .The primary objective of having Core SGF is to have a fund for each segment (for e.g. Cash, F&O, CD, etc.) to guarantee the settlement of trades executed in respective segment of the stock exchange. In the event of a clearing member failing to honour settlement commitments, the core SGF shall be used to fund the obligations of that member and complete the settlement without affecting the normal settlement process.",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "derivatives": {
         "initial_margin_practice": {
@@ -1624,7 +1767,8 @@
           "quote": "Initial margin requirements are based on 99% value at risk over a one day time horizon. However, in the case of futures contracts (on index or individual securities), where it may not be possible to collect mark to market settlement value, before the commencement of trading on the next day, the initial margin is computed over a two-day time horizon, applying the appropriate statistical formula.",
           "verified": "2026-08-27",
           "confidence": "high",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "maintenance_margin_practice": {
           "zh": "衍生品清算不设独立维持保证金率；会员须持续维持 SPAN 初始保证金（含敞口/大额头寸附加），并以逐日盯市（T+1）补足浮动盈亏，实质维持水平等于每日重算的初始保证金要求",
@@ -1640,6 +1784,7 @@
           "confidence": "medium",
           "verified": "2026-08-27",
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "mark_to_market_frequency": {
@@ -1656,7 +1801,8 @@
           "quote": "mark-to-market settlement is on T+1 days (T = Trade day). The mark to market losses or profits are directly debited or credited to the CMs clearing bank account. Option to settle Daily MTM on T+0 day",
           "verified": "2026-08-27",
           "confidence": "high",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "delivery_method": {
           "zh": "指数衍生品（Nifty/Bank Nifty 等期货与期权）为现金结算；期权权利金结算为现金；期权到期时按价内行权价（in-the-money）做到期结算。个股期权（Individual Securities F&O）按 NSE 规则为实物交割（physical settlement）—但有官方说明与'个股期权已改为现金结算'的市场认知存在冲突，本次抓取页（Settlement Mechanism）仅明确期权到期结算按 ITM 行权价，未明确个股期权交割方式，故以 medium 标注、交割方式以交易所合约规格为准",
@@ -1677,7 +1823,8 @@
           "quote": "Final Exercise settlement is effected for option positions at in-the-money strike prices existing at the close of trading hours, on the expiration day. Premium settlement is cash settled",
           "verified": "2026-08-27",
           "confidence": "medium",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "last_trading_day_rule": {
           "zh": "Nifty 50 衍生品于到期月最后一个星期二到期（遇假日顺延至前一交易日）；其余指数/个股衍生品遵循各自合约规格的到期日，普遍为月末到期",
@@ -1693,7 +1840,8 @@
           "quote": "Nifty 50 futures contracts expire on the last Tuesday of the expiry month. If the last Tuesday is a trading holiday, the contracts expire on the previous trading day.",
           "verified": "2026-08-27",
           "confidence": "high",
-          "enum": null
+          "enum": null,
+          "spec": null
         }
       }
     },
@@ -1712,6 +1860,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "account_opening_requirements": {
@@ -1728,7 +1877,8 @@
         "quote": "The next step is to select a SEBI Registered broker and fill a KYC form and enter into a broker-client agreement. The broker then allocates a unique client ID, which acts as the identification.",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "suitability_management": {
         "zh": "券商须在 onboarding 时完成 KYC（客户身份识别与风险画像），并受 SEBI KYC 准则与反洗钱（AML/CFT）要求约束；开户流程含风险揭示与 KYC 合规（见 NSE 'KYC Compliance' 指引）。本次未抓取到独立的'适当性/风险承受力评估'细则条文，以 medium 定性描述",
@@ -1749,6 +1899,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "foreign_access_channel": {
@@ -1770,7 +1921,8 @@
         "quote": "unless it has obtained a certificate granted by a designated depository participant on behalf of the Board.",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "membership_structure": {
         "zh": "会员按功能分为交易会员（Trading Member）、交易兼自结算会员（Trading cum Self Clearing Member）、交易兼结算会员（Trading cum Clearing Member）、专业结算会员（Professional Clearing Member）四类，另有'Normal Membership'与'Alpha Membership'两种整体会员类型，可按细分市场分段申请",
@@ -1786,6 +1938,7 @@
         "verified": "2026-08-27",
         "confidence": "high",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "broker_landscape": {
@@ -1802,7 +1955,8 @@
         "quote": "Trading Member ... Trading Cum Self Clearing Member ... Trading Cum Clearing Member ... Professional Clearing Member",
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "infrastructure": {
@@ -1820,7 +1974,8 @@
         "quote": "Level 1 provides best bid and ask price; Level 2 provides market depth data upto 5 best bid and ask prices and Level 3 provides market depth data unto 20 best bid and ask prices. Tick by tick data offers full order book",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "data_latency": {
         "zh": "NSE 通过实时数据订阅提供逐笔（Tick-by-Tick）全订单簿行情，属低延迟推送馈送；官方未在抓取页中公布具体的延迟数值（如毫秒/微秒级 SLA），故确切延迟指标无法核实",
@@ -1836,7 +1991,8 @@
         "quote": "Tick by tick data offers full order book",
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "data_pricing_model": {
         "zh": "NSE 的数据与信息分发服务由 NSE Data & Analytics Limited（原 DotEx International Limited）提供；数据产品按国内/国际客户分档定价，采用订阅制（在线流式/快照/EOD/历史/企业数据等分类），最新价目表自（官网原文 effective April 01, 2026）起生效",
@@ -1852,7 +2008,8 @@
         "quote": "The data and info-vending services of National Stock Exchange (NSE) are provided through NSE Data & Analytics Limited (formerly known as DotEx International Limited). / Pricing applicable for NSE Market data products effective April 01, 2026",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "historical_data_availability": {
         "zh": "NSE 每日交易结束后生成二进制格式的收盘（End of Day）数据文件（bhavcopy），包含当日 EOD 行情；另提供历史数据与 EOD/历史数据订阅服务，可回溯获取历史成交与指数数据",
@@ -1868,7 +2025,8 @@
         "quote": "The End of Day data files are generated in binary format at the end of each trading day. These files contain the End of Day bhavcopy",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_system_name": {
         "zh": "NEAT / NEAT Plus",
@@ -1884,7 +2042,8 @@
         "quote": "Exchange provides trading front-ends \"NEAT\" / \"NEAT+\".",
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "access_methods": {
         "zh": "两种接入方式：使用官方提供的NEAT Adapter中间件连接NEAT/NEAT Plus前端；或通过Trimmed Protocol直连交易所主机（面向自建Non-NEAT前端的会员/供应商），另分Capital Market/期权期货/货币衍生品/商品衍生品四套协议文档",
@@ -1900,6 +2059,7 @@
         "verified": "2026-08-27",
         "confidence": "high",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "major_outage_history": {
@@ -1916,6 +2076,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -1934,7 +2095,8 @@
         "quote": "the amount recovered from end clients is the same as amount paid by the trading members to the MIIs",
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "exchange_fees": {
         "zh": "NSE 按双侧计收交易费（transaction charges）：现货市场 Rs. 2.97/每边/每 lakh 成交金额；股指与股票期货 Rs. 1.73/每边/每 lakh；股票期权 Rs. 35.03/每边/每 lakh 权利金价值；货币期货 Rs. 0.35/每边/每 lakh；货币与利率期权 Rs. 31.10/每边/每 lakh 权利金价值。生效与修订后的费率见 detail",
@@ -1950,7 +2112,8 @@
         "quote": "Cash Market: Rs. 2.97 each side per lakh of traded value / Equity Futures: Rs. 1.73 each side per lakh of traded value / Equity Options: Rs. 35.03 each side per lakh of premium value / Currency Futures: Rs. 0.35 each side per lakh of traded value / Currency Options and Interest Rate Options: Rs. 31.10 each side per lakh of premium value",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_fees": {
         "zh": "NSE Clearing 作为中央对手方，对清算会员按业务线计收清算费（clearing fees），并入整体交易成本、由券商向客户逐笔转嫁；该清算费的具体逐产品费率表本次未在抓取页中核实，故仅作定性说明",
@@ -1966,6 +2129,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "regulatory_fees": {
@@ -1982,7 +2146,8 @@
         "quote": "All sale and purchase transactions in securities other than debt securities 0.0001 per cent of the price at which the securities are purchased or sold (Rs.10 per crore) / All sale and purchase transactions in debt securities 0.000025 per cent of the price at which the securities are purchased or sold (Rs.2.5 per crore)",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "stamp_duty": {
         "zh": "印度自（官网原文 with effect from July 1, 2020）起通过证券交易所交易证券须缴印花税（Stamp Duty），由清算公司（经交易所授权）代征代缴：实物交割的股票转让 0.015%（买方）、非实物交割 0.003%（买方）、股票期货 0.002%（买方）、股票期权 0.003%（买方）。注意印度对证券交易同时征收印花税与证券交易税(STT)，二者为不同税目；其余品种（货币/利率衍生品、公司债、回购、政府证券等）税率见 detail",
@@ -2003,7 +2168,8 @@
         "quote": "The Finance Act, 2019 (No. 7 of 2019) has introduced amendment in The Indian Stamp Act, 1899, with respect to levy and collection of stamp duty for transaction in securities made through stock exchange and accordingly with effect from July 1, 2020, being the notified date, stamp duty is levied and collected by Clearing Corporations authorised by Stock Exchanges. / Transfer of Security other than debenture on delivery basis 0.015% Buyer / Transfer of Security other than debenture on non-delivery basis 0.003% Buyer / Derivatives – Equity Futures 0.002% Buyer / Derivatives – Equity Options 0.003% Buyer",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "financial_transaction_tax": {
         "zh": "证券交易税（STT）针对股票类证券交易征收（官网税率表标注 RATES W.E.F. APRIL 1, 2026）：现货股票实物交割的买入与卖出均 0.100%、非实物交割卖出 0.025%；股票期权卖出 0.15%（另行权 0.15%）、股票期货卖出 0.05%。STT 与印花税(stamp_duty)为不同税目",
@@ -2019,7 +2185,8 @@
         "quote": "RATES W.E.F. APRIL 1, 2026 / Purchase of an equity share in a company or a unit of a business trust, where such contract is settled by the actual delivery or transfer of such share or unit. 0.100 per cent 0.100 per cent Purchaser / 0.025 per cent Seller / Sale of an option in securities 0.15 per cent 0.10 per cent Seller / Sale of an option in securities, where option is exercised 0.15 per cent 0.125 per cent Purchaser / Sale of a futures in securities 0.05 per cent 0.02 per cent Seller",
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_gains_tax": {
         "zh": "印度资本利得税（非交易所征收，由投资者向所得税部门申报）：自 2024 年 7 月 23 日起，股票等证券投资持有 ≤12 个月为短期（STCG）按 20% 征收；持有 >12 个月为长期（LTCG），对超过 12.5 万卢比免税额以上的部分按 12.5% 征收。税率/免税额的确切数字来自 2024 年预算（Finance Act 2024），本次未能成功抓取所得税部门官网原文逐字核实，故以 medium 标注",
@@ -2035,6 +2202,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "dividend_withholding_tax": {
@@ -2051,6 +2219,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "implicit_costs_note": {
@@ -2072,6 +2241,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -2082,6 +2252,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -2100,6 +2271,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "liquidity_risk_note": {
@@ -2121,6 +2293,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "regulatory_change_risk_note": {
@@ -2142,6 +2315,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "enforcement_note": {
@@ -2158,7 +2332,8 @@
         "quote": "Debarred Entities / Action against Members / Complaint against Members",
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     }
   }

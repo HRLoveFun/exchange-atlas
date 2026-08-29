@@ -260,26 +260,31 @@ market_structure:
 
   trading_sessions:
     pre_market:
+      spec: {start: "06:30", end: "09:30", kind: pre_open_queue}
       zh: "6:30am起接受挂单排队，不成交，直至9:30am开盘集合竞价"
       en: "Orders queue from 6:30 a.m. ET without executing, until the 9:30 a.m. Opening Auction"
       quote: "Pre-Opening Session: 6:30 a.m. ET / Orders can be entered and will be queued until the Opening Auction at 9:30 a.m. ET"
     continuous_am:
+      spec: {kind: none, note: "NYSE 本身无上午/下午分段，为单一连续时段，见 continuous_pm"}
       zh: "无独立盘前连续交易时段（这点与部分NYSE集团其他实体如NYSE American/Arca不同，那些有7:00-9:30am的早盘连续交易）；9:30am开盘集合竞价后进入连续交易"
       en: "No separate early-morning continuous session (unlike some NYSE Group siblings such as NYSE American/Arca, which run a 7:00-9:30am Early Trading Session); continuous trading begins after the 9:30am Opening Auction"
       confidence: medium
     lunch_break:
+      spec: {kind: none}
       zh: "无"
       en: "None"
       confidence: medium
     continuous_pm:
+      spec: {start: "09:30", end: "16:00", kind: continuous, note: "3:50-4:00pm 为收盘失衡期"}
       zh: "9:30am-3:50pm连续交易；3:50pm-4:00pm为收盘失衡期"
       en: "Continuous trading 9:30am-3:50pm; Closing Imbalance Period 3:50-4:00pm"
       quote: "Core Trading Session: 9:30 a.m. to 4:00 p.m. ET / 9:30 a.m. ET - Core Open Auction / 3:50 p.m. to 4:00 p.m. ET - Closing Imbalance Period / 4:00 p.m. ET - Closing Auction"
     after_market:
       zh: ""
       confidence: low
-      detail: "官网列出的Tape A（NYSE本身）时段表未见独立盘后连续交易时段；NYSE American/Arca/National/Texas等同集团其他实体明确列有4:00-8:00pm盘后时段，NYSE本身是否有盘后交易未在本次抓取的页面中确认，留空不猜。"
+      detail: "官网列出的Tape A（NYSE本身）时段表未见独立盘后连续交易时段；NYSE American/Arca/National/Texas等同集团其他实体明确列有4:00-8:00pm盘后时段，NYSE本身是否有盘后交易未在本次抓取的页面中确认，留空不猜。spec 也留空（表示未知，非确认无）。"
     night_session:
+      spec: {kind: none}
       zh: "无"
       en: "None"
       confidence: medium
@@ -290,6 +295,7 @@ market_structure:
     confidence: low
 
   opening_mechanism:
+    spec: {type: dmm_auction, auction_end: "09:30"}
     zh: "开盘集合竞价（9:30am），由指定做市商（DMM）主持"
     en: "Core Open Auction, facilitated by the Designated Market Maker (DMM)"
     detail: "DMM 角色见 market_maker_scheme。"
@@ -304,6 +310,7 @@ market_structure:
     confidence: high
 
   closing_mechanism:
+    spec: {type: dmm_auction, auction_start: "15:50", auction_end: "16:00", note: "3:50-4:00pm 为收盘失衡期，4:00pm 出清"}
     zh: "收盘集合竞价（4:00pm），3:50-4:00pm为收盘失衡期"
     en: "Closing Auction, preceded by a Closing Imbalance Period"
     quote: "3:50 p.m. to 4:00 p.m. ET - Closing Imbalance Period / 4:00 p.m. ET - Closing Auction"
@@ -350,6 +357,7 @@ market_structure:
       quote: "The Plan is designed to prevent trades in NMS Stocks from occurring outside specified price bands, which are set at a percentage level above and below the average reference price of a security over the preceding five-minute period."
       confidence: high
     main_board:
+      spec: {type: dynamic, band_pct: null, note: "LULD 动态价格带，以前 5 分钟均价为滚动参考价（见 type 字段 quote）；Tier 1/Tier 2 的具体价格带百分比未在官方页面找到——band_pct 留 null 表示机制存在、数值未公布（[ADR-035] D）"}
       zh: "按Tier 1（标普500/罗素1000/部分ETP）与Tier 2（其余NMS证券）分级设定价格带百分比，具体档位数值本次未在抓取页面中找到"
       en: "Price bands are set by Tier 1 (S&P 500 / Russell 1000 / select ETPs) vs. Tier 2 (other NMS securities); the specific percentage figures were not found in the pages fetched this session"
       quote: "The percentage level is determined by a security's designation as a Tier 1 or Tier 2 security. Tier 1 comprises all securities in the S&P 500, the Russell 1000 and select Exchange Traded Products (ETPs). Tier 2 comprises all other NMS securities, except for rights and warrants, which are specifically excluded from coverage."
@@ -360,6 +368,14 @@ market_structure:
 
   circuit_breaker:
     enum: index_level
+    spec:
+      type: index_level
+      reference: [{index: "S&P 500", exchange: self}]
+      levels:
+        - {threshold_pct: 7}
+        - {threshold_pct: 13}
+        - {threshold_pct: 20}
+      note: "各档停牌时长（一/二级 15 分钟、三级收市）在 detail 里但未逐字核实，暂不入 spec；Phase 1b 找 NYSE Rule 7.12 原文后补 halt_minutes / day_end"
     zh: "全市场熔断（Market-Wide Circuit Breaker, MWCB），基于标普500指数单日跌幅触发三级阈值：7%（一级）、13%（二级）、20%（三级）"
     en: "Market-Wide Circuit Breaker (MWCB)"
     detail: "由 NYSE、NYSE American、NYSE Arca Rule 7.12 共同规定，跨市场协调停牌，一/二级为暂停交易15分钟，三级为直接收市（本条细则未逐字核实，见 quote 之外的机制说明）。"

@@ -19,6 +19,7 @@
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -29,6 +30,7 @@
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -47,7 +49,8 @@
         "quote": "50年 10.23 臺灣證券交易所成立 51年 02.09 臺灣證券交易所正式開業",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "history": {
         "zh": "1961年成立、1962年开业；1988年上市股票全面纳入电脑辅助撮合，1993年全面电脑自动竞价；2009年实施T+2款券划拨交割(DVP)；2015年涨跌幅由7%放宽至10%；2021年实施股票造市者制度",
@@ -63,7 +66,8 @@
         "quote": "82年 08.02 上市股票全面納入電腦自動競價交易系統 98年 02.02 實施「證券市場款券T+2日交割制度（DVP）」 104年 06.01 放寬漲跌幅限制：由7%放寬至10%",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "organization_form": {
         "enum": "demutualized_unlisted",
@@ -79,7 +83,8 @@
         ],
         "quote": "證券交易所之組織，分會員制及公司制。",
         "confidence": "medium",
-        "verified": "2026-08-16"
+        "verified": "2026-08-16",
+        "spec": null
       },
       "self_listed": {
         "enum": "no",
@@ -95,6 +100,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-16",
+        "spec": null,
         "quote": null
       },
       "market_cap_usd_bn": {
@@ -111,7 +117,8 @@
         "quote": "Listing Statistics for Stock (2021-2025) Unit: million shares, NTD million ／ Year: 2025 ／ No. of Listed Companies: 1063 ／ No. of Listed Stocks: 1091 ／ No. of Listed Shares: 793,745 ／ Market Capitalization: 94,358,927",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "listed_companies_count": {
         "zh": "1063（截至2025年底，计入普通股/特别股上市公司，不含台湾存托凭证TDR发行人）",
@@ -127,6 +134,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "annual_turnover_usd_bn": {
@@ -143,7 +151,8 @@
         "quote": "Stock Trading Volume and Value (2021-2025) Year: 2025 ／ No. of Trading Days: 243 ／ Volume (Unit: million shares) Total: 921,859 ／ Value (Unit: NTD million) Total: 93,259,320",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "global_ranking": {
         "zh": "",
@@ -151,6 +160,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -169,6 +179,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "settlement_currency": {
@@ -177,6 +188,7 @@
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -197,7 +209,8 @@
         "quote": "本法所稱主管機關，為金融監督管理委員會。",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "self_regulatory_org": {
         "zh": "中华民国证券商业同业公会",
@@ -218,7 +231,8 @@
         "quote": "證券商非加入同業公會，不得開業。",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_regulator": {
         "zh": "金融监督管理委员会",
@@ -234,7 +248,8 @@
         "quote": "金融監督管理委員會證券期貨局為簡化證券市場結算交割作業，規劃推動實施『有價證券集中保管帳簿劃撥交割制度』，由集保結算所負責辦理相關事務",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "core_laws": {
         "zh": "《证券交易法》",
@@ -250,7 +265,8 @@
         "quote": "為發展國民經濟，並保障投資，特制定本法。",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_ownership_limit": {
         "zh": "外资投资台湾上市证券整体已无总额度限制，境外外国机构投资人(FINI)登记后即可投资；个别产业（如电信、航运等）依产业主管法规仍有外资持股比例上限，未在本次会话逐一核实",
@@ -266,6 +282,7 @@
         "confidence": "low",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "capital_controls": {
@@ -275,6 +292,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -292,7 +310,8 @@
         ],
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "investor_protection": {
         "zh": "",
@@ -301,6 +320,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       }
@@ -384,6 +404,7 @@
           "verified": "2026-08-16",
           "confidence": "medium",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "continuous_am": {
@@ -405,6 +426,7 @@
           "verified": "2026-08-16",
           "confidence": "medium",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "lunch_break": {
@@ -425,6 +447,7 @@
           "verified": "2026-08-16",
           "confidence": "medium",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -446,6 +469,7 @@
           "confidence": "medium",
           "en": null,
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -468,6 +492,7 @@
           "verified": "2026-08-16",
           "confidence": "medium",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "night_session": {
@@ -488,6 +513,7 @@
           "verified": "2026-08-16",
           "confidence": "medium",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -506,6 +532,7 @@
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "opening_mechanism": {
@@ -527,6 +554,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "closing_mechanism": {
@@ -548,6 +576,7 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "matching_principle": {
@@ -564,6 +593,7 @@
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "order_types": {
@@ -580,6 +610,7 @@
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "tick_size": {
@@ -601,7 +632,8 @@
         ],
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "board_lot_size": {
         "zh": "1,000股（份）为一交易单位；转换公司债、中央登录公债、公司债、附认股权公司债以面额10万元为一交易单位；外国股票第二上市及境外ETF不限1,000股（份）",
@@ -617,6 +649,7 @@
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "odd_lot_handling": {
@@ -633,6 +666,7 @@
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "price_limits": {
@@ -654,6 +688,7 @@
           ],
           "verified": "2026-08-16",
           "confidence": "medium",
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -676,6 +711,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -697,6 +733,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         }
       },
@@ -719,6 +756,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-16",
+        "spec": null,
         "quote": null
       },
       "volatility_interruption": {
@@ -740,6 +778,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -756,6 +795,7 @@
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "intraday_reversal": {
@@ -772,7 +812,8 @@
           }
         ],
         "confidence": "high",
-        "verified": "2026-08-16"
+        "verified": "2026-08-16",
+        "spec": null
       },
       "short_selling": {
         "enum": "restricted_uptick",
@@ -793,7 +834,8 @@
           }
         ],
         "confidence": "high",
-        "verified": "2026-08-16"
+        "verified": "2026-08-16",
+        "spec": null
       },
       "block_trade": {
         "zh": "鉅额交易：配对交易(08:00-08:30及09:00-17:00)与逐笔交易(09:00-17:00)两种方式；单一证券达500交易单位以上或金额达1,500万元以上，股票组合5种以上且总金额达1,500万元以上；采T+2交割",
@@ -809,6 +851,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "dark_pool": {
@@ -825,6 +868,7 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "market_maker_scheme": {
@@ -841,6 +885,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "connect_schemes": {
@@ -857,6 +902,7 @@
         "confidence": "low",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "derivatives": {
@@ -923,7 +969,8 @@
           }
         ],
         "confidence": "high",
-        "verified": "2026-08-16"
+        "verified": "2026-08-16",
+        "spec": null
       },
       "listing_process_duration": {
         "zh": "官方页面列出七个步骤：申请公司提出申请→本公司承办人员查核→有价证券上市审议委员会及董事会审查→通过后转报金融监督管理委员会→委托证券承销商办理承销手续→向本公司洽定上市日期→正式挂牌买卖；但未见官方公开披露的标准总耗时（如「平均X个月」）数字。已确认的具体期限数据点：依《审查有价证券上市作业程序》第7-2条，免提报审议委员会审议之案件（如转板案件）经理部门应于收件后一个月内决议，因申请公司请求得延长一个月；另中央目的事业主管机关之评估意见函自发文之日起一年内有效，须于此期间内提出上市申请，逾期须重新申请",
@@ -944,7 +991,8 @@
         ],
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "transfer_between_boards": {
         "zh": "本国发行公司申请一般板/创新板上市前，除已在证券柜台买卖中心(TPEx)上柜或为公营事业外，一般须先申请股票登录兴柜柜台买卖满6个月，本公司方受理上市申请（属上市公司子公司等情形可豁免或缩短）",
@@ -960,6 +1008,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "continuing_obligations": {
@@ -976,7 +1025,8 @@
         ],
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "suspension_resumption": {
         "zh": "上市公司出现财报未如期申报、净值低于实收资本额二分之一等多类情事之一，先列为「变更交易方法」证券（类似其他市场的处置/风险警示机制）；情形未改善或涉及无法表示意见/否定意见之查核报告、重大讯息违规等更严重情事，本公司依《证券交易法》相关规定停止其买卖并报请金管会备查，改善后得公告恢复买卖",
@@ -992,6 +1042,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_conditions": {
@@ -1008,6 +1059,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_process": {
@@ -1024,6 +1076,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_transition_period": {
@@ -1040,6 +1093,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "post_delisting_venue": {
@@ -1061,6 +1115,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -1111,6 +1166,7 @@
         ],
         "confidence": "high",
         "verified": "2026-08-16",
+        "spec": null,
         "detail": null
       },
       "ccp_name": {
@@ -1127,7 +1183,8 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "csd_name": {
         "zh": "台湾集中保管结算所股份有限公司（TDCC）",
@@ -1143,7 +1200,8 @@
         ],
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "initial_margin_practice": {
         "zh": "现货股票买卖无衍生品意义上的初始保证金；信用交易（融资融券）须收足融资自备款或融券保证金，具体成数依主管机关规定按标的分类调整，本次未逐条核实费率表",
@@ -1159,6 +1217,7 @@
         "confidence": "low",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "maintenance_margin_practice": {
@@ -1175,7 +1234,8 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "mark_to_market_frequency": {
         "zh": "",
@@ -1184,6 +1244,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1201,7 +1262,8 @@
           }
         ],
         "confidence": "medium",
-        "verified": "2026-08-16"
+        "verified": "2026-08-16",
+        "spec": null
       },
       "last_trading_day_rule": {
         "zh": "",
@@ -1210,6 +1272,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1227,6 +1290,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "derivatives": {
@@ -1252,6 +1316,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "account_opening_requirements": {
@@ -1268,6 +1333,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suitability_management": {
@@ -1284,6 +1350,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "foreign_access_channel": {
@@ -1300,7 +1367,8 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "membership_structure": {
         "zh": "非会员制交易所（公司制）；证券经纪商、证券自营商须与本公司订立「使用市场契约」方得参与集中市场交易买卖",
@@ -1316,6 +1384,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "broker_landscape": {
@@ -1332,6 +1401,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -1355,6 +1425,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_latency": {
@@ -1371,6 +1442,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_pricing_model": {
@@ -1392,6 +1464,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "historical_data_availability": {
@@ -1408,6 +1481,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_system_name": {
@@ -1424,7 +1498,8 @@
         ],
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "access_methods": {
         "zh": "证券商透过交易单元电脑自动交易系统接入，买卖申报得自市场交易时间开始前30分钟起输入；另建有FIX通讯协定作业平台（2010年上线）供机构客户接入",
@@ -1440,6 +1515,7 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "major_outage_history": {
@@ -1449,6 +1525,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       }
@@ -1461,6 +1538,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1471,6 +1549,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1488,6 +1567,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "regulatory_fees": {
@@ -1497,6 +1577,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1514,7 +1595,8 @@
         ],
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "financial_transaction_tax": {
         "zh": "",
@@ -1523,6 +1605,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1540,6 +1623,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "dividend_withholding_tax": {
@@ -1556,7 +1640,8 @@
         ],
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "implicit_costs_note": {
         "zh": "",
@@ -1565,6 +1650,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       }
@@ -1576,6 +1662,7 @@
         "confidence": "low",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1587,6 +1674,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1604,7 +1692,8 @@
         ],
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_change_risk_note": {
         "zh": "现股当日冲销交易的证券交易税减半优惠（千分之一点五）属定期立法延长之优惠税率，现行延长至2027年12月31日止，到期后是否延续需视立法院修法而定，存在政策不确定性",
@@ -1620,6 +1709,7 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "enforcement_note": {
@@ -1636,6 +1726,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     }

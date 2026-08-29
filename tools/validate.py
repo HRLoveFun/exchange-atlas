@@ -131,7 +131,7 @@ def source_domain_classes(domain, domain_tags):
 
 # ── 1-7：数据层校验 ──────────────────────────────────────────
 
-def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered_domains, domain_tags):
+def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered_domains, domain_tags, spec_shapes):
     schema = sync.build_json_schema(taxonomy)
     enum_ids = {name: {v["id"] for v in table.get("values", [])} for name, table in enums.items()}
 
@@ -192,6 +192,23 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                 if env.get("enum") is not None and enum_ref:
                     if env["enum"] not in enum_ids.get(enum_ref, set()):
                         err(f"{loc}: enum 值 `{env['enum']}` 不在词表 `{enum_ref}` 里")
+
+                # spec 结构校验（[ADR-035] B）：spec 必须是 dict；每个键都要在
+                # schema/spec.yml 里声明过（挡拼写错）。深层形态合法性暂不强校验。
+                if env.get("spec") is not None:
+                    spec = env["spec"]
+                    field_key = f"{ch['id']}.{'.'.join(path)}"
+                    shape = spec_shapes.get(field_key)
+                    if not isinstance(spec, dict):
+                        err(f"{loc}: spec 必须是 dict，实际是 {type(spec).__name__}")
+                    elif shape is None:
+                        err(f"{loc}: 字段有 spec 但 schema/spec.yml 里没有它的形状定义")
+                    else:
+                        declared = set(shape.get("keys") or {})
+                        for k in spec:
+                            if k not in declared:
+                                err(f"{loc}: spec 里的键 `{k}` 未在 schema/spec.yml 声明"
+                                    f"（拼写错？可用键：{sorted(declared)}）")
 
                 # en_required 字段必须填 en——此前这个 taxonomy 标记从未被机器校验过，
                 # 导致标了 en_required 的专有名词类字段（机制名/板块名/法规名等）静默
@@ -400,7 +417,10 @@ def main():
             cls = "primary"  # 标签格式不符时按宽松处理，不制造假的第三方封顶报错
         domain_tags.setdefault(dom, set()).add(cls)
 
-    validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered_domains, domain_tags)
+    spec_path = ROOT / "schema" / "spec.yml"
+    spec_shapes = (sync.load_yaml(spec_path).get("fields") if spec_path.exists() else None) or {}
+
+    validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered_domains, domain_tags, spec_shapes)
     validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchanges_expanded)
     validate_docs_data_fresh(taxonomy, glossary, enums, exchanges_expanded)
     validate_path_references()

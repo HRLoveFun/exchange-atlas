@@ -21,6 +21,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -31,6 +32,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -49,6 +51,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "history": {
@@ -65,6 +68,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "organization_form": {
@@ -81,7 +85,8 @@
         "quote": "In Germany, a stock exchange, as a public law institution with limited legal capacity, cannot act as a legal entity under private law. An organiser is required for the execution and appropriate development of stock exchange operations. ... The organising company of the Frankfurter Wertpapierbörse (FWB®, Frankfurt Stock Exchange) is Deutsche Börse AG.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "self_listed": {
         "enum": "no",
@@ -97,7 +102,8 @@
         ],
         "quote": "In Germany, a stock exchange, as a public law institution with limited legal capacity, cannot act as a legal entity under private law.",
         "confidence": "high",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "market_cap_usd_bn": {
         "zh": "",
@@ -105,6 +111,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -115,6 +122,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -125,6 +133,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -135,6 +144,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -153,6 +163,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "settlement_currency": {
@@ -161,6 +172,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -181,6 +193,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "self_regulatory_org": {
@@ -197,6 +210,7 @@
         ],
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "clearing_regulator": {
@@ -213,6 +227,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "core_laws": {
@@ -229,6 +244,7 @@
         ],
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "foreign_ownership_limit": {
@@ -245,6 +261,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "capital_controls": {
@@ -261,6 +278,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "disclosure_requirements": {
@@ -277,6 +295,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "investor_protection": {
@@ -293,6 +312,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -373,6 +393,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "continuous_am": {
@@ -394,6 +415,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "lunch_break": {
@@ -415,6 +437,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "continuous_pm": {
@@ -435,6 +458,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -457,6 +481,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "night_session": {
@@ -478,6 +503,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         }
       },
@@ -495,6 +521,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "opening_mechanism": {
@@ -511,6 +538,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "closing_mechanism": {
@@ -527,6 +555,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "matching_principle": {
@@ -543,6 +572,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "order_types": {
@@ -559,6 +589,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "tick_size": {
@@ -575,6 +606,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "board_lot_size": {
@@ -591,6 +623,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "odd_lot_handling": {
@@ -611,6 +644,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -629,6 +663,7 @@
           "quote": "Continuous trading is interrupted by a volatility interruption whenever the potential next execution price of an order lies outside the dynamic and/or static price range around a reference price.",
           "confidence": "high",
           "verified": "2026-08-14",
+          "spec": null,
           "detail": null
         },
         "main_board": {
@@ -649,6 +684,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -670,6 +706,7 @@
           "verified": "2026-08-14",
           "en": null,
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -688,7 +725,8 @@
         ],
         "quote": "The Management Board may 1. suspend trading on the regulated market if orderly trading on the stock exchange is temporarily endangered due to an emergency situation or if the suspension is deemed necessary in the interests of protecting the public",
         "confidence": "medium",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "volatility_interruption": {
         "zh": "波动性中断（Volatility Interruption）：预期成交价超出动态/静态价格区间即触发，切换为集合竞价方式恢复交易；分「单一波动性中断」与「自动扩展区间波动性中断」两种模型（后者用于ETF/ETN/ETC），与de-eurex的机制高度相似（同集团模板）",
@@ -704,6 +742,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -720,6 +759,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "intraday_reversal": {
@@ -741,6 +781,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "short_selling": {
@@ -762,7 +803,8 @@
         "quote": "Short Selling Regulation           Regulation (EU) No 236/2012 ... § 108 Prohibition of Short Selling with Structured Products (1) Companies admitted to trading at FWB may only sell Structured Products on FWB, if they can guarantee that, at the time of fulfilment of the Transactions ..., they possess securities holdings sufficient for fulfilment of the sale transaction.",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "block_trade": {
         "zh": "场外报告交易（Off-book Trading）：交易时段可达8:00-22:00 CET，由管理董事会另行确定具体时段，性质为协议成交后向交易所报告，非连续订单簿撮合",
@@ -778,6 +820,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "dark_pool": {
@@ -794,6 +837,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "market_maker_scheme": {
@@ -810,6 +854,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "connect_schemes": {
@@ -830,6 +875,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -901,7 +947,8 @@
         ],
         "quote": "Prospectus/inclusion document: Valid, approved and published prospectus ... The competent supervisory authority regarding compliance with follow-up obligations is the Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin, German Federal Financial Supervisory Authority).",
         "confidence": "medium",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "listing_process_duration": {
         "zh": "从提交申请到正式上市的「交易所准入」环节本身较快：在招股说明书已获BaFin核准后，法兰克福交易所的准入决定通常可在两周内完成；但完整IPO时间线更长——Prime Standard通常6–9个月、General Standard 4–6个月、Scale约4–5周、Basic Board约1–2个月（含招股书编制与BaFin核准）",
@@ -917,7 +964,8 @@
         "quote": "The listing process with the FSE is much quicker than the prospectus approval process and may take less than two weeks.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "transfer_between_boards": {
         "zh": "Prime Standard被撤销时不影响该证券在General Standard的挂牌资格（即Prime→General的降级路径），反之升级需另行申请并满足Prime Standard的额外条件",
@@ -933,6 +981,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "continuing_obligations": {
@@ -949,6 +998,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suspension_resumption": {
@@ -965,7 +1015,8 @@
         "quote": "§ 59 Suspension and Cessation of Trading on the Regulated Market / The Management Board may suspend trading on the regulated market if orderly trading on the stock exchange is temporarily endangered due to an emergency situation ... existing orders shall be deleted (suspension of trading). After resumption of trading, the Management Board may determine that, in the case of structured products, the Exchange Trader acting on behalf of the Quote Provider is eligible for purchases only and all remaining Trading Participants are eligible for sales only.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delisting_conditions": {
         "zh": "退市（撤销上市）须由发行人申请，或由管理董事会依《德国交易所法》第42条第2款依职权撤销（如发行人进入破产程序）",
@@ -981,6 +1032,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_process": {
@@ -997,6 +1049,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_transition_period": {
@@ -1013,6 +1066,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "post_delisting_venue": {
@@ -1034,7 +1088,8 @@
         "quote": "The Quotation Board is a part of the Open Market segment at Frankfurter Wertpapierbörse (FWB®, the Frankfurt Stock Exchange).",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "indices": {
@@ -1078,6 +1133,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "ccp_name": {
@@ -1094,6 +1150,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "csd_name": {
@@ -1110,7 +1167,8 @@
         "quote": "Delivery and cash transfer (\"Settlement\") for trades concluded on FWB occurs via Clearstream Europe AG or via another central Securities depository recognized in the present Exchange Rules.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "initial_margin_practice": {
         "zh": "",
@@ -1126,6 +1184,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "maintenance_margin_practice": {
@@ -1141,6 +1200,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1157,6 +1217,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1174,6 +1235,7 @@
           }
         ],
         "verified": "2026-08-14",
+        "spec": null,
         "quote": null
       },
       "last_trading_day_rule": {
@@ -1189,6 +1251,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1206,7 +1269,8 @@
         "quote": "In case of the default of a Clearing Member and the occurrence of a termination event with respect to such Clearing Member, Eurex Clearing primarily uses the financial resources provided by such defaulted Clearing Member (its margin collateral and its contribution to the Default Fund) to cover resulting losses.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "derivatives": {
         "initial_margin_practice": null,
@@ -1231,6 +1295,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "account_opening_requirements": {
@@ -1247,6 +1312,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suitability_management": {
@@ -1263,6 +1329,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "foreign_access_channel": {
@@ -1284,6 +1351,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "membership_structure": {
@@ -1305,6 +1373,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "broker_landscape": {
@@ -1326,6 +1395,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -1344,6 +1414,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_latency": {
@@ -1360,6 +1431,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_pricing_model": {
@@ -1381,7 +1453,8 @@
         "quote": "The fee model applicable to Information Products distinguishes by (i) Usage Type, (ii) Customer Category and (iii) Unit of Count.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "historical_data_availability": {
         "zh": "德意志交易所「Market Data + Services」提供Xetra历史市场数据，官方称具备最高粒度（highest granularity），可用于分析、预测与交易策略；亦提供高度细分的Eurex与德意志交易所平台历史数据供分析",
@@ -1397,6 +1470,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_system_name": {
@@ -1413,6 +1487,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "access_methods": {
@@ -1429,6 +1504,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "major_outage_history": {
@@ -1445,7 +1521,8 @@
         "quote": "Trading on the Frankfurt stock exchange was halted for more than four hours on Tuesday, one of its longest outages ever, due to a technical glitch on Deutsche Boerse's Xetra and Eurex platforms",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "costs": {
@@ -1463,6 +1540,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "exchange_fees": {
@@ -1479,6 +1557,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "clearing_fees": {
@@ -1495,6 +1574,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "regulatory_fees": {
@@ -1511,6 +1591,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "stamp_duty": {
@@ -1527,7 +1608,8 @@
         "quote": "Die Börsenumsatzsteuer entfiel zum 1. Januar 1991. / Die Börsenumsatzsteuer wurde mit Artikel 4 des Gesetzes zur Verbesserung der Rahmenbedingungen der Finanzmärkte abgeschafft.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "financial_transaction_tax": {
         "zh": "德国目前不对证券买卖征收金融交易税（FTT）；曾存在的「证券转移税」（Börsenumsatzsteuer）已于1991年废除（见stamp_duty字段），而欧盟层面的金融交易税提案至今未正式生效，故Xetra交易无此税项",
@@ -1543,6 +1625,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "capital_gains_tax": {
@@ -1559,7 +1642,8 @@
         "quote": "Kapitalerträge unterliegen in Deutschland einem Steuerabzug in Höhe von 25 Prozent zuzüglich Solidaritätszuschlag in Höhe von 5,5 Prozent der Kapitalertragsteuer",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "dividend_withholding_tax": {
         "zh": "资本所得预提税（Kapitalertragsteuer）：25%，另加其5.5%的团结附加税（Solidaritätszuschlag），详细比例与合计数见detail；协定优惠税率另计",
@@ -1575,7 +1659,8 @@
         "quote": "Kapitalerträge unterliegen in Deutschland einem Steuerabzug in Höhe von 25 Prozent zuzüglich Solidaritätszuschlag in Höhe von 5,5 Prozent der Kapitalertragsteuer",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "implicit_costs_note": {
         "zh": "Xetra的隐性交易成本主要为买卖价差（bid-ask spread）与市场冲击（market impact），而非固定费用；流动性越高成本越低——DAX等大盘蓝筹价差极窄，Scale等中小盘及流动性较差证券价差更宽。交易所公开发布「Xetra流动性指标」（XLM, Xetra Liquidity Measure）以量化价差成本",
@@ -1591,6 +1676,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -1601,6 +1687,7 @@
         "confidence": "low",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1619,6 +1706,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "liquidity_risk_note": {
@@ -1635,6 +1723,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "regulatory_change_risk_note": {
@@ -1651,6 +1740,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "enforcement_note": {
@@ -1667,6 +1757,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     }

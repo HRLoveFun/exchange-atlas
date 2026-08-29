@@ -19,6 +19,7 @@
         "verified": "2026-08-13",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -29,6 +30,7 @@
         "verified": "2026-08-13",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -47,7 +49,8 @@
         "quote": "The New York Stock Exchange traces its origins to the Buttonwood Agreement signed by 24 stockbrokers on May 17, 1792",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "history": {
         "zh": "1792年成立；2006年由会员制改为公司制并上市（与Archipelago/Pacific Exchange合并组成NYSE Group）；2013年被洲际交易所（ICE）收购，现为ICE子公司",
@@ -63,7 +66,8 @@
         "quote": "On November 16, 2005, Intercontinental Exchange (NYSE: ICE) listed on the NYSE. In 2006, the New York Stock Exchange (NYSE), Archipelago (Arca), and the Pacific Exchange (PCX) merged to form the publicly traded NYSE Group, ending membership ownership of the Exchange. In 2008, the NYSE acquired the American Stock Exchange, becoming the third largest U.S. options market. By 2013, ICE acquired the NYSE",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "organization_form": {
         "enum": "demutualized_listed",
@@ -79,7 +83,8 @@
         ],
         "quote": "In 2006, the New York Stock Exchange (NYSE), Archipelago (Arca), and the Pacific Exchange (PCX) merged to form the publicly traded NYSE Group, ending membership ownership of the Exchange.",
         "confidence": "high",
-        "verified": "2026-08-13"
+        "verified": "2026-08-13",
+        "spec": null
       },
       "self_listed": {
         "enum": "partial",
@@ -95,7 +100,8 @@
         ],
         "quote": "On November 16, 2005, Intercontinental Exchange (NYSE: ICE) listed on the NYSE... By 2013, ICE acquired the NYSE",
         "confidence": "high",
-        "verified": "2026-08-13"
+        "verified": "2026-08-13",
+        "spec": null
       },
       "market_cap_usd_bn": {
         "zh": "",
@@ -104,6 +110,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -113,6 +120,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -123,6 +131,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -134,6 +143,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -143,6 +153,7 @@
         "verified": "2026-08-13",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -153,6 +164,7 @@
         "verified": "2026-08-13",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -173,7 +185,8 @@
           }
         ],
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "self_regulatory_org": {
         "zh": "NYSE Regulation（交易所自身的一线监管部门）；金融业监管局（FINRA）按监管服务协议代为执行部分跨市场执法工作",
@@ -189,7 +202,8 @@
           }
         ],
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_regulator": {
         "zh": "美国证券交易委员会",
@@ -205,6 +219,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "core_laws": {
@@ -221,6 +236,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "foreign_ownership_limit": {
@@ -237,6 +253,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "capital_controls": {
@@ -253,7 +270,8 @@
         "quote": "an interagency committee authorized to review certain transactions involving foreign investment into United States businesses and certain transactions by foreign persons involving real estate in the United States, in order to determine the effect of such transactions on the national security of the United States",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "disclosure_requirements": {
         "zh": "披露制度以持续性定期报告为核心：资产超过1000万美元且股东超过500人的公司须提交年度与定期报告（如10-K/10-Q等），信息通过SEC的EDGAR数据库向公众公开；征集股东投票所用的委托材料（proxy materials）须在征集前向SEC备案",
@@ -269,6 +287,7 @@
         "confidence": "medium",
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "investor_protection": {
@@ -285,7 +304,8 @@
         "quote": "SIPC protects against the loss of cash and securities – such as stocks and bonds – held by a customer at a financially-troubled SIPC-member brokerage firm. The limit of SIPC protection is $500,000, which includes a $250,000 limit for cash... SIPC does not protect against the decline in value of your securities.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "products": {
@@ -338,6 +358,11 @@
     "market_structure": {
       "trading_sessions": {
         "pre_market": {
+          "spec": {
+            "start": "06:30",
+            "end": "09:30",
+            "kind": "pre_open_queue"
+          },
           "zh": "6:30am起接受挂单排队，不成交，直至9:30am开盘集合竞价",
           "en": "Orders queue from 6:30 a.m. ET without executing, until the 9:30 a.m. Opening Auction",
           "quote": "Pre-Opening Session: 6:30 a.m. ET / Orders can be entered and will be queued until the Opening Auction at 9:30 a.m. ET",
@@ -354,6 +379,10 @@
           "detail": null
         },
         "continuous_am": {
+          "spec": {
+            "kind": "none",
+            "note": "NYSE 本身无上午/下午分段，为单一连续时段，见 continuous_pm"
+          },
           "zh": "无独立盘前连续交易时段（这点与部分NYSE集团其他实体如NYSE American/Arca不同，那些有7:00-9:30am的早盘连续交易）；9:30am开盘集合竞价后进入连续交易",
           "en": "No separate early-morning continuous session (unlike some NYSE Group siblings such as NYSE American/Arca, which run a 7:00-9:30am Early Trading Session); continuous trading begins after the 9:30am Opening Auction",
           "confidence": "medium",
@@ -370,6 +399,9 @@
           "quote": null
         },
         "lunch_break": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无",
           "en": "None",
           "confidence": "medium",
@@ -386,6 +418,12 @@
           "quote": null
         },
         "continuous_pm": {
+          "spec": {
+            "start": "09:30",
+            "end": "16:00",
+            "kind": "continuous",
+            "note": "3:50-4:00pm 为收盘失衡期"
+          },
           "zh": "9:30am-3:50pm连续交易；3:50pm-4:00pm为收盘失衡期",
           "en": "Continuous trading 9:30am-3:50pm; Closing Imbalance Period 3:50-4:00pm",
           "quote": "Core Trading Session: 9:30 a.m. to 4:00 p.m. ET / 9:30 a.m. ET - Core Open Auction / 3:50 p.m. to 4:00 p.m. ET - Closing Imbalance Period / 4:00 p.m. ET - Closing Auction",
@@ -404,7 +442,7 @@
         "after_market": {
           "zh": "",
           "confidence": "low",
-          "detail": "官网列出的Tape A（NYSE本身）时段表未见独立盘后连续交易时段；NYSE American/Arca/National/Texas等同集团其他实体明确列有4:00-8:00pm盘后时段，NYSE本身是否有盘后交易未在本次抓取的页面中确认，留空不猜。",
+          "detail": "官网列出的Tape A（NYSE本身）时段表未见独立盘后连续交易时段；NYSE American/Arca/National/Texas等同集团其他实体明确列有4:00-8:00pm盘后时段，NYSE本身是否有盘后交易未在本次抓取的页面中确认，留空不猜。spec 也留空（表示未知，非确认无）。",
           "sources": [
             {
               "title": "Trading Information（官网）",
@@ -415,9 +453,13 @@
           "verified": "2026-08-13",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "night_session": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无",
           "en": "None",
           "confidence": "medium",
@@ -447,10 +489,15 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
       "opening_mechanism": {
+        "spec": {
+          "type": "dmm_auction",
+          "auction_end": "09:30"
+        },
         "zh": "开盘集合竞价（9:30am），由指定做市商（DMM）主持",
         "en": "Core Open Auction, facilitated by the Designated Market Maker (DMM)",
         "detail": "DMM 角色见 market_maker_scheme。",
@@ -472,6 +519,12 @@
         "enum": null
       },
       "closing_mechanism": {
+        "spec": {
+          "type": "dmm_auction",
+          "auction_start": "15:50",
+          "auction_end": "16:00",
+          "note": "3:50-4:00pm 为收盘失衡期，4:00pm 出清"
+        },
         "zh": "收盘集合竞价（4:00pm），3:50-4:00pm为收盘失衡期",
         "en": "Closing Auction, preceded by a Closing Imbalance Period",
         "quote": "3:50 p.m. to 4:00 p.m. ET - Closing Imbalance Period / 4:00 p.m. ET - Closing Auction",
@@ -501,6 +554,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "order_types": {
@@ -517,6 +571,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "tick_size": {
@@ -533,6 +588,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "board_lot_size": {
@@ -549,6 +605,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "odd_lot_handling": {
@@ -564,6 +621,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -582,9 +640,15 @@
           "quote": "The Plan is designed to prevent trades in NMS Stocks from occurring outside specified price bands, which are set at a percentage level above and below the average reference price of a security over the preceding five-minute period.",
           "confidence": "high",
           "verified": "2026-08-13",
+          "spec": null,
           "detail": null
         },
         "main_board": {
+          "spec": {
+            "type": "dynamic",
+            "band_pct": null,
+            "note": "LULD 动态价格带，以前 5 分钟均价为滚动参考价（见 type 字段 quote）；Tier 1/Tier 2 的具体价格带百分比未在官方页面找到——band_pct 留 null 表示机制存在、数值未公布（[ADR-035] D）"
+          },
           "zh": "按Tier 1（标普500/罗素1000/部分ETP）与Tier 2（其余NMS证券）分级设定价格带百分比，具体档位数值本次未在抓取页面中找到",
           "en": "Price bands are set by Tier 1 (S&P 500 / Russell 1000 / select ETPs) vs. Tier 2 (other NMS securities); the specific percentage figures were not found in the pages fetched this session",
           "quote": "The percentage level is determined by a security's designation as a Tier 1 or Tier 2 security. Tier 1 comprises all securities in the S&P 500, the Russell 1000 and select Exchange Traded Products (ETPs). Tier 2 comprises all other NMS securities, except for rights and warrants, which are specifically excluded from coverage.",
@@ -613,12 +677,34 @@
           "verified": "2026-08-13",
           "en": null,
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
       },
       "circuit_breaker": {
         "enum": "index_level",
+        "spec": {
+          "type": "index_level",
+          "reference": [
+            {
+              "index": "S&P 500",
+              "exchange": "self"
+            }
+          ],
+          "levels": [
+            {
+              "threshold_pct": 7
+            },
+            {
+              "threshold_pct": 13
+            },
+            {
+              "threshold_pct": 20
+            }
+          ],
+          "note": "各档停牌时长（一/二级 15 分钟、三级收市）在 detail 里但未逐字核实，暂不入 spec；Phase 1b 找 NYSE Rule 7.12 原文后补 halt_minutes / day_end"
+        },
         "zh": "全市场熔断（Market-Wide Circuit Breaker, MWCB），基于标普500指数单日跌幅触发三级阈值：7%（一级）、13%（二级）、20%（三级）",
         "en": "Market-Wide Circuit Breaker (MWCB)",
         "detail": "由 NYSE、NYSE American、NYSE Arca Rule 7.12 共同规定，跨市场协调停牌，一/二级为暂停交易15分钟，三级为直接收市（本条细则未逐字核实，见 quote 之外的机制说明）。",
@@ -647,7 +733,8 @@
         "quote": "On May 31, 2012, the SEC approved, on a pilot basis, a National Market System Plan, known as the Limit Up/Limit Down (\"LULD\") Plan, to address extraordinary market volatility. The Plan was approved as a permanent rule on April 11, 2019.",
         "confidence": "medium",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_halt_mechanism": {
         "zh": "见 circuit_breaker（全市场级）与 volatility_interruption（LULD，个股级）；另有因披露事项的停牌（regulatory halt）未逐条核实",
@@ -662,6 +749,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -679,6 +767,7 @@
           }
         ],
         "verified": "2026-08-13",
+        "spec": null,
         "quote": null
       },
       "short_selling": {
@@ -700,7 +789,8 @@
         ],
         "quote": "Among other things, Rule 201 requires that a trading center establish, maintain, and enforce written policies and procedures reasonably designed to prevent the execution or display of a short sale order of a covered security at a price that is less than or equal to the current national best bid if the price of that covered security decreases by 10% or more from the covered security's closing price as of the end of regular trading hours on the prior day.",
         "confidence": "high",
-        "verified": "2026-08-13"
+        "verified": "2026-08-13",
+        "spec": null
       },
       "block_trade": {
         "zh": "",
@@ -715,6 +805,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -731,6 +822,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -748,7 +840,8 @@
         "quote": "Select Your Designated Market Maker (DMM) / Your DMM will facilitate price discovery for your stock during market opens, closes and during periods of substantial trading imbalances or instability.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "connect_schemes": {
         "zh": "无（美股市场无类似沪港通/深港通的跨境互联互通安排）",
@@ -763,6 +856,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -812,7 +906,8 @@
         ],
         "quote": "The Exchange has broad discretion regarding the listing of a company. All listed companies must comply with the Exchange's corporate governance standards of Section 3 of the NYSE Listed Company Manual. In addition, companies must meet other qualitative criteria including but not limited to being suitable for auction market trading and maintaining a healthy level of financial liquidity.",
         "confidence": "high",
-        "verified": "2026-08-13"
+        "verified": "2026-08-13",
+        "spec": null
       },
       "listing_process_duration": {
         "zh": "",
@@ -828,6 +923,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "transfer_between_boards": {
@@ -844,6 +940,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "continuing_obligations": {
@@ -860,6 +957,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suspension_resumption": {
@@ -876,7 +974,8 @@
         "quote": "if a company fails to meet the $1.00 Price Criteria and has (i) effected a reverse stock split over the prior one-year period or (ii) effected one or more reverse stock splits over the prior two-year period with a cumulative ratio of 200 shares or more to one, then the company would not be eligible for any compliance period and the Exchange would immediately commence suspension of trading and delisting proceedings.",
         "confidence": "medium",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delisting_conditions": {
         "zh": "未达持续上市定量/定性标准触发退市；具体阈值（如最低股价规则）本次未逐条核实",
@@ -892,7 +991,8 @@
           }
         ],
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delisting_process": {
         "zh": "退市分两种发起路径：交易所主动退市——交易所向SEC提交Form 25后列入'交易所主动退市待处理'名单，直至退市申请对SEC生效；发行人主动退市——发行人通知交易所拟自愿撤回上市后一个工作日列入'发行人主动退市待处理'名单，同样以Form 25对SEC生效为准",
@@ -908,7 +1008,8 @@
         "quote": "The NYSE publishes two lists of issues pending delisting from the Exchange: Exchange-Initiated Delisting: An issue is added to this list upon the Exchange's filing of a Form 25 with the SEC and remains posted until the application to delist the issue becomes effective with the SEC (generally 10 days). Issuer-Initiated Delisting: An issue is added to this list one business day after the exchange is notified of the issuer's intent to voluntarily withdraw its listing by filing a Form 25 with the SEC, and remains posted until the issuer's application to delist becomes effective with the SEC.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delisting_transition_period": {
         "zh": "交易所主动退市：自NYSE提交Form 25起，一般约10个工作日后对SEC生效（即证券注销挂牌的最终生效期）；发行人主动退市则以其自身Form 25对SEC的生效日为准，未见统一的固定天数",
@@ -924,7 +1025,8 @@
         "quote": "An issue is added to this list upon the Exchange's filing of a Form 25 with the SEC and remains posted until the application to delist the issue becomes effective with the SEC (generally 10 days).",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "post_delisting_venue": {
         "zh": "",
@@ -940,6 +1042,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -992,7 +1095,8 @@
         ],
         "quote": "in February 2023, the Securities and Exchange Commission adopted amendments to Rule 15c6-1 under the Securities Exchange Act of 1934 to shorten the standard settlement cycle for most broker-dealer transactions from two business days after the trade date (\"T+2\") to one business day after the trade date (\"T+1\"). ... T+1 settlements will be required beginning on May 28, 2024",
         "confidence": "medium",
-        "verified": "2026-08-13"
+        "verified": "2026-08-13",
+        "spec": null
       },
       "ccp_name": {
         "zh": "全国证券清算公司（National Securities Clearing Corporation, NSCC），DTCC旗下子公司；对涉及股票、公司债与市政债、美国存托凭证、交易所买卖基金及单位投资信托的几乎所有经纪商间交易提供中央对手方（CCP）服务",
@@ -1013,7 +1117,8 @@
         "quote": "NSCC serves as a CCP for virtually all broker-to-broker trades involving equities, corporate and municipal debt, American depositary receipts, exchange-traded funds, and unit investment trusts.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "csd_name": {
         "zh": "存管信托公司（The Depository Trust Company, DTC），DTCC旗下子公司；为美国证券交易提供中央证券存管（CSD）服务，覆盖股票、认股权证、公司债券及票据、市政债券、政府证券、资产支持证券、存托凭证及货币市场工具等多类合格证券",
@@ -1029,7 +1134,8 @@
         "quote": "DTC provides CSD services for U.S. securities transactions in various types of eligible securities including, among others, equities, warrants, rights, corporate debt and notes, municipal bonds, government securities, asset-backed securities, depositary receipts, and money market instruments.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "initial_margin_practice": {
         "zh": "",
@@ -1038,6 +1144,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1047,6 +1154,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1057,6 +1165,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1075,6 +1184,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-13",
+        "spec": null,
         "quote": null
       },
       "last_trading_day_rule": {
@@ -1083,6 +1193,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1101,7 +1212,8 @@
         "quote": "DTC, FICC, and NSCC adopted the Clearing Agency Stress Testing Framework... DTC, FICC, and NSCC adopted recovery and wind-down plans (\"RWPs\") and related rules... Loss Allocation. DTC, FICC, and NSCC adopted enhanced loss allocation rules designed to (i) modify each respective clearing agency's loss allocation processes, (ii) harmonize the loss allocation processes among the clearing agencies, (iii) reduce the time within which NSCC is required to return a former member's Clearing Fund deposit",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "derivatives": {
         "initial_margin_practice": null,
@@ -1126,7 +1238,8 @@
         "quote": "U.S. households with stock holdings ... Number of U.S. households (in Millions)  67.73 76.14      Percentage of U.S. households  52.6% 58.0%",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "account_opening_requirements": {
         "zh": "FINRA第2090条（了解你的客户，KYC）要求会员在开户及账户维护环节，尽合理注意义务了解并留存每位客户的核心事实，包括：有效服务该账户所需的信息、按特殊指示处理账户所需的信息、了解代理人权限，以及遵守适用法律法规所需的信息",
@@ -1142,7 +1255,8 @@
         "quote": "2090. Know Your Customer ... Every member shall use reasonable diligence, in regard to the opening and maintenance of every account, to know (and retain) the essential facts concerning every customer and concerning the authority of each person acting on behalf of such customer... facts \"essential\" to \"knowing the customer\" are those required to (a) effectively service the customer's account, (b) act in accordance with any special handling instructions for the account, (c) understand the authority of each person acting on behalf of the customer, and (d) comply with applicable laws, regulations, and rules.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "suitability_management": {
         "zh": "经纪商向零售客户提出投资建议时，如涉及《证券交易法》15l-1规则（Regulation Best Interest，简称Reg BI），须遵守'最优利益标准'，FINRA第2111条的一般适当性规则则不适用于受Reg BI约束的建议；第2111条要求经纪商/关联人员基于对客户投资画像（年龄、财务状况、税务状况、投资目标、投资经验、时间horizon、流动性需求、风险承受力等）的合理尽职调查，有合理依据相信推荐的交易或投资策略适合该客户",
@@ -1158,7 +1272,8 @@
         "quote": "FINRA Rule 2111 does not apply to recommendations subject to SEA Rule 15l-1 (Regulation Best Interest)... FINRA Rule 2111 requires that a firm or associated person have a reasonable basis to believe a recommended transaction or investment strategy involving a security or securities is suitable for the customer. This is based on the information obtained through reasonable diligence of the firm or associated person to ascertain the customer's investment profile... the customer's investment profile \"includes, but is not limited to, the customer's age, other investments, financial situation and needs, tax status, investment objectives, investment experience, investment time horizon, liquidity needs [and] risk tolerance\"",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_access_channel": {
         "zh": "",
@@ -1167,6 +1282,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1176,6 +1292,7 @@
         "confidence": "medium",
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1194,7 +1311,8 @@
         "quote": "Broker-Dealer Firms Only ... 2,867   2,840 / Dual Broker-Dealer and Investment Adviser Firms ... 431    409 / All FINRA-Registered Broker-Dealer Firms ... 3,298   3,249 / Investment Adviser Firms Only ... 31,971 32,090 / Total Registered Firms ... 35,269 35,339",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "infrastructure": {
@@ -1212,7 +1330,8 @@
         "quote": "The NYSE Integrated Feed provides a comprehensive order-by-order view of events in the NYSE equities market. This single high-performance product integrates orders and trades in sequence, providing a more deterministic and transparent view of the order book and related activity... NYSE Openbook Ultra is an event-based depth of book feed that contains aggregate limit-order volume and individual event-by-event volume, action and price information for all bid and offer prices",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "data_latency": {
         "zh": "NYSE的专有行情产品定位为'实时'（real-time），与'参考数据'（reference，覆盖公司行为/合约规格等非实时信息）并列区分，但本次未找到具体延迟数值（如微秒级时间戳精度）的官方原文，故只确认实时/参考的定性区分，未采纳具体延迟数字",
@@ -1228,7 +1347,8 @@
         "quote": "The NYSE supports high-performance trading and investment applications with a simple and consistent line of real-time market data feeds across our trading venues, including depth of book, top of book, trades and auction imbalances.",
         "confidence": "medium",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "data_pricing_model": {
         "zh": "",
@@ -1237,6 +1357,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1254,7 +1375,8 @@
         "quote": "NYSE's \"TAQ\" branded historical data products support post-trade analysis and back testing strategies with a tick-by-tick records of each of our real-time proprietary products, as well as of the CTA and UTP consolidated feeds.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_system_name": {
         "zh": "NYSE Pillar",
@@ -1270,6 +1392,7 @@
         "confidence": "medium",
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "access_methods": {
@@ -1286,7 +1409,8 @@
         "quote": "NYSE owned Liquidity Centers in the US (Mahwah, New Jersey) and UK (Basildon, Essex)... Colocation at any of the NYSE Liquidity Centers provides a level playing field for firms wishing to host near NYSE exchanges but is not a requirement for trading on NYSE markets... Customers can choose how to access the production environment inside the Liquidity Center via two distinct, resilient network services at port capacities ranging from 1Gb to 40Gb: The high performance SFTI Liquidity Center Network (SFTI LCN) offers fast, dedicated connectivity from the colo cabinet to market data and trading gateways. The SFTI Network wide area network provides a cost-effective connection to NYSE markets",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "major_outage_history": {
         "zh": "2023年1月24日，NYSE因关键系统故障（主用交易系统与备用交易系统同时运行导致系统误判开盘集合竞价已完成）未能为2,824只NYSE上市证券执行开盘集合竞价、转为直接连续交易，引发价格触发型交易限制、84只证券的市场级交易暂停及数千笔交易被取消；SEC于2026年3月认定NYSE违反Regulation SCI（系统合规与完整性条例）第1001(a)(2)(vii)条及《证券交易法》第19(g)(1)条，NYSE同意支付900万美元民事罚款，此前已向会员机构支付超过577万美元的相关索赔",
@@ -1302,7 +1426,8 @@
         "quote": "This matter arises out of a January 24, 2023 event in which NYSE failed to run opening auctions for 2,824 NYSE-listed securities (\"the 2,824 Securities\") due to a critical systems disruption. Instead, NYSE initiated continuous trading for those securities. NYSE's failures caused market-wide impacts, including price-triggered restrictions on trading, market-wide trading pauses in 84 of the securities, and ultimately thousands of busted trades... Respondent shall, within 14 days of the entry of this Order, pay a civil money penalty in the amount of $9,000,000.00",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "costs": {
@@ -1313,6 +1438,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1330,7 +1456,8 @@
         "quote": "Non-Tier Adding Credit – Equity per Share Credit - per transaction - for all orders, other than Mid-Point Liquidity (\"MPL\") and Non-Displayed Limit Orders that add liquidity to the NYSE unless a higher credit applies $0.0012",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_fees": {
         "zh": "NSCC（美股主要中央对手方，见clearing.ccp_name）对非证券融资交易（Non-SFT）的清算活动费为'纳入净额'费每百万处理价值0.4644美元，加'流出净额'费每百万结算价值2.16美元；此外按月计收清算基金维持费，费率为会员现金保证金余额（不含SFT账户及补充流动性保证金部分）月均值的0.35%（年化，按360天折算）",
@@ -1346,7 +1473,8 @@
         "quote": "Non-SFT – The sum of: (a) a \"value into the net\" fee of $0.4644 per million of processed value (i.e. for CNS and Balance Order netting, the sum of the contract amount and any CNS fail value), plus (b) a \"value out of the net\" fee of $2.16 per million of settling value... Clearing Fund Maintenance Fee A monthly fee calculated, in arrears, as the product of (A) 0.35% and (B) the average of each Member's cash deposit balance in the Clearing Fund",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_fees": {
         "zh": "SEC依据《证券交易法》第31条向交易所征收的交易类监管费，自2026年4月4日起费率为每百万美元交易额20.60美元（此前2026财年初至4月3日暂为每百万美元0美元）；该费用逐年由SEC按预算需要调整并转嫁给交易环节；证券期货交易的对应评估费维持每笔round-turn交易0.0042美元不变",
@@ -1362,7 +1490,8 @@
         "quote": "Feb. 27, 2026 — The Securities and Exchange Commission today announced that starting on April 4, 2026, the fee rates applicable to most securities transactions will be set at $20.60 per million dollars. Consequently, each SRO will continue to pay the Commission a rate of $0.00 per million for covered sales occurring on charge dates through April 3, 2026, and a rate of $20.60 per million for covered sales occurring on charge dates on or after April 4, 2026... The assessment on security futures transactions will remain unchanged at $0.0042 for each round turn transaction.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "stamp_duty": {
         "zh": "",
@@ -1371,6 +1500,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1388,7 +1518,8 @@
         "quote": "one of the historical examples of a transaction tax was a stock transfer tax (STT) effective from 1914 to 1966. In 1966 the rates were 0.1% at security issuance and 0.04% on transfer. At the present time the federal government still levies a small tax on share issuance and transfers at the rates of 0.028% and 0.0033%, respectively, for the primary purpose of financing the activities of the Securities and Exchange Commission (SEC).",
         "confidence": "medium",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_gains_tax": {
         "zh": "",
@@ -1397,6 +1528,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1407,6 +1539,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1424,6 +1557,7 @@
         "confidence": "low",
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -1434,6 +1568,7 @@
         "confidence": "low",
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1452,7 +1587,8 @@
         "quote": "The Securities and Exchange Commission today adopted amendments to finalize rules implementing the submission and disclosure requirements in the Holding Foreign Companies Accountable Act (HFCAA). The rules apply to registrants the SEC identifies as having filed an annual report with an audit report issued by a registered public accounting firm that is located in a foreign jurisdiction and that the Public Company Accounting Oversight Board (PCAOB) is unable to inspect or investigate (Commission-Identified Issuers).",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "liquidity_risk_note": {
         "zh": "美股整体呈现高度分散化的多元交易场所格局，非展示型订单（non-displayed order types）约占交易所内成交量的11%–14%；学术研究发现暗池/非展示交易占比存在一个'临界点'（有研究估计约46.7%），超过该临界点后继续分散化交易场所可能损害价格发现与整体市场质量，但截至相关SEC讨论撰写时尚未观察到已越过该临界点的证据",
@@ -1468,7 +1604,8 @@
         "quote": "non-displayed order types are the most commonly used order types on exchanges, and these order types may account for as much as 11% to 14% of exchange-based volume... This study found that 46.7% could be the tipping point for all stocks... while there may come a point when dark venues capture too much order flow, the evidence currently available to us suggests that we have not yet crossed that threshold.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_change_risk_note": {
         "zh": "美国证券监管规则处于持续演进状态，且改动经常直接影响交易/结算机制本身：例如2024年5月28日起证券结算周期从T+2缩短至T+1（见clearing.settlement_cycle）；SEC对交易所的Section 31监管费费率逐年（有时逐半年）重新核定（见costs.regulatory_fees）；针对特定外国发行人的HFCAA强制退市立法2020年通过、2021年实施细则落地（见political_risk_note）。交易所自身规则的任何新增/修订也须按《证券交易法》第19(b)条向SEC备案并经批准（见regulation.core_laws），意味着规则变更节奏部分取决于SEC自身的审批流程而非交易所单方面决定",
@@ -1494,6 +1631,7 @@
         "confidence": "medium",
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "enforcement_note": {
@@ -1510,6 +1648,7 @@
         "confidence": "high",
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     }

@@ -32,6 +32,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -53,6 +54,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -75,7 +77,8 @@
           }
         ],
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "history": {
         "zh": "1878年设立，几经战时整合与解散重组，1949年以现行组织形式重新成立；2013年东京证券交易所集团与大阪证券交易所合并成立日本交易所集团（JPX），JPX随即于同月在TSE挂牌上市；同年大阪证交所现货市场并入TSE，衍生品市场整合进更名后的大阪交易所（OSE）",
@@ -91,6 +94,7 @@
         "confidence": "high",
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "organization_form": {
@@ -107,6 +111,7 @@
         "quote": "Jan. 1, 2013 Japan Exchange Group, Inc.(JPX) is established",
         "confidence": "high",
         "verified": "2026-08-13",
+        "spec": null,
         "detail": null
       },
       "self_listed": {
@@ -123,7 +128,8 @@
         ],
         "quote": "Jan. 4, 2013 Japan Exchange Group, Inc.(JPX) is listed on Tokyo Stock Exchange (TSE) 1st Section",
         "confidence": "high",
-        "verified": "2026-08-13"
+        "verified": "2026-08-13",
+        "spec": null
       },
       "market_cap_usd_bn": {
         "zh": "",
@@ -143,6 +149,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -164,6 +171,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -185,6 +193,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -206,6 +215,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -227,6 +237,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -248,6 +259,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       }
@@ -267,7 +279,8 @@
         "quote": "the Exchange shall report the details to the Commissioner of the Financial Services Agency without delay",
         "confidence": "high",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "self_regulatory_org": {
         "zh": "Japan Exchange Regulation（JPX集团内设自律监管机构，2014年由「东京证券交易所自律监管法人」更名而来）；日本证券业协会（JSDA，经纪商会员层面）",
@@ -283,6 +296,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "clearing_regulator": {
@@ -291,6 +305,7 @@
         "confidence": "medium",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -309,7 +324,8 @@
         "quote": "the Transaction Restriction Ordinance ... the Financial Instruments and Exchange Act",
         "confidence": "high",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_ownership_limit": {
         "zh": "对上市公司无笼统的外资持股比例上限；《外汇及外国贸易法》（FEFTA）要求外国投资者在「核心业务领域」（含半导体、国防装备、网络安全等指定行业）持有上市公司股份达1%以上时须事前申报并接受国家安全审查，未获豁免前30天（可延至4个月）内不得完成投资，而非设定持股比例封顶",
@@ -330,7 +346,8 @@
         "quote": "Acquiring 1% or more of stocks of a listed company ... the foreign investors must submit a prior notification via a resident in Japan acting as an agent ... the foreign investor cannot make the investment or take similar actions within 30 days after the ministers receiving the prior notification. This period is called \"investment prohibition period\" and could be extended to four months.",
         "confidence": "high",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_controls": {
         "zh": "1998年修订后的《外汇及外国贸易法》已全面放开跨境资本交易（原则自由）；此后叠加的唯一实质性管制层是FEFTA对「核心业务领域」外资并购的国家安全事前申报制度（见foreign_ownership_limit），而非传统意义的外汇/资本流动限制",
@@ -351,7 +368,8 @@
         "quote": "the revised Foreign Exchange Law was changed to totally liberalize cross-border transactions in April 1998. / As various challenges are on the rise both in economy and security territories, it is necessary for the government to collectively strengthen its economic security initiatives.",
         "confidence": "high",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "disclosure_requirements": {
         "zh": "以《有价证券上市规程》第402条「适时披露」为核心：上市公司发生对投资者决策有重大影响的事项须立即披露；决算须逐季（含累计季度）结算后立即披露财务业绩；披露一律通过交易所运营的TDnet系统向QUICK、路透、彭博等信息商同步分发，2025年4月起主板（Prime）上市的境内公司须日英双语同步披露决算与适时披露信息",
@@ -372,7 +390,8 @@
         "quote": "Where a listed company falls under any of the following items ... the listed company must disclose details immediately ... Where details of the financial results for a business year or an interim accounting period ... are settled, a listed company must disclose such details immediately. / Disclosure of corporate information on the basis of the provisions of Rules 402 through 411-3 shall be carried out using TDnet",
         "confidence": "high",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "investor_protection": {
         "zh": "日本投资者保护基金（JIPF，1998年12月依据《金融商品交易法》设立的会员制法人）：证券公司须与自有资产分离管理客户资产（客户资产分离保管制度）为第一道防线；若证券公司因破产等原因无法返还客户资产，JIPF对每位客户最高赔付1000万日元；截至2025财年末基金余额约584亿日元；成立以来仅两次实际赔付（2000年南证券、2012年丸大证券）",
@@ -388,6 +407,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -433,6 +453,9 @@
     "market_structure": {
       "trading_sessions": {
         "pre_market": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无独立盘前时段",
           "en": "No separate pre-market session",
           "confidence": "medium",
@@ -449,6 +472,11 @@
           "quote": null
         },
         "continuous_am": {
+          "spec": {
+            "start": "09:00",
+            "end": "11:30",
+            "kind": "continuous"
+          },
           "zh": "上午盘 9:00-11:30",
           "en": "Morning session 9:00 a.m.-11:30 a.m.",
           "quote": "The morning trading session shall be held from 9:00 a.m. to 11:30 a.m.",
@@ -465,6 +493,11 @@
           "detail": null
         },
         "lunch_break": {
+          "spec": {
+            "start": "11:30",
+            "end": "12:30",
+            "kind": "lunch_recess"
+          },
           "zh": "11:30-12:30 午休，无交易",
           "en": "11:30 a.m.-12:30 p.m. lunch recess, no trading",
           "confidence": "medium",
@@ -481,6 +514,12 @@
           "quote": null
         },
         "continuous_pm": {
+          "spec": {
+            "start": "12:30",
+            "end": "15:30",
+            "kind": "continuous",
+            "note": "15:25-15:30 为收盘集合竞价"
+          },
           "zh": "下午盘 12:30-15:30，其中15:25-15:30为收盘集合竞价",
           "en": "Afternoon session 12:30 p.m.-3:30 p.m., with 3:25-3:30 p.m. as the closing auction session",
           "quote": "the afternoon trading session shall be held from 0:30 p.m. to 3.30 p.m. However, 3:25 p.m. to 3:30 p.m. will be a closing auction session, with trades being executed at 3:30 p.m.",
@@ -497,6 +536,9 @@
           "detail": null
         },
         "after_market": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无独立盘后连续交易时段",
           "en": "No separate after-hours continuous session",
           "confidence": "medium",
@@ -513,6 +555,10 @@
           "quote": null
         },
         "night_session": {
+          "spec": {
+            "kind": "none",
+            "note": "现货股票；衍生品夜盘属大阪交易所 OSE，不在本文件范围"
+          },
           "zh": "现货股票无夜盘（衍生品市场另有夜盘，属大阪交易所OSE，不在本文件范围）",
           "en": "None for cash equities (derivatives have a night session under Osaka Exchange, outside this file's scope)",
           "confidence": "medium",
@@ -542,10 +588,15 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
       "opening_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_end": "09:00"
+        },
         "zh": "开盘集合竞价撮合决定开盘价，其后转为连续竞价",
         "en": "Opening price determined by call auction, then continuous trading begins",
         "detail": "「所有开盘价确定前的申报视为同时提出」——board_lot_size等细则见 Rule 10。",
@@ -562,6 +613,11 @@
         "enum": null
       },
       "closing_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "15:25",
+          "auction_end": "15:30"
+        },
         "zh": "收盘集合竞价，15:25-15:30，15:30执行成交",
         "en": "Closing call auction, 3:25-3:30 p.m., executed at 3:30 p.m.",
         "sources": [
@@ -591,6 +647,7 @@
         "confidence": "high",
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "order_types": {
@@ -607,7 +664,8 @@
         "quote": "Market orders shall have precedence over bids and offers other than those of market orders in terms of price. All market orders shall be on parity with each other.",
         "confidence": "medium",
         "verified": "2026-08-13",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "tick_size": {
         "zh": "",
@@ -622,6 +680,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -639,6 +698,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "odd_lot_handling": {
@@ -654,6 +714,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -672,9 +733,25 @@
           "quote": "Less than 100 yen Upward/Downward 30 yen ... Where the price is more than 50,000,000 yen 10,000,000 yen",
           "confidence": "high",
           "verified": "2026-08-13",
+          "spec": null,
           "detail": null
         },
         "main_board": {
+          "spec": {
+            "type": "stepwise",
+            "reference": "prev_close",
+            "ladder": [
+              {
+                "base_max": 100,
+                "band_abs": 30
+              },
+              {
+                "base_min": 50000000,
+                "band_abs": 10000000
+              }
+            ],
+            "full_table_note": "值幅制限共 37 档（绝对日元金额，随基准价升高放大），完整表见 price_limits.type 字段的 quote 与 en；此处只放 quote 撑得住的首尾两档锚点，Phase 1b 补全 37 档"
+          },
           "zh": "见 type 字段的37档完整表；档位随基准价升高而放大，非固定比例",
           "en": "See the 37-tier table in the type field; the band widens as the base price rises, not a fixed percentage",
           "confidence": "medium",
@@ -703,12 +780,17 @@
           ],
           "verified": "2026-08-13",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
       },
       "circuit_breaker": {
         "enum": "stock_level",
+        "spec": {
+          "type": "stock_level",
+          "note": "无全市场熔断；波动控制靠个股级「特別気配」（申报价超值幅制限基准价时不成交、显示指示性价格，上午盘不成交、下午盘按值幅制限价处理），见 volatility_interruption。是否存在独立全市场熔断未确认，见 OPEN-QUESTIONS #16"
+        },
         "zh": "无独立的全市场熔断机制（如美股MWCB）；波动控制主要通过「特別気配」（特别行情揭示）机制实现——申报价格超出值幅制限的基准价时，不直接成交，而是显示特别气配指示性价格，上午盘超出即不成交，下午盘则按值幅制限价位处理",
         "en": "No separate market-wide circuit breaker (unlike the U.S. MWCB); volatility control operates primarily through the \"special quote\" mechanism — when an order price would exceed the price-limit band around the base price, no trade is executed at that price; instead a special indicative quote is displayed. In the morning session no transaction is effected; in the afternoon session trading is capped at the price limit",
         "detail": "本条描述的是个股级机制，是否存在独立于值幅制限之外的全市场级熔断安排未在本次抓取内容中确认，留待后续核实，见 OPEN-QUESTIONS。",
@@ -736,6 +818,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -752,6 +835,7 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -769,6 +853,7 @@
           }
         ],
         "verified": "2026-08-13",
+        "spec": null,
         "quote": null
       },
       "short_selling": {
@@ -785,6 +870,7 @@
         "quote": "If the trading participant intends to execute a short sale... disclosure of that fact / Rule 16. Base Prices with Short Selling Price Restriction",
         "confidence": "medium",
         "verified": "2026-08-13",
+        "spec": null,
         "detail": null
       },
       "block_trade": {
@@ -800,6 +886,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -816,6 +903,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -833,6 +921,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "connect_schemes": {
@@ -848,6 +937,7 @@
         "verified": "2026-08-13",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -922,7 +1012,8 @@
         ],
         "quote": "Rule 101. Market Segments / The Exchange has established the market segments referred to in the following each item... (1) Standard Market (2) Prime Market (3) Growth Market",
         "confidence": "high",
-        "verified": "2026-08-24"
+        "verified": "2026-08-24",
+        "spec": null
       },
       "listing_process_duration": {
         "zh": "境外公司申请上市：审核约需3个月，审核通过后公开发售（IPO）程序约需1个月，合计原则上自申请日至上市首日约需4个月；若计入公司内部筹备（含须完成两个会计年度的审计），从启动到上市整体约需1年",
@@ -938,7 +1029,8 @@
         "quote": "Depending on the internal systems of the company, it takes about one year from kick-off to listing. Note that the company needs to be audited for two business years. ... When a foreign company files an application for listing on TSE, the listing examination will require about three months. After listing approval by TSE, about one month will be required for public offering procedures (the IPO). An applicant therefore needs four months, as a rule, from the listing application date to the first day of listing.",
         "confidence": "high",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "transfer_between_boards": {
         "zh": "",
@@ -973,6 +1065,7 @@
         "verified": "2026-08-24",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -995,6 +1088,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suspension_resumption": {
@@ -1016,6 +1110,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_conditions": {
@@ -1051,6 +1146,7 @@
         "verified": "2026-08-24",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1068,6 +1164,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_transition_period": {
@@ -1084,7 +1181,8 @@
         "quote": "When a listed company does not meet the Continued Listing Criteria within one year (six months for trading volume criteria of the Continued Listing Criteria) after failing to meet the Continued Listing Criteria, the listed company will be delisted after being designated as Securities Under Supervision and as Securities to be Delisted (total of six month in principle).",
         "confidence": "high",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "post_delisting_venue": {
         "zh": "",
@@ -1120,6 +1218,7 @@
         "verified": "2026-08-24",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -1161,7 +1260,8 @@
         ],
         "quote": "it was decided to implement T+2 settlements effective July 16, 2019 (Tues.) (for executed trades), which means the date of delivery of shares and other securities occurs one business day earlier from the date of transaction than previously, and delivery is made two business days after the trade date.",
         "confidence": "high",
-        "verified": "2026-08-24"
+        "verified": "2026-08-24",
+        "spec": null
       },
       "ccp_name": {
         "zh": "日本证券结算公司",
@@ -1177,6 +1277,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "csd_name": {
@@ -1193,6 +1294,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "initial_margin_practice": {
@@ -1201,6 +1303,7 @@
         "verified": "2026-08-24",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1211,6 +1314,7 @@
         "verified": "2026-08-24",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1221,6 +1325,7 @@
         "verified": "2026-08-24",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1239,6 +1344,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-24",
+        "spec": null,
         "quote": null
       },
       "last_trading_day_rule": {
@@ -1247,6 +1353,7 @@
         "verified": "2026-08-24",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1265,6 +1372,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "derivatives": {
@@ -1295,6 +1403,7 @@
         "confidence": "medium",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "account_opening_requirements": {
@@ -1311,6 +1420,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suitability_management": {
@@ -1327,6 +1437,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "foreign_access_channel": {
@@ -1348,6 +1459,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "membership_structure": {
@@ -1363,6 +1475,7 @@
         "confidence": "medium",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1380,6 +1493,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -1398,6 +1512,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_latency": {
@@ -1419,6 +1534,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_pricing_model": {
@@ -1435,6 +1551,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "historical_data_availability": {
@@ -1451,6 +1568,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_system_name": {
@@ -1460,6 +1578,7 @@
         "confidence": "medium",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1482,6 +1601,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "major_outage_history": {
@@ -1503,7 +1623,8 @@
         "quote": "TSE would like to express our sincerest apologies to investors and the people related to the market for any inconvenience caused by the failure of the equity trading system, arrowhead on October 1, 2020. / A failure occurred in a memory module in Device 1 of the Shared Disk Device in arrowhead. Operations were supposed to switch automatically to Device 2, but switching did not function as expected. ... We implemented the settings into the system on October 4 and have confirmed that automatic switching functions as expected.",
         "confidence": "high",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "costs": {
@@ -1521,7 +1642,8 @@
         "quote": "The Financial System Reform, \"Japanese Big Bang,\" was commenced in November 1996 ... switching from the licensing system to a registration system for securities companies, liberalizing cross-border capital transactions and foreign exchange business, fully liberalizing brokerage commissions, and eliminating the obligation to use premium rates set by the non-life insurance rating organization. ... Furthermore, the full liberalization of brokerage commissions has led to expansion of trading of securities through the internet (online trading).",
         "confidence": "high",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "exchange_fees": {
         "zh": "TSE向交易参与者（证券公司）收取的交易参与费用由四部分构成：基本费用（Basic fees）、交易费用（Trading fees，按成交金额/量计）、接入费用（Access fees，按下单笔数计）、交易系统设施使用费（按交易系统使用状况计）；这是交易所向会员（而非终端投资者）收取的费用，终端投资者实际负担的部分通常已隐含在券商佣金中",
@@ -1537,6 +1659,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "clearing_fees": {
@@ -1553,6 +1676,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "regulatory_fees": {
@@ -1562,6 +1686,7 @@
         "verified": "2026-08-24",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1572,6 +1697,7 @@
         "verified": "2026-08-24",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1589,7 +1715,8 @@
         "quote": "Securities Transaction Tax and Bourse Tax will be abolished on March31, 1999. The special measure for listed stocks to allow the option of being taxed by 1.05% on proceeds of sales in lieu of being taxed by 26% on capital will continue to be applied until March 31, 2001, and then, will be abolished.",
         "confidence": "high",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_gains_tax": {
         "zh": "个人投资者出售上市股票的转让所得适用「申告分离课税」（与其他所得分开单独计税），税率为所得税15%+住民税5%（另加相应的复兴特别所得税），与股息所得选择分离课税时的税率结构一致；持有于「特定账户（源泉徵收）」的上市股票，转让损益可与同账户内的利息/股息损益相互冲抵",
@@ -1605,7 +1732,8 @@
         "quote": "In case of the separate self-assessment taxation, the applicable income tax rate is at 15% (inhabitant tax 5%). In addition, the special income tax for reconstruction (see page 47) is imposed in addition to income tax. ... Dividends and other payments from listed stocks received in withholding accounts may be subject to aggregation of profits and losses with capital gains of listed stocks in the same account",
         "confidence": "high",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "dividend_withholding_tax": {
         "zh": "境内个人投资者持有上市股票（非大股东，持股低于3%）取得的股息，来源扣缴所得税等15.315%+住民税5%，合计20.315%；若为非上市股票股息或大股东（持股3%以上）取得的上市股票股息，仅扣缴所得税等20.42%（不含住民税）；非居民/外国法人取得的股息另按《所得税法》分离源泉课税规则处理，一般情形税率20.42%，但可能因日本与投资者居住国的税收协定而降低，具体协定税率因国而异未逐一核实",
@@ -1626,6 +1754,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "implicit_costs_note": {
@@ -1635,6 +1764,7 @@
         "verified": "2026-08-24",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       }
@@ -1646,6 +1776,7 @@
         "confidence": "low",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1664,7 +1795,8 @@
         "quote": "As various challenges are on the rise both in economy and security territories, it is necessary for the government to collectively strengthen its economic security initiatives. While further promoting sound inward investment into Japan, one of the aims of the Foreign Exchange and Foreign Trade Act (\"FEFTA\") is to prevent technology leakage involving national security.",
         "confidence": "medium",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "liquidity_risk_note": {
         "zh": "流动性风险随板块显著分化：Prime市场对流通股市值/流通股数设有最高门槛（见listing.boards），是三板中流动性要求最严格的一档；Growth市场流通股市值最低门槛仅2.5亿日元、流通股数最低仅500单位（过渡期标准），显著低于Prime，意味着Growth市场个股面临更高的流动性风险（买卖价差更宽、大额交易冲击成本更高）；TOPIX等旗舰指数的成分股集中在Prime市场也从侧面反映这一分层",
@@ -1680,7 +1812,8 @@
         "quote": "Tradable share market capitalization: JPY 1 billion or more (Prime) ... Tradable share market capitalization: JPY 0.25 billion or more (Standard/Growth) ... Number of tradable shares: 500 units or more (Standard/Growth)",
         "confidence": "medium",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_change_risk_note": {
         "zh": "现行Prime/Standard/Growth三板体系于2022年4月4日由旧「本则市场（含一部/二部）、Mothers、JASDAQ」体系改制而来，是TSE近年最大的一次市场结构变革；已上市公司须于2021年9月1日至12月30日间在新旧三板间做出选择，2022年4月4日正式切换",
@@ -1701,6 +1834,7 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "enforcement_note": {
@@ -1717,7 +1851,8 @@
         "quote": "A Chairman and two Commissioners are appointed by the Prime Minister and function as independent agents. (Term of office: 3 years) / The SESC aims to ensure the fairness and transparency of markets and to protect investors. / Inspections of violations of laws and regulations related to securities business by Financial Instruments Business Operators (FIBOs) ... Investigations of market misconduct, including insider trading and market manipulation ... Inspections of violations of disclosure requirements by listed companies ... Recommendations for administrative actions or administrative monetary penalty payment orders, policy proposal, or filing criminal charges",
         "confidence": "high",
         "verified": "2026-08-24",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     }
   }
