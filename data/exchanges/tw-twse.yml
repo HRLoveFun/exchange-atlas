@@ -356,6 +356,7 @@ market_structure:
     confidence: medium
 
   matching_principle:
+    enum: price_time
     zh: "价格优先、时间优先"
     en: "Price priority and time priority"
     quote: "撮合依價格優先及時間優先原則成交，買賣申報之優先順序依下列原則決定：一 價格優先原則：較高買進申報優先於較低買進申報，較低賣出申報優先於較高賣出申報...二 時間優先原則：開市前輸入之申報，依電腦隨機排列方式決定優先順序；開市後輸入之申報，依輸入時序決定優先順序。"

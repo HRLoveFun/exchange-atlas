@@ -346,6 +346,7 @@ market_structure:
     confidence: high
 
   matching_principle:
+    enum: price_time
     zh: "价格优先、时间优先，连续竞价阶段由ASX Trade系统自动持续撮合"
     en: "Price/time priority, continuously matched automatically by the ASX Trade system during continuous trading"
     sources:
@@ -555,6 +556,7 @@ market_structure:
       confidence: high
 
     matching_principle:
+      enum: price_time
       zh: "价格-时间优先（Price-Time Priority）：连续交易阶段由撮合引擎自动配对买卖盘；修改价格、增加数量或变更账户类型会导致排队优先级重置并生成新的Public Order ID，其余类型的修改不影响原有优先级"
       en: "Price-Time Priority: the matching engine automatically pairs orders during continuous trading; a change in order price, an increase in order size, or a change of account type resets queue priority and generates a new Public Order ID, while other modifications leave existing priority unaffected"
       sources:

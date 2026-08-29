@@ -338,6 +338,7 @@ market_structure:
     confidence: high
 
   matching_principle:
+    enum: price_time
     zh: "价格优先、时间优先"
     en: "Price priority and time priority"
     quote: "证券竞价交易按价格优先、时间优先的原则撮合成交。"
@@ -617,6 +618,7 @@ market_structure:
       confidence: high
 
     matching_principle:
+      enum: price_time
       zh: "价格优先、时间优先；连续竞价期间以涨跌停价格进行的申报另按平仓优先、时间优先原则撮合（涨停价的买入平仓申报优先于买入开仓申报，跌停价的卖出平仓申报优先于卖出开仓申报）"
       en: "Price priority, then time priority; during continuous auction, orders submitted at the price limit are instead matched on a close-priority, then time-priority basis (at the up-limit price, closing buy orders take priority over opening buy orders; at the down-limit price, closing sell orders take priority over opening sell orders)"
       sources:

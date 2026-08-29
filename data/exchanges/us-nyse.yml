@@ -317,6 +317,7 @@ market_structure:
     confidence: high
 
   matching_principle:
+    enum: price_time
     zh: "开盘/收盘由DMM主持的集合竞价撮合，盘中为电子连续竞价撮合（NYSE Pillar系统）"
     en: "DMM-facilitated auctions at open/close; continuous electronic matching intraday via NYSE Pillar"
     detail: "未找到对撮合优先顺序（价格优先/时间优先等）逐条说明的官方原文，本条为对整体机制的归纳，非逐字摘引。"

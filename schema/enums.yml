@@ -115,6 +115,18 @@ circuit_breaker_type:
     - {id: stock_level, label_zh: 个股级, label_en: Stock-level}
     - {id: both, label_zh: 指数级+个股级, label_en: Both}
 
+matching_principle:
+  # 连续交易时段订单簿的成交优先级模型。绝大多数订单驱动市场是纯「价格优先、
+  # 时间优先」；下面另外三档是对它的结构性偏离——显示单优先于隐藏单 / 经纪商
+  # 自成交优先 / 逐合约在时间优先与按比例分配间切换。开收盘集合竞价由做市商
+  # 主持（NYSE DMM、ASX/SIX 集合竞价算法等）记在 opening_mechanism / closing_mechanism，
+  # 不进本词表——本词表只描述盘中连续撮合。粒度取舍见 DECISIONS.md [ADR-038]。
+  values:
+    - {id: price_time, label_zh: 价格-时间优先, label_en: Price-Time Priority}
+    - {id: price_display_time, label_zh: 价格-显示-时间优先, label_en: Price-Display-Time Priority}
+    - {id: price_time_broker_priority, label_zh: 价格-时间优先+经纪商优先, label_en: "Price-Time + Broker Priority"}
+    - {id: price_time_or_pro_rata, label_zh: 价格-时间优先/按比例分配（逐合约）, label_en: "Price-Time or Pro-Rata (per contract)"}
+
 yes_no:
   # id 和 label_en 都必须加引号：裸写的 yes/no/Yes/No 会被 YAML 1.1 解析成布尔值
   # 而不是字符串（大小写不敏感，"No" 一样会中招）。id 不加引号会导致数据文件里

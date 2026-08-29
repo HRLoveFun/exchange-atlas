@@ -295,6 +295,7 @@ market_structure:
         accessed: 2026-08-13
 
   matching_principle:
+    enum: price_time
     zh: "价格优先、时间优先"
     en: "Price priority and time priority"
     quote: "证券竞价交易按价格优先、时间优先的原则撮合成交"

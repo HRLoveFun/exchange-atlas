@@ -349,6 +349,7 @@ market_structure:
     confidence: high
 
   matching_principle:
+    enum: price_time
     zh: "常规时段为连续竞价：新申报（或修改后申报）收到后，按价格优先、时间优先原则即时撮合成交（低流动性品种不适用）"
     en: "Regular session is continuous auction: when new (or modified) orders are received, trade is executed immediately based on price priority and time priority (not applied to issues with low liquidity)"
     quote: "Regular session : Continuous auction / When new (or modified) orders are received, trade is executed immediately based on the principles of price priority and time priority. (not applied to issues with low liquidity)"
@@ -569,6 +570,7 @@ market_structure:
       confidence: high
 
     matching_principle:
+      enum: price_time
       zh: "连续交易阶段采用个别竞价、价格优先与时间优先原则：较低卖价优先于较高卖价，较高买价优先于较低买价，同价申报按接收先后排序；但在单一价格集合竞价中，若成交价落在涨跌停价，则不适用时间优先，改按数量优先分配成交（大额申报优先于小额申报，同数量再按时间优先）"
       en: "Continuous trading applies individual auction with price and time priority: a lower ask has priority over a higher ask, a higher bid has priority over a lower bid, and among same-priced orders the one received earlier has priority; however, in a single-price (call) auction, if the determined price is at the daily price limit, time priority is not applied — quantity priority is used instead (larger orders matched before smaller ones, with time priority applied among orders of equal quantity)"
       sources:

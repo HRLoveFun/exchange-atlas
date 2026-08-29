@@ -323,6 +323,7 @@ market_structure:
     confidence: high
 
   matching_principle:
+    enum: price_time
     zh: "限价盘在同价位按订单进入顺序撮合；连续交易时段（第二时段）市价盘可部分/全部按单一价格成交"
     en: "Price-driven matching with entry-order priority at each price level in continuous trading"
     confidence: medium
@@ -563,6 +564,7 @@ market_structure:
       confidence: high
 
     matching_principle:
+      enum: price_time
       zh: "按价格与时间优先原则撮合：买盘价格从高到低、卖盘价格从低到高享有优先权；同价位按进入交易系统的时间先后排序；市价盘始终享有最高优先权"
       en: "Matching takes place based on price and time priority: the highest buy order prices and the lowest sell order prices get the highest priority; orders at the same price are prioritized by entry time; market orders always receive the highest priority"
       sources:

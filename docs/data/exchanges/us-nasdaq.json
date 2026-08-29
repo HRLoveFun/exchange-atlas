@@ -536,6 +536,7 @@
         "detail": null
       },
       "matching_principle": {
+        "enum": "price_display_time",
         "zh": "价格/时间优先撮合：同一价位按订单到达先后顺序执行；显示订单（displayed）优先于非展示订单（non-displayed）成交",
         "en": "Price/time priority: displayed limit orders at the same price execute in the order received; non-displayed shares execute after displayed shares at that price",
         "sources": [
@@ -548,7 +549,6 @@
         "quote": "Nasdaq features a price/time priority model where the execution logic is fair and transparent for all market participants. All displayed limit orders are treated equally and executed in the order in which they were received at the same price. Non-displayed shares are executed after displayed shares in the order in which they were received at that price.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null,
         "spec": null,
         "detail": null
       },

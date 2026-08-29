@@ -669,6 +669,7 @@
         "detail": null
       },
       "matching_principle": {
+        "enum": "price_time",
         "zh": "价格-时间优先原则：更优价格（买方最高限价、卖方最低限价）优先成交，不限价申报优先于限价申报，同价按接收先后顺序成交；集合竞价另按「最大可执行数量原则」确定单一成交价",
         "en": "Price-time priority: the order/quote with the better price (highest limit for buy side, lowest for sell side) is executed first, unlimited orders enjoy top priority, and orders at the same price are executed in order of receipt; auctions additionally apply the \"principle of highest executable volume\" to determine a single auction price",
         "quote": "As a rule, the price-time priority principle applies. This means that the order and quote with the better price (highest price limit for buy side, lowest price limit for sell side) is executed first. Unlimited orders enjoy top priority when consolidating orders and quotes.",
@@ -681,7 +682,6 @@
         ],
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null,
         "spec": null,
         "detail": null
       },

@@ -383,6 +383,30 @@
       }
     ]
   },
+  "matching_principle": {
+    "values": [
+      {
+        "id": "price_time",
+        "label_zh": "价格-时间优先",
+        "label_en": "Price-Time Priority"
+      },
+      {
+        "id": "price_display_time",
+        "label_zh": "价格-显示-时间优先",
+        "label_en": "Price-Display-Time Priority"
+      },
+      {
+        "id": "price_time_broker_priority",
+        "label_zh": "价格-时间优先+经纪商优先",
+        "label_en": "Price-Time + Broker Priority"
+      },
+      {
+        "id": "price_time_or_pro_rata",
+        "label_zh": "价格-时间优先/按比例分配（逐合约）",
+        "label_en": "Price-Time or Pro-Rata (per contract)"
+      }
+    ]
+  },
   "yes_no": {
     "values": [
       {

@@ -525,6 +525,7 @@ market_structure:
       '
     confidence: high
   matching_principle:
+    enum: price_time_broker_priority
     zh: 电子连续限价订单簿（CLOB）撮合；同一经纪商的双方挂单可触发「经纪商优先撮合」（Broker Preferencing），不受订单簿原有排序位置限制，Jitney单与匿名单不适用此优先机制
     en: Electronic Central Limit Order Book (CLOB) matching; Broker Preferencing lets
       an incoming attributed order match another attributed order from the same broker

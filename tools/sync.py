@@ -214,6 +214,7 @@ EXCHANGE_IANA_TZ = {
     "us-nyse": "America/New_York",
     "jp-jpx": "Asia/Tokyo",
     "de-eurex": "Europe/Berlin",
+    "in-nse": "Asia/Kolkata",  # Phase 1b：spec.trading_sessions 已结构化（[ADR-037]），补入甘特条；印度不实行夏令时，恒为 UTC+5:30
 }
 
 # 交易时段字段目前都是自由文本（如 "13:00-15:00"、"9:30am-3:50pm连续交易..."）。

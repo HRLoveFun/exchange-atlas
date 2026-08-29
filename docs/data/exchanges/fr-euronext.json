@@ -632,6 +632,7 @@
         "detail": null
       },
       "matching_principle": {
+        "enum": "price_time",
         "zh": "严格价格优先，同价位按时间优先（strict price/time priority）；对未公开披露的订单类型（大宗订单Large-in-Scale、中间价订单Mid-Point）另有独立的规模/时间优先规则",
         "en": "Strict price priority, with strict time priority at the same price level; orders exempted from pre-trade transparency (Large-in-Scale orders, Mid-Point orders) follow separate size/time priority rules",
         "sources": [
@@ -644,7 +645,6 @@
         "quote": "Orders in the Central Order Book shall be executed according to strict price priority. Orders at the same price are ranked and executed according to strict time priority",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null,
         "spec": null,
         "detail": null
       },
@@ -1154,6 +1154,7 @@
           "detail": null
         },
         "matching_principle": {
+          "enum": "price_time_or_pro_rata",
           "zh": "逐合约设定为『价格/时间优先』或『按比例分配（Pro-rata）』二者之一（具体见Annexe One逐合约对照表）：价格/时间优先——同一合约/交割月/组合中，最高买价与最低卖价优先，同价位按接受时间先后排序；按比例分配——最优价位的全部买卖盘按比例算法分配成交量，具体细节见Annex 3",
           "en": "Each contract is assigned either \"Price/Time priority\" or \"Pro-rata priority\" (see Annexe One for the per-contract mapping): Price/Time priority — within the same contract/delivery month/strategy, the highest bid and lowest offer take priority, ranked by acceptance time at the same price; Pro-rata priority — all bids/offers at the best price in the same contract/delivery month/strategy trade according to a pro-rata algorithm, detailed in Annex 3",
           "sources": [
@@ -1166,7 +1167,6 @@
           "quote": "The following order prioritisation criteria will determine trade priority. ... (a) Price/Time priority: (i) best price. A buy order at the highest price and a sell order at the lowest price has priority over orders in the same contract/delivery month/strategy; and (ii) oldest time-stamp. ... (b) Pro-rata priority: (i) best price ...; (ii) pro-rata. All buy orders at the highest price and all sell orders at the lowest price in the same contract/delivery month/strategy are traded in accordance with the pro-rata algorithm",
           "confidence": "high",
           "verified": "2026-08-16",
-          "enum": null,
           "spec": null,
           "detail": null
         },

@@ -407,7 +407,7 @@
           "label_en": "Matching Principle",
           "volatility": "stable",
           "en_required": true,
-          "enum_ref": null,
+          "enum_ref": "matching_principle",
           "in_matrix": "trading_mechanism"
         },
         {
@@ -667,7 +667,7 @@
           "label_en": "Matching Principle",
           "volatility": "stable",
           "en_required": true,
-          "enum_ref": null,
+          "enum_ref": "matching_principle",
           "in_matrix": false
         },
         {

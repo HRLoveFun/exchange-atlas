@@ -587,6 +587,7 @@
         "detail": null
       },
       "matching_principle": {
+        "enum": "price_time",
         "zh": "连续竞价阶段按价格优先、时间优先撮合；开收盘及午间例行程序按均衡价算法撮合（见开盘/收盘机制）",
         "en": "Continuous Trading Phase matches by price priority then time priority; Opening/Mid-Day/Closing routines match via the Equilibrium Price algorithm (see opening/closing mechanism)",
         "quote": "All orders are matched in accordance with price priority, subject to Rule 8.14, followed by time priority.",
@@ -599,7 +600,6 @@
           }
         ],
         "verified": "2026-08-14",
-        "enum": null,
         "spec": null,
         "detail": null
       },
@@ -1034,6 +1034,7 @@
           "quote": null
         },
         "matching_principle": {
+          "enum": "price_time_or_pro_rata",
           "zh": "价格优先、时间优先为基本原则；交易所可为特定合约启用「价格点开创者」（Price Point Maker, PPM）、「做市商」（Market Maker, MM）或「按比例分配」（Pro-Rata Order）三种算法之一或组合，启用后同价位订单改按相应算法优先分配，而非单纯时间优先",
           "en": "Price priority then time priority as the baseline; the Exchange may activate one or more of three algorithms for a given Contract — Price Point Maker (\"PPM\"), Market Maker (\"MM\"), or Pro-Rata Order allocation — in which case orders at the same price are allocated per that algorithm rather than by simple time priority",
           "sources": [
@@ -1046,7 +1047,6 @@
           "quote": "All orders entered into the Trading System will be matched in a manner that gives priority to price; i.e. orders at the best price (highest bid/lowest offer) receive priority over other orders in the same Contract Month/spreads. ... For orders at the same price point, the time priority would apply ... unless any one (1) or more of the trade matching algorithms (PPM, MM and Pro-Rata Order) is applicable.",
           "confidence": "high",
           "verified": "2026-08-14",
-          "enum": null,
           "spec": null,
           "detail": null
         },
