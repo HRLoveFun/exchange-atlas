@@ -23,8 +23,12 @@ overview:
     verified: 2026-08-13
     confidence: medium
 
-  timezone: "America/New_York (ET)"
-  dst_rule: "实行夏令时（东部时间在 EST/EDT 间切换）"
+  timezone:
+    zh: "America/New_York (ET)"
+    en: "America/New_York (ET)"
+  dst_rule:
+    zh: "实行夏令时（东部时间在 EST/EDT 间切换）"
+    en: "Observes daylight saving time (Eastern Time switches between EST and EDT)"
 
   founded_year:
     zh: "1792（5月17日，梧桐树协议 Buttonwood Agreement）"
@@ -481,6 +485,10 @@ listing:
     en: "Continuing obligations monitored by the Continued Listing group"
     quote: "The Continued Listing group monitors and enforces quantitative, qualitative and timely filing requirements of companies listed on the NYSE Exchanges, and initiates suspensions and delistings for companies that are noncompliant or no longer suitable for continued listing."
     confidence: high
+    sources:
+      - title: NYSE Regulation（官网，Continued Listing group 说明）
+        url: https://www.nyse.com/regulation
+        accessed: 2026-08-30
 
   suspension_resumption:
     zh: "交易所可自行裁量、可不经事先通知即暂停证券交易并启动退市程序（如触发反向拆股相关的最低股价规则时'立即暂停交易并启动退市程序'）；具体的合规整改期/申诉听证等复牌路径的完整规则文本本次未逐条核实到"

@@ -26,10 +26,13 @@ overview:
     verified: 2026-08-16
     confidence: medium
 
-  timezone: "America/Sao_Paulo (BRT, UTC-3)"
+  timezone:
+    zh: "America/Sao_Paulo (BRT, UTC-3)"
+    en: "America/Sao_Paulo (BRT, UTC-3)"
 
   dst_rule:
     zh: "无夏令时：巴西自2019年起全国不再实行夏令时切换，全年固定使用UTC-3"
+    en: "No daylight saving time: since 2019 Brazil no longer switches to DST nationwide, staying on UTC-3 year-round"
     confidence: low
     detail: |
       此说法来自本次会话的公开检索（非 b3.com.br 官网原文），未在本次抓取到的 B3 页面里
@@ -197,7 +200,8 @@ regulation:
     detail: "No exchange-level foreign ownership limit. Entry is via the non-resident investor regime (CMN 4,373/2014) using an omnibus or own account at a local custodian/broker. Capital gains are exempt for most non-residents."
     quote: "CMN Resolution 4.373/2014 ... allows Non-resident investors (1) to trade and invest in the same portfolio products available for resident investors in Brazil"
     sources:
-      - "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/trading-equities-derivatives-and-fixed-income-cmn-4-373-2014.htm"
+      - url: https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/trading-equities-derivatives-and-fixed-income-cmn-4-373-2014.htm
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -523,6 +527,7 @@ market_structure:
         confidence: high
       lunch_break:
         zh: "无：指数期货、个股期货均为单一连续交易时段（09:00至收盘），不设午间休市；期权市场同样沿用现货市场无午休的连续交易安排（见顶层lunch_break）"
+        en: "None: index futures and single-stock futures both run as a single continuous session (09:00 to close) with no midday break; the options market likewise follows the cash market's no-lunch-break continuous arrangement (see the top-level lunch_break)"
         confidence: medium
       continuous_pm:
         zh: "延续continuous_am的单一连续时段直至电子集合竞价收盘：指数期货类旗舰合约（IND/WIN）18:25；个股/份额期货（Single Stock, Units and ETFs Futures）17:55；期权市场（个股/ETF期权）连续交易至16:55、指数期权至16:50，其后进入收盘集合竞价（见closing_mechanism）"
@@ -787,7 +792,8 @@ listing:
     detail: "Figures are B3's own processing times (Issuers Regulation Annex A). CVM's separate registration adds ~60 days, so total time to listing is typically ~3–4 months."
     quote: "12 business days in ... 39 business days, extendable for up to 20 business days"
     sources:
-      - "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf"
+      - url: https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -832,7 +838,8 @@ listing:
     detail: "B3 Issuers Regulation Arts 69/71/73. Voluntary cancellations of shares generally require a liquidity event (tender/minimum acceptance) before delisting."
     quote: "If voluntary cancellation (Article 69), in the case of shares, Units backed by shares and Fund shares, it will depend, unless otherwise decided by B3, on the occurrence of a liquidity event so that the affected securities are withdrawn from trading; If ex officio cancellation... it will imply the exclusion from trading of the affected securities"
     sources:
-      - "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf"
+      - url: https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -842,7 +849,8 @@ listing:
     detail: "B3 Issuers Regulation Art. 72. The transition window protects holders by allowing an orderly exit."
     quote: "B3 shall publish on its portal the decisions to cancel the trading of securities Admitted to Trading and shall set, as needed, a timeframe not exceeding 30 days for the cancellation decision to take effect, so that the securities continue to be temporarily traded in a continuous or non-continuous manner"
     sources:
-      - "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf"
+      - url: https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -852,8 +860,10 @@ listing:
     detail: "Balcão B3 is B3's organized OTC venue for assets not admitted to the exchange; a delisted security is excluded from BOTH the exchange and Balcão B3 per Art. 71."
     quote: "Once a voluntary cancellation has been authorized or the cancellation of the Issuer's Listing or its Admission to Trading has been communicated, the securities issued by it shall no longer be traded; O Capítulo V trata do Mercado de Balcão Organizado de negociação eletrônica (Plataforma de Negociação de Balcão B3)"
     sources:
-      - "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf"
-      - "https://www.b3.com.br/data/files/B8/90/92/1D/BBE7B9105B12E5A9AC094EA8/Regulamento%20do%20Balcao%20B3%20-%2002012026%20-%20Sem%20marca.pdf"
+      - url: https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf
+        accessed: 2026-08-27
+      - url: https://www.b3.com.br/data/files/B8/90/92/1D/BBE7B9105B12E5A9AC094EA8/Regulamento%20do%20Balcao%20B3%20-%2002012026%20-%20Sem%20marca.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -928,7 +938,8 @@ clearing:
     detail: "B3 Guide for Nonresident Investors, 'Cash Market Collateralization in the B3 Clearinghouse'. The spot market is not margin-traded in the derivatives sense; collateral covers settlement-cycle risk."
     quote: "Cash Market Collateralization in the B3 Clearinghouse • Clearing Member, Broker or Client can pledge collateral for cash market risk; Cash Market risk assessed only for the settlement cycle: from trade date until settlement"
     sources:
-      - "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf"
+      - url: https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -938,7 +949,8 @@ clearing:
     detail: "Same source basis as initial_margin_practice; B3 requires collateral to be maintained over the D+2 settlement cycle."
     quote: "Cash Market risk assessed only for the settlement cycle: from trade date until settlement"
     sources:
-      - "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf"
+      - url: https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -948,8 +960,10 @@ clearing:
     detail: "Spot has no daily MTM; the B3 Guide states cash market risk is assessed only over the settlement cycle, while Trading Dynamics states daily settlement applies to derivatives."
     quote: "Cash Market risk assessed only for the settlement cycle: from trade date until settlement; The profit or loss that results from the investment is calculated and settled on a daily basis through daily settlement of accounts."
     sources:
-      - "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf"
-      - "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm"
+      - url: https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf
+        accessed: 2026-08-27
+      - url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -974,7 +988,8 @@ clearing:
     detail: "N/A for spot; cash market settles T+2 per B3 clearing rules. The 'last trading day' notion belongs to derivatives."
     quote: "Cash Market risk assessed only for the settlement cycle: from trade date until settlement (T+2)"
     sources:
-      - "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf"
+      - url: https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -1009,7 +1024,8 @@ clearing:
       detail: "B3 Trading Dynamics: daily settlement marks positions to market each day; initial collateral is a percentage of position value."
       quote: "Daily settlement The profit or loss that results from the investment is calculated and settled on a daily basis through daily settlement of accounts; Initially, only a collateral deposit is needed equivalent to a percentage of the total value of the open position."
       sources:
-        - "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm"
+        - url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm
+          accessed: 2026-08-27
       verified: "2026-08-27"
       confidence: high
 
@@ -1029,7 +1045,8 @@ clearing:
       detail: "B3 Futures Market page states most contracts are financially settled but some are physically settled."
       quote: "Most contracts are financially settled, but some are settled physically."
       sources:
-        - "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/futures-market.htm"
+        - url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/futures-market.htm
+          accessed: 2026-08-27
       verified: "2026-08-27"
       confidence: high
 
@@ -1057,7 +1074,8 @@ participants:
     detail: "Foreign investors are the largest by traded volume (often >50%); individuals are a growing but minority volume share. Exact % split (foreign ~62%, institutional ~21%, individual ~17% by volume in the Boletim) to be confirmed from Boletim Ações 01M25."
     quote: ""
     sources:
-      - "https://www.b3.com.br/data/files/A4/C4/EF/D2/E11F491029BEEC39AC094EA8/Boletim%20Acoes%20-%2001M25.pdf"
+      - url: https://www.b3.com.br/data/files/A4/C4/EF/D2/E11F491029BEEC39AC094EA8/Boletim%20Acoes%20-%2001M25.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: medium
 
@@ -1077,7 +1095,8 @@ participants:
     detail: "CVM Resolution 30 (2021) sets the suitability duty on distributors; client profiling is mandatory before recommending products."
     quote: "CVM RESOLUTION Nº 30 ... This Resolution regulates the duty to verify the suitability of products, services, and operations to the customer's profile; ... evaluate and classify the customer in previously established risk profile categories."
     sources:
-      - "https://www.gov.br/cvm/en/foreign-investors/regulation-files/ResolutionCVM30.pdf"
+      - url: https://www.gov.br/cvm/en/foreign-investors/regulation-files/ResolutionCVM30.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -1107,7 +1126,8 @@ participants:
     detail: "SINACOR is B3's standard order-routing/clearing system; most local brokers are SINACOR users. (The ~95% SINACOR-adoption stat from B3/Oracle material was not independently cached this session — treat as indicative.)"
     quote: ""
     sources:
-      - "https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/b3-trading-characteristics-and-rules.htm"
+      - url: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/b3-trading-characteristics-and-rules.htm
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: medium
 
@@ -1125,7 +1145,8 @@ infrastructure:
     detail: "B3 Market Data B3 Commercial Policy 2027 defines L1 (top of book) and L2 (complete order book)."
     quote: "Depth Level 1 (L1) – Top of the Book: detailed in item 3.2.1; Depth Level 2 (L2) – Complete Order Book: detailed in item 3.2.2"
     sources:
-      - "https://www.b3.com.br/data/files/59/57/0D/50/464599100A29E189AC094EA8/Market%20Data%20Commercial%20Policy%202027.pdf"
+      - url: https://www.b3.com.br/data/files/59/57/0D/50/464599100A29E189AC094EA8/Market%20Data%20Commercial%20Policy%202027.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -1135,7 +1156,8 @@ infrastructure:
     detail: "B3 Market Data B3 Consumption Policy defines real-time/delayed/snapshot delayed thresholds."
     quote: "Real-Time Data: means the Distribution of information within less than 15 (fifteen) minutes from the transmission of the data by B3; Delayed Data: means the distribution of information 15 (fifteen) minutes or more after the transmission of Data Contained in Market Data B3 by B3; Snapshot Delayed Data: means the delayed and static Distribution of the Data Contained in Market Data B3. Information may be updated every 15 (fifteen) minutes or longer."
     sources:
-      - "https://www.b3.com.br/data/files/3A/E2/3F/56/B73699100A29E189AC094EA8/Market%20Data%20B3%20Consumption%20Policy.pdf"
+      - url: https://www.b3.com.br/data/files/3A/E2/3F/56/B73699100A29E189AC094EA8/Market%20Data%20B3%20Consumption%20Policy.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -1145,8 +1167,10 @@ infrastructure:
     detail: "B3 Market Data B3 Commercial Policy 2027 sets the billing basis; the Consumption Policy defines fixed vs variable fees."
     quote: "The fees listed in this Market Data B3 Commercial Policy are applied per Client, per counting unit, per month, per dataset, unless otherwise indicated, and are invoiced monthly in arrears; Fees: means fixed fees and variable fees due for the usage of Market Data B3"
     sources:
-      - "https://www.b3.com.br/data/files/59/57/0D/50/464599100A29E189AC094EA8/Market%20Data%20Commercial%20Policy%202027.pdf"
-      - "https://www.b3.com.br/data/files/3A/E2/3F/56/B73699100A29E189AC094EA8/Market%20Data%20B3%20Consumption%20Policy.pdf"
+      - url: https://www.b3.com.br/data/files/59/57/0D/50/464599100A29E189AC094EA8/Market%20Data%20Commercial%20Policy%202027.pdf
+        accessed: 2026-08-27
+      - url: https://www.b3.com.br/data/files/3A/E2/3F/56/B73699100A29E189AC094EA8/Market%20Data%20B3%20Consumption%20Policy.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -1156,7 +1180,8 @@ infrastructure:
     detail: "B3 Market Data B3 Consumption Policy defines historical data and its redistribution terms."
     quote: "Historical Market Data B3: means historical data, meaning all data or information not considered Real-Time Data or Delayed Data, based on the information from the Data Contained in Market Data B3; commercialization of Historical Market Data B3, without prior approval by B3."
     sources:
-      - "https://www.b3.com.br/data/files/3A/E2/3F/56/B73699100A29E189AC094EA8/Market%20Data%20B3%20Consumption%20Policy.pdf"
+      - url: https://www.b3.com.br/data/files/3A/E2/3F/56/B73699100A29E189AC094EA8/Market%20Data%20B3%20Consumption%20Policy.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -1176,8 +1201,10 @@ infrastructure:
     detail: "B3 Market Data B3 Consumption Policy defines Direct/Indirect Access and Redistributor roles."
     quote: "Reporting Users: mean ... (ii) Users with Direct Access who subscribe Data Contained in Market Data B3 directly from B3; Redistributor: means the institution that, via Indirect Access, is responsible for the Redistribution of the Data Contained in Market Data B3"
     sources:
-      - "https://www.b3.com.br/data/files/3A/E2/3F/56/B73699100A29E189AC094EA8/Market%20Data%20B3%20Consumption%20Policy.pdf"
-      - "https://www.b3.com.br/en_us/market-data-and-indices/data-services/market-data/market-data-platform/"
+      - url: https://www.b3.com.br/data/files/3A/E2/3F/56/B73699100A29E189AC094EA8/Market%20Data%20B3%20Consumption%20Policy.pdf
+        accessed: 2026-08-27
+      - url: https://www.b3.com.br/en_us/market-data-and-indices/data-services/market-data/market-data-platform/
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -1187,7 +1214,8 @@ infrastructure:
     detail: "Third-party news report (Valor International, 2026-08-03). B3 also maintains a formal business continuity plan (PCO-PUMA) for disaster recovery; no full-day market failure is recorded in the recent period."
     quote: "B3 said a “technical and isolated failure” in its post-trade operations forced it to delay the start of trading in several markets, in some cases by more than two and a half hours past the regular opening time."
     sources:
-      - "https://valorinternational.globo.com/markets/news/2026/08/03/b3-outage-hits-stock-exchange-at-crucial-moment.ghtml"
+      - url: https://valorinternational.globo.com/markets/news/2026/08/03/b3-outage-hits-stock-exchange-at-crucial-moment.ghtml
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: medium
 
@@ -1205,7 +1233,8 @@ costs:
     detail: "Brokerage commission is a bilateral commercial term, not filed with B3; many retail brokers now offer zero-fee schemes. Treated as medium as it is inferred from B3's fee schedule scope."
     quote: ""
     sources:
-      - "https://www.b3.com.br/en_us/products-and-services/fee-schedules/listed-equities-and-derivatives/equities/equities-and-investment-funds-fees/spot/"
+      - url: https://www.b3.com.br/en_us/products-and-services/fee-schedules/listed-equities-and-derivatives/equities/equities-and-investment-funds-fees/spot/
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: medium
 
@@ -1225,7 +1254,8 @@ costs:
     detail: "B3 Equities & Investment Funds Fee Schedule (spot) lists Trading fee, CCP fee and Asset transfer fee by monthly ADTV tier."
     quote: "for Trading fee, CCP fee and Asset transfer fee, tables will be updated later. Monthly ADTV(BRL million) Trading fee CCP fee Asset transfer fee Total ... 0 3 0.00500% 0.02240% 0.0026% 0.0300% More than 3 0.00375% 0.01615% 0.0026% 0.0225%"
     sources:
-      - "https://www.b3.com.br/en_us/products-and-services/fee-schedules/listed-equities-and-derivatives/equities/equities-and-investment-funds-fees/spot/"
+      - url: https://www.b3.com.br/en_us/products-and-services/fee-schedules/listed-equities-and-derivatives/equities/equities-and-investment-funds-fees/spot/
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -1235,8 +1265,10 @@ costs:
     detail: "CVM oversight is funded by its own regime, not a per-trade fee passed to investors via B3. The spot fee schedule lists only Trading/CCP/Asset-transfer fees — no separate regulatory fee row."
     quote: "for Trading fee, CCP fee and Asset transfer fee, tables will be updated later."
     sources:
-      - "https://www.b3.com.br/en_us/products-and-services/fee-schedules/listed-equities-and-derivatives/equities/equities-and-investment-funds-fees/spot/"
-      - "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm"
+      - url: https://www.b3.com.br/en_us/products-and-services/fee-schedules/listed-equities-and-derivatives/equities/equities-and-investment-funds-fees/spot/
+        accessed: 2026-08-27
+      - url: https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: medium
 
@@ -1246,7 +1278,8 @@ costs:
     detail: "No stamp-duty instrument applies to share transfers in Brazil. The only financial-transaction tax is IOF, listed on B3's taxation page with 0% on incoming equity resources."
     quote: "IOF (Financial Transaction Tax) ... 0% incoming resources"
     sources:
-      - "https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm"
+      - url: https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: medium
 
@@ -1299,8 +1332,10 @@ costs:
     detail: "B3 spot fee schedule rates used for the explicit-fee illustration; the T+2 settlement cycle is the main implicit funding cost for spot."
     quote: "Monthly ADTV(BRL million) Trading fee CCP fee Asset transfer fee Total ... 0 3 0.00500% 0.02240% 0.0026% 0.0300%; Cash Market risk assessed only for the settlement cycle: from trade date until settlement"
     sources:
-      - "https://www.b3.com.br/en_us/products-and-services/fee-schedules/listed-equities-and-derivatives/equities/equities-and-investment-funds-fees/spot/"
-      - "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf"
+      - url: https://www.b3.com.br/en_us/products-and-services/fee-schedules/listed-equities-and-derivatives/equities/equities-and-investment-funds-fees/spot/
+        accessed: 2026-08-27
+      - url: https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: high
 
@@ -1323,7 +1358,8 @@ risks:
     detail: "No exchange-level seizure risk; risk is country-level policy/SOE governance."
     quote: ""
     sources:
-      - "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf"
+      - url: https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: medium
 
@@ -1333,8 +1369,10 @@ risks:
     detail: "Liquidity is concentrated in index names; the 2026-08-03 outage illustrates operational liquidity risk."
     quote: "B3 said a “technical and isolated failure” in its post-trade operations forced it to delay the start of trading in several markets, in some cases by more than two and a half hours past the regular opening time."
     sources:
-      - "https://valorinternational.globo.com/markets/news/2026/08/03/b3-outage-hits-stock-exchange-at-crucial-moment.ghtml"
-      - "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf"
+      - url: https://valorinternational.globo.com/markets/news/2026/08/03/b3-outage-hits-stock-exchange-at-crucial-moment.ghtml
+        accessed: 2026-08-27
+      - url: https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf
+        accessed: 2026-08-27
     verified: "2026-08-27"
     confidence: medium
 

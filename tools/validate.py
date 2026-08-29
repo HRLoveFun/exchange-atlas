@@ -340,8 +340,9 @@ def validate_path_references():
     # 只把"首段是仓库顶层条目"的 token 当作仓库内路径校验。反引号里以已知扩展名结尾的
     # 字符串还有别的来源：站内相对路径片段（res/pc/js/func.js）、别的网站/仓库的路径、
     # 绝对路径示例（/tmp/x.html）——这些不是本校验的对象，此前会被误报（见 OPEN-QUESTIONS
-    # 已删除的 #35 与 ADR-029 顺带修复）。
-    top_level = {p.name for p in ROOT.iterdir()}
+    # 已删除的 #35 与 ADR-029 顺带修复）。`.cache/` 内容不入库（ADR-002），文档里写
+    # `.cache/<id>/_manifest.json` 这类是示意路径，同样跳过。
+    top_level = {p.name for p in ROOT.iterdir()} - skip_dirs
     for md in md_files:
         text = md.read_text(encoding="utf-8")
         for token in PATH_TOKEN_RE.findall(text):

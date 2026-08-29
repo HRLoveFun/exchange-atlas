@@ -169,7 +169,7 @@
 方向定案见 [ADR-033] 起（`spec` 层规则、ADR-005 修订、零构建确认、诚实渲染、非现货降级等 ADR 由 Phase 0 落）。目标：主视图从对比矩阵改为单市场「交易日平面图」（x=日内时间/分钟，y=涨跌幅），让交易员首次接触一个市场即 30 秒看懂其微观结构。本节只记进度，工程设计与取舍见 DECISIONS。
 
 - [x] **立即执行 · A1 防幻觉机器校验补完**（2026-08-29，[ADR-033]）— 见上方「阶段路线」。
-- [ ] **立即执行 · A2 v1.1 尾巴收口** — 英文回填 `OPEN-QUESTIONS` #45 剩余（`sa-tadawul`/`sg-sgx`/`br-b3` 约 13 字段）+ 61 个 `verify_quotes` CACHE_MISS 降零或注明。
+- [x] **立即执行 · A2 v1.1 尾巴收口**（2026-08-30，[ADR-034]）— `verify_quotes.py` 走 `expand_exchange`（消化 42 个假 CACHE_MISS，暴露并修 6 个真 FAIL）；`br-b3.yml` 34 处裸字符串 `sources` 归一为字典；英文回填 #45 **全库清零**（20 家，不止原计划 3 家）；61 个 CACHE_MISS → 0。`make build` 全绿（validate 0/0、verify_quotes OK=1024 FAIL=0 CACHE_MISS=0）。`OPEN-QUESTIONS` #45 删除。
 - [ ] **Phase 0 · 范式与数据模型定案** — 修订 ADR-005；新增 `spec` 层 / 零构建 / 诚实渲染 / 非现货降级等 ADR；搭车裁定 `OPEN-QUESTIONS` 框架性问题 #38/#39 等。
 - [ ] **Phase 1 · market_structure 结构化** — `taxonomy.yml` 加第五章 `spec` 子结构，`matching_principle` 转 enum，`validate.py` 5b 接 `spec`，20 家现货所回填 `spec` 并对来源复核；`sync.py` `compute_trading_window()` 改吃 `spec`。
 - [ ] **Phase 2 · 交易日平面图** — 新默认首屏（手写 SVG），矩阵移到 `#view=matrix`。交付后停下评估「30 秒看懂」是否达成。

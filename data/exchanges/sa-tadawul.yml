@@ -41,8 +41,12 @@ overview:
     verified: 2026-08-14
     confidence: medium
 
-  timezone: "Asia/Riyadh (UTC+3)"
-  dst_rule: "不实行夏令时"
+  timezone:
+    zh: "Asia/Riyadh (UTC+3)"
+    en: "Asia/Riyadh (UTC+3)"
+  dst_rule:
+    zh: "不实行夏令时"
+    en: "No daylight saving time"
 
   founded_year:
     zh: "2007年3月19日，依据《资本市场法》第20条注册成立为股份公司"
@@ -101,7 +105,9 @@ overview:
     quote: "Debt Instruments are priced in percentage terms over their par value."
     confidence: medium
 
-  settlement_currency: "沙特里亚尔（SAR）"
+  settlement_currency:
+    zh: "沙特里亚尔（SAR）"
+    en: "Saudi riyal (SAR)"
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境
@@ -273,9 +279,11 @@ market_structure:
       quote: "Second Session: 10:00 – 15:00 / Market Open - Trading"
     lunch_break:
       zh: "无午休；第二时段为单一连续交易时段"
+      en: "No lunch break; the Second Session is a single continuous trading session"
       confidence: medium
     continuous_pm:
       zh: "同第二时段（10:00–15:00 为单一连续交易时段，未按上午/下午拆分）"
+      en: "Same as the Second Session (10:00–15:00 is a single continuous session, not split into morning/afternoon)"
       confidence: medium
     after_market:
       zh: "第三时段（收盘集合竞价）15:00–15:10；第四时段（尾盘按收盘价撮合 Trade at Last）15:10–15:20（债券与ETF不适用第三、四时段）"
@@ -283,6 +291,7 @@ market_structure:
       quote: "Third Session: Listed securities (except for Debt Instruments and ETFs): 15:00 – 15:10 / Closing Auction ... Fourth Session: Listed securities (except for Debt Instruments and ETFs): 15:10 – 15:20 / Trade at Last"
     night_session:
       zh: "无"
+      en: "None"
       confidence: medium
 
   holidays_note:
@@ -489,6 +498,7 @@ market_structure:
         confidence: high
       lunch_break:
         zh: "无午休；第二时段为单一连续交易时段，与现货市场结构一致"
+        en: "No lunch break; the Second Session is a single continuous trading session, consistent with the cash market structure"
         sources:
           - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
             url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
@@ -497,6 +507,7 @@ market_structure:
         detail: "Table(1)交易时段表仅列三段（开盘前/连续交易/休市），未见独立午休时段，属对表格结构的推断而非直接原文陈述，故标 medium 而非 high。"
       continuous_pm:
         zh: "同第二时段（9:30–15:30为单一连续交易时段，未按上午/下午拆分）"
+        en: "Same as the Second Session (9:30–15:30 is a single continuous session, not split into morning/afternoon)"
         sources:
           - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
             url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
@@ -513,6 +524,7 @@ market_structure:
         confidence: high
       night_session:
         zh: "无独立夜盘/收市后交易时段；官方交易时段表仅列三个时段（开盘前、连续交易、休市），未见类似港交所AHT的延伸交易安排"
+        en: "No separate night / after-hours session; the official session table lists only three sessions (pre-open, continuous trading, market closed), with no extended-hours arrangement comparable to HKEX's AHT"
         sources:
           - title: Derivatives Exchange Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
             url: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp
@@ -1301,6 +1313,7 @@ risks:
 
   fx_risk_note:
     zh: "沙特里亚尔实行盯住美元的固定汇率制度（本条为一般常识性背景信息，本次未附一手原文来源，confidence 相应降级）"
+    en: "The Saudi riyal operates under a fixed exchange-rate regime pegged to the US dollar (general background information; no primary source cited this session, hence the lower confidence)"
     confidence: low
 
   political_risk_note:

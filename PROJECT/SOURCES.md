@@ -908,6 +908,8 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
   - Lei nº 15.270, de 26 de novembro de 2025 全文（OPEN-QUESTIONS 悬案第1条用，第3条修订《9.249/1995号法律》第10条新增非居民股息10%预扣税条款，第8条规定2026-01-01生效）: https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm
 - `bsmsupervisao.com.br` | 官方（B3自律监管子机构） | pt-BR / en | curl 常规 UA 200 | BSM Supervisão de Mercados，2007年由B3（原BM&FBOVESPA）设立的自律组织，负责对B3管理的市场及参与者进行一线监督、稽查与纪律处分，受CVM监督
   - 英文首页: https://www.bsmsupervisao.com.br/en/us/home（HTTP 200）
+- `valorinternational.globo.com` | 第三方（财经媒体，Valor Econômico 英文版） | en | 未测试专门反爬 | `infrastructure.major_outage_history` / `risks.liquidity_risk_note` 用——2026-08-03 B3 交易延迟开市事件的报道；两字段均 `confidence: medium`（第三方来源，CLAUDE.md 二第3条），未找到 B3 官方对该次故障的事后复盘声明
+  - B3 outage hits stock exchange at crucial moment（2026-08-03）: https://valorinternational.globo.com/markets/news/2026/08/03/b3-outage-hits-stock-exchange-at-crucial-moment.ghtml
 ### 多伦多证券交易所 Toronto Stock Exchange (TSX) `ca-tsx`
 - `tsx.com` | 官方 | en / fr（`/en/` 与 `/fr/` 路径均可直接访问，法语版正文与英文版对应，如 `/fr/trading/calendars-and-trading-hours/trading-hours` 返回「Heures de négociation」正文；本次抓取全部走英文版，法语版未逐条比对） | curl + 常规 UA 全部 200，未见反爬，未加延时 | ⚠️ TSX 隶属 TMX Group（`group_id: tmx-group`），集团下还有 TSX Venture Exchange（TSXV，创业板，独立交易所实体非本文件板块）、TSX Alpha Exchange（另一撮合场所/marketplace）、Montréal Exchange（衍生品）、CDS（清算/托管）等实体，很多页面把 TSX/TSXV/Alpha 三个 marketplace 的规则并排列在同一张表里，摘引时要看清楚列头对应哪个实体——本文件只收 TSX 本身
   - 交易时段（含 MOO/MOC/PME 收盘流程完整时间表）: https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours

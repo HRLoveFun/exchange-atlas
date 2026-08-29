@@ -21,8 +21,12 @@ overview:
     verified: 2026-08-12
     confidence: medium
 
-  timezone: "Asia/Hong_Kong (UTC+8)"
-  dst_rule: "不实行夏令时"
+  timezone:
+    zh: "Asia/Hong_Kong (UTC+8)"
+    en: "Asia/Hong_Kong (UTC+8)"
+  dst_rule:
+    zh: "不实行夏令时"
+    en: "No daylight saving time"
 
   founded_year:
     zh: "1891（前身香港经纪协会）／2000年3月6日（现HKEX集团经公司化改制成立，同年6月27日上市）"
@@ -76,7 +80,9 @@ overview:
     quote: "Dual Counter Market Maker Short Selling by a Dual Counter Market Maker"
     confidence: medium
 
-  settlement_currency: "港元（双柜台人民币柜台以人民币结算）"
+  settlement_currency:
+    zh: "港元（双柜台人民币柜台以人民币结算）"
+    en: "Hong Kong dollars (the renminbi counter under the dual-counter model settles in renminbi)"
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境
@@ -364,6 +370,10 @@ market_structure:
       en: "No daily price limit"
       quote: "it also does not work the same way as the daily price limit model which sets a specific daily price range for securities trading as seen in some markets"
       confidence: high
+      sources:
+        - title: VCM FAQ（HKEX 官网英文版）
+          url: https://www.hkex.com.hk/Global/Exchange/FAQ/Securities-Market/Trading/VCM?sc_lang=en
+          accessed: 2026-08-30
     main_board: ""
     other_boards: ""
 
