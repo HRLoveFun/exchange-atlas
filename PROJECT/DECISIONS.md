@@ -28,6 +28,7 @@
 **定了什么：** 站点默认进矩阵视图（行=交易所，列=可切换维度组），不是逐所档案列表。
 **为什么：** 横向可比是本项目相对于"某交易所规则百科"的核心差异化价值。矩阵格子用「短标签 + 可展开细则」解决不同交易所同一机制不可直接比较的问题（如日本值幅制限是阶梯绝对值、A股是百分比）。
 **日期：** 2026-08-12
+**状态：** 已被 [ADR-035] A 节修订（2026-08-30）——v2.0 主视图改为单市场「交易日平面图」，矩阵降为对比模式（`#view=matrix`）。矩阵本身与「横向可比有价值」的判断不变，改的只是"默认首屏"。
 
 ### ADR-006 — UI 标签恒中英双语，与「数据语言模式」分离
 **定了什么：** 界面标签（表头、章节名、枚举标签）永远中英并列显示，不受语言模式开关影响；语言模式开关只切换**数据值**在「纯中文」与「原语言」之间。
@@ -482,5 +483,128 @@
 **未处理 / 留给后续：** `.cache/<id>/_manifest.json` 是否入库（入库则 `verify_quotes` 离线校验在 CI / 新克隆才有意义）是 [ADR-002]"零 CI 部署 / `.cache` 不入库"的再评估，属 Phase 0 范畴，本条不动。`OPEN-QUESTIONS.md` #20（`in-nse` STT 税率表覆盖面 / `overview.foreign_ownership_limit` 留空）只顺带订正了其中 `foreign_access_channel` 的来源 URL，STT 与外资持股上限两处仍如实保留。
 
 **验证：** `make build` 全绿（validate 0/0、verify_quotes OK=1024 FAIL=0 CACHE_MISS=0）；`make sync` 两次连续运行产物 md5 一致（幂等）；6 个新暴露 FAIL 逐一核对补入的 `sources` 页正文含该 quote 的 verbatim 窗口；英文回填字段的数字与既有 `zh`/`quote` 一致（[ADR-033] 的散文数字反查通过）。
+
+**日期：** 2026-08-30
+
+### ADR-035 — v2.0 Phase 0：范式转向（主视图=交易日平面图）+ `spec` 结构化层契约 + 零构建 / 诚实渲染 / 非现货降级
+
+**背景：** 2026-08-29 用户校准项目目标（见记忆 `v2-visualization-pivot` 与 `ROADMAP.md`「v2.0 计划」）：当前网页本质是分类数据表，可视化程度低，没服务到「交易员首次接触一个陌生市场就快速建立认知」这个真实主用例。核心范式是「日内时间 × 相对前收价」二维平面——第五章几乎每个字段都是对这个空间的约束。本条是 v2.0 Phase 0 的定案集（几乎不写代码，产出是本 ADR + [ADR-036] + `ROADMAP` 骨架），Phase 1 起才动 schema/数据/前端。四项决策（主视图、`spec` 层、零构建、诚实渲染）在 Phase 0 讨论时用 AskUserQuestion 逐项确认。
+
+---
+
+#### A. 主视图范式转向——修订 [ADR-005]
+
+**定了什么：** 站点默认首屏从对比矩阵（[ADR-005]）改为**单市场「交易日平面图」**：顶部市场下拉；中央 SVG 平面，x = 日内时间（分钟精度，覆盖盘前到盘后），y = 涨跌幅（相对前收价 / 前结算价）。矩阵降级为「对比模式」，移到 `#view=matrix`。
+
+**平面元素 ← 第五章字段映射**（Phase 2 据此渲染，Phase 1 据此决定 `spec` 结构化哪些字段）：交易时段→x 轴分段着色；开/收盘机制→首尾集合竞价区块；价格限制类型→y 轴处理方式；主板幅度→y 轴边界墙 + 墙外阴影；熔断→y 轴多档触发线 + 触发后 x 轴时间缺口 + 恢复标记；波动性中断→贴价格路径的走廊；临时停牌→"任意时刻"斜纹条；回转交易 T+N→x 轴右缘箭头；撮合原则 / 订单类型 / 做空 / 做市商→标注层。
+
+**为什么修订而非废弃 [ADR-005]：** [ADR-005] 的「横向可比是核心差异化」在校准后不再是唯一立论——「首次接触即看懂」成为新的主用例，它天然是单市场、图形化的。矩阵不消失（对比模式保留），但「默认首屏 = 矩阵」这个决定要改。[ADR-005] 条目保留作历史，加一行指向本条。
+
+**Phase 2 要改的（本条只记，不动）：** `app.js` `render()` L603 的 `params.view || "matrix"` 默认值、L632/L673 的初始 hash、`updateActiveTab`、`docs/index.html` 的 tab 按钮顺序（对比矩阵 / 交易日平面图 / 时区 / 健康度）。矩阵/时区/健康度三视图的渲染逻辑不动。
+
+---
+
+#### B. `spec` 结构化层——契约
+
+**问题：** 分钟级、每个元素挂 quote 的平面图需要机器可读的量化参数（时段起止 HH:MM、涨跌停 ±%、熔断档位表 …）。现在这些是散文（`price_limits.main_board.zh = "±10%"`，数字漂在字里）。[ADR-015] 当初为时区甘特条选了「构建期正则从散文推导」，并自己承认是近似（"误差量级是分钟"）——正则推导撑不起分钟级 + 逐元素溯源的图。
+
+**定了什么：**
+
+1. **新增 `spec` 为事实信封的一个键**，与 `zh`/`en`/`enum`/`quote`/`confidence`/`sources`/`detail`/`verified` 并列（Phase 1 加进 `sync.ENVELOPE_KEYS`，原样导出到 `docs/data/exchanges/<id>.json`）。`spec` 存该字段量化机制的结构化形式：
+   ```yaml
+   price_limits:
+     main_board:
+       spec: { limit_pct: 10, reference: prev_close, symmetric: true }
+       zh:   "±10%（风险警示股票 ±5%，科创板见 other_boards）"
+       quote: "涨跌幅限制比例为 10%"
+       confidence: high
+   ```
+
+2. **与 CLAUDE.md §一「一处手写」的共存——`spec` 是量化事实的机器形式，`zh`/`detail` 是同一事实的人读渲染 + 语境，同构于既有的 `enum` + `zh` 关系**（`price_limits.type` 早就同时有 `enum: percentage_band` 和 `zh: "百分比涨跌幅"`，没人当"写两遍"）。**纪律规则：驱动图的量化值只在 `spec` 手写；`zh`/`detail` 可以为读者复述它，但不得携带 `spec` 里没有的量化事实，反之亦然。** `quote` 仍是一切的 verbatim 底稿，`spec` 是"从 `quote` 提取并被 `quote` 反查"的派生值。
+
+3. **校验**：[ADR-033] 校验 5b 已预埋——`confidence: high` 且带 `spec` 的字段，`spec` 里每个数值都必须能在 `quote` 里逐字找到（`spec` 是 typed 值，没有散文那些 12/24 小时改写 / 中文数字 / 含数字产品名的噪声，可严判）。Phase 1 另加：`spec` 结构合法性校验（见下条）；`zh` 里 ≥2 位数字若既不在 `spec` 也不在 `detail` → **warn**（不 err，[ADR-033] 已论证散文数字严查是死路）。
+
+4. **`spec` 形状的权威定义放新文件 `schema/spec.yml`**（Phase 0 已建 stub，含设计说明 + `market_structure.price_limits.main_board` 一条示范条目；Phase 1 填充第五章其余字段并给 `validate.py` 加结构校验），按 `fields.<chapter>.<field path>` 列出每个字段 `spec` 的可用键与类型；**不塞进 `taxonomy.yml`**（已 818 行，见 [ADR-036] 对框架性问题 #5 的裁定）。
+
+5. **`null` / 不适用 / 未填 三态**（喂给 D 节的诚实渲染）：
+   - `spec: { limit_pct: null, note: "官方未公布 Tier 档位" }` —— 机制存在、数值查不到 → 平面图画幽灵墙 + "数值未公布"角标。**这正是 [OPEN-QUESTIONS 已删除的 #13] 在问的"半成品状态视觉区分"。**
+   - `spec: { type: none }` —— 机制确实不存在（无涨跌停 / 无熔断）→ 平面图该轴不设线。
+   - `spec` 键整个缺省 —— Phase 1 尚未填 → 平面图省略该元素。三态前端必须能区分。
+
+6. **取代 [ADR-015] 对第五章的做法**：Phase 1 让 `spec.trading_sessions` 成为权威，`sync.compute_trading_window()` 改读 `spec`、删 `_parse_hour_tokens` 正则；时区甘特条退化成 `spec` 的一个投影。[ADR-015] 的"派生值不需 quote/confidence"论述对其余派生仍成立，只是第五章时刻不再走"推导"而走"结构化存储 + 反查"。
+
+7. **连带解决**：[OPEN-QUESTIONS #12]（散文数字反查绕过）——`spec` 给出精确 typed 值让 5b 严查；#13（已删除，见上）。
+
+---
+
+#### C. 前端技术栈——守零构建
+
+**定了什么：** 平面图 + 后续十章图形，全部用 **vanilla JS + 手写 SVG 字符串**（与现有 `app.js` 拼 DOM 字符串的风格一致），**不引图表库（D3/visx）、不引打包器 / 框架、不加构建步骤**。
+
+**为什么：** 呼应 [ADR-002]（产物入库、推送即上线、零 CI 部署）与 [ADR-008]（不为用而用）。平面图需要的东西——坐标轴、色块、水平线、时间缺口、走廊、点击浮层——手写 SVG 完全够，且风格可控、无供应链。代价（`app.js` 会显著变大、坐标换算得自己写）可接受；真到手写 SVG 撑不住某个图形（如力导向的监管关系图）时再单独评估，不预先破例。
+
+---
+
+#### D. 图形诚实呈现规则
+
+平面图（及后续所有图形）不得宣称比来源更高的精度。规则：
+
+1. `spec` 值有 + `confidence: high` → 实线 / 实心渲染。
+2. `spec` 值 `null`（带 `note`）→ 虚线 / 幽灵 + "数值未公布"角标。
+3. 来源只给区间不给点 → 渲染成半透明带，不是线。
+4. `confidence: medium/low` → 元素照渲染，但加"未完全核实"视觉线索（更淡 / 点边框）。
+5. **时间精度**：`spec.trading_sessions.*` 的 `start`/`end` 是 HH:MM；x 轴分钟分辨率，但不得暗示到秒。来源给随机窗口（如 ASX「09:59:00 randomised 15s」）→ `spec` 存名义时刻 + `randomised_seconds`，图上画一小段模糊区。
+6. **每个渲染元素可点击 → 弹出该字段的 `zh`/`detail`/`quote`/`sources` 全套溯源**（复用现有 `openCellOverlay`）。平面图永远不是某个事实的唯一表示。
+7. 延续 [ADR-015] 的自律：视图文案与浮层带原始散文，图不假装比档案页更权威。
+
+---
+
+#### E. 非现货所在交易日平面图上的降级
+
+「时间 × 相对前收价」平面默认现货股票市场。处理：
+
+- **纯衍生品所（`de-eurex`）**：y 轴 reference 从"前收盘价"改标"前结算价"（期货涨跌停、股指期货熔断本来就按 % from prev settlement 表达）。平面语法不变，只换 y 轴标签——`spec` 里带 `reference: prev_settlement`，前端据此选标签。`de-eurex` 的顶层第五章字段本就在描述衍生品（[ADR-009]/[ADR-019]），其 `spec` 直接用；无涨跌停 / 无股票式熔断的地方走 D 节 `type: none`。
+- **一所现货+衍生品双业务、合并单条目（`sg-sgx`/`kr-krx` 等）**：平面图**默认显示现货**（顶层 `market_structure.*` 的 `spec`），提供切换到衍生品视图（`market_structure.derivatives.*` 的 `spec`）——同一套语法，两份数据。
+- **衍生品由集团内独立法人经营、不在本记录范围（`de-xetra`→Eurex、`ca-tsx`→Montréal）**：平面图只显示现货。
+
+**更新 [OPEN-QUESTIONS #17]**：市场结构 / 平面图这一侧本条已解决（平面图靠 `reference` 标签 + `type: none` 泛化到衍生品）；`listing` 整章对纯衍生品所的系统性不适配是另一回事，[ADR-036] 给方向（把 [ADR-020] 的 `optional`/`count_chapter_leaves` 推广到章节级"仅现货适用"标记，Phase 3 做第六章可视化时一并落地）。
+
+---
+
+**验证：** 本条不写代码，无 `make check` 影响。[ADR-005] 加了指向本条的修订注。
+
+**日期：** 2026-08-30
+
+### ADR-036 — 积累的 schema 框架性问题批量裁定（Wave 3 前置）
+
+**背景：** [ADR-035] 之外，`OPEN-QUESTIONS.md`「框架性问题」里攒了一批"等样本更多再评估 schema"的条目。v2.0 Phase 0 一并坐下来逐条裁定——20 家样本已经不少，且 Phase 4（Wave 3）一开就是 6-8 个并行子代理，不先裁定会把同样的判断错误复制 6-8 遍（[ADR-018] 的教训）。**裁定逐条对照真实数据，不转述 OPEN-QUESTIONS 的归纳。** 大多数结论是"暂不改 + 写明确触发条件"——不是拖延，是把"什么时候该动"从模糊变成可执行。
+
+**逐条裁定：**
+
+1. **#39 `short_selling_stance` 缺"备兑卖空"档 —— 落地：加 `covered_only`。** 逐读 `za-jse`（"允许备兑、禁止裸卖空、无报升规则、无名单"，当前无 enum 只有自由文本）与 `sa-tadawul`（`restricted_uptick`，备兑 + 类报升价格条件 + 动态限额）。`covered_only`（允许备兑卖空 / 禁止裸卖空 / 无报升规则 / 无指定名单）是全球最常见的卖空规制形态，四个法律区分（备兑 vs 报升 vs 名单 vs 禁止）本身很清晰——不像 `review_system` 需要 11 个样本才看出形态（[ADR-023]）。**`enums.yml` 加 `covered_only`；`za-jse.short_selling` 从自由文本改填 `enum: covered_only`（`zh`/`en`/`quote`/`sources` 不动，只是把已核实的事实归类）；`sa-tadawul` 保持 `restricted_uptick`（报升条件是更具约束力的特征）。** `OPEN-QUESTIONS #39` 删除。
+
+2. **#38 `region` 枚举粒度（`mena_africa` 混装中东 + 非洲）—— 暂不拆，触发条件写明。** 现 2 样本（`sa-tadawul` 中东、`za-jse` 撒哈拉以南非洲）。**触发：Phase 4（Wave 3）若纳入第 3 个 MENA/非洲所（如 `eg-egx`/`ng-ngx`），则把 `mena_africa` 拆成 `middle_east` + `africa`，`za-jse`→`africa`、`sa-tadawul`→`middle_east`，前端矩阵地区筛选自动跟随（读 enum，无需改代码）。** 在那之前 4 档够用。`OPEN-QUESTIONS #38` 更新为记录本裁定（保留，因为还没到触发点）。
+
+3. **#1 `federation_of`（Euronext 联邦制，整体收录为一条）—— 暂不加字段。** 1 样本。现状"如实列出七国监管机构对照 + `detail`"字段变长但不失真。**触发：Phase 4 若再纳入第 2 个"多国联邦、整体收录为一条"的所（另一个泛区域交易所），再评估 `federation_of` 反向字段。**
+
+4. **#5 `taxonomy.yml` 单文件失控 —— 暂不拆，设阈值。** 现 818 行；[ADR-035] 的 `spec` 形状定义已决定放独立文件 `schema/spec.yml` 而非塞回 taxonomy，缓解了主要增长压力。**触发：`taxonomy.yml` 超过 ~1200 行，或需要新增第 12 个顶层章节时，按章拆 `schema/chapters/*.yml` 由 `sync.py` 汇总。**
+
+5. **#17 `listing` 整章对纯衍生品所不适配 —— 平面图侧已由 [ADR-035] E 解决；`listing` 侧给方向。** 决定**不引入"按交易所类型的章节级条件适用机制"**这种大改，改为把 [ADR-020] 已有的 `optional: true` + `count_chapter_leaves()`（"整组未启用则不计入完成度分母"）**推广到章节级**：给 `listing` 章节加一个"仅现货适用"标记，纯衍生品所（`de-eurex`）整章不计入分母、前端档案页折叠显示。低成本、复用现有机制。**Phase 3 做第六章「上市生命周期」可视化时一并落地**，Phase 0 只锁方向。`OPEN-QUESTIONS #17` 更新。
+
+6. **#19 跨交易所指数熔断（`in-nse` 的熔断看 Nifty 50 或竞争对手 BSE Sensex 先触发者）—— 不加 enum 维度，`spec` 结构承接。** [ADR-035] 的 `circuit_breaker.spec` 结构里，`reference` 允许是列表并带跨所标注（如 `reference: [{index: "Nifty 50", exchange: self}, {index: "Sensex", exchange: "bse"}]`）——Phase 1 设计 `spec` 形状时纳入，不动 `circuit_breaker_type` enum。1 样本，够了。
+
+7. **#27 一所现货 + 衍生品双业务合并单条目（`sg-sgx`）—— 现有机制够用，不加新机制。** `market_structure.derivatives` / `clearing.derivatives` 子块（[ADR-019]/[ADR-030]）已承接"同实体两条产品线"；[ADR-035] E 明确了平面图对这类所"默认现货 + 切换衍生品"。`clearing.delivery_method` 顶层收窄（[ADR-030]）也已处理取值模糊。不再加机制。
+
+8. **#30 `au-asx` 单层准入名单（无多层级板块）—— 不改 schema。** `listing.boards` 是 list 类型，ASX 填两条"伪板块"（Official List / Foreign Exempt）+ `transfer_between_boards: 不适用` 是可接受的近似。list 结构本就容得下 1 条或 N 条，不存在"装不下"。
+
+9. **#36 监管层级（欧盟 MiFID II / SSR 等超国家规则，既非交易所自定也非单一国家监管）—— 暂不加"监管层级"维度。** 现 2 个欧盟成员国样本（`fr-euronext` 联邦、`de-xetra` 德国）+ `uk-lse`（脱欧后不适用）。受影响的是 `market_structure.tick_size`/`short_selling`、`regulation.regulator`/`core_laws` 等约 3-5 个字段，现状"如实留空 + `detail` 说明规则来自欧盟层级"够用，收益小。**若真要做，形状是给受影响字段加可选 `rule_level: exchange|national|supranational` 标记。触发：Phase 4 若纳入 ≥2 个新的欧盟成员国现货所。**
+
+10. **#41 `overview.market_cap_usd_bn`/`annual_turnover_usd_bn` 字段名假设美元、实际多按本币披露 —— 暂维持现状，触发条件收紧。** 现 2 样本（`cn-sse` 人民币、`ca-tsx` 加元，均"如实存本币数字 + `detail` 说明"）。`OPEN-QUESTIONS #41` 已写"下次遇到第三家非美元官方披露口径的交易所时应动手解决"——**本条确认这个触发：第 3 家即动手，方案是字段改名去掉 `usd`、配一个可选 `currency` 键（不接实时汇率，避免"什么时点汇率"的新可追溯性问题）。** `OPEN-QUESTIONS #41` 保留（还没到第 3 家）。
+
+**未纳入本条的框架性问题**（属数据缺口或已另有归属，非 schema 结构问题）：#4（quote 粒度成本，方法论）、#7/#8/#9/#10/#11（具体来源缺口）、#16（jp-jpx 熔断存疑，[ADR-035] D 节的 `null` 约定让它可诚实呈现，数据本身仍是悬案）、#18（`official_languages` 口径，`in-nse` 已临时判断）、#25/#40（`organization_form`/`ccp_name` 单一制假设，样本仍不足，各 1-2 家，`de-xetra`/`za-jse` 已"留空 enum + 文字描述"吸收）、#20-#24/#26/#28/#29/#31/#33/#34/#37/#43（具体交易所数据 / 抓取缺口）。
+
+**关于 `.cache/` 入库（[ADR-034] 留给 Phase 0 的问题）：** `verify_quotes` 离线校验只在本地 `.cache/` 已 `fetch_sources` 落盘时有意义；`make check` 里 `verify_quotes` 对 `CACHE_MISS` 不 fail，新克隆构建不受影响。**裁定：暂不入库**（保 [ADR-002] 的 `.cache` 不入库 + 仓库体积可控）。若未来真上 CI 且要 CI 跑 verbatim 反查，方案是只入库规范化文本提取（`.pdf.txt` + 每个来源一份 normalized `.txt`），不入库原始 HTML/PDF 快照——留待有 CI 需求时再做。
+
+**验证：** `enums.yml` 加 `covered_only` + `za-jse.short_selling` 改 `enum: covered_only`（`quote`/`sources` 不动）后 `make build` 全绿（20 家，0/0、verify_quotes OK=1024 FAIL=0）；`make sync` 幂等；其余裁定不写代码。
 
 **日期：** 2026-08-30

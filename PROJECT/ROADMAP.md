@@ -2,7 +2,7 @@
 
 进度状态放这里；「为什么这么排」去 `DECISIONS.md`，这里不重复。
 
-## 当前阶段：v1.1 已收口（20 家 × 11 章，2026-08-27）。下一步方向已校准为 **v2.0 高度可视化转向**（2026-08-29，见下方「v2.0 计划」与 [ADR-033] 起）——主视图从对比矩阵改为单市场「交易日平面图」，新增结构化 `spec` 层。已完成前置加固 A1（防幻觉机器校验补完，[ADR-033]）。
+## 当前阶段：**v2.0 高度可视化转向**（2026-08-29 校准）——主视图从对比矩阵改为单市场「交易日平面图」，新增结构化 `spec` 层。加固组 A1（[ADR-033]）、A2（[ADR-034]）与 Phase 0 范式/契约定案（[ADR-035] + [ADR-036]）均已完成。**下一步：Phase 1 · market_structure 结构化**（见下方「v2.0 计划」）。
 
 ## 阶段路线
 
@@ -14,6 +14,7 @@
 - [x] **v1.0 横向铺开** — 按 Tier 扩到 20+ 家；Wave 1（8 家）+ Wave 2（7 家）均已完成，加上 v0.1/v0.2 五家标杆共 20 家；计划任务/工程设计/验收标准/进度见下方「v1.0 计划」一节
 - [x] **前端阅读性优化**（v1.0 收尾后）— 矩阵工具栏去掉「标杆批次 Tier」筛选框与搜索框（v0.3 加的两个交互，20 家规模下地区筛选已够用，搜索是冗余项；`v0.3` 那条历史记录不改，此处记录后续变更）；时区甘特条午休时段从"柱状条空白+右侧括号文字"改为独立蓝色色块；正文字号/行高、矩阵斑马纹与悬停高亮、档案页字段卡片间距与长文本限宽等一轮可读性调整，见 `PROJECT/DECISIONS.md` [ADR-025]
 - [x] **v2.0 前置加固 A1**（2026-08-29）— `tools/validate.py` 补完防幻觉铁律的机器强制：第三方来源 `confidence` 封顶、`NUMBER_RE` 收紧杜绝垃圾 token、路径引用校验收窄到仓库内路径、结构化 `spec` 值的逐字反查（Phase 1 前 no-op）。0 存量违规，均为 preventive；`OPEN-QUESTIONS` 框架性问题 #6/#35 已解决删除、#12 更新为"此路不通"路标。见 `PROJECT/DECISIONS.md` [ADR-033]
+- [x] **v2.0 前置加固 A2 + Phase 0**（2026-08-30）— A2 尾巴收口（英文回填 #45 全库清零、CACHE_MISS 归零、`verify_quotes` 走 expand，[ADR-034]）；Phase 0 范式与数据模型定案（修订 ADR-005、`spec` 层契约 + `schema/spec.yml`、零构建/诚实渲染/非现货降级、框架性问题批量裁定含 `covered_only` 落地，[ADR-035] + [ADR-036]）。详见下方「v2.0 计划」。
 
 ## 交易所填充进度
 
@@ -166,12 +167,12 @@
 
 ## v2.0 计划：高度可视化转向
 
-方向定案见 [ADR-033] 起（`spec` 层规则、ADR-005 修订、零构建确认、诚实渲染、非现货降级等 ADR 由 Phase 0 落）。目标：主视图从对比矩阵改为单市场「交易日平面图」（x=日内时间/分钟，y=涨跌幅），让交易员首次接触一个市场即 30 秒看懂其微观结构。本节只记进度，工程设计与取舍见 DECISIONS。
+方向与契约定案见 [ADR-033]～[ADR-036]。目标：主视图从对比矩阵改为单市场「交易日平面图」（x=日内时间/分钟，y=涨跌幅/相对前结算价），让交易员首次接触一个市场即 30 秒看懂其微观结构。本节只记进度，工程设计与取舍见 DECISIONS。
 
 - [x] **立即执行 · A1 防幻觉机器校验补完**（2026-08-29，[ADR-033]）— 见上方「阶段路线」。
-- [x] **立即执行 · A2 v1.1 尾巴收口**（2026-08-30，[ADR-034]）— `verify_quotes.py` 走 `expand_exchange`（消化 42 个假 CACHE_MISS，暴露并修 6 个真 FAIL）；`br-b3.yml` 34 处裸字符串 `sources` 归一为字典；英文回填 #45 **全库清零**（20 家，不止原计划 3 家）；61 个 CACHE_MISS → 0。`make build` 全绿（validate 0/0、verify_quotes OK=1024 FAIL=0 CACHE_MISS=0）。`OPEN-QUESTIONS` #45 删除。
-- [ ] **Phase 0 · 范式与数据模型定案** — 修订 ADR-005；新增 `spec` 层 / 零构建 / 诚实渲染 / 非现货降级等 ADR；搭车裁定 `OPEN-QUESTIONS` 框架性问题 #38/#39 等。
-- [ ] **Phase 1 · market_structure 结构化** — `taxonomy.yml` 加第五章 `spec` 子结构，`matching_principle` 转 enum，`validate.py` 5b 接 `spec`，20 家现货所回填 `spec` 并对来源复核；`sync.py` `compute_trading_window()` 改吃 `spec`。
-- [ ] **Phase 2 · 交易日平面图** — 新默认首屏（手写 SVG），矩阵移到 `#view=matrix`。交付后停下评估「30 秒看懂」是否达成。
-- [ ] **Phase 3 · 其余章节可视化** — 成本瀑布 → 交割管线 → …按交易员价值迭代；B 组（`fx_risk_note`/`kr-krx` low 簇）在第十一/十二章就地清。
-- [ ] **Phase 4 · Wave 3 广度扩张（搁置）** — Phase 1–2 稳定后解冻，候选见 [ADR-016] 思路 + 东南亚/中东/非洲/拉美补白。
+- [x] **立即执行 · A2 v1.1 尾巴收口**（2026-08-30，[ADR-034]）— `verify_quotes.py` 走 `expand_exchange`（消化 42 个假 CACHE_MISS，暴露并修 6 个真 FAIL）；`br-b3.yml` 34 处裸字符串 `sources` 归一为字典；英文回填 #45 **全库清零**（20 家）；61 个 CACHE_MISS → 0。`OPEN-QUESTIONS` #45 删除。
+- [x] **Phase 0 · 范式与数据模型定案**（2026-08-30，[ADR-035] + [ADR-036]）— 修订 ADR-005（主视图=交易日平面图，矩阵降为 `#view=matrix`）；定 `spec` 结构化层契约（新文件 `schema/spec.yml` 存形状定义，含 1 条示范条目）、零构建守则、图形诚实呈现规则（`spec` 三态 null/type:none/缺省）、非现货所 y 轴 `reference` 降级；框架性问题 #39 落地（`enums.yml` 加 `covered_only`，`za-jse` 归类），#13 删除，#17/#38 更新，其余（#1/#5/#36/#41 等）"暂不改 + 明确触发条件"。
+- [ ] **Phase 1 · market_structure 结构化** — 依 `schema/spec.yml` 契约填第五章 `spec`（`trading_sessions.*` 起止 HH:MM + kind、`price_limits` ±% + reference、`circuit_breaker` 档位表、`volatility_interruption` 走廊、`opening/closing_mechanism` 竞价窗口）；`schema/spec.yml` 填充第五章其余字段 + `validate.py` 加结构校验；`matching_principle` 转 enum；`sync.py` `compute_trading_window()` 改吃 `spec.trading_sessions` 删 `_parse_hour_tokens` 正则；20 家现货所 + 有 `derivatives` 子块的所回填 `spec` 并对来源复核（并行子代理，[ADR-017] 模式）。退出：`make build` 全绿、`spec` 5b 反查 0 FAIL、时区甘特条回归无变化。
+- [ ] **Phase 2 · 交易日平面图** — `app.js` 新增 `renderTradingDay`（手写 SVG，按 [ADR-035] A 的字段→元素映射 + D 的诚实渲染规则），市场下拉，路由默认值改 `trading-day`，矩阵移 `#view=matrix`，`index.html` tab 调整。非现货所按 [ADR-035] E 渲染。交付后**停下评估**「30 秒看懂」由非专业读者实测。
+- [ ] **Phase 3 · 其余章节可视化** — 成本瀑布 → 交割管线 → 上市生命周期（一并落地 [ADR-036] #5 的章节级"仅现货适用"标记）→ 监管图 → 参与者 → 风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）→ …按交易员价值迭代，每章带一次小型 `spec` 补充。
+- [ ] **Phase 4 · Wave 3 广度扩张（搁置）** — Phase 1–2 稳定后解冻。候选见 [ADR-016] 思路 + 东南亚/中东/非洲/拉美补白；若纳入第 3 个 MENA/非洲所则同时执行 [ADR-036] #2 的 `region` 拆分。子代理任务里加"第五章直接填 `spec`、并在平面图里自检"。
