@@ -21,6 +21,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -31,6 +32,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -49,6 +51,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "history": {
@@ -65,6 +68,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "organization_form": {
@@ -81,6 +85,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-27",
+        "spec": null,
         "quote": null
       },
       "self_listed": {
@@ -97,6 +102,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-27",
+        "spec": null,
         "quote": null
       },
       "market_cap_usd_bn": {
@@ -106,6 +112,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -116,6 +123,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -125,6 +133,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -135,6 +144,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -146,6 +156,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -155,6 +166,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -185,7 +197,8 @@
           }
         ],
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "self_regulatory_org": {
         "zh": "交易所理事会（Exchange Council），依据德国交易所法及黑森州交易所条例设立",
@@ -211,6 +224,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "clearing_regulator": {
@@ -227,6 +241,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "core_laws": {
@@ -253,6 +268,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "foreign_ownership_limit": {
@@ -269,6 +285,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "capital_controls": {
@@ -290,6 +307,7 @@
         "verified": "2026-08-27",
         "confidence": "high",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "disclosure_requirements": {
@@ -306,6 +324,7 @@
         "verified": "2026-08-27",
         "confidence": "high",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "investor_protection": {
@@ -327,6 +346,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -403,6 +423,12 @@
     "market_structure": {
       "trading_sessions": {
         "pre_market": {
+          "spec": {
+            "start": "01:00",
+            "end": "08:00",
+            "kind": "continuous",
+            "note": "延长交易时段（亚洲），部分流动性较好的期货品种"
+          },
           "zh": "亚洲时段 01:00-08:00 CET（部分流动性较好的期货品种，属'延长交易时段'性质）",
           "en": "Asian hours 01:00-08:00 CET (for selected liquid futures, as extended trading hours)",
           "quote": "In addition to regular trading hours, Eurex is offering extended (Asian) trading hours for selected liquid futures. 01:00 CET (02:00 CEST) – 08:00 CET (Asian hours)",
@@ -419,6 +445,11 @@
           "detail": null
         },
         "continuous_am": {
+          "spec": {
+            "start": "08:00",
+            "end": "17:30",
+            "kind": "continuous"
+          },
           "zh": "欧洲时段 08:00-17:30 CET",
           "en": "European hours 08:00-17:30 CET",
           "quote": "08:00 CET – 17:30 CET (European hours)",
@@ -435,6 +466,9 @@
           "detail": null
         },
         "lunch_break": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无",
           "en": "None",
           "confidence": "medium",
@@ -451,6 +485,12 @@
           "quote": null
         },
         "continuous_pm": {
+          "spec": {
+            "start": "17:30",
+            "end": "22:00",
+            "kind": "continuous",
+            "note": "美国时段"
+          },
           "zh": "美国时段 17:30-22:00 CET",
           "en": "U.S. hours 17:30-22:00 CET",
           "quote": "17:30 CET – 22:00 CET (U.S. hours)",
@@ -467,6 +507,10 @@
           "detail": null
         },
         "after_market": {
+          "spec": {
+            "kind": "none",
+            "note": "01:00-22:00 CET 已整体覆盖，22:00 后衔接次日亚洲时段"
+          },
           "zh": "常规交易日 08:00-22:00 CET 整体已覆盖欧洲+美国时段，22:00后即衔接次日亚洲时段，无独立盘后连续交易时段",
           "en": "Regular trading runs 08:00-22:00 CET covering European+U.S. hours; after 22:00 it rolls directly into the next day's Asian hours, with no separate after-hours continuous session",
           "confidence": "medium",
@@ -483,6 +527,10 @@
           "quote": null
         },
         "night_session": {
+          "spec": {
+            "kind": "none",
+            "note": "夜盘即 pre_market 的亚洲时段，本所准全天候（01:00-22:00 CET）"
+          },
           "zh": "见 pre_market 亚洲时段——本所实质上是准全天候交易（01:00-22:00 CET，仅01:00前后有窄幅间隙），与四家现货标杆均无夜盘形成鲜明对比",
           "en": "See pre_market (Asian hours) — trading effectively runs near round-the-clock (01:00-22:00 CET with only a narrow gap), a sharp contrast with the four cash-equity benchmarks, none of which have a night session",
           "confidence": "medium",
@@ -512,10 +560,15 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
       "opening_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "note": "具体时刻逐衍生品由管理董事会确定，无统一钟点"
+        },
         "zh": "开盘集合竞价（Opening Auction），期间可继续提交订单/报价，以撮合成交量最大的价格定开盘价（Netting流程）",
         "en": "Opening Auction; additional Orders and Quotes may still be entered during the auction, with the opening price determined via a netting process maximizing matched volume",
         "quote": "Exchange trading can begin with an Opening Auction for the respective... The Opening Auction ends with a netting process (\"Netting\").",
@@ -532,6 +585,10 @@
         "detail": null
       },
       "closing_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "note": "部分品种另设盘中收盘集合竞价；具体时刻逐衍生品确定"
+        },
         "zh": "收盘集合竞价（Closing Auction），部分品种另设盘中收盘集合竞价（intra-day Closing Auction）",
         "en": "Closing Auction; some instruments also have intra-day Closing Auctions",
         "quote": "The Management Board may determine intra-day Closing Auctions which take place during the Trading Period.",
@@ -561,6 +618,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "order_types": {
@@ -576,6 +634,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -592,6 +651,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -609,6 +669,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "odd_lot_handling": {
@@ -624,6 +685,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -642,9 +704,16 @@
           "quote": "If the next expected execution price of an Instrument is outside a dynamic or static price range, an interruption of continuous trading in such Instrument shall occur (\"Volatility Interruption\").",
           "confidence": "high",
           "verified": "2026-08-27",
+          "spec": null,
           "detail": null
         },
         "main_board": {
+          "spec": {
+            "type": "dynamic",
+            "band_pct": null,
+            "reference": "prev_settlement",
+            "note": "动态/静态价格区间，逐衍生品由管理董事会确定，无公开统一档位表；出走廊触发波动性中断而非拒单（见 volatility_interruption）。reference 为前结算价（[ADR-035] E：衍生品所 y 轴基准）"
+          },
           "zh": "区间宽度与参考价由管理董事会（Management Board）按每个衍生品逐一确定，未公开统一的百分比表（与JPX值幅制限、美股LULD的Tier分级不同，本所未见公开的统一档位表）",
           "en": "The size of each price range and its reference prices are set by the Management Board per Derivative; no single published percentage table was found (unlike JPX's tiered yen bands or the U.S. LULD Tier system)",
           "confidence": "medium",
@@ -673,12 +742,17 @@
           "verified": "2026-08-27",
           "en": null,
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
       },
       "circuit_breaker": {
         "enum": "stock_level",
+        "spec": {
+          "type": "contract_level",
+          "note": "无全市场熔断；波动性中断触发后管理董事会可扩大到同一衍生品的全部合约暂停（见 volatility_interruption）。是否存在覆盖全市场的熔断未确认，见 OPEN-QUESTIONS。enum 仍为 stock_level（借用其「非全市场」含义，OQ #44 记录了 contract_level 枚举缺口）"
+        },
         "zh": "无独立于波动性中断之外的全市场级熔断；波动性中断（见volatility_interruption）触发后管理董事会可扩大到同一衍生品的全部合约暂停交易，但本次未找到覆盖全市场所有产品的熔断安排",
         "en": "No market-wide circuit breaker separate from the Volatility Interruption mechanism; upon a Volatility Interruption the Management Board may extend the trading halt to all Instruments of the same Derivative, but no exchange-wide halt covering all products was found in the content fetched this session",
         "detail": "与JPX的情况相似（也没找到独立于个股价格机制之外的全市场熔断），可能是本次检索范围局限，未逐条核实是否存在，见 OPEN-QUESTIONS。",
@@ -707,6 +781,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -722,6 +797,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -739,6 +815,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "short_selling": {
@@ -755,6 +832,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "block_trade": {
@@ -770,6 +848,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -786,6 +865,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -803,7 +883,8 @@
         "quote": "the Exchange Traders acting on behalf of the Regulated Market Maker are required to continuously enter binding Quotes in at least one Derivative and during 50% of the daily Trading Hours on a monthly average.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "connect_schemes": {
         "zh": "",
@@ -818,6 +899,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -866,6 +948,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -882,6 +965,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -898,6 +982,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -914,6 +999,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -930,6 +1016,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -946,6 +1033,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -962,6 +1050,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -978,6 +1067,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -994,6 +1084,7 @@
         "verified": "2026-08-27",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       }
@@ -1030,6 +1121,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "ccp_name": {
@@ -1046,6 +1138,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "csd_name": {
@@ -1072,6 +1165,7 @@
         "verified": "2026-08-27",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "initial_margin_practice": {
@@ -1088,6 +1182,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "maintenance_margin_practice": {
@@ -1104,6 +1199,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "mark_to_market_frequency": {
@@ -1120,6 +1216,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delivery_method": {
@@ -1136,7 +1233,8 @@
         ],
         "quote": "In case of an exclusion of physical delivery pursuant to Clause 1 (iii) or Clause 2 (ii), a cash settlement of the relevant Contracts shall take place.",
         "confidence": "high",
-        "verified": "2026-08-27"
+        "verified": "2026-08-27",
+        "spec": null
       },
       "last_trading_day_rule": {
         "zh": "最后交易日与到期/最终结算日按各合约的产品说明书（Contract Specifications）逐一规定，由管理董事会确定，无全市场统一规则。以最具代表性的 EURO STOXX 50® 指数期权为例：最后交易日即为最终结算日，最终结算日为每个到期月的第三个周五（若为交易日；否则为该日之前最近的交易日）。期货的最后交易日则通常为交割/结算日前一营业日。",
@@ -1152,6 +1250,7 @@
         "verified": "2026-08-27",
         "confidence": "high",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "default_management": {
@@ -1168,6 +1267,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "derivatives": {
@@ -1203,6 +1303,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "account_opening_requirements": {
@@ -1219,6 +1320,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suitability_management": {
@@ -1234,6 +1336,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1251,6 +1354,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "membership_structure": {
@@ -1266,6 +1370,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1283,6 +1388,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -1306,6 +1412,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_latency": {
@@ -1322,6 +1429,7 @@
         "verified": "2026-08-27",
         "confidence": "high",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_pricing_model": {
@@ -1343,6 +1451,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "historical_data_availability": {
@@ -1359,6 +1468,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_system_name": {
@@ -1375,6 +1485,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "access_methods": {
@@ -1391,6 +1502,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "major_outage_history": {
@@ -1407,6 +1519,7 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -1425,6 +1538,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "exchange_fees": {
@@ -1451,6 +1565,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "clearing_fees": {
@@ -1467,6 +1582,7 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "regulatory_fees": {
@@ -1483,6 +1599,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "stamp_duty": {
@@ -1508,6 +1625,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1534,6 +1652,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1560,6 +1679,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1586,6 +1706,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1603,6 +1724,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -1625,6 +1747,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1641,6 +1764,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1662,6 +1786,7 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1679,6 +1804,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "enforcement_note": {
@@ -1695,6 +1821,7 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     }

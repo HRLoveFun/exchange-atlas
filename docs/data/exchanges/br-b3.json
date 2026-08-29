@@ -19,6 +19,7 @@
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -30,6 +31,7 @@
         "detail": "此说法来自本次会话的公开检索（非 b3.com.br 官网原文），未在本次抓取到的 B3 页面里\n找到直接确认该决令的官方原文，故未标 high。有意思的旁证：B3's Trading Procedures\nManual（2024年4月版）正文里仍保留\"during daylight saving time\"的备用时段条款（如\n收盘集合竞价在\"4:50-4:54:59 p.m.\"与\"5:50-5:49:59 p.m.*\"两套时刻表并存），但当前\nTrading Hours – Equities 页面给出的最新时段表只有一套时刻（16:55/17:00等），不再区分\n夏令时/非夏令时——这与\"巴西已取消夏令时\"的说法方向一致，但本次未做逐条比对确认。\n",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -47,7 +49,8 @@
         "quote": "B3 is the result of the merger between BM&FBOVESPA S.A. – Bolsa de Valores, Mercadorias e Futuros (“BM&FBOVESPA”) and Cetip S.A. – Mercados Organizados (“Cetip”), consummated on March 29, 2017.",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "history": {
         "zh": "2008年BM&F（衍生品交易所）与Bovespa Holding合并组成BM&FBOVESPA；2017年BM&FBOVESPA与Cetip（原场外市场基础设施公司）合并组成现在的B3",
@@ -63,7 +66,8 @@
         "quote": "BM&FBOVESPA 2008 BM&FBOVESPA is born, from the merger between BM&F and Bovespa Holding. ... 2017 The business combination between BM&FBOVESPA and Cetip is approved by the regulators: Central Bank, Brazilian Securities Commission (CVM) and Administrative Council for Economic Defense (Cade). Thus starts the history of B3.",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "organization_form": {
         "enum": "demutualized_listed",
@@ -79,6 +83,7 @@
         "quote": "Ticker: B3SA3 (common shares) / Corporate Governance listing segment: Novo Mercado",
         "confidence": "high",
         "verified": "2026-08-16",
+        "spec": null,
         "detail": null
       },
       "self_listed": {
@@ -95,6 +100,7 @@
         "quote": "OFFICIAL NAME: B3 S.A. – BRASIL, BOLSA, BALCÃO / Stock Exchange listing: BM&FBOVESPA / Ticker: B3SA3 (common shares) / Corporate Governance listing segment: Novo Mercado",
         "confidence": "high",
         "verified": "2026-08-16",
+        "spec": null,
         "detail": null
       },
       "market_cap_usd_bn": {
@@ -104,6 +110,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -113,6 +120,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -123,6 +131,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -134,6 +143,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -144,6 +154,7 @@
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -153,6 +164,7 @@
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -173,7 +185,8 @@
         "quote": "CVM is an independent federal regulatory agency with nationwide jurisdiction over securities markets. Its responsibilities include commodities and financial derivatives markets and exclude government debt markets. Besides regulating and enforcing the related laws and its own rules, CVM is empowered to investigate market participants and apply sanctions.",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "self_regulatory_org": {
         "zh": "BSM Supervisão de Mercados（B3集团旗下的自律监管子机构）",
@@ -189,7 +202,8 @@
         "quote": "4. BSM / Subsidiary of B3 group, inspects and supervise market participants and B3 itself and has the capability to establish and conduct disciplinary administrative proceedings.",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_regulator": {
         "zh": "巴西央行（Banco Central do Brasil）与CVM共同审批（视清算/托管系统类型而定）",
@@ -205,6 +219,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "core_laws": {
@@ -231,7 +246,8 @@
         "quote": "A Comissão de Valores Mobiliários (CVM) foi criada em 07/12/1976 pela Lei 6.385/76, com o objetivo de fiscalizar, normatizar, disciplinar e desenvolver o mercado de valores mobiliários no Brasil.",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_ownership_limit": {
         "zh": "巴西对外国投资者持有巴西交易所上市证券不设交易所层面的行业性持股比例上限。巴西央行CMN第4.373/2014号决议允许非居民投资者投资巴西居民可投资的同等组合产品，外国投资者可自由交易巴西交易所股票、衍生品与公司债（仅个别行业如媒体、航空需另行审批，非交易所限制）。",
@@ -246,7 +262,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_controls": {
         "zh": "外资须通过CMN 4.373号决议开立「4.373账户」进入市场：委托当地法定代表人、税务代表与托管机构并向CVM登记；资金汇入/汇出目前对交易所内股票与ETF交易适用0%金融操作税（IOF）",
@@ -267,6 +284,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "disclosure_requirements": {
@@ -288,6 +306,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "investor_protection": {
@@ -309,6 +328,7 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -390,6 +410,7 @@
           "verified": "2026-08-16",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "continuous_am": {
@@ -411,6 +432,7 @@
           "verified": "2026-08-16",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "lunch_break": {
@@ -431,6 +453,7 @@
           ],
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -453,6 +476,7 @@
           "verified": "2026-08-16",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "after_market": {
@@ -474,6 +498,7 @@
           "verified": "2026-08-16",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "night_session": {
@@ -494,6 +519,7 @@
           ],
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -517,6 +543,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "opening_mechanism": {
@@ -538,6 +565,7 @@
         ],
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "closing_mechanism": {
@@ -554,6 +582,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "matching_principle": {
@@ -570,6 +599,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "order_types": {
@@ -586,6 +616,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "tick_size": {
@@ -607,6 +638,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "board_lot_size": {
@@ -623,6 +655,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "odd_lot_handling": {
@@ -639,6 +672,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "price_limits": {
@@ -656,6 +690,7 @@
           "quote": "B3's trading tunnel module is composed of rejection, auction and protection tunnels... Independently of their purpose (rejection or auction), trading tunnels may be calculated either by the additive or the multiplicative method.",
           "confidence": "high",
           "verified": "2026-08-16",
+          "spec": null,
           "detail": null
         },
         "main_board": {
@@ -677,6 +712,7 @@
           "verified": "2026-08-16",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "other_boards": {
@@ -697,6 +733,7 @@
           "verified": "2026-08-16",
           "en": null,
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -715,6 +752,7 @@
         "quote": "I - If the Ibovespa falls ten per cent (10%) from its closing level on the previous day, all trading in assets, derivatives and private fixed-income instruments is interrupted for thirty (30) minutes; II - When trading resumes, if the Ibovespa falls fifteen per cent (15%) from its closing level on the previous day, all trading in assets, derivatives and private fixed-income instruments is interrupted for one hour; III - When trading resumes, if the Ibovespa falls twenty per cent (20%) from its closing level on the previous day, B3 may determine a suspension of trading in assets, derivatives and private fixed-income instruments for a certain period to be announced by B3.",
         "confidence": "high",
         "verified": "2026-08-16",
+        "spec": null,
         "detail": null
       },
       "volatility_interruption": {
@@ -731,6 +769,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -747,6 +786,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "intraday_reversal": {
@@ -763,7 +803,8 @@
         ],
         "quote": "Day trade / 1. In stock exchange: Exempt (e) 2. Outside the stock exchange: 15% (b)",
         "confidence": "high",
-        "verified": "2026-08-16"
+        "verified": "2026-08-16",
+        "spec": null
       },
       "short_selling": {
         "zh": "存在证券出借/融券安排使做空成为可能（官网设「Securities Lending, Equity and ETF Trades」专栏），但本次抓取到的该页面正文只包含股票/ETF的代码、整手规格与结算周期，没有描述性正文说明具体限制规则（如是否有报升限制、裸卖空处理等），仅能确认功能入口存在",
@@ -778,6 +819,7 @@
         "confidence": "low",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -800,6 +842,7 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "dark_pool": {
@@ -820,6 +863,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -837,6 +881,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "connect_schemes": {
@@ -858,6 +903,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "derivatives": {
@@ -876,6 +922,7 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "continuous_am": {
@@ -897,6 +944,7 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "lunch_break": {
@@ -917,6 +965,7 @@
             ],
             "verified": "2026-08-16",
             "enum": null,
+            "spec": null,
             "detail": null,
             "quote": null
           },
@@ -939,6 +988,7 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "after_market": {
@@ -955,6 +1005,7 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "night_session": {
@@ -976,6 +1027,7 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
+            "spec": null,
             "detail": null
           }
         },
@@ -998,6 +1050,7 @@
           "verified": "2026-08-16",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "opening_mechanism": {
@@ -1014,6 +1067,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "closing_mechanism": {
@@ -1035,6 +1089,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "matching_principle": {
@@ -1051,6 +1106,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "order_types": {
@@ -1067,6 +1123,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "tick_size": {
@@ -1093,6 +1150,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "contract_specs_note": {
@@ -1124,6 +1182,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "price_limits": {
@@ -1141,6 +1200,7 @@
             "quote": "The methodology uses the prices of actual trades in the most liquid contract months as a basis for dynamic updating of the reference price (tunnel center) to calculate auction and rejection tunnels for the less liquid contract months, as follows: I - Pivot point: the contract month considered most liquid and used as a basis for updating the other contract months, considered less liquid.",
             "confidence": "high",
             "verified": "2026-08-16",
+            "spec": null,
             "detail": null
           },
           "main_board": {
@@ -1162,6 +1222,7 @@
             "verified": "2026-08-16",
             "en": null,
             "enum": null,
+            "spec": null,
             "quote": null
           },
           "other_boards": {
@@ -1182,6 +1243,7 @@
             "verified": "2026-08-16",
             "en": null,
             "enum": null,
+            "spec": null,
             "detail": null,
             "quote": null
           }
@@ -1200,6 +1262,7 @@
           "quote": "I - If the Ibovespa falls ten per cent (10%) from its closing level on the previous day, all trading in assets, derivatives and private fixed-income instruments is interrupted for thirty (30) minutes; II - When trading resumes, if the Ibovespa falls fifteen per cent (15%) from its closing level on the previous day, all trading in assets, derivatives and private fixed-income instruments is interrupted for one hour; III - When trading resumes, if the Ibovespa falls twenty per cent (20%) from its closing level on the previous day, B3 may determine a suspension of trading in assets, derivatives and private fixed-income instruments for a certain period to be announced by B3.",
           "confidence": "high",
           "verified": "2026-08-16",
+          "spec": null,
           "detail": null
         },
         "volatility_interruption": {
@@ -1216,6 +1279,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "trading_halt_mechanism": {
@@ -1232,6 +1296,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "block_trade": {
@@ -1253,6 +1318,7 @@
           "verified": "2026-08-16",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "market_maker_scheme": {
@@ -1269,6 +1335,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "margin_practice_note": {
@@ -1290,6 +1357,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "connect_schemes": {
@@ -1311,6 +1379,7 @@
           "verified": "2026-08-16",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         }
       }
@@ -1375,7 +1444,8 @@
         ],
         "quote": "One of the main activities of the BM&FBOVESPA Segment is to list issuers and admit securities of their issuance for trading. The rules regarding these processes are described in the following document: ISSUER'S REGULATIONS",
         "confidence": "medium",
-        "verified": "2026-08-16"
+        "verified": "2026-08-16",
+        "spec": null
       },
       "listing_process_duration": {
         "zh": "发行人上市审核时长取决于发行类型与CVM注册方式。股票及认购权证的发行人在'无需注册或CVM自动注册'的发行要约下为12个工作日；在需CVM事先注册的发行要约下为39个工作日，并可延长最多20个工作日。",
@@ -1390,7 +1460,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "transfer_between_boards": {
         "zh": "",
@@ -1406,6 +1477,7 @@
         "verified": "2026-08-16",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "continuing_obligations": {
@@ -1422,6 +1494,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suspension_resumption": {
@@ -1438,6 +1511,7 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_conditions": {
@@ -1454,6 +1528,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_process": {
@@ -1469,7 +1544,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delisting_transition_period": {
         "zh": "B3在取消交易决定公布后设定不超过30天的过渡期，期间证券可继续以连续或非连续方式临时交易，之后退市生效。",
@@ -1484,7 +1560,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "post_delisting_venue": {
         "zh": "证券上市/交易许可被取消后，依据B3发行人规则，该证券'不再被交易'于任何B3运营的有组织市场（涵盖交易所市场与有组织场外市场Balcão B3）。B3另运营Balcão B3电子场外交易平台供未上市资产交易，但被退市发行人的证券被禁止在B3体系内交易；其后续转让只能在B3之外的场外双边交易进行。",
@@ -1503,7 +1580,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "indices": {
@@ -1548,6 +1626,7 @@
         "quote": "on May 14, 2019, the Central Bank of Brazil (BCB) and the Securities and Exchange Commission of Brazil (CVM) granted B3 the authorizations necessary for implementation of the T+2 Settlement Cycle Project, which consist of reducing the settlement cycle of the cash equities market from T+3 to T+2... we will implement the T+2 settlement cycle on May 27, 2019",
         "confidence": "high",
         "verified": "2026-08-16",
+        "spec": null,
         "detail": null
       },
       "ccp_name": {
@@ -1564,6 +1643,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "csd_name": {
@@ -1580,6 +1660,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "initial_margin_practice": {
@@ -1595,7 +1676,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "maintenance_margin_practice": {
         "zh": "现货（现金）市场采用维持保证金机制：因现金市场风险仅在结算周期内评估，清算所要求会员在整个结算周期维持足额担保品以覆盖风险敞口，不足时追加。",
@@ -1610,7 +1692,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "mark_to_market_frequency": {
         "zh": "现货（现金）市场采用滚动交割（交易日后第二个工作日），无逐日盯市：现金市场风险仅针对结算周期（交易日到交割日）评估，逐日结算仅适用于衍生品（每日盈亏通过账户每日结算）。",
@@ -1629,7 +1712,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delivery_method": {
         "enum": "na",
@@ -1650,7 +1734,8 @@
         ],
         "quote": "Settlement / Financial and Physical / Settlement Period / T+2 from the trading date",
         "confidence": "high",
-        "verified": "2026-08-16"
+        "verified": "2026-08-16",
+        "spec": null
       },
       "last_trading_day_rule": {
         "zh": "现货股票/ETF无'最后交易日'概念；交易持续至正常退市或暂停。交割规则为T+2（交易日后第二个工作日交割）。衍生品另有最后交易日规则（已在 clearing.derivatives.last_trading_day_rule 填写）。",
@@ -1665,7 +1750,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "default_management": {
         "zh": "「违约者先付、生存者分摊」（defaulters pay and survivors pay）的风险共担机制，依托CORE方法论计算的担保品与安全垫（含Liquidez Investment Fund等专项基金）应对结算参与者违约",
@@ -1686,6 +1772,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "derivatives": {
@@ -1703,7 +1790,8 @@
           "confidence": "high",
           "detail": "由顶层字段迁移而来（ADR-030）。原引文本身未逐字标注「仅适用于衍生品」，B3 CORE是否为覆盖现货+衍生品的统一CCP风险模型、还是仅衍生品适用，本次未逐条核实，暂按 ADR-028 既有判断归入衍生品语境，留待下次专项核实。",
           "verified": "2026-08-16",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "maintenance_margin_practice": {
           "zh": "衍生品采用维持保证金：除初始保证金外，持仓按每日盈亏（逐日结算）调整，会员须维持账户余额覆盖敞口，保证金不足时需补足。",
@@ -1718,7 +1806,8 @@
           ],
           "verified": "2026-08-27",
           "confidence": "high",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "mark_to_market_frequency": {
           "zh": "逐日盯市（daily settlement）：衍生品持仓每个交易日按当日结算价计算盈亏并现金划转",
@@ -1734,6 +1823,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "delivery_method": {
@@ -1749,7 +1839,8 @@
           ],
           "verified": "2026-08-27",
           "confidence": "high",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "last_trading_day_rule": {
           "zh": "期权到期日的到期系列于15:45停止交易；到期日自动履约按标的现货参考价与行权价比较自动触发（个股/ETF期权自18:15起，指数期权自17:20起）",
@@ -1765,6 +1856,7 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
+          "spec": null,
           "detail": null
         }
       }
@@ -1783,7 +1875,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "account_opening_requirements": {
         "zh": "非居民投资者须依CMN 4.373号决议开立「4.373账户」：指定巴西本地法定代表人、税务代表、托管机构，并向CVM完成电子登记（获发CNPJ税号，一般在申请后24小时内下发），再通过本地经纪商开户方可交易",
@@ -1799,6 +1892,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suitability_management": {
@@ -1814,7 +1908,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_access_channel": {
         "zh": "CMN 4.373号决议为主要通道，允许非居民投资者与本地投资者投资相同的产品组合；另有CMN 2.687号决议专门规范商品期货交易；简化登记（Rule 419，CVM于2005年颁布）适用于代表机构与境外代表存在正式关系、且所在国证券监管机构与CVM签有多边合作备忘录（MMOU）的合格投资者",
@@ -1830,6 +1925,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "membership_structure": {
@@ -1846,6 +1942,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "broker_landscape": {
@@ -1861,7 +1958,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "infrastructure": {
@@ -1878,7 +1976,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "data_latency": {
         "zh": "B3实时数据定义为自B3传输数据起'不到15分钟'内分发；延迟数据为'传输后15分钟或更久'分发。快照延迟数据可每15分钟或更长更新一次。'实时'门槛为15分钟内。",
@@ -1893,7 +1992,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "data_pricing_model": {
         "zh": "B3市场数据按客户、计数单位、月度、数据集计费（除非另有说明），每月后付；费用分固定费与可变费（实时分发按可变费计）。",
@@ -1912,7 +2012,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "historical_data_availability": {
         "zh": "历史市场数据（Historical Market Data B3）定义为非实时、非延迟的所有基于B3市场数据的信息；B3允许对历史数据的商业化'无需B3事先批准'。",
@@ -1927,7 +2028,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_system_name": {
         "zh": "PUMA Trading System（与CME集团合作开发的多资产电子撮合平台）",
@@ -1943,6 +2045,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "access_methods": {
@@ -1962,7 +2065,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "major_outage_history": {
         "zh": "B3曾发生交易中断。最近一次：2026年8月3日（7月最后一个交易日），B3称其'后台交易操作出现技术与孤立故障'，导致多个市场延迟开市超过两个半小时，部分合约（美元期货、利率期货、Ibovespa期货及现货指数）至约12:45才恢复。",
@@ -1977,7 +2081,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "costs": {
@@ -1994,7 +2099,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "exchange_fees": {
         "zh": "按成交总金额收取一定比例的交易所费用（Exchange Fees），费率依交易类型（常规交易/超短线日内交易）、投资者类别（个人/基金/投资俱乐部）与投资金额分档",
@@ -2010,6 +2116,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "clearing_fees": {
@@ -2025,7 +2132,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_fees": {
         "zh": "巴西没有单列于交易所的'监管费'项目；与交易相关的法定收费已内含于B3交易费（自律组织/监管成分）与清算费。流转环节仅有的类交易税为IOF（股票资金汇入为0%）与所得税（资本利得15%）。",
@@ -2044,7 +2152,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "stamp_duty": {
         "zh": "巴西不对证券交易征收类似英国/香港式的印花税（stamp duty）；证券流转环节的类交易税为IOF（金融操作税，股票资金汇入当前为0%）与所得税。该字段对B3适用情形为N/A。",
@@ -2059,7 +2168,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "financial_transaction_tax": {
         "zh": "金融操作税（IOF, Imposto sobre Operações Financeiras）：现行对交易所内股票/ETF交易的资金汇入适用税率为0%（历史上曾有非零税率，本次仅确认当前状态）",
@@ -2075,6 +2185,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "capital_gains_tax": {
@@ -2091,6 +2202,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "dividend_withholding_tax": {
@@ -2112,7 +2224,8 @@
         "quote": "§ 4º Os lucros ou dividendos pagos, creditados, entregues, empregados ou remetidos ao exterior ficarão sujeitos à incidência do imposto de renda na fonte à alíquota de 10% (dez por cento). [...] Art. 8º Esta Lei entra em vigor na data de sua publicação e produzirá efeitos a partir de 1º de janeiro de 2026.",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "implicit_costs_note": {
         "zh": "除显性费用（交易费约0.00500%、CCP清算费约0.02240%、经纪佣金、IOF 0%/所得税）外，B3现货市场隐性成本主要来自买卖价差与结算周期（交易日后第二个工作日）的资金占用；蓝筹股与指数期货流动性好、价差窄。逐日盯市仅适用于衍生品，现货无盯市追加成本。",
@@ -2131,7 +2244,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "risks": {
@@ -2141,6 +2255,7 @@
         "confidence": "low",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -2158,7 +2273,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "liquidity_risk_note": {
         "zh": "B3整体流动性良好，蓝筹股与指数期货成交活跃；但中小盘股、部分固定收益与场外产品流动性分化明显，极端事件（如2026年8月3日技术故障导致多市场停摆逾两小时）会暂时放大流动性风险。退市证券在过渡期后仍可临时交易，但长期流动性枯竭。",
@@ -2177,7 +2293,8 @@
         ],
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_change_risk_note": {
         "zh": "2019年T+2结算周期改革、2025/2026年之交由《第15.270/2025号法律》实施的非居民股息预扣税立法变化（见costs.dividend_withholding_tax，官方法律原文已核实生效，但交易所官网说明页尚未同步更新）等显示巴西证券监管/税务规则存在较活跃的调整节奏",
@@ -2197,6 +2314,7 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -2214,6 +2332,7 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     }

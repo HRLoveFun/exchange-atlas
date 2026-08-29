@@ -19,6 +19,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -29,6 +30,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -47,7 +49,8 @@
         "quote": "该指数以 1990 年 12 月 19 日为基日，以 100 点为基点。",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "history": null,
       "organization_form": {
@@ -64,6 +67,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
+        "spec": null,
         "quote": null
       },
       "self_listed": {
@@ -80,6 +84,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
+        "spec": null,
         "quote": null
       },
       "market_cap_usd_bn": {
@@ -96,6 +101,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "listed_companies_count": {
@@ -111,6 +117,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -130,6 +137,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "settlement_currency": {
@@ -138,6 +146,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -158,6 +167,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "self_regulatory_org": {
@@ -167,6 +177,7 @@
         "detail": "SAC 官网本次抓取失败（HTTP 异常），其与交易所自律监管的职责边界未逐条核实，见 OPEN-QUESTIONS。",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -176,6 +187,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -199,7 +211,8 @@
         "quote": "these Rules are formulated in accordance with the Securities Law of the People's Republic of China",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_ownership_limit": {
         "zh": "单个境外投资者持有单个上市公司股份不得超过该公司股份总数的10%；全部境外投资者合计持股不得超过30%；对上市公司战略投资的持股不受此比例限制",
@@ -215,7 +228,8 @@
         "quote": "七、合格境外投资者及其他境外投资者的境内证券投资，应当遵循下列持股比例限制：（一）单个合格境外投资者或其他境外投资者持有单个上市公司或者挂牌公司的股份，不得超过该公司股份总数的10%；（二）全部合格境外投资者及其他境外投资者持有单个公司A股或者境内挂牌股份的总和，不得超过该公司股份总数的30%。合格境外投资者及其他境外投资者依法对上市公司战略投资的，其战略投资的持股不受前款规定的比例限制。",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_controls": {
         "zh": "境外投资者须通过合格境外投资者（QFII/RQFII）等渠道并委托境内托管人参与境内证券投资，跨境资金流动纳入中国证监会、央行、外汇局联合监管协调机制；人民币资本项下尚未完全可自由兑换",
@@ -231,7 +245,8 @@
         "quote": "中国证监会、人民银行、外汇局就合格境外投资者投资境内证券期货的情况加强监管协调，建立信息共享机制。",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "disclosure_requirements": {
         "zh": "披露文本以中文为准；同时采用外文文本的，两种文本发生歧义时以中文文本为准。定期报告含年度报告（会计年度结束后4个月内）、半年度报告（上半年结束后2个月内）、季度报告（前3个月/前9个月结束后1个月内），另有重大事项临时报告义务",
@@ -247,7 +262,8 @@
         "quote": "上市公司应当在每个会计年度结束后4个月内披露年度报告，应当在每个会计年度的上半年结束后2个月内披露半年度报告，应当在每个会计年度前3个月、前9个月结束后1个月内披露季度报告。",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "investor_protection": {
         "zh": "设有国务院出资、归口证监会管理的中国证券投资者保护基金有限责任公司，证券公司被撤销/关闭/破产或被行政接管、托管经营时，按规定用基金对债权人（投资者）予以偿付；基金来源包括交易所经手费的一定比例、证券公司按营业收入0.5%-5%缴纳等",
@@ -263,7 +279,8 @@
         "quote": "第二条 证券投资者保护基金（以下简称基金）是指按照本办法筹集形成的、在防范和处置证券公司风险中用于保护证券投资者利益的资金。设立国有独资的中国证券投资者保护基金有限责任公司（以下简称基金公司），负责基金的筹集、管理和使用。／第十四条 基金的来源：（一）上海、深圳证券交易所在风险基金分别达到规定的上限后，交易经手费的20%纳入基金；（二）所有在中国境内注册的证券公司，按其营业收入的0.5–5%缴纳基金",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "products": {
@@ -320,6 +337,11 @@
     "market_structure": {
       "trading_sessions": {
         "pre_market": {
+          "spec": {
+            "start": "09:15",
+            "end": "09:25",
+            "kind": "opening_auction"
+          },
           "zh": "无独立盘前时段；9:15-9:25 为开盘集合竞价",
           "en": "No separate pre-market session; 9:15-9:25 is the opening call auction",
           "sources": [
@@ -336,6 +358,11 @@
           "quote": null
         },
         "continuous_am": {
+          "spec": {
+            "start": "09:30",
+            "end": "11:30",
+            "kind": "continuous"
+          },
           "zh": "9:30-11:30",
           "en": "9:30-11:30",
           "sources": [
@@ -352,6 +379,11 @@
           "quote": null
         },
         "lunch_break": {
+          "spec": {
+            "start": "11:30",
+            "end": "13:00",
+            "kind": "lunch_recess"
+          },
           "zh": "11:30-13:00",
           "en": "11:30-13:00",
           "sources": [
@@ -368,6 +400,12 @@
           "quote": null
         },
         "continuous_pm": {
+          "spec": {
+            "start": "13:00",
+            "end": "15:00",
+            "kind": "continuous",
+            "note": "14:57-15:00 为收盘集合竞价，见 closing_mechanism"
+          },
           "zh": "13:00-15:00（普通证券 13:00-14:57 连续竞价 + 14:57-15:00 收盘集合竞价；基金交易 13:00-15:00 全程连续竞价，无独立收盘集合竞价）",
           "en": "13:00-15:00 (ordinary securities: 13:00-14:57 continuous auction + 14:57-15:00 closing call auction; fund trading: continuous auction throughout 13:00-15:00, with no separate closing call auction)",
           "quote": "9:30 至 11:30、13:00 至 14:57 为连续竞价时间，14:57 至 15:00 为收盘集合竞价时间。基金交易，每个交易日的 9:15 至 9:25 为开盘集合竞价时间，9:30 至 11:30、13:00 至 15:00 为连续竞价时间。",
@@ -384,6 +422,12 @@
           "detail": null
         },
         "after_market": {
+          "spec": {
+            "start": "15:05",
+            "end": "15:30",
+            "kind": "fixed_price",
+            "note": "仅科创板股票"
+          },
           "zh": "科创板股票另有盘后固定价格交易，15:05-15:30，按当日收盘价成交",
           "en": "STAR Market stocks additionally have an after-hours fixed-price trading session, 15:05-15:30, executed at that day's closing price",
           "quote": "每个交易日的 15:05 至 15:30 为盘后固定价格交易时间，当日 15:00 仍处于停牌状态的股票不进行盘后固定价格交易。",
@@ -400,6 +444,9 @@
           "detail": null
         },
         "night_session": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无",
           "en": "None",
           "sources": [
@@ -430,9 +477,15 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "opening_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "09:15",
+          "auction_end": "09:25"
+        },
         "zh": "开盘集合竞价（9:15-9:25）",
         "en": "Opening Call Auction (9:15-9:25)",
         "quote": "9:15 至 9:25 为开盘集合竞价时间",
@@ -454,6 +507,11 @@
         "detail": null
       },
       "closing_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "14:57",
+          "auction_end": "15:00"
+        },
         "zh": "收盘集合竞价（14:57-15:00，普通证券适用；基金交易无独立收盘集合竞价）",
         "en": "Closing Call Auction (14:57-15:00)",
         "detail": "9:20-9:25 开盘集合竞价阶段、14:57-15:00 收盘集合竞价阶段，交易主机不接受撤单申报。",
@@ -493,6 +551,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "order_types": {
@@ -514,6 +573,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "tick_size": {
@@ -530,6 +590,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "board_lot_size": {
@@ -546,6 +607,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "odd_lot_handling": {
@@ -562,6 +624,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "price_limits": {
@@ -578,10 +641,16 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
+          "spec": null,
           "detail": null,
           "quote": null
         },
         "main_board": {
+          "spec": {
+            "limit_pct": 10,
+            "reference": "prev_close",
+            "symmetric": true
+          },
           "zh": "±10%",
           "en": "±10%",
           "quote": "本所对股票、基金交易实行价格涨跌幅限制，涨跌幅限制比例为 10%。",
@@ -611,11 +680,15 @@
           ],
           "verified": "2026-08-12",
           "confidence": "medium",
-          "enum": null
+          "enum": null,
+          "spec": null
         }
       },
       "circuit_breaker": {
         "enum": "none",
+        "spec": {
+          "type": "none"
+        },
         "zh": "无指数级熔断（2016年1月8日起暂停实施）",
         "en": "No index-level circuit breaker (suspended since 8 January 2016)",
         "detail": "2015年12月本所曾在《交易规则》第四章第五节新增\"指数熔断\"机制（以沪深300指数为基准，\n5%/7%两档阈值），实施4个交易日后于2016年1月8日起暂停，此后未恢复。现行规则中已无该章节。\n个股级另有临时停牌机制，见 volatility_interruption / trading_halt_mechanism。\n交叉核实：SSE 官方《交易规则》英文译本（2026年修订版）修订历史里\"Circuit Breaker\"仅在\n2015年12月4日新增该节的记录中出现一次（\"the sixth time on December 4, 2015 by the Notice\nof Adding Chapter IV Section 5 'Circuit Breaker' to the Trading Rules\"），正文再无相关章节\n（现行第四章标题为\"Other Trading-Related Matters\"，不含\"Circuit Breaker\"字样），与\"已暂停\n且未恢复\"的结论一致，en 字段 2026-08-20 据此补上。\n",
@@ -649,7 +722,8 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_halt_mechanism": {
         "zh": "无涨跌幅限制的股票盘中较开盘价首次涨跌达30%或60%，实施单次10分钟临时停牌；另有因违规嫌疑的特别停牌",
@@ -665,6 +739,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "intraday_reversal": {
@@ -681,7 +756,8 @@
           }
         ],
         "verified": "2026-08-12",
-        "confidence": "medium"
+        "confidence": "medium",
+        "spec": null
       },
       "short_selling": {
         "enum": "restricted_list",
@@ -697,6 +773,7 @@
           }
         ],
         "verified": "2026-08-12",
+        "spec": null,
         "quote": null
       },
       "block_trade": {
@@ -713,6 +790,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "dark_pool": {
@@ -728,6 +806,7 @@
         ],
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -750,6 +829,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "connect_schemes": {
@@ -766,6 +846,7 @@
         ],
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "derivatives": {
@@ -829,6 +910,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-17",
+        "spec": null,
         "quote": null
       },
       "listing_process_duration": {
@@ -850,6 +932,7 @@
         "verified": "2026-08-17",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "transfer_between_boards": {
@@ -871,6 +954,7 @@
         "verified": "2026-08-17",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "continuing_obligations": {
@@ -892,6 +976,7 @@
         "verified": "2026-08-17",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "suspension_resumption": {
@@ -913,6 +998,7 @@
         "verified": "2026-08-17",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "delisting_conditions": {
@@ -929,6 +1015,7 @@
         "confidence": "medium",
         "verified": "2026-08-17",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "delisting_process": {
@@ -945,6 +1032,7 @@
         "confidence": "medium",
         "verified": "2026-08-17",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "delisting_transition_period": {
@@ -960,6 +1048,7 @@
         "confidence": "medium",
         "verified": "2026-08-17",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -977,7 +1066,8 @@
         "quote": "为了适应注册制改革和常态化退市的要求，顺畅退市公司进入退市板块挂牌转让，完善退市公司管理……上海证券交易所、深圳证券交易所、北京证券交易所（以下统称交易所）、全国中小企业股份转让系统有限责任公司和中国证券登记结算有限责任公司联合制定了《关于退市公司进入退市板块挂牌转让的实施办法》（以下简称《实施办法》）。经中国证监会批准，现予以发布，自发布之日起施行。",
         "confidence": "high",
         "verified": "2026-08-17",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "indices": {
@@ -1029,7 +1119,8 @@
         ],
         "quote": "投资者买入的证券，在交收前不得卖出，但实行回转交易的除外。",
         "confidence": "medium",
-        "verified": "2026-08-12"
+        "verified": "2026-08-12",
+        "spec": null
       },
       "ccp_name": {
         "zh": "中国证券登记结算有限责任公司",
@@ -1045,6 +1136,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "csd_name": {
@@ -1053,6 +1145,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1064,6 +1157,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1073,6 +1167,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1083,6 +1178,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1101,6 +1197,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
+        "spec": null,
         "quote": null
       },
       "last_trading_day_rule": {
@@ -1109,6 +1206,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1132,7 +1230,8 @@
         "quote": "第六十八条 结算参与人发生资金交收违约的，证券登记结算机构应当按照下列顺序动用担保物和证券结算保证金，完成与对手方结算参与人的资金交收：（一）违约结算参与人的担保物中的现金部分；（二）证券结算保证金中违约结算参与人交纳的部分；（三）证券结算保证金中其他结算参与人交纳的及证券登记结算机构划拨的部分。按前款处理仍不能弥补结算参与人资金交收违约的，证券登记结算机构还可以动用下列资金：（一）证券结算风险基金；（二）商业银行等机构的授信支持；（三）其他资金。",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "derivatives": {
         "initial_margin_practice": null,
@@ -1150,6 +1249,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1167,7 +1267,8 @@
         "quote": "第十七条 符合法律、行政法规、国务院证券监督管理机构及本公司有关规定的自然人、法人、合伙企业以及其他投资者，可以申请开立证券账户。／第十九条 子账户包括人民币普通股票账户（以下称为A股账户）、人民币特种股票账户（以下称为B股账户）、全国中小企业股份转让系统账户（以下简称股转系统账户）、封闭式基金账户、开放式基金账户以及本公司根据业务需要设立的其他证券账户。／第二十三条 投资者应当以本人名义申请开立证券账户，不得冒用他人名义或使用虚假证件开立证券账户。",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "suitability_management": {
         "zh": "",
@@ -1176,6 +1277,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1186,6 +1288,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1195,6 +1298,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1218,6 +1322,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -1241,7 +1346,8 @@
         "quote": "上证所Level-1行情是上海证券交易所基本行情，指根据《上海证券交易所交易规则》规定发布的即时行情信息……／目前提供上证所Level-1及Level-2行情两种行情信息服务。",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "data_latency": {
         "zh": "上证所官方行情产品（Level-1/Level-2）为「即时行情信息」（实时行情），通过持牌信息商/数据用户分发；本次未找到官方公开的延时行情产品说明",
@@ -1257,7 +1363,8 @@
         "quote": "上证所Level-1行情是上海证券交易所基本行情，指根据《上海证券交易所交易规则》规定发布的即时行情信息；数据格式包括基于BINARY、STEP等多协议的接口。",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "data_pricing_model": {
         "zh": "行情数据按许可经营模式收费，由上证所信息网络有限公司统一制定并发布价目表（如《Level-1行情许可经营价格表》《Level-2行情展示许可价目表》等），区分展示许可与非展示数据许可等类别",
@@ -1273,7 +1380,8 @@
         "quote": "上证行情服务是上证所信息网络有限公司为信息服务商或其投资者提供的信息服务及许可管理，涵盖上证所Level-1行情、上证所Level-2行情、智能数据服务、指数编制许可等内容。",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "historical_data_availability": {
         "zh": "上证所信息网络提供付费历史行情数据产品，涵盖Level-1/Level-2行情快照、逐笔成交、日K线、分钟K线、集合竞价等，按证券打包在文件中提供，另有证券基本信息文件",
@@ -1289,6 +1397,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_system_name": {
@@ -1298,6 +1407,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1307,6 +1417,7 @@
         "confidence": "low",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1325,7 +1436,8 @@
         "quote": "今日开盘后，本所股票竞价交易出现成交确认缓慢的异常情况，并导致交易受到影响。经处置，股票竞价交易于11点13分起逐步恢复。对于该异常情况的发生，本所深表歉意。",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "costs": {
@@ -1343,6 +1455,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "exchange_fees": {
@@ -1359,6 +1472,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "clearing_fees": {
@@ -1375,7 +1489,8 @@
         "quote": "财联社4月28日讯，中国证券登记结算有限责任公司发布通知，4月29日起，将股票交易过户费总体下调50%，即股票交易过户费由现行沪深市场A股按照成交金额0.02‰、北京市场A股和挂牌公司股份按照成交金额0.025‰双向收取，统一下调为按照成交金额0.01‰双向收取。",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_fees": {
         "zh": "存在独立于交易所经手费之外的「证券交易监管费」，由中国证监会向交易所收取（2012年起对股票按年交易额0.02‰收取，基金/债券免收）；该费率是否为现行值本次未核实到更新的官方文件",
@@ -1391,7 +1506,8 @@
         "quote": "一、你会向上海、深圳证券交易所收取的证券交易监管费收费标准，对股票由按年交易额的0.04‰调整为按年交易额的0.02‰收取；对证券投资基金和债券免收证券交易监管费。",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "stamp_duty": {
         "zh": "0.05%（单边，卖方缴纳）",
@@ -1407,7 +1523,8 @@
         "quote": "据财政部、税务总局公告，为活跃资本市场、提振投资者信心，自2023年8月28日起，证券交易印花税实施减半征收。……证券交易印花税由单边征收1‰下调至0.5‰",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "financial_transaction_tax": {
         "zh": "",
@@ -1416,6 +1533,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1426,6 +1544,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1436,6 +1555,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1453,6 +1573,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -1463,6 +1584,7 @@
         "confidence": "low",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1474,6 +1596,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1491,7 +1614,8 @@
         "quote": "在本所仅发行A股股票的上市公司，出现连续90个交易日（不包含公司股票停牌日）通过本所交易系统实现的累计股票成交量低于375万股的，应当在次一交易日披露公司股票可能被终止上市的风险提示公告",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_change_risk_note": {
         "zh": "",
@@ -1500,6 +1624,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1510,6 +1635,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       }

@@ -19,6 +19,7 @@
         "verified": "2026-08-14",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -29,6 +30,7 @@
         "verified": "2026-08-14",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -47,6 +49,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "history": {
@@ -68,7 +71,8 @@
         "quote": "gain independence from its founding organization, the National Association of Securities Dealers (NASD), which allowed Nasdaq to go public in 2005 under the symbol NDAQ",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "organization_form": {
         "enum": "demutualized_listed",
@@ -84,7 +88,8 @@
         ],
         "quote": "gain independence from its founding organization, the National Association of Securities Dealers (NASD), which allowed Nasdaq to go public in 2005 under the symbol NDAQ",
         "confidence": "high",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "self_listed": {
         "enum": "yes",
@@ -100,6 +105,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-14",
+        "spec": null,
         "quote": null
       },
       "market_cap_usd_bn": {
@@ -109,6 +115,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -119,6 +126,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -128,6 +136,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -146,7 +155,8 @@
         "quote": "The Nasdaq Stock Market (Nasdaq) is the largest U.S. equities exchange venue by volume.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_currency": {
         "zh": "美元 (USD)",
@@ -154,6 +164,7 @@
         "verified": "2026-08-14",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -164,6 +175,7 @@
         "verified": "2026-08-14",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -184,7 +196,8 @@
         "quote": "The Securities and Exchange Commission (SEC) has adopted amendments to Regulation SHO",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "self_regulatory_org": {
         "zh": "Nasdaq自身监管职能部门（MarketWatch股票/期权市场监察、调查与执法、上市审核三大团队，独立于业务部门运作）；FINRA代表纳斯达克会员机构提供部分监管服务",
@@ -205,7 +218,8 @@
         "quote": "At Nasdaq, our regulatory functions operate independently of Nasdaq's business units to safeguard the integrity of our markets.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_regulator": {
         "zh": "美国证券交易委员会",
@@ -221,6 +235,7 @@
         ],
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "core_laws": {
@@ -237,7 +252,8 @@
         "quote": "SECURITIES EXCHANGE ACT OF 1934 ... NATIONAL SECURITIES EXCHANGES SEC. 6. An exchange may be registered as a national securities exchange under the terms and conditions hereinafter provided in this section and in accordance with the provisions of section 19(a) of this title, by filing with the Commission an application for registration in such form as the Commission, by rule, may prescribe containing the rules of the exchange and such other information and documents as the Commission, by rule, may prescribe as necessary or appropriate in the public interest or for the protection of investors.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_ownership_limit": {
         "zh": "无针对纳斯达克上市公司整体的统一外资持股比例上限；外国投资以「个案国家安全审查」（CFIUS，外国投资委员会）而非固定比例上限的形式管控，特定受监管行业（如航空、广播电视等）另有行业专属的法定持股比例限制，本次未逐一核实",
@@ -253,7 +269,8 @@
         "quote": "an interagency committee authorized to review certain transactions involving foreign investment into United States businesses and certain transactions by foreign persons involving real estate in the United States, in order to determine the effect of such transactions on the national security of the United States",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_controls": {
         "zh": "无统一的资本/外汇管制制度；对外国投资者资金进出的限制以「特定国家/主体定向制裁」（OFAC，外国资产控制办公室）为主要渠道，而非普遍性资本管制——例如对俄罗斯关联实体的新增投资限制并不禁止向非美国人出售/剥离既有证券持仓",
@@ -274,7 +291,8 @@
         "quote": "OFAC notes, however, the new investment prohibitions of the respective E.O.s do not prohibit U.S. persons from selling or divesting debt or equity securities issued by such entities to a non-U.S. person. Moreover, U.S. financial institutions may clear and settle, or otherwise serve as market intermediaries in, such divestment transactions on the secondary market — including transactions between non-U.S. persons.",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "disclosure_requirements": {
         "zh": "联邦层面公平披露规则（Regulation FD，§ 243.100）：发行人向经纪商/投资顾问/机构投资经理等特定对象披露重大非公开信息时，须同步（故意披露）或及时（非故意披露）向公众披露同一信息",
@@ -290,7 +308,8 @@
         "quote": "§ 243.100 General rule regarding selective disclosure. ... Whenever an issuer, or any person acting on its behalf, discloses any material nonpublic information regarding that issuer or its securities to any person described in paragraph (b)(1) of this section, the issuer shall make public disclosure of that information as provided in § 243.101(e): (1) Simultaneously, in the case of an intentional disclosure; and (2) Promptly, in the case of a non-intentional disclosure.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "investor_protection": {
         "zh": "证券投资者保护公司（SIPC）：SIPC会员经纪商破产清算时，为客户账户中缺失的现金和证券提供保护，保护限额50万美元（其中现金子限额25万美元）；保护对象不区分投资者国籍或居住地",
@@ -306,7 +325,8 @@
         "quote": "SIPC protects against the loss of cash and securities – such as stocks and bonds – held by a customer at a financially-troubled SIPC-member brokerage firm. The limit of SIPC protection is $500,000, which includes a $250,000 limit for cash. ... There is no requirement that a customer reside in or be a citizen of the United States.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "products": {
@@ -375,6 +395,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "continuous_am": {
@@ -390,6 +411,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -406,6 +428,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -423,6 +446,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "after_market": {
@@ -439,6 +463,7 @@
           "verified": "2026-08-14",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "night_session": {
@@ -454,6 +479,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -471,6 +497,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -488,6 +515,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "closing_mechanism": {
@@ -504,6 +532,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "matching_principle": {
@@ -520,6 +549,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "order_types": {
@@ -536,6 +566,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "tick_size": {
@@ -551,6 +582,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -567,6 +599,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -583,6 +616,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -601,6 +635,7 @@
           "quote": "The Limit Up-Limit Down (LULD) mechanism is intended to prevent trades in National Market System (NMS) securities from occurring outside of specified price bands. The bands would be set at a percentage level above and below the average reference price of the security over the immediately preceding five-minute period.",
           "confidence": "high",
           "verified": "2026-08-14",
+          "spec": null,
           "detail": null
         },
         "main_board": {
@@ -617,6 +652,7 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -632,6 +668,7 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -650,7 +687,8 @@
         ],
         "quote": "Level 1 halt (7% decline in S&P 500 index) / Trading will halt for 15 minutes if drop occurs before 3:25 p.m. / Level 2 halt (13% decline in S&P 500 index) / Trading will halt for 15 minutes if drop occurs before 3:25 p.m. / Level 3 halt (20% decline in S&P 500 index) / At any time during the trading day-trading will halt for the remainder of the trading day.",
         "confidence": "high",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "volatility_interruption": {
         "zh": "LULD个股级波动性中断：报价触及价格带边缘形成'Limit State'，持续15秒仍未消化即触发5分钟交易暂停",
@@ -666,6 +704,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -681,6 +720,7 @@
         ],
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -698,6 +738,7 @@
           }
         ],
         "verified": "2026-08-14",
+        "spec": null,
         "quote": null
       },
       "short_selling": {
@@ -724,7 +765,8 @@
         ],
         "quote": "A trading center shall establish, maintain, and enforce written policies and procedures reasonably designed to: (i) Prevent the execution or display of a short sale order of a covered security at a price that is less than or equal to the current national best bid if the price of that covered security decreases by 10% or more from the covered security's closing price as determined by the listing market for the covered security as of the end of regular trading hours on the prior day; and (ii) Impose the requirements of paragraph (b)(1)(i) of this section for the remainder of the day and the following day...",
         "confidence": "high",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "block_trade": {
         "zh": "",
@@ -739,6 +781,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -756,6 +799,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "market_maker_scheme": {
@@ -772,7 +816,8 @@
         "quote": "A market maker is a NASDAQ member firm that buys and sells securities at prices it displays in NASDAQ for its own account (principal trades) and for customer accounts (agency trades).",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "connect_schemes": {
         "zh": "无（美股市场无类似沪港通/深港通的跨境互联互通安排）",
@@ -787,6 +832,7 @@
         ],
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -861,7 +907,8 @@
         ],
         "quote": "The integrity of The Nasdaq Stock Market is dependent on the consistent and fair application of initial and continued listing standards. It is the responsibility of Nasdaq's Listing Qualifications (LQ) Team to review and approve companies applying to list securities on Nasdaq.",
         "confidence": "high",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "listing_process_duration": {
         "zh": "通常4-6周完成审核（第1周开始审核；第2-3周完成初步审核并出具意见函；第3-6周公司回应问题；第7-8周完成审核并批准上市），若无争议问题可能更短",
@@ -877,6 +924,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "transfer_between_boards": {
@@ -897,6 +945,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -914,6 +963,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suspension_resumption": {
@@ -930,6 +980,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "delisting_conditions": {
@@ -946,6 +997,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "delisting_process": {
@@ -967,7 +1019,8 @@
         "quote": "When the Listing Qualifications Department determines that a company does not meet the requirements to remain listed, the Listing Qualifications Department will issue a Staff Delisting Determination. ... Upon receipt of a Staff Delisting Determination or a Public Reprimand Letter, or when its application for initial listing is denied, a company may request that a Hearings Panel review the matter. ... After reviewing the written record and holding an oral hearing, if one is requested, a Hearings Panel will issue a decision, which is reviewed by the Nasdaq Listing and Hearing Review Council (the \"Listing Council\"), either on appeal or on its own initiative.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delisting_transition_period": {
         "zh": "买价（Bid Price Requirement）等特定持续上市标准不达标时，公司通常先获得180天合规宽限期；若已通知拟通过反向股票分割解决买价问题，可再获第二个180天宽限期（两期合计最长360天），宽限期满仍未达标才触发Staff Delisting Determination（职员退市决定），进入listing.delisting_process所述的听证/上诉程序",
@@ -983,6 +1036,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "post_delisting_venue": {
@@ -999,6 +1053,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "quote": null
       }
     },
@@ -1080,7 +1135,8 @@
         ],
         "quote": "in February 2023, the Securities and Exchange Commission adopted amendments to Rule 15c6-1 under the Securities Exchange Act of 1934 to shorten the standard settlement cycle for most broker-dealer transactions from two business days after the trade date (\"T+2\") to one business day after the trade date (\"T+1\")",
         "confidence": "medium",
-        "verified": "2026-08-14"
+        "verified": "2026-08-14",
+        "spec": null
       },
       "ccp_name": {
         "zh": "全国证券清算公司（National Securities Clearing Corporation, NSCC，DTCC子公司）",
@@ -1096,7 +1152,8 @@
         "quote": "Have your clearing agency call the National Securities Clearing Corporation (NSCC) at 212.412.8623 to ensure a clearing arrangement.",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "csd_name": {
         "zh": "",
@@ -1105,6 +1162,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1114,6 +1172,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1124,6 +1183,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1134,6 +1194,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1152,6 +1213,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-14",
+        "spec": null,
         "quote": null
       },
       "last_trading_day_rule": {
@@ -1160,6 +1222,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1178,6 +1241,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "derivatives": {
@@ -1203,7 +1267,8 @@
         "quote": "According to the latest Federal Reserve survey, 58.0% of households own equities, +5.3 pps from the prior survey. ... The breakout of liquid financial assets held by U.S. households was: Equities 54.5% Mutual funds 17.1% Deposits (bank deposits and CDs) 13.7% Bonds (UST, agency, munis, and corporates) 8.2% Money market funds 6.5%",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "account_opening_requirements": {
         "zh": "联邦《客户身份识别程序》（Customer Identification Program, CIP）规则：经纪商须建立书面CIP，开户前至少须获取客户姓名、（自然人）出生日期、地址、身份证明号码（美国人为纳税人识别号；非美国人可用护照号及签发国、外国人身份证号或其他政府签发证件号）",
@@ -1219,7 +1284,8 @@
         "quote": "A broker-dealer must establish, document, and maintain a written Customer Identification Program (\"CIP\") ... Except as permitted by paragraph (a)(2)(i)(B) of this section, the broker-dealer must obtain, at a minimum, the following information prior to opening an account: (1) Name; (2) Date of birth, for an individual; (3) Address ...; and (4) Identification number, which shall be: (i) For a U.S. person, a taxpayer identification number; or (ii) for a non-U.S. person, one or more of the following: A taxpayer identification number, a passport number and country of issuance, an alien identification card number, or the number and country of issuance of any other government-issued document evidencing nationality or residence and bearing a photograph or similar safeguard.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "suitability_management": {
         "zh": "SEC《最佳利益规则》（Regulation Best Interest, Reg BI，§ 240.15l-1）：经纪商及其关联自然人向散户客户就证券交易/投资策略提出建议时，须以散户客户利益为先，不得将自身或第三方利益置于客户利益之上；须履行披露、审慎、利益冲突管理、合规四项义务",
@@ -1235,7 +1301,8 @@
         "quote": "§ 240.15l-1 Regulation best interest. ... A broker, dealer, or a natural person who is an associated person of a broker or dealer, when making a recommendation of any securities transaction or investment strategy involving securities (including account recommendations) to a retail customer, shall act in the best interest of the retail customer at the time the recommendation is made, without placing the financial or other interest of the broker, dealer, or natural person who is an associated person of a broker or dealer making the recommendation ahead of the interest of the retail customer.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "foreign_access_channel": {
         "zh": "无类似QFII/沪深港通式的境外投资者专属准入通道；境外投资者通过在美（或跨境提供服务的）持牌经纪商开立账户即可直接交易纳斯达克上市证券，开户身份核验程序与美国本土投资者相同（见account_opening_requirements），仅身份证明文件类型因是否美国人而有所区分",
@@ -1256,6 +1323,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "membership_structure": {
@@ -1272,6 +1340,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "broker_landscape": {
@@ -1288,7 +1357,8 @@
         "quote": "Broker-                                     Investment            Registered\nDealers            Branch Offices          Advisor Firms        Representatives\n2010                     4,577                162,711                 26,159               628,440\n2024                     3,249                148,994                 32,090               634,508\nSource: FINRA\n",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "infrastructure": {
@@ -1306,6 +1376,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_latency": {
@@ -1322,7 +1393,8 @@
         "quote": "Most Nasdaq indices are updated in real-time during market hours, with at least a 1-minute delay for public display.",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "data_pricing_model": {
         "zh": "按订阅者类型分层定价（Professional/Corporate专业机构用户 vs Non-Professional非专业个人用户，后者费率显著更低）：以TotalView全深度行情为例，2025年1月起专业/机构用户每订阅账号月费80.50美元，非专业用户15美元；另有面向数据分销商的内部/外部分发费与交易平台费等附加费率",
@@ -1338,6 +1410,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "historical_data_availability": {
@@ -1354,7 +1427,8 @@
         "quote": "Historical data provides up to 10 years of daily historical stock prices and volumes for each stock. Historical price trends can indicate the future direction of a stock.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_system_name": {
         "zh": "INET（原Instinet电子交易平台，2005年纳斯达克收购Instinet电子交易业务后整合为核心撮合系统）",
@@ -1375,6 +1449,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "access_methods": {
@@ -1391,6 +1466,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "major_outage_history": {
@@ -1407,7 +1483,8 @@
         "quote": "For three hours on August 22, 2013, trading was halted on the Nasdaq Stock Market. Trading on the exchange stopped at 12:14 pm and resumed at 3:25 pm, with 35 minutes left of trading for the day. One week after the trading halt NASDAQ OMX credited the freeze to an overloading of the Securities Information Processor (SIP) caused by reconnection issues with the New York Stock Exchange Arca.",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "costs": {
@@ -1418,6 +1495,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1435,7 +1513,8 @@
         "quote": "Firm adds greater than 0.03% of TCV of non-displayed liquidity, including midpoint orders / $0.0010 for Tape A & B Securities, $0.0005 for Tape C Securities",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_fees": {
         "zh": "NSCC官方费率指南（Guide to the NSCC Fee Schedule）列示的现货证券清算相关费用示例：CNS买入平仓（Buy-in）每次通知5.00美元（原始方与空头经纪商双方均收取）；未交割入CNS每笔0.25美元（短缺1-30天）/3.00美元（超过30天）；净额清算「计入净值」每百万美元0.44美元、「计出净值」每百万美元2.16美元；另设按月按账户收取的300美元清算账户费",
@@ -1451,7 +1530,8 @@
         "quote": "CNS buy-in 5.00 Per notice of intent and retransmission; charged to both originator and short broker\nFail to deliver to CNS 0.25 Per item short in CNS for 1 to 30 days at close of business / 3.00 Per item short in CNS for more than 30 days at close of business\nInto the net value 0.44 Per million dollars, calculated as value of gross positions prior to netting / Out of the net value 2.16 Per million dollars, calculated as value of net positions after netting\nClearance account fee 300.00 Per month, per account\n",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_fees": {
         "zh": "SEC Section 31交易费（Regulatory Transaction Fee）：现行费率为每百万美元成交额20.60美元，2026年4月4日起生效（此前一段时期费率为0，见detail）；由交易所代收后转付SEC，是本项目防幻觉铁律中明确点名的美国市场费率反例（费率随SEC每年度公告周期性调整，非固定不变）",
@@ -1467,7 +1547,8 @@
         "quote": "Pursuant to the SEC's Fee Rate Advisory for Fiscal Year 2026, the Securities and Exchange Commission has announced that the Section 31 transaction fee rate applicable to securities transactions on national securities exchanges and over-the-counter markets will be set at $20.60 per million dollars, effective April 4, 2026. Until that date, the prevailing rate of $0.00 per million dollars will remain in effect.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "stamp_duty": {
         "zh": "",
@@ -1476,6 +1557,7 @@
         "verified": "2026-08-14",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1493,7 +1575,8 @@
         "quote": "At the federal level one of the historical examples of a transaction tax was a stock transfer tax (STT) effective from 1914 to 1966. ... At the present time the federal government still levies a small tax on share issuance and transfers ... for the primary purpose of financing the activities of the Securities and Exchange Commission (SEC).",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "capital_gains_tax": {
         "zh": "属于投资者个人所得税范畴，非交易所/市场层面收费。美国本土个人投资者：长期资本利得（持有超过1年）适用0%/15%/20%三档优惠税率（按应纳税所得额分档，2025纳税年度门槛见detail）；短期资本利得按累进的普通所得税税率征收。非美国居民境外投资者买卖美股产生的资本利得的具体待遇本次未找到可引用的官方原文逐字确认，故未写入zh/en正文",
@@ -1509,7 +1592,8 @@
         "quote": "Net capital gains are taxed at different rates depending on overall taxable income, although some or all net capital gain may be taxed at 0%. For taxable years beginning in 2025, the tax rate on most net capital gain is no higher than 15% for most individuals. A capital gains rate of 0% applies if your taxable income is less than or equal to: $48,350 for single and married filing separately; $96,700 for married filing jointly and qualifying surviving spouse; and $64,750 for head of household. ... However, a capital gains rate of 20% applies to the extent that your taxable income exceeds the thresholds set for the 15% capital gain rate.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "dividend_withholding_tax": {
         "zh": "境外投资者（非美国居民/外国实体）取得美国来源股息等收入，一般按30%的法定税率由付款方（经纪商/托管机构）代扣代缴（NRA Withholding，Internal Revenue Code第1441-1443条）；若投资者所在国与美国订有税收协定，可申请按协定优惠税率代扣（需提交W-8BEN等证明文件）；美国本土居民投资者取得股息则按其个人所得税税率征税（合格股息适用与长期资本利得相同的优惠税率档），不涉及预扣",
@@ -1525,6 +1609,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "implicit_costs_note": {
@@ -1541,7 +1626,8 @@
         "quote": "For Nasdaq Global Select Market and Nasdaq Global Market Companies ... Market Makers 2 4 4\nFor Nasdaq Capital Market Companies ... Market Makers 2 2 2\n",
         "confidence": "low",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "risks": {
@@ -1552,6 +1638,7 @@
         "confidence": "low",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1569,7 +1656,8 @@
         "quote": "TRADING PROHIBITION AFTER 3 YEARS OF NON-INSPECTION ... a covered issuer has 3 consecutive non-inspection years, the Commission shall prohibit the securities of the covered issuer ... Approved December 18, 2020.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "liquidity_risk_note": {
         "zh": "持续上市标准中做市商数量最低要求随所选子标准不同而有别：Nasdaq Capital Market（入门层级）三个可选子标准（权益/上市证券市值/净利润标准）均只需2家做市商；Nasdaq Global Select Market与Global Market的权益标准同样只需2家，但市值标准与总资产/营收标准则需4家。做市商数量下限越低，理论上流动性风险越高，尤以Capital Market层级的小型成长型公司为甚",
@@ -1585,7 +1673,8 @@
         "quote": "For Nasdaq Global Select Market and Nasdaq Global Market Companies ... Market Makers 2 4 4\nFor Nasdaq Capital Market Companies ... Market Makers 2 2 2\n",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "regulatory_change_risk_note": {
         "zh": "纳斯达克上市规则处于持续修订状态：仅退市听证/上诉相关的Rule 5810/5815/5820就在2024-2026年间经历多轮SEC规则修改申请（如2024年拟修改上诉标准后撤回、2025年通过买价二次合规期与退市听证例外规则）；NSCC结算基金方法论、持续上市新增要求等亦在2026年内多次修订，反映美国证券市场监管规则处于常态化、高频次的动态调整中，而非一经制定长期不变",
@@ -1606,6 +1695,7 @@
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "enforcement_note": {
@@ -1622,6 +1712,7 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     }

@@ -2,7 +2,7 @@
 
 进度状态放这里；「为什么这么排」去 `DECISIONS.md`，这里不重复。
 
-## 当前阶段：**v2.0 高度可视化转向**（2026-08-29 校准）——主视图从对比矩阵改为单市场「交易日平面图」，新增结构化 `spec` 层。加固组 A1（[ADR-033]）、A2（[ADR-034]）与 Phase 0 范式/契约定案（[ADR-035] + [ADR-036]）均已完成。**下一步：Phase 1 · market_structure 结构化**（见下方「v2.0 计划」）。
+## 当前阶段：**v2.0 高度可视化转向**（2026-08-29 校准）——主视图从对比矩阵改为单市场「交易日平面图」，新增结构化 `spec` 层。加固组 A1/A2（[ADR-033]/[ADR-034]）、Phase 0 范式定案（[ADR-035]/[ADR-036]）、Phase 1a `spec` 层实装 + 5 家示范（[ADR-037]）均已完成。**下一步：Phase 1b · 其余 15 家 spec 回填**（见下方「v2.0 计划」）。
 
 ## 阶段路线
 
@@ -172,7 +172,8 @@
 - [x] **立即执行 · A1 防幻觉机器校验补完**（2026-08-29，[ADR-033]）— 见上方「阶段路线」。
 - [x] **立即执行 · A2 v1.1 尾巴收口**（2026-08-30，[ADR-034]）— `verify_quotes.py` 走 `expand_exchange`（消化 42 个假 CACHE_MISS，暴露并修 6 个真 FAIL）；`br-b3.yml` 34 处裸字符串 `sources` 归一为字典；英文回填 #45 **全库清零**（20 家）；61 个 CACHE_MISS → 0。`OPEN-QUESTIONS` #45 删除。
 - [x] **Phase 0 · 范式与数据模型定案**（2026-08-30，[ADR-035] + [ADR-036]）— 修订 ADR-005（主视图=交易日平面图，矩阵降为 `#view=matrix`）；定 `spec` 结构化层契约（新文件 `schema/spec.yml` 存形状定义，含 1 条示范条目）、零构建守则、图形诚实呈现规则（`spec` 三态 null/type:none/缺省）、非现货所 y 轴 `reference` 降级；框架性问题 #39 落地（`enums.yml` 加 `covered_only`，`za-jse` 归类），#13 删除，#17/#38 更新，其余（#1/#5/#36/#41 等）"暂不改 + 明确触发条件"。
-- [ ] **Phase 1 · market_structure 结构化** — 依 `schema/spec.yml` 契约填第五章 `spec`（`trading_sessions.*` 起止 HH:MM + kind、`price_limits` ±% + reference、`circuit_breaker` 档位表、`volatility_interruption` 走廊、`opening/closing_mechanism` 竞价窗口）；`schema/spec.yml` 填充第五章其余字段 + `validate.py` 加结构校验；`matching_principle` 转 enum；`sync.py` `compute_trading_window()` 改吃 `spec.trading_sessions` 删 `_parse_hour_tokens` 正则；20 家现货所 + 有 `derivatives` 子块的所回填 `spec` 并对来源复核（并行子代理，[ADR-017] 模式）。退出：`make build` 全绿、`spec` 5b 反查 0 FAIL、时区甘特条回归无变化。
+- [x] **Phase 1a · spec 层实装 + 第五章契约 + 5 家示范**（2026-08-30，[ADR-037]）— `schema/spec.yml` 写全第五章 13 字段 `spec` 形状；`sync.py` 加 `spec` 到 `ENVELOPE_KEYS` + `compute_trading_window` 优先读 `spec.{start,end}`（散文回退）；`validate.py` 加 `spec` 结构校验（键名 + dict + 5b 数值反查）；`cn-sse`/`us-nyse`/`jp-jpx`/`de-eurex`/`in-nse` 五家回填 `spec`，覆盖百分比 / 无 / 动态未公布(band_pct null) / 阶梯 / 前结算价 / 跨所联动六种形态。全 20 家时区甘特条数据零变化。
+- [ ] **Phase 1b · 其余 15 家 spec + 补齐** — 剩余 15 家第五章 `spec`；`volatility_interruption`/`short_selling`/`market_maker_scheme` 的 `spec`；JPX 值幅制限 37 档全表；`matching_principle` 转 enum（20 家）；`in-nse` 加进 `EXCHANGE_IANA_TZ`。并行子代理（[ADR-017]），每家 `spec` 对来源复核。退出：`make build` 全绿、`spec` 5b 0 FAIL、时区甘特条回归无变化。
 - [ ] **Phase 2 · 交易日平面图** — `app.js` 新增 `renderTradingDay`（手写 SVG，按 [ADR-035] A 的字段→元素映射 + D 的诚实渲染规则），市场下拉，路由默认值改 `trading-day`，矩阵移 `#view=matrix`，`index.html` tab 调整。非现货所按 [ADR-035] E 渲染。交付后**停下评估**「30 秒看懂」由非专业读者实测。
 - [ ] **Phase 3 · 其余章节可视化** — 成本瀑布 → 交割管线 → 上市生命周期（一并落地 [ADR-036] #5 的章节级"仅现货适用"标记）→ 监管图 → 参与者 → 风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）→ …按交易员价值迭代，每章带一次小型 `spec` 补充。
 - [ ] **Phase 4 · Wave 3 广度扩张（搁置）** — Phase 1–2 稳定后解冻。候选见 [ADR-016] 思路 + 东南亚/中东/非洲/拉美补白；若纳入第 3 个 MENA/非洲所则同时执行 [ADR-036] #2 的 `region` 拆分。子代理任务里加"第五章直接填 `spec`、并在平面图里自检"。

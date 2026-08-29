@@ -31,7 +31,7 @@ DOCS_DATA = ROOT / "docs" / "data"
 PROJECT_DIR = ROOT / "PROJECT"
 
 VOLATILITY_MONTHS = {"stable": 24, "moderate": 12, "volatile": 6}
-ENVELOPE_KEYS = ("zh", "en", "enum", "detail", "quote", "sources", "verified", "confidence")
+ENVELOPE_KEYS = ("zh", "en", "enum", "spec", "detail", "quote", "sources", "verified", "confidence")
 # exchange_identity 里视为必填的字段；group_id 允许缺省（无集团归属）
 REQUIRED_IDENTITY_FIELDS = ("id", "name_zh", "name_native", "official_languages", "source_lang", "region", "tier")
 
@@ -260,11 +260,28 @@ def compute_trading_window(exchange_id, expanded_chapters):
         return None
     sessions_path = ("trading_sessions",)
 
-    def session_text(field_id):
-        env = get_by_path(expanded_chapters.get("market_structure") or {}, sessions_path + (field_id,))
-        if not env:
-            return ""
-        return env.get("zh") or env.get("en") or ""
+    def session_env(field_id):
+        return get_by_path(expanded_chapters.get("market_structure") or {}, sessions_path + (field_id,)) or {}
+
+    def session_hours(field_id):
+        """优先用 spec.{start,end}（[ADR-035] B，Phase 1 起）；没有 spec 就退回
+        从 zh/en 自由文本正则抽取（[ADR-015] 的旧路径，Phase 1b 未结构化的所仍走这条）。"""
+        env = session_env(field_id)
+        spec = env.get("spec") or {}
+        if spec.get("kind") == "none":
+            return []
+        out = []
+        for k in ("start", "end"):
+            v = spec.get(k)
+            if isinstance(v, str) and ":" in v:
+                try:
+                    hh, mm = v.split(":")[:2]
+                    out.append(int(hh) + int(mm) / 60)
+                except ValueError:
+                    pass
+        if out:
+            return out
+        return _parse_hour_tokens(env.get("zh") or env.get("en") or "")
 
     # 故意不把 night_session 的数字并进来取 min/max：夜盘通常与日盘不连续（如商品期货
     # 夜盘 21:00-23:00，中间隔着日盘收盘到夜盘开盘的空档），一旦并入同一个 min/max 窗口，
@@ -274,12 +291,12 @@ def compute_trading_window(exchange_id, expanded_chapters):
     # 第二段柱，而不是简单把 night_session 加进这个循环。
     window_hours = []
     for f in ("pre_market", "continuous_am", "continuous_pm", "after_market"):
-        window_hours += _parse_hour_tokens(session_text(f))
+        window_hours += session_hours(f)
     if not window_hours:
         return None
     open_local, close_local = min(window_hours), max(window_hours)
 
-    lunch_hours = _parse_hour_tokens(session_text("lunch_break"))
+    lunch_hours = session_hours("lunch_break")
     lunch_start_local = min(lunch_hours) if len(lunch_hours) >= 2 else None
     lunch_end_local = max(lunch_hours) if len(lunch_hours) >= 2 else None
 

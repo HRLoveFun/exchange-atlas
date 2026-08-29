@@ -251,26 +251,32 @@ market_structure:
 
   trading_sessions:
     pre_market:
+      spec: {kind: none}
       zh: "无独立盘前时段"
       en: "No separate pre-market session"
       confidence: medium
     continuous_am:
+      spec: {start: "09:00", end: "11:30", kind: continuous}
       zh: "上午盘 9:00-11:30"
       en: "Morning session 9:00 a.m.-11:30 a.m."
       quote: "The morning trading session shall be held from 9:00 a.m. to 11:30 a.m."
     lunch_break:
+      spec: {start: "11:30", end: "12:30", kind: lunch_recess}
       zh: "11:30-12:30 午休，无交易"
       en: "11:30 a.m.-12:30 p.m. lunch recess, no trading"
       confidence: medium
     continuous_pm:
+      spec: {start: "12:30", end: "15:30", kind: continuous, note: "15:25-15:30 为收盘集合竞价"}
       zh: "下午盘 12:30-15:30，其中15:25-15:30为收盘集合竞价"
       en: "Afternoon session 12:30 p.m.-3:30 p.m., with 3:25-3:30 p.m. as the closing auction session"
       quote: "the afternoon trading session shall be held from 0:30 p.m. to 3.30 p.m. However, 3:25 p.m. to 3:30 p.m. will be a closing auction session, with trades being executed at 3:30 p.m."
     after_market:
+      spec: {kind: none}
       zh: "无独立盘后连续交易时段"
       en: "No separate after-hours continuous session"
       confidence: medium
     night_session:
+      spec: {kind: none, note: "现货股票；衍生品夜盘属大阪交易所 OSE，不在本文件范围"}
       zh: "现货股票无夜盘（衍生品市场另有夜盘，属大阪交易所OSE，不在本文件范围）"
       en: "None for cash equities (derivatives have a night session under Osaka Exchange, outside this file's scope)"
       confidence: medium
@@ -281,6 +287,7 @@ market_structure:
     confidence: low
 
   opening_mechanism:
+    spec: {type: call_auction, auction_end: "09:00"}
     zh: "开盘集合竞价撮合决定开盘价，其后转为连续竞价"
     en: "Opening price determined by call auction, then continuous trading begins"
     detail: "「所有开盘价确定前的申报视为同时提出」——board_lot_size等细则见 Rule 10。"
@@ -292,6 +299,7 @@ market_structure:
     confidence: high
 
   closing_mechanism:
+    spec: {type: call_auction, auction_start: "15:25", auction_end: "15:30"}
     zh: "收盘集合竞价，15:25-15:30，15:30执行成交"
     en: "Closing call auction, 3:25-3:30 p.m., executed at 3:30 p.m."
     sources:
@@ -347,6 +355,13 @@ market_structure:
       quote: "Less than 100 yen Upward/Downward 30 yen ... Where the price is more than 50,000,000 yen 10,000,000 yen"
       confidence: high
     main_board:
+      spec:
+        type: stepwise
+        reference: prev_close
+        ladder:
+          - {base_max: 100, band_abs: 30}
+          - {base_min: 50000000, band_abs: 10000000}
+        full_table_note: "值幅制限共 37 档（绝对日元金额，随基准价升高放大），完整表见 price_limits.type 字段的 quote 与 en；此处只放 quote 撑得住的首尾两档锚点，Phase 1b 补全 37 档"
       zh: "见 type 字段的37档完整表；档位随基准价升高而放大，非固定比例"
       en: "See the 37-tier table in the type field; the band widens as the base price rises, not a fixed percentage"
       confidence: medium
@@ -357,6 +372,7 @@ market_structure:
 
   circuit_breaker:
     enum: stock_level
+    spec: {type: stock_level, note: "无全市场熔断；波动控制靠个股级「特別気配」（申报价超值幅制限基准价时不成交、显示指示性价格，上午盘不成交、下午盘按值幅制限价处理），见 volatility_interruption。是否存在独立全市场熔断未确认，见 OPEN-QUESTIONS #16"}
     zh: "无独立的全市场熔断机制（如美股MWCB）；波动控制主要通过「特別気配」（特别行情揭示）机制实现——申报价格超出值幅制限的基准价时，不直接成交，而是显示特别气配指示性价格，上午盘超出即不成交，下午盘则按值幅制限价位处理"
     en: "No separate market-wide circuit breaker (unlike the U.S. MWCB); volatility control operates primarily through the \"special quote\" mechanism — when an order price would exceed the price-limit band around the base price, no trade is executed at that price; instead a special indicative quote is displayed. In the morning session no transaction is effected; in the afternoon session trading is capped at the price limit"
     detail: "本条描述的是个股级机制，是否存在独立于值幅制限之外的全市场级熔断安排未在本次抓取内容中确认，留待后续核实，见 OPEN-QUESTIONS。"

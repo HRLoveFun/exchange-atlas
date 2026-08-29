@@ -21,6 +21,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -31,6 +32,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -42,6 +44,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -60,6 +63,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
+        "spec": null,
         "quote": null
       },
       "self_listed": {
@@ -75,6 +79,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -85,6 +90,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -94,6 +100,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -114,7 +121,8 @@
         "quote": "Dual Counter Market Maker Short Selling by a Dual Counter Market Maker",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "settlement_currency": {
         "zh": "港元（双柜台人民币柜台以人民币结算）",
@@ -122,6 +130,7 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -141,6 +150,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -151,6 +161,7 @@
         "detail": "SFC 与 HKEX 之间自律监管职责的精确边界未逐条核实，留待后续核实。",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -160,6 +171,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -178,6 +190,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "foreign_ownership_limit": {
@@ -187,6 +200,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -197,6 +211,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -207,6 +222,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -229,7 +245,8 @@
         "quote": "The SFO provided for the establishment of the Investor Compensation Fund to compensate investors who suffer pecuniary losses as a result of defaults of licensed intermediaries or authorized financial institutions occurring on or after 1 April 2003 in relation to exchange-traded products in Hong Kong. ... For defaults occurring on or after 1 January 2020, the compensation limit is raised from HK$150,000 to HK$500,000 per investor ... For joint accounts, each account holder is subject to a maximum compensation limit of HK$500,000.",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "products": {
@@ -396,6 +413,7 @@
           "verified": "2026-08-12",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "continuous_am": {
@@ -412,6 +430,7 @@
           "verified": "2026-08-12",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "lunch_break": {
@@ -428,6 +447,7 @@
           "verified": "2026-08-12",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "continuous_pm": {
@@ -444,6 +464,7 @@
           "verified": "2026-08-12",
           "confidence": "high",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "after_market": {
@@ -459,6 +480,7 @@
           ],
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -476,6 +498,7 @@
           ],
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "quote": null
         }
       },
@@ -493,6 +516,7 @@
         "verified": "2026-08-12",
         "confidence": "high",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "opening_mechanism": {
@@ -509,6 +533,7 @@
         "verified": "2026-08-12",
         "confidence": "high",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "closing_mechanism": {
@@ -525,6 +550,7 @@
         "verified": "2026-08-12",
         "confidence": "high",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "matching_principle": {
@@ -546,7 +572,8 @@
         "quote": "現時 OTP-C 以嚴格的價格及時間優先次序持續進行配對。較早時間輸入系統的買賣盤必須要完全執行，才可處理同等價格但較遲輸入的買賣盤。／Orders are continuously executed in strict price and time priority. An order entered into the system at an earlier time must be executed in full before an order at the same price entered at a later time is executed.",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "order_types": {
         "zh": "开市前时段及收市竞价时段只接受竞价盘及竞价限价盘；持续交易时段只接受限价盘、增强限价盘及特别限价盘，可选择附加「全数执行或立刻取消」指示",
@@ -567,7 +594,8 @@
         "quote": "在持續交易時段，系統只以限價盤、增強限價盤及特別限價盤進行買賣。／During the Continuous Trading Session, the system accepts limit, enhanced limit and special limit orders only, with an option for an \"All-or-Nothing Qualifier\"",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "tick_size": {
         "zh": "",
@@ -583,6 +611,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "board_lot_size": {
@@ -598,6 +627,7 @@
         ],
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -614,6 +644,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -632,6 +663,7 @@
             }
           ],
           "verified": "2026-08-12",
+          "spec": null,
           "detail": null
         },
         "main_board": {
@@ -647,6 +679,7 @@
           "confidence": "high",
           "en": null,
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -663,6 +696,7 @@
           "confidence": "high",
           "en": null,
           "enum": null,
+          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -686,7 +720,8 @@
         ],
         "quote": "港交所建議的市調機制旨在緩和自動化交易引致的極端價格波動（譬如「閃崩」、程式錯誤等等）以維護市場持正操作。此機制不會暫停交易，並非用來限制股價上落，亦與某些市場就證券交易限定每日價格範圍的每日漲跌停板制有所分別。",
         "verified": "2026-08-12",
-        "confidence": "high"
+        "confidence": "high",
+        "spec": null
       },
       "volatility_interruption": {
         "zh": "波动性中断机制（市調機制/VCM）：以5分钟前成交价为基准，触发阈值按恒生综合大型股/中型股/小型股指数成份股分组分别为±10%/±15%/±20%，触发后进入5分钟冷静期（非停牌，仅限价区间内可继续交易）",
@@ -707,7 +742,8 @@
         "quote": "市調機制的設計已包括特別措施以盡量減少干擾市場……觸發點設置的門檻應不致過頻地觸發市調機制（證券市場的觸發點因應股票組別分別設為±10%、±15%或±20%）；以及市調機制的監測亦不適用於某些時段（上午及下午持續交易時段的首15分鐘，及下午持續交易時段（或半日交易日的早市持續交易時段）的最後20分鐘）及某些產品。一旦股票價格超出5分鐘前最後一次交易價格的±10%（恒生綜合大型股指數成份股）、±15%（恒生綜合中型股指數成份股）或±20%（恒生綜合小型股指數成份股），市調機制將被觸發，並隨即開始5分鐘的冷靜期。",
         "verified": "2026-08-12",
         "confidence": "high",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "trading_halt_mechanism": {
         "zh": "无涨跌停亦无个股熔断停牌，VCM 触发后不停牌只限价（见上）；另有因披露事项的停牌机制未逐条核实",
@@ -722,6 +758,7 @@
         ],
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -739,6 +776,7 @@
           }
         ],
         "verified": "2026-08-12",
+        "spec": null,
         "quote": null
       },
       "short_selling": {
@@ -755,6 +793,7 @@
         "quote": "Be placed only on Designated Securities eligible for short selling; ... Observe \"tick rule\", i.e., a short sale order of a Designated Security shall not be made on the Exchange below the POS reference price during POS, the best current ask price during CTS, or the CAS reference price during CAS",
         "confidence": "high",
         "verified": "2026-08-12",
+        "spec": null,
         "detail": null
       },
       "block_trade": {
@@ -770,6 +809,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -786,6 +826,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -803,6 +844,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "connect_schemes": {
@@ -819,7 +861,8 @@
         "quote": "Stock Connect (Northbound) ... Opening Call Auction 9:15 a.m. - 9:25 a.m. ... Continuous Auction (Morning) 9:30 a.m. - 11:30 a.m. ... Continuous Auction (Afternoon) 1:00 p.m. - 2:57 p.m. ... Closing Call Auction 2:57 p.m. - 3:00 p.m.",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "derivatives": {
         "trading_sessions": {
@@ -837,6 +880,7 @@
             "confidence": "high",
             "verified": "2026-08-12",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "continuous_am": {
@@ -853,6 +897,7 @@
             "confidence": "high",
             "verified": "2026-08-12",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "lunch_break": {
@@ -868,6 +913,7 @@
             ],
             "verified": "2026-08-12",
             "enum": null,
+            "spec": null,
             "detail": null,
             "quote": null
           },
@@ -885,6 +931,7 @@
             "confidence": "high",
             "verified": "2026-08-12",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "after_market": {
@@ -900,6 +947,7 @@
             ],
             "verified": "2026-08-12",
             "enum": null,
+            "spec": null,
             "detail": null,
             "quote": null
           },
@@ -917,7 +965,8 @@
             "confidence": "high",
             "detail": "本 trading_sessions 子块整体以恒生指数/恒生中国企业指数/恒生科技指数期货期权为代表性样本；不同产品（如货币期货、商品期货、单一股票期权/期货）的具体时段有差异，已在各字段说明中标注，完整逐品种时段表见 sources 页面。",
             "verified": "2026-08-12",
-            "enum": null
+            "enum": null,
+            "spec": null
           }
         },
         "holidays_note": {
@@ -934,6 +983,7 @@
           "verified": "2026-08-12",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "opening_mechanism": {
@@ -950,6 +1000,7 @@
           "confidence": "high",
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "closing_mechanism": {
@@ -966,6 +1017,7 @@
           "verified": "2026-08-12",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         },
         "matching_principle": {
@@ -982,6 +1034,7 @@
           "confidence": "high",
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "order_types": {
@@ -998,6 +1051,7 @@
           "confidence": "high",
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "tick_size": {
@@ -1014,6 +1068,7 @@
           "confidence": "medium",
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "contract_specs_note": {
@@ -1035,6 +1090,7 @@
           "confidence": "high",
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "price_limits": {
@@ -1057,6 +1113,7 @@
             "quote": "動態價格限制機制是為避免顯然是錯價的買賣盤出現於 HKATS 內之額外監管措施⋯如最後成交價偏離參考價的數值超過更新參數，參考價將調整至最後成交價⋯此機制旨在限制特定交易時段內的價格波動。",
             "confidence": "high",
             "verified": "2026-08-12",
+            "spec": null,
             "detail": null
           },
           "main_board": {
@@ -1073,6 +1130,7 @@
             "confidence": "high",
             "verified": "2026-08-12",
             "enum": null,
+            "spec": null,
             "detail": null
           },
           "other_boards": {
@@ -1089,6 +1147,7 @@
             "verified": "2026-08-12",
             "en": null,
             "enum": null,
+            "spec": null,
             "quote": null
           }
         },
@@ -1106,7 +1165,8 @@
           ],
           "quote": "市調機制僅適用於恒生指數（HSI）期貨，小型恒生指數（MHI）期貨，Ｈ股指數（HHI）期貨，小型Ｈ股指數（MCH）期貨，恒生科技指數（HTI）期貨及恒生生物科技指數（HBI）期貨的首兩個合約月份。",
           "confidence": "high",
-          "verified": "2026-08-12"
+          "verified": "2026-08-12",
+          "spec": null
         },
         "volatility_interruption": {
           "zh": "冷靜期觸發條件：期貨合約潛在成交價較5分鐘前最後成交價偏離達±5%即觸發，隨即開始5分鐘冷靜期，期間僅可在價格限制區間內交易；監測適用於持續交易時段，但不包括早市/午市首15分鐘及午市最後20分鐘，亦不適用於開市前議價時段及收市後交易時段",
@@ -1122,6 +1182,7 @@
           "confidence": "high",
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "trading_halt_mechanism": {
@@ -1138,6 +1199,7 @@
           "confidence": "high",
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "block_trade": {
@@ -1154,7 +1216,8 @@
           "quote": "收市後交易時段的大手交易機制的交易安排與T時段相同，除了：大手交易價亦須符合T+1時段+/-6%的價格上下限規定；及特別大手交易按金會如常適用⋯由於T+1時段並無銀行支援，若相關參與者CCMS抵押品戶口的抵押品不足以達到特別大手交易按金的金額，大手交易及／或相關買賣調整會被拒絕。",
           "confidence": "medium",
           "verified": "2026-08-12",
-          "enum": null
+          "enum": null,
+          "spec": null
         },
         "market_maker_scheme": {
           "zh": "香港交易所衍生產品市場內的不同產品均設有市場莊家計劃及/或流通量提供者計劃：股票期貨、股指期貨及期權的莊家責任及獎勵已闡述於期交所規則內；股票期權的莊家責任及獎勵則闡述於聯交所期權交易規則；莊家分主要莊家（PMM）、持續報價莊家（CQMM）、回應詢價莊家（QRMM）三類；流通量提供者計劃（LP）是交易所為新產品流通量所作的商業安排，要求及獎勵較具彈性，不寫入交易所規則",
@@ -1170,6 +1233,7 @@
           "confidence": "high",
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "margin_practice_note": {
@@ -1186,6 +1250,7 @@
           "confidence": "high",
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "connect_schemes": {
@@ -1202,6 +1267,7 @@
           "verified": "2026-08-12",
           "en": null,
           "enum": null,
+          "spec": null,
           "quote": null
         }
       }
@@ -1237,6 +1303,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
+        "spec": null,
         "quote": null
       },
       "listing_process_duration": {
@@ -1253,7 +1320,8 @@
         "quote": "the time taken by each regulator to confirm whether there are any material regulatory concerns will be no more than 40 business days ... The applicant and its sponsor are expected to take a total of around 60 business days to satisfactorily address regulators’ comments. Subject to obtaining approvals from the Listing Committee and other authorities or regulators, the application process would be completed within the six-month application validity window. ... Under the Accelerated Timeframe ... 30 business days (instead of 40 business days).",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "transfer_between_boards": {
         "zh": "",
@@ -1261,6 +1329,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1279,7 +1348,8 @@
         "quote": "13.03 The continuing obligations in this Chapter are primarily to ensure the maintenance of a fair and orderly market in securities and that all users of the market have simultaneous access to the same information. Failure by an issuer to comply with a continuing obligation may result in the Exchange taking disciplinary action in addition to its power to suspend or cancel a listing. 13.04 An issuer’s directors are collectively and individually responsible for ensuring the issuer’s full compliance with the Listing Rules.",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "suspension_resumption": {
         "zh": "停牌须由发行人或其授权代表/财务顾问向交易所提出申请并附具体理由；交易所拥有酌情决定权，仅在认为理由充分时才批准停牌，否则倾向要求发行人改以公告澄清；停牌/停牌期间应为绝对必要的最短时间，发行人有责任确保在适当公告刊发后尽快复牌；复牌方向由交易所指示，可要求发行人先刊发复牌公告，其后交易所才指示恢复交易；若停牌拖延且发行人未采取足够行动争取复牌，可能导致交易所进一步启动撤销上市程序",
@@ -1295,7 +1365,8 @@
         "quote": "Any request for a trading halt or suspension must be made to the Exchange by the issuer or its authorised representative or financial adviser and must be supported by the specific reasons which the issuer wishes the Exchange to take into account ... The duration of any trading halt or suspension should be for the shortest possible period. It is the issuer's responsibility to ensure that trading in its securities resumes as soon as practicable following the publication of an appropriate announcement ... The Exchange shall have the power to direct the resumption of trading of halted or suspended securities.",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delisting_conditions": {
         "zh": "",
@@ -1303,6 +1374,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1321,7 +1393,8 @@
         "quote": "Under Rule 6.10 which sets out the procedures for delisting an issuer under Rule 6.01, the Exchange may, (a) issue a delisting notice specifying a remedial period (specific remedial period). If the issuer fails to remedy the issues and resume trading before the end of the remedial period, the Exchange may cancel its listing; or (b) delist the issuer immediately. ... The Exchange may delist an issuer immediately under Rule 6.01 only in exceptional circumstances where the matters triggering the application of a delisting criterion are fundamental to the general principles for listing and are beyond remedy.",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "delisting_transition_period": {
         "zh": "强制除牌前的「补救期限」（remedial period）：按《主板上市规则》6.01A(1)条，发行人自停牌之日起18个月内（「订明补救期限」）仍未补救导致停牌的问题并恢复交易，交易所可将其除牌；交易所亦可按6.10条为个案酌情订立更短的「特定补救期限」（如6个月）；补救期限届满时若获批延期，一般不会再获第二次延期",
@@ -1337,6 +1410,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "post_delisting_venue": {
@@ -1353,7 +1427,8 @@
         "quote": "an OTC market would, in principle, provide the shareholders of delisted issuers with an exit opportunity ... We will continue to work with various stakeholders on the viability of an OTC market in Hong Kong and will update the market on progress in due course.",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "indices": {
@@ -1431,6 +1506,7 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-12",
+        "spec": null,
         "quote": null
       },
       "ccp_name": {
@@ -1446,6 +1522,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -1463,6 +1540,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "initial_margin_practice": {
@@ -1471,6 +1549,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1481,6 +1560,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1491,6 +1571,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1509,6 +1590,7 @@
         ],
         "confidence": "low",
         "verified": "2026-08-12",
+        "spec": null,
         "quote": null
       },
       "last_trading_day_rule": {
@@ -1517,6 +1599,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1535,7 +1618,8 @@
         "quote": "HKEX has established a Default Management Executive Group (DMEG), comprising senior executives from various divisions of HKEX including HKEX group chief risk officer and chief operating officer, to manage the default management process. ... HKCC conducts default drills annually with the DMEG. ... Under HKCC Rule 706, the order of application of the RF is as follows: (a) RF contributions (including Fixed Contribution and Variable Contribution) of the defaulting HKCC Participant; (b) Variable Contribution Credit granted to the defaulting HKCC Participant; (c) RF accumulated interest income; (d) the proceeds of any insurance policies arranged [Currently there is no insurance arrangement]; (e) the resources of HKCC appropriated to the RF; (f) the Fixed Contributions made by all non-defaulting HKCC Participants; (g) the proceeds of any guarantees or facilities arranged; and (h) the Variable Contributions and Variable Contribution Credits of all non-defaulting HKCC Participants on a pro-rata basis.",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "derivatives": {
         "initial_margin_practice": {
@@ -1552,6 +1636,7 @@
           "confidence": "high",
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "maintenance_margin_practice": {
@@ -1568,6 +1653,7 @@
           "confidence": "high",
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "mark_to_market_frequency": {
@@ -1584,6 +1670,7 @@
           "confidence": "high",
           "verified": "2026-08-12",
           "enum": null,
+          "spec": null,
           "detail": null
         },
         "delivery_method": null,
@@ -1606,7 +1693,8 @@
           "quote": "Last Trading Day / The second last Trading Day of the Contract Month ... Final Settlement Day / The first Trading Day after the Last Trading Day ... Final Settlement Price ... The official closing price of the underlying stock as quoted by SEHK on the Last Trading Day.／Expiry Day / The third Friday of the Contract Month and if it is not a Trading Day, the Expiry Day shall be the preceding Trading Day",
           "confidence": "high",
           "verified": "2026-08-12",
-          "enum": null
+          "enum": null,
+          "spec": null
         }
       }
     },
@@ -1625,7 +1713,8 @@
         "quote": "In 2019, overseas investors’ contribution to the total market turnover was 43% ... Overseas investor trading came mainly from institutions – 37% of the total market turnover (up from 35% in 2018), compared to 7% from overseas retail investors (6% in 2018). ... local investor trading is relatively more evenly contributed by institutional investors and retail investors (17% and 14% of total market [turnover]) ... Institutional investors (local and overseas) contributed 53% to total market turnover in 2019 (55% in 2018). Contribution from retail investors (local and overseas) increased to 20% in [2019].",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "account_opening_requirements": {
         "zh": "证监会《持牌人或注册人操守准则》第5.1段：证监会认可两类开户核实方式——「面对面」（开户文件在持牌人/注册人雇员在场情况下签立）与「非面对面」（客户协议书签署及身份文件核对须由持牌/注册人士、其联属机构、太平绅士，或银行经理/执业会计师/律师/公证人/特许秘书等专业人士见证核实）；非面对面开户亦可通过「电子支票认证」（客户签立协议书+身份文件+以本人名义在香港持牌银行账户开立支票核实签名一致）或「iAM Smart」数字身份认证完成",
@@ -1641,6 +1730,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "suitability_management": {
@@ -1662,6 +1752,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "foreign_access_channel": {
@@ -1671,6 +1762,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1680,6 +1772,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1698,7 +1791,8 @@
         "quote": "No. of Trading Right Holders (No. of trading rights held) / Stock Exchange: 600 (921) / Futures Exchange: 193 (210) ... Exchange Participants* - Trading / 508 (806) / 146 (162) - Non-trading / 81 (104) / N/A (N/A) ... Non-Exchange Participants / 11 (11) / 47 (48) ... * An Exchange Participant is a corporation who may trade on or through the Exchange and is licensed under the Securities and Futures Ordinance to carry on securities/futures/options dealing activity. Updated 31 Jul 2026",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       }
     },
     "infrastructure": {
@@ -1716,6 +1810,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_latency": {
@@ -1732,6 +1827,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "data_pricing_model": {
@@ -1748,6 +1844,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "historical_data_availability": {
@@ -1764,6 +1861,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "trading_system_name": {
@@ -1773,6 +1871,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1790,6 +1889,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "major_outage_history": {
@@ -1811,6 +1911,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -1822,6 +1923,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1839,7 +1941,8 @@
         "quote": "A Trading Fee of 0.00565% per side of the consideration of a transaction (rounded to the nearest cent) is payable to the Exchange. Different rate of exemption of the Trading Fee will apply to the SMM transactions in different categories of Exchange Traded Products.",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "clearing_fees": {
         "zh": "股票结算费（Stock settlement fee）：经CCASS清算结算的交易所交易，每名结算参与者/结算代理参与者按成交金额单边0.0042%缴付（合资格ETF做市商交易适用0.002%优惠税率）；同一交易所参与者自行对盘的「交叉盘」交易另按单边0.0021%计收；结算所本身不另收「结算清算费」（Stock clearing fee列明为NIL）",
@@ -1855,6 +1958,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "regulatory_fees": {
@@ -1871,7 +1975,8 @@
         "quote": "SFC Transaction Levy / Effective 1 November 2014, a SFC Transaction Levy of 0.0027% (rounded to the nearest cent) is charged per side of the consideration of a transaction, and the amount is collected for the SFC. ... Investor Compensation Levy / Effective 19 December 2005, the payment of Investor Compensation Levy (i.e. 0.002% per side of the consideration of a transaction, rounded to the nearest cent) has been suspended by the SFC. ... AFRC Transaction Levy / Effective 1 January 2022, an AFRC Transaction Levy of 0.00015% (rounded to the nearest cent) is charged per side of the consideration of a transaction, and the amount is collected for the Accounting and Financial Reporting Council (AFRC).",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "stamp_duty": {
         "zh": "0.1%（买卖双方各自缴纳，2023年11月17日起由0.13%下调）",
@@ -1887,6 +1992,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "financial_transaction_tax": {
@@ -1903,6 +2009,7 @@
         "confidence": "medium",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "quote": null
       },
       "capital_gains_tax": {
@@ -1912,6 +2019,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1934,7 +2042,8 @@
         "quote": "豁免／應評税利潤並不包括以下項目的款項：－已繳付香港利得税的法團所分派的股息／Exemption / The following sums are excluded from the assessable profits:- dividends received from a corporation which is subject to Hong Kong Profits Tax",
         "confidence": "medium",
         "verified": "2026-08-12",
-        "enum": null
+        "enum": null,
+        "spec": null
       },
       "implicit_costs_note": {
         "zh": "港交所2024年6月发表的最小价差检讨咨询文件官方确认：港股买卖价差（bid-ask spread，隐性交易成本之一）水平相对国际同类市场偏高；文件由香港特区政府2023年8月成立的「促进股票市场流动性专责小组」建议推动，提出分阶段调整最小价差以缩窄买卖价差——第一阶段（$10-$50价格带）拟降低最小价差50%-60%，第二阶段（$0.5-$10价格带）拟降低50%",
@@ -1950,6 +2059,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     },
@@ -1960,6 +2070,7 @@
         "confidence": "low",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null,
         "quote": null,
         "sources": null
@@ -1971,6 +2082,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -1981,6 +2093,7 @@
         "verified": "2026-08-12",
         "en": null,
         "enum": null,
+        "spec": null,
         "quote": null,
         "sources": null
       },
@@ -2008,6 +2121,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       },
       "enforcement_note": {
@@ -2029,6 +2143,7 @@
         "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
+        "spec": null,
         "detail": null
       }
     }

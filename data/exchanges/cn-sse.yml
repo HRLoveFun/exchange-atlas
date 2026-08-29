@@ -236,23 +236,29 @@ market_structure:
 
   trading_sessions:
     pre_market:
+      spec: {start: "09:15", end: "09:25", kind: opening_auction}
       zh: "无独立盘前时段；9:15-9:25 为开盘集合竞价"
       en: "No separate pre-market session; 9:15-9:25 is the opening call auction"
     continuous_am:
+      spec: {start: "09:30", end: "11:30", kind: continuous}
       zh: "9:30-11:30"
       en: "9:30-11:30"
     lunch_break:
+      spec: {start: "11:30", end: "13:00", kind: lunch_recess}
       zh: "11:30-13:00"
       en: "11:30-13:00"
     continuous_pm:
+      spec: {start: "13:00", end: "15:00", kind: continuous, note: "14:57-15:00 为收盘集合竞价，见 closing_mechanism"}
       zh: "13:00-15:00（普通证券 13:00-14:57 连续竞价 + 14:57-15:00 收盘集合竞价；基金交易 13:00-15:00 全程连续竞价，无独立收盘集合竞价）"
       en: "13:00-15:00 (ordinary securities: 13:00-14:57 continuous auction + 14:57-15:00 closing call auction; fund trading: continuous auction throughout 13:00-15:00, with no separate closing call auction)"
       quote: "9:30 至 11:30、13:00 至 14:57 为连续竞价时间，14:57 至 15:00 为收盘集合竞价时间。基金交易，每个交易日的 9:15 至 9:25 为开盘集合竞价时间，9:30 至 11:30、13:00 至 15:00 为连续竞价时间。"
     after_market:
+      spec: {start: "15:05", end: "15:30", kind: fixed_price, note: "仅科创板股票"}
       zh: "科创板股票另有盘后固定价格交易，15:05-15:30，按当日收盘价成交"
       en: "STAR Market stocks additionally have an after-hours fixed-price trading session, 15:05-15:30, executed at that day's closing price"
       quote: "每个交易日的 15:05 至 15:30 为盘后固定价格交易时间，当日 15:00 仍处于停牌状态的股票不进行盘后固定价格交易。"
     night_session:
+      spec: {kind: none}
       zh: "无"
       en: "None"
 
@@ -262,6 +268,7 @@ market_structure:
     quote: "本所交易日为每周一至周五。国家法定假日和本所公告的休市日，本所市场休市。"
 
   opening_mechanism:
+    spec: {type: call_auction, auction_start: "09:15", auction_end: "09:25"}
     zh: "开盘集合竞价（9:15-9:25）"
     en: "Opening Call Auction (9:15-9:25)"
     quote: "9:15 至 9:25 为开盘集合竞价时间"
@@ -274,6 +281,7 @@ market_structure:
         accessed: 2026-08-13
 
   closing_mechanism:
+    spec: {type: call_auction, auction_start: "14:57", auction_end: "15:00"}
     zh: "收盘集合竞价（14:57-15:00，普通证券适用；基金交易无独立收盘集合竞价）"
     en: "Closing Call Auction (14:57-15:00)"
     detail: "9:20-9:25 开盘集合竞价阶段、14:57-15:00 收盘集合竞价阶段，交易主机不接受撤单申报。"
@@ -331,6 +339,7 @@ market_structure:
       zh: "百分比涨跌幅"
       en: "Percentage price-limit band"
     main_board:
+      spec: {limit_pct: 10, reference: prev_close, symmetric: true}
       zh: "±10%"
       en: "±10%"
       quote: "本所对股票、基金交易实行价格涨跌幅限制，涨跌幅限制比例为 10%。"
@@ -343,6 +352,7 @@ market_structure:
 
   circuit_breaker:
     enum: none
+    spec: {type: none}
     zh: "无指数级熔断（2016年1月8日起暂停实施）"
     en: "No index-level circuit breaker (suspended since 8 January 2016)"
     detail: |

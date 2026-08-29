@@ -7,31 +7,104 @@
 #     （同构于既有的 `enum` + `zh` 关系）。驱动图的量化值只在 `spec` 手写。
 #   - `quote` 仍是 verbatim 底稿；`spec` 是"从 quote 提取、被 quote 反查"的派生值。
 #     validate.py 校验 5b（[ADR-033]）：confidence:high 字段 spec 里每个数值都必须
-#     能在 quote 里逐字找到。
-#   - 三态：spec 值为 null（+ note）= 机制存在数值查不到；spec 里 type: none =
-#     机制确实不存在；spec 键缺省 = 尚未填。前端必须能区分（[ADR-035] D 节）。
+#     能在 quote 里逐字找到。→ spec 只能放当次 quote 撑得住的数值，撑不住的留给
+#     Phase 1b 补更完整的 quote 后再加。
+#   - 三态：spec 里某键为 null（+ note）= 机制存在数值查不到；spec 里 type=none
+#     = 机制确实不存在；spec 键整个缺省 = 尚未填。前端必须区分（[ADR-035] D 节）。
+#   - validate.py（Phase 1）校验：spec 必须是 dict；spec 里每个键必须在下面对应
+#     字段的 keys 里声明过（挡拼写错）。更深的形态合法性暂不强校验。
 #
-# 本文件按 `<chapter>.<field path>` 列出每个字段 spec 的可用键与类型。Phase 1
-# （market_structure 结构化）填充第五章条目并给 validate.py 加结构校验；在那之前
-# 只有下面这一条示范条目，其余章节 Phase 3 逐步补。
+# 进度：Phase 1a 填了第五章 core 字段的形状 + 5 家示范数据（cn-sse / us-nyse /
+# jp-jpx / de-eurex / in-nse）。Phase 1b 补其余 15 家 + volatility_interruption /
+# short_selling / market_maker_scheme 的 spec + JPX 37 档完整表。其余章节 Phase 3。
 
 fields:
+
+  # ── 交易时段：每个时段叶子字段一份 spec ──
+  market_structure.trading_sessions.pre_market: &session
+    doc: "一个交易时段的当地时刻与性质。start/end 是当地时间 HH:MM（24 小时制）。形态：start/end/kind 三键，或 kind=none（该时段不存在）。"
+    keys:
+      start: "HH:MM，当地时间"
+      end: "HH:MM，当地时间；跨零点的时段 end < start 表示次日"
+      kind: "pre_open_queue（挂单排队不成交）/ opening_auction / continuous / closing_auction / fixed_price / lunch_recess / after_hours_continuous / night / none"
+      randomised_seconds: "int，可选——结束时刻在此秒数内随机触发（如 ASX）"
+      note: "string，可选"
+  market_structure.trading_sessions.continuous_am: *session
+  market_structure.trading_sessions.lunch_break: *session
+  market_structure.trading_sessions.continuous_pm: *session
+  market_structure.trading_sessions.after_market: *session
+  market_structure.trading_sessions.night_session: *session
+
+  market_structure.opening_mechanism:
+    doc: "开盘价的形成方式。"
+    keys:
+      type: "call_auction / continuous_direct（直接连续竞价）/ dmm_auction（做市商主持）"
+      auction_start: "HH:MM，可选"
+      auction_end: "HH:MM，可选——集合竞价出清 / 开盘时刻"
+      note: "string，可选"
+
+  market_structure.closing_mechanism:
+    doc: "收盘价的形成方式。"
+    keys:
+      type: "call_auction / last_price（末笔成交价）/ vwap_window（尾盘 VWAP）/ dmm_auction"
+      auction_start: "HH:MM，可选"
+      auction_end: "HH:MM，可选"
+      trade_at_close_end: "HH:MM，可选——收盘后按收盘价撮合的延长窗口结束时刻"
+      note: "string，可选"
+
   market_structure.price_limits.main_board:
     doc: >
-      现货主板 / 主力合约的每日价格限制。四种形态之一：
-      (1) 百分比幅度  { limit_pct: <number>, reference: prev_close|prev_settlement, symmetric: <bool> }
-      (2) 无涨跌停    { type: none }
-      (3) 阶梯绝对值幅（JPX 式）{ type: stepwise, ladder: [...] }  —— ladder 结构 Phase 1 定
-      (4) 机制存在、档位数值未公布  { limit_pct: null, note: "<说明>" }
+      主板 / 主力合约的每日价格限制。y 轴的墙。形态之一：
+      (1) 百分比 limit_pct + reference + symmetric，非对称用 limit_pct_up / limit_pct_down；
+      (2) 无 type=none；
+      (3) 动态参考价 type=dynamic + band_pct（未公布则 null）+ reference_window_min（LULD / Eurex 式）；
+      (4) 阶梯绝对值幅 type=stepwise + reference + ladder（每项 base_min / base_max / band_abs）；
+      (5) 存在未公布 limit_pct=null + note。
     keys:
-      limit_pct: "number | null —— 单边百分比（10 表示 ±10%）"
-      reference: "prev_close | prev_settlement —— y 轴基准，喂给 [ADR-035] E 的 y 轴标签"
-      symmetric: "bool —— 涨跌幅度是否对称"
-      type: "none | stepwise —— 见 doc"
-      ladder: "list —— type: stepwise 时的绝对值档位表"
-      note: "string —— limit_pct: null 时说明为何查不到"
-    example:
-      spec: {limit_pct: 10, reference: prev_close, symmetric: true}
-      zh: "±10%（风险警示股票 ±5%，科创板见 other_boards）"
-      quote: "涨跌幅限制比例为 10%"
-      confidence: high
+      limit_pct: "number 或 null——单边百分比（10 = ±10%）"
+      limit_pct_up: "number，可选（非对称时）"
+      limit_pct_down: "number，可选（非对称时）"
+      reference: "prev_close / prev_settlement——y 轴基准（[ADR-035] E）"
+      symmetric: "bool"
+      type: "none / dynamic / stepwise"
+      band_pct: "number 或 null——type=dynamic 的价格带半宽（未公布则 null）"
+      reference_window_min: "number——type=dynamic 的滚动参考价窗口分钟数"
+      ladder: "list——type=stepwise 的档位表，每项 base_min / base_max / band_abs"
+      full_table_note: "string——ladder 只含 quote 撑得住的锚点时，说明完整表在哪"
+      note: "string"
+
+  market_structure.circuit_breaker:
+    doc: >
+      全市场 / 指数级 / 合约级熔断。形态：type=none，或 type=index_level + reference + levels，
+      或 type=stock_level / contract_level + note。
+    keys:
+      type: "none / index_level / stock_level / contract_level"
+      reference: "list——触发依据的指数，每项 index（名称）+ exchange（self 或其它交易所 id）。跨交易所联动（如 in-nse 看 Nifty 50 或 BSE Sensex）用多项表达（[ADR-036] #6）"
+      levels: "list——每项 threshold_pct + halt_minutes（number 或 null）+ day_end（bool）"
+      note: "string——stock_level / contract_level 无标准档位时的机制说明"
+
+  market_structure.volatility_interruption:
+    doc: "个股 / 合约级的波动性中断（价格出走廊触发短暂集合竞价）。形态 type=none 或走廊参数。"
+    keys:
+      type: "none，可选（确认无时）"
+      static_pct: "number 或 null——静态价格区间半宽"
+      dynamic_pct: "number 或 null——动态价格区间半宽"
+      auction_minutes: "number 或 null——触发后的集合竞价时长"
+      halt_minutes: "number 或 null——若为停牌而非集合竞价"
+      note: "string"
+
+  market_structure.short_selling:
+    doc: "卖空机制的结构化补充（分类见 enum short_selling_stance）。"
+    keys:
+      naked_allowed: "bool"
+      uptick_rule: "bool"
+      borrow_required: "bool"
+      note: "string"
+
+  market_structure.market_maker_scheme:
+    doc: "做市商制度的结构化补充。"
+    keys:
+      present: "bool"
+      quote_obligation: "bool——是否有持续双边报价义务"
+      max_spread_pct: "number 或 null——报价价差上限"
+      note: "string"
