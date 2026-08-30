@@ -9,7 +9,6 @@
     "source_lang": {},
     "group_id": {},
     "region": {},
-    "tier": {},
     "overview": {
       "type": "object",
       "properties": {
@@ -911,8 +910,7 @@
     "name_native",
     "official_languages",
     "source_lang",
-    "region",
-    "tier"
+    "region"
   ],
   "additionalProperties": true
 }

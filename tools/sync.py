@@ -33,7 +33,7 @@ PROJECT_DIR = ROOT / "PROJECT"
 VOLATILITY_MONTHS = {"stable": 24, "moderate": 12, "volatile": 6}
 ENVELOPE_KEYS = ("zh", "en", "enum", "spec", "detail", "quote", "sources", "verified", "confidence")
 # exchange_identity 里视为必填的字段；group_id 允许缺省（无集团归属）
-REQUIRED_IDENTITY_FIELDS = ("id", "name_zh", "name_native", "official_languages", "source_lang", "region", "tier")
+REQUIRED_IDENTITY_FIELDS = ("id", "name_zh", "name_native", "official_languages", "source_lang", "region")
 
 TODAY = datetime.date.today()
 
@@ -426,7 +426,6 @@ def apply_blocks(path: Path, blocks: dict):
 def build_enum_label_maps(enums):
     return {
         "region": {v["id"]: v["label_zh"] for v in (enums.get("region") or {}).get("values", [])},
-        "tier": {v["id"]: v["label_zh"] for v in (enums.get("tier") or {}).get("values", [])},
     }
 
 
@@ -434,12 +433,10 @@ def render_exchange_list(exchanges_expanded, enum_label_maps):
     if not exchanges_expanded:
         return "（暂无交易所数据）"
     region_map = enum_label_maps["region"]
-    tier_map = enum_label_maps["tier"]
-    lines = ["| ID | 名称 | 地区 | 批次 |", "|---|---|---|---|"]
+    lines = ["| ID | 名称 | 地区 |", "|---|---|---|"]
     for eid, ex in sorted(exchanges_expanded.items()):
         region = region_map.get(ex.get("region"), ex.get("region") or "")
-        tier = tier_map.get(ex.get("tier"), ex.get("tier") or "")
-        lines.append(f"| `{eid}` | {ex.get('name_zh', '')} | {region} | {tier} |")
+        lines.append(f"| `{eid}` | {ex.get('name_zh', '')} | {region} |")
     return "\n".join(lines)
 
 

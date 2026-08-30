@@ -18,12 +18,6 @@ region:
     - {id: apac, label_zh: 亚太, label_en: APAC}
     - {id: mena_africa, label_zh: 中东非, label_en: MENA & Africa}
 
-tier:
-  values:
-    - {id: pilot, label_zh: 首批标杆, label_en: Pilot}
-    - {id: standard, label_zh: 标杆扩展, label_en: Standard}
-    - {id: extended, label_zh: 横向铺开, label_en: Extended}
-
 organization_form:
   values:
     - {id: demutualized_listed, label_zh: 公司制（自身上市）, label_en: Demutualized, Listed}
