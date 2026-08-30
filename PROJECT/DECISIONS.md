@@ -871,3 +871,27 @@
 - `PROJECT/SOURCES.md`：记「`git pull` 会静默删除被忽略、但位置上要放 tracked 文件的目录」这一 git 行为，避免再次误判缓存丢失原因。
 
 **日期：** 2026-08-30
+
+### ADR-045 — Phase 3 第二棒：成本瀑布的 spec 形状 + 20 家数据层回填（渲染层留交互式迭代）
+
+**背景 / 四个设计轴（2026-08-30 用户 Q&A 定案）：** 市场机制剖面目前只有一个「印花税/交易税」chip，交易员看不到一笔往返交易被抽走多少、抽在哪几层。第十一章 9 个字段全是散文、`spec` 层为零。用 AskUserQuestion 定死四轴：
+
+1. **费种范围**：6 个「按笔显性成本」字段进瀑布条 —— `commission_structure` / `exchange_fees` / `clearing_fees` / `regulatory_fees` / `stamp_duty` / `financial_transaction_tax`。`capital_gains_tax` / `dividend_withholding_tax` 不是按笔成本，前端作「退出/持有税」注解另列，无 spec。隐性成本（买卖价差）按 CLAUDE.md 覆盖边界不收。
+2. **买卖不对称**：镜像双瀑布（买入侧 / 卖出侧各一条，底部各一小计 + 往返合计）。`side: buy/sell/both` 键承接（英股 SDRT 仅买方、A 股印花税仅卖方、港股双边、美股无）。
+3. **计量口径**：全部归一到「bp of 成交额」在**渲染层**做；`spec` 只存 quote 逐字撑得住的**原始值 + 单位**（`unit`: pct/permille/bp/per_share/per_lakh/per_crore/per_million/flat_*）。定额费 / 按股费按图上标注的假设成交额换算，脚注写明假设。
+4. **放置**：新增顶层 tab「成本瀑布 / Costs」。⚠️ Phase 3 后面还有 5 个章节可视化，全做顶层 tab 会到 10 个 —— 届时可能收拢成子导航，本棒先按顶层 tab 落地。
+
+**spec 形状（`schema/spec.yml` 新增 `costs.*` 共用 `cost_layer`）：** `rate`（number 或 null）/ `unit` / `currency` / `side` / `cap` + `cap_scope` / `floor` / `components`（多项分征费如 hk SFC+AFRC，逐项 name+rate，渲染层求和）/ `tiered`（按量/价分档，rate 取代表档）/ `type: none`（本市场不征该费种 —— 是关键事实不是空缺）/ `note`。三态同 [ADR-035] D：`rate: null`=费种存在但未摘引数值（幽灵条）、`type: none`=明确不征、键缺省=尚未填。
+
+**回填结果（协调者串行，3 个 commit，未并行——[ADR-043] 教训）：** 全 20 家共 **103 个 costs spec**。
+- **实体费率 bp 化**（`exchange_fees` / `clearing_fees` 多数、`regulatory_fees` 部分）：hk 0.00565%/0.0042%、cn-szse 经手费 0.0341‰、in-nse Rs 2.97/lakh、uk 0.45 bp（月封顶 £15,000）、ch 清算 CHF 0.80/settlement、au 清算 0.225 bp、sa 0.009%/0.005%/0.030%、de-xetra 清算 0.08 bp（€4 封顶）…
+- **多项分征费 `components`**：hk `regulatory_fees`（SFC 0.0027% + AFRC 0.00015%）、us-nyse/nasdaq `clearing_fees`（NSCC value-into/out-of-net per_million）、br-b3 `clearing_fees`（CCP + asset transfer）。
+- **`type: none`**（关键事实）：澳/加/巴/沙 `stamp_duty` + `financial_transaction_tax`、日 FTT（1999 废止）、德 印花税（1991 废止）、新 印花税（CDP 电子过户豁免）、多国 `regulatory_fees`（无按笔监管费）。
+- **`rate: null` 幽灵条**：所有 `commission_structure`（市场化议价，20/20 无统一费率）、maker-taker 所的 `exchange_fees`（us-nyse/nasdaq——quote 只含挂单返佣）、`tw-twse` 税/费（quote 为国字数字「千分之三」）、`za-jse` STT（quote 逗号小数「0,25%」）—— 后两类是 [ADR-039]「非阿拉伯数字 quote 不放数值 spec」纪律的一致处理。
+- **衍生品所**：`de-eurex` 成本按合约计、费率未摘引 → 多为 `rate: null` / `type: none`，瀑布近空（符合 [ADR-035] E 非现货降级）。
+
+**质量关：** `validate` 20 家 0/0（5b 逐字反查：44 个 `confidence: high` 且带数值的 spec 全部命中 quote）。`verify_quotes` FAIL=0（未动任何 quote / zh，只加 spec 键）。全库已填字段随 spec 增加。生成块无变化（`spec` 不进 progress-matrix / matrix.json）。
+
+**未做（本棒不含，留交互式会话按 Phase 2 节奏迭代）：** `docs/assets/app.js` 的 `renderCostWaterfall`（镜像双瀑布 SVG）+ 顶层 tab + 路由 + `index.html` tab + 假设成交额脚注 + 税注解摆位。渲染器要几轮视觉对齐，不宜后台任务单方面定死。
+
+**日期：** 2026-08-30

@@ -1306,6 +1306,7 @@ costs:
     confidence: medium
 
   commission_structure:
+    spec: {rate: null, note: "B3 不规定经纪佣金；多数零售券商已零佣金"}
     zh: "B3不规定经纪佣金，佣金由经纪商与客户协商，通常按交易金额比例或固定费率收取；B3仅收取交易费、清算费与资产转移费（见exchange_fees/clearing_fees/regulatory_fees）。"
     en: "B3 does not set broker commissions; commissions are negotiated between broker and client, typically as a percentage of trade value or a flat fee. B3 only charges trading, clearing and asset-transfer fees (see exchange_fees/clearing_fees/regulatory_fees)."
     detail: "Brokerage commission is a bilateral commercial term, not filed with B3; many retail brokers now offer zero-fee schemes. Treated as medium as it is inferred from B3's fee schedule scope."
@@ -1317,6 +1318,7 @@ costs:
     confidence: medium
 
   exchange_fees:
+    spec: {rate: null, unit: pct, side: both, tiered: true, note: "按交易类型/投资者类别/金额分档；本字段 quote 未给数值，clearing_fees 的费率表列首档 trading fee 0.00500%、逾 3 百万雷亚尔档 0.00375%"}
     zh: "按成交总金额收取一定比例的交易所费用（Exchange Fees），费率依交易类型（常规交易/超短线日内交易）、投资者类别（个人/基金/投资俱乐部）与投资金额分档"
     en: "Exchange Fees are charged as a percentage of total traded volume, varying by trade type (regular vs. very-short-term day trades), investor category (individual/funds/investment clubs), and amount invested"
     sources:
@@ -1327,6 +1329,7 @@ costs:
     confidence: high
 
   clearing_fees:
+    spec: {unit: pct, side: both, tiered: true, components: [{name: "CCP fee", rate: 0.0224}, {name: "asset transfer fee", rate: 0.0026}], note: "首档（月均成交额 ≤3 百万雷亚尔）；逾此档 CCP fee 降至 0.01615%"}
     zh: "B3清算所对现货交易收取清算（CCP）费，按成交金额计。B3现货费用表列示：月均成交额0至3百万雷亚尔档，交易费0.00500%、CCP费0.02240%、资产转移费0.0026%、合计0.0300%；月均成交额逾3百万雷亚尔档，CCP费降至0.01615%。"
     en: "B3 Clearinghouse charges a CCP (clearing) fee on spot trades, by trade value. B3's spot fee schedule: for monthly ADTV BRL 0–3M, Trading fee 0.00500%, CCP fee 0.02240%, Asset transfer fee 0.0026%, Total 0.0300%; for ADTV >3M, CCP fee falls to 0.01615%."
     detail: "B3 Equities & Investment Funds Fee Schedule (spot) lists Trading fee, CCP fee and Asset transfer fee by monthly ADTV tier."
@@ -1338,6 +1341,7 @@ costs:
     confidence: high
 
   regulatory_fees:
+    spec: {type: none, note: "巴西无单列于交易所的监管费；相关法定成分已内含于 B3 交易费与清算费"}
     zh: "巴西没有单列于交易所的'监管费'项目；与交易相关的法定收费已内含于B3交易费（自律组织/监管成分）与清算费。流转环节仅有的类交易税为IOF（股票资金汇入为0%）与所得税（资本利得15%）。"
     en: "Brazil has no separate exchange 'regulatory fee' line item; the statutory charges tied to trading are embedded in B3's trading fee (SRO/regulatory component) and clearing fee. The only transaction-style levies are IOF (0% on equity inflows) and income tax (15% capital gains)."
     detail: "CVM oversight is funded by its own regime, not a per-trade fee passed to investors via B3. The spot fee schedule lists only Trading/CCP/Asset-transfer fees — no separate regulatory fee row."
@@ -1351,6 +1355,7 @@ costs:
     confidence: medium
 
   stamp_duty:
+    spec: {type: none, note: "巴西无股票转让印花税；流转环节类交易税为 IOF（股票资金汇入 0%）"}
     zh: "巴西不对证券交易征收类似英国/香港式的印花税（stamp duty）；证券流转环节的类交易税为IOF（金融操作税，股票资金汇入当前为0%）与所得税。该字段对B3适用情形为N/A。"
     en: "Brazil levies no UK/Hong-Kong-style stamp duty on securities trades; the transaction-style levies on securities are IOF (Financial Transaction Tax, currently 0% on equity inflows) and income tax. This field is N/A for B3."
     detail: "No stamp-duty instrument applies to share transfers in Brazil. The only financial-transaction tax is IOF, listed on B3's taxation page with 0% on incoming equity resources."
@@ -1362,6 +1367,7 @@ costs:
     confidence: medium
 
   financial_transaction_tax:
+    spec: {rate: 0, unit: pct, note: "IOF（金融操作税）对交易所内股票/ETF 交易资金汇入现行 0%"}
     zh: "金融操作税（IOF, Imposto sobre Operações Financeiras）：现行对交易所内股票/ETF交易的资金汇入适用税率为0%（历史上曾有非零税率，本次仅确认当前状态）"
     en: "Financial Transaction Tax (IOF): the rate currently applicable to FX inflows related to on-exchange stock/ETF trading is 0% (rates have been non-zero historically; only the current 0% state was confirmed this session)"
     sources:

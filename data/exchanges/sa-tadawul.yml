@@ -1264,6 +1264,7 @@ costs:
     confidence: low
 
   commission_structure:
+    spec: {rate: null, note: "会员自定，部分平台零佣金；监管未设佣金上限"}
     zh: "经纪佣金由各家会员（经纪商）自行设定，费率不一；部分线上平台（如 Derayah、Al Rajhi 的某些账户）提供零佣金或极低佣金，无统一定价。监管层未设佣金上限"
     en: "Brokerage commissions are set by each Exchange Member and vary; some online platforms (e.g. Derayah, certain Al Rajhi accounts) offer zero or very low commissions, with no uniform pricing and no statutory cap"
     detail: "佣金为市场化定价，具体费率以各家经纪商公示为准；本结论来自第三方经纪商页面综述，confidence 定为 medium"
@@ -1276,6 +1277,7 @@ costs:
     verified: 2026-08-27
 
   exchange_fees:
+    spec: {rate: 0.009, unit: pct, side: both, note: "沙特交易所收取；第三方券商费率综述"}
     zh: "交易所交易费约为成交金额的 0.009%（由沙特交易所/Tadawul 收取）"
     en: "Exchange trading fee is approximately 0.009% of trade value (collected by Saudi Exchange / Tadawul)"
     detail: "费率来自第三方券商手续费综述（sahmcapital）；属交易所端收费，与 CMA 规费、Edaa 结算费、Muqassa 清算费分列"
@@ -1288,6 +1290,7 @@ costs:
     verified: 2026-08-27
 
   clearing_fees:
+    spec: {rate: 0.005, unit: pct, side: both, note: "Muqassa 中央对手方；另有 Edaa 结算费约 0.005%"}
     zh: "清算费约 0.005%（由 Muqassa 中央对手方收取）"
     en: "Clearing fee is approximately 0.005% (collected by Muqassa, the central counterparty)"
     detail: "费率来自第三方券商手续费综述（sahmcapital）；与结算费（Edaa 0.005%）分列"
@@ -1300,6 +1303,7 @@ costs:
     verified: 2026-08-27
 
   regulatory_fees:
+    spec: {rate: 0.03, unit: pct, side: both, note: "资本市场管理局 CMA 规费；服务费另加 15% VAT"}
     zh: "监管规费约 0.030%（由资本市场管理局 CMA 收取）；此外相关服务费适用 15% 增值税（VAT）"
     en: "Regulatory fee is approximately 0.030% (collected by the Capital Market Authority, CMA); applicable service fees are also subject to 15% VAT"
     detail: "费率来自第三方券商手续费综述（sahmcapital）；与交易/清算/结算费并列构成综合交易成本"
@@ -1312,6 +1316,7 @@ costs:
     verified: 2026-08-27
 
   stamp_duty:
+    spec: {type: none, note: "沙特对证券转让不征收印花税"}
     zh: "沙特对证券转让不征收印花税（stamp duty）"
     en: "Saudi Arabia does not impose stamp duty on securities transfers"
     detail: "来自律所/贸易促进机构对市场税费的综述；属无此税项"
@@ -1327,6 +1332,7 @@ costs:
     verified: 2026-08-27
 
   financial_transaction_tax:
+    spec: {type: none, note: "沙特不对证券交易征收金融交易税"}
     zh: "沙特不对证券交易征收金融交易税（FTT）"
     en: "Saudi Arabia does not impose a financial transaction tax (FTT) on securities trades"
     detail: "来自 CEPR 对各国 FTT 的清单（第三方综述）；属无此税项"

@@ -843,6 +843,7 @@ costs:
     confidence: medium
 
   commission_structure:
+    spec: {rate: null, note: "券商佣金，费率市场化协商，无统一标准"}
     zh: "券商佣金，费率市场化协商，无统一标准"
     en: "Brokerage commission, with rates negotiated on a market basis; no uniform standard"
     quote: "投资者买卖证券成交的，应当按规定向代其进行证券买卖的会员交纳佣金。"
@@ -853,6 +854,7 @@ costs:
     confidence: medium
 
   exchange_fees:
+    spec: {rate: null, unit: permille, side: both, note: "交易经手费；本文件未记录具体费率，深交所同期全国性降费后 A股为 0.0341‰ 双边"}
     zh: "交易经手费等，由交易参与人向交易所缴纳"
     en: "Trading handling fees, etc., paid by trading participants to the Exchange"
     quote: "交易参与人应当按规定向本所交纳交易经手费及其他费用；会员还应当按规定向本所交纳会员费。"
@@ -863,6 +865,7 @@ costs:
     confidence: medium
 
   clearing_fees:
+    spec: {rate: 0.01, unit: permille, side: both, note: "中国结算过户费；2022-04-29 起（此前 0.02‰）"}
     zh: "中国结算收取的过户费，2022年4月29日起沪深市场A股统一按成交金额0.01‰双向收取（此前为0.02‰）"
     en: "The share-transfer fee charged by ChinaClear; effective 29 April 2022, it was unified at 0.01‰ of transaction value, charged on both the buy and sell sides, for Shanghai/Shenzhen A-shares (previously 0.02‰)"
     detail: "信息来自第三方财经媒体（财联社）对中国结算通知的转述，非中国结算官方公告原页，confidence 标 medium。"
@@ -874,6 +877,7 @@ costs:
     confidence: medium
 
   regulatory_fees:
+    spec: {rate: 0.02, unit: permille, side: both, note: "证券交易监管费（发改价格〔2012〕2119号），按年交易额计；基金/债券免收；现行费率本次未再核实"}
     zh: "存在独立于交易所经手费之外的「证券交易监管费」，由中国证监会向交易所收取（2012年起对股票按年交易额0.02‰收取，基金/债券免收）；该费率是否为现行值本次未核实到更新的官方文件"
     en: "An independent \"securities trading regulatory fee\" exists on top of the Exchange's own handling fee, collected by the CSRC from the exchanges (set in 2012 at 0.02‰ of annual trading value for stocks, with funds and bonds exempt); whether this rate remains current was not confirmed against a more recent official document this round"
     detail: "出处为国家发展改革委、财政部联合发布的《关于降低证券、期货市场监管费收费标准等问题的通知》（发改价格〔2012〕2119号），托管于财政部官网。该通知明确「有效期3年」（至2015年），本次未找到后续重新审批/延续的官方公告，故 confidence 标 medium 而非 high——不确定现行费率是否仍为0.02‰，这不属于「没有独立监管费概念」的情形，而是「存在但现行费率未再核实」。"
@@ -885,6 +889,7 @@ costs:
     confidence: medium
 
   stamp_duty:
+    spec: {rate: 0.5, unit: permille, side: sell, note: "2023-08-28 起减半（此前单边 1‰）"}
     zh: "0.05%（单边，卖方缴纳）"
     en: "0.05% (one-sided, paid by the seller)"
     detail: |

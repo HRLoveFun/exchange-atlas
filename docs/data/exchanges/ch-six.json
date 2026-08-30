@@ -1835,6 +1835,10 @@
     },
     "costs": {
       "commission_structure": {
+        "spec": {
+          "rate": null,
+          "note": "会员券商与客户双边合同约定，交易所不统一规定佣金率"
+        },
         "zh": "经纪佣金由交易参与者（会员券商）与客户在双边合同中约定，交易所不统一规定佣金率；SIX自身收取的是按交易与参与者计的交易费（见exchange_fees）及接入/容量费，不涉及对投资者的佣金定价。",
         "en": "Brokerage commissions are set bilaterally between the trading participant (member firm) and its client; the exchange does not prescribe a uniform commission rate. SIX itself charges a per-transaction, per-participant exchange fee (see exchange_fees) and access/capacity fees, not investor-facing commissions.",
         "detail": "佣金属会员机构商业定价；本字段记录为「由券商自行定价」。",
@@ -1848,10 +1852,15 @@
         ],
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "exchange_fees": {
+        "spec": {
+          "rate": null,
+          "unit": "pct",
+          "tiered": true,
+          "note": "从价费 + 按笔数 + 按月容量费；费率表见《List of Charges under Trading Rules》(LOC-TR)，本次未摘引具体档位"
+        },
         "zh": "SIX对所有场内交易收取费用，按「每笔交易 × 每参与者」计提，取决于该参与者的总交易额（从价费，ad valorem fee）与交易笔数；另有按月容量费（依所选接口与吞吐量）。具体费率见《List of Charges under Trading Rules》（LOC-TR）。",
         "en": "SIX charges a fee for all on-Exchange transactions, calculated per transaction and per participant, depending on the participant's total trading turnover (money involved; ad valorem fee) and number of transactions; a monthly capacity fee also applies by interface and throughput. Specific rates are in the List of Charges under Trading Rules (LOC-TR).",
         "detail": "费用结构为从价费+按笔数，外加容量费；费率表在LOC-TR中。",
@@ -1870,10 +1879,16 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "clearing_fees": {
+        "spec": {
+          "rate": 0.8,
+          "unit": "flat_per_settlement",
+          "currency": "CHF",
+          "side": "both",
+          "note": "SIX Swiss Exchange 交易，自 2025 年起；另有参与者年度会员费 ICM/GCM CHF 25,000、NCM CHF 3,500"
+        },
         "zh": "SIX x-clear对清算收取费用：自2025年起，SIX Swiss Exchange（SSX）交易的清算费为每笔结算CHF 0.80；另设参与者年度会员费（ICM/GCM为CHF 25,000/年，NCM为CHF 3,500/年）。具体以清算费用通知函（Clearing Fees Letter）为准。",
         "en": "SIX x-clear charges clearing fees: from 2025, clearing of SIX Swiss Exchange (SSX) trades is CHF 0.80 per settlement; an annual participant membership fee also applies (ICM/GCM CHF 25,000 p.a., NCM CHF 3,500 p.a.). Details per the Clearing Fees Letter.",
         "detail": "费率来自SIX x-clear清算费用通知函（flb-clr-fees-240701-en.pdf）。",
@@ -1887,10 +1902,13 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "regulatory_fees": {
+        "spec": {
+          "type": "none",
+          "note": "瑞士联邦层面对场内交易不征收单独的监管费；交易环节法定费用为交易所费 + 证券交易印花税"
+        },
         "zh": "瑞士联邦层面对场内交易不征收单独的「监管费」（类似美国SEC费）；交易环节实际发生的法定费用为交易所交易费（exchange_fees）与联邦证券交易印花税（stamp_duty）。FINMA等监管机构对参与者的监管不以逐笔交易费形式转嫁。",
         "en": "Switzerland levies no separate federal per-transaction 'regulatory fee' on exchange trades (unlike, e.g., the U.S. SEC fee); the statutory charges that actually arise at the transaction level are the exchange fee (see exchange_fees) and the federal securities transfer stamp tax (see stamp_duty). FINMA's supervision of participants is not passed through as a per-trade fee.",
         "detail": "《List of Charges under Trading Rules》(LOC-TR)的费用表中列有交易所交易费、从价费等，但无独立「监管费」项，支持「瑞士无逐笔监管费」的判断。",
@@ -1909,10 +1927,15 @@
         ],
         "verified": "2026-08-27",
         "confidence": "medium",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "stamp_duty": {
+        "spec": {
+          "rate": 0.15,
+          "unit": "pct",
+          "side": "both",
+          "note": "本国证券 0.15%（1,5‰）、外国证券 0.3%（3,0‰）；买卖双方各承担一半（Umsatzabgabe）"
+        },
         "zh": "联邦证券交易印花税（Umsatzabgabe/transfer stamp tax）：本国证券1.5‰（合0.15%），外国证券3.0‰（合0.3%）——按证券买卖对价计算，由境内证券商作为交易方或中介参与时征收，实务上买卖双方各承担一半",
         "en": "Federal securities transfer stamp tax (Umsatzabgabe): 1.5‰ (0.15%) for securities issued by a Swiss tax resident, 3.0‰ (0.3%) for securities issued by a foreign tax resident — calculated on the consideration paid, levied where a Swiss securities dealer participates as a contracting party or intermediary; in practice split between buyer and seller",
         "detail": "2026-08-21 按 OPEN-QUESTIONS 建议改抓 ESTV 官网德语版子页（英文版总览页 `estv.admin.ch/\nen/stamp-duty` 此前及本次均只确认税种法律性质，未给出具体税率数字），在《Umsatzabgabe\nkurz erklärt》页找到官方原文，以千分比（‰）计价\"1,5 ‰\"/\"3,0 ‰\"，与常用的0.15%/0.3%\n百分比表述在数学上完全等价（1.5‰=0.15%，3.0‰=0.3%），非另一套不同数字。zh/en为便于\n与本项目其他交易所同类字段对照，采用百分比表述；quote同时保留德文官方原始千分比表述与\n第三方PwC税务简报的百分比转述作为交叉印证。confidence 由此前的 medium（仅第三方来源）\n升级为 high（已有官方原文撑腰）。\n",
@@ -1936,8 +1959,7 @@
         "quote": "Die Abgabe beträgt 1,5 ‰ für inländische Wertpapiere und 3,0 ‰ für ausländische Wertpapiere. ... The ordinary tax rate of Swiss securities transfer tax is 0.15% for securities issued by a tax resident of Switzerland and 0.3% for securities issued by a tax resident of a foreign country.",
         "confidence": "high",
         "verified": "2026-08-16",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "financial_transaction_tax": {
         "zh": "",

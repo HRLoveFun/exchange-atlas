@@ -1607,6 +1607,10 @@
     },
     "costs": {
       "commission_structure": {
+        "spec": {
+          "rate": null,
+          "note": "会员与客户自行约定；Eurex 对做市商/特定产品设费用减免与返利"
+        },
         "zh": "交易所不规定经纪商对客户收取的佣金；Eurex 自身按合约收取交易/清算费（见 exchange_fees、clearing_fees），经纪佣金由会员（银行/券商）与客户自行约定。此外 Eurex 对做市商与特定产品设有费用减免/返利（rebates）。",
         "en": "The exchange does not set broker-to-client commissions; Eurex itself charges per-contract trading/clearing fees (see exchange_fees, clearing_fees), while broker commissions are negotiated between members (banks/brokers) and their clients. Eurex also offers fee reductions/rebates for market makers and selected products.",
         "sources": [
@@ -1620,10 +1624,14 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "exchange_fees": {
+        "spec": {
+          "rate": null,
+          "unit": "flat_per_trade",
+          "note": "按每合约标准费计（Price List 第 3 章，本次未摘引）；成交撤销/更正申请每笔 EUR 500"
+        },
         "zh": "按三类收费：交易参与准入费、交易参与年费（由管理董事会确定）、交易员资格考试费；另有成交撤销/更正申请费每笔500欧元",
         "en": "Three fee categories: admission fee, annual participation fee (set by the Management Board), and Exchange Trader examination fee; a separate EUR 500 fee applies per cancellation/correction application",
         "quote": "Fees are levied for 1. admission to participation in exchange trading, 2. participation in exchange trading, and 3. participation in the Exchange trader examination. ... This fee shall amount to EUR 500 per application.",
@@ -1647,10 +1655,14 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "clearing_fees": {
+        "spec": {
+          "rate": null,
+          "unit": "flat_per_trade",
+          "note": "按每合约标准费（Eurex Clearing 价目表第 3 章）；部分产品按合约价值百分比计"
+        },
         "zh": "Eurex Clearing 对衍生品交易的撮合/登记收取交易与清算费，按「每合约标准费」（standard fee per contract）计费，具体费率按产品/产品类别列于《Eurex Clearing AG 价目表》(Price List) 第 3 章；部分产品（如股票总回报期货）按合约价值百分比计费。",
         "en": "Eurex Clearing charges trading and clearing fees for the matching/registration of derivatives transactions, billed as a 'standard fee per contract', with rates per product/product class set out in chapter 3 of the Price List of Eurex Clearing AG; some products (e.g. Equity Total Return Futures) are charged as a percentage of contract value.",
         "sources": [
@@ -1664,10 +1676,13 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "regulatory_fees": {
+        "spec": {
+          "type": "none",
+          "note": "费用条例（准入/年费/考试费）本身具监管收费属性；无按笔征收的监管机构费"
+        },
         "zh": "Eurex Deutschland 的费用由《费用条例》(Fee Regulations) 这一公法性质的收费目录规定（准入费、年费、考试费等，由交易所理事会/管理董事会确定），本身即具监管收费属性；本次未在官方价目表中识别到单独的「政府监管征费」（如按笔征收的监管机构费）。衍生品交易亦不受德国金融业交易税（Finanztransaktionssteuer）覆盖（见 financial_transaction_tax）。",
         "en": "Eurex Deutschland's fees are set out in its public-law Fee Regulations (admission, annual, examination fees, determined by the Exchange Council/Management Board), which are inherently regulatory in nature; no separate per-trade government 'regulatory levy' was identified in the official fee schedule. Derivatives trading is also outside the scope of any German financial transaction tax (see financial_transaction_tax).",
         "sources": [
@@ -1681,10 +1696,13 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "stamp_duty": {
+        "spec": {
+          "type": "none",
+          "note": "德国无股票印花税（1991 年废止）；场内衍生品亦不发生证券过户印花税"
+        },
         "zh": "N/A — 德国对衍生品交易不征收印花税（英国式的股票印花税/荷兰式转让税不适用于场内衍生品），衍生品本身亦不发生证券过户印花税。",
         "en": "N/A — Germany does not levy stamp duty on derivatives trading (the UK-style share stamp duty / Dutch-style transfer tax does not apply to on-exchange derivatives), and derivatives do not involve a stampable securities transfer.",
         "confidence": "medium",
@@ -1707,11 +1725,14 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null,
         "quote": null
       },
       "financial_transaction_tax": {
+        "spec": {
+          "type": "none",
+          "note": "EU FTT 提案未生效；德国未单独立法对衍生品征交易税"
+        },
         "zh": "无金融业交易税适用于 Eurex 衍生品：欧盟金融业交易税（EU FTT）提案至今未生效；德国亦未单独立法对衍生品征收交易税。少数标的股票可能适用德国《交易所 turnover 税》(Börsenumsatzsteuer)，但该税不延伸至在 Eurex 交易的衍生品合约本身。具体适用性本次未逐条核实，已记入 OPEN-QUESTIONS。",
         "en": "No financial transaction tax applies to Eurex derivatives: the EU FTT proposal is not in force, and Germany has not enacted a standalone transaction tax on derivatives. A few underlying equities may be subject to the German stock-exchange turnover tax (Börsenumsatzsteuer), but that does not extend to the derivative contracts traded on Eurex. Exact applicability was not individually verified this session (see OPEN-QUESTIONS).",
         "confidence": "medium",
@@ -1734,7 +1755,6 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null,
         "quote": null
       },

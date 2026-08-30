@@ -20,7 +20,10 @@
 # 值幅制限完整 34 档 ladder（Rule 2 Paragraph 1，此前误记为 37 档）。
 # [ADR-042]（2026-08-30）加了 execution_model / error_trade_rule / order_types /
 # tick_size 四个 spec 形状（对齐资深交易员清单里「可查证」的维度），short_selling
-# 加 margin_note 键——数据回填并入 Phase 3。其余章节 Phase 3。
+# 加 margin_note 键——数据回填 [ADR-043] 已完成。
+# [ADR-045]（2026-08-30）Phase 3 成本瀑布：第十一章 6 个按笔显性成本字段
+# （commission_structure / exchange_fees / clearing_fees / regulatory_fees /
+# stamp_duty / financial_transaction_tax）共用一份 cost_layer 形状。其余章节 Phase 3。
 
 fields:
 
@@ -166,3 +169,38 @@ fields:
       ladder: "list，可选——每项 price_min / price_max / tick"
       full_table_note: "string——ladder 只含锚点时说明完整表在哪"
       note: "string"
+
+  # ── 第十一章｜交易成本：成本瀑布（Phase 3，[ADR-045]）──
+  # 6 个「按笔显性成本」字段共用一份形状，各字段一份 spec，描述该层成本的费率 /
+  # 单位 / 征收方向。渲染为「镜像双瀑布」（买入侧 / 卖出侧）时：
+  #   side=both → 买卖两侧各画一段；side=buy / sell → 只在对应侧画；
+  #   type=none → 该市场明确「不征」该费种 / 税目（画 0 高度 + 标注，是关键事实不是空缺）；
+  #   rate=null → 费种存在但 quote 未给数值（幽灵条，如佣金市场化议价）；
+  #   spec 键整个缺省 → 尚未填（[ADR-035] D 的三态）。
+  # 归一到「bp of 成交额」在渲染层做（per_share / flat_* / per_lakh 等按图上标注的
+  # 假设成交额换算）；spec 只存 quote 逐字撑得住的原始值 + 单位（confidence: high
+  # 走校验 5b；medium 不强校验，仍只放 zh / quote 明确给出的数值）。
+  # capital_gains_tax / dividend_withholding_tax 不在此形状——它们不是按笔成本，
+  # 前端作「退出 / 持有税」注解另列，无 spec。
+  costs.commission_structure: &cost_layer
+    doc: >
+      一层按笔显性成本的费率结构。rate + unit 给费率（原始单位，渲染层归一到 bp）；
+      side 给征收方向；type=none 表示本市场不征该费种 / 税目；rate=null 表示费种存在
+      但 quote 未给数值（如佣金市场化议价）。数值须逐字在 quote 里（校验 5b）。
+    keys:
+      rate: "number 或 null——费率数值，单位见 unit。null = 费种存在但无可摘引数值"
+      unit: "pct（% of 成交额）/ permille（‰ of 成交额）/ bp（基点 of 成交额）/ per_share（每股，配 currency）/ per_lakh（每十万成交额）/ per_crore（每千万成交额）/ per_million（每百万成交额）/ flat_per_trade / flat_per_settlement / flat_per_order（后三者配 currency）"
+      currency: "string，可选——unit 为绝对额类（per_share / flat_* / per_lakh / per_crore / per_million）时的计价货币，ISO 4217（HKD / GBP / INR / USD / CHF / JPY…）"
+      side: "buy / sell / both——征收方向。both = 买卖各计一次"
+      cap: "number 或 null，可选——封顶额（绝对额，配 currency）"
+      cap_scope: "per_trade_side / per_trade / per_month，可选——cap 的适用范围"
+      floor: "number 或 null，可选——每笔下限（绝对额，配 currency）"
+      components: "list，可选——该层由多项分征费构成时（如香港 SFC 征费 + AFRC 征费），每项 name + rate（单位同 unit）；渲染层求和。此时顶层 rate 可为代表项或缺省"
+      tiered: "bool，可选——按月成交量 / 订单数 / 价格分档；rate 取首档或代表档，note 说明"
+      type: "none——确认本市场不征该费种 / 税目（如加拿大无印花税、日本 1999 年废止证券交易税、澳洲各州废除上市证券转让印花税）"
+      note: "string"
+  costs.exchange_fees: *cost_layer
+  costs.clearing_fees: *cost_layer
+  costs.regulatory_fees: *cost_layer
+  costs.stamp_duty: *cost_layer
+  costs.financial_transaction_tax: *cost_layer

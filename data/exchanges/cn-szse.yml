@@ -1263,6 +1263,7 @@ costs:
     confidence: medium
 
   commission_structure:
+    spec: {rate: null, note: "券商佣金，费率市场化协商，无统一标准"}
     zh: "券商佣金，费率市场化协商，无统一标准"
     en: "Brokerage commission, market-negotiated with no uniform standard rate"
     quote: "投资者买卖证券成交的，应当按规定向会员交纳佣金。"
@@ -1273,6 +1274,7 @@ costs:
     confidence: high
 
   exchange_fees:
+    spec: {rate: 0.0341, unit: permille, side: both, note: "2023-08-28 起（此前 0.0487‰）；大宗交易再下浮 A股30%/B股50%"}
     zh: "A股、B股交易经手费按成交金额 0.0341‰ 双边收取（2023年8月28日起下调；此前为0.0487‰）；大宗交易按下调后费率再下浮（A股30%、B股50%）；另有会员管理费用"
     en: "Transaction handling fee: 0.0341‰ of trade value, bilateral (reduced from 0.0487‰ effective 28 August 2023)"
     detail: "与上交所同步下调（同一次全国性降费政策，cn-sse.yml 未记录具体费率数字，本条是本次新增的更具体数据）。"
@@ -1287,6 +1289,7 @@ costs:
     confidence: high
 
   clearing_fees:
+    spec: {rate: 0.01, unit: permille, side: both, note: "中国结算过户费；2022-04-29 起（此前 A股 0.02‰）"}
     zh: "股票交易过户费由中国结算统一收取（不由证券公司留存），现行标准为按成交金额0.01‰双向收取（2022年4月29日起执行；此前沪深市场A股为0.02‰，北京市场A股及挂牌公司股份为0.025‰）"
     en: "The stock transfer fee is collected uniformly by ChinaClear (not retained by securities firms); the current rate is 0.01‰ of trade value, charged bilaterally, effective 29 April 2022 (previously 0.02‰ for SSE/SZSE A-shares and 0.025‰ for Beijing Stock Exchange A-shares and NEEQ-listed shares)"
     detail: "该费用是与交易所自身经手费（见 exchange_fees）平行的另一项独立费用，由中国结算这一登记结算机构收取，非深交所收取；来源为第三方媒体转载中国结算官网公告，非本次直接抓取到 chinaclear.cn 官网原始公告页，confidence 依铁律封顶 medium。"
@@ -1303,6 +1306,7 @@ costs:
     detail: "未核实到深交所或中国证监会体系下、独立于交易所经手费（exchange_fees）与清算过户费（clearing_fees）之外、以「监管费」命名且现行有效征收的费用项目。历史上曾存在「证券监管费」（证管费）项目，本次会话未能确认其当前是否仍在征收及现行费率，留空并转 OPEN-QUESTIONS，不排除中国大陆现行收费体系确实不单列此类费用（与 CLAUDE.md 任务说明的预期一致）。"
 
   stamp_duty:
+    spec: {rate: 0.5, unit: permille, side: sell, note: "2023-08-28 起减半（此前单边 1‰）"}
     zh: "0.05%（单边，卖方缴纳）"
     en: "0.05% (one-sided, paid by the seller)"
     detail: |
@@ -1318,6 +1322,7 @@ costs:
     confidence: medium
 
   financial_transaction_tax:
+    spec: {type: none, note: "中国大陆证券交易国家层面税收以印花税为主体（见 stamp_duty）；无独立 FTT 税目"}
     zh: "本次会话未见独立于证券交易印花税（见 stamp_duty 字段）之外、以「金融交易税」单独命名的税种；中国大陆对证券交易征收的国家层面税收目前以证券交易印花税（单边0.05%，卖方缴纳）为主体"
     en: "This session found no tax separately labelled a 'financial transaction tax' distinct from the securities transaction stamp duty (see stamp_duty); mainland China's national-level tax on securities trading is currently, in substance, the stamp duty alone (0.05%, one-sided, paid by the seller)"
     confidence: low

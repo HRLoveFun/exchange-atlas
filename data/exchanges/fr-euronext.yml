@@ -1987,6 +1987,7 @@ costs:
       accessed: 2026-08-16
     confidence: high
   commission_structure:
+    spec: {rate: null, note: "经纪商自定；Euronext 仅向会员收费"}
     zh: 投资者向经纪商支付的佣金由各家经纪商自定，非交易所统一规则；Euronext 仅向会员收取交易费（见 exchange_fees），不向终端投资者直接收费，故无统一佣金表。结构通常为按笔/按金额的比例佣金或固定费用，因经纪商与账户类型而异。
     en: The commission an investor pays to a broker is set by each broker individually,
       not by a unified exchange rule; Euronext only charges trading fees to its members
@@ -2001,6 +2002,7 @@ costs:
     confidence: medium
     verified: 2026-08-27
   exchange_fees:
+    spec: {rate: 0.95, unit: bp, side: both, tiered: true, note: "方式一（默认，会员逐月二选一）：按月成交额阶梯 0.95→0.45 bp + 另按已执行订单笔数阶梯 EUR 0.13→0.05/笔（flat，未计入 rate）；方式二为最低承诺费方案"}
     zh: 标准股票交易费提供两种计价方式（会员逐月二选一）：方式一（默认）按已执行订单笔数阶梯收费（前70万笔€0.13/笔，其后每笔递减至最低€0.05）+
       按月成交金额阶梯收费（从0.95个基点递减至0.45个基点）；方式二为「最低承诺费+更低单笔/按值费率」的替代方案，区分蓝筹股（CAC 40/AEX/BEL
       20/PSI/SBF 120/AMX/ISEQ 20/OBX/FTSE MIB成分股）与其他证券两档费率
@@ -2020,6 +2022,7 @@ costs:
       bps
     confidence: high
   clearing_fees:
+    spec: {rate: null, note: "Euronext Clearing（CC&G）自有费率表，本次未核实"}
     zh: 清算费由 Euronext Clearing（CCP，法定实体 Cassa di Compensazione e Garanzia S.p.A.）按其自有清算费率表另行收取，不在本次核实的现货交易费指南（Cash
       Markets Trading Fee Guide）范围内；具体逐产品清算费率本次未逐一核实。
     en: Clearing fees are charged separately by Euronext Clearing (the CCP, legal
@@ -2035,6 +2038,7 @@ costs:
     confidence: medium
     verified: 2026-08-27
   regulatory_fees:
+    spec: {type: none, note: "监管性收费由各本国主管机关另征，不通过交易所代收"}
     zh: Euronext 作为交易所/市场运营者，不直接代征「监管费」(regulatory fee) 性质的统一收费；其向会员收取的费用为交易费、做市商费、连接费等（见
       exchange_fees 及现金市场费率指南），监管性收费（如各国金融监管机构对发行人/中介的规费）由各本国主管机关另行计征，不通过交易所统一代收。
     en: As an exchange / market operator, Euronext does not levy a unified "regulatory
@@ -2051,6 +2055,7 @@ costs:
     confidence: medium
     verified: 2026-08-27
   stamp_duty:
+    spec: {type: none, note: "一所多国：法国 2008 年废除股票印花税；七国均无经典股票现货印花税（法/意有 FTT，见 financial_transaction_tax）"}
     zh: 印花税属各国税法事项而非交易所规则；本所七个市场所属国中，法国自 2008 年起已废除股票交易印花税（但仍对部分衍生品/高频交易征收金融交易税，见
       financial_transaction_tax），其余国家亦无针对普通股现货交易的经典「印花税」(stamp duty)。比利时/荷兰/爱尔兰/葡萄牙/挪威各有其他交易相关税种，但均非印花税性质。
     en: Stamp duty is a matter of each country's tax law rather than an exchange rule;
@@ -2068,6 +2073,7 @@ costs:
     confidence: medium
     verified: 2026-08-27
   financial_transaction_tax:
+    spec: {rate: null, unit: pct, side: buy, note: "法国 FTT：市值 >EUR 10 亿的法国注册实体股票收购（买方）；意大利另有类 Tobin Tax；本字段 quote 未给税率（法国现行 0.3%）；七国税制各异"}
     zh: 法国、意大利对本国上市大市值公司股票交易开征金融交易税。法国 FTT 适用于在受监管市场（法国或外国）交易的、由法国注册实体发行的、市值超过 €1
       billion 的股票收购；意大利则另有类 Tobin Tax 式的股票交易税。荷兰/比利时/爱尔兰/葡萄牙/挪威税制各异，部分无此税。这是「一所多国」结构下税费类字段的典型难点——单一字段无法承接七国不同税制。
     en: France and Italy levy financial transaction taxes on trades in large-cap domestic

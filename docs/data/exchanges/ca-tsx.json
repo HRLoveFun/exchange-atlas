@@ -1612,6 +1612,10 @@
     },
     "costs": {
       "commission_structure": {
+        "spec": {
+          "rate": null,
+          "note": "佣金由 CIRO 监管的投资交易商自设（可协商）"
+        },
         "zh": "TSX 本身不规定经纪佣金费率；佣金由 CIRO 监管的投资交易商自行设定（可协商），常见为按笔固定费或按交易金额比例，线上折扣券商多采用按笔低费模式。佣金与交易所经手费（exchange_fees）是分开的两类成本",
         "en": "TSX does not set broker commission rates; commissions are set by CIRO-regulated investment dealers (negotiable), commonly a flat per-trade fee or a percentage of trade value, with online discount brokers typically charging low flat per-trade fees. Commissions are distinct from the exchange trading fee (exchange_fees)",
         "detail": "佣金属券商-客户之间的商业安排，受 CIRO 行为准则（NI 31-103 适当性等）约束但不设统一价目；本字段定性描述，无交易所统一佣金数字可引。",
@@ -1625,10 +1629,17 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "quote": null
       },
       "exchange_fees": {
+        "spec": {
+          "rate": 0.0027,
+          "unit": "per_share",
+          "currency": "CAD",
+          "side": "both",
+          "tiered": true,
+          "note": "maker-taker：吃单方每股每边 $0.0027（interlisted equities ≥$1）、挂单方返佣 ($0.0023)；<$1 / non-interlisted / ETF 分档不同"
+        },
         "zh": "做市商-吃单者模式（maker-taker）：以非美元计价、非跨挂牌股票为例，主动吃单费约每股$0.0027（$1及以上价位），提供流动性一方获返佣约每股$0.0023；不同价位/品类（跨挂牌股票、ETF、低价股）费率分层",
         "en": "Maker-taker pricing model: for example, non-interlisted equities priced at $1.00 or above are charged roughly $0.0027/share for removing displayed liquidity, with a roughly $0.0023/share rebate for providing it; rates are further tiered by price level and security type (interlisted equities, ETFs, sub-$1 stocks)",
         "detail": "完整费率表按会员机构分层（如DRK暗盘、Retail零售通道等）另有细分档位，本条只归纳主要档位，不逐条摘录。",
@@ -1642,8 +1653,7 @@
         "quote": "TSX Post-Open Continuous Trades Involving Displayed Orders in Equities and Exchange Traded Funds (ETFs):\n\n                                                                                         Where trade price per share is:\n                                                                                                                  ≥$1.00\n                                                                 < $1.00         Non-Interlisted\n                                                                                                           Interlisted Equities             ETFs\n                                                                                   Equities\nRemoving Displayed with Displayed or Dark\n  Fee / share / side                                           $0.00020              $0.0015                     $0.0027                    $0.0017\nProviding Displayed\n  Fee / share / side                                               $0                ($0.0011)                  ($0.0023)                  ($0.0013)\n",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "clearing_fees": {
         "zh": "TSX 现货交易的中央对手方清算由 CDS 提供，费用按《CDS Participant Fee Schedule》（经 OSC 批准）向 CDS Participant（即券商）收取，并非直接向投资者逐笔征收；具体逐笔清算费率（如 CCP 失败收受费等）在 CDS 价目表中分服务列示",
@@ -1663,6 +1673,10 @@
         "quote": null
       },
       "regulatory_fees": {
+        "spec": {
+          "type": "none",
+          "note": "加拿大联邦层面无类似美国 SEC Section 31 的按交易额监管费"
+        },
         "zh": "加拿大联邦层面对证券交易不征收类似美国 SEC Section 31 的按交易额「监管费」；TSX 层面唯一的交易相关费用即交易所经手费（maker-taker，见 exchange_fees），并无独立名为「regulatory fee」的征费。因此本字段记为不适用（无独立的联邦/省级证券交易监管费）",
         "en": "At the Canadian federal level there is no per-trade 'regulatory fee' analogous to the U.S. SEC Section 31 fee on securities transactions; the only transaction-level charge at TSX is the exchange trading fee (maker-taker, see exchange_fees), and there is no separately named 'regulatory fee' levy. This field is therefore not applicable (no standalone federal/provincial securities transaction regulatory fee)",
         "detail": "加拿大没有联邦证券交易税/监管费这一费种（见 financial_transaction_tax / stamp_duty 同为不适用）。若未来省或联邦新设该类费，需重新核实。",
@@ -1676,10 +1690,13 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "quote": null
       },
       "stamp_duty": {
+        "spec": {
+          "type": "none",
+          "note": "There is no stamp duty in Canada（跨境并购税务指南）"
+        },
         "zh": "不适用：加拿大对证券转让不征收印花税（stamp duty）。跨境并购税务指南明确指出「There is no stamp duty in Canada」；联邦无证券交易印花税，各省印花税一般也不适用于证券交易所上市证券的转让",
         "en": "Not applicable: Canada imposes no stamp duty on the transfer of securities. A cross-border M&A guide states plainly 'There is no stamp duty in Canada'; there is no federal securities-transfer stamp duty, and provincial stamp duties generally do not apply to transfers of exchange-listed securities",
         "sources": [
@@ -1693,10 +1710,13 @@
         "confidence": "medium",
         "detail": "该字段volatility: volatile，按铁律必须有sources才能填；本次未找到对「加拿大联邦层面是否征收证券交易印花税」的官方一手确认，不凭常识填写，留空。",
         "verified": "2026-08-27",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "financial_transaction_tax": {
+        "spec": {
+          "type": "none",
+          "note": "Canada – No Financial Transaction Tax Currently Found"
+        },
         "zh": "不适用：加拿大联邦层面对证券买卖不征收金融交易税（FTT）。学术研究汇编《Financial Transactions Taxes Around the World》明确列示「Canada – No Financial Transaction Tax Currently Found」",
         "en": "Not applicable: Canada imposes no federal financial transaction tax (FTT) on securities purchases and sales. The research compilation 'Financial Transactions Taxes Around the World' lists 'Canada – No Financial Transaction Tax Currently Found'",
         "sources": [
@@ -1710,7 +1730,6 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "capital_gains_tax": {

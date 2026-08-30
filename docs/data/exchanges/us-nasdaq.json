@@ -1652,6 +1652,14 @@
         "sources": null
       },
       "exchange_fees": {
+        "spec": {
+          "rate": null,
+          "unit": "per_share",
+          "currency": "USD",
+          "side": "both",
+          "tiered": true,
+          "note": "maker-taker：吃单方付费、挂单方返佣；非展示流动性挂单返佣 Tape A/B $0.0010、Tape C $0.0005/股；完整费率表按数十种条件分层，代表性吃单费本字段 quote 未含"
+        },
         "zh": "做市商-吃单者模式（maker-taker）：为市场提供流动性的非展示订单可获返佣（如Tape C每股约$0.0005-0.0023区间，按月成交量与流动性类型分层），吃走流动性的一方付费；完整费率表按数十种精细条件分层",
         "en": "Maker-taker pricing model",
         "detail": "完整费率表（Price List - Trading）按是否合格做市商QMM、成交量档位、订单展示与否等数十种条件分层，本条只归纳整体模式与一个代表性档位，不逐条摘录。术语见 schema/glossary.yml 的 `maker-taker-pricing` 条目（本次新增，回填自 us-nyse 首次出现但未收录的缺口）。",
@@ -1665,10 +1673,25 @@
         "quote": "Firm adds greater than 0.03% of TCV of non-displayed liquidity, including midpoint orders / $0.0010 for Tape A & B Securities, $0.0005 for Tape C Securities",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "clearing_fees": {
+        "spec": {
+          "unit": "per_million",
+          "currency": "USD",
+          "side": "both",
+          "components": [
+            {
+              "name": "value into the net",
+              "rate": 0.44
+            },
+            {
+              "name": "value out of the net",
+              "rate": 2.16
+            }
+          ],
+          "note": "NSCC 净额清算费；另有 CNS buy-in $5.00、fail-to-deliver $0.25/$3.00、按月清算账户费 $300"
+        },
         "zh": "NSCC官方费率指南（Guide to the NSCC Fee Schedule）列示的现货证券清算相关费用示例：CNS买入平仓（Buy-in）每次通知5.00美元（原始方与空头经纪商双方均收取）；未交割入CNS每笔0.25美元（短缺1-30天）/3.00美元（超过30天）；净额清算「计入净值」每百万美元0.44美元、「计出净值」每百万美元2.16美元；另设按月按账户收取的300美元清算账户费",
         "en": "Sample fees from NSCC's official Guide to the Fee Schedule for equity clearing: CNS buy-in $5.00 per notice of intent (charged to both originator and short broker); fail to deliver to CNS $0.25/item (short 1-30 days) or $3.00/item (short more than 30 days); clearance activity $0.44 per million dollars (into the net value) / $2.16 per million dollars (out of the net value); plus a $300/month per-account clearance account fee",
         "detail": "dtcc.com主站内容页此前多次尝试均403（见SOURCES.md既有记录），但本次发现其静态资产\n路径（\"~/media/Files/Downloads/...\"托管的PDF文件）不受该拦截影响，成功抓到DTCC官方\n发布的《2026年NSCC费率指南》完整PDF——该指南明确声明\"仅供参考，官方费率以NSCC\nRules & Procedures附录A为准\"，本字段引用的是指南列示的说明性费率样本，非全部费率表。\n详见SOURCES.md本节反爬突破记录。\n",
@@ -1682,10 +1705,16 @@
         "quote": "CNS buy-in 5.00 Per notice of intent and retransmission; charged to both originator and short broker\nFail to deliver to CNS 0.25 Per item short in CNS for 1 to 30 days at close of business / 3.00 Per item short in CNS for more than 30 days at close of business\nInto the net value 0.44 Per million dollars, calculated as value of gross positions prior to netting / Out of the net value 2.16 Per million dollars, calculated as value of net positions after netting\nClearance account fee 300.00 Per month, per account\n",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "regulatory_fees": {
+        "spec": {
+          "rate": 20.6,
+          "unit": "per_million",
+          "currency": "USD",
+          "side": "sell",
+          "note": "SEC Section 31 费；2026-04-04 起 $20.60/百万美元（此前 $0.00）；仅卖方（covered sales）"
+        },
         "zh": "SEC Section 31交易费（Regulatory Transaction Fee）：现行费率为每百万美元成交额20.60美元，2026年4月4日起生效（此前一段时期费率为0，见detail）；由交易所代收后转付SEC，是本项目防幻觉铁律中明确点名的美国市场费率反例（费率随SEC每年度公告周期性调整，非固定不变）",
         "en": "SEC Section 31 Regulatory Transaction Fee: currently $20.60 per million dollars of covered securities transactions, effective April 4, 2026 (the rate was $0.00 for a preceding period — see detail); collected by the exchange and remitted to the SEC. This fee is periodically re-set by SEC fee-rate advisories (annually), so the rate is not fixed",
         "detail": "纳斯达克官方Equity Trader Alert明确写明\"直至该生效日期前，现行费率为每百万美元0.00\n美元\"（Until that date, the prevailing rate of $0.00 per million dollars will remain in\neffect）——这一\"费率一度为零\"的表述本身依据的是SEC官方《2026财年费率公告》（Fee Rate\nAdvisory for Fiscal Year 2026），具体为何一度归零（如国会预算授权周期性因素）本次未\n深入核实，仅如实转述纳斯达克官方提醒原文。该费率按SEC财年周期性调整，属于\"数值会变\"\n的字段，引用时应连同生效日一并核对，不可视为长期固定值。\n",
@@ -1699,8 +1728,7 @@
         "quote": "Pursuant to the SEC's Fee Rate Advisory for Fiscal Year 2026, the Securities and Exchange Commission has announced that the Section 31 transaction fee rate applicable to securities transactions on national securities exchanges and over-the-counter markets will be set at $20.60 per million dollars, effective April 4, 2026. Until that date, the prevailing rate of $0.00 per million dollars will remain in effect.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "stamp_duty": {
         "zh": "",
@@ -1714,6 +1742,10 @@
         "sources": null
       },
       "financial_transaction_tax": {
+        "spec": {
+          "type": "none",
+          "note": "联邦层面无广义证券交易税；1914–1966 股票转让税已废止；现存 SEC 发行/转让小额规费性质近监管经费（见 regulatory_fees）"
+        },
         "zh": "美国联邦层面目前无广义证券交易税/金融交易税；历史上曾有股票转让税（Stock Transfer Tax），1914-1966年间实施后废止，其后续遗留形式即为costs.regulatory_fees记录的SEC Section 31交易费（性质是为SEC运作筹资的小额规费，非广义交易税）；此后历次国会层面广义证券交易税提案均未获通过立法",
         "en": "No broad-based securities/financial transaction tax currently exists at the U.S. federal level; a historical federal Stock Transfer Tax was in effect from 1914 to 1966 before repeal. Its present-day successor is the SEC Section 31 transaction fee recorded under costs.regulatory_fees (a small fee funding SEC operations, not a broad-based transaction tax); various broad-based securities transaction tax proposals since have not been enacted",
         "detail": "来源为国会研究服务处（Congressional Research Service, CRS）报告《Transaction Tax:\nGeneral Overview》，congress.gov本身对本次curl返回403，改用everycrsreport.com（第三方\n托管的CRS报告归档站）镜像获取原文，按CLAUDE.md第二节第三条第三方来源confidence上限\nmedium处理。该报告年代较早（文中\"目前费率\"引用的是2000年前后的SEC费率数字，与本\n文件costs.regulatory_fees记录的2026年现行费率$20.60/百万美元不是同一时期数字，不可\n混用），本字段仅采信其\"历史沿革\"与\"无广义交易税立法\"两点结构性事实，不采信其具体\n费率数字。\n",
@@ -1727,8 +1759,7 @@
         "quote": "At the federal level one of the historical examples of a transaction tax was a stock transfer tax (STT) effective from 1914 to 1966. ... At the present time the federal government still levies a small tax on share issuance and transfers ... for the primary purpose of financing the activities of the Securities and Exchange Commission (SEC).",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "capital_gains_tax": {
         "zh": "属于投资者个人所得税范畴，非交易所/市场层面收费。美国本土个人投资者：长期资本利得（持有超过1年）适用0%/15%/20%三档优惠税率（按应纳税所得额分档，2025纳税年度门槛见detail）；短期资本利得按累进的普通所得税税率征收。非美国居民境外投资者买卖美股产生的资本利得的具体待遇本次未找到可引用的官方原文逐字确认，故未写入zh/en正文",

@@ -1275,6 +1275,7 @@ costs:
     confidence: medium
 
   commission_structure:
+    spec: {rate: null, unit: pct, note: "券商与客户商业约定，ASX 不规定经纪佣金；零售常见固定每笔费或按比例"}
     zh: "券商佣金由市场自由定价，无交易所统一费率表：零售投资者常见为「固定每笔费用」或「按成交金额百分比」两种计价，线上折扣券商多收固定小额单笔费，全方位服务券商常按比例收费；佣金属券商与客户的商业约定，ASX 仅对成交本身收上述 trade fee，不规定经纪佣金"
     en: "Brokerage commissions are freely priced by the market with no exchange-uniform schedule: retail investors typically face either a flat per-trade fee or a percentage of traded value; online discount brokers usually charge a small flat per-trade fee while full-service brokers often charge a percentage. Commission is a commercial matter between broker and client; ASX only charges the trade fee above and does not set brokerage"
     sources:
@@ -1285,6 +1286,7 @@ costs:
     verified: 2026-08-27
 
   exchange_fees:
+    spec: {rate: 0.15, unit: bp, side: both, cap: 75, cap_scope: per_trade_side, currency: AUD, note: "股票档 0.15 bp；权证/结构性产品 0.31 bp；ETF 特别成交费 0.15 bp；均加 GST"}
     zh: "ASX 对现货市场成交本身收取成交费（Trade Fee）；以股票为例，按成交金额 0.15 基点从价计收，每笔每边封顶 75 澳元。其余产品类别适用不同档费率，均按月计收并加收 GST"
     en: "ASX charges a Trade Fee on the cash-market trade itself; for equities it is 0.15 basis points of traded value, capped at $75 per trade per side. Other product categories use different fee tiers, all charged monthly plus GST"
     detail: |
@@ -1299,6 +1301,7 @@ costs:
     verified: 2026-08-27
 
   clearing_fees:
+    spec: {rate: 0.225, unit: bp, side: both, note: "权证/计息证券 0.35 bp；交叉盘登记费 0.10 bp（AUD 5 封顶）"}
     zh: "现货市场股票及投资产品清算费：成交金额的0.225个基点（0.00225%），从价计费"
     en: "Cash market clearing fee for equities and investment products: 0.225 basis points (0.00225%) of executed trade value, charged ad valorem"
     detail: "权证、计息证券适用更高费率0.35个基点（0.0035%）；另有交叉盘登记费0.10个基点（$5封顶）；ASX运营现货市场清算结算收入分成机制，超年度增长门槛部分与清算结算参与者对半分享。"
@@ -1310,6 +1313,7 @@ costs:
     confidence: high
 
   regulatory_fees:
+    spec: {type: none, note: "ASIC 行业成本回收征费针对持牌实体，不按投资者每笔交易计收"}
     zh: "澳大利亚对证券交易的终端投资者不征收按笔的政府/监管费（无类似英国 PTM Levy 的成交征费）；ASIC 通过面向持牌实体（市场运营商、清算设施、金融服务牌照持有人）的行业成本回收征费（levy）填补市场监管成本，该征费不直接按投资者每笔交易计收。故对个人投资者而言，监管性费用层面实际为「无按笔监管费」"
     en: "Australia imposes no per-trade government/regulatory fee on end investors in securities (no UK-style PTM Levy); ASIC funds its market-supervision role through industry cost-recovery levies on licensed entities (market operators, clearing facilities, AFSL holders), which are not charged per investor trade. So at the end-investor level the regulatory-fee position is effectively 'no per-trade regulatory fee'"
     sources:
@@ -1320,6 +1324,7 @@ costs:
     verified: 2026-08-27
 
   stamp_duty:
+    spec: {type: none, note: "各州已废除上市证券（marketable securities）转让印花税，如 NSW Duties Act 1997 §34（2016-07-01 起）"}
     zh: "澳大利亚各州已废除上市证券（marketable securities，含 ASX 上市股票）转让的印花税（含交易单据印花税）。以新南威尔士州为例，《1997 年税收法》(Duties Act 1997) 第 34 条自 2016 年 7 月 1 日起规定「marketable securities … are not dutiable property」，各州亦先后废除对上市股票的印花税；因此 ASX 二级市场交易目前不产生州印花税。土地持有型公司（landholder）的股份转让等特定情形仍可能触地相关税，属例外"
     en: "Australian states have abolished stamp duty on transfer of marketable securities (including ASX-listed shares). In New South Wales, for example, s34 of the Duties Act 1997 provides that from 1 July 2016 marketable securities 'are not dutiable property'; other states likewise abolished duty on listed shares. ASX secondary-market trades therefore currently incur no state stamp duty. Transfers of shares in landholder companies remain a possible exception caught by land-related duty"
     sources:
@@ -1330,6 +1335,7 @@ costs:
     verified: 2026-08-27
 
   financial_transaction_tax:
+    spec: {type: none, note: "澳联邦与各州均不对证券买卖征收一般性金融交易税"}
     zh: "澳大利亚联邦与各州均不对股票等证券的买卖征收一般性的金融交易税（securities transaction tax / FTT）；交易环节的实际法定收费仅为 ASX 成交费与清算费，以及各州已废除的上市证券转让印花税（见 stamp_duty）。截至目前未核实到任何适用于 ASX 现货股票交易的成交税种"
     en: "Neither the Commonwealth nor the states levy a general financial transaction tax (securities transaction tax / FTT) on share trades; the only statutory charges at the transaction level are the ASX trade fee and clearing fee, plus the now-abolished state stamp duty on transfer of listed securities (see stamp_duty). No transaction tax applicable to ASX cash-equity trading was identified"
     sources:

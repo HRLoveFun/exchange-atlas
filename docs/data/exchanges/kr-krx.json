@@ -2214,6 +2214,10 @@
     },
     "costs": {
       "commission_structure": {
+        "spec": {
+          "rate": null,
+          "note": "完全市场化，无监管上下限；零售线上多零/近零佣金"
+        },
         "zh": "韩国股票佣金由券商自主定价、完全市场化、无监管上下限；零售线上佣金极低（多家互联网券商如Kiwoom、Mirae Asset、Toss等以零佣金或近零佣金竞争），传统线下费率在可议价的约0.0x%–0.1%区间；机构与大宗交易费率另行协商。外国投资者通过本地券商账户交易，适用相同佣金结构。衍生品另按合约收取交易所/结算费用（见 exchange_fees、clearing_fees）。",
         "en": "Korea's stock brokerage commissions are freely priced by securities firms with no regulatory ceiling or floor; retail online commissions are extremely low (several internet brokers such as Kiwoom, Mirae Asset and Toss compete with zero or near-zero commissions), while traditional offline rates sit in a negotiable ~0.0x%–0.1% range; institutional and block-trade rates are negotiated separately. Foreign investors trading through local broker accounts face the same commission structure. Derivatives carry separate per-contract exchange/clearing fees (see exchange_fees, clearing_fees).",
         "sources": [
@@ -2227,10 +2231,16 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "exchange_fees": {
+        "spec": {
+          "rate": 0.0023,
+          "unit": "pct",
+          "side": "both",
+          "tiered": true,
+          "note": "2025-12-15 起临时阶梯（至 2026-02-13）：限价单(Maker) 0.00134%、市价单(Taker) 0.00182%；原统一 0.0023%（精确 0.0022763%）"
+        },
         "zh": "交易所交易经手费：KRX对股票交易收取统一约0.0023%的交易费（精确实为0.0022763%）；为应对Nextrade竞争，2025年12月15日宣布临时改为阶梯费率——自2025年12月15日至2026年2月13日，限价单(Maker)费率降至0.00134%、市价单(Taker)降至0.00182%（原为统一0.0023%）。衍生品按合约计收交易费。",
         "en": "Exchange trading fee: KRX charges a flat stock trading fee of about 0.0023% (precisely 0.0022763%); to counter competition from Nextrade it announced in Dec 2025 a temporary shift to a tiered rate — from 15 Dec 2025 to 13 Feb 2026, limit-order (Maker) fees drop to 0.00134% and market-order (Taker) fees to 0.00182% (from the prior flat 0.0023%). Derivatives are charged per contract.",
         "sources": [
@@ -2244,10 +2254,13 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "clearing_fees": {
+        "spec": {
+          "rate": null,
+          "note": "按产品与会员类别收费；一手费率本次未核实（第三方汇编曾列约 0.0004446%）"
+        },
         "zh": "证券结算与交收费率：KRX对股票清算交收按产品与会员类别收费，但本次未能从一手来源核实具体费率——第三方收费汇编（如Mondo Visione收录的交易所收费表）曾列示股票交易交收费约0.0004446%等数字，但该页本次抓取未含此数据，可靠性未独立核实。衍生品结算费另按合约计。建议后续抓取KRX当期收费表确认确切费率。",
         "en": "Securities clearing & settlement fee rates: KRX charges stock clearing/settlement fees per product and member category, but this session could not verify the exact rate from a primary source — third-party fee compilations (e.g. the exchange fee schedules captured by Mondo Visione) have listed a stock-trading clearing fee around 0.0004446%, but that page did not contain this figure when fetched this session and its reliability is unconfirmed. Derivatives settlement fees are per contract. Recommend fetching the current KRX fee schedule to confirm exact rates.",
         "sources": [
@@ -2261,10 +2274,13 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "regulatory_fees": {
+        "spec": {
+          "type": "none",
+          "note": "交易环节税费主要为 STT + 交易所/结算费；未核实到统一法定监管费率"
+        },
         "zh": "韩国对证券交易不另征广义「监管费」；交易环节税费主要为证券交易税(STT，见 financial_transaction_tax)与交易所/结算费(见 exchange_fees、clearing_fees)。部分衍生品或特定情形下可能有交易所风险基金计提，但本次未核实到统一的法定监管费率，建议后续抓取KRX收费表确认。",
         "en": "Korea does not levy a separate broad-based 'regulatory fee' on securities trades; the transaction-level taxes/fees are essentially the Securities Transaction Tax (see financial_transaction_tax) and exchange/clearing fees (see exchange_fees, clearing_fees). Certain derivatives or specific cases may carry an exchange risk-fund levy, but no unified statutory regulatory-fee rate was verified this session; recommend fetching the KRX fee schedule to confirm.",
         "sources": [
@@ -2278,10 +2294,13 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "stamp_duty": {
+        "spec": {
+          "type": "none",
+          "note": "韩国无名为印花税的证券税种；对应流转税为证券交易税 STT（见 financial_transaction_tax）"
+        },
         "zh": "韩国对证券转让不征收「印花税」(stamp duty)这一独立税种；本项目横向对比中与该字段对应的、按交易金额课征的流转税是「证券交易税」(Securities Transaction Tax, STT)，其现行税率见 financial_transaction_tax（2026年起KOSPI/KOSDAQ均为0.20%）。韩国税法中并无名为印花税的证券税种。",
         "en": "Korea does not impose a stamp duty as a separate tax on securities transfers; the transaction-value turnover tax that corresponds to this field in cross-exchange comparison is the 'Securities Transaction Tax' (STT), whose current rate is in financial_transaction_tax (0.20% for both KOSPI and KOSDAQ from 2026). Korean law has no securities stamp-duty instrument.",
         "sources": [
@@ -2295,10 +2314,15 @@
         "confidence": "low",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "financial_transaction_tax": {
+        "spec": {
+          "rate": 0.2,
+          "unit": "pct",
+          "side": "sell",
+          "note": "STT 2026 年起 KOSPI/KOSDAQ 均 0.20%（此前 KOSPI 0%、KOSDAQ 0.15%）；ETF/债券通常免征"
+        },
         "zh": "证券交易税(STT)：2026年税制改革将韩股交易税恢复并定为 KOSPI市场0.20%、KOSDAQ市场0.20%（此前KOSPI为0%、KOSDAQ为0.15%），自2026年1月1日起对当日或之后转让的证券施行。ETF/债券通常免征。",
         "en": "Securities Transaction Tax (STT): the 2026 tax reform restored and set the Korean stock transaction tax to 0.20% for the KOSPI market and 0.20% for the KOSDAQ market (previously 0% for KOSPI and 0.15% for KOSDAQ), effective 1 January 2026 for securities transferred on or after that date. ETFs/bonds are generally exempt.",
         "sources": [
@@ -2312,8 +2336,7 @@
         "confidence": "medium",
         "detail": "原引用文本（未能从缓存源逐字核实，故降级为 medium）：\"KOSPI Market 0% 0.20% KOSDAQ Market 0.15% 0.20% ... Enacted rate will be effective for the securities transferred on or after 1 Jan 2026.\" 缓存的 EY 页面仅为 JS/登录墙外壳，未含文章正文，无法逐字核验，需重新抓取原始正文或改用官方税法来源坐实 2026 年税率。",
         "verified": "2026-08-27",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "capital_gains_tax": {
         "zh": "资本利得税：韩国对个人股票转让（无论持有期）不征一般资本利得税；仅「大股东」(major shareholder，单只股票持股≥50亿韩元)的转让价差按约20%（含10%地方税，约22%）单独计税。2025年税改曾拟将大股东门槛由50亿韩元下调至10亿韩元，但在散户反弹后，政府于2025年9月决定维持50亿韩元门槛不变。",
