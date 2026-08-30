@@ -525,6 +525,7 @@ market_structure:
     confidence: medium
 
   short_selling:
+    spec: {note: "设证券借贷机制（SLBS，2007-08 年度推出）；具体做空限制（报升规则、裸卖空禁令条文表述）本次未能核实到直接原文，见 OPEN-QUESTIONS"}
     zh: "设有证券借贷机制（Securities Lending and Borrowing Scheme, SLBS，2007-2008年度推出），但具体做空限制规则（如是否有报升规则、裸卖空禁令的条文表述）本次未能核实到直接原文"
     en: "A Securities Lending and Borrowing Scheme (SLBS) exists (introduced FY2007-2008), but the specific short-selling restriction rules (e.g. uptick-rule wording, naked short selling ban text) were not confirmed against direct source text this session"
     detail: "未设 enum 值——现有 short_selling_stance 枚举（freely_allowed/restricted_uptick/restricted_list/banned）哪个最贴切本次没有依据判断，强行选一个属于凑数，留空。"

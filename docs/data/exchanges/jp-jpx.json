@@ -806,6 +806,10 @@
         "verified": "2026-08-13"
       },
       "volatility_interruption": {
+        "spec": {
+          "type": "none",
+          "note": "无独立于值幅制限之外的波动性中断层；「特別気配」是值幅制限的执行方式（申报价超基准价值幅时不成交、显示指示性价格），见 circuit_breaker / price_limits"
+        },
         "zh": "同 circuit_breaker 所述的「特別気配」机制——本质是值幅制限的执行方式，而非独立的波动性中断层，与港交所VCM那种独立于涨跌停之外的冷静期机制不是同一类设计",
         "en": "Same \"special quote\" mechanism described under circuit_breaker — it is the enforcement mechanism of the price-limit system itself, not a separate volatility-interruption layer distinct from price limits (unlike HKEX's VCM, which operates independently of any daily price limit since HKEX has none)",
         "confidence": "medium",
@@ -818,7 +822,6 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
-        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -858,6 +861,12 @@
       },
       "short_selling": {
         "enum": "restricted_uptick",
+        "spec": {
+          "naked_allowed": null,
+          "uptick_rule": true,
+          "borrow_required": true,
+          "note": "卖空须标记申报（向交易所披露）；受价格限制约束（Business Rules Rule 16「卖空价格限制基准价」），类报升规则；具体触发比例本次未确认"
+        },
         "zh": "卖空须向交易所披露（标记申报），且受价格限制约束（Rule 16「卖空价格限制基准价」），类似报升规则，具体触发比例本次未能在抓取内容中确认",
         "en": "Short sales must be flagged/disclosed to the Exchange and are subject to a price restriction (Rule 16, \"Base Prices with Short Selling Price Restriction\"), functionally similar to an uptick rule; the specific trigger percentage was not confirmed in the content fetched this session",
         "sources": [
@@ -870,7 +879,6 @@
         "quote": "If the trading participant intends to execute a short sale... disclosure of that fact / Rule 16. Base Prices with Short Selling Price Restriction",
         "confidence": "medium",
         "verified": "2026-08-13",
-        "spec": null,
         "detail": null
       },
       "block_trade": {

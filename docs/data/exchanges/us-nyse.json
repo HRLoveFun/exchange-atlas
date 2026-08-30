@@ -784,6 +784,12 @@
       },
       "short_selling": {
         "enum": "restricted_uptick",
+        "spec": {
+          "naked_allowed": false,
+          "uptick_rule": true,
+          "borrow_required": true,
+          "note": "Reg SHO；Rule 201 备兑报升熔断——证券当日较前一交易日收盘价跌 ≥10% 触发，触发后当日剩余及次日禁止以 ≤当前全国最优买价（NBB）的价格执行/展示卖空单"
+        },
         "zh": "Regulation SHO第201条（'另类报升规则'/空头卖出熔断）：当某证券当日价格较前一交易日常规交易时段收盘价下跌10%或以上时，触发熔断，该证券自当时起至次一交易日收盘前，禁止以低于或等于当前全国最优买价（NBB）的价格执行或展示卖空订单",
         "en": "Rule 201 of Regulation SHO (the \"Alternative Uptick Rule\" / short sale circuit breaker): once a covered security's price declines 10% or more intraday from its prior day's regular-trading-hours closing price, a circuit breaker is triggered, and for the remainder of that day and the following day, trading centers must prevent execution or display of a short sale order at a price at or below the current national best bid",
         "detail": "本条2026年经突破sec.gov反爬后，直接从SEC官方FAQ原文核实到具体10%阈值数字，取代此前\nconfidence: medium的定性描述（详见 PROJECT/OPEN-QUESTIONS.md 第15条的解决记录）。NYSE\n官网Regulation SHO页面本身正文很薄，此前多次尝试sec.gov/finra.org均403，本次改用\nSEC Fair Access规范格式的User-Agent（形如\"机构标识 联系邮箱\"，而非常规浏览器UA字符串）\n成功绕过sec.gov的\"Request Rate Threshold Exceeded\"限流拦截。\n",
@@ -801,8 +807,7 @@
         ],
         "quote": "Among other things, Rule 201 requires that a trading center establish, maintain, and enforce written policies and procedures reasonably designed to prevent the execution or display of a short sale order of a covered security at a price that is less than or equal to the current national best bid if the price of that covered security decreases by 10% or more from the covered security's closing price as of the end of regular trading hours on the prior day.",
         "confidence": "high",
-        "verified": "2026-08-13",
-        "spec": null
+        "verified": "2026-08-13"
       },
       "block_trade": {
         "zh": "",
@@ -839,6 +844,12 @@
         "quote": null
       },
       "market_maker_scheme": {
+        "spec": {
+          "present": true,
+          "quote_obligation": true,
+          "max_spread_pct": null,
+          "note": "指定做市商 DMM：每支股票一名 DMM，负责开盘/收盘及严重失衡/不稳定期间的价格发现；无统一价差上限公布"
+        },
         "zh": "指定做市商制度（DMM）：每支股票指定一名DMM，负责在开盘、收盘及严重失衡/不稳定期间维持价格发现",
         "en": "Designated Market Maker (DMM)",
         "detail": "上市公司在上市流程第4步须选定DMM；DMM是NYSE区别于纯电子化交易所（如NYSE Arca）的标志性制度。",
@@ -852,8 +863,7 @@
         "quote": "Select Your Designated Market Maker (DMM) / Your DMM will facilitate price discovery for your stock during market opens, closes and during periods of substantial trading imbalances or instability.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "connect_schemes": {
         "zh": "无（美股市场无类似沪港通/深港通的跨境互联互通安排）",

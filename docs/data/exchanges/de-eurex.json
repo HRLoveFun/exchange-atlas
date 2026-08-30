@@ -768,6 +768,11 @@
         "verified": "2026-08-27"
       },
       "volatility_interruption": {
+        "spec": {
+          "static_pct": null,
+          "dynamic_pct": null,
+          "note": "预期成交价超出动态/静态价格区间即触发，中断后以集合竞价恢复（紧接收盘集合竞价的除外）；区间宽度逐衍生品由管理董事会确定、无公开统一表"
+        },
         "zh": "波动性中断（Volatility Interruption）：预期成交价超出动态或静态价格区间即触发，中断后以集合竞价方式恢复交易（紧接的收盘集合竞价除外）",
         "en": "Volatility Interruption: triggered when the next expected execution price falls outside the dynamic or static price range; trading resumes via an auction (unless immediately followed by a Closing Auction)",
         "quote": "Immediately after a Volatility Interruption, exchange trading shall be resumed in the respective Instrument or Derivative with an auction period unless a Closing Auction pursuant to Number 1.4 Paragraph 3 follows immediately thereafter.",
@@ -781,7 +786,6 @@
         ],
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -870,6 +874,12 @@
         "quote": null
       },
       "market_maker_scheme": {
+        "spec": {
+          "present": true,
+          "quote_obligation": true,
+          "max_spread_pct": null,
+          "note": "受监管做市商：须申请资格，在至少一个衍生品上按月均覆盖每日交易时段 50% 持续双边报价；点差/报价量要求由管理董事会规定"
+        },
         "zh": "受监管做市商制度（Regulated Market Maker）：需申请获得资格，须在至少一个衍生品品种上按月平均覆盖每日交易时段50%的时间持续提供双边报价，具体点差/报价量要求由管理董事会另行规定",
         "en": "Regulated Market Maker system: admission required; must continuously enter binding two-way quotes in at least one Derivative covering 50% of daily Trading Hours on a monthly average, with specific spread/volume requirements set separately by the Management Board",
         "detail": "该义务框架依据欧盟《受托规例》(EU) 2017/578（MiFID II项下做市商监管规则）确定。",
@@ -883,8 +893,7 @@
         "quote": "the Exchange Traders acting on behalf of the Regulated Market Maker are required to continuously enter binding Quotes in at least one Derivative and during 50% of the daily Trading Hours on a monthly average.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "connect_schemes": {
         "zh": "",
