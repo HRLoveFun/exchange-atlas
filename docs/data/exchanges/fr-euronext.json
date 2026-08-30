@@ -649,7 +649,27 @@
         "enum": null,
         "detail": null
       },
-      "execution_model": null,
+      "execution_model": {
+        "enum": "hybrid",
+        "spec": {
+          "electronic": true,
+          "dealer_intermediated": true,
+          "note": "Optiq 中央电子限价订单簿、严格价格-时间优先连续撮合；同时设多类流动性提供者（统称 Liquidity Providers）——ETF 做市计划、结构性产品做市义务、零售流动性厂商（Retail Liquidity Firm，报价仅与零售订单撮合、同价优先），各带量化报价义务"
+        },
+        "zh": "混合模式：Optiq 为中央电子限价订单簿，严格价格优先、时间优先连续撮合；同时设多类流动性提供者制度——面向 ETF 的做市商计划、面向结构性产品的做市商义务，以及零售流动性厂商（其报价仅能与零售订单撮合、享同价位优先权）",
+        "en": "Hybrid: Optiq is a central electronic limit order book matching on strict price-then-time priority, running alongside several liquidity-provider schemes — ETF market-maker programmes, Structured Product market-maker obligations, and Retail Liquidity Firms whose quotes match only Retail Orders and are given same-price precedence",
+        "detail": "enum 依据既有 matching_principle（严格价格-时间优先，confidence high）与 market_maker_scheme（多类带义务的流动性提供者，含零售流动性厂商）综合判定为 hybrid。联邦制结构（一所横跨多国法人），见 OPEN-QUESTIONS 框架性问题第 1/17 条。",
+        "sources": [
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 4401/1）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Orders in the Central Order Book shall be executed according to strict price priority. Orders at the same price are ranked and executed according to strict time priority",
+        "confidence": "medium",
+        "verified": "2026-08-16"
+      },
       "matching_principle": {
         "enum": "price_time",
         "zh": "严格价格优先，同价位按时间优先（strict price/time priority）；对未公开披露的订单类型（大宗订单Large-in-Scale、中间价订单Mid-Point）另有独立的规模/时间优先规则",
@@ -668,6 +688,15 @@
         "detail": null
       },
       "order_types": {
+        "spec": {
+          "market": true,
+          "limit": true,
+          "stop": true,
+          "iceberg": true,
+          "hidden": true,
+          "pegged": true,
+          "note": "市价 / 限价 / 止损 / 冰山（仅披露一档）/ 中间价（Mid-Point / Primary Peg，全隐藏、盯住 PBBO 中点）/ 最小成交量 / 集合竞价专用 VFU·VFCU / 拍卖量发现（AVD，隐藏）/ 大宗（Large-in-Scale）。可用类型按交易分组而异"
+        },
         "zh": "市价单（Market）、限价单（Limit）、止损单（Stop）、冰山单（Iceberg）、中间价单（Mid-Point/Primary Peg）、最小成交量单、仅参与集合竞价的VFU/VFCU订单、拍卖量发现单（Auction Volume Discovery, AVD）等，具体适用哪些类型按交易分组（trading group）而异",
         "en": "Market, Limit, Stop, Iceberg, Mid-Point/Primary Peg, Minimum-quantity, auction-only VFU/VFCU orders, Auction Volume Discovery (AVD) orders, etc.; the specific set of order types available varies by trading group",
         "sources": [
@@ -680,31 +709,31 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
-        "spec": null,
         "detail": null,
         "quote": null
       },
       "tick_size": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "欧盟MiFID II（RTS 11）对最小报价单位实行跨交易所统一的分层表（按品种日均成交笔数与价格区间分档），并非Euronext自行制定的规则——这与本所「无单一监管机构」的结构性特点呼应：本字段设计假设是「交易所自定tick size」，对适用MiFID II统一tick size体制的欧盟交易所不完全成立；本次未找到Euronext自己公布的、区别于MiFID II标准表的补充说明，留空。",
+        "spec": {
+          "regime": "tiered_by_price_and_liquidity",
+          "min_tick": null,
+          "currency": "EUR",
+          "full_table_note": "欧盟 MiFID II RTS 11（Commission Delegated Regulation (EU) 2017/588）的跨所统一 tick size 表：按价格区间 × 日均成交笔数（ADT）交叉查表，价格越高 / 流动性越低则档位越大。Euronext 不自定 tick size，直接适用该欧盟标准（与 uk-lse / de-xetra 同一份技术标准，英国脱欧后自留）",
+          "note": "min_tick 留 null——随标的价格 / 流动性变动；Euronext 无区别于 RTS 11 标准表的补充规则"
+        },
+        "zh": "采用欧盟 MiFID II 的跨交易所统一最小报价单位技术标准——按证券价格区间与日均成交笔数两个维度交叉查表，价格越高、流动性越低则档位越大；Euronext 不自行制定，直接适用该欧盟标准",
+        "en": "Uses the EU-wide MiFID II harmonised tick-size technical standard — a two-dimensional grid indexed by price band and by average daily number of transactions, where the tick coarsens as price rises and liquidity falls; Euronext does not set its own tick size but applies this EU standard directly",
+        "detail": "此前留空（本字段设计假设『交易所自定 tick size』，对适用 MiFID II 统一体制的欧盟交易所不成立）。本次结构化为 spec：regime 为价格×流动性分档，min_tick 留 null，指向 RTS 11（(EU) 2017/588）附录——与 uk-lse / de-xetra 同表。",
         "sources": [
           {
-            "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
-            "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
-            "accessed": "2026-08-16"
-          },
-          {
-            "title": "Euronext Rule Book Book I - Harmonised Rules",
-            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
-            "accessed": "2026-08-16"
+            "title": "Commission Delegated Regulation (EU) 2017/588 (RTS 11) — tick size regime（EUR-Lex / legislation.gov.uk）",
+            "url": "https://www.legislation.gov.uk/eur/2017/588",
+            "accessed": "2026-08-30"
           }
         ],
+        "quote": "The tick size regime only determines the minimum difference between two price levels of orders sent in relation to a financial instrument in the order-book. It should therefore be applied equally, regardless of the currency of the financial instrument. ... 1 ≤ price < 2 0,01 0,005 0,002 0,001 0,0005 0,0002",
+        "confidence": "high",
         "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
-        "spec": null,
-        "quote": null
+        "enum": null
       },
       "board_lot_size": {
         "zh": "",
@@ -875,7 +904,29 @@
         "spec": null,
         "detail": null
       },
-      "error_trade_rule": null,
+      "error_trade_rule": {
+        "spec": {
+          "bust_allowed": true,
+          "review_window_min": null,
+          "deviation_threshold_pct": null,
+          "resolution": "cancel",
+          "note": "Euronext Rule Book Book I Rule 4403/3。相关 Euronext Market Undertaking 可依职权作废成交：(i) 违反规则（尤其公平有序高效市场原则）、(ii) 不正当交易条件下、(iii) 明显重大错误（manifest material error）——涵盖订单簿内外成交。经一方请求：对 Notice 指定的某类证券，可作废『异常价格（aberrant price）』成交；或经对手方同意作废。Euronext 不考虑作废对后续成交的影响，且不作废用于平仓的成交或止损等条件单触发的成交"
+        },
+        "zh": "Euronext 规则手册第一册的『交易作废』条款：相关 Euronext 市场运营主体可依职权作废成交，条件为——(i) 成交违反规则（尤其是公平、有序、高效市场运作原则），或 (ii) 在不正当交易条件下达成，或 (iii) 由明显重大错误（manifest material error）导致；该作废权涵盖订单簿内与订单簿外成交。此外，经一方请求：对某类由 Notice 指定的证券，Euronext 可作废以『异常价格（aberrant price）』达成的成交；或在对手方同意下作废。Euronext 不考虑作废对后续成交的连带影响，也不作废为平掉初始头寸而达成的成交或止损等条件单触发的成交",
+        "en": "Under the Euronext Rule Book Book I trade-cancellation rule, the Relevant Euronext Market Undertaking may cancel Transactions on its own authority where they were made (i) in violation of the Rules, particularly those on fair, orderly and efficient market operation, (ii) under improper trading conditions, or (iii) further to a manifest material error; this power covers both order-book and off-order-book Transactions. In addition, upon request of a counterpart, Euronext may cancel Transactions executed at an aberrant price for certain securities defined in a Notice, or cancel with the agreement of the other counterpart(s). Euronext does not take into account the consequences of a cancellation on subsequent Transactions and will not cancel trades executed to close an initial position or trades resulting from triggered contingent (e.g. stop) orders",
+        "detail": "Euronext Harmonised Rule Book Rule 4403/3（Trade cancellation）。异常价格（aberrant price）的具体百分比门槛在 Notice / Trading Manual 中，本次未取得逐字数值——deviation_threshold_pct 留 null。属『交易所裁量 + 异常价格 / 对手方合意』一类。与 trading_halt_mechanism 视角不同。",
+        "sources": [
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 4403/3 Trade cancellation）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "The Relevant Euronext Market Undertaking may cancel Transactions on its own authority if they have been made: (i) in violation of the Rules, particularly those Rules relating to the principles of fair, orderly and efficient market operation; or (ii) under improper trading conditions; or (iii) further to a manifest material error. The power to cancel Transactions on Euronext's authority shall encompass order-book and off-order book Transactions. In addition, and upon request of one of the counterparts: (i) Euronext may, for certain kinds of Securities defined in a Notice, cancel Transactions executed at an aberrant price; or (ii) Euronext may cancel Transactions with the agreement of the other counterpart(s), based on explanations provided by the member concerned.",
+        "confidence": "high",
+        "verified": "2026-08-16",
+        "enum": null
+      },
       "intraday_reversal": {
         "zh": "",
         "confidence": "low",
@@ -942,7 +993,23 @@
         "detail": null,
         "quote": null
       },
-      "order_book_transparency": null,
+      "order_book_transparency": {
+        "zh": "盘前：Optiq 中央限价订单簿公开，展示订单的价量按严格价格-时间优先撮合。同一订单簿内支持不完全披露 / 隐藏的流动性——冰山单仅显示一档、中间价单（Mid-Point / Primary Peg）为全隐藏并盯住 PBBO 中点、拍卖量发现单（AVD）为集合竞价专用隐藏单、大宗订单（Large-in-Scale）免于盘前透明度。盘后：适用欧盟 MiFIR 成交透明度与延迟披露安排",
+        "en": "Pre-trade: the Optiq central limit order book is public — displayed order sizes and prices are matched on strict price-then-time priority. The same book supports partially-disclosed and hidden liquidity — Iceberg orders show only one visible tranche, Mid-Point / Primary Peg orders are fully hidden and pegged to the PBBO midpoint, Auction Volume Discovery (AVD) orders are hidden auction-only orders, and Large-in-Scale orders are exempt from pre-trade transparency. Post-trade: the EU MiFIR transparency regime with deferred publication applies",
+        "detail": "字段管本所订单簿内部的（非）展示流动性——中间价单 / AVD 在同簿内提供隐藏流动性。行情层级 / 收费见第十章。quote 复用 matching_principle 已核实措辞（严格价格-时间优先 + 未披露订单的独立优先规则）。盘后 LIS 延迟为 MiFIR 一般制度、未逐字核实产品级参数，故整体 confidence: medium。",
+        "sources": [
+          {
+            "title": "Euronext Rule Book Book I - Harmonised Rules（Rule 4401/1）",
+            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Orders in the Central Order Book shall be executed according to strict price priority. Orders at the same price are ranked and executed according to strict time priority",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "enum": null,
+        "spec": null
+      },
       "dark_pool": {
         "zh": "存在非公开披露（dark）交易安排——大宗订单（Large-in-Scale）与中间价订单（Mid-Point Orders）在独立的非展示订单簿中撮合，按规模/时间优先原则执行",
         "en": "Non-pre-trade-transparent (dark) trading exists — Large-in-Scale orders and Mid-Point orders match in a dedicated non-displayed order book, executed on a size/time priority basis",

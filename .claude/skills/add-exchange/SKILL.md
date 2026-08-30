@@ -22,6 +22,12 @@ us-nasdaq/cn-szse/uk-lse/de-xetra/sg-sgx/au-asx/in-nse/sa-tadawul）、v1.0 Wave
 
 ## 并行执行须知（仅当你是同一波多个子代理之一时适用）
 
+**先给 orchestrator 的一条**：并行子代理数量要看账号 session limit 余量。[ADR-043]（Phase 3 首棒
+回填）在**后台任务**里一次派 7 个并行子代理，**7 路并发瞬间打爆 session limit（HTTP 429），
+7 个全部提前终止、零产出**，改协调者串行才跑完。后台任务里做「补全已有交易所少量字段」这类
+工作，协调者串行（一家一家：抓→填→单文件校验→提交→下一家）往往比并行更稳——单条 API 流、
+可控、即时提交、session limit 风险归零。并行只在「新增整所、每所工作量大、且额度充裕」时值得。
+
 如果你是 orchestrator 按 [ADR-017] 派发的并行子代理之一（同一时刻还有其他子代理在跑别的交易所），
 有两条 v0.1/v0.2 单会话串行时不会遇到的坑：
 
@@ -316,18 +322,52 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
      存在这个概念"本身需要认真检索一遍才能下结论，不能因为任务描述里写了"预期多数留空"就
      跳过检索直接判定不适用。
 8. **第五章有几个 2026-08 新增（[ADR-042]）、规则手册里往往不集中的字段，建档时留意：**
-   - `execution_model`（执行模型：订单驱动 / 报价驱动 / 混合 / 经纪撮合）——多数现代交易所是
-     `order_driven`，有场内 / 电子做市商角色的是 `hybrid`（NYSE DMM、LSE SETSqx）。别和
-     `matching_principle`（订单簿内部的价格-时间优先）混为一谈。
+   - `execution_model`（执行模型：订单驱动 / 报价驱动 / 混合 / 经纪撮合）——从既有
+     `matching_principle` + `market_maker_scheme` 的已核实 quote 派生（同 [ADR-038] 把
+     `matching_principle` 转 enum 的做法），`detail` 写推理链，不用重新抓。判定规则（[ADR-043]
+     的 20 家结论）：**做市商有合同义务、承担点差 / 持续报价约束、实质参与价格形成 = `hybrid`**
+     （NYSE DMM、Nasdaq 竞争性做市商、LSE 双轨、Xetra Designated Sponsor、Eurex 受监管做市商、
+     SIX Market Maker Agreement、TSX Market Maker Firm、Tadawul CMA 做市商规则、Euronext 流动性
+     提供者、B3 三类注册做市商）；**纯中央订单簿，做市仅激励型 / 限 ETF·结构性产品·SME 等产品线 =
+     `order_driven`**（jp-jpx、hk-hkex、cn-sse/szse、tw-twse、kr-krx、sg-sgx、au-asx、za-jse、in-nse）。
+     20 家样本里没有 `quote_driven` / `brokered`。做市商 quote 撑得住 enum 但「hybrid vs
+     order_driven」是综合判断时标 `medium`。别和 `matching_principle`（订单簿内部的优先级）混。
    - `error_trade_rule`（错误交易 / 明显错误处理）——查规则手册的 "clearly erroneous" /
-     "mistrade" / "cancellation of trades" / 日本「誤発注・特別気配」条款；重点是「已成交能否
-     作废、复核时限、价格偏离阈值」。日本现货实务上近乎不可作废，是这维度的极端一端。
+     "mistrade" / "cancellation of trades" / "annulment" / 日本「誤発注・特別気配」条款。[ADR-043]
+     的 20 家呈**三谱系**，判完归入哪一类：① **阈值 + 时限复核制**（US 7.10/11890、德 FWB/Eurex
+     Mistrade、澳 Procedure 3200、巴西 BRL 损失门槛、印度 Trade Annulment）——填 `review_window_min`
+     + `deviation_threshold_pct`（分档时取最紧一档 + note 列全）；② **纯裁量 / 双边合意制**（LSE
+     manifestly erroneous、SGX Rule 11.4、SIX 双方申请、TSX + CIRO、Euronext 4403/3）——
+     `deviation_threshold_pct: null` + note；③ **成交近乎终局**（日 TSE Rule 13、港 SEHK Rule 567、
+     台营业细则第 87 条错帐专户、中 交易规则 3.5.5/3.4.5）——`resolution: no_bust` 或窄口径
+     `cancel` + note 说清事前防线（涨跌停 / 价格笼子 / 特別気配）。查规则手册常在「Cancellation of
+     Trades」「Erroneous Trades」独立小节；美股走 **sec.gov SRO 规则申请 Exhibit 5**（Fair Access
+     UA 可 curl，含增删标记时摘无标记的连续片段）。
    - `order_book_transparency`（订单簿透明度）——盘前订单簿公开程度 + 是否支持冰山 / 隐藏
      限价单 + 盘后大宗成交披露延迟；信息常散在 order types 条款、market data policy、
-     block trade deferral 三处。与 `dark_pool`（独立暗池实体）、第十章 `market_data_levels`
-     分工见 `schema/taxonomy.yml` 三个字段各自的 note。
+     block trade deferral 三处。**多数现货订单簿是「全展示，无非展示订单类型」**（日港中台）——
+     这本身是与欧美（NYSE Non-Displayed/MPL、SIX Iceberg/AVD、Euronext Mid-Point、ASX Undisclosed/
+     Centre Point、TSX Dark、JSE Pegged Hidden）的显著差异，值得写清。quote 常可复用
+     `matching_principle` / `order_types` 已核实的措辞，多为 `medium`。与 `dark_pool`（独立暗池
+     实体）、第十章 `market_data_levels` 分工见 `schema/taxonomy.yml` 三个字段各自的 note。
    - 这几个字段连同 `order_types` / `tick_size` 都有 `spec` 形状（`schema/spec.yml`）——按
-     [ADR-035] 直接填 `spec`，填完在「市场机制剖面」视图里点开自检。
+     [ADR-035] 直接填 `spec`，填完在「市场机制剖面」视图里点开自检。**tick_size / error_trade_rule
+     的 spec 数值填 5b 校验（数值逐字 ⊆ quote）踩过的坑（[ADR-043]）：**
+     - **单位不一致**：官方表用「分 / cents」而 spec 想用「元 / dollars」→ 十进制对不上
+       （ASX 澳分表、台湾官方英译「5 cents」）。对策：spec 直接沿用官方表单位
+       （如 `currency: AUD_cents`），或 `ladder` 留 null 用 `full_table_note` 散文。
+     - **欧陆逗号小数**：RTS 11 原文「0,01」，validate 5b 做 `quote.replace(",","")`→「001」，
+       与 spec repr「0.01」不匹配 → 这类表一律 `min_tick: null` + 散文 `full_table_note`，
+       不放数值 `ladder`（SIX Annex D 用句点小数，是可放 ladder 的例外）。
+     - **规则 / 条款号别写进 `zh` / `en` 正文**：`NUMBER_RE` 把「Rule 4403」「RTS 11」「§ 87」
+       「Ref 66/2024」里的数字当反查目标，quote 里没有就 fail——条款号只写进 `detail` / `note`
+       / `sources` title。
+     - **flow-mapping spec 里的长 note**：`spec: {a: b, note: "很长…含半角逗号…"}` PyYAML
+       偶发 parse error；长 note 用块式 `spec:` 换行写。
+   - 有些交易所的一手规则页是 JS 导航壳、curl 抓不到正文（KRX 英文栏目、NSE 现货交易机制页）——
+     此时 `error_trade_rule` / `execution_model` 等如实标 `low` / `medium` + `detail` 说明 +
+     记 OPEN-QUESTIONS，或退一步引第三方逐字转载件（`ricago.com` 转 NSE Consolidated Circular）
+     / 权威财经媒体（`business-standard.com` 转 NSE 通函），均按 CLAUDE.md 二.3 封顶 `medium`。
 
 ### 5. 本地验证
 

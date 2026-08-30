@@ -604,7 +604,27 @@
         "enum": null,
         "detail": null
       },
-      "execution_model": null,
+      "execution_model": {
+        "enum": "hybrid",
+        "spec": {
+          "electronic": true,
+          "dealer_intermediated": true,
+          "note": "Eurex T7 中央电子订单簿连续撮合 + 受监管做市商制度：须申请资格，在至少一个衍生品上按月均覆盖每日交易时段 50% 持续录入有约束力双边报价；期权尤其依赖做市商流动性"
+        },
+        "zh": "混合模式：Eurex T7 为中央电子订单簿、连续撮合；叠加受监管做市商制度——做市商须申请资格，在至少一个衍生品上按月平均覆盖每日交易时段 50% 的时间持续提供有约束力的双边报价，期权市场流动性尤其依赖做市商",
+        "en": "Hybrid: Eurex T7 is a central electronic order book with continuous matching, complemented by a Regulated Market Maker regime — market makers must be admitted and continuously enter binding two-way quotes in at least one Derivative covering 50% of daily Trading Hours on a monthly average; options liquidity in particular relies on market makers",
+        "detail": "enum 依据既有 market_maker_scheme（受监管做市商，confidence high）与 matching_principle 的已核实 quote 综合判定为 hybrid。衍生品所——listing 等章节不适用，price_limits 参考价为前结算价。",
+        "sources": [
+          {
+            "title": "Exchange Rules（官网英文版PDF）§48-49",
+            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "the Exchange Traders acting on behalf of the Regulated Market Maker are required to continuously enter binding Quotes in at least one Derivative and during 50% of the daily Trading Hours on a monthly average.",
+        "confidence": "high",
+        "verified": "2026-08-27"
+      },
       "matching_principle": {
         "enum": "price_time",
         "zh": "市价申报优先于限价申报执行；具体价格/时间优先顺序细则详见交易系统规则",
@@ -623,11 +643,19 @@
         "detail": null
       },
       "order_types": {
-        "zh": "市价申报、限价申报、止损申报（Market/Limit/Stop Orders），另支持多种复合工具（跨期价差组合等）",
-        "en": "Market Orders, Limit Orders, Stop Orders; complex instruments (e.g. calendar spread strategies) are also supported",
+        "spec": {
+          "market": true,
+          "limit": true,
+          "stop": true,
+          "iceberg": true,
+          "note": "Eurex T7 订单类型（Conditions for Trading 2.x）：市价单、限价单、止损单（Stop）；另支持冰山单与 Book-or-Cancel 等属性、以及复合工具（跨期价差等策略）。全隐藏 / 中点订单不在标准衍生品订单簿类型内"
+        },
+        "zh": "市价申报、限价申报、止损申报（Market/Limit/Stop Orders）、冰山申报（Iceberg Orders）；另支持多种复合工具（跨期价差组合等策略）",
+        "en": "Market Orders, Limit Orders, Stop Orders, and Iceberg Orders; complex instruments (e.g. calendar spread strategies) are also supported",
+        "detail": "quote 待补——本次以 Conditions for Trading 目录结构核实类型存在，未逐条摘引条文原文，故 confidence: medium。",
         "sources": [
           {
-            "title": "Conditions for Trading（官网英文版PDF）目录 3.2-3.4",
+            "title": "Conditions for Trading（官网英文版PDF）2.x 订单类型",
             "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
             "accessed": "2026-08-27"
           }
@@ -635,26 +663,30 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
-        "detail": null,
         "quote": null
       },
       "tick_size": {
-        "zh": "",
-        "confidence": "low",
+        "spec": {
+          "regime": "per_instrument",
+          "min_tick": null,
+          "currency": "EUR",
+          "full_table_note": "各衍生品的最小价格变动（minimum price change / price gradation）由管理董事会在各产品《合约规格》中逐一规定，无统一表。例：DAX® 期货 1 个指数点（合约乘数 €25，故每跳 €25），Mini-DAX® 期货 1 点（€5），TecDAX® 期货 0.5 点（€5）",
+          "note": "驱动图形的量化值以各产品《合约规格》为准；此处仅取指数期货代表档位作锚点"
+        },
+        "zh": "最小价格变动逐衍生品在《合约规格》中规定，无统一表——如 DAX® 期货为 1 个指数点、Mini-DAX® 期货 1 点、TecDAX® 期货 0.5 点，利率与其他资产类别各不相同",
+        "en": "The minimum price change is set per Derivative in each product's Contract Specifications, with no single table — e.g. the DAX® Future moves in 1 index point (a EUR 25 tick), the Mini-DAX® Future in 1 point (EUR 5), and the TecDAX® Future in 0.5 point; rate and other asset classes differ",
+        "detail": "此前留空。Eurex tick size 本质是 per-instrument（数百个合约各有 minimum price change），无统一档位表——spec 记 regime=per_instrument + min_tick=null，full_table_note 给指数期货锚点并指向《合约规格》。",
         "sources": [
           {
-            "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
-            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
-            "accessed": "2026-08-27"
+            "title": "DAX® Futures — Contract Specifications（eurex.com，Contract values and price gradations 表）",
+            "url": "https://www.eurex.com/ex-en/markets/idx/dax/DAX-Futures-139902",
+            "accessed": "2026-08-30"
           }
         ],
+        "quote": "Contract values and price gradations Contract Contract value Minimum price change Points Value DAX® Futures EUR 25 1 EUR 25 Mini-DAX® Futures EUR 5 1 EUR 5",
+        "confidence": "high",
         "verified": "2026-08-27",
-        "en": null,
-        "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "board_lot_size": {
         "zh": "",
@@ -806,7 +838,29 @@
         "detail": null,
         "quote": null
       },
-      "error_trade_rule": null,
+      "error_trade_rule": {
+        "spec": {
+          "bust_allowed": true,
+          "review_window_min": 30,
+          "deviation_threshold_pct": null,
+          "resolution": "cancel_or_adjust",
+          "note": "「Mistrade」制度（Conditions for Trading 2.9）。只有成交时处于不利一方的会员可申请，须在成交后 30 分钟内（且在该衍生品当日交易时段结束后 30 分钟内）向管理董事会提交；逾期至 3 小时内另有更严条件。构成 Mistrade 的价格偏离区间（Mistrade Ranges）由管理董事会按每个衍生品逐一确定并公布，无统一百分比——市场波动加剧时可设 Fast-Market Period，期权 Mistrade Range 翻倍。期权净额成交中受益方可要求价格修正（Price Correction）以替代作废"
+        },
+        "zh": "「错误交易（Mistrade）」制度：仅成交时处于不利一方的会员可申请由管理董事会作废，须在成交后 30 分钟内（且在该衍生品当日交易时段结束后 30 分钟内）提交；逾 30 分钟至 3 小时内另有更严格条件。构成错误交易的价格偏离区间（Mistrade Ranges）由管理董事会按每个衍生品逐一确定并公布，无统一百分比表；市场波动加剧时管理董事会可设 Fast-Market Period，其间期权的 Mistrade Range 翻倍。期权净额成交中的受益方可要求价格修正以替代作废",
+        "en": "Mistrade regime: only the member that was at a disadvantage in the transaction may apply; the application must be submitted to the Management Board within 30 minutes of conclusion (and within 30 minutes of the end of that Derivative's Trading Period that day), with stricter conditions for applications after 30 minutes up to 3 hours. The price-deviation intervals that constitute a mistrade (Mistrade Ranges) are set and published by the Management Board per Derivative — there is no single percentage; during a Fast-Market Period the option Mistrade Ranges double. For options transactions in the netting process the benefiting party may demand a Price Correction instead of cancellation",
+        "detail": "Conditions for Trading at Eurex Deutschland 2.9.2–2.9.5。衍生品所——与 trading_halt_mechanism 不同。resolution 取 cancel_or_adjust：一般为作废，期权净额成交场景可改为价格修正。deviation_threshold_pct 留 null（Mistrade Ranges 逐产品公布，非统一值）。",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（Eurex03e，as of 27.07.2026，2.9 Mistrade）PDF",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-30"
+          }
+        ],
+        "quote": "Only the business party which is at a disadvantage in this Transaction at the time of conclusion is entitled to submit an application (“Entitled Admitted Company”). ... The Management Board shall cancel a Transaction if such cancellation has been applied for ... within 30 minutes upon its conclusion and before expiration of 30 minutes after termination of the Trading Period of the respective Derivative ... The Management Board shall determine the intervals respectively applicable for deviations to the reference price ... outside which a Transaction pursuant to the regulations in Number 2.9 are cancelled or whose price may be corrected for the respective Derivative (“Mistrade Ranges”) and shall publish them. ... For the Transactions in options Contracts accomplished during a Fast-Market Period, the Mistrade Ranges applicable pursuant to Paragraph 1 reduplicate.",
+        "confidence": "high",
+        "verified": "2026-08-27",
+        "enum": null
+      },
       "intraday_reversal": {
         "zh": "",
         "confidence": "low",
@@ -858,7 +912,23 @@
         "detail": null,
         "quote": null
       },
-      "order_book_transparency": null,
+      "order_book_transparency": {
+        "zh": "盘前：Eurex T7 为公开的中央电子订单簿，展示订单的价量向市场披露、按价格-时间优先撮合（市价单优先于限价单和报价），支持冰山订单（仅部分数量展示）。无独立暗池；大额交易走场外报告类型（Off-book / Eurex EnLight RFQ）并适用衍生品成交披露延迟。盘后：适用欧盟 MiFIR 衍生品成交透明度制度",
+        "en": "Pre-trade: Eurex T7 is a public central electronic order book whose displayed order sizes and prices are disseminated and matched on price-time priority (Market Orders ahead of Limit Orders and Quotes), with Iceberg Orders showing only a portion. There is no separate dark pool; large trades use off-book reporting types (Off-book / Eurex EnLight RFQ) with the applicable deferrals for derivatives. Post-trade: the EU MiFIR post-trade transparency regime for derivatives applies",
+        "detail": "字段管本所订单簿内部的（非）展示流动性；行情层级 / 收费见第十章。quote 复用 matching_principle 已核实措辞（市价单优先）；冰山单见 order_types。盘后延迟为 MiFIR 一般制度、未逐字核实产品级参数，故整体 confidence: medium。",
+        "sources": [
+          {
+            "title": "Conditions for Trading at Eurex Deutschland（订单执行优先级）PDF",
+            "url": "https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf",
+            "accessed": "2026-08-27"
+          }
+        ],
+        "quote": "Market Orders shall always be executed before Limit Orders or Quotes, as the case may be, are executed.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "enum": null,
+        "spec": null
+      },
       "dark_pool": {
         "zh": "",
         "confidence": "low",

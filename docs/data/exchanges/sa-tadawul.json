@@ -541,7 +541,27 @@
         "verified": "2026-08-14",
         "enum": null
       },
-      "execution_model": null,
+      "execution_model": {
+        "enum": "hybrid",
+        "spec": {
+          "electronic": true,
+          "dealer_intermediated": true,
+          "note": "全电子中央订单簿、价格-进入顺序优先连续撮合 + 正式做市商制度（经资本市场管理局 CMA 董事会 2022 批准的《做市商规则》管辖）。持约束性证券借贷协议的做市商做市时不适用卖空监管"
+        },
+        "zh": "混合模式：全电子中央订单簿、价格优先-进入顺序连续撮合，叠加正式做市商制度——经资本市场管理局（CMA）董事会 2022 年批准的《做市商规则》管辖",
+        "en": "Hybrid: a fully electronic central order book matching on price then entry-order priority, overlaid with a formal market-maker regime governed by the Market Making Regulations approved by the CMA Board in 2022",
+        "detail": "enum 依据既有 market_maker_scheme（正式《做市商规则》，confidence high）与 matching_principle（价格-进入顺序优先）综合判定为 hybrid。",
+        "sources": [
+          {
+            "title": "Market Making Regulations（Saudi Exchange 官方规则 PDF，经 tadawulgroup.sa 分发）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/2fc1a74f-4357-4843-9b50-0edbc06296b3/Market+Making+Regulations+%282%29.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-2fc1a74f-4357-4843-9b50-0edbc06296b3-oqd5Wba",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Approved by the Board of the Capital Market Authority Pursuant to its Resolution Number (1-98-2022) Dated 18/02/1444H corresponding to 14/09/2022G",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
       "matching_principle": {
         "enum": "price_time",
         "zh": "限价盘在同价位按订单进入顺序撮合；连续交易时段（第二时段）市价盘可部分/全部按单一价格成交",
@@ -560,6 +580,17 @@
         "quote": null
       },
       "order_types": {
+        "spec": {
+          "market": true,
+          "limit": true,
+          "iceberg": true,
+          "tif": [
+            "day",
+            "gtc",
+            "gtd"
+          ],
+          "note": "限价盘 / 市价盘（第二时段）+ 订单条件 FoK / FaK / Hidden Quantity（冰山，最低 5 万股或 5 万里亚尔起、每次至少披露总量的 5%）/ Cancel on Disconnect；有效期 Session / Day / GTC（最长 30 天）/ GTD（最长 30 天）。无全隐藏 / 止损订单类型"
+        },
         "zh": "限价盘（Limit Order）：可按对手方更优价成交，未成交部分继续按限价挂单；市价盘（Market Order）：第二时段内按当前价成交，未成交部分转为限价盘",
         "en": "Limit Order and Market Order",
         "sources": [
@@ -573,10 +604,48 @@
         "quote": "5.1.1 The Trading System will improve the execution prices of limit orders ... 5.2.1 During the Second Session, the Trading System will execute market orders partially or fully at one price, and convert the unmatched parts of partially matched market orders into limit orders at their traded prices.",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "tick_size": {
+        "spec": {
+          "regime": "tiered_by_price",
+          "min_tick": 0.01,
+          "currency": "SAR",
+          "ladder": [
+            {
+              "price_min": 0,
+              "price_max": 25,
+              "tick": 0.01
+            },
+            {
+              "price_min": 25,
+              "price_max": 50,
+              "tick": 0.02
+            },
+            {
+              "price_min": 50,
+              "price_max": 100,
+              "tick": 0.05
+            },
+            {
+              "price_min": 100,
+              "price_max": 250,
+              "tick": 0.1
+            },
+            {
+              "price_min": 250,
+              "price_max": 500,
+              "tick": 0.2
+            },
+            {
+              "price_min": 500,
+              "price_max": null,
+              "tick": 0.5
+            }
+          ],
+          "full_table_note": "股票 6 档（Trading and Membership Procedures §8.1.1 Table 2，档界为 25 / 49.98 / 99.95 / 249.90 / 499.80）；债务工具按票面值百分比计价、tick 为 0.001%",
+          "note": "min_tick 0.01 为最低价档；债务工具另按 0.001% 票面值"
+        },
         "zh": "股票按价格分层：25里亚尔以下0.01；25–49.98为0.02；50–99.95为0.05；100–249.90为0.10；250–499.80为0.20；500里亚尔及以上为0.50；债券类按票面值0.001%计",
         "en": "Tiered by price band: below SAR 25 → SAR 0.01; SAR 25–49.98 → SAR 0.02; SAR 50–99.95 → SAR 0.05; SAR 100–249.90 → SAR 0.10; SAR 250–499.80 → SAR 0.20; at or above SAR 500 → SAR 0.50; Debt Instruments 0.001% of par value",
         "sources": [
@@ -590,7 +659,6 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "board_lot_size": {
@@ -743,7 +811,29 @@
         "spec": null,
         "detail": null
       },
-      "error_trade_rule": null,
+      "error_trade_rule": {
+        "spec": {
+          "bust_allowed": true,
+          "review_window_min": null,
+          "deviation_threshold_pct": null,
+          "resolution": "cancel",
+          "note": "已抓取的《交易与会员规则》未见针对已成交订单的『明显错误成交作废』专章；误单防线以事前控制为主——每日静态涨跌幅限制 ±10%、动态价格带、超出静态限价即触发 5 分钟波动性拍卖，交易系统对超范围申报即时撤单。交易所在特定情形下（经资本市场管理局 CMA 不反对）可调整涨跌幅参数或手动调整参考价。已成交后的作废 / 更正规则本次未从官方文本核实，已记入 OPEN-QUESTIONS"
+        },
+        "zh": "已抓取的《交易与会员规则》未见针对已成交订单的『明显错误成交作废』专门条文。沙特交易所的误单防线以事前控制为主：每日 ±10% 静态涨跌幅限制、动态价格带、订单若可能在静态限价边界成交即触发 5 分钟波动性拍卖，交易系统对超出有效价格范围的申报即时撤单。交易所在特定情形下（经资本市场管理局 CMA 不反对）可调整涨跌幅参数或手动调整参考价",
+        "en": "The Trading and Membership Procedures fetched contain no dedicated provision for cancelling an executed trade as clearly erroneous. The Saudi Exchange's defence against erroneous orders is primarily preventive — a ±10% daily static price limit, a dynamic price band, a 5-minute volatility auction triggered when an order could match at the static-limit boundary, and immediate rejection/cancellation by the trading system of orders outside the valid price range. In certain cases (with a non-objection from the Capital Market Authority) the Exchange may adjust the fluctuation-limit parameters or manually adjust the reference price",
+        "detail": "confidence: medium——事前控制部分有官方文本支撑（§11.7 / §11.8），但已成交后的作废 / 更正规则未在已抓取的官方文本中定位到。已记入 OPEN-QUESTIONS，待人工提供官方错误交易 / mistrade 规则文本。与 trading_halt_mechanism 视角不同。",
+        "sources": [
+          {
+            "title": "Trading and Membership Procedures（§11.7 Volatility Auctions / §11.8）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Without prejudice to paragraphs (11.2), (11.5) and (11.6) of this Section the Exchange may as the case requires take any of the following actions: a) Adjust or cancel the fluctuation limit parameters after receiving a non-objection notification from the Authority. b) Adjust the reference price manually.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null
+      },
       "intraday_reversal": {
         "zh": "",
         "confidence": "low",
@@ -805,7 +895,23 @@
         "spec": null,
         "detail": null
       },
-      "order_book_transparency": null,
+      "order_book_transparency": {
+        "zh": "盘前：全电子中央订单簿公开，展示订单的价量向市场披露、按价格-进入顺序优先撮合。同一订单簿内支持部分披露——Hidden Quantity（冰山单，起点 5 万股或 5 万里亚尔，每次至少披露总量的 5%）；无全隐藏订单类型。事前另设有效申报价格范围与波动性拍卖约束。盘后：大宗交易另行申报",
+        "en": "Pre-trade: the fully electronic central order book is public — displayed order sizes and prices are disseminated and matched on price then entry-order priority. The same book supports partial disclosure via Hidden Quantity (iceberg) orders (minimum 50,000 shares or SAR 50,000, disclosing at least 5% of the total each time); there is no fully hidden order type. A valid price range and volatility auctions constrain order entry. Post-trade: block trades are reported separately",
+        "detail": "字段管本所订单簿内部的（非）展示流动性——Hidden Quantity 冰山单为唯一非完全展示类型（起点与披露比例见 order_types.detail）。confidence: low——中央订单簿的盘前展示程度与盘后披露延迟安排未从官方文本逐条摘引核实，已记入 OPEN-QUESTIONS。行情层级 / 收费见第十章 market_data_levels。",
+        "sources": [
+          {
+            "title": "Trading and Membership Procedures（§6 Order Conditions — Hidden Quantity）",
+            "url": "https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "low",
+        "verified": "2026-08-14",
+        "enum": null,
+        "spec": null,
+        "quote": null
+      },
       "dark_pool": {
         "zh": "",
         "confidence": "low",

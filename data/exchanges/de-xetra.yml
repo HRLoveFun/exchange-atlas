@@ -330,6 +330,19 @@ market_structure:
     quote: "In the closing auction, liquidity is concentrated at the end of the main trading phase and the day's closing price determined. ... Trade-at-Close is triggered after the closing auction for DAX, MDAX and SDAX and lasts for a maximum of five minutes."
     confidence: high
 
+  execution_model:
+    enum: hybrid
+    spec: {electronic: true, dealer_intermediated: true, note: "Xetra 中央电子限价订单簿连续撮合 + 指定发起人（Designated Sponsor）为流动性较低证券提供有约束力双边报价（守最大点差 / 最小报价量 / 最小报价时长），另有受监管做市商层级"}
+    zh: "混合模式：Xetra 为中央电子限价订单簿、价格-时间优先连续撮合；对流动性较低的证券叠加指定发起人（Designated Sponsor）制度——由做市参与者持续提供有约束力的双边报价，须守最大点差、最小报价量、最小报价时长等质量标准"
+    en: "Hybrid: Xetra is a central electronic limit order book matching on price-time priority; for less liquid securities it adds the Designated Sponsor scheme — market participants providing binding two-way quotes subject to quality criteria (maximum spread, minimum quote volume, minimum quotation duration)"
+    detail: "enum 依据既有 market_maker_scheme（Designated Sponsor，confidence high）与 matching_principle 的已核实 quote 综合判定：指定发起人为流动性较低证券的一等价格形成参与者，故归 hybrid；高流动性 DAX 成分股实务上以订单簿为主。"
+    sources:
+      - title: Designated Sponsor and Market Maker（Deutsche Börse官网）
+        url: https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/Designated-Sponsor-and-Market-Maker
+        accessed: 2026-08-14
+    quote: "Designated Sponsors are market participants who post binding buy and sell offers for the trading of less liquid securities. ... when quoting Designated Sponsors must observe a maximum spread (between the buy and sell price) and a minimum quote volume"
+    confidence: high
+
   matching_principle:
     enum: price_time
     zh: "价格优先、时间优先原则（Price-Time Priority）：无法按determined价格全部成交的限价订单按申报先后顺序执行；不限价订单（市价订单）优先执行"
@@ -342,6 +355,13 @@ market_structure:
     confidence: high
 
   order_types:
+    spec:
+      market: true
+      limit: true
+      stop: true
+      stop_limit: true
+      iceberg: true
+      note: "FWB Exchange Rules Annex I 定义：市价单（不限价）、限价单、冰山单（仅部分数量展示）、止损单（Stop Market / Stop Limit）、一撤二组合单（OCO）、跟踪止损单。冰山单承担部分披露；隐藏 / 中点流动性由 Xetra Midpoint 独立提供（见 dark_pool）"
     zh: "市价订单（Market Orders，不限价）、限价订单（Limit Orders）、冰山订单（Iceberg Orders）、止损订单（Stop Limit/Stop Market Orders）、一撤二组合订单（One-Cancels-Other Orders）、跟踪止损订单（Trailing Stop Orders）等"
     en: "Market Orders (unlimited), Limit Orders, Iceberg Orders, Stop Orders (Stop Limit/Stop Market), One-Cancels-Other Orders, Trailing Stop Orders, among others"
     sources:
@@ -352,8 +372,15 @@ market_structure:
     confidence: high
 
   tick_size:
-    zh: "最小报价单位由管理董事会依据欧盟委托条例 (EU) 2017/588 确定，未在本次抓取材料中找到具体档位数值表"
-    en: "Minimum tick sizes are determined by the Management Board pursuant to Commission Delegated Regulation (EU) 2017/588; a specific numeric table was not found in the materials fetched this session"
+    spec:
+      regime: tiered_by_price_and_liquidity
+      min_tick: null
+      currency: EUR
+      full_table_note: "管理董事会依欧盟委托条例 (EU) 2017/588（脱欧前统一的 MiFID II tick size 技术标准，德国仍适用）确定：按价格区间 × 日均成交笔数交叉查表，价格越高 / 流动性越低则档位越大"
+      note: "驱动订单簿的量化值以 (EU) 2017/588 tick size 表为准；FWB《交易所规则》§71(4) 仅作转致"
+    zh: "最小报价单位由管理董事会依据欧盟委托条例 (EU) 2017/588 确定——按证券价格区间与日均成交笔数两个维度交叉查表，价格越高、流动性越低，档位越大"
+    en: "Minimum tick sizes are determined by the Management Board pursuant to Commission Delegated Regulation (EU) 2017/588 — a two-dimensional table indexed by price band and by average daily number of transactions, where the tick coarsens as price rises and liquidity falls"
+    detail: "此前只确认转致条文、未找到数值表。本次结构化为 spec：regime 为价格×流动性分档，min_tick 留 null（随标的变动），完整表见 (EU) 2017/588 附录（与 uk-lse 承接同一份技术标准）。"
     sources:
       - title: Exchange Rules for the FWB（§71(4)）PDF
         url: https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf
@@ -429,6 +456,23 @@ market_structure:
     quote: "The Management Board shall inform the Exchange Supervisory Authority and the Federal Financial Supervisory Authority (Bundesanstalt für Finanzdienstleistungsaufsicht, BaFin) immediately of any measures pursuant to Sentence 1. In case of suspension pursuant to Sentence 1 Number 1, existing orders shall be deleted (suspension of trading)."
     confidence: high
 
+  error_trade_rule:
+    spec:
+      bust_allowed: true
+      review_window_min: null
+      deviation_threshold_pct: 3
+      resolution: cancel
+      note: "「Mistrade」制度（Conditions for Transactions §24–§28）。申请须在成交确认后两个交易小时内向管理董事会提交（连续竞价品种）。构成『明显偏离市场价』的门槛按板块分档，须同时满足百分比与欧元绝对额两条件：DAX 段 ≥3% 且 ≥€0.30 或 ≥12% 且 ≥€0.03；MDAX 段 ≥4% 且 ≥€0.40 或 ≥16% 且 ≥€0.04；其他证券 ≥5% 且 ≥€0.50 或 ≥20% 且 ≥€0.05。裁定成立即作废该笔成交（及后续因果成交），不调价"
+    zh: "「错误交易（Mistrade）」制度：成交价明显偏离市场价的，可申请由管理董事会作废（Mistrade Application）。连续竞价证券须在收到成交确认后两个交易小时内提交申请。构成「明显偏离」须同时满足百分比与欧元绝对额两个条件，按板块分档——DAX 成分股为偏离参考市场价 ≥3% 且 ≥€0.30，或 ≥12% 且 ≥€0.03；MDAX ≥4% 且 ≥€0.40 或 ≥16% 且 ≥€0.04；其余证券 ≥5% 且 ≥€0.50 或 ≥20% 且 ≥€0.05。裁定成立即作废成交，不作价格调整"
+    en: "Mistrade regime: a transaction executed at a price obviously out of line with the market may be cancelled by the Management Board on a Mistrade Application. For securities in Continuous Auction the application must be filed within two trading hours of receipt of the transaction confirmation. An 'obvious price deviation' requires both a percentage and an absolute-euro condition to be met, tiered by segment — DAX securities: deviation from the market-driven price of at least 3 per cent and at least EUR 0.30, or at least 12 per cent and at least EUR 0.03; MDAX: at least 4 per cent and EUR 0.40, or 16 per cent and EUR 0.04; all other securities: at least 5 per cent and EUR 0.50, or 20 per cent and EUR 0.05. A successful application voids the trade; there is no price adjustment"
+    detail: "Conditions for Transactions on the Frankfurter Wertpapierbörse §24（申请）+ §27（其他证券的明显价格偏离阈值）。spec.deviation_threshold_pct 取 DAX 段最紧的 3%（同时须满足 €0.30 绝对额）；review_window_min 留 null——原文为『两个交易小时』而非分钟数。与 trading_halt_mechanism（§59 应急停牌）不同。"
+    sources:
+      - title: "Conditions for Transactions on the Frankfurter Wertpapierbörse（FWB04e，as of 01.12.2025，§24 / §27）PDF"
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/258072/0c3583c58b7f5f34d7a14143f1419745/data/2025_12_01_fwb_bedingungen_fuer_geschaefte_en.pdf
+        accessed: 2026-08-30
+    quote: "The cancellation of Transactions shall be applied for with the Management Board (“Mistrade Application”). ... the Mistrade Application shall be submitted within two trading hours upon receipt of the Transaction Confirmation ... Transactions in Securities according to Paragraph 1 Sentence 1 which are quoted per unit and are traded in the DAX segment, have been accomplished at a price obviously not in line with the market if the price of the Transaction deviates from the market-driven price determined according to Paragraph 1 by at least 3 per cent and by at least EUR0.30 or by at least 12 per cent and by at least EUR 0.03. ... by at least 5 per cent and by at least EUR 0.50 or by at least 20 per cent and by at least EUR 0.05."
+    confidence: high
+
   intraday_reversal:
     zh: ""
     confidence: low
@@ -458,6 +502,17 @@ market_structure:
         accessed: 2026-08-14
     quote: "In deviation to Paragraph 1, Off-book Trading can take place from 8:00 a.m. to 10:00 p.m. Within such timeframe, the Management Board shall determine the Trading Period for Off-book Trading (\"Off-book Trading Time\")."
     confidence: high
+
+  order_book_transparency:
+    zh: "盘前：Xetra 为公开的中央电子限价订单簿，展示订单的价量向市场披露、按价格-时间优先撮合；同一订单簿内支持冰山订单（仅展示部分数量，隐藏部分按时间优先靠后成交）。全隐藏 / 中点流动性不在主订单簿内，由独立的 Xetra Midpoint 暗池功能提供（见 dark_pool）。盘后：适用欧盟 MiFIR 成交透明度制度，大额成交（LIS）可延迟披露"
+    en: "Pre-trade: Xetra is a public central electronic limit order book whose displayed order sizes and prices are disseminated and matched on price-time priority; the book supports Iceberg Orders (only a portion shown, the hidden remainder queued behind). Fully hidden / midpoint liquidity is not in the main book but is offered through the separate Xetra Midpoint dark pool (see dark_pool). Post-trade: under the EU MiFIR transparency regime, large-in-scale (LIS) trades may be published on a deferred basis"
+    detail: "字段管本所主订单簿内部的（非）展示流动性；独立暗池功能 Xetra Midpoint 见 dark_pool，行情层级 / 收费见第十章 market_data_levels。quote 复用 matching_principle（FWB §90 价格-时间优先）+ order_types（Iceberg）已核实措辞；盘后 LIS 延迟为 MiFIR 一般制度、未逐字核实交易所参数，故整体 confidence: medium。"
+    sources:
+      - title: Exchange Rules for the FWB（§90 / Annex I）PDF
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf
+        accessed: 2026-08-14
+    quote: "To the extent that Limit Orders cannot or can only partially be executed at the determined price, the chronological order of entry shall be determinative. ... Iceberg Orders Limit Orders which are entered with a specific total Volume..."
+    confidence: medium
 
   dark_pool:
     zh: "Xetra Midpoint：面向机构客户的暗池交易功能，以中间价（买卖盘中点）撮合执行订单"

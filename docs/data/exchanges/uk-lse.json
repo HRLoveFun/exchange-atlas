@@ -544,7 +544,27 @@
         "enum": null,
         "detail": null
       },
-      "execution_model": null,
+      "execution_model": {
+        "enum": "hybrid",
+        "spec": {
+          "electronic": true,
+          "dealer_intermediated": true,
+          "note": "Millennium Exchange 中央电子限价订单簿连续撮合（SETS / IOB 等订单驱动品种）+ 两套做市商制度：订单驱动品种用可执行报价 EQ，报价驱动品种（SETSqx / SEAQ / 欧洲报价服务）用非电子可执行的确定报价 Firm Quotes"
+        },
+        "zh": "混合模式：核心为中央电子限价订单簿（Millennium Exchange）连续撮合；同时并行两套注册做市商制度——订单驱动品种（SETS/IOB 等）做市商以可执行报价参与订单簿，报价驱动品种（SETSqx/SEAQ/欧洲报价服务，多为流动性较低的证券）由注册做市商以确定报价提供流动性",
+        "en": "Hybrid: at its core a central electronic limit order book (Millennium Exchange) with continuous matching, running alongside two parallel registered market-maker regimes — market makers in order-driven instruments (SETS, IOB, etc.) quote Executable Quotes into the book, while quote-driven instruments (SETSqx, SEAQ, European Quoting Service — largely less liquid securities) rely on registered market makers providing Firm Quotes",
+        "detail": "enum 依据既有 market_maker_scheme（confidence high）明确记载的订单驱动 + 报价驱动双轨制与 matching_principle（价格优先、显示/非显示优先级）的已核实 quote 综合判定为 hybrid。",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The obligations of market makers in order-driven securities section (rules 4100-4110.6) covers trading services SETS, IOB, securitised derivatives and order book for fixed income securities where registered market makers use Executable Quotes (EQ) to display their quote. The obligations of market makers in quote driven securities section (rules 4200 – 4334.3) covers trading services SETSqx, SEAQ and European Quoting Service where registered market makers use firm quotes to display their quote.",
+        "confidence": "high",
+        "verified": "2026-08-14"
+      },
       "matching_principle": {
         "enum": "price_display_time",
         "zh": "价格优先原则（Millennium Exchange以价格优先为基础运作）；同价位内展示订单优先于非展示订单（冰山订单非展示部分＞完全隐藏订单＞中间价挂钩订单），除冰山订单非展示部分外，各类别内部再按提交时间优先排序",
@@ -563,6 +583,16 @@
         "detail": null
       },
       "order_types": {
+        "spec": {
+          "market": true,
+          "limit": true,
+          "stop": true,
+          "stop_limit": true,
+          "iceberg": true,
+          "hidden": true,
+          "pegged": true,
+          "note": "MIT201 订单类型：限价单、市价单（无价、优先于所有限价单）、止损单 / 止损限价单、冰山单（仅展示部分数量）、隐藏限价单（全隐藏）、中间价挂钩单（仅以买卖中间价成交）"
+        },
         "zh": "限价订单（Limit Order）、市价订单（Market Order，无价格优先于所有限价订单）、止损订单/止损限价订单（Stop/Stop Limit Order）、冰山订单（Iceberg Order，仅展示部分数量）、隐藏限价订单（Hidden Limit Order）、中间价挂钩订单（Mid-Price Pegged Order，仅在盘中以买卖中间价成交）",
         "en": "Limit Order, Market Order (unpriced, has price priority over all priced orders), Stop / Stop Limit Order, Iceberg Order (displays only a portion of total volume), Hidden Limit Order (non-displayed), Mid-Price Pegged Order (executes only at the mid BID/OFFER price during regular trading)",
         "sources": [
@@ -576,25 +606,35 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "tick_size": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "确认档位分静态（static，固定值）与动态（dynamic，按订单意向价格决定）两种regime，但具体档位数值表定义在未抓取的Business Parameters文档内，留空不猜。",
+        "spec": {
+          "regime": "tiered_by_price_and_liquidity",
+          "min_tick": null,
+          "currency": "GBP",
+          "full_table_note": "英国承接欧盟 MiFID II RTS 11（Commission Delegated Regulation (EU) 2017/588，脱欧后保留于英国法）的统一 tick size 制度：按 18 个价格区间 × 6 个「日均成交笔数（ADT）」区间交叉查表——价格越高、流动性越低，最小报价单位越大；从 0.0001 到 500（标的计价货币单位）。ETF 统一按最高流动性档。",
+          "note": "驱动订单簿的量化值以 RTS 11 表为准；MIT201 另区分静态 / 动态 tick regime（静态＝固定档，动态＝按订单意向价格实时定档），两者都在 RTS 11 表框架内"
+        },
+        "zh": "采用英国承接欧盟 MiFID II 的统一最小报价单位技术标准（脱欧后保留于英国法）：按证券价格区间与日均成交笔数两个维度交叉查表确定——价格越高、流动性（日均成交笔数）越低，档位越大；交易所交易基金统一按最高流动性档",
+        "en": "Uses the UK's assimilated EU harmonised tick-size technical standard (retained in UK law after Brexit): the minimum price increment is obtained from a two-dimensional table indexed by the security's price band and by its average daily number of transactions — the higher the price and the lower the liquidity, the coarser the tick; exchange-traded funds use a single (most-liquid) liquidity band",
+        "detail": "此前留空（数值表在未抓取的 Business Parameters 文档内）。本次以 legislation.gov.uk 托管的 RTS 11（Commission Delegated Regulation (EU) 2017/588）官方法条原文（含完整 tick size 表）为准补齐；spec 的 min_tick 留 null——单一最小值随标的价格 / 流动性变动，完整表见 full_table_note 指向的法条。",
         "sources": [
           {
             "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
             "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
             "accessed": "2026-08-14"
+          },
+          {
+            "title": "Commission Delegated Regulation (EU) 2017/588 (RTS 11) — tick size regime for shares, depositary receipts and ETFs（legislation.gov.uk，UK 保留法）",
+            "url": "https://www.legislation.gov.uk/eur/2017/588",
+            "accessed": "2026-08-30"
           }
         ],
+        "quote": "The tick size regime only determines the minimum difference between two price levels of orders sent in relation to a financial instrument in the order-book. It should therefore be applied equally, regardless of the currency of the financial instrument. ... 0 ≤ price < 0,1 0,0005 0,0002 0,0001 0,0001 0,0001 0,0001 ... 1 ≤ price < 2 0,01 0,005 0,002 0,001 0,0005 0,0002 ... 50 000 ≤ price 500 200 100 50 20 10",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "spec": null,
-        "quote": null
+        "enum": null
       },
       "board_lot_size": {
         "zh": "",
@@ -732,7 +772,29 @@
         "spec": null,
         "detail": null
       },
-      "error_trade_rule": null,
+      "error_trade_rule": {
+        "spec": {
+          "bust_allowed": true,
+          "review_window_min": 30,
+          "deviation_threshold_pct": null,
+          "resolution": "cancel",
+          "note": "交易所视一切成交为 firm，仅在例外情形作 Exchange enforced cancellation（Rule 2120–2121），可应会员申请或交易所自行发起。无固定价格偏离百分比门槛，代之以：成交须『manifestly erroneous』、双方无法用 contra facility 自行冲销、且申请方潜在损失达最低标准——股票单只 £100,000 / 多只 £200,000，ETF/ETP £50,000 / £100,000。申请须在成交后 30 分钟内提交 Market Supervision（收盘 16:30 后的收盘拍卖成交须在 17:00 前）。交易所决定为终局，无上诉；只作废、不调价"
+        },
+        "zh": "交易所将其规则下的所有成交视为确定（firm），仅在例外情形下由交易所强制作废（Exchange enforced cancellation，规则 2120–2121）——可应会员申请或交易所自行发起（如公司事件明显误传、收盘拍卖被错单严重扭曲）。会员申请须在成交后 30 分钟内提交市场监察部门；待作废成交须经交易所判断为『明显错误（manifestly erroneous）』，且双方无法通过 contra 冲销机制自行处理，申请方潜在损失须达门槛（股票单只 £100,000、多只 £200,000）。交易所决定为终局，只作废不调价",
+        "en": "The Exchange treats all trades under its rules as firm; only in exceptional circumstances will it undertake an Exchange enforced cancellation (Rules 2120–2121), on a member firm's request or of its own volition (e.g. a clear miscommunication of a corporate event, or a closing price significantly distorted by erroneous orders in the closing auction). A member firm's request must reach the Market Supervision department within 30 minutes of the trade time; the trade must be manifestly erroneous in the Exchange's judgement, the parties must be unable to use the contra facility, and the requesting firm's potential loss must reach a threshold (£100,000 for a single stock, £200,000 across more than one). The Exchange's decision is final; trades are cancelled, not price-adjusted",
+        "detail": "Rule 2120–2121（Exchange enforced cancellation of erroneous trades）+ Guidance to Rule。与 trading_halt_mechanism（系统故障停牌）不同。无固定 % 偏离阈值——LSE 用『manifestly erroneous + 损失门槛 + 市场影响』的裁量标准，故 spec.deviation_threshold_pct 留 null。",
+        "sources": [
+          {
+            "title": "RULES OF THE LONDON STOCK EXCHANGE（Rulebook，effective 19 January 2026，Rule 2120–2121）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/rules-of-the-london-stock-exchange-effective-19-january-2026_0.pdf",
+            "accessed": "2026-08-30"
+          }
+        ],
+        "quote": "The Exchange views all trades undertaken under its rules as firm. However, the Exchange may, in exceptional circumstances, undertake an Exchange enforced cancellation of an automated trade executed on the trading system, either at the request of a member firm or of its own volition. ... any requests from member firms to cancel trades should be made to the Market Supervision department as soon as possible and in any event within 30 minutes of the trade time. ... any trades to be cancelled must be manifestly erroneous in the judgement of the Exchange. ... the Market Supervision department will only consider an Exchange enforced cancellation where the amount of loss is £100,000 or more in relation to automated trades conducted in a single stock on the trading system and £200,000 or more in relation to automated trades conducted in more than one stock",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
       "intraday_reversal": {
         "zh": "",
         "confidence": "low",
@@ -777,7 +839,23 @@
         "quote": null,
         "sources": null
       },
-      "order_book_transparency": null,
+      "order_book_transparency": {
+        "zh": "盘前：SETS 为公开的中央限价订单簿，展示订单的价量向市场披露（Millennium Exchange 以价格优先运作，展示部分优先于非展示部分）；同一订单簿内支持不披露的流动性——冰山订单仅展示部分数量、隐藏限价订单全隐藏、中间价挂钩订单仅以买卖中间价成交，均排在同价展示订单之后。盘后：适用英国承接的 MiFIR 成交透明度制度，大额成交（LIS）可延迟披露",
+        "en": "Pre-trade: SETS is a public central limit order book whose displayed order sizes and prices are disseminated to the market (Millennium Exchange operates on price priority, with displayed portions ahead of non-displayed); the same book supports undisclosed liquidity — Iceberg Orders show only a portion, Hidden Limit Orders are fully non-displayed, and Mid-Price Pegged Orders execute only at the mid, all ranked behind displayed orders at the same price. Post-trade: under the UK's assimilated MiFIR transparency regime, large-in-scale (LIS) trades may be published on a deferred basis",
+        "detail": "字段管本所订单簿内部的（非）展示流动性；独立暗池 / MTF 实体（Turquoise）见 dark_pool，行情层级 / 收费见第十章 market_data_levels。quote 复用 MIT201 已核实的展示 / 非展示优先级表述；盘后 LIS 延迟披露为 UK MiFIR 一般制度，未逐字核实交易所侧参数，故整体 confidence: medium。",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "Millennium Exchange operates on a price priority basis. Displayed parts of orders take precedence over non-displayed parts at any price point. With non-display portions of icebergs taking precedence over fully Hidden Orders, which in turn take precedence over Mid-Price Pegged Orders.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "spec": null
+      },
       "dark_pool": {
         "zh": "本所自身订单簿（SETS）内含非展示/隐藏订单类型（冰山订单非展示部分、隐藏限价订单、中间价挂钩订单），可在同一订单簿内实现部分非展示流动性；集团内另设独立法人实体Turquoise（LSEG于2009年12月取得多数股权的泛欧交易平台）专营暗池/多边交易设施业务，但那是与本交易所不同的法人实体，不计入本字段",
         "en": "The Exchange's own order book (SETS) supports non-displayed/hidden order types (iceberg non-display portions, Hidden Limit Orders, Mid-Price Pegged Orders), enabling some non-displayed liquidity within the same book; a separate LSEG group entity, Turquoise (majority stake acquired December 2009), operates as a dedicated pan-European dark/MTF venue, but it is a distinct legal entity from this Exchange and is not counted under this field",

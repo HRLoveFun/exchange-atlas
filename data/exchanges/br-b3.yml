@@ -358,6 +358,22 @@ market_structure:
     quote: "Trading Closing Call After-Market trading ... 10:00 16:55 16:55 17:00"
     confidence: high
 
+  execution_model:
+    enum: hybrid
+    spec:
+      electronic: true
+      dealer_intermediated: true
+      note: "PUMA 中央电子订单簿、价格优先-报单时间顺序连续撮合；同时设正式做市商制度——分独立做市商、参与 B3 计划的独立做市商、受托做市商（Contracted Market Maker）三类注册，获批后 30 日内须履约，逐资产做市商数量上限由 B3 设定"
+    zh: "混合模式：PUMA 为中央电子订单簿，按价格优先、报单时间顺序连续撮合；同时设正式做市商制度，分独立做市商、参与 B3 计划的独立做市商、受托做市商三类注册，投资基金也可注册为独立做市商，获批后须在 30 日内开始履约"
+    en: "Hybrid: PUMA is a central electronic order book matching on price priority then chronological order of entry, running alongside a formal market-maker regime with three registration categories (independent, B3-programme independent, and contracted market makers); investment funds may also register, and a registered market maker must begin acting within 30 days of approval"
+    detail: "enum 依据既有 matching_principle（价格 / 时间顺序优先，confidence high）与 market_maker_scheme（三类注册做市商、有履约义务，confidence high）综合判定为 hybrid。"
+    sources:
+      - title: B3's Trading Procedures Manual（PDF）
+        url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+        accessed: 2026-08-16
+    quote: "always compete based on price priority and chronological order of entry"
+    confidence: medium
+
   matching_principle:
     enum: price_time
     zh: "连续交易按价格优先、报单先后时间顺序（chronological order of entry）撮合；集合竞价按能匹配最大成交量的价格确定理论价，价格相同再依失衡量最小与最近成交价接近程度决胜"
@@ -370,6 +386,12 @@ market_structure:
     confidence: high
 
   order_types:
+    spec:
+      market: true
+      limit: true
+      stop: true
+      tif: [day, gtc, gtd]
+      note: "八种基础类型：市价、限价、管理单（Managed）、竞争性管理单、自由裁量单（Discretionary）、联动单（Funding）、止损单（Stop）、配对单（Matched）；另有 MOA / MOC / LOC 撮合期专用；有效期含 GTC / GTD。冰山 / 隐藏类型本次未从手册逐字核实，不入 spec"
     zh: "市价单、限价单、管理单（Managed Order）、竞争性管理单、自由裁量单（Discretionary Order）、联动单（Funding Order）、止损单（Stop Order）、配对单（Matched Order）八种基础类型；另有开盘市价单(MOA)、收盘市价单(MOC)、收盘限价单(LOC)等特殊撮合期订单，以及GTC/GTD等有效期修饰符"
     en: "Eight base order types: Market, Limit, Managed, Competing Managed, Discretionary, Funding, Stop, and Matched orders; plus auction-specific types Market-on-Auction (MOA), Market-on-Close (MOC), Limit-on-Close (LOC), and time-in-force qualifiers such as GTC/GTD"
     sources:
@@ -380,9 +402,21 @@ market_structure:
     confidence: high
 
   tick_size:
-    zh: ""
-    confidence: low
-    detail: "规程手册正文多处引用tick size概念（如「twice tick size」计算隧道带宽）但未给出固定数值，明确说明「Tick size is available from B3's portal」（按证券逐条维护），本次未抓取到该清单页面，留空不猜。"
+    spec:
+      regime: per_instrument
+      min_tick: null
+      currency: BRL
+      full_table_note: "B3 不设跨证券统一 tick size 表——各资产 / 衍生品的最小报价单位由 B3 逐条在其门户维护并公布（Trading Procedures Manual：『Tick size is available from B3's portal』）。手册正文用 tick size 作为『隧道』带宽等参数的计量单位"
+      note: "min_tick 留 null——per-instrument，无统一值；巴西现货股票实务上多为 R$0.01，但正式以 B3 门户逐证券公布为准"
+    zh: "B3 不设跨证券统一的最小报价单位表——各资产 / 衍生品的 tick size 由 B3 逐条在门户维护公布（手册明确『Tick size is available from B3's portal』）"
+    en: "B3 does not publish a single cross-security tick-size table — the tick size for each asset or derivative is maintained and published per instrument on B3's portal (the Trading Procedures Manual states 'Tick size is available from B3's portal')"
+    detail: "此前留空。本次结构化为 spec：regime=per_instrument，min_tick=null（无统一值），full_table_note 指向 B3 门户。手册正文多处以 tick size 为『隧道』带宽等参数的计量单位。"
+    sources:
+      - title: B3's Trading Procedures Manual（PDF）
+        url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+        accessed: 2026-08-16
+    quote: "Tick size is available from B3's portal"
+    confidence: medium
 
   board_lot_size:
     zh: "由发行人自行设定，多数股票为100股一手；低于整手可在碎股市场（odd-lot market）交易。ETF二级市场整手为10份，碎股市场为1份"
@@ -457,6 +491,34 @@ market_structure:
         accessed: 2026-08-16
     quote: "9:15:00-9:29:59 a.m. Postponement of order cancellation phases for twenty (20) minutes, followed by: Order cancellation phase lasting five minutes / Opening call lasting at least five minutes"
     confidence: high
+
+  error_trade_rule:
+    spec:
+      bust_allowed: true
+      review_window_min: 10
+      deviation_threshold_pct: null
+      resolution: cancel
+      note: "因严重操作错误（severe operating error）单方申请作废：须在成交登记后 10 分钟内电话通知 B3，并于当日交易时段结束前用 B3 提供的表单正式提交。除交易规则另有规定外，B3 依职权或应申请作废该类成交，仅当该成交造成的实际或潜在财务损失 ≥ 1,000 万巴西雷亚尔（BRL 10,000,000）。B3 应申请作废时，收到请求后 20 分钟内尽力执行。B3 可对责任方处罚款——不低于损失的 20%、不超过 BRL 5,000 万。事前防线：盘中波动限制 + type 1/2/4 拒单隧道 + 拍卖隧道"
+    zh: "因『严重操作错误（severe operating error）』的单方作废申请：会员须在成交登记后 10 分钟内电话通知 B3，并在当日交易时段结束前用 B3 提供的表单正式提交。除交易规则另有规定外，B3 依职权或应会员申请作废该类成交，前提是该成交造成的实际或潜在财务损失达到或超过 1,000 万巴西雷亚尔。B3 决定应申请作废时，收到请求后 20 分钟内尽力执行。B3 可对该成交的责任方处以罚款，金额不低于损失的 20%、不超过 5,000 万巴西雷亚尔"
+    en: "A unilateral request to cancel a trade due to severe operating error must be communicated to B3 by telephone within 10 minutes of trade registration and formalised on a B3 form by the end of the trading session. Apart from situations specified in its rulebook, B3 may cancel such a trade ex officio or on request only if the trade incurs an actual or potential financial loss of at least ten million Brazilian Reais (BRL 10,000,000). Where B3 decides to cancel on request, it uses best efforts to do so within 20 minutes of receiving the request. B3 may fine the responsible participant at least 20% of the loss, up to BRL 50,000,000"
+    detail: "B3's Trading Procedures Manual（Unilateral trade cancellation requests due to severe operating error）。与 trading_halt_mechanism 视角不同。B3 的门槛是绝对金额（BRL 10M）而非 % 偏离，故 deviation_threshold_pct 留 null。属『阈值 + 时限复核制』，门槛以损失金额计。"
+    sources:
+      - title: B3's Trading Procedures Manual（PDF，Unilateral trade cancellation requests due to severe operating error）
+        url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+        accessed: 2026-08-16
+    quote: "A unilateral request to cancel a trade due to severe operating error must be communicated to B3 by telephone by the full trading participant or trading participant concerned not more than ten (10) minutes after registration of the trade and formalized using a form provided by B3 by the end of the trading session ... B3 may cancel a trade due to severe operating error ex officio or at the request of a full trading participant or trading participant only if the trade in question incurs an actual or potential financial loss equal to or exceeding ten million Brazilian Reais (BRL 10,000,000.00). If B3 decides to cancel a trade at the request of a full trading participant or trading participant, B3 will make best efforts to do so for twenty (20) minutes after receiving the cancellation request."
+    confidence: high
+
+  order_book_transparency:
+    zh: "盘前：PUMA 中央订单簿公开，展示订单的价量按价格优先、报单时间顺序撮合。B3 现货订单簿未从手册逐字核实到冰山 / 隐藏订单类型（八种基础类型中不含明确的『部分披露』类型）。盘中另设 type 1/2/4 拒单隧道与拍卖隧道拦截超范围申报。盘后 / 大额：大宗交易（block trades）单独进行"
+    en: "Pre-trade: the PUMA central order book is public — displayed order sizes and prices are matched on price priority then chronological order of entry. No iceberg or hidden order type was verified verbatim from the manual for the B3 cash order book (the eight base order types do not include an explicit partially-disclosed type). Rejection tunnels (types 1/2/4) and auction tunnels constrain order entry. Post-trade / large orders: block trades run separately"
+    detail: "字段管本所订单簿内部的（非）展示流动性。行情层级 / 收费见第十章 market_data_levels。confidence: medium——B3 现货订单簿是否支持某种非展示订单类型未从手册逐字确认，已记入 OPEN-QUESTIONS。quote 复用 matching_principle 已核实措辞。"
+    sources:
+      - title: B3's Trading Procedures Manual（PDF）
+        url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+        accessed: 2026-08-16
+    quote: "always compete based on price priority and chronological order of entry"
+    confidence: medium
 
   intraday_reversal:
     enum: t0

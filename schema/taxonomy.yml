@@ -265,12 +265,13 @@ chapters:
         volatility: stable
         en_required: true
         enum_ref: execution_model
+        in_matrix: trading_mechanism
         note: >
           市场组织的基本形态——订单驱动 / 报价驱动 / 混合 / 经纪撮合（见 enums.yml
           execution_model 的说明）。`matching_principle` 是订单驱动模型内部的成交优先级
           细化，与本字段是两个层次，不重复。口头竞价 vs 电子撮合的差异写进 `detail`。
-          暂不标 `in_matrix`——待 Phase 3 回填覆盖率达 ADR-022 门槛（≥16/20）后再进
-          `trading_mechanism` 组（见 DECISIONS.md [ADR-042]）。
+          Phase 3（[ADR-043]）20/20 回填完成、覆盖率达 ADR-022 门槛后进 `trading_mechanism`
+          组（10 家 order_driven + 10 家 hybrid，无 quote_driven / brokered）。
       - id: matching_principle
         label_zh: 撮合原则
         label_en: Matching Principle

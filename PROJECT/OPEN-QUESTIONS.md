@@ -55,6 +55,12 @@
 
 （填数据时遇到查不清的，按下面格式加条目；`make sync` 会额外从 `data/` 里 `confidence: low` 或空字段生成一份自动清单，附在下面，不需要手动同步那部分）
 
+- **[ADR-043] 第五章三字段回填时几家未坐实到官方一手英文原文，均已如实标 `medium`/`low` 并附 `detail`，集中记此备查：**
+  - `kr-krx` `error_trade_rule` / `order_book_transparency`（均 `low`，已进自动清单）：KRX Business Regulation 主要为韩文，官网英文『Publication of Quotation Information』『Liquidity Provider』等栏目为 JS 导航壳、无正文。已知结构：KRX 设误单救济制度（源于 2013 HanMag 事件）+ 技术故障直接撤单权（2025 扩至债券市场）；订单簿为多档公开、无冰山/隐藏。**待人工提供**：KRX 官方英文《KOSPI/KOSDAQ Market Business Regulation》或其 Enforcement Rules 中「erroneous trade / trade cancellation」「market data / quotation dissemination」章节原文。
+  - `sa-tadawul` `error_trade_rule`（`medium`）：已抓取的《Trading and Membership Procedures》无针对已成交订单的『明显错误成交作废』专章（Section 9 只讲成交前的订单撤销）。事前控制（±10% 静态限、波动性拍卖、§11.8 参数调整权）有官方文本支撑。**待人工提供**：Saudi Exchange / CMA 关于 mistrade / trade cancellation 的规则原文（可能在被 Akamai 拦截的 `www.saudiexchange.sa` 上）。`order_book_transparency`（`low`）：中央订单簿盘前展示程度与盘后披露延迟未逐条摘引。
+  - `in-nse` `error_trade_rule` / `execution_model` / `matching_principle` / `order_types` / `tick_size`（`medium`）：NSE 一手 `nseindia.com` 现货交易机制专页多为 JS 导航壳、正文抓不到。撮合/订单类型引自 NSE『Equity Derivatives Trading System』页（同一 NEAT/NNF 架构，非现货专页）；Trade Annulment 细则引自 `ricago.com` 逐字转载的 NSEIL Consolidated Circular（第三方封顶 `medium`）；tick size（₹0.01/₹0.05，2024-06-10 起）引自 `business-standard.com` 转述 NSE 通函 Ref 66/2024。**待人工提供**：NSE 一手《Capital Market — Trading》规则页正文、NSE 通函 Ref 66/2024 PDF 直链、NSE Disclosed Quantity 现货最低披露比例。
+  - `br-b3` `order_book_transparency`（`medium`）：B3《Trading Procedures Manual》八种基础订单类型不含明确的『部分披露 / 冰山』类型；B3 现货订单簿是否支持某种非展示订单类型未从手册逐字确认。**待人工提供**：B3 手册中订单簿展示 / 隐藏订单相关章节。
+
 - **`sa-tadawul` 官网 `www.saudiexchange.sa` 全站被 Akamai WAF 拦截，任何路径/PDF/UA 组合均返回 403**（响应体含 `errors.edgesuite.net`，与 v0.2 的 `sec.gov`/`finra.org`/`dtcc.com` 同一类拦截），详细探测记录见 `SOURCES.md` `sa-tadawul` 一节末尾。已用同一 CMS 后端但未被拦截的 `tadawulgroup.sa` 域名、监管方 `cma.gov.sa`、清算/存管子公司自有域名 `edaa.sa`/`muqassa.sa` 覆盖了监管、交易机制、上市、指数、清算五章的核心内容，但市场数据/技术基础设施（十）章节几乎完全留空——行情费率、历史数据可得性、交易系统名称等信息主要只在被封锁的官网上有专门页面。**待人工提供**：若能人工访问 `www.saudiexchange.sa` 截取市场数据服务页（Market Data Services / historical data / trading system 相关页面）的原文或 PDF，可补齐第十章。
 - **`sa-tadawul` 的 TASI（塔达吾尔全股指数）自身基日/基点仍未找到官方一手原文，2026-08-20/21 复查再次确认无果。** 已排除的候选：官方《指数方法论 2024》PDF（只给出下属 GICS 行业分类指数的基日 2017年1月8日，无 TASI 自身基日）、CMA 投资者教育 Booklet 2《Investing in the Stock Market》（提到 TASI 但无历史/基日信息）、Saudi Exchange 官方《2024年度统计报告》（无历史基日信息）；`web.archive.org` 两次尝试（`/wayback/available` API 与直接 `web.archive.org/web/<ts>/<url>` 跳转两种路径）均未取到可用快照——一次报务站级"Temporarily Offline"，一次 429 限流，与此前记录的限流现象一致但这次多了"服务暂时整体下线"的新观察。业内广泛流传"TASI基日1985年2月27日=100点，1998年1月23日×10变为1000点"的说法（Wikipedia、naga.com、capital.com、CEIC等多个第三方口径一致），但均为第三方且无可摘引一手原文支撑，按铁律不采纳。下次有空可尝试：① 直接在 `saudiexchange.sa`（若人工能访问）找 Index Overview/Historical Data 专页；② 找 Tadawul/CMA 更早年份（如2010年代）的《Equity Market Indices Guidebook》旧版存档；③ 待 `web.archive.org` 恢复后重新查这两个域名的历史快照。
 - **`kr-krx` 列表型章节（`indices`）里仍有一条查不清的具体条目，列表项本身不带 `confidence` 字段，不会被下面的自动清单扫描到，手动记在这里：KOSDAQ 综合指数（`indices.kosdaq-index`）自身的基日/基点未能确认。** 2026-08-21 重新尝试：(a) 静态可抓取的 KOSDAQ Market Overview / Characteristics of the KOSDAQ Market 两个官方英文页正文均未提及基日/基点数字（同一批新抓取的「Introduction of KOSPI Market」页倒是直接给出了 KOSPI 综合指数的基日基点，见下方，两个指数命运不同）；(b) KRX 官网英文版没有单独的「KOSDAQ Index」产品介绍页（Product > Indices 栏目下只有 Index Business/Committee/Organization/Events 几个治理性子页，不含逐指数说明）；(c) 找到了专门的指数子站 `eindex.krx.co.kr`（Family Site 里的"Indices"），其「Current Index > Equity > KOSDAQ Series」页面确实有"Index Name / Base Date / Date Introduced / Base Value"这一列表结构、且看起来正是我们要的数据，但该表格是纯前端渲染——页面静态 HTML 里只有 `{{idx_nm}}`/`{{cmpprevdd}}` 等 Mustache 占位符，真实数据靠站内一个需要先调用 `/contents/COM/GenerateOTP.jspx` 换取一次性 code、再带 code POST 到 `/contents/IDXE/99/IDXE99000001.jspx` 的两步 AJAX 接口拉取（该域名下 res/pc/js/func.js 里 `$.otpCode` 函数可见完整逻辑）；同一域名下「Index Methodology」「FactSheet」「Brochure/Guide」几个资料下载页也是同一套 OTP-AJAX 机制，不是静态 PDF 直链。这类需要模拟一次性 token 交换的接口已超出"curl 抓静态页/PDF"的范围，判断为不值得单为一个字段去逆向一个鉴权 AJAX 接口（性质上与 sg-sgx 那次 SPA 空壳问题类似，见框架性问题第28条），未继续深入；(d) 一份 2015 年官方 KOSDAQ 市场介绍 PDF（`kosdaq_brochure.pdf`）里有一张历年 KOSDAQ 指数点位走势图，但基日数字是画在图表里的像素图案，pdftotext 抽不出文字。**下次有空可尝试**：① 找官方或 KOSDAQ 委员会发布的指数方法论 PDF 直链（非 AJAX 触发的那种）；② 或索性正面解决 OTP-AJAX 两步鉴权流程（如果未来还会反复遇到 `eindex.krx.co.kr` 这类站内数据表，一次性写通用抓取逻辑比每次绕开更划算）。KOSPI 综合指数与 KOSPI200 的基日基点均已确认，不受影响：KOSPI（`indices.kospi`）基日基点 1980年1月4日=100（2026-08-21 新增确认，来源见 SOURCES.md），KOSPI200（`indices.kospi200`）1990年1月3日=100（既有数据）。
@@ -116,6 +122,8 @@
 - `jp-jpx` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
+- `kr-krx` 市场结构与交易机制 / 错误交易处理规则（error_trade_rule）— confidence: low
+- `kr-krx` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 做市商制度（market_maker_scheme）— confidence: low
 - `kr-krx` 市场数据与技术基础设施 / 实时/延时（data_latency）— confidence: low
 - `kr-krx` 市场数据与技术基础设施 / 数据收费模式（data_pricing_model）— confidence: low
@@ -127,6 +135,7 @@
 - `kr-krx` 交易成本与税费 / 股息预扣税（dividend_withholding_tax）— confidence: low
 - `kr-krx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `kr-krx` 风险与特殊考量 / 市场操纵与监管执法环境（enforcement_note）— confidence: low
+- `sa-tadawul` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low
 - `sa-tadawul` 市场数据与技术基础设施 / 历史系统故障事件（major_outage_history）— confidence: low
 - `sa-tadawul` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `sg-sgx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
@@ -137,7 +146,6 @@
 - `us-nasdaq` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `us-nasdaq` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `us-nyse` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
-- `us-nyse` 市场结构与交易机制 / 订单类型（order_types）— confidence: low
 - `us-nyse` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `us-nyse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 <!-- END:GENERATED auto-issues -->

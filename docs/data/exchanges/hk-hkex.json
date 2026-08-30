@@ -585,7 +585,27 @@
         "enum": null,
         "detail": null
       },
-      "execution_model": null,
+      "execution_model": {
+        "enum": "order_driven",
+        "spec": {
+          "electronic": true,
+          "dealer_intermediated": false,
+          "note": "OTP-C 中央电子订单簿、严格价格-时间优先连续配对，现货股票无场内做市商；仅结构性产品（权证 / 牛熊证）、ETF、双柜台股票设做市商 / 流动性提供者"
+        },
+        "zh": "订单驱动：证券市场交易平台 OTP-C 为中央电子订单簿，以严格的价格及时间优先次序连续配对；现货股票不设做市商。仅结构性产品（权证 / 牛熊证）、交易所买卖基金（ETF）及双柜台股票设有做市商制度",
+        "en": "Order-driven: the OTP-C central electronic order book matches continuously on strict price-then-time priority; cash equities have no market makers. Market-maker schemes exist only for structured products (warrants / CBBCs), ETFs and dual-counter securities",
+        "detail": "enum 依据既有 matching_principle（OTP-C 价格-时间优先，confidence high）与 market_maker_scheme（仅结构性产品 / ETF / 双柜台设做市商，confidence high）综合判定：现货股票为纯订单驱动，产品级做市不改变市场基本形态。dealer_intermediated 记 false（就现货股票主市场而言）。",
+        "sources": [
+          {
+            "title": "Trading Mechanism – Securities Market (Orion Trading Platform, sc_lang=zh-hk)",
+            "url": "https://www.hkex.com.hk/Services/Trading/Securities/Overview/Trading-Mechanism?sc_lang=zh-hk",
+            "accessed": "2026-08-20"
+          }
+        ],
+        "quote": "現時 OTP-C 以嚴格的價格及時間優先次序持續進行配對。較早時間輸入系統的買賣盤必須要完全執行，才可處理同等價格但較遲輸入的買賣盤。",
+        "confidence": "high",
+        "verified": "2026-08-12"
+      },
       "matching_principle": {
         "enum": "price_time",
         "zh": "现时 OTP-C（证券市场交易平台）以严格的价格及时间优先次序持续进行配对：较早时间输入系统的买卖盘必须完全执行，才可处理同等价格但较迟输入的买卖盘",
@@ -609,9 +629,14 @@
         "spec": null
       },
       "order_types": {
+        "spec": {
+          "market": false,
+          "limit": true,
+          "note": "OTP-C 证券市场只有限价类订单：竞价盘 / 竞价限价盘（开市前、收市竞价时段）、限价盘 / 增强限价盘 / 特别限价盘（持续交易时段），可附「全数执行或立刻取消」。无独立市价盘类型（特别限价盘可扫至多个价位、功能上近似可成交限价盘）；无冰山 / 隐藏 / 止损订单类型（止损由券商端处理）"
+        },
         "zh": "开市前时段及收市竞价时段只接受竞价盘及竞价限价盘；持续交易时段只接受限价盘、增强限价盘及特别限价盘，可选择附加「全数执行或立刻取消」指示",
         "en": "The Pre-opening Session and the Closing Auction Session accept at-auction and at-auction limit orders only; the Continuous Trading Session accepts limit, enhanced limit and special limit orders only, with an optional \"All-or-Nothing Qualifier\"",
-        "detail": "2026-08-20 改用官方中英文对照页核实，取代此前把 VCM 报价限制误当作订单类型说明的表述——VCM 是另一套独立机制（见 volatility_interruption 字段），不应与订单类型混填。",
+        "detail": "2026-08-20 改用官方中英文对照页核实，取代此前把 VCM 报价限制误当作订单类型说明的表述——VCM 是另一套独立机制（见 volatility_interruption 字段），不应与订单类型混填。HKEX 证券市场无市价盘、无冰山 / 隐藏 / 止损订单类型。",
         "sources": [
           {
             "title": "Trading Mechanism – Securities Market (Orion Trading Platform, sc_lang=zh-hk)",
@@ -627,25 +652,92 @@
         "quote": "在持續交易時段，系統只以限價盤、增強限價盤及特別限價盤進行買賣。／During the Continuous Trading Session, the system accepts limit, enhanced limit and special limit orders only, with an option for an \"All-or-Nothing Qualifier\"",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "tick_size": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "按股价分层的最小变动价位表未在本次抓取，留空。",
+        "spec": {
+          "regime": "tiered_by_price",
+          "min_tick": 0.001,
+          "currency": "HKD",
+          "ladder": [
+            {
+              "price_min": 0.01,
+              "price_max": 0.25,
+              "tick": 0.001
+            },
+            {
+              "price_min": 0.25,
+              "price_max": 0.5,
+              "tick": 0.005
+            },
+            {
+              "price_min": 0.5,
+              "price_max": 10.0,
+              "tick": 0.01
+            },
+            {
+              "price_min": 10.0,
+              "price_max": 20.0,
+              "tick": 0.01
+            },
+            {
+              "price_min": 20.0,
+              "price_max": 50.0,
+              "tick": 0.02
+            },
+            {
+              "price_min": 50.0,
+              "price_max": 100.0,
+              "tick": 0.05
+            },
+            {
+              "price_min": 100.0,
+              "price_max": 200.0,
+              "tick": 0.1
+            },
+            {
+              "price_min": 200.0,
+              "price_max": 500.0,
+              "tick": 0.2
+            },
+            {
+              "price_min": 500.0,
+              "price_max": 1000.0,
+              "tick": 0.5
+            },
+            {
+              "price_min": 1000.0,
+              "price_max": 2000.0,
+              "tick": 1.0
+            },
+            {
+              "price_min": 2000.0,
+              "price_max": 5000.0,
+              "tick": 2.0
+            },
+            {
+              "price_min": 5000.0,
+              "price_max": 9995.0,
+              "tick": 5.0
+            }
+          ],
+          "full_table_note": "单一上落价位表（Spread Table，适用于所有货币单位）。上表已反映 2025 年年中第一阶段最低上落价位下调（10–20 元档 0.02→0.01、20–50 元档 0.05→0.02）；第二阶段（0.50–10 元档 0.01→0.005）计划约 2026 年年中、视市场准备情况推行。以 HKEX 官网上落价位表最新版为准。",
+          "note": "0.50–10.00 档现为 0.010；第二阶段落地后该档降为 0.005"
+        },
+        "zh": "单一上落价位表按股价分档：0.01–0.25 元为 0.001 元，0.25–0.50 元为 0.005 元，0.50–20.00 元为 0.010 元（第一阶段下调后），20–50 元 0.020 元……递增至 5,000–9,995 元为 5.000 元。适用于所有货币单位",
+        "en": "A single spread table tiered by price: HK$0.001 for prices HK$0.01–0.25, HK$0.005 for HK$0.25–0.50, HK$0.010 for HK$0.50–20.00 (after the phase-1 reduction), HK$0.020 for HK$20–50, rising to HK$5.000 for HK$5,000–9,995; applicable to all currency units",
+        "detail": "此前留空。本次以 HKEX《下调证券市场最低上落价位》咨询总结（cp202406cc.pdf）内的上落价位表结构化——第一阶段（约 2025 年年中）已生效，第二阶段约 2026 年年中；full_table_note 说明分阶段安排。",
         "sources": [
           {
-            "title": "Trading Hours - Securities Market（HKEX 官网）",
-            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
-            "accessed": "2026-08-12"
+            "title": "Reduction of Minimum Spreads in the Hong Kong Securities Market — Consultation Conclusions（HKEX，Dec 2024，Table 1 / Table 2）PDF",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/News/Market-Consultations/2016-Present/June-2024-Review-of-Minimum-Spreads/Conclusions-Dec-2024/cp202406cc.pdf",
+            "accessed": "2026-08-30"
           }
         ],
+        "quote": "From 0.01 to 0.25 0.001 ... Over 0.25 to 0.50 0.005 ... Over 0.50 to 10.00 0.010 ... Over 10.00 to 20.00 0.020 0.010 (-50%) ... Over 20.00 to 100.00 0.050 ... 20.00 to 50.00 0.050 0.020 (-60%) ... Over 100.00 to 200.00 0.100 ... Over 200.00 to 500.00 0.200 ... Over 500.00 to 1,000.00 0.500 ... Over 1,000.0 to 2,000.00 1.000 ... Over 2,000.0 to 5,000.00 2.000 ... Over 5,000.0 to 9,995.00 5.000",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
-        "enum": null,
-        "spec": null,
-        "quote": null
+        "enum": null
       },
       "board_lot_size": {
         "zh": "各股票各自设定board lot（非全市场统一，如100股/500股/1000股不等）",
@@ -805,7 +897,29 @@
         "detail": null,
         "quote": null
       },
-      "error_trade_rule": null,
+      "error_trade_rule": {
+        "spec": {
+          "bust_allowed": true,
+          "review_window_min": null,
+          "deviation_threshold_pct": null,
+          "resolution": "cancel_or_adjust",
+          "note": "证券市场（OTP-C 自动对盘）成交视为确定，无美欧式『按价格偏离阈值 + 时限申请复核』的常规错误交易机制。仅在争议经报告、交易所作出决定后方可对参与者交易记录作调整，该决定为最终且不可推翻。香港期货市场 HKATS 另有一套短窗口 Error Trade Rule，本字段不含"
+        },
+        "zh": "证券市场自动对盘的成交为确定成交，没有欧美式『成交价偏离参考价达某百分比、限时申请复核作废』的常规错误交易处理机制。参与者的交易记录只有在争议经报告、并由交易所作出决定后方可调整，且该决定为最终、具决定性并对各方有约束力。（注：香港期货市场另设有一套短窗口的错误交易规则 Error Trade Rule，属期货交易平台 HKATS，不适用于本字段所述的证券市场）",
+        "en": "Automatched trades on the securities market are final; there is no routine erroneous-trade process of the US/EU type (a deviation-from-reference-price threshold plus a time-limited request for review and cancellation). A participant's trading records may be adjusted only after a dispute has been reported and the Exchange has made a decision, and that decision is final and conclusive and binding on the parties. (The Hong Kong futures market has a separate short-window Error Trade Rule on the HKATS platform, which is outside the scope of this securities-market field.)",
+        "detail": "证券市场：SEHK Rules of the Exchange Rule 567（争议报告后方可调整交易记录、决定为终局）。港交所证券市场没有单独的『明显错误成交』作废流程——这本身是与欧美市场的显著差异。香港期货市场（HKATS）的 Error Trade Rule 为成交后 10 分钟内的窗口。resolution 记 cancel_or_adjust（Rule 567 用『adjustments』措辞）。",
+        "sources": [
+          {
+            "title": "Rules of the Exchange of The Stock Exchange of Hong Kong Limited — Chapter 5 (Trading), Rule 567 PDF",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/SEHK/Securities/Rules/Chap_5_eng.pdf",
+            "accessed": "2026-08-30"
+          }
+        ],
+        "quote": "Any adjustments to a Participant's trading records kept by the Exchange can only be made after a dispute has been reported and a decision made by the Exchange. Any such decision shall be final and conclusive and binding on the parties involved.",
+        "confidence": "high",
+        "verified": "2026-08-12",
+        "enum": null
+      },
       "intraday_reversal": {
         "enum": "t0",
         "zh": "T+0（可当日回转，无 SSE 式 T+1 限制）",
@@ -862,7 +976,23 @@
         "detail": null,
         "quote": null
       },
-      "order_book_transparency": null,
+      "order_book_transparency": {
+        "zh": "盘前：OTP-C 为公开的中央订单簿，各价位买卖盘数量公开、按价格及时间优先连续配对；证券市场不提供冰山盘、隐藏盘或市价盘。价格急剧波动时以市场波动调节机制（VCM）在 5 分钟冷静期内限价（不停牌）。盘后 / 大额：无独立暗池；大额交易另行按规则申报。适用《证券及期货条例》下的成交披露要求",
+        "en": "Pre-trade: the OTP-C central order book is public — order quantities at each price level are displayed and matched on price-then-time priority; the securities market offers no iceberg, hidden or market order types. During sharp moves the Volatility Control Mechanism (VCM) applies a 5-minute cooling-off price band rather than a halt. Post-trade / large orders: there is no separate dark pool; large trades are reported under the Rules. Trade publication follows the requirements under the Securities and Futures Ordinance",
+        "detail": "字段管本所订单簿内部的（非）展示流动性——HKEX 证券市场订单簿全展示、无非展示订单类型，是与欧美市场的显著差异。行情层级 / 收费见第十章 market_data_levels。quote 复用 matching_principle / order_types 已核实措辞；盘后披露延迟参数未逐字核实，故整体 confidence: medium。",
+        "sources": [
+          {
+            "title": "Trading Mechanism – Securities Market (Orion Trading Platform, sc_lang=zh-hk)",
+            "url": "https://www.hkex.com.hk/Services/Trading/Securities/Overview/Trading-Mechanism?sc_lang=zh-hk",
+            "accessed": "2026-08-20"
+          }
+        ],
+        "quote": "現時 OTP-C 以嚴格的價格及時間優先次序持續進行配對。／在持續交易時段，系統只以限價盤、增強限價盤及特別限價盤進行買賣。",
+        "confidence": "medium",
+        "verified": "2026-08-12",
+        "enum": null,
+        "spec": null
+      },
       "dark_pool": {
         "zh": "",
         "confidence": "low",

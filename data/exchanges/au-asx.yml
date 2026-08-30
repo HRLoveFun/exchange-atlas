@@ -353,6 +353,22 @@ market_structure:
     quote: "The Closing Single Price Auction takes place between 16:10:00^ (randomised 30 seconds) to 16:11:00, Sydney time. ASX Trade calculates closing prices during this phase."
     confidence: high
 
+  execution_model:
+    enum: order_driven
+    spec:
+      electronic: true
+      dealer_intermediated: false
+      note: "ASX Trade 中央电子订单簿、价格-时间优先连续撮合；现货股票无做市商。投资产品（ETF / 权证）发行人须依 AQUA / Warrant 规则履行流动性支持义务，衍生品市场另设正式做市商注册——均为订单驱动之上的补充"
+    zh: "订单驱动：ASX Trade 为中央电子订单簿，按价格优先、时间优先连续自动撮合；现货股票不设做市商。ETF / 权证等投资产品发行人须履行流动性支持（做市）义务，衍生品市场另设正式做市商注册制度"
+    en: "Order-driven: ASX Trade is a central electronic order book matching continuously on price-then-time priority; cash equities have no market makers. Issuers of investment products (ETFs / warrants) must meet liquidity-support obligations under the AQUA / Warrant Rules, and the derivatives market has a separate formal Market Maker registration scheme"
+    detail: "enum 依据既有 matching_principle（价格 / 时间优先，confidence high）与 market_maker_scheme（做市限投资产品 / 衍生品，confidence high）综合判定为 order_driven。dealer_intermediated 记 false（就现货股票而言）。"
+    sources:
+      - title: Cash market trading hours（ASX 官网）
+        url: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours
+        accessed: 2026-08-14
+    quote: "ASX Trade automatically matches all trades in Price/Time Priority on a continuous basis."
+    confidence: high
+
   matching_principle:
     enum: price_time
     zh: "价格优先、时间优先，连续竞价阶段由ASX Trade系统自动持续撮合"
@@ -365,14 +381,43 @@ market_structure:
     confidence: high
 
   order_types:
-    zh: ""
-    confidence: low
-    detail: "本轮抓取的Operating Rules第三节未包含订单类型的完整定义清单（篇幅未覆盖到该部分），留空待后续核实。"
+    spec:
+      market: true
+      limit: true
+      iceberg: true
+      hidden: true
+      pegged: true
+      note: "限价单、市转限单（Market-To-Limit）、扫单（Sweep Market-To-Limit）；冰山单（Iceberg，最低披露 500 单位，Rule 4022）；全隐藏单（Undisclosed Order，Rule 4023）；Centre Point 系列（盯住买卖中点的暗盘 / 块单，Rule 4024）。ASX 现货无原生止损单（由券商端处理）"
+    zh: "限价单、市转限单（Market-To-Limit）、扫单（Sweep Market-To-Limit）、冰山单（Iceberg Order，最低披露 500 单位）、全隐藏单（Undisclosed Order）、Centre Point 中点订单系列（盯住买卖中点的暗盘 / 块单）"
+    en: "Limit Order, Market-To-Limit Order, Sweep Market-To-Limit Order, Iceberg Order (minimum disclosed portion 500 units), Undisclosed Order (fully hidden), and Centre Point orders (dark orders pegged to the bid/offer midpoint, including block orders)"
+    detail: "此前留空。本次以 ASX Operating Rules Procedures（Procedure 4021–4024 + 3260）核实。ASX 现货市场无原生止损单。"
+    sources:
+      - title: "ASX Operating Rules Procedures（Procedure 4021–4024 Iceberg / Undisclosed / Centre Point Orders）PDF"
+        url: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_procedures.pdf
+        accessed: 2026-08-30
+    quote: "For the purposes of Rule [4021], the exceptions are: (a) Iceberg Orders in accordance with Rule [4022]; (b) Undisclosed Orders in accordance with Rule [4023]; and (c) Centre Point Orders in accordance with Rule [4024]. ... a Trading Participant may enter a Bid or Offer that exceeds the following minimum Disclosed Portion: Equity Securities – 500 units"
+    confidence: high
 
   tick_size:
-    zh: ""
-    confidence: low
-    detail: "ASX运营规则中提及交易须为「Price Steps」的整数倍，但具体分档表未在本轮抓取范围内（可能在单独的Procedures文件中），留空。"
+    spec:
+      regime: tiered_by_price
+      min_tick: 0.1
+      currency: AUD_cents
+      ladder:
+        - {price_min: 0, price_max: 10, tick: 0.1}
+        - {price_min: 10, price_max: 200, tick: 0.5}
+        - {price_min: 200, price_max: null, tick: 1}
+      full_table_note: "ASX 现货『Price Steps』3 档（ASX Operating Rules Procedures 表，以澳分列示）：0.1–9.9 分 tick 0.1 分；10–199.5 分 tick 0.5 分；≥ 200 分 tick 1 分。折算：< AUD 0.10 → 0.001；AUD 0.10–1.995 → 0.005；≥ AUD 2.00 → 0.01"
+      note: "spec 以澳分（cents）为单位，与官方表一致；min_tick 0.1 分 = AUD 0.001"
+    zh: "现货 Price Steps 按澳分分三档：0.1–9.9 分 tick 为 0.1 分（即 < AUD 0.10 的股票最小变动 AUD 0.001）；10–199.5 分 tick 为 0.5 分；200 分及以上 tick 为 1 分"
+    en: "Cash-market Price Steps in three tiers (in Australian cents): 0.1–9.9 cents → 0.1 cent tick (i.e. AUD 0.001 for shares below AUD 0.10); 10–199.5 cents → 0.5 cent tick; 200 cents and above → 1 cent tick"
+    detail: "此前留空（分档表在单独的 Procedures 文件中）。本次以 ASX Operating Rules Procedures 的价格 / tick / 撤单范围表结构化。"
+    sources:
+      - title: "ASX Operating Rules Procedures（Procedure 3200 价格 / tick 表）PDF"
+        url: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_procedures.pdf
+        accessed: 2026-08-30
+    quote: "PRICE TICK NCR QCR ETR 0.1 – 9.9 cents 0.1 cent 0 – 4 cents > 10 cents 10 – 15.5 cents 0.5 cent 0 – 4 cents > 30 cents 16 – 99.5 cents 0.5 cent 0 – 10 cents > 30 cents 100 – 119.5 cents 0.5 cent 0 – 10 cents > 50 cents 120 – 199.5 cents 0.5 cent 0 – 15 cents > 50 cents 200 – 234 cents 1 cent 0 – 15 cents > 50% ... ≥5000 cents 1 cent 10% > 20%"
+    confidence: high
 
   board_lot_size:
     zh: ""
@@ -435,6 +480,34 @@ market_structure:
         url: https://www.asx.com.au/documents/rules/Chapter17.pdf
         accessed: 2026-08-14
     quote: "ASX may grant a trading halt at the request of an entity. ... ASX Operating Rule 16.4.2 says that a trading halt can be applied for a period not exceeding the commencement of normal trading on the second trading day following the day on which it is requested."
+    confidence: high
+
+  error_trade_rule:
+    spec:
+      bust_allowed: true
+      review_window_min: 30
+      deviation_threshold_pct: 20
+      resolution: cancel
+      note: "仅 ASX 可作废成交（Procedure 3200）。会员须在成交后 30 分钟内电话通知 ASX Trading Operations，随后 10 分钟内邮件补交。以参考价（每分钟更新）为基准分三段：不可作废区（NCR）内不作废；合格作废区（QCR）内仅对手方 10 分钟内同意才作废；极端交易区（ETR，等同 ASIC 市场诚信规则的 ETR）内 ASX 直接作废（Rule 3210）。ETR 门槛按价格分档：235–499 分为 >50%，逐档收窄至 ≥5000 分为 >20%。ASX 明确不接受『会员财务损失』作为作废理由"
+    zh: "只有 ASX 可作废成交。会员须在成交后 30 分钟内电话通知 ASX 交易运营部门，并在 10 分钟内邮件补交细节。ASX 以每分钟更新的参考价为基准，将偏离分为三段：不可作废区（No Cancellation Range）内不作废；合格作废区（Qualifying Cancellation Range）内只有对手方在 10 分钟内同意才作废；极端交易区（Extreme Trade Range，等同 ASIC 市场诚信规则规定的 ETR）内 ASX 直接作废。ETR 门槛按价格分档（如 235–499 分档为偏离 >50%，2000–4999 分档为 >25%，5000 分及以上为 >20%）。ASX 不接受『会员因该成交承受的财务损失』作为作废理由"
+    en: "Only ASX may facilitate the cancellation of a trade. A Participant must notify ASX Trading Operations by telephone within 30 minutes of the trade and email the details within a further 10 minutes. Against a Reference Price (updated every minute), ASX places the deviation into one of three bands: within the No Cancellation Range the trade is not cancelled; within the Qualifying Cancellation Range the trade is cancelled only if the counterparty consents within 10 minutes; within the Extreme Trade Range (the same ETR as in the ASIC Market Integrity Rules) ASX will cancel the trade. ETR thresholds are tiered by price (e.g. > 50% for the 235–499 cents band, > 25% for 2000–4999 cents, > 20% for 5000 cents and above). ASX will not accept the financial loss incurred by a Participant as grounds for cancellation"
+    detail: "ASX Operating Rules Procedure 3200（Request for Cancellation）+ Procedure 3210（Cancellation of Trades in the Extreme Trade Range）+ Procedure 3260（Anomalous Order Thresholds，事前拦截）。与 trading_halt_mechanism 视角不同。spec.deviation_threshold_pct 取 ETR 的最低门槛 20（高价股）——高于此偏离 ASX 单方作废。属『阈值 + 时限复核制』（同美 / 德），但 ETR 内是 ASX 单方而非需双方合意。"
+    sources:
+      - title: "ASX Operating Rules Procedures（Procedure 3200 / 3210，Cancellations）PDF"
+        url: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_procedures.pdf
+        accessed: 2026-08-30
+    quote: "A Participant, via its Authorised Signatories, must notify ASX Trading Operations by telephone within 30 minutes of the trade occurring that it requests a trade to be considered for cancellation ... At or within the QCR (Qualifying Cancellation Range) The trade will only be cancelled if the Participant counterparty to the trade consents within 10 minutes from contact by ASX Trading Operations. At or within the ETR (Extreme Trade Range) ASX will cancel the trade subject to any exceptions. ... ASX will not accept the financial loss incurred by a Participant as grounds for cancellation. ... 2000 – 4999 cents 1 cent 10% > 25% ≥5000 cents 1 cent 10% > 20%"
+    confidence: high
+
+  order_book_transparency:
+    zh: "盘前：ASX Trade 中央订单簿公开，展示订单的价量向市场披露、按价格-时间优先撮合。同一系统内支持不完全披露 / 隐藏的流动性——冰山单仅披露一部分（最低 500 单位）、全隐藏单（Undisclosed Order）完全不显示、Centre Point 系列在买卖中点撮合（暗盘）。盘中另设『异常订单阈值（AOT）』拦截偏离过大的进攻性订单。盘后 / 大额：大宗交易（Block、Centre Point Block）单独进行"
+    en: "Pre-trade: the ASX Trade central order book is public — displayed order sizes and prices are disseminated and matched on price-then-time priority. The same system supports partially-disclosed and hidden liquidity — Iceberg orders show only a disclosed portion (minimum 500 units), Undisclosed Orders are fully hidden, and Centre Point orders match at the bid/offer midpoint (dark). An Anomalous Order Threshold (AOT) rejects aggressive orders that deviate too far. Post-trade / large orders: Block and Centre Point Block trades run separately"
+    detail: "字段管本所系统内部的（非）展示流动性——Centre Point 是 ASX 自营的中点暗盘，见 dark_pool。行情层级 / 收费见第十章。quote 引自 ASX OR Procedures（订单类型例外条款 + AOT）。"
+    sources:
+      - title: "ASX Operating Rules Procedures（Procedure 4021–4024 / 3260）PDF"
+        url: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_procedures.pdf
+        accessed: 2026-08-30
+    quote: "For the purposes of Rule [4021], the exceptions are: (a) Iceberg Orders in accordance with Rule [4022]; (b) Undisclosed Orders in accordance with Rule [4023]; and (c) Centre Point Orders in accordance with Rule [4024]. ... a Trading Participant may enter a Bid or Offer that exceeds the following minimum Disclosed Portion: Equity Securities – 500 units"
     confidence: high
 
   intraday_reversal:
