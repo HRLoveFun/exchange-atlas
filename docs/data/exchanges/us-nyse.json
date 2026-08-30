@@ -694,32 +694,45 @@
           ],
           "levels": [
             {
-              "threshold_pct": 7
+              "threshold_pct": 7,
+              "halt_minutes": 15
             },
             {
-              "threshold_pct": 13
+              "threshold_pct": 13,
+              "halt_minutes": 15
             },
             {
-              "threshold_pct": 20
+              "threshold_pct": 20,
+              "halt_minutes": null,
+              "day_end": true
             }
           ],
-          "note": "各档停牌时长（一/二级 15 分钟、三级收市）在 detail 里但未逐字核实，暂不入 spec；Phase 1b 找 NYSE Rule 7.12 原文后补 halt_minutes / day_end"
+          "note": "一、二级仅 9:30am-3:25pm 可触发、各每日一次；三级任何时段可触发。停牌后重开集合竞价（[ADR-037] 的 Phase 1b 待办已补 halt_minutes / day_end）"
         },
-        "zh": "全市场熔断（Market-Wide Circuit Breaker, MWCB），基于标普500指数单日跌幅触发三级阈值：7%（一级）、13%（二级）、20%（三级）",
+        "zh": "全市场熔断（Market-Wide Circuit Breaker, MWCB），基于标普500指数单日跌幅触发三级阈值：7%（一级）、13%（二级）、20%（三级）；一、二级暂停交易 15 分钟，三级当日收市",
         "en": "Market-Wide Circuit Breaker (MWCB)",
-        "detail": "由 NYSE、NYSE American、NYSE Arca Rule 7.12 共同规定，跨市场协调停牌，一/二级为暂停交易15分钟，三级为直接收市（本条细则未逐字核实，见 quote 之外的机制说明）。",
+        "detail": "由 NYSE、NYSE American、NYSE Arca Rule 7.12 共同规定，跨市场协调停牌。一、二级仅在 9:30am-3:25pm 触发、每交易日各限一次；三级任何时段触发即停至收市。",
         "sources": [
           {
             "title": "Trading Information（官网）",
             "url": "https://www.nyse.com/trade/trading-information",
             "accessed": "2026-08-13"
+          },
+          {
+            "title": "NYSE Market-Wide Circuit Breakers FAQ（官网 PDF）",
+            "url": "https://nyse.com/publicdocs/nyse/NYSE_MWCB_FAQ.pdf",
+            "accessed": "2026-08-30"
           }
         ],
-        "quote": "A cross-market trading halt can be triggered at three circuit breaker thresholds that measure a decrease against the prior day's closing price of the S&P 500 Index -- 7% (Level 1), 13% (Level 2), and 20% (Level 3) (See NYSE, NYSE American and NYSE Arca Rule 7.12).",
+        "quote": "A cross-market trading halt can be triggered at three circuit breaker thresholds that measure a decrease against the prior day's closing price of the S&P 500 Index -- 7% (Level 1), 13% (Level 2), and 20% (Level 3) (See NYSE, NYSE American and NYSE Arca Rule 7.12). ... Level 1 and Level 2 breaches halt trading for a minimum of 15 minutes. Level 3 breach halts trading for the remainder of the trading day.",
         "confidence": "high",
         "verified": "2026-08-13"
       },
       "volatility_interruption": {
+        "spec": {
+          "halt_minutes": 5,
+          "note": "LULD 个股级：Limit State 持续 15 秒未消化即触发 5 分钟交易暂停（与 us-nasdaq 同一 NMS 计划）；价格带见 price_limits"
+        },
         "zh": "涨跌限价机制（LULD）本身即承担个股级波动性中断功能：价格持续处于价格带边缘会触发交易暂停",
         "en": "LULD serves as the stock-level volatility interruption mechanism",
         "detail": "具体触发后暂停多久、如何恢复的逐条机制（如'Limit State'持续15秒即转'Trading Pause'）本次未在抓取页面中找到明确表述，未采纳未核实的印象。",
@@ -733,8 +746,7 @@
         "quote": "On May 31, 2012, the SEC approved, on a pilot basis, a National Market System Plan, known as the Limit Up/Limit Down (\"LULD\") Plan, to address extraordinary market volatility. The Plan was approved as a permanent rule on April 11, 2019.",
         "confidence": "medium",
         "verified": "2026-08-13",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "trading_halt_mechanism": {
         "zh": "见 circuit_breaker（全市场级）与 volatility_interruption（LULD，个股级）；另有因披露事项的停牌（regulatory halt）未逐条核实",
@@ -772,6 +784,12 @@
       },
       "short_selling": {
         "enum": "restricted_uptick",
+        "spec": {
+          "naked_allowed": false,
+          "uptick_rule": true,
+          "borrow_required": true,
+          "note": "Reg SHO；Rule 201 备兑报升熔断——证券当日较前一交易日收盘价跌 ≥10% 触发，触发后当日剩余及次日禁止以 ≤当前全国最优买价（NBB）的价格执行/展示卖空单"
+        },
         "zh": "Regulation SHO第201条（'另类报升规则'/空头卖出熔断）：当某证券当日价格较前一交易日常规交易时段收盘价下跌10%或以上时，触发熔断，该证券自当时起至次一交易日收盘前，禁止以低于或等于当前全国最优买价（NBB）的价格执行或展示卖空订单",
         "en": "Rule 201 of Regulation SHO (the \"Alternative Uptick Rule\" / short sale circuit breaker): once a covered security's price declines 10% or more intraday from its prior day's regular-trading-hours closing price, a circuit breaker is triggered, and for the remainder of that day and the following day, trading centers must prevent execution or display of a short sale order at a price at or below the current national best bid",
         "detail": "本条2026年经突破sec.gov反爬后，直接从SEC官方FAQ原文核实到具体10%阈值数字，取代此前\nconfidence: medium的定性描述（详见 PROJECT/OPEN-QUESTIONS.md 第15条的解决记录）。NYSE\n官网Regulation SHO页面本身正文很薄，此前多次尝试sec.gov/finra.org均403，本次改用\nSEC Fair Access规范格式的User-Agent（形如\"机构标识 联系邮箱\"，而非常规浏览器UA字符串）\n成功绕过sec.gov的\"Request Rate Threshold Exceeded\"限流拦截。\n",
@@ -789,8 +807,7 @@
         ],
         "quote": "Among other things, Rule 201 requires that a trading center establish, maintain, and enforce written policies and procedures reasonably designed to prevent the execution or display of a short sale order of a covered security at a price that is less than or equal to the current national best bid if the price of that covered security decreases by 10% or more from the covered security's closing price as of the end of regular trading hours on the prior day.",
         "confidence": "high",
-        "verified": "2026-08-13",
-        "spec": null
+        "verified": "2026-08-13"
       },
       "block_trade": {
         "zh": "",
@@ -827,6 +844,12 @@
         "quote": null
       },
       "market_maker_scheme": {
+        "spec": {
+          "present": true,
+          "quote_obligation": true,
+          "max_spread_pct": null,
+          "note": "指定做市商 DMM：每支股票一名 DMM，负责开盘/收盘及严重失衡/不稳定期间的价格发现；无统一价差上限公布"
+        },
         "zh": "指定做市商制度（DMM）：每支股票指定一名DMM，负责在开盘、收盘及严重失衡/不稳定期间维持价格发现",
         "en": "Designated Market Maker (DMM)",
         "detail": "上市公司在上市流程第4步须选定DMM；DMM是NYSE区别于纯电子化交易所（如NYSE Arca）的标志性制度。",
@@ -840,8 +863,7 @@
         "quote": "Select Your Designated Market Maker (DMM) / Your DMM will facilitate price discovery for your stock during market opens, closes and during periods of substantial trading imbalances or instability.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "connect_schemes": {
         "zh": "无（美股市场无类似沪港通/深港通的跨境互联互通安排）",

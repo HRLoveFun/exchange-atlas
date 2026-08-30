@@ -356,6 +356,12 @@
     "market_structure": {
       "trading_sessions": {
         "pre_market": {
+          "spec": {
+            "start": "09:30",
+            "end": "10:00",
+            "kind": "opening_auction",
+            "note": "第一时段开盘集合竞价"
+          },
           "zh": "第一时段（开盘集合竞价）09:30–10:00",
           "en": "First Session (Opening Auction) 09:30–10:00",
           "quote": "First Session: 09:30 – 10:00 / Opening Auction",
@@ -369,10 +375,15 @@
           "verified": "2026-08-14",
           "confidence": "high",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "continuous_am": {
+          "spec": {
+            "start": "10:00",
+            "end": "15:00",
+            "kind": "continuous",
+            "note": "第二时段：单一连续交易时段，无午休，不分上午/下午"
+          },
           "zh": "第二时段（连续交易，全天单一连续时段，无午休）10:00–15:00",
           "en": "Second Session (Market Open - Trading) 10:00–15:00",
           "quote": "Second Session: 10:00 – 15:00 / Market Open - Trading",
@@ -386,10 +397,12 @@
           "verified": "2026-08-14",
           "confidence": "high",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "lunch_break": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无午休；第二时段为单一连续交易时段",
           "en": "No lunch break; the Second Session is a single continuous trading session",
           "confidence": "medium",
@@ -402,11 +415,14 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         },
         "continuous_pm": {
+          "spec": {
+            "kind": "none",
+            "note": "无上午/下午分段，见 continuous_am"
+          },
           "zh": "同第二时段（10:00–15:00 为单一连续交易时段，未按上午/下午拆分）",
           "en": "Same as the Second Session (10:00–15:00 is a single continuous session, not split into morning/afternoon)",
           "confidence": "medium",
@@ -419,11 +435,16 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         },
         "after_market": {
+          "spec": {
+            "start": "15:10",
+            "end": "15:20",
+            "kind": "after_hours_continuous",
+            "note": "第四时段 Trade at Last：按收盘价撮合；债券与 ETF 不适用第三、四时段"
+          },
           "zh": "第三时段（收盘集合竞价）15:00–15:10；第四时段（尾盘按收盘价撮合 Trade at Last）15:10–15:20（债券与ETF不适用第三、四时段）",
           "en": "Third Session (Closing Auction) 15:00–15:10; Fourth Session (Trade at Last) 15:10–15:20",
           "quote": "Third Session: Listed securities (except for Debt Instruments and ETFs): 15:00 – 15:10 / Closing Auction ... Fourth Session: Listed securities (except for Debt Instruments and ETFs): 15:10 – 15:20 / Trade at Last",
@@ -437,10 +458,12 @@
           "verified": "2026-08-14",
           "confidence": "high",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "night_session": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无",
           "en": "None",
           "confidence": "medium",
@@ -453,7 +476,6 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -476,6 +498,11 @@
         "detail": null
       },
       "opening_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "09:30",
+          "auction_end": "10:00"
+        },
         "zh": "第一时段开盘集合竞价（09:30–10:00，单一理论开盘价撮合）",
         "en": "First Session Opening Auction (09:30–10:00)",
         "detail": "9.9条：第一时段最后的理论开盘价即为开盘价（Opening Price）。",
@@ -489,10 +516,16 @@
         "quote": "First Session: 09:30 – 10:00 / Opening Auction",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "closing_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "15:00",
+          "auction_end": "15:10",
+          "trade_at_close_end": "15:20",
+          "note": "第四时段（15:10-15:20）Trade at Last：按收盘价撮合；债券与 ETF 不适用"
+        },
         "zh": "第三时段收盘集合竞价（15:00–15:10），随后第四时段（15:10–15:20）允许会员按收盘价继续按盘撮合（Trade at Last）",
         "en": "Third Session Closing Auction (15:00–15:10), followed by Fourth Session Trade at Last (15:10–15:20)",
         "detail": "会员在第四时段可提交订单，按收盘价撮合买卖双方（2:30 PM – 3:00 PM 附近原文另有类似机制描述，属旧版页码残留，未纳入 quote）。",
@@ -506,8 +539,7 @@
         "quote": "Fourth Session: Listed securities (except for Debt Instruments and ETFs): 15:10 – 15:20 / Trade at Last",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "matching_principle": {
         "enum": "price_time",
@@ -613,6 +645,12 @@
           "spec": null
         },
         "main_board": {
+          "spec": {
+            "limit_pct": 10,
+            "reference": "prev_close",
+            "symmetric": true,
+            "note": "新股上市首 3 日 ±30%，第 4 日起 ±10%；ETF 自首日即 ±10%；另叠加盘中随波动性拍卖滚动重设的静态限制 ±10%（见 volatility_interruption）"
+          },
           "zh": "±10%（新股上市首3个交易日为±30%，第4日起收窄为±10%；ETF自上市首日起即为±10%）",
           "en": "±10% (±30% for the first 3 trading days after a new listing, narrowing to ±10% from day 4; ETFs are ±10% from day 1)",
           "sources": [
@@ -626,7 +664,6 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -649,6 +686,10 @@
       },
       "circuit_breaker": {
         "enum": "stock_level",
+        "spec": {
+          "type": "stock_level",
+          "note": "无全市场熔断；订单可能以静态限制 ±10% 边界成交时触发 5 分钟波动性拍卖（非停牌），见 volatility_interruption"
+        },
         "zh": "无全市场熔断；个股/产品层级设静态限制（Static Limit ±10%）触发的波动性拍卖机制，非全面停牌",
         "en": "No market-wide circuit breaker; stock-level Static Limit (±10%) triggers a Volatility Auction, not a full trading halt",
         "detail": "与港交所 VCM 机制类似：触发订单本身不成交，转入5分钟波动性拍卖参与撮合，拍卖结束后按最新理论价恢复交易；若拍卖结束时无法形成理论价，静态价格回退至此前水平。",
@@ -661,10 +702,14 @@
         ],
         "quote": "Volatility auctions are triggered intraday for 5 minutes (during the Second session), whenever an order (regardless of its size) can potentially match an opposite side order at the upper end of the Static Limit or lower end of the Static Limit (±10%). The order that triggers the volatility auction is not executed and moves to participate in the volatility auction...",
         "confidence": "high",
-        "verified": "2026-08-14",
-        "spec": null
+        "verified": "2026-08-14"
       },
       "volatility_interruption": {
+        "spec": {
+          "static_pct": 10,
+          "auction_minutes": 5,
+          "note": "波动性拍卖：订单可能以静态限制 ±10% 边界成交时触发（仅第二时段）；5 分钟集合竞价冷静期；触发价成为新的静态基准价"
+        },
         "zh": "波动性拍卖（Volatility Auction）：盘中订单可能以静态限制±10%边界成交时触发，5分钟集合竞价冷静期，触发价成为新的静态基准价",
         "en": "Volatility Auction: triggered when an order would match at the ±10% Static Limit boundary, 5-minute call-auction cooling-off, trigger price becomes the new static reference",
         "sources": [
@@ -678,7 +723,6 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -717,6 +761,12 @@
       },
       "short_selling": {
         "enum": "restricted_uptick",
+        "spec": {
+          "naked_allowed": false,
+          "uptick_rule": true,
+          "borrow_required": true,
+          "note": "受监管备兑卖空（禁裸卖空），须标记且经证券借贷协议锁定；类报升——卖出价须高于该证券当前最优买价；默认覆盖除衍生品外全部上市证券；两项动态限额（净空头/60 日日均量 ≤10 日；净空头 ≤自由流通 10%），触限次日禁卖空该证券"
+        },
         "zh": "受监管的备兑卖空（禁止裸卖空）：卖空订单须标记且已通过证券借贷协议锁定证券；默认覆盖除衍生品外全部上市证券（非指定清单），但须满足价格条件（卖出价须高于该证券当前最优买价，类报升规则）与两项动态限额（净空头持仓/最近60日日均成交量之比不超10日；净空头持仓不超过该证券自由流通量10%），触及限额的证券次一交易日禁止卖空",
         "en": "Regulated covered short selling (naked short selling prohibited): orders must be flagged and covered under a securities borrowing and lending agreement; eligible by default for all listed securities except Derivatives (not a curated list), subject to a price condition (sale price must exceed the security's current best bid — an uptick-like rule) and two dynamic caps (net short position / 60-day average daily traded volume must not exceed 10 days; net short position must not exceed 10% of free float) — securities breaching either cap are barred from short selling the next Trading Day",
         "detail": "已从 Short Selling Regulations 全文（Article 3 短卖交易定义/Article 4 合资格参与人/Article 5 合资格上市证券）核实，此前的悬案本次已澄清：(a) 不存在静态「合格证券清单」，Article 5(a) 明确默认覆盖除衍生品外全部上市证券（'Unless the Exchange specifies otherwise, a short selling transaction may be entered into in respect of all listed securities (except for Derivatives)'），交易所仅保留另行指定例外的权力，故此前暂定的 restricted_list（限指定标的）判断不准确；(b) 确实存在类报升规则的价格条件——Article 3(b)(4) 要求卖空订单价格须高于标的证券当前最优买价（不同于传统美股式「较上一笔成交价上涨」，而是「高于当前最优买价」），据此改判 enum 为 restricted_uptick；(c) 另有两项量化动态限额（10日空头量/日均成交量之比、10%自由流通量上限），触及限额次日禁止卖空，属报升规则之外的补充限制。",
@@ -734,8 +784,7 @@
         ],
         "quote": "Article 3 Short selling transactions ... b. A person must not enter into as seller ... a short selling order in respect of a listed security unless all of the following conditions are met: ... 4) the price of selling the security, underlying the transaction, is higher than the price of the best bid of that security. ... Article 5 Eligible listed securities a. Unless the Exchange specifies otherwise, a short selling transaction may be entered into in respect of all listed securities (except for Derivatives) in accordance with the following limits: 1) The short ratio to Average Daily Traded Volume of the relevant security (total net short positions / Average Daily Traded Volume of the last 60 days) must not exceed 10 days; and 2) The total net short positions must not exceed 10% of the free floated securities of the relevant security.",
         "confidence": "high",
-        "verified": "2026-08-14",
-        "spec": null
+        "verified": "2026-08-14"
       },
       "block_trade": {
         "zh": "存在场外协商交易（Negotiated Deals），结算周期默认T+2，经买卖双方另行约定可在T+0至T+5间调整",
@@ -772,6 +821,12 @@
         "quote": null
       },
       "market_maker_scheme": {
+        "spec": {
+          "present": true,
+          "quote_obligation": true,
+          "max_spread_pct": null,
+          "note": "《做市商规则》（CMA 董事会 2022 批准）；持约束性证券借贷协议的做市商做市时不适用卖空监管；无统一价差上限公布"
+        },
         "zh": "设有正式做市商制度，经CMA董事会2022年批准的《做市商规则》管辖；持有约束性证券借贷协议的做市商在从事做市活动时不适用卖空监管规则",
         "en": "Formal Market Making Regulations approved by the CMA Board in 2022",
         "sources": [
@@ -785,7 +840,6 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "connect_schemes": {

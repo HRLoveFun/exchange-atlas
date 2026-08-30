@@ -15,8 +15,9 @@
 #     字段的 keys 里声明过（挡拼写错）。更深的形态合法性暂不强校验。
 #
 # 进度：Phase 1a 填了第五章 core 字段的形状 + 5 家示范数据（cn-sse / us-nyse /
-# jp-jpx / de-eurex / in-nse）。Phase 1b 补其余 15 家 + volatility_interruption /
-# short_selling / market_maker_scheme 的 spec + JPX 37 档完整表。其余章节 Phase 3。
+# jp-jpx / de-eurex / in-nse）。Phase 1b（[ADR-039]）补齐其余 15 家 + 全 20 家
+# volatility_interruption / short_selling / market_maker_scheme 的 spec + JPX
+# 值幅制限完整 34 档 ladder（Rule 2 Paragraph 1，此前误记为 37 档）。其余章节 Phase 3。
 
 fields:
 
@@ -41,6 +42,7 @@ fields:
       type: "call_auction / continuous_direct（直接连续竞价）/ dmm_auction（做市商主持）"
       auction_start: "HH:MM，可选"
       auction_end: "HH:MM，可选——集合竞价出清 / 开盘时刻"
+      randomised_seconds: "int，可选——出清时刻在此秒数内随机触发（如 ASX 15s）"
       note: "string，可选"
 
   market_structure.closing_mechanism:
@@ -49,6 +51,8 @@ fields:
       type: "call_auction / last_price（末笔成交价）/ vwap_window（尾盘 VWAP）/ dmm_auction"
       auction_start: "HH:MM，可选"
       auction_end: "HH:MM，可选"
+      randomised_seconds: "int，可选——出清时刻在此秒数内随机触发（如 ASX 30s）"
+      random_close_window_min: "int，可选——出清时刻在一个分钟级窗口内随机（如 HKEX 4:08–4:10 → 2）"
       trade_at_close_end: "HH:MM，可选——收盘后按收盘价撮合的延长窗口结束时刻"
       note: "string，可选"
 

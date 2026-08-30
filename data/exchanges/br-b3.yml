@@ -305,26 +305,32 @@ market_structure:
 
   trading_sessions:
     pre_market:
+      spec: {start: "09:45", end: "10:00", kind: opening_auction, note: "09:30-09:45 为撤单阶段；09:45-10:00 盘前集合竞价形成开盘理论价"}
       zh: "09:30–09:45订单撤单阶段，09:45–10:00盘前集合竞价（确定开盘理论价，只挂单不成交）"
       en: "09:30–09:45 order cancellation phase; 09:45–10:00 pre-opening call (theoretical opening-price discovery; orders queue without matching)"
       quote: "Order cancellation Pre-opening Trading ... Cash Market, Odd lots market, Investment Funds and OTC Market 09:30 09:45 09:45 10:00 10:00 16:55"
     continuous_am:
+      spec: {start: "10:00", end: "16:55", kind: continuous, note: "单一连续时段，无上午/下午分段；16:55-17:00 收盘集合竞价"}
       zh: "10:00起进入连续竞价（Regular trading period），无独立的上午/下午分段"
       en: "Continuous trading (Regular trading period) begins at 10:00, with no separate morning/afternoon split"
       quote: "Cash Market, Odd lots market, Investment Funds and OTC Market 09:30 09:45 09:45 10:00 10:00 16:55"
     lunch_break:
+      spec: {kind: none}
       zh: "无"
       en: "None"
       confidence: medium
     continuous_pm:
+      spec: {kind: none, note: "无独立下午时段；连续交易至 16:55（见 continuous_am），16:55-17:00 收盘集合竞价"}
       zh: "连续交易持续至16:55，随后16:55–17:00为收盘集合竞价（Closing Call）"
       en: "Continuous trading runs until 16:55, followed by the 16:55–17:00 Closing Call"
       quote: "Trading Closing Call ... 10:00 16:55 16:55 17:00"
     after_market:
+      spec: {start: "17:30", end: "18:00", kind: after_hours_continuous, note: "17:25-17:30 与 18:25-18:45 为撤单阶段；期权到期日有专门调整"}
       zh: "17:25–17:30为撤单阶段，17:30–18:00为盘后交易（After-Market），18:25–18:45为另一撤单阶段（期权到期日等情形有专门调整）"
       en: "17:25–17:30 order cancellation, 17:30–18:00 after-market trading, 18:25–18:45 a further order-cancellation window (with special adjustments on options expiration dates etc.)"
       quote: "After-Market trading Order cancellation ... 17:25 17:30 17:30 18:00 18:25 18:45"
     night_session:
+      spec: {kind: none, note: "现货股票市场无夜盘"}
       zh: "现货股票市场无夜盘"
       en: "No night session for the cash equities market"
       confidence: medium
@@ -335,12 +341,14 @@ market_structure:
     detail: "官网未见本次抓取到逐年节假日安排页面，留空。"
 
   opening_mechanism:
+    spec: {type: call_auction, auction_start: "09:45", auction_end: "10:00"}
     zh: "开盘集合竞价（Opening Call）：09:45–10:00为盘前阶段，只挂单不成交，用于形成开盘理论价格"
     en: "Opening Call: the 09:45–10:00 pre-opening phase accepts order entry without matching, used to form the theoretical opening price"
     quote: "Order cancellation Pre-opening Trading ... Cash Market, Odd lots market, Investment Funds and OTC Market 09:30 09:45 09:45 10:00 10:00 16:55 ... Pre-opening phase: precedes trading in an instrument, with a specific duration and designed to assure the opening of trading at a fair and transparent price. Order registration is allowed but no trades are matched. Orders are used only to define the theoretical opening price in accordance with auction rules."
     confidence: high
 
   closing_mechanism:
+    spec: {type: call_auction, auction_start: "16:55", auction_end: "17:00"}
     zh: "收盘集合竞价（Closing Call）：16:55–17:00"
     en: "Closing Call: 16:55–17:00"
     sources:
@@ -408,15 +416,18 @@ market_structure:
       quote: "B3's trading tunnel module is composed of rejection, auction and protection tunnels... Independently of their purpose (rejection or auction), trading tunnels may be calculated either by the additive or the multiplicative method."
       confidence: high
     main_board:
-      zh: ""
-      confidence: low
-      detail: "隧道具体带宽数值（bandwidth）由B3官网逐品种维护，本次抓取到的规程手册正文未给出固定数值表，留空不猜。"
+      spec: {type: dynamic, band_pct: null, note: "无固定百分比涨跌停墙；动态「交易隧道」以 tunnel base price 为中心按加法或乘法计算带宽，逐品种参数由 B3 官网维护、无固定数值表，见 type / volatility_interruption"}
+      zh: "无固定百分比涨跌停；动态「交易隧道」，具体带宽逐品种由 B3 官网维护（见 type 字段）"
+      en: "No fixed percentage limit band; dynamic 'trading tunnels' with per-instrument bandwidths maintained by B3 (see the type field)"
+      quote: "B3's trading tunnel module is composed of rejection, auction and protection tunnels... Independently of their purpose (rejection or auction), trading tunnels may be calculated either by the additive or the multiplicative method."
+      confidence: high
     other_boards:
       zh: ""
       confidence: low
 
   circuit_breaker:
     enum: index_level
+    spec: {type: index_level, reference: [{index: "Ibovespa", exchange: self}], levels: [{threshold_pct: 10, halt_minutes: 30}, {threshold_pct: 15, halt_minutes: null}, {threshold_pct: 20, halt_minutes: null, day_end: false}], note: "跌幅相对前一交易日收盘；二档暂停 1 小时（原文「one hour」未给数字）；三档暂停时长由 B3 自定并公告；全市场（资产/衍生品/私募固收）联动"}
     zh: "指数级熔断：以Ibovespa较前一交易日收盘的跌幅触发，分三档——跌10%暂停全市场交易30分钟；恢复后再跌15%暂停1小时；恢复后再跌20%由B3自行决定暂停时长并公告"
     en: "Index-level circuit breaker triggered by Ibovespa's decline from the prior close, in three stages: -10% halts all trading for 30 minutes; upon resumption, -15% halts trading for 1 hour; upon resumption, -20% lets B3 determine and announce the suspension period"
     sources:
@@ -427,6 +438,7 @@ market_structure:
     confidence: high
 
   volatility_interruption:
+    spec: {note: "品种级「拍卖隧道」（auction tunnel）：撮合价将突破基于最近成交价动态计算的区间时，自动触发一次集合竞价而非直接成交；区间参数逐品种、无公开统一表"}
     zh: "品种级的「拍卖隧道」（auction tunnel）机制：撮合价若将突破基于最近成交价动态计算的价格区间，系统不直接成交，而是自动触发一次集合竞价"
     en: "Instrument-level 'auction tunnel' mechanism: when a prospective trade price would breach the dynamically computed band around the last traded price, the system does not execute directly but automatically triggers an auction"
     sources:
@@ -459,6 +471,7 @@ market_structure:
     confidence: high
 
   short_selling:
+    spec: {naked_allowed: null, borrow_required: null, uptick_rule: null, note: "确认有证券出借/融券安排使做空可能；具体限制（报升规则、裸卖空处理）未在抓取内容中找到，见 OPEN-QUESTIONS"}
     zh: "存在证券出借/融券安排使做空成为可能（官网设「Securities Lending, Equity and ETF Trades」专栏），但本次抓取到的该页面正文只包含股票/ETF的代码、整手规格与结算周期，没有描述性正文说明具体限制规则（如是否有报升限制、裸卖空处理等），仅能确认功能入口存在"
     en: "A securities lending facility exists that enables short selling (the site has a page titled 'Securities Lending, Equity and ETF Trades'), but the content actually fetched on that page only covers ticker format, round-lot size and settlement period for stocks/ETFs — no descriptive text on specific restrictions (e.g. any uptick rule, treatment of naked short selling) was found; only the existence of the facility is confirmed"
     sources:
@@ -485,6 +498,7 @@ market_structure:
     confidence: low
 
   market_maker_scheme:
+    spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "独立/计划内独立/受托做市商三类注册；投资基金亦可注册；批准后 30 日内须履约；逐资产做市商数量上限由 B3 设定；无统一价差上限公布"}
     zh: "分独立做市商、参与B3计划的独立做市商、受托做市商（Contracted Market Maker）三类注册；投资基金也可注册为独立做市商；获批后须在30日内开始履约，具体资产/衍生品可容纳的做市商数量上限由B3设定"
     en: "Three registration categories: independent market makers, independent market makers accredited for B3 programs, and contracted market makers; investment funds may also register as independent market makers; once approved, a market maker must begin acting within 30 days, and B3 caps the maximum number of market makers per asset/derivative"
     sources:

@@ -397,6 +397,7 @@ market_structure:
 
   trading_sessions:
     pre_market:
+      spec: {start: "06:00", end: "09:00", kind: pre_open_queue, note: "Pre-Opening：可下单/改单不成交，显示理论开盘价；09:00 开盘（2 分钟随机窗口）"}
       zh: "06:00 CET 交易日开始（Pre-Opening，可下单/改单但不成交，显示理论开盘价）"
       en: "06:00 CET Start of Business Day (Pre-Opening — orders may be entered/amended but not executed; a theoretical opening price is displayed)"
       quote: "06:00   Start of Business Day"
@@ -406,6 +407,7 @@ market_structure:
           accessed: 2026-08-16
       confidence: high
     continuous_am:
+      spec: {start: "09:00", end: "17:20", kind: continuous, note: "蓝筹股/中小盘股：开盘 09:00（2 分钟随机窗口），持续竞价至 17:20 收盘集合竞价；无午休"}
       zh: "蓝筹股/中小盘股09:00开盘（2分钟随机开盘时间），持续竞价至17:20"
       en: "Blue Chip / Mid-/Small-Cap Shares open at 09:00 (2-minute random opening window), continuous trading runs until 17:20"
       quote: "Blue Chip Shares 06:00 09:00 17:20 17:30 17:30 17:40 22:00 CLOB P1 XSWX Yes"
@@ -415,10 +417,12 @@ market_structure:
           accessed: 2026-08-16
       confidence: high
     lunch_break:
+      spec: {kind: none}
       zh: "无午休，全天连续交易"
       en: "None — trading is continuous throughout the day with no lunch break"
       confidence: medium
     continuous_pm:
+      spec: {kind: none, note: "无上午/下午分段；连续交易见 continuous_am，17:20-17:30 收盘集合竞价（2 分钟随机窗口）"}
       zh: "17:20收盘竞价开始，17:30收盘竞价完成并公布收盘价（含2分钟随机收盘时间窗口）"
       en: "Closing auction starts at 17:20 and completes with the closing price published at 17:30 (with a 2-minute random end window)"
       detail: "Trading Guide 原文分处记载：\"17:20 Start of Closing Auction\"、\"17:30 Run Auction and Close\"，以及收盘竞价随机结束时间\"Randomized Closing 2 minutes 17:30 - 17:32 CET\"；因上述时间分散在不同表格行、无单一连续原文同时含17:20/17:30/2分钟，无法给出单一逐字 quote，故 confidence 标 medium。"
@@ -428,11 +432,13 @@ market_structure:
           accessed: 2026-08-16
       confidence: medium
     after_market:
+      spec: {start: "17:30", end: "17:40", kind: after_hours_continuous, note: "Trading-At-Last：以收盘价撮合；17:40-22:00 为 Post Trading（挂单管理，无新成交）"}
       zh: "蓝筹股/中小盘股17:30-17:40另有Trading-At-Last（以收盘价撮合的盘后交易期），此后至22:00为Post Trading（挂单管理，不产生新成交）"
       en: "Blue Chip / Mid-/Small-Cap Shares have a Trading-At-Last period 17:30-17:40 (execution at the closing price), followed by Post Trading until 22:00 (order management only, no new executions)"
       quote: "17:30   Start of Trading-At-Last   Mid-/Small-Cap Shares ... 17:40   End of Trading-At-Last   Mid-/Small-Cap Shares ... 22:00   End of Clearing Day / End of Business Day"
       confidence: high
     night_session:
+      spec: {kind: none, note: "无独立夜盘；22:00-06:00 为系统关闭期"}
       zh: "无独立夜盘；08:00-22:00覆盖全部交易活动，22:00-次日06:00为系统关闭期"
       en: "No separate night session; all trading activity falls within 06:00-22:00 CET, with the system closed 22:00 to 06:00 the next day"
       confidence: medium
@@ -443,6 +449,7 @@ market_structure:
     detail: "交易所公众假期安排未逐条核实，留空，见OPEN-QUESTIONS。"
 
   opening_mechanism:
+    spec: {type: call_auction, auction_end: "09:00", note: "开盘 2 分钟随机窗口；按「最大可执行数量原则」定价，价格-时间优先"}
     zh: "开盘集合竞价，随机时间窗口2分钟；按「最大可执行数量原则」确定开盘价，价格-时间优先原则下限价与不限价申报均纳入撮合"
     en: "Opening auction with a 2-minute random time window; the opening price is determined according to the \"principle of highest executable volume\", with orders considered under price-time priority"
     quote: "According to the principle of highest executable volume the largest possible quantity executable, orders and quotes shall be executed at a single price specified in the auction. ... a) Orders and quotes shall be considered in accordance with the price-time priority principle."
@@ -453,6 +460,7 @@ market_structure:
     confidence: high
 
   closing_mechanism:
+    spec: {type: call_auction, auction_start: "17:20", auction_end: "17:30", trade_at_close_end: "17:40", note: "2 分钟随机收盘窗口（17:30-17:32）；17:30-17:40 Trading-At-Last 以收盘价撮合"}
     zh: "收盘集合竞价（17:20起始，17:30随机窗口内完成），蓝筹股/中小盘股另有17:30-17:40的Trading-At-Last盘后交易期，以收盘价继续撮合"
     en: "Closing auction (starts 17:20, completes within a random window around 17:30); Blue Chip and Mid-/Small-Cap Shares additionally have a Trading-At-Last period 17:30-17:40 that continues matching at the closing price"
     quote: "17:20   Start of Closing Auction ... 17:30   Run Auction and Close ... 17:30   Start of Trading-At-Last   Mid-/Small-Cap Shares"
@@ -516,6 +524,7 @@ market_structure:
       quote: "Continuous trading shall be interrupted for 5 minutes if the potential subsequent price differs a) by 1.5% or more from the current reference price; b) by 1.5% or more from a reference price valid within 10 seconds (Avalanche Stop)."
       confidence: high
     main_board:
+      spec: {type: dynamic, band_pct: 1.5, note: "蓝筹股（Annex A）：预期成交价偏离参考价 ±1.5% 触发 5 分钟交易中断；另有 10 秒内价格骤变 Avalanche Stop（同阈值）；中小盘股/波动股见 other_boards / volatility_interruption"}
       zh: "蓝筹股（Annex A）：偏离参考价±1.5%触发5分钟交易中断（另有10秒内价格骤变的Avalanche Stop机制，同阈值）"
       en: "Blue Chip Shares (Annex A): a ±1.5% deviation from the reference price triggers a 5-minute trading interruption (an Avalanche Stop for rapid moves within 10 seconds applies the same threshold)"
       quote: "Continuous trading shall be interrupted for 5 minutes if the potential subsequent price differs a) by 1.5% or more from the current reference price; b) by 1.5% or more from a reference price valid within 10 seconds (Avalanche Stop)."
@@ -543,6 +552,7 @@ market_structure:
 
   circuit_breaker:
     enum: stock_level
+    spec: {type: stock_level, note: "无按指数跌幅自动触发的全市场熔断；个股级交易中断见 volatility_interruption；非常规情形交易所有裁量权（延迟开盘/暂停个股/删单等）"}
     zh: "无独立于个股级波动性中断之外、按指数跌幅自动触发的全市场熔断；极端情形下交易所依《交易规则》「非常规情形」/「紧急情形」条款拥有自由裁量权，可延迟开盘、限制/暂停个股连续交易、拒绝或删除订单，乃至暂停部分规则"
     en: "No automatic market-wide circuit breaker triggered by index-level declines, separate from the per-security Volatility Interruption; in extreme situations the Exchange has discretionary powers under the Trading Rules' \"Extraordinary situations\" / \"Emergency situations\" provisions to delay openings, restrict or suspend continuous trading in a security, reject or delete orders, or even suspend rules in part"
     detail: "与Eurex/JPX的情况相似（均未找到独立于个股价格机制之外的自动全市场熔断），可能是本次检索范围局限，未逐条核实是否存在，见OPEN-QUESTIONS。"
@@ -554,6 +564,7 @@ market_structure:
     confidence: medium
 
   volatility_interruption:
+    spec: {dynamic_pct: null, note: "统一「Trading Interruption」：蓝筹股 ±1.5%/5 分钟；中小盘股 ±2%/15 分钟（SMIM 成份股 5 分钟）；波动股 ±10%/5 分钟；中断后以随机 30 秒内结束的集合竞价恢复；参数交易所可按短期通知调整。dynamic_pct 因分市场分档留 null"}
     zh: "见price_limits——本所以「Trading Interruption」（交易中断）统一处理开盘延时与盘中波动，按细分市场设不同带宽（蓝筹股±1.5%/5分钟，中小盘股±2%/15分钟或5分钟，波动股±10%/5分钟），交易所可按短期通知调整参数"
     en: "See price_limits — the Exchange uses a unified \"Trading Interruption\" mechanism for both delayed openings and intraday volatility, with bandwidths varying by segment (Blue Chip ±1.5%/5min; Mid-/Small-Cap ±2%/15min or 5min; volatile securities ±10%/5min); the Exchange may adjust these parameters at short notice"
     quote: "Continuous trading shall be interrupted for 5 minutes if the potential subsequent price differs a) by 1.5% or more from the current reference price ... Continuous trading shall be interrupted for 15 minutes if the potential subsequent price differs a) by 2% or more ... the delay in the opening or the trading interruption shall be 5 minutes and the bandwidth shall be 10% or more"
@@ -580,6 +591,7 @@ market_structure:
 
   short_selling:
     enum: freely_allowed
+    spec: {naked_allowed: null, uptick_rule: false, borrow_required: false, note: "无需事先借券锁定；卖方须在成交时点完成结算安排；无报升规则、无指定名单；非常规情形经与 FINMA 协商可另发限制"}
     zh: "允许卖空，无需事先借券锁定；卖方须在成交时点即完成结算安排（与交收责任一致）；非常规情形下交易所经与FINMA协商可另行发布卖空限制规定"
     en: "Short selling is permitted without a pre-borrow requirement; the seller must be able to settle the short sale by the time of trade execution; in special situations the Exchange may, after consultation with FINMA, issue additional short-selling restrictions"
     detail: "与上交所/深交所式「限指定标的范围」的融资融券制度不同，瑞士本身没有专门的卖空立法（WebSearch确认：'no provisions to regulate short selling in terms of laws'），卖空规则完全由交易所自律规则承载，是与本项目其他市场结构性不同的一点。"
@@ -606,6 +618,7 @@ market_structure:
     confidence: high
 
   market_maker_scheme:
+    spec: {present: true, quote_obligation: true, max_spread_pct: 2.5, note: "须签书面 Market Maker Agreement；蓝筹股要求月均 ≥80% 交易时段维持报价，最大点差 2.5%（部分品种 5%）"}
     zh: "做市商须与交易所签订书面「Market Maker Agreement」；具体按细分市场设定报价覆盖率与最大点差要求，如蓝筹股要求月均80%以上交易时段内维持不超过2.5%（或部分品种5%）的最大点差"
     en: "Market makers must sign a written \"Market Maker Agreement\" with the Exchange; coverage and maximum-spread requirements vary by segment, e.g. Blue Chip Shares require quoting over 80% of trading hours (monthly average) with a maximum spread of 2.5% (or 5% for certain instruments)"
     quote: "The Exchange may admit a participant as a market maker under a written agreement (Market Maker Agreement). ... The market maker contractually undertakes to meet the following requirements over 80% (on a monthly average) ... with a maximum trading spread of 2.5%; or ... prices with a maximum trading spread of 5%."

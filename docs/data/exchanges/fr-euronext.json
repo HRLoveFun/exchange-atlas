@@ -453,6 +453,10 @@
     "market_structure": {
       "trading_sessions": {
         "pre_market": {
+          "spec": {
+            "kind": "opening_auction",
+            "note": "开盘前集合竞价/订单累积期，只录入不成交；逐市场逐分组确切钟点表未在抓取到的静态页找到（业内印象 09:00 起，未核实）"
+          },
           "zh": "开盘前集合竞价（Pre-opening Call phase / 订单累积期），期间只接受订单录入不产生成交；具体各市场/各交易分组的确切钟点表未在本次抓取到的静态页面中找到，仅在节假日安排表等间接材料中出现片段时刻（如都柏林收盘13:28-13:30 CET），见 holidays_note",
           "en": "Pre-opening Call phase (order accumulation period): orders are entered but no trades occur; the exact clock times per market/trading group were not found in the static pages fetched this session (only fragmentary times appear indirectly, e.g. Dublin's 13:28-13:30 CET close — see holidays_note)",
           "confidence": "medium",
@@ -470,11 +474,14 @@
           ],
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         },
         "continuous_am": {
+          "spec": {
+            "kind": "continuous",
+            "note": "主交易时段连续竞价，开盘集合竞价完成后开始；逐市场每日开收盘钟点表未定位到官方静态页"
+          },
           "zh": "主交易时段（Main trading session）连续竞价，开盘集合竞价完成后即开始；标准逐市场每日开收盘钟点表本次未定位到官方静态页面，留空不猜（常见业内印象为09:00起，但未经当次抓取原文核实，不采纳）",
           "en": "Main trading session (continuous trading) begins once the opening uncrossing completes; the standard daily open/close clock time table per market was not located in an official static page this session — a commonly-cited market impression (e.g. 09:00 start) was not verified against a primary source fetched this session and is therefore not adopted",
           "confidence": "low",
@@ -492,7 +499,6 @@
           ],
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         },
@@ -541,6 +547,10 @@
           "quote": null
         },
         "after_market": {
+          "spec": {
+            "kind": "after_hours_continuous",
+            "note": "Trading-at-Last：收盘集合竞价后只能以收盘价成交；部分结构性产品另有延长时段至 20:00/22:00 CET"
+          },
           "zh": "收盘集合竞价（Closing uncrossing）后进入Trading-at-Last（TAL）阶段，只能以收盘价成交；部分产品另有Extended Trading Hours（结构性产品可延长至20:00或22:00 CET）",
           "en": "After the Closing uncrossing, a Trading-at-Last (TAL) phase follows in which orders can only match at the closing price; certain products (Structured Products) additionally offer Extended Trading Hours until 20:00 or 22:00 CET",
           "sources": [
@@ -553,11 +563,14 @@
           "confidence": "medium",
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         },
         "night_session": {
+          "spec": {
+            "kind": "none",
+            "note": "现货市场无夜盘"
+          },
           "zh": "无——本所现货市场未见夜盘安排，与四家现货标杆（SSE/HKEX/NYSE/JPX）一致",
           "en": "None — no night session found for the cash markets, consistent with the four cash-equity benchmarks (SSE/HKEX/NYSE/JPX)",
           "confidence": "medium",
@@ -575,7 +588,6 @@
           ],
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -598,6 +610,10 @@
         "detail": null
       },
       "opening_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "note": "开盘集合竞价（opening uncrossing）：订单累积期只录入不成交，撮合时中央订单簿短暂冻结，以最大成交量理论价定价；无法撮合则用主时段首笔成交价"
+        },
         "zh": "开盘集合竞价（Opening uncrossing）：订单累积期内只录入订单不成交，撮合算法启动时中央订单簿短暂冻结，以能实现最大成交量的理论开盘价定价；若无法撮合，则以主交易时段第一笔成交价作为开盘价",
         "en": "Opening uncrossing: during the order-accumulation period orders are entered but not matched; when the matching algorithm runs the Central Order Book is briefly frozen and the opening price is set at the level that maximises matched volume; if no match occurs, the price of the first trade in the main trading session becomes the opening price",
         "sources": [
@@ -611,10 +627,13 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "closing_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "note": "收盘集合竞价（closing uncrossing），机制同开盘；未产生成交价则用主时段最后成交价；随后进入 Trading-at-Last"
+        },
         "zh": "收盘集合竞价（Closing uncrossing）：机制与开盘集合竞价相同；收盘参考价通常即收盘集合竞价成交价，若集合竞价未产生成交价则退而采用主交易时段最后成交价",
         "en": "Closing uncrossing: the same mechanism as the opening uncrossing; the closing reference price is generally the closing-uncrossing price, falling back to the last traded price of the main session if the uncrossing produces no price",
         "sources": [
@@ -628,7 +647,6 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "matching_principle": {
@@ -750,6 +768,12 @@
           "detail": null
         },
         "main_board": {
+          "spec": {
+            "type": "dynamic",
+            "band_pct": 5,
+            "reference": "prev_close",
+            "note": "双层区间：动态区间 ±5%（旗舰指数成分股 ±3%，基准为逐笔更新的最新成交价）+ 静态区间 ±10%（旗舰指数 ±8%，基准为静态参考价/前收）；触及即触发预约期。band_pct 取普通股动态阈值 5%"
+          },
           "zh": "动态区间：普通股±5%，旗舰指数成分股±3%；静态区间：普通股±10%（对照前收盘价），旗舰指数成分股±8%——「旗舰指数」按fee guide定义为CAC 40/AEX/BEL 20/PSI/SBF 120/AMX/ISEQ 20/OBX/FTSE MIB成分股",
           "en": "Dynamic collars: ±5% for ordinary shares, ±3% for flagship-index constituents; static collars: ±10% (vs previous close) for ordinary shares, ±8% for flagship-index constituents — \"flagship index\" per the fee guide covers constituents of CAC 40/AEX/BEL 20/PSI/SBF 120/AMX/ISEQ 20/OBX/FTSE MIB",
           "sources": [
@@ -763,7 +787,6 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -791,6 +814,10 @@
       },
       "circuit_breaker": {
         "enum": "stock_level",
+        "spec": {
+          "type": "stock_level",
+          "note": "无独立于价格区间之外的全市场熔断；动态/静态区间为个股级，触发进入预约期（reservation period），见 volatility_interruption / price_limits"
+        },
         "zh": "无独立于价格区间机制之外的全市场级熔断；动态/静态区间（见price_limits）本身是个股级机制，触发后进入预约期（reservation period），未见覆盖全市场所有品种的指数级熔断安排",
         "en": "No market-wide circuit breaker separate from the price-collar mechanism; the dynamic/static collars (see price_limits) are themselves a stock-level mechanism that triggers a reservation period upon breach — no index-level, market-wide halt covering all instruments was found",
         "detail": "与Eurex（同样只找到个股/合约级机制、未发现独立的全市场级熔断）情况类似，可能是本次检索范围局限，未逐条核实是否存在，见OPEN-QUESTIONS。",
@@ -808,10 +835,13 @@
           }
         ],
         "verified": "2026-08-16",
-        "spec": null,
         "quote": null
       },
       "volatility_interruption": {
+        "spec": {
+          "auction_minutes": 3,
+          "note": "预约期（reservation period）：连续交易阶段理论撮合价触及适用阈值即触发，至少 3 分钟；动态区间首次触发后由 Euronext 人工设参或按预约期内报价自动更新区间后自动恢复；阈值即动态 ±5%/±3%、静态 ±10%/±8%（见 price_limits）"
+        },
         "zh": "预约期（reservation period）：连续交易阶段理论撮合价触及适用阈值即触发预约期，至少持续3分钟；因动态区间触发的首次预约后，恢复交易有两种方式——由Euronext评估市场情况后人工设定参数，或按预约期内报价自动更新动态区间后自动撮合恢复；若自动方式仍在同方向再次触发预约，是否进一步调整区间/参考价须再经Euronext评估市场情况后决定",
         "en": "Reservation period: triggered when the theoretical matching price during continuous trading breaches the applicable thresholds, lasting at least 3 minutes; upon the first reservation caused by a dynamic collar breach, resumption may follow either a manual process (parameters set by Euronext after assessing market conditions) or an automatic process with updated dynamic collars; if the automatic process is breached again in the same direction, any further adjustment to the collars or reference price is decided by Euronext only after a fresh market assessment",
         "sources": [
@@ -825,7 +855,6 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -929,6 +958,12 @@
         "detail": null
       },
       "market_maker_scheme": {
+        "spec": {
+          "present": true,
+          "quote_obligation": true,
+          "max_spread_pct": null,
+          "note": "多类流动性提供者：ETF 做市计划、结构性产品做市义务、零售流动性厂商（报价仅与零售订单撮合、同价优先）；各计划量化义务未逐一核实"
+        },
         "zh": "存在多类流动性提供者安排（统称Liquidity Provider），含针对ETF的做市商计划、针对结构性产品的做市商义务，以及「零售流动性厂商」（Retail Liquidity Firm）——后者的报价仅能与零售订单撮合，享有同价位优先权；具体各计划的量化义务（点差、报价时长占比）本次未逐一核实",
         "en": "Multiple categories of liquidity provider exist (collectively \"Liquidity Providers\"), including ETF market-maker programmes, Structured Product market-maker obligations, and \"Retail Liquidity Firms\" — whose quotes can only match Retail Orders and are given precedence at the same price level; the quantitative obligations of each programme (spread, quoting-time coverage) were not individually verified this session",
         "sources": [
@@ -942,7 +977,6 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "connect_schemes": {

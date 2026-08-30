@@ -709,6 +709,11 @@
         "confidence": "medium"
       },
       "volatility_interruption": {
+        "spec": {
+          "type": "stock_level",
+          "halt_minutes": 10,
+          "note": "科创板无涨跌幅限制股票（新股前 5 日等）盘中涨跌达 ±30% 或 ±60% 触发 10 分钟临时停牌；「异常波动/严重异常波动」两级指标仅触发信息披露不中断交易"
+        },
         "zh": "科创板设「异常波动」与「严重异常波动」两级指标并公告，不中断交易；无涨跌幅限制股票另有盘中30%/60%触发的10分钟临时停牌",
         "en": "STAR Market has two tiers of public disclosure triggers — \"abnormal fluctuation\" and \"severe abnormal fluctuation\" — that do not interrupt trading; stocks without a price-limit band separately have a 10-minute intraday trading halt triggered at 30%/60% price moves",
         "detail": "科创板异常波动：连续3个交易日内日收盘价涨跌幅偏离值累计达±30%。\n严重异常波动：连续10个交易日内累计达+100%/-50%，或连续30个交易日内累计达+200%/-70%。\n触发后本所公布相关信息（如异常交易营业部名单），不直接中断交易，属于信息披露与监控机制而非熔断。\n英文对照此前未核实到官方译本中的对应条款（SSE 英文版《交易规则》第六章科创板专章未见\n\"abnormal fluctuation\" 类表述），2026-08-20 改为直接翻译已核实的中文 quote，未采用官方\n译本原文（因其确实没有对应条款可摘引）。\n",
@@ -722,8 +727,7 @@
         ],
         "verified": "2026-08-12",
         "confidence": "medium",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "trading_halt_mechanism": {
         "zh": "无涨跌幅限制的股票盘中较开盘价首次涨跌达30%或60%，实施单次10分钟临时停牌；另有因违规嫌疑的特别停牌",
@@ -761,6 +765,12 @@
       },
       "short_selling": {
         "enum": "restricted_list",
+        "spec": {
+          "naked_allowed": false,
+          "uptick_rule": null,
+          "borrow_required": true,
+          "note": "融资融券制度，限指定标的范围内进行；报升规则具体表述本次未核实（confidence: low）"
+        },
         "zh": "融资融券制度，限指定标的范围内进行",
         "en": "Margin Trading and Short Selling",
         "confidence": "low",
@@ -773,7 +783,6 @@
           }
         ],
         "verified": "2026-08-12",
-        "spec": null,
         "quote": null
       },
       "block_trade": {
@@ -811,6 +820,12 @@
         "quote": null
       },
       "market_maker_scheme": {
+        "spec": {
+          "present": true,
+          "quote_obligation": true,
+          "max_spread_pct": null,
+          "note": "科创板可实行做市商机制，做市商提供双边报价服务；无统一价差上限公布"
+        },
         "zh": "科创板股票交易可实行做市商机制，做市商可提供双边报价",
         "en": "Market Making Mechanism",
         "quote": "科创板股票交易可以实行做市商机制，做市商可以为科创板股票提供双边报价服务。",
@@ -829,7 +844,6 @@
         "verified": "2026-08-12",
         "confidence": "medium",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "connect_schemes": {

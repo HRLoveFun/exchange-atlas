@@ -840,6 +840,9 @@
         "quote": null
       },
       "short_selling": {
+        "spec": {
+          "note": "设证券借贷机制（SLBS，2007-08 年度推出）；具体做空限制（报升规则、裸卖空禁令条文表述）本次未能核实到直接原文，见 OPEN-QUESTIONS"
+        },
         "zh": "设有证券借贷机制（Securities Lending and Borrowing Scheme, SLBS，2007-2008年度推出），但具体做空限制规则（如是否有报升规则、裸卖空禁令的条文表述）本次未能核实到直接原文",
         "en": "A Securities Lending and Borrowing Scheme (SLBS) exists (introduced FY2007-2008), but the specific short-selling restriction rules (e.g. uptick-rule wording, naked short selling ban text) were not confirmed against direct source text this session",
         "detail": "未设 enum 值——现有 short_selling_stance 枚举（freely_allowed/restricted_uptick/restricted_list/banned）哪个最贴切本次没有依据判断，强行选一个属于凑数，留空。",
@@ -853,8 +856,7 @@
         "quote": "Introduced the Securities Lending and Borrowing Scheme (SLBS)",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "block_trade": {
         "zh": "设有专门的大宗交易时段（Block Deal session），每日两场：08:45-09:00（开盘前）与14:05-14:20（盘中）",

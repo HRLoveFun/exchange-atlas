@@ -393,6 +393,10 @@
           "sources": null
         },
         "continuous_am": {
+          "spec": {
+            "kind": "none",
+            "note": "无上午/下午分段；开盘集合竞价后进入单一连续时段，见 continuous_pm"
+          },
           "zh": "无独立上午/下午划分，开盘集合竞价后即进入全天单一连续交易时段，见 continuous_pm",
           "en": "No separate morning/afternoon split; a single continuous trading session runs for the full day following the opening auction — see continuous_pm",
           "sources": [
@@ -405,11 +409,13 @@
           "confidence": "medium",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         },
         "lunch_break": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无",
           "en": "None",
           "sources": [
@@ -422,11 +428,15 @@
           "confidence": "medium",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         },
         "continuous_pm": {
+          "spec": {
+            "start": "08:00",
+            "end": "16:30",
+            "kind": "continuous"
+          },
           "zh": "主板核心连续交易时段为08:00至16:30（无午休）",
           "en": "Main Market continuous trading runs from 08:00 to 16:30 (no lunch break)",
           "sources": [
@@ -440,10 +450,13 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "after_market": {
+          "spec": {
+            "kind": "none",
+            "note": "无独立盘后连续交易；收盘集合竞价后有短暂 CPX，仅按收盘价撮合剩余订单"
+          },
           "zh": "无独立盘后连续交易时段；收盘集合竞价后另有短暂的收盘价交叉时段（Closing Price Crossing Session, CPX），仅允许以收盘价继续撮合剩余订单，非独立盘后连续交易，见closing_mechanism",
           "en": "No separate after-hours continuous session; a brief Closing Price Crossing Session (CPX) follows the closing auction, allowing only executions at the closing auction price — not an independent after-hours session, see closing_mechanism",
           "sources": [
@@ -457,10 +470,13 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "night_session": {
+          "spec": {
+            "kind": "none",
+            "note": "LSE 24 延长时段（17:00-07:50）拟建中，尚待监管批准，非现行机制"
+          },
           "zh": "无（拟建中的LSE 24是与Main Market分开运营的独立延长交易时段计划，17:00至次日07:50、18:30-19:00暂停做日终处理，尚待监管批准，2026年内向客户开放测试，首个资产类别ETP计划2027上半年上线，非现行机制）",
           "en": "None (LSE 24, a planned extended-hours venue operating separately from the Main Market, would run 17:00-07:50 with an 18:30-19:00 pause for End of Day processing; subject to regulatory approval, client testing by end of 2026, first asset class ETPs targeted H1 2027 — not yet in operation)",
           "sources": [
@@ -474,7 +490,6 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         }
       },
@@ -490,6 +505,10 @@
         "sources": null
       },
       "opening_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "note": "开盘集合竞价 Opening Auction Call；具体钟点定义在未抓取的 Business Parameters 文档，暂缺"
+        },
         "zh": "开盘集合竞价（Opening Auction Call）",
         "en": "Opening Auction Call",
         "sources": [
@@ -503,10 +522,13 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "closing_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "note": "收盘集合竞价（约 16:30）后进入 CPX：仅可按收盘价撮合剩余订单；具体钟点在未抓取的 Business Parameters 文档"
+        },
         "zh": "收盘集合竞价，随后进入短暂的收盘价交叉时段（CPX），允许以收盘价继续撮合剩余订单",
         "en": "Closing Auction, followed by a brief Closing Price Crossing Session (CPX) allowing continued execution at the closing auction price",
         "sources": [
@@ -520,7 +542,6 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "matching_principle": {
@@ -615,6 +636,11 @@
           "detail": null
         },
         "main_board": {
+          "spec": {
+            "type": "dynamic",
+            "band_pct": null,
+            "note": "逐证券价格监控（非固定涨跌停）：富时100 FE10 组静态阈值 8%（相对上次集合竞价价）+ 动态阈值 3%（相对最近成交价），FS10 组 10%/5%；触发转 5 分钟波动性拍卖。band_pct 留 null——分组、且静态/动态两套阈值，无单一值"
+          },
           "zh": "以富时100成分股为例：静态价格监控阈值8%（相对上一次集合竞价成交价），动态价格监控阈值3%（相对最近成交价，触发5分钟波动性拍卖，含最多一次2分钟市价订单延期）；次一流动性梯队（如LSE行业分类FS10）静态阈值10%、动态阈值5%；富时100盘中/收盘/EDSP拍卖的动态阈值比常规交易更紧（FE10为1%，FS10为3%）",
           "en": "For FTSE 100 constituents: static price monitoring threshold 8% (vs. last auction uncrossing price), dynamic threshold 3% (vs. last traded price, triggering a 5-minute volatility auction with up to one 2-minute Market Order extension); the next liquidity tier (e.g. LSE sector FS10) uses 10% static / 5% dynamic; FTSE 100 intraday/closing/EDSP auctions use tighter dynamic thresholds than regular trading (1% for FE10, 3% for FS10)",
           "sources": [
@@ -628,7 +654,6 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -645,6 +670,10 @@
       },
       "circuit_breaker": {
         "enum": "stock_level",
+        "spec": {
+          "type": "stock_level",
+          "note": "无美式全市场熔断；逐证券价格监控触发波动性拍卖，见 volatility_interruption"
+        },
         "zh": "个股级价格监控机制（无美股式全市场熔断）：不同于美国基于标普500指数跌幅触发的全市场熔断（暂停全部股票交易15分钟），伦敦证券交易所采用逐证券的价格监控功能",
         "en": "Stock-level price monitoring mechanism (no US-style market-wide circuit breaker): unlike US market-wide circuit breakers that pause all stocks for 15 minutes based on S&P 500 declines, LSE employs a security-by-security price monitoring mechanism",
         "detail": "同一份说明文档明确将美式全市场熔断作为对照系统提及，是本项目目前少数能在同一原文里直接对比两种机制设计哲学差异的样本。",
@@ -657,10 +686,14 @@
         ],
         "quote": "In the US, market-wide circuit breakers enforce a trading pause for all stocks for 15 minutes. London Stock Exchange's price monitoring functionality is constantly evolving to respond to clients' changing needs and instead, employs a security-by-security price monitoring mechanism.",
         "confidence": "high",
-        "verified": "2026-08-14",
-        "spec": null
+        "verified": "2026-08-14"
       },
       "volatility_interruption": {
+        "spec": {
+          "static_pct": null,
+          "dynamic_pct": null,
+          "note": "静态价格监控（相对上次集合竞价价）+ 动态价格监控（相对最近成交价）触发 5 分钟波动性拍卖（含最多一次 2 分钟市价订单延期）；富时100 FE10 组静态 8%/动态 3%，FS10 组 10%/5%，故两个 pct 键均留 null；每次拍卖及延期后另加最长 30 秒随机"
+        },
         "zh": "静态价格监控（Static Price Monitoring）与动态价格监控（Dynamic Price Monitoring）触发后转入波动性拍卖（volatility auction），价格重新形成后恢复常规交易；每次拍卖及延期后另设最长30秒随机时间",
         "en": "Static and Dynamic Price Monitoring trigger a volatility auction; once the price re-forms, regular trading resumes; each auction/extension is followed by a random period of up to 30 seconds",
         "sources": [
@@ -674,7 +707,6 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -712,6 +744,12 @@
       },
       "short_selling": {
         "enum": "restricted_list",
+        "spec": {
+          "naked_allowed": null,
+          "uptick_rule": false,
+          "borrow_required": null,
+          "note": "SSR 2025（脱欧后英国独立框架，自 2026-07-13 起）：净空头仓位达 0.2% 须报 FCA，FCA 公布匿名化 ANSP；无报升规则；FCA 保留紧急限制/禁止权"
+        },
         "zh": "《2025年卖空规则》（Short Selling Regulations 2025, SSR 2025）——脱欧后英国自订的独立卖空监管框架，2026年7月13日起正式取代此前“承接”的欧盟《卖空条例》（Regulation (EU) No 236/2012）。持有可报告股票净空头仓位达0.2%阈值须向FCA报告，FCA公布匿名化的汇总净空头仓位（ANSP）；FCA保留在特殊情形下实施限制/禁止卖空的紧急权力",
         "en": "Short Selling Regulations 2025 (SSR 2025) — the UK's own post-Brexit short-selling framework, which from 13 July 2026 replaced the previously-assimilated EU Short Selling Regulation (Regulation (EU) No 236/2012). Net short positions in reportable shares must be notified to the FCA once the 0.2% threshold is reached; the FCA publishes anonymised Aggregate Net Short Positions (ANSP); the FCA retains emergency powers to restrict or ban short selling in exceptional circumstances",
         "detail": "压测点核心证据：这是本项目迄今唯一能在同一份原文里直接看到\"英国自订规则明确替换欧盟\n规则、附生效日期\"的案例，比\"脱欧后监管独立\"这个笼统印象具体得多。枚举值选\nrestricted_list（需报告的可报告股票清单机制）而非 restricted_uptick（如美股报升规则），\n因为SSR 2025的核心约束是\"达到净空头仓位阈值须披露\"而非逐笔挂单的报升限制，两者机制\n设计不同，具体触发/豁免细节（稳定化交易、做市商豁免等）未逐条核实。\n",
@@ -724,8 +762,7 @@
         ],
         "quote": "The SSR is set out in the Short Selling Regulations 2025 (SSR 2025) and the Short Selling Rules Sourcebook within the FCA Handbook. These form the legal and regulatory framework for short selling in the UK. The new SSR applies from 13 July 2026. It replaces the assimilated EU Short Selling Regulation (Regulation (EU) No 236/2012)... The FCA publishes daily current and historic ANSP reports. These show the aggregated net short positions in companies based on reported net short positions above the 0.2% threshold.",
         "confidence": "high",
-        "verified": "2026-08-14",
-        "spec": null
+        "verified": "2026-08-14"
       },
       "block_trade": {
         "zh": "",
@@ -761,6 +798,12 @@
         "detail": null
       },
       "market_maker_scheme": {
+        "spec": {
+          "present": true,
+          "quote_obligation": true,
+          "max_spread_pct": null,
+          "note": "订单驱动品种（SETS/IOB 等）做市商用可执行报价 EQ；报价驱动品种（SETSqx/SEAQ）用确定报价，仅具 CCP 清算资格会员可注册"
+        },
         "zh": "分订单驱动与报价驱动两套做市商制度：SETS/IOB/证券化衍生品/固定收益订单簿等订单驱动品种，注册做市商以可执行报价（Executable Quotes）参与；SETSqx/SEAQ/欧洲报价服务等报价驱动品种，注册做市商以非电子可执行的确定报价（Firm Quotes）参与，且仅具备中央对手方清算资格的会员机构方可注册为报价驱动品种做市商",
         "en": "Two parallel market maker regimes: order-driven instruments (SETS, IOB, securitised derivatives, fixed income order book) use registered market makers quoting Executable Quotes; quote-driven instruments (SETSqx, SEAQ, European Quoting Service) use registered market makers providing non-electronically-executable Firm Quotes, and only member firms with central counterparty clearing capability may register as quote-driven market makers",
         "sources": [
@@ -774,7 +817,6 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "connect_schemes": {

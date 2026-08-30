@@ -375,6 +375,7 @@ market_structure:
     quote: "上证发〔2016〕4号 各市场参与人：为维护市场平稳运行，经中国证监会批准，上海证券交易所决定自2016年1月8日起暂停实施《上海证券交易所交易规则》第四章第五节规定的「指数熔断」机制。／the sixth time on December 4, 2015 by the Notice of Adding Chapter IV Section 5 \"Circuit Breaker\" to the Trading Rules of Shanghai Stock Exchange"
 
   volatility_interruption:
+    spec: {type: stock_level, halt_minutes: 10, note: "科创板无涨跌幅限制股票（新股前 5 日等）盘中涨跌达 ±30% 或 ±60% 触发 10 分钟临时停牌；「异常波动/严重异常波动」两级指标仅触发信息披露不中断交易"}
     zh: "科创板设「异常波动」与「严重异常波动」两级指标并公告，不中断交易；无涨跌幅限制股票另有盘中30%/60%触发的10分钟临时停牌"
     en: "STAR Market has two tiers of public disclosure triggers — \"abnormal fluctuation\" and \"severe abnormal fluctuation\" — that do not interrupt trading; stocks without a price-limit band separately have a 10-minute intraday trading halt triggered at 30%/60% price moves"
     detail: |
@@ -400,6 +401,7 @@ market_structure:
 
   short_selling:
     enum: restricted_list
+    spec: {naked_allowed: false, uptick_rule: null, borrow_required: true, note: "融资融券制度，限指定标的范围内进行；报升规则具体表述本次未核实（confidence: low）"}
     zh: "融资融券制度，限指定标的范围内进行"
     en: "Margin Trading and Short Selling"
     confidence: low
@@ -422,6 +424,7 @@ market_structure:
     confidence: medium
 
   market_maker_scheme:
+    spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "科创板可实行做市商机制，做市商提供双边报价服务；无统一价差上限公布"}
     zh: "科创板股票交易可实行做市商机制，做市商可提供双边报价"
     en: "Market Making Mechanism"
     quote: "科创板股票交易可以实行做市商机制，做市商可以为科创板股票提供双边报价服务。"

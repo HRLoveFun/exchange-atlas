@@ -721,11 +721,11 @@
       "price_limits": {
         "type": {
           "enum": "absolute_tiered",
-          "zh": "值幅制限：按前收盘价所在区间，分37档规定绝对值幅（非百分比），如100円以下±30円……5000万円以上±1000万円",
-          "en": "Price limits on bids and offers: 37 tiers of absolute yen amounts (not percentages) keyed to the base price band, e.g. under 100 yen → ±30 yen ... 50,000,000 yen or more → ±10,000,000 yen",
+          "zh": "值幅制限：按前收盘价（基准价）所在区间，分34档规定绝对日元值幅（非百分比），如100円未満±30円……5000万円超±1000万円。完整档位表见 main_board.spec.ladder",
+          "en": "Price limits on bids and offers: 34 tiers of absolute yen amounts (not percentages) keyed to the base price band, e.g. under 100 yen → ±30 yen ... more than 50,000,000 yen → ±10,000,000 yen. Full ladder in main_board.spec.ladder",
           "sources": [
             {
-              "title": "Rules Concerning Price Limits on Bids and Offers（TSE官网英文版PDF）",
+              "title": "Rules Concerning Price Limits on Bids and Offers（TSE官网英文版PDF，Rule 2）",
               "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/bids_and_offers_price_limits_20141201.pdf",
               "accessed": "2026-08-13"
             }
@@ -746,26 +746,186 @@
                 "band_abs": 30
               },
               {
+                "base_min": 100,
+                "base_max": 200,
+                "band_abs": 50
+              },
+              {
+                "base_min": 200,
+                "base_max": 500,
+                "band_abs": 80
+              },
+              {
+                "base_min": 500,
+                "base_max": 700,
+                "band_abs": 100
+              },
+              {
+                "base_min": 700,
+                "base_max": 1000,
+                "band_abs": 150
+              },
+              {
+                "base_min": 1000,
+                "base_max": 1500,
+                "band_abs": 300
+              },
+              {
+                "base_min": 1500,
+                "base_max": 2000,
+                "band_abs": 400
+              },
+              {
+                "base_min": 2000,
+                "base_max": 3000,
+                "band_abs": 500
+              },
+              {
+                "base_min": 3000,
+                "base_max": 5000,
+                "band_abs": 700
+              },
+              {
+                "base_min": 5000,
+                "base_max": 7000,
+                "band_abs": 1000
+              },
+              {
+                "base_min": 7000,
+                "base_max": 10000,
+                "band_abs": 1500
+              },
+              {
+                "base_min": 10000,
+                "base_max": 15000,
+                "band_abs": 3000
+              },
+              {
+                "base_min": 15000,
+                "base_max": 20000,
+                "band_abs": 4000
+              },
+              {
+                "base_min": 20000,
+                "base_max": 30000,
+                "band_abs": 5000
+              },
+              {
+                "base_min": 30000,
+                "base_max": 50000,
+                "band_abs": 7000
+              },
+              {
+                "base_min": 50000,
+                "base_max": 70000,
+                "band_abs": 10000
+              },
+              {
+                "base_min": 70000,
+                "base_max": 100000,
+                "band_abs": 15000
+              },
+              {
+                "base_min": 100000,
+                "base_max": 150000,
+                "band_abs": 30000
+              },
+              {
+                "base_min": 150000,
+                "base_max": 200000,
+                "band_abs": 40000
+              },
+              {
+                "base_min": 200000,
+                "base_max": 300000,
+                "band_abs": 50000
+              },
+              {
+                "base_min": 300000,
+                "base_max": 500000,
+                "band_abs": 70000
+              },
+              {
+                "base_min": 500000,
+                "base_max": 700000,
+                "band_abs": 100000
+              },
+              {
+                "base_min": 700000,
+                "base_max": 1000000,
+                "band_abs": 150000
+              },
+              {
+                "base_min": 1000000,
+                "base_max": 1500000,
+                "band_abs": 300000
+              },
+              {
+                "base_min": 1500000,
+                "base_max": 2000000,
+                "band_abs": 400000
+              },
+              {
+                "base_min": 2000000,
+                "base_max": 3000000,
+                "band_abs": 500000
+              },
+              {
+                "base_min": 3000000,
+                "base_max": 5000000,
+                "band_abs": 700000
+              },
+              {
+                "base_min": 5000000,
+                "base_max": 7000000,
+                "band_abs": 1000000
+              },
+              {
+                "base_min": 7000000,
+                "base_max": 10000000,
+                "band_abs": 1500000
+              },
+              {
+                "base_min": 10000000,
+                "base_max": 15000000,
+                "band_abs": 3000000
+              },
+              {
+                "base_min": 15000000,
+                "base_max": 20000000,
+                "band_abs": 4000000
+              },
+              {
+                "base_min": 20000000,
+                "base_max": 30000000,
+                "band_abs": 5000000
+              },
+              {
+                "base_min": 30000000,
+                "base_max": 50000000,
+                "band_abs": 7000000
+              },
+              {
                 "base_min": 50000000,
                 "band_abs": 10000000
               }
             ],
-            "full_table_note": "值幅制限共 37 档（绝对日元金额，随基准价升高放大），完整表见 price_limits.type 字段的 quote 与 en；此处只放 quote 撑得住的首尾两档锚点，Phase 1b 补全 37 档"
+            "full_table_note": "共 34 档；档位随基准价升高而放大，非固定比例。逐字来源见本字段 quote（TSE 英文版 PDF Rule 2，Provisional Reference Translation，日文本为准，故 confidence 维持 medium）"
           },
-          "zh": "见 type 字段的37档完整表；档位随基准价升高而放大，非固定比例",
-          "en": "See the 37-tier table in the type field; the band widens as the base price rises, not a fixed percentage",
-          "confidence": "medium",
+          "zh": "34 档绝对日元值幅表（见 spec.ladder），如 100 円未満 ±30 円、1000-1500 円 ±300 円、5000 万円超 ±1000 万円；档位随基准价升高放大",
+          "en": "34-tier absolute-yen band table (see spec.ladder): e.g. under 100 yen ±30 yen, 1,000-1,500 yen ±300 yen, over 50,000,000 yen ±10,000,000 yen; the band widens as the base price rises",
+          "quote": "Less than 100 yen Upward/Downward 30 yen\n100 yen or more, but less than 200 yen 50 yen\n200 yen or more, but less than 500 yen 80 yen\n500 yen or more, but less than 700 yen 100 yen\n700 yen or more, but less than 1,000 yen 150 yen\n1,000 yen or more, but less than 1,500 yen 300 yen\n1,500 yen or more, but less than 2,000 yen 400 yen\n2,000 yen or more, but less than 3,000 yen 500 yen\n3,000 yen or more, but less than 5,000 yen 700 yen\n5,000 yen or more, but less than 7,000 yen 1,000 yen\n7,000 yen or more, butt less than 10,000 yen 1,500 yen\n10,000 yen or more, butt less than 15,000 yen 3,000 yen\n15,000 yen or more, but less than 20,000 yen 4,000 yen\n20,000 yen or more, but less than 30,000 yen 5,000 yen\n30,000 yen or more, but less than 50,000 yen 7,000 yen\n50,000 yen or more, but less than 70,000 yen 10,000 yen\n70,000 yen or more, but less than 100,000 yen 15,000 yen\n100,000 yen or more, but less than 150,000 yen 30,000 yen\n150,000 yen or more, but less than 200,000 yen 40,000 yen\n200,000 yen or more, but less than 300,000 yen 50,000 yen\n300,000 yen or more, but less than 500,000 yen 70,000 yen\n500,000 yen or more, but less than 700,000 yen 100,000 yen\n700,000 yen or more, but less than 1,000,000 yen 150,000 yen\n1,000,000 yen or more, but less than 1,500,000 yen 300,000 yen\n1,500,000 yen or more, but less than 2,000,000 yen 400,000 yen\n2,000,000 yen or more, but less than 3,000,000 yen 500,000 yen\n3,000,000 yen or more, but less than 5,000,000 yen 700,000 yen\n5,000,000 yen or more, but less than 7,000,000 yen 1,000,000 yen\n7,000,000 yen or more, but less than 10,000,000 yen 1,500,000 yen\n10,000,000 yen or more, but less than 15,000,000 yen 3,000,000 yen\n15,000,000 yen or more, but less than 20,000,000 yen 4,000,000 yen\n20,000,000 yen or more, but less than 30,000,000 yen 5,000,000 yen\n30,000,000 yen or more, but less than 50,000,000 yen 7,000,000 yen\nWhere the price is more than 50,000,000 yen 10,000,000 yen\n",
           "sources": [
             {
-              "title": "Business Regulations（TSE官网英文版PDF）",
-              "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
-              "accessed": "2026-08-13"
+              "title": "Rules Concerning Price Limits on Bids and Offers（TSE官网英文版PDF，Rule 2 Paragraph 1）",
+              "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/bids_and_offers_price_limits_20141201.pdf",
+              "accessed": "2026-08-30"
             }
           ],
+          "confidence": "medium",
           "verified": "2026-08-13",
           "enum": null,
-          "detail": null,
-          "quote": null
+          "detail": null
         },
         "other_boards": {
           "zh": "Prime/Standard/Growth三板统一适用同一套值幅制限表，未发现分板差异",
@@ -806,6 +966,10 @@
         "verified": "2026-08-13"
       },
       "volatility_interruption": {
+        "spec": {
+          "type": "none",
+          "note": "无独立于值幅制限之外的波动性中断层；「特別気配」是值幅制限的执行方式（申报价超基准价值幅时不成交、显示指示性价格），见 circuit_breaker / price_limits"
+        },
         "zh": "同 circuit_breaker 所述的「特別気配」机制——本质是值幅制限的执行方式，而非独立的波动性中断层，与港交所VCM那种独立于涨跌停之外的冷静期机制不是同一类设计",
         "en": "Same \"special quote\" mechanism described under circuit_breaker — it is the enforcement mechanism of the price-limit system itself, not a separate volatility-interruption layer distinct from price limits (unlike HKEX's VCM, which operates independently of any daily price limit since HKEX has none)",
         "confidence": "medium",
@@ -818,7 +982,6 @@
         ],
         "verified": "2026-08-13",
         "enum": null,
-        "spec": null,
         "detail": null,
         "quote": null
       },
@@ -858,6 +1021,12 @@
       },
       "short_selling": {
         "enum": "restricted_uptick",
+        "spec": {
+          "naked_allowed": null,
+          "uptick_rule": true,
+          "borrow_required": true,
+          "note": "卖空须标记申报（向交易所披露）；受价格限制约束（Business Rules Rule 16「卖空价格限制基准价」），类报升规则；具体触发比例本次未确认"
+        },
         "zh": "卖空须向交易所披露（标记申报），且受价格限制约束（Rule 16「卖空价格限制基准价」），类似报升规则，具体触发比例本次未能在抓取内容中确认",
         "en": "Short sales must be flagged/disclosed to the Exchange and are subject to a price restriction (Rule 16, \"Base Prices with Short Selling Price Restriction\"), functionally similar to an uptick rule; the specific trigger percentage was not confirmed in the content fetched this session",
         "sources": [
@@ -870,7 +1039,6 @@
         "quote": "If the trading participant intends to execute a short sale... disclosure of that fact / Rule 16. Base Prices with Short Selling Price Restriction",
         "confidence": "medium",
         "verified": "2026-08-13",
-        "spec": null,
         "detail": null
       },
       "block_trade": {

@@ -279,19 +279,24 @@ market_structure:
 
   trading_sessions:
     pre_market:
+      spec: {start: "09:15", end: "09:25", kind: opening_auction}
       zh: "无独立盘前时段；9:15-9:25 为开盘集合竞价"
       en: "No separate pre-market session; 9:15-9:25 is the opening call auction"
     continuous_am:
+      spec: {start: "09:30", end: "11:30", kind: continuous}
       zh: "9:30-11:30"
       en: "9:30-11:30"
     lunch_break:
+      spec: {start: "11:30", end: "13:00", kind: lunch_recess}
       zh: "11:30-13:00"
       en: "11:30-13:00"
     continuous_pm:
+      spec: {start: "13:00", end: "15:00", kind: continuous, note: "14:57-15:00 为收盘集合竞价，见 closing_mechanism"}
       zh: "13:00-15:00（13:00-14:57 连续竞价 + 14:57-15:00 收盘集合竞价）"
       en: "1:00 p.m.-3:00 p.m. (1:00-2:57 p.m. continuous auction + 2:57-3:00 p.m. closing call auction)"
       quote: "9:30 至 11:30、13:00 至 14:57 为连续竞价时间，14:57 至 15:00 为收盘集合竞价时间。"
     after_market:
+      spec: {start: "15:05", end: "15:30", kind: fixed_price, note: "盘后固定价格交易，全市场 A 股与 ETF，按当日收盘价成交"}
       zh: "盘后固定价格交易，15:05-15:30，按当日收盘价成交；适用范围为 A 股与交易型开放式基金（ETF），不限于特定板块"
       en: "After-hours fixed-price trading, 3:05-3:30 p.m., executed at the day's closing price; applies to A-shares and exchange-traded funds (ETFs) market-wide, not limited to a specific board"
       detail: "与上交所不同：SSE 的盘后固定价格交易仅限科创板股票，SZSE 的这项机制覆盖全市场 A 股和 ETF，不分板块——这是两所交易机制的一处具体差异。"
@@ -302,6 +307,7 @@ market_structure:
           accessed: 2026-08-14
       confidence: high
     night_session:
+      spec: {kind: none}
       zh: "无"
       en: "None"
 
@@ -311,6 +317,7 @@ market_structure:
     quote: "本所交易日为每周一至周五。国家法定假日和本所公告的休市日，本所市场休市。"
 
   opening_mechanism:
+    spec: {type: call_auction, auction_start: "09:15", auction_end: "09:25"}
     zh: "开盘集合竞价（9:15-9:25）"
     en: "Opening Call Auction (9:15-9:25)"
     quote: "证券采用竞价交易方式的，每个交易日的 9:15 至 9:25 为开盘集合竞价时间"
@@ -324,6 +331,7 @@ market_structure:
     confidence: high
 
   closing_mechanism:
+    spec: {type: call_auction, auction_start: "14:57", auction_end: "15:00"}
     zh: "收盘集合竞价（14:57-15:00）"
     en: "Closing Call Auction (14:57-15:00)"
     detail: "9:20-9:25 开盘集合竞价阶段、14:57-15:00 收盘集合竞价阶段，交易主机不接受撤销申报。"
@@ -403,6 +411,7 @@ market_structure:
       zh: "百分比涨跌幅"
       en: "Percentage price band"
     main_board:
+      spec: {limit_pct: 10, reference: prev_close, symmetric: true}
       zh: "±10%"
       en: "±10%"
       quote: "主板股票的价格涨跌幅限制比例为 10%"
@@ -427,6 +436,7 @@ market_structure:
 
   circuit_breaker:
     enum: none
+    spec: {type: none, note: "2015-12 曾设指数熔断（沪深300 基准，与上交所联动），实施 4 个交易日后于 2016-01-08 暂停，未恢复"}
     zh: "无指数级熔断（2016年1月8日起暂停实施）"
     en: "No index-level circuit breaker (suspended since 8 January 2016)"
     detail: |
@@ -447,6 +457,7 @@ market_structure:
     confidence: medium
 
   volatility_interruption:
+    spec: {type: none, note: "无价格走廊/集合竞价式波动中断；「异常波动」（主板 3 日累计 ±20%、创业板 ±30%）与「严重异常波动」两级指标仅触发信息披露，不中断交易"}
     zh: "主板/创业板股票、封闭式基金设「异常波动」与「严重异常波动」两级指标并公告交易信息，不中断交易"
     en: "Two-tier 'abnormal fluctuation' / 'severe abnormal fluctuation' indicators for Main Board / ChiNext stocks and closed-end funds, triggering disclosure but not a trading halt"
     detail: |
@@ -487,6 +498,7 @@ market_structure:
 
   short_selling:
     enum: restricted_uptick
+    spec: {naked_allowed: false, uptick_rule: true, borrow_required: true, note: "融资融券制度，限本所认可标的；报升规则——卖空申报价不得低于最近成交价（个别品种除外）"}
     zh: "融资融券制度，限指定标的范围；卖空申报价格遵循「报升规则」，不得低于最近成交价（个别本所认可品种除外）"
     en: "Margin Trading and Securities Lending; short-sell orders subject to an uptick (tick) rule"
     detail: |
@@ -522,6 +534,7 @@ market_structure:
     confidence: medium
 
   market_maker_scheme:
+    spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "创业板可实行做市商机制；做市商负双边持续报价、双边回应报价义务；无统一价差上限公布"}
     zh: "创业板股票交易可实行做市商机制，做市商提供双边持续报价、双边回应报价"
     en: "Market Making Mechanism (ChiNext)"
     quote: "创业板股票交易可以实行做市商机制。做市商应当遵守法律法规和本所相关业务规则，并按照做市协议的约定承担为创业板股票提供双边持续报价、双边回应报价等义务。"

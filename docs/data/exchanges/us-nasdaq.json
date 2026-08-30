@@ -382,6 +382,12 @@
     "market_structure": {
       "trading_sessions": {
         "pre_market": {
+          "spec": {
+            "start": "04:00",
+            "end": "09:30",
+            "kind": "after_hours_continuous",
+            "note": "早盘延长交易时段（实际成交，非仅挂单排队）；9:25-9:30 发布开盘失衡信息"
+          },
           "zh": "4:00am起接受交易与订单录入（早盘时段）",
           "en": "Trading and order entry begins at 4:00 a.m. ET",
           "sources": [
@@ -395,10 +401,13 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "continuous_am": {
+          "spec": {
+            "kind": "none",
+            "note": "官网未将 4:00am-9:30am 细分排队/连续两阶段；早盘时段见 pre_market，常规连续交易见 continuous_pm"
+          },
           "zh": "官网未将4:00am-9:30am再细分为'挂单排队不成交'与'连续竞价'两个子阶段（与NYSE区分Pre-Opening Session/无早盘连续交易的做法不同）；本字段与pre_market指向同一时段，未见独立命名",
           "en": "The official page does not further split 4:00am-9:30am into a queue-only phase and a separate continuous phase (unlike NYSE's Pre-Opening Session structure); this field overlaps with pre_market",
           "confidence": "medium",
@@ -411,11 +420,13 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         },
         "lunch_break": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无",
           "en": "None",
           "confidence": "medium",
@@ -428,11 +439,16 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         },
         "continuous_pm": {
+          "spec": {
+            "start": "09:30",
+            "end": "16:00",
+            "kind": "continuous",
+            "note": "常规交易时段，含开盘/收盘 Cross"
+          },
           "zh": "常规交易时段（Regular Hours）9:30am-4:00pm连续交易，含开盘集合竞价",
           "en": "Regular Hours: continuous trading 9:30 a.m.-4:00 p.m. ET, including the Opening Cross",
           "sources": [
@@ -446,7 +462,6 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "after_market": {
@@ -467,6 +482,9 @@
           "quote": null
         },
         "night_session": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无",
           "en": "None",
           "confidence": "medium",
@@ -479,7 +497,6 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -502,6 +519,12 @@
         "quote": null
       },
       "opening_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "09:25",
+          "auction_end": "09:30",
+          "note": "Opening Cross；9:25 起发布订单失衡信息（NOII）"
+        },
         "zh": "开盘集合竞价（Opening Cross），9:25-9:30am发布订单失衡信息，9:30am撮合成交",
         "en": "Opening Cross at 9:30 a.m. ET, preceded by Net Order Imbalance Indicator dissemination from 9:25 a.m.",
         "sources": [
@@ -515,10 +538,15 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "closing_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "15:50",
+          "auction_end": "16:00",
+          "note": "Closing Cross；3:50pm 起发布订单失衡信息（NOII）"
+        },
         "zh": "收盘集合竞价（Closing Cross），3:50pm起发布订单失衡信息，4:00pm撮合成交",
         "en": "Closing Cross at 4:00 p.m. ET, preceded by Net Order Imbalance Indicator dissemination from 3:50 p.m.",
         "sources": [
@@ -532,7 +560,6 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "matching_principle": {
@@ -639,6 +666,12 @@
           "detail": null
         },
         "main_board": {
+          "spec": {
+            "type": "dynamic",
+            "band_pct": 5,
+            "reference_window_min": 5,
+            "note": "LULD 动态价格带，参考价为过去 5 分钟均价。常规时段（9:30am-3:35pm）分层：Tier1（标普500/罗素1000/部分 ETP，前收 >$3）±5%；Tier2（其他 NMS >$3）±10%；前收 $0.75-3 → ±20%；前收 <$0.75 → $0.15 或 75% 孰低。收盘前时段（3:35-4:00pm）各档加倍。band_pct 取 Tier1 常规时段值"
+          },
           "zh": "常规时段（9:30am-3:35pm）按证券分层：Tier1（标普500/罗素1000/部分ETP，前收盘价>$3）5%；Tier2（其他NMS证券，前收盘价>$3）10%；前收盘价$0.75-3之间的Tier1&2证券20%；前收盘价低于$0.75者为$0.15或75%孰低。收盘前时段（3:35-4:00pm）各档带宽加倍（如Tier1变10%、$0.75-3档变40%）",
           "en": "Tiered during Regular Hours (9:30am-3:35pm): Tier 1 (S&P 500/Russell 1000/select ETPs, prior close >$3) 5%; Tier 2 (other NMS securities, prior close >$3) 10%; Tier 1&2 securities priced $0.75-$3 use 20%; below $0.75 use the lesser of $0.15 or 75%. Bands double during the 3:35-4:00pm closing period",
           "sources": [
@@ -652,7 +685,6 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -675,6 +707,31 @@
       },
       "circuit_breaker": {
         "enum": "index_level",
+        "spec": {
+          "type": "index_level",
+          "reference": [
+            {
+              "index": "S&P 500",
+              "exchange": "self"
+            }
+          ],
+          "levels": [
+            {
+              "threshold_pct": 7,
+              "halt_minutes": 15
+            },
+            {
+              "threshold_pct": 13,
+              "halt_minutes": 15
+            },
+            {
+              "threshold_pct": 20,
+              "halt_minutes": null,
+              "day_end": true
+            }
+          ],
+          "note": "同一跨市场联合计划（与 NYSE 一致）；一、二级 3:25pm 后触发不再暂停（除非同时触发三级）；三级任何时段触发即暂停至收市"
+        },
         "zh": "全市场熔断（Market-Wide Circuit Breaker, MWCB），基于标普500指数单日跌幅：7%（一级）、13%（二级）、20%（三级）；与us-nyse.yml记录的机制相同（同一份跨市场联合计划）",
         "en": "Market-Wide Circuit Breaker (MWCB) based on S&P 500 index decline: 7% (Level 1), 13% (Level 2), 20% (Level 3)",
         "detail": "一级/二级：3:25pm前触发则暂停交易15分钟，3:25pm后触发不再暂停（除非同时触发三级）；三级：任何时段触发即暂停交易至当日收市。",
@@ -687,10 +744,13 @@
         ],
         "quote": "Level 1 halt (7% decline in S&P 500 index) / Trading will halt for 15 minutes if drop occurs before 3:25 p.m. / Level 2 halt (13% decline in S&P 500 index) / Trading will halt for 15 minutes if drop occurs before 3:25 p.m. / Level 3 halt (20% decline in S&P 500 index) / At any time during the trading day-trading will halt for the remainder of the trading day.",
         "confidence": "high",
-        "verified": "2026-08-14",
-        "spec": null
+        "verified": "2026-08-14"
       },
       "volatility_interruption": {
+        "spec": {
+          "halt_minutes": 5,
+          "note": "LULD 个股级：NBO 等于下限价格带（或 NBB 等于上限）形成 15 秒 Limit State，若仍在价格带交易或 15 秒内无价格带内成交即触发 5 分钟交易暂停；价格带见 price_limits"
+        },
         "zh": "LULD个股级波动性中断：报价触及价格带边缘形成'Limit State'，持续15秒仍未消化即触发5分钟交易暂停",
         "en": "LULD stock-level volatility interruption: an unresolved 15-second Limit State triggers a five-minute trading pause",
         "sources": [
@@ -704,7 +764,6 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -743,6 +802,12 @@
       },
       "short_selling": {
         "enum": "restricted_uptick",
+        "spec": {
+          "naked_allowed": false,
+          "uptick_rule": true,
+          "borrow_required": true,
+          "note": "Reg SHO；Rule 201 备兑报升熔断——证券较上一交易日收盘价跌 ≥10% 触发，触发后当日剩余及次日卖空单价须高于当前全国最优买价（NBB）方可成交；short exempt 及触发前已优于 NBB 的展示单例外"
+        },
         "zh": "受Regulation SHO监管，含卖空限制熔断机制（Rule 201报升规则，Alternative Uptick Rule）：当某证券较其上一交易日常规交易时段收盘价（由其上市市场认定）下跌达10%或以上时触发，触发后当日剩余时段及次一交易日，卖空单价格须高于当前全国最优买价方可成交（展示卖空单在触发前已优于最优买价挂出的除外，另有标记为short exempt的例外情形）",
         "en": "Regulated under Regulation SHO, including the short sale-related circuit breaker (Rule 201, Alternative Uptick Rule): triggered when a security's price decreases by 10% or more from its closing price on the prior day (as determined by its listing market), after which short sale orders for the remainder of that day and the following day may only execute at a price above the current national best bid (subject to exceptions for displayed orders already priced above the NBB before the trigger, and orders marked \"short exempt\")",
         "detail": "先前留空理由：Nasdaq/NYSE/FINRA页面均只确认Rule 201存在，未给出触发跌幅百分比的逐字\n原文，按铁律不凭记忆填入具体数值。本次改用ecfr.gov的官方汇编条文原文（Electronic Code\nof Federal Regulations，17 CFR 242.201，Regulation SHO的官方法规文本），成功取得\"10%\"\n这一具体阈值的逐字条文。ecfr.gov面向用户的前端页面（如\necfr.gov/current/title-17/.../section-242.201）是纯JS渲染的SPA外壳，curl直接抓取\n拿不到正文；本次改用其公开的versioner API（无需鉴权，返回官方汇编XML/纯文本全文）\n成功绕过，详见SOURCES.md本节反爬突破记录。该API URL按eCFR\"issue date\"锁定版本\n（本次用2026-08-17，17 CFR Title 17当时的最新汇编日期），属于稳定可复现的历史快照\n引用方式，不会因未来法规再修订而失效或内容漂移。\n",
@@ -765,8 +830,7 @@
         ],
         "quote": "A trading center shall establish, maintain, and enforce written policies and procedures reasonably designed to: (i) Prevent the execution or display of a short sale order of a covered security at a price that is less than or equal to the current national best bid if the price of that covered security decreases by 10% or more from the covered security's closing price as determined by the listing market for the covered security as of the end of regular trading hours on the prior day; and (ii) Impose the requirements of paragraph (b)(1)(i) of this section for the remainder of the day and the following day...",
         "confidence": "high",
-        "verified": "2026-08-14",
-        "spec": null
+        "verified": "2026-08-14"
       },
       "block_trade": {
         "zh": "",
@@ -803,6 +867,12 @@
         "detail": null
       },
       "market_maker_scheme": {
+        "spec": {
+          "present": true,
+          "quote_obligation": true,
+          "max_spread_pct": null,
+          "note": "竞争性做市商：任意数量会员机构可就同一证券登记做市、彼此竞价（区别于 NYSE 单一 DMM）；无统一价差上限公布"
+        },
         "zh": "竞争性做市商制度：任意数量的会员机构均可就同一证券登记为做市商、彼此报价竞争（区别于NYSE的单一指定做市商DMM在同一证券上独占价格发现职责，见us-nyse.yml）",
         "en": "Competing market maker model: any number of member firms may register as market makers in the same security and compete on quotes (contrasted with NYSE's single Designated Market Maker, see us-nyse.yml)",
         "detail": "术语见 schema/glossary.yml 的 `competing-market-maker` 条目。成为做市商须先是/申请成为Nasdaq会员，并经FINRA地区办公室（或非FINRA会员时由The NASDAQ Stock Market LLC自身）审核批准。",
@@ -816,8 +886,7 @@
         "quote": "A market maker is a NASDAQ member firm that buys and sells securities at prices it displays in NASDAQ for its own account (principal trades) and for customer accounts (agency trades).",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "connect_schemes": {
         "zh": "无（美股市场无类似沪港通/深港通的跨境互联互通安排）",
