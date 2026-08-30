@@ -371,6 +371,19 @@ market_structure:
     quote: "The Closing Routine is designed to reduce the risk of manipulating closing prices with a single transaction at an unusually high or low price, just before the trading session ends."
     confidence: high
 
+  execution_model:
+    enum: order_driven
+    spec: {electronic: true, dealer_intermediated: false, note: "中央电子限价订单簿、价格优先时间优先连续撮合 + 开收盘均衡价集合竞价；一般股票无做市商。SGX-ST Chapter 6 设指定做市商（Designated Market-Maker）制度，须就获批品种（ETF / 结构性权证 / DLC / 部分股票）持续提供有约束力双边报价，在最大价差与最小数量范围内，属订单驱动之上的补充"}
+    zh: "订单驱动：中央电子限价订单簿，连续竞价按价格优先、时间优先撮合，开收盘按均衡价算法；一般股票无做市商。指定做市商（Designated Market-Maker）制度仅覆盖获批品种（ETF / 结构性权证 / DLC 等），须持续提供符合最大价差与最小数量要求的双边报价"
+    en: "Order-driven: a central electronic limit order book matching on price-then-time priority in continuous trading and via an Equilibrium Price algorithm at the open and close; ordinary stocks have no market makers. A Designated Market-Maker scheme (SGX-ST Rules Chapter 6) covers only approved instruments (ETFs, structured warrants, DLCs, etc.), whose DMMs must provide continuous binding two-sided quotes within a prescribed maximum spread and minimum quantity"
+    detail: "enum 依据既有 matching_principle（价格-时间优先，confidence high）与 market_maker_scheme（DMM 限获批品种，confidence high）综合判定：一般股票为纯订单驱动，DMM 为产品级补充。dealer_intermediated 记 false。"
+    sources:
+      - title: SGX-ST Rules Chapter 6 — Designated Market-Makers
+        url: https://rulebook.sgx.com/rulebook/chapter-6-designated-market-makers
+        accessed: 2026-08-14
+    quote: "A Designated Market-Maker must provide on the Trading System competitive bid and offer quotations: (i) on a continuous basis or in such other manner as SGX-ST prescribes to provide for an adequately liquid market with suitable disclosure to investors."
+    confidence: high
+
   matching_principle:
     enum: price_time
     zh: "连续竞价阶段按价格优先、时间优先撮合；开收盘及午间例行程序按均衡价算法撮合（见开盘/收盘机制）"
@@ -379,6 +392,10 @@ market_structure:
     confidence: high
 
   order_types:
+    spec:
+      market: true
+      limit: true
+      note: "限价申报为主；交易系统亦支持市价申报（均衡价算法专门处理『市价盘剩余』Market Order Surplus）。止损单、完整有效期类型清单本次未逐条核实——不入 spec。证券市场无冰山 / 隐藏订单类型"
     zh: "限价申报为主；交易系统亦支持市价申报（Market Order），均衡价算法专门处理市价盘造成的「市价盘剩余」情形；完整订单类型清单（如止损单、有效期类型）本次未逐条核实"
     en: "Primarily limit orders; the Trading System also supports Market Orders (the Equilibrium Price algorithm has a dedicated rule for a \"Market Order Surplus\"); a complete order-type/time-in-force enumeration was not individually verified this session"
     sources:
@@ -389,6 +406,16 @@ market_structure:
     confidence: medium
 
   tick_size:
+    spec:
+      regime: tiered_by_price
+      min_tick: 0.001
+      currency: SGD
+      ladder:
+        - {price_min: 0, price_max: 0.20, tick: 0.001}
+        - {price_min: 0.20, price_max: 1.00, tick: 0.005}
+        - {price_min: 1.00, price_max: null, tick: 0.01}
+      full_table_note: "普通股票 3 档（SGX-ST Rules 8.3.3）；结构性权证门槛为 S$2 而非 S$1；ETF / ETN 为 S$0.01 或 S$0.001（SGX-ST 指定）；债券 / 贷款股 / 优先股统一 S$0.001。港元 / 人民币 / 日元计价证券按港交所 / 日本市场对齐，不适用本表"
+      note: "0.20–0.995 档 tick 为 0.005，1.00 及以上为 0.01"
     zh: "分三档：股价<S$0.20 为S$0.001；S$0.20–0.995 为S$0.005；S$1.00以上为S$0.01（结构性权证门槛为S$2而非S$1）；ETF/ETN为S$0.01或S$0.001（由SGX-ST另行指定）；债券/贷款股/优先股统一S$0.001"
     en: "Three tiers: below S$0.20 → S$0.001; S$0.20–0.995 → S$0.005; S$1.00 and above → S$0.01 (structured warrants use a S$2 threshold instead of S$1); ETFs/ETNs at S$0.01 or S$0.001 as SGX-ST determines; debentures/bonds/loan stocks/preference shares uniformly S$0.001"
     detail: "港元/人民币/日元计价的证券另按港交所/日本市场的最小报价单位对齐，不适用本表。"
@@ -479,6 +506,34 @@ market_structure:
         url: https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles
         accessed: 2026-08-14
     quote: "An Adjust Phase operates upon the lifting of a suspension of a security or futures contract pursuant to Rule 8.13.7 ... The Adjust Phase sets in for 15 minutes unless a longer time is specified."
+    confidence: medium
+
+  error_trade_rule:
+    spec:
+      bust_allowed: true
+      review_window_min: null
+      deviation_threshold_pct: null
+      resolution: cancel
+      note: "SGX-ST Rules 11.4：SGX-ST 为维护公平有序市场保留复核『错误交易（Error Trade）』的权力，可主动决定作废或维持。无固定价格偏离百分比门槛——裁量时综合考虑成交价与前一成交价之差、市场流动性、若作废 / 不作废的金钱损失、错误订单录入与撮合的时间差、涉及对手方客户数、是否触发 Force Key 等防错提示、对结算的影响等因素。SGX-ST 决定不接受复议"
+    zh: "SGX-ST 错误交易规则：为维护公平有序市场，SGX-ST 保留复核『错误交易（Error Trade）』的权力，可决定将其作废或维持有效。没有固定的价格偏离百分比门槛——SGX-ST 裁量时综合考虑成交价与前一成交价之差、当时市场流动性、作废 / 不作废涉及的金钱损失、错误订单录入与撮合之间的时间差、涉及的对手方客户数、录入时是否使用 Force Key 或触发其他防错提示、对结算流程的影响等相关信息。作出决定后 SGX-ST 不再受理任何复议请求"
+    en: "Under the SGX-ST Rules, SGX-ST reserves the right to review an Error Trade where necessary for the proper maintenance of a fair and orderly market, and may decide to cancel it or leave it valid. There is no fixed price-deviation threshold — in deciding, SGX-ST may consider the difference between the trade price and the preceding traded price, market liquidity at the time, the monetary loss if the trade is or is not cancelled, the time between entry of the erroneous order and its matching, the number of counterparty customers involved, whether the Force Key or another error-prevention alert was triggered, the impact on settlement, and the reasons given for the error. SGX-ST will not consider any request to review its decision"
+    detail: "SGX-ST Rules 11.4.1–11.4.4。与 trading_halt_mechanism（停牌 / Adjust Phase）视角不同。SGX 的错误交易复核是纯裁量式（无 % 阈值），介于欧美的阈值制度与日港的『成交终局』之间。resolution 记 cancel（可作废或维持，无调价）。"
+    sources:
+      - title: SGX-ST Rules 11.4 — Error Trade Cancellations（SGX Rulebook）
+        url: https://rulebook.sgx.com/rulebook/114-error-trade-cancellations
+        accessed: 2026-08-30
+    quote: "SGX-ST reserves the right to review an Error Trade if SGX-ST deems it necessary for the proper maintenance of a fair and orderly market. ... SGX-ST may consider any relevant information, including but not limited to the following when deciding whether to cancel an Error Trade: (a) the difference between the price at which the trade was done and the preceding traded price of the security or futures contract; ... (d) the monetary loss involved if the trade is or is not cancelled; (e) the difference between the time the erroneous order was entered and the time it was matched; (f) the number of counterparty customers involved ... SGX-ST will not consider any request to review its decision"
+    confidence: high
+
+  order_book_transparency:
+    zh: "盘前：中央订单簿公开，各价位限价申报的价量向市场披露，连续竞价按价格优先、时间优先撮合。SGX 证券市场不提供冰山 / 隐藏订单类型（订单全数量展示）。盘后 / 大额：大宗交易（married / block trades）单独申报，SGX 无独立暗池。盘后成交披露适用 SGX-ST 规则"
+    en: "Pre-trade: the central order book is public — limit-order sizes and prices at each level are disseminated and matched on price-then-time priority. The SGX securities market offers no iceberg or hidden order types (full order quantities are displayed). Post-trade / large orders: married and block trades are reported separately and SGX has no separate dark pool; post-trade publication follows the SGX-ST Rules"
+    detail: "字段管本所订单簿内部的（非）展示流动性——SGX 证券订单簿全展示、无非展示订单类型。行情层级 / 收费见第十章 market_data_levels。quote 复用 matching_principle 已核实措辞；盘后披露延迟参数未逐字核实，故整体 confidence: medium。"
+    sources:
+      - title: SGX-ST Rules 8.14 — order matching（price then time priority）
+        url: https://rulebook.sgx.com/rulebook/sgx-st-rules
+        accessed: 2026-08-14
+    quote: "All orders are matched in accordance with price priority, subject to Rule 8.14, followed by time priority."
     confidence: medium
 
   intraday_reversal:
