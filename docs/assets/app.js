@@ -688,9 +688,13 @@
     // 阶梯绝对值幅 → 半透明带（ADR-035 D3：来源给区间不给点）
     if (ladderPct) {
       var lp0 = ladderPct[0], lp1 = ladderPct[1];
+      function ladBand(a, b) {
+        return '<rect x="' + PL + '" y="' + n(Y(b)) + '" width="' + pw + '" height="' + n(Y(a) - Y(b)) + '" fill="var(--danger)" opacity="0.08"/>' +
+          '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(a)) + '" y2="' + n(Y(a)) + '" stroke="var(--danger)" stroke-width="1" stroke-dasharray="4 3" opacity="0.7"/>' +
+          '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(b)) + '" y2="' + n(Y(b)) + '" stroke="var(--danger)" stroke-width="1" stroke-dasharray="4 3" opacity="0.7"/>';
+      }
       g.push(tdCell(id, "price_limits.main_board",
-        '<rect x="' + PL + '" y="' + n(Y(lp1)) + '" width="' + pw + '" height="' + n(Y(lp0) - Y(lp1)) + '" fill="var(--danger)" opacity="0.13"/>' +
-        '<rect x="' + PL + '" y="' + n(Y(-lp0)) + '" width="' + pw + '" height="' + n(Y(-lp1) - Y(-lp0)) + '" fill="var(--danger)" opacity="0.13"/>' +
+        ladBand(lp0, lp1) + ladBand(-lp1, -lp0) +
         '<text x="' + (PL + pw + 7) + '" y="' + n(Y(lp1) + 4) + '" class="td-wl" fill="var(--danger)">阶梯值幅</text>' +
         '<text x="' + (PL + pw + 7) + '" y="' + n(Y(lp1) + 16) + '" class="td-wl-sub">约 ±' + Math.round(lp0) + "–" + Math.round(lp1) + '%</text>',
         tdFieldLabel("price_limits.main_board") + "：阶梯绝对值幅，幅度随基准价变化（点击看完整档位）"));
@@ -736,6 +740,7 @@
     }
 
     // ── 波动性中断走廊（ADR-035 A：贴价格路径的走廊；静态平面上呈中心走廊带）──
+    // 视觉语言：细点线灰色 = "频繁触发的软护栏"，与红墙（硬）/蓝动态带（滚动）区分
     if (viS && viS.type !== "none") {
       var cor = [];
       if (typeof viS.dynamic_pct === "number") cor.push(viS.dynamic_pct);
@@ -743,10 +748,11 @@
       if (cor.length) {
         var vf = "";
         cor.forEach(function (p) {
-          vf += '<rect x="' + PL + '" y="' + n(Y(p)) + '" width="' + pw + '" height="' + n(Y(-p) - Y(p)) + '" fill="none" stroke="var(--warn)" stroke-width="1.1" stroke-dasharray="1 3"/>';
+          vf += '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(p)) + '" y2="' + n(Y(p)) + '" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="2 2"/>' +
+            '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(-p)) + '" y2="' + n(Y(-p)) + '" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="2 2"/>';
         });
-        vf += '<text x="' + (PL + 6) + '" y="' + n(Y(Math.max.apply(null, cor)) - 4) + '" class="td-inl" fill="var(--warn)">波动中断走廊 ±' + cor.join("/") + '%</text>';
-        g.push(tdCell(id, "volatility_interruption", vf, tdFieldLabel("volatility_interruption")));
+        vf += '<text x="' + (PL + pw + 7) + '" y="' + n(Y(Math.min.apply(null, cor)) + 4) + '" class="td-wl-sub">波动走廊 ±' + cor.join("/") + '%</text>';
+        g.push(tdCell(id, "volatility_interruption", vf, tdFieldLabel("volatility_interruption") + "：出走廊触发短暂集合竞价"));
       }
     }
 
@@ -862,28 +868,29 @@
       out.push('<p class="td-banner td-banner-soft">本所记录含衍生品市场字段；平面图显示<strong>现货</strong>（衍生品 spec 待 Phase 3 补充）。</p>');
     }
 
-    function trunc(s, len) { s = String(s == null ? "" : s); return s.length > len ? s.slice(0, len) + "…" : s; }
+    // val 传完整串；CSS 用 -webkit-line-clamp 截断到 2 行，title 给完整内容
     function chip(path, label, val, env) {
       var has = env && (env.zh || env.enum || env.spec);
+      val = String(val == null || val === "" ? "—" : val);
       return '<button type="button" class="td-chip' + tdConfClass(env) + (has ? "" : " td-chip-empty") +
-        '" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) + '" data-chapter="market_structure">' +
-        '<span class="td-chip-k">' + esc(label) + '</span><span class="td-chip-v">' + esc(val || "—") + '</span></button>';
+        '" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) + '" data-chapter="market_structure" title="' + esc(val) + '">' +
+        '<span class="td-chip-k">' + esc(label) + '</span><span class="td-chip-v">' + esc(val) + '</span></button>';
     }
 
     var chips = [];
     var pt = getByPath(ms, "price_limits.type");
-    chips.push(chip("price_limits.type", "价格限制类型", pt && pt.enum ? enumDisplay("price_limit_type", pt.enum) : trunc(pt && pt.zh, 20), pt));
+    chips.push(chip("price_limits.type", "价格限制类型", pt && pt.enum ? enumDisplay("price_limit_type", pt.enum) : (pt && pt.zh), pt));
     var cbf = ms.circuit_breaker;
-    chips.push(chip("circuit_breaker", "熔断", cbf && cbf.enum ? enumDisplay("circuit_breaker_type", cbf.enum) : trunc(cbf && cbf.zh, 20), cbf));
+    chips.push(chip("circuit_breaker", "熔断", cbf && cbf.enum ? enumDisplay("circuit_breaker_type", cbf.enum) : (cbf && cbf.zh), cbf));
     var mp = ms.matching_principle;
-    chips.push(chip("matching_principle", "撮合原则", mp && mp.enum ? enumDisplay("matching_principle", mp.enum) : trunc(mp && mp.zh, 20), mp));
+    chips.push(chip("matching_principle", "撮合原则", mp && mp.enum ? enumDisplay("matching_principle", mp.enum) : (mp && mp.zh), mp));
     var ot = ms.order_types;
-    chips.push(chip("order_types", "订单类型", trunc(ot && (state.langMode === "en" && ot.en ? ot.en : ot.zh), 34), ot));
+    chips.push(chip("order_types", "订单类型", ot && (state.langMode === "en" && ot.en ? ot.en : ot.zh), ot));
     var ss = ms.short_selling;
-    chips.push(chip("short_selling", "做空机制", ss && ss.enum ? enumDisplay("short_selling_stance", ss.enum) : trunc(ss && ss.zh, 20), ss));
+    chips.push(chip("short_selling", "做空机制", ss && ss.enum ? enumDisplay("short_selling_stance", ss.enum) : (ss && ss.zh), ss));
     var mm = ms.market_maker_scheme, mmS = mm && mm.spec;
     var mmv = mmS && mmS.present === true ? ("有" + (mmS.quote_obligation ? " · 强制双边报价" : "")) :
-      (mmS && mmS.present === false ? "无" : trunc(mm && mm.zh, 20));
+      (mmS && mmS.present === false ? "无" : (mm && mm.zh));
     chips.push(chip("market_maker_scheme", "做市商", mmv, mm));
 
     out.push('<div class="td-chips">' + chips.join("") + "</div>");
@@ -896,7 +903,9 @@
       '<span><i class="td-sw" style="background:var(--warn)"></i>集合竞价 / 挂单排队</span>' +
       '<span><i class="td-sw" style="background:var(--info)"></i>午休</span>' +
       '<span><i class="td-sw" style="background:var(--border-strong)"></i>固定价 / 盘后</span>' +
-      '<span><i class="td-sw td-sw-wall"></i>涨跌停墙 / 熔断线</span>' +
+      '<span><i class="td-sw td-sw-solid"></i>涨跌停墙（硬）</span>' +
+      '<span><i class="td-sw td-sw-dash"></i>熔断触发线</span>' +
+      '<span><i class="td-sw td-sw-band"></i>动态带（蓝） / 波动走廊（灰）</span>' +
       "</div>";
   }
 
