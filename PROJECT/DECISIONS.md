@@ -698,3 +698,34 @@
 **验证：** `make build` 全绿（validate 0/0；verify_quotes 离线 CACHE_MISS，非失败）；`spec` 5b 手工复核 JPX ladder + 5 家 index-level 熔断 `levels`，spec 数值全部 quote 命中；`make sync` 幂等。
 
 **日期：** 2026-08-30
+
+### ADR-040 — Phase 2：交易日平面图（v2.0 主视图落地）
+
+**做了什么：** 按 [ADR-035] A 的「第五章字段 → 平面元素」映射与 D 的诚实渲染规则，在 `docs/assets/app.js` 新增 `renderTradingDay` / `tdBuild`（手写 SVG 字符串，零依赖、零构建，[ADR-035] C）。改动仅前端三文件（`app.js` / `assets/styles.css` / `index.html`），不动 schema / 数据 / `docs/data/` 产物。
+
+**字段 → 元素映射的实现选择：**
+- **交易时段** → 全高背景淡带（按 `kind` 着色）+ 底部时段 ribbon 色条。`kind: none` 的时段不渲染。
+- **开 / 收盘机制** → 竞价窗口：`auction_start`+`auction_end` 齐全 → 45° 斜纹块；仅 `auction_end` → 竖虚线；`randomised_seconds` / `random_close_window_min` → 出清边缘一道模糊竖条（[ADR-035] D5）。`trade_at_close_end` → 竞价后一段极淡延长块。
+- **主板幅度** → y 轴墙 + 墙外阴影。五态分开处理：`limit_pct` 数值 → 实线（`confidence != high` 转虚线，D4）；`type: stepwise` → 由 `ladder` 算出百分比包络（`band_abs/base_max`…`band_abs/base_min`，`base_min<300` 的低价档跳过以免失真）画**半透明带**（D3）；`type: dynamic` + `band_pct` 数值 → info 色虚线软带；`band_pct: null` → 幽灵虚线 + 「数值未公布」角标（D2）；`type: none` → 明确文字「无每日涨跌停墙」；spec 在但形态未识别（如 `in-nse` 分档 `limit_pct: null`）→ 兜底幽灵线 + 「分档 / 见 type」。
+- **熔断** → `type: index_level` 才画 y 轴多档触发线（跌侧，`day_end` / `halt_minutes` 进标签，跨所 `reference` 加「跨所联动」）；`stock_level` / `contract_level` 不画线，只在 chips 里出 enum 标签（静态平面画不出「个股各自阈值」，硬画会假装精度）。
+- **波动性中断** → 有 `static_pct` / `dynamic_pct` 数值才画中心走廊带（warn 色点线）；`type: none` 或 pct 全 null → 不画（避免与动态带混淆），信息进 chips。
+- **临时停牌** → 顶边一道 45° 斜纹条 +「可发生于任意时刻」。
+- **回转交易 T+N** → 右缘一行 `↺ T+0` / `→ T+1` 标记。
+- **撮合原则 / 订单类型 / 做空 / 做市商 / 价格限制类型 / 熔断类型** → SVG 下方「标注层」chips（点击进浮层）。
+
+**诚实渲染三态（[ADR-035] D）在代码里的落点：** `spec` 缺省 → 元素整体不渲染；`spec` 键 `null` → 幽灵虚线 + 角标；`type: none` → 明确「无」文字。`confidence: medium/low` → `tdConfClass()` 给 chips 加虚线边框；墙线在 `!= high` 时转虚线。`haveTimes` 为假（`fr-euronext` 全部 `trading_sessions` 只有 `kind`）→ x 轴退回默认 09:00–17:30，ribbon 显示「钟点未结构化——见档案页」，仍渲染价格维度。
+
+**每个元素可点击（[ADR-035] D6）：** 每个渲染组包成 `<g data-role="cell" data-exchange data-path data-chapter="market_structure">`，复用既有的 `openCellOverlay` 事件委托（`Element.closest` 对 SVG 元素成立）。顺带给 `openCellOverlay` 加一节「结构化 Spec」（`<pre>` 展示 `env.spec` JSON），矩阵视图点开同一字段也受益。
+
+**路由 / tab（[ADR-035] A「Phase 2 要改的」）：**
+- `route()` 默认 `params.view` 从 `"matrix"` 改为 `"trading-day"`；`matrix` 改为显式分支，新增 `else renderTradingDay`。启动初始 hash、`index.html` 品牌链接同步改。
+- **交易日平面图作为第一个 tab**（顺序：平面图 / 对比矩阵 / 时区甘特条 / 数据健康度）。[ADR-035] A「要改的」括注里把矩阵列在前是 Phase 0 时按旧顺序随手写的；这里以「默认首屏 = 平面图」为准——默认视图不做成第一个 tab 是 UX 反直觉。矩阵 / 时区 / 健康度三视图渲染逻辑一字未动，`#view=exchange` 档案页仍高亮矩阵 tab。
+- 顶部「市场 Market」下拉（`data-role="td-exchange"`）切换交易所，写 `#view=trading-day&id=<id>`；无 `id` 时默认 `cn-sse`（干净的百分比墙样本，不过载）。
+
+**非现货降级（[ADR-035] E）：** `price_limits.main_board.spec.reference === "prev_settlement"`（`de-eurex`）→ y 轴标签换「相对前结算价」+ 顶部 banner。检测到 `market_structure.derivatives` 子块有内容（10 家）→ 一行淡 banner「平面图显示现货，衍生品 spec 待 Phase 3」。**现货 / 衍生品切换开关未做**——`derivatives.*.spec` 尚无数据，留到 Phase 3。
+
+**验证：** `node --check` 通过；`make build` 全绿、`docs/data/` 无 diff（未动数据）；Chrome headless 截图核对 `cn-sse`（百分比墙）/ `us-nyse`（动态 null 幽灵 + 三档熔断）/ `jp-jpx`（阶梯半透明带）/ `kr-krx`（±30 墙 + 三档熔断 + 波动走廊）/ `fr-euronext`（无时段退化）/ 深色模式（`cn-szse`）六种形态渲染正确；矩阵 / 时区 / 健康度视图无回归。
+
+**未完（Phase 2 的验收 gate，不是本条范围）：** [ADR-035] A 收尾要求「交付后停下评估『30 秒看懂』由非专业读者实测」——**该实测尚未进行**，是 Phase 3 启动前的门槛。已知待打磨点（留给实测反馈定优先级）：静态平面无价格路径时，走廊 / 动态带 / 阶梯带三者视觉区分度；`jp-jpx` 阶梯带偏满；订单类型 chip 文字过长时高度不齐。
+
+**日期：** 2026-08-30
