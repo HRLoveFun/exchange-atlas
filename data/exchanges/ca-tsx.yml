@@ -425,6 +425,7 @@ market_structure:
     confidence: high
   trading_sessions:
     pre_market:
+      spec: {start: "07:00", end: "09:30", kind: pre_open_queue, note: "只排队不成交，持续显示更新参考开盘价 COP"}
       zh: 7:00am-9:30am 盘前挂单期（Pre Open），只排队不成交，参考开盘价（COP）持续更新显示
       en: '7:00 a.m.–9:30 a.m. Pre Open: orders queue without executing; the Calculated
         Opening Price (COP) is displayed and continuously updated'
@@ -436,16 +437,19 @@ market_structure:
         accessed: 2026-08-16
       confidence: high
     continuous_am:
+      spec: {kind: none, note: "无上午/下午分段；9:30am MOO 后进入单一连续时段，见 continuous_pm"}
       zh: 无独立盘前连续交易时段与午休；9:30am开盘集合竞价（MOO）后直接进入全天连续交易
       en: No separate morning-only continuous session or lunch break; continuous trading
         begins immediately after the 9:30 a.m. Market on Open (MOO) auction and runs
         through the afternoon
       confidence: medium
     lunch_break:
+      spec: {kind: none}
       zh: 无
       en: None
       confidence: medium
     continuous_pm:
+      spec: {start: "09:30", end: "16:00", kind: continuous, note: "3:50-3:56pm MOC 失衡期，3:56pm 起随机冻结期，4:00pm 收盘集合竞价"}
       zh: 9:30am-3:50pm连续交易；3:50pm-3:56pm为MOC失衡期（Imbalance Period）；3:56pm-4:00pm为冻结期（Freeze
         Period）；4:00pm收盘集合竞价（MOC）
       en: 9:30 a.m.–3:50 p.m. continuous trading; 3:50–3:56 p.m. MOC Imbalance Period;
@@ -462,6 +466,7 @@ market_structure:
         accessed: 2026-08-16
       confidence: high
     after_market:
+      spec: {start: "16:15", end: "17:00", kind: after_hours_continuous, note: "仅可按最后成交价成交；4:00-4:10pm 价格波动延展期、4:10-4:15pm 盘后撤单期"}
       zh: 4:15pm-5:00pm延时交易时段（Extended Trading Session），仅可在最后成交价（Last Sale Price）成交
       en: 4:15–5:00 p.m. Extended Trading Session; trades may only occur at the Last
         Sale Price
@@ -477,6 +482,7 @@ market_structure:
         accessed: 2026-08-16
       confidence: high
     night_session:
+      spec: {kind: none}
       zh: 无
       en: None
       confidence: medium
@@ -485,6 +491,7 @@ market_structure:
     confidence: low
     detail: 官网另有独立的多年交易日历页（Calendar），本次未展开逐年抓取核实具体假期日期，留空。
   opening_mechanism:
+    spec: {type: call_auction, auction_end: "09:30", note: "Market on Open：可撮合订单以单一开盘价成交，剩余（除 Limit on Open）转入连续订单簿"}
     zh: 开盘集合竞价（Market on Open, MOO），9:30am，所有可撮合订单以单一开盘价成交，未成交剩余订单（Limit on Open订单除外）转入连续限价订单簿
     en: Market on Open (MOO) auction at 9:30 a.m.; all matching orders execute at
       a single opening trade price, with unfilled residuals (except Limit on Open
@@ -499,6 +506,7 @@ market_structure:
       accessed: 2026-08-16
     confidence: high
   closing_mechanism:
+    spec: {type: call_auction, auction_start: "15:50", auction_end: "16:00", trade_at_close_end: "16:10", note: "Market on Close：3:50pm 失衡期、3:56pm 起随机冻结期；计算收盘价超出 PME（3% 或 5 个报价单位，取大者）触发 4:00-4:10pm 价格波动延展期，CPA 参数 10%"}
     zh: 收盘集合竞价（Market on Close, MOC），4:00pm；若计算收盘价（CCP）超出价格波动延展（PME）范围，触发4:00-4:10pm价格波动延展期重新计算；TSX的PME参数为3%或5个最小报价单位（取较大者），收盘价接受度（CPA）参数为10%
     en: Market on Close (MOC) auction at 4:00 p.m.; if the Calculated Closing Price
       (CCP) exceeds the Price Movement Extension (PME) range, a 4:00–4:10 p.m. PME
@@ -621,6 +629,7 @@ market_structure:
         specified by the CIRO Marketplace Threshold guidance.'
       confidence: high
     main_board:
+      spec: {type: dynamic, band_pct: null, note: "无固定百分比涨跌停墙。Marketplace Threshold：以 National Last Sale Price（及本分钟起始 NLSP）为参考的动态价格偏离限制，逐证券按类型/价位不同、遵循 CIRO 指引，无公开固定值。另有 Bid/Ask Tick Limit 按报价分档的穿透限制（股票：$0-1→0.10、$1-5→0.25、$5-50→0.50、$50-100→1.00、≥$100→5.00；债券统一 5.00）"}
       zh: Bid/Ask Tick Limit按报价起始价分档：$0.00起0.10个报价单位、$1.00起0.25、$5.00起0.50、$50.00起1.00、$100.00起5.00（股票；债券统一5.00）
       en: 'Bid/Ask Tick Limit tiers by starting price: 0.10 ticks from $0.00, 0.25
         from $1.00, 0.50 from $5.00, 1.00 from $50.00, 5.00 from $100.00 (equities;
@@ -645,6 +654,7 @@ market_structure:
       detail: TSX本身无其他板块，见 listing.boards 的说明。
   circuit_breaker:
     enum: index_level
+    spec: {type: index_level, reference: [{index: "S&P 500", exchange: "us"}, {index: "S&P/TSX Composite", exchange: self}], levels: [{threshold_pct: 7, halt_minutes: 15}, {threshold_pct: 13, halt_minutes: 15}, {threshold_pct: 20, halt_minutes: null, day_end: true}], note: "标普500 为基准，美股休市时改用标普/多伦多综指；3:25pm 后价格下跌不停牌（三级除外）；CIRO 跨市场协调"}
     zh: 全市场熔断（Market-Wide Circuit Breaker），三级阈值：一级7%（暂停15分钟）、二级13%（暂停15分钟）、三级20%（当日剩余时间停市）；基准为标普500指数，美股休市时改用标普/多伦多综指（S&P/TSX
       Composite Index）；由CIRO统一监管跨市场协调停牌
     en: 'Market-Wide Circuit Breaker with three levels: Level 1 at 7% (15-min halt),
@@ -669,6 +679,7 @@ market_structure:
       if price decline happens after 3:25 p.m., unless there is Level 3 halt.
     confidence: high
   volatility_interruption:
+    spec: {dynamic_pct: 10, halt_minutes: 5, note: "个股熔断 SSCB：5 分钟内价格波动 ≥10% 触发全加拿大市场 5 分钟停牌；停牌前触发价外 >5% 的成交事后撤销；适用标普/多伦多综指成份股及主要持仓 ETF"}
     zh: 个股熔断机制（Single Stock Circuit Breaker, SSCB）：5分钟内价格波动达10%以上，跨全体加拿大市场自动触发该股票5分钟停牌；停牌前触发价外5%以上的成交事后撤销；初期适用范围为标普/多伦多综指成份股及以其为主要持仓的ETF
     en: 'Single Stock Circuit Breakers (SSCB): a 10%-or-more price swing within a
       5-minute period automatically triggers a 5-minute halt in that security across
@@ -723,6 +734,7 @@ market_structure:
     confidence: low
     detail: TSX Rule Book/Order Types Guide本次抓取范围内未找到对当日买卖回转是否受限的专门条款，留空不猜（区别于结算层面的T+1，见clearing.settlement_cycle）。
   short_selling:
+    spec: {note: "TSX 规则手册 2002 年废除自订卖空条款；现由 CIRO 的 UMIR 统一规范，UMIR 具体限制（是否有报升规则/限制清单）本次未能核实（ciro.ca 403），见 OPEN-QUESTIONS"}
     zh: TSX规则手册本身已于2002年废除卖空定义与规则条款，相关卖空规则现由CIRO制定并统一执行的UMIR（Universal Market Integrity
       Rules）规范，非TSX自订；UMIR具体的卖空限制条款（如是否有报升规则）本次未能核实，见 OPEN-QUESTIONS
     en: TSX's own Rule Book repealed its short-sale definition and rules in 2002;
@@ -768,6 +780,7 @@ market_structure:
       the two markets' displayed order book.
     confidence: high
   market_maker_scheme:
+    spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "Market Maker Firm 为其「负责证券」维持公平有序连续双向市场（由 Registered Trader 履约），兼管碎股自动执行；上市时须选定一名做市商；无统一价差上限公布"}
     zh: 做市商制度：经批准的「Market Maker Firm」为其负责证券（Securities of Responsibility）维持公平有序双向市场，由「Registered
       Trader」代表履行日常义务，兼管碎股自动执行
     en: 'Market Maker scheme: approved Market Maker Firms maintain a fair, orderly
