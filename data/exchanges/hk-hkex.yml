@@ -281,26 +281,32 @@ market_structure:
 
   trading_sessions:
     pre_market:
+      spec: {start: "09:00", end: "09:30", kind: opening_auction}
       zh: "盘前时段 9:00-9:30（单一价格集合竞价）"
       en: "Pre-opening Session (POS)"
       quote: "Pre-opening Session / 9:00 a.m. - 9:30 a.m."
     continuous_am:
+      spec: {start: "09:30", end: "12:00", kind: continuous}
       zh: "9:30-12:00"
       en: "9:30 a.m. - 12:00 noon"
       quote: "Continuous Trading Session / Morning Session / 9:30 a.m. - 12:00 noon"
     lunch_break:
+      spec: {start: "12:00", end: "13:00", kind: lunch_recess, note: "官方称「延长午市」，非正式连续交易；圣诞/元旦/农历年夜前不设"}
       zh: "延长午市 12:00-13:00（非正式连续交易，圣诞夜/元旦夜/农历年夜前不设）"
       en: "Extended Morning Session 12:00 noon - 1:00 p.m. (not formal continuous trading; not held on the eves of Christmas, New Year and Lunar New Year)"
       quote: "Extended Morning Session / 12:00 noon - 1:00 p.m."
     continuous_pm:
+      spec: {start: "13:00", end: "16:00", kind: continuous}
       zh: "13:00-16:00"
       en: "1:00 p.m. - 4:00 p.m."
       quote: "Afternoon Session / 1:00 p.m. - 4:00 p.m."
     after_market:
+      spec: {kind: none, note: "无独立盘后连续交易；16:00 起进入收盘集合竞价"}
       zh: "无独立盘后连续交易时段；16:00 起进入收盘集合竞价"
       en: "No separate after-hours continuous trading session; the Closing Auction Session begins at 4:00 p.m."
       confidence: medium
     night_session:
+      spec: {kind: none}
       zh: "无"
       en: "None"
       detail: "官方交易时段表未列出夜盘时段，属推断而非逐字摘引，confidence 相应降级。"
@@ -312,11 +318,13 @@ market_structure:
     quote: "There is no Extended Morning Session and Afternoon Session on the eves of Christmas, New Year and Lunar New Year."
 
   opening_mechanism:
+    spec: {type: call_auction, auction_start: "09:00", auction_end: "09:30"}
     zh: "盘前集合竞价（9:00-9:30，单一价格）"
     en: "Pre-opening Session (POS)"
     quote: "Pre-opening Session / 9:00 a.m. - 9:30 a.m."
 
   closing_mechanism:
+    spec: {type: call_auction, auction_start: "16:00", auction_end: "16:08", random_close_window_min: 2, note: "4:00pm 起，出清时刻在 4:08–4:10pm 间随机"}
     zh: "收盘集合竞价，4:00pm 起至 4:08-4:10pm 间随机收盘"
     en: "Closing Auction Session (CAS)"
     quote: "Closing Auction Session / 4:00 p.m. to a random closing between 4:08 p.m. and 4:10 p.m."
@@ -375,11 +383,17 @@ market_structure:
         - title: VCM FAQ（HKEX 官网英文版）
           url: https://www.hkex.com.hk/Global/Exchange/FAQ/Securities-Market/Trading/VCM?sc_lang=en
           accessed: 2026-08-30
-    main_board: ""
+    main_board:
+      spec: {type: none, note: "港股无每日涨跌停墙；波动控制靠个股级 VCM，见 volatility_interruption"}
+      zh: "无每日涨跌停幅度（见 type / volatility_interruption）"
+      en: "No daily price limit band (see type / volatility_interruption)"
+      quote: "it also does not work the same way as the daily price limit model which sets a specific daily price range for securities trading as seen in some markets"
+      confidence: high
     other_boards: ""
 
   circuit_breaker:
     enum: stock_level
+    spec: {type: stock_level, note: "无全市场/指数级熔断；个股/产品级市場波動調節機制 VCM（触发后 5 分钟冷静期，不停牌），见 volatility_interruption"}
     zh: "无全市场熔断；个股/产品层级设波动性中断机制（官方中文全称：市場波動調節機制，简称市調機制）"
     en: "Volatility Control Mechanism (VCM)"
     detail: "非全市场熔断，是本所对港股「无涨跌停」制度的配套安全阀，见 volatility_interruption。"
@@ -393,6 +407,7 @@ market_structure:
     quote: "港交所建議的市調機制旨在緩和自動化交易引致的極端價格波動（譬如「閃崩」、程式錯誤等等）以維護市場持正操作。此機制不會暫停交易，並非用來限制股價上落，亦與某些市場就證券交易限定每日價格範圍的每日漲跌停板制有所分別。"
 
   volatility_interruption:
+    spec: {dynamic_pct: null, auction_minutes: 5, note: "VCM：基准为 5 分钟前成交价；触发阈值按恒生综合大型股/中型股/小型股分别 ±10%/±15%/±20%（故 dynamic_pct 留 null）；触发后 5 分钟冷静期内标的可在触发前区间内继续交易（非停牌）；连续时段首 15 分钟及午市收盘前 20 分钟不监测"}
     zh: "波动性中断机制（市調機制/VCM）：以5分钟前成交价为基准，触发阈值按恒生综合大型股/中型股/小型股指数成份股分组分别为±10%/±15%/±20%，触发后进入5分钟冷静期（非停牌，仅限价区间内可继续交易）"
     en: "Volatility Control Mechanism (VCM)"
     detail: |
@@ -424,6 +439,7 @@ market_structure:
 
   short_selling:
     enum: restricted_uptick
+    spec: {naked_allowed: false, uptick_rule: true, borrow_required: true, note: "仅限「指定证券」；须备兑；报升规则——不得低于 POS 参考价/连续时段最优卖价/CAS 参考价"}
     zh: "受监管的卖空：仅限「指定证券」、须为备兑卖空、遵守报升规则（不得低于最优卖盘价/参考价）"
     en: "Regulated Short Selling"
     sources:
@@ -442,6 +458,7 @@ market_structure:
     confidence: low
 
   market_maker_scheme:
+    spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "结构性产品（权证/牛熊证）、ETF、双柜台股票设做市商；卖空规则对做市商活动有豁免；无统一价差上限公布"}
     zh: "结构性产品（权证/牛熊证）、ETF、双柜台股票均设做市商制度，卖空规则中对做市商活动另有豁免安排"
     en: "Securities Market Maker / Dual Counter Market Maker"
     sources:

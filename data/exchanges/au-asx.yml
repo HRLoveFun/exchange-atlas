@@ -295,27 +295,33 @@ market_structure:
 
   trading_sessions:
     pre_market:
+      spec: {start: "07:00", end: "09:59", kind: pre_open_queue, randomised_seconds: 15, note: "经纪商录入订单不撮合；09:59:00 起随机 15 秒触发开盘集合竞价"}
       zh: "盘前 07:00:00-09:59:00（悉尼时间，随机15秒），经纪商录入订单但不撮合"
       en: "Pre-open 07:00:00-09:59:00 Sydney time (randomised 15 secs); orders queued but not matched"
       quote: "Pre-opening takes place from 07:00:00 to 09:59:00* (randomised 15 seconds), Sydney time. During Pre-opening: Brokers enter orders into ASX Trade in preparation for the market opening. ASX Trade does not match orders."
     continuous_am:
+      spec: {kind: none, note: "无上午/下午分段；开盘集合竞价出清后进入单一连续时段，见 continuous_pm"}
       zh: "开盘单一价格集合竞价09:59:00-09:59:45后转入连续交易，无区分上下午"
       en: "Opening Single Price Auction 09:59:00-09:59:45, transitioning into continuous trading; no AM/PM split"
       quote: "The transition from OSPA to continuous trading (Open) occurs at 09:59:45* (randomised 15 seconds)."
     lunch_break:
+      spec: {kind: none}
       zh: "无午休，全天连续交易"
       en: "No lunch break; trading is continuous throughout the day"
       detail: "推断依据：交易时段表从09:59:45连续交易至16:00:00无中断记录，未见专门声明「无午休」的原文，confidence相应降级。"
       confidence: medium
     continuous_pm:
+      spec: {start: "10:00", end: "16:00", kind: continuous, note: "开盘集合竞价出清后 09:59:45 起（随机 15 秒）转入连续交易，名义开盘 10:00"}
       zh: "连续交易09:59:45-16:00:00（悉尼时间），价格/时间优先连续撮合"
       en: "Continuous trading 09:59:45-16:00:00 Sydney time, continuous matching on price/time priority"
       quote: "During Normal Trading from 09:59:45* (randomised 15 seconds) to 16:00:00, Sydney time, brokers enter orders into ASX Trade and ASX Trade matches the orders against each other, resulting in trades i.e in this phase ASX Trade automatically matches all trades in Price/Time Priority on a continuous basis."
     after_market:
+      spec: {kind: none, note: "16:00 起为收盘流程：Pre-CSPA 16:00-16:10 → 收盘集合竞价 16:10-16:11（随机 30 秒）→ Post Close/Adjust 至 16:42；无盘后连续交易"}
       zh: "16:00起依次经过Pre-CSPA(16:00-16:10)、收盘集合竞价(16:10-16:11)、Post Close(16:11-16:21:30)、Adjust(16:21:30-16:42)等多阶段收盘流程，非单一「盘后连续交易」时段"
       en: "From 16:00, a multi-phase closing sequence runs: Pre-CSPA (16:00-16:10), Closing Single Price Auction (16:10-16:11), Post Close (16:11-16:21:30), Adjust (16:21:30-16:42) — not a single continuous after-hours session"
       quote: "Between 16:00:00 to 16:10:00, Sydney time, the market is placed in Pre-CSPA. Continuous matching ceases, brokers can enter, change and cancel orders in preparation for the market closing. The Closing Single Price Auction takes place between 16:10:00^ (randomised 30 seconds) to 16:11:00, Sydney time."
     night_session:
+      spec: {kind: none, note: "无电子夜盘；16:42-18:50 Adjust ON 阶段经纪商可电话协商成交（overnight trading）"}
       zh: "无正式夜盘；16:42-18:50为Adjust ON阶段，经纪商可电话协商成交（称为overnight trading），须遵守ASX Market Rules保证有序"
       en: "No formal night session; 16:42-18:50 is the 'Adjust ON' phase during which brokers may negotiate trades by telephone ('overnight trading'), subject to ASX Market Rules to ensure orderliness"
       quote: "Brokers wishing to trade contact each other by telephone. ASX Market Rules ensure that trading takes place in an orderly fashion. Trading during the Adjust phase is referred to as overnight trading."
@@ -326,6 +332,7 @@ market_structure:
     confidence: low
 
   opening_mechanism:
+    spec: {type: call_auction, auction_start: "09:59", auction_end: "10:00", randomised_seconds: 15, note: "09:59:00 起随机 15 秒触发；OSPA 缓冲期后最早 09:59:45 转连续交易"}
     zh: "开盘单一价格集合竞价（OSPA），09:59:00起随机15秒窗口触发，最早09:59:45转入连续交易"
     en: "Opening Single Price Auction (OSPA), triggered within a randomised 15-second window from 09:59:00, earliest transition to continuous trading at 09:59:45"
     sources:
@@ -336,6 +343,7 @@ market_structure:
     confidence: high
 
   closing_mechanism:
+    spec: {type: call_auction, auction_start: "16:10", auction_end: "16:11", randomised_seconds: 30}
     zh: "收盘单一价格集合竞价（CSPA），16:10起随机30秒窗口触发，16:11收盘"
     en: "Closing Single Price Auction (CSPA), triggered within a randomised 30-second window from 16:10, closing at 16:11"
     sources:
@@ -387,11 +395,17 @@ market_structure:
           accessed: 2026-08-14
       quote: "ASX does not use circuit breakers like those employed by some other international exchanges. ... These rules include specifications about the use of Anomalous Order Thresholds (AOTs), rather than circuit breakers. ... The AOT Reference Price is updated every minute and prevents the placing of aggressive orders (an order +/-10% the reference price)."
       confidence: high
-    main_board: ""
+    main_board:
+      spec: {type: none, note: "无逐日涨跌停墙；订单级 AOT 阈值拦截激进订单，非全天价格区间，见 type 字段"}
+      zh: "无每日涨跌停幅度（见 type 字段的 AOT 说明）"
+      en: "No daily price limit band (see the AOT note in the type field)"
+      quote: "ASX does not use circuit breakers like those employed by some other international exchanges. ... These rules include specifications about the use of Anomalous Order Thresholds (AOTs), rather than circuit breakers."
+      confidence: high
     other_boards: ""
 
   circuit_breaker:
     enum: none
+    spec: {type: none, note: "无全市场/指数级熔断（ASIC 政策）；波动控制靠订单级 AOT + 个股级 ETR，见 volatility_interruption"}
     zh: "ASX不使用其他国际交易所常见的熔断机制；ASIC统一制定的市场诚信规则(MIR)改用AOT取代熔断"
     en: "ASX does not use circuit breakers as employed by some other international exchanges; ASIC's Market Integrity Rules substitute AOTs for circuit breakers"
     sources:
@@ -402,6 +416,7 @@ market_structure:
     confidence: high
 
   volatility_interruption:
+    spec: {halt_minutes: 2, note: "极端成交区间 ETR：成交价触及每只股票各自的区间即暂停该股 2 分钟（与 AOT 组合）；区间宽度逐股设定、未公开"}
     zh: "极端成交区间机制（ETR）：成交价触及每只股票各自设定的区间即暂停该股交易2分钟，与AOT搭配构成组合机制"
     en: "Extreme Trade Range (ETR) mechanism: trading in an individual stock is paused for two minutes if price triggers that stock's own ETR band, working alongside AOT"
     detail: "AOT-ETR组合被ASX官方定位为在「限制大幅急促价格波动」与「允许自然市场力量引导交易」之间取得平衡的方案，功能上对应其他交易所的个股级波动性中断，但ASX强调这不是circuit breaker。"
@@ -431,6 +446,7 @@ market_structure:
 
   short_selling:
     enum: freely_allowed
+    spec: {naked_allowed: false, uptick_rule: false, borrow_required: true, note: "备兑卖空须 T+1 上午 9 点前向市场运营商报告；裸卖空除 ASIC 豁免外禁止；无报升规则、无指定名单"}
     zh: "覆盖式卖空（covered short selling）合法且受《公司法》认可为价格发现与流动性的正当机制，须遵守披露义务；裸卖空（naked short selling）除ASIC个别豁免情形外一律禁止；覆盖式卖空须于次一交易日上午9点前向市场运营商报告"
     en: "Covered short selling is legal and recognised under the Corporations Act as a legitimate mechanism for price discovery and liquidity, subject to disclosure obligations; naked short selling is prohibited except where ASIC has granted relief; covered short sales must be reported to the market operator by 9am on the next trading day"
     detail: "无美式报升规则（uptick rule），不限定特定证券名单，因此归为freely_allowed而非restricted_uptick，核心限制是强制披露与裸卖空禁令而非价格限制。"
@@ -456,6 +472,7 @@ market_structure:
     confidence: low
 
   market_maker_scheme:
+    spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "投资产品（ETF/权证）发行人负流动性支持义务；衍生品市场设正式做市商注册；无统一价差上限公布"}
     zh: "ETF/权证等投资产品发行人须依AQUA/Warrant规则履行流动性支持（做市）义务；衍生品市场另设正式的做市商注册制度"
     en: "Issuers of investment products (ETFs/warrants) must meet liquidity support (market making) obligations under the AQUA/Warrant Rules; the derivatives market has a separate formal Market Maker registration scheme"
     sources:
