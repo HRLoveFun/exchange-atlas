@@ -2132,6 +2132,10 @@
     },
     "costs": {
       "commission_structure": {
+        "spec": {
+          "rate": null,
+          "note": "券商佣金，费率市场化协商，无统一标准"
+        },
         "zh": "券商佣金，费率市场化协商，无统一标准",
         "en": "Brokerage commission, market-negotiated with no uniform standard rate",
         "quote": "投资者买卖证券成交的，应当按规定向会员交纳佣金。",
@@ -2145,10 +2149,15 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "exchange_fees": {
+        "spec": {
+          "rate": 0.0341,
+          "unit": "permille",
+          "side": "both",
+          "note": "2023-08-28 起（此前 0.0487‰）；大宗交易再下浮 A股30%/B股50%"
+        },
         "zh": "A股、B股交易经手费按成交金额 0.0341‰ 双边收取（2023年8月28日起下调；此前为0.0487‰）；大宗交易按下调后费率再下浮（A股30%、B股50%）；另有会员管理费用",
         "en": "Transaction handling fee: 0.0341‰ of trade value, bilateral (reduced from 0.0487‰ effective 28 August 2023)",
         "detail": "与上交所同步下调（同一次全国性降费政策，cn-sse.yml 未记录具体费率数字，本条是本次新增的更具体数据）。",
@@ -2167,10 +2176,15 @@
         "quote": "自2023年8月28日起，本所A股、B股交易经手费收费标准由按成交金额的0.0487‰双边收取下调至按成交金额的0.0341‰双边收取。A股、B股大宗交易按照本次下调后的标准费率分别下浮30%、50%收取。",
         "confidence": "high",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "clearing_fees": {
+        "spec": {
+          "rate": 0.01,
+          "unit": "permille",
+          "side": "both",
+          "note": "中国结算过户费；2022-04-29 起（此前 A股 0.02‰）"
+        },
         "zh": "股票交易过户费由中国结算统一收取（不由证券公司留存），现行标准为按成交金额0.01‰双向收取（2022年4月29日起执行；此前沪深市场A股为0.02‰，北京市场A股及挂牌公司股份为0.025‰）",
         "en": "The stock transfer fee is collected uniformly by ChinaClear (not retained by securities firms); the current rate is 0.01‰ of trade value, charged bilaterally, effective 29 April 2022 (previously 0.02‰ for SSE/SZSE A-shares and 0.025‰ for Beijing Stock Exchange A-shares and NEEQ-listed shares)",
         "detail": "该费用是与交易所自身经手费（见 exchange_fees）平行的另一项独立费用，由中国结算这一登记结算机构收取，非深交所收取；来源为第三方媒体转载中国结算官网公告，非本次直接抓取到 chinaclear.cn 官网原始公告页，confidence 依铁律封顶 medium。",
@@ -2184,8 +2198,7 @@
         "quote": "据中国证券登记结算有限责任公司（以下简称\"中国结算\"）网站消息，自2022年4月29日起，将股票交易过户费总体下调50%。据悉，中国结算决定将股票交易过户费由现行沪深市场A股按照成交金额0.02‰、北京市场A股和挂牌公司股份按照成交金额0.025‰双向收取，统一下调为按照成交金额0.01‰双向收取。……交易过户费为中国结算收费，证券经营机构不予留存。",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "regulatory_fees": {
         "zh": "",
@@ -2199,6 +2212,12 @@
         "sources": null
       },
       "stamp_duty": {
+        "spec": {
+          "rate": 0.5,
+          "unit": "permille",
+          "side": "sell",
+          "note": "2023-08-28 起减半（此前单边 1‰）"
+        },
         "zh": "0.05%（单边，卖方缴纳）",
         "en": "0.05% (one-sided, paid by the seller)",
         "detail": "2023年8月28日起，证券交易印花税由此前的单边1‰减半下调至单边0.5‰，仅对卖方征收。\n印花税是全国统一税率的国家税种，非交易所自定，深交所与上交所适用同一税率——本条与\ncn-sse.yml 引用同一篇报道确认同一政策，信息来自新闻媒体对财政部、税务总局公告的转载，\n非财政部官方公告原页，confidence 标 medium。\n",
@@ -2212,10 +2231,13 @@
         "quote": "据财政部、税务总局公告，为活跃资本市场、提振投资者信心，自2023年8月28日起，证券交易印花税实施减半征收。……证券交易印花税由单边征收1‰下调至0.5‰",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "financial_transaction_tax": {
+        "spec": {
+          "type": "none",
+          "note": "中国大陆证券交易国家层面税收以印花税为主体（见 stamp_duty）；无独立 FTT 税目"
+        },
         "zh": "本次会话未见独立于证券交易印花税（见 stamp_duty 字段）之外、以「金融交易税」单独命名的税种；中国大陆对证券交易征收的国家层面税收目前以证券交易印花税（单边0.05%，卖方缴纳）为主体",
         "en": "This session found no tax separately labelled a 'financial transaction tax' distinct from the securities transaction stamp duty (see stamp_duty); mainland China's national-level tax on securities trading is currently, in substance, the stamp duty alone (0.05%, one-sided, paid by the seller)",
         "confidence": "low",
@@ -2229,7 +2251,6 @@
         ],
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "quote": null
       },
       "capital_gains_tax": {

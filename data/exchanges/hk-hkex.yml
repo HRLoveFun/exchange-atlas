@@ -1201,6 +1201,7 @@ costs:
     detail: "草稿印象：券商佣金，费率市场化协商——未附来源，留空。"
 
   exchange_fees:
+    spec: {rate: 0.00565, unit: pct, side: both}
     zh: "港交所自身收取的「交易费」（Trading Fee）：每宗证券交易按代价金额单边0.00565%（四舍五入至分）向交易所缴付；对不同类别交易所买卖基金的证券市场做市商（SMM）交易另设不同宽免比率"
     en: "The Exchange's own \"Trading Fee\": 0.00565% per side of the consideration of a transaction (rounded to the nearest cent) is payable to the Exchange for each security transaction; different exemption rates apply to Securities Market Maker (SMM) transactions in different categories of Exchange Traded Products"
     detail: "与 regulatory_fees（SFC/AFRC等监管机构征费，交易所仅代收代缴）区分：本字段仅指港交所自身作为运营方留存的交易费，两者同一来源页面并列列示，摘引时已按归属机构拆分。"
@@ -1212,6 +1213,7 @@ costs:
     confidence: high
 
   clearing_fees:
+    spec: {rate: 0.0042, unit: pct, side: both, note: "合资格 ETF 做市商交易 0.002%/单边；同一参与者交叉盘 0.0021%/单边；结算所不另收 stock clearing fee（NIL）"}
     zh: "股票结算费（Stock settlement fee）：经CCASS清算结算的交易所交易，每名结算参与者/结算代理参与者按成交金额单边0.0042%缴付（合资格ETF做市商交易适用0.002%优惠税率）；同一交易所参与者自行对盘的「交叉盘」交易另按单边0.0021%计收；结算所本身不另收「结算清算费」（Stock clearing fee列明为NIL）"
     en: "Stock settlement fee: for Exchange Trades cleared and settled through CCASS, each Clearing Participant/Clearing Agency Participant pays 0.0042% per side of gross trade value (a preferential 0.002% rate applies to eligible ETF Securities Market Maker transactions); crossed trades handled by the same Exchange Participant on both sides are charged 0.0021% per side instead; a separate \"stock clearing fee\" is not charged (listed as NIL)"
     sources:
@@ -1222,6 +1224,7 @@ costs:
     confidence: high
 
   regulatory_fees:
+    spec: {unit: pct, side: both, components: [{name: "SFC 交易征费", rate: 0.0027}, {name: "AFRC 交易征费", rate: 0.00015}], note: "投资者赔偿征费 0.002%/单边自 2005-12-19 起暂停；证券市场做市商交易豁免"}
     zh: "香港有独立于交易所费用外的监管性征费，均由交易所代收后划付相应机构：证监会交易征费（SFC Transaction Levy）0.0027%/单边（2014年11月1日起，证券市场做市商交易豁免）；会计及财务汇报局征费（AFRC Transaction Levy）0.00015%/单边（2022年1月1日起，证券市场做市商交易豁免）；投资者赔偿征费（Investor Compensation Levy）原定0.002%/单边，自2005年12月19日起由证监会暂停征收（尚未恢复）"
     en: "Hong Kong does have regulatory levies distinct from the Exchange's own fee, all collected by the Exchange and remitted to the respective bodies: SFC Transaction Levy 0.0027% per side (effective 1 Nov 2014, exempt for Securities Market Maker transactions); Accounting and Financial Reporting Council (AFRC) Transaction Levy 0.00015% per side (effective 1 Jan 2022, exempt for Securities Market Maker transactions); Investor Compensation Levy originally 0.002% per side, suspended by the SFC since 19 December 2005 (not yet reinstated)"
     detail: "任务说明提示需先查证香港是否有独立于交易所费用外的『监管费』概念再判断——本次核实结果是确实存在（SFC征费+AFRC征费+暂停中的投资者赔偿征费），与最初『香港可能没有』的预设不同，属查证后推翻预设的案例。"
@@ -1233,6 +1236,7 @@ costs:
     confidence: high
 
   stamp_duty:
+    spec: {rate: 0.1, unit: pct, side: both}
     zh: "0.1%（买卖双方各自缴纳，2023年11月17日起由0.13%下调）"
     en: "0.1% (payable by both the buyer and the seller separately; reduced from 0.13% effective 17 November 2023)"
     detail: "从价印花税（ad valorem stamp duty），交易双方各付0.1%，与上交所『仅卖方缴纳』的单边征收方式不同——值得在矩阵中标注这一结构性差异。"
@@ -1243,6 +1247,7 @@ costs:
     confidence: medium
 
   financial_transaction_tax:
+    spec: {type: none, note: "香港无独立于印花税之外的金融交易税税目；从价交易税负体现为印花税（见 stamp_duty）"}
     zh: "不适用：香港未另立独立于印花税之外的「金融交易税」税目，证券买卖的从价交易税负体现为印花税（见 costs.stamp_duty，交易双方各0.1%），另有代收代缴性质的证监会/会计及财务汇报局征费（见 costs.regulatory_fees），两者功能上合计构成港股的交易税费负担，但港交所/税务局官方材料均未使用「金融交易税」这一独立税目名称"
     en: "Not applicable: Hong Kong has no separately-named \"financial transaction tax\" distinct from stamp duty. The ad valorem transaction tax burden on securities trading is expressed as Stamp Duty (see costs.stamp_duty, 0.1% each side) plus the pass-through SFC/AFRC regulatory levies (see costs.regulatory_fees); together these functionally constitute Hong Kong's securities transaction tax burden, but neither HKEX nor the Inland Revenue Department uses a distinct \"financial transaction tax\" label"
     detail: "本条是结构性判断（该税目在港未独立存在）而非某个具体数值，主要依据是本次抓取到的官方费率页（stamp_duty/regulatory_fees 两字段共用来源）逐项列示的税费种类里没有第三个独立税目，未见反例；confidence 定 medium 是因为『未见』不等于穷尽性地排除了所有可能命名，留有不确定性。"
