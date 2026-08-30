@@ -712,12 +712,10 @@
           '<text x="' + (PL + pw + 7) + '" y="' + n(Y(bp) + 16) + '" class="td-wl-sub">相对滚动参考价</text>',
           tdFieldLabel("price_limits.main_board") + "：动态价格带 ±" + bp + "%（相对滚动参考价，非固定墙）"));
       } else {
-        var gy = Y(yR * 0.74);
+        // band_pct: null —— 机制存在、数值未公布。不画线（位置无依据，且易与熔断线撞），
+        // 只在右上角标注（ADR-035 D 三态之一）
         g.push(tdCell(id, "price_limits.main_board",
-          '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(gy) + '" y2="' + n(gy) + '" stroke="var(--fg-faint)" stroke-width="1" stroke-dasharray="2 4"/>' +
-          '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(-yR * 0.74)) + '" y2="' + n(Y(-yR * 0.74)) + '" stroke="var(--fg-faint)" stroke-width="1" stroke-dasharray="2 4"/>' +
-          '<text x="' + (PL + pw + 7) + '" y="' + n(gy + 4) + '" class="td-wl-sub">动态带</text>' +
-          '<text x="' + (PL + pw + 7) + '" y="' + n(gy + 15) + '" class="td-wl-sub">数值未公布</text>',
+          '<text x="' + (PL + pw - 6) + '" y="' + n(PT + 14) + '" class="td-wl-sub" text-anchor="end">动态价格带 · 档位官方未公布</text>',
           tdFieldLabel("price_limits.main_board") + "：存在动态价格带，官方未公布档位（ADR-035 D 三态之一）"));
       }
       wallDrawn = true;
@@ -729,13 +727,11 @@
         tdFieldLabel("price_limits.main_board") + "：无逐日涨跌停（见 波动性中断）"));
       wallDrawn = true;
     }
-    // 兜底：spec 存在但形态未识别（如 in-nse limit_pct: null 分档）
+    // 兜底：spec 存在但形态未识别（如 in-nse limit_pct: null 分档）——
+    // 不画线（会臆造一个不存在的单一幅度墙，违反 ADR-035 D），只标注
     if (!wallDrawn && mbS) {
-      var fy = Y(yR * 0.78);
       g.push(tdCell(id, "price_limits.main_board",
-        '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(fy) + '" y2="' + n(fy) + '" stroke="var(--fg-faint)" stroke-width="1" stroke-dasharray="2 4"/>' +
-        '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(-yR * 0.78)) + '" y2="' + n(Y(-yR * 0.78)) + '" stroke="var(--fg-faint)" stroke-width="1" stroke-dasharray="2 4"/>' +
-        '<text x="' + (PL + pw + 7) + '" y="' + n(fy + 4) + '" class="td-wl-sub">分档 / 见 type</text>',
+        '<text x="' + (PL + 6) + '" y="' + n(PT + 22) + '" class="td-inl" fill="var(--fg-muted)">涨跌停按品种分档，无单一幅度 → 见「价格限制类型」</text>',
         tdFieldLabel("price_limits.main_board") + "：按品种分档，无单一幅度（点击展开）"));
     }
 
@@ -751,14 +747,25 @@
           vf += '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(p)) + '" y2="' + n(Y(p)) + '" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="2 2"/>' +
             '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(-p)) + '" y2="' + n(Y(-p)) + '" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="2 2"/>';
         });
-        vf += '<text x="' + (PL + pw + 7) + '" y="' + n(Y(Math.min.apply(null, cor)) + 4) + '" class="td-wl-sub">波动走廊 ±' + cor.join("/") + '%</text>';
+        // 标签放左侧内缘（右侧留给涨跌停墙/熔断标签，避免与同 % 的墙标签叠字，如 sa-tadawul）
+        vf += '<text x="' + (PL + 6) + '" y="' + n(Y(Math.max.apply(null, cor)) - 4) + '" class="td-wl-sub" fill="var(--fg-muted)">波动走廊 ±' + cor.join("/") + '%</text>';
         g.push(tdCell(id, "volatility_interruption", vf, tdFieldLabel("volatility_interruption") + "：出走廊触发短暂集合竞价"));
       }
     }
 
     // ── 熔断（ADR-035 A：指数级 → y 轴多档触发线）──
     if (cbS && cbS.type === "index_level" && cbS.levels) {
-      var xref = (cbS.reference || []).some(function (r) { return r.exchange && r.exchange !== "self"; }) ? " ·跨所联动" : "";
+      var xrefList = (cbS.reference || []).filter(function (r) { return r.exchange && r.exchange !== "self"; });
+      var xref = xrefList.length ? " ·跨所联动" : "";
+      // 跨所联动（ADR-036 #6，如 in-nse 看 Nifty 50 或 BSE Sensex 先触发者）→ 顶部一行说明
+      if (xrefList.length) {
+        var refNames = (cbS.reference || []).map(function (r) {
+          return r.index + "（" + (r.exchange === "self" ? "本所" : r.exchange) + "）";
+        }).join(" 或 ");
+        g.push(tdCell(id, "circuit_breaker",
+          '<text x="' + (PL + 6) + '" y="' + n(Y(0) - 6) + '" class="td-inl" fill="var(--danger)">熔断触发依据：' + esc(refNames) + ' 先触发者</text>',
+          tdFieldLabel("circuit_breaker") + "：跨所联动"));
+      }
       cbS.levels.forEach(function (lv) {
         if (typeof lv.threshold_pct !== "number") return;
         var yy = Y(-lv.threshold_pct), lab = "−" + lv.threshold_pct + "%";
@@ -892,6 +899,13 @@
     var mmv = mmS && mmS.present === true ? ("有" + (mmS.quote_obligation ? " · 强制双边报价" : "")) :
       (mmS && mmS.present === false ? "无" : (mm && mm.zh));
     chips.push(chip("market_maker_scheme", "做市商", mmv, mm));
+    var vic = ms.volatility_interruption, vicS = vic && vic.spec;
+    var vicv;
+    if (vicS && vicS.type === "none") vicv = "无独立层";
+    else if (vicS && (typeof vicS.dynamic_pct === "number" || typeof vicS.static_pct === "number")) {
+      vicv = "走廊 ±" + [vicS.dynamic_pct, vicS.static_pct].filter(function (x) { return typeof x === "number"; }).join("/") + "%";
+    } else vicv = vic && vic.zh;
+    chips.push(chip("volatility_interruption", "波动性中断", vicv, vic));
 
     out.push('<div class="td-chips">' + chips.join("") + "</div>");
     return out.join("");
