@@ -972,6 +972,7 @@ costs:
     confidence: low
 
   commission_structure:
+    spec: {rate: null, note: "1996 年金融大爆炸全面放开佣金管制；此后各券商自定，网上券商多零/极低佣金"}
     zh: "「日本金融大爆炸」（Big Bang，1996年11月启动的金融体制改革）全面放开经纪佣金管制，此前长期实行固定费率；自由化后佣金转为各证券公司自行议定，并直接带动了网上交易（在线证券交易）的扩张，目前主流网上券商多提供极低或零佣金的现货股票交易服务（本次未抓取到某一家具体券商的费率表，故不展开列举具体数字）"
     en: "Brokerage commissions were fully liberalized as part of Japan's \"Big Bang\" financial system reform (commenced November 1996), replacing the long-standing fixed-rate regime; since liberalization, commissions are freely negotiated between securities companies and customers, and this liberalization directly drove the expansion of online (internet) securities trading, with mainstream online brokers today commonly offering very low or zero-commission cash-equity trading (no single broker's current rate table was fetched this session, so no specific figure is asserted)"
     detail: "本条描述的是制度层面的「佣金已自由化」这一事实，不是任何一家具体券商的现行费率；后者随时间/券商变化快，不适合作为交易所层面的稳定事实记录。"
@@ -983,6 +984,7 @@ costs:
     confidence: high
 
   exchange_fees:
+    spec: {rate: null, note: "四部分（基本费/交易费/接入费/系统设施费）；向会员而非终端投资者收取，本次未摘引费率"}
     zh: "TSE向交易参与者（证券公司）收取的交易参与费用由四部分构成：基本费用（Basic fees）、交易费用（Trading fees，按成交金额/量计）、接入费用（Access fees，按下单笔数计）、交易系统设施使用费（按交易系统使用状况计）；这是交易所向会员（而非终端投资者）收取的费用，终端投资者实际负担的部分通常已隐含在券商佣金中"
     en: "TSE's trading participation fees, paid by Trading Participants (brokers), are composed of four elements: Basic fees; Trading fees (based on trading value/volume); Access fees (based on the number of orders placed); and Trading system facility usage fees (based on the status of use of trading systems). These are fees the Exchange charges its members, not end investors directly — the investor-borne portion is typically embedded within broker commissions"
     sources:
@@ -993,6 +995,7 @@ costs:
     confidence: high
 
   clearing_fees:
+    spec: {rate: null, unit: pct, side: both, tiered: true, note: "月度基本费 JPY 5,000,000（一般清算参与者，达门槛时）；清算费按当月每日清算金额累进：≤1 万亿日元档 0.000007%、>4 万亿日元档 0.0000044%；债券另计"}
     zh: "JSCC（日本证券结算公司）向证券清算参与者收取月度基本费与清算费两部分：月度基本费——一般清算参与者50万日元（仅当该参与者当月承担义务占全市场份额超3%且单位义务价值低于市场平均时收取）、ETF特别清算参与者/注册ETF信托银行各5万日元；清算费——按当月「每日清算金额（单边）」分级累进费率计算（不超过1万亿日元部分费率0.000007，超过4万亿日元部分降至0.0000044），债券另按面值0.000004或每笔2.95日元计"
     en: "JSCC (Japan Securities Clearing Corporation) charges Clearing Participants a monthly fee plus a clearing fee: monthly fee — JPY500,000 for a Securities Clearing Participant (charged only when its monthly share of assumed obligation count exceeds 3% of the market and its unit value per assumed obligation is below the market average), JPY50,000 each for an ETF Special Clearing Participant or Registered ETF Trust Bank; clearing fee — a tiered rate applied to the month's Daily Clearing Value (one way), starting at 0.000007 for the portion up to JPY1 trillion and stepping down to 0.0000044 above JPY4 trillion; bonds are charged separately at 0.000004 per face value of ¥1 or ¥2.95 per contract"
     sources:
@@ -1013,6 +1016,7 @@ costs:
     detail: "草稿印象：日本1999年已废止有价证券交易税——与上交所0.05%单边、港交所0.1%双边形成对比的重要字段，但本次未找到可引用的官方来源确认，留空不凭常识填写（该字段volatility: volatile，按铁律必须有sources才能填，本次没有）。"
 
   financial_transaction_tax:
+    spec: {type: none, note: "有价证券交易税与交易所税 1999-03-31 废止；此后日本对现货股票买卖不再征独立交易税"}
     zh: "原有的有价证券交易税（对证券转让课征）与交易所税（对期货期权等交易所交易课征）已于1999年3月31日废止，属1999年度税制改正的一部分；此后日本对现货股票买卖本身不再征收独立于所得税/资本利得税之外的交易税"
     en: "The former Securities Transaction Tax (levied on securities transfers) and Bourse Tax (levied on exchange-traded futures/options transactions) were abolished on March 31, 1999, as part of the FY1999 tax reform; since then Japan has not levied a transaction tax on cash-equity trades separate from income/capital-gains tax"
     detail: "与stamp_duty字段（本次未在本任务范围内，仍留空）描述的是同一段历史事实，但schema里是两个独立字段；本字段专门确认「废止」这一节点，stamp_duty字段的既有detail草稿印象可留待下次专项核实时一并回填，本次不越界代填。"

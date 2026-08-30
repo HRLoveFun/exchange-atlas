@@ -1651,6 +1651,10 @@
     },
     "costs": {
       "commission_structure": {
+        "spec": {
+          "rate": null,
+          "note": "佣金由投资者与其银行/经纪商协商"
+        },
         "zh": "Xetra不对终端投资者设定统一佣金；佣金由投资者与其开户的银行/经纪商（获准公司/交易员）自行协商，取决于账户类型、交易量、是否主动/被动管理等。交易所仅对参与与交易收取规则内费用，不介入经纪佣金",
         "en": "Xetra sets no uniform commission for end investors; commissions are negotiated between the investor and their bank/broker (Admitted Company / Exchange Trader), depending on account type, volume and active/passive management. The exchange only charges its rule-based participation and transaction fees and does not intervene in broker commissions",
         "detail": "佣金属中介竞争范畴，非交易所规则事项",
@@ -1664,10 +1668,14 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "quote": null
       },
       "exchange_fees": {
+        "spec": {
+          "rate": null,
+          "unit": "pct",
+          "note": "准入费 + 年度参与费（《费用规则》表 I/II）；本字段 quote 未给按笔从价费率；Mistrade 申请每笔 EUR 500"
+        },
         "zh": "按类别收费：参与者一次性准入费、年度参与费（依《费用规则》表I/II）；连续竞价中撤销成交（Mistrade申请）每笔另收500欧元费用，结构性产品的多笔关联Mistrade申请可另计",
         "en": "Fees by category: a one-time participant admission fee, an annual participation fee (per Fee Regulations Tables I/II); a separate EUR 500 fee applies per Mistrade Application (transaction-cancellation request) in Continuous Auction trading, with additional tiered fees for related Mistrade Applications on Structured Products",
         "sources": [
@@ -1681,10 +1689,18 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "clearing_fees": {
+        "spec": {
+          "rate": 0.08,
+          "unit": "bp",
+          "side": "both",
+          "cap": 4,
+          "cap_scope": "per_trade_side",
+          "currency": "EUR",
+          "note": "Eurex Clearing 另收 EUR 0.06/已执行订单（flat）；价值费单笔封顶 EUR 4"
+        },
         "zh": "Xetra现货证券交易的清算由Eurex Clearing承担，对每笔已成交订单收取0.06欧元，另按成交金额收取0.08个基点（即0.0008%）的价值费，单笔价值费上限为4欧元",
         "en": "Clearing of Xetra spot securities trades is performed by Eurex Clearing, which charges EUR 0.06 per executed order, plus a value-based fee of 0.08 basis points (i.e. 0.0008 percent) of the transaction value, capped at EUR 4 per order",
         "sources": [
@@ -1698,10 +1714,13 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "regulatory_fees": {
+        "spec": {
+          "type": "none",
+          "note": "市场监管由对机构的年度摊派负担，不按笔征收"
+        },
         "zh": "Xetra层面没有独立于交易所费用（Gebührenordnung）与清算费之外的「监管费」按笔征收；对市场的监管（BaFin、黑森州交易所监管机关）由对受监管实体征收的年度监管费/摊派负担，不向每笔Xetra交易征收交易税式监管费",
         "en": "At the Xetra level there is no separate \"regulatory fee\" levied per transaction beyond the exchange fees (Fee Regulations) and clearing fees; market supervision (by BaFin and the Hesse Exchange Supervisory Authority) is funded by annual supervisory fees / levies on supervised entities, not by a transaction-tax-style regulatory fee on each Xetra trade",
         "detail": "《费用规则》（Gebührenordnung）所列费用均为交易所/参与/交易类费用，未含按笔征收的「监管费」；监管费属对机构的年度摊派",
@@ -1715,10 +1734,13 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "quote": null
       },
       "stamp_duty": {
+        "spec": {
+          "type": "none",
+          "note": "德国证券交易税（Börsenumsatzsteuer）1991-01-01 废除；不同于英国外国股票 SDRT"
+        },
         "zh": "德国不对证券买卖征收印花税/证券转移税；历史上的「证券交易税」（Börsenumsatzsteuer）已于1991年1月1日废除（依据《改善金融市场条件法》第4条），不同于英国的外国股票SDRT",
         "en": "Germany levies no stamp duty / securities transfer tax on securities trades; the historical Börsenumsatzsteuer (stock exchange sales tax) was abolished with effect from 1 January 1991 (under Article 4 of the Act to Improve the Framework Conditions for Financial Markets), unlike the UK's SDRT on foreign shares",
         "detail": "德国自1991年起无证券印花税；现行无此类税项",
@@ -1732,10 +1754,13 @@
         "quote": "Die Börsenumsatzsteuer entfiel zum 1. Januar 1991. / Die Börsenumsatzsteuer wurde mit Artikel 4 des Gesetzes zur Verbesserung der Rahmenbedingungen der Finanzmärkte abgeschafft.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "financial_transaction_tax": {
+        "spec": {
+          "type": "none",
+          "note": "欧盟 FTT 提案未生效；德国 1991 年废除证券转移税"
+        },
         "zh": "德国目前不对证券买卖征收金融交易税（FTT）；曾存在的「证券转移税」（Börsenumsatzsteuer）已于1991年废除（见stamp_duty字段），而欧盟层面的金融交易税提案至今未正式生效，故Xetra交易无此税项",
         "en": "Germany currently levies no financial transaction tax (FTT) on securities trades; the former securities transfer tax (Börsenumsatzsteuer) was abolished in 1991 (see the stamp_duty field), and the EU-level FTT proposal has not entered into force, so Xetra trades carry no such levy",
         "detail": "德国无一般金融交易税；欧盟FTT仍在提案阶段、未生效",
@@ -1749,7 +1774,6 @@
         "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "quote": null
       },
       "capital_gains_tax": {

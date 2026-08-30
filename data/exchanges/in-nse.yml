@@ -1444,6 +1444,7 @@ costs:
     confidence: medium
 
   commission_structure:
+    spec: {rate: null, note: "券商佣金市场化；SEBI True-to-Label：交易所/清算所/监管征费不得加价转嫁"}
     zh: "券商佣金（brokerage）由券商与客户自行约定（可按笔或按成交金额比例），不在交易所统一费率之内；但 SEBI 的'True to Label'规则要求券商向客户收取的交易相关费用（交易所/清算所/监管征费）须与实际向 MII 支付的金额一致、不得加价。故投资者可见的'成本'=券商佣金 + 交易所/清算所/监管各项征费（逐项列示于 contract note）"
     en: "Brokerage is negotiated between the broker and the client (per-trade or ad-valorem) and is outside the Exchange's uniform fee schedule; however SEBI's 'True to Label' rule requires that the trading-related charges a broker recovers from clients (exchange/clearing-corporation/regulatory levies) equal the amount actually paid to the MIIs, with no markup. Thus an investor's visible cost = brokerage + the itemised exchange/clearing/regulatory levies on the contract note"
     detail: |
@@ -1458,6 +1459,7 @@ costs:
     confidence: medium
 
   exchange_fees:
+    spec: {rate: 2.97, unit: per_lakh, currency: INR, side: both, note: "现货 Rs 2.97/每边/每 lakh；股指与股票期货 Rs 1.73；股票期权 Rs 35.03/每边/每 lakh 权利金"}
     zh: "NSE 按双侧计收交易费（transaction charges）：现货市场 Rs. 2.97/每边/每 lakh 成交金额；股指与股票期货 Rs. 1.73/每边/每 lakh；股票期权 Rs. 35.03/每边/每 lakh 权利金价值；货币期货 Rs. 0.35/每边/每 lakh；货币与利率期权 Rs. 31.10/每边/每 lakh 权利金价值。生效与修订后的费率见 detail"
     en: "NSE charges transaction charges on both sides: Cash Market Rs. 2.97 per lakh of traded value per side; Equity Futures Rs. 1.73 per lakh per side; Equity Options Rs. 35.03 per lakh of premium value per side; Currency Futures Rs. 0.35 per lakh per side; Currency and Interest Rate Options Rs. 31.10 per lakh of premium value per side; see detail for effective dates and later revisions"
     detail: |
@@ -1474,6 +1476,7 @@ costs:
     confidence: high
 
   clearing_fees:
+    spec: {rate: null, note: "NSE Clearing 按业务线计收，逐笔转嫁；费率表本次未核实"}
     zh: "NSE Clearing 作为中央对手方，对清算会员按业务线计收清算费（clearing fees），并入整体交易成本、由券商向客户逐笔转嫁；该清算费的具体逐产品费率表本次未在抓取页中核实，故仅作定性说明"
     en: "As the central counterparty, NSE Clearing levies per-segment clearing fees on clearing members, which flow into the overall transaction cost and are passed through to clients by brokers; the exact per-product clearing-fee schedule was not verified on the pages fetched, so this is a qualitative note"
     detail: "清算费与上文交易所交易费、监管费并行，均列示于 contract note；具体数字以 NSE Clearing 的 tariff 为准，本次未抓取该 tariff 原文。"
@@ -1484,6 +1487,7 @@ costs:
     confidence: medium
 
   regulatory_fees:
+    spec: {rate: 0.0001, unit: pct, side: both, note: "SEBI 交易征费；股票 0.0001%（Rs 10/crore），债务证券 0.000025%；另含 IPFT 征费"}
     zh: "SEBI 交易征费（SEBI Turnover Fee）：除债务证券外，所有证券的买卖交易按成交价格的 0.0001%（即每 crore 10 卢比）计收；债务证券交易按 0.000025%（每 crore 2.5 卢比）。由交易所代 SEBI 向会员收取、再转嫁客户"
     en: "SEBI Turnover Fee: all sale and purchase transactions in securities other than debt securities are charged at 0.0001% of the price (Rs. 10 per crore); debt securities at 0.000025% (Rs. 2.5 per crore). Collected by the Exchange on behalf of SEBI from members and passed to clients"
     detail: "该征费为监管费（SEBI 依其章程征收），与 STT、印花税并列于 contract note；另含 IPFT（投资者保护教育基金）征费。"
@@ -1496,6 +1500,7 @@ costs:
     confidence: high
 
   stamp_duty:
+    spec: {rate: 0.015, unit: pct, side: buy, note: "实物交割股票转让 0.015%（买方）；非实物交割 0.003%；股票期货 0.002%、期权 0.003%（均买方）；W.E.F. 2020-07-01"}
     zh: "印度自（官网原文 with effect from July 1, 2020）起通过证券交易所交易证券须缴印花税（Stamp Duty），由清算公司（经交易所授权）代征代缴：实物交割的股票转让 0.015%（买方）、非实物交割 0.003%（买方）、股票期货 0.002%（买方）、股票期权 0.003%（买方）。注意印度对证券交易同时征收印花税与证券交易税(STT)，二者为不同税目；其余品种（货币/利率衍生品、公司债、回购、政府证券等）税率见 detail"
     en: "From (per the official text, with effect from July 1, 2020) stamp duty on securities transactions through a stock exchange is levied and collected by Clearing Corporations authorised by the Exchange: delivery-based equity transfer 0.015% (buyer), non-delivery 0.003% (buyer), equity futures 0.002% (buyer), equity options 0.003% (buyer). Note India levies both stamp duty and STT on securities trades — distinct tax heads; rates for other instruments (currency/IR derivatives, corporate bonds, repo, government securities) are in detail"
     detail: "税率与征收机制来自《2019年财政法》对《1899年印度印花税法》的修订；原字段误以为印度对证券交易无印花税，现以官方税率表更正。完整税率：货币/利率衍生品 0.0001%、公司债/证券化债务 0.0001%、回购 0.00001%、政府证券 0%。"
@@ -1511,6 +1516,7 @@ costs:
     confidence: high
 
   financial_transaction_tax:
+    spec: {rate: 0.1, unit: pct, side: both, note: "现货实物交割 STT：买入 0.100% + 卖出 0.100%；非实物交割卖出 0.025%；期权卖出 0.15%、期货卖出 0.05%（W.E.F. 2026-04-01）"}
     zh: "证券交易税（STT）针对股票类证券交易征收（官网税率表标注 RATES W.E.F. APRIL 1, 2026）：现货股票实物交割的买入与卖出均 0.100%、非实物交割卖出 0.025%；股票期权卖出 0.15%（另行权 0.15%）、股票期货卖出 0.05%。STT 与印花税(stamp_duty)为不同税目"
     en: "Securities Transaction Tax (STT) is levied on equity securities transactions (the official rate table is headed RATES W.E.F. APRIL 1, 2026): delivery-based equity purchase and sale 0.100% each; non-delivery equity sale 0.025%; sale of an option 0.15% (and 0.15% on exercise); sale of a futures contract 0.05%. STT is distinct from stamp duty"
     detail: |
