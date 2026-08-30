@@ -2,7 +2,7 @@
 
 进度状态放这里；「为什么这么排」去 `DECISIONS.md`，这里不重复。
 
-## 当前阶段：**v2.0 高度可视化转向**（2026-08-29 校准）——主视图从对比矩阵改为单市场「交易日平面图」，新增结构化 `spec` 层。加固组 A1/A2（[ADR-033]/[ADR-034]）、Phase 0 范式定案（[ADR-035]/[ADR-036]）、Phase 1a `spec` 层实装 + 5 家示范（[ADR-037]）、**Phase 1b 全部完成**（其一 `matching_principle` 转 enum + `in-nse` 时区，[ADR-038]；其二 15 家第五章 `spec` + 全 20 家三个补充字段 `spec` + JPX 34 档全表，[ADR-039]）。**下一步：Phase 2 · 交易日平面图**（`app.js` 新增 `renderTradingDay`，见下方「v2.0 计划」）。
+## 当前阶段：**v2.0 高度可视化转向**（2026-08-29 校准）——主视图从对比矩阵改为单市场「交易日平面图」，新增结构化 `spec` 层。加固组 A1/A2（[ADR-033]/[ADR-034]）、Phase 0 范式定案（[ADR-035]/[ADR-036]）、Phase 1a `spec` 层实装 + 5 家示范（[ADR-037]）、Phase 1b 全部完成（[ADR-038] + [ADR-039]）、**Phase 2 · 交易日平面图实装完成**（[ADR-040]，`app.js` `renderTradingDay` 手写 SVG，成为默认首屏兼第一个 tab）。**下一步：Phase 2 收口 gate——「30 秒看懂」由非专业读者实测；通过后开 Phase 3（其余章节可视化）。**
 
 ## 阶段路线
 
@@ -176,6 +176,7 @@
 - [x] **Phase 1b · 其余 15 家 spec + 补齐**（2026-08-30 完成）— 拆两步：
   - [x] **其一 · schema/工程部分**（[ADR-038]）— `matching_principle` 转 enum：`enums.yml` 新增 4 值词表（`price_time` / `price_display_time` / `price_time_broker_priority` / `price_time_or_pro_rata`），`taxonomy.yml` 两处加 `enum_ref`，29 个字段回填 enum（19 顶层 + 10 衍生品；`in-nse` 顶层因原文缺失如实不填）；`in-nse` 加进 `EXCHANGE_IANA_TZ`（Asia/Kolkata），甘特条多一条印度柱、其余 5 家 `trading_hours` 逐字节不变。
   - [x] **其二 · 数据回填部分**（[ADR-039]，协调者串行——非并行子代理，理由见 ADR）— 15 家第五章 `spec`（`trading_sessions` / `opening`·`closing_mechanism` / `price_limits.main_board` / `circuit_breaker`）从既有已核实 `quote` 结构化；全 20 家 `volatility_interruption`(19/20)·`short_selling`(18/20)·`market_maker_scheme`(18/20) 的 `spec`（缺口均为数据文件本身 `zh` 空的真实缺口）；JPX 值幅制限**完整 34 档** `ladder`（抓官方 PDF 逐行核实，此前误记 37 档已改）；`schema/spec.yml` 加 `randomised_seconds` / `random_close_window_min` 键。`make build` 全绿、`spec` 5b 0 FAIL、时区甘特条 6 家 `trading_hours` 逐字节不变。
-- [ ] **Phase 2 · 交易日平面图** — `app.js` 新增 `renderTradingDay`（手写 SVG，按 [ADR-035] A 的字段→元素映射 + D 的诚实渲染规则），市场下拉，路由默认值改 `trading-day`，矩阵移 `#view=matrix`，`index.html` tab 调整。非现货所按 [ADR-035] E 渲染。交付后**停下评估**「30 秒看懂」由非专业读者实测。
+- [x] **Phase 2 · 交易日平面图**（2026-08-30 实装，[ADR-040]）— `app.js` 新增 `renderTradingDay` / `tdBuild`（手写 SVG，按 [ADR-035] A 字段→元素映射 + D 诚实渲染三态 + C 零构建）；顶部「市场 Market」下拉；路由默认值改 `trading-day`，`renderMatrix` 转显式分支，矩阵仍在 `#view=matrix`；`index.html` tab 调整（平面图为第一个 tab，理由见 [ADR-040]）。非现货所按 [ADR-035] E：`de-eurex` y 轴换「前结算价」+ banner；10 家有衍生品子块的加淡 banner（现货 / 衍生品切换开关待 Phase 3 补 `derivatives.*.spec`）。`openCellOverlay` 加「结构化 Spec」节。改动仅前端三文件，`docs/data/` 无 diff。**Chrome headless 六形态截图核对通过；矩阵 / 时区 / 健康度无回归。**
+  - [ ] **收口 gate（未完）** — [ADR-035] A 要求「交付后停下评估『30 秒看懂』由非专业读者实测」。**实测尚未进行**，是 Phase 3 启动前门槛。待打磨点见 [ADR-040]（走廊/动态带/阶梯带视觉区分度、JPX 阶梯带偏满、长文本 chip 高度）。
 - [ ] **Phase 3 · 其余章节可视化** — 成本瀑布 → 交割管线 → 上市生命周期（一并落地 [ADR-036] #5 的章节级"仅现货适用"标记）→ 监管图 → 参与者 → 风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）→ …按交易员价值迭代，每章带一次小型 `spec` 补充。
 - [ ] **Phase 4 · Wave 3 广度扩张（搁置）** — Phase 1–2 稳定后解冻。候选见 [ADR-016] 思路 + 东南亚/中东/非洲/拉美补白；若纳入第 3 个 MENA/非洲所则同时执行 [ADR-036] #2 的 `region` 拆分。子代理任务里加"第五章直接填 `spec`、并在平面图里自检"。

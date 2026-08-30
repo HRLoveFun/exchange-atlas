@@ -506,6 +506,409 @@
   }
 
   // ══════════════════════════════════════════════
+  // 交易日平面图（v2.0 主视图，见 PROJECT/DECISIONS.md ADR-035）
+  //   x = 日内时间（分钟精度，覆盖盘前到盘后），y = 涨跌幅（相对前收盘价 / 前结算价）
+  //   数据源：第五章 spec 层（sync.py 原样导出到 exchanges/<id>.json）。
+  //   手写 SVG 字符串，不引图表库（ADR-035 C 零构建守则）。
+  //   诚实渲染三态（ADR-035 D）：spec 有值+high → 实线；spec 值 null → 幽灵虚线+"未公布"角标；
+  //   medium/low → 更淡 / 虚线。每个渲染元素带 data-role="cell"，点击复用 openCellOverlay 弹出处。
+  // ══════════════════════════════════════════════
+  var TD_DEFAULT_EX = "cn-sse";
+  var TD_SESSION_ORDER = ["pre_market", "continuous_am", "lunch_break", "continuous_pm", "after_market", "night_session"];
+  var TD_KIND_LABEL = {
+    pre_open_queue: "挂单排队·不成交", opening_auction: "开盘集合竞价", continuous: "连续竞价",
+    closing_auction: "收盘集合竞价", fixed_price: "固定价格交易", lunch_recess: "午间休市",
+    after_hours_continuous: "盘后连续交易", night: "夜盘", none: "不设"
+  };
+  function tdKindFill(kind) {
+    if (kind === "continuous") return "var(--accent)";
+    if (kind === "lunch_recess") return "var(--info)";
+    if (kind === "night") return "var(--fg-muted)";
+    if (kind === "pre_open_queue" || kind === "opening_auction" || kind === "closing_auction") return "var(--warn)";
+    return "var(--border-strong)";
+  }
+  function tdParseHM(s) {
+    var m = typeof s === "string" && s.match(/^(\d{1,2}):(\d{2})$/);
+    return m ? (+m[1]) * 60 + (+m[2]) : null;
+  }
+  function tdFmtHM(min) {
+    min = ((Math.round(min) % 1440) + 1440) % 1440;
+    var h = Math.floor(min / 60), mm = min % 60;
+    return (h < 10 ? "0" : "") + h + ":" + (mm < 10 ? "0" : "") + mm;
+  }
+  // ADR-035 D4：medium/low 置信度元素加"未完全核实"视觉线索（虚线边框 / 更淡）
+  function tdConfClass(env) {
+    if (!env || !env.confidence || env.confidence === "high") return "";
+    return env.confidence === "low" ? " td-uncertain td-low" : " td-uncertain";
+  }
+  function tdFieldLabel(path) {
+    var ch = (cache.taxonomy.chapters || []).filter(function (c) { return c.id === "market_structure"; })[0];
+    var f = ch && (ch.fields || []).filter(function (x) { return x.path === path; })[0];
+    return f ? f.label_zh : path;
+  }
+  function tdResolveId(params) {
+    var l = cache.manifest.exchanges;
+    if (l.some(function (e) { return e.id === params.id; })) return params.id;
+    return l.some(function (e) { return e.id === TD_DEFAULT_EX; }) ? TD_DEFAULT_EX : l[0].id;
+  }
+  function tdCell(id, path, inner, title) {
+    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
+      '" data-chapter="market_structure">' + (title ? "<title>" + esc(title) + "</title>" : "") + inner + "</g>";
+  }
+
+  function renderTradingDay(app, params) {
+    var list = cache.manifest.exchanges;
+    var id = tdResolveId(params);
+    var toolbar = '<div class="view-toolbar">' +
+      '<label for="tdExchange">市场 Market</label>' +
+      '<select id="tdExchange" data-role="td-exchange">' +
+      list.map(function (e) {
+        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
+      }).join("") + "</select>" +
+      '<span class="td-tb-note">x = 日内时间 · y = 涨跌幅相对前收盘价 · 点击任意元素看出处</span>' +
+      "</div>";
+    app.innerHTML = toolbar + '<div class="loading">加载平面图中…</div>';
+    return loadExchange(id).then(function (data) {
+      var cur = parseHash();
+      if ((cur.view && cur.view !== "trading-day") || tdResolveId(cur) !== id) return;
+      var ms = (data.chapters && data.chapters.market_structure) || {};
+      app.innerHTML = toolbar + tdBuild(id, ms);
+    }).catch(function (e) {
+      app.innerHTML = toolbar + '<p style="color:var(--danger)">加载失败：' + esc(e.message) + "</p>";
+    });
+  }
+
+  function tdBuild(id, ms) {
+    var n = function (v) { return (+v).toFixed(1); };
+    var sessions = ms.trading_sessions || {};
+    var mb = ms.price_limits && ms.price_limits.main_board, mbS = (mb && mb.spec) || null;
+    var cb = ms.circuit_breaker, cbS = (cb && cb.spec) || null;
+    var vi = ms.volatility_interruption, viS = (vi && vi.spec) || null;
+    var opnS = (ms.opening_mechanism && ms.opening_mechanism.spec) || null;
+    var clsS = (ms.closing_mechanism && ms.closing_mechanism.spec) || null;
+    var yRef = (mbS && mbS.reference === "prev_settlement") ? "前结算价" : "前收盘价";
+
+    // ── x 轴范围：所有已知时刻的包络 + 15 分钟留白 ──
+    var T = [];
+    TD_SESSION_ORDER.forEach(function (k) {
+      var s = sessions[k] && sessions[k].spec;
+      if (!s || s.kind === "none") return;
+      var a = tdParseHM(s.start), b = tdParseHM(s.end);
+      if (a != null) T.push(a);
+      if (b != null) T.push(b);
+    });
+    [opnS, clsS].forEach(function (s) {
+      if (!s) return;
+      [s.auction_start, s.auction_end, s.trade_at_close_end].forEach(function (t) {
+        var m = tdParseHM(t); if (m != null) T.push(m);
+      });
+    });
+    var haveTimes = T.length >= 2;
+    var xMin = haveTimes ? Math.min.apply(null, T) - 15 : 540;
+    var xMax = haveTimes ? Math.max.apply(null, T) + 15 : 1050;
+    if (xMax - xMin < 90) { xMin -= 45; xMax += 45; }
+
+    // ── y 轴范围：涨跌停 / 动态带 / 熔断档位 / 波动中断 的最大量级 × 1.3（封顶 40）──
+    var mags = [];
+    if (mbS) {
+      [mbS.limit_pct, mbS.limit_pct_up, mbS.limit_pct_down, mbS.band_pct].forEach(function (v) {
+        if (typeof v === "number") mags.push(Math.abs(v));
+      });
+    }
+    var ladderPct = null;
+    if (mbS && mbS.type === "stepwise" && mbS.ladder && mbS.ladder.length) {
+      var ps = [];
+      mbS.ladder.forEach(function (r) {
+        if (typeof r.band_abs !== "number") return;
+        if (r.base_max) ps.push(r.band_abs / r.base_max * 100);
+        if (r.base_min && r.base_min >= 300) ps.push(r.band_abs / r.base_min * 100);
+      });
+      if (ps.length) { ladderPct = [Math.min.apply(null, ps), Math.max.apply(null, ps)]; mags.push(ladderPct[1]); }
+    }
+    if (cbS && cbS.levels) cbS.levels.forEach(function (lv) {
+      if (typeof lv.threshold_pct === "number") mags.push(Math.abs(lv.threshold_pct));
+    });
+    if (viS) [viS.static_pct, viS.dynamic_pct].forEach(function (v) {
+      if (typeof v === "number") mags.push(Math.abs(v));
+    });
+    var yR = Math.min(40, Math.max(6, mags.length ? Math.ceil(Math.max.apply(null, mags) * 1.3) : 10));
+
+    // ── 画布 ──
+    var W = 960, H = 544, PL = 60, PR = 152, PT = 46, PB = 106;
+    var pw = W - PL - PR, ph = H - PT - PB;
+    var X = function (m) { return PL + (m - xMin) / (xMax - xMin) * pw; };
+    var Y = function (p) { return PT + (yR - p) / (2 * yR) * ph; };
+    var g = [];
+
+    g.push('<defs>' +
+      '<pattern id="tdAuc" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
+      '<rect width="7" height="7" fill="var(--warn)" opacity="0.09"/>' +
+      '<line x1="0" y1="0" x2="0" y2="7" stroke="var(--warn)" stroke-width="2.5" opacity="0.34"/></pattern>' +
+      '<pattern id="tdHalt" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">' +
+      '<rect width="8" height="8" fill="var(--fg-muted)" opacity="0.05"/>' +
+      '<line x1="0" y1="0" x2="0" y2="8" stroke="var(--fg-muted)" stroke-width="2" opacity="0.26"/></pattern></defs>');
+
+    g.push('<rect x="' + PL + '" y="' + PT + '" width="' + pw + '" height="' + ph + '" fill="var(--bg-elevated)" stroke="var(--border)"/>');
+
+    // ── 时段：全高背景淡带（x 轴分段着色）──
+    var drawn = [];
+    TD_SESSION_ORDER.forEach(function (k) {
+      var env = sessions[k], s = env && env.spec;
+      if (!s || s.kind === "none") return;
+      var a = tdParseHM(s.start), b = tdParseHM(s.end);
+      if (a == null || b == null) return;
+      if (b <= a) b += 1440;
+      drawn.push({ k: k, env: env, s: s, a: a, b: b });
+    });
+    drawn.forEach(function (d) {
+      var x1 = X(d.a), w = Math.max(1, X(d.b) - x1);
+      g.push('<rect x="' + n(x1) + '" y="' + PT + '" width="' + n(w) + '" height="' + ph + '" fill="' + tdKindFill(d.s.kind) + '" opacity="0.06"/>');
+    });
+
+    // ── 涨跌停墙 + 墙外阴影（ADR-035 A：主板幅度 → y 轴边界墙 + 墙外阴影）──
+    var wallDrawn = false;
+    var wUp = null, wDn = null;
+    if (mbS) {
+      if (typeof mbS.limit_pct === "number") { wUp = mbS.limit_pct; wDn = -mbS.limit_pct; }
+      if (typeof mbS.limit_pct_up === "number") wUp = mbS.limit_pct_up;
+      if (typeof mbS.limit_pct_down === "number") wDn = -Math.abs(mbS.limit_pct_down);
+    }
+    if (wUp != null && wDn != null) {
+      var dash = (mb && mb.confidence && mb.confidence !== "high") ? ' stroke-dasharray="6 3"' : "";
+      g.push('<rect x="' + PL + '" y="' + PT + '" width="' + pw + '" height="' + n(Math.max(0, Y(wUp) - PT)) + '" fill="var(--danger)" opacity="0.07"/>');
+      g.push('<rect x="' + PL + '" y="' + n(Y(wDn)) + '" width="' + pw + '" height="' + n(Math.max(0, PT + ph - Y(wDn))) + '" fill="var(--danger)" opacity="0.07"/>');
+      g.push(tdCell(id, "price_limits.main_board",
+        '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(wUp)) + '" y2="' + n(Y(wUp)) + '" stroke="var(--danger)" stroke-width="1.6"' + dash + '/>' +
+        '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(wDn)) + '" y2="' + n(Y(wDn)) + '" stroke="var(--danger)" stroke-width="1.6"' + dash + '/>' +
+        '<text x="' + (PL + pw + 7) + '" y="' + n(Y(wUp) + 4) + '" class="td-wl" fill="var(--danger)">涨停 +' + wUp + '%</text>' +
+        '<text x="' + (PL + pw + 7) + '" y="' + n(Y(wDn) + 4) + '" class="td-wl" fill="var(--danger)">跌停 ' + wDn + '%</text>',
+        tdFieldLabel("price_limits.main_board") + "：±" + wUp + "% 相对" + yRef));
+      wallDrawn = true;
+    }
+    // 阶梯绝对值幅 → 半透明带（ADR-035 D3：来源给区间不给点）
+    if (ladderPct) {
+      var lp0 = ladderPct[0], lp1 = ladderPct[1];
+      g.push(tdCell(id, "price_limits.main_board",
+        '<rect x="' + PL + '" y="' + n(Y(lp1)) + '" width="' + pw + '" height="' + n(Y(lp0) - Y(lp1)) + '" fill="var(--danger)" opacity="0.13"/>' +
+        '<rect x="' + PL + '" y="' + n(Y(-lp0)) + '" width="' + pw + '" height="' + n(Y(-lp1) - Y(-lp0)) + '" fill="var(--danger)" opacity="0.13"/>' +
+        '<text x="' + (PL + pw + 7) + '" y="' + n(Y(lp1) + 4) + '" class="td-wl" fill="var(--danger)">阶梯值幅</text>' +
+        '<text x="' + (PL + pw + 7) + '" y="' + n(Y(lp1) + 16) + '" class="td-wl-sub">约 ±' + Math.round(lp0) + "–" + Math.round(lp1) + '%</text>',
+        tdFieldLabel("price_limits.main_board") + "：阶梯绝对值幅，幅度随基准价变化（点击看完整档位）"));
+      wallDrawn = true;
+    }
+    // 动态参考价区间
+    if (mbS && mbS.type === "dynamic") {
+      if (typeof mbS.band_pct === "number") {
+        var bp = mbS.band_pct;
+        g.push(tdCell(id, "price_limits.main_board",
+          '<rect x="' + PL + '" y="' + n(Y(bp)) + '" width="' + pw + '" height="' + n(Y(-bp) - Y(bp)) + '" fill="var(--info)" opacity="0.10"/>' +
+          '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(bp)) + '" y2="' + n(Y(bp)) + '" stroke="var(--info)" stroke-width="1.2" stroke-dasharray="5 4"/>' +
+          '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(-bp)) + '" y2="' + n(Y(-bp)) + '" stroke="var(--info)" stroke-width="1.2" stroke-dasharray="5 4"/>' +
+          '<text x="' + (PL + pw + 7) + '" y="' + n(Y(bp) + 4) + '" class="td-wl" fill="var(--info)">动态带 ±' + bp + '%</text>' +
+          '<text x="' + (PL + pw + 7) + '" y="' + n(Y(bp) + 16) + '" class="td-wl-sub">相对滚动参考价</text>',
+          tdFieldLabel("price_limits.main_board") + "：动态价格带 ±" + bp + "%（相对滚动参考价，非固定墙）"));
+      } else {
+        var gy = Y(yR * 0.74);
+        g.push(tdCell(id, "price_limits.main_board",
+          '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(gy) + '" y2="' + n(gy) + '" stroke="var(--fg-faint)" stroke-width="1" stroke-dasharray="2 4"/>' +
+          '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(-yR * 0.74)) + '" y2="' + n(Y(-yR * 0.74)) + '" stroke="var(--fg-faint)" stroke-width="1" stroke-dasharray="2 4"/>' +
+          '<text x="' + (PL + pw + 7) + '" y="' + n(gy + 4) + '" class="td-wl-sub">动态带</text>' +
+          '<text x="' + (PL + pw + 7) + '" y="' + n(gy + 15) + '" class="td-wl-sub">数值未公布</text>',
+          tdFieldLabel("price_limits.main_board") + "：存在动态价格带，官方未公布档位（ADR-035 D 三态之一）"));
+      }
+      wallDrawn = true;
+    }
+    // type: none — 明确无墙
+    if (mbS && mbS.type === "none") {
+      g.push(tdCell(id, "price_limits.main_board",
+        '<text x="' + (PL + 6) + '" y="' + n(PT + 22) + '" class="td-inl" fill="var(--fg-muted)">无每日涨跌停墙</text>',
+        tdFieldLabel("price_limits.main_board") + "：无逐日涨跌停（见 波动性中断）"));
+      wallDrawn = true;
+    }
+    // 兜底：spec 存在但形态未识别（如 in-nse limit_pct: null 分档）
+    if (!wallDrawn && mbS) {
+      var fy = Y(yR * 0.78);
+      g.push(tdCell(id, "price_limits.main_board",
+        '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(fy) + '" y2="' + n(fy) + '" stroke="var(--fg-faint)" stroke-width="1" stroke-dasharray="2 4"/>' +
+        '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(-yR * 0.78)) + '" y2="' + n(Y(-yR * 0.78)) + '" stroke="var(--fg-faint)" stroke-width="1" stroke-dasharray="2 4"/>' +
+        '<text x="' + (PL + pw + 7) + '" y="' + n(fy + 4) + '" class="td-wl-sub">分档 / 见 type</text>',
+        tdFieldLabel("price_limits.main_board") + "：按品种分档，无单一幅度（点击展开）"));
+    }
+
+    // ── 波动性中断走廊（ADR-035 A：贴价格路径的走廊；静态平面上呈中心走廊带）──
+    if (viS && viS.type !== "none") {
+      var cor = [];
+      if (typeof viS.dynamic_pct === "number") cor.push(viS.dynamic_pct);
+      if (typeof viS.static_pct === "number") cor.push(viS.static_pct);
+      if (cor.length) {
+        var vf = "";
+        cor.forEach(function (p) {
+          vf += '<rect x="' + PL + '" y="' + n(Y(p)) + '" width="' + pw + '" height="' + n(Y(-p) - Y(p)) + '" fill="none" stroke="var(--warn)" stroke-width="1.1" stroke-dasharray="1 3"/>';
+        });
+        vf += '<text x="' + (PL + 6) + '" y="' + n(Y(Math.max.apply(null, cor)) - 4) + '" class="td-inl" fill="var(--warn)">波动中断走廊 ±' + cor.join("/") + '%</text>';
+        g.push(tdCell(id, "volatility_interruption", vf, tdFieldLabel("volatility_interruption")));
+      }
+    }
+
+    // ── 熔断（ADR-035 A：指数级 → y 轴多档触发线）──
+    if (cbS && cbS.type === "index_level" && cbS.levels) {
+      var xref = (cbS.reference || []).some(function (r) { return r.exchange && r.exchange !== "self"; }) ? " ·跨所联动" : "";
+      cbS.levels.forEach(function (lv) {
+        if (typeof lv.threshold_pct !== "number") return;
+        var yy = Y(-lv.threshold_pct), lab = "−" + lv.threshold_pct + "%";
+        if (lv.day_end) lab += " 全日休市";
+        else if (typeof lv.halt_minutes === "number") lab += " 停" + lv.halt_minutes + "分";
+        g.push(tdCell(id, "circuit_breaker",
+          '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(yy) + '" y2="' + n(yy) + '" stroke="var(--danger)" stroke-width="1.3" stroke-dasharray="8 3" opacity="0.85"/>' +
+          '<text x="' + (PL + pw + 7) + '" y="' + n(yy + 4) + '" class="td-wl" fill="var(--danger)">熔断 ' + esc(lab) + '</text>',
+          tdFieldLabel("circuit_breaker") + "：指数级 " + lab + xref));
+      });
+    }
+
+    // ── 开 / 收盘集合竞价区块（ADR-035 A：首尾集合竞价区块）──
+    function auc(spec, path, tag) {
+      if (!spec) return;
+      var a = tdParseHM(spec.auction_start), b = tdParseHM(spec.auction_end), tc = tdParseHM(spec.trade_at_close_end);
+      var f = "";
+      if (a != null && b != null && b > a) {
+        f += '<rect x="' + n(X(a)) + '" y="' + PT + '" width="' + n(Math.max(2, X(b) - X(a))) + '" height="' + ph + '" fill="url(#tdAuc)"/>';
+        if (typeof spec.randomised_seconds === "number" || typeof spec.random_close_window_min === "number") {
+          f += '<rect x="' + n(X(b) - 3) + '" y="' + PT + '" width="6" height="' + ph + '" fill="var(--warn)" opacity="0.18"/>';
+        }
+      } else if (b != null) {
+        f += '<line x1="' + n(X(b)) + '" x2="' + n(X(b)) + '" y1="' + PT + '" y2="' + (PT + ph) + '" stroke="var(--warn)" stroke-width="1.4" stroke-dasharray="4 3"/>';
+      } else { return; }
+      if (tc != null && b != null && tc > b) {
+        f += '<rect x="' + n(X(b)) + '" y="' + PT + '" width="' + n(X(tc) - X(b)) + '" height="' + ph + '" fill="var(--warn)" opacity="0.05"/>';
+      }
+      f += '<text x="' + n((a != null ? X(a) : X(b)) + 2) + '" y="' + (PT - 6) + '" class="td-inl" fill="var(--warn)">' + esc(tag) + '</text>';
+      g.push(tdCell(id, path, f, tdFieldLabel(path)));
+    }
+    auc(opnS, "opening_mechanism", "开盘竞价");
+    auc(clsS, "closing_mechanism", "收盘竞价");
+
+    // ── 临时停牌：顶边斜纹条（ADR-035 A："任意时刻"斜纹条）──
+    if (ms.trading_halt_mechanism && ms.trading_halt_mechanism.zh) {
+      g.push(tdCell(id, "trading_halt_mechanism",
+        '<rect x="' + PL + '" y="' + (PT + 1) + '" width="' + pw + '" height="9" fill="url(#tdHalt)"/>' +
+        '<text x="' + (PL + 5) + '" y="' + (PT + 8.5) + '" class="td-inl" fill="var(--fg-muted)">临时停牌可发生于任意时刻</text>',
+        tdFieldLabel("trading_halt_mechanism")));
+    }
+
+    // ── 回转交易 T+N：右缘标记（ADR-035 A：x 轴右缘箭头）──
+    var ir = ms.intraday_reversal;
+    if (ir && (ir.enum || ir.zh)) {
+      var irm = { t0: "↺ T+0 当日可回转", t1: "→ T+1 次日可卖", t2: "→ T+2", mixed: "⇄ 分品种不同" };
+      g.push(tdCell(id, "intraday_reversal",
+        '<text x="' + (PL + pw + 7) + '" y="' + n(PT + ph - 2) + '" class="td-margin">' + esc(irm[ir.enum] || "回转制度见档案") + '</text>',
+        tdFieldLabel("intraday_reversal") + "：" + (ir.zh || "")));
+    }
+
+    // ── 网格 + 轴刻度 ──
+    var yStep = yR <= 8 ? 2 : yR <= 16 ? 4 : yR <= 30 ? 5 : 10;
+    for (var p = -Math.floor(yR / yStep) * yStep; p <= yR; p += yStep) {
+      var yy2 = Y(p), zero = p === 0;
+      g.push('<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(yy2) + '" y2="' + n(yy2) + '" stroke="var(--border)" stroke-width="' + (zero ? 1.5 : 0.5) + '"' + (zero ? "" : ' opacity="0.55"') + '/>');
+      g.push('<text x="' + (PL - 8) + '" y="' + n(yy2 + 3.5) + '" class="td-tick" text-anchor="end">' + (p > 0 ? "+" : "") + p + '%</text>');
+    }
+    var xStep = (xMax - xMin) > 300 ? 60 : 30;
+    for (var mx = Math.ceil(xMin / xStep) * xStep; mx <= xMax; mx += xStep) {
+      g.push('<line x1="' + n(X(mx)) + '" x2="' + n(X(mx)) + '" y1="' + PT + '" y2="' + (PT + ph) + '" stroke="var(--border)" stroke-width="0.5" opacity="0.45"/>');
+      g.push('<text x="' + n(X(mx)) + '" y="' + (PT + ph + 15) + '" class="td-tick" text-anchor="middle">' + tdFmtHM(mx) + '</text>');
+    }
+
+    // ── 时段 ribbon（x 轴分段着色的图例条）──
+    var ry = PT + ph + 26, rh = 15;
+    if (drawn.length) {
+      drawn.forEach(function (d) {
+        var x1 = X(d.a), w = Math.max(2, X(d.b) - x1);
+        var f = '<rect x="' + n(x1) + '" y="' + ry + '" width="' + n(w) + '" height="' + rh + '" rx="2" fill="' + tdKindFill(d.s.kind) + '" opacity="0.9"/>';
+        if (w > 64) f += '<text x="' + n(x1 + w / 2) + '" y="' + (ry + 11) + '" class="td-rib" text-anchor="middle">' + esc(TD_KIND_LABEL[d.s.kind] || d.s.kind) + '</text>';
+        g.push(tdCell(id, "trading_sessions." + d.k, f,
+          tdFieldLabel("trading_sessions." + d.k) + "：" + tdFmtHM(d.a) + "–" + tdFmtHM(d.b % 1440) + "（" + (TD_KIND_LABEL[d.s.kind] || d.s.kind) + "）"));
+      });
+    } else {
+      g.push('<rect x="' + PL + '" y="' + ry + '" width="' + pw + '" height="' + rh + '" rx="2" fill="var(--border)" opacity="0.4"/>');
+      g.push('<text x="' + (PL + 6) + '" y="' + (ry + 11) + '" class="td-rib" fill="var(--fg-muted)">交易时段钟点未结构化——见档案页第五章</text>');
+    }
+
+    // ── 标题 / 轴名 ──
+    var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
+    g.push('<text x="' + PL + '" y="' + (PT - 22) + '" class="td-title">' + esc(exName) + ' · 交易日平面图</text>');
+    g.push('<text transform="translate(15,' + n(PT + ph / 2) + ') rotate(-90)" class="td-axis-name" text-anchor="middle">涨跌幅 %（相对' + yRef + '）</text>');
+    g.push('<text x="' + n(PL + pw / 2) + '" y="' + (H - 5) + '" class="td-axis-name" text-anchor="middle">日内时间（当地）</text>');
+
+    var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + ' ' + H + '" class="td-svg" role="img" aria-label="' +
+      esc(exName) + ' 交易日平面图">' + g.join("") + "</svg></div>";
+    return svg + tdSidePanels(id, ms) + tdLegend() + tdProse();
+  }
+
+  // 标注层 chips（ADR-035 A：撮合原则 / 订单类型 / 做空 / 做市商 → 标注层）+ 非现货降级提示
+  function tdSidePanels(id, ms) {
+    var out = [];
+    var mbRef = ms.price_limits && ms.price_limits.main_board && ms.price_limits.main_board.spec && ms.price_limits.main_board.spec.reference;
+    var hasDeriv = ms.derivatives && Object.keys(ms.derivatives).some(function (k) {
+      var v = ms.derivatives[k];
+      function content(o) {
+        if (!o || typeof o !== "object") return false;
+        if (o.zh || o.enum || o.spec) return true;
+        return Object.keys(o).some(function (kk) { return ["zh", "en", "quote", "sources", "detail", "confidence", "verified", "enum", "spec", "_meta"].indexOf(kk) < 0 && content(o[kk]); });
+      }
+      return content(v);
+    });
+    if (mbRef === "prev_settlement") {
+      out.push('<p class="td-banner">纯衍生品交易所：y 轴基准为<strong>前结算价</strong>，第五章字段描述衍生品市场（ADR-035 E）。</p>');
+    } else if (hasDeriv) {
+      out.push('<p class="td-banner td-banner-soft">本所记录含衍生品市场字段；平面图显示<strong>现货</strong>（衍生品 spec 待 Phase 3 补充）。</p>');
+    }
+
+    function trunc(s, len) { s = String(s == null ? "" : s); return s.length > len ? s.slice(0, len) + "…" : s; }
+    function chip(path, label, val, env) {
+      var has = env && (env.zh || env.enum || env.spec);
+      return '<button type="button" class="td-chip' + tdConfClass(env) + (has ? "" : " td-chip-empty") +
+        '" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) + '" data-chapter="market_structure">' +
+        '<span class="td-chip-k">' + esc(label) + '</span><span class="td-chip-v">' + esc(val || "—") + '</span></button>';
+    }
+
+    var chips = [];
+    var pt = getByPath(ms, "price_limits.type");
+    chips.push(chip("price_limits.type", "价格限制类型", pt && pt.enum ? enumDisplay("price_limit_type", pt.enum) : trunc(pt && pt.zh, 20), pt));
+    var cbf = ms.circuit_breaker;
+    chips.push(chip("circuit_breaker", "熔断", cbf && cbf.enum ? enumDisplay("circuit_breaker_type", cbf.enum) : trunc(cbf && cbf.zh, 20), cbf));
+    var mp = ms.matching_principle;
+    chips.push(chip("matching_principle", "撮合原则", mp && mp.enum ? enumDisplay("matching_principle", mp.enum) : trunc(mp && mp.zh, 20), mp));
+    var ot = ms.order_types;
+    chips.push(chip("order_types", "订单类型", trunc(ot && (state.langMode === "en" && ot.en ? ot.en : ot.zh), 34), ot));
+    var ss = ms.short_selling;
+    chips.push(chip("short_selling", "做空机制", ss && ss.enum ? enumDisplay("short_selling_stance", ss.enum) : trunc(ss && ss.zh, 20), ss));
+    var mm = ms.market_maker_scheme, mmS = mm && mm.spec;
+    var mmv = mmS && mmS.present === true ? ("有" + (mmS.quote_obligation ? " · 强制双边报价" : "")) :
+      (mmS && mmS.present === false ? "无" : trunc(mm && mm.zh, 20));
+    chips.push(chip("market_maker_scheme", "做市商", mmv, mm));
+
+    out.push('<div class="td-chips">' + chips.join("") + "</div>");
+    return out.join("");
+  }
+
+  function tdLegend() {
+    return '<div class="td-legend">' +
+      '<span><i class="td-sw" style="background:var(--accent)"></i>连续竞价</span>' +
+      '<span><i class="td-sw" style="background:var(--warn)"></i>集合竞价 / 挂单排队</span>' +
+      '<span><i class="td-sw" style="background:var(--info)"></i>午休</span>' +
+      '<span><i class="td-sw" style="background:var(--border-strong)"></i>固定价 / 盘后</span>' +
+      '<span><i class="td-sw td-sw-wall"></i>涨跌停墙 / 熔断线</span>' +
+      "</div>";
+  }
+
+  function tdProse() {
+    return '<p class="td-prose">平面图由第五章「市场结构与交易机制」的结构化 <code>spec</code> 层驱动（见 ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-035</a>）：' +
+      '实线 / 实心为已核实数值，虚线 / 幽灵为「机制存在、数值官方未公布」，更淡的元素为 medium/low 置信度。' +
+      '时间轴为分钟精度，不表示到秒；随机开 / 收盘窗口以模糊边缘示意。点击任意元素查看原文摘录与出处。' +
+      '规则以各交易所官方发布为准，不构成投资建议。</p>';
+  }
+
+  // ══════════════════════════════════════════════
   // 出处浮层
   // ══════════════════════════════════════════════
   function openCellOverlay(exchangeId, fieldPath, chapterId) {
@@ -537,6 +940,7 @@
         html += '<div class="overlay-section"><h4>中文 Chinese</h4><div>' + esc(env.zh || "—") + "</div></div>";
         if (env.en) html += '<div class="overlay-section"><h4>英文 English</h4><div>' + esc(env.en) + "</div></div>";
         if (env.detail) html += '<div class="overlay-section"><h4>细则 Detail</h4><div class="overlay-detail">' + esc(env.detail) + "</div></div>";
+        if (env.spec) html += '<div class="overlay-section"><h4>结构化 Spec</h4><pre class="overlay-spec">' + esc(JSON.stringify(env.spec, null, 2)) + "</pre></div>";
         if (env.quote) html += '<div class="overlay-section"><h4>原文摘录 Quote</h4><div class="overlay-quote">' + esc(env.quote) + "</div></div>";
         if (env.sources && env.sources.length) {
           html += '<div class="overlay-section"><h4>来源 Sources</h4><ul class="overlay-sources">';
@@ -600,13 +1004,14 @@
   function route() {
     closeOverlay();
     var params = parseHash();
-    var view = params.view || "matrix";
+    var view = params.view || "trading-day";
     updateActiveTab(view === "exchange" ? "matrix" : view);
     var app = $("#app");
     if (view === "exchange") renderExchange(app, params);
     else if (view === "health") renderHealth(app, params);
     else if (view === "timezone") renderTimezone(app, params);
-    else renderMatrix(app, params);
+    else if (view === "matrix") renderMatrix(app, params);
+    else renderTradingDay(app, params);
   }
 
   // ══════════════════════════════════════════════
@@ -650,6 +1055,8 @@
       var p3 = parseHash();
       p3[role === "health-exchange" ? "hex" : "htype"] = e.target.value;
       setHash(p3);
+    } else if (role === "td-exchange") {
+      setHash({ view: "trading-day", id: e.target.value });
     }
   });
   document.addEventListener("keydown", function (e) {
@@ -670,7 +1077,7 @@
   loadCore()
     .then(function () {
       window.addEventListener("hashchange", route);
-      if (!location.hash) setHash({ view: "matrix" }, true);
+      if (!location.hash) setHash({ view: "trading-day" }, true);
       route();
     })
     .catch(function (e) {
