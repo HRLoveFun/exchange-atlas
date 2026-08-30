@@ -649,6 +649,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "严格价格优先，同价位按时间优先（strict price/time priority）；对未公开披露的订单类型（大宗订单Large-in-Scale、中间价订单Mid-Point）另有独立的规模/时间优先规则",
@@ -874,6 +875,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "zh": "",
         "confidence": "low",
@@ -940,6 +942,7 @@
         "detail": null,
         "quote": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "存在非公开披露（dark）交易安排——大宗订单（Large-in-Scale）与中间价订单（Mid-Point Orders）在独立的非展示订单簿中撮合，按规模/时间优先原则执行",
         "en": "Non-pre-trade-transparent (dark) trading exists — Large-in-Scale orders and Mid-Point orders match in a dedicated non-displayed order book, executed on a size/time priority basis",

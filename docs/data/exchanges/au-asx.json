@@ -604,6 +604,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "价格优先、时间优先，连续竞价阶段由ASX Trade系统自动持续撮合",
@@ -802,6 +803,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "enum": "t0",
         "zh": "未见针对当日回转交易（先买后卖）的结构性限制，交易层面近似T+0",
@@ -858,6 +860,7 @@
         "spec": null,
         "detail": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "",
         "confidence": "low",

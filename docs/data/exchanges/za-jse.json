@@ -658,6 +658,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_display_time",
         "zh": "中央订单簿按价格-可见性-时间优先原则连续撮合：会员在同等条件下竞争成交，同价位隐藏单排在可见单之后成交",
@@ -862,6 +863,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "zh": "JSE 现货市场允许当日回转交易（T+0）：当日买入的证券可于同一交易日卖出，无类似 A 股的 T+1 锁定；后端结算为 T+3（见 clearing.settlement_cycle），但交易层面不受结算周期限制。",
         "en": "The JSE cash market permits intraday round-trip trading (T+0): securities bought on a given day can be sold on the same day, with no A-share-style T+1 lock; back-office settlement is T+3 (see clearing.settlement_cycle), but trading is not constrained by the settlement cycle.",
@@ -923,6 +925,7 @@
         "spec": null,
         "quote": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "JSE 本身不运营独立的暗池（dark pool）；但提供场外报告成交类型（Off-Book Trades，如大宗交易 Block Trade BT、以及延迟公布的场外成交）以实现大额交易的 discreet 执行。南非另存在独立另类交易场所 A2X Markets（2017 年成立），但非 JSE 自营暗池。",
         "en": "The JSE does not operate a separate dark pool; it instead offers off-book trade types (e.g. Block Trade BT and delayed-reported off-book trades) for discreet execution of large orders. A separate alternative venue, A2X Markets (launched 2017), also exists in South Africa but is not a JSE-owned dark pool.",

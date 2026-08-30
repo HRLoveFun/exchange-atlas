@@ -315,6 +315,19 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
      最终查明一份 2012 年通知的三年有效期已到期、后续是否续期未核实，但至少证明了"该国是否
      存在这个概念"本身需要认真检索一遍才能下结论，不能因为任务描述里写了"预期多数留空"就
      跳过检索直接判定不适用。
+8. **第五章有几个 2026-08 新增（[ADR-042]）、规则手册里往往不集中的字段，建档时留意：**
+   - `execution_model`（执行模型：订单驱动 / 报价驱动 / 混合 / 经纪撮合）——多数现代交易所是
+     `order_driven`，有场内 / 电子做市商角色的是 `hybrid`（NYSE DMM、LSE SETSqx）。别和
+     `matching_principle`（订单簿内部的价格-时间优先）混为一谈。
+   - `error_trade_rule`（错误交易 / 明显错误处理）——查规则手册的 "clearly erroneous" /
+     "mistrade" / "cancellation of trades" / 日本「誤発注・特別気配」条款；重点是「已成交能否
+     作废、复核时限、价格偏离阈值」。日本现货实务上近乎不可作废，是这维度的极端一端。
+   - `order_book_transparency`（订单簿透明度）——盘前订单簿公开程度 + 是否支持冰山 / 隐藏
+     限价单 + 盘后大宗成交披露延迟；信息常散在 order types 条款、market data policy、
+     block trade deferral 三处。与 `dark_pool`（独立暗池实体）、第十章 `market_data_levels`
+     分工见 `schema/taxonomy.yml` 三个字段各自的 note。
+   - 这几个字段连同 `order_types` / `tick_size` 都有 `spec` 形状（`schema/spec.yml`）——按
+     [ADR-035] 直接填 `spec`，填完在「市场机制剖面」视图里点开自检。
 
 ### 5. 本地验证
 

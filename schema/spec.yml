@@ -17,7 +17,10 @@
 # 进度：Phase 1a 填了第五章 core 字段的形状 + 5 家示范数据（cn-sse / us-nyse /
 # jp-jpx / de-eurex / in-nse）。Phase 1b（[ADR-039]）补齐其余 15 家 + 全 20 家
 # volatility_interruption / short_selling / market_maker_scheme 的 spec + JPX
-# 值幅制限完整 34 档 ladder（Rule 2 Paragraph 1，此前误记为 37 档）。其余章节 Phase 3。
+# 值幅制限完整 34 档 ladder（Rule 2 Paragraph 1，此前误记为 37 档）。
+# [ADR-042]（2026-08-30）加了 execution_model / error_trade_rule / order_types /
+# tick_size 四个 spec 形状（对齐资深交易员清单里「可查证」的维度），short_selling
+# 加 margin_note 键——数据回填并入 Phase 3。其余章节 Phase 3。
 
 fields:
 
@@ -103,6 +106,7 @@ fields:
       naked_allowed: "bool"
       uptick_rule: "bool"
       borrow_required: "bool"
+      margin_note: "string，可选——卖空 / 融券保证金要求（维持保证金比例、专项保证金规定等），由交易所 / 清算所 / 监管强制"
       note: "string"
 
   market_structure.market_maker_scheme:
@@ -111,4 +115,54 @@ fields:
       present: "bool"
       quote_obligation: "bool——是否有持续双边报价义务"
       max_spread_pct: "number 或 null——报价价差上限"
+      note: "string"
+
+  # ── 交易员心智模型对齐补充（[ADR-042]，2026-08-30）──
+  # 数据回填并入 Phase 3 各章节的「小型 spec 补充」节奏，不单开 Wave。
+
+  market_structure.execution_model:
+    doc: >
+      市场组织基本形态的结构化补充（分类见 enum execution_model）。多数键是布尔位，
+      缺省表示「原文未提及」，不等于「无」。
+    keys:
+      electronic: "bool——电子撮合（本 sample 已基本全为 true；口头 / 公开喊价的例外写 note）"
+      dealer_intermediated: "bool——是否有交易商 / 做市商作为对手方介入（quote_driven / hybrid）"
+      note: "string"
+
+  market_structure.error_trade_rule:
+    doc: >
+      「明显错误」/ 误发注成交事后处置的结构化补充。resolution 说明处置方式；
+      review_window_min / deviation_threshold_pct 给可量化门槛，查不到留 null + note。
+    keys:
+      bust_allowed: "bool——已成交是否可被作废（日本现货实务上近乎不可作废）"
+      review_window_min: "number 或 null——申请复核 / 作废的时限（分钟）"
+      deviation_threshold_pct: "number 或 null——构成「明显错误」的成交价偏离参考价幅度"
+      resolution: "cancel（作废）/ price_adjust（调整成交价）/ cancel_or_adjust / no_bust（不作废，仅事后监管）"
+      note: "string"
+
+  market_structure.order_types:
+    doc: >
+      交易所标准化订单类型与有效期指令的结构化补充（散文清单见 zh/en）。布尔位缺省表示
+      「原文未提及」，不等于「不支持」——不确定就不写该键。
+    keys:
+      market: "bool——市价单"
+      limit: "bool——限价单"
+      stop: "bool——止损 / 触价单"
+      stop_limit: "bool——止损限价单"
+      iceberg: "bool——冰山 / 部分披露"
+      hidden: "bool——全隐藏限价单"
+      pegged: "bool——盯住 / 挂钩订单"
+      tif: "list——有效期指令子集，取值 day / gtc / gtd / fok / ioc"
+      note: "string"
+
+  market_structure.tick_size:
+    doc: >
+      最小报价单位的结构化补充。regime 说明分档方式；min_tick 给最小一档；ladder（可选）
+      列锚点档位，完整表用 full_table_note 指向。数值须逐字在 quote 里（校验 5b）。
+    keys:
+      regime: "uniform（全市场单一）/ tiered_by_price（按价格分档）/ tiered_by_price_and_liquidity（MiFID II 式，价格 × 流动性）/ per_instrument"
+      min_tick: "number 或 null——最小一档的绝对报价单位"
+      currency: "string，可选——min_tick / ladder 的计价货币"
+      ladder: "list，可选——每项 price_min / price_max / tick"
+      full_table_note: "string——ladder 只含锚点时说明完整表在哪"
       note: "string"

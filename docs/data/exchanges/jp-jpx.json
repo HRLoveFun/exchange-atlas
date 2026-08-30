@@ -633,6 +633,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "价格优先、时间优先；市价申报优先于指值申报",
@@ -1002,6 +1003,7 @@
         "detail": null,
         "quote": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "enum": "t1",
         "zh": "现货股票交收前不得卖出（不可当日回转），与结算层面T+2（见 clearing.settlement_cycle）相配套",
@@ -1058,6 +1060,7 @@
         "detail": null,
         "quote": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "",
         "confidence": "low",

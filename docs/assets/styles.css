@@ -252,7 +252,7 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
 .tz-now-line { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--danger); }
 .tz-times { font-size: 11.5px; color: var(--fg-muted); white-space: nowrap; }
 
-/* ── 交易日平面图（v2.0 主视图，ADR-035）── */
+/* ── 市场机制剖面（v2.0 主视图，ADR-035；旧名「交易日平面图」，更名见 ADR-042）── */
 .td-tb-note { font-size: 11.5px; color: var(--fg-faint); margin-left: auto; }
 .td-plot-wrap { overflow-x: auto; }
 .td-svg {

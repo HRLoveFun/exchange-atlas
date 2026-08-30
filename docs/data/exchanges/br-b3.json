@@ -616,6 +616,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "连续交易按价格优先、报单先后时间顺序（chronological order of entry）撮合；集合竞价按能匹配最大成交量的价格确定理论价，价格相同再依失衡量最小与最近成交价接近程度决胜",
@@ -850,6 +851,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "enum": "t0",
         "zh": "T+0：允许当日回转交易（day trade）；B3自身税务页面把「Day trade」列为独立的操作类别，交易所层面未见限制次日才可卖出的规则",
@@ -911,6 +913,7 @@
         "spec": null,
         "detail": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "",
         "confidence": "low",

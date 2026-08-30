@@ -611,6 +611,7 @@
         "enum": null,
         "quote": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "价格优先、时间优先",
@@ -842,6 +843,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "enum": "mixed",
         "zh": "一般交割周期为T+2，但现股当日冲销交易（先买后卖自2014年1月6日、先卖后买自2014年6月30日起开放）允许同一帐户同日买卖同种类同数量股票以差额净沖，不必等待T+2交割完成；沖销标的以公告之信用交易/当沖标的清单为限，非全市场无差别适用",
@@ -903,6 +905,7 @@
         "spec": null,
         "detail": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "无西方意义上的暗池；鉅额交易制度承担大宗订单的类似功能",
         "en": "No dark pool in the Western sense; the Block Trading system serves an analogous function for large orders",

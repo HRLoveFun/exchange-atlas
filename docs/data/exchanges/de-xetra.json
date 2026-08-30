@@ -590,6 +590,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "价格优先、时间优先原则（Price-Time Priority）：无法按determined价格全部成交的限价订单按申报先后顺序执行；不限价订单（市价订单）优先执行",
@@ -805,6 +806,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "zh": "",
         "confidence": "low",
@@ -868,6 +870,7 @@
         "spec": null,
         "detail": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "Xetra Midpoint：面向机构客户的暗池交易功能，以中间价（买卖盘中点）撮合执行订单",
         "en": "Xetra Midpoint: a dark pool feature for institutional clients, executing orders at the midpoint price between the best bid and ask",

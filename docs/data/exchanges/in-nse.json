@@ -606,6 +606,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "zh": "",
         "confidence": "low",
@@ -822,6 +823,7 @@
         "detail": null,
         "quote": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "enum": "t0",
         "zh": "T+0（可当日回转）——现货市场为单一连续交易时段（09:15-15:30），未见对当日买入证券当日卖出的限制性表述",
@@ -875,6 +877,7 @@
         "spec": null,
         "detail": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "",
         "confidence": "low",
