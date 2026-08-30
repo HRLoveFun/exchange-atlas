@@ -6967,13 +6967,13 @@
       "field_path": "order_types",
       "label_zh": "订单类型",
       "label_en": "Order Types",
-      "zh": "限价订单、市价订单（且有多种细分类型，如Five Best Orders Immediate or Cancel等）；具体订单类型矩阵未逐条核实",
-      "en": "Limit Order, Market Order (multiple sub-types)",
+      "zh": "主要订单类型（Rule 7.31 Orders and Modifiers）：限价单（Limit Order）、市价单（Market Order）、非显示限价单（Non-Displayed Limit Order）、中点流动性单（MPL Order）、储备单（Reserve Order，部分显示 + 隐藏储备量）、盯住单（Pegged Order）；修饰符含 IOC、ALO（仅添加流动性）；开盘/收盘专用 LOO/LOC 及 D-Order",
+      "en": "Principal order types (Rule 7.31, Orders and Modifiers): Limit Order, Market Order, Non-Displayed Limit Order, Mid-Point Liquidity (MPL) Order, Reserve Order (partially displayed with non-displayed reserve), and Pegged Order; modifiers include IOC and ALO (Add Liquidity Only); the open and close additionally support Limit-on-Open/Close (LOO/LOC) and D-Orders",
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
       "verified": "2026-08-13",
-      "confidence": "low"
+      "confidence": "medium"
     },
     {
       "exchange_id": "us-nyse",

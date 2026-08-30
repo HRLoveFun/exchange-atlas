@@ -540,7 +540,27 @@
         "enum": null,
         "detail": null
       },
-      "execution_model": null,
+      "execution_model": {
+        "enum": "hybrid",
+        "spec": {
+          "electronic": true,
+          "dealer_intermediated": true,
+          "note": "中央电子限价订单簿（NYSE Pillar）连续撮合 + 每支上市股票一名指定做市商（DMM）主持开盘/收盘集合竞价并在严重失衡/不稳定期间提供流动性与价格发现"
+        },
+        "zh": "混合模式：以中央电子限价订单簿（NYSE Pillar）连续撮合为主，叠加指定做市商（DMM）制度——每支股票指定一名 DMM 负责开盘、收盘及严重失衡期间的价格发现",
+        "en": "Hybrid: a central electronic limit order book (NYSE Pillar) with continuous matching, overlaid with the Designated Market Maker (DMM) system — each listed stock has one assigned DMM that facilitates price discovery at the open, at the close and during periods of substantial imbalance or instability",
+        "detail": "enum 依据既有 market_maker_scheme（DMM，confidence high）与 opening_mechanism / closing_mechanism（均 dmm_auction）的已核实 quote 综合判定：DMM 承担实质做市与价格发现职能，故归 hybrid 而非纯 order_driven。matching_principle（价格-时间优先）是订单簿内部的成交优先级细化，与本字段是两个层次。",
+        "sources": [
+          {
+            "title": "NYSE Listings Process & Requirements（官网）",
+            "url": "https://www.nyse.com/listings-process",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Your DMM will facilitate price discovery for your stock during market opens, closes and during periods of substantial trading imbalances or instability.",
+        "confidence": "medium",
+        "verified": "2026-08-13"
+      },
       "matching_principle": {
         "enum": "price_time",
         "zh": "开盘/收盘由DMM主持的集合竞价撮合，盘中为电子连续竞价撮合（NYSE Pillar系统）",
@@ -559,38 +579,60 @@
         "quote": null
       },
       "order_types": {
-        "zh": "限价订单、市价订单（且有多种细分类型，如Five Best Orders Immediate or Cancel等）；具体订单类型矩阵未逐条核实",
-        "en": "Limit Order, Market Order (multiple sub-types)",
-        "detail": "官网有\"NYSE Pillar Binary/FIX Gateway Order Type Matrix\"链接列出完整订单类型表，\n本次只确认了矩阵存在及少量条目（如Market Order细分为Five Best Orders Immediate or\nCancel / Immediate to Limit），未逐条抓取完整矩阵内容。\n",
-        "confidence": "low",
+        "spec": {
+          "market": true,
+          "limit": true,
+          "iceberg": true,
+          "hidden": true,
+          "pegged": true,
+          "tif": [
+            "day",
+            "ioc"
+          ],
+          "note": "NYSE Pillar 订单类型（Rule 7.31）：限价单 / 市价单为基础；Reserve Order（部分显示 + 隐藏储备量）承担冰山功能；Non-Displayed Limit Order 与 Mid-Point Liquidity (MPL) Order 为全隐藏；Pegged Order 盯住 PBBO；有效期以 Day 为主，IOC 为常用修饰符；开盘/收盘另有 LOO/LOC 及 D-Order。GTC 类跨日单在 Pillar 迁移后由券商端维护"
+        },
+        "zh": "主要订单类型（Rule 7.31 Orders and Modifiers）：限价单（Limit Order）、市价单（Market Order）、非显示限价单（Non-Displayed Limit Order）、中点流动性单（MPL Order）、储备单（Reserve Order，部分显示 + 隐藏储备量）、盯住单（Pegged Order）；修饰符含 IOC、ALO（仅添加流动性）；开盘/收盘专用 LOO/LOC 及 D-Order",
+        "en": "Principal order types (Rule 7.31, Orders and Modifiers): Limit Order, Market Order, Non-Displayed Limit Order, Mid-Point Liquidity (MPL) Order, Reserve Order (partially displayed with non-displayed reserve), and Pegged Order; modifiers include IOC and ALO (Add Liquidity Only); the open and close additionally support Limit-on-Open/Close (LOO/LOC) and D-Orders",
+        "detail": "完整订单类型表见 NYSE Pillar Binary/FIX Gateway Order Type Matrix。此处 quote 引自 SR-NYSE-2019-05 Exhibit 5（Rule 7.31 条文），定义性措辞稳定，但个别子类型自 2019 年后有增减，故整体 confidence: medium。",
         "sources": [
           {
-            "title": "Trading Information（官网）",
-            "url": "https://www.nyse.com/trade/trading-information",
-            "accessed": "2026-08-13"
+            "title": "Rules of New York Stock Exchange LLC — Rule 7.31 (Orders and Modifiers)，SEC filing SR-NYSE-2019-05 Exhibit 5",
+            "url": "https://www.sec.gov/files/rules/sro/nyse/2019/34-85176-ex5.pdf",
+            "accessed": "2026-08-30"
           }
         ],
+        "quote": "Limit Order. An order to buy or sell a stated amount of a security at a specified price or better. ... Non-Displayed Limit Order. A Limit Order that is not displayed and does not route. ... Mid-Point Liquidity Order (“MPL Order”). A Limit Order that is not displayed and does not route, with a working price at the midpoint of the PBBO. ... Pegged Orders. A Limit Order that does not route with a working price that is pegged to a",
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "enum": null,
-        "spec": null,
-        "quote": null
+        "enum": null
       },
       "tick_size": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "未核实按股价分层的最小报价单位规则（Reg NMS Rule 612相关），留空。",
+        "spec": {
+          "regime": "tiered_by_price_and_liquidity",
+          "min_tick": 0.005,
+          "currency": "USD",
+          "full_table_note": "17 CFR 242.612 (Reg NMS Rule 612)：报价 ≥ $1.00 的 NMS 股票按主上市所每半年测算的时间加权平均报价价差（TWAQS）分配 tick——≤ $0.015 为 $0.005，> $0.015 为 $0.01；报价 < $1.00 的股票为 $0.0001。两档制 2025-11-03 起施行",
+          "note": "联邦层面的全国市场系统统一规则，非 NYSE 单独规定；某股当期 tick 由主上市所按 Rule 612 评估期测算后分配"
+        },
+        "zh": "按 Reg NMS Rule 612（17 CFR 242.612）：报价不低于 $1.00 的 NMS 股票，最小报价单位为 $0.01 或 $0.005（时间加权平均报价价差 $0.015 或以下者为 $0.005，否则为 $0.01，由主上市交易所每半年评估分配）；报价低于 $1.00 的股票为 $0.0001",
+        "en": "Per Reg NMS Rule 612 (17 CFR 242.612): for NMS stocks priced at or above $1.00, the minimum pricing increment is either $0.01 or $0.005 (a $0.005 tick if the Time Weighted Average Quoted Spread over the Evaluation Period was $0.015 or less, otherwise $0.01, assessed semi-annually by the primary listing exchange); for stocks priced below $1.00 it is $0.0001",
+        "detail": "两档制（$0.005 / $0.01）自 2025-11-03（首个评估期 2025 年 7–9 月）起施行，取代此前统一 $0.01。适用范围为全部 NMS 股票（联邦规则），此前本字段留空。",
         "sources": [
           {
-            "title": "Trading Information（官网）",
-            "url": "https://www.nyse.com/trade/trading-information",
-            "accessed": "2026-08-13"
+            "title": "17 CFR § 242.612 — Minimum pricing increment（eCFR versioner API，title 17 part 242，issue 2026-08-17）",
+            "url": "https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=242",
+            "accessed": "2026-08-30"
+          },
+          {
+            "title": "Tick Sizes – A Small Entity Compliance Guide（SEC，2024-11-21）",
+            "url": "https://www.sec.gov/resources-small-businesses/small-business-compliance-guides/tick-sizes",
+            "accessed": "2026-08-30"
           }
         ],
+        "quote": "if that bid or offer, order, or indication of interest is priced equal to or greater than $1.00 per share: ( i ) $0.01, if the Time Weighted Average Quoted Spread for the NMS stock during the Evaluation Period was greater than, $0.015; or ( ii ) $0.005, if the Time Weighted Average Quoted Spread for the NMS stock during the Evaluation Period was equal to or less than $0.015. ... shall display, rank, or accept from any person a bid or offer, an order, or an indication of interest in any NMS stock priced in an increment smaller than $0.0001 if that bid or offer, order, or indication of interest is priced less than $1.00 per share.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "spec": null,
-        "quote": null
+        "enum": null
       },
       "board_lot_size": {
         "zh": "",
@@ -766,7 +808,29 @@
         "detail": null,
         "quote": null
       },
-      "error_trade_rule": null,
+      "error_trade_rule": {
+        "spec": {
+          "bust_allowed": true,
+          "review_window_min": 30,
+          "deviation_threshold_pct": 10,
+          "resolution": "cancel",
+          "note": "核心时段内、受 LULD 计划约束的 NMS 股票原则上不可复核（LULD 价格带已阻止极端价成交）；仅在 LULD 带不可用、交易所系统故障致带外成交、监管停牌后成交、或参考价因公司行动/新股/暂停恢复而错误等情形可复核。适用数值门槛按参考价分档：≤$25 为 10%、$25.01–$50 为 5%、>$50 为 3%（盘前时段翻倍）。裁定成立即宣告成交无效并从合并行情带移除，股票市场不作调价"
+        },
+        "zh": "「明显错误」成交（价格、股数、证券识别等任一要素明显有误）可由会员在成交后 30 分钟内书面申请复核；officer 裁定成立者宣告该笔成交无效（null and void）并从合并行情带（Consolidated Tape）移除。核心交易时段内受 LULD 计划约束的股票通常不予复核，仅限 LULD 带不可用、系统故障带外成交、监管停牌后成交或参考价错误等例外；适用数值门槛为偏离参考价 10%（参考价 $0.00–$25.00）、5%（$25.01–$50.00）、3%（>$50.00）",
+        "en": "A 'clearly erroneous' execution (an obvious error in any term such as price, number of shares or identification of the security) may be challenged in writing by a member organization within 30 minutes of execution time; if an Exchange Officer finds it clearly erroneous the transaction is declared null and void and removed from the Consolidated Tape. During the Core Trading Session, transactions in stocks subject to the LULD Plan are generally not reviewable — review is limited to cases where the LULD bands were unavailable, a systems issue produced a trade outside the bands, the trade followed a regulatory halt, or the reference price was erroneous. Where the Numerical Guidelines apply, a trade is clearly erroneous if it deviates from the Reference Price by 10% (Reference Price $0.00–$25.00), 5% ($25.01–$50.00) or 3% (over $50.00)",
+        "detail": "NYSE Rule 7.10（Clearly Erroneous Executions）。与 trading_halt_mechanism（盘中停牌 / 复牌）视角不同。美国股票 CEE 只作废、不调价（期权市场才有调价选项）。officer 裁定可上诉至 Clearly Erroneous Execution Panel，但 LULD 带外成交的裁定不可上诉。quote 引自 SR-NYSE-2022-38 Exhibit 5（原文含增删标记，此处摘无标记的连续片段）。",
+        "sources": [
+          {
+            "title": "Rules of New York Stock Exchange LLC — Rule 7.10 (Clearly Erroneous Executions)，SEC filing SR-NYSE-2022-38 Exhibit 5",
+            "url": "https://www.sec.gov/files/rules/sro/nyse/2022/34-95822-ex5.pdf",
+            "accessed": "2026-08-30"
+          }
+        ],
+        "quote": "the terms of a transaction executed on the Exchange are “clearly erroneous” when there is an obvious error in any term, such as price, number of shares or other unit of trading, or identification of the security. ... Requests for review must be received by the Exchange within 30 minutes of execution time ... If the execution time of the transaction(s) under review is during the Core Trading Session, the transaction will not be reviewable as clearly erroneous unless the transaction: A. is in an NMS Stock that is not subject to the Plan to Address Extraordinary Market Volatility ... Between $0.00 and $25.00 10% ... Between $25.01 and $50.00 5% ... Greater than $50.00 3% ... In the event that the Officer determines that the transaction in dispute is clearly erroneous, the Officer will declare the transaction null and void.",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null
+      },
       "intraday_reversal": {
         "enum": "t0",
         "zh": "T+0（可当日回转），与结算层面的T+1（见 clearing.settlement_cycle）是两回事",
@@ -828,7 +892,23 @@
         "detail": null,
         "quote": null
       },
-      "order_book_transparency": null,
+      "order_book_transparency": {
+        "zh": "盘前：NYSE 运营公开的中央限价订单簿，全部展示订单（Priority 2 - Display Orders）的价量向市场披露，并通过 SIP 与自有行情源（NYSE Integrated Feed 等）实时分发；支持不披露的流动性——非显示限价单（Non-Displayed Limit Order）、中点流动性单（MPL Order）为全隐藏，储备单（Reserve Order）仅显示部分、隐藏储备量，均排在同价展示订单之后（Priority 3 - Non-Display Orders）。盘后：成交实时打印至合并行情带，无欧盟式大额成交延迟披露（LIS deferral）安排",
+        "en": "Pre-trade: the NYSE operates a public central limit order book; displayed orders (Priority 2 - Display Orders) are disseminated in full size and price through the SIP and NYSE proprietary feeds, while non-displayed liquidity is supported — Non-Displayed Limit Orders and MPL Orders are fully hidden and Reserve Orders show only a portion with a hidden reserve, all ranked behind displayed orders at the same price (Priority 3 - Non-Display Orders). Post-trade: executions print to the Consolidated Tape in real time, with no EU-style large-in-scale deferral regime",
+        "detail": "字段管本所订单簿内部的（非）展示流动性；独立暗池 / ATS 见 dark_pool，行情层级 / 收费见第十章 market_data_levels。post-trade 无延迟披露为美国市场结构特征（对比 MiFID II 的 LIS deferral）。quote 引自 Rule 7.31 条文（SR-NYSE-2019-05 Exhibit 5），展示 / 非展示订单的优先级区分为定义性、稳定；整体 confidence: medium（缺一条正面表述『订单簿对公众公开』的单一 quote）。",
+        "sources": [
+          {
+            "title": "Rules of New York Stock Exchange LLC — Rule 7.31 (Orders and Modifiers)，SEC filing SR-NYSE-2019-05 Exhibit 5",
+            "url": "https://www.sec.gov/files/rules/sro/nyse/2019/34-85176-ex5.pdf",
+            "accessed": "2026-08-30"
+          }
+        ],
+        "quote": "Limit Order. An order to buy or sell a stated amount of a security at a specified price or better. ... it is ranked Priority 2 - Display Orders. ... Non-Displayed Limit Order. A Limit Order that is not displayed and does not route. A Non-Displayed Limit Order is ranked Priority 3 - Non-Display Orders.",
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "enum": null,
+        "spec": null
+      },
       "dark_pool": {
         "zh": "",
         "confidence": "low",

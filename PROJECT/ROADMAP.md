@@ -2,7 +2,7 @@
 
 进度状态放这里；「为什么这么排」去 `DECISIONS.md`，这里不重复。
 
-## 当前阶段：**v2.0 高度可视化转向**（2026-08-29 校准）——主视图从对比矩阵改为单市场「市场机制剖面」（旧名「交易日平面图」，[ADR-042] 更名），新增结构化 `spec` 层。加固组 A1/A2（[ADR-033]/[ADR-034]）、Phase 0 范式定案（[ADR-035]/[ADR-036]）、Phase 1a `spec` 层实装 + 5 家示范（[ADR-037]）、Phase 1b 全部完成（[ADR-038] + [ADR-039]）、**Phase 2 · 市场机制剖面实装完成**（[ADR-040]，`app.js` `renderTradingDay` 手写 SVG，成为默认首屏兼第一个 tab）、**收口审查四轮 + schema 对齐交易员心智模型**（[ADR-042]：第五章补 3 字段 + 4 个 spec 形状 + 覆盖边界写明，数据回填并入 Phase 3）。**下一步：Phase 2 收口 gate——「30 秒看懂」由非专业读者实测；通过后开 Phase 3（其余章节可视化）。**
+## 当前阶段：**v2.0 高度可视化转向**（2026-08-29 校准）——主视图从对比矩阵改为单市场「市场机制剖面」（旧名「交易日平面图」，[ADR-042] 更名），新增结构化 `spec` 层。加固组 A1/A2（[ADR-033]/[ADR-034]）、Phase 0 范式定案（[ADR-035]/[ADR-036]）、Phase 1a `spec` 层实装 + 5 家示范（[ADR-037]）、Phase 1b 全部完成（[ADR-038] + [ADR-039]）、**Phase 2 · 市场机制剖面实装完成**（[ADR-040]，`app.js` `renderTradingDay` 手写 SVG，成为默认首屏兼第一个 tab）、**收口审查四轮 + schema 对齐交易员心智模型**（[ADR-042]：第五章补 3 字段 + 4 个 spec 形状 + 覆盖边界写明，数据回填并入 Phase 3）、**Phase 2 收口 gate 实测达标**（2026-08-30，用户执行「30 秒看懂」非专业读者实测，通过）。**下一步：Phase 3 开工——[ADR-042] 三字段 + 四个 spec 形状的 20 家回填（进行中），随后其余章节可视化（成本瀑布起）。**
 
 ## 阶段路线
 
@@ -48,7 +48,7 @@
 ## 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
-共 1770 个已填字段，其中 0 个超过复核阈值待复核。
+共 1774 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
 |---|---|---|
@@ -70,7 +70,7 @@
 | `tw-twse` | 79 | 0 |
 | `uk-lse` | 67 | 0 |
 | `us-nasdaq` | 74 | 0 |
-| `us-nyse` | 66 | 0 |
+| `us-nyse` | 70 | 0 |
 | `za-jse` | 119 | 0 |
 <!-- END:GENERATED health-summary -->
 
@@ -181,8 +181,9 @@
   - [x] **收口审查第一轮反馈已处理**（2026-08-30，[ADR-040]「收口审查反馈」段）— ① 图例移到主图上方；② 中心留白 → 中心信息卡：把「日内价格受什么约束」（价格限制 + 熔断 + 回转）综述成 1–3 行放平面中央，`au-asx`/`hk-hkex` 这类「以无涨跌停为特征」的市场空白中心现在直接说结论；连带 `yR` 系数收紧、0 基准线加标签、画不出墙的情形不再角落标注。
   - [x] **收口审查二轮 / 三轮反馈已处理**（2026-08-30，[ADR-040]「收口审查第二/三轮」段）— 二轮：x 轴时间坐标上下各一排、网格恒 30 分钟、个股/合约级熔断 chip 展开机制描述。三轮：标注层 chips 分「交易机制」+「交易细则·成本」两组，新增 tick size / 交易单位 / 交收周期 / 佣金 / 印花税·交易税 / 跨境互联互通 六个跨章 chip。
   - [x] **收口审查四轮 · 更名 + schema 对齐交易员心智模型**（2026-08-30，[ADR-042]）— 主视图更名「交易日平面图」→「**市场机制剖面**」（旧名只描述形式不反映内核，[ADR-040] 补记）。据资深交易员（对照 Harris《Trading and Exchanges》）的「首次接触陌生市场需知」清单审查 schema：第五章补 `execution_model`（执行模型，enum）/ `error_trade_rule`（错误交易处理规则）/ `order_book_transparency`（订单簿透明度）三字段；`schema/spec.yml` 加 `execution_model`/`error_trade_rule`/`order_types`/`tick_size` 四个 spec 形状 + `short_selling.margin_note` 键；`README` / `CLAUDE.md` 写明「执行风险 / 市场冲击 / 真实流动性 / 价格聚簇不在覆盖范围，需实盘验证」。**只动 schema/spec/文档 + 前端更名，不动 `data/`；`make build` 全绿。生成块唯一变动：`za-jse` 第五章 ✅→🟡（此前 20 家里唯一填满，新增 3 空字段后分母 +3，符合预期、不加 `optional`）。数据回填并入下方 Phase 3。**
-  - [ ] **收口 gate（未完）** — 上述改动待用户再次审查确认「30 秒看懂」达标；确认后开 Phase 3。
+  - [x] **收口 gate 达标**（2026-08-30）— 用户执行「30 秒看懂」非专业读者实测，通过。Phase 3 解锁。
 - [ ] **Phase 3 · 其余章节可视化** — 成本瀑布 → 交割管线 → 上市生命周期（一并落地 [ADR-036] #5 的章节级"仅现货适用"标记）→ 监管图 → 参与者 → 风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）→ …按交易员价值迭代，每章带一次小型 `spec` 补充。**并入 [ADR-042] 的第五章三字段 + 四个 spec 形状的 20 家回填**（`execution_model` 达 ≥16/20 后补 `in_matrix: trading_mechanism`）。
+  - [ ] **Phase 3 首棒 · [ADR-042] 三字段 + 四 spec 形状 20 家回填**（进行中，2026-08-30 启动）— `execution_model`（enum，多数从既有 `matching_principle`+`market_maker_scheme` 派生）/ `error_trade_rule`（散文 + spec，实抓官方规则）/ `order_book_transparency`（散文，实抓）三字段；`order_types` + `tick_size` 的 spec 从既有字段结构化（`tick_size` 10 家基础字段亦空，可抓则补）；`short_selling.spec.margin_note` 按需补。沿用 [ADR-017] 并行子代理，子代理只写各自 `data/exchanges/<id>.yml` + `.cache/<id>/`，共享文件由协调者合并。退出：`make build` 全绿、spec 5b 0 FAIL、每家抽检 10 字段 ≥95%；`execution_model` ≥16/20 后补 `in_matrix: trading_mechanism`。
 
 **v2.0 的 Phase 序列到 Phase 3 为止。**
 
