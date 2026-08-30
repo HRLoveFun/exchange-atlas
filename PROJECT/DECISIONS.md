@@ -622,11 +622,11 @@
 4. **5 家示范 `spec` 回填**，覆盖形态多样性：
    - `cn-sse`——`price_limits` 百分比 `{limit_pct: 10, reference: prev_close}`；`circuit_breaker: {type: none}`（2016 暂停史留 `detail`）；集合竞价起止。
    - `us-nyse`——`price_limits: {type: dynamic, band_pct: null, note}`（LULD，Tier 百分比未公布 → `band_pct: null` = [ADR-035] D 的"存在未公布"三态之一）；`circuit_breaker` MWCB `levels: [{7}, {13}, {20}]`（停牌时长在 `detail` 未逐字核实，暂不入 `spec`）；`continuous_am/lunch: {kind: none}`（无上下午分段）。
-   - `jp-jpx`——`price_limits: {type: stepwise, ladder: [首尾两档锚点], full_table_note}`（值幅制限 37 档，只放 `quote` 撑得住的两档，Phase 1b 补全）；`circuit_breaker: {type: stock_level, note}`。
+   - `jp-jpx`——`price_limits: {type: stepwise, ladder: [首尾两档锚点], full_table_note}`（值幅制限，本条原写「37 档」系笔误，实为 **34 档**，Phase 1b [ADR-039] 逐行核实并填全）；`circuit_breaker: {type: stock_level, note}`。
    - `de-eurex`——**`price_limits.reference: prev_settlement`**（[ADR-035] E：衍生品所 y 轴基准换标"前结算价"，平面语法不变）；`{type: dynamic, band_pct: null}`；准全天候时段 01:00-22:00 CET。
    - `in-nse`——**`circuit_breaker` 跨交易所联动**：`reference: [{index: "Nifty 50", exchange: self}, {index: "BSE Sensex", exchange: "bse"}]`（[ADR-036] #6 / OPEN-QUESTIONS #19 的 schema 承接方式，验证通过）；`price_limits: {limit_pct: null, note}`（按证券分类分档 2/5/10/20%，非单一幅度）。
 
-**为什么先做 1a 而非一次性 20 家：** 沿 [ADR-019] 先例——先示范性填几家验证 schema 能不能用、契约定得对不对，再铺开。5 家覆盖了百分比 / 无 / 动态未公布 / 阶梯 / 前结算价 / 跨所联动六种形态，`schema/spec.yml` 的键与三态设计经此验证够用。Phase 1b 补其余 15 家 + `volatility_interruption`/`short_selling`/`market_maker_scheme` 的 `spec` + JPX 37 档全表 + `matching_principle` 转 enum（20 家全量任务，规模半个 batch，适合并行子代理）。
+**为什么先做 1a 而非一次性 20 家：** 沿 [ADR-019] 先例——先示范性填几家验证 schema 能不能用、契约定得对不对，再铺开。5 家覆盖了百分比 / 无 / 动态未公布 / 阶梯 / 前结算价 / 跨所联动六种形态，`schema/spec.yml` 的键与三态设计经此验证够用。Phase 1b（[ADR-038] + [ADR-039]）补其余 15 家 + `volatility_interruption`/`short_selling`/`market_maker_scheme` 的 `spec` + JPX 34 档全表 + `matching_principle` 转 enum（20 家）。
 
 **回归：全 20 家时区甘特条 `trading_hours` 数据与结构化前逐字节一致**（5 家 spec-driven 的 `compute_trading_window` 输出 == 原散文推导）。`in-nse` 本就不在 `EXCHANGE_IANA_TZ`（无甘特条），不受影响；Phase 1b/2 可考虑补上。
 
@@ -670,5 +670,31 @@
 ---
 
 **验证：** `make build` 全绿（20 家、validate 0 警告 0 错误、verify_quotes OK=0 FAIL=0 CACHE_MISS=1024——本地 `.cache` 未落盘的信息性计数，非失败）；`make sync` 幂等（`git diff` 仅预期产物变化 + `freshness.json` 的 `age_days` 时间漂移）；`matching_principle` 的 29 个 enum 值（19 顶层 + 10 衍生品）经结构校验，无 `en_required` 缺失。
+
+**日期：** 2026-08-30
+
+### ADR-039 — Phase 1b（其二）：15 家第五章 `spec` 数据回填 + 全 20 家三个补充字段 + JPX 34 档全表
+
+**做了什么：** 承 [ADR-037] Phase 1a 的 5 家示范，把第五章 `spec` 铺到其余 15 家（`au-asx` / `br-b3` / `ca-tsx` / `ch-six` / `cn-szse` / `de-xetra` / `fr-euronext` / `hk-hkex` / `kr-krx` / `sa-tadawul` / `sg-sgx` / `tw-twse` / `uk-lse` / `us-nasdaq` / `za-jse`），并给全 20 家补 `volatility_interruption` / `short_selling` / `market_maker_scheme` 的 `spec`、填全 JPX 值幅制限 ladder。
+
+**执行方式偏离 [ADR-017]（并行子代理）：** 本次由协调者串行逐家完成，非派子代理。理由：(a) 运行环境为后台任务，不宜自行大量派子代理；(b) 15 家的第五章绝大多数字段在 v1.0/v1.1 已抓取核实、`verify_quotes` OK=929，本次是把**既有已核实 `quote` 结构化**，非新抓事实——风险与「[ADR-018] 教训」针对的「批量新抓」不同类；(c) 少数需补 `quote` 的（JPX 34 档、KRX 三级熔断、NYSE MWCB 停牌时长）由协调者现场 `curl` + `pdftotext` 抓官方 PDF 逐行核实。
+
+**结构化纪律（[ADR-035] B/D 三态）：**
+- 值只放当次 `quote` 撑得住的：`confidence: high` 字段经 `validate.py` 5b 逐字反查（本次新增 spec 数值 0 FAIL）。
+- 机制存在但数值分组/未公开 → 该键 `null` + `note`（如 `ch-six` / `de-xetra` / `fr-euronext` / `hk-hkex` 的动态价格区间 `band_pct: null`，多市场分档写进 `note`）。
+- 机制确不存在 → `type: none`（`au-asx` / `tw-twse` 无熔断，`cn-szse` / `jp-jpx` 无独立波动中断层）。
+- `market_structure._meta.confidence` 多为 `high`——**新填的空字段若不显式给 `confidence`/`quote` 会继承 `high` 并触发「high 缺 quote」err**（`au-asx` / `hk-hkex` 的 `price_limits.main_board` 踩到，已补 `quote` + 显式 `confidence`）。教训已回写 `add-exchange` SKILL。
+
+**新增到 `schema/spec.yml` 的键：** `opening_mechanism` / `closing_mechanism` 加 `randomised_seconds`（ASX 开收盘随机窗口）、`closing_mechanism` 加 `random_close_window_min`（HKEX 4:08–4:10 随机收盘）。
+
+**JPX 值幅制限：** 抓 TSE 官方英文版 PDF（`bids_and_offers_price_limits_20141201.pdf`，现行版）逐行核实——Rule 2 Paragraph 1 股票值幅表实为 **34 档**，非 [ADR-037] / `SOURCES.md` 所写的「37 档」（笔误，已改）。`jp-jpx.price_limits.main_board.spec.ladder` 填全 34 档（`base_min` / `base_max` / `band_abs`），`quote` 扩为完整表格逐字原文；`main_board` 维持 `confidence: medium`（PDF 自标 "Provisional Reference Translation"、日文本为准）。
+
+**`matching_principle` → `enum`（20 家）与 `in-nse` → `EXCHANGE_IANA_TZ`：** 属 Phase 1b 但已在 其一（[ADR-038]）完成。
+
+**已知数据缺口（按三态留缺省，非本次能力问题）：** `in-nse` 的 `volatility_interruption` / `market_maker_scheme`、`de-eurex` / `fr-euronext` 的 `short_selling`、`jp-jpx` 的 `market_maker_scheme`——这些字段数据文件本身 `zh` 为空、`confidence: low`，待后续抓取坐实后再结构化。`uk-lse` / `fr-euronext` 的部分 `trading_sessions` 只填 `kind`（官方静态钟点表未定位）。
+
+**时区甘特条回归：** 6 家（cn-sse / hk-hkex / us-nyse / jp-jpx / de-eurex / in-nse）`docs/data/manifest.json` 的 `trading_hours` 与 [ADR-038] 后逐字节一致（`hk-hkex` 已把 `trading_sessions` 结构化为 `spec`，`compute_trading_window` 改走 `spec` 后输出不变）。其余 14 家不在 `EXCHANGE_IANA_TZ`，无甘特条。
+
+**验证：** `make build` 全绿（validate 0/0；verify_quotes 离线 CACHE_MISS，非失败）；`spec` 5b 手工复核 JPX ladder + 5 家 index-level 熔断 `levels`，spec 数值全部 quote 命中；`make sync` 幂等。
 
 **日期：** 2026-08-30

@@ -230,6 +230,10 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
      该显式声明"兜底的，不是设计上鼓励依赖的路径。** 调试这类报错时，`validate.py` 的检查
      跑在 `expand_field` 展开之后的数据上，不是原始 YAML——肉眼比对 raw YAML 常常看不出问题，
      应该跑 `python3 tools/sync.py` 后去看 `docs/data/exchanges/<id>.json` 里展开后的实际值。
+     Phase 1b（[ADR-039]）给之前是空字符串的 `price_limits.main_board` 补 `spec` + `zh` 时又踩到
+     同一个坑（`au-asx`/`hk-hkex`）：**把一个之前空的字段升级成信封（哪怕只是加 `spec`），也要顺手
+     给它 `confidence` + `quote`（或显式 `confidence: medium/low`），否则继承章节 `_meta` 的 `high`
+     就缺 quote 报错。**
    - **`in_matrix: true` 的字段即使没标 `en_required`，也应该写成 `{zh, en}` 完整信封，不要写
      裸字符串**（如 `trading_currency: "港元"`）——裸字符串在导出的 `matrix.json` 里会让 `en`
      直接变成 `null`，`make check` 不会报错，但英文模式下这个格子会显示空白，属于人工浏览器验收
