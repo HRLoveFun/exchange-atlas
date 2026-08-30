@@ -439,6 +439,12 @@
     "market_structure": {
       "trading_sessions": {
         "pre_market": {
+          "spec": {
+            "start": "07:00",
+            "end": "09:00",
+            "kind": "pre_open_queue",
+            "note": "07:00-08:30 仅可撤单；08:30-09:00 开盘集合竞价（Opening Auction Call）"
+          },
           "zh": "盘前时段（Start of Trading Session）07:00–08:30，仅可撤单不可报/改单；随后进入开盘集合竞价（Opening Auction Call）08:30–09:00",
           "en": "Start of Trading Session 07:00–08:30 (cancel-only, no new/amended orders), followed by the Opening Auction Call 08:30–09:00",
           "quote": "Start: 07:00 End: 08:30 ... OPENING AUCTION CALL SESSION Start: 08:30 End: 09:00",
@@ -457,10 +463,14 @@
           "verified": "2026-08-27",
           "confidence": "high",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "continuous_am": {
+          "spec": {
+            "start": "09:00",
+            "end": "12:00",
+            "kind": "continuous"
+          },
           "zh": "连续交易第一段 09:00–12:00",
           "en": "Continuous Trading 1, 09:00–12:00",
           "quote": "Continuous Trading 1 ... 09:00 – 12:00",
@@ -479,10 +489,15 @@
           "verified": "2026-08-27",
           "confidence": "high",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "lunch_break": {
+          "spec": {
+            "start": "12:00",
+            "end": "12:15",
+            "kind": "lunch_recess",
+            "note": "盘中集合竞价（Intraday Auction Call）分隔上下午连续交易，非传统午休"
+          },
           "zh": "无传统午休，但设有12:00–12:15的盘中集合竞价（Intraday Auction Call）分隔上下午连续交易",
           "en": "No traditional lunch break; a scheduled Intraday Auction Call runs 12:00–12:15 between the two continuous-trading segments",
           "quote": "Intraday Auction Call ... 12:00 – 12:15",
@@ -501,10 +516,14 @@
           ],
           "verified": "2026-08-27",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "continuous_pm": {
+          "spec": {
+            "start": "12:15",
+            "end": "16:50",
+            "kind": "continuous"
+          },
           "zh": "连续交易第二段 12:15–16:50",
           "en": "Continuous Trading 2, 12:15–16:50",
           "quote": "Continuous Trading 2 ... 12:15 – 16:50",
@@ -523,10 +542,15 @@
           "verified": "2026-08-27",
           "confidence": "high",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "after_market": {
+          "spec": {
+            "start": "17:00",
+            "end": "17:15",
+            "kind": "after_hours_continuous",
+            "note": "收盘集合竞价 16:50-17:00 后：CPP 17:00-17:05 → CPX 17:05-17:10 → 尾盘量收盘价撮合 17:10-17:15；17:15-18:15 收盘后处理，无盘后连续交易"
+          },
           "zh": "收盘集合竞价（Closing Auction Call）16:50–17:00，随后依次为CPP时段17:00–17:05、CPX时段17:05–17:10、尾盘量在收盘价撮合（EOD Volume Auction）17:10–17:15、收盘后处理（Post Close）17:15–18:15；场外报告成交（Off Book Trades）时段为18:15–18:20",
           "en": "Closing Auction Call 16:50–17:00, followed by CPP 17:00–17:05, CPX 17:05–17:10, EOD Volume Auction 17:10–17:15, and Post Close 17:15–18:15; Off Book Trades window 18:15–18:20",
           "quote": "16:50– 17:00   17:00– 17:05   17:05– 17:10   17:10– 17:15   17:15– 18:15",
@@ -545,10 +569,12 @@
           "verified": "2026-08-27",
           "confidence": "high",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "night_session": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无",
           "en": "None",
           "confidence": "medium",
@@ -566,7 +592,6 @@
           ],
           "verified": "2026-08-27",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -589,6 +614,12 @@
         "quote": null
       },
       "opening_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "08:30",
+          "auction_end": "09:00",
+          "note": "按成交量最大化算法（Volume Maximising Algorithm）统一定价"
+        },
         "zh": "开盘集合竞价（Opening Auction Call，08:30–09:00），订单可提交/撤销/修改，竞价结束时按成交量最大化算法（Volume Maximising Algorithm）统一定价撮合",
         "en": "Opening Auction Call (08:30–09:00); orders may be entered, cancelled or amended, with the uncrossing price determined by the Volume Maximising Algorithm",
         "sources": [
@@ -602,10 +633,16 @@
         "detail": "v4.09 正文确认存在 Opening Auction Call Session 且撮合采用 Volume Maximising algorithm（8.4 章），但具体时段 08:30–09:00 在 v4.09 文本中未逐字列出（原 v4.08 的 session-times 表曾含该时间，现已 404 无法取回），故由 high 降为 medium 并移除非逐字 quote。",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "quote": null
       },
       "closing_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "16:50",
+          "auction_end": "17:00",
+          "trade_at_close_end": "17:15",
+          "note": "成交量最大化算法；分段收盘价方法不同（ZA01-03 用 VWAP，ZA04/06 用中间价）；17:10-17:15 尾盘量在收盘价撮合"
+        },
         "zh": "收盘集合竞价（Closing Auction Call，16:50–17:00），同样按成交量最大化算法撮合定价；不同交易分段收盘价计算方法不同（如ZA01/ZA02/ZA03用成交量加权平均价VWAP法，ZA04/ZA06用中间价Mid-point法）",
         "en": "Closing Auction Call (16:50–17:00), also uncrossed via the Volume Maximising Algorithm; the closing-price methodology varies by segment (e.g. ZA01/ZA02/ZA03 use VWAP, ZA04/ZA06 use a mid-point method)",
         "sources": [
@@ -619,7 +656,6 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "matching_principle": {
@@ -731,6 +767,11 @@
           "detail": null
         },
         "main_board": {
+          "spec": {
+            "type": "dynamic",
+            "band_pct": 3,
+            "note": "双阈值（静态相对前收/最近集合竞价价 + 动态相对最近成交价），任一被突破即触发波动性拍卖。ZA01 分段（Top40 等）：连续交易静态 ±10%/动态 ±3%，集合竞价阶段静态 ±8%/动态 ±6%，FCO 阶段静态 ±15%/动态 ±2%；ZA02 分段连续 ±15%/±5%；熔断仅对 ZA01/ZA02 启用。band_pct 取 ZA01 连续交易动态阈值 3%"
+          },
           "zh": "以ZA01分段（Top40成分股等流动性最好的品种）为例：连续交易静态阈值±10%/动态阈值±3%；开盘/收盘/重开集合竞价阶段静态±8%/动态±6%；期货到期收盘（FCO）阶段静态±15%/动态±2%",
           "en": "For Segment ZA01 (Top40 constituents and other highly liquid instruments): Continuous Trading Static ±10% / Dynamic ±3%; Opening/Closing/Re-Opening Auction Calls Static ±8% / Dynamic ±6%; Futures Close-Out Auction Call Static ±15% / Dynamic ±2%",
           "sources": [
@@ -744,7 +785,6 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -767,6 +807,10 @@
       },
       "circuit_breaker": {
         "enum": "stock_level",
+        "spec": {
+          "type": "stock_level",
+          "note": "个股/品种级：静态或动态参考价容忍阈值被突破即自动转入 5 分钟波动性拍卖冷静期（Volatility Auction Call），非全市场停牌；仅 ZA01/ZA02 分段启用，见 price_limits / volatility_interruption"
+        },
         "zh": "个股/品种级熔断（非指数级）：静态或动态参考价容忍阈值被突破后，该品种自动转入5分钟的波动性拍卖冷静期（Volatility Auction Call），非全市场停牌。未找到与美股MWCB或港交所整体停市式的独立全市场级熔断机制，与jp-jpx/de-eurex此前遇到的同类未确认情况类似，不确定是否本次检索范围局限",
         "en": "Instrument-level circuit breaker (not index-level): breaching the static or dynamic reference-price tolerance moves the instrument into a 5-minute Volatility Auction Call, not an exchange-wide halt. No evidence of a separate market-wide circuit breaker (akin to U.S. MWCB) was found in the content fetched this round — similar to the unresolved status previously noted for jp-jpx/de-eurex, this may reflect the limits of this session's search rather than a confirmed absence",
         "sources": [
@@ -779,10 +823,13 @@
         "quote": "Circuit Breakers are defined as a percentage in relation to the Static Reference Price (Previous Day's closing price or latest auction trade) and Dynamic Reference Price (Last Traded Price). If the Static or Dynamic circuit breaker for the relevant trading session is breached, the instrument will automatically be moved into a Volatility Auction Call session.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "spec": null,
         "detail": null
       },
       "volatility_interruption": {
+        "spec": {
+          "auction_minutes": 5,
+          "note": "波动性拍卖冷静期：5 分钟，可追加 1 次 2 分钟市价单延期，随后最长 30 秒随机撮合窗口完成集合竞价；触发阈值见 price_limits（ZA01 连续 ±10%/±3% 等）"
+        },
         "zh": "波动性拍卖冷静期（Volatility Auction Call Session）：持续5分钟，可能追加1次2分钟的市价单延期（Market Order Extension），随后进入最长30秒的随机撮合窗口完成集合竞价定价",
         "en": "Volatility Auction Call Session: lasts 5 minutes, may be followed by one 2-minute Market Order Extension, then a random period of up to 30 seconds before the auction uncrossing",
         "sources": [
@@ -796,7 +843,6 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -840,6 +886,12 @@
       },
       "short_selling": {
         "enum": "covered_only",
+        "spec": {
+          "naked_allowed": false,
+          "uptick_rule": false,
+          "borrow_required": true,
+          "note": "备兑卖空允许、裸卖空禁止；下卖空单前证券须已实际持有/已有交易取得/已落实借券/公司行动产生/境外转本地登记之一；无报升规则、无指定名单"
+        },
         "zh": "允许备兑卖空（covered short selling），禁止裸卖空（naked short selling）：客户下达卖空指令、会员向JSE交易系统录入卖空订单或报告卖空成交前，须满足证券已实际持有（非证书化形式，由会员或客户的CSDP托管）、已有另一笔交易将取得该证券、已落实借券安排、公司行动将产生该证券、或证券将从境外登记簿过户至本地登记簿等条件之一",
         "en": "Covered short selling is permitted; naked short selling is prohibited. Before a client places a short-sell order or a member enters/reports one, the securities must be secured via one of: uncertificated holding with the member's/client's CSDP, another transaction that will yield the securities, a satisfactory borrowing arrangement, a corporate action, or transfer from a foreign register",
         "detail": "enum 取 covered_only（2026-08-30 [ADR-036] 新增枚举值）：允许备兑卖空 / 禁止裸卖空 / 无报升规则 / 无指定标的名单。此前因受控词表缺这一档而只写自由文本，现已归类（sa-tadawul 同为备兑制但另有类报升价格条件与动态限额，仍归 restricted_uptick）。",
@@ -852,8 +904,7 @@
         ],
         "quote": "The JSE equities market rules state that clients may only place sell orders with a member (rule 10.50.1) and members may only insert sell orders into or report trades to the JSE equities trading system (rule 10.50.2) if the securities have been secured and will be available for settlement on the settlement date in one of the following circumstances: the securities are in uncertificated form, owned by the client and held by the CSDP of the member or client ... another transaction has been concluded that will yield the securities; a satisfactory borrowing arrangement is in place ...",
         "confidence": "high",
-        "verified": "2026-08-27",
-        "spec": null
+        "verified": "2026-08-27"
       },
       "block_trade": {
         "zh": "存在场外报告成交类别中的大宗交易（Block Trade，交易类型代码BT），可延迟至收盘后处理时段（18:15后）公布",
@@ -895,6 +946,12 @@
         "quote": null
       },
       "market_maker_scheme": {
+        "spec": {
+          "present": true,
+          "quote_obligation": null,
+          "max_spread_pct": null,
+          "note": "专项证券（ETF/AMETF/ETN/AMC/权证/结构性产品）设做市商提供流动性；现货股票主板/AltX 普通股未见强制做市商要求"
+        },
         "zh": "专项证券（ETF/AMETF/ETN/AMC/权证/结构性产品）设有做市商制度以提供流动性，是该类产品发行人获准挂牌的重要考量之一；现货股票主板/AltX普通股本身未见强制做市商要求的证据",
         "en": "Specialist Securities (ETFs/AMETFs/ETNs/AMCs/warrants/structured products) rely on market makers for liquidity provision, a key consideration for issuers; no evidence of a mandatory market-maker requirement was found for ordinary Main Board/AltX equities",
         "sources": [
@@ -908,7 +965,6 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "connect_schemes": {

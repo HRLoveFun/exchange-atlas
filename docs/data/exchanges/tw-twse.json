@@ -386,6 +386,12 @@
     "market_structure": {
       "trading_sessions": {
         "pre_market": {
+          "spec": {
+            "start": "08:30",
+            "end": "09:00",
+            "kind": "opening_auction",
+            "note": "仅接受限价当日有效(ROD)委托并试算；试算价收盘前 1 分钟波动超 3.5% 的个股延后 2 分钟至 09:02 开盘"
+          },
           "zh": "开盘前委托时段8:30-9:00，仅接受限价当日有效(限价ROD)委托并试算参考行情，9:00以集合竞价开盘（试算成交价于收盘前1分钟波动超逾3.5%的个股延后2分钟至9:02开盘）",
           "en": "Pre-open order-entry window 08:30-09:00; only Limit-ROD orders accepted, with trial reference prices calculated; opens at 09:00 via call auction (a stock whose trial price moves more than 3.5% in the final minute is delayed 2 minutes, opening at 09:02)",
           "quote": "開盤 (08:30~09:00) 集合競價 僅接受限價當日有效(ROD)委託 使用市價單、IOC及FOK委託將會被退單",
@@ -404,10 +410,15 @@
           "verified": "2026-08-16",
           "confidence": "medium",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "continuous_am": {
+          "spec": {
+            "start": "09:00",
+            "end": "13:25",
+            "kind": "continuous",
+            "note": "全程逐笔交易，无午间休市；13:25 起转收盘集合竞价"
+          },
           "zh": "9:00-13:25全程逐笔交易（无午间休市），价格优先、时间优先撮合；13:25起转为收盘集合竞价",
           "en": "Continuous order-driven trading 9:00-13:25 (no lunch break)",
           "quote": "盤中 (09:00~13:25) 原則：逐筆交易 例外：遇瞬間價格穩定措施則暫緩2分鐘後以「集合競價」撮合成交",
@@ -426,10 +437,12 @@
           "verified": "2026-08-16",
           "confidence": "medium",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "lunch_break": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无（9:00-13:30全程连续交易，仅开收盘各有一段集合竞价）",
           "en": "None (continuous trading throughout 9:00-13:30, with only an opening and a closing call auction)",
           "sources": [
@@ -447,12 +460,16 @@
           "verified": "2026-08-16",
           "confidence": "medium",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         },
         "continuous_pm": {
-          "zh": "",
+          "spec": {
+            "kind": "none",
+            "note": "无独立下午时段；连续交易见 continuous_am"
+          },
+          "zh": "无独立下午时段（9:00-13:30 单一连续交易，见 continuous_am）",
+          "en": "No separate afternoon session (a single continuous session 9:00-13:30, see continuous_am)",
           "sources": [
             {
               "title": "集中市场交易制度介绍（TWSE 官网）",
@@ -467,13 +484,17 @@
           ],
           "verified": "2026-08-16",
           "confidence": "medium",
-          "en": null,
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         },
         "after_market": {
+          "spec": {
+            "start": "14:00",
+            "end": "14:30",
+            "kind": "fixed_price",
+            "note": "盘后定价交易：14:00-14:30 委托，14:30 以当日收盘价集合竞价撮合；另有盘后零股交易"
+          },
           "zh": "盘后定价交易14:00-14:30委托、14:30以当日上午收盘价集合竞价撮合；另有盘后零股交易13:40-14:30委托、14:30集合竞价一次撮合",
           "en": "Post-market Fixed-price Trading: orders accepted 14:00-14:30, matched at 14:30 by call auction at the same day's closing price; a separate Post-market Odd-lot Trading session accepts orders 13:40-14:30, matched once by call auction at 14:30",
           "quote": "交易時間：委託申報時間自14:00至14:30，當日14:30採電腦自動交易撮合成交。",
@@ -492,10 +513,12 @@
           "verified": "2026-08-16",
           "confidence": "medium",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "night_session": {
+          "spec": {
+            "kind": "none"
+          },
           "zh": "无",
           "en": "None",
           "sources": [
@@ -513,7 +536,6 @@
           "verified": "2026-08-16",
           "confidence": "medium",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -536,6 +558,12 @@
         "detail": null
       },
       "opening_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "08:30",
+          "auction_end": "09:00",
+          "note": "当市第一次撮合采集合竞价，其后逐笔交易"
+        },
         "zh": "开盘集合竞价：当市第一次撮合采集合竞价，8:30-9:00仅接受限价当日有效(ROD)委托，9:00依集合竞价原则决定开盘价",
         "en": "Opening Call Auction: the first matching of the day uses call auction; only Limit-ROD orders accepted 8:30-9:00, matched at 9:00",
         "quote": "開盤 (08:30~09:00) 集合競價 僅接受限價當日有效(ROD)委託 使用市價單、IOC及FOK委託將會被退單／當市第一次撮合採集合競價，其後至收市前一段時間採逐筆交易，收市彙集一段時間所有買賣申報採集合競價。",
@@ -554,10 +582,15 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "closing_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "13:25",
+          "auction_end": "13:30",
+          "note": "收盘前 1 分钟模拟成交价较前次波动超 3.5% 者延后 2 分钟至 13:33 收盘"
+        },
         "zh": "收盘集合竞价：13:25-13:30汇集一段时间内所有申报以集合竞价方式决定收盘价；收盘前最后1分钟若模拟成交价较前次波动超逾3.5%者，延后2分钟至13:33收盘",
         "en": "Closing Call Auction: orders accumulated 13:25-13:30 are matched by call auction; certain volatile stocks are delayed to 13:33",
         "detail": "收盤採集合競價，時段為13:25~13:30（TWSE「集中市场交易制度介绍」表列：\n「收盤(13:25~13:30) 集合競價 僅接受限價當日有效(ROD)委託」）。\n收盤前最後1分鐘實施暫緩收盤作業：達標準者不於13:30收盤撮合，投資人可於13:31起\n持續增刪改委託，至13:33分收盤（同页「交易方式彙總」）。波動門檻3.5%見營業細則\n第58-3条（漲跌超逾參考價格百分之三點五時延緩撮合二分鐘）。\n",
@@ -576,7 +609,6 @@
         "confidence": "medium",
         "verified": "2026-08-16",
         "enum": null,
-        "spec": null,
         "quote": null
       },
       "matching_principle": {
@@ -693,6 +725,12 @@
           "quote": null
         },
         "main_board": {
+          "spec": {
+            "limit_pct": 10,
+            "reference": "prev_close",
+            "symmetric": true,
+            "note": "基准为当市开盘竞价基准（通常为前一交易日收盘价）；2015-06-01 由 ±7% 放宽至 ±10%；债券 ±5%，新上市普通股首 5 日无涨跌幅（见 other_boards）"
+          },
           "zh": "±10%，以当市开盘竞价基准（通常为前一交易日收盘价）为计算基准，非以前收盘价直接乘幅度；2015年6月1日起由±7%放宽至±10%",
           "en": "±10% of the auction reference price at market opening of the current trading session",
           "quote": "有價證券每日市價升降幅度，除主管機關另有核定者外，股票價格以漲至或跌至當市開盤競價基準百分之十為限／The daily price fluctuation limits of securities...shall be 10 percent above and below the auction reference price at market opening of the current trading session for stocks",
@@ -711,7 +749,6 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -739,6 +776,10 @@
       },
       "circuit_breaker": {
         "enum": "none",
+        "spec": {
+          "type": "none",
+          "note": "无指数级/全市场熔断；仅个股级「瞬间价格稳定措施」（延后撮合而非停止交易），见 volatility_interruption"
+        },
         "zh": "无指数级/全市场熔断机制；仅有个股级「瞬间价格稳定措施」（延后撮合而非全面停止交易）",
         "en": "No index-level/market-wide circuit breaker; only a stock-level \"price stabilization\" measure (delays matching rather than halting trading market-wide)",
         "detail": "本次检索 TWSE 官方交易制度介绍页与营业细则均未见类似美股 MWCB（大盘指数跌幅触发全市场\n停牌）式的独立市场级熔断条文，仅见个股级机制（volatility_interruption 字段）与因个别\n上市公司重大讯息而个别暂停交易的机制（trading_halt_mechanism 字段）。与 jp-jpx 情况\n类似，这是「未找到相关条文」而非「确认没有」，不排除检索范围未覆盖到的可能，如实标注\n为未完全确认，见 OPEN-QUESTIONS。en 字段 2026-08-20 据官方英文版交易制度页核实——该页\n同样只见\"price stabilization\"个股级表述，未见\"circuit breaker\"字样，与中文版结论一致。\n",
@@ -756,10 +797,14 @@
         ],
         "confidence": "medium",
         "verified": "2026-08-16",
-        "spec": null,
         "quote": null
       },
       "volatility_interruption": {
+        "spec": {
+          "dynamic_pct": 3.5,
+          "auction_minutes": 2,
+          "note": "瞬间价格稳定措施：试算成交价超出前 5 分钟滚动加权平均价（9:00-9:05 以开盘价为基准）±3.5% 即暂缓该证券撮合 2 分钟，之后以集合竞价撮合；权证及新上市首 5 日无涨跌幅股票不适用"
+        },
         "zh": "瞬间价格稳定措施：逐笔交易时段内，任一试算成交价超出「前5分钟滚动加权平均价」（9:00-9:05以开盘价为基准）上下3.5%，即暂缓该证券撮合2分钟，2分钟后以集合竞价撮合成交，其后恢复逐笔交易；权证及新上市首5日无涨跌幅股票不适用本措施",
         "en": "Instantaneous Price Stabilization Measures: continuous-auction matching is paused for 2 minutes and resumed via call auction whenever a trial price moves ±3.5% beyond the trailing 5-minute weighted average price",
         "quote": "若有價證券之限價當日有效(限價ROD)委託於撮合前任一試算成交價超過參考價之上下3.5%，將暫緩該有價證券撮合2分鐘，於2分鐘後當盤以集合競價撮合，嗣後恢復為逐筆交易。",
@@ -778,7 +823,6 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -817,6 +861,12 @@
       },
       "short_selling": {
         "enum": "restricted_uptick",
+        "spec": {
+          "naked_allowed": false,
+          "uptick_rule": true,
+          "borrow_required": true,
+          "note": "融资融券/借券卖出，仅限公告标的证券；2013-09-23 起平盘以下可融(借)券卖出标的扩至所有融资融券标的；不在放宽清单内的证券平盘以下不得改价放空"
+        },
         "zh": "融资融券（信用交易）及借券卖出机制；仅限公告之融资融券标的证券方可信用交易。2013年9月23日起，平盘以下得融(借)券卖出之标的已扩大至所有得为融资融券标的之证券（此前范围更窄）；对不在放宽清单内的证券，平盘以下不得改价放空",
         "en": "Margin Trading (融資) and Securities Lending Short Sale (融券/借券賣出); short sales below the reference (last) price are restricted except for securities on the published margin-eligible list",
         "detail": "「个股跌停收盘后次一交易日暂停平盘下放空」的具体细则来自第三方检索摘要，本次未逐条核对官方原文，未纳入 zh 正式表述。",
@@ -834,8 +884,7 @@
           }
         ],
         "confidence": "high",
-        "verified": "2026-08-16",
-        "spec": null
+        "verified": "2026-08-16"
       },
       "block_trade": {
         "zh": "鉅额交易：配对交易(08:00-08:30及09:00-17:00)与逐笔交易(09:00-17:00)两种方式；单一证券达500交易单位以上或金额达1,500万元以上，股票组合5种以上且总金额达1,500万元以上；采T+2交割",
@@ -872,6 +921,12 @@
         "quote": null
       },
       "market_maker_scheme": {
+        "spec": {
+          "present": true,
+          "quote_obligation": true,
+          "max_spread_pct": null,
+          "note": "股票造市者/交易奖励参与者制度（2021-06-30 起，借镜新加坡/韩国），针对优质低流动性股票；证券自营商择一申请；无统一价差上限公布"
+        },
         "zh": "股票造市者及交易奖励参与者制度，2021年6月30日起实施，参考新加坡及韩国市场造市制度；证券自营商可择一申请担任「股票造市者」或「交易奖励参与者」，本公司按获利水准、成交量、周转率等标准每年筛选「优质低流动性股票」并提供经手费折让等奖励",
         "en": "Stock Market Maker and Trading Incentive Participant Scheme (effective 30 June 2021, modeled on Singapore and Korea)",
         "quote": "本制度係針對優質低流動性股票所規劃，主要借鏡新加坡及韓國市場造市制度，本制度於110年6月30日實施。",
@@ -885,7 +940,6 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "connect_schemes": {

@@ -694,32 +694,45 @@
           ],
           "levels": [
             {
-              "threshold_pct": 7
+              "threshold_pct": 7,
+              "halt_minutes": 15
             },
             {
-              "threshold_pct": 13
+              "threshold_pct": 13,
+              "halt_minutes": 15
             },
             {
-              "threshold_pct": 20
+              "threshold_pct": 20,
+              "halt_minutes": null,
+              "day_end": true
             }
           ],
-          "note": "各档停牌时长（一/二级 15 分钟、三级收市）在 detail 里但未逐字核实，暂不入 spec；Phase 1b 找 NYSE Rule 7.12 原文后补 halt_minutes / day_end"
+          "note": "一、二级仅 9:30am-3:25pm 可触发、各每日一次；三级任何时段可触发。停牌后重开集合竞价（[ADR-037] 的 Phase 1b 待办已补 halt_minutes / day_end）"
         },
-        "zh": "全市场熔断（Market-Wide Circuit Breaker, MWCB），基于标普500指数单日跌幅触发三级阈值：7%（一级）、13%（二级）、20%（三级）",
+        "zh": "全市场熔断（Market-Wide Circuit Breaker, MWCB），基于标普500指数单日跌幅触发三级阈值：7%（一级）、13%（二级）、20%（三级）；一、二级暂停交易 15 分钟，三级当日收市",
         "en": "Market-Wide Circuit Breaker (MWCB)",
-        "detail": "由 NYSE、NYSE American、NYSE Arca Rule 7.12 共同规定，跨市场协调停牌，一/二级为暂停交易15分钟，三级为直接收市（本条细则未逐字核实，见 quote 之外的机制说明）。",
+        "detail": "由 NYSE、NYSE American、NYSE Arca Rule 7.12 共同规定，跨市场协调停牌。一、二级仅在 9:30am-3:25pm 触发、每交易日各限一次；三级任何时段触发即停至收市。",
         "sources": [
           {
             "title": "Trading Information（官网）",
             "url": "https://www.nyse.com/trade/trading-information",
             "accessed": "2026-08-13"
+          },
+          {
+            "title": "NYSE Market-Wide Circuit Breakers FAQ（官网 PDF）",
+            "url": "https://nyse.com/publicdocs/nyse/NYSE_MWCB_FAQ.pdf",
+            "accessed": "2026-08-30"
           }
         ],
-        "quote": "A cross-market trading halt can be triggered at three circuit breaker thresholds that measure a decrease against the prior day's closing price of the S&P 500 Index -- 7% (Level 1), 13% (Level 2), and 20% (Level 3) (See NYSE, NYSE American and NYSE Arca Rule 7.12).",
+        "quote": "A cross-market trading halt can be triggered at three circuit breaker thresholds that measure a decrease against the prior day's closing price of the S&P 500 Index -- 7% (Level 1), 13% (Level 2), and 20% (Level 3) (See NYSE, NYSE American and NYSE Arca Rule 7.12). ... Level 1 and Level 2 breaches halt trading for a minimum of 15 minutes. Level 3 breach halts trading for the remainder of the trading day.",
         "confidence": "high",
         "verified": "2026-08-13"
       },
       "volatility_interruption": {
+        "spec": {
+          "halt_minutes": 5,
+          "note": "LULD 个股级：Limit State 持续 15 秒未消化即触发 5 分钟交易暂停（与 us-nasdaq 同一 NMS 计划）；价格带见 price_limits"
+        },
         "zh": "涨跌限价机制（LULD）本身即承担个股级波动性中断功能：价格持续处于价格带边缘会触发交易暂停",
         "en": "LULD serves as the stock-level volatility interruption mechanism",
         "detail": "具体触发后暂停多久、如何恢复的逐条机制（如'Limit State'持续15秒即转'Trading Pause'）本次未在抓取页面中找到明确表述，未采纳未核实的印象。",
@@ -733,8 +746,7 @@
         "quote": "On May 31, 2012, the SEC approved, on a pilot basis, a National Market System Plan, known as the Limit Up/Limit Down (\"LULD\") Plan, to address extraordinary market volatility. The Plan was approved as a permanent rule on April 11, 2019.",
         "confidence": "medium",
         "verified": "2026-08-13",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "trading_halt_mechanism": {
         "zh": "见 circuit_breaker（全市场级）与 volatility_interruption（LULD，个股级）；另有因披露事项的停牌（regulatory halt）未逐条核实",

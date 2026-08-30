@@ -7012,7 +7012,7 @@
       "field_path": "circuit_breaker",
       "label_zh": "熔断机制",
       "label_en": "Circuit Breaker",
-      "zh": "全市场熔断（Market-Wide Circuit Breaker, MWCB），基于标普500指数单日跌幅触发三级阈值：7%（一级）、13%（二级）、20%（三级）",
+      "zh": "全市场熔断（Market-Wide Circuit Breaker, MWCB），基于标普500指数单日跌幅触发三级阈值：7%（一级）、13%（二级）、20%（三级）；一、二级暂停交易 15 分钟，三级当日收市",
       "en": "Market-Wide Circuit Breaker (MWCB)",
       "enum": "index_level",
       "enum_ref": "circuit_breaker_type",
