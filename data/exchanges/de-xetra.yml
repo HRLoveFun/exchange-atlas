@@ -263,25 +263,30 @@ market_structure:
 
   trading_sessions:
     pre_market:
+      spec: {start: "08:00", end: "09:00", kind: continuous, note: "延伸 Xetra 零售服务早盘（2025-12 起），仅零售流动性供应商相关订单，非普通盘前集合竞价；主订单簿 09:00 开盘集合竞价"}
       zh: "延伸Xetra零售服务（Extended Xetra Retail Service）早盘 8:00-9:00 CET，2025年12月起提供，仅零售流动性供应商（RLP）相关订单适用，非普通连续竞价盘前时段"
       en: "Extended Xetra Retail Service early trading 8:00-9:00 a.m. CET, introduced December 2025, applies to Retail Liquidity Provider (RLP) related orders only, not a general continuous-auction pre-market session"
       quote: "Deviating from Paragraph 1, in the Extended Xetra Retail Service, pursuant to § 84, early trading can take place from 8:00 a.m. to 9:00 a.m. and late trading can take place from 5:30 p.m. to 10 p.m."
       confidence: high
     continuous_am:
+      spec: {start: "09:00", end: "17:30", kind: continuous, note: "开盘集合竞价后连续交易；中午前后一次约 2 分钟盘中集合竞价中断后自动恢复"}
       zh: "开盘集合竞价后进入连续交易，主交易时段 9:00-17:30 CET"
       en: "Continuous trading begins after the opening auction; main trading session 9:00 a.m.-5:30 p.m. CET"
       quote: "Trading on Xetra takes place from Mondays to Fridays from 9 until 17:30 CET."
       confidence: high
     lunch_break:
+      spec: {kind: none, note: "无固定午休；中午前后一次盘中集合竞价短暂中断连续交易后自动恢复，具体钟点浮动"}
       zh: "无固定午休；盘中设一次盘中集合竞价（通常在中午前后），中断连续交易后自动恢复"
       en: "No fixed lunch break; an intraday auction (typically around midday) interrupts continuous trading and it resumes automatically afterwards"
       quote: "The intraday auction – conducted as a rule around midday – interrupts continuous trading. It enables liquidity to be concentrated in the middle of the trading day. On its conclusion, continuous trading is resumed."
       confidence: high
     continuous_pm:
+      spec: {kind: none, note: "无上午/下午分段，连续交易见 continuous_am"}
       zh: "同continuous_am，连续交易延续至收盘集合竞价开始"
       en: "Same as continuous_am; continuous trading runs through to the start of the closing auction"
       confidence: medium
     after_market:
+      spec: {start: "17:30", end: "22:00", kind: after_hours_continuous, note: "延伸 Xetra 零售服务晚盘（零售流动性供应商相关订单）；另有收盘集合竞价后 DAX/MDAX/SDAX 成分股最长 5 分钟 Trade-at-Close"}
       zh: "收盘集合竞价后，DAX/MDAX/SDAX成分股设最长5分钟的「盘后定点交易」（Trade-at-Close）；另有延伸Xetra零售服务晚盘 17:30-22:00 CET（零售流动性供应商相关订单）"
       en: "After the closing auction, DAX/MDAX/SDAX constituents have a Trade-at-Close period of up to 5 minutes; separately, Extended Xetra Retail Service late trading runs 5:30 p.m.-10 p.m. CET (RLP-related orders)"
       quote: "Trade-at-Close is triggered after the closing auction for DAX, MDAX and SDAX and lasts for a maximum of five minutes. ... late trading can take place from 5:30 p.m. to 10 p.m."
@@ -291,6 +296,7 @@ market_structure:
       en: "No night session for the standard continuous order book (ends at 5:30 p.m./closing auction); Off-book Trading may under the rules run until 10 p.m., but that is off-book reported trading, not continuous order-book matching — a different mechanism from de-eurex's near-round-the-clock night session"
       quote: "In deviation to Paragraph 1, Off-book Trading can take place from 8:00 a.m. to 10:00 p.m."
       confidence: medium
+      spec: {kind: none, note: "标准连续竞价订单簿无夜盘；场外报告交易可到 22:00，非连续订单簿撮合"}
 
   holidays_note:
     zh: "法兰克福证券交易所非交易日包括元旦、耶稣受难日、复活节星期一、劳动节（5月1日）、圣诞夜、圣诞节等；具体日期逐年公布"
@@ -303,6 +309,7 @@ market_structure:
     confidence: high
 
   opening_mechanism:
+    spec: {type: call_auction, auction_end: "09:00", note: "开盘集合竞价，综合尽可能多订单确定开盘价"}
     zh: "开盘集合竞价（Opening Auction），集中流动性并综合尽可能多的订单确定开盘价"
     en: "Opening Auction; concentrates liquidity and determines the opening price by taking into account as many orders as possible"
     sources:
@@ -313,6 +320,7 @@ market_structure:
     confidence: high
 
   closing_mechanism:
+    spec: {type: call_auction, auction_start: "17:30", note: "收盘集合竞价确定收盘价；DAX/MDAX/SDAX 成分股另设收盘后最长 5 分钟 Trade-at-Close 定点交易"}
     zh: "收盘集合竞价（Closing Auction）确定收盘价；DAX/MDAX/SDAX成分股另设收盘后最长5分钟的Trade-at-Close定点交易"
     en: "Closing Auction determines the closing price; DAX/MDAX/SDAX constituents additionally have a Trade-at-Close period of up to 5 minutes after the closing auction"
     sources:
@@ -379,6 +387,7 @@ market_structure:
       quote: "Continuous trading is interrupted by a volatility interruption whenever the potential next execution price of an order lies outside the dynamic and/or static price range around a reference price."
       confidence: high
     main_board:
+      spec: {type: dynamic, band_pct: null, note: "无固定百分比涨跌停墙；动态/静态价格区间触发波动性中断，区间宽度与参考价由管理董事会逐证券确定，无公开统一百分比表（同集团 de-eurex 模板）"}
       zh: "区间宽度与参考价由管理董事会按每只证券分别确定，本次未在抓取材料中找到公开的统一百分比档位表"
       en: "The size of each price range and its reference prices are set by the Management Board per Security; no single published percentage table was found in the materials fetched this session"
       confidence: medium
@@ -388,6 +397,7 @@ market_structure:
 
   circuit_breaker:
     enum: stock_level
+    spec: {type: stock_level, note: "无基于大盘指数跌幅的全市场熔断；管理董事会有一般性停牌裁量权；波动控制靠个股级波动性中断，见 volatility_interruption"}
     zh: "无独立于波动性中断之外的全市场级熔断；管理董事会另有一般性停牌裁量权（因突发事件或维护公共利益需要），但本次未找到基于大盘指数跌幅触发的全市场熔断机制，与de-eurex/jp-jpx情况相似"
     en: "No market-wide circuit breaker separate from the Volatility Interruption mechanism; the Management Board separately holds general discretionary power to suspend trading (in emergencies or to protect the public interest), but no index-decline-triggered market-wide circuit breaker was found in the materials fetched this session — similar to de-eurex/jp-jpx"
     detail: "与de-eurex的措辞几乎一致：可能是本次检索范围局限，未逐条核实是否存在，见 OPEN-QUESTIONS。"
@@ -399,6 +409,7 @@ market_structure:
     confidence: medium
 
   volatility_interruption:
+    spec: {static_pct: null, dynamic_pct: null, note: "预期成交价超出动态/静态价格区间即触发，切换集合竞价恢复；分「单一波动性中断」与「自动扩展区间」两模型（后者用于 ETF/ETN/ETC）；区间宽度逐证券由管理董事会确定、未公开（同集团 de-eurex 模板）"}
     zh: "波动性中断（Volatility Interruption）：预期成交价超出动态/静态价格区间即触发，切换为集合竞价方式恢复交易；分「单一波动性中断」与「自动扩展区间波动性中断」两种模型（后者用于ETF/ETN/ETC），与de-eurex的机制高度相似（同集团模板）"
     en: "Volatility Interruption: triggered when the potential next execution price falls outside the dynamic/static price range, switching the trading form to an auction; two models — Single Volatility Interruption and Volatility Interruption with automated price range extension (the latter for ETFs/ETNs/ETCs) — closely mirroring de-eurex's mechanism (shared group template)"
     sources:
@@ -424,6 +435,7 @@ market_structure:
     detail: "本次抓取材料未找到对「当日买入证券能否当日卖出」的明确正面陈述（欧盟T+2结算市场一般无此限制，但按铁律不凭常识填写，留空转OPEN-QUESTIONS）。"
 
   short_selling:
+    spec: {note: "普通股票卖空受欧盟《卖空规则》236/2012 约束，须向 BaFin 申报净卖空头寸；FWB《交易所规则》§108 另对结构性产品发行商要求备兑卖空；逐项限制（报升/裸卖空处理）本文件未逐条核实"}
     zh: "普通股票卖空受欧盟《卖空规则》（Regulation (EU) No 236/2012）约束，需向BaFin申报净卖空头寸；FWB《交易所规则》§108另对结构性产品（证书/权证）发行商专设「备兑卖空」要求（发行时须已持有或已锁定足额证券）——与股票现货的卖空监管框架不是同一条规则"
     en: "General equity short selling is governed by the EU Short Selling Regulation (Regulation (EU) No 236/2012), with net short position notification to BaFin; the FWB Exchange Rules §108 separately imposes a covered-short requirement on issuers selling Structured Products (certificates/warrants) — a distinct rule from the general equity short-selling framework"
     detail: "本次未能在BaFin官网找到可直接摘引的净头寸申报门槛具体数值（0.1%申报/0.5%公开披露，常被引用但本次抓取页面未见规范性陈述句），故enum留空未套用short_selling_stance词表，仅描述规则依据本身。"
@@ -458,6 +470,7 @@ market_structure:
     confidence: high
 
   market_maker_scheme:
+    spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "指定发起人（Designated Sponsor）为流动性较低证券提供双边约束报价，须守最大点差/最小报价量/最小报价时长标准；另有「受监管做市商」层级；具体数值未公开统一表"}
     zh: "指定发起人制度（Designated Sponsor）：为流动性较低证券提供双边约束报价的做市参与者，须遵守最大点差、最小报价量、最小报价时长等质量标准；因其报价活动原则上亦受MiFID II/MiFIR监管做市商规则约束。另有「受监管做市商」（Regulated Market Maker）层级"
     en: "Designated Sponsor scheme: market participants posting binding two-way quotes for less liquid Securities, subject to quality criteria (maximum spread, minimum quote volume, minimum quotation duration); as quoting participants they are in principle also subject to the MiFID II/MiFIR Regulated Market Maker rules. A separate \"Regulated Market Maker\" tier also exists"
     sources:
