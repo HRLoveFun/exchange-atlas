@@ -365,6 +365,22 @@ market_structure:
         accessed: 2026-08-16
     confidence: medium
 
+  execution_model:
+    enum: order_driven
+    spec: {electronic: true, dealer_intermediated: false, note: "全电子中央订单簿、价格优先时间优先、逐笔撮合（2020-03 起，此前为每 5 秒集合竞价）+ 开收盘集合竞价；一般股票无做市商。2021-06-30 起对『优质低流动性股票』设股票造市者 / 交易奖励参与者制度（借镜新加坡 / 韩国），属订单驱动之上的补充"}
+    zh: "订单驱动：集中市场为全电子中央订单簿，依价格优先、时间优先原则逐笔撮合成交；一般股票不设做市商。仅对经交易所每年筛选的『优质低流动性股票』实施股票造市者及交易奖励参与者制度"
+    en: "Order-driven: the centralised market is a fully electronic central order book matching order-by-order on price-then-time priority; ordinary stocks have no market makers. A Stock Market Maker and Trading Incentive Participant scheme applies only to 'quality low-liquidity stocks' selected annually by the Exchange"
+    detail: "enum 依据既有 matching_principle（价格优先、时间优先）与 market_maker_scheme（造市制度限『优质低流动性股票』，confidence high）综合判定：一般股票为纯订单驱动，造市为补充。dealer_intermediated 记 false。"
+    sources:
+      - title: 台湾证券交易所股份有限公司营业细则 第58-2条
+        url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007304
+        accessed: 2026-08-16
+      - title: 股票造市制度专区（TWSE 官网）
+        url: https://www.twse.com.tw/zh/products/system/stock-market.html
+        accessed: 2026-08-16
+    quote: "撮合依價格優先及時間優先原則成交，買賣申報之優先順序依下列原則決定：一 價格優先原則：較高買進申報優先於較低買進申報，較低賣出申報優先於較高賣出申報／本制度係針對優質低流動性股票所規劃，主要借鏡新加坡及韓國市場造市制度"
+    confidence: medium
+
   matching_principle:
     enum: price_time
     zh: "价格优先、时间优先"
@@ -376,15 +392,27 @@ market_structure:
         accessed: 2026-08-16
 
   order_types:
+    spec:
+      market: true
+      limit: true
+      tif: [day, ioc, fok]
+      note: "价格种类（限价 / 市价）× 存续类别（当日有效 ROD / 立即成交或取消 IOC / 全部成交或取消 FOK）共 6 种委托方式；逐笔交易时段皆可用，开收盘集合竞价时段仅接受限价 ROD。无冰山 / 隐藏 / 止损订单类型"
     zh: "六种委托方式：价格种类（限价/市价）× 存续类别（当日有效ROD / 立即成交或取消IOC / 全部成交或取消FOK）；逐笔交易时段六种皆可用，开收盘集合竞价时段仅接受限价ROD"
     en: "Six order types: Limit/Market price x Rest-of-Day (ROD) / Immediate-or-Cancel (IOC) / Fill-or-Kill (FOK); only Limit-ROD accepted during call auctions"
     quote: "依價格種類(限價、市價)及存續類別(當日有效：Rest of Day，ROD、立即成交或取消：Immediate or Cancel, IOC、全部成交或取消：Fill or Kill, FOK)搭配，共有6種委託方式供投資人選擇使用。"
+    confidence: medium
     sources:
       - title: 集中市场交易制度介绍
         url: https://www.twse.com.tw/zh/products/system/trading.html
         accessed: 2026-08-16
 
   tick_size:
+    spec:
+      regime: tiered_by_price
+      min_tick: null
+      currency: TWD
+      full_table_note: "6 档累退表（营业细则第 62 条）：股价 < NT$10 → NT$0.01；NT$10 至 < NT$50 → NT$0.05；NT$50 至 < NT$100 → NT$0.10；NT$100 至 < NT$500 → NT$0.50；NT$500 至 < NT$1,000 → NT$1；NT$1,000 及以上 → NT$5"
+      note: "min_tick 留 null——最细档 NT$0.01 仅适用于低价股；档位随股价累退放大"
     zh: "分级累退：股价未满10元为0.01元，10元至未满50元为0.05元，50元至未满100元为0.1元，100元至未满500元为0.5元，500元至未满1000元为1元，1000元以上为5元"
     en: "Tiered by price: under NT$10 = NT$0.01; NT$10-<50 = NT$0.05; NT$50-<100 = NT$0.10; NT$100-<500 = NT$0.50; NT$500-<1,000 = NT$1; NT$1,000+ = NT$5"
     detail: |
@@ -494,6 +522,34 @@ market_structure:
       - title: 集中市场交易制度介绍
         url: https://www.twse.com.tw/zh/products/system/trading.html
         accessed: 2026-08-16
+
+  error_trade_rule:
+    spec:
+      bust_allowed: false
+      review_window_min: null
+      deviation_threshold_pct: null
+      resolution: no_bust
+      note: "无交易所层级的『明显错误成交作废』机制——成交一经撮合即通知委托人并制作凭证。证券经纪商受托买卖发生错误的，依《证券经纪商受托买卖错帐及更正帐号处理作业要点》以经纪商名义开立的『错帐处理专户』处理：该专户买卖视同一般交易并按规定缴纳证券交易税，损益由经纪商承担；错误持仓在专户内平仓，原成交不撤销。事前防线：瞬间价格稳定措施（±3.5% 暂缓撮合 2 分钟）与每日涨跌幅限制"
+    zh: "台湾证券交易所没有『成交价偏离参考价达某百分比、限时申请复核作废』的常规错误交易处理机制。买卖申报一经撮合成交，经纪商即通知委托人并制作凭证。证券经纪商受托买卖发生错误的，依营业细则以经纪商自己名义开立『错帐处理专户』处理——该专户买卖视同一般交易、按规定缴纳证券交易税，损益由经纪商承担，错误持仓在专户内平仓，原成交不予撤销"
+    en: "The TWSE has no routine erroneous-trade process of the US/EU type (a deviation threshold plus a time-limited request for review and cancellation). Once orders are matched, the broker notifies the client and prepares the records. Where a securities broker makes an execution error, it is handled under the Operating Rules through an 'error-account' opened in the broker's own name — trades in that account are treated as ordinary trades subject to securities transaction tax, gains and losses are borne by the broker, the erroneous position is closed out within the account, and the original trade is not cancelled"
+    detail: "台湾证券交易所营业细则第 87 条 + 《证券经纪商受托买卖错帐及更正帐号处理作业要点》。与 trading_halt_mechanism（讯息面暂停）视角不同。resolution 记 no_bust：错误由经纪商端错帐专户承担，成交本身不作废。台湾与日本 / 香港证券市场同属『成交终局』一类。"
+    sources:
+      - title: 台湾证券交易所股份有限公司营业细则 第87条 / 第68条
+        url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007304
+        accessed: 2026-08-16
+    quote: "證券經紀商因受託買賣發生錯誤，申報錯帳及更正帳號應依本公司訂定之「證券經紀商受託買賣錯帳及更正帳號處理作業要點」規定辦理。證券經紀商應以自己名義開立錯帳處理專戶，並編列帳號填註其公司營利事業統一編號，於客戶分戶帳內設戶記載。錯帳處理專戶所為之買賣，視同一般交易按規定繳納證券交易稅"
+    confidence: high
+
+  order_book_transparency:
+    zh: "盘前：中央订单簿公开——开市前及收市前的一段时间即时揭示试算成交价与数量及试算未成交的最高五档买进、最低五档卖出申报价格与数量；交易时间内即时揭示成交价量及未成交的最高五档买进、最低五档卖出申报价量。集中市场不提供冰山 / 隐藏 / 未披露委托类型。盘中另有『瞬间价格稳定措施』限制价格跳动。盘后 / 大额：鉅额交易单独进行"
+    en: "Pre-trade: the central order book is public — for a period before the open and before the close the Exchange discloses in real time the trial matched price and quantity and the best five unmatched bid and best five unmatched ask prices and quantities; during trading hours it discloses executed prices and quantities and the best five unmatched bid/ask prices and quantities. The centralised market offers no iceberg, hidden or undisclosed order types. Block trades run separately"
+    detail: "字段管本所订单簿内部的（非）展示流动性——集中市场订单簿五档揭示、无非展示订单类型。行情层级 / 收费见第十章 market_data_levels。quote 引自营业细则第 58-2 条。"
+    sources:
+      - title: 台湾证券交易所股份有限公司营业细则 第58-2条
+        url: https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL007304
+        accessed: 2026-08-16
+    quote: "本公司於開市（即交易時間開始）前之三十分鐘及收市（即交易時間結束）前一段時間，即時揭示試算成交價格與數量及試算未成交之最高五檔買進及最低五檔賣出申報價格與數量；另交易時間內即時揭示成交價格與數量，及未成交之最高五檔買進及最低五檔賣出申報價格與數量。"
+    confidence: high
 
   intraday_reversal:
     enum: mixed
