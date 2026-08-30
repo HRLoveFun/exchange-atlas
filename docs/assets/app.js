@@ -988,6 +988,285 @@
   }
 
   // ══════════════════════════════════════════════
+  // 交易成本瀑布（v2.0 Phase 3 第二棒：数据层 ADR-045 / 渲染层 ADR-047，见 PROJECT/DECISIONS.md）
+  //   镜像双瀑布：中轴 = 0 bp；左半 = 买入侧、右半 = 卖出侧，向中间对齐。
+  //   六费种（佣金 / 交易所费 / 清算费 / 监管费 / 印花税 / 金融交易税）逐行，
+  //   spec.side（buy/sell/both）决定落在哪一侧；底部买 / 卖小计 + 往返合计。
+  //   数据源：第十一章 costs.* 的 spec 层（cost_layer 形状：rate + unit + side +
+  //   components / tiered / cap / type:none / rate:null）。归一到 bp 在渲染层做（ADR-045 轴③）。
+  //   诚实三态：rate 有值 → 实心条 + bp 数；rate:null → 幽灵虚线条 +「议价 / 未披露」；
+  //   type:none → 中轴细线 +「不征收」。资本利得税 / 股息预扣税为持有 / 退出税，
+  //   非按笔成本，另列图下方（ADR-045 轴①）。手写 SVG，不引图表库。
+  // ══════════════════════════════════════════════
+  var CW_DEFAULT_EX = "hk-hkex";
+  var CW_ASSUMED_NOTIONAL = 100000; // 单笔成交金额（当地货币），折算定额 / 按笔费种
+  var CW_ASSUMED_PRICE = 50;        // 单股价格（当地货币），折算按股费种
+  var CW_FEE_ORDER = ["commission_structure", "exchange_fees", "clearing_fees", "regulatory_fees", "stamp_duty", "financial_transaction_tax"];
+  var CW_FEE_META = {
+    commission_structure:      { zh: "佣金", color: "var(--fg-faint)" },
+    exchange_fees:             { zh: "交易所费", color: "var(--accent)" },
+    clearing_fees:             { zh: "清算费", color: "var(--info)" },
+    regulatory_fees:           { zh: "监管费", color: "var(--fg-muted)" },
+    stamp_duty:                { zh: "印花税", color: "var(--danger)" },
+    financial_transaction_tax: { zh: "金融交易税", color: "var(--warn)" }
+  };
+
+  // spec（cost_layer 形状）→ null（无 spec）| {none} | {ghost,tiered} | {bp,tiered,capped,components,approx}
+  function cwToBp(spec) {
+    if (!spec) return null;
+    if (spec.type === "none") return { none: true };
+    var comps = spec.components && spec.components.length ? spec.components : null;
+    var rate = spec.rate;
+    if (comps) {
+      var sum = 0, ok = false;
+      comps.forEach(function (c) { if (typeof c.rate === "number") { sum += c.rate; ok = true; } });
+      if (ok) rate = sum;
+    }
+    if (typeof rate !== "number") return { ghost: true, tiered: !!spec.tiered };
+    var bp = null, approx = false;
+    switch (spec.unit) {
+      case "pct": bp = rate * 100; break;
+      case "permille": bp = rate * 10; break;
+      case "bp": bp = rate; break;
+      case "per_lakh": bp = rate / 1e5 * 1e4; break;
+      case "per_crore": bp = rate / 1e7 * 1e4; break;
+      case "per_million": bp = rate / 1e6 * 1e4; break;
+      case "per_share": bp = rate / CW_ASSUMED_PRICE * 1e4; approx = true; break;
+      case "flat_per_trade": case "flat_per_settlement": case "flat_per_order":
+        bp = rate / CW_ASSUMED_NOTIONAL * 1e4; approx = true; break;
+      default: return { ghost: true, tiered: !!spec.tiered };
+    }
+    return { bp: bp, tiered: !!spec.tiered, capped: spec.cap != null, components: !!comps, approx: approx };
+  }
+  function cwSide(spec) {
+    return spec && (spec.side === "buy" || spec.side === "sell") ? spec.side : "both";
+  }
+  function cwFmtBp(v) {
+    if (v >= 10) return v.toFixed(0);
+    if (v >= 1) return v.toFixed(1);
+    return v.toFixed(2);
+  }
+  // 小计 / 往返合计保留 1 位小数，避免「11 + 11 = 23」这类肉眼不一致
+  function cwFmtBp2(v) {
+    if (v >= 100) return v.toFixed(0);
+    if (v >= 1) return v.toFixed(1);
+    return v.toFixed(2);
+  }
+  function cwResolveId(params) {
+    var l = cache.manifest.exchanges;
+    if (l.some(function (e) { return e.id === params.id; })) return params.id;
+    return l.some(function (e) { return e.id === CW_DEFAULT_EX; }) ? CW_DEFAULT_EX : l[0].id;
+  }
+  function cwCell(id, key, inner, title) {
+    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(key) +
+      '" data-chapter="costs">' + (title ? "<title>" + esc(title) + "</title>" : "") + inner + "</g>";
+  }
+  function cwTitle(r) {
+    var s = (r.env && r.env.spec) || {};
+    var parts = [r.meta.zh + "："];
+    if (r.d && typeof r.d.bp === "number") parts.push("≈ " + cwFmtBp(r.d.bp) + " bp/边");
+    if (s.unit) parts.push("原始 " + (s.rate != null ? s.rate : "?") + " " + s.unit);
+    if (r.d && r.d.components) parts.push("多项分征费求和");
+    if (r.d && r.d.tiered) parts.push("▸阶梯首档 / 代表档");
+    if (r.d && r.d.capped) parts.push("^设封顶（bp 未扣封顶）");
+    if (r.d && r.d.approx) parts.push("≈按假设成交额折算");
+    parts.push("side=" + r.side);
+    return parts.join(" · ");
+  }
+
+  function renderCostWaterfall(app, params) {
+    var list = cache.manifest.exchanges;
+    var id = cwResolveId(params);
+    var toolbar = '<div class="view-toolbar">' +
+      '<label for="cwExchange">市场 Market</label>' +
+      '<select id="cwExchange" data-role="cw-exchange">' +
+      list.map(function (e) {
+        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
+      }).join("") + "</select>" +
+      '<span class="td-tb-note">左 = 买入侧 · 右 = 卖出侧 · 归一到 bp of 成交额 · 点击任意条看出处</span>' +
+      "</div>";
+    app.innerHTML = toolbar + '<div class="loading">加载成本瀑布中…</div>';
+    return loadExchange(id).then(function (data) {
+      var cur = parseHash();
+      if ((cur.view && cur.view !== "cost-waterfall") || cwResolveId(cur) !== id) return;
+      app.innerHTML = toolbar + cwBuild(id, data);
+    }).catch(function (e) {
+      app.innerHTML = toolbar + '<p style="color:var(--danger)">加载失败：' + esc(e.message) + "</p>";
+    });
+  }
+
+  function cwBuild(id, data) {
+    var costs = (data.chapters && data.chapters.costs) || {};
+    var ms = (data.chapters && data.chapters.market_structure) || {};
+    var n = function (v) { return (+v).toFixed(1); };
+
+    var rows = CW_FEE_ORDER.map(function (key) {
+      var env = costs[key] || null;
+      var d = cwToBp(env && env.spec);
+      return { key: key, env: env, meta: CW_FEE_META[key], d: d, side: cwSide(env && env.spec) };
+    });
+
+    var buySum = 0, sellSum = 0, vMax = 0;
+    rows.forEach(function (r) {
+      if (!r.d || typeof r.d.bp !== "number") return;
+      if (r.side !== "sell") buySum += r.d.bp;
+      if (r.side !== "buy") sellSum += r.d.bp;
+      vMax = Math.max(vMax, r.d.bp);
+    });
+    vMax = Math.max(vMax, buySum, sellSum, 2);
+    var vStep = vMax > 40 ? 10 : vMax > 16 ? 5 : vMax > 8 ? 2 : vMax > 3 ? 1 : 0.5;
+    var vTop = Math.ceil(vMax / vStep) * vStep;
+
+    var W = 960, labelW = 118, PL = 14, PR = 14;
+    var half = (W - PL - PR - labelW) / 2;
+    var cx = PL + labelW + half;
+    var PT = 112, rowH = 40, barH = 19, padOut = 54;
+    var sc = function (v) { return Math.max(0, v) / vTop * (half - padOut); };
+    var totalY = PT + CW_FEE_ORDER.length * rowH + 14;
+    var axisY = totalY + rowH + 6;
+    var H = axisY + 34;
+    var g = [];
+
+    g.push('<defs><pattern id="cwGhost" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
+      '<rect width="6" height="6" fill="transparent"/><line x1="0" y1="0" x2="0" y2="6" stroke="var(--fg-faint)" stroke-width="1.4" opacity="0.55"/></pattern></defs>');
+
+    // 中轴 + 顶部侧标
+    g.push('<line x1="' + n(cx) + '" x2="' + n(cx) + '" y1="' + (PT - 22) + '" y2="' + n(axisY + 4) + '" stroke="var(--border-strong)" stroke-width="1.2"/>');
+    g.push('<text x="' + n(cx) + '" y="' + (PT - 26) + '" text-anchor="middle" class="cw-0">0</text>');
+    g.push('<text x="' + n(cx - 14) + '" y="' + (PT - 26) + '" text-anchor="end" class="cw-side">← 买入 BUY</text>');
+    g.push('<text x="' + n(cx + 14) + '" y="' + (PT - 26) + '" text-anchor="start" class="cw-side">卖出 SELL →</text>');
+
+    rows.forEach(function (r, i) {
+      var y = PT + i * rowH, yc = y + barH / 2 + 4;
+      g.push('<text x="' + (PL + labelW - 8) + '" y="' + n(yc) + '" text-anchor="end" class="cw-flabel">' + esc(r.meta.zh) + '</text>');
+      g.push('<line x1="' + PL + '" x2="' + (W - PR) + '" y1="' + (y + rowH - 6) + '" y2="' + (y + rowH - 6) + '" stroke="var(--border)" stroke-width="0.5" opacity="0.5"/>');
+
+      if (!r.d) {
+        g.push(cwCell(id, r.key,
+          '<text x="' + n(cx + 8) + '" y="' + n(yc) + '" class="cw-none">未结构化（本所该费种未填 spec）</text>',
+          r.meta.zh + "：本所该费种数据尚无结构化 spec，点击看散文字段"));
+        return;
+      }
+      if (r.d.none) {
+        g.push(cwCell(id, r.key,
+          '<rect x="' + n(cx - 26) + '" y="' + n(y + barH / 2) + '" width="52" height="2" fill="var(--border-strong)"/>' +
+          '<text x="' + n(cx + 32) + '" y="' + n(yc) + '" class="cw-none">不征收 / 不适用</text>',
+          r.meta.zh + "：本市场不征该费种 / 税目（type: none）"));
+        return;
+      }
+      [-1, 1].forEach(function (dir) {
+        var active = dir < 0 ? r.side !== "sell" : r.side !== "buy";
+        if (!active) {
+          g.push('<line x1="' + n(cx + dir * 5) + '" x2="' + n(cx + dir * 19) + '" y1="' + n(y + barH / 2 + 1) + '" y2="' + n(y + barH / 2 + 1) +
+            '" stroke="var(--border-strong)" stroke-width="1" stroke-dasharray="2 2"/>');
+          return;
+        }
+        if (typeof r.d.bp !== "number") {
+          var gw = 34;
+          g.push(cwCell(id, r.key,
+            '<rect x="' + n(dir < 0 ? cx - gw : cx) + '" y="' + n(y + 1) + '" width="' + gw + '" height="' + barH +
+            '" fill="url(#cwGhost)" stroke="var(--fg-faint)" stroke-width="1" stroke-dasharray="3 2" opacity="0.85"/>' +
+            '<text x="' + n(dir < 0 ? cx - gw - 4 : cx + gw + 4) + '" y="' + n(yc) + '" text-anchor="' + (dir < 0 ? "end" : "start") +
+            '" class="cw-ghost-l">' + (r.d.tiered ? "阶梯·" : "") + '议价/未披露</text>',
+            cwTitle(r)));
+          return;
+        }
+        var w = Math.max(1.5, sc(r.d.bp));
+        var bx = dir < 0 ? cx - w : cx;
+        var mark = (r.d.tiered ? "▸" : "") + (r.d.capped ? "^" : "") + (r.d.approx ? "≈" : "");
+        g.push(cwCell(id, r.key,
+          '<rect x="' + n(bx) + '" y="' + n(y + 1) + '" width="' + n(w) + '" height="' + barH + '" fill="' + r.meta.color + '" opacity="0.82"/>' +
+          '<text x="' + n(dir < 0 ? bx - 4 : bx + w + 4) + '" y="' + n(yc) + '" text-anchor="' + (dir < 0 ? "end" : "start") +
+          '" class="cw-vlab">' + esc(cwFmtBp(r.d.bp) + (mark ? " " + mark : "")) + '</text>',
+          cwTitle(r)));
+      });
+    });
+
+    // 小计行
+    g.push('<text x="' + (PL + labelW - 8) + '" y="' + n(totalY + barH / 2 + 4) + '" text-anchor="end" class="cw-flabel cw-total-l">合计</text>');
+    [[-1, buySum], [1, sellSum]].forEach(function (p) {
+      var dir = p[0], v = p[1], w = Math.max(1.5, sc(v));
+      var bx = dir < 0 ? cx - w : cx;
+      g.push('<rect x="' + n(bx) + '" y="' + n(totalY + 1) + '" width="' + n(w) + '" height="' + barH + '" fill="var(--fg)" opacity="0.86"/>');
+      g.push('<text x="' + n(dir < 0 ? bx - 4 : bx + w + 4) + '" y="' + n(totalY + barH / 2 + 4) + '" text-anchor="' + (dir < 0 ? "end" : "start") +
+        '" class="cw-vlab cw-total-v">' + cwFmtBp2(v) + ' bp</text>');
+    });
+
+    // bp 刻度轴（双向）
+    g.push('<line x1="' + n(cx - sc(vTop)) + '" x2="' + n(cx + sc(vTop)) + '" y1="' + n(axisY) + '" y2="' + n(axisY) + '" stroke="var(--border)" stroke-width="1"/>');
+    for (var t = 0; t <= vTop + 0.001; t += vStep) {
+      [-1, 1].forEach(function (dir) {
+        if (t === 0 && dir > 0) return;
+        var xx = cx + dir * sc(t);
+        g.push('<line x1="' + n(xx) + '" x2="' + n(xx) + '" y1="' + n(axisY) + '" y2="' + n(axisY + 4) + '" stroke="var(--border-strong)" stroke-width="1"/>');
+        g.push('<text x="' + n(xx) + '" y="' + n(axisY + 16) + '" text-anchor="middle" class="cw-tick">' + t + '</text>');
+      });
+    }
+    g.push('<text x="' + n(cx) + '" y="' + n(axisY + 30) + '" text-anchor="middle" class="cw-axis-name">bp of 成交额（1 bp = 0.01%）· 买卖两侧各自计</text>');
+
+    var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
+    var rt = buySum + sellSum;
+    g.push('<text x="' + PL + '" y="34" class="td-title">' + esc(exName) + ' · 交易成本瀑布</text>');
+    var sub;
+    if (buySum === 0 && sellSum === 0) {
+      sub = "显性成本按笔 / 按合约计，本所未摘引到可折算为 bp 的费率（见下方各费种）";
+    } else {
+      sub = "单边显性成本 买 " + cwFmtBp2(buySum) + " bp / 卖 " + cwFmtBp2(sellSum) + " bp　·　往返合计 ≈ " + cwFmtBp2(rt) + " bp" +
+        (rt >= 1 ? "（约 " + (rt / 100).toFixed(rt >= 10 ? 2 : 3) + "%）" : "");
+    }
+    g.push('<text x="' + PL + '" y="55" class="cw-rt">' + esc(sub) + "</text>");
+    if (rt > 0 && rt < 2) {
+      g.push('<text x="' + PL + '" y="73" class="cw-rt cw-rt-note">按笔显性成本极低；实际成本主要在买卖价差 / 市场冲击，不在本项目覆盖范围</text>');
+    }
+
+    var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + ' ' + n(H) + '" class="td-svg cw-svg" role="img" aria-label="' +
+      esc(exName) + ' 交易成本瀑布">' + g.join("") + "</svg></div>";
+    return cwLegend() + cwBanner(ms) + svg + cwTaxPanel(id, data) + cwProse();
+  }
+
+  function cwBanner(ms) {
+    var ref = ms.price_limits && ms.price_limits.main_board && ms.price_limits.main_board.spec && ms.price_limits.main_board.spec.reference;
+    if (ref === "prev_settlement") {
+      return '<p class="td-banner td-banner-soft">纯衍生品交易所：费用多按合约计（非按成交额比例），下图 bp 折算仅供参考，多数费种未摘引费率。</p>';
+    }
+    return "";
+  }
+
+  function cwLegend() {
+    var items = CW_FEE_ORDER.map(function (k) {
+      return '<span><i class="td-sw" style="background:' + CW_FEE_META[k].color + '"></i>' + CW_FEE_META[k].zh + '</span>';
+    }).join("");
+    return '<div class="td-legend">' + items +
+      '<span><i class="td-sw" style="background:var(--fg);opacity:.86"></i>买 / 卖合计</span>' +
+      '<span><i class="td-sw td-sw-ghost"></i>幽灵条 = 议价 / 未披露</span>' +
+      '<span class="cw-mk">▸阶梯首档　^设封顶　≈按假设折算</span>' +
+      "</div>";
+  }
+
+  function cwTaxPanel(id, data) {
+    var costs = (data.chapters && data.chapters.costs) || {};
+    function line(key, label) {
+      var env = costs[key];
+      var v = env && (state.langMode === "en" && env.en ? env.en : env.zh);
+      return '<button type="button" class="cw-tax-line' + (v ? "" : " td-chip-empty") +
+        '" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(key) + '" data-chapter="costs" title="' + esc(v || "—") + '">' +
+        '<span class="cw-tax-k">' + esc(label) + '</span><span class="cw-tax-v">' + esc(v || "暂缺，见 OPEN-QUESTIONS") + '</span></button>';
+    }
+    return '<div class="td-chips-label">持有 / 退出税（非按笔成本，另计）</div>' +
+      '<div class="cw-tax-lines">' + line("capital_gains_tax", "资本利得税") + line("dividend_withholding_tax", "股息预扣税") + "</div>";
+  }
+
+  function cwProse() {
+    return '<p class="td-prose">本图由第十一章 <code>costs.*</code> 的结构化 <code>spec</code> 层驱动（见 ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-045</a>）。' +
+      '六费种为按笔（per-trade）显性成本，按 <code>side</code> 落在买入侧 / 卖出侧 / 双边。各费种原始计量单位不一' +
+      '（% / ‰ / bp / 每股 / 每十万 / 定额），此处统一折算为 bp of 成交额：按股 / 定额费种按「假设单笔成交金额 100,000（当地货币）、' +
+      '假设股价 50」折算（标 ≈）；阶梯费率取首档 / 代表档（标 ▸）；封顶（标 ^）在该假设成交额下未必触及、bp 未扣封顶。' +
+      '实心条为已摘引官方费率；幽灵虚线条为「费种存在、无可摘引费率」（市场化议价的佣金、maker-taker 净费率等）。' +
+      '买卖价差等隐性成本按本项目覆盖边界不收录（见 CLAUDE.md）。规则以各交易所官方发布为准，不构成投资建议。</p>';
+  }
+
+  // ══════════════════════════════════════════════
   // 出处浮层
   // ══════════════════════════════════════════════
   function openCellOverlay(exchangeId, fieldPath, chapterId) {
@@ -1090,6 +1369,7 @@
     else if (view === "health") renderHealth(app, params);
     else if (view === "timezone") renderTimezone(app, params);
     else if (view === "matrix") renderMatrix(app, params);
+    else if (view === "cost-waterfall") renderCostWaterfall(app, params);
     else renderTradingDay(app, params);
   }
 
@@ -1136,6 +1416,8 @@
       setHash(p3);
     } else if (role === "td-exchange") {
       setHash({ view: "trading-day", id: e.target.value });
+    } else if (role === "cw-exchange") {
+      setHash({ view: "cost-waterfall", id: e.target.value });
     }
   });
   document.addEventListener("keydown", function (e) {
