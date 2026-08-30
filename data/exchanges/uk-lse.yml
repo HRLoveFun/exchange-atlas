@@ -1149,6 +1149,7 @@ costs:
     detail: "英国经纪商向客户收取的佣金由市场自行竞争定价，交易所自身规则未见对经纪商佣金水平的直接规定——与NYSE的情形类似，本次未找到LSE/FCA对此的专门表述，留空不硬凑。"
 
   exchange_fees:
+    spec: {rate: 0.45, unit: bp, side: both, tiered: true, cap: 15000, cap_scope: per_month, currency: GBP, note: "Standard value traded scheme：首档 0.45 bp，其后 0.35/0.25 bp（按月累计成交额）；流动性提供计划对被动成交返佣"}
     zh: "会员交易费：按月度累计成交金额分档收取基点费率（Standard value traded scheme：首£35亿0.45个基点，其后£50亿0.35个基点，超出部分0.25个基点，月度封顶£15,000），另设流动性提供计划（Liquidity Provider Scheme）对被动成交给予返佣（负费率）；发行人上市费：股票类新上市按市值分级累进收取（如£0-5百万区间为最低费£17,600，此后每百万递增£2,305……最高累计£698,000+20%增值税），另按上市证券市值每年收取年费（如£175百万市值对应年费£11,750，按每百万£60递增，上限£265,000）"
     en: "Member trading fees: tiered basis-point rates by monthly cumulative value traded (Standard value traded scheme: 0.45bp on the first £3.5bn, 0.35bp on the next £5bn, 0.25bp thereafter, capped at £15,000/month), plus a Liquidity Provider Scheme offering rebates (negative fees) for passive execution; issuer fees: admission fees for new equity listings are tiered by market capitalisation (e.g. minimum fee £17,600 for the £0-5m band, then £2,305 per additional £1m... cumulative maximum £698,000 plus 20% VAT), plus an annual fee based on listed market capitalisation (e.g. £11,750 minimum for a £175m market cap, £60 per £1m thereafter, capped at £265,000)"
     sources:
@@ -1162,6 +1163,7 @@ costs:
     confidence: high
 
   clearing_fees:
+    spec: {rate: 0.85, unit: flat_per_settlement, currency: GBP, side: both, note: "LCH EquityClear 结算费：英国本地 £0.85/笔（+ £0.06 信息传递费）、Euroclear Bank €5.50/笔；不含主 ad valorem 清算费（本次无可提取文本）；不对公司行动单独收费"}
     zh: "LCH Ltd EquityClear按月向清算会员后付制收取结算环节费用（每笔结算一次性收取，另有信息传递费），费率按结算所在市场区分，如英国本地结算£0.85/笔（另收信息传递费£0.06/笔），Euroclear Bank结算€5.50/笔（信息传递费£0.07/笔）；该费用为结算通道的「过手成本」，不含托管机构/CSD自身可能另收的费用，且明确不对公司行动（corporate action）或收益派发单独收费"
     en: "LCH Ltd EquityClear charges clearing members a monthly, in-arrears settlement fee per settlement instruction, plus a separate messaging fee, tiered by settlement location — e.g. GBP 0.85 per settlement for UK settlement (plus GBP 0.06 messaging fee), EUR 5.50 for Euroclear Bank settlement (plus GBP 0.07 messaging fee). This is a settlement-leg pass-through cost, excludes any additional fees the CSD/agent itself may charge, and EquityClear in LCH Ltd explicitly does not charge a corporate-action or income-payment fee"
     detail: |
@@ -1181,6 +1183,7 @@ costs:
     confidence: high
 
   regulatory_fees:
+    spec: {rate: null, note: "FCA 收费针对招股书审核/发行人年费/保荐人注册，非交易环节；PTM Levy 等第三方按笔征费本字段未涵盖"}
     zh: "官方名册（Official List）层面的申请/变更/移除/暂停/恢复本身不向FCA缴纳费用；仅招股说明书审批需缴费（文件审核费，Vetting Fee，在首次提交草案时缴纳）；发行人另按UKLR缴纳年度定期费用（金额见FCA Handbook FEES 4 Annex 14）；保荐人（Sponsor）注册需缴纳申请费并按年缴纳年费。这构成独立于交易所自身上市/交易费用（见costs.exchange_fees、Fees for Issuers）之外的另一层监管费用，与交易所自身收费主体不同（FCA vs LSE）"
     en: "Applications, amendments, removals, suspensions and restorations on the Official List are not themselves subject to an FCA fee; only prospectus approval carries a fee (a document-vetting fee, due on first submission of a draft); issuers also pay annual periodic fees under UKLR (amounts set out in FCA Handbook FEES 4 Annex 14); sponsors pay an application fee to join the sponsor register plus an annual fee. This is a regulatory-fee layer distinct from, and levied by a different body (the FCA) than, the Exchange's own listing/trading fees (see costs.exchange_fees, Fees for Issuers)"
     detail: |
@@ -1202,6 +1205,7 @@ costs:
     confidence: high
 
   stamp_duty:
+    spec: {rate: 0.5, unit: pct, side: buy, note: "SDRT（电子交易，常态）0.5%，买方，经 CREST 自动代收；纸质转让文书 >£1,000 适用 Stamp Duty 0.5%（就近取整至 £5）"}
     zh: "印花税（Stamp Duty）：纸质转让文书形式、金额超£1,000的证券交易，税率0.5%（就近取整至£5）；印花税储备税（Stamp Duty Reserve Tax, SDRT）：电子（无纸化）交易，税率0.5%（就近取整至1便士），经CREST系统自动代收并划付予英国税务海关总署（HMRC）"
     en: "Stamp Duty: 0.5% (rounded to the nearest £5) on paper-form share transfers over £1,000; Stamp Duty Reserve Tax (SDRT): 0.5% (rounded to the nearest 1p) on electronic (paperless) transactions, automatically collected via CREST and remitted to HMRC"
     sources:

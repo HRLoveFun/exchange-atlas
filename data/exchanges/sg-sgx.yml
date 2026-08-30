@@ -1225,6 +1225,7 @@ costs:
     confidence: medium
 
   commission_structure:
+    spec: {rate: null, note: "券商阶梯佣金约 0.18%–0.275%，最低每笔 SGD 25；SGX 不统一规定"}
     zh: "券商佣金多为阶梯式：按成交金额计费，常见区间约 0.18%–0.275%，并设最低每笔 S$25 的收费下限；网络券商/机构客户可获更低费率。具体佣金由各家券商自行定价，SGX 不统一规定。"
     en: "Broker commissions are mostly tiered: a percentage of turnover in the rough range of 0.18%–0.275%, subject to a per-trade minimum of around S$25; online brokers and institutional clients can negotiate lower rates. Brokers set their own commissions; SGX does not prescribe a uniform rate."
     sources:
@@ -1234,6 +1235,7 @@ costs:
     confidence: medium
 
   exchange_fees:
+    spec: {rate: 0.0075, unit: pct, side: both, note: "SGX Trading Fee；第三方费率综述，本次未抓到 sgx.com 逐字费率表"}
     zh: "SGX 对现货证券交易收取「交易费」（SGX Trading Fee），业界与券商公开费率表口径约为成交金额的 0.0075%；此外 CDP 另收证券清算/存管相关费用。衍生品交易/清算费按合约计收，与本字段现货口径不同。本数值来自第三方券商费率综述，本次未抓取到 sgx.com 逐字费率表，故标 medium。"
     en: "SGX levies a securities Trading Fee, cited by industry/broker fee schedules at roughly 0.0075% of contract value; CDP separately charges securities clearing/custody fees. Derivatives trading/clearing fees are per-contract and differ from this securities figure. The rate is from third-party broker fee overviews; no verbatim sgx.com fee table was fetched, so confidence is medium."
     sources:
@@ -1243,6 +1245,7 @@ costs:
     confidence: medium
 
   clearing_fees:
+    spec: {rate: null, note: "现货由 CDP 清算按 CDP 费率表；本字段 quote 仅覆盖股票期权（OCC 0.05%/premium，封顶 USD 200），非现货"}
     zh: "股票期权清算费为期权金总额的0.05%，每笔上限S$200，向OCC缴纳——仅限股票期权市场（Chapter 18），非现货证券/期货市场的通用清算费率；现货证券由 CDP 清算，另按 CDP 费率表收清算/存管费；衍生品由 SGX-DC 按合约收清算费。"
     en: "For equity options, a clearing fee of 0.05% of the aggregate Premium (capped at S$200 per transaction) is payable to the OCC — specific to the equity options market (Chapter 18), not a general securities/futures clearing fee; securities are cleared by CDP (separate CDP clearing/custody schedule) and derivatives by SGX-DC (per-contract clearing fee)."
     sources:
@@ -1253,6 +1256,7 @@ costs:
     confidence: medium
 
   regulatory_fees:
+    spec: {type: none, note: "除券商服务费 GST（9%）外无按笔或按比例的监管征费"}
     zh: "新加坡不就证券交易征收专门的「监管征费」（无按笔或按比例上缴监管机构的交易监管费）；证券交易环节除券商服务费的消费税（GST，现行 9%）外，无额外监管性收费。GST 就券商服务费计征，而非就交易本金计征。"
     en: "Singapore does not levy a dedicated securities 'regulatory fee' (no per-trade or ad-valorem regulator levy); aside from the Goods and Services Tax (GST, currently 9%) on broker service fees, there is no additional regulatory charge on securities transactions. GST is charged on the broker's service fee, not on the trade principal."
     sources:
@@ -1262,6 +1266,7 @@ costs:
     confidence: medium
 
   stamp_duty:
+    spec: {type: none, note: "无纸化股票经 CDP 电子过户免征印花税（Stamp Duties (Exempt Record) Rules 2018）"}
     zh: "无纸化（scripless）股票经CDP电子过户免征印花税，依《印花税（豁免记录）规则》2018"
     en: "Electronic transfers of scripless shares via CDP are exempt from stamp duty under the Stamp Duties (Exempt Record) Rules 2018"
     sources:
@@ -1272,6 +1277,7 @@ costs:
     confidence: high
 
   financial_transaction_tax:
+    spec: {type: none, note: "除券商服务费 GST（9%）外无按交易本金计征的交易税"}
     zh: "新加坡无专门的金融交易税（FTT / 托宾税）一类基于证券交易额征收的交易税；证券交易环节除券商服务费的消费税（GST 9%）外，无按交易本金计征的交易税。印花税仅适用于非电子化（手写单据）股份转让，而 SGX 现货证券均为 CDP 无纸化电子过户，实际豁免（见 stamp_duty）。"
     en: "Singapore imposes no dedicated financial-transaction tax (FTT / Tobin tax) on securities trades; apart from GST (9%) on broker service fees, there is no transaction tax levied on trade principal. Stamp duty applies only to manual (paper) share transfers, while SGX securities are scripless CDP electronic transfers and effectively exempt (see stamp_duty)."
     sources:

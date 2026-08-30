@@ -1117,6 +1117,7 @@ costs:
     detail: "与us-nyse.yml记录的情况一致：美国经纪商佣金由市场自行竞争定价，交易所规则本身不规定经纪商向客户收取的佣金，留空不硬凑。"
 
   exchange_fees:
+    spec: {rate: null, unit: per_share, currency: USD, side: both, tiered: true, note: "maker-taker：吃单方付费、挂单方返佣；非展示流动性挂单返佣 Tape A/B $0.0010、Tape C $0.0005/股；完整费率表按数十种条件分层，代表性吃单费本字段 quote 未含"}
     zh: "做市商-吃单者模式（maker-taker）：为市场提供流动性的非展示订单可获返佣（如Tape C每股约$0.0005-0.0023区间，按月成交量与流动性类型分层），吃走流动性的一方付费；完整费率表按数十种精细条件分层"
     en: "Maker-taker pricing model"
     detail: "完整费率表（Price List - Trading）按是否合格做市商QMM、成交量档位、订单展示与否等数十种条件分层，本条只归纳整体模式与一个代表性档位，不逐条摘录。术语见 schema/glossary.yml 的 `maker-taker-pricing` 条目（本次新增，回填自 us-nyse 首次出现但未收录的缺口）。"
@@ -1128,6 +1129,7 @@ costs:
     confidence: high
 
   clearing_fees:
+    spec: {unit: per_million, currency: USD, side: both, components: [{name: "value into the net", rate: 0.44}, {name: "value out of the net", rate: 2.16}], note: "NSCC 净额清算费；另有 CNS buy-in $5.00、fail-to-deliver $0.25/$3.00、按月清算账户费 $300"}
     zh: "NSCC官方费率指南（Guide to the NSCC Fee Schedule）列示的现货证券清算相关费用示例：CNS买入平仓（Buy-in）每次通知5.00美元（原始方与空头经纪商双方均收取）；未交割入CNS每笔0.25美元（短缺1-30天）/3.00美元（超过30天）；净额清算「计入净值」每百万美元0.44美元、「计出净值」每百万美元2.16美元；另设按月按账户收取的300美元清算账户费"
     en: "Sample fees from NSCC's official Guide to the Fee Schedule for equity clearing: CNS buy-in $5.00 per notice of intent (charged to both originator and short broker); fail to deliver to CNS $0.25/item (short 1-30 days) or $3.00/item (short more than 30 days); clearance activity $0.44 per million dollars (into the net value) / $2.16 per million dollars (out of the net value); plus a $300/month per-account clearance account fee"
     detail: |
@@ -1148,6 +1150,7 @@ costs:
     confidence: high
 
   regulatory_fees:
+    spec: {rate: 20.60, unit: per_million, currency: USD, side: sell, note: "SEC Section 31 费；2026-04-04 起 $20.60/百万美元（此前 $0.00）；仅卖方（covered sales）"}
     zh: "SEC Section 31交易费（Regulatory Transaction Fee）：现行费率为每百万美元成交额20.60美元，2026年4月4日起生效（此前一段时期费率为0，见detail）；由交易所代收后转付SEC，是本项目防幻觉铁律中明确点名的美国市场费率反例（费率随SEC每年度公告周期性调整，非固定不变）"
     en: "SEC Section 31 Regulatory Transaction Fee: currently $20.60 per million dollars of covered securities transactions, effective April 4, 2026 (the rate was $0.00 for a preceding period — see detail); collected by the exchange and remitted to the SEC. This fee is periodically re-set by SEC fee-rate advisories (annually), so the rate is not fixed"
     detail: |
@@ -1170,6 +1173,7 @@ costs:
     detail: "与us-nyse.yml记录的情况一致：美国联邦层面无证券交易印花税的印象未附可引用来源，该字段volatility: volatile按铁律必须有sources才能填，本次没有，留空。"
 
   financial_transaction_tax:
+    spec: {type: none, note: "联邦层面无广义证券交易税；1914–1966 股票转让税已废止；现存 SEC 发行/转让小额规费性质近监管经费（见 regulatory_fees）"}
     zh: "美国联邦层面目前无广义证券交易税/金融交易税；历史上曾有股票转让税（Stock Transfer Tax），1914-1966年间实施后废止，其后续遗留形式即为costs.regulatory_fees记录的SEC Section 31交易费（性质是为SEC运作筹资的小额规费，非广义交易税）；此后历次国会层面广义证券交易税提案均未获通过立法"
     en: "No broad-based securities/financial transaction tax currently exists at the U.S. federal level; a historical federal Stock Transfer Tax was in effect from 1914 to 1966 before repeal. Its present-day successor is the SEC Section 31 transaction fee recorded under costs.regulatory_fees (a small fee funding SEC operations, not a broad-based transaction tax); various broad-based securities transaction tax proposals since have not been enacted"
     detail: |

@@ -904,6 +904,7 @@ costs:
     detail: "美国经纪商佣金由市场自行竞争定价（多数券商已对散户零佣金），交易所规则本身不规定经纪商向客户收取的佣金——与上交所交易规则里出现佣金相关条款的模式不同，这本身是一个有意思的对比点，但本次未找到NYSE/SEC对此的专门表述，留空不硬凑。"
 
   exchange_fees:
+    spec: {rate: null, unit: per_share, currency: USD, side: both, tiered: true, note: "maker-taker：挂单返佣约 $0.0012/股、吃单方付费；34 页费率表按 DMM/非展示/流动性档等分层；代表性吃单费本字段 quote 未含"}
     zh: "做市商-吃单者模式（maker-taker）：为市场提供流动性的报单可获返佣（如每股0.0012美元量级），吃走流动性的一方付费；费率按会员机构的报价/成交量分层，逐月计算"
     en: "Maker-taker pricing model"
     detail: "完整的34页费率表按各种精细条件（是否DMM、是否非展示订单、流动性档位等）分层，本条只归纳整体模式，不逐条摘录具体费率档位。"
@@ -915,6 +916,7 @@ costs:
     confidence: high
 
   clearing_fees:
+    spec: {unit: per_million, currency: USD, side: both, components: [{name: "value into the net", rate: 0.4644}, {name: "value out of the net", rate: 2.16}], note: "NSCC Non-SFT 清算活动费；另有清算基金维持费（会员现金保证金月均值的 0.35% 年化）"}
     zh: "NSCC（美股主要中央对手方，见clearing.ccp_name）对非证券融资交易（Non-SFT）的清算活动费为'纳入净额'费每百万处理价值0.4644美元，加'流出净额'费每百万结算价值2.16美元；此外按月计收清算基金维持费，费率为会员现金保证金余额（不含SFT账户及补充流动性保证金部分）月均值的0.35%（年化，按360天折算）"
     en: "NSCC (the primary equities CCP; see clearing.ccp_name) charges Non-SFT clearance activity fees of $0.4644 per million of processed value (\"value into the net\") plus $2.16 per million of settling value (\"value out of the net\"); it also assesses a monthly Clearing Fund Maintenance Fee equal to 0.35% of a member's average cash deposit balance in the Clearing Fund (excluding SFT-account and Supplemental Liquidity Deposit balances), annualized on a 360-day basis"
     detail: |
@@ -929,6 +931,7 @@ costs:
     confidence: high
 
   regulatory_fees:
+    spec: {rate: 20.60, unit: per_million, currency: USD, side: sell, note: "SEC Section 31 费；2026-04-04 起 $20.60/百万美元（此前 $0.00）；仅卖方；证券期货 round-turn $0.0042/笔不变"}
     zh: "SEC依据《证券交易法》第31条向交易所征收的交易类监管费，自2026年4月4日起费率为每百万美元交易额20.60美元（此前2026财年初至4月3日暂为每百万美元0美元）；该费用逐年由SEC按预算需要调整并转嫁给交易环节；证券期货交易的对应评估费维持每笔round-turn交易0.0042美元不变"
     en: "The Section 31 transaction fee that the SEC assesses on national securities exchanges is set at $20.60 per million dollars of covered sales effective April 4, 2026 (a rate of $0.00 per million applied for charge dates from the start of FY2026 through April 3, 2026); the rate is readjusted annually by the SEC to match its appropriation needs and is passed through to the trading process; the assessment on security futures transactions remains unchanged at $0.0042 per round-turn transaction"
     detail: |
@@ -947,6 +950,7 @@ costs:
     detail: "草稿印象：美国联邦层面无证券交易印花税——与上交所0.05%单边、港交所0.1%双边形成对比的重要字段，但本次未找到可引用的官方来源确认，留空不凭常识填写（该字段volatility: volatile，按铁律必须有sources才能填，本次没有）。"
 
   financial_transaction_tax:
+    spec: {type: none, note: "联邦层面无普遍证券交易税；1914–1966 转让税已废止；现存 SEC 发行/转让小额规费（约 0.0033%）性质近监管经费"}
     zh: "联邦层面没有对证券买卖普遍征收的金融交易税；历史上1914–1966年曾对股票发行与转让征收印花性质的转让税（1966年税率为发行0.1%、转让0.04%），该税种已废止。目前联邦仍保留一项与SEC经费挂钩的证券发行/转让小额收费（费率约发行0.028%、转让0.0033%），性质更接近监管经费而非普遍性交易税，与本文件costs.regulatory_fees所述SEC第31条交易费属同一类别的不同计费环节"
     en: "There is no broad-based federal financial transaction tax on securities trading; a federal stock transfer tax existed from 1914 to 1966 (rates of 0.1% on issuance and 0.04% on transfer by the time of repeal), since abolished. A small residual federal charge on share issuance/transfer tied to funding SEC operations still exists (roughly 0.028% on issuance, 0.0033% on transfer) — this is more akin to a regulatory funding fee than a general transaction tax, and sits in the same category as the Section 31 fee described under costs.regulatory_fees"
     detail: |

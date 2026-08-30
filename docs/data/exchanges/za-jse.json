@@ -2240,6 +2240,10 @@
     },
     "costs": {
       "commission_structure": {
+        "spec": {
+          "rate": null,
+          "note": "会员券商自定佣金（可协商），不在交易所统一披露范围"
+        },
         "zh": "JSE 不直接向个人投资者收取佣金；佣金由会员券商（broker）自行定价，通常按成交金额的比例或固定每笔费率计收，并可视客户类型（尤其机构）协商。具体费率因券商而异，不在交易所统一披露范围。",
         "en": "The JSE does not charge commission directly to retail investors; commission is set by the member broker, typically as a percentage of trade value or a fixed per-trade fee, and is negotiable by client type (especially institutions). Rates vary by broker and are not uniformly disclosed by the exchange.",
         "sources": [
@@ -2258,10 +2262,15 @@
         "confidence": "medium",
         "detail": "quote 为概括性表述（JSE 投资者教育与券商披露），反映佣金由券商定价、非交易所统一收取的事实；具体费率区间本次未逐家核实，故 confidence: medium。",
         "verified": "2026-08-27",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "exchange_fees": {
+        "spec": {
+          "rate": 0.5,
+          "unit": "bp",
+          "side": "both",
+          "note": "含权证/ETP/AltX；设单笔成交腿上限（trade cap）；2026 Price List PDF 为图像型无法机器反查，降 medium"
+        },
         "zh": "JSE 对权益交易（含权证、ETP、AltX）按每笔成交金额的 0.50 个基点计收交易费，并设单笔成交上限（trade cap，见 detail）。",
         "en": "The JSE charges a trading fee of 0.50 basis points of the value of each trade leg on equity trades (including warrants, ETPs and AltX), subject to a per-trade ceiling (trade cap, see detail).",
         "sources": [
@@ -2275,10 +2284,18 @@
         "detail": "JSE 2026 Price List PDF 缓存文本层为空（image-only，pdftotext 无法抽取），无法机器反查逐字原文，按防幻觉铁律二.5 降为 medium；PDF 中权益交易（含权证、ETP、AltX）交易费为每笔成交金额 0.50 个基点（0.50 basis points of value of each trade leg），并设单笔成交上限（trade cap，2026 年价目表常规订单 XT/BT/OP 等 trade cap 为 R554.28 未含增值税 / R637.42 含增值税）。本字段仅覆盖交易所交易费，结算/清算费见 clearing_fees，STT 见 stamp_duty。",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "quote": null
       },
       "clearing_fees": {
+        "spec": {
+          "rate": 0.0038,
+          "unit": "pct",
+          "side": "both",
+          "cap": 312,
+          "cap_scope": "per_trade_side",
+          "currency": "ZAR",
+          "note": "含权证与 AltX；单笔成交腿上限 R312.00（未含 VAT）；PDF 图像型，降 medium"
+        },
         "zh": "JSE 对权益交易（含权证与 AltX）按每笔成交金额的 0.0038% 计收清算与结算费，单笔成交腿设上限 R312.00（未含增值税）；JSE Clear 会员另有年度会员资格费（见 detail）。",
         "en": "For equity trades (including warrants and AltX), JSE levies a clearing and settlement fee of 0.0038% of the value of each trade leg, capped at R312.00 per trade leg (excl. VAT); JSE Clear membership carries a separate annual membership fee (see detail).",
         "sources": [
@@ -2297,10 +2314,13 @@
         "detail": "JSE 2026 Price List 与 JSE Clear 2025 Price List 两份 PDF 缓存文本层均为空（image-only，pdftotext 无法抽取），无法机器反查逐字原文，按防幻觉铁律二.5 降为 medium；PDF 中权益交易（含权证与 AltX）清算与结算费为每笔成交金额 0.0038%（0.0038% of value of each trade leg），单笔成交腿上限 R312.00（未含增值税）。JSE Clear 会员另收年度会员资格费（2025 年 JSE Clear 价目表 R522 500.00）。本字段聚焦交易层面清算/结算费，不含交易所交易费（exchange_fees）与 STT（stamp_duty）。",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "quote": null
       },
       "regulatory_fees": {
+        "spec": {
+          "type": "none",
+          "note": "无独立于 STT 之外的按笔监管费；另有小额投资者保护征费（Investor Protection Levy），费率未逐条核实"
+        },
         "zh": "南非权益交易无独立于 STT 之外的按笔监管费；交易环节法定/准法定费用主要为证券转让税（STT，见 stamp_duty）及小额投资者保护征费（Investor Protection Levy）。交易所与清算所收取的交易/清算费（exchange_fees、clearing_fees）为商业服务费，非监管性税费。",
         "en": "South African equity trading has no per-trade regulatory fee separate from STT; the statutory/quasi-statutory charges on a trade are primarily the Securities Transfer Tax (STT, see stamp_duty) and a small Investor Protection Levy. The exchange and clearing-house trading/clearing fees (exchange_fees, clearing_fees) are commercial service fees, not regulatory taxes.",
         "sources": [
@@ -2319,10 +2339,15 @@
         "confidence": "medium",
         "detail": "Investor Protection Levy 为依《金融监管法》（Financial Sector Regulation Act）设立的小额征费，用于投资者保护基金；其具体费率未逐条核实，本字段定性说明「无独立按笔监管费」即可满足 medium 级结论。",
         "verified": "2026-08-27",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "stamp_duty": {
+        "spec": {
+          "rate": null,
+          "unit": "pct",
+          "side": "buy",
+          "note": "证券转让税 STT 0.25%（0,25%），2008-07-01 起取代原印花税；quote 为逗号小数，不放数值 spec"
+        },
         "zh": "证券转让税（Securities Transfer Tax，STT）：税率0.25%，适用于上市与未上市证券的每一次转让，2008年7月1日起依《证券转让税法》（No.25 of 2007）及其征管法（No.26 of 2007）施行，取代原印花税制度",
         "en": "Securities Transfer Tax (STT): levied at 0.25% on every transfer of a security (listed or unlisted), effective 1 July 2008 under the Securities Transfer Tax Act No. 25 of 2007 and its Administration Act No. 26 of 2007, replacing the former stamp duty regime",
         "detail": "南非现行税种法定名称为\"证券转让税\"而非\"印花税\"，性质对应本项目 stamp_duty 字段（证券转让环节的交易税），非另设的 financial_transaction_tax。",
@@ -2337,10 +2362,13 @@
         "en_required": true,
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "financial_transaction_tax": {
+        "spec": {
+          "type": "none",
+          "note": "无独立 FTT；交易环节税负由证券转让税 STT 覆盖（见 stamp_duty）"
+        },
         "zh": "南非证券交易环节未设独立的金融交易税（FTT）；相应税负由证券转让税（STT，见 stamp_duty 字段）覆盖，因此本字段非留空、而是明确标注为「不适用 / 由 STT 覆盖」。",
         "en": "South Africa does not impose a separate financial transaction tax (FTT) on securities trades; the corresponding tax burden is covered by the Securities Transfer Tax (STT, see stamp_duty), so this field is explicitly marked 'not applicable / covered by STT' rather than left blank.",
         "sources": [
@@ -2354,8 +2382,7 @@
         "confidence": "medium",
         "detail": "南非财政部与 SARS 均未在证券交易环节另设 FTT；STT（0.25%）即为交易环节主要税负，故本字段标记为不适用而非重复记录。沿用 ADR-002 的字段语义（STT 映射至 stamp_duty）。",
         "verified": "2026-08-27",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "capital_gains_tax": {
         "zh": "南非对资本利得征税，但并入个人所得税体系（非独立税种）：自然人及特殊信托适用 18% 的有效税率（按其应税利得的一定比例计入应税所得），公司适用 21.6%，其他信托 36%。法定依据为《所得税法 58 of 1962》第八附表。",
