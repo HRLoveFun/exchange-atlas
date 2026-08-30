@@ -264,6 +264,8 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
 .td-title { font-size: 14.5px; font-weight: 700; }
 .td-axis-name { font-size: 11px; fill: var(--fg-muted); }
 .td-tick { font-size: 10px; fill: var(--fg-faint); font-family: var(--font-mono); }
+.td-head { font-size: 12px; fill: var(--fg-muted); }
+.td-head-1 { font-size: 13.5px; fill: var(--fg); font-weight: 600; }
 .td-wl { font-size: 10.5px; font-weight: 600; }
 .td-wl-sub { font-size: 9px; fill: var(--fg-faint); }
 .td-inl { font-size: 9.5px; font-weight: 600; }
@@ -294,7 +296,11 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
 .td-chip.td-low { border-color: var(--danger); }
 .td-chip.td-chip-empty { opacity: .5; font-style: italic; }
 
-.td-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; font-size: 11.5px; color: var(--fg-muted); align-items: center; }
+.td-legend {
+  display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0 0 8px; font-size: 11.5px;
+  color: var(--fg-muted); align-items: center; padding: 8px 12px;
+  background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius);
+}
 .td-legend span { display: inline-flex; align-items: center; gap: 5px; }
 .td-sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
 .td-sw-solid { width: 15px; height: 0; border-radius: 0; border-top: 2px solid var(--danger); }
