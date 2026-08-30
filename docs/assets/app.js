@@ -555,6 +555,37 @@
     return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
       '" data-chapter="market_structure">' + (title ? "<title>" + esc(title) + "</title>" : "") + inner + "</g>";
   }
+  // 把价格限制 + 熔断 + 回转三件核心事实综述成 1–3 行短句，放在平面中央
+  function tdHeadlineParts(ms, yRef) {
+    var out = [];
+    var s = ms.price_limits && ms.price_limits.main_board && ms.price_limits.main_board.spec;
+    if (s) {
+      if (typeof s.limit_pct === "number") out.push("当日价格限制 ±" + s.limit_pct + "%（相对" + yRef + "）");
+      else if (typeof s.limit_pct_up === "number" || typeof s.limit_pct_down === "number") {
+        out.push("当日涨跌停 +" + (s.limit_pct_up != null ? s.limit_pct_up : "?") + "% / −" +
+          (s.limit_pct_down != null ? Math.abs(s.limit_pct_down) : "?") + "%");
+      } else if (s.type === "stepwise") out.push("阶梯值幅：涨跌幅随基准价分档");
+      else if (s.type === "dynamic" && typeof s.band_pct === "number") out.push("动态价格带 ±" + s.band_pct + "%（随参考价滚动）");
+      else if (s.type === "dynamic") out.push("设动态价格带，档位官方未公布");
+      else if (s.type === "none") out.push("无每日涨跌停墙");
+      else out.push("价格限制按品种 / 证券分类分档");
+    }
+    var c = ms.circuit_breaker && ms.circuit_breaker.spec;
+    if (c) {
+      if (c.type === "index_level" && c.levels) {
+        var t = c.levels.filter(function (l) { return typeof l.threshold_pct === "number"; })
+          .map(function (l) { return l.threshold_pct; });
+        var idxNames = (c.reference || []).map(function (r) { return r.index; }).filter(Boolean);
+        var subj = idxNames.length > 1 ? idxNames.join(" 或 ") + " " : "指数";
+        if (t.length) out.push(subj + "跌 " + t.join("/") + "% 触发全市场熔断");
+      } else if (c.type === "none") out.push("无全市场熔断");
+      else if (c.type === "stock_level" || c.type === "contract_level") out.push("仅个股 / 合约级熔断，无全市场熔断");
+    }
+    var ir = ms.intraday_reversal;
+    var irm = { t0: "当日可回转（T+0）", t1: "T+1：当日买入次日才可卖", t2: "T+2 交收", mixed: "回转交易分品种不同" };
+    if (ir && irm[ir.enum]) out.push(irm[ir.enum]);
+    return out;
+  }
 
   function renderTradingDay(app, params) {
     var list = cache.manifest.exchanges;
@@ -631,7 +662,7 @@
     if (viS) [viS.static_pct, viS.dynamic_pct].forEach(function (v) {
       if (typeof v === "number") mags.push(Math.abs(v));
     });
-    var yR = Math.min(40, Math.max(6, mags.length ? Math.ceil(Math.max.apply(null, mags) * 1.3) : 10));
+    var yR = Math.min(40, Math.max(5, mags.length ? Math.ceil(Math.max.apply(null, mags) * 1.15) : 9));
 
     // ── 画布 ──
     var W = 960, H = 544, PL = 60, PR = 152, PT = 46, PB = 106;
@@ -666,7 +697,7 @@
     });
 
     // ── 涨跌停墙 + 墙外阴影（ADR-035 A：主板幅度 → y 轴边界墙 + 墙外阴影）──
-    var wallDrawn = false;
+    // 画不出墙的情形（无墙 / 动态 null / 分档 null）不在此标注，交给中心信息卡
     var wUp = null, wDn = null;
     if (mbS) {
       if (typeof mbS.limit_pct === "number") { wUp = mbS.limit_pct; wDn = -mbS.limit_pct; }
@@ -683,7 +714,6 @@
         '<text x="' + (PL + pw + 7) + '" y="' + n(Y(wUp) + 4) + '" class="td-wl" fill="var(--danger)">涨停 +' + wUp + '%</text>' +
         '<text x="' + (PL + pw + 7) + '" y="' + n(Y(wDn) + 4) + '" class="td-wl" fill="var(--danger)">跌停 ' + wDn + '%</text>',
         tdFieldLabel("price_limits.main_board") + "：±" + wUp + "% 相对" + yRef));
-      wallDrawn = true;
     }
     // 阶梯绝对值幅 → 半透明带（ADR-035 D3：来源给区间不给点）
     if (ladderPct) {
@@ -698,7 +728,6 @@
         '<text x="' + (PL + pw + 7) + '" y="' + n(Y(lp1) + 4) + '" class="td-wl" fill="var(--danger)">阶梯值幅</text>' +
         '<text x="' + (PL + pw + 7) + '" y="' + n(Y(lp1) + 16) + '" class="td-wl-sub">约 ±' + Math.round(lp0) + "–" + Math.round(lp1) + '%</text>',
         tdFieldLabel("price_limits.main_board") + "：阶梯绝对值幅，幅度随基准价变化（点击看完整档位）"));
-      wallDrawn = true;
     }
     // 动态参考价区间
     if (mbS && mbS.type === "dynamic") {
@@ -711,28 +740,9 @@
           '<text x="' + (PL + pw + 7) + '" y="' + n(Y(bp) + 4) + '" class="td-wl" fill="var(--info)">动态带 ±' + bp + '%</text>' +
           '<text x="' + (PL + pw + 7) + '" y="' + n(Y(bp) + 16) + '" class="td-wl-sub">相对滚动参考价</text>',
           tdFieldLabel("price_limits.main_board") + "：动态价格带 ±" + bp + "%（相对滚动参考价，非固定墙）"));
-      } else {
-        // band_pct: null —— 机制存在、数值未公布。不画线（位置无依据，且易与熔断线撞），
-        // 只在右上角标注（ADR-035 D 三态之一）
-        g.push(tdCell(id, "price_limits.main_board",
-          '<text x="' + (PL + pw - 6) + '" y="' + n(PT + 14) + '" class="td-wl-sub" text-anchor="end">动态价格带 · 档位官方未公布</text>',
-          tdFieldLabel("price_limits.main_board") + "：存在动态价格带，官方未公布档位（ADR-035 D 三态之一）"));
       }
-      wallDrawn = true;
-    }
-    // type: none — 明确无墙
-    if (mbS && mbS.type === "none") {
-      g.push(tdCell(id, "price_limits.main_board",
-        '<text x="' + (PL + 6) + '" y="' + n(PT + 22) + '" class="td-inl" fill="var(--fg-muted)">无每日涨跌停墙</text>',
-        tdFieldLabel("price_limits.main_board") + "：无逐日涨跌停（见 波动性中断）"));
-      wallDrawn = true;
-    }
-    // 兜底：spec 存在但形态未识别（如 in-nse limit_pct: null 分档）——
-    // 不画线（会臆造一个不存在的单一幅度墙，违反 ADR-035 D），只标注
-    if (!wallDrawn && mbS) {
-      g.push(tdCell(id, "price_limits.main_board",
-        '<text x="' + (PL + 6) + '" y="' + n(PT + 22) + '" class="td-inl" fill="var(--fg-muted)">涨跌停按品种分档，无单一幅度 → 见「价格限制类型」</text>',
-        tdFieldLabel("price_limits.main_board") + "：按品种分档，无单一幅度（点击展开）"));
+      // band_pct: null / type: none / 分档 null 三种「墙画不出」的情形，
+      // 不再单独标注——中心信息卡已用一句话说明（ADR-040 收口反馈）。
     }
 
     // ── 波动性中断走廊（ADR-035 A：贴价格路径的走廊；静态平面上呈中心走廊带）──
@@ -755,17 +765,9 @@
 
     // ── 熔断（ADR-035 A：指数级 → y 轴多档触发线）──
     if (cbS && cbS.type === "index_level" && cbS.levels) {
-      var xrefList = (cbS.reference || []).filter(function (r) { return r.exchange && r.exchange !== "self"; });
-      var xref = xrefList.length ? " ·跨所联动" : "";
-      // 跨所联动（ADR-036 #6，如 in-nse 看 Nifty 50 或 BSE Sensex 先触发者）→ 顶部一行说明
-      if (xrefList.length) {
-        var refNames = (cbS.reference || []).map(function (r) {
-          return r.index + "（" + (r.exchange === "self" ? "本所" : r.exchange) + "）";
-        }).join(" 或 ");
-        g.push(tdCell(id, "circuit_breaker",
-          '<text x="' + (PL + 6) + '" y="' + n(Y(0) - 6) + '" class="td-inl" fill="var(--danger)">熔断触发依据：' + esc(refNames) + ' 先触发者</text>',
-          tdFieldLabel("circuit_breaker") + "：跨所联动"));
-      }
+      // 跨所联动（ADR-036 #6，如 in-nse 看 Nifty 50 或 BSE Sensex 先触发者）——
+      // 触发依据已并入中心信息卡的熔断行，这里只在档位标签的 tooltip 里带一句
+      var xref = (cbS.reference || []).some(function (r) { return r.exchange && r.exchange !== "self"; }) ? " ·跨所联动" : "";
       cbS.levels.forEach(function (lv) {
         if (typeof lv.threshold_pct !== "number") return;
         var yy = Y(-lv.threshold_pct), lab = "−" + lv.threshold_pct + "%";
@@ -823,6 +825,21 @@
       var yy2 = Y(p), zero = p === 0;
       g.push('<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(yy2) + '" y2="' + n(yy2) + '" stroke="var(--border)" stroke-width="' + (zero ? 1.5 : 0.5) + '"' + (zero ? "" : ' opacity="0.55"') + '/>');
       g.push('<text x="' + (PL - 8) + '" y="' + n(yy2 + 3.5) + '" class="td-tick" text-anchor="end">' + (p > 0 ? "+" : "") + p + '%</text>');
+      if (zero) g.push('<text x="' + (PL + 6) + '" y="' + n(yy2 - 5) + '" class="td-wl-sub">0 = ' + yRef + '</text>');
+    }
+
+    // ── 中心信息卡：把「本市场日内价格受什么约束」这一核心事实用一句话放在中央
+    //    （ADR-040 收口审查反馈：中心大量留白 → 用它承载 30 秒看懂的结论）──
+    var head = tdHeadlineParts(ms, yRef);
+    if (head.length) {
+      var hcx = PL + pw / 2, hcw = Math.min(pw - 40, 404), hlh = 21;
+      var hcy = PT + ph * 0.17, hch = head.length * hlh + 15;
+      g.push('<rect x="' + n(hcx - hcw / 2) + '" y="' + n(hcy) + '" width="' + n(hcw) + '" height="' + n(hch) +
+        '" rx="7" fill="var(--bg-elevated)" fill-opacity="0.9" stroke="var(--border)"/>');
+      head.forEach(function (line, i) {
+        g.push('<text x="' + n(hcx) + '" y="' + n(hcy + 15 + i * hlh) + '" text-anchor="middle" class="td-head' +
+          (i === 0 ? " td-head-1" : "") + '">' + esc(line) + "</text>");
+      });
     }
     var xStep = (xMax - xMin) > 300 ? 60 : 30;
     for (var mx = Math.ceil(xMin / xStep) * xStep; mx <= xMax; mx += xStep) {
@@ -853,7 +870,7 @@
 
     var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + ' ' + H + '" class="td-svg" role="img" aria-label="' +
       esc(exName) + ' 交易日平面图">' + g.join("") + "</svg></div>";
-    return svg + tdSidePanels(id, ms) + tdLegend() + tdProse();
+    return tdLegend() + svg + tdSidePanels(id, ms) + tdProse();
   }
 
   // 标注层 chips（ADR-035 A：撮合原则 / 订单类型 / 做空 / 做市商 → 标注层）+ 非现货降级提示

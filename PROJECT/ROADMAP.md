@@ -178,7 +178,8 @@
   - [x] **其二 · 数据回填部分**（[ADR-039]，协调者串行——非并行子代理，理由见 ADR）— 15 家第五章 `spec`（`trading_sessions` / `opening`·`closing_mechanism` / `price_limits.main_board` / `circuit_breaker`）从既有已核实 `quote` 结构化；全 20 家 `volatility_interruption`(19/20)·`short_selling`(18/20)·`market_maker_scheme`(18/20) 的 `spec`（缺口均为数据文件本身 `zh` 空的真实缺口）；JPX 值幅制限**完整 34 档** `ladder`（抓官方 PDF 逐行核实，此前误记 37 档已改）；`schema/spec.yml` 加 `randomised_seconds` / `random_close_window_min` 键。`make build` 全绿、`spec` 5b 0 FAIL、时区甘特条 6 家 `trading_hours` 逐字节不变。
 - [x] **Phase 2 · 交易日平面图**（2026-08-30 实装，[ADR-040]）— `app.js` 新增 `renderTradingDay` / `tdBuild`（手写 SVG，按 [ADR-035] A 字段→元素映射 + D 诚实渲染三态 + C 零构建）；顶部「市场 Market」下拉；路由默认值改 `trading-day`，`renderMatrix` 转显式分支，矩阵仍在 `#view=matrix`；`index.html` tab 调整（平面图为第一个 tab，理由见 [ADR-040]）。非现货所按 [ADR-035] E：`de-eurex` y 轴换「前结算价」+ banner；10 家有衍生品子块的加淡 banner（现货 / 衍生品切换开关待 Phase 3 补 `derivatives.*.spec`）。`openCellOverlay` 加「结构化 Spec」节。改动仅前端三文件，`docs/data/` 无 diff。**Chrome headless 六形态截图核对通过；矩阵 / 时区 / 健康度无回归。**
   - [x] **打磨迭代 + 20 家巡检**（2026-08-30，[ADR-040]「打磨迭代」段，PR #29）— 线条视觉语言去重（墙=红实线 / 熔断=红长虚线 / 动态带=蓝虚线 / 波动走廊=灰点线，图例补齐）、JPX 阶梯带降透明度 + 边界线、chips 定宽定高 + 2 行截断 + title + 加「波动性中断」chip、`band_pct`/`limit_pct` null 兜底改角标（不臆造墙线位置）、sa-tadawul 右缘叠字修复、跨所联动熔断说明行。20 家全形态渲染巡检通过。
-  - [ ] **收口 gate（未完）** — [ADR-035] A 要求「交付后停下评估『30 秒看懂』由非专业读者实测」。**实测尚未进行**，是 Phase 3 启动前门槛。
+  - [x] **收口审查第一轮反馈已处理**（2026-08-30，[ADR-040]「收口审查反馈」段）— ① 图例移到主图上方；② 中心留白 → 中心信息卡：把「日内价格受什么约束」（价格限制 + 熔断 + 回转）综述成 1–3 行放平面中央，`au-asx`/`hk-hkex` 这类「以无涨跌停为特征」的市场空白中心现在直接说结论；连带 `yR` 系数收紧、0 基准线加标签、画不出墙的情形不再角落标注。
+  - [ ] **收口 gate（未完）** — 中心信息卡等改动待用户再次审查确认「30 秒看懂」达标；确认后开 Phase 3。
 - [ ] **Phase 3 · 其余章节可视化** — 成本瀑布 → 交割管线 → 上市生命周期（一并落地 [ADR-036] #5 的章节级"仅现货适用"标记）→ 监管图 → 参与者 → 风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）→ …按交易员价值迭代，每章带一次小型 `spec` 补充。
 
 **v2.0 的 Phase 序列到 Phase 3 为止。**
