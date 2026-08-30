@@ -345,6 +345,19 @@ market_structure:
         accessed: 2026-08-14
     confidence: high
 
+  execution_model:
+    enum: order_driven
+    spec: {electronic: true, dealer_intermediated: false, note: "全电子中央订单簿、价格优先时间优先连续竞价 + 集合竞价；主板 / B 股无做市商。仅创业板（ChiNext）可实行做市商机制，做市商负双边持续报价、双边回应报价义务，属订单驱动之上的补充"}
+    zh: "订单驱动：证券竞价交易按价格优先、时间优先在中央订单簿撮合，无做市商介入；仅创业板股票交易可实行做市商机制，做市商承担双边持续报价、双边回应报价等义务"
+    en: "Order-driven: auction trading is matched in the central order book on price-then-time priority with no dealer intervention; only ChiNext stocks may operate a market-making mechanism under which market makers must provide continuous and responsive two-sided quotes"
+    detail: "enum 依据既有 matching_principle（价格优先、时间优先，confidence high）与 market_maker_scheme（仅创业板可实行做市商机制，confidence high）的已核实 quote 综合判定：主板为纯订单驱动，创业板做市为补充。dealer_intermediated 记 false（就主板而言）。"
+    sources:
+      - title: 深圳证券交易所交易规则（2026年修订）第3.4.2 / 3.7条
+        url: https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf
+        accessed: 2026-08-14
+    quote: "证券竞价交易按价格优先、时间优先的原则撮合成交。／创业板股票交易可以实行做市商机制。做市商应当遵守法律法规和本所相关业务规则，并按照做市协议的约定承担为创业板股票提供双边持续报价、双边回应报价等义务。"
+    confidence: high
+
   matching_principle:
     enum: price_time
     zh: "价格优先、时间优先"
@@ -360,6 +373,10 @@ market_structure:
     confidence: high
 
   order_types:
+    spec:
+      market: true
+      limit: true
+      note: "限价申报为主；市价申报仅限有价格涨跌幅限制证券的连续竞价阶段，细分对手方最优价格、本方最优价格、最优五档即时成交剩余撤销、即时成交剩余撤销、全额成交或撤销等类型。无冰山 / 隐藏 / 止损订单类型"
     zh: "限价申报；市价申报（六种类型，仅限有价格涨跌幅限制证券的连续竞价阶段）"
     en: "Limit Order; Market Order (six sub-types, continuous auction only, price-limited securities)"
     detail: "市价申报含对手方最优价格、本方最优价格、最优五档即时成交剩余撤销、即时成交剩余撤销、全额成交或撤销等类型。"
@@ -374,6 +391,12 @@ market_structure:
     confidence: high
 
   tick_size:
+    spec:
+      regime: per_instrument
+      min_tick: 0.001
+      currency: CNY
+      full_table_note: "按证券类型（非按价格）分档：A 股 0.01 元人民币，基金 0.001 元人民币，B 股 0.01 港元（深市 B 股以港元计价，与沪市 B 股的美元计价不同）"
+      note: "创业板股票申报价格最小变动单位同为 0.01 元"
     zh: "A股 0.01 元人民币；基金 0.001 元人民币；B股 0.01 港元"
     en: "A-shares RMB 0.01; funds RMB 0.001; B-shares HKD 0.01"
     detail: "与上交所不同：SSE 的 B 股最小变动单位为 0.001 美元，SZSE 为 0.01 港元——计价货币不同（见 overview.trading_currency）。"
@@ -482,6 +505,34 @@ market_structure:
       - title: 深圳证券交易所交易规则（2026年修订）第4.3.4条
         url: https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf
         accessed: 2026-08-14
+    confidence: high
+
+  error_trade_rule:
+    spec:
+      bust_allowed: true
+      review_window_min: null
+      deviation_threshold_pct: null
+      resolution: cancel
+      note: "买卖申报经交易主机撮合成交后交易即告成立，于成立时生效，买卖双方必须承认交易结果、履行清算交收义务。无欧美式『偏离参考价达某百分比、限时申请复核作废』的常规错误交易流程。交易所仅在窄口径情形可认定无效 / 取消：不可抗力 / 意外事件 / 交易系统被非法侵入等致严重后果、成交显失公平、成交违反规则并严重破坏市场正常运行。事前防线：涨跌停 / 价格笼子（买入不高于基准价 102%、卖出不低于 98%）/ 有效申报价格范围"
+    zh: "买卖申报经交易主机撮合成交后，交易即告成立；符合规则达成的交易于成立时生效，买卖双方必须承认交易结果、履行清算交收义务。深圳证券交易所没有欧美式『成交价偏离参考价达某百分比、限时申请复核并作废』的常规错误交易处理机制。仅在因不可抗力、意外事件、交易系统被非法侵入等原因造成严重后果，或成交显失公平，或成交违反规则并严重破坏证券市场正常运行的窄口径情形下，交易所方可采取措施、认定无效或宣布取消交易"
+    en: "Once orders are matched by the trading host a transaction is formed and becomes effective on formation; both parties must accept the result and perform their clearing and settlement obligations. The SZSE has no routine erroneous-trade process of the US/EU type (a deviation-from-reference-price threshold plus a time-limited request for review and cancellation). The Exchange may take measures, treat a transaction as void, or declare it cancelled only in narrow circumstances — where force majeure, an accident, illegal intrusion into the trading system or similar causes serious consequences, where a transaction is manifestly unfair, or where a transaction violates the Rules and seriously disrupts the normal operation of the market"
+    detail: "深圳证券交易所交易规则 3.4.5。与 trading_halt_mechanism（盘中临时停牌）视角不同。中国 A 股与日本 / 香港证券市场同属『成交近乎终局、靠事前价格控制防误单』一类。deviation_threshold_pct / review_window_min 均留 null（原文无量化门槛）。"
+    sources:
+      - title: 深圳证券交易所交易规则（2026年修订）第3.4.5条
+        url: https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf
+        accessed: 2026-08-14
+    quote: "买卖申报经交易主机撮合成交后，交易即告成立。符合本规则各项规定达成的交易于成立时生效，买卖双方必须承认交易结果，履行清算交收义务。因不可抗力、意外事件、交易系统被非法侵入等原因造成严重后果的交易，本所可以采取适当措施或认定无效。对显失公平的交易，经本所认定，可以采取适当措施。违反本规则，严重破坏证券市场正常运行的交易，本所有权宣布取消交易。"
+    confidence: high
+
+  order_book_transparency:
+    zh: "盘前：中央订单簿公开——连续竞价期间的即时行情内容包括各证券实时最高五个价位买入申报价和数量、实时最低五个价位卖出申报价和数量（Level-1）；Level-2 行情另提供十档及逐笔委托。证券市场不提供冰山 / 隐藏 / 未披露委托类型。盘中另设『价格笼子』（有效申报价格范围）限制申报价偏离。盘后：成交实时揭示；大宗交易不纳入即时行情"
+    en: "Pre-trade: the central order book is public — real-time market data during continuous auction includes, for each security, the best five bid prices and quantities and the best five ask prices and quantities (Level-1); Level-2 data adds ten price levels and order-by-order feeds. The securities market offers no iceberg, hidden or undisclosed order types. An intraday 'price cage' (valid order-price range) limits price deviation. Post-trade: executions are shown in real time; block trades are excluded from the real-time feed"
+    detail: "字段管本所订单簿内部的（非）展示流动性——A 股订单簿全展示、无非展示订单类型，与欧美市场是显著差异。行情层级 / 收费见第十章 market_data_levels。quote 引自深交所交易规则 5.2.2。"
+    sources:
+      - title: 深圳证券交易所交易规则（2026年修订）第5.2.2条
+        url: https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf
+        accessed: 2026-08-14
+    quote: "连续竞价期间，即时行情内容包括：证券代码、证券简称、前收盘价、最近成交价、当日最高价、当日最低价、当日累计成交数量、当日累计成交金额、实时最高五个价位买入申报价和数量、实时最低五个价位卖出申报价和数量等。"
     confidence: high
 
   intraday_reversal:
