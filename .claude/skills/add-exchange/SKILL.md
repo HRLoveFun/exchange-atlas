@@ -376,6 +376,21 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
      记 OPEN-QUESTIONS，或退一步引第三方逐字转载件（`ricago.com` 转 NSE Consolidated Circular）
      / 权威财经媒体（`business-standard.com` 转 NSE 通函），均按 CLAUDE.md 二.3 封顶 `medium`。
 
+9. **第十一章成本的 `spec`（[ADR-045]，成本瀑布）：** 6 个「按笔显性成本」字段
+   （`commission_structure` / `exchange_fees` / `clearing_fees` / `regulatory_fees` /
+   `stamp_duty` / `financial_transaction_tax`）都有 `spec` 形状（`schema/spec.yml` 的
+   `cost_layer`）。要点：
+   - **`spec` 只存 quote 逐字撑得住的原始费率 + `unit`**（`pct` / `permille` / `bp` /
+     `per_share` / `per_lakh` / `per_crore` / `per_million` / `flat_*`）——归一到 bp 是渲染层的事，
+     别在 `spec` 里换算（换算值不 verbatim → 5b FAIL）。国字数字（「千分之三」）、逗号小数
+     （「0,25%」）的 quote 一律 `rate: null` + `note`（同 [ADR-039] 纪律）。
+   - **`side: buy / sell / both`**——单边税看清楚（英股 SDRT 仅买方、A 股印花税仅卖方、
+     港股双边、美股无）。maker-taker 所的 `exchange_fees` quote 常只含挂单返佣、吃单费未摘引
+     → `rate: null` + `note`。
+   - **该市场不征某费种 / 税目** → `type: none` + `note`（是关键事实，不是留空）。多项分征费
+     （香港 SFC + AFRC、美股 NSCC value-into/out-of-net）用 `components: [{name, rate}]`，渲染层求和。
+   - 填完在「成本瀑布」tab 里点开自检（渲染层落地后）。
+
 ### 5. 本地验证
 
 ```
