@@ -89,6 +89,37 @@ git 不报错、不提示）。本地几百上千份来源快照就这么没了�
 
 ---
 
+## 经验：`fetch_sources.py` 全量重跑会用「抓取失败页」覆盖已有好缓存，制造 `verify_quotes` 假 FAIL
+
+2026-08-30 一个后台任务里踩到：`make check` 本来 `verify_quotes OK=993 FAIL=0`，跑了一次
+`python3 tools/fetch_sources.py` 重建 `.cache/` 之后变成 `OK=1000 FAIL=64`，`make check` 直接
+非零退出。64 个 FAIL **全部集中在 `za-jse` 一家**。
+
+**根因**：`fetch_sources.py` 会 re-fetch `data/` 里登记的**所有** `sources` URL 并覆盖
+`.cache/<id>/`。这次运行环境对 `jse.co.za` 三个子域名全部拿到 Cloudflare「Access Denied」403
+（响应体仍是一个 ~170KB 的 HTML 页，不是网络错误），对多个 PDF 拿到 ~6KB 的错误页存成 `.pdf`
+（伴随 `.txt` 为 0 字节）。这些「坏正文」把 `za-jse` 建档时抓到的好快照整个盖掉了，`verify_quotes`
+拿坏正文去比对 `quote` 当然一个连续窗口都命中不了 → 报 **FAIL**（不是 CACHE_MISS）。
+
+**CACHE_MISS vs 这种 FAIL**：CACHE_MISS = 这条来源从没抓到过，信息性、不阻断（[ADR-044] 后
+`.cache/` 重建期间的正常状态）；这里是「抓到了一个拦截页 / 壳页」被当成「来源正文可取到但
+quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
+
+**排查顺序**：① 看 FAIL 是否**高度集中在一两家** + 这些家的来源域名是否同源（同一个官网）；
+② `curl -sS -o /dev/null -w '%{http_code}'` 手测那几个域名，确认是不是这次环境访问不到；
+③ 看 `fetch_sources.py` 自己末行报的 `OK=/FAIL=` 比例——FAIL 占比高（这次是 `OK=16 FAIL=55`）
+说明这次抓取整体不可信，别拿它的 `.cache` 覆盖结果当真。
+
+**补救**：把受影响那几家的 `.cache/<id>/` 整个删掉（`rm -rf .cache/<id>`），`verify_quotes`
+会把它们的来源重新记为 CACHE_MISS，`make check` 恢复退出 0；等换到能正常访问该官网的环境
+（住宅 IP 通常比数据中心 IP 少遇 Cloudflare 拦截）再 `python3 tools/fetch_sources.py` 重抓。
+`data/` 不受影响——这纯粹是本地核查凭据的临时退化。
+
+**预防**：`fetch_sources.py` 跑完先扫一眼它报的成功率；成功率低时先查是不是这次网络环境的问题，
+不要立刻相信新的 `.cache/` 状态。
+
+---
+
 ### 上海证券交易所 Shanghai Stock Exchange (SSE) `cn-sse`
 - `sse.com.cn` | 官方 | zh | WebFetch 对规则总览页（`lawandrules/sselawsrules/overview/`）返回 403；换 `lawandrules/sselawsrules2025/overview/`（新版路径）+ curl 常规 UA 可过（HTTP 200）；PDF 用 `pdftotext -layout` 提取纯文本再 grep 定位条款，比逐页翻 PDF 快得多 | 规则总览页本身不含全文直链，需从站内导航多跳到具体规则文档；官网有《现行有效的业务规则清单》目录 PDF（见下）能确认某规则「现行有效」，但清单本身不含可点击的逐条直达链接，还没找到《交易规则》全文在 sse.com.cn 上的直接 URL——这是本节唯一的已知缺口，下次找到了请替换掉 mgzq.com 那条并把相关字段 confidence 升回 high
   - 规则总览: https://www.sse.com.cn/lawandrules/sselawsrules2025/overview/
@@ -829,7 +860,7 @@ git 不报错、不提示）。本地几百上千份来源快照就这么没了�
 - `www.reuters.com` | 第三方（财经通讯社） | en | WebSearch 定位 | 政治/市场背景（risks.*，confidence 封顶 medium）
 
 ### 约翰内斯堡证券交易所 Johannesburg Stock Exchange (JSE) `za-jse`
-- `jse.co.za` | 官方 | en（南非无为JSE本身立法声明的"官方语言"，但全部规则/上市文件/技术规范均只有英文版，未见南非其他官方语言的对照版本，与美股NYSE同理按实际使用语言取 official_languages: [en]） | curl 常规 UA 全部 200，全程未见反爬/限流，比 sec.gov/saflii.org 好抓得多 | 官网横跨三个子域名：`www.jse.co.za`（产品/服务介绍页）、`group.jse.co.za`（集团概况、历史沿革、投资者关系）、`clientportal.jse.co.za`（规则文档/市场通知/技术规格 PDF 的实际托管域名，很多深层 PDF 链接指向这里，三者按 `validate.py` 的域名后缀匹配规则统一登记为 `jse.co.za` 一条即可覆盖）。⚠️ 部分关键 PDF（如权益市场交易时段表、熔断阈值表）正文数据是图片渲染，`pdftotext -layout` 抓不出表格数字；换成同信息的另一份《交易信息系统概念培训》PDF（`Conceptual Training_v2.pdf`）才拿到可摘引的纯文本版本（含 ZA01/ZA02 分段的静态/动态熔断阈值百分比表），这是本次抓取里唯一能完整摘引熔断具体数值的来源，下次抓类似"阈值表"类内容时优先找培训/说明类文档而非官方摘要通知
+- `jse.co.za` | 官方 | en（南非无为JSE本身立法声明的"官方语言"，但全部规则/上市文件/技术规范均只有英文版，未见南非其他官方语言的对照版本，与美股NYSE同理按实际使用语言取 official_languages: [en]） | 建档时（2026-08-16）curl 常规 UA 全部 200、全程未见反爬/限流；⚠️ 2026-08-30 一个后台任务里三个子域名（`www.` / `group.` / `clientportal.`）**全部返回 Cloudflare「Access Denied」403**（首页、深层页、多种 UA + Referer 头均无效），见本节末尾探测记录 2026-08-30 补记——疑似环境相关（数据中心/云出口比住宅 IP 更易被 Cloudflare 拦），住宅 IP 下可能仍可访问 | 官网横跨三个子域名：`www.jse.co.za`（产品/服务介绍页）、`group.jse.co.za`（集团概况、历史沿革、投资者关系）、`clientportal.jse.co.za`（规则文档/市场通知/技术规格 PDF 的实际托管域名，很多深层 PDF 链接指向这里，三者按 `validate.py` 的域名后缀匹配规则统一登记为 `jse.co.za` 一条即可覆盖）。⚠️ 部分关键 PDF（如权益市场交易时段表、熔断阈值表）正文数据是图片渲染，`pdftotext -layout` 抓不出表格数字；换成同信息的另一份《交易信息系统概念培训》PDF（`Conceptual Training_v2.pdf`）才拿到可摘引的纯文本版本（含 ZA01/ZA02 分段的静态/动态熔断阈值百分比表），这是本次抓取里唯一能完整摘引熔断具体数值的来源，下次抓类似"阈值表"类内容时优先找培训/说明类文档而非官方摘要通知
   - 首页: https://www.jse.co.za/
   - 现货股票市场总览: https://www.jse.co.za/trade/equities-market
   - 主板: https://www.jse.co.za/raise-capital/equities-market/main-board
@@ -890,6 +921,16 @@ git 不报错、不提示）。本地几百上千份来源快照就这么没了�
 与 v0.2 填 NYSE 时的情况相似，本次也踩到"监管/立法类第三方数据库域名被拦"的坑：`saflii.org`（南非法律信息研究所，用于查《金融市场法》Financial Markets Act 19 of 2012 全文）与 `lawlibrary.org.za` 两个域名对同一份法律文本的 PDF/HTML 页面均返回 403（换 UA、加延时重试均无效，与 sec.gov/finra.org 的边缘防护特征类似）。绕过方式：改用 JSE 官方《上市规则》PDF 定义章节里对该法的引用原文（"FMA the Financial Markets Act No.19 of 2012, as amended"）作为 `core_laws` 的来源——足以确认法律全称与编号且来自 JSE 自己的官方文档（未降级为 medium），但未能拿到法律条文全文逐条核对其他章节（如做空/披露的具体法条编号），这部分留待下次专门解决 saflii/lawlibrary 的反爬问题时补齐。
 
 `jse.co.za` 三个子域名（`www.` / `group.` / `clientportal.`）加上 `fsca.co.za`、`strate.co.za`、`sars.gov.za`、`lseg.com` 全部一次性 curl 常规 UA 成功，无一例 403，是本项目目前抓取难度最低的交易所之一。
+
+**2026-08-30 补记（一个后台任务）**：`jse.co.za` 三个子域名此时全部返回 Cloudflare「Access Denied」403
+——`www.jse.co.za/`、`group.jse.co.za/group-overview/history`、`clientportal.jse.co.za/...pdf` 逐一实测，
+常规 Chrome UA、Safari UA + `Accept-Language` + `Referer: https://www.google.com/` 均 403，响应体是
+~170KB 的 Cloudflare 拦截页（含 "Access Denied" 与 `cloudflare` 字样）。`fsca.co.za` / `gov.za` /
+`sars.gov.za` / `resbank.co.za` 同批也大量 404/坏页。这与建档时「抓取难度最低」的记录相反，说明
+JSE 在 2026-08 中之后对官网加了 Cloudflare 防护，**且对数据中心/云 IP 段拦得比住宅 IP 严**——
+用户在自己机器上 curl 可能仍正常，但任何在云环境跑的 `make fetch` / `fetch_sources.py` 对 `za-jse`
+都会拿到拦截页（并可能覆盖已有好缓存，见文首「经验」一节）。下次需要重抓 `za-jse` 来源：优先在
+住宅网络环境跑；若只能在云环境，考虑找 `web.archive.org` 快照或人工投喂 PDF（CLAUDE.md 三降级）。
 ### B3 – Brasil, Bolsa, Balcão `br-b3`
 - `b3.com.br` | 官方 | pt-BR / en（官网原文是葡萄牙语，`en_us` 路径下有官方英文版，覆盖面广，多数规则/交易机制/非居民投资者页面均有对应英文版；本节 source_lang 取 en，见下方说明） | curl + 常规 UA 全部 200，未见反爬（全程无延时也未被拦，比 english.sse.com.cn/JPX 好抓得多）；PDF 用 `pdftotext -layout` 提取 | ⚠️ B3 官网英文版**没有**看到类似 SSE/JPX 那种"译本仅供参考，以原文为准"的免责声明（本次抓取页面未发现此类文字），但取源规则仍按 ADR-013："有可核实的官方中文原文就填 zh，没有就填 en"——B3 官网无中文版，故 source_lang: en，把英文版当溯源锚点，不因为找不到 zh 就退回葡萄牙语原文（葡萄牙语不是 zh/en 二选一之外的第三态，见 taxonomy.yml source_lang 字段说明）。B3 是巴西唯一的证券交易所，由 2017 年 BM&FBOVESPA 与 Cetip 合并而成（`name_native` 用此说明）；集团层面 B3 本身即为最终控股主体（B3 S.A.自身在自己的 Novo Mercado 板块挂牌，代码 B3SA3），未发现类似 NYSE Group/JPX Group 那样同集团下辖多个独立注册交易所法人实体的结构，故不设 `group_id`
   - 首页: https://www.b3.com.br/en_us/（HTTP 200）
