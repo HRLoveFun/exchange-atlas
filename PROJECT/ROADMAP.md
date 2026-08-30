@@ -48,7 +48,7 @@
 ## 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
-共 1774 个已填字段，其中 0 个超过复核阈值待复核。
+共 1778 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
 |---|---|---|
@@ -69,7 +69,7 @@
 | `sg-sgx` | 104 | 0 |
 | `tw-twse` | 79 | 0 |
 | `uk-lse` | 67 | 0 |
-| `us-nasdaq` | 74 | 0 |
+| `us-nasdaq` | 78 | 0 |
 | `us-nyse` | 70 | 0 |
 | `za-jse` | 119 | 0 |
 <!-- END:GENERATED health-summary -->

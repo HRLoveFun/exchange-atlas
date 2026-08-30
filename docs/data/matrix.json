@@ -6592,13 +6592,13 @@
       "field_path": "order_types",
       "label_zh": "订单类型",
       "label_en": "Order Types",
-      "zh": "限价、市价及多种细分订单类型（如最小数量单、中点挂钩单Mid-Point Peg、只加单Post Only、自成交防范Self Match Prevention等）；完整订单类型矩阵见Order Types Guide",
-      "en": "Limit and market orders plus specialized types (Minimum Quantity, Mid-Point Peg, Post Only, Self Match Prevention, etc.); full matrix in the Order Types Guide",
+      "zh": "限价单、市价单及多种细分类型与属性（Order Types Guide）：最小数量单（Minimum Quantity）、中点挂钩单（Mid-Point Peg）、非展示单（Non-Displayed）、只加单（Post Only）、自成交防范（Self Match Prevention）等；开盘 / 收盘另有 Opening / Closing Cross",
+      "en": "Limit and market orders plus a range of specialized types and attributes (see the Order Types Guide): Minimum Quantity, Mid-Point Peg, Non-Displayed, Post Only, and Self Match Prevention; the open and close use the Opening and Closing Crosses",
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
       "verified": "2026-08-14",
-      "confidence": "high"
+      "confidence": "medium"
     },
     {
       "exchange_id": "us-nasdaq",

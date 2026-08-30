@@ -562,7 +562,27 @@
         "enum": null,
         "detail": null
       },
-      "execution_model": null,
+      "execution_model": {
+        "enum": "hybrid",
+        "spec": {
+          "electronic": true,
+          "dealer_intermediated": true,
+          "note": "中央电子限价订单簿连续撮合 + 竞争性做市商——任意数量会员机构可就同一证券登记做市、以自有账户买卖并显示报价（区别于 NYSE 单一 DMM）"
+        },
+        "zh": "混合模式：中央电子限价订单簿连续撮合，叠加竞争性做市商制度——任意数量会员机构可就同一证券登记为做市商，以自有账户在 Nasdaq 显示报价买卖并彼此竞争",
+        "en": "Hybrid: a central electronic limit order book with continuous matching, plus a competing market maker model — any number of member firms may register as market makers in a security and display two-sided quotes for their own account in competition with one another",
+        "detail": "enum 依据既有 market_maker_scheme（竞争性做市商，confidence high）与 matching_principle（displayed / non-displayed 优先级，confidence high）的已核实 quote 综合判定：做市商为一等价格形成参与者，故归 hybrid。与 NYSE 同为 hybrid 但形态不同（竞争性多做市商 vs 单一 DMM）。",
+        "sources": [
+          {
+            "title": "Market Maker Process（官网）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=marketmakerprocess",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "A market maker is a NASDAQ member firm that buys and sells securities at prices it displays in NASDAQ for its own account (principal trades) and for customer accounts (agency trades).",
+        "confidence": "medium",
+        "verified": "2026-08-14"
+      },
       "matching_principle": {
         "enum": "price_display_time",
         "zh": "价格/时间优先撮合：同一价位按订单到达先后顺序执行；显示订单（displayed）优先于非展示订单（non-displayed）成交",
@@ -581,8 +601,15 @@
         "detail": null
       },
       "order_types": {
-        "zh": "限价、市价及多种细分订单类型（如最小数量单、中点挂钩单Mid-Point Peg、只加单Post Only、自成交防范Self Match Prevention等）；完整订单类型矩阵见Order Types Guide",
-        "en": "Limit and market orders plus specialized types (Minimum Quantity, Mid-Point Peg, Post Only, Self Match Prevention, etc.); full matrix in the Order Types Guide",
+        "spec": {
+          "market": true,
+          "limit": true,
+          "hidden": true,
+          "pegged": true,
+          "note": "Nasdaq 订单类型（Equity Rules 4702/4703）：限价单 / 市价单为基础；非展示订单（Non-Displayed）与中点挂钩单（Mid-Point Peg）为隐藏流动性；另有 Post Only、Minimum Quantity、ISO、Discretionary 等属性与修饰符；完整清单见 Order Types Guide。iceberg 类以 Reserve/Random Reserve 属性实现，本次未逐字核实故不入 spec"
+        },
+        "zh": "限价单、市价单及多种细分类型与属性（Order Types Guide）：最小数量单（Minimum Quantity）、中点挂钩单（Mid-Point Peg）、非展示单（Non-Displayed）、只加单（Post Only）、自成交防范（Self Match Prevention）等；开盘 / 收盘另有 Opening / Closing Cross",
+        "en": "Limit and market orders plus a range of specialized types and attributes (see the Order Types Guide): Minimum Quantity, Mid-Point Peg, Non-Displayed, Post Only, and Self Match Prevention; the open and close use the Opening and Closing Crosses",
         "sources": [
           {
             "title": "The Nasdaq Stock Market（交易机制总览页）",
@@ -591,28 +618,38 @@
           }
         ],
         "quote": "Nasdaq offers popular orders and functionality such as Minimum Quantity, Mid-Point Peg and Post Only orders, Self Match Prevention and Order Modify functionality, a robust suite of innovative routing strategies and our award-winning opening and closing crosses.",
-        "confidence": "high",
+        "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "tick_size": {
-        "zh": "",
-        "confidence": "low",
+        "spec": {
+          "regime": "tiered_by_price_and_liquidity",
+          "min_tick": 0.005,
+          "currency": "USD",
+          "full_table_note": "17 CFR 242.612 (Reg NMS Rule 612)：报价 ≥ $1.00 的 NMS 股票按主上市所每半年测算的时间加权平均报价价差（TWAQS）分配 tick——≤ $0.015 为 $0.005，> $0.015 为 $0.01；报价 < $1.00 的股票为 $0.0001。两档制 2025-11-03 起施行",
+          "note": "联邦层面的全国市场系统统一规则，非 Nasdaq 单独规定"
+        },
+        "zh": "按 Reg NMS Rule 612（17 CFR 242.612）：报价不低于 $1.00 的 NMS 股票，最小报价单位为 $0.01 或 $0.005（时间加权平均报价价差 $0.015 或以下者为 $0.005，否则为 $0.01，由主上市交易所每半年评估分配）；报价低于 $1.00 的股票为 $0.0001",
+        "en": "Per Reg NMS Rule 612 (17 CFR 242.612): for NMS stocks priced at or above $1.00, the minimum pricing increment is either $0.01 or $0.005 (a $0.005 tick if the Time Weighted Average Quoted Spread over the Evaluation Period was $0.015 or less, otherwise $0.01, assessed semi-annually by the primary listing exchange); for stocks priced below $1.00 it is $0.0001",
+        "detail": "两档制（$0.005 / $0.01）自 2025-11-03（首个评估期 2025 年 7–9 月）起施行，取代此前统一 $0.01。适用范围为全部 NMS 股票（联邦规则），此前本字段留空。",
         "sources": [
           {
-            "title": "The Nasdaq Stock Market（交易机制总览页）",
-            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
-            "accessed": "2026-08-14"
+            "title": "17 CFR § 242.612 — Minimum pricing increment（eCFR versioner API，title 17 part 242，issue 2026-08-17）",
+            "url": "https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=242",
+            "accessed": "2026-08-30"
+          },
+          {
+            "title": "Tick Sizes – A Small Entity Compliance Guide（SEC，2024-11-21）",
+            "url": "https://www.sec.gov/resources-small-businesses/small-business-compliance-guides/tick-sizes",
+            "accessed": "2026-08-30"
           }
         ],
+        "quote": "if that bid or offer, order, or indication of interest is priced equal to or greater than $1.00 per share: ( i ) $0.01, if the Time Weighted Average Quoted Spread for the NMS stock during the Evaluation Period was greater than, $0.015; or ( ii ) $0.005, if the Time Weighted Average Quoted Spread for the NMS stock during the Evaluation Period was equal to or less than $0.015. ... shall display, rank, or accept from any person a bid or offer, an order, or an indication of interest in any NMS stock priced in an increment smaller than $0.0001 if that bid or offer, order, or indication of interest is priced less than $1.00 per share.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "board_lot_size": {
         "zh": "",
@@ -784,7 +821,34 @@
         "detail": null,
         "quote": null
       },
-      "error_trade_rule": null,
+      "error_trade_rule": {
+        "spec": {
+          "bust_allowed": true,
+          "review_window_min": 30,
+          "deviation_threshold_pct": 10,
+          "resolution": "cancel",
+          "note": "常规市场时段内、受 LULD 计划约束的 NMS 股票原则上不可复核（LULD 价格带已阻止极端价成交）；仅在 LULD 带不可用、系统故障致带外成交、监管停牌后成交、或参考价错误等情形可复核。适用数值门槛按参考价分档：≤$25 为 10%、$25.01–$50 为 5%、>$50 为 3%（盘前/盘后翻倍）。裁定成立即宣告成交无效并从合并行情带移除，不作调价。Rule 4120(c) 停牌拍卖产生的成交不可申请复核"
+        },
+        "zh": "「明显错误」成交（价格、股数、证券识别等任一要素明显有误）：会员可在成交后 30 分钟内向 Nasdaq MarketWatch 书面申请复核；官员亦可自行发起、一般在发现后 30 分钟内处理；裁定成立者宣告该笔成交无效（null and void）并从合并行情带移除。常规市场时段内受 LULD 计划约束的股票通常不予复核；适用数值门槛为偏离参考价 10%（参考价 $0.00–$25.00）、5%（$25.01–$50.00）、3%（>$50.00），偏离 ≥30% 一律作废",
+        "en": "A 'clearly erroneous' execution (an obvious error in any term such as price, number of shares, or identification of the security): a member may file a written request for review with Nasdaq MarketWatch within 30 minutes of the execution time, and an official may also act on their own motion generally within 30 minutes of detection; if found clearly erroneous the transaction is declared null and void and removed from the consolidated tape. During Regular Market Hours, stocks subject to the LULD Plan are generally not reviewable; where the Numerical Guidelines apply a trade is clearly erroneous if it deviates from the Reference Price by 10% (Reference Price $0.00–$25.00), 5% ($25.01–$50.00) or 3% (over $50.00), and transactions 30% or more away are nullified",
+        "detail": "Nasdaq Equity Rule 11890（Clearly Erroneous Transactions），与 NYSE Rule 7.10 同出 SRO 统一框架、内容基本一致。美国股票 CEE 只作废、不调价。quote 引自 SR-NASDAQ-2022-052 Exhibit 5（原文含增删标记，此处摘无标记的连续片段）。",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market LLC Rules — Rule 11890 (Clearly Erroneous Transactions)，SEC filing SR-NASDAQ-2022-052 Exhibit 5",
+            "url": "https://www.sec.gov/files/rules/sro/nasdaq/2022/34-95902-ex5.pdf",
+            "accessed": "2026-08-30"
+          },
+          {
+            "title": "Clearly Erroneous Transactions Policy（nasdaqtrader.com 官网）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=clearlyerroneous",
+            "accessed": "2026-08-30"
+          }
+        ],
+        "quote": "the terms of a transaction executed on Nasdaq are \"clearly erroneous\" when there is an obvious error in any term, such as price, number of shares or other unit of trading, or identification of the security. A transaction made in clearly erroneous error and cancelled by both parties or determined by Nasdaq to be clearly erroneous will be removed from the consolidated tape. ... Nasdaq MarketWatch within 30 minutes of the execution time. ... Greater than $0.00 up to and including $25.00 10% ... Greater than $50.00 3% ... the official shall declare the transaction null and void.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "enum": null
+      },
       "intraday_reversal": {
         "enum": "t0",
         "zh": "T+0（可当日回转），与结算层面T+1（见clearing.settlement_cycle）是两个不同概念",
@@ -851,7 +915,23 @@
         "detail": null,
         "quote": null
       },
-      "order_book_transparency": null,
+      "order_book_transparency": {
+        "zh": "盘前：Nasdaq 运营公开的中央限价订单簿，展示订单（displayed limit orders）的价量向市场披露并按到达顺序成交，全市场深度通过 Nasdaq TotalView 等自有行情源及 SIP 分发；支持不披露的流动性——非展示订单（Non-Displayed）与中点挂钩单（Mid-Point Peg）为隐藏，排在同价展示订单之后成交。盘后：成交实时打印至合并行情带，无欧盟式大额成交延迟披露（LIS deferral）安排",
+        "en": "Pre-trade: Nasdaq operates a public central limit order book; displayed limit orders are disseminated in size and price and matched in time priority, with full market depth distributed through Nasdaq proprietary feeds (e.g. TotalView) and the SIP, while non-displayed liquidity is supported — Non-Displayed and Mid-Point Peg orders are hidden and execute behind displayed orders at the same price. Post-trade: executions print to the consolidated tape in real time, with no EU-style large-in-scale deferral",
+        "detail": "字段管本所订单簿内部的（非）展示流动性；独立暗池 / ATS 见 dark_pool，行情层级 / 收费见第十章 market_data_levels。quote 复用 matching_principle 的已核实 quote（displayed vs non-displayed 的正面区分）+ 价目表『Non-Displayed Liquidity』条目。整体 confidence: medium（缺一条正面描述『订单簿对公众公开』并覆盖盘后披露的单一 quote）。",
+        "sources": [
+          {
+            "title": "The Nasdaq Stock Market（交易机制总览页）",
+            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "All displayed limit orders are treated equally and executed in the order in which they were received at the same price. Non-displayed shares are executed after displayed shares in the order in which they were received at that price.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "enum": null,
+        "spec": null
+      },
       "dark_pool": {
         "zh": "纳斯达克自身撮合系统内设有非展示订单（Non-Displayed/Midpoint Peg等）机制，可提供不公开显示的流动性；这与传统意义上独立于交易所之外的第三方暗池是否算同一概念，本次未核实清楚",
         "en": "Nasdaq's own matching system offers non-displayed order types (e.g. Midpoint Peg) providing hidden liquidity; whether this is the same concept as third-party off-exchange dark pools was not clarified this session",
