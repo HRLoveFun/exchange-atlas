@@ -391,6 +391,22 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
      （香港 SFC + AFRC、美股 NSCC value-into/out-of-net）用 `components: [{name, rate}]`，渲染层求和。
    - 填完在「成本瀑布」tab 里点开自检（渲染层落地后）。
 
+10. **第八章清算的 `guarantee_model` + `default_management.spec`（[ADR-050]，交割管线）：**
+    - **`clearing.guarantee_model`（enum，`en_required`）**——「谁来保证成交最终交收」，4 值见
+      `schema/enums.yml`：`ccp_novation`（独立法人 CCP 更替担保，多数）/ `exchange_as_ccp`
+      （交易所自身即 CCP，无独立法人）/ `lines_of_defence`（无 novation 的多层结算保障防线）/
+      `shared_ccp`（跨市场共享独立 CCP，如美股 NSCC）。`quote` 直接复用同文件 `ccp_name` /
+      `default_management` / `csd_name` 已核实的 verbatim quote。定级规则：**quote 里逐字出现
+      `central counterparty` / `CCP` / `novat*` / `buyer to every seller` 才可标 `high`，
+      否则 `medium`**（「是不是 CCP」有据但「4 种模式选哪个」是分类判断时降 `medium`）。
+    - **`clearing.default_management.spec`**——`model`（`ccp_default_waterfall` / `lines_of_defence` /
+      `unstructured`）+ `layers`（每项 `order` int / `resource` 从 quote 摘的短语 / `bearer` 可选，
+      取 `defaulter` / `ccp` / `surviving_members` / `statutory_fund` / `external`）+ `note`。
+      **只存层级顺序 + bearer，绝不存金额**——`order` 是唯一数值且为个位数，不进 5b 反查。
+    - **quote 给了明确 (a)(b)(c)… / ①②③ 顺序 → 填完整 `layers`**；quote 只泛述「设有违约基金 /
+      按规则处置」没有干净层级 → **`model: unstructured` + `note`**（三态占位，别硬凑层级）。
+      lines_of_defence 的预防性层级（准入门槛、资本监控）可省 `bearer`。
+
 ### 5. 本地验证
 
 ```

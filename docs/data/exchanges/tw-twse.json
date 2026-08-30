@@ -1337,6 +1337,23 @@
         "enum": null,
         "spec": null
       },
+      "guarantee_model": {
+        "enum": "exchange_as_ccp",
+        "zh": "台湾证券交易所自身承担中央对手方之实质角色：与会员证券商按证券 / 款项分别多边净额沖抵，一方不履行交割义务时指定其他证券商代为交付；未另设与交易所法律上分离的独立 CCP 法人实体（与 KRX 同类，但无 novation 式债务更替，走指定他方代交付）",
+        "en": "Taiwan Stock Exchange itself performs the de facto CCP role — multilateral netting of securities and cash with member brokers, and if one party fails to deliver, TWSE designates another securities firm to deliver on its behalf; there is no separate CCP legal entity distinct from the exchange (same family as KRX, but without novation-style obligation substitution — it uses substitute delivery)",
+        "sources": [
+          {
+            "title": "结算交割作业特色",
+            "url": "https://www.twse.com.tw/zh/clearing/clearing/features.html",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "本公司與證券商進行沖抵計算，計算出雙方間就每一證券標的之淨應收或淨應付數量...證券商在本公司市場買賣證券，買賣一方不履行交付義務時，本公司應指定其他證券商代為交付。",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "spec": null,
+        "detail": null
+      },
       "initial_margin_practice": {
         "zh": "现货股票买卖无衍生品意义上的初始保证金；信用交易（融资融券）须收足融资自备款或融券保证金，具体成数依主管机关规定按标的分类调整，本次未逐条核实费率表",
         "en": "No initial margin in the derivatives sense for cash stock trading; margin trading (融資融券) requires full collection of the margin-purchase own-funds contribution or short-sale margin, with the exact percentage set by the regulator and varying by security category — the specific rate schedule was not verified article-by-article this session",
@@ -1411,6 +1428,10 @@
         "sources": null
       },
       "default_management": {
+        "spec": {
+          "model": "unstructured",
+          "note": "TWSE 自身承担交割履约：成交不可撤销，一方不履行时指定其他证券商代为交付、本公司完成对待给付；另设券商共同提缴的交割结算基金（本条 quote 未涵盖其动用顺序）。非标准 CCP 违约瀑布 → 三态占位为 unstructured"
+        },
         "zh": "台湾证券交易所集中市场交易完成后不得撤销；证券商须完成对本公司之款券交割，若买卖一方不履行交付义务，本公司应指定其他证券商代为交付",
         "en": "TWSE-market trades are irrevocable once completed; if one party fails to deliver, TWSE designates another securities firm to deliver on its behalf",
         "quote": "本公司集中市場之交易，完成之後即不得撤銷。證券商必須完成對本公司之款券交割，本公司也將對其完成對待給付，撥付其應收之款券。證券商在本公司市場買賣證券，買賣一方不履行交付義務時，本公司應指定其他證券商代為交付。",
@@ -1424,7 +1445,6 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "derivatives": {

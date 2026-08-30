@@ -1293,6 +1293,23 @@
         "enum": null,
         "spec": null
       },
+      "guarantee_model": {
+        "enum": "ccp_novation",
+        "zh": "Xetra 现货成交由主中央对手方 Eurex Clearing AG 经净额结算担保交收；交易参与者可为特定证券指定 Cboe Clear Europe N.V. 为「优选 CCP」（欧洲 CCP 互操作性安排），双方选定同一优选 CCP 时按该方净额结算，否则默认由 Eurex Clearing AG 净额结算",
+        "en": "Xetra spot trades are guaranteed via netting at the primary CCP, Eurex Clearing AG; trading participants may designate Cboe Clear Europe N.V. as a \"Preferred CCP\" for selected securities under European CCP interoperability — if both counterparties select the same preferred CCP the trade nets there, otherwise it defaults to Eurex Clearing AG",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB（§119(1)）PDF",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "The netting of receivables and liabilities (\"Clearing\") for Transactions concluded on FWB shall be carried out via Eurex Clearing AG or Cboe Clear Europe N.V. for Securities defined by the Management Board. ... Otherwise, the Transaction will be netted by Eurex Clearing AG.",
+        "confidence": "medium",
+        "verified": "2026-08-14",
+        "spec": null,
+        "detail": null
+      },
       "initial_margin_practice": {
         "zh": "",
         "confidence": "low",
@@ -1379,6 +1396,47 @@
         "quote": null
       },
       "default_management": {
+        "spec": {
+          "model": "ccp_default_waterfall",
+          "layers": [
+            {
+              "order": 1,
+              "resource": "违约会员的保证金抵押品",
+              "bearer": "defaulter"
+            },
+            {
+              "order": 2,
+              "resource": "违约会员的违约基金出资",
+              "bearer": "defaulter"
+            },
+            {
+              "order": 3,
+              "resource": "Eurex Clearing 专项自有投入（Dedicated Amount / Skin in the Game）",
+              "bearer": "ccp"
+            },
+            {
+              "order": 4,
+              "resource": "非违约会员的违约基金出资",
+              "bearer": "surviving_members"
+            },
+            {
+              "order": 5,
+              "resource": "第二层自有投入（Second Skin in the Game）",
+              "bearer": "ccp"
+            },
+            {
+              "order": 6,
+              "resource": "向会员追收的附加出资（assessments）",
+              "bearer": "surviving_members"
+            },
+            {
+              "order": 7,
+              "resource": "Eurex Clearing 自有股本",
+              "bearer": "ccp"
+            }
+          ],
+          "note": "层级与 de-eurex 一致（同一 Eurex Clearing 违约瀑布）；Deutsche Börse AG 另出具安慰函提供资金支持"
+        },
         "zh": "Xetra现货交易的清算由Eurex Clearing AG（或交易参与者指定的Cboe Clear Europe）担任中央对手方，其违约处置遵循Eurex Clearing的「违约瀑布」（Default Waterfall）：首先动用违约清算会员自身的保证金与违约基金出资覆盖损失；不足时依次动用Eurex Clearing自有「投入金额」（Dedicated Amount/Skin in the Game）、非违约会员的违约基金出资与「第二层自有投入」、向会员追收的附加出资（assessments），最后动用Eurex Clearing自有股本；Deutsche Börse AG另出具安慰函提供资金支持",
         "en": "Clearing of Xetra spot trades is undertaken by Eurex Clearing AG (or Cboe Clear Europe where designated by the trading participant) as CCP; its default management follows Eurex Clearing's \"Default Waterfall\": first, the defaulted clearing member's own margin collateral and Default Fund contribution are used to cover losses; if insufficient, Eurex Clearing's own \"Dedicated Amount\" (Skin in the Game), then non-defaulting members' Default Fund contributions and \"Second Skin in the Game\", then additional assessments levied on members, and finally Eurex Clearing's own equity; Deutsche Börse AG additionally provides a letter of comfort",
         "detail": "清算层级与de-eurex的瀑布一致；Xetra现货的CCP为Eurex Clearing AG",
@@ -1392,8 +1450,7 @@
         "quote": "In case of the default of a Clearing Member and the occurrence of a termination event with respect to such Clearing Member, Eurex Clearing primarily uses the financial resources provided by such defaulted Clearing Member (its margin collateral and its contribution to the Default Fund) to cover resulting losses.",
         "confidence": "high",
         "verified": "2026-08-27",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "derivatives": {
         "initial_margin_practice": null,

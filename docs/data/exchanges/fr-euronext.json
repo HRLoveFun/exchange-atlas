@@ -1881,6 +1881,23 @@
         "enum": null,
         "spec": null
       },
+      "guarantee_model": {
+        "enum": "ccp_novation",
+        "zh": "集团旗下唯一独立法人中央对手方 Euronext Clearing（法定实体为意大利公司 Cassa di Compensazione e Garanzia S.p.A.，受 EMIR 监管）经更替（novation）介入买卖双方， 先后承接集团现货与衍生品清算、覆盖已整合的各国市场（承接时点见 clearing.ccp_name）",
+        "en": "Euronext Clearing — the Group's sole independent legal-entity CCP (the legal entity is the Italian company Cassa di Compensazione e Garanzia S.p.A., EMIR-authorised) — interposes itself by novation between buyer and seller, having progressively taken over the Group's cash and derivatives clearing across the integrated markets (migration dates in clearing.ccp_name)",
+        "sources": [
+          {
+            "title": "Euronext Clearing Risk Management（官网）",
+            "url": "https://www.euronext.com/en/clearing/risk-management",
+            "accessed": "2026-08-18"
+          }
+        ],
+        "quote": "Default Funds are an additional, mutualistic layer of protection aimed at protecting the CCP from extreme but plausible risks, not captured by margins.",
+        "confidence": "medium",
+        "verified": "2026-08-16",
+        "spec": null,
+        "detail": null
+      },
       "initial_margin_practice": {
         "zh": "",
         "confidence": "low",
@@ -1943,6 +1960,27 @@
         "sources": null
       },
       "default_management": {
+        "spec": {
+          "model": "ccp_default_waterfall",
+          "layers": [
+            {
+              "order": 1,
+              "resource": "违约会员的保证金",
+              "bearer": "defaulter"
+            },
+            {
+              "order": 2,
+              "resource": "违约基金（互助层，Default Fund）",
+              "bearer": "surviving_members"
+            },
+            {
+              "order": 3,
+              "resource": "CCP 自有资本",
+              "bearer": "ccp"
+            }
+          ],
+          "note": "EMIR 标准损失分担层级；Euronext Clearing 逐层参数（SITG 规模、assessments、Second SITG 等）本次未逐条核实，故只结构化 3 段"
+        },
         "zh": "Euronext Clearing 采用多层风险防护：每日向清算会员（Clearing Member）收取保证金以覆盖其违约及平仓的 theoretical 成本；此外设立「违约基金」(Default Fund) 作为额外、互助式的保护层，覆盖超出保证金的极端但合理的风险。违约处置按 EMIR 框架下的损失分担层级（保证金→违约基金→CCP 自有资本）进行，但具体逐层参数本次未逐条核实。",
         "en": "Euronext Clearing applies a multi-layered risk framework: margins are called on a daily basis to cover the theoretical costs it would incur in the event of a Clearing Member's default and the clearing of its open positions; in addition, a Default Fund provides an additional, mutualistic layer of protection aimed at covering extreme but plausible risks not captured by margins. Default handling follows the EMIR loss-waterfall hierarchy (margins → Default Fund → CCP own capital), but the exact per-tranche parameters were not individually verified this session.",
         "sources": [
@@ -1956,7 +1994,6 @@
         "confidence": "high",
         "verified": "2026-08-27",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "derivatives": {

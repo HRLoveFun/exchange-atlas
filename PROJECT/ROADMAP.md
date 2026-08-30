@@ -2,7 +2,7 @@
 
 进度状态放这里；「为什么这么排」去 `DECISIONS.md`，这里不重复。
 
-## 当前阶段：**v2.0 高度可视化转向**（2026-08-29 校准）——主视图从对比矩阵改为单市场「市场机制剖面」（旧名「交易日平面图」，[ADR-042] 更名），新增结构化 `spec` 层。加固组 A1/A2（[ADR-033]/[ADR-034]）、Phase 0 范式定案（[ADR-035]/[ADR-036]）、Phase 1a `spec` 层实装 + 5 家示范（[ADR-037]）、Phase 1b 全部完成（[ADR-038] + [ADR-039]）、**Phase 2 · 市场机制剖面实装完成**（[ADR-040]，`app.js` `renderTradingDay` 手写 SVG，成为默认首屏兼第一个 tab）、**收口审查四轮 + schema 对齐交易员心智模型**（[ADR-042]：第五章补 3 字段 + 4 个 spec 形状 + 覆盖边界写明，数据回填并入 Phase 3）、**Phase 2 收口 gate 实测达标**（2026-08-30，用户执行「30 秒看懂」非专业读者实测，通过）、**Phase 3 首棒 · [ADR-042] 三字段 + 四 spec 形状 20 家回填完成**（2026-08-30，[ADR-043]）、**`.cache` 符号链接 bug 修复**（[ADR-044]，PR #36）、**Phase 3 第二棒 · 成本瀑布数据层 + 渲染层首版完成**（2026-08-30，[ADR-045] 数据层：`schema/spec.yml` 加 `costs.*` `cost_layer` 形状，全 20 家 103 个 costs spec；[ADR-047] 渲染层首版：`renderCostWaterfall` 镜像双瀑布 SVG + 顶层 tab「交易成本瀑布」，仅前端三文件、`docs/data/` 零 diff，headless 截图核对 13 家 × 明暗通过）。另 [ADR-046] 删除 `tier`（标杆批次）身份字段。**Phase 3 第三棒 · 交割管线可视化设计定案**（2026-08-30，[ADR-048]：① 双泳道并列 ② 违约瀑布作主图下方常驻附图、层级堆叠按「谁的钱」上色 ③ 新增 `guarantee_model` 枚举——仅定方向，schema/数据/渲染留后续）。**下一步：交割管线实施（[ADR-048] 方向已定——`spec` 形状细化 → `schema/spec.yml`+`enums.yml` → 20 家 `default_management.spec` 回填 → `renderSettlementPipeline`）；成本瀑布视觉迭代（交互式会话，见 [ADR-047] 已知局限）；英文版可用性修订（审查 + 五批次计划见 `PROJECT/ENGLISH-REVISION-PLAN.md`，待排期）。之后 上市生命周期 → 监管图 → 参与者 → 风险旗标。**
+## 当前阶段：**v2.0 高度可视化转向**（2026-08-29 校准）——主视图从对比矩阵改为单市场「市场机制剖面」（旧名「交易日平面图」，[ADR-042] 更名），新增结构化 `spec` 层。加固组 A1/A2（[ADR-033]/[ADR-034]）、Phase 0 范式定案（[ADR-035]/[ADR-036]）、Phase 1a `spec` 层实装 + 5 家示范（[ADR-037]）、Phase 1b 全部完成（[ADR-038] + [ADR-039]）、**Phase 2 · 市场机制剖面实装完成**（[ADR-040]，`app.js` `renderTradingDay` 手写 SVG，成为默认首屏兼第一个 tab）、**收口审查四轮 + schema 对齐交易员心智模型**（[ADR-042]：第五章补 3 字段 + 4 个 spec 形状 + 覆盖边界写明，数据回填并入 Phase 3）、**Phase 2 收口 gate 实测达标**（2026-08-30，用户执行「30 秒看懂」非专业读者实测，通过）、**Phase 3 首棒 · [ADR-042] 三字段 + 四 spec 形状 20 家回填完成**（2026-08-30，[ADR-043]）、**`.cache` 符号链接 bug 修复**（[ADR-044]，PR #36）、**Phase 3 第二棒 · 成本瀑布数据层 + 渲染层首版完成**（2026-08-30，[ADR-045] 数据层：`schema/spec.yml` 加 `costs.*` `cost_layer` 形状，全 20 家 103 个 costs spec；[ADR-047] 渲染层首版：`renderCostWaterfall` 镜像双瀑布 SVG + 顶层 tab「交易成本瀑布」，仅前端三文件、`docs/data/` 零 diff，headless 截图核对 13 家 × 明暗通过）。另 [ADR-046] 删除 `tier`（标杆批次）身份字段。**Phase 3 第三棒 · 交割管线可视化设计定案**（2026-08-30，[ADR-048]：① 双泳道并列 ② 违约瀑布作主图下方常驻附图、层级堆叠按「谁的钱」上色 ③ 新增 `guarantee_model` 枚举）。**Phase 3 第三棒（数据层）完成**（2026-08-31，[ADR-050]：`schema/enums.yml`+`spec.yml`+`taxonomy.yml` 加 `guarantee_model` 枚举与 `clearing.default_management` spec 形状〔`bearer` 5 值〕；全 20 家 `default_management.spec`〔12 完整瀑布 + 1 lines_of_defence + 7 unstructured 三态〕+ `guarantee_model`〔8 high + 12 medium〕回填；`make check` 全绿、`progress-matrix` 零 diff、`health-summary` +20；未动前端）。**下一步：① 英文版可用性修订（审查 + 五批次计划见 `PROJECT/ENGLISH-REVISION-PLAN.md`，待排期，前端三件套主战场）② 交割管线渲染层 `renderSettlementPipeline`（待英文版修订合并后，避免前端合并冲突）③ 成本瀑布视觉迭代（交互式会话，见 [ADR-047] 已知局限）。之后 上市生命周期 → 监管图 → 参与者 → 风险旗标。**
 
 ## 阶段路线
 
@@ -48,30 +48,30 @@
 ## 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
-共 1844 个已填字段，其中 0 个超过复核阈值待复核。
+共 1864 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
 |---|---|---|
-| `au-asx` | 107 | 0 |
-| `br-b3` | 108 | 0 |
-| `ca-tsx` | 85 | 0 |
-| `ch-six` | 85 | 0 |
-| `cn-sse` | 73 | 0 |
-| `cn-szse` | 108 | 0 |
-| `de-eurex` | 79 | 0 |
-| `de-xetra` | 80 | 0 |
-| `fr-euronext` | 103 | 0 |
-| `hk-hkex` | 93 | 0 |
-| `in-nse` | 104 | 0 |
-| `jp-jpx` | 75 | 0 |
-| `kr-krx` | 109 | 0 |
-| `sa-tadawul` | 105 | 0 |
-| `sg-sgx` | 107 | 0 |
-| `tw-twse` | 82 | 0 |
-| `uk-lse` | 71 | 0 |
-| `us-nasdaq` | 78 | 0 |
-| `us-nyse` | 70 | 0 |
-| `za-jse` | 122 | 0 |
+| `au-asx` | 108 | 0 |
+| `br-b3` | 109 | 0 |
+| `ca-tsx` | 86 | 0 |
+| `ch-six` | 86 | 0 |
+| `cn-sse` | 74 | 0 |
+| `cn-szse` | 109 | 0 |
+| `de-eurex` | 80 | 0 |
+| `de-xetra` | 81 | 0 |
+| `fr-euronext` | 104 | 0 |
+| `hk-hkex` | 94 | 0 |
+| `in-nse` | 105 | 0 |
+| `jp-jpx` | 76 | 0 |
+| `kr-krx` | 110 | 0 |
+| `sa-tadawul` | 106 | 0 |
+| `sg-sgx` | 108 | 0 |
+| `tw-twse` | 83 | 0 |
+| `uk-lse` | 72 | 0 |
+| `us-nasdaq` | 79 | 0 |
+| `us-nyse` | 71 | 0 |
+| `za-jse` | 123 | 0 |
 <!-- END:GENERATED health-summary -->
 
 ## v1.0 计划：横向铺开到 20+ 家
@@ -188,8 +188,10 @@
   - [x] **Phase 3 第二棒（数据层）· 成本瀑布 spec 形状 + 20 家回填**（2026-08-30，[ADR-045]）— 四个设计轴用户 Q&A 定案：① 6 费种进瀑布（佣金/交易所费/清算费/监管费/印花税/金融交易税；资本利得税·股息预扣税作注解另列）② 镜像双瀑布（买入侧/卖出侧，`side: buy/sell/both` 键）③ 归一 bp 在渲染层做，spec 只存 quote 撑得住的原始值 + `unit` ④ 新增顶层 tab「成本瀑布」。`schema/spec.yml` 加 `costs.*` 共用 `cost_layer` 形状（`rate`/`unit`/`currency`/`side`/`cap`/`components`/`tiered`/`type:none`/`note`）。协调者串行 3 commit，全 20 家共 **103 个 costs spec**：实体费率 bp 化（hk/cn-szse/in-nse/uk/ch/au/sa/de-xetra…）、多项分征费 `components`（hk SFC+AFRC、us NSCC）、`type: none` 关键事实（澳/加/巴/沙/日/德 印花税·FTT）、`rate: null` 幽灵条（全部佣金 + maker-taker 所 + tw/za 非阿拉伯数字 quote）。`validate` 0/0（5b 44 个 high 数值 spec 全过）、`verify_quotes` FAIL=0（未动 quote）。
   - [x] **清理 · 删除 `tier`（标杆批次）身份字段**（2026-08-30，[ADR-046]）— 用户判定"交易所是第几批建档的"是无效信息。整字段删除：`schema/enums.yml` 词表 + `taxonomy.yml` 字段定义、20 家 `data/exchanges/*.yml` 的 `tier:` 行、`sync.py`（`REQUIRED_IDENTITY_FIELDS` / `build_enum_label_maps` / README exchange-list 的「批次」列）、`SKILL.md` 填写步骤。前端自 [ADR-025] 起已无 `tier` 引用。`make check` 0/0、`verify_quotes` FAIL=0（未动 quote/zh/spec）。**未动**：ROADMAP 的 Wave/Batch 进度日志、历史 ADR（[ADR-016] 等）、glossary 词条里的"v1.1 Batch 1"造词说明——工作日志不是交易所元数据（用户选最窄范围）。
   - [x] **Phase 3 第二棒（渲染层首版）· 成本瀑布 `renderCostWaterfall`**（2026-08-30，[ADR-047]）— `docs/assets/app.js` `renderCostWaterfall` / `cwBuild`（手写 SVG 镜像双瀑布：中轴 0 bp、左买右卖，6 费种逐行按 `spec.side` 落侧 + 底部小计 + 往返合计）、`cwToBp` 归一（pct/permille/bp/per_lakh/per_crore/per_million 直换，per_share/flat_* 按假设成交额 100,000·股价 50 折算标 `≈`，`components` 求和、`tiered` 取首档标 `▸`、`cap` 记 tooltip 标 `^`）、诚实三态（实心条 / 幽灵斜纹条「议价·未披露」/ `type:none`「不征收」/ 无 spec「未结构化」）、持有·退出税（资本利得税·股息预扣税）图下方另列、点击复用 `openCellOverlay`、`de-eurex` prev_settlement 淡 banner；`index.html` 加顶层 tab（排「市场机制剖面」后）、路由键 `cost-waterfall`、`styles.css` `.cw-*`。**仅前端三文件，`docs/data/` 零 diff；`make build` 全绿（生成块无变化）；Chrome headless 13 家 × 明暗两主题截图核对通过，其余四视图无回归。** 已知局限（留交互式迭代）：单一费种远大于其余时左半留白、全零市场「合计 0.00 bp」略尴尬、暗色「此侧不征」虚线偏弱、按股/定额费折算较粗——见 [ADR-047]。
-  - [ ] **Phase 3 第三棒 · 交割管线可视化（设计定案，2026-08-30，[ADR-048]）** — 用户 Q&A 定三个方向：① **双泳道并列**（x=相对交易日天数；上泳道现货 T+N 流水线「成交→novation→轧差→保证金→DvP 终局」2–3 格封口，下泳道衍生品「成交→每日盯市循环 motif→不按比例的『到期』抽象区块→最终结算」；纯现货所下泳道 `type: none` 灰条、de-eurex 只画下泳道）② **违约瀑布作主图下方常驻附图**（与成本瀑布「主图+常驻税注解」同版式），纵向层级堆叠 = 动用顺序，按「谁的钱」上色（违约方红 / CCP SITG 橙 / 存续会员黄 / 法定风险基金灰）；`spec` 只存层级顺序+bearer 不存金额（不触校验 5b）③ **新增 `guarantee_model` 枚举**（`ccp_novation` / `exchange_as_ccp`（tw-twse·kr-krx）/ `lines_of_defence`（za-jse 现货）/ `shared_ccp`（us NSCC）），把 `ccp_name` 里三种「非标准 CCP」散文降级为结构化标签，前端据此选「CCP 介入」节点图形。**本棒只定方向**：`schema/spec.yml` 的 `clearing.*` 形状具体键、`schema/enums.yml` 加 `guarantee_model`、`taxonomy` 是否加 `enum_ref`（会牵动第 8 章 progress-matrix，类 [ADR-042] za-jse ✅→🟡）、20 家 `default_management.spec` + `guarantee_model` 回填、`docs/assets/app.js` `renderSettlementPipeline` + 顶层 tab —— 均留后续（可能再一轮 `spec` 形状细化确认，数据回填按 [ADR-043] 教训协调者串行）。`data/` 未动。
-  - [ ] **英文版可用性修订**（审查完成 2026-08-30，待排期）— 走查发现「英文版」（`langMode: en`）只在矩阵 / 档案 / 健康度三视图部分成立；市场机制剖面 + 成本瀑布几乎全中文（Phase 2/3 新代码未接语言开关），另 1028 个 `detail` 从不翻译、[ADR-006] UI 双语约定多处漏网、站点外壳与 `README` 无英文。事实信封 `en` 覆盖率与译文质量本身达标（[ADR-034] 生效）。**完整审查 + 五批次修订计划（A 视图接语言开关 / B `detail` 折叠降级 / C 清单语串 + 加机器校验 / D 外壳 + `README.en.md` 完整版 / E 术语一致性）见 `PROJECT/ENGLISH-REVISION-PLAN.md`。** 前三批纯前端、零数据改动。收尾写 ADR（暂定 ADR-049，ADR-048 已归交割管线）。
+  - [x] **Phase 3 第三棒 · 交割管线可视化 — 设计定案**（2026-08-30，[ADR-048]）— 用户 Q&A 定三个方向：① **双泳道并列**（x=相对交易日天数；上泳道现货 T+N 流水线「成交→novation→轧差→保证金→DvP 终局」2–3 格封口，下泳道衍生品「成交→每日盯市循环 motif→不按比例的『到期』抽象区块→最终结算」；纯现货所下泳道 `type: none` 灰条、de-eurex 只画下泳道）② **违约瀑布作主图下方常驻附图**（与成本瀑布「主图+常驻税注解」同版式），纵向层级堆叠 = 动用顺序，按「谁的钱」上色（违约方红 / CCP SITG 橙 / 存续会员黄 / 法定风险基金灰）；`spec` 只存层级顺序+bearer 不存金额（不触校验 5b）③ **新增 `guarantee_model` 枚举**。本棒只定方向、未动 `schema` / `data`。
+  - [x] **Phase 3 第三棒（数据层）· `default_management.spec` 形状 + `guarantee_model` 枚举 + 20 家回填**（2026-08-31，[ADR-050]；ADR-049 预留给英文版修订）— 实施前一轮 `spec` 形状细化 Q&A（三题全取推荐）：本棒范围=只做数据层 / `layers` 粒度=`bearer` 枚举 + `resource` 自由短语 / `guarantee_model`=taxonomy 第 8 章正式字段 + `enum_ref`。**`schema/` 三文件**：`enums.yml` 加 `guarantee_model` 4 值（`ccp_novation` 15 家 / `exchange_as_ccp` br·kr·tw / `lines_of_defence` za 现货 / `shared_ccp` us×2 的 NSCC）；`spec.yml` 加 `clearing.default_management` 形状（`model` + `layers`〔`order`/`resource`/`bearer`〕+ `note`，`bearer` 5 值——[ADR-048] 的 4 类 + 新增 `external` 外部授信 / 保险，因 cn-sse·hk·sg 有明确外部资源层）；`taxonomy.yml` 第 8 章 `csd_name` 后加 `guarantee_model`（`en_required` + `enum_ref`，**不加 `in_matrix`**）。**回填 20/20**：`default_management.spec` = 12 家完整 `ccp_default_waterfall` layers（hk 8 层 706 条、sg 6 层 (a)–(f)、uk 8 层、de-eurex/xetra 6–7 层、cn-sse 5 层 68 条…）+ 1 家 `lines_of_defence`（za）+ 7 家 `unstructured` 三态占位（ca/jp/sa/tw/us×2——框架存在、逐层瀑布未在一手页呈现，[ADR-048] 预期）；`guarantee_model` 20/20（7 high + 13 medium，`quote` 全复用同文件既有已核实字段）。**只动 `schema/` + `data/` + `PROJECT/`（DECISIONS / ROADMAP / SKILL）+ 生成产物；未动前端、未动 `docs/data/freshness.json`（依 ADR-043/045 惯例）。** 退出验收：`make check` 全绿——`validate` 20 家 0/0、`verify_quotes` FAIL=0（CACHE_MISS=1079 为 [ADR-044] 待重建已知态）；生成块唯一变动 `health-summary` +20（1844→1864），`progress-matrix` **零 diff**（`guarantee_model` 20/20 全填、`za-jse` 第 8 章仍 ✅）。**渲染层（`renderSettlementPipeline` + 顶层 tab，动前端三件套）留英文版修订合并后**——避让并行前端工作，同 [ADR-045]/[ADR-047] 分棒。
+  - [ ] **Phase 3 第三棒（渲染层）· `renderSettlementPipeline`** — 待英文版可用性修订合并后开工（避免 `app.js`/`index.html`/`styles.css` 合并冲突）。清单：`docs/assets/app.js` 双泳道 SVG + 违约瀑布常驻附图（按 `default_management.spec.layers[].bearer` 上色）+ 据 `guarantee_model` 选「CCP 介入」节点图形 / `index.html` 顶层 tab + 路由键 `settlement-pipeline` / `styles.css` `.sp-*` / Chrome headless 截图核对。**新代码从一开始接语言开关**（吸取 [ADR-047] 渲染层未接、留给英文版修订补的教训）。见 [ADR-048] 三方向。
+  - [ ] **英文版可用性修订**（审查完成 2026-08-30，待排期）— 走查发现「英文版」（`langMode: en`）只在矩阵 / 档案 / 健康度三视图部分成立；市场机制剖面 + 成本瀑布几乎全中文（Phase 2/3 新代码未接语言开关），另 1028 个 `detail` 从不翻译、[ADR-006] UI 双语约定多处漏网、站点外壳与 `README` 无英文。事实信封 `en` 覆盖率与译文质量本身达标（[ADR-034] 生效）。**完整审查 + 五批次修订计划（A 视图接语言开关 / B `detail` 折叠降级 / C 清单语串 + 加机器校验 / D 外壳 + `README.en.md` 完整版 / E 术语一致性）见 `PROJECT/ENGLISH-REVISION-PLAN.md`。** 前三批纯前端、零数据改动。收尾写 ADR-049（ADR-048 已归交割管线设计、ADR-050 已归交割管线数据层）。
 
 **v2.0 的 Phase 序列到 Phase 3 为止。**
 

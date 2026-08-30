@@ -1597,6 +1597,23 @@
         "spec": null,
         "detail": null
       },
+      "guarantee_model": {
+        "enum": "ccp_novation",
+        "zh": "日本证券结算公司（JSCC，JPX 集团旗下独立法人）作为中央对手方，为各市场全部证券交易提供清算，经债务承担 / 更改（obligation assumption）介入买卖双方；违约时即使发生也按既定时间表完成结算",
+        "en": "Japan Securities Clearing Corporation (JSCC, a separate legal entity within the JPX group) acts as central counterparty, providing clearing for all securities transactions on the markets by interposing itself through obligation assumption; even on a participant default it fulfils settlement on the regular schedule",
+        "sources": [
+          {
+            "title": "Summary（JPX官网，清算结算组织说明）",
+            "url": "https://www.jpx.co.jp/english/equities/clearing-settlement/outline/index.html",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Clearing services for all securities transactions on these markets are provided by Japan Securities Clearing Corporation (JSCC).",
+        "confidence": "medium",
+        "verified": "2026-08-24",
+        "spec": null,
+        "detail": null
+      },
       "initial_margin_practice": {
         "zh": "",
         "confidence": "low",
@@ -1659,6 +1676,10 @@
         "sources": null
       },
       "default_management": {
+        "spec": {
+          "model": "unstructured",
+          "note": "JSCC 宣告违约后停止为违约方清算新交易、在市场对冲平仓其持仓，客户持仓与担保品在可行时转移给非违约会员；违约损失依 JSCC 损失补偿（清算基金等）财务资源规则消化，并维持流动性供应设施按既定时间表完成结算。所抓官方页描述处置流程而非逐层损失分摊瀑布 → 三态占位为 unstructured"
+        },
         "zh": "JSCC（清算机构）持续监控清算参与者以避免违约；一旦其管理层判定某参与者已经或可能无法履行义务，即宣告违约，随即停止为其清算新交易并处置其持仓——上市产品的处置方式为在市场上做对冲平仓交易；客户持仓与担保品在可行情况下可转移给未违约的清算参与者；违约造成的损失依JSCC自身的损失补偿（清算基金等）财务资源规则消化；即使发生违约，JSCC仍按既定时间表完成结算，为此维持流动性供应设施",
         "en": "JSCC (the CCP) continuously monitors Clearing Participants to avoid defaults; if its senior management determines a participant is, or is likely to be, unable to perform its obligations, JSCC declares a default, halts clearing of new transactions from the defaulter, and liquidates the defaulter's positions — for listed products, by offsetting transactions in the market. Customer positions and collateral can, where feasible, be transferred (ported) to non-defaulting Clearing Participants. Losses arising from the default process are absorbed using JSCC's loss-compensation financial resources per its rules; even when a default occurs, JSCC still fulfills settlement on the regular schedule, maintaining Liquidity Supply Facilities for this purpose",
         "sources": [
@@ -1672,7 +1693,6 @@
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "derivatives": {

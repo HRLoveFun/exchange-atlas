@@ -286,6 +286,30 @@
       }
     ]
   },
+  "guarantee_model": {
+    "values": [
+      {
+        "id": "ccp_novation",
+        "label_zh": "独立 CCP 更替担保",
+        "label_en": "Independent CCP (Novation)"
+      },
+      {
+        "id": "exchange_as_ccp",
+        "label_zh": "交易所自身充当 CCP",
+        "label_en": "Exchange Acts as CCP"
+      },
+      {
+        "id": "lines_of_defence",
+        "label_zh": "多层结算保障防线（无更替）",
+        "label_en": "Lines of Defence (no novation)"
+      },
+      {
+        "id": "shared_ccp",
+        "label_zh": "跨市场共享独立 CCP",
+        "label_en": "Shared Cross-market CCP"
+      }
+    ]
+  },
   "short_selling_stance": {
     "values": [
       {

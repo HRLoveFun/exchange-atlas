@@ -1239,6 +1239,23 @@
         "quote": null,
         "sources": null
       },
+      "guarantee_model": {
+        "enum": "ccp_novation",
+        "zh": "中国证券登记结算有限责任公司（中国结算）作为独立法人担任中央对手方，对 A 股集中交易实行多边净额结算并承担共同对手方担保交收职责；CCP 与中央证券存管（CSD）职能由同一机构承担",
+        "en": "China Securities Depository and Clearing Corporation (ChinaClear), a separate legal entity, acts as central counterparty — providing multilateral netting and common-counterparty settlement guarantee for centrally traded A-shares; the CCP and CSD functions sit in the same institution",
+        "sources": [
+          {
+            "title": "证券登记结算管理办法（中国证监会令第29号）第七章第65-73条",
+            "url": "http://www.sse.com.cn/lawandrules/regulations/csrcorder/c/10116597/files/f2bae870b188483eae343f735c141cf6.pdf",
+            "accessed": "2026-08-24"
+          }
+        ],
+        "quote": "证券登记结算机构应当按照下列顺序动用担保物和证券结算保证金，完成与对手方结算参与人的资金交收",
+        "confidence": "medium",
+        "verified": "2026-08-12",
+        "spec": null,
+        "detail": null
+      },
       "initial_margin_practice": {
         "zh": "",
         "confidence": "low",
@@ -1301,6 +1318,37 @@
         "sources": null
       },
       "default_management": {
+        "spec": {
+          "model": "ccp_default_waterfall",
+          "layers": [
+            {
+              "order": 1,
+              "resource": "违约方担保物中的现金部分",
+              "bearer": "defaulter"
+            },
+            {
+              "order": 2,
+              "resource": "证券结算保证金中违约方缴纳部分",
+              "bearer": "defaulter"
+            },
+            {
+              "order": 3,
+              "resource": "证券结算保证金中其他参与人缴纳及公司划拨部分",
+              "bearer": "surviving_members"
+            },
+            {
+              "order": 4,
+              "resource": "证券结算风险基金",
+              "bearer": "statutory_fund"
+            },
+            {
+              "order": 5,
+              "resource": "商业银行等机构的授信支持",
+              "bearer": "external"
+            }
+          ],
+          "note": "顺序为《证券登记结算管理办法》第六十八条明列；另有『其他资金』兜底层与证券交收违约的同种证券冲抵机制（见 zh），未入 layers"
+        },
         "zh": "结算参与人资金交收违约时，中国结算按顺序动用：违约方担保物中的现金部分→证券结算保证金中违约方缴纳部分→证券结算保证金中其他参与人缴纳及公司划拨部分；仍不足的可动用证券结算风险基金、商业银行等机构授信支持等；证券交收违约的可用违约方提交的同种证券或以专用清偿账户资金买入的同种证券冲抵；违约方逾期未补足的，公司可处分其担保物、回购质押券及专用清偿账户内资产以补足欠付，并继续向其追偿",
         "en": "When a settlement participant defaults on a cash settlement obligation, ChinaClear draws on, in order: the cash portion of the defaulter's collateral, then the defaulter's own contribution to the securities settlement deposit, then other participants' contributions and the company's allocation within that deposit; if still insufficient, it may draw on the Securities Settlement Risk Fund or commercial-bank credit facilities; for a securities settlement default, it may offset using identical securities submitted by the defaulter or bought with funds in a dedicated clearing account; if the defaulter fails to make up the shortfall within the required period, the company may dispose of the defaulter's collateral, repo-pledged securities and dedicated-account assets to cover the shortfall, and continues to pursue recovery from the defaulter",
         "detail": "出处为《证券登记结算管理办法》（中国证监会令第29号）第七章「风险防范和交收违约处理」第65-73条；《证券结算风险基金管理办法》（证监会、财政部联合发布，托管于财政部官网）进一步规定风险基金本身用于垫付/弥补违约交收、技术故障、操作失误损失，两份规章配合构成完整的违约处置与风险共担体系，本条 quote 仅摘自第一份文件，第二份作为背景补充列入 sources。",
@@ -1319,8 +1367,7 @@
         "quote": "第六十八条 结算参与人发生资金交收违约的，证券登记结算机构应当按照下列顺序动用担保物和证券结算保证金，完成与对手方结算参与人的资金交收：（一）违约结算参与人的担保物中的现金部分；（二）证券结算保证金中违约结算参与人交纳的部分；（三）证券结算保证金中其他结算参与人交纳的及证券登记结算机构划拨的部分。按前款处理仍不能弥补结算参与人资金交收违约的，证券登记结算机构还可以动用下列资金：（一）证券结算风险基金；（二）商业银行等机构的授信支持；（三）其他资金。",
         "confidence": "high",
         "verified": "2026-08-12",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "derivatives": {
         "initial_margin_practice": null,

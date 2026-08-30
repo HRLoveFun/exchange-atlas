@@ -1009,6 +1009,17 @@ clearing:
     quote: "a statement of the seller's position with B3's central securities depository"
     confidence: high
 
+  guarantee_model:
+    enum: exchange_as_ccp
+    zh: "B3 公司自身通过内设的 B3 Clearinghouse 充当中央对手方（CCP），非独立法人清算所（与美股 NSCC/DTCC 独立法人模式不同）；对 PUMA 交易系统成交承担 CCP 与证券结算系统双重职能"
+    en: "B3 itself acts as the central counterparty (CCP) through its in-house B3 Clearinghouse — not a separately incorporated clearing entity (unlike the NSCC/DTCC model in the US); it serves as both CCP and securities settlement system for trades executed in the PUMA Trading System"
+    sources:
+      - title: Regulatory Framework – Clearing, Settlement and Risk Management
+        url: https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/clearing-settlement-and-risk-management.htm
+        accessed: 2026-08-16
+    quote: "B3 acts as a central counterparty (CCP) and securities settlement system (SSS) for trades executed in the PUMA Trading System, through the B3 Clearinghouse; as well as for FX trades registered directly at the B3 Foreign Exchange Clearinghouse."
+    confidence: medium
+
   initial_margin_practice:
     zh: "B3清算所对现货（现金）市场征收初始保证金。现金市场风险仅就结算周期（从交易日至交割）评估，清算会员、经纪商或客户均可为现金市场风险质押担保品。"
     en: "B3 Clearinghouse collects initial margin for the cash/spot market. Cash market risk is assessed only for the settlement cycle (from trade date until settlement), and Clearing Members, Brokers or Clients may pledge collateral for cash market risk."
@@ -1071,6 +1082,12 @@ clearing:
     confidence: high
 
   default_management:
+    spec:
+      model: ccp_default_waterfall
+      layers:
+        - {order: 1, resource: "违约方按 CORE 方法论质押的担保品（defaulters pay）", bearer: defaulter}
+        - {order: 2, resource: "专项安全垫基金 + 存续参与人分摊（survivors pay；含 Liquidez Investment Fund）", bearer: surviving_members}
+      note: "B3 官方仅表述为『defaulters pay and survivors pay』二段式，未公开逐层瀑布参数与 CCP 自有出资（SITG）层级；spec 按此二段结构化"
     zh: "「违约者先付、生存者分摊」（defaulters pay and survivors pay）的风险共担机制，依托CORE方法论计算的担保品与安全垫（含Liquidez Investment Fund等专项基金）应对结算参与者违约"
     en: "A 'defaulters pay, survivors pay' mutualized default-management structure, backed by CORE-methodology collateral and dedicated safeguard funds (including the Liquidez Investment Fund)"
     sources:
