@@ -116,6 +116,8 @@
 - `jp-jpx` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
+- `kr-krx` 市场结构与交易机制 / 错误交易处理规则（error_trade_rule）— confidence: low
+- `kr-krx` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 做市商制度（market_maker_scheme）— confidence: low
 - `kr-krx` 市场数据与技术基础设施 / 实时/延时（data_latency）— confidence: low
 - `kr-krx` 市场数据与技术基础设施 / 数据收费模式（data_pricing_model）— confidence: low

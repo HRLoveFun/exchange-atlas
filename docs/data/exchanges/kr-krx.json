@@ -659,7 +659,27 @@
         "enum": null,
         "detail": null
       },
-      "execution_model": null,
+      "execution_model": {
+        "enum": "order_driven",
+        "spec": {
+          "electronic": true,
+          "dealer_intermediated": false,
+          "note": "全电子中央订单簿、价格优先时间优先连续竞价 + 开收盘单一价集合竞价；一般股票无做市商。设『流动性提供者』（Liquidity Provider / LP）制度（ETF 另有专门 LP System），针对低流动性品种，属订单驱动之上的补充。低流动性个股改用单一价定期集合竞价（见 matching_principle）"
+        },
+        "zh": "订单驱动：常规时段为中央电子订单簿连续竞价，按价格优先、时间优先原则即时撮合；一般股票无做市商。设『流动性提供者』（LP）制度，针对低流动性品种（ETF 另有专门 LP 制度）；流动性不足的个股改用单一价定期集合竞价而非连续竞价",
+        "en": "Order-driven: the regular session is continuous auction in a central electronic order book on price-then-time priority; ordinary stocks have no market makers. A Liquidity Provider (LP) scheme applies to low-liquidity instruments (ETFs have a dedicated LP System), and issues with insufficient liquidity are traded via periodic single-price call auctions rather than continuous auction",
+        "detail": "enum 依据既有 matching_principle（连续竞价、价格-时间优先，confidence high）与 market_maker_scheme（LP 制度存在，confidence low）综合判定为 order_driven——LP 为低流动性品种的补充，不改变市场基本形态。dealer_intermediated 记 false。LP 的具体资格 / 义务未从官方英文文本逐条核实。",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX 官网英文版官方手册 PDF）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "Regular session : Continuous auction / When new (or modified) orders are received, trade is executed immediately based on the principles of price priority and time priority. (not applied to issues with low liquidity)",
+        "confidence": "medium",
+        "verified": "2026-08-16"
+      },
       "matching_principle": {
         "enum": "price_time",
         "zh": "常规时段为连续竞价：新申报（或修改后申报）收到后，按价格优先、时间优先原则即时撮合成交（低流动性品种不适用）",
@@ -678,6 +698,15 @@
         "detail": null
       },
       "order_types": {
+        "spec": {
+          "market": true,
+          "limit": true,
+          "tif": [
+            "ioc",
+            "fok"
+          ],
+          "note": "限价、市价、限价转收盘价（Limit-to-market-On-close）、即时可执行限价、最优限价、竞价型大宗交易申报，加附带条件（FOK / IOC）；各类型在开盘 / 收盘集合竞价、盘前盘后、大宗交易等时段的可用性不同。无冰山 / 隐藏订单类型"
+        },
         "zh": "限价申报、市价申报、限价转收盘价申报（Limit-to-market-On-close order）、即时可执行限价申报、最优限价申报、竞价型大宗交易申报，以及附带条件申报（FOK/IOC），各类型在开盘集合竞价/收盘集合竞价/盘前盘后/大宗交易等不同时段的可用性不同",
         "en": "Limit Order, Market Order, Limit-to-market-On-close order, Immediately Executable Limit Order, Best Limit Order, Auction-based Block Trade Order, and Orders With Conditions (FOK, IOC) — availability of each type varies by session (opening/closing auction, pre/after-hours, block trade, etc.)",
         "quote": "Limit Order / Market Order / Limit-to-marketOn-close order / Immediately Executable Limit Order / Best Limit Order / Auction-based Block Trade Order / With Conditions (FOK, IOC)",
@@ -691,10 +720,16 @@
         "confidence": "high",
         "verified": "2026-08-16",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "tick_size": {
+        "spec": {
+          "regime": "tiered_by_price",
+          "min_tick": 1,
+          "currency": "KRW",
+          "full_table_note": "按价格区间分档，KOSPI 与 KOSDAQ 档表不同：1,000 KRW 以下两市均为 1 KRW，向上逐档放大至 500,000 KRW 以上时 KOSPI 为 1,000 KRW、KOSDAQ 为 100 KRW。ETF / ETN / ELW 统一 5 KRW、不分价格区间",
+          "note": "min_tick 1 为最细档（低价股）；ETF / ETN / ELW 固定 5 KRW"
+        },
         "zh": "按价格区间分档，KOSPI与KOSDAQ档位表不同（如1,000韩元以下均为1韩元；500,000韩元以上KOSPI为1,000韩元、KOSDAQ为100韩元）；ETF/ETN/ELW统一为5韩元，不分价格区间",
         "en": "Tiered by price range, with separate tables for KOSPI and KOSDAQ markets (e.g. under 1,000 KRW both are 1 KRW tick; 500,000 KRW or higher KOSPI is 1,000 KRW while KOSDAQ is 100 KRW); ETFs/ETNs/ELWs use a flat 5 KRW tick regardless of price range",
         "quote": "Less than 1,000 KRW 1 KRW 1 KRW ... 500,000 or higher 1,000 KRW 100 KRW / As for ETFs, ETNs, and ELWs, the tick size is 5 KRW regardless of price ranges due to the characteristics of the products.",
@@ -708,7 +743,6 @@
         ],
         "verified": "2026-08-16",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "board_lot_size": {
@@ -887,7 +921,29 @@
         "spec": null,
         "detail": null
       },
-      "error_trade_rule": null,
+      "error_trade_rule": {
+        "spec": {
+          "bust_allowed": true,
+          "review_window_min": null,
+          "deviation_threshold_pct": null,
+          "resolution": "cancel",
+          "note": "本次未从 KRX 官方英文规则文本取得逐字条文。已知结构：KRX 设错误交易救济制度（member 可就误单成交向 KRX 申请救济 / 事后处置），并对因技术性系统故障产生的委托 / 成交保留直接撤单权（2025 年已扩至债券市场）；具体损失门槛、申请时限、价格偏离标准未核实。韩国是少数保留明确『误单救济』制度的市场之一（源于 2013 年 HanMag 事件）"
+        },
+        "zh": "韩国交易所设有针对误单成交的错误交易救济 / 处置机制，并对因技术性系统故障产生的委托 / 成交保留直接撤销权；具体损失门槛、申请时限与价格偏离标准本次未从官方英文规则文本逐条核实",
+        "en": "The Korea Exchange operates a relief/handling mechanism for trades resulting from erroneous orders and retains authority to directly cancel orders and trades arising from a technical system failure; the specific loss thresholds, application deadlines and price-deviation criteria were not verified from official English rule text this session",
+        "detail": "低置信度——KRX Business Regulation 主要为韩文，本次未取得可逐字摘引的英文条文。已记入 OPEN-QUESTIONS，待人工提供官方英文规则或韩文原文。制度背景：2013 年 HanMag Securities 期权误单事件后韩国强化了误单救济与事前风控。",
+        "sources": [
+          {
+            "title": "Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF，未含错误交易专章）",
+            "url": "https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "enum": null,
+        "quote": null
+      },
       "intraday_reversal": {
         "zh": "",
         "detail": "本次抓取材料确认结算周期为T+2（见 clearing.settlement_cycle），但未找到明确说明现货股票「先买后卖是否可当日回转」的条文——结算周期与回转交易规则是两个不同维度，不能相互推断，按铁律留空不猜。",
@@ -944,7 +1000,23 @@
         "spec": null,
         "detail": null
       },
-      "order_book_transparency": null,
+      "order_book_transparency": {
+        "zh": "KRX 公布多档买卖申报价量信息（Publication of Quotation Information）；一般股票订单簿为全展示，未见冰山 / 隐藏订单类型。盘后大宗交易单独进行。具体披露档位数、盘后成交延迟安排本次未从官方英文规则文本逐条核实",
+        "en": "The KRX publishes multi-level quotation (order-book) price and quantity information; the ordinary-stock order book is fully displayed and no iceberg or hidden order type was found. Block trades run separately. The exact number of disclosed price levels and any post-trade publication deferral were not verified from official English rule text this session",
+        "detail": "低置信度——KRX 官网『Publication of Quotation Information』栏目为 JS 壳、无正文，官方英文规则文本未取得。已记入 OPEN-QUESTIONS。字段管本所订单簿内部的（非）展示流动性；行情层级 / 收费见第十章 market_data_levels。",
+        "sources": [
+          {
+            "title": "Regulation ‧ Stocks ‧ KOSPI Market（KRX 官网英文版，栏目含 \"Publication of Quotation Information\"）",
+            "url": "https://global.krx.co.kr/contents/GLB/06/0602/0602010204/GLB0602010204.jsp",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "confidence": "low",
+        "verified": "2026-08-16",
+        "enum": null,
+        "spec": null,
+        "quote": null
+      },
       "dark_pool": {
         "zh": "",
         "confidence": "low",
