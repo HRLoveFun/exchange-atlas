@@ -408,7 +408,7 @@
           "volatility": "stable",
           "en_required": true,
           "enum_ref": "execution_model",
-          "in_matrix": false
+          "in_matrix": "trading_mechanism"
         },
         {
           "kind": "leaf",
