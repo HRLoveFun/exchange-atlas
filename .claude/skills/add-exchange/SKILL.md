@@ -122,7 +122,7 @@ us-nasdaq/cn-szse/uk-lse/de-xetra/sg-sgx/au-asx/in-nse/sa-tadawul）、v1.0 Wave
   **有可核实的官方中文原文就填 `zh`，没有就填 `en`，中英文都没有可靠原文的先别填，转
   `PROJECT/OPEN-QUESTIONS.md` 悬置**。v0.2 的 NYSE/JPX/Eurex 都是这样定的 `en`（没有官方中文
   原文，直接用英文官网取数，不必啃日语/德语原文）
-- 确定 `region`、`tier`（对照 `schema/enums.yml` 的受控词表）
+- 确定 `region`（对照 `schema/enums.yml` 的受控词表）
 
 ### 2. 查 `PROJECT/SOURCES.md`，缺就探测
 

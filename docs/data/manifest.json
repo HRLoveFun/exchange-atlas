@@ -12,7 +12,6 @@
       "source_lang": "en",
       "group_id": null,
       "region": "apac",
-      "tier": "extended",
       "trading_hours": null
     },
     {
@@ -27,7 +26,6 @@
       "source_lang": "en",
       "group_id": null,
       "region": "americas",
-      "tier": "extended",
       "trading_hours": null
     },
     {
@@ -44,7 +42,6 @@
       "source_lang": "en",
       "group_id": "tmx-group",
       "region": "americas",
-      "tier": "extended",
       "trading_hours": null
     },
     {
@@ -63,7 +60,6 @@
       "source_lang": "en",
       "group_id": "six-group",
       "region": "europe",
-      "tier": "standard",
       "trading_hours": null
     },
     {
@@ -78,7 +74,6 @@
       "source_lang": "zh",
       "group_id": null,
       "region": "apac",
-      "tier": "pilot",
       "trading_hours": {
         "iana_tz": "Asia/Shanghai",
         "utc_offset_hours": 8.0,
@@ -104,7 +99,6 @@
       "source_lang": "zh",
       "group_id": null,
       "region": "apac",
-      "tier": "extended",
       "trading_hours": null
     },
     {
@@ -121,7 +115,6 @@
       "source_lang": "en",
       "group_id": "deutsche-boerse-group",
       "region": "europe",
-      "tier": "standard",
       "trading_hours": {
         "iana_tz": "Europe/Berlin",
         "utc_offset_hours": 2.0,
@@ -149,7 +142,6 @@
       "source_lang": "en",
       "group_id": "deutsche-boerse-group",
       "region": "europe",
-      "tier": "extended",
       "trading_hours": null
     },
     {
@@ -169,7 +161,6 @@
       "source_lang": "en",
       "group_id": null,
       "region": "europe",
-      "tier": "extended",
       "trading_hours": null
     },
     {
@@ -186,7 +177,6 @@
       "source_lang": "zh",
       "group_id": null,
       "region": "apac",
-      "tier": "pilot",
       "trading_hours": {
         "iana_tz": "Asia/Hong_Kong",
         "utc_offset_hours": 8.0,
@@ -213,7 +203,6 @@
       "source_lang": "en",
       "group_id": "nse-group",
       "region": "apac",
-      "tier": "extended",
       "trading_hours": {
         "iana_tz": "Asia/Kolkata",
         "utc_offset_hours": 5.5,
@@ -240,7 +229,6 @@
       "source_lang": "en",
       "group_id": "jpx-group",
       "region": "apac",
-      "tier": "standard",
       "trading_hours": {
         "iana_tz": "Asia/Tokyo",
         "utc_offset_hours": 9.0,
@@ -266,7 +254,6 @@
       "source_lang": "en",
       "group_id": null,
       "region": "apac",
-      "tier": "extended",
       "trading_hours": null
     },
     {
@@ -281,7 +268,6 @@
       "source_lang": "en",
       "group_id": null,
       "region": "mena_africa",
-      "tier": "extended",
       "trading_hours": null
     },
     {
@@ -296,7 +282,6 @@
       "source_lang": "en",
       "group_id": null,
       "region": "apac",
-      "tier": "extended",
       "trading_hours": null
     },
     {
@@ -311,7 +296,6 @@
       "source_lang": "zh",
       "group_id": null,
       "region": "apac",
-      "tier": "extended",
       "trading_hours": null
     },
     {
@@ -326,7 +310,6 @@
       "source_lang": "en",
       "group_id": "lseg-group",
       "region": "europe",
-      "tier": "extended",
       "trading_hours": null
     },
     {
@@ -341,7 +324,6 @@
       "source_lang": "en",
       "group_id": "nasdaq-group",
       "region": "americas",
-      "tier": "extended",
       "trading_hours": null
     },
     {
@@ -356,7 +338,6 @@
       "source_lang": "en",
       "group_id": "nyse-group",
       "region": "americas",
-      "tier": "standard",
       "trading_hours": {
         "iana_tz": "America/New_York",
         "utc_offset_hours": -4.0,
@@ -382,7 +363,6 @@
       "source_lang": "en",
       "group_id": null,
       "region": "mena_africa",
-      "tier": "extended",
       "trading_hours": null
     }
   ],
