@@ -389,6 +389,10 @@ market_structure:
       en: "No daily price limit band (see type / volatility_interruption)"
       quote: "it also does not work the same way as the daily price limit model which sets a specific daily price range for securities trading as seen in some markets"
       confidence: high
+      sources:
+        - title: VCM FAQ（HKEX 官网英文版）
+          url: https://www.hkex.com.hk/Global/Exchange/FAQ/Securities-Market/Trading/VCM?sc_lang=en
+          accessed: 2026-08-30
     other_boards: ""
 
   circuit_breaker:
