@@ -532,6 +532,22 @@ market_structure:
 
       '
     confidence: high
+  execution_model:
+    enum: hybrid
+    spec:
+      electronic: true
+      dealer_intermediated: true
+      note: "电子中央限价订单簿（CLOB）连续撮合 + 正式做市商制度：经批准的 Market Maker Firm 为其『负责证券』维持公平有序连续双向市场（由 Registered Trader 履约），兼管碎股自动执行；上市时须选定一名做市商"
+    zh: "混合模式：电子中央限价订单簿（CLOB）连续撮合，叠加正式做市商制度——经批准的 Market Maker Firm 为其负责证券（Securities of Responsibility）维持公平、有序、连续的双向市场，由 Registered Trader 代表履行日常义务，并处理碎股自动执行"
+    en: "Hybrid: an electronic central limit order book (CLOB) with continuous matching, overlaid with a formal market-maker regime — an approved Market Maker Firm maintains a fair, orderly and continuous two-sided market in its Securities of Responsibility, carried out day-to-day by a Registered Trader who also handles Odd Lot auto-execution"
+    detail: "enum 依据既有 market_maker_scheme（Market Maker Firm 维持连续双向市场、上市须选定做市商，confidence high）与 matching_principle（CLOB + Broker Preferencing，confidence high）综合判定为 hybrid。matching_principle 的经纪商优先撮合（Broker Preferencing）是 CLOB 内部的成交优先级细化，与本字段不同层次。"
+    sources:
+      - title: Toronto Stock Exchange Rule Book（PDF，Effective January 13, 2026，Rule 4-603）
+        url: https://www.tsx.com/en/resource/1464
+        accessed: 2026-08-16
+    quote: "The primary responsibilities of a Market Maker are to maintain a fair and orderly market in its securities of responsibility and generally to make a positive contribution to the functioning of the market."
+    confidence: high
+
   matching_principle:
     enum: price_time_broker_priority
     zh: 电子连续限价订单簿（CLOB）撮合；同一经纪商的双方挂单可触发「经纪商优先撮合」（Broker Preferencing），不受订单簿原有排序位置限制，Jitney单与匿名单不适用此优先机制
@@ -549,6 +565,14 @@ market_structure:
       are excluded from broker preferencing opportunities.
     confidence: high
   order_types:
+    spec:
+      market: true
+      limit: true
+      stop: true
+      iceberg: true
+      hidden: true
+      pegged: true
+      note: "限价 / 市价 / 冰山 / 暗盘单（Dark Pegged 盯住中点 / Dark Limit，均全隐藏）/ 待触发（On-Stop）/ 绕过标记（Bypass）；收盘另有 MOC / LOC。暗盘单在同一订单簿内提供隐藏流动性"
     zh: 限价单、市价单、冰山单（Iceberg）、暗盘单（Dark Pegged/Dark Limit）、绕过标记单（Bypass）、待触发单（On-Stop）等；另有MOC/LOC（Limit
       on Close）等收盘专用订单
     en: Limit Order, Market Order, Iceberg Order, Dark Order (Dark Pegged/Dark Limit),
@@ -563,6 +587,15 @@ market_structure:
       available price.
     confidence: high
   tick_size:
+    spec:
+      regime: tiered_by_price
+      min_tick: 0.005
+      currency: CAD
+      ladder:
+        - {price_min: 0.005, price_max: 0.50, tick: 0.005}
+        - {price_min: 0.50, price_max: null, tick: 0.01}
+      full_table_note: "标准价格变动（TMX Order Types and Functionality Guide §6.1.2）：$0.005–$0.495/股为 $0.005，$0.50 及以上为 $0.01。适用于 TSX / TSXV / TSX Alpha"
+      note: "sub-penny 报价规则同美国：$1 以上不得优于 $0.01 报价（此表为交易所层面标准价格变动）"
     zh: $0.005-$0.495/股：最小报价单位$0.005；$0.50及以上：最小报价单位$0.01
     en: '$0.005–$0.495/share: $0.005 increment; $0.50 and above: $0.01 increment'
     sources:
@@ -729,6 +762,35 @@ market_structure:
 
       '
     confidence: high
+
+  error_trade_rule:
+    spec:
+      bust_allowed: true
+      review_window_min: null
+      deviation_threshold_pct: null
+      resolution: cancel_or_adjust
+      note: "常规误单：经纪商联系 TMX Trading Services，可请求联系对手方申请作废——双方须一致同意，否则转 CIRO（加拿大投资监管组织）处理。技术 / 系统 / 接入故障实质影响交易时，交易所有权在未经双方同意下作废受影响成交，但须经 CIRO 批准。价格 / 数量的更正 / 调整须由经纪商向 CIRO 申请、CIRO 批准后由 TMX 执行。无固定价格偏离百分比门槛（个股断路器 SSCB 触发后偏离触发价 5% 以上的成交一律作废，属另一机制）"
+    zh: "常规误单（erroneous trade）：经纪商联系 TMX 交易服务台，可请求交易服务台联系对手方申请作废该笔成交——双方须一致同意作废，否则可转由 CIRO（加拿大投资监管组织）协助处理。若因技术、系统或接入故障实质影响了交易，TSX / TSXV / TSXA 有权在未经双方同意的情况下作废受影响成交，但须经 CIRO 批准。涉及价格或数量更正 / 调整的，须由经纪商向 CIRO 申请，CIRO 批准后指示 TMX 执行"
+    en: "For a normal erroneous trade, the broker contacts the TMX Trading Services desk, which may on request contact the other party to request cancellation of the trade — both parties must agree to the cancellation, failing which they may contact CIRO (the Canadian Investment Regulatory Organization) for assistance. Where a technical, systems or access problem has substantially impaired trading, TSX/TSXV/TSXA may cancel an impacted trade without the consent of both parties, subject to CIRO approval. A change or amendment to price and/or quantity requires the broker to obtain CIRO approval, after which CIRO instructs TMX to make the change"
+    detail: "TMX Order Types and Functionality Guide §6.8（Erroneous Trade and Trade Amendment Policy）；实体规则为 CIRO UMIR 10.06。与 trading_halt_mechanism 视角不同。加拿大属『双边合意 + SRO 裁决』一类（同 LSE / SIX）。resolution 记 cancel_or_adjust（作废或价格 / 数量调整）。个股断路器场景另有『偏离触发价 5% 以上一律作废』的硬规则（见 price_limits / trading_halt_mechanism 的 SSCB quote）。"
+    sources:
+      - title: "Order Types and Functionality Guide（PDF，TMX GROUP，§6.8 Erroneous Trade and Trade Amendment Policy）"
+        url: https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf
+        accessed: 2026-08-30
+    quote: "In the event that a broker executes an order in error (“erroneous trade”) the broker will be asked to contact the Trading Services desk. The Trading Services desk may, upon request of the broker, contact the other party to the trade to request cancellation of the trade. Both parties to the trade must agree to the trade cancellation or they may elect to contact CIRO for assistance. In the event of a technical, systems, or access problem that has substantially impaired or impacted access or trading, TSX, TSXV or TSXA, as the case may be, has the discretion to cancel an impacted trade without the consent of both parties and subject to CIRO approval."
+    confidence: high
+
+  order_book_transparency:
+    zh: "盘前：电子中央限价订单簿（CLOB）公开，展示订单的价量向市场披露、按价格-时间（+ 经纪商优先）撮合。同一订单簿内支持不完全披露 / 隐藏的流动性——冰山单仅部分可见、暗盘单（Dark Pegged 盯住中点 / Dark Limit）为全隐藏。TSX 另运营独立暗池 TSX DRK。盘后：成交实时上报合并行情，大额成交按 CIRO 规则可延迟披露"
+    en: "Pre-trade: the electronic central limit order book (CLOB) is public — displayed order sizes and prices are disseminated and matched on price-time (plus broker) priority. The same book supports partially-disclosed and hidden liquidity — Iceberg orders are only partially visible and Dark orders (Dark Pegged to the midpoint / Dark Limit) are fully hidden. TSX also operates a separate dark pool, TSX DRK. Post-trade: executions are reported to the consolidated feed in real time, with deferred publication for large trades permitted under CIRO rules"
+    detail: "字段管本所订单簿内部的（非）展示流动性——TSX 的暗盘单在同一订单簿内提供隐藏流动性；独立暗池 TSX DRK 见 dark_pool。行情层级 / 收费见第十章。quote 引自 Order Types 页面（暗盘单 / 冰山单定义）。"
+    sources:
+      - title: Order Types（TSX 官网，Dark / Iceberg 订单）
+        url: https://www.tsx.com/en/trading/toronto-stock-exchange/order-types-and-features/order-types
+        accessed: 2026-08-16
+    quote: "Broker Preferencing An incoming attributed order from a broker will automatically be matched with another attributed order from the same broker in the same trading venue, regardless of its position in the order book."
+    confidence: medium
+
   intraday_reversal:
     zh: ''
     confidence: low
