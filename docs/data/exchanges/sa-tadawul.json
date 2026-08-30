@@ -541,6 +541,7 @@
         "verified": "2026-08-14",
         "enum": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "限价盘在同价位按订单进入顺序撮合；连续交易时段（第二时段）市价盘可部分/全部按单一价格成交",
@@ -742,6 +743,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "zh": "",
         "confidence": "low",
@@ -803,6 +805,7 @@
         "spec": null,
         "detail": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "",
         "confidence": "low",

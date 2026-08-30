@@ -765,6 +765,8 @@
 
 **未完（Phase 2 的验收 gate，不是本条范围）：** [ADR-035] A 收尾要求「交付后停下评估『30 秒看懂』由非专业读者实测」——**该实测尚未进行**，是 Phase 3 启动前的门槛。
 
+**补记（2026-08-30，[ADR-042] 同批）——主视图更名「交易日平面图」→「市场机制剖面」：** 用户指出旧名「只描述形式（一张 2D 平面图 / floor-plan），不反映所呈现信息的内核」。内核是**一个市场的交易机制**（第五章 spec：撮合模型 / 涨跌停 / 熔断 / 波动走廊 / 时段 / 订单类型 / tick / 成本…），用一个交易日的时间轴作画布。「剖面」取「结构性横切、非某一具体交易日的行情数据」之意（图上没有真实价格路径，只有机制画出的边界）。斟酌过的备选：「交易日剖面图」（保留「交易日」锚点、但内核仍偏时间轴）、「市场机制全景图」（「全景」偏营销、弱化「一日」框架）、「交易机制图谱」（「图谱」偏关系网络，此图非此义）——取「市场机制剖面」：内核（机制）在前，「剖面」修正旧名的形式偏差，6 字无「图」与同级 tab（对比矩阵 / 时区甘特条 / 数据健康度）齐整。**改动面**：`docs/index.html` tab（中「市场机制剖面」/ 英「Market Mechanics」）、`app.js` 3 处显示串（标题 / aria-label / 加载态 / prose / banner）、`styles.css` 注释。**未改**：路由键 `#view=trading-day`（URL 兼容，内部标识非用户可见）、CSS 类名 `td-*`、历史 ADR 正文（[ADR-035]/[ADR-039] 等仍称「交易日平面图」为当时名，本补记为唯一更名锚点）。
+
 **日期：** 2026-08-30
 
 ### ADR-041 — 广度扩张（新增交易所，原 Wave 3 / Phase 4）从计划阶段改为按需可选能力
@@ -783,5 +785,29 @@
 4. **[ADR-036] 里以"Phase 4（Wave 3）"为触发条件的 schema 裁定（#1 `federation_of`、#2 `region` 拆分、#9 `rule_level`）继续有效**，触发语义改为"当用户触发的某次新增交易所满足该条件时"，不再绑定"Phase 4"这个不会到来的阶段名。这些 ADR 正文不逐条改写，本条统一说明。
 
 **没改什么：** `CLAUDE.md`（本决策属 scope / roadmap，非防幻觉铁律，按职责边界表不进宪法）；`README.md`「覆盖范围」（生成块，随数据变）；已有 20 家数据；`add-exchange` 的任何执行步骤。
+
+**日期：** 2026-08-30
+
+### ADR-042 — schema 对齐资深交易员心智模型：第五章补三字段 + 四个 spec 形状 + 覆盖边界显式化
+
+**背景：** 一位资深交易员（对照 Larry Harris《Trading and Exchanges》）总结了「交易员首次接触一个陌生市场需要知道什么」的清单，用户要求据此审查项目目标与架构。逐条比对结论：v2.0 的「交易日平面图」范式（[ADR-035]）与这份清单高度一致——清单里「写进规则、可查证」的主干（时段 / 撮合 / 涨跌停 / 熔断 / 波动中断 / 卖空 / 结算）已是 schema 的一等公民。但有三个交易员点名、明确「写进交易所规则手册、可查证」的维度当前**完全没有字段**，另有两处「字段在但没结构化」，还有一处是项目边界正确但从未写明。本条只做 schema / spec / 文档改动，**数据回填并入 Phase 3**（每章一次小型 spec 补充的既有节奏，不单开 Wave）。
+
+**逐项：**
+
+1. **`market_structure.execution_model`（新增，enum）** —— 市场组织的基本形态：订单驱动 / 报价驱动 / 混合 / 经纪撮合。交易员判断陌生市场结构的第一问，此前只能从 `matching_principle` + `market_maker_scheme` + `trading_system_name` 间接拼。`enums.yml` 加 `execution_model` 4 值词表；`matching_principle` 明确为「订单驱动模型内部的优先级细化」，两者不同层次、不重复。口头 vs 电子喊价的差异写 `detail`（20 家样本已基本全电子，不单开枚举维度）。**暂不标 `in_matrix`**——按 [ADR-014]/[ADR-022] 的纪律，覆盖率不足 16/20 时进矩阵只会得到一整列「—」，误读成「数据没填全」。Phase 3 回填达门槛后再加 `in_matrix: trading_mechanism`（`in_matrix` 是纯声明式标记，[ADR-011]，届时改动风险为零）。
+
+2. **`market_structure.error_trade_rule`（新增，散文 + spec）** —— 「明显错误」/ 误发注 / clearly-erroneous 成交的事后处置：可否作废、复核时限、价格偏离阈值、作废还是调价。交易员点名的「交易所正式制度」，且跨所差异实打实（日本「成交不可作废」出了名的严 vs 美国 clearly-erroneous 复核窗口 vs Xetra mistrade 阈值）。此前全项目无字段——仅 `au-asx` 衍生品 `circuit_breaker` 里偶带一句 ETR 复核。与 `trading_halt_mechanism`（盘中停牌 / 复牌）视角不同，不合并。归第五章而非第十二章（风险）：它是交易机制的一部分，且平面图的 chip 层能直接承接。
+
+3. **`market_structure.order_book_transparency`（新增，散文）** —— 盘前透明度（订单簿公开程度 + 是否支持冰山 / 隐藏限价单）+ 盘后成交披露与延迟。交易员要点 3「信息机制与透明度」里「订单簿公开程度」「是否允许提交不披露的限价指令」当前无正面字段，只有 `dark_pool`（独立暗池实体）和第十章 `market_data_levels`（行情层级）两个侧面。三者职责重新划清并互相指向：本字段管「本所订单簿内部的（非）展示流动性」，`dark_pool` 收窄为「与本所并列的独立暗池 / MTF」，行情层级 / 收费留第十章。`regulation.disclosure_requirements` 是**发行人**披露，与本字段无关。
+
+4. **四个 `spec` 形状（`schema/spec.yml`）** —— `execution_model`（`electronic` / `dealer_intermediated` 布尔）、`error_trade_rule`（`bust_allowed` / `review_window_min` / `deviation_threshold_pct` / `resolution`）、`order_types`（标准指令类型布尔位 + `tif` 列表：day/gtc/gtd/fok/ioc）、`tick_size`（`regime` + `min_tick` + 可选 `ladder`，仿 `price_limits.main_board` 的「锚点 + full_table_note」先例，不强求 MiFID II 式完整表）。`order_types` / `tick_size` 本就是字段、只是自由文本进不了平面图量化层，加 spec 让它们与 v2.0 方向一致（校验 5b 严查 spec 数值 ⊆ quote）。`short_selling.spec` 加可选 `margin_note` 键承接「卖空保证金」（交易员要点 4a），不值得为它单开字段。
+
+5. **覆盖边界显式化（`README.md` + `CLAUDE.md`）** —— 交易员清单第二部分「执行风险 / 市场冲击 / 真实流动性 / 价格聚簇」明确只能靠小额实盘测试暴露，项目其实**已按防幻觉铁律事实上排除**（[ADR-020] §4 记录 `liquidity_risk_note` / `implicit_costs_note` / `political_risk_note` 结构性只能 low/medium），但 `README` / `CLAUDE.md` 从没把这条边界写明，导致新会话反复尝试用第三方推断去填这些字段（`OPEN-QUESTIONS` 里多条 `*_risk_note` 悬案是同一根因）。`README`「这是什么」顺带从「一张对比矩阵」（v2.0 前的旧定位）改为以平面图为主。`CLAUDE.md` 补一句写进开篇项目定位——**这一条是对项目范围的澄清、不是新增铁律**，按职责边界表属「对外定位」（README）与「项目是什么」（CLAUDE 开篇），不进第二节五条铁律。
+
+**不做：** ①「交易定价规则」（连续竞价价格歧视 vs 集合竞价统一价）单独字段——已被 `opening/closing_mechanism`(call_auction) + `matching_principle`(pro-rata) 隐含，且近乎普适微观结构，加字段是噪声。②「官方市场数据产品去匿名化」（北欧部分交易所）单独字段——太细，`market_data_levels.detail` 足够。③ 新字段暂不镜像进 `market_structure.derivatives` 子块——`error_trade_rule` / `execution_model` 对衍生品同样适用，但 derivatives 子块字段集是 [ADR-019] 精心裁剪的、且已填 10 家（镜像 = 每家多 2 个空缺口）；Phase 3 回填时若发现衍生品线的这两项与现货线实质不同，再按 [ADR-019]/[ADR-030] 先例加镜像字段。
+
+**验证：** 只加 taxonomy 字段 + enums 词表 + spec 形状，不动任何 `data/`。`make build` 全绿：validate 0 错误 0 警告、verify_quotes FAIL=0、`node --check app.js` 通过。生成块变动**仅一处且符合预期**——`progress-matrix` 里 `za-jse` 第五章 ✅→🟡：该所此前是 20 家里唯一第五章填满的（`filled == total`），新增 3 个空字段后 `count_chapter_leaves` 分母 +3、`filled < total` → 🟡；其余 19 家本就 🟡（`filled < total`），不变。这三个字段对现货所普遍适用，**不加 `optional` 标记**（`optional` 是给「仅部分所有的产品线」用的，见 [ADR-020]），🟡 如实反映「第五章还有未坐实字段」是正确状态。`health-summary` / `auto-issues` / `exchange-list` 零变化；`docs/data/*.json` 每家 +3 个 `null` 叶子（构建产物，随 schema 走）。`in_matrix` 未新增，矩阵列不变。
+
+**关联的前端改动（同一 PR）：** 主视图「交易日平面图」更名为「**市场机制剖面**」（用户指出旧名只描述形式不反映内核）——见 [ADR-040] 补记。
 
 **日期：** 2026-08-30

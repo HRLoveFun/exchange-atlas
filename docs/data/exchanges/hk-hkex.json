@@ -585,6 +585,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "现时 OTP-C（证券市场交易平台）以严格的价格及时间优先次序持续进行配对：较早时间输入系统的买卖盘必须完全执行，才可处理同等价格但较迟输入的买卖盘",
@@ -804,6 +805,7 @@
         "detail": null,
         "quote": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "enum": "t0",
         "zh": "T+0（可当日回转，无 SSE 式 T+1 限制）",
@@ -860,6 +862,7 @@
         "detail": null,
         "quote": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "",
         "confidence": "low",

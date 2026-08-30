@@ -594,6 +594,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time_broker_priority",
         "zh": "电子连续限价订单簿（CLOB）撮合；同一经纪商的双方挂单可触发「经纪商优先撮合」（Broker Preferencing），不受订单簿原有排序位置限制，Jitney单与匿名单不适用此优先机制",
@@ -819,6 +820,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "zh": "",
         "confidence": "low",
@@ -872,6 +874,7 @@
         "spec": null,
         "quote": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "TSX自身内嵌暗盘单类型（Dark Pegged、Dark Limit），提供完全盘前匿名，与展示订单簿原生整合；未核实外部另类交易系统（ATS）如MATCHNow在TSX撮合体系外的暗池占比",
         "en": "TSX has its own integrated dark order types (Dark Pegged, Dark Limit) offering full pre-trade anonymity, natively integrated with the displayed order book; external ATS dark pools (e.g. MATCHNow) outside TSX's own matching system were not verified this session",

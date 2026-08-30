@@ -604,6 +604,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "市价申报优先于限价申报执行；具体价格/时间优先顺序细则详见交易系统规则",
@@ -805,6 +806,7 @@
         "detail": null,
         "quote": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "zh": "",
         "confidence": "low",
@@ -856,6 +858,7 @@
         "detail": null,
         "quote": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "",
         "confidence": "low",

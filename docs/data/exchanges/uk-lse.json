@@ -544,6 +544,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_display_time",
         "zh": "价格优先原则（Millennium Exchange以价格优先为基础运作）；同价位内展示订单优先于非展示订单（冰山订单非展示部分＞完全隐藏订单＞中间价挂钩订单），除冰山订单非展示部分外，各类别内部再按提交时间优先排序",
@@ -731,6 +732,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "zh": "",
         "confidence": "low",
@@ -775,6 +777,7 @@
         "quote": null,
         "sources": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "本所自身订单簿（SETS）内含非展示/隐藏订单类型（冰山订单非展示部分、隐藏限价订单、中间价挂钩订单），可在同一订单簿内实现部分非展示流动性；集团内另设独立法人实体Turquoise（LSEG于2009年12月取得多数股权的泛欧交易平台）专营暗池/多边交易设施业务，但那是与本交易所不同的法人实体，不计入本字段",
         "en": "The Exchange's own order book (SETS) supports non-displayed/hidden order types (iceberg non-display portions, Hidden Limit Orders, Mid-Price Pegged Orders), enabling some non-displayed liquidity within the same book; a separate LSEG group entity, Turquoise (majority stake acquired December 2009), operates as a dedicated pan-European dark/MTF venue, but it is a distinct legal entity from this Exchange and is not counted under this field",

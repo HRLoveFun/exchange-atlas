@@ -540,6 +540,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "开盘/收盘由DMM主持的集合竞价撮合，盘中为电子连续竞价撮合（NYSE Pillar系统）",
@@ -765,6 +766,7 @@
         "detail": null,
         "quote": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "enum": "t0",
         "zh": "T+0（可当日回转），与结算层面的T+1（见 clearing.settlement_cycle）是两回事",
@@ -826,6 +828,7 @@
         "detail": null,
         "quote": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "",
         "confidence": "low",

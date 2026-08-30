@@ -259,6 +259,18 @@ chapters:
         volatility: moderate
         en_required: true
         in_matrix: trading_mechanism
+      - id: execution_model
+        label_zh: 执行模型
+        label_en: Execution Model
+        volatility: stable
+        en_required: true
+        enum_ref: execution_model
+        note: >
+          市场组织的基本形态——订单驱动 / 报价驱动 / 混合 / 经纪撮合（见 enums.yml
+          execution_model 的说明）。`matching_principle` 是订单驱动模型内部的成交优先级
+          细化，与本字段是两个层次，不重复。口头竞价 vs 电子撮合的差异写进 `detail`。
+          暂不标 `in_matrix`——待 Phase 3 回填覆盖率达 ADR-022 门槛（≥16/20）后再进
+          `trading_mechanism` 组（见 DECISIONS.md [ADR-042]）。
       - id: matching_principle
         label_zh: 撮合原则
         label_en: Matching Principle
@@ -321,6 +333,15 @@ chapters:
         label_en: Trading Halt & Resumption
         volatility: moderate
         in_matrix: trading_mechanism
+      - id: error_trade_rule
+        label_zh: 错误交易处理规则
+        label_en: Erroneous Trade / Mistrade Rule
+        volatility: moderate
+        note: >
+          「明显错误」/ 误发注 / clearly-erroneous 成交的事后处置：可否申请作废、复核
+          时限、构成明显错误的价格偏离阈值、作废还是调整成交价。日本以「成交不可作废」
+          著称，是这个维度差异最大的一端。与 `trading_halt_mechanism`（盘中停牌 / 复牌）
+          视角不同，不合并。结构化补充见 `schema/spec.yml`。
       - id: intraday_reversal
         label_zh: 回转交易制度
         label_en: Intraday Reversal (T+N)
@@ -338,10 +359,20 @@ chapters:
         label_zh: 大宗交易
         label_en: Block Trade
         volatility: moderate
+      - id: order_book_transparency
+        label_zh: 订单簿透明度
+        label_en: Order Book Transparency
+        volatility: moderate
+        note: >
+          盘前透明度（订单簿对公众公开的程度、是否支持冰山 / 隐藏限价单）+ 盘后成交
+          披露与延迟安排。本字段管「本所订单簿内部的（非）展示流动性」；与本所并列的
+          独立暗池 / MTF 实体见 `dark_pool`，行情数据的层级 / 收费见第十章
+          `market_data_levels` / `data_pricing_model`，三者互相指向、不重复手写。
       - id: dark_pool
         label_zh: 暗池与场外交易
         label_en: Dark Pool / OTC
         volatility: moderate
+        note: "仅记与本所并列的独立暗池 / MTF / 场外机制；本所订单簿内部的非展示订单（冰山 / 隐藏限价单）记入 order_book_transparency"
       - id: market_maker_scheme
         label_zh: 做市商制度
         label_en: Market Maker Scheme

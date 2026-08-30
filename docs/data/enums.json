@@ -407,6 +407,30 @@
       }
     ]
   },
+  "execution_model": {
+    "values": [
+      {
+        "id": "order_driven",
+        "label_zh": "订单驱动",
+        "label_en": "Order-driven"
+      },
+      {
+        "id": "quote_driven",
+        "label_zh": "报价驱动（交易商/做市商）",
+        "label_en": "Quote-driven (Dealer)"
+      },
+      {
+        "id": "hybrid",
+        "label_zh": "混合（订单簿+做市商）",
+        "label_en": "Hybrid (Book + Market Makers)"
+      },
+      {
+        "id": "brokered",
+        "label_zh": "经纪撮合",
+        "label_en": "Brokered"
+      }
+    ]
+  },
   "yes_no": {
     "values": [
       {

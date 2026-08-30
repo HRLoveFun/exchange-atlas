@@ -562,6 +562,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_display_time",
         "zh": "价格/时间优先撮合：同一价位按订单到达先后顺序执行；显示订单（displayed）优先于非展示订单（non-displayed）成交",
@@ -783,6 +784,7 @@
         "detail": null,
         "quote": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "enum": "t0",
         "zh": "T+0（可当日回转），与结算层面T+1（见clearing.settlement_cycle）是两个不同概念",
@@ -849,6 +851,7 @@
         "detail": null,
         "quote": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "纳斯达克自身撮合系统内设有非展示订单（Non-Displayed/Midpoint Peg等）机制，可提供不公开显示的流动性；这与传统意义上独立于交易所之外的第三方暗池是否算同一概念，本次未核实清楚",
         "en": "Nasdaq's own matching system offers non-displayed order types (e.g. Midpoint Peg) providing hidden liquidity; whether this is the same concept as third-party off-exchange dark pools was not clarified this session",

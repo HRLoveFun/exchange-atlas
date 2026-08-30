@@ -623,6 +623,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "连续竞价阶段按价格优先、时间优先撮合；开收盘及午间例行程序按均衡价算法撮合（见开盘/收盘机制）",
@@ -822,6 +823,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "enum": "t0",
         "zh": "T+0（当日买入证券可当日卖出）——本次抓取的交易/结算规则未见任何限制当日买卖的条款，与T+2结算（见clearing.settlement_cycle）是两个独立层面",
@@ -878,6 +880,7 @@
         "detail": null,
         "quote": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "",
         "confidence": "low",

@@ -229,6 +229,12 @@
             "null"
           ]
         },
+        "execution_model": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
         "matching_principle": {
           "type": [
             "object",
@@ -304,6 +310,12 @@
             "null"
           ]
         },
+        "error_trade_rule": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
         "intraday_reversal": {
           "type": [
             "object",
@@ -317,6 +329,12 @@
           ]
         },
         "block_trade": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "order_book_transparency": {
           "type": [
             "object",
             "null"

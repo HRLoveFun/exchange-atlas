@@ -506,7 +506,9 @@
   }
 
   // ══════════════════════════════════════════════
-  // 交易日平面图（v2.0 主视图，见 PROJECT/DECISIONS.md ADR-035）
+  // 市场机制剖面（v2.0 主视图，见 PROJECT/DECISIONS.md ADR-035 / 更名见 ADR-040/042）
+  //   旧名「交易日平面图」——只描述形式不反映内核；内核是「一个市场的交易机制」，
+  //   用一个交易日的时间轴作画布。路由键 trading-day 保持不变（URL 兼容）。
   //   x = 日内时间（分钟精度，覆盖盘前到盘后），y = 涨跌幅（相对前收盘价 / 前结算价）
   //   数据源：第五章 spec 层（sync.py 原样导出到 exchanges/<id>.json）。
   //   手写 SVG 字符串，不引图表库（ADR-035 C 零构建守则）。
@@ -599,7 +601,7 @@
       }).join("") + "</select>" +
       '<span class="td-tb-note">x = 日内时间 · y = 涨跌幅相对前收盘价 · 点击任意元素看出处</span>' +
       "</div>";
-    app.innerHTML = toolbar + '<div class="loading">加载平面图中…</div>';
+    app.innerHTML = toolbar + '<div class="loading">加载机制剖面中…</div>';
     return loadExchange(id).then(function (data) {
       var cur = parseHash();
       if ((cur.view && cur.view !== "trading-day") || tdResolveId(cur) !== id) return;
@@ -870,12 +872,12 @@
 
     // ── 标题 / 轴名 ──
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
-    g.push('<text x="' + PL + '" y="' + (PT - 40) + '" class="td-title">' + esc(exName) + ' · 交易日平面图</text>');
+    g.push('<text x="' + PL + '" y="' + (PT - 40) + '" class="td-title">' + esc(exName) + ' · 市场机制剖面</text>');
     g.push('<text transform="translate(15,' + n(PT + ph / 2) + ') rotate(-90)" class="td-axis-name" text-anchor="middle">涨跌幅 %（相对' + yRef + '）</text>');
     g.push('<text x="' + n(PL + pw / 2) + '" y="' + (H - 5) + '" class="td-axis-name" text-anchor="middle">日内时间（当地）</text>');
 
     var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + ' ' + H + '" class="td-svg" role="img" aria-label="' +
-      esc(exName) + ' 交易日平面图">' + g.join("") + "</svg></div>";
+      esc(exName) + ' 市场机制剖面">' + g.join("") + "</svg></div>";
     return tdLegend() + svg + tdSidePanels(id, data) + tdProse();
   }
 
@@ -898,7 +900,7 @@
     if (mbRef === "prev_settlement") {
       out.push('<p class="td-banner">纯衍生品交易所：y 轴基准为<strong>前结算价</strong>，第五章字段描述衍生品市场（ADR-035 E）。</p>');
     } else if (hasDeriv) {
-      out.push('<p class="td-banner td-banner-soft">本所记录含衍生品市场字段；平面图显示<strong>现货</strong>（衍生品 spec 待 Phase 3 补充）。</p>');
+      out.push('<p class="td-banner td-banner-soft">本所记录含衍生品市场字段；本剖面显示<strong>现货</strong>（衍生品 spec 待 Phase 3 补充）。</p>');
     }
 
     // val 传完整串；CSS 用 -webkit-line-clamp 截断到 2 行，title 给完整内容。
@@ -978,7 +980,7 @@
   }
 
   function tdProse() {
-    return '<p class="td-prose">平面图由第五章「市场结构与交易机制」的结构化 <code>spec</code> 层驱动（见 ' +
+    return '<p class="td-prose">本剖面由第五章「市场结构与交易机制」的结构化 <code>spec</code> 层驱动（见 ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-035</a>）：' +
       '实线 / 实心为已核实数值，虚线 / 幽灵为「机制存在、数值官方未公布」，更淡的元素为 medium/low 置信度。' +
       '时间轴为分钟精度，不表示到秒；随机开 / 收盘窗口以模糊边缘示意。点击任意元素查看原文摘录与出处。' +

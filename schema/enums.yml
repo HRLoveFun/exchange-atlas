@@ -127,6 +127,16 @@ matching_principle:
     - {id: price_time_broker_priority, label_zh: 价格-时间优先+经纪商优先, label_en: "Price-Time + Broker Priority"}
     - {id: price_time_or_pro_rata, label_zh: 价格-时间优先/按比例分配（逐合约）, label_en: "Price-Time or Pro-Rata (per contract)"}
 
+execution_model:
+  # 市场组织的基本形态（Harris《Trading and Exchanges》的分类）。matching_principle
+  # 是「订单驱动」模型内部的成交优先级细化，与本词表是两个层次，不重复。口头竞价 vs
+  # 电子撮合的差异写进字段 detail——本项目 20 家样本已基本全电子，不单开枚举维度。
+  values:
+    - {id: order_driven, label_zh: 订单驱动, label_en: Order-driven}
+    - {id: quote_driven, label_zh: 报价驱动（交易商/做市商）, label_en: "Quote-driven (Dealer)"}
+    - {id: hybrid, label_zh: 混合（订单簿+做市商）, label_en: "Hybrid (Book + Market Makers)"}
+    - {id: brokered, label_zh: 经纪撮合, label_en: Brokered}
+
 yes_no:
   # id 和 label_en 都必须加引号：裸写的 yes/no/Yes/No 会被 YAML 1.1 解析成布尔值
   # 而不是字符串（大小写不敏感，"No" 一样会中招）。id 不加引号会导致数据文件里

@@ -659,6 +659,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "常规时段为连续竞价：新申报（或修改后申报）收到后，按价格优先、时间优先原则即时撮合成交（低流动性品种不适用）",
@@ -886,6 +887,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "zh": "",
         "detail": "本次抓取材料确认结算周期为T+2（见 clearing.settlement_cycle），但未找到明确说明现货股票「先买后卖是否可当日回转」的条文——结算周期与回转交易规则是两个不同维度，不能相互推断，按铁律留空不猜。",
@@ -942,6 +944,7 @@
         "spec": null,
         "detail": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "",
         "confidence": "low",

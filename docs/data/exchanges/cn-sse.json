@@ -532,6 +532,7 @@
         "confidence": "medium",
         "enum": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "价格优先、时间优先",
@@ -746,6 +747,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "enum": "t1",
         "zh": "T+1（股票整体）；部分品种（跨境/商品/货币/黄金ETF、权证等）实行 T+0",
@@ -802,6 +804,7 @@
         "spec": null,
         "detail": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "无西方意义上的暗池；大宗交易系统承担大额订单的类似功能",
         "en": "No dark pool in the Western sense; the block-trade system serves an analogous function for large orders",

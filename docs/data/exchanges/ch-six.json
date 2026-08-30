@@ -701,6 +701,7 @@
         "enum": null,
         "detail": null
       },
+      "execution_model": null,
       "matching_principle": {
         "enum": "price_time",
         "zh": "价格-时间优先原则：更优价格（买方最高限价、卖方最低限价）优先成交，不限价申报优先于限价申报，同价按接收先后顺序成交；集合竞价另按「最大可执行数量原则」确定单一成交价",
@@ -920,6 +921,7 @@
         "spec": null,
         "detail": null
       },
+      "error_trade_rule": null,
       "intraday_reversal": {
         "zh": "",
         "confidence": "low",
@@ -996,6 +998,7 @@
         "spec": null,
         "quote": null
       },
+      "order_book_transparency": null,
       "dark_pool": {
         "zh": "SwissAtMid——不含盘前透明度的中点撮合交易服务，依瑞士《金融市场基础设施条例》（FMIO）第27条第4款相关豁免运作，最高订单价值CHF 250,000,000",
         "en": "SwissAtMid — a mid-point matching trading service exempted from pre-trade transparency, operating under the relevant exemptions of Art. 27 para. 4 FMIO; maximum order value CHF 250,000,000",

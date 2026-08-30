@@ -402,6 +402,16 @@
         },
         {
           "kind": "leaf",
+          "path": "execution_model",
+          "label_zh": "执行模型",
+          "label_en": "Execution Model",
+          "volatility": "stable",
+          "en_required": true,
+          "enum_ref": "execution_model",
+          "in_matrix": false
+        },
+        {
+          "kind": "leaf",
           "path": "matching_principle",
           "label_zh": "撮合原则",
           "label_en": "Matching Principle",
@@ -512,6 +522,16 @@
         },
         {
           "kind": "leaf",
+          "path": "error_trade_rule",
+          "label_zh": "错误交易处理规则",
+          "label_en": "Erroneous Trade / Mistrade Rule",
+          "volatility": "moderate",
+          "en_required": false,
+          "enum_ref": null,
+          "in_matrix": false
+        },
+        {
+          "kind": "leaf",
           "path": "intraday_reversal",
           "label_zh": "回转交易制度",
           "label_en": "Intraday Reversal (T+N)",
@@ -535,6 +555,16 @@
           "path": "block_trade",
           "label_zh": "大宗交易",
           "label_en": "Block Trade",
+          "volatility": "moderate",
+          "en_required": false,
+          "enum_ref": null,
+          "in_matrix": false
+        },
+        {
+          "kind": "leaf",
+          "path": "order_book_transparency",
+          "label_zh": "订单簿透明度",
+          "label_en": "Order Book Transparency",
           "volatility": "moderate",
           "en_required": false,
           "enum_ref": null,
