@@ -394,6 +394,22 @@ market_structure:
     quote: "Closing Auction Call Session (16:50* - 17:00*) ... ZA01 Closing Auction VWAP Methodology 1 ... ZA02 Closing Auction VWAP Methodology 1 ... ZA03 Closing Auction VWAP Methodology 1 ... ZA04 Mid-point None Methodology 2 ... ZA06 Mid-point Last AT/UT Methodology 3"
     confidence: high
 
+  execution_model:
+    enum: order_driven
+    spec:
+      electronic: true
+      dealer_intermediated: false
+      note: "中央电子订单簿、价格-可见性-时间优先连续撮合（JSE 交易平台由伦敦证交所集团 Millennium Exchange 技术支持）。普通股票（主板 / AltX）无强制做市商；仅专项证券（ETF / AMETF / ETN / AMC / 权证 / 结构性产品）设做市商提供流动性"
+    zh: "订单驱动：中央电子限价订单簿，按价格-可见性-时间优先原则连续撮合；主板与 AltX 普通股无强制做市商要求，仅专项证券（ETF / ETN / 权证 / 结构性产品等）设做市商制度以提供流动性"
+    en: "Order-driven: a central electronic limit order book matching on price-visibility-time priority; there is no mandatory market-maker requirement for ordinary Main Board or AltX equities, and market makers exist only for specialist securities (ETFs, ETNs, warrants, structured products, etc.) to provide liquidity"
+    detail: "enum 依据既有 matching_principle（价格-可见性-时间优先，confidence high）与 market_maker_scheme（普通股无强制做市商，仅专项证券设做市商，confidence high）综合判定为 order_driven。dealer_intermediated 记 false（就普通股票而言）。"
+    sources:
+      - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（8.6.1 Central Order Book）"
+        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
+        accessed: 2026-08-28
+    quote: "The central order book is an order-matching facility where members participate on equal terms, competing for execution on the basis of strict price-visibility-time priority."
+    confidence: high
+
   matching_principle:
     enum: price_display_time
     zh: "中央订单簿按价格-可见性-时间优先原则连续撮合：会员在同等条件下竞争成交，同价位隐藏单排在可见单之后成交"
@@ -406,6 +422,15 @@ market_structure:
     confidence: high
 
   order_types:
+    spec:
+      market: true
+      limit: true
+      stop: true
+      stop_limit: true
+      iceberg: true
+      hidden: true
+      pegged: true
+      note: "Market / Limit / Stop / Stop Limit / Pegged Hidden / Pegged Hidden Limit / Iceberg。Pegged Hidden 为全隐藏且盯住同侧最优价；Iceberg 仅部分可见"
     zh: "市价单（Market Order）、限价单（Limit Order）、止损单（Stop Order）、止损限价单（Stop Limit Order）、钉住隐藏单/钉住隐藏限价单（Pegged Hidden Order / Pegged Hidden Limit Order）、冰山单（Iceberg Order）"
     en: "Market Order, Limit Order, Stop Order, Stop Limit Order, Pegged Hidden Order / Pegged Hidden Limit Order, and Iceberg Order"
     sources:
@@ -416,6 +441,11 @@ market_structure:
     confidence: high
 
   tick_size:
+    spec:
+      regime: uniform
+      min_tick: 1
+      currency: ZAR
+      note: "全市场单一最小报价单位 = 1（南非分，ZAX），不分价格区间；同一 tick 适用于 JSE 与 NSX 市场"
     zh: "统一为1个最小报价单位（按南非分计价，无论价格档位均为1分，不设阶梯式档位）"
     en: "A uniform tick size of 1 (in South African cents) for every instrument, with no tiered price bands"
     sources:
@@ -503,6 +533,34 @@ market_structure:
         url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
         accessed: 2026-08-28
     quote: "This session will be manually triggered by Market Operations Users. A halt may be triggered for the Market, Segment or Instrument."
+    confidence: high
+
+  error_trade_rule:
+    spec:
+      bust_allowed: true
+      review_window_min: null
+      deviation_threshold_pct: null
+      resolution: cancel
+      note: "中央订单簿的自动成交为确定成交；没有欧美式『成交价偏离参考价达某百分比、限时申请复核作废』的常规错误交易机制。会员对当日或次一交易日的场内成交（On Book trade）可发起取消——次日取消通过录入一笔等值反向交易（新 Trade ID）实现，属『冲正』而非直接撤销，且须符合 JSE 规则与指令。场外成交（Off Book）可当日或次日、单方或双方取消。事前防线：静态 / 动态参考价 + 断路器 + 波动性拍卖"
+    zh: "中央订单簿自动撮合的成交为确定成交。JSE 没有欧美式『成交价偏离参考价达某百分比、限时申请复核作废』的常规错误交易处理机制——会员对场内成交（On Book trade）的取消限于当日或次一交易日，且次日取消是通过在系统中录入一笔等值反向交易（生成新的 Trade ID）来实现『冲正』，而非直接撤销原成交，须符合 JSE 的规则与指令。场外报告成交（Off Book trade）可由单方或双方在当日或次日取消"
+    en: "Automatched trades in the central order book are final. The JSE has no routine erroneous-trade process of the US/EU type (a deviation-from-reference-price threshold plus a time-limited request for review and cancellation) — a member's cancellation of an On Book trade is limited to the same or next business day, and a next-day cancellation is effected by entering an equal and opposite reversing trade in the system (with a new Trade ID) rather than deleting the original trade, subject to the rules and directives of the JSE. Off Book (reported) trades may be cancelled by one or both parties on the same or the next business day"
+    detail: "Volume 00E §10.4（Off Book）/ §10.5（On Book Trade Cancellation）+ Trade cancellation 定义。与 trading_halt_mechanism（人工停牌）视角不同。JSE 与日港台同属『On Book 成交终局、靠冲正 / 交易所权力处置』一类，无 % 阈值、窗口以营业日计。resolution 记 cancel（含冲正 / Off Book 取消）。"
+    sources:
+      - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（§10.4 / §10.5，clientportal.jse.co.za PDF）"
+        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
+        accessed: 2026-08-30
+    quote: "Trade cancellation The cancellation of an On Book or Off Book trade on the same business day or the next business day. ... A next day cancellation of an On Book trade is a transaction where a member cancels a trade executed in the central order book on the previous business day, subject to the provisions of the rules and directives of the JSE. ... The new trade is entered as a means of reversing the original trade."
+    confidence: high
+
+  order_book_transparency:
+    zh: "盘前：中央订单簿公开，可见订单的价量向市场披露、按价格-可见性-时间优先撮合。同一订单簿内支持不披露 / 隐藏的流动性——冰山单仅部分可见、钉住隐藏单（Pegged Hidden Order）为全隐藏且盯住同侧最优价，同价位隐藏单排在可见单之后成交。JSE 不运营独立暗池；大额交易走场外报告成交类型（Off-Book / Block Trade BT，含延迟公布）。盘后：适用南非《金融市场法》下的成交披露安排"
+    en: "Pre-trade: the central order book is public — visible order sizes and prices are disseminated and matched on price-visibility-time priority. The same book supports undisclosed and hidden liquidity — Iceberg orders are only partially visible and Pegged Hidden Orders are fully hidden and pegged to the same-side best price, with hidden orders yielding priority to visible orders at the same price. The JSE does not operate a separate dark pool; large trades use off-book reported trade types (Off-Book / Block Trade BT, some with delayed publication). Post-trade: publication follows the arrangements under South Africa's Financial Markets Act"
+    detail: "字段管本所订单簿内部的（非）展示流动性；独立另类交易场所 A2X Markets 见 dark_pool。行情层级 / 收费见第十章。quote 引自 Volume 00E 8.6.1（中央订单簿定义）。"
+    sources:
+      - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（8.6.1 Central Order Book）"
+        url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf
+        accessed: 2026-08-28
+    quote: "The central order book is an order-matching facility where members participate on equal terms, competing for execution on the basis of strict price-visibility-time priority. Any hidden order at a better price will take priority and visible orders will take priority over hidden orders if they are placed at the same price."
     confidence: high
 
   intraday_reversal:
