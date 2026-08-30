@@ -4267,7 +4267,7 @@
       "field_path": "order_types",
       "label_zh": "订单类型",
       "label_en": "Order Types",
-      "zh": "市价申报、指值申报（限价申报）",
+      "zh": "市价申报（成行）、指值申报（限价申报）",
       "en": "Market orders and limit orders",
       "enum": null,
       "enum_ref": null,
@@ -4379,6 +4379,21 @@
       "has_detail": false,
       "verified": "2026-08-13",
       "confidence": "medium"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "group": "trading_mechanism",
+      "field_path": "market_maker_scheme",
+      "label_zh": "做市商制度",
+      "label_en": "Market Maker Scheme",
+      "zh": "现货股票市场无场内指定做市商。仅交易所交易基金（ETF）设有『ETF 做市激励制度』：交易所按品种、依交易参与者或高速交易者的申请指定 ETF 做市商，被指定者须按交易所规定持续提交双边报价，以促进 ETF 公允价格形成与流通",
+      "en": "The cash equity market has no on-exchange designated market makers. Only ETFs have an 'ETF Market Making Incentive Scheme': the Exchange designates ETF market makers per issue on application by trading participants or low-latency traders, and a designated market maker must post continuous two-sided quotes as specified by the Exchange to support fair price formation and circulation of ETFs",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-13",
+      "confidence": "high"
     },
     {
       "exchange_id": "jp-jpx",

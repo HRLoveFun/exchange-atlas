@@ -633,7 +633,27 @@
         "enum": null,
         "detail": null
       },
-      "execution_model": null,
+      "execution_model": {
+        "enum": "order_driven",
+        "spec": {
+          "electronic": true,
+          "dealer_intermediated": false,
+          "note": "TSE arrowhead 全电子中央订单簿、价格-时间优先连续竞价（ザラバ）+ 开盘/收盘板寄せ（Itayose）集合竞价；现货股票无场内指定做市商。仅 ETF 设『ETF 做市激励制度』（Rule 69），按品种指定做市商、须持续双边报价，属激励型非义务型"
+        },
+        "zh": "订单驱动：TSE arrowhead 为全电子化中央订单簿，价格优先、时间优先连续竞价；现货股票市场没有场内指定做市商。仅交易所交易基金（ETF）设有『ETF 做市激励制度』——按品种指定做市商并要求持续双边报价",
+        "en": "Order-driven: TSE arrowhead is a fully electronic central order book matching on price then time priority; the cash equity market has no on-exchange designated market makers. Only ETFs have an 'ETF Market Making Incentive Scheme' under which market makers are designated per issue and required to post continuous two-sided quotes",
+        "detail": "enum 依据既有 matching_principle（Rule 10，价格-时间优先，confidence high）+ Rule 69（ETF 做市激励制度）综合判定：现货股票为纯订单驱动，ETF 的做市为激励型附加、不改变市场基本形态，故 order_driven（非 hybrid）。dealer_intermediated 记 false（就现货股票主市场而言）。",
+        "sources": [
+          {
+            "title": "Business Regulations（官网英文版PDF）Rule 10 / Rule 69",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Market orders shall have precedence over bids and offers other than those of market orders in terms of price. ... The Exchange shall establish an ETF Market Making Incentive Scheme ... The ETF market maker designated pursuant to the provisions of the preceding paragraph shall, as specified by the Exchange, place a continuous bid and offer",
+        "confidence": "high",
+        "verified": "2026-08-13"
+      },
       "matching_principle": {
         "enum": "price_time",
         "zh": "价格优先、时间优先；市价申报优先于指值申报",
@@ -652,7 +672,12 @@
         "detail": null
       },
       "order_types": {
-        "zh": "市价申报、指值申报（限价申报）",
+        "spec": {
+          "market": true,
+          "limit": true,
+          "note": "TSE 業務規程只在撮合条文（Rule 10）中提到市价申报（成行）与指值申报；官方英文《业务规程》无独立订单类型清单条款。实务上另有『不成』（funari，收盘转市价）、IOC 等条件指令，但本次未取得逐字条文，故 spec 只记 market / limit"
+        },
+        "zh": "市价申报（成行）、指值申报（限价申报）",
         "en": "Market orders and limit orders",
         "detail": "官方英文版《业务规程》未见对订单类型的独立分类条款清单（不同于纽交所专门的Order Type Matrix文档），本条基于撮合规则条文（Rule 10）里对市价/指值申报的提及归纳。",
         "sources": [
@@ -665,25 +690,87 @@
         "quote": "Market orders shall have precedence over bids and offers other than those of market orders in terms of price. All market orders shall be on parity with each other.",
         "confidence": "medium",
         "verified": "2026-08-13",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "tick_size": {
-        "zh": "",
-        "confidence": "low",
+        "spec": {
+          "regime": "tiered_by_price",
+          "min_tick": 0.1,
+          "currency": "JPY",
+          "ladder": [
+            {
+              "price_min": 0,
+              "price_max": 3000,
+              "tick": 1
+            },
+            {
+              "price_min": 3000,
+              "price_max": 5000,
+              "tick": 5
+            },
+            {
+              "price_min": 5000,
+              "price_max": 30000,
+              "tick": 10
+            },
+            {
+              "price_min": 30000,
+              "price_max": 50000,
+              "tick": 50
+            },
+            {
+              "price_min": 50000,
+              "price_max": 300000,
+              "tick": 100
+            },
+            {
+              "price_min": 300000,
+              "price_max": 500000,
+              "tick": 500
+            },
+            {
+              "price_min": 500000,
+              "price_max": 3000000,
+              "tick": 1000
+            },
+            {
+              "price_min": 3000000,
+              "price_max": 5000000,
+              "tick": 5000
+            },
+            {
+              "price_min": 5000000,
+              "price_max": 30000000,
+              "tick": 10000
+            },
+            {
+              "price_min": 30000000,
+              "price_max": 50000000,
+              "tick": 50000
+            },
+            {
+              "price_min": 50000000,
+              "price_max": null,
+              "tick": 100000
+            }
+          ],
+          "full_table_note": "上表为一般股票（Business Regulations Rule 13 第3项 a.）。TOPIX 500 成分股另有更细档表（价 ≤ 1,000 时 0.1 日元、1,000–3,000 时 0.5 日元…30,000,000 以上 10,000 日元）；ETF / 投资信托受益证券按各自子表。",
+          "note": "min_tick 0.1 为 TOPIX 500 成分股最细档；一般股票最细档为 1 日元"
+        },
+        "zh": "按每股价格分档的呼値（tick size）表——一般股票：3,000 日元及以下为 1 日元，之上逐档放大至 50,000,000 日元以上为 100,000 日元；TOPIX 500 成分股另设更细的档表（最细 0.1 日元）",
+        "en": "A price-tiered tick-size (呼値) schedule — for general stocks: JPY 1 at or below JPY 3,000, widening by band up to JPY 100,000 above JPY 50,000,000; TOPIX 500 constituents follow a finer schedule (down to JPY 0.1)",
+        "detail": "此前留空。本次以 TSE Business Regulations Rule 13 第3项的呼値表逐档结构化（一般股票 11 档），TOPIX 500 更细表放进 full_table_note。",
         "sources": [
           {
-            "title": "Business Regulations（TSE官网英文版PDF）",
+            "title": "Business Regulations（官网英文版PDF）Rule 13（Tick Size 呼値）",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
             "accessed": "2026-08-13"
           }
         ],
+        "quote": "JPY 1 when the price is JPY 3,000 or less per share ... JPY 5 when the price is more than JPY 3,000 but JPY 5,000 or less per share; JPY 10 when the price is more than JPY 5,000 but JPY 30,000 or less per share; JPY 50 when the price is more than JPY 30,000 but JPY 50,000 or less per share; JPY 100 when the price is more than JPY 50,000 but JPY 300,000 or less per share; JPY 500 when the price is more than JPY 300,000 but JPY 500,000 or less per share; JPY 1,000 when the price is more than JPY 500,000 but JPY 3,000,000 or less per share; JPY 5,000 when the price is more than JPY 3,000,000 but JPY 5,000,000 or less per share; JPY 10,000 when the price is more than JPY 5,000,000 but JPY 30,000,000 or less per share; JPY 50,000 when the price is more than JPY 30,000,000 but JPY 50,000,000 or less per share; and JPY 100,000 when the price is more than JPY 50,000,000 per share ... JPY 0.1 when the price is JPY 1,000 or less per share; JPY 0.5 when the price is more than JPY 1,000 but JPY 3,000 or less per share",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "enum": null
       },
       "board_lot_size": {
         "zh": "",
@@ -1003,7 +1090,29 @@
         "detail": null,
         "quote": null
       },
-      "error_trade_rule": null,
+      "error_trade_rule": {
+        "spec": {
+          "bust_allowed": true,
+          "review_window_min": null,
+          "deviation_threshold_pct": null,
+          "resolution": "cancel",
+          "note": "TSE 業務規程 Rule 13：因误单产生的成交，只有在『极难完成交收且交易所认为市场可能混乱』时交易所才可作废（另有系统记录丢失情形）——无固定申请时限、无固定价格偏离阈值，是交易所裁量的窄口径例外，非常规复核流程。被作废的成交视同从未发生；下单方对因作废受损的对手方不负赔偿责任（故意 / 重大过失除外）。日本市场以『成交原则上不可撤销』著称，事前靠值幅制限 + 特別気配抑制误单成交"
+        },
+        "zh": "TSE《业务规程》的「成交作废」条款：因误单产生的成交，仅在『交收极为困难且交易所认为市场可能陷入混乱』时，交易所方可作废该笔成交（另有系统交易记录因不可抗力丢失且难以恢复的情形）。无固定申请时限、无固定价格偏离百分比门槛——属交易所裁量的窄口径例外，而非常规错误交易复核流程。被作废成交视同自始未成立；下单方对因作废受损的对手方原则上不负赔偿责任（故意或重大过失除外）",
+        "en": "TSE Business Regulations' transaction-cancellation rule: a transaction resulting from an erroneous order may be cancelled by the Exchange only where it is extremely difficult to conduct settlement and the Exchange deems the market likely to be confused (also where system transaction records are lost through unavoidable causes). There is no fixed application deadline and no fixed price-deviation threshold — this is a narrow, discretionary exception rather than a routine erroneous-trade review. A cancelled transaction is deemed never to have been effected; the party that placed the erroneous order is generally not liable to the counterparty for resulting damage (absent deliberate action or gross negligence)",
+        "detail": "TSE Business Regulations Rule 13（Cancellation of Transactions）。与欧美的偏离阈值 + 时限式明显错误复核制度对比鲜明：日本现货成交近乎不可作废，事前防线是值幅制限（见 price_limits）与特別気配。deviation_threshold_pct / review_window_min 均留 null（原文无量化门槛）。",
+        "sources": [
+          {
+            "title": "Business Regulations（官网英文版PDF）Rule 13",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "Where a transaction is effected because of an erroneous order, if it is extremely difficult to conduct the settlement and the Exchange deems that the market is likely to be confused, the Exchange may cancel the transaction specified by the Exchange as prescribed by the Exchange. ... Where the Exchange cancels a transaction pursuant to the provisions of Paragraph 1 or the preceding paragraph, such transaction shall be deemed as if it were never effected at all. ... the trading participant shall be unable to claim for compensation for the damage against the trading participant which has placed an erroneous order",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null
+      },
       "intraday_reversal": {
         "enum": "t1",
         "zh": "现货股票交收前不得卖出（不可当日回转），与结算层面T+2（见 clearing.settlement_cycle）相配套",
@@ -1060,7 +1169,23 @@
         "detail": null,
         "quote": null
       },
-      "order_book_transparency": null,
+      "order_book_transparency": {
+        "zh": "盘前：TSE arrowhead 为公开的中央订单簿，各价位的申报数量以『板情報』向市场披露；价格急剧变动时以『特別気配』（special quote）显示预期成交价并放缓成交。现货股票订单簿不提供冰山 / 隐藏限价单类型（全部申报数量公开）。盘后 / 大宗：立会外取引 ToSTNeT 单独进行并披露。适用日本金商法的成交披露要求",
+        "en": "Pre-trade: TSE arrowhead is a public central order book; order quantities at each price level are disseminated as board information (板情報), and a 'special quote' (特別気配) is displayed to signal the expected execution price and slow matching during sharp moves. The cash equity order book does not offer iceberg or hidden order types — full order quantities are shown. Off-auction / block trades run separately on ToSTNeT and are disclosed. Trade publication follows the requirements of Japan's Financial Instruments and Exchange Act",
+        "detail": "字段管本所订单簿内部的（非）展示流动性；ToSTNeT 立会外系统见 block_trade。TSE 现货订单簿无非展示订单类型是与欧美市场的一个显著差异。quote 复用 matching_principle / circuit_breaker 已核实的板情報·特別気配措辞；整体 confidence: medium（盘后披露延迟参数未逐字核实）。",
+        "sources": [
+          {
+            "title": "Business Regulations（官网英文版PDF）Rule 10 / 特別気配条款",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "A lower offer shall have precedence over higher offers, and a higher bid shall have precedence over lower bids... Market orders shall have precedence over bids and offers other than those of market orders in terms of price.",
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "enum": null,
+        "spec": null
+      },
       "dark_pool": {
         "zh": "",
         "confidence": "low",
@@ -1079,21 +1204,26 @@
         "quote": null
       },
       "market_maker_scheme": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "TSE现货市场撮合系统（arrowhead）为全电子化连续竞价，未确认是否存在类似纽交所DMM式的场内指定做市商角色；部分ETF/权证品种可能另有流动性提供者（Liquidity Provider）安排，未核实细节，留空不猜。",
+        "spec": {
+          "present": true,
+          "quote_obligation": true,
+          "max_spread_pct": null,
+          "note": "仅 ETF：ETF 做市激励制度（Rule 69），按品种指定做市商，须持续提供双边报价；现货股票市场无指定做市商。激励型（做市换费用返还 / 激励），非带罚则的强制报价义务"
+        },
+        "zh": "现货股票市场无场内指定做市商。仅交易所交易基金（ETF）设有『ETF 做市激励制度』：交易所按品种、依交易参与者或高速交易者的申请指定 ETF 做市商，被指定者须按交易所规定持续提交双边报价，以促进 ETF 公允价格形成与流通",
+        "en": "The cash equity market has no on-exchange designated market makers. Only ETFs have an 'ETF Market Making Incentive Scheme': the Exchange designates ETF market makers per issue on application by trading participants or low-latency traders, and a designated market maker must post continuous two-sided quotes as specified by the Exchange to support fair price formation and circulation of ETFs",
+        "detail": "此前留空。本次以 TSE Business Regulations Rule 69 补齐——限定 ETF 范围，属激励型（非义务型）做市制度，故与 NYSE DMM / Nasdaq 竞争性做市商形态不同；现货股票仍为纯订单驱动（见 execution_model）。",
         "sources": [
           {
-            "title": "Business Regulations（TSE官网英文版PDF）",
+            "title": "Business Regulations（官网英文版PDF）Rule 69（ETF Market Making Incentive Scheme）",
             "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
             "accessed": "2026-08-13"
           }
         ],
+        "quote": "The Exchange shall establish an ETF Market Making Incentive Scheme ... The Exchange shall designate an ETF market maker(s) for each issue, as specified by the Exchange, based on application for designation of an ETF market maker(s) from trading participants ... The ETF market maker designated pursuant to the provisions of the preceding paragraph shall, as specified by the Exchange, place a continuous bid and offer",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "spec": null,
-        "quote": null
+        "enum": null
       },
       "connect_schemes": {
         "zh": "",
