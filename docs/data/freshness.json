@@ -10421,6 +10421,20 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "execution_model",
+      "label_zh": "执行模型",
+      "label_en": "Execution Model",
+      "volatility": "stable",
+      "verified": "2026-08-16",
+      "age_days": 14,
+      "stale": false,
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "fr-euronext",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "matching_principle",
       "label_zh": "撮合原则",
       "label_en": "Matching Principle",
@@ -10443,6 +10457,20 @@
       "age_days": 14,
       "stale": false,
       "confidence": "medium"
+    },
+    {
+      "exchange_id": "fr-euronext",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "tick_size",
+      "label_zh": "最小报价单位",
+      "label_en": "Tick Size",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "age_days": 14,
+      "stale": false,
+      "confidence": "high"
     },
     {
       "exchange_id": "fr-euronext",
@@ -10533,6 +10561,20 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "error_trade_rule",
+      "label_zh": "错误交易处理规则",
+      "label_en": "Erroneous Trade / Mistrade Rule",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "age_days": 14,
+      "stale": false,
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "fr-euronext",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "block_trade",
       "label_zh": "大宗交易",
       "label_en": "Block Trade",
@@ -10541,6 +10583,20 @@
       "age_days": 14,
       "stale": false,
       "confidence": "low"
+    },
+    {
+      "exchange_id": "fr-euronext",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "order_book_transparency",
+      "label_zh": "订单簿透明度",
+      "label_en": "Order Book Transparency",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "age_days": 14,
+      "stale": false,
+      "confidence": "medium"
     },
     {
       "exchange_id": "fr-euronext",
