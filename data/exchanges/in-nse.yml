@@ -420,19 +420,66 @@ market_structure:
     quote: "Closing session Open 15:40 hrs / Closing session Close 16:00 hrs"
     confidence: high
 
+  execution_model:
+    enum: order_driven
+    spec:
+      electronic: true
+      dealer_intermediated: false
+      note: "NEAT / NNF 全电子中央订单簿、价格-时间优先连续撮合；主板股票无场内做市商。衍生品设流动性激励计划（Liquidity Enhancement Scheme），SME 平台（NSE Emerge）另设做市商制度——均为订单驱动之上的补充"
+    zh: "订单驱动：NSE 交易系统（NEAT / NNF）为全电子中央订单簿，按价格优先、时间优先连续撮合；主板股票不设场内做市商。衍生品有流动性激励计划、SME 平台另设做市商制度"
+    en: "Order-driven: the NSE trading system (NEAT / NNF) is a fully electronic central order book matching continuously on price-then-time priority; main-board equities have no on-exchange market makers. There is a Liquidity Enhancement Scheme for derivatives and a separate market-maker regime for the SME (NSE Emerge) platform"
+    detail: "enum 依据 matching_principle（Price-Time priority）与既有 market_maker_scheme detail（LES / SME 做市，非主板股票）综合判定为 order_driven。quote 引自 NSE『Equity Derivatives Trading System』页——该页明确 NSE 交易架构『supports an order driven market』并按价格-时间优先撮合；NEAT / NNF 平台与撮合逻辑现货与 F&O 共用，故现货主板同为订单驱动。整体 confidence: medium（引自 F&O 分段页面，非现货专页）。"
+    sources:
+      - title: "Equity Derivatives Trading System（NSE 官网，NEAT 撮合架构：order driven + price-time priority）"
+        url: https://www.nseindia.com/static/products-services/equity-derivatives-trading-system
+        accessed: 2026-08-30
+    quote: "The system supports an order driven market and provides complete transparency of trading operations. ... Orders are stored in price-time priority in various books"
+    confidence: medium
+
   matching_principle:
-    zh: ""
-    confidence: low
-    detail: "官网确认交易系统为电子撮合（NEAT），但本次未找到对具体撮合优先顺序（如价格优先/时间优先）逐条说明的官方原文，未采纳常识性印象。"
+    enum: price_time
+    zh: "价格优先、时间优先：订单进入系统后先加时间戳，随即尝试撮合，未成交的按价格-时间优先存入订单簿；最优买单（价高者）与最优卖单（价低者）撮合"
+    en: "Price-then-time priority: incoming orders are time-stamped and immediately processed for a match; unmatched orders are stored in price-time priority, and the best buy order (highest price) matches the best sell order (lowest price)"
+    detail: "此前留空。本次以 NSE『Equity Derivatives Trading System』页核实——NEAT / NNF 平台现货与 F&O 共用同一撮合逻辑。来源为 F&O 分段页面，confidence: medium。"
+    sources:
+      - title: "Equity Derivatives Trading System（NSE 官网，Order Matching Rules）"
+        url: https://www.nseindia.com/static/products-services/equity-derivatives-trading-system
+        accessed: 2026-08-30
+    quote: "Orders, as and when they are received, are first time stamped and then immediately processed for potential match. If a match is not found, then the orders are stored in different 'books'. Orders are stored in price-time priority ... Order Matching Rules The best buy order will match with the best sell order. ... the best buy order is the one with highest price and the best sell order is the one with lowest price."
+    confidence: medium
 
   order_types:
-    zh: ""
-    confidence: low
-    detail: "本次抓取的 Trading Protocols 页聚焦连接协议（NEAT Adapter/Trimmed Protocol），未涉及订单类型清单本身，留空。"
+    spec:
+      market: true
+      limit: true
+      stop: true
+      tif: [day, ioc]
+      note: "价格条件：限价单（Limit）、市价单（Market，按录入时可得最优价成交）、止损单（Stop Loss / SL，触及触发价才激活入市）。时间条件：DAY（当日有效）、IOC（即时成交否则撤销）。NSE 另有披露数量单（Disclosed Quantity，仅披露部分数量）——本次未从 NSE 一手页面核实其现货参数，不入 spec（见 order_book_transparency / OPEN-QUESTIONS）"
+    zh: "价格条件：限价单（Limit Order）、市价单（Market Order，按录入时可得最优价成交）、止损单（Stop Loss / SL Order，市场价触及或穿越阈值价时才激活）。时间条件：DAY（当日有效）、IOC（即时成交否则撤销，可部分成交、余量即撤）"
+    en: "Price conditions: Limit orders, Market orders (filled at the best price obtainable when entered), and Stop Loss (SL) orders (activated only when the market price reaches or crosses a threshold). Time conditions: DAY (valid for the day) and IOC (Immediate-or-Cancel — partial fills allowed, the unmatched portion cancelled immediately)"
+    detail: "此前留空。本次以 NSE『Equity Derivatives Trading System』页的 Time / Price Conditions 核实——NEAT / NNF 平台现货共用。NSE 现货另支持披露数量单（Disclosed Quantity），其现货最低披露比例等参数本次未从一手页面核实，记入 OPEN-QUESTIONS。confidence: medium（引自 F&O 分段页面）。"
+    sources:
+      - title: "Equity Derivatives Trading System（NSE 官网，Time Conditions / Price Conditions）"
+        url: https://www.nseindia.com/static/products-services/equity-derivatives-trading-system
+        accessed: 2026-08-30
+    quote: "Time Conditions DAY - A Day order ... is an order which is valid for the day on which it is entered. ... IOC - An Immediate or Cancel (IOC) order ... Price Conditions Limit Price/Order - An order that allows the price to be specified while entering the order into the system. Market Price/Order - An order to buy or sell securities at the best price obtainable at the time of entering the order. Stop Loss (SL) Price/Order - The one that allows the Trading Member to place an order which gets activated only when the market price of the relevant security reaches or crosses a threshold price."
+    confidence: medium
 
   tick_size:
-    zh: ""
-    confidence: low
+    spec:
+      regime: tiered_by_price
+      min_tick: 0.01
+      currency: INR
+      full_table_note: "SEBI / NSE 价格联动 tick size（NSE 通函 Ref 66/2024，2024-06-10 起）：收盘价 < ₹250 的证券 tick 为 ₹0.01（1 派士），≥ ₹250 的为 ₹0.05（5 派士）；按上一自然月最后交易日收盘价每月重定"
+      note: "min_tick ₹0.01；两档由前月末收盘价决定"
+    zh: "价格联动的最小报价单位（2024-06-10 起）：证券收盘价低于 ₹250 的 tick 为 ₹0.01（1 派士）；收盘价 ₹250 及以上的 tick 为 ₹0.05（5 派士）；按上一自然月最后交易日收盘价每月重新确定"
+    en: "A price-linked tick size (effective 10 June 2024): ₹0.01 (1 paisa) for a security whose closing price is below ₹250, and ₹0.05 (5 paise) for a closing price of ₹250 or above; reassigned monthly based on the closing price on the last trading day of the previous calendar month"
+    detail: "此前留空。本次数值来自 NSE 通函 Ref 66/2024（2024-05-24，2024-06-10 生效）的第三方转述（business-standard / marketcalls），未取得 NSE 一手 PDF——按 CLAUDE.md 二第 3 条 confidence 封顶 medium。"
+    sources:
+      - title: "NSE lowers tick size for stocks below Rs 250（Business Standard，转述 NSE 通函 Ref 66/2024）"
+        url: https://www.business-standard.com/markets/capital-market-news/nse-lowers-tick-size-for-stocks-below-rs-250-124052700731_1.html
+        accessed: 2026-08-30
+    confidence: medium
 
   board_lot_size:
     zh: ""
@@ -516,6 +563,37 @@ market_structure:
     zh: "见 circuit_breaker（全市场指数熔断）；个股级别的临时停牌/复牌具体规则本次未逐条核实"
     en: "See circuit_breaker (market-wide index circuit breaker); stock-level suspension/resumption rules not verified in detail this session"
     confidence: low
+
+  error_trade_rule:
+    spec:
+      bust_allowed: true
+      review_window_min: 30
+      deviation_threshold_pct: null
+      resolution: cancel
+      note: "『Trade Annulment』政策（依 SEBI CIR/MRD/DP/15/2015）：仅执行该成交的交易会员（买 / 卖方）可通过交易系统电子申请，须在成交后 30 分钟内提交。须同时满足：单笔订单最低价值 Rs 10 Crores（1 亿卢比）、单笔订单产生的成交最低价值 Rs 10 lakhs；成交须不在当时适用的价格带 / operating range / trade execution range 内；须为连续时段（Normal market）成交；买卖两侧 PAN 不同。对手方交易会员须在收市后 30 分钟内（或申请后 30 分钟内、以较晚者为准）电子表示接受。无固定价格偏离百分比门槛——以『在价格带外』+ 卢比金额门槛替代"
+    zh: "『交易作废（Trade Annulment）』政策（依 SEBI 2015 年通函）：只有执行该成交的交易会员（买方或卖方）可申请，须通过交易所交易系统在成交后 30 分钟内电子提交。须同时满足：产生该成交的单笔订单价值不低于 Rs 10 Crores（1 亿卢比）、单笔订单产生的成交价值不低于 Rs 10 lakhs；该成交在成交时不在适用的价格带 / 操作区间 / 成交执行区间之内；须为连续时段（Normal market）成交；买卖两侧非同一 PAN。对手方交易会员须电子表示同意作废（在收市后 30 分钟内、或申请后 30 分钟内，以较晚者为准）"
+    en: "Trade Annulment policy (under SEBI circular of 2015): only the executing trading member (buyer or seller) may apply, electronically through the exchange trading system, within 30 minutes of execution. The trade must meet all of: a minimum order value of Rs 10 Crores and a minimum trade value from a single order of Rs 10 lakhs; the trade must have been outside the applicable price bands / operating range / trade execution range at the time; it must have been executed in the continuous (Normal market) session; and the two sides must not share the same PAN. The counterparty trading member must electronically consent to the annulment (within 30 minutes after market close, or within 30 minutes of the request, whichever is later)"
+    detail: "NSEIL Consolidated Circular ITEM 3.1（Trade Annulment Request）+ SEBI CIR/MRD/DP/15/2015。来源为第三方转载件（ricago.com），confidence: medium。与 trading_halt_mechanism 视角不同。印度属『阈值 + 时限复核制』，门槛以卢比金额 + 是否在价格带外计，非 % 偏离——故 spec.deviation_threshold_pct 留 null。"
+    sources:
+      - title: "NSEIL Consolidated Circular（ITEM 3.1 Trade Annulment Request，经 ricago.com 逐字转载）PDF"
+        url: https://www.ricago.com/assets/front/base/file/file_management/441.pdf
+        accessed: 2026-08-30
+      - title: "NSE Circular CMTR54851（确认 Trade Annulment 依 SEBI CIR/MRD/DP/15/2015 处理）PDF"
+        url: https://archives.nseindia.com/content/circulars/CMTR54851.pdf
+        accessed: 2026-08-30
+    quote: "Trade annulment requests should be submitted to the Exchange within 30 minutes of the execution of trade. A trade annulment request can only be made for an order of a minimum value of Rs 10 Crores ... Minimum trade value of trade(s) originating from a single order for which annulment request is made should be Rs. 10 lakhs or above ... The trade(s) in question are not within the price bands / operating range / trade execution range applicable at the time of trade. ... Counterparty trading member should have provided acceptance to trade annulment in electronic form within 30 minutes after the market closure or within 30 minutes from time of trade annulment requests whichever is later."
+    confidence: medium
+
+  order_book_transparency:
+    zh: "盘前：NEAT / NNF 中央订单簿公开——系统『supports an order driven market and provides complete transparency of trading operations』，未成交订单按价格-时间优先存入订单簿并向市场披露。NSE 现货有披露数量单（Disclosed Quantity Order，仅显示预设比例、余量隐藏），具体最低披露比例本次未从 NSE 一手页面核实；未见全隐藏订单类型。盘中另设价格带 / 操作区间拦截超范围申报。盘后 / 大额：大宗交易窗口单独进行"
+    en: "Pre-trade: the NEAT / NNF central order book is public — the system 'supports an order driven market and provides complete transparency of trading operations', and unmatched orders are stored in and disseminated from the book on price-time priority. NSE cash trading has Disclosed Quantity orders (which show only a pre-specified proportion, hiding the rest); the exact minimum disclosed proportion was not verified from a first-party NSE page this session, and no fully hidden order type was found. Price bands / operating ranges constrain order entry. Post-trade / large orders: a separate block-trade window operates"
+    detail: "字段管本所订单簿内部的（非）展示流动性。行情层级 / 收费见第十章。quote 引自 NSE『Equity Derivatives Trading System』页（同一 NEAT / NNF 架构）。Disclosed Quantity 现货参数未核实、记入 OPEN-QUESTIONS。confidence: medium。"
+    sources:
+      - title: "Equity Derivatives Trading System（NSE 官网，order driven + complete transparency）"
+        url: https://www.nseindia.com/static/products-services/equity-derivatives-trading-system
+        accessed: 2026-08-30
+    quote: "The system supports an order driven market and provides complete transparency of trading operations. ... Orders are stored in price-time priority in various books"
+    confidence: medium
 
   intraday_reversal:
     enum: t0

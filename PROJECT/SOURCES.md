@@ -418,6 +418,12 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 - `sebi.gov.in` | 监管 | en | curl 常规 UA 200，未见反爬；页面是服务端渲染的传统多页站（非 SPA），正文可直接 grep，比同为监管机构域名的 `sec.gov`（美国，v0.2 时实测 403）好抓得多 | 印度证券交易委员会（SEBI），NSE 的政府监管机构；本节只用于确认监管机构身份与核心法律名称，具体规则条款优先引用 NSE 官网转载/说明页
   - About SEBI（设立沿革：1988年非法定机构成立/1992年成为法定机构）: https://www.sebi.gov.in/about-sebi.html（HTTP 200，8.5KB）
   - Securities Contracts (Regulation) Act, 1956（核心法律之一，SCRA，确认法律名称与年份）: https://www.sebi.gov.in/legal/acts/feb-1957/securities-contracts-regulation-act-1956-as-amended-by-the-international-financial-services-centres-authority-act-2019-w-e-f-october-01-2020-_4.html（HTTP 200，8.6KB）
+- `archives.nseindia.com`（NSE 官网另一文档归档子域，与 `nsearchives.nseindia.com` 并列，2026-08-30 新增登记） | 官方（NSE 一手来源） | en | curl 常规 UA 200，PDF 用 `pdftotext -layout` | 存放历史交易通函（`/content/circulars/CMTR*.pdf` 等）
+  - NSE Circular CMTR54851（Market Price Protection + 确认 Trade Annulment 政策依 SEBI CIR/MRD/DP/15/2015 及 NSE 合并通函 44481 §4.3 处理）PDF: https://archives.nseindia.com/content/circulars/CMTR54851.pdf（HTTP 200，146KB）
+- `ricago.com`（compliance-tech 公司运营的合规知识库，逐字转载 NSE 官方合并通函，2026-08-30 新增登记；⚠️ 非交易所自有域名，按 CLAUDE.md 二第3条 `confidence` 上限 `medium`——即便摘到逐字原文也一样，无法排除转载件被静默改动的风险；与 `everycrsreport.com`（CRS 报告非营利镜像）同类，仅在 NSE 一手页面为 JS 壳、无正文时作降级来源） | 第三方（官方文件转载） | en | curl 常规 UA 200，PDF 用 `pdftotext -layout` | NSEIL Consolidated Circular 转载件，用于 `in-nse` 的 `market_structure.error_trade_rule`（Trade Annulment 政策：30 分钟窗口 / 最低订单价值 Rs 10 Crores / 须在价格带外 / 对手方须接受）与 Disclosed Quantity 机制说明——NSE 一手 `nseindia.com` 对应页面为 JS 导航壳、正文抓不到
+  - NSEIL Consolidated Circular（ITEM 3.1 Trade Annulment Request + Disclosed Quantity 撮合说明，转载 NSE 官方合并通函）PDF: https://www.ricago.com/assets/front/base/file/file_management/441.pdf（HTTP 200，约910KB）
+- `business-standard.com`（印度主流财经日报，2026-08-30 新增登记；第三方新闻媒体，按 CLAUDE.md 二第3条 `confidence` 上限 `medium`） | 第三方（财经媒体） | en | curl 常规 UA 200 | 用于 `in-nse` 的 `market_structure.tick_size` 数值转述——NSE 通函 Ref 66/2024（2024-06-10 起价格联动 tick：收盘价 < ₹250 为 ₹0.01、≥ ₹250 为 ₹0.05）的报道，NSE 一手通函 PDF 本次未定位到直链
+  - NSE lowers tick size for stocks below Rs 250（转述 NSE 通函 Ref 66/2024 的 tick size 数值与生效日）: https://www.business-standard.com/markets/capital-market-news/nse-lowers-tick-size-for-stocks-below-rs-250-124052700731_1.html（HTTP 200）
 
 - `incometaxindia.gov.in` | 官方（印度所得税局） | en | curl 常规 UA 200 | 资本利得税/股息预扣税（costs 出处）
 - `rbi.org.in` | 官方（印度储备银行） | en | curl 常规 UA 200 | 外资准入/账户开立（foreign_access_channel/account_opening_requirements 出处）
