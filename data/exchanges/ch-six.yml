@@ -470,6 +470,19 @@ market_structure:
         accessed: 2026-08-16
     confidence: high
 
+  execution_model:
+    enum: hybrid
+    spec: {electronic: true, dealer_intermediated: true, note: "中央电子限价订单簿、价格-时间优先连续撮合 + 正式做市商制度：做市商须与交易所签书面 Market Maker Agreement，按细分市场承担报价覆盖率与最大点差义务（如蓝筹股月均 ≥80% 交易时段维持报价、最大点差 2.5%）"}
+    zh: "混合模式：中央电子限价订单簿、价格-时间优先连续撮合；同时设正式做市商制度——做市商须与交易所签订书面 Market Maker Agreement，按所在细分市场承担持续报价覆盖率与最大点差义务（蓝筹股要求月均 80% 以上交易时段维持不超过 2.5% 的最大点差）"
+    en: "Hybrid: a central electronic limit order book matching on price-then-time priority, with a formal market-maker regime — market makers sign a written Market Maker Agreement with the Exchange and take on quoting-coverage and maximum-spread obligations by segment (Blue Chip Shares require quoting over 80% of trading hours on a monthly average with a maximum spread of 2.5%)"
+    detail: "enum 依据既有 market_maker_scheme（书面 Market Maker Agreement + 点差义务，confidence high，spec.max_spread_pct=2.5）与 matching_principle（价格-时间优先）综合判定为 hybrid——SIX 的做市商是有合同义务、承担点差约束的一等价格形成参与者。"
+    sources:
+      - title: "Directive 1: Admission of Participants / Market Maker Agreement"
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir01-en.pdf
+        accessed: 2026-08-16
+    quote: "The Exchange may admit a participant as a market maker under a written agreement (Market Maker Agreement). ... The market maker contractually undertakes to meet the following requirements over 80% (on a monthly average) ... with a maximum trading spread of 2.5%;"
+    confidence: high
+
   matching_principle:
     enum: price_time
     zh: "价格-时间优先原则：更优价格（买方最高限价、卖方最低限价）优先成交，不限价申报优先于限价申报，同价按接收先后顺序成交；集合竞价另按「最大可执行数量原则」确定单一成交价"
@@ -482,6 +495,14 @@ market_structure:
     confidence: high
 
   order_types:
+    spec:
+      market: true
+      limit: true
+      stop: true
+      stop_limit: true
+      iceberg: true
+      hidden: true
+      note: "Normal order（限价 / 不限价）、Iceberg order（仅披露可见数量的一档，隐藏部分失时间优先）、Retail order（触发型，含 Stop Limit / Stop Loss，触发前不入订单簿）、Auction Volume Discovery order（集合竞价专用全隐藏订单）。SIX 另设 SwissAtMid 中点整合订单簿（免盘前透明度）"
     zh: "Normal order（普通订单，限价/不限价）；Iceberg order（冰山订单，逐笔披露可见数量）；Retail order（零售触发订单，含Stop Limit/Stop Loss两类，触发前不进入订单簿）；Auction Volume Discovery order（集合竞价隐藏订单，仅用于开/收盘竞价按数量-时间优先撮合）"
     en: "Normal order (limited or unlimited price); Iceberg order (discloses only a visible tranche at a time); Retail order (trigger-based, not visible pre-trigger, with Stop Limit / Stop Loss variants); Auction Volume Discovery order (hidden order used only in opening/closing auctions, matched under quantity-time priority)"
     quote: "The Exchange supports the order types: a) Normal order; ... b) Iceberg order; ... c) Retail order; ... d) Auction Volume Discovery order"
@@ -492,13 +513,20 @@ market_structure:
     confidence: high
 
   tick_size:
-    zh: "按价格区间与流动性带（Band A-F，依近90日日均成交笔数ANT分类）双维度分档：同一价格区间内流动性越高、最小报价单位越小，如价格1-2瑞郎档，Band A（低流动性）为0.01，Band F（高流动性）低至0.0002"
-    en: "Tiered by both price range and a liquidity band (Band A-F, classified by average number of trades — ANT); within the same price range, higher liquidity means a smaller tick, e.g. for the CHF 1-2 price band, Band A (low liquidity) is 0.01 while Band F (high liquidity) is as small as 0.0002"
-    quote: "1 ≤ price < 2                   0.01         0.005         0.002        0.001         0.0005       0.0002"
+    spec:
+      regime: tiered_by_price_and_liquidity
+      min_tick: 0.0001
+      currency: CHF
+      full_table_note: "Directive 3 Annex D：19 个价格区间 × 6 个流动性带（Band A–F，按近 90 交易日日均成交笔数 ANT 分类）交叉查表——同一价格区间内流动性越高、tick 越小；价格越高、tick 越大。最小 0.0001，最大 500（Band A、价 ≥ 50,000）"
+      note: "计价货币按标的证券，非仅 CHF；min_tick 0.0001 为全表最细档"
+    zh: "按价格区间与流动性带（Band A-F，依近90日日均成交笔数ANT分类）双维度分档：同一价格区间内流动性越高、最小报价单位越小，如价格1-2瑞郎档，Band A（低流动性）为0.01，Band F（高流动性）低至0.0002；全表最细档为0.0001"
+    en: "Tiered by both price range and a liquidity band (Band A-F, classified by average number of trades — ANT); within the same price range, higher liquidity means a smaller tick, e.g. for the CHF 1-2 price band, Band A (low liquidity) is 0.01 while Band F (high liquidity) is as small as 0.0002; the finest step across the whole table is 0.0001"
+    detail: "此前只摘一行。本次结构化为 spec：regime 为价格×流动性分档，min_tick 0.0001（全表最细），完整 19×6 表见 Annex D。"
     sources:
       - title: Directive 3 — Trading, Annex D Price Steps (Tick Size)
         url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf
         accessed: 2026-08-16
+    quote: "0 ≤ price < 0.1                 0.0005       0.0002        0.0001       0.0001        0.0001       0.0001 ... 1 ≤ price < 2                   0.01         0.005         0.002        0.001         0.0005       0.0002 ... 50,000 ≤ price                  500          200           100          50            20           10"
     confidence: high
 
   board_lot_size:
@@ -582,6 +610,34 @@ market_structure:
       - title: "\"Trading Parameters\" Guideline"
         url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf
         accessed: 2026-08-16
+    confidence: high
+
+  error_trade_rule:
+    spec:
+      bust_allowed: true
+      review_window_min: null
+      deviation_threshold_pct: null
+      resolution: cancel
+      note: "『不规则的场内成交（irregular on-exchange trades）』由交易双方共同向交易所申请作废——须双方提供的信息一致方可作废；申请须不迟于成交次一交易日提交；交易所一般于当日交易日结束前（CCP 品种为清算日结束前）作废，例外情形可延长或拒绝作废。无固定价格偏离百分比门槛。作废后交易所在行情数据中公布。另可用『countertrade（对冲平仓交易）』替代作废"
+    zh: "对『不规则的场内成交』，交易双方均须向交易所申请作废（须双方提供的信息一致方可作废，即双方需就作废达成一致）。申请须不迟于成交之次一交易日提交；交易所一般于当日交易日结束前（属中央对手方清算品种的于清算日结束前）作废，例外情形可延长期限或拒绝作废。没有固定的价格偏离百分比门槛。作废经交易所在行情数据中公布。交易所另设『对冲平仓交易（countertrade）』作为替代路径"
+    en: "For irregular on-exchange trades, both parties to the trade must apply to the Exchange to cancel it — a trade cannot be cancelled unless the information given by the two parties corresponds (i.e. both must agree). The application must be made no later than the trading day following the trade; as a rule the Exchange cancels by the end of the trading day (by the end of the clearing day for CCP-eligible securities), and under exceptional circumstances may extend these periods or refuse to cancel. There is no fixed price-deviation threshold. A cancellation is published by the Exchange in the market data. A 'countertrade' is available as an alternative to cancellation"
+    detail: "Directive 3 §23.2.1（Cancellation of trade by the Exchange）+ §24（Countertrade）。与 trading_halt_mechanism（Trading Interruption）视角不同。SIX 的错误交易作废是双边合意制（需双方申请、信息一致），无 % 阈值，窗口以『交易日』计。resolution 记 cancel。"
+    sources:
+      - title: Directive 3 — Trading §23.2.1 / §24（SIX Swiss Exchange）
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf
+        accessed: 2026-08-30
+    quote: "In the event of irregular on-exchange trades, both parties involved in the trade shall apply to the Exchange to cancel the trade. ... A trade cannot be cancelled unless the information given by the two parties corresponds. ... The application from the parties shall be made no later than the trading day following that on which the trade was made. ... As a rule, the Exchange will cancel the trade by the end of the trading day at the latest. Trades in CCP-eligible securities will be cancelled by the end of the clearing day at the latest. ... Under exceptional circumstances, the Exchange may extend these periods or refuse to cancel a trade."
+    confidence: high
+
+  order_book_transparency:
+    zh: "盘前：中央限价订单簿公开，展示订单的价量向市场披露、按价格-时间优先撮合。同一订单簿内支持不完全披露 / 隐藏的流动性——冰山订单仅逐档披露可见数量（隐藏部分每档换新时间戳、失时间优先）、Auction Volume Discovery 订单为集合竞价专用全隐藏订单、Retail 触发订单在触发前不进入订单簿。此外 SIX 运营 SwissAtMid 中点整合订单簿（依瑞士金融市场基础设施法规免于盘前透明度）。盘后：适用瑞士 FinfraG / FMIO 的成交披露与延迟安排"
+    en: "Pre-trade: the central limit order book is public — displayed order sizes and prices are disseminated and matched on price-then-time priority. The same book supports partially-disclosed and hidden liquidity — Iceberg orders publish only one visible tranche at a time (each new tranche gets a fresh time stamp and loses time priority), Auction Volume Discovery orders are fully hidden and used only in auctions, and Retail (trigger) orders are not in the book before triggering. SIX additionally operates the SwissAtMid midpoint integrated order book, which is exempt from pre-trade transparency under the Swiss financial market infrastructure ordinance. Post-trade: publication and deferral follow the Swiss FinfraG / FMIO regime"
+    detail: "字段管本所订单簿内部的（非）展示流动性；SwissAtMid 中点暗簿见 dark_pool。行情层级 / 收费见第十章。quote 引自 Directive 3 §5.1.2（Iceberg 定义）+ §11（免盘前透明度）。"
+    sources:
+      - title: Directive 3 — Trading §5.1.2 / §11（SIX Swiss Exchange）
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf
+        accessed: 2026-08-16
+    quote: "The visible quantity of the Iceberg order is published in the order book. After the visible quantity of the Iceberg order has been executed, the next tranche of the total order quantity shall be published in the order book as a new visible quantity ... Each tranche shall be given a new time stamp and a new identification number, and thus loses its time priority. ... Iceberg orders, Retail orders and orders with at-the-close validity (namely also Auction Volume Discovery orders) which are executed using an order management facility of the Exchange are exempted from pre-trade transparency regulations"
     confidence: high
 
   intraday_reversal:
