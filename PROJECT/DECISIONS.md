@@ -912,3 +912,25 @@
 **验证：** `make check` → `validate` 20 家 0 警告 0 错误；`verify_quotes` FAIL=0（未动任何 `quote`/`zh`/`spec`，只删身份字段）；`make sync` 后 `git diff` 生成块与重算一致。（worktree 内 `.cache/` 未重建，`verify_quotes` 显示 `OK=0 / CACHE_MISS≈1071`，属 [ADR-044] 已知信息性状态，非本次回归。）
 
 **日期：** 2026-08-30
+
+### ADR-047 — 成本瀑布渲染层首版：镜像双瀑布 SVG + 顶层 tab
+
+**背景：** [ADR-045] 已把第十一章 6 费种的 `spec` 层（`cost_layer` 形状）在 20 家全部回填，渲染层按当时判断留交互式会话做。用户此后明确要求推进首版实现；本条记首版落地的形态与取舍，后续视觉迭代仍走交互式会话。
+
+**定了什么（`docs/assets/app.js` `renderCostWaterfall` / `cwBuild` + `docs/index.html` 新 tab + `styles.css` `.cw-*`，仅前端三文件，`docs/data/` 零 diff）：**
+
+1. **顶层 tab「交易成本瀑布 / Cost Waterfall」**，路由键 `cost-waterfall`，排在「市场机制剖面」之后。市场下拉与「市场机制剖面」同构（`data-role="cw-exchange"` → `setHash({view,id})`）。默认市场 `hk-hkex`（6 费种里 5 种有实体费率、印花税双边、监管费多项分征——首屏信息最全）。
+2. **镜像双瀑布**：中轴 = 0 bp，左半买入侧、右半卖出侧。6 费种逐行，`spec.side`（buy/sell/both）决定条落哪侧；单边费种的另一侧画灰虚线示意「此侧不征」。底部「合计」行 = 各侧小计，标题下副标 = 单边 buy/sell bp + 往返合计 bp（≥1 bp 才附 %）。
+3. **归一到 bp of 成交额（渲染层做，[ADR-045] 轴③）：** `cwToBp(spec)` 按 `unit` 换算——`pct`×100 / `permille`×10 / `bp`×1 / `per_lakh`÷10 / `per_crore`÷1000 / `per_million`÷100 直接换；`per_share` 按「假设股价 50」、`flat_*` 按「假设单笔成交额 100,000」换（标 `≈`，脚注写明假设）。`components` 求和；`tiered` 取 `rate` 首档（标 `▸`）；`cap` 记入 tooltip、bp 不扣封顶（标 `^`）。
+4. **诚实三态（同 [ADR-035] D）：** `rate` 有值 → 实心条 + bp 数；`rate: null` → 斜纹幽灵条 +「议价/未披露」；`type: none` → 中轴细线 +「不征收 / 不适用」；费种无 `spec` → 「未结构化」。全 20 家 buy/sell 均为 0（jp-jpx / de-eurex）时副标改为「未摘引到可折算为 bp 的费率」。
+5. **持有 / 退出税另列**（[ADR-045] 轴①）：`capital_gains_tax` / `dividend_withholding_tax` 无 `spec`，作图下方两行文本（`.cw-tax-line`，可点开出处），标题「持有 / 退出税（非按笔成本，另计）」。
+6. **点击任意条 / 税行**复用 `openCellOverlay`（`data-chapter="costs"`，path 用裸字段名如 `stamp_duty`——与 `tdSidePanels` 的 costs chip 一致）。
+7. **`de-eurex` 淡 banner**：`price_limits.main_board.spec.reference === "prev_settlement"` → 「费用多按合约计，bp 折算仅供参考」。
+
+**为什么这样：** 镜像布局把「单边税一眼可见」做成主信息（英股 50 bp 仅买、A股/韩国仅卖、港股双边、美股 SEC 费仅卖——4 种形态在 4 张图上立刻区分）。bp 归一让不同计量口径（%/‰/bp/每股/每十万/定额）可比。三态渲染避免把「市场化议价的佣金」画成 0 或留白误导。手写 SVG、零依赖，与 `renderTradingDay` 同套路（[ADR-035] C）。
+
+**验证：** `node -c` 通过；`make build` 全绿（validate 0/0、verify_quotes FAIL=0、生成块无 diff）。Chrome headless 截图核对 13 家 × 明暗两主题：hk/uk/cn-sse/kr/in-nse/us-nyse/au/de-eurex/jp/za/tw/br/ca，镜像不对称、幽灵条、`type:none` 行、多分量求和、阶梯/封顶/近似标记均按预期渲染；矩阵 / 时区 / 健康度 / 市场机制剖面无回归。
+
+**已知局限（留交互式迭代）：** ① 单一费种（印花税）远大于其余时左半大量留白——镜像条形图的固有形态，改累积式瀑布可填满但是更大改动；② 全零市场（jp-jpx/de-eurex）「合计 0.00 bp」行略显尴尬，可考虑抑制；③ 暗色下「此侧不征」灰虚线偏弱；④ `per_share`/`flat_*` 的假设成交额 / 股价折算较粗（只影响 ca-tsx 交易所费、ch-six/uk-lse 清算费）。
+
+**日期：** 2026-08-30
