@@ -433,6 +433,12 @@
     "market_structure": {
       "trading_sessions": {
         "pre_market": {
+          "spec": {
+            "start": "08:30",
+            "end": "09:00",
+            "kind": "opening_auction",
+            "note": "Pre-Open 08:30 至 08:58-59 随机结束 + Non-Cancel 至 09:00"
+          },
           "zh": "开盘例行程序（Opening Routine）08:30-09:00，含 Pre-Open（08:30 至 08:58/59 随机结束）与 Non-Cancel（至09:00）两阶段单一价格集合竞价",
           "en": "Opening Routine 08:30-09:00, comprising a Pre-Open Phase (08:30 to a random end at 08:58-08:59) and a Non-Cancel Phase (to 09:00), both single-price call auction phases",
           "quote": "Pre-Open Phase (08:30 hours to 08:58–59 hours) ... This phase begins at 08:30 hours and ends randomly at any time from 08:58 hours to 08:59 hours.",
@@ -446,10 +452,14 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "continuous_am": {
+          "spec": {
+            "start": "09:00",
+            "end": "12:00",
+            "kind": "continuous"
+          },
           "zh": "09:00-12:00 连续竞价",
           "en": "Continuous Trading Phase, 09:00-12:00",
           "quote": "The morning trading session consists of a Trading Phase which begins at 09:00 hours and ends at 12:00 hours.",
@@ -463,10 +473,15 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "lunch_break": {
+          "spec": {
+            "start": "12:00",
+            "end": "13:00",
+            "kind": "lunch_recess",
+            "note": "含午间开盘例行程序（Pre-Open 至 12:58-59 随机 + Non-Cancel 至 13:00）计算下午开盘价"
+          },
           "zh": "午休 12:00-13:00，含 Pre-Open（12:00至12:58/59随机结束）与 Non-Cancel（至13:00）两阶段单一价格集合竞价，计算下午开盘价",
           "en": "Mid-Day Break 12:00-13:00, comprising a Pre-Open Phase (12:00 to a random end at 12:58-12:59) and a Non-Cancel Phase (to 13:00), computing the afternoon session's opening price",
           "quote": "The Mid-Day Break is a 60-minute session that begins after the morning trading session ends at 12:00 hours, and ends before the afternoon trading session begins at 13:00 hours.",
@@ -480,10 +495,14 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "continuous_pm": {
+          "spec": {
+            "start": "13:00",
+            "end": "17:00",
+            "kind": "continuous"
+          },
           "zh": "13:00-17:00 连续竞价",
           "en": "Continuous Trading Phase, 13:00-17:00",
           "quote": "The afternoon trading session consists of a Trading Phase which begins at 13:00 hours and ends at 17:00 hours.",
@@ -497,10 +516,15 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "after_market": {
+          "spec": {
+            "start": "17:06",
+            "end": "17:16",
+            "kind": "after_hours_continuous",
+            "note": "Trade at Close：仅可按收盘均衡价成交；17:00-17:06 为收盘例行程序；无独立盘后连续竞价"
+          },
           "zh": "收盘例行程序（17:00-17:06，Pre-Close+Non-Cancel两阶段单一价格集合竞价计算收盘价）后接十分钟「Trade at Close」阶段（17:06-17:16，仅可按收盘均衡价成交），无独立盘后连续竞价时段",
           "en": "Closing Routine (17:00-17:06, Pre-Close + Non-Cancel phases computing the closing price) followed by a ten-minute Trade at Close Phase (17:06-17:16, orders only at the Equilibrium Price); no separate after-hours continuous trading session",
           "quote": "The Trade at Close Phase is a ten-minute session that begins after the Closing Routine ends at 17:06 hours (for normal day trading) ... Orders may be entered in this phase only at the Equilibrium Price determined at the end of the Closing Routine.",
@@ -514,10 +538,13 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "night_session": {
+          "spec": {
+            "kind": "none",
+            "note": "现货证券市场无夜盘"
+          },
           "zh": "现货证券市场无夜盘",
           "en": "No night session in the cash securities market",
           "confidence": "medium",
@@ -530,7 +557,6 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null,
           "quote": null
         }
@@ -553,6 +579,12 @@
         "detail": null
       },
       "opening_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "08:30",
+          "auction_end": "09:00",
+          "note": "开盘例行程序：Pre-Open + Non-Cancel，按最大成交量/最小失衡量确定均衡价"
+        },
         "zh": "开盘例行程序：Pre-Open阶段可自由报单/改单/撤单不撮合，Non-Cancel阶段不可再报单改单，按SGX-ST算法计算出成交量最大、失衡量最小的均衡价（Equilibrium Price）作为开盘价",
         "en": "Opening Routine: order entry/amendment/withdrawal freely allowed without matching during Pre-Open; no new entry/amendment during Non-Cancel, where an Equilibrium Price (largest tradable volume, lowest imbalance) is computed as the opening price",
         "sources": [
@@ -566,10 +598,16 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "closing_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "17:00",
+          "auction_end": "17:06",
+          "trade_at_close_end": "17:16",
+          "note": "收盘例行程序算收盘均衡价；Trade at Close 17:06-17:16 仅按该均衡价撮合"
+        },
         "zh": "收盘例行程序（Pre-Close+Non-Cancel，机制与开盘例行程序对称）计算收盘均衡价，随后Trade at Close阶段仅允许按该均衡价继续撮合十分钟",
         "en": "Closing Routine (Pre-Close + Non-Cancel, mirroring the Opening Routine) computes the closing Equilibrium Price, followed by a ten-minute Trade at Close Phase where matching continues only at that price",
         "quote": "The Closing Routine is designed to reduce the risk of manipulating closing prices with a single transaction at an unusually high or low price, just before the trading session ends.",
@@ -583,7 +621,6 @@
         ],
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "matching_principle": {
@@ -690,6 +727,12 @@
           "detail": null
         },
         "main_board": {
+          "spec": {
+            "type": "dynamic",
+            "band_pct": 10,
+            "reference_window_min": 5,
+            "note": "非固定每日涨跌停：价格带为滚动参考价 ±10%；参考价取当节开盘价，此后每 5 分钟更新为 5 分钟前成交价；覆盖 STI/MSCI Singapore 成分股及参考价 ≥S$0.50 的股票/REIT/ETF 等，新股首日豁免"
+          },
           "zh": "上限为参考价+10%，下限为参考价-10%；参考价在交易阶段开始时取当节开盘价（缺失则取前值），此后每5分钟滚动更新为5分钟前成交价",
           "en": "Upper threshold = reference price + 10%; lower threshold = reference price − 10%; the reference price starts as the session's opening price (falling back to prior values), then rolls every 5 minutes to the trade price from 5 minutes earlier",
           "quote": "The upper threshold is 10% above the reference price and the lower threshold is 10% below the reference price.",
@@ -703,7 +746,6 @@
           ],
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "other_boards": {
@@ -726,6 +768,10 @@
       },
       "circuit_breaker": {
         "enum": "stock_level",
+        "spec": {
+          "type": "stock_level",
+          "note": "个股/期货合约级熔断冷静期（Circuit Breaker / Cooling-Off Period），非全市场级；见 volatility_interruption / price_limits"
+        },
         "zh": "个股/期货合约级别的熔断冷静期机制（Circuit Breaker / Cooling-Off Period），非全市场级",
         "en": "Circuit Breaker / Cooling-Off Period — applies at the individual security/futures contract level, not market-wide",
         "detail": "详细机制见 volatility_interruption 字段与 price_limits。",
@@ -738,10 +784,12 @@
         ],
         "quote": "SGX-ST may prescribe, for certain securities and futures contracts, Circuit Breakers which are designed to temporarily restrict trading in these securities and futures contracts.",
         "confidence": "high",
-        "verified": "2026-08-14",
-        "spec": null
+        "verified": "2026-08-14"
       },
       "volatility_interruption": {
+        "spec": {
+          "note": "冷静期（Cooling-Off Period）5 分钟：撮合价超出滚动参考价 ±10% 价格带（见 price_limits）的委托被拒，冷静期内仍可在带内交易（非停牌）；结束后价格带按新参考价调整；与午休/收盘前/停牌重叠则提前结束"
+        },
         "zh": "冷静期（Cooling-Off Period）持续5分钟：撮合价超出价格带的委托将被拒绝，冷静期内交易仍可在价格带内继续进行（非停牌）；冷静期结束后价格带随新参考价调整；冷静期若与午休/收盘前阶段/停牌/暂停交易重叠则提前结束",
         "en": "The Cooling-Off Period lasts 5 minutes: an incoming order that would match outside the band is rejected while trading continues within the band (not a halt); after the period ends the band is recalculated from the new reference price; the period ends early if it coincides with the Mid-Day Break, Pre-Close Phase, a suspension or a trading halt",
         "sources": [
@@ -755,7 +803,6 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "trading_halt_mechanism": {
@@ -794,6 +841,12 @@
       },
       "short_selling": {
         "enum": "freely_allowed",
+        "spec": {
+          "naked_allowed": null,
+          "uptick_rule": false,
+          "borrow_required": false,
+          "note": "基本无限制；卖单须标记「卖空/正常」并申报数量；无报升规则、无指定名单（消极推断，未见相关条款）"
+        },
         "zh": "基本无限制，但须标记卖单为「卖空/正常卖单」并申报数量；未见报升规则（uptick rule）或指定名单限制",
         "en": "Largely unrestricted, subject to an order-marking/reporting regime (short sell orders must be flagged, with quantity disclosed); no uptick rule or designated-list restriction was found",
         "detail": "「无报升规则/无指定名单」是基于本次抓取的 SGX-ST Rules 全文未见相关条款的消极推断，不是正面声明，故整条 confidence 标 medium。标记要求本身（引文出处）是可直接验证的正面事实。",
@@ -806,8 +859,7 @@
         ],
         "quote": "Each sell order for Specified Capital Markets Products shall be marked to indicate to SGX-ST whether it is a Short Sell Order or a normal sell order.",
         "confidence": "medium",
-        "verified": "2026-08-14",
-        "spec": null
+        "verified": "2026-08-14"
       },
       "block_trade": {
         "zh": "",
@@ -844,6 +896,12 @@
         "quote": null
       },
       "market_maker_scheme": {
+        "spec": {
+          "present": true,
+          "quote_obligation": true,
+          "max_spread_pct": null,
+          "note": "指定做市商须就获批品种持续提供约束性双边报价，在最大价差与最小数量范围内；具体数值未公开统一表。衍生品另可启用 PPM/MM/Pro-Rata 分配算法（见 matching_principle）"
+        },
         "zh": "指定做市商（Designated Market-Maker）制度：须就获批品种在交易系统持续提供有约束力的双边报价，报价须在SGX-ST规定的最大价差与最小数量范围内",
         "en": "Designated Market-Maker scheme: must continuously provide binding two-way quotations on the Trading System for approved instruments, within SGX-ST-prescribed maximum spread and minimum quantity",
         "sources": [
@@ -857,7 +915,6 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "connect_schemes": {
