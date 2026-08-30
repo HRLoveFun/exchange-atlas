@@ -532,7 +532,27 @@
         "confidence": "medium",
         "enum": null
       },
-      "execution_model": null,
+      "execution_model": {
+        "enum": "order_driven",
+        "spec": {
+          "electronic": true,
+          "dealer_intermediated": false,
+          "note": "全电子中央订单簿、价格优先时间优先连续竞价 + 开收盘集合竞价；主板 / B 股无做市商。仅科创板（STAR Market）可实行做市商机制，做市商提供双边报价服务，属订单驱动之上的补充"
+        },
+        "zh": "订单驱动：证券竞价交易按价格优先、时间优先的原则在中央订单簿撮合，无做市商介入；仅科创板股票交易可实行做市商机制，由做市商提供双边报价服务",
+        "en": "Order-driven: auction trading is matched in the central order book on price-then-time priority with no dealer intervention; only STAR Market stocks may operate a market-making mechanism under which market makers provide two-sided quotes",
+        "detail": "enum 依据既有 matching_principle（价格优先、时间优先）与 market_maker_scheme（仅科创板可实行做市商机制）的已核实 quote 综合判定：主板为纯订单驱动，科创板做市为补充、不改变市场基本形态。dealer_intermediated 记 false（就主板而言）。",
+        "sources": [
+          {
+            "title": "上海证券交易所交易规则（2023年修订），经 mgzq.com 镜像获取，见 SOURCES.md 说明",
+            "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
+            "accessed": "2026-08-12"
+          }
+        ],
+        "quote": "证券竞价交易按价格优先、时间优先的原则撮合成交／科创板股票交易可以实行做市商机制，做市商可以为科创板股票提供双边报价服务。",
+        "confidence": "medium",
+        "verified": "2026-08-12"
+      },
       "matching_principle": {
         "enum": "price_time",
         "zh": "价格优先、时间优先",
@@ -556,9 +576,15 @@
         "detail": null
       },
       "order_types": {
-        "zh": "限价申报；市价申报（仅限连续竞价阶段）",
-        "en": "Limit Order; Market Order (continuous auction only)",
+        "spec": {
+          "market": true,
+          "limit": true,
+          "note": "限价申报为主；市价申报仅限连续竞价阶段，并细分为多种类型（如『五档即成剩撤』『本方最优』『对手方最优』等，见交易规则）。无冰山 / 隐藏 / 止损订单类型"
+        },
+        "zh": "限价申报；市价申报（仅限连续竞价阶段，另细分为多种执行方式）",
+        "en": "Limit orders; market orders (continuous auction only, further divided into several execution modes)",
         "quote": "市价申报只适用于连续竞价期间的交易",
+        "confidence": "medium",
         "sources": [
           {
             "title": "上海证券交易所交易规则（2023年修订）第3.1.4条，经 mgzq.com 镜像获取，见 SOURCES.md 说明",
@@ -572,15 +598,21 @@
           }
         ],
         "verified": "2026-08-12",
-        "confidence": "medium",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "tick_size": {
+        "spec": {
+          "regime": "per_instrument",
+          "min_tick": 0.001,
+          "currency": "CNY",
+          "full_table_note": "按证券类型（非按价格）分档：A 股 0.01 元人民币，基金 / 权证 0.001 元人民币，B 股 0.001 美元。科创板股票申报价格最小变动单位同为 0.01 元",
+          "note": "B 股以美元计价，最小变动单位 0.001 美元"
+        },
         "zh": "A股 0.01 元人民币；基金/权证 0.001 元人民币；B股 0.001 美元",
         "en": "A-shares RMB 0.01; funds/warrants RMB 0.001; B-shares USD 0.001",
         "quote": "A 股的申报价格最小变动单位为 0.01 元人民币，基金、权证交易为 0.001 元人民币，B 股交易为 0.001 美元。",
+        "confidence": "medium",
         "sources": [
           {
             "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
@@ -589,9 +621,7 @@
           }
         ],
         "verified": "2026-08-12",
-        "confidence": "medium",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "board_lot_size": {
@@ -747,7 +777,34 @@
         "spec": null,
         "detail": null
       },
-      "error_trade_rule": null,
+      "error_trade_rule": {
+        "spec": {
+          "bust_allowed": true,
+          "review_window_min": null,
+          "deviation_threshold_pct": null,
+          "resolution": "cancel",
+          "note": "成交依规则达成即具法律效力，买卖双方须接受成交结果并履行清算交收义务，无欧美式『偏离参考价达某百分比、限时申请复核作废』的常规错误交易流程。交易所仅在窄口径情形可宣布交易无效：不可抗力 / 意外事件 / 非法侵入交易系统等致严重后果、成交显失公平、成交违反规则并严重扰乱市场秩序。事前防线：涨跌停 / 价格笼子 / 有效申报价格范围 / 无效申报剔除。第八章另规定重大技术故障、重大人为差错等紧急情况下可取消交易并通知登记结算机构暂停结算"
+        },
+        "zh": "依规则达成的成交自成交时起即具法律效力，买卖双方均应当接受成交结果、履行清算交收义务。上海证券交易所没有欧美式『成交价偏离参考价达某百分比、限时申请复核并作废』的常规错误交易处理机制。仅在因不可抗力、意外事件、非法侵入交易系统等原因致成交产生严重后果，或成交显失公平，或成交违反交易规则并严重扰乱市场正常秩序的窄口径情形下，交易所方可采取措施或宣布交易无效",
+        "en": "A transaction concluded under the Rules is legally effective from the moment of its conclusion; both buyer and seller must accept the result and perform their clearing and settlement obligations. The SSE has no routine erroneous-trade process of the US/EU type (a deviation-from-reference-price threshold plus a time-limited request for review and cancellation). The Exchange may take measures or declare a transaction void only in narrow circumstances — where force majeure, an accident, illegal intrusion into the trading system or similar causes serious consequences, where a transaction is manifestly unfair, or where a transaction violates the Rules and seriously disrupts the normal order of the market",
+        "detail": "上海证券交易所交易规则 3.5.5 + 第八章（交易异常情况处理）。与 trading_halt_mechanism（盘中临时停牌）视角不同。中国 A 股与日本 / 香港证券市场同属『成交近乎终局、靠事前价格控制防误单』一类，与欧美的偏离阈值复核制度形成对比。deviation_threshold_pct / review_window_min 均留 null（原文无量化门槛）。quote 引自 SSE 官方英文译本（中文本为准）。",
+        "sources": [
+          {
+            "title": "上海证券交易所交易规则（2023年修订）3.5.5 / 第八章，经 mgzq.com 镜像获取",
+            "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
+            "accessed": "2026-08-12"
+          },
+          {
+            "title": "Trading Rules of Shanghai Stock Exchange — SSE 官方英文译本（3.5.5 / Chapter VIII），仅供参考，中文本为准",
+            "url": "https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "For a transaction that results in serious consequences due to force majeure, accidents, illegal intrusion into the trading system, or other reasons, the Exchange may take appropriate measures or declare the transaction void. For a transaction that is manifestly unfair, the Exchange may, upon its determination, take appropriate measures. Where a transaction violates these Rules and seriously disrupts the normal operation of the securities market, the Exchange has the right to cancel it",
+        "confidence": "high",
+        "verified": "2026-08-12",
+        "enum": null
+      },
       "intraday_reversal": {
         "enum": "t1",
         "zh": "T+1（股票整体）；部分品种（跨境/商品/货币/黄金ETF、权证等）实行 T+0",
@@ -804,7 +861,23 @@
         "spec": null,
         "detail": null
       },
-      "order_book_transparency": null,
+      "order_book_transparency": {
+        "zh": "盘前：中央订单簿公开——连续竞价阶段的实时行情向市场发布各证券的即时最高五档买入申报价格及数量、即时最低五档卖出申报价格及数量（Level-1）；Level-2 行情另提供十档及逐笔委托。证券市场不提供冰山 / 隐藏 / 未披露委托类型。盘中另设『价格笼子』限制申报价格偏离范围。盘后：成交实时揭示，大宗交易单独申报并披露",
+        "en": "Pre-trade: the central order book is public — real-time market data during continuous auction disseminates, for each security, the best five bid prices and quantities and the best five ask prices and quantities (Level-1); Level-2 data additionally provides ten price levels and order-by-order feeds. The securities market offers no iceberg, hidden or undisclosed order types. An intraday 'price cage' limits how far an order price may deviate. Post-trade: executions are shown in real time; block trades are reported and disclosed separately",
+        "detail": "字段管本所订单簿内部的（非）展示流动性——A 股订单簿全展示、无非展示订单类型，与欧美市场是显著差异。行情层级 / 收费见第十章 market_data_levels。quote 引自 SSE 官方英文译本 5.2.2。",
+        "sources": [
+          {
+            "title": "Trading Rules of Shanghai Stock Exchange — SSE 官方英文译本 5.2.2，仅供参考，中文本为准",
+            "url": "https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf",
+            "accessed": "2026-08-13"
+          }
+        ],
+        "quote": "The real-time quotations during continuous auction include, with respect to each type of security, its code, short name, previous closing price, last execution price, highest execution price of the day, lowest execution price of the day, cumulative trading volume and transaction value of the day, the five real-time highest bids and their quantities, and the five real-time lowest asks and their quantities.",
+        "confidence": "high",
+        "verified": "2026-08-12",
+        "enum": null,
+        "spec": null
+      },
       "dark_pool": {
         "zh": "无西方意义上的暗池；大宗交易系统承担大额订单的类似功能",
         "en": "No dark pool in the Western sense; the block-trade system serves an analogous function for large orders",
