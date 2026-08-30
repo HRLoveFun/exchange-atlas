@@ -59,6 +59,13 @@ us-nasdaq/cn-szse/uk-lse/de-xetra/sg-sgx/au-asx/in-nse/sa-tadawul）、v1.0 Wave
      出过一次真实事故：某子代理给 SOURCES.md 打补丁时依据了过期快照，直接静默删除了另一个
      子代理几分钟前刚提交的 10 行内容，事后是 orchestrator 合并阶段逐行核对才发现补回的，
      肇事的子代理自己完全没意识到。
+  4. **绝不 `git add .cache`（或任何 `.cache` 开头的路径）。** 如果你为复用主 checkout 的来源
+     缓存、在自己 worktree 里手建了 `.cache` 符号链接，它不在 `.gitignore` 的目录规则覆盖内
+     （`.cache/` 带斜杠只挡目录、不挡同名软链）——一旦被 `git add -A` / `git add .` 顺带扫进
+     提交，合并到 main 后**任何人 `git pull` 都会被 git 静默删掉本地 `.cache/` 全部快照**
+     （git 为放置这个 tracked 软链会覆盖位置上被忽略的目录，不报错）。[ADR-044] 就是这么炸的。
+     提交前 `git status` 扫一眼有没有 `.cache` 冒出来；用 `git commit -- <明确文件列表>`，
+     永远不用 `git add -A` / `git commit -a`。
 
 **v1.1 Batch 1（8 个子代理，2026-08-24/25）进一步确认与补充**——这次共享目录规模比 [ADR-021]
 更大（8 个子代理里 7 个共享同一目录，仅 1 个真正独立），且与账号会话限额多次中断后经

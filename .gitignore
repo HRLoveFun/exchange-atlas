@@ -1,4 +1,7 @@
-.cache/
+# 无斜杠：同时挡住 .cache 目录及其内容、以及误建的 .cache 符号链接
+# （worktree 里指向主 checkout .cache 的软链一旦被 git add 会污染仓库，
+#  且 checkout 时 git 会为放置该软链静默抹掉被忽略的 .cache/ 目录 —— 见 ADR-044）
+.cache
 __pycache__/
 *.pyc
 .DS_Store

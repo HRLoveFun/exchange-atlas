@@ -71,6 +71,24 @@ v0.1 人工抽检（2026-08-13）时发现的一条通用问题：个别字段�
 
 ---
 
+## 经验：`.cache/` 突然全空 / 全 CACHE_MISS，先查是不是 `git pull` 把它删了
+
+2026-08-30 发现（[ADR-044]）：`verify_quotes` 从 `OK=1071` 一夜变成 `OK=0 / CACHE_MISS=1071`，
+`.cache/` 目录整个消失。根因不是抓取失效，是 **git 的一个隐蔽行为**——
+
+`.gitignore` 里写 `.cache/`（带斜杠）时，一个**同名的 tracked 文件/符号链接** `.cache` 不被这条规则
+挡住。一旦某次提交误把 `.cache` 软链（worktree 里为复用主 checkout 缓存手建的那种）`git add` 进去，
+之后任何人 `git pull` / `git checkout` 到该提交时，git 为了在 `.cache` 这个位置放下那个 tracked 软链，
+会**静默删除**位置上原有的、被 `.gitignore` 忽略的 `.cache/` 目录（忽略文件在 checkout 时可被覆盖，
+git 不报错、不提示）。本地几百上千份来源快照就这么没了。
+
+**排查顺序**：① `git log --oneline -- .cache` 看有没有它的提交记录（正常应该没有，它全程 gitignore）；
+② `ls -la .cache` 看是不是变成了符号链接。**修复**：`git rm --cached .cache && rm .cache`，把
+`.gitignore` 的 `.cache/` 改成 `.cache`（无斜杠，连软链一起挡），再 `python3 tools/fetch_sources.py`
+全量重建。**预防**：worktree 里绝不 `git add .cache`；提交前 `git status` 扫一眼有没有 `.cache` 冒出来。
+
+---
+
 ### 上海证券交易所 Shanghai Stock Exchange (SSE) `cn-sse`
 - `sse.com.cn` | 官方 | zh | WebFetch 对规则总览页（`lawandrules/sselawsrules/overview/`）返回 403；换 `lawandrules/sselawsrules2025/overview/`（新版路径）+ curl 常规 UA 可过（HTTP 200）；PDF 用 `pdftotext -layout` 提取纯文本再 grep 定位条款，比逐页翻 PDF 快得多 | 规则总览页本身不含全文直链，需从站内导航多跳到具体规则文档；官网有《现行有效的业务规则清单》目录 PDF（见下）能确认某规则「现行有效」，但清单本身不含可点击的逐条直达链接，还没找到《交易规则》全文在 sse.com.cn 上的直接 URL——这是本节唯一的已知缺口，下次找到了请替换掉 mgzq.com 那条并把相关字段 confidence 升回 high
   - 规则总览: https://www.sse.com.cn/lawandrules/sselawsrules2025/overview/
