@@ -129,6 +129,7 @@
 - `kr-krx` 交易成本与税费 / 股息预扣税（dividend_withholding_tax）— confidence: low
 - `kr-krx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `kr-krx` 风险与特殊考量 / 市场操纵与监管执法环境（enforcement_note）— confidence: low
+- `sa-tadawul` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low
 - `sa-tadawul` 市场数据与技术基础设施 / 历史系统故障事件（major_outage_history）— confidence: low
 - `sa-tadawul` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `sg-sgx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
