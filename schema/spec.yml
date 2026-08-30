@@ -204,3 +204,32 @@ fields:
   costs.regulatory_fees: *cost_layer
   costs.stamp_duty: *cost_layer
   costs.financial_transaction_tax: *cost_layer
+
+  # ── 第八章｜清算、结算与交割：违约瀑布（Phase 3 第三棒，[ADR-048]/[ADR-050]）──
+  # default_management 一份 spec，存违约处置瀑布 / 多层防线的「层级顺序 + 每层谁的钱
+  # （bearer）」，不存金额——各层绝对额基本不披露，且 [ADR-048] 轴②明确只结构化顺序 +
+  # bearer。spec 里唯一的数值是 layers[].order（1..N），个位数不进校验 5b 的数字反查
+  # （NUMBER_RE 只收 ≥2 位），故此形状不涉及逐字数值反查。
+  # 前端「违约瀑布」常驻附图：按 order 从上到下堆叠、按 bearer 上色
+  #   （defaulter 红 / ccp 橙 / surviving_members 黄 / statutory_fund 灰 /
+  #    external 灰蓝——外部授信 / 保险 / 流动性安排，[ADR-048] 的 4 类之外，
+  #    因 cn-sse / hk-hkex / sg-sgx / jp-jpx 等有明确的外部资源层而补入，见 [ADR-050]）。
+  # 结构化不出干净层级的（us-nyse NSCC/DTC 共享框架、tw-twse 指定他方代交付等），
+  # 走 model: unstructured + note（[ADR-035] D 三态的「机制存在、结构查不到」）。
+  # settlement 时间轴不新增 spec：由既有 settlement_cycle enum（t1/t2/t3）+
+  # delivery_method + last_trading_day_rule 驱动。结算担保模式是 clearing 章的独立
+  # enum 字段 guarantee_model（schema/enums.yml），不进 spec。
+  clearing.default_management:
+    doc: >
+      违约处置瀑布 / 多层结算保障防线的结构化形式。model 给整体形态；layers 按动用
+      （或防线）顺序逐层列，order 从 1 起。只存顺序与「谁的钱」，不存金额。
+    keys:
+      model: "ccp_default_waterfall（标准 CCP 违约瀑布：违约方资源→CCP 自有出资→存续会员共担）/ lines_of_defence（无 novation 的多层结算保障防线，如 za-jse 现货）/ unstructured（机制存在但原文未给可结构化的干净层级）"
+      layers: >
+        list——按动用 / 防线顺序，每项：
+        order（int，从 1）；
+        resource（string——该层动用的资源 / 防线措施，从 quote 摘的简短人读标签）；
+        bearer（可选——谁的钱：defaulter / ccp / surviving_members / statutory_fund /
+        external（外部授信 / 保险 / 流动性安排）。ccp_default_waterfall 的损失吸收层必填；
+        lines_of_defence 的预防性层级（准入门槛、资本监控等非损失吸收）可省）
+      note: "string——model: unstructured 时说明机制概况；或补充层级取舍"

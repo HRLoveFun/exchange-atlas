@@ -851,6 +851,17 @@ clearing:
     confidence: low
     detail: "草稿印象为DTC（Depository Trust Company），与us-nyse.yml记录的缺口一致：dtcc.com内容子页本次再次尝试仍403，未能拿到官方原文确认，留空不猜。"
 
+  guarantee_model:
+    enum: shared_ccp
+    zh: "全国证券清算公司（NSCC，DTCC 子公司）作为独立法人中央对手方，为几乎全部美国经纪商间股票 / 公司债 / ETF 等成交提供清算——NYSE / Nasdaq / 各 ATS 等所有交易场所共用同一 CCP，非某一交易所专属"
+    en: "The National Securities Clearing Corporation (NSCC, a DTCC subsidiary), a separate legal entity, acts as central counterparty for virtually all US broker-to-broker equity, corporate-debt and ETF trades — a single CCP shared across NYSE, Nasdaq and the ATSs rather than tied to one exchange"
+    sources:
+      - title: Market Maker Process（官网）
+        url: https://www.nasdaqtrader.com/trader.aspx?id=marketmakerprocess
+        accessed: 2026-08-14
+    quote: "Have your clearing agency call the National Securities Clearing Corporation (NSCC) at 212.412.8623 to ensure a clearing arrangement."
+    confidence: medium
+
   initial_margin_practice:
     zh: ""
     confidence: low
@@ -879,6 +890,9 @@ clearing:
     confidence: low
 
   default_management:
+    spec:
+      model: unstructured
+      note: "已知两级：① 违约会员的应缴基金保证金（Required Fund Deposit，个体保证金）→ ② 结算基金（Clearing Fund，全体会员保证金汇总）。NSCC 向非违约会员的损失分摊（Loss Allocation）触发条件与比例本次未找到逐字原文，且所引 federalregister.gov 页面为反爬验证页无法核验（default_management confidence 为 medium）→ 三态占位为 unstructured"
     zh: "清算对手方NSCC（National Securities Clearing Corporation）设有「结算基金」（Clearing Fund，即其违约基金）：每个会员按每日风险测算缴纳「应缴基金保证金」（Required Fund Deposit，个体层面即为该会员的保证金），全体会员保证金汇总构成结算基金；若某会员违约（NSCC终止为其行为）且该会员自身保证金不足以弥补清算其持仓所造成的损失，NSCC动用结算基金弥补差额"
     en: "NSCC (the CCP for Nasdaq trades) maintains a Clearing Fund functioning as its default fund: each member deposits a daily risk-based Required Fund Deposit (individually, the member's margin); the aggregate of all members' deposits is the Clearing Fund. If a Member defaults (NSCC ceases to act for it) and that member's own deposit is insufficient to cover losses from liquidating its portfolio, NSCC draws on the Clearing Fund to cover the shortfall"
     detail: |

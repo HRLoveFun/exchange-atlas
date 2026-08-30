@@ -585,6 +585,17 @@ chapters:
         volatility: stable
         en_required: true
         in_matrix: clearing_settlement
+      - id: guarantee_model
+        label_zh: 结算担保模式
+        label_en: Settlement Guarantee Model
+        volatility: stable
+        en_required: true
+        enum_ref: guarantee_model
+        note: >
+          「谁来保证成交最终交收」的制度形态（见 schema/enums.yml guarantee_model）。
+          描述现货 / 主板市场的担保安排；同时运营独立衍生品 CCP 的（如 za-jse 的
+          JSE Clear）在 detail 里补充。不进 in_matrix——是「市场机制剖面 / 交割管线」
+          图形层的维度，矩阵列不因它加宽。见 PROJECT/DECISIONS.md [ADR-048]/[ADR-050]。
       - id: initial_margin_practice
         label_zh: 初始保证金制度
         label_en: Initial Margin

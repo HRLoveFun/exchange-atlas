@@ -989,6 +989,17 @@ clearing:
     quote: "KSD 70% owned ⇒ Depository Subsidiary / 1974 Dec.6 The Korea Securities Depository (KSD) established"
     confidence: high
 
+  guarantee_model:
+    enum: exchange_as_ccp
+    zh: "韩国交易所（KRX）自身直接充当证券与衍生品市场的中央对手方，经更替成为所有卖方的买方、所有买方的卖方，通过净额结算最终确定交收并担保交收完成；不把清算职能分设给独立法人（与 JPX 靠 JSCC、美股靠 NSCC 不同）"
+    en: "Korea Exchange (KRX) itself directly acts as the central counterparty for both the securities and derivatives markets — by novation becoming buyer to all sellers and seller to all buyers, finalising settlement via netting and guaranteeing its completion; it does not split the clearing function off to a separate legal entity (unlike JPX via JSCC, or the US via NSCC)"
+    sources:
+      - title: Concept of Clearing（KRX官网英文版）
+        url: https://global.krx.co.kr/contents/GLB/02/0202/0202020102/GLB0202020102.jsp
+        accessed: 2026-08-16
+    quote: "KRX, as a CCP, intervenes for the trades executed among members by becoming a buyer to all sellers and a seller to all buyers, finalizing the settlement details through the netting process, issuing the settlement instruction to the settlement institution and providing the guarantee for the finalization of settlement."
+    confidence: high
+
   initial_margin_practice:
     zh: ""
     confidence: low
@@ -1017,6 +1028,13 @@ clearing:
     confidence: low
 
   default_management:
+    spec:
+      model: ccp_default_waterfall
+      layers:
+        - {order: 1, resource: "违约会员缴存的保证金 / 存款（FSCMA §397）", bearer: defaulter}
+        - {order: 2, resource: "共同补偿基金（Joint Compensation Fund，§394）", bearer: surviving_members}
+        - {order: 3, resource: "KRX 自有资本（交易所承担会员违约赔偿责任，§399）", bearer: ccp}
+      note: "顺序据 FSCMA §397 / §394 / §399；KRX 对违约会员的其他债权人享有优先受偿权（§400）。CCP 自有专项出资（SITG）层级未在原文单列"
     zh: "KRX作为中央对手方(CCP)，违约处置依FSCMA构建：向会员收取共同补偿基金(Joint Compensation Funds, §394)；违约时先以该会员缴存的保证金/存款抵偿债务(§397)，不足部分由KRX承担会员违约赔偿责任(§399)，且KRX对违约会员的其他债权人享有优先受偿权(§400)。即损失吸收顺序为：违约会员自有保证金→共同补偿基金→交易所自有资本。"
     en: "As the CCP, KRX's default management is built on the FSCMA: it collects a Joint Compensation Fund from members (§394); on a member's default it first appropriates that member's deposits and margins to redeem obligations (§397), and to the extent still uncovered KRX bears the compensation responsibility for the member's default (§399), with claim priority over other creditors of the defaulting member (§400). The loss-absorption order is: the defaulting member's own margin → the Joint Compensation Fund → the Exchange's own capital."
     sources:

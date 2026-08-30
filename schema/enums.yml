@@ -87,6 +87,17 @@ delivery_method:
     - {id: either, label_zh: 可选, label_en: Either}
     - {id: na, label_zh: 不适用（现货）, label_en: N/A (Cash Market)}
 
+guarantee_model:
+  # 清算环节「谁来保证成交最终交收」的制度形态。`ccp_name` 字段隐含「存在单一独立
+  # CCP 通过更替（novation）介入买卖双方」，实际 20 家样本至少 4 种形态。前端「市场机制
+  # 剖面 / 交割管线」据此选「CCP 介入」节点的图形与文案，把散文降级为结构化标签，一次
+  # 覆盖 tw / kr / za / us 四种「非标准 CCP」。见 PROJECT/DECISIONS.md [ADR-048]/[ADR-050]。
+  values:
+    - {id: ccp_novation, label_zh: 独立 CCP 更替担保, label_en: "Independent CCP (Novation)"}
+    - {id: exchange_as_ccp, label_zh: 交易所自身充当 CCP, label_en: "Exchange Acts as CCP"}
+    - {id: lines_of_defence, label_zh: 多层结算保障防线（无更替）, label_en: "Lines of Defence (no novation)"}
+    - {id: shared_ccp, label_zh: 跨市场共享独立 CCP, label_en: "Shared Cross-market CCP"}
+
 short_selling_stance:
   values:
     - {id: freely_allowed, label_zh: 基本无限制, label_en: Largely Unrestricted}

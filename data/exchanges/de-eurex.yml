@@ -671,6 +671,17 @@ clearing:
     confidence: low
     detail: "草稿印象：同集团的Clearstream可能承担证券交割相关的存管职能，但未找到Eurex官方原文明确表述两者关系，留空不猜。"
 
+  guarantee_model:
+    enum: ccp_novation
+    zh: "独立法人 Eurex Clearing AG（欧洲期货结算公司）作为中央对手方，专属处理 Eurex 成交的清算——经更替（novation）成为每个买方的卖方、每个卖方的买方"
+    en: "The separate legal entity Eurex Clearing AG acts as central counterparty, handling clearing for Eurex transactions exclusively — interposing by novation as buyer to every seller and seller to every buyer"
+    sources:
+      - title: Exchange Rules（官网英文版PDF）§18
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+    quote: "the Clearing in respect of these Transactions shall be handled exclusively by Eurex Clearing AG in its capacity as a central counterparty."
+    confidence: high
+
   initial_margin_practice:
     zh: "Eurex Clearing Prisma：基于会员整体持仓组合计算保证金的方法（而非逐笔/逐品种），可反映对冲与品种间相关性带来的风险抵消效应，覆盖场内与场外产品"
     en: "Eurex Clearing Prisma: a portfolio-based margin methodology (rather than trade-by-trade or product-by-product) that accounts for hedging and cross-correlation effects, covering both ETD and OTC products"
@@ -725,6 +736,16 @@ clearing:
     confidence: high
 
   default_management:
+    spec:
+      model: ccp_default_waterfall
+      layers:
+        - {order: 1, resource: "违约会员的保证金抵押品", bearer: defaulter}
+        - {order: 2, resource: "违约会员的违约基金出资", bearer: defaulter}
+        - {order: 3, resource: "Eurex Clearing 专项自有出资（Skin in the Game）", bearer: ccp}
+        - {order: 4, resource: "非违约会员的违约基金出资", bearer: surviving_members}
+        - {order: 5, resource: "第二层自有出资（Second Skin in the Game）", bearer: ccp}
+        - {order: 6, resource: "Eurex Clearing 剩余资本", bearer: ccp}
+      note: "单一、跨所有资产类别的联合违约基金；顺序为 Eurex Clearing Default Management Process 明列"
     zh: "违约处置采用多层「违约瀑布」（Default Waterfall / Lines of Defense）：先动用违约结算会员自身的保证金抵押与违约基金出资；不足时依次动用 Eurex Clearing 的自有「Skin in the Game」出资、非违约会员的违约基金出资（含「Second Skin in the Game」）及 Eurex Clearing 剩余资本。设有单一、跨所有资产类别的联合违约基金。"
     en: "Default management uses a multi-level 'Default Waterfall' (Lines of Defense): first the defaulter's own margin collateral and Default Fund contribution are used; if insufficient, Eurex Clearing's own 'Skin in the Game', then non-defaulting members' Default Fund contributions (including 'Second Skin in the Game') and Eurex Clearing's remaining capital follow. There is one joint Default Fund covering all asset classes."
     sources:

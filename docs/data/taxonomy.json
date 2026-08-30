@@ -1077,6 +1077,16 @@
         },
         {
           "kind": "leaf",
+          "path": "guarantee_model",
+          "label_zh": "结算担保模式",
+          "label_en": "Settlement Guarantee Model",
+          "volatility": "stable",
+          "en_required": true,
+          "enum_ref": "guarantee_model",
+          "in_matrix": false
+        },
+        {
+          "kind": "leaf",
           "path": "initial_margin_practice",
           "label_zh": "初始保证金制度",
           "label_en": "Initial Margin",

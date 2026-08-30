@@ -1293,6 +1293,23 @@
         "enum": null,
         "spec": null
       },
+      "guarantee_model": {
+        "enum": "ccp_novation",
+        "zh": "独立法人 CDS Clearing and Depository Services Inc. 作为中央对手方，通过其 Continuous Net Settlement（CNS）服务对经纪商间成交做净额担保与对手方 / 结算风险管理；CDS 与交易所同属 TMX Group（与美国 NSCC/DTCC 独立于交易所集团之外的结构不同）",
+        "en": "The separately incorporated CDS Clearing and Depository Services Inc. acts as central counterparty, providing netting guarantee and counterparty/settlement risk management for broker-to-broker trades via its Continuous Net Settlement (CNS) service; CDS sits within the same TMX Group as the exchange",
+        "sources": [
+          {
+            "title": "Order Types and Functionality Guide（PDF，TMX GROUP，6.7节）",
+            "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
+            "accessed": "2026-08-16"
+          }
+        ],
+        "quote": "All transactions executed are reported to CDS Clearing and Depository Services Inc. at day end for clearing and settlement and management of counterparty and settlement risk.",
+        "confidence": "medium",
+        "verified": "2026-08-27",
+        "spec": null,
+        "detail": null
+      },
       "initial_margin_practice": {
         "zh": "",
         "confidence": "low",
@@ -1355,6 +1372,10 @@
         "sources": null
       },
       "default_management": {
+        "spec": {
+          "model": "unstructured",
+          "note": "CDS 作为 CCP 通过 CDS Participant Rules 规范违约处置，设 CNS Participant Default Fund 作损失共担准备金；具体违约瀑布层级由 CDS 规则 / 风险程序规定（经 OSC 批准），本文件未逐条摘引 → 三态占位为 unstructured"
+        },
         "zh": "TSX 现货市场的中央对手方清算由 CDS Clearing and Depository Services Inc.（CDS）通过「CDS Participant Rules」规范，涵盖参与人风险管理与违约处置；CDS 设有 CNS Participant Default Fund 作为违约损失共担的准备金，具体违约瀑布（default waterfall）层级由 CDS 规则规定",
         "en": "Central-counterparty clearing of the TSX spot market is governed by CDS Clearing and Depository Services Inc. (CDS) through the CDS Participant Rules, covering participant risk management and default handling; CDS maintains a CNS Participant Default Fund as the loss-sharing reserve, with the specific default waterfall tiers set out in CDS rules",
         "detail": "CDS 同时是 CSD 与 CCP，违约处置细节（如清算基金分摊、损失递进顺序）在其 Participant Rules / Risk Procedures 中规定，并经 OSC 批准（见 OSC CDS rule review 历年备案）。本文件不逐条摘引瀑布层级，仅确认框架归属 CDS。",
@@ -1373,8 +1394,7 @@
         "quote": "The CDS Participant Rules govern the operation of CDS clearing and settlement services, including risk management.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "derivatives": {
         "initial_margin_practice": null,

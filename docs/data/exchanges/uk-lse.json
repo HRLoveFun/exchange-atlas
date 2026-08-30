@@ -1278,6 +1278,23 @@
         "enum": null,
         "spec": null
       },
+      "guarantee_model": {
+        "enum": "ccp_novation",
+        "zh": "LCH Ltd（LSEG 集团 LCH 集团旗下英国主体，独立法人）作为中央对手方，介入买卖双方成为每个卖方的买方、每个买方的卖方，为含股票在内的多资产类别提供清算；EquityClear 为其证券清算业务线",
+        "en": "LCH Ltd (the UK entity of LSEG's LCH Group, a separate legal entity) acts as central counterparty, standing as buyer to every seller and seller to every buyer across multiple asset classes including equities; EquityClear is its securities clearing service line",
+        "sources": [
+          {
+            "title": "About LCH（LSEG官网）",
+            "url": "https://www.lseg.com/en/post-trade/clearing/about-lch",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "quote": "As a clearing house, we stand as a central counterparty (CCP), acting as a buyer to every seller and a seller to every buyer.",
+        "confidence": "high",
+        "verified": "2026-08-14",
+        "spec": null,
+        "detail": null
+      },
       "initial_margin_practice": {
         "zh": "",
         "confidence": "low",
@@ -1340,6 +1357,52 @@
         "sources": null
       },
       "default_management": {
+        "spec": {
+          "model": "ccp_default_waterfall",
+          "layers": [
+            {
+              "order": 1,
+              "resource": "违约会员的各类保证金（初始 / 追加 / 交割等）",
+              "bearer": "defaulter"
+            },
+            {
+              "order": 2,
+              "resource": "违约会员的违约基金出资",
+              "bearer": "defaulter"
+            },
+            {
+              "order": 3,
+              "resource": "LCH Ltd 自有资本出资（skin in the game）",
+              "bearer": "ccp"
+            },
+            {
+              "order": 4,
+              "resource": "非违约会员对 EquityClear 违约基金的出资",
+              "bearer": "surviving_members"
+            },
+            {
+              "order": 5,
+              "resource": "追加缴款（callable Assessments）",
+              "bearer": "surviving_members"
+            },
+            {
+              "order": 6,
+              "resource": "服务连续性阶段的损失分摊（Loss Distribution）",
+              "bearer": "surviving_members"
+            },
+            {
+              "order": 7,
+              "resource": "自愿服务连续性",
+              "bearer": "surviving_members"
+            },
+            {
+              "order": 8,
+              "resource": "EquityClear 服务关闭（最终手段）",
+              "bearer": "surviving_members"
+            }
+          ],
+          "note": "EquityClear 业务线专属瀑布；LCH Ltd 四条业务线各自独立的违约基金与自有资本额度、互不交叉污染（见 detail）。spec 不存各层金额"
+        },
         "zh": "LCH Ltd（本所CCP，见ccp_name）对EquityClear（证券清算业务线）设有分层「违约处置瀑布」（Default Waterfall）：违约会员自身的初始保证金/追加保证金等各类保证金及其违约基金出资首先被吸收→LCH LTD自有资本出资（「风险共担」，截至2024年10月末为€1.6百万，四条业务线中最低，与EquityClear业务线整体风险规模匹配）→非违约会员对EquityClear违约基金的出资（截至2024年10月末规模£155百万，可通过「追加缴款」Assessment进一步补充）→服务连续性阶段的损失分摊（Loss Distribution）→自愿服务连续性→EquityClear服务关闭（最终手段）。LCH LTD截至2024年10月31日持有的保证金抵押品市值合计€288十亿",
         "en": "LCH Ltd (this Exchange's CCP, see ccp_name) operates a tiered Default Waterfall for its EquityClear (securities clearing) service line: the defaulting member's own margin (initial, variation, delivery and additional margins) and its default fund contribution are absorbed first, then LCH LTD's own capital ('skin in the game', €1.6mn as of end-October 2024 — the smallest of the four service lines, scaled to EquityClear's relative risk size), then non-defaulting members' EquityClear default fund contributions (£155mn as of end-October 2024, further replenishable via callable 'Assessments'), then loss distribution during the service continuity phase, then voluntary service continuity, and finally EquityClear service closure as a last resort. LCH LTD held margin collateral with a total market value of €288bn as of 31 October 2024",
         "detail": "LCH LTD同时为ForexClear（外汇）、Rates Derivatives（利率衍生品）、EquityClear（证券）、\nRepoClear（回购）四条业务线分别设立独立的违约基金与自有资本出资额度，不同业务线之间\n风险不交叉污染——EquityClear的€1.6mn LCH自有资本出资与£155mn违约基金规模，相较\nRates Derivatives（€61.9mn资本/£6,014mn基金）小得多，反映证券现货清算相对利率衍生品\n清算的风险敞口更低。术语译法见schema/glossary.yml新增`default-waterfall`条目。本字段\n的信息来源是一份\"瀑布流程图\"型PDF而非叙述性条文，摘引的quote由图中各阶段标签与脚注\n文字按图示顺序拼接而成，非重新组织的转述。\n",
@@ -1358,8 +1421,7 @@
         "quote": "EquityClear Member Default／Defaulter’s Initial Margin, Delivery Margin, Contingent Variation Margin and Additional Margins／Defaulter’s Default Fund Contribution／LCH LTD Capital €1.6mn／LCH EquityClear Default Fund £155mn／Unfunded Contributions – Assessment／Service Continuity – Loss Distribution／Voluntary Service Continuity／LCH EquityClear Service Closure／LCH LTD held margin collateral with a market value of €288bn on 31st of October 2024.／Assessments are callable up to the value of each member’s Default Fund contribution at the time of the default.／Further resources are available in the service continuity phase as determined by the LCH LTD Rulebook.",
         "verified": "2026-08-24",
         "confidence": "high",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "derivatives": {
         "initial_margin_practice": null,

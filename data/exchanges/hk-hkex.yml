@@ -961,6 +961,17 @@ clearing:
     quote: "Exchange Trades: Continuous Net Settlement (CNS) and Isolated Trades Systems"
     confidence: high
 
+  guarantee_model:
+    enum: ccp_novation
+    zh: "香港中央结算有限公司（HKSCC）就 CCASS 内的「交易所交易」经持续净额交收（CNS）系统充当中央对手方，对买卖双方做净额担保；CCP 与中央结算存管（CCASS）职能合一（与新交所 CDP 相同模式）。衍生品市场另由 HKCC / SEOCH 等结算所担任 CCP"
+    en: "Hong Kong Securities Clearing Company Limited (HKSCC) acts as central counterparty for CCASS 'Exchange Trades' via the Continuous Net Settlement (CNS) system, guaranteeing settlement between buyer and seller; the CCP and CSD (CCASS) functions are combined (same model as SGX's CDP). Derivatives markets are cleared by separate clearing houses (HKCC / SEOCH)"
+    sources:
+      - title: HKEX Clearing - Securities Overview（CCASS）
+        url: https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en
+        accessed: 2026-08-12
+    quote: "Exchange Trades: Continuous Net Settlement (CNS) and Isolated Trades Systems"
+    confidence: medium
+
   initial_margin_practice:
     zh: ""
     confidence: low
@@ -992,6 +1003,18 @@ clearing:
     confidence: low
 
   default_management:
+    spec:
+      model: ccp_default_waterfall
+      layers:
+        - {order: 1, resource: "违约方自身向结算基金（RF）的出资（固定 + 可变）", bearer: defaulter}
+        - {order: 2, resource: "授予违约方的可变出资信用额", bearer: defaulter}
+        - {order: 3, resource: "RF 累计利息收入", bearer: surviving_members}
+        - {order: 4, resource: "保险赔付（目前无相关安排）", bearer: external}
+        - {order: 5, resource: "结算所自身拨入 RF 的资源（HKCC skin in the game）", bearer: ccp}
+        - {order: 6, resource: "非违约参与者的固定出资", bearer: surviving_members}
+        - {order: 7, resource: "担保或信贷安排所得", bearer: external}
+        - {order: 8, resource: "非违约参与者的可变出资及可变出资信用额（按比例分摊）", bearer: surviving_members}
+      note: "顺序为《期货结算公司规则》706 条明列（HKCC / 衍生品侧代表样本）；现货 HKSCC 另有结构相近的保证基金（通用规则第 25 章），其独立瀑布顺序本条未逐条摘引，见 detail"
     zh: "以 HKCC（期货结算公司）为例：结算所设立结算所违约管理执行小组（DMEG，由 HKEX 集团首席风险官、首席营运官等高层组成）统筹违约处置，委任特定结算参与者作为「获授权经纪商」协助平仓/对冲/拍卖违约方持仓，每年进行违约演习并至少每年检讨《违约管理手册》；损失分摊按《期货结算公司规则》706条设定的「违约损失分摊阶梯」（default waterfall）依次动用：①违约方自身向结算基金（RF）的出资；②授予违约方的可变出资信用额；③RF累计利息收入；④保险赔付（目前未有相关保险安排）；⑤结算所自身拨入RF的资源；⑥非违约参与者的固定出资；⑦担保或信贷安排所得；⑧非违约参与者的可变出资及可变出资信用额（按比例分摊）"
     en: "Using HKCC (HKFE Clearing Corporation) as the example: HKEX has established a Default Management Executive Group (DMEG, comprising senior executives including HKEX Group's chief risk officer and chief operating officer) to manage the default process, appoints designated Clearing Participants as \"authorised brokers\" to assist in closing-out, hedging and auctioning a defaulter's positions, conducts annual default drills, and reviews the Default Management Manual at least annually. Loss allocation follows the default waterfall under HKFE Clearing Corporation Rule 706, applied in order: (1) the defaulter's own Reserve Fund (RF) contributions; (2) Variable Contribution Credit granted to the defaulter; (3) RF accumulated interest income; (4) proceeds of any insurance policies (none currently arranged); (5) HKCC's own resources appropriated to the RF; (6) Fixed Contributions of non-defaulting Participants; (7) proceeds of any guarantees or facilities arranged; and (8) Variable Contributions and Variable Contribution Credits of non-defaulting Participants on a pro-rata basis"
     detail: "现货市场（HKSCC/CCASS）另设结构相近的「保证基金」（Guarantee Fund，《香港中央结算通用规则》第25章，最低现金基本出资额每名直接结算参与者5万港元或每持有一个联交所交易权5万港元，以较高者为准），本次未逐条摘引其独立瀑布顺序，二者原理相近但规则条文各自独立，如需精确比较现货/衍生品两套违约处置机制的顺序差异，应分别摘引 HKSCC 通用规则第25章与本字段引用的 HKCC 规则706条，本条暂以衍生品/HKCC一侧为代表性样本。"

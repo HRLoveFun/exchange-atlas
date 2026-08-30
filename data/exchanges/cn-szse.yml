@@ -1015,6 +1015,17 @@ clearing:
     en: "ChinaClear"
     confidence: medium
 
+  guarantee_model:
+    enum: ccp_novation
+    zh: "中国证券登记结算有限责任公司（中国结算）作为独立法人担任中央对手方，对沪深两所集中交易证券实行多边净额结算并担保交收；沪深共用同一登记结算法人（见 clearing.ccp_name），CCP 与中央证券存管（CSD）职能合一"
+    en: "China Securities Depository and Clearing Corporation (ChinaClear), a separate legal entity, acts as central counterparty — providing multilateral netting and settlement guarantee for centrally traded securities on both the Shanghai and Shenzhen exchanges (shared registrar-clearer, see clearing.ccp_name); CCP and CSD functions are combined"
+    sources:
+      - title: 中国证券登记结算有限责任公司遵循《金融市场基础设施原则》信息披露报告（2022年6月）
+        url: http://www.chinaclear.cn/zdjs/xxxpl/202307/e8fcc5f599a34963b5c83c8ac07ece1d/files/中国结算遵循《金融市场基础设施原则》信息披露报告（2022）.pdf
+        accessed: 2026-08-24
+    quote: "发生交收违约时，中国结算可以动用的财务资源包括违约结算参与人的担保物中的现金部分、结算保证金、结算风险基金以及包括一般风险准备金在内的其他资金。"
+    confidence: medium
+
   initial_margin_practice:
     zh: ""
     confidence: low
@@ -1044,6 +1055,14 @@ clearing:
     confidence: low
 
   default_management:
+    spec:
+      model: ccp_default_waterfall
+      layers:
+        - {order: 1, resource: "违约方担保物中的现金部分", bearer: defaulter}
+        - {order: 2, resource: "结算保证金（全体结算参与人共同缴纳）", bearer: surviving_members}
+        - {order: 3, resource: "证券结算风险基金", bearer: statutory_fund}
+        - {order: 4, resource: "一般风险准备金及其他资金", bearer: statutory_fund}
+      note: "中国结算全国性框架，沪深共用（见 cn-sse.clearing.default_management）；本所 quote 未细分结算保证金中违约方 / 其他方缴纳部分，故第 2 层归 surviving_members"
     zh: "中国结算作为CCP以分层财务资源应对结算参与人交收违约：先动用违约方担保物中的现金部分、结算保证金，不足部分动用证券结算风险基金及一般风险准备金；对逾期无法追偿的证券/资金，可依法动用结算保证金与结算风险基金予以弥补，之后继续向违约方追偿；程序上可采取扣划证券、处置证券等措施完成违约处置"
     en: "As CCP, ChinaClear meets a clearing participant's settlement default with tiered financial resources: first the defaulting party's own cash collateral and settlement margin, then (if insufficient) the securities settlement risk fund and general risk reserve; for securities or funds that cannot be recovered within the prescribed period, it may draw on the settlement margin and risk fund to cover the shortfall and then continue pursuing recovery from the defaulter; procedurally it may debit or dispose of the defaulter's securities to make up the shortfall"
     detail: "本字段为中国结算的全国性违约处置框架，同等适用于沪深两所清算的证券，非深交所专属机制；与上交所（cn-sse）共用同一登记结算法人（见 clearing.ccp_name）。"

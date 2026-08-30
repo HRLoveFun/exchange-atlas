@@ -697,6 +697,17 @@ clearing:
     quote: "DTC provides CSD services for U.S. securities transactions in various types of eligible securities including, among others, equities, warrants, rights, corporate debt and notes, municipal bonds, government securities, asset-backed securities, depositary receipts, and money market instruments."
     confidence: high
 
+  guarantee_model:
+    enum: shared_ccp
+    zh: "全国证券清算公司（NSCC，DTCC 子公司，独立法人，SEC 注册清算机构）作为中央对手方，为几乎全部美国经纪商间股票 / 公司债与市政债 / ADR / ETF / 单位投资信托成交提供清算——非 NYSE 专属，跨所有交易场所共用同一 CCP；DTC（亦 DTCC 子公司）任 CSD"
+    en: "The National Securities Clearing Corporation (NSCC, a DTCC subsidiary, a separate SEC-registered legal entity) acts as central counterparty for virtually all US broker-to-broker trades in equities, corporate and municipal debt, ADRs, ETFs and unit investment trusts — not specific to NYSE, a single CCP shared across all trading venues; DTC (also a DTCC subsidiary) is the CSD"
+    sources:
+      - title: "Staff Report on the Regulation of Clearing Agencies（美国证监会官方报告，2020年10月）"
+        url: https://www.sec.gov/files/regulation-clearing-agencies-100120.pdf
+        accessed: 2026-08-24
+    quote: "NSCC serves as a CCP for virtually all broker-to-broker trades involving equities, corporate and municipal debt, American depositary receipts, exchange-traded funds, and unit investment trusts."
+    confidence: high
+
   initial_margin_practice:
     zh: ""
     confidence: low
@@ -726,6 +737,9 @@ clearing:
     confidence: low
 
   default_management:
+    spec:
+      model: unstructured
+      note: "NSCC 对会员信用暴露由清算基金（Clearing Fund，会员缴纳的保证金池）承接，遵循损失分摊规则；NSCC / DTC / FICC 共享统一压力测试框架、信用风险评级矩阵与流动性风险管理框架，各有 RWP。具体分摊比例与瀑布先后顺序本次未逐条核实（ADR-048 预期的『共享框架、结构查不到』情形）→ 三态占位为 unstructured"
     zh: "NSCC/DTC/FICC共享统一的清算基金压力测试框架、信用风险评级矩阵与流动性风险管理框架，并各自制定了'恢复与清算处置计划'（RWP）；损失分摊规则经过强化协调，缩短了NSCC向退出会员退还清算基金保证金的时限"
     en: "NSCC, DTC and FICC share a common Clearing Agency Stress Testing Framework, Credit Risk Rating Matrix and Liquidity Risk Management Framework, and each has adopted a Recovery and Wind-Down Plan (RWP); enhanced loss allocation rules harmonize the loss allocation process across the clearing agencies and shorten the time within which NSCC must return a former member's Clearing Fund deposit"
     detail: |

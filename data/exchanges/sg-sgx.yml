@@ -970,6 +970,20 @@ clearing:
     quote: "\"CDP\" The Central Depository (Pte) Limited"
     confidence: high
 
+  guarantee_model:
+    enum: ccp_novation
+    zh: "现货证券由新加坡中央存托（CDP）担任中央对手方兼中央存管机构（CCP 与 CSD 合一，同港交所 HKSCC 模式），对买卖双方经更替做净额担保；衍生品由新加坡交易所衍生品结算有限公司（SGX-DC）担任 CCP"
+    en: "For cash securities, The Central Depository (CDP) acts as both central counterparty and CSD (combined CCP/CSD, the same model as HKEX's HKSCC), interposing by novation to guarantee netting between buyer and seller; derivatives are cleared by Singapore Exchange Derivatives Clearing Limited (SGX-DC) as CCP"
+    sources:
+      - title: SGX-ST Rules — Definitions
+        url: https://rulebook.sgx.com/rulebook/sgx-st-rules
+        accessed: 2026-08-14
+      - title: SGX-DC Clearing Rules — Definitions
+        url: https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules
+        accessed: 2026-08-14
+    quote: "\"CDP\" The Central Depository (Pte) Limited; ... \"Clearing House\" means the Singapore Exchange Derivatives Clearing Limited by whatever name called or its successor and assigns."
+    confidence: medium
+
   initial_margin_practice:
     zh: "现货证券市场（SGX-ST）不收取交易初始保证金——CDP 为中央对手方但采用非担保（novation）模式，证券卖方须在交收前足额交付，结算失败才会触发补进（buying-in），并非「预先冻结保证金」意义上的初始保证金；衍生品（SGX-DT）的初始保证金由 SGX-DC 收取，另行在 clearing.derivatives.initial_margin_practice 描述。"
     en: "The securities market (SGX-ST) does not levy trading initial margin — CDP acts as CCP on a novation basis but settlement is prepaid (seller must deliver in full before settlement; only settlement failure triggers buying-in), not a 'pre-emptively frozen margin' sense; derivatives (SGX-DT) initial margin is collected by SGX-DC and described under clearing.derivatives.initial_margin_practice."
@@ -1022,6 +1036,16 @@ clearing:
     confidence: medium
 
   default_management:
+    spec:
+      model: ccp_default_waterfall
+      layers:
+        - {order: 1, resource: "违约会员的违约基金（Default Fund）出资", bearer: defaulter}
+        - {order: 2, resource: "违约会员的结算保证金与变动保证金盈余", bearer: defaulter}
+        - {order: 3, resource: "SGX-DC 资本（Capital）", bearer: ccp}
+        - {order: 4, resource: "全体结算会员的共同保证金（mutualised margin）", bearer: surviving_members}
+        - {order: 5, resource: "全体会员的共同违约基金（mutualised Default Fund）", bearer: surviving_members}
+        - {order: 6, resource: "SGX-DC 其他资源（Other Resources，含外部授信 / 流动性安排）", bearer: external}
+      note: "顺序为 SGX-DC Clearing Rules 7A.01A.2B.2 明列（衍生品 CCP）；现货 CDP 违约处置另依 CDP 清算规则，优先级逻辑同源（见 detail）"
     zh: "SGX-DC 违约处置遵循明确的优先级瀑布（waterfall）：(a) 先动用违约会员自身的「违约基金」（Default Fund）出资；(b) 再动用违约会员缴纳的结算保证金（Clearing Margin）与变动保证金盈余；(c) 动用 SGX-DC 的「资本」（Capital）；(d) 动用全体结算会员的「共同保证金」（mutualised margin）；(e) 动用全体会员的「共同违约基金」（mutualised Default Fund）；(f) 最后才动用 SGX-DC 的「其他资源」（Other Resources，含外部授信/流动性安排）。即先「自担、后互担、再外部」。"
     en: "SGX-DC default management follows a clear priority waterfall: (a) the defaulting member's own Default Fund contribution; (b) the defaulting member's Clearing Margin and variation-margin surplus; (c) SGX-DC's Capital; (d) the pooled mutualised margin of all Clearing Members; (e) the mutualised Default Fund of all members; (f) finally SGX-DC's Other Resources (including external credit/liquidity lines). I.e. 'member's own first, then mutualised, then external'."
     detail: "本字段描述衍生品 CCP（SGX-DC）的违约处置顺序；现货证券由 CDP 清算，其违约处置机制另行依 CDP 清算规则，但优先级逻辑同源。引语来自 SGX-DC Clearing Rules 7A.01A.2B.2。"

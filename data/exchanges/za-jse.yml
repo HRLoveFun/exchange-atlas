@@ -1101,6 +1101,20 @@ clearing:
     quote: "Strate is South Africa's principal central securities depository and central collateral platform."
     confidence: high
 
+  guarantee_model:
+    enum: lines_of_defence
+    zh: "现货证券市场无 CCP novation：由 JSE 结算权威机构（JSE Settlement Authority）通过多层「防线」（会员准入门槛、每日资本充足监控、CSDP 承诺、T+2 结算保证金、失败交易处置、违约管理、治理）提供结算保障；衍生品市场另设独立 CCP —— JSE Clear（JSE 全资子公司，2022 年 9 月起持 FSCA/PA/SARB 联合颁发的独立结算所与 CCP 牌照）"
+    en: "The cash equity market has no CCP novation: the JSE Settlement Authority provides settlement assurance through multiple 'lines of defence' (membership entry requirements, daily capital-adequacy monitoring, CSDP commits, T+2 settlement margin, fails-transaction management, default management, governance). Derivatives markets have a dedicated CCP — JSE Clear (a wholly owned JSE subsidiary, licensed as an independent clearing house and CCP by the FSCA jointly with the PA/SARB since 1 September 2022)"
+    sources:
+      - title: Equity Market Risk Management（jse.co.za）
+        url: https://www.jse.co.za/services/post-trade-services/t3settlement
+        accessed: 2026-08-16
+      - title: JSE Clear Granted Clearing House & CCP Licence（jse.co.za 新闻稿，2022年9月1日）
+        url: https://www.jse.co.za/news/news/jse-clear-granted-independent-clearing-house-central-counterparty-licence
+        accessed: 2026-08-16
+    quote: "The JSE provides settlement assurance for central order book trades in the cash equity market and employs various measures to affect this. ... JSE Clear, its wholly owned subsidiary, has been granted a licence to operate as an Independent Clearing House and Central Counterparty (CCP) by the Financial Sector Conduct Authority (FSCA) ... Published 01 Sep 2022"
+    confidence: high
+
   initial_margin_practice:
     zh: "针对现货证券交易的结算保障金：JSE要求会员在T+2（按T+1收盘时点计算）就其撮合成交、存在未结算风险的全部交易向JSE存入结算保证金"
     en: "For cash equity settlement assurance: the JSE requires members to deposit settlement margin on T+2 (calculated at the T+1 end of day) for all transactions they introduced that carry settlement risk"
@@ -1154,6 +1168,18 @@ clearing:
     detail: "顶层字段按 ADR-023 收窄为现货；现金市场无最后交易日。"
 
   default_management:
+    spec:
+      model: lines_of_defence
+      layers:
+        - {order: 1, resource: "会员准入门槛（财务 / 资本 / 管理 / 运营）"}
+        - {order: 2, resource: "每日资本充足监控（经 BDA 系统）"}
+        - {order: 3, resource: "资产透明度（JSE 可查会员及客户持仓）"}
+        - {order: 4, resource: "CSDP 结算承诺"}
+        - {order: 5, resource: "T+2 结算保证金", bearer: defaulter}
+        - {order: 6, resource: "失败交易处置流程（Fails Transaction Management Process）"}
+        - {order: 7, resource: "违约管理（Default Management）", bearer: surviving_members}
+        - {order: 8, resource: "治理机制（Governance）"}
+      note: "现货市场无 CCP novation、无互助违约基金；「防线」以预防 + 程序性措施为主，仅 T+2 结算保证金为可上色的财务资源层。za-jse 现货 guarantee_model: lines_of_defence 指向本 layers（≈ 同一串，不重复建模）；衍生品由独立 CCP JSE Clear 承担、瀑布另计"
     zh: "JSE结算权威机构针对现货证券市场设有多层\"防线\"式违约处置机制：会员准入财务/资本/管理/运营门槛→每日资本充足监控（经BDA系统）→资产透明度（JSE可查会员及其客户持仓）→CSDP结算承诺→T+2结算保证金→失败交易处置流程→违约管理→治理机制，逐层降低成交无法结算的风险"
     en: "The JSE Settlement Authority operates a multi-layered \"lines of defence\" default-management framework for the cash equity market: membership entry requirements, daily capital-adequacy monitoring (via the BDA system), asset visibility (the JSE can view members' and clients' holdings), CSDP settlement commits, T+2 settlement margin, a fails-transaction-management process, default management, and governance"
     sources:

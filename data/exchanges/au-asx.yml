@@ -998,6 +998,17 @@ clearing:
     quote: "The settlement system and electronic securities depository for cash equities, warrants and other equity related securities traded in Australia ... We conduct settlement through the Clearing House Electronic Sub-register System (CHESS)."
     confidence: high
 
+  guarantee_model:
+    enum: ccp_novation
+    zh: "ASX Clear 作为中央对手方（CCP），经更替（novation）介入每笔现货市场成交——原合约被替换为清算参与人与 ASX Clear 之间的两笔独立合约，ASX Clear 成为每个买方的卖方、每个卖方的买方"
+    en: "ASX Clear acts as the central counterparty (CCP), interposing itself by novation into every cash-market trade — the original contract is replaced with two separate contracts between the clearing participants and ASX Clear, which becomes buyer to every seller and seller to every buyer"
+    sources:
+      - title: Cash market clearing（ASX 官网）
+        url: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear/cash-market-clearing
+        accessed: 2026-08-14
+    quote: "Once accepted by ASX Clear, each cash market transaction or derivatives market contract is novated – replaced with two separate transactions or contracts between the clearing participants and ASX Clear as the Central Counterparty (CCP)."
+    confidence: high
+
   initial_margin_practice:
     zh: ""
     confidence: low
@@ -1026,6 +1037,14 @@ clearing:
     confidence: low
 
   default_management:
+    spec:
+      model: ccp_default_waterfall
+      layers:
+        - {order: 1, resource: "违约清算参与人的保证金及附加保证金", bearer: defaulter}
+        - {order: 2, resource: "ASX Clear 自有可用资源", bearer: ccp}
+        - {order: 3, resource: "向非违约参与人征收的恢复摊派（Recovery Assessments）", bearer: surviving_members}
+        - {order: 4, resource: "对所有未平仓头寸「完全终止」并削减结算支付（最后手段）", bearer: surviving_members}
+      note: "各层金额（自有资源约 250M AUD、摊派上限约 300M AUD）见 zh / detail；spec 只存顺序与 bearer，不存金额。所引 PDF 为图像型无文本层，default_management confidence 为 medium"
     zh: "ASX Clear（现金市场 CCP）设有分层违约处置资源与调用顺序：第一层为违约清算参与人缴存的保证金及附加保证金（可为现金或合格非现金抵押品）；不足时调用 ASX Clear 自有资源（当前 250 million 澳元）；再不足时依《恢复规则》向非违约参与人征收恢复摊派（上限 300 million 澳元）；作为最后手段，可动用《恢复规则》权力对所有未平仓头寸实施「完全终止」并削减结算支付。整个流程以 ASX Clear 回归「匹配账簿」为终点"
     en: "ASX Clear (cash-market CCP) has a layered default resource waterfall: the first layer is the defaulting Clearing Participant's margins and additional margins lodged (cash or eligible non-cash collateral); if insufficient, ASX Clear draws on its own available resources (currently $250 million); if still insufficient, it may call Recovery Assessments from non-defaulting Clearing Participants up to $300 million under its Recovery Rules; as a last resort it may invoke Recovery Rules powers to apply 'complete termination' of all open positions and reduce settlement payments. The process ends when ASX Clear returns to a matched book"
     detail: |

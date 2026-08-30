@@ -1114,6 +1114,17 @@ clearing:
     confidence: low
     detail: "官网原文只泛称'depositories'（复数），未点名具体的存管机构法人名称（业内常识为NSDL/CDSL两家，但本次未找到载明这两个名称的官方原文），按铁律不采纳未经核实的印象，留空。"
 
+  guarantee_model:
+    enum: ccp_novation
+    zh: "NSE Clearing Limited（NCL，NSE 全资子公司，独立法人）作为中央对手方，对资本市场板块成交做清算、结算与担保交收；按业务线分设核心结算担保基金"
+    en: "NSE Clearing Limited (NCL, a wholly-owned NSE subsidiary and separate legal entity) acts as central counterparty — clearing, settling and guaranteeing trades in the capital market segment, with a segment-ring-fenced Core Settlement Guarantee Fund"
+    sources:
+      - title: Clearing & Settlement（官网）
+        url: https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement
+        accessed: 2026-08-14
+    quote: "NSE Clearing Ltd carries out clearing and settlement of securities traded on the capital market segment of Exchanges."
+    confidence: medium
+
   initial_margin_practice:
     zh: "NSE Clearing 对所有清算会员实行 SPAN 基的初始保证金制度：初始保证金要求基于 99% 置信度、单日风险价值（VaR）计算；其中期货合约的初始保证金按两日风险 horizon 计算（现货/期权等为单日）。另叠加敞口保证金（Exposure Margin）等附加边际"
     en: "NSE Clearing applies a SPAN-based initial margin regime to all clearing members: initial margin requirements are based on 99% value-at-risk over a one-day horizon; for futures contracts the initial margin is computed over a two-day horizon (cash/options use one-day). Additional Exposure Margin is also levied"
@@ -1178,6 +1189,18 @@ clearing:
     confidence: high
 
   default_management:
+    spec:
+      model: ccp_default_waterfall
+      layers:
+        - {order: 1, resource: "违约清算会员自有资金", bearer: defaulter}
+        - {order: 2, resource: "违约会员未实现收益（MTM 盈余）", bearer: defaulter}
+        - {order: 3, resource: "违约会员抵押品 / 保证金", bearer: defaulter}
+        - {order: 4, resource: "核心结算担保基金（Core SGF，按业务线分设）", bearer: surviving_members}
+        - {order: 5, resource: "交易所 / 清算所缴付资本", bearer: ccp}
+        - {order: 6, resource: "NCL（清算所）其余资产", bearer: ccp}
+        - {order: 7, resource: "SEBI 投资者保护基金", bearer: statutory_fund}
+        - {order: 8, resource: "其他交易所基金", bearer: statutory_fund}
+      note: "Core SGF 用途有官方原文；第 5–8 层顺序据 SEBI 2025-09 新闻稿（权威，本次为 WebSearch 摘录，非逐层 verbatim），见 detail"
     zh: "NSE Clearing 设立核心结算担保基金（Core SGF），按业务线（现货/F&O/CD 等）分设，用于保证各线交易的结算；当清算会员无法履行结算义务时，核心 SGF 用于偿付该会员义务、完成结算而不影响正常结算流程。叠加 SEBI 规定的多层'违约瀑布'（waterfall）处置顺序，交易所/清算所资本与担保基金逐级吸收损失"
     en: "NSE Clearing maintains a Core Settlement Guarantee Fund (Core SGF), ring-fenced per segment (Cash, F&O, CD, etc.), to guarantee settlement of trades in each segment; if a clearing member fails to honour settlement commitments, the Core SGF is used to fund that member's obligations and complete settlement without affecting the normal process. This is supplemented by SEBI's multi-tier 'default waterfall' loss-allocation hierarchy, where exchange/clearing-corporation capital and guarantee funds absorb losses in sequence"
     detail: |

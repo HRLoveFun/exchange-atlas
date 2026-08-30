@@ -911,6 +911,17 @@ clearing:
     quote: "SIX SIS is the national Central Securities Depository (CSD) of the Swiss financial market and an International Central Securities Depository"
     confidence: high
 
+  guarantee_model:
+    enum: ccp_novation
+    zh: "由受 FINMA 认可的独立中央对手方担保成交交收；集团内默认 / 主要 CCP 为 SIX x-clear AG。《交易规则》采中性表述「recognised central counterparty」，欧洲 CCP 互操作性安排下可存在多家受认可 CCP"
+    en: "Settlement is guaranteed by a FINMA-recognised independent central counterparty; the group's default/primary CCP is SIX x-clear AG. The Trading Rules use the neutral term 'recognised central counterparty' and, under European CCP interoperability, more than one recognised CCP may exist"
+    sources:
+      - title: Monitoring and Regulation
+        url: https://www.six-group.com/en/company/governance/monitoring-and-regulation.html
+        accessed: 2026-08-16
+    quote: "SIX x-clear is licensed by the Swiss Financial Market Supervisory Authority (FINMA) as a central counterparty according to the Swiss Financial Market Infrastructure Act (FMIA)."
+    confidence: high
+
   initial_margin_practice:
     enum: na
     zh: "不适用——SIX Swiss Exchange是现货证券市场，不运营衍生品交易板块；SMI等指数期货/期权在Eurex挂牌，由SIX x-clear（集团CCP）以独立业务线清算衍生品，故不适用于本所自身的交易机制。"
@@ -974,6 +985,14 @@ clearing:
     confidence: medium
 
   default_management:
+    spec:
+      model: ccp_default_waterfall
+      layers:
+        - {order: 1, resource: "违约会员保证金", bearer: defaulter}
+        - {order: 2, resource: "SIX x-clear 自有出资（skin in the game）", bearer: ccp}
+        - {order: 3, resource: "违约基金各分段出资（Default Fund Segments）", bearer: surviving_members}
+        - {order: 4, resource: "其他会员的补充出资（极端情形）", bearer: surviving_members}
+      note: "顺序见 SIX x-clear Operational Manual 第 10 章 Default Waterfall（Figure 6）；spec 不存各段金额"
     zh: "SIX x-clear（本所交易的中央对手方）设有违约基金（Default Fund）与违约 waterfall（损失分摊层级），覆盖其清算的各类工具；违约时依序以违约会员保证金、SIX x-clear自有出资（skin in the game）、违约基金各分段出资、以及（在极端情形下）其他会员的补充出资吸收损失。"
     en: "SIX x-clear (the CCP for SIX Swiss Exchange trades) maintains a Default Fund and a default waterfall (loss-allocation hierarchy) covering its cleared instruments; on a member default, losses are absorbed in order by the defaulter's margin, SIX x-clear's own equity contribution (skin in the game), the respective Default Fund Segment contributions, and (in extreme cases) supplementary contributions from non-defaulting members."
     detail: "SIX x-clear Operational Manual第8章（Default Fund）与第10章（Application of collateral / Default Waterfall）详述机制；符合CPMI-IOSCO披露义务。"

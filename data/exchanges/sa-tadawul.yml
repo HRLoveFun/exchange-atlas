@@ -987,6 +987,17 @@ clearing:
     quote: "The Securities Depository Center Company 'Edaa' was established in 2016 and is fully owned by Saudi Exchange (Tadawul). ... Edaa operates and maintain the Depository and Settlement System (DSS), an electronic book-entry system used to record and maintain securities and to register the ownership of securities."
     confidence: high
 
+  guarantee_model:
+    enum: ccp_novation
+    zh: "证券清算中心公司（Muqassa，Saudi Exchange 全资子公司，独立法人）作为中央对手方，为 Tadawul 全资产类别成交提供清算并担保所有交易的结算与履约；现货与衍生品同由 Muqassa 清算"
+    en: "Securities Clearing Center Company (Muqassa, a wholly-owned subsidiary of Saudi Exchange and a separate legal entity) acts as central counterparty, clearing all asset classes traded on Tadawul and guaranteeing the settlement and fulfilment of obligations for all trades; both cash and derivatives are cleared by Muqassa"
+    sources:
+      - title: "Tadawul Derivatives Market Brochures（Muqassa clearing & guarantee）"
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/0e0e1657-e035-4172-a4e6-943c4dfce80d/Derivatives+Market+Brochures.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-0e0e1657-e035-4172-a4e6-943c4dfce80d-oW9oJ-.
+        accessed: 2026-08-27
+    quote: "by facilitating clearing services and guaranteeing the settlement and fulfilment of obligations for all trades executed on Tadawul across all asset classes under its coverage."
+    confidence: medium
+
   initial_margin_practice:
     zh: "衍生品交易端由会员向客户收取初始保证金，用以覆盖客户持仓价值的潜在不利变动；清算端（Muqassa 对结算会员）设最低初始保证金，结算会员可在此最低保证金基础上按合约类别适用各自的保证金乘数（Margin Multiplier）向客户加收。总保证金 = 初始保证金 + 适用的变动保证金 + Muqassa/结算会员认定的追加保证金"
     en: "On the trading side, Exchange Members collect Initial Margin from clients to cover potential adverse changes in the value of each client position; on the clearing side Muqassa sets a minimum Initial Margin, and clearing members may apply their own contract-class-specific margin multiplier (Margin Multiplier) on top when collecting from clients. Total Margin = Initial Margin + applicable Variation Margin + any additional margin determined by Muqassa and the clearing member"
@@ -1048,6 +1059,9 @@ clearing:
     verified: 2026-08-27
 
   default_management:
+    spec:
+      model: unstructured
+      note: "Muqassa（现货与衍生品同一 CCP）设有风险管理框架——会员准入、保证金、违约处置、违约基金；逐层瀑布式损失分摊顺序未在一手抓取页完整呈现（default_management confidence 为 medium）→ 三态占位为 unstructured"
     zh: "衍生品清算由 Muqassa（Saudi Exchange 全资子公司）中央对手方（CCP）承担，为 Tadawul 全资产类别的成交提供清算服务并'保证所有交易的结算与履约'；Muqassa 设有风险管理框架（会员准入、保证金、违约处置），具体违约基金/瀑布式损失分摊细则见其规则与风险管理办法"
     en: "Derivatives clearing is performed by Muqassa (a wholly-owned subsidiary of Saudi Exchange) as the central counterparty (CCP), providing clearing services and 'guaranteeing the settlement and fulfilment of obligations for all trades executed on Tadawul across all asset classes under its coverage'; Muqassa operates a risk-management framework (membership, margin, default handling) with default-fund / loss-waterfall details set out in its rules and risk-management methodology"
     detail: "Muqassa 同时清算现货与衍生品；违约处置的具体分层（违约基金、追加保证金、瀑布）未在一手抓取页完整呈现，故 confidence 定为 medium"
