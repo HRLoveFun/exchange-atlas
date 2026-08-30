@@ -579,7 +579,8 @@
         var subj = idxNames.length > 1 ? idxNames.join(" 或 ") + " " : "指数";
         if (t.length) out.push(subj + "跌 " + t.join("/") + "% 触发全市场熔断");
       } else if (c.type === "none") out.push("无全市场熔断");
-      else if (c.type === "stock_level" || c.type === "contract_level") out.push("仅个股 / 合约级熔断，无全市场熔断");
+      else if (c.type === "contract_level") out.push("无全市场熔断；合约级波动中断可扩至全合约暂停");
+      else if (c.type === "stock_level") out.push("无全市场熔断；靠个股 / 品种级波动中断（见下方「熔断」）");
     }
     var ir = ms.intraday_reversal;
     var irm = { t0: "当日可回转（T+0）", t1: "T+1：当日买入次日才可卖", t2: "T+2 交收", mixed: "回转交易分品种不同" };
@@ -602,14 +603,14 @@
     return loadExchange(id).then(function (data) {
       var cur = parseHash();
       if ((cur.view && cur.view !== "trading-day") || tdResolveId(cur) !== id) return;
-      var ms = (data.chapters && data.chapters.market_structure) || {};
-      app.innerHTML = toolbar + tdBuild(id, ms);
+      app.innerHTML = toolbar + tdBuild(id, data);
     }).catch(function (e) {
       app.innerHTML = toolbar + '<p style="color:var(--danger)">加载失败：' + esc(e.message) + "</p>";
     });
   }
 
-  function tdBuild(id, ms) {
+  function tdBuild(id, data) {
+    var ms = (data.chapters && data.chapters.market_structure) || {};
     var n = function (v) { return (+v).toFixed(1); };
     var sessions = ms.trading_sessions || {};
     var mb = ms.price_limits && ms.price_limits.main_board, mbS = (mb && mb.spec) || null;
@@ -665,7 +666,7 @@
     var yR = Math.min(40, Math.max(5, mags.length ? Math.ceil(Math.max.apply(null, mags) * 1.15) : 9));
 
     // ── 画布 ──
-    var W = 960, H = 544, PL = 60, PR = 152, PT = 46, PB = 106;
+    var W = 960, H = 556, PL = 60, PR = 152, PT = 62, PB = 106;
     var pw = W - PL - PR, ph = H - PT - PB;
     var X = function (m) { return PL + (m - xMin) / (xMax - xMin) * pw; };
     var Y = function (p) { return PT + (yR - p) / (2 * yR) * ph; };
@@ -841,10 +842,15 @@
           (i === 0 ? " td-head-1" : "") + '">' + esc(line) + "</text>");
       });
     }
-    var xStep = (xMax - xMin) > 300 ? 60 : 30;
-    for (var mx = Math.ceil(xMin / xStep) * xStep; mx <= xMax; mx += xStep) {
+    // x 轴刻度：网格线恒 30 分钟；标签宽跨度（>10h，如 de-eurex）降为每 60 分钟避免叠字。
+    // 时间坐标上下各一排（收口审查反馈）。
+    var xLabelEvery = (xMax - xMin) > 600 ? 60 : 30;
+    for (var mx = Math.ceil(xMin / 30) * 30; mx <= xMax; mx += 30) {
       g.push('<line x1="' + n(X(mx)) + '" x2="' + n(X(mx)) + '" y1="' + PT + '" y2="' + (PT + ph) + '" stroke="var(--border)" stroke-width="0.5" opacity="0.45"/>');
-      g.push('<text x="' + n(X(mx)) + '" y="' + (PT + ph + 15) + '" class="td-tick" text-anchor="middle">' + tdFmtHM(mx) + '</text>');
+      if (mx % xLabelEvery === 0) {
+        g.push('<text x="' + n(X(mx)) + '" y="' + (PT - 16) + '" class="td-tick" text-anchor="middle">' + tdFmtHM(mx) + '</text>');
+        g.push('<text x="' + n(X(mx)) + '" y="' + (PT + ph + 15) + '" class="td-tick" text-anchor="middle">' + tdFmtHM(mx) + '</text>');
+      }
     }
 
     // ── 时段 ribbon（x 轴分段着色的图例条）──
@@ -864,17 +870,20 @@
 
     // ── 标题 / 轴名 ──
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
-    g.push('<text x="' + PL + '" y="' + (PT - 22) + '" class="td-title">' + esc(exName) + ' · 交易日平面图</text>');
+    g.push('<text x="' + PL + '" y="' + (PT - 40) + '" class="td-title">' + esc(exName) + ' · 交易日平面图</text>');
     g.push('<text transform="translate(15,' + n(PT + ph / 2) + ') rotate(-90)" class="td-axis-name" text-anchor="middle">涨跌幅 %（相对' + yRef + '）</text>');
     g.push('<text x="' + n(PL + pw / 2) + '" y="' + (H - 5) + '" class="td-axis-name" text-anchor="middle">日内时间（当地）</text>');
 
     var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + ' ' + H + '" class="td-svg" role="img" aria-label="' +
       esc(exName) + ' 交易日平面图">' + g.join("") + "</svg></div>";
-    return tdLegend() + svg + tdSidePanels(id, ms) + tdProse();
+    return tdLegend() + svg + tdSidePanels(id, data) + tdProse();
   }
 
   // 标注层 chips（ADR-035 A：撮合原则 / 订单类型 / 做空 / 做市商 → 标注层）+ 非现货降级提示
-  function tdSidePanels(id, ms) {
+  function tdSidePanels(id, data) {
+    var ms = (data.chapters && data.chapters.market_structure) || {};
+    var costs = (data.chapters && data.chapters.costs) || {};
+    var clearing = (data.chapters && data.chapters.clearing) || {};
     var out = [];
     var mbRef = ms.price_limits && ms.price_limits.main_board && ms.price_limits.main_board.spec && ms.price_limits.main_board.spec.reference;
     var hasDeriv = ms.derivatives && Object.keys(ms.derivatives).some(function (k) {
@@ -892,20 +901,28 @@
       out.push('<p class="td-banner td-banner-soft">本所记录含衍生品市场字段；平面图显示<strong>现货</strong>（衍生品 spec 待 Phase 3 补充）。</p>');
     }
 
-    // val 传完整串；CSS 用 -webkit-line-clamp 截断到 2 行，title 给完整内容
-    function chip(path, label, val, env) {
+    // val 传完整串；CSS 用 -webkit-line-clamp 截断到 2 行，title 给完整内容。
+    // chapter 默认第五章；成本 / 清算等跨章字段传对应 chapter，浮层据此取值。
+    function chip(path, label, val, env, chapter) {
       var has = env && (env.zh || env.enum || env.spec);
       val = String(val == null || val === "" ? "—" : val);
       return '<button type="button" class="td-chip' + tdConfClass(env) + (has ? "" : " td-chip-empty") +
-        '" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) + '" data-chapter="market_structure" title="' + esc(val) + '">' +
+        '" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
+        '" data-chapter="' + esc(chapter || "market_structure") + '" title="' + esc(val) + '">' +
         '<span class="td-chip-k">' + esc(label) + '</span><span class="td-chip-v">' + esc(val) + '</span></button>';
     }
+    function dv(env) { return env && (state.langMode === "en" && env.en ? env.en : env.zh); }
 
     var chips = [];
     var pt = getByPath(ms, "price_limits.type");
     chips.push(chip("price_limits.type", "价格限制类型", pt && pt.enum ? enumDisplay("price_limit_type", pt.enum) : (pt && pt.zh), pt));
-    var cbf = ms.circuit_breaker;
-    chips.push(chip("circuit_breaker", "熔断", cbf && cbf.enum ? enumDisplay("circuit_breaker_type", cbf.enum) : (cbf && cbf.zh), cbf));
+    // 熔断 chip：指数级 / 无 → 枚举标签（档位见中心卡与平面线）；
+    //           个股 / 合约级 → 直接展示机制描述（spec.note 优先，收口审查反馈：要「具体信息」）
+    var cbf = ms.circuit_breaker, cbfS = cbf && cbf.spec, cbv;
+    if (cbfS && (cbfS.type === "stock_level" || cbfS.type === "contract_level")) cbv = cbfS.note || (cbf && cbf.zh);
+    else if (cbf && cbf.enum) cbv = enumDisplay("circuit_breaker_type", cbf.enum);
+    else cbv = cbf && cbf.zh;
+    chips.push(chip("circuit_breaker", "熔断", cbv, cbf));
     var mp = ms.matching_principle;
     chips.push(chip("matching_principle", "撮合原则", mp && mp.enum ? enumDisplay("matching_principle", mp.enum) : (mp && mp.zh), mp));
     var ot = ms.order_types;
@@ -924,7 +941,27 @@
     } else vicv = vic && vic.zh;
     chips.push(chip("volatility_interruption", "波动性中断", vicv, vic));
 
-    out.push('<div class="td-chips">' + chips.join("") + "</div>");
+    out.push('<div class="td-chips-label">交易机制</div><div class="td-chips">' + chips.join("") + "</div>");
+
+    // ── 交易细则 · 成本 · 特殊安排（收口审查反馈：tick size / 费用 / 特殊规则 也上主图）──
+    var chips2 = [];
+    var ts = ms.tick_size;
+    chips2.push(chip("tick_size", "最小报价单位", dv(ts), ts));
+    var bl = ms.board_lot_size;
+    chips2.push(chip("board_lot_size", "最小交易单位", dv(bl), bl));
+    var sc = clearing.settlement_cycle;
+    chips2.push(chip("settlement_cycle", "交收周期", sc && sc.enum ? enumDisplay("settlement_cycle", sc.enum) : dv(sc), sc, "clearing"));
+    var cm = costs.commission_structure;
+    chips2.push(chip("commission_structure", "佣金", dv(cm), cm, "costs"));
+    // 交易税：印花税优先，其次金融交易税；都没有则指向印花税字段（多为空=不征）
+    var sd = costs.stamp_duty, ftt = costs.financial_transaction_tax;
+    if (sd && sd.zh) chips2.push(chip("stamp_duty", "印花税", dv(sd), sd, "costs"));
+    else if (ftt && ftt.zh) chips2.push(chip("financial_transaction_tax", "金融交易税", dv(ftt), ftt, "costs"));
+    else chips2.push(chip("stamp_duty", "印花税 / 交易税", "无 / 未见征收", sd, "costs"));
+    var cs = ms.connect_schemes;
+    if (cs && cs.zh) chips2.push(chip("connect_schemes", "跨境 / 互联互通", dv(cs), cs));
+    out.push('<div class="td-chips-label">交易细则 · 成本</div><div class="td-chips">' + chips2.join("") + "</div>");
+
     return out.join("");
   }
 
