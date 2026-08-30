@@ -284,7 +284,7 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
 .td-chip {
   display: flex; flex-direction: column; gap: 3px; text-align: left; cursor: pointer;
   border: 1px solid var(--border); background: var(--bg-elevated); color: var(--fg);
-  border-radius: var(--radius); padding: 8px 12px; width: 176px; min-height: 62px;
+  border-radius: var(--radius); padding: 8px 12px; min-width: 148px; max-width: 264px; min-height: 62px;
 }
 .td-chip:hover { background: var(--bg-hover); border-color: var(--border-strong); }
 .td-chip-k { font-size: 10px; text-transform: uppercase; letter-spacing: .03em; color: var(--fg-muted); font-weight: 600; }

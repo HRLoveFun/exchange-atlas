@@ -579,7 +579,8 @@
         var subj = idxNames.length > 1 ? idxNames.join(" 或 ") + " " : "指数";
         if (t.length) out.push(subj + "跌 " + t.join("/") + "% 触发全市场熔断");
       } else if (c.type === "none") out.push("无全市场熔断");
-      else if (c.type === "stock_level" || c.type === "contract_level") out.push("仅个股 / 合约级熔断，无全市场熔断");
+      else if (c.type === "contract_level") out.push("无全市场熔断；合约级波动中断可扩至全合约暂停");
+      else if (c.type === "stock_level") out.push("无全市场熔断；靠个股 / 品种级波动中断（见下方「熔断」）");
     }
     var ir = ms.intraday_reversal;
     var irm = { t0: "当日可回转（T+0）", t1: "T+1：当日买入次日才可卖", t2: "T+2 交收", mixed: "回转交易分品种不同" };
@@ -665,7 +666,7 @@
     var yR = Math.min(40, Math.max(5, mags.length ? Math.ceil(Math.max.apply(null, mags) * 1.15) : 9));
 
     // ── 画布 ──
-    var W = 960, H = 544, PL = 60, PR = 152, PT = 46, PB = 106;
+    var W = 960, H = 556, PL = 60, PR = 152, PT = 62, PB = 106;
     var pw = W - PL - PR, ph = H - PT - PB;
     var X = function (m) { return PL + (m - xMin) / (xMax - xMin) * pw; };
     var Y = function (p) { return PT + (yR - p) / (2 * yR) * ph; };
@@ -841,10 +842,15 @@
           (i === 0 ? " td-head-1" : "") + '">' + esc(line) + "</text>");
       });
     }
-    var xStep = (xMax - xMin) > 300 ? 60 : 30;
-    for (var mx = Math.ceil(xMin / xStep) * xStep; mx <= xMax; mx += xStep) {
+    // x 轴刻度：网格线恒 30 分钟；标签宽跨度（>10h，如 de-eurex）降为每 60 分钟避免叠字。
+    // 时间坐标上下各一排（收口审查反馈）。
+    var xLabelEvery = (xMax - xMin) > 600 ? 60 : 30;
+    for (var mx = Math.ceil(xMin / 30) * 30; mx <= xMax; mx += 30) {
       g.push('<line x1="' + n(X(mx)) + '" x2="' + n(X(mx)) + '" y1="' + PT + '" y2="' + (PT + ph) + '" stroke="var(--border)" stroke-width="0.5" opacity="0.45"/>');
-      g.push('<text x="' + n(X(mx)) + '" y="' + (PT + ph + 15) + '" class="td-tick" text-anchor="middle">' + tdFmtHM(mx) + '</text>');
+      if (mx % xLabelEvery === 0) {
+        g.push('<text x="' + n(X(mx)) + '" y="' + (PT - 16) + '" class="td-tick" text-anchor="middle">' + tdFmtHM(mx) + '</text>');
+        g.push('<text x="' + n(X(mx)) + '" y="' + (PT + ph + 15) + '" class="td-tick" text-anchor="middle">' + tdFmtHM(mx) + '</text>');
+      }
     }
 
     // ── 时段 ribbon（x 轴分段着色的图例条）──
@@ -864,7 +870,7 @@
 
     // ── 标题 / 轴名 ──
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
-    g.push('<text x="' + PL + '" y="' + (PT - 22) + '" class="td-title">' + esc(exName) + ' · 交易日平面图</text>');
+    g.push('<text x="' + PL + '" y="' + (PT - 40) + '" class="td-title">' + esc(exName) + ' · 交易日平面图</text>');
     g.push('<text transform="translate(15,' + n(PT + ph / 2) + ') rotate(-90)" class="td-axis-name" text-anchor="middle">涨跌幅 %（相对' + yRef + '）</text>');
     g.push('<text x="' + n(PL + pw / 2) + '" y="' + (H - 5) + '" class="td-axis-name" text-anchor="middle">日内时间（当地）</text>');
 
@@ -904,8 +910,13 @@
     var chips = [];
     var pt = getByPath(ms, "price_limits.type");
     chips.push(chip("price_limits.type", "价格限制类型", pt && pt.enum ? enumDisplay("price_limit_type", pt.enum) : (pt && pt.zh), pt));
-    var cbf = ms.circuit_breaker;
-    chips.push(chip("circuit_breaker", "熔断", cbf && cbf.enum ? enumDisplay("circuit_breaker_type", cbf.enum) : (cbf && cbf.zh), cbf));
+    // 熔断 chip：指数级 / 无 → 枚举标签（档位见中心卡与平面线）；
+    //           个股 / 合约级 → 直接展示机制描述（spec.note 优先，收口审查反馈：要「具体信息」）
+    var cbf = ms.circuit_breaker, cbfS = cbf && cbf.spec, cbv;
+    if (cbfS && (cbfS.type === "stock_level" || cbfS.type === "contract_level")) cbv = cbfS.note || (cbf && cbf.zh);
+    else if (cbf && cbf.enum) cbv = enumDisplay("circuit_breaker_type", cbf.enum);
+    else cbv = cbf && cbf.zh;
+    chips.push(chip("circuit_breaker", "熔断", cbv, cbf));
     var mp = ms.matching_principle;
     chips.push(chip("matching_principle", "撮合原则", mp && mp.enum ? enumDisplay("matching_principle", mp.enum) : (mp && mp.zh), mp));
     var ot = ms.order_types;
