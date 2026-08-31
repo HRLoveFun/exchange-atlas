@@ -18,6 +18,7 @@
   --danger-soft: #f9e6e4;
   --info: #2f6690;
   --info-soft: #e2ecf2;
+  --sp-gold: #9c6f15;
   --link: #1d5c4a;
   --shadow: 0 1px 2px rgba(28, 27, 26, 0.06), 0 4px 12px rgba(28, 27, 26, 0.06);
   --radius: 8px;
@@ -70,6 +71,7 @@
   --danger-soft: #3a2321;
   --info: #7aa9d9;
   --info-soft: #1c2a36;
+  --sp-gold: #d9b45a;
   --link: #7fcbaa;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.35);
 }
@@ -343,6 +345,28 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
   font-size: 12.5px; color: var(--fg); line-height: 1.45;
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
 }
+
+/* ── 交割管线（v2.0 Phase 3 第三棒，ADR-048 / ADR-050）── */
+.sp-svg .sp-day { font-size: 9.5px; fill: var(--fg-faint); font-family: var(--font-mono); }
+.sp-svg .sp-axis-name { font-size: 10px; fill: var(--fg-muted); }
+.sp-svg .sp-lane-l { font-size: 12px; fill: var(--fg); font-weight: 700; }
+.sp-svg .sp-lane-s { font-size: 9px; fill: var(--fg-faint); }
+.sp-svg .sp-node-t { font-size: 10px; fill: var(--fg-muted); font-weight: 600; }
+.sp-svg .sp-node-s { font-size: 9.5px; fill: var(--fg-muted); }
+.sp-svg .sp-empty { font-size: 10.5px; fill: var(--fg-faint); font-style: italic; }
+.sp-svg .sp-loop { font-size: 15px; fill: var(--info); font-weight: 700; }
+.sp-svg .sp-wf-ord { font-size: 11px; fill: var(--fg); font-weight: 700; font-family: var(--font-mono); }
+.sp-svg .sp-wf-res { font-size: 11px; fill: var(--fg); }
+.sp-svg .sp-wf-tag { font-size: 9.5px; fill: var(--fg-muted); font-weight: 600; }
+.td-legend .sp-lg-dot, .td-legend .sp-lg-dia, .td-legend .sp-lg-seal, .td-legend .sp-lg-exp {
+  width: 12px; height: 12px; display: inline-block; flex-shrink: 0;
+}
+.sp-lg-dot { border-radius: 50%; background: var(--fg); }
+.sp-lg-dia { width: 9px; height: 9px; background: var(--accent); transform: rotate(45deg); }
+.sp-lg-seal { width: 8px; height: 13px; border-left: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+.sp-lg-exp { background: var(--bg-hover); border: 1px dashed var(--border-strong); }
+.sp-lg-loop { color: var(--info); font-weight: 600; }
+.sp-wf-note { margin-top: 10px; }
 
 .overlay-spec {
   background: var(--bg); border-radius: 4px; padding: 10px 12px; margin: 0;

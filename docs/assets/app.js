@@ -1414,6 +1414,362 @@
   }
 
   // ══════════════════════════════════════════════
+  // 交割管线（v2.0 Phase 3 第三棒：设计 ADR-048 / 数据层 ADR-050 / 渲染层本条，见 PROJECT/DECISIONS.md）
+  //   双泳道并列，x = 相对交易日天数（T+0…T+N）：
+  //   上泳道「现货」 成交 →〔CCP 更替〕→ 净额轧差 · 保证金 → DvP 终局交收（T+N 封口）；
+  //   下泳道「衍生品」 成交 → 每日盯市循环 ↻ → 不按比例的「到期」抽象区块 → 最终结算（现金 / 实物）。
+  //   纯衍生品所（de-eurex）只画下泳道；第 8 章无衍生品清算数据时下泳道留空（不断言"本所无衍生品"）。
+  //   主图下方常驻「违约损失吸收顺序」附图：按 default_management.spec.layers[].order 自上而下堆叠，
+  //   按 bearer 上色（违约方红 / CCP 橙 / 存续会员金 / 法定基金灰 / 外部灰蓝）；model: unstructured 走三态占位。
+  //   guarantee_model 枚举决定「CCP 介入」节点图形。手写 SVG，不引图表库（ADR-035 C）。
+  //   新代码从一开始接语言开关（吸取 ADR-047 教训）：所有文案走 t() / tSel() / enumDisplay()。
+  // ══════════════════════════════════════════════
+  var SP_DEFAULT_EX = "hk-hkex";
+  function spNum(v) { return (+v).toFixed(1); }
+
+  // bearer → 填色（[ADR-048] 轴②：按「谁的钱」上色）。除存续会员金色外均复用既有主题令牌；
+  // --sp-gold 为本视图新增（styles.css 三处主题块），保证明暗主题下都与橙色 --warn 可区分。
+  var SP_BEARER = {
+    defaulter:         { zh: "违约方", en: "Defaulter" },
+    ccp:               { zh: "CCP 自有出资（SITG）", en: "CCP capital (SITG)" },
+    surviving_members: { zh: "存续会员共担", en: "Surviving members" },
+    statutory_fund:    { zh: "法定风险基金", en: "Statutory fund" },
+    external:          { zh: "外部授信 / 保险", en: "External credit / insurance" }
+  };
+  function spBearerFill(b) {
+    return b === "defaulter" ? "var(--danger)" :
+      b === "ccp" ? "var(--warn)" :
+      b === "surviving_members" ? "var(--sp-gold)" :
+      b === "statutory_fund" ? "var(--fg-faint)" :
+      b === "external" ? "var(--info)" : "var(--border-strong)";
+  }
+  function spBearerName(b) {
+    return b && SP_BEARER[b] ? tSel(SP_BEARER, b) : t("未标注", "unspecified");
+  }
+
+  // guarantee_model → 「CCP 介入」节点的短名 + 一句话释义（enums.yml 的 label 偏长，图上另用短名）
+  var SP_GM_SHORT = {
+    ccp_novation:     { zh: "CCP 更替担保", en: "CCP novation" },
+    exchange_as_ccp:  { zh: "交易所即 CCP", en: "Exchange as CCP" },
+    lines_of_defence: { zh: "无更替 · 多层防线", en: "No novation · lines of defence" },
+    shared_ccp:       { zh: "跨市场共享 CCP", en: "Shared CCP" }
+  };
+  var SP_GM_GLOSS = {
+    ccp_novation:     { zh: "独立法人 CCP 经更替（novation）插入买卖双方之间、做净额担保", en: "An independent CCP is substituted between buyer and seller by novation and guarantees the net position" },
+    exchange_as_ccp:  { zh: "交易所自身承担中央对手方的实质角色", en: "The exchange itself performs the central-counterparty role" },
+    lines_of_defence: { zh: "现货无 novation，靠会员准入 / 资本监控 / 结算保证金等多层防线", en: "No novation in the cash market; relies on layered defences — member admission, capital monitoring, settlement margin, etc." },
+    shared_ccp:       { zh: "跨市场共享的独立 CCP（如 NSCC 覆盖多家美国交易所）", en: "An independent CCP shared across markets (e.g. NSCC covering multiple U.S. exchanges)" }
+  };
+
+  function spResolveId(params) {
+    var l = cache.manifest.exchanges;
+    if (l.some(function (e) { return e.id === params.id; })) return params.id;
+    return l.some(function (e) { return e.id === SP_DEFAULT_EX; }) ? SP_DEFAULT_EX : l[0].id;
+  }
+  function spCell(id, path, inner, title) {
+    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
+      '" data-chapter="clearing">' + (title ? "<title>" + esc(title) + "</title>" : "") + inner + "</g>";
+  }
+  function spSettleDays(cl) {
+    var e = cl.settlement_cycle && cl.settlement_cycle.enum;
+    return e === "t0" ? 0 : e === "t1" ? 1 : e === "t3" ? 3 : 2;
+  }
+  // 下泳道三态：only（纯衍生品所）/ both（有衍生品清算数据）/ none（第 8 章未记录）
+  function spDerivState(data) {
+    var ms = (data.chapters && data.chapters.market_structure) || {};
+    var cl = (data.chapters && data.chapters.clearing) || {};
+    var mbRef = ms.price_limits && ms.price_limits.main_board && ms.price_limits.main_board.spec && ms.price_limits.main_board.spec.reference;
+    if (mbRef === "prev_settlement") return "only";
+    var d = cl.derivatives || {};
+    var has = Object.keys(d).some(function (k) {
+      var v = d[k];
+      return v && typeof v === "object" && (v.zh || v.enum || v.spec);
+    });
+    return has ? "both" : "none";
+  }
+  function spClip(s, max) {
+    s = String(s == null ? "" : s);
+    return s.length > max ? s.slice(0, max - 1) + "…" : s;
+  }
+  function spArrow(x1, x2, y, color) {
+    return '<line x1="' + spNum(x1) + '" x2="' + spNum(x2 - 5) + '" y1="' + spNum(y) + '" y2="' + spNum(y) +
+      '" stroke="' + color + '" stroke-width="1.5"/>' +
+      '<path d="M' + spNum(x2) + ' ' + spNum(y) + ' L' + spNum(x2 - 6) + ' ' + spNum(y - 3.6) + ' L' + spNum(x2 - 6) + ' ' + spNum(y + 3.6) + ' Z" fill="' + color + '"/>';
+  }
+  function spDiamond(x, y, r) {
+    return 'M' + spNum(x) + ' ' + spNum(y - r) + ' L' + spNum(x + r) + ' ' + spNum(y) +
+      ' L' + spNum(x) + ' ' + spNum(y + r) + ' L' + spNum(x - r) + ' ' + spNum(y) + ' Z';
+  }
+  function spCcpNode(id, gm, x, y) {
+    var label = gm && SP_GM_SHORT[gm] ? tSel(SP_GM_SHORT, gm) : t("CCP 介入", "CCP steps in");
+    var gloss = gm && SP_GM_GLOSS[gm] ? tSel(SP_GM_GLOSS, gm) : "";
+    var shape;
+    if (gm === "lines_of_defence") {
+      shape = '<path d="M' + spNum(x) + ' ' + spNum(y - 8) + ' L' + spNum(x + 7) + ' ' + spNum(y - 4) +
+        ' L' + spNum(x + 7) + ' ' + spNum(y + 3) + ' Q' + spNum(x) + ' ' + spNum(y + 10) + ' ' + spNum(x - 7) + ' ' + spNum(y + 3) +
+        ' L' + spNum(x - 7) + ' ' + spNum(y - 4) + ' Z" fill="none" stroke="var(--fg-muted)" stroke-width="1.6"/>';
+    } else if (gm === "exchange_as_ccp") {
+      shape = '<path d="' + spDiamond(x, y, 8) + '" fill="var(--info)" opacity="0.9"/>' +
+        '<rect x="' + spNum(x - 2.4) + '" y="' + spNum(y - 2.4) + '" width="4.8" height="4.8" fill="var(--bg-elevated)"/>';
+    } else if (gm === "shared_ccp") {
+      shape = '<path d="' + spDiamond(x, y, 9) + '" fill="none" stroke="var(--accent)" stroke-width="1.4"/>' +
+        '<path d="' + spDiamond(x, y, 5) + '" fill="var(--accent)"/>';
+    } else if (gm === "ccp_novation") {
+      shape = '<path d="' + spDiamond(x, y, 8) + '" fill="var(--accent)"/>';
+    } else {
+      shape = '<path d="' + spDiamond(x, y, 8) + '" fill="none" stroke="var(--accent)" stroke-width="1.4"/>';
+    }
+    return spCell(id, "guarantee_model",
+      shape +
+      '<text x="' + spNum(x) + '" y="' + spNum(y - 14) + '" text-anchor="middle" class="sp-node-t">' + esc(t("CCP 介入", "CCP steps in")) + '</text>' +
+      '<text x="' + spNum(x) + '" y="' + spNum(y + 22) + '" text-anchor="middle" class="sp-node-s">' + esc(label) + '</text>',
+      t("结算担保模式", "Settlement guarantee model") + sep() + label + (gloss ? " — " + gloss : ""));
+  }
+
+  function spLanes(id, data, derivState) {
+    var cl = (data.chapters && data.chapters.clearing) || {};
+    var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
+    var W = 960, PL = 134, PR = 46, PT = 60;
+    var plotW = W - PL - PR;
+    var settleDays = spSettleDays(cl);
+    var Nmax = Math.max(settleDays, 2);
+    var dayX = function (d) { return PL + (d / Nmax) * plotW; };
+    var topMid = PT + 44, botMid = topMid + 104;
+    var gridTop = PT + 14, gridBot = botMid + 40;
+    var H = gridBot + 44;
+    var g = [];
+
+    g.push('<text x="14" y="30" class="td-title">' + esc(exName) + esc(t(" · 交割管线", " · Settlement Pipeline")) + '</text>');
+
+    // ── T+k 天数轴 + 竖网格 ──
+    for (var d = 0; d <= Nmax; d++) {
+      var gx = dayX(d);
+      g.push('<line x1="' + spNum(gx) + '" x2="' + spNum(gx) + '" y1="' + spNum(gridTop) + '" y2="' + spNum(gridBot) +
+        '" stroke="var(--border)" stroke-width="0.6" opacity="0.7"/>');
+      g.push('<text x="' + spNum(gx) + '" y="' + spNum(PT + 2) + '" text-anchor="middle" class="sp-day">T+' + d + '</text>');
+    }
+    g.push('<text x="' + spNum(W - PR) + '" y="' + spNum(gridBot + 30) + '" text-anchor="end" class="sp-axis-name">' +
+      esc(t("相对成交日的营业日", "business days from trade date")) + '</text>');
+
+    // ── 上泳道：现货 ──
+    g.push('<text x="' + spNum(PL - 14) + '" y="' + spNum(topMid - 3) + '" text-anchor="end" class="sp-lane-l">' + esc(t("现货", "Cash")) + '</text>');
+    g.push('<text x="' + spNum(PL - 14) + '" y="' + spNum(topMid + 10) + '" text-anchor="end" class="sp-lane-s">' + esc(t("T+N 流水线", "T+N pipeline")) + '</text>');
+    if (derivState === "only") {
+      g.push('<line x1="' + spNum(dayX(0)) + '" x2="' + spNum(dayX(Nmax)) + '" y1="' + spNum(topMid) + '" y2="' + spNum(topMid) +
+        '" stroke="var(--fg-faint)" stroke-width="1.2" stroke-dasharray="4 4"/>');
+      g.push('<text x="' + spNum((dayX(0) + dayX(Nmax)) / 2) + '" y="' + spNum(topMid - 10) + '" text-anchor="middle" class="sp-empty">' +
+        esc(t("本所无现货市场（纯衍生品交易所）", "No cash market (derivatives-only exchange)")) + '</text>');
+    } else {
+      var sx = dayX(Math.max(settleDays, 1));
+      g.push(spArrow(dayX(0), sx, topMid, "var(--border-strong)"));
+      g.push('<circle cx="' + spNum(dayX(0)) + '" cy="' + spNum(topMid) + '" r="5" fill="var(--fg)"/>');
+      g.push('<text x="' + spNum(dayX(0)) + '" y="' + spNum(topMid + 20) + '" text-anchor="middle" class="sp-node-s">' + esc(t("成交", "Trade")) + '</text>');
+      var gm = cl.guarantee_model && cl.guarantee_model.enum;
+      g.push(spCcpNode(id, gm, dayX(0) + (sx - dayX(0)) * 0.30, topMid));
+      var midx = dayX(0) + (sx - dayX(0)) * 0.58;
+      g.push('<line x1="' + spNum(midx) + '" x2="' + spNum(midx) + '" y1="' + spNum(topMid - 5) + '" y2="' + spNum(topMid + 5) + '" stroke="var(--fg-muted)" stroke-width="1.2"/>');
+      g.push('<text x="' + spNum(midx) + '" y="' + spNum(topMid + 33) + '" text-anchor="middle" class="sp-node-s">' + esc(t("净额轧差 · 保证金", "Netting · margin")) + '</text>');
+      g.push(spCell(id, "settlement_cycle",
+        '<rect x="' + spNum(sx - 3.4) + '" y="' + spNum(topMid - 9) + '" width="2.4" height="18" fill="var(--accent)"/>' +
+        '<rect x="' + spNum(sx + 1) + '" y="' + spNum(topMid - 9) + '" width="2.4" height="18" fill="var(--accent)"/>' +
+        '<text x="' + spNum(sx) + '" y="' + spNum(topMid - 15) + '" text-anchor="middle" class="sp-node-t">' + esc(t("DvP 终局", "DvP final")) + '</text>' +
+        '<text x="' + spNum(sx) + '" y="' + spNum(topMid + 22) + '" text-anchor="middle" class="sp-node-s">' +
+        esc(settleDays === 0 ? t("当日交收", "same-day") : t("交收 T+", "settles T+") + settleDays) + '</text>',
+        t("结算周期", "Settlement cycle") + sep() + (dv(cl.settlement_cycle) || ("T+" + settleDays))));
+    }
+
+    // ── 下泳道：衍生品 ──
+    g.push('<text x="' + spNum(PL - 14) + '" y="' + spNum(botMid - 3) + '" text-anchor="end" class="sp-lane-l">' + esc(t("衍生品", "Derivatives")) + '</text>');
+    g.push('<text x="' + spNum(PL - 14) + '" y="' + spNum(botMid + 10) + '" text-anchor="end" class="sp-lane-s">' + esc(t("盯市循环", "MTM loop")) + '</text>');
+    if (derivState === "none") {
+      g.push('<line x1="' + spNum(dayX(0)) + '" x2="' + spNum(dayX(Nmax)) + '" y1="' + spNum(botMid) + '" y2="' + spNum(botMid) +
+        '" stroke="var(--fg-faint)" stroke-width="1.2" stroke-dasharray="4 4"/>');
+      g.push('<text x="' + spNum((dayX(0) + dayX(Nmax)) / 2) + '" y="' + spNum(botMid - 10) + '" text-anchor="middle" class="sp-empty">' +
+        esc(t("第 8 章未记录衍生品清算数据（不代表无衍生品市场）", "No derivatives-clearing data in Chapter 8 (does not imply there is no derivatives market)")) + '</text>');
+    } else {
+      var loopEnd = PL + plotW * 0.48;
+      var brk = loopEnd + 12;
+      var expX = brk + 16, expW = (W - PR) - expX - 78, expR = expX + expW;
+      var finX = expR + 22;
+      g.push('<line x1="' + spNum(dayX(0)) + '" x2="' + spNum(loopEnd) + '" y1="' + spNum(botMid) + '" y2="' + spNum(botMid) + '" stroke="var(--border-strong)" stroke-width="1.5"/>');
+      g.push('<circle cx="' + spNum(dayX(0)) + '" cy="' + spNum(botMid) + '" r="5" fill="var(--fg)"/>');
+      g.push('<text x="' + spNum(dayX(0)) + '" y="' + spNum(botMid + 20) + '" text-anchor="middle" class="sp-node-s">' + esc(t("成交", "Trade")) + '</text>');
+      var mtm = cl.derivatives && cl.derivatives.mark_to_market_frequency;
+      var mtmTxt = (mtm && ((mtm.zh || "") + " " + (mtm.en || ""))) || "";
+      var twice = /两次|twice|two times|2 times|per day two/i.test(mtmTxt);
+      var glyph = twice ? "↻↻" : "↻";
+      var loopLabel = twice ? t("每日两次盯市", "Twice-daily mark-to-market") : t("每日盯市 · 追收变动保证金", "Daily mark-to-market · variation margin");
+      var inner = "";
+      for (var k = 1; k <= 3; k++) {
+        var lx = dayX(0) + (loopEnd - dayX(0)) * (k / 4);
+        inner += '<text x="' + spNum(lx) + '" y="' + spNum(botMid + 5) + '" text-anchor="middle" class="sp-loop">' + glyph + '</text>';
+      }
+      inner += '<text x="' + spNum((dayX(0) + loopEnd) / 2) + '" y="' + spNum(botMid - 12) + '" text-anchor="middle" class="sp-node-s">' + esc(loopLabel) + '</text>';
+      g.push(spCell(id, "derivatives.mark_to_market_frequency", inner,
+        t("盯市频率", "Mark-to-market frequency") + sep() + (dv(mtm) ? spClip(dv(mtm), 90) : t("每日", "daily"))));
+      g.push('<line x1="' + spNum(brk - 3) + '" x2="' + spNum(brk + 3) + '" y1="' + spNum(botMid + 5) + '" y2="' + spNum(botMid - 5) + '" stroke="var(--fg-faint)" stroke-width="1.2"/>');
+      g.push('<line x1="' + spNum(brk + 2) + '" x2="' + spNum(brk + 8) + '" y1="' + spNum(botMid + 5) + '" y2="' + spNum(botMid - 5) + '" stroke="var(--fg-faint)" stroke-width="1.2"/>');
+      g.push('<line x1="' + spNum(brk + 8) + '" x2="' + spNum(expX) + '" y1="' + spNum(botMid) + '" y2="' + spNum(botMid) + '" stroke="var(--border-strong)" stroke-width="1.5"/>');
+      var ltd = cl.derivatives && cl.derivatives.last_trading_day_rule;
+      g.push(spCell(id, "derivatives.last_trading_day_rule",
+        '<rect x="' + spNum(expX) + '" y="' + spNum(botMid - 16) + '" width="' + spNum(expW) + '" height="32" rx="4" fill="var(--bg-hover)" stroke="var(--border-strong)" stroke-width="1" stroke-dasharray="4 3"/>' +
+        '<text x="' + spNum(expX + expW / 2) + '" y="' + spNum(botMid - 1) + '" text-anchor="middle" class="sp-node-t">' + esc(t("到期", "Expiry")) + '</text>' +
+        '<text x="' + spNum(expX + expW / 2) + '" y="' + spNum(botMid + 11) + '" text-anchor="middle" class="sp-node-s">' + esc(t("因产品而异 · 不锚定 T+N", "product-specific · not anchored to T+N")) + '</text>',
+        t("最后交易日规则", "Last trading day rule") + sep() + (dv(ltd) ? spClip(dv(ltd), 110) : t("因合约而异", "varies by contract"))));
+      g.push(spArrow(expR, finX + 4, botMid, "var(--border-strong)"));
+      var dm2 = cl.derivatives && cl.derivatives.delivery_method;
+      var dme = dm2 && dm2.enum;
+      var fLab = dme === "cash" ? t("现金结算", "Cash-settled") : dme === "physical" ? t("实物交割", "Physical delivery") :
+        dme === "either" ? t("现金 / 实物", "Cash / physical") : t("最终结算", "Final settlement");
+      g.push(spCell(id, "derivatives.delivery_method",
+        '<circle cx="' + spNum(finX + 12) + '" cy="' + spNum(botMid) + '" r="5.5" fill="none" stroke="var(--accent)" stroke-width="1.6"/>' +
+        '<text x="' + spNum(finX + 12) + '" y="' + spNum(botMid + 20) + '" text-anchor="middle" class="sp-node-s">' + esc(fLab) + '</text>',
+        t("交割方式（衍生品）", "Delivery method (derivatives)") + sep() + (dv(dm2) ? spClip(dv(dm2), 90) : fLab)));
+    }
+
+    return '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + ' ' + spNum(H) + '" class="td-svg sp-svg" role="img" aria-label="' +
+      esc(exName) + esc(t(" 交割管线", " settlement pipeline")) + '">' + g.join("") + '</svg></div>';
+  }
+
+  function spWaterfall(id, data) {
+    var cl = (data.chapters && data.chapters.clearing) || {};
+    var dm = cl.default_management || {};
+    var spec = dm.spec || {};
+    var model = spec.model;
+    var layers = (spec.layers || []).slice().sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
+    var W = 960, badgeX = 34, boxX = 66, boxW = 612, tagX = boxX + boxW + 16;
+    var rowH = 42, boxH = 30, body, H;
+
+    if (model === "unstructured" || !layers.length) {
+      H = 84;
+      body = '<rect x="' + boxX + '" y="16" width="' + (W - boxX - 44) + '" height="46" rx="4" fill="var(--bg-hover)" stroke="var(--border-strong)" stroke-dasharray="4 3"/>' +
+        '<text x="' + spNum(boxX + 14) + '" y="37" class="sp-wf-res">' +
+        esc(t("机制存在，逐层损失分摊结构未在一手来源逐条呈现", "The mechanism exists, but a layer-by-layer loss-allocation structure is not set out in primary sources")) + '</text>' +
+        '<text x="' + spNum(boxX + 14) + '" y="53" class="sp-wf-tag">' + esc(t("点此看散文说明与出处", "click for the prose description and its sources")) + '</text>';
+    } else {
+      H = layers.length * rowH + 18;
+      body = layers.map(function (L, i) {
+        var y = 14 + i * rowH, cyc = y + boxH / 2, hasB = !!L.bearer;
+        return '<circle cx="' + badgeX + '" cy="' + spNum(cyc) + '" r="11" fill="var(--bg-elevated)" stroke="var(--border-strong)"/>' +
+          '<text x="' + badgeX + '" y="' + spNum(cyc + 4) + '" text-anchor="middle" class="sp-wf-ord">' + (L.order || (i + 1)) + '</text>' +
+          '<rect x="' + boxX + '" y="' + spNum(y) + '" width="' + boxW + '" height="' + boxH + '" rx="4" fill="' + spBearerFill(L.bearer) +
+          '" opacity="' + (hasB ? "0.82" : "0.22") + '"' + (hasB ? "" : ' stroke="var(--border-strong)"') + '/>' +
+          '<text x="' + spNum(boxX + 12) + '" y="' + spNum(cyc + 4) + '" class="sp-wf-res">' + esc(spClip(L.resource, 58)) + '</text>' +
+          '<text x="' + spNum(tagX) + '" y="' + spNum(cyc + 4) + '" class="sp-wf-tag">' + esc(spBearerName(L.bearer)) + '</text>' +
+          (i < layers.length - 1 ? '<path d="M' + badgeX + ' ' + spNum(y + boxH + 2) + ' l 0 ' + spNum(rowH - boxH - 7) +
+            ' m -3 -4 l 3 4 l 3 -4" fill="none" stroke="var(--fg-faint)" stroke-width="1.3"/>' : "");
+      }).join("");
+    }
+
+    var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + ' ' + spNum(H) + '" class="td-svg sp-svg" role="img" aria-label="' +
+      esc(t("违约损失吸收顺序", "default loss-absorption order")) + '">' +
+      spCell(id, "default_management", body,
+        t("违约处置与风险共担", "Default management") + sep() + (dv(dm) ? spClip(dv(dm), 120) : "—")) +
+      '</svg></div>';
+    var note = spec.note ? '<div class="td-prose sp-wf-note">' + zhNoteBlock(esc(t("附注：", "Note: ") + spec.note)) + '</div>' : "";
+    return svg + note;
+  }
+
+  function spChipEnumRef(path) {
+    return path === "guarantee_model" || path === "settlement_cycle" || path === "delivery_method" ? path : null;
+  }
+  function spChipsBlock(id, data) {
+    function chip(path) {
+      var env = getByPath(data.chapters.clearing || {}, path);
+      var enumRef = spChipEnumRef(path);
+      var val = (enumRef && env && env.enum) ? enumDisplay(enumRef, env.enum) : dv(env);
+      var has = env && (env.zh || env.enum || env.spec);
+      return '<button type="button" class="td-chip' + (has ? "" : " td-chip-empty") +
+        '" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) + '" data-chapter="clearing" title="' + esc(dv(env) || "—") + '">' +
+        '<span class="td-chip-k">' + esc(fieldLabel("clearing", path)) + '</span>' +
+        '<span class="td-chip-v">' + esc(val || t("暂缺", "not recorded")) + '</span></button>';
+    }
+    return '<div class="td-chips-label">' + t("清算 · 结算关键事实", "Clearing & settlement — key facts") + '</div>' +
+      '<div class="td-chips">' + ["guarantee_model", "settlement_cycle", "ccp_name", "csd_name", "delivery_method"].map(chip).join("") + '</div>';
+  }
+
+  function spLaneLegend() {
+    return '<div class="td-legend">' +
+      '<span><i class="sp-lg-dot"></i>' + t("成交", "Trade") + '</span>' +
+      '<span><i class="sp-lg-dia"></i>' + t("CCP 介入", "CCP steps in") + '</span>' +
+      '<span><i class="sp-lg-seal"></i>' + t("DvP 终局交收", "DvP final settlement") + '</span>' +
+      '<span class="sp-lg-loop">↻ ' + t("每日盯市", "daily mark-to-market") + '</span>' +
+      '<span><i class="sp-lg-exp"></i>' + t("到期区块（不按比例）", "expiry block (not to scale)") + '</span>' +
+      "</div>";
+  }
+  function spBearerLegend() {
+    var items = ["defaulter", "ccp", "surviving_members", "statutory_fund", "external"].map(function (b) {
+      return '<span><i class="td-sw" style="background:' + spBearerFill(b) + '"></i>' + esc(spBearerName(b)) + '</span>';
+    }).join("");
+    return '<div class="td-legend">' + items +
+      '<span><i class="td-sw" style="background:var(--border-strong);opacity:.4"></i>' +
+      t("非损失吸收层（准入 / 监控等）", "non-loss-absorbing layer (admission / monitoring, etc.)") + '</span></div>';
+  }
+  function spBanner(derivState) {
+    if (derivState === "only") {
+      return '<p class="td-banner">' + t(
+        "纯衍生品交易所：本所无现货 DvP 交收环节，下方只呈现衍生品泳道与违约瀑布。",
+        "Derivatives-only exchange: there is no cash-market DvP settlement leg here; only the derivatives lane and the default waterfall are shown.") + "</p>";
+    }
+    if (derivState === "none") {
+      return '<p class="td-banner td-banner-soft">' + t(
+        "本所记录中无独立的衍生品清算数据；下方衍生品泳道留空，不代表本所无衍生品市场。",
+        "No separate derivatives-clearing data is on record for this exchange; the derivatives lane below is left blank, which does not imply the exchange has no derivatives market.") + "</p>";
+    }
+    return "";
+  }
+  function spProse() {
+    return '<div class="td-prose">' + t(
+      '本视图由第八章「清算、结算与交割」的 <code>guarantee_model</code> 枚举与 <code>default_management.spec</code> 结构化层驱动（见 ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-048 / ADR-050</a>）。' +
+      '上泳道现货 T+N 的天数轴为「相对成交日的营业日」，节点位置示意先后、不表示精确时点；下泳道衍生品的「每日盯市」只示意「每个交易日重复」，' +
+      '「到期」区块<strong>不按比例</strong>——衍生品最后交易日因合约而异，不锚定某个 T+N。违约瀑布只结构化「层级顺序 + 每层由谁的钱吸收损失」，不含金额；' +
+      '<code>model: unstructured</code> 表示机制存在但一手来源未给出可结构化的干净层级。规则以各交易所官方发布为准，不构成投资建议。',
+      'This view is driven by the <code>guarantee_model</code> enum and the structured <code>default_management.spec</code> layer of Chapter 8, ' +
+      '“Clearing, Settlement &amp; Delivery” (see ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-048 / ADR-050</a>). ' +
+      'On the cash lane, the T+N axis counts business days from the trade date; node positions show sequence, not exact timing. On the derivatives lane, ' +
+      'the “daily mark-to-market” glyphs simply mean “repeats every trading day”, and the “expiry” block is <strong>not to scale</strong> — a derivative’s ' +
+      'last trading day varies by contract and is not anchored to any T+N. The default waterfall structures only “layer order + whose funds absorb the loss ' +
+      'at each layer”, with no amounts; <code>model: unstructured</code> means the mechanism exists but primary sources do not set out a clean layer-by-layer ' +
+      'structure. Rules are as officially published by each exchange; nothing here is investment advice.') + "</div>";
+  }
+
+  function spBuild(id, data) {
+    var derivState = spDerivState(data);
+    return spBanner(derivState) +
+      spLaneLegend() +
+      spLanes(id, data, derivState) +
+      '<div class="td-chips-label">' + t("违约损失吸收顺序（自上而下 = 动用先后）", "Default loss-absorption order (top → bottom = order of use)") + "</div>" +
+      spBearerLegend() +
+      spWaterfall(id, data) +
+      spChipsBlock(id, data) +
+      spProse();
+  }
+
+  function renderSettlementPipeline(app, params) {
+    var list = cache.manifest.exchanges;
+    var id = spResolveId(params);
+    var toolbar = '<div class="view-toolbar">' +
+      '<label for="spExchange">市场 Market</label>' +
+      '<select id="spExchange" data-role="sp-exchange">' +
+      list.map(function (e) {
+        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
+      }).join("") + "</select>" +
+      '<span class="td-tb-note">' + t("上 = 现货 T+N · 下 = 衍生品盯市循环 · 点任意节点看出处",
+        "top = cash T+N · bottom = derivatives mark-to-market loop · click any node for sources") + "</span>" +
+      "</div>";
+    app.innerHTML = toolbar + '<div class="loading">' + t("加载交割管线中…", "Loading settlement pipeline…") + "</div>";
+    return loadExchange(id).then(function (data) {
+      var cur = parseHash();
+      if ((cur.view && cur.view !== "settlement-pipeline") || spResolveId(cur) !== id) return;
+      app.innerHTML = toolbar + spBuild(id, data);
+    }).catch(function (e) {
+      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
+    });
+  }
+
+  // ══════════════════════════════════════════════
   // 出处浮层
   // ══════════════════════════════════════════════
   function openCellOverlay(exchangeId, fieldPath, chapterId) {
@@ -1545,6 +1901,7 @@
     else if (view === "timezone") renderTimezone(app, params);
     else if (view === "matrix") renderMatrix(app, params);
     else if (view === "cost-waterfall") renderCostWaterfall(app, params);
+    else if (view === "settlement-pipeline") renderSettlementPipeline(app, params);
     else renderTradingDay(app, params);
   }
 
@@ -1594,6 +1951,8 @@
       setHash({ view: "trading-day", id: e.target.value });
     } else if (role === "cw-exchange") {
       setHash({ view: "cost-waterfall", id: e.target.value });
+    } else if (role === "sp-exchange") {
+      setHash({ view: "settlement-pipeline", id: e.target.value });
     }
   });
   document.addEventListener("keydown", function (e) {
