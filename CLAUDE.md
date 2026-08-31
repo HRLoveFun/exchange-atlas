@@ -85,6 +85,18 @@ exchange-atlas《全球交易所图鉴》：用统一框架横向记录全球主
 
 - **交互式会话**（终端里逐轮对话）：开始改动前先 `git pull --ff-only` 确认本地 `main` 与 `origin/main` 同步、无分叉；改完后跑一遍 `make build`（`sync` + `check`）确认无误，直接 `git add` + `git commit` + `git push origin main`。本条即为 CLAUDE.md 对自动 push 的授权，不必每次都问"要不要 push"。仍然遵守：`make check` 不过不推、不 force push、不改写已推送的历史。
 - **后台任务（background job）**：Claude Code 平台对后台任务有硬性限制——不能直接 push/merge 到 main，只能建分支开 PR，这是运行环境层面的限制，CLAUDE.md 管不到，改不了。后台任务做完仓库改动后会照常留一个 PR，需要手动 `gh pr merge` 或在网页点一下——这一步目前没有能从项目侧省掉的办法。想要免 PR 的直接推送体验，走交互式会话。
+- **合后台任务留下的 PR 前，先把 head 分支的 worktree 摘掉**：`gh pr merge --delete-branch` 的顺序是「先删本地分支、再删远端分支」，而 PR 的 head 分支通常正被 `.claude/worktrees/<name>` 检出，git 会以 `cannot delete branch '<branch>' used by worktree at '...'` 拒绝。**此时远端已经合并成功，但命令以非零码退出，且远端分支残留**——只看退出码会误判成合并失败，再跑一次只会得到 `was already merged` 又卡在同一个本地错误上。正确顺序：
+
+  ```bash
+  git -C .claude/worktrees/<name> status -sb   # 先确认无未提交内容；squash 合并后提交已被 main 的 merge commit 收走，删掉不丢东西
+  git worktree unlock .claude/worktrees/<name> # 后台任务的 worktree 往往是 locked，不 unlock 不能 remove
+  git worktree remove .claude/worktrees/<name>
+  git branch -D <head-branch>                  # squash 合并后 -d 会判"未合并"，需 -D
+  gh pr merge <n> --squash --delete-branch
+  git pull --ff-only                           # gh 在删分支失败时会跳过本地 main 的同步，合并后自己补一次
+  ```
+
+  另：`gh pr merge` 不带 `--subject/--body` 会弹 `$EDITOR` 让人编辑 squash 提交信息，非交互执行必须显式给 `--subject`（GitHub 不会自动追加 `(#n)`，要自己带上）与 `--body ""`。
 
 ---
 
