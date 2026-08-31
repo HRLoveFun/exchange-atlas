@@ -975,6 +975,76 @@
 
 **验证：** 本条不写代码。只改 `PROJECT/DECISIONS.md` + `PROJECT/ROADMAP.md` 叙述条目（非生成块），`make check` 的 `validate` 20 家 0/0、生成块无 diff。
 
+### ADR-049 — 英文版可用性修订：图形视图接语言开关 + `detail` 折叠降级 + UI 双语机器校验
+
+**背景：** 2026-08-30 的英文版走查（`PROJECT/ENGLISH-REVISION-PLAN.md`，本条是它的决策落点，审查结论不在此复述）发现「英文版」名不副实：事实信封 `en` 覆盖率与译文质量本身达标（[ADR-034]），但 **Phase 2/3 新写的两个旗舰视图（市场机制剖面 = 默认首屏、交易成本瀑布）几乎完全无视 `state.langMode`**，加上 1028 个 `detail` 字段从不翻译且始终渲染、[ADR-006] 的 UI 双语约定在多处漏网。按该计划的批次顺序落地，本条逐批补记。
+
+#### 批次 1（2026-08-30）方案 A + C
+
+1. **`[ADR-006]` 边界细化——UI 文案分两种形态。** 原约定「UI 标签恒双语」只覆盖**短标签**（表头 / 下拉框 / 筛选器 / 状态徽章）；**图形视图的合成语句 / 轴名 / 图例 / banner / 说明段**改为**跟随语言开关**（toggled），不恒双语。
+   - 为什么：中心信息卡、说明段这类长句若中英并列，版面会挤爆；而带数字的**合成数据语句**（「涨停 +10%」「指数跌 7% 触发全市场熔断」）本就与 `displayValue()` 同理，理应跟随 `langMode`。这条边界此前没人写清楚，是 Phase 2/3 静默劣化的根因——写 `renderTradingDay` 时理解为「UI 恒双语 → 不必接开关」。
+   - 实现：零依赖小工具 `t(zh, en)` / `tSel({zh,en}字典, key)` / `sep()`，符合 [ADR-035] C 零构建守则。
+
+2. **chip 名不新写英文——按 `chapter` + `path` 到 `cache.taxonomy` 查字段定义的 `label_en`。** 新增 `fieldLabel(chapterId, path)`，chips 与持有 / 退出税行的标签全部改走它。
+   - 为什么：chip 名（「最小报价单位」「印花税」…）此前是手写字面量，等于把 taxonomy 里已有的 `label_en` 又抄一遍，正是 `CLAUDE.md` §一 反对的「同一标签两处手写」。顺手消除，也保证 taxonomy 改标签时 chip 自动跟随。
+   - **取舍：`zh` 态的 5 个 chip 名因此变了**，这是本条唯一偏离「`zh` 态逐字不变」验收标准处。改动是 `熔断→熔断机制`、`做市商→做市商制度`、`交收周期→结算周期`、`佣金→佣金结构`、`跨境 / 互联互通→互联互通/跨境安排`——全部是 chip 手写简称向 taxonomy 规范名的收敛。留手写字面量则同一字段在剖面 chip 与档案页字段卡上叫两个名字，与 §一 直接冲突；且 §3 方案 A 第 3 条明写了「按 `path` 查 taxonomy」，与「逐字不变」冲突时按更具体的实现指令走。中文模式因此**不是**逐字不变，逐屏核对见下。
+   - 反向例外一个：`price_limits.type` 在 taxonomy 里挂在 `price_limits` 组下，`build.py` 扁平化时只留叶子、组名进不了 `docs/data/taxonomy.json`，标签只剩「类型 / Type」——脱离分组上下文不知所云。为此留了 `LABEL_OVERRIDE`（→「价格限制类型 / Price Limit Type」）这一处兜底，是「两处手写」原则在标签本身不自洽时的必要例外。
+
+3. **方案 C 的机器校验：`tools/check_ui_i18n.py`，接入 `make check`。** 扫 `docs/assets/app.js` 的字符串字面量，含 CJK 且①不在 `t()`/`tSel()` 调用内、②不是 `{zh,en}` 字典的 `zh:` 值、③不是双语串（含 ≥2 连续 ASCII 字母）、④行内未标 `// i18n-exempt` → 报错。
+   - 为什么：[ADR-006] 是硬约定但无机器强制，Phase 2/3 就是这么静默烂掉的；不加校验，修完还会再烂（对照 [ADR-024]/[ADR-033]「加机器校验锁住铁律」）。
+   - 扫描器自己实现极小 JS 词法（跳 `//` 与 `/* */` 注释、正确处理三种引号与转义、**识别正则字面量**——`esc()` 里的 `/[&<>"']/g` 曾让朴素实现把引号误判为字符串边界，产生大量假阳性）。
+   - `// i18n-exempt` 是显式逃生口，目前两处：`sep()`（分隔符的 i18n 本体）与语言切换按钮（显示的是「当前数据语言」本身，写成「中文 Chinese」反而不知所云）。
+   - 验收：故意塞 `var _probe = "裸露的中文串";` 确认能报错定位到行（`app.js:1612`，exit 1），改回后 `make check` 恢复绿。
+
+**逐屏核对（Chrome headless `--dump-dom`，比对渲染后的可见文本）：** 6 家代表交易所 × {市场机制剖面, 成本瀑布, 档案页} + 时区 + 矩阵，`zh` 态以 `git show HEAD` 的前端代码为基线逐行 diff。结果：成本瀑布 6/6、档案页 6/6、矩阵/时区（时钟数字除外）逐字一致；市场机制剖面 6/6 仅差上述 5 个 chip 改名。
+
+**过程中抓到的两个坑（都已修，值得记）：**
+
+- **`var t` 遮蔽 `t()`**：`cwBuild()` 里 bp 刻度轴的 `for (var t = 0; …)` 因 `var` 提升到函数顶部，把模块级的 `t()` 文案助手整个遮蔽，成本瀑布在**两种语言模式下**都直接抛 `t is not a function` 白屏。同名遮蔽在 JS 里不报任何错、只在运行到那一行才炸，而 `t()` 这种「两字母的全局小工具」被局部变量撞上的概率不低。已在三处（`cwBuild` 循环变量、`tdBuild` 回调形参、点击处理器的 `var t`）全部改名，并就地留注释。
+- **`t()` 套模板字符串时把数据值也语言化了**：`t(zo + "跌 …", …)` 里的 `zo` 本身走过 `t()`，导致中文态输出「S&P 500跌」而非原文的「指数跌」（HEAD 逻辑是「单一参考指数时一律说『指数』、不写指数名」）。教训：`t()` 的参数应是**整句字面量**，拼进来的值要在两种语言下都成立。
+
+**范围：** 仅 `docs/assets/app.js` + `styles.css`（`.zh-note`）+ `tools/check_ui_i18n.py` + `Makefile`，`data/` 与 `docs/data/` 零改动。
+
+#### 批次 2（2026-08-30）方案 B —— `detail` / `spec.note` 的诚实降级
+
+**定了什么：** 英文模式下，`renderObjectChapter` 的 `field-detail` 与 `openCellOverlay` 的 `detail` 段落、以及 `spec` 里所有 `*note` 键（`note` / `full_table_note` / `margin_note` / `*_note`，由 `splitSpecNotes()` 按 `/note$/i` 从 JSON dump 里摘出）**收进默认折叠的 `<details>` 小块**，摘要行 `Analyst note (Chinese) ▾`，点开显示中文原文；`spec` 的其余部分照旧 `JSON.stringify` 展示。中文模式逐字不变。
+
+**为什么不选另外两条路：**
+
+- ① **schema 的 `detail` 升 `{zh, en}` 回填 1028 条** —— 否。`detail` 是**分析性散文**（含对来源的推理、归纳改写），翻译漂移风险高；更要命的是每新增一个带 `detail` 的字段就多一份长期双语负担，会持续拖慢 [ADR-017] 的建档流程。
+- ② **构建期机翻进 `docs/data/`** —— 否。与「每条事实可溯源、不编造」直接冲突：`detail` 有时写的是「为什么这条查不到」「这个数字为什么可疑」，机翻会把它变成一句看似肯定的译文。
+- ③ **前端折叠 + 视觉标记** —— 选它。沿用 [ADR-026] 的哲学：**加视觉标记、不改数据可见性**。读者看到的是「这是一段中文分析注记」而不是「译文缺失」或「这里本来就该有英文」；要读原文点开即可，信息量零损失。
+
+**顺带的取舍：** `spec` 的 note 类键从 JSON dump 里**摘出来单独渲染**而不是留在 dump 里——JSON 里夹中文句子既难读又像 bug；摘出后 dump 只剩纯结构化键值，反而更好读。
+
+**逐屏核对：** `us-nyse` 档案页 `en` 态出现 14 个 `Analyst note (Chinese) ▾` 折叠块、中文原文在其内；同一页 `zh` 态 0 个、与基线逐字一致（上面批次 1 的全量 diff 已覆盖档案页 6/6）。
+
+#### 批次 3（2026-08-31）方案 D —— 站点外壳 + `README.en.md`
+
+1. **外壳 i18n 走计划的方案 (b)，即纯 CSS 双写切换。** `index.html` 的静态文案（加载提示、页脚免责声明）写成 `<span class="i18n-zh">` / `<span class="i18n-en">` 两份，`toggleLang()` 设 `<html data-lang>`，`styles.css` 用 `html[data-lang="en"] .i18n-zh { display:none }` 切。
+   - 为什么选 (b) 而不是 (a)（文案移进 JS）：外壳文案与数据渲染解耦，**首屏在 `app.js` 加载前就是正确语言**——(a) 必然有一帧中文闪现。代价是 HTML 里同一句话写两遍，但外壳文案一共只有 2 处、且几乎不变。
+   - `title=` 是属性，塞不下双 span，改由 `data-title-zh` / `data-title-en` 驱动，`applyLang()` 统一赋值。
+   - `<html lang>` 在 `applyLang()` 里同步切（`zh-CN` ↔ `en`）——这是给浏览器、读屏和搜索引擎看的，与 `data-lang`（给 CSS 看）是两个用途。
+   - **`tab` 标签的双语不动**：计划第 2 节已认定「tab 标签本身是双语的（OK）」，它们是短标签、按 [ADR-006] 恒双语，属于本条边界细化的另一半。
+
+2. **`README.en.md` 独立文件 + 手工同步，只有 `exchange-list` 块是生成的。**
+   - 为什么不把英文塞进 `README.md`：两份完整正文并列会让中文读者先读一遍英文，反之亦然；两个文件 + 顶部互链是 GitHub 上的通行做法。
+   - 为什么同步靠手工：`README.md` 极少变动（v2.0 期间只改过覆盖范围表一处），自动翻译 / 自动同步的成本都大于收益。文件头已写明「本文件与 README.md 手工同步」。
+   - `exchange-list` 块必须生成：它是 `data/exchanges/*.yml` 的投影，手工维护必然过期。`sync.render_exchange_list()` 加 `lang=` 参数输出英文变体（列头 `| ID | Name | Region |`，名称取 `name_native.en`，地区取 `enums.yml` 的 `label_en`），`apply_blocks()` 对两个 README 各写一次；`validate.py` 的生成块新鲜度校验从五处变六处。
+   - **数据补了 5 个 `name_native.en`**（`br-b3` / `cn-sse` / `cn-szse` / `kr-krx` / `tw-twse` 此前只有本地语言写法）。全部取各所官网的官方英文名，与既有 15 家同字段同性质（`name_native` 是身份元数据，不挂 `sources`，见 `schema/taxonomy.yml` 该字段 note）。`render_exchange_list(en)` 在英文名缺失时退回中文名而不是留空——留空会让整列表格断一列，而「这家所没有官方英文名」不是读者需要在此处知道的信息。
+
+#### 批次 4（2026-08-31）方案 E —— `en` 术语一致性
+
+1. **`tools/check_en_terms.py` 只出建议清单，不自动改、也不进 `make check`。**
+   - 为什么：扫出来的 55 处候选里，**绝大多数是合法的市场特定用法**——SSE 官方自己就叫 call auction（36 处 call auction 几乎全在 cn-sse / cn-szse，且各自文件内前后一致，是正确的）；美股 round lot、日本 trading unit 同理。还有一类是**同名不同概念**：`trading unit` 在 cn-sse / cn-szse / tw-twse 里指券商接入交易所的「交易单元」，和 lot 毫无关系。机器分不清这三类，自动改会把对的改成错的。
+   - 为什么也不进 `make check`：挂上去要么长期红（逼人写豁免，把它变成橡皮图章），要么逼着把合法用法改掉。作为 `make check-en-terms` 独立命令存在，谁想清理谁跑。
+   - **人工逐条判断后实改 4 处**：`cn-sse` `trading_currency` / `settlement_currency`、`cn-szse` `settlement_currency` 的 `Renminbi` → `RMB`（全库 20 家同字段既成写法是 ISO 代码/简称，`Renminbi` 是孤例）；`za-jse` `board_lot_size` 的「lot size … minimum board-lot」同句混用统一为 `board lot`。
+   - **判断为不改的**：散文里的 "the renminbi"（小写、作普通名词，是正确英文，不是漂移）；`br-b3` 的 `round lot`（B3 自身英文材料不统一，留待维护者决断，不在本轮替他拍板）；derivatives 语境的 `lot size` / `contract size`（标准英文，非 lot 概念）。
+2. **house style 落进 `schema/glossary.yml` 头注**（货币 / 集合竞价 / 最小交易单位三条 + 上述「同名不同概念」的警告），与 `check_en_terms.py` 互相指向。
+3. **修确定性小错**：`tw-twse` 的 `网路资讯商店` → `網路資訊商店`。这个是简繁混种的错字（网/资/讯 是简体字形，路 同形），TWSE 官方写作「證交所網路資訊商店」（已开官网核对确认）。改了三处：`zh`、`en` 里的括注、以及来源标题——来源标题按官方页名原文写全（「證交所網路資訊商店（Data E-Shop）」）。**未动**同文件其余简体文本：本所 `source_lang: zh`，全库 `zh` 列统一简体是既定约定，`quote` 才是繁体原文锚点。
+
+**日期：** 2026-08-31
+
 **日期：** 2026-08-30
 
 ### ADR-050 — Phase 3 第三棒（数据层）：交割管线的 `default_management.spec` 形状 + `guarantee_model` 枚举 + 20 家回填

@@ -15,6 +15,22 @@
 #   en      标准英文对照
 #   natives 该概念在各交易所官方语言中的原文，{语言代码: 原文}
 #   note    简短说明，帮助判断该词与近义词的边界
+#
+# ── `en` 值的 house style（ADR-049 方案 E）──
+# 本文件裁决的是**术语译法**；而「同一个 `en` 值在不同交易所该写成什么样」另有一组
+# 更细的写法约定，记在这里（跑 `python3 tools/check_en_terms.py` 出待判断清单）：
+#   1. 货币：短值字段（trading_currency / settlement_currency 这类）一律用 ISO 代码或
+#      通用简称（RMB / USD / HKD / BRL…）——全库 20 家的既成写法就是如此，
+#      「Renminbi」这类全称拼写是漂移。但在**散文**里按英文习惯写 "the renminbi"
+#      （小写、作普通名词）是对的，不属于漂移，不要改成 RMB。
+#   2. 集合竞价：默认 Opening Auction / Closing Auction。**市场官方另有名称时用官方名**，
+#      并在该交易所文件内保持前后一致（SSE 官方即 call auction，故 cn-sse 全文件用
+#      call auction 是正确的，不要"统一"成 auction）。
+#   3. 最小交易单位：默认 board lot。**美/日等官方用语不同的沿用官方**（美股 round lot、
+#      日本 trading unit）。注意「trading unit」在 cn-sse / cn-szse / tw-twse 里常常是
+#      **另一个概念**（券商接入交易所的「交易单元」），不是 lot，别误当成漂移改掉。
+#   4. 上述判断依赖「该市场官方到底怎么说」，机器分不清漂移与有意沿用，所以
+#      check_en_terms.py 只出建议清单、不自动改、也不进 `make check`。
 
 terms:
   - id: circuit-breaker-index

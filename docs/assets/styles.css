@@ -350,6 +350,27 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
   white-space: pre-wrap; overflow-x: auto;
 }
 
+/* ── 站点外壳文案双语切换（方案 D / ADR-049）──
+   index.html 里的静态文案（加载提示、页脚免责声明）写两遍
+   <span class="i18n-zh"> / <span class="i18n-en">，由 toggleLang() 设 <html data-lang> 切换。
+   纯 CSS 切换：零 JS 逻辑增量，且首屏（app.js 加载前）就已经是正确语言。 */
+html[data-lang="en"] .i18n-zh,
+html:not([data-lang="en"]) .i18n-en { display: none; }
+
+/* ── 中文分析注记在英文模式下的折叠块（方案 B ③ / ADR-049）──
+   只在 langMode=en 时由 JS 包一层 <details>，中文模式完全不出现。 */
+.zh-note { margin-top: 10px; }
+.zh-note > summary {
+  cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; letter-spacing: .02em; color: var(--fg-faint);
+  border: 1px dashed var(--border-strong); border-radius: 4px; padding: 1px 7px;
+  user-select: none;
+}
+.zh-note > summary::-webkit-details-marker { display: none; }
+.zh-note > summary:hover { color: var(--fg-muted); border-color: var(--fg-faint); }
+.zh-note > summary::marker { content: ""; }
+.zh-note[open] > summary { margin-bottom: 6px; }
+
 /* ── 页脚 ── */
 .page-footer { max-width: 1400px; margin: 40px auto 24px; padding: 16px 20px 0; border-top: 1px solid var(--border); color: var(--fg-faint); font-size: 12.5px; }
 
