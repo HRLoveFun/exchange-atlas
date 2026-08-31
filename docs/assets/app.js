@@ -114,7 +114,7 @@
   // 哲学：英文模式收进默认折叠的小块，标清楚「这是中文分析注记，不是译文缺失」，
   // 点开仍是原文。中文模式逐字不变。
   var ZH_NOTE_SUMMARY = "Analyst note (Chinese) ▾";
-  function zhNoteBlock(inner, bodyClass) {
+  function zhNoteBlock(inner) {
     if (state.langMode !== "en") return inner;
     return '<details class="zh-note"><summary>' + ZH_NOTE_SUMMARY + "</summary>" + inner + "</details>";
   }
@@ -1512,9 +1512,13 @@
     // 按钮显示的是「当前数据语言」本身（zh 态「中文」/ en 态 "English"），不是需要
     // 双语并列的 UI 标签——写成 "中文 Chinese" 反而不知所云，故行内标 i18n-exempt。
     $("#langToggle").textContent = en ? "English" : "中文"; // i18n-exempt
-    // title= 提示：HTML 属性塞不下双 span，改由 index.html 的 data-title-zh / data-title-en 驱动
+    // title= 提示：HTML 属性塞不下双 span，改由 index.html 的 data-title-zh / data-title-en 驱动。
+    // <title> 元素也挂同一对属性，但它要设的是 document.title（浏览器标签页 / 搜索结果），
+    // 不是自身的 title 属性——单独分流。
     $all("[data-title-zh]").forEach(function (el) {
-      el.title = en ? (el.dataset.titleEn || el.dataset.titleZh) : el.dataset.titleZh;
+      var val = en ? (el.dataset.titleEn || el.dataset.titleZh) : el.dataset.titleZh;
+      if (el.tagName === "TITLE") document.title = val;
+      else el.title = val;
     });
   }
   function toggleLang() {
