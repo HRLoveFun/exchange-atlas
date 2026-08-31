@@ -975,6 +975,8 @@
 
 **验证：** 本条不写代码。只改 `PROJECT/DECISIONS.md` + `PROJECT/ROADMAP.md` 叙述条目（非生成块），`make check` 的 `validate` 20 家 0/0、生成块无 diff。
 
+**日期：** 2026-08-30
+
 ### ADR-049 — 英文版可用性修订：图形视图接语言开关 + `detail` 折叠降级 + UI 双语机器校验
 
 **背景：** 2026-08-30 的英文版走查（`PROJECT/ENGLISH-REVISION-PLAN.md`，本条是它的决策落点，审查结论不在此复述）发现「英文版」名不副实：事实信封 `en` 覆盖率与译文质量本身达标（[ADR-034]），但 **Phase 2/3 新写的两个旗舰视图（市场机制剖面 = 默认首屏、交易成本瀑布）几乎完全无视 `state.langMode`**，加上 1028 个 `detail` 字段从不翻译且始终渲染、[ADR-006] 的 UI 双语约定在多处漏网。按该计划的批次顺序落地，本条逐批补记。
@@ -1041,11 +1043,11 @@
    - **人工逐条判断后实改 4 处**：`cn-sse` `trading_currency` / `settlement_currency`、`cn-szse` `settlement_currency` 的 `Renminbi` → `RMB`（全库 20 家同字段既成写法是 ISO 代码/简称，`Renminbi` 是孤例）；`za-jse` `board_lot_size` 的「lot size … minimum board-lot」同句混用统一为 `board lot`。
    - **判断为不改的**：散文里的 "the renminbi"（小写、作普通名词，是正确英文，不是漂移）；`br-b3` 的 `round lot`（B3 自身英文材料不统一，留待维护者决断，不在本轮替他拍板）；derivatives 语境的 `lot size` / `contract size`（标准英文，非 lot 概念）。
 2. **house style 落进 `schema/glossary.yml` 头注**（货币 / 集合竞价 / 最小交易单位三条 + 上述「同名不同概念」的警告），与 `check_en_terms.py` 互相指向。
-3. **修确定性小错**：`tw-twse` 的 `网路资讯商店` → `網路資訊商店`。这个是简繁混种的错字（网/资/讯 是简体字形，路 同形），TWSE 官方写作「證交所網路資訊商店」（已开官网核对确认）。改了三处：`zh`、`en` 里的括注、以及来源标题——来源标题按官方页名原文写全（「證交所網路資訊商店（Data E-Shop）」）。**未动**同文件其余简体文本：本所 `source_lang: zh`，全库 `zh` 列统一简体是既定约定，`quote` 才是繁体原文锚点。
+3. **修确定性小错**：`tw-twse` `historical_data_availability` 的来源标题原写作简繁混种的 `证交所网路资讯商店（Data E-Shop）`，改为 TWSE 官方页名原文「證交所網路資訊商店（Data E-Shop）」（已开官网核对确认）。`zh` / `en` 散文里的店名按全库「`zh` 列统一简体、`quote` 作繁体原文锚点」的既定约定保持简体 `网路资讯商店`（与同句『公开资讯观测站』一致）；同文件其余简体文本一并不动。
+
+> 补记（2026-08-31，收尾审查）：ADR-048 的 `**日期：**` 行此前被本条挤到 ADR-050 之前、成了孤儿，已移回；本条 `tw-twse` 简繁修订初版把 `zh` / `en` 散文也改成了繁体、与同句『公开资讯观测站』不一致，已按上述约定收敛回简体。同批还清掉 `zhNoteBlock()` 未用形参、`check_en_terms.py` 头注与 `glossary.yml` house style 对齐、站点 `<title>` 接语言开关。
 
 **日期：** 2026-08-31
-
-**日期：** 2026-08-30
 
 ### ADR-050 — Phase 3 第三棒（数据层）：交割管线的 `default_management.spec` 形状 + `guarantee_model` 枚举 + 20 家回填
 

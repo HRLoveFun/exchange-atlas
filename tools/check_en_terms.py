@@ -23,12 +23,14 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data" / "exchanges"
 
 # 概念组：标准写法（house style，与 schema/glossary.yml 头注一致）→ 需要报告的偏离写法。
-# 每项 (正则, 说明)，正则用 \b 词界，大小写不敏感。
+# 每项 (正则, 说明)，正则用 \b 词界；默认**大小写敏感**（`Renminbi` 只想抓拼全称的那种，
+# 不想抓散文里小写 "the renminbi"），需不敏感的写法在正则里自带 (?i)。
 CONCEPTS = {
     "currency": {
-        "standard": "RMB（首次出现拼 Renminbi）",
+        "standard": "短值字段用 ISO 代码 / 通用简称（RMB / USD / HKD…）",
         "variants": [
-            (r"\bRenminbi\b", "非标准：house style 用 RMB，首次出现时再拼全称 Renminbi"),
+            (r"\bRenminbi\b", "短值字段应作 RMB；散文里小写 the renminbi 作普通名词是正确英文、"
+                              "非漂移——本条只匹配大写 Renminbi，见到即人工核该处是短值还是散文"),
             (r"\bCNY\b", "非标准：house style 用 RMB（CNY 是 ISO 代码，仅在确实引 ISO 语境时保留）"),
             (r"\bRMB\b", None),  # 标准写法，只统计不报告
         ],
@@ -36,19 +38,19 @@ CONCEPTS = {
     "auction": {
         "standard": "Opening Auction / Closing Auction",
         "variants": [
-            (r"\bcall auctions?\b", "需逐案判断：glossary 标准是 Opening/Closing Auction；"
-                                    "但部分市场官方即称 call auction（如 SSE），沿用官方名时应全所一致"),
-            (r"\bopening auctions?\b", None),
-            (r"\bclosing auctions?\b", None),
+            (r"(?i)\bcall auctions?\b", "需逐案判断：glossary 标准是 Opening/Closing Auction；"
+                                        "但部分市场官方即称 call auction（如 SSE），沿用官方名时应全所一致"),
+            (r"(?i)\bopening auctions?\b", None),
+            (r"(?i)\bclosing auctions?\b", None),
         ],
     },
     "lot": {
         "standard": "board lot",
         "variants": [
-            (r"\bround lots?\b", "需逐案判断：house style 默认 board lot；美股官方用 round lot，沿用即合法"),
-            (r"\btrading units?\b", "需逐案判断：house style 默认 board lot；日本官方用 trading unit，沿用即合法"),
-            (r"\blot sizes?\b", "非标准：house style 用 board lot"),
-            (r"\bboard lots?\b", None),
+            (r"(?i)\bround lots?\b", "需逐案判断：house style 默认 board lot；美股官方用 round lot，沿用即合法"),
+            (r"(?i)\btrading units?\b", "需逐案判断：house style 默认 board lot；日本官方用 trading unit，沿用即合法"),
+            (r"(?i)\blot sizes?\b", "非标准：house style 用 board lot"),
+            (r"(?i)\bboard lots?\b", None),
         ],
     },
 }
@@ -77,7 +79,7 @@ def main():
         hits = {pat: [] for pat, _ in cfg["variants"]}
         for eid, line_no, value in iter_en_values():
             for pat, _ in cfg["variants"]:
-                if re.search(pat, value, re.IGNORECASE):
+                if re.search(pat, value):  # 大小写敏感；需不敏感的正则自带 (?i)
                     hits[pat].append((eid, line_no, value))
         for pat, note in cfg["variants"]:
             found = hits[pat]
