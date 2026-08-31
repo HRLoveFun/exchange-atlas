@@ -17,6 +17,7 @@
 
 退出码：发现问题为 1，否则 0。接入 `make check`。
 """
+import bisect
 import re
 import sys
 from pathlib import Path
@@ -124,35 +125,39 @@ def _starts_regex(prev):
     return prev in REGEX_KEYWORDS
 
 
-def enclosing_callees(src, lit_start, literals):
-    """由内向外列出所有包裹该字面量的一层层调用的标识符。
+def enclosing_callees(src, lit_start, literals, lit_lo=None):
+    """由内向外列出包裹该字面量的一层层调用的标识符。
 
     只要任意一层是 t() / tSel() 就豁免——t("…" + x + (cond ? "（约 " : ""))
     里内层的条件表达式不该被当成漏网串。
+
+    性能：调用方只判断 EXEMPT_CALLEES 是否出现，故一旦回溯到某层是
+    t() / tSel() 就提前返回，不必再走到文件头（大文件里逐字回溯是主要
+    耗时来源）。判断「位置是否落在某个字符串字面量内」也改用二分，
+    不再对全部字面量做线性扫描。
     """
+    if lit_lo is None:
+        lit_lo = [a for a, _ in literals]
     out = []
     depth = 0
     i = lit_start - 1
     while i >= 0:
-        owner = None
-        for a, b in literals:
-            if a <= i < b:
-                owner = a
-                break
-        if owner is not None:
-            i = owner - 1
+        k = bisect.bisect_right(lit_lo, i) - 1
+        if k >= 0 and literals[k][0] <= i < literals[k][1]:
+            i = literals[k][0] - 1
             continue
         ch = src[i]
         if ch == ")":
             depth += 1
         elif ch == "(":
             if depth == 0:
-                m = CALLEE_RE.search(src[:i])
-                out.append(m.group(1) if m else "")
+                m = CALLEE_RE.search(src[max(0, i - 80):i])
+                name = m.group(1) if m else ""
+                out.append(name)
+                if name in EXEMPT_CALLEES:
+                    return out
             else:
                 depth -= 1
-        elif ch == "\n":
-            pass
         i -= 1
     return out
 
