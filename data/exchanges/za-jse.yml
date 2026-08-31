@@ -456,7 +456,7 @@ market_structure:
 
   board_lot_size:
     zh: "统一为1股，不设整手/最小交易单位限制"
-    en: "A uniform lot size of 1 share for every instrument, with no minimum board-lot requirement"
+    en: "A uniform board lot of 1 share for every instrument, with no minimum board-lot requirement"
     sources:
       - title: "Volume 00E – Trading and Information Overview for Equity Market v4.09（clientportal.jse.co.za PDF）"
         url: https://clientportal.jse.co.za/Content/JSE%20Contract%20Specification%20Items/Volume%2000E%20-%20Trading%20and%20Information%20Overview%20for%20Equity%20Market%20v4.09.pdf

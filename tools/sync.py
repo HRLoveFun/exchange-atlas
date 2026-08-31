@@ -6,9 +6,10 @@
   2. 把数据文件里的「简写字段」展开成完整事实信封（继承章节 _meta）
   3. 生成 docs/data/{manifest,matrix,freshness,glossary,taxonomy,_schema}.json
      与 docs/data/exchanges/<id>.json（前端直接 fetch 这些，不解析 YAML）
-  4. 重写五处 GENERATED 标记块：
+  4. 重写六处 GENERATED 标记块：
        PROJECT/ROADMAP.md      progress-matrix, health-summary
-       README.md               exchange-list
+       README.md               exchange-list（中文名 + 中文地区）
+       README.en.md            exchange-list（官方英文名 + 英文地区，方案 D）
        PROJECT/GLOSSARY.md     全文
        PROJECT/OPEN-QUESTIONS.md  auto-issues
 
@@ -424,19 +425,34 @@ def apply_blocks(path: Path, blocks: dict):
 # 两边不允许出现第二份「怎么生成这段内容」的逻辑。
 
 def build_enum_label_maps(enums):
+    """每个词表给 zh / en 两张 id→标签的表；README 与 README.en.md 的覆盖
+    范围表各取一张（方案 D）。"""
     return {
         "region": {v["id"]: v["label_zh"] for v in (enums.get("region") or {}).get("values", [])},
+        "region_en": {v["id"]: v["label_en"] for v in (enums.get("region") or {}).get("values", [])},
     }
 
 
-def render_exchange_list(exchanges_expanded, enum_label_maps):
+def render_exchange_list(exchanges_expanded, enum_label_maps, lang="zh"):
+    """覆盖范围表。`lang="en"` 时列头与地区走英文、名称取官方英文名
+    （`name_native.en`），供 README.en.md 用。"""
     if not exchanges_expanded:
-        return "（暂无交易所数据）"
-    region_map = enum_label_maps["region"]
-    lines = ["| ID | 名称 | 地区 |", "|---|---|---|"]
+        return "（暂无交易所数据）" if lang == "zh" else "(No exchange data yet)"
+    region_map = enum_label_maps["region" if lang == "zh" else "region_en"]
+    header = "| ID | 名称 | 地区 |" if lang == "zh" else "| ID | Name | Region |"
+    lines = [header, "|---|---|---|"]
     for eid, ex in sorted(exchanges_expanded.items()):
         region = region_map.get(ex.get("region"), ex.get("region") or "")
-        lines.append(f"| `{eid}` | {ex.get('name_zh', '')} | {region} |")
+        if lang == "zh":
+            name = ex.get("name_zh", "")
+        else:
+            nn = ex.get("name_native") or {}
+            name = nn.get("en") if isinstance(nn, dict) else None
+            if not name:
+                # 官方英文名缺失时退回中文名，而不是留空——留空会让表格整列断掉，
+                # 且「这家所没有官方英文名」本身不是读者需要在此处知道的信息。
+                name = ex.get("name_zh", "")
+        lines.append(f"| `{eid}` | {name} | {region} |")
     return "\n".join(lines)
 
 
@@ -603,6 +619,7 @@ def main():
     enum_label_maps = build_enum_label_maps(enums)
 
     apply_blocks(ROOT / "README.md", {"exchange-list": render_exchange_list(exchanges_expanded, enum_label_maps)})
+    apply_blocks(ROOT / "README.en.md", {"exchange-list": render_exchange_list(exchanges_expanded, enum_label_maps, lang="en")})
     apply_blocks(PROJECT_DIR / "ROADMAP.md", {
         "progress-matrix": render_progress_matrix(taxonomy, raw_exchanges, exchanges_expanded),
         "health-summary": render_health_summary(freshness_rows),
@@ -614,7 +631,7 @@ def main():
     glossary_md_path = PROJECT_DIR / "GLOSSARY.md"
     glossary_md_path.write_text(render_glossary_md(glossary) + "\n", encoding="utf-8")
 
-    print(f"[sync] {len(exchanges_expanded)} 家交易所 → docs/data/ 产物已生成，5 处 GENERATED 块已更新")
+    print(f"[sync] {len(exchanges_expanded)} 家交易所 → docs/data/ 产物已生成，6 处 GENERATED 块已更新")
 
 
 if __name__ == "__main__":

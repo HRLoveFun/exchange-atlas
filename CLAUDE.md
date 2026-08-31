@@ -17,7 +17,8 @@ exchange-atlas《全球交易所图鉴》：用统一框架横向记录全球主
 | 文件 | 唯一负责 | 绝不写（改为指向） |
 |---|---|---|
 | `CLAUDE.md`（本文件） | 铁律、职责边界、降级方案 | 决策理由 → `DECISIONS.md`；命令列表 → `Makefile`（跑 `make help`） |
-| `README.md` | 对外定位、免责声明、授权 | 干活流程 → skill；进度 → `ROADMAP.md` |
+| `README.md` | 对外定位（中文）、免责声明、授权 | 干活流程 → skill；进度 → `ROADMAP.md` |
+| `README.en.md` | 对外定位（英文），与 `README.md` **手工同步**（除生成块） | 同 `README.md` 的「绝不写」 |
 | `Makefile` | **命令的唯一权威** | — |
 | `schema/taxonomy.yml` | 字段结构、双语标签、矩阵列归属、时效等级、原文要求 | 具体数据值 → `data/`；字段 `spec` 的形状 → `schema/spec.yml` |
 | `schema/glossary.yml` | 术语译法唯一裁决 | 字段结构 → `taxonomy.yml` |
@@ -30,7 +31,7 @@ exchange-atlas《全球交易所图鉴》：用统一框架横向记录全球主
 | `PROJECT/GLOSSARY.md` | ⚠️ 由 `schema/glossary.yml` 生成，**不要手改** | — |
 | `.claude/skills/add-exchange/` | 可执行步骤 | 铁律复述 → 引用本文件章节号，如"见 CLAUDE.md §二" |
 
-生成块（`<!-- BEGIN:GENERATED ... -->`）只在五处使用：`ROADMAP.md` 的 progress-matrix 与 health-summary、`README.md` 的 exchange-list、`GLOSSARY.md` 全文、`OPEN-QUESTIONS.md` 的 auto-issues。这些由 `make sync` 重新生成；`make check` 会验证生成块内容与重新生成的结果一致，跑完 `make sync` 后 `git diff` 应为空——不为空说明有文档忘了同步。
+生成块（`<!-- BEGIN:GENERATED ... -->`）只在六处使用：`ROADMAP.md` 的 progress-matrix 与 health-summary、`README.md` 与 `README.en.md` 的 exchange-list（同一份数据的中英两种渲染，见 `sync.render_exchange_list(lang=...)`）、`GLOSSARY.md` 全文、`OPEN-QUESTIONS.md` 的 auto-issues。这些由 `make sync` 重新生成；`make check` 会验证生成块内容与重新生成的结果一致，跑完 `make sync` 后 `git diff` 应为空——不为空说明有文档忘了同步。
 
 ---
 

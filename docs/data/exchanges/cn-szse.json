@@ -2,7 +2,8 @@
   "id": "cn-szse",
   "name_zh": "深圳证券交易所",
   "name_native": {
-    "zh-Hans": "深圳证券交易所"
+    "zh-Hans": "深圳证券交易所",
+    "en": "Shenzhen Stock Exchange (SZSE)"
   },
   "official_languages": [
     "zh-Hans"
@@ -181,7 +182,7 @@
       },
       "settlement_currency": {
         "zh": "人民币（B股为港元）",
-        "en": "Renminbi (Hong Kong dollars for B-shares)",
+        "en": "RMB (HKD for B-shares)",
         "verified": "2026-08-14",
         "confidence": "medium",
         "enum": null,

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>全球交易所图鉴 exchange-atlas</title>
-  <meta name="description" content="用统一框架横向记录全球主要交易所的交易机制与市场制度，每条事实可溯源、标注核实日期。" />
+  <meta name="description" content="用统一框架横向记录全球主要交易所的交易机制与市场制度，每条事实可溯源、标注核实日期。A unified framework for comparing trading mechanics and market rules across major global exchanges; every fact is traceable to a source and dated." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
@@ -18,7 +18,7 @@
           <span class="brand-en">exchange-atlas</span>
         </span>
       </a>
-      <nav class="header-tabs" aria-label="视图">
+      <nav class="header-tabs" aria-label="视图 Views">
         <button type="button" class="tab-btn" data-view="trading-day">市场机制剖面 <span class="en">Market Mechanics</span></button>
         <button type="button" class="tab-btn" data-view="cost-waterfall">交易成本瀑布 <span class="en">Cost Waterfall</span></button>
         <button type="button" class="tab-btn" data-view="matrix">对比矩阵 <span class="en">Matrix</span></button>
@@ -26,19 +26,23 @@
         <button type="button" class="tab-btn" data-view="health">数据健康度 <span class="en">Health</span></button>
       </nav>
       <div class="header-actions">
-        <button type="button" id="langToggle" class="action-btn" title="切换数据语言模式">中文</button>
-        <button type="button" id="themeToggle" class="action-btn" title="切换明暗主题">🌓</button>
-        <a class="action-btn" href="https://github.com/HRLoveFun/exchange-atlas" target="_blank" rel="noopener noreferrer" title="GitHub 仓库">GitHub</a>
+        <!-- title= 是属性，没法用双 span 切换，改由 data-title-zh / data-title-en 驱动（applyLang()） -->
+        <button type="button" id="langToggle" class="action-btn" data-title-zh="切换数据语言模式" data-title-en="Switch data language">中文</button>
+        <button type="button" id="themeToggle" class="action-btn" data-title-zh="切换明暗主题" data-title-en="Switch light / dark theme">🌓</button>
+        <a class="action-btn" href="https://github.com/HRLoveFun/exchange-atlas" target="_blank" rel="noopener noreferrer" data-title-zh="GitHub 仓库" data-title-en="GitHub repository">GitHub</a>
       </div>
     </div>
   </header>
 
   <main id="app">
-    <div class="loading" id="loadingIndicator">加载中…</div>
+    <div class="loading" id="loadingIndicator"><span class="i18n-zh">加载中…</span><span class="i18n-en">Loading…</span></div>
   </main>
 
   <footer class="page-footer">
-    <p>本项目为研究性二手整理，规则以各交易所官方发布为准，不构成投资建议。数据 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>，代码 MIT。</p>
+    <p>
+      <span class="i18n-zh">本项目为研究性二手整理，规则以各交易所官方发布为准，不构成投资建议。数据 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>，代码 MIT。</span>
+      <span class="i18n-en">An independent secondary research compilation. Rules are as officially published by each exchange; this is not investment advice. Data <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>, code MIT.</span>
+    </p>
   </footer>
 
   <script src="assets/app.js"></script>

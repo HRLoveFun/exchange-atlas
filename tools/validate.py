@@ -18,7 +18,7 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
   6. verified 不得是未来日期
   7. 来源域名已在 SOURCES.md 登记；且若某 confidence: high 字段的全部来源域名在
      SOURCES.md 都标为「第三方」，直接 fail（CLAUDE.md 二第3条：第三方来源 confidence 上限 medium）
-  8. 生成块新鲜度：五处 GENERATED 块内容 == 用 sync.py 同一批函数重新算出来的内容
+  8. 生成块新鲜度：六处 GENERATED 块内容 == 用 sync.py 同一批函数重新算出来的内容
   9. docs/data/*.json 新鲜度：磁盘内容 == 重新生成的内容（忘了跑 make sync 时报错）
   10. 路径引用：文档里反引号包住、首段是仓库顶层条目的路径必须存在（非仓库路径片段
       如站内相对路径 res/pc/js/x.js 或绝对路径 /tmp/x.html 不属校验对象）
@@ -301,6 +301,7 @@ def validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchange
 
     checks = [
         (ROOT / "README.md", "exchange-list", sync.render_exchange_list(exchanges_expanded, enum_label_maps)),
+        (ROOT / "README.en.md", "exchange-list", sync.render_exchange_list(exchanges_expanded, enum_label_maps, lang="en")),
         (PROJECT_DIR / "ROADMAP.md", "progress-matrix", sync.render_progress_matrix(taxonomy, raw_exchanges, exchanges_expanded)),
         (PROJECT_DIR / "ROADMAP.md", "health-summary", sync.render_health_summary(freshness_rows)),
         (PROJECT_DIR / "OPEN-QUESTIONS.md", "auto-issues", sync.render_auto_issues(taxonomy, raw_exchanges, exchanges_expanded)),

@@ -3,7 +3,7 @@
 
 id: cn-sse
 name_zh: 上海证券交易所
-name_native: {zh-Hans: 上海证券交易所}
+name_native: {zh-Hans: 上海证券交易所, en: "Shanghai Stock Exchange (SSE)"}
 official_languages: [zh-Hans]
 source_lang: zh
 region: apac
@@ -82,7 +82,7 @@ overview:
 
   trading_currency:
     zh: "人民币（A股）；美元（B股，规模很小且趋于边缘化）"
-    en: "Renminbi (A-shares); US dollar (B-shares, very small and increasingly marginal in scale)"
+    en: "RMB (A-shares); USD (B-shares, very small and increasingly marginal in scale)"
     sources:
       - title: 上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）
         url: https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf
@@ -92,7 +92,7 @@ overview:
 
   settlement_currency:
     zh: "人民币（B股为美元）"
-    en: "Renminbi (US dollars for B-shares)"
+    en: "RMB (USD for B-shares)"
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境
