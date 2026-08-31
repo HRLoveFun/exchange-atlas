@@ -302,7 +302,14 @@ def compute_trading_window(exchange_id, expanded_chapters):
     lunch_start_local = min(lunch_hours) if len(lunch_hours) >= 2 else None
     lunch_end_local = max(lunch_hours) if len(lunch_hours) >= 2 else None
 
-    offset_hours = datetime.datetime.now(ZoneInfo(iana)).utcoffset().total_seconds() / 3600
+    # utcoffset() 的签名是 Optional[timedelta]，但这里 now() 一定带 ZoneInfo tzinfo，
+    # 运行期不会返回 None。真拿到 None 说明时区解析异常，此时算出的 UTC 窗口是错的：
+    # 不能拿 0 兜底当成 UTC+0 悄悄写进产物（那会造出看似合理、实则偏移一整段时区的
+    # 甘特条），直接停下来更符合本项目对数据正确性的要求。
+    tz_offset = datetime.datetime.now(ZoneInfo(iana)).utcoffset()
+    if tz_offset is None:
+        sys.exit(f"[sync] 错误：无法解析 {exchange_id}（{iana}）的 UTC 偏移，拒绝按 UTC+0 生成交易窗口")
+    offset_hours = tz_offset.total_seconds() / 3600
 
     def to_utc(local_h):
         return None if local_h is None else local_h - offset_hours
@@ -579,11 +586,10 @@ def main():
     # 前端友好的 taxonomy 视图（不含内部注释，扁平化 leaf 字段路径）。
     # 注意 object 章节里也可能嵌套 list 字段（如 listing.boards）——不只是叶子字段，
     # 否则前端拿不到 item_schema，这部分数据就会被悄悄漏渲染。
-    taxonomy_out = {
-        "dimension_groups": taxonomy.get("dimension_groups", []),
-        "default_chapter": taxonomy.get("default_chapter"),
-        "chapters": [],
-    }
+    # 先攒成独立列表再组装 dict：taxonomy 来自 yaml.safe_load()（返回 Any），直接对
+    # taxonomy_out["chapters"] 取 .append 会把 Optional 混进 dict 值的联合类型里，
+    # 类型检查器据此报「None 没有 append」。独立变量的列表类型能正常推断出来。
+    taxonomy_chapters = []
     for ch in taxonomy["chapters"]:
         if ch.get("kind") == "list":
             fields_out = ch.get("item_schema", [])
@@ -601,10 +607,15 @@ def main():
                         "kind": "list", "path": ".".join(path), "label_zh": fdef["label_zh"], "label_en": fdef["label_en"],
                         "item_schema": fdef.get("item_schema", []),
                     })
-        taxonomy_out["chapters"].append({
+        taxonomy_chapters.append({
             "id": ch["id"], "chapter_no": ch.get("chapter_no"), "label_zh": ch["label_zh"],
             "label_en": ch["label_en"], "kind": ch.get("kind", "object"), "fields": fields_out,
         })
+    taxonomy_out = {
+        "dimension_groups": taxonomy.get("dimension_groups", []),
+        "default_chapter": taxonomy.get("default_chapter"),
+        "chapters": taxonomy_chapters,
+    }
     (DOCS_DATA / "taxonomy.json").write_text(dump_json(taxonomy_out), encoding="utf-8")
 
     for eid, ex in exchanges_expanded.items():
