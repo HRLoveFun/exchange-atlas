@@ -2269,9 +2269,9 @@
       "financial_transaction_tax": {
         "spec": {
           "rate": null,
-          "note": "来源已升级：Baker McKenzie Global Private M&A Guide (Australia) 明确『Stamp duty is not payable on share transfers』，澳大利亚对股份转让不课印花税式转让税，联邦层面亦无独立的金融交易税(FTT)。仍维持 rate: null（幽灵条）——一手来源仅证「无印花税式转让税」，未逐字出现「no financial transaction tax」字样；如需翻 type: none 需财政部/ATO 明确「无 FTT」的一手陈述，见 OPEN-QUESTIONS"
+          "note": "来源已升级：Baker McKenzie Global Private M&A Guide (Australia)（第三方律所综述，封顶 medium）明确『Stamp duty is not payable on share transfers』，澳大利亚对股份转让不课印花税式转让税。仍维持 rate: null（幽灵条）——该综述只证「无印花税式转让税」，未逐字出现「no financial transaction tax」字样；如需翻 type: none 需财政部/ATO 明确「无 FTT」的一手陈述，见 OPEN-QUESTIONS"
         },
-        "zh": "澳大利亚对股票等证券的买卖不征收一般性的金融交易税(FTT)：Baker McKenzie Global Private M&A Guide (Australia) 明确「Stamp duty is not payable on share transfers」，各州上市证券转让印花税亦已废除（见 stamp_duty）；联邦层面无独立的 FTT 税目。交易环节已核实的法定收费仅为 ASX 成交费与清算费。按 CLAUDE.md 第二节第四条，前述一手源仅证「无印花税式转让税」而未逐字出现「no FTT」，故仍记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。",
+        "zh": "澳大利亚对股票等证券的买卖不征收一般性的金融交易税(FTT)：Baker McKenzie Global Private M&A Guide (Australia) 明确「Stamp duty is not payable on share transfers」，各州上市证券转让印花税亦已废除（见 stamp_duty）；联邦层面无独立的 FTT 税目。交易环节已核实的法定收费仅为 ASX 成交费与清算费。按 CLAUDE.md 第二节第四条，前述第三方综述只证「无印花税式转让税」而未逐字出现「no FTT」，故仍记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。",
         "en": "Australia does not levy a general financial transaction tax (FTT) on share trades: Baker McKenzie's Global Private M&A Guide (Australia) states 'Stamp duty is not payable on share transfers', and state stamp duty on transfer of listed securities has been abolished (see stamp_duty); there is no separate federal FTT head of tax. The only statutory transaction-level charges verified are the ASX trade fee and clearing fee. Per the CLAUDE.md anti-hallucination rules the source positively establishes 'no stamp-duty-style transfer tax' but does not contain the literal phrase 'no FTT', so the spec remains rate: null (ghost bar) rather than type: none and is referred to OPEN-QUESTIONS.",
         "sources": [
           {
@@ -2280,7 +2280,7 @@
             "accessed": "2026-08-27"
           },
           {
-            "title": "Stamp duty and tax | Australia | Global Private M&A Guide（Baker McKenzie，一手税法综述）",
+            "title": "Stamp duty and tax | Australia | Global Private M&A Guide（Baker McKenzie，第三方律所税法综述）",
             "url": "https://resourcehub.bakermckenzie.com/en/resources/global-private-ma-guide-limited/asia-pacific/australia/topics/agreeing-the-acquisition-agreement/stamp-duty-and-tax",
             "accessed": "2026-09-01"
           }

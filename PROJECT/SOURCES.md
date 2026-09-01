@@ -418,8 +418,8 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `cahill.com` | 第三方（律所客户简报） | en | curl 常规 UA 200 | 与 us-nyse 一节引用同一份简报，说明SEC统一结算周期规则（Rule 15c6-1，2024-05-28起T+1）对全国性证券交易所（含纳斯达克）同等适用，非纳斯达克自身单独设定的规则；按 CLAUDE.md 二第3条，第三方来源 confidence 上限 medium
   - One-Day Settlement Cycle (T+1) To Begin May 28, 2024: https://www.cahill.com/publications/client-alerts/2024-04-29-one-day-settlement-cycle-t-1-to-begin-may-28-2024（HTTP 200，23KB）
 - `ir.nasdaq.com` | 官方（投资者关系站） | en | ⚠️ 本次多次尝试均 HTTP/2 stream 报错或超时（`curl: (92) HTTP/2 stream 1 was not closed cleanly`／`curl: (28) Operation timed out`），换 `--http1.1` 仍超时，与 `nasdaq.com`/`nasdaqtrader.com` 的可达性形成对比——同集团不同子域名反爬/限流行为不一致，值得记录；Nasdaq, Inc. 自身股票在 Nasdaq 交易所挂牌（NDAQ）这一事实原打算从这里的"Stock Information"页确认，未能拿到，改用 `nasdaq.com/articles` 与 `nasdaq.com/market-activity` 两个可达页面间接佐证，`overview.self_listed` 因此定为 `confidence: medium` 而非 `high` | 未抓取到可引用内容
-- `ecfr.gov`（美国联邦法规电子码，2026-09-01 A3 补充登记） | 官方（美国政府出版局） | en | curl + 常规 UA 200，eCFR 站点为 SPA、正文在 JS 包内，但 17 CFR 240.31 页面成功落盘（156KB，含『covered sale』法条定义） | `costs.regulatory_fees` 出处，eCFR 17 CFR 240.31 定义 Section 31 的『covered sale』（证券出售），坐实 SEC Section 31 费仅向卖方（covered sales）课征；⚠️ eCFR 为 SPA，单页 curl 可能只取到导航壳，本次 240.31 页恰好含正文
-  - 17 CFR 240.31 — Section 31 transaction fees: https://www.ecfr.gov/current/title-17/chapter-II/part-240/subject-group-ECFR88ac63dc03926d2/section-240.31
+- `ecfr.gov` — 17 CFR 240.31（Section 31 transaction fees，2026-09-01 A3 用于 `us-nasdaq`/`us-nyse` `costs.regulatory_fees`；2026-09-02 收尾审查复核） | 官方（联邦公报办公室） | en | **`/current/...section-240.31` 前端页面 2026-09-02 复测返回「Federal Register :: Request Access」访问闸**（对自动客户端），须走本节上方（`ecfr.gov` 首条）记录的 versioner API：`https://www.ecfr.gov/api/versioner/v1/full/{issue-date}/title-17.xml?section=240.31&part=240&chapter=II` + **必须带 `--compressed`**（该端点要求响应压缩，否则返回「requires response compression」错误） | 定义 Section 31 的『Covered sale means a sale of a security, other than an exempt sale or a sale of a security future...』，坐实 SEC Section 31 费按 covered sale 计征、落卖方（`side: sell`）。逐字引文经 versioner API 于 2026-09-01 核实；`.cache/us-nasdaq/` 已按 `/current/` URL 的 slug 手动播种该 XML，**不要盲目 `fetch-sources` 重跑此 URL**（会用访问闸页覆盖，同 [ADR-044] 坑）
+  - versioner API（带 `--compressed`）: https://www.ecfr.gov/api/versioner/v1/full/2026-08-01/title-17.xml?section=240.31&part=240&chapter=II
 
 ### 欧洲期货交易所 Eurex `de-eurex`
 - `eurex.com` | 官方 | de / en（官方英文版为主，德文版覆盖度低于英文版） | curl + 常规 UA 200，未见反爬（全程无限流，比 english.sse.com.cn 好抓得多） | 保证金具体数值走在线计算器（JS 交互），静态页只有方法论说明，产品级保证金参数需要用 Prisma Margin Calculator 交互获取或找按品种的公开参数文件，不能只靠抓静态 HTML。⚠️ 法律实体名是「Eurex Deutschland」（德国法批准设立，注册地法兰克福，受黑森州最高监管机关监督，不是联邦金融监管局BaFin——这点容易凭常识猜错，本次已实测确认），品牌名"Eurex"，隶属 Deutsche Börse Group（`group_id: deutsche-boerse-group`）
@@ -727,7 +727,7 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `www.ato.gov.au` | 官方（澳大利亚税务局） | en | curl 常规 UA 200 | 资本利得税/股息预扣税（costs 出处）
 - `www.austrac.gov.au` | 官方（AML/CTF 监管） | en | curl 常规 UA 200 | 客户身份识别（account_opening_requirements 出处）
 - `cepr.org` | 第三方（金融交易税研究库） | en | curl 常规 UA 200 | 澳大利亚无金融交易税佐证（costs.financial_transaction_tax，confidence 封顶 medium）
-- `resourcehub.bakermckenzie.com` | 第三方（律所，Global Private M&A Guide） | en | curl 常规 UA 200 | 澳大利亚对股份转让不课印花税（"Stamp duty is not payable on share transfers"，costs.financial_transaction_tax 一手佐证，confidence medium）
+- `resourcehub.bakermckenzie.com` | 第三方（律所，Global Private M&A Guide） | en | curl 常规 UA 200 | 澳大利亚对股份转让不课印花税（"Stamp duty is not payable on share transfers"，`au-asx.costs.financial_transaction_tax` 的第三方佐证，封顶 confidence medium；非一手税法条文，翻 `type: none` 仍需 ATO/财政部原文）
   - Stamp duty and tax | Australia | Global Private M&A Guide: https://resourcehub.bakermckenzie.com/en/resources/global-private-ma-guide-limited/asia-pacific/australia/topics/agreeing-the-acquisition-agreement/stamp-duty-and-tax
 
 ### 沙特交易所 Saudi Exchange (Tadawul) `sa-tadawul`
@@ -831,7 +831,7 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `www.kchipnews.com` | 第三方（半导体新闻） | ko | WebSearch 定位 | 市场背景（confidence 封顶 medium）
 - `taxnews.ey.com` | 第三方（EY 税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
 - `www.mondovisione.com` | 第三方（交易所资讯） | en | WebSearch 定位 | 市场结构背景（confidence 封顶 medium）
-- `taxsummaries.pwc.com` | 第三方（四大税务简报） | en | curl 常规 UA 200 | 韩国印花税税种定性（stamp tax 针对"制备证明财产权设立/转让/变更的文书者"，非证券转让；costs.stamp_duty 一手佐证，confidence medium）
+- `taxsummaries.pwc.com` | 第三方（四大税务简报） | en | curl 常规 UA 200 | 韩国印花税税种定性（stamp tax 针对"制备证明财产权设立/转让/变更的文书者"，非证券转让；`kr-krx.costs.stamp_duty` 的第三方佐证，封顶 confidence medium；`type: none` 据此标「暂定」，翻实需韩国《印花税法》一手条文）
   - Korea, Republic of - Corporate - Other taxes: https://taxsummaries.pwc.com/republic-of-korea/corporate/other-taxes
 
 - `elaw.klri.re.kr`（韩国法制研究院法律数据库英文版，2026-09-01 A3 补充登记） | 官方镜像（韩国法制研究院 KLRI 运营的法律英文数据库，含韩国现行法令英文译本） | en | curl + 常规 UA 200，正文为静态 HTML，逐字可抓取 | `costs.financial_transaction_tax` 出处，韩国《证券取引税法》(Securities Transaction Tax Law) 英文版明文以『transferor（让与人=卖方）』为纳税义务人，坐实韩国 STT 向卖方课征（side: sell）

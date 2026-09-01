@@ -732,7 +732,7 @@
         "spec": {
           "static_pct": null,
           "dynamic_pct": null,
-          "note": "静态价格监控（相对上次集合竞价价）+ 动态价格监控（相对最近成交价）触发 5 分钟波动性拍卖（含最多一次 2 分钟市价订单延期）；富时100 等分设不同静态/动态带宽（见 price_limits），故两个 pct 键均留 null；每次拍卖及延期后另加最长 30 秒随机"
+          "note": "静态价格监控（相对上次集合竞价价）+ 动态价格监控（相对最近成交价）触发 5 分钟波动性拍卖（含最多一次 2 分钟市价订单延期）；富时100 FE10 组静态 8%/动态 3%，FS10 组 10%/5%（见 price_limits），故两个 pct 键均留 null；每次拍卖及延期后另加最长 30 秒随机"
         },
         "zh": "静态价格监控（Static Price Monitoring）与动态价格监控（Dynamic Price Monitoring）触发后转入波动性拍卖（volatility auction），价格重新形成后恢复常规交易；每次拍卖及延期后另设最长30秒随机时间",
         "en": "Static and Dynamic Price Monitoring trigger a volatility auction; once the price re-forms, regular trading resumes; each auction/extension is followed by a random period of up to 30 seconds",

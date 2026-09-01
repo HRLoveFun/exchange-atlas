@@ -1311,15 +1311,16 @@ costs:
     confidence: low
 
   stamp_duty:
-    spec: {type: none, note: "坐实 type:none：一手源 PwC 韩国『Other taxes』将『Stamp tax』定义为对『制备证明财产权设立/转让/变更的文书者』课征（KRW 50–350,000），课税对象是文书而非证券转让；证券交易的流转税为『Securities transaction tax (STT)』（见 financial_transaction_tax）。故韩国对证券转让不征独立印花税税种，type: none。"}
-    zh: "韩国对证券转让不征「印花税」(stamp duty)这一独立税种——已坐实：PwC 韩国『Other taxes』明确韩国的 Stamp tax 是对『制备证明财产权设立/转让/变更的文书者』课征（KRW 50–350,000），课税对象是文书而非证券交易；本项目横向对比中对应的证券流转税是「证券交易税」(Securities Transaction Tax, STT)，现行税率见 financial_transaction_tax（2026年起KOSPI/KOSDAQ均为0.20%）。type: none。"
-    en: "Korea does not impose a stamp duty as a separate tax on securities transfers — now positively established: PwC Korea 'Other taxes' defines Korean stamp tax as levied on 'a person who prepares a document certifying the establishment, transfer, or change of rights to property in Korea' (KRW 50–350,000), i.e. on instruments, not on securities trading; the transaction-value turnover tax in cross-exchange comparison is the 'Securities Transaction Tax' (STT), whose current rate is in financial_transaction_tax (0.20% for both KOSPI and KOSDAQ from 2026). type: none."
+    spec: {type: none, note: "type: none（第三方综述支撑，暂定——见 OPEN-QUESTIONS）：PwC 韩国『Other taxes』（四大税务简报，封顶 medium）将『Stamp tax』定义为对『制备证明财产权设立/转让/变更的文书者』课征（KRW 50–350,000），课税对象是文书而非证券转让；证券交易的流转税为『Securities transaction tax (STT)』（见 financial_transaction_tax）。据此判韩国对证券转让不征独立印花税税种；翻实需韩国《印花税法》一手条文佐证"}
+    zh: "韩国对证券转让不征「印花税」(stamp duty)这一独立税种（第三方综述支撑、暂定）：PwC 韩国『Other taxes』明确韩国的 Stamp tax 是对『制备证明财产权设立/转让/变更的文书者』课征（KRW 50–350,000），课税对象是文书而非证券交易；本项目横向对比中对应的证券流转税是「证券交易税」(Securities Transaction Tax, STT)，现行税率见 financial_transaction_tax（2026年起KOSPI/KOSDAQ均为0.20%）。spec 记 type: none，但仅由四大税务简报支撑（非一手条文），已转 OPEN-QUESTIONS 待《印花税法》原文坐实。"
+    en: "Korea does not impose a stamp duty as a separate tax on securities transfers (third-party-summary basis, provisional): PwC Korea 'Other taxes' defines Korean stamp tax as levied on 'a person who prepares a document certifying the establishment, transfer, or change of rights to property in Korea' (KRW 50–350,000), i.e. on instruments, not on securities trading; the transaction-value turnover tax in cross-exchange comparison is the 'Securities Transaction Tax' (STT), whose current rate is in financial_transaction_tax (0.20% for both KOSPI and KOSDAQ from 2026). The spec is recorded as type: none but rests only on a Big-4 tax summary (not primary legislation) and is referred to OPEN-QUESTIONS pending the Korean Stamp Tax Act text."
     sources:
-      - title: Korea, Republic of - Corporate - Other taxes（PwC Tax Summaries，一手税法综述）
+      - title: Korea, Republic of - Corporate - Other taxes（PwC Tax Summaries，第三方四大税务简报）
         url: https://taxsummaries.pwc.com/republic-of-korea/corporate/other-taxes
         accessed: 2026-09-01
     quote: "Stamp tax is levied on a person who prepares a document certifying the establishment, transfer, or change of rights to property in Korea."
     confidence: medium
+    verified: 2026-09-01
 
   financial_transaction_tax:
     spec: {rate: 0.2, unit: pct, side: sell, note: "STT 2026 年起 KOSPI/KOSDAQ 均 0.20%（此前 KOSPI 0%、KOSDAQ 0.15%）；ETF/债券通常免征。side: sell 已由韩国《证券取引税法》英文版坐实——税法明文以『transferor（让与人=卖方）』为纳税义务人"}
@@ -1334,6 +1335,7 @@ costs:
         accessed: 2026-09-01
     quote: "The transferor of the relevant share certificates, etc., where share certificates, etc. are transferred by means of other than those provided in subparagraphs 1 and 2:"
     confidence: medium
+    verified: 2026-09-01
     detail: "原引用文本（未能从缓存源逐字核实，故降级为 medium）：\"KOSPI Market 0% 0.20% KOSDAQ Market 0.15% 0.20% ... Enacted rate will be effective for the securities transferred on or after 1 Jan 2026.\" 缓存的 EY 页面仅为 JS/登录墙外壳，未含文章正文，无法逐字核验，需重新抓取原始正文或改用官方税法来源坐实 2026 年税率。2026-09-01 A3 补充：韩国《证券取引税法》英文版已坐实 side: sell（transferor=让与人=卖方）。"
 
   capital_gains_tax:

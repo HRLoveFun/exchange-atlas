@@ -487,7 +487,7 @@ market_structure:
     confidence: high
 
   volatility_interruption:
-    spec: {note: "冷静期（Cooling-Off Period）5 分钟：撮合价超出滚动参考价价格带（见 price_limits）的委托被拒，冷静期内仍可在带内交易（非停牌）；结束后价格带按新参考价调整；与午休/收盘前/停牌重叠则提前结束"}
+    spec: {note: "冷静期（Cooling-Off Period）5 分钟：撮合价超出滚动参考价 ±10% 价格带（见 price_limits）的委托被拒，冷静期内仍可在带内交易（非停牌）；结束后价格带按新参考价调整；与午休/收盘前/停牌重叠则提前结束"}
     zh: "冷静期（Cooling-Off Period）持续5分钟：撮合价超出价格带的委托将被拒绝，冷静期内交易仍可在价格带内继续进行（非停牌）；冷静期结束后价格带随新参考价调整；冷静期若与午休/收盘前阶段/停牌/暂停交易重叠则提前结束"
     en: "The Cooling-Off Period lasts 5 minutes: an incoming order that would match outside the band is rejected while trading continues within the band (not a halt); after the period ends the band is recalculated from the new reference price; the period ends early if it coincides with the Mid-Day Break, Pre-Close Phase, a suspension or a trading halt"
     sources:

@@ -889,7 +889,7 @@
           "review_window_min": null,
           "deviation_threshold_pct": null,
           "resolution": "no_bust",
-          "note": "无交易所层级的『明显错误成交作废』机制——成交一经撮合即通知委托人并制作凭证。证券经纪商受托买卖发生错误的，依《证券经纪商受托买卖错帐及更正帐号处理作业要点》以经纪商名义开立的『错帐处理专户』处理：该专户买卖视同一般交易并按规定缴纳证券交易税，损益由经纪商承担；错误持仓在专户内平仓，原成交不撤销。事前防线：瞬间价格稳定措施与每日涨跌幅限制"
+          "note": "无交易所层级的『明显错误成交作废』机制——成交一经撮合即通知委托人并制作凭证。证券经纪商受托买卖发生错误的，依《证券经纪商受托买卖错帐及更正帐号处理作业要点》以经纪商名义开立的『错帐处理专户』处理：该专户买卖视同一般交易并按规定缴纳证券交易税，损益由经纪商承担；错误持仓在专户内平仓，原成交不撤销。事前防线：瞬间价格稳定措施（±3.5% 暂缓撮合 2 分钟，见 volatility_interruption）与每日涨跌幅限制"
         },
         "zh": "台湾证券交易所没有『成交价偏离参考价达某百分比、限时申请复核作废』的常规错误交易处理机制。买卖申报一经撮合成交，经纪商即通知委托人并制作凭证。证券经纪商受托买卖发生错误的，依营业细则以经纪商自己名义开立『错帐处理专户』处理——该专户买卖视同一般交易、按规定缴纳证券交易税，损益由经纪商承担，错误持仓在专户内平仓，原成交不予撤销",
         "en": "The TWSE has no routine erroneous-trade process of the US/EU type (a deviation threshold plus a time-limited request for review and cancellation). Once orders are matched, the broker notifies the client and prepares the records. Where a securities broker makes an execution error, it is handled under the Operating Rules through an 'error-account' opened in the broker's own name — trades in that account are treated as ordinary trades subject to securities transaction tax, gains and losses are borne by the broker, the erroneous position is closed out within the account, and the original trade is not cancelled",

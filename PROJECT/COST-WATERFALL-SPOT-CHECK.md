@@ -49,9 +49,15 @@
 
 1. **`note` 字符串里的数字完全没有机器覆盖**（5b 只查数值型叶子）。`cn-sse exchange_fees` 的 `0.0341‰`（深交所费率混进上交所字段）、`br-b3 exchange_fees` 的 `0.00500% / 0.00375%`、`fr-euronext FTT` 的「法国现行 0.3%」都是这类——图能正常渲染、数字错了没有任何信号。**建议后续给 `validate.py` 5b 加 note 字符串数字反查**（同字段 quote/zh/detail 三处任一命中即可），这是本次发现的最值钱的流程改进。
 2. **`type: none` 的正面依据普遍缺失**（31 个里 13 个降级）。「交易所费率页没列这个税目」被当成了「不征收」的证据，但费率页只覆盖交易所自身收费，根本不管国家税制；第三方「国别税费综述」（CEPR FTT 清单、IRAS GST 页、Euronext 市场总览页）只能支撑它们各自主题内的事实，也借不来「无此税」。真正的正面依据在税法/税务局/立法机构官网（如 `de-xetra` 的 Bundestag 废止条文、`sg-sgx` 的 IRAS 豁免规则页、`jp-jpx` 的 MOF 税改纲要——这三家过了）。
-   > **[2026-09 A2 后续坐实]** 13 个降级点已逐条用 `make fetch` 重抓税法/税务局原文复核。结论：**`rate: null` 本身是审慎正确的终态**——一手税务局页通常只覆盖自身税种、**不证伪** FTT/监管费，能翻回 `type: none` 的仅限拿到「肯定性不征」一手陈述者。本轮坐实并**改回 `type: none`** 的 2 个：`kr-krx stamp_duty`（PwC 韩国：stamp tax 针对「制备证明财产权设立/转让/变更的文书者」，非证券转让）、`hk-hkex financial_transaction_tax`（IRD 印花税制度 + 港交所费率页：港股从价交易税负即印花税）。**源升级但仍维持 `rate: null`** 的 1 个：`au-asx financial_transaction_tax`（Baker McKenzie Australia "Stamp duty is not payable on share transfers"——证「无印花税式转让税」但未逐字出现 "no FTT"，故不硬翻）。仍缺干净一手源、维持 `rate: null` 的 2 个：`ca-tsx regulatory_fees`（CSA 监管费页 307 跳转失败、且主题为注册费非按笔监管费）、`kr-krx regulatory_fees`（KRX 收费表为 JS 表格、无干净 verbatim）。余 8 点维持 `rate: null` 并已在 OPEN-QUESTIONS #88 留痕。
+   > **[2026-09 A2 后续坐实，2026-09-02 收尾审查修订]** 13 个降级点已逐条用 `make fetch` 重抓税法/税务局原文复核。结论：**`rate: null` 本身是审慎正确的终态**——一手税务局页通常只覆盖自身税种、**不证伪** FTT/监管费，能翻回 `type: none` 的仅限拿到「肯定性不征」**一手**陈述者；第三方综述至多支撑「暂定 type: none」。终态：`kr-krx stamp_duty` → `type: none`（**第三方综述 PwC 支撑、标暂定**）；`hk-hkex financial_transaction_tax` → **收尾审查回退 `rate: null`**（IRD 引文讲印花税减免、不支撑「无独立 FTT」）；`au-asx financial_transaction_tax` → 第三方律所综述（Baker McKenzie）仍 `rate: null`；`ca-tsx`/`kr-krx regulatory_fees` → 缺干净源维持 `rate: null`。余 8 点维持并在 OPEN-QUESTIONS #88 留痕。
 3. **`tiered` / `side` 是随时间漂移的键，没有复核时点意识**。`kr-krx exchange_fees` 的 `tiered: true` 挂在一段已过期（2026-02-13 到期）的临时阶梯费率上，渲染层会按「阶梯首档」标注一个其实不存在的档位；`side: sell/buy`（韩国 STT、南非 STT、英国 SDRT）在 quote/zh 里都没有方向陈述。这类键需要连同生效日一起核对。
    > **[2026-09 A3 后续坐实]** 6 个 `side`/费率补强点已用一手源落地，**5 个坐实**：`kr-krx financial_transaction_tax` 的 `side: sell`（韩国《证券取引税法》英文版 elaw.klri.re.kr，明文以 transferor=让与人=卖方为纳税人）；`za-jse stamp_duty` 的 `side: buy`（SARS 原文 "applies to the purchase" + 经纪人可向受让人/买方追偿）；`us-nasdaq regulatory_fees` 的 `side: sell` + "covered sales"（eCFR 17 CFR 240.31 定义 covered sale 为证券出售）；`hk-hkex financial_transaction_tax`（翻 `type: none`，见上条）；`br-b3 financial_transaction_tax` 的 `side: buy`（B3 费率页 IOF 0% "incoming resources" = 买入侧）。**1 个残差**：`uk-lse stamp_duty` 的 `side: buy`（SDRT 由买方缴纳是真实制度且字段已 high，但 gov.uk/HMRC 页面为 SPA、未取到逐字「买方缴纳」原文，待抓 HMRC 非 SPA 端点或 legislation.gov.uk 条文）。
+
+   > **[2026-09-02 收尾审查修订（[ADR-058] 收尾修订段）]** 对 A2/A3 做第二视角复核，两处回退：
+   > - `hk-hkex financial_transaction_tax` **回退 `type: none` → `rate: null`**：所引 IRD 页「stamp duty relief is available for the transfer of ... shares」讲的是印花税**减免**，不构成「无独立 FTT」的正面依据。
+   > - `za-jse stamp_duty` `side: buy` **降为「保留 + 待补强」**：本字段 `quote` 未含 ADR-058 声称的「applies to the purchase」措辞（`side: buy` 不移除——南非 STT 通行由买方承担，且渲染层缺省回退 `both` 更错）。
+   > - `kr-krx stamp_duty` `type: none` **标「暂定」**：仅由第三方综述 PwC Tax Summaries 支撑（封顶 medium），非一手条文。
+   > - `us-nasdaq regulatory_fees` 的 eCFR 引文已逐字补入 `quote`（`/current/` 页对自动客户端设访问闸，经 versioner API 核实）。
 
 ## 逐家明细
 
@@ -64,7 +70,7 @@
 | `clearing_fees` | A | PASS | 0.225 ⊆ quote；note 的 0.35/0.10/5 在 detail |
 | `regulatory_fees` | C | PASS | zh 正面陈述：ASIC 征费面向持牌实体、不按投资者每笔计收 |
 | `stamp_duty` | C | PASS | zh 引法条正面表述 "marketable securities … are not dutiable property" |
-| `financial_transaction_tax` | C | **DOWNGRADE** | 来源仅 ASX 费率表，无联邦/州税制正面陈述；→ `rate: null`。**[2026-09 A2 后续]** 源升级为 Baker McKenzie Australia（"Stamp duty is not payable on share transfers"，已入 .cache/au-asx），但仍维持 `rate: null`（一手源未逐字出现 "no FTT"，不硬翻 `type: none`） |
+| `financial_transaction_tax` | C | **DOWNGRADE** | 来源仅 ASX 费率表，无联邦/州税制正面陈述；→ `rate: null`。**[2026-09 A2 后续]** 源升级为 Baker McKenzie M&A Guide（**第三方律所综述**，"Stamp duty is not payable on share transfers"），仍 `rate: null`（未逐字出现 "no FTT"，且第三方源不硬翻 `type: none`） |
 
 ### br-b3（6 spec：4 PASS / 2 FIX）
 
@@ -158,7 +164,7 @@
 | `clearing_fees` | A | PASS | 0.0042/0.002/0.0021 全 ⊆ quote；"per side"；NIL 说明 |
 | `regulatory_fees` | A | PASS | components 两项 ⊆ quote；已暂停的投资者赔偿征费未计入求和且 note 说明 |
 | `stamp_duty` | B | PASS | 0.1 有 zh 支撑；「买卖双方各自缴纳」支撑 both |
-| `financial_transaction_tax` | C | **DOWNGRADE** | detail 自述「『未见』不等于穷尽性排除」→ `rate: null`。✅**[2026-09 A3 后续]** 据 IRD 印花税制度 + 港交所费率页坐实「港股从价交易税负即印花税、无独立 FTT」→ 数据层已改回 `type: none`（medium） |
+| `financial_transaction_tax` | C | **DOWNGRADE** | detail 自述「『未见』不等于穷尽性排除」→ `rate: null`。⚠️**[2026-09-02 收尾审查]** A2 曾据 IRD 页翻 `type: none`，收尾审查判定引文（印花税**减免**）不支撑结论 → **回退 `rate: null`**，IRD 源保留为补充 |
 
 ### in-nse（6 spec：6 PASS）
 
@@ -188,7 +194,7 @@
 | `exchange_fees` | B | **FIX** | `tiered: true` 挂在已过期的临时阶梯上（2025-12-15→2026-02-13），且「限价/市价」是订单类型档非首档 → 移除 `tiered`，`rate: 0.0023` 保留为统一费率（quote "flat 0.0023%"） |
 | `clearing_fees` | D | PASS | note 诚实标注第三方数字未核实 |
 | `regulatory_fees` | C | **DOWNGRADE** | quote 空、confidence low、自述「未核实到」→ `rate: null` |
-| `stamp_duty` | C | **DOWNGRADE** | quote 只讲 2026 STT 上调，无「无印花税税种」正面陈述 → `rate: null`。✅**[2026-09 A2 后续]** 据 PwC 韩国「Other taxes」坐实（stamp tax 针对「制备证明财产权设立/转让/变更的文书者」，非证券转让）→ 数据层已改回 `type: none`（medium） |
+| `stamp_duty` | C | **DOWNGRADE** | quote 只讲 2026 STT 上调，无「无印花税税种」正面陈述 → `rate: null`。⚠️**[2026-09 A2 + 09-02 收尾审查]** 据 PwC 韩国「Other taxes」（stamp tax 针对「文书者」、非证券转让）→ `type: none`，**但收尾审查标「暂定」：仅第三方综述支撑（封顶 medium），翻实需韩国《印花税法》一手条文** |
 | `financial_transaction_tax` | B | PASS | 0.2 有 zh 支撑。✅**[2026-09 A3 后续]** `side: sell` 已由韩国《证券取引税法》英文版（elaw.klri.re.kr，明文 transferor=让与人=卖方）坐实 |
 
 ### sa-tadawul（6 spec：6 PASS）
@@ -255,5 +261,5 @@
 | `exchange_fees` | B | PASS | 0.5 有 zh/detail 支撑；note 说明有 trade cap（数值因 PDF 图像型未摘引 → 已知局限） |
 | `clearing_fees` | B | PASS | 0.0038/312 有 zh/detail 支撑；`currency: ZAR`；`per_trade_side` 有 "each trade leg" 支撑 |
 | `regulatory_fees` | C | **DOWNGRADE** | quote 只讲 STT；note 自相矛盾（既断言无按笔监管费又承认存在 Investor Protection Levy 未核实）→ `rate: null` |
-| `stamp_duty` | D | PASS | `rate: null` 恰当（quote 为逗号小数 "0,25%"）。✅**[2026-09 A3 后续]** `side: buy` 已由 SARS 原文（"applies to the purchase" + 可向受让人/买方追偿）坐实；⚠️ 25 bp 幽灵条结构性缺口仍在（逗号小数进不了 5b 逐字反查） |
+| `stamp_duty` | D | PASS | `rate: null` 恰当（quote 为逗号小数 "0,25%"）。⚠️**[2026-09 A3 + 09-02 收尾审查]** ADR-058 曾记「`side: buy` 由 SARS "applies to the purchase" 坐实」，收尾审查：**本字段 quote 未含该措辞** → `side: buy` 保留（南非 STT 通行由买方承担；渲染层缺省回退 `both` 更错）+ 待补 SARS/立法方向措辞；25 bp 幽灵条结构性缺口仍在 |
 | `financial_transaction_tax` | C | **DOWNGRADE** | quote 只讲 STT 立法施行 → `rate: null` |

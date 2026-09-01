@@ -1163,7 +1163,7 @@ costs:
     confidence: high
 
   regulatory_fees:
-    spec: {rate: 20.60, unit: per_million, currency: USD, side: sell, note: "SEC Section 31 费；2026-04-04 起 $20.60/百万美元（此前 $0.00）；仅卖方（covered sales，eCFR 定义『covered sale』为证券出售，对应卖方）——A3 已坐实"}
+    spec: {rate: 20.60, unit: per_million, currency: USD, side: sell, note: "SEC Section 31 费；2026-04-04 起 $20.60/百万美元（此前 $0.00）；仅卖方——17 CFR 240.31(a)(6) 定义『covered sale』为『a sale of a security』，Section 31 费按『covered sale』计征，落卖方"}
     zh: "SEC Section 31交易费（Regulatory Transaction Fee）：现行费率为每百万美元成交额20.60美元，2026年4月4日起生效（此前一段时期费率为0，见detail）；由交易所代收后转付SEC，是本项目防幻觉铁律中明确点名的美国市场费率反例（费率随SEC每年度公告周期性调整，非固定不变）"
     en: "SEC Section 31 Regulatory Transaction Fee: currently $20.60 per million dollars of covered securities transactions, effective April 4, 2026 (the rate was $0.00 for a preceding period — see detail); collected by the exchange and remitted to the SEC. This fee is periodically re-set by SEC fee-rate advisories (annually), so the rate is not fixed"
     detail: |
@@ -1177,11 +1177,12 @@ costs:
       - title: "Equity Trader Alert #2026-18: Regulatory Transaction Fee Rate Adjustment per SEC Section 31（nasdaqtrader.com官网）"
         url: https://www.nasdaqtrader.com/TraderNews.aspx?id=ETA2026-18
         accessed: 2026-08-24
-      - title: "17 CFR 240.31 — Section 31 transaction fees; defines 'covered sale' (eCFR)"
+      - title: "17 CFR 240.31 — Section 31 transaction fees（eCFR，含 'covered sale' 定义；/current/ 页对自动客户端设访问闸，正文经 eCFR versioner API 于 2026-09-01 逐字核实）"
         url: https://www.ecfr.gov/current/title-17/chapter-II/part-240/subject-group-ECFR88ac63dc03926d2/section-240.31
         accessed: 2026-09-01
-    quote: "Pursuant to the SEC's Fee Rate Advisory for Fiscal Year 2026, the Securities and Exchange Commission has announced that the Section 31 transaction fee rate applicable to securities transactions on national securities exchanges and over-the-counter markets will be set at $20.60 per million dollars, effective April 4, 2026. Until that date, the prevailing rate of $0.00 per million dollars will remain in effect."
+    quote: "Pursuant to the SEC's Fee Rate Advisory for Fiscal Year 2026, the Securities and Exchange Commission has announced that the Section 31 transaction fee rate applicable to securities transactions on national securities exchanges and over-the-counter markets will be set at $20.60 per million dollars, effective April 4, 2026. Until that date, the prevailing rate of $0.00 per million dollars will remain in effect.／Covered sale means a sale of a security, other than an exempt sale or a sale of a security future, occurring on a national securities exchange or by or through any member of a national securities association otherwise than on a national securities exchange."
     confidence: high
+    verified: 2026-09-01
 
   stamp_duty:
     zh: ""

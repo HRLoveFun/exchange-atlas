@@ -14,7 +14,7 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 
 **核心原则：任何一个事实只在一处手写，其余位置要么生成、要么引用、要么被校验。** 发现自己在两个文件写同一件事，说明这张表哪里划错了，先改表，别继续复制。
 
-同一事实允许有多种「渲染」而不算"写两遍"：`data/` 字段里 `enum`（受控词表值）、`spec`（量化机制的机器形式，见 [ADR-035]）、`zh`/`en`（人读散文）是同一事实的不同渲染，`quote` 是它们共同的 verbatim 底稿。纪律：驱动图形的量化值只在 `spec` 手写，`zh`/`detail` 可复述但不得携带 `spec` 没有的量化事实（`make check` 校验 5b 反查 `spec` 数值 ⊆ `quote`，只覆盖 `confidence: high` 的数值叶子；`spec.note`（及 `*_note`）内嵌数字由 5c 不限 confidence 反查同字段 `quote`/`zh`/`detail`，见 [ADR-054]/[ADR-058]）；medium/low 数值叶子仍靠人。
+同一事实允许有多种「渲染」而不算"写两遍"：`data/` 字段里 `enum`（受控词表值）、`spec`（量化机制的机器形式，见 [ADR-035]）、`zh`/`en`（人读散文）是同一事实的不同渲染，`quote` 是它们共同的 verbatim 底稿。纪律：驱动图形的量化值只在 `spec` 手写，`zh`/`detail` 可复述但不得携带 `spec` 没有的量化事实（`make check` 校验 5b 反查 `spec` 数值 ⊆ `quote`，只覆盖 `confidence: high` 的数值叶子；`spec.note`（及 `*_note`）内嵌数字由 5c 不限 confidence 反查**本交易所文件内所有 `quote`/`zh`** 加本字段 `detail`〔note 常跨字段引 `price_limits` 等的阈值〕，见 [ADR-054]/[ADR-058]）；medium/low 数值叶子仍靠人。
 
 | 文件 | 唯一负责 | 绝不写（改为指向） |
 |---|---|---|
