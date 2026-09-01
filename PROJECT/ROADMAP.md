@@ -2,21 +2,41 @@
 
 进度状态放这里；「为什么这么排」去 `DECISIONS.md`，这里不重复。
 
-## 当前阶段：**v2.0 高度可视化转向**（2026-08-29 校准）——主视图从对比矩阵改为单市场「市场机制剖面」（旧名「交易日平面图」，[ADR-042] 更名），新增结构化 `spec` 层。加固组 A1/A2（[ADR-033]/[ADR-034]）、Phase 0 范式定案（[ADR-035]/[ADR-036]）、Phase 1a `spec` 层实装 + 5 家示范（[ADR-037]）、Phase 1b 全部完成（[ADR-038] + [ADR-039]）、**Phase 2 · 市场机制剖面实装完成**（[ADR-040]，`app.js` `renderTradingDay` 手写 SVG，成为默认首屏兼第一个 tab）、**收口审查四轮 + schema 对齐交易员心智模型**（[ADR-042]：第五章补 3 字段 + 4 个 spec 形状 + 覆盖边界写明，数据回填并入 Phase 3）、**Phase 2 收口 gate 实测达标**（2026-08-30，用户执行「30 秒看懂」非专业读者实测，通过）、**Phase 3 首棒 · [ADR-042] 三字段 + 四 spec 形状 20 家回填完成**（2026-08-30，[ADR-043]）、**`.cache` 符号链接 bug 修复**（[ADR-044]，PR #36）、**Phase 3 第二棒 · 成本瀑布数据层 + 渲染层首版完成**（2026-08-30，[ADR-045] 数据层：`schema/spec.yml` 加 `costs.*` `cost_layer` 形状，全 20 家 103 个 costs spec；[ADR-047] 渲染层首版：`renderCostWaterfall` 镜像双瀑布 SVG + 顶层 tab「交易成本瀑布」，仅前端三文件、`docs/data/` 零 diff，headless 截图核对 13 家 × 明暗通过）。另 [ADR-046] 删除 `tier`（标杆批次）身份字段。**Phase 3 第三棒 · 交割管线可视化设计定案**（2026-08-30，[ADR-048]：① 双泳道并列 ② 违约瀑布作主图下方常驻附图、层级堆叠按「谁的钱」上色 ③ 新增 `guarantee_model` 枚举）。**Phase 3 第三棒（数据层）完成**（2026-08-31，[ADR-050]：`schema/enums.yml`+`spec.yml`+`taxonomy.yml` 加 `guarantee_model` 枚举与 `clearing.default_management` spec 形状〔`bearer` 5 值〕；全 20 家 `default_management.spec`〔12 完整瀑布 + 1 lines_of_defence + 7 unstructured 三态〕+ `guarantee_model`〔8 high + 12 medium〕回填；`make check` 全绿、`progress-matrix` 零 diff、`health-summary` +20；未动前端）。**Phase 3 第三棒（英文版可用性修订）完成**（2026-08-31，[ADR-049]：市场机制剖面 / 成本瀑布 / 时区甘特条接语言开关、`detail` 与 `spec` note 英文态折叠降级、`check_ui_i18n.py` 并入 `make check`、站点外壳 + `README.en.md` 双语切换、`check_en_terms.py` 术语漂移清单）。**Phase 3 第三棒（渲染层）完成**（2026-09-01，[ADR-051]：`renderSettlementPipeline` 双泳道 SVG〔现货 T+N 流水线 + 衍生品盯市循环·到期抽象区块〕+ 常驻违约瀑布附图按 bearer 上色 + `guarantee_model` 选 CCP 节点图形 + 顶层 tab「交割管线」；纯前端四文件〔含 `check_ui_i18n.py` 性能修复〕、`docs/data/` 零 diff、从一开始接语言开关；Chrome headless 8 家 × 中英 × 明暗核对通过、五视图无回归）。**下一步：成本瀑布视觉迭代（交互式会话，见 [ADR-047] 已知局限）；交割管线视觉迭代（[ADR-051] 已知局限：深色预防层过淡、T+1 现货所右半留白）。之后 上市生命周期 → 监管图 → 参与者 → 风险旗标。**
+> **怎么读这份文件**
+> - **现在该做什么** → 一、当前状态
+> - **数据现状快照** → 二、数据看板（`make sync` 算出，不手改）
+> - **当前版本的计划与进度** → 三、v2.0 计划：高度可视化转向
+> - **v0.x / v1.x 已全部完成** → 四、历史归档，只在需要追溯时读
 
-## 阶段路线
+---
 
-- [x] **v0.0 立项 + 可达性探针** — 仓库骨架、`CLAUDE.md`、`PROJECT/` 四件套、`schema/`、`Makefile`、三个 tool 跑通、LICENSE、`.claude/settings.json`；五家标杆抓取方式探明（见 `SOURCES.md`）
-- [x] **v0.1 骨架验证** — `taxonomy.yml` 十一章字段字典、上交所+港交所填满、前端矩阵+档案视图最小可用、Pages 上线；人工抽检 20 字段（2026-08-13，基本准确，反馈已回写 `SOURCES.md`「来源 URL 应精确到信息页」一节）
-- [x] **语言模型简化**（v0.1 收尾后、v0.2 开始前，独立迁移）— 数据语言从 zh/native/native_lang 三态简化为 zh/en 两态 + 交易所级 `source_lang` 标记，见 `PROJECT/DECISIONS.md` [ADR-013]；两家现有交易所数据已迁移
-- [x] **v0.2 标杆扩展** — NYSE / JPX / Eurex 三家数据均已补齐（均 `source_lang: en`）；Eurex 是首个衍生品交易所样本，暴露出 `listing` 章节与 `settlement_cycle`/`short_selling`/`intraday_reversal` 三个字段对非股票交易所不适配，见 `PROJECT/OPEN-QUESTIONS.md` 框架性问题第17条。矩阵维度组已按实测填充率重新校准（[ADR-014]）；`add-exchange` skill 已吸收三次实操教训定型
-- [x] **v0.3 前端完善** — 修复语言模式切换的遗留 bug：交易所名称（矩阵行/档案页标题/浮层）、矩阵行地区标签、健康度视图字段名此前都不随模式切换，只是英文模式下用 `en_required` 字段本身的回退掩盖了部分（见 [ADR-013] 的回退设计），这几处是取值路径完全绕过了 langMode 判断；格子浮层加双语标题、章节面包屑、加载态；健康度视图加交易所/类型筛选并支持点行跳出处；矩阵加标杆批次筛选；新增时区甘特条视图（`#view=timezone`），推导方式见 `PROJECT/DECISIONS.md` [ADR-015]
-- [x] **v1.0 横向铺开** — 按 Tier 扩到 20+ 家；Wave 1（8 家）+ Wave 2（7 家）均已完成，加上 v0.1/v0.2 五家标杆共 20 家；计划任务/工程设计/验收标准/进度见下方「v1.0 计划」一节
-- [x] **前端阅读性优化**（v1.0 收尾后）— 矩阵工具栏去掉「标杆批次 Tier」筛选框与搜索框（v0.3 加的两个交互，20 家规模下地区筛选已够用，搜索是冗余项；`v0.3` 那条历史记录不改，此处记录后续变更）；时区甘特条午休时段从"柱状条空白+右侧括号文字"改为独立蓝色色块；正文字号/行高、矩阵斑马纹与悬停高亮、档案页字段卡片间距与长文本限宽等一轮可读性调整，见 `PROJECT/DECISIONS.md` [ADR-025]
-- [x] **v2.0 前置加固 A1**（2026-08-29）— `tools/validate.py` 补完防幻觉铁律的机器强制：第三方来源 `confidence` 封顶、`NUMBER_RE` 收紧杜绝垃圾 token、路径引用校验收窄到仓库内路径、结构化 `spec` 值的逐字反查（Phase 1 前 no-op）。0 存量违规，均为 preventive；`OPEN-QUESTIONS` 框架性问题 #6/#35 已解决删除、#12 更新为"此路不通"路标。见 `PROJECT/DECISIONS.md` [ADR-033]
-- [x] **v2.0 前置加固 A2 + Phase 0**（2026-08-30）— A2 尾巴收口（英文回填 #45 全库清零、CACHE_MISS 归零、`verify_quotes` 走 expand，[ADR-034]）；Phase 0 范式与数据模型定案（修订 ADR-005、`spec` 层契约 + `schema/spec.yml`、零构建/诚实渲染/非现货降级、框架性问题批量裁定含 `covered_only` 落地，[ADR-035] + [ADR-036]）。详见下方「v2.0 计划」。
+## 一、当前状态
 
-## 交易所填充进度
+### 当前阶段：v2.0 高度可视化转向（2026-08-29 校准）
+
+主视图从对比矩阵改为单市场「市场机制剖面」（旧名「交易日平面图」，[ADR-042] 更名），新增结构化 `spec` 层作为图形的数据源。方向与契约定案见 [ADR-033]～[ADR-036]，工程取舍不在此重复。
+
+### 下一步（按此顺序）
+
+1. **成本瀑布视觉迭代**（交互式会话）— [ADR-047] 已知局限：单一费种远大于其余时左半留白、全零市场「合计 0.00 bp」略尴尬、暗色「此侧不征」虚线偏弱、按股/定额费折算较粗
+2. **交割管线视觉迭代** — [ADR-051] 已知局限：深色预防层色块偏淡、T+1 现货所右半留白；违约瀑布 `resource` 短语无 `en`、英文态仍中文（同 [ADR-049] 对 `detail` 的结构性处置，触发条件见 [ADR-051]）
+3. **其后按交易员价值继续**：上市生命周期（一并落地 [ADR-036] #5 章节级"仅现货适用"标记）→ 监管图 → 参与者 → 风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）
+
+完整清单与每章的小型 `spec` 补充见三节 `- [ ] **Phase 3 · 其余章节可视化**`。
+
+### 最近完成（滚动窗口，只留最近 3 条；更早的见三节）
+
+- **2026-09-01 · Phase 3 第三棒（渲染层）· 交割管线**（[ADR-051]）— `renderSettlementPipeline` 双泳道 SVG + 常驻违约瀑布附图 + 顶层 tab「交割管线」；纯前端四文件、`data/` 与 `docs/data/` 零 diff
+- **2026-08-31 · Phase 3 第三棒（数据层）**（[ADR-050]）— `default_management.spec` 形状 + `guarantee_model` 枚举 + 20 家回填；`progress-matrix` 零 diff、`health-summary` +20
+- **2026-08-31 · 英文版可用性修订四批次执行完**（[ADR-049]，横切条目）— 剖面/瀑布/甘特条接语言开关、`detail` 与 `spec` note 英文态折叠降级、站点外壳 + `README.en.md` 双语切换
+
+---
+
+## 二、数据看板
+
+两处表格均由 `make sync` 扫描 `data/` 算出（`CLAUDE.md` §四：🟡 会一直挂着，直到字段真的被坐实），生成块内**不手改**。
+
+### 交易所填充进度
 
 <!-- BEGIN:GENERATED progress-matrix -->
 | 交易所 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
@@ -45,7 +65,7 @@
 列说明：2 基本信息、3 监管与法律环境、4 产品体系、5 市场结构与交易机制、6 上市、持续监管与退市、7 指数体系、8 清算、结算与交割、9 市场参与者、10 市场数据与技术基础设施、11 交易成本与税费、12 风险与特殊考量
 <!-- END:GENERATED progress-matrix -->
 
-## 数据健康度摘要
+### 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
 共 1864 个已填字段，其中 0 个超过复核阈值待复核。
@@ -74,102 +94,13 @@
 | `za-jse` | 123 | 0 |
 <!-- END:GENERATED health-summary -->
 
-## v1.0 计划：横向铺开到 20+ 家
+---
 
-工程设计与取舍依据见 `PROJECT/DECISIONS.md` [ADR-016]（候选清单与分波依据）、[ADR-017]（并行执行模式与质量门槛）；验收阈值见 `CLAUDE.md` 四。本节只管任务清单与进度，不重复决策理由。
-
-### 工程设计摘要
-
-- **执行模式**：不再逐家串行，改为每波内用 Agent 工具并行派发子代理，一个子代理独立跑完一家交易所的 `add-exchange` skill 全部步骤；波次结束后统一 `make build` 复核一次。
-- **验收标准**：每家新交易所人工抽检 10 个字段核对 `quote` 与原始出处，通过率需 ≥95%（阈值不变，样本量比 v0.1 缩小，理由见 [ADR-017]）；未过阈值只暂停复核该家，不影响同批次其他交易所。每波结束后额外过一遍各子代理执行记录，把新教训回写 `add-exchange` skill，再开下一波。
-- **退出标准**：两波（15 家）全部完成且各自通过验收 → 总数达到 20 家；`region: mena_africa` 与 `americas` 不再是明显空白；至少新增一个"一所多国"结构样本（Euronext）供 `OPEN-QUESTIONS.md` 框架性问题第17条积累更多真实证据。
-
-### Wave 1 启动前置条件
-
-- [x] `review_system` 矩阵列的枚举覆盖率问题——实际未在 Wave 1 启动前解决（见 [ADR-018] 执行进度补记），Wave 1/2 完成后作为高优先级待办于 2026-08-19 解决，枚举从 3 值扩到 5 值，见 `PROJECT/DECISIONS.md` [ADR-023]。
-
-### Wave 1（8 家，优先，待启动）
-
-| 交易所（草案 id） | 地区（初判，待建档时核实） | 压测点 |
-|---|---|---|
-| `us-nasdaq` 纳斯达克 | americas | 同法域对照 NYSE（做市商电子市场 vs DMM） |
-| `cn-szse` 深圳证券交易所 | apac | 同国对照 SSE（创业板 vs 科创板） |
-| `uk-lse` 伦敦证券交易所 | europe | 脱欧后独立监管框架 |
-| `de-xetra` 法兰克福证券交易所/Xetra | europe | 同集团对照 Eurex（`deutsche-boerse-group` 内首个现货所） |
-| `sg-sgx` 新加坡交易所 | apac | 地区补充 |
-| `au-asx` 澳大利亚证券交易所 | apac | 地区补充 |
-| `in-nse` 印度国家证券交易所 | apac（待核实） | 地区补充 |
-| `sa-tadawul` 沙特交易所 | mena_africa | 该地区首个样本（现有 5 家里是 0） |
-
-进度：8/8 已完成（并行子代理模式，2026-08-14/15）。人工抽检见 `PROJECT/DECISIONS.md` [ADR-017] 执行记录；子代理踩出的新坑已回写 `.claude/skills/add-exchange/SKILL.md`。
-
-### Wave 2（7 家，视 Wave 1 结果调整，非最终锁定）
-
-| 交易所（草案 id） | 地区（初判） | 压测点 |
-|---|---|---|
-| `fr-euronext` Euronext | europe | 一所横跨多国市场，结构性新样本 |
-| `kr-krx` 韩国交易所 | apac | 地区补充 |
-| `ca-tsx` 多伦多证券交易所 | americas | 地区补充 |
-| `br-b3` 巴西 B3 | americas | 拉美首个样本 |
-| `tw-twse` 台湾证券交易所 | apac | 地区补充 |
-| `ch-six` 瑞士证券交易所 | europe | 地区补充 |
-| `za-jse` 约翰内斯堡证券交易所 | mena_africa | 非洲首个样本 |
-
-进度：7/7 已完成（并行子代理模式，2026-08-16/17，中途两次撞到账号月度支出限额，恢复后续跑完成）。人工抽检见 `PROJECT/DECISIONS.md` [ADR-017] 执行记录；子代理踩出的新坑已回写 `.claude/skills/add-exchange/SKILL.md`。
-
-### 当前进度
-
-- 20/20+ 已完成（v0.1/v0.2 五家标杆 `cn-sse`/`hk-hkex`/`us-nyse`/`jp-jpx`/`de-eurex` + v1.0 Wave 1 八家 `us-nasdaq`/`cn-szse`/`uk-lse`/`de-xetra`/`sg-sgx`/`au-asx`/`in-nse`/`sa-tadawul` + v1.0 Wave 2 七家 `fr-euronext`/`kr-krx`/`ca-tsx`/`br-b3`/`tw-twse`/`ch-six`/`za-jse`，见上方填充进度表）
-- v1.0 横向铺开阶段已完成，达成 20 家目标；`review_system` 枚举覆盖率问题（下方"Wave 1 启动前置条件"）未在 Wave 1 启动前解决，属流程疏漏，见 `PROJECT/DECISIONS.md` [ADR-018] 执行进度补记，已于 2026-08-19 解决（[ADR-023]，连带修了 `delivery_method` 同类问题）；市场结构/指数体系两处 schema 缺口已设计并示范填一家（[ADR-019]）。9 家交易所的衍生品市场机制已按 [ADR-017] 并行子代理模式补齐，人工抽检 90 字段全部通过，见 [ADR-021]。前端矩阵/章节结构审查见 [ADR-022]。
-- **英文版审查（2026-08-20 启动）**：走查发现"中英夹杂"症状，拆成两层——① `en_required` 字段真违规（9 处，`cn-sse`/`hk-hkex`/`tw-twse`），已补齐数据并给 `validate.py` 加永久机器校验，附带查出并修正一处 `hk-hkex` 撮合规则误引衍生品市场规则的数据错误，见 [ADR-024]；② 114 个非强制双语字段在英文模式下仍回退显示中文，方案②（前端加视觉标记区分"设计不需双语"与"真漏填"）已实施，见 [ADR-026]，方案①（批量翻译114字段）随 v1.1 一并评估，不单独开工。
-- **悬案批量清理（2026-08-20/21）**：`sa-tadawul`/`kr-krx`/`tw-twse`/`ch-six`/`br-b3`/`fr-euronext` 六家共 17 条 `PROJECT/OPEN-QUESTIONS.md` 具体数据悬案，13 条解决、1 条重新定性为"官方确认不披露"、3 条如实保留（sa-tadawul TASI基日、kr-krx KOSDAQ基日、fr-euronext市值口径不在本次任务范围），见 [ADR-027]。
-- **下一步方向已定：深度优先（v1.1 Category B 数据深耕），Wave 3 暂缓**，见 `PROJECT/DECISIONS.md` [ADR-028]。详见下方「v1.1 计划」一节。（2026-08-30 [ADR-041] 进一步将 Wave 3 / 广度扩张定为按需可选能力，不再是计划阶段——见下方「v2.0 计划」末尾。）
-
-## v1.1 计划：Category B 数据深耕（Batch 1/3 / Batch 2/3 / Batch 3/3 均已完成，2026-08-27）
-
-依据与规模估计见 `PROJECT/DECISIONS.md` [ADR-028]，本节只管任务清单与进度，不重复决策理由。
-
-### 前置事项（批量执行前必须先解决，否则会重演 [ADR-018] 的教训）
-
-- [x] **`clearing.initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency`/`last_trading_day_rule` 四字段语义歧义澄清**——已于 2026-08-22 解决，见 [ADR-030]：仿照 `delivery_method` 先例扩容 `clearing.derivatives` 子块，顶层收窄为「现货语境」、衍生品语境统一移到子块；`tw-twse` 数据本就符合收窄后的顶层语义无需改动，`de-eurex`（纯衍生品）无需改动，`br-b3` 三个字段已完成迁移（`quote`/`sources` 原样搬移，未新造事实）。批量填充的前置阻塞已清除。
-
-### 候选字段清单（36 个确定 Category B 字段，2026-08-21 审计；另 4 个原待澄清语义的 `clearing` 字段已于 2026-08-22 解决语义歧义，见 [ADR-030]，现并入候选范围，合计 40 个）
-
-| 章节 | 填充率 | 字段（括号内为当前 X/20） |
-|---|---|---|
-| `regulation` | 57% | `capital_controls`(2)、`foreign_ownership_limit`(3)、`investor_protection`(5)、`disclosure_requirements`(7) |
-| `listing` | 42% | `post_delisting_venue`(0)、`listing_process_duration`(1)、`delisting_transition_period`(4)、`delisting_process`(7)、`suspension_resumption`(10)、`continuing_obligations`(11) |
-| `clearing` | 43% | `default_management`(4)；另 4 个字段的语义歧义已解决（[ADR-030]），`clearing.derivatives.*` 镜像字段已就绪，可与 `default_management` 一并纳入批量填充范围 |
-| `participants` | 27% | `broker_landscape`(0)、`investor_structure`(1)、`suitability_management`(1)、`account_opening_requirements`(3)、`foreign_access_channel`(7) |
-| `infrastructure` | 18% | `data_pricing_model`(0)、`historical_data_availability`(0)、`data_latency`(1)、`market_data_levels`(1)、`major_outage_history`(2)、`access_methods`(8)、`trading_system_name`(13) |
-| `costs` | 19% | `implicit_costs_note`(0)、`regulatory_fees`(0，预期多数合理留空)、`clearing_fees`(2)、`commission_structure`(2)、`financial_transaction_tax`(2)、`capital_gains_tax`(3)、`dividend_withholding_tax`(6)、`stamp_duty`(9)、`exchange_fees`(10) |
-| `risks` | 35% | `liquidity_risk_note`(0)、`political_risk_note`(0)、`enforcement_note`(6)、`regulatory_change_risk_note`(11) |
-
-### 顺带处理（同一批交易所研究窗口内一起做，不单独开工）
-
-- 英文缺失字段回填（`OPEN-QUESTIONS.md` 框架性问题第45条，114 个非强制双语字段，集中在 `cn-sse`/`tw-twse`/`hk-hkex`/`cn-szse`；`en_required` 真违规部分已由 [ADR-024] 解决，这里指剩余部分）
-- `sec.gov`/`finra.org`/`dtcc.com` 反爬突破尝试（框架性问题14/15/32条，集中影响 `us-nyse`/`us-nasdaq`）
-
-### 执行设计（草案，启动时确认）
-
-- 按交易所分批（非按字段），沿用 [ADR-017] 并行子代理模式，7-8 家/批分 2-3 批
-- 质量门槛沿用 [CLAUDE.md 四]（≥95%），抽检量比照 [ADR-017]（10 字段/所）
-- 退出标准：8 个当前 0/20 的字段（`implicit_costs_note`/`regulatory_fees`/`data_pricing_model`/`historical_data_availability`/`post_delisting_venue`/`broker_landscape`/`liquidity_risk_note`/`political_risk_note`）全部转为"有值+来源"或"明确 detail 说明不适用/查不到"；其余字段填充率显著提升，不强求 100%
-
-### 进度
-
-- 前置事项已解决（2026-08-22，见 [ADR-030]），批量填充的阻塞已清除。
-- **Batch 1（8 家）已完成（2026-08-22/25）**：`cn-sse`/`tw-twse`/`hk-hkex`/`cn-szse`/`us-nyse`/`us-nasdaq`/`uk-lse`/`jp-jpx`。选取逻辑：优先覆盖「顺带处理」一节点名的两个批量任务——前四家一并回填英文缺失字段，`us-nyse`/`us-nasdaq` 一并尝试反爬突破，`uk-lse`/`jp-jpx` 补地区多样性。执行结果、字段明细、人工抽检通过率、反爬突破方法与并行执行的工程教训见 `PROJECT/DECISIONS.md` [ADR-031]，本条不重复：全库已填字段 1162→1360（+198）；8 个子代理各自 10 字段自查 + 协调者独立复核 16+1 个字段，全部通过，远超 ≥95% 门槛；`sec.gov`/`finra.org` 反爬已攻克（方法见 `PROJECT/SOURCES.md`「突破记录」），`dtcc.com` 仍未攻克但已降级绕过；`make build` 0 错误 0 警告。
-- **Batch 2/3（剩余 12 家：`au-asx`/`br-b3`/`ca-tsx`/`ch-six`/`de-eurex`/`de-xetra`/`fr-euronext`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse`）已完成（2026-08-27）**。按原执行设计分两批（各 6 家）并行子代理执行，沿用 [ADR-017] 模式但收紧隔离：子代理只写各自 `data/exchanges/<id>.yml` 并把来源落盘到 `.cache/<id>/`，`PROJECT/SOURCES.md`/`OPEN-QUESTIONS.md`/`schema/glossary.yml` 由协调者统一合并，避免共享文件冲突。`make build` 0 错误 0 警告；全库已填字段 1360→1766（+406）。8 个原 0/20 字段（`implicit_costs_note`/`regulatory_fees`/`data_pricing_model`/`historical_data_availability`/`post_delisting_venue`/`broker_landscape`/`liquidity_risk_note`/`political_risk_note`）在 12 家中全部转为有值（个别 `low` 置信度，属"查不清已如实标注"，见 `OPEN-QUESTIONS.md` auto-issues）。质量关：协调者用脚本对全部 40 个 Category B 高置信字段做"quote 是否在落盘来源原文中"反查，命中 19/22 不匹配后逐一核实——其中 19 个实为来源页未落盘（现场抓取官方页均可命中原文），仅 3 个确属 quote 与原文不符（`ca-tsx` 两个 participants 字段引用的 OSC NI 31-103 着陆页无规则正文；`fr-euronext` `clearing.derivatives.delivery_method` 的 "EDSP=CTD/CF" 公式原文未出现），已修正（前两例降级 `medium` 保留官方来源、后一例改为 PDF 中真实存在的 EDSP 措辞并重新 verbatim 引用）。`kr-krx` 多处 costs/infrastructure 字段仍 `low`，属真实未核实，已记入悬案。
-- **Repo 级 verbatim-quote 反查（2026-08-27，接续 Batch 2）**：用脚本对全库 20 家共 ~671 个 `confidence: high` 字段的 `quote` 逐一比对落盘 `.cache/<id>/` 原文与现场抓取来源，先发现 48 处 quote 与来源不符（多为缺 `sources` 或 quote 为改写/编造），分 11 个交易所并行子代理修复——其中确属编造/改写并已修正的代表：`fr-euronext` `clearing.derivatives.delivery_method`（"EDSP=CTD/CF" 公式原文无）、`ch-six` `clearing.csd_name`（quote 指非 CSD 内容）、`ca-tsx` 两 participants 字段（引 OSC NI 31-103 着陆页无规则正文）、`hk-hkex` `clearing.ccp_name`（quote 指 CSDC 非 HKSCC）、`tw-twse` `market_structure.closing_mechanism`、`cn-sse` 若干（数字跨表格行无法成连续 verbatim）。修复后重查，可证伪的失配降至 0；残留"未命中"均为 JS 渲染页（curl 拿不到正文）或来源页未落盘，属检查器局限非数据缺陷。教训：verify 脚本必须做 HTML 标签剥离+PDF 文本提取，否则表格单元/标签会制造大量假阴性。该反查已固化为 `tools/verify_quotes.py`：离线只比对 `.cache/<id>/_manifest.json` 中实际落盘的引用来源（没抓过的来源记为 CACHE_MISS 不误判），`--live` 额外现场抓取（JS 页/被拦记为 LIVE_ERR）；已接入 `make check`（仅 FAIL 才非零退出），并加 `make verify-quotes` / `make verify-quotes-live` 两个独立命令。
-- **落盘全部引用来源 + 复核（2026-08-27，接续上条）**：新增 `tools/fetch_sources.py`（收割 yml 里所有 `sources` URL 落盘 `.cache`，按内容类型定扩展名、为 PDF/Office 生成 `.txt` 伴随文本、sec.gov 用 Fair Access UA），批量抓得 632 个来源。重跑反查后 OK 由 27 升到 929、FAIL 由 44 暴露并归零——其中确属"quote 非 verbatim / 引用错页 / 抓到 404/JS 壳/图片 PDF"的 34 处，分 11 个交易所并行子代理修复（重引正确来源并改写 verbatim quote，或降级 `medium` 保留 sources）。最终 `make build` 全绿：validate 0/0、verify_quotes OK=929 FAIL=0。残 61 个 CACHE_MISS 为引用来源未落盘或错误页，按 CLAUDE.md §四 留人工抽检。
-- **Batch 3/3 收尾（2026-08-27，v1.1 全部完成）**：① `SOURCES.md` 末尾「Batch 2 补充登记」堆块已按交易所 id 去重并入各 `### <exchange>` 小节；② Batch B 并行执行教训回写 `.claude/skills/add-exchange/SKILL.md`（verbatim 反查步骤、不可核验即降级 `medium` 的规则）；③ 每家抽 10 个「全部引用来源已落盘」的 `high` 字段做 quote-vs-来源 核验，20 家共 200/200 通过（100%，≥95% 阈值），报告见 `PROJECT/SPOT-CHECK-v1.1.md`；④ `OPEN-QUESTIONS.md` 与 glossary 经 `make sync` 重新生成；⑤ 上述 verbatim-quote 机器化反查 + 来源全量落盘的决策记入 `PROJECT/DECISIONS.md` [ADR-032]。`make build` 全绿（validate 0/0、verify_quotes OK=929 FAIL=0）。v1.1 至此收口。
-
-## v2.0 计划：高度可视化转向
+## 三、v2.0 计划：高度可视化转向
 
 方向与契约定案见 [ADR-033]～[ADR-036]。目标：主视图从对比矩阵改为单市场「市场机制剖面」（旧名「交易日平面图」，更名见 [ADR-042]；x=日内时间/分钟，y=涨跌幅/相对前结算价），让交易员首次接触一个市场即 30 秒看懂其微观结构。本节只记进度，工程设计与取舍见 DECISIONS。
 
-- [x] **立即执行 · A1 防幻觉机器校验补完**（2026-08-29，[ADR-033]）— 见上方「阶段路线」。
+- [x] **立即执行 · A1 防幻觉机器校验补完**（2026-08-29，[ADR-033]）— `tools/validate.py` 补完防幻觉铁律的机器强制：第三方来源 `confidence` 封顶、`NUMBER_RE` 收紧杜绝垃圾 token、路径引用校验收窄到仓库内路径、结构化 `spec` 值的逐字反查（Phase 1 前 no-op）。0 存量违规，均为 preventive；`OPEN-QUESTIONS` 框架性问题 #6/#35 已解决删除、#12 更新为"此路不通"路标。
 - [x] **立即执行 · A2 v1.1 尾巴收口**（2026-08-30，[ADR-034]）— `verify_quotes.py` 走 `expand_exchange`（消化 42 个假 CACHE_MISS，暴露并修 6 个真 FAIL）；`br-b3.yml` 34 处裸字符串 `sources` 归一为字典；英文回填 #45 **全库清零**（20 家）；61 个 CACHE_MISS → 0。`OPEN-QUESTIONS` #45 删除。
 - [x] **Phase 0 · 范式与数据模型定案**（2026-08-30，[ADR-035] + [ADR-036]）— 修订 ADR-005（主视图=交易日平面图，矩阵降为 `#view=matrix`）；定 `spec` 结构化层契约（新文件 `schema/spec.yml` 存形状定义，含 1 条示范条目）、零构建守则、图形诚实呈现规则（`spec` 三态 null/type:none/缺省）、非现货所 y 轴 `reference` 降级；框架性问题 #39 落地（`enums.yml` 加 `covered_only`，`za-jse` 归类），#13 删除，#17/#38 更新，其余（#1/#5/#36/#41 等）"暂不改 + 明确触发条件"。
 - [x] **Phase 1a · spec 层实装 + 第五章契约 + 5 家示范**（2026-08-30，[ADR-037]）— `schema/spec.yml` 写全第五章 13 字段 `spec` 形状；`sync.py` 加 `spec` 到 `ENVELOPE_KEYS` + `compute_trading_window` 优先读 `spec.{start,end}`（散文回退）；`validate.py` 加 `spec` 结构校验（键名 + dict + 5b 数值反查）；`cn-sse`/`us-nyse`/`jp-jpx`/`de-eurex`/`in-nse` 五家回填 `spec`，覆盖百分比 / 无 / 动态未公布(band_pct null) / 阶梯 / 前结算价 / 跨所联动六种形态。全 20 家时区甘特条数据零变化。
@@ -185,21 +116,22 @@
 - [ ] **Phase 3 · 其余章节可视化** — 成本瀑布 → 交割管线 → 上市生命周期（一并落地 [ADR-036] #5 的章节级"仅现货适用"标记）→ 监管图 → 参与者 → 风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）→ …按交易员价值迭代，每章带一次小型 `spec` 补充。**并入 [ADR-042] 的第五章三字段 + 四个 spec 形状的 20 家回填**（`execution_model` 达 ≥16/20 后补 `in_matrix: trading_mechanism`）。
   - [x] **Phase 3 首棒 · [ADR-042] 三字段 + 四 spec 形状 20 家回填**（2026-08-30 完成，[ADR-043]）— `execution_model`（20/20，10 order_driven + 10 hybrid，从既有 `matching_principle`+`market_maker_scheme` 派生）/ `error_trade_rule`（20/20，17 high + 2 medium + 1 low，实抓官方规则，呈现「阈值复核制 / 双边合意制 / 成交终局」三谱系）/ `order_book_transparency`（20/20，6 high + 12 medium + 2 low）；`order_types` + `tick_size` 的 spec 从既有 quote 结构化（美股走 17 CFR 242.612、欧洲走 RTS 11、其余按各所自有表）；`short_selling.spec.margin_note` 各所均不具区分性、未补。**偏离 [ADR-017]：7 路并行子代理瞬间打爆 session limit（429），改协调者串行**，20 个 commit（每家一个）+ 3 收尾 commit。`execution_model` 覆盖 20/20 → taxonomy 加 `in_matrix: trading_mechanism`。退出验收：`validate` 0/0、`verify_quotes` OK 1027→1071 / FAIL=0 / CACHE_MISS=0（44 个新 high 字段逐字反查全过）+ 8 家×2 字段语义抽检全过；全库已填字段 1770→1844。`kr-krx`/`sa-tadawul`/`in-nse`/`br-b3` 几个 medium/low 缺口已进 OPEN-QUESTIONS。
   - [x] **修复 · `.cache` 误提交为符号链接**（2026-08-30，[ADR-044]，PR #36）— `4fc61db`（PR #35 内）随 us-nyse 提交误 `git add` 进一个 `.cache` 软链，后果：任何 checkout 都长出该软链使工具 `CACHE` 路径失效；且 `git pull` 到该提交时会为放置这个 tracked 软链而静默删除被 `.gitignore` 忽略的 `.cache/` 目录，本地 1071 份 verbatim-quote 反查凭据丢失。已 `git rm --cached` + `.gitignore` `.cache/`→`.cache`。⚠️ **`.cache/` 需 `python3 tools/fetch_sources.py` 全量重跑重建**——重建前 `make check` 的 `verify_quotes` 会显示 `OK=0 / CACHE_MISS≈1071`（信息性、不阻断，`data/` 未受影响、ADR-043 已验过 FAIL=0）。
-  - [x] **Phase 3 第二棒（数据层）· 成本瀑布 spec 形状 + 20 家回填**（2026-08-30，[ADR-045]）— 四个设计轴用户 Q&A 定案：① 6 费种进瀑布（佣金/交易所费/清算费/监管费/印花税/金融交易税；资本利得税·股息预扣税作注解另列）② 镜像双瀑布（买入侧/卖出侧，`side: buy/sell/both` 键）③ 归一 bp 在渲染层做，spec 只存 quote 撑得住的原始值 + `unit` ④ 新增顶层 tab「成本瀑布」。`schema/spec.yml` 加 `costs.*` 共用 `cost_layer` 形状（`rate`/`unit`/`currency`/`side`/`cap`/`components`/`tiered`/`type:none`/`note`）。协调者串行 3 commit，全 20 家共 **103 个 costs spec**：实体费率 bp 化（hk/cn-szse/in-nse/uk/ch/au/sa/de-xetra…）、多项分征费 `components`（hk SFC+AFRC、us NSCC）、`type: none` 关键事实（澳/加/巴/沙/日/德 印花税·FTT）、`rate: null` 幽灵条（全部佣金 + maker-taker 所 + tw/za 非阿拉伯数字 quote）。`validate` 0/0（5b 44 个 high 数值 spec 全过）、`verify_quotes` FAIL=0（未动 quote）。
+  - [x] **Phase 3 第二棒（数据层）· 成本瀑布 spec 形状 + 20 家回填**（2026-08-30，[ADR-045]）— 四个设计轴用户 Q&A 定案：① 6 费种进瀑布（佣金/交易所费/清算费/监管费/印花税/金融交易税；资本利得税·股息预扣税作注解另列）② 镜像双瀑布（买入侧/卖出侧，`side: buy/sell/both` 键）③ 归一 bp 在渲染层做，spec 只存 quote 撑得住的原始值 + `unit` ④ 新增顶层 tab「交易成本瀑布」（`index.html` 实际文案，见 [ADR-047] 渲染层落地的 tab）。`schema/spec.yml` 加 `costs.*` 共用 `cost_layer` 形状（`rate`/`unit`/`currency`/`side`/`cap`/`components`/`tiered`/`type:none`/`note`）。协调者串行 3 commit，全 20 家共 **103 个 costs spec**：实体费率 bp 化（hk/cn-szse/in-nse/uk/ch/au/sa/de-xetra…）、多项分征费 `components`（hk SFC+AFRC、us NSCC）、`type: none` 关键事实（澳/加/巴/沙/日/德 印花税·FTT）、`rate: null` 幽灵条（全部佣金 + maker-taker 所 + tw/za 非阿拉伯数字 quote）。`validate` 0/0（5b 44 个 high 数值 spec 全过）、`verify_quotes` FAIL=0（未动 quote）。
   - [x] **清理 · 删除 `tier`（标杆批次）身份字段**（2026-08-30，[ADR-046]）— 用户判定"交易所是第几批建档的"是无效信息。整字段删除：`schema/enums.yml` 词表 + `taxonomy.yml` 字段定义、20 家 `data/exchanges/*.yml` 的 `tier:` 行、`sync.py`（`REQUIRED_IDENTITY_FIELDS` / `build_enum_label_maps` / README exchange-list 的「批次」列）、`SKILL.md` 填写步骤。前端自 [ADR-025] 起已无 `tier` 引用。`make check` 0/0、`verify_quotes` FAIL=0（未动 quote/zh/spec）。**未动**：ROADMAP 的 Wave/Batch 进度日志、历史 ADR（[ADR-016] 等）、glossary 词条里的"v1.1 Batch 1"造词说明——工作日志不是交易所元数据（用户选最窄范围）。
   - [x] **Phase 3 第二棒（渲染层首版）· 成本瀑布 `renderCostWaterfall`**（2026-08-30，[ADR-047]）— `docs/assets/app.js` `renderCostWaterfall` / `cwBuild`（手写 SVG 镜像双瀑布：中轴 0 bp、左买右卖，6 费种逐行按 `spec.side` 落侧 + 底部小计 + 往返合计）、`cwToBp` 归一（pct/permille/bp/per_lakh/per_crore/per_million 直换，per_share/flat_* 按假设成交额 100,000·股价 50 折算标 `≈`，`components` 求和、`tiered` 取首档标 `▸`、`cap` 记 tooltip 标 `^`）、诚实三态（实心条 / 幽灵斜纹条「议价·未披露」/ `type:none`「不征收」/ 无 spec「未结构化」）、持有·退出税（资本利得税·股息预扣税）图下方另列、点击复用 `openCellOverlay`、`de-eurex` prev_settlement 淡 banner；`index.html` 加顶层 tab（排「市场机制剖面」后）、路由键 `cost-waterfall`、`styles.css` `.cw-*`。**仅前端三文件，`docs/data/` 零 diff；`make build` 全绿（生成块无变化）；Chrome headless 13 家 × 明暗两主题截图核对通过，其余四视图无回归。** 已知局限（留交互式迭代）：单一费种远大于其余时左半留白、全零市场「合计 0.00 bp」略尴尬、暗色「此侧不征」虚线偏弱、按股/定额费折算较粗——见 [ADR-047]。
   - [x] **Phase 3 第三棒 · 交割管线可视化 — 设计定案**（2026-08-30，[ADR-048]）— 用户 Q&A 定三个方向：① **双泳道并列**（x=相对交易日天数；上泳道现货 T+N 流水线「成交→novation→轧差→保证金→DvP 终局」2–3 格封口，下泳道衍生品「成交→每日盯市循环 motif→不按比例的『到期』抽象区块→最终结算」；纯现货所下泳道 `type: none` 灰条、de-eurex 只画下泳道）② **违约瀑布作主图下方常驻附图**（与成本瀑布「主图+常驻税注解」同版式），纵向层级堆叠 = 动用顺序，按「谁的钱」上色（违约方红 / CCP SITG 橙 / 存续会员黄 / 法定风险基金灰）；`spec` 只存层级顺序+bearer 不存金额（不触校验 5b）③ **新增 `guarantee_model` 枚举**。本棒只定方向、未动 `schema` / `data`。
   - [x] **Phase 3 第三棒（数据层）· `default_management.spec` 形状 + `guarantee_model` 枚举 + 20 家回填**（2026-08-31，[ADR-050]；ADR-049 归英文版修订条）— 实施前一轮 `spec` 形状细化 Q&A（三题全取推荐）：本棒范围=只做数据层 / `layers` 粒度=`bearer` 枚举 + `resource` 自由短语 / `guarantee_model`=taxonomy 第 8 章正式字段 + `enum_ref`。**`schema/` 三文件**：`enums.yml` 加 `guarantee_model` 4 值（`ccp_novation` 15 家 / `exchange_as_ccp` br·kr·tw / `lines_of_defence` za 现货 / `shared_ccp` us×2 的 NSCC）；`spec.yml` 加 `clearing.default_management` 形状（`model` + `layers`〔`order`/`resource`/`bearer`〕+ `note`，`bearer` 5 值——[ADR-048] 的 4 类 + 新增 `external` 外部授信 / 保险，因 cn-sse·hk·sg 有明确外部资源层）；`taxonomy.yml` 第 8 章 `csd_name` 后加 `guarantee_model`（`en_required` + `enum_ref`，**不加 `in_matrix`**）。**回填 20/20**：`default_management.spec` = 12 家完整 `ccp_default_waterfall` layers（hk 8 层 706 条、sg 6 层 (a)–(f)、uk 8 层、de-eurex/xetra 6–7 层、cn-sse 5 层 68 条…）+ 1 家 `lines_of_defence`（za）+ 7 家 `unstructured` 三态占位（ca/jp/sa/tw/us×2——框架存在、逐层瀑布未在一手页呈现，[ADR-048] 预期）；`guarantee_model` 20/20（7 high + 13 medium，`quote` 全复用同文件既有已核实字段）。**只动 `schema/` + `data/` + `PROJECT/`（DECISIONS / ROADMAP / SKILL）+ 生成产物；未动前端、未动 `docs/data/freshness.json`（依 ADR-043/045 惯例）。** 退出验收：`make check` 全绿——`validate` 20 家 0/0、`verify_quotes` FAIL=0（CACHE_MISS=1079 为 [ADR-044] 待重建已知态）；生成块唯一变动 `health-summary` +20（1844→1864），`progress-matrix` **零 diff**（`guarantee_model` 20/20 全填、`za-jse` 第 8 章仍 ✅）。**渲染层（`renderSettlementPipeline` + 顶层 tab，动前端三件套）留英文版修订合并后**——避让并行前端工作，同 [ADR-045]/[ADR-047] 分棒。
   - [x] **Phase 3 第三棒（渲染层）· `renderSettlementPipeline`**（2026-09-01 完成，[ADR-051]）— `docs/assets/app.js` `renderSettlementPipeline` / `spLanes`（双泳道手写 SVG：上「现货」`成交→CCP 介入→净额轧差·保证金→DvP 终局 T+N`，下「衍生品」`成交→每日盯市 ↻ 循环→不按比例断口→到期抽象区块→最终结算`；三态 `only`/`both`/`none` 由 `spDerivState()` 定，`none` 用软表述不硬断言「本所无衍生品」）/ `spWaterfall`（违约瀑布常驻附图，按 `default_management.spec.layers[].order` 堆叠、按 `bearer` 上色，`unstructured` 三态占位，`spec.note` 走 `zhNoteBlock` 英文态折叠）/ `guarantee_model` 四形 CCP 节点（菱形 / 叠方孔 / 套小菱形 / 空心盾）/ 顶层 tab「交割管线」+ 路由键 `settlement-pipeline` + `styles.css` `.sp-*` + `--sp-gold` 令牌。`Nmax = max(settleDays, 2)`。从一开始接语言开关（`t()`/`tSel()`/`fieldLabel`/`enumDisplay`）。顺带修 `tools/check_ui_i18n.py` 的 `enclosing_callees` O(位置×字面量数) 性能（命中 `t`/`tSel` 提前返回 + 二分判定，行为等价，7 分钟→数秒）。纯前端四文件、`data/` 与 `docs/data/` 零 diff、`make sync` 幂等。Chrome headless `hk-hkex`/`de-eurex`/`za-jse`/`us-nyse`/`cn-sse`/`br-b3`/`uk-lse`/`sg-sgx` × 中英 × 明暗核对通过，五视图无回归。**已知局限**：违约瀑布 `resource` 短语无 `en`、英文态仍中文（同 [ADR-049] 对 `detail` 的结构性处置，触发条件见 ADR-051）；深色预防层色块偏淡、T+1 现货所右半留白（留交互式迭代）。见 [ADR-048] 三方向。
-  - [x] **英文版可用性修订**（审查 2026-08-30，四批次全部执行完 2026-08-31，[ADR-049]）— 走查发现「英文版」（`langMode: en`）只在矩阵 / 档案 / 健康度三视图部分成立；市场机制剖面 + 成本瀑布几乎全中文（Phase 2/3 新代码未接语言开关），另 1028 个 `detail` 从不翻译、[ADR-006] UI 双语约定多处漏网、站点外壳与 `README` 无英文。**完整审查 + 修订计划见 `PROJECT/ENGLISH-REVISION-PLAN.md`（已归档），决策落点见 [ADR-049]，此处只记执行结果。**
-    - **批次 1（方案 A + C，[ADR-049]）**：市场机制剖面 / 成本瀑布 / 时区甘特条全面接入语言开关，约 180 个串走新增的零依赖 `t(zh, en)` / `tSel()`；chip 名改为按 `chapter` + `path` 查 taxonomy 的 `label_zh` / `label_en`（**中文态因此有 5 个 chip 改名**，是唯一偏离「zh 逐字不变」处，理由见 ADR）。新增 `tools/check_ui_i18n.py` 并入 `make check`（已用探针串验证能拦下）。
-    - **批次 2（方案 B，[ADR-049]）**：`detail` / `spec` 的 `*note` 键在英文模式下收进默认折叠的 `<details>`，摘要 `Analyst note (Chinese) ▾`，沿用 [ADR-026]「加视觉标记、不改数据可见性」。
-    - **批次 3（方案 D，[ADR-049]）**：`index.html` 外壳文案（加载提示、页脚免责声明、`title=` 提示、`<html lang>`、`<meta description>`）随开关切换，走纯 CSS 双写方案；新增 `README.en.md`（手工同步，`exchange-list` 块由 `sync.py` 生成，中文版英文版同一函数两个 `lang`）。数据侧补 5 个 `name_native.en`。`make check` 的生成块新鲜度校验五处 → 六处。
-    - **批次 4（方案 E，[ADR-049]）**：新增 `tools/check_en_terms.py`（`make check-en-terms`，只出建议清单、不自动改、不进 `make check`）；house style 写进 `schema/glossary.yml` 头注；55 处候选人工逐条判断后实改 4 处（3 个 `Renminbi` → `RMB`、1 处 `lot size` / `board lot` 同句混用），修 `tw-twse` 简繁错字 `网路资讯商店` → `網路資訊商店`（已开官网核对）。
-    - **验收**：`make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK、`make sync` 二次幂等）。Chrome headless `--dump-dom` 逐屏核对 6 家 × {剖面, 瀑布, 档案} + 时区 + 矩阵：中文态与 `git show HEAD` 前端逐行 diff，**成本瀑布 6/6、档案页 6/6、矩阵 逐字一致**，剖面仅差上述 5 个 chip 改名；英文态外壳 / 折叠块 / 语言切换按钮均正确。
-    - **过程中修掉两个真 bug**（详见 ADR）：`cwBuild` 里 `for (var t …)` 因 `var` 提升遮蔽了模块级 `t()` 文案助手，导致成本瀑布两种语言模式都白屏；`tdHeadlineParts` 把已语言化的变量再套进 `t()` 模板，中文态输出「S&P 500跌」而非原文「指数跌」。
 
 **v2.0 的 Phase 序列到 Phase 3 为止。**
+
+- [x] **英文版可用性修订**（横切条目，不属于 Phase 序列；审查 2026-08-30，四批次全部执行完 2026-08-31，[ADR-049]）— 走查发现「英文版」（`langMode: en`）只在矩阵 / 档案 / 健康度三视图部分成立；市场机制剖面 + 成本瀑布几乎全中文（Phase 2/3 新代码未接语言开关），另 1028 个 `detail` 从不翻译、[ADR-006] UI 双语约定多处漏网、站点外壳与 `README` 无英文。**完整审查 + 修订计划见 `PROJECT/ENGLISH-REVISION-PLAN.md`（已归档），决策落点见 [ADR-049]，此处只记执行结果。**
+  - **批次 1（方案 A + C，[ADR-049]）**：市场机制剖面 / 成本瀑布 / 时区甘特条全面接入语言开关，约 180 个串走新增的零依赖 `t(zh, en)` / `tSel()`；chip 名改为按 `chapter` + `path` 查 taxonomy 的 `label_zh` / `label_en`（**中文态因此有 5 个 chip 改名**，是唯一偏离「zh 逐字不变」处，理由见 ADR）。新增 `tools/check_ui_i18n.py` 并入 `make check`（已用探针串验证能拦下）。
+  - **批次 2（方案 B，[ADR-049]）**：`detail` / `spec` 的 `*note` 键在英文模式下收进默认折叠的 `<details>`，摘要 `Analyst note (Chinese) ▾`，沿用 [ADR-026]「加视觉标记、不改数据可见性」。
+  - **批次 3（方案 D，[ADR-049]）**：`index.html` 外壳文案（加载提示、页脚免责声明、`title=` 提示、`<html lang>`、`<meta description>`）随开关切换，走纯 CSS 双写方案；新增 `README.en.md`（手工同步，`exchange-list` 块由 `sync.py` 生成，中文版英文版同一函数两个 `lang`）。数据侧补 5 个 `name_native.en`。`make check` 的生成块新鲜度校验五处 → 六处。
+  - **批次 4（方案 E，[ADR-049]）**：新增 `tools/check_en_terms.py`（`make check-en-terms`，只出建议清单、不自动改、不进 `make check`）；house style 写进 `schema/glossary.yml` 头注；55 处候选人工逐条判断后实改 4 处（3 个 `Renminbi` → `RMB`、1 处 `lot size` / `board lot` 同句混用），修 `tw-twse` 简繁错字 `网路资讯商店` → `網路資訊商店`（已开官网核对）。
+  - **验收**：`make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK、`make sync` 二次幂等）。Chrome headless `--dump-dom` 逐屏核对 6 家 × {剖面, 瀑布, 档案} + 时区 + 矩阵：中文态与 `git show HEAD` 前端逐行 diff，**成本瀑布 6/6、档案页 6/6、矩阵 逐字一致**，剖面仅差上述 5 个 chip 改名；英文态外壳 / 折叠块 / 语言切换按钮均正确。
+  - **过程中修掉两个真 bug**（详见 ADR）：`cwBuild` 里 `for (var t …)` 因 `var` 提升遮蔽了模块级 `t()` 文案助手，导致成本瀑布两种语言模式都白屏；`tdHeadlineParts` 把已语言化的变量再套进 `t()` 模板，中文态输出「S&P 500跌」而非原文「指数跌」。
 
 ### 广度扩张（新增交易所，原「Phase 4 · Wave 3」）——按需可选能力，非计划阶段
 
@@ -208,3 +140,115 @@
 - `add-exchange` skill 十一章完整流程**原样保留**，随时可用（`/add-exchange` 或口头要求）。
 - **仅在用户主动要求时执行；agent 不主动提议、规划或启动新增交易所**，也不在下一步任务建议里列「加某家交易所」。
 - 用户触发某次新增时：候选思路见 [ADR-016]（补东南亚 / 中东 / 非洲 / 拉美空白）；若纳入第 3 个 MENA/非洲所同步执行 [ADR-036] #2 的 `region` 拆分（#1 `federation_of` / #9 `rule_level` 触发条件同理）；子代理任务里加"第五章直接填 `spec`（含 [ADR-042] 的 `execution_model` / `error_trade_rule` / `order_book_transparency` / `order_types` / `tick_size`）、并在市场机制剖面里自检"。
+
+---
+
+## 四、历史归档（v0.x / v1.x 均已全部完成）
+
+以下都是已完成阶段的原始工作日志，**只增补、不改写**（历史 ADR 与 Wave/Batch 日志的不可变性见 [ADR-046]「未动」段与 `CLAUDE.md` §八）。
+
+### 阶段路线（v0.0 → v1.1）
+
+- [x] **v0.0 立项 + 可达性探针** — 仓库骨架、`CLAUDE.md`、`PROJECT/` 四件套、`schema/`、`Makefile`、三个 tool 跑通、LICENSE、`.claude/settings.json`；五家标杆抓取方式探明（见 `SOURCES.md`）
+- [x] **v0.1 骨架验证** — `taxonomy.yml` 十一章字段字典、上交所+港交所填满、前端矩阵+档案视图最小可用、Pages 上线；人工抽检 20 字段（2026-08-13，基本准确，反馈已回写 `SOURCES.md`「来源 URL 应精确到信息页」一节）
+- [x] **语言模型简化**（v0.1 收尾后、v0.2 开始前，独立迁移）— 数据语言从 zh/native/native_lang 三态简化为 zh/en 两态 + 交易所级 `source_lang` 标记，见 `PROJECT/DECISIONS.md` [ADR-013]；两家现有交易所数据已迁移
+- [x] **v0.2 标杆扩展** — NYSE / JPX / Eurex 三家数据均已补齐（均 `source_lang: en`）；Eurex 是首个衍生品交易所样本，暴露出 `listing` 章节与 `settlement_cycle`/`short_selling`/`intraday_reversal` 三个字段对非股票交易所不适配，见 `PROJECT/OPEN-QUESTIONS.md` 框架性问题第17条。矩阵维度组已按实测填充率重新校准（[ADR-014]）；`add-exchange` skill 已吸收三次实操教训定型
+- [x] **v0.3 前端完善** — 修复语言模式切换的遗留 bug：交易所名称（矩阵行/档案页标题/浮层）、矩阵行地区标签、健康度视图字段名此前都不随模式切换，只是英文模式下用 `en_required` 字段本身的回退掩盖了部分（见 [ADR-013] 的回退设计），这几处是取值路径完全绕过了 langMode 判断；格子浮层加双语标题、章节面包屑、加载态；健康度视图加交易所/类型筛选并支持点行跳出处；矩阵加标杆批次筛选；新增时区甘特条视图（`#view=timezone`），推导方式见 `PROJECT/DECISIONS.md` [ADR-015]
+- [x] **v1.0 横向铺开** — 按 Tier 扩到 20+ 家；Wave 1（8 家）+ Wave 2（7 家）均已完成，加上 v0.1/v0.2 五家标杆共 20 家；计划任务/工程设计/验收标准/进度见下方「v1.0 计划」一节
+- [x] **前端阅读性优化**（v1.0 收尾后）— 矩阵工具栏去掉「标杆批次 Tier」筛选框与搜索框（v0.3 加的两个交互，20 家规模下地区筛选已够用，搜索是冗余项；`v0.3` 那条历史记录不改，此处记录后续变更）；时区甘特条午休时段从"柱状条空白+右侧括号文字"改为独立蓝色色块；正文字号/行高、矩阵斑马纹与悬停高亮、档案页字段卡片间距与长文本限宽等一轮可读性调整，见 `PROJECT/DECISIONS.md` [ADR-025]
+- [x] **v1.1 Category B 数据深耕**（2026-08-22/27）— Batch 1/3 + Batch 2/3 全部完成，全库已填字段 1162→1766；详见下方「v1.1 计划」一节
+- [x] **v2.0 前置加固 A1 + A2**（2026-08-29/30）— A1 防幻觉机器校验补完（[ADR-033]）+ A2 v1.1 尾巴收口（英文回填 #45 全库清零、CACHE_MISS 归零、`verify_quotes` 走 expand，[ADR-034]）。明细见上方「三、v2.0 计划」
+- [x] **v2.0 高度可视化转向 Phase 0 起**（2026-08-30 起，进行中）— Phase 0 范式与数据模型定案（修订 ADR-005、`spec` 层契约 + `schema/spec.yml`、零构建/诚实渲染/非现货降级、框架性问题批量裁定含 `covered_only` 落地，[ADR-035] + [ADR-036]）及其后 Phase 1a～3。明细见上方「三、v2.0 计划」
+
+### v1.0 计划：横向铺开到 20+ 家
+
+工程设计与取舍依据见 `PROJECT/DECISIONS.md` [ADR-016]（候选清单与分波依据）、[ADR-017]（并行执行模式与质量门槛）；验收阈值见 `CLAUDE.md` 四。本节只管任务清单与进度，不重复决策理由。
+
+#### 工程设计摘要
+
+- **执行模式**：不再逐家串行，改为每波内用 Agent 工具并行派发子代理，一个子代理独立跑完一家交易所的 `add-exchange` skill 全部步骤；波次结束后统一 `make build` 复核一次。
+- **验收标准**：每家新交易所人工抽检 10 个字段核对 `quote` 与原始出处，通过率需 ≥95%（阈值不变，样本量比 v0.1 缩小，理由见 [ADR-017]）；未过阈值只暂停复核该家，不影响同批次其他交易所。每波结束后额外过一遍各子代理执行记录，把新教训回写 `add-exchange` skill，再开下一波。
+- **退出标准**：两波（15 家）全部完成且各自通过验收 → 总数达到 20 家；`region: mena_africa` 与 `americas` 不再是明显空白；至少新增一个"一所多国"结构样本（Euronext）供 `OPEN-QUESTIONS.md` 框架性问题第17条积累更多真实证据。
+
+#### Wave 1 启动前置条件
+
+- [x] `review_system` 矩阵列的枚举覆盖率问题——实际未在 Wave 1 启动前解决（见 [ADR-018] 执行进度补记），Wave 1/2 完成后作为高优先级待办于 2026-08-19 解决，枚举从 3 值扩到 5 值，见 `PROJECT/DECISIONS.md` [ADR-023]。
+
+#### Wave 1（8 家，优先）— 8/8 已完成
+
+| 交易所（草案 id） | 地区（初判，待建档时核实） | 压测点 |
+|---|---|---|
+| `us-nasdaq` 纳斯达克 | americas | 同法域对照 NYSE（做市商电子市场 vs DMM） |
+| `cn-szse` 深圳证券交易所 | apac | 同国对照 SSE（创业板 vs 科创板） |
+| `uk-lse` 伦敦证券交易所 | europe | 脱欧后独立监管框架 |
+| `de-xetra` 法兰克福证券交易所/Xetra | europe | 同集团对照 Eurex（`deutsche-boerse-group` 内首个现货所） |
+| `sg-sgx` 新加坡交易所 | apac | 地区补充 |
+| `au-asx` 澳大利亚证券交易所 | apac | 地区补充 |
+| `in-nse` 印度国家证券交易所 | apac（待核实） | 地区补充 |
+| `sa-tadawul` 沙特交易所 | mena_africa | 该地区首个样本（现有 5 家里是 0） |
+
+进度：8/8 已完成（并行子代理模式，2026-08-14/15）。人工抽检见 `PROJECT/DECISIONS.md` [ADR-017] 执行记录；子代理踩出的新坑已回写 `.claude/skills/add-exchange/SKILL.md`。
+
+#### Wave 2（7 家，视 Wave 1 结果调整，非最终锁定）— 7/7 已完成
+
+| 交易所（草案 id） | 地区（初判） | 压测点 |
+|---|---|---|
+| `fr-euronext` Euronext | europe | 一所横跨多国市场，结构性新样本 |
+| `kr-krx` 韩国交易所 | apac | 地区补充 |
+| `ca-tsx` 多伦多证券交易所 | americas | 地区补充 |
+| `br-b3` 巴西 B3 | americas | 拉美首个样本 |
+| `tw-twse` 台湾证券交易所 | apac | 地区补充 |
+| `ch-six` 瑞士证券交易所 | europe | 地区补充 |
+| `za-jse` 约翰内斯堡证券交易所 | mena_africa | 非洲首个样本 |
+
+进度：7/7 已完成（并行子代理模式，2026-08-16/17，中途两次撞到账号月度支出限额，恢复后续跑完成）。人工抽检见 `PROJECT/DECISIONS.md` [ADR-017] 执行记录；子代理踩出的新坑已回写 `.claude/skills/add-exchange/SKILL.md`。
+
+#### 当前进度
+
+- 20/20+ 已完成（v0.1/v0.2 五家标杆 `cn-sse`/`hk-hkex`/`us-nyse`/`jp-jpx`/`de-eurex` + v1.0 Wave 1 八家 `us-nasdaq`/`cn-szse`/`uk-lse`/`de-xetra`/`sg-sgx`/`au-asx`/`in-nse`/`sa-tadawul` + v1.0 Wave 2 七家 `fr-euronext`/`kr-krx`/`ca-tsx`/`br-b3`/`tw-twse`/`ch-six`/`za-jse`，见上方填充进度表）
+- v1.0 横向铺开阶段已完成，达成 20 家目标；`review_system` 枚举覆盖率问题（上方"Wave 1 启动前置条件"）未在 Wave 1 启动前解决，属流程疏漏，见 `PROJECT/DECISIONS.md` [ADR-018] 执行进度补记，已于 2026-08-19 解决（[ADR-023]，连带修了 `delivery_method` 同类问题）；市场结构/指数体系两处 schema 缺口已设计并示范填一家（[ADR-019]）。9 家交易所的衍生品市场机制已按 [ADR-017] 并行子代理模式补齐，人工抽检 90 字段全部通过，见 [ADR-021]。前端矩阵/章节结构审查见 [ADR-022]。
+- **英文版审查（2026-08-20 启动）**：走查发现"中英夹杂"症状，拆成两层——① `en_required` 字段真违规（9 处，`cn-sse`/`hk-hkex`/`tw-twse`），已补齐数据并给 `validate.py` 加永久机器校验，附带查出并修正一处 `hk-hkex` 撮合规则误引衍生品市场规则的数据错误，见 [ADR-024]；② 114 个非强制双语字段在英文模式下仍回退显示中文，方案②（前端加视觉标记区分"设计不需双语"与"真漏填"）已实施，见 [ADR-026]，方案①（批量翻译114字段）随 v1.1 一并评估，不单独开工。
+- **悬案批量清理（2026-08-20/21）**：`sa-tadawul`/`kr-krx`/`tw-twse`/`ch-six`/`br-b3`/`fr-euronext` 六家共 17 条 `PROJECT/OPEN-QUESTIONS.md` 具体数据悬案，13 条解决、1 条重新定性为"官方确认不披露"、3 条如实保留（sa-tadawul TASI基日、kr-krx KOSDAQ基日、fr-euronext市值口径不在本次任务范围），见 [ADR-027]。
+- **下一步方向已定：深度优先（v1.1 Category B 数据深耕），Wave 3 暂缓**，见 `PROJECT/DECISIONS.md` [ADR-028]。详见下方「v1.1 计划」一节。（2026-08-30 [ADR-041] 进一步将 Wave 3 / 广度扩张定为按需可选能力，不再是计划阶段——见上方「三、v2.0 计划」末尾。）
+
+### v1.1 计划：Category B 数据深耕（Batch 1/3 / Batch 2/3 / Batch 3/3 均已完成，2026-08-27）
+
+依据与规模估计见 `PROJECT/DECISIONS.md` [ADR-028]，本节只管任务清单与进度，不重复决策理由。
+
+#### 前置事项（批量执行前必须先解决，否则会重演 [ADR-018] 的教训）
+
+- [x] **`clearing.initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency`/`last_trading_day_rule` 四字段语义歧义澄清**——已于 2026-08-22 解决，见 [ADR-030]：仿照 `delivery_method` 先例扩容 `clearing.derivatives` 子块，顶层收窄为「现货语境」、衍生品语境统一移到子块；`tw-twse` 数据本就符合收窄后的顶层语义无需改动，`de-eurex`（纯衍生品）无需改动，`br-b3` 三个字段已完成迁移（`quote`/`sources` 原样搬移，未新造事实）。批量填充的前置阻塞已清除。
+
+#### 候选字段清单（填充前基线快照，非当前状态）
+
+> 下表是 **2026-08-21 审计时、批量填充前**的基线：36 个确定 Category B 字段；另 4 个原待澄清语义的 `clearing` 字段已于 2026-08-22 解决语义歧义（见 [ADR-030]），并入候选范围，合计 40 个。**填充率与 `X/20` 均为当时的快照，实际填充结果与退出标准对照见下方「进度」。**
+
+| 章节 | 填充率 | 字段（括号内为当前 X/20） |
+|---|---|---|
+| `regulation` | 57% | `capital_controls`(2)、`foreign_ownership_limit`(3)、`investor_protection`(5)、`disclosure_requirements`(7) |
+| `listing` | 42% | `post_delisting_venue`(0)、`listing_process_duration`(1)、`delisting_transition_period`(4)、`delisting_process`(7)、`suspension_resumption`(10)、`continuing_obligations`(11) |
+| `clearing` | 43% | `default_management`(4)；另 4 个字段的语义歧义已解决（[ADR-030]），`clearing.derivatives.*` 镜像字段已就绪，可与 `default_management` 一并纳入批量填充范围 |
+| `participants` | 27% | `broker_landscape`(0)、`investor_structure`(1)、`suitability_management`(1)、`account_opening_requirements`(3)、`foreign_access_channel`(7) |
+| `infrastructure` | 18% | `data_pricing_model`(0)、`historical_data_availability`(0)、`data_latency`(1)、`market_data_levels`(1)、`major_outage_history`(2)、`access_methods`(8)、`trading_system_name`(13) |
+| `costs` | 19% | `implicit_costs_note`(0)、`regulatory_fees`(0，预期多数合理留空)、`clearing_fees`(2)、`commission_structure`(2)、`financial_transaction_tax`(2)、`capital_gains_tax`(3)、`dividend_withholding_tax`(6)、`stamp_duty`(9)、`exchange_fees`(10) |
+| `risks` | 35% | `liquidity_risk_note`(0)、`political_risk_note`(0)、`enforcement_note`(6)、`regulatory_change_risk_note`(11) |
+
+#### 顺带处理（同一批交易所研究窗口内一起做，不单独开工）
+
+- 英文缺失字段回填（`OPEN-QUESTIONS.md` 框架性问题第45条，114 个非强制双语字段，集中在 `cn-sse`/`tw-twse`/`hk-hkex`/`cn-szse`；`en_required` 真违规部分已由 [ADR-024] 解决，这里指剩余部分）
+- `sec.gov`/`finra.org`/`dtcc.com` 反爬突破尝试（框架性问题14/15/32条，集中影响 `us-nyse`/`us-nasdaq`）
+
+#### 执行设计（2026-08-21 草案，已按此执行完毕）
+
+- 按交易所分批（非按字段），沿用 [ADR-017] 并行子代理模式，7-8 家/批分 2-3 批
+- 质量门槛沿用 [CLAUDE.md 四]（≥95%），抽检量比照 [ADR-017]（10 字段/所）
+- 退出标准：8 个当前 0/20 的字段（`implicit_costs_note`/`regulatory_fees`/`data_pricing_model`/`historical_data_availability`/`post_delisting_venue`/`broker_landscape`/`liquidity_risk_note`/`political_risk_note`）全部转为"有值+来源"或"明确 detail 说明不适用/查不到"；其余字段填充率显著提升，不强求 100%
+
+#### 进度
+
+- 前置事项已解决（2026-08-22，见 [ADR-030]），批量填充的阻塞已清除。
+- **Batch 1（8 家）已完成（2026-08-22/25）**：`cn-sse`/`tw-twse`/`hk-hkex`/`cn-szse`/`us-nyse`/`us-nasdaq`/`uk-lse`/`jp-jpx`。选取逻辑：优先覆盖「顺带处理」一节点名的两个批量任务——前四家一并回填英文缺失字段，`us-nyse`/`us-nasdaq` 一并尝试反爬突破，`uk-lse`/`jp-jpx` 补地区多样性。执行结果、字段明细、人工抽检通过率、反爬突破方法与并行执行的工程教训见 `PROJECT/DECISIONS.md` [ADR-031]，本条不重复：全库已填字段 1162→1360（+198）；8 个子代理各自 10 字段自查 + 协调者独立复核 16+1 个字段，全部通过，远超 ≥95% 门槛；`sec.gov`/`finra.org` 反爬已攻克（方法见 `PROJECT/SOURCES.md`「突破记录」），`dtcc.com` 仍未攻克但已降级绕过；`make build` 0 错误 0 警告。
+- **Batch 2/3（剩余 12 家：`au-asx`/`br-b3`/`ca-tsx`/`ch-six`/`de-eurex`/`de-xetra`/`fr-euronext`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse`）已完成（2026-08-27）**。按原执行设计分两批（各 6 家）并行子代理执行，沿用 [ADR-017] 模式但收紧隔离：子代理只写各自 `data/exchanges/<id>.yml` 并把来源落盘到 `.cache/<id>/`，`PROJECT/SOURCES.md`/`OPEN-QUESTIONS.md`/`schema/glossary.yml` 由协调者统一合并，避免共享文件冲突。`make build` 0 错误 0 警告；全库已填字段 1360→1766（+406）。8 个原 0/20 字段（`implicit_costs_note`/`regulatory_fees`/`data_pricing_model`/`historical_data_availability`/`post_delisting_venue`/`broker_landscape`/`liquidity_risk_note`/`political_risk_note`）在 12 家中全部转为有值（个别 `low` 置信度，属"查不清已如实标注"，见 `OPEN-QUESTIONS.md` auto-issues）。质量关：协调者用脚本对全部 40 个 Category B 高置信字段做"quote 是否在落盘来源原文中"反查，命中 19/22 不匹配后逐一核实——其中 19 个实为来源页未落盘（现场抓取官方页均可命中原文），仅 3 个确属 quote 与原文不符（`ca-tsx` 两个 participants 字段引用的 OSC NI 31-103 着陆页无规则正文；`fr-euronext` `clearing.derivatives.delivery_method` 的 "EDSP=CTD/CF" 公式原文未出现），已修正（前两例降级 `medium` 保留官方来源、后一例改为 PDF 中真实存在的 EDSP 措辞并重新 verbatim 引用）。`kr-krx` 多处 costs/infrastructure 字段仍 `low`，属真实未核实，已记入悬案。
+- **Repo 级 verbatim-quote 反查（2026-08-27，接续 Batch 2）**：用脚本对全库 20 家共 ~671 个 `confidence: high` 字段的 `quote` 逐一比对落盘 `.cache/<id>/` 原文与现场抓取来源，先发现 48 处 quote 与来源不符（多为缺 `sources` 或 quote 为改写/编造），分 11 个交易所并行子代理修复——其中确属编造/改写并已修正的代表：`fr-euronext` `clearing.derivatives.delivery_method`（"EDSP=CTD/CF" 公式原文无）、`ch-six` `clearing.csd_name`（quote 指非 CSD 内容）、`ca-tsx` 两 participants 字段（引 OSC NI 31-103 着陆页无规则正文）、`hk-hkex` `clearing.ccp_name`（quote 指 CSDC 非 HKSCC）、`tw-twse` `market_structure.closing_mechanism`、`cn-sse` 若干（数字跨表格行无法成连续 verbatim）。修复后重查，可证伪的失配降至 0；残留"未命中"均为 JS 渲染页（curl 拿不到正文）或来源页未落盘，属检查器局限非数据缺陷。教训：verify 脚本必须做 HTML 标签剥离+PDF 文本提取，否则表格单元/标签会制造大量假阴性。该反查已固化为 `tools/verify_quotes.py`：离线只比对 `.cache/<id>/_manifest.json` 中实际落盘的引用来源（没抓过的来源记为 CACHE_MISS 不误判），`--live` 额外现场抓取（JS 页/被拦记为 LIVE_ERR）；已接入 `make check`（仅 FAIL 才非零退出），并加 `make verify-quotes` / `make verify-quotes-live` 两个独立命令。
+- **落盘全部引用来源 + 复核（2026-08-27，接续上条）**：新增 `tools/fetch_sources.py`（收割 yml 里所有 `sources` URL 落盘 `.cache`，按内容类型定扩展名、为 PDF/Office 生成 `.txt` 伴随文本、sec.gov 用 Fair Access UA），批量抓得 632 个来源。重跑反查后 OK 由 27 升到 929、FAIL 由 44 暴露并归零——其中确属"quote 非 verbatim / 引用错页 / 抓到 404/JS 壳/图片 PDF"的 34 处，分 11 个交易所并行子代理修复（重引正确来源并改写 verbatim quote，或降级 `medium` 保留 sources）。最终 `make build` 全绿：validate 0/0、verify_quotes OK=929 FAIL=0。残 61 个 CACHE_MISS 为引用来源未落盘或错误页，按 CLAUDE.md §四 留人工抽检。
+- **Batch 3/3 收尾（2026-08-27，v1.1 全部完成）**：① `SOURCES.md` 末尾「Batch 2 补充登记」堆块已按交易所 id 去重并入各 `### <exchange>` 小节；② Batch B 并行执行教训回写 `.claude/skills/add-exchange/SKILL.md`（verbatim 反查步骤、不可核验即降级 `medium` 的规则）；③ 每家抽 10 个「全部引用来源已落盘」的 `high` 字段做 quote-vs-来源 核验，20 家共 200/200 通过（100%，≥95% 阈值），报告见 `PROJECT/SPOT-CHECK-v1.1.md`；④ `OPEN-QUESTIONS.md` 与 glossary 经 `make sync` 重新生成；⑤ 上述 verbatim-quote 机器化反查 + 来源全量落盘的决策记入 `PROJECT/DECISIONS.md` [ADR-032]。`make build` 全绿（validate 0/0、verify_quotes OK=929 FAIL=0）。v1.1 至此收口。
