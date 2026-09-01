@@ -1104,3 +1104,25 @@
 **已知视觉局限（留交互式迭代，同 [ADR-047]）：** 深色主题下无 bearer 的预防层（`za-jse` lines_of_defence 6 层）色块极淡、近乎只剩序号与文字；T+1 现货所右半（T+1→T+2 网格区）在现货泳道留白；到期区块与「最终结算」节点排布较紧。
 
 **日期：** 2026-09-01
+
+### ADR-052 — `freshness.json` 不再落盘 `age_days`/`stale`，改由前端按访问日现算
+
+**背景：** `docs/data/freshness.json` 里的 `age_days`（今天 − `verified`）与 `stale`（`age_days` 超过 `volatility` 对应阈值）是构建时刻的派生值，不是建库事实。这带来两层问题：① 每次 `make build` 都会把这两个键在全部 1864 条记录上重写一遍，造成一份与内容无关、纯粹因为「今天变了」而必然出现的 3700+ 行 diff，逼着文档类提交每次手动排除该文件才能保持「`make sync` 后 `git diff` 应为空」这条一致性判据；② 更实质的问题是**线上站点的过期判定被冻结在上次构建的那天**——两次 `make sync` 之间，一个字段可能真的跨过了复核阈值，但站点的「待复核 Stale」标记不会反映，直到下次有人跑 `make build` 才会更新，这与 CLAUDE.md §四把「进度矩阵/健康度」当作数据质量外部判据的设计意图相悖。
+
+**决定：** `age_days`/`stale` 不进 `freshness.json`；`tools/sync.py` 的 `compute_freshness()` 内部仍算这两个值供 `render_health_summary()`（ROADMAP.md 的 health-summary 生成块，本就是构建时刻快照，冻结符合预期，不受本条影响）使用，但写盘前用 `freshness_rows_out` 过滤掉这两个键。前端 `docs/assets/app.js` 新增 `daysSince()` + `applyStaleness()`，在 `loadCore()` 里用每条记录自带的 `verified`（已有）+ `volatility`（已有）+ `manifest.json` 新增的 `volatility_months`（`sync.py` 的 `VOLATILITY_MONTHS` 常量原样 emit，唯一生成出口，前端不重复手写这三个数字）在**访客本地按当天现算**，算完仍写回 `f.age_days`/`f.stale`，下游（`staleSet`、矩阵格子的 stale-dot、健康度页排序与展示列）零改动。
+
+**为什么 `volatility_months` 放进 `manifest.json` 而不是 `_schema.json`：** `_schema.json` 是 `build_json_schema()` 产出的 JSON-Schema 文档（`$schema: draft/2020-12`），语义上只描述字段结构，塞进业务阈值常量会污染这份文档的用途；`manifest.json` 本就是「站点级构建配置」的落点（已有 `exchanges`/`dimension_groups`/`chapters`），且已有先例——故意不放时间戳字段就是为了保 diff 干净（见文件内注释），加一个静态、跨构建不变的常量不违反这条纪律。
+
+**验证：** worktree 内 `.cache/` 为空（`git worktree` 不复制被 `.gitignore` 忽略的目录，这本身也是 [ADR-053] 要处理的那类"环境局部状态"的现场例证），`make build` 仍全绿：`validate` 0/0、`verify_quotes` FAIL=0（CACHE_MISS=1078 为本 worktree 无缓存的信息性状态，非回归）、`check_ui_i18n` OK；`make sync` 二次幂等，`git status` 只有预期的 4 个文件（`tools/sync.py` / `docs/assets/app.js` / `docs/data/freshness.json` / `docs/data/manifest.json`）。Chrome headless `--dump-dom` 核对健康度页（`#view=health&htype=stale`）：`共 1864 个已填字段，其中 0 个超过复核阈值待复核`，与 ROADMAP.md 现有 health-summary 生成块的服务端算出的 `0` 一致；矩阵视图（`#view=matrix`）280 个 `<td>` 正常渲染、无 stale-dot（同为 0 的预期结果），未见 JS 异常。
+
+**日期：** 2026-09-01
+
+### ADR-053 — 受控文档记录构建态数字时，只记取数方式不记快照数字
+
+**背景：** [ADR-044] 与 [ADR-050] 的 ROADMAP.md / DECISIONS.md 条目里写死了 `verify_quotes` 在当时环境下的具体输出（如"重建前会显示 `OK=0 / CACHE_MISS≈1071`""CACHE_MISS=1079"）。`.cache/` 是 `.gitignore` 排除的本地缓存目录（[ADR-032]），其内容量因环境而异——同一份代码在另一台机器、另一次 `git clone`、甚至同一台机器新建一个 `git worktree`（本次改动的验证过程就撞上了：worktree 内 `.cache/` 为空，`verify_quotes` 显示 `OK=0/CACHE_MISS=1078`，而主 checkout 当时已是 `OK=1000/FAIL=0/CACHE_MISS=78`）都会得到不同的数字。历史条目本身没错（记的是"当时该环境下发生了什么"），但后续读者如果把它当成"现在的状态"会被误导：以为 quote 尚不可核验、以为还需要全量重跑 `fetch_sources.py`。
+
+**决定：** 不改写 [ADR-044]/[ADR-050] 已记录的历史数字（本就是过去某一刻的真实观测，改写违反 §八"只增补不改写"），只在 ROADMAP.md 对应条目补一句限定语，指向可执行的取数方式——`.cache/` 状态请跑 `make verify-quotes` 看当前实际输出——而不是让读者信任文档里的旧快照。以后任何要记录"构建态/环境态"（`.cache/` 覆盖率、依赖版本、机器本地状态之类，凡是 `.gitignore` 排除或环境相关的）数字的场合，同样优先记"怎么取数"而非具体数字；确需记录数字时标注"某时刻快照，非当前状态"字样。
+
+**未做（留用户判断）：** 现存 78 个 `CACHE_MISS`（`za-jse` 71 / `cn-szse` 5 / `jp-jpx` 1 / `br-b3` 1）要不要跑 `fetch_sources.py` 补齐落盘——`FAIL=0` 已证明现有 1000 条 `quote` 未见编造，不影响数据可信度，补齐的收益只是让计数归零、看着干净，且 `za-jse` 那 71 个多半是 PDF/JS 页面，补不补得到 0 存疑，本条不代为决定。
+
+**日期：** 2026-09-01
