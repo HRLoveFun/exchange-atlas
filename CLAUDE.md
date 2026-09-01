@@ -1,6 +1,8 @@
 # CLAUDE.md — 会话宪法
 
-exchange-atlas《全球交易所图鉴》：用统一框架横向记录全球主要交易所的交易机制与市场制度，每条事实可溯源、标注核实日期。公开仓库，不主动征集外部贡献。
+**本文件的性质**：宪法服务于项目目标，不是目标本身。世界与项目目标会变，条款随之可以修订——「一字不可改」是误解，「随手就改」也是。程序：改动前先说清改什么、后续影响是什么，交用户拍板；执行中若发现某条与现实脱节，先提出、暂按现状办，不要一边照着过时的条款做、一边当没看见。改动怎么落地见 §八。
+
+exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交易所写进规则的交易机制与市场制度，每条事实可溯源、标注核实日期。**核心目标——把交易员理解一个陌生市场所需的关键信息收敛到同一屏可视化，一眼看懂这个市场怎么运转**；当前按主题分成的几个视图是过渡形态，终态合并为一页、其余降级到「更多」入口。横向对比矩阵作为第二价值保留。公开仓库，不主动征集外部贡献。
 
 **覆盖边界**：只收录写进交易所/清算所规则、或作为官方数据发布的制度（交易时段、撮合方式、执行模型、订单类型与优先规则、最小报价单位、涨跌停与熔断、透明度安排、保证金、错误交易规则、卖空限制、上市与结算规则等）。规则的**执行后果**——实际执行风险、真实市场冲击与可承受交易量、流动性真实来源与价差动态、限价申报的价格聚簇行为——只能靠小额实盘测试暴露，不在本项目覆盖范围，不据第三方推断填写（`risks` 章的 `*_note` 与 `costs.implicit_costs_note` 这类分析性字段因此结构性停留在 low/medium，见 `PROJECT/DECISIONS.md` [ADR-020]/[ADR-042]）。这是范围澄清，不是第二节铁律的新增。
 
@@ -12,7 +14,7 @@ exchange-atlas《全球交易所图鉴》：用统一框架横向记录全球主
 
 **核心原则：任何一个事实只在一处手写，其余位置要么生成、要么引用、要么被校验。** 发现自己在两个文件写同一件事，说明这张表哪里划错了，先改表，别继续复制。
 
-同一事实允许有多种「渲染」而不算"写两遍"：`data/` 字段里 `enum`（受控词表值）、`spec`（量化机制的机器形式，见 [ADR-035]）、`zh`/`en`（人读散文）是同一事实的不同渲染，`quote` 是它们共同的 verbatim 底稿。纪律：驱动图形的量化值只在 `spec` 手写，`zh`/`detail` 可复述但不得携带 `spec` 没有的量化事实（`make check` 校验 5b 反查 `spec` 数字 ⊆ `quote`）。
+同一事实允许有多种「渲染」而不算"写两遍"：`data/` 字段里 `enum`（受控词表值）、`spec`（量化机制的机器形式，见 [ADR-035]）、`zh`/`en`（人读散文）是同一事实的不同渲染，`quote` 是它们共同的 verbatim 底稿。纪律：驱动图形的量化值只在 `spec` 手写，`zh`/`detail` 可复述但不得携带 `spec` 没有的量化事实（`make check` 校验 5b 反查 `spec` 数值 ⊆ `quote`，但只覆盖 `confidence: high` 的数值叶子——`spec.note` 与 medium/low 仍靠人，见 [ADR-054]）。
 
 | 文件 | 唯一负责 | 绝不写（改为指向） |
 |---|---|---|
@@ -29,6 +31,7 @@ exchange-atlas《全球交易所图鉴》：用统一框架横向记录全球主
 | `PROJECT/DECISIONS.md` | **为什么这么定** | 是什么 → 各自权威文件 |
 | `PROJECT/OPEN-QUESTIONS.md` | 尚未解决的疑问 | 已解决的 → 删除该条目（转 `data/` + 一条 ADR） |
 | `PROJECT/GLOSSARY.md` | ⚠️ 由 `schema/glossary.yml` 生成，**不要手改** | — |
+| `PROJECT/GIT-RUNBOOK.md` | 后台任务 PR / worktree 清理的操作顺序（踩坑记录） | 推送原则（默认推 main 等）→ `CLAUDE.md` §六 |
 | `.claude/skills/add-exchange/` | 可执行步骤 | 铁律复述 → 引用本文件章节号，如"见 CLAUDE.md §二" |
 
 生成块（`<!-- BEGIN:GENERATED ... -->`）只在六处使用：`ROADMAP.md` 的 progress-matrix 与 health-summary、`README.md` 与 `README.en.md` 的 exchange-list（同一份数据的中英两种渲染，见 `sync.render_exchange_list(lang=...)`）、`GLOSSARY.md` 全文、`OPEN-QUESTIONS.md` 的 auto-issues。这些由 `make sync` 重新生成；`make check` 会验证生成块内容与重新生成的结果一致，跑完 `make sync` 后 `git diff` 应为空——不为空说明有文档忘了同步。
@@ -43,11 +46,13 @@ exchange-atlas《全球交易所图鉴》：用统一框架横向记录全球主
 2. **来源优先级**：交易所官方规则手册 > 官网说明页 > 监管机构文件 > 第三方（研报/维基/新闻）。
 3. **第三方来源的字段 `confidence` 最高只能标 `medium`。** 只有直接读到官方原始文本、且填了 `quote` 的字段才能标 `high`。
 4. **查不清就留空，写进 `OPEN-QUESTIONS.md`，绝不猜。** 空字段不算失败，猜的字段才是。
-5. **`confidence: high` 的字段必须有 `quote`**（原文照抄，一字不改），且 `zh`/`native` 里出现的数字必须能在 `quote` 里找到——`make check` 会做反向校验，填 `700円` 却引不出含 `700` 的原文会直接 fail。
+5. **`confidence: high` 的字段必须有 `quote`**（原文照抄，一字不改），且 `zh`/`en` 里出现的数字必须能在 `quote` 里找到——`make check` 会做反向校验，填 `700円` 却引不出含 `700` 的原文会直接 fail。
 
 `detail` 与 `quote` 不要混淆：`detail` 是自己写的解释，允许归纳改写；`quote` 是原文照抄，是抽检凭据。
 
-抓取一律用 `make fetch EX=<id>`（内部走 curl + 常规浏览器 UA，见 `PROJECT/SOURCES.md`）——**不要用 WebFetch 直接抓交易所官网**，已实测多个交易所对 WebFetch 返回 403，换 curl UA 可以过。抓到的原始页存 `.cache/`，是「这条数据不是编的」的可核查凭据。
+这五条里，第 3 条（第三方封顶 `medium`）与第 5 条的 verbatim + 数值反查已是 `make check`（`validate.py` / `verify_quotes.py`）可阻断构建的硬关卡（[ADR-032]/[ADR-033]）；但 `spec.note` 里的数字、`type: none` 的正面依据、散文的语义忠实度仍是机器盲区（[ADR-054]）——**`make check` 全绿不等于数据没被幻觉污染**，铁律该守的地方一处都不能省。哪几条已机器化随校验器演进，不在这里追。
+
+抓取用 `make fetch EX=<id>`（单家，按 `PROJECT/SOURCES.md` 登记的方式取页）或 `make fetch-sources`（收割全库 `sources` URL 落盘、给 PDF 生成 `.txt` 伴随文本，是 `verify_quotes` 全库反查的前置）——**不要用 WebFetch 直接抓交易所官网**，已实测多个交易所对 WebFetch 返回 403。UA / 反爬绕过的具体门道（含 `sec.gov`/`finra.org` 的 Fair Access 身份 UA、`fetch-sources` 全量重跑会用失败页覆盖好缓存的坑）见 `PROJECT/SOURCES.md`，不写死在这里。抓到的原始页存 `.cache/`，是「这条数据不是编的」的可核查凭据。
 
 ---
 
@@ -65,17 +70,18 @@ exchange-atlas《全球交易所图鉴》：用统一框架横向记录全球主
 
 ---
 
-## 四、数据质量的外部判据（不靠自觉）
+## 四、质量的外部判据（不靠自觉）
 
 - `PROJECT/ROADMAP.md` 的进度矩阵是 `make sync` 扫描 `data/` **算出来的**，不是手写"做完了"就算数。🟡（部分完成，含 low confidence 或空字段）会一直挂着，直到字段真的被坐实。
-- v0.1 阶段性验收：上交所填完后人工抽检 20 个字段核对 `quote` 与原始出处，**通过率需 ≥95% 才能继续铺开其他交易所**；低于此数先停下来修流程，不要带着已知的高错误率继续扩张。
-- v1.0 阶段性验收（按所评估，不是按批次）：每新增一家交易所人工抽检 10 个字段核对 `quote` 与原始出处，**通过率仍需 ≥95%**（样本量比 v0.1 小，阈值不放宽，理由见 `PROJECT/DECISIONS.md` [ADR-017]，此处不复述）。某家未过阈值只暂停复核该家，不影响同批次其他已过关的交易所。
+- **任何批量数据 / `spec` 工作，交付前人工抽检值与原始出处，通过率 < 95% 就停下来修流程，不带着已知错误率继续铺开。** 阈值不随样本量放宽（[ADR-017]）；某家 / 某批不过只暂停复核该家 / 该批，不牵连已过关的。历史实例：v0.1 上交所抽检 20 字段、v1.0 每新增一家抽检 10 字段，都按此执行。
+- **`spec` 层验收**（v2.0）：`spec` 与 `quote` 逐条比对 6 个维度——数值 / `unit` / `side` / `type: none` 的正面依据 / `note` 里的数字 / `components`·`tiered`·`cap` 完整性，均须 ⊆ `quote`（范式见 [ADR-054]）。**单批 `spec` 回填触及 > 30 个字段（约一章量）时，第二人独立复核是必经步骤**——不是协调者自查，ROADMAP 条目打勾前必须有另一个视角跑完这道关（[ADR-054] 实测串行回填初检约 80%，正是 95% 阈值要拦的个案错误）；章节可视化顺带的少量 `spec` 微调仍自检即可。
+- **改动交付前 `make build` 必须全绿。** 改动引入新的结构或不变式（新字段 / 新枚举 / 新 UI 约定 / 新 `spec` 形状……）时，必须同时给 `validate.py` / `verify_quotes.py` / `check_*.py` 加上能机器校验它的检查——[ADR-024]/[ADR-033]/[ADR-049] 的既有模式，把「该守的」从自觉变成构建关卡，别只在 ROADMAP 里提一句。
 
 ---
 
 ## 五、常用命令
 
-跑 `make help` 看完整命令列表（`Makefile` 是命令的唯一权威，这里不重复）。最常用的：`make fetch EX=<id>`、`make build`、`make check`、`make serve`。
+跑 `make help` 看完整命令列表（`Makefile` 是命令的唯一权威，这里不重复）。最常用的：`make fetch EX=<id>` / `make fetch-sources`、`make build`、`make check`、`make serve`。
 
 ---
 
@@ -84,30 +90,20 @@ exchange-atlas《全球交易所图鉴》：用统一框架横向记录全球主
 个人独立维护的仓库，GitHub 上 `main` 无分支保护、无强制 CI 卡点，走 PR 只是多一次手动点 merge，没有额外价值。**默认直接推 main，不必开 PR、不必等审核**：
 
 - **交互式会话**（终端里逐轮对话）：开始改动前先 `git pull --ff-only` 确认本地 `main` 与 `origin/main` 同步、无分叉；改完后跑一遍 `make build`（`sync` + `check`）确认无误，直接 `git add` + `git commit` + `git push origin main`。本条即为 CLAUDE.md 对自动 push 的授权，不必每次都问"要不要 push"。仍然遵守：`make check` 不过不推、不 force push、不改写已推送的历史。
-- **后台任务（background job）**：Claude Code 平台对后台任务有硬性限制——不能直接 push/merge 到 main，只能建分支开 PR，这是运行环境层面的限制，CLAUDE.md 管不到，改不了。后台任务做完仓库改动后会照常留一个 PR，需要手动 `gh pr merge` 或在网页点一下——这一步目前没有能从项目侧省掉的办法。想要免 PR 的直接推送体验，走交互式会话。
-- **合后台任务留下的 PR 前，先把 head 分支的 worktree 摘掉**：`gh pr merge --delete-branch` 的顺序是「先删本地分支、再删远端分支」，而 PR 的 head 分支通常正被 `.claude/worktrees/<name>` 检出，git 会以 `cannot delete branch '<branch>' used by worktree at '...'` 拒绝。**此时远端已经合并成功，但命令以非零码退出，且远端分支残留**——只看退出码会误判成合并失败，再跑一次只会得到 `was already merged` 又卡在同一个本地错误上。正确顺序：
-
-  ```bash
-  git -C .claude/worktrees/<name> status -sb   # 先确认无未提交内容；squash 合并后提交已被 main 的 merge commit 收走，删掉不丢东西
-  git worktree unlock .claude/worktrees/<name> # 后台任务的 worktree 往往是 locked，不 unlock 不能 remove
-  git worktree remove .claude/worktrees/<name>
-  git branch -D <head-branch>                  # squash 合并后 -d 会判"未合并"，需 -D
-  gh pr merge <n> --squash --delete-branch
-  git pull --ff-only                           # gh 在删分支失败时会跳过本地 main 的同步，合并后自己补一次
-  ```
-
-  另：`gh pr merge` 不带 `--subject/--body` 会弹 `$EDITOR` 让人编辑 squash 提交信息，非交互执行必须显式给 `--subject`（GitHub 不会自动追加 `(#n)`，要自己带上）与 `--body ""`。
+- **后台任务（background job）**：Claude Code 平台对后台任务有硬性限制——不能直接 push/merge 到 main，只能建分支开 PR，这是运行环境层面的限制，CLAUDE.md 管不到，改不了。后台任务做完仓库改动后会照常留一个 PR，需要手动 `gh pr merge` 或在网页点一下。想要免 PR 的直接推送体验，走交互式会话。
+- **一个逻辑改动对应一个 commit**（便于单独回溯 / 回滚），不把不相关的改动攒进一个大提交；一次成体系的改动（如一条 ADR 完整落地）作为一个提交是可以的。
+- **合并后台任务留下的 PR 时**，`gh pr merge --delete-branch` 会因 head 分支正被 `.claude/worktrees/<name>` 检出而报错、且此时远端其实已合并成功（只看退出码会误判成失败）——完整踩坑与正确操作顺序见 `PROJECT/GIT-RUNBOOK.md`。
 
 ---
 
 ## 七、目录地图（简要，详细结构见各目录内文件）
 
 ```
-schema/       数据结构、术语表、枚举表的权威（YAML）
+schema/       数据结构、术语表、枚举表、spec 形状的权威（YAML）
 data/         各交易所权威数据（YAML，人手写）
-tools/        fetch.py / sync.py / validate.py
-docs/         GitHub Pages 站点根目录（含构建产物 docs/data/）
-PROJECT/      进度、决策、悬案、资料来源
+tools/        抓取 / 构建 / 校验脚本（清单见 Makefile 各 target 与文件头注）
+docs/         GitHub Pages 站点根目录（前端 assets/app.js·styles.css，构建产物 docs/data/）
+PROJECT/      进度、决策、悬案、资料来源、Git runbook
 .cache/       抓取的原始页快照（不入库，供核查）
 ```
 
@@ -116,6 +112,8 @@ PROJECT/      进度、决策、悬案、资料来源
 ## 八、记录纪律：里程碑/进展/可复用知识，收尾时就地回写
 
 **目的**：新会话只读 `CLAUDE.md` + `ROADMAP.md` 就能接上下文（见文首），前提是每次真发生了这三类事就有人写下来——不要等被问起、也不要攒到"下次一起补"。回写是收尾的一部分，不是额外任务：一件事做完了但该回写的文件没改，视为没做完。
+
+同理，另外两件也是收尾的一部分，缺了同样算没做完：**每个逻辑改动一个 `git commit`**（规则见 §六）、**交付前 `make build` 全绿且新引入的不变式已加机器校验**（判据见 §四）。
 
 写什么、写去哪继续遵循第一节边界表；这里只补一件事——**触发时机**：
 

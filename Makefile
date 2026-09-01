@@ -1,10 +1,13 @@
-.PHONY: help fetch sync check build serve verify-quotes verify-quotes-live check-en-terms
+.PHONY: help fetch fetch-sources sync check build serve verify-quotes verify-quotes-live check-en-terms
 
 help: ## 列出所有命令
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
 
 fetch: ## 按 PROJECT/SOURCES.md 登记的抓取方式取页到 .cache/ ；用法: make fetch EX=<id>
 	python3 tools/fetch.py $(EX)
+
+fetch-sources: ## 收割 data/ 里所有 sources URL 落盘 .cache/（verify_quotes 全库反查前置）；用法: make fetch-sources [EX=<id>]。全量重跑的坑见 PROJECT/SOURCES.md
+	python3 tools/fetch_sources.py $(if $(EX),--ex $(EX),)
 
 sync: ## 重生成所有 GENERATED 文档块 + docs/data/ 构建产物（幂等）
 	python3 tools/sync.py
