@@ -528,7 +528,7 @@ market_structure:
       review_window_min: null
       deviation_threshold_pct: null
       resolution: no_bust
-      note: "无交易所层级的『明显错误成交作废』机制——成交一经撮合即通知委托人并制作凭证。证券经纪商受托买卖发生错误的，依《证券经纪商受托买卖错帐及更正帐号处理作业要点》以经纪商名义开立的『错帐处理专户』处理：该专户买卖视同一般交易并按规定缴纳证券交易税，损益由经纪商承担；错误持仓在专户内平仓，原成交不撤销。事前防线：瞬间价格稳定措施（±3.5% 暂缓撮合 2 分钟）与每日涨跌幅限制"
+      note: "无交易所层级的『明显错误成交作废』机制——成交一经撮合即通知委托人并制作凭证。证券经纪商受托买卖发生错误的，依《证券经纪商受托买卖错帐及更正帐号处理作业要点》以经纪商名义开立的『错帐处理专户』处理：该专户买卖视同一般交易并按规定缴纳证券交易税，损益由经纪商承担；错误持仓在专户内平仓，原成交不撤销。事前防线：瞬间价格稳定措施（±3.5% 暂缓撮合 2 分钟，见 volatility_interruption）与每日涨跌幅限制"
     zh: "台湾证券交易所没有『成交价偏离参考价达某百分比、限时申请复核作废』的常规错误交易处理机制。买卖申报一经撮合成交，经纪商即通知委托人并制作凭证。证券经纪商受托买卖发生错误的，依营业细则以经纪商自己名义开立『错帐处理专户』处理——该专户买卖视同一般交易、按规定缴纳证券交易税，损益由经纪商承担，错误持仓在专户内平仓，原成交不予撤销"
     en: "The TWSE has no routine erroneous-trade process of the US/EU type (a deviation threshold plus a time-limited request for review and cancellation). Once orders are matched, the broker notifies the client and prepares the records. Where a securities broker makes an execution error, it is handled under the Operating Rules through an 'error-account' opened in the broker's own name — trades in that account are treated as ordinary trades subject to securities transaction tax, gains and losses are borne by the broker, the erroneous position is closed out within the account, and the original trade is not cancelled"
     detail: "台湾证券交易所营业细则第 87 条 + 《证券经纪商受托买卖错帐及更正帐号处理作业要点》。与 trading_halt_mechanism（讯息面暂停）视角不同。resolution 记 no_bust：错误由经纪商端错帐专户承担，成交本身不作废。台湾与日本 / 香港证券市场同属『成交终局』一类。"
@@ -1060,7 +1060,7 @@ costs:
     detail: "证券商须向本公司缴纳交易经手费及会员费等费用属一般知识，但本次抓取的来源页均未包含具体费率表原文，依 CLAUDE.md 二第1/4条不凭记忆填写、查不清就留空，如实留空，见 OPEN-QUESTIONS。"
 
   clearing_fees:
-    spec: {rate: null, unit: permille, side: both, note: "TDCC 清算交割服务费 万分之 0.14625（0.0014625%，向交易所收）+ 帐簿划拨处理服务费 万分之 0.1425（向经纪商收）；quote 为国字数字，不放数值 spec"}
+    spec: {rate: null, unit: permille, side: both, note: "TDCC 清算交割服务费 万分之 0.14625（向交易所收）+ 帐簿划拨处理服务费 万分之 0.1425（向经纪商收）；quote 为国字数字，不放数值 spec"}
     zh: "依台湾集中保管结算所（TDCC）《收费办法》第1条（现行条文版本经民国104年12月16日金管会核准修订），主要向交易所收取『清算交割服务费』：按每日成交金额（议价交易及兴柜股票及开放式受益凭证部分除外）计收，费率为买卖金额万分之0.14625，付费者为台湾证券交易所、证券柜台买卖中心；另向证券经纪商收取『帐簿划拨处理服务费』，按每日成交金额计收，费率为买卖金额万分之0.1425；此外尚有依成交单位数分级收费之『买卖交割处理服务费』（付费者为证券自营商）及送存╱领回╱转帐手续费、帐户维护费等项目"
     en: "Under Article 1 of the Taiwan Depository & Clearing Corporation's (TDCC) Fee Measures (current text as amended per FSC approval dated ROC 104/12/16), TDCC charges TWSE and the Taipei Exchange a 'clearing and settlement service fee' on daily trading value (excluding negotiated trades and Emerging-Stock/open-end fund transactions) at a rate of 0.14625 basis points of trade value; it separately charges securities brokers a 'book-entry transfer processing service fee' at 0.1425 basis points of daily trading value; additional items include a tiered 'trade settlement processing service fee' charged to securities dealers based on the number of trading units settled, plus deposit/withdrawal/transfer handling fees and account maintenance fees"
     quote: "第一條 股票、受益憑證、存託憑證……收費標準：一、清算交割服務費：(一)收費方式：按每日成交金額（議價交易及興櫃股票及開放式受益憑證部分除外）計收，每月計算一次。(二)費率：按買賣金額各萬分之○．一四六二五計收。(三)付費者：臺灣證券交易所、證券櫃檯買賣中心。……三、帳簿劃撥處理服務費：(一)收費方式：按每日成交金額計收，每月計算一次。(二)費率：按買賣金額各萬分之○．一四二五計收。(三)付費者：證券紀經商。／臺灣集中保管結算所股份有限公司104年12月16日經「金融監督管理委員會」金管證投字第1040049870號函准予修訂"

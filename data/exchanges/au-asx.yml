@@ -406,7 +406,7 @@ market_structure:
         - {price_min: 0, price_max: 10, tick: 0.1}
         - {price_min: 10, price_max: 200, tick: 0.5}
         - {price_min: 200, price_max: null, tick: 1}
-      full_table_note: "ASX 现货『Price Steps』3 档（ASX Operating Rules Procedures 表，以澳分列示）：0.1–9.9 分 tick 0.1 分；10–199.5 分 tick 0.5 分；≥ 200 分 tick 1 分。折算：< AUD 0.10 → 0.001；AUD 0.10–1.995 → 0.005；≥ AUD 2.00 → 0.01"
+      full_table_note: "ASX 现货『Price Steps』3 档（ASX Operating Rules Procedures 表，以澳分列示）：0.1–9.9 分 tick 0.1 分；10–199.5 分 tick 0.5 分；≥ 200 分 tick 1 分"
       note: "spec 以澳分（cents）为单位，与官方表一致；min_tick 0.1 分 = AUD 0.001"
     zh: "现货 Price Steps 按澳分分三档：0.1–9.9 分 tick 为 0.1 分（即 < AUD 0.10 的股票最小变动 AUD 0.001）；10–199.5 分 tick 为 0.5 分；200 分及以上 tick 为 1 分"
     en: "Cash-market Price Steps in three tiers (in Australian cents): 0.1–9.9 cents → 0.1 cent tick (i.e. AUD 0.001 for shares below AUD 0.10); 10–199.5 cents → 0.5 cent tick; 200 cents and above → 1 cent tick"
@@ -1353,15 +1353,19 @@ costs:
     verified: 2026-08-27
 
   financial_transaction_tax:
-    spec: {rate: null, note: "未找到明确不征依据：本字段来源仅覆盖 ASX 现货市场费率表，未含联邦 / 州税制的正面陈述；见 OPEN-QUESTIONS"}
-    zh: "澳大利亚联邦与各州是否对股票等证券的买卖征收一般性的金融交易税（securities transaction tax / FTT），本次未取得正面依据——本字段来源仅覆盖 ASX 现货市场费率表，不含联邦 / 州税制条文；交易环节已核实的法定收费为 ASX 成交费与清算费，各州上市证券转让印花税已废除（见 stamp_duty）。按 CLAUDE.md 第二节第四条，「未提及」不等于「明确不征」，故 spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS"
-    en: "Whether the Commonwealth or the states levy a general financial transaction tax (securities transaction tax / FTT) on share trades was not positively established this session — this field's sources cover only the ASX cash-market fee schedule and contain no federal / state tax-law text. The statutory charges verified at the transaction level are the ASX trade fee and clearing fee, plus the now-abolished state stamp duty on transfer of listed securities (see stamp_duty). Per the CLAUDE.md anti-hallucination rules, absence of a mention is not proof of non-levy, so the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS"
+    spec: {rate: null, note: "来源已升级：Baker McKenzie Global Private M&A Guide (Australia)（第三方律所综述，封顶 medium）明确『Stamp duty is not payable on share transfers』，澳大利亚对股份转让不课印花税式转让税。仍维持 rate: null（幽灵条）——该综述只证「无印花税式转让税」，未逐字出现「no financial transaction tax」字样；如需翻 type: none 需财政部/ATO 明确「无 FTT」的一手陈述，见 OPEN-QUESTIONS"}
+    zh: "澳大利亚对股票等证券的买卖不征收一般性的金融交易税(FTT)：Baker McKenzie Global Private M&A Guide (Australia) 明确「Stamp duty is not payable on share transfers」，各州上市证券转让印花税亦已废除（见 stamp_duty）；联邦层面无独立的 FTT 税目。交易环节已核实的法定收费仅为 ASX 成交费与清算费。按 CLAUDE.md 第二节第四条，前述第三方综述只证「无印花税式转让税」而未逐字出现「no FTT」，故仍记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。"
+    en: "Australia does not levy a general financial transaction tax (FTT) on share trades: Baker McKenzie's Global Private M&A Guide (Australia) states 'Stamp duty is not payable on share transfers', and state stamp duty on transfer of listed securities has been abolished (see stamp_duty); there is no separate federal FTT head of tax. The only statutory transaction-level charges verified are the ASX trade fee and clearing fee. Per the CLAUDE.md anti-hallucination rules the source positively establishes 'no stamp-duty-style transfer tax' but does not contain the literal phrase 'no FTT', so the spec remains rate: null (ghost bar) rather than type: none and is referred to OPEN-QUESTIONS."
     sources:
       - title: ASX Trade 现货市场费率表（ASX 官网 PDF）
         url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/trading/schedule-of-fees.pdf
         accessed: 2026-08-27
+      - title: Stamp duty and tax | Australia | Global Private M&A Guide（Baker McKenzie，第三方律所税法综述）
+        url: https://resourcehub.bakermckenzie.com/en/resources/global-private-ma-guide-limited/asia-pacific/australia/topics/agreeing-the-acquisition-agreement/stamp-duty-and-tax
+        accessed: 2026-09-01
+    quote: "Stamp duty is not payable on share transfers (provided that the target company does not directly or indirectly hold ... landholder)."
     confidence: medium
-    verified: 2026-08-27
+    verified: 2026-09-01
 
   capital_gains_tax:
     zh: "澳大利亚对资产增值征收资本利得税（CGT），并入所得税按边际税率计征；澳大利亚税务居民个人及信托持有资产超过 12 个月可享 50% CGT 折扣（公司不适用）。注：2026 年联邦预算宣布自 2027 年 7 月 1 日起废止该 50% 长期折扣，但截至核实日（2026-08-27）该改革尚未生效，当前仍适用 50% 折扣"

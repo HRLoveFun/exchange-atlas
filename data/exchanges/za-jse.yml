@@ -514,7 +514,7 @@ market_structure:
     confidence: high
 
   volatility_interruption:
-    spec: {auction_minutes: 5, note: "波动性拍卖冷静期：5 分钟，可追加 1 次 2 分钟市价单延期，随后最长 30 秒随机撮合窗口完成集合竞价；触发阈值见 price_limits（ZA01 连续 ±10%/±3% 等）"}
+    spec: {auction_minutes: 5, note: "波动性拍卖冷静期：5 分钟，可追加 1 次 2 分钟市价单延期，随后最长 30 秒随机撮合窗口完成集合竞价；触发阈值见 price_limits（ZA01 连续静态 ±10%/动态 ±3% 等）"}
     zh: "波动性拍卖冷静期（Volatility Auction Call Session）：持续5分钟，可能追加1次2分钟的市价单延期（Market Order Extension），随后进入最长30秒的随机撮合窗口完成集合竞价定价"
     en: "Volatility Auction Call Session: lasts 5 minutes, may be followed by one 2-minute Market Order Extension, then a random period of up to 30 seconds before the auction uncrossing"
     sources:
@@ -1481,10 +1481,10 @@ costs:
     detail: "Investor Protection Levy 为依《金融监管法》（Financial Sector Regulation Act）设立的小额征费，用于投资者保护基金；其具体费率未逐条核实。原字段以 type: none 同时断言「无独立按笔监管费」并承认存在该征费，两者矛盾；本次抽检按防幻觉铁律二.4 改为 rate: null 并转 OPEN-QUESTIONS，待取得 SARS / FSCA 收费框架原文后坐实。"
 
   stamp_duty:
-    spec: {rate: null, unit: pct, side: buy, note: "证券转让税 STT 0.25%（0,25%），2008-07-01 起取代原印花税；quote 为逗号小数，不放数值 spec"}
-    zh: "证券转让税（Securities Transfer Tax，STT）：税率0.25%，适用于上市与未上市证券的每一次转让，2008年7月1日起依《证券转让税法》（No.25 of 2007）及其征管法（No.26 of 2007）施行，取代原印花税制度"
-    en: "Securities Transfer Tax (STT): levied at 0.25% on every transfer of a security (listed or unlisted), effective 1 July 2008 under the Securities Transfer Tax Act No. 25 of 2007 and its Administration Act No. 26 of 2007, replacing the former stamp duty regime"
-    detail: "南非现行税种法定名称为\"证券转让税\"而非\"印花税\"，性质对应本项目 stamp_duty 字段（证券转让环节的交易税），非另设的 financial_transaction_tax。"
+    spec: {rate: null, unit: pct, side: buy, note: "证券转让税 STT 0.25%（0,25%），2008-07-01 起取代原印花税；quote 为逗号小数，不放数值 spec。side: buy——南非 STT 通行由买方（受让人）承担（经纪商/参与者为法定纳税人、向买方追偿），但本字段 quote 未含方向措辞，side: buy 保留待补 SARS/立法原文（见 OPEN-QUESTIONS），不移除（渲染层缺省回退 both 更错）"}
+    zh: "证券转让税（Securities Transfer Tax，STT）：税率0.25%，适用于上市与未上市证券的每一次转让，2008年7月1日起依《证券转让税法》（No.25 of 2007）及其征管法（No.26 of 2007）施行，取代原印花税制度。方向记为买方（南非 STT 通行由受让人/买方承担），惟本字段 quote 未含方向措辞，待补强。"
+    en: "Securities Transfer Tax (STT): levied at 0.25% on every transfer of a security (listed or unlisted), effective 1 July 2008 under the Securities Transfer Tax Act No. 25 of 2007 and its Administration Act No. 26 of 2007, replacing the former stamp duty regime. The incidence is recorded as buy-side (South African STT is generally borne by the transferee/buyer), but this field's quote does not carry the directional wording and it is pending reinforcement."
+    detail: "南非现行税种法定名称为\"证券转让税\"而非\"印花税\"，性质对应本项目 stamp_duty 字段（证券转让环节的交易税），非另设的 financial_transaction_tax。2026-09-01 复核：ADR-058 曾把 side: buy 记为「SARS 原文坐实（applies to the purchase）」，收尾审查（ADR-058 收尾修订）判定本字段 quote 未含该措辞，改为保留 side: buy + 待补强表述。"
     sources:
       - title: Securities Transfer Tax（sars.gov.za）
         url: https://www.sars.gov.za/types-of-tax/securities-transfer-tax/
@@ -1492,6 +1492,7 @@ costs:
     quote: "Securities Transfer Tax is levied on every transfer of a security and was implemented from 1 July 2008 under the Securities Transfer Tax Act, No. 25 of 2007, together with the Securities Transfer Tax Administration Act, No. 26 of 2007. ... Securities tax is levied at the rate of 0,25%."
     en_required: true
     confidence: high
+    verified: 2026-09-01
 
   financial_transaction_tax:
     spec: {rate: null, note: "未找到明确不征依据：本字段 quote 只讲 STT 的立法施行（2008-07-01），无「无独立 FTT」的正面陈述；见 OPEN-QUESTIONS"}

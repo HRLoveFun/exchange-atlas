@@ -1244,3 +1244,41 @@
 **验证：** 纯文档。改 `PROJECT/DECISIONS.md`（本条 + [ADR-056]「遗留」段补一句承接）+ `PROJECT/ROADMAP.md`（§三 新增 Phase 4 条目、§一 三处同步）+ `CLAUDE.md` 开篇定位句补 `[ADR-057]` 引用。`make check` 的 `validate` 20 家 0/0、生成块无 diff（三个文件都不被 `sync.py` 扫描）。
 
 **日期：** 2026-09-01
+
+### ADR-058 — `validate.py` 5b 增补 `spec.note` 数字反查（5c）：把「note 夹带数字」变成构建关卡
+
+**背景：** [ADR-054] 成本瀑布 103 条独立复核里，8 处 FIX 有 4 处属于同一个机器盲区——`spec` 自由文本键（`note` / `*_note`）里夹带的数字完全不被 `make check` 覆盖。典型是 `cn-sse` `exchange_fees`（medium）的 `note` 写进了深交所费率，图照常渲染、数字错了零信号；5b 只反查 `confidence: high` 的**数值叶子**，这类散文式字符串连高门槛都进不去。[ADR-054] 把「给 5b 增补 note 数字反查」记为「未实施、留 ROADMAP 迭代点」。
+
+**决定：** 在 `validate.py` 落地 5c——
+
+- **对象**：`spec` 子块里自由文本键（`note` / `*_note`）的字符串，不限 `confidence`（medium/low 的 note 正是盲区重灾区）。
+- **命中范围**：note 常做交叉引用（如「见 price_limits」），允许复述人读文本里已有的数字，但**不得夹带谁都没有的数字**。〔收尾修订 B5/B7：范围由「同字段 quote/zh/detail」放宽为「本交易所文件内所有 quote/zh + 本字段 detail」，见下方「收尾审查修订」段〕
+- **非数值 token 剥离后再比对**：ISO 日期、时刻、孤立年份、条款号（Rule / § / 第 N 条）、ADR / 悬案编号引用、字母粘连代码（MT30、ZA01、FE10）——这些不是量化机制值，挡的是「费率 / 阈值 / 金额」这类静默错误。小数尾随零归一（`0.50 ≡ 0.5`）避免书写精度误报。
+- **报错即阻断构建**，与 5b 同等级。
+
+**落地残差（现网数据）：** 5c 跑在现网抓出 13 处违例——全在第五章 `market_structure` 的 `spec.note`（+ 1 处 `costs.clearing_fees`），正是 [ADR-054] 抽检只覆盖 `costs` 章而漏掉的盲区。初次修复一律删数字；收尾审查（见下方「收尾审查修订」B4）逐条复核：其中 5 处是**在兄弟字段有源**的合法交叉引用，文件级 5c（B5）下已还原带数字；6 处确认删除正确（无源 / 派生值，含 `cn-szse` 价格笼子 `102%/98%` 与 `ch-six`「随机 30 秒」——后者 SIX 实为 2 分钟随机窗口、`30 秒` 系误植）。
+
+**文档回写：** `CLAUDE.md` §一 / §二 移除「`spec.note` 数字是机器盲区」的旧表述（改指向本条）；`schema/spec.yml` 头部补 5c 说明。
+
+**验证：** `make check` 20 家 0/0；负向探针确认——注入 `note: "测试费率 0.0341‰ 已确认"`（无底稿）被拦，同数字出现在 `quote` 则放行。
+
+**没改：** 5b 的高门槛数值叶子反查不变；medium/low 的**数值叶子**（非 note 字符串）仍靠人——5c 只管 note 里的数字，不把 5b 的覆盖扩到 medium/low 数值叶子。
+
+**日期：** 2026-09-01
+
+---
+
+**收尾审查修订（2026-09-02）** — 对 A1（5c）+ A2/A3（数据层坐实，记录在 `ROADMAP` 第三节 + OPEN-QUESTIONS #88，非本 ADR 正文）做第二视角复核，逐条落地 8 项（B1–B8）：
+
+- **B1（数据）· `hk-hkex financial_transaction_tax` 回退 `type: none` → `rate: null`。** A2 据 IRD 印花税页翻的 `type: none`，其引文「stamp duty relief is available for the transfer of ... shares」讲的是印花税**减免**，不构成「除印花税外无独立证券交易税」的正面依据（CLAUDE.md 二.4）。回退 `rate: null` + 诚实 `note`，IRD 源保留为补充但注明不支撑结论，转 OPEN-QUESTIONS。
+- **B2（措辞）· 「一手源」收敛为「第三方综述」。** A2/A3 的 `kr-krx stamp_duty`（PwC Tax Summaries）、`au-asx FTT`（Baker McKenzie M&A Guide）此前在 note / source title / ROADMAP 里被称「一手税法综述 / 一手源」——它们是第三方顾问综述（一手＝韩国《印花税法》/ ATO 裁定本身），`confidence` 已封顶 `medium` 合规，但表述夸大。全部改「第三方（律所 / 四大税务简报）综述」。`kr-krx stamp_duty` 保留 `type: none` 但 `note`/`zh`/`en` 标「第三方综述支撑、暂定」并转 OPEN-QUESTIONS。`elaw.klri.re.kr`（韩国法令英文版）、`ecfr.gov`（联邦法规）是真一手，不改。
+- **B3（流程）· 补 5 个字段的 `verified: 2026-09-01`。** `kr-krx stamp_duty` / `kr-krx FTT` / `za-jse stamp_duty` / `us-nasdaq regulatory_fees` / `hk-hkex FTT` 均在 2026-09-01 按新源重核过，但只有 `au-asx FTT` 补了字段级 `verified`，其余继承 chapter-meta 的旧日期。按新源重核的字段应带当日 `verified`。
+- **B4（数据）· 复核 A1 顺带删掉的 12 处第五章 `spec.note` 数字。** 逐条核对被删数字是否在兄弟字段有源：**5 处还原**（`fr-euronext` / `sg-sgx` / `uk-lse` 波动性中断的走廊阈值、`za-jse` ZA01 分段阈值、`tw-twse` 瞬间价格稳定 ±3.5%/2min——均在同文件 `price_limits` / `volatility_interruption` 的 `quote`/`zh` 逐字可查，文件级 5c〔见 B5〕下合法）；**6 处确认删除正确**（`au-asx` 澳分→澳元折算、`br-b3` "实务 R$0.01"、`tw-twse` 派生 `0.0014625%` 均为无源 / 派生值；`cn-szse` 价格笼子 `102%/98%` 与 `ch-six` 「随机 30 秒」在本所文件里**哪都没有**——后者 SIX 实为 2 分钟随机窗口，`30 秒` 系误植，5c 顺带纠了一个真错）。
+- **B5（工具）· 5c 命中范围从「同字段」放宽到「本交易所文件内所有 `quote`/`zh`」。** 原「同字段」逼出「删除」作为默认修法，删掉了 `cn-szse 102/98` 之外一批**正确且在兄弟字段有源**的交叉引用数字。文件级保住合法交叉引用（`note` 引 `price_limits` 阈值），同时仍拦跨所造假（A 所费率写进 B 所字段在 B 所文件里找不到）。代价：同文件跨字段数字碰撞的漏报风险略升（`cn-szse 102` 就因碰撞 5c 放行、靠人工核对才发现无源）——**5c 全绿不代表 note 数字都有源，仍需抽检**。实现见 `collect_verbatim_texts`。
+- **B6（工具）· `NOTE_NON_VALUE_RE` 补法规引用号剥离。** 探针确认 `17 CFR 240.31`→误报 `17`/`240.31`、`RTS 11`→误报 `11`。补 `\d+ CFR \d+`、`RTS \d+`、`MiFID [IVX]+`、`(EU) YYYY/NNN`、`Procedure N`、`Ref N/YYYY`、`No. N` 等。
+- **B7（工具）· B「收紧到 quote+zh」校准为「文件级 quote/zh + 本字段 detail」。** 实测「彻底去掉 detail」会打到 [ADR-045] 起的既定写法——「主档费率进 `spec`/`zh`、次级档进同字段 `detail`」（次级档常无 verbatim quote，放 `detail` 比塞 `zh` 更合 §一）。只把**本字段自己的 detail** 并进目标，不吃全文件 detail。
+- **B8（文档）· `ROADMAP` 下一步列表编号 6→5 重编；`us-nasdaq regulatory_fees` 补 eCFR『covered sale』逐字引文（经 eCFR versioner API 2026-09-01 核实——`/current/` HTML 页对自动客户端设访问闸；`.cache/us-nasdaq/` 已手动播种，post-merge 可 `make fetch-sources EX=us-nasdaq` 复核）；本「收尾审查修订」段本身。**
+
+**收尾审查验证：** `make check` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK；`make sync` 二次幂等；5c 正负向探针复跑通过（跨所造假拦下、跨字段合法引用放行、法规引用号不误报）。
+
+**日期（收尾修订）：** 2026-09-02

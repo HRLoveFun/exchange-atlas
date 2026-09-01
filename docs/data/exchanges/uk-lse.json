@@ -612,12 +612,12 @@
           "regime": "tiered_by_price_and_liquidity",
           "min_tick": null,
           "currency": "GBP",
-          "full_table_note": "英国承接欧盟 MiFID II RTS 11（Commission Delegated Regulation (EU) 2017/588，脱欧后保留于英国法）的统一 tick size 制度：按 18 个价格区间 × 6 个「日均成交笔数（ADT）」区间交叉查表——价格越高、流动性越低，最小报价单位越大；从 0.0001 到 500（标的计价货币单位）。ETF 统一按最高流动性档。",
+          "full_table_note": "英国承接欧盟 MiFID II RTS 11（Commission Delegated Regulation (EU) 2017/588，脱欧后保留于英国法）的统一 tick size 制度：按价格区间 × 6 个「日均成交笔数（ADT）」区间交叉查表——价格越高、流动性越低，最小报价单位越大；从 0.0001 到 500（标的计价货币单位）。ETF 统一按最高流动性档。",
           "note": "驱动订单簿的量化值以 RTS 11 表为准；MIT201 另区分静态 / 动态 tick regime（静态＝固定档，动态＝按订单意向价格实时定档），两者都在 RTS 11 表框架内"
         },
         "zh": "采用英国承接欧盟 MiFID II 的统一最小报价单位技术标准（脱欧后保留于英国法）：按证券价格区间与日均成交笔数两个维度交叉查表确定——价格越高、流动性（日均成交笔数）越低，档位越大；交易所交易基金统一按最高流动性档",
         "en": "Uses the UK's assimilated EU harmonised tick-size technical standard (retained in UK law after Brexit): the minimum price increment is obtained from a two-dimensional table indexed by the security's price band and by its average daily number of transactions — the higher the price and the lower the liquidity, the coarser the tick; exchange-traded funds use a single (most-liquid) liquidity band",
-        "detail": "此前留空（数值表在未抓取的 Business Parameters 文档内）。本次以 legislation.gov.uk 托管的 RTS 11（Commission Delegated Regulation (EU) 2017/588）官方法条原文（含完整 tick size 表）为准补齐；spec 的 min_tick 留 null——单一最小值随标的价格 / 流动性变动，完整表见 full_table_note 指向的法条。",
+        "detail": "此前留空（数值表在未抓取的 Business Parameters 文档内）。本次以 legislation.gov.uk 托管的 RTS 11（Commission Delegated Regulation (EU) 2017/588）官方法条原文（含完整 tick size 表）为准补齐；spec 的 min_tick 留 null——单一最小值随标的价格 / 流动性变动，完整表见 full_table_note 指向的法条（RTS 11 表最小报价单位 0.0001、最大 500，单位同标的计价货币单位）。",
         "sources": [
           {
             "title": "MIT201 – Guide to the Trading System Issue 15.8（官网）",
@@ -732,7 +732,7 @@
         "spec": {
           "static_pct": null,
           "dynamic_pct": null,
-          "note": "静态价格监控（相对上次集合竞价价）+ 动态价格监控（相对最近成交价）触发 5 分钟波动性拍卖（含最多一次 2 分钟市价订单延期）；富时100 FE10 组静态 8%/动态 3%，FS10 组 10%/5%，故两个 pct 键均留 null；每次拍卖及延期后另加最长 30 秒随机"
+          "note": "静态价格监控（相对上次集合竞价价）+ 动态价格监控（相对最近成交价）触发 5 分钟波动性拍卖（含最多一次 2 分钟市价订单延期）；富时100 FE10 组静态 8%/动态 3%，FS10 组 10%/5%（见 price_limits），故两个 pct 键均留 null；每次拍卖及延期后另加最长 30 秒随机"
         },
         "zh": "静态价格监控（Static Price Monitoring）与动态价格监控（Dynamic Price Monitoring）触发后转入波动性拍卖（volatility auction），价格重新形成后恢复常规交易；每次拍卖及延期后另设最长30秒随机时间",
         "en": "Static and Dynamic Price Monitoring trigger a volatility auction; once the price re-forms, regular trading resumes; each auction/extension is followed by a random period of up to 30 seconds",
@@ -779,7 +779,7 @@
           "resolution": "cancel",
           "note": "交易所视一切成交为 firm，仅在例外情形作 Exchange enforced cancellation（Rule 2120–2121），可应会员申请或交易所自行发起。无固定价格偏离百分比门槛，代之以：成交须『manifestly erroneous』、双方无法用 contra facility 自行冲销、且申请方潜在损失达最低标准——股票单只 £100,000 / 多只 £200,000，ETF/ETP £50,000 / £100,000。申请须在成交后 30 分钟内提交 Market Supervision（收盘 16:30 后的收盘拍卖成交须在 17:00 前）。交易所决定为终局，无上诉；只作废、不调价"
         },
-        "zh": "交易所将其规则下的所有成交视为确定（firm），仅在例外情形下由交易所强制作废（Exchange enforced cancellation，规则 2120–2121）——可应会员申请或交易所自行发起（如公司事件明显误传、收盘拍卖被错单严重扭曲）。会员申请须在成交后 30 分钟内提交市场监察部门；待作废成交须经交易所判断为『明显错误（manifestly erroneous）』，且双方无法通过 contra 冲销机制自行处理，申请方潜在损失须达门槛（股票单只 £100,000、多只 £200,000）。交易所决定为终局，只作废不调价",
+        "zh": "交易所将其规则下的所有成交视为确定（firm），仅在例外情形下由交易所强制作废（Exchange enforced cancellation，规则 2120–2121）——可应会员申请或交易所自行发起（如公司事件明显误传、收盘拍卖被错单严重扭曲）。会员申请须在成交后 30 分钟内提交市场监察部门；待作废成交须经交易所判断为『明显错误（manifestly erroneous）』，且双方无法通过 contra 冲销机制自行处理，申请方潜在损失须达门槛（股票单只 £100,000、多只 £200,000；ETF/ETP 单只 £50,000、多只 £100,000）。交易所决定为终局，只作废不调价",
         "en": "The Exchange treats all trades under its rules as firm; only in exceptional circumstances will it undertake an Exchange enforced cancellation (Rules 2120–2121), on a member firm's request or of its own volition (e.g. a clear miscommunication of a corporate event, or a closing price significantly distorted by erroneous orders in the closing auction). A member firm's request must reach the Market Supervision department within 30 minutes of the trade time; the trade must be manifestly erroneous in the Exchange's judgement, the parties must be unable to use the contra facility, and the requesting firm's potential loss must reach a threshold (£100,000 for a single stock, £200,000 across more than one). The Exchange's decision is final; trades are cancelled, not price-adjusted",
         "detail": "Rule 2120–2121（Exchange enforced cancellation of erroneous trades）+ Guidance to Rule。与 trading_halt_mechanism（系统故障停牌）不同。无固定 % 偏离阈值——LSE 用『manifestly erroneous + 损失门槛 + 市场影响』的裁量标准，故 spec.deviation_threshold_pct 留 null。",
         "sources": [

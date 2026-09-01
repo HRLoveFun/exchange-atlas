@@ -14,7 +14,7 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 
 **核心原则：任何一个事实只在一处手写，其余位置要么生成、要么引用、要么被校验。** 发现自己在两个文件写同一件事，说明这张表哪里划错了，先改表，别继续复制。
 
-同一事实允许有多种「渲染」而不算"写两遍"：`data/` 字段里 `enum`（受控词表值）、`spec`（量化机制的机器形式，见 [ADR-035]）、`zh`/`en`（人读散文）是同一事实的不同渲染，`quote` 是它们共同的 verbatim 底稿。纪律：驱动图形的量化值只在 `spec` 手写，`zh`/`detail` 可复述但不得携带 `spec` 没有的量化事实（`make check` 校验 5b 反查 `spec` 数值 ⊆ `quote`，但只覆盖 `confidence: high` 的数值叶子——`spec.note` 与 medium/low 仍靠人，见 [ADR-054]）。
+同一事实允许有多种「渲染」而不算"写两遍"：`data/` 字段里 `enum`（受控词表值）、`spec`（量化机制的机器形式，见 [ADR-035]）、`zh`/`en`（人读散文）是同一事实的不同渲染，`quote` 是它们共同的 verbatim 底稿。纪律：驱动图形的量化值只在 `spec` 手写，`zh`/`detail` 可复述但不得携带 `spec` 没有的量化事实（`make check` 校验 5b 反查 `spec` 数值 ⊆ `quote`，只覆盖 `confidence: high` 的数值叶子；`spec.note`（及 `*_note`）内嵌数字由 5c 不限 confidence 反查**本交易所文件内所有 `quote`/`zh`** 加本字段 `detail`〔note 常跨字段引 `price_limits` 等的阈值〕，见 [ADR-054]/[ADR-058]）；medium/low 数值叶子仍靠人。
 
 | 文件 | 唯一负责 | 绝不写（改为指向） |
 |---|---|---|
@@ -50,7 +50,7 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 
 `detail` 与 `quote` 不要混淆：`detail` 是自己写的解释，允许归纳改写；`quote` 是原文照抄，是抽检凭据。
 
-这五条里，第 3 条（第三方封顶 `medium`）与第 5 条的 verbatim + 数值反查已是 `make check`（`validate.py` / `verify_quotes.py`）可阻断构建的硬关卡（[ADR-032]/[ADR-033]）；但 `spec.note` 里的数字、`type: none` 的正面依据、散文的语义忠实度仍是机器盲区（[ADR-054]）——**`make check` 全绿不等于数据没被幻觉污染**，铁律该守的地方一处都不能省。哪几条已机器化随校验器演进，不在这里追。
+这五条里，第 3 条（第三方封顶 `medium`）与第 5 条的 verbatim + 数值反查已是 `make check`（`validate.py` / `verify_quotes.py`）可阻断构建的硬关卡（[ADR-032]/[ADR-033]）；`spec.note` 内嵌数字已由 5c 机器化（[ADR-058]），但 `type: none` 的正面依据、散文的语义忠实度仍是机器盲区（[ADR-054]）——**`make check` 全绿不等于数据没被幻觉污染**，铁律该守的地方一处都不能省。哪几条已机器化随校验器演进，不在这里追。
 
 抓取用 `make fetch EX=<id>`（单家，按 `PROJECT/SOURCES.md` 登记的方式取页）或 `make fetch-sources`（收割全库 `sources` URL 落盘、给 PDF 生成 `.txt` 伴随文本，是 `verify_quotes` 全库反查的前置）——**不要用 WebFetch 直接抓交易所官网**，已实测多个交易所对 WebFetch 返回 403。UA / 反爬绕过的具体门道（含 `sec.gov`/`finra.org` 的 Fair Access 身份 UA、`fetch-sources` 全量重跑会用失败页覆盖好缓存的坑）见 `PROJECT/SOURCES.md`，不写死在这里。抓到的原始页存 `.cache/`，是「这条数据不是编的」的可核查凭据。
 

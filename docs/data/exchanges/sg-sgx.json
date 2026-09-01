@@ -780,7 +780,7 @@
             "reference_window_min": 5,
             "note": "非固定每日涨跌停：价格带为滚动参考价 ±10%；参考价取当节开盘价，此后每 5 分钟更新为 5 分钟前成交价；覆盖 STI/MSCI Singapore 成分股及参考价 ≥S$0.50 的股票/REIT/ETF 等，新股首日豁免"
           },
-          "zh": "上限为参考价+10%，下限为参考价-10%；参考价在交易阶段开始时取当节开盘价（缺失则取前值），此后每5分钟滚动更新为5分钟前成交价",
+          "zh": "上限为参考价+10%，下限为参考价-10%；参考价在交易阶段开始时取当节开盘价（缺失则取前值），此后每5分钟滚动更新为5分钟前成交价；覆盖 STI/MSCI Singapore 成份股及参考价不低于 S$0.50 的股票/REIT/ETF 等（新股首日豁免）",
           "en": "Upper threshold = reference price + 10%; lower threshold = reference price − 10%; the reference price starts as the session's opening price (falling back to prior values), then rolls every 5 minutes to the trade price from 5 minutes earlier",
           "quote": "The upper threshold is 10% above the reference price and the lower threshold is 10% below the reference price.",
           "confidence": "high",

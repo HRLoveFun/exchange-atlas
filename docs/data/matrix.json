@@ -5107,13 +5107,13 @@
       "field_path": "stamp_duty",
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
-      "zh": "韩国对证券转让不征收「印花税」(stamp duty)这一独立税种——这是原字段的断言，但本次未取得正面依据（本字段 quote 只讲 2026 年 STT 税率上调）；本项目横向对比中与该字段对应的、按交易金额课征的流转税是「证券交易税」(Securities Transaction Tax, STT)，其现行税率见 financial_transaction_tax（2026年起KOSPI/KOSDAQ均为0.20%）。按 CLAUDE.md 第二节第四条，「未见印花税税目」的表述不足以断言「明确不征」，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。",
-      "en": "Korea does not impose a stamp duty as a separate tax on securities transfers — the original claim, without a positive basis this session (this field's quote only covers the 2026 STT rate increase); the transaction-value turnover tax that corresponds to this field in cross-exchange comparison is the 'Securities Transaction Tax' (STT), whose current rate is in financial_transaction_tax (0.20% for both KOSPI and KOSDAQ from 2026). Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS.",
+      "zh": "韩国对证券转让不征「印花税」(stamp duty)这一独立税种（第三方综述支撑、暂定）：PwC 韩国『Other taxes』明确韩国的 Stamp tax 是对『制备证明财产权设立/转让/变更的文书者』课征（KRW 50–350,000），课税对象是文书而非证券交易；本项目横向对比中对应的证券流转税是「证券交易税」(Securities Transaction Tax, STT)，现行税率见 financial_transaction_tax（2026年起KOSPI/KOSDAQ均为0.20%）。spec 记 type: none，但仅由四大税务简报支撑（非一手条文），已转 OPEN-QUESTIONS 待《印花税法》原文坐实。",
+      "en": "Korea does not impose a stamp duty as a separate tax on securities transfers (third-party-summary basis, provisional): PwC Korea 'Other taxes' defines Korean stamp tax as levied on 'a person who prepares a document certifying the establishment, transfer, or change of rights to property in Korea' (KRW 50–350,000), i.e. on instruments, not on securities trading; the transaction-value turnover tax in cross-exchange comparison is the 'Securities Transaction Tax' (STT), whose current rate is in financial_transaction_tax (0.20% for both KOSPI and KOSDAQ from 2026). The spec is recorded as type: none but rests only on a Big-4 tax summary (not primary legislation) and is referred to OPEN-QUESTIONS pending the Korean Stamp Tax Act text.",
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-27",
-      "confidence": "low"
+      "verified": "2026-09-01",
+      "confidence": "medium"
     },
     {
       "exchange_id": "sa-tadawul",
@@ -5722,7 +5722,7 @@
       "field_path": "price_limits.main_board",
       "label_zh": "主板幅度",
       "label_en": "Main Board Band",
-      "zh": "上限为参考价+10%，下限为参考价-10%；参考价在交易阶段开始时取当节开盘价（缺失则取前值），此后每5分钟滚动更新为5分钟前成交价",
+      "zh": "上限为参考价+10%，下限为参考价-10%；参考价在交易阶段开始时取当节开盘价（缺失则取前值），此后每5分钟滚动更新为5分钟前成交价；覆盖 STI/MSCI Singapore 成份股及参考价不低于 S$0.50 的股票/REIT/ETF 等（新股首日豁免）",
       "en": "Upper threshold = reference price + 10%; lower threshold = reference price − 10%; the reference price starts as the session's opening price (falling back to prior values), then rolls every 5 minutes to the trade price from 5 minutes earlier",
       "enum": null,
       "enum_ref": null,
@@ -7957,12 +7957,12 @@
       "field_path": "stamp_duty",
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
-      "zh": "证券转让税（Securities Transfer Tax，STT）：税率0.25%，适用于上市与未上市证券的每一次转让，2008年7月1日起依《证券转让税法》（No.25 of 2007）及其征管法（No.26 of 2007）施行，取代原印花税制度",
-      "en": "Securities Transfer Tax (STT): levied at 0.25% on every transfer of a security (listed or unlisted), effective 1 July 2008 under the Securities Transfer Tax Act No. 25 of 2007 and its Administration Act No. 26 of 2007, replacing the former stamp duty regime",
+      "zh": "证券转让税（Securities Transfer Tax，STT）：税率0.25%，适用于上市与未上市证券的每一次转让，2008年7月1日起依《证券转让税法》（No.25 of 2007）及其征管法（No.26 of 2007）施行，取代原印花税制度。方向记为买方（南非 STT 通行由受让人/买方承担），惟本字段 quote 未含方向措辞，待补强。",
+      "en": "Securities Transfer Tax (STT): levied at 0.25% on every transfer of a security (listed or unlisted), effective 1 July 2008 under the Securities Transfer Tax Act No. 25 of 2007 and its Administration Act No. 26 of 2007, replacing the former stamp duty regime. The incidence is recorded as buy-side (South African STT is generally borne by the transferee/buyer), but this field's quote does not carry the directional wording and it is pending reinforcement.",
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-27",
+      "verified": "2026-09-01",
       "confidence": "high"
     }
   ]

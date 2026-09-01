@@ -87,9 +87,16 @@
 
 - **[ADR-054] 成本瀑布 spec 层核查（2026-09-01）留下的坐实项**——13 个 `type: none` 降级点 + 6 个方向/费率补强点，逐条判定见 `PROJECT/COST-WATERFALL-SPOT-CHECK.md`。共同模式：断言「本市场不征收某税费」需要税法/税务局/立法机构的**正面**文本，交易所费率页与第三方国别税费综述都撑不住。
   - **`type: none` 降级后待坐实（改回 `type: none` 需正面依据原文）**：`au-asx financial_transaction_tax`（联邦/州是否征证券交易税 → ATO 或州税收局）；`ca-tsx regulatory_fees`（加拿大有无 SEC-31 类按交易额监管费 → OSC/CSA 收费框架）；`cn-szse financial_transaction_tax`（有无独立于印花税的 FTT 税目 → 国务院/财政部税目清单）；`de-eurex stamp_duty` 与 `financial_transaction_tax`（两字段无 sources/quote，需 Eurex/德国官方税务说明，可先复用 de-xetra 已引的 Bundestag 废止文档自持一份）；`fr-euronext stamp_duty`（七国逐一不征印花税 → 各国税务当局或分国律所综述）；`hk-hkex financial_transaction_tax`（税务局/库务署正面排除性陈述，或官方明确「从价交易税负即印花税」）；`kr-krx regulatory_fees` 与 `stamp_duty`（KRX 当期收费表 + 国税厅 STT 条文）；`sg-sgx regulatory_fees` 与 `financial_transaction_tax`（MAS/IRAS 正面陈述）；`za-jse regulatory_fees` 与 `financial_transaction_tax`（SARS/FSCA 收费框架，含 Investor Protection Levy 是否属按笔征费及其费率）。
-  - **`side` / 费率补强**：`kr-krx financial_transaction_tax` 的 `side: sell`（韩国 STT 向卖方课征的条文，国税厅/韩国税法）；`za-jse stamp_duty` 的 `side: buy`（STT 向买方课征的条文）；`uk-lse stamp_duty` 的 `side: buy`（SDRT 由买方缴纳的 HMRC 原文——现值是真实制度，但本字段 quote/zh 均未明说；**不可直接移除该键**：渲染层缺省回退 `both`，移除会把 50 bp 画成双边）；`us-nasdaq regulatory_fees`（quote 写 "securities transactions" 未提 "covered sales"，补一段含 "covered sales" 的原文与 us-nyse 对齐）。
+  - **`side` / 费率补强**：[2026-09-01 A3 进度，2026-09-02 收尾审查修订] `kr-krx financial_transaction_tax` 的 `side: sell` ✅（韩国《证券取引税法》英文版一手，明文以 transferor=让与人=卖方为纳税人）；`us-nasdaq regulatory_fees` 的 `side: sell` ✅（eCFR 17 CFR 240.31『Covered sale means a sale of a security...』逐字，Section 31 费按 covered sale 计征、落卖方）；`br-b3 financial_transaction_tax` 的 `side: buy` ✅（B3 "incoming resources"）；`uk-lse stamp_duty` 的 `side: buy` ⚠️（SDRT 由买方缴纳为真实制度、字段已 `side: buy`，但 gov.uk/HMRC 页面为 SPA、未取到逐字原文，待抓 HMRC 非 SPA 端点或 legislation.gov.uk 条文）；`za-jse stamp_duty` 的 `side: buy` ⚠️（**收尾审查修订**：ADR-058 曾记「SARS 原文 applies to the purchase 坐实」，但本字段 quote 未含该措辞——改为保留 `side: buy`〔南非 STT 通行由买方承担〕+ 待补 SARS/立法方向措辞）。**不可直接移除任何 side 键**：渲染层缺省回退 `both`，移除会把单边税画成双边。
   - **费率时效**：`kr-krx exchange_fees`——2025-12-15→2026-02-13 的临时阶梯已到期，恢复后的现行费率需抓 KRX 当期收费表确认（`rate: 0.0023` 为 quote 所述统一费率，`tiered` 已移除）；`us-nyse` / `us-nasdaq regulatory_fees`——SEC Section 31 费率按财年调整，**2026-10-01（FY2027）起需重核**。
-  - **结构性缺口（已如实降级/留空，属已知局限）**：`za-jse` STT（quote 为逗号小数 `0,25%`）与 `tw-twse` 证券交易税（quote 为国字数字）都是各自市场成本瀑布里**最大的一笔**，却因 5b 逐字反查进不了 `spec.rate`，渲染为幽灵条——后续可考虑给 `cost_layer` 增加存原文数值串的键或调整反查规则，需先讨论口径，不擅自放宽铁律；`uk-lse regulatory_fees` 未覆盖 **PTM Levy**（收购委员会按笔征费、买方承担，`au-asx regulatory_fees` 的 zh 里已间接提及英国有此征费），是否应在 uk 的该字段补记待定；`au-asx exchange_fees` 自身无 quote（原文引在同文件 `implicit_costs_note` 的 quote 里），补本字段 quote 后可升回 `high`。
+  - **结构性缺口（已如实降级/留空，属已知局限）**：`za-jse` STT（quote 为逗号小数 `0,25%`）与 `tw-twse` 证券交易税（quote 为国字数字）都是各自市场成本瀑布里**最大的一笔**，却因 5b 逐字反查进不了 `spec.rate`，渲染为幽灵条——是否给 `cost_layer` 加一个存原文数值串的键待定，需先讨论口径、不擅自放宽铁律。
+  - **[2026-09-01 A2 进度，2026-09-02 收尾审查修订]** 用 `make fetch` 重抓税法/税务局原文逐条复核，终态：
+    - `kr-krx stamp_duty` → `type: none`，**但仅由第三方综述 PwC Tax Summaries 支撑（封顶 medium），已标「暂定」**；翻实需韩国《印花税法》一手条文。
+    - `hk-hkex financial_transaction_tax` → **收尾审查回退 `rate: null`**：A2 曾据 IRD 印花税页翻 `type: none`，但其引文讲的是印花税**减免**、不构成「无独立 FTT」的正面依据（CLAUDE.md 二.4）。翻实需 IRD/库务署明确「证券交易税负即印花税、别无他税」的一手陈述。
+    - `au-asx financial_transaction_tax` → 源升级为 Baker McKenzie M&A Guide（**第三方律所综述**，"Stamp duty is not payable on share transfers"），仍 `rate: null`；翻实需 ATO/财政部「无 FTT」一手陈述。
+    - `ca-tsx regulatory_fees` / `kr-krx regulatory_fees` → 缺干净一手源（CSA 页 307 跳转 / KRX 收费表 JS），维持 `rate: null`，待抓 CSA·CIRO 收费框架 / KRX 非 JS 端点。
+    - 方法学结论：13 个 `rate: null` 本身审慎正确——税务局页只覆盖自身税种、不证伪 FTT/监管费，能翻 `type: none` 的仅限有肯定性「不征」**一手**陈述者（如 `de-xetra` Bundestag 1991 废止条文）；第三方综述至多支撑「暂定 type: none」。
+    - 未竟：`cost_layer` 是否加存原文数值串的键（`za-jse`/`tw-twse` STT 逗号/国字小数进不了 `spec.rate`）——需先讨论口径，不擅自放宽铁律；`uk-lse regulatory_fees` 未覆盖 PTM Levy；`au-asx exchange_fees` 自身无 quote（引在同文件 `implicit_costs_note`）。
 <!-- BEGIN:GENERATED auto-issues -->
 - `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `br-b3` 基本信息 / 夏令时规则（dst_rule）— confidence: low
@@ -137,7 +144,6 @@
 - `kr-krx` 交易成本与税费 / 佣金结构（commission_structure）— confidence: low
 - `kr-krx` 交易成本与税费 / 清算费用（clearing_fees）— confidence: low
 - `kr-krx` 交易成本与税费 / 监管费用（regulatory_fees）— confidence: low
-- `kr-krx` 交易成本与税费 / 印花税（stamp_duty）— confidence: low
 - `kr-krx` 交易成本与税费 / 股息预扣税（dividend_withholding_tax）— confidence: low
 - `kr-krx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `kr-krx` 风险与特殊考量 / 市场操纵与监管执法环境（enforcement_note）— confidence: low

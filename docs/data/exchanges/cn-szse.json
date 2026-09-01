@@ -875,7 +875,7 @@
           "review_window_min": null,
           "deviation_threshold_pct": null,
           "resolution": "cancel",
-          "note": "买卖申报经交易主机撮合成交后交易即告成立，于成立时生效，买卖双方必须承认交易结果、履行清算交收义务。无欧美式『偏离参考价达某百分比、限时申请复核作废』的常规错误交易流程。交易所仅在窄口径情形可认定无效 / 取消：不可抗力 / 意外事件 / 交易系统被非法侵入等致严重后果、成交显失公平、成交违反规则并严重破坏市场正常运行。事前防线：涨跌停 / 价格笼子（买入不高于基准价 102%、卖出不低于 98%）/ 有效申报价格范围"
+          "note": "买卖申报经交易主机撮合成交后交易即告成立，于成立时生效，买卖双方必须承认交易结果、履行清算交收义务。无欧美式『偏离参考价达某百分比、限时申请复核作废』的常规错误交易流程。交易所仅在窄口径情形可认定无效 / 取消：不可抗力 / 意外事件 / 交易系统被非法侵入等致严重后果、成交显失公平、成交违反规则并严重破坏市场正常运行。事前防线：涨跌停 / 价格笼子（买入不高于、卖出不低于基准价一定幅度）/ 有效申报价格范围"
         },
         "zh": "买卖申报经交易主机撮合成交后，交易即告成立；符合规则达成的交易于成立时生效，买卖双方必须承认交易结果、履行清算交收义务。深圳证券交易所没有欧美式『成交价偏离参考价达某百分比、限时申请复核并作废』的常规错误交易处理机制。仅在因不可抗力、意外事件、交易系统被非法侵入等原因造成严重后果，或成交显失公平，或成交违反规则并严重破坏证券市场正常运行的窄口径情形下，交易所方可采取措施、认定无效或宣布取消交易",
         "en": "Once orders are matched by the trading host a transaction is formed and becomes effective on formation; both parties must accept the result and perform their clearing and settlement obligations. The SZSE has no routine erroneous-trade process of the US/EU type (a deviation-from-reference-price threshold plus a time-limited request for review and cancellation). The Exchange may take measures, treat a transaction as void, or declare it cancelled only in narrow circumstances — where force majeure, an accident, illegal intrusion into the trading system or similar causes serious consequences, where a transaction is manifestly unfair, or where a transaction violates the Rules and seriously disrupts the normal operation of the market",

@@ -15,6 +15,11 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
      数字命中"判——挡整条编造；结构化 spec 值按"每个都要命中"判，见第 5b 条）
   5b. confidence: high 且带 spec 子块的字段，spec 里的每个数值都必须能在 quote 里找到
      （spec 是精确定型值，没有 12/24 小时改写、中文数字、含数字的产品名这类噪声，可严判）
+  5c. spec 子块自由文本键（note / *_note）里内嵌的数字必须能在本交易所文件内任一字段的
+     quote / zh 里找到——不限 confidence（[ADR-054] 复核 8 处 FIX 里 4 处属于这个盲区，
+     cn-sse 那次是 medium 连 5b 的高门槛都进不了）。文件级而非同字段（[ADR-058] 收尾修订：
+     note 常跨字段交叉引用 price_limits 的阈值等）；日期/时刻/年份/条款号/法规引用号/ADR
+     引用等非数值 token 剥离后比对，挡的是「费率/阈值/金额夹带进 note」这类静默错误
   6. verified 不得是未来日期
   7. 来源域名已在 SOURCES.md 登记；且若某 confidence: high 字段的全部来源域名在
      SOURCES.md 都标为「第三方」，直接 fail（CLAUDE.md 二第3条：第三方来源 confidence 上限 medium）
@@ -120,6 +125,115 @@ def spec_number_strings(spec):
     return out
 
 
+# 5c（[ADR-054] 盲区机器化）：note（及 *_note）等自由文本里不算「数值主张」的 token——
+# ISO 日期（2026-04-04）、年月（2025-12）、时刻（09:59:45 / 17:30）、孤立年份（1991 年）、
+# ADR / 悬案编号引用（[ADR-035] / OPEN-QUESTIONS #19）、条款号引用（Rule 4702 / §34 /
+# 第 62 条）、法规引用号（17 CFR 240.31 / RTS 11 / MiFID II / (EU) 2017/588 /
+# Act No. 25 of 2007）。它们是时间背景与出处指针，不是费率/阈值/金额；数字反查挡的是后者。
+NOTE_NON_VALUE_RE = re.compile(
+    r"\d{4}-\d{1,2}-\d{1,2}"
+    r"|\d{4}-\d{1,2}(?!\d)"
+    r"|\d{1,2}:\d{2}(?::\d{2})?"
+    r"|(?<![\d.])(?:19|20)\d{2}(?![\d.])"
+    r"|\[?ADR-\d{3}\]?"
+    r"|#\d+"
+    r"|(?:Rule|Rules|Section|Sections|Article|Articles|Procedure|Procedures|§)\s*\d[\d.,\-–—/至到和與与]*"
+    r"|第\s*\d[\d.,\-–—/、至到和與与]*\s*条?"
+    r"|\d{1,3}\s*CFR\s*\d+(?:\.\d+)?"          # 美国联邦法规 17 CFR 240.31
+    r"|\bRTS\s*\d+"                             # 欧盟技术标准 RTS 11 / RTS 27
+    r"|\bMiFID\s*[IVX]+"                        # MiFID II
+    r"|\((?:EU|EC)\)\s*\d{4}/\d+"               # (EU) 2017/588
+    r"|(?:Ref|Ref\.|Reference|Circular|通函)\s*[:：]?\s*\d[\d,]*(?:/\d+)?"   # NSE 通函 Ref 66/2024
+    r"|\bNo\.?\s*\d[\d,]*"                      # Act No. 25（"of 2007" 由孤立年份规则另剥）
+)
+
+
+def spec_note_strings(spec):
+    """递归收集 spec 子块里自由文本键（note / *_note）的字符串，作为 5c 的比对对象；
+    数值型叶子已由 5b 严判，这里只管字符串里夹带的数字。"""
+    out = []
+
+    def walk(v, key=None):
+        if isinstance(v, dict):
+            for k, x in v.items():
+                walk(x, k)
+        elif isinstance(v, (list, tuple)):
+            for x in v:
+                walk(x, key)
+        elif isinstance(v, str) and key and (key == "note" or key.endswith("_note")):
+            if not re.fullmatch(r"-?\d+(?:\.\d+)?%?", v.strip()):
+                out.append(v)
+
+    walk(spec)
+    return out
+
+
+def collect_verbatim_texts(ex, keys=("quote", "zh")):
+    """收集整个交易所展开信封树里所有 quote / zh 字符串——5c 文件级反查用。
+    [ADR-058 收尾修订]：note 里的数字只要在本交易所**任意字段**的 quote / zh 里
+    出现过就算有原文支撑（note 常跨字段交叉引用，如错误交易规则的 note 引价格笼子
+    的百分比、波动性中断的 note 引 price_limits 的走廊阈值）。真造假——把 A 所费率
+    写进 B 所字段——在 B 所文件里哪都找不到，仍会被拦。
+
+    `detail` 不进这个**全文件**池子（避免 detail 的叙述性数字大面积削弱反查），但 5c
+    调用处会把**本字段自己的 detail** 并进目标——[ADR-045] 起就有「主档费率进 spec/zh、
+    次级档进同字段 detail」的既定写法（次级档常无 verbatim quote，放 detail 比塞进 zh
+    更符合 §一「zh 不携带 spec 没有的量化事实」）。B7「收紧到 quote+zh」据此校准为
+    「全文件 quote/zh + 本字段 detail」。"""
+    out = []
+
+    def walk(v):
+        if isinstance(v, dict):
+            for k, x in v.items():
+                if k in keys and isinstance(x, str):
+                    out.append(x)
+                walk(x)
+        elif isinstance(v, (list, tuple)):
+            for x in v:
+                walk(x)
+
+    walk(ex)
+    return out
+
+
+def note_numbers_in(text):
+    """自由文本里 ≥2 位有效数字的集合：先剥离日期/时刻/年份/条款号等非数值 token，
+    再跑 NUMBER_RE；紧邻字母的命中（MT30、ZA01、FE10 这类代码记号）不算。"""
+    text = NOTE_NON_VALUE_RE.sub(" ", str(text if text is not None else ""))
+    out = set()
+    for m in NUMBER_RE.finditer(text):
+        s, e = m.span()
+        if s > 0 and text[s - 1].isalpha():
+            continue
+        if e < len(text) and text[e].isalpha():
+            continue
+        core = m.group().replace(",", "")
+        if len(core.replace(".", "")) >= 2:
+            out.add(core)
+    return out
+
+
+def note_numbers_missing(note_texts, target_texts):
+    """note 文本里出现、但目标文本（本交易所文件内所有 quote / zh，任一命中即算
+    找到——note 常做跨字段交叉引用）里找不到的数字集合。候选数字的小数尾随零归一后
+    比对（0.50 ≡ 0.5）：同一数值的不同书写精度不算夹带。"""
+    quotes = [str(q or "").replace(",", "") for q in target_texts]
+
+    def hit(n):
+        if any(n in q for q in quotes):
+            return True
+        if "." in n:
+            trimmed = n.rstrip("0").rstrip(".")
+            return any(trimmed in q for q in quotes)
+        return False
+
+    nums = set()
+    for t in note_texts:
+        nums |= note_numbers_in(t)
+    return nums, {n for n in nums if not hit(n)}
+
+
+
 def source_domain_classes(domain, domain_tags):
     """domain 在 SOURCES.md 的标签分类集合：{'primary'} / {'third_party'} / 混合 / 空。
     子域名沿用父域名登记（与"来源域名已登记"校验一致）。"""
@@ -163,6 +277,8 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
 
     for eid, raw in raw_exchanges.items():
         ex = exchanges_expanded[eid]
+        # 5c 文件级反查池：本交易所所有字段的 quote / zh（[ADR-058] 收尾修订）
+        verbatim_pool = collect_verbatim_texts(ex)
 
         # 结构校验
         try:
@@ -209,6 +325,25 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                             if k not in declared:
                                 err(f"{loc}: spec 里的键 `{k}` 未在 schema/spec.yml 声明"
                                     f"（拼写错？可用键：{sorted(declared)}）")
+
+                        # 5c：note（及 *_note）自由文本里内嵌的数字反查。不限 confidence——
+                        # [ADR-054] 复核 8 处 FIX 里 4 处属于这个盲区（cn-sse 夹带深交所
+                        # 费率那次是 medium，连 5b 的高门槛都进不了）。[ADR-058] 收尾修订：
+                        # 命中范围从「同字段 quote/zh/detail」放宽到「本交易所文件内所有
+                        # quote/zh + 本字段 detail」——note 常跨字段交叉引用（错误交易规则的
+                        # note 引价格笼子百分比、波动性中断的 note 引 price_limits 走廊阈值），
+                        # 同文件复述已核实数字不算夹带；跨所造假（A 所费率写进 B 所字段）在
+                        # B 所文件里仍找不到、照样拦。全文件池只含 quote/zh（不含 detail 的
+                        # 叙述性数字），本字段自己的 detail 单独并进（见 collect_verbatim_texts）。
+                        note_texts = spec_note_strings(spec)
+                        if note_texts:
+                            _, note_missing = note_numbers_missing(
+                                note_texts, verbatim_pool + [env.get("detail")])
+                            if note_missing:
+                                err(f"{loc}: spec 的 note 里内嵌的数字 {sorted(note_missing)} "
+                                    f"在本交易所任何字段的 quote/zh（或本字段 detail）里都找不到"
+                                    f"——note 不得夹带无原文支撑的数字（CLAUDE.md 二.5，"
+                                    f"[ADR-054]/[ADR-058] 确立的维度）")
 
                 # en_required 字段必须填 en——此前这个 taxonomy 标记从未被机器校验过，
                 # 导致标了 en_required 的专有名词类字段（机制名/板块名/法规名等）静默
