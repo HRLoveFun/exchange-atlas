@@ -2208,7 +2208,7 @@
       "clearing_fees": {
         "spec": {
           "rate": null,
-          "note": "现货由 CDP 清算按 CDP 费率表；本字段 quote 仅覆盖股票期权（OCC 0.05%/premium，封顶 USD 200），非现货"
+          "note": "现货由 CDP 清算按 CDP 费率表；本字段 quote 仅覆盖股票期权（OCC 0.05%/premium，封顶 S$200——zh 口径；quote 原文写作 $200），非现货"
         },
         "zh": "股票期权清算费为期权金总额的0.05%，每笔上限S$200，向OCC缴纳——仅限股票期权市场（Chapter 18），非现货证券/期货市场的通用清算费率；现货证券由 CDP 清算，另按 CDP 费率表收清算/存管费；衍生品由 SGX-DC 按合约收清算费。",
         "en": "For equity options, a clearing fee of 0.05% of the aggregate Premium (capped at S$200 per transaction) is payable to the OCC — specific to the equity options market (Chapter 18), not a general securities/futures clearing fee; securities are cleared by CDP (separate CDP clearing/custody schedule) and derivatives by SGX-DC (per-contract clearing fee).",
@@ -2227,11 +2227,11 @@
       },
       "regulatory_fees": {
         "spec": {
-          "type": "none",
-          "note": "除券商服务费 GST（9%）外无按笔或按比例的监管征费"
+          "rate": null,
+          "note": "未找到明确不征依据：本字段来源为 IRAS 的 GST 税率页，只能证明券商服务费适用 GST，不能支撑「无按笔监管征费」这一断言；本字段无 quote；见 OPEN-QUESTIONS"
         },
-        "zh": "新加坡不就证券交易征收专门的「监管征费」（无按笔或按比例上缴监管机构的交易监管费）；证券交易环节除券商服务费的消费税（GST，现行 9%）外，无额外监管性收费。GST 就券商服务费计征，而非就交易本金计征。",
-        "en": "Singapore does not levy a dedicated securities 'regulatory fee' (no per-trade or ad-valorem regulator levy); aside from the Goods and Services Tax (GST, currently 9%) on broker service fees, there is no additional regulatory charge on securities transactions. GST is charged on the broker's service fee, not on the trade principal.",
+        "zh": "新加坡是否就证券交易征收专门的「监管征费」，本次未取得正面依据——本字段来源为 IRAS 的 GST 税率页，只能证明券商服务费适用 GST（现行 9%），不能支撑「无按笔或按比例上缴监管机构的交易监管费」这一断言。GST 就券商服务费计征，而非就交易本金计征。按 CLAUDE.md 第二节第四条，「来源未提及」不等于「明确不征」，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。",
+        "en": "Whether Singapore levies a dedicated securities 'regulatory fee' was not positively established this session — this field's source is the IRAS GST-rate page, which shows that broker service fees attract GST (currently 9%) but cannot support the claim that no per-trade or ad-valorem regulator levy exists. GST is charged on the broker's service fee, not on the trade principal. Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS.",
         "sources": [
           {
             "title": "IRAS — GST rate (current 9%)",
@@ -2267,11 +2267,11 @@
       },
       "financial_transaction_tax": {
         "spec": {
-          "type": "none",
-          "note": "除券商服务费 GST（9%）外无按交易本金计征的交易税"
+          "rate": null,
+          "note": "未找到明确不征依据：本字段来源为 IRAS 印花税页（支撑 stamp_duty 的豁免规则），无「无按交易本金计征交易税」的正面陈述；本字段无 quote；见 OPEN-QUESTIONS"
         },
-        "zh": "新加坡无专门的金融交易税（FTT / 托宾税）一类基于证券交易额征收的交易税；证券交易环节除券商服务费的消费税（GST 9%）外，无按交易本金计征的交易税。印花税仅适用于非电子化（手写单据）股份转让，而 SGX 现货证券均为 CDP 无纸化电子过户，实际豁免（见 stamp_duty）。",
-        "en": "Singapore imposes no dedicated financial-transaction tax (FTT / Tobin tax) on securities trades; apart from GST (9%) on broker service fees, there is no transaction tax levied on trade principal. Stamp duty applies only to manual (paper) share transfers, while SGX securities are scripless CDP electronic transfers and effectively exempt (see stamp_duty).",
+        "zh": "新加坡是否设有专门的金融交易税（FTT / 托宾税）一类基于证券交易额征收的交易税，本次未取得正面依据——本字段来源为 IRAS 印花税页，只能证明印花税仅适用于非电子化（手写单据）股份转让、而 SGX 现货证券均为 CDP 无纸化电子过户（实际豁免，见 stamp_duty），不能穷尽性支撑「无按交易本金计征的交易税」。证券交易环节除券商服务费的消费税（GST 9%）外，本次未核实到其他按本金计征的税项。按 CLAUDE.md 第二节第四条，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。",
+        "en": "Whether Singapore imposes a dedicated financial-transaction tax (FTT / Tobin tax) levied on securities trade value was not positively established this session — this field's source is the IRAS stamp-duty page, which shows only that stamp duty applies to manual (paper) share transfers while SGX securities are scripless CDP electronic transfers (effectively exempt, see stamp_duty), and cannot exhaustively support 'no transaction tax on trade principal'. Apart from GST (9%) on broker service fees, no other principal-based transaction tax was verified this session. Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS.",
         "sources": [
           {
             "title": "IRAS — Stamp Duty for Shares (exempt scripless transfers)",

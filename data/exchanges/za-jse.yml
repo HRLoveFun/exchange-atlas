@@ -1466,9 +1466,9 @@ costs:
     detail: "JSE 2026 Price List 与 JSE Clear 2025 Price List 两份 PDF 缓存文本层均为空（image-only，pdftotext 无法抽取），无法机器反查逐字原文，按防幻觉铁律二.5 降为 medium；PDF 中权益交易（含权证与 AltX）清算与结算费为每笔成交金额 0.0038%（0.0038% of value of each trade leg），单笔成交腿上限 R312.00（未含增值税）。JSE Clear 会员另收年度会员资格费（2025 年 JSE Clear 价目表 R522 500.00）。本字段聚焦交易层面清算/结算费，不含交易所交易费（exchange_fees）与 STT（stamp_duty）。"
 
   regulatory_fees:
-    spec: {type: none, note: "无独立于 STT 之外的按笔监管费；另有小额投资者保护征费（Investor Protection Levy），费率未逐条核实"}
-    zh: "南非权益交易无独立于 STT 之外的按笔监管费；交易环节法定/准法定费用主要为证券转让税（STT，见 stamp_duty）及小额投资者保护征费（Investor Protection Levy）。交易所与清算所收取的交易/清算费（exchange_fees、clearing_fees）为商业服务费，非监管性税费。"
-    en: "South African equity trading has no per-trade regulatory fee separate from STT; the statutory/quasi-statutory charges on a trade are primarily the Securities Transfer Tax (STT, see stamp_duty) and a small Investor Protection Levy. The exchange and clearing-house trading/clearing fees (exchange_fees, clearing_fees) are commercial service fees, not regulatory taxes."
+    spec: {rate: null, note: "未找到明确不征依据：本字段 quote 只讲 STT（0,25%），无「无按笔监管费」的正面陈述；且 note 一方面断言无按笔监管费、一方面自述存在 Investor Protection Levy 但费率未核实，两者矛盾；见 OPEN-QUESTIONS"}
+    zh: "南非权益交易是否存在独立于 STT 之外的按笔监管费，本次未取得正面依据：本字段 quote 只讲证券转让税（STT，见 stamp_duty）；且交易环节存在小额投资者保护征费（Investor Protection Levy）但费率未核实。交易所与清算所收取的交易/清算费（exchange_fees、clearing_fees）为商业服务费，非监管性税费。按 CLAUDE.md 第二节第四条，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。"
+    en: "Whether South African equity trading carries a per-trade regulatory fee separate from STT was not positively established this session: this field's quote covers only the Securities Transfer Tax (STT, see stamp_duty), and a small Investor Protection Levy exists whose rate was not verified. The exchange and clearing-house trading/clearing fees (exchange_fees, clearing_fees) are commercial service fees, not regulatory taxes. Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS."
     sources:
       - title: "Securities Transfer Tax（sars.gov.za）"
         url: https://www.sars.gov.za/types-of-tax/securities-transfer-tax/
@@ -1478,7 +1478,7 @@ costs:
         accessed: 2026-08-27
     quote: "Securities Transfer Tax is levied on every transfer of a security ... at the rate of 0,25%."
     confidence: medium
-    detail: "Investor Protection Levy 为依《金融监管法》（Financial Sector Regulation Act）设立的小额征费，用于投资者保护基金；其具体费率未逐条核实，本字段定性说明「无独立按笔监管费」即可满足 medium 级结论。"
+    detail: "Investor Protection Levy 为依《金融监管法》（Financial Sector Regulation Act）设立的小额征费，用于投资者保护基金；其具体费率未逐条核实。原字段以 type: none 同时断言「无独立按笔监管费」并承认存在该征费，两者矛盾；本次抽检按防幻觉铁律二.4 改为 rate: null 并转 OPEN-QUESTIONS，待取得 SARS / FSCA 收费框架原文后坐实。"
 
   stamp_duty:
     spec: {rate: null, unit: pct, side: buy, note: "证券转让税 STT 0.25%（0,25%），2008-07-01 起取代原印花税；quote 为逗号小数，不放数值 spec"}
@@ -1494,16 +1494,16 @@ costs:
     confidence: high
 
   financial_transaction_tax:
-    spec: {type: none, note: "无独立 FTT；交易环节税负由证券转让税 STT 覆盖（见 stamp_duty）"}
-    zh: "南非证券交易环节未设独立的金融交易税（FTT）；相应税负由证券转让税（STT，见 stamp_duty 字段）覆盖，因此本字段非留空、而是明确标注为「不适用 / 由 STT 覆盖」。"
-    en: "South Africa does not impose a separate financial transaction tax (FTT) on securities trades; the corresponding tax burden is covered by the Securities Transfer Tax (STT, see stamp_duty), so this field is explicitly marked 'not applicable / covered by STT' rather than left blank."
+    spec: {rate: null, note: "未找到明确不征依据：本字段 quote 只讲 STT 的立法施行（2008-07-01），无「无独立 FTT」的正面陈述；见 OPEN-QUESTIONS"}
+    zh: "南非证券交易环节是否设有独立的金融交易税（FTT），本次未取得正面依据：本字段 quote 只讲证券转让税（STT，见 stamp_duty 字段）的立法施行，无「无独立 FTT」的正面陈述。STT（0.25%）为交易环节主要税负；沿用 ADR-002 的字段语义（STT 映射至 stamp_duty）。按 CLAUDE.md 第二节第四条，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。"
+    en: "Whether South Africa imposes a separate financial transaction tax (FTT) on securities trades was not positively established this session: this field's quote covers only the enactment of the Securities Transfer Tax (STT, see stamp_duty) and contains no positive statement that no standalone FTT exists. STT (0.25%) is the main transaction-level tax; the ADR-002 field semantics (STT mapped to stamp_duty) are retained. Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS."
     sources:
       - title: "Securities Transfer Tax（sars.gov.za）"
         url: https://www.sars.gov.za/types-of-tax/securities-transfer-tax/
         accessed: 2026-08-27
     quote: "Securities Transfer Tax is levied on every transfer of a security and was implemented from 1 July 2008 under the Securities Transfer Tax Act, No. 25 of 2007."
     confidence: medium
-    detail: "南非财政部与 SARS 均未在证券交易环节另设 FTT；STT（0.25%）即为交易环节主要税负，故本字段标记为不适用而非重复记录。沿用 ADR-002 的字段语义（STT 映射至 stamp_duty）。"
+    detail: "南非财政部与 SARS 未见在证券交易环节另设 FTT 的线索，但「未提及」不等于「明确不征」；本次抽检按防幻觉铁律二.4 把 type: none 改为 rate: null 并转 OPEN-QUESTIONS。"
 
   capital_gains_tax:
     zh: "南非对资本利得征税，但并入个人所得税体系（非独立税种）：自然人及特殊信托适用 18% 的有效税率（按其应税利得的一定比例计入应税所得），公司适用 21.6%，其他信托 36%。法定依据为《所得税法 58 of 1962》第八附表。"

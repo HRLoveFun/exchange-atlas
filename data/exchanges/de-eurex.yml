@@ -984,15 +984,15 @@ costs:
     confidence: medium
 
   stamp_duty:
-    spec: {type: none, note: "德国无股票印花税（1991 年废止）；场内衍生品亦不发生证券过户印花税"}
-    zh: "N/A — 德国对衍生品交易不征收印花税（英国式的股票印花税/荷兰式转让税不适用于场内衍生品），衍生品本身亦不发生证券过户印花税。"
-    en: "N/A — Germany does not levy stamp duty on derivatives trading (the UK-style share stamp duty / Dutch-style transfer tax does not apply to on-exchange derivatives), and derivatives do not involve a stampable securities transfer."
+    spec: {rate: null, note: "未找到明确不征依据：本字段无 sources / quote，仅凭常识性印象断言「德国无股票印花税」；德国证券转移税 1991 年废除的原文见本仓库 de-xetra 的 stamp_duty 字段，本字段未自持来源；见 OPEN-QUESTIONS"}
+    zh: "N/A — 德国对衍生品交易是否征收印花税，本字段未自持可引用的来源（无 sources / quote）；「德国证券转移税（Börsenumsatzsteuer）已于 1991 年 1 月 1 日废除」这一法域级事实有原文支撑，但出自本仓库 de-xetra 的 stamp_duty 字段所引 Bundestag 文档。衍生品合约本身不发生证券过户，故该法域级事实是否足以覆盖 Eurex 的情形，按 CLAUDE.md 第二节第四条不作断言，spec 记为 rate: null（幽灵条）并转 OPEN-QUESTIONS。"
+    en: "N/A — whether Germany levies stamp duty on derivatives trading is not asserted from a source held by this field (no sources / quote); the jurisdiction-level fact that the German Börsenumsatzsteuer (stock-exchange turnover tax) was abolished on 1 January 1991 is verbatim-sourced, but only via the Bundestag document cited in de-xetra's stamp_duty field. Since derivative contracts themselves involve no stampable securities transfer, per the CLAUDE.md anti-hallucination rules this field does not assert non-levy: the spec is recorded as rate: null (ghost bar) and referred to OPEN-QUESTIONS."
     confidence: medium
 
   financial_transaction_tax:
-    spec: {type: none, note: "EU FTT 提案未生效；德国未单独立法对衍生品征交易税"}
-    zh: "无金融业交易税适用于 Eurex 衍生品：欧盟金融业交易税（EU FTT）提案至今未生效；德国亦未单独立法对衍生品征收交易税。少数标的股票可能适用德国《交易所 turnover 税》(Börsenumsatzsteuer)，但该税不延伸至在 Eurex 交易的衍生品合约本身。具体适用性本次未逐条核实，已记入 OPEN-QUESTIONS。"
-    en: "No financial transaction tax applies to Eurex derivatives: the EU FTT proposal is not in force, and Germany has not enacted a standalone transaction tax on derivatives. A few underlying equities may be subject to the German stock-exchange turnover tax (Börsenumsatzsteuer), but that does not extend to the derivative contracts traded on Eurex. Exact applicability was not individually verified this session (see OPEN-QUESTIONS)."
+    spec: {rate: null, note: "未找到明确不征依据：本字段无 sources / quote，「EU FTT 提案未生效」「德国未单独立法」均为常识性表述；原 detail 自述「具体适用性本次未逐条核实」；见 OPEN-QUESTIONS"}
+    zh: "无金融业交易税适用于 Eurex 衍生品——这是本字段的原始断言，但其依据（欧盟金融业交易税（EU FTT）提案至今未生效、德国未单独立法对衍生品征交易税）本次未取得可引用原文，且原 detail 自述「具体适用性本次未逐条核实」。少数标的股票可能适用德国《交易所 turnover 税》(Börsenumsatzsteuer) 的法域级事实，其废除原文见 de-xetra 的 stamp_duty 字段。按 CLAUDE.md 第二节第四条不作断言，spec 记为 rate: null（幽灵条）并转 OPEN-QUESTIONS。"
+    en: "No financial transaction tax applies to Eurex derivatives — the original claim, but its basis (the EU FTT proposal is not in force; Germany has not enacted a standalone derivatives transaction tax) was not verbatim-sourced this session and the original detail itself states that exact applicability was not individually verified. The jurisdiction-level Börsenumsatzsteuer abolition is verbatim-sourced only via de-xetra's stamp_duty field. Per the CLAUDE.md anti-hallucination rules this field does not assert non-levy: the spec is recorded as rate: null (ghost bar) and referred to OPEN-QUESTIONS."
     confidence: medium
 
   capital_gains_tax:

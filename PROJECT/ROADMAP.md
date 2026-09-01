@@ -18,17 +18,19 @@
 
 ### 下一步（按此顺序）
 
-1. **成本瀑布视觉迭代**（交互式会话）— [ADR-047] 已知局限：单一费种远大于其余时左半留白、全零市场「合计 0.00 bp」略尴尬、暗色「此侧不征」虚线偏弱、按股/定额费折算较粗
-2. **交割管线视觉迭代** — [ADR-051] 已知局限：深色预防层色块偏淡、T+1 现货所右半留白；违约瀑布 `resource` 短语无 `en`、英文态仍中文（同 [ADR-049] 对 `detail` 的结构性处置，触发条件见 [ADR-051]）
-3. **其后按交易员价值继续**：上市生命周期（一并落地 [ADR-036] #5 章节级"仅现货适用"标记）→ 监管图 → 参与者 → 风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）
+1. **成本瀑布数据层复查（[ADR-054] 留下的坐实项，可与视觉迭代合并做）** — 13 个 `type: none` 降级点 + 6 个 `side`/费率补强点，重抓税法/税务局原文坐实后回 `type: none`（`kr-krx` 交易费需抓 KRX 当期收费表确认临时阶梯到期后的现行费率；`us-nyse`/`us-nasdaq` SEC Section 31 费率 2026-10-01 起按 SEC FY2027 公告重核）；明细见 `PROJECT/COST-WATERFALL-SPOT-CHECK.md` 与 OPEN-QUESTIONS
+2. **`validate.py` 5b 增补 `spec.note` 数字反查**（[ADR-054] 流程项）— 本次 8 处 FIX 里 4 处属于这个盲区；机器化后 `note` 夹带数字不再依赖人工抽检
+3. **成本瀑布视觉迭代**（交互式会话）— [ADR-047] 已知局限：单一费种远大于其余时左半留白、全零市场「合计 0.00 bp」略尴尬、暗色「此侧不征」虚线偏弱、按股/定额费折算较粗
+4. **交割管线视觉迭代** — [ADR-051] 已知局限：深色预防层色块偏淡、T+1 现货所右半留白；违约瀑布 `resource` 短语无 `en`、英文态仍中文（同 [ADR-049] 对 `detail` 的结构性处置，触发条件见 [ADR-051]）
+5. **其后按交易员价值继续**：上市生命周期（一并落地 [ADR-036] #5 章节级"仅现货适用"标记）→ 监管图 → 参与者 → 风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）
 
 完整清单与每章的小型 `spec` 补充见三节 `- [ ] **Phase 3 · 其余章节可视化**`。
 
 ### 最近完成（滚动窗口，只留最近 3 条；更早的见三节）
 
+- **2026-09-01 · 成本瀑布数据层核查 · 103 个 `costs` spec 独立复核**（[ADR-054]）— 8 FIX + 13 DOWNGRADE（初检 79.6%），全部就地处置、`make check` 全绿；逐条结论表 `PROJECT/COST-WATERFALL-SPOT-CHECK.md`
 - **2026-09-01 · 修复 · `freshness.json` 的 `age_days`/`stale` 改由前端现算**（[ADR-052]）— 消除 `make build` 每天必现的 diff + 线上过期判定冻结问题；顺带给 ROADMAP 里 `verify_quotes` 历史快照数字补限定语（[ADR-053]）
 - **2026-09-01 · Phase 3 第三棒（渲染层）· 交割管线**（[ADR-051]）— `renderSettlementPipeline` 双泳道 SVG + 常驻违约瀑布附图 + 顶层 tab「交割管线」；纯前端四文件、`data/` 与 `docs/data/` 零 diff
-- **2026-08-31 · Phase 3 第三棒（数据层）**（[ADR-050]）— `default_management.spec` 形状 + `guarantee_model` 枚举 + 20 家回填；`progress-matrix` 零 diff、`health-summary` +20
 
 ---
 
@@ -123,6 +125,7 @@
   - [x] **Phase 3 第三棒（数据层）· `default_management.spec` 形状 + `guarantee_model` 枚举 + 20 家回填**（2026-08-31，[ADR-050]；ADR-049 归英文版修订条）— 实施前一轮 `spec` 形状细化 Q&A（三题全取推荐）：本棒范围=只做数据层 / `layers` 粒度=`bearer` 枚举 + `resource` 自由短语 / `guarantee_model`=taxonomy 第 8 章正式字段 + `enum_ref`。**`schema/` 三文件**：`enums.yml` 加 `guarantee_model` 4 值（`ccp_novation` 15 家 / `exchange_as_ccp` br·kr·tw / `lines_of_defence` za 现货 / `shared_ccp` us×2 的 NSCC）；`spec.yml` 加 `clearing.default_management` 形状（`model` + `layers`〔`order`/`resource`/`bearer`〕+ `note`，`bearer` 5 值——[ADR-048] 的 4 类 + 新增 `external` 外部授信 / 保险，因 cn-sse·hk·sg 有明确外部资源层）；`taxonomy.yml` 第 8 章 `csd_name` 后加 `guarantee_model`（`en_required` + `enum_ref`，**不加 `in_matrix`**）。**回填 20/20**：`default_management.spec` = 12 家完整 `ccp_default_waterfall` layers（hk 8 层 706 条、sg 6 层 (a)–(f)、uk 8 层、de-eurex/xetra 6–7 层、cn-sse 5 层 68 条…）+ 1 家 `lines_of_defence`（za）+ 7 家 `unstructured` 三态占位（ca/jp/sa/tw/us×2——框架存在、逐层瀑布未在一手页呈现，[ADR-048] 预期）；`guarantee_model` 20/20（7 high + 13 medium，`quote` 全复用同文件既有已核实字段）。**只动 `schema/` + `data/` + `PROJECT/`（DECISIONS / ROADMAP / SKILL）+ 生成产物；未动前端、未动 `docs/data/freshness.json`（依 ADR-043/045 惯例）。** 退出验收：`make check` 全绿——`validate` 20 家 0/0、`verify_quotes` FAIL=0（CACHE_MISS=1079 为 [ADR-044] 待重建已知态，当次快照非当前状态，见 [ADR-053]）；生成块唯一变动 `health-summary` +20（1844→1864），`progress-matrix` **零 diff**（`guarantee_model` 20/20 全填、`za-jse` 第 8 章仍 ✅）。**渲染层（`renderSettlementPipeline` + 顶层 tab，动前端三件套）留英文版修订合并后**——避让并行前端工作，同 [ADR-045]/[ADR-047] 分棒。
   - [x] **Phase 3 第三棒（渲染层）· `renderSettlementPipeline`**（2026-09-01 完成，[ADR-051]）— `docs/assets/app.js` `renderSettlementPipeline` / `spLanes`（双泳道手写 SVG：上「现货」`成交→CCP 介入→净额轧差·保证金→DvP 终局 T+N`，下「衍生品」`成交→每日盯市 ↻ 循环→不按比例断口→到期抽象区块→最终结算`；三态 `only`/`both`/`none` 由 `spDerivState()` 定，`none` 用软表述不硬断言「本所无衍生品」）/ `spWaterfall`（违约瀑布常驻附图，按 `default_management.spec.layers[].order` 堆叠、按 `bearer` 上色，`unstructured` 三态占位，`spec.note` 走 `zhNoteBlock` 英文态折叠）/ `guarantee_model` 四形 CCP 节点（菱形 / 叠方孔 / 套小菱形 / 空心盾）/ 顶层 tab「交割管线」+ 路由键 `settlement-pipeline` + `styles.css` `.sp-*` + `--sp-gold` 令牌。`Nmax = max(settleDays, 2)`。从一开始接语言开关（`t()`/`tSel()`/`fieldLabel`/`enumDisplay`）。顺带修 `tools/check_ui_i18n.py` 的 `enclosing_callees` O(位置×字面量数) 性能（命中 `t`/`tSel` 提前返回 + 二分判定，行为等价，7 分钟→数秒）。纯前端四文件、`data/` 与 `docs/data/` 零 diff、`make sync` 幂等。Chrome headless `hk-hkex`/`de-eurex`/`za-jse`/`us-nyse`/`cn-sse`/`br-b3`/`uk-lse`/`sg-sgx` × 中英 × 明暗核对通过，五视图无回归。**已知局限**：违约瀑布 `resource` 短语无 `en`、英文态仍中文（同 [ADR-049] 对 `detail` 的结构性处置，触发条件见 ADR-051）；深色预防层色块偏淡、T+1 现货所右半留白（留交互式迭代）。见 [ADR-048] 三方向。
   - [x] **修复 · `freshness.json` 的 `age_days`/`stale` 改由前端现算**（2026-09-01，[ADR-052]，PR 待合并）— 这两个键是构建时刻的派生值，落盘会导致① 每次 `make build` 在 1864 条记录上造出与内容无关的 diff，② 线上过期判定冻结在上次构建那天。`sync.py` 不再把 `age_days`/`stale` 写进 `freshness.json`（`render_health_summary` 仍用 Python 侧算出的完整值，不受影响）；`manifest.json` 新增 `volatility_months`（`VOLATILITY_MONTHS` 常量的唯一生成出口）；`app.js` 新增 `daysSince`/`applyStaleness`，在 `loadCore()` 用 `verified`+`volatility`+`volatility_months` 按访客当天现算，下游 `staleSet`/矩阵 stale-dot/健康度页零改动。`make build` 全绿、`make sync` 二次幂等；Chrome headless 核对健康度页「0 个超过复核阈值待复核」与服务端 health-summary 生成块一致，矩阵视图 280 个 `<td>` 正常渲染无回归。**同棒顺带**：ROADMAP 里 [ADR-044]/[ADR-050] 记录的 `verify_quotes` 历史快照数字补限定语，指向 `make verify-quotes` 看当前实际状态（不改写数字本身，见 [ADR-053]）——起因是本棒验证时撞上 `git worktree` 不复制 `.cache/` 的现场例证（同一仓库、同一提交，worktree 内 `CACHE_MISS=1078` 而主 checkout 是 `OK=1000/CACHE_MISS=78`）。
+  - [x] **Phase 3 · 成本瀑布数据层核查 · 103 个 `costs` spec 独立复核**（2026-09-01，[ADR-054]）— 对 [ADR-045] 回填的 103 个 `costs.*` spec 做第二人独立复核（离线 spec-vs-quote，四档深度 × 6 维度，逐条结论表 `PROJECT/COST-WATERFALL-SPOT-CHECK.md`）：**8 FIX + 13 DOWNGRADE，初检通过 82/103 = 79.6%，全部就地处置后终态 100%、`make check` 全绿、`PROJECT/` 生成块零 diff**。三类系统性缺口：① `note` 字符串数字无机器覆盖（`cn-sse` 夹带深交所费率、`br-b3`/`fr-euronext` 夹带无源税率、`sg-sgx` 币种错）→ 4 处 FIX；② `type: none` 正面依据缺失 → 13 个降级 `rate: null`（根因：把「费率页没列」当「不征收」）；③ `tiered`/`side` 时间性键（`kr-krx` 临时阶梯 2026-02-13 已到期）。`side` 裁定细则已立（未明说则保留 + OPEN-Q，不移除——渲染层缺省回退 `both`）。后续：13 个降级点待重抓税法原文坐实 + `validate.py` 5b 补 `note` 数字反查（见「下一步」）。
 
 **v2.0 的 Phase 序列到 Phase 3 为止。**
 

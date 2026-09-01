@@ -1693,12 +1693,12 @@
       },
       "regulatory_fees": {
         "spec": {
-          "type": "none",
-          "note": "加拿大联邦层面无类似美国 SEC Section 31 的按交易额监管费"
+          "rate": null,
+          "note": "未找到明确不征依据：本字段来源为 CEPR 的 FTT 国别清单，主题是金融交易税而非证券交易监管费，无法支撑『无按交易额监管费』这一断言；见 OPEN-QUESTIONS"
         },
-        "zh": "加拿大联邦层面对证券交易不征收类似美国 SEC Section 31 的按交易额「监管费」；TSX 层面唯一的交易相关费用即交易所经手费（maker-taker，见 exchange_fees），并无独立名为「regulatory fee」的征费。因此本字段记为不适用（无独立的联邦/省级证券交易监管费）",
-        "en": "At the Canadian federal level there is no per-trade 'regulatory fee' analogous to the U.S. SEC Section 31 fee on securities transactions; the only transaction-level charge at TSX is the exchange trading fee (maker-taker, see exchange_fees), and there is no separately named 'regulatory fee' levy. This field is therefore not applicable (no standalone federal/provincial securities transaction regulatory fee)",
-        "detail": "加拿大没有联邦证券交易税/监管费这一费种（见 financial_transaction_tax / stamp_duty 同为不适用）。若未来省或联邦新设该类费，需重新核实。",
+        "zh": "加拿大联邦层面是否存在类似美国 SEC Section 31 的按交易额「监管费」，本次未取得正面依据——本字段来源（CEPR 的 FTT 国别清单）主题是金融交易税，不覆盖证券交易监管费；TSX 层面已核实的交易相关费用为交易所经手费（maker-taker，见 exchange_fees）。按 CLAUDE.md 第二节第四条，spec 记为 rate: null（幽灵条），并转 OPEN-QUESTIONS",
+        "en": "Whether a per-trade 'regulatory fee' analogous to the U.S. SEC Section 31 fee exists at the Canadian federal level was not positively established this session — this field's source (the CEPR country inventory of financial transaction taxes) is about FTTs and does not cover securities-transaction regulatory fees; the transaction-level charge verified at TSX is the exchange trading fee (maker-taker, see exchange_fees). Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) and referred to OPEN-QUESTIONS",
+        "detail": "现有来源不足以断言「加拿大无联邦证券交易监管费」这一费种：CEPR 清单只覆盖 FTT（见 financial_transaction_tax），不覆盖监管费。按 CLAUDE.md 第二节第四条不凭「未提及」断言不征，spec 由 type: none 改为 rate: null 并转 OPEN-QUESTIONS；若后续拿到 OSC / CSA 的收费框架原文可就地坐实。",
         "sources": [
           {
             "title": "Financial Transactions Taxes Around the World（CEPR）",
