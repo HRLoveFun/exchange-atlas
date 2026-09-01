@@ -1603,7 +1603,7 @@
           "rate": null,
           "unit": "permille",
           "side": "both",
-          "note": "交易经手费；本文件未记录具体费率，深交所同期全国性降费后 A股为 0.0341‰ 双边"
+          "note": "交易经手费；本文件 quote 未记录具体费率（沪深两次经手费下调属同一次全国性降费政策，深交所档费率见本仓库 cn-szse 的 exchange_fees 字段，本字段不转抄该数值）"
         },
         "zh": "交易经手费等，由交易参与人向交易所缴纳",
         "en": "Trading handling fees, etc., paid by trading participants to the Exchange",
@@ -1647,7 +1647,7 @@
           "rate": 0.02,
           "unit": "permille",
           "side": "both",
-          "note": "证券交易监管费（发改价格〔2012〕2119号），按年交易额计；基金/债券免收；现行费率本次未再核实"
+          "note": "证券交易监管费（发改价格〔2012〕2119号），按年交易额向交易所征收、非按笔向投资者征收，瀑布图中按 bp 呈现仅为同一口径的折算；基金/债券免收；现行费率本次未再核实"
         },
         "zh": "存在独立于交易所经手费之外的「证券交易监管费」，由中国证监会向交易所收取（2012年起对股票按年交易额0.02‰收取，基金/债券免收）；该费率是否为现行值本次未核实到更新的官方文件",
         "en": "An independent \"securities trading regulatory fee\" exists on top of the Exchange's own handling fee, collected by the CSRC from the exchanges (set in 2012 at 0.02‰ of annual trading value for stocks, with funds and bonds exempt); whether this rate remains current was not confirmed against a more recent official document this round",

@@ -387,8 +387,21 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
    - **`side: buy / sell / both`**——单边税看清楚（英股 SDRT 仅买方、A 股印花税仅卖方、
      港股双边、美股无）。maker-taker 所的 `exchange_fees` quote 常只含挂单返佣、吃单费未摘引
      → `rate: null` + `note`。
-   - **该市场不征某费种 / 税目** → `type: none` + `note`（是关键事实，不是留空）。多项分征费
-     （香港 SFC + AFRC、美股 NSCC value-into/out-of-net）用 `components: [{name, rate}]`，渲染层求和。
+   - **该市场不征某费种 / 税目** → `type: none` + `note`（是关键事实，不是留空）。
+     ⚠️ **`type: none` 必须有「明确不征」的正面依据原文**（税法 / 税务局 / 立法机构文档）——
+     交易所费率页「没列」不算（费率页只覆盖交易所自身收费，不管国家税制），第三方国别税费
+     综述只能支撑其主题内的事实（CEPR 的 FTT 清单证明得了「无 FTT」，证明不了「无监管费」）。
+     查不到正面依据就填 `rate: null` + `note` 说明 + 转 OPEN-QUESTIONS，别用 `type: none`。
+     （[ADR-054] 实测：31 个 `type: none` 里 13 个因此降级。）
+   - **`spec.note` 里的数字完全不受 5b 机器校验**（5b 只递归查数值型叶子，`note` 是字符串）——
+     人工保证 note 里每个数字都能在该字段 `quote` / `zh` / `detail` 里逐字找到；写不了就改成
+     不含数字的交叉引用表述。这是 [ADR-054] 8 处 FIX 里 4 处的根源（`cn-sse` note 混入深交所
+     费率、`sg-sgx` note 币种写错都是这类）。
+   - **`tiered: true` 只在 `rate` 确实取自某个费率档时用**（渲染层按「阶梯首档」标注 ▸）；
+     临时阶梯费率过期后必须回头移除（`kr-krx` 2025-12→2026-02 临时阶梯即是案例）。`side`
+     原文未明说时保留声明值 + 记 OPEN-Q，**不要移除**——渲染层缺省回退 `both`，单边税会被画成双边。
+   - 多项分征费（香港 SFC + AFRC、美股 NSCC value-into/out-of-net）用 `components: [{name, rate}]`，
+     渲染层求和。
    - 填完在「成本瀑布」tab 里点开自检（渲染层落地后）。
 
 10. **第八章清算的 `guarantee_model` + `default_management.spec`（[ADR-050]，交割管线）：**
