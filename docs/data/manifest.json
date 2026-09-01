@@ -487,5 +487,10 @@
       "label_en": "Risks & Special Considerations",
       "kind": "object"
     }
-  ]
+  ],
+  "volatility_months": {
+    "stable": 24,
+    "moderate": 12,
+    "volatile": 6
+  }
 }

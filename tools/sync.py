@@ -572,13 +572,24 @@ def main():
              "label_en": c["label_en"], "kind": c.get("kind", "object")}
             for c in taxonomy["chapters"]
         ],
+        # 复核阈值常量的唯一生成出口：前端用它 + 各字段自带的 verified/volatility
+        # 现算 age_days/stale（见 ADR-052），不读 freshness.json 里冻结的派生值。
+        "volatility_months": VOLATILITY_MONTHS,
         # 故意不含时间戳字段：没有消费者会读它，留着只会让每次 `make sync` 都在
         # manifest.json 里制造一行必然变化的 diff，破坏「sync 后 git diff 应为空」
         # 这条一致性判据。真要知道数据新不新，看各字段自己的 verified 日期。
     }
     (DOCS_DATA / "manifest.json").write_text(dump_json(manifest), encoding="utf-8")
     (DOCS_DATA / "matrix.json").write_text(dump_json({"cells": matrix_cells}), encoding="utf-8")
-    (DOCS_DATA / "freshness.json").write_text(dump_json({"fields": freshness_rows}), encoding="utf-8")
+    # freshness.json 只带 verified/volatility 这两个建库时的事实，不带 age_days/stale
+    # ——那两个是「今天」的派生值，写进产物会让站点的过期判定冻结在上次构建那天，
+    # 且 make build 每天都会造出一份必然变化的 diff（ADR-052）。健康度摘要仍用
+    # Python 侧算出的完整 freshness_rows（含 age_days/stale），只是不落盘进 JSON。
+    freshness_rows_out = [
+        {k: v for k, v in row.items() if k not in ("age_days", "stale")}
+        for row in freshness_rows
+    ]
+    (DOCS_DATA / "freshness.json").write_text(dump_json({"fields": freshness_rows_out}), encoding="utf-8")
     (DOCS_DATA / "glossary.json").write_text(dump_json(glossary), encoding="utf-8")
     (DOCS_DATA / "enums.json").write_text(dump_json(enums), encoding="utf-8")
     (DOCS_DATA / "_schema.json").write_text(dump_json(build_json_schema(taxonomy)), encoding="utf-8")

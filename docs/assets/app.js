@@ -28,6 +28,25 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
+  // age_days/stale 现算（见 ADR-052）：freshness.json 只带 verified/volatility 这两个
+  // 建库事实，age_days/stale 是「今天」的派生值，在访客本地按访问日现算，不用构建
+  // 那天冻结在产物里的值——否则站点的过期标记会在两次 make sync 之间失真。
+  function daysSince(isoDate) {
+    var today = new Date();
+    var todayUTC = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(isoDate));
+    if (!m) return null;
+    var verifiedUTC = Date.UTC(+m[1], +m[2] - 1, +m[3]);
+    return Math.round((todayUTC - verifiedUTC) / 86400000);
+  }
+  function applyStaleness(rows, volatilityMonths) {
+    rows.forEach(function (f) {
+      var ageDays = f.verified ? daysSince(f.verified) : null;
+      f.age_days = ageDays;
+      f.stale = ageDays == null ? true : ageDays > (volatilityMonths[f.volatility] || 12) * 30;
+    });
+    return rows;
+  }
   function getByPath(obj, pathStr) {
     return pathStr.split(".").reduce(function (o, k) {
       return o && typeof o === "object" ? o[k] : undefined;
@@ -188,7 +207,7 @@
       cache.manifest = r[0];
       cache.taxonomy = r[1];
       cache.matrix = r[2].cells;
-      cache.freshness = r[3].fields;
+      cache.freshness = applyStaleness(r[3].fields, cache.manifest.volatility_months || {});
       cache.enums = r[4];
       cache.staleSet = new Set(
         cache.freshness.filter(function (f) { return f.stale; }).map(function (f) { return f.exchange_id + "|" + f.field_path; })
