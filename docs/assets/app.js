@@ -655,48 +655,39 @@
     return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
       '" data-chapter="market_structure">' + (title ? "<title>" + esc(title) + "</title>" : "") + inner + "</g>";
   }
-  // 把价格限制 + 熔断 + 回转三件核心事实综述成 1–3 行短句，放在平面中央
-  function tdHeadlineParts(ms, yRef) {
-    var out = [];
+  // 标注 chip（tdCorePanel 的六格 + tdSidePanels 的「交易细则·成本」组共用；ADR-054）。
+  // val 传完整串，CSS 用 -webkit-line-clamp 截断，title 给完整内容；标签按 chapter+path 查 taxonomy。
+  function tdChip(id, path, val, env, chapter) {
+    var has = env && (env.zh || env.enum || env.spec);
+    val = String(val == null || val === "" ? "—" : val);
+    return '<button type="button" class="td-chip' + tdConfClass(env) + (has ? "" : " td-chip-empty") +
+      '" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
+      '" data-chapter="' + esc(chapter || "market_structure") + '" title="' + esc(val) + '">' +
+      '<span class="td-chip-k">' + esc(fieldLabel(chapter || "market_structure", path)) + '</span><span class="td-chip-v">' + esc(val) + '</span></button>';
+  }
+  // 透视开关状态（面板退成虚线轮廓、露出零轴/熔断线/走廊），按访客持久化。
+  function tdGhostOn() {
+    try { return localStorage.getItem("ea-td-ghost") === "1"; } catch (e) { return false; }
+  }
+  // 价格约束结论句（机制核心面板顶栏，恒 1 行）——只综述主板价格限制，不含熔断/回转
+  // （熔断进面板槽③，回转已是平面右外缘标记）。
+  function tdEnvelopeLine(ms, yRef) {
     var s = ms.price_limits && ms.price_limits.main_board && ms.price_limits.main_board.spec;
     if (s) {
-      if (typeof s.limit_pct === "number") out.push(t("当日价格限制 ±" + s.limit_pct + "%（相对" + yRef + "）", "Daily price limit ±" + s.limit_pct + "% (vs " + yRef + ")"));
-      else if (typeof s.limit_pct_up === "number" || typeof s.limit_pct_down === "number") {
-        out.push(t("当日涨跌停 +" + (s.limit_pct_up != null ? s.limit_pct_up : "?") + "% / −" +
-          (s.limit_pct_down != null ? Math.abs(s.limit_pct_down) : "?") + "%",
-          "Daily limit up +" + (s.limit_pct_up != null ? s.limit_pct_up : "?") + "% / down −" +
-          (s.limit_pct_down != null ? Math.abs(s.limit_pct_down) : "?") + "%"));
-      } else if (s.type === "stepwise") out.push(t("阶梯值幅：涨跌幅随基准价分档", "Stepwise limits: the band depends on the base price"));
-      else if (s.type === "dynamic" && typeof s.band_pct === "number") out.push(t("动态价格带 ±" + s.band_pct + "%（随参考价滚动）", "Dynamic price band ±" + s.band_pct + "% (rolling reference price)"));
-      else if (s.type === "dynamic") out.push(t("设动态价格带，档位官方未公布", "Dynamic price band in place; thresholds not published"));
-      else if (s.type === "none") out.push(t("无每日涨跌停墙", "No daily price limit wall"));
-      else out.push(t("价格限制按品种 / 证券分类分档", "Price limits are tiered by instrument / security class"));
+      if (typeof s.limit_pct === "number") return t("当日价格限制 ±" + s.limit_pct + "%（相对" + yRef + "）", "Daily price limit ±" + s.limit_pct + "% (vs " + yRef + ")");
+      if (typeof s.limit_pct_up === "number" || typeof s.limit_pct_down === "number")
+        return t("当日涨跌停 +" + (s.limit_pct_up != null ? s.limit_pct_up : "?") + "% / −" + (s.limit_pct_down != null ? Math.abs(s.limit_pct_down) : "?") + "%",
+          "Daily limit up +" + (s.limit_pct_up != null ? s.limit_pct_up : "?") + "% / down −" + (s.limit_pct_down != null ? Math.abs(s.limit_pct_down) : "?") + "%");
+      if (s.type === "stepwise") return t("阶梯值幅：涨跌幅随基准价分档", "Stepwise limits: the band depends on the base price");
+      if (s.type === "dynamic" && typeof s.band_pct === "number") return t("动态价格带 ±" + s.band_pct + "%（随参考价滚动）", "Dynamic price band ±" + s.band_pct + "% (rolling reference price)");
+      if (s.type === "dynamic") return t("设动态价格带，档位官方未公布", "Dynamic price band in place; thresholds not published");
+      if (s.type === "none") return t("无每日涨跌停墙", "No daily price-limit wall");
+      return t("价格限制按品种 / 证券分类分档", "Price limits are tiered by instrument / security class");
     }
-    var c = ms.circuit_breaker && ms.circuit_breaker.spec;
-    if (c) {
-      if (c.type === "index_level" && c.levels) {
-        var ts = c.levels.filter(function (l) { return typeof l.threshold_pct === "number"; })
-          .map(function (l) { return l.threshold_pct; });
-        var idxNames = (c.reference || []).map(function (r) { return r.index; }).filter(Boolean);
-        if (ts.length) {
-          // 注意是 > 1：只有单一参考指数时，中文一律说「指数」，不写指数名（保持 HEAD 原行为）
-          var zo = idxNames.length > 1 ? idxNames.join(t(" 或 ", " or ")) + " " : t("指数", "the index");
-          out.push(t(zo + "跌 " + ts.join("/") + "% 触发全市场熔断",
-            "A " + ts.join("/") + "% fall in " + zo.trim() + " triggers a market-wide halt"));
-        }
-      } else if (c.type === "none") out.push(t("无全市场熔断", "No market-wide circuit breaker"));
-      else if (c.type === "contract_level") out.push(t("无全市场熔断；合约级波动中断可扩至全合约暂停", "No market-wide circuit breaker; contract-level volatility interruptions may extend to all contracts"));
-      else if (c.type === "stock_level") out.push(t("无全市场熔断；靠个股 / 品种级波动中断（见下方「熔断」）", "No market-wide circuit breaker; relies on stock / instrument-level volatility interruptions (see Circuit breaker below)"));
-    }
-    var ir = ms.intraday_reversal;
-    var irm = {
-      t0: { zh: "当日可回转（T+0）", en: "Same-day reversal allowed (T+0)" },
-      t1: { zh: "T+1：当日买入次日才可卖", en: "T+1: shares bought today can only be sold the next day" },
-      t2: { zh: "T+2 交收", en: "T+2 settlement" },
-      mixed: { zh: "回转交易分品种不同", en: "Reversal rules differ by instrument" },
-    };
-    if (ir && irm[ir.enum]) out.push(tSel(irm, ir.enum));
-    return out;
+    var pt = getByPath(ms, "price_limits.type");
+    if (pt && pt.enum) return enumDisplay("price_limit_type", pt.enum);
+    if (pt && pt.zh) return dv(pt);
+    return t("价格约束未结构化——见档案页第五章", "Price constraints not structured — see Chapter 5 of the profile");
   }
 
   function renderTradingDay(app, params) {
@@ -951,19 +942,9 @@
       if (zero) g.push('<text x="' + (PL + 6) + '" y="' + n(yy2 - 5) + '" class="td-wl-sub">' + t("0 = ", "0 = ") + esc(yRef) + "</text>");
     }
 
-    // ── 中心信息卡：把「本市场日内价格受什么约束」这一核心事实用一句话放在中央
-    //    （ADR-040 收口审查反馈：中心大量留白 → 用它承载 30 秒看懂的结论）──
-    var head = tdHeadlineParts(ms, yRef);
-    if (head.length) {
-      var hcx = PL + pw / 2, hcw = Math.min(pw - 40, 404), hlh = 21;
-      var hcy = PT + ph * 0.17, hch = head.length * hlh + 15;
-      g.push('<rect x="' + n(hcx - hcw / 2) + '" y="' + n(hcy) + '" width="' + n(hcw) + '" height="' + n(hch) +
-        '" rx="7" fill="var(--bg-elevated)" fill-opacity="0.9" stroke="var(--border)"/>');
-      head.forEach(function (line, i) {
-        g.push('<text x="' + n(hcx) + '" y="' + n(hcy + 15 + i * hlh) + '" text-anchor="middle" class="td-head' +
-          (i === 0 ? " td-head-1" : "") + '">' + esc(line) + "</text>");
-      });
-    }
+    // ── 机制核心面板（ADR-054）：第五章七项机制事实（价格约束结论句 + 撮合/订单类型/
+    //    熔断/波动中断/卖空/做市商 六格）收进平面中心一块固定 628×276 的 foreignObject。
+    //    在 g[] 末尾 push（见下方），使其压在几何层之上；透视开关可让它退成虚线轮廓。
     // x 轴刻度：网格线恒 30 分钟；标签宽跨度（>10h，如 de-eurex）降为每 60 分钟避免叠字。
     // 时间坐标上下各一排（收口审查反馈）。
     var xLabelEvery = (xMax - xMin) > 600 ? 60 : 30;
@@ -1001,18 +982,65 @@
     g.push('<text x="' + n(PL + pw / 2) + '" y="' + (H - 5) + '" class="td-axis-name" text-anchor="middle">' +
       t("日内时间（当地）", "Time of day (local)") + "</text>");
 
-    var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + ' ' + H + '" class="td-svg" role="img" aria-label="' +
+    // 机制核心面板压在几何层之上（透视态 = 面板退成虚线轮廓，露出零轴/熔断线/走廊）
+    var ghostOn = tdGhostOn();
+    g.push(tdCorePanel(id, ms, yRef, ghostOn));
+
+    var svg = '<div class="td-plot-wrap' + (ghostOn ? " td-ghost" : "") + '"><svg viewBox="0 0 ' + W + ' ' + H + '" class="td-svg" role="img" aria-label="' +
       esc(exName) + t(" 市场机制剖面", " market mechanics profile") + '">' + g.join("") + "</svg></div>";
-    return tdLegend() + svg + tdSidePanels(id, data) + tdProse();
+    return tdBanner(ms) + tdLegend() + svg + tdSidePanels(id, data) + tdProse();
   }
 
-  // 标注层 chips（ADR-035 A：撮合原则 / 订单类型 / 做空 / 做市商 → 标注层）+ 非现货降级提示
-  function tdSidePanels(id, data) {
-    var ms = (data.chapters && data.chapters.market_structure) || {};
-    var costs = (data.chapters && data.chapters.costs) || {};
-    var clearing = (data.chapters && data.chapters.clearing) || {};
-    var out = [];
+  // 机制核心面板（ADR-054）——固定 628×276 的 foreignObject，水平居中、垂直居中于零轴
+  // （Y(0)=PT+ph/2=256）。涨/跌停线因 yR 自适应恒在 Y≈90/420，面板居中 → 上下气口自动对称。
+  function tdCorePanel(id, ms, yRef, ghostOn) {
+    var W = 960, PL = 60, PR = 152, PT = 62, PB = 106;
+    var pw = W - PL - PR, ph = 556 - PT - PB;
+    var fw = pw - 120, fx = PL + 60, fh = 276, fy = PT + ph / 2 - fh / 2;
+
+    var cells = [];
+    var mp = ms.matching_principle;
+    cells.push(tdChip(id, "matching_principle", mp && mp.enum ? enumDisplay("matching_principle", mp.enum) : dv(mp), mp));
+    cells.push(tdChip(id, "order_types", dv(ms.order_types), ms.order_types));
+    // 熔断：个股/合约级 → 展示机制描述（en 模式下信封 en 优先于中文 spec.note）；指数级/无 → 枚举标签
+    var cbf = ms.circuit_breaker, cbfS = cbf && cbf.spec, cbv;
+    if (cbfS && (cbfS.type === "stock_level" || cbfS.type === "contract_level")) {
+      cbv = (state.langMode === "en" && cbf && cbf.en) ? cbf.en : (cbfS.note || (cbf && cbf.zh));
+    } else if (cbf && cbf.enum) cbv = enumDisplay("circuit_breaker_type", cbf.enum);
+    else cbv = dv(cbf);
+    cells.push(tdChip(id, "circuit_breaker", cbv, cbf));
+    var vic = ms.volatility_interruption, vicS = vic && vic.spec, vicv;
+    if (vicS && vicS.type === "none") vicv = t("无独立层", "No separate layer");
+    else if (vicS && (typeof vicS.dynamic_pct === "number" || typeof vicS.static_pct === "number")) {
+      vicv = t("走廊 ", "Corridor ") + "±" + [vicS.dynamic_pct, vicS.static_pct].filter(function (x) { return typeof x === "number"; }).join("/") + "%";
+    } else vicv = dv(vic);
+    cells.push(tdChip(id, "volatility_interruption", vicv, vic));
+    var ss = ms.short_selling;
+    cells.push(tdChip(id, "short_selling", ss && ss.enum ? enumDisplay("short_selling_stance", ss.enum) : dv(ss), ss));
+    var mm = ms.market_maker_scheme, mmS = mm && mm.spec;
+    var mmv = mmS && mmS.present === true ? (t("有", "Yes") + (mmS.quote_obligation ? t(" · 强制双边报价", " · mandatory two-sided quotes") : "")) :
+      (mmS && mmS.present === false ? t("无", "No") : dv(mm));
+    cells.push(tdChip(id, "market_maker_scheme", mmv, mm));
+
+    var gt = ghostOn ? t("恢复面板", "Restore panel")
+      : t("透视面板：露出零轴 / 熔断线 / 走廊", "See-through: reveal zero line, halts, corridor");
+    return '<foreignObject x="' + fx + '" y="' + Math.round(fy) + '" width="' + fw + '" height="' + fh + '">' +
+      '<div xmlns="http://www.w3.org/1999/xhtml" class="td-core">' +
+      '<button type="button" class="td-core-ghost" data-role="td-ghost" aria-pressed="' + (ghostOn ? "true" : "false") +
+      '" title="' + esc(gt) + '">' + (ghostOn ? "●" : "◐") + '</button>' +
+      '<div class="td-core-head"><span class="td-core-tag">' + t("价格约束", "Price envelope") + '</span>' +
+      '<span class="td-core-line">' + esc(tdEnvelopeLine(ms, yRef)) + '</span></div>' +
+      '<div class="td-core-grid">' + cells.join("") + '</div></div></foreignObject>';
+  }
+
+  // 非现货 / 衍生品字段 banner（移到 SVG 之前——读图前要知道的前提；ADR-054）
+  function tdBanner(ms) {
     var mbRef = ms.price_limits && ms.price_limits.main_board && ms.price_limits.main_board.spec && ms.price_limits.main_board.spec.reference;
+    if (mbRef === "prev_settlement") {
+      return t(
+        '<p class="td-banner">纯衍生品交易所：y 轴基准为<strong>前结算价</strong>，第五章字段描述衍生品市场（ADR-035 E）。</p>',
+        '<p class="td-banner">Derivatives-only exchange: the y axis is benchmarked to the <strong>previous settlement price</strong>, and Chapter 5 fields describe the derivatives market (ADR-035 E).</p>');
+    }
     var hasDeriv = ms.derivatives && Object.keys(ms.derivatives).some(function (k) {
       var v = ms.derivatives[k];
       function content(o) {
@@ -1022,62 +1050,22 @@
       }
       return content(v);
     });
-    if (mbRef === "prev_settlement") {
-      out.push(t(
-        '<p class="td-banner">纯衍生品交易所：y 轴基准为<strong>前结算价</strong>，第五章字段描述衍生品市场（ADR-035 E）。</p>',
-        '<p class="td-banner">Derivatives-only exchange: the y axis is benchmarked to the <strong>previous settlement price</strong>, and Chapter 5 fields describe the derivatives market (ADR-035 E).</p>'));
-    } else if (hasDeriv) {
-      out.push(t(
+    if (hasDeriv) {
+      return t(
         '<p class="td-banner td-banner-soft">本所记录含衍生品市场字段；本剖面显示<strong>现货</strong>（衍生品 spec 待 Phase 3 补充）。</p>',
-        '<p class="td-banner td-banner-soft">This exchange has derivatives-market fields on record; this profile shows the <strong>cash market</strong> (derivatives specs are pending Phase 3).</p>'));
+        '<p class="td-banner td-banner-soft">This exchange has derivatives-market fields on record; this profile shows the <strong>cash market</strong> (derivatives specs are pending Phase 3).</p>');
     }
+    return "";
+  }
 
-    // val 传完整串；CSS 用 -webkit-line-clamp 截断到 2 行，title 给完整内容。
-    // chapter 默认第五章；成本 / 清算等跨章字段传对应 chapter，浮层据此取值。
-    // chip 名不再由调用方传：按 chapter + path 到 taxonomy 查字段标签的 zh/en，
-    // 省掉「同一标签两处手写」（CLAUDE.md §一）。
-    function chip(path, val, env, chapter) {
-      var has = env && (env.zh || env.enum || env.spec);
-      val = String(val == null || val === "" ? "—" : val);
-      return '<button type="button" class="td-chip' + tdConfClass(env) + (has ? "" : " td-chip-empty") +
-        '" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
-        '" data-chapter="' + esc(chapter || "market_structure") + '" title="' + esc(val) + '">' +
-        '<span class="td-chip-k">' + esc(fieldLabel(chapter || "market_structure", path)) + '</span><span class="td-chip-v">' + esc(val) + '</span></button>';
-    }
+  // 交易细则 · 成本组（tick size / 交易单位 / 交收 / 佣金 / 交易税 / 互联互通）——图下方保留，
+  // 「交易机制」七项已移入机制核心面板（ADR-054）。定宽 6 列，不随交易所换行漂移。
+  function tdSidePanels(id, data) {
+    var ms = (data.chapters && data.chapters.market_structure) || {};
+    var costs = (data.chapters && data.chapters.costs) || {};
+    var clearing = (data.chapters && data.chapters.clearing) || {};
+    function chip(path, val, env, chapter) { return tdChip(id, path, val, env, chapter); }
 
-    var chips = [];
-    var pt = getByPath(ms, "price_limits.type");
-    chips.push(chip("price_limits.type", pt && pt.enum ? enumDisplay("price_limit_type", pt.enum) : dv(pt), pt));
-    // 熔断 chip：指数级 / 无 → 枚举标签（档位见中心卡与平面线）；
-    //           个股 / 合约级 → 直接展示机制描述（spec.note 优先，收口审查反馈：要「具体信息」）
-    // 英文模式下数据信封的 en 优先于 spec.note（note 是中文散文，见 F3）
-    var cbf = ms.circuit_breaker, cbfS = cbf && cbf.spec, cbv;
-    if (cbfS && (cbfS.type === "stock_level" || cbfS.type === "contract_level")) {
-      cbv = (state.langMode === "en" && cbf && cbf.en) ? cbf.en : (cbfS.note || (cbf && cbf.zh));
-    } else if (cbf && cbf.enum) cbv = enumDisplay("circuit_breaker_type", cbf.enum);
-    else cbv = dv(cbf);
-    chips.push(chip("circuit_breaker", cbv, cbf));
-    var mp = ms.matching_principle;
-    chips.push(chip("matching_principle", mp && mp.enum ? enumDisplay("matching_principle", mp.enum) : dv(mp), mp));
-    var ot = ms.order_types;
-    chips.push(chip("order_types", dv(ot), ot));
-    var ss = ms.short_selling;
-    chips.push(chip("short_selling", ss && ss.enum ? enumDisplay("short_selling_stance", ss.enum) : dv(ss), ss));
-    var mm = ms.market_maker_scheme, mmS = mm && mm.spec;
-    var mmv = mmS && mmS.present === true ? (t("有", "Yes") + (mmS.quote_obligation ? t(" · 强制双边报价", " · mandatory two-sided quotes") : "")) :
-      (mmS && mmS.present === false ? t("无", "No") : dv(mm));
-    chips.push(chip("market_maker_scheme", mmv, mm));
-    var vic = ms.volatility_interruption, vicS = vic && vic.spec;
-    var vicv;
-    if (vicS && vicS.type === "none") vicv = t("无独立层", "No separate layer");
-    else if (vicS && (typeof vicS.dynamic_pct === "number" || typeof vicS.static_pct === "number")) {
-      vicv = t("走廊 ", "Corridor ") + "±" + [vicS.dynamic_pct, vicS.static_pct].filter(function (x) { return typeof x === "number"; }).join("/") + "%";
-    } else vicv = dv(vic);
-    chips.push(chip("volatility_interruption", vicv, vic));
-
-    out.push('<div class="td-chips-label">' + t("交易机制", "Trading Mechanics") + '</div><div class="td-chips">' + chips.join("") + "</div>");
-
-    // ── 交易细则 · 成本 · 特殊安排（收口审查反馈：tick size / 费用 / 特殊规则 也上主图）──
     var chips2 = [];
     var ts = ms.tick_size;
     chips2.push(chip("tick_size", dv(ts), ts));
@@ -1094,9 +1082,9 @@
     else chips2.push(chip("stamp_duty", t("无 / 未见征收", "None / not found"), sd, "costs"));
     var cs = ms.connect_schemes;
     if (cs && cs.zh) chips2.push(chip("connect_schemes", dv(cs), cs));
-    out.push('<div class="td-chips-label">' + t("交易细则 · 成本", "Trading Rules · Costs") + '</div><div class="td-chips">' + chips2.join("") + "</div>");
 
-    return out.join("");
+    return '<div class="td-chips-label">' + t("交易细则 · 成本", "Trading Rules · Costs") +
+      '</div><div class="td-chips td-chips-6">' + chips2.join("") + "</div>";
   }
 
   function tdLegend() {
@@ -1941,6 +1929,16 @@
     var role = hit.dataset.role;
     if (role === "cell" || role === "goto-health-field") {
       openCellOverlay(hit.dataset.exchange, hit.dataset.path, hit.dataset.chapter);
+    } else if (role === "td-ghost") {
+      // 机制核心面板透视开关（ADR-054）：切 .td-plot-wrap 的 td-ghost 类 + 持久化
+      var gon = hit.getAttribute("aria-pressed") !== "true";
+      try { localStorage.setItem("ea-td-ghost", gon ? "1" : "0"); } catch (err) { /* 隐私模式忽略 */ }
+      var gwrap = hit.closest(".td-plot-wrap");
+      if (gwrap) gwrap.classList.toggle("td-ghost", gon);
+      hit.setAttribute("aria-pressed", gon ? "true" : "false");
+      hit.textContent = gon ? "●" : "◐";
+      hit.title = gon ? t("恢复面板", "Restore panel")
+        : t("透视面板：露出零轴 / 熔断线 / 走廊", "See-through: reveal zero line, halts, corridor");
     } else if (role === "close-overlay") {
       closeOverlay();
     } else if (role === "group") {
