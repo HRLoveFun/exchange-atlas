@@ -2275,8 +2275,7 @@
           "rate": 0.0023,
           "unit": "pct",
           "side": "both",
-          "tiered": true,
-          "note": "2025-12-15 起临时阶梯（至 2026-02-13）：限价单(Maker) 0.00134%、市价单(Taker) 0.00182%；原统一 0.0023%（精确 0.0022763%）"
+          "note": "统一费率（quote: flat 0.0023%）。2025-12-15 至 2026-02-13 曾临时切换为阶梯：限价单(Maker) 0.00134%、市价单(Taker) 0.00182%——该临时阶梯已到期；且「限价/市价」是订单类型档而非首档，故本次抽检移除 tiered 键（tiered 会使渲染层按「阶梯首档」标注）。恢复后现行费率需抓 KRX 当期收费表确认，见 OPEN-QUESTIONS"
         },
         "zh": "交易所交易经手费：KRX对股票交易收取统一约0.0023%的交易费（精确实为0.0022763%）；为应对Nextrade竞争，2025年12月15日宣布临时改为阶梯费率——自2025年12月15日至2026年2月13日，限价单(Maker)费率降至0.00134%、市价单(Taker)降至0.00182%（原为统一0.0023%）。衍生品按合约计收交易费。",
         "en": "Exchange trading fee: KRX charges a flat stock trading fee of about 0.0023% (precisely 0.0022763%); to counter competition from Nextrade it announced in Dec 2025 a temporary shift to a tiered rate — from 15 Dec 2025 to 13 Feb 2026, limit-order (Maker) fees drop to 0.00134% and market-order (Taker) fees to 0.00182% (from the prior flat 0.0023%). Derivatives are charged per contract.",
@@ -2315,11 +2314,11 @@
       },
       "regulatory_fees": {
         "spec": {
-          "type": "none",
-          "note": "交易环节税费主要为 STT + 交易所/结算费；未核实到统一法定监管费率"
+          "rate": null,
+          "note": "未找到明确不征依据：原 zh 自述「未核实到统一的法定监管费率，建议后续抓取 KRX 收费表确认」，本字段无 quote、来源为第三方收费汇编；见 OPEN-QUESTIONS"
         },
-        "zh": "韩国对证券交易不另征广义「监管费」；交易环节税费主要为证券交易税(STT，见 financial_transaction_tax)与交易所/结算费(见 exchange_fees、clearing_fees)。部分衍生品或特定情形下可能有交易所风险基金计提，但本次未核实到统一的法定监管费率，建议后续抓取KRX收费表确认。",
-        "en": "Korea does not levy a separate broad-based 'regulatory fee' on securities trades; the transaction-level taxes/fees are essentially the Securities Transaction Tax (see financial_transaction_tax) and exchange/clearing fees (see exchange_fees, clearing_fees). Certain derivatives or specific cases may carry an exchange risk-fund levy, but no unified statutory regulatory-fee rate was verified this session; recommend fetching the KRX fee schedule to confirm.",
+        "zh": "韩国对证券交易不另征广义「监管费」——这是原字段的断言，但本次未取得正面依据：交易环节税费主要为证券交易税(STT，见 financial_transaction_tax)与交易所/结算费(见 exchange_fees、clearing_fees)。部分衍生品或特定情形下可能有交易所风险基金计提，但本次未核实到统一的法定监管费率，建议后续抓取KRX收费表确认。按 CLAUDE.md 第二节第四条，「未核实到」不等于「明确不征」，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。",
+        "en": "Korea does not levy a separate broad-based 'regulatory fee' on securities trades — the original claim, without a positive basis this session: the transaction-level taxes/fees are essentially the Securities Transaction Tax (see financial_transaction_tax) and exchange/clearing fees (see exchange_fees, clearing_fees). Certain derivatives or specific cases may carry an exchange risk-fund levy, but no unified statutory regulatory-fee rate was verified this session; recommend fetching the KRX fee schedule to confirm. Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS.",
         "sources": [
           {
             "title": "Korea Exchange (KRX) — Fee Schedules（第三方收费汇编，本次未直接核实具体数字）",
@@ -2335,11 +2334,11 @@
       },
       "stamp_duty": {
         "spec": {
-          "type": "none",
-          "note": "韩国无名为印花税的证券税种；对应流转税为证券交易税 STT（见 financial_transaction_tax）"
+          "rate": null,
+          "note": "未找到明确不征依据：本字段 quote 只讲 2026 年 STT 税率上调，无「韩国无印花税税种」的正面陈述；confidence low；见 OPEN-QUESTIONS"
         },
-        "zh": "韩国对证券转让不征收「印花税」(stamp duty)这一独立税种；本项目横向对比中与该字段对应的、按交易金额课征的流转税是「证券交易税」(Securities Transaction Tax, STT)，其现行税率见 financial_transaction_tax（2026年起KOSPI/KOSDAQ均为0.20%）。韩国税法中并无名为印花税的证券税种。",
-        "en": "Korea does not impose a stamp duty as a separate tax on securities transfers; the transaction-value turnover tax that corresponds to this field in cross-exchange comparison is the 'Securities Transaction Tax' (STT), whose current rate is in financial_transaction_tax (0.20% for both KOSPI and KOSDAQ from 2026). Korean law has no securities stamp-duty instrument.",
+        "zh": "韩国对证券转让不征收「印花税」(stamp duty)这一独立税种——这是原字段的断言，但本次未取得正面依据（本字段 quote 只讲 2026 年 STT 税率上调）；本项目横向对比中与该字段对应的、按交易金额课征的流转税是「证券交易税」(Securities Transaction Tax, STT)，其现行税率见 financial_transaction_tax（2026年起KOSPI/KOSDAQ均为0.20%）。按 CLAUDE.md 第二节第四条，「未见印花税税目」的表述不足以断言「明确不征」，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。",
+        "en": "Korea does not impose a stamp duty as a separate tax on securities transfers — the original claim, without a positive basis this session (this field's quote only covers the 2026 STT rate increase); the transaction-value turnover tax that corresponds to this field in cross-exchange comparison is the 'Securities Transaction Tax' (STT), whose current rate is in financial_transaction_tax (0.20% for both KOSPI and KOSDAQ from 2026). Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS.",
         "sources": [
           {
             "title": "Korea enacts 2026 tax reform bill（EY TaxNews，仅论及证券交易税，未见印花税）",
@@ -2358,7 +2357,7 @@
           "rate": 0.2,
           "unit": "pct",
           "side": "sell",
-          "note": "STT 2026 年起 KOSPI/KOSDAQ 均 0.20%（此前 KOSPI 0%、KOSDAQ 0.15%）；ETF/债券通常免征"
+          "note": "STT 2026 年起 KOSPI/KOSDAQ 均 0.20%（此前 KOSPI 0%、KOSDAQ 0.15%）；ETF/债券通常免征。征收方向（卖方）本字段 quote/zh 均未明确——韩国 STT 向证券受让方（卖方）课征为通行制度，但本次未取得可引用原文，保留 side: sell 并记 OPEN-QUESTIONS 待补强"
         },
         "zh": "证券交易税(STT)：2026年税制改革将韩股交易税恢复并定为 KOSPI市场0.20%、KOSDAQ市场0.20%（此前KOSPI为0%、KOSDAQ为0.15%），自2026年1月1日起对当日或之后转让的证券施行。ETF/债券通常免征。",
         "en": "Securities Transaction Tax (STT): the 2026 tax reform restored and set the Korean stock transaction tax to 0.20% for the KOSPI market and 0.20% for the KOSDAQ market (previously 0% for KOSPI and 0.15% for KOSDAQ), effective 1 January 2026 for securities transferred on or after that date. ETFs/bonds are generally exempt.",

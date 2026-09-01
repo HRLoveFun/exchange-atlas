@@ -1269,10 +1269,10 @@ costs:
     confidence: medium
 
   financial_transaction_tax:
-    spec: {type: none, note: "香港无独立于印花税之外的金融交易税税目；从价交易税负体现为印花税（见 stamp_duty）"}
-    zh: "不适用：香港未另立独立于印花税之外的「金融交易税」税目，证券买卖的从价交易税负体现为印花税（见 costs.stamp_duty，交易双方各0.1%），另有代收代缴性质的证监会/会计及财务汇报局征费（见 costs.regulatory_fees），两者功能上合计构成港股的交易税费负担，但港交所/税务局官方材料均未使用「金融交易税」这一独立税目名称"
-    en: "Not applicable: Hong Kong has no separately-named \"financial transaction tax\" distinct from stamp duty. The ad valorem transaction tax burden on securities trading is expressed as Stamp Duty (see costs.stamp_duty, 0.1% each side) plus the pass-through SFC/AFRC regulatory levies (see costs.regulatory_fees); together these functionally constitute Hong Kong's securities transaction tax burden, but neither HKEX nor the Inland Revenue Department uses a distinct \"financial transaction tax\" label"
-    detail: "本条是结构性判断（该税目在港未独立存在）而非某个具体数值，主要依据是本次抓取到的官方费率页（stamp_duty/regulatory_fees 两字段共用来源）逐项列示的税费种类里没有第三个独立税目，未见反例；confidence 定 medium 是因为『未见』不等于穷尽性地排除了所有可能命名，留有不确定性。"
+    spec: {rate: null, note: "未找到明确不征依据：依据仅是官方费率页逐项列示的税费名目中未见第三个独立税目，原 detail 自述「『未见』不等于穷尽性地排除所有可能命名」；见 OPEN-QUESTIONS"}
+    zh: "香港是否另立独立于印花税之外的「金融交易税」税目，本次未取得正面依据：依据仅是官方费率页（stamp_duty/regulatory_fees 两字段共用来源）逐项列示的税费种类里未见第三个独立税目，原 detail 自述「『未见』不等于穷尽性地排除所有可能命名」。证券买卖的从价交易税负体现为印花税（见 costs.stamp_duty，交易双方各0.1%），另有代收代缴性质的证监会/会计及财务汇报局征费（见 costs.regulatory_fees），两者功能上合计构成港股的交易税费负担，但港交所/税务局官方材料均未使用「金融交易税」这一独立税目名称。按 CLAUDE.md 第二节第四条，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS"
+    en: "Whether Hong Kong has a separately-named \"financial transaction tax\" distinct from stamp duty was not positively established this session: the basis is only that the official fee page (shared source of stamp_duty/regulatory_fees) lists no third standalone levy, and the original detail itself notes that \"not seen\" does not exhaustively rule out all possible labels. The ad valorem transaction tax burden on securities trading is expressed as Stamp Duty (see costs.stamp_duty, 0.1% each side) plus the pass-through SFC/AFRC regulatory levies (see costs.regulatory_fees); together these functionally constitute Hong Kong's securities transaction tax burden, but neither HKEX nor the Inland Revenue Department uses a distinct \"financial transaction tax\" label. Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS"
+    detail: "本条是结构性判断（该税目在港未独立存在）而非某个具体数值，主要依据是本次抓取到的官方费率页（stamp_duty/regulatory_fees 两字段共用来源）逐项列示的税费种类里没有第三个独立税目，未见反例；confidence 定 medium 是因为『未见』不等于穷尽性地排除了所有可能命名，留有不确定性。本次成本瀑布抽检按该自述降级：spec 由 type: none 改为 rate: null。"
     sources:
       - title: Trading Fee / Trading Tariff / SFC Transaction Levy 费率页（港交所官网，逐项列出证券交易涉及的全部税费名目）
         url: https://www.hkex.com.hk/Services/Rules-and-Forms-and-Fees/Fees/Securities-%28Hong-Kong%29/Trading/Transaction?sc_lang=en

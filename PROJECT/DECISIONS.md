@@ -1127,7 +1127,7 @@
 
 **日期：** 2026-09-01
 
-### ADR-054 — 市场机制剖面视觉迭代：机制核心面板（第五章七项事实收进主图中心的固定 foreignObject）+ 透视开关
+### ADR-055 — 市场机制剖面视觉迭代：机制核心面板（第五章七项事实收进主图中心的固定 foreignObject）+ 透视开关
 
 **为什么需要：** [ADR-040]/[ADR-042] 定型的剖面把「交易机制」七项事实（价格限制类型 / 熔断 / 撮合原则 / 订单类型 / 卖空 / 做市商 / 波动中断）放在主图**下方**、用 `flex-wrap` 排的 13 个 chip 里。三个问题：① 读者读完坐标系要往下扫再回头对照，两个阅读焦点；② `flex-wrap` 让每家交易所因文字长短不同而换行位置不同，「撮合原则」在哪没有稳定落点；③ 中心信息卡（结论句）与下方 chip 是同一章的两种割裂呈现，且 13 个 chip 视觉权重相同，最该先看的不突出。而剖面中心（零轴附近、日内时间中段）对绝大多数交易所是结构性空地——`yR` 按涨跌停/熔断量级自适应，几何元素恒贴四条边。
 
@@ -1149,5 +1149,26 @@
 - 透视是手动切换；未做 hover 自动半透明（会与点击槽位抢手感）。
 
 **验证：** `make build` 全绿——`validate` 20 家 0/0、`verify_quotes` FAIL=0（CACHE_MISS 为本 worktree 无 `.cache/` 的信息性状态，见 [ADR-053]）、`check_ui_i18n` OK（面板所有 UI 串走 `t()`/`tSel()`/`fieldLabel`/`enumDisplay`，从一开始接语言开关）；`make sync` 幂等，`git status` 仅 `app.js` + `styles.css`，`docs/data/` 零 diff、生成块无变化。Chrome headless 核对：`cn-sse`（±10%）/ `kr-krx`（±30%+三档熔断，最紧）/ `de-eurex`（前结算价 + banner 上移）/ `us-nyse`（英文态）/ `kr-krx`（暗色）+ 透视开/关两态——面板槽位稳定、顶栏恒一行、透视按钮切换正确、被盖几何在透视态浮现；成本瀑布 / 对比矩阵两视图无回归。
+
+### ADR-054 — 成本瀑布 spec 层 103 条独立复核：`note` 数字、`type: none` 依据、时间性键是三个系统性缺口
+
+**背景：** [ADR-045] 一次性回填了 103 个 `costs.*` spec，绝大多数由协调者串行、从既有 quote 结构化而来，**未经过第二人独立复核**。机器校验 5b 只覆盖一个窄面（`confidence: high` 且 ≥2 位数字的 spec 数值 ⊆ quote），对 `unit` 混淆、`side` 错侧、`type: none` 无依据、`note` 夹带数字、`tiered` 档位漂移全部静默放行——而成本瀑布已随 [ADR-047] 上线，这些都是图能正常渲染、数字错了没有任何信号的失效面。按 CLAUDE.md §四，新数据面铺开前需人工抽检，spec 层补过这道关。
+
+**方法：** 离线 spec-vs-quote 比对（quote 在各 yml 字段内，未新增抓取），四档深度（A 实体值+high / B 实体值+medium·low / C `type: none` / D `rate: null`）× 6 维度，逐条结论表见 `PROJECT/COST-WATERFALL-SPOT-CHECK.md`。
+
+**结果（初检 82/103 = 79.6% 通过，全部就地处置后终态 100%、`make check` 全绿）：** 8 处 `FIX` + 13 处 `DOWNGRADE`，集中在三类系统性缺口——
+
+1. **`note` 字符串里的数字完全没有机器覆盖**（5b 只递归查数值型叶子，`note` 是字符串）：`cn-sse exchange_fees` 夹带深交所费率 `0.0341‰`、`br-b3 exchange_fees` 夹带 `0.00500%/0.00375%`、`fr-euronext FTT` 夹带「法国现行 0.3%」、`sg-sgx clearing_fees` 币种写错（USD vs S$）。已全部改为不含数字的交叉引用表述或改回原文口径。
+2. **`type: none` 的正面依据普遍缺失**：31 个 `type: none` 里 13 个降级为 `rate: null`（au FTT、ca 监管费、cn-szse FTT、de-eurex 印花税与 FTT、fr stamp_duty、hk FTT、kr 监管费与印花税、sg 监管费与 FTT、za 监管费与 FTT）。根因是把「费率页没列这个税目」当成了「不征收」——交易所费率页只覆盖自身收费，不管国家税制；第三方国别税费综述（CEPR FTT 清单、IRAS GST 页）只能支撑其主题内的事实。
+3. **`tiered` / `side` 是随时间漂移或原文常缺的键**：`kr-krx exchange_fees` 的 `tiered: true` 挂在 2026-02-13 已过期的临时阶梯上（渲染层会按「阶梯首档」标注一个不存在的档位）；韩国/南非 STT、英国 SDRT 的单边方向在 quote/zh 里都没有陈述。
+
+**决定：**
+
+- **（数据）** 8 处 FIX 与 13 处 DOWNGRADE 全部就地处置：数值/单位/方向错但 quote 有正确值 → 改 `spec` 不改 `quote`；`type: none` 无正面依据 → 改 `rate: null` + 诚实 `note` + 转 OPEN-QUESTIONS（13 个降级点同步改写 zh/en，不再保留无依据的「不征收」断言——spec 与 zh 是同一事实的两种渲染，只改一半会自相矛盾）；`kr-krx` 移除已过期的 `tiered`；`br-b3` FTT 保留 `rate: 0` 并补 `side: buy`（`rate: 0` 与 `type: none` 的语义区分成立：税种存在但现行税率为 0，后者会渲染成「不征收」抹掉这一事实）。
+- **（`side` 裁定细则，供后续沿用）** quote/zh/detail 任一处明说方向 → 必须一致；三处都未提而 spec 声明了方向 → **保留值 + 记 OPEN-Q 补强来源，不移除**——渲染层 `cwSide()` 对缺省回退 `both`，移除单边税键会把它画成双边，错得更远。
+- **（流程，未实施、记为 ROADMAP 迭代点）** 给 `validate.py` 5b 增补「`spec.note` 字符串数字反查」（同字段 quote/zh/detail 任一命中即可）——本次 8 处 FIX 里有 4 处属于这个盲区，机器化后这类错误不再依赖人工抽检；另把「`type: none` 必须有正面依据句」写进 add-exchange skill（已写入）。
+
+**未做（留用户判断）：** ① 初检 79.6% 低于 CLAUDE.md §四 的 95% 阈值——以「修正后终态」计达标，但这个数字本身量化了「协调者串行、无第二人复核」流程的缺口率；后续大棒回填（如 [ADR-050] 的 20 家 `default_management.spec`）是否要把「第二人独立复核」从可选变成必经步骤，属流程决策，不代定。② 13 个降级点大多可以靠重抓税法/税务局原文坐实回 `type: none`，清单已进 ROADMAP「下一步」与 OPEN-QUESTIONS，本次未新增抓取。
+
 
 **日期：** 2026-09-01

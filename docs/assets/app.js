@@ -655,7 +655,7 @@
     return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
       '" data-chapter="market_structure">' + (title ? "<title>" + esc(title) + "</title>" : "") + inner + "</g>";
   }
-  // 标注 chip（tdCorePanel 的六格 + tdSidePanels 的「交易细则·成本」组共用；ADR-054）。
+  // 标注 chip（tdCorePanel 的六格 + tdSidePanels 的「交易细则·成本」组共用；ADR-055）。
   // val 传完整串，CSS 用 -webkit-line-clamp 截断，title 给完整内容；标签按 chapter+path 查 taxonomy。
   function tdChip(id, path, val, env, chapter) {
     var has = env && (env.zh || env.enum || env.spec);
@@ -942,7 +942,7 @@
       if (zero) g.push('<text x="' + (PL + 6) + '" y="' + n(yy2 - 5) + '" class="td-wl-sub">' + t("0 = ", "0 = ") + esc(yRef) + "</text>");
     }
 
-    // ── 机制核心面板（ADR-054）：第五章七项机制事实（价格约束结论句 + 撮合/订单类型/
+    // ── 机制核心面板（ADR-055）：第五章七项机制事实（价格约束结论句 + 撮合/订单类型/
     //    熔断/波动中断/卖空/做市商 六格）收进平面中心一块固定 628×276 的 foreignObject。
     //    在 g[] 末尾 push（见下方），使其压在几何层之上；透视开关可让它退成虚线轮廓。
     // x 轴刻度：网格线恒 30 分钟；标签宽跨度（>10h，如 de-eurex）降为每 60 分钟避免叠字。
@@ -991,7 +991,7 @@
     return tdBanner(ms) + tdLegend() + svg + tdSidePanels(id, data) + tdProse();
   }
 
-  // 机制核心面板（ADR-054）——固定 628×276 的 foreignObject，水平居中、垂直居中于零轴
+  // 机制核心面板（ADR-055）——固定 628×276 的 foreignObject，水平居中、垂直居中于零轴
   // （Y(0)=PT+ph/2=256）。涨/跌停线因 yR 自适应恒在 Y≈90/420，面板居中 → 上下气口自动对称。
   function tdCorePanel(id, ms, yRef, ghostOn) {
     var W = 960, PL = 60, PR = 152, PT = 62, PB = 106;
@@ -1033,7 +1033,7 @@
       '<div class="td-core-grid">' + cells.join("") + '</div></div></foreignObject>';
   }
 
-  // 非现货 / 衍生品字段 banner（移到 SVG 之前——读图前要知道的前提；ADR-054）
+  // 非现货 / 衍生品字段 banner（移到 SVG 之前——读图前要知道的前提；ADR-055）
   function tdBanner(ms) {
     var mbRef = ms.price_limits && ms.price_limits.main_board && ms.price_limits.main_board.spec && ms.price_limits.main_board.spec.reference;
     if (mbRef === "prev_settlement") {
@@ -1059,7 +1059,7 @@
   }
 
   // 交易细则 · 成本组（tick size / 交易单位 / 交收 / 佣金 / 交易税 / 互联互通）——图下方保留，
-  // 「交易机制」七项已移入机制核心面板（ADR-054）。定宽 6 列，不随交易所换行漂移。
+  // 「交易机制」七项已移入机制核心面板（ADR-055）。定宽 6 列，不随交易所换行漂移。
   function tdSidePanels(id, data) {
     var ms = (data.chapters && data.chapters.market_structure) || {};
     var costs = (data.chapters && data.chapters.costs) || {};
@@ -1930,7 +1930,7 @@
     if (role === "cell" || role === "goto-health-field") {
       openCellOverlay(hit.dataset.exchange, hit.dataset.path, hit.dataset.chapter);
     } else if (role === "td-ghost") {
-      // 机制核心面板透视开关（ADR-054）：切 .td-plot-wrap 的 td-ghost 类 + 持久化
+      // 机制核心面板透视开关（ADR-055）：切 .td-plot-wrap 的 td-ghost 类 + 持久化
       var gon = hit.getAttribute("aria-pressed") !== "true";
       try { localStorage.setItem("ea-td-ghost", gon ? "1" : "0"); } catch (err) { /* 隐私模式忽略 */ }
       var gwrap = hit.closest(".td-plot-wrap");

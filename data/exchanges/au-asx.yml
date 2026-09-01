@@ -1353,9 +1353,9 @@ costs:
     verified: 2026-08-27
 
   financial_transaction_tax:
-    spec: {type: none, note: "澳联邦与各州均不对证券买卖征收一般性金融交易税"}
-    zh: "澳大利亚联邦与各州均不对股票等证券的买卖征收一般性的金融交易税（securities transaction tax / FTT）；交易环节的实际法定收费仅为 ASX 成交费与清算费，以及各州已废除的上市证券转让印花税（见 stamp_duty）。截至目前未核实到任何适用于 ASX 现货股票交易的成交税种"
-    en: "Neither the Commonwealth nor the states levy a general financial transaction tax (securities transaction tax / FTT) on share trades; the only statutory charges at the transaction level are the ASX trade fee and clearing fee, plus the now-abolished state stamp duty on transfer of listed securities (see stamp_duty). No transaction tax applicable to ASX cash-equity trading was identified"
+    spec: {rate: null, note: "未找到明确不征依据：本字段来源仅覆盖 ASX 现货市场费率表，未含联邦 / 州税制的正面陈述；见 OPEN-QUESTIONS"}
+    zh: "澳大利亚联邦与各州是否对股票等证券的买卖征收一般性的金融交易税（securities transaction tax / FTT），本次未取得正面依据——本字段来源仅覆盖 ASX 现货市场费率表，不含联邦 / 州税制条文；交易环节已核实的法定收费为 ASX 成交费与清算费，各州上市证券转让印花税已废除（见 stamp_duty）。按 CLAUDE.md 第二节第四条，「未提及」不等于「明确不征」，故 spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS"
+    en: "Whether the Commonwealth or the states levy a general financial transaction tax (securities transaction tax / FTT) on share trades was not positively established this session — this field's sources cover only the ASX cash-market fee schedule and contain no federal / state tax-law text. The statutory charges verified at the transaction level are the ASX trade fee and clearing fee, plus the now-abolished state stamp duty on transfer of listed securities (see stamp_duty). Per the CLAUDE.md anti-hallucination rules, absence of a mention is not proof of non-levy, so the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS"
     sources:
       - title: ASX Trade 现货市场费率表（ASX 官网 PDF）
         url: https://www.asx.com.au/content/dam/asx/participants/trading-and-market-data-services/trading/schedule-of-fees.pdf

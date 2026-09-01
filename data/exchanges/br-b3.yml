@@ -1334,7 +1334,7 @@ costs:
     confidence: medium
 
   exchange_fees:
-    spec: {rate: null, unit: pct, side: both, tiered: true, note: "按交易类型/投资者类别/金额分档；本字段 quote 未给数值，clearing_fees 的费率表列首档 trading fee 0.00500%、逾 3 百万雷亚尔档 0.00375%"}
+    spec: {rate: null, unit: pct, side: both, tiered: true, note: "按交易类型/投资者类别/金额分档；本字段 quote 未给数值（B3 现货费率表按 Trading fee / CCP fee / Asset transfer fee 三项分档列示，trading fee 首档见同文件 clearing_fees 字段所引费率表）"}
     zh: "按成交总金额收取一定比例的交易所费用（Exchange Fees），费率依交易类型（常规交易/超短线日内交易）、投资者类别（个人/基金/投资俱乐部）与投资金额分档"
     en: "Exchange Fees are charged as a percentage of total traded volume, varying by trade type (regular vs. very-short-term day trades), investor category (individual/funds/investment clubs), and amount invested"
     sources:
@@ -1383,7 +1383,7 @@ costs:
     confidence: medium
 
   financial_transaction_tax:
-    spec: {rate: 0, unit: pct, note: "IOF（金融操作税）对交易所内股票/ETF 交易资金汇入现行 0%"}
+    spec: {rate: 0, unit: pct, side: buy, note: "IOF（金融操作税）税种存在、现行对交易所内股票/ETF 交易资金汇入适用 0%（quote: incoming resources，即买入侧）。故取 rate: 0 而非 type: none——后者会渲染为『不征收』，抹掉『该税种存在且税率历史上非零』这一事实"}
     zh: "金融操作税（IOF, Imposto sobre Operações Financeiras）：现行对交易所内股票/ETF交易的资金汇入适用税率为0%（历史上曾有非零税率，本次仅确认当前状态）"
     en: "Financial Transaction Tax (IOF): the rate currently applicable to FX inflows related to on-exchange stock/ETF trading is 0% (rates have been non-zero historically; only the current 0% state was confirmed this session)"
     sources:
