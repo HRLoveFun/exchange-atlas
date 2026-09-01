@@ -418,6 +418,9 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `cahill.com` | 第三方（律所客户简报） | en | curl 常规 UA 200 | 与 us-nyse 一节引用同一份简报，说明SEC统一结算周期规则（Rule 15c6-1，2024-05-28起T+1）对全国性证券交易所（含纳斯达克）同等适用，非纳斯达克自身单独设定的规则；按 CLAUDE.md 二第3条，第三方来源 confidence 上限 medium
   - One-Day Settlement Cycle (T+1) To Begin May 28, 2024: https://www.cahill.com/publications/client-alerts/2024-04-29-one-day-settlement-cycle-t-1-to-begin-may-28-2024（HTTP 200，23KB）
 - `ir.nasdaq.com` | 官方（投资者关系站） | en | ⚠️ 本次多次尝试均 HTTP/2 stream 报错或超时（`curl: (92) HTTP/2 stream 1 was not closed cleanly`／`curl: (28) Operation timed out`），换 `--http1.1` 仍超时，与 `nasdaq.com`/`nasdaqtrader.com` 的可达性形成对比——同集团不同子域名反爬/限流行为不一致，值得记录；Nasdaq, Inc. 自身股票在 Nasdaq 交易所挂牌（NDAQ）这一事实原打算从这里的"Stock Information"页确认，未能拿到，改用 `nasdaq.com/articles` 与 `nasdaq.com/market-activity` 两个可达页面间接佐证，`overview.self_listed` 因此定为 `confidence: medium` 而非 `high` | 未抓取到可引用内容
+- `ecfr.gov`（美国联邦法规电子码，2026-09-01 A3 补充登记） | 官方（美国政府出版局） | en | curl + 常规 UA 200，eCFR 站点为 SPA、正文在 JS 包内，但 17 CFR 240.31 页面成功落盘（156KB，含『covered sale』法条定义） | `costs.regulatory_fees` 出处，eCFR 17 CFR 240.31 定义 Section 31 的『covered sale』（证券出售），坐实 SEC Section 31 费仅向卖方（covered sales）课征；⚠️ eCFR 为 SPA，单页 curl 可能只取到导航壳，本次 240.31 页恰好含正文
+  - 17 CFR 240.31 — Section 31 transaction fees: https://www.ecfr.gov/current/title-17/chapter-II/part-240/subject-group-ECFR88ac63dc03926d2/section-240.31
+
 ### 欧洲期货交易所 Eurex `de-eurex`
 - `eurex.com` | 官方 | de / en（官方英文版为主，德文版覆盖度低于英文版） | curl + 常规 UA 200，未见反爬（全程无限流，比 english.sse.com.cn 好抓得多） | 保证金具体数值走在线计算器（JS 交互），静态页只有方法论说明，产品级保证金参数需要用 Prisma Margin Calculator 交互获取或找按品种的公开参数文件，不能只靠抓静态 HTML。⚠️ 法律实体名是「Eurex Deutschland」（德国法批准设立，注册地法兰克福，受黑森州最高监管机关监督，不是联邦金融监管局BaFin——这点容易凭常识猜错，本次已实测确认），品牌名"Eurex"，隶属 Deutsche Börse Group（`group_id: deutsche-boerse-group`）
   - 交易时段: https://www.eurex.com/ex-en/trade/trading-hours（HTTP 200，134KB，含欧洲/美国/亚洲三段准全天候交易时段）
@@ -724,6 +727,8 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `www.ato.gov.au` | 官方（澳大利亚税务局） | en | curl 常规 UA 200 | 资本利得税/股息预扣税（costs 出处）
 - `www.austrac.gov.au` | 官方（AML/CTF 监管） | en | curl 常规 UA 200 | 客户身份识别（account_opening_requirements 出处）
 - `cepr.org` | 第三方（金融交易税研究库） | en | curl 常规 UA 200 | 澳大利亚无金融交易税佐证（costs.financial_transaction_tax，confidence 封顶 medium）
+- `resourcehub.bakermckenzie.com` | 第三方（律所，Global Private M&A Guide） | en | curl 常规 UA 200 | 澳大利亚对股份转让不课印花税（"Stamp duty is not payable on share transfers"，costs.financial_transaction_tax 一手佐证，confidence medium）
+  - Stamp duty and tax | Australia | Global Private M&A Guide: https://resourcehub.bakermckenzie.com/en/resources/global-private-ma-guide-limited/asia-pacific/australia/topics/agreeing-the-acquisition-agreement/stamp-duty-and-tax
 
 ### 沙特交易所 Saudi Exchange (Tadawul) `sa-tadawul`
 - `tadawulgroup.sa` | 官方（集团控股公司站点，与被封锁的 saudiexchange.sa 共用同一套 IBM WebSphere Portal 内容管理后端） | ar/en（阿拉伯语为唯一官方语言，英文版为官方提供的对照译本；部分 PDF 首页标注"Arabic is the official language of the Saudi Exchange"或"unofficial translation"字样） | curl + 常规 UA 全部 200，未见反爬；⚠️ `/wps/portal/tadawulgroup/...` 命名空间下的集团公司页可正常抓取，但把 `saudiexchange`/`edaa` 等其他子品牌的 portal 路径直接拼到 `tadawulgroup.sa` 域名下会被应用层拒绝返回 403（如 `tadawulgroup.sa/wps/portal/saudiexchange/...`），只有 `wcm/connect/...`（内容仓库直链，通常是 PDF）路径不受这条限制、任意命名空间前缀都能抓到 | 规则类 PDF 大多是集团整体维护的内容仓库资源，即使标题写"Saudi Exchange Company"也通过 tadawulgroup.sa 域名分发；`Trading and Membership Procedures` 一份 PDF 信息密度最高，交易时段/订单类型/订单条件/最小报价单位/涨跌停与波动性拍卖机制均有精确条文可摘引
@@ -826,6 +831,11 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `www.kchipnews.com` | 第三方（半导体新闻） | ko | WebSearch 定位 | 市场背景（confidence 封顶 medium）
 - `taxnews.ey.com` | 第三方（EY 税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
 - `www.mondovisione.com` | 第三方（交易所资讯） | en | WebSearch 定位 | 市场结构背景（confidence 封顶 medium）
+- `taxsummaries.pwc.com` | 第三方（四大税务简报） | en | curl 常规 UA 200 | 韩国印花税税种定性（stamp tax 针对"制备证明财产权设立/转让/变更的文书者"，非证券转让；costs.stamp_duty 一手佐证，confidence medium）
+  - Korea, Republic of - Corporate - Other taxes: https://taxsummaries.pwc.com/republic-of-korea/corporate/other-taxes
+
+- `elaw.klri.re.kr`（韩国法制研究院法律数据库英文版，2026-09-01 A3 补充登记） | 官方镜像（韩国法制研究院 KLRI 运营的法律英文数据库，含韩国现行法令英文译本） | en | curl + 常规 UA 200，正文为静态 HTML，逐字可抓取 | `costs.financial_transaction_tax` 出处，韩国《证券取引税法》(Securities Transaction Tax Law) 英文版明文以『transferor（让与人=卖方）』为纳税义务人，坐实韩国 STT 向卖方课征（side: sell）
+  - 증권거래세법 (Securities Transaction Tax Law), English version: https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=46383
 
 ### 泛欧交易所 Euronext `fr-euronext`
 - `euronext.com` | 官方 | en（官网默认英文；各地方市场页另有 fr/nl/pt/it/nb 等本地语言版本，本节只取英文版作 `source_lang: en` 的锚点） | curl + 常规 UA 全部 200，未见反爬（含多个 PDF，均可直接 curl 到） | ⚠️ **本所是本项目第一个"单一集团、多国法人实体"样本**：`Euronext`（集团整体）= `Euronext N.V.`（荷兰阿姆斯特丹注册的 naamloze vennootschap，集团控股实体，本身在 Euronext Paris 挂牌交易，代码 ENX，2025-09-22 起纳入 CAC 40 指数）+ 七个「Euronext Market Undertaking」（Euronext Amsterdam N.V. 荷兰法人、Euronext Brussels S.A./N.V. 比利时法人、Euronext Dublin/The Irish Stock Exchange plc 爱尔兰法人、Euronext Lisbon S.A. 葡萄牙法人、Euronext Paris S.A. 法国法人、Borsa Italiana 意大利法人、Oslo Børs 挪威法人），各自受本国法律与本国监管机构管辖（见 Harmonised Rulebook I Rule 1.7 Governing Law），但共享同一部《Harmonised Rulebook》（Book I）、同一交易平台 Optiq、同一中央订单簿。2025年7月新增第八个市场 Euronext Athens（收购 ATHEX），但截至本次抓取（2026-08）雅典尚未并入 Harmonised Rulebook/Optiq（计划2027-06迁移），regulated-markets 页原文明确写"Euronext Athens markets are scheduled to be integrated in the Euronext rulebooks upon the migration to Optiq (June 2027)"，故本次数据以七个已整合市场（不含雅典）为主，雅典相关事实单独注明未核实。清算方面 Euronext Clearing 是法定实体 Cassa di Compensazione e Garanzia S.p.A.（CC&G，意大利公司）的商业新名称；托管结算方面 Euronext Securities 是集团自有 CSD 网络，运营实体分布在哥本哈根/米兰/奥斯陆/波尔图四地，里斯本/米兰/奥斯陆三个市场现已用 Euronext Securities 托管结算，阿姆斯特丹/布鲁塞尔/巴黎计划2026-09起迁移过去，都柏林及迁移前的阿姆斯特丹/布鲁塞尔/巴黎具体托管机构本次未核实（⚠️ 2026-08-21已补充核实并回填：巴黎=Euroclear France（Book II Article P 2.3.3逐字点名）、阿姆斯特丹=Euroclear Nederland、布鲁塞尔=Euroclear Belgium（新闻稿+Place of Settlement change guidelines两份官方文档间接但可靠佐证）、都柏林=Euroclear Bank（2021-03migration新闻稿），详见下方新增4条来源与`data/exchanges/fr-euronext.yml`的`clearing.csd_name`字段；`euroclear.com`主域名及`/services/en/provider-homepage/euroclear-*.html`子页面本次实测对常规UA同样403，与`uk-lse`一节`euroclear.com`踩坑案例一致，故本次改用Euronext自己官网发布的分市场规则手册/新闻稿/技术指引达成核实，未能直接抓取Euroclear自己官网）

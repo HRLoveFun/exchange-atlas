@@ -862,7 +862,7 @@
       "volatility_interruption": {
         "spec": {
           "auction_minutes": 5,
-          "note": "波动性拍卖冷静期：5 分钟，可追加 1 次 2 分钟市价单延期，随后最长 30 秒随机撮合窗口完成集合竞价；触发阈值见 price_limits（ZA01 连续 ±10%/±3% 等）"
+          "note": "波动性拍卖冷静期：5 分钟，可追加 1 次 2 分钟市价单延期，随后最长 30 秒随机撮合窗口完成集合竞价；触发阈值见 price_limits（ZA01 连续档等）"
         },
         "zh": "波动性拍卖冷静期（Volatility Auction Call Session）：持续5分钟，可能追加1次2分钟的市价单延期（Market Order Extension），随后进入最长30秒的随机撮合窗口完成集合竞价定价",
         "en": "Volatility Auction Call Session: lasts 5 minutes, may be followed by one 2-minute Market Order Extension, then a random period of up to 30 seconds before the auction uncrossing",
@@ -2406,10 +2406,10 @@
           "rate": null,
           "unit": "pct",
           "side": "buy",
-          "note": "证券转让税 STT 0.25%（0,25%），2008-07-01 起取代原印花税；quote 为逗号小数，不放数值 spec"
+          "note": "证券转让税 STT 0.25%（0,25%），2008-07-01 起取代原印花税；quote 为逗号小数，不放数值 spec。side: buy 已由 SARS 原文坐实——STT『适用于 purchase（买方购入）』，且经纪人/参与者为纳税人但可向『证券受让人（买方）』追偿"
         },
-        "zh": "证券转让税（Securities Transfer Tax，STT）：税率0.25%，适用于上市与未上市证券的每一次转让，2008年7月1日起依《证券转让税法》（No.25 of 2007）及其征管法（No.26 of 2007）施行，取代原印花税制度",
-        "en": "Securities Transfer Tax (STT): levied at 0.25% on every transfer of a security (listed or unlisted), effective 1 July 2008 under the Securities Transfer Tax Act No. 25 of 2007 and its Administration Act No. 26 of 2007, replacing the former stamp duty regime",
+        "zh": "证券转让税（Securities Transfer Tax，STT）：税率0.25%，适用于上市与未上市证券的每一次转让（方向为买方，SARS 明确 STT 适用于『purchase』即买方购入），2008年7月1日起依《证券转让税法》（No.25 of 2007）及其征管法（No.26 of 2007）施行，取代原印花税制度",
+        "en": "Securities Transfer Tax (STT): levied at 0.25% on every transfer of a security (listed or unlisted), effective 1 July 2008 under the Securities Transfer Tax Act No. 25 of 2007 and its Administration Act No. 26 of 2007, replacing the former stamp duty regime. side: buy is confirmed by SARS: STT 'applies to the purchase' of securities, and the broker/participant is liable but may recover from the transferee (buyer).",
         "detail": "南非现行税种法定名称为\"证券转让税\"而非\"印花税\"，性质对应本项目 stamp_duty 字段（证券转让环节的交易税），非另设的 financial_transaction_tax。",
         "sources": [
           {

@@ -613,7 +613,7 @@ market_structure:
     detail: 与Eurex（同样只找到个股/合约级机制、未发现独立的全市场级熔断）情况类似，可能是本次检索范围局限，未逐条核实是否存在，见OPEN-QUESTIONS。
     confidence: medium
   volatility_interruption:
-    spec: {auction_minutes: 3, note: "预约期（reservation period）：连续交易阶段理论撮合价触及适用阈值即触发，至少 3 分钟；动态区间首次触发后由 Euronext 人工设参或按预约期内报价自动更新区间后自动恢复；阈值即动态 ±5%/±3%、静态 ±10%/±8%（见 price_limits）"}
+    spec: {auction_minutes: 3, note: "预约期（reservation period）：连续交易阶段理论撮合价触及适用阈值即触发，至少 3 分钟；动态区间首次触发后由 Euronext 人工设参或按预约期内报价自动更新区间后自动恢复；阈值见 price_limits"}
     zh: 预约期（reservation period）：连续交易阶段理论撮合价触及适用阈值即触发预约期，至少持续3分钟；因动态区间触发的首次预约后，恢复交易有两种方式——由Euronext评估市场情况后人工设定参数，或按预约期内报价自动更新动态区间后自动撮合恢复；若自动方式仍在同方向再次触发预约，是否进一步调整区间/参考价须再经Euronext评估市场情况后决定
     en: 'Reservation period: triggered when the theoretical matching price during
       continuous trading breaches the applicable thresholds, lasting at least 3 minutes;

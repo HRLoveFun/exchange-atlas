@@ -1244,3 +1244,24 @@
 **验证：** 纯文档。改 `PROJECT/DECISIONS.md`（本条 + [ADR-056]「遗留」段补一句承接）+ `PROJECT/ROADMAP.md`（§三 新增 Phase 4 条目、§一 三处同步）+ `CLAUDE.md` 开篇定位句补 `[ADR-057]` 引用。`make check` 的 `validate` 20 家 0/0、生成块无 diff（三个文件都不被 `sync.py` 扫描）。
 
 **日期：** 2026-09-01
+
+### ADR-058 — `validate.py` 5b 增补 `spec.note` 数字反查（5c）：把「note 夹带数字」变成构建关卡
+
+**背景：** [ADR-054] 成本瀑布 103 条独立复核里，8 处 FIX 有 4 处属于同一个机器盲区——`spec` 自由文本键（`note` / `*_note`）里夹带的数字完全不被 `make check` 覆盖。典型是 `cn-sse` `exchange_fees`（medium）的 `note` 写进了深交所费率，图照常渲染、数字错了零信号；5b 只反查 `confidence: high` 的**数值叶子**，这类散文式字符串连高门槛都进不去。[ADR-054] 把「给 5b 增补 note 数字反查」记为「未实施、留 ROADMAP 迭代点」。
+
+**决定：** 在 `validate.py` 落地 5c——
+
+- **对象**：`spec` 子块里自由文本键（`note` / `*_note`）的字符串，不限 `confidence`（medium/low 的 note 正是盲区重灾区）。
+- **命中范围放宽到同字段 `quote` / `zh` / `detail` 任一**：note 常做交叉引用（如「见 price_limits」），允许复述同字段人读文本里已有的数字，但**不得夹带谁都没有的数字**。
+- **非数值 token 剥离后再比对**：ISO 日期、时刻、孤立年份、条款号（Rule / § / 第 N 条）、ADR / 悬案编号引用、字母粘连代码（MT30、ZA01、FE10）——这些不是量化机制值，挡的是「费率 / 阈值 / 金额」这类静默错误。小数尾随零归一（`0.50 ≡ 0.5`）避免书写精度误报。
+- **报错即阻断构建**，与 5b 同等级。
+
+**落地残差（现网数据）：** 5c 跑在现网抓出 13 处违例——全在第五章 `market_structure` 的 `spec.note`（+ 1 处 `costs.clearing_fees`），正是 [ADR-054] 抽检只覆盖 `costs` 章而漏掉的盲区。逐条修复：多数是 note 跨章节复述 `price_limits` 的阈值 / 门槛（违反 [ADR-054]「交叉引用不带数字」纪律，改为「见 price_limits」或把数字落到 `zh`/`detail`）；少数是无来源的分析师折算值（如 `br-b3` 实务 `R$0.01`、`tw-twse` 派生 `0.0014625%`）。修复后 `make check` 0/0。
+
+**文档回写：** `CLAUDE.md` §一 / §二 移除「`spec.note` 数字是机器盲区」的旧表述（改指向本条）；`schema/spec.yml` 头部补 5c 说明。
+
+**验证：** `make check` 20 家 0/0；负向探针确认——注入 `note: "测试费率 0.0341‰ 已确认"`（无底稿）被拦，同数字出现在 `quote` 则放行。
+
+**没改：** 5b 的高门槛数值叶子反查不变；medium/low 的**数值叶子**（非 note 字符串）仍靠人——5c 只管 note 里的数字，不把 5b 的覆盖扩到 medium/low 数值叶子。
+
+**日期：** 2026-09-01

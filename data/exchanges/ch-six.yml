@@ -591,7 +591,7 @@ market_structure:
     confidence: medium
 
   volatility_interruption:
-    spec: {dynamic_pct: null, note: "统一「Trading Interruption」：蓝筹股 ±1.5%/5 分钟；中小盘股 ±2%/15 分钟（SMIM 成份股 5 分钟）；波动股 ±10%/5 分钟；中断后以随机 30 秒内结束的集合竞价恢复；参数交易所可按短期通知调整。dynamic_pct 因分市场分档留 null"}
+    spec: {dynamic_pct: null, note: "统一「Trading Interruption」：蓝筹股 ±1.5%/5 分钟；中小盘股 ±2%/15 分钟（SMIM 成份股 5 分钟）；波动股 ±10%/5 分钟；中断后以随机时长的集合竞价恢复；参数交易所可按短期通知调整。dynamic_pct 因分市场分档留 null"}
     zh: "见price_limits——本所以「Trading Interruption」（交易中断）统一处理开盘延时与盘中波动，按细分市场设不同带宽（蓝筹股±1.5%/5分钟，中小盘股±2%/15分钟或5分钟，波动股±10%/5分钟），交易所可按短期通知调整参数"
     en: "See price_limits — the Exchange uses a unified \"Trading Interruption\" mechanism for both delayed openings and intraday volatility, with bandwidths varying by segment (Blue Chip ±1.5%/5min; Mid-/Small-Cap ±2%/15min or 5min; volatile securities ±10%/5min); the Exchange may adjust these parameters at short notice"
     quote: "Continuous trading shall be interrupted for 5 minutes if the potential subsequent price differs a) by 1.5% or more from the current reference price ... Continuous trading shall be interrupted for 15 minutes if the potential subsequent price differs a) by 2% or more ... the delay in the opening or the trading interruption shall be 5 minutes and the bandwidth shall be 10% or more"

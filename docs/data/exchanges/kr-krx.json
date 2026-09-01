@@ -2334,20 +2334,20 @@
       },
       "stamp_duty": {
         "spec": {
-          "rate": null,
-          "note": "未找到明确不征依据：本字段 quote 只讲 2026 年 STT 税率上调，无「韩国无印花税税种」的正面陈述；confidence low；见 OPEN-QUESTIONS"
+          "type": "none",
+          "note": "坐实 type:none：一手源 PwC 韩国『Other taxes』将『Stamp tax』定义为对『制备证明财产权设立/转让/变更的文书者』课征（KRW 50–350,000），课税对象是文书而非证券转让；证券交易的流转税为『Securities transaction tax (STT)』（见 financial_transaction_tax）。故韩国对证券转让不征独立印花税税种，type: none。"
         },
-        "zh": "韩国对证券转让不征收「印花税」(stamp duty)这一独立税种——这是原字段的断言，但本次未取得正面依据（本字段 quote 只讲 2026 年 STT 税率上调）；本项目横向对比中与该字段对应的、按交易金额课征的流转税是「证券交易税」(Securities Transaction Tax, STT)，其现行税率见 financial_transaction_tax（2026年起KOSPI/KOSDAQ均为0.20%）。按 CLAUDE.md 第二节第四条，「未见印花税税目」的表述不足以断言「明确不征」，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。",
-        "en": "Korea does not impose a stamp duty as a separate tax on securities transfers — the original claim, without a positive basis this session (this field's quote only covers the 2026 STT rate increase); the transaction-value turnover tax that corresponds to this field in cross-exchange comparison is the 'Securities Transaction Tax' (STT), whose current rate is in financial_transaction_tax (0.20% for both KOSPI and KOSDAQ from 2026). Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS.",
+        "zh": "韩国对证券转让不征「印花税」(stamp duty)这一独立税种——已坐实：PwC 韩国『Other taxes』明确韩国的 Stamp tax 是对『制备证明财产权设立/转让/变更的文书者』课征（KRW 50–350,000），课税对象是文书而非证券交易；本项目横向对比中对应的证券流转税是「证券交易税」(Securities Transaction Tax, STT)，现行税率见 financial_transaction_tax（2026年起KOSPI/KOSDAQ均为0.20%）。type: none。",
+        "en": "Korea does not impose a stamp duty as a separate tax on securities transfers — now positively established: PwC Korea 'Other taxes' defines Korean stamp tax as levied on 'a person who prepares a document certifying the establishment, transfer, or change of rights to property in Korea' (KRW 50–350,000), i.e. on instruments, not on securities trading; the transaction-value turnover tax in cross-exchange comparison is the 'Securities Transaction Tax' (STT), whose current rate is in financial_transaction_tax (0.20% for both KOSPI and KOSDAQ from 2026). type: none.",
         "sources": [
           {
-            "title": "Korea enacts 2026 tax reform bill（EY TaxNews，仅论及证券交易税，未见印花税）",
-            "url": "https://taxnews.ey.com/news/2026-0126_korea_enacts_2026_tax_reform_bill",
-            "accessed": "2026-08-27"
+            "title": "Korea, Republic of - Corporate - Other taxes（PwC Tax Summaries，一手税法综述）",
+            "url": "https://taxsummaries.pwc.com/republic-of-korea/corporate/other-taxes",
+            "accessed": "2026-09-01"
           }
         ],
-        "quote": "the 2026 Tax Reform increases securities transaction tax rates on securities traded on Korea's stock exchange. Enacted rate will be effective for the securities transferred on or after 1 Jan 2026.",
-        "confidence": "low",
+        "quote": "Stamp tax is levied on a person who prepares a document certifying the establishment, transfer, or change of rights to property in Korea.",
+        "confidence": "medium",
         "verified": "2026-08-27",
         "enum": null,
         "detail": null
@@ -2357,20 +2357,25 @@
           "rate": 0.2,
           "unit": "pct",
           "side": "sell",
-          "note": "STT 2026 年起 KOSPI/KOSDAQ 均 0.20%（此前 KOSPI 0%、KOSDAQ 0.15%）；ETF/债券通常免征。征收方向（卖方）本字段 quote/zh 均未明确——韩国 STT 向证券受让方（卖方）课征为通行制度，但本次未取得可引用原文，保留 side: sell 并记 OPEN-QUESTIONS 待补强"
+          "note": "STT 2026 年起 KOSPI/KOSDAQ 均 0.20%（此前 KOSPI 0%、KOSDAQ 0.15%）；ETF/债券通常免征。side: sell 已由韩国《证券取引税法》英文版坐实——税法明文以『transferor（让与人=卖方）』为纳税义务人"
         },
-        "zh": "证券交易税(STT)：2026年税制改革将韩股交易税恢复并定为 KOSPI市场0.20%、KOSDAQ市场0.20%（此前KOSPI为0%、KOSDAQ为0.15%），自2026年1月1日起对当日或之后转让的证券施行。ETF/债券通常免征。",
-        "en": "Securities Transaction Tax (STT): the 2026 tax reform restored and set the Korean stock transaction tax to 0.20% for the KOSPI market and 0.20% for the KOSDAQ market (previously 0% for KOSPI and 0.15% for KOSDAQ), effective 1 January 2026 for securities transferred on or after that date. ETFs/bonds are generally exempt.",
+        "zh": "证券交易税(STT)：2026年税制改革将韩股交易税恢复并定为 KOSPI市场0.20%、KOSDAQ市场0.20%（此前KOSPI为0%、KOSDAQ为0.15%），自2026年1月1日起对当日或之后转让的证券施行。ETF/债券通常免征。征收方向为卖方（让与人/transferor）——韩国《证券取引税法》明文以转让人（卖方）为纳税义务人。",
+        "en": "Securities Transaction Tax (STT): the 2026 tax reform restored and set the Korean stock transaction tax to 0.20% for the KOSPI market and 0.20% for the KOSDAQ market (previously 0% for KOSPI and 0.15% for KOSDAQ), effective 1 January 2026 for securities transferred on or after that date. ETFs/bonds are generally exempt. side: sell is confirmed by the Korean Securities Transaction Tax Law (English version), which imposes the tax on the 'transferor' of the shares (i.e. the seller).",
         "sources": [
           {
             "title": "Korea enacts 2026 tax reform bill（EY TaxNews）",
             "url": "https://taxnews.ey.com/news/2026-0126_korea_enacts_2026_tax_reform_bill",
             "accessed": "2026-08-27"
+          },
+          {
+            "title": "증권거래세법 (Securities Transaction Tax Law), English version（韩国法令英文版 elaw.klri.re.kr）",
+            "url": "https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=46383",
+            "accessed": "2026-09-01"
           }
         ],
-        "quote": "",
+        "quote": "The transferor of the relevant share certificates, etc., where share certificates, etc. are transferred by means of other than those provided in subparagraphs 1 and 2:",
         "confidence": "medium",
-        "detail": "原引用文本（未能从缓存源逐字核实，故降级为 medium）：\"KOSPI Market 0% 0.20% KOSDAQ Market 0.15% 0.20% ... Enacted rate will be effective for the securities transferred on or after 1 Jan 2026.\" 缓存的 EY 页面仅为 JS/登录墙外壳，未含文章正文，无法逐字核验，需重新抓取原始正文或改用官方税法来源坐实 2026 年税率。",
+        "detail": "原引用文本（未能从缓存源逐字核实，故降级为 medium）：\"KOSPI Market 0% 0.20% KOSDAQ Market 0.15% 0.20% ... Enacted rate will be effective for the securities transferred on or after 1 Jan 2026.\" 缓存的 EY 页面仅为 JS/登录墙外壳，未含文章正文，无法逐字核验，需重新抓取原始正文或改用官方税法来源坐实 2026 年税率。2026-09-01 A3 补充：韩国《证券取引税法》英文版已坐实 side: sell（transferor=让与人=卖方）。",
         "verified": "2026-08-27",
         "enum": null
       },

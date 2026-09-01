@@ -780,7 +780,7 @@
             "reference_window_min": 5,
             "note": "非固定每日涨跌停：价格带为滚动参考价 ±10%；参考价取当节开盘价，此后每 5 分钟更新为 5 分钟前成交价；覆盖 STI/MSCI Singapore 成分股及参考价 ≥S$0.50 的股票/REIT/ETF 等，新股首日豁免"
           },
-          "zh": "上限为参考价+10%，下限为参考价-10%；参考价在交易阶段开始时取当节开盘价（缺失则取前值），此后每5分钟滚动更新为5分钟前成交价",
+          "zh": "上限为参考价+10%，下限为参考价-10%；参考价在交易阶段开始时取当节开盘价（缺失则取前值），此后每5分钟滚动更新为5分钟前成交价；覆盖 STI/MSCI Singapore 成份股及参考价不低于 S$0.50 的股票/REIT/ETF 等（新股首日豁免）",
           "en": "Upper threshold = reference price + 10%; lower threshold = reference price − 10%; the reference price starts as the session's opening price (falling back to prior values), then rolls every 5 minutes to the trade price from 5 minutes earlier",
           "quote": "The upper threshold is 10% above the reference price and the lower threshold is 10% below the reference price.",
           "confidence": "high",
@@ -835,7 +835,7 @@
       },
       "volatility_interruption": {
         "spec": {
-          "note": "冷静期（Cooling-Off Period）5 分钟：撮合价超出滚动参考价 ±10% 价格带（见 price_limits）的委托被拒，冷静期内仍可在带内交易（非停牌）；结束后价格带按新参考价调整；与午休/收盘前/停牌重叠则提前结束"
+          "note": "冷静期（Cooling-Off Period）5 分钟：撮合价超出滚动参考价价格带（见 price_limits）的委托被拒，冷静期内仍可在带内交易（非停牌）；结束后价格带按新参考价调整；与午休/收盘前/停牌重叠则提前结束"
         },
         "zh": "冷静期（Cooling-Off Period）持续5分钟：撮合价超出价格带的委托将被拒绝，冷静期内交易仍可在价格带内继续进行（非停牌）；冷静期结束后价格带随新参考价调整；冷静期若与午休/收盘前阶段/停牌/暂停交易重叠则提前结束",
         "en": "The Cooling-Off Period lasts 5 minutes: an incoming order that would match outside the band is rejected while trading continues within the band (not a halt); after the period ends the band is recalculated from the new reference price; the period ends early if it coincides with the Mid-Day Break, Pre-Close Phase, a suspension or a trading halt",

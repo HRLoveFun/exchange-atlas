@@ -406,7 +406,7 @@ market_structure:
       min_tick: null
       currency: BRL
       full_table_note: "B3 不设跨证券统一 tick size 表——各资产 / 衍生品的最小报价单位由 B3 逐条在其门户维护并公布（Trading Procedures Manual：『Tick size is available from B3's portal』）。手册正文用 tick size 作为『隧道』带宽等参数的计量单位"
-      note: "min_tick 留 null——per-instrument，无统一值；巴西现货股票实务上多为 R$0.01，但正式以 B3 门户逐证券公布为准"
+      note: "min_tick 留 null——per-instrument，无统一值；以 B3 门户逐证券公布为准"
     zh: "B3 不设跨证券统一的最小报价单位表——各资产 / 衍生品的 tick size 由 B3 逐条在门户维护公布（手册明确『Tick size is available from B3's portal』）"
     en: "B3 does not publish a single cross-security tick-size table — the tick size for each asset or derivative is maintained and published per instrument on B3's portal (the Trading Procedures Manual states 'Tick size is available from B3's portal')"
     detail: "此前留空。本次结构化为 spec：regime=per_instrument，min_tick=null（无统一值），full_table_note 指向 B3 门户。手册正文多处以 tick size 为『隧道』带宽等参数的计量单位。"

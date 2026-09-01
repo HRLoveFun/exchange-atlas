@@ -9,6 +9,9 @@
 #     validate.py 校验 5b（[ADR-033]）：confidence:high 字段 spec 里每个数值都必须
 #     能在 quote 里逐字找到。→ spec 只能放当次 quote 撑得住的数值，撑不住的留给
 #     Phase 1b 补更完整的 quote 后再加。
+#     validate.py 另校验 5c（[ADR-058]）：spec 自由文本键（note / *_note）内嵌的数字
+#     不限 confidence 反查同字段 quote/zh/detail 任一——覆盖 5b 进不去的盲区
+#     （[ADR-054] 复核 8 处 FIX 里 4 处属此类），挡「费率/阈值/金额夹带进 note」。
 #   - 三态：spec 里某键为 null（+ note）= 机制存在数值查不到；spec 里 type=none
 #     = 机制确实不存在；spec 键整个缺省 = 尚未填。前端必须区分（[ADR-035] D 节）。
 #   - validate.py（Phase 1）校验：spec 必须是 dict；spec 里每个键必须在下面对应

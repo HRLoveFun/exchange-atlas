@@ -15,6 +15,10 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
      数字命中"判——挡整条编造；结构化 spec 值按"每个都要命中"判，见第 5b 条）
   5b. confidence: high 且带 spec 子块的字段，spec 里的每个数值都必须能在 quote 里找到
      （spec 是精确定型值，没有 12/24 小时改写、中文数字、含数字的产品名这类噪声，可严判）
+  5c. spec 子块自由文本键（note / *_note）里内嵌的数字必须能在同字段 quote/zh/detail
+     任一处找到——不限 confidence（[ADR-054] 复核 8 处 FIX 里 4 处属于这个盲区，cn-sse
+     那次是 medium 连 5b 的高门槛都进不了）。日期/时刻/年份/条款号/ADR 引用等非数值
+     token 剥离后比对，挡的是「费率/阈值/金额夹带进 note」这类静默错误
   6. verified 不得是未来日期
   7. 来源域名已在 SOURCES.md 登记；且若某 confidence: high 字段的全部来源域名在
      SOURCES.md 都标为「第三方」，直接 fail（CLAUDE.md 二第3条：第三方来源 confidence 上限 medium）
@@ -120,6 +124,80 @@ def spec_number_strings(spec):
     return out
 
 
+# 5c（[ADR-054] 盲区机器化）：note（及 *_note）等自由文本里不算「数值主张」的 token——
+# ISO 日期（2026-04-04）、年月（2025-12）、时刻（09:59:45 / 17:30）、孤立年份（1991 年）、
+# ADR / 悬案编号引用（[ADR-035] / OPEN-QUESTIONS #19）、条款号引用（Rule 4702 / §34 /
+# 第 62 条）。它们是时间背景与出处指针，不是费率/阈值/金额；数字反查挡的是后者。
+NOTE_NON_VALUE_RE = re.compile(
+    r"\d{4}-\d{1,2}-\d{1,2}"
+    r"|\d{4}-\d{1,2}(?!\d)"
+    r"|\d{1,2}:\d{2}(?::\d{2})?"
+    r"|(?<![\d.])(?:19|20)\d{2}(?![\d.])"
+    r"|\[?ADR-\d{3}\]?"
+    r"|#\d+"
+    r"|(?:Rule|Rules|Section|Sections|Article|Articles|§)\s*\d[\d.,\-–—/至到和與与]*"
+    r"|第\s*\d[\d.,\-–—/、至到和與与]*\s*条?"
+)
+
+
+def spec_note_strings(spec):
+    """递归收集 spec 子块里自由文本键（note / *_note）的字符串，作为 5c 的比对对象；
+    数值型叶子已由 5b 严判，这里只管字符串里夹带的数字。"""
+    out = []
+
+    def walk(v, key=None):
+        if isinstance(v, dict):
+            for k, x in v.items():
+                walk(x, k)
+        elif isinstance(v, (list, tuple)):
+            for x in v:
+                walk(x, key)
+        elif isinstance(v, str) and key and (key == "note" or key.endswith("_note")):
+            if not re.fullmatch(r"-?\d+(?:\.\d+)?%?", v.strip()):
+                out.append(v)
+
+    walk(spec)
+    return out
+
+
+def note_numbers_in(text):
+    """自由文本里 ≥2 位有效数字的集合：先剥离日期/时刻/年份/条款号等非数值 token，
+    再跑 NUMBER_RE；紧邻字母的命中（MT30、ZA01、FE10 这类代码记号）不算。"""
+    text = NOTE_NON_VALUE_RE.sub(" ", str(text if text is not None else ""))
+    out = set()
+    for m in NUMBER_RE.finditer(text):
+        s, e = m.span()
+        if s > 0 and text[s - 1].isalpha():
+            continue
+        if e < len(text) and text[e].isalpha():
+            continue
+        core = m.group().replace(",", "")
+        if len(core.replace(".", "")) >= 2:
+            out.add(core)
+    return out
+
+
+def note_numbers_missing(note_texts, target_texts):
+    """note 文本里出现、但目标文本（可多个，任一命中即算找到——note 常做交叉引用）
+    里找不到的数字集合。候选数字的小数尾随零归一后比对（0.50 ≡ 0.5）：
+    同一数值的不同书写精度不算夹带。"""
+    quotes = [str(q or "").replace(",", "") for q in target_texts]
+
+    def hit(n):
+        if any(n in q for q in quotes):
+            return True
+        if "." in n:
+            trimmed = n.rstrip("0").rstrip(".")
+            return any(trimmed in q for q in quotes)
+        return False
+
+    nums = set()
+    for t in note_texts:
+        nums |= note_numbers_in(t)
+    return nums, {n for n in nums if not hit(n)}
+
+
+
 def source_domain_classes(domain, domain_tags):
     """domain 在 SOURCES.md 的标签分类集合：{'primary'} / {'third_party'} / 混合 / 空。
     子域名沿用父域名登记（与"来源域名已登记"校验一致）。"""
@@ -209,6 +287,20 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                             if k not in declared:
                                 err(f"{loc}: spec 里的键 `{k}` 未在 schema/spec.yml 声明"
                                     f"（拼写错？可用键：{sorted(declared)}）")
+
+                        # 5c：note（及 *_note）自由文本里内嵌的数字反查。不限 confidence——
+                        # [ADR-054] 复核 8 处 FIX 里 4 处属于这个盲区（cn-sse 夹带深交所
+                        # 费率那次是 medium，连 5b 的高门槛都进不了）；命中范围放宽到同
+                        # 字段 quote/zh/detail 任一（note 常做交叉引用，允许复述同字段
+                        # 人读文本里已有的数字，但不得夹带谁都没有的数字）。
+                        note_texts = spec_note_strings(spec)
+                        if note_texts:
+                            _, note_missing = note_numbers_missing(
+                                note_texts, [env.get("quote"), env.get("zh"), env.get("detail")])
+                            if note_missing:
+                                err(f"{loc}: spec 的 note 里内嵌的数字 {sorted(note_missing)} "
+                                    f"在本字段 quote/zh/detail 里都找不到——note 不得夹带无原文"
+                                    f"支撑的数字（CLAUDE.md 二.5，[ADR-054] 复核确立的维度）")
 
                 # en_required 字段必须填 en——此前这个 taxonomy 标记从未被机器校验过，
                 # 导致标了 en_required 的专有名词类字段（机制名/板块名/法规名等）静默
