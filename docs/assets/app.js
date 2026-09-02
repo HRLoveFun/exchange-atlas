@@ -384,6 +384,15 @@
   function renderObjectChapter(chDef, chapterData, exchangeId) {
     var fields = chDef.fields || [];
     if (!fields.length) return '<p style="color:var(--fg-muted)">' + t("本章节暂无字段定义。", "No field definitions for this chapter yet.") + "</p>";
+    // 章节级不适用（only_spot + _meta.not_applicable，ADR-036 #5 / ADR-059）：折叠为一行说明，
+    // 不逐字段渲染空信封。目前仅纯衍生品所（de-eurex）的「上市」章。
+    if (chapterData && chapterData._meta && chapterData._meta.not_applicable) {
+      return '<div class="field-card"><div class="field-label">' + esc(chDef.label_zh) + " · " + esc(chDef.label_en) + "</div>" +
+        '<p style="color:var(--fg-muted);margin:0">' + t(
+          "本所为衍生品交易所，不上市公司——本章整章不适用（<code>_meta.not_applicable</code>，见 ADR-036 #5 / ADR-059）。对应概念是交易员准入（见「市场参与者」）与合约挂牌 / 到期（见「产品体系」「清算、结算与交割」）。",
+          "This is a derivatives exchange and does not list corporations — the whole chapter is not applicable (<code>_meta.not_applicable</code>; see ADR-036 #5 / ADR-059). The analogous concepts are trader admission (see “Market Participants”) and contract listing / expiry (see “Products”, “Clearing, Settlement & Delivery”).") +
+        "</p></div>";
+    }
     var html = "";
     fields.forEach(function (f) {
       if (f.kind === "list") {
@@ -1777,6 +1786,364 @@
   }
 
   // ══════════════════════════════════════════════
+  // 上市生命周期剖面（v2.0 Phase 3 第四棒，ADR-059）
+  //   一条水平「证券的一生」时间轴：上市审核 → 上市流程周期 → 挂牌 → 持续义务存续带
+  //   →〔停牌/复牌 ↻〕→ 退市触发 →〔触发条件框〕→ 退市流程 → 退市整理期 → 退市后去向。
+  //   阶段块等宽示意（一家公司上市多久没有固定值）；唯「上市流程周期」「退市整理期」两块
+  //   按 spec 实际月数画填充条（满条 = 9 个月）。诚实三态：缺省虚线框 / type:none 空心点 /
+  //   null 斜体灰。纯衍生品所（listing._meta.not_applicable，ADR-036 #5）整图折叠为一行。
+  //   每个渲染元素带 data-role="cell"，点击复用 openCellOverlay。
+  // ══════════════════════════════════════════════
+  var LL_DEFAULT_EX = "hk-hkex";
+  // review_system 枚举 label 偏长（"交易所审核+监管机构平行注册"），阶段块里放不下——
+  // 图上用短名，全称进 tooltip / 顶栏描述 / 出处浮层。
+  var LL_REVIEW_SHORT = {
+    registration: { zh: "注册制", en: "Registration" },
+    disclosure_with_discretion: { zh: "披露为本", en: "Disclosure-based" },
+    dual_track: { zh: "审核 + 平行注册", en: "Review + registration" },
+    approval: { zh: "核准制", en: "Approval-based" },
+    mixed_by_board: { zh: "分板块不一", en: "Varies by board" }
+  };
+
+  function llResolveId(params) {
+    var l = cache.manifest.exchanges;
+    if (l.some(function (e) { return e.id === params.id; })) return params.id;
+    return l.some(function (e) { return e.id === LL_DEFAULT_EX; }) ? LL_DEFAULT_EX : l[0].id;
+  }
+  function llN(v) { return Math.round(v * 10) / 10; }
+  function llCell(id, path, inner, title) {
+    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
+      '" data-chapter="listing">' + (title ? "<title>" + esc(title) + "</title>" : "") + inner + "</g>";
+  }
+  // CJK 按字数断行、拉丁按空格断行；最多 maxLines 行，超出末行省略号
+  function llWrap(s, per, maxLines) {
+    s = String(s == null ? "" : s).trim();
+    var out = [];
+    if (/[一-鿿]/.test(s)) {
+      for (var i = 0; i < s.length; i += per) out.push(s.slice(i, i + per));
+    } else {
+      var cur = "";
+      s.split(/\s+/).forEach(function (w) {
+        if (cur && (cur + " " + w).length > per) { out.push(cur); cur = w; }
+        else cur = cur ? cur + " " + w : w;
+      });
+      if (cur) out.push(cur);
+    }
+    if (out.length > maxLines) { out = out.slice(0, maxLines); out[maxLines - 1] = spClip(out[maxLines - 1] + "…", per + 1); }
+    return out;
+  }
+  // 时长 spec → { months, label } | { none: true } | null
+  function llDurInfo(env) {
+    var sp = env && env.spec;
+    if (!sp) return null;
+    if (sp.type === "none") return { none: true };
+    if (typeof sp.value !== "number") return null;
+    var per = { months: 1, weeks: 1 / 4.35, business_days: 1 / 21, trading_days: 1 / 21, calendar_days: 1 / 30.4 }[sp.unit] || 1;
+    var unitTxt = ({
+      months: t("个月", " mo"), weeks: t(" 周", " wk"), business_days: t(" 个工作日", " business days"),
+      trading_days: t(" 个交易日", " trading days"), calendar_days: t(" 日", " days")
+    })[sp.unit] || "";
+    var lbl = (sp.unit === "months" ? "≈ " + sp.value + " " : sp.value) + unitTxt;
+    return { months: sp.value * per, label: lbl.trim() };
+  }
+  function llBoardName(b) {
+    if (state.langMode === "en" && typeof b.name_native === "string" && b.name_native) return b.name_native;
+    return b.name_zh || (typeof b.name_native === "string" ? b.name_native : "");
+  }
+
+  var LL_BLOCK_H = 30;
+  // 阶段块：块内放标题（上）+ 短标签 / 时长条 / 换行正文（下）。全文进 <title>。
+  function llPhaseBlock(id, path, x, w, cy, label, opts) {
+    opts = opts || {};
+    var h = LL_BLOCK_H, y = cy - h / 2;
+    var fill = ({ info: "var(--info-soft)", danger: "var(--danger-soft)" })[opts.kind] || "var(--bg-hover)";
+    var stroke = ({ info: "var(--info)", danger: "var(--danger)" })[opts.kind] || "var(--border-strong)";
+    var g = "";
+    var dash = opts.dashed ? ' stroke-dasharray="4 3"' : "";
+    var rectFill = opts.hatch ? "url(#ll-hatch)" : fill;
+    g += '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="' + llN(w) + '" height="' + h + '" rx="4" fill="' + rectFill +
+      '" stroke="' + stroke + '" stroke-width="1"' + dash + "/>";
+    g += '<text x="' + llN(x + w / 2) + '" y="' + llN(y - 7) + '" text-anchor="middle" class="ll-phase-k">' + esc(label) + "</text>";
+    if (opts.dur && typeof opts.dur.months === "number") {
+      var frac = Math.max(0.04, Math.min(1, opts.dur.months / 9));
+      var tw = w - 18, bx = x + 9, by = y + h - 9;
+      g += '<rect x="' + llN(bx) + '" y="' + llN(by) + '" width="' + llN(tw) + '" height="3.5" rx="1.8" fill="var(--border)"/>';
+      g += '<rect x="' + llN(bx) + '" y="' + llN(by) + '" width="' + llN(tw * frac) + '" height="3.5" rx="1.8" fill="' + stroke + '"/>';
+      g += '<text x="' + llN(x + w / 2) + '" y="' + llN(y + 13) + '" text-anchor="middle" class="ll-dur">' + esc(opts.dur.label) + "</text>";
+    } else if (opts.durMissing) {
+      g += '<text x="' + llN(x + w / 2) + '" y="' + llN(cy + 3.5) + '" text-anchor="middle" class="ll-dur">' + esc(t("未记录", "not recorded")) + "</text>";
+    } else if (opts.body && opts.body.length) {
+      var by0 = cy + 3.5 - (opts.body.length - 1) * 5;
+      opts.body.forEach(function (ln, i) {
+        g += '<text x="' + llN(x + w / 2) + '" y="' + llN(by0 + i * 10) + '" text-anchor="middle" class="ll-phase-s">' + esc(ln) + "</text>";
+      });
+    } else if (opts.sub) {
+      var sw = /[一-鿿]/.test(opts.sub) ? Math.floor((w - 10) / 9.5) : Math.floor((w - 10) / 5);
+      g += '<text x="' + llN(x + w / 2) + '" y="' + llN(cy + 3.5) + '" text-anchor="middle" class="ll-phase-s">' + esc(spClip(opts.sub, Math.max(4, sw))) + "</text>";
+    }
+    return path ? llCell(id, path, g, opts.title) : ("<g>" + (opts.title ? "<title>" + esc(opts.title) + "</title>" : "") + g + "</g>");
+  }
+  function llNode(x, cy, shape, color, kLabel, opts) {
+    opts = opts || {};
+    var g = "";
+    if (shape === "diamond") {
+      g += '<path d="M' + llN(x) + " " + llN(cy - 7) + " L" + llN(x + 7) + " " + llN(cy) + " L" + llN(x) + " " + llN(cy + 7) + " L" + llN(x - 7) + " " + llN(cy) + ' Z" fill="' + color + '"/>';
+    } else if (shape === "hollow") {
+      g += '<circle cx="' + llN(x) + '" cy="' + llN(cy) + '" r="5.5" fill="var(--bg-elevated)" stroke="' + color + '" stroke-width="1.7"/>';
+    } else {
+      g += '<circle cx="' + llN(x) + '" cy="' + llN(cy) + '" r="5.5" fill="' + color + '"/>';
+    }
+    if (kLabel) {
+      var ky = opts.above ? cy - 14 : cy + 19;
+      g += '<text x="' + llN(x) + '" y="' + llN(ky) + '" text-anchor="middle" class="ll-node-k">' + esc(kLabel) + "</text>";
+    }
+    return g;
+  }
+
+  function llCollapsed(id, name) {
+    var W = 1180, PR = 40, PL = 80, H = 150, midY = 84;
+    return '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + " " + H + '" class="td-svg ll-svg" role="img" aria-label="' +
+      esc(t("纯衍生品交易所，无公司上市生命周期", "derivatives-only exchange, no corporate listing lifecycle")) + '">' +
+      '<text x="18" y="28" class="ll-title">' + esc(name) + esc(t(" · 上市生命周期", " · Listing Lifecycle")) + "</text>" +
+      '<line x1="' + PL + '" y1="' + midY + '" x2="' + (W - PR) + '" y2="' + midY + '" stroke="var(--fg-faint)" stroke-width="1.4" stroke-dasharray="5 4"/>' +
+      '<text x="' + W / 2 + '" y="' + (midY - 16) + '" text-anchor="middle" class="ll-empty-strong">' +
+      esc(t("衍生品交易所 · 无公司上市生命周期", "Derivatives-only exchange · no corporate listing lifecycle")) + "</text>" +
+      '<text x="' + W / 2 + '" y="' + (midY + 22) + '" text-anchor="middle" class="ll-empty">' +
+      esc(t("第六章标记「仅现货适用」：整章不计入完成度（ADR-036 #5 / ADR-059）",
+        'Chapter 6 flagged "spot-only": excluded from the completeness count (ADR-036 #5 / ADR-059)')) + "</text>" +
+      "</svg></div>";
+  }
+
+  function llBuild(id, data) {
+    var L = (data.chapters && data.chapters.listing) || {};
+    var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
+    if (L._meta && L._meta.not_applicable) return llCollapsed(id, exName) + llProse(true);
+
+    var W = 1180, PL = 80, PR = 40;
+    var boards = L.boards || [];
+    var reviewEnv = L.review_system, lpEnv = L.listing_process_duration;
+    var contEnv = L.continuing_obligations, suspEnv = L.suspension_resumption;
+    var condEnv = L.delisting_conditions, procEnv = L.delisting_process;
+    var transEnv = L.delisting_transition_period, postEnv = L.post_delisting_venue;
+    var xferEnv = L.transfer_between_boards;
+    var has = function (e) { return e && (e.zh || e.en); };
+
+    var hasCond = !!has(condEnv);
+    // 板块阶梯最多画 5 行；超出折成「+N」一行（ch-six 有 11 个板块）
+    var boardRows = boards.length > 5 ? boards.slice(0, 4) : boards;
+    var boardMore = boards.length - boardRows.length;
+    var ladderN = boardRows.length + (boardMore > 0 ? 1 : 0);
+    var tierRowH = 13, tierStackH = ladderN * tierRowH;
+    var bandY = 66 + (boards.length > 1 ? tierStackH : 18) + 44;
+    var calloutTop = bandY + 40, calloutH = 44;
+    var axisY = calloutTop + (hasCond ? calloutH : 16) + 24, H = axisY + 24;
+
+    var g = [];
+    g.push('<text x="18" y="26" class="ll-title">' + esc(exName) + esc(t(" · 上市生命周期", " · Listing Lifecycle")) + "</text>");
+    // 派生一句描述：审核制度 · N 个板块 [· 可转板]
+    var desc = [];
+    if (reviewEnv && reviewEnv.enum) desc.push(enumDisplay("review_system", reviewEnv.enum));
+    else if (has(reviewEnv)) desc.push(spClip(dv(reviewEnv), 18));
+    if (boards.length) desc.push(boards.length + t(" 个板块", boards.length === 1 ? " board" : " boards"));
+    if (has(xferEnv) && boards.length > 1) desc.push(t("可转板", "transferable"));
+    g.push('<text x="18" y="43" class="ll-archetype">' + esc(desc.join(" · ")) + "</text>");
+
+    // ── 横向布局（顺序推进） ──
+    var x = PL + 18;
+    var reviewX = x, reviewW = 96; x += reviewW + 20;
+    var filingX = x, filingW = 104; x += filingW + 18;
+    var bandX = x, bandW = 330; x = bandX + bandW;
+    var triggerX = x + 16; x += 46;
+    var procX = x, procW = 100; x += procW + 22;
+    var transInfo = llDurInfo(transEnv);
+    var transNone = transInfo && transInfo.none;
+    var transX = x, transW = 108;
+    x += transNone ? 64 : transW + 22;
+    var postX = x, postW = 120; x += postW;
+    var spineEnd = x;
+
+    // 连续生命周期基线（挂牌 → 退市后去向）
+    g.push('<line x1="' + llN(bandX) + '" y1="' + llN(bandY) + '" x2="' + llN(spineEnd) + '" y2="' + llN(bandY) + '" stroke="var(--border-strong)" stroke-width="1.4"/>');
+
+    // ── 板块阶梯（挂牌点正上方）：多板画阶梯 + 转板箭头；单板一行紧凑标签 ──
+    var stackBot = bandY - 22, stackTop = stackBot - tierStackH;
+    if (boards.length > 1) {
+      var transferable = has(xferEnv);
+      g.push('<text x="' + llN(bandX) + '" y="' + llN(stackTop - 6) + '" class="ll-tier">' +
+        esc(t("板块体系", "Boards") + (transferable ? t(" · 可转板", " · transferable") : "")) + "</text>");
+      boardRows.forEach(function (b, i) {
+        var ty = stackTop + i * tierRowH;
+        g.push('<rect x="' + llN(bandX) + '" y="' + llN(ty) + '" width="90" height="9" rx="2" fill="var(--info-soft)" stroke="var(--info)" stroke-width="0.8"/>');
+        g.push('<text x="' + llN(bandX + 98) + '" y="' + llN(ty + 8) + '" class="ll-tier">' + esc(spClip(llBoardName(b), 11)) + "</text>");
+      });
+      if (boardMore > 0) {
+        var my = stackTop + boardRows.length * tierRowH;
+        g.push('<text x="' + llN(bandX + 4) + '" y="' + llN(my + 8) + '" class="ll-tier">+ ' + boardMore + t(" 个板块", " more") + "</text>");
+      }
+      if (transferable) {
+        var axc = bandX - 9;
+        g.push('<g><title>' + esc(dv(xferEnv)) + "</title>" +
+          '<line x1="' + llN(axc) + '" y1="' + llN(stackTop + 3) + '" x2="' + llN(axc) + '" y2="' + llN(stackBot - 3) + '" stroke="var(--info)" stroke-width="1.3"/>' +
+          '<path d="M' + llN(axc - 3) + " " + llN(stackTop + 6) + " L" + llN(axc) + " " + llN(stackTop + 2) + " L" + llN(axc + 3) + " " + llN(stackTop + 6) + '" fill="none" stroke="var(--info)" stroke-width="1.3"/>' +
+          '<path d="M' + llN(axc - 3) + " " + llN(stackBot - 6) + " L" + llN(axc) + " " + llN(stackBot - 2) + " L" + llN(axc + 3) + " " + llN(stackBot - 6) + '" fill="none" stroke="var(--info)" stroke-width="1.3"/></g>');
+      }
+    } else if (boards.length === 1) {
+      g.push('<rect x="' + llN(bandX) + '" y="' + llN(stackBot - 10) + '" width="10" height="9" rx="2" fill="var(--info-soft)" stroke="var(--info)" stroke-width="0.8"/>');
+      g.push('<text x="' + llN(bandX + 16) + '" y="' + llN(stackBot - 2.5) + '" class="ll-tier">' +
+        esc(t("板块：", "Board: ") + spClip(llBoardName(boards[0]), 14)) + "</text>");
+    }
+    g.push('<line x1="' + llN(bandX) + '" y1="' + llN(stackBot) + '" x2="' + llN(bandX) + '" y2="' + llN(bandY - 7) + '" stroke="var(--border-strong)" stroke-width="0.8" stroke-dasharray="2 2"/>');
+
+    // ── 阶段块：上市审核 ──
+    var rEnum = reviewEnv && reviewEnv.enum;
+    var rShort = rEnum && LL_REVIEW_SHORT[rEnum] ? tSel(LL_REVIEW_SHORT, rEnum) : (has(reviewEnv) ? dv(reviewEnv) : "");
+    g.push(llPhaseBlock(id, "review_system", reviewX, reviewW, bandY, t("上市审核", "Listing review"),
+      { kind: "info",
+        title: (rEnum ? enumDisplay("review_system", rEnum) + (has(reviewEnv) ? sep() : "") : "") + (has(reviewEnv) ? dv(reviewEnv) : "") || t("未记录", "not recorded"),
+        sub: rShort, dashed: !rEnum && !has(reviewEnv) }));
+
+    // ── 阶段块：上市流程周期 ──
+    var lpInfo = llDurInfo(lpEnv);
+    g.push(llPhaseBlock(id, "listing_process_duration", filingX, filingW, bandY, t("上市流程周期", "Listing process"),
+      { kind: "info", title: has(lpEnv) ? dv(lpEnv) : t("未记录", "not recorded"),
+        dur: lpInfo && !lpInfo.none ? lpInfo : null,
+        sub: !lpInfo && has(lpEnv) ? dv(lpEnv) : "",
+        dashed: !has(lpEnv), durMissing: !lpInfo && !has(lpEnv) }));
+
+    // ── 持续义务存续带 ──
+    var hasCont = has(contEnv);
+    g.push(llCell(id, "continuing_obligations",
+      '<rect x="' + llN(bandX) + '" y="' + llN(bandY - 6) + '" width="' + llN(bandW) + '" height="12" rx="3" fill="' +
+      (hasCont ? "var(--accent)" : "var(--bg-hover)") + '" opacity="' + (hasCont ? 0.85 : 1) + '"' +
+      (hasCont ? "" : ' stroke="var(--border-strong)" stroke-dasharray="4 3"') + "/>",
+      t("持续上市义务", "Continuing obligations") + sep() + (hasCont ? spClip(dv(contEnv), 120) : "—")));
+    if (!hasCont) {
+      g.push('<text x="' + llN(bandX + bandW / 2) + '" y="' + llN(bandY - 12) + '" text-anchor="middle" class="ll-phase-s">' +
+        esc(t("持续上市义务（未记录）", "Continuing obligations (not recorded)")) + "</text>");
+    }
+
+    // ── 挂牌 / 停复牌 ↻ / 退市触发 ──
+    g.push(llNode(bandX, bandY, "solid", "var(--accent)", t("挂牌", "Listed")));
+    if (has(suspEnv)) {
+      var loopX = bandX + bandW * 0.52;
+      g.push(llCell(id, "suspension_resumption",
+        '<text x="' + llN(loopX) + '" y="' + llN(bandY + 6) + '" text-anchor="middle" class="ll-loop-glyph">↻</text>' +
+        '<text x="' + llN(loopX) + '" y="' + llN(bandY - 16) + '" text-anchor="middle" class="ll-loop-k">' + esc(t("停牌 / 复牌", "Halt / resume")) + "</text>",
+        t("停牌 / 复牌规则", "Suspension / resumption") + sep() + spClip(dv(suspEnv), 120)));
+    }
+    g.push(llNode(triggerX, bandY, "diamond", "var(--danger)", t("退市触发", "Delisting trigger"), { above: true }));
+
+    // ── 退市触发条件（有内容画常驻框；缺省只在触发点下一行灰字，不画空框）──
+    if (hasCond) {
+      var condTxt = dv(condEnv);
+      var cbW = 340, cbX = triggerX - 150;
+      if (cbX + cbW > W - PR) cbX = W - PR - cbW;
+      if (cbX < PL) cbX = PL;
+      g.push('<line x1="' + llN(triggerX) + '" y1="' + llN(bandY + 8) + '" x2="' + llN(triggerX) + '" y2="' + llN(calloutTop) + '" stroke="var(--danger)" stroke-width="0.9"/>');
+      g.push(llCell(id, "delisting_conditions",
+        '<rect x="' + llN(cbX) + '" y="' + llN(calloutTop) + '" width="' + cbW + '" height="' + calloutH + '" rx="4" fill="var(--danger-soft)" stroke="var(--danger)" stroke-width="0.9"/>' +
+        '<text x="' + llN(cbX + 12) + '" y="' + llN(calloutTop + 15) + '" class="ll-callout-k">' + esc(t("退市触发条件", "Delisting triggers")) + "</text>" +
+        llWrap(condTxt, state.langMode === "en" ? 64 : 32, 2).map(function (ln, i) {
+          return '<text x="' + llN(cbX + 12) + '" y="' + llN(calloutTop + 29 + i * 12) + '" class="ll-callout-v">' + esc(ln) + "</text>";
+        }).join(""),
+        t("退市条件", "Delisting conditions") + sep() + spClip(condTxt, 140)));
+    } else {
+      g.push(llCell(id, "delisting_conditions",
+        '<text x="' + llN(triggerX) + '" y="' + llN(bandY + 30) + '" text-anchor="middle" class="ll-callout-muted">' +
+        esc(t("触发条件未记录", "triggers not recorded")) + "</text>",
+        t("退市条件", "Delisting conditions") + sep() + "—"));
+    }
+
+    // ── 退市流程 ──
+    g.push(llPhaseBlock(id, "delisting_process", procX, procW, bandY, t("退市流程", "Delisting process"),
+      { kind: "danger", title: has(procEnv) ? dv(procEnv) : t("未记录", "not recorded"),
+        sub: has(procEnv) ? dv(procEnv) : "", dashed: !has(procEnv) }));
+
+    // ── 退市整理期 ──
+    if (transNone) {
+      var tnx = transX + 26;
+      g.push(llCell(id, "delisting_transition_period",
+        '<circle cx="' + llN(tnx) + '" cy="' + llN(bandY) + '" r="3" fill="var(--bg-elevated)" stroke="var(--fg-faint)" stroke-width="1.2"/>' +
+        '<text x="' + llN(tnx) + '" y="' + llN(bandY - 12) + '" text-anchor="middle" class="ll-phase-s">' + esc(t("无整理期", "No transition")) + "</text>" +
+        '<text x="' + llN(tnx) + '" y="' + llN(bandY + 17) + '" text-anchor="middle" class="ll-node-s">' + esc(t("摘牌日停止交易", "trading stops on removal")) + "</text>",
+        t("退市整理期", "Transition period") + sep() + (has(transEnv) ? spClip(dv(transEnv), 120) : t("无", "none"))));
+    } else {
+      g.push(llPhaseBlock(id, "delisting_transition_period", transX, transW, bandY, t("退市整理期", "Transition period"),
+        { kind: "danger", hatch: true, title: has(transEnv) ? dv(transEnv) : t("未记录", "not recorded"),
+          dur: transInfo && !transInfo.none ? transInfo : null,
+          sub: !transInfo && has(transEnv) ? dv(transEnv) : "",
+          dashed: !has(transEnv), durMissing: !transInfo && !has(transEnv) }));
+    }
+
+    // ── 退市后去向 ──
+    var pvTxt = has(postEnv) ? dv(postEnv) : t("去向未记录", "destination not recorded");
+    g.push(llPhaseBlock(id, "post_delisting_venue", postX, postW, bandY, t("退市后去向", "After delisting"),
+      { title: pvTxt, dashed: !has(postEnv), body: llWrap(pvTxt, state.langMode === "en" ? 18 : 9, 2) }));
+
+    // ── 基线 + 尺度说明 ──
+    g.push('<line x1="' + llN(PL) + '" y1="' + llN(axisY) + '" x2="' + llN(spineEnd + 4) + '" y2="' + llN(axisY) + '" stroke="var(--border)" stroke-width="1"/>');
+    g.push('<text x="' + llN(PL) + '" y="' + llN(axisY + 18) + '" class="ll-axis-end">' + esc(t("上市前", "pre-listing")) + " →</text>");
+    g.push('<text x="' + llN(W - PR) + '" y="' + llN(axisY + 18) + '" text-anchor="end" class="ll-axis-name">' +
+      esc(t("证券的一生 · 尺度为年，阶段块不按真实时长比例", "life of a security · years-scale; blocks not to real-time proportion")) + "</text>");
+
+    var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + " " + llN(H) + '" class="td-svg ll-svg" role="img" aria-label="' +
+      esc(exName) + esc(t(" 上市生命周期", " listing lifecycle")) + '">' +
+      '<defs><pattern id="ll-hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">' +
+      '<rect width="6" height="6" fill="var(--danger-soft)"/>' +
+      '<line x1="0" y1="0" x2="0" y2="6" stroke="var(--danger)" stroke-width="1.4" opacity="0.5"/></pattern></defs>' +
+      g.join("") + "</svg></div>";
+    return llLegend() + svg + llProse(false);
+  }
+
+  function llLegend() {
+    return '<div class="td-legend">' +
+      '<span><i class="td-sw" style="background:var(--accent)"></i>' + t("已挂牌 · 持续义务", "Listed · continuing obligations") + "</span>" +
+      '<span><i class="td-sw" style="background:var(--danger)"></i>' + t("退市路径", "Delisting path") + "</span>" +
+      '<span class="ll-lg-loop">↻ ' + t("停牌 / 复牌", "Suspension / resumption") + "</span>" +
+      '<span><i class="td-sw" style="background:var(--info)"></i>' + t("板块 · 转板", "Boards · transfer") + "</span>" +
+      '<span><i class="ll-lg-dash"></i>' + t("缺省 / 不适用（诚实三态）", "blank / N.A. (honest three-state)") + "</span>" +
+      "</div>";
+  }
+  function llProse(collapsed) {
+    if (collapsed) {
+      return '<div class="td-prose">' + t(
+        "本所在数据文件里把第六章《上市、持续监管与退市》整章标记为不适用（<code>_meta.not_applicable</code>）——衍生品交易所不上市公司，对应概念是交易员准入（见「参与者」）与合约挂牌 / 到期（见「产品」「交割管线」）。见 " +
+        '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-036 #5 / ADR-059</a>。',
+        "This exchange marks the whole of Chapter 6 (“Listing, Continuing Obligations &amp; Delisting”) as not applicable (<code>_meta.not_applicable</code>) — a derivatives exchange does not list corporations; the analogous concepts are trader admission (see “Participants”) and contract listing / expiry (see “Products”, “Settlement”). See " +
+        '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-036 #5 / ADR-059</a>.') + "</div>";
+    }
+    return '<div class="td-prose">' + t(
+      "本视图由第六章《上市、持续监管与退市》的字段驱动（见 " +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-059</a>）。' +
+      "时间尺度是<strong>一只证券的一生（年）</strong>——与「市场机制剖面」的一个交易日、「交割管线」的成交后 T+N 天构成同一只证券的三级缩放。阶段块只示意先后、<strong>不按真实时长比例</strong>（一家公司上市多久没有固定值）；只有「上市流程周期」「退市整理期」两块画按 <code>spec</code> 实际月数的填充条（满条 = 9 个月）。诚实三态：虚线框 =「尚未填」，空心点 = 规则明确「不设」，斜体灰 =「存在但未公布」。点任意元素看出处。规则以各交易所官方发布为准，不构成投资建议。",
+      "This view is driven by Chapter 6 (“Listing, Continuing Obligations &amp; Delisting”; see " +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-059</a>). ' +
+      "The time scale is <strong>the life of a security (years)</strong> — a third zoom level alongside the one-trading-day of “Market Mechanics” and the T+N business days of “Settlement”. Phase blocks show sequence only and are <strong>not to real-time scale</strong> (how long a company stays listed has no fixed value); only “Listing process” and “Transition period” carry a fill bar scaled to their <code>spec</code> months (full bar = 9 months). Honest three-state: a dashed block = “not yet filled”, a hollow dot = the rule explicitly sets none, italic grey = “exists but not published”. Click any element for sources. Rules are as officially published by each exchange; nothing here is investment advice.") + "</div>";
+  }
+
+  function renderListingLifecycle(app, params) {
+    var list = cache.manifest.exchanges;
+    var id = llResolveId(params);
+    var toolbar = '<div class="view-toolbar">' +
+      '<label for="llExchange">市场 Market</label>' +
+      '<select id="llExchange" data-role="ll-exchange">' +
+      list.map(function (e) {
+        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
+      }).join("") + "</select>" +
+      '<span class="td-tb-note">' + t("一只证券的一生：上市审核 → 挂牌 → 持续义务 → 退市 → 去向 · 点任意元素看出处",
+        "a security's lifetime: review → listed → obligations → delisting → destination · click any element for sources") + "</span>" +
+      "</div>";
+    app.innerHTML = toolbar + '<div class="loading">' + t("加载上市生命周期中…", "Loading listing lifecycle…") + "</div>";
+    return loadExchange(id).then(function (data) {
+      var cur = parseHash();
+      if ((cur.view && cur.view !== "listing-lifecycle") || llResolveId(cur) !== id) return;
+      app.innerHTML = toolbar + llBuild(id, data);
+    }).catch(function (e) {
+      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
+    });
+  }
+
+  // ══════════════════════════════════════════════
   // 出处浮层
   // ══════════════════════════════════════════════
   function openCellOverlay(exchangeId, fieldPath, chapterId) {
@@ -1909,6 +2276,7 @@
     else if (view === "matrix") renderMatrix(app, params);
     else if (view === "cost-waterfall") renderCostWaterfall(app, params);
     else if (view === "settlement-pipeline") renderSettlementPipeline(app, params);
+    else if (view === "listing-lifecycle") renderListingLifecycle(app, params);
     else renderTradingDay(app, params);
   }
 
@@ -1970,6 +2338,8 @@
       setHash({ view: "cost-waterfall", id: e.target.value });
     } else if (role === "sp-exchange") {
       setHash({ view: "settlement-pipeline", id: e.target.value });
+    } else if (role === "ll-exchange") {
+      setHash({ view: "listing-lifecycle", id: e.target.value });
     }
   });
   document.addEventListener("keydown", function (e) {

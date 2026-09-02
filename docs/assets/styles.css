@@ -421,6 +421,30 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
 .sp-lg-loop { color: var(--info); font-weight: 600; }
 .sp-wf-note { margin-top: 10px; }
 
+/* ── 上市生命周期剖面（v2.0 Phase 3 第四棒，ADR-059）── */
+.ll-svg { min-width: 1080px; }
+.ll-svg .ll-title { font-size: 14.5px; font-weight: 700; fill: var(--fg); }
+.ll-svg .ll-archetype { font-size: 10.5px; fill: var(--fg-muted); }
+.ll-svg .ll-phase-k { font-size: 11px; font-weight: 700; fill: var(--fg); }
+.ll-svg .ll-phase-s { font-size: 9.5px; fill: var(--fg-muted); }
+.ll-svg .ll-node-k { font-size: 10.5px; font-weight: 700; fill: var(--fg); }
+.ll-svg .ll-node-s { font-size: 9.5px; fill: var(--fg-muted); }
+.ll-svg .ll-tier { font-size: 9.5px; fill: var(--info); font-weight: 600; }
+.ll-svg .ll-loop-k { font-size: 10px; font-weight: 700; fill: var(--warn); }
+.ll-svg .ll-loop-glyph { font-size: 17px; font-weight: 700; fill: var(--warn); }
+.ll-svg .ll-dur { font-size: 9.5px; font-family: var(--font-mono); fill: var(--fg-muted); }
+.ll-svg .ll-callout-k { font-size: 9.5px; font-weight: 700; fill: var(--danger); }
+.ll-svg .ll-callout-v { font-size: 10px; fill: var(--fg); }
+.ll-svg .ll-callout-muted { font-size: 10px; fill: var(--fg-faint); font-style: italic; }
+.ll-svg .ll-axis-name { font-size: 10px; fill: var(--fg-muted); font-family: var(--font-mono); }
+.ll-svg .ll-axis-end { font-size: 9.5px; fill: var(--fg-faint); }
+.ll-svg .ll-empty { font-size: 10.5px; fill: var(--fg-faint); }
+.ll-svg .ll-empty-strong { font-size: 12.5px; font-weight: 700; fill: var(--fg-muted); }
+.ll-svg .td-hit { cursor: pointer; }
+.ll-svg .td-hit:hover rect { filter: brightness(0.97); }
+.td-legend .ll-lg-dash { width: 15px; height: 0; border-top: 2px dashed var(--fg-faint); display: inline-block; flex-shrink: 0; }
+.td-legend .ll-lg-loop { color: var(--warn); font-weight: 700; }
+
 .overlay-spec {
   background: var(--bg); border-radius: 4px; padding: 10px 12px; margin: 0;
   font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted);
