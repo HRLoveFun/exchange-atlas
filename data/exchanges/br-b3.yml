@@ -864,6 +864,7 @@ listing:
     confidence: medium
 
   listing_process_duration:
+    spec: {value: 39, unit: business_days, range: [12, 39], note: "无需注册 / CVM 自动注册的要约 12 个工作日；需 CVM 事先注册 39 个工作日，可延长最多 20 个工作日（B3 自身处理时长）"}
     zh: "发行人上市审核时长取决于发行类型与CVM注册方式。股票及认购权证的发行人在'无需注册或CVM自动注册'的发行要约下为12个工作日；在需CVM事先注册的发行要约下为39个工作日，并可延长最多20个工作日。"
     en: "Listing review time depends on offering type and CVM registration route. Issuers of shares and subscription warrants take 12 business days where the distribution offer is not subject to registration or is subject to automatic CVM registration, and 39 business days (extendable up to 20 business days) where prior CVM registration is required."
     detail: "Figures are B3's own processing times (Issuers Regulation Annex A). CVM's separate registration adds ~60 days, so total time to listing is typically ~3–4 months."
@@ -921,6 +922,7 @@ listing:
     confidence: high
 
   delisting_transition_period:
+    spec: {value: 30, unit: calendar_days, note: "取消交易决定公布后设定不超过 30 天过渡期，期间证券可继续以连续或非连续方式临时交易，之后退市生效"}
     zh: "B3在取消交易决定公布后设定不超过30天的过渡期，期间证券可继续以连续或非连续方式临时交易，之后退市生效。"
     en: "After publishing a cancellation decision, B3 sets a timeframe not exceeding 30 days during which the securities may continue to be temporarily traded in a continuous or non-continuous manner before the cancellation takes effect."
     detail: "B3 Issuers Regulation Art. 72. The transition window protects holders by allowing an orderly exit."

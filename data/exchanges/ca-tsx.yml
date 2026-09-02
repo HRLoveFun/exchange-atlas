@@ -1041,6 +1041,7 @@ listing:
       \ triggered the delisting review.\n"
     confidence: high
   delisting_transition_period:
+    spec: {value: 30, unit: calendar_days, note: "停牌日起第 30 个日历日退市生效；过渡期内发行人仍须遵守全部 TSX 持续义务"}
     zh: 停牌日起第30个日历日为退市生效日，期间发行人仍须遵守全部TSX要求（含第602条规定的义务）
     en: Delisting becomes effective on the 30th calendar day after the suspension
       date; during that window the issuer remains subject to all TSX requirements,

@@ -1142,6 +1142,11 @@
         "quote": null
       },
       "delisting_transition_period": {
+        "spec": {
+          "value": 20,
+          "unit": "business_days",
+          "note": "主板：取消上市生效日不得早于股东会通过取消决议后 20 个工作日；AIM：须至少提前 20 个工作日通知交易所，且股东批准后至少 5 个工作日方生效。此为通知 / 生效期，证券在此期间持续交易"
+        },
         "zh": "主板（Official List）：发行人主动申请取消上市须发出致股东通函（须先经FCA审批），通函须载明取消上市的预计生效日期，该日期不得早于股东大会通过取消决议之日起20个工作日；决议须获不少于75%已投票表决权支持（如有控股股东，还须获独立股东表决权75%以上支持）。AIM：须至少提前20个工作日通知交易所拟取消挂牌的日期，取消一般须经不少于75%已投票表决权同意；取消须在股东批准后至少5个工作日方可生效",
         "en": "Main Market (Official List): an issuer requesting voluntary cancellation must send shareholders a circular (which must first be approved by the FCA) stating the anticipated cancellation date, which must be not less than 20 business days after the resolution to cancel is passed at a general meeting; the resolution requires approval by not less than 75% of the votes cast (and, where there is a controlling shareholder, also a majority of independent shareholders' votes). AIM: the company must notify the Exchange of its preferred cancellation date at least 20 business days in advance, cancellation generally requires the consent of not less than 75% of votes cast, and cancellation does not take effect until at least 5 business days after shareholder approval is obtained",
         "detail": "两套板块的\"整理期\"机制高度相似（20个工作日通知期+75%表决权门槛），这不是巧合——AIM\n规则历史上参照了彼时Listing Rules的退市程序设计，2024年7月UKLR改革后主板一侧的具体\n条文编号变为UKLR 21.2.8R，但20工作日+75%的核心参数未变。两者的差异在于AIM额外明确\n\"取消决议通过后再等5个工作日方可生效\"这一层，主板本次抓取的条文未见对应的\"决议通过\n后二次等待期\"表述（决议本身即需在20工作日窗口内进行）。要约收购触发的强制退市另有\n独立于本字段的简化规则（如收购方通过要约/强制收购程序达到75%接纳时可援引不同的通知\n路径），未展开。\n",
@@ -1160,8 +1165,7 @@
         "quote": "(1) send a circular to the holders of the relevant shares. The circular must: ... (c) include the anticipated date of cancellation (which must be not less than 20 business days following the passing of the resolution referred to in paragraph (2)); (2) obtain, at a general meeting, the prior approval of a resolution for the cancellation from: (a) a majority of not less than 75% of the votes attaching to the shares voted on the resolution.／An AIM company which wishes the Exchange to cancel admission of its AIM securities must notify such intended cancellation and must separately inform the Exchange of its preferred cancellation date at least twenty business days prior to such date and save where the Exchange otherwise agrees, the cancellation shall be conditional upon the consent of not less than 75% of votes cast by its shareholders given in a general meeting.／Cancellation will not take effect until at least five business days have passed since shareholder approval has been obtained and a dealing notice has been issued.\n",
         "verified": "2026-08-24",
         "confidence": "high",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "post_delisting_venue": {
         "zh": "LSE/AIM规则本身不指定任何强制性的「继受交易场所」：AIM Rule 41明确要求发行人在致股东的取消上市通知中自行说明「股东在证券被取消挂牌后将如何进行交易」，具体安排（是否、以及通过何种场外撮合平台继续交易）由发行人自主决定并向股东披露，非交易所强制指定。实务中部分已退市公司股份会转由JP Jenkins、Asset Match等独立的「配对成交」（matched bargain）撮合平台提供有限的场外流动性，但这些平台与LSE/AIM之间不存在制度性的强制继受关系",

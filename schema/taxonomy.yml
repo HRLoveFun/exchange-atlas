@@ -487,6 +487,11 @@ chapters:
     label_zh: 上市、持续监管与退市
     label_en: Listing, Continuing Obligations & Delisting
     kind: object
+    # only_spot：纯衍生品交易所（不上市公司）可在数据文件里给本章
+    # _meta.not_applicable: true，整章不计入完成度分母、progress-matrix 显 ➖。
+    # 承接 [ADR-036] #5 / [ADR-059]，把 [ADR-020] 的 optional 机制推广到章节级。
+    # 不是自动豁免——须人工在该所文件里显式标记 + 写 note 说明。
+    only_spot: true
     fields:
       - id: boards
         label_zh: 板块体系

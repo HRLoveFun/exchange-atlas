@@ -1313,6 +1313,7 @@ listing:
     confidence: low
     detail: 三个板块各自的具体审核制度（谁审、审什么、注册制/核准制光谱上处于什么位置）本次未逐一拆解核实；且「审核」本身在多法域结构下可能因市场而略有差异，需要更细的研究才能填，暂留空。
   listing_process_duration:
+    spec: {value: 8, unit: weeks, note: "受监管市场（Euronext）IPO 约 8 周；Euronext Growth（奥斯陆市场）标准 15 个工作日；具体在发行人与市场运营方商定的上市时间表中确定，规则手册不设统一天数"}
     zh: 上市周期因板块而异：受监管市场（Euronext）IPO 通常约 8 周；Euronext Growth 板块在奥斯陆市场的标准流程为 15 个工作日，其余市场参照各自时间表。具体时长在发行人保荐人与相关市场运营实体共同商定的上市时间表（timetable）中明确，规则手册仅要求双方对上市安排达成共同认可的时间表，未规定统一最短/最长天数。
     en: 'Time-to-listing varies by segment: an IPO on the regulated Euronext market
       typically takes about 8 weeks; the Euronext Growth segment runs a standard 15

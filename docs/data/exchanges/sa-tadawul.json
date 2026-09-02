@@ -1415,6 +1415,15 @@
         "spec": null
       },
       "listing_process_duration": {
+        "spec": {
+          "value": 12,
+          "unit": "months",
+          "range": [
+            6,
+            12
+          ],
+          "note": "向 CMA 提交约 6 个月 + 处理与开始交易最长约 6 个月，合计约 6–12 个月；Nomu 平行市场显著更短。区间为第三方律所指引估计，非法定硬性时限"
+        },
         "zh": "主板（Main Market）IPO 通常自启动至开始交易约需 6–12 个月：先向 CMA 提交申请，CMA 审核通过后再经最长约 6 个月完成上市流程与开始交易；平行市场（Nomu）流程显著更短",
         "en": "A Main Market IPO typically takes about 6–12 months from launch to first trading: file with the CMA, then up to a further ~6 months to complete the listing process and commence trading; the Parallel Market (Nomu) process is significantly shorter",
         "detail": "时间为律所实务指引的估计区间，非法定硬性时限；具体因个案与监管问答节奏而异",
@@ -1428,8 +1437,7 @@
         "quote": "It takes around 6 months to file with the CMA, then up to a further 6 months for the processing and trading to commence.",
         "confidence": "medium",
         "verified": "2026-08-27",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "transfer_between_boards": {
         "zh": "平行市场（Nomu）挂牌满两个日历年后可申请转往主板，另须最近一期财报无保留意见、无累计亏损、申请前十二个月内无因第38条导致的停牌记录",
