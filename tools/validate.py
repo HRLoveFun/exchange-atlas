@@ -275,10 +275,36 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                 err(f"taxonomy.yml: 字段 {field_path} 的 in_matrix `{group_id}` 属于章节 `{group_chapter[group_id]}`，"
                     f"与字段自身所在章节 `{ch['id']}` 不一致")
 
+    only_spot_chapters = {ch["id"] for ch in taxonomy["chapters"] if ch.get("only_spot")}
+    chapter_by_id = {ch["id"]: ch for ch in taxonomy["chapters"]}
+
     for eid, raw in raw_exchanges.items():
         ex = exchanges_expanded[eid]
         # 5c 文件级反查池：本交易所所有字段的 quote / zh（[ADR-058] 收尾修订）
         verbatim_pool = collect_verbatim_texts(ex)
+
+        # only_spot 章节级不适用标记（[ADR-036] #5 / [ADR-059]）：
+        #   _meta.not_applicable: true 只允许出现在 taxonomy 里标了 only_spot 的章节；
+        #   被标不适用的章节里不允许再留带 zh 的 leaf 字段（占位散文是标记落地前的
+        #   临时办法，落地后应清掉——保持"不适用 = 干净空"）。
+        for ch_id, raw_ch in raw.items():
+            if not isinstance(raw_ch, dict):
+                continue
+            if ((raw_ch.get("_meta") or {}).get("not_applicable")) is not True:
+                continue
+            if ch_id not in only_spot_chapters:
+                err(f"{eid}: 章节 `{ch_id}` 标了 _meta.not_applicable，但 taxonomy 里它没有 "
+                    f"only_spot: true（not_applicable 只用于 only_spot 章，见 [ADR-059]）")
+                continue
+            ch_def = chapter_by_id.get(ch_id)
+            if ch_def and ch_def.get("kind") != "list":
+                for kind, path, _fdef in sync.walk_chapter_fields(ch_def.get("fields", [])):
+                    if kind != "leaf":
+                        continue
+                    fenv = sync.get_by_path(ex["chapters"][ch_id], path)
+                    if fenv and fenv.get("zh"):
+                        err(f"{eid}: 章节 `{ch_id}` 标了 not_applicable，但 `{'.'.join(path)}` 仍有 zh "
+                            f"——不适用的章节应清掉占位字段（[ADR-059]）")
 
         # 结构校验
         try:
@@ -431,7 +457,7 @@ def validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchange
     matrix_cells, freshness_rows = [], []
     for eid, ex in exchanges_expanded.items():
         matrix_cells += sync.collect_matrix_cells(eid, taxonomy, ex["chapters"])
-        freshness_rows += sync.compute_freshness(eid, taxonomy, ex["chapters"])
+        freshness_rows += sync.compute_freshness(eid, taxonomy, ex["chapters"], raw_exchanges[eid])
     enum_label_maps = sync.build_enum_label_maps(enums)
 
     checks = [

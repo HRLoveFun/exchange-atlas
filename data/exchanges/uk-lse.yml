@@ -763,6 +763,7 @@ listing:
     detail: "发行人主动申请取消上市（Cancellation at issuer's request）须满足UKLR 21.2.8-21.2.18及21.3的具体程序要求，本次未逐条核实完整流程细节。"
 
   delisting_transition_period:
+    spec: {value: 20, unit: business_days, note: "主板：取消上市生效日不得早于股东会通过取消决议后 20 个工作日；AIM：须至少提前 20 个工作日通知交易所，且股东批准后至少 5 个工作日方生效。此为通知 / 生效期，证券在此期间持续交易"}
     zh: "主板（Official List）：发行人主动申请取消上市须发出致股东通函（须先经FCA审批），通函须载明取消上市的预计生效日期，该日期不得早于股东大会通过取消决议之日起20个工作日；决议须获不少于75%已投票表决权支持（如有控股股东，还须获独立股东表决权75%以上支持）。AIM：须至少提前20个工作日通知交易所拟取消挂牌的日期，取消一般须经不少于75%已投票表决权同意；取消须在股东批准后至少5个工作日方可生效"
     en: "Main Market (Official List): an issuer requesting voluntary cancellation must send shareholders a circular (which must first be approved by the FCA) stating the anticipated cancellation date, which must be not less than 20 business days after the resolution to cancel is passed at a general meeting; the resolution requires approval by not less than 75% of the votes cast (and, where there is a controlling shareholder, also a majority of independent shareholders' votes). AIM: the company must notify the Exchange of its preferred cancellation date at least 20 business days in advance, cancellation generally requires the consent of not less than 75% of votes cast, and cancellation does not take effect until at least 5 business days after shareholder approval is obtained"
     detail: |

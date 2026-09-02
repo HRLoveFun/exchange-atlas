@@ -1015,160 +1015,19 @@
       }
     },
     "listing": {
+      "_meta": {
+        "not_applicable": true
+      },
       "boards": [],
-      "review_system": {
-        "zh": "N/A — Eurex 为衍生品交易所，不上市公司，不存在公司上市审核制度；与之对应的是交易员资格考试与准入审核（Admission Regulations for Exchange Traders），性质不同，不适合填入本字段，见章节顶部说明。",
-        "en": "N/A — Eurex is a derivatives exchange and does not list corporations, so there is no corporate listing-review regime; the analogous concept is the Exchange Trader examination/admission (Admission Regulations for Exchange Traders), which is a different mechanism and not suitable for this field. See the chapter note.",
-        "sources": [
-          {
-            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
-            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
-            "accessed": "2026-08-27"
-          }
-        ],
-        "verified": "2026-08-27",
-        "confidence": "medium",
-        "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
-      },
-      "listing_process_duration": {
-        "zh": "N/A — Eurex 不上市公司，没有 IPO/上市流程，故无上市所需时长可言。",
-        "en": "N/A — Eurex does not list corporations, so there is no IPO/listing process and therefore no listing duration to report.",
-        "sources": [
-          {
-            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
-            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
-            "accessed": "2026-08-27"
-          }
-        ],
-        "verified": "2026-08-27",
-        "confidence": "medium",
-        "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
-      },
-      "transfer_between_boards": {
-        "zh": "N/A — Eurex 不上市公司，没有板块间转板制度。",
-        "en": "N/A — Eurex does not list corporations, so there is no inter-board transfer regime.",
-        "sources": [
-          {
-            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
-            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
-            "accessed": "2026-08-27"
-          }
-        ],
-        "verified": "2026-08-27",
-        "confidence": "medium",
-        "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
-      },
-      "continuing_obligations": {
-        "zh": "N/A — 衍生品交易所没有上市公司的持续信息披露/持续义务概念；持续义务更贴近清算会员的保证金与持仓报告义务（见 clearing 章节），而非公司层面。",
-        "en": "N/A — A derivatives exchange has no 'continuing obligations' of listed corporations; the analogous ongoing duties are those of clearing members (margin and position reporting), not corporate-level, see clearing.",
-        "sources": [
-          {
-            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
-            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
-            "accessed": "2026-08-27"
-          }
-        ],
-        "verified": "2026-08-27",
-        "confidence": "medium",
-        "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
-      },
-      "suspension_resumption": {
-        "zh": "N/A — 没有公司股票停牌/复牌概念；衍生品合约的交易暂停与恢复由波动性中断等机制处理（见 market_structure.volatility_interruption），不属于公司上市语境下的停复牌。",
-        "en": "N/A — There is no corporate trading suspension/resumption concept; trading halts and resumptions of derivative contracts are handled by mechanisms such as the Volatility Interruption (see market_structure.volatility_interruption), not by a corporate suspension/resumption regime.",
-        "sources": [
-          {
-            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
-            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
-            "accessed": "2026-08-27"
-          }
-        ],
-        "verified": "2026-08-27",
-        "confidence": "medium",
-        "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
-      },
-      "delisting_conditions": {
-        "zh": "N/A — 衍生品没有'退市'概念，最接近的是合约到期（Expiry）或管理董事会终止交易（见 clearing/last_trading_day_rule），性质是合约生命周期管理，非公司退市，不适合填入本字段。",
-        "en": "N/A — Derivatives have no 'delisting' concept; the closest analogues are contract expiry or termination of trading by the Management Board (see clearing.last_trading_day_rule), which is contract-lifecycle management, not corporate delisting.",
-        "sources": [
-          {
-            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
-            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
-            "accessed": "2026-08-27"
-          }
-        ],
-        "verified": "2026-08-27",
-        "confidence": "medium",
-        "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
-      },
-      "delisting_process": {
-        "zh": "N/A — Eurex 不上市公司，无退市流程。",
-        "en": "N/A — Eurex does not list corporations, so there is no delisting process.",
-        "sources": [
-          {
-            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
-            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
-            "accessed": "2026-08-27"
-          }
-        ],
-        "verified": "2026-08-27",
-        "confidence": "medium",
-        "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
-      },
-      "delisting_transition_period": {
-        "zh": "N/A — Eurex 不上市公司，无退市过渡期。",
-        "en": "N/A — Eurex does not list corporations, so there is no delisting transition period.",
-        "sources": [
-          {
-            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
-            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
-            "accessed": "2026-08-27"
-          }
-        ],
-        "verified": "2026-08-27",
-        "confidence": "medium",
-        "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
-      },
-      "post_delisting_venue": {
-        "zh": "N/A — Eurex 为衍生品交易所，不上市公司，不存在公司退市后转入场外/其他板块的安排。",
-        "en": "N/A — Eurex is a derivatives exchange and does not list corporations, so there is no post-delisting venue (e.g. transfer to an OTC or second board) to report.",
-        "sources": [
-          {
-            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
-            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
-            "accessed": "2026-08-27"
-          }
-        ],
-        "verified": "2026-08-27",
-        "confidence": "medium",
-        "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
-      }
+      "review_system": null,
+      "listing_process_duration": null,
+      "transfer_between_boards": null,
+      "continuing_obligations": null,
+      "suspension_resumption": null,
+      "delisting_conditions": null,
+      "delisting_process": null,
+      "delisting_transition_period": null,
+      "post_delisting_venue": null
     },
     "indices": {
       "meta": {

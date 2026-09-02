@@ -238,3 +238,28 @@ fields:
         external（外部授信 / 保险 / 流动性安排）。ccp_default_waterfall 的损失吸收层必填；
         lines_of_defence 的预防性层级（准入门槛、资本监控等非损失吸收）可省）
       note: "string——model: unstructured 时说明机制概况；或补充层级取舍"
+
+  # ── 第六章｜上市、持续监管与退市：两段时长（Phase 3 上市生命周期剖面，[ADR-059]）──
+  # listing_process_duration / delisting_transition_period 各一份 spec，存「从上市申请
+  # 到挂牌」和「退市触发到退市生效」的量化时长，驱动上市生命周期剖面里这两段的按比例
+  # 填充条（满条 = 9 个月；其余阶段块为示意顺序、不按真实时长比例——一家公司上市多久
+  # 没有固定值）。
+  # 只有能从 quote 拿到干净数字的交易所才填。多数市场不设法定固定时长（"无硬性法定
+  # 期限"），或唯一来源把数字拼写成英文单词 / 中文数字（"about four months" /
+  # "十五个交易日"——5b 的逐字数字反查拿不到）——spec 整个缺省、散文承载，属预期，
+  # 不是缺口（缺 quote 的几家记 OPEN-QUESTIONS）。
+  # value + unit 给代表值（有跨度时通常取上界或最典型档）；range [min,max] 给板块 /
+  # CVM 注册路径 / 境内外不同导致的跨度；type: none 仅在规则明确"不设此过渡期"且有
+  # 正面原文依据时用。value/range 里的 ≥2 位数字受 validate.py 5b 逐字反查（quote），
+  # note 里的数字受 5c 文件级反查。
+  listing.listing_process_duration: &listing_duration
+    doc: >
+      从上市申请 / 受理到挂牌的时长。value 是代表值（与 unit 同单位），range 给跨度。
+      多数交易所不设法定固定时长——查不到干净数字时整个 spec 缺省，不强行填。
+    keys:
+      value: "number——代表时长，与 unit 同单位"
+      unit: "business_days / trading_days / calendar_days / weeks / months"
+      range: "[min, max]，可选——与 value 同单位，板块 / 注册路径 / 境内外不同导致的跨度"
+      type: "none——规则明确不设此时长 / 过渡期（须有正面原文依据）"
+      note: "string，可选——档位、口径、仅适用某情形的限定"
+  listing.delisting_transition_period: *listing_duration

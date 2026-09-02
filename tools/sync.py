@@ -116,6 +116,11 @@ def expand_object_chapter(chapter_def, raw_chapter):
     raw_chapter = raw_chapter or {}
     meta = raw_chapter.get("_meta") or {}
     expanded = {}
+    # only_spot 章的 not_applicable 标记透传进产物，给前端一个干净的「本章不适用」信号
+    # （[ADR-059]，如 de-eurex 的 listing）。其余 _meta 字段（verified/confidence）仍按
+    # expand_field 继承进各字段信封，不单独透传。
+    if chapter_def.get("only_spot") and meta.get("not_applicable") is True:
+        expanded["_meta"] = {"not_applicable": True}
     for kind, path, fdef in walk_chapter_fields(chapter_def.get("fields", [])):
         if kind == "leaf":
             raw = get_by_path(raw_chapter, path)
@@ -173,11 +178,14 @@ def collect_matrix_cells(exchange_id, taxonomy, expanded_chapters):
     return cells
 
 
-def compute_freshness(exchange_id, taxonomy, expanded_chapters):
+def compute_freshness(exchange_id, taxonomy, expanded_chapters, raw_chapters=None):
+    raw_chapters = raw_chapters or {}
     rows = []
     for ch in taxonomy["chapters"]:
         if ch.get("kind") == "list":
             continue
+        if chapter_is_not_applicable(ch, raw_chapters.get(ch["id"])):
+            continue  # only_spot 章标 not_applicable：不产 freshness 行（[ADR-059]）
         for kind, path, fdef in walk_chapter_fields(ch.get("fields", [])):
             if kind != "leaf":
                 continue
@@ -355,7 +363,18 @@ def count_chapter_leaves(fields, expanded, prefix=()):
     return total, filled, low_conf
 
 
+def chapter_is_not_applicable(chapter_def, raw_chapter):
+    """only_spot 章 + 该所显式标 _meta.not_applicable: true（如 de-eurex 的 listing）：
+    整章对本所不适用，不计入完成度、不产 freshness 行。见 [ADR-036] #5 / [ADR-059]。"""
+    return bool(
+        chapter_def.get("only_spot")
+        and ((raw_chapter or {}).get("_meta") or {}).get("not_applicable") is True
+    )
+
+
 def chapter_status(chapter_def, raw_chapter, expanded):
+    if chapter_is_not_applicable(chapter_def, raw_chapter):
+        return "➖"
     if chapter_def.get("kind") == "list":
         items = (raw_chapter or {}).get("items") or []
         if items:
@@ -552,7 +571,7 @@ def main():
     freshness_rows = []
     for eid, ex in exchanges_expanded.items():
         matrix_cells += collect_matrix_cells(eid, taxonomy, ex["chapters"])
-        freshness_rows += compute_freshness(eid, taxonomy, ex["chapters"])
+        freshness_rows += compute_freshness(eid, taxonomy, ex["chapters"], raw_exchanges[eid])
 
     # ── docs/data/ 产物 ──
     DOCS_DATA.mkdir(parents=True, exist_ok=True)

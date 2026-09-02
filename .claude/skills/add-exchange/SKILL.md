@@ -284,7 +284,12 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
    `listing` 章节整章不适用；`settlement_cycle`/`short_selling`/`intraday_reversal` 的设计假设
    都是现货股票市场的时间/借券结构），**如实留空 + 在 `detail` 里说明"设计前提不适用"，不要为了
    填满而强行套用**（比如把交易员资格考试硬填进上市审核字段）。这类发现比"查不到具体数值"更
-   重要，记一条到第 7 步的框架性问题回写里，参考 `de-eurex.yml` 里 `listing` 章节顶部注释的写法
+   重要，记一条到第 7 步的框架性问题回写里。
+   - **纯衍生品交易所的第六章（[ADR-059]）**：`schema/taxonomy.yml` `listing` 章有 `only_spot: true`——
+     不要逐字段填「N/A —…」占位散文，直接在数据文件里写 `listing: {_meta: {not_applicable: true,
+     verified: <日期>, note: "衍生品交易所，不上市公司；第六章整章不适用"}}`，其余字段全部不写。
+     `sync.py` 会把该章 `progress-matrix` 显 `➖`、不计入 `health-summary` 分母；`validate.py` 会
+     检查 `not_applicable` 只用在 `only_spot` 章、且被标章不留带 zh 的 leaf。范本见 `de-eurex.yml`。
 6. **`quote` 里如果拼接了不止一段原文（用"／"或"..."分隔的复合引用是本项目已确立的合法写法），
    每一段都必须能在同一份被 `sources` 引用的文档里逐字查到——不能从别的文档"借"一段拼进来
    凑成一句读起来通顺的话。** v1.0 Wave 2 人工抽检（`PROJECT/DECISIONS.md` [ADR-017] 流程）
@@ -419,6 +424,20 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
     - **quote 给了明确 (a)(b)(c)… / ①②③ 顺序 → 填完整 `layers`**；quote 只泛述「设有违约基金 /
       按规则处置」没有干净层级 → **`model: unstructured` + `note`**（三态占位，别硬凑层级）。
       lines_of_defence 的预防性层级（准入门槛、资本监控）可省 `bearer`。
+
+11. **第六章两段时长的 `spec`（[ADR-059]，上市生命周期剖面）：** `listing.listing_process_duration`
+    与 `listing.delisting_transition_period` 有共用 `spec` 形状（`schema/spec.yml`）：`value` +
+    `unit`（`business_days` / `trading_days` / `calendar_days` / `weeks` / `months`）+ `range`
+    `[min,max]`（可选，板块 / 注册路径 / 境内外不同的跨度）+ `type: none`（规则明确不设，须正面依据）
+    + `note`。
+    - **只在 quote 里有阿拉伯数字的干净时长才填。** 多数市场不设法定固定上市时长（「无硬性法定
+      期限」），或唯一来源把数字拼成英文单词 / 中文数字（"about four months" / "十五个交易日"，
+      5b 逐字反查拿不到）——这时 `spec` 整个不写、散文承载，属正常，记一条 `OPEN-QUESTIONS`。
+    - `value`/`range` 里 ≥2 位数字受 5b 逐字反查（≤1 位不查但仍须溯源）；`note` 里数字受 5c
+      文件级反查。**语义把关**：`delisting_transition_period` 只填「退市决定后证券仍可交易的
+      整理 / 通知窗口」——「除牌前的整改宽限期（期间停牌）」「注销生效等待期」不是一回事，
+      硬填会让剖面里的时长块误导（[ADR-059] 因此未收 `hk-hkex` 18 个月补救期限、`us-nyse`
+      Form 25 生效期）。
 
 ### 5. 本地验证
 
