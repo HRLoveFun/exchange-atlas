@@ -1330,3 +1330,17 @@
 **验证：** `make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK）、`make sync` 二次幂等；新不变式已加 `validate.py` 机器校验 + 三个探针复跑通过——① `not_applicable` 放非 `only_spot` 章 → 拦；② `not_applicable` 章塞带 `zh` 的 leaf → 拦；③ 新时长 spec 注入 quote 里没有的数字（`97`）→ 5b 拦。生成块变动仅 `de-eurex`（progress `✅→➖` + health 80→71 + matrix -30 行），逐条核对符合预期。**本棒触及约 17 个字段（8 spec + de-eurex 9 字段清理），在 [CLAUDE.md §四] 的「> 30 字段第二人独立复核」硬门槛之下——协调者做了逐条 spec-vs-quote 自检；渲染层棒前建议再过一遍 8 个 spec 的语义忠实度（尤其两个「时长块只画真实跨度」的字段）。**
 
 **日期：** 2026-09-02
+
+---
+
+**渲染层落地（2026-09-03）** — 把 MVP 原型移植进主前端，纯前端三文件（`docs/assets/app.js` +370 / `docs/assets/styles.css` +24 / `docs/index.html` +1），`data/` 与 `docs/data/` 零 diff、`make sync` 幂等、生成块无变化。
+
+- **`app.js` `renderListingLifecycle` / `llBuild`**：手写 SVG「证券的一生」水平轴（`W=1180` viewBox）：板块阶梯 → 连续基线上的 `上市审核 → 上市流程周期 → 挂牌 → 持续义务存续带 →〔停复牌 ↻〕→ 退市触发 ◆ →〔触发条件框〕→ 退市流程 → 退市整理期 → 退市后去向`。节点 / 阶段块全部 `<g class="td-hit" data-role="cell" data-chapter="listing">` 包裹 → 点击复用 `openCellOverlay`（不新增浮层代码）。从第一版接 `t()` / `tSel()` / `dv()` / `enumDisplay` / `exchangeDisplayName`。
+- **诚实三态**照 [ADR-035] D 分岔：字段有 `spec.value` → 阶段块内画按月数比例的填充条（`llDurInfo` 把 `business_days`/`trading_days` 归一 ÷21，满条 = 9 个月）+ 时长标签；`spec.type: none`（仅 `delisting_transition_period`）→ 不画块、基线上一个空心点 +「无整理期 / 摘牌日停止交易」；有散文无 spec → 块内按块宽估字数的极短裁剪 + 全文进 `<title>` + 点击浮层；整字段缺省 → 虚线块 +「未记录」。`delisting_conditions` 缺省时不画空红框，只在触发点下一行灰字「触发条件未记录」。
+- **`review_system`**：enum label 偏长（"交易所审核+监管机构平行注册"），图上用 `LL_REVIEW_SHORT` 短名（"审核 + 平行注册"），全称进 `<title>` / 顶栏派生描述 / 出处浮层。
+- **板块阶梯**：`boards.length > 1` 画阶梯 + `transfer_between_boards` 有内容画左侧 ↕ 转板箭头（`<title>` 带规则）；`=== 1` 一行紧凑标签；`> 5`（`ch-six` 11 个）折成前 4 行 +「+N 个板块」。
+- **纯衍生品所折叠**：`data.chapters.listing._meta.not_applicable`（数据层 `expand_object_chapter` 已透传）→ `llCollapsed`（一条虚线 + 说明）+ `llProse(true)`，不画时间轴。档案页 `renderObjectChapter` 同一信号 → 折叠为一行说明卡（取代逐字段渲染 9 个空信封）。
+- **接线**：顶层 tab「上市生命周期 / Listing Lifecycle」排「交割管线」后（tab 6→7）；路由键 `listing-lifecycle`；`LL_DEFAULT_EX = "hk-hkex"`；`change` 事件加 `ll-exchange` 分支。`styles.css` `.ll-*` 复用 `.td-svg` / `.td-plot-wrap` / `.td-legend` / `.td-hit` / `.td-sw`，只加字号与令牌。
+- **验证**：`make build` 全绿（`validate` 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK——新串全走 `t()`/`tSel()`）；Chrome headless 核对 `hk-hkex`（1 spec + 停复牌 + 缺 `delisting_conditions`）/ `br-b3`（双 spec + 6 板块）/ `uk-lse`（EN + 暗色 + `delisting_process` 缺省虚线）/ `za-jse`（全填无 spec）/ `de-eurex`（折叠）+ 档案页 de-eurex 第六章 + 交割管线 / 剖面无回归。**已知局限**：① 有散文无 spec 的阶段块内文字是硬裁剪片段（"This field captur…"），全文在 `<title>` + 浮层——真正解法是给更多所补时长 spec（数据层）；② 停复牌 `↻` 字形偏淡；③ 7 个 tab 在窄屏靠既有 `@media` 换行。
+
+**渲染层日期：** 2026-09-03
