@@ -683,9 +683,24 @@ market_structure:
     confidence: medium
 
   intraday_reversal:
-    zh: ''
-    confidence: low
-    detail: 本次抓取材料未见对「当日回转交易」这一概念的直接对应表述——欧盟现货市场惯例上买入证券当日即可卖出（无T+1式限制），但未找到Euronext官方原文明确声明，不凭常识代入enum，留空。
+    enum: t0
+    zh: 交易层面为 T+0（当日买入的证券当日即可卖出）——Euronext Trading Manual 与 Rule Book Book
+      I 只规范订单类型、竞价与撮合，未设持有期或「交收前不得卖出」限制；结算层面为 T+2（见
+      clearing.settlement_cycle；欧盟已定于 2027-10-11 统一改 T+1）
+    en: T+0 at the trading level (securities bought during the day may be sold the same
+      day) — the Euronext Trading Manual and Rule Book Book I govern only order types,
+      auctions and matching, with no holding-period or "may not sell before settlement"
+      restriction; settlement is T+2 (see clearing.settlement_cycle)
+    detail: confidence 标 medium——依据是交易规则中不存在持有期限制条款（消极认定），而非交易所对「允许当日回转」的正面声明。与中国
+      A 股 T+1（SSE / SZSE 交易规则明文「交收前不得卖出」）形成对照——欧盟现货市场无此明文限制。
+    sources:
+    - title: Euronext Trading Manual（Notice n°4-01）
+      url: https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf
+      accessed: 2026-08-16
+    - title: Euronext Rule Book Book I — Harmonised Rules
+      url: https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf
+      accessed: 2026-08-16
+    confidence: medium
   short_selling:
     zh: ''
     confidence: low

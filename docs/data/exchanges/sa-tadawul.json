@@ -834,19 +834,19 @@
         "enum": null
       },
       "intraday_reversal": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "本次抓取的规程文本未直接给出「当日买入证券当日可否卖出」的明文条款，未找到可摘引原文，留空转 OPEN-QUESTIONS。",
+        "enum": "t0",
+        "zh": "交易层面为 T+0（当日买入的证券当日即可卖出）——Saudi Exchange 的 Trading and Membership Procedures 只规范申报、竞价与撮合，未设持有期或「交收前不得卖出」限制；2017 年 4 月前本所本即 T+0 即时交收、当日买卖是常态，2017-04 改为 T+2 净额交收后交易层面维持 T+0（结算层面见 clearing.settlement_cycle）",
+        "en": "T+0 at the trading level (securities bought during the day may be sold the same day) — the Saudi Exchange Trading and Membership Procedures govern only orders, auctions and matching, with no holding-period or 'may not sell before settlement' restriction; before April 2017 the market settled T+0 in real time (so same-day round-trips were the norm), and the trading-level T+0 was retained after the move to T+2 netting settlement (see clearing.settlement_cycle)",
+        "detail": "confidence 标 medium——交易层面无持有期限制为消极认定（规程文本中无限制性条款），2017 年前 T+0 即时交收下当日回转是既成常态则是正面佐证。与中国 A 股 T+1（SSE / SZSE 交易规则明文「交收前不得卖出」）形成对照。",
         "sources": [
           {
-            "title": "Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）",
+            "title": "Trading and Membership Procedures（Saudi Exchange 官方规程 PDF）",
             "url": "https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI",
             "accessed": "2026-08-14"
           }
         ],
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
         "spec": null,
         "quote": null
       },

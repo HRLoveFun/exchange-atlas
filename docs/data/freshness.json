@@ -3077,6 +3077,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "intraday_reversal",
+      "label_zh": "回转交易制度",
+      "label_en": "Intraday Reversal (T+N)",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "ca-tsx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "short_selling",
       "label_zh": "做空机制",
       "label_en": "Short Selling",
@@ -4091,6 +4103,18 @@
       "volatility": "moderate",
       "verified": "2026-08-16",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "ch-six",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "intraday_reversal",
+      "label_zh": "回转交易制度",
+      "label_en": "Intraday Reversal (T+N)",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
     },
     {
       "exchange_id": "ch-six",
@@ -8141,6 +8165,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "intraday_reversal",
+      "label_zh": "回转交易制度",
+      "label_en": "Intraday Reversal (T+N)",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "de-xetra",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "short_selling",
       "label_zh": "做空机制",
       "label_en": "Short Selling",
@@ -9095,6 +9131,18 @@
       "volatility": "moderate",
       "verified": "2026-08-16",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "fr-euronext",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "intraday_reversal",
+      "label_zh": "回转交易制度",
+      "label_en": "Intraday Reversal (T+N)",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
     },
     {
       "exchange_id": "fr-euronext",
@@ -13685,6 +13733,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "intraday_reversal",
+      "label_zh": "回转交易制度",
+      "label_en": "Intraday Reversal (T+N)",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "kr-krx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "short_selling",
       "label_zh": "做空机制",
       "label_en": "Short Selling",
@@ -14972,6 +15032,18 @@
       "field_path": "error_trade_rule",
       "label_zh": "错误交易处理规则",
       "label_en": "Erroneous Trade / Mistrade Rule",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "sa-tadawul",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "intraday_reversal",
+      "label_zh": "回转交易制度",
+      "label_en": "Intraday Reversal (T+N)",
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "medium"
@@ -18503,6 +18575,18 @@
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "uk-lse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "intraday_reversal",
+      "label_zh": "回转交易制度",
+      "label_en": "Intraday Reversal (T+N)",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
     },
     {
       "exchange_id": "uk-lse",

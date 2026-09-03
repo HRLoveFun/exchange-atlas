@@ -795,15 +795,21 @@
         "enum": null
       },
       "intraday_reversal": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "现货市场当日买入证券当日是否可卖出（T+0）本次未找到交易所或FCA的专门表述性原文，按铁律不凭常识填入，留空。",
+        "enum": "t0",
+        "zh": "交易层面为 T+0（当日买入的证券当日即可卖出）——LSE 的 MIT201 交易系统指南与 Rules of the London Stock Exchange 只规范订单簿运作、竞价与撮合，未设持有期或「交收前不得卖出」限制；结算层面为 T+2（见 clearing.settlement_cycle；英国已定于 2027-10-11 改 T+1）",
+        "en": "T+0 at the trading level (securities bought during the day may be sold the same day) — the LSE's MIT201 Guide to the Trading System and the Rules of the London Stock Exchange govern only order-book operation, auctions and matching, with no holding-period or 'may not sell before settlement' restriction; settlement is T+2 (see clearing.settlement_cycle)",
+        "detail": "confidence 标 medium——依据是交易规则中不存在持有期限制条款（消极认定），而非交易所对「允许当日回转」的正面声明。与中国 A 股 T+1（SSE / SZSE 交易规则明文「交收前不得卖出」）形成对照——英国现货市场无此明文限制。",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网 PDF）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
         "spec": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "short_selling": {
         "enum": "restricted_list",

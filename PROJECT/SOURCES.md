@@ -823,6 +823,7 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `www.kcmi.re.kr` | 官方（资本市场研究院 KCMI） | ko | curl 常规 UA 200 | 市场结构研究（market_structure 出处）
 - `www.k-otc.or.kr` | 官方（K-OTC 场外市场） | ko | curl 常规 UA 200 | 退市后场外转移（post_delisting_venue 出处）
 - `www.clearstream.com` | 官方（Clearstream 国际中央存托） | en | curl 常规 UA 200 | 国际存托/交收（clearing 出处）
+  - Settlement process – South Korea（KRX 上市股票「当日回转交易」same-day turnaround 规则的明文表述；2026-09-04 数据空缺复核轨任务二 `intraday_reversal` 回填所抓，curl 200，205KB）: https://www.clearstream.com/clearstream-en/res-library/market-coverage/settlement-process-south-korea-1283572
 - `en.sedaily.com` | 第三方（韩国经济日报英文） | en | WebSearch 定位 | 市场背景（confidence 封顶 medium）
 - `en.yna.co.kr` | 第三方（韩联社英文） | en | WebSearch 定位 | 政治/流动性风险（confidence 封顶 medium）
 - `www.koreaherald.com` | 第三方（韩国先驱报） | en | WebSearch 定位 | 流动性/政治风险（confidence 封顶 medium）

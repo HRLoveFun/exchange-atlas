@@ -480,9 +480,8 @@ market_structure:
     confidence: medium
 
   intraday_reversal:
-    zh: ""
-    confidence: low
-    detail: "衍生品合约买卖本身不涉及股票市场'当日回转'限制的概念（开仓/平仓当日可自由进行），该字段的设计前提（T+0/T+1式限制）对衍生品交易所不完全适用，留空不强行套用enum，记入OPEN-QUESTIONS。"
+    not_applicable: true
+    detail: "衍生品合约的开仓 / 平仓当日可自由进行，不存在现货市场「买入的证券在交收前不得卖出」这一持有期限制的概念——本字段的设计前提（T+0 / T+1 式回转限制）对纯衍生品交易所不成立。OPEN-QUESTIONS #17 已就 de-eurex 三个现货前提字段（settlement_cycle / short_selling / intraday_reversal）的不适配定调（[ADR-035] E / [ADR-059]），本次按 [ADR-060] 字段级 not_applicable 机制显式标记，移出完成度分母。"
 
   short_selling:
     zh: ""

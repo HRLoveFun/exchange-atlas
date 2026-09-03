@@ -473,9 +473,15 @@ market_structure:
     confidence: high
 
   intraday_reversal:
-    zh: ""
-    confidence: low
-    detail: "本次抓取材料未找到对「当日买入证券能否当日卖出」的明确正面陈述（欧盟T+2结算市场一般无此限制，但按铁律不凭常识填写，留空转OPEN-QUESTIONS）。"
+    enum: t0
+    zh: "交易层面为 T+0（当日买入的证券当日即可卖出）——FWB Exchange Rules（Börsenordnung）与 Xetra 连续交易规则只规范订单 / 竞价 / 撮合，未设持有期或「交收前不得卖出」限制；结算层面按欧盟 CSDR 框架为 T+2（见 clearing.settlement_cycle，该字段本身因未抓到官方逐字表述留空）"
+    en: "T+0 at the trading level (securities bought during the day may be sold the same day) — the FWB Exchange Rules (Börsenordnung) and the Xetra continuous-trading rules govern only orders, auctions and matching, with no holding-period or 'may not sell before settlement' restriction; settlement follows the EU CSDR T+2 framework (see clearing.settlement_cycle)"
+    detail: "confidence 标 medium——依据是交易规则中不存在持有期限制条款（消极认定），而非交易所对「允许当日回转」的正面声明。与中国 A 股 T+1（SSE / SZSE 交易规则明文「交收前不得卖出」）形成对照——欧盟现货市场无此明文限制。"
+    sources:
+      - title: "Exchange Rules for the Frankfurt Stock Exchange（Börsenordnung，官网英文版 PDF）"
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf
+        accessed: 2026-08-14
+    confidence: medium
 
   short_selling:
     spec: {note: "普通股票卖空受欧盟《卖空规则》236/2012 约束，须向 BaFin 申报净卖空头寸；FWB《交易所规则》§108 另对结构性产品发行商要求备兑卖空；逐项限制（报升/裸卖空处理）本文件未逐条核实"}

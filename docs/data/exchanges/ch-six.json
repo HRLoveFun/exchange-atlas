@@ -978,29 +978,19 @@
         "enum": null
       },
       "intraday_reversal": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "本所结算周期为T+2（见clearing.settlement_cycle），但「当日买入当日可否卖出」这类回转交易限制本质是结算/借券层面的问题，本次未找到官方原文对此有专门表述（欧洲主流市场普遍无此限制，但未核实原文，不采信常识），留空，见OPEN-QUESTIONS。",
+        "enum": "t0",
+        "zh": "交易层面为 T+0（当日买入的证券当日即可卖出）——SIX Swiss Exchange Rule Book 只在 Part III 规范 T+2 清算交收，未设持有期或「交收前不得卖出」限制；其交收失败条款还专门处理「卖出方未持有证券」的情形（以 buy-in 而非禁止申报应对），可见交收前卖出属规则预期内的常态。结算层面为 T+2（见 clearing.settlement_cycle）",
+        "en": "T+0 at the trading level (securities bought during the day may be sold the same day) — the SIX Swiss Exchange Rule Book regulates only T+2 clearing and settlement in Part III, with no holding-period or 'may not sell before settlement' restriction; its settlement-fail provisions even address a selling participant that 'does not hold the securities' via buy-in rather than by barring the order, implying that selling before settlement is contemplated as normal. Settlement is T+2 (see clearing.settlement_cycle)",
+        "detail": "confidence 标 medium——依据是规则手册中不存在持有期限制条款（消极认定，佐以交收失败条款对『卖方未持券』的常态化处理），而非交易所对『允许当日回转』的正面声明。与中国 A 股 T+1（SSE / SZSE 交易规则明文『交收前不得卖出』）形成对照。",
         "sources": [
           {
-            "title": "Directive 3 — Trading（SER官网英文版PDF，交易机制核心条款）",
-            "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf",
-            "accessed": "2026-08-16"
-          },
-          {
-            "title": "Trading Guide（综合交易指南PDF）",
-            "url": "https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/trading-guide.pdf",
-            "accessed": "2026-08-16"
-          },
-          {
-            "title": "\"Trading Parameters\" Guideline（GTP，各细分市场波动性中断参数）",
-            "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf",
+            "title": "SIX Swiss Exchange Rule Book（RB，SER 官网英文版 PDF，Part II 交易 / Part III 清算交收）",
+            "url": "https://www.ser-ag.com/dam/downloads/regulation/trading/rule-books/rb-en.pdf",
             "accessed": "2026-08-16"
           }
         ],
+        "confidence": "medium",
         "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
         "spec": null,
         "quote": null
       },

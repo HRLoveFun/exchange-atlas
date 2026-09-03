@@ -889,19 +889,24 @@
         "enum": null
       },
       "intraday_reversal": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "TSX Rule Book/Order Types Guide本次抓取范围内未找到对当日买卖回转是否受限的专门条款，留空不猜（区别于结算层面的T+1，见clearing.settlement_cycle）。",
+        "enum": "t0",
+        "zh": "交易层面为 T+0（当日买入的证券当日即可卖出）——TSX Rule Book 与 Order Types and Functionality Guide 通篇只规范订单类型、撮合与交收，未设任何持有期或「交收前不得卖出」限制；结算层面为 T+1（见 clearing.settlement_cycle）",
+        "en": "T+0 at the trading level (securities bought during the day may be sold the same day) — the TSX Rule Book and the Order Types and Functionality Guide govern only order types, matching and settlement, with no holding-period or \"may not sell before settlement\" restriction; settlement is T+1 (see clearing.settlement_cycle)",
+        "detail": "confidence 标 medium——依据是 TSX 规则手册与订单类型指南中不存在限制性条款（消极认定），而非交易所对「允许当日回转」的正面声明。与中国 A 股 T+1（SSE / SZSE 交易规则明文「买入的证券，在交收前不得卖出」）形成对照——北美市场无此明文限制。UMIR（CIRO 自律规则）是否含相关限制本次未独立核实（ciro.ca 返回 403，见 OPEN-QUESTIONS）。",
         "sources": [
           {
-            "title": "Trading Hours（官网）",
-            "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+            "title": "Toronto Stock Exchange Rule Book（PDF，Rule 5-103 交收周期条款所在，通篇无持有期限制）",
+            "url": "https://www.tsx.com/en/resource/1464",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Order Types and Functionality Guide（官网 PDF）",
+            "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
             "accessed": "2026-08-16"
           }
         ],
+        "confidence": "medium",
         "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
         "spec": null,
         "quote": null
       },

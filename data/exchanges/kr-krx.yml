@@ -506,9 +506,16 @@ market_structure:
     confidence: low
 
   intraday_reversal:
-    zh: ""
-    detail: "本次抓取材料确认结算周期为T+2（见 clearing.settlement_cycle），但未找到明确说明现货股票「先买后卖是否可当日回转」的条文——结算周期与回转交易规则是两个不同维度，不能相互推断，按铁律留空不猜。"
-    confidence: low
+    enum: t0
+    zh: "交易层面为 T+0（当日买入的证券当日即可卖出）——买单成交确认后即可提交对应卖单，属「当日回转交易」（same-day turnaround），不改变 T+2 净额交收（见 clearing.settlement_cycle）"
+    en: "T+0 at the trading level (securities bought during the day may be sold the same day) — once a buy order's execution is confirmed the matching sell order may be entered as a same-day turnaround trade, without altering the T+2 netting settlement (see clearing.settlement_cycle)"
+    detail: "quote 出处为 Clearstream（国际中央存托）韩国市场交收说明，属操作层面权威第三方，confidence 依 CLAUDE.md 二第3条封顶 medium；KRX 官方英文操作手册《Guide to Trading in the Korean Stock Market》本身未就当日回转单列条文。与中国 A 股 T+1（SSE / SZSE 交易规则明文「交收前不得卖出」）形成对照。"
+    quote: "Same-day turnaround trades are allowed only for shares listed on the KRX under the condition that the sale is done following the confirmation of the execution of the buy order."
+    sources:
+      - title: "Clearstream — Settlement process, South Korea（KRX 上市股票当日回转交易规则）"
+        url: https://www.clearstream.com/clearstream-en/res-library/market-coverage/settlement-process-south-korea-1283572
+        accessed: 2026-09-04
+    confidence: medium
 
   short_selling:
     enum: restricted_uptick
