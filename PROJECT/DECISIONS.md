@@ -1515,5 +1515,41 @@
 **没改：** `spec.rate` / `spec.type` 的实质值除 ca-tsx 的框架描述外均未动（本轮是「坐实既有值」不是「改值」）；渲染层（成本瀑布 SVG 无改动）；`schema/`；`tools/`。
 
 **验证：** `make check` 全绿（`selfcheck` 24/24、`validate` 20 家 0/0、`verify_quotes` OK=1001 / FAIL=0 / CACHE_MISS=77〔含 za-jse 未重建缓存的既有态〕、`check_ui_i18n` OK）、`make sync` 二次幂等。触及 7 个字段（< [CLAUDE.md §四] 的 >30 字段第二人复核门槛），协调者逐条 spec/quote-vs-source 自检；每条改动均带 `.cache/` 落盘凭据（除 `sec.gov` 走 Fair Access UA 外均常规 UA）。生成块变动仅 `matrix.json` / `freshness.json`（zh/en 文本 + `verified` 日期 + `has_detail` 派生），`progress-matrix` / `health-summary` 零 diff。
+### ADR-064 — Phase 3 第六棒：参与者图 Participant Map 的设计定案 + 数据层评估（无需 spec）
+
+**背景：** Phase 3 剩余章节可视化模块的第三棒（首棒 [ADR-059] 上市生命周期、第二棒 [ADR-061] 监管图），也是 Phase 4 单页画布合并的硬前置之一（[ADR-057] #4）。第九章《市场参与者》6 个字段（`investor_structure` / `membership_structure` / `broker_landscape` / `account_opening_requirements` / `suitability_management` / `foreign_access_channel`）目前只在档案页文字块里呈现，零图形——交易员接触陌生市场的一阶问题是「谁在场上跟我做对手盘（机构还是散户、本地还是外资）、我怎么才能进场、如果我是外资走哪条道」，这几个字段把答案分散在章内各处，没有一屏把它们收敛成「一眼读懂谁在这个市场里」。第九章数据相当完整（6 字段全库 M/H，仅 6 处真实空白，均在 [ADR-060] F 桶轨道）。
+
+**流程：** 沿用 [ADR-059]/[ADR-061] 三棒走法。① 先做仿真数据 MVP 原型（两个虚构市场样例 + 一个设计轴变体 × 中英 × 明暗，验证三层槽位 / 接入链 / 外资平行道 / 诚实两态 / 语言开关 / 零构建，**未落库**、放 `/tmp/pt-mvp/`），用户看过**确认形态按此定案**；② 数据层评估结论 = **本棒零 spec 需求**（见轴 5，用户拍板取纯散文），无 schema/data 改动；③ 渲染层（`renderParticipantMap` + 顶层 tab + 路由 + `.pt-*` 样式）留后续棒，与 [ADR-059] 的「设计 / 数据层 → 渲染层」分棒同构（MVP 原型即渲染层参考）。
+
+**定了什么（7 个设计轴，用户 2026-09-04 拍板轴 1–7；轴 5 取「纯散文」）：**
+
+1. **形态 = 固定槽位的「参与者截面」单画布（手写 SVG，`W=1180`，与 [ADR-059]/[ADR-061] 同版式）。** 第九章 6 字段全为散文（占比描述 / 机构名 / 法定义务），无量化机制值可结构化成 bar / 轴——图的几何只能来自**语义槽位**：每个字段固定槽位、跨 20 家位置不变，「换所即对比」。诚实渲染走 [ADR-035] D（结构定形 → 散文按卡宽 / 卡高硬裁剪 + 全文走 `<title>` + 点击 `openCellOverlay`），与 [ADR-059]/[ADR-061] 的同类处置一致。
+
+2. **三层纵向槽位（自上而下 = 交易员三个一阶问题）：**
+   - **谁在场上**——`investor_structure` 满宽单卡，左缘色条 `--info`。这是「跟谁做对手盘」的一句话画像（机构 / 散户 / 本地 / 外资的成交占比描述）。
+   - **我怎么进场**——`membership_structure` → `broker_landscape` → `account_opening_requirements` → `suitability_management` 四张节点卡横排成一条「接入链」，节点间 → 箭头，链末一个终点节点「你」（`--accent-soft` 底 + `--accent` 描边的小圆，上方 `终端投资者 / end investor` 小标）。前两环（会员 / 经纪，中间机构层）左缘 `--accent`；后两环（开户 / 适当性，准入门槛）左缘 `--warn`。节点带序号 1–4。
+   - **外资走哪条道**——`foreign_access_channel` 满宽平行道单卡（右侧留一条并入通道），左缘 `--accent`；一条肘形虚线（`--accent`、`stroke-dasharray`）从卡右沿上折汇入接入链的**同一终点「你」**，卡下一行 caption 说明语义：「外资可在『会员』环直接并入（直接会员），或整体绕过前几环（额度 / 互联互通）」。
+   三层顺序 = 场上人口 → 接入链 → 外资通道，线性推进、槽位稳定。
+
+3. **接入链方向 = 机构侧 → 终端投资者**（交易所接纳会员 → 会员 / 经纪面向客户 → 开户 → 适当性门槛 → 你），**不加独立「交易所」起点节点**——交易所是隐含的链头，画出来占空间、无新信息。
+
+4. **外资通道 = 平行道汇入同一终点**，不做「在某一环精确并入」的连线——各所并入点不同（直接会员在链首、QFII 额度 / 互联互通整体绕过），精确连线会把某一家的形态当通用形态、误导读者。用「平行道 + 肘形虚线汇终点 + 一行 caption」表达「另一条通向同一目的地的路」。
+
+5. **`investor_structure` = 纯散文卡，不加 spec（用户 2026-09-04 拍板，与 [ADR-061] 先例一致）。** 该字段散文里常带硬百分比（港交所机构 53% / 散户 20% / 境外 43%，LSE 境外 58.8%），MVP 的「样例 C」把「加 `investor_structure.spec`（`by`: turnover/accounts + `segments` 数组）」的迷你构成条形态画了出来供权衡。权衡结论取**纯散文**：① 口径不统一——各所报告基准不同（成交额 vs 账户数、本地/外资 vs 机构/散户），强行进同一根 100% 堆叠条会制造可比性假象；② `confidence` 多为 medium、`volatility: moderate` 需年更，spec 化会把年更负担 + 5b 数值反查 + 口径字段 + 第二人复核都引进来；③ 「机构主导还是散户主导」的一眼判断，散文首句同样能承载。**本章因此 6 字段全散文、零 spec**——与 [ADR-061] 监管图同构。
+
+6. **merge-ready 清单（逐条答 [ADR-057]）：**
+   - **锚定关系**：独立分区——尺度 = 一座市场的「参与者截面」，与主图剖面的「一个交易日」、交割管线「T+N 天」、上市生命周期「证券的一生」、监管图「制度截面」无共同 x 轴、不叠加；构成「同一市场的第五个视角——谁在里面」。视觉呼应走主站令牌 + [ADR-040] 线条语言：`--info` = 场上人口（与监管图监管主体 / 透明保护同源）、`--accent` = 接入通道（与监管图资金闸门、交割管线违约瀑布 bearer 同源）、`--warn` = 准入门槛（与监管图法律基座暖色呼应）。
+   - **占位**：合并画布常驻显示、默认展开；纵向 ≈ 监管图档（约 0.8 主图高）、横向满宽。
+   - **诚实两态 / 语言开关 / 零构建**：见轴 1 与 [ADR-049]/[ADR-035] 既有约定——卡头走 `fieldLabel("participants", path)`、合成文案走 `t()` / `tSel()`、无第三方渲染库；本章无 `type: none` 形态（6 字段无 spec），三态退化为「有值实心卡 + 左缘色条 / 缺省虚线框 + 居中斜体『未记录 not recorded』」两态（同 [ADR-061] 轴 4）。分区缩小后仍成立（三态提示是卡级 / 节点级，不依赖大面积留白）。
+
+7. **数据层评估 = 本棒不新增 spec、零 schema/data 改动。** 第九章 6 字段全是「占比描述 / 机构名 / 法定义务」，属 [ADR-035] B 不可结构化类；按「quote 撑得住才结构化」原则（[ADR-045]/[ADR-050]/[ADR-061]），`investor_structure` 的百分比经轴 5 权衡后不 spec 化，其余 5 字段本无量化机制值——spec 缺省是预期而非缺口。现网 6 处空白（`cn-sse` 的 `investor_structure` / `suitability_management` / `foreign_access_channel`、`cn-szse` / `hk-hkex` / `us-nyse` 的 `foreign_access_channel`）是真实研究缺口、已在 [ADR-060] 任务二 / 四轨道，**本棒不替数据层代劳、不造 spec 撑图表**——诚实虚线框就是当前数据层的正确呈现。
+
+8. **纯衍生品所（`de-eurex`）= 全章适用，无 `only_spot`。** 第九章对衍生品所同样成立——Eurex 有完整的「交易参与者准入」体系，这正是 OPEN-QUESTIONS #17 点名的「衍生品所对应概念（交易员 / 交易参与者准入）」；[ADR-059] 的 `listing` 章级 `only_spot` 机制不适用于本章。`de-eurex` 走正常全章渲染（`investor_structure` 对纯衍生品所可能偏薄，但 `membership_structure` / `foreign_access_channel` 等完全适用）。
+
+**没改：** `data/` 与 `docs/data/`（无 spec、无枚举、不增字段）；`schema/`（`spec.yml` / `taxonomy.yml` / `enums.yml` 零 diff）；`tools/validate.py`（无新不变式——本棒未引入新结构）；[ADR-060] 五任务轨道不受影响；前端（渲染层留后续棒）。
+
+**分棒 —— 留给渲染层棒：** `docs/assets/app.js` 的 `renderParticipantMap` / `ptBuild`（手写 SVG，按上述轴 1–4；卡 / 节点 `data-role="cell"` 复用 `openCellOverlay`；折行复用 [ADR-059] `llWrap` + [ADR-061] `rmWrap` 思路的 `ptWrap`）+ `docs/index.html` 顶层 tab「参与者图 / Participant Map」（排「监管图」后，tab 数 8→9）+ 路由键 `participant-map` + `styles.css` `.pt-*`。新代码从一开始接 `t()` / `tSel()` / `fieldLabel` / `dv()`。MVP 原型（`/tmp/pt-mvp/`，仿真数据、不落库）已验证形态，`ptBuild` 可直接移植其 `build()` 逻辑（三层槽位 + `envCard` + 接入链节点 + 终点「你」+ 外资平行道肘形连线）。
+
+**验证（本棒 = 设计文档 + 数据层评估）：** MVP 截图（明 / 暗 × 中英）三层槽位对齐、接入链 4 节点 + 终点「你」+ 外资平行道汇入清晰、空白虚线 / 实心左缘差异可见、卡头随 langMode 正确切换；`make build` 基线不受影响（未触碰任何被 `sync.py` 扫描的文件——只改 `PROJECT/DECISIONS.md` + `PROJECT/ROADMAP.md`）。
 
 **日期：** 2026-09-04
