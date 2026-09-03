@@ -688,9 +688,8 @@
         "enum": null
       },
       "board_lot_size": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "衍生品交易所以'合约张数'为交易单位，没有股票市场'一手多少股'的概念；按合约规格（Contract Specifications）逐品种规定最小变动单位与合约乘数，未逐条核实。",
+        "not_applicable": true,
+        "detail": "纯衍生品交易所以「合约张数」为交易单位，按合约规格（Contract Specifications）逐品种规定合约乘数与最小报价单位，没有现货市场「一手多少股」的概念——本字段设计前提对本所不成立（[ADR-060] 字段级 not_applicable）。",
         "sources": [
           {
             "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
@@ -699,14 +698,16 @@
           }
         ],
         "verified": "2026-08-27",
+        "confidence": "high",
+        "zh": null,
         "en": null,
         "enum": null,
         "spec": null,
         "quote": null
       },
       "odd_lot_handling": {
-        "zh": "",
-        "confidence": "low",
+        "not_applicable": true,
+        "detail": "「碎股」是现货整手交易单位的派生概念（不足一手的余额）；衍生品以合约为整数单位交易，无此概念——本字段设计前提对本所不成立（[ADR-060] 字段级 not_applicable）。",
         "sources": [
           {
             "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
@@ -715,10 +716,11 @@
           }
         ],
         "verified": "2026-08-27",
+        "confidence": "high",
+        "zh": null,
         "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null
       },
       "price_limits": {

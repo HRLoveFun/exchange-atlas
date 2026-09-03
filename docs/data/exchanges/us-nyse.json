@@ -634,38 +634,38 @@
         "enum": null
       },
       "board_lot_size": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "美股市场碎股（odd lot）交易普遍允许，是否仍有正式'整手'概念及具体股数未核实，留空。",
+        "zh": "「整手」（round lot）由 Reg NMS Rule 600(b) 全国统一定义，按前一评估期主上市所平均收盘价分档：≤$250 为 100 股，$250.01–$1,000 为 40 股，$1,000.01–$10,000 为 10 股，>$10,000 为 1 股；新上市 NMS 股票一律先按 100 股。适用于全部 NMS 股票，纽交所与纳斯达克一致",
+        "en": "The 'round lot' is defined market-wide by Reg NMS Rule 600(b), tiered by the stock's average closing price on the primary listing exchange during the prior Evaluation Period: 100 shares for stocks priced $250.00 or less, 40 shares for $250.01–$1,000.00, 10 shares for $1,000.01–$10,000.00, and 1 share for $10,000.01 or more; a new NMS stock is assigned a 100-share round lot. This applies to all NMS stocks, identically for NYSE and Nasdaq",
+        "quote": "Round lot means: (i) For any NMS stock for which the average closing price on the primary listing exchange during the prior Evaluation Period was: (A) $250.00 or less per share, an order for the purchase or sale of an NMS stock of 100 shares; (B) $250.01 to $1,000.00 per share, an order for the purchase or sale of an NMS stock of 40 shares; (C) $1,000.01 to $10,000.00 per share, an order for the purchase or sale of an NMS stock of 10 shares; (D) $10,000.01 or more per share, an order for the purchase or sale of an NMS stock of 1 share; and (ii) New NMS stocks. Any security that becomes an NMS stock during an operative period as described in paragraph (b)(93)(iv) of this section shall be assigned a round lot of 100 shares.",
         "sources": [
           {
-            "title": "Trading Information（官网）",
-            "url": "https://www.nyse.com/trade/trading-information",
-            "accessed": "2026-08-13"
+            "title": "17 CFR 242.600(b)(93) — Regulation NMS, definition of 'round lot'（eCFR versioner API，Title 17 Part 242）",
+            "url": "https://www.ecfr.gov/api/versioner/v1/full/2025-01-01/title-17.xml?part=242",
+            "accessed": "2026-09-04"
           }
         ],
+        "detail": "分档 round lot 是 2020 年 SEC Market Data Infrastructure Rules 引入、分阶段实施的定义。传统上『整手 = 100 股』，高价股分档是新增。",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "odd_lot_handling": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "「碎股」（odd-lot）= 数量少于一个整手（round lot）的 NMS 股票买卖订单。碎股可正常成交；按 SEC Market Data Infrastructure Rules，优于全国最优买卖价的碎股报价须纳入行情传输并按最不激进价格聚合披露",
+        "en": "An 'odd-lot' is an order to buy or sell an NMS stock in an amount less than a round lot. Odd lots execute normally; under the SEC's Market Data Infrastructure Rules, odd-lot quotations better than the national best bid/offer must be included in the consolidated feed, aggregated and disseminated at the least aggressive price",
+        "quote": "Odd-lot means an order for the purchase or sale of an NMS stock in an amount less than a round lot. …… such aggregation shall occur across multiple prices and shall be disseminated at the least aggressive price of all such aggregated odd-lots.",
         "sources": [
           {
-            "title": "Trading Information（官网）",
-            "url": "https://www.nyse.com/trade/trading-information",
-            "accessed": "2026-08-13"
+            "title": "17 CFR 242.600(b)(68) — Regulation NMS, definition of 'odd-lot'（eCFR versioner API，Title 17 Part 242）",
+            "url": "https://www.ecfr.gov/api/versioner/v1/full/2025-01-01/title-17.xml?part=242",
+            "accessed": "2026-09-04"
           }
         ],
+        "detail": "quote 用「……」连接 (b)(68) odd-lot 定义与 (b)(69) odd-lot information 里的聚合披露条款。",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "price_limits": {
         "type": {

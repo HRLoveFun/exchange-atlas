@@ -735,30 +735,27 @@
         "enum": null
       },
       "board_lot_size": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "无全市场统一的「整手」交易单位——Euronext 中央订单簿以股数申报，最小交易量为 1 股",
+        "en": "No market-wide board-lot trading unit — the Euronext Central Order Book is specified in number of shares, with a minimum tradable quantity of one share",
+        "detail": "「无全市场整手」为消极认定——Trading Manual 与 Rule Book Book I 通篇无 board lot / round lot 概念；具体证券可能有 Notice 规定的最小订单量参数，但非全市场统一门槛。",
         "sources": [
           {
-            "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
+            "title": "Euronext Trading Manual（Notice n°4-01）",
             "url": "https://www.euronext.com/sites/default/files/2026-06/Trading%20Manual%20-%20311025%20-%20AVD%20orders%2Bdark%20post-only%2Bhybrid%20model%20.pdf",
-            "accessed": "2026-08-16"
-          },
-          {
-            "title": "Euronext Rule Book Book I - Harmonised Rules",
-            "url": "https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf",
             "accessed": "2026-08-16"
           }
         ],
+        "confidence": "medium",
         "verified": "2026-08-16",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null
       },
       "odd_lot_handling": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "无「碎股」概念——无全市场整手单位（见 board_lot_size），订单以股数申报，不存在不足一手的余额",
+        "en": "No odd-lot concept — with no market-wide board lot (see board_lot_size), orders are in number of shares and there is no sub-lot remainder",
+        "detail": "「无碎股概念」是「无全市场整手」的直接推论。",
+        "confidence": "medium",
         "sources": [
           {
             "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
@@ -772,10 +769,8 @@
           }
         ],
         "verified": "2026-08-16",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null
       },
       "price_limits": {

@@ -739,38 +739,43 @@
         "enum": null
       },
       "board_lot_size": {
-        "zh": "各股票各自设定board lot（非全市场统一，如100股/500股/1000股不等）",
-        "en": "Set individually per stock (not standardised market-wide, e.g. 100/500/1,000 shares)",
-        "confidence": "low",
+        "zh": "由发行人自行为其股票确定「整手」（board lot）交易单位，非全市场统一；港交所提供指引（建议整手价值不低于 2,000 港元、股数少于 900,000，并尽量减少碎股）。目前市场在用的整手单位有 40 多种，最常见的是 2,000 股（约 25% 的证券采用）。港交所 2025 年 12 月发布咨询文件，拟将整手单位收敛为 1 / 50 / 100 / 500 / 1,000 / 2,000 / 5,000 / 10,000 股八种标准值（尚未生效）",
+        "en": "The board-lot trading unit is set by the issuer for its own stock, not standardised market-wide; HKEX provides guidance (a suggested minimum board-lot value of HK$2,000, a unit of fewer than 900,000 shares, and minimising odd-lot creation). Over 40 distinct board-lot units are currently in use, the most common being 2,000 shares (~25% of securities). In December 2025 HKEX published a consultation proposing to narrow board-lot units to eight standardised values — 1, 50, 100, 500, 1,000, 2,000, 5,000 and 10,000 shares (not yet in effect)",
+        "quote": "The current board lot framework allows issuers to determine the board lot unit for their stock. HKEX provides issuers with guidance to assist in selecting appropriate board lot units to support orderly trading and operational efficiency. …… The board lot guidance suggests a minimum board lot value of HK$2,000 …… It also recommends a board lot unit of fewer than 900,000 shares …… issuers would retain flexibility to select their board lot unit but from a defined set of eight standardised board lot units: 1, 50, 100, 500, 1,000, 2,000, 5,000, and 10,000 share(s). …… Standardising board lot sizes from the current structure of over 40 distinct units to a simplified set of eight units would require approximately 25% of issuers to revise their existing board lot structure",
         "sources": [
           {
-            "title": "Trading Hours - Securities Market（HKEX 官网）",
-            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
-            "accessed": "2026-08-12"
+            "title": "HKEX Consultation Paper — Board Lot Framework Enhancements in the Hong Kong Securities Market（December 2025）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/News/Market-Consultations/2016-Present/December-2025-Board-Lot-Framework-Enhancements/Consultation-Paper/cp202512.pdf",
+            "accessed": "2026-09-04"
           }
         ],
+        "detail": "quote 用「……」连接咨询文件 §19、§20、§7、§8 若干句。八种标准整手为 2025-12 咨询提案、尚未落地，现行仍为发行人自定（40+ 种）。",
+        "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "odd_lot_handling": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "「碎股」（odd lot）= 数量少于一个整手的订单或成交。碎股不被交易系统自动对盘；系统内设特别买卖单位市场（special lot market），交易所参与者把碎股盘挂到指定屏幕由其他参与者撮合，未成交则由卖方经 OTP-C 申报成交。碎股价通常略低于同证券整手价。碎股成交量很低（2025 年上半年占成交笔数 0.2%、成交额 0.1%）；港交所正检讨改进方案",
+        "en": "An 'odd lot' is an order or trade in a quantity less than one board lot. Odd lots are not auto-matched by the trading system; a special lot market exists in which Exchange Participants post odd-lot orders on a designated screen for matching by other EPs, with the selling party otherwise reporting the trade via OTP-C. Odd-lot prices are usually slightly lower than the board-lot price of the same security. Odd-lot turnover is very low (0.2% of trades and 0.1% of turnover in H1 2025); HKEX is reviewing enhancements",
+        "quote": "“Odd lot” The quantity of the order or trade that is less than one board lot …… Despite the presence of a semi-automated trade matching mechanism and the manual trade reporting of odd lot transactions, odd lot trading turnover in Hong Kong remains low. …… Odd lot trades represent 0.2% of the total number of trades and 0.1% of the total turnover in the first half of 2025.",
         "sources": [
           {
-            "title": "Trading Hours - Securities Market（HKEX 官网）",
-            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
-            "accessed": "2026-08-12"
+            "title": "HKEX Consultation Paper — Board Lot Framework Enhancements in the Hong Kong Securities Market（December 2025，§107 与脚注 14 / 术语表）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/News/Market-Consultations/2016-Present/December-2025-Board-Lot-Framework-Enhancements/Consultation-Paper/cp202512.pdf",
+            "accessed": "2026-09-04"
+          },
+          {
+            "title": "HKEX — Securities Market Trading Mechanism（Odd Lot Trade 定义，OTP-C 操作）",
+            "url": "https://www.hkex.com.hk/Services/Trading/Securities/Overview/Trading-Mechanism?sc_lang=en",
+            "accessed": "2026-09-04"
           }
         ],
+        "detail": "「special lot market / 指定屏幕 / OTP-C 申报」细节来自 HKEX Trading Mechanism 页的 Odd Lot Trade 定义（本次已抓，未逐字进 quote）；quote 主体引咨询文件术语表与 §107 + 脚注 14。",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "price_limits": {
         "type": {

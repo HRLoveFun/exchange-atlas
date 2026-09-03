@@ -772,37 +772,37 @@
         "enum": null
       },
       "board_lot_size": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "日股普遍以100股为单位交易，但未在本次抓取的条文中找到统一规定的直接原文，留空不猜。",
+        "zh": "国内股票交易单位统一为 100 股（2018 年 10 月 1 日起）。交易单位原按各上市公司章程规定，TSE 推动统一后现全部为 100 股",
+        "en": "The trading unit for domestic stocks is a uniform 100 shares (since 1 October 2018). Trading units were previously set per each company's articles of incorporation; TSE standardised them to 100 shares",
+        "quote": "Now trading units are 100 shares for domestic stocks. TSE was making effort to unite the units to 100 shares in order to establish easy-to-understand and useful market for investors. Finally, trading units of domestic stocks were normalized to 100 shares on Oct. 1, 2018.",
         "sources": [
           {
-            "title": "Business Regulations（TSE官网英文版PDF）",
-            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
-            "accessed": "2026-08-13"
+            "title": "JPX — Trading Rules of Domestic Stocks: Trading Unit（官网英文版）",
+            "url": "https://www.jpx.co.jp/english/equities/trading/domestic/03.html",
+            "accessed": "2026-09-04"
           }
         ],
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
         "spec": null,
-        "quote": null
+        "detail": null
       },
       "odd_lot_handling": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "不足一个交易单位（100 股）的「単元未満株」不能在 TSE 拍卖市场交易；持有人通过发行公司的买入 / 卖出请求制度或券商的単元未満株（碎股）服务处理",
+        "en": "Shares in quantities below one trading unit (100 shares) — 'less-than-one-unit shares' — cannot be traded on the TSE auction market; holders deal with them via the issuer's purchase/sale request scheme or a broker's odd-lot service",
+        "detail": "交易单位统一为 100 股见 board_lot_size（high，逐字 quote）。単元未満株的处理渠道为日本市场通行做法，本次未抓到 TSE 逐条规则原文，confidence 标 medium。",
         "sources": [
           {
-            "title": "Business Regulations（TSE官网英文版PDF）",
-            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
-            "accessed": "2026-08-13"
+            "title": "JPX — Trading Rules of Domestic Stocks: Trading Unit（官网英文版）",
+            "url": "https://www.jpx.co.jp/english/equities/trading/domestic/03.html",
+            "accessed": "2026-09-04"
           }
         ],
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null
       },
       "price_limits": {

@@ -398,8 +398,10 @@ market_structure:
     confidence: high
 
   odd_lot_handling:
-    zh: ""
-    confidence: low
+    zh: "无传统「碎股」市场——无全市场统一整手（见 board_lot_size），订单以股数申报；低于某证券「最小交易规模」的订单不被接受，不存在「不足一手余额」的专门处理机制"
+    en: "No traditional odd-lot market — with no exchange-wide board lot (see board_lot_size), orders are in number of shares; an order below a Security's Minimum Trading Size is simply not accepted, and there is no dedicated sub-lot-remainder handling"
+    detail: "「无碎股市场」是 board_lot_size 记录的「按证券设最小交易规模、无全市场整手」的直接推论。"
+    confidence: medium
 
   price_limits:
     type:

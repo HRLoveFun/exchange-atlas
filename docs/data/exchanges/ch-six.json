@@ -814,9 +814,10 @@
         "quote": null
       },
       "odd_lot_handling": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "既然未见整手/碎股概念区分（见board_lot_size），本字段的设计前提可能对本所不完全适用，留空，不强行套用，见OPEN-QUESTIONS。",
+        "zh": "无「碎股」概念——以单股为最小可交易单位、无最低整手要求（见 board_lot_size），不存在不足一手的余额",
+        "en": "No odd-lot concept — with a single share as the smallest tradable unit and no minimum board-lot requirement (see board_lot_size), there is no sub-lot remainder",
+        "detail": "「无碎股概念」是 board_lot_size 记录的「无最低整手、单股为最小单位」的直接推论（同为消极认定，Directive 3 §5.1.3 订单规范未设最低股数门槛）。",
+        "confidence": "medium",
         "sources": [
           {
             "title": "Directive 3 — Trading（SER官网英文版PDF，交易机制核心条款）",
@@ -835,7 +836,6 @@
           }
         ],
         "verified": "2026-08-16",
-        "en": null,
         "enum": null,
         "spec": null,
         "quote": null

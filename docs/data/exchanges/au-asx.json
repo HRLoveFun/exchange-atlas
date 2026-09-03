@@ -706,25 +706,27 @@
         "enum": null
       },
       "board_lot_size": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "未核实ASX是否仍保留传统意义上的标准交易单位/整手概念，留空。",
+        "zh": "无股数意义上的「整手」；盘中订单以任意股数申报（最小 1 股）。相关概念是按价值定义的「适销单位」（Marketable Parcel）——不少于 500 澳元的股票组合，用于最低持股要求与非适销单位卖出便利，不是订单单位",
+        "en": "No share-count board lot; on-market orders are placed in any number of shares (minimum 1). The related concept is a value-based 'Marketable Parcel' — a parcel of equity securities of not less than A$500 — used for minimum-holding requirements and the non-marketable-parcel sale facility, not as an order unit",
+        "quote": "Marketable Parcel means, in relation to: 1. Equity Securities (but not rights to subscribe for Equity Securities or options over Equity Securities) a parcel of securities of not less than $500 based on: (a) the closing price on a Trading Platform, if the Equity Securities are quoted",
         "sources": [
           {
-            "title": "Cash market trading hours（ASX 官网）",
-            "url": "https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours",
-            "accessed": "2026-08-14"
+            "title": "ASX Operating Rules Procedures（定义节「Marketable Parcel」）PDF",
+            "url": "https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_procedures.pdf",
+            "accessed": "2026-08-30"
           }
         ],
+        "detail": "「盘中以任意股数申报」为消极认定（Operating Rules 无股数整手条款）；「适销单位 = 不少于 500 澳元」有逐字 quote 支撑。confidence 取 medium（两部分强度不同）。",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "odd_lot_handling": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "无独立的「碎股」市场——盘中可按任意股数交易。持有非适销单位（< 500 澳元）的股东可通过公司的非适销单位卖出便利离场，属公司层面安排、非交易所专门撮合机制",
+        "en": "No separate odd-lot market — any quantity may be traded on-market. A holder of a non-marketable parcel (< A$500) may exit via a company's non-marketable-parcel sale facility, an issuer-level arrangement rather than a dedicated exchange matching mechanism",
+        "detail": "「无独立碎股市场」为消极认定（未见 ASX 关于 odd-lot / special-lot 市场的规则）；非适销单位卖出便利见 board_lot_size 的 Marketable Parcel 定义与 ASX Listing Rules 的持股相关条款。",
+        "confidence": "medium",
         "sources": [
           {
             "title": "Cash market trading hours（ASX 官网）",
@@ -733,10 +735,8 @@
           }
         ],
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null
       },
       "price_limits": {

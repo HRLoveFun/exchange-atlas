@@ -457,13 +457,24 @@ market_structure:
     confidence: high
 
   board_lot_size:
-    zh: ""
-    confidence: low
-    detail: "本次抓取的技术文档未见“board lot/一手”这类整手交易单位的表述，SETS为完全电子化订单簿、以单股为基本交易单位，但未找到官方原文明确声明“无整手概念”，按铁律不主动断言，留空。"
+    zh: "无全市场统一的「整手」交易单位。SETS 订单簿以股数申报；最低订单规模（minimum order size）逐证券在 Business Parameters 文档中另行规定，非全市场统一门槛"
+    en: "No market-wide board-lot trading unit. The SETS order book is specified in number of shares; a per-instrument minimum order size is set in the Business Parameters document rather than as a uniform market-wide threshold"
+    detail: "「无全市场整手」为消极认定——MIT201《Guide to the Trading System》通篇无 board lot / round lot 概念，只有逐证券的 minimum order size 参数（定义在未抓取的 Business Parameters 文档）。"
+    sources:
+      - title: "MIT201 – Guide to the Trading System Issue 15.8（官网 PDF，§6.5 与订单参数章节）"
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf
+        accessed: 2026-08-14
+    confidence: medium
 
   odd_lot_handling:
-    zh: ""
-    confidence: low
+    zh: "无「碎股」概念——无全市场整手单位（见 board_lot_size），订单以股数申报，不存在不足一手的余额"
+    en: "No odd-lot concept — with no market-wide board lot (see board_lot_size), orders are in number of shares and there is no sub-lot remainder"
+    detail: "「无碎股概念」是「无全市场整手」的直接推论（MIT201《Guide to the Trading System》通篇无 board lot / odd lot 概念）。"
+    sources:
+      - title: "MIT201 – Guide to the Trading System Issue 15.8（官网 PDF）"
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf
+        accessed: 2026-08-14
+    confidence: medium
 
   price_limits:
     type:

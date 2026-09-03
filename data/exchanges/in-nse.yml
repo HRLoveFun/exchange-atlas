@@ -481,8 +481,14 @@ market_structure:
     confidence: medium
 
   board_lot_size:
-    zh: ""
-    confidence: low
+    zh: "现货（资本市场分部）Normal / Rolling 市场以 1 股为交易单位、无最低整手门槛；不足标准单位的实物股票余额在独立的 Odd Lot Market 处理（见 odd_lot_handling）"
+    en: "In the cash (Capital Market) segment, the Normal/Rolling market trades in units of one share with no minimum board-lot threshold; sub-standard-unit physical-share balances are handled in a separate Odd Lot Market (see odd_lot_handling)"
+    detail: "「Normal 市场 1 股为单位」为消极认定 + 与 Odd Lot Market 并存这一结构的推论——NSE 一手 nseindia.com 现货交易机制专页多为 JS 壳，本次抓到的 lot size 说明均属 F&O（衍生品）合约，非现货 board lot。Market Timings 页确认「Normal / Odd lot market」两个并行分段。"
+    sources:
+      - title: Market Timings（官网，列明 Normal Market 与 Odd Lot Market 分段）
+        url: https://www.nseindia.com/static/market-data/market-timings
+        accessed: 2026-08-14
+    confidence: medium
 
   odd_lot_handling:
     zh: "设有独立的'Odd Lot Market'交易时段（与Normal Market同时段09:15-15:30并行），碎股在此市场撮合"

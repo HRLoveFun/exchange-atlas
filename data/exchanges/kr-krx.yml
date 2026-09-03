@@ -416,8 +416,10 @@ market_structure:
     confidence: high
 
   odd_lot_handling:
-    zh: ""
-    confidence: low
+    zh: "无「碎股」概念——股票 / ETF / ETN 的最小交易单位即为 1 股（见 board_lot_size），不存在不足一手的余额"
+    en: "No odd-lot concept — the minimum trading unit for stocks/ETFs/ETNs is one share (see board_lot_size), so there is no sub-lot remainder"
+    detail: "「无碎股概念」是 board_lot_size（high，逐字 quote：『Stocks, ETFs, ETNs 1 share』）的直接推论。"
+    confidence: medium
 
   price_limits:
     type:

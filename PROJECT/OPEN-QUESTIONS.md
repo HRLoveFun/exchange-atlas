@@ -133,7 +133,6 @@
 - `fr-euronext` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
 - `fr-euronext` 市场结构与交易机制 / 大宗交易（block_trade）— confidence: low
 - `hk-hkex` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
-- `hk-hkex` 市场结构与交易机制 / 最小交易单位（board_lot_size）— confidence: low
 - `hk-hkex` 清算、结算与交割 / 交割方式（delivery_method）— confidence: low
 - `hk-hkex` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（trading_halt_mechanism）— confidence: low

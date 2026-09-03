@@ -365,6 +365,30 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "board_lot_size",
+      "label_zh": "最小交易单位",
+      "label_en": "Board Lot Size",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "au-asx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "odd_lot_handling",
+      "label_zh": "碎股处理",
+      "label_en": "Odd Lot Handling",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "au-asx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "price_limits.type",
       "label_zh": "类型",
       "label_en": "Type",
@@ -4064,6 +4088,18 @@
       "field_path": "board_lot_size",
       "label_zh": "最小交易单位",
       "label_en": "Board Lot Size",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "ch-six",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "odd_lot_handling",
+      "label_zh": "碎股处理",
+      "label_en": "Odd Lot Handling",
       "volatility": "moderate",
       "verified": "2026-08-16",
       "confidence": "medium"
@@ -8165,6 +8201,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "odd_lot_handling",
+      "label_zh": "碎股处理",
+      "label_en": "Odd Lot Handling",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "de-xetra",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "price_limits.type",
       "label_zh": "类型",
       "label_en": "Type",
@@ -9131,6 +9179,30 @@
       "volatility": "moderate",
       "verified": "2026-08-16",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "fr-euronext",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "board_lot_size",
+      "label_zh": "最小交易单位",
+      "label_en": "Board Lot Size",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "fr-euronext",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "odd_lot_handling",
+      "label_zh": "碎股处理",
+      "label_en": "Odd Lot Handling",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
     },
     {
       "exchange_id": "fr-euronext",
@@ -10378,7 +10450,19 @@
       "label_en": "Board Lot Size",
       "volatility": "moderate",
       "verified": "2026-08-12",
-      "confidence": "low"
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "hk-hkex",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "odd_lot_handling",
+      "label_zh": "碎股处理",
+      "label_en": "Odd Lot Handling",
+      "volatility": "moderate",
+      "verified": "2026-08-12",
+      "confidence": "high"
     },
     {
       "exchange_id": "hk-hkex",
@@ -11528,6 +11612,18 @@
       "field_path": "tick_size",
       "label_zh": "最小报价单位",
       "label_en": "Tick Size",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "in-nse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "board_lot_size",
+      "label_zh": "最小交易单位",
+      "label_en": "Board Lot Size",
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "medium"
@@ -12809,6 +12905,30 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "board_lot_size",
+      "label_zh": "最小交易单位",
+      "label_en": "Board Lot Size",
+      "volatility": "moderate",
+      "verified": "2026-08-13",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "odd_lot_handling",
+      "label_zh": "碎股处理",
+      "label_en": "Odd Lot Handling",
+      "volatility": "moderate",
+      "verified": "2026-08-13",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "price_limits.type",
       "label_zh": "类型",
       "label_en": "Type",
@@ -13739,6 +13859,18 @@
       "volatility": "moderate",
       "verified": "2026-08-16",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "kr-krx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "odd_lot_handling",
+      "label_zh": "碎股处理",
+      "label_en": "Odd Lot Handling",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
     },
     {
       "exchange_id": "kr-krx",
@@ -15059,6 +15191,30 @@
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "sa-tadawul",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "board_lot_size",
+      "label_zh": "最小交易单位",
+      "label_en": "Board Lot Size",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "sa-tadawul",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "odd_lot_handling",
+      "label_zh": "碎股处理",
+      "label_en": "Odd Lot Handling",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
     },
     {
       "exchange_id": "sa-tadawul",
@@ -18629,6 +18785,30 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "board_lot_size",
+      "label_zh": "最小交易单位",
+      "label_en": "Board Lot Size",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "uk-lse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "odd_lot_handling",
+      "label_zh": "碎股处理",
+      "label_en": "Odd Lot Handling",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "uk-lse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "price_limits.type",
       "label_zh": "类型",
       "label_en": "Type",
@@ -19532,6 +19712,30 @@
       "field_path": "tick_size",
       "label_zh": "最小报价单位",
       "label_en": "Tick Size",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "board_lot_size",
+      "label_zh": "最小交易单位",
+      "label_en": "Board Lot Size",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "odd_lot_handling",
+      "label_zh": "碎股处理",
+      "label_en": "Odd Lot Handling",
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "high"
@@ -20468,6 +20672,30 @@
       "field_path": "tick_size",
       "label_zh": "最小报价单位",
       "label_en": "Tick Size",
+      "volatility": "moderate",
+      "verified": "2026-08-13",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "board_lot_size",
+      "label_zh": "最小交易单位",
+      "label_en": "Board Lot Size",
+      "volatility": "moderate",
+      "verified": "2026-08-13",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "odd_lot_handling",
+      "label_zh": "碎股处理",
+      "label_en": "Odd Lot Handling",
       "volatility": "moderate",
       "verified": "2026-08-13",
       "confidence": "high"

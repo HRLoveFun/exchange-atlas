@@ -73,29 +73,29 @@
 ### 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
-共 1873 个已填字段，其中 0 个超过复核阈值待复核。
+共 1892 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
 |---|---|---|
-| `au-asx` | 110 | 0 |
+| `au-asx` | 112 | 0 |
 | `br-b3` | 111 | 0 |
 | `ca-tsx` | 87 | 0 |
-| `ch-six` | 88 | 0 |
+| `ch-six` | 89 | 0 |
 | `cn-sse` | 74 | 0 |
 | `cn-szse` | 109 | 0 |
 | `de-eurex` | 72 | 0 |
-| `de-xetra` | 83 | 0 |
-| `fr-euronext` | 105 | 0 |
-| `hk-hkex` | 94 | 0 |
-| `in-nse` | 105 | 0 |
-| `jp-jpx` | 77 | 0 |
-| `kr-krx` | 112 | 0 |
-| `sa-tadawul` | 108 | 0 |
+| `de-xetra` | 84 | 0 |
+| `fr-euronext` | 107 | 0 |
+| `hk-hkex` | 95 | 0 |
+| `in-nse` | 106 | 0 |
+| `jp-jpx` | 79 | 0 |
+| `kr-krx` | 113 | 0 |
+| `sa-tadawul` | 110 | 0 |
 | `sg-sgx` | 108 | 0 |
 | `tw-twse` | 83 | 0 |
-| `uk-lse` | 73 | 0 |
-| `us-nasdaq` | 80 | 0 |
-| `us-nyse` | 71 | 0 |
+| `uk-lse` | 75 | 0 |
+| `us-nasdaq` | 82 | 0 |
+| `us-nyse` | 73 | 0 |
 | `za-jse` | 123 | 0 |
 <!-- END:GENERATED health-summary -->
 
