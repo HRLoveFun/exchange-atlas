@@ -2144,6 +2144,174 @@
   }
 
   // ══════════════════════════════════════════════
+  // 监管图 Regulation Map（v2.0 Phase 3 第五棒，ADR-061）
+  //   第三章「监管与法律环境」8 字段的固定槽位「监管截面」单画布：
+  //     监管主体（regulator / self_regulatory_org / clearing_regulator）
+  //   → 法律基座 core_laws → 外资与资金（foreign_ownership_limit /
+  //     capital_controls）→ 透明与保护（disclosure_requirements /
+  //     investor_protection）。
+  //   本章 8 字段全为散文、无 spec 字段（[ADR-061] 轴 6），故 [ADR-035] D 的
+  //   诚实三态退化为「有值实心卡 / 未记录虚线框」两态；点卡片复用 openCellOverlay。
+  //   固定槽位：每个字段固定位置、跨 20 家不变，「换所即对比」。
+  // ══════════════════════════════════════════════
+  var RM_DEFAULT_EX = "sg-sgx";
+  function rmResolveId(params) {
+    var l = cache.manifest.exchanges;
+    if (l.some(function (e) { return e.id === params.id; })) return params.id;
+    return l.some(function (e) { return e.id === RM_DEFAULT_EX; }) ? RM_DEFAULT_EX : l[0].id;
+  }
+  // 折行：CJK 按字数、拉丁按单词，per 由可用像素反推（与 llWrap 同思路）
+  function rmWrap(text, innerW, maxLines) {
+    var per = /[一-鿿]/.test(text)
+      ? Math.max(6, Math.floor((innerW - 4) / 10.5))
+      : Math.max(10, Math.floor((innerW - 4) / 5.6));
+    return llWrap(text, per, maxLines);
+  }
+  // 三张监管机构卡 / 两张闸门卡 / 两张保护卡共用：有值 = 实心 + 左缘色条；
+  // 缺省 = 虚线框 + 居中「未记录」。卡整体走 openCellOverlay。
+  function rmEnvCard(id, R, path, x, y, w, h, keyColor) {
+    var env = R[path] || {};
+    var has = !!(env.zh || env.en);
+    var inner, titleTxt;
+    if (!has) {
+      inner = '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="' + w + '" height="' + h + '" rx="5" fill="none" stroke="var(--fg-faint)" stroke-dasharray="4 3"/>' +
+        '<text x="' + llN(x + w / 2) + '" y="' + llN(y + h / 2 + 3.5) + '" text-anchor="middle" class="rm-card-empty">' +
+        esc(t("未记录", "not recorded")) + "</text>";
+      titleTxt = t("此字段暂无数据（未记录）", "No data recorded for this field");
+    } else {
+      var text = dv(env) || "";
+      var lines = rmWrap(text, w, Math.max(1, Math.floor((h - 36) / 14)));
+      var bodyY = y + 36;
+      inner = '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="' + w + '" height="' + h + '" rx="5" fill="var(--bg-hover)" stroke="var(--border-strong)"/>' +
+        '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="3.5" height="' + h + '" fill="' + keyColor + '" rx="1.5"/>' +
+        '<text x="' + llN(x + 14) + '" y="' + llN(y + 19) + '" class="rm-card-k">' + esc(fieldLabel("regulation", path)) + "</text>" +
+        lines.map(function (ln, i) {
+          return '<text x="' + llN(x + 14) + '" y="' + llN(bodyY + i * 14) + '" class="rm-card-v">' + esc(ln) + "</text>";
+        }).join("");
+      titleTxt = (fieldLabel("regulation", path) + " · ") + (text.length > 200 ? text.slice(0, 200) + "…" : text);
+    }
+    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
+      '" data-chapter="regulation">' + "<title>" + esc(titleTxt) + "</title>" + inner + "</g>";
+  }
+  // 法律基座：core_laws 满宽一条，暖色（--warn）作整图底座
+  function rmLawStrip(id, R, path, x, y, w, h) {
+    var env = R[path] || {};
+    var has = !!(env.zh || env.en);
+    var inner, titleTxt;
+    if (!has) {
+      inner = '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="' + w + '" height="' + h + '" rx="5" fill="none" stroke="var(--fg-faint)" stroke-dasharray="4 3"/>' +
+        '<text x="' + llN(x + w / 2) + '" y="' + llN(y + h / 2 + 3.5) + '" text-anchor="middle" class="rm-card-empty">' +
+        esc(t("未记录", "not recorded")) + "</text>";
+      titleTxt = t("核心法律法规体系（未记录）", "Core laws — no data recorded");
+    } else {
+      var text = dv(env) || "";
+      var lines = rmWrap(text, w, 2);
+      inner = '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="' + w + '" height="' + h + '" rx="5" fill="var(--warn-soft)" stroke="var(--warn)"/>' +
+        '<text x="' + llN(x + 14) + '" y="' + llN(y + 19) + '" class="rm-law-k">' + esc(fieldLabel("regulation", path)) + "</text>" +
+        lines.map(function (ln, i) {
+          return '<text x="' + llN(x + 14) + '" y="' + llN(y + 37 + i * 15) + '" class="rm-law-v">' + esc(ln) + "</text>";
+        }).join("");
+      titleTxt = (fieldLabel("regulation", path) + " · ") + (text.length > 200 ? text.slice(0, 200) + "…" : text);
+    }
+    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
+      '" data-chapter="regulation">' + "<title>" + esc(titleTxt) + "</title>" + inner + "</g>";
+  }
+  // 左槽 lane label（主 + 副，随语言开关）
+  function rmLaneLabel(x, y, main, sub) {
+    return '<text x="' + (x - 16) + '" y="' + llN(y) + '" text-anchor="end" class="rm-lane-l">' + esc(t(main.zh, main.en)) + "</text>" +
+      '<text x="' + (x - 16) + '" y="' + llN(y + 13) + '" text-anchor="end" class="rm-lane-s">' + esc(t(sub.zh, sub.en)) + "</text>";
+  }
+
+  function rmLegend() {
+    return '<div class="td-legend rm-legend">' +
+      '<span><i class="rm-lg-solid"></i>' + t("已填事实", "Filled fact") + "</span>" +
+      '<span><i class="rm-lg-dash"></i>' + t("未记录（真实数据缺口）", "Not recorded (genuine data gap)") + "</span>" +
+      '<span><i class="rm-lg-key" style="background:var(--info)"></i>' + t("监管主体 · 透明保护", "regulators · disclosure/protection") + "</span>" +
+      '<span><i class="rm-lg-key" style="background:var(--accent)"></i>' + t("外资与资金闸门", "foreign access & capital gates") + "</span>" +
+      '<span><i class="rm-lg-key" style="background:var(--warn)"></i>' + t("法律基座", "legal basis") + "</span>" +
+      "</div>";
+  }
+  function rmProse() {
+    return '<div class="td-prose">' + t(
+      '本视图把第三章《监管与法律环境》八个字段压进一屏固定槽位（见 ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-061</a>）。' +
+      '自上而下四层 = 交易员接触陌生市场时的一阶问题：谁在管（监管主体）、依什么法（法律基座）、钱怎么进出（外资与资金）、信息透不透明 / 出事赔不赔（透明与保护）。' +
+      '槽位固定：同一字段在 20 家交易所位于同一位置，「换所即对比」。本章八个字段全为散文（机构名 / 法名 / 制度描述），无 spec 层——' +
+      '<strong>虚线框 = 数据真缺口</strong>（多数在「数据空缺复核轨」[ADR-060] 轨道上），不是渲染问题；点任意卡片看全文与出处。' +
+      '规则以各交易所官方发布为准，不构成投资建议。',
+      'This view condenses the eight fields of Chapter 3 (“Regulation &amp; Legal Environment”) into one fixed-slot canvas (see ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-061</a>). ' +
+      'Top-to-bottom the four lanes answer a trader\'s first-order questions about a new market: who regulates (regulators), under what law (legal basis), ' +
+      'how money moves in and out (foreign access &amp; capital), and how transparent / protected the market is (disclosure &amp; protection). ' +
+      'Slots are fixed, so the same field sits in the same place across all twenty exchanges. All eight fields are prose (institutions, laws, rule descriptions) with no spec layer — ' +
+      '<strong>a dashed box is a genuine data gap</strong> (most sit on the “data-gap track”, ADR-060), not a rendering problem; click any card for the full text and its sources. ' +
+      'Rules are as officially published by each exchange; nothing here is investment advice.') + "</div>";
+  }
+  function rmBuild(id, data) {
+    var R = (data.chapters && data.chapters.regulation) || {};
+    var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
+    var W = 1180, PL = 150, PR = 44;
+    var g = [];
+    g.push('<text x="18" y="28" class="rm-title">' + esc(exName) + esc(t(" · 监管图", " · Regulation Map")) + "</text>");
+
+    // 四层纵向槽位（y 固定，不随内容伸缩）
+    var rowA = { top: 74, h: 100 };
+    var rowB = { top: 200, h: 58 };
+    var rowC = { top: 282, h: 100 };
+    var rowD = { top: 406, h: 96 };
+    var H = rowD.top + rowD.h + 12;
+    var cardX1 = PL, cardW3 = Math.floor((W - PR - PL - 48) / 3), gap3 = 24;
+    var cardW2 = 480, gap2 = 26;
+
+    // ── 监管主体（谁在管）──
+    g.push(rmLaneLabel(PL, rowA.top + 18, { zh: "监管主体", en: "Who regulates" }, { zh: "政府 · 自律 · 清算", en: "govt · SRO · clearing" }));
+    ["regulator", "self_regulatory_org", "clearing_regulator"].forEach(function (p, i) {
+      g.push(rmEnvCard(id, R, p, cardX1 + i * (cardW3 + gap3), rowA.top, cardW3, rowA.h, "var(--info)"));
+    });
+
+    // ── 法律基座（依什么法）──
+    g.push(rmLaneLabel(PL, rowB.top + 18, { zh: "法律基座", en: "Legal basis" }, { zh: "核心法律法规", en: "core laws" }));
+    g.push(rmLawStrip(id, R, "core_laws", PL, rowB.top, W - PR - PL, rowB.h));
+
+    // ── 外资与资金（钱怎么进出）──
+    g.push(rmLaneLabel(PL, rowC.top + 18, { zh: "外资与资金", en: "Foreign access" }, { zh: "进得来？出得去？", en: "capital in · out?" }));
+    ["foreign_ownership_limit", "capital_controls"].forEach(function (p, i) {
+      g.push(rmEnvCard(id, R, p, cardX1 + i * (cardW2 + gap2), rowC.top, cardW2, rowC.h, "var(--accent)"));
+    });
+
+    // ── 透明与保护 ──
+    g.push(rmLaneLabel(PL, rowD.top + 18, { zh: "透明与保护", en: "Transparency" }, { zh: "披露 · 赔付", en: "disclosure · safety" }));
+    ["disclosure_requirements", "investor_protection"].forEach(function (p, i) {
+      g.push(rmEnvCard(id, R, p, cardX1 + i * (cardW2 + gap2), rowD.top, cardW2, rowD.h, "var(--info)"));
+    });
+
+    var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + " " + llN(H) + '" class="td-svg rm-svg" role="img" aria-label="' +
+      esc(exName) + esc(t(" 监管图", " regulation map")) + '">' + g.join("") + "</svg></div>";
+    return rmLegend() + svg + rmProse();
+  }
+  function renderRegulationMap(app, params) {
+    var list = cache.manifest.exchanges;
+    var id = rmResolveId(params);
+    var toolbar = '<div class="view-toolbar">' +
+      '<label for="rmExchange">市场 Market</label>' +
+      '<select id="rmExchange" data-role="rm-exchange">' +
+      list.map(function (e) {
+        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
+      }).join("") + "</select>" +
+      '<span class="td-tb-note">' + t("第三章 8 字段固定槽位：谁在管 · 依什么法 · 外资与资金 · 透明与保护 —— 点任意卡片看全文与出处",
+        "Chapter 3, 8 fixed slots: who regulates · legal basis · access & capital · disclosure & protection — click any card for full text and sources") + "</span>" +
+      "</div>";
+    app.innerHTML = toolbar + '<div class="loading">' + t("加载监管图中…", "Loading regulation map…") + "</div>";
+    return loadExchange(id).then(function (data) {
+      var cur = parseHash();
+      if ((cur.view && cur.view !== "regulation-map") || rmResolveId(cur) !== id) return;
+      app.innerHTML = toolbar + rmBuild(id, data);
+    }).catch(function (e) {
+      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
+    });
+  }
+
+  // ══════════════════════════════════════════════
   // 出处浮层
   // ══════════════════════════════════════════════
   function openCellOverlay(exchangeId, fieldPath, chapterId) {
@@ -2277,6 +2445,7 @@
     else if (view === "cost-waterfall") renderCostWaterfall(app, params);
     else if (view === "settlement-pipeline") renderSettlementPipeline(app, params);
     else if (view === "listing-lifecycle") renderListingLifecycle(app, params);
+    else if (view === "regulation-map") renderRegulationMap(app, params);
     else renderTradingDay(app, params);
   }
 
@@ -2340,6 +2509,8 @@
       setHash({ view: "settlement-pipeline", id: e.target.value });
     } else if (role === "ll-exchange") {
       setHash({ view: "listing-lifecycle", id: e.target.value });
+    } else if (role === "rm-exchange") {
+      setHash({ view: "regulation-map", id: e.target.value });
     }
   });
   document.addEventListener("keydown", function (e) {
