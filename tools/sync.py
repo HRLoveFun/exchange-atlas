@@ -97,7 +97,12 @@ def walk_chapter_fields(fields, prefix=()):
 # ── 信封展开 ──────────────────────────────────────────────
 
 def expand_field(raw, chapter_meta):
-    """裸字符串/数字 -> 只有 zh 的信封；dict -> 补齐继承字段。raw 为 None 时返回 None（缺失）。"""
+    """裸字符串/数字 -> 只有 zh 的信封；dict -> 补齐继承字段。raw 为 None 时返回 None（缺失）。
+
+    dict 信封里的非信封键（如字段级 `not_applicable: true`，[ADR-060]）原样透传——
+    env = dict(raw) 保留全部键，下面只做缺省补齐、不裁剪。前端据此渲染「本所此字段
+    设计前提不适用」灰条（与章节级 _meta.not_applicable 同构，见 [ADR-059]/[ADR-060]）。
+    """
     if raw is None:
         return None
     if isinstance(raw, dict):
@@ -191,6 +196,10 @@ def compute_freshness(exchange_id, taxonomy, expanded_chapters, raw_chapters=Non
                 continue
             env = get_by_path(expanded_chapters[ch["id"]], path)
             if not env or not env.get("zh"):
+                continue
+            # 字段级 not_applicable（data 侧）不产 freshness 行——该字段本所不适用，
+            # 不是"已填待复核"的事实；空 optional leaf 因无 zh 已在上面被跳过（[ADR-060]）。
+            if env.get("not_applicable") is True:
                 continue
             vol = fdef.get("volatility", "moderate")
             threshold_days = VOLATILITY_MONTHS.get(vol, 12) * 30
@@ -333,13 +342,20 @@ def compute_trading_window(exchange_id, expanded_chapters):
 
 
 def count_chapter_leaves(fields, expanded, prefix=()):
-    """递归统计一组字段的 (total, filled, low_conf)，按分组识别 `optional` 标记。
+    """递归统计一组字段的 (total, filled, low_conf)，识别 `optional`（分组级与 leaf 级）
+    与 `not_applicable`（字段级，data 侧）三种豁免。
 
-    标了 `optional: true` 的分组字段（如 market_structure.derivatives）若组内一个
-    字段都没填，整组不计入分母——这类字段仅对部分交易所适用（见该字段在 taxonomy.yml
-    里的 note），不适用时留空是正确状态，不该被当成"没填完"拖累其余字段都已填好的
-    交易所的完成度。一旦组内至少有一个字段被填（说明该所确实用到这条产品线/机制），
-    则整组正常计入分母，要求填完整——不是永久豁免，只豁免"完全未启用"的情况。
+    1. 分组级 `optional: true`（如 market_structure.derivatives）：组内一个字段都没填时，
+       整组不计入分母——这类字段仅对部分交易所适用（见该字段在 taxonomy.yml 里的 note），
+       不适用时留空是正确状态，不该被当成"没填完"拖累其余字段都已填好的交易所的完成度。
+       一旦组内至少有一个字段被填（说明该所确实用到这条产品线/机制），则整组正常计入分母，
+       要求填完整——不是永久豁免，只豁免"完全未启用"的情况。
+    2. leaf 级 `optional: true`（[ADR-060] A 桶，如 overview 的市值/成交额等 volatile
+       市场结果快照字段）：语义同分组级——「填了算数、空着不算缺口」。字段标了 optional
+       且未填（无 zh）时不加 total；已填则正常计入（total/filled 都加，仍要求 confidence）。
+    3. 字段级 `not_applicable: true`（data 侧信封标记，见 expand_field 透传）：语义比
+       optional 强——「本所该字段的设计前提不成立」（如纯现货所无衍生品保证金概念）。
+       整字段跳过，不计 total/filled。
     """
     total = filled = low_conf = 0
     for f in fields or []:
@@ -354,8 +370,12 @@ def count_chapter_leaves(fields, expanded, prefix=()):
             filled += sub_filled
             low_conf += sub_low
         else:
-            total += 1
             env = get_by_path(expanded, path)
+            if env and env.get("not_applicable") is True:
+                continue  # 字段级 not_applicable：本所此字段设计前提不成立，整字段豁免
+            if f.get("optional") and not (env and env.get("zh")):
+                continue  # leaf 级 optional 且未填：空不算缺口（[ADR-060]）
+            total += 1
             if env and env.get("zh"):
                 filled += 1
                 if env.get("confidence") == "low":

@@ -75,6 +75,28 @@ def warn(msg):
     warnings.append(msg)
 
 
+def field_na_violations(loc, fenv, fdef_optional):
+    """字段级 not_applicable 标记的两条不变式（[ADR-060] 任务一实装）。返回违规消息列表
+    （空 = 合法），供 validate_data 与正负向探针共用同一判定逻辑：
+
+      1. 标 not_applicable: true 的字段不得再有 zh——与 only_spot 章节级同构（[ADR-059]），
+         "不适用" = 干净空，占位散文应清掉（若某字段既标 N/A 又留 zh，两套信号打架）。
+      2. 同一字段不得同时带 taxonomy 侧 leaf `optional` 与 data 侧 `not_applicable`——
+         前者语义"空不算缺口、可回填"（A 桶 overview 指标），后者"本所设计前提不成立"
+         （B/D 桶），一个字段同时标两层是模型混乱，改标一层。
+    """
+    out = []
+    if fenv.get("not_applicable") is not True:
+        return out
+    if fenv.get("zh"):
+        out.append(f"{loc}: 字段标了 not_applicable: true 但仍带 zh——N/A 字段应清空占位内容"
+                    f"（[ADR-060]）")
+    if fdef_optional:
+        out.append(f"{loc}: taxonomy 侧 leaf 已标 optional: true，data 侧又标 not_applicable——"
+                    f"两层标记不同时生效（[ADR-060]）")
+    return out
+
+
 # ── 数值反查复用工具（CLAUDE.md 二.5）─────────────────────────
 # A1 (2026-08) 抽出来给两处共用：散文 zh/en 与结构化 spec 值。sync/verify_quotes
 # 各有自己的文本规范化，这里只管"从一段文本里抠出可比对的数字集合"。
@@ -305,6 +327,21 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                     if fenv and fenv.get("zh"):
                         err(f"{eid}: 章节 `{ch_id}` 标了 not_applicable，但 `{'.'.join(path)}` 仍有 zh "
                             f"——不适用的章节应清掉占位字段（[ADR-059]）")
+
+        # 字段级 not_applicable 标记（[ADR-060] 任务一实装，leaf 级下沉）：判定逻辑在
+        # field_na_violations()（独立纯函数，便于正负向探针复用），这里只负责收集违规。
+        for ch in taxonomy["chapters"]:
+            if ch.get("kind") == "list":
+                continue
+            for kind, path, fdef in sync.walk_chapter_fields(ch.get("fields", [])):
+                if kind != "leaf":
+                    continue
+                fenv = sync.get_by_path(ex["chapters"][ch["id"]], path)
+                if not fenv:
+                    continue
+                loc = f"{eid}: {ch['id']}.{'.'.join(path)}"
+                for v in field_na_violations(loc, fenv, fdef.get("optional")):
+                    err(v)
 
         # 结构校验
         try:

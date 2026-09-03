@@ -129,22 +129,33 @@ chapters:
         volatility: moderate
         enum_ref: yes_no
         in_matrix: overview
+      # A 桶「幽灵缺口」（[ADR-060]，2026-09-03 用户拍板）：market_cap_usd_bn /
+      # listed_companies_count / annual_turnover_usd_bn / global_ranking 四个字段是
+      # volatility: volatile 的市场运行结果快照，不驱动任何可视化，全库仅 5/4/4/5 家有值，
+      # 其余留空是「美元硬口径 + volatile 无止境维护」的既有决定，不是待回填缺口。
+      # `optional: true`（leaf 级，见 tools/sync.py count_chapter_leaves）表示「填了算数、
+      # 空着不算缺口」：空不计入 chapter_status 完成度分母、不产 freshness 行，已填的保留
+      # 正常计入并要求 confidence（ADR-060 决策点 1 = 搁置，不改字段名、不接汇率换算展示层）。
       - id: market_cap_usd_bn
         label_zh: 总市值（十亿美元）
         label_en: Market Cap (USD bn)
         volatility: volatile
+        optional: true
       - id: listed_companies_count
         label_zh: 上市公司数量
         label_en: Listed Companies
         volatility: volatile
+        optional: true
       - id: annual_turnover_usd_bn
         label_zh: 年成交额（十亿美元）
         label_en: Annual Turnover (USD bn)
         volatility: volatile
+        optional: true
       - id: global_ranking
         label_zh: 全球排名
         label_en: Global Ranking
         volatility: volatile
+        optional: true
         note: "如「全球股票市值第X」，写在 detail，字段填简短摘要"
       - id: trading_currency
         label_zh: 交易货币

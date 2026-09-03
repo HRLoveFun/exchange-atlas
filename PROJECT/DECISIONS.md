@@ -1437,3 +1437,27 @@
 - **验证**：`make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK）；Chrome headless 核对 `sg-sgx`（EN + 暗色）/ `fr-euronext`（中文 + 亮色，多辖区长文 + 2 空白）/ `hk-hkex`（中文，闸门区 2 空白 + 保护层 1 空白）——四层槽位对齐、虚线 / 实心差异可见、卡头随语言切换正确、其余视图无回归。**已知局限**：① 卡片正文按卡高硬裁剪 ≤ 4 行（全文在 `<title>` + 浮层；长文卡「先摘要后全文」散文精修属数据层活，不进渲染层）；② 空白虚线卡点击后浮层无正文（部分空白带 `detail` 草稿注记，en 态走 `zhNoteBlock` 折叠）；③ 槽位 y 坐标固定使全 20 家图高一致、空白多的市场纵向留白一致（诚实呈现，非 bug）。
 
 **渲染层日期：** 2026-09-03
+
+### ADR-062 — 数据空缺复核轨任务一实装：leaf 级 `optional` / 字段级 `not_applicable` 机制 + A 桶标注；B/D 桶勘误回 F
+
+**背景：** [ADR-060]（2026-09-03）把任务一定为"A 桶 4 字段标 `optional`、B+D 桶 60 处标 `not_applicable`、清 ≈ 116 处结构性幽灵缺口"。实装前逐所核对 `data/` 现状，发现 **B/D 桶的"不适用"前提不成立**，需要勘误后再落地。
+
+**B/D 桶勘误（用户拍板，2026-09-03）：** 原六桶分类把 60 处空缺按字段名粗分为"现货所 `clearing` 保证金四字段不适用"（B 50）与"单层板块所无转板"（D 10），但逐所核对后：
+
+- **B 桶**：空缺所的现货市场几乎都已被证实存在对应机制——`au-asx` 现货由 ASX Clear（现金市场 CCP）清算（其 `default_management` 首层即"参与人缴存的保证金"）、`us-nyse`/`us-nasdaq` 有 NSCC Required Fund Deposit、`uk-lse`/`fr-euronext` 走 LCH EquityClear、`de-xetra` Eurex Clearing 承担 CCP 职能、`ca-tsx` 现货由 CDS 清算、`cn-sse`/`cn-szse`/`tw-twse` 交易所层面融资融券、`jp-jpx`/`kr-krx` 有信用取引/信用거래。这些是**可回填的真实研究缺口**（`tw-twse` 已按此先例填了 `initial_margin_practice`/`maintenance_margin_practice`），标 `not_applicable` 会写入"本所无此机制"的假断言。
+- **D 桶**：`listing.transfer_between_boards` 空缺的 10 家（`br-b3`/`ch-six`/`cn-sse`/`cn-szse`/`hk-hkex`/`jp-jpx`/`sg-sgx`/`uk-lse`/`us-nasdaq`/`us-nyse`）几乎全是多板块结构且转板机制真实存在（`hk-hkex` GEM→主板、`jp-jpx` Prime/Standard/Growth、`sg-sgx` Catalist→Mainboard、`us-nasdaq` 三档、`uk-lse` AIM→Main…），现有 detail 也自述"未核实留空"——是研究缺口而非结构不适用。
+- **结论**：B+D 桶整体回 F 桶（真实研究缺口，并入任务二/四回填），任务一**不标任何字段级 `not_applicable`**；该机制仍落地（代码 + 校验器 + 探针），留待真正"本所设计前提不成立"的场景（现有唯一先例是 [ADR-059] 的章节级 `only_spot`）。结构性幽灵缺口实为 A 桶 58 处 + [ADR-059] 已落地的 de-eurex 章节级 9 处。
+
+**定了什么（任务一实装）：**
+
+1. **A 桶 = leaf 级 `optional`（taxonomy 侧）**：`schema/taxonomy.yml` 的 `overview.market_cap_usd_bn` / `listed_companies_count` / `annual_turnover_usd_bn` / `global_ranking` 四个 `volatility: volatile` 市场结果快照字段标 `optional: true`。语义同 [ADR-020] 的分组级 `optional`：填了算数、空着不算缺口——空不计入 `chapter_status()` 完成度分母、不产 freshness 行；已填正常计入并要求 confidence。
+2. **`tools/sync.py` 机制扩展**：
+ - `count_chapter_leaves()` 把分组级 `optional` 的识别扩展到 leaf；新增字段级 `not_applicable`（data 侧信封标记）整字段跳过。
+ - `compute_freshness()` 跳过字段级 `not_applicable`（空 optional leaf 因无 zh 本就不产行）。
+ - `expand_field()` 透传信封中的 `not_applicable`（dict 原样保留，不裁剪），前端可据此渲染"本所不适用"信号。
+3. **`tools/validate.py` 两条新不变式（机器化）**：抽 `field_na_violations()` 纯函数（便于正负向探针），对每个标 `not_applicable: true` 的字段信封：① 不得再有 `zh`（N/A = 干净空，与 [ADR-059] 章节级同构）；② 同一字段不得同时带 taxonomy 侧 leaf `optional` 与 data 侧 `not_applicable`（两层语义不同，[ADR-060] 决策点 2）。正负向探针通过。
+4. **不改** `data/exchanges/*.yml`（B/D 回 F，无 N/A 落地）、不改前端（`not_applicable` 渲染留到真正使用时按 [ADR-059] 的 `_meta` 先例做）。
+
+**验证：** `make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK）、`make sync` 二次幂等。生成块变动仅 `progress-matrix` 第 2 列 12 家 🟡→✅（`au-asx`/`ca-tsx`/`cn-szse`/`de-eurex`/`de-xetra`/`jp-jpx`/`kr-krx`/`sg-sgx`/`tw-twse`/`uk-lse`/`us-nasdaq`/`us-nyse` 的 overview 章随 A 桶 optional 分母缩小到 ✅）；`health-summary` 无变化（optional 只改完成度分母，freshness 行只计已填字段，B/D 未落地 N/A）——比 [ADR-060] 预期的"health 分母减"窄，属勘误后的正确预期。未动 `quote` / 已填 `zh`。
+
+**日期：** 2026-09-03
