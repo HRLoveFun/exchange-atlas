@@ -97,6 +97,30 @@ def field_na_violations(loc, fenv, fdef_optional):
     return out
 
 
+def chapter_na_violations(loc, ch_id, meta_not_applicable, is_only_spot, zh_leaf_paths):
+    """章节级 not_applicable 标记的两条不变式（[ADR-036] #5 / [ADR-059]）。返回违规消息列表
+    （空 = 合法），供 validate_data 与 tools/selfcheck.py 共用同一判定——判定纯逻辑、无 I/O：
+
+      1. `_meta.not_applicable: true` 只允许出现在 taxonomy 里标了 `only_spot: true` 的章节。
+      2. 被标不适用的章节里不允许再留带 zh 的 leaf 字段（占位散文是标记落地前的临时办法，
+         落地后应清掉——保持"不适用 = 干净空"，与 field_na_violations 第 1 条同构）。
+
+    参数 zh_leaf_paths：该章展开后仍带 zh 的 leaf 路径（点分字符串）列表——调用方先算好传进来。
+    非 only_spot 章直接命中不变式 1、不再看 leaf（调用方此时传空列表即可）。
+    """
+    out = []
+    if meta_not_applicable is not True:
+        return out
+    if not is_only_spot:
+        out.append(f"{loc}: 章节 `{ch_id}` 标了 _meta.not_applicable，但 taxonomy 里它没有 "
+                   f"only_spot: true（not_applicable 只用于 only_spot 章，见 [ADR-059]）")
+        return out
+    for p in zh_leaf_paths:
+        out.append(f"{loc}: 章节 `{ch_id}` 标了 not_applicable，但 `{p}` 仍有 zh "
+                   f"——不适用的章节应清掉占位字段（[ADR-059]）")
+    return out
+
+
 # ── 数值反查复用工具（CLAUDE.md 二.5）─────────────────────────
 # A1 (2026-08) 抽出来给两处共用：散文 zh/en 与结构化 spec 值。sync/verify_quotes
 # 各有自己的文本规范化，这里只管"从一段文本里抠出可比对的数字集合"。
@@ -305,28 +329,27 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
         # 5c 文件级反查池：本交易所所有字段的 quote / zh（[ADR-058] 收尾修订）
         verbatim_pool = collect_verbatim_texts(ex)
 
-        # only_spot 章节级不适用标记（[ADR-036] #5 / [ADR-059]）：
-        #   _meta.not_applicable: true 只允许出现在 taxonomy 里标了 only_spot 的章节；
-        #   被标不适用的章节里不允许再留带 zh 的 leaf 字段（占位散文是标记落地前的
-        #   临时办法，落地后应清掉——保持"不适用 = 干净空"）。
+        # only_spot 章节级不适用标记（[ADR-036] #5 / [ADR-059]）：判定逻辑在
+        # chapter_na_violations()（独立纯函数，tools/selfcheck.py 合成用例复用），
+        # 这里只把该章展开后仍带 zh 的 leaf 路径算好、收集违规。
         for ch_id, raw_ch in raw.items():
             if not isinstance(raw_ch, dict):
                 continue
-            if ((raw_ch.get("_meta") or {}).get("not_applicable")) is not True:
+            meta_na = (raw_ch.get("_meta") or {}).get("not_applicable")
+            if meta_na is not True:
                 continue
-            if ch_id not in only_spot_chapters:
-                err(f"{eid}: 章节 `{ch_id}` 标了 _meta.not_applicable，但 taxonomy 里它没有 "
-                    f"only_spot: true（not_applicable 只用于 only_spot 章，见 [ADR-059]）")
-                continue
+            is_only_spot = ch_id in only_spot_chapters
             ch_def = chapter_by_id.get(ch_id)
-            if ch_def and ch_def.get("kind") != "list":
+            zh_leaf_paths = []
+            if is_only_spot and ch_def and ch_def.get("kind") != "list":
                 for kind, path, _fdef in sync.walk_chapter_fields(ch_def.get("fields", [])):
                     if kind != "leaf":
                         continue
                     fenv = sync.get_by_path(ex["chapters"][ch_id], path)
                     if fenv and fenv.get("zh"):
-                        err(f"{eid}: 章节 `{ch_id}` 标了 not_applicable，但 `{'.'.join(path)}` 仍有 zh "
-                            f"——不适用的章节应清掉占位字段（[ADR-059]）")
+                        zh_leaf_paths.append(".".join(path))
+            for v in chapter_na_violations(eid, ch_id, meta_na, is_only_spot, zh_leaf_paths):
+                err(v)
 
         # 字段级 not_applicable 标记（[ADR-060] 任务一实装，leaf 级下沉）：判定逻辑在
         # field_na_violations()（独立纯函数，便于正负向探针复用），这里只负责收集违规。

@@ -13,6 +13,7 @@ sync: ## 重生成所有 GENERATED 文档块 + docs/data/ 构建产物（幂等�
 	python3 tools/sync.py
 
 check: ## 一致性 + 生成块新鲜度 + quote 支持性等全部校验
+	python3 tools/selfcheck.py
 	python3 tools/validate.py
 	python3 tools/verify_quotes.py
 	python3 tools/check_ui_i18n.py

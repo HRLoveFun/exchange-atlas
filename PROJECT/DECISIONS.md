@@ -1438,6 +1438,12 @@
 
 **渲染层日期：** 2026-09-03
 
+---
+
+**视觉修订（2026-09-03，接审查反馈）** — 审查方对长文所（`cn-sse` / `za-jse` / `uk-lse` / `hk-hkex` / `sa-tadawul`）× 亮暗做 headless + SVG 几何实测（`<g data-path>` 的 `<rect>` 右沿 vs 卡内 `<text>` 行右端）：**卡内密排 CJK 长行越过卡片右沿约 6px**。根因 `rmWrap(text, w, …)` 传的 `innerW` 是整卡宽，正文实际从 `x+14` 起排、右侧还要留白，而 `per` 只扣了 4px。修：`rmWrap` 改扣 24px（14 左内边距 + 10 右内边距），`per` 43/27（cardW2/cardW3）。修后几何复测每卡右侧余量 ≥14px、纵向本就无裁剪（末行 y 远在卡底之上）。纯前端一处、`data/` 与 `docs/data/` 零 diff。**未修**：中英混排时 Latin 词 / 数字被 `llWrap` 的 CJK 逐字切分从中间断开（`Recognis|ed`、`20|26年`）——与 `renderListingLifecycle` 共用 `llWrap` 的既有局限，改需两模块一起上更聪明的混排折行，超出本次范围，记 [ADR-061] 已知局限④。设计七轴（四层固定槽位 / 暖色法律基座 / 诚实两态）经审查确认，不回滚。
+
+**视觉修订日期：** 2026-09-03
+
 ### ADR-062 — 数据空缺复核轨任务一实装：leaf 级 `optional` / 字段级 `not_applicable` 机制 + A 桶标注；B/D 桶勘误回 F
 
 **背景：** [ADR-060]（2026-09-03）把任务一定为"A 桶 4 字段标 `optional`、B+D 桶 60 处标 `not_applicable`、清 ≈ 116 处结构性幽灵缺口"。实装前逐所核对 `data/` 现状，发现 **B/D 桶的"不适用"前提不成立**，需要勘误后再落地。
@@ -1459,5 +1465,27 @@
 4. **不改** `data/exchanges/*.yml`（B/D 回 F，无 N/A 落地）、不改前端（`not_applicable` 渲染留到真正使用时按 [ADR-059] 的 `_meta` 先例做）。
 
 **验证：** `make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK）、`make sync` 二次幂等。生成块变动仅 `progress-matrix` 第 2 列 12 家 🟡→✅（`au-asx`/`ca-tsx`/`cn-szse`/`de-eurex`/`de-xetra`/`jp-jpx`/`kr-krx`/`sg-sgx`/`tw-twse`/`uk-lse`/`us-nasdaq`/`us-nyse` 的 overview 章随 A 桶 optional 分母缩小到 ✅）；`health-summary` 无变化（optional 只改完成度分母，freshness 行只计已填字段，B/D 未落地 N/A）——比 [ADR-060] 预期的"health 分母减"窄，属勘误后的正确预期。未动 `quote` / 已填 `zh`。
+
+**日期：** 2026-09-03
+
+---
+
+### ADR-063 — 不变式纯函数的合成用例自检：`tools/selfcheck.py` 接入 `make check`
+
+**背景：** [ADR-059] 章节级 `not_applicable`、[ADR-062] 字段级 `not_applicable` 与 leaf/分组级 `optional` 完成度豁免，判定逻辑都抽成了纯函数（`chapter_na_violations` / `field_na_violations` / `count_chapter_leaves` / `chapter_is_not_applicable`），落地时各跑一次"正负向探针"就丢。审查（2026-09-03）指出：B/D 桶勘误回 F 后**全库无一处真实 `not_applicable`**，`validate.py` 里这两条检查跑不到自己的核心分支，`field_na_violations` 若回归，首次真正使用前无人拦。[CLAUDE.md §四] 要求"新引入的不变式已加机器校验"——检查本身加了，但探针不入库 = 覆盖不可重复。
+
+**定了什么：**
+
+1. **新增 `tools/selfcheck.py`（stdlib，无 pytest）** —— 把那批探针固化成 `(name, got, want)` 用例表，喂**合成输入**锁住纯函数在"当前无真实数据触发"分支上的行为。当前 24 条：`field_na_violations` 6（含 YAML 字符串 `"true"` 不触发的兜底）、`chapter_na_violations` 6、`count_chapter_leaves` 8（普通 / leaf `optional` 空与非空 / 字段级 `not_applicable` / 分组 `optional` 空与非空——[ADR-020] 回归护栏）、`chapter_is_not_applicable` 4。失配 → 打印 `got`/`want` + 退出码 1。
+2. **接入 `make check`**，排在 `validate.py` 前（最快、纯逻辑、不读 `data/`）。
+3. **`validate.py` 抽 `chapter_na_violations()` 纯函数** —— [ADR-059] 的章节级判定此前内联在 `validate_data` 里，抽出来与 `field_na_violations` 对齐（调用方先算好"该章展开后仍带 zh 的 leaf 路径"再传进来，函数无 I/O），`selfcheck.py` 才能复用同一判定。内联调用点行为等价。
+
+**为什么不上 pytest（用户 2026-09-03 明确）：** 项目此前无 `tests/`、无测试依赖，`make check` 已是"stdlib 脚本挨个跑"的形态。为几个纯函数引一套 pytest + 目录约定 + 依赖，比问题本身重。`selfcheck.py` 与 `check_ui_i18n.py` / `check_en_terms.py` 同形态——一个自带用例、`sys.exit` 表态、`make check` 串起来的脚本。
+
+**边界：** `selfcheck.py` 只测**判定纯函数**，不测 `validate.py` 对真实 `data/` 的扫描（那是 `validate.py` 自己的职责，跑真数据）。真实数据一旦用上 `not_applicable`（未来 B/D 之外真有"设计前提不成立"的字段 / 章节），`validate.py` 的真数据校验自然接管，`selfcheck.py` 仍守合成边界用例。
+
+**今后：** 新增或改动一条不变式纯函数时，在 `selfcheck.py` 补对应正负向用例——和写 `validate.py` 检查是同一个动作（[CLAUDE.md §四] 的操作化落点）。
+
+**验证：** `make build` 全绿（`selfcheck` 24/24、`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK）、`make sync` 二次幂等、`docs/data/` 零 diff。负向探针：注入一条必失配用例 → `main()` 退出码 1，确认失配会红。`validate.py` 重构后 20 家扫描结果不变（`de-eurex` 的 `listing._meta.not_applicable` 仍正常通过、无新误报）。
 
 **日期：** 2026-09-03
