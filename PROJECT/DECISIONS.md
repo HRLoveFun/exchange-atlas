@@ -1391,3 +1391,37 @@
 **本 ADR 不动代码**：只加本条 + `PROJECT/ROADMAP.md` 进度条目。字段级标记的机器校验随任务一实装（[CLAUDE.md §四]：新不变式必须同时加 `validate.py` 检查——任务一的验收判据已列）。
 
 **日期：** 2026-09-03
+
+---
+
+### ADR-061 — Phase 3 第五棒：监管图 Regulation Map 的设计定案 + 数据层评估（无需 spec）
+
+**背景：** Phase 3 剩余四个章节可视化模块（上市生命周期 / 监管图 / 参与者 / 风险旗标）的第二棒，Phase 4 单页画布合并的硬前置之一（[ADR-057] #4）。第三章《监管与法律环境》8 个字段（`regulator` / `self_regulatory_org` / `clearing_regulator` / `core_laws` / `foreign_ownership_limit` / `capital_controls` / `disclosure_requirements` / `investor_protection`）目前只在对比矩阵两列 + 档案页文字块里呈现，零图形——交易员接触陌生市场的一阶问题恰是「谁在管、外资能不能进、钱能不能出去、出事赔不赔」，这几个字段把它们分散在章内各处，没有一屏把它们收敛成「一眼读懂这座市场的监管截面」。
+
+**流程：** 沿用 [ADR-059] 三棒走法。① 先做仿真数据 MVP 原型（三个虚构市场样本 × 中英 × 明暗，验证四层纵向槽位 / 空白虚线态 / 长文多辖区 / 暖色法律基座 / 语言开关 / 零构建，**未落库**、放 `/tmp/rm-mvp/`），形态验证通过；② 数据层评估结论 = **本棒零 spec 需求**（见轴 6），无 schema/data 改动；③ 渲染层（`renderRegulationMap` + 顶层 tab + 路由 + `.rm-*` 样式）留本 ADR 文末的渲染层棒。设计轴在无人值守自动续跑会话中按推荐项定案（未能像 [ADR-048]/[ADR-059] 那样现场 Q&A——如用户对任一轴有异议，可在本棒两个 commit 上直接回滚重排，本 ADR 即回滚依据）。
+
+**定了什么（7 个设计轴）：**
+
+1. **形态 = 一张固定槽位的「监管截面」单画布（手写 SVG，`W=1180`，与 [ADR-059] 同版式）。** 第三章 8 字段全为散文（机构名 / 法名 / 制度描述），无量化机制值可结构化成 bar / 轴——图的几何只能来自**语义槽位**：每个字段固定槽位、跨 20 家位置不变，「换所即对比」。诚实渲染走 [ADR-035] D（结构定形 → 散文硬裁剪 + 全文走浮层），与 [ADR-059] 的「有散文无 spec 的阶段块」同一处置。
+2. **四层纵向「监管截面」（自上而下，回应交易员三个一阶问题）：**
+   - **监管主体（谁在管）**——`regulator`（政府监管机构）/ `self_regulatory_org`（自律组织）/ `clearing_regulator`（清算监管机构）三卡横排，左缘色条 `--info`。
+   - **法律基座（依什么法）**——`core_laws` 满宽单卡（`--warn-soft` 底 + `--warn` 描边），作整图视觉底座。
+   - **外资与资金（钱怎么进出）**——`foreign_ownership_limit`（外资进入与持股）/ `capital_controls`（资本跨境进出）两卡并排，左缘色条 `--accent`（呼应「通道」语义）。
+   - **透明与保护**——`disclosure_requirements` / `investor_protection` 两卡并排，左缘色条 `--info`。
+   四层顺序 = 监管 → 法 → 资金闸门 → 保护网，线性推进、槽位稳定。
+3. **每卡结构**：卡内顶部角色头（`fieldLabel("regulation", path)` 双语取 taxonomy label，langMode 跟随）+ 正文 `dv(env)` 经 [ADR-059] `llWrap` 按卡宽折 ≤4 行 + 截断省略号；全文进 `<title>`、点开走 `openCellOverlay`（复用现有出处浮层）。卡宽按层定档：监管三卡 312、法律基座整宽 984、闸门 / 保护层两卡 480，全图 y 坐标固定、不随内容伸缩。
+4. **诚实三态（[ADR-035] D）**：有值 → 实心卡 + 左缘色条；**null / 缺省 → 虚线边框 + 居中斜体「未记录 not recorded」，不画左缘色条**；**本章无 `type:none` 形态**——8 字段无 spec，`type:none` 语义不存在，三态在本模块实际退化为「有值 / 未记录」两态（`detail` 草稿注记的诚实呈现与 [ADR-049] 方案 B ③ 同源，浮层里仍可见）。分区缩小后仍成立（三态提示是卡级，不依赖大面积留白）。
+5. **merge-ready 清单（逐条答 [ADR-057]）**：
+   - **锚定关系**：独立分区——时间 / 空间尺度 = 一座市场的制度截面，与主图剖面的「一个交易日」、交割管线「T+N 天」、listing-lifecycle「证券的一生」无共同 x 轴、不叠加；视觉呼应走主站令牌 + [ADR-040] 线条语言（机构 = 蓝 `--info`、资金通道 = 绿 `--accent`、法律基座 = 琥珀 `--warn`），与交割管线违约瀑布的 bearer 色同源。
+   - **占位**：合并画布常驻显示、默认展开；纵向 ≈ listing-lifecycle 档位（约 0.8 主图高）、横向满宽。
+   - **诚实三态 / 语言开关 / 零构建**：见轴 4 与 [ADR-049]/[ADR-035] 既有约定（卡头走 `fieldLabel`、合成文案走 `t()`、无第三方渲染库）。
+6. **数据层评估 = 本棒不新增 spec、零 schema/data 改动。** 第三章 8 字段全是「机构名 / 法名 / 制度描述」，属 [ADR-035] B 不可结构化类；按「quote 撑得住才结构化」原则（[ADR-045]/[ADR-050]），无量化机制值可摘——spec 缺省是预期而非缺口。现网 9 处空白（hk-hkex 外资 / 资本 / 披露、us-nyse 外资、tw-twse 资本 / 投资者保护、de-xetra / fr-euronext / uk-lse 清算监管、fr-euronext 自律组织）是真实研究缺口、已分布在 [ADR-060] 任务二 / 四轨道（穿插 viz 模块间推进），**本棒不替数据层代劳、不造 spec 撑图表**——诚实虚线框就是当前数据层的正确呈现。
+7. **纯衍生品所 = 全章适用，无 `only_spot`。** 第三章对衍生品所同样成立（de-eurex 有完整的监管 / 法律 / CCP 授权体系），[ADR-059] 的 `listing` 章级 `only_spot` 机制不适用于本章——本棒不引入新形态，de-eurex 走正常全章渲染。
+
+**没改：** `data/` 与 `docs/data/`（无 spec、无枚举、不增字段）；`schema/`（`spec.yml` / `taxonomy.yml` / `enums.yml` 零 diff）；`tools/validate.py`（无新不变式——本棒未引入新结构）；[ADR-060] 五任务轨道不受影响。
+
+**分棒 —— 留给渲染层棒（本 ADR 文末落实现）：** `docs/assets/app.js` 的 `renderRegulationMap` / `rmBuild`（手写 SVG，按上述轴 1–4；卡 `data-role="cell"` 复用 `openCellOverlay`；`llWrap` 复用）+ `docs/index.html` 顶层 tab「监管图 / Regulation Map」（排「上市生命周期」后，tab 数 7→8）+ 路由键 `regulation-map` + `styles.css` `.rm-*`。新代码从一开始接 `t()` / `tSel()` / `fieldLabel` / `dv()` / `enumDisplay`。MVP 原型已做自检（`/tmp/rm-mvp/`，不落库）。
+
+**验证（本棒 = 设计文档 + 数据层评估）：** MVP 截图（明 / 暗两态）四层槽位对齐、空白虚线 / 实心左缘差异可见、法律基座暖色、中英卡头随 langMode 正确切换；`make build` 基线不受影响（未触碰任何被扫描文件）。
+
+**日期：** 2026-09-03

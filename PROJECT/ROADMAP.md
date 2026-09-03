@@ -144,6 +144,12 @@
     - **渲染层（2026-09-03）**：`docs/assets/app.js` `renderListingLifecycle` / `llBuild`（手写 SVG「证券的一生」水平轴，节点 / 阶段块 `data-role="cell"` 复用 `openCellOverlay`，从第一版接 `t()`/`tSel()`；诚实三态：有 `spec` 画比例填充条 / `type:none` 空心点 / 有散文无 spec 硬裁剪 + `<title>` / 缺省虚线框）+ 顶层 tab「上市生命周期 / Listing Lifecycle」排「交割管线」后（tab 6→7）+ 路由键 `listing-lifecycle` + `styles.css` `.ll-*` + 档案页 `renderObjectChapter` 对 `_meta.not_applicable` 折叠。纯前端三文件（`app.js` +370 / `styles.css` +24 / `index.html` +1），`data/` 与 `docs/data/` 零 diff、`make sync` 幂等；`check_ui_i18n` OK；Chrome headless `hk-hkex`/`br-b3`/`uk-lse`(EN·暗)/`za-jse`/`de-eurex`(折叠) + 档案页 + 交割管线 / 剖面无回归。**已知局限**：有散文无 spec 的阶段块内是硬裁剪片段（全文在 `<title>` + 浮层）；停复牌 `↻` 偏淡；给更多所补时长 spec 是数据层活。
     - **待复核**：8 个时长 spec 的语义忠实度未经第二人独立复核（触及字段 < §四 硬门槛，协调者自检）；建议做视觉迭代时一并过一遍。
 
+  - [x] **Phase 3 第五棒 · 监管图 Regulation Map — 设计定案**（2026-09-03，[ADR-061]）— 第三章《监管与法律环境》8 字段一屏「监管截面」。**流程**：仿真数据 MVP 原型（三个虚构市场样本 × 中英 × 明暗，验证四层槽位 / 空白虚线态 / 长文多辖区 / 暖色法律基座，未落库）形态验证通过；7 个设计轴在无人值守自动续跑会话按推荐项定案（未现场 Q&A，回滚依据 = [ADR-061]）。
+    - **形态**：固定槽位纵向四层单画布（SVG W=1180）——监管主体三卡（`regulator` / `self_regulatory_org` / `clearing_regulator`，左缘 `--info`）→ 法律基座 `core_laws` 满宽暖色卡 → 外资与资金两卡（`foreign_ownership_limit` / `capital_controls`，左缘 `--accent`）→ 透明与保护两卡（`disclosure_requirements` / `investor_protection`，左缘 `--info`）。卡头 `fieldLabel` 双语、正文 `dv()` 折 ≤4 行、全文进 `<title>` + 点击复用 `openCellOverlay`。
+    - **数据层评估 = 零 spec 需求**：8 字段全为散文、无量化机制值可结构化（[ADR-035] B 不可结构化类）——`spec` 缺省是预期，非缺口。现网 9 处空白是真实研究缺口、走 [ADR-060] 任务二 / 四轨道，本棒不代劳。纯衍生品所（de-eurex）第三章全章适用、无 `only_spot`。
+    - **merge-ready**：独立分区（无共同 x 轴 / 不叠加）；占位 = 合并画布常驻、默认展开、纵 ≈ listing 档、横满宽；诚实三态 = 实心 / 虚线「未记录」/（本章无 `type:none`）；语言开关从第一版接；零构建。
+    - **本棒不动** `data/`、`schema/`、`tools/`。渲染层（`renderRegulationMap` + 顶层 tab「监管图」+ 路由 + `.rm-*`）留后续棒。
+
 - [ ] **Phase 4 · 单页画布合并** — 把市场机制剖面 / 成本瀑布 / 交割管线 / Phase 3 剩余模块合并为同一页的一块可视化画布，对比矩阵 / 时区甘特条 / 数据健康度 / 档案页降级到「更多」入口（北极星定案见 [ADR-057]，此前只在 [ADR-056] 与宪法开篇点到）。Phase 3 剩余每个模块的设计定案按 [ADR-057] 的 merge-ready 清单逐条回答（锚定关系 / 占位 / 诚实三态 / 语言开关 / 零构建）。
   - **启动前置条件（硬顺序，不插队）：Phase 3 的全部章节可视化模块——上市生命周期（三棒做齐 [ADR-059]）/ 监管图 / 参与者 / 风险旗标——均已落地。** 在此之前不启动合并、不动前端做画布布局；单项没做齐就合并会反复重排（[ADR-057] 定了什么 #4，用户 2026-09-01 复述强调）。
   - [x] **方向定案**（2026-09-01，[ADR-057]）— 终态形态 + 「更多」降级 + merge-ready 设计清单立项，承接 [ADR-056]「遗留」。**本条不做**：合并画布的整体布局形态（纵向滚动 / 缩放平移 / 分区网格）、「更多」入口形态、各模块排序 —— 留 Phase 4 启动时 Q&A。（注：原「Phase 4 · Wave 3」已被 [ADR-041] 解散为按需能力、不再是 Phase，此编号在此复用。）
