@@ -359,8 +359,15 @@ market_structure:
       confidence: medium
 
   holidays_note:
-    zh: ""
-    confidence: low
+    zh: "美国股票与期权市场每年公布假期日历。2026 年休市日：元旦、马丁·路德·金纪念日、总统日、耶稣受难日、阵亡将士纪念日、六月节、独立日、劳动节、感恩节、圣诞节；感恩节次日与平安夜为 13:00 提前收市日"
+    en: "The U.S. equity and options markets publish an annual holiday schedule. 2026 closures: New Year's Day, Martin Luther King Jr. Day, Presidents' Day, Good Friday, Memorial Day, Juneteenth, Independence Day, Labor Day, Thanksgiving Day, Christmas; the day after Thanksgiving and Christmas Eve are 1:00 p.m. early-close days"
+    quote: "U.S. Equity and Options Markets Holiday Schedule 2026 …… January 19, 2026 Martin Luther King, Jr. Day Closed February 16, 2026 President's Day - U.S. Closed April 3, 2026 Good Friday Closed …… November 26, 2026 Thanksgiving Day - U.S. Closed November 27, 2026 Early Close* - U.S. 1:00 p.m. December 24, 2026 Early Close* - U.S. 1:00 p.m."
+    sources:
+      - title: "Nasdaq Trader — Trading Calendar（U.S. Equity and Options Markets Holiday Schedule）"
+        url: https://www.nasdaqtrader.com/trader.aspx?id=Calendar
+        accessed: 2026-09-04
+    detail: "quote 用「……」连接页面标题与假期表若干行（中间是页面导航 / 其他行）。逐年日历以 Nasdaq Trader 页为准；同一日历适用于 NYSE（美股统一假期）。"
+    confidence: medium
 
   opening_mechanism:
     spec: {type: call_auction, auction_start: "09:25", auction_end: "09:30", note: "Opening Cross；9:25 起发布订单失衡信息（NOII）"}

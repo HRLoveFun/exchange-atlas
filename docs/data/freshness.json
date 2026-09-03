@@ -281,6 +281,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "holidays_note",
+      "label_zh": "节假日与特殊休市",
+      "label_en": "Holidays & Special Closures",
+      "volatility": "stable",
+      "verified": "2026-08-14",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "au-asx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "opening_mechanism",
       "label_zh": "开盘机制",
       "label_en": "Opening Mechanism",
@@ -1557,6 +1569,18 @@
       "label_zh": "夜盘",
       "label_en": "Night Session",
       "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "br-b3",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "holidays_note",
+      "label_zh": "节假日与特殊休市",
+      "label_en": "Holidays & Special Closures",
+      "volatility": "stable",
       "verified": "2026-08-16",
       "confidence": "medium"
     },
@@ -19329,6 +19353,18 @@
       "label_zh": "夜盘",
       "label_en": "Night Session",
       "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "holidays_note",
+      "label_zh": "节假日与特殊休市",
+      "label_en": "Holidays & Special Closures",
+      "volatility": "stable",
       "verified": "2026-08-14",
       "confidence": "medium"
     },

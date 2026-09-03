@@ -335,9 +335,15 @@ market_structure:
       confidence: medium
 
   holidays_note:
-    zh: ""
-    confidence: low
-    detail: "官网未见本次抓取到逐年节假日安排页面，留空。"
+    zh: "B3 每年在官网发布 Trading Calendar / Holidays 页。休市日无股票、私募固定收益、固定收益 ETF、上市衍生品及证券借贷市场交易；巴西全国性休市日包括元旦、狂欢节（周一 / 周二，圣灰星期三为半日）、耶稣受难日、Tiradentes 日（4/21）、劳动节（5/1）、基督圣体节、独立日（9/7）、圣母显现日（10/12）、共和国宣告日（11/15）、黑人意识日（11/20）、圣诞节等"
+    en: "B3 publishes an annual Trading Calendar / Holidays page. On closure days there is no trading on the equity, private fixed income, fixed income ETF, listed derivatives or securities lending markets; Brazil-wide closures include New Year's Day, Carnival (Mon/Tue, with Ash Wednesday a half day), Good Friday, Tiradentes' Day (21 Apr), Labour Day (1 May), Corpus Christi, Independence Day (7 Sep), Our Lady of Aparecida (12 Oct), Republic Proclamation Day (15 Nov), Black Awareness Day (20 Nov) and Christmas"
+    quote: "There will be no trading on the equity, private fixed income, fixed income ETF or listed derivatives markets, or on the securities lending markets"
+    sources:
+      - title: "B3 — Trading calendar / Holidays（PUMA Trading System，For members and traders）"
+        url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-calendar/holidays/
+        accessed: 2026-09-04
+    detail: "quote 为 B3 官网 Holidays 页对每个休市日的标准表述。抓取时该页在无 JS 环境下默认显示往年（2021）日历骨架——休市规则句与巴西法定休市日清单为稳定内容，逐年具体日期以 B3 当年 Trading Calendar 为准，故 confidence 标 medium。"
+    confidence: medium
 
   opening_mechanism:
     spec: {type: call_auction, auction_start: "09:45", auction_end: "10:00"}
