@@ -950,12 +950,20 @@ costs:
     detail: |
       Section 31费由SEC定期发布"Fee Rate Advisory"调整，本条数字为2026财年（FY2026）4月起
       生效的最新费率，具体历史费率变化（如2025财年费率）本次未逐年核实，只取当前生效值。
+      2026-09-04（ADR-065 成本瀑布数据层残差）复核：SEC「Fee Rate Advisories」列表页仍以
+      「Section 31 Transaction Fee Rate Advisory for Fiscal Year 2026 - Feb. 27, 2026」为
+      Latest；FY2027 的 Section 31 交易费公告尚未发布（历年在当年 2–4 月出，依拨款周期），
+      $20.60/百万美元（2026-04-04 起）为现行值。触发点仍挂在 OPEN-QUESTIONS。
     sources:
       - title: "Section 31 Transaction Fee Rate Advisory for Fiscal Year 2026（sec.gov 官方费率公告）"
         url: https://www.sec.gov/rules-regulations/fee-rate-advisories/2026-2
         accessed: 2026-08-24
+      - title: "Fee Rate Advisories（sec.gov 列表页，2026-09-04 复核 Latest Section 31 仍为 FY2026）"
+        url: https://www.sec.gov/rules-regulations/fee-rate-advisories
+        accessed: 2026-09-04
     quote: "Feb. 27, 2026 — The Securities and Exchange Commission today announced that starting on April 4, 2026, the fee rates applicable to most securities transactions will be set at $20.60 per million dollars. Consequently, each SRO will continue to pay the Commission a rate of $0.00 per million for covered sales occurring on charge dates through April 3, 2026, and a rate of $20.60 per million for covered sales occurring on charge dates on or after April 4, 2026... The assessment on security futures transactions will remain unchanged at $0.0042 for each round turn transaction."
     confidence: high
+    verified: 2026-09-04
 
   stamp_duty:
     zh: ""

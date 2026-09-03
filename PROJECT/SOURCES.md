@@ -273,6 +273,7 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
   - Staff Report on the Regulation of Clearing Agencies（PDF，2020年10月官方报告，NSCC=CCP/DTC=CSD定性原文、清算基金损失分摊机制）: https://www.sec.gov/files/regulation-clearing-agencies-100120.pdf（HTTP 200，683KB）
   - NSCC Rules & Procedures Addendum A（SR-NSCC-2025-017费用结构附件，清算活动费/清算基金维持费具体数字）: https://www.sec.gov/files/rules/sro/nscc/2025/34-104376-ex5.pdf（HTTP 200，225KB）
   - Section 31 Transaction Fee Rate Advisory FY2026（每百万美元20.60美元最新费率公告）: https://www.sec.gov/rules-regulations/fee-rate-advisories/2026-2（HTTP 200，65KB）
+  - Fee Rate Advisories（列表页，用于核对 Latest Section 31 公告——2026-09-04 ADR-065 复核仍为 FY2026 / Feb. 27, 2026，FY2027 Section 31 公告未发布；`us-nyse`/`us-nasdaq costs.regulatory_fees` 触发点跟踪）: https://www.sec.gov/rules-regulations/fee-rate-advisories（HTTP 200，81KB）
   - U.S. Households' Participation in Capital Markets（官方统计页，基于美联储SCF数据的家庭持股比例）: https://www.sec.gov/data-research/statistics-data-visualizations/us-households-participation-capital-markets（HTTP 200，99KB）
   - In the Matter of New York Stock Exchange LLC（PDF，2026年3月行政处罚令，2023年开盘集合竞价系统性故障事件与900万美元罚款）: https://www.sec.gov/files/litigation/admin/2026/34-104934.pdf（HTTP 200，234KB）
   - SEC Adopts Amendments to Finalize Rules Relating to the Holding Foreign Companies Accountable Act（2021年HFCAA最终细则新闻稿）: https://www.sec.gov/newsroom/press-releases/2021-250（HTTP 200，65KB）
@@ -579,8 +580,9 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `data.fca.org.uk` | 官方（National Storage Mechanism，FCA托管的RNS/交易所公告官方存档） | en | curl 常规 UA 200 | LSE Market Notice N06/22（2022-03-03，依据Rules of the London Stock Exchange Rule 1510暂停约20只俄罗斯公司GDR/ADR交易，政治/制裁风险压测点的一手证据）
   - N06/22 - Russia related sanctions - Update: https://data.fca.org.uk/artefacts/NSM/RNS/4290415.html
 - `euroclear.com` | 官方（清算/托管机构） | en | ⚠️ curl 常规 UA 对根域名与内容页均返回 403（间隔12秒重试后仍 403，非限流，是真实拦截），未能抓到——Euroclear UK & International（原 CREST）作为 LSE 中央证券存管机构的角色改用第三方转述来源确认，见下 | —
-- `gov.uk` | 监管（税务机关 HMRC；国家安全与投资法审查亦发布于此） | en | curl 常规 UA 200，未见反爬 | 印花税储备税（SDRT）官方说明，含 CREST 代收 SDRT 的机制描述；国家安全与投资法（外资并购国家安全审查）指引；资本利得税税率官方页
+- `gov.uk` | 监管（税务机关 HMRC；国家安全与投资法审查亦发布于此） | en | curl 常规 UA 200，未见反爬 | 印花税储备税（SDRT）官方说明，含 CREST 代收 SDRT 的机制描述；国家安全与投资法（外资并购国家安全审查）指引；资本利得税税率官方页；`costs.stamp_duty` 的 `side: buy` 方向措辞（2026-09-04 A3 残差坐实——短句『you pay tax when you buy』页，非 SPA、curl 常规 UA 直接 200）
   - Stamp Duty and Stamp Duty Reserve Tax: https://www.gov.uk/government/publications/stamp-duty-and-stamp-duty-reserve-tax/stamp-duty-and-stamp-duty-reserve-tax
+  - Tax when you buy shares: Overview（HMRC，『When you buy shares, you usually pay a tax or duty of 0.5%』『You pay tax when you buy』——买方缴纳的一手方向措辞）: https://www.gov.uk/tax-buy-shares
   - National Security and Investment Act guidance on acquisitions（NSI Act 2021外资/内资并购国家安全审查制度，25%/50%/75%持股门槛，17个敏感行业）: https://www.gov.uk/guidance/national-security-and-investment-act-guidance-on-acquisitions
   - Capital Gains Tax: what you pay it on, rates and allowances（2026/27税率：基本税率18%、较高税率24%，年度免税额£3,000）: https://www.gov.uk/capital-gains-tax/rates
 - `fscs.org.uk` | 监管（金融服务补偿计划，FSMA 2000下设立的法定投资者/存款人补偿机构） | en | curl 常规 UA 200 | 投资类索赔补偿限额（2019年4月后失败机构：每人每机构最高£85,000）
@@ -827,15 +829,17 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `en.yna.co.kr` | 第三方（韩联社英文） | en | WebSearch 定位 | 政治/流动性风险（confidence 封顶 medium）
 - `www.koreaherald.com` | 第三方（韩国先驱报） | en | WebSearch 定位 | 流动性/政治风险（confidence 封顶 medium）
 - `www.asiae.co.kr` | 第三方（亚洲经济） | ko | WebSearch 定位 | 流动性风险（confidence 封顶 medium）
-- `www.kedglobal.com` | 第三方（KED 全球） | en | WebSearch 定位 | 政治风险（confidence 封顶 medium）
+- `www.kedglobal.com` | 第三方（KED 全球） | en | WebSearch 定位；curl 常规 UA 200 | 政治风险（confidence 封顶 medium）；`costs.exchange_fees` 的费率沿革佐证（KRX『single fee rate of 0.0023% for nearly 20 years』、2025-12 阶梯下调『initially in effect for two months』、永久性下调须经 FSC 市场效率委员会审议——2026-09-04 ADR-065 补登记）
+  - Korea Exchange to cut trading fees for 1st time in 2 decades（ked202510020003）: https://www.kedglobal.com/korean-stock-market/newsView/ked202510020003
 - `www.kchipnews.com` | 第三方（半导体新闻） | ko | WebSearch 定位 | 市场背景（confidence 封顶 medium）
 - `taxnews.ey.com` | 第三方（EY 税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
 - `www.mondovisione.com` | 第三方（交易所资讯） | en | WebSearch 定位 | 市场结构背景（confidence 封顶 medium）
 - `taxsummaries.pwc.com` | 第三方（四大税务简报） | en | curl 常规 UA 200 | 韩国印花税税种定性（stamp tax 针对"制备证明财产权设立/转让/变更的文书者"，非证券转让；`kr-krx.costs.stamp_duty` 的第三方佐证，封顶 confidence medium；`type: none` 据此标「暂定」，翻实需韩国《印花税法》一手条文）
   - Korea, Republic of - Corporate - Other taxes: https://taxsummaries.pwc.com/republic-of-korea/corporate/other-taxes
 
-- `elaw.klri.re.kr`（韩国法制研究院法律数据库英文版，2026-09-01 A3 补充登记） | 官方镜像（韩国法制研究院 KLRI 运营的法律英文数据库，含韩国现行法令英文译本） | en | curl + 常规 UA 200，正文为静态 HTML，逐字可抓取 | `costs.financial_transaction_tax` 出处，韩国《证券取引税法》(Securities Transaction Tax Law) 英文版明文以『transferor（让与人=卖方）』为纳税义务人，坐实韩国 STT 向卖方课征（side: sell）
+- `elaw.klri.re.kr`（韩国法制研究院法律数据库英文版，2026-09-01 A3 补充登记） | 官方镜像（韩国法制研究院 KLRI 运营的法律英文数据库，含韩国现行法令英文译本） | en | curl + 常规 UA 200，正文为静态 HTML，逐字可抓取；⚠️ 每页标注『Translations provided here are for reference only, and are neither official nor legally effective』，同 `english.sse.com.cn`——引此域名的字段 confidence 封顶 medium | `costs.financial_transaction_tax` 出处，韩国《证券取引税法》(Securities Transaction Tax Law) 英文版明文以『transferor（让与人=卖方）』为纳税义务人，坐实韩国 STT 向卖方课征（side: sell）；`costs.stamp_duty` 出处，韩国《印花税法》(Stamp Tax Act) 第1条明定印花税纳税义务人为『文书制备者』、课税对象是文书而非证券转让，`type: none` 由『暂定』转为一手条文支撑（2026-09-04 ADR-065）
   - 증권거래세법 (Securities Transaction Tax Law), English version: https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=46383
+  - STAMP TAX ACT（韩国《印花税法》英文版，hseq=64499）: https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=64499
 
 ### 泛欧交易所 Euronext `fr-euronext`
 - `euronext.com` | 官方 | en（官网默认英文；各地方市场页另有 fr/nl/pt/it/nb 等本地语言版本，本节只取英文版作 `source_lang: en` 的锚点） | curl + 常规 UA 全部 200，未见反爬（含多个 PDF，均可直接 curl 到） | ⚠️ **本所是本项目第一个"单一集团、多国法人实体"样本**：`Euronext`（集团整体）= `Euronext N.V.`（荷兰阿姆斯特丹注册的 naamloze vennootschap，集团控股实体，本身在 Euronext Paris 挂牌交易，代码 ENX，2025-09-22 起纳入 CAC 40 指数）+ 七个「Euronext Market Undertaking」（Euronext Amsterdam N.V. 荷兰法人、Euronext Brussels S.A./N.V. 比利时法人、Euronext Dublin/The Irish Stock Exchange plc 爱尔兰法人、Euronext Lisbon S.A. 葡萄牙法人、Euronext Paris S.A. 法国法人、Borsa Italiana 意大利法人、Oslo Børs 挪威法人），各自受本国法律与本国监管机构管辖（见 Harmonised Rulebook I Rule 1.7 Governing Law），但共享同一部《Harmonised Rulebook》（Book I）、同一交易平台 Optiq、同一中央订单簿。2025年7月新增第八个市场 Euronext Athens（收购 ATHEX），但截至本次抓取（2026-08）雅典尚未并入 Harmonised Rulebook/Optiq（计划2027-06迁移），regulated-markets 页原文明确写"Euronext Athens markets are scheduled to be integrated in the Euronext rulebooks upon the migration to Optiq (June 2027)"，故本次数据以七个已整合市场（不含雅典）为主，雅典相关事实单独注明未核实。清算方面 Euronext Clearing 是法定实体 Cassa di Compensazione e Garanzia S.p.A.（CC&G，意大利公司）的商业新名称；托管结算方面 Euronext Securities 是集团自有 CSD 网络，运营实体分布在哥本哈根/米兰/奥斯陆/波尔图四地，里斯本/米兰/奥斯陆三个市场现已用 Euronext Securities 托管结算，阿姆斯特丹/布鲁塞尔/巴黎计划2026-09起迁移过去，都柏林及迁移前的阿姆斯特丹/布鲁塞尔/巴黎具体托管机构本次未核实（⚠️ 2026-08-21已补充核实并回填：巴黎=Euroclear France（Book II Article P 2.3.3逐字点名）、阿姆斯特丹=Euroclear Nederland、布鲁塞尔=Euroclear Belgium（新闻稿+Place of Settlement change guidelines两份官方文档间接但可靠佐证）、都柏林=Euroclear Bank（2021-03migration新闻稿），详见下方新增4条来源与`data/exchanges/fr-euronext.yml`的`clearing.csd_name`字段；`euroclear.com`主域名及`/services/en/provider-homepage/euroclear-*.html`子页面本次实测对常规UA同样403，与`uk-lse`一节`euroclear.com`踩坑案例一致，故本次改用Euronext自己官网发布的分市场规则手册/新闻稿/技术指引达成核实，未能直接抓取Euroclear自己官网）
@@ -1003,6 +1007,7 @@ JSE 在 2026-08 中之后对官网加了 Cloudflare 防护，**且对数据中�
   - Recognized Exchanges（TMX Group Limited and TSX Inc. 认定页，含关键原文「together with its parent company, TMX Group Limited, is recognized as an exchange in Ontario」）: https://www.osc.ca/en/industry/market-regulation/marketplaces/exchanges/recognized-exchanges
   - Canadian Investment Regulatory Organization (CIRO) 说明页（CIRO 定位、IIROC/MFDA 合并沿革）: https://www.osc.ca/en/industry/market-regulation/self-regulatory-organizations-sro/canadian-investment-regulatory-organization-ciro
   - Notice of Approval – Amendments to the Toronto Stock Exchange Company Manual (November 6, 2025)（PDF，OSC 托管的 TSX 规则修订核准公告，Appendix D 为最终 clean 版 Company Manual 正文，含 Part III 上市财务门槛与 Part VII 停牌/退市完整条文）: https://www.osc.ca/sites/default/files/2025-11/tsx_20251106_noa-exchange-company-manual.pdf
+  - CIRO Bulletin 24-0154 – Request for Comments – Fee Model – Integrated Fee Model Project（PDF，OSC 托管的 CIRO 费模型征求意见公告；第 8 节复述现行《Equity Market Regulation Fee Model》原文——成本回收制、Message Processing Fee + Trade Fee 两部分、由 Participants 缴纳。`costs.regulatory_fees` 出处，2026-09-04 ADR-065；ciro.ca 官网仍 403，续用 OSC 托管件）: https://www.osc.ca/sites/default/files/2024-04/ciro_20240425_rfc-fee-model.pdf
 - `getsmarteraboutmoney.ca` | 监管（OSC Investor Office 运营的投资者教育网站，页脚署名「© Ontario Securities Commission」「Brought to you by the OSC Investor Office」） | en | curl 常规 UA 200 | 用于确认加拿大全市场熔断（market-wide circuit breaker）三级阈值（7%/13%/20%），该机制由 CIRO 监管、参照 S&P 500（美股休市时改用 S&P/TSX Composite），原始出处应是 ciro.ca（已 403，见下）
   - Market-wide circuit breakers: https://www.getsmarteraboutmoney.ca/learning-path/stocks/market-wide-circuit-breakers/
 - `en.wikipedia.org` | 第三方 | en | curl 常规 UA 200 | 用于交易所历史沿革背景叙述（1852年 Association of Brokers、1861年正式创立、1999-2000年公司化、2008年与 Montréal Exchange 合并组成 TMX Group 等）；`confidence` 相应标 medium，未逐条核对一手史料
