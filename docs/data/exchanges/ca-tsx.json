@@ -765,9 +765,9 @@
           "detail": null
         },
         "other_boards": {
-          "zh": "",
-          "confidence": "low",
-          "detail": "TSX本身无其他板块，见 listing.boards 的说明。",
+          "zh": "TSX 本身无分层板块（见 listing.boards）。Marketplace Threshold 与 Bid/Ask Tick Limit 按证券类型与价位分档、非按板块（见 main_board）；TSX Venture Exchange 为独立交易所实体、不在本条目范围",
+          "en": "TSX itself has no tiered boards (see listing.boards). The Marketplace Threshold and Bid/Ask Tick Limit are graduated by security type and price level rather than by board (see main_board); the TSX Venture Exchange is a separate exchange entity, outside this record's scope",
+          "confidence": "medium",
           "sources": [
             {
               "title": "Trading Hours（官网）",
@@ -776,9 +776,9 @@
             }
           ],
           "verified": "2026-08-16",
-          "en": null,
           "enum": null,
           "spec": null,
+          "detail": null,
           "quote": null
         }
       },

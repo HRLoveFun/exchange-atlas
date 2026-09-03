@@ -778,8 +778,9 @@
           "detail": null
         },
         "other_boards": {
-          "zh": "",
-          "confidence": "low",
+          "zh": "不按板块区分——B3 的动态「交易隧道」（trading tunnels）以逐品种基准价（PBT）为中心计算带宽，参数按证券 / 合约维护、非按上市板块（Novo Mercado / Nível 2 等治理层级不影响价格限制机制），见 type / main_board",
+          "en": "Not differentiated by board — B3's dynamic 'trading tunnels' compute bands around a per-instrument tunnel base price (PBT), with parameters maintained per security/contract rather than per listing segment (the Novo Mercado / Nível 2 governance tiers do not affect the price-limit mechanism); see type / main_board",
+          "confidence": "medium",
           "sources": [
             {
               "title": "Trading Hours – Equities",
@@ -793,7 +794,6 @@
             }
           ],
           "verified": "2026-08-16",
-          "en": null,
           "enum": null,
           "spec": null,
           "detail": null,

@@ -765,8 +765,10 @@
           "detail": null
         },
         "other_boards": {
-          "zh": "",
-          "confidence": "low",
+          "zh": "NSE Emerge（SME 平台）证券同样适用价格带机制，幅度按证券监察分类确定，沿用与主板同一套分类框架（见 main_board）；本次未抓到 Emerge 专属幅度表，未逐档核实",
+          "en": "Securities on NSE Emerge (the SME platform) are also subject to price bands, set by surveillance category under the same classification framework as the main board (see main_board); an Emerge-specific band table was not fetched this session and bands were not verified tier by tier",
+          "detail": "NSE 的结构是 Capital Market 分部 + SME Emerge + F&O，非分层「板块」；main_board 字段已覆盖各证券类别（含 auction market）的分档。",
+          "confidence": "medium",
           "sources": [
             {
               "title": "Market Timings（官网）",
@@ -775,10 +777,8 @@
             }
           ],
           "verified": "2026-08-14",
-          "en": null,
           "enum": null,
           "spec": null,
-          "detail": null,
           "quote": null
         }
       },

@@ -816,7 +816,9 @@
           "detail": null
         },
         "other_boards": {
-          "zh": "",
+          "zh": "无——主板与 GEM 均不设每日涨跌停幅度；波动控制统一靠个股级市场波动调节机制（VCM），不按板块区分（见 type / volatility_interruption）",
+          "en": "None — neither the Main Board nor GEM has a daily price-limit band; volatility control is a uniform stock-level Volatility Control Mechanism (VCM), not differentiated by board (see type / volatility_interruption)",
+          "confidence": "medium",
           "sources": [
             {
               "title": "Trading Hours - Securities Market（HKEX 官网）",
@@ -825,8 +827,6 @@
             }
           ],
           "verified": "2026-08-12",
-          "confidence": "high",
-          "en": null,
           "enum": null,
           "spec": null,
           "detail": null,

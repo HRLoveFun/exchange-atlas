@@ -778,7 +778,9 @@
           "detail": null
         },
         "other_boards": {
-          "zh": "",
+          "zh": "无——ASX 任何上市类别 / 报价类别均不设每日涨跌停幅度；价格保护统一为订单级 AOT 阈值（见 type / main_board），不按板块区分",
+          "en": "None — no ASX listing or quotation category has a daily price-limit band; price protection is a uniform order-level AOT threshold (see type / main_board), not differentiated by board",
+          "confidence": "medium",
           "sources": [
             {
               "title": "Cash market trading hours（ASX 官网）",
@@ -787,8 +789,6 @@
             }
           ],
           "verified": "2026-08-14",
-          "confidence": "high",
-          "en": null,
           "enum": null,
           "spec": null,
           "detail": null,

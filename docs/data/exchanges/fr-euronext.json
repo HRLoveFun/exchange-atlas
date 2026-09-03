@@ -816,7 +816,8 @@
         "other_boards": {
           "zh": "Euronext Growth/Access板块及衍生品市场另有各自的静态/动态区间参数（衍生品市场机制与Eurex类似，另设Dynamic Collar Reference Price/DCRP与Static Collar Reference Price/SCRP），具体数值本次未逐一核实",
           "en": "Euronext Growth/Access segments and the derivatives markets carry their own static/dynamic collar parameters (the derivatives-market mechanism resembles Eurex's, with its own Dynamic/Static Collar Reference Price — DCRP/SCRP); exact values not individually verified this session",
-          "confidence": "low",
+          "detail": "主图规则化机制（collar）在受监管市场与 Growth / Access 之间是同一套形态、参数分层，非「板块专属的固定涨跌幅」；具体数值表未逐一核实，故 confidence 取 medium。",
+          "confidence": "medium",
           "sources": [
             {
               "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
@@ -832,7 +833,6 @@
           "verified": "2026-08-16",
           "enum": null,
           "spec": null,
-          "detail": null,
           "quote": null
         }
       },

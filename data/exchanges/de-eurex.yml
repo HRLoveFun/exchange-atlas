@@ -422,8 +422,8 @@ market_structure:
       en: "The size of each price range and its reference prices are set by the Management Board per Derivative; no single published percentage table was found (unlike JPX's tiered yen bands or the U.S. LULD Tier system)"
       confidence: medium
     other_boards:
-      zh: ""
-      confidence: low
+      not_applicable: true
+      detail: "纯衍生品交易所无现货「上市板块」结构（listing 章已整章 not_applicable，见 [ADR-059]）；动态 / 静态价格区间按合约（品种、到期月）设定，见 type / main_board——本子字段（其他板块的涨跌幅）设计前提对本所不成立（[ADR-060] 字段级 not_applicable）。"
 
   circuit_breaker:
     enum: stock_level

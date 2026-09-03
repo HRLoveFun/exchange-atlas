@@ -709,15 +709,21 @@
           "detail": null
         },
         "other_boards": {
-          "zh": "",
-          "confidence": "low",
-          "detail": "AIM等其他板块/品种的具体阈值本次未在面向客户的说明性文档中找到，完整数值表在未抓取的Business Parameters文档内，留空不猜。",
+          "zh": "AIM 与主板（Main Market）共用同一套 Millennium Exchange 静态 / 动态价格监控机制，触发阈值按流动性梯队（如 FE10 / FS10）而非上市板块分档（见 main_board / type）；AIM 与其他品种的具体阈值数值表在未抓取的 Business Parameters 文档内，未逐档核实",
+          "en": "AIM shares the same Millennium Exchange static/dynamic price-monitoring mechanism as the Main Market, with trigger thresholds graduated by liquidity band (e.g. FE10 / FS10) rather than by listing board (see main_board / type); the specific threshold table for AIM and other instrument types is in the Business Parameters document, which was not fetched, and was not verified tier by tier",
+          "sources": [
+            {
+              "title": "MIT201 – Guide to the Trading System Issue 15.8（官网 PDF，价格监控章节）",
+              "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "confidence": "medium",
           "verified": "2026-08-14",
-          "en": null,
           "enum": null,
           "spec": null,
-          "quote": null,
-          "sources": null
+          "detail": null,
+          "quote": null
         }
       },
       "circuit_breaker": {

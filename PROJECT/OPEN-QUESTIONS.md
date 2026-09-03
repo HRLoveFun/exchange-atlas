@@ -130,7 +130,6 @@
 - `de-xetra` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `fr-euronext` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `fr-euronext` 市场结构与交易机制 / 上午连续竞价（trading_sessions.continuous_am）— confidence: low
-- `fr-euronext` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
 - `fr-euronext` 市场结构与交易机制 / 大宗交易（block_trade）— confidence: low
 - `hk-hkex` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `hk-hkex` 清算、结算与交割 / 交割方式（delivery_method）— confidence: low

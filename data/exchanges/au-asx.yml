@@ -460,7 +460,10 @@ market_structure:
       en: "No daily price limit band (see the AOT note in the type field)"
       quote: "ASX does not use circuit breakers like those employed by some other international exchanges. ... These rules include specifications about the use of Anomalous Order Thresholds (AOTs), rather than circuit breakers."
       confidence: high
-    other_boards: ""
+    other_boards:
+      zh: "无——ASX 任何上市类别 / 报价类别均不设每日涨跌停幅度；价格保护统一为订单级 AOT 阈值（见 type / main_board），不按板块区分"
+      en: "None — no ASX listing or quotation category has a daily price-limit band; price protection is a uniform order-level AOT threshold (see type / main_board), not differentiated by board"
+      confidence: medium
 
   circuit_breaker:
     enum: none

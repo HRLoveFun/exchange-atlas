@@ -498,9 +498,13 @@ market_structure:
       quote: "For the most liquid stocks in the FTSE 100 stocks (e.g. London Stock Exchange sector FE10): – An 8% (Static Price Monitoring %) move from the last auction uncross... would cause a Static Limit volatility auction with 5-minute duration... – Any single order which moves market 3% (Dynamic Price Monitoring %) from last order book traded price would cause a volatility auction of 5-minute duration... For the next most liquid stocks in the FTSE 100 (e.g. London Stock Exchange sector FS10), the Static Price Monitoring % is 10%, and the Dynamic Price Monitoring % is 5%."
       confidence: high
     other_boards:
-      zh: ""
-      confidence: low
-      detail: "AIM等其他板块/品种的具体阈值本次未在面向客户的说明性文档中找到，完整数值表在未抓取的Business Parameters文档内，留空不猜。"
+      zh: "AIM 与主板（Main Market）共用同一套 Millennium Exchange 静态 / 动态价格监控机制，触发阈值按流动性梯队（如 FE10 / FS10）而非上市板块分档（见 main_board / type）；AIM 与其他品种的具体阈值数值表在未抓取的 Business Parameters 文档内，未逐档核实"
+      en: "AIM shares the same Millennium Exchange static/dynamic price-monitoring mechanism as the Main Market, with trigger thresholds graduated by liquidity band (e.g. FE10 / FS10) rather than by listing board (see main_board / type); the specific threshold table for AIM and other instrument types is in the Business Parameters document, which was not fetched, and was not verified tier by tier"
+      sources:
+        - title: "MIT201 – Guide to the Trading System Issue 15.8（官网 PDF，价格监控章节）"
+          url: https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf
+          accessed: 2026-08-14
+      confidence: medium
 
   circuit_breaker:
     enum: stock_level

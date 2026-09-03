@@ -406,8 +406,9 @@ market_structure:
       quote: "The percentage level is determined by a security's designation as a Tier 1 or Tier 2 security. Tier 1 comprises all securities in the S&P 500, the Russell 1000 and select Exchange Traded Products (ETPs). Tier 2 comprises all other NMS securities, except for rights and warrants, which are specifically excluded from coverage."
       confidence: medium
     other_boards:
-      zh: ""
-      confidence: low
+      zh: "不按板块区分——LULD 价格带按 Tier 1（标普500 / 罗素1000 / 部分 ETP）与 Tier 2（其余 NMS 证券）分级，依指数成分而非上市板块；NYSE American / NYSE Arca 等为同集团下独立注册的交易所实体、不在本条目范围（见 main_board / type）"
+      en: "Not differentiated by board — LULD price bands are tiered as Tier 1 (S&P 500 / Russell 1000 / selected ETPs) and Tier 2 (all other NMS securities), by index membership rather than by listing board; NYSE American / NYSE Arca etc. are separately registered exchange entities within the group and outside this record's scope (see main_board / type)"
+      confidence: medium
 
   circuit_breaker:
     enum: index_level

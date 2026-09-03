@@ -420,8 +420,9 @@ market_structure:
       en: "The size of each price range and its reference prices are set by the Management Board per Security; no single published percentage table was found in the materials fetched this session"
       confidence: medium
     other_boards:
-      zh: ""
-      confidence: low
+      zh: "不按板块区分——动态 / 静态价格区间的宽度与参考价由管理董事会按每只证券分别确定，不因上市板块（Prime Standard / General Standard / Scale）不同而有不同的价格限制机制（见 type / main_board）"
+      en: "Not differentiated by board — the width and reference prices of the dynamic/static price ranges are set by the Management Board per Security, and do not vary by listing segment (Prime Standard / General Standard / Scale); see type / main_board"
+      confidence: medium
 
   circuit_breaker:
     enum: stock_level

@@ -681,9 +681,13 @@ market_structure:
         '
       confidence: high
     other_boards:
-      zh: ''
-      confidence: low
-      detail: TSX本身无其他板块，见 listing.boards 的说明。
+      zh: TSX 本身无分层板块（见 listing.boards）。Marketplace Threshold 与 Bid/Ask Tick
+        Limit 按证券类型与价位分档、非按板块（见 main_board）；TSX Venture Exchange 为独立交易所实体、不在本条目范围
+      en: TSX itself has no tiered boards (see listing.boards). The Marketplace Threshold
+        and Bid/Ask Tick Limit are graduated by security type and price level rather
+        than by board (see main_board); the TSX Venture Exchange is a separate exchange
+        entity, outside this record's scope
+      confidence: medium
   circuit_breaker:
     enum: index_level
     spec: {type: index_level, reference: [{index: "S&P 500", exchange: "us"}, {index: "S&P/TSX Composite", exchange: self}], levels: [{threshold_pct: 7, halt_minutes: 15}, {threshold_pct: 13, halt_minutes: 15}, {threshold_pct: 20, halt_minutes: null, day_end: true}], note: "标普500 为基准，美股休市时改用标普/多伦多综指；3:25pm 后价格下跌不停牌（三级除外）；CIRO 跨市场协调"}

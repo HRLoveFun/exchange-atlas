@@ -707,8 +707,9 @@
           "detail": null
         },
         "other_boards": {
-          "zh": "",
-          "confidence": "low",
+          "zh": "不按板块区分——LULD 价格带按 Tier 1（标普500 / 罗素1000 / 部分 ETP）与 Tier 2（其余 NMS 证券）分级，依指数成分而非上市板块；NYSE American / NYSE Arca 等为同集团下独立注册的交易所实体、不在本条目范围（见 main_board / type）",
+          "en": "Not differentiated by board — LULD price bands are tiered as Tier 1 (S&P 500 / Russell 1000 / selected ETPs) and Tier 2 (all other NMS securities), by index membership rather than by listing board; NYSE American / NYSE Arca etc. are separately registered exchange entities within the group and outside this record's scope (see main_board / type)",
+          "confidence": "medium",
           "sources": [
             {
               "title": "Trading Information（官网）",
@@ -717,7 +718,6 @@
             }
           ],
           "verified": "2026-08-13",
-          "en": null,
           "enum": null,
           "spec": null,
           "detail": null,

@@ -413,6 +413,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "price_limits.other_boards",
+      "label_zh": "其他板块幅度",
+      "label_en": "Other Boards' Bands",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "au-asx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "circuit_breaker",
       "label_zh": "熔断机制",
       "label_en": "Circuit Breaker",
@@ -1739,6 +1751,18 @@
       "volatility": "moderate",
       "verified": "2026-08-16",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "br-b3",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "price_limits.other_boards",
+      "label_zh": "其他板块幅度",
+      "label_en": "Other Boards' Bands",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
     },
     {
       "exchange_id": "br-b3",
@@ -3095,6 +3119,18 @@
       "volatility": "moderate",
       "verified": "2026-08-16",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "ca-tsx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "price_limits.other_boards",
+      "label_zh": "其他板块幅度",
+      "label_en": "Other Boards' Bands",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
     },
     {
       "exchange_id": "ca-tsx",
@@ -8237,6 +8273,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "price_limits.other_boards",
+      "label_zh": "其他板块幅度",
+      "label_en": "Other Boards' Bands",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "de-xetra",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "circuit_breaker",
       "label_zh": "熔断机制",
       "label_en": "Circuit Breaker",
@@ -9238,7 +9286,7 @@
       "label_en": "Other Boards' Bands",
       "volatility": "moderate",
       "verified": "2026-08-16",
-      "confidence": "low"
+      "confidence": "medium"
     },
     {
       "exchange_id": "fr-euronext",
@@ -10493,6 +10541,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "price_limits.other_boards",
+      "label_zh": "其他板块幅度",
+      "label_en": "Other Boards' Bands",
+      "volatility": "moderate",
+      "verified": "2026-08-12",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "hk-hkex",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "circuit_breaker",
       "label_zh": "熔断机制",
       "label_en": "Circuit Breaker",
@@ -11663,6 +11723,18 @@
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "in-nse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "price_limits.other_boards",
+      "label_zh": "其他板块幅度",
+      "label_en": "Other Boards' Bands",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
     },
     {
       "exchange_id": "in-nse",
@@ -18833,6 +18905,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "price_limits.other_boards",
+      "label_zh": "其他板块幅度",
+      "label_en": "Other Boards' Bands",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "uk-lse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "circuit_breaker",
       "label_zh": "熔断机制",
       "label_en": "Circuit Breaker",
@@ -20720,6 +20804,18 @@
       "field_path": "price_limits.main_board",
       "label_zh": "主板幅度",
       "label_en": "Main Board Band",
+      "volatility": "moderate",
+      "verified": "2026-08-13",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "price_limits.other_boards",
+      "label_zh": "其他板块幅度",
+      "label_en": "Other Boards' Bands",
       "volatility": "moderate",
       "verified": "2026-08-13",
       "confidence": "medium"
