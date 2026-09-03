@@ -2160,11 +2160,15 @@
     if (l.some(function (e) { return e.id === params.id; })) return params.id;
     return l.some(function (e) { return e.id === RM_DEFAULT_EX; }) ? RM_DEFAULT_EX : l[0].id;
   }
-  // 折行：CJK 按字数、拉丁按单词，per 由可用像素反推（与 llWrap 同思路）
+  // 折行：CJK 按字数、拉丁按单词，per 由可用像素反推（与 llWrap 同思路）。
+  // innerW 传的是整卡宽 w，正文实际从 x+14 起排、右侧还要留白——扣 24px
+  // （14 左内边距 + 10 右内边距），否则密排 CJK 长行会越过卡片右沿约 6px
+  // （[ADR-061] 渲染层视觉修订，2026-09-03 审查反馈，几何实测）。
   function rmWrap(text, innerW, maxLines) {
+    var avail = innerW - 24;
     var per = /[一-鿿]/.test(text)
-      ? Math.max(6, Math.floor((innerW - 4) / 10.5))
-      : Math.max(10, Math.floor((innerW - 4) / 5.6));
+      ? Math.max(6, Math.floor(avail / 10.5))
+      : Math.max(10, Math.floor(avail / 5.6));
     return llWrap(text, per, maxLines);
   }
   // 三张监管机构卡 / 两张闸门卡 / 两张保护卡共用：有值 = 实心 + 左缘色条；

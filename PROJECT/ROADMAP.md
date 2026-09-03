@@ -23,7 +23,7 @@
 1. **成本瀑布数据层残差（A2/A3 + 收尾审查未竟项，按触发时点推进）** — `kr-krx exchange_fees` 需抓 KRX 当期收费表确认临时阶梯到期后的现行费率；`us-nyse`/`us-nasdaq` SEC Section 31 费率 2026-10-01 起按 SEC FY2027 公告重核；`ca-tsx regulatory_fees` / `kr-krx regulatory_fees`（「无按笔监管费」仍缺干净一手源）；`uk-lse stamp_duty` / `za-jse stamp_duty` 的 `side: buy`（需 HMRC 非 SPA 端点 / SARS 或立法一手条文的方向措辞）；`hk-hkex FTT` / `kr-krx stamp_duty` 的 `type: none`（收尾审查回退 / 标暂定，待 IRD·库务署 / 韩国《印花税法》一手条文）。明细见 OPEN-QUESTIONS #88 与 `PROJECT/COST-WATERFALL-SPOT-CHECK.md`
 2. **成本瀑布视觉迭代**（交互式会话）— [ADR-047] 已知局限：单一费种远大于其余时左半留白、全零市场「合计 0.00 bp」略尴尬、暗色「此侧不征」虚线偏弱、按股/定额费折算较粗
 3. **交割管线视觉迭代** — [ADR-051] 已知局限：深色预防层色块偏淡、T+1 现货所右半留白；违约瀑布 `resource` 短语无 `en`、英文态仍中文（同 [ADR-049] 对 `detail` 的结构性处置，触发条件见 [ADR-051]）
-4. **其后按交易员价值继续**：参与者 → 风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）——每个模块的设计定案按 [ADR-057] 的 merge-ready 清单逐条回答。上市生命周期已三棒做齐（[ADR-059]）、监管图已两棒做齐（[ADR-061]），两者均可做视觉迭代（上市生命周期已知局限：有散文无 spec 的阶段块内文字是硬裁剪片段 / 停复牌 ↻ 偏淡 / 给更多所补时长 spec 是数据层活；监管图已知局限：卡片正文按卡高 ≤4 行硬裁剪，长文卡的「先摘要后全文」散文精修是数据层活，见 [ADR-061]）
+4. **其后按交易员价值继续**：参与者 → 风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）——每个模块的设计定案按 [ADR-057] 的 merge-ready 清单逐条回答。上市生命周期已三棒做齐（[ADR-059]）、监管图已两棒做齐 + 审查视觉修订（[ADR-061]），两者均可做视觉迭代（上市生命周期已知局限：有散文无 spec 的阶段块内文字是硬裁剪片段 / 停复牌 ↻ 偏淡 / 给更多所补时长 spec 是数据层活；监管图已知局限：卡片正文按卡高 ≤4 行硬裁剪 + 中英混排 Latin 词被逐字折行截断，长文卡「先摘要后全文」精修是数据层活，见 [ADR-061]）
 5. **数据空缺复核轨（横切，与 Phase 3 并行；[ADR-060]/[ADR-062]）** — 全库 316 处空缺六桶（ADR-060）：A 58 已标 `optional` 移出完成度分母；**B 50 / D 10 经逐所核对回 F（真实研究缺口，任务二/四清单扩容）**；余 C 40 / E 10 / F 148 原判不变。**任务一已完成（2026-09-03，[ADR-062]）**：leaf 级 `optional`/`not_applicable` 机制落地 + A 桶 4 字段标 `optional`，B/D 桶不标 `not_applicable`。任务二三（横切 8 高频字段 / 9 家衍生品子章残余）穿插 viz 模块间；任务四（5 家旗舰所深度，`us-nyse`/`hk-hkex`/`uk-lse`/`cn-sse`/`jp-jpx`）建议 Phase 4 前完成（非硬前置）；任务五（`kr-krx` OTP-AJAX 抓取 + `za-jse` 缓存重建 + 时效触发）按触发点。详版见三节
 6. **Phase 3 全部单项模块做齐后（硬前置）→ Phase 4 单页画布合并**（[ADR-057]）：合并画布的整体布局形态 / 「更多」入口形态 / 各模块排序，启动时 Q&A 定；单项没做齐不启动
 
@@ -32,8 +32,8 @@
 ### 最近完成（滚动窗口，只留最近 3 条；更早的见三节）
 
 - **2026-09-03 · 数据空缺复核轨任务一 · leaf 级 `optional`/`not_applicable` 机制 + A 桶标注**（[ADR-060] 实装 / [ADR-062]）— A 桶 overview 4 字段（58 处空缺）标 `optional`；`count_chapter_leaves`/`compute_freshness` 扩展 leaf 级 + 字段级 `not_applicable` 透传跳过；`validate.py` 两条不变式机器化；**B/D 桶经逐所核对回 F（不标 `not_applicable`）**。生成块仅 progress-matrix 第 2 列 12 家 🟡→✅、health-summary 零变化
-- **2026-09-03 · 监管图 Regulation Map · 设计 + 渲染层（两棒做齐）**（[ADR-061]）— 第三章 8 字段固定槽位四层「监管截面」：监管主体三卡 → 法律基座满宽暖色 → 外资与资金两卡 → 透明与保护两卡；`renderRegulationMap` 手写 SVG + 顶层 tab（7→8）+ 路由键 `regulation-map`；本章 8 字段纯散文、数据层零 spec，诚实三态退化为实心卡 / 虚线「未记录」，现网 9 处空白如实呈现（真实研究缺口，走 [ADR-060] 任务二 / 四）；纯前端三文件、`docs/data/` 零 diff、Chrome headless 3 家 × 中英 × 明暗核对通过
-- **2026-09-03 · 上市生命周期剖面 · 设计 + 数据层 + 渲染层（三棒做齐）**（[ADR-059]）— 7 设计轴按推荐项定案（仿真 MVP 验证形态）；章节级 `only_spot` 标记（`de-eurex` 第六章 `➖`、health -9）+ 两段时长 spec + 8 家从 quote 结构化；`renderListingLifecycle` 手写 SVG「证券的一生」轴 + 顶层 tab（6→7）+ 档案页折叠，纯前端三文件、`docs/data/` 零 diff、Chrome headless 5 家 × 中英 × 明暗核对通过
+- **2026-09-03 · 监管图 Regulation Map · 设计 + 渲染层（两棒做齐）+ 审查视觉修订**（[ADR-061]）— 第三章 8 字段固定槽位四层「监管截面」：监管主体三卡 → 法律基座满宽暖色 → 外资与资金两卡 → 透明与保护两卡；`renderRegulationMap` 手写 SVG + 顶层 tab（7→8）+ 路由键 `regulation-map`；纯散文、零 spec，诚实两态（实心 / 虚线「未记录」），现网 9 处空白如实呈现。审查对 5 家长文所 × 明暗做 headless + SVG 几何实测，修 `rmWrap` 右边距（CJK 长行溢出卡右沿 6px）；纯前端、`docs/data/` 零 diff
+- **2026-09-03 · 不变式纯函数合成用例自检**（横切，[ADR-063]；接 ADR-062 审查反馈）— `not_applicable` / `optional` 判定的探针从"跑一次就丢"固化为 `tools/selfcheck.py`（stdlib 24 用例）接入 `make check`；`validate.py` 抽 `chapter_na_violations()` 纯函数。B/D 桶勘误后全库无真实 `not_applicable`、`validate.py` 跑不到核心分支的盲区补上
 
 ---
 
@@ -148,7 +148,8 @@
     - **流程**：仿真数据 MVP 原型（三个虚构市场 × 中英 × 明暗，验证四层槽位 / 空白虚线态 / 长文多辖区 / 暖色法律基座，未落库）形态通过；设计轴按推荐项定案（无人值守自动续跑会话，未现场 Q&A——用户异议可在本棒两个 commit 上回滚，回滚依据 = [ADR-061]）。
     - **设计**：第三章 8 字段固定槽位纵向四层「监管截面」（SVG W=1180）——监管主体三卡（`regulator` / `self_regulatory_org` / `clearing_regulator`，左缘 `--info`）→ 法律基座 `core_laws` 满宽暖色卡（`--warn`）→ 外资与资金两卡（`foreign_ownership_limit` / `capital_controls`，左缘 `--accent`）→ 透明与保护两卡（`disclosure_requirements` / `investor_protection`）。卡头 `fieldLabel`、正文 `dv()` 折 ≤4 行、全文进 `<title>` + 点击复用 `openCellOverlay`；诚实三态退化为实心 / 虚线「未记录」（本章无 spec、无 `type:none`，[ADR-035] D 退化两态）。
     - **数据层评估 = 零 spec 需求**：8 字段全为散文、无量化机制值可结构化（[ADR-035] B）——`spec` 缺省是预期，非缺口。现网 9 处空白是真实研究缺口、走 [ADR-060] 任务二 / 四轨道，本棒不代劳。纯衍生品所（de-eurex）第三章全章适用、无 `only_spot`。**本棒未动** `data/`、`schema/`、`tools/`。
-    - **渲染层（2026-09-03）**：`docs/assets/app.js` `renderRegulationMap` / `rmBuild`（+171；`rmEnvCard` / `rmLawStrip` / `rmLaneLabel` / `rmWrap` / `rmLegend` / `rmProse`）+ 顶层 tab「监管图 / Regulation Map」（排「上市生命周期」后，tab 数 7→8）+ 路由键 `regulation-map` + `styles.css` `.rm-*`（+19）+ `index.html`（+1）。纯前端三文件、`data/` 与 `docs/data/` 零 diff、`make sync` 幂等、生成块无变化、`check_ui_i18n` OK。Chrome headless `sg-sgx`（EN 暗色）/ `fr-euronext`（中文亮色，多辖区长文 + 2 空白）/ `hk-hkex`（中文，闸门 2 空白 + 保护 1 空白）核对通过，其余视图无回归。**已知局限**：① 卡片正文按卡高 ≤4 行硬裁剪（全文在 `<title>` + 浮层；长文卡「先摘要后全文」散文精修属数据层活）；② 空白虚线卡点击后浮层无正文（部分空白带 `detail` 草稿、en 态走 `zhNoteBlock` 折叠）；③ 全 20 家图高一致、空白多的市场纵向留白一致（诚实呈现，非 bug）。
+    - **渲染层（2026-09-03）**：`docs/assets/app.js` `renderRegulationMap` / `rmBuild`（+171；`rmEnvCard` / `rmLawStrip` / `rmLaneLabel` / `rmWrap` / `rmLegend` / `rmProse`）+ 顶层 tab「监管图 / Regulation Map」（排「上市生命周期」后，tab 数 7→8）+ 路由键 `regulation-map` + `styles.css` `.rm-*`（+19）+ `index.html`（+1）。纯前端三文件、`data/` 与 `docs/data/` 零 diff、`make sync` 幂等、生成块无变化、`check_ui_i18n` OK。Chrome headless `sg-sgx`（EN 暗色）/ `fr-euronext`（中文亮色，多辖区长文 + 2 空白）/ `hk-hkex`（中文，闸门 2 空白 + 保护 1 空白）核对通过，其余视图无回归。**已知局限**：① 卡片正文按卡高 ≤4 行硬裁剪（全文在 `<title>` + 浮层；长文卡「先摘要后全文」散文精修属数据层活）；② 空白虚线卡点击后浮层无正文（部分空白带 `detail` 草稿、en 态走 `zhNoteBlock` 折叠）；③ 全 20 家图高一致、空白多的市场纵向留白一致（诚实呈现，非 bug）；④ 中英混排时 Latin 词 / 数字被 `llWrap` 逐字切分从中间断开（与 `renderListingLifecycle` 共用 `llWrap` 的既有局限）。
+    - **视觉修订（2026-09-03，接审查反馈）**：审查方对 5 家长文所 × 明暗做 headless + SVG 几何实测，抓出**卡内密排 CJK 长行越过卡片右沿约 6px**——`rmWrap` 的 `per` 只扣 4px、没算正文 `x+14` 左内边距 + 右留白。修：`rmWrap` 改扣 24px，`per` 43/27。几何复测每卡右侧余量 ≥14px、纵向本就无裁剪。纯前端一处、`docs/data/` 零 diff。设计七轴经审查确认、不回滚。见 [ADR-061] 视觉修订段。
 
 - [ ] **Phase 4 · 单页画布合并** — 把市场机制剖面 / 成本瀑布 / 交割管线 / Phase 3 剩余模块合并为同一页的一块可视化画布，对比矩阵 / 时区甘特条 / 数据健康度 / 档案页降级到「更多」入口（北极星定案见 [ADR-057]，此前只在 [ADR-056] 与宪法开篇点到）。Phase 3 剩余每个模块的设计定案按 [ADR-057] 的 merge-ready 清单逐条回答（锚定关系 / 占位 / 诚实三态 / 语言开关 / 零构建）。
   - **启动前置条件（硬顺序，不插队）：Phase 3 的全部章节可视化模块——上市生命周期（三棒做齐 [ADR-059]）/ 监管图 / 参与者 / 风险旗标——均已落地。** 在此之前不启动合并、不动前端做画布布局；单项没做齐就合并会反复重排（[ADR-057] 定了什么 #4，用户 2026-09-01 复述强调）。
@@ -163,6 +164,8 @@
   - **批次 4（方案 E，[ADR-049]）**：新增 `tools/check_en_terms.py`（`make check-en-terms`，只出建议清单、不自动改、不进 `make check`）；house style 写进 `schema/glossary.yml` 头注；55 处候选人工逐条判断后实改 4 处（3 个 `Renminbi` → `RMB`、1 处 `lot size` / `board lot` 同句混用），修 `tw-twse` 简繁错字 `网路资讯商店` → `網路資訊商店`（已开官网核对）。
   - **验收**：`make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK、`make sync` 二次幂等）。Chrome headless `--dump-dom` 逐屏核对 6 家 × {剖面, 瀑布, 档案} + 时区 + 矩阵：中文态与 `git show HEAD` 前端逐行 diff，**成本瀑布 6/6、档案页 6/6、矩阵 逐字一致**，剖面仅差上述 5 个 chip 改名；英文态外壳 / 折叠块 / 语言切换按钮均正确。
   - **过程中修掉两个真 bug**（详见 ADR）：`cwBuild` 里 `for (var t …)` 因 `var` 提升遮蔽了模块级 `t()` 文案助手，导致成本瀑布两种语言模式都白屏；`tdHeadlineParts` 把已语言化的变量再套进 `t()` 模板，中文态输出「S&P 500跌」而非原文「指数跌」。
+
+- [x] **不变式纯函数合成用例自检**（横切条目，2026-09-03，[ADR-063]；接 [ADR-062] 审查反馈）— [ADR-059]/[ADR-062] 的 `not_applicable` / `optional` 判定抽了纯函数但探针一次性跑过就丢，B/D 桶勘误回 F 后**全库无真实 `not_applicable`**，`validate.py` 这两条检查跑不到核心分支。新增 `tools/selfcheck.py`（stdlib，无 pytest）固化 24 条正负向用例（`field_na_violations` 6 / `chapter_na_violations` 6 / `count_chapter_leaves` 8 / `chapter_is_not_applicable` 4），接入 `make check`（排 `validate` 前）；`validate.py` 抽 `chapter_na_violations()` 纯函数（内联调用点行为等价）。负向探针确认失配 → 退出码 1。今后新增 / 改一条不变式纯函数 = 顺手补 `selfcheck.py` 用例（[CLAUDE.md §四] 操作化落点）。
 
 ### 数据空缺复核轨（横切条目，不属于 Phase 序列；与 Phase 3 并行，[ADR-060]）
 
