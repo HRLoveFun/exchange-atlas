@@ -555,8 +555,15 @@ market_structure:
     confidence: low
 
   connect_schemes:
-    zh: ""
-    confidence: low
+    zh: "无沪港通式的跨境股票互联互通机制。KRX 曾就自身上市衍生品与境外交易所设夜盘联动：CME-linked trading（2009–2020 年 4 月）、Eurex-linked trading（2010–2025 年 6 月 5 日），两者均已终止，KRX 自 2025 年 6 月起自主运营夜盘。现无跨所联动；境外投资者按 IRC / LEI 登记通过持牌会员接入现货市场"
+    en: "No cross-border stock-connect scheme of the Stock Connect type. KRX previously ran night-session links for its own listed derivatives with overseas exchanges — CME-linked trading (2009 to April 2020) and Eurex-linked trading (2010 to 5 June 2025) — both now terminated, with KRX operating its own in-house night trading since June 2025. There is no current inter-exchange link; foreign investors access the cash market through licensed members after IRC/LEI registration"
+    quote: "The Korea Exchange (KRX) has been providing the night trading services … in cooperation with major global exchanges, such as CME and Eurex, since 2009. …… CME-linked Trading … Operation period 2009~April 2020 … Eurex-linked Trading … 2010~To be terminated on June 5, 2025 …… The Eurex-linked night trading was decided to end at 4:00* on Thursday, June 5, 2025."
+    sources:
+      - title: "Guide to Night Session in KRX Derivatives Market（KRX 官网英文版 PDF，2025 年 4 月）"
+        url: https://global.krx.co.kr/contents/GLB/02/0201/0201041003/Guide_to_Night_Session_in_KRX_Derivatives_Market.pdf
+        accessed: 2026-08-18
+    detail: "quote 用「…」「……」连接同一 PDF 的引言句、『Trading Linked to CME and Eurex』时间线表两列、以及 Q&A 段（中间为表格其他行 / 段落）。「无股票互联互通」为消极认定。境外准入渠道见 participants.foreign_access_channel。"
+    confidence: high
 
   derivatives:
     trading_sessions:

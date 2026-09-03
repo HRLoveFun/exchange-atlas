@@ -497,6 +497,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "connect_schemes",
+      "label_zh": "互联互通/跨境安排",
+      "label_en": "Connect / Cross-border Schemes",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "au-asx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "derivatives.trading_sessions.pre_market",
       "label_zh": "盘前",
       "label_en": "Pre-market",
@@ -1817,6 +1829,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "connect_schemes",
+      "label_zh": "互联互通/跨境安排",
+      "label_en": "Connect / Cross-border Schemes",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "br-b3",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "derivatives.trading_sessions.pre_market",
       "label_zh": "盘前",
       "label_en": "Pre-market",
@@ -4190,6 +4214,18 @@
     },
     {
       "exchange_id": "ch-six",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "connect_schemes",
+      "label_zh": "互联互通/跨境安排",
+      "label_en": "Connect / Cross-border Schemes",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "ch-six",
       "chapter": "listing",
       "chapter_label_zh": "上市、持续监管与退市",
       "chapter_label_en": "Listing, Continuing Obligations & Delisting",
@@ -5266,7 +5302,7 @@
       "label_en": "Connect / Cross-border Schemes",
       "volatility": "moderate",
       "verified": "2026-08-12",
-      "confidence": "low"
+      "confidence": "high"
     },
     {
       "exchange_id": "cn-sse",
@@ -7346,6 +7382,18 @@
     },
     {
       "exchange_id": "de-eurex",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "connect_schemes",
+      "label_zh": "互联互通/跨境安排",
+      "label_en": "Connect / Cross-border Schemes",
+      "volatility": "moderate",
+      "verified": "2026-08-27",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "de-eurex",
       "chapter": "clearing",
       "chapter_label_zh": "清算、结算与交割",
       "chapter_label_en": "Clearing, Settlement & Delivery",
@@ -8255,6 +8303,18 @@
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "de-xetra",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "connect_schemes",
+      "label_zh": "互联互通/跨境安排",
+      "label_en": "Connect / Cross-border Schemes",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
     },
     {
       "exchange_id": "de-xetra",
@@ -9226,7 +9286,7 @@
       "label_en": "Connect / Cross-border Schemes",
       "volatility": "moderate",
       "verified": "2026-08-16",
-      "confidence": "low"
+      "confidence": "medium"
     },
     {
       "exchange_id": "fr-euronext",
@@ -12878,6 +12938,18 @@
     },
     {
       "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "connect_schemes",
+      "label_zh": "互联互通/跨境安排",
+      "label_en": "Connect / Cross-border Schemes",
+      "volatility": "moderate",
+      "verified": "2026-08-13",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "jp-jpx",
       "chapter": "listing",
       "chapter_label_zh": "上市、持续监管与退市",
       "chapter_label_en": "Listing, Continuing Obligations & Delisting",
@@ -13811,6 +13883,18 @@
       "volatility": "moderate",
       "verified": "2026-08-16",
       "confidence": "low"
+    },
+    {
+      "exchange_id": "kr-krx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "connect_schemes",
+      "label_zh": "互联互通/跨境安排",
+      "label_en": "Connect / Cross-border Schemes",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "high"
     },
     {
       "exchange_id": "kr-krx",
@@ -15119,6 +15203,18 @@
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "sa-tadawul",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "connect_schemes",
+      "label_zh": "互联互通/跨境安排",
+      "label_en": "Connect / Cross-border Schemes",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
     },
     {
       "exchange_id": "sa-tadawul",
@@ -17770,7 +17866,7 @@
       "label_en": "Connect / Cross-border Schemes",
       "volatility": "moderate",
       "verified": "2026-08-16",
-      "confidence": "low"
+      "confidence": "medium"
     },
     {
       "exchange_id": "tw-twse",

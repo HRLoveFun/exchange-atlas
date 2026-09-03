@@ -993,9 +993,10 @@
         "detail": null
       },
       "connect_schemes": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "未见类似沪港通式的跨境互联互通机制；ASX Clear的Trade Acceptance Service(TAS)接受Cboe Australia、National Stock Exchange of Australia等其他本地市场运营商(AMO)的CHESS适格证券交易，属本地竞争市场间的清算互通，非跨境机制，与「互联互通」概念不完全对应，暂不作为该字段的正式内容填入。",
+        "zh": "无沪港通 / 深港通式的跨境股票互联互通机制。ASX Clear 的 Trade Acceptance Service（TAS）接受 Cboe Australia、National Stock Exchange of Australia 等其他本地市场运营商（AMO）的 CHESS 适格证券交易，属本地竞争市场之间的清算互通、非跨境订单路由安排。境外投资者按澳大利亚一般外资规则参与，无需通过专门连接通道",
+        "en": "No cross-border stock-connect scheme of the Shanghai-/Shenzhen-Hong Kong Stock Connect type. ASX Clear's Trade Acceptance Service (TAS) accepts CHESS-eligible trades from other domestic Approved Market Operators (Cboe Australia, National Stock Exchange of Australia) — a clearing-interoperability arrangement between competing domestic venues, not a cross-border order-routing link. Foreign investors participate under Australia's general foreign-investment rules without a dedicated connect channel",
+        "detail": "「无跨境互联互通」为消极认定（未见 ASX 或 ASIC 关于此类机制的任何安排）；TAS 的本地清算互通有官方规则支撑。境外准入渠道见 participants.foreign_access_channel。",
+        "confidence": "medium",
         "sources": [
           {
             "title": "Cash market trading hours（ASX 官网）",
@@ -1004,7 +1005,6 @@
           }
         ],
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "spec": null,
         "quote": null

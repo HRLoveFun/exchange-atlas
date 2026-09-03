@@ -1225,8 +1225,10 @@
         "enum": null
       },
       "connect_schemes": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "无沪港通式的跨境股票互联互通机制。境外投资者按日本一般外资规则通过持牌金融工具经营者（证券公司）接入东证市场，无需专门连接通道",
+        "en": "No cross-border stock-connect scheme of the Stock Connect type. Foreign investors access the TSE markets through licensed Financial Instruments Business Operators (securities firms) under Japan's general foreign-investment rules, with no dedicated connect channel",
+        "detail": "「无跨境互联互通」为消极认定（未见 JPX / TSE 关于此类机制的官方原文）。",
+        "confidence": "medium",
         "sources": [
           {
             "title": "Business Regulations（TSE官网英文版PDF）",
@@ -1235,10 +1237,8 @@
           }
         ],
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null
       },
       "derivatives": {

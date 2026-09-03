@@ -923,21 +923,21 @@
         "detail": null
       },
       "connect_schemes": {
-        "zh": "沪港通（与港交所互联互通，2014年11月开通）",
-        "en": "Shanghai-Hong Kong Stock Connect (interconnection with HKEX, launched November 2014)",
-        "confidence": "low",
-        "detail": "开通日期等细节为一般知识，未在本次会话重新核实原始公告，留待与 hk-hkex 数据交叉核对时补充来源。",
+        "zh": "沪港通（Shanghai-Hong Kong Stock Connect）：SSE 与香港联合交易所（SEHK）之间的双向交易连接，2014 年 4 月由李克强总理宣布、2014 年 11 月 17 日正式开通。北向（沪股通）供香港与海外投资者买卖合格 A 股，南向（港股通）供合格境内投资者买卖合格港股，受每日额度限制；总额度已于 2016 年 8 月取消。ETF 于 2022 年 7 月纳入",
+        "en": "Shanghai-Hong Kong Stock Connect: a two-way trading link between the SSE and the Stock Exchange of Hong Kong Limited (SEHK), announced by Premier Li Keqiang in April 2014 and officially launched on 17 November 2014. Northbound lets Hong Kong and overseas investors trade eligible A shares; Southbound lets qualified mainland investors trade eligible Hong Kong shares, subject to a daily quota; the aggregate quota was abolished in August 2016. ETFs were included from July 2022",
+        "quote": "The Shanghai-Hong Kong Stock Connect was officially launched in 2014. The stock connect established a two-way trading link between the Shanghai Stock Exchange (SSE) and the Stock Exchange of Hong Kong Limited (SEHK), a wholly-owned subsidiary of Hong Kong Exchanges and Clearing Limited (HKEX). The stock connect allows qualified mainland China investors to access eligible Hong Kong shares (Southbound) as well as Hong Kong and overseas investors to trade eligible A shares (Northbound) subject to a certain amount of daily quota. …… 2016.8 Aggregate quota abolished …… 2014.11.17 The SH-HK Stock Connect launched …… 2014.4 Premier Li Keqiang announced the SH-HK Stock Connect",
         "sources": [
           {
-            "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
-            "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
-            "accessed": "2026-08-12"
+            "title": "SSE — Shanghai-Hong Kong Stock Connect, Brief Introduction / History and Development（english.sse.com.cn）",
+            "url": "http://english.sse.com.cn/access/stockconnect/introduction/",
+            "accessed": "2026-09-04"
           }
         ],
+        "detail": "quote 用「……」连接简介段与「History and Development」时间线若干行（中间为其他年份行）。SSE 英文版带「以中文原文为准」免责声明，但本条为事实性沿革描述、非规则条文，取 high。SZ-HK Stock Connect（2016.12.5 开通）由 cn-szse 记录。",
+        "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "derivatives": {
         "trading_sessions": {

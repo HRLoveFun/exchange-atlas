@@ -951,8 +951,10 @@
         "detail": null
       },
       "connect_schemes": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "无沪港通式的跨境股票互联互通机制。境外机构通过合格外国投资者（QFI）框架直接开户参与，或经与获批中介签订的互换协议（swap）间接持有经济权益；均为准入安排、非交易所间订单路由连接（见 participants.foreign_access_channel）",
+        "en": "No cross-border stock-connect scheme of the Stock Connect type. Foreign institutions participate directly by opening accounts under the Qualified Foreign Investor (QFI) framework, or hold economic exposure indirectly via swap agreements with approved intermediaries; both are access arrangements rather than an inter-exchange order-routing link (see participants.foreign_access_channel)",
+        "detail": "「无跨境互联互通」为消极认定（未见 Saudi Exchange / CMA 关于此类机制的安排）。",
+        "confidence": "medium",
         "sources": [
           {
             "title": "Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）",
@@ -961,10 +963,8 @@
           }
         ],
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null
       },
       "derivatives": {

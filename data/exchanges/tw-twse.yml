@@ -610,14 +610,14 @@ market_structure:
     confidence: high
 
   connect_schemes:
-    zh: "无类似沪港通/深港通的股票互联互通机制；外资统一透过境外外国机构投资人(FINI)与境外华侨及外国自然人(FIDI)登记制参与，2003年起已取消QFII式总额度限制"
-    en: "No stock-connect scheme analogous to Shanghai-Hong Kong Stock Connect or Shenzhen-Hong Kong Stock Connect; foreign investors participate uniformly through the Foreign Institutional Investor (FINI) and Overseas Chinese/Foreign Natural Person (FIDI) registration regimes, with the QFII-style aggregate quota abolished since 2003"
-    detail: "「已取消总额度限制」的具体表述来自第三方检索摘要，本次未逐条核对金管会/证期局原文，confidence 相应降级。"
+    zh: "无沪港通 / 深港通式的股票互联互通机制。外资统一透过境外外国机构投资人（FINI）与境外华侨及外国自然人（FIDI）登记制参与——是准入登记而非交易所间订单连接（见 participants.foreign_access_channel）"
+    en: "No stock-connect scheme analogous to Shanghai-/Shenzhen-Hong Kong Stock Connect. Foreign investors participate uniformly through the Foreign Institutional Investor (FINI) and Overseas Chinese/Foreign Natural Person (FIDI) registration regimes — a registration-based access route, not an inter-exchange order link (see participants.foreign_access_channel)"
+    detail: "「无跨境互联互通」为消极认定。原记「2003 年起取消 QFII 式总额度限制」一句来自第三方检索摘要、未核对金管会一手文，本次删去。"
     sources:
       - title: 侨外投资专区（FINI/FIDI 登记表格）
         url: https://www.twse.com.tw/zh/page/investor/foreign/03f.html
         accessed: 2026-08-16
-    confidence: low
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 六｜上市、持续监管与退市

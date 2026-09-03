@@ -1049,9 +1049,10 @@
         "detail": null
       },
       "connect_schemes": {
-        "zh": "本所自身即是「一个交易所横跨多国市场」的互联互通式结构（七个市场共享同一中央订单簿/同一交易平台Optiq），与其他交易所之间是否另有独立的跨境互联互通安排（如与LSE、Nasdaq等的对接）本次未核实",
-        "en": "The exchange itself already embodies a \"one exchange spanning multiple countries\" connected structure (seven markets share one Central Order Book / one Optiq trading platform); whether separate cross-border connect schemes exist with other exchanges (e.g. LSE, Nasdaq) was not verified this session",
-        "confidence": "low",
+        "zh": "本所自身即「一个交易所横跨多国市场」的一体化结构——阿姆斯特丹 / 布鲁塞尔 / 都柏林 / 里斯本 / 米兰 / 奥斯陆 / 巴黎七个市场共享同一部规则手册（Harmonised Rulebook）、同一中央订单簿、同一交易平台 Optiq，本身已是跨境订单联通。未见 Euronext 与集团外交易所（如 LSE、Nasdaq）之间沪港通式的独立跨境互联互通安排",
+        "en": "The exchange itself is an integrated \"one exchange spanning multiple countries\" structure — the seven markets (Amsterdam, Brussels, Dublin, Lisbon, Milan, Oslo, Paris) share one rulebook (the Harmonised Rulebook), one Central Order Book and one Optiq trading platform, which is already a cross-border order link. No separate Stock Connect-style cross-border scheme was found between Euronext and exchanges outside the group (e.g. LSE, Nasdaq)",
+        "detail": "「七市场共享 Optiq / Harmonised Rulebook」在本文件 overview.history 与 market_structure._meta 引用的 Rule Book Book I 中已核实；「无集团外独立互联互通」为消极认定。",
+        "confidence": "medium",
         "sources": [
           {
             "title": "Notice n°4-01 Trading Manual（生效2025-12-08）",
@@ -1067,7 +1068,6 @@
         "verified": "2026-08-16",
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null
       },
       "derivatives": {

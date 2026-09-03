@@ -576,9 +576,10 @@ market_structure:
     confidence: high
 
   connect_schemes:
-    zh: ""
-    confidence: low
-    detail: "未找到B3与其他交易所间类似沪港通式的正式互联互通安排。非居民投资者接入渠道（CMN 4.373号决议）性质不同——是准入通道而非交易所间连接，已记入participants.foreign_access_channel。"
+    zh: "无 B3 与其他交易所之间沪港通式的正式跨境互联互通安排。非居民投资者按巴西央行 CMN 第 4.373 号决议登记后直接参与 B3 市场——是准入通道而非交易所间订单连接（见 participants.foreign_access_channel）。B3 另设 BDR（巴西存托凭证）制度让本地投资者交易境外公司凭证，属存托工具、非市场互联"
+    en: "No formal cross-border connect scheme of the Stock Connect type between B3 and other exchanges. Non-resident investors register under the Central Bank's CMN Resolution 4,373 and then access B3's markets directly — an access channel, not an inter-exchange order link (see participants.foreign_access_channel). B3 separately runs a BDR (Brazilian Depositary Receipt) programme letting local investors trade receipts over foreign companies — a depositary instrument, not a market link"
+    detail: "「无跨境互联互通」为消极认定（未见 B3 或 CVM 关于此类机制的安排）。"
+    confidence: medium
 
   # 衍生品市场机制：B3自身运营期货/期权业务线（见第四章products的br-b3-options/br-b3-futures），
   # 本子块裁剪自本章顶层字段集合，见 schema/taxonomy.yml market_structure.derivatives 与

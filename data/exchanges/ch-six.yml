@@ -693,9 +693,10 @@ market_structure:
     confidence: high
 
   connect_schemes:
-    zh: ""
-    confidence: low
-    detail: "SIX Group同时运营本所与西班牙BME Exchange（见overview.history），但本次未找到两地市场之间存在类似「沪港通」式互联互通订单路由机制的官方原文——目前更像是「同集团分别运营两个独立市场」而非「互联互通」，该关系已通过group_id表达，不在本字段重复，留空，见OPEN-QUESTIONS。"
+    zh: "无沪港通式的跨境互联互通订单路由机制。SIX Group 同时运营本所与西班牙 BME Exchange（见 overview.history），但两地市场是「同集团分别运营的两个独立市场」而非互联互通，该关系由 group_id 表达。境外投资者按瑞士一般规则通过交易参与者接入，无专门连接通道"
+    en: "No cross-border connect scheme with order routing of the Stock Connect type. SIX Group operates both this exchange and Spain's BME Exchange (see overview.history), but the two are separately operated independent markets under one group rather than an interconnection — a relationship expressed via group_id. Foreign investors access through trading participants under Switzerland's general rules, with no dedicated connect channel"
+    detail: "「无跨境互联互通」为消极认定（未见 SIX / SER 关于此类订单路由机制的官方原文）。"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 六｜上市、持续监管与退市

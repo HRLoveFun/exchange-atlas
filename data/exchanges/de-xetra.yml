@@ -541,8 +541,10 @@ market_structure:
     confidence: high
 
   connect_schemes:
-    zh: ""
-    confidence: low
+    zh: "无沪港通式的跨境股票互联互通机制。境外投资者按欧盟 MiFID II 框架通过获准交易参与者接入 Xetra；欧盟内投资服务的跨境护照（passporting）是券商层面的许可安排、非交易所间订单路由连接"
+    en: "No cross-border stock-connect scheme of the Stock Connect type. Foreign investors access Xetra through authorised trading participants under the EU's MiFID II framework; the EU passporting of investment services is a broker-level authorisation regime, not an inter-exchange order-routing link"
+    detail: "「无跨境互联互通」为消极认定（未见 FWB / Deutsche Börse 关于此类机制的官方原文）。"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 六｜上市、持续监管与退市

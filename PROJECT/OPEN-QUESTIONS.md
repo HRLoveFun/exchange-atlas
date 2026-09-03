@@ -118,7 +118,6 @@
 - `ch-six` 风险与特殊考量 / 政治、地缘与制裁风险（political_risk_note）— confidence: low
 - `cn-sse` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `cn-sse` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
-- `cn-sse` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
 - `cn-sse` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `cn-sse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `cn-szse` 交易成本与税费 / 金融交易税（financial_transaction_tax）— confidence: low
@@ -133,7 +132,6 @@
 - `fr-euronext` 市场结构与交易机制 / 上午连续竞价（trading_sessions.continuous_am）— confidence: low
 - `fr-euronext` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
 - `fr-euronext` 市场结构与交易机制 / 大宗交易（block_trade）— confidence: low
-- `fr-euronext` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
 - `hk-hkex` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `hk-hkex` 市场结构与交易机制 / 最小交易单位（board_lot_size）— confidence: low
 - `hk-hkex` 清算、结算与交割 / 交割方式（delivery_method）— confidence: low
@@ -161,7 +159,6 @@
 - `sa-tadawul` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `sg-sgx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `tw-twse` 监管与法律环境 / 外资准入与持股比例限制（foreign_ownership_limit）— confidence: low
-- `tw-twse` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
 - `tw-twse` 清算、结算与交割 / 初始保证金制度（initial_margin_practice）— confidence: low
 - `tw-twse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `us-nasdaq` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low

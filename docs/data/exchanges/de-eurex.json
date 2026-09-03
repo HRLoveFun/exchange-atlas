@@ -969,8 +969,10 @@
         "enum": null
       },
       "connect_schemes": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "无沪港通式的跨境股票互联互通机制（现货概念，对纯衍生品所本不适用）。Eurex 面向境外提供直接市场准入：美国参与者可依 SEC class no-action relief 与 2009 年 SEC 令 / 《商品交易法》直接接入合格期权与外国证券期货品种；准入由各法域监管安排规定，非交易所间订单路由连接",
+        "en": "No cross-border stock-connect scheme of the Stock Connect type (a cash-market concept that does not really apply to a pure derivatives exchange). Eurex offers direct market access from abroad: U.S. participants may access eligible options and foreign security-futures products under SEC class no-action relief and the 2009 SEC Order / Commodity Exchange Act; access is governed by per-jurisdiction regulatory arrangements rather than an inter-exchange order-routing link",
+        "detail": "「无股票互联互通」对衍生品所是范畴不适配（见框架性问题 #17），此处如实说明并给出 Eurex 实际的跨境准入形态。",
+        "confidence": "medium",
         "sources": [
           {
             "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
@@ -979,10 +981,8 @@
           }
         ],
         "verified": "2026-08-27",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null
       },
       "derivatives": {
