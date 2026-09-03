@@ -1425,3 +1425,15 @@
 **验证（本棒 = 设计文档 + 数据层评估）：** MVP 截图（明 / 暗两态）四层槽位对齐、空白虚线 / 实心左缘差异可见、法律基座暖色、中英卡头随 langMode 正确切换；`make build` 基线不受影响（未触碰任何被扫描文件）。
 
 **日期：** 2026-09-03
+
+---
+
+**渲染层落地（2026-09-03）** — 把设计定案移植进主前端，纯前端三文件（`docs/assets/app.js` +171 / `docs/assets/styles.css` +19 / `docs/index.html` +1），`data/` 与 `docs/data/` 零 diff、`make sync` 幂等、生成块无变化。
+
+- **`app.js` `renderRegulationMap` / `rmBuild`**：手写 SVG（`W=1180`）固定槽位纵向四层——监管主体三卡（`regulator`/`self_regulatory_org`/`clearing_regulator`，左缘 `var(--info)`）→ 法律基座 `core_laws` 满宽暖色卡（`--warn-soft` + `--warn`）→ 外资与资金两卡（`foreign_ownership_limit`/`capital_controls`，左缘 `var(--accent)`）→ 透明与保护两卡（`disclosure_requirements`/`investor_protection`）。卡 = `<g class="td-hit" data-role="cell" data-chapter="regulation">`、点击复用 `openCellOverlay`；从第一版接 `t()` / `tSel()` / `fieldLabel` / `dv()` / `llWrap`（[ADR-059] 折行复用；`rmWrap` 按内容 CJK / 拉丁推 `per`）。
+- **诚实三态（本章无 spec，退化为两态）**：有值 → 实心卡 + 左缘色条 + 角色头（`fieldLabel`）+ 正文折 ≤ 4 行 + 全文进 `<title>`；**缺省 → 虚线框 + 居中斜体「未记录 / not recorded」**——现网 9 处空白如实呈现（hk-hkex 外资 / 资本 / 披露、us-nyse 外资、tw-twse 资本 / 投资者保护、de-xetra / fr-euronext / uk-lse 清算监管、fr-euronext 自律组织），均为真实数据缺口、不造 spec 撑图表（轴 6）。
+- **merge-ready 逐条**：锚定关系 = 独立分区、无共同 x 轴 / 不叠加（与剖面一个交易日、交割 T+N、listing 证券一生构成「同一市场四视角」）；占位 = 合并画布常驻、默认展开、纵 ≈ listing 档、横满宽；语言开关从第一版接（图例 / lane label / prose 全走 `t()`，卡头走 `fieldLabel`）；零构建（手写 SVG + 主题令牌，无新增 CSS 变量）。
+- **接线**：顶层 tab「监管图 / Regulation Map」排「上市生命周期」后（tab 数 7→8）；路由键 `regulation-map`；`RM_DEFAULT_EX = "sg-sgx"`；`change` 事件加 `rm-exchange` 分支；`styles.css` `.rm-*`（含图例 `.rm-lg-solid / .rm-lg-dash / .rm-lg-key`）。`check_ui_i18n` OK（新串全走 `t()` / `tSel()`）。
+- **验证**：`make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK）；Chrome headless 核对 `sg-sgx`（EN + 暗色）/ `fr-euronext`（中文 + 亮色，多辖区长文 + 2 空白）/ `hk-hkex`（中文，闸门区 2 空白 + 保护层 1 空白）——四层槽位对齐、虚线 / 实心差异可见、卡头随语言切换正确、其余视图无回归。**已知局限**：① 卡片正文按卡高硬裁剪 ≤ 4 行（全文在 `<title>` + 浮层；长文卡「先摘要后全文」散文精修属数据层活，不进渲染层）；② 空白虚线卡点击后浮层无正文（部分空白带 `detail` 草稿注记，en 态走 `zhNoteBlock` 折叠）；③ 槽位 y 坐标固定使全 20 家图高一致、空白多的市场纵向留白一致（诚实呈现，非 bug）。
+
+**渲染层日期：** 2026-09-03
