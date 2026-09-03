@@ -1489,3 +1489,31 @@
 **验证：** `make build` 全绿（`selfcheck` 24/24、`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK）、`make sync` 二次幂等、`docs/data/` 零 diff。负向探针：注入一条必失配用例 → `main()` 退出码 1，确认失配会红。`validate.py` 重构后 20 家扫描结果不变（`de-eurex` 的 `listing._meta.not_applicable` 仍正常通过、无新误报）。
 
 **日期：** 2026-09-03
+
+---
+
+### ADR-065 — 成本瀑布数据层残差处理：`side` / `type: none` / 触发点残差逐条坐实
+
+> **编号说明：** ADR-064 由并行会话的「参与者图设计定案 + 数据层评估」占用（见 auto-memory），本条取 065 避让。
+
+**背景：** [ADR-054] 成本瀑布 spec 层核查（103 个 `costs` spec 第二人复核）留下 13 个 `type: none` 降级点 + 6 个 `side`/费率补强点；[ADR-058] A2/A3 坐实了一部分，收尾审查又回退了两处（`hk-hkex FTT` → `rate: null`、`za-jse STT side: buy` → 保留待补）。ROADMAP「下一步 #1」把剩余项列为「成本瀑布数据层残差（按触发时点推进）」，明细在 OPEN-QUESTIONS #88。本条是这批残差的一轮集中处理（2026-09-04）。
+
+**共同模式（承接 [ADR-054] 三类系统性缺口）：** 断言「本市场不征某税费」需税法/税务局/立法机构的**正面**文本；`side` 方向键需来源逐字方向措辞（quote / zh / detail 三处任一），未取到则**保留值 + 记 OPEN-Q**（渲染层 `cwSide()` 对缺省回退 `both`，移除单边税键错得更远，[ADR-054] 裁定细则）。
+
+**逐条结果：**
+
+| 字段 | 处理前 | 处理后 | 依据 |
+|---|---|---|---|
+| `uk-lse stamp_duty` `side: buy` | high，quote 无方向措辞、待补 | ✅ 坐实，`verified: 2026-09-04` | HMRC / gov.uk『Tax when you buy shares』：『When you buy shares, you usually pay a tax or duty of 0.5%』『You pay tax when you buy』（非 SPA 页、curl 常规 UA 200，已入 quote + `.cache/uk-lse`） |
+| `za-jse stamp_duty` `side: buy` | high，quote 无方向措辞、[ADR-058] 收尾回退为「保留待补」 | ✅ 坐实，`verified: 2026-09-04` | SARS『Securities Transfer Tax』页『Who is it for?』段：member/participant 为法定纳税人但『may recover the tax payable from the persons to whom the securities were transferred』——买方（受让人）最终承担。措辞已入 quote，并顺带把 `.cache/za-jse` 从 0/空重建到含本页（该所缓存此前坏，见 SOURCES.md） |
+| `kr-krx stamp_duty` `type: none` | medium，[ADR-058] 标「暂定、仅 PwC 支撑」 | ✅ `type: none` 由「暂定」转「一手条文 + 第三方佐证」，`verified: 2026-09-04`，confidence 维持 medium | 韩国《印花税法》(Stamp Tax Act) 英文版第 1 条（elaw.klri.re.kr hseq=64499，同 STT Act 已登记域名）：印花税纳税义务人为『文书制备者』、课税对象是文书而非证券转让。translation 页标注 for-reference-only，故 confidence 不升 high |
+| `ca-tsx regulatory_fees` | medium `rate: null`，[ADR-054] 从 `type: none` 降级，理由「来源主题错配、查不到」 | ✅ 实质修正：`rate: null` 保留（无固定比率），但从「查不到」改为「查到了——是浮动费」，`verified: 2026-09-04` | OSC Bulletin 24-0154（osc.ca 托管的 CIRO 费模型征求意见公告，第 8 节复述现行模型原文）：CIRO《Equity Market Regulation Fee Model》为成本回收制，按 Message Processing Fee + Trade Fee 两部分对 Marketplace 成交按月征收、由 Participants（券商）缴纳。ciro.ca 官网仍 403，续用 OSC 托管件 |
+| `hk-hkex financial_transaction_tax` `type: none` | medium `rate: null`，[ADR-058] 收尾回退 | ⏸️ 维持 `rate: null`，**按「审慎终态」关闭**（不再作待抓项跟进），`verified: 2026-09-04` | 香港列举式税制，IRD 所辖征费为封闭清单（Stamp Duty / Estate Duty / Betting Duty / Hotel Accommodation Tax / Business Registration），其中无「证券交易税 / FTT」条例——比一般税法典国家的「未提及」更接近否定，但仍是推断（『无该条例』≠ 官方正面排除），铁律二.4 不足以翻 `type: none` |
+| `us-nyse` / `us-nasdaq regulatory_fees` FY2027 | high，$20.60/百万（2026-04-04 起） | ⏸️ 无数据变更，`verified: 2026-09-04` | SEC「Fee Rate Advisories」列表页 2026-09-04 复核：Latest Section 31 仍为 FY2026 公告（Feb. 27, 2026），FY2027 Section 31 公告尚未发布（历年在当年 2–4 月出）。触发点仍挂 OPEN-Q，$20.60 现行 |
+| `kr-krx exchange_fees` 到期后现行费率 | medium `rate: 0.0023`（[ADR-054] 移除 `tiered`） | ⏸️ 无 rate 变更，sourcing 强化（+KED Global），`.cache/kr-krx` 补 | KED Global（第三方）：KRX『single fee rate of 0.0023% for nearly 20 years』、2025-12 阶梯下调『initially in effect for two months』、永久性下调须经 FSC 市场效率委员会审议。到期后 KRX 当期收费表 JS 化未取到一手确认——仍挂 OPEN-Q |
+
+**没改：** `spec.rate` / `spec.type` 的实质值除 ca-tsx 的框架描述外均未动（本轮是「坐实既有值」不是「改值」）；渲染层（成本瀑布 SVG 无改动）；`schema/`；`tools/`。
+
+**验证：** `make check` 全绿（`selfcheck` 24/24、`validate` 20 家 0/0、`verify_quotes` OK=1001 / FAIL=0 / CACHE_MISS=77〔含 za-jse 未重建缓存的既有态〕、`check_ui_i18n` OK）、`make sync` 二次幂等。触及 7 个字段（< [CLAUDE.md §四] 的 >30 字段第二人复核门槛），协调者逐条 spec/quote-vs-source 自检；每条改动均带 `.cache/` 落盘凭据（除 `sec.gov` 走 Fair Access UA 外均常规 UA）。生成块变动仅 `matrix.json` / `freshness.json`（zh/en 文本 + `verified` 日期 + `has_detail` 派生），`progress-matrix` / `health-summary` 零 diff。
+
+**日期：** 2026-09-04
