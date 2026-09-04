@@ -1124,11 +1124,11 @@
   }
 
   // ══════════════════════════════════════════════
-  // 交易成本瀑布（v2.0 Phase 3 第二棒：数据层 ADR-045 / 渲染层 ADR-047 / ADR-070 迭代，见 PROJECT/DECISIONS.md）
+  // 交易成本瀑布（v2.0 Phase 3 第二棒：数据层 ADR-045 / 渲染层 ADR-047 / ADR-071 迭代，见 PROJECT/DECISIONS.md）
   //   镜像双瀑布：中轴 = 0 bp；左半 = 买入侧、右半 = 卖出侧，向中间对齐。
   //   五费种（交易所费 / 清算费 / 监管费 / 印花税 / 金融交易税）逐行，
   //   spec.side（buy/sell/both）决定落在哪一侧；底部买 / 卖小计 + 往返合计。
-  //   佣金（commission_structure）不进瀑布条（ADR-070：券商议价、20/20 无统一费率、
+  //   佣金（commission_structure）不进瀑布条（ADR-071：券商议价、20/20 无统一费率、
   //   恒幽灵条零对比价值）——降为图下方一行说明，点击仍可看出处；数据字段仍在剖面 chip / 档案页。
   //   数据源：第十一章 costs.* 的 spec 层（cost_layer 形状：rate + unit + side +
   //   components / tiered / cap / type:none / rate:null / rate_raw）。归一到 bp 在渲染层做（ADR-045 轴③）。
@@ -1142,7 +1142,7 @@
   var CW_ASSUMED_PRICE = 50;        // 单股价格（当地货币），折算按股费种
   var CW_FEE_ORDER = ["exchange_fees", "clearing_fees", "regulatory_fees", "stamp_duty", "financial_transaction_tax"];
   var CW_FEE_META = {
-    // 佣金不在 CW_FEE_ORDER（ADR-070）——保留元数据供图下方说明行的 cwFeeName / openCellOverlay 用
+    // 佣金不在 CW_FEE_ORDER（ADR-071）——保留元数据供图下方说明行的 cwFeeName / openCellOverlay 用
     commission_structure:      { zh: "佣金", en: "Commission", color: "var(--fg-faint)" },
     exchange_fees:             { zh: "交易所费", en: "Exchange fees", color: "var(--accent)" },
     clearing_fees:             { zh: "清算费", en: "Clearing fees", color: "var(--info)" },
@@ -1178,7 +1178,7 @@
         bp = rate / CW_ASSUMED_NOTIONAL * 1e4; approx = true; break;
       default: return { ghost: true, tiered: !!spec.tiered };
     }
-    // rate_raw（ADR-070）：原文非阿拉伯数字（「千分之三」/「0,25%」），rate 为人工转写 → 标 *
+    // rate_raw（ADR-071）：原文非阿拉伯数字（「千分之三」/「0,25%」），rate 为人工转写 → 标 *
     return { bp: bp, tiered: !!spec.tiered, capped: spec.cap != null, components: !!comps, approx: approx, raw: !!spec.rate_raw };
   }
   function cwSide(spec) {
@@ -1401,7 +1401,7 @@
       "</div>";
   }
 
-  // 佣金说明行（ADR-070）：佣金不进瀑布条——券商议价、20/20 无统一费率、恒幽灵条零对比价值。
+  // 佣金说明行（ADR-071）：佣金不进瀑布条——券商议价、20/20 无统一费率、恒幽灵条零对比价值。
   // 但对零售交易者通常是最大的一笔显性成本，图下方留一行说明，点击仍可看 commission_structure 出处。
   function cwCommissionNote(id, data) {
     var costs = (data.chapters && data.chapters.costs) || {};
@@ -1434,7 +1434,7 @@
     return '<p class="td-prose">' + t(
       '本图由第十一章 <code>costs.*</code> 的结构化 <code>spec</code> 层驱动（见 ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-045</a>、' +
-      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-070</a>）。' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-071</a>）。' +
       '五费种（交易所费 / 清算费 / 监管费 / 印花税 / 金融交易税）为按笔（per-trade）显性成本，按 <code>side</code> 落在买入侧 / 卖出侧 / 双边。各费种原始计量单位不一' +
       '（% / ‰ / bp / 每股 / 每十万 / 定额），此处统一折算为 bp of 成交额：按股 / 定额费种按「假设单笔成交金额 100,000（当地货币）、' +
       '假设股价 50」折算（标 ≈）；阶梯费率取首档 / 代表档（标 ▸）；封顶（标 ^）在该假设成交额下未必触及、bp 未扣封顶；' +
@@ -1443,7 +1443,7 @@
       '佣金券商议价、不在交易所规则内，不作瀑布条，见图下方说明。买卖价差等隐性成本按本项目覆盖边界不收录（见 CLAUDE.md）。规则以各交易所官方发布为准，不构成投资建议。',
       'This chart is driven by the structured <code>spec</code> layer of Chapter 11 <code>costs.*</code> (see ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-045</a>, ' +
-      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-070</a>). ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-071</a>). ' +
       'The five fee types (exchange, clearing, regulatory, stamp duty, financial transaction tax) are per-trade explicit costs, placed on the buy side / sell side / both according to <code>side</code>. ' +
       'Their native units differ (%, ‰, bp, per share, per lakh, flat), so all are converted here to bp of notional: per-share and flat fees are ' +
       'converted using “assumed notional 100,000 (local currency), assumed share price 50” (marked ≈); tiered rates use the first / a representative ' +
