@@ -1637,17 +1637,22 @@
         },
         "zh": "SEC依据《证券交易法》第31条向交易所征收的交易类监管费，自2026年4月4日起费率为每百万美元交易额20.60美元（此前2026财年初至4月3日暂为每百万美元0美元）；该费用逐年由SEC按预算需要调整并转嫁给交易环节；证券期货交易的对应评估费维持每笔round-turn交易0.0042美元不变",
         "en": "The Section 31 transaction fee that the SEC assesses on national securities exchanges is set at $20.60 per million dollars of covered sales effective April 4, 2026 (a rate of $0.00 per million applied for charge dates from the start of FY2026 through April 3, 2026); the rate is readjusted annually by the SEC to match its appropriation needs and is passed through to the trading process; the assessment on security futures transactions remains unchanged at $0.0042 per round-turn transaction",
-        "detail": "Section 31费由SEC定期发布\"Fee Rate Advisory\"调整，本条数字为2026财年（FY2026）4月起\n生效的最新费率，具体历史费率变化（如2025财年费率）本次未逐年核实，只取当前生效值。\n",
+        "detail": "Section 31费由SEC定期发布\"Fee Rate Advisory\"调整，本条数字为2026财年（FY2026）4月起\n生效的最新费率，具体历史费率变化（如2025财年费率）本次未逐年核实，只取当前生效值。\n2026-09-04（ADR-065 成本瀑布数据层残差）复核：SEC「Fee Rate Advisories」列表页仍以\n「Section 31 Transaction Fee Rate Advisory for Fiscal Year 2026 - Feb. 27, 2026」为\nLatest；FY2027 的 Section 31 交易费公告尚未发布（历年在当年 2–4 月出，依拨款周期），\n$20.60/百万美元（2026-04-04 起）为现行值。触发点仍挂在 OPEN-QUESTIONS。\n",
         "sources": [
           {
             "title": "Section 31 Transaction Fee Rate Advisory for Fiscal Year 2026（sec.gov 官方费率公告）",
             "url": "https://www.sec.gov/rules-regulations/fee-rate-advisories/2026-2",
             "accessed": "2026-08-24"
+          },
+          {
+            "title": "Fee Rate Advisories（sec.gov 列表页，2026-09-04 复核 Latest Section 31 仍为 FY2026）",
+            "url": "https://www.sec.gov/rules-regulations/fee-rate-advisories",
+            "accessed": "2026-09-04"
           }
         ],
         "quote": "Feb. 27, 2026 — The Securities and Exchange Commission today announced that starting on April 4, 2026, the fee rates applicable to most securities transactions will be set at $20.60 per million dollars. Consequently, each SRO will continue to pay the Commission a rate of $0.00 per million for covered sales occurring on charge dates through April 3, 2026, and a rate of $20.60 per million for covered sales occurring on charge dates on or after April 4, 2026... The assessment on security futures transactions will remain unchanged at $0.0042 for each round turn transaction.",
         "confidence": "high",
-        "verified": "2026-08-13",
+        "verified": "2026-09-04",
         "enum": null
       },
       "stamp_duty": {

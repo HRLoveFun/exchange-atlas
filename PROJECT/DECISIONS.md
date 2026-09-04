@@ -1527,5 +1527,148 @@
 **验证：** `make build` 全绿（`selfcheck` 24/24、`validate` 20 家 0/0、`verify_quotes` OK=1023 / FAIL=0 / CACHE_MISS=77 均为既有无关字段、`check_ui_i18n` OK）、`make sync` 二次幂等。新增来源域名登记 6 个（`info.gov.hk` / `jsri.or.jp` / `nextrade.co.kr` + `asic.gov.au` / `fsc.go.kr` 补子链）。
 
 **已知局限（下一迭代点）：** ① `holidays_note` 4 家 JS-SPA 待人工 / 渲染型抓取；② `ca-tsx block_trade` CIRO UMIR 6.6 跨市场 block 门槛待人工原文；③ `dark_pool` 5 家 medium（`hk-hkex` SFC 操守准则第 19 段 / `sg-sgx` MAS RMO 现行待遇 / `kr-krx` NXT 市场规则 / `jp-jpx` FSA-PTS 细则 / `in-nse` SEBI 正面禁止性表述）可日后升 high，均已记 OPEN-Q。
+### ADR-065 — 成本瀑布数据层残差处理：`side` / `type: none` / 触发点残差逐条坐实
+
+> **编号说明：** ADR-064 由并行会话的「参与者图设计定案 + 数据层评估」占用（见 auto-memory），本条取 065 避让。
+
+**背景：** [ADR-054] 成本瀑布 spec 层核查（103 个 `costs` spec 第二人复核）留下 13 个 `type: none` 降级点 + 6 个 `side`/费率补强点；[ADR-058] A2/A3 坐实了一部分，收尾审查又回退了两处（`hk-hkex FTT` → `rate: null`、`za-jse STT side: buy` → 保留待补）。ROADMAP「下一步 #1」把剩余项列为「成本瀑布数据层残差（按触发时点推进）」，明细在 OPEN-QUESTIONS #88。本条是这批残差的一轮集中处理（2026-09-04）。
+
+**共同模式（承接 [ADR-054] 三类系统性缺口）：** 断言「本市场不征某税费」需税法/税务局/立法机构的**正面**文本；`side` 方向键需来源逐字方向措辞（quote / zh / detail 三处任一），未取到则**保留值 + 记 OPEN-Q**（渲染层 `cwSide()` 对缺省回退 `both`，移除单边税键错得更远，[ADR-054] 裁定细则）。
+
+**逐条结果：**
+
+| 字段 | 处理前 | 处理后 | 依据 |
+|---|---|---|---|
+| `uk-lse stamp_duty` `side: buy` | high，quote 无方向措辞、待补 | ✅ 坐实，`verified: 2026-09-04` | HMRC / gov.uk『Tax when you buy shares』：『When you buy shares, you usually pay a tax or duty of 0.5%』『You pay tax when you buy』（非 SPA 页、curl 常规 UA 200，已入 quote + `.cache/uk-lse`） |
+| `za-jse stamp_duty` `side: buy` | high，quote 无方向措辞、[ADR-058] 收尾回退为「保留待补」 | ✅ 坐实，`verified: 2026-09-04` | SARS『Securities Transfer Tax』页『Who is it for?』段：member/participant 为法定纳税人但『may recover the tax payable from the persons to whom the securities were transferred』——买方（受让人）最终承担。措辞已入 quote，并顺带把 `.cache/za-jse` 从 0/空重建到含本页（该所缓存此前坏，见 SOURCES.md） |
+| `kr-krx stamp_duty` `type: none` | medium，[ADR-058] 标「暂定、仅 PwC 支撑」 | ✅ `type: none` 由「暂定」转「一手条文 + 第三方佐证」，`verified: 2026-09-04`，confidence 维持 medium | 韩国《印花税法》(Stamp Tax Act) 英文版第 1 条（elaw.klri.re.kr hseq=64499，同 STT Act 已登记域名）：印花税纳税义务人为『文书制备者』、课税对象是文书而非证券转让。translation 页标注 for-reference-only，故 confidence 不升 high |
+| `ca-tsx regulatory_fees` | medium `rate: null`，[ADR-054] 从 `type: none` 降级，理由「来源主题错配、查不到」 | ✅ 实质修正：`rate: null` 保留（无固定比率），但从「查不到」改为「查到了——是浮动费」，`verified: 2026-09-04` | OSC Bulletin 24-0154（osc.ca 托管的 CIRO 费模型征求意见公告，第 8 节复述现行模型原文）：CIRO《Equity Market Regulation Fee Model》为成本回收制，按 Message Processing Fee + Trade Fee 两部分对 Marketplace 成交按月征收、由 Participants（券商）缴纳。ciro.ca 官网仍 403，续用 OSC 托管件 |
+| `hk-hkex financial_transaction_tax` `type: none` | medium `rate: null`，[ADR-058] 收尾回退 | ⏸️ 维持 `rate: null`，**按「审慎终态」关闭**（不再作待抓项跟进），`verified: 2026-09-04` | 香港列举式税制，IRD 所辖征费为封闭清单（Stamp Duty / Estate Duty / Betting Duty / Hotel Accommodation Tax / Business Registration），其中无「证券交易税 / FTT」条例——比一般税法典国家的「未提及」更接近否定，但仍是推断（『无该条例』≠ 官方正面排除），铁律二.4 不足以翻 `type: none` |
+| `us-nyse` / `us-nasdaq regulatory_fees` FY2027 | high，$20.60/百万（2026-04-04 起） | ⏸️ 无数据变更，`verified: 2026-09-04` | SEC「Fee Rate Advisories」列表页 2026-09-04 复核：Latest Section 31 仍为 FY2026 公告（Feb. 27, 2026），FY2027 Section 31 公告尚未发布（历年在当年 2–4 月出）。触发点仍挂 OPEN-Q，$20.60 现行 |
+| `kr-krx exchange_fees` 到期后现行费率 | medium `rate: 0.0023`（[ADR-054] 移除 `tiered`） | ⏸️ 无 rate 变更，sourcing 强化（+KED Global），`.cache/kr-krx` 补 | KED Global（第三方）：KRX『single fee rate of 0.0023% for nearly 20 years』、2025-12 阶梯下调『initially in effect for two months』、永久性下调须经 FSC 市场效率委员会审议。到期后 KRX 当期收费表 JS 化未取到一手确认——仍挂 OPEN-Q |
+
+**没改：** `spec.rate` / `spec.type` 的实质值除 ca-tsx 的框架描述外均未动（本轮是「坐实既有值」不是「改值」）；渲染层（成本瀑布 SVG 无改动）；`schema/`；`tools/`。
+
+**验证：** `make check` 全绿（`selfcheck` 24/24、`validate` 20 家 0/0、`verify_quotes` OK=1001 / FAIL=0 / CACHE_MISS=77〔含 za-jse 未重建缓存的既有态〕、`check_ui_i18n` OK）、`make sync` 二次幂等。触及 7 个字段（< [CLAUDE.md §四] 的 >30 字段第二人复核门槛），协调者逐条 spec/quote-vs-source 自检；每条改动均带 `.cache/` 落盘凭据（除 `sec.gov` 走 Fair Access UA 外均常规 UA）。生成块变动仅 `matrix.json` / `freshness.json`（zh/en 文本 + `verified` 日期 + `has_detail` 派生），`progress-matrix` / `health-summary` 零 diff。
+### ADR-064 — Phase 3 第六棒：参与者图 Participant Map 的设计定案 + 数据层评估（无需 spec）
+
+**背景：** Phase 3 剩余章节可视化模块的第三棒（首棒 [ADR-059] 上市生命周期、第二棒 [ADR-061] 监管图），也是 Phase 4 单页画布合并的硬前置之一（[ADR-057] #4）。第九章《市场参与者》6 个字段（`investor_structure` / `membership_structure` / `broker_landscape` / `account_opening_requirements` / `suitability_management` / `foreign_access_channel`）目前只在档案页文字块里呈现，零图形——交易员接触陌生市场的一阶问题是「谁在场上跟我做对手盘（机构还是散户、本地还是外资）、我怎么才能进场、如果我是外资走哪条道」，这几个字段把答案分散在章内各处，没有一屏把它们收敛成「一眼读懂谁在这个市场里」。第九章数据相当完整（6 字段全库 M/H，仅 6 处真实空白，均在 [ADR-060] F 桶轨道）。
+
+**流程：** 沿用 [ADR-059]/[ADR-061] 三棒走法。① 先做仿真数据 MVP 原型（两个虚构市场样例 + 一个设计轴变体 × 中英 × 明暗，验证三层槽位 / 接入链 / 外资平行道 / 诚实两态 / 语言开关 / 零构建，**未落库**、放 `/tmp/pt-mvp/`），用户看过**确认形态按此定案**；② 数据层评估结论 = **本棒零 spec 需求**（见轴 5，用户拍板取纯散文），无 schema/data 改动；③ 渲染层（`renderParticipantMap` + 顶层 tab + 路由 + `.pt-*` 样式）留后续棒，与 [ADR-059] 的「设计 / 数据层 → 渲染层」分棒同构（MVP 原型即渲染层参考）。
+
+**定了什么（7 个设计轴，用户 2026-09-04 拍板轴 1–7；轴 5 取「纯散文」）：**
+
+1. **形态 = 固定槽位的「参与者截面」单画布（手写 SVG，`W=1180`，与 [ADR-059]/[ADR-061] 同版式）。** 第九章 6 字段全为散文（占比描述 / 机构名 / 法定义务），无量化机制值可结构化成 bar / 轴——图的几何只能来自**语义槽位**：每个字段固定槽位、跨 20 家位置不变，「换所即对比」。诚实渲染走 [ADR-035] D（结构定形 → 散文按卡宽 / 卡高硬裁剪 + 全文走 `<title>` + 点击 `openCellOverlay`），与 [ADR-059]/[ADR-061] 的同类处置一致。
+
+2. **三层纵向槽位（自上而下 = 交易员三个一阶问题）：**
+   - **谁在场上**——`investor_structure` 满宽单卡，左缘色条 `--info`。这是「跟谁做对手盘」的一句话画像（机构 / 散户 / 本地 / 外资的成交占比描述）。
+   - **我怎么进场**——`membership_structure` → `broker_landscape` → `account_opening_requirements` → `suitability_management` 四张节点卡横排成一条「接入链」，节点间 → 箭头，链末一个终点节点「你」（`--accent-soft` 底 + `--accent` 描边的小圆，上方 `终端投资者 / end investor` 小标）。前两环（会员 / 经纪，中间机构层）左缘 `--accent`；后两环（开户 / 适当性，准入门槛）左缘 `--warn`。节点带序号 1–4。
+   - **外资走哪条道**——`foreign_access_channel` 满宽平行道单卡（右侧留一条并入通道），左缘 `--accent`；一条肘形虚线（`--accent`、`stroke-dasharray`）从卡右沿上折汇入接入链的**同一终点「你」**，卡下一行 caption 说明语义：「外资可在『会员』环直接并入（直接会员），或整体绕过前几环（额度 / 互联互通）」。
+   三层顺序 = 场上人口 → 接入链 → 外资通道，线性推进、槽位稳定。
+
+3. **接入链方向 = 机构侧 → 终端投资者**（交易所接纳会员 → 会员 / 经纪面向客户 → 开户 → 适当性门槛 → 你），**不加独立「交易所」起点节点**——交易所是隐含的链头，画出来占空间、无新信息。
+
+4. **外资通道 = 平行道汇入同一终点**，不做「在某一环精确并入」的连线——各所并入点不同（直接会员在链首、QFII 额度 / 互联互通整体绕过），精确连线会把某一家的形态当通用形态、误导读者。用「平行道 + 肘形虚线汇终点 + 一行 caption」表达「另一条通向同一目的地的路」。
+
+5. **`investor_structure` = 纯散文卡，不加 spec（用户 2026-09-04 拍板，与 [ADR-061] 先例一致）。** 该字段散文里常带硬百分比（港交所机构 53% / 散户 20% / 境外 43%，LSE 境外 58.8%），MVP 的「样例 C」把「加 `investor_structure.spec`（`by`: turnover/accounts + `segments` 数组）」的迷你构成条形态画了出来供权衡。权衡结论取**纯散文**：① 口径不统一——各所报告基准不同（成交额 vs 账户数、本地/外资 vs 机构/散户），强行进同一根 100% 堆叠条会制造可比性假象；② `confidence` 多为 medium、`volatility: moderate` 需年更，spec 化会把年更负担 + 5b 数值反查 + 口径字段 + 第二人复核都引进来；③ 「机构主导还是散户主导」的一眼判断，散文首句同样能承载。**本章因此 6 字段全散文、零 spec**——与 [ADR-061] 监管图同构。
+
+6. **merge-ready 清单（逐条答 [ADR-057]）：**
+   - **锚定关系**：独立分区——尺度 = 一座市场的「参与者截面」，与主图剖面的「一个交易日」、交割管线「T+N 天」、上市生命周期「证券的一生」、监管图「制度截面」无共同 x 轴、不叠加；构成「同一市场的第五个视角——谁在里面」。视觉呼应走主站令牌 + [ADR-040] 线条语言：`--info` = 场上人口（与监管图监管主体 / 透明保护同源）、`--accent` = 接入通道（与监管图资金闸门、交割管线违约瀑布 bearer 同源）、`--warn` = 准入门槛（与监管图法律基座暖色呼应）。
+   - **占位**：合并画布常驻显示、默认展开；纵向 ≈ 监管图档（约 0.8 主图高）、横向满宽。
+   - **诚实两态 / 语言开关 / 零构建**：见轴 1 与 [ADR-049]/[ADR-035] 既有约定——卡头走 `fieldLabel("participants", path)`、合成文案走 `t()` / `tSel()`、无第三方渲染库；本章无 `type: none` 形态（6 字段无 spec），三态退化为「有值实心卡 + 左缘色条 / 缺省虚线框 + 居中斜体『未记录 not recorded』」两态（同 [ADR-061] 轴 4）。分区缩小后仍成立（三态提示是卡级 / 节点级，不依赖大面积留白）。
+
+7. **数据层评估 = 本棒不新增 spec、零 schema/data 改动。** 第九章 6 字段全是「占比描述 / 机构名 / 法定义务」，属 [ADR-035] B 不可结构化类；按「quote 撑得住才结构化」原则（[ADR-045]/[ADR-050]/[ADR-061]），`investor_structure` 的百分比经轴 5 权衡后不 spec 化，其余 5 字段本无量化机制值——spec 缺省是预期而非缺口。现网 6 处空白（`cn-sse` 的 `investor_structure` / `suitability_management` / `foreign_access_channel`、`cn-szse` / `hk-hkex` / `us-nyse` 的 `foreign_access_channel`）是真实研究缺口、已在 [ADR-060] 任务二 / 四轨道，**本棒不替数据层代劳、不造 spec 撑图表**——诚实虚线框就是当前数据层的正确呈现。
+
+8. **纯衍生品所（`de-eurex`）= 全章适用，无 `only_spot`。** 第九章对衍生品所同样成立——Eurex 有完整的「交易参与者准入」体系，这正是 OPEN-QUESTIONS #17 点名的「衍生品所对应概念（交易员 / 交易参与者准入）」；[ADR-059] 的 `listing` 章级 `only_spot` 机制不适用于本章。`de-eurex` 走正常全章渲染（`investor_structure` 对纯衍生品所可能偏薄，但 `membership_structure` / `foreign_access_channel` 等完全适用）。
+
+**没改：** `data/` 与 `docs/data/`（无 spec、无枚举、不增字段）；`schema/`（`spec.yml` / `taxonomy.yml` / `enums.yml` 零 diff）；`tools/validate.py`（无新不变式——本棒未引入新结构）；[ADR-060] 五任务轨道不受影响；前端（渲染层留后续棒）。
+
+**分棒 —— 留给渲染层棒：** `docs/assets/app.js` 的 `renderParticipantMap` / `ptBuild`（手写 SVG，按上述轴 1–4；卡 / 节点 `data-role="cell"` 复用 `openCellOverlay`；折行复用 [ADR-059] `llWrap` + [ADR-061] `rmWrap` 思路的 `ptWrap`）+ `docs/index.html` 顶层 tab「参与者图 / Participant Map」（排「监管图」后，tab 数 8→9）+ 路由键 `participant-map` + `styles.css` `.pt-*`。新代码从一开始接 `t()` / `tSel()` / `fieldLabel` / `dv()`。MVP 原型（`/tmp/pt-mvp/`，仿真数据、不落库）已验证形态，`ptBuild` 可直接移植其 `build()` 逻辑（三层槽位 + `envCard` + 接入链节点 + 终点「你」+ 外资平行道肘形连线）。
+
+**验证（本棒 = 设计文档 + 数据层评估）：** MVP 截图（明 / 暗 × 中英）三层槽位对齐、接入链 4 节点 + 终点「你」+ 外资平行道汇入清晰、空白虚线 / 实心左缘差异可见、卡头随 langMode 正确切换；`make build` 基线不受影响（未触碰任何被 `sync.py` 扫描的文件——只改 `PROJECT/DECISIONS.md` + `PROJECT/ROADMAP.md`）。
+
+**日期：** 2026-09-04
+
+---
+
+**渲染层落地（2026-09-04）** — 把设计定案移植进主前端，纯前端三文件（`docs/assets/app.js` +160 / `docs/assets/styles.css` +26 / `docs/index.html` +1），`data/` 与 `docs/data/` 零 diff、`make sync` 幂等、生成块无变化、`check_ui_i18n` OK。
+
+- **`app.js` `renderParticipantMap` / `ptBuild`**：手写 SVG（`W=1180`）固定槽位纵向三层——① `investor_structure` 满宽单卡（左缘 `var(--info)`）→ ② 接入链 `membership_structure`→`broker_landscape`→`account_opening_requirements`→`suitability_management` 四张 `ptEnvCard` 节点（前两环 `var(--accent)` / 后两环 `var(--warn)`，节点序号 1–4，节点间 `<path marker-end>` 箭头）+ 终点小圆「你」（`--accent-soft` 底 + `--accent` 描边，上方 `终端投资者 / end investor` 小标）→ ③ `foreign_access_channel` 满宽平行道（宽度 `CW-132`，左缘 `var(--accent)`），肘形虚线（`stroke-dasharray`）从卡右沿汇入终点「你」+ 卡下 caption「外资可在『会员』环直接并入 / 整体绕过（额度 / 互联互通）」。卡 / 节点 = `<g class="td-hit" data-role="cell" data-chapter="participants">`、点击复用 `openCellOverlay`；从第一版接 `t()` / `tSel()` / `fieldLabel` / `dv()` / `exchangeDisplayName`。`ptWrap` 独立一份（同 [ADR-061] `rmWrap` 思路：整卡宽扣 24px 内边距、CJK 按字数 / 拉丁按词、委托 `llWrap`）。
+- **诚实两态（本章无 spec / 无 `type:none`，退化为两态）**：有值 → 实心卡 `var(--bg-hover)` + 左缘色条 + 角色头（`fieldLabel("participants", path)`）+ 正文按卡高折行（满宽卡 3 行 / 节点卡 6 行）+ 全文进 `<title>`（≤200 字截断）；缺省 → 虚线框 + 角色头 + 居中斜体「未记录 / not recorded」。现网 6 处空白（`cn-sse` ×3、`cn-szse` / `hk-hkex` / `us-nyse` 的 `foreign_access_channel`）如实呈现虚线框，接入链箭头照常穿过缺省节点（链的视觉完整性不因单节点缺口断裂）。
+- **接线**：顶层 tab「参与者图 / Participant Map」排「监管图」后（`index.html`，tab 数 8→9）；路由键 `participant-map`（`route()` 分派 + `change` 事件 `pt-exchange` 分支）；`PT_DEFAULT_EX = "hk-hkex"`；`styles.css` `.pt-*`（`.pt-title` / `.pt-sub` / `.pt-lane-l` / `.pt-lane-s` / `.pt-card-k` / `.pt-card-v` / `.pt-card-empty` / `.pt-node-n` / `.pt-end` / `.pt-conn`），图例复用 `.rm-legend` / `.rm-lg-*`。
+- **顺带修 `.header-tabs`**：9 个 tab 在标准宽度下一行放不下，原 `display:flex; flex:1` 会压缩 flex 项把 CJK 标签从字当中折断（「对比矩\n阵」）。改 `flex-wrap: wrap` + `.tab-btn { white-space: nowrap }` —— 宽屏能放下时不换行，放不下时整块换到第二行（headless 实测 1440/1280/1024 三档均干净换行、无字内折断）。不预判 Phase 4 的「更多」入口形态（[ADR-057] 已把它留给 Phase 4）。
+- **验证**：`make build` 全绿（`selfcheck` 24/24、`validate` 20 家 0/0、`verify_quotes` FAIL=0〔CACHE_MISS=1078 为 [ADR-044] worktree 未复制 `.cache/` 已知态〕、`check_ui_i18n` OK）、`make sync` 二次幂等、`docs/data/` 与生成块零 diff。Chrome headless 核对 `hk-hkex`（1 空白 + 停复牌无关，zh 亮）/ `cn-sse`（3 空白，zh 亮）/ `za-jse`（全填，EN 暗）/ `de-eurex`（纯衍生品，全填，zh 亮——全章渲染无 `only_spot`，轴 8 成立）/ `us-nyse`（1 空白，zh 暗）/ `uk-lse`（全填，EN）/ `br-b3`（全填，zh）× 1440/1280/1024 三档宽度：三层槽位对齐、接入链 4 节点 + 终点「你」+ 外资平行道汇入清晰、虚线 / 实心差异可见、卡头随 langMode 切换正确；`regulation-map` / `trading-day` / `matrix` 三视图无回归。
+- **已知局限**：① 6 字段散文均较长（`broker_landscape` / `account_opening_requirements` 常 150–250 字），节点卡 6 行放不下 → 按卡高硬裁剪 + 全文进 `<title>` + 点击浮层（[ADR-035] D / [ADR-064] 轴 1 的既定处置，同 [ADR-059]/[ADR-061]）；真正解法是散文「先摘要后全文」精修，属数据层活。② 中英混排时 Latin 词 / 数字被 `llWrap` 的 CJK 逐字切分从中间断开（`Exchange Partic|ipant`、`CMN 4.37|3`）——与 `renderListingLifecycle` / `renderRegulationMap` 共用 `llWrap` 的既有局限（[ADR-061] 已知局限④），改需三模块一起上混排折行，超出本棒范围。③ 固定槽位使全 20 家图高一致、空白多的市场（`cn-sse`）纵向留白一致（诚实呈现，非 bug）。④ 窄于 1080px 时 SVG 在 `.td-plot-wrap` 内横向滚动（同 `rm-svg` / `ll-svg`，页面 body 不横向滚动）。
+
+**渲染层日期：** 2026-09-04
+### ADR-066 — Phase 3 第七棒：风险旗标 Risk Flags 的设计定案 + 数据层评估（零 spec + 一次 `fx_risk_note` 就地清）
+
+**背景：** Phase 3 剩余章节可视化模块的第四棒（首三棒 [ADR-059] 上市生命周期 / [ADR-061] 监管图 / [ADR-064] 参与者图），也是四个 viz 模块里最后一个拿到设计 ADR 的。Phase 4 单页画布合并的硬前置（[ADR-057] #4）是四个模块**均落地**——参与者图与本模块的渲染层棒（外加本模块的 `fx_risk_note` 数据子棒）仍未做，Phase 4 尚未解锁。第十二章《风险与特殊考量》5 个字段（`fx_risk_note` / `political_risk_note` / `liquidity_risk_note` / `regulatory_change_risk_note` / `enforcement_note`）目前一列都没进对比矩阵（[ADR-020]/[ADR-022]：覆盖率个位数是数据缺口、不通过「重选列」掩盖），只在档案页散文里呈现，零图形——「这个市场**正在**改什么规则、被制裁 / 冻结过没有、流动性有多集中、谁在盯操纵」是交易员认知陌生市场的一层，与盘中机制、交割、上市、监管截面、参与者截面同等重要。
+
+**本章与前三棒的结构性差异：** 第 12 章 5 字段全是分析性 `*_note` 散文——宪法「覆盖边界」段与 [ADR-020] 点 4 已定：这类字段（连同 `costs.implicit_costs_note`）**结构性停留在 `confidence: low/medium`**，因为没有一份官方文件会写「本国流动性风险是 X」。所以本模块里「我们对这条掌握到什么程度」本身就是要呈现的信息——不是脚注，是主信号。这决定了轴 3，也是本模块区别于监管图 / 参与者图（两者置信度多为 medium/high、退化为两态）之处。
+
+**流程：** 沿用 [ADR-059]/[ADR-061]/[ADR-064] 三棒走法。① MVP 原型（3 个虚构市场「北岸 / 南港 / 海峡」× 中英 × 明暗，验证两泳道固定槽位 5 卡 / 置信度四态 / 「非评分」常驻声明 / 语言开关 / 零构建，**未落库**）——本次为 Artifact（`claude.ai/code/artifact/81c033eb…`）而非 `/tmp/`，因本棒在后台任务里跑、用户异步复核，Artifact 是更合适的复核载体；② 7 个设计轴按推荐 + 用户经 3 个结构化问题当场确认（形态 OK、按 7 轴定案 / 分组取「交易层面 vs 制度·地缘·执法」两泳道 / `fx_risk_note` 就地清纳入作独立数据层子棒）；③ 数据层评估见下（结论 = 零 schema/data 改动 + 一次 `fx_risk_note` 就地清子棒）；渲染层留文末分棒清单。
+
+**定了什么（7 个设计轴）：**
+
+1. **形态 = 一张固定槽位「旗标面板」单画布（手写 SVG，`W=1180`，与 [ADR-059]/[ADR-061]/[ADR-064] 同版式）。** 第 12 章 5 字段全为散文、无量化机制值可结构化成 bar / 轴（[ADR-035] B）——图的几何只能来自**语义槽位**：每字段固定位置、跨 20 家不变，「换所即对比」。**明确不做**：时间轴（本章无时序）、评分表盘 / 风险评级、热力图、市场排名——见轴 4。诚实渲染走 [ADR-035] D（结构定形 → 散文硬裁剪 ≤4–5 行 + 全文进 `<title>` + 点击走 `openCellOverlay`），与前三棒同一处置。
+2. **两泳道分组（用户确认）：**
+   - **交易层面**（`--info` 蓝，左缘色条）——`liquidity_risk_note` / `fx_risk_note` 两卡横排。
+   - **制度 · 地缘 · 执法**（`--warn` 琥珀，左缘色条）——`regulatory_change_risk_note` / `political_risk_note` / `enforcement_note` 三卡横排。
+   泳道颜色复用 [ADR-040] 线条语言 + [ADR-061]/[ADR-064] 的「蓝 = 主体 / 人口、琥珀 = 制度 / 门槛」呼应。
+3. **置信度作一等视觉信号（本模块的区别性轴）。** 每卡显式标三档 + 空态共四态：`high`「有据可查」（具体规则 / 案例 + 逐字 `quote`）→ 实心旗标字形 + 全不透明左缘色条；`medium`「综合判断」（多项事实综合）→ 半填充旗标 + 0.6 色条；`low`「定性背景 · 无官方来源」→ 空心旗标 + 极淡斜纹卡底 + 0.3 色条；**缺省**「未记录」→ 虚线框 + 居中斜体 + 无旗标（真实数据缺口）。**关键语义**：旗标填充度 = 我们的取证程度，**不是**市场风险高低——图例与常驻声明都写明。**不复用 `.badge-low` 的红**（`--danger`）到卡面：红在风险语境会被误读成「高风险」；卡面置信度走中性梯度（accent 绿 → warn 琥珀 → faint 灰），红色 `.badge-low` 只出现在点开后的出处浮层（与全站一致）。
+4. **「这不是风险评分」写进模块，不是脚注。** 常驻说明句（图下方，与成本瀑布「主图 + 常驻税注解」、上市生命周期「触发条件框」同版式）明确：本图汇总各市场**已写进规则 / 已发生**的风险信号（在途制度变更、已执行的制裁与暂停、公开在案的执法个案），**不打分、不给市场排名**；执行风险、真实市场冲击、流动性深度与买卖价差动态只能靠小额实盘暴露，不在本图、也不在本项目覆盖范围（宪法「覆盖边界」/ [ADR-020] / [ADR-042]）。这条直接化解「一个风险面板会不会被当成风险评级」的宪法顾虑。
+5. **merge-ready 清单（逐条答 [ADR-057]）：**
+   - **锚定关系**：独立分区。尺度 = 一座市场当下的风险姿态（非时间轴），与剖面「一个交易日」、交割「T+N 天」、上市「证券一生」、监管图「制度截面」、参与者图「参与者截面」无共同 x 轴、不叠加。视觉呼应走主站令牌 + [ADR-040] 线条语言（交易层面 = `--info`、制度地缘执法 = `--warn`，与监管图 / 参与者图 lane 色同源）。合并画布里与监管图 / 参与者图相邻（三者都是「市场级制度背景」，与前四个「同一只证券的多级时间缩放」分区并置）。
+   - **占位**：合并画布常驻显示、默认展开；纵向 ≈ 监管图档（约 0.7 主图高），横向满宽。
+   - **诚实三态**：本章降级是常态而非例外，退化为**四态**（有据可查 / 综合判断 / 定性背景 / 未记录）——比监管图 / 参与者图的两态更宽，因为置信度在本章携带信息。提示是卡级，不依赖大面积留白，分区缩小后仍成立。`type:none` 不适用（无 spec、无「本市场无汇率风险」这类正面断言）。
+   - **语言开关**：第一版即接 `t()` / `tSel()` / `fieldLabel` / `dv()` / `enumDisplay`（[ADR-049] 教训）；`detail` 与 `*_note` 在 en 态走 `zhNoteBlock` 折叠（同 [ADR-061]/[ADR-064]）。
+   - **零构建**：手写 SVG + vanilla JS + 主题令牌，无渲染库（[ADR-035] C）。
+6. **数据层评估 = 零 schema/data 改动（本设计棒）+ 一次 `fx_risk_note` 就地清作独立数据层子棒。** 第 12 章 5 字段全是「分析性散文」，属 [ADR-035] B 不可结构化类，按「quote 撑得住才结构化」原则（[ADR-045]/[ADR-050]/[ADR-061]/[ADR-064]），无量化机制值可摘——`spec` 缺省是预期而非缺口，本模块与 [ADR-061]/[ADR-064] 同为零 spec。**但**承接 [ADR-020] 欠的 Category B、`ROADMAP` §一下一步点名的「`fx_risk_note` 就地清」：`fx_risk_note` 近全库 `confidence: low`（多家 `detail` 直接写「本次未附官方来源」「一般性市场认知」），可按各国央行 / IMF AREAER / 交易所自有外资指南补一手源升 medium（汇率**制度**——自由浮动 / 盯住 / 有管理浮动 / 资本项目状态——是可逐字记录的；「历史波动较大」这类定性判断仍停 medium，与宪法覆盖边界一致）；顺带填 3 处空的 `political_risk_note`（`cn-sse` / `hk-hkex` / `tw-twse`）、复核 `enforcement_note` 的 low 簇（`cn-sse` / `cn-szse` / `kr-krx`）。作**独立数据层子棒**（不并进本设计棒，保持设计棒零 data 改动、子棒可单独验收），排在渲染层棒之前或并行；与 [ADR-060] 任务二 / 四的横切回填目标一致，落地时并轨执行、不重复排期。
+7. **纯衍生品所（`de-eurex`）= 第 12 章全章适用，无 `only_spot`。** `de-eurex` 有多币种敞口（`fx_risk`）、EU 制度变更（EMIR 3.0，`regulatory_change_risk`）、BaFin/ESMA 执法（`enforcement_note`）——数据已填、全 medium。[ADR-059] 的 `listing` 章级 `only_spot` 不适用于本章，走正常全章渲染，同 [ADR-061]/[ADR-064]。
+
+**没改：** `data/` 与 `docs/data/`（无 spec、无枚举、不增字段——`fx_risk_note` 就地清是独立子棒，本棒不动）；`schema/`（`spec.yml` / `taxonomy.yml` / `enums.yml` 零 diff）；`tools/`（无新不变式——本棒未引入新结构，与 [ADR-061]/[ADR-064] 同）；前端（渲染层留后续棒，避让 / 分棒同 [ADR-050]/[ADR-059]/[ADR-061]/[ADR-064]）；[ADR-060] 五任务轨道（`fx_risk_note` 就地清与任务二 / 四的横切回填目标一致，落地时并轨执行）。
+
+**分棒 —— 留给后续棒的清单：**
+
+- **数据层子棒**：`fx_risk_note` 就地清 + 第 12 章 low 簇复核（见轴 6）。触及 > 30 字段则第二人独立复核（[CLAUDE.md §四]）；`make fetch` 补抓的央行 / 外资指南来源登记进 `PROJECT/SOURCES.md`。
+- **渲染层棒**：`docs/assets/app.js` `renderRiskFlags` / `rfBuild`（手写 SVG，按轴 1–4；两泳道固定槽位 5 卡 + 置信度旗标字形 + 诚实四态；卡 `data-role="cell"` 复用 `openCellOverlay`；折行复用 `llWrap` / `rmWrap` / `ptWrap` 思路的 `rfWrap`）+ `docs/index.html` 顶层 tab「风险旗标 / Risk Flags」（排「参与者图」后——若参与者图渲染层先落地则 tab 数 9→10，否则按落地顺序）+ 路由键 `risk-flags` + `docs/assets/styles.css` `.rf-*` + 档案页第十二章**不折叠**（无 `only_spot`）+ Chrome headless 截图核对（含缺口多的所 / 长文所 × 明暗 × 中英）。新代码从一开始接语言开关。MVP 原型（Artifact，未落库）已验证形态，可作渲染层参考。
+
+**验证（本棒 = 设计文档 + 数据层评估，纯文档）：** MVP 原型（明 / 暗 / 中英）两泳道槽位对齐、四态视觉差异可见（实心 / 半填 / 空心旗标 + 虚线缺口）、常驻「非评分」声明在位、卡头随 langMode 切换；改 `PROJECT/DECISIONS.md`（本条）+ `PROJECT/ROADMAP.md`（§三 Phase 3 新增第七棒条目、§一 两处同步）——两文件都不被 `sync.py` 扫描，`make check` 的 `validate` 20 家 0/0、生成块零 diff。
+
+**并行分支双重撞号（同 [ADR-029]）：** 本条起初写作 ADR-064 → 撞并行后台会话「参与者图」的 ADR-064（`worktree-participant-map-design`，先 commit + push）→ 让号 065 又撞并行 PR #58「成本瀑布数据层残差」的 ADR-065（`worktree-cost-waterfall-residuals`，2026-09-03 更早）→ 最终让号 **066**、「第六棒」改「第七棒」。分支基于 `worktree-participant-map-design` 栈式叠放（stacked PR）；三条 unmerged 分支的 `PROJECT/DECISIONS.md` 插入点都在 ADR-063 之后，合并时按 [ADR-029] 用 merge 而非 rebase 处理，最终顺序不影响正文（ADR 编号是引用键，非物理顺序契约）。
+
+**日期：** 2026-09-04
+
+---
+
+### ADR-067 — 成本瀑布数据层长尾：`type: none` 正面依据的结构性补齐 + cn 监管费现行标准
+
+> **编号说明：** ADR-066 由并行会话的「风险旗标 Risk Flags 设计定案」占用（PR #59），本条取 067。承接 [ADR-065]「剩」段所列的 `type: none` 长尾。
+
+**背景：** [ADR-054] 把 13 个 `type: none` 降为 `rate: null`（根因：把「费率页没列」当「不征收」）；[ADR-058]/[ADR-065] 逐条重抓，方法学结论是「税务局页只覆盖自身税种、不证伪 FTT/监管费，`rate: null` 是审慎终态」。但 [ADR-065] 收尾时对 `hk-hkex FTT` 用了一个更强的论证——**「该国某类税的完整立法把 X 并入征税范围、无独立 Y 税目」是结构性正面依据**（香港列举式税制虽仍判不足）。本条把这个论证范式系统应用到剩余长尾，并顺带把中国监管费换成现行标准。
+
+**处理范式（本条确立）：** 当一国「证券交易环节的流转税」有一部**完整立法**（印花税法 / STT Act / 州印花税），且该法把证券交易明文并入征税范围、通篇无独立「金融交易税」税目时——按 [ADR-002] 语义把该税映射至 `stamp_duty`，则 `financial_transaction_tax` 判 `type: none`（confidence medium：这是对「该法即完整立法」的结构性推断，非法条明文否定句）。监管费同理：当一国证券监管机构的**经费来源立法**明定「政府拨款 + 机构层面分担金」、不含按交易计收时，`regulatory_fees` 判 `type: none`（与 `au-asx` 的 ASIC 机构征费先例同构）。
+
+**逐条结果（8 字段，触及 7 家）：**
+
+| 字段 | 处理前 | 处理后 | 一手/官方依据 |
+|---|---|---|---|
+| `cn-szse regulatory_fees` | 空 / low | ✅ 补齐 `rate: 0.02 permille`（证券业务监管费）| 发改价格规〔2018〕917号（ndrc.gov.cn，现行标准、无有效期限、废止 2016 标准）：『对上海、深圳证券交易所收取证券业务监管费，按股票交易额的0.02‰收取』 |
+| `cn-sse regulatory_fees` | 0.02‰ / 2012 通知 + 「未再核实」hedge | ✅ 主来源换 2018 通知、去 hedge | 同上（顺带对齐 cn-szse） |
+| `cn-szse` / `cn-sse stamp_duty` | `side: sell` 由人民网转载公告支撑 | ✅ `side: sell` 升为《印花税法》第三条一手 | 《印花税法》(fgk.chinatax.gov.cn 政策法规库) 第三条『证券交易印花税对证券交易的出让方征收，不对受让方征收』 |
+| `cn-szse` / `cn-sse financial_transaction_tax` | `rate: null`（『检索未发现』/ 空）| ✅ `type: none` medium | 《印花税法》第一/二/三条把证券交易与合同/产权转移书据/营业账簿并列为印花税征税范围——中国交易环节税收的完整立法，无独立 FTT 税目 |
+| `de-eurex stamp_duty` + `financial_transaction_tax` | 无源 `rate: null`（『N/A / 不作断言』）| ✅ `type: none` medium | 自持一份 de-xetra 已引的 Bundestag 文档（BT-Drs. 16/12571，Börsenumsatzsteuer 1991-01-01 废除）+ 结构性论据（衍生品合约无证券过户）；与 de-xetra FTT 同处置 |
+| `za-jse financial_transaction_tax` | `rate: null` | ✅ `type: none` medium | SARS：STT『levied on every transfer of a security』（Securities Transfer Tax Act No. 25 of 2007）——南非证券交易环节的完整流转税立法；[ADR-002] 语义 STT→stamp_duty，故 FTT 判 `type: none` |
+| `za-jse regulatory_fees` | `rate: null`，note 自相矛盾 | ✅ `rate: 0.0002 pct`（Investor Protection Levy）| sharenet 第三方券商费率表『Investor Protection levy at 0.0002% of trade value』（jse.co.za 三子域名 + WebFetch 全 Cloudflare 403；2026 据 Market Notice 37025 约 0.000345%，未一手核实）。confidence medium |
+| `sg-sgx regulatory_fees` + `financial_transaction_tax` | `rate: null`（IRAS GST 页主题错配）| ✅ `type: none` medium | SGX-ST Rule 4.23.2：客户须知/须披露的按笔费用 =『any fees imposed by CDP and/or SGX-ST, stamp duty and Goods and Services Tax』——无 MAS 按笔征费、无本金税项；配合已 high 的 `stamp_duty`（scripless 豁免）+ 多份券商成本拆解一致 |
+| `au-asx financial_transaction_tax` | `rate: null`（Baker McKenzie 未逐字『no FTT』）| ✅ `type: none` medium | 各州『可流通证券』印花税对上市证券已全废（见 stamp_duty，NSW Duties Act §34）+ PwC Australia『Other taxes』综合税种综述印花税节仅提未上市实体、全篇无 FTT 条目。[ADR-002] 语义映射 |
+| `kr-krx regulatory_fees` | 无 quote / low | ✅ `type: none` medium | 《金融委员会设置法》(elaw.klri.re.kr) 第 46 条 FSS 经费 = 政府/韩行拨款 + 第 38 条受检机构（含证券公司）分担金；第 47(1) 条『属第 38 条各款的机构……应向金融监督院缴纳其费用分摊额』——机构层面征收、非按交易计收（同 au-asx ASIC 先例） |
+
+**仍为 `rate: null`（长尾未竟，非本条范围）：** `au-asx` / `ca-tsx` / `kr-krx` 的 `regulatory_fees` 已在本条或 [ADR-065] 处理；`fr-euronext stamp_duty`（一所多国、七国税制各异，`rate: null` 是正确的「无法逐国断言」）；`kr-krx exchange_fees`（KRX 站 JS，当期档位未取到——与「有无税/费」无关，见 OPEN-QUESTIONS）。
+
+**没改：** `spec` 形状、`schema/`、`tools/`、前端（成本瀑布 SVG 对 `type: none` 已有「不征收」渲染，无需改）；未新增不变式（本条未引入新结构）。
+
+**验证：** `make check` 全绿（`selfcheck` 24/24、`validate` 20 家 0/0、`verify_quotes` OK=1001 / FAIL=0 / CACHE_MISS=77、`check_ui_i18n` OK）、`make sync` 二次幂等。触及 8 字段（< [CLAUDE.md §四] 的 >30 门槛），协调者逐条 spec/quote-vs-source 自检；每条改动带 `.cache/` 落盘凭据（curl 常规 UA，除 fgk/ndrc/pwc/sgx/sars/elaw/bundestag 均已在册域名）。生成块变动：`health-summary` +2（1855→1857，cn-sse/cn-szse 各 +1）、`OPEN-QUESTIONS auto-issues` 移除 2 行（cn-szse FTT / kr-krx regulatory_fees 由 low 升 medium），`progress-matrix` 零 diff。
 
 **日期：** 2026-09-04

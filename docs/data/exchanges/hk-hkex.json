@@ -2293,7 +2293,7 @@
         },
         "zh": "香港是否另立独立于印花税之外的「金融交易税」税目，本次未取得正面依据：IRD 印花税页只讲印花税及其减免、未逐字排除其他证券交易税，港交所费率页只列自身收费。证券买卖的从价交易税负体现为印花税（见 costs.stamp_duty，交易双方各 0.1%），另有代收代缴性质的证监会/会计及财务汇报局征费（见 costs.regulatory_fees），两者功能上合计构成港股的交易税费负担；业界普遍理解港股无独立于印花税的 FTT，但港交所/税务局官方材料均未作此正面陈述。按 CLAUDE.md 第二节第四条，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS",
         "en": "Whether Hong Kong has a separately-named \"financial transaction tax\" distinct from stamp duty was not positively established: the IRD Stamp Duty page only addresses stamp duty itself and its reliefs, without a verbatim exclusion of any other securities transaction tax, and the HKEX fee page only lists HKEX's own charges. The ad valorem transaction tax burden on securities trading is expressed as Stamp Duty (see costs.stamp_duty, 0.1% each side) plus the pass-through SFC/AFRC levies (see costs.regulatory_fees); it is widely understood that Hong Kong has no FTT separate from stamp duty, but neither HKEX nor the Inland Revenue Department states this positively. Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS.",
-        "detail": "结构性判断（该税目在港疑未独立存在）而非某个具体数值。2026-09-01 复核：抓到 IRD 印花税页（ird.gov.hk/eng/tax/sdu.htm），但其内容是印花税制度与减免，不构成「除印花税外无证券交易税」的正面依据；此前一度据此翻 type: none，收尾审查（ADR-058）判定引文不支撑结论，回退 rate: null。翻 type: none 需 IRD/库务署明确「证券交易税负即印花税、别无他税」的一手陈述。",
+        "detail": "结构性判断（该税目在港疑未独立存在）而非某个具体数值。2026-09-01 复核：抓到 IRD 印花税页（ird.gov.hk/eng/tax/sdu.htm），但其内容是印花税制度与减免，不构成「除印花税外无证券交易税」的正面依据；此前一度据此翻 type: none，收尾审查（ADR-058）判定引文不支撑结论，回退 rate: null。翻 type: none 需 IRD/库务署明确「证券交易税负即印花税、别无他税」的一手陈述。2026-09-04（ADR-065 成本瀑布数据层残差）再核：香港采用列举式税制（无统一税法典），IRD『Tax Information - Others』所辖征费为封闭清单——Business Registration / Stamp Duty / Estate Duty / Betting Duty / Hotel Accommodation Tax，其中并无『证券交易税 / 金融交易税』条例。这比一般税法典国家的『未提及』更接近否定，但仍是推断（『无该条例』≠ 官方正面排除），按铁律二.4 不足以翻 type: none。本残差按『审慎终态』关闭——除非 IRD/库务署发布正面排除性陈述，不再作为待抓项跟进。",
         "sources": [
           {
             "title": "Trading Fee / Trading Tariff / SFC Transaction Levy 费率页（港交所官网，逐项列出证券交易涉及的全部税费名目）",
@@ -2307,7 +2307,7 @@
           }
         ],
         "confidence": "medium",
-        "verified": "2026-09-01",
+        "verified": "2026-09-04",
         "enum": null,
         "quote": null
       },

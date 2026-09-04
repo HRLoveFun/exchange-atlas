@@ -1269,7 +1269,7 @@
       "label_zh": "金融交易税",
       "label_en": "Financial Transaction Tax",
       "volatility": "volatile",
-      "verified": "2026-09-01",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -3669,7 +3669,7 @@
       "label_zh": "监管费用",
       "label_en": "Regulatory Fees",
       "volatility": "moderate",
-      "verified": "2026-08-27",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -5709,7 +5709,7 @@
       "label_zh": "监管费用",
       "label_en": "Regulatory Fees",
       "volatility": "moderate",
-      "verified": "2026-08-12",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -5721,7 +5721,19 @@
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
       "volatility": "volatile",
-      "verified": "2026-08-12",
+      "verified": "2026-09-04",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "cn-sse",
+      "chapter": "costs",
+      "chapter_label_zh": "交易成本与税费",
+      "chapter_label_en": "Trading Costs & Taxes",
+      "field_path": "financial_transaction_tax",
+      "label_zh": "金融交易税",
+      "label_en": "Financial Transaction Tax",
+      "volatility": "volatile",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -6965,11 +6977,23 @@
       "chapter": "costs",
       "chapter_label_zh": "交易成本与税费",
       "chapter_label_en": "Trading Costs & Taxes",
+      "field_path": "regulatory_fees",
+      "label_zh": "监管费用",
+      "label_en": "Regulatory Fees",
+      "volatility": "moderate",
+      "verified": "2026-09-04",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "cn-szse",
+      "chapter": "costs",
+      "chapter_label_zh": "交易成本与税费",
+      "chapter_label_en": "Trading Costs & Taxes",
       "field_path": "stamp_duty",
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
       "volatility": "volatile",
-      "verified": "2026-08-14",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -6981,8 +7005,8 @@
       "label_zh": "金融交易税",
       "label_en": "Financial Transaction Tax",
       "volatility": "volatile",
-      "verified": "2026-08-14",
-      "confidence": "low"
+      "verified": "2026-09-04",
+      "confidence": "medium"
     },
     {
       "exchange_id": "cn-szse",
@@ -7833,7 +7857,7 @@
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
       "volatility": "volatile",
-      "verified": "2026-08-27",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -7845,7 +7869,7 @@
       "label_zh": "金融交易税",
       "label_en": "Financial Transaction Tax",
       "volatility": "volatile",
-      "verified": "2026-08-27",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -11361,7 +11385,7 @@
       "label_zh": "金融交易税",
       "label_en": "Financial Transaction Tax",
       "volatility": "volatile",
-      "verified": "2026-09-01",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -14937,8 +14961,8 @@
       "label_zh": "监管费用",
       "label_en": "Regulatory Fees",
       "volatility": "moderate",
-      "verified": "2026-08-27",
-      "confidence": "low"
+      "verified": "2026-09-04",
+      "confidence": "medium"
     },
     {
       "exchange_id": "kr-krx",
@@ -14949,7 +14973,7 @@
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
       "volatility": "volatile",
-      "verified": "2026-09-01",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -17589,7 +17613,7 @@
       "label_zh": "监管费用",
       "label_en": "Regulatory Fees",
       "volatility": "moderate",
-      "verified": "2026-08-27",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -17613,7 +17637,7 @@
       "label_zh": "金融交易税",
       "label_en": "Financial Transaction Tax",
       "volatility": "volatile",
-      "verified": "2026-08-27",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -19557,7 +19581,7 @@
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
       "volatility": "volatile",
-      "verified": "2026-08-14",
+      "verified": "2026-09-04",
       "confidence": "high"
     },
     {
@@ -20517,7 +20541,7 @@
       "label_zh": "监管费用",
       "label_en": "Regulatory Fees",
       "volatility": "moderate",
-      "verified": "2026-09-01",
+      "verified": "2026-09-04",
       "confidence": "high"
     },
     {
@@ -21453,7 +21477,7 @@
       "label_zh": "监管费用",
       "label_en": "Regulatory Fees",
       "volatility": "moderate",
-      "verified": "2026-08-13",
+      "verified": "2026-09-04",
       "confidence": "high"
     },
     {
@@ -22893,7 +22917,7 @@
       "label_zh": "监管费用",
       "label_en": "Regulatory Fees",
       "volatility": "moderate",
-      "verified": "2026-08-27",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -22905,7 +22929,7 @@
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
       "volatility": "volatile",
-      "verified": "2026-09-01",
+      "verified": "2026-09-04",
       "confidence": "high"
     },
     {
@@ -22917,7 +22941,7 @@
       "label_zh": "金融交易税",
       "label_en": "Financial Transaction Tax",
       "volatility": "volatile",
-      "verified": "2026-08-27",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {

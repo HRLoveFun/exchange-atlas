@@ -1201,6 +1201,9 @@ costs:
       Advisory for Fiscal Year 2026），具体为何一度归零（如国会预算授权周期性因素）本次未
       深入核实，仅如实转述纳斯达克官方提醒原文。该费率按SEC财年周期性调整，属于"数值会变"
       的字段，引用时应连同生效日一并核对，不可视为长期固定值。
+      2026-09-04（ADR-065 成本瀑布数据层残差）复核：SEC「Fee Rate Advisories」列表页的
+      Latest Section 31 仍为 FY2026 公告（Feb. 27, 2026）；FY2027 Section 31 公告尚未发布，
+      $20.60/百万美元现行。触发点见 OPEN-QUESTIONS。
     sources:
       - title: "Equity Trader Alert #2026-18: Regulatory Transaction Fee Rate Adjustment per SEC Section 31（nasdaqtrader.com官网）"
         url: https://www.nasdaqtrader.com/TraderNews.aspx?id=ETA2026-18
@@ -1208,9 +1211,12 @@ costs:
       - title: "17 CFR 240.31 — Section 31 transaction fees（eCFR，含 'covered sale' 定义；/current/ 页对自动客户端设访问闸，正文经 eCFR versioner API 于 2026-09-01 逐字核实）"
         url: https://www.ecfr.gov/current/title-17/chapter-II/part-240/subject-group-ECFR88ac63dc03926d2/section-240.31
         accessed: 2026-09-01
+      - title: "Fee Rate Advisories（sec.gov 列表页，2026-09-04 复核 Latest Section 31 仍为 FY2026）"
+        url: https://www.sec.gov/rules-regulations/fee-rate-advisories
+        accessed: 2026-09-04
     quote: "Pursuant to the SEC's Fee Rate Advisory for Fiscal Year 2026, the Securities and Exchange Commission has announced that the Section 31 transaction fee rate applicable to securities transactions on national securities exchanges and over-the-counter markets will be set at $20.60 per million dollars, effective April 4, 2026. Until that date, the prevailing rate of $0.00 per million dollars will remain in effect.／Covered sale means a sale of a security, other than an exempt sale or a sale of a security future, occurring on a national securities exchange or by or through any member of a national securities association otherwise than on a national securities exchange."
     confidence: high
-    verified: 2026-09-01
+    verified: 2026-09-04
 
   stamp_duty:
     zh: ""

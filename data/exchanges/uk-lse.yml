@@ -1259,15 +1259,20 @@ costs:
     confidence: high
 
   stamp_duty:
-    spec: {rate: 0.5, unit: pct, side: buy, note: "SDRT（电子交易，常态）0.5%，买方，经 CREST 自动代收；纸质转让文书 >£1,000 适用 Stamp Duty 0.5%（就近取整至 £5）"}
-    zh: "印花税（Stamp Duty）：纸质转让文书形式、金额超£1,000的证券交易，税率0.5%（就近取整至£5）；印花税储备税（Stamp Duty Reserve Tax, SDRT）：电子（无纸化）交易，税率0.5%（就近取整至1便士），经CREST系统自动代收并划付予英国税务海关总署（HMRC）"
-    en: "Stamp Duty: 0.5% (rounded to the nearest £5) on paper-form share transfers over £1,000; Stamp Duty Reserve Tax (SDRT): 0.5% (rounded to the nearest 1p) on electronic (paperless) transactions, automatically collected via CREST and remitted to HMRC"
+    spec: {rate: 0.5, unit: pct, side: buy, note: "SDRT（电子交易，常态）0.5%，买方，经 CREST 自动代收；纸质转让文书 >£1,000 适用 Stamp Duty 0.5%（就近取整至 £5）。side: buy 已由 HMRC/gov.uk『Tax when you buy shares』坐实——『you pay tax when you buy』"}
+    zh: "印花税（Stamp Duty）：纸质转让文书形式、金额超£1,000的证券交易，税率0.5%（就近取整至£5）；印花税储备税（Stamp Duty Reserve Tax, SDRT）：电子（无纸化）交易，税率0.5%（就近取整至1便士），经CREST系统自动代收并划付予英国税务海关总署（HMRC）。征收方向为买方——HMRC 官方指引明示『买入股票时缴纳』（you pay tax when you buy）"
+    en: "Stamp Duty: 0.5% (rounded to the nearest £5) on paper-form share transfers over £1,000; Stamp Duty Reserve Tax (SDRT): 0.5% (rounded to the nearest 1p) on electronic (paperless) transactions, automatically collected via CREST and remitted to HMRC. The tax is borne by the buyer — HMRC guidance states plainly that 'you pay tax when you buy' shares"
     sources:
       - title: Stamp Duty and Stamp Duty Reserve Tax（HMRC研究报告，gov.uk）
         url: https://www.gov.uk/government/publications/stamp-duty-and-stamp-duty-reserve-tax/stamp-duty-and-stamp-duty-reserve-tax
         accessed: 2026-08-14
-    quote: "Stamp Duty is incurred on items that are traded 'on paper', that is using a stock transfer form, or other written instrument, and with a value more than £1,000... Stamp Duty is payable at 0.5% rounded to the nearest £5. Stamp Duty Reserve Tax is incurred on electronic (or 'paperless') transactions in shares in a UK company or a foreign company with a UK share register. Electronic transactions are usually carried out through CREST, which automatically collects Stamp Duty Reserve Tax and sends it to HMRC. Stamp Duty Reserve Tax is payable at 0.5% rounded to the nearest 1p."
+      - title: "Tax when you buy shares: Overview（HMRC / gov.uk，买方缴纳的方向措辞）"
+        url: https://www.gov.uk/tax-buy-shares
+        accessed: 2026-09-04
+    quote: "Stamp Duty is incurred on items that are traded 'on paper', that is using a stock transfer form, or other written instrument, and with a value more than £1,000... Stamp Duty is payable at 0.5% rounded to the nearest £5. Stamp Duty Reserve Tax is incurred on electronic (or 'paperless') transactions in shares in a UK company or a foreign company with a UK share register. Electronic transactions are usually carried out through CREST, which automatically collects Stamp Duty Reserve Tax and sends it to HMRC. Stamp Duty Reserve Tax is payable at 0.5% rounded to the nearest 1p.／Tax when you buy shares — Overview: \"When you buy shares, you usually pay a tax or duty of 0.5% on the transaction. If you buy: shares electronically, you’ll pay Stamp Duty Reserve Tax (SDRT); shares using a stock transfer form, you’ll pay Stamp Duty if the transaction is over £1,000... You usually pay tax based on the price you pay for the shares. Transactions you pay tax on: You pay tax when you buy: existing shares in a company incorporated in the UK\""
     confidence: high
+    verified: 2026-09-04
+    detail: "2026-09-04（ADR-065 成本瀑布数据层残差）：ADR-054/058 收尾审查将 side: buy 记为『真实制度、字段已 high，但 quote 未含买方缴纳措辞、待补』。本次抓 HMRC/gov.uk『Tax when you buy shares』（非 SPA 页，curl 常规 UA 200），其 Overview 明示『When you buy shares, you usually pay a tax or duty of 0.5%』与『You pay tax when you buy: existing shares...』——买方缴纳的方向措辞已入 quote，side: buy 坐实、残差关闭。"
 
   financial_transaction_tax:
     zh: ""
