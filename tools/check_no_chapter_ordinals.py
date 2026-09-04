@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""tools/check_no_chapter_ordinals.py — [ADR-070]「前端不暴露 taxonomy 章序数」的机器强制
+"""tools/check_no_chapter_ordinals.py — [ADR-072]「前端不暴露 taxonomy 章序数」的机器强制
 
-背景（ADR-070）：`schema/taxonomy.yml` 的 `chapters` 用 `chapter_no`（2–12，源自原始
-十三章大纲）给十一个数据章节编号。这套序数是内部 schema 产物，前端从没有一个页面
-把它当目录呈现。可视化视图底部的设计思想段落却写「本视图由第五章《市场结构与交易机制》
-…驱动」——读者看到「第五章」却无从知道这是什么的第五章、去哪看全貌。ADR-070 定：
+背景（ADR-072，原占 ADR-070，撞已合并的 [ADR-070]/[ADR-071]，按 ADR-029 协议让号）：
+`schema/taxonomy.yml` 的 `chapters` 用 `chapter_no`（2–12，源自原始十三章大纲）给
+十一个数据章节编号。这套序数是内部 schema 产物，前端从没有一个页面把它当目录呈现。
+可视化视图底部的设计思想段落却写「本视图由第五章《市场结构与交易机制》
+…驱动」——读者看到「第五章」却无从知道这是什么的第五章、去哪看全貌。ADR-072 定：
 前端只用**章节名**（读者能在档案页左栏点到的那一节）+ 指向档案页 / ADR 的链接，
 不出现 `第X章` / `Chapter N` 这类悬空序数。
 
@@ -117,7 +118,7 @@ def main():
     if not problems:
         print("[check-chapter-ordinals] OK — 前端无 taxonomy 章序数（第X章 / Chapter N）")
         return 0
-    print(f"[check-chapter-ordinals] FAIL — {len(problems)} 处章序数进入前端（ADR-070：改用章节名 + 档案页 / ADR 链接）：")
+    print(f"[check-chapter-ordinals] FAIL — {len(problems)} 处章序数进入前端（ADR-072：改用章节名 + 档案页 / ADR 链接）：")
     for path, line_no, hit, snippet in problems:
         print(f"  {path.relative_to(ROOT)}:{line_no}  「{hit}」  {snippet}")
     return 1

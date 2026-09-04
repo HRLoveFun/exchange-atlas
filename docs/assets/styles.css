@@ -400,6 +400,9 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
   font-size: 12.5px; color: var(--fg); line-height: 1.45;
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
 }
+/* 佣金说明行（ADR-071）：整行、不裁剪、弱化——它是注解不是数据条 */
+.cw-commission-line { margin-top: 6px; }
+.cw-commission-line .cw-tax-v { -webkit-line-clamp: 4; color: var(--fg-muted); }
 
 /* ── 交割管线（v2.0 Phase 3 第三棒，ADR-048 / ADR-050）── */
 .sp-svg .sp-day { font-size: 9.5px; fill: var(--fg-faint); font-family: var(--font-mono); }
@@ -485,6 +488,37 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
 .pt-svg .pt-end { font-size: 11px; font-weight: 700; fill: var(--accent); }
 .pt-svg .pt-conn { font-size: 9px; fill: var(--fg-faint); font-style: italic; }
 .pt-svg .td-hit { cursor: pointer; }
+
+/* ── 风险旗标 Risk Flags（v2.0 Phase 3 第七棒，ADR-066）──
+   第十二章 5 字段的固定槽位「旗标面板」两泳道：交易层面（--info）/ 制度·地缘·执法（--warn）。
+   区别性轴 = 置信度作一等视觉信号：旗标字形填充度四态（有据可查 / 综合判断 / 定性背景 /
+   未记录）= 取证程度，非市场风险高低。左缘色条不透明度随置信度（内联控制）。
+   卡内角色头 .rf-card-k（随语言开关取 taxonomy label）；正文 .rf-card-v；缺省卡走虚线框
+   + 斜体「未记录」。低置信度卡叠极淡斜纹（#rf-hatch）。
+   常驻 .rf-disclaimer「这不是风险评分」声明（ADR-066 轴 4）。图例复用 .rm-lg-*。 */
+.rf-svg { min-width: 1080px; }
+.rf-svg .rf-title { font-size: 14.5px; font-weight: 700; fill: var(--fg); }
+.rf-svg .rf-sub { font-size: 10.5px; fill: var(--fg-muted); }
+.rf-svg .rf-lane-l { font-size: 10.5px; font-weight: 700; fill: var(--fg-muted); }
+.rf-svg .rf-lane-s { font-size: 8.5px; fill: var(--fg-faint); }
+.rf-svg .rf-card-k { font-size: 9px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; fill: var(--fg-muted); }
+.rf-svg .rf-conf { font-size: 10.5px; font-weight: 700; }
+.rf-svg .rf-card-v { font-size: 10.5px; fill: var(--fg); }
+.rf-svg .rf-empty { font-size: 11px; fill: var(--fg-faint); font-style: italic; }
+.rf-svg .rf-empty-s { font-size: 9px; fill: var(--fg-faint); font-family: var(--font-mono); }
+.rf-svg .rf-scale { font-size: 9px; fill: var(--fg-faint); font-family: var(--font-mono); }
+.rf-svg .td-hit { cursor: pointer; }
+.rf-svg .td-hit:hover rect { filter: brightness(0.97); }
+.td-legend .rf-lg-flag { flex-shrink: 0; overflow: visible; }
+
+.rf-disclaimer {
+  margin-top: 14px; font-size: 12px; line-height: 1.62; color: var(--fg-muted);
+  max-width: 92ch; border-left: 3px solid var(--border-strong); padding-left: 13px;
+}
+.rf-disclaimer strong { color: var(--fg); font-weight: 650; }
+.rf-disclaimer em { font-style: italic; }
+.rf-disclaimer code { font-family: var(--font-mono); font-size: 11px; background: var(--bg-hover); padding: 0 3px; border-radius: 3px; }
+.rf-disclaimer .rf-hard { color: var(--danger); font-weight: 650; }
 
 .overlay-spec {
   background: var(--bg); border-radius: 4px; padding: 10px 12px; margin: 0;

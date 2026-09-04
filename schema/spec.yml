@@ -175,25 +175,37 @@ fields:
       full_table_note: "string——ladder 只含锚点时说明完整表在哪"
       note: "string"
 
-  # ── 第十一章｜交易成本：成本瀑布（Phase 3，[ADR-045]）──
-  # 6 个「按笔显性成本」字段共用一份形状，各字段一份 spec，描述该层成本的费率 /
+  # ── 第十一章｜交易成本：成本瀑布（Phase 3，[ADR-045]；[ADR-071] 加 rate_raw）──
+  # 5 个「按笔显性成本」字段共用一份形状，各字段一份 spec，描述该层成本的费率 /
   # 单位 / 征收方向。渲染为「镜像双瀑布」（买入侧 / 卖出侧）时：
   #   side=both → 买卖两侧各画一段；side=buy / sell → 只在对应侧画；
   #   type=none → 该市场明确「不征」该费种 / 税目（画 0 高度 + 标注，是关键事实不是空缺）；
-  #   rate=null → 费种存在但 quote 未给数值（幽灵条，如佣金市场化议价）；
+  #   rate=null → 费种存在但 quote 未给可摘引数值（幽灵条）；
   #   spec 键整个缺省 → 尚未填（[ADR-035] D 的三态）。
   # 归一到「bp of 成交额」在渲染层做（per_share / flat_* / per_lakh 等按图上标注的
   # 假设成交额换算）；spec 只存 quote 逐字撑得住的原始值 + 单位（confidence: high
   # 走校验 5b；medium 不强校验，仍只放 zh / quote 明确给出的数值）。
   # capital_gains_tax / dividend_withholding_tax 不在此形状——它们不是按笔成本，
   # 前端作「退出 / 持有税」注解另列，无 spec。
+  # commission_structure 不再进瀑布条（[ADR-071]：券商议价、20/20 无统一费率，
+  # 恒幽灵条零对比价值）——降为图下方一行说明；其数据字段仍在剖面 chip / 档案页出现，
+  # spec 形状保留以防未来某所出现官方佣金费率上限。
+  #
+  # rate_raw（[ADR-071]）：原文以非阿拉伯数字给出费率时（tw-twse 证券交易税「千分之三」、
+  # za-jse STT「0,25%」逗号小数）——ADR-039 纪律原是「不放数值 spec」，渲染成幽灵条，
+  # 但这两笔恰是各自市场最大的一笔成本，画成「议价/未披露」是失真。改为：rate 照填人工
+  # 转写的阿拉伯值，rate_raw 存原文逐字串（校验：rate_raw 必须是本字段 quote 的逐字子串，
+  # 挡「转写」名义下的编造；ASCII 纯数字型 rate_raw 再机器比对 rate）。渲染层画实心条 +
+  # 「*」标记「原文非阿拉伯数字、已人工转写」。5b 对带 rate_raw 的字段豁免 rate 的
+  # quote 数值反查（rate_raw 逐字子串是更强的锚点）。
   costs.commission_structure: &cost_layer
     doc: >
       一层按笔显性成本的费率结构。rate + unit 给费率（原始单位，渲染层归一到 bp）；
       side 给征收方向；type=none 表示本市场不征该费种 / 税目；rate=null 表示费种存在
-      但 quote 未给数值（如佣金市场化议价）。数值须逐字在 quote 里（校验 5b）。
+      但 quote 未给数值。数值须逐字在 quote 里（校验 5b）；原文为非阿拉伯数字时见 rate_raw。
     keys:
       rate: "number 或 null——费率数值，单位见 unit。null = 费种存在但无可摘引数值"
+      rate_raw: "string，可选——原文以非阿拉伯数字给出费率时（国字「千分之三」、逗号小数「0,25%」），此处存原文逐字串，rate 存人工转写的阿拉伯值。校验：rate_raw 必须逐字出现在本字段 quote 里（[ADR-071]）"
       unit: "pct（% of 成交额）/ permille（‰ of 成交额）/ bp（基点 of 成交额）/ per_share（每股，配 currency）/ per_lakh（每十万成交额）/ per_crore（每千万成交额）/ per_million（每百万成交额）/ flat_per_trade / flat_per_settlement / flat_per_order（后三者配 currency）"
       currency: "string，可选——unit 为绝对额类（per_share / flat_* / per_lakh / per_crore / per_million）时的计价货币，ISO 4217（HKD / GBP / INR / USD / CHF / JPY…）"
       side: "buy / sell / both——征收方向。both = 买卖各计一次"
