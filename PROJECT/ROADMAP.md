@@ -7,6 +7,8 @@
 > - **数据现状快照** → 二、数据看板（`make sync` 算出，不手改）
 > - **当前版本的计划与进度** → 三、v2.0 计划：高度可视化转向
 > - **v0.x / v1.x 已全部完成** → 四、历史归档，只在需要追溯时读
+>
+> **怎么改这份文件**：§三详版就地改；**§一「下一步」「最近完成」是单写者资源**——后台任务 / worktree 只往 `ROADMAP-INBOX.md` 追加便签，由交互式会话折叠进 §一（机制见 [ADR-069]、`CLAUDE.md` §八）。
 
 ---
 
@@ -183,6 +185,8 @@
   - **过程中修掉两个真 bug**（详见 ADR）：`cwBuild` 里 `for (var t …)` 因 `var` 提升遮蔽了模块级 `t()` 文案助手，导致成本瀑布两种语言模式都白屏；`tdHeadlineParts` 把已语言化的变量再套进 `t()` 模板，中文态输出「S&P 500跌」而非原文「指数跌」。
 
 - [x] **不变式纯函数合成用例自检**（横切条目，2026-09-03，[ADR-063]；接 [ADR-062] 审查反馈）— [ADR-059]/[ADR-062] 的 `not_applicable` / `optional` 判定抽了纯函数但探针一次性跑过就丢，B/D 桶勘误回 F 后**全库无真实 `not_applicable`**，`validate.py` 这两条检查跑不到核心分支。新增 `tools/selfcheck.py`（stdlib，无 pytest）固化 24 条正负向用例（`field_na_violations` 6 / `chapter_na_violations` 6 / `count_chapter_leaves` 8 / `chapter_is_not_applicable` 4），接入 `make check`（排 `validate` 前）；`validate.py` 抽 `chapter_na_violations()` 纯函数（内联调用点行为等价）。负向探针确认失配 → 退出码 1。今后新增 / 改一条不变式纯函数 = 顺手补 `selfcheck.py` 用例（[CLAUDE.md §四] 操作化落点）。
+
+- [x] **并行 worktree 防失序 · 四道护栏**（横切条目，2026-09-04，[ADR-069]）— 2026-09-03/04 三条后台 worktree 并行 → 合并把 `main` 的 `make check` 合红（`c0c2b04`，PR #63 收拾）。四类失序、成因各异，共同点是并行分支各自手写 git 无法语义合并的单写者资源。四道护栏：① `validate.py` 加 `roadmap_nextstep_violations` / `roadmap_recent_violations`（§一「下一步」编号 `1..n` 连续无重复、「最近完成」≤3）+ `validate_no_conflict_markers`（全库扫 `<<<<<<< ` / `||||||| ` / `>>>>>>> ` 残留），`selfcheck` 加 12 条用例；② §一 改单写者——新增 `PROJECT/ROADMAP-INBOX.md`，后台任务只往收件箱追加便签、由交互式会话折进 §一，`CLAUDE.md §八` 改写；③ `GIT-RUNBOOK.md` 定「后台 PR 串行合并、每合一个 `git pull --ff-only && make build`、红则停」；④ 新增 `PROJECT/ADR-LEDGER.md` 编号台账 + `validate.py` `adr_ledger_violations`（`DECISIONS.md` 每条 ADR 都登记过、台账编号连续无重复），`selfcheck` 加 7 条用例。`selfcheck` 24→43。**未做（列 [ADR-069]）**：`renumber_adr.py` 机械让号、`DECISIONS.md` 拆文件、CI。**已知局限**：护栏 3 是纪律非机器强制（后台任务平台限制不能装 CI 卡点）；§一 折叠动作仍靠交互式会话记得做；`make check` 全绿 ≠ 无并行风险，只覆盖这四类已复现的。`make build` 全绿、`data/` 与 `docs/data/` 零 diff。
 
 ### 数据空缺复核轨（横切条目，不属于 Phase 序列；与 Phase 3 并行，[ADR-060]）
 

@@ -28,6 +28,11 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
   10. 路径引用：文档里反引号包住、首段是仓库顶层条目的路径必须存在（非仓库路径片段
       如站内相对路径 res/pc/js/x.js 或绝对路径 /tmp/x.html 不属校验对象）
   11. ADR 锚点：DECISIONS.md 里的 ADR 编号不重复；引用处能找到对应编号
+  12. ROADMAP §一 防失序（[ADR-069]）：「下一步」编号 1..n 连续无重复、「最近完成」不超
+      滚动窗口（并行 worktree 各自重排该子节，git 静默三方合并 → 重号/超窗）
+  13. 冲突标记：任何入库文本文件不得残留 git 合并冲突标记（<<<<<<< / ||||||| / >>>>>>>）
+  14. ADR 台账（[ADR-069]）：DECISIONS.md 每条 ### ADR-NNN 都在 PROJECT/ADR-LEDGER.md
+      登记过；台账编号 1..max 连续、不重复（并行分支预支编号必撞的护栏）
 """
 import datetime
 import json
@@ -56,6 +61,14 @@ NUMBER_RE = re.compile(r"\d+(?:,\d{3})*(?:\.\d+)?")
 PATH_TOKEN_RE = re.compile(r"`([A-Za-z0-9_.\-/]+(?:/[A-Za-z0-9_.\-]+)+)`")
 ADR_DEF_RE = re.compile(r"^### (ADR-\d{3})\b", re.M)
 ADR_REF_RE = re.compile(r"\[?(ADR-\d{3})\]?")
+# git 合并冲突标记：`<<<<<<< `、`||||||| `、`>>>>>>> ` 三种带尾随空格 + 标签，
+# 误报率接近零（裸 `=======` 会撞 rst/markdown 标题，故不收）。并行分支未清冲突
+# 即入库的护栏（2026-09-04 PR #61/#62 的教训之一，见 [ADR-069]）。
+CONFLICT_MARKER_RE = re.compile(r"^(?:<{7}|\|{7}|>{7}) ", re.M)
+# ADR-LEDGER.md 的登记行：区间行 `- ADR-001 … ADR-068 · ...` 兜住建台账前的历史条目，
+# 之后逐条 `- ADR-069 · ...`。见 [ADR-069]。
+LEDGER_RANGE_RE = re.compile(r"ADR-(\d{3})\s*(?:…|\.\.\.|—|~)\s*ADR-(\d{3})")
+LEDGER_SINGLE_RE = re.compile(r"^-\s*ADR-(\d{3})\b")
 SOURCES_DOMAIN_RE = re.compile(r"^-\s+`([a-z0-9.\-]+\.[a-z]{2,})`", re.M)
 # 域名行含「官方/监管/第三方」标签的形式：- `domain`（可选括注） | 标签 | 语言 | ...
 # 部分"补充登记"行只有域名没有后续管道分隔，靠上面的 SOURCES_DOMAIN_RE 收录、
@@ -65,6 +78,19 @@ SOURCES_TAG_RE = re.compile(
 
 errors = []
 warnings = []
+
+# 忽略的目录，按 ROOT 相对路径判定——关键：ROOT 本身可能就在
+# `.claude/worktrees/<name>/` 里（validate 跑在 worktree 分支上做合并前校验），
+# 此时绝对路径 parts 会含 "worktrees"，用绝对 parts 判会把整个仓库跳过（[ADR-069]）。
+SKIP_DIRS = {".git", ".cache", "node_modules", "worktrees"}
+
+
+def under_skip_dir(p):
+    try:
+        rel_parts = p.relative_to(ROOT).parts
+    except ValueError:
+        rel_parts = p.parts
+    return any(part in SKIP_DIRS for part in rel_parts)
 
 
 def err(msg):
@@ -118,6 +144,77 @@ def chapter_na_violations(loc, ch_id, meta_not_applicable, is_only_spot, zh_leaf
     for p in zh_leaf_paths:
         out.append(f"{loc}: 章节 `{ch_id}` 标了 not_applicable，但 `{p}` 仍有 zh "
                    f"——不适用的章节应清掉占位字段（[ADR-059]）")
+    return out
+
+
+# ── ROADMAP §一 的两条不变式（[ADR-069]）──────────────────────
+# 并行 worktree 各自重排 §一「下一步」编号列表 / 各自 prepend「最近完成」，
+# git 把不同分支的行看成互不冲突 → 三方合并静默产出重号列表、超窗窗口
+# （2026-09-04 PR #61/#62 实测：下一步编号乱成 1-6,4-6,4-8、最近完成涨到 9 条）。
+# 这两条把「静默失序」变成 make check 的硬错误。判定纯逻辑、无 I/O，
+# 调用方切好 §一 两个子节的文本传进来，tools/selfcheck.py 喂合成输入锁行为。
+
+ROADMAP_RECENT_MAX = 3  # CLAUDE.md §八：「最近完成」滚动窗口只留最近 3 条
+NEXTSTEP_ITEM_RE = re.compile(r"^(\d+)\.\s", re.M)
+RECENT_ITEM_RE = re.compile(r"^-\s\*\*", re.M)
+
+
+def roadmap_nextstep_violations(nextstep_block):
+    """§一「下一步」顶层有序列表的编号必须是 1..n 连续、无重复。返回违规消息列表。"""
+    nums = [int(x) for x in NEXTSTEP_ITEM_RE.findall(nextstep_block)]
+    if not nums:
+        return []
+    out = []
+    seen, dup = set(), set()
+    for n in nums:
+        (dup if n in seen else seen).add(n)
+    if dup:
+        out.append(f"ROADMAP §一「下一步」列表编号重复 {sorted(dup)}"
+                   f"（并行分支各自重排、合并未清干净？见 [ADR-069]）")
+    if sorted(seen) != list(range(1, max(seen) + 1)):
+        out.append(f"ROADMAP §一「下一步」列表编号不连续 {sorted(seen)}（应为 1..{max(seen)}）")
+    return out
+
+
+def roadmap_recent_violations(recent_block, limit=ROADMAP_RECENT_MAX):
+    """§一「最近完成」顶层条目数不得超过滚动窗口上限。返回违规消息列表。"""
+    n = len(RECENT_ITEM_RE.findall(recent_block))
+    if n > limit:
+        return [f"ROADMAP §一「最近完成」有 {n} 条，超出滚动窗口上限 {limit}"
+                f"（CLAUDE.md §八：只留最近 3 条，更早的见三节；见 [ADR-069]）"]
+    return []
+
+
+def adr_ledger_violations(decisions_nums, ledger_text):
+    """DECISIONS.md 的 ADR 编号集合 ⊆ ADR-LEDGER.md 登记的编号；台账 1..max 连续无重复。
+    返回违规消息列表（空 = 合法）。判定纯逻辑、无 I/O，selfcheck 喂合成输入锁行为。"""
+    reserved, dup = set(), set()
+    for line in ledger_text.splitlines():
+        s = line.strip()
+        if not s.startswith("- ADR-"):
+            continue
+        rng = LEDGER_RANGE_RE.search(s)
+        if rng:
+            for n in range(int(rng.group(1)), int(rng.group(2)) + 1):
+                reserved.add(n)
+            continue
+        m = LEDGER_SINGLE_RE.match(s)
+        if m:
+            n = int(m.group(1))
+            (dup if n in reserved else reserved).add(n)
+            reserved.add(n)
+    out = []
+    missing = sorted(decisions_nums - reserved)
+    if missing:
+        out.append("PROJECT/ADR-LEDGER.md: 未登记 " + ", ".join(f"ADR-{n:03d}" for n in missing)
+                   + "（DECISIONS.md 有、台账没有——写 ADR 前先登记，见 [ADR-069]）")
+    if dup:
+        out.append(f"PROJECT/ADR-LEDGER.md: 编号重复登记 {sorted(f'ADR-{n:03d}' for n in dup)}")
+    if reserved:
+        gaps = sorted(set(range(1, max(reserved) + 1)) - reserved)
+        if gaps:
+            out.append("PROJECT/ADR-LEDGER.md: 编号不连续，缺口 "
+                       + ", ".join(f"ADR-{n:03d}" for n in gaps))
     return out
 
 
@@ -573,15 +670,14 @@ def validate_docs_data_fresh(taxonomy, glossary, enums, exchanges_expanded):
 # ── 10-11：文档内部引用 ────────────────────────────────────────
 
 def validate_path_references():
-    skip_dirs = {".git", ".cache", "node_modules", "worktrees"}
-    md_files = [p for p in ROOT.rglob("*.md") if not any(part in skip_dirs for part in p.parts)]
+    md_files = [p for p in ROOT.rglob("*.md") if not under_skip_dir(p)]
     known_ext = (".yml", ".yaml", ".py", ".json", ".md", ".html", ".js", ".css", ".txt")
     # 只把"首段是仓库顶层条目"的 token 当作仓库内路径校验。反引号里以已知扩展名结尾的
     # 字符串还有别的来源：站内相对路径片段（res/pc/js/func.js）、别的网站/仓库的路径、
     # 绝对路径示例（/tmp/x.html）——这些不是本校验的对象，此前会被误报（见 OPEN-QUESTIONS
     # 已删除的 #35 与 ADR-029 顺带修复）。`.cache/` 内容不入库（ADR-002），文档里写
     # `.cache/<id>/_manifest.json` 这类是示意路径，同样跳过。
-    top_level = {p.name for p in ROOT.iterdir()} - skip_dirs
+    top_level = {p.name for p in ROOT.iterdir()} - SKIP_DIRS
     for md in md_files:
         text = md.read_text(encoding="utf-8")
         for token in PATH_TOKEN_RE.findall(text):
@@ -608,13 +704,60 @@ def validate_adr_anchors():
         err(f"PROJECT/DECISIONS.md: ADR 编号重复 {sorted(dupes)}")
     defined_set = set(defined)
 
-    skip_dirs = {".git", ".cache", "node_modules", "worktrees"}
     for md in ROOT.rglob("*.md"):
-        if any(part in skip_dirs for part in md.parts) or md == decisions_path:
+        if under_skip_dir(md) or md == decisions_path:
             continue
         for ref in ADR_REF_RE.findall(md.read_text(encoding="utf-8")):
             if ref not in defined_set:
                 err(f"{md.relative_to(ROOT)}: 引用了不存在的 `{ref}`（DECISIONS.md 里没有这条）")
+
+
+def validate_adr_ledger():
+    """DECISIONS.md 的每条 ADR 都在 ADR-LEDGER.md 登记过；台账编号连续无重复（[ADR-069]）。"""
+    decisions_path = PROJECT_DIR / "DECISIONS.md"
+    ledger_path = PROJECT_DIR / "ADR-LEDGER.md"
+    if not decisions_path.exists():
+        return
+    if not ledger_path.exists():
+        err("PROJECT/ADR-LEDGER.md 不存在（ADR 编号台账，见 [ADR-069]）")
+        return
+    decisions_nums = {int(x[4:]) for x in ADR_DEF_RE.findall(decisions_path.read_text(encoding="utf-8"))}
+    for v in adr_ledger_violations(decisions_nums, ledger_path.read_text(encoding="utf-8")):
+        err(v)
+
+
+def validate_roadmap_section_one():
+    """ROADMAP §一「下一步」编号连续无重复 + 「最近完成」不超滚动窗口（[ADR-069]）。"""
+    path = PROJECT_DIR / "ROADMAP.md"
+    if not path.exists():
+        return
+    text = path.read_text(encoding="utf-8")
+    m_next = re.search(r"^### 下一步[^\n]*\n(.*?)\n^### 最近完成", text, re.S | re.M)
+    m_recent = re.search(r"^### 最近完成[^\n]*\n(.*?)\n^---$", text, re.S | re.M)
+    if not m_next:
+        err("PROJECT/ROADMAP.md: 找不到 §一「下一步」小节（标题被改过？[ADR-069] 的校验依赖它）")
+    else:
+        for v in roadmap_nextstep_violations(m_next.group(1)):
+            err(v)
+    if not m_recent:
+        err("PROJECT/ROADMAP.md: 找不到 §一「最近完成」小节（标题被改过？[ADR-069] 的校验依赖它）")
+    else:
+        for v in roadmap_recent_violations(m_recent.group(1)):
+            err(v)
+
+
+def validate_no_conflict_markers():
+    """任何入库文本文件里不得残留 git 合并冲突标记（[ADR-069]）。"""
+    exts = (".md", ".yml", ".yaml", ".py", ".js", ".css", ".json", ".txt", ".html")
+    for p in ROOT.rglob("*"):
+        if p.suffix not in exts or under_skip_dir(p):
+            continue
+        try:
+            text = p.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        if CONFLICT_MARKER_RE.search(text):
+            err(f"{p.relative_to(ROOT)}: 残留 git 合并冲突标记（并行分支合并未清干净，见 [ADR-069]）")
 
 
 # ── 主流程 ────────────────────────────────────────────────
@@ -647,6 +790,9 @@ def main():
     validate_docs_data_fresh(taxonomy, glossary, enums, exchanges_expanded)
     validate_path_references()
     validate_adr_anchors()
+    validate_adr_ledger()
+    validate_roadmap_section_one()
+    validate_no_conflict_markers()
 
     if warnings:
         print(f"[check] {len(warnings)} 条警告：")

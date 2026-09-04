@@ -1675,3 +1675,37 @@
 **验证：** `make check` 全绿（`selfcheck` 24/24、`validate` 20 家 0/0、`verify_quotes` OK=1001 / FAIL=0 / CACHE_MISS=77、`check_ui_i18n` OK）、`make sync` 二次幂等。触及 8 字段（< [CLAUDE.md §四] 的 >30 门槛），协调者逐条 spec/quote-vs-source 自检；每条改动带 `.cache/` 落盘凭据（curl 常规 UA，除 fgk/ndrc/pwc/sgx/sars/elaw/bundestag 均已在册域名）。生成块变动：`health-summary` +2（1855→1857，cn-sse/cn-szse 各 +1）、`OPEN-QUESTIONS auto-issues` 移除 2 行（cn-szse FTT / kr-krx regulatory_fees 由 low 升 medium），`progress-matrix` 零 diff。
 
 **日期：** 2026-09-04
+
+---
+
+### ADR-069 — 并行 worktree 防失序：ROADMAP §一 / ADR 编号 / 生成块 / 合并纪律四道护栏
+
+**背景：** 2026-09-03/04 同时有三条后台 worktree 在跑（参与者图渲染层、成本瀑布残差、数据空缺轨任务二），各自开 PR。合并后 `main` 的 `make check` 转红（`c0c2b04`），PR #63 事后收拾。四类失序，成因各不相同，共同点是**把 git 无法语义合并的「单写者资源」交给并行分支各自手写**：
+
+1. **ADR 编号预支撞号。** 每条分支拉出时取「下一个空号」，N 条并行 → 几乎必撞。[ADR-029] 定的对策（晚合并方让号 + 全库 grep 改引用）是纯手工：`ADR-065` 这次被三条分支同时预支，PR #63 手工让号 `ADR-068`，commit message 里仍永久写着旧号。
+2. **`ROADMAP.md` §一「下一步」是共享散文编号列表。** 每条分支重排它，git 把不同分支的行看成互不冲突，**不报冲突**，直接三方合并 → 编号乱成 `1-6, 4-6, 4-8`。最坏的失效：没有冲突标记，静默错误。
+3. **§一「最近完成」滚动窗口每条分支各自 prepend。** 合并保留全部 → 窗口从「只留 3 条」涨到 9 条（含 2 条逐字重复）。同样不报冲突。
+4. **生成块每条分支各自 `make sync`。** 各自基于自己那部分 `data/` 视图重算 `health-summary`，合并把两个重算版本并在同一个 `<!-- BEGIN/END -->` 块里 → 块内两张表头。`validate.py` §8 能抓（重算 ≠ 已提交），**但前提是合并后有人真跑了 `make build`**——PR #61/#62 的合并者做完 `git pull --ff-only` 没跑 check，红 `main` 溜过。
+
+**定了什么（四道护栏，按失效模式）：**
+
+1. **`validate.py` 加 §一防失序两条不变式（[CLAUDE.md §四]「新不变式必须机器化」）：**
+   - `roadmap_nextstep_violations(block)`：§一「下一步」顶层有序列表编号必须 `1..n` 连续、无重复。
+   - `roadmap_recent_violations(block, limit=3)`：§一「最近完成」顶层条目数 ≤ `ROADMAP_RECENT_MAX`（=3，`CLAUDE.md §八` 的窗口大小）。
+   - 两个纯函数无 I/O，`validate_roadmap_section_one()` 切 §一两子节文本喂进去；`tools/selfcheck.py` 加 12 条合成用例（含「重号各报一条 + 不连续 → 2 条消息」「缩进子编号不计入顶层」等边界），`selfcheck` 24→36。
+   - 顺带 `validate_no_conflict_markers()`：全库文本文件扫 `<<<<<<< ` / `||||||| ` / `>>>>>>> ` 残留（裸 `=======` 会撞 markdown 标题，不收）——PR #61/#62「冲突未清理即入库」这一类的兜底。
+   - 顺带修一个既有 bug：`validate.py` 三处 `rglob` 用**绝对路径** `.parts` 判 `skip_dirs`，而 validate 跑在 `.claude/worktrees/<name>/` 分支上时绝对路径必含 `"worktrees"` → 整个仓库被跳过，`validate_adr_anchors` 的跨文件 ADR 引用扫描等在 worktree 里静默失效。抽 `under_skip_dir(p)` 按 ROOT 相对路径判，三处统一。
+2. **§一 改为单写者，后台任务走收件箱。** [CLAUDE.md 一] 早已规定「§一 只是速览索引、事实不在这写」——本就不该由干活的分支维护。新增 `PROJECT/ROADMAP-INBOX.md`（纯 append，不同分支的 append git 合并干净）：**后台任务 / worktree 收尾只往收件箱追加一行完成便签，不碰 §一**；**§三详版就地改**（逐条 checklist，改不同条目不冲突）。**交互式会话 / 合并协调者开工时**把收件箱堆积的行折进 §一（「最近完成」裁到 3 条、「下一步」重排编号）再清空——串行、单写者、不会撞。`CLAUDE.md §八`「ROADMAP 回写要动两处」相应改写为「详版就地改、§一 走收件箱」。
+3. **合并协调纪律入 `GIT-RUNBOOK.md`。** 后台 PR 无 CI（[CLAUDE.md §六] 有意选择），合并动作本身不验证——红 `main` 正是这样溜过的。定：多个后台 PR **串行合并，一次一个**；每合一个立即 `git pull --ff-only && make build`，红了先修再合下一个，**绝不把第二个 PR 叠在未验证的 `main` 上**。RUNBOOK 的合并步骤序列末尾把 `git pull --ff-only` 改成 `&& make build`。
+4. **ADR 编号预留台账。** 新增 `PROJECT/ADR-LEDGER.md`（append-only）：开工写 ADR 前，先在台账登记要用的号（交互式会话直接推 `main`；后台任务走一个只改这一个文件的快速 PR 先合）。`validate.py` 加 `adr_ledger_violations()`：`DECISIONS.md` 每条 `### ADR-NNN` 都必须在台账登记过、台账编号 `1..max` 连续不重复——**把「加 ADR 必先登记」变成构建关卡**，撞号从常态降为「两条分支同一分钟登记」的罕见事件。台账用一条范围行 `ADR-001 … ADR-068` 兜住建台账前的历史条目（不重列 68 条标题，[CLAUDE.md 一]「事实只在一处」），之后逐条登记。
+
+**没做（`make check` 全绿 ≠ 数据没被幻觉污染，同理这四道不覆盖全部并行风险）：**
+
+- **`renumber_adr.py` 机械让号脚本**——台账把撞号变罕见后收益下降，暂不做；真撞了仍按 [ADR-029] 手工让号 + 全库 grep。列为备选。
+- **`DECISIONS.md` 拆成一 ADR 一文件**——能根除并行 ADR 碰同一文件，但要迁移 68 条 + 改交叉引用工具，收益中等，缓。
+- **GitHub Actions 跑 `make check`**——[CLAUDE.md §六]「无强制 CI」是有意选择；护栏 3 用纪律替代，若纪律再被违反可重新评估。
+- **生成块「块内表头只出现一次」的专项检查**——`validate.py` §8 的「重算 ≠ 已提交」已能抓块内重复，只是信息不如专项直白；护栏 3 的「合并后必 `make build`」是更根本的堵法，不叠专项检查。
+
+**验证：** `make build` 全绿（`selfcheck` 43/43、`validate` 20 家 0/0、`check_ui_i18n` OK）、`make sync` 二次幂等、`data/` 与 `docs/data/` 零 diff（本条不碰数据 / schema / 前端）。负向验证：`selfcheck.py` 新增 19 条合成用例覆盖重号「下一步」/ 不连续 / 超窗「最近完成」/ 未登记 ADR / 台账缺口 / 台账重复登记等，注入必失配用例确认 `main()` 退出码 1。`ROADMAP-INBOX.md` 的折叠动作待本条合并后由首个交互式会话执行（把这条的完成便签折进 §一）。
+
+**日期：** 2026-09-04

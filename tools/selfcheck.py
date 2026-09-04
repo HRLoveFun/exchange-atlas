@@ -107,6 +107,65 @@ case("chapter-is-NA 假：raw_chapter 为 None",
      _cina({"only_spot": True}, None), False)
 
 
+# ══════════════════════════════════════════════════════════════
+# [ADR-069] ROADMAP §一 防失序：
+#   validate.roadmap_nextstep_violations(block) / roadmap_recent_violations(block, limit)
+#   —— 并行 worktree 各自重排 §一 子节、git 静默三方合并 → 重号/超窗。取 bool / count。
+# ══════════════════════════════════════════════════════════════
+def _next_bad(block):
+    return bool(validate.roadmap_nextstep_violations(block))
+
+
+case("nextstep 合法：1..4 连续", _next_bad("1. a\n2. b\n3. c\n4. d\n"), False)
+case("nextstep 合法：空列表（无编号行）", _next_bad("完整清单见三节。\n"), False)
+case("nextstep 合法：带 ~~划掉~~ 前缀仍算一项", _next_bad("1. ~~done~~ ✅\n2. b\n"), False)
+case("nextstep 违规：重号（并行合并残留 1-6,4-6）",
+     _next_bad("1. a\n2. b\n3. c\n4. d\n5. e\n6. f\n4. g\n5. h\n6. i\n"), True)
+case("nextstep 违规：不连续（缺 3）", _next_bad("1. a\n2. b\n4. d\n"), True)
+case("nextstep 违规：不从 1 起", _next_bad("2. a\n3. b\n"), True)
+case("nextstep 计数：重号各报一条 + 不连续 → 2 条消息",
+     len(validate.roadmap_nextstep_violations("1. a\n1. b\n3. c\n")), 2)
+case("nextstep 不误伤：缩进的子编号不计入顶层",
+     _next_bad("1. a\n  1. sub\n  2. sub\n2. b\n"), False)
+
+
+def _recent_bad(block, limit=3):
+    return bool(validate.roadmap_recent_violations(block, limit))
+
+
+case("recent 合法：正好 3 条", _recent_bad("- **2026-09-04 · a** — x\n- **2026-09-03 · b** — y\n- **2026-09-02 · c** — z\n"), False)
+case("recent 合法：2 条", _recent_bad("- **a** — x\n- **b** — y\n"), False)
+case("recent 违规：9 条（并行各自 prepend 未裁剪）",
+     _recent_bad("".join(f"- **{i}** — x\n" for i in range(9))), True)
+case("recent 计数：条目数按 `- **` 行首算，正文里的 `- **` 不计",
+     len(validate.roadmap_recent_violations("- **a** — 见 `- **b**` 的说明\n- **c** — y\n", 3)), 0)
+
+
+# ══════════════════════════════════════════════════════════════
+# [ADR-069] ADR 编号台账：validate.adr_ledger_violations(decisions_nums, ledger_text)
+#   —— DECISIONS 的 ADR 号 ⊆ 台账登记的号；台账 1..max 连续无重复。取 bool / count。
+# ══════════════════════════════════════════════════════════════
+def _ledger_bad(nums, text):
+    return bool(validate.adr_ledger_violations(set(nums), text))
+
+
+_SEED = "- ADR-001 … ADR-003 · 历史 · pre-ledger\n"
+case("ledger 合法：区间行兜住历史 + DECISIONS 都在区间内",
+     _ledger_bad([1, 2, 3], _SEED), False)
+case("ledger 合法：区间 + 逐条，无缺口无重复",
+     _ledger_bad([1, 2, 3, 4], _SEED + "- ADR-004 · x · br · 2026-09-04\n"), False)
+case("ledger 违规：DECISIONS 有 ADR-005 但台账没登记",
+     _ledger_bad([1, 2, 3, 5], _SEED), True)
+case("ledger 违规：逐条行与区间重复登记同一号",
+     _ledger_bad([1, 2, 3], _SEED + "- ADR-002 · dup · x · d\n"), True)
+case("ledger 违规：编号有缺口（3 之后直接 5）",
+     _ledger_bad([], _SEED + "- ADR-005 · x · y · z\n"), True)
+case("ledger 不误伤：非登记行（说明文字里的 ADR-029）不计入",
+     _ledger_bad([1, 2, 3], _SEED + "真撞了按 [ADR-029] 让号。\n"), False)
+case("ledger 计数：缺登记 + 缺口 → 2 条消息",
+     len(validate.adr_ledger_violations({7}, _SEED + "- ADR-005 · x · y · z\n")), 2)
+
+
 def main():
     fails = [(n, g, w) for n, g, w in CASES if g != w]
     for n, g, w in CASES:
