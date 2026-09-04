@@ -899,16 +899,30 @@ costs:
     confidence: medium
 
   stamp_duty:
-    spec: {rate: null, note: "未找到明确不征依据：本字段无 sources / quote，仅凭常识性印象断言「德国无股票印花税」；德国证券转移税 1991 年废除的原文见本仓库 de-xetra 的 stamp_duty 字段，本字段未自持来源；见 OPEN-QUESTIONS"}
-    zh: "N/A — 德国对衍生品交易是否征收印花税，本字段未自持可引用的来源（无 sources / quote）；「德国证券转移税（Börsenumsatzsteuer）已于 1991 年 1 月 1 日废除」这一法域级事实有原文支撑，但出自本仓库 de-xetra 的 stamp_duty 字段所引 Bundestag 文档。衍生品合约本身不发生证券过户，故该法域级事实是否足以覆盖 Eurex 的情形，按 CLAUDE.md 第二节第四条不作断言，spec 记为 rate: null（幽灵条）并转 OPEN-QUESTIONS。"
-    en: "N/A — whether Germany levies stamp duty on derivatives trading is not asserted from a source held by this field (no sources / quote); the jurisdiction-level fact that the German Börsenumsatzsteuer (stock-exchange turnover tax) was abolished on 1 January 1991 is verbatim-sourced, but only via the Bundestag document cited in de-xetra's stamp_duty field. Since derivative contracts themselves involve no stampable securities transfer, per the CLAUDE.md anti-hallucination rules this field does not assert non-levy: the spec is recorded as rate: null (ghost bar) and referred to OPEN-QUESTIONS."
+    spec: {type: none, note: "两重依据：① 衍生品合约本身不发生证券过户，无可课印花税/转移税的转让行为；② 德国《证券交易税》(Börsenumsatzsteuer) 已于 1991-01-01 依《改善金融市场条件法》第 4 条废除（Bundestag 文档，本字段自持一份，与 de-xetra stamp_duty 同源）。故 Eurex 交易不产生印花税式税负"}
+    zh: "Eurex 衍生品交易不征印花税/证券转移税：其一，衍生品合约本身不发生证券过户，没有可课印花税的转让行为；其二，德国唯一的证券流转税「证券交易税」(Börsenumsatzsteuer) 已于 1991 年 1 月 1 日依《改善金融市场条件法》(Gesetz zur Verbesserung der Rahmenbedingungen der Finanzmärkte) 第 4 条废除（与 de-xetra 的 stamp_duty 字段同一 Bundestag 来源，本字段自持一份）。"
+    en: "Eurex derivatives trading incurs no stamp duty / securities transfer tax: first, a derivative contract itself effects no transfer of securities and so there is no transaction to stamp; second, Germany's only securities turnover tax, the Börsenumsatzsteuer, was abolished with effect from 1 January 1991 under Article 4 of the Act to Improve the Framework Conditions for Financial Markets (same Bundestag source as de-xetra's stamp_duty field, held here in this field's own right)."
+    sources:
+      - title: Börsenumsatzsteuer abolition（Deutscher Bundestag 资料，BT-Drs. 16/12571；与 de-xetra stamp_duty 同源，本字段自持）
+        url: https://dserver.bundestag.de/btd/16/125/1612571.pdf
+        accessed: 2026-09-04
+    quote: "Die Börsenumsatzsteuer entfiel zum 1. Januar 1991 ... Welche Staaten haben die Börsenumsatzsteuer abgeschafft, und wann ... Deutschland 1991 Die Börsenumsatzsteuer wurde mit Artikel 4 des Gesetzes zur Verbesserung der Rahmenbedingungen der Finanzmärkte abgeschafft"
     confidence: medium
+    verified: 2026-09-04
+    detail: "2026-09-04（ADR-067 成本瀑布数据层长尾）：本字段原为无源 rate: null（『N/A / 不作断言』，理由是没自持来源）。本次给 Eurex 自持一份 de-xetra stamp_duty 已引的 Bundestag 废止文档（BT-Drs. 16/12571），并叠加结构性论据（衍生品无证券过户）——两重依据下 type: none 成立。confidence 标 medium 而非 high（『衍生品无过户』是结构性推断；且 Bundestag 文本经 pdftotext 提取时『Ver-besserung』被断字，仅首句『Die Börsenumsatzsteuer entfiel zum 1. Januar 1991』逐字可反查）。"
 
   financial_transaction_tax:
-    spec: {rate: null, note: "未找到明确不征依据：本字段无 sources / quote，「EU FTT 提案未生效」「德国未单独立法」均为常识性表述；原 detail 自述「具体适用性本次未逐条核实」；见 OPEN-QUESTIONS"}
-    zh: "无金融业交易税适用于 Eurex 衍生品——这是本字段的原始断言，但其依据（欧盟金融业交易税（EU FTT）提案至今未生效、德国未单独立法对衍生品征交易税）本次未取得可引用原文，且原 detail 自述「具体适用性本次未逐条核实」。少数标的股票可能适用德国《交易所 turnover 税》(Börsenumsatzsteuer) 的法域级事实，其废除原文见 de-xetra 的 stamp_duty 字段。按 CLAUDE.md 第二节第四条不作断言，spec 记为 rate: null（幽灵条）并转 OPEN-QUESTIONS。"
-    en: "No financial transaction tax applies to Eurex derivatives — the original claim, but its basis (the EU FTT proposal is not in force; Germany has not enacted a standalone derivatives transaction tax) was not verbatim-sourced this session and the original detail itself states that exact applicability was not individually verified. The jurisdiction-level Börsenumsatzsteuer abolition is verbatim-sourced only via de-xetra's stamp_duty field. Per the CLAUDE.md anti-hallucination rules this field does not assert non-levy: the spec is recorded as rate: null (ghost bar) and referred to OPEN-QUESTIONS."
+    spec: {type: none, note: "德国证券流转税（Börsenumsatzsteuer）1991-01-01 废除，且此后未立法开征替代性交易税——本字段 type: none 的正面依据（Bundestag 文档，与 stamp_duty 同源，本字段自持）；EU FTT 提案至今未生效，本字段无独立出处、不作为依据"}
+    zh: "Eurex 衍生品交易不征金融交易税：德国唯一的证券流转税「证券交易税」(Börsenumsatzsteuer) 已于 1991 年废除（见 stamp_duty 字段所引 Bundestag 文档，本字段自持一份），此后德国未立法开征替代性证券/衍生品交易税；欧盟层面的金融交易税(EU FTT)提案至今未正式生效（本字段无独立出处，不作为依据）。同 de-xetra 的 financial_transaction_tax 处置。"
+    en: "Eurex derivatives trading incurs no financial transaction tax: Germany's only securities turnover tax, the Börsenumsatzsteuer, was abolished in 1991 (see the Bundestag document cited in the stamp_duty field, held here in this field's own right) and Germany has enacted no replacement securities/derivatives transaction tax since; the EU-level FTT proposal has not entered into force (not relied on here as this field holds no independent source for it). Treated the same as de-xetra's financial_transaction_tax field."
+    sources:
+      - title: Börsenumsatzsteuer abolition（Deutscher Bundestag 资料，BT-Drs. 16/12571；与 stamp_duty 同源，本字段自持）
+        url: https://dserver.bundestag.de/btd/16/125/1612571.pdf
+        accessed: 2026-09-04
+    quote: "Die Börsenumsatzsteuer entfiel zum 1. Januar 1991 ... Welche Staaten haben die Börsenumsatzsteuer abgeschafft, und wann ... Deutschland 1991 Die Börsenumsatzsteuer wurde mit Artikel 4 des Gesetzes zur Verbesserung der Rahmenbedingungen der Finanzmärkte abgeschafft"
     confidence: medium
+    verified: 2026-09-04
+    detail: "2026-09-04（ADR-067 成本瀑布数据层长尾）：本字段原为无源 rate: null。本次给 Eurex 自持一份 Bundestag 废止文档，与 de-xetra 的 financial_transaction_tax 字段对齐处置——正面依据 = 德国唯一证券流转税 1991 废除且无替代立法；EU FTT 提案状态本字段无独立出处、不作依据。confidence medium（同 de-xetra FTT）。"
 
   capital_gains_tax:
     zh: "Eurex 不征收资本利得税；资本利得税是投资者所在税域的投资者层面税种（德国税务居民私人生意通常按 25% 的 Abgeltungsteuer 计），并非交易所收取的费用。"

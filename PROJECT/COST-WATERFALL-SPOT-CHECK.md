@@ -67,6 +67,18 @@
    > - `hk-hkex financial_transaction_tax` → ⏸️ 维持 `rate: null`，**按「审慎终态」关闭**：香港列举式税制、IRD 征费封闭清单（Stamp/Estate/Betting/Hotel Accommodation Duty + Business Registration）无 FTT 条例，但仍是推断（『无该条例』≠ 官方正面排除），铁律二.4 不足以翻 `type: none`。除非 IRD/库务署正面排除性陈述不再作待抓项跟进。
    > - `us-nyse` / `us-nasdaq regulatory_fees` FY2027 → ⏸️ 无数据变更：SEC「Fee Rate Advisories」列表页 2026-09-04 复核 Latest Section 31 仍为 FY2026 公告，FY2027 Section 31 公告未发布（历年在当年 2–4 月出）。两字段加 `verified: 2026-09-04` + 触发点跟踪句。
    > - `kr-krx exchange_fees` 到期后现行费率 → ⏸️ 无 rate 变更（KRX 站 JS 化未取到一手），补 KED Global 佐证「阶梯下调按设计仅两个月、永久性下调须经 FSC 审议」。
+   >
+   > **[2026-09-04 [ADR-067] 长尾收口]** [ADR-065]「剩」段的 `type: none` 长尾。范式（本条确立）：一国证券流转税有一部**完整立法**、把证券交易明文并入征税范围且无独立「金融交易税」税目时，按 [ADR-002] 语义映射至 `stamp_duty`，`financial_transaction_tax` 判 `type: none`（confidence medium，结构性推断）；监管费同理靠监管机构**经费来源立法**。
+   > - `cn-szse regulatory_fees` → ✅ **补齐** `rate: 0.02 permille`（证券业务监管费）：发改价格规〔2018〕917号（ndrc.gov.cn）『对上海、深圳证券交易所收取证券业务监管费，按股票交易额的0.02‰收取』『自2018年1月1日起执行』、无有效期限、废止 2016 标准。`cn-sse` 同步：主来源从 2012 通知（有效期已过）换成 2018 通知，去掉「现行费率未再核实」hedge。
+   > - `cn-sse`/`cn-szse stamp_duty` `side: sell` → ✅ **升为一手**：《中华人民共和国印花税法》第三条（fgk.chinatax.gov.cn 政策法规库）『证券交易印花税对证券交易的出让方征收，不对受让方征收』，此前仅人民网转载公告支撑。
+   > - `cn-sse`/`cn-szse financial_transaction_tax` → ✅ `type: none`：《印花税法》第一/二/三条把证券交易与合同/产权转移书据/营业账簿并列为印花税征税范围——中国交易环节税收的完整立法，无独立 FTT 税目。
+   > - `de-eurex stamp_duty` + `financial_transaction_tax` → ✅ `type: none`：自持一份 de-xetra 已引的 Bundestag 文档（BT-Drs. 16/12571，Börsenumsatzsteuer 1991-01-01 废除）+ 结构性论据（衍生品合约无证券过户）。原为无源 `rate: null`（『N/A / 不作断言』）。
+   > - `za-jse financial_transaction_tax` → ✅ `type: none`：SARS『Securities Transfer Tax is levied on every transfer of a security』（STT Act No. 25 of 2007）——南非证券交易环节的完整流转税立法；[ADR-002] 语义 STT→stamp_duty。
+   > - `za-jse regulatory_fees` → ✅ **补** `rate: 0.0002 pct`（Investor Protection Levy）：sharenet 第三方券商费率表逐字『Investor Protection levy at 0.0002% of trade value』。⚠️ jse.co.za 三子域名 + WebFetch 全 Cloudflare 403（本轮再确认），JSE 一手价目表未取到；2026 现行据 Market Notice 37025 约 0.000345%，note 已标明、待 jse.co.za 一手或人工投喂。原 note 自相矛盾（断言无按笔监管费 + 承认存在 IPL 费率未核实）已修正。
+   > - `sg-sgx regulatory_fees` + `financial_transaction_tax` → ✅ `type: none`：SGX-ST Rule 4.23.2（rulebook.sgx.com）列举客户须知/须披露的按笔费用为『any fees imposed by CDP and/or SGX-ST, stamp duty and Goods and Services Tax』——无 MAS 按笔征费、无本金税项；配合已 high 的 `stamp_duty`（scripless 豁免）+ 多份券商成本拆解一致。原引 IRAS GST 页（主题错配）。
+   > - `au-asx financial_transaction_tax` → ✅ `type: none`：各州『可流通证券』印花税对上市证券已全废（见 stamp_duty，NSW Duties Act §34）+ PwC Australia『Other taxes』综合税种综述印花税节仅提未上市实体、全篇无 FTT 条目。原 `rate: null`（Baker McKenzie 未逐字『no FTT』）。
+   > - `kr-krx regulatory_fees` → ✅ `type: none`：《金融委员会设置法》(elaw.klri.re.kr hseq=47931) 第 46 条 FSS 经费 = 政府/韩行拨款 + 第 38 条受检机构（含证券公司）分担金；第 47(1) 条『属第 38 条各款的机构……应向金融监督院缴纳其费用分摊额』——机构层面征收、非按证券交易计收（同 au-asx『ASIC 征费面向持牌实体、不按投资者每笔计收』先例）。原为 `rate: null` / low（无 quote）。
+   > - `fr-euronext stamp_duty` → ⏸️ 维持 `rate: null`：一所七国、比利时 TOB / 爱尔兰 1% 印花税 / 法国 FTT 各异，单字段无法逐国断言，`rate: null`（幽灵条）是正确终态、非待坐实项。
 
 ## 逐家明细
 

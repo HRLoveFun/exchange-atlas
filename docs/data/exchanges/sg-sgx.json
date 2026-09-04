@@ -2227,23 +2227,28 @@
       },
       "regulatory_fees": {
         "spec": {
-          "rate": null,
-          "note": "未找到明确不征依据：本字段来源为 IRAS 的 GST 税率页，只能证明券商服务费适用 GST，不能支撑「无按笔监管征费」这一断言；本字段无 quote；见 OPEN-QUESTIONS"
+          "type": "none",
+          "note": "SGX-ST Rule 4.23.2 列举须向客户披露的全部按笔费用为『CDP/SGX-ST 收费 + 印花税 + GST』——不含证券监管机构（MAS）的按笔征费；新加坡对证券交易无独立于交易所/清算费与 GST 之外的监管性征费（对比香港的 SFC/AFRC 征费）"
         },
-        "zh": "新加坡是否就证券交易征收专门的「监管征费」，本次未取得正面依据——本字段来源为 IRAS 的 GST 税率页，只能证明券商服务费适用 GST（现行 9%），不能支撑「无按笔或按比例上缴监管机构的交易监管费」这一断言。GST 就券商服务费计征，而非就交易本金计征。按 CLAUDE.md 第二节第四条，「来源未提及」不等于「明确不征」，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。",
-        "en": "Whether Singapore levies a dedicated securities 'regulatory fee' was not positively established this session — this field's source is the IRAS GST-rate page, which shows that broker service fees attract GST (currently 9%) but cannot support the claim that no per-trade or ad-valorem regulator levy exists. GST is charged on the broker's service fee, not on the trade principal. Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS.",
+        "zh": "新加坡对证券交易不征独立于交易所/清算费与消费税（GST）之外的按笔「监管征费」：SGX-ST 交易规则第 4.23.2 条列举须向客户披露、由客户承担的全部收费与开支为『CDP 及/或 SGX-ST 施加的费用、印花税与商品及服务税（GST）』——这是 SGX 关于客户须知费用的规则，其中并无证券监管机构（MAS）的按笔或按额征费（与香港由交易所代收的 SFC/AFRC 征费形成对比）。GST（现行 9%）就券商服务费计征、非就交易本金计征。",
+        "en": "Singapore levies no per-trade 'regulatory fee' on securities trading separate from the exchange/clearing fees and GST: SGX-ST Rule 4.23.2 enumerates the charges and expenses borne by and disclosed to the customer as 'any fees imposed by CDP and/or SGX-ST, stamp duty and Goods and Services Tax' — this is SGX's rule on customer charges, and it contains no per-trade or ad-valorem levy of a securities regulator (MAS), in contrast to the SFC/AFRC levies collected by the exchange in Hong Kong. GST (currently 9%) is charged on the broker's service fee, not on the trade principal.",
         "sources": [
+          {
+            "title": "SGX-ST Rules 4.23 Brokerages and Charges（rulebook.sgx.com，4.23.2 列举客户须知/须披露的按笔费用）",
+            "url": "https://rulebook.sgx.com/rulebook/423-brokerages-and-charges",
+            "accessed": "2026-09-04"
+          },
           {
             "title": "IRAS — GST rate (current 9%)",
             "url": "https://www.iras.gov.sg/taxes/goods-and-services-tax-(gst)/gst-rate",
             "accessed": "2026-08-27"
           }
         ],
+        "quote": "All charges and expenses, including any fees imposed by CDP and/or SGX-ST, stamp duty and Goods and Services Tax, to be borne by the customer (whether included as part of the brokerage or otherwise) must be accurately disclosed to the customer and agreed between the customer and the Trading Member.",
         "confidence": "medium",
-        "verified": "2026-08-27",
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "verified": "2026-09-04",
+        "detail": "2026-09-04（ADR-067 成本瀑布数据层长尾）：本字段原引 IRAS GST 页（主题错配、rate: null）。本次抓 SGX-ST 规则第 4.23.2 条——SGX 关于客户须知/须披露费用的规则，列举的按笔费用为『CDP/SGX-ST 收费 + 印花税 + GST』，无 MAS 按笔征费。据此判 type: none（confidence medium：4.23.2 用『including』非穷尽措辞，且是交易所规则非监管机构声明；但作为 SGX 对客户费用的正式列举、无监管征费一项，配合多份券商成本拆解一致〔佣金 + 清算 0.0325% + 交易 0.0075% + 交收 S$0.35 + GST〕，足以从『查不到』转为『查到了、没有』）。",
+        "enum": null
       },
       "stamp_duty": {
         "spec": {
@@ -2267,23 +2272,28 @@
       },
       "financial_transaction_tax": {
         "spec": {
-          "rate": null,
-          "note": "未找到明确不征依据：本字段来源为 IRAS 印花税页（支撑 stamp_duty 的豁免规则），无「无按交易本金计征交易税」的正面陈述；本字段无 quote；见 OPEN-QUESTIONS"
+          "type": "none",
+          "note": "新加坡对证券交易的唯一凭证税是印花税（无纸化 CDP 过户豁免，见 stamp_duty）；无按交易本金计征的金融交易税/托宾税。SGX-ST Rule 4.23.2 列举客户须知费用为『CDP/SGX-ST 收费 + 印花税 + GST』，无本金税项"
         },
-        "zh": "新加坡是否设有专门的金融交易税（FTT / 托宾税）一类基于证券交易额征收的交易税，本次未取得正面依据——本字段来源为 IRAS 印花税页，只能证明印花税仅适用于非电子化（手写单据）股份转让、而 SGX 现货证券均为 CDP 无纸化电子过户（实际豁免，见 stamp_duty），不能穷尽性支撑「无按交易本金计征的交易税」。证券交易环节除券商服务费的消费税（GST 9%）外，本次未核实到其他按本金计征的税项。按 CLAUDE.md 第二节第四条，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。",
-        "en": "Whether Singapore imposes a dedicated financial-transaction tax (FTT / Tobin tax) levied on securities trade value was not positively established this session — this field's source is the IRAS stamp-duty page, which shows only that stamp duty applies to manual (paper) share transfers while SGX securities are scripless CDP electronic transfers (effectively exempt, see stamp_duty), and cannot exhaustively support 'no transaction tax on trade principal'. Apart from GST (9%) on broker service fees, no other principal-based transaction tax was verified this session. Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS.",
+        "zh": "新加坡对证券交易不设按交易本金计征的金融交易税（FTT / 托宾税）：新加坡对股份转让的唯一凭证税是印花税，而 SGX 现货证券经 CDP 无纸化电子过户已豁免印花税（见 stamp_duty）。SGX-ST 交易规则第 4.23.2 条列举须向客户披露、由客户承担的费用为『CDP 及/或 SGX-ST 施加的费用、印花税与 GST』——除对券商服务费计征的 GST（9%）外，无就交易本金计征的税项。",
+        "en": "Singapore imposes no financial transaction tax (FTT / Tobin tax) on the value of securities trades: the only instrument tax on share transfers is stamp duty, and SGX cash securities transferred electronically via CDP are exempt from it (see stamp_duty). SGX-ST Rule 4.23.2 enumerates the charges disclosed to and borne by the customer as 'any fees imposed by CDP and/or SGX-ST, stamp duty and Goods and Services Tax' — apart from GST (9%) on the broker's service fee, there is no tax on the trade principal.",
         "sources": [
+          {
+            "title": "SGX-ST Rules 4.23 Brokerages and Charges（rulebook.sgx.com，4.23.2 列举客户须知/须披露的按笔费用）",
+            "url": "https://rulebook.sgx.com/rulebook/423-brokerages-and-charges",
+            "accessed": "2026-09-04"
+          },
           {
             "title": "IRAS — Stamp Duty for Shares (exempt scripless transfers)",
             "url": "https://www.iras.gov.sg/taxes/stamp-duty/for-shares/basics-of-stamp-duty-for-shares/learning-the-basics-for-shares",
             "accessed": "2026-08-27"
           }
         ],
+        "quote": "All charges and expenses, including any fees imposed by CDP and/or SGX-ST, stamp duty and Goods and Services Tax, to be borne by the customer (whether included as part of the brokerage or otherwise) must be accurately disclosed to the customer and agreed between the customer and the Trading Member.／The electronic entry made by CDP in its register to effect the transfer of scripless shares is exempt from stamp duty pursuant to the Stamp Duties (Exempt Record) Rules 2018.",
         "confidence": "medium",
-        "verified": "2026-08-27",
-        "enum": null,
-        "detail": null,
-        "quote": null
+        "verified": "2026-09-04",
+        "detail": "2026-09-04（ADR-067 成本瀑布数据层长尾）：本字段原引 IRAS 印花税页（rate: null）。本次以 SGX-ST 规则第 4.23.2 条（客户须知费用列举 = CDP/SGX-ST 收费 + 印花税 + GST，无本金税项）+ 已 high 的 stamp_duty 豁免为正面依据，判 type: none。新加坡的证券凭证税即印花税、无独立 FTT；沿用 ADR-002 语义。confidence medium（4.23.2 是交易所规则非税务当局声明，『无 FTT』仍是对该列举完整性的推断）。同 de-xetra FTT 的处置逻辑。",
+        "enum": null
       },
       "capital_gains_tax": {
         "zh": "无资本利得税——买卖股票等金融工具产生的利润/损失一般视为个人投资行为，不征税",

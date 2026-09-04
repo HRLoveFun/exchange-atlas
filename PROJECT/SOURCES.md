@@ -147,9 +147,11 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `people.com.cn` | 第三方（官方媒体） | zh | curl 需按 GBK 解码（非 UTF-8），常规 UA 可过 | 用于印花税税率调整等财政部/税务总局公告的转载确认；`confidence` 相应标 medium（非财政部原始公告页）
 - `cls.cn` | 第三方（财经媒体） | zh | 未测试专门反爬，本次 WebSearch 摘要已够用未额外 curl | 用于退市规则修订的综述性报道；`confidence` 标 medium
   - 2026-08-24 新增：中国结算：4月29日起将股票交易过户费总体下调50%（2022-04-28发文，`costs.clearing_fees` 出处；第三方财经媒体转述 ChinaClear 通知，`confidence` 标 medium）: https://www.cls.cn/detail/1001120
-- `mof.gov.cn`（2026-08-24 新增登记） | 官方（财政部，与 sse.com.cn/chinaclear.cn 并列的另一政府域名，非第三方） | zh | curl 常规 UA 可过（`m.mof.gov.cn` 移动版偶发 502，换 `www.mof.gov.cn` 桌面版路径可稳定拿到全文） | 国家发展改革委、财政部联合发布的《关于降低证券、期货市场监管费收费标准等问题的通知》（发改价格〔2012〕2119号），`costs.regulatory_fees` 出处——确认"证券交易监管费"这一独立于交易所经手费之外的监管费种确实存在（对股票按年交易额0.02‰收取，基金/债券免收），但通知本身注明"有效期3年"（即至2015年），本次未找到后续重新审批/延续的官方公告，故字段按"该费种曾被官方确认存在，现行费率是否仍为此值未再核实"处理，`confidence` 标 medium 而非 high
+- `mof.gov.cn`（2026-08-24 新增登记） | 官方（财政部，与 sse.com.cn/chinaclear.cn 并列的另一政府域名，非第三方） | zh | curl 常规 UA 可过（`m.mof.gov.cn` 移动版偶发 502，换 `www.mof.gov.cn` 桌面版路径可稳定拿到全文） | 国家发展改革委、财政部联合发布的《关于降低证券、期货市场监管费收费标准等问题的通知》（发改价格〔2012〕2119号），`costs.regulatory_fees` 历史沿革出处——确认"证券交易监管费"这一独立于交易所经手费之外的监管费种确实存在（对股票按年交易额0.02‰收取，基金/债券免收），但通知注明"有效期3年"（即至2015年）；现行标准见下方 `ndrc.gov.cn` 的 2018 通知
   - 关于降低证券、期货市场监管费收费标准等问题的通知（发改价格〔2012〕2119号）: https://www.mof.gov.cn/zhengwuxinxi/zhengcefabu/201207/t20120714_666369.htm
   - 证券结算风险基金管理办法（中国证监会、财政部联合发布，第二条给出风险基金定义与用途，`clearing.default_management` 补充出处）PDF: http://m.mof.gov.cn/zcfb/202511/P020251107701444228151.pdf
+- `ndrc.gov.cn`（2026-09-04 新增登记，ADR-067） | 官方（国家发展改革委，与财政部联合发布证券期货业行政事业性收费标准的定价机关，非第三方） | zh | curl 常规 UA 200，正文为静态 HTML | `cn-sse`/`cn-szse` `costs.regulatory_fees` 的**现行标准**出处——《国家发展改革委 财政部关于证券期货业监管费标准等有关问题的通知》（发改价格规〔2018〕917号）：『对上海、深圳证券交易所收取证券业务监管费，按股票交易额的0.02‰收取』『自2018年1月1日起执行』、同时废止 2016 年标准、无有效期限。confidence medium（发布已 7 年、机构监管费部分曾 2018–2020 暂免，未再核实到更晚文件）
+  - 关于证券期货业监管费标准等有关问题的通知（发改价格规〔2018〕917号）: https://www.ndrc.gov.cn/xxgk/zcfb/ghxwj/201806/t20180627_960950.html
 - `sipf.com.cn`（2026-08-24 新增登记） | 官方（中国证券投资者保护基金有限责任公司，国务院出资设立、归口证监会管理的国有独资企业） | zh | curl 常规 UA 可过 | `regulation.investor_protection` 出处；网站首页本身是纯导航壳无正文，需定位到具体规章条文页
   - 证券投资者保护基金管理办法（2016年修订，中国证监会令第124号）: http://www.sipf.com.cn/tbfg/2020/03/12872.shtml
 - `sseinfo.com`（2026-08-24 新增登记） | 官方（上证所信息网络有限公司，上海证券交易所出资设立的全资子公司，SSE 证券信息独家全权经营机构） | zh | curl 常规 UA 可过 | `infrastructure.market_data_levels`/`data_latency`/`data_pricing_model`/`historical_data_availability` 出处；产品价目表本身是 PDF/公告列表页，本次仅取产品概述页正文，未逐条摘引具体单价数字
@@ -541,7 +543,8 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `szsi.cn` | 官方（深圳证券信息有限公司，SZSE 全资子公司，行情数据授权与分发主体，域名与已登记的 `cnindex.com.cn` 同属该公司不同业务线） | zh | curl 常规 UA 200，未见反爬 | 用于 `infrastructure.market_data_levels`/`data_pricing_model`/`data_latency`：官方行情商用授权与定价说明
   - 深市行情授权 - 增强行情介绍: http://www.szsi.cn/cpfw/fwsq/hq/yw-2.htm
   - 深交所行情互联网接入服务说明（含收费标准）PDF: http://www.szsi.cn/cpfw/fwsq/hq/深交所行情互联网接入服务说明.pdf
-- `chinatax.gov.cn` | 官方（国家税务总局，含省级税务局子域名 `guangdong.chinatax.gov.cn` 转发件，均标注来源为国家税务总局） | zh | curl 常规 UA 200，未见反爬 | 用于 `costs.capital_gains_tax`/`costs.dividend_withholding_tax`：全国统一税收政策，非深交所自定，与上交所（cn-sse）适用同一套规则
+- `chinatax.gov.cn` | 官方（国家税务总局，含省级税务局子域名 `guangdong.chinatax.gov.cn` 转发件、政策法规库子域名 `fgk.chinatax.gov.cn`，均标注来源为国家税务总局） | zh | curl 常规 UA 200，未见反爬；`fgk.chinatax.gov.cn` 政策法规库为法律法规全文库，静态 HTML，逐字可抓 | 用于 `costs.capital_gains_tax`/`costs.dividend_withholding_tax`：全国统一税收政策，非深交所自定，与上交所（cn-sse）适用同一套规则；`costs.stamp_duty` 的 `side: sell` 一手依据（《印花税法》第三条『证券交易印花税对证券交易的出让方征收，不对受让方征收』）与 `costs.financial_transaction_tax` 的 `type: none`（《印花税法》即交易凭证/证券交易类税收完整立法、无独立 FTT 税目）——2026-09-04 ADR-067
+  - 中华人民共和国印花税法（政策法规库全文，2021 通过 / 2022-07-01 施行）: https://fgk.chinatax.gov.cn/zcfgk/c100009/c5193058/content.html
   - 关于上市公司股息红利差别化个人所得税政策有关问题的通知（财税〔2015〕101号，通知抬头列明直接下发对象含"上海、深圳证券交易所"）: https://www.chinatax.gov.cn/n810341/n810755/c1797427/content.html
   - 关于个人转让股票所得继续暂免征收个人所得税的通知（财税字〔1998〕61号，广东省税务局官网转发，标注来源为国家税务总局）: https://guangdong.chinatax.gov.cn/gdsw/grsdsgg_hmqsc_pyzbsc_ssgs/2021-08/31/content_0515931e3f044baf9a26bbe53e85eb38.shtml
 - `qianzhan.com` | 第三方（行业研究机构，前瞻产业研究院） | zh | curl 常规 UA 200，未见反爬 | 用于 `participants.broker_landscape`：全国证券业集中度数据，非深交所专属统计，confidence 依铁律封顶 medium
@@ -637,6 +640,7 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 ### 新加坡交易所 Singapore Exchange (SGX) `sg-sgx`
 - `rulebook.sgx.com` | 官方（规则手册独立域名） | en | curl + 常规 UA 全部 200，未见反爬；页面正文夹杂大量导航/相关链接文字，抓到后按关键词定位正文 | ⚠️ SGX 集团下 SGX-ST（Singapore Exchange Securities Trading Limited，现货证券）与 SGX-DT（Singapore Exchange Derivatives Trading Limited，衍生品）是 MAS 分别核准的两个独立"Approved Exchange"法人实体（另有 SGX-DC 衍生品清算、CDP 证券清算/存管，见下 cftc.gov 一条），但本项目只建一个 `sg-sgx` 条目覆盖整个 SGX 品牌的现货+衍生品业务（Wave 1/2 名单未规划把 SGX-DT 拆成姊妹交易所另行建档），**不设 `group_id`**——与 NYSE/JPX/Eurex 那种"本文件只记一个实体、集团内确有其他姊妹交易所品牌"的情况不同，这里是刻意合并单一条目代表整个可识别品牌，详见数据文件顶部注释
   - SGX-ST Rules（现货证券交易规则总览）: https://rulebook.sgx.com/rulebook/sgx-st-rules（HTTP 200，2.1MB）
+  - SGX-ST Rules 4.23 Brokerages and Charges（4.23.2 列举客户须知/须披露的按笔费用 = CDP/SGX-ST 收费 + 印花税 + GST，`costs.regulatory_fees`/`costs.financial_transaction_tax` 的 `type: none` 依据，2026-09-04 ADR-067）: https://rulebook.sgx.com/rulebook/423-brokerages-and-charges
   - Mainboard Rules（主板上市规则）: https://rulebook.sgx.com/rulebook/mainboard-rules（HTTP 200，2.0MB）
   - Catalist Rules（凯利板上市规则）: https://rulebook.sgx.com/rulebook/catalist-rules（HTTP 200，1.8MB）
   - Futures Trading Rules（衍生品交易规则总览）: https://rulebook.sgx.com/rulebook/futures-trading-rules（HTTP 200，1.2MB）
@@ -834,12 +838,14 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `www.kchipnews.com` | 第三方（半导体新闻） | ko | WebSearch 定位 | 市场背景（confidence 封顶 medium）
 - `taxnews.ey.com` | 第三方（EY 税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
 - `www.mondovisione.com` | 第三方（交易所资讯） | en | WebSearch 定位 | 市场结构背景（confidence 封顶 medium）
-- `taxsummaries.pwc.com` | 第三方（四大税务简报） | en | curl 常规 UA 200 | 韩国印花税税种定性（stamp tax 针对"制备证明财产权设立/转让/变更的文书者"，非证券转让；`kr-krx.costs.stamp_duty` 的第三方佐证，封顶 confidence medium；`type: none` 据此标「暂定」，翻实需韩国《印花税法》一手条文）
+- `taxsummaries.pwc.com` | 第三方（四大税务简报） | en | curl 常规 UA 200 | 韩国印花税税种定性（stamp tax 针对"制备证明财产权设立/转让/变更的文书者"，非证券转让；`kr-krx.costs.stamp_duty` 的第三方佐证，封顶 confidence medium）；澳大利亚综合税种综述（`au-asx.costs.financial_transaction_tax`：印花税节仅提未上市实体股份转让、全篇无 FTT 条目，佐证 `type: none`——2026-09-04 ADR-067）
   - Korea, Republic of - Corporate - Other taxes: https://taxsummaries.pwc.com/republic-of-korea/corporate/other-taxes
+  - Australia - Corporate - Other taxes: https://taxsummaries.pwc.com/australia/corporate/other-taxes
 
 - `elaw.klri.re.kr`（韩国法制研究院法律数据库英文版，2026-09-01 A3 补充登记） | 官方镜像（韩国法制研究院 KLRI 运营的法律英文数据库，含韩国现行法令英文译本） | en | curl + 常规 UA 200，正文为静态 HTML，逐字可抓取；⚠️ 每页标注『Translations provided here are for reference only, and are neither official nor legally effective』，同 `english.sse.com.cn`——引此域名的字段 confidence 封顶 medium | `costs.financial_transaction_tax` 出处，韩国《证券取引税法》(Securities Transaction Tax Law) 英文版明文以『transferor（让与人=卖方）』为纳税义务人，坐实韩国 STT 向卖方课征（side: sell）；`costs.stamp_duty` 出处，韩国《印花税法》(Stamp Tax Act) 第1条明定印花税纳税义务人为『文书制备者』、课税对象是文书而非证券转让，`type: none` 由『暂定』转为一手条文支撑（2026-09-04 ADR-065）
   - 증권거래세법 (Securities Transaction Tax Law), English version: https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=46383
   - STAMP TAX ACT（韩国《印花税法》英文版，hseq=64499）: https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=64499
+  - Act on the Establishment of Financial Services Commission（韩国《金融委员会设置法》英文版，hseq=47931；第 46/47/38 条 FSS 经费来源=政府/韩行拨款 + 受检机构分担金，`kr-krx.costs.regulatory_fees` 的 `type: none` 一手依据，2026-09-04 ADR-067）: https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=47931
 
 ### 泛欧交易所 Euronext `fr-euronext`
 - `euronext.com` | 官方 | en（官网默认英文；各地方市场页另有 fr/nl/pt/it/nb 等本地语言版本，本节只取英文版作 `source_lang: en` 的锚点） | curl + 常规 UA 全部 200，未见反爬（含多个 PDF，均可直接 curl 到） | ⚠️ **本所是本项目第一个"单一集团、多国法人实体"样本**：`Euronext`（集团整体）= `Euronext N.V.`（荷兰阿姆斯特丹注册的 naamloze vennootschap，集团控股实体，本身在 Euronext Paris 挂牌交易，代码 ENX，2025-09-22 起纳入 CAC 40 指数）+ 七个「Euronext Market Undertaking」（Euronext Amsterdam N.V. 荷兰法人、Euronext Brussels S.A./N.V. 比利时法人、Euronext Dublin/The Irish Stock Exchange plc 爱尔兰法人、Euronext Lisbon S.A. 葡萄牙法人、Euronext Paris S.A. 法国法人、Borsa Italiana 意大利法人、Oslo Børs 挪威法人），各自受本国法律与本国监管机构管辖（见 Harmonised Rulebook I Rule 1.7 Governing Law），但共享同一部《Harmonised Rulebook》（Book I）、同一交易平台 Optiq、同一中央订单簿。2025年7月新增第八个市场 Euronext Athens（收购 ATHEX），但截至本次抓取（2026-08）雅典尚未并入 Harmonised Rulebook/Optiq（计划2027-06迁移），regulated-markets 页原文明确写"Euronext Athens markets are scheduled to be integrated in the Euronext rulebooks upon the migration to Optiq (June 2027)"，故本次数据以七个已整合市场（不含雅典）为主，雅典相关事实单独注明未核实。清算方面 Euronext Clearing 是法定实体 Cassa di Compensazione e Garanzia S.p.A.（CC&G，意大利公司）的商业新名称；托管结算方面 Euronext Securities 是集团自有 CSD 网络，运营实体分布在哥本哈根/米兰/奥斯陆/波尔图四地，里斯本/米兰/奥斯陆三个市场现已用 Euronext Securities 托管结算，阿姆斯特丹/布鲁塞尔/巴黎计划2026-09起迁移过去，都柏林及迁移前的阿姆斯特丹/布鲁塞尔/巴黎具体托管机构本次未核实（⚠️ 2026-08-21已补充核实并回填：巴黎=Euroclear France（Book II Article P 2.3.3逐字点名）、阿姆斯特丹=Euroclear Nederland、布鲁塞尔=Euroclear Belgium（新闻稿+Place of Settlement change guidelines两份官方文档间接但可靠佐证）、都柏林=Euroclear Bank（2021-03migration新闻稿），详见下方新增4条来源与`data/exchanges/fr-euronext.yml`的`clearing.csd_name`字段；`euroclear.com`主域名及`/services/en/provider-homepage/euroclear-*.html`子页面本次实测对常规UA同样403，与`uk-lse`一节`euroclear.com`踩坑案例一致，故本次改用Euronext自己官网发布的分市场规则手册/新闻稿/技术指引达成核实，未能直接抓取Euroclear自己官网）
@@ -907,9 +913,10 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
   - 关于我们: https://www.fsca.co.za/about-us/
 - `strate.co.za` | 官方（中央证券存管机构） | en | curl 常规 UA 200（575KB，内容较厚） | Strate Limited，南非法定中央证券存管机构（CSD），负责JSE现货证券市场的电子结算
   - 关于我们: https://www.strate.co.za/about-us/
-- `sars.gov.za` | 监管（税务机关） | en | curl 常规 UA 200 | 南非税务局（South African Revenue Service），股息预扣税与证券转让税的法定征收与规则发布方
+- `sars.gov.za` | 监管（税务机关） | en | curl 常规 UA 200 | 南非税务局（South African Revenue Service），股息预扣税与证券转让税的法定征收与规则发布方；`costs.stamp_duty` 的 `side: buy` 方向措辞出处（『Who is it for?』段：member/participant『may recover the tax payable from the persons to whom the securities were transferred』——ADR-065 坐实）
   - 股息预扣税: https://www.sars.gov.za/types-of-tax/dividends-tax/
   - 证券转让税: https://www.sars.gov.za/types-of-tax/securities-transfer-tax/
+- `sharenet.co.za`（2026-09-04 新增登记，ADR-067） | 第三方（南非老牌投资门户 / JSE 会员券商，费率表转述 JSE 官方收费） | en | curl 常规 UA 200 | `za-jse costs.regulatory_fees` 出处——`/feeschedule/` 页逐项列出 JSE 交易的法定征费：『Investor Protection levy at 0.0002% of trade value』『Securities Transfer Tax (STT) of 0.25% ... levied on the value of purchase transactions』『Strate levy of R8.25 to R88.92』。⚠️ jse.co.za 三个子域名 + WebFetch 均 Cloudflare 403（本轮再确认），JSE 一手价目表未取到；本页费率可能滞后（IPL 记 0.0002%，2026 现行据 Market Notice 37025 约 0.000345%），`confidence` 封顶 medium
 - `lseg.com` | 第三方（伦敦证券交易所集团旗下 FTSE Russell，与JSE联合编制指数） | en | curl 常规 UA 200（586KB） | 《FTSE/JSE Africa Index Series Ground Rules》官方编制细则文档，JSE与FTSE Russell联合发布，用于确认指数编制方非JSE自编而是合资/授权模式
   - FTSE/JSE Africa Index Series Ground Rules（v9.1，2026年2月）PDF: https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse-jse-africa-index-series-ground-rules.pdf
 
