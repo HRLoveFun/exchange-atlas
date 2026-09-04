@@ -166,6 +166,27 @@ case("ledger 计数：缺登记 + 缺口 → 2 条消息",
      len(validate.adr_ledger_violations({7}, _SEED + "- ADR-005 · x · y · z\n")), 2)
 
 
+# ══════════════════════════════════════════════════════════════
+# [ADR-070] OTP 来源登记格式：validate.otp_line_violations(sources_text)
+#   —— 复用 fetch.py 的 OTP_LINE_RE/URL_RE 解析同一份正则，一行 [OTP] 必须恰好 2 个 URL。
+# ══════════════════════════════════════════════════════════════
+def _otp_bad(text):
+    return bool(validate.otp_line_violations(text))
+
+
+case("OTP 合法：两个 URL（GenerateOTP 端点 + 数据端点）",
+     _otp_bad("  - x [OTP]: https://a.com/otp?bld=1 https://a.com/data\n"), False)
+case("OTP 违规：只有 1 个 URL",
+     _otp_bad("  - x [OTP]: https://a.com/otp?bld=1\n"), True)
+case("OTP 违规：3 个 URL",
+     _otp_bad("  - x [OTP]: https://a.com/o https://a.com/d https://a.com/extra\n"), True)
+case("OTP 不误伤：没有 [OTP] 标记的普通行不检查 URL 数",
+     _otp_bad("  - 普通页: https://a.com/x\n"), False)
+case("OTP 计数：两行各违规各报一条",
+     len(validate.otp_line_violations(
+         "  - a [OTP]: https://a.com/o\n  - b [OTP]: https://b.com/o\n")), 2)
+
+
 def main():
     fails = [(n, g, w) for n, g, w in CASES if g != w]
     for n, g, w in CASES:

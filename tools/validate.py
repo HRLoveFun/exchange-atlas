@@ -33,6 +33,9 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
   13. 冲突标记：任何入库文本文件不得残留 git 合并冲突标记（<<<<<<< / ||||||| / >>>>>>>）
   14. ADR 台账（[ADR-069]）：DECISIONS.md 每条 ### ADR-NNN 都在 PROJECT/ADR-LEDGER.md
       登记过；台账编号 1..max 连续、不重复（并行分支预支编号必撞的护栏）
+  15. OTP 来源登记格式（[ADR-070]）：SOURCES.md 里含 `[OTP]` 标记的登记行必须恰好 2 个
+      URL（GenerateOTP 端点 + 数据端点，见 tools/fetch.py 文首），否则 fetch.py 抓取时
+      才会 sys.exit——挪到 make check 提前拦，别等抓取现场才发现登记写错了
 """
 import datetime
 import json
@@ -43,6 +46,7 @@ from urllib.parse import urlparse
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import sync  # noqa: E402  （复用 sync.py 的纯函数，见模块 docstring）
+import fetch as fetchmod  # noqa: E402  （复用 fetch.py 的 [OTP] 行解析正则，见校验项 15）
 
 try:
     import jsonschema
@@ -746,6 +750,31 @@ def validate_roadmap_section_one():
             err(v)
 
 
+def otp_line_violations(sources_text: str):
+    """SOURCES.md 里每一行 `[OTP]` 登记必须恰好 2 个 URL（GenerateOTP 端点 + 数据端点，
+    顺序固定，见 tools/fetch.py 文首「OTP 来源登记格式」，[ADR-070]）。复用 fetch.py 的
+    同一套正则解析，不重写第二份（CLAUDE.md 一节：同一件事只在一处实现）。返回违规消息
+    列表（空 = 合法），供 validate_otp_sources 与正负向探针共用同一判定逻辑。"""
+    out = []
+    for line in fetchmod.OTP_LINE_RE.findall(sources_text):
+        urls = [fetchmod.TRAILING_ANNOTATION_RE.sub("", u) for u in fetchmod.URL_RE.findall(line)]
+        if len(urls) != 2:
+            out.append(
+                f"PROJECT/SOURCES.md: `[OTP]` 登记行 URL 数不是 2（须为 GenerateOTP 端点 + "
+                f"数据端点），实际 {len(urls)} 个——{line.strip()[:120]}"
+            )
+    return out
+
+
+def validate_otp_sources():
+    """PROJECT/SOURCES.md 里的 `[OTP]` 登记行格式合法，见 [ADR-070]。"""
+    path = PROJECT_DIR / "SOURCES.md"
+    if not path.exists():
+        return
+    for msg in otp_line_violations(path.read_text(encoding="utf-8")):
+        err(msg)
+
+
 def validate_no_conflict_markers():
     """任何入库文本文件里不得残留 git 合并冲突标记（[ADR-069]）。"""
     exts = (".md", ".yml", ".yaml", ".py", ".js", ".css", ".json", ".txt", ".html")
@@ -793,6 +822,7 @@ def main():
     validate_adr_ledger()
     validate_roadmap_section_one()
     validate_no_conflict_markers()
+    validate_otp_sources()
 
     if warnings:
         print(f"[check] {len(warnings)} 条警告：")
