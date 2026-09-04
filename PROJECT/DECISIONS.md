@@ -1489,3 +1489,43 @@
 **验证：** `make build` 全绿（`selfcheck` 24/24、`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK）、`make sync` 二次幂等、`docs/data/` 零 diff。负向探针：注入一条必失配用例 → `main()` 退出码 1，确认失配会红。`validate.py` 重构后 20 家扫描结果不变（`de-eurex` 的 `listing._meta.not_applicable` 仍正常通过、无新误报）。
 
 **日期：** 2026-09-03
+
+---
+
+### ADR-065 — 数据空缺复核轨任务二实装：横切 8 高频字段批量回填清零
+
+**背景：** [ADR-060] 把任务二定为「`odd_lot_handling`(12) / `dark_pool`(10) / `board_lot_size`(9) / `price_limits.other_boards`(9) / `block_trade`(9) / `connect_schemes`(8) / `intraday_reversal`(8) / `holidays_note`(7) 在所有缺失所填到带 `quote` 的 high/medium，或确认 `not_applicable` 并写 `detail`」，方法明确「按字段而非按所推进（保证跨所口径一致）」。2026-09-04 一个后台会话分 8 个 commit（每字段一个）执行完毕。
+
+**做了什么（8 字段逐条）：**
+
+| 字段 | 结果 | 关键决策 |
+|---|---|---|
+| `intraday_reversal` | 8 家清零（`ca-tsx`/`ch-six`/`de-xetra`/`fr-euronext`/`sa-tadawul`/`uk-lse` medium `t0` + `au-asx`/`sg-sgx` 复核）；`de-eurex` → `not_applicable` | 消极认定范式（见下）；已 `in_matrix: trading_mechanism` |
+| `holidays_note` | 3 家回填（`au-asx` high / `br-b3`·`us-nasdaq` medium）；`ca-tsx`/`uk-lse`/`ch-six`/`de-eurex` 4 家因官方交易日历是 JS-SPA 维持 low，记 OPEN-Q + tried-URL 清单 | JS-SPA 阻塞降级（见下） |
+| `connect_schemes` | 8 家回填 + 3 家 low→medium/high（`kr-krx`/`cn-sse` high，含 CME/Eurex 夜盘、沪港通逐字原文） | `de-eurex`/`fr-euronext` 如实说明「无股票互联互通」对衍生品所范畴不适配（框架性问题 #17） |
+| `board_lot_size` + `odd_lot_handling` | 缺失所清零（`us-nasdaq`/`us-nyse` 17 CFR 242.600(b) 定义 high；`sa-tadawul`/`hk-hkex`/`jp-jpx` 官方规则 high；余 medium）；`de-eurex` 两字段 → `not_applicable` | 数值年份不入 `zh` 只入 `detail`（避开 5b 反查假阳性，见 [ADR-032] 教训） |
+| `price_limits.other_boards` | 9 家回填；`de-eurex` → `not_applicable`；`fr-euronext` low→medium；`kr-krx` 维持 low（KONEX 未证实）| **不加 `in_matrix`**（见下） |
+| `block_trade` | 10 家（8 high / 2 medium）：`de-eurex` TES Block Trades·`jp-jpx` ToSTNeT·`ch-six` off-order-book 延迟公布·`sg-sgx` Direct Business 门槛·`uk-lse` LIS/negotiated·`hk-hkex` HKFE 815·`us-nyse` Rule 127·`us-nasdaq` FINRA 5270 为 high；`fr-euronext` Euronext Block·`ca-tsx` Cross facilities 为 medium | `de-eurex` **不**标 `not_applicable`（Eurex 确有 TES Block Trades）；`ca-tsx` CIRO/UMIR 跨市场 block 门槛因 `ciro.ca` Cloudflare 403 未取到，记 OPEN-Q |
+| `dark_pool` | 10 家：`au-asx`（ASX Centre Point）·`br-b3`（B3 Midpoint）·`us-nyse`（Reg ATS 17 CFR 242.300）为 high；`hk-hkex`/`in-nse`/`jp-jpx`/`kr-krx`/`sa-tadawul`/`sg-sgx` medium；`de-eurex` → `not_applicable` | 字段口径「仅记与本所并列的独立机制」——`au-asx`/`br-b3` 是本项目仅有的「本所自营暗池」肯定案例；`in-nse`「NSE Alpha 暗池」二手说法查无一手依据、判为不实 |
+
+净效果：全库已填字段 1,900 → 1,918（+18；`de-eurex` 5 字段 `not_applicable` 不计入）；8 个字段的结构性空缺清零（`holidays_note` 余 4 家为降级留空、已文档化）。
+
+**反复出现、影响后续做法的决策：**
+
+1. **消极认定（negative inference）作为 `medium` 的合法依据。** `intraday_reversal` 6 个发达市场所：通读交易规则手册后「不含持有期 / 交收前不得卖出限制」+ 与中国 A 股 T+1 明文条款对照 → 填 `enum: t0` / `medium` / `detail` 显式写「消极认定」。这**不是** [ADR-054] 的反模式（那是「费率页没列 = 不征收」）——区别在于：同日转售禁令若存在，会是交易规则里的显眼条款（像 A 股那样），其缺席是有信息量的；而税率页的沉默不能证伪一个税种。范式：消极认定可支撑 `medium`，升 `high` 需正面官方陈述。
+2. **`not_applicable` 的边界。** `de-eurex` 5 个字段（`intraday_reversal`/`board_lot_size`/`odd_lot_handling`/`price_limits.other_boards`/`dark_pool`）标字段级 `not_applicable`——判据是「本字段的设计前提（现货持有期 / 板手 / 碎股 / 板块涨跌停 / 竞争性暗池生态）对纯衍生品所结构性不成立」，与 [ADR-059] 章节级 `only_spot` 同源。**但 `block_trade` 与 `connect_schemes` 不标 `not_applicable`**：Eurex 确有 TES Block Trades（真实机制、可填 high）；`connect_schemes` 虽「无股票互联互通」但可如实描述 Eurex 的跨境直接准入形态。「概念不适配」≠「无内容可填」——能如实描述实际形态的就填、不能的才 `not_applicable`。这是 [ADR-062] 「B/D 桶回 F」判断的延续：`not_applicable` 是最后手段。此前全库无真实字段级 `not_applicable`（[ADR-063] 记录），本轮 `de-eurex` 5 处是首次实际使用，`validate.py` 的 `field_na_violations` 两条不变式（无 `zh` / 不与 leaf `optional` 并存）首次跑到真实数据分支、通过。
+3. **`price_limits.other_boards` 不进对比矩阵。** 覆盖率达 19/20（≥16 阈值），按 [ADR-060] 需「评估补 `in_matrix`」。评估结论：**不补**。该字段内容结构异质——有的「无分层板块」、有的给创业板 / SME 板幅度、有的描述衍生品合约带、`us` 两所是「LULD 按指数分层非按板」——无法归约为矩阵列所需的可比标量；`price_limits.main_board`（已 `in_matrix`）已承载涨跌停的矩阵相关信号。`intraday_reversal` 本就有 `in_matrix`，无需改动。`schema/taxonomy.yml` 零改动。
+4. **JS-SPA 交易日历阻塞的降级。** `ca-tsx`/`uk-lse`/`ch-six`/`de-eurex` 的官方年度交易日历页是纯前端渲染，curl 与 WebFetch 都只拿到外壳。按 [CLAUDE.md §三] 降级：`holidays_note` 维持 low 留空，OPEN-Q 记具体 tried-URL 清单待人工投喂或任务五渲染型抓取器，**不**据往年骨架或第三方推断填写。
+5. **规则手册重编号要重抓当前版。** `sg-sgx` Direct Business 从 SGX-ST Rule 8.7 重编为 8.10（缓存的旧版仍写 8.7）——子代理转述与现行版本不一致时以现场重抓的官方页为准（`verify_quotes` 反查的是本地缓存，故必须重抓入缓存）。
+6. **大文件缓存截取。** `us-nyse` 的 `NYSE_Rules.pdf` 28MB，`verify_quotes` 每次 `make check` 都要读——缓存 PDF 原件 + 手工把 `pdftotext` 结果截到 Rules 70–127 段（约 500KB）作 `.txt` 伴随，兼顾可核查与构建速度。
+7. **子代理调研 + 本地缓存直读互补。** 两个 `dark_pool` / `block_trade` 调研子代理各跑约 15–18 分钟收集官方 URL + 候选原文，主线负责抓取入缓存 + `verify_quotes` 反查 + 填写。一处子代理漏判被本地缓存直读纠正：`br-b3` 有自营中点暗池 **Midpoint**（《Trading Procedures Manual》Title II 明文「not displayed in the Market Data」），子代理因 B3 的 PDF 未解析而判「无」。
+
+**踩坑（已在提交中修复）：** `sg-sgx` `block_trade` 首个 commit 的 `Edit` `old_string` 含了下一字段 `dark_pool` 的空信封、`new_string` 未带回 → 空 `dark_pool` 字段被删（`make check` 不报错，因缺字段=缺口非错误）。`dark_pool` commit 一并恢复并填充。教训同 kr-krx `derivatives:` 键删除（早前会话）——**编辑某字段时，`old_string` 若纳入了下一个键，`new_string` 必须原样带回**。
+
+**第二人独立复核（[CLAUDE.md §四]，待人工）：** 本轮触及约 74 个字段填写（8 字段 × 约 9–12 家），远超「> 30 字段须第二人独立复核」阈值。后台会话无法充当真正的第二个视角——**本条目打勾前的第二人复核尚未进行，标为待人工**。已做的自检：每字段批 `make check` 全绿（`verify_quotes` 对 26 个新 high-confidence 字段逐条反查缓存 FAIL=0）、`make sync` 幂等、跨字段口径一致性自查（如「本所自营暗池 vs 市场有第三方」两栏在 `dark_pool` 10 家统一表述）。
+
+**验证：** `make build` 全绿（`selfcheck` 24/24、`validate` 20 家 0/0、`verify_quotes` OK=1023 / FAIL=0 / CACHE_MISS=77 均为既有无关字段、`check_ui_i18n` OK）、`make sync` 二次幂等。新增来源域名登记 6 个（`info.gov.hk` / `jsri.or.jp` / `nextrade.co.kr` + `asic.gov.au` / `fsc.go.kr` 补子链）。
+
+**已知局限（下一迭代点）：** ① `holidays_note` 4 家 JS-SPA 待人工 / 渲染型抓取；② `ca-tsx block_trade` CIRO UMIR 6.6 跨市场 block 门槛待人工原文；③ `dark_pool` 5 家 medium（`hk-hkex` SFC 操守准则第 19 段 / `sg-sgx` MAS RMO 现行待遇 / `kr-krx` NXT 市场规则 / `jp-jpx` FSA-PTS 细则 / `in-nse` SEBI 正面禁止性表述）可日后升 high，均已记 OPEN-Q。
+
+**日期：** 2026-09-04
