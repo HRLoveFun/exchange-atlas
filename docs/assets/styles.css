@@ -112,11 +112,13 @@ button { font-family: inherit; }
 .brand-zh { font-weight: 700; font-size: 15px; }
 .brand-en { font-size: 11px; color: var(--fg-faint); font-family: var(--font-mono); }
 
-.header-tabs { display: flex; gap: 4px; flex: 1; }
+/* flex-wrap：9 个 tab（ADR-064 起）在标准宽度下一行放不下，宁可整块换到第二行，
+   也不让 flex 压缩把 CJK 标签从字当中折断（「对比矩\n阵」）。宽屏能放下时不换行。 */
+.header-tabs { display: flex; flex-wrap: wrap; gap: 4px 2px; flex: 1; }
 .tab-btn {
   border: none; background: transparent; color: var(--fg-muted);
   padding: 8px 14px; border-radius: var(--radius); cursor: pointer;
-  font-size: 13.5px; font-weight: 600;
+  font-size: 13.5px; font-weight: 600; white-space: nowrap;
 }
 .tab-btn .en { font-weight: 400; color: var(--fg-faint); font-size: 11.5px; }
 .tab-btn:hover { background: var(--bg-hover); color: var(--fg); }
@@ -463,6 +465,26 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
 .rm-legend .rm-lg-solid { width: 14px; height: 10px; border: 1px solid var(--border-strong); background: var(--bg-hover); display: inline-block; border-radius: 2px; }
 .rm-legend .rm-lg-dash { width: 14px; height: 10px; border: 1px dashed var(--fg-faint); background: transparent; display: inline-block; border-radius: 2px; }
 .rm-legend .rm-lg-key { width: 4px; height: 10px; border-radius: 2px; display: inline-block; }
+
+/* ── 参与者图 Participant Map（v2.0 Phase 3 第六棒，ADR-064）──
+   第九章 6 字段的固定槽位「参与者截面」三层：谁在场上（investor_structure）
+   → 接入链 4 节点（会员 → 经纪 → 开户 → 适当性 → 终点「你」）→ 外资平行道。
+   卡内角色头 .pt-card-k（随语言开关取 taxonomy label）；正文 .pt-card-v；
+   缺省卡走虚线框 + 斜体「未记录」。左缘色条由内联 fill 控制（--info 场上人口 /
+   --accent 中间机构层 + 外资通道 / --warn 准入门槛），只作区带识别。
+   图例 / 折行复用 .rm-legend / llWrap。 */
+.pt-svg { min-width: 1080px; }
+.pt-svg .pt-title { font-size: 14.5px; font-weight: 700; fill: var(--fg); }
+.pt-svg .pt-sub { font-size: 10.5px; fill: var(--fg-muted); }
+.pt-svg .pt-lane-l { font-size: 10.5px; font-weight: 700; fill: var(--fg-muted); }
+.pt-svg .pt-lane-s { font-size: 8.5px; fill: var(--fg-faint); }
+.pt-svg .pt-card-k { font-size: 9px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; fill: var(--fg-muted); }
+.pt-svg .pt-card-v { font-size: 10.5px; fill: var(--fg); }
+.pt-svg .pt-card-empty { font-size: 10.5px; fill: var(--fg-faint); font-style: italic; }
+.pt-svg .pt-node-n { font-size: 8px; fill: var(--fg-faint); font-weight: 700; }
+.pt-svg .pt-end { font-size: 11px; font-weight: 700; fill: var(--accent); }
+.pt-svg .pt-conn { font-size: 9px; fill: var(--fg-faint); font-style: italic; }
+.pt-svg .td-hit { cursor: pointer; }
 
 .overlay-spec {
   background: var(--bg); border-radius: 4px; padding: 10px 12px; margin: 0;
