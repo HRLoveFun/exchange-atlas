@@ -1643,6 +1643,16 @@
 
 **日期：** 2026-09-04
 
+**渲染层落地（2026-09-04，本条文末段）** — 把 MVP 原型（Artifact，未落库）移植进主前端，纯前端三文件（`docs/assets/app.js` +206 / `docs/assets/styles.css` +31 / `docs/index.html` +1），`data/` 与 `docs/data/` 零 diff、`make sync` 幂等、生成块无变化、`check_ui_i18n` OK。
+
+- **`app.js` `renderRiskFlags` / `rfBuild`**：手写 SVG（`W=1180`，`PL=150`）两泳道固定槽位——① `liquidity_risk_note` / `fx_risk_note` 两卡横排（`--info` 左缘），② `regulatory_change_risk_note` / `political_risk_note` / `enforcement_note` 三卡横排（`--warn` 左缘）；每个字段固定位置、跨 20 家不变。`rfCard` 诚实四态（轴 3）：`rfFlag` 三角旗字形按 `env.confidence` —— `high` 实心 + 左缘不透明度 1、`medium` `fill-opacity 0.32` + 0.6、`low` 空心描边 + `#rf-hatch` 极淡斜纹卡底 + 0.3 + 卡内「未附官方来源」；无值 = 虚线框 + 居中斜体「未记录 / 真实数据缺口」。取证词 `rfConfWord`（有据可查 / 综合判断 / 定性背景）走中性梯度色（`--accent` → `--warn` → `--fg-faint`），**红 `.badge-low` 只在点开后的浮层**（轴 3）。卡 `data-role="cell" data-chapter="risks"` 复用 `openCellOverlay`（`detail` 草稿 en 态走既有 `zhNoteBlock` 折叠）。从第一版接 `t()` / `tSel()` / `fieldLabel("risks", …)` / `dv()`。`rfWrap` 独立一份（同 `rmWrap` 思路：整卡宽扣 24px、CJK 按字数 / 拉丁按词、委托 `llWrap`）。
+- **`rfDisclaimer`（轴 4）**：SVG 下方常驻「这不是风险评分」声明块（`.rf-disclaimer`，`border-left` + 红色 `.rf-hard` 强调句），与成本瀑布「主图 + 常驻税注解」同版式——明确本图只汇总已写进规则 / 已发生的信号，不打分不排名；执行风险 / 市场冲击 / 价差深度须实盘验证、不在覆盖范围（宪法覆盖边界 / [ADR-020] / [ADR-042]）。另附 `rfProse` 标准说明段（ADR 链接 + 诚实四态 + 「不构成投资建议」）。
+- **`index.html`**：顶层 tab「风险旗标 / Risk Flags」排「参与者图」后（参与者图渲染层 PR #60 已先落地，tab 数 9→10，`.header-tabs` 既有 `flex-wrap` 承接换行）；路由键 `risk-flags`（`route()` 分支 + `change` 事件 `rf-exchange` 分支）。
+- **档案页第十二章不折叠**（轴 6：无 `only_spot`，`de-eurex` 第 12 章全章适用）——`renderObjectChapter` 无改动。
+- **验证**：`make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK、`make sync` 二次幂等、生成块零 diff）。Chrome headless 核对 `us-nyse`（四态全出：high 实心 + medium 半填 + low 空心斜纹）/ `cn-sse`（制度泳道 3 卡全虚线缺口）/ `hk-hkex`（流动性 + 政治 2 缺口）/ `de-eurex`（纯衍生品全章渲染）/ `za-jse`（全 medium）× 中英 × 明暗；`participant-map` / `trading-day` 无回归；DOM dump 确认 5 个 `data-role="cell"` 齐、无加载错误。
+- **已知局限**：① 制度泳道 3 卡窄（`w3 ≈ 313px`），长散文（`regulatory_change` / `political` / `enforcement` 常 200–400 字）按卡 5 行硬裁剪 + 全文进 `<title>` + 点击浮层（[ADR-035] D / 轴 1，同 [ADR-059]/[ADR-061]/[ADR-064]）；真正解法是散文「先摘要后全文」精修，属数据层活。② 中英混排 Latin 词被 `llWrap` 逐字切断（[ADR-061] 已知局限 ④，四模块共用）。③ 固定槽位使全 20 家图高一致。④ 窄于 1080px SVG 在 `.td-plot-wrap` 内横向滚动。⑤ `low` 卡的 0.3 不透明度左缘色条在暗色下几乎不可见（意图内——低置信度弱化，旗标字形与斜纹已承载信号）。
+- **Phase 4 前置进度**：四个 viz 模块（[ADR-059] 上市生命周期 / [ADR-061] 监管图 / [ADR-064] 参与者图 / [ADR-066] 风险旗标）**渲染层均已落地**——[ADR-057] #4「四个模块均落地」按渲染层口径满足。仍未做：`fx_risk_note` 数据层子棒（本 ADR 轴 6 把它定为**独立子棒**、与 [ADR-060] 任务二/四横切回填并轨；但 `ROADMAP` §一「下一步」与 auto-memory 把它并列进「Phase 3 做齐」的两棒之一）——**这条是否也是 Phase 4 启动硬前置，留合并协调者 / 用户按 ROADMAP §一 拍板**，本棒不单方面宣布 Phase 4 解锁。
+
 ---
 
 ### ADR-067 — 成本瀑布数据层长尾：`type: none` 正面依据的结构性补齐 + cn 监管费现行标准
