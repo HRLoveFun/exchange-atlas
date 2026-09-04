@@ -1643,6 +1643,16 @@
 
 **日期：** 2026-09-04
 
+**渲染层落地（2026-09-04，本条文末段）** — 把 MVP 原型（Artifact，未落库）移植进主前端，纯前端三文件（`docs/assets/app.js` +206 / `docs/assets/styles.css` +31 / `docs/index.html` +1），`data/` 与 `docs/data/` 零 diff、`make sync` 幂等、生成块无变化、`check_ui_i18n` OK。
+
+- **`app.js` `renderRiskFlags` / `rfBuild`**：手写 SVG（`W=1180`，`PL=150`）两泳道固定槽位——① `liquidity_risk_note` / `fx_risk_note` 两卡横排（`--info` 左缘），② `regulatory_change_risk_note` / `political_risk_note` / `enforcement_note` 三卡横排（`--warn` 左缘）；每个字段固定位置、跨 20 家不变。`rfCard` 诚实四态（轴 3）：`rfFlag` 三角旗字形按 `env.confidence` —— `high` 实心 + 左缘不透明度 1、`medium` `fill-opacity 0.32` + 0.6、`low` 空心描边 + `#rf-hatch` 极淡斜纹卡底 + 0.3 + 卡内「未附官方来源」；无值 = 虚线框 + 居中斜体「未记录 / 真实数据缺口」。取证词 `rfConfWord`（有据可查 / 综合判断 / 定性背景）走中性梯度色（`--accent` → `--warn` → `--fg-faint`），**红 `.badge-low` 只在点开后的浮层**（轴 3）。卡 `data-role="cell" data-chapter="risks"` 复用 `openCellOverlay`（`detail` 草稿 en 态走既有 `zhNoteBlock` 折叠）。从第一版接 `t()` / `tSel()` / `fieldLabel("risks", …)` / `dv()`。`rfWrap` 独立一份（同 `rmWrap` 思路：整卡宽扣 24px、CJK 按字数 / 拉丁按词、委托 `llWrap`）。
+- **`rfDisclaimer`（轴 4）**：SVG 下方常驻「这不是风险评分」声明块（`.rf-disclaimer`，`border-left` + 红色 `.rf-hard` 强调句），与成本瀑布「主图 + 常驻税注解」同版式——明确本图只汇总已写进规则 / 已发生的信号，不打分不排名；执行风险 / 市场冲击 / 价差深度须实盘验证、不在覆盖范围（宪法覆盖边界 / [ADR-020] / [ADR-042]）。另附 `rfProse` 标准说明段（ADR 链接 + 诚实四态 + 「不构成投资建议」）。
+- **`index.html`**：顶层 tab「风险旗标 / Risk Flags」排「参与者图」后（参与者图渲染层 PR #60 已先落地，tab 数 9→10，`.header-tabs` 既有 `flex-wrap` 承接换行）；路由键 `risk-flags`（`route()` 分支 + `change` 事件 `rf-exchange` 分支）。
+- **档案页第十二章不折叠**（轴 6：无 `only_spot`，`de-eurex` 第 12 章全章适用）——`renderObjectChapter` 无改动。
+- **验证**：`make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK、`make sync` 二次幂等、生成块零 diff）。Chrome headless 核对 `us-nyse`（四态全出：high 实心 + medium 半填 + low 空心斜纹）/ `cn-sse`（制度泳道 3 卡全虚线缺口）/ `hk-hkex`（流动性 + 政治 2 缺口）/ `de-eurex`（纯衍生品全章渲染）/ `za-jse`（全 medium）× 中英 × 明暗；`participant-map` / `trading-day` 无回归；DOM dump 确认 5 个 `data-role="cell"` 齐、无加载错误。
+- **已知局限**：① 制度泳道 3 卡窄（`w3 ≈ 313px`），长散文（`regulatory_change` / `political` / `enforcement` 常 200–400 字）按卡 5 行硬裁剪 + 全文进 `<title>` + 点击浮层（[ADR-035] D / 轴 1，同 [ADR-059]/[ADR-061]/[ADR-064]）；真正解法是散文「先摘要后全文」精修，属数据层活。② 中英混排 Latin 词被 `llWrap` 逐字切断（[ADR-061] 已知局限 ④，四模块共用）。③ 固定槽位使全 20 家图高一致。④ 窄于 1080px SVG 在 `.td-plot-wrap` 内横向滚动。⑤ `low` 卡的 0.3 不透明度左缘色条在暗色下几乎不可见（意图内——低置信度弱化，旗标字形与斜纹已承载信号）。
+- **Phase 4 前置进度**：四个 viz 模块（[ADR-059] 上市生命周期 / [ADR-061] 监管图 / [ADR-064] 参与者图 / [ADR-066] 风险旗标）**渲染层均已落地**——[ADR-057] #4「四个模块均落地」按渲染层口径满足。仍未做：`fx_risk_note` 数据层子棒（本 ADR 轴 6 把它定为**独立子棒**、与 [ADR-060] 任务二/四横切回填并轨；但 `ROADMAP` §一「下一步」与 auto-memory 把它并列进「Phase 3 做齐」的两棒之一）——**这条是否也是 Phase 4 启动硬前置，留合并协调者 / 用户按 ROADMAP §一 拍板**，本棒不单方面宣布 Phase 4 解锁。
+
 ---
 
 ### ADR-067 — 成本瀑布数据层长尾：`type: none` 正面依据的结构性补齐 + cn 监管费现行标准
@@ -1732,7 +1742,76 @@
 
 **日期：** 2026-09-04
 
+### ADR-071 — 成本瀑布迭代：佣金行降级为说明 + `cost_layer` 加 `rate_raw`（tw/za 证券交易税不再画幽灵条）
+
+**背景（2026-09-04 用户 Q&A 定案）：** 用户问「成本瀑布里佣金字段是否所有交易所都空白、要不要保留」。逐字段核查 [ADR-045] 回填的 6 费种条：
+
+| 瀑布条费种 | 有数值实心条 | `type: none`（明确不征） | 幽灵条 | 无 spec |
+|---|---|---|---|---|
+| **commission_structure** | **0** | **0** | 15 | 5 |
+| exchange_fees | 11 | 0 | 8 | 1 |
+| clearing_fees | 12 | 0 | 7 | 1 |
+| regulatory_fees | 8 | 8 | 2 | 2 |
+| stamp_duty | 6 | 8 | 3 | 3 |
+| financial_transaction_tax | 3 | 12 | 2 | 3 |
+
+佣金是唯一「20 家里 0 个数值、0 个明确不征」的费种——在每张瀑布里必然是幽灵条或「未结构化」，对买/卖小计恒贡献 0。根因是结构性的：佣金 1975（美）/ 1986（英）/ 1999（日）等早已去管制，由券商逐笔议价、**不写进交易所或清算所规则**，落在 [CLAUDE.md 覆盖边界] 之外（与买卖价差同类）。这不是抓取缺口，再多田野工作也填不出。[ADR-045] 留幽灵条本意是「避免把佣金画成 0 误导」，但副作用是一根跨 20 市场恒等、钉在 bp 定量轴上（固定 34px 宽 ≈ 轴上 1bp、暗示了一个它没有的量级）、且 15/5 两种画法的噪音行。
+
+顺带发现反向问题：`tw-twse` 证券交易税 0.3%（原文「千分之三」）、`za-jse` STT 0.25%（原文「0,25%」）是各自市场**最大的一笔成本**，官方明文公布，却因 [ADR-039] 纪律「非阿拉伯数字 quote 不放数值 spec」渲染成幽灵条「议价/未披露」——对「一眼看懂这个市场」是失真（[OPEN-QUESTIONS] 已登记「是否给 `cost_layer` 加原文数值串键」）。
+
+**定了什么：**
+
+1. **佣金退出瀑布条**（`app.js`）：`CW_FEE_ORDER` 从 6 → 5（`exchange_fees` / `clearing_fees` / `regulatory_fees` / `stamp_duty` / `financial_transaction_tax`）。新增 `cwCommissionNote(id, data)`——图下方一行说明「券商议价、不在交易所规则内、对零售通常是最大一笔显性成本、按覆盖边界不量化」，点击复用 `openCellOverlay`（`data-path="commission_structure"`）看本所佣金结构。`CW_FEE_META.commission_structure` 保留（说明行的 `cwFeeName` / overlay 用）。**数据字段 `costs.commission_structure` 不动**——仍在市场机制剖面的跨章 chip（[ADR-042]）与档案页出现，删字段会让剖面少一列。
+
+2. **`cost_layer` 加 `rate_raw`**（`schema/spec.yml`）：原文以非阿拉伯数字给费率时，`rate` 填人工转写的阿拉伯值、`rate_raw` 存原文逐字串。`tw-twse.costs.stamp_duty` → `{rate: 3, rate_raw: "千分之三", unit: permille, side: sell}`；`za-jse.costs.stamp_duty` → `{rate: 0.25, rate_raw: "0,25%", unit: pct, side: buy}`。渲染层画实心条 + `*` 标记「原文非阿拉伯数字、已人工转写」（`cwToBp` 加 `raw` 标志，legend / prose / tooltip 同步）。
+
+3. **`validate.py` 加机器校验（[CLAUDE.md §四]「新不变式必须机器化」）：** 带 `rate_raw` 的字段——① `rate_raw` 非空字符串且字段有 `quote`；② `rate_raw`（折叠空白 + 小写后）逐字出现在本字段 `quote` 里（挡「转写」名义下的编造）；③ `rate` 必须是数值；④ ASCII 纯数字型 `rate_raw`（`0,25%`）逗号归一后机器比对 `rate`。5b 相应豁免带 `rate_raw` 字段顶层 `rate` 的 quote 数值反查（`rate_raw` 的 verbatim 子串是更强锚点）。负向验证：伪造 `rate_raw: "0,99%"`（不在 quote）→ 报错；`rate: 0.5 / rate_raw: "0,25%"` → 归一不一致报错。
+
+**为什么这样：** 瀑布的价值是「一屏看懂这个市场怎么抽钱、抽在哪几层、买卖是否对称」的横向对比；一根跨 20 市场恒等且无收敛可能的幽灵行是纯噪音，降为注解既守住 [ADR-045] 的诚实目标（交易员仍被告知佣金存在、通常最大、见档案页），又去掉噪音行与 15/5 不一致。`rate_raw` 不放宽 [ADR-039] 的防幻觉内核——`rate` 仍需 verbatim 锚点，只是锚点从「阿拉伯数字集合成员」换成「原文串的逐字子串」（更严，不是更松），fabrication 照样被拦；机器无法判「千分之三 = 0.3%」这一步转写正确，由人工核对（`detail` 里写明，仅 2 字段、[CLAUDE.md §四]「少量 spec 微调自检即可」）。
+
+**验证：** `node -c` 通过；`make build` 全绿（`selfcheck` 43/43、`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK、6 处生成块零 diff）；`make sync` 二次幂等。Chrome headless 截图核对 5 家：`tw-twse`（印花税 30bp 实心条 + `*`，卖侧；此前全幽灵/未结构化）、`za-jse`（STT 25bp 实心条 + `*`，买侧）、`hk-hkex`（默认，5 条 + 佣金说明行，此前佣金是「未结构化」文字行）、`jp-jpx`（全零市场，副标不变）、`uk-lse`（SDRT 50bp 仅买侧，无回归）。人工核对 2 处转写：台「徵千分之三」= 3‰ = 0.3%（日冲「千分之一點五」= 0.15% 为次级档、未进 `spec.rate`）；南非「0,25%」= 0.25%——均与 `quote` 逐字一致，通过率 2/2。
+
+**日期：** 2026-09-04
+
+---
+
+### ADR-072 — 前端不暴露 taxonomy 章序数，只用章节名 + 档案页 / ADR 链接
+
+> **编号说明：** 本条原占 ADR-070（分支拉出时取的「下一个空号」），与并行合并的 PR #66（[ADR-070] 机制核心面板右缘避让）、PR #68（[ADR-071] 成本瀑布佣金迭代）撞号。本 PR 是三个占用者里最后合并的，按 [ADR-029] 协议让号为 **072**。
+
+**背景：** `schema/taxonomy.yml` 的 `chapters` 用 `chapter_no`（2–12，源自原始十三章大纲，见 [ADR-010]）给十一个数据章节编号。这套序数是内部 schema 产物——前端从没有一个页面把它当目录呈现。但六个可视化视图底部的设计思想段落都写「本视图由第X章《XXX》……驱动」（剖面→第五 / 成本瀑布→第十一 / 交割管线→第八 / 上市生命周期→第六 / 监管图→第三 / 参与者图→第九），SVG 空态与工具条里还有「见档案页第五章」「第 8 章未记录……」「第三章 8 字段固定槽位」等零散引用，档案页左栏章节导航则以 `chapter_no + ". "` 前缀渲染成「2. 基本信息 … 12. 风险与特殊考量」。读者看到「第五章」却无从知道这是**什么的**第五章、去哪看全部十一章、为什么成本是「第十一」——引用了一份前端不存在的带编号目录。英文态同样（`Chapter 5` / `Chapter 3`）。
+
+用户提出二选一：把这份「目录文件」作为一个前端标签页，或用恰当方式从前端隐去。
+
+**定了什么：**
+
+1. **前端 reader-facing 文案不出现 `第X章` / `Chapter N` 这类章序数。** 改用**章节名**——读者能在档案页左栏点到的那一节的名字（`taxonomy` 的 `label_zh` / `label_en`），并显式说明它是「每所档案页的某章」。例：「本剖面由第五章「市场结构与交易机制」的结构化 `spec` 层驱动」→「本剖面由**每所档案页「市场结构与交易机制」章**的结构化 `spec` 层驱动」。指向具体章节的旧「见档案页第五章」改为按章名指（英文态用 `taxonomy` 的 `label_en` 原词，便于与档案页左栏对齐）。
+2. **档案页章节导航去掉 `chapter_no + ". "` 数字前缀**，只留中英章名。列表本身有序，数字前缀无信息增量；且从「2.」起头会引出「第 1 章在哪」的疑问（原大纲第一章已并入 `exchange_identity`，[ADR-010]）。`chapter_no` 作为跨项目稳定标识仍留在 `taxonomy.yml` / `docs/data/`，只是不再进 DOM。
+3. **`[ADR-xxx]` 的 GitHub 链接保留**——那是可点击、落在真实 `DECISIONS.md` 页的产物，属「引用且可达」，与「引用且不可达」的章序数不是一类。
+
+**为什么选「隐去」而不是「加标签页」：**
+
+- **与北极星逆行。** [ADR-057] / Phase 4 的方向是所有模块并成单页、矩阵 / 时区 / 健康度 / 档案页降「更多」入口——顶栏已 9 个标签，再加一个「框架说明」元标签是加法不是减法。一份框架说明顶多进 Phase 4 的「更多」抽屉，不该现在立主标签。
+- **病灶是序数不是章名。** 「《市场结构与交易机制》章」本就自洽——它是每家档案页里真实存在、点得进去的一节；去掉「第五」这个悬空序数后，每句话都成立。
+- **成本对称。** 隐去 = 十几处纯文案改动 + 一条机器校验，一个 commit；加标签页 = 新 render 函数 + `taxonomy` 新增每章 `blurb` 字段 + 新校验 + 顶栏改动。前者几小时，不阻塞 Phase 3。
+- **已有先例。** 时区甘特条的说明段一直是这个范式（「由「市场结构与交易机制」章节的交易时段文本……换算」「精确时段见各所档案页」），无序数、指向档案页，读起来通顺——本条把其余视图对齐到它。
+
+**机器校验（[CLAUDE.md §四]）：** 新增 `tools/check_no_chapter_ordinals.py`，复用 `check_ui_i18n.scan` 的 JS 词法扫 `docs/assets/app.js` 字符串字面量（注释里的「第五章」是开发者速记，放行）+ `docs/index.html` 正文（去 HTML 注释），命中 `第<中文数字>章` / `第 \d 章` / `Chapter \d`（含 `&nbsp;`）即 FAIL；行内 `chapter-ordinal-ok` 标记可放行个案（目前无）。接入 `make check`（`check_ui_i18n` 之后）。把「前端不带章序数」从自觉变成构建关卡，防后续新视图再引入。
+
+**没做：**
+
+- **档案页导航顶部加一行「本图鉴用统一的十一章框架记录每一家交易所」+ footer 框架说明链接**——分析里列为「可选补强」，本条不含；等 Phase 4 决定框架说明进不进「更多」抽屉时一并处理，届时数据从 `taxonomy.yml` 生成。
+- **`taxonomy.yml` 每章 `blurb` 字段**——「加标签页」方案的前置，本条不走该方案，不加。
+- **`[ADR-xxx]` 链接改成人话**（ADR-xxx 对交易员是黑话）——相关但独立的打磨项，不在本条范围。
+- **英文态 `Market Structure & Trading Mechanic(s/m)` 收敛**——`taxonomy` 的 `label_en` 是 `Trading Mechanism`，旧散文里有 `Trading Mechanics`；本条新写 / 改写处统一按 `label_en`（`Mechanism`），未逐一追改未触及的历史串。
+
+**验证：** `make build` 全绿（`selfcheck` 43/43、`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK、`check_no_chapter_ordinals` OK）；`make sync` 二次幂等、生成块与 `docs/data/` 零 diff（本条只动 `docs/assets/app.js` + `tools/` + `Makefile` + `PROJECT/`，不碰 `data/` / `schema/`）。负向验证：`_hits()` 对 `第五章` / `第 8 章` / `Chapter 11` / `Chapter&nbsp;3` 均命中，对「市场结构与交易机制章」不误伤。合并 `origin/main`（含 [ADR-070] 面板避让 / [ADR-071] 成本瀑布佣金迭代 / [ADR-066] 风险旗标渲染层）后复核：面板避让与本条触及的 6 个可视化视图说明段落无重叠；成本瀑布 `cwProse()` 一处与 [ADR-071] 的费种数量改动（6→5）落在同一句话，语义合并（保留 [ADR-071] 的最新内容，套用本条的去序数改法）；风险旗标渲染层是本条原始 15 处范围之外的新代码（合并前不存在），`check_no_chapter_ordinals.py` 跑起来直接抓出它 `rfProse()` 说明段 + 工具条 note 共 4 处同款「第十二章」/`Chapter 12` 悬空引用，按同一改法修掉——机器校验「拦住后续新视图再犯」的设计目的在合并当场就验证生效，不是纸面声称。
+
+**日期：** 2026-09-04
+
 ### ADR-073 — 市场机制剖面视觉迭代：零轴刻度改标参考价名称、删 y 轴标题与"0 = …"内嵌批注、临时停牌文案居中
+
+> **编号说明：** 本条原占 ADR-071（分支拉出时取的「下一个空号」），与并行合并的 PR #68（[ADR-071] 成本瀑布佣金迭代）撞号。本 PR 晚于 #68 落地，按 [ADR-029] 协议让号为 **073**（[ADR-072] 已被 PR #69 占用）。
 
 **为什么需要：** 剖面 y 轴此前三处重复表达同一件事——顶栏工具条一句「y = 涨跌幅相对前收盘价」、旋转的 y 轴标题「涨跌幅 %（相对前收盘价）」、零轴旁内嵌批注「0 = 前收盘价」，而零轴本身的刻度只写着信息量为零的「0%」。三处冗余里，旋转标题最占地方（贴绘图区左侧全高）、内嵌批注离零轴线还有 11px 视觉间隙容易被读成独立元素。此外「临时停牌可发生于任意时刻」左对齐紧贴斜纹条左端，视觉上偏一侧、不像居中的通栏声明。
 

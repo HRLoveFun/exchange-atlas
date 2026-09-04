@@ -20,6 +20,10 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
      cn-sse 那次是 medium 连 5b 的高门槛都进不了）。文件级而非同字段（[ADR-058] 收尾修订：
      note 常跨字段交叉引用 price_limits 的阈值等）；日期/时刻/年份/条款号/法规引用号/ADR
      引用等非数值 token 剥离后比对，挡的是「费率/阈值/金额夹带进 note」这类静默错误
+  5d. spec.rate_raw（[ADR-071]）：原文以非阿拉伯数字给费率时（「千分之三」/「0,25%」），
+     rate 填人工转写值、rate_raw 存原文逐字串——校验 rate_raw 是本字段 quote 的 verbatim
+     子串（挡「转写」名义下的编造）+ rate 为数值 + ASCII 纯数字型再机器比对 rate；
+     5b 相应豁免带 rate_raw 字段的顶层 rate 数值反查
   6. verified 不得是未来日期
   7. 来源域名已在 SOURCES.md 登记；且若某 confidence: high 字段的全部来源域名在
      SOURCES.md 都标为「第三方」，直接 fail（CLAUDE.md 二第3条：第三方来源 confidence 上限 medium）
@@ -528,6 +532,41 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                                     f"——note 不得夹带无原文支撑的数字（CLAUDE.md 二.5，"
                                     f"[ADR-054]/[ADR-058] 确立的维度）")
 
+                        # rate_raw（[ADR-071]）：原文以非阿拉伯数字给出费率时（tw-twse
+                        # 「千分之三」、za-jse 逗号小数「0,25%」）——ADR-039 纪律原是「不放
+                        # 数值 spec」、渲染成幽灵条，但这两笔恰是各自市场最大的一笔成本。
+                        # 改为 rate 填人工转写的阿拉伯值、rate_raw 存原文逐字串。校验：
+                        #   ① rate_raw 必须是非空字符串、且字段有 quote 作锚点；
+                        #   ② rate_raw 逐字（折叠空白 + 小写后）出现在本字段 quote 里
+                        #      ——挡「转写」名义下的编造；
+                        #   ③ rate 必须是数值（rate_raw 的用途是给 rate 附原文锚点）；
+                        #   ④ ASCII 纯数字型 rate_raw（0,25%）：逗号归一后机器比对 rate。
+                        # 5b 对带 rate_raw 的字段豁免 rate 的 quote 数值反查（见下方 5b）。
+                        raw = spec.get("rate_raw")
+                        if raw is not None:
+                            if not isinstance(raw, str) or not raw.strip():
+                                err(f"{loc}: spec.rate_raw 必须是非空字符串（[ADR-071]）")
+                            elif not env.get("quote"):
+                                err(f"{loc}: spec 有 rate_raw 但字段缺 quote"
+                                    f"——rate_raw 需要 quote 作逐字锚点（[ADR-071]）")
+                            else:
+                                def _fold(s):
+                                    return re.sub(r"\s+", "", str(s)).lower()
+                                if _fold(raw) not in _fold(env["quote"]):
+                                    err(f"{loc}: spec.rate_raw `{raw}` 不是本字段 quote 的逐字子串"
+                                        f"——原文费率转写必须有 verbatim 锚点（[ADR-071]/CLAUDE.md 二.5）")
+                                if not isinstance(spec.get("rate"), (int, float)) or isinstance(spec.get("rate"), bool):
+                                    err(f"{loc}: spec 有 rate_raw 但 rate 不是数值"
+                                        f"——rate_raw 用于给 rate 附原文锚点，二者须同时给（[ADR-071]）")
+                                elif re.fullmatch(r"[\d.,]+\s*[%‰]?", raw.strip()):
+                                    got = raw.strip().rstrip("%‰ ").replace(",", ".")
+                                    try:
+                                        if abs(float(got) - float(spec["rate"])) > 1e-9:
+                                            err(f"{loc}: spec.rate_raw `{raw}` 归一后（{got}）"
+                                                f"与 spec.rate（{spec['rate']}）不一致（[ADR-071]）")
+                                    except ValueError:
+                                        pass
+
                 # en_required 字段必须填 en——此前这个 taxonomy 标记从未被机器校验过，
                 # 导致标了 en_required 的专有名词类字段（机制名/板块名/法规名等）静默
                 # 缺英文，英文模式下前端会回退显示中文（见 app.js 的 langMode 回退逻辑），
@@ -560,8 +599,14 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                         # （limit_pct: 10、threshold_pct: 7 …），不含时间改写/中文数字/
                         # 含数字的名称这类噪声，可以严。Phase 1 给 market_structure 加
                         # spec 后这条才有对象，在那之前 spec_number_strings() 返回空。
+                        # [ADR-071]：带 rate_raw 的字段豁免顶层 rate 的 quote 数值反查
+                        # ——rate 是原文非阿拉伯数字（「千分之三」/「0,25%」）的人工转写，
+                        # rate_raw 的 verbatim 子串反查（上方结构校验块）是更强的锚点。
                         if env.get("spec") is not None:
-                            spec_nums = spec_number_strings(env["spec"])
+                            spec_for_5b = env["spec"]
+                            if isinstance(spec_for_5b, dict) and spec_for_5b.get("rate_raw"):
+                                spec_for_5b = {k: v for k, v in spec_for_5b.items() if k != "rate"}
+                            spec_nums = spec_number_strings(spec_for_5b)
                             _, spec_missing = numbers_missing_from_quote(spec_nums, env["quote"])
                             if spec_missing:
                                 err(f"{loc}: spec 里的数值 {sorted(spec_missing)} 在 quote 里找不到"
