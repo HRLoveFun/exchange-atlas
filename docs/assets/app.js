@@ -2316,6 +2316,163 @@
   }
 
   // ══════════════════════════════════════════════
+  // 参与者图 Participant Map（v2.0 Phase 3 第六棒，ADR-064）
+  //   第九章「市场参与者」6 字段的固定槽位「参与者截面」单画布，自上而下三层：
+  //     ① 谁在场上 —— investor_structure（跟谁做对手盘：机构 / 散户 / 本地 / 外资）
+  //     ② 我怎么进场 —— membership_structure → broker_landscape →
+  //        account_opening_requirements → suitability_management 四节点「接入链」，
+  //        节点间 → 箭头、链末终点小圆「你」。前两环 --accent（中间机构层）、
+  //        后两环 --warn（准入门槛）。
+  //     ③ 外资走哪条道 —— foreign_access_channel 平行道，肘形虚线汇入同一终点「你」
+  //   本章 6 字段全为散文、无 spec（[ADR-064] 轴 5/7），[ADR-035] D 诚实三态
+  //   退化为「有值实心卡 + 左缘色条 / 未记录虚线框」两态；点卡片复用 openCellOverlay。
+  //   固定槽位：每个字段固定位置、跨 20 家不变，「换所即对比」。
+  //   纯衍生品所（de-eurex）第九章全章适用、无 only_spot（[ADR-064] 轴 8）。
+  // ══════════════════════════════════════════════
+  var PT_DEFAULT_EX = "hk-hkex";
+  function ptResolveId(params) {
+    var l = cache.manifest.exchanges;
+    if (l.some(function (e) { return e.id === params.id; })) return params.id;
+    return l.some(function (e) { return e.id === PT_DEFAULT_EX; }) ? PT_DEFAULT_EX : l[0].id;
+  }
+  // 折行：CJK 按字数、拉丁按单词，per 由可用像素反推（同 [ADR-061] rmWrap 思路，
+  // innerW 传整卡宽、扣 24px 左右内边距）。独立一份，便于各模块单独微调。
+  function ptWrap(text, innerW, maxLines) {
+    var avail = innerW - 24;
+    var per = /[一-鿿]/.test(text)
+      ? Math.max(6, Math.floor(avail / 10.5))
+      : Math.max(10, Math.floor(avail / 5.6));
+    return llWrap(text, per, maxLines);
+  }
+  // 一张信封卡（满宽 / 接入链节点共用）：有值 = 实心 + 左缘色条 + 角色头 + 折行正文；
+  // 缺省 = 虚线框 + 角色头 + 居中斜体「未记录」。卡整体走 openCellOverlay。
+  function ptEnvCard(id, P, path, x, y, w, h, keyColor) {
+    var env = P[path] || {};
+    var has = !!(env.zh || env.en);
+    var label = fieldLabel("participants", path);
+    var head = '<text x="' + llN(x + 14) + '" y="' + llN(y + 19) + '" class="pt-card-k">' + esc(label) + "</text>";
+    var inner, titleTxt;
+    if (!has) {
+      inner = '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="' + w + '" height="' + h + '" rx="5" fill="none" stroke="var(--fg-faint)" stroke-dasharray="4 3"/>' +
+        head +
+        '<text x="' + llN(x + w / 2) + '" y="' + llN(y + h / 2 + 9) + '" text-anchor="middle" class="pt-card-empty">' +
+        esc(t("未记录", "not recorded")) + "</text>";
+      titleTxt = label + " · " + t("此字段暂无数据（未记录）", "No data recorded for this field");
+    } else {
+      var text = dv(env) || "";
+      var lines = ptWrap(text, w, Math.max(1, Math.floor((h - 34) / 14)));
+      inner = '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="' + w + '" height="' + h + '" rx="5" fill="var(--bg-hover)" stroke="var(--border-strong)"/>' +
+        '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="3.5" height="' + h + '" fill="' + keyColor + '" rx="1.5"/>' +
+        head +
+        lines.map(function (ln, i) {
+          return '<text x="' + llN(x + 14) + '" y="' + llN(y + 34 + i * 14) + '" class="pt-card-v">' + esc(ln) + "</text>";
+        }).join("");
+      titleTxt = label + " · " + (text.length > 200 ? text.slice(0, 200) + "…" : text);
+    }
+    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
+      '" data-chapter="participants">' + "<title>" + esc(titleTxt) + "</title>" + inner + "</g>";
+  }
+  function ptLaneLabel(x, y, main, sub) {
+    return '<text x="' + (x - 16) + '" y="' + llN(y) + '" text-anchor="end" class="pt-lane-l">' + esc(t(main.zh, main.en)) + "</text>" +
+      '<text x="' + (x - 16) + '" y="' + llN(y + 13) + '" text-anchor="end" class="pt-lane-s">' + esc(t(sub.zh, sub.en)) + "</text>";
+  }
+  function ptLegend() {
+    return '<div class="td-legend rm-legend">' +
+      '<span><i class="rm-lg-solid"></i>' + t("已填事实", "Filled fact") + "</span>" +
+      '<span><i class="rm-lg-dash"></i>' + t("未记录（真实数据缺口）", "Not recorded (genuine data gap)") + "</span>" +
+      '<span><i class="rm-lg-key" style="background:var(--info)"></i>' + t("谁在场上", "who's on the floor") + "</span>" +
+      '<span><i class="rm-lg-key" style="background:var(--accent)"></i>' + t("接入 · 会员 / 经纪 / 外资", "access · member / broker / foreign") + "</span>" +
+      '<span><i class="rm-lg-key" style="background:var(--warn)"></i>' + t("准入门槛 · 开户 / 适当性", "gates · account / suitability") + "</span>" +
+      "</div>";
+  }
+  function ptProse() {
+    return '<div class="td-prose">' + t(
+      '本视图把第九章《市场参与者》六个字段压进一屏固定槽位（见 ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-064</a>）。' +
+      '自上而下三层 = 交易员接触陌生市场时的一阶问题：谁在场上跟我做对手盘（投资者结构）、我怎么才能进场（会员 → 经纪商 → 开户 → 适当性 这条接入链，链末是「你」）、如果我是外资走哪条道（外资通道，一条汇入同一终点的平行道——可在「会员」环直接并入，或整体绕过前几环）。' +
+      '槽位固定：同一字段在 20 家交易所位于同一位置，「换所即对比」。本章六个字段全为散文（占比描述 / 机构名 / 法定义务），无 spec 层——' +
+      '<strong>虚线框 = 数据真缺口</strong>（多在「数据空缺复核轨」[ADR-060] 轨道上），不是渲染问题；卡内为按卡宽 / 卡高硬裁剪的片段，点任意卡片看全文与出处。' +
+      '规则以各交易所官方发布为准，不构成投资建议。',
+      'This view condenses the six fields of Chapter 9 (“Market Participants”) into one fixed-slot canvas (see ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-064</a>). ' +
+      'Top-to-bottom the three lanes answer a trader\'s first-order questions about a new market: who is on the other side of my trades (investor structure), how I get in at all (the access chain: member firm → broker → account opening → suitability, ending at “you”), and — if I\'m a foreign investor — which lane I take (foreign access, a parallel path that merges into the same endpoint: it may join at the “member” stage or bypass the earlier stages entirely). ' +
+      'Slots are fixed, so the same field sits in the same place across all twenty exchanges. All six fields are prose (share-of-turnover descriptions, institution names, statutory duties) with no spec layer — ' +
+      '<strong>a dashed box is a genuine data gap</strong> (most sit on the “data-gap track”, ADR-060), not a rendering problem; card text is a fragment clipped to the card, so click any card for the full text and its sources. ' +
+      'Rules are as officially published by each exchange; nothing here is investment advice.') + "</div>";
+  }
+  function ptBuild(id, data) {
+    var P = (data.chapters && data.chapters.participants) || {};
+    var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
+    var W = 1180, PL = 150, PR = 44, CW = W - PL - PR; // 986
+    var g = [];
+    g.push('<text x="18" y="26" class="pt-title">' + esc(exName) + esc(t(" · 参与者图", " · Participant Map")) + "</text>");
+    g.push('<text x="18" y="42" class="pt-sub">' + esc(t("谁在场上 → 我怎么进场 → 外资走哪条道", "who's on the floor → how you get in → the foreign lane")) + "</text>");
+
+    // ── 层 1 · 谁在场上（investor_structure）──
+    var y1 = 66, h1 = 90;
+    g.push(ptLaneLabel(PL, y1 + 18, { zh: "谁在场上", en: "Who's here" }, { zh: "投资者结构", en: "investor structure" }));
+    g.push(ptEnvCard(id, P, "investor_structure", PL, y1, CW, h1, "var(--info)"));
+
+    // ── 层 2 · 我怎么进场（接入链 4 节点 + 终点「你」）──
+    var chain = ["membership_structure", "broker_landscape", "account_opening_requirements", "suitability_management"];
+    var y2 = y1 + h1 + 44, h2 = 120;
+    var endW = 88, gap = 24;
+    var nodeW = Math.floor((CW - endW - chain.length * gap) / chain.length);
+    var baseY = y2 + h2 / 2;
+    g.push(ptLaneLabel(PL, y2 + 18, { zh: "我怎么进场", en: "How you get in" }, { zh: "会员→经纪→我", en: "member→broker→you" }));
+    chain.forEach(function (p, i) {
+      var nx = PL + i * (nodeW + gap);
+      g.push('<text x="' + llN(nx + 2) + '" y="' + llN(y2 - 5) + '" class="pt-node-n">' + (i + 1) + "</text>");
+      g.push(ptEnvCard(id, P, p, nx, y2, nodeW, h2, i < 2 ? "var(--accent)" : "var(--warn)"));
+      var ax = nx + nodeW;
+      g.push('<path d="M ' + llN(ax + 4) + ' ' + baseY + ' L ' + llN(ax + gap - 3) + ' ' + baseY + '" stroke="var(--fg-faint)" stroke-width="1.5" marker-end="url(#pt-arr)"/>');
+    });
+    var cx = PL + chain.length * (nodeW + gap) + 22;
+    g.push('<text x="' + llN(cx) + '" y="' + llN(baseY - 27) + '" text-anchor="middle" class="pt-lane-s">' + esc(t("终端投资者", "end investor")) + "</text>");
+    g.push('<circle cx="' + llN(cx) + '" cy="' + baseY + '" r="17" fill="var(--accent-soft)" stroke="var(--accent)"/>');
+    g.push('<text x="' + llN(cx) + '" y="' + llN(baseY + 4) + '" text-anchor="middle" class="pt-end">' + esc(t("你", "you")) + "</text>");
+
+    // ── 层 3 · 外资走哪条道（平行道，肘形汇入同一终点「你」）──
+    var y3 = y2 + h2 + 52, h3 = 86;
+    var fcW = CW - 132, fcR = PL + fcW;
+    g.push(ptLaneLabel(PL, y3 + 18, { zh: "外资走哪条道", en: "Foreign lane" }, { zh: "会员 / 额度 / 互联互通", en: "member / quota / Connect" }));
+    g.push(ptEnvCard(id, P, "foreign_access_channel", PL, y3, fcW, h3, "var(--accent)"));
+    g.push('<path d="M ' + llN(fcR + 4) + ' ' + llN(y3 + h3 / 2) + ' L ' + llN(cx) + ' ' + llN(y3 + h3 / 2) + ' L ' + llN(cx) + ' ' + llN(baseY + 18) + '" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="5 3" marker-end="url(#pt-arr-a)"/>');
+    g.push('<text x="' + llN(fcR + 8) + '" y="' + llN(y3 + h3 / 2 - 7) + '" class="pt-conn">' + esc(t("→「你」", "→ you")) + "</text>");
+    g.push('<text x="' + llN(PL) + '" y="' + llN(y3 + h3 + 16) + '" class="pt-conn">' + esc(t("外资可在「会员」环直接并入（直接会员），或整体绕过前几环（额度 / 互联互通）", "foreign investors may merge at the 'member' stage, or bypass the earlier stages entirely (quota / Connect)")) + "</text>");
+
+    var H = y3 + h3 + 30;
+    var defs = "<defs>" +
+      '<marker id="pt-arr" markerWidth="7" markerHeight="7" refX="5.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--fg-faint)"/></marker>' +
+      '<marker id="pt-arr-a" markerWidth="7" markerHeight="7" refX="5.5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--accent)"/></marker>' +
+      "</defs>";
+    var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + " " + llN(H) + '" class="td-svg pt-svg" role="img" aria-label="' +
+      esc(exName) + esc(t(" 参与者图", " participant map")) + '">' + defs + g.join("") + "</svg></div>";
+    return ptLegend() + svg + ptProse();
+  }
+  function renderParticipantMap(app, params) {
+    var list = cache.manifest.exchanges;
+    var id = ptResolveId(params);
+    var toolbar = '<div class="view-toolbar">' +
+      '<label for="ptExchange">市场 Market</label>' +
+      '<select id="ptExchange" data-role="pt-exchange">' +
+      list.map(function (e) {
+        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
+      }).join("") + "</select>" +
+      '<span class="td-tb-note">' + t("第九章 6 字段固定槽位：谁在场上 · 接入链（会员 → 经纪 → 开户 → 适当性 → 你）· 外资平行道 —— 点任意卡片看全文与出处",
+        "Chapter 9, 6 fixed slots: who's on the floor · access chain (member → broker → account → suitability → you) · the foreign lane — click any card for full text and sources") + "</span>" +
+      "</div>";
+    app.innerHTML = toolbar + '<div class="loading">' + t("加载参与者图中…", "Loading participant map…") + "</div>";
+    return loadExchange(id).then(function (data) {
+      var cur = parseHash();
+      if ((cur.view && cur.view !== "participant-map") || ptResolveId(cur) !== id) return;
+      app.innerHTML = toolbar + ptBuild(id, data);
+    }).catch(function (e) {
+      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
+    });
+  }
+
+  // ══════════════════════════════════════════════
   // 出处浮层
   // ══════════════════════════════════════════════
   function openCellOverlay(exchangeId, fieldPath, chapterId) {
@@ -2450,6 +2607,7 @@
     else if (view === "settlement-pipeline") renderSettlementPipeline(app, params);
     else if (view === "listing-lifecycle") renderListingLifecycle(app, params);
     else if (view === "regulation-map") renderRegulationMap(app, params);
+    else if (view === "participant-map") renderParticipantMap(app, params);
     else renderTradingDay(app, params);
   }
 
@@ -2515,6 +2673,8 @@
       setHash({ view: "listing-lifecycle", id: e.target.value });
     } else if (role === "rm-exchange") {
       setHash({ view: "regulation-map", id: e.target.value });
+    } else if (role === "pt-exchange") {
+      setHash({ view: "participant-map", id: e.target.value });
     }
   });
   document.addEventListener("keydown", function (e) {
