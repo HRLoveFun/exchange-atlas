@@ -79,6 +79,19 @@ SOURCES_TAG_RE = re.compile(
 errors = []
 warnings = []
 
+# 忽略的目录，按 ROOT 相对路径判定——关键：ROOT 本身可能就在
+# `.claude/worktrees/<name>/` 里（validate 跑在 worktree 分支上做合并前校验），
+# 此时绝对路径 parts 会含 "worktrees"，用绝对 parts 判会把整个仓库跳过（[ADR-069]）。
+SKIP_DIRS = {".git", ".cache", "node_modules", "worktrees"}
+
+
+def under_skip_dir(p):
+    try:
+        rel_parts = p.relative_to(ROOT).parts
+    except ValueError:
+        rel_parts = p.parts
+    return any(part in SKIP_DIRS for part in rel_parts)
+
 
 def err(msg):
     errors.append(msg)
@@ -657,15 +670,14 @@ def validate_docs_data_fresh(taxonomy, glossary, enums, exchanges_expanded):
 # ── 10-11：文档内部引用 ────────────────────────────────────────
 
 def validate_path_references():
-    skip_dirs = {".git", ".cache", "node_modules", "worktrees"}
-    md_files = [p for p in ROOT.rglob("*.md") if not any(part in skip_dirs for part in p.parts)]
+    md_files = [p for p in ROOT.rglob("*.md") if not under_skip_dir(p)]
     known_ext = (".yml", ".yaml", ".py", ".json", ".md", ".html", ".js", ".css", ".txt")
     # 只把"首段是仓库顶层条目"的 token 当作仓库内路径校验。反引号里以已知扩展名结尾的
     # 字符串还有别的来源：站内相对路径片段（res/pc/js/func.js）、别的网站/仓库的路径、
     # 绝对路径示例（/tmp/x.html）——这些不是本校验的对象，此前会被误报（见 OPEN-QUESTIONS
     # 已删除的 #35 与 ADR-029 顺带修复）。`.cache/` 内容不入库（ADR-002），文档里写
     # `.cache/<id>/_manifest.json` 这类是示意路径，同样跳过。
-    top_level = {p.name for p in ROOT.iterdir()} - skip_dirs
+    top_level = {p.name for p in ROOT.iterdir()} - SKIP_DIRS
     for md in md_files:
         text = md.read_text(encoding="utf-8")
         for token in PATH_TOKEN_RE.findall(text):
@@ -692,9 +704,8 @@ def validate_adr_anchors():
         err(f"PROJECT/DECISIONS.md: ADR 编号重复 {sorted(dupes)}")
     defined_set = set(defined)
 
-    skip_dirs = {".git", ".cache", "node_modules", "worktrees"}
     for md in ROOT.rglob("*.md"):
-        if any(part in skip_dirs for part in md.parts) or md == decisions_path:
+        if under_skip_dir(md) or md == decisions_path:
             continue
         for ref in ADR_REF_RE.findall(md.read_text(encoding="utf-8")):
             if ref not in defined_set:
@@ -737,10 +748,9 @@ def validate_roadmap_section_one():
 
 def validate_no_conflict_markers():
     """任何入库文本文件里不得残留 git 合并冲突标记（[ADR-069]）。"""
-    skip_dirs = {".git", ".cache", "node_modules", "worktrees"}
     exts = (".md", ".yml", ".yaml", ".py", ".js", ".css", ".json", ".txt", ".html")
     for p in ROOT.rglob("*"):
-        if p.suffix not in exts or any(part in skip_dirs for part in p.parts):
+        if p.suffix not in exts or under_skip_dir(p):
             continue
         try:
             text = p.read_text(encoding="utf-8")
