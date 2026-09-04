@@ -122,6 +122,12 @@
   - `kr-krx`：Nextrade（NXT，2025-03-04 开业）『中间价申报』是否构成独立非展示订单簿，NXT 官方市场规则未确认；ATS 的 FSCMA 市场份额上限具体数值未逐字缓存。
   - `jp-jpx`：引日本証券経済研究所（JSRI）2025-11 报告（第三方，封顶 medium）；PTS 的 FIEA 许可与市场份额上限细则待抓 FSA / JSDA。
   - `in-nse`：SEBI 无单句『禁止暗池』的正面表述，禁止性靠《证券合约（监管）法》结构 + 一贯监管实践推得。**并附一条勘误**：多篇二手文章称『NSE Alpha 是印度唯一合法暗池 / NSE 2010 年推出暗池框架』，本次遍查 NSE / SEBI 一手资料无任何依据，判为不实，`in-nse.yml` 已按『印度不允许暗池』填写。
+- **[ADR-072] 任务二第二人独立复核（2026-09-05）留下的待核项**（逐条判定与 4 处已订正 FIX 见 `PROJECT/DATA-GAP-TASK2-SPOT-CHECK.md`）：
+  - `de-eurex board_lot_size` 标 `not_applicable` 是否应改判为填写实际内容——复核者指出同一文件 `tick_size` 面对"无统一值但逐品种有正面规定"的结构相同情况选择了"填内容"（`regime: per_instrument`），`au-asx`（同样无股数整手概念）也是"填内容"（无整手 + Marketable Parcel）而非 `not_applicable`。两种处理各自能自洽，是"信息退化为恒定值（如恒为 1 张合约）时是否够格 not_applicable"的通用判据缺口，不是 de-eurex 一家的事实错误，待人工拍板一个可复用的判据。
+  - `de-xetra connect_schemes` 未提及 CEINEX（Deutsche Börse 与上交所/中金所合资的法兰克福 RMB 产品互联互通平台）——是否构成遗漏需人工判断（CEINEX 严格说不是"Xetra 与另一交易所的订单路由连接"，但与"跨境互联互通"主题高度相关）。
+  - `in-nse price_limits.other_boards` "NSE Emerge 沿用与主板同一套分类框架"的断言在 `.cache/in-nse/` 里只找到导航栏"Emerge Platform"字样、无正文支撑；印度 SME 板块实践中常有独立于主板的涨跌幅安排，待人工核对 SEBI/NSE Emerge 专属规则原文再定案。
+  - （软性，非阻塞）`fr-euronext`/`uk-lse` 的 `block_trade` confidence 评级不对称（medium vs high），两者结构相似（门槛均由欧盟/英国 MiFIR 层级设定、非交易所自定），未见显式判断依据说明；`hk-hkex dark_pool` 的"第 1 类+第 7 类牌照""合资格投资者仅限机构"两处细节写入了 zh/en 主文而非仅限 `detail`，独立来源（SFC《操守准则》第 19 段/附表 8）本次未逐字缓存。
+  - （系统性，跨多家）`connect_schemes` 的消极认定条目（`au-asx`/`br-b3`/`ch-six`/`de-xetra`/`jp-jpx`/`sa-tadawul` 共 6 处）普遍未填 `sources`，会静默继承与断言主题无关的章节级默认来源（`market_structure._meta.sources`，通常是交易时段页面），使"moderate 必须有 sources"的校验对这类字段形同虚设——建议给消极认定类字段设计专门的来源占位方式，本次未处理（跨 6 个文件的结构性调整超出复核范围）。
 <!-- BEGIN:GENERATED auto-issues -->
 - `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `br-b3` 基本信息 / 夏令时规则（dst_rule）— confidence: low
