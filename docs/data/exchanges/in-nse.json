@@ -956,21 +956,21 @@
         "spec": null
       },
       "dark_pool": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "本次未找到暗池/场外交易相关的官方说明文字，不确定是否存在，未做'无'的断言，留空。",
+        "zh": "印度不允许暗池／独立另类交易系统——依《证券合约（监管）法》，证券交易须在认可的证券交易所订单簿内进行，SEBI 未批准任何券商暗池或场外撮合系统。大额交易走完全透明的交易所『大宗交易窗口』（Block Deal Window）：NSE 设早盘（08:45-09:00，参考价为前收）与午盘（14:05-14:20，参考价为 13:45-14:00 的 VWAP）两场，价格须在参考价 ±3% 内，单笔最低 25 亿卢比（INR 25 Crores），必须实物交割、不得当日冲销；交易所须在当日收盘后向公众披露每笔大宗交易的证券名、客户名、数量、成交价",
+        "en": "India does not permit dark pools or independent alternative trading systems — under the Securities Contracts (Regulation) Act, securities trading must occur on a recognised stock exchange's order book, and SEBI has authorised no broker dark pool or off-exchange crossing system. Large trades use the fully transparent exchange Block Deal Window: NSE runs a morning window (08:45-09:00, reference = previous close) and an afternoon window (14:05-14:20, reference = 13:45-14:00 VWAP), orders within ±3% of the reference price, minimum INR 25 Crores per trade, delivery-mandatory and no same-day squaring off; exchanges must disclose each block deal's scrip name, client name, quantity and price to the public after market hours the same day",
+        "detail": "本字段『本所自营暗池』一栏 in-nse 为『无』，且监管禁止第三方暗池——大宗交易机制是『透明性 by design』（同日披露含客户名），与暗池匿名性相反。逐字引文取自 SEBI《Review of Block Deal Framework》(SEBI/HO/MRD/POD-III/CIR/P/2025/134，2025-10-08)。⚠️『NSE Alpha 是印度唯一合法暗池』的说法在若干二手文章流传，本次未找到任何 NSE / SEBI 一手依据，判为不实、已记入 OPEN-QUESTIONS。整体 confidence: medium（SEBI 未有单句『禁止暗池』的正面表述，禁止性是《证券合约（监管）法》结构 + 一贯监管实践）。",
         "sources": [
           {
-            "title": "Market Timings（官网）",
-            "url": "https://www.nseindia.com/static/market-data/market-timings",
-            "accessed": "2026-08-14"
+            "title": "SEBI — Review of Block Deal Framework (Circular SEBI/HO/MRD/POD-III/CIR/P/2025/134, 8 Oct 2025)",
+            "url": "https://www.sebi.gov.in/sebi_data/attachdocs/oct-2025/1759928647818.pdf",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "Block deal is execution of large trades through a single transaction without putting either the buyer or seller in a disadvantageous position. …… The minimum order size for execution of trades in the block deal windows shall be INR 25 Crores. Every trade executed in the block deal windows must result in delivery and shall not be squared off or reversed. …… The stock exchanges shall disseminate the information on block deals such as the name of the scrip, name of the client, quantity of shares bought/sold, traded price, etc. to the general public on the same day, after the market hours.",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "market_maker_scheme": {
         "zh": "",

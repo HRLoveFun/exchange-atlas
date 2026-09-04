@@ -912,21 +912,21 @@
         "quote": null
       },
       "dark_pool": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "沙特交易所不运营暗池；沙特市场内无独立的股票另类交易系统或暗池（资本市场管理局 CMA 虽已向 Tradeweb Saudi Arabia 授予 ATS 牌照，但仅限主权债／sukuk 债券，非股票）。大额股票交易走交易所内的『议价成交』（Negotiated Deals，交易与会员规程第 13 节）——买卖双方先商定数量与价格、经交易系统执行，成交计入交易所成交笔数与价量统计并对外披露（属透明机制，非非展示撮合），仅在计算最新成交价／最高最低价／开收盘价／指数时被排除",
+        "en": "The Saudi Exchange operates no dark pool; there is no independent equity alternative trading system or dark pool in the Saudi market (the CMA has licensed Tradeweb Saudi Arabia as an ATS, but only for sovereign/sukuk debt, not equities). Large equity trades use on-exchange 'Negotiated Deals' (Trading and Membership Procedures Section 13) — the seller and buyer first agree quantity and price, execution goes through the Trading System, and the deal is counted in and disseminated with the Exchange's traded-transaction and price/volume statistics (a transparent mechanism, not non-displayed matching); it is only excluded from the last traded price, high/low, opening/closing prices and index calculations",
+        "detail": "本字段『本所自营暗池』与『市场内第三方股票暗池』两栏 sa-tadawul 均为『无』。沙特的大额交易机制（Negotiated Deals）是透明的（成交对外披露），与暗池匿名 / 无盘前透明相反。逐字引文取自《Trading and Membership Procedures》第 13 节。Tradeweb 债券 ATS 属不同范畴、为佐证性说明（第三方来源），未纳入 quote。整体 confidence: medium（『无暗池 / 无股票 ATS』为审慎否定表述，结构上沙特无第二家股票交易场所）。",
         "sources": [
           {
-            "title": "Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）",
+            "title": "Saudi Exchange — Trading and Membership Procedures, Section 13 Negotiated Deals",
             "url": "https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI",
-            "accessed": "2026-08-14"
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "Negotiated Deals occur after both seller and buyer determine the quantity and price of the listed securities involved in the transaction as specified under this section. …… Negotiated Deals are computed when calculating or disseminating the number of Exchange traded transactions and the number and price of the traded securities. …… Negotiated Deals are not included in the calculation of the last traded price (LTP), the highest and lowest security price, the opening and Closing Prices, as well as the calculation of the Exchange and sectors indexes (except for Debt Instruments).",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "market_maker_scheme": {
         "spec": {

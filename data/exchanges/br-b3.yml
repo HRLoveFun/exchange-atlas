@@ -562,8 +562,15 @@ market_structure:
     confidence: medium
 
   dark_pool:
-    zh: ""
-    confidence: low
+    zh: "B3 自营非展示撮合设施 **Midpoint**：Midpoint 订单以中央订单簿最优买卖价的算术均价撮合、仅与同类型（Midpoint）订单成交，标的代码为标的证券加后缀『M』；Midpoint 订单不在中央订单簿行情（Market Data）中展示，成交信息在操作结束后立即披露。另有 Book of Block Trade（BBT）与 RFQ 用于大额交易（见 block_trade）。B3 为巴西唯一证券交易场所，市场内无独立于 B3 的第三方暗池"
+    en: "B3 operates its own non-displayed matching facility, **Midpoint**: Midpoint orders are matched at the arithmetic mean of the best bid and best offer in the central order book and only against other Midpoint orders, with asset codes formed by the underlying plus the suffix 'M'; a Midpoint order is not displayed in the central order book's Market Data, with trade information disclosed immediately after execution. Book of Block Trade (BBT) and RFQ serve large trades (see block_trade). B3 is Brazil's sole securities trading venue, with no independent third-party dark pool in the market"
+    detail: "本字段『本所自营暗池』一栏 br-b3 为『有』（Midpoint）——与 au-asx（ASX Centre Point）同属少数肯定案例。Midpoint 是独立的非展示撮合池（『M』后缀独立代码、仅同类型互撮），故计入本字段而非 order_book_transparency。逐字引文取自《B3 Trading Procedures Manual》Title II（2024-04-17 版）Midpoint order 一节。"
+    sources:
+      - title: "B3's Trading Procedures Manual — Title II, Midpoint order"
+        url: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf
+        accessed: 2026-09-04
+    quote: "the Midpoint order can match and be matched by orders exclusively of the same type (Midpoint) …… the Midpoint order price is calculated by the trading platform, continuous and automatically, to reflect the arithmetic mean of the price of the best buy order and the price of the best sell order underlying visible in the central order book. …… the Midpoint order is not displayed in the Market Data in the central order book. Disclosure of information via Market Data occurs immediately after the closing of the operations."
+    confidence: high
 
   market_maker_scheme:
     spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "独立/计划内独立/受托做市商三类注册；投资基金亦可注册；批准后 30 日内须履约；逐资产做市商数量上限由 B3 设定；无统一价差上限公布"}

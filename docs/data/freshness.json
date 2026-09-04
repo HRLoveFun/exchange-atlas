@@ -521,6 +521,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "dark_pool",
+      "label_zh": "暗池与场外交易",
+      "label_en": "Dark Pool / OTC",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "au-asx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "market_maker_scheme",
       "label_zh": "做市商制度",
       "label_en": "Market Maker Scheme",
@@ -1859,6 +1871,18 @@
       "volatility": "moderate",
       "verified": "2026-08-16",
       "confidence": "medium"
+    },
+    {
+      "exchange_id": "br-b3",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "dark_pool",
+      "label_zh": "暗池与场外交易",
+      "label_en": "Dark Pool / OTC",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "high"
     },
     {
       "exchange_id": "br-b3",
@@ -10685,6 +10709,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "dark_pool",
+      "label_zh": "暗池与场外交易",
+      "label_en": "Dark Pool / OTC",
+      "volatility": "moderate",
+      "verified": "2026-08-12",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "hk-hkex",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "market_maker_scheme",
       "label_zh": "做市商制度",
       "label_en": "Market Maker Scheme",
@@ -11864,6 +11900,18 @@
       "field_path": "order_book_transparency",
       "label_zh": "订单簿透明度",
       "label_en": "Order Book Transparency",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "in-nse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "dark_pool",
+      "label_zh": "暗池与场外交易",
+      "label_en": "Dark Pool / OTC",
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "medium"
@@ -13181,6 +13229,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "dark_pool",
+      "label_zh": "暗池与场外交易",
+      "label_en": "Dark Pool / OTC",
+      "volatility": "moderate",
+      "verified": "2026-08-13",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "market_maker_scheme",
       "label_zh": "做市商制度",
       "label_en": "Market Maker Scheme",
@@ -14135,6 +14195,18 @@
       "volatility": "moderate",
       "verified": "2026-08-16",
       "confidence": "low"
+    },
+    {
+      "exchange_id": "kr-krx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "dark_pool",
+      "label_zh": "暗池与场外交易",
+      "label_en": "Dark Pool / OTC",
+      "volatility": "moderate",
+      "verified": "2026-08-16",
+      "confidence": "medium"
     },
     {
       "exchange_id": "kr-krx",
@@ -15485,6 +15557,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "dark_pool",
+      "label_zh": "暗池与场外交易",
+      "label_en": "Dark Pool / OTC",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "sa-tadawul",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "market_maker_scheme",
       "label_zh": "做市商制度",
       "label_en": "Market Maker Scheme",
@@ -16820,6 +16904,18 @@
       "field_path": "order_book_transparency",
       "label_zh": "订单簿透明度",
       "label_en": "Order Book Transparency",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "sg-sgx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "dark_pool",
+      "label_zh": "暗池与场外交易",
+      "label_en": "Dark Pool / OTC",
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "medium"
@@ -21011,6 +21107,18 @@
       "volatility": "moderate",
       "verified": "2026-08-13",
       "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "dark_pool",
+      "label_zh": "暗池与场外交易",
+      "label_en": "Dark Pool / OTC",
+      "volatility": "moderate",
+      "verified": "2026-08-13",
+      "confidence": "high"
     },
     {
       "exchange_id": "us-nyse",

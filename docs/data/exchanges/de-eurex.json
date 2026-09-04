@@ -943,8 +943,8 @@
         "spec": null
       },
       "dark_pool": {
-        "zh": "",
-        "confidence": "low",
+        "not_applicable": true,
+        "detail": "『暗池 / 场外交易』是股票市场结构概念——与明盘交易所并列、不提供盘前透明度的非展示撮合场所（ATS / MTF / ALP）。Eurex 为纯衍生品交易所，无现货订单簿、无与之竞争的股票暗池生态，本字段的设计前提不成立。Eurex 的场外／大宗议价成交走 T7 Entry Service（TES，见 block_trade），依 MiFIR 大额（LIS）盘前透明度豁免运作，属场外交易设施而非暗池。按 [ADR-060] 字段级 not_applicable 机制显式标记、移出完成度分母，与本所 intraday_reversal / board_lot_size / odd_lot_handling / price_limits.other_boards 的处理一致（见框架性问题 #17）。",
         "sources": [
           {
             "title": "Conditions for Trading at Eurex Deutschland（官网英文版PDF）",
@@ -953,10 +953,11 @@
           }
         ],
         "verified": "2026-08-27",
+        "confidence": "high",
+        "zh": null,
         "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null
       },
       "market_maker_scheme": {

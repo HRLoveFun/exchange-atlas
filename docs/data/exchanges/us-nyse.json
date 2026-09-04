@@ -909,21 +909,26 @@
         "spec": null
       },
       "dark_pool": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "NYSE 及其关联交易所（Arca / American / National / Chicago）均为明盘交易所，设盘内非展示／中点订单类型但不运营独立暗池。美国的暗池是依 SEC《另类交易系统条例》(Regulation ATS，17 CFR §242.300–304) 注册的另类交易系统（ATS）——须注册为经纪自营商、加入 FINRA、遵守 Reg ATS；NMS 股票 ATS 另须提交 Form ATS-N 公开运营披露（Rule 304）。现有 30 余家 NMS 股票 ATS（如 UBS ATS、MS POOL、Level ATS、IntelligentCross 等），加上批发商内部化，场外成交占美股合并成交量相当大的比重（2014 年 SEC 数据：ATS 约占 NMS 股票美元成交额 18%，单一 ATS 均不超过 5%）；所有场外成交经 FINRA 交易报告设施（TRF）申报，并按 FINRA Rule 4552 逐周分 ATS 披露成交量",
+        "en": "The NYSE and its affiliated exchanges (Arca / American / National / Chicago) are lit exchanges; they offer on-book non-displayed / midpoint order types but do not operate a dark pool. US dark venues are Alternative Trading Systems (ATSs) registered under SEC Regulation ATS (17 CFR §242.300–304) — each must register as a broker-dealer, join FINRA, and comply with Regulation ATS; an NMS Stock ATS must also file Form ATS-N public operational disclosures (Rule 304). Dozens of NMS stock ATSs operate (e.g. UBS ATS, MS POOL, Level ATS, IntelligentCross); combined with wholesaler internalization, off-exchange execution is a large fraction of consolidated US equity volume (2014 SEC data: ATSs ~18% of NMS-stock dollar volume, no single ATS above 5%). All off-exchange trades are reported to a FINRA Trade Reporting Facility (TRF) and per-ATS volume is disclosed weekly under FINRA Rule 4552",
+        "detail": "本字段『本所自营暗池』一栏 us-nyse 为『无』；市场侧的暗池生态是本项目最庞大的（对比亚洲多为『本所与市场均无』）。盘内非展示 / MPL 订单归 order_book_transparency，本字段只记独立 ATS。逐字引文取自 17 CFR §242.300（Reg ATS 对 ATS 的定义）与 SEC 委员 Aguilar《Shedding Light on Dark Pools》(2015) 官方声明。18% 为 2014 年数据点、随时间变动，仅作量级示意。",
         "sources": [
           {
-            "title": "Trading Information（官网）",
-            "url": "https://www.nyse.com/trade/trading-information",
-            "accessed": "2026-08-13"
+            "title": "17 CFR §242.300 — Regulation ATS: definition of 'alternative trading system' (eCFR versioner, title 17 part 242, 2026-08-17)",
+            "url": "https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=242",
+            "accessed": "2026-09-04"
+          },
+          {
+            "title": "SEC — Shedding Light on Dark Pools (Commissioner Luis A. Aguilar, 18 Nov 2015)",
+            "url": "https://www.sec.gov/newsroom/speeches-statements/shedding-light-dark-pools",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "Alternative trading system means any organization, association, person, group of persons, or system: (1) That constitutes, maintains, or provides a market place or facilities for bringing together purchasers and sellers of securities or for otherwise performing with respect to securities the functions commonly performed by a stock exchange within the meaning of § 240.3b-16 of this chapter …… ATSs responded to this need by offering ever more trading on an anonymous basis, and without displaying specific order information before trades occur. …… These types of ATSs have come to be known as \"dark pools.\" …… based on data collected from ATSs pursuant to FINRA Rule 4552 for 18 weeks of trading in 2014, the trading volume of ATSs accounted for approximately 18 percent of the total dollar volume in NMS stocks, with no individual ATS executing more than five percent",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "market_maker_scheme": {
         "spec": {

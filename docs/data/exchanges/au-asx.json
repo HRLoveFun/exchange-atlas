@@ -949,21 +949,26 @@
         "spec": null
       },
       "dark_pool": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "ASX 自营暗池 **ASX Centre Point**：非展示流动性按全国最优买卖价（NBBO）中点匿名撮合，含 Dark Limit、Centre Point Block、Any Price Block、ASX Sweep（先扫暗池再走 TradeMatch 明盘）等订单类型；占 ASX 日均成交量 10% 以上。此外澳洲有独立暗盘场所 Cboe Australia（Cboe Mid-Point / BIDS）及约 20 家券商内部撮合系统。监管：ASIC《市场诚信规则（证券市场）》要求成交须撮合于盘前透明订单簿，Rule 6.2.1 大宗交易为例外——单笔对价不低于 Tier 1 A$100 万 / Tier 2 A$50 万 / Tier 3 A$20 万（逐季按 ADV 分档）方可免盘前透明；低于大宗规模的暗盘成交须较明盘最优价有『实质性价格改善』（2013-05-26 起）",
+        "en": "ASX runs its own dark pool, **ASX Centre Point**: non-displayed liquidity matched anonymously at the mid-point of the National Best Bid and Offer (NBBO), with order types including Dark Limit, Centre Point Block, Any Price Block and ASX Sweep (sweeps the dark pool then routes to the lit TradeMatch book); it accounts for more than 10% of ASX average daily volume. Independent venues also operate: Cboe Australia (Cboe Mid-Point / BIDS) and ~20 broker crossing systems. Regulation: ASIC's Market Integrity Rules (Securities Markets) require matching against a pre-trade-transparent order book, with Rule 6.2.1 (block trades) as the exception — no pre-trade transparency where consideration is at least A$1m (Tier 1) / A$500k (Tier 2) / A$200k (Tier 3), tiered quarterly by ADV; sub-block dark trades must give meaningful price improvement over the lit best price (since 26 May 2013)",
+        "detail": "本字段的『本所自营暗池』一栏 au-asx 是本项目少数肯定案例（对比 us-nyse / hk-hkex / jp-jpx / sg-sgx / kr-krx 均为『本所无、市场有第三方』）。ASX Centre Point 与 ASX 明盘 TradeMatch 原生整合但为独立的非展示撮合系统，故计入本字段（本所订单簿内部的冰山/隐藏单归 order_book_transparency）。Rule 6.2.1 分档具体阈值由 ASIC 逐季在联邦立法登记册公布。",
         "sources": [
           {
-            "title": "Cash market trading hours（ASX 官网）",
-            "url": "https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours",
-            "accessed": "2026-08-14"
+            "title": "ASX Centre Point — customer brochure (BEM-3683, content correct as at March 2025)",
+            "url": "https://www.asx.com.au/content/dam/asx/participants/trading-platforms/centre-point/asx-centre-point-customer-brochure.pdf",
+            "accessed": "2026-09-04"
+          },
+          {
+            "title": "ASIC — Block trade tiers (Market Integrity Rules (Securities Markets) Rule 6.2.1)",
+            "url": "https://asic.gov.au/regulatory-resources/markets/market-structure/block-trade-tiers/",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "ASX Centre Point, Australia's largest anonymous mid-point execution venue …… ASX Centre Point is Australia's only dark pool matching system which can offer true integration with the lit market without …… towards more than 10% of average daily volumes. …… Non-displayed liquidity matched at the mid-point of the National Best Bid and …… This exception allows a transaction to be executed without pre-trade transparency where the consideration for the transaction is not less than: $1 million or more for Tier 1 equity market products $500,000 or more for Tier 2 equity market products, and $200,000 or more for Tier 3 equity market products and CGS depository interests.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "market_maker_scheme": {
         "spec": {

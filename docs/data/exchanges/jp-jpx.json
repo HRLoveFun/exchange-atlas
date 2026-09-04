@@ -1196,21 +1196,21 @@
         "spec": null
       },
       "dark_pool": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "东证（TSE）本身不运营暗池；ToSTNeT 为场外申报成交（见 block_trade），非非展示撮合。日本的场外场所是《金融商品交易法》(FIEA) 下的『私设交易系统』（PTS）。2025 年 8 月底 Cboe Japan（原 Chi-X Japan，2021 年收购进入）终止 PTS 业务后，日本已无独立的多边 PTS——TSE 实际上成为唯一汇集广泛券商订单的多边撮合场所；其余为券商内部化 PTS 与自营暗池（SBI 证券 2024-04 上线的『SBI Cross』、乐天证券的『R-Cross』），SBI Japannext 亦属 SBI 关联的 PTS。信用交易依 FSA 规则不得在暗池执行。PTS 份额约由 2021 年 8.8% 升至 2025 上半年 12.2%，暗池由 3.1% 升至 5.0%",
+        "en": "TSE itself operates no dark pool; ToSTNeT is off-auction reported trading (see block_trade), not non-displayed matching. Japan's off-exchange venues are Proprietary Trading Systems (PTS) under the Financial Instruments and Exchange Act (FIEA). After Cboe Japan (formerly Chi-X Japan, which entered via acquisition in 2021) terminated its PTS at the end of August 2025, no independent multilateral PTS remains — TSE has effectively become the only multilateral venue matching a wide range of brokers' orders; the rest are broker-internalized PTS and proprietary dark pools (SBI Securities' 'SBI Cross', launched April 2024; Rakuten Securities' 'R-Cross'), with SBI Japannext also an SBI-affiliated PTS. Margin trades cannot legally execute in dark pools under FSA rules. PTS market share rose from ~8.8% (2021) to 12.2% (H1 2025), dark pools from 3.1% to 5.0%",
+        "detail": "本字段『本所自营暗池』一栏 jp-jpx 为『无』。引文取自日本証券経済研究所（JSRI）2025-11 报告——JSRI 是证券业研究机构，按 CLAUDE.md 二第3条 confidence 封顶 medium。PTS 运营须 FIEA 第一种金融商品取引业许可、并受市场份额上限（历史约每股 10% / 全市场 20%）约束，此项细则本次未逐字缓存。",
         "sources": [
           {
-            "title": "Business Regulations（TSE官网英文版PDF）",
-            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
-            "accessed": "2026-08-13"
+            "title": "JSRI — The Implications of Cboe Japan's Withdrawal: Structural Changes in Japan's Stock Market（Manabu Morimoto, 2025-11）",
+            "url": "https://www.jsri.or.jp/upload/topics_2511_01_en.pdf",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "At the end of August, Cboe Japan terminated its PTS—equivalent to the United States' ATS—operations in Japan. …… With Cboe Japan's withdrawal, there are no longer any independent PTSs in Japan. This means that TSE has effectively become the only multilateral venue matching orders from a wide range of broker-dealers. …… Currently, SBI Securities and Rakuten Securities execute margin trades primarily on internalized PTSs and cash equity trades through dark pools because margin trading cannot legally be executed in dark pools under FSA rules. …… began executing its own orders in its proprietary dark pool called \"SBI Cross\" (in April). Rakuten Securities had already been executing through its own dark pool (\"R-Cross\") …… PTS and dark pool market shares have risen sharply (from 8.8% → 12.2% for PTSs and 3.1% → 5.0% for dark pools between 2021 and 2025 (Jan–Jun))",
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "market_maker_scheme": {
         "spec": {

@@ -1003,21 +1003,21 @@
         "spec": null
       },
       "dark_pool": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "HKEX 本身不运营暗池。香港的暗盘由券商／银行运营，称『另类流动性池』（Alternative Liquidity Pool, ALP）——即不提供盘前透明度的电子成交场所。监管：运营者须向证监会（SFC）申领《证券及期货条例》(SFO) 第 V 部下的牌照（现行为第 1 类『证券交易』+ 第 7 类『提供自动化交易服务』），受《操守准则》约束、仅限『合资格投资者』（机构／专业投资者，不含个人）接入；交易所参与者向联交所（SEHK）申报港股暗盘成交时须标记为『ALP』，SEHK 自 2012-10-03 起在其规则中强制此项",
+        "en": "HKEX does not operate a dark pool. Hong Kong's dark venues are broker/bank-operated Alternative Liquidity Pools (ALPs) — electronic venues that provide no pre-trade transparency. Regulation: operators must be licensed by the SFC under Part V of the Securities and Futures Ordinance (SFO) (currently Type 1 'dealing in securities' plus Type 7 'providing automated trading services'), are bound by the Code of Conduct, and may admit only 'Qualified Investors' (institutional/professional investors, not individuals); Exchange Participants must flag Hong Kong-stock ALP trades as 'ALP' when reporting to SEHK, which SEHK has mandated in its Rules since 3 October 2012",
+        "detail": "本字段『本所自营暗池』一栏 hk-hkex 为『无』，市场侧有多个券商 ALP。逐字引文取自财经事务及库务局局长 2012-11-28 立法会书面答复（LCQ15）——该文确立 SFC 第 V 部发牌 + ALP 强制标记（2012-10-03 起）两项核心制度；『第 7 类牌照』与『合资格投资者仅限机构』的细化见 SFC《操守准则》第 19 段及附表 8（2015-12-01 起生效，本次未逐字缓存），故整体 confidence: medium。2012 年时暗盘约占港股成交 2.2%。",
         "sources": [
           {
-            "title": "Trading Hours - Securities Market（HKEX 官网）",
-            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
-            "accessed": "2026-08-12"
+            "title": "LCQ15: Regulation of dark pool trading（香港政府新闻公报，2012-11-28，财经事务及库务局局长书面答复）",
+            "url": "https://www.info.gov.hk/gia/general/201211/28/P201211280278.htm",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "Dark pools, as alternative trading platforms to public securities exchanges, allow financial institutions to trade large volume of shares, away from the eyes of the public, in anonymity and with lower trading fees. …… Under our regulatory system, dark pool operators are required to apply to the Securities and Futures Commission (SFC) for licences under Part V of the Securities and Futures Ordinance (SFO). …… exchange participants are required to flag all dark pool transactions in Hong Kong stocks as \"ALP\" (Alternative Liquidity Pool) when they report such transactions to SEHK. Since October 3, 2012, SEHK has mandated such reporting requirement in its Rules.",
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "market_maker_scheme": {
         "spec": {
