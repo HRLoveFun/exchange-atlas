@@ -167,7 +167,7 @@ case("ledger 计数：缺登记 + 缺口 → 2 条消息",
 
 
 # ══════════════════════════════════════════════════════════════
-# [ADR-070] OTP 来源登记格式：validate.otp_line_violations(sources_text)
+# [ADR-072] OTP 来源登记格式：validate.otp_line_violations(sources_text)
 #   —— 复用 fetch.py 的 OTP_LINE_RE/URL_RE 解析同一份正则，一行 [OTP] 必须恰好 2 个 URL。
 # ══════════════════════════════════════════════════════════════
 def _otp_bad(text):

@@ -130,7 +130,7 @@ def manifest_map(ex):
     体落盘、manifest 里标 `ok: false`（保留失败痕迹供排查）。这类文件不是"真正抓到的原文"，
     若混进这里，quote 反查会拿一段 403 错误页/Cloudflare 拦截页当来源正文比对，把本该是
     信息性的 CACHE_MISS 错判成阻断构建的 FAIL——PROJECT/SOURCES.md「fetch_sources 全量
-    重跑会用抓取失败页覆盖已有好缓存」记的就是这个坑，这里在消费侧堵上（[ADR-070]）。
+    重跑会用抓取失败页覆盖已有好缓存」记的就是这个坑，这里在消费侧堵上（[ADR-072]）。
 
     `via` 保留给调用方区分 "live"（当次直连拿到）vs "wayback"（历史快照，见 tools/fetch.py
     的 wayback_snapshot）——wayback 快照可能明显滞后于当次数据录入时的官网原文（实测

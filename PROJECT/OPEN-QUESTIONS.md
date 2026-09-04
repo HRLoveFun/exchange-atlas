@@ -122,6 +122,7 @@
   - `kr-krx`：Nextrade（NXT，2025-03-04 开业）『中间价申报』是否构成独立非展示订单簿，NXT 官方市场规则未确认；ATS 的 FSCMA 市场份额上限具体数值未逐字缓存。
   - `jp-jpx`：引日本証券経済研究所（JSRI）2025-11 报告（第三方，封顶 medium）；PTS 的 FIEA 许可与市场份额上限细则待抓 FSA / JSDA。
   - `in-nse`：SEBI 无单句『禁止暗池』的正面表述，禁止性靠《证券合约（监管）法》结构 + 一贯监管实践推得。**并附一条勘误**：多篇二手文章称『NSE Alpha 是印度唯一合法暗池 / NSE 2010 年推出暗池框架』，本次遍查 NSE / SEBI 一手资料无任何依据，判为不实，`in-nse.yml` 已按『印度不允许暗池』填写。
+- **[任务五] `kr-krx price_limits.other_boards`（KONEX 涨跌停幅度）仍未确认（2026-09-05）。** 找到 `global.krx.co.kr`『Regulation ‧ Stocks ‧ KONEX Market ‧ Trading』正文页（`GLB0602030101.jsp`，已登记 SOURCES.md），明文列出「trading hours, market holidays, trading halts, trading methods, restrictions on short-selling, clearing and settlement, and good faith deposit are the same as the KOSDAQ market」——**枚举清单里没有 price limit / 涨跌停字样**，不足以支撑「KONEX = KOSDAQ ±30%」这一具体断言（哪怕看起来像是同一批交易细则）；如实不填，维持 `confidence: low`。**待补**：KONEX 专属交易规则文本（非 KOSPI/KOSDAQ 通用指南）里对涨跌停幅度的正面陈述。
 <!-- BEGIN:GENERATED auto-issues -->
 - `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `br-b3` 基本信息 / 夏令时规则（dst_rule）— confidence: low
@@ -156,13 +157,11 @@
 - `kr-krx` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 错误交易处理规则（error_trade_rule）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low
-- `kr-krx` 市场结构与交易机制 / 做市商制度（market_maker_scheme）— confidence: low
 - `kr-krx` 市场数据与技术基础设施 / 实时/延时（data_latency）— confidence: low
 - `kr-krx` 市场数据与技术基础设施 / 数据收费模式（data_pricing_model）— confidence: low
 - `kr-krx` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `kr-krx` 交易成本与税费 / 佣金结构（commission_structure）— confidence: low
 - `kr-krx` 交易成本与税费 / 清算费用（clearing_fees）— confidence: low
-- `kr-krx` 交易成本与税费 / 股息预扣税（dividend_withholding_tax）— confidence: low
 - `kr-krx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `kr-krx` 风险与特殊考量 / 市场操纵与监管执法环境（enforcement_note）— confidence: low
 - `sa-tadawul` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low

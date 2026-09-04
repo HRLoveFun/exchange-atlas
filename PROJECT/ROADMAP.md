@@ -215,10 +215,13 @@
   - **目标**：`us-nyse`(15) / `hk-hkex`(13) / `uk-lse`(13) / `cn-sse`(11) / `jp-jpx`(9)（+`de-eurex` 11 / `fr-euronext` 10 / `in-nse` 10 视精力）F 桶清零到 ✅ / 显式不适用，达到 `za-jse` 的「全章 ✅、0 low」基准。图鉴主视图讲「一眼看懂一个市场」，最该完整的恰是这几家——ROADMAP 已承认、未排期的欠账。
   - **步骤**：逐所过字段清单，`make fetch` 补抓，重点监管细节（`foreign_ownership_limit` / `capital_controls` / `clearing_regulator`）、成本税费（`stamp_duty` / `capital_gains_tax` / `dividend_withholding_tax`）、`csd_name`；每所一个 commit。
   - **验收**：每所抽检 10 字段（历史惯例）；`make build` 全绿。
-- [ ] **任务五 · 抓取基础设施修复**（按触发点，`kr-krx` 随成本瀑布残差一起）
+- [x] **任务五 · 抓取基础设施修复**（2026-09-05 完成 ①②，[ADR-072]；不做 ③，理由见下）
   - **目标**：① `kr-krx` 13 处 low（`infrastructure` + `costs` 簇）中可升级的升到 medium/high；② `za-jse` 来源重新落盘、`verify_quotes` 能离线覆盖（当前 `.cache/za-jse` 仅 1 文件、manifest-ok 0）；③ `make check` 在 stale 字段数 > 0 时输出清单（warning、不阻断）。
-  - **步骤**：① 给 `tools/fetch.py` 加通用 OTP-AJAX 两步抓取（`GenerateOTP.jspx` 换一次性 code → 带 code POST 数据端点，接口细节见 `PROJECT/OPEN-QUESTIONS.md` 的 `kr-krx` KOSDAQ 指数基日一条）；`kr-krx` 单点不划算则回退降级方案（人工提供 KRX 收费表 / 指数方法论 PDF）。② `make fetch-sources EX=za-jse` 重收割，失败查 `PROJECT/SOURCES.md` `za-jse` 节。③ `tools/validate.py` 加 stale 清单输出；复核节奏是否固化进 `CLAUDE.md` §八 待此时评估（宪法改动走 §一 程序）。
-  - **验收**：`kr-krx` `verify_quotes` 新增 OK 条数 > 0；`za-jse` CACHE_MISS 大幅下降；stale 输出探针通过。
+  - **结果**：动手前先探明云环境（数据中心 IP）可达性——**KRX 数据端点对数据中心 IP 封锁**（`GenerateOTP` 换 code 能通，带 code 的数据端点一律拒绝：`data.krx.co.kr` 返回字面量 `LOGOUT`、`eindex.krx.co.kr` 302 跳 `SiteSearch.jsp`）；`jse.co.za` 一如既往 Cloudflare 403，但 `web.archive.org` 的 CDX + `id_` 原始快照可用。据此：
+    - **① `tools/fetch.py` 加 `[OTP]` 两步抓取**（SOURCES.md 登记行含 `[OTP]` 标记，前两个 URL 依次是 GenerateOTP 端点 + 数据端点）+ **通用 wayback 回退**（403/拦截页时自动查最近 200 快照重试，`fetch_sources.py` 复用）；`validate.py`/`selfcheck.py` 加 `[OTP]` 行格式机器校验（selfcheck 43→48）。`kr-krx` 2 处 low 坐实：`market_maker_scheme`（ETF LP 制度双边报价 + 1% 价差比例豁免线，`confidence: high`）、`dividend_withholding_tax`（PwC 预提税率表，坐实原有"22%"推算链 + 纠正"美韩协定10%"为表内真实"10/15%"，`confidence: medium`）；`price_limits.other_boards`（KONEX 涨跌停）判定**不填**——找到的官网正文枚举 KONEX 交易安排"与 KOSDAQ 相同"但清单不含 price limit 字样，据此断言具体幅度是过度推断，如实记 OPEN-QUESTIONS。其余 8 处 low 未命中承载正文的页面，`fx_risk_note`/`enforcement_note` 已转 [ADR-066] 分棒①。
+    - **② `.cache/za-jse/` 重建**：`verify_quotes` 全库 CACHE_MISS 77→39（za-jse 一家 70→36）、OK 1023→1062、FAIL 全程 0；`jse.co.za` 官网本身仍不可达，重建的是离线核对覆盖率，非重新核实数据，`data/` 零改动。**顺带修 `verify_quotes.py` 两处消费侧回归**（有了 wayback 回退才暴露）：`manifest_map` 原不看 `ok` 字段，把 404 错误页当正文核对，挖出一个真实假阳性（`au-asx infrastructure.access_methods`，已修复降级为 CACHE_MISS）；wayback 快照可能明显滞后官网原文（za-jse 一处仅 2020 年归档）导致假 FAIL，现降级规则：未命中时只有"当次直连"来源也确认没有才判 FAIL。
+    - **不做 ③**：本棒探明的真正瓶颈是抓取能力边界（KRX 封锁 / JSE 全站 Cloudflare），stale 清单是独立小功能、不依赖此发现，留给下次单独排期。
+  - **验收**：`make build` 全绿（`selfcheck` 48/48、`validate` 20/0、`verify_quotes` FAIL=0、6 处生成块零 diff）；人工核对 2 处 kr-krx `quote` 与落盘原文逐字一致（2/2，远低于第二人复核门槛）。已知局限：OTP 数据步骤端到端成功路径（住宅 IP）本次环境无法验证，仅验证机制正确接线；kr-krx 剩 8 处 low 待人工投喂。
 
 ### 广度扩张（新增交易所，原「Phase 4 · Wave 3」）——按需可选能力，非计划阶段
 

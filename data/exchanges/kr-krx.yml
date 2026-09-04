@@ -557,14 +557,20 @@ market_structure:
     confidence: medium
 
   market_maker_scheme:
-    spec: {present: true, quote_obligation: null, max_spread_pct: null, note: "官网确认存在「流动性提供者」（LP）制度（ETF 另有专门 LP System）；具体资格与义务本次未展开抓取"}
-    zh: "官网栏目中确认存在「流动性提供者」（Liquidity Provider, LP）制度（ETF另有专门的LP System栏目），具体资格与义务本次未展开抓取"
-    en: "The official site confirms a Liquidity Provider (LP) scheme exists (ETFs have a dedicated LP System section), but specific qualification and obligation details were not fetched this session"
+    spec: {present: true, quote_obligation: true, max_spread_pct: 1, note: "仅 ETF：『流动性提供者』(LP) 制度，须原则上双边报价；单边报价足以使市场价差比例落入 1% 以内时可豁免另一侧报价义务。现货股票市场本身无一般性做市商安排"}
+    zh: "现货股票市场无场内一般性做市商制度；ETF 另设「流动性提供者」（Liquidity Provider, LP）制度：LP 原则上须同时提交买卖双边报价，若仅提交单边报价即可使市场价差比例落入 1% 以内，可豁免提交另一侧报价；市场价差比例超标或未履行报价义务达一定频次，交易所可要求基金管理公司更换 LP。"
+    en: "The cash equity market has no general on-exchange market-maker scheme; ETFs have a separate Liquidity Provider (LP) scheme: in principle an LP must submit both bid and ask quotes, but may submit only one side if that already keeps the market spread ratio within 1%; if the spread-ratio requirement is breached or quoting obligations are unmet beyond a set frequency, the Exchange may require the fund management company to change the LP."
+    detail: "低置信度已解除——官网『Equity Product ‧ ETF Trading ‧ Trading System/Settlement System ‧ LP System』正文给出具体义务与阈值（双边报价原则 + 1% 价差比例豁免线 + 违规频次触发换 LP），此前只在栏目导航里看到『Liquidity provider』字样、未展开抓取正文。现货股票市场本身仍无一般性做市商安排（与 execution_model 的订单驱动定性一致）。最小/最大申报数量（100股 / 上市份额5%或1亿股）等细节量本次未纳入 zh，避免与 spec 定义的两键（quote_obligation/max_spread_pct）之外的数字堆砌。"
     sources:
       - title: Regulation ‧ Stocks ‧ KOSPI Market ‧ Market Operation and Management（KRX官网英文版，栏目导航含"Liquidity provider"）
         url: https://global.krx.co.kr/contents/GLB/06/0602/0602010204/GLB0602010204.jsp
         accessed: 2026-08-16
-    confidence: low
+      - title: Equity Product ‧ ETF Trading ‧ Trading System/Settlement System ‧ LP System（KRX官网英文版，ETF流动性提供者制度正文）
+        url: https://global.krx.co.kr/contents/GLB/06/0605/0605010102/GLB0605010102.jsp
+        accessed: 2026-09-05
+    quote: "In principle, an LP should submit both ask and bid prices at a time, but if the market spread ratio may fall into 1% or less with only one-way quotation (either ask or bid) submitted by the LP, the LP doesn't necessarily need to submit quotations for the other side."
+    confidence: high
+    verified: 2026-09-05
 
   connect_schemes:
     zh: "无沪港通式的跨境股票互联互通机制。KRX 曾就自身上市衍生品与境外交易所设夜盘联动：CME-linked trading（2009–2020 年 4 月）、Eurex-linked trading（2010–2025 年 6 月 5 日），两者均已终止，KRX 自 2025 年 6 月起自主运营夜盘。现无跨所联动；境外投资者按 IRC / LEI 登记通过持牌会员接入现货市场"
@@ -1391,14 +1397,16 @@ costs:
     confidence: medium
 
   dividend_withholding_tax:
-    zh: "股息预扣税：非居民收到的韩国股息，法定预扣税率22%（20%所得税+10%地方税）；依据税收协定可降至10%或15%（如韩美协定10%）。居民个人可选择分离计税，股息分离税率14%+1.4%≈15.4%（另有并入综合所得申报选项）。本次未从原始来源抓取逐项核实，数值为通用认知，建议以OECD/KRX税制页复核。"
-    en: "Dividend withholding tax: non-residents receiving Korean dividends face a statutory withholding of 22% (20% income tax + 10% local surtax); tax treaties reduce this to 10% or 15% (e.g. Korea–US treaty 10%). Resident individuals may elect separate taxation at 14% + 1.4% local ≈ 15.4% (or include in global income). This was not verified from a primary source this session; figures reflect general knowledge and should be re-checked against OECD/KRX tax pages."
+    zh: "股息预扣税：居民公司间股息 WHT 0%、居民个人 14%（另按 WHT 税额加计 10% 地方所得税，即约 14%+1.4%≈15.4%，可选并入综合所得申报）；非居民（无税收协定）股息国内法定 WHT 税率 20%，加计 10% 地方所得税后合计约 22%。依税收协定可降低，具体税率依协定国而异（如韩美协定股息 10%/15%，依 10% 持股门槛区分）。"
+    en: "Dividend withholding tax: dividends to resident corporations face 0% WHT, to resident individuals 14% (plus a local income tax equal to 10% of the WHT liability, i.e. roughly 14%+1.4%≈15.4% combined, with an option to file as global income); non-resident, non-treaty dividends face a domestic statutory WHT of 20%, plus the 10% local-income-tax add-on for a combined ~22%. Tax treaties can reduce this, with the rate varying by treaty country (e.g. the Korea–US treaty applies 10%/15% depending on a 10% ownership threshold)."
+    detail: "低置信度已解除——PwC Worldwide Tax Summaries『Korea, Republic of - Corporate - Withholding taxes』页（as of January 2026）给出完整税率表：非居民非协定股息 WHT 表内数字为 20%（国内法定税率本身，未含地方所得税），页面『Notes』段另说明按 WHT 税额加计 10% 地方所得税（20%×1.1=22%），与既有 zh 原有的『22%』表述吻合、非冲突——本次坐实了这条推算链的一手依据。原 zh『美韩协定10%』的单一数字不准确，表内美国行实为『10/15』（依 10% 持股门槛区分税率），已改写。第三方来源（PwC 税务简报），confidence 封顶 medium（CLAUDE.md 二第3条）。"
     sources:
-      - title: Korea — Withholding tax overview（通用税制综述，非一手来源）
-        url: https://www.kchipnews.com/
-        accessed: 2026-08-27
-    quote: ""
-    confidence: low
+      - title: "Korea, Republic of - Corporate - Withholding taxes（PwC Worldwide Tax Summaries）"
+        url: https://taxsummaries.pwc.com/republic-of-korea/corporate/withholding-taxes
+        accessed: 2026-09-05
+    quote: "Recipient WHT (%) Dividends Interest Royalties Resident corporations (1) 0 14/25 0 Resident individuals (1) 14 14/25 0 …… Non-treaty (2) 20 0/14/20 (34) 20 (36) …… In addition to the indicated tax rate, a local income tax is charged at a rate of 10% of the WHT rate. …… United States (2) 10/15 (28) 12 (35) 10/15 (29)"
+    confidence: medium
+    verified: 2026-09-05
 
   implicit_costs_note:
     zh: "隐性成本（买卖价差、市场冲击）方面：韩国市场散户主导、个股流动性分化大——大盘蓝筹（三星电子等）价差窄、冲击成本低；大量小盘/创业板(KOSDAQ)个股流动性差、价差宽、冲击成本高。2025年改革引入市价单最低执行比率(skim)等机制以缓解极端波动下的隐性成本。整体隐性成本高于以机构为主的市场。"

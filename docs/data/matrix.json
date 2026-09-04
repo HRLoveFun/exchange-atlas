@@ -5032,13 +5032,13 @@
       "field_path": "market_maker_scheme",
       "label_zh": "做市商制度",
       "label_en": "Market Maker Scheme",
-      "zh": "官网栏目中确认存在「流动性提供者」（Liquidity Provider, LP）制度（ETF另有专门的LP System栏目），具体资格与义务本次未展开抓取",
-      "en": "The official site confirms a Liquidity Provider (LP) scheme exists (ETFs have a dedicated LP System section), but specific qualification and obligation details were not fetched this session",
+      "zh": "现货股票市场无场内一般性做市商制度；ETF 另设「流动性提供者」（Liquidity Provider, LP）制度：LP 原则上须同时提交买卖双边报价，若仅提交单边报价即可使市场价差比例落入 1% 以内，可豁免提交另一侧报价；市场价差比例超标或未履行报价义务达一定频次，交易所可要求基金管理公司更换 LP。",
+      "en": "The cash equity market has no general on-exchange market-maker scheme; ETFs have a separate Liquidity Provider (LP) scheme: in principle an LP must submit both bid and ask quotes, but may submit only one side if that already keeps the market spread ratio within 1%; if the spread-ratio requirement is breached or quoting obligations are unmet beyond a set frequency, the Exchange may require the fund management company to change the LP.",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
-      "verified": "2026-08-16",
-      "confidence": "low"
+      "has_detail": true,
+      "verified": "2026-09-05",
+      "confidence": "high"
     },
     {
       "exchange_id": "kr-krx",
