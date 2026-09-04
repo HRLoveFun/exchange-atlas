@@ -918,11 +918,11 @@
     auc(opnS, "opening_mechanism", t("开盘竞价", "Opening auction"));
     auc(clsS, "closing_mechanism", t("收盘竞价", "Closing auction"));
 
-    // ── 临时停牌：顶边斜纹条（ADR-035 A："任意时刻"斜纹条）──
+    // ── 临时停牌：顶边斜纹条（ADR-035 A："任意时刻"斜纹条；文案居中，ADR-073）──
     if (ms.trading_halt_mechanism && ms.trading_halt_mechanism.zh) {
       g.push(tdCell(id, "trading_halt_mechanism",
         '<rect x="' + PL + '" y="' + (PT + 1) + '" width="' + pw + '" height="9" fill="url(#tdHalt)"/>' +
-        '<text x="' + (PL + 5) + '" y="' + (PT + 8.5) + '" class="td-inl" fill="var(--fg-muted)">' +
+        '<text x="' + n(PL + pw / 2) + '" y="' + (PT + 8.5) + '" class="td-inl" fill="var(--fg-muted)" text-anchor="middle">' +
           t("临时停牌可发生于任意时刻", "Temporary halts may occur at any time") + '</text>',
         tdFieldLabel("trading_halt_mechanism")));
     }
@@ -942,13 +942,26 @@
         tdTip("intraday_reversal", dv(ir) || "")));
     }
 
-    // ── 网格 + 轴刻度 ──
+    // ── 网格 + 轴刻度（零轴刻度直接标参考价名称，取代无信息量的"0%"；
+    //    轴含义已在顶栏工具条说明，不再重复"0 = …"内嵌批注，见 ADR-073）──
     var yStep = yR <= 8 ? 2 : yR <= 16 ? 4 : yR <= 30 ? 5 : 10;
     for (var p = -Math.floor(yR / yStep) * yStep; p <= yR; p += yStep) {
       var yy2 = Y(p), zero = p === 0;
       g.push('<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(yy2) + '" y2="' + n(yy2) + '" stroke="var(--border)" stroke-width="' + (zero ? 1.5 : 0.5) + '"' + (zero ? "" : ' opacity="0.55"') + '/>');
-      g.push('<text x="' + (PL - 8) + '" y="' + n(yy2 + 3.5) + '" class="td-tick" text-anchor="end">' + (p > 0 ? "+" : "") + p + '%</text>');
-      if (zero) g.push('<text x="' + (PL + 6) + '" y="' + n(yy2 - 5) + '" class="td-wl-sub">' + t("0 = ", "0 = ") + esc(yRef) + "</text>");
+      if (!zero) {
+        g.push('<text x="' + (PL - 8) + '" y="' + n(yy2 + 3.5) + '" class="td-tick" text-anchor="end">' + (p > 0 ? "+" : "") + p + '%</text>');
+      } else {
+        // 参考价名称按空格拆两行防溢出（英文长词组，如 "previous settlement"）；
+        // 中文无空格恒单行。
+        var refWords = String(yRef).split(" ");
+        if (refWords.length < 2) {
+          g.push('<text x="' + (PL - 8) + '" y="' + n(yy2 + 3.5) + '" class="td-tick td-tick-0" text-anchor="end">' + esc(yRef) + '</text>');
+        } else {
+          var refMid = Math.ceil(refWords.length / 2);
+          g.push('<text x="' + (PL - 8) + '" y="' + n(yy2 - 1.5) + '" class="td-tick td-tick-0" text-anchor="end">' + esc(refWords.slice(0, refMid).join(" ")) + '</text>' +
+            '<text x="' + (PL - 8) + '" y="' + n(yy2 + 8.5) + '" class="td-tick td-tick-0" text-anchor="end">' + esc(refWords.slice(refMid).join(" ")) + '</text>');
+        }
+      }
     }
 
     // ── 机制核心面板（ADR-055）：第五章七项机制事实（价格约束结论句 + 撮合/订单类型/
@@ -983,11 +996,10 @@
         t("交易时段钟点未结构化——见档案页「市场结构与交易机制」章", "Session times not structured — see the Market Structure &amp; Trading Mechanism chapter of the profile") + '</text>');
     }
 
-    // ── 标题 / 轴名 ──
+    // ── 标题 / 轴名（y 轴标题已删——"涨跌幅 %"与参考价已由 % 刻度 + 零轴刻度本身表达，
+    //    顶栏工具条另有一句完整口径，ADR-073）──
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
     g.push('<text x="' + PL + '" y="' + (PT - 40) + '" class="td-title">' + esc(exName) + t(" · 市场机制剖面", " · Market Mechanics Profile") + "</text>");
-    g.push('<text transform="translate(15,' + n(PT + ph / 2) + ') rotate(-90)" class="td-axis-name" text-anchor="middle">' +
-      t("涨跌幅 %（相对" + yRef + "）", "% change (vs " + yRef + ")") + "</text>");
     g.push('<text x="' + n(PL + pw / 2) + '" y="' + (H - 5) + '" class="td-axis-name" text-anchor="middle">' +
       t("日内时间（当地）", "Time of day (local)") + "</text>");
 
