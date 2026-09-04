@@ -337,7 +337,7 @@
       html += '<div class="archive-layout"><nav class="archive-nav">';
       chapters.forEach(function (c) {
         html += '<button type="button" class="' + (c.id === activeCh ? "active" : "") + '" data-role="goto-chapter" data-ch="' + esc(c.id) + '">' +
-          esc(c.chapter_no) + ". " + esc(c.label_zh) + "<br><span style=\"font-size:10.5px;opacity:.65\">" + esc(c.label_en) + "</span></button>";
+          esc(c.label_zh) + "<br><span style=\"font-size:10.5px;opacity:.65\">" + esc(c.label_en) + "</span></button>";
       });
       html += "</nav>";
 
@@ -696,7 +696,7 @@
     var pt = getByPath(ms, "price_limits.type");
     if (pt && pt.enum) return enumDisplay("price_limit_type", pt.enum);
     if (pt && pt.zh) return dv(pt);
-    return t("价格约束未结构化——见档案页第五章", "Price constraints not structured — see Chapter 5 of the profile");
+    return t("价格约束未结构化——见档案页「市场结构与交易机制」章", "Price constraints not structured — see the Market Structure & Trading Mechanism chapter of the profile");
   }
 
   function renderTradingDay(app, params) {
@@ -918,11 +918,11 @@
     auc(opnS, "opening_mechanism", t("开盘竞价", "Opening auction"));
     auc(clsS, "closing_mechanism", t("收盘竞价", "Closing auction"));
 
-    // ── 临时停牌：顶边斜纹条（ADR-035 A："任意时刻"斜纹条）──
+    // ── 临时停牌：顶边斜纹条（ADR-035 A："任意时刻"斜纹条；文案居中，ADR-073）──
     if (ms.trading_halt_mechanism && ms.trading_halt_mechanism.zh) {
       g.push(tdCell(id, "trading_halt_mechanism",
         '<rect x="' + PL + '" y="' + (PT + 1) + '" width="' + pw + '" height="9" fill="url(#tdHalt)"/>' +
-        '<text x="' + (PL + 5) + '" y="' + (PT + 8.5) + '" class="td-inl" fill="var(--fg-muted)">' +
+        '<text x="' + n(PL + pw / 2) + '" y="' + (PT + 8.5) + '" class="td-inl" fill="var(--fg-muted)" text-anchor="middle">' +
           t("临时停牌可发生于任意时刻", "Temporary halts may occur at any time") + '</text>',
         tdFieldLabel("trading_halt_mechanism")));
     }
@@ -942,13 +942,26 @@
         tdTip("intraday_reversal", dv(ir) || "")));
     }
 
-    // ── 网格 + 轴刻度 ──
+    // ── 网格 + 轴刻度（零轴刻度直接标参考价名称，取代无信息量的"0%"；
+    //    轴含义已在顶栏工具条说明，不再重复"0 = …"内嵌批注，见 ADR-073）──
     var yStep = yR <= 8 ? 2 : yR <= 16 ? 4 : yR <= 30 ? 5 : 10;
     for (var p = -Math.floor(yR / yStep) * yStep; p <= yR; p += yStep) {
       var yy2 = Y(p), zero = p === 0;
       g.push('<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(yy2) + '" y2="' + n(yy2) + '" stroke="var(--border)" stroke-width="' + (zero ? 1.5 : 0.5) + '"' + (zero ? "" : ' opacity="0.55"') + '/>');
-      g.push('<text x="' + (PL - 8) + '" y="' + n(yy2 + 3.5) + '" class="td-tick" text-anchor="end">' + (p > 0 ? "+" : "") + p + '%</text>');
-      if (zero) g.push('<text x="' + (PL + 6) + '" y="' + n(yy2 - 5) + '" class="td-wl-sub">' + t("0 = ", "0 = ") + esc(yRef) + "</text>");
+      if (!zero) {
+        g.push('<text x="' + (PL - 8) + '" y="' + n(yy2 + 3.5) + '" class="td-tick" text-anchor="end">' + (p > 0 ? "+" : "") + p + '%</text>');
+      } else {
+        // 参考价名称按空格拆两行防溢出（英文长词组，如 "previous settlement"）；
+        // 中文无空格恒单行。
+        var refWords = String(yRef).split(" ");
+        if (refWords.length < 2) {
+          g.push('<text x="' + (PL - 8) + '" y="' + n(yy2 + 3.5) + '" class="td-tick td-tick-0" text-anchor="end">' + esc(yRef) + '</text>');
+        } else {
+          var refMid = Math.ceil(refWords.length / 2);
+          g.push('<text x="' + (PL - 8) + '" y="' + n(yy2 - 1.5) + '" class="td-tick td-tick-0" text-anchor="end">' + esc(refWords.slice(0, refMid).join(" ")) + '</text>' +
+            '<text x="' + (PL - 8) + '" y="' + n(yy2 + 8.5) + '" class="td-tick td-tick-0" text-anchor="end">' + esc(refWords.slice(refMid).join(" ")) + '</text>');
+        }
+      }
     }
 
     // ── 机制核心面板（ADR-055）：第五章七项机制事实（价格约束结论句 + 撮合/订单类型/
@@ -980,14 +993,13 @@
     } else {
       g.push('<rect x="' + PL + '" y="' + ry + '" width="' + pw + '" height="' + rh + '" rx="2" fill="var(--border)" opacity="0.4"/>');
       g.push('<text x="' + (PL + 6) + '" y="' + (ry + 11) + '" class="td-rib" fill="var(--fg-muted)">' +
-        t("交易时段钟点未结构化——见档案页第五章", "Session times not structured — see Chapter 5 of the profile") + '</text>');
+        t("交易时段钟点未结构化——见档案页「市场结构与交易机制」章", "Session times not structured — see the Market Structure &amp; Trading Mechanism chapter of the profile") + '</text>');
     }
 
-    // ── 标题 / 轴名 ──
+    // ── 标题 / 轴名（y 轴标题已删——"涨跌幅 %"与参考价已由 % 刻度 + 零轴刻度本身表达，
+    //    顶栏工具条另有一句完整口径，ADR-073）──
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
     g.push('<text x="' + PL + '" y="' + (PT - 40) + '" class="td-title">' + esc(exName) + t(" · 市场机制剖面", " · Market Mechanics Profile") + "</text>");
-    g.push('<text transform="translate(15,' + n(PT + ph / 2) + ') rotate(-90)" class="td-axis-name" text-anchor="middle">' +
-      t("涨跌幅 %（相对" + yRef + "）", "% change (vs " + yRef + ")") + "</text>");
     g.push('<text x="' + n(PL + pw / 2) + '" y="' + (H - 5) + '" class="td-axis-name" text-anchor="middle">' +
       t("日内时间（当地）", "Time of day (local)") + "</text>");
 
@@ -1063,8 +1075,8 @@
     var mbRef = ms.price_limits && ms.price_limits.main_board && ms.price_limits.main_board.spec && ms.price_limits.main_board.spec.reference;
     if (mbRef === "prev_settlement") {
       return t(
-        '<p class="td-banner">纯衍生品交易所：y 轴基准为<strong>前结算价</strong>，第五章字段描述衍生品市场（ADR-035 E）。</p>',
-        '<p class="td-banner">Derivatives-only exchange: the y axis is benchmarked to the <strong>previous settlement price</strong>, and Chapter 5 fields describe the derivatives market (ADR-035 E).</p>');
+        '<p class="td-banner">纯衍生品交易所：y 轴基准为<strong>前结算价</strong>，「市场结构与交易机制」章字段描述衍生品市场（ADR-035 E）。</p>',
+        '<p class="td-banner">Derivatives-only exchange: the y axis is benchmarked to the <strong>previous settlement price</strong>, and the Market Structure &amp; Trading Mechanism fields describe the derivatives market (ADR-035 E).</p>');
     }
     var hasDeriv = ms.derivatives && Object.keys(ms.derivatives).some(function (k) {
       var v = ms.derivatives[k];
@@ -1126,12 +1138,12 @@
 
   function tdProse() {
     return '<p class="td-prose">' + t(
-      '本剖面由第五章「市场结构与交易机制」的结构化 <code>spec</code> 层驱动（见 ' +
+      '本剖面由每所档案页「市场结构与交易机制」章的结构化 <code>spec</code> 层驱动（见 ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-035</a>）：' +
       '实线 / 实心为已核实数值，虚线 / 幽灵为「机制存在、数值官方未公布」，更淡的元素为 medium/low 置信度。' +
       '时间轴为分钟精度，不表示到秒；随机开 / 收盘窗口以模糊边缘示意。点击任意元素查看原文摘录与出处。' +
       '规则以各交易所官方发布为准，不构成投资建议。',
-      'This profile is driven by the structured <code>spec</code> layer of Chapter 5, “Market Structure &amp; Trading Mechanics” (see ' +
+      'This profile is driven by the structured <code>spec</code> layer of the “Market Structure &amp; Trading Mechanism” chapter of each exchange profile (see ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-035</a>): ' +
       'solid lines / fills are verified values; dashed lines and ghost elements mean “the mechanism exists but the official figure is unpublished”; ' +
       'fainter elements are medium/low confidence. The time axis is minute-precision, not second-precision; randomised open/close windows are shown ' +
@@ -1448,7 +1460,7 @@
 
   function cwProse() {
     return '<p class="td-prose">' + t(
-      '本图由第十一章 <code>costs.*</code> 的结构化 <code>spec</code> 层驱动（见 ' +
+      '本图由每所档案页「交易成本与税费」章 <code>costs.*</code> 的结构化 <code>spec</code> 层驱动（见 ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-045</a>、' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-071</a>）。' +
       '五费种（交易所费 / 清算费 / 监管费 / 印花税 / 金融交易税）为按笔（per-trade）显性成本，按 <code>side</code> 落在买入侧 / 卖出侧 / 双边。各费种原始计量单位不一' +
@@ -1457,7 +1469,7 @@
       '原文以非阿拉伯数字给出费率（台湾「千分之三」、南非「0,25%」）的，rate 为人工转写、原文逐字串经校验器 verbatim 反查（标 *）。' +
       '实心条为已摘引官方费率；幽灵虚线条为「费种存在、无可摘引费率」（maker-taker 净费率、市场化议价费等）。' +
       '佣金券商议价、不在交易所规则内，不作瀑布条，见图下方说明。买卖价差等隐性成本按本项目覆盖边界不收录（见 CLAUDE.md）。规则以各交易所官方发布为准，不构成投资建议。',
-      'This chart is driven by the structured <code>spec</code> layer of Chapter 11 <code>costs.*</code> (see ' +
+      'This chart is driven by the structured <code>spec</code> layer of <code>costs.*</code> in the “Trading Costs &amp; Taxes” chapter of each exchange profile (see ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-045</a>, ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-071</a>). ' +
       'The five fee types (exchange, clearing, regulatory, stamp duty, financial transaction tax) are per-trade explicit costs, placed on the buy side / sell side / both according to <code>side</code>. ' +
@@ -1643,7 +1655,7 @@
       g.push('<line x1="' + spNum(dayX(0)) + '" x2="' + spNum(dayX(Nmax)) + '" y1="' + spNum(botMid) + '" y2="' + spNum(botMid) +
         '" stroke="var(--fg-faint)" stroke-width="1.2" stroke-dasharray="4 4"/>');
       g.push('<text x="' + spNum((dayX(0) + dayX(Nmax)) / 2) + '" y="' + spNum(botMid - 10) + '" text-anchor="middle" class="sp-empty">' +
-        esc(t("第 8 章未记录衍生品清算数据（不代表无衍生品市场）", "No derivatives-clearing data in Chapter 8 (does not imply there is no derivatives market)")) + '</text>');
+        esc(t("未记录衍生品清算数据（不代表无衍生品市场）", "No derivatives-clearing data on record (does not imply there is no derivatives market)")) + '</text>');
     } else {
       var loopEnd = PL + plotW * 0.48;
       var brk = loopEnd + 12;
@@ -1778,13 +1790,13 @@
   }
   function spProse() {
     return '<div class="td-prose">' + t(
-      '本视图由第八章「清算、结算与交割」的 <code>guarantee_model</code> 枚举与 <code>default_management.spec</code> 结构化层驱动（见 ' +
+      '本视图由每所档案页「清算、结算与交割」章的 <code>guarantee_model</code> 枚举与 <code>default_management.spec</code> 结构化层驱动（见 ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-048 / ADR-050</a>）。' +
       '上泳道现货 T+N 的天数轴为「相对成交日的营业日」，节点位置示意先后、不表示精确时点；下泳道衍生品的「每日盯市」只示意「每个交易日重复」，' +
       '「到期」区块<strong>不按比例</strong>——衍生品最后交易日因合约而异，不锚定某个 T+N。违约瀑布只结构化「层级顺序 + 每层由谁的钱吸收损失」，不含金额；' +
       '<code>model: unstructured</code> 表示机制存在但一手来源未给出可结构化的干净层级。规则以各交易所官方发布为准，不构成投资建议。',
-      'This view is driven by the <code>guarantee_model</code> enum and the structured <code>default_management.spec</code> layer of Chapter 8, ' +
-      '“Clearing, Settlement &amp; Delivery” (see ' +
+      'This view is driven by the <code>guarantee_model</code> enum and the structured <code>default_management.spec</code> layer of the ' +
+      '“Clearing, Settlement &amp; Delivery” chapter of each exchange profile (see ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-048 / ADR-050</a>). ' +
       'On the cash lane, the T+N axis counts business days from the trade date; node positions show sequence, not exact timing. On the derivatives lane, ' +
       'the “daily mark-to-market” glyphs simply mean “repeats every trading day”, and the “expiry” block is <strong>not to scale</strong> — a derivative’s ' +
@@ -1951,8 +1963,8 @@
       '<text x="' + W / 2 + '" y="' + (midY - 16) + '" text-anchor="middle" class="ll-empty-strong">' +
       esc(t("衍生品交易所 · 无公司上市生命周期", "Derivatives-only exchange · no corporate listing lifecycle")) + "</text>" +
       '<text x="' + W / 2 + '" y="' + (midY + 22) + '" text-anchor="middle" class="ll-empty">' +
-      esc(t("第六章标记「仅现货适用」：整章不计入完成度（ADR-036 #5 / ADR-059）",
-        'Chapter 6 flagged "spot-only": excluded from the completeness count (ADR-036 #5 / ADR-059)')) + "</text>" +
+      esc(t("「上市、持续监管与退市」章标记「仅现货适用」：整章不计入完成度（ADR-036 #5 / ADR-059）",
+        'The "Listing, Continuing Obligations & Delisting" chapter is flagged "spot-only": excluded from the completeness count (ADR-036 #5 / ADR-059)')) + "</text>" +
       "</svg></div>";
   }
 
@@ -2149,16 +2161,16 @@
   function llProse(collapsed) {
     if (collapsed) {
       return '<div class="td-prose">' + t(
-        "本所在数据文件里把第六章《上市、持续监管与退市》整章标记为不适用（<code>_meta.not_applicable</code>）——衍生品交易所不上市公司，对应概念是交易员准入（见「参与者」）与合约挂牌 / 到期（见「产品」「交割管线」）。见 " +
+        "本所在数据文件里把《上市、持续监管与退市》整章标记为不适用（<code>_meta.not_applicable</code>）——衍生品交易所不上市公司，对应概念是交易员准入（见「参与者」）与合约挂牌 / 到期（见「产品」「交割管线」）。见 " +
         '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-036 #5 / ADR-059</a>。',
-        "This exchange marks the whole of Chapter 6 (“Listing, Continuing Obligations &amp; Delisting”) as not applicable (<code>_meta.not_applicable</code>) — a derivatives exchange does not list corporations; the analogous concepts are trader admission (see “Participants”) and contract listing / expiry (see “Products”, “Settlement”). See " +
+        "This exchange marks the whole “Listing, Continuing Obligations &amp; Delisting” chapter as not applicable (<code>_meta.not_applicable</code>) — a derivatives exchange does not list corporations; the analogous concepts are trader admission (see “Participants”) and contract listing / expiry (see “Products”, “Settlement”). See " +
         '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-036 #5 / ADR-059</a>.') + "</div>";
     }
     return '<div class="td-prose">' + t(
-      "本视图由第六章《上市、持续监管与退市》的字段驱动（见 " +
+      "本视图由每所档案页《上市、持续监管与退市》章的字段驱动（见 " +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-059</a>）。' +
       "时间尺度是<strong>一只证券的一生（年）</strong>——与「市场机制剖面」的一个交易日、「交割管线」的成交后 T+N 天构成同一只证券的三级缩放。阶段块只示意先后、<strong>不按真实时长比例</strong>（一家公司上市多久没有固定值）；只有「上市流程周期」「退市整理期」两块画按 <code>spec</code> 实际月数的填充条（满条 = 9 个月）。诚实三态：虚线框 =「尚未填」，空心点 = 规则明确「不设」，斜体灰 =「存在但未公布」。点任意元素看出处。规则以各交易所官方发布为准，不构成投资建议。",
-      "This view is driven by Chapter 6 (“Listing, Continuing Obligations &amp; Delisting”; see " +
+      "This view is driven by the “Listing, Continuing Obligations &amp; Delisting” chapter of each exchange profile (see " +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-059</a>). ' +
       "The time scale is <strong>the life of a security (years)</strong> — a third zoom level alongside the one-trading-day of “Market Mechanics” and the T+N business days of “Settlement”. Phase blocks show sequence only and are <strong>not to real-time scale</strong> (how long a company stays listed has no fixed value); only “Listing process” and “Transition period” carry a fill bar scaled to their <code>spec</code> months (full bar = 9 months). Honest three-state: a dashed block = “not yet filled”, a hollow dot = the rule explicitly sets none, italic grey = “exists but not published”. Click any element for sources. Rules are as officially published by each exchange; nothing here is investment advice.") + "</div>";
   }
@@ -2279,13 +2291,13 @@
   }
   function rmProse() {
     return '<div class="td-prose">' + t(
-      '本视图把第三章《监管与法律环境》八个字段压进一屏固定槽位（见 ' +
+      '本视图把每所档案页《监管与法律环境》章的八个字段压进一屏固定槽位（见 ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-061</a>）。' +
       '自上而下四层 = 交易员接触陌生市场时的一阶问题：谁在管（监管主体）、依什么法（法律基座）、钱怎么进出（外资与资金）、信息透不透明 / 出事赔不赔（透明与保护）。' +
       '槽位固定：同一字段在 20 家交易所位于同一位置，「换所即对比」。本章八个字段全为散文（机构名 / 法名 / 制度描述），无 spec 层——' +
       '<strong>虚线框 = 数据真缺口</strong>（多数在「数据空缺复核轨」[ADR-060] 轨道上），不是渲染问题；点任意卡片看全文与出处。' +
       '规则以各交易所官方发布为准，不构成投资建议。',
-      'This view condenses the eight fields of Chapter 3 (“Regulation &amp; Legal Environment”) into one fixed-slot canvas (see ' +
+      'This view condenses the eight fields of the “Regulation &amp; Legal Environment” chapter of each exchange profile into one fixed-slot canvas (see ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-061</a>). ' +
       'Top-to-bottom the four lanes answer a trader\'s first-order questions about a new market: who regulates (regulators), under what law (legal basis), ' +
       'how money moves in and out (foreign access &amp; capital), and how transparent / protected the market is (disclosure &amp; protection). ' +
@@ -2344,8 +2356,8 @@
       list.map(function (e) {
         return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
       }).join("") + "</select>" +
-      '<span class="td-tb-note">' + t("第三章 8 字段固定槽位：谁在管 · 依什么法 · 外资与资金 · 透明与保护 —— 点任意卡片看全文与出处",
-        "Chapter 3, 8 fixed slots: who regulates · legal basis · access & capital · disclosure & protection — click any card for full text and sources") + "</span>" +
+      '<span class="td-tb-note">' + t("8 字段固定槽位：谁在管 · 依什么法 · 外资与资金 · 透明与保护 —— 点任意卡片看全文与出处",
+        "8 fixed slots: who regulates · legal basis · access & capital · disclosure & protection — click any card for full text and sources") + "</span>" +
       "</div>";
     app.innerHTML = toolbar + '<div class="loading">' + t("加载监管图中…", "Loading regulation map…") + "</div>";
     return loadExchange(id).then(function (data) {
@@ -2429,13 +2441,13 @@
   }
   function ptProse() {
     return '<div class="td-prose">' + t(
-      '本视图把第九章《市场参与者》六个字段压进一屏固定槽位（见 ' +
+      '本视图把每所档案页《市场参与者》章的六个字段压进一屏固定槽位（见 ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-064</a>）。' +
       '自上而下三层 = 交易员接触陌生市场时的一阶问题：谁在场上跟我做对手盘（投资者结构）、我怎么才能进场（会员 → 经纪商 → 开户 → 适当性 这条接入链，链末是「你」）、如果我是外资走哪条道（外资通道，一条汇入同一终点的平行道——可在「会员」环直接并入，或整体绕过前几环）。' +
       '槽位固定：同一字段在 20 家交易所位于同一位置，「换所即对比」。本章六个字段全为散文（占比描述 / 机构名 / 法定义务），无 spec 层——' +
       '<strong>虚线框 = 数据真缺口</strong>（多在「数据空缺复核轨」[ADR-060] 轨道上），不是渲染问题；卡内为按卡宽 / 卡高硬裁剪的片段，点任意卡片看全文与出处。' +
       '规则以各交易所官方发布为准，不构成投资建议。',
-      'This view condenses the six fields of Chapter 9 (“Market Participants”) into one fixed-slot canvas (see ' +
+      'This view condenses the six fields of the “Market Participants” chapter of each exchange profile into one fixed-slot canvas (see ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-064</a>). ' +
       'Top-to-bottom the three lanes answer a trader\'s first-order questions about a new market: who is on the other side of my trades (investor structure), how I get in at all (the access chain: member firm → broker → account opening → suitability, ending at “you”), and — if I\'m a foreign investor — which lane I take (foreign access, a parallel path that merges into the same endpoint: it may join at the “member” stage or bypass the earlier stages entirely). ' +
       'Slots are fixed, so the same field sits in the same place across all twenty exchanges. All six fields are prose (share-of-turnover descriptions, institution names, statutory duties) with no spec layer — ' +
@@ -2501,8 +2513,8 @@
       list.map(function (e) {
         return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
       }).join("") + "</select>" +
-      '<span class="td-tb-note">' + t("第九章 6 字段固定槽位：谁在场上 · 接入链（会员 → 经纪 → 开户 → 适当性 → 你）· 外资平行道 —— 点任意卡片看全文与出处",
-        "Chapter 9, 6 fixed slots: who's on the floor · access chain (member → broker → account → suitability → you) · the foreign lane — click any card for full text and sources") + "</span>" +
+      '<span class="td-tb-note">' + t("6 字段固定槽位：谁在场上 · 接入链（会员 → 经纪 → 开户 → 适当性 → 你）· 外资平行道 —— 点任意卡片看全文与出处",
+        "6 fixed slots: who's on the floor · access chain (member → broker → account → suitability → you) · the foreign lane — click any card for full text and sources") + "</span>" +
       "</div>";
     app.innerHTML = toolbar + '<div class="loading">' + t("加载参与者图中…", "Loading participant map…") + "</div>";
     return loadExchange(id).then(function (data) {
@@ -2645,7 +2657,7 @@
   }
   function rfProse() {
     return '<div class="td-prose">' + t(
-      '本视图把第十二章《风险与特殊考量》五个字段压进一屏固定槽位（见 ' +
+      '本视图把每所档案页《风险与特殊考量》章的五个字段压进一屏固定槽位（见 ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-066</a>）。' +
       '两条泳道 = 交易员接触陌生市场要问的两层：交易层面（流动性有多集中、汇率制度是什么）、制度 · 地缘 · 执法（正在改什么规则、被制裁 / 冻结过没有、谁在盯操纵）。' +
       '槽位固定：同一字段在 20 家交易所位于同一位置，「换所即对比」。本章五个字段全为分析性散文、无 spec 层——' +
@@ -2653,7 +2665,7 @@
       '所以本图把「取证程度」做成一等视觉信号（旗标填充度），不藏进脚注。' +
       '<strong>虚线框 = 数据真缺口</strong>，卡内为按卡裁剪的片段，点任意卡片看全文、原文引用与出处。' +
       '规则以各交易所官方发布为准，不构成投资建议。',
-      'This view condenses the five fields of Chapter 12 (“Risks &amp; Special Considerations”) into one fixed-slot canvas (see ' +
+      'This view condenses the five fields of the “Risks &amp; Special Considerations” chapter of each exchange profile into one fixed-slot canvas (see ' +
       '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-066</a>). ' +
       'The two lanes are the two layers a trader asks about a new market: trading-level (how concentrated liquidity is, what the FX regime is) and institutional / geopolitical / enforcement (what rules are changing, any sanctions or freezes, who polices manipulation). ' +
       'Slots are fixed, so the same field sits in the same place across all twenty exchanges. All five fields are analytical prose with no spec layer — ' +
@@ -2704,8 +2716,8 @@
       list.map(function (e) {
         return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
       }).join("") + "</select>" +
-      '<span class="td-tb-note">' + t("第十二章 5 字段固定槽位：流动性 · 汇率 · 制度变革 · 政治地缘 · 执法 —— 旗标填充度 = 取证程度、非风险评分；点卡片看全文与出处",
-        "Chapter 12, 5 fixed slots: liquidity · FX · regulatory change · geopolitical · enforcement — flag fill = how well sourced, not a risk score; click a card for full text and sources") + "</span>" +
+      '<span class="td-tb-note">' + t("5 字段固定槽位：流动性 · 汇率 · 制度变革 · 政治地缘 · 执法 —— 旗标填充度 = 取证程度、非风险评分；点卡片看全文与出处",
+        "5 fixed slots: liquidity · FX · regulatory change · geopolitical · enforcement — flag fill = how well sourced, not a risk score; click a card for full text and sources") + "</span>" +
       "</div>";
     app.innerHTML = toolbar + '<div class="loading">' + t("加载风险旗标中…", "Loading risk flags…") + "</div>";
     return loadExchange(id).then(function (data) {

@@ -1720,6 +1720,39 @@
 
 **日期：** 2026-09-04
 
+### ADR-074 — 数据空缺复核轨任务二第二人独立复核：79 处，4 FIX + 3 QUESTION，零幻觉
+
+> **编号说明：** 本条实装于 2026-09-05（分支拉出时取的「下一个空号」ADR-072），与并行先合并的 PR #69（[ADR-072]「前端不暴露 taxonomy 章序数」）撞号；ADR-073 亦已被 PR #70 占用。按 [ADR-029] 协议让号为 **074**。
+
+**背景：** [ADR-068]（2026-09-04）一个后台会话分 8 个 commit 批量回填了 `intraday_reversal`/`holidays_note`/`connect_schemes`/`board_lot_size`/`odd_lot_handling`/`price_limits.other_boards`/`block_trade`/`dark_pool` 8 个横切字段共约 74 处，自己在 ADR 里标注"触及约 74 个字段填写，远超 [CLAUDE.md §四]『>30 字段须第二人独立复核』阈值……后台会话无法充当真正的第二个视角……标为待人工"。用户直接要求"启动第二人独立复核"，本条是这道复核的落地。
+
+**方法：** 4 个互相隔离、彼此不知情的独立复核视角（按字段分组：A=intraday_reversal+holidays_note 15 处、B=board_lot_size+odd_lot_handling 22 处、C=block_trade+dark_pool 20 处、D=connect_schemes+price_limits.other_boards 22 处，合计 79 处，与 ADR-068 自估的"约 74"量级一致），逐条去主仓库 `.cache/` 用 `grep` 核对 `quote` 是否原始缓存页面的逐字连续子串（而非只看 `make check` 是否绿灯）、核对 confidence 分级与来源优先级匹配、独立评估"消极认定"与 `not_applicable` 判断是否站得住、核对跨所口径一致性。逐条判定表、系统性问题、FIX 明细见 `PROJECT/DATA-GAP-TASK2-SPOT-CHECK.md`。
+
+**结果：** 初检 72/79 = 91.1% PASS；4 处 FIX（已就地订正，见下）；3 处 QUESTION（判断分歧，非事实错误，转 `PROJECT/OPEN-QUESTIONS.md` 留待后续）。**终态 76/79 = 96.2%，按 [ADR-054] 确立的"以终态计"口径达标。零处发现"quote 查无缓存支持"级别的编造或张冠李戴**——ADR-068 的批量回填方法本身可靠，暴露的问题集中在"引文摘录颗粒度不足"（quote 没覆盖 zh/en 的每个数字，但事实本身在缓存里查得到）与"跨字段协同一致性"（同一文件不同字段对同一制度的时效状态不同步）两个此前未被专门关注的维度。
+
+**4 处 FIX（本次已就地订正）：**
+
+1. `sa-tadawul intraday_reversal`——`zh`/`en`/`detail` 夹带"2017 年 4 月前 T+0 即时交收、2017-04 改 T+2 净额交收"的具体历史细节，在引用来源与 `.cache/sa-tadawul/` 全部缓存文件里查无依据（凭记忆填写，违反 [CLAUDE.md §二] 第 1 条）。删除该细节，`enum: t0`/`confidence: medium` 本身不受影响（消极认定这条腿独立成立）。
+2. `sa-tadawul connect_schemes`——把已于 2026-02-01 废止的 QFI（合格境外投资者）框架描述成现行准入渠道，与同文件 `regulation.foreign_ownership_limit`/`capital_controls`/`participants.foreign_access_channel` 三处（均 high + CMA_N_3974 官方公告 quote）记录的废止事实矛盾——这是"跨字段事实不一致"，`make check` 不做跨字段时效交叉核对，靠人工复核才发现。改写为现状描述并指向三处一手依据；此前提及的互换协议（swap）渠道废止后是否仍并行存在未重新核实，本次不再断言，转 OPEN-QUESTIONS。
+3. `ch-six block_trade`——`zh`/`en` 断言"≥ CHF 3,500 万延迟至收盘"，`quote` 只摘到"≥ CHF 1,000 万延迟 60 分钟"一档，未覆盖 3,500 万这一档（事实在 `.cache/ch-six/` Directive 3 Annex C 里真实存在，只是没抄进 quote）。`quote` 追加该 ADT 分组的完整三档。
+4. `hk-hkex block_trade`——`zh`/`en` 提到"部分 MSCI 指数期货 25 张"门槛，`quote` 未覆盖任何 MSCI 品种（HKFE Rules VIII 表格里确有多个 25 张的 MSCI 品种）。`quote` 追加一条 MSCI 品种门槛行。
+
+**3 处 QUESTION（留待人工/协调者，非本次决定）：**
+
+1. `de-eurex board_lot_size` 标 `not_applicable` 是否应改判为填写实际内容——复核者指出同一文件 `tick_size` 面对结构相同的情况（无统一值但逐品种有正面规定）选择了"填内容"，`au-asx`（同样无股数整手概念）也走"填内容"而非 `not_applicable`；两种处理都能自洽，是"何时够格 not_applicable"的通用判据缺口，不单独为 de-eurex 一家改判。
+2. `de-xetra connect_schemes` 未提及 CEINEX（法兰克福 RMB 产品互联互通平台）是否构成遗漏。
+3. `in-nse price_limits.other_boards` "NSE Emerge 沿用主板同一套分类框架"的断言未在缓存里找到实质支撑，需人工核对 SEBI/NSE Emerge 专属规则原文。
+
+**决定：** 4 处 FIX 就地订正、写回 `data/exchanges/`；3 处 QUESTION 转 `PROJECT/OPEN-QUESTIONS.md`（具体到交易所+字段+复核者理由），不阻塞任务二收口——比照 [CLAUDE.md §四]"某家/某批不过只暂停复核该家/该批，不牵连已过关的"原则。`PROJECT/ROADMAP.md` §三"数据空缺复核轨任务二"条目标注"第二人独立复核已完成"。
+
+**系统性问题（记录，未在本条处理，多数已转 OPEN-QUESTIONS）：** ① `validate.py` 对纯散文字段的数值反查只要求"至少一个数字命中"（区别于 `spec` 数值叶子的逐个必须命中），"quote 没覆盖 zh/en 全部数字"因此不会被机器拦下，与 [ADR-054]/[ADR-058] 的"note 数字机器盲区"同源，这次落在散文字段而非 `spec.note`；② `connect_schemes` 的消极认定条目普遍未填 `sources`，静默继承与断言主题无关的章节级默认来源（`market_structure._meta.sources`），使"moderate 必须有 sources"检查形同虚设；③ 多来源合成的 high 字段，非主来源内容未必进 `quote`，是纯靠人工诚实自陈的盲区。三者均非本次批次专属、也非本条职责修复，留后续流程改进参考。
+
+**没改：** `schema/`（无新字段/枚举/spec 形状）；`tools/`（无新不变式——本次是散文字段复核，未引入新结构）；除上述 4 处 FIX 外的其余 75 处交易所×字段内容不动。
+
+**验证：** `make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0）、`make sync` 二次幂等；4 处 FIX 只改 `zh`/`en`/`detail`/`quote`，未动 `enum`/`confidence`/`sources` 结构，生成块预期零 diff。
+
+**日期：** 2026-09-05
+
 ### ADR-070 — 市场机制剖面视觉迭代：机制核心面板右缘避让收盘集合竞价竖条（[ADR-055] 已知局限②落地）
 
 **为什么需要：** [ADR-055] 把机制核心面板定为**固定 628 宽**（左缘 x=120、右缘 x=748，左右各距绘图区边 60px），并把「切换 20 家每个槽位屏幕坐标不变」列为验收目标。但收盘集合竞价竖条的横坐标由 `xMax`（= 最晚已知时刻 + 15min）决定——**有盘后时段或日内跨度窄的所，`xMax` 被盘后 / 夜盘撑远，收盘竞价条被压到绘图区中段**：`cn-sse`/`cn-szse`（盘后固定价 15:05–15:30）竞价条落在 x≈719、`tw-twse` x≈655、`kr-krx` x≈610，全部在 748 之内，被面板盖住。默认视图 `cn-sse` 即中招。[ADR-055] 已知局限②预判了这条并给了解法方向（「给面板宽度设一个按 `xMin/xMax` 跨度收缩的下限」），本条落地。
@@ -1775,7 +1808,9 @@
 
 ---
 
-### ADR-072 — 抓取基础设施：`fetch.py` OTP 两步 + wayback 回退 + `kr-krx`/`za-jse` 缓存重建（数据空缺复核轨任务五）
+### ADR-075 — 抓取基础设施：`fetch.py` OTP 两步 + wayback 回退 + `kr-krx`/`za-jse` 缓存重建（数据空缺复核轨任务五）
+
+> **编号说明：** 本条原占 ADR-072（分支拉出时取的「下一个空号」），与并行合并的 PR #66（[ADR-070]）/ PR #68（[ADR-071]）/ PR #69（[ADR-072] 前端去章序数）/ PR #70（[ADR-073] 剖面零轴刻度）/ PR #71（[ADR-074] 任务二第二人复核）撞号。本 PR 是最后合并的，按 [ADR-029] 协议让号为 **075**。
 
 **背景：** [ADR-060] 任务五排定「① `kr-krx` 13 处 low 能升级的升级 ② `za-jse` 来源重新落盘，`verify_quotes` 能离线覆盖（当时 `.cache/za-jse` 仅 1 文件、manifest-ok 0）③ `make check` stale 清单」，本棒动手前先探明当前云环境（数据中心 IP）对两处目标站点的实际可达性，据实测结果定了三件事的范围（不做 ③，理由见下）。
 
@@ -1799,3 +1834,59 @@
 **已知局限：** ① OTP 数据步骤的端到端成功路径（住宅 IP）本次环境无法验证，仅验证了机制正确接线；② za-jse 仍有 39 处 CACHE_MISS（jse.co.za 全站不可达、部分 URL 连 wayback 都没有 200 快照）；③ kr-krx 剩 8 处 low（不含已转交 [ADR-066] 的 `fx_risk_note`/`enforcement_note` 2 处）留给人工投喂或下次换角度尝试；④ `make check` stale 清单未做。
 
 **日期：** 2026-09-05
+
+---
+
+### ADR-072 — 前端不暴露 taxonomy 章序数，只用章节名 + 档案页 / ADR 链接
+
+> **编号说明：** 本条原占 ADR-070（分支拉出时取的「下一个空号」），与并行合并的 PR #66（[ADR-070] 机制核心面板右缘避让）、PR #68（[ADR-071] 成本瀑布佣金迭代）撞号。本 PR 是三个占用者里最后合并的，按 [ADR-029] 协议让号为 **072**。
+
+**背景：** `schema/taxonomy.yml` 的 `chapters` 用 `chapter_no`（2–12，源自原始十三章大纲，见 [ADR-010]）给十一个数据章节编号。这套序数是内部 schema 产物——前端从没有一个页面把它当目录呈现。但六个可视化视图底部的设计思想段落都写「本视图由第X章《XXX》……驱动」（剖面→第五 / 成本瀑布→第十一 / 交割管线→第八 / 上市生命周期→第六 / 监管图→第三 / 参与者图→第九），SVG 空态与工具条里还有「见档案页第五章」「第 8 章未记录……」「第三章 8 字段固定槽位」等零散引用，档案页左栏章节导航则以 `chapter_no + ". "` 前缀渲染成「2. 基本信息 … 12. 风险与特殊考量」。读者看到「第五章」却无从知道这是**什么的**第五章、去哪看全部十一章、为什么成本是「第十一」——引用了一份前端不存在的带编号目录。英文态同样（`Chapter 5` / `Chapter 3`）。
+
+用户提出二选一：把这份「目录文件」作为一个前端标签页，或用恰当方式从前端隐去。
+
+**定了什么：**
+
+1. **前端 reader-facing 文案不出现 `第X章` / `Chapter N` 这类章序数。** 改用**章节名**——读者能在档案页左栏点到的那一节的名字（`taxonomy` 的 `label_zh` / `label_en`），并显式说明它是「每所档案页的某章」。例：「本剖面由第五章「市场结构与交易机制」的结构化 `spec` 层驱动」→「本剖面由**每所档案页「市场结构与交易机制」章**的结构化 `spec` 层驱动」。指向具体章节的旧「见档案页第五章」改为按章名指（英文态用 `taxonomy` 的 `label_en` 原词，便于与档案页左栏对齐）。
+2. **档案页章节导航去掉 `chapter_no + ". "` 数字前缀**，只留中英章名。列表本身有序，数字前缀无信息增量；且从「2.」起头会引出「第 1 章在哪」的疑问（原大纲第一章已并入 `exchange_identity`，[ADR-010]）。`chapter_no` 作为跨项目稳定标识仍留在 `taxonomy.yml` / `docs/data/`，只是不再进 DOM。
+3. **`[ADR-xxx]` 的 GitHub 链接保留**——那是可点击、落在真实 `DECISIONS.md` 页的产物，属「引用且可达」，与「引用且不可达」的章序数不是一类。
+
+**为什么选「隐去」而不是「加标签页」：**
+
+- **与北极星逆行。** [ADR-057] / Phase 4 的方向是所有模块并成单页、矩阵 / 时区 / 健康度 / 档案页降「更多」入口——顶栏已 9 个标签，再加一个「框架说明」元标签是加法不是减法。一份框架说明顶多进 Phase 4 的「更多」抽屉，不该现在立主标签。
+- **病灶是序数不是章名。** 「《市场结构与交易机制》章」本就自洽——它是每家档案页里真实存在、点得进去的一节；去掉「第五」这个悬空序数后，每句话都成立。
+- **成本对称。** 隐去 = 十几处纯文案改动 + 一条机器校验，一个 commit；加标签页 = 新 render 函数 + `taxonomy` 新增每章 `blurb` 字段 + 新校验 + 顶栏改动。前者几小时，不阻塞 Phase 3。
+- **已有先例。** 时区甘特条的说明段一直是这个范式（「由「市场结构与交易机制」章节的交易时段文本……换算」「精确时段见各所档案页」），无序数、指向档案页，读起来通顺——本条把其余视图对齐到它。
+
+**机器校验（[CLAUDE.md §四]）：** 新增 `tools/check_no_chapter_ordinals.py`，复用 `check_ui_i18n.scan` 的 JS 词法扫 `docs/assets/app.js` 字符串字面量（注释里的「第五章」是开发者速记，放行）+ `docs/index.html` 正文（去 HTML 注释），命中 `第<中文数字>章` / `第 \d 章` / `Chapter \d`（含 `&nbsp;`）即 FAIL；行内 `chapter-ordinal-ok` 标记可放行个案（目前无）。接入 `make check`（`check_ui_i18n` 之后）。把「前端不带章序数」从自觉变成构建关卡，防后续新视图再引入。
+
+**没做：**
+
+- **档案页导航顶部加一行「本图鉴用统一的十一章框架记录每一家交易所」+ footer 框架说明链接**——分析里列为「可选补强」，本条不含；等 Phase 4 决定框架说明进不进「更多」抽屉时一并处理，届时数据从 `taxonomy.yml` 生成。
+- **`taxonomy.yml` 每章 `blurb` 字段**——「加标签页」方案的前置，本条不走该方案，不加。
+- **`[ADR-xxx]` 链接改成人话**（ADR-xxx 对交易员是黑话）——相关但独立的打磨项，不在本条范围。
+- **英文态 `Market Structure & Trading Mechanic(s/m)` 收敛**——`taxonomy` 的 `label_en` 是 `Trading Mechanism`，旧散文里有 `Trading Mechanics`；本条新写 / 改写处统一按 `label_en`（`Mechanism`），未逐一追改未触及的历史串。
+
+**验证：** `make build` 全绿（`selfcheck` 43/43、`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK、`check_no_chapter_ordinals` OK）；`make sync` 二次幂等、生成块与 `docs/data/` 零 diff（本条只动 `docs/assets/app.js` + `tools/` + `Makefile` + `PROJECT/`，不碰 `data/` / `schema/`）。负向验证：`_hits()` 对 `第五章` / `第 8 章` / `Chapter 11` / `Chapter&nbsp;3` 均命中，对「市场结构与交易机制章」不误伤。合并 `origin/main`（含 [ADR-070] 面板避让 / [ADR-071] 成本瀑布佣金迭代 / [ADR-066] 风险旗标渲染层）后复核：面板避让与本条触及的 6 个可视化视图说明段落无重叠；成本瀑布 `cwProse()` 一处与 [ADR-071] 的费种数量改动（6→5）落在同一句话，语义合并（保留 [ADR-071] 的最新内容，套用本条的去序数改法）；风险旗标渲染层是本条原始 15 处范围之外的新代码（合并前不存在），`check_no_chapter_ordinals.py` 跑起来直接抓出它 `rfProse()` 说明段 + 工具条 note 共 4 处同款「第十二章」/`Chapter 12` 悬空引用，按同一改法修掉——机器校验「拦住后续新视图再犯」的设计目的在合并当场就验证生效，不是纸面声称。
+
+**日期：** 2026-09-04
+
+### ADR-073 — 市场机制剖面视觉迭代：零轴刻度改标参考价名称、删 y 轴标题与"0 = …"内嵌批注、临时停牌文案居中
+
+> **编号说明：** 本条原占 ADR-071（分支拉出时取的「下一个空号」），与并行合并的 PR #68（[ADR-071] 成本瀑布佣金迭代）撞号。本 PR 晚于 #68 落地，按 [ADR-029] 协议让号为 **073**（[ADR-072] 已被 PR #69 占用）。
+
+**为什么需要：** 剖面 y 轴此前三处重复表达同一件事——顶栏工具条一句「y = 涨跌幅相对前收盘价」、旋转的 y 轴标题「涨跌幅 %（相对前收盘价）」、零轴旁内嵌批注「0 = 前收盘价」，而零轴本身的刻度只写着信息量为零的「0%」。三处冗余里，旋转标题最占地方（贴绘图区左侧全高）、内嵌批注离零轴线还有 11px 视觉间隙容易被读成独立元素。此外「临时停牌可发生于任意时刻」左对齐紧贴斜纹条左端，视觉上偏一侧、不像居中的通栏声明。
+
+**要达成的目标：** 零轴刻度直接显示参考价名称（如「前收盘价」/`previous close`），y 轴含义仍靠顶栏工具条一句话完整表达（不再重复）；旋转 y 轴标题与「0 = …」批注两处冗余全部删除；临时停牌斜纹条内的文案水平居中于整条绘图区宽度。20 家交易所（含英文态、`de-eurex` 的 `previous settlement` 最长词组）零轴标签不溢出绘图区左边界。
+
+**如何达成（纯前端两文件）：**
+- `docs/assets/app.js` `tdBuild`：零轴（`p===0`）不再画「0%」+ 旁批注，改画 `yRef`——按空格拆词，单词形态（中文「前收盘价」/`en` 两词短语）分两行右对齐画在原刻度位置（`x=PL−8`），避免 `previous settlement` 一行溢出绘图区左边界（20 家实测只有 `previous close`/`previous settlement` 两种取值，各按 8/2 词分行）。
+- 删除旋转 `<text transform="…rotate(-90)…">涨跌幅 %（相对…）</text>`（原 y 轴标题）。
+- 「临时停牌可发生于任意时刻」`text` 的 `x` 从 `PL+5`（左对齐）改 `PL+pw/2` + `text-anchor="middle"`（水平居中于斜纹条整条宽度）。
+- `docs/assets/styles.css` 新增 `.td-tick-0`（无衬线、8.5px、`font-weight:600`，与数字刻度的等宽字体区分——参考价名称是词不是数字）。
+
+**验证：** `make build` 全绿（`selfcheck` 43/43、`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK——本条零新增 UI 串，`yRef` 已走 `t()`）；`make sync` 幂等，`docs/data/` 零 diff、生成块无变化；`node --check` 通过。宽度核对：20 家 `yRef` 只有两种取值（`前收盘价`/`前结算价`，19 家 vs `de-eurex`），按 `.td-tick-0`（8.5px 无衬线）估算字符宽度，两行形态下最长行 `settlement`（10 字符 ≈ 47px）仍在 `PL−8=52px` 预算内；垂直方向相邻网格线间距（`yR` 取值范围内最紧 43px）远大于两行文本所需的约 17px，不与相邻刻度碰撞。
+
+**已知局限：** 未做 headless 截图核对像素级排版（本环境 Chrome 在 worktree 沙箱下签名校验失败，同 [ADR-070] 记录的环境限制）——以上宽度/间距核对为字符级估算，非渲染实测。
+
+**日期：** 2026-09-04

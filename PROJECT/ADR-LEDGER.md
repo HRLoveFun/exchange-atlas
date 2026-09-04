@@ -19,4 +19,7 @@
 - ADR-069 · 并行 worktree 防失序四道护栏 · worktree-antidisorder · 2026-09-04
 - ADR-070 · 剖面机制核心面板右缘避让收盘集合竞价竖条（ADR-055 已知局限②） · worktree-td-corepanel-right-edge · 2026-09-04
 - ADR-071 · 成本瀑布：佣金行降级为说明 + cost_layer 加 rate_raw（tw/za 证券交易税不再画幽灵条） · worktree-cost-waterfall-commission · 2026-09-04
-- ADR-072 · 抓取基础设施：fetch.py OTP 两步 + wayback 回退 + kr-krx/za-jse 缓存重建 · worktree-fetch-infra-otp · 2026-09-05
+- ADR-072 · 前端不暴露 taxonomy 章序数，只用章节名 + 档案页 / ADR 链接（原占 ADR-070，撞已合并的 PR #66，按 ADR-029 协议让号） · worktree-frontend-hide-chapter-ordinals · 2026-09-04
+- ADR-073 · 剖面零轴刻度改标参考价名称 / 删 y 轴标题与内嵌批注 / 临时停牌文案居中（原占 ADR-071，撞已合并的 PR #68，按 ADR-029 协议让号） · worktree-td-axis-labels · 2026-09-04
+- ADR-074 · 数据空缺复核轨任务二第二人独立复核（79 处，4 FIX + 3 QUESTION）（原占 ADR-072，撞已合并的 PR #69，按 ADR-029 协议让号） · worktree-data-q-task2-review · 2026-09-05
+- ADR-075 · 抓取基础设施：fetch.py OTP 两步 + wayback 回退 + kr-krx/za-jse 缓存重建（原占 ADR-072，撞已合并的 PR #69，按 ADR-029 协议让号） · worktree-fetch-infra-otp · 2026-09-05

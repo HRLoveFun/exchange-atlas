@@ -9,7 +9,7 @@
 见 CLAUDE.md 二：数据不得凭记忆填写，必须来自本脚本抓取并落盘在 .cache/ 的原始页——
 那是「这条数据不是编的」的可核查凭据。
 
-## OTP 来源登记格式（2026-09-04 新增，见 [ADR-072]）
+## OTP 来源登记格式（2026-09-04 新增，见 [ADR-075]）
 
 部分站点（典型如 KRX 数据门户 `data.krx.co.kr`、指数子站 `eindex.krx.co.kr`）没有可
 直接 curl 的静态正文——真实数据靠站内 JS 先 GET 一个 `GenerateOTP` 端点换一次性 code，
@@ -27,7 +27,7 @@
 脚本逻辑错误。住宅 IP 下预期能走通；数据中心环境抓不到就是 CLAUDE.md 三的降级触发点
 （人工提供页面），不要因为这一步过不去就凭记忆填数据。见 PROJECT/SOURCES.md 对应记录。
 
-## wayback 回退（2026-09-04 新增，见 [ADR-072]）
+## wayback 回退（2026-09-04 新增，见 [ADR-075]）
 
 官网直连被拦（403 / Cloudflare 拦截页，典型如 `jse.co.za`）时，自动去 web.archive.org
 查最近一次 HTTP 200 快照重试（`wayback_snapshot`），成功则 manifest 里该条 `via` 记

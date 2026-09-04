@@ -11,7 +11,7 @@ data/exchanges/*.yml 里每个字段 sources[] 实际引用的 URL（即"数据�
 - PDF 落盘后额外用 pdftotext 生成 .pdf.txt 伴随文本，供 verify_quotes 比对。
 - 多线程抓取（--workers，默认 16）。失败只打印统计，不阻断。
 - 直连失败或拿到反爬拦截页（如 za-jse 的 Cloudflare 403）时自动回退 web.archive.org 最近
-  一次 200 快照（复用 tools/fetch.py 的 wayback_snapshot，见 [ADR-072]）；manifest 里这
+  一次 200 快照（复用 tools/fetch.py 的 wayback_snapshot，见 [ADR-075]）；manifest 里这
   条来源的 `via` 记 "wayback"，供人核对是历史快照而非当次官网原文。
 
 用法：
@@ -125,7 +125,7 @@ def _fetch_once(url, ua):
 
 def fetch_url(url):
     """返回 (status, label, raw, ext, via)。直连失败或拿到拦截页时自动回退 wayback 快照
-    （见 [ADR-072]）——`via` 标 "live" / "wayback"，好坏都如实记，不静默改写来源身份。"""
+    （见 [ADR-075]）——`via` 标 "live" / "wayback"，好坏都如实记，不静默改写来源身份。"""
     ua = FAIR_UA if ".gov" in urlparse(url).netloc else BROWSER_UA
     status, label, raw, ext = _fetch_once(url, ua)
     blocked = status is None or not str(status).startswith("2") or (
@@ -195,7 +195,7 @@ def main():
     for ex in exs:
         man = load_manifest(ex)
         # 只有 ok:true 才算"已覆盖"——上次失败（404/403/拦截页）落盘的坏文件不能拿来当
-        # "已经抓过"跳过，否则失败的来源永远没有重试机会（[ADR-072]，配合 verify_quotes.py
+        # "已经抓过"跳过，否则失败的来源永远没有重试机会（[ADR-075]，配合 verify_quotes.py
         # manifest_map 只信 ok:true 的同一处修复）。
         cached = {it.get("url") for it in man if it.get("url") and it.get("file")
                   and it.get("ok") and (ROOT / it["file"]).exists()}
