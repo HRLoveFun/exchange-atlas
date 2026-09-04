@@ -992,20 +992,36 @@
       t("日内时间（当地）", "Time of day (local)") + "</text>");
 
     // 机制核心面板压在几何层之上（透视态 = 面板退成虚线轮廓，露出零轴/熔断线/走廊）
+    // 面板右缘避让收盘集合竞价竖条（ADR-055 已知局限②：窄跨度 / 有盘后时段的所——如
+    // cn-sse、tw-twse、kr-krx——收盘竞价条落在默认 628 宽面板之内被压住）。
+    // clsLeftX = 竞价块左缘 X，判定条件与下方 auc() 画不画一致（只有 end 且无区间时画竖线，
+    // 只有 start 无 end 时 auc() 直接 return 不画——de-xetra 属此，面板保持默认宽）。
+    var clsLeftX = null;
+    if (clsS) {
+      var clsAX = tdParseHM(clsS.auction_start), clsBX = tdParseHM(clsS.auction_end);
+      if (clsAX != null && clsBX != null && clsBX > clsAX) clsLeftX = X(clsAX);
+      else if (clsBX != null) clsLeftX = X(clsBX);
+    }
     var ghostOn = tdGhostOn();
-    g.push(tdCorePanel(id, ms, yRef, ghostOn));
+    g.push(tdCorePanel(id, ms, yRef, ghostOn, clsLeftX));
 
     var svg = '<div class="td-plot-wrap' + (ghostOn ? " td-ghost" : "") + '"><svg viewBox="0 0 ' + W + ' ' + H + '" class="td-svg" role="img" aria-label="' +
       esc(exName) + t(" 市场机制剖面", " market mechanics profile") + '">' + g.join("") + "</svg></div>";
     return tdBanner(ms) + tdLegend() + svg + tdSidePanels(id, data) + tdProse();
   }
 
-  // 机制核心面板（ADR-055）——固定 628×276 的 foreignObject，水平居中、垂直居中于零轴
+  // 机制核心面板（ADR-055）——高 276 的 foreignObject，水平居中、垂直居中于零轴
   // （Y(0)=PT+ph/2=256）。涨/跌停线因 yR 自适应恒在 Y≈90/420，面板居中 → 上下气口自动对称。
-  function tdCorePanel(id, ms, yRef, ghostOn) {
+  // 宽度默认 628（左缘 x=120，右缘 x=748，左右各距绘图区边 60px）；当收盘集合竞价竖条
+  // （clsLeftX，见 tdBuild）落在默认右缘之内时，右缘收到竞价块左侧 14px，左缘不动——
+  // 窄跨度 / 有盘后时段的所（cn-sse≈719、tw-twse≈655、kr-krx≈610）由此让出竞价条。
+  function tdCorePanel(id, ms, yRef, ghostOn, clsLeftX) {
     var W = 960, PL = 60, PR = 152, PT = 62, PB = 106;
     var pw = W - PL - PR, ph = 556 - PT - PB;
-    var fw = pw - 120, fx = PL + 60, fh = 276, fy = PT + ph / 2 - fh / 2;
+    var fx = PL + 60, fh = 276, fy = PT + ph / 2 - fh / 2;
+    var fRight = PL + pw - 60;                                    // 默认右缘 x=748
+    if (typeof clsLeftX === "number") fRight = Math.min(fRight, clsLeftX - 14);
+    var fw = Math.max(430, fRight - fx);                          // 宽度下限 430（当前 20 家均不触及）
 
     var cells = [];
     var mp = ms.matching_principle;
