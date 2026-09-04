@@ -17,3 +17,4 @@
 <!-- 折叠进 ROADMAP §一 后删除该行。 -->
 
 - 2026-09-04 · 风险旗标渲染层落地：`renderRiskFlags` 两泳道旗标面板 + 置信度旗标字形四态 + 常驻「非评分」声明 + tab（9→10）+ 路由 `risk-flags` + `.rf-*`；纯前端三文件、headless 5 家 × 中英 × 明暗核对、零 diff、`make build` 全绿。四个 viz 模块渲染层均已落地（[ADR-057] #4 按渲染层口径满足）；剩 `fx_risk_note` 数据层子棒（是否 Phase 4 硬前置留协调者按 §一 拍板） · [ADR-066] · worktree-risk-flags-render
+- 2026-09-04 · 剖面机制核心面板右缘避让收盘集合竞价竖条（[ADR-055] 已知局限②落地，7 家面板收窄 476–605、其余不变） · [ADR-070] · worktree-td-corepanel-right-edge
