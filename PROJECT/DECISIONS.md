@@ -1705,6 +1705,6 @@
 - **GitHub Actions 跑 `make check`**——[CLAUDE.md §六]「无强制 CI」是有意选择；护栏 3 用纪律替代，若纪律再被违反可重新评估。
 - **生成块「块内表头只出现一次」的专项检查**——`validate.py` §8 的「重算 ≠ 已提交」已能抓块内重复，只是信息不如专项直白；护栏 3 的「合并后必 `make build`」是更根本的堵法，不叠专项检查。
 
-**验证：** `make build` 全绿（`selfcheck` 36/36、`validate` 20 家 0/0、`check_ui_i18n` OK）、`make sync` 二次幂等、`data/` 与 `docs/data/` 零 diff（本条不碰数据 / schema / 前端）。负向验证：构造重号「下一步」列表 / 4 条「最近完成」/ 一条未登记的 `### ADR-070` / 一行 `>>>>>>> x` 分别喂 `validate.py`，四者各自红。`ROADMAP-INBOX.md` 折叠动作在本条落地时首次执行（把本条的完成便签折进 §一）。
+**验证：** `make build` 全绿（`selfcheck` 43/43、`validate` 20 家 0/0、`check_ui_i18n` OK）、`make sync` 二次幂等、`data/` 与 `docs/data/` 零 diff（本条不碰数据 / schema / 前端）。负向验证：`selfcheck.py` 新增 19 条合成用例覆盖重号「下一步」/ 不连续 / 超窗「最近完成」/ 未登记 ADR / 台账缺口 / 台账重复登记等，注入必失配用例确认 `main()` 退出码 1。`ROADMAP-INBOX.md` 的折叠动作待本条合并后由首个交互式会话执行（把这条的完成便签折进 §一）。
 
 **日期：** 2026-09-04

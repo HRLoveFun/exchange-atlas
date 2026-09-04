@@ -141,6 +141,31 @@ case("recent 计数：条目数按 `- **` 行首算，正文里的 `- **` 不计
      len(validate.roadmap_recent_violations("- **a** — 见 `- **b**` 的说明\n- **c** — y\n", 3)), 0)
 
 
+# ══════════════════════════════════════════════════════════════
+# [ADR-069] ADR 编号台账：validate.adr_ledger_violations(decisions_nums, ledger_text)
+#   —— DECISIONS 的 ADR 号 ⊆ 台账登记的号；台账 1..max 连续无重复。取 bool / count。
+# ══════════════════════════════════════════════════════════════
+def _ledger_bad(nums, text):
+    return bool(validate.adr_ledger_violations(set(nums), text))
+
+
+_SEED = "- ADR-001 … ADR-003 · 历史 · pre-ledger\n"
+case("ledger 合法：区间行兜住历史 + DECISIONS 都在区间内",
+     _ledger_bad([1, 2, 3], _SEED), False)
+case("ledger 合法：区间 + 逐条，无缺口无重复",
+     _ledger_bad([1, 2, 3, 4], _SEED + "- ADR-004 · x · br · 2026-09-04\n"), False)
+case("ledger 违规：DECISIONS 有 ADR-005 但台账没登记",
+     _ledger_bad([1, 2, 3, 5], _SEED), True)
+case("ledger 违规：逐条行与区间重复登记同一号",
+     _ledger_bad([1, 2, 3], _SEED + "- ADR-002 · dup · x · d\n"), True)
+case("ledger 违规：编号有缺口（3 之后直接 5）",
+     _ledger_bad([], _SEED + "- ADR-005 · x · y · z\n"), True)
+case("ledger 不误伤：非登记行（说明文字里的 ADR-029）不计入",
+     _ledger_bad([1, 2, 3], _SEED + "真撞了按 [ADR-029] 让号。\n"), False)
+case("ledger 计数：缺登记 + 缺口 → 2 条消息",
+     len(validate.adr_ledger_violations({7}, _SEED + "- ADR-005 · x · y · z\n")), 2)
+
+
 def main():
     fails = [(n, g, w) for n, g, w in CASES if g != w]
     for n, g, w in CASES:

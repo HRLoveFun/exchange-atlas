@@ -31,6 +31,8 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
   12. ROADMAP §一 防失序（[ADR-069]）：「下一步」编号 1..n 连续无重复、「最近完成」不超
       滚动窗口（并行 worktree 各自重排该子节，git 静默三方合并 → 重号/超窗）
   13. 冲突标记：任何入库文本文件不得残留 git 合并冲突标记（<<<<<<< / ||||||| / >>>>>>>）
+  14. ADR 台账（[ADR-069]）：DECISIONS.md 每条 ### ADR-NNN 都在 PROJECT/ADR-LEDGER.md
+      登记过；台账编号 1..max 连续、不重复（并行分支预支编号必撞的护栏）
 """
 import datetime
 import json
@@ -63,6 +65,10 @@ ADR_REF_RE = re.compile(r"\[?(ADR-\d{3})\]?")
 # 误报率接近零（裸 `=======` 会撞 rst/markdown 标题，故不收）。并行分支未清冲突
 # 即入库的护栏（2026-09-04 PR #61/#62 的教训之一，见 [ADR-069]）。
 CONFLICT_MARKER_RE = re.compile(r"^(?:<{7}|\|{7}|>{7}) ", re.M)
+# ADR-LEDGER.md 的登记行：区间行 `- ADR-001 … ADR-068 · ...` 兜住建台账前的历史条目，
+# 之后逐条 `- ADR-069 · ...`。见 [ADR-069]。
+LEDGER_RANGE_RE = re.compile(r"ADR-(\d{3})\s*(?:…|\.\.\.|—|~)\s*ADR-(\d{3})")
+LEDGER_SINGLE_RE = re.compile(r"^-\s*ADR-(\d{3})\b")
 SOURCES_DOMAIN_RE = re.compile(r"^-\s+`([a-z0-9.\-]+\.[a-z]{2,})`", re.M)
 # 域名行含「官方/监管/第三方」标签的形式：- `domain`（可选括注） | 标签 | 语言 | ...
 # 部分"补充登记"行只有域名没有后续管道分隔，靠上面的 SOURCES_DOMAIN_RE 收录、
@@ -164,6 +170,39 @@ def roadmap_recent_violations(recent_block, limit=ROADMAP_RECENT_MAX):
         return [f"ROADMAP §一「最近完成」有 {n} 条，超出滚动窗口上限 {limit}"
                 f"（CLAUDE.md §八：只留最近 3 条，更早的见三节；见 [ADR-069]）"]
     return []
+
+
+def adr_ledger_violations(decisions_nums, ledger_text):
+    """DECISIONS.md 的 ADR 编号集合 ⊆ ADR-LEDGER.md 登记的编号；台账 1..max 连续无重复。
+    返回违规消息列表（空 = 合法）。判定纯逻辑、无 I/O，selfcheck 喂合成输入锁行为。"""
+    reserved, dup = set(), set()
+    for line in ledger_text.splitlines():
+        s = line.strip()
+        if not s.startswith("- ADR-"):
+            continue
+        rng = LEDGER_RANGE_RE.search(s)
+        if rng:
+            for n in range(int(rng.group(1)), int(rng.group(2)) + 1):
+                reserved.add(n)
+            continue
+        m = LEDGER_SINGLE_RE.match(s)
+        if m:
+            n = int(m.group(1))
+            (dup if n in reserved else reserved).add(n)
+            reserved.add(n)
+    out = []
+    missing = sorted(decisions_nums - reserved)
+    if missing:
+        out.append("PROJECT/ADR-LEDGER.md: 未登记 " + ", ".join(f"ADR-{n:03d}" for n in missing)
+                   + "（DECISIONS.md 有、台账没有——写 ADR 前先登记，见 [ADR-069]）")
+    if dup:
+        out.append(f"PROJECT/ADR-LEDGER.md: 编号重复登记 {sorted(f'ADR-{n:03d}' for n in dup)}")
+    if reserved:
+        gaps = sorted(set(range(1, max(reserved) + 1)) - reserved)
+        if gaps:
+            out.append("PROJECT/ADR-LEDGER.md: 编号不连续，缺口 "
+                       + ", ".join(f"ADR-{n:03d}" for n in gaps))
+    return out
 
 
 # ── 数值反查复用工具（CLAUDE.md 二.5）─────────────────────────
@@ -662,6 +701,20 @@ def validate_adr_anchors():
                 err(f"{md.relative_to(ROOT)}: 引用了不存在的 `{ref}`（DECISIONS.md 里没有这条）")
 
 
+def validate_adr_ledger():
+    """DECISIONS.md 的每条 ADR 都在 ADR-LEDGER.md 登记过；台账编号连续无重复（[ADR-069]）。"""
+    decisions_path = PROJECT_DIR / "DECISIONS.md"
+    ledger_path = PROJECT_DIR / "ADR-LEDGER.md"
+    if not decisions_path.exists():
+        return
+    if not ledger_path.exists():
+        err("PROJECT/ADR-LEDGER.md 不存在（ADR 编号台账，见 [ADR-069]）")
+        return
+    decisions_nums = {int(x[4:]) for x in ADR_DEF_RE.findall(decisions_path.read_text(encoding="utf-8"))}
+    for v in adr_ledger_violations(decisions_nums, ledger_path.read_text(encoding="utf-8")):
+        err(v)
+
+
 def validate_roadmap_section_one():
     """ROADMAP §一「下一步」编号连续无重复 + 「最近完成」不超滚动窗口（[ADR-069]）。"""
     path = PROJECT_DIR / "ROADMAP.md"
@@ -727,6 +780,7 @@ def main():
     validate_docs_data_fresh(taxonomy, glossary, enums, exchanges_expanded)
     validate_path_references()
     validate_adr_anchors()
+    validate_adr_ledger()
     validate_roadmap_section_one()
     validate_no_conflict_markers()
 
