@@ -542,21 +542,21 @@
         }
       },
       "holidays_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "ASX 每年发布现货市场交易日历。2026 年休市日：元旦（1/1）、澳大利亚日（1/26）、耶稣受难日（4/3）、复活节星期一（4/6）、ANZAC 日（4/25）、国王生日（6/8）、圣诞节（12/25）、节礼日（12/28）；圣诞前最后一个工作日（12/24）与年末最后一个工作日（12/31）于悉尼时间 14:10 提前收市。ASX 保留在不另行通知的情况下增设或调整非营业日的权利",
+        "en": "ASX publishes an annual cash-market trading calendar. 2026 closures: New Year's Day (1 Jan), Australia Day (26 Jan), Good Friday (3 Apr), Easter Monday (6 Apr), ANZAC Day (25 Apr), King's Birthday (8 Jun), Christmas Day (25 Dec), Boxing Day (28 Dec); the last business day before Christmas (24 Dec) and the last business day of the year (31 Dec) close early at 14:10 Sydney time. ASX reserves the right to declare additional Non-Business Days or alter those specified without notice",
+        "quote": "PUBLIC HOLIDAY DATES FOR 2026 …… New Year’s Day Thursday 1 January CLOSED …… Australia Day Monday 26 January CLOSED …… Good Friday Friday 3 April CLOSED …… Easter Monday Monday 6 April CLOSED …… ANZAC Day Saturday 25 April CLOSED …… King’s Birthday Monday 8 June CLOSED …… Last Business day before Christmas Day Thursday 24 December CLOSE EARLY …… Christmas Day Friday 25 December CLOSED …… Boxing Day Monday 28 December CLOSED …… Last Business day of the Year Thursday 31 December CLOSE EARLY …… Normal trading ceases at 14:10 (Sydney time). ASX Limited reserves the right to declare additional Non-Business Days or alter those currently specified herein without notice",
         "sources": [
           {
-            "title": "Cash market trading hours（ASX 官网）",
-            "url": "https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours",
-            "accessed": "2026-08-14"
+            "title": "ASX Trade calendar — Trading calendar for ASX cash market products（2026 trading calendar）",
+            "url": "https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours/trading-calendar",
+            "accessed": "2026-09-04"
           }
         ],
+        "detail": "quote 用「……」连接页面标题、假期表逐行与页脚说明（中间为表格其他列 / 脚注编号）。ANZAC Day 落在周六，实际不影响交易日。",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "opening_mechanism": {
         "spec": {
@@ -706,25 +706,27 @@
         "enum": null
       },
       "board_lot_size": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "未核实ASX是否仍保留传统意义上的标准交易单位/整手概念，留空。",
+        "zh": "无股数意义上的「整手」；盘中订单以任意股数申报（最小 1 股）。相关概念是按价值定义的「适销单位」（Marketable Parcel）——不少于 500 澳元的股票组合，用于最低持股要求与非适销单位卖出便利，不是订单单位",
+        "en": "No share-count board lot; on-market orders are placed in any number of shares (minimum 1). The related concept is a value-based 'Marketable Parcel' — a parcel of equity securities of not less than A$500 — used for minimum-holding requirements and the non-marketable-parcel sale facility, not as an order unit",
+        "quote": "Marketable Parcel means, in relation to: 1. Equity Securities (but not rights to subscribe for Equity Securities or options over Equity Securities) a parcel of securities of not less than $500 based on: (a) the closing price on a Trading Platform, if the Equity Securities are quoted",
         "sources": [
           {
-            "title": "Cash market trading hours（ASX 官网）",
-            "url": "https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours",
-            "accessed": "2026-08-14"
+            "title": "ASX Operating Rules Procedures（定义节「Marketable Parcel」）PDF",
+            "url": "https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_procedures.pdf",
+            "accessed": "2026-08-30"
           }
         ],
+        "detail": "「盘中以任意股数申报」为消极认定（Operating Rules 无股数整手条款）；「适销单位 = 不少于 500 澳元」有逐字 quote 支撑。confidence 取 medium（两部分强度不同）。",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "odd_lot_handling": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "无独立的「碎股」市场——盘中可按任意股数交易。持有非适销单位（< 500 澳元）的股东可通过公司的非适销单位卖出便利离场，属公司层面安排、非交易所专门撮合机制",
+        "en": "No separate odd-lot market — any quantity may be traded on-market. A holder of a non-marketable parcel (< A$500) may exit via a company's non-marketable-parcel sale facility, an issuer-level arrangement rather than a dedicated exchange matching mechanism",
+        "detail": "「无独立碎股市场」为消极认定（未见 ASX 关于 odd-lot / special-lot 市场的规则）；非适销单位卖出便利见 board_lot_size 的 Marketable Parcel 定义与 ASX Listing Rules 的持股相关条款。",
+        "confidence": "medium",
         "sources": [
           {
             "title": "Cash market trading hours（ASX 官网）",
@@ -733,10 +735,8 @@
           }
         ],
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null
       },
       "price_limits": {
@@ -778,7 +778,9 @@
           "detail": null
         },
         "other_boards": {
-          "zh": "",
+          "zh": "无——ASX 任何上市类别 / 报价类别均不设每日涨跌停幅度；价格保护统一为订单级 AOT 阈值（见 type / main_board），不按板块区分",
+          "en": "None — no ASX listing or quotation category has a daily price-limit band; price protection is a uniform order-level AOT threshold (see type / main_board), not differentiated by board",
+          "confidence": "medium",
           "sources": [
             {
               "title": "Cash market trading hours（ASX 官网）",
@@ -787,8 +789,6 @@
             }
           ],
           "verified": "2026-08-14",
-          "confidence": "high",
-          "en": null,
           "enum": null,
           "spec": null,
           "detail": null,
@@ -949,21 +949,26 @@
         "spec": null
       },
       "dark_pool": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "ASX 自营暗池 **ASX Centre Point**：非展示流动性按全国最优买卖价（NBBO）中点匿名撮合，含 Dark Limit、Centre Point Block、Any Price Block、ASX Sweep（先扫暗池再走 TradeMatch 明盘）等订单类型；占 ASX 日均成交量 10% 以上。此外澳洲有独立暗盘场所 Cboe Australia（Cboe Mid-Point / BIDS）及约 20 家券商内部撮合系统。监管：ASIC《市场诚信规则（证券市场）》要求成交须撮合于盘前透明订单簿，Rule 6.2.1 大宗交易为例外——单笔对价不低于 Tier 1 A$100 万 / Tier 2 A$50 万 / Tier 3 A$20 万（逐季按 ADV 分档）方可免盘前透明；低于大宗规模的暗盘成交须较明盘最优价有『实质性价格改善』（2013-05-26 起）",
+        "en": "ASX runs its own dark pool, **ASX Centre Point**: non-displayed liquidity matched anonymously at the mid-point of the National Best Bid and Offer (NBBO), with order types including Dark Limit, Centre Point Block, Any Price Block and ASX Sweep (sweeps the dark pool then routes to the lit TradeMatch book); it accounts for more than 10% of ASX average daily volume. Independent venues also operate: Cboe Australia (Cboe Mid-Point / BIDS) and ~20 broker crossing systems. Regulation: ASIC's Market Integrity Rules (Securities Markets) require matching against a pre-trade-transparent order book, with Rule 6.2.1 (block trades) as the exception — no pre-trade transparency where consideration is at least A$1m (Tier 1) / A$500k (Tier 2) / A$200k (Tier 3), tiered quarterly by ADV; sub-block dark trades must give meaningful price improvement over the lit best price (since 26 May 2013)",
+        "detail": "本字段的『本所自营暗池』一栏 au-asx 是本项目少数肯定案例（对比 us-nyse / hk-hkex / jp-jpx / sg-sgx / kr-krx 均为『本所无、市场有第三方』）。ASX Centre Point 与 ASX 明盘 TradeMatch 原生整合但为独立的非展示撮合系统，故计入本字段（本所订单簿内部的冰山/隐藏单归 order_book_transparency）。Rule 6.2.1 分档具体阈值由 ASIC 逐季在联邦立法登记册公布。",
         "sources": [
           {
-            "title": "Cash market trading hours（ASX 官网）",
-            "url": "https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours",
-            "accessed": "2026-08-14"
+            "title": "ASX Centre Point — customer brochure (BEM-3683, content correct as at March 2025)",
+            "url": "https://www.asx.com.au/content/dam/asx/participants/trading-platforms/centre-point/asx-centre-point-customer-brochure.pdf",
+            "accessed": "2026-09-04"
+          },
+          {
+            "title": "ASIC — Block trade tiers (Market Integrity Rules (Securities Markets) Rule 6.2.1)",
+            "url": "https://asic.gov.au/regulatory-resources/markets/market-structure/block-trade-tiers/",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "ASX Centre Point, Australia's largest anonymous mid-point execution venue …… ASX Centre Point is Australia's only dark pool matching system which can offer true integration with the lit market without …… towards more than 10% of average daily volumes. …… Non-displayed liquidity matched at the mid-point of the National Best Bid and …… This exception allows a transaction to be executed without pre-trade transparency where the consideration for the transaction is not less than: $1 million or more for Tier 1 equity market products $500,000 or more for Tier 2 equity market products, and $200,000 or more for Tier 3 equity market products and CGS depository interests.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "market_maker_scheme": {
         "spec": {
@@ -993,9 +998,10 @@
         "detail": null
       },
       "connect_schemes": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "未见类似沪港通式的跨境互联互通机制；ASX Clear的Trade Acceptance Service(TAS)接受Cboe Australia、National Stock Exchange of Australia等其他本地市场运营商(AMO)的CHESS适格证券交易，属本地竞争市场间的清算互通，非跨境机制，与「互联互通」概念不完全对应，暂不作为该字段的正式内容填入。",
+        "zh": "无沪港通 / 深港通式的跨境股票互联互通机制。ASX Clear 的 Trade Acceptance Service（TAS）接受 Cboe Australia、National Stock Exchange of Australia 等其他本地市场运营商（AMO）的 CHESS 适格证券交易，属本地竞争市场之间的清算互通、非跨境订单路由安排。境外投资者按澳大利亚一般外资规则参与，无需通过专门连接通道",
+        "en": "No cross-border stock-connect scheme of the Shanghai-/Shenzhen-Hong Kong Stock Connect type. ASX Clear's Trade Acceptance Service (TAS) accepts CHESS-eligible trades from other domestic Approved Market Operators (Cboe Australia, National Stock Exchange of Australia) — a clearing-interoperability arrangement between competing domestic venues, not a cross-border order-routing link. Foreign investors participate under Australia's general foreign-investment rules without a dedicated connect channel",
+        "detail": "「无跨境互联互通」为消极认定（未见 ASX 或 ASIC 关于此类机制的任何安排）；TAS 的本地清算互通有官方规则支撑。境外准入渠道见 participants.foreign_access_channel。",
+        "confidence": "medium",
         "sources": [
           {
             "title": "Cash market trading hours（ASX 官网）",
@@ -1004,7 +1010,6 @@
           }
         ],
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "spec": null,
         "quote": null

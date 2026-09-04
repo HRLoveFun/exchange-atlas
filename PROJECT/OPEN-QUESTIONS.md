@@ -112,6 +112,16 @@
     - `ca-tsx regulatory_fees` → **[ADR-065] 实质修正**：不是「不征」也不是「查不到」，而是有按笔市场监管费——CIRO《Equity Market Regulation Fee Model》成本回收制（Message Processing Fee + Trade Fee，Participants 缴纳，OSC Bulletin 24-0154 第 8 节）；`rate: null` 保留（无固定比率、随 CIRO 年度成本预算浮动）。`kr-krx regulatory_fees` → 仍缺 KRX 非 JS 端点，维持 `rate: null`。
     - 方法学结论：`rate: null` 本身审慎正确——税务局页只覆盖自身税种、不证伪 FTT/监管费，能翻 `type: none` 的仅限有肯定性「不征」**一手**陈述者（如 `de-xetra` Bundestag 1991 废止条文、`kr-krx stamp_duty` 的《印花税法》税基定义）；第三方综述至多支撑「暂定 type: none」。「查不到监管费」有时是「其实有、只是浮动费」（ca-tsx 案例）——降级时要区分。
     - 未竟：`cost_layer` 是否加存原文数值串的键（`za-jse`/`tw-twse` STT 逗号/国字小数进不了 `spec.rate`）——需先讨论口径，不擅自放宽铁律；`uk-lse regulatory_fees` 未覆盖 PTM Levy；`au-asx exchange_fees` 自身无 quote（引在同文件 `implicit_costs_note`）。
+
+- **[ADR-060 任务二] `holidays_note` 4 家的官方交易日历页是 JS 单页应用（SPA），curl 与 WebFetch 都只拿到外壳，逐年假期表靠前端渲染——`ca-tsx` / `uk-lse` / `ch-six` / `de-eurex` 因此维持 `confidence: low` 留空（2026-09-04）。** 已试：`tsx.com/en/trading/calendars-and-trading-hours` 及其 `/calendars` 子页（后者 404）；`londonstockexchange.com/equities-trading/business-days` 及 `docs.londonstockexchange.com` 的 Business-days PDF（404）；`six-group.com` trading-days.html（404），Trading Guide PDF 里的「Trading Calendar 2026/2027」是像素日历网格、无可摘引文本；`eurex.com/ex-en/trade/trading-calendar` 及 `/holiday-regulations` 均导航壳。已完成的 3 家：`us-nasdaq`（Nasdaq Trader 旧版 ASP 页有完整假期表，medium）、`br-b3`（Holidays 页有休市规则句 + 巴西法定假日清单，无 JS 时默认显示往年骨架，medium）、`au-asx`（`asx.com.au` 现货交易日历页静态 HTML 含完整 2026 假期表 + 14:10 提前收市说明，high）。**待补**：`ch-six` / `de-eurex` 的年度交易日历 PDF 直链（非 AJAX），或人工提供 `ca-tsx` / `uk-lse` 假期日历页原文；或用 task 5 的渲染型抓取器。
+- **[ADR-060 任务二] `intraday_reversal` 6 家（`ca-tsx` / `ch-six` / `de-xetra` / `fr-euronext` / `sa-tadawul` / `uk-lse`）填 `enum: t0` / `confidence: medium`，依据是各所交易规则手册通读后不含持有期或「交收前不得卖出」限制（消极认定）+ 与中国 A 股 T+1 明文条款对照（2026-09-04）。** 若要升 `high`，需各所对「买入证券当日可卖出」的正面官方陈述——多数发达市场不单列此条（如 `kr-krx` 只能靠 Clearstream「same-day turnaround」的第三方表述，封顶 medium）。`de-eurex` 已按 [ADR-060] 字段级 `not_applicable` 处理（衍生品无现货持有期概念，见框架性问题 #17）。
+- **[ADR-060 任务二] `ca-tsx block_trade` 的跨市场「block」定义（CIRO/UMIR 项下）未取到一手原文（2026-09-04）。** `ca-tsx.yml` 现填的是 TSX 规则手册在「发行人回购大宗购买豁免」语境下的 `block` 定义（购买额 ≥ CAD 20 万 / ≥ 5,000 股且 ≥ CAD 5 万 / ≥ 20 手且 ≥ 150% ADTV），已核实；但真正跨市场适用的门槛在 CIRO Universal Market Integrity Rules Rule 6.6（Dark Order 价格改善豁免：> 50 standard trading units 且 > CAD 30,000，或 > CAD 100,000）与 Rule 1.1，`ciro.ca` 对 curl 与 WebFetch 均返回 Cloudflare 质询（403），本次未拿到逐字原文。**待补**：人工提供 CIRO UMIR 6.5 / 6.6 / 1.1 原文，或用渲染型抓取器；该门槛同时也是 `dark_pool` 字段的关键依据。
+- **[ADR-060 任务二] `dark_pool` 回填清零（2026-09-04），5 家 `confidence: medium` 依赖的官方来源较旧或未逐字缓存，可日后升 `high`：**
+  - `hk-hkex`：现填引 2012-11-28 立法会答复（LCQ15），确立 SFC 第 V 部发牌 + ALP 强制标记两项核心制度；『第 7 类牌照』『合资格投资者仅限机构』的细化在 SFC《操守准则》第 19 段及附表 8（2015-12-01 生效），本次未逐字缓存——待抓 SFC Code of Conduct PDF。
+  - `sg-sgx`：现填引 MAS 2010 国会答复（撮合网络限大额单 + 单股成交量上限）；Chi-East 2010 上线 / 2014 停运为第三方（The TRADE）；待补 MAS 对撮合网络当前 RMO 待遇的一手表述、单股成交量上限具体数值。
+  - `kr-krx`：Nextrade（NXT，2025-03-04 开业）『中间价申报』是否构成独立非展示订单簿，NXT 官方市场规则未确认；ATS 的 FSCMA 市场份额上限具体数值未逐字缓存。
+  - `jp-jpx`：引日本証券経済研究所（JSRI）2025-11 报告（第三方，封顶 medium）；PTS 的 FIEA 许可与市场份额上限细则待抓 FSA / JSDA。
+  - `in-nse`：SEBI 无单句『禁止暗池』的正面表述，禁止性靠《证券合约（监管）法》结构 + 一贯监管实践推得。**并附一条勘误**：多篇二手文章称『NSE Alpha 是印度唯一合法暗池 / NSE 2010 年推出暗池框架』，本次遍查 NSE / SEBI 一手资料无任何依据，判为不实，`in-nse.yml` 已按『印度不允许暗池』填写。
 <!-- BEGIN:GENERATED auto-issues -->
 - `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `br-b3` 基本信息 / 夏令时规则（dst_rule）— confidence: low
@@ -124,7 +134,6 @@
 - `ch-six` 风险与特殊考量 / 政治、地缘与制裁风险（political_risk_note）— confidence: low
 - `cn-sse` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `cn-sse` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
-- `cn-sse` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
 - `cn-sse` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `cn-sse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `cn-szse` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
@@ -136,11 +145,7 @@
 - `de-xetra` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `fr-euronext` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `fr-euronext` 市场结构与交易机制 / 上午连续竞价（trading_sessions.continuous_am）— confidence: low
-- `fr-euronext` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
-- `fr-euronext` 市场结构与交易机制 / 大宗交易（block_trade）— confidence: low
-- `fr-euronext` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
 - `hk-hkex` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
-- `hk-hkex` 市场结构与交易机制 / 最小交易单位（board_lot_size）— confidence: low
 - `hk-hkex` 清算、结算与交割 / 交割方式（delivery_method）— confidence: low
 - `hk-hkex` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（trading_halt_mechanism）— confidence: low
@@ -165,7 +170,6 @@
 - `sa-tadawul` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `sg-sgx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `tw-twse` 监管与法律环境 / 外资准入与持股比例限制（foreign_ownership_limit）— confidence: low
-- `tw-twse` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
 - `tw-twse` 清算、结算与交割 / 初始保证金制度（initial_margin_practice）— confidence: low
 - `tw-twse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `us-nasdaq` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low

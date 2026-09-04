@@ -250,6 +250,8 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `ird.gov.hk`（税务局官网，2026-08-22 新增登记） | 官方（监管机构） | zh-Hant / en（同一路径 `/chi/` 与 `/eng/` 切换） | curl 常规 UA 探测通过 | 用于核实股息预扣税
   - 利得税（股息不予徵税条文页，中文版）: https://www.ird.gov.hk/chi/tax/bus_pft.htm
   - Profits Tax（英文版，与中文版交叉核对用）: https://www.ird.gov.hk/eng/tax/bus_pft.htm
+- `info.gov.hk`（香港政府新闻公报 GIA，2026-09-04 新增登记） | 官方（政府新闻处发布的立法会答问等一手文件） | en / zh-Hant | curl 常规 UA 200；⚠️ 旧公报页 `charset=BIG5`，非 UTF-8，抓下来后按 latin-1/BIG5 解码再抽正文 | `dark_pool` 依据：财经事务及库务局局长就「暗池交易的规管」的立法会书面答复（LCQ15，2012-11-28）——SFC 依《证券及期货条例》第 V 部发牌规管暗池运营者、SEHK 自 2012-10-03 起强制 ALP 标记
+  - LCQ15: Regulation of dark pool trading（2012-11-28）: https://www.info.gov.hk/gia/general/201211/28/P201211280278.htm
 
 ### 纽约证券交易所 New York Stock Exchange (NYSE) `us-nyse`
 - `nyse.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬；注意站内不少旧 URL 会 301/302 跳转到新路径（如 `/products/etp-limit-up-limit-down` 跳到 `/trade/trading-information`），curl 要带 `-L` 跟随重定向 | ⚠️ NYSE 集团旗下有 NYSE、NYSE American、NYSE Arca、NYSE National、NYSE Texas 多个 SEC 注册的独立交易所实体（`group_id: nyse-group`），很多页面把几个实体的信息混在一起讲，摘引时要看清楚是哪个实体（本文件只收 NYSE 本身/Tape A 的信息）；⚠️ 主站是 CMS2（React）驱动，多数栏目落地页静态 HTML 里能拿到真实正文段落（挂在 `<main><div data-testid="belt">...` 结构下），但也有个别历史遗留 PDF 直链已失效、curl 200 却拿到的是 HTML 兜底壳（如 `NYSE_Market_Quality_infographic.pdf` 实测返回的是网页壳层，不是真正的 PDF 二进制，`pdftotext` 会直接报"Illegal character"语法错误——遇到这种"HTTP 200但内容类型不对"要用 `head -c 300` 看文件头是不是 `<!DOCTYPE html>` 而不是想当然按 PDF 处理）
@@ -339,6 +341,8 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
     - Brokerage Agreement Standards（受託契約準則英文版，经纪商与客户开户/委托合同准则，account_opening_requirements依据）PDF: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/brokerage_agreement_standards_20260401.pdf（HTTP 200；WebSearch给出的旧文件名 ...20250401.pdf 已404，经验记入下方——与既有「XXXX年修订式规则文档URL会随修订版本更迭直接下线」经验一致）
 - `jipf.or.jp`（日本投资者保护基金 Japan Investor Protection Fund，FIEA法定设立的会员制法人，官方自身网站） | 官方（法定投资者保护机制运营主体） | en | curl 常规 UA 200 | investor_protection 字段依据
   - About Us: https://jipf.or.jp/en/about/index.html（HTTP 200）
+- `jsri.or.jp`（日本証券経済研究所 Japan Securities Research Institute，2026-09-04 新增登记） | 第三方（证券业研究机构，按 CLAUDE.md 二第3条 confidence 上限 medium） | en | curl 常规 UA 200 | `dark_pool` 依据：研究报告《The Implications of Cboe Japan's Withdrawal》（Morimoto，2025-11）——2025-08 底 Cboe Japan（原 Chi-X Japan）终止 PTS 业务后日本已无独立 PTS，券商 SBI Cross / R-Cross 暗池与 SBI Japannext 为券商关联场所
+  - The Implications of Cboe Japan's Withdrawal – Structural Changes in Japan's Stock Market（PDF）: https://www.jsri.or.jp/upload/topics_2511_01_en.pdf
 - `mof.go.jp`（财务省，外汇外贸法FEFTA对内直接投资事前申报制度主管机关之一） | 官方（监管机构） | en | curl 常规 UA 200 | capital_controls/foreign_ownership_limit 字段依据，FEFTA要求外国投资者投资"核心业务领域"上市公司达1%以上须事前申报
   - Foreign investors are required to submit a prior notification（制度概述其一）PDF: https://www.mof.go.jp/english/policy/international_policy/fdi/Overview/outline1.pdf（HTTP 200）
   - Mandatory Notification of Foreign Investors: Outline of the system（制度概述其二）PDF: https://www.mof.go.jp/english/policy/international_policy/fdi/Overview/outline2.pdf（HTTP 200）
@@ -718,6 +722,7 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
   - Regulatory Guide 196 - Short Selling PDF: https://download.asic.gov.au/media/4896780/rg196-published-8-october-2018.pdf（HTTP 200，702KB）
   - RG 196 索引页: https://www.asic.gov.au/regulatory-resources/find-a-document/regulatory-guides/rg-196-short-selling/（HTTP 200，66KB）
   - ASX 因 CHESS 替换项目误导性陈述被罚 2050万澳元（2026年，用于风险与特殊考量章节的监管执法案例）: https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-143mr-asx-ordered-to-pay-20-5-million-penalty-for-misleading-conduct-relating-to-chess-replacement-project/（HTTP 200，20KB）
+  - Block trade tiers（`dark_pool` 依据：Market Integrity Rules Rule 6.2.1 盘前透明度豁免门槛 Tier 1 A$100 万 / Tier 2 A$50 万 / Tier 3 A$20 万，逐季按 ADV 分档）: https://asic.gov.au/regulatory-resources/markets/market-structure/block-trade-tiers/（curl 常规 UA 200，2026-09-04）
 - `foreigninvestment.gov.au` | 监管（外国投资审查委员会 FIRB 所属网站，财政部下设） | en | curl 常规 UA 200 | 用于确认外资持股上市公司的申报门槛（一般性被动持股 <20% 通常无需申报，达到实质利益门槛或涉及国家安全业务另有规则），非 ASX 自身规则而是全澳适用的外资审查制度，与港交所"自由港无限制"形成对比
   - 首页: https://foreigninvestment.gov.au/（HTTP 200，34KB）
   - Guidance Note 7 - Business Investments PDF: https://foreigninvestment.gov.au/sites/firb.gov.au/files/guidance-notes/gn07_business-20230531.pdf（HTTP 200，497KB）
@@ -824,11 +829,14 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - `www.openapi.krx.co.kr` | 官方（KRX OpenAPI，同上 www 前缀） | ko | curl 常规 UA 200 | 同上
 - `fss.or.kr` | 官方（金融监督院 FSS） | ko | curl 常规 UA 200 | 投资者保护/ suitability（investor_protection 出处）
 - `www.fss.or.kr` | 官方（FSS www 前缀） | ko | curl 常规 UA 200 | 同上
-- `www.fsc.go.kr` | 官方（金融委员会 FSC） | ko | curl 常规 UA 200 | 监管框架（regulation 出处）
+- `www.fsc.go.kr` | 官方（金融委员会 FSC） | ko | curl 常规 UA 200；英文新闻页 `/eng/prXXXXXX/<id>` 同样 curl 200 | 监管框架（regulation 出处）；`dark_pool` 依据：FSC 于 2025-02-05 向 Nextrade 授予 ATS 最终许可、2025-03-04 开业的英文新闻稿 https://www.fsc.go.kr/eng/pr010101/83967（ATS 立法依据 2013 年立）
+- `nextrade.co.kr` | 官方（韩国首家 ATS Nextrade / NXT 自身官网） | en（`/en/` 路径）/ ko | curl 常规 UA 200 | `dark_pool` 依据：NXT 市场概览页——「Korea's first Alternative Trading Platform」「second stock trading venue alongside the Korea Exchange, established under the Financial Investment Services and Capital Markets Act」，打破韩国 50 年单一交易系统
+  - Market Overview: https://nextrade.co.kr/en/marketOverview/content.do
 - `law.kofia.or.kr` | 官方（韩国证券业协会 KOFIA） | ko | curl 常规 UA 200 | 自律规则/适当性（suitability_management 出处）
 - `www.kcmi.re.kr` | 官方（资本市场研究院 KCMI） | ko | curl 常规 UA 200 | 市场结构研究（market_structure 出处）
 - `www.k-otc.or.kr` | 官方（K-OTC 场外市场） | ko | curl 常规 UA 200 | 退市后场外转移（post_delisting_venue 出处）
 - `www.clearstream.com` | 官方（Clearstream 国际中央存托） | en | curl 常规 UA 200 | 国际存托/交收（clearing 出处）
+  - Settlement process – South Korea（KRX 上市股票「当日回转交易」same-day turnaround 规则的明文表述；2026-09-04 数据空缺复核轨任务二 `intraday_reversal` 回填所抓，curl 200，205KB）: https://www.clearstream.com/clearstream-en/res-library/market-coverage/settlement-process-south-korea-1283572
 - `en.sedaily.com` | 第三方（韩国经济日报英文） | en | WebSearch 定位 | 市场背景（confidence 封顶 medium）
 - `en.yna.co.kr` | 第三方（韩联社英文） | en | WebSearch 定位 | 政治/流动性风险（confidence 封顶 medium）
 - `www.koreaherald.com` | 第三方（韩国先驱报） | en | WebSearch 定位 | 流动性/政治风险（confidence 封顶 medium）

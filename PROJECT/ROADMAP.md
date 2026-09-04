@@ -23,6 +23,8 @@
 1. ~~成本瀑布数据层残差~~ **✅ 已收口**（[ADR-065] 2026-09-04 残差 + [ADR-067] 2026-09-04 长尾）：`side` / `type: none` / 现行标准逐条坐实——`uk-lse`/`za-jse stamp_duty` `side: buy`、`cn-sse`/`cn-szse stamp_duty` `side: sell`（《印花税法》第三条）、`kr-krx`/`cn-sse`/`cn-szse`/`de-eurex`/`za-jse`/`sg-sgx`/`au-asx` 的 FTT·regulatory_fees `type: none`（结构性正面依据）、`cn-szse regulatory_fees` 补 0.02‰、`za-jse regulatory_fees` 补 IPL 0.0002%、`ca-tsx regulatory_fees` 实质修正。**剩（非本轨、已移交）**：`kr-krx exchange_fees` 当期档位（KRX 站 JS → 归入下方任务五 `kr-krx` OTP-AJAX 抓取）；`us-nyse`/`us-nasdaq` Section 31 FY2027 公告（未发布，触发点见 OPEN-QUESTIONS #88）；`fr-euronext stamp_duty`（一所多国、`rate: null` 是正确终态）
 2. **成本瀑布视觉迭代**（交互式会话）— [ADR-047] 已知局限：单一费种远大于其余时左半留白、全零市场「合计 0.00 bp」略尴尬、暗色「此侧不征」虚线偏弱、按股/定额费折算较粗
 3. **交割管线视觉迭代** — [ADR-051] 已知局限：深色预防层色块偏淡、T+1 现货所右半留白；违约瀑布 `resource` 短语无 `en`、英文态仍中文（同 [ADR-049] 对 `detail` 的结构性处置，触发条件见 [ADR-051]）
+4. **其后按交易员价值继续**：参与者 → 风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）——每个模块的设计定案按 [ADR-057] 的 merge-ready 清单逐条回答。上市生命周期已三棒做齐（[ADR-059]）、监管图已两棒做齐 + 审查视觉修订（[ADR-061]），两者均可做视觉迭代（上市生命周期已知局限：有散文无 spec 的阶段块内文字是硬裁剪片段 / 停复牌 ↻ 偏淡 / 给更多所补时长 spec 是数据层活；监管图已知局限：卡片正文按卡高 ≤4 行硬裁剪 + 中英混排 Latin 词被逐字折行截断，长文卡「先摘要后全文」精修是数据层活，见 [ADR-061]）
+5. **数据空缺复核轨（横切，与 Phase 3 并行；[ADR-060]/[ADR-062]/[ADR-065]）** — **任务一已完成**（2026-09-03，[ADR-062]：leaf `optional`/`not_applicable` 机制 + A 桶标注）；**任务二已完成**（2026-09-04，[ADR-065]：8 高频字段横切清零，全库 +18 字段，`de-eurex` 5 字段首次真实 `not_applicable`）。**剩余**：任务二三处遗留待人工——(a) `holidays_note` 4 家（`ca-tsx`/`uk-lse`/`ch-six`/`de-eurex`）JS-SPA 交易日历；(b) `ca-tsx block_trade` 的 CIRO UMIR 6.6 门槛（`ciro.ca` Cloudflare 403）；(c) `dark_pool` 5 家 medium 升 high。**任务二触及约 74 字段、第二人独立复核尚未进行（[CLAUDE.md §四]，待人工）**。**任务三**（9 家衍生品子章 C 桶 40 处）、**任务四**（5 家旗舰所深度 F 桶，`us-nyse`/`hk-hkex`/`uk-lse`/`cn-sse`/`jp-jpx`，建议 Phase 4 前完成、非硬前置）、**任务五**（`kr-krx` OTP-AJAX + `za-jse` 缓存重建 + 时效触发，按触发点）未启动。详版见三节
 4. **其后按交易员价值继续**：风险旗标（B 组 `fx_risk_note`/`kr-krx` low 簇就地清）——设计定案按 [ADR-057] merge-ready 清单逐条回答。已做齐 / 可视觉迭代：上市生命周期三棒（[ADR-059]，已知局限：散文无 spec 的阶段块硬裁剪 / 停复牌 ↻ 偏淡 / 补时长 spec 是数据层活）、监管图两棒 + 审查修订（[ADR-061]，已知局限：卡正文按卡高 ≤4 行硬裁剪 + 中英混排 Latin 词逐字折断）、**参与者图做齐（[ADR-064]，已知局限：散文长 → 节点卡硬裁剪 / 中英混排 Latin 词逐字折断 / 「先摘要后全文」散文精修是数据层活）**
 5. **数据空缺复核轨（横切，与 Phase 3 并行；[ADR-060]/[ADR-062]）** — 全库 316 处空缺六桶（ADR-060）：A 58 已标 `optional` 移出完成度分母；**B 50 / D 10 经逐所核对回 F（真实研究缺口，任务二/四清单扩容）**；余 C 40 / E 10 / F 148 原判不变。**任务一已完成（2026-09-03，[ADR-062]）**：leaf 级 `optional`/`not_applicable` 机制落地 + A 桶 4 字段标 `optional`，B/D 桶不标 `not_applicable`。任务二三（横切 8 高频字段 / 9 家衍生品子章残余）穿插 viz 模块间；任务四（5 家旗舰所深度，`us-nyse`/`hk-hkex`/`uk-lse`/`cn-sse`/`jp-jpx`）建议 Phase 4 前完成（非硬前置）；任务五（`kr-krx` OTP-AJAX 抓取 + `za-jse` 缓存重建 + 时效触发）按触发点。详版见三节
 6. **Phase 3 全部单项模块做齐后（硬前置）→ Phase 4 单页画布合并**（[ADR-057]）：合并画布的整体布局形态 / 「更多」入口形态 / 各模块排序，启动时 Q&A 定；单项没做齐不启动
@@ -36,6 +38,9 @@
 
 ### 最近完成（滚动窗口，只留最近 3 条；更早的见三节）
 
+- **2026-09-04 · 数据空缺复核轨任务二 · 横切 8 高频字段批量回填清零**（[ADR-065]，1 个后台会话 / 8 commit，按字段推进）— `odd_lot_handling`/`dark_pool`/`board_lot_size`/`price_limits.other_boards`/`block_trade`/`connect_schemes`/`intraday_reversal`/`holidays_note` 结构性空缺清零（`holidays_note` 余 4 家 JS-SPA 降级留空、已文档化）；全库已填字段 1,900→1,918；`de-eurex` 5 字段首次真实字段级 `not_applicable`；`price_limits.other_boards` 评估后不补 `in_matrix`；26 个新 high 字段 `verify_quotes` FAIL=0。⚠️ 触及约 74 字段、第二人独立复核待人工
+- **2026-09-03 · 数据空缺复核轨任务一 · leaf 级 `optional`/`not_applicable` 机制 + A 桶标注**（[ADR-060] 实装 / [ADR-062]）— A 桶 overview 4 字段（58 处空缺）标 `optional`；`count_chapter_leaves`/`compute_freshness` 扩展 leaf 级 + 字段级 `not_applicable` 透传跳过；`validate.py` 两条不变式机器化；**B/D 桶经逐所核对回 F（不标 `not_applicable`）**。生成块仅 progress-matrix 第 2 列 12 家 🟡→✅、health-summary 零变化
+- **2026-09-03 · 监管图 Regulation Map · 设计 + 渲染层（两棒做齐）+ 审查视觉修订**（[ADR-061]）— 第三章 8 字段固定槽位四层「监管截面」：监管主体三卡 → 法律基座满宽暖色 → 外资与资金两卡 → 透明与保护两卡；`renderRegulationMap` 手写 SVG + 顶层 tab（7→8）+ 路由键 `regulation-map`；纯散文、零 spec，诚实两态（实心 / 虚线「未记录」），现网 9 处空白如实呈现。审查对 5 家长文所 × 明暗做 headless + SVG 几何实测，修 `rmWrap` 右边距（CJK 长行溢出卡右沿 6px）；纯前端、`docs/data/` 零 diff
 - **2026-09-04 · 成本瀑布数据层长尾**（[ADR-067]）— 承接 [ADR-065]「剩」段的 `type: none` 长尾，范式=「一国证券流转税有完整立法且无独立 FTT 税目 → 按 ADR-002 映射至 stamp_duty，FTT 判 type: none」。触及 8 字段 / 7 家：`cn-szse regulatory_fees` 补 0.02‰（发改价格规〔2018〕917号）、`cn-sse`/`cn-szse stamp_duty` `side: sell` 升《印花税法》第三条一手、`cn`/`de-eurex`/`za-jse`/`sg-sgx`/`au-asx` 的 FTT·regulatory_fees `type: none`、`za-jse regulatory_fees` 补 IPL 0.0002%（sharenet 第三方，jse.co.za 全 Cloudflare 403）、`kr-krx regulatory_fees` `type: none`（《金融委员会设置法》第 46/47 条，FSS 靠机构分担金）。`make check` 全绿、`progress-matrix` 零 diff、`health-summary` +2
 - **2026-09-04 · 参与者图 Participant Map · 设计定案 + 数据层评估 + 渲染层（做齐）**（[ADR-064]，Phase 3 第六棒）— 第九章 6 字段固定槽位三层「参与者截面」：谁在场上（`investor_structure` 满宽）→ 接入链 4 节点（会员→经纪→开户→适当性，汇于终点「你」）→ 外资平行道（`foreign_access_channel` 肘形汇入同一终点）。MVP 原型 `/tmp/pt-mvp/` 用户确认形态、7 轴逐条拍板；`investor_structure` 取纯散文（轴 5，同 [ADR-061] 先例）→ 全章零 spec、零 schema/data 改动。`renderParticipantMap` / `ptBuild` 手写 SVG + 顶层 tab（8→9）+ 路由键 `participant-map` + `.pt-*`；顺带 `.header-tabs` 加 `flex-wrap` 修 9 tab 挤压折断。纯前端三文件、`docs/data/` 零 diff、headless 7 家 × 3 宽度核对、三视图无回归
 - **2026-09-03 · 数据空缺复核轨任务一 · leaf 级 `optional`/`not_applicable` 机制 + A 桶标注**（[ADR-060] 实装 / [ADR-062]）— A 桶 overview 4 字段（58 处空缺）标 `optional`；`count_chapter_leaves`/`compute_freshness` 扩展 leaf 级 + 字段级 `not_applicable` 透传跳过；`validate.py` 两条不变式机器化；**B/D 桶经逐所核对回 F（不标 `not_applicable`）**。生成块仅 progress-matrix 第 2 列 12 家 🟡→✅、health-summary 零变化
@@ -61,7 +66,7 @@
 | `cn-sse` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
 | `cn-szse` | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
 | `de-eurex` | ✅ | ✅ | ✅ | 🟡 | ➖ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | 🟡 |
-| `de-xetra` | ✅ | 🟡 | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | 🟡 |
+| `de-xetra` | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | 🟡 |
 | `fr-euronext` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ |
 | `hk-hkex` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
 | `in-nse` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | ✅ | 🟡 |
@@ -69,7 +74,7 @@
 | `kr-krx` | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | 🟡 | 🟡 | 🟡 |
 | `sa-tadawul` | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | 🟡 | ✅ | 🟡 |
 | `sg-sgx` | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 |
-| `tw-twse` | ✅ | 🟡 | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | 🟡 | 🟡 | 🟡 |
+| `tw-twse` | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | 🟡 | 🟡 | 🟡 |
 | `uk-lse` | ✅ | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | 🟡 | 🟡 | 🟡 |
 | `us-nasdaq` | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | 🟡 | 🟡 |
 | `us-nyse` | ✅ | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
@@ -81,6 +86,25 @@
 ### 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
+共 1918 个已填字段，其中 0 个超过复核阈值待复核。
+
+| 交易所 | 已填字段 | 待复核 |
+|---|---|---|
+| `au-asx` | 114 | 0 |
+| `br-b3` | 113 | 0 |
+| `ca-tsx` | 89 | 0 |
+| `ch-six` | 90 | 0 |
+| `cn-sse` | 74 | 0 |
+| `cn-szse` | 109 | 0 |
+| `de-eurex` | 73 | 0 |
+| `de-xetra` | 85 | 0 |
+| `fr-euronext` | 107 | 0 |
+| `hk-hkex` | 98 | 0 |
+| `in-nse` | 108 | 0 |
+| `jp-jpx` | 81 | 0 |
+| `kr-krx` | 114 | 0 |
+| `sa-tadawul` | 111 | 0 |
+| `sg-sgx` | 110 | 0 |
 共 1857 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
@@ -101,9 +125,9 @@
 | `sa-tadawul` | 106 | 0 |
 | `sg-sgx` | 108 | 0 |
 | `tw-twse` | 83 | 0 |
-| `uk-lse` | 72 | 0 |
-| `us-nasdaq` | 79 | 0 |
-| `us-nyse` | 71 | 0 |
+| `uk-lse` | 77 | 0 |
+| `us-nasdaq` | 83 | 0 |
+| `us-nyse` | 76 | 0 |
 | `za-jse` | 123 | 0 |
 <!-- END:GENERATED health-summary -->
 
@@ -202,10 +226,11 @@
   - **落地**：`schema/taxonomy.yml` A 桶 4 字段（`market_cap_usd_bn` / `annual_turnover_usd_bn` / `global_ranking` / `listed_companies_count`）加 `optional: true`；`tools/sync.py` `count_chapter_leaves()` 把分组 `optional` 逻辑扩展到 leaf、新增字段级 `not_applicable` 跳过、`compute_freshness()` 跳过 `not_applicable`、`expand_field()` 透传 `not_applicable`；`tools/validate.py` 抽 `field_na_violations()` 纯函数，两条不变式机器化（`not_applicable` 字段不得带 `zh`；taxonomy 侧 leaf `optional` 与 data 侧 `not_applicable` 不同时生效）+ 正负向探针通过。
   - **B/D 桶勘误**：ADR-060 把 50 + 10 处空缺粗分为"现货所保证金 / 单层板块无转板不适用"，逐所核对 `data/` 现状后不成立——B 桶涉及所的现货端 CCP（NSCC / LCH EquityClear / ASX Clear / CDS / Eurex Clearing）或融资融券（cn-sse / cn-szse / tw-twse）机制已在各所文件内被证实存在，是**可回填真实缺口**；D 桶 10 所（hk-hkex / jp-jpx / sg-sgx / us-nasdaq / cn-sse 等）均为多板块结构、转板机制真实存在或 detail 自述"未核实留空"。因此 B+D 处均不标 `not_applicable`、整体回 F 桶（并入任务二 / 四回填）。字段级 `not_applicable` 机制保留待真正适用的场景。结构性缺口实算修正为 ≈ 58（A 桶）+ 9（[ADR-059] de-eurex 章节级）——见 [ADR-062]。
   - **验收**：`make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` OK）、`make sync` 二次幂等；生成块变动仅 `progress-matrix` 第 2 列 12 家 🟡→✅（`au-asx` / `ca-tsx` / `cn-szse` / `de-eurex` / `de-xetra` / `jp-jpx` / `kr-krx` / `sg-sgx` / `tw-twse` / `uk-lse` / `us-nasdaq` / `us-nyse` 的 `overview` 章随 A 桶 optional 分母缩小到 ✅）；`health-summary` 无变化（optional 只改完成度分母，freshness 行只计已填字段，B/D 未落地 N/A）——预期内的收窄版。未动 `quote` / 已填 `zh`。
-- [ ] **任务二 · 横切 8 高频字段批量回填**（穿插 Phase 3 viz 模块之间）
+- [x] **任务二 · 横切 8 高频字段批量回填**（2026-09-04 完成，[ADR-065]，1 个后台会话 / 8 个 commit，按字段推进）
   - **目标**：`odd_lot_handling`(12) / `dark_pool`(10) / `board_lot_size`(9) / `price_limits.other_boards`(9) / `block_trade`(9) / `connect_schemes`(8) / `intraday_reversal`(8) / `holidays_note`(7) 在所有缺失所填到有 `quote` 的 high/medium，或确认 `type: none` / `not_applicable` 并写 `detail`；`price_limits.other_boards` / `intraday_reversal` 覆盖率达 ≥16/20 后评估补 `in_matrix`。
-  - **步骤**：每字段一轮——列缺失所 → 逐所 `make fetch EX=<id>` 补抓对应规则章节（碎股 / 交易单位 / 涨跌停 / 大宗 / 回转交易 / 节假日 / 互联互通）→ 填信封 + 需要时 `spec` → `make check` 跑 quote 反查。按字段而非按所推进（保证跨所口径一致）。
-  - **验收**：每字段一批，抽检通过率 ≥95%（[ADR-017]，不过只暂停该批）；触及 > 30 字段则第二人独立复核（[CLAUDE.md §四]）。
+  - **结果**：8 字段结构性空缺清零（`holidays_note` 余 4 家 `ca-tsx`/`uk-lse`/`ch-six`/`de-eurex` 因官方交易日历 JS-SPA、按 [CLAUDE.md §三] 降级留空、已文档化）。全库已填字段 1,900→1,918（+18）；`de-eurex` 5 字段标字段级 `not_applicable`（`intraday_reversal`/`board_lot_size`/`odd_lot_handling`/`price_limits.other_boards`/`dark_pool`——全库首次真实使用该机制，`validate.py` `field_na_violations` 首跑真数据分支通过）。26 个新 high-confidence 字段 `verify_quotes` 逐条反查缓存 FAIL=0。`price_limits.other_boards` 评估后**不补 `in_matrix`**（内容结构异质、不可归约为可比标量，理由见 [ADR-065]）；`intraday_reversal` 本就有 `in_matrix`。新增来源域名登记 6 个。
+  - **已知局限**：① `holidays_note` 4 家 JS-SPA 待人工 / 任务五渲染型抓取；② `ca-tsx block_trade` 的 CIRO UMIR 6.6 跨市场 block 门槛因 `ciro.ca` Cloudflare 403 未取到一手原文；③ `dark_pool` 5 家 medium（`hk-hkex`/`sg-sgx`/`kr-krx`/`jp-jpx`/`in-nse`）可日后升 high——均已记 OPEN-QUESTIONS。
+  - **⚠️ 第二人独立复核待人工**：触及约 74 个字段填写，远超 [CLAUDE.md §四] 「> 30 字段须第二人独立复核」阈值。后台会话无法充当真正第二个视角——**本条打勾但第二人复核尚未进行**。已做自检：每字段批 `make check` 全绿 + `make sync` 幂等 + 跨字段口径一致性自查。
 - [ ] **任务三 · 9 家衍生品子章残余补全（C 桶 40 处）**（穿插 viz 模块之间）
   - **目标**：运营衍生品业务线的 9 家，`market_structure.derivatives.*`（主体已 [ADR-021] 补齐）与 `clearing.derivatives.*` 的残余空缺清零到 ✅ 或显式 `not_applicable`，`spec` 层同步（驱动剖面「衍生品业务线」切换）；缺口集中在 `derivatives.connect_schemes`(7) / `holidays_note`(6) / `price_limits.other_boards`(5) / `closing_mechanism`(3)。
   - **步骤**：逐所按 `.claude/skills/add-exchange/SKILL.md` 第 4 步子章部分，`make fetch` 补抓衍生品规则页（合约规格、交易时段、涨跌停、保证金方法论），填信封 + `spec`。

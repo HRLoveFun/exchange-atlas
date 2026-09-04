@@ -367,13 +367,26 @@ market_structure:
     confidence: high
 
   board_lot_size:
-    zh: ""
-    confidence: low
-    detail: "美股市场碎股（odd lot）交易普遍允许，是否仍有正式'整手'概念及具体股数未核实，留空。"
+    zh: "「整手」（round lot）由 Reg NMS Rule 600(b) 全国统一定义，按前一评估期主上市所平均收盘价分档：≤$250 为 100 股，$250.01–$1,000 为 40 股，$1,000.01–$10,000 为 10 股，>$10,000 为 1 股；新上市 NMS 股票一律先按 100 股。适用于全部 NMS 股票，纽交所与纳斯达克一致"
+    en: "The 'round lot' is defined market-wide by Reg NMS Rule 600(b), tiered by the stock's average closing price on the primary listing exchange during the prior Evaluation Period: 100 shares for stocks priced $250.00 or less, 40 shares for $250.01–$1,000.00, 10 shares for $1,000.01–$10,000.00, and 1 share for $10,000.01 or more; a new NMS stock is assigned a 100-share round lot. This applies to all NMS stocks, identically for NYSE and Nasdaq"
+    quote: "Round lot means: (i) For any NMS stock for which the average closing price on the primary listing exchange during the prior Evaluation Period was: (A) $250.00 or less per share, an order for the purchase or sale of an NMS stock of 100 shares; (B) $250.01 to $1,000.00 per share, an order for the purchase or sale of an NMS stock of 40 shares; (C) $1,000.01 to $10,000.00 per share, an order for the purchase or sale of an NMS stock of 10 shares; (D) $10,000.01 or more per share, an order for the purchase or sale of an NMS stock of 1 share; and (ii) New NMS stocks. Any security that becomes an NMS stock during an operative period as described in paragraph (b)(93)(iv) of this section shall be assigned a round lot of 100 shares."
+    sources:
+      - title: "17 CFR 242.600(b)(93) — Regulation NMS, definition of 'round lot'（eCFR versioner API，Title 17 Part 242）"
+        url: https://www.ecfr.gov/api/versioner/v1/full/2025-01-01/title-17.xml?part=242
+        accessed: 2026-09-04
+    detail: "分档 round lot 是 2020 年 SEC Market Data Infrastructure Rules 引入、分阶段实施的定义。传统上『整手 = 100 股』，高价股分档是新增。"
+    confidence: high
 
   odd_lot_handling:
-    zh: ""
-    confidence: low
+    zh: "「碎股」（odd-lot）= 数量少于一个整手（round lot）的 NMS 股票买卖订单。碎股可正常成交；按 SEC Market Data Infrastructure Rules，优于全国最优买卖价的碎股报价须纳入行情传输并按最不激进价格聚合披露"
+    en: "An 'odd-lot' is an order to buy or sell an NMS stock in an amount less than a round lot. Odd lots execute normally; under the SEC's Market Data Infrastructure Rules, odd-lot quotations better than the national best bid/offer must be included in the consolidated feed, aggregated and disseminated at the least aggressive price"
+    quote: "Odd-lot means an order for the purchase or sale of an NMS stock in an amount less than a round lot. …… such aggregation shall occur across multiple prices and shall be disseminated at the least aggressive price of all such aggregated odd-lots."
+    sources:
+      - title: "17 CFR 242.600(b)(68) — Regulation NMS, definition of 'odd-lot'（eCFR versioner API，Title 17 Part 242）"
+        url: https://www.ecfr.gov/api/versioner/v1/full/2025-01-01/title-17.xml?part=242
+        accessed: 2026-09-04
+    detail: "quote 用「……」连接 (b)(68) odd-lot 定义与 (b)(69) odd-lot information 里的聚合披露条款。"
+    confidence: high
 
   price_limits:
     type:
@@ -393,8 +406,9 @@ market_structure:
       quote: "The percentage level is determined by a security's designation as a Tier 1 or Tier 2 security. Tier 1 comprises all securities in the S&P 500, the Russell 1000 and select Exchange Traded Products (ETPs). Tier 2 comprises all other NMS securities, except for rights and warrants, which are specifically excluded from coverage."
       confidence: medium
     other_boards:
-      zh: ""
-      confidence: low
+      zh: "不按板块区分——LULD 价格带按 Tier 1（标普500 / 罗素1000 / 部分 ETP）与 Tier 2（其余 NMS 证券）分级，依指数成分而非上市板块；NYSE American / NYSE Arca 等为同集团下独立注册的交易所实体、不在本条目范围（见 main_board / type）"
+      en: "Not differentiated by board — LULD price bands are tiered as Tier 1 (S&P 500 / Russell 1000 / selected ETPs) and Tier 2 (all other NMS securities), by index membership rather than by listing board; NYSE American / NYSE Arca etc. are separately registered exchange entities within the group and outside this record's scope (see main_board / type)"
+      confidence: medium
 
   circuit_breaker:
     enum: index_level
@@ -480,8 +494,15 @@ market_structure:
     confidence: high
 
   block_trade:
-    zh: ""
-    confidence: low
+    zh: "无现代化的专用电子大宗交易设施；大额订单在『楼上市场』（upstairs market）议价后打印至合并行情带。NYSE 规则手册定义『大宗』（block）：至少 10,000 股，或市值 20 万美元以上，两者取其低。Rule 127《在 NYSE 现价之外的大宗交叉》规定会员机构收到难以被市场即时吸收的大宗订单时应深入探询楼面市场（该条不适用于 Pillar 平台上的 UTP 证券）；Rule 72/76/97 另有大宗规模的代理交叉程序"
+    en: "No modern dedicated electronic block-trading facility; large orders are negotiated in the 'upstairs market' and printed to the Consolidated Tape. The NYSE rulebook defines a 'block' as at least 10,000 shares or a quantity of stock with a market value of $200,000 or more, whichever is less. Rule 127 (Block Crosses Outside the Prevailing NYSE Quotation) requires a member organization receiving a block order that may not readily be absorbed by the market to explore the Floor market in depth (this rule does not apply to UTP securities on the Pillar platform); Rules 72/76/97 provide the agency-cross procedures for block-size trades"
+    detail: "美国股票市场结构下没有交易所侧的规模化大宗时段/设施；『block』是规则与市场惯例中的定义性阈值（10,000 股 / 20 万美元）。大额成交主要经券商内部化或另类交易系统（Reg ATS，见 dark_pool）完成后申报。引文取自 NYSE 规则手册合并本 Rule 127 与 Rule 72 的 Supplementary Material .10。"
+    sources:
+      - title: "NYSE Rules (consolidated) — Rule 127 Block Crosses Outside the Prevailing NYSE Quotation; Rule 72 Supplementary Material .10"
+        url: https://www.nyse.com/publicdocs/nyse/regulation/nyse/NYSE_Rules.pdf
+        accessed: 2026-09-04
+    quote: "a block shall be at least 10,000 shares or a quantity of stock having a market value of $200,000 or more, whichever is less, which is acquired by a member organization on its own behalf and/or for others from one or more buyers or sellers in a single transaction. …… Block Crosses Outside the Prevailing NYSE Quotation …… This Rule is not applicable to trading UTP Securities on the Pillar trading platform. (a) A member organization that receives an order or orders for the purchase or sale of a block of stock, that may not readily be absorbed by the market, should explore in depth the market on the Floor."
+    confidence: high
 
   order_book_transparency:
     zh: "盘前：NYSE 运营公开的中央限价订单簿，全部展示订单（Priority 2 - Display Orders）的价量向市场披露，并通过 SIP 与自有行情源（NYSE Integrated Feed 等）实时分发；支持不披露的流动性——非显示限价单（Non-Displayed Limit Order）、中点流动性单（MPL Order）为全隐藏，储备单（Reserve Order）仅显示部分、隐藏储备量，均排在同价展示订单之后（Priority 3 - Non-Display Orders）。盘后：成交实时打印至合并行情带，无欧盟式大额成交延迟披露（LIS deferral）安排"
@@ -493,8 +514,18 @@ market_structure:
     confidence: medium
 
   dark_pool:
-    zh: ""
-    confidence: low
+    zh: "NYSE 及其关联交易所（Arca / American / National / Chicago）均为明盘交易所，设盘内非展示／中点订单类型但不运营独立暗池。美国的暗池是依 SEC《另类交易系统条例》(Regulation ATS，17 CFR §242.300–304) 注册的另类交易系统（ATS）——须注册为经纪自营商、加入 FINRA、遵守 Reg ATS；NMS 股票 ATS 另须提交 Form ATS-N 公开运营披露（Rule 304）。现有 30 余家 NMS 股票 ATS（如 UBS ATS、MS POOL、Level ATS、IntelligentCross 等），加上批发商内部化，场外成交占美股合并成交量相当大的比重（2014 年 SEC 数据：ATS 约占 NMS 股票美元成交额 18%，单一 ATS 均不超过 5%）；所有场外成交经 FINRA 交易报告设施（TRF）申报，并按 FINRA Rule 4552 逐周分 ATS 披露成交量"
+    en: "The NYSE and its affiliated exchanges (Arca / American / National / Chicago) are lit exchanges; they offer on-book non-displayed / midpoint order types but do not operate a dark pool. US dark venues are Alternative Trading Systems (ATSs) registered under SEC Regulation ATS (17 CFR §242.300–304) — each must register as a broker-dealer, join FINRA, and comply with Regulation ATS; an NMS Stock ATS must also file Form ATS-N public operational disclosures (Rule 304). Dozens of NMS stock ATSs operate (e.g. UBS ATS, MS POOL, Level ATS, IntelligentCross); combined with wholesaler internalization, off-exchange execution is a large fraction of consolidated US equity volume (2014 SEC data: ATSs ~18% of NMS-stock dollar volume, no single ATS above 5%). All off-exchange trades are reported to a FINRA Trade Reporting Facility (TRF) and per-ATS volume is disclosed weekly under FINRA Rule 4552"
+    detail: "本字段『本所自营暗池』一栏 us-nyse 为『无』；市场侧的暗池生态是本项目最庞大的（对比亚洲多为『本所与市场均无』）。盘内非展示 / MPL 订单归 order_book_transparency，本字段只记独立 ATS。逐字引文取自 17 CFR §242.300（Reg ATS 对 ATS 的定义）与 SEC 委员 Aguilar《Shedding Light on Dark Pools》(2015) 官方声明。18% 为 2014 年数据点、随时间变动，仅作量级示意。"
+    sources:
+      - title: "17 CFR §242.300 — Regulation ATS: definition of 'alternative trading system' (eCFR versioner, title 17 part 242, 2026-08-17)"
+        url: https://www.ecfr.gov/api/versioner/v1/full/2026-08-17/title-17.xml?part=242
+        accessed: 2026-09-04
+      - title: "SEC — Shedding Light on Dark Pools (Commissioner Luis A. Aguilar, 18 Nov 2015)"
+        url: https://www.sec.gov/newsroom/speeches-statements/shedding-light-dark-pools
+        accessed: 2026-09-04
+    quote: "Alternative trading system means any organization, association, person, group of persons, or system: (1) That constitutes, maintains, or provides a market place or facilities for bringing together purchasers and sellers of securities or for otherwise performing with respect to securities the functions commonly performed by a stock exchange within the meaning of § 240.3b-16 of this chapter …… ATSs responded to this need by offering ever more trading on an anonymous basis, and without displaying specific order information before trades occur. …… These types of ATSs have come to be known as \"dark pools.\" …… based on data collected from ATSs pursuant to FINRA Rule 4552 for 18 weeks of trading in 2014, the trading volume of ATSs accounted for approximately 18 percent of the total dollar volume in NMS stocks, with no individual ATS executing more than five percent"
+    confidence: high
 
   market_maker_scheme:
     spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "指定做市商 DMM：每支股票一名 DMM，负责开盘/收盘及严重失衡/不稳定期间的价格发现；无统一价差上限公布"}

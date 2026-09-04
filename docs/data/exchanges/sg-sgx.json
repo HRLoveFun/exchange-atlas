@@ -932,21 +932,26 @@
         "verified": "2026-08-14"
       },
       "block_trade": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "现货股票：无专门的大宗交易时段，但大额协议成交须走『直接业务』（Direct Business，即不在交易系统内撮合的成交）——SGX-ST 规则第 8.10 条设有规模门槛：单笔至少 (i) 50,000 单位证券／期货合约（可保证金期货合约按 50,000 单位标的计），或 (ii) 合约价值 15 万新元；须经交易系统的对敲申报系统（married trade reporting system）申报。衍生品：另设『协议大额交易』（Negotiated Large Trade, NLT），须满足交易所按合约规定的最低张数门槛（如日经 225 指数期货／期权为 5 张，STI 指数期货约 50 张）",
+        "en": "Cash equities: no dedicated block-trading session, but large negotiated trades must go through 'Direct Business' (a trade not executed on the Trading System) — SGX-ST Rule 8.10 sets a size floor: at least (i) 50,000 units of securities or futures contracts (50,000 units of the underlying for Marginable Futures Contracts), or (ii) S$150,000 in contract value; reported through the married trade reporting system. Derivatives: a separate 'Negotiated Large Trade' (NLT) regime applies, subject to per-contract minimum lot thresholds set by the Exchange (e.g. 5 lots for Nikkei 225 futures/options, ~50 lots for Straits Times Index futures)",
+        "detail": "SGX 现货『大宗』= off-book 议价成交 + 规模门槛 + 申报，无独立撮合时段；衍生品 NLT 的逐合约门槛表在 Regulatory Notice 4.1.11 Appendix A，多腿交易只需其中一腿达标。SGX-ST 规则手册近期把 Direct Business 由第 8.7 条重编为第 8.10 条（个别交叉引用仍写 8.7）。",
         "sources": [
           {
-            "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
-            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
-            "accessed": "2026-08-14"
+            "title": "SGX-ST Rules — Rule 8.10 Direct Business",
+            "url": "https://rulebook.sgx.com/rulebook/810-direct-business",
+            "accessed": "2026-09-04"
+          },
+          {
+            "title": "SGX Futures Trading Rules — Negotiated Large Trades (Rule 4.1.11)",
+            "url": "https://rulebook.sgx.com/rulebook/futures-trading-rules",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "A Trading Member may only execute Direct Business that is: (a) at least: (i) 50,000 units of securities or futures contracts, or in the case of Marginable Futures Contracts, 50,000 units of the underlying; or (ii) S$150,000 in terms of contract value …… Direct Business must be reported through the married trade reporting system of the Trading System. …… Contracts eligible for Negotiated Large Trade transactions shall comply with the minimum volume thresholds, related notification requirements and such other procedures as prescribed by the Exchange from time to time. …… Minimum volume threshold for NK Futures = 5 lots",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "order_book_transparency": {
         "zh": "盘前：中央订单簿公开，各价位限价申报的价量向市场披露，连续竞价按价格优先、时间优先撮合。SGX 证券市场不提供冰山 / 隐藏订单类型（订单全数量展示）。盘后 / 大额：大宗交易（married / block trades）单独申报，SGX 无独立暗池。盘后成交披露适用 SGX-ST 规则",
@@ -966,21 +971,21 @@
         "spec": null
       },
       "dark_pool": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "SGX 目前不运营暗池——2010 年前后 SGX 与 Chi-X Global 合资的非展示大宗撮合池 Chi-East 已于 2014 年停止运营；SGX 现货市场为明盘中央订单簿。新加坡市场内有券商／投行运营的撮合网络（crossing networks）。监管：MAS 要求撮合网络只能撮合符合 SGX 场外规模门槛的大额订单，并对任何单一撮合网络在单只 SGX 上市股票的成交量设上限（以防明盘流动性被分流）",
+        "en": "SGX operates no dark pool at present — Chi-East, the non-displayed block-crossing pool jointly launched by SGX and Chi-X Global around 2010, ceased operations in 2014; SGX's securities market is a lit central order book. Broker/bank-operated crossing networks operate in the Singapore market. Regulation: MAS requires crossing networks to match only large orders that comply with SGX's off-exchange thresholds, and caps the volume any single crossing network can trade in any one SGX-listed share (to prevent lit-market liquidity fragmentation)",
+        "detail": "本字段『本所自营暗池』一栏 sg-sgx 为『无（现存）』。逐字引文取自 MAS 就『暗池规管框架』的国会答复（2010）——该文的框架（撮合网络限大额单 + 单股成交量上限）至今有效；Chi-East 2010 上线 / 2014 停运为第三方来源（The TRADE）佐证。SGX 场外规模门槛即 SGX-ST Rule 8.10 Direct Business（见 block_trade）。整体 confidence: medium（MAS 答复为 2010 年一手官方文件，撮合网络当前 RMO 待遇与具体成交量上限数值未逐字核实）。",
         "sources": [
           {
-            "title": "Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching",
-            "url": "https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles",
-            "accessed": "2026-08-14"
+            "title": "MAS — Reply to Parliamentary Question on Regulatory Framework for Dark Pools (2010)",
+            "url": "https://www.mas.gov.sg/news/parliamentary-replies/2010/reply-to-pq-on-regulatory-framework-for-dark-pools",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "Dark pools, otherwise known as crossing networks, are an alternative trading venue where institutional investors can transact large blocks of shares that are listed and traded on stock exchanges. …… MAS has required crossing networks to match only large orders that comply with the SGX off-exchange thresholds. As an additional measure to prevent liquidity in the exchange from being fragmented by the crossing network, MAS has set limits on the volume any crossing network can trade in any single SGX-listed share.",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "market_maker_scheme": {
         "spec": {

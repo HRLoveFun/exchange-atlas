@@ -765,9 +765,9 @@
           "detail": null
         },
         "other_boards": {
-          "zh": "",
-          "confidence": "low",
-          "detail": "TSX本身无其他板块，见 listing.boards 的说明。",
+          "zh": "TSX 本身无分层板块（见 listing.boards）。Marketplace Threshold 与 Bid/Ask Tick Limit 按证券类型与价位分档、非按板块（见 main_board）；TSX Venture Exchange 为独立交易所实体、不在本条目范围",
+          "en": "TSX itself has no tiered boards (see listing.boards). The Marketplace Threshold and Bid/Ask Tick Limit are graduated by security type and price level rather than by board (see main_board); the TSX Venture Exchange is a separate exchange entity, outside this record's scope",
+          "confidence": "medium",
           "sources": [
             {
               "title": "Trading Hours（官网）",
@@ -776,9 +776,9 @@
             }
           ],
           "verified": "2026-08-16",
-          "en": null,
           "enum": null,
           "spec": null,
+          "detail": null,
           "quote": null
         }
       },
@@ -889,19 +889,24 @@
         "enum": null
       },
       "intraday_reversal": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "TSX Rule Book/Order Types Guide本次抓取范围内未找到对当日买卖回转是否受限的专门条款，留空不猜（区别于结算层面的T+1，见clearing.settlement_cycle）。",
+        "enum": "t0",
+        "zh": "交易层面为 T+0（当日买入的证券当日即可卖出）——TSX Rule Book 与 Order Types and Functionality Guide 通篇只规范订单类型、撮合与交收，未设任何持有期或「交收前不得卖出」限制；结算层面为 T+1（见 clearing.settlement_cycle）",
+        "en": "T+0 at the trading level (securities bought during the day may be sold the same day) — the TSX Rule Book and the Order Types and Functionality Guide govern only order types, matching and settlement, with no holding-period or \"may not sell before settlement\" restriction; settlement is T+1 (see clearing.settlement_cycle)",
+        "detail": "confidence 标 medium——依据是 TSX 规则手册与订单类型指南中不存在限制性条款（消极认定），而非交易所对「允许当日回转」的正面声明。与中国 A 股 T+1（SSE / SZSE 交易规则明文「买入的证券，在交收前不得卖出」）形成对照——北美市场无此明文限制。UMIR（CIRO 自律规则）是否含相关限制本次未独立核实（ciro.ca 返回 403，见 OPEN-QUESTIONS）。",
         "sources": [
           {
-            "title": "Trading Hours（官网）",
-            "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
+            "title": "Toronto Stock Exchange Rule Book（PDF，Rule 5-103 交收周期条款所在，通篇无持有期限制）",
+            "url": "https://www.tsx.com/en/resource/1464",
+            "accessed": "2026-08-16"
+          },
+          {
+            "title": "Order Types and Functionality Guide（官网 PDF）",
+            "url": "https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf",
             "accessed": "2026-08-16"
           }
         ],
+        "confidence": "medium",
         "verified": "2026-08-16",
-        "en": null,
-        "enum": null,
         "spec": null,
         "quote": null
       },
@@ -925,21 +930,21 @@
         "enum": null
       },
       "block_trade": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "官网提及Cross Facilities（含Specialty Crosses：Basis/VWAP/Contingent/Special Trading Session/NAV/Internal crosses）与MGF Facility等相邻机制，但本次未找到「大宗交易」最低起点规模的专门条款，留空不猜。",
+        "zh": "连续交易时段无按规模设限的专门大宗交易设施。大额订单以『主动交叉』（Intentional Cross）／『内部交叉』（Internal Cross）成交，或作为 Rule 4-107 下的『特殊价格交叉』（Specialty Price Cross，即 Basis Trade 或 VWAP Trade）执行，也可进入收盘后的『特别交易时段』（Special Trading Session，全场单一价格成交）。TSX 规则手册仅在发行人回购（issuer bid）的『大宗购买豁免』语境下定义『block』：购买额 ≥ 20 万加元；或 ≥ 5,000 股且购买额 ≥ 5 万加元；或 ≥ 20 手且达该证券日均成交量的 150% 以上",
+        "en": "No size-gated dedicated block-trading facility in the continuous session. Large orders are executed as Intentional Crosses / Internal Crosses, or as Specialty Price Crosses under Rule 4-107 (a Basis Trade or Volume-Weighted Average Price Trade), and may also be run in the post-close Special Trading Session (single-price execution). The TSX Rule Book defines 'block' only in the issuer-bid Block Purchase Exception context: a purchase price of $200,000 or more; or at least 5,000 securities and a purchase price of at least $50,000; or at least 20 board lots totalling 150% or more of the security's ADTV",
+        "detail": "TSX 无亚洲式规模化大宗交易时段；跨市场层面的一般『block』定义（如 CIRO/UMIR 项下用于客户优先／最佳执行的门槛）本次因 CIRO 官网持续 403 未取到官方原文，记入 OPEN-QUESTIONS。引文取自 TSX 规则手册（Rule Book）定义节与 Rule 4-107。",
         "sources": [
           {
-            "title": "Trading Hours（官网）",
-            "url": "https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours",
-            "accessed": "2026-08-16"
+            "title": "Toronto Stock Exchange Rule Book（Effective January 13, 2026）— Definitions; Rule 4-107 Specialty Price Crosses",
+            "url": "https://www.tsx.com/en/resource/1464",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "means a quantity of securities that either: has a purchase price of $200,000 or more; or is at least 5,000 securities and has a purchase price of at least $50,000; or is at least 20 board lots of the security and total 150% or more of the ADTV for that security …… means a Basis Trade or Volume-Weighted Average Price Trade, or such other trade that is designated by the Exchange from time to time, resulting from the entry by a Participating Organization of both the order to purchase and the order to sell a security. …… means a Session during which trading in a security is limited to the execution of transactions at a single price.",
+        "confidence": "medium",
         "verified": "2026-08-16",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "order_book_transparency": {
         "zh": "盘前：电子中央限价订单簿（CLOB）公开，展示订单的价量向市场披露、按价格-时间（+ 经纪商优先）撮合。同一订单簿内支持不完全披露 / 隐藏的流动性——冰山单仅部分可见、暗盘单（Dark Pegged 盯住中点 / Dark Limit）为全隐藏。TSX 另运营独立暗池 TSX DRK。盘后：成交实时上报合并行情，大额成交按 CIRO 规则可延迟披露",

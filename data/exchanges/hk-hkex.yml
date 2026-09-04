@@ -405,13 +405,29 @@ market_structure:
     confidence: high
 
   board_lot_size:
-    zh: "各股票各自设定board lot（非全市场统一，如100股/500股/1000股不等）"
-    en: "Set individually per stock (not standardised market-wide, e.g. 100/500/1,000 shares)"
-    confidence: low
+    zh: "由发行人自行为其股票确定「整手」（board lot）交易单位，非全市场统一；港交所提供指引（建议整手价值不低于 2,000 港元、股数少于 900,000，并尽量减少碎股）。目前市场在用的整手单位有 40 多种，最常见的是 2,000 股（约 25% 的证券采用）。港交所 2025 年 12 月发布咨询文件，拟将整手单位收敛为 1 / 50 / 100 / 500 / 1,000 / 2,000 / 5,000 / 10,000 股八种标准值（尚未生效）"
+    en: "The board-lot trading unit is set by the issuer for its own stock, not standardised market-wide; HKEX provides guidance (a suggested minimum board-lot value of HK$2,000, a unit of fewer than 900,000 shares, and minimising odd-lot creation). Over 40 distinct board-lot units are currently in use, the most common being 2,000 shares (~25% of securities). In December 2025 HKEX published a consultation proposing to narrow board-lot units to eight standardised values — 1, 50, 100, 500, 1,000, 2,000, 5,000 and 10,000 shares (not yet in effect)"
+    quote: "The current board lot framework allows issuers to determine the board lot unit for their stock. HKEX provides issuers with guidance to assist in selecting appropriate board lot units to support orderly trading and operational efficiency. …… The board lot guidance suggests a minimum board lot value of HK$2,000 …… It also recommends a board lot unit of fewer than 900,000 shares …… issuers would retain flexibility to select their board lot unit but from a defined set of eight standardised board lot units: 1, 50, 100, 500, 1,000, 2,000, 5,000, and 10,000 share(s). …… Standardising board lot sizes from the current structure of over 40 distinct units to a simplified set of eight units would require approximately 25% of issuers to revise their existing board lot structure"
+    sources:
+      - title: "HKEX Consultation Paper — Board Lot Framework Enhancements in the Hong Kong Securities Market（December 2025）"
+        url: https://www.hkex.com.hk/-/media/HKEX-Market/News/Market-Consultations/2016-Present/December-2025-Board-Lot-Framework-Enhancements/Consultation-Paper/cp202512.pdf
+        accessed: 2026-09-04
+    detail: "quote 用「……」连接咨询文件 §19、§20、§7、§8 若干句。八种标准整手为 2025-12 咨询提案、尚未落地，现行仍为发行人自定（40+ 种）。"
+    confidence: high
 
   odd_lot_handling:
-    zh: ""
-    confidence: low
+    zh: "「碎股」（odd lot）= 数量少于一个整手的订单或成交。碎股不被交易系统自动对盘；系统内设特别买卖单位市场（special lot market），交易所参与者把碎股盘挂到指定屏幕由其他参与者撮合，未成交则由卖方经 OTP-C 申报成交。碎股价通常略低于同证券整手价。碎股成交量很低（2025 年上半年占成交笔数 0.2%、成交额 0.1%）；港交所正检讨改进方案"
+    en: "An 'odd lot' is an order or trade in a quantity less than one board lot. Odd lots are not auto-matched by the trading system; a special lot market exists in which Exchange Participants post odd-lot orders on a designated screen for matching by other EPs, with the selling party otherwise reporting the trade via OTP-C. Odd-lot prices are usually slightly lower than the board-lot price of the same security. Odd-lot turnover is very low (0.2% of trades and 0.1% of turnover in H1 2025); HKEX is reviewing enhancements"
+    quote: "“Odd lot” The quantity of the order or trade that is less than one board lot …… Despite the presence of a semi-automated trade matching mechanism and the manual trade reporting of odd lot transactions, odd lot trading turnover in Hong Kong remains low. …… Odd lot trades represent 0.2% of the total number of trades and 0.1% of the total turnover in the first half of 2025."
+    sources:
+      - title: "HKEX Consultation Paper — Board Lot Framework Enhancements in the Hong Kong Securities Market（December 2025，§107 与脚注 14 / 术语表）"
+        url: https://www.hkex.com.hk/-/media/HKEX-Market/News/Market-Consultations/2016-Present/December-2025-Board-Lot-Framework-Enhancements/Consultation-Paper/cp202512.pdf
+        accessed: 2026-09-04
+      - title: "HKEX — Securities Market Trading Mechanism（Odd Lot Trade 定义，OTP-C 操作）"
+        url: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Trading-Mechanism?sc_lang=en
+        accessed: 2026-09-04
+    detail: "「special lot market / 指定屏幕 / OTP-C 申报」细节来自 HKEX Trading Mechanism 页的 Odd Lot Trade 定义（本次已抓，未逐字进 quote）；quote 主体引咨询文件术语表与 §107 + 脚注 14。"
+    confidence: high
 
   price_limits:
     type:
@@ -434,7 +450,10 @@ market_structure:
         - title: VCM FAQ（HKEX 官网英文版）
           url: https://www.hkex.com.hk/Global/Exchange/FAQ/Securities-Market/Trading/VCM?sc_lang=en
           accessed: 2026-08-30
-    other_boards: ""
+    other_boards:
+      zh: "无——主板与 GEM 均不设每日涨跌停幅度；波动控制统一靠个股级市场波动调节机制（VCM），不按板块区分（见 type / volatility_interruption）"
+      en: "None — neither the Main Board nor GEM has a daily price-limit band; volatility control is a uniform stock-level Volatility Control Mechanism (VCM), not differentiated by board (see type / volatility_interruption)"
+      confidence: medium
 
   circuit_breaker:
     enum: stock_level
@@ -523,12 +542,29 @@ market_structure:
     confidence: high
 
   block_trade:
-    zh: ""
-    confidence: low
+    zh: "现货股票市场（联交所）无专门的大宗交易设施——大额交易私下议价后按普通／手动成交（manual trade）输入并申报。衍生品市场（期交所 HKFE）设『大宗交易设施』（Block Trade Facility）：期交所规则第 815／815A 条，须为董事会指定的『大宗交易合约』、达到规定的『最低成交量门槛』（按合约，如股票指数期货 100 张、恒生科技指数期货／期权 50 张、部分 MSCI 指数期货 25 张），并即时经 HKATS 输入；不含迷你恒指／迷你国指期货期权。股票期权另有《大宗交易规例》（第三附表），门槛由董事会设定"
+    en: "The cash equity market (SEHK) has no dedicated block-trade facility — large trades are privately negotiated and entered/reported as ordinary or manual trades. The derivatives market (HKFE) operates a Block Trade Facility under HKFE Rules 815/815A: the contract must be a Board-designated Block Trade Contract, the order must meet the applicable Minimum Volume Threshold (per contract, e.g. 100 contracts for Stock Index Futures, 50 for Hang Seng TECH Index Futures/Options, 25 for some MSCI index futures), and it must be executed immediately on HKATS; Mini-HSI and Mini-HSCEI futures and options are excluded. Stock options have a separate 'Regulations for Block Trades' (Third Schedule) with a Board-set threshold"
+    detail: "HKEX 的大宗交易设施是衍生品专属机制（现货侧无对应设施——官方大宗交易说明页面全部归在衍生品栏目下）。股票期权《大宗交易规例》的具体最低成交量门槛由董事会另行公布（业界普遍引 500 张），第三附表条文本身只写『适用的最低成交量门槛』，故此数字未纳入正文。"
+    sources:
+      - title: "Rules of the Futures Exchange (HKFE) — Chapter VIII, Rules 815 & 815A (Execution of Block Trades; Minimum Volume Threshold table)"
+        url: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/HKFE/Rules/FE_VIII.pdf
+        accessed: 2026-09-04
+      - title: "HKEX — Block Trade Facility (derivatives market overview)"
+        url: https://www.hkex.com.hk/Services/Trading/Derivatives/Overview/Trading-Mechanism/Block-Trade-Facility?sc_lang=en
+        accessed: 2026-09-04
+    quote: "Exchange Participants may execute orders as a Block Trade provided that they are executed in such manner and within such trading hours or other time, and satisfy the criteria laid down in Rule 815A and such other criteria, as may be prescribed by the Board and notified to Exchange Participants from time to time. …… an Exchange Participant shall not execute any order as a Block Trade unless that order meets the applicable Minimum Volume Threshold set forth below …… Hang Seng Index (HSI) Futures - first 4 Contract Months 100 …… Hang Seng TECH Index Futures 50 …… A block trade comprises large buy and sell orders privately negotiated apart from the public auction market. …… except the Mini-HSI futures and options and Mini-HSCEI futures and options contracts."
+    confidence: high
 
   dark_pool:
-    zh: ""
-    confidence: low
+    zh: "HKEX 本身不运营暗池。香港的暗盘由券商／银行运营，称『另类流动性池』（Alternative Liquidity Pool, ALP）——即不提供盘前透明度的电子成交场所。监管：运营者须向证监会（SFC）申领《证券及期货条例》(SFO) 第 V 部下的牌照（现行为第 1 类『证券交易』+ 第 7 类『提供自动化交易服务』），受《操守准则》约束、仅限『合资格投资者』（机构／专业投资者，不含个人）接入；交易所参与者向联交所（SEHK）申报港股暗盘成交时须标记为『ALP』，SEHK 自 2012-10-03 起在其规则中强制此项"
+    en: "HKEX does not operate a dark pool. Hong Kong's dark venues are broker/bank-operated Alternative Liquidity Pools (ALPs) — electronic venues that provide no pre-trade transparency. Regulation: operators must be licensed by the SFC under Part V of the Securities and Futures Ordinance (SFO) (currently Type 1 'dealing in securities' plus Type 7 'providing automated trading services'), are bound by the Code of Conduct, and may admit only 'Qualified Investors' (institutional/professional investors, not individuals); Exchange Participants must flag Hong Kong-stock ALP trades as 'ALP' when reporting to SEHK, which SEHK has mandated in its Rules since 3 October 2012"
+    detail: "本字段『本所自营暗池』一栏 hk-hkex 为『无』，市场侧有多个券商 ALP。逐字引文取自财经事务及库务局局长 2012-11-28 立法会书面答复（LCQ15）——该文确立 SFC 第 V 部发牌 + ALP 强制标记（2012-10-03 起）两项核心制度；『第 7 类牌照』与『合资格投资者仅限机构』的细化见 SFC《操守准则》第 19 段及附表 8（2015-12-01 起生效，本次未逐字缓存），故整体 confidence: medium。2012 年时暗盘约占港股成交 2.2%。"
+    sources:
+      - title: "LCQ15: Regulation of dark pool trading（香港政府新闻公报，2012-11-28，财经事务及库务局局长书面答复）"
+        url: https://www.info.gov.hk/gia/general/201211/28/P201211280278.htm
+        accessed: 2026-09-04
+    quote: "Dark pools, as alternative trading platforms to public securities exchanges, allow financial institutions to trade large volume of shares, away from the eyes of the public, in anonymity and with lower trading fees. …… Under our regulatory system, dark pool operators are required to apply to the Securities and Futures Commission (SFC) for licences under Part V of the Securities and Futures Ordinance (SFO). …… exchange participants are required to flag all dark pool transactions in Hong Kong stocks as \"ALP\" (Alternative Liquidity Pool) when they report such transactions to SEHK. Since October 3, 2012, SEHK has mandated such reporting requirement in its Rules."
+    confidence: medium
 
   market_maker_scheme:
     spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "结构性产品（权证/牛熊证）、ETF、双柜台股票设做市商；卖空规则对做市商活动有豁免；无统一价差上限公布"}

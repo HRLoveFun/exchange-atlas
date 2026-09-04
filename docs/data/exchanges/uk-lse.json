@@ -636,26 +636,38 @@
         "enum": null
       },
       "board_lot_size": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "本次抓取的技术文档未见“board lot/一手”这类整手交易单位的表述，SETS为完全电子化订单簿、以单股为基本交易单位，但未找到官方原文明确声明“无整手概念”，按铁律不主动断言，留空。",
+        "zh": "无全市场统一的「整手」交易单位。SETS 订单簿以股数申报；最低订单规模（minimum order size）逐证券在 Business Parameters 文档中另行规定，非全市场统一门槛",
+        "en": "No market-wide board-lot trading unit. The SETS order book is specified in number of shares; a per-instrument minimum order size is set in the Business Parameters document rather than as a uniform market-wide threshold",
+        "detail": "「无全市场整手」为消极认定——MIT201《Guide to the Trading System》通篇无 board lot / round lot 概念，只有逐证券的 minimum order size 参数（定义在未抓取的 Business Parameters 文档）。",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网 PDF，§6.5 与订单参数章节）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "spec": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "odd_lot_handling": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "无「碎股」概念——无全市场整手单位（见 board_lot_size），订单以股数申报，不存在不足一手的余额",
+        "en": "No odd-lot concept — with no market-wide board lot (see board_lot_size), orders are in number of shares and there is no sub-lot remainder",
+        "detail": "「无碎股概念」是「无全市场整手」的直接推论（MIT201《Guide to the Trading System》通篇无 board lot / odd lot 概念）。",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网 PDF）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "price_limits": {
         "type": {
@@ -697,15 +709,21 @@
           "detail": null
         },
         "other_boards": {
-          "zh": "",
-          "confidence": "low",
-          "detail": "AIM等其他板块/品种的具体阈值本次未在面向客户的说明性文档中找到，完整数值表在未抓取的Business Parameters文档内，留空不猜。",
+          "zh": "AIM 与主板（Main Market）共用同一套 Millennium Exchange 静态 / 动态价格监控机制，触发阈值按流动性梯队（如 FE10 / FS10）而非上市板块分档（见 main_board / type）；AIM 与其他品种的具体阈值数值表在未抓取的 Business Parameters 文档内，未逐档核实",
+          "en": "AIM shares the same Millennium Exchange static/dynamic price-monitoring mechanism as the Main Market, with trigger thresholds graduated by liquidity band (e.g. FE10 / FS10) rather than by listing board (see main_board / type); the specific threshold table for AIM and other instrument types is in the Business Parameters document, which was not fetched, and was not verified tier by tier",
+          "sources": [
+            {
+              "title": "MIT201 – Guide to the Trading System Issue 15.8（官网 PDF，价格监控章节）",
+              "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+              "accessed": "2026-08-14"
+            }
+          ],
+          "confidence": "medium",
           "verified": "2026-08-14",
-          "en": null,
           "enum": null,
           "spec": null,
-          "quote": null,
-          "sources": null
+          "detail": null,
+          "quote": null
         }
       },
       "circuit_breaker": {
@@ -795,15 +813,21 @@
         "enum": null
       },
       "intraday_reversal": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "现货市场当日买入证券当日是否可卖出（T+0）本次未找到交易所或FCA的专门表述性原文，按铁律不凭常识填入，留空。",
+        "enum": "t0",
+        "zh": "交易层面为 T+0（当日买入的证券当日即可卖出）——LSE 的 MIT201 交易系统指南与 Rules of the London Stock Exchange 只规范订单簿运作、竞价与撮合，未设持有期或「交收前不得卖出」限制；结算层面为 T+2（见 clearing.settlement_cycle；英国已定于 2027-10-11 改 T+1）",
+        "en": "T+0 at the trading level (securities bought during the day may be sold the same day) — the LSE's MIT201 Guide to the Trading System and the Rules of the London Stock Exchange govern only order-book operation, auctions and matching, with no holding-period or 'may not sell before settlement' restriction; settlement is T+2 (see clearing.settlement_cycle)",
+        "detail": "confidence 标 medium——依据是交易规则中不存在持有期限制条款（消极认定），而非交易所对「允许当日回转」的正面声明。与中国 A 股 T+1（SSE / SZSE 交易规则明文「交收前不得卖出」）形成对照——英国现货市场无此明文限制。",
+        "sources": [
+          {
+            "title": "MIT201 – Guide to the Trading System Issue 15.8（官网 PDF）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-08-14"
+          }
+        ],
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
-        "enum": null,
         "spec": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "short_selling": {
         "enum": "restricted_list",
@@ -828,15 +852,26 @@
         "verified": "2026-08-14"
       },
       "block_trade": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "无按规模设限的专门大宗交易时段。大额交易在中央限价订单簿外完成，作为『在交易所（on-Exchange）的簿外成交』申报（经 TRADEcho），前提是该笔符合以下情形之一：属『大额成交』（large in scale，即规模达到或超过英国 MiFIR 规定的最小订单规模）、或属『协议成交』（negotiated trade，不适用盘前透明度、成交条件不劣于当时订单／报价簿可达到的水平）。此外 SETS 内设 RFQ（询价）交易簿，股票 RFQ 的最低金额为 £50,000 与盘前大额成交（LIS）阈值的 25% 两者取高",
+        "en": "There is no size-gated dedicated block-trading session. Large trades are executed away from the central limit order book and reported as off-book on-Exchange trades (via TRADEcho), provided the trade is either 'large in scale' (equal to or larger than the minimum order size set in UK MiFIR) or a 'negotiated trade' (not subject to pre-trade transparency, on terms no worse than could be achieved on the order or quote book at the time). SETS also runs an on-book RFQ facility; for equities the minimum RFQ value is the higher of £50,000 or 25% of the pre-trade large-in-scale value",
+        "detail": "英国承接 MiFID II／MiFIR 后无亚洲式规模化『大宗交易』设施；LIS 阈值由 UK MiFIR（受托规例 (EU) 2017/587 承接版）按证券日均成交额分档设定，非 LSE 自设。引文为《伦敦证券交易所规则》术语定义 + MIT201 的 RFQ 参数。",
+        "sources": [
+          {
+            "title": "Rules of the London Stock Exchange (effective 5 February 2024) — Definitions; Rule 3000",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/rules-of-the-london-stock-exchange-effective-5-february-2024.pdf",
+            "accessed": "2026-09-04"
+          },
+          {
+            "title": "MIT201 – Guide to the Trading System (Issue 15.8) §6.6 Request for Quote",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf",
+            "accessed": "2026-09-04"
+          }
+        ],
+        "quote": "a trade, conducted in UK regulated market security, that is not subject to pre-trade transparency on the trading system and which is on terms that are no worse than those that could be achieved on the relevant Exchange order or quote book at the time of the trade. …… an order which is equal to or larger than the minimum size of orders provided for in UK MiFIR and reflected in the parameters …… Where the trade is executed away from an order book (but possibly still in an order book security) a 'manual' trade report must be submitted to TRADEcho to bring the execution 'on Exchange' under paragraph 3040 of Rules of the London Stock Exchange. …… the minimum will be set as the higher of £50,000 or 25% of Pre-Trade Large in Scale value. Other instruments will not have a minimum.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "order_book_transparency": {
         "zh": "盘前：SETS 为公开的中央限价订单簿，展示订单的价量向市场披露（Millennium Exchange 以价格优先运作，展示部分优先于非展示部分）；同一订单簿内支持不披露的流动性——冰山订单仅展示部分数量、隐藏限价订单全隐藏、中间价挂钩订单仅以买卖中间价成交，均排在同价展示订单之后。盘后：适用英国承接的 MiFIR 成交透明度制度，大额成交（LIS）可延迟披露",

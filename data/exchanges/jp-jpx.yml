@@ -377,13 +377,24 @@ market_structure:
     confidence: high
 
   board_lot_size:
-    zh: ""
-    confidence: low
-    detail: "日股普遍以100股为单位交易，但未在本次抓取的条文中找到统一规定的直接原文，留空不猜。"
+    zh: "国内股票交易单位统一为 100 股（2018 年 10 月 1 日起）。交易单位原按各上市公司章程规定，TSE 推动统一后现全部为 100 股"
+    en: "The trading unit for domestic stocks is a uniform 100 shares (since 1 October 2018). Trading units were previously set per each company's articles of incorporation; TSE standardised them to 100 shares"
+    quote: "Now trading units are 100 shares for domestic stocks. TSE was making effort to unite the units to 100 shares in order to establish easy-to-understand and useful market for investors. Finally, trading units of domestic stocks were normalized to 100 shares on Oct. 1, 2018."
+    sources:
+      - title: "JPX — Trading Rules of Domestic Stocks: Trading Unit（官网英文版）"
+        url: https://www.jpx.co.jp/english/equities/trading/domestic/03.html
+        accessed: 2026-09-04
+    confidence: high
 
   odd_lot_handling:
-    zh: ""
-    confidence: low
+    zh: "不足一个交易单位（100 股）的「単元未満株」不能在 TSE 拍卖市场交易；持有人通过发行公司的买入 / 卖出请求制度或券商的単元未満株（碎股）服务处理"
+    en: "Shares in quantities below one trading unit (100 shares) — 'less-than-one-unit shares' — cannot be traded on the TSE auction market; holders deal with them via the issuer's purchase/sale request scheme or a broker's odd-lot service"
+    detail: "交易单位统一为 100 股见 board_lot_size（high，逐字 quote）。単元未満株的处理渠道为日本市场通行做法，本次未抓到 TSE 逐条规则原文，confidence 标 medium。"
+    sources:
+      - title: "JPX — Trading Rules of Domestic Stocks: Trading Unit（官网英文版）"
+        url: https://www.jpx.co.jp/english/equities/trading/domestic/03.html
+        accessed: 2026-09-04
+    confidence: medium
 
   price_limits:
     type:
@@ -558,12 +569,32 @@ market_structure:
     confidence: medium
 
   block_trade:
-    zh: ""
-    confidence: low
+    zh: "ToSTNeT（东证交易网络系统）为东证的场外（off-auction）大宗交易平台：ToSTNeT-1 含单一个股交易（最低 1 个交易单位，通常 100 股）与篮子交易（须 15 只以上标的、合计 1 亿日元以上）；ToSTNeT-2 为收盘价／VWAP 交易；ToSTNeT-3 为上市公司回购自家股份。ToSTNeT-1／-2 交易时段 8:20-18:00，按价格／数量一致即成交、不进入连续竞价订单簿"
+    en: "ToSTNeT (Tokyo Stock Exchange Trading NeTwork System) is TSE's off-auction platform for large-lot and basket trades: ToSTNeT-1 covers single-issue transactions (minimum one trading unit, typically 100 shares) and basket transactions (15 or more issues aggregating at least JPY 100 million); ToSTNeT-2 handles closing-price / VWAP transactions; ToSTNeT-3 is for listed companies repurchasing their own shares. ToSTNeT-1/-2 trade 8:20 a.m.-6:00 p.m., matching on exact price/quantity correspondence outside the continuous auction book"
+    detail: "单一个股 ToSTNeT 交易的最低量按 Business Regulations Rule 15『交易单位』确定（即无『大额』硬门槛，其大宗属性来自协议成交、不冲击连续竞价簿）；篮子交易的 15 只 + 1 亿日元门槛见 ToSTNeT 特别规程施行细则 Rule 3。ToSTNeT-1 于 1998-06-29 上线（1999-09-30 前称『大口交易』），ToSTNeT-2 于 1999-08-07 上线。"
+    sources:
+      - title: ToSTNeT Market — Overview（JPX 官网英文版）
+        url: https://www.jpx.co.jp/english/equities/trading/tostnet/index.html
+        accessed: 2026-09-04
+      - title: Special Regulations of Business Regulations Concerning ToSTNeT Market（官方英文版 PDF）Rule 4 / Rule 10
+        url: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/tostnet_market_sp_regs_20250228.pdf
+        accessed: 2026-09-04
+      - title: Enforcement Rules for the Special Regulations ... Concerning ToSTNeT Market（官方英文版 PDF）Rule 2 / Rule 3
+        url: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/tostnet_market_sp_regs_ER_20241105.pdf
+        accessed: 2026-09-04
+    quote: "the ToSTNeT market has been used for off-auction trading to accommodate large-lot and basket trades that are difficult to execute smoothly in the trading session (trading by auction method). …… The number of issues specified by the Exchange as prescribed in Rule 4, Paragraph 2 of the ToSTNeT Special Regulations shall be fifteen (15), and the amount specified by the Exchange shall be one hundred (100) million yen. …… The trading hours of single-issue transactions and basket transactions shall be from 8:20 a.m. to 6:00 p.m."
+    confidence: high
 
   dark_pool:
-    zh: ""
-    confidence: low
+    zh: "东证（TSE）本身不运营暗池；ToSTNeT 为场外申报成交（见 block_trade），非非展示撮合。日本的场外场所是《金融商品交易法》(FIEA) 下的『私设交易系统』（PTS）。2025 年 8 月底 Cboe Japan（原 Chi-X Japan，2021 年收购进入）终止 PTS 业务后，日本已无独立的多边 PTS——TSE 实际上成为唯一汇集广泛券商订单的多边撮合场所；其余为券商内部化 PTS 与自营暗池（SBI 证券 2024-04 上线的『SBI Cross』、乐天证券的『R-Cross』），SBI Japannext 亦属 SBI 关联的 PTS。信用交易依 FSA 规则不得在暗池执行。PTS 份额约由 2021 年 8.8% 升至 2025 上半年 12.2%，暗池由 3.1% 升至 5.0%"
+    en: "TSE itself operates no dark pool; ToSTNeT is off-auction reported trading (see block_trade), not non-displayed matching. Japan's off-exchange venues are Proprietary Trading Systems (PTS) under the Financial Instruments and Exchange Act (FIEA). After Cboe Japan (formerly Chi-X Japan, which entered via acquisition in 2021) terminated its PTS at the end of August 2025, no independent multilateral PTS remains — TSE has effectively become the only multilateral venue matching a wide range of brokers' orders; the rest are broker-internalized PTS and proprietary dark pools (SBI Securities' 'SBI Cross', launched April 2024; Rakuten Securities' 'R-Cross'), with SBI Japannext also an SBI-affiliated PTS. Margin trades cannot legally execute in dark pools under FSA rules. PTS market share rose from ~8.8% (2021) to 12.2% (H1 2025), dark pools from 3.1% to 5.0%"
+    detail: "本字段『本所自营暗池』一栏 jp-jpx 为『无』。引文取自日本証券経済研究所（JSRI）2025-11 报告——JSRI 是证券业研究机构，按 CLAUDE.md 二第3条 confidence 封顶 medium。PTS 运营须 FIEA 第一种金融商品取引业许可、并受市场份额上限（历史约每股 10% / 全市场 20%）约束，此项细则本次未逐字缓存。"
+    sources:
+      - title: "JSRI — The Implications of Cboe Japan's Withdrawal: Structural Changes in Japan's Stock Market（Manabu Morimoto, 2025-11）"
+        url: https://www.jsri.or.jp/upload/topics_2511_01_en.pdf
+        accessed: 2026-09-04
+    quote: "At the end of August, Cboe Japan terminated its PTS—equivalent to the United States' ATS—operations in Japan. …… With Cboe Japan's withdrawal, there are no longer any independent PTSs in Japan. This means that TSE has effectively become the only multilateral venue matching orders from a wide range of broker-dealers. …… Currently, SBI Securities and Rakuten Securities execute margin trades primarily on internalized PTSs and cash equity trades through dark pools because margin trading cannot legally be executed in dark pools under FSA rules. …… began executing its own orders in its proprietary dark pool called \"SBI Cross\" (in April). Rakuten Securities had already been executing through its own dark pool (\"R-Cross\") …… PTS and dark pool market shares have risen sharply (from 8.8% → 12.2% for PTSs and 3.1% → 5.0% for dark pools between 2021 and 2025 (Jan–Jun))"
+    confidence: medium
 
   market_maker_scheme:
     spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "仅 ETF：ETF 做市激励制度（Rule 69），按品种指定做市商，须持续提供双边报价；现货股票市场无指定做市商。激励型（做市换费用返还 / 激励），非带罚则的强制报价义务"}
@@ -578,8 +609,10 @@ market_structure:
     confidence: high
 
   connect_schemes:
-    zh: ""
-    confidence: low
+    zh: "无沪港通式的跨境股票互联互通机制。境外投资者按日本一般外资规则通过持牌金融工具经营者（证券公司）接入东证市场，无需专门连接通道"
+    en: "No cross-border stock-connect scheme of the Stock Connect type. Foreign investors access the TSE markets through licensed Financial Instruments Business Operators (securities firms) under Japan's general foreign-investment rules, with no dedicated connect channel"
+    detail: "「无跨境互联互通」为消极认定（未见 JPX / TSE 关于此类机制的官方原文）。"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 六｜上市、持续监管与退市

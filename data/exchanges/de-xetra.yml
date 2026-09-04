@@ -398,8 +398,10 @@ market_structure:
     confidence: high
 
   odd_lot_handling:
-    zh: ""
-    confidence: low
+    zh: "无传统「碎股」市场——无全市场统一整手（见 board_lot_size），订单以股数申报；低于某证券「最小交易规模」的订单不被接受，不存在「不足一手余额」的专门处理机制"
+    en: "No traditional odd-lot market — with no exchange-wide board lot (see board_lot_size), orders are in number of shares; an order below a Security's Minimum Trading Size is simply not accepted, and there is no dedicated sub-lot-remainder handling"
+    detail: "「无碎股市场」是 board_lot_size 记录的「按证券设最小交易规模、无全市场整手」的直接推论。"
+    confidence: medium
 
   price_limits:
     type:
@@ -418,8 +420,9 @@ market_structure:
       en: "The size of each price range and its reference prices are set by the Management Board per Security; no single published percentage table was found in the materials fetched this session"
       confidence: medium
     other_boards:
-      zh: ""
-      confidence: low
+      zh: "不按板块区分——动态 / 静态价格区间的宽度与参考价由管理董事会按每只证券分别确定，不因上市板块（Prime Standard / General Standard / Scale）不同而有不同的价格限制机制（见 type / main_board）"
+      en: "Not differentiated by board — the width and reference prices of the dynamic/static price ranges are set by the Management Board per Security, and do not vary by listing segment (Prime Standard / General Standard / Scale); see type / main_board"
+      confidence: medium
 
   circuit_breaker:
     enum: stock_level
@@ -473,9 +476,15 @@ market_structure:
     confidence: high
 
   intraday_reversal:
-    zh: ""
-    confidence: low
-    detail: "本次抓取材料未找到对「当日买入证券能否当日卖出」的明确正面陈述（欧盟T+2结算市场一般无此限制，但按铁律不凭常识填写，留空转OPEN-QUESTIONS）。"
+    enum: t0
+    zh: "交易层面为 T+0（当日买入的证券当日即可卖出）——FWB Exchange Rules（Börsenordnung）与 Xetra 连续交易规则只规范订单 / 竞价 / 撮合，未设持有期或「交收前不得卖出」限制；结算层面按欧盟 CSDR 框架为 T+2（见 clearing.settlement_cycle，该字段本身因未抓到官方逐字表述留空）"
+    en: "T+0 at the trading level (securities bought during the day may be sold the same day) — the FWB Exchange Rules (Börsenordnung) and the Xetra continuous-trading rules govern only orders, auctions and matching, with no holding-period or 'may not sell before settlement' restriction; settlement follows the EU CSDR T+2 framework (see clearing.settlement_cycle)"
+    detail: "confidence 标 medium——依据是交易规则中不存在持有期限制条款（消极认定），而非交易所对「允许当日回转」的正面声明。与中国 A 股 T+1（SSE / SZSE 交易规则明文「交收前不得卖出」）形成对照——欧盟现货市场无此明文限制。"
+    sources:
+      - title: "Exchange Rules for the Frankfurt Stock Exchange（Börsenordnung，官网英文版 PDF）"
+        url: https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf
+        accessed: 2026-08-14
+    confidence: medium
 
   short_selling:
     spec: {note: "普通股票卖空受欧盟《卖空规则》236/2012 约束，须向 BaFin 申报净卖空头寸；FWB《交易所规则》§108 另对结构性产品发行商要求备兑卖空；逐项限制（报升/裸卖空处理）本文件未逐条核实"}
@@ -535,8 +544,10 @@ market_structure:
     confidence: high
 
   connect_schemes:
-    zh: ""
-    confidence: low
+    zh: "无沪港通式的跨境股票互联互通机制。境外投资者按欧盟 MiFID II 框架通过获准交易参与者接入 Xetra；欧盟内投资服务的跨境护照（passporting）是券商层面的许可安排、非交易所间订单路由连接"
+    en: "No cross-border stock-connect scheme of the Stock Connect type. Foreign investors access Xetra through authorised trading participants under the EU's MiFID II framework; the EU passporting of investment services is a broker-level authorisation regime, not an inter-exchange order-routing link"
+    detail: "「无跨境互联互通」为消极认定（未见 FWB / Deutsche Börse 关于此类机制的官方原文）。"
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 六｜上市、持续监管与退市

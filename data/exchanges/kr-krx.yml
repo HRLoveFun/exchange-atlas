@@ -416,8 +416,10 @@ market_structure:
     confidence: high
 
   odd_lot_handling:
-    zh: ""
-    confidence: low
+    zh: "无「碎股」概念——股票 / ETF / ETN 的最小交易单位即为 1 股（见 board_lot_size），不存在不足一手的余额"
+    en: "No odd-lot concept — the minimum trading unit for stocks/ETFs/ETNs is one share (see board_lot_size), so there is no sub-lot remainder"
+    detail: "「无碎股概念」是 board_lot_size（high，逐字 quote：『Stocks, ETFs, ETNs 1 share』）的直接推论。"
+    confidence: medium
 
   price_limits:
     type:
@@ -506,9 +508,16 @@ market_structure:
     confidence: low
 
   intraday_reversal:
-    zh: ""
-    detail: "本次抓取材料确认结算周期为T+2（见 clearing.settlement_cycle），但未找到明确说明现货股票「先买后卖是否可当日回转」的条文——结算周期与回转交易规则是两个不同维度，不能相互推断，按铁律留空不猜。"
-    confidence: low
+    enum: t0
+    zh: "交易层面为 T+0（当日买入的证券当日即可卖出）——买单成交确认后即可提交对应卖单，属「当日回转交易」（same-day turnaround），不改变 T+2 净额交收（见 clearing.settlement_cycle）"
+    en: "T+0 at the trading level (securities bought during the day may be sold the same day) — once a buy order's execution is confirmed the matching sell order may be entered as a same-day turnaround trade, without altering the T+2 netting settlement (see clearing.settlement_cycle)"
+    detail: "quote 出处为 Clearstream（国际中央存托）韩国市场交收说明，属操作层面权威第三方，confidence 依 CLAUDE.md 二第3条封顶 medium；KRX 官方英文操作手册《Guide to Trading in the Korean Stock Market》本身未就当日回转单列条文。与中国 A 股 T+1（SSE / SZSE 交易规则明文「交收前不得卖出」）形成对照。"
+    quote: "Same-day turnaround trades are allowed only for shares listed on the KRX under the condition that the sale is done following the confirmation of the execution of the buy order."
+    sources:
+      - title: "Clearstream — Settlement process, South Korea（KRX 上市股票当日回转交易规则）"
+        url: https://www.clearstream.com/clearstream-en/res-library/market-coverage/settlement-process-south-korea-1283572
+        accessed: 2026-09-04
+    confidence: medium
 
   short_selling:
     enum: restricted_uptick
@@ -534,8 +543,18 @@ market_structure:
     confidence: high
 
   dark_pool:
-    zh: ""
-    confidence: low
+    zh: "KRX 不运营暗池。2025-03-04 之前 KRX 是韩国唯一股票交易场所（『50 年单一系统』）。2025 年起有 **Nextrade（NXT）**——韩国首家另类交易系统（ATS），FSC 于 2025-02-05 授予最终许可、3 月 4 日开业，依《资本市场与金融投资业法》(FSCMA) 设立（ATS 立法依据早于 2013 年）；NXT 是与 KRX 并列、可交易相同上市股票的第二个交易场所，主要为明盘（展示订单簿、延长交易时段、费率低于 KRX），设有『中间价申报』但在其订单簿内处理。韩国市场内无券商暗池"
+    en: "KRX operates no dark pool. Before 4 March 2025, KRX was Korea's sole stock trading venue (a '50-year single system'). From 2025 there is **Nextrade (NXT)** — Korea's first alternative trading system (ATS); the FSC granted final approval on 5 February 2025 and it launched on 4 March, established under the Financial Investment Services and Capital Markets Act (FSCMA) (the ATS legislative basis dates to 2013). NXT is a second venue alongside KRX trading the same listed stocks, and is primarily lit (displayed order book, extended hours, fees below KRX); it offers a mid-price order handled within its order book. There are no broker dark pools in the Korean market"
+    detail: "本字段『本所自营暗池』一栏 kr-krx 为『无』。NXT 是明盘竞争场所而非暗池；其『中间价申报』是否构成独立非展示簿本次未从 NXT 官方市场规则确认，故不认定为暗池。ATS 受 FSCMA 市场份额上限约束（历史口径约每股 15% / 全市场 10%），细则未逐字缓存。整体 confidence: medium（『KRX 无暗池』『市场内无券商暗池』为审慎否定表述，NXT / FSC 一手来源支撑其存在与性质）。"
+    sources:
+      - title: "Nextrade — Market Overview（NXT 官网英文版）"
+        url: https://nextrade.co.kr/en/marketOverview/content.do
+        accessed: 2026-09-04
+      - title: "FSC Grants Final Approval to Nextrade for Operation of ATS（金融委员会英文新闻稿，2025-02-05）"
+        url: https://www.fsc.go.kr/eng/pr010101/83967
+        accessed: 2026-09-04
+    quote: "Nextrade is the second stock trading venue alongside the Korea Exchange, established under the Financial Investment Services and Capital Markets Act. …… This breaks the 50-year single system in Korea …… granted final approval to Nextrade for operating an alternative trading system (ATS). The introduction of an ATS in domestic stock market will officially set off a multiple-exchange and competition-based stock trading system in Korea. …… the government first established legislative grounds for ATS in 2013"
+    confidence: medium
 
   market_maker_scheme:
     spec: {present: true, quote_obligation: null, max_spread_pct: null, note: "官网确认存在「流动性提供者」（LP）制度（ETF 另有专门 LP System）；具体资格与义务本次未展开抓取"}
@@ -548,8 +567,15 @@ market_structure:
     confidence: low
 
   connect_schemes:
-    zh: ""
-    confidence: low
+    zh: "无沪港通式的跨境股票互联互通机制。KRX 曾就自身上市衍生品与境外交易所设夜盘联动：CME-linked trading（2009–2020 年 4 月）、Eurex-linked trading（2010–2025 年 6 月 5 日），两者均已终止，KRX 自 2025 年 6 月起自主运营夜盘。现无跨所联动；境外投资者按 IRC / LEI 登记通过持牌会员接入现货市场"
+    en: "No cross-border stock-connect scheme of the Stock Connect type. KRX previously ran night-session links for its own listed derivatives with overseas exchanges — CME-linked trading (2009 to April 2020) and Eurex-linked trading (2010 to 5 June 2025) — both now terminated, with KRX operating its own in-house night trading since June 2025. There is no current inter-exchange link; foreign investors access the cash market through licensed members after IRC/LEI registration"
+    quote: "The Korea Exchange (KRX) has been providing the night trading services … in cooperation with major global exchanges, such as CME and Eurex, since 2009. …… CME-linked Trading … Operation period 2009~April 2020 … Eurex-linked Trading … 2010~To be terminated on June 5, 2025 …… The Eurex-linked night trading was decided to end at 4:00* on Thursday, June 5, 2025."
+    sources:
+      - title: "Guide to Night Session in KRX Derivatives Market（KRX 官网英文版 PDF，2025 年 4 月）"
+        url: https://global.krx.co.kr/contents/GLB/02/0201/0201041003/Guide_to_Night_Session_in_KRX_Derivatives_Market.pdf
+        accessed: 2026-08-18
+    detail: "quote 用「…」「……」连接同一 PDF 的引言句、『Trading Linked to CME and Eurex』时间线表两列、以及 Q&A 段（中间为表格其他行 / 段落）。「无股票互联互通」为消极认定。境外准入渠道见 participants.foreign_access_channel。"
+    confidence: high
 
   derivatives:
     trading_sessions:
