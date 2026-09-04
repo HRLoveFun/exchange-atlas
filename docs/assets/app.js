@@ -1124,21 +1124,25 @@
   }
 
   // ══════════════════════════════════════════════
-  // 交易成本瀑布（v2.0 Phase 3 第二棒：数据层 ADR-045 / 渲染层 ADR-047，见 PROJECT/DECISIONS.md）
+  // 交易成本瀑布（v2.0 Phase 3 第二棒：数据层 ADR-045 / 渲染层 ADR-047 / ADR-070 迭代，见 PROJECT/DECISIONS.md）
   //   镜像双瀑布：中轴 = 0 bp；左半 = 买入侧、右半 = 卖出侧，向中间对齐。
-  //   六费种（佣金 / 交易所费 / 清算费 / 监管费 / 印花税 / 金融交易税）逐行，
+  //   五费种（交易所费 / 清算费 / 监管费 / 印花税 / 金融交易税）逐行，
   //   spec.side（buy/sell/both）决定落在哪一侧；底部买 / 卖小计 + 往返合计。
+  //   佣金（commission_structure）不进瀑布条（ADR-070：券商议价、20/20 无统一费率、
+  //   恒幽灵条零对比价值）——降为图下方一行说明，点击仍可看出处；数据字段仍在剖面 chip / 档案页。
   //   数据源：第十一章 costs.* 的 spec 层（cost_layer 形状：rate + unit + side +
-  //   components / tiered / cap / type:none / rate:null）。归一到 bp 在渲染层做（ADR-045 轴③）。
+  //   components / tiered / cap / type:none / rate:null / rate_raw）。归一到 bp 在渲染层做（ADR-045 轴③）。
   //   诚实三态：rate 有值 → 实心条 + bp 数；rate:null → 幽灵虚线条 +「议价 / 未披露」；
-  //   type:none → 中轴细线 +「不征收」。资本利得税 / 股息预扣税为持有 / 退出税，
+  //   type:none → 中轴细线 +「不征收」。rate_raw（原文非阿拉伯数字、已人工转写，如 tw/za 的
+  //   证券交易税）→ 实心条 + 「*」标记。资本利得税 / 股息预扣税为持有 / 退出税，
   //   非按笔成本，另列图下方（ADR-045 轴①）。手写 SVG，不引图表库。
   // ══════════════════════════════════════════════
   var CW_DEFAULT_EX = "hk-hkex";
   var CW_ASSUMED_NOTIONAL = 100000; // 单笔成交金额（当地货币），折算定额 / 按笔费种
   var CW_ASSUMED_PRICE = 50;        // 单股价格（当地货币），折算按股费种
-  var CW_FEE_ORDER = ["commission_structure", "exchange_fees", "clearing_fees", "regulatory_fees", "stamp_duty", "financial_transaction_tax"];
+  var CW_FEE_ORDER = ["exchange_fees", "clearing_fees", "regulatory_fees", "stamp_duty", "financial_transaction_tax"];
   var CW_FEE_META = {
+    // 佣金不在 CW_FEE_ORDER（ADR-070）——保留元数据供图下方说明行的 cwFeeName / openCellOverlay 用
     commission_structure:      { zh: "佣金", en: "Commission", color: "var(--fg-faint)" },
     exchange_fees:             { zh: "交易所费", en: "Exchange fees", color: "var(--accent)" },
     clearing_fees:             { zh: "清算费", en: "Clearing fees", color: "var(--info)" },
@@ -1174,7 +1178,8 @@
         bp = rate / CW_ASSUMED_NOTIONAL * 1e4; approx = true; break;
       default: return { ghost: true, tiered: !!spec.tiered };
     }
-    return { bp: bp, tiered: !!spec.tiered, capped: spec.cap != null, components: !!comps, approx: approx };
+    // rate_raw（ADR-070）：原文非阿拉伯数字（「千分之三」/「0,25%」），rate 为人工转写 → 标 *
+    return { bp: bp, tiered: !!spec.tiered, capped: spec.cap != null, components: !!comps, approx: approx, raw: !!spec.rate_raw };
   }
   function cwSide(spec) {
     return spec && (spec.side === "buy" || spec.side === "sell") ? spec.side : "both";
@@ -1203,11 +1208,12 @@
     var s = (r.env && r.env.spec) || {};
     var parts = [cwFeeName(r.key) + sep()];
     if (r.d && typeof r.d.bp === "number") parts.push("≈ " + cwFmtBp(r.d.bp) + t(" bp/边", " bp per side"));
-    if (s.unit) parts.push(t("原始 ", "raw ") + (s.rate != null ? s.rate : "?") + " " + s.unit);
+    if (s.unit) parts.push(t("原始 ", "raw ") + (s.rate_raw != null ? s.rate_raw : (s.rate != null ? s.rate : "?")) + " " + s.unit);
     if (r.d && r.d.components) parts.push(t("多项分征费求和", "sum of multiple levies"));
     if (r.d && r.d.tiered) parts.push(t("▸阶梯首档 / 代表档", "▸ first tier / representative tier"));
     if (r.d && r.d.capped) parts.push(t("^设封顶（bp 未扣封顶）", "^ capped (bp not net of the cap)"));
     if (r.d && r.d.approx) parts.push(t("≈按假设成交额折算", "≈ converted using an assumed notional"));
+    if (r.d && r.d.raw) parts.push(t("*原文非阿拉伯数字，已人工转写", "* transcribed from non-Arabic source numerals"));
     parts.push("side=" + r.side);
     return parts.join(" · ");
   }
@@ -1315,7 +1321,7 @@
         }
         var w = Math.max(1.5, sc(r.d.bp));
         var bx = dir < 0 ? cx - w : cx;
-        var mark = (r.d.tiered ? "▸" : "") + (r.d.capped ? "^" : "") + (r.d.approx ? "≈" : "");
+        var mark = (r.d.tiered ? "▸" : "") + (r.d.capped ? "^" : "") + (r.d.approx ? "≈" : "") + (r.d.raw ? "*" : "");
         g.push(cwCell(id, r.key,
           '<rect x="' + n(bx) + '" y="' + n(y + 1) + '" width="' + n(w) + '" height="' + barH + '" fill="' + r.meta.color + '" opacity="0.82"/>' +
           '<text x="' + n(dir < 0 ? bx - 4 : bx + w + 4) + '" y="' + n(yc) + '" text-anchor="' + (dir < 0 ? "end" : "start") +
@@ -1370,7 +1376,7 @@
 
     var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + ' ' + n(H) + '" class="td-svg cw-svg" role="img" aria-label="' +
       esc(exName) + t(" 交易成本瀑布", " cost waterfall") + '">' + g.join("") + "</svg></div>";
-    return cwLegend() + cwBanner(ms) + svg + cwTaxPanel(id, data) + cwProse();
+    return cwLegend() + cwBanner(ms) + svg + cwCommissionNote(id, data) + cwTaxPanel(id, data) + cwProse();
   }
 
   function cwBanner(ms) {
@@ -1390,8 +1396,23 @@
     return '<div class="td-legend">' + items +
       '<span><i class="td-sw" style="background:var(--fg);opacity:.86"></i>' + t("买 / 卖合计", "Buy / sell total") + "</span>" +
       '<span><i class="td-sw td-sw-ghost"></i>' + t("幽灵条 = 议价 / 未披露", "Ghost bar = negotiated / undisclosed") + "</span>" +
-      '<span class="cw-mk">' + t("▸阶梯首档　^设封顶　≈按假设折算", "▸ first tier　^ capped　≈ assumed notional") + "</span>" +
+      '<span class="cw-mk">' + t("▸阶梯首档　^设封顶　≈按假设折算　*原文非阿拉伯数字已人工转写",
+        "▸ first tier　^ capped　≈ assumed notional　* transcribed from non-Arabic numerals") + "</span>" +
       "</div>";
+  }
+
+  // 佣金说明行（ADR-070）：佣金不进瀑布条——券商议价、20/20 无统一费率、恒幽灵条零对比价值。
+  // 但对零售交易者通常是最大的一笔显性成本，图下方留一行说明，点击仍可看 commission_structure 出处。
+  function cwCommissionNote(id, data) {
+    var costs = (data.chapters && data.chapters.costs) || {};
+    var v = dv(costs.commission_structure);
+    return '<div class="td-chips-label">' + t("佣金（不在瀑布条内）", "Commission (not a waterfall bar)") + "</div>" +
+      '<button type="button" class="cw-tax-line cw-commission-line' + (v ? "" : " td-chip-empty") +
+      '" data-role="cell" data-exchange="' + esc(id) + '" data-path="commission_structure" data-chapter="costs" title="' + esc(v || "—") + '">' +
+      '<span class="cw-tax-v">' + t(
+        "券商与客户议价，不写进交易所 / 清算所规则——对零售交易者通常是最大的一笔显性成本，按覆盖边界不量化。点击看本所佣金结构。",
+        "Set by broker-client negotiation, not written into exchange / clearing rules — usually the largest single explicit cost for a retail trader, and not quantified under this project’s coverage boundary. Click for this market’s commission structure.") +
+      '</span></button>';
   }
 
   function cwTaxPanel(id, data) {
@@ -1412,20 +1433,25 @@
   function cwProse() {
     return '<p class="td-prose">' + t(
       '本图由第十一章 <code>costs.*</code> 的结构化 <code>spec</code> 层驱动（见 ' +
-      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-045</a>）。' +
-      '六费种为按笔（per-trade）显性成本，按 <code>side</code> 落在买入侧 / 卖出侧 / 双边。各费种原始计量单位不一' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-045</a>、' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-070</a>）。' +
+      '五费种（交易所费 / 清算费 / 监管费 / 印花税 / 金融交易税）为按笔（per-trade）显性成本，按 <code>side</code> 落在买入侧 / 卖出侧 / 双边。各费种原始计量单位不一' +
       '（% / ‰ / bp / 每股 / 每十万 / 定额），此处统一折算为 bp of 成交额：按股 / 定额费种按「假设单笔成交金额 100,000（当地货币）、' +
-      '假设股价 50」折算（标 ≈）；阶梯费率取首档 / 代表档（标 ▸）；封顶（标 ^）在该假设成交额下未必触及、bp 未扣封顶。' +
-      '实心条为已摘引官方费率；幽灵虚线条为「费种存在、无可摘引费率」（市场化议价的佣金、maker-taker 净费率等）。' +
-      '买卖价差等隐性成本按本项目覆盖边界不收录（见 CLAUDE.md）。规则以各交易所官方发布为准，不构成投资建议。',
+      '假设股价 50」折算（标 ≈）；阶梯费率取首档 / 代表档（标 ▸）；封顶（标 ^）在该假设成交额下未必触及、bp 未扣封顶；' +
+      '原文以非阿拉伯数字给出费率（台湾「千分之三」、南非「0,25%」）的，rate 为人工转写、原文逐字串经校验器 verbatim 反查（标 *）。' +
+      '实心条为已摘引官方费率；幽灵虚线条为「费种存在、无可摘引费率」（maker-taker 净费率、市场化议价费等）。' +
+      '佣金券商议价、不在交易所规则内，不作瀑布条，见图下方说明。买卖价差等隐性成本按本项目覆盖边界不收录（见 CLAUDE.md）。规则以各交易所官方发布为准，不构成投资建议。',
       'This chart is driven by the structured <code>spec</code> layer of Chapter 11 <code>costs.*</code> (see ' +
-      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-045</a>). ' +
-      'The six fee types are per-trade explicit costs, placed on the buy side / sell side / both according to <code>side</code>. ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-045</a>, ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-070</a>). ' +
+      'The five fee types (exchange, clearing, regulatory, stamp duty, financial transaction tax) are per-trade explicit costs, placed on the buy side / sell side / both according to <code>side</code>. ' +
       'Their native units differ (%, ‰, bp, per share, per lakh, flat), so all are converted here to bp of notional: per-share and flat fees are ' +
       'converted using “assumed notional 100,000 (local currency), assumed share price 50” (marked ≈); tiered rates use the first / a representative ' +
-      'tier (marked ▸); caps (marked ^) may not be reached at that assumed notional and are not netted off the bp figure. Solid bars are officially ' +
-      'cited rates; ghost hatched bars are “fee exists, no citable rate” (negotiated commissions, net maker-taker rates, etc.). Implicit costs such as ' +
-      'the bid-ask spread are out of scope by this project’s coverage boundary (see CLAUDE.md). Rules are as officially published by each exchange; ' +
+      'tier (marked ▸); caps (marked ^) may not be reached at that assumed notional and are not netted off the bp figure; where the source gives the rate ' +
+      'in non-Arabic numerals (Taiwan “per mille three”, South Africa “0,25%”), the rate is a manual transcription and the verbatim source string is ' +
+      'reverse-checked by the validator (marked *). Solid bars are officially cited rates; ghost hatched bars are “fee exists, no citable rate” ' +
+      '(net maker-taker rates, negotiated fees, etc.). Commission is broker-negotiated and outside exchange rules, so it is not a waterfall bar — see the note below the chart. ' +
+      'Implicit costs such as the bid-ask spread are out of scope by this project’s coverage boundary (see CLAUDE.md). Rules are as officially published by each exchange; ' +
       'nothing here is investment advice.') + "</p>";
   }
 

@@ -15,3 +15,5 @@
 
 <!-- 一行一条，格式：`- YYYY-MM-DD · <一句话结果> · [ADR-NNN] · <分支或 PR>` -->
 <!-- 折叠进 ROADMAP §一 后删除该行。当前为空。 -->
+
+- 2026-09-04 · 成本瀑布迭代：佣金行降级为图下方说明（`CW_FEE_ORDER` 6→5）+ `cost_layer` 加 `rate_raw`（tw-twse 证券交易税 0.3% / za-jse STT 0.25% 由幽灵条转实心条 + `*` 标记，`validate.py` 加 verbatim 子串校验，解决 OPEN-QUESTIONS「原文数值串键」悬案） · [ADR-070] · worktree-cost-waterfall-commission
