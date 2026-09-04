@@ -15,3 +15,4 @@
 
 <!-- 一行一条，格式：`- YYYY-MM-DD · <一句话结果> · [ADR-NNN] · <分支或 PR>` -->
 <!-- 折叠进 ROADMAP §一 后删除该行。当前为空。 -->
+- 2026-09-04 · 前端隐去 taxonomy 章序数（六视图说明段 + SVG/工具条 + 档案页导航去「第X章」，改用章节名 + 档案页指向）+ 新增 `check_no_chapter_ordinals.py` 并入 `make check` · [ADR-070] · worktree-frontend-hide-chapter-ordinals
