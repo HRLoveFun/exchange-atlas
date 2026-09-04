@@ -918,7 +918,7 @@
     auc(opnS, "opening_mechanism", t("开盘竞价", "Opening auction"));
     auc(clsS, "closing_mechanism", t("收盘竞价", "Closing auction"));
 
-    // ── 临时停牌：顶边斜纹条（ADR-035 A："任意时刻"斜纹条；文案居中，ADR-071）──
+    // ── 临时停牌：顶边斜纹条（ADR-035 A："任意时刻"斜纹条；文案居中，ADR-073）──
     if (ms.trading_halt_mechanism && ms.trading_halt_mechanism.zh) {
       g.push(tdCell(id, "trading_halt_mechanism",
         '<rect x="' + PL + '" y="' + (PT + 1) + '" width="' + pw + '" height="9" fill="url(#tdHalt)"/>' +
@@ -943,7 +943,7 @@
     }
 
     // ── 网格 + 轴刻度（零轴刻度直接标参考价名称，取代无信息量的"0%"；
-    //    轴含义已在顶栏工具条说明，不再重复"0 = …"内嵌批注，见 ADR-071）──
+    //    轴含义已在顶栏工具条说明，不再重复"0 = …"内嵌批注，见 ADR-073）──
     var yStep = yR <= 8 ? 2 : yR <= 16 ? 4 : yR <= 30 ? 5 : 10;
     for (var p = -Math.floor(yR / yStep) * yStep; p <= yR; p += yStep) {
       var yy2 = Y(p), zero = p === 0;
@@ -997,7 +997,7 @@
     }
 
     // ── 标题 / 轴名（y 轴标题已删——"涨跌幅 %"与参考价已由 % 刻度 + 零轴刻度本身表达，
-    //    顶栏工具条另有一句完整口径，ADR-071）──
+    //    顶栏工具条另有一句完整口径，ADR-073）──
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
     g.push('<text x="' + PL + '" y="' + (PT - 40) + '" class="td-title">' + esc(exName) + t(" · 市场机制剖面", " · Market Mechanics Profile") + "</text>");
     g.push('<text x="' + n(PL + pw / 2) + '" y="' + (H - 5) + '" class="td-axis-name" text-anchor="middle">' +

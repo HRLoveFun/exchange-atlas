@@ -268,7 +268,7 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
 .td-title { font-size: 14.5px; font-weight: 700; }
 .td-axis-name { font-size: 11px; fill: var(--fg-muted); }
 .td-tick { font-size: 10px; fill: var(--fg-faint); font-family: var(--font-mono); }
-/* 零轴刻度：参考价名称是词不是数字，换回无衬线 + 略缩小以容纳英文长词组（ADR-071） */
+/* 零轴刻度：参考价名称是词不是数字，换回无衬线 + 略缩小以容纳英文长词组（ADR-073） */
 .td-tick-0 { font-family: var(--font-sans); font-size: 8.5px; font-weight: 600; fill: var(--fg-muted); }
 .td-wl { font-size: 10.5px; font-weight: 600; }
 .td-wl-sub { font-size: 9px; fill: var(--fg-faint); }
