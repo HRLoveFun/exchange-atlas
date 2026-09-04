@@ -18,3 +18,4 @@
 - ADR-001 … ADR-068 · 台账建立前的历史条目（主题见 `DECISIONS.md`） · pre-ledger
 - ADR-069 · 并行 worktree 防失序四道护栏 · worktree-antidisorder · 2026-09-04
 - ADR-070 · 剖面机制核心面板右缘避让收盘集合竞价竖条（ADR-055 已知局限②） · worktree-td-corepanel-right-edge · 2026-09-04
+- ADR-071 · 成本瀑布：佣金行降级为说明 + cost_layer 加 rate_raw（tw/za 证券交易税不再画幽灵条） · worktree-cost-waterfall-commission · 2026-09-04
