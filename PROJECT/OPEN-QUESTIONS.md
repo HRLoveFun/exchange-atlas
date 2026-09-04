@@ -122,6 +122,7 @@
   - `kr-krx`：Nextrade（NXT，2025-03-04 开业）『中间价申报』是否构成独立非展示订单簿，NXT 官方市场规则未确认；ATS 的 FSCMA 市场份额上限具体数值未逐字缓存。
   - `jp-jpx`：引日本証券経済研究所（JSRI）2025-11 报告（第三方，封顶 medium）；PTS 的 FIEA 许可与市场份额上限细则待抓 FSA / JSDA。
   - `in-nse`：SEBI 无单句『禁止暗池』的正面表述，禁止性靠《证券合约（监管）法》结构 + 一贯监管实践推得。**并附一条勘误**：多篇二手文章称『NSE Alpha 是印度唯一合法暗池 / NSE 2010 年推出暗池框架』，本次遍查 NSE / SEBI 一手资料无任何依据，判为不实，`in-nse.yml` 已按『印度不允许暗池』填写。
+- **[任务五] `kr-krx price_limits.other_boards`（KONEX 涨跌停幅度）仍未确认（2026-09-05）。** 找到 `global.krx.co.kr`『Regulation ‧ Stocks ‧ KONEX Market ‧ Trading』正文页（`GLB0602030101.jsp`，已登记 SOURCES.md），明文列出「trading hours, market holidays, trading halts, trading methods, restrictions on short-selling, clearing and settlement, and good faith deposit are the same as the KOSDAQ market」——**枚举清单里没有 price limit / 涨跌停字样**，不足以支撑「KONEX = KOSDAQ ±30%」这一具体断言（哪怕看起来像是同一批交易细则）；如实不填，维持 `confidence: low`。**待补**：KONEX 专属交易规则文本（非 KOSPI/KOSDAQ 通用指南）里对涨跌停幅度的正面陈述。
 - **[ADR-074] 任务二第二人独立复核（2026-09-05）留下的待核项**（逐条判定与 4 处已订正 FIX 见 `PROJECT/DATA-GAP-TASK2-SPOT-CHECK.md`）：
   - `de-eurex board_lot_size` 标 `not_applicable` 是否应改判为填写实际内容——复核者指出同一文件 `tick_size` 面对"无统一值但逐品种有正面规定"的结构相同情况选择了"填内容"（`regime: per_instrument`），`au-asx`（同样无股数整手概念）也是"填内容"（无整手 + Marketable Parcel）而非 `not_applicable`。两种处理各自能自洽，是"信息退化为恒定值（如恒为 1 张合约）时是否够格 not_applicable"的通用判据缺口，不是 de-eurex 一家的事实错误，待人工拍板一个可复用的判据。
   - `de-xetra connect_schemes` 未提及 CEINEX（Deutsche Börse 与上交所/中金所合资的法兰克福 RMB 产品互联互通平台）——是否构成遗漏需人工判断（CEINEX 严格说不是"Xetra 与另一交易所的订单路由连接"，但与"跨境互联互通"主题高度相关）。
@@ -162,13 +163,11 @@
 - `kr-krx` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 错误交易处理规则（error_trade_rule）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low
-- `kr-krx` 市场结构与交易机制 / 做市商制度（market_maker_scheme）— confidence: low
 - `kr-krx` 市场数据与技术基础设施 / 实时/延时（data_latency）— confidence: low
 - `kr-krx` 市场数据与技术基础设施 / 数据收费模式（data_pricing_model）— confidence: low
 - `kr-krx` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `kr-krx` 交易成本与税费 / 佣金结构（commission_structure）— confidence: low
 - `kr-krx` 交易成本与税费 / 清算费用（clearing_fees）— confidence: low
-- `kr-krx` 交易成本与税费 / 股息预扣税（dividend_withholding_tax）— confidence: low
 - `kr-krx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `kr-krx` 风险与特殊考量 / 市场操纵与监管执法环境（enforcement_note）— confidence: low
 - `sa-tadawul` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low

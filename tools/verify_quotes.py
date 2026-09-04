@@ -124,7 +124,19 @@ def file_text(p):
 
 
 def manifest_map(ex):
-    """返回 {url: 规范正文文本}（仅含实际落盘的 fetch 来源）。"""
+    """返回 {url: (规范正文文本, via)}（仅含实际落盘、且抓取本身成功的来源）。
+
+    ⚠️ `ok` 必须为 True 才收——`fetch_sources.py` 对抓取失败（403/404/拦截页）也会把响应
+    体落盘、manifest 里标 `ok: false`（保留失败痕迹供排查）。这类文件不是"真正抓到的原文"，
+    若混进这里，quote 反查会拿一段 403 错误页/Cloudflare 拦截页当来源正文比对，把本该是
+    信息性的 CACHE_MISS 错判成阻断构建的 FAIL——PROJECT/SOURCES.md「fetch_sources 全量
+    重跑会用抓取失败页覆盖已有好缓存」记的就是这个坑，这里在消费侧堵上（[ADR-075]）。
+
+    `via` 保留给调用方区分 "live"（当次直连拿到）vs "wayback"（历史快照，见 tools/fetch.py
+    的 wayback_snapshot）——wayback 快照可能明显滞后于当次数据录入时的官网原文（实测
+    za-jse 一处仅有 2020 年快照、现网早已改版），拿它证明 quote "存在"合理，拿它证明 quote
+    "不存在/编造"不合理，调用方据此把 wayback-only 未命中降级为 CACHE_MISS 而非 FAIL。
+    """
     mfile = CACHE / ex / "_manifest.json"
     out = {}
     if not mfile.exists():
@@ -136,12 +148,12 @@ def manifest_map(ex):
     for item in man:
         url = item.get("url")
         f = item.get("file")
-        if not url or not f:
+        if not url or not f or not item.get("ok"):
             continue
         p = ROOT / f
         if not p.exists():
             continue
-        out[url] = file_text(p)
+        out[url] = (file_text(p), item.get("via") or "live")
     return out
 
 
@@ -225,7 +237,7 @@ def main():
     for ex in exs:
         raw = yaml.safe_load(open(DATA / f"{ex}.yml", encoding="utf-8"))
         d = sync.expand_exchange(taxonomy, raw).get("chapters", {})
-        mmap = manifest_map(ex)  # url -> 规范正文
+        mmap = manifest_map(ex)  # url -> (规范正文, via)
         for path, node in walk(d, ""):
             q = norm(node.get("quote", ""))
             if not q:
@@ -247,14 +259,18 @@ def main():
                 continue
 
             # 离线：只查 manifest 中实际落盘的来源
-            cached = [(u, mmap[u]) for u in urls if u in mmap]
+            cached = [(u, *mmap[u]) for u in urls if u in mmap]  # (url, text, via)
             uncached = [u for u in urls if u not in mmap]
             if not cached:
                 cache_miss.append((ex, path, urls)); continue
-            if quote_in(q, [t for _, t in cached]):
+            if quote_in(q, [t for _, t, _ in cached]):
                 oks.append((ex, path))
-            elif uncached:
-                # 部分来源未落盘，无法排除 quote 在那些来源里 → 记为缺失而非失配
+                continue
+            # 未命中：只有当"当次直连"（非 wayback）的来源也确认没有 quote 才算实锤 FAIL；
+            # 若命中集合里只有 wayback 历史快照，快照可能明显滞后于数据录入时的官网原文
+            # （见 manifest_map 说明），不能拿它证明 quote 是编的，降级为 CACHE_MISS。
+            live_cached = [c for c in cached if c[2] != "wayback"]
+            if uncached or not live_cached:
                 cache_miss.append((ex, path, urls))
             else:
                 fails.append((ex, path, urls))
