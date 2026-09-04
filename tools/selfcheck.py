@@ -107,6 +107,40 @@ case("chapter-is-NA 假：raw_chapter 为 None",
      _cina({"only_spot": True}, None), False)
 
 
+# ══════════════════════════════════════════════════════════════
+# [ADR-069] ROADMAP §一 防失序：
+#   validate.roadmap_nextstep_violations(block) / roadmap_recent_violations(block, limit)
+#   —— 并行 worktree 各自重排 §一 子节、git 静默三方合并 → 重号/超窗。取 bool / count。
+# ══════════════════════════════════════════════════════════════
+def _next_bad(block):
+    return bool(validate.roadmap_nextstep_violations(block))
+
+
+case("nextstep 合法：1..4 连续", _next_bad("1. a\n2. b\n3. c\n4. d\n"), False)
+case("nextstep 合法：空列表（无编号行）", _next_bad("完整清单见三节。\n"), False)
+case("nextstep 合法：带 ~~划掉~~ 前缀仍算一项", _next_bad("1. ~~done~~ ✅\n2. b\n"), False)
+case("nextstep 违规：重号（并行合并残留 1-6,4-6）",
+     _next_bad("1. a\n2. b\n3. c\n4. d\n5. e\n6. f\n4. g\n5. h\n6. i\n"), True)
+case("nextstep 违规：不连续（缺 3）", _next_bad("1. a\n2. b\n4. d\n"), True)
+case("nextstep 违规：不从 1 起", _next_bad("2. a\n3. b\n"), True)
+case("nextstep 计数：重号各报一条 + 不连续 → 2 条消息",
+     len(validate.roadmap_nextstep_violations("1. a\n1. b\n3. c\n")), 2)
+case("nextstep 不误伤：缩进的子编号不计入顶层",
+     _next_bad("1. a\n  1. sub\n  2. sub\n2. b\n"), False)
+
+
+def _recent_bad(block, limit=3):
+    return bool(validate.roadmap_recent_violations(block, limit))
+
+
+case("recent 合法：正好 3 条", _recent_bad("- **2026-09-04 · a** — x\n- **2026-09-03 · b** — y\n- **2026-09-02 · c** — z\n"), False)
+case("recent 合法：2 条", _recent_bad("- **a** — x\n- **b** — y\n"), False)
+case("recent 违规：9 条（并行各自 prepend 未裁剪）",
+     _recent_bad("".join(f"- **{i}** — x\n" for i in range(9))), True)
+case("recent 计数：条目数按 `- **` 行首算，正文里的 `- **` 不计",
+     len(validate.roadmap_recent_violations("- **a** — 见 `- **b**` 的说明\n- **c** — y\n", 3)), 0)
+
+
 def main():
     fails = [(n, g, w) for n, g, w in CASES if g != w]
     for n, g, w in CASES:
