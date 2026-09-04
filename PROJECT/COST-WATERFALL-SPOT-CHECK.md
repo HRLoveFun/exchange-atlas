@@ -58,6 +58,15 @@
    > - `za-jse stamp_duty` `side: buy` **降为「保留 + 待补强」**：本字段 `quote` 未含 ADR-058 声称的「applies to the purchase」措辞（`side: buy` 不移除——南非 STT 通行由买方承担，且渲染层缺省回退 `both` 更错）。
    > - `kr-krx stamp_duty` `type: none` **标「暂定」**：仅由第三方综述 PwC Tax Summaries 支撑（封顶 medium），非一手条文。
    > - `us-nasdaq regulatory_fees` 的 eCFR 引文已逐字补入 `quote`（`/current/` 页对自动客户端设访问闸，经 versioner API 核实）。
+   >
+   > **[2026-09-04 [ADR-065] 残差收口]** 上述收尾审查留下的项逐条处理：
+   > - `uk-lse stamp_duty` `side: buy` → ✅ **坐实**：HMRC/gov.uk『Tax when you buy shares』（非 SPA 页，curl 常规 UA 200）——『When you buy shares, you usually pay a tax or duty of 0.5%』『You pay tax when you buy』，措辞已入 quote，`verified: 2026-09-04`。
+   > - `za-jse stamp_duty` `side: buy` → ✅ **坐实**：SARS『Securities Transfer Tax』页『Who is it for?』段——member/participant 为法定纳税人但『may recover the tax payable from the persons to whom the securities were transferred』（买方最终承担），措辞已入 quote；顺带把 `.cache/za-jse` 从空重建到含本页。
+   > - `kr-krx stamp_duty` `type: none` → ✅ **由「暂定」转「一手条文支撑」**：韩国《印花税法》(Stamp Tax Act) 英文版第 1 条（elaw.klri.re.kr hseq=64499）——印花税纳税义务人为『文书制备者』、课税对象是文书而非证券转让；confidence 维持 medium（translation for-reference-only），但不再是「暂定」。
+   > - `ca-tsx regulatory_fees` → ✅ **实质修正**：不是「查不到」而是「查到了、是浮动费」——CIRO《Equity Market Regulation Fee Model》成本回收制（Message Processing Fee + Trade Fee，Participants 缴纳；OSC Bulletin 24-0154 第 8 节复述现行模型原文）；`rate: null` 保留（无固定比率），note/zh/en 改为如实描述该费而非「未取得正面依据」。
+   > - `hk-hkex financial_transaction_tax` → ⏸️ 维持 `rate: null`，**按「审慎终态」关闭**：香港列举式税制、IRD 征费封闭清单（Stamp/Estate/Betting/Hotel Accommodation Duty + Business Registration）无 FTT 条例，但仍是推断（『无该条例』≠ 官方正面排除），铁律二.4 不足以翻 `type: none`。除非 IRD/库务署正面排除性陈述不再作待抓项跟进。
+   > - `us-nyse` / `us-nasdaq regulatory_fees` FY2027 → ⏸️ 无数据变更：SEC「Fee Rate Advisories」列表页 2026-09-04 复核 Latest Section 31 仍为 FY2026 公告，FY2027 Section 31 公告未发布（历年在当年 2–4 月出）。两字段加 `verified: 2026-09-04` + 触发点跟踪句。
+   > - `kr-krx exchange_fees` 到期后现行费率 → ⏸️ 无 rate 变更（KRX 站 JS 化未取到一手），补 KED Global 佐证「阶梯下调按设计仅两个月、永久性下调须经 FSC 审议」。
 
 ## 逐家明细
 

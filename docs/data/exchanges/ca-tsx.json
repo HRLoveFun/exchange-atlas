@@ -1698,22 +1698,27 @@
       "regulatory_fees": {
         "spec": {
           "rate": null,
-          "note": "未找到明确不征依据：本字段来源为 CEPR 的 FTT 国别清单，主题是金融交易税而非证券交易监管费，无法支撑『无按交易额监管费』这一断言；见 OPEN-QUESTIONS"
+          "note": "加拿大有按笔市场监管费，但非固定费率：CIRO《Equity Market Regulation Fee Model》为成本回收制（cost-recovery），对交易权益证券的 Marketplace 交易按月征收——① Message Processing Fee（按 CIRO 监察系统处理的报文数）② Trade Fee（按 Marketplace 上执行的成交笔数），由 Participants（会员/订户券商）缴纳、随 CIRO 年度成本预算浮动。无可放入 spec.rate 的固定比率，渲染为幽灵条"
         },
-        "zh": "加拿大联邦层面是否存在类似美国 SEC Section 31 的按交易额「监管费」，本次未取得正面依据——本字段来源（CEPR 的 FTT 国别清单）主题是金融交易税，不覆盖证券交易监管费；TSX 层面已核实的交易相关费用为交易所经手费（maker-taker，见 exchange_fees）。按 CLAUDE.md 第二节第四条，spec 记为 rate: null（幽灵条），并转 OPEN-QUESTIONS",
-        "en": "Whether a per-trade 'regulatory fee' analogous to the U.S. SEC Section 31 fee exists at the Canadian federal level was not positively established this session — this field's source (the CEPR country inventory of financial transaction taxes) is about FTTs and does not cover securities-transaction regulatory fees; the transaction-level charge verified at TSX is the exchange trading fee (maker-taker, see exchange_fees). Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) and referred to OPEN-QUESTIONS",
-        "detail": "现有来源不足以断言「加拿大无联邦证券交易监管费」这一费种：CEPR 清单只覆盖 FTT（见 financial_transaction_tax），不覆盖监管费。按 CLAUDE.md 第二节第四条不凭「未提及」断言不征，spec 由 type: none 改为 rate: null 并转 OPEN-QUESTIONS；若后续拿到 OSC / CSA 的收费框架原文可就地坐实。",
+        "zh": "加拿大证券交易环节有按笔的市场监管费，但不是固定费率：加拿大投资监管组织（CIRO）的《权益市场监管费模型》(Equity Market Regulation Fee Model) 采成本回收制，对在交易权益证券的 Marketplace 上的成交按月收取两部分——报文处理费（Message Processing Fee，按 CIRO 监察系统当月处理的报文总数）与成交费（Trade Fee，按当月在 Marketplace 上执行的成交总笔数）；由 Participants（Marketplace 的会员或订户，即券商）缴纳，费率随 CIRO 年度成本预算分摊而定、无法定固定比率（历史上对履行做市义务的合格做市商成交给予 70% 的 Trade Fee 折扣，CIRO 已提议取消）。TSX 层面的 maker-taker 经手费见 exchange_fees，是交易所商业收费、与此监管费分属两层。因无固定比率，spec.rate 记 null（幽灵条）。",
+        "en": "Canadian equity trading does carry a per-trade market-regulation fee, but not at a fixed rate: CIRO's Equity Market Regulation Fee Model is a cost-recovery model that charges monthly on trades on Marketplaces trading equity securities in two parts — a Message Processing Fee (on the total messages processed by CIRO's surveillance system in a month) and a Trade Fee (on the total trades executed on a Marketplace in a month); it is paid by Participants (members or subscribers of a Marketplace, i.e. dealers) and floats with CIRO's annual cost-recovery budget rather than any statutory rate (historically trades by Qualified Market Makers meeting market-making obligations received a 70% Trade Fee Discount, which CIRO has proposed to remove). The maker-taker trading fee at TSX (see exchange_fees) is a separate commercial exchange charge. With no fixed rate, spec.rate is recorded as null (ghost bar).",
+        "detail": "2026-09-04（ADR-065 成本瀑布数据层残差）：ADR-054 曾把本字段从 type: none 降为 rate: null，理由是原来源（CEPR 的 FTT 国别清单）主题错配、无法断言『无按笔监管费』。本次抓 OSC Bulletin 24-0154（osc.ca 托管的 CIRO 费模型征求意见公告，第 8 节复述现行模型原文）——加拿大其实有按笔市场监管费（CIRO Equity Market Regulation Fee Model），只是成本回收制、无固定比率，由 Participants 缴纳。改按此如实描述（仍 rate: null 幽灵条，但从『查不到』改为『查到了、是浮动费』）。ciro.ca 官网多次尝试均 403，用 OSC 托管的公告替代（同 SOURCES.md ca-tsx 一节既有做法）。",
         "sources": [
           {
-            "title": "Financial Transactions Taxes Around the World（CEPR）",
+            "title": "Financial Transactions Taxes Around the World（CEPR，仅用于 financial_transaction_tax）",
             "url": "https://cepr.net/publications/financial-transactions-taxes-around-the-world/",
             "accessed": "2026-08-27"
+          },
+          {
+            "title": "CIRO Bulletin 24-0154 — Rules Bulletin — Request for Comments — Fee Model — Integrated Fee Model Project（OSC 托管 PDF，第 8 节复述现行 Equity Market Regulation Fee Model）",
+            "url": "https://www.osc.ca/sites/default/files/2024-04/ciro_20240425_rfc-fee-model.pdf",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "CIRO’s current Equity Market Regulation Fee Model operates as a cost-recovery model and is applicable to trades on Marketplaces that trade equity securities. It allocates fees based on: A message processing fee based on the total number of messages processed by CIRO’s surveillance system during a particular month (the Message Processing Fee); and A fee based on the total number of trades executed on a Marketplace during a particular month (the Trade Fee). ... the number of trades they execute on the listing exchange in securities for which the role is applicable is discounted by 70% for the purposes of calculating the total Trade Fee paid by all Participants (the “Trade Fee Discount”).",
         "confidence": "medium",
-        "verified": "2026-08-27",
-        "enum": null,
-        "quote": null
+        "verified": "2026-09-04",
+        "enum": null
       },
       "stamp_duty": {
         "spec": {
