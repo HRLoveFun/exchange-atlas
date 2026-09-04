@@ -17,3 +17,4 @@
 
 - ADR-001 … ADR-068 · 台账建立前的历史条目（主题见 `DECISIONS.md`） · pre-ledger
 - ADR-069 · 并行 worktree 防失序四道护栏 · worktree-antidisorder · 2026-09-04
+- ADR-070 · 前端不暴露 taxonomy 章序数，只用章节名 + 档案页 / ADR 链接 · worktree-frontend-hide-chapter-ordinals · 2026-09-04
