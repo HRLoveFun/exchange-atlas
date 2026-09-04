@@ -22,19 +22,18 @@
 
 ### 下一步（按此顺序）
 
-1. **风险旗标 · 数据子棒**（[ADR-066] 分棒 ①）— `fx_risk_note` 就地清（17 家 `confidence: low` → `make fetch` 央行 / IMF AREAER / 交易所外资指南补一手源升 medium）+ 补 3 处空 `political_risk_note`（`cn-sse`/`hk-hkex`/`tw-twse`）+ 复核 `enforcement_note` low 簇（`cn-sse`/`cn-szse` 空、`kr-krx` low）。触及约 22 字段（近 [CLAUDE.md §四] 的 30 字段第二人复核门槛，回填前先估清）；与 [ADR-060] 任务四并轨。
-2. **风险旗标 · 渲染层**（[ADR-066] 分棒 ②）— `renderRiskFlags` / `rfBuild` 两泳道固定槽位 5 卡（交易层面 `liquidity_risk_note`/`fx_risk_note` | 制度·地缘·执法 `regulatory_change_risk_note`/`political_risk_note`/`enforcement_note`）+ 置信度旗标字形四态 + 常驻「非风险评分」声明 + 顶层 tab「风险旗标 / Risk Flags」（排「参与者图」后）+ 路由键 `risk-flags` + `.rf-*`。纯前端三文件、从第一版接语言开关、`data/` 与 `docs/data/` 零 diff、零 spec。MVP 原型（Artifact）已验证形态。
-3. **→ Phase 3 六个可视化模块做齐（硬前置）→ Phase 4 单页画布合并解锁**（[ADR-057]）— 成本瀑布 / 交割管线 / 上市生命周期 / 监管图 / 参与者图**五个已落地**，只差风险旗标上面两棒。合并画布整体布局形态 / 「更多」入口形态 / 各模块排序，Phase 4 启动时 Q&A 定；单项没做齐不启动。
-4. **已做齐模块的视觉迭代**（交互式会话，不阻断 Phase 4，与上并行）— 成本瀑布（[ADR-047]：单一费种远大于其余时左半留白 / 全零市场「合计 0.00 bp」/ 暗色「此侧不征」虚线偏弱 / 按股·定额费折算粗）、交割管线（[ADR-051]：深色预防层偏淡 / T+1 现货所右半留白 / 违约瀑布 `resource` 短语无 `en`、英文态仍中文）、上市生命周期（[ADR-059]：散文无 spec 阶段块硬裁剪 / 停复牌 ↻ 偏淡 / 8 个时长 spec 语义忠实度待第二人复核 / 给更多所补时长 spec）、监管图（[ADR-061]：卡正文 ≤4 行硬裁剪 / 中英混排 Latin 词逐字折断 / 长文卡「先摘要后全文」）、参与者图（[ADR-064]：节点卡硬裁剪 / 同上 Latin 折断）。
-5. **数据空缺复核轨剩余**（横切，与上并行；[ADR-060]/[ADR-062]/[ADR-068]）— **任务二第二人独立复核**（[ADR-068]，约 74 字段回填，[CLAUDE.md §四] 硬要求，后台会话不能充当第二视角，待人工或干净视角会话）；**任务三**（9 家衍生品子章 C 桶 40 处，穿插 viz）；**任务四**（5 家旗舰所深度 F 桶，`us-nyse`/`hk-hkex`/`uk-lse`/`cn-sse`/`jp-jpx`，建议 Phase 4 前完成、非硬前置）；**任务五**（`kr-krx` OTP-AJAX 抓取 + `za-jse` 缓存重建，按触发点）。另有已收口的成本瀑布残差（[ADR-065]）/ 长尾（[ADR-067]）遗留移交项：`kr-krx exchange_fees` 当期档位（→ 任务五）、`us` Section 31 FY2027 公告（未发布，OPEN-QUESTIONS #88）、`fr-euronext stamp_duty`（一所多国、`rate: null` 是正确终态）。详版见三节。
+1. **风险旗标 · 数据子棒**（[ADR-066] 分棒 ①）— `fx_risk_note` 就地清（17 家 `confidence: low` → `make fetch` 央行 / IMF AREAER / 交易所外资指南补一手源升 medium）+ 补 3 处空 `political_risk_note`（`cn-sse`/`hk-hkex`/`tw-twse`）+ 复核 `enforcement_note` low 簇（`cn-sse`/`cn-szse` 空、`kr-krx` low）。触及约 22 字段（近 [CLAUDE.md §四] 的 30 字段第二人复核门槛，回填前先估清）；与 [ADR-060] 任务四并轨。风险旗标渲染层已落地（[ADR-066] 分棒 ②，2026-09-04）。
+2. **→ Phase 3 六个可视化模块做齐（硬前置）→ Phase 4 单页画布合并解锁**（[ADR-057]）— 成本瀑布 / 交割管线 / 上市生命周期 / 监管图 / 参与者图 / 风险旗标**六个模块渲染层均已落地**（[ADR-057] #4 按渲染层口径满足）；只差上面风险旗标数据子棒。合并画布整体布局形态 / 「更多」入口形态 / 各模块排序，Phase 4 启动时 Q&A 定；**该数据子棒是否也是硬前置留待拍板**（[ADR-066] 文末）。
+3. **已做齐模块的视觉迭代**（交互式会话，不阻断 Phase 4，与上并行）— 成本瀑布（[ADR-047]：单一费种远大于其余时左半留白 / 全零市场「合计 0.00 bp」/ 暗色「此侧不征」虚线偏弱 / 按股·定额费折算粗，佣金行降级+`rate_raw` 已由 [ADR-071] 落地）、交割管线（[ADR-051]：深色预防层偏淡 / T+1 现货所右半留白 / 违约瀑布 `resource` 短语无 `en`、英文态仍中文）、上市生命周期（[ADR-059]：散文无 spec 阶段块硬裁剪 / 停复牌 ↻ 偏淡 / 8 个时长 spec 语义忠实度待第二人复核 / 给更多所补时长 spec）、监管图（[ADR-061]：卡正文 ≤4 行硬裁剪 / 中英混排 Latin 词逐字折断 / 长文卡「先摘要后全文」）、参与者图（[ADR-064]：节点卡硬裁剪 / 同上 Latin 折断）、风险旗标（[ADR-066]：制度泳道 3 卡窄 + 长散文按卡 5 行硬裁剪 / 同上 Latin 折断 / `low` 卡左缘色条暗色下几乎不可见）。剖面机制核心面板右缘避让（[ADR-070]）与零轴刻度改标参考价名称（[ADR-073]）已落地。
+4. **数据空缺复核轨剩余**（横切，与上并行；[ADR-060]/[ADR-062]）— **任务三**（9 家衍生品子章 C 桶 40 处，穿插 viz）；**任务四**（5 家旗舰所深度 F 桶，`us-nyse`/`hk-hkex`/`uk-lse`/`cn-sse`/`jp-jpx`，建议 Phase 4 前完成、非硬前置）。任务二第二人独立复核已完成（[ADR-074]，2026-09-05，79 处终态 96.2% 达标）；任务五 ①② 已完成（[ADR-075]，2026-09-05，`[OTP]` 抓取 + wayback 回退 + `za-jse` 缓存重建），③（`make check` stale 清单）未做、留独立排期，`kr-krx` 剩 8 处 low 待人工投喂。另有已收口的成本瀑布残差（[ADR-065]）/ 长尾（[ADR-067]）遗留移交项：`kr-krx exchange_fees` 当期档位（KRX 数据端点对数据中心 IP 封锁，[ADR-075] 已探明，仍需人工投喂）、`us` Section 31 FY2027 公告（未发布，OPEN-QUESTIONS #88）、`fr-euronext stamp_duty`（一所多国、`rate: null` 是正确终态）。详版见三节。
 
 完整清单与每章的小型 `spec` 补充见三节 `- [ ] **Phase 3 · 其余章节可视化**`。
 
 ### 最近完成（滚动窗口，只留最近 3 条；更早的见三节）
 
-- **2026-09-04 · 并行 worktree 防失序 · 四道护栏**（[ADR-069]，横切条目，PR #64）— §一 编号/窗口不变式 + 全库冲突标记扫描 + `ROADMAP-INBOX.md` 让 §一 变单写者（`CLAUDE.md §八` 改写）+ `ADR-LEDGER.md` 编号台账 + `GIT-RUNBOOK.md` 后台 PR 串行合并纪律；`selfcheck` 24→43，`data/`+`docs/` 零 diff。
-- **2026-09-04 · 数据空缺复核轨任务二 · 横切 8 高频字段批量回填清零**（[ADR-068]）— `odd_lot_handling`/`dark_pool`/`board_lot_size`/`price_limits.other_boards`/`block_trade`/`connect_schemes`/`intraday_reversal`/`holidays_note` 结构性空缺清零；全库已填字段 1,900→1,918；`de-eurex` 5 字段首次真实字段级 `not_applicable`。⚠️ 触及约 74 字段、第二人独立复核待人工。
-- **2026-09-04 · 成本瀑布数据层长尾 · `type: none` 正面依据结构性补齐**（[ADR-067]）— 承接 [ADR-065]「剩」段，8 字段 / 7 家（`cn-szse regulatory_fees` 0.02‰、`cn` stamp_duty `side: sell`、`cn`/`de-eurex`/`za-jse`/`sg-sgx`/`au-asx` FTT·regulatory_fees `type: none`、`za-jse` IPL 0.0002%）；`health-summary` +2。
+- **2026-09-05 · 数据空缺复核轨任务五 · 抓取基础设施修复**（[ADR-075]）— `fetch.py` 加 `[OTP]` 两步抓取 + 通用 wayback 回退（`fetch_sources.py` 复用，顺带修 `verify_quotes.py` 两处消费侧回归）；探明 KRX 数据端点对数据中心 IP 封锁、`za-jse` `.cache` 重建（CACHE_MISS 77→39）；`kr-krx` 2 处 low 坐实（`market_maker_scheme`/`dividend_withholding_tax`）；`selfcheck` 43→48，`make build` 全绿。
+- **2026-09-05 · 数据空缺复核轨任务二 · 第二人独立复核完成**（[ADR-074]）— 4 个独立视角复核 79 处交易所×字段，初检 91.1%、4 处 FIX 就地订正后终态 76/79=96.2%，达 [CLAUDE.md §四] 95% 阈值，零幻觉；3 处转 OPEN-QUESTIONS。任务二「第二人独立复核待人工」标注解除。
+- **2026-09-04 · Phase 3 六个 viz 模块渲染层全部落地**（[ADR-066]/[ADR-070]/[ADR-071]/[ADR-072]/[ADR-073]）— 风险旗标渲染层（`renderRiskFlags` 两泳道 5 卡 + 置信度四态 + 常驻「非评分」声明，tab 9→10）收官，[ADR-057] #4 按渲染层口径满足；穿插剖面机制核心面板右缘避让收盘竞价条（[ADR-070]）、成本瀑布佣金行降级为说明 + `cost_layer` 加 `rate_raw`（[ADR-071]）、前端隐去 taxonomy 章序数（[ADR-072]）、剖面零轴刻度改标参考价名称（[ADR-073]）四项迭代；`make build` 全绿。
 
 ---
 
