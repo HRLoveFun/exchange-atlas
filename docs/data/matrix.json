@@ -2062,12 +2062,12 @@
       "field_path": "stamp_duty",
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
-      "zh": "0.05%（单边，卖方缴纳）",
-      "en": "0.05% (one-sided, paid by the seller)",
+      "zh": "0.05%（单边，卖方缴纳）：证券交易印花税自 2023 年 8 月 28 日起由单边 1‰ 减半至 0.5‰。征收方向为卖方——《中华人民共和国印花税法》（2021 通过、2022-07-01 施行）第三条明文『证券交易印花税对证券交易的出让方征收，不对受让方征收』。印花税为全国统一税率的国家税种、非交易所自定，上交所与深交所适用同一税率。",
+      "en": "0.05% (one-sided, paid by the seller): the securities transaction stamp duty was halved from 1‰ to 0.5‰ per side from 28 August 2023. The seller side is confirmed by Article 3 of the PRC Stamp Tax Law (passed 2021, effective 1 July 2022): 'the securities transaction stamp duty is levied on the transferor of a securities transaction, not on the transferee'. Stamp duty is a nationally uniform state tax set centrally, not by the exchange, and SSE and SZSE apply the same rate.",
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-12",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -2482,12 +2482,12 @@
       "field_path": "stamp_duty",
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
-      "zh": "0.05%（单边，卖方缴纳）",
-      "en": "0.05% (one-sided, paid by the seller)",
+      "zh": "0.05%（单边，卖方缴纳）：证券交易印花税自 2023 年 8 月 28 日起由单边 1‰ 减半至 0.5‰。征收方向为卖方——《中华人民共和国印花税法》（2021 通过、2022-07-01 施行）第三条明文『证券交易印花税对证券交易的出让方征收，不对受让方征收』。印花税为全国统一税率的国家税种、非交易所自定，深交所与上交所适用同一税率。",
+      "en": "0.05% (one-sided, paid by the seller): the securities transaction stamp duty was halved from 1‰ to 0.5‰ per side from 28 August 2023. The seller side is confirmed by Article 3 of the PRC Stamp Tax Law (passed 2021, effective 1 July 2022): 'the securities transaction stamp duty is levied on the transferor of a securities transaction, not on the transferee'. Stamp duty is a nationally uniform state tax set centrally, not by the exchange, and SZSE and SSE apply the same rate.",
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-14",
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {
@@ -2812,12 +2812,12 @@
       "field_path": "stamp_duty",
       "label_zh": "印花税",
       "label_en": "Stamp Duty",
-      "zh": "N/A — 德国对衍生品交易是否征收印花税，本字段未自持可引用的来源（无 sources / quote）；「德国证券转移税（Börsenumsatzsteuer）已于 1991 年 1 月 1 日废除」这一法域级事实有原文支撑，但出自本仓库 de-xetra 的 stamp_duty 字段所引 Bundestag 文档。衍生品合约本身不发生证券过户，故该法域级事实是否足以覆盖 Eurex 的情形，按 CLAUDE.md 第二节第四条不作断言，spec 记为 rate: null（幽灵条）并转 OPEN-QUESTIONS。",
-      "en": "N/A — whether Germany levies stamp duty on derivatives trading is not asserted from a source held by this field (no sources / quote); the jurisdiction-level fact that the German Börsenumsatzsteuer (stock-exchange turnover tax) was abolished on 1 January 1991 is verbatim-sourced, but only via the Bundestag document cited in de-xetra's stamp_duty field. Since derivative contracts themselves involve no stampable securities transfer, per the CLAUDE.md anti-hallucination rules this field does not assert non-levy: the spec is recorded as rate: null (ghost bar) and referred to OPEN-QUESTIONS.",
+      "zh": "Eurex 衍生品交易不征印花税/证券转移税：其一，衍生品合约本身不发生证券过户，没有可课印花税的转让行为；其二，德国唯一的证券流转税「证券交易税」(Börsenumsatzsteuer) 已于 1991 年 1 月 1 日依《改善金融市场条件法》(Gesetz zur Verbesserung der Rahmenbedingungen der Finanzmärkte) 第 4 条废除（与 de-xetra 的 stamp_duty 字段同一 Bundestag 来源，本字段自持一份）。",
+      "en": "Eurex derivatives trading incurs no stamp duty / securities transfer tax: first, a derivative contract itself effects no transfer of securities and so there is no transaction to stamp; second, Germany's only securities turnover tax, the Börsenumsatzsteuer, was abolished with effect from 1 January 1991 under Article 4 of the Act to Improve the Framework Conditions for Financial Markets (same Bundestag source as de-xetra's stamp_duty field, held here in this field's own right).",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
-      "verified": "2026-08-27",
+      "has_detail": true,
+      "verified": "2026-09-04",
       "confidence": "medium"
     },
     {

@@ -2327,23 +2327,28 @@
       },
       "regulatory_fees": {
         "spec": {
-          "rate": null,
-          "note": "未找到明确不征依据：原 zh 自述「未核实到统一的法定监管费率，建议后续抓取 KRX 收费表确认」，本字段无 quote、来源为第三方收费汇编；见 OPEN-QUESTIONS"
+          "type": "none",
+          "note": "韩国证券监管（FSS/金融监督院）经费依《金融委员会设置法》第 46/47 条，来自政府/韩国银行拨款 + 受检金融机构（含证券公司，第 38 条）的『分担金/费用分摊』——机构层面征收，非按证券交易笔数/金额征收的监管费。交易环节的法定负担为证券交易税（见 financial_transaction_tax）+ 交易所/结算费"
         },
-        "zh": "韩国对证券交易不另征广义「监管费」——这是原字段的断言，但本次未取得正面依据：交易环节税费主要为证券交易税(STT，见 financial_transaction_tax)与交易所/结算费(见 exchange_fees、clearing_fees)。部分衍生品或特定情形下可能有交易所风险基金计提，但本次未核实到统一的法定监管费率，建议后续抓取KRX收费表确认。按 CLAUDE.md 第二节第四条，「未核实到」不等于「明确不征」，spec 记为 rate: null（幽灵条）而非 type: none，并转 OPEN-QUESTIONS。",
-        "en": "Korea does not levy a separate broad-based 'regulatory fee' on securities trades — the original claim, without a positive basis this session: the transaction-level taxes/fees are essentially the Securities Transaction Tax (see financial_transaction_tax) and exchange/clearing fees (see exchange_fees, clearing_fees). Certain derivatives or specific cases may carry an exchange risk-fund levy, but no unified statutory regulatory-fee rate was verified this session; recommend fetching the KRX fee schedule to confirm. Per the CLAUDE.md anti-hallucination rules the spec is recorded as rate: null (ghost bar) rather than type: none and referred to OPEN-QUESTIONS.",
+        "zh": "韩国对证券交易不征按笔的监管费：韩国金融监督院（FSS）的经费来源由《金融委员会设置法》(Act on the Establishment of Financial Services Commission) 第 46 条规定——政府拨款、韩国银行拨款、第 38 条所列受检机构（含银行、金融投资业者即证券公司等）的分担金、依第 47 条的费用分摊等；第 47 条第 1 款明文『受金融监督院检查的、属第 38 条各款的机构，应向金融监督院缴纳其费用分摊额』。即监管经费在机构层面按分担金征收，不向证券交易按笔或按额计收。交易环节的国家税收为证券交易税（STT，见 financial_transaction_tax），另有交易所经手费与结算费（见 exchange_fees、clearing_fees）。",
+        "en": "Korea imposes no per-trade regulatory fee on securities trading: the Financial Supervisory Service (FSS) is funded under Articles 46-47 of the Act on the Establishment of Financial Services Commission — government contributions, Bank of Korea contributions, contributions from the supervised institutions listed in Article 38 (which include banks and financial investment business entities, i.e. securities firms), and a share of expenses under Article 47. Article 47(1) provides that 'the institutions falling under each subparagraph of Article 38, which are subject to inspection by the Financial Supervisory Service, shall pay their share of the expenses to the Financial Supervisory Service.' Supervision is thus funded by institution-level contributions, not by a levy on the number or value of securities trades. The national tax at the trading stage is the Securities Transaction Tax (see financial_transaction_tax), alongside the exchange handling fee and clearing fee (see exchange_fees, clearing_fees).",
         "sources": [
           {
-            "title": "Korea Exchange (KRX) — Fee Schedules（第三方收费汇编，本次未直接核实具体数字）",
+            "title": "Act on the Establishment of Financial Services Commission（韩国《金融委员会设置法》英文版，elaw.klri.re.kr；第 46/47/38 条 FSS 经费来源）",
+            "url": "https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=47931",
+            "accessed": "2026-09-04"
+          },
+          {
+            "title": "Korea Exchange (KRX) — Fee Schedules（第三方收费汇编，历史背景）",
             "url": "https://www.mondovisione.com/exchanges/korea-exchange/",
             "accessed": "2026-08-27"
           }
         ],
-        "quote": "",
-        "confidence": "low",
-        "verified": "2026-08-27",
-        "enum": null,
-        "detail": null
+        "quote": "Article 46 (Revenue Sources) The Financial Supervisory Service shall appropriate its expenses from the revenue sources under the following subparagraphs: 1. Contributions from the Government; 2. Contributions from the Bank of Korea; 3. Contributions from the institutions falling under each subparagraph of Article 38; 4. Share of the expenses pursuant to Article 47; 5. Other revenues prescribed by other statutes or by the articles of incorporation.／Article 47 (Share of Expenses) (1) The institutions falling under each subparagraph of Article 38, which are subject to inspection by the Financial Supervisory Service, shall pay their share of the expenses to the Financial Supervisory Service.",
+        "confidence": "medium",
+        "verified": "2026-09-04",
+        "detail": "2026-09-04（ADR-067 成本瀑布数据层长尾）：本字段原为 rate: null / low（无 quote、第三方收费汇编、自述『未核实到』）。本次抓《金融委员会设置法》英文版（elaw.klri.re.kr，同 STT/印花税法已登记域名）——第 46/47 条明定 FSS 经费来自政府/韩行拨款 + 受检机构（含证券公司）的分担金，是机构层面征收、非按证券交易计收。据此判 type: none（与 au-asx『ASIC 征费面向持牌实体、不按投资者每笔计收』同构）。confidence medium（KLRI 译本 for-reference-only；且『无按笔监管费』是对『监管经费=机构分担金』的结构性推断）。KRX 站 JS 化的当期收费表仍未取到（见 exchange_fees / OPEN-QUESTIONS），但那是『交易所经手费的现行档位』问题、与本『有无按笔监管费』字段无关。",
+        "enum": null
       },
       "stamp_duty": {
         "spec": {

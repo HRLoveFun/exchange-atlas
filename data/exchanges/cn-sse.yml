@@ -896,35 +896,54 @@ costs:
     confidence: medium
 
   regulatory_fees:
-    spec: {rate: 0.02, unit: permille, side: both, note: "证券交易监管费（发改价格〔2012〕2119号），按年交易额向交易所征收、非按笔向投资者征收，瀑布图中按 bp 呈现仅为同一口径的折算；基金/债券免收；现行费率本次未再核实"}
-    zh: "存在独立于交易所经手费之外的「证券交易监管费」，由中国证监会向交易所收取（2012年起对股票按年交易额0.02‰收取，基金/债券免收）；该费率是否为现行值本次未核实到更新的官方文件"
-    en: "An independent \"securities trading regulatory fee\" exists on top of the Exchange's own handling fee, collected by the CSRC from the exchanges (set in 2012 at 0.02‰ of annual trading value for stocks, with funds and bonds exempt); whether this rate remains current was not confirmed against a more recent official document this round"
-    detail: "出处为国家发展改革委、财政部联合发布的《关于降低证券、期货市场监管费收费标准等问题的通知》（发改价格〔2012〕2119号），托管于财政部官网。该通知明确「有效期3年」（至2015年），本次未找到后续重新审批/延续的官方公告，故 confidence 标 medium 而非 high——不确定现行费率是否仍为0.02‰，这不属于「没有独立监管费概念」的情形，而是「存在但现行费率未再核实」。"
+    spec: {rate: 0.02, unit: permille, side: both, note: "证券（业务）监管费：现行标准为发改价格规〔2018〕917号，对上海、深圳证券交易所按股票交易额 0.02‰ 收取，2018-01-01 起执行、无有效期限（同时废止发改价格〔2016〕14号）；此前 2012 通知（发改价格〔2012〕2119号，有效期 3 年至 2015）亦为 0.02‰、基金/债券免收。CSRC 向交易所征收、经券商代收（并入佣金的「证管费」）"}
+    zh: "存在独立于交易所经手费之外的「证券（业务）监管费」（俗称证管费），由中国证监会向交易所收取：现行标准依《国家发展改革委 财政部关于证券期货业监管费标准等有关问题的通知》（发改价格规〔2018〕917号），对上海、深圳证券交易所按股票交易额 0.02‰ 收取，自 2018 年 1 月 1 日起执行、未设有效期限（同时废止 2016 年旧标准）；2012 年通知（有效期 3 年至 2015）亦为 0.02‰、基金/债券免收。实务中并入券商佣金作为「证管费」代收。"
+    en: "A \"securities (business) regulatory fee\" exists on top of the Exchange's own handling fee, collected by the CSRC from the exchanges: the current standard is the NDRC/MOF Notice Fagai Jiage Gui [2018] No. 917, levying 0.02‰ of stock trading value on the Shanghai and Shenzhen stock exchanges, effective 1 January 2018 with no stated expiry (repealing the 2016 standard); the earlier 2012 notice (3-year validity to 2015) also set 0.02‰ with funds and bonds exempt. In practice it is passed through inside broker commissions."
+    detail: "2026-09-04（ADR-067 成本瀑布数据层长尾）：本字段原引 2012 通知（发改价格〔2012〕2119号），该通知注明「有效期3年」（至2015）、当时未找到后续文件、故 confidence medium 且带「现行费率未再核实」的 hedge。本次找到并抓取现行标准——发改价格规〔2018〕917号（ndrc.gov.cn），明文『对上海、深圳证券交易所收取证券业务监管费，按股票交易额的0.02‰收取』、『自2018年1月1日起执行』、同时废止 2016 年标准、无有效期限。据此把主来源换为 2018 通知，去掉「未再核实」hedge；confidence 仍标 medium（发布已 7 年，机构监管费部分曾 2018–2020 暂免、显示此类收费会周期性调整，未再核实到更晚的业务监管费文件）。"
     sources:
-      - title: 关于降低证券、期货市场监管费收费标准等问题的通知（发改价格〔2012〕2119号）
+      - title: 国家发展改革委 财政部关于证券期货业监管费标准等有关问题的通知（发改价格规〔2018〕917号，ndrc.gov.cn，现行标准）
+        url: https://www.ndrc.gov.cn/xxgk/zcfb/ghxwj/201806/t20180627_960950.html
+        accessed: 2026-09-04
+      - title: 关于降低证券、期货市场监管费收费标准等问题的通知（发改价格〔2012〕2119号，mof.gov.cn，历史沿革）
         url: https://www.mof.gov.cn/zhengwuxinxi/zhengcefabu/201207/t20120714_666369.htm
         accessed: 2026-08-24
-    quote: "一、你会向上海、深圳证券交易所收取的证券交易监管费收费标准，对股票由按年交易额的0.04‰调整为按年交易额的0.02‰收取；对证券投资基金和债券免收证券交易监管费。"
+    quote: "一、证券期货业监管费标准 （一）业务监管费标准。对上海、深圳证券交易所收取证券业务监管费，按股票交易额的0.02‰收取。……四、证券期货业业务监管费标准自2018年1月1日起执行，《国家发展改革委 财政部关于重新核发银监会证监会保监会监管费等收费标准的通知》（发改价格〔2016〕14号）同时废止。／一、你会向上海、深圳证券交易所收取的证券交易监管费收费标准，对股票由按年交易额的0.04‰调整为按年交易额的0.02‰收取；对证券投资基金和债券免收证券交易监管费。"
     confidence: medium
+    verified: 2026-09-04
 
   stamp_duty:
-    spec: {rate: 0.5, unit: permille, side: sell, note: "2023-08-28 起减半（此前单边 1‰）"}
-    zh: "0.05%（单边，卖方缴纳）"
-    en: "0.05% (one-sided, paid by the seller)"
+    spec: {rate: 0.5, unit: permille, side: sell, note: "证券交易印花税：现行单边 0.5‰（2023-08-28 起减半，此前 1‰），由 财政部/税务总局公告调整；side: sell 由《印花税法》第三条一手坐实——『证券交易印花税对证券交易的出让方征收，不对受让方征收』"}
+    zh: "0.05%（单边，卖方缴纳）：证券交易印花税自 2023 年 8 月 28 日起由单边 1‰ 减半至 0.5‰。征收方向为卖方——《中华人民共和国印花税法》（2021 通过、2022-07-01 施行）第三条明文『证券交易印花税对证券交易的出让方征收，不对受让方征收』。印花税为全国统一税率的国家税种、非交易所自定，上交所与深交所适用同一税率。"
+    en: "0.05% (one-sided, paid by the seller): the securities transaction stamp duty was halved from 1‰ to 0.5‰ per side from 28 August 2023. The seller side is confirmed by Article 3 of the PRC Stamp Tax Law (passed 2021, effective 1 July 2022): 'the securities transaction stamp duty is levied on the transferor of a securities transaction, not on the transferee'. Stamp duty is a nationally uniform state tax set centrally, not by the exchange, and SSE and SZSE apply the same rate."
     detail: |
       2023年8月28日起，证券交易印花税由此前的单边1‰减半下调至单边0.5‰，仅对卖方征收。
-      信息来自新闻媒体对财政部、税务总局公告的转载，非财政部官方公告原页，confidence 标 medium。
+      现行税率来自新闻媒体对财政部、税务总局公告的转载（非公告原页），故 confidence 标 medium；
+      2026-09-04（ADR-067 成本瀑布数据层长尾）补：side: sell 已由《印花税法》第三条一手坐实
+      （fgk.chinatax.gov.cn 国家税务总局政策法规库全文，『对证券交易的出让方征收，不对受让方
+      征收』），此前仅由人民网转载的公告支撑。上交所与深交所（cn-szse）适用同一税率。
     sources:
-      - title: 证券交易印花税8月28日起实施减半征收（人民网）
+      - title: "中华人民共和国印花税法（国家税务总局政策法规库，fgk.chinatax.gov.cn；第三条 side sell 一手依据）"
+        url: https://fgk.chinatax.gov.cn/zcfgk/c100009/c5193058/content.html
+        accessed: 2026-09-04
+      - title: 证券交易印花税8月28日起实施减半征收（人民网，2023 减半公告转载）
         url: http://finance.people.com.cn/n1/2023/0828/c1004-40065300.html
         accessed: 2026-08-12
-    quote: "据财政部、税务总局公告，为活跃资本市场、提振投资者信心，自2023年8月28日起，证券交易印花税实施减半征收。……证券交易印花税由单边征收1‰下调至0.5‰"
+    quote: "第三条 本法所称证券交易，是指转让在依法设立的证券交易所、国务院批准的其他全国性证券交易场所交易的股票和以股票为基础的存托凭证。证券交易印花税对证券交易的出让方征收，不对受让方征收。／据财政部、税务总局公告，为活跃资本市场、提振投资者信心，自2023年8月28日起，证券交易印花税实施减半征收。……证券交易印花税由单边征收1‰下调至0.5‰"
     confidence: medium
+    verified: 2026-09-04
 
   financial_transaction_tax:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：无独立于印花税之外的金融交易税——未核实，留空。"
+    spec: {type: none, note: "中国的交易环节流转税即『证券交易印花税』（印花税的一个税目，见 stamp_duty），无另立的『金融交易税』税种：《印花税法》是交易凭证/证券交易类税收的完整立法，第一/二/三条把证券交易与合同、产权转移书据、营业账簿并列为印花税征税范围，未见独立 FTT 税目"}
+    zh: "中国大陆对证券交易不另立独立于印花税之外的『金融交易税』税种：《中华人民共和国印花税法》（2021 通过、2022-07-01 施行）是交易凭证与证券交易类税收的完整立法——第一条规定『进行证券交易的单位和个人，为印花税的纳税人』，第二条列举应税凭证为合同、产权转移书据和营业账簿，第三条把『证券交易』并入印花税征税范围（即证券交易印花税，见 stamp_duty）。中国现行税种中无『金融交易税』；证券交易环节的国家税收即证券交易印花税（现行单边 0.05%）。"
+    en: "Mainland China imposes no financial transaction tax separate from stamp duty on securities trading: the PRC Stamp Tax Law (passed 2021, effective 1 July 2022) is the complete legislation for taxes on transaction instruments and securities trading — Article 1 makes those 'engaging in securities transactions' taxpayers of the stamp tax, Article 2 lists the taxable instruments (contracts, property-transfer documents, business account books), and Article 3 brings 'securities transactions' within the stamp tax's scope (i.e. the securities transaction stamp duty, see stamp_duty). There is no 'financial transaction tax' among China's current taxes; the national tax at the trading stage is the securities transaction stamp duty (currently 0.05% one-sided)."
+    sources:
+      - title: 中华人民共和国印花税法（国家税务总局政策法规库，fgk.chinatax.gov.cn）
+        url: https://fgk.chinatax.gov.cn/zcfgk/c100009/c5193058/content.html
+        accessed: 2026-09-04
+    quote: "第一条 在中华人民共和国境内书立应税凭证、进行证券交易的单位和个人，为印花税的纳税人，应当依照本法规定缴纳印花税。第二条 本法所称应税凭证，是指本法所附《印花税税目税率表》列明的合同、产权转移书据和营业账簿。第三条 本法所称证券交易，是指转让在依法设立的证券交易所、国务院批准的其他全国性证券交易场所交易的股票和以股票为基础的存托凭证。"
+    confidence: medium
+    verified: 2026-09-04
+    detail: "2026-09-04（ADR-067 成本瀑布数据层长尾）：本字段原为空（草稿印象、未核实）。本次抓《印花税法》全文（fgk.chinatax.gov.cn 国家税务总局政策法规库）——该法把证券交易与合同/产权转移书据/营业账簿并列为印花税的征税范围（第一/二/三条），是中国交易环节税收的完整立法，无独立『金融交易税』税目。据此判 type: none（证券流转税即证券交易印花税，映射至 stamp_duty，沿用 ADR-002 语义）。confidence medium——《印花税法》是一手，但『无独立 FTT』是对『该法即完整立法』的结构性推断，非法条明文否定句。与 cn-szse 同步处置。"
 
   capital_gains_tax:
     zh: ""

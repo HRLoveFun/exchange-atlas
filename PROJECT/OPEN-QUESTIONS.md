@@ -86,9 +86,17 @@
 - **`uk-lse.costs.clearing_fees` 只覆盖了LCH Ltd EquityClear的"结算费"（每笔£0.85等），未覆盖"清算费"（按成交金额/笔数计费的主清算费率表）。** 对应的官方PDF（`lch-equityclear-clearing-fee-subscription.pdf`）本次抓取成功（HTTP 200，466KB），但`pdftotext -layout`提取出的文本几乎为空（只有零散的"–"符号和"LCH"/"lseg.com"几个词），判断是表格以图片形式渲染、无文本层，与SKILL.md记录的SIX月度统计PDF提取失败是同一类问题。下次有空可尝试：①找是否有面向清算会员的非图片版说明文档（如培训material/FAQ）；②如有OCR工具可用，尝试对该PDF做OCR提取。
 
 - **[ADR-054] 成本瀑布 spec 层核查（2026-09-01）留下的坐实项**——13 个 `type: none` 降级点 + 6 个方向/费率补强点，逐条判定见 `PROJECT/COST-WATERFALL-SPOT-CHECK.md`。共同模式：断言「本市场不征收某税费」需要税法/税务局/立法机构的**正面**文本，交易所费率页与第三方国别税费综述都撑不住。
-  - **`type: none` 降级后待坐实（改回 `type: none` 需正面依据原文）**：`au-asx financial_transaction_tax`（联邦/州是否征证券交易税 → ATO 或州税收局）；`cn-szse financial_transaction_tax`（有无独立于印花税的 FTT 税目 → 国务院/财政部税目清单）；`de-eurex stamp_duty` 与 `financial_transaction_tax`（两字段无 sources/quote，需 Eurex/德国官方税务说明，可先复用 de-xetra 已引的 Bundestag 废止文档自持一份）；`fr-euronext stamp_duty`（七国逐一不征印花税 → 各国税务当局或分国律所综述）；`kr-krx regulatory_fees`（KRX 当期收费表 / 非 JS 端点）；`sg-sgx regulatory_fees` 与 `financial_transaction_tax`（MAS/IRAS 正面陈述）；`za-jse regulatory_fees` 与 `financial_transaction_tax`（SARS/FSCA 收费框架，含 Investor Protection Levy 是否属按笔征费及其费率）。
-    - **已收口（[ADR-065]，2026-09-04）**：`kr-krx stamp_duty` `type: none` 由「暂定」转「一手条文支撑」（韩国《印花税法》第 1 条：印花税对象是文书、纳税人是文书制备者，非证券转让）；`ca-tsx regulatory_fees` 实质修正——不是「查不到」而是「查到了、是浮动费」：CIRO《Equity Market Regulation Fee Model》成本回收制（Message Processing Fee + Trade Fee，Participants 缴纳），`rate: null` 保留（无固定比率）；`hk-hkex financial_transaction_tax` 按「审慎终态」关闭——香港列举式税制下 IRD 所辖征费为封闭清单、无 FTT 条例，但仍是推断（不足以翻 `type: none`），除非 IRD/库务署发布正面排除性陈述不再跟进。
-  - **`side` / 费率补强**：[2026-09-01 A3 进度，2026-09-02 收尾审查修订，2026-09-04 [ADR-065]] `kr-krx financial_transaction_tax` 的 `side: sell` ✅（韩国《证券取引税法》英文版一手，明文以 transferor=让与人=卖方为纳税人）；`us-nasdaq regulatory_fees` 的 `side: sell` ✅（eCFR 17 CFR 240.31『Covered sale means a sale of a security...』逐字）；`br-b3 financial_transaction_tax` 的 `side: buy` ✅（B3 "incoming resources"）；`uk-lse stamp_duty` 的 `side: buy` ✅（[ADR-065]：HMRC/gov.uk『Tax when you buy shares』——『When you buy shares, you usually pay a tax or duty of 0.5%』『You pay tax when you buy』，非 SPA 页，措辞已入 quote）；`za-jse stamp_duty` 的 `side: buy` ✅（[ADR-065]：SARS『Securities Transfer Tax』页『Who is it for?』段——member/participant『may recover the tax payable from the persons to whom the securities were transferred』，买方最终承担，措辞已入 quote）。**不可直接移除任何 side 键**：渲染层缺省回退 `both`，移除会把单边税画成双边。
+  - **`type: none` 长尾 —— [ADR-067]（2026-09-04）系统收口**。范式：一国「证券交易环节流转税」有完整立法（印花税法 / STT Act / 州印花税）且把证券交易明文并入征税范围、无独立「金融交易税」税目时，按 [ADR-002] 语义映射至 `stamp_duty`，`financial_transaction_tax` 判 `type: none`（confidence medium，结构性推断非法条否定句）；监管费同理靠监管机构经费来源立法（机构分担金 vs 按交易计收）。逐条：
+    - ✅ `cn-sse`/`cn-szse financial_transaction_tax` → `type: none`（《印花税法》第一/二/三条把证券交易与合同/产权转移书据/营业账簿并列为印花税征税范围）
+    - ✅ `de-eurex stamp_duty` 与 `financial_transaction_tax` → `type: none`（自持 de-xetra 已引的 Bundestag BT-Drs. 16/12571 + 衍生品合约无证券过户）
+    - ✅ `za-jse financial_transaction_tax` → `type: none`（SARS：STT『levied on every transfer of a security』，Securities Transfer Tax Act No. 25 of 2007）
+    - ✅ `sg-sgx regulatory_fees` 与 `financial_transaction_tax` → `type: none`（SGX-ST Rule 4.23.2：客户须知按笔费用 = CDP/SGX-ST 收费 + 印花税 + GST，无 MAS 征费/本金税项）
+    - ✅ `au-asx financial_transaction_tax` → `type: none`（州『可流通证券』印花税对上市已全废，见 stamp_duty；PwC Australia『Other taxes』综合税种综述无 FTT 条目）
+    - ✅ `kr-krx regulatory_fees` → `type: none`（《金融委员会设置法》第 46/47 条：FSS 经费 = 政府/韩行拨款 + 第 38 条受检机构分担金，非按交易计收；同 au-asx ASIC 先例）
+    - ✅ `za-jse regulatory_fees` → 补 `rate: 0.0002 pct`（Investor Protection Levy，sharenet 第三方费率表逐字；jse.co.za 三子域名 + WebFetch 全 Cloudflare 403，2026 现行据 Market Notice 37025 约 0.000345% 未一手核实——**待 jse.co.za 一手价目表或人工投喂**）
+    - ⏸️ `fr-euronext stamp_duty` → 维持 `rate: null`：一所七国、比利时 TOB / 爱尔兰 1% 印花税 / 法国 FTT 各异，单字段无法逐国断言，`rate: null`（幽灵条）是正确终态，非待坐实项
+    - **[ADR-065] 已收口**：`kr-krx stamp_duty` `type: none`（韩国《印花税法》第 1 条）、`ca-tsx regulatory_fees` 实质修正（CIRO《Equity Market Regulation Fee Model》浮动费）、`hk-hkex financial_transaction_tax` 按「审慎终态」关闭（香港列举式税制 + IRD 征费封闭清单无 FTT 条例；除非 IRD/库务署正面排除性陈述不再跟进）。
+  - **`side` / 费率补强**：[2026-09-01 A3 进度，2026-09-02 收尾审查修订，2026-09-04 [ADR-065]/[ADR-067]] `kr-krx financial_transaction_tax` 的 `side: sell` ✅（韩国《证券取引税法》英文版一手，明文以 transferor=让与人=卖方为纳税人）；`us-nasdaq regulatory_fees` 的 `side: sell` ✅（eCFR 17 CFR 240.31『Covered sale means a sale of a security...』逐字）；`br-b3 financial_transaction_tax` 的 `side: buy` ✅（B3 "incoming resources"）；`uk-lse stamp_duty` 的 `side: buy` ✅（[ADR-065]：HMRC/gov.uk『Tax when you buy shares』，非 SPA 页）；`za-jse stamp_duty` 的 `side: buy` ✅（[ADR-065]：SARS『Who is it for?』段『may recover the tax payable from the persons to whom the securities were transferred』）；`cn-sse`/`cn-szse stamp_duty` 的 `side: sell` ✅（[ADR-067]：《中华人民共和国印花税法》第三条『证券交易印花税对证券交易的出让方征收，不对受让方征收』，fgk.chinatax.gov.cn 一手，此前仅人民网转载公告支撑）。**不可直接移除任何 side 键**：渲染层缺省回退 `both`，移除会把单边税画成双边。
 
 - **[ADR-059] 第六章两段时长 spec 回填时，几家的时长数字在唯一一手来源里是拼写形式（英文单词 / 中文数字），5b 逐字反查拿不到，spec 缺省、散文承载——待补一份含阿拉伯数字的一手 quote。**
   - `jp-jpx listing_process_duration`（境外公司审核约 3 个月 + IPO 约 1 个月 ≈ 4 个月）与 `delisting_transition_period`（监理股份 + 整理股份合计约 6 个月）：JPX 官方英文页把数字全拼写为 "about three / one / four months"、"one year (six months...)"。**待补**：JPX 上市 / 退市指引里含 "3 months" / "6 months" 形式的页面或 PDF。
@@ -119,7 +127,6 @@
 - `cn-sse` 市场结构与交易机制 / 互联互通/跨境安排（connect_schemes）— confidence: low
 - `cn-sse` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `cn-sse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `cn-szse` 交易成本与税费 / 金融交易税（financial_transaction_tax）— confidence: low
 - `cn-szse` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `cn-szse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `cn-szse` 风险与特殊考量 / 政治、地缘与制裁风险（political_risk_note）— confidence: low
@@ -150,7 +157,6 @@
 - `kr-krx` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `kr-krx` 交易成本与税费 / 佣金结构（commission_structure）— confidence: low
 - `kr-krx` 交易成本与税费 / 清算费用（clearing_fees）— confidence: low
-- `kr-krx` 交易成本与税费 / 监管费用（regulatory_fees）— confidence: low
 - `kr-krx` 交易成本与税费 / 股息预扣税（dividend_withholding_tax）— confidence: low
 - `kr-krx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `kr-krx` 风险与特殊考量 / 市场操纵与监管执法环境（enforcement_note）— confidence: low
