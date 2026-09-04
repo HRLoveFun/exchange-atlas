@@ -505,7 +505,7 @@ market_structure:
     enum: t0
     zh: "交易层面为 T+0（当日买入的证券当日即可卖出）——Saudi Exchange 的 Trading and Membership Procedures 只规范申报、竞价与撮合，未设持有期或「交收前不得卖出」限制（结算层面见 clearing.settlement_cycle）"
     en: "T+0 at the trading level (securities bought during the day may be sold the same day) — the Saudi Exchange Trading and Membership Procedures govern only orders, auctions and matching, with no holding-period or 'may not sell before settlement' restriction (see clearing.settlement_cycle)"
-    detail: "confidence 标 medium——交易层面无持有期限制为消极认定（规程文本中无限制性条款）。与中国 A 股 T+1（SSE / SZSE 交易规则明文「交收前不得卖出」）形成对照。原表述曾补充『2017 年 4 月前本所即 T+0 即时交收、当日买卖是常态，2017-04 改 T+2 净额交收』作为正面佐证，但经第二人独立复核（[ADR-072]）核查，该具体历史细节在本字段引用来源与 `.cache/sa-tadawul/` 全部缓存文件中均查无依据（凭记忆填写，违反 CLAUDE.md §二第 1 条），本次删除；enum: t0 / confidence: medium 的判断不依赖这条被删细节，仅由消极认定支撑。"
+    detail: "confidence 标 medium——交易层面无持有期限制为消极认定（规程文本中无限制性条款）。与中国 A 股 T+1（SSE / SZSE 交易规则明文「交收前不得卖出」）形成对照。原表述曾补充『2017 年 4 月前本所即 T+0 即时交收、当日买卖是常态，2017-04 改 T+2 净额交收』作为正面佐证，但经第二人独立复核（[ADR-074]）核查，该具体历史细节在本字段引用来源与 `.cache/sa-tadawul/` 全部缓存文件中均查无依据（凭记忆填写，违反 CLAUDE.md §二第 1 条），本次删除；enum: t0 / confidence: medium 的判断不依赖这条被删细节，仅由消极认定支撑。"
     sources:
       - title: "Trading and Membership Procedures（Saudi Exchange 官方规程 PDF）"
         url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
@@ -563,7 +563,7 @@ market_structure:
   connect_schemes:
     zh: "无沪港通式的跨境股票互联互通机制。境外投资者自 2026 年 2 月 1 日 QFI（合格境外投资者）资格制度取消后，可不受投资者类别限制直接投资主板（不再需经 QFI 框架开户），仍受单一 10%／合计 49% 持股上限约束（一手依据见 regulation.foreign_ownership_limit / participants.foreign_access_channel）；这是市场准入安排，非交易所间订单路由连接"
     en: "No cross-border stock-connect scheme of the Stock Connect type. Since the Qualified Foreign Investor (QFI) framework was abolished effective 1 February 2026, foreign investors may access the Main Market directly without meeting QFI qualification requirements (primary source: regulation.foreign_ownership_limit / participants.foreign_access_channel), subject to the existing 10%/49% ownership caps; this is a market-access arrangement rather than an inter-exchange order-routing link"
-    detail: "「无跨境互联互通」本身为消极认定（未见 Saudi Exchange / CMA 关于此类机制的安排）。原表述把已于 2026-02-01 废止的 QFI 框架描述成境外机构现行准入渠道，与同文件 regulation.foreign_ownership_limit / capital_controls / participants.foreign_access_channel 三处（均 confidence high、CMA_N_3974 一手公告）记录的废止事实矛盾，经第二人独立复核（[ADR-072]）指出后订正为现状描述、并与三处保持一致。此前提及的『经获批中介签订互换协议（swap）间接持有经济权益』渠道在 QFI 废止后是否仍并行存在未重新核实，本次订正未保留该断言，已记入 OPEN-QUESTIONS。"
+    detail: "「无跨境互联互通」本身为消极认定（未见 Saudi Exchange / CMA 关于此类机制的安排）。原表述把已于 2026-02-01 废止的 QFI 框架描述成境外机构现行准入渠道，与同文件 regulation.foreign_ownership_limit / capital_controls / participants.foreign_access_channel 三处（均 confidence high、CMA_N_3974 一手公告）记录的废止事实矛盾，经第二人独立复核（[ADR-074]）指出后订正为现状描述、并与三处保持一致。此前提及的『经获批中介签订互换协议（swap）间接持有经济权益』渠道在 QFI 废止后是否仍并行存在未重新核实，本次订正未保留该断言，已记入 OPEN-QUESTIONS。"
     confidence: medium
 
   # ─── 衍生品市场机制（如适用）2026-08-18 新增，见 schema/taxonomy.yml market_structure.derivatives
