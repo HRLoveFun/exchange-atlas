@@ -898,21 +898,21 @@
         "verified": "2026-08-14"
       },
       "block_trade": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "Nasdaq 股票规则手册中没有专门的大宗交易设施或大宗订单类型；大额订单在场外议价后经 FINRA/Nasdaq 交易报告设施（TRF）申报。美股『大宗』的规则性定义在 FINRA 规则 5270（大宗交易抢跑）——Nasdaq 会员均为 FINRA 会员：股票交易中，涉及 10,000 股或以上通常即视为大宗交易，少于 10,000 股的交易也可能构成大宗；规则本身不含金额门槛（市场惯例另有『10,000 股或市值 20 万美元』一说）",
+        "en": "The Nasdaq equity rulebook contains no dedicated block-trading facility or block order type; large orders are negotiated off-exchange and reported to a FINRA/Nasdaq Trade Reporting Facility (TRF). The rule-based definition of a 'block' for US equities is in FINRA Rule 5270 (Front Running of Block Transactions) — Nasdaq members are FINRA members: in equities, a transaction of 10,000 shares or more is generally deemed a block, and a smaller transaction can also qualify; the rule itself carries no dollar threshold (the market convention adds '10,000 shares or $200,000 market value')",
+        "detail": "美国股票市场结构下无交易所侧的规模化大宗时段/设施；大额成交主要经券商内部化或另类交易系统（Reg ATS，见 dark_pool）完成后申报至 TRF。FINRA 5270 是监管机构（自律组织）来源，非 Nasdaq 自身规则；Nasdaq 自有的集合竞价机制见 opening_mechanism / closing_mechanism（Opening/Closing Cross），非大宗设施。",
         "sources": [
           {
-            "title": "The Nasdaq Stock Market（交易机制总览页）",
-            "url": "https://www.nasdaqtrader.com/trader.aspx?id=tradingusequities",
-            "accessed": "2026-08-14"
+            "title": "FINRA Rule 5270 (Front Running of Block Transactions) — Supplementary Material .03 Examples of Block Transactions",
+            "url": "https://www.finra.org/rules-guidance/rulebooks/finra-rules/5270",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "In the context of equity securities, a transaction involving 10,000 shares or more of a security, an underlying security, or a related financial instrument overlying such number of shares, is generally deemed to be a block transaction, although a transaction of fewer than 10,000 shares could be considered a block transaction.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "order_book_transparency": {
         "zh": "盘前：Nasdaq 运营公开的中央限价订单簿，展示订单（displayed limit orders）的价量向市场披露并按到达顺序成交，全市场深度通过 Nasdaq TotalView 等自有行情源及 SIP 分发；支持不披露的流动性——非展示订单（Non-Displayed）与中点挂钩单（Mid-Point Peg）为隐藏，排在同价展示订单之后成交。盘后：成交实时打印至合并行情带，无欧盟式大额成交延迟披露（LIS deferral）安排",

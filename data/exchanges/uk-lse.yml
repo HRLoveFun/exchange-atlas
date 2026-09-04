@@ -590,8 +590,18 @@ market_structure:
     confidence: high
 
   block_trade:
-    zh: ""
-    confidence: low
+    zh: "无按规模设限的专门大宗交易时段。大额交易在中央限价订单簿外完成，作为『在交易所（on-Exchange）的簿外成交』申报（经 TRADEcho），前提是该笔符合以下情形之一：属『大额成交』（large in scale，即规模达到或超过英国 MiFIR 规定的最小订单规模）、或属『协议成交』（negotiated trade，不适用盘前透明度、成交条件不劣于当时订单／报价簿可达到的水平）。此外 SETS 内设 RFQ（询价）交易簿，股票 RFQ 的最低金额为 £50,000 与盘前大额成交（LIS）阈值的 25% 两者取高"
+    en: "There is no size-gated dedicated block-trading session. Large trades are executed away from the central limit order book and reported as off-book on-Exchange trades (via TRADEcho), provided the trade is either 'large in scale' (equal to or larger than the minimum order size set in UK MiFIR) or a 'negotiated trade' (not subject to pre-trade transparency, on terms no worse than could be achieved on the order or quote book at the time). SETS also runs an on-book RFQ facility; for equities the minimum RFQ value is the higher of £50,000 or 25% of the pre-trade large-in-scale value"
+    detail: "英国承接 MiFID II／MiFIR 后无亚洲式规模化『大宗交易』设施；LIS 阈值由 UK MiFIR（受托规例 (EU) 2017/587 承接版）按证券日均成交额分档设定，非 LSE 自设。引文为《伦敦证券交易所规则》术语定义 + MIT201 的 RFQ 参数。"
+    sources:
+      - title: Rules of the London Stock Exchange (effective 5 February 2024) — Definitions; Rule 3000
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/rules-of-the-london-stock-exchange-effective-5-february-2024.pdf
+        accessed: 2026-09-04
+      - title: MIT201 – Guide to the Trading System (Issue 15.8) §6.6 Request for Quote
+        url: https://docs.londonstockexchange.com/sites/default/files/documents/mit201-guide-to-the-trading-system-15-8-20260119_0.pdf
+        accessed: 2026-09-04
+    quote: "a trade, conducted in UK regulated market security, that is not subject to pre-trade transparency on the trading system and which is on terms that are no worse than those that could be achieved on the relevant Exchange order or quote book at the time of the trade. …… an order which is equal to or larger than the minimum size of orders provided for in UK MiFIR and reflected in the parameters …… Where the trade is executed away from an order book (but possibly still in an order book security) a 'manual' trade report must be submitted to TRADEcho to bring the execution 'on Exchange' under paragraph 3040 of Rules of the London Stock Exchange. …… the minimum will be set as the higher of £50,000 or 25% of Pre-Trade Large in Scale value. Other instruments will not have a minimum."
+    confidence: high
 
   order_book_transparency:
     zh: "盘前：SETS 为公开的中央限价订单簿，展示订单的价量向市场披露（Millennium Exchange 以价格优先运作，展示部分优先于非展示部分）；同一订单簿内支持不披露的流动性——冰山订单仅展示部分数量、隐藏限价订单全隐藏、中间价挂钩订单仅以买卖中间价成交，均排在同价展示订单之后。盘后：适用英国承接的 MiFIR 成交透明度制度，大额成交（LIS）可延迟披露"

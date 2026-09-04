@@ -964,21 +964,26 @@
         "detail": null
       },
       "block_trade": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "现货股票市场（联交所）无专门的大宗交易设施——大额交易私下议价后按普通／手动成交（manual trade）输入并申报。衍生品市场（期交所 HKFE）设『大宗交易设施』（Block Trade Facility）：期交所规则第 815／815A 条，须为董事会指定的『大宗交易合约』、达到规定的『最低成交量门槛』（按合约，如股票指数期货 100 张、恒生科技指数期货／期权 50 张、部分 MSCI 指数期货 25 张），并即时经 HKATS 输入；不含迷你恒指／迷你国指期货期权。股票期权另有《大宗交易规例》（第三附表），门槛由董事会设定",
+        "en": "The cash equity market (SEHK) has no dedicated block-trade facility — large trades are privately negotiated and entered/reported as ordinary or manual trades. The derivatives market (HKFE) operates a Block Trade Facility under HKFE Rules 815/815A: the contract must be a Board-designated Block Trade Contract, the order must meet the applicable Minimum Volume Threshold (per contract, e.g. 100 contracts for Stock Index Futures, 50 for Hang Seng TECH Index Futures/Options, 25 for some MSCI index futures), and it must be executed immediately on HKATS; Mini-HSI and Mini-HSCEI futures and options are excluded. Stock options have a separate 'Regulations for Block Trades' (Third Schedule) with a Board-set threshold",
+        "detail": "HKEX 的大宗交易设施是衍生品专属机制（现货侧无对应设施——官方大宗交易说明页面全部归在衍生品栏目下）。股票期权《大宗交易规例》的具体最低成交量门槛由董事会另行公布（业界普遍引 500 张），第三附表条文本身只写『适用的最低成交量门槛』，故此数字未纳入正文。",
         "sources": [
           {
-            "title": "Trading Hours - Securities Market（HKEX 官网）",
-            "url": "https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
-            "accessed": "2026-08-12"
+            "title": "Rules of the Futures Exchange (HKFE) — Chapter VIII, Rules 815 & 815A (Execution of Block Trades; Minimum Volume Threshold table)",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/HKFE/Rules/FE_VIII.pdf",
+            "accessed": "2026-09-04"
+          },
+          {
+            "title": "HKEX — Block Trade Facility (derivatives market overview)",
+            "url": "https://www.hkex.com.hk/Services/Trading/Derivatives/Overview/Trading-Mechanism/Block-Trade-Facility?sc_lang=en",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "Exchange Participants may execute orders as a Block Trade provided that they are executed in such manner and within such trading hours or other time, and satisfy the criteria laid down in Rule 815A and such other criteria, as may be prescribed by the Board and notified to Exchange Participants from time to time. …… an Exchange Participant shall not execute any order as a Block Trade unless that order meets the applicable Minimum Volume Threshold set forth below …… Hang Seng Index (HSI) Futures - first 4 Contract Months 100 …… Hang Seng TECH Index Futures 50 …… A block trade comprises large buy and sell orders privately negotiated apart from the public auction market. …… except the Mini-HSI futures and options and Mini-HSCEI futures and options contracts.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "order_book_transparency": {
         "zh": "盘前：OTP-C 为公开的中央订单簿，各价位买卖盘数量公开、按价格及时间优先连续配对；证券市场不提供冰山盘、隐藏盘或市价盘。价格急剧波动时以市场波动调节机制（VCM）在 5 分钟冷静期内限价（不停牌）。盘后 / 大额：无独立暗池；大额交易另行按规则申报。适用《证券及期货条例》下的成交披露要求",

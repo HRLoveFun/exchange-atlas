@@ -1152,21 +1152,31 @@
         "detail": null
       },
       "block_trade": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "ToSTNeT（东证交易网络系统）为东证的场外（off-auction）大宗交易平台：ToSTNeT-1 含单一个股交易（最低 1 个交易单位，通常 100 股）与篮子交易（须 15 只以上标的、合计 1 亿日元以上）；ToSTNeT-2 为收盘价／VWAP 交易；ToSTNeT-3 为上市公司回购自家股份。ToSTNeT-1／-2 交易时段 8:20-18:00，按价格／数量一致即成交、不进入连续竞价订单簿",
+        "en": "ToSTNeT (Tokyo Stock Exchange Trading NeTwork System) is TSE's off-auction platform for large-lot and basket trades: ToSTNeT-1 covers single-issue transactions (minimum one trading unit, typically 100 shares) and basket transactions (15 or more issues aggregating at least JPY 100 million); ToSTNeT-2 handles closing-price / VWAP transactions; ToSTNeT-3 is for listed companies repurchasing their own shares. ToSTNeT-1/-2 trade 8:20 a.m.-6:00 p.m., matching on exact price/quantity correspondence outside the continuous auction book",
+        "detail": "单一个股 ToSTNeT 交易的最低量按 Business Regulations Rule 15『交易单位』确定（即无『大额』硬门槛，其大宗属性来自协议成交、不冲击连续竞价簿）；篮子交易的 15 只 + 1 亿日元门槛见 ToSTNeT 特别规程施行细则 Rule 3。ToSTNeT-1 于 1998-06-29 上线（1999-09-30 前称『大口交易』），ToSTNeT-2 于 1999-08-07 上线。",
         "sources": [
           {
-            "title": "Business Regulations（TSE官网英文版PDF）",
-            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
-            "accessed": "2026-08-13"
+            "title": "ToSTNeT Market — Overview（JPX 官网英文版）",
+            "url": "https://www.jpx.co.jp/english/equities/trading/tostnet/index.html",
+            "accessed": "2026-09-04"
+          },
+          {
+            "title": "Special Regulations of Business Regulations Concerning ToSTNeT Market（官方英文版 PDF）Rule 4 / Rule 10",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/tostnet_market_sp_regs_20250228.pdf",
+            "accessed": "2026-09-04"
+          },
+          {
+            "title": "Enforcement Rules for the Special Regulations ... Concerning ToSTNeT Market（官方英文版 PDF）Rule 2 / Rule 3",
+            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/tostnet_market_sp_regs_ER_20241105.pdf",
+            "accessed": "2026-09-04"
           }
         ],
+        "quote": "the ToSTNeT market has been used for off-auction trading to accommodate large-lot and basket trades that are difficult to execute smoothly in the trading session (trading by auction method). …… The number of issues specified by the Exchange as prescribed in Rule 4, Paragraph 2 of the ToSTNeT Special Regulations shall be fifteen (15), and the amount specified by the Exchange shall be one hundred (100) million yen. …… The trading hours of single-issue transactions and basket transactions shall be from 8:20 a.m. to 6:00 p.m.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "order_book_transparency": {
         "zh": "盘前：TSE arrowhead 为公开的中央订单簿，各价位的申报数量以『板情報』向市场披露；价格急剧变动时以『特別気配』（special quote）显示预期成交价并放缓成交。现货股票订单簿不提供冰山 / 隐藏限价单类型（全部申报数量公开）。盘后 / 大宗：立会外取引 ToSTNeT 单独进行并披露。适用日本金商法的成交披露要求",

@@ -665,9 +665,18 @@ market_structure:
     confidence: high
 
   block_trade:
-    zh: ""
-    confidence: low
-    detail: "「大宗交易」在本所对应概念可能是Off-order-book trades（场外成交报备）或SwissAtMid机制下的大额订单，但本次未找到官方对「大宗交易」专门量化门槛（如最低金额）的原文表述，留空，见dark_pool字段的相关说明。"
+    zh: "SIX 无独立的盘中大宗交易订单类型或时段；大额交易在订单簿外（off-order-book）协议达成后向交易所申报——可作为『场内、订单簿外交易』（申报且价格通过合理性检验后适用交易规则），或走 SwissAtMid 中点撮合。大额 off-order-book 成交可按分档『延迟公布』制度延后披露：延迟时长取决于该证券日均成交额（ADT）与单笔规模，例如 ADT > CHF 1 亿的证券，单笔 ≥ CHF 1,000 万延迟 60 分钟、≥ CHF 3,500 万延至收盘"
+    en: "SIX has no dedicated intraday block-trade order type or session; large trades are negotiated off the order book and reported to the Exchange — either as 'on-exchange, off-order-book trades' (the Trading Rules apply once the trade is reported and its price passes a plausibility test) or via SwissAtMid mid-point matching. Large off-order-book trades qualify for tiered deferred publication: the delay depends on the security's average daily turnover (ADT) and the trade size — e.g. for a security with ADT > CHF 100 million, a trade ≥ CHF 10 million is deferred 60 minutes and one ≥ CHF 35 million until the end of the trading day"
+    detail: "『大宗交易』在 SIX 体制下不是独立机制，而是 off-order-book 成交 + 延迟公布豁免的组合，透明度豁免的法律依据为瑞士《金融市场基础设施条例》(FMIO) 第 27 条。延迟公布分档表（按 ADT 分 8 档、每档 3 个规模阈值）见 Directive 3 附件 C；SwissAtMid 见 dark_pool 字段。"
+    sources:
+      - title: SIX Swiss Exchange Trading Rules (Rule Book) §12 On-exchange, off-order-book trading
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/rule-books/rb-en.pdf
+        accessed: 2026-09-04
+      - title: Directive 3 — Trading, Annex C Delayed Publication
+        url: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf
+        accessed: 2026-09-04
+    quote: "The provisions of these Trading Rules shall apply to off-order-book trades, if a) the parties agree prior to or at the time of the trade that it should be made according to the provisions of the Trading Rules; b) the trade is reported to the Exchange in accordance with the provisions of these Trading Rules; and c) the price of the reported trade passes an Exchange plausibility test. …… At the request of the participants, the Exchange shall publish off-order-book trades with a delay. The participant may apply for delayed publication if all of the following provisions are fulfilled: a) the trade is executed off-order-book; b) the trade is concluded between a participant trading on its own account (nostro) and a client of this participant; and c) the required minimum volume of the trade corresponds to the average daily turnover (ADT) in the securities in question. …… > 100 million 10,000,000 60 minutes"
+    confidence: high
 
   dark_pool:
     zh: "SwissAtMid——不含盘前透明度的中点撮合交易服务，依瑞士《金融市场基础设施条例》（FMIO）第27条第4款相关豁免运作，最高订单价值CHF 250,000,000"

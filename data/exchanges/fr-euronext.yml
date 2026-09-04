@@ -719,11 +719,18 @@ market_structure:
     confidence: low
     detail: 卖空规则源自欧盟层面统一的《卖空规则》（Regulation (EU) No 236/2012），由各国监管机构（如法国AMF、荷兰AFM）而非Euronext交易所本身执行——这与本所「无单一监管机构」的结构性特点呼应，本次抓取材料中未见Euronext自己发布的卖空机制说明页，留空不代入enum。
   block_trade:
-    zh: 官网术语为「Euronext Block」，作为独立的大宗交易设施存在（见products章节），具体门槛与流程本次未逐条核实
-    en: Officially termed "Euronext Block", operated as a dedicated block-trading
-      facility (see products chapter); exact thresholds and workflow not individually
-      verified this session
-    confidence: low
+    zh: "两条路径：①受监管市场内，『大额成交』（Large In Scale transactions，规模达到或超过受托规例 (EU) 2017/587 附件 II 表 1/2 门槛的交易）可在中央订单簿外完成并申报，另有 VWAP 成交、其他协议成交、保证交叉成交等场外类型；②Euronext Block MTF——泛欧交易场所，供 Euronext 会员撮合大额（Large-In-Scale）订单，成交按成交额 0.3bps 收费、挂单（无论 firm 还是 conditional）免费"
+    en: "Two routes: (1) within the regulated market, 'Large In Scale transactions' (trades equal to or exceeding the thresholds in Delegated Regulation (EU) 2017/587 Annex II tables 1 and 2) may be carried out outside the Central Order Book and reported, alongside VWAP transactions, other negotiated trades and guaranteed cross trades; (2) Euronext Block MTF — a pan-European venue for Euronext members to trade Large-In-Scale orders, charged at 0.3bps on value traded, with orders (firm or conditional) free of charge"
+    detail: "LIS 门槛由欧盟受托规例按证券日均成交额分档设定，非 Euronext 自设；『Euronext Block』是集团旗下独立 MTF（非受监管市场板块）。引文取自《Euronext Rule Book Book I: Harmonised Rules》Rule 4404 与《Euronext Cash Markets Trading Fee Guide》§2.7。"
+    sources:
+      - title: "Euronext Rule Book Book I: Harmonised Rules (25 June 2026) — Rule 4404/2 Large In Scale transactions"
+        url: https://www.euronext.com/sites/default/files/2026-06/harmonised_rulebook_en_25062026.pdf
+        accessed: 2026-09-04
+      - title: "Euronext Cash Markets Trading Fee Guide (effective 01 Sep 2026) — §2.7 Euronext Block"
+        url: https://www.euronext.com/sites/default/files/2026-08/euronext_cash_markets_trading_fee_guide_effective_01sep2026.pdf
+        accessed: 2026-09-04
+    quote: "Large In Scale Transactions shall mean Transactions that are equal to or exceed the size for large scale transactions as set forth by Delegated Regulation (EU) 2017/587 Annex II tables 1 and 2. …… Euronext Block MTF is a pan-European trading venue allowing Euronext member firms to trade Large-In-Scale orders. Transactions on the Euronext Block segment are charged at 0.3bps (applied on the value-traded in Euros). Orders, whether firm or conditional, are free of charge."
+    confidence: medium
   dark_pool:
     zh: 存在非公开披露（dark）交易安排——大宗订单（Large-in-Scale）与中间价订单（Mid-Point Orders）在独立的非展示订单簿中撮合，按规模/时间优先原则执行
     en: Non-pre-trade-transparent (dark) trading exists — Large-in-Scale orders and

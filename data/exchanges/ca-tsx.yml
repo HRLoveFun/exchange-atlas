@@ -841,10 +841,15 @@ market_structure:
       from time to time.
     confidence: high
   block_trade:
-    zh: ''
-    confidence: low
-    detail: 官网提及Cross Facilities（含Specialty Crosses：Basis/VWAP/Contingent/Special
-      Trading Session/NAV/Internal crosses）与MGF Facility等相邻机制，但本次未找到「大宗交易」最低起点规模的专门条款，留空不猜。
+    zh: "连续交易时段无按规模设限的专门大宗交易设施。大额订单以『主动交叉』（Intentional Cross）／『内部交叉』（Internal Cross）成交，或作为 Rule 4-107 下的『特殊价格交叉』（Specialty Price Cross，即 Basis Trade 或 VWAP Trade）执行，也可进入收盘后的『特别交易时段』（Special Trading Session，全场单一价格成交）。TSX 规则手册仅在发行人回购（issuer bid）的『大宗购买豁免』语境下定义『block』：购买额 ≥ 20 万加元；或 ≥ 5,000 股且购买额 ≥ 5 万加元；或 ≥ 20 手且达该证券日均成交量的 150% 以上"
+    en: "No size-gated dedicated block-trading facility in the continuous session. Large orders are executed as Intentional Crosses / Internal Crosses, or as Specialty Price Crosses under Rule 4-107 (a Basis Trade or Volume-Weighted Average Price Trade), and may also be run in the post-close Special Trading Session (single-price execution). The TSX Rule Book defines 'block' only in the issuer-bid Block Purchase Exception context: a purchase price of $200,000 or more; or at least 5,000 securities and a purchase price of at least $50,000; or at least 20 board lots totalling 150% or more of the security's ADTV"
+    detail: "TSX 无亚洲式规模化大宗交易时段；跨市场层面的一般『block』定义（如 CIRO/UMIR 项下用于客户优先／最佳执行的门槛）本次因 CIRO 官网持续 403 未取到官方原文，记入 OPEN-QUESTIONS。引文取自 TSX 规则手册（Rule Book）定义节与 Rule 4-107。"
+    sources:
+      - title: Toronto Stock Exchange Rule Book（Effective January 13, 2026）— Definitions; Rule 4-107 Specialty Price Crosses
+        url: https://www.tsx.com/en/resource/1464
+        accessed: 2026-09-04
+    quote: "means a quantity of securities that either: has a purchase price of $200,000 or more; or is at least 5,000 securities and has a purchase price of at least $50,000; or is at least 20 board lots of the security and total 150% or more of the ADTV for that security …… means a Basis Trade or Volume-Weighted Average Price Trade, or such other trade that is designated by the Exchange from time to time, resulting from the entry by a Participating Organization of both the order to purchase and the order to sell a security. …… means a Session during which trading in a security is limited to the execution of transactions at a single price."
+    confidence: medium
   dark_pool:
     zh: TSX自身内嵌暗盘单类型（Dark Pegged、Dark Limit），提供完全盘前匿名，与展示订单簿原生整合；未核实外部另类交易系统（ATS）如MATCHNow在TSX撮合体系外的暗池占比
     en: TSX has its own integrated dark order types (Dark Pegged, Dark Limit) offering

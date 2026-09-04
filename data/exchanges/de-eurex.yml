@@ -488,8 +488,21 @@ market_structure:
     detail: "衍生品的'卖出开仓'（如卖出期货、卖出看涨期权）在机制上不同于股票卖空（不涉及借券），该字段的设计前提本身是股票市场概念，对本所不完全适用，留空不强行套用，记入OPEN-QUESTIONS。"
 
   block_trade:
-    zh: ""
-    confidence: low
+    zh: "Eurex 通过 T7 Entry Service（TES）等场外机制支持大宗交易（Block Trades）——即超过特定订单量的期货／期权合约交易，合格品种与最低订单量由管理董事会按品种在合约规格中规定（如 DAX 期货最低 250 张；EURO STOXX 50 指数期权非披露式双边 TES 交易最低 25,000 张）。TES 属《交易条件》第 4 部分「场外交易」，另有 Eurex EnLight 选择性询价"
+    en: "Eurex supports Block Trades via off-book mechanisms such as the T7 Entry Service (TES): transactions in futures and options contracts exceeding a specific order volume, with eligible contracts and the minimum order volume set per product by the Management Board in the Contract Specifications (e.g. a 250-contract minimum for DAX Futures; a 25,000-contract minimum for non-disclosed bilateral TES transactions in EURO STOXX 50 Index Options). TES sits in Part 4 'Off-book Trading' of the Conditions for Trading, alongside the Eurex EnLight selective RFQ service"
+    detail: "Eurex 为纯衍生品交易所，本字段描述其衍生品大宗机制（无现货『大宗交易时段』概念）。DAX 期货 250 张、EURO STOXX 50 指数期权披露式 TES 1,000 张 / 非披露式 25,000 张，均取自各自产品页的 Block Trade Service 说明，属逐品种参数、会随管理董事会决定调整。"
+    sources:
+      - title: Conditions for Trading at Eurex Deutschland — Part 4 Off-book Trading (4.3 Block Trades)
+        url: https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf
+        accessed: 2026-09-04
+      - title: Eurex — DAX Futures product page (Block Trades)
+        url: https://www.eurex.com/ex-en/markets/idx/dax/DAX-Futures-139902
+        accessed: 2026-09-04
+      - title: Eurex — EURO STOXX 50 Index Options product page (Block Trades)
+        url: https://www.eurex.com/ex-en/markets/idx/stx/euro-stoxx-50-derivatives/products/EURO-STOXX-50-Index-Options-69660
+        accessed: 2026-09-04
+    quote: "Block Trades are Transactions in futures and options Contracts, including the Complex Instruments specified in Number 2.2, that exceed a specific Order volume. The eligible futures and options Contracts and the minimum Order volume for Block Trades are determined by the Management Board in the Contract Specifications. …… Block Trade Service with a Minimum Block Trade Size of 250 contracts …… Minimum Block Trade Size for non-disclosed bilateral TES transactions is 25,000 contracts"
+    confidence: high
 
   dark_pool:
     zh: ""

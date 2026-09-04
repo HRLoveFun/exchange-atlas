@@ -494,8 +494,15 @@ market_structure:
     confidence: high
 
   block_trade:
-    zh: ""
-    confidence: low
+    zh: "无现代化的专用电子大宗交易设施；大额订单在『楼上市场』（upstairs market）议价后打印至合并行情带。NYSE 规则手册定义『大宗』（block）：至少 10,000 股，或市值 20 万美元以上，两者取其低。Rule 127《在 NYSE 现价之外的大宗交叉》规定会员机构收到难以被市场即时吸收的大宗订单时应深入探询楼面市场（该条不适用于 Pillar 平台上的 UTP 证券）；Rule 72/76/97 另有大宗规模的代理交叉程序"
+    en: "No modern dedicated electronic block-trading facility; large orders are negotiated in the 'upstairs market' and printed to the Consolidated Tape. The NYSE rulebook defines a 'block' as at least 10,000 shares or a quantity of stock with a market value of $200,000 or more, whichever is less. Rule 127 (Block Crosses Outside the Prevailing NYSE Quotation) requires a member organization receiving a block order that may not readily be absorbed by the market to explore the Floor market in depth (this rule does not apply to UTP securities on the Pillar platform); Rules 72/76/97 provide the agency-cross procedures for block-size trades"
+    detail: "美国股票市场结构下没有交易所侧的规模化大宗时段/设施；『block』是规则与市场惯例中的定义性阈值（10,000 股 / 20 万美元）。大额成交主要经券商内部化或另类交易系统（Reg ATS，见 dark_pool）完成后申报。引文取自 NYSE 规则手册合并本 Rule 127 与 Rule 72 的 Supplementary Material .10。"
+    sources:
+      - title: "NYSE Rules (consolidated) — Rule 127 Block Crosses Outside the Prevailing NYSE Quotation; Rule 72 Supplementary Material .10"
+        url: https://www.nyse.com/publicdocs/nyse/regulation/nyse/NYSE_Rules.pdf
+        accessed: 2026-09-04
+    quote: "a block shall be at least 10,000 shares or a quantity of stock having a market value of $200,000 or more, whichever is less, which is acquired by a member organization on its own behalf and/or for others from one or more buyers or sellers in a single transaction. …… Block Crosses Outside the Prevailing NYSE Quotation …… This Rule is not applicable to trading UTP Securities on the Pillar trading platform. (a) A member organization that receives an order or orders for the purchase or sale of a block of stock, that may not readily be absorbed by the market, should explore in depth the market on the Floor."
+    confidence: high
 
   order_book_transparency:
     zh: "盘前：NYSE 运营公开的中央限价订单簿，全部展示订单（Priority 2 - Display Orders）的价量向市场披露，并通过 SIP 与自有行情源（NYSE Integrated Feed 等）实时分发；支持不披露的流动性——非显示限价单（Non-Displayed Limit Order）、中点流动性单（MPL Order）为全隐藏，储备单（Reserve Order）仅显示部分、隐藏储备量，均排在同价展示订单之后（Priority 3 - Non-Display Orders）。盘后：成交实时打印至合并行情带，无欧盟式大额成交延迟披露（LIS deferral）安排"

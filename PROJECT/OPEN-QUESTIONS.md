@@ -106,6 +106,7 @@
 
 - **[ADR-060 任务二] `holidays_note` 4 家的官方交易日历页是 JS 单页应用（SPA），curl 与 WebFetch 都只拿到外壳，逐年假期表靠前端渲染——`ca-tsx` / `uk-lse` / `ch-six` / `de-eurex` 因此维持 `confidence: low` 留空（2026-09-04）。** 已试：`tsx.com/en/trading/calendars-and-trading-hours` 及其 `/calendars` 子页（后者 404）；`londonstockexchange.com/equities-trading/business-days` 及 `docs.londonstockexchange.com` 的 Business-days PDF（404）；`six-group.com` trading-days.html（404），Trading Guide PDF 里的「Trading Calendar 2026/2027」是像素日历网格、无可摘引文本；`eurex.com/ex-en/trade/trading-calendar` 及 `/holiday-regulations` 均导航壳。已完成的 3 家：`us-nasdaq`（Nasdaq Trader 旧版 ASP 页有完整假期表，medium）、`br-b3`（Holidays 页有休市规则句 + 巴西法定假日清单，无 JS 时默认显示往年骨架，medium）、`au-asx`（`asx.com.au` 现货交易日历页静态 HTML 含完整 2026 假期表 + 14:10 提前收市说明，high）。**待补**：`ch-six` / `de-eurex` 的年度交易日历 PDF 直链（非 AJAX），或人工提供 `ca-tsx` / `uk-lse` 假期日历页原文；或用 task 5 的渲染型抓取器。
 - **[ADR-060 任务二] `intraday_reversal` 6 家（`ca-tsx` / `ch-six` / `de-xetra` / `fr-euronext` / `sa-tadawul` / `uk-lse`）填 `enum: t0` / `confidence: medium`，依据是各所交易规则手册通读后不含持有期或「交收前不得卖出」限制（消极认定）+ 与中国 A 股 T+1 明文条款对照（2026-09-04）。** 若要升 `high`，需各所对「买入证券当日可卖出」的正面官方陈述——多数发达市场不单列此条（如 `kr-krx` 只能靠 Clearstream「same-day turnaround」的第三方表述，封顶 medium）。`de-eurex` 已按 [ADR-060] 字段级 `not_applicable` 处理（衍生品无现货持有期概念，见框架性问题 #17）。
+- **[ADR-060 任务二] `ca-tsx block_trade` 的跨市场「block」定义（CIRO/UMIR 项下）未取到一手原文（2026-09-04）。** `ca-tsx.yml` 现填的是 TSX 规则手册在「发行人回购大宗购买豁免」语境下的 `block` 定义（购买额 ≥ CAD 20 万 / ≥ 5,000 股且 ≥ CAD 5 万 / ≥ 20 手且 ≥ 150% ADTV），已核实；但真正跨市场适用的门槛在 CIRO Universal Market Integrity Rules Rule 6.6（Dark Order 价格改善豁免：> 50 standard trading units 且 > CAD 30,000，或 > CAD 100,000）与 Rule 1.1，`ciro.ca` 对 curl 与 WebFetch 均返回 Cloudflare 质询（403），本次未拿到逐字原文。**待补**：人工提供 CIRO UMIR 6.5 / 6.6 / 1.1 原文，或用渲染型抓取器；该门槛同时也是 `dark_pool` 字段的关键依据。
 <!-- BEGIN:GENERATED auto-issues -->
 - `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `br-b3` 基本信息 / 夏令时规则（dst_rule）— confidence: low
@@ -130,7 +131,6 @@
 - `de-xetra` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `fr-euronext` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `fr-euronext` 市场结构与交易机制 / 上午连续竞价（trading_sessions.continuous_am）— confidence: low
-- `fr-euronext` 市场结构与交易机制 / 大宗交易（block_trade）— confidence: low
 - `hk-hkex` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `hk-hkex` 清算、结算与交割 / 交割方式（delivery_method）— confidence: low
 - `hk-hkex` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
