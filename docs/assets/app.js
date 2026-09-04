@@ -999,7 +999,7 @@
     // ── 标题 / 轴名（y 轴标题已删——"涨跌幅 %"与参考价已由 % 刻度 + 零轴刻度本身表达，
     //    顶栏工具条另有一句完整口径，ADR-073）──
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
-    g.push('<text x="' + PL + '" y="' + (PT - 40) + '" class="td-title">' + esc(exName) + t(" · 市场机制剖面", " · Market Mechanics Profile") + "</text>");
+    g.push('<text x="' + PL + '" y="' + (PT - 40) + '" class="td-title">' + t("市场机制剖面", "Market Mechanics Profile") + "</text>");
     g.push('<text x="' + n(PL + pw / 2) + '" y="' + (H - 5) + '" class="td-axis-name" text-anchor="middle">' +
       t("日内时间（当地）", "Time of day (local)") + "</text>");
 
@@ -1384,7 +1384,7 @@
 
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
     var rt = buySum + sellSum;
-    g.push('<text x="' + PL + '" y="34" class="td-title">' + esc(exName) + t(" · 交易成本瀑布", " · Cost Waterfall") + "</text>");
+    g.push('<text x="' + PL + '" y="34" class="td-title">' + t("交易成本瀑布", "Cost Waterfall") + "</text>");
     var sub;
     if (buySum === 0 && sellSum === 0) {
       sub = t("显性成本按笔 / 按合约计，本所未摘引到可折算为 bp 的费率（见下方各费种）",
@@ -1609,7 +1609,7 @@
     var H = gridBot + 44;
     var g = [];
 
-    g.push('<text x="14" y="30" class="td-title">' + esc(exName) + esc(t(" · 交割管线", " · Settlement Pipeline")) + '</text>');
+    g.push('<text x="14" y="30" class="td-title">' + esc(t("交割管线", "Settlement Pipeline")) + '</text>');
 
     // ── T+k 天数轴 + 竖网格 ──
     for (var d = 0; d <= Nmax; d++) {
@@ -1958,7 +1958,7 @@
     var W = 1180, PR = 40, PL = 80, H = 150, midY = 84;
     return '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + " " + H + '" class="td-svg ll-svg" role="img" aria-label="' +
       esc(t("纯衍生品交易所，无公司上市生命周期", "derivatives-only exchange, no corporate listing lifecycle")) + '">' +
-      '<text x="18" y="28" class="ll-title">' + esc(name) + esc(t(" · 上市生命周期", " · Listing Lifecycle")) + "</text>" +
+      '<text x="18" y="28" class="ll-title">' + esc(t("上市生命周期", "Listing Lifecycle")) + "</text>" +
       '<line x1="' + PL + '" y1="' + midY + '" x2="' + (W - PR) + '" y2="' + midY + '" stroke="var(--fg-faint)" stroke-width="1.4" stroke-dasharray="5 4"/>' +
       '<text x="' + W / 2 + '" y="' + (midY - 16) + '" text-anchor="middle" class="ll-empty-strong">' +
       esc(t("衍生品交易所 · 无公司上市生命周期", "Derivatives-only exchange · no corporate listing lifecycle")) + "</text>" +
@@ -1993,7 +1993,7 @@
     var axisY = calloutTop + (hasCond ? calloutH : 16) + 24, H = axisY + 24;
 
     var g = [];
-    g.push('<text x="18" y="26" class="ll-title">' + esc(exName) + esc(t(" · 上市生命周期", " · Listing Lifecycle")) + "</text>");
+    g.push('<text x="18" y="26" class="ll-title">' + esc(t("上市生命周期", "Listing Lifecycle")) + "</text>");
     // 派生一句描述：审核制度 · N 个板块 [· 可转板]
     var desc = [];
     if (reviewEnv && reviewEnv.enum) desc.push(enumDisplay("review_system", reviewEnv.enum));
@@ -2310,7 +2310,7 @@
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
     var W = 1180, PL = 150, PR = 44;
     var g = [];
-    g.push('<text x="18" y="28" class="rm-title">' + esc(exName) + esc(t(" · 监管图", " · Regulation Map")) + "</text>");
+    g.push('<text x="18" y="28" class="rm-title">' + esc(t("监管图", "Regulation Map")) + "</text>");
 
     // 四层纵向槽位（y 固定，不随内容伸缩）
     var rowA = { top: 74, h: 100 };
@@ -2459,7 +2459,7 @@
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
     var W = 1180, PL = 150, PR = 44, CW = W - PL - PR; // 986
     var g = [];
-    g.push('<text x="18" y="26" class="pt-title">' + esc(exName) + esc(t(" · 参与者图", " · Participant Map")) + "</text>");
+    g.push('<text x="18" y="26" class="pt-title">' + esc(t("参与者图", "Participant Map")) + "</text>");
     g.push('<text x="18" y="42" class="pt-sub">' + esc(t("谁在场上 → 我怎么进场 → 外资走哪条道", "who's on the floor → how you get in → the foreign lane")) + "</text>");
 
     // ── 层 1 · 谁在场上（investor_structure）──
@@ -2681,7 +2681,7 @@
     var g = [];
     g.push('<defs><pattern id="rf-hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">' +
       '<line x1="0" y1="0" x2="0" y2="7" stroke="var(--fg-faint)" stroke-width="1" opacity="0.16"/></pattern></defs>');
-    g.push('<text x="18" y="26" class="rf-title">' + esc(exName) + esc(t(" · 风险旗标", " · Risk Flags")) + "</text>");
+    g.push('<text x="18" y="26" class="rf-title">' + esc(t("风险旗标", "Risk Flags")) + "</text>");
     g.push('<text x="18" y="42" class="rf-sub">' +
       esc(t("正在改什么规则 · 制裁过没有 · 流动性多集中 · 谁在盯操纵", "rules changing · sanctions on record · how concentrated · who polices")) + "</text>");
 
