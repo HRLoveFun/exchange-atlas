@@ -167,6 +167,38 @@ case("ledger 计数：缺登记 + 缺口 → 2 条消息",
 
 
 # ══════════════════════════════════════════════════════════════
+# [ADR-076] ADR 占位符定号：
+#   validate.pending_adr_placeholder_violations(text)
+#   —— 分支开工写 ADR-PENDING-<slug> 占位符代替具体数字号，合并前才由
+#   tools/assign_adr_number.py 定号；main 上残留是错误、分支上只警告
+#   （严重程度判定在 validate_no_pending_adr_placeholders 里，不在这个纯函数）。
+# ══════════════════════════════════════════════════════════════
+def _pending(slug):
+    """拼出 `ADR-PENDING-<slug>`：不能在这写死完整字面量，否则这个测试文件自己会被
+    validate_no_pending_adr_placeholders 的仓库级扫描当成真占位符误报（[ADR-076]）。"""
+    return f"ADR-PENDING-{slug}"
+
+
+case("pending 合法：正文没有占位符",
+     validate.pending_adr_placeholder_violations("### ADR-076 — 正常已定号的标题\n"), [])
+case("pending 违规：标题带占位符",
+     validate.pending_adr_placeholder_violations(
+         f"### {_pending('td-axis-labels')} — 剖面零轴刻度\n"), [_pending("td-axis-labels")])
+case("pending 违规：正文引用也算，不只是标题",
+     validate.pending_adr_placeholder_violations(
+         f"见 [{_pending('foo')}] 的讨论。\n"), [_pending("foo")])
+case("pending 去重：同一占位符出现多次只报一条",
+     validate.pending_adr_placeholder_violations(
+         f"### {_pending('foo')} — x\n\n见 [{_pending('foo')}]。\n"), [_pending("foo")])
+case("pending 计数：两个不同占位符各报一条，按字典序排",
+     validate.pending_adr_placeholder_violations(
+         f"[{_pending('zzz')}] 与 [{_pending('aaa')}]\n"),
+     sorted([_pending("aaa"), _pending("zzz")]))
+case("pending 不误伤：已定号的普通 ADR 编号不匹配",
+     validate.pending_adr_placeholder_violations("[ADR-069] 与 ### ADR-070 — 标题\n"), [])
+
+
+# ══════════════════════════════════════════════════════════════
 # [ADR-075] OTP 来源登记格式：validate.otp_line_violations(sources_text)
 #   —— 复用 fetch.py 的 OTP_LINE_RE/URL_RE 解析同一份正则，一行 [OTP] 必须恰好 2 个 URL。
 # ══════════════════════════════════════════════════════════════
