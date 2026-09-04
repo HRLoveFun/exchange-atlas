@@ -1492,7 +1492,9 @@
 
 ---
 
-### ADR-065 — 数据空缺复核轨任务二实装：横切 8 高频字段批量回填清零
+### ADR-068 — 数据空缺复核轨任务二实装：横切 8 高频字段批量回填清零
+
+> **编号说明：** 本条实装于 2026-09-04（PR #62），原始 commit 写作 ADR-065——与并行 PR #58「成本瀑布数据层残差」（见下条，[ADR-066] 的编号链已确认其为 065）撞号。#62 合并时冲突未清理即入 `main`，`make check` 因「ADR 编号重复」+ ROADMAP 生成块重复转红。事后让号 **068**（066 风险旗标 / 067 成本瀑布长尾均已占用）。教训：栈式并行分支合并前必跑 `make build`（[CLAUDE.md §四 / §六]）。
 
 **背景：** [ADR-060] 把任务二定为「`odd_lot_handling`(12) / `dark_pool`(10) / `board_lot_size`(9) / `price_limits.other_boards`(9) / `block_trade`(9) / `connect_schemes`(8) / `intraday_reversal`(8) / `holidays_note`(7) 在所有缺失所填到带 `quote` 的 high/medium，或确认 `not_applicable` 并写 `detail`」，方法明确「按字段而非按所推进（保证跨所口径一致）」。2026-09-04 一个后台会话分 8 个 commit（每字段一个）执行完毕。
 
@@ -1527,6 +1529,7 @@
 **验证：** `make build` 全绿（`selfcheck` 24/24、`validate` 20 家 0/0、`verify_quotes` OK=1023 / FAIL=0 / CACHE_MISS=77 均为既有无关字段、`check_ui_i18n` OK）、`make sync` 二次幂等。新增来源域名登记 6 个（`info.gov.hk` / `jsri.or.jp` / `nextrade.co.kr` + `asic.gov.au` / `fsc.go.kr` 补子链）。
 
 **已知局限（下一迭代点）：** ① `holidays_note` 4 家 JS-SPA 待人工 / 渲染型抓取；② `ca-tsx block_trade` CIRO UMIR 6.6 跨市场 block 门槛待人工原文；③ `dark_pool` 5 家 medium（`hk-hkex` SFC 操守准则第 19 段 / `sg-sgx` MAS RMO 现行待遇 / `kr-krx` NXT 市场规则 / `jp-jpx` FSA-PTS 细则 / `in-nse` SEBI 正面禁止性表述）可日后升 high，均已记 OPEN-Q。
+
 ### ADR-065 — 成本瀑布数据层残差处理：`side` / `type: none` / 触发点残差逐条坐实
 
 > **编号说明：** ADR-064 由并行会话的「参与者图设计定案 + 数据层评估」占用（见 auto-memory），本条取 065 避让。
