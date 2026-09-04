@@ -21,3 +21,4 @@
 - 2026-09-04 · 成本瀑布迭代：佣金行降级为图下方说明（`CW_FEE_ORDER` 6→5）+ `cost_layer` 加 `rate_raw`（tw-twse 证券交易税 0.3% / za-jse STT 0.25% 由幽灵条转实心条 + `*` 标记，`validate.py` 加 verbatim 子串校验，解决 OPEN-QUESTIONS「原文数值串键」悬案） · [ADR-071] · worktree-cost-waterfall-commission
 - 2026-09-04 · 前端隐去 taxonomy 章序数（六视图说明段 + SVG/工具条 + 档案页导航去「第X章」，改用章节名 + 档案页指向）+ 新增 `check_no_chapter_ordinals.py` 并入 `make check`；原占 ADR-070，撞已合并的 [ADR-070]/[ADR-071]，按 ADR-029 协议让号 · [ADR-072] · worktree-frontend-hide-chapter-ordinals
 - 2026-09-04 · 剖面零轴刻度改标参考价名称、删 y 轴标题与"0 = …"批注、临时停牌文案居中；原占 ADR-071，撞已合并的 [ADR-071]（PR #68），按 ADR-029 协议让号 · [ADR-073] · worktree-td-axis-labels
+- 2026-09-05 · 数据空缺复核轨任务二第二人独立复核完成：4 个独立视角复核 79 处交易所×字段，终态 76/79=96.2% 达标、零幻觉；4 处 FIX 就地订正（`sa-tadawul` 两处、`ch-six`/`hk-hkex block_trade` 各一处），3 处 QUESTION 转 OPEN-QUESTIONS 待人工；任务二 ROADMAP 条目「第二人独立复核待人工」标注解除；原占 ADR-072，撞已合并的 [ADR-072]（PR #69），按 ADR-029 协议让号 · [ADR-074] · worktree-data-q-task2-review
