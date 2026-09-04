@@ -2489,6 +2489,209 @@
   }
 
   // ══════════════════════════════════════════════
+  // 风险旗标 Risk Flags（v2.0 Phase 3 第七棒，ADR-066）
+  //   第十二章「风险与特殊考量」5 字段的固定槽位「旗标面板」单画布，两泳道：
+  //     ① 交易层面（--info 蓝）—— liquidity_risk_note / fx_risk_note
+  //     ② 制度 · 地缘 · 执法（--warn 琥珀）—— regulatory_change_risk_note /
+  //        political_risk_note / enforcement_note
+  //   本章区别性轴（ADR-066 轴 3）：置信度作一等视觉信号。第 12 章 5 字段全为
+  //   分析性 *_note，宪法「覆盖边界」/ [ADR-020] 点 4 已定它们结构性停留在
+  //   low/medium——「我们对这条掌握到什么程度」本身就是主信号，不是脚注。
+  //   旗标字形填充度四态 = 取证程度（不是市场风险高低）：
+  //     high   实心旗标 + 全不透明左缘色条 —— 有据可查（规则 / 案例 + 逐字 quote）
+  //     medium 半填旗标 + 0.6 色条        —— 综合判断
+  //     low    空心旗标 + 极淡斜纹卡底 + 0.3 色条 —— 定性背景 · 无官方来源
+  //     缺省   虚线框 + 居中斜体 + 无旗标 —— 未记录（真实数据缺口）
+  //   不复用 .badge-low 的红到卡面（红在风险语境会被误读成「高风险」）——
+  //   卡面走中性梯度，红只出现在点开后的出处浮层。
+  //   常驻「这不是风险评分」声明写进模块（ADR-066 轴 4），不打分不排名。
+  //   本章无 spec、无 type:none（无「本市场无汇率风险」这类正面断言）。
+  //   纯衍生品所（de-eurex）第十二章全章适用、无 only_spot（ADR-066 轴 7）。
+  //   固定槽位：每个字段固定位置、跨 20 家不变，「换所即对比」。
+  // ══════════════════════════════════════════════
+  var RF_DEFAULT_EX = "us-nyse"; // l/h/h/m/h —— 四态里的 high/medium/low 都出现
+  var RF_FIELDS = [
+    { path: "liquidity_risk_note", lane: 1 },
+    { path: "fx_risk_note", lane: 1 },
+    { path: "regulatory_change_risk_note", lane: 2 },
+    { path: "political_risk_note", lane: 2 },
+    { path: "enforcement_note", lane: 2 }
+  ];
+  function rfResolveId(params) {
+    var l = cache.manifest.exchanges;
+    if (l.some(function (e) { return e.id === params.id; })) return params.id;
+    return l.some(function (e) { return e.id === RF_DEFAULT_EX; }) ? RF_DEFAULT_EX : l[0].id;
+  }
+  // 折行：同 rmWrap / ptWrap 思路（整卡宽扣 24px 内边距、CJK 按字数 / 拉丁按词、委托 llWrap）
+  function rfWrap(text, innerW, maxLines) {
+    var avail = innerW - 24;
+    var per = /[一-鿿]/.test(text)
+      ? Math.max(6, Math.floor(avail / 10.5))
+      : Math.max(10, Math.floor(avail / 5.6));
+    return llWrap(text, per, maxLines);
+  }
+  function rfConfWord(c) {
+    return c === "high" ? t("有据可查", "documented")
+      : c === "medium" ? t("综合判断", "assessed")
+      : t("定性背景", "qualitative");
+  }
+  function rfConfColor(c) {
+    return c === "high" ? "var(--accent)" : c === "medium" ? "var(--warn)" : "var(--fg-faint)";
+  }
+  // 旗标字形：旗杆 + 三角旗，填充度 = 置信度取证程度（非风险高低）
+  function rfFlag(x, y, conf, color) {
+    var pole = '<line x1="' + llN(x) + '" y1="' + llN(y - 13) + '" x2="' + llN(x) + '" y2="' + llN(y + 2) +
+      '" stroke="' + color + '" stroke-width="1.4"/>';
+    var tri = "M" + llN(x) + " " + llN(y - 13) + " L" + llN(x + 12) + " " + llN(y - 8.5) + " L" + llN(x) + " " + llN(y - 4) + " Z";
+    var f;
+    if (conf === "high") f = '<path d="' + tri + '" fill="' + color + '"/>';
+    else if (conf === "medium") f = '<path d="' + tri + '" fill="' + color + '" fill-opacity="0.32" stroke="' + color + '" stroke-width="1"/>';
+    else f = '<path d="' + tri + '" fill="none" stroke="' + color + '" stroke-width="1.3"/>';
+    return pole + f;
+  }
+  // 一张旗标卡：有值 = 实心卡 + 左缘色条（不透明度 = 置信度）+ 角色头 + 旗标 + 取证词 + 折行正文；
+  //   low 额外叠极淡斜纹 + 「未附官方来源」；缺省 = 虚线框 + 居中斜体「未记录」。卡整体走 openCellOverlay。
+  function rfCard(id, R, path, x, y, w, h, laneColor) {
+    var env = R[path] || {};
+    var has = !!(env.zh || env.en);
+    var label = fieldLabel("risks", path);
+    var head = '<text x="' + llN(x + 15) + '" y="' + llN(y + 20) + '" class="rf-card-k">' + esc(label) + "</text>";
+    var inner, titleTxt;
+    if (!has) {
+      inner = '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="' + w + '" height="' + h + '" rx="6" fill="none" stroke="var(--fg-faint)" stroke-dasharray="4 3"/>' +
+        head +
+        '<text x="' + llN(x + w / 2) + '" y="' + llN(y + h / 2 + 6) + '" text-anchor="middle" class="rf-empty">' + esc(t("未记录", "not recorded")) + "</text>" +
+        '<text x="' + llN(x + w / 2) + '" y="' + llN(y + h / 2 + 22) + '" text-anchor="middle" class="rf-empty-s">' + esc(t("真实数据缺口", "genuine data gap")) + "</text>";
+      titleTxt = label + " · " + t("此维度暂无记录（真实数据缺口）", "no note recorded (genuine data gap)");
+    } else {
+      var conf = env.confidence || "low";
+      var edgeOp = conf === "high" ? 1 : conf === "medium" ? 0.6 : 0.3;
+      var cc = rfConfColor(conf);
+      var text = dv(env) || env.zh || "";
+      var maxLines = Math.max(3, Math.min(5, Math.floor((h - 66) / 14)));
+      var lines = rfWrap(text, w, maxLines);
+      var tint = conf === "low"
+        ? '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="' + w + '" height="' + h + '" rx="6" fill="url(#rf-hatch)"/>'
+        : "";
+      var confTxt = rfConfWord(conf) + (conf === "low" ? t("　·　未附官方来源", "  ·  no official source") : "");
+      inner = '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="' + w + '" height="' + h + '" rx="6" fill="var(--bg-hover)" stroke="var(--border-strong)"/>' +
+        tint +
+        '<rect x="' + llN(x) + '" y="' + llN(y) + '" width="4" height="' + h + '" rx="2" fill="' + laneColor + '" opacity="' + edgeOp + '"/>' +
+        head +
+        rfFlag(x + 20, y + 40, conf, cc) +
+        '<text x="' + llN(x + 38) + '" y="' + llN(y + 40) + '" class="rf-conf" fill="' + cc + '">' + esc(confTxt) + "</text>" +
+        lines.map(function (ln, i) {
+          return '<text x="' + llN(x + 15) + '" y="' + llN(y + 60 + i * 14) + '" class="rf-card-v">' + esc(ln) + "</text>";
+        }).join("");
+      titleTxt = label + " · " + rfConfWord(conf) + " — " + (text.length > 220 ? text.slice(0, 220) + "…" : text);
+    }
+    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
+      '" data-chapter="risks">' + "<title>" + esc(titleTxt) + "</title>" + inner + "</g>";
+  }
+  function rfLaneLabel(x, y, main, sub) {
+    return '<text x="' + (x - 16) + '" y="' + llN(y) + '" text-anchor="end" class="rf-lane-l">' + esc(t(main.zh, main.en)) + "</text>" +
+      '<text x="' + (x - 16) + '" y="' + llN(y + 13) + '" text-anchor="end" class="rf-lane-s">' + esc(t(sub.zh, sub.en)) + "</text>";
+  }
+  function rfFlagChip(conf, color) {
+    return '<svg class="rf-lg-flag" width="15" height="17" viewBox="-2 0 17 17" aria-hidden="true">' + rfFlag(2, 14, conf, color) + "</svg>";
+  }
+  function rfLegend() {
+    return '<div class="td-legend rf-legend">' +
+      '<span>' + rfFlagChip("high", "var(--accent)") + t("有据可查（规则 / 案例 + 逐字引用）", "documented (rule / case + verbatim quote)") + "</span>" +
+      '<span>' + rfFlagChip("medium", "var(--warn)") + t("综合判断", "assessed") + "</span>" +
+      '<span>' + rfFlagChip("low", "var(--fg-faint)") + t("定性背景 · 无官方来源", "qualitative · no official source") + "</span>" +
+      '<span><i class="rm-lg-dash"></i>' + t("未记录（真实数据缺口）", "not recorded (genuine data gap)") + "</span>" +
+      '<span><i class="rm-lg-key" style="background:var(--info)"></i>' + t("交易层面", "trading-level") + "</span>" +
+      '<span><i class="rm-lg-key" style="background:var(--warn)"></i>' + t("制度 · 地缘 · 执法", "institutional") + "</span>" +
+      "</div>";
+  }
+  // 常驻「这不是风险评分」声明（ADR-066 轴 4）——写进模块、不是脚注
+  function rfDisclaimer() {
+    return '<div class="rf-disclaimer">' + t(
+      '<strong>这张图给的是什么。</strong>各市场<strong>已写进规则、或已经发生</strong>的风险信号——在途的制度变更、已执行的制裁与暂停、公开在案的执法个案——每条都标清楚取证程度。' +
+      '<span class="rf-hard">这不是风险评分，也不给市场排名。</span>' +
+      '执行风险、真实市场冲击、流动性深度与买卖价差动态只能靠小额实盘暴露，不在本图、也不在本项目覆盖范围（见 CLAUDE.md 覆盖边界与 <code>ADR-020</code> / <code>ADR-042</code>）。' +
+      '旗标填充度描述的是<em>我们的取证程度</em>，不是市场风险高低。',
+      '<strong>What this shows.</strong> Risk signals each market has <strong>written into its rules or already acted on</strong> — regulatory changes in flight, sanctions and suspensions carried out, enforcement cases on the public record — each with an explicit note on how well it is sourced. ' +
+      '<span class="rf-hard">This is not a risk score, and it does not rank markets.</span> ' +
+      'Execution risk, true market impact, liquidity depth and bid–ask dynamics can only be revealed by small live trades and are outside this view — and outside the project (see the coverage boundary in CLAUDE.md and <code>ADR-020</code> / <code>ADR-042</code>). ' +
+      'The flag fill describes <em>our sourcing</em>, not the market’s riskiness.') + "</div>";
+  }
+  function rfProse() {
+    return '<div class="td-prose">' + t(
+      '本视图把第十二章《风险与特殊考量》五个字段压进一屏固定槽位（见 ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-066</a>）。' +
+      '两条泳道 = 交易员接触陌生市场要问的两层：交易层面（流动性有多集中、汇率制度是什么）、制度 · 地缘 · 执法（正在改什么规则、被制裁 / 冻结过没有、谁在盯操纵）。' +
+      '槽位固定：同一字段在 20 家交易所位于同一位置，「换所即对比」。本章五个字段全为分析性散文、无 spec 层——' +
+      '这类字段结构性停留在 <code>confidence: low/medium</code>（宪法覆盖边界 / [ADR-020] 点 4：没有官方文件会写「本国流动性风险是 X」），' +
+      '所以本图把「取证程度」做成一等视觉信号（旗标填充度），不藏进脚注。' +
+      '<strong>虚线框 = 数据真缺口</strong>，卡内为按卡裁剪的片段，点任意卡片看全文、原文引用与出处。' +
+      '规则以各交易所官方发布为准，不构成投资建议。',
+      'This view condenses the five fields of Chapter 12 (“Risks &amp; Special Considerations”) into one fixed-slot canvas (see ' +
+      '<a href="https://github.com/HRLoveFun/exchange-atlas/blob/main/PROJECT/DECISIONS.md" target="_blank" rel="noopener noreferrer">ADR-066</a>). ' +
+      'The two lanes are the two layers a trader asks about a new market: trading-level (how concentrated liquidity is, what the FX regime is) and institutional / geopolitical / enforcement (what rules are changing, any sanctions or freezes, who polices manipulation). ' +
+      'Slots are fixed, so the same field sits in the same place across all twenty exchanges. All five fields are analytical prose with no spec layer — ' +
+      'they structurally stay at <code>confidence: low/medium</code> (coverage boundary in CLAUDE.md / ADR-020 point 4: no official document states “this country’s liquidity risk is X”), ' +
+      'so this view makes “how well sourced” a first-class visual signal (flag fill) rather than a footnote. ' +
+      '<strong>A dashed box is a genuine data gap</strong>; card text is a clipped fragment, so click any card for the full text, verbatim quote and sources. ' +
+      'Rules are as officially published by each exchange; nothing here is investment advice.') + "</div>";
+  }
+  function rfBuild(id, data) {
+    var R = (data.chapters && data.chapters.risks) || {};
+    var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
+    var W = 1180, PL = 150, PR = 44, CW = W - PL - PR; // 986
+    var g = [];
+    g.push('<defs><pattern id="rf-hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">' +
+      '<line x1="0" y1="0" x2="0" y2="7" stroke="var(--fg-faint)" stroke-width="1" opacity="0.16"/></pattern></defs>');
+    g.push('<text x="18" y="26" class="rf-title">' + esc(exName) + esc(t(" · 风险旗标", " · Risk Flags")) + "</text>");
+    g.push('<text x="18" y="42" class="rf-sub">' +
+      esc(t("正在改什么规则 · 制裁过没有 · 流动性多集中 · 谁在盯操纵", "rules changing · sanctions on record · how concentrated · who polices")) + "</text>");
+
+    var rowA = { top: 70, h: 126 };
+    var rowB = { top: 230, h: 150 };
+    var w2 = (CW - 30) / 2;
+    var w3 = (CW - 48) / 3;
+    var laneA = RF_FIELDS.filter(function (f) { return f.lane === 1; });
+    var laneB = RF_FIELDS.filter(function (f) { return f.lane === 2; });
+
+    g.push(rfLaneLabel(PL, rowA.top + 20, { zh: "交易层面", en: "Trading-level" }, { zh: "流动性 · 汇率", en: "liquidity · FX" }));
+    laneA.forEach(function (f, i) { g.push(rfCard(id, R, f.path, PL + i * (w2 + 30), rowA.top, w2, rowA.h, "var(--info)")); });
+
+    g.push(rfLaneLabel(PL, rowB.top + 20, { zh: "制度 · 地缘 · 执法", en: "Institutional" }, { zh: "在途变更 · 制裁 · 监管", en: "change · sanctions · policing" }));
+    laneB.forEach(function (f, i) { g.push(rfCard(id, R, f.path, PL + i * (w3 + 24), rowB.top, w3, rowB.h, "var(--warn)")); });
+
+    var H = rowB.top + rowB.h + 30;
+    g.push('<text x="18" y="' + llN(H - 10) + '" class="rf-scale">' +
+      esc(t("尺度 = 一座市场当下的风险姿态（非时间轴，不与其他视图共用坐标）",
+        "scale = a market's standing risk posture (not a timeline; no shared axis with other views)")) + "</text>");
+
+    var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + " " + llN(H) + '" class="td-svg rf-svg" role="img" aria-label="' +
+      esc(exName) + esc(t(" 风险旗标", " risk flags")) + '">' + g.join("") + "</svg></div>";
+    return rfLegend() + svg + rfDisclaimer() + rfProse();
+  }
+  function renderRiskFlags(app, params) {
+    var list = cache.manifest.exchanges;
+    var id = rfResolveId(params);
+    var toolbar = '<div class="view-toolbar">' +
+      '<label for="rfExchange">市场 Market</label>' +
+      '<select id="rfExchange" data-role="rf-exchange">' +
+      list.map(function (e) {
+        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
+      }).join("") + "</select>" +
+      '<span class="td-tb-note">' + t("第十二章 5 字段固定槽位：流动性 · 汇率 · 制度变革 · 政治地缘 · 执法 —— 旗标填充度 = 取证程度、非风险评分；点卡片看全文与出处",
+        "Chapter 12, 5 fixed slots: liquidity · FX · regulatory change · geopolitical · enforcement — flag fill = how well sourced, not a risk score; click a card for full text and sources") + "</span>" +
+      "</div>";
+    app.innerHTML = toolbar + '<div class="loading">' + t("加载风险旗标中…", "Loading risk flags…") + "</div>";
+    return loadExchange(id).then(function (data) {
+      var cur = parseHash();
+      if ((cur.view && cur.view !== "risk-flags") || rfResolveId(cur) !== id) return;
+      app.innerHTML = toolbar + rfBuild(id, data);
+    }).catch(function (e) {
+      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
+    });
+  }
+
+  // ══════════════════════════════════════════════
   // 出处浮层
   // ══════════════════════════════════════════════
   function openCellOverlay(exchangeId, fieldPath, chapterId) {
@@ -2624,6 +2827,7 @@
     else if (view === "listing-lifecycle") renderListingLifecycle(app, params);
     else if (view === "regulation-map") renderRegulationMap(app, params);
     else if (view === "participant-map") renderParticipantMap(app, params);
+    else if (view === "risk-flags") renderRiskFlags(app, params);
     else renderTradingDay(app, params);
   }
 
@@ -2691,6 +2895,8 @@
       setHash({ view: "regulation-map", id: e.target.value });
     } else if (role === "pt-exchange") {
       setHash({ view: "participant-map", id: e.target.value });
+    } else if (role === "rf-exchange") {
+      setHash({ view: "risk-flags", id: e.target.value });
     }
   });
   document.addEventListener("keydown", function (e) {
