@@ -32,9 +32,9 @@
 
 ### 最近完成（滚动窗口，只留最近 3 条；更早的见三节）
 
+- **2026-09-04 · 并行 worktree 防失序 · 四道护栏**（[ADR-069]，横切条目，PR #64）— §一 编号/窗口不变式 + 全库冲突标记扫描 + `ROADMAP-INBOX.md` 让 §一 变单写者（`CLAUDE.md §八` 改写）+ `ADR-LEDGER.md` 编号台账 + `GIT-RUNBOOK.md` 后台 PR 串行合并纪律；`selfcheck` 24→43，`data/`+`docs/` 零 diff。
 - **2026-09-04 · 数据空缺复核轨任务二 · 横切 8 高频字段批量回填清零**（[ADR-068]）— `odd_lot_handling`/`dark_pool`/`board_lot_size`/`price_limits.other_boards`/`block_trade`/`connect_schemes`/`intraday_reversal`/`holidays_note` 结构性空缺清零；全库已填字段 1,900→1,918；`de-eurex` 5 字段首次真实字段级 `not_applicable`。⚠️ 触及约 74 字段、第二人独立复核待人工。
 - **2026-09-04 · 成本瀑布数据层长尾 · `type: none` 正面依据结构性补齐**（[ADR-067]）— 承接 [ADR-065]「剩」段，8 字段 / 7 家（`cn-szse regulatory_fees` 0.02‰、`cn` stamp_duty `side: sell`、`cn`/`de-eurex`/`za-jse`/`sg-sgx`/`au-asx` FTT·regulatory_fees `type: none`、`za-jse` IPL 0.0002%）；`health-summary` +2。
-- **2026-09-04 · 参与者图 Participant Map · 设计 + 数据层 + 渲染层三棒做齐**（[ADR-064]，Phase 3 第六棒）— 第九章 6 字段三层「参与者截面」；`renderParticipantMap` + 顶层 tab（8→9）+ 路由键 `participant-map`；纯散文零 spec、前端三文件、`docs/data/` 零 diff。
 
 ---
 
