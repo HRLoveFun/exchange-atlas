@@ -30,7 +30,7 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 | `PROJECT/ROADMAP.md` | 进度状态 | 为什么这么排 → `DECISIONS.md` |
 | `PROJECT/ROADMAP-INBOX.md` | 并行会话给 ROADMAP §一 的一次性完成便签（折叠进 §一 后即删，[ADR-069]） | 事实本体 → `ROADMAP.md` §三详版 |
 | `PROJECT/DECISIONS.md` | **为什么这么定** | 是什么 → 各自权威文件 |
-| `PROJECT/ADR-LEDGER.md` | ADR 编号被谁占了（开工写 ADR 前先登记，[ADR-069]） | 每条 ADR 的内容 → `DECISIONS.md` |
+| `PROJECT/ADR-LEDGER.md` | ADR 编号被谁占了（占位符 + 合并时定号，[ADR-076]） | 每条 ADR 的内容 → `DECISIONS.md` |
 | `PROJECT/OPEN-QUESTIONS.md` | 尚未解决的疑问 | 已解决的 → 删除该条目（转 `data/` + 一条 ADR） |
 | `PROJECT/GLOSSARY.md` | ⚠️ 由 `schema/glossary.yml` 生成，**不要手改** | — |
 | `PROJECT/GIT-RUNBOOK.md` | 后台任务 PR / worktree 清理的操作顺序（踩坑记录） | 推送原则（默认推 main 等）→ `CLAUDE.md` §六 |
@@ -122,7 +122,7 @@ PROJECT/      进度、决策、悬案、资料来源、Git runbook
 | 发生了什么 | 就去写 | 写成什么样 |
 |---|---|---|
 | 阶段/波次/某交易所批次跑完，或验收（抽检）出了结果 | `PROJECT/ROADMAP.md` §三详版条目打勾 **+ §一 走 `ROADMAP-INBOX.md`**（见下方「ROADMAP 回写」） | 带日期，写清楚结果（几/几家、抽检通过率），别只写"完成" |
-| 做了一个会影响后续做法的选择——哪怕当时觉得是小事 | `PROJECT/DECISIONS.md` 新增一条 ADR（**编号先在 `PROJECT/ADR-LEDGER.md` 登记**，[ADR-069]） | 写决策 + 理由，"是什么"留给权威文件，这里不重复 |
+| 做了一个会影响后续做法的选择——哪怕当时觉得是小事 | `PROJECT/DECISIONS.md` 新增一条 ADR（**标题先写占位符 `ADR-PENDING-<slug>`，合并前跑 `make assign-adr` 定号**，见 `PROJECT/ADR-LEDGER.md`） | 写决策 + 理由，"是什么"留给权威文件，这里不重复 |
 | 抓取/核实中踩的坑或摸出的通用经验（反爬方式、页面结构、来源查证技巧） | `PROJECT/SOURCES.md` | 写清楚现象 + 应对方式，下次能直接照抄，不必重新试错 |
 | `add-exchange` 执行步骤本身暴露的教训（某步骤该加检查、某类字段易错） | `.claude/skills/add-exchange/SKILL.md` | 改步骤本身或加一条提醒，别只在 ROADMAP 里提一句就算了 |
 | 查证中发现但当次没解决的疑问 | `PROJECT/OPEN-QUESTIONS.md` | 具体到交易所 + 字段，别写成模糊待办 |

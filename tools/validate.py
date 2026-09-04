@@ -40,10 +40,15 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
   15. OTP 来源登记格式（[ADR-075]）：SOURCES.md 里含 `[OTP]` 标记的登记行必须恰好 2 个
       URL（GenerateOTP 端点 + 数据端点，见 tools/fetch.py 文首），否则 fetch.py 抓取时
       才会 sys.exit——挪到 make check 提前拦，别等抓取现场才发现登记写错了
+  16. ADR 占位符定号（[ADR-076]）：`ADR-PENDING-<slug>` 占位符
+      出现在 main 上直接 fail（合并前必须先跑 `tools/assign_adr_number.py` 定号）；
+      出现在其他分支上只警告——占位符本就是分支未合并前的正常中间态，见
+      `PROJECT/ADR-LEDGER.md`
 """
 import datetime
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 from urllib.parse import urlparse
@@ -77,6 +82,11 @@ CONFLICT_MARKER_RE = re.compile(r"^(?:<{7}|\|{7}|>{7}) ", re.M)
 # 之后逐条 `- ADR-069 · ...`。见 [ADR-069]。
 LEDGER_RANGE_RE = re.compile(r"ADR-(\d{3})\s*(?:…|\.\.\.|—|~)\s*ADR-(\d{3})")
 LEDGER_SINGLE_RE = re.compile(r"^-\s*ADR-(\d{3})\b")
+# ADR-PENDING-<slug> 占位符（[ADR-076]）：分支开工时不再预支
+# 具体数字号（那样几条并行分支几乎必撞，PR69-72 一批连撞四次），改用占位符，合并前
+# 由 tools/assign_adr_number.py 按 main 当前台账定号。main 上残留即错；分支上只是
+# 未合并前的正常中间态，只警告不挡该分支自己的 make build。
+PENDING_ADR_RE = re.compile(r"ADR-PENDING-[A-Za-z0-9][A-Za-z0-9_-]*")
 SOURCES_DOMAIN_RE = re.compile(r"^-\s+`([a-z0-9.\-]+\.[a-z]{2,})`", re.M)
 # 域名行含「官方/监管/第三方」标签的形式：- `domain`（可选括注） | 标签 | 语言 | ...
 # 部分"补充登记"行只有域名没有后续管道分隔，靠上面的 SOURCES_DOMAIN_RE 收录、
@@ -191,6 +201,13 @@ def roadmap_recent_violations(recent_block, limit=ROADMAP_RECENT_MAX):
         return [f"ROADMAP §一「最近完成」有 {n} 条，超出滚动窗口上限 {limit}"
                 f"（CLAUDE.md §八：只留最近 3 条，更早的见三节；见 [ADR-069]）"]
     return []
+
+
+def pending_adr_placeholder_violations(text):
+    """文本里残留的 ADR-PENDING-<slug> 占位符（去重排序，空=合法）。纯函数、无 I/O，
+    selfcheck 喂合成输入。main 上出现是硬错误，feature 分支上出现只警告——分支/main
+    的区分由调用方（validate_no_pending_adr_placeholders）做，见 [ADR-076]。"""
+    return sorted(set(PENDING_ADR_RE.findall(text)))
 
 
 def adr_ledger_violations(decisions_nums, ledger_text):
@@ -775,6 +792,38 @@ def validate_adr_ledger():
         err(v)
 
 
+def _current_git_branch():
+    """当前分支名；取不到（非 git 环境/detached HEAD）时返回 None，调用方按「未知」从严处理。"""
+    try:
+        out = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                              cwd=ROOT, capture_output=True, text=True, timeout=5)
+        return out.stdout.strip() if out.returncode == 0 else None
+    except (OSError, subprocess.SubprocessError):
+        return None
+
+
+def validate_no_pending_adr_placeholders():
+    """main 上不得残留 `ADR-PENDING-*` 占位符（合并前必须先跑
+    `tools/assign_adr_number.py` 定号）；其他分支上允许存在，只给警告——占位符正是
+    分支未合并前的正常中间态，见 [ADR-076]。"""
+    on_main = _current_git_branch() in ("main", None)  # 取不到分支名时从严按 main 处理
+    exts = (".md", ".yml", ".yaml", ".py", ".js", ".css", ".json", ".txt", ".html")
+    for p in ROOT.rglob("*"):
+        if p.suffix not in exts or under_skip_dir(p):
+            continue
+        try:
+            text = p.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        placeholders = pending_adr_placeholder_violations(text)
+        if not placeholders:
+            continue
+        msg = (f"{p.relative_to(ROOT)}: 残留 ADR 编号占位符 {placeholders}"
+               f"（合并前先跑 `python tools/assign_adr_number.py` 定号，见"
+               f" [ADR-076]）")
+        (err if on_main else warn)(msg)
+
+
 def validate_roadmap_section_one():
     """ROADMAP §一「下一步」编号连续无重复 + 「最近完成」不超滚动窗口（[ADR-069]）。"""
     path = PROJECT_DIR / "ROADMAP.md"
@@ -865,6 +914,7 @@ def main():
     validate_path_references()
     validate_adr_anchors()
     validate_adr_ledger()
+    validate_no_pending_adr_placeholders()
     validate_roadmap_section_one()
     validate_no_conflict_markers()
     validate_otp_sources()

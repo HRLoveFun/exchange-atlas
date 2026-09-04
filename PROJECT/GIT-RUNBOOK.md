@@ -25,6 +25,22 @@ gh pr merge <n> --squash --delete-branch
 git pull --ff-only && make build             # gh 在删分支失败时会跳过本地 main 的同步，合并后自己补一次；build 红则停（见下）
 ```
 
+## 合并前先给占位符 ADR 定号（[ADR-076]）
+
+某条后台 PR 的 `DECISIONS.md` 里如果带着 `### ADR-PENDING-<slug>` 占位符（并行分支不再预支具体数字号的新纪律，见 `PROJECT/ADR-LEDGER.md`），**在 `gh pr merge` 之前**先在该分支上跑一次定号：
+
+```bash
+cd .claude/worktrees/<name>       # 或该分支已签出的任意目录
+git pull --ff-only                # 确保台账是 main 最新状态，定号才准
+make assign-adr                   # 把占位符改写成台账下一个真实编号 + 全库替换引用
+git status -s                     # 确认只改了 DECISIONS.md / ADR-LEDGER.md 及被引用的文件
+git add -A
+git commit -m "编号定案：ADR-PENDING-<slug> → ADR-0NN（assign_adr_number.py）"
+git push
+```
+
+再按下面「一次只合一个后台 PR」的正常步骤 `gh pr merge`。**多个待合并 PR 都带占位符时仍要逐条串行处理**——定号、合并、`make build` 绿了，再处理下一个的定号，不要一次性给所有分支批量定号（那样又回到「预支」竞态，见 [ADR-076]）。
+
 ## 一次只合一个后台 PR，合完必 `make build`（[ADR-069]）
 
 后台 PR 分支拉出时对 `main` 是绿的，但两条并行分支的改动**合并时**可能语义冲突而 git 不报——`ROADMAP.md` §一 重号、生成块块内重复表头、`DECISIONS.md` ADR 撞号（2026-09-04 PR #61/#62 就是这样把 `main` 的 `make check` 合红的，PR #63 收拾）。后台 PR 走的是网页 / `gh` 直接 merge，没有 CI 卡点，合并动作本身不验证。所以：
@@ -43,6 +59,6 @@ git pull --ff-only && make build             # gh 在删分支失败时会跳过
 ## 相关历史
 
 - 并行 worktree 防失序的四道护栏（§一 单写者 + ADR 台账 + 生成块 + 本节的串行合并纪律），见 `DECISIONS.md` [ADR-069]。
-- 并行分支 ADR 编号撞号、已推送提交不能 rebase（改用 `merge origin/main`）的处理，见 `DECISIONS.md` [ADR-029]（编号预支的根治见 [ADR-069] 的 `ADR-LEDGER.md`）。
+- 并行分支 ADR 编号撞号、已推送提交不能 rebase（改用 `merge origin/main`）的处理，见 `DECISIONS.md` [ADR-029]（编号预支的第一版根治见 [ADR-069] 的 `ADR-LEDGER.md`；批量并行下该版仍会撞，占位符 + 合并时定号的第二版见 [ADR-076]）。
 - `isolation: "worktree"` 在「因限额中断后经 SendMessage 恢复」路径上多次失效的证据，见 [ADR-021] / [ADR-027] / [ADR-031]。
 - `.cache/` 被误提交为符号链接导致 `git pull` 静默抹掉本地来源快照，见 [ADR-044]。
