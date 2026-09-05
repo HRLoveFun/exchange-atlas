@@ -61,3 +61,5 @@
   - Stamp duty and tax | Australia | Global Private M&A Guide: https://resourcehub.bakermckenzie.com/en/resources/global-private-ma-guide-limited/asia-pacific/australia/topics/agreeing-the-acquisition-agreement/stamp-duty-and-tax
   - ASX 24 Trading Calendar（衍生品市场专属日历页：假日交易时段政策表——Day Session Closed / Night Session Normal Trading Hours 等）: https://www.asx.com.au/markets/market-resources/asx-24-trading-calendar（HTTP 200，静态可抓）
   - T24 Trading Calendar 2026 全年逐日 PDF（假日当日日盘/夜盘安排与到期/行权时刻）: https://www.asx.com.au/content/dam/asx/markets/market-resources/t24-trading-calendars/T24-trading-calendar2026.pdf（HTTP 200，任务三棒 4 新增）
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Australia/Sydney 的 UTC 偏移与夏令时规则
+  - tzdb「australasia」zone 文件（`Zone Australia/Sydney` + NSW 夏令时 Rule）: https://data.iana.org/time-zones/tzdb/australasia（HTTP 200，35KB）

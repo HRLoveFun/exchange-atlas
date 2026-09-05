@@ -15,24 +15,36 @@
       "timezone": {
         "zh": "Australia/Sydney (AEST UTC+10 / AEDT UTC+11)",
         "en": "Australia/Sydney (AEST UTC+10 / AEDT UTC+11)",
-        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "IANA tz database「australasia」zone 文件（Australia/Sydney：AEST UTC+10 / AEDT UTC+11 及夏令时切换规则）",
+            "url": "https://data.iana.org/time-zones/tzdb/australasia",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "dst_rule": {
         "zh": "实行夏令时（新南威尔士州随全国东部大部分州10月至次年4月使用AEDT）",
         "en": "Observes daylight saving time (New South Wales, with most of eastern Australia, uses AEDT from October to the following April)",
-        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "IANA tz database「australasia」zone 文件（Australia/Sydney 的 NSW 夏令时 Rule：10 月首个周日切 AEDT、4 月首个周日回 AEST）",
+            "url": "https://data.iana.org/time-zones/tzdb/australasia",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "founded_year": {
         "zh": "1987年4月1日（澳大利亚联邦议会立法批准，六个州级交易所合并组建Australian Stock Exchange Limited）；最早可追溯渊源为1871年悉尼证券交易所（Sydney Stock Exchange）成立",
@@ -165,24 +177,36 @@
       "trading_currency": {
         "zh": "澳元",
         "en": "AUD",
-        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "ASX Operating Rules Procedures（成交单据须载明「the consideration in Australian dollars」——现货市场以澳元交收对价）",
+            "url": "https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_procedures.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "settlement_currency": {
         "zh": "澳元",
         "en": "AUD",
-        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "ASX Operating Rules Procedures（对价以澳元计）与 ASX Clear/ASX Settlement 费用表（全部费用以澳元计收——现金市场清算结算在澳元口径下运行的综合判断，medium）",
+            "url": "https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_procedures.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "regulation": {
