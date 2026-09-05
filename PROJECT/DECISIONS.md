@@ -2149,3 +2149,27 @@
 **验证：** `make build` 全绿（validate 20 家 0/0、verify_quotes OK=1088/FAIL=0）；4 个 PDF 的 .txt 伴随补齐后 `verify_quotes` 口径与独立复核一致。
 
 **日期：** 2026-09-05
+
+---
+
+### ADR-PENDING-solo-automation-pipeline — 自动合并流水线：CI build 检查 + auto-merge + ADR 定号 post-merge healer，§四"人工抽检"改"独立视角复核"
+
+**背景：** 单人维护仓库的开发者反馈现有流程三处摩擦让人疲于应付：① 后台任务留下的 PR 需要人手动点 merge（[CLAUDE.md] §六已经承认"走 PR 只是多一次手动点 merge，没有额外价值"，但没人去把这多余的一步真正拿掉）；② 合并前跑 `make assign-adr` 定号（[ADR-076]）虽然只是机械操作，仍要协调者记得手动跑一遍；③ 并行 worktree 批量开工时 PR 反复冲突，2026-09-04/05 那次 ADR 编号连撞四次（PR69-72）就是最直接的例子。用户明确要求"高度自动化摆脱人工干预"，并同意把 [CLAUDE.md] §四"人工抽检"/"第二人独立复核"的措辞改为不强制要求真人（[ADR-074] 已经用 4 个独立 agent 视角顶替真人复核、96.2% 达标，验证了这条路可行）。
+
+**定了什么：**
+
+1. **`.github/workflows/pr-build.yml`**：`pull_request` 触发，跑 `make build`（`pip install -r tools/requirements.txt` 后）。这是唯一的必需检查，PR 自身分支上 `ADR-PENDING-*` 占位符只警告不报错（`validate.py` 既有逻辑，[ADR-076]），不需要额外处理就能绿。
+2. **`.github/workflows/adr-heal.yml`**：`push: main` 触发，`concurrency: group: main-adr-heal, cancel-in-progress: false`——利用 GitHub Actions 对同一 concurrency group 的多次触发天然排队串行执行这一原生机制，复刻 [ADR-076] 依赖的"合并本身是串行的"前提，不需要自己写互斥锁。每次跑：`git checkout -B main` 确保不是 detached HEAD（否则 `assign_adr_number.py` 的 `current_branch()` 会把台账登记行的分支名写成字面 `HEAD`）→ `make assign-adr` → 有变更就以 `github-actions[bot]` 身份直接 commit + push 回 `main`（commit message 带 `[skip ci]` 避免自己触发的 push 又重跑一轮）→ 收尾跑一次 `make build` 复核仍绿。**取代原来"合并协调者手动跑 `make assign-adr` 再 commit"的人工步骤**（`PROJECT/GIT-RUNBOOK.md` 原有的手动步骤降级为 CI 故障时的兜底，未删除）。
+3. **后台任务开 PR 时自带 `gh pr merge --auto --squash --subject "..." --body ""`**（不传 `--delete-branch`——仓库级 `deleteBranchOnMerge` 已经是 `true`，远端分支合并后服务端自动删，不需要 CLI 再删一次；这也顺带避免了 `PROJECT/GIT-RUNBOOK.md` 记录的"本地分支正被 worktree 检出导致删分支报错"那个坑——因为正常路径下已经没有人在本地跑带 `--delete-branch` 的合并命令了）。仓库已确认 `allow_auto_merge: true`（`gh api repos/{owner}/{repo}` 现测），不需要额外开启。
+4. **`CLAUDE.md` §四措辞修订**：「人工抽检」→「抽检」+ 显式允许「独立视角——可以是人，也可以是另一个未共享上下文的全新 agent 会话（不是 fork）」；「第二人独立复核」→「独立视角复核」。量化门槛（95% 阈值、`quote` 反查、>30 字段触发独立复核）一字未改，只改"谁来复核"这一处的字面要求。
+5. **`CLAUDE.md` §六 / `PROJECT/GIT-RUNBOOK.md` 同步更新**，把"后台任务留 PR 需要人工 merge"的旧描述改为"正常路径全自动，CI 报红或真实内容冲突才需要人工兜底"，旧的手动合并/手动定号步骤保留作为兜底流程，不删除。
+
+**没做：**
+
+- **没有开 GitHub 原生 Merge Queue。** 这能进一步解决"多个后台 PR 密集自动合并、后一个的 CI 检查没有针对合并后的最新 main 重新验证"这一残余风险（`PROJECT/GIT-RUNBOOK.md` 已记录此局限），但需要仓库开 branch protection + 把 `build` 设为 required check，涉及仓库级安全设置变更，本条不擅自用 `gh api` 改；留给用户在 GitHub 网页 Settings → Rules 里手动开，本条只探明并记录了这个可选后续项，不是本条范围。
+- **没有把"抽检者可以是独立 agent"这件事再往前推成一个正式的可复用 skill/操作模板**（比如"怎么给独立 agent 布置盲审任务、只给交易所 id + 字段清单、不告诉它已填答案"）——[ADR-074] 已经有一次实践先例，但把它写成可直接照抄的模板是另一件事，本条只改了措辞允许这么做，模板留待下次真正触发 >30 字段复核时顺手补，或单独立项。
+- **没有改变 ADR 编号台账（`PROJECT/ADR-LEDGER.md`）的运作方式本身**——post-merge healer 只是把 [ADR-076] 已经定好的"分配延后到合并进 main 这一刻"这条规则从"人工在分支上跑"进一步自动化成"CI 在 main 上跑"，序列化的原理不变（合并本身串行 → 定号也就串行），只是把执行者从人换成 workflow。
+
+**验证：** 本条自身就是这条流水线的第一个真实用例——`DECISIONS.md` 标题写占位符 `ADR-PENDING-solo-automation-pipeline`，`CLAUDE.md`/`PROJECT/GIT-RUNBOOK.md` 里的交叉引用也写同一占位符；PR 开出后带 `gh pr merge --auto --squash`，`pr-build.yml` 跑绿后由 GitHub 服务端自动合并，合并进 main 后 `adr-heal.yml` 应该自动把本条占位符定号为下面这个真实编号——本条末尾若能看到具体数字而不是 `ADR-PENDING-solo-automation-pipeline`，说明整条流水线（CI 检查 → auto-merge → post-merge 定号）端到端跑通了。人工验证记录：`gh repo view`/`gh api` 现测 `allow_auto_merge: true`、`deleteBranchOnMerge: true`；本地 `make build` 全绿（占位符在本分支上只警告，不阻断）。
+
+**日期：** 2026-09-05
