@@ -886,8 +886,8 @@ market_structure:
     circuit_breaker:
       enum: index_level
       spec: {type: index_level, reference: [{index: "S&P 500", exchange: self}], note: "MWCB 为跨市场联合计划（与现货顶层 circuit_breaker 同一机制、同一阈值体系）；MWCB 暂停触发时期权市场暂停相应期权交易；期权市场无自设指数熔断"}
-      zh: "期权市场跟随跨市场全市场熔断（MWCB，基于标普500指数跌幅的统一阈值体系，见顶层 circuit_breaker）：当 MWCB 交易暂停触发时，Nasdaq 各期权市场将暂停相应期权交易；暂停期间保留全部未成交订单、清除做市商挂出报价，并可接受新订单与撤单"
-      en: "The options markets follow the cross-market Market-Wide Circuit Breaker (MWCB, the same joint plan and threshold framework as the top-level cash-equity circuit_breaker): when an MWCB trading halt has been initiated, Nasdaq options markets halt trading in the corresponding options; during the halt all open orders are kept, standing market maker quotes are purged, and new orders, quotes and cancels are accepted"
+      zh: "期权市场跟随跨市场全市场熔断（MWCB，以标普500指数跌幅为触发依据的统一阈值体系，见顶层 circuit_breaker）：当 MWCB 交易暂停触发时，Nasdaq 各期权市场将暂停相应期权交易；暂停期间保留全部未成交订单、清除做市商挂出报价，并可接受新订单与撤单"
+      en: "The options markets follow the cross-market Market-Wide Circuit Breaker (MWCB, triggered by declines in the S&P 500 index — the same joint plan and threshold framework as the top-level cash-equity circuit_breaker): when an MWCB trading halt has been initiated, Nasdaq options markets halt trading in the corresponding options; during the halt all open orders are kept, standing market maker quotes are purged, and new orders, quotes and cancels are accepted"
       sources:
         - title: "Market-Wide Circuit Breakers FAQ（PDF，Nasdaq 期权市场一节）"
           url: https://www.nasdaqtrader.com/content/marketregulation/mwcb_faq.pdf
@@ -895,6 +895,7 @@ market_structure:
       quote: |
         A: Yes. Nasdaq options markets will halt trading in options when an MWCB trading halt has been initiated.
         ／ Yes. All 6 Nasdaq options markets will keep all open orders during the halt. Firms have the ability to cancel open orders.
+        ／ Level 1 halt (7% decline in S&P 500 index)
       confidence: high
       verified: 2026-09-05
 
@@ -960,8 +961,8 @@ market_structure:
       verified: 2026-09-05
 
     margin_practice_note:
-      zh: "交易端保证金：NOM 规则要求参与者/关联人遵守 CBOE 或 NYSE 二者之一的初始与维持保证金要求（以向 Nasdaq Regulation 提交书面通知选定为准）——即美国期权市场通行的 OCC 最低保证金体系在交易端的落地，由交易所对会员执行；清算端 CCP 的保证金方法论（STANS）见 clearing.derivatives（与本字段视角不同，不合并，见 [ADR-030]）"
-      en: "Trading-side margin: NOM rules require a Participant or associated person to be bound by the initial and maintenance margin requirements of either the CBOE or the NYSE (elected by written notice to Nasdaq Regulation) — i.e. the exchange enforces the industry-standard OCC minimum margin framework at the member level; the clearing-side CCP margin methodology (STANS) is described in clearing.derivatives (a different perspective, not merged, see ADR-030)"
+      zh: "交易端保证金：NOM 规则要求参与者/关联人遵守 CBOE 或 NYSE 二者之一的初始与维持保证金要求（以向 Nasdaq Regulation 提交书面通知选定为准）——即美国期权市场通行的 OCC 最低保证金体系在交易端的落地，由交易所对会员执行；清算端 CCP 的保证金方法论（STANS）见 clearing.derivatives（与本字段视角不同，不合并，见 PROJECT/DECISIONS.md 对应 ADR）"
+      en: "Trading-side margin: NOM rules require a Participant or associated person to be bound by the initial and maintenance margin requirements of either the CBOE or the NYSE (elected by written notice to Nasdaq Regulation) — i.e. the exchange enforces the industry-standard OCC minimum margin framework at the member level; the clearing-side CCP margin methodology (STANS) is described in clearing.derivatives (a different perspective, not merged, see the corresponding ADR in PROJECT/DECISIONS.md)"
       sources:
         - title: "Nasdaq Stock Market Rules — NOM Options 13, Sec. 3（Margin Requirements，NASDAQ OPTIONS RULES PDF）"
           url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
@@ -1368,7 +1369,7 @@ clearing:
 
     delivery_method:
       enum: physical
-      zh: "实物交割为主：NOM 规则将 underlying security 定义为清算机构（即 OCC）在期权有效行权时有义务卖出（认购）或买入（认沽）的证券——个股/ETF 期权行权以交付/受领标的证券完成；指数期权为特例，按 A.M./P.M. 结晒口径以现金结算（结算价值按行权日或行权日前最后交易日的收盘指数值、或成分股开盘价计算）"
+      zh: "实物交割为主：NOM 规则将 underlying security 定义为清算机构（即 OCC）在期权有效行权时有义务卖出（认购）或买入（认沽）的证券——个股/ETF 期权行权以交付/受领标的证券完成；指数期权为特例，按 A.M./P.M. 结算口径以现金结算（结算价值按行权日或行权日前最后交易日的收盘指数值、或成分股开盘价计算）"
       en: "Physical delivery as the default: NOM rules define the underlying security as the security the Clearing Corporation (OCC) is obligated to sell (call) or purchase (put) upon valid exercise — equity/ETF options settle by delivery of the underlying; index options are the exception, settled in cash on an A.M./P.M.-settled basis (settlement value from the closing index value on the exercise day or the last trading day before exercise, or from component opening prices)"
       detail: "enum physical 系对规则结构的归纳：个股/ETF 期权的行权义务以「交付标的证券」表述（quote 第 64 条定义），A.M./P.M. 现金结算仅出现在指数期权定义（第 65 条）——与 cn-szse.delivery_method 的处理一致。"
       sources:
