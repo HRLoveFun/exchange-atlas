@@ -2419,15 +2419,21 @@
     },
     "risks": {
       "fx_risk_note": {
-        "zh": "印度卢比非完全自由兑换货币，资本项目存在一定管制，实行有管理浮动汇率制度；对境外投资者而言汇率波动构成额外风险层——本次未找到官方原文逐条核实具体管制细则，以上为一般性认知，未采纳为高置信度断言",
-        "en": "The Indian Rupee is not fully convertible; capital account transactions are subject to certain controls under a managed float regime. FX volatility is an additional risk layer for foreign investors — the above is general market knowledge, not verified against detailed official source text this session, hence not asserted at high confidence",
-        "confidence": "low",
-        "verified": "2026-08-27",
+        "zh": "印度卢比汇率由市场决定；印度储备银行（RBI）对外汇市场的干预仅以平抑过度与破坏性波动为目的，不针对汇率设定任何具体水平或区间目标——此为印度长期汇率政策（RBI 行长货币政策声明，见 sources）。对非卢比投资者：以卢比计价的资产在兑换回本币时承担汇率风险；卢比的资本项目可兑换程度与汇兑管制属资金进出议题，见 capital_controls",
+        "en": "The Indian rupee's exchange rate is market-determined; the Reserve Bank of India (RBI) intervenes in the foreign exchange market only to smoothen excessive and disruptive volatility, without targeting any specific level or band — a long-standing policy (RBI Governor's Statement, see sources). For non-rupee investors: exchange-rate risk on rupee-denominated assets arises on conversion back to the investor's currency; capital-account convertibility and exchange controls are covered in capital_controls",
+        "quote": "let me reiterate that our exchange rate policy remains unchanged. Specifically, intervention in the foreign exchange market is aimed at smoothening excessive and disruptive volatility without targeting any specific level or band for the exchange rate. This is consistent with our long-standing policy of the exchange rates being market-determined.",
+        "sources": [
+          {
+            "title": "Monetary Policy Statement, 2026-27 – Governor's Statement: April 08, 2026（RBI 官网新闻稿 PDF，prid=62515；汇率制度定性表述见第 18 段）",
+            "url": "https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR37F51ECB4682364FFBB7BC60382CE58007.PDF",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "political_risk_note": {
         "zh": "印度为议会制民主国家、政体总体稳定，对外资持相对开放态度；政治风险主要体现为政策/监管变动（如 2026 年预算上调 STT、2025 年修订退市条例）与偶发地缘政治外溢，而非政权更迭类风险。属定性评估，medium",
