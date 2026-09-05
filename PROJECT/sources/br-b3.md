@@ -1,4 +1,6 @@
 # B3 – Brasil, Bolsa, Balcão `br-b3`
+- `bcb.gov.br` | 官方（货币当局——巴西中央银行 BCB；2026-09-05 新增登记，[ADR-079] 风险旗标子棒） | en / pt-BR | ⚠️ 直连 curl 只能拿到 React 应用壳（2.8KB），正文 JS 渲染；经 r.jina.ai 渲染代理取得全文（缓存为 .md） | 雷亚尔汇率制度（fx_risk_note 出处）
+  - Foreign exchange policy（BCB 官方外汇政策页：浮动汇率制 + 与通胀目标制一致不为决定汇率水平而干预 + 遏制过度波动的工具）: https://www.bcb.gov.br/en/financialstability/fxpolicy（HTTP 200，渲染后 43KB）
 - `b3.com.br` | 官方 | pt-BR / en（官网原文是葡萄牙语，`en_us` 路径下有官方英文版，覆盖面广，多数规则/交易机制/非居民投资者页面均有对应英文版；本节 source_lang 取 en，见下方说明） | curl + 常规 UA 全部 200，未见反爬（全程无延时也未被拦，比 english.sse.com.cn/JPX 好抓得多）；PDF 用 `pdftotext -layout` 提取 | ⚠️ B3 官网英文版**没有**看到类似 SSE/JPX 那种"译本仅供参考，以原文为准"的免责声明（本次抓取页面未发现此类文字），但取源规则仍按 ADR-013："有可核实的官方中文原文就填 zh，没有就填 en"——B3 官网无中文版，故 source_lang: en，把英文版当溯源锚点，不因为找不到 zh 就退回葡萄牙语原文（葡萄牙语不是 zh/en 二选一之外的第三态，见 taxonomy.yml source_lang 字段说明）。B3 是巴西唯一的证券交易所，由 2017 年 BM&FBOVESPA 与 Cetip 合并而成（`name_native` 用此说明）；集团层面 B3 本身即为最终控股主体（B3 S.A.自身在自己的 Novo Mercado 板块挂牌，代码 B3SA3），未发现类似 NYSE Group/JPX Group 那样同集团下辖多个独立注册交易所法人实体的结构，故不设 `group_id`
   - 首页: https://www.b3.com.br/en_us/（HTTP 200）
   - 历史沿革（投资者关系站 History 页）: https://ri.b3.com.br/en/b3/history/（HTTP 200）
