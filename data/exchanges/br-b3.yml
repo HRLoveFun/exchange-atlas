@@ -809,12 +809,12 @@ market_structure:
             halt_minutes: 30
             day_end: false
           - threshold_pct: 15
-            halt_minutes: 60
+            halt_minutes: null
             day_end: false
           - threshold_pct: 20
             halt_minutes: null
             day_end: false
-        note: "与顶层同一套 Ibovespa 熔断，规程原文明文覆盖衍生品（全市场暂停含资产/衍生品/私募固收）；第三档暂停时长由 B3 自行决定并公告"
+        note: "与顶层同一套 Ibovespa 熔断，规程原文明文覆盖衍生品（全市场暂停含资产/衍生品/私募固收）；15% 档暂停 1 小时（原文 one hour，分钟换算值不进 spec）、20% 档暂停时长由 B3 自行决定并公告，两档均记 null"
       zh: "与顶层市场熔断机制（见market_structure.circuit_breaker）为同一套以Ibovespa跌幅触发的机制，规程原文明确写明覆盖范围包含衍生品：跌10%时全市场（含资产、衍生品与私募固定收益工具）暂停交易30分钟；恢复后再跌15%暂停1小时；恢复后再跌20%由B3自行决定暂停时长并公告"
       en: "The same Ibovespa-decline-triggered circuit breaker described at the top level (see market_structure.circuit_breaker) explicitly covers derivatives per the rulebook text: a 10% decline halts all trading (assets, derivatives and private fixed-income instruments) for 30 minutes; upon resumption, a 15% decline halts trading for 1 hour; upon resumption, a 20% decline lets B3 determine and announce the suspension period"
       sources:
