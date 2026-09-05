@@ -1342,10 +1342,10 @@ risks:
     verified: 2026-09-05
 
   political_risk_note:
-    zh: "瑞士为永久中立国，政治体制长期稳定、机构健全、法治与财产权保护强，传统上被视为低政治风险国家；联邦制与直接民主带来政策可预期性，交易所运营与监管框架受此稳定环境支撑，政治中断风险低。主要可观察变量为与欧盟的监管等效性博弈（见regulatory_change_risk_note），属外部政策风险而非国内政治失稳。"
-    en: "Switzerland is a permanently neutral state with a long-stable political system, strong institutions, rule of law and property-rights protection, traditionally viewed as a low political-risk country; federalism and direct democracy lend policy predictability, and exchange operations and the regulatory framework are underpinned by this stability, with low political-disruption risk. The main observable variable is the EU equivalence dynamic (see regulatory_change_risk_note), an external policy risk rather than domestic political instability."
-    detail: "政治稳定为公认国别事实；本字段为定性判断，confidence标low，未附单一权威原文逐条核实，建议后续补一权威国别风险来源（见OPEN-QUESTIONS）。"
-    quote: ""
+    zh: ""
+    confidence: low
+    detail: "原条为无官方来源的分析性内容（永久中立国/直接民主/低政治风险等定性），依 [ADR-079] 制度核/分析尾二分与铁律清空。瑞士官方政治体制一手原文未能落地：admin.ch 与 eda.admin.ch（联邦政治体制页）对常规 UA 返回 Access Denied（Akamai），ch.ch 为 JS 壳、静态抓取无正文；已记入 OPEN-QUESTIONS，待人工提供瑞士联邦宪法或联邦官方政治体制页原文后按制度核口径回填。"
+    en: ""
     sources:
       - title: "The Swiss Confederation – official portal (admin.ch)"
         url: https://www.admin.ch
