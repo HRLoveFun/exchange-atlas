@@ -3932,6 +3932,21 @@
     },
     {
       "exchange_id": "hk-hkex",
+      "chapter": "listing",
+      "group": "listing_delisting",
+      "field_path": "delisting_conditions",
+      "label_zh": "退市条件",
+      "label_en": "Delisting Conditions",
+      "zh": "主板除牌条件（第6章）：上市是持续附条件安排——联交所在为保障投资者或维持有序市场而认为有必要时，可随时指示停牌或暂停买卖，或取消任何证券的上市（6.01，列举情形包括公众持股量不足等）；已连续停牌 18 个月的证券，联交所可取消其上市（6.01A）；发行人自愿撤回上市须有替代上市安排或经股东批准（6.12）",
+      "en": "Main Board delisting conditions (Chapter 6): listing is always granted subject to the condition that where the Exchange considers it necessary for the protection of the investor or the maintenance of an orderly market, it may at any time direct a trading halt or suspend dealings or cancel the listing of any securities (6.01, including insufficient public float); the Exchange may cancel the listing of securities suspended for a continuous period of 18 months (6.01A); voluntary withdrawal requires an alternative listing or shareholder approval (6.12)",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": false,
+      "verified": "2026-08-12",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "hk-hkex",
       "chapter": "clearing",
       "group": "clearing_settlement",
       "field_path": "settlement_cycle",
@@ -4662,6 +4677,21 @@
       "enum": "disclosure_with_discretion",
       "enum_ref": "review_system",
       "has_detail": true,
+      "verified": "2026-08-24",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "listing",
+      "group": "listing_delisting",
+      "field_path": "delisting_conditions",
+      "label_zh": "退市条件",
+      "label_en": "Delisting Conditions",
+      "zh": "退市标准（三板块通用，《有价证券上市规程》Rule 601 第1项第1–20号，官方概要页）：触及持续上市标准（股东数、成交量、市值、净资产等）原则上经 1 年宽限（成交量为 6 个月）后退市——触及后 3 个月内须提交达标改善计划；有价证券报告书迟延提交、内部管理体系失效、反社会势力关联等情形亦构成退市事由",
+      "en": "Delisting criteria (common to all market segments — Securities Listing Regulations Rule 601, Paragraph 1, Items 1 through 20, per JPX's official outline): failure to meet the Continued Listing Criteria (shareholders, trading volume, market cap, net assets, etc.) leads to delisting after a one-year grace period (six months for trading volume) in principle, with an improvement plan due within three months; delay in filing securities reports, breakdown of internal management systems, anti-social-forces involvement and other grounds also trigger delisting",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": false,
       "verified": "2026-08-24",
       "confidence": "high"
     },
