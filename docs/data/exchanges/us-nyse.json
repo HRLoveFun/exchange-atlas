@@ -1605,15 +1605,26 @@
     },
     "costs": {
       "commission_structure": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "美国经纪商佣金由市场自行竞争定价（多数券商已对散户零佣金），交易所规则本身不规定经纪商向客户收取的佣金——与上交所交易规则里出现佣金相关条款的模式不同，这本身是一个有意思的对比点，但本次未找到NYSE/SEC对此的专门表述，留空不硬凑。",
+        "zh": "NYSE 不向投资者统一规定佣金：经纪佣金由会员券商自主定价——1975-05-01『五月日』（May Day）起交易所固定佣金制废止、费率全面竞争化/协商化（SEC 官方一手叙述，见 quote）；NYSE 自身向会员收取的是交易费与流动性返佣（maker-taker，见 exchange_fees 与官方费率表），与经纪佣金分属两类成本",
+        "en": "NYSE does not set investor commissions: brokerage commissions are set by member firms — the exchange's fixed commission regime was abolished on 1 May 1975 ('May Day'), with rates fully competitive/negotiable (per the SEC's official account); NYSE itself charges its members transaction fees and liquidity rebates (maker-taker, see exchange_fees and the official price list), a separate cost category from brokerage commissions",
+        "detail": "原留空记录中的方向性判断（美国经纪佣金由市场竞争定价、多数券商已对散户零佣金）本次以 SEC 1975 年官方一手文件坐实『固定佣金制废止』这一制度节点；『多数券商零佣金』属市场现状描述，未见官方统计，维持不作为主要论断。",
+        "sources": [
+          {
+            "title": "Brokerage Commissions and Research After May Day（SEC 委员 Loomis 演讲 PDF，1975-06-03，固定佣金废止/竞争费率的一手官方叙述；OCR 全大写、标点为 `~`，摘引照抄）",
+            "url": "https://www.sec.gov/news/speech/1975/060375loomis.pdf",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "New York Stock Exchange Price List 2026（官网费率表，NYSE 面向会员的交易费/返佣结构，佐证『交易所收费≠经纪佣金』）",
+            "url": "https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSE_Price_List.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "FOR SEVERAL MONTHS NOW THE SECURITIES INDUSTRY HAS BEEN LOOKING FORWARD WITH VERY MIXED EMOTIONS TO THE DAWN OF MAy DAY AND COMPETITIVE RATES. Now MAy DAY rlAS COME AND GONE BUT THE CONSEQUENCES ARE STILL NOT ENTIRELY CLEA ... BECAUSE IT WAS ABLE TO UNDERCUT THE FIXED COMMISSION.",
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "exchange_fees": {
         "spec": {
@@ -1700,15 +1711,21 @@
         "enum": null
       },
       "stamp_duty": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：美国联邦层面无证券交易印花税——与上交所0.05%单边、港交所0.1%双边形成对比的重要字段，但本次未找到可引用的官方来源确认，留空不凭常识填写（该字段volatility: volatile，按铁律必须有sources才能填，本次没有）。",
+        "zh": "无联邦证券交易印花税：美国税制中不存在针对证券交易的印花税税种；证券交易环节的联邦税收历史沿革（1914–1966 联邦股票转让税 STT 及现行 SEC 小额规费）见 financial_transaction_tax 字段，二者为同一来源、同一判据",
+        "en": "No federal stamp duty on securities transactions: the U.S. tax system has no stamp-duty instrument applying to securities trades; the federal transaction-tax history (the 1914–1966 stock transfer tax and the current small SEC-related fees) is covered under the financial_transaction_tax field, which uses the same source and judgment basis",
+        "detail": "原留空记录中的『与上交所 0.05% 单边、港交所 0.1% 双边对比』仍成立且已在相应交易所字段坐实；美国联邦层面对交易征税的正面依据与 financial_transaction_tax 共用 CRS RL32266。州层面（如纽约州历史上）的转让税本次未单独核实，不写入 zh。",
+        "sources": [
+          {
+            "title": "Transaction Tax: General Overview（CRS Report RL32266，everycrsreport.com 镜像托管；与 financial_transaction_tax 同一来源）",
+            "url": "https://www.everycrsreport.com/reports/RL32266.html",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "No major industrialized nation has adopted a broad-based transaction tax. At the federal level one of the historical examples of a transaction tax was a stock transfer tax (STT) effective from 1914 to 1966.",
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "financial_transaction_tax": {
         "spec": {
@@ -1731,43 +1748,55 @@
         "enum": null
       },
       "capital_gains_tax": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "美国资本利得税制度复杂（联邦+州、长短期税率不同），未在本次会话深入核实，留空。",
-        "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
-      },
-      "dividend_withholding_tax": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：对外国投资者股息预扣税默认30%，可按税收协定降低——未附来源，留空。",
-        "verified": "2026-08-13",
-        "en": null,
-        "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
-      },
-      "implicit_costs_note": {
-        "zh": "隐性成本（买卖价差、冲击成本）未在本次会话找到可摘引的官方原文——曾尝试抓取NYSE官网一份'市场质量信息图'PDF，但该链接实际返回的是网页壳层而非PDF内容（属已知的'HTTP 200但非目标内容'情形），未采纳第三方检索摘要中关于价差数值的说法；exchange_fees字段中的做市商-吃单者费率结构（maker-taker）与隐性成本存在间接关联（返佣设计本身是为激励报价方收窄价差），但不能替代对实际价差/冲击成本的直接测度",
-        "en": "No citable primary text on implicit costs (bid-ask spread, market impact) was found this session — an attempt to fetch a NYSE \"Market Quality\" infographic PDF instead resolved to an HTML page shell (a known \"HTTP 200 but not the target content\" pattern), so third-party search-summary claims about specific spread figures were not adopted; the maker-taker rebate structure described under exchange_fees is indirectly related (rebates are designed to incentivize quoting that narrows spreads) but is not a substitute for a direct measure of realized spread or market impact",
-        "detail": "留作后续补全线索：可尝试NYSE Data Insights栏目（如'credit-to-those-in-the-arena-enhanced-quoted-spread'一类文章）或SEC市场结构统计页面，本次未展开抓取核实。",
+        "zh": "长期资本利得（持有超过一年）按 0%/15%/20% 三档优惠税率计征；短期（持有一年及以内）利得按普通所得税率计征：2025 纳税年度，单身应税所得不超过 48,350 美元适用 0% 档、48,350–533,400 美元适用 15% 档，超过 15% 档门槛的部分适用 20%（本字段为联邦口径，州所得税另计，未逐州核实）",
+        "en": "Long-term capital gains (held over one year) are taxed at preferential rates of 0%/15%/20%; short-term gains (held one year or less) are taxed as ordinary income: for taxable years beginning in 2025, the 0% rate applies to single filers with taxable income up to 48,350 USD and the 15% rate between 48,350 and 533,400 USD, with the 20% rate above the 15% thresholds (federal basis; state income taxes not verified per-state)",
         "sources": [
           {
-            "title": "NYSE Market Quality infographic（官网PDF直链，本次实测已失效，返回HTML壳层而非PDF内容，见detail）",
-            "url": "https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSE_Market_Quality_infographic.pdf",
-            "accessed": "2026-08-24"
+            "title": "Topic 409, Capital Gains and Losses（IRS 官方主题页，长期三档税率、2025 年度门槛与短期/长期分类）",
+            "url": "https://www.irs.gov/taxtopics/tc409",
+            "accessed": "2026-09-05"
           }
         ],
-        "confidence": "low",
+        "quote": "For taxable years beginning in 2025, the tax rate on most net capital gain is no higher than 15% for most individuals. A capital gains rate of 0% applies if your taxable income is less than or equal to: $48,350 for single and married filing separately ... A capital gains rate of 15% applies if your taxable income is: more than $48,350 but less than or equal to $533,400 for single ... However, a capital gains rate of 20% applies to the extent that your taxable income exceeds the thresholds set for the 15% capital gain rate. ... Generally, if you hold the asset for more than one year before you dispose of it, your capital gain or loss is long-term. If you hold it one year or less, your capital gain or loss is short-term.",
+        "confidence": "high",
         "verified": "2026-08-13",
         "enum": null,
         "spec": null,
-        "quote": null
+        "detail": null
+      },
+      "dividend_withholding_tax": {
+        "zh": "非居民外国人（NRA）取得美国来源股息等固定/可确定的年度或定期所得（FDAP），按 30% 固定税率预扣（适用税收协定可降至更低税率），由支付方扣缴、不得就该类所得扣除费用",
+        "en": "Nonresident aliens receiving U.S.-source dividends and other fixed, determinable, annual or periodical (FDAP) income are subject to a flat 30 percent tax (lower treaty rates may apply), withheld by the payer, with no deductions allowed against such income",
+        "sources": [
+          {
+            "title": "Nonresident aliens（IRS 官方国际税收页，FDAP 所得 flat 30 percent 或更低协定税率）",
+            "url": "https://www.irs.gov/individuals/international-taxpayers/nonresident-aliens",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "If you are not engaged in a trade or business, the payment of U.S. source income that is fixed, determinable, annual, or periodical is taxed at a flat 30 percent (or lower treaty rate) and no deductions are allowed against such income.",
+        "confidence": "high",
+        "verified": "2026-08-13",
+        "enum": null,
+        "spec": null,
+        "detail": null
+      },
+      "implicit_costs_note": {
+        "zh": "美国现货股票的主要隐性成本为买卖价差与市场冲击。可引用的官方口径（SEC 市场结构演讲）：最大市值股票的报价价差长期钉在最小报价单位 1 美分上，包含中小盘股票在内的整体价差接近历史低位；同时 SEC 同文记录了针对 maker-taker 返佣与订单流付费（PFOF）安排是否构成利益冲突、损害投资者最佳执行权的官方争论——返佣结构本身（见 exchange_fees）与价差形成直接相关。实际价差/冲击成本的逐标的直接测度官方不发布，本字段按覆盖边界停留在分析性描述",
+        "en": "The main implicit costs in U.S. cash equities are bid-ask spreads and market impact. Citable official account (SEC market structure speech): quoted bid-ask spreads for the largest stocks remain pegged at the minimum tick of one cent, and overall spreads, including those for smaller stocks, are near historic lows; the same speech records the official debate over whether maker-taker rebates and payment for order flow (PFOF) create conflicts of interest that undermine best execution — the rebate structure itself (see exchange_fees) bears directly on spread formation. Per-instrument realized spread/impact figures are not officially published, so this note remains analytical per the project's coverage boundary",
+        "detail": "由 low 升级：找到 SEC 官方一手演讲（.cache 已落盘）提供可摘引的价差与市场结构争论表述；数字（1 美分、历史低位）为演讲引用的定性口径，非逐笔实测。原 low 记录中『NYSE Market Quality infographic 链接失效』的教训保留在 git 历史，不再重复。",
+        "sources": [
+          {
+            "title": "U.S. Equity Market Structure: Making Our Markets Work Better for Investors（SEC 官方演讲稿，价差水平与 maker-taker/PFOF 争论的官方叙述）",
+            "url": "https://www.sec.gov/newsroom/speeches-statements/us-equity-market-structure",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "Quoted bid-ask spreads for the largest stocks remain pegged at the minimum level of one cent, [5] and overall spreads, including those for smaller stocks, are near historic lows. ... incentives like the maker-taker pricing model [30] and payment for order flow arrangements [31] pose irreconcilable conflicts of interest for broker-dealers that deprive investors of their right to best execution.",
+        "confidence": "medium",
+        "verified": "2026-08-13",
+        "enum": null,
+        "spec": null
       }
     },
     "risks": {

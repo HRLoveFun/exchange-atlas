@@ -72,3 +72,9 @@
   - 12 CFR Part 220（Regulation T，§220.12(a)「50 percent of the current market value」初始保证金条文）: https://www.ecfr.gov/current/title-12/chapter-II/subchapter-A/part-220（HTTP 200，300KB）
 - `finra.org`（沿用既有域名条目，Fair Access UA）2026-09-05 新增 URL：
   - FINRA Rule 4210（(c) Maintenance Margin：多头 25% / 卖空 $5 以上 30% 条文页）: https://www.finra.org/rules-guidance/rulebooks/finra-rules/4210（HTTP 200，需 Fair Access UA）
+
+- `irs.gov`（2026-09-05 新增登记，任务四族D：美国税收一手来源） | 官方（国税局） | en | curl 常规浏览器 UA 200，未见反爬 | 资本利得税率与非居民预扣税率的一手条文页
+  - Topic 409, Capital Gains and Losses（长期 0%/15%/20% 三档与 2025 纳税年度门槛、短期/长期分类）: https://www.irs.gov/taxtopics/tc409（HTTP 200，108KB）
+  - Nonresident aliens（FDAP 所得 flat 30 percent 或更低协定税率的官方表述）: https://www.irs.gov/individuals/international-taxpayers/nonresident-aliens（HTTP 200，117KB）
+- `sec.gov`（沿用既有域名条目，Fair Access UA）2026-09-05 新增 URL：
+  - Brokerage Commissions and Research After May Day（SEC 委员 Loomis 演讲 PDF，1975-06-03，May Day 竞争性佣金费率的一手官方叙述；OCR 全大写、标点为 `~`，摘引时照抄）: https://www.sec.gov/news/speech/1975/060375loomis.pdf（HTTP 200，PDF）
