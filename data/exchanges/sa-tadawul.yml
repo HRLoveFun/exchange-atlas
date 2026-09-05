@@ -726,9 +726,8 @@ market_structure:
         quote: "Daily Price Limits / 20 %"
         confidence: high
       other_boards:
-        zh: ""
-        confidence: low
-        detail: "本所衍生品市场目前仅 MT30 指数期货一条产品线（见 products 章节），无其他板块/品类可比较；官方规则文本预留了未来新增单一股票期货/期权（SSF/SSO）的框架，届时如涨跌幅参数不同需另行核实补充，不为凑填而假设。"
+        not_applicable: true
+        detail: "本所衍生品市场目前仅 MT30 指数期货一条产品线（见 products 章节），「其他合约/板块幅度」的设计前提不成立（[ADR-082] 裁定②合格样本：没有『其他』可比较）；官方规则文本预留了未来新增单一股票期货/期权（SSF/SSO）的框架——届时该字段前提成立，如涨跌幅参数与 MT30 不同需另行核实补充（时效性提示）。"
 
     circuit_breaker:
       enum: none
