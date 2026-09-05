@@ -1019,38 +1019,38 @@
         "spec": null
       },
       "listing_process_duration": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "官网确认申请分'保密资格审查+正式申请'两步，资格审查后14个工作日内回复，但完整流程总耗时未核实，留空。",
+        "zh": "NYSE 官方给出申请受理环节的明确时限：完成并提交申请后，NYSE 上市团队将在 14 个工作日内回复审核意见；申请获受理后由专责上市团队协助走完后续流程。完整端到端周期（含 SEC 注册、定价与挂牌）官方未给出统一数字，视项目复杂度而定",
+        "en": "NYSE publishes a concrete service-level for the application intake: once an application is completed and submitted, the NYSE listings team will respond within 14 business days; after acceptance a dedicated listings specialist assists through the remaining process. No official end-to-end duration (including SEC registration, pricing and listing) is published — it varies with project complexity",
+        "detail": "由留空升级：官网『listings-process』页的 14 个工作日回复时限为可摘引一手表述；此前记录的『保密资格审查+正式申请两步』结构保留为背景。",
         "sources": [
           {
-            "title": "Initial Listings（官网）",
-            "url": "https://www.nyse.com/regulation/initial-listings",
-            "accessed": "2026-08-13"
+            "title": "Listings Process（NYSE 官网，申请流程与 14 个工作日回复时限）",
+            "url": "https://www.nyse.com/listings-process",
+            "accessed": "2026-09-05"
           }
         ],
+        "quote": "Once you complete and submit your application, a member of our NYSE listings team will review your information and get back to you within 14 business days.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "transfer_between_boards": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "NYSE集团内部（如从NYSE American转至NYSE）转板机制未核实，留空。",
+        "zh": "NYSE 自身无内部分层板块，「转板」在美国语境下指交易所之间的上市转移（NYSE ↔ NYSE American ↔ Nasdaq 等）：机制上通过原交易所向 SEC 提交 Form 25（除牌申请，一般 10 天生效）与新交易所的上市程序衔接完成——NYSE 官方退市页给出的正是这一 Form 25 机制（见 quote），配合接收交易所的挂牌条件审核",
+        "en": "NYSE has no internal board tiers; 'board transfer' in the U.S. context means inter-exchange listing transfers (NYSE ↔ NYSE American ↔ Nasdaq): mechanically the transferring issuer's original exchange files a Form 25 with the SEC (effective generally 10 days) and the receiving exchange applies its own listing conditions — the Form 25 mechanism is documented on NYSE's official delistings page (see quote)",
+        "detail": "由留空升级：『转板=Form 25 除牌+新所上市』为基于官方退市页机制的表述；各接收交易所（Nasdaq/NYSE American）的具体转挂条件本次未逐一展开。",
         "sources": [
           {
-            "title": "Initial Listings（官网）",
-            "url": "https://www.nyse.com/regulation/initial-listings",
-            "accessed": "2026-08-13"
+            "title": "NYSE Regulation | Delistings（官网，Form 25 提交与一般 10 天生效的官方表述）",
+            "url": "https://www.nyse.com/regulation/delistings",
+            "accessed": "2026-09-05"
           }
         ],
+        "quote": "An issue is added to this list upon the Exchange's filing of a Form 25 with the SEC and remains posted until the application to delist the issue becomes effective with the SEC (generally 10 days).",
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "continuing_obligations": {
         "zh": "持续上市义务由Continued Listing团队监督执行，含定量、定性与及时信息披露要求",
@@ -1138,21 +1138,26 @@
         "spec": null
       },
       "post_delisting_venue": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：退市后通常转入OTC市场（粉单市场等）交易——未附来源，留空。",
+        "zh": "退市后股份一般转入场外（OTC）市场交易：SEC 官方投资者材料将 OTC 定位为交易所之外由券商网络构成的交易场所，退市/停牌股份在 OTC 恢复交易须符合 Rule 15c2-11 的审查要求（券商向 FINRA 提交 Form 211）；NYSE 官方退市页本身只覆盖 Form 25 除牌程序（见 transfer_between_boards quote），退市去向不在其规定范围",
+        "en": "Delisted shares generally move to over-the-counter (OTC) trading: SEC official investor materials describe OTC as trading outside exchanges over broker-dealer networks, and OTC quotation of a delisted/suspended stock requires compliance with Rule 15c2-11 review (a Form 211 filed with FINRA); NYSE's own delistings page covers only the Form 25 removal process (see transfer_between_boards quote) — post-delisting venues are outside its scope",
+        "detail": "原『草稿印象：退市后转入 OTC（粉单等）』以 SEC 官方材料坐实 OTC 市场属性与 Rule 15c2-11/Form 211 恢复交易要求；『粉单』为私营 OTC 平台分类，非监管机构表述，不写入 zh。",
         "sources": [
           {
-            "title": "Initial Listings（官网）",
-            "url": "https://www.nyse.com/regulation/initial-listings",
-            "accessed": "2026-08-13"
+            "title": "Over-the-Counter (OTC)（investor.gov 术语表，SEC 投资者教育与倡导办公室，OTC 市场官方定义）",
+            "url": "https://www.investor.gov/introduction-investing/investing-basics/glossary/over-the-counter-otc",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "Why would the SEC suspend trading in a stock?（SEC 投资者警示 PDF，OTC 股票恢复交易须符合 Rule 15c2-11 与 Form 211）",
+            "url": "https://www.sec.gov/investor/alerts/tradingsuspensions.pdf",
+            "accessed": "2026-09-05"
           }
         ],
+        "quote": "Before OTC stock quoting can resume after a ... in accordance with Exchange Act Rule 15c2-11 and FINRA Rule 6432.",
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       }
     },
     "indices": {

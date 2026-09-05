@@ -78,3 +78,4 @@
   - Nonresident aliens（FDAP 所得 flat 30 percent 或更低协定税率的官方表述）: https://www.irs.gov/individuals/international-taxpayers/nonresident-aliens（HTTP 200，117KB）
 - `sec.gov`（沿用既有域名条目，Fair Access UA）2026-09-05 新增 URL：
   - Brokerage Commissions and Research After May Day（SEC 委员 Loomis 演讲 PDF，1975-06-03，May Day 竞争性佣金费率的一手官方叙述；OCR 全大写、标点为 `~`，摘引时照抄）: https://www.sec.gov/news/speech/1975/060375loomis.pdf（HTTP 200，PDF）
+  - 2026-09-05 新增（任务四族C，沿用 `sec.gov` 既有域名条目）: Why would the SEC suspend trading in a stock?（投资者警示 PDF，退市/停牌后股份转 OTC 交易需符合 Rule 15c2-11 与 Form 211 的官方表述——post_delisting_venue 出处）: https://www.sec.gov/investor/alerts/tradingsuspensions.pdf（直连 403，经 wayback 回退抓取）
