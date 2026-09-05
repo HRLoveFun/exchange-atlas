@@ -12,9 +12,3 @@
 ---
 
 ## 待折叠
-
-- 2026-09-05 · 架构优化任务B完成：新增 `tools/data_files.py` 收敛4处 `data/exchanges/*.yml` 遍历样板，`make build` 全绿零 diff（[ADR-083]）
-- 2026-09-05 · 架构优化任务C完成：DECISIONS.md 归档阈值定案（超3500行触发），validate.py 加非阻断 warn（[ADR-084]）
-- 2026-09-05 · 架构优化任务A完成：app.js 七模块 clone-and-own 收敛为6个共享函数，新增 check_no_dup_render_helpers.py 挂 make check，Playwright 308组合零diff（[ADR-085]）
-- 2026-09-05 · 任务三五棒（C 桶 40 处）执行落地：18 填实 + 2 not_applicable + 20 留空（OQ 第30/31条），独立盲审初检 88.9% 订正后 18/18 PASS、零幻觉 · [ADR-086] · main
-- 2026-09-05 · adr-heal.yml 改走开分支+PR+auto-merge（不再直推main），修复branch protection拦截bot直推导致main两度变红的问题（[ADR-087]）

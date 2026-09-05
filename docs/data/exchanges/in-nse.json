@@ -1009,6 +1009,12 @@
       "derivatives": {
         "trading_sessions": {
           "pre_market": {
+            "spec": {
+              "start": "09:00",
+              "end": "09:15",
+              "kind": "opening_auction",
+              "note": "仅当月合约适用，到期前最后5个交易日扩至下月合约"
+            },
             "zh": "开盘前集合竞价（Pre-open session），09:00-09:15，采用call auction机制；仅适用于当月合约（个股期货与指数期货均适用），到期前最后5个交易日扩展至下月合约；如遇全市场指数熔断触发或系统中断导致停牌，复牌时也会启用一次开盘前集合竞价，具体时段另行公告",
             "en": "Pre-open session, 09:00-09:15, using a call auction mechanism; applies only to current-month futures contracts (both single-stock and index); extended to next-month contracts during the last 5 trading days before expiry. In case of an index-based market-wide circuit filter breach or a trading outage, the market also reopens with a pre-open session, with timing announced separately",
             "sources": [
@@ -1022,10 +1028,15 @@
             "confidence": "high",
             "verified": "2026-08-14",
             "enum": null,
-            "spec": null,
             "detail": null
           },
           "continuous_am": {
+            "spec": {
+              "start": "09:15",
+              "end": "15:40",
+              "kind": "continuous",
+              "note": "单一连续时段，无上午/下午分段"
+            },
             "zh": "股票/股指衍生品（Equity Derivatives）分部连续交易时段09:15起，与下午时段为同一连续时段，无独立上/下午划分（见 continuous_pm）",
             "en": "The Equity Derivatives segment's continuous trading begins at 09:15; not split into separate morning/afternoon sessions (see continuous_pm)",
             "sources": [
@@ -1039,10 +1050,12 @@
             "confidence": "high",
             "verified": "2026-08-14",
             "enum": null,
-            "spec": null,
             "detail": null
           },
           "lunch_break": {
+            "spec": {
+              "kind": "none"
+            },
             "zh": "无（连续交易09:15-15:40中间不设午休，与现货市场一致）",
             "en": "None (continuous trading 09:15-15:40 has no midday break, consistent with the cash market)",
             "confidence": "medium",
@@ -1055,11 +1068,14 @@
             ],
             "verified": "2026-08-14",
             "enum": null,
-            "spec": null,
             "detail": null,
             "quote": null
           },
           "continuous_pm": {
+            "spec": {
+              "kind": "none",
+              "note": "无上午/下午分段，连续时段见 continuous_am；交易修改截止 16:15 为会员端时点、非市场时段"
+            },
             "zh": "股票/股指衍生品（Normal Market）连续交易09:15-15:40；交易修改截止16:15；未见类似现货市场收盘集合竞价（CAS）的独立衍生品收盘机制说明，见 closing_mechanism",
             "en": "Equity Derivatives (Normal Market) continuous trading 09:15-15:40; trade modification cut-off 16:15; no dedicated derivatives closing-auction mechanism analogous to the cash market's CAS was found — see closing_mechanism",
             "sources": [
@@ -1073,10 +1089,13 @@
             "confidence": "high",
             "verified": "2026-08-14",
             "enum": null,
-            "spec": null,
             "detail": null
           },
           "after_market": {
+            "spec": {
+              "kind": "none",
+              "note": "Market Timings 页 Equity Derivatives 区块穷举无盘后条目（现货区块明列 Closing session）"
+            },
             "zh": "无盘后时段——官方 Market Timings 页的 Equity Derivatives 区块仅列 Normal Market Open（09:15）、Normal Market Close（15:40）与 Trade Modification End（16:15）三条，无盘后/收盘后交易时段（对照：现货区块明列 Closing session 15:40–16:00 与 Block Deal 时段，衍生品区块无对应条目）",
             "en": "No after-market session — the official Market Timings page's Equity Derivatives block lists only Normal Market Open (09:15), Normal Market Close (15:40) and Trade Modification End (16:15), with no post-close trading session (by contrast, the cash-equities block explicitly lists a Closing session 15:40–16:00 and Block Deal sessions, which the derivatives block lacks)",
             "sources": [
@@ -1090,10 +1109,13 @@
             "confidence": "medium",
             "detail": "棒 2「负面断言正面化」（[ADR-082]）：Market Timings 页对全部分部时段做穷举列示，Equity Derivatives 区块无盘后条目而现货区块明列 Closing session，据此以 medium 记「无盘后时段」的结构性推断（官方无「不设盘后」明文，不标 high）。",
             "verified": "2026-08-14",
-            "enum": null,
-            "spec": null
+            "enum": null
           },
           "night_session": {
+            "spec": {
+              "kind": "none",
+              "note": "股票/股指衍生品无夜盘；商品/货币衍生品延时时段属另一产品条线（见 contract_specs_note）"
+            },
             "zh": "股票/股指衍生品本身无夜盘；但同为衍生品业务线的商品衍生品（非农品种）时段可延至夜间23:30/23:55（跨美国夏令时调整），跨货币货币衍生品（EURUSD/GBPUSD/USDJPY交叉盘）收市时间也明显晚于股票/股指衍生品，具体见 contract_specs_note",
             "en": "No night session for equity/index derivatives themselves; but the commodity derivatives line (non-agri) extends to 23:30/23:55 (adjusted for US daylight-saving), and cross-currency derivatives (EURUSD/GBPUSD/USDJPY) close markedly later than equity derivatives — see contract_specs_note",
             "sources": [
@@ -1107,7 +1129,6 @@
             "confidence": "medium",
             "verified": "2026-08-14",
             "enum": null,
-            "spec": null,
             "detail": null
           }
         },

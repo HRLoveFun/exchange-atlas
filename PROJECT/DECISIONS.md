@@ -92,6 +92,7 @@
 - ADR-085 · 2026-09-05 · 前端可视化模块共享层抽取：收敛 clone-and-own
 - ADR-086 · 2026-09-05 · 任务三五棒执行落地：C 桶 40 处三态收口（18 填实 + 2 not_applicable + 20 留空）+ 独立复核订正
 - ADR-087 · 2026-09-05 · adr-heal.yml 改走「开分支 + PR + auto-merge」，不再直推 main（原占 ADR-086，撞已合并的 main 直推提交，按 ADR-029 协议让号）
+- ADR-088 · 2026-09-05 · `make check` 输出 stale 字段复核清单（数据空缺复核轨任务五③收尾）
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2447,5 +2448,22 @@ print('全库 medium 零 sources:',n)
 - **没有改 `pr-build.yml`**——它验证的对象（任意 PR 都要 `make build` 全绿）不变，healer 开的 PR 只是又走了一遍这条已有的检查，不需要为它单独开后门或例外。
 
 **验证：** 本条自身就是这条改造后流水线的第一个真实用例——本分支上手动跑 `make assign-adr` 把占位符定号为下面这个真实编号（沿用 [ADR-085] 落地时验证过的"合并前先在自己分支上定号"兜底做法，不依赖旧版 healer），本地 `make build` 全绿；YAML 语法（`yaml.safe_load`）与三段内嵌 shell 脚本（`bash -n`）均通过；`.github/workflows/adr-heal.yml` 合并进 main 后，下一次真正有 `ADR-PENDING-*` 占位符需要处理时（下一条 ADR 落地即是）会验证这条新流水线端到端跑通。
+
+**日期：** 2026-09-05
+
+### ADR-088 — `make check` 输出 stale 字段复核清单（数据空缺复核轨任务五③收尾）
+
+**背景：** [ADR-060] 任务五排了三件事，①②已由 [ADR-075] 完成，③「`make check` 在 stale 字段数 > 0 时输出清单（warning、不阻断）」当时判为独立小功能、单独排期（[ADR-075] 「不做 ③」）。[ADR-052] 把 `age_days`/`stale` 从 `freshness.json` 落盘物里拿掉、改由前端按访问日现算之后，**构建侧不再有任何一处把「哪些字段超期了」打印给人看**：前端健康度页要开浏览器才看得见，ROADMAP 的 health-summary 生成块只给按所汇总计数 + top5——复核者（尤其是数据子棒开工前的会话）没有一个命令能直接拿到逐字段超期清单。
+
+**定了什么：**
+
+1. `tools/validate.py` 新增纯函数 `stale_field_warnings(freshness_rows)`（校验项 19）：输入 `sync.compute_freshness()` 的行——`validate_generated_blocks` 为 health-summary 校验本来就要算一遍，改为顺路返回复用，不二次扫描 `data/`。stale 行分两组：**超期**（`verified` 存在且 `age_days` 超阈值，按超期天数降序）与**无法判定**（未记 `verified`，`compute_freshness` 对缺失/非法日期默认置 stale）。0 条时返回空列表、输出里什么都不出现。
+2. `main()` 把返回值 `extend` 进 `warnings`——warning 不阻断构建（exit 0），与任务五③「不阻断」的原始定义一致；每条消息带交易所 id / 字段中文名 / 字段路径 / 超期天数（或「未记 verified」）/ volatility，拿到清单即可直接开工逐字段复核。
+3. `tools/selfcheck.py` 补 9 条合成用例（78 → 87）：当前全库 stale 实算为 0（2026-09-05，2,007 个 freshness 行），函数所有分支真实数据都触发不到，行为全靠合成用例锁定——首个字段自然超期时 `make check` 会自动开始打印清单，无需再改代码。
+4. **[ADR-060] 留的评估题——「stale 复核节奏是否固化进 CLAUDE.md §八」：不固化。** §八管「发生了什么就写哪」，stale 复核是周期性巡检不是事件回写，写进宪法只会多一条无人触发的条款；`make check` 是每个改动会话交付前必跑的入口（[CLAUDE.md §四]），提醒挂在必然发生的动作上，可见性已由机器保证。节奏问题退化为「看到清单后什么时候排期」，属普通任务排序，不需要宪法条款示——本条即评估结论，宪法零改动。
+
+**为什么这样：** 挂在 `validate.py` 而不是新建脚本或 Makefile target，是因为 `make check` 是唯一每个会话都必跑的入口，独立命令没人会记得跑；超期/未记 verified 分组不混排，是因为两者处置成本差一个量级（重抓原文复核 vs 补个日期），混排会把机械活和田野活搅在一起。warning 而非 err，沿用任务五③原始定义——stale 是数据会老化的事实，不是本次改动引入的错误，拿它阻断构建会让任何人在字段自然老化后连 `make build` 都跑不过，反而逼迫绕过检查。
+
+**验证：** `make build` 全绿（selfcheck 87/87、validate 20 家 0/0/0 警告——当前 stale 为 0、输出静默符合预期、verify_quotes FAIL=0、生成块零 diff）；输出侧行为由 selfcheck 合成用例正负向锁定（零输出基线 / 超期内容 / 未记 verified 归类 / 排序 / 头部计数 / 不误伤 fresh 高龄行）。
 
 **日期：** 2026-09-05

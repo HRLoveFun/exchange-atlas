@@ -11889,8 +11889,20 @@
       "label_zh": "汇率风险",
       "label_en": "FX Risk",
       "volatility": "stable",
-      "verified": "2026-08-12",
-      "confidence": "low"
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "hk-hkex",
+      "chapter": "risks",
+      "chapter_label_zh": "风险与特殊考量",
+      "chapter_label_en": "Risks & Special Considerations",
+      "field_path": "political_risk_note",
+      "label_zh": "政治、地缘与制裁风险",
+      "label_en": "Political & Geopolitical Risk",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
     },
     {
       "exchange_id": "hk-hkex",

@@ -1,4 +1,7 @@
 # 香港交易及结算所 Hong Kong Exchanges and Clearing (HKEX) `hk-hkex`
+- `hkma.gov.hk` | 官方（货币当局——香港金融管理局 HKMA，联系汇率制度政策主体；2026-09-05 新增登记，[ADR-079] 风险旗标子棒） | en（另设繁/简版，同路径结构） | curl + 常规 UA 200，正文服务端渲染可直接 grep（导航文字占大头，按关键词定位） | 港元汇率制度（fx_risk_note 出处）；HKMA 对港交所履行货币发行局与金融稳定职能，是第十二章「交易层面」汇率风险泳道的制度锚
+  - Linked Exchange Rate System（联系汇率制度总览：1983-10-17 起实施、货币发行局制度、7.75–7.85 区间表述）: https://www.hkma.gov.hk/eng/key-functions/money/linked-exchange-rate-system（HTTP 200，82KB）
+  - How Does the LERS Work?（强方/弱方兑换保证机制细节：CU 7.75 卖出 / 7.85 买入港元、利率自动调节机制）: https://www.hkma.gov.hk/eng/key-functions/money/linked-exchange-rate-system/how-does-the-lers-work（HTTP 200，128KB）
 - `hkex.com.hk` | 官方 | zh-Hant / en（官方双语，逐页各有独立 URL，非同页切换） | curl + 常规 UA 全部 200，未见反爬 | Rulebook 站另有独立域名；不少栏目页（如上市规则总览、结算总览）正文夹在大量导航菜单文字里，抓到后要按关键词（而非直接取前 N 段）定位正文
   - Rulebook: https://en-rules.hkex.com.hk/（HTTP 200，170KB）
   - VCM（波动性中断机制）FAQ: https://www.hkex.com.hk/Global/Exchange/FAQ/Securities-Market/Trading/VCM?sc_lang=en（HTTP 200，405KB，含精确阈值 ±10%/±15%/±20%、5分钟冷静期）
@@ -97,6 +100,7 @@
   - 同上中文版（繁体，历史沿革官方答复中文原文——history 的 quote 出处；注意 zh 页 URL 参数为 `zh-HK`）: https://www.hkex.com.hk/Global/Exchange/FAQ/Getting-Started?sc_lang=zh-HK（HTTP 200）
 - `basiclaw.gov.hk`（2026-09-05 新增登记，任务四收尾第29条） | 官方（香港特别行政区《基本法》官方全文网站） | en（`/en/` 路径）/ zh-Hant（`/tc/` 路径） | curl 常规 UA 200，章节页服务端渲染、正文可 grep；OPEN-QUESTIONS 第29条此前记录的「章节直达 URL 404（站点改版）」已失效——改版后正确路径为 `/basiclaw/chapter5.html` | 用于 regulation.capital_controls（第112条外汇管制条文，中英文版本均有逐字原文）
   - 基本法第五章（经济）英文版全文页（Article 112: "No foreign exchange control policies shall be applied in the Hong Kong Special Administrative Region..."）: https://www.basiclaw.gov.hk/en/basiclaw/chapter5.html（HTTP 200，16KB）
+  - 基本法第一章英文版全文页（Article 5：资本主义制度和生活方式 50 年不变——political_risk_note 的制度锚，[ADR-079] 风险旗标子棒）: https://www.basiclaw.gov.hk/en/basiclaw/chapter1.html（HTTP 200，5KB）
   - 基本法第五章（經濟）中文版全文页: https://www.basiclaw.gov.hk/tc/basiclaw/chapter5.html（HTTP 200，12KB）
 - `state.gov`（2026-09-05 新增登记，任务四收尾第29条） | 第三方（美国政府官方出版物，对港/他国属第三方年度评估，confidence 封顶 medium） | en | ⚠️ 站点对本环境 Akamai 拦截：报告落地页为 JS 壳（curl 200 但正文仅 151 字符）、`wp-content` PDF 直连 403（浏览器 UA 同样 403）——fetch_sources 会自动走 wayback 回退，2025 香港 ICS PDF 快照已验证可用 | 用于 regulation.foreign_ownership_limit（「open foreign investment policy 的主要例外清单」官方评估表述）
   - 2025 Hong Kong Investment Climate Statement PDF（直连 403，经 wayback 快照 20260214215223 抓取，481KB）: https://www.state.gov/wp-content/uploads/2025/09/638719_2025-Hong-Kong-Investment-Climate-Statement.pdf

@@ -25,15 +25,15 @@
 1. **风险旗标 · 数据子棒**（[ADR-066] 分棒 ①）— **已估清，28 字段，待执行**（[ADR-079] 补记：用户 2026-09-05 拍板范围取 28、走第二人独立复核、定为 Phase 4 硬前置）。构成（按 09-05 现算重排）：`fx_risk_note` 20 家全扫（17 家 `low` 就地清 + 3 家 `medium` 复核，其中 `fr-euronext` 补字段级 `sources`）+ 补 3 处空 `political_risk_note`（`cn-sse`/`hk-hkex`/`tw-twse`）+ `enforcement_note` low 簇 3 处（`cn-sse`/`cn-szse` 空、`kr-krx` `low`）+ `ch-six`/`cn-szse` 的 `political_risk_note` `low` 就地清。**逐所落地清单（20 家 × 货币当局 / 域名 / 登记状态 / 候选入口 / 预期终态）见 [ADR-079] 补记第四节**——18 个候选域名（17 家货币当局 + `imf.org`）已登记仅 3 个（`mas.gov.sg` / `rbi.org.in` / `resbank.co.za`），登记域名是每家闭环的第一步。与 [ADR-060] 任务四并轨。风险旗标渲染层已落地（[ADR-066] 分棒 ②，2026-09-04）。
 2. **→ Phase 3 六个可视化模块做齐（硬前置）→ Phase 4 单页画布合并解锁**（[ADR-057]）— 成本瀑布 / 交割管线 / 上市生命周期 / 监管图 / 参与者图 / 风险旗标**六个模块渲染层均已落地**（[ADR-057] #4 按渲染层口径满足）；**只差上面风险旗标数据子棒，该子棒经用户 2026-09-05 拍板列为 Phase 4 启动硬前置**（[ADR-066] 文末的挂起已解除，见 [ADR-079] 补记）。合并画布整体布局形态 / 「更多」入口形态 / 各模块排序，Phase 4 启动时 Q&A 定。
 3. **已做齐模块的视觉迭代**（交互式会话，不阻断 Phase 4，与上并行）— 成本瀑布（[ADR-047]：单一费种远大于其余时左半留白 / 全零市场「合计 0.00 bp」/ 暗色「此侧不征」虚线偏弱 / 按股·定额费折算粗，佣金行降级+`rate_raw` 已由 [ADR-071] 落地）、交割管线（[ADR-051]：深色预防层偏淡 / T+1 现货所右半留白 / 违约瀑布 `resource` 短语无 `en`、英文态仍中文）、上市生命周期（[ADR-059]：散文无 spec 阶段块硬裁剪 / 停复牌 ↻ 偏淡 / 8 个时长 spec 语义忠实度待第二人复核 / 给更多所补时长 spec）、监管图（[ADR-061]：卡正文 ≤4 行硬裁剪 / 中英混排 Latin 词逐字折断 / 长文卡「先摘要后全文」）、参与者图（[ADR-064]：节点卡硬裁剪 / 同上 Latin 折断）、风险旗标（[ADR-066]：制度泳道 3 卡窄 + 长散文按卡 5 行硬裁剪 / 同上 Latin 折断 / `low` 卡左缘色条暗色下几乎不可见）。剖面机制核心面板右缘避让（[ADR-070]）与零轴刻度改标参考价名称（[ADR-073]）已落地。
-4. **数据空缺复核轨剩余**（横切，与上并行；[ADR-060]/[ADR-062]）— **任务三**（9 家衍生品子章 C 桶 40 处，穿插 viz）；**任务四**（5 家旗舰所深度 F 桶 78 处，`us-nyse`/`hk-hkex`/`uk-lse`/`cn-sse`/`jp-jpx`，执行方案已定案 [ADR-078]，建议 Phase 4 前完成、非硬前置）**78/78 全部回填完成**（2026-09-05 交互式会话收尾：剩 11 处逐处自检收口，`OPEN-QUESTIONS.md` 第29条已删除，残存微缺口见三节）。任务二第二人独立复核已完成（[ADR-074]，2026-09-05，79 处终态 96.2% 达标）；任务五 ①② 已完成（[ADR-075]，2026-09-05，`[OTP]` 抓取 + wayback 回退 + `za-jse` 缓存重建），③（`make check` stale 清单）未做、留独立排期，`kr-krx` 剩 8 处 low 待人工投喂。**新增独立棒（用户 2026-09-05 拍板立项，[ADR-079] 补记 / `OPEN-QUESTIONS.md` 第 28 条）：`volatility: stable` 且 `confidence: medium` 却零 `sources` 的全库 64 处**——头部为 `overview.timezone` 16 / `settlement_currency` 16 / `dst_rule` 14 / `trading_currency` 5 / `regulation.clearing_regulator` 5；不从风险旗标数据子棒扩张（该子棒只在第 12 章加限定不变式），独立排期，与上面③同批或先于③做均可。另有已收口的成本瀑布残差（[ADR-065]）/ 长尾（[ADR-067]）遗留移交项：`kr-krx exchange_fees` 当期档位（KRX 数据端点对数据中心 IP 封锁，[ADR-075] 已探明，仍需人工投喂）、`us` Section 31 FY2027 公告（未发布，OPEN-QUESTIONS #88）、`fr-euronext stamp_duty`（一所多国、`rate: null` 是正确终态）。详版见三节。
+4. **数据空缺复核轨剩余**（横切，与上并行；[ADR-060]/[ADR-062]）— ~~任务三~~（已完成 2026-09-05，[ADR-086]）；**任务四**（5 家旗舰所深度 F 桶 78 处，`us-nyse`/`hk-hkex`/`uk-lse`/`cn-sse`/`jp-jpx`，执行方案已定案 [ADR-078]，建议 Phase 4 前完成、非硬前置）**78/78 全部回填完成**（2026-09-05 交互式会话收尾：剩 11 处逐处自检收口，`OPEN-QUESTIONS.md` 第29条已删除，残存微缺口见三节）。任务二第二人独立复核已完成（[ADR-074]，2026-09-05，79 处终态 96.2% 达标）；任务五 ①②③ 全部完成（①② [ADR-075]，③ stale 复核清单 [ADR-088]，2026-09-05），`kr-krx` 剩 8 处 low 待人工投喂。**新增独立棒（用户 2026-09-05 拍板立项，[ADR-079] 补记 / `OPEN-QUESTIONS.md` 第 28 条）：`volatility: stable` 且 `confidence: medium` 却零 `sources` 的全库 64 处**——头部为 `overview.timezone` 16 / `settlement_currency` 16 / `dst_rule` 14 / `trading_currency` 5 / `regulation.clearing_regulator` 5；不从风险旗标数据子棒扩张（该子棒只在第 12 章加限定不变式），独立排期，与上面③同批或先于③做均可。另有已收口的成本瀑布残差（[ADR-065]）/ 长尾（[ADR-067]）遗留移交项：`kr-krx exchange_fees` 当期档位（KRX 数据端点对数据中心 IP 封锁，[ADR-075] 已探明，仍需人工投喂）、`us` Section 31 FY2027 公告（未发布，OPEN-QUESTIONS #88）、`fr-euronext stamp_duty`（一所多国、`rate: null` 是正确终态）。详版见三节。
 
 完整清单与每章的小型 `spec` 补充见三节 `- [ ] **Phase 3 · 其余章节可视化**`。
 
 ### 最近完成（滚动窗口，只留最近 3 条；更早的见三节）
 
-- **2026-09-05 · 数据空缺复核轨任务四收尾 · 剩余 11 处全部回填，78/78 完结**（[ADR-078]）— hk-hkex×5（`overview.history` 补整字段、外资持股/资本管制/准入通道/自律组织升级）、us-nyse×1（CRS 官方口径）、uk-lse×3（`pre_market` 高置信 + `holidays_note` 部分 + outage 官方年报注脚）、cn-sse×2（统计年鉴官方表 + 交易系统官方命名）；5 处 high + 6 处 medium，逐字段 `quote` 与 `.cache/` 原文离线核对 11/11 命中，`make build` 全绿（`validate` 0/0、`verify_quotes` OK=1109/FAIL=0）；新登记 `basiclaw.gov.hk`/`state.gov`/`congress.gov`，`OPEN-QUESTIONS.md` 第29条删除，微缺口就地记 detail。
-- **2026-09-05 · 数据空缺复核轨任务四 · 族A 清算保证金四件套 20 处回填完成**（[ADR-078]）— `us-nyse`/`hk-hkex`/`cn-sse`/`uk-lse`/`jp-jpx` 各 4 字段按族A批量检索一次做成：NSCC 清算基金逐日风险保证金＋Reg T 50%＋FINRA 4210 维持保证金、HKSCC 两级保证金（Tier P VaR 3.2% 下限/Tier N 12/30/55%）＋盘中 11:00 MTM、中国结算结算保证金＋最低备付金逐月限额＋融资保证金 100%（上证发〔2026〕5号）、LCH EquityClear（LCH ERA/变动保证金/盘中 PPS）、JSCC 当初証拠金（VaR 1日/250日/99%＋日中預託）；全部一手官方来源，`us-nyse`/`cn-sse`/`uk-lse`/`jp-jpx` clearing 章 🟡→✅；每所一个 commit，`make build` 全绿。
-- **2026-09-05 · 风险旗标数据子棒落地方案定案**（[ADR-079]）— 估清 24 字段 / 制度核-分析尾二分 / AREAER 封顶 medium / 第12章来源不变式，执行未开始。
+- **2026-09-05 · 任务五③ `make check` stale 复核清单上线**（[ADR-088]）— `validate.py` 校验项 19：超阈值（按超期天数降序）与未记 verified（无法判定）分两组、warning 不阻断，freshness_rows 由 `validate_generated_blocks` 顺路复用；selfcheck 78→87 锁行为（全库现算 stale=0）；[ADR-060] 评估题「是否固化进 CLAUDE.md §八」结论=不固化，宪法零改动。
+- **2026-09-05 · 任务三五棒（C 桶 40 处）执行落地 + 独立盲审**（[ADR-086]）— 18 填实 + 2 not_applicable + 20 留空（OQ 第30/31条），盲审初检 88.9%、订正后 18/18 PASS、零幻觉。
+- **2026-09-05 · adr-heal.yml 改走开分支+PR+auto-merge**（[ADR-087]）— 不再直推 main，修复 branch protection 拦截 bot 直推导致 main 两度变红的问题。
 
 ---
 
@@ -55,7 +55,7 @@
 | `de-eurex` | ✅ | ✅ | ✅ | 🟡 | ➖ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | 🟡 |
 | `de-xetra` | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | 🟡 |
 | `fr-euronext` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ |
-| `hk-hkex` | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 |
+| `hk-hkex` | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `in-nse` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ |
 | `jp-jpx` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 |
 | `kr-krx` | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | 🟡 | 🟡 | 🟡 |
@@ -73,7 +73,7 @@
 ### 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
-共 2007 个已填字段，其中 0 个超过复核阈值待复核。
+共 2008 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
 |---|---|---|
@@ -86,7 +86,7 @@
 | `de-eurex` | 73 | 0 |
 | `de-xetra` | 85 | 0 |
 | `fr-euronext` | 108 | 0 |
-| `hk-hkex` | 116 | 0 |
+| `hk-hkex` | 117 | 0 |
 | `in-nse` | 111 | 0 |
 | `jp-jpx` | 91 | 0 |
 | `kr-krx` | 115 | 0 |
@@ -205,6 +205,8 @@
 
 - [x] **抗膨胀落地 · 来源文件下沉 + 靠自觉约定变构建关卡**（横切条目，2026-09-05，[ADR-077]）— 文档膨胀已致真实事故（PR #69–72 连撞四次、main c0c2b04 转红），根因是「膨胀文件同时是并发写入点」+「靠自觉的约定无机器上限」。四轨落地：① `PROJECT/SOURCES.md` 20 个交易所节（1041 行）按所下沉到 `PROJECT/sources/<id>.md`（文件名 = data id，与 `data/exchanges/` 一一对应、校验 17 强制），SOURCES.md 收缩为「条目格式 + 跨所经验册 + 生成分片索引」；`fetch.py` 删 `extract_section` 直接读分片，`validate.py` 域名/标签/`[OTP]` 校验改扫拼接全文。② `DECISIONS.md` 生成 adr-index 块（按编号排序，物理顺序不动，零迁移缓解认知负荷）。③ INBOX「一句话」加机器上限（校验 18：「待折叠」区每条 ≤200 字，只限行长不限堆积）。④ ADR 引用完整性扩面到 .py/.yml/.js/.css/.json。生成块六处 → 八处；`selfcheck` 48→68；迁移零丢失断言全过；`make fetch EX=cn-sse`/`EX=za-jse` 验活走通（顺带修 za-jse 探测记录 URL 被反引号包裹致 `URL_RE` 误捕的潜伏问题）；反向验活（临时删分片 make check 红）通过。
 
+- [x] **架构优化 A/B/C：数据加载去重 / DECISIONS 归档阈值 / 前端共享层收敛**（横切条目，2026-09-05，[ADR-083]/[ADR-084]/[ADR-085]）— ① `tools/data_files.py` 收敛 4 处 `data/exchanges/*.yml` 遍历样板，`make build` 全绿零 diff（A）；② DECISIONS.md 归档阈值定案（超 3500 行触发），`validate.py` 加非阻断 warn 提醒拆 `DECISIONS-ARCHIVE.md`（B）；③ `app.js` 七模块 clone-and-own 收敛为 6 个共享函数，新增 `check_no_dup_render_helpers.py`（严格字节比对、零假阳性）挂 `make check`，Playwright 308 个 `(view, exchange, lang)` 组合回归零 diff（C）。
+
 ### 数据空缺复核轨（横切条目，不属于 Phase 序列；与 Phase 3 并行，[ADR-060]）
 
 2026-09-03 全库空缺实算（`sync.expand_exchange` 逐所展开 + `count_chapter_leaves` 口径，空缺 = 无 `zh` 的 leaf）：2,171 个适用字段槽位、已填 1,855（85%）、空缺 316；另 62 处已填但 `confidence: low`（`risks.fx_risk_note` 近全库、`kr-krx` 13 处成簇，余零散）。316 处分六桶——A 58（`overview` 市值/成交额/排名/上市公司数，搁置）、B 50（现货所 `clearing` 保证金四字段）、C 40（9 家衍生品子章残余，真缺口）、D 10（多板块所 `listing.transfer_between_boards` 空缺）、E 10（`risks.*_note` 等，宪法覆盖边界，[ADR-020] 点 4 已定不动）、F 148（真实研究缺口）。承接 [ADR-020] 欠的 Category B 排期；三决策点用户 2026-09-03 拍板见 [ADR-060]。**任务一落地勘误（[ADR-062]）**：B+D 桶 60 处经逐所核对（现货 CCP / 融资融券机制已在各所文件内证实）不是"设计不适用"而是可回填真实缺口，整体回 F 桶并入任务二/四——任务一因此不标任何字段级 `not_applicable`（机制保留待真正适用的场景），结构性幽灵缺口仅 A 桶 58 处（本任务标 leaf `optional`）+ [ADR-059] 已落地的 de-eurex 章节级 9 处。
@@ -249,13 +251,13 @@
   - **目标**：`us-nyse`(17) / `hk-hkex`(17) / `cn-sse`(19) / `uk-lse`(14) / `jp-jpx`(11)（+`de-eurex` 11 / `fr-euronext` 10 / `in-nse` 10 视精力）F 桶清零到 ✅ / 显式不适用，达到 `za-jse` 的「全章 ✅、0 low」基准。图鉴主视图讲「一眼看懂一个市场」，最该完整的恰是这几家——ROADMAP 已承认、未排期的欠账。**逐所分布已用脚本现算更新**（原 15/13/13/11/9 是 2026-09-03 estimate，其后任务二 / 成本瀑布残差长尾 / 抓取基础设施修复已动过部分交叉字段）；逐字段清单（含所属交易所与来源类型建议）见 [ADR-078]，不必重新翻 YAML 现算。
   - **步骤**：检索按 8 个字段族批量做（清算保证金四件套 20 处 / `transfer_between_boards` 5 处 / listing 其余残余 8 处 / 税费佣金 15 处 / regulation 监管细节 7 处 / participants 5 处 / infrastructure 5 处 / `overview.history` 2 处 + risks 残余 3 处待「下一步 1」完工后复用其判据），落盘提交仍按所归拢、每所一个 commit（交付粒度不变，字段族只是检索效率手段）；建议顺序与各族来源类型见 ADR 正文。**与「下一步 1」不重复认领**：`fx_risk_note`/`political_risk_note`/`enforcement_note` 共 8 处已排在该子棒范围，任务四只在其完工后复核结果。
   - **验收**：每所抽检 10 字段（历史惯例）；`make build` 全绿；**78 处总量超 [CLAUDE.md §四] 30 字段门槛，5 家全部完工后须比照 [ADR-074] 做一次第二人独立复核**，不能只靠协调者自查收尾。
-- [x] **任务五 · 抓取基础设施修复**（2026-09-05 完成 ①②，[ADR-075]；不做 ③，理由见下）
+- [x] **任务五 · 抓取基础设施修复**（2026-09-05 全部完成：①② [ADR-075]，③ [ADR-088]）
   - **目标**：① `kr-krx` 13 处 low（`infrastructure` + `costs` 簇）中可升级的升到 medium/high；② `za-jse` 来源重新落盘、`verify_quotes` 能离线覆盖（当前 `.cache/za-jse` 仅 1 文件、manifest-ok 0）；③ `make check` 在 stale 字段数 > 0 时输出清单（warning、不阻断）。
   - **结果**：动手前先探明云环境（数据中心 IP）可达性——**KRX 数据端点对数据中心 IP 封锁**（`GenerateOTP` 换 code 能通，带 code 的数据端点一律拒绝：`data.krx.co.kr` 返回字面量 `LOGOUT`、`eindex.krx.co.kr` 302 跳 `SiteSearch.jsp`）；`jse.co.za` 一如既往 Cloudflare 403，但 `web.archive.org` 的 CDX + `id_` 原始快照可用。据此：
     - **① `tools/fetch.py` 加 `[OTP]` 两步抓取**（SOURCES.md 登记行含 `[OTP]` 标记，前两个 URL 依次是 GenerateOTP 端点 + 数据端点）+ **通用 wayback 回退**（403/拦截页时自动查最近 200 快照重试，`fetch_sources.py` 复用）；`validate.py`/`selfcheck.py` 加 `[OTP]` 行格式机器校验（selfcheck 43→48）。`kr-krx` 2 处 low 坐实：`market_maker_scheme`（ETF LP 制度双边报价 + 1% 价差比例豁免线，`confidence: high`）、`dividend_withholding_tax`（PwC 预提税率表，坐实原有"22%"推算链 + 纠正"美韩协定10%"为表内真实"10/15%"，`confidence: medium`）；`price_limits.other_boards`（KONEX 涨跌停）判定**不填**——找到的官网正文枚举 KONEX 交易安排"与 KOSDAQ 相同"但清单不含 price limit 字样，据此断言具体幅度是过度推断，如实记 OPEN-QUESTIONS。其余 8 处 low 未命中承载正文的页面，`fx_risk_note`/`enforcement_note` 已转 [ADR-066] 分棒①。
     - **② `.cache/za-jse/` 重建**：`verify_quotes` 全库 CACHE_MISS 77→39（za-jse 一家 70→36）、OK 1023→1062、FAIL 全程 0；`jse.co.za` 官网本身仍不可达，重建的是离线核对覆盖率，非重新核实数据，`data/` 零改动。**顺带修 `verify_quotes.py` 两处消费侧回归**（有了 wayback 回退才暴露）：`manifest_map` 原不看 `ok` 字段，把 404 错误页当正文核对，挖出一个真实假阳性（`au-asx infrastructure.access_methods`，已修复降级为 CACHE_MISS）；wayback 快照可能明显滞后官网原文（za-jse 一处仅 2020 年归档）导致假 FAIL，现降级规则：未命中时只有"当次直连"来源也确认没有才判 FAIL。
-    - **不做 ③**：本棒探明的真正瓶颈是抓取能力边界（KRX 封锁 / JSE 全站 Cloudflare），stale 清单是独立小功能、不依赖此发现，留给下次单独排期。
-  - **验收**：`make build` 全绿（`selfcheck` 48/48、`validate` 20/0、`verify_quotes` FAIL=0、6 处生成块零 diff）；人工核对 2 处 kr-krx `quote` 与落盘原文逐字一致（2/2，远低于第二人复核门槛）。已知局限：OTP 数据步骤端到端成功路径（住宅 IP）本次环境无法验证，仅验证机制正确接线；kr-krx 剩 8 处 low 待人工投喂。
+    - **③ `make check` stale 复核清单**（2026-09-05 交互式会话补完，[ADR-088]）：`validate.py` 校验项 19 `stale_field_warnings`——超阈值（按超期天数降序）与未记 verified（无法判定）分两组、warning 不阻断（任务五③原始定义）；freshness_rows 由 `validate_generated_blocks` 为 health-summary 校验顺路返回复用，不二次扫描 `data/`；selfcheck 78→87 锁行为（全库现算 stale=0、2,007 个 freshness 行，所有分支真实数据触发不到）。[ADR-060] 评估题「stale 复核节奏是否固化进 CLAUDE.md §八」结论：**不固化**（周期巡检非事件回写，`make check` 必跑已保证可见性），宪法零改动。
+  - **验收**：`make build` 全绿（`selfcheck` 48/48、`validate` 20/0、`verify_quotes` FAIL=0、6 处生成块零 diff）；人工核对 2 处 kr-krx `quote` 与落盘原文逐字一致（2/2，远低于第二人复核门槛）。③ 收尾时复验 `make build` 全绿（`selfcheck` 87/87、`validate` 20 家 0 警告 0 错误、生成块零 diff）。已知局限：OTP 数据步骤端到端成功路径（住宅 IP）本次环境无法验证，仅验证机制正确接线；kr-krx 剩 8 处 low 待人工投喂。
 
 ### 广度扩张（新增交易所，原「Phase 4 · Wave 3」）——按需可选能力，非计划阶段
 

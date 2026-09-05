@@ -38,3 +38,4 @@
 - ADR-085 · 前端可视化模块共享层抽取：收敛 clone-and-own · worktree-frontend-shared-render-helpers · 2026-09-05
 - ADR-086 · 任务三五棒执行落地：C 桶 40 处三态收口（18 填实 + 2 not_applicable + 20 留空）+ 独立复核订正 · main · 2026-09-05
 - ADR-087 · adr-heal.yml 改走「开分支 + PR + auto-merge」，不再直推 main（原占 ADR-086，撞已合并的 main 直推提交，按 ADR-029 协议让号） · worktree-adr-heal-pr-flow · 2026-09-05
+- ADR-088 · `make check` 输出 stale 字段复核清单（数据空缺复核轨任务五③收尾） · main · 2026-09-05
