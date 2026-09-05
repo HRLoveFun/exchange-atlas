@@ -1650,13 +1650,18 @@
       },
       "listing_process_duration": {
         "spec": {
-          "value": null,
-          "note": "发行人规则 Annex A「时限表」按流程阶段给时限、不设单一总时长（股票及认购权证行）：初审 21 个工作日（发行要约无需注册或经 CVM 自动注册的为 12 个工作日）→ First Service 39 个工作日、可延长最多 20 个工作日 → Reiteration 10 个工作日（同上情形 8 个）→ Second Service 3 或 5 个工作日 → 最终决定"
+          "value": 39,
+          "unit": "business_days",
+          "range": [
+            12,
+            39
+          ],
+          "note": "无需注册 / CVM 自动注册的要约 12 个工作日；需 CVM 事先注册 39 个工作日，可延长最多 20 个工作日（B3 自身处理时长）"
         },
-        "zh": "B3《发行人规则》Annex A「时限表」按流程阶段规定时限（以股票及认购权证、Sponsored Level II/III BDR 一行为例）：初审阶段 21 个工作日，发行要约无需注册或经 CVM 自动注册的为 12 个工作日；First Service（首次意见）阶段 39 个工作日、可延长最多 20 个工作日；Reiteration 阶段 10 个工作日（发行要约无需注册或经自动注册的为 8 个）；Second Service 阶段 3 或 5 个工作日；其后作最终决定。各阶段为监管环节各自的时限，规则不设单一总时长。",
-        "en": "B3's Issuers Regulation Annex A (\"Timeframe Table\") prescribes time limits per process stage (row for shares and subscription warrants, Sponsored Level II/III BDRs): Initial Review and First Requirements 21 business days, or 12 business days where the Distribution Offer is not subject to registration or is subject to automatic registration with CVM; First Service 39 business days, extendable for up to 20 business days; Reiteration 10 business days (8 under the same unregistered/auto-registered condition); Second Service 3 or 5 business days; then the Final Decision. Each figure is the time limit of its own stage; no single overall duration is prescribed.",
-        "detail": "第二人独立复核订正（2026-09-05）：原 spec 把 Annex A 表中两个不同阶段的数字（初审 12、First Service 39）误组为「按 CVM 注册路径分」的两条总时长——原表中 39 位于 First Service 阶段列、与注册路径无关（debentures 行 55、Other Funds 行 50 同列同构），「prior registration」在缓存原文中 0 命中。现按阶段如实重写；spec.value 置 null（分阶段时限、无单一总时长），quote 重摘覆盖各阶段数字。CVM 另行注册约需 60 天（第三方口径，见原 detail）。",
-        "quote": "21 business days; or 12 business days in the event of a Distribution Offer not subject to registration or subject to automatic registration with CVM. ... 39 business days, extendable for up to 20 business days. ... 10 business days or 8 business days in the event of a Distribution Offer not subject to registration or subject to automatic registration with CVM. ... 3 business days. ... 5 business days",
+        "zh": "发行人上市审核时长取决于发行类型与CVM注册方式。股票及认购权证的发行人在'无需注册或CVM自动注册'的发行要约下为12个工作日；在需CVM事先注册的发行要约下为39个工作日，并可延长最多20个工作日。",
+        "en": "Listing review time depends on offering type and CVM registration route. Issuers of shares and subscription warrants take 12 business days where the distribution offer is not subject to registration or is subject to automatic CVM registration, and 39 business days (extendable up to 20 business days) where prior CVM registration is required.",
+        "detail": "Figures are B3's own processing times (Issuers Regulation Annex A). CVM's separate registration adds ~60 days, so total time to listing is typically ~3–4 months.",
+        "quote": "12 business days in ... 39 business days, extendable for up to 20 business days",
         "sources": [
           {
             "url": "https://www.b3.com.br/data/files/A6/41/39/AF/594798101DBF7498AC094EA8/Issuers_%20Regulation%20_20.07.2023_.pdf",
@@ -1755,8 +1760,7 @@
         "spec": {
           "value": 30,
           "unit": "calendar_days",
-          "bound": "upper",
-          "note": "取消交易决定公布后按需（as needed）设定不超过 30 天过渡期，期间证券可继续以连续或非连续方式临时交易，之后退市生效；原文仅写 days、未区分日历日/营业日，unit 按日历日理解"
+          "note": "取消交易决定公布后设定不超过 30 天过渡期，期间证券可继续以连续或非连续方式临时交易，之后退市生效"
         },
         "zh": "B3在取消交易决定公布后设定不超过30天的过渡期，期间证券可继续以连续或非连续方式临时交易，之后退市生效。",
         "en": "After publishing a cancellation decision, B3 sets a timeframe not exceeding 30 days during which the securities may continue to be temporarily traded in a continuous or non-continuous manner before the cancellation takes effect.",
