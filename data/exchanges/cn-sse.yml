@@ -16,6 +16,16 @@ overview:
     verified: 2026-08-12
     confidence: medium
 
+  history:
+    zh: "上海证券交易所成立于 1990 年 11 月 26 日，同年 12 月 19 日开业，受中国证监会监督和管理（本所简介官方表述）"
+    en: "The Shanghai Stock Exchange was established on 26 November 1990 and opened on 19 December of the same year, operating under the supervision and administration of the CSRC (official profile)"
+    sources:
+      - title: "本所简介（上海证券交易所官网，成立与开业日期的官方表述）"
+        url: https://www.sse.com.cn/aboutus/overview/
+        accessed: 2026-09-05
+    quote: "上海证券交易所成立于1990年11月26日，同年12月19日开业，受中国证监会监督和管理。"
+    confidence: high
+
   timezone:
     zh: "Asia/Shanghai (UTC+8)"
     en: "Asia/Shanghai (UTC+8)"
@@ -113,7 +123,15 @@ regulation:
     confidence: medium
 
   self_regulatory_org:
-    zh: "中国证券业协会（券商层面）；交易所自身对上市公司行使一线自律监管职能"
+    zh: "一线自律监管：上海证券交易所自身承担对上市公司与会员的一线自律监管职能（官方简介明列其职能包括『组织和监督证券交易；对会员进行监管』等，且『受中国证监会监督和管理』）；券商层面另有中国证券业协会（自律组织）承担行业自律职责"
+    en: "Front-line self-regulation: the Shanghai Stock Exchange itself exercises front-line self-regulatory functions over listed companies and members (its official profile lists 'organising and supervising securities trading; regulating members' among its functions, operating 'under the supervision and administration of the CSRC'); at the broker level, the Securities Association of China (SAC) additionally undertakes industry self-regulation over securities firms"
+    detail: "由 low 升级：以本所官网『本所简介』一手坐实交易所的自律监管职能与证监会监管关系；证券业协会一句为制度常识性补充，未单独登记来源，不作为字段主要论断。"
+    sources:
+      - title: "本所简介（上海证券交易所官网，成立时间、职能与证监会监管关系的官方表述）"
+        url: https://www.sse.com.cn/aboutus/overview/
+        accessed: 2026-09-05
+    quote: "上海证券交易所成立于1990年11月26日，同年12月19日开业，受中国证监会监督和管理。 ... 组织和监督证券交易；对会员进行监管"
+    confidence: medium
     en: "Securities Association of China (SAC)"
     confidence: low
     detail: "SAC 官网本次抓取失败（HTTP 异常），其与交易所自律监管的职责边界未逐条核实，见 OPEN-QUESTIONS。"
@@ -456,17 +474,19 @@ market_structure:
 
   short_selling:
     enum: restricted_list
-    spec: {naked_allowed: false, uptick_rule: null, borrow_required: true, note: "融资融券制度，限指定标的范围内进行；报升规则具体表述本次未核实（confidence: low）"}
-    zh: "融资融券制度，限指定标的范围内进行"
-    en: "Margin Trading and Short Selling"
-    confidence: low
-    detail: "报升规则、标的范围等具体细则未逐条核实，留待后续核实。en 术语已用 SSE 官方英文译本确认存在
-      对应条款（3.2.11：会员为客户证券交易提供融资融券服务的，应当按照有关规定办理），但该条未覆盖
-      「限指定标的范围」这一具体限制的表述，故 confidence 维持 low，不因新增英文来源而上调。"
+    spec: {naked_allowed: false, uptick_rule: null, borrow_required: true, note: "融资融券制度，限指定标的范围内进行；报升规则具体表述未核实；转融券业务 2024-07-11 起暂停（见 sources）"}
+    zh: "融券（卖空）经融资融券制度在指定标的范围内进行（裸卖空不允许、须借券），且处于持续收紧的逆周期调节之下：2024-07-10 经证监会批准，中证金融公司暂停转融券业务（自 2024-07-11 起实施），融券卖空的实际可用券源因此大幅收缩"
+    en: "Securities lending (short selling) runs through the margin-trading regime on designated eligible securities (no naked shorting; borrowing required), under progressively tightening counter-cyclical adjustment: with CSRC approval, China Securities Finance suspended its securities-refinancing business from 11 July 2024, materially shrinking the lendable supply for short selling"
+    confidence: medium
+    detail: "报升规则、标的范围等具体细则未逐条核实。en 术语已用 SSE 官方英文译本确认存在对应条款（3.2.11：会员为客户证券交易提供融资融券服务的，应当按照有关规定办理）。由 low 升级：2024-07 转融券暂停以上交所官网要闻一手坐实（见 sources），「融券券源大幅收缩」的判断由此有了官方事件锚点；报升规则表述仍未核实，故不到 high。"
     sources:
+      - title: "证监会依法批准暂停转融券业务 进一步强化融券逆周期调节（上交所官网要闻，2024-07-10）"
+        url: https://www.sse.com.cn/home/component/news/c/c_20240710_10759727.shtml
+        accessed: 2026-09-05
       - title: "Trading Rules of Shanghai Stock Exchange (2026 Revision) 第3.2.11条 — SSE 官方英文译本，仅供参考，中文本为准"
         url: https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf
         accessed: 2026-08-13
+    quote: "证监会依法批准中证金融公司暂停转融券业务的申请，自2024年7月11日起实施。"
 
   block_trade:
     zh: "大宗交易：意向申报 9:30-11:30、13:00-15:30；确认申报另可延至 16:00-17:00；固定价格申报 15:00-15:30"
@@ -541,24 +561,46 @@ listing:
     confidence: medium
 
   listing_process_duration:
-    zh: ""
-    confidence: low
-    detail: "未核实具体周期数据，留空。"
+    zh: "注册制下上交所股票发行上市的法定时限（《上海证券交易所股票发行上市审核规则》现行版）：收到申请文件后 5 个工作日内作出是否受理的决定；自受理之日起，本所审核和证监会注册的时间总计不超过 3 个月（发行人及保荐机构回复审核问询的时间不计算在内）"
+    en: "Statutory timelines for SSE IPOs under the registration system (SSE Stock Issuance and Listing Review Rules, current version): accept/reject decision within 5 business days of receiving the application; review plus CSRC registration in total no more than 3 months from acceptance (time spent answering review inquiries is excluded)"
+    sources:
+      - title: "《上海证券交易所股票发行上市审核规则（2024年4月修订）》全文 DOCX（第十三条受理时限、第四十四条审核+注册 3 个月总时限）"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/firstepisode/c/10778841/files/327d65c5e46d4e7d926e4ecc70e4c6d9.docx
+        accessed: 2026-09-05
+    quote: "第十三条 本所收到发行上市申请文件后五个工作日内，对文件进行核对，作出是否受理的决定，告知发行人及其保荐人，并在本所网站公示。 ... 自受理发行上市申请文件之日起，本所审核和中国证监会注册的时间总计不超过三个月。"
+    confidence: high
 
   transfer_between_boards:
-    zh: ""
-    confidence: low
-    detail: "未核实转板机制细节，留空。"
+    zh: "转板上市制度：北京证券交易所上市公司可向本所申请转板至科创板上市——《北京证券交易所上市公司向上海证券交易所科创板转板办法（试行）》（上证发〔2022〕34号，现行有效）规范转板审核及上市安排；北交所公司亦可在符合条件时向深交所申请转板至创业板（另一通道，未在本所文件内）"
+    en: "Board-transfer system: Beijing Stock Exchange listed companies may apply to transfer-list onto the SSE STAR Market — governed by the Measures for the Transfer of BSE Listed Companies to the STAR Market of SSE (Trial) (SSE Fa [2022] No. 34, in force); BSE companies may also transfer to the ChiNext of SZSE under a parallel channel (outside this document)"
+    detail: "原『未核实转板机制细节』以本所官方办法一手坐实；此字段口径按 [ADR-062] 勘误后的『层级/板块间转移』理解：中国 A 股内部无多板块互转安排（主板/科创板为独立上市体系），现实制度即北交所转板通道。"
+    sources:
+      - title: "《北京证券交易所上市公司向上海证券交易所科创板转板办法（试行）》（上交所官网公告页，上证发〔2022〕34号，现行有效）"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/flap/c/c_20250514_10778852.shtml
+        accessed: 2026-09-05
+    quote: "北京证券交易所上市公司向上海证券交易所科创板转板办法（试行） 发文文号 上证发〔2022〕34号 发布日期 2022年03月04日 生效日期 2022年03月04日 时效性 现行有效 ... 为了细化落实《中国证监会关于北京证券交易所上市公司转板的指导意见》，规范北京证券交易所上市公司向上海证券交易所（以下简称本所）科创板转板审核及上市安排等事宜"
+    confidence: high
 
   continuing_obligations:
-    zh: ""
-    confidence: low
-    detail: "留空前的草稿印象：定期报告、临时信息披露、公司治理规范运作等持续义务——未核实来源，故未采纳为正式字段值。"
+    zh: "上市后的持续义务以《股票上市规则》为总纲：信息披露义务人应当及时、公平地披露信息并保证信息真实、准确、完整（第二章）；上市公司须遵守公司治理（第四章）、定期报告（第五章）、应当披露的交易与关联交易（第六章）、应当披露的其他重大事项（第七章）等持续规范；控股股东、实控人及董监高负有相应诚信与配合义务"
+    en: "Post-listing continuing obligations are codified in the SSE Listing Rules: timely and fair disclosure with information that is true, accurate and complete (Chapter 2); ongoing compliance across corporate governance (Chapter 4), periodic reports (Chapter 5), disclosable transactions and related-party transactions (Chapter 6) and other material matters (Chapter 7); controlling shareholders, actual controllers and directors/supervisors/senior management bear corresponding integrity and cooperation duties"
+    sources:
+      - title: "《上海证券交易所股票上市规则（2026年4月修订）》全文 DOCX（第一、二、四至七章持续义务条款）"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx
+        accessed: 2026-09-05
+    quote: "上市公司及相关信息披露义务人应当及时、公平地披露信息，并保证所披露的信息真实、准确、完整，不得有虚假记载、误导性陈述或者重大遗漏。"
+    confidence: high
 
   suspension_resumption:
-    zh: ""
-    confidence: low
-    detail: "个股级临时停牌见 market_structure.trading_halt_mechanism（已有来源）；此字段特指因重大事项等的长期停牌规则，未核实，留空。"
+    zh: "停牌与复牌专章规定（《股票上市规则》第八章）：上市公司发生本章规定事项应向本所申请停牌复牌；未按期披露定期报告、财报被责令改正未改正、信息披露或规范运作存在重大缺陷被要求改正未改正等情形应停牌，停牌期限不超过 2 个月，依规改正后复牌；资金占用达最近一期经审计净资产绝对值 30% 以上或金额达 2 亿元以上被责令改正未改正的同样停牌不超过 2 个月；股本总额/股权分布连续 20 个交易日不具备上市条件的停牌不超过 1 个月"
+    en: "Suspension and resumption are governed by a dedicated chapter (Chapter 8 of the SSE Listing Rules): the company must apply to the Exchange for suspension/resumption of the enumerated matters; trading is suspended — with a suspension period of no more than 2 months — where periodic reports are not disclosed on time, where financial reports are ordered to be corrected but are not, where disclosure or governance has major defects, or where non-operating fund occupation by controlling shareholders reaches 30% of audited net assets or two hundred million yuan; suspension for losing listing conditions on share capital/distribution over 20 consecutive trading days lasts no more than 1 month, with resumption upon rectification"
+    detail: "原留空记录（『个股级临时停牌见 market_structure.trading_halt_mechanism，此字段特指长期停牌』）的分工沿用：本字段聚焦第八章的制度性停复牌，盘中临时停牌仍在交易机制字段。"
+    sources:
+      - title: "《上海证券交易所股票上市规则（2026年4月修订）》全文 DOCX（第八章 停牌与复牌）"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx
+        accessed: 2026-09-05
+    quote: "8.1 上市公司发生本章规定的停牌、复牌事项，应当向本所申请对其股票及其衍生品种停牌与复牌。 ... 8.3 上市公司未在法定期限内披露年度报告或者半年度报告的 ... 股票及其衍生品种应当自相关定期报告披露期限届满后次一交易日起停牌，停牌期限不超过2个月。 ... 余额达到最近一期经审计净资产绝对值30%以上，或者金额达到2亿元以上 ... 8.7 上市公司因股本总额、股权分布发生变化导致连续20个交易日不具备上市条件的，本所将于前述交易日届满的次一交易日起对公司股票及其衍生品种实施停牌，停牌期限不超过1个月。"
+    confidence: high
 
   delisting_conditions:
     zh: "四类强制退市（交易类、财务类、规范类、重大违法类）+ 主动退市"
@@ -681,17 +723,43 @@ clearing:
     confidence: medium
 
   initial_margin_practice:
-    zh: ""
-    confidence: low
-    detail: "现货市场无衍生品意义上的保证金；融资融券保证金比例等细节未核实，留空。"
+    zh: "现货市场无衍生品式客户初始保证金；清算端由中国结算向结算参与人收取『证券结算保证金』——结算参与人缴纳的、用于交收违约时提供流动性保障并对交收违约损失进行弥补的专项资金，适用于 A 股、债券、证券投资基金等由中国结算提供多边净额结算服务的品种；新增结算参与人参与单个证券市场缴纳的最低限额为每个结算保证金账户 20 万元人民币，自营结算保证金承担互保功能（互保最高限额 20 万元），客户结算保证金不具有互保功能；交易端客户信用交易方面，融资买入证券时融资保证金比例不得低于 100%（上证发〔2026〕5号，2026-01-19 施行）"
+    en: "No derivative-style customer initial margin in the cash market; at the clearing level, ChinaClear collects 'securities settlement margin' from clearing participants — dedicated funds contributed by participants (and allocated by ChinaClear) to provide liquidity and cover losses upon settlement default, applicable to multilateral netting settlement of A-shares, bonds, securities investment funds, etc.; a newly admitted clearing participant contributes a minimum of RMB 200,000 per settlement margin account for each single market, proprietary settlement margin carries mutual-guarantee function (capped at RMB 200,000) while client settlement margin does not; at the trading level, the margin ratio for margin purchases must be no less than 100% (SSE Notice Shang Zheng Fa [2026] No. 5, effective 2026-01-19)"
+    sources:
+      - title: "《证券结算保证金管理办法》（中国结算官方 PDF，第二条定义/第五条适用范围/第六·七·八条筹集与最低限额）"
+        url: http://www.chinaclear.cn/zdjs/editor_file/20211030211400917.pdf
+        accessed: 2026-09-05
+      - title: "《关于调整融资保证金比例的通知》（上交所官网，上证发〔2026〕5号，现行有效的融资保证金比例 100% 标准）"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/trade/specific/margin/c/c_20260114_10805174.shtml
+        accessed: 2026-09-05
+    quote: "第二条 本办法所称证券结算保证金（以下简称“结算保证金”），是指由结算参与人根据本办法向中国证券登记结算有限责任公司（以下简称“本公司”）缴纳的、以及本公司根据本办法划拨的，用于在结算参与人交收违约时提供流动性保障、并对交收违约损失进行弥补的专项资金。 ... 第八条 新增结算参与人在完成与本公司签订有关结算业务协议后，应向本公司分别缴纳用于参与京沪深证券市场交易结算的最低限额的结算保证金。结算参与人参与单个证券市场应缴纳的最低限额为：每个结算保证金账户 20 万元人民币。 ... 一、投资者融资买入证券时，融资保证金比例不得低于100%。"
+    confidence: high
 
   maintenance_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "中国结算不设与衍生品对应的『维持保证金』阈值；对应机制是结算备付金的最低限额管理——每月按『最低结算备付金限额＝上月证券买入金额／上月交易日历天数×最低结算备付金比例』为各结算参与人确定限额（比例按业务类型与品种确定），且结算保证金不得用于日常交收、结算参与人不得因已缴纳结算保证金而拒绝履行资金交收义务"
+    en: "ChinaClear has no derivative-style maintenance margin threshold; the corresponding mechanism is minimum settlement reserve fund management — each month ChinaClear determines each clearing participant's minimum reserve fund limit as 'prior-month securities purchase amount / prior-month trading calendar days × minimum reserve fund ratio' (ratio set by business type and instrument class), and settlement margin may not be used for daily settlement nor excuse a participant from settling"
+    sources:
+      - title: "《结算备付金管理办法（2023年8月修订版）》（中国结算官方 PDF，第九条最低结算备付金限额公式）"
+        url: http://www.chinaclear.cn/zdjs/qzb/202310/cca8984cb74a46aab0b3f75f2df4acb4/files/%E4%B8%AD%E5%9B%BD%E8%AF%81%E5%88%B8%E7%99%BB%E8%AE%B0%E7%BB%93%E7%AE%97%E6%9C%89%E9%99%90%E8%B4%A3%E4%BB%BB%E5%85%AC%E5%8F%B8%E7%BB%93%E7%AE%97%E5%A4%87%E4%BB%98%E9%87%91%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95%EF%BC%882023%E5%B9%B48%E6%9C%88%E4%BF%AE%E8%AE%A2%E7%89%88%EF%BC%89.pdf
+        accessed: 2026-09-05
+      - title: "《证券结算保证金管理办法》（中国结算官方 PDF，第四条结算保证金不得用于日常交收）"
+        url: http://www.chinaclear.cn/zdjs/editor_file/20211030211400917.pdf
+        accessed: 2026-09-05
+    quote: "第九条 本公司每月根据最低结算备付金比例计算规则（见附件）为各结算参与人确定最低结算备付金比例，并按照各结算参与人上月证券日均买入金额和对应的最低结算备付金比例，确定其最低结算备付金限额。计算公式为： 最低结算备付金限额＝上月证券买入金额／上月交易日历天数×最低结算备付金比例。 ... 第四条 结算参与人缴纳的结算保证金不得用于其日常交收需要，结算参与人不得因已缴纳结算保证金而拒绝履行资金交收义务。"
+    confidence: medium
 
   mark_to_market_frequency:
-    zh: ""
-    confidence: low
+    zh: "不适用衍生品式逐日盯市盈亏划转——A 股实行多边净额结算（T+1 货银对付），交收完成后结算风险即告消灭；结算风险改由逐日资金交收、逐月重算的最低结算备付金限额与恒定缴存的结算保证金监控，而非逐日盯市"
+    en: "Derivative-style daily variation margin settlement does not apply — A-shares settle on a multilateral netting basis (T+1 DvP) and settlement risk is extinguished upon settlement; risk is instead monitored through daily cash settlement, the monthly recalculated minimum reserve fund limit, and the standing settlement margin, not through daily mark-to-market"
+    sources:
+      - title: "《证券结算保证金管理办法》（中国结算官方 PDF，第四条结算保证金不得用于日常交收）"
+        url: http://www.chinaclear.cn/zdjs/editor_file/20211030211400917.pdf
+        accessed: 2026-09-05
+      - title: "《结算备付金管理办法（2023年8月修订版）》（中国结算官方 PDF，第九条逐月限额管理）"
+        url: http://www.chinaclear.cn/zdjs/qzb/202310/cca8984cb74a46aab0b3f75f2df4acb4/files/%E4%B8%AD%E5%9B%BD%E8%AF%81%E5%88%B8%E7%99%BB%E8%AE%B0%E7%BB%93%E7%AE%97%E6%9C%89%E9%99%90%E8%B4%A3%E4%BB%BB%E5%85%AC%E5%8F%B8%E7%BB%93%E7%AE%97%E5%A4%87%E4%BB%98%E9%87%91%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95%EF%BC%882023%E5%B9%B48%E6%9C%88%E4%BF%AE%E8%AE%A2%E7%89%88%EF%BC%89.pdf
+        accessed: 2026-09-05
+    quote: "第四条 结算参与人缴纳的结算保证金不得用于其日常交收需要，结算参与人不得因已缴纳结算保证金而拒绝履行资金交收义务。"
+    confidence: medium
 
   delivery_method:
     enum: na
@@ -705,8 +773,14 @@ clearing:
     confidence: medium
 
   last_trading_day_rule:
-    zh: ""
-    confidence: low
+    zh: "不适用——现货证券无到期日与『最后交易日』概念；中国结算对 A 股等品种实行多边净额结算与担保交收，清算义务随 T+1 交收完成而消灭"
+    en: "Not applicable — cash securities have no expiry and thus no derivative-style last trading day; ChinaClear provides multilateral netting and guaranteed settlement for A-shares and other products, and clearing obligations are extinguished upon T+1 settlement"
+    sources:
+      - title: "《证券结算保证金管理办法》（中国结算官方 PDF，第五条适用范围——A 股/债券/基金的多边净额结算业务）"
+        url: http://www.chinaclear.cn/zdjs/editor_file/20211030211400917.pdf
+        accessed: 2026-09-05
+    quote: "第五条 本办法适用于由本公司提供多边净额结算服务的人民币普通股（A 股）、债券、证券投资基金和其他证券类金融产品（不含人民币特种股票交易、开放式基金等产品场外申购赎回）的交易结算业务。"
+    confidence: medium
 
   default_management:
     spec:
@@ -756,14 +830,25 @@ participants:
     confidence: high
 
   suitability_management:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：科创板设置投资者适当性门槛（如50万元资产+2年交易经验）——未核实最新标准原文，留空。"
+    zh: "投资者适当性管理制度为全市场统一框架：依《证券期货投资者适当性管理办法》（证监会令第130号公布，经2020年修订），向投资者销售证券期货产品或提供服务的经营机构须了解投资者信息、进行风险承受能力评估并做适当性匹配；在此基础上分板块设置准入门槛（如科创板另设资产与交易经验门槛，未核实最新标准原文，见 detail）"
+    en: "A unified investor-suitability regime applies market-wide: under the Measures for the Administration of Suitability Management of Securities and Futures Investors (CSRC Order No. 130, revised 2020), institutions selling securities/futures products or providing services must understand investor information, assess risk tolerance and match products appropriately; individual boards add entry thresholds on top (e.g. STAR Market asset/trading-experience gates — latest criteria not verified, see detail)"
+    sources:
+      - title: "证券期货投资者适当性管理办法（中国证监会官网全文，令第130号公布、2020年修订）"
+        url: https://www.csrc.gov.cn/csrc/c106256/c1653849/content.shtml
+        accessed: 2026-09-05
+    quote: "第一条 为了规范证券期货投资者适当性管理，维护投资者合法权益，根据《 证券法 》《 证券投资基金法 》《 证券公司监督管理条例 》《 期货交易管理条例 》及其他相关法律、行政法规，制定本办法。 第二条 向投资者销售公开或者非公开发行的 证券 、公开或者非公开募集的 证券投资基金 和 股权投资基金 （包括创业投资基金，以下简称基金）、公开或者非公开转让的期货及其他衍生产品，或者为投资者提供相关业务服务的，适用本办法。"
+    confidence: medium
 
   foreign_access_channel:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：QFII/RQFII、沪港通北向资金等渠道——未核实细节，留空。"
+    zh: "境外投资者参与沪市的两个制度通道：①合格境外机构投资者（QFII）/人民币合格境外机构投资者（RQFII）制度——境外机构依《合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法》经托管人办理开户与投资，持股比例受单一/全部境外投资者上限约束（见 regulation.foreign_ownership_limit）；②沪港通下的沪股通——香港及境外投资者经香港交易所买卖沪市标的（机制细节未在本次单独登记来源，见 detail）"
+    en: "Two institutional channels for foreign participation in the SSE market: (1) the QFII/RQFII regime — qualified foreign institutions open accounts and invest through custodians under the QFII/RQFII Measures, subject to single/all-foreign-investor ownership caps (see regulation.foreign_ownership_limit); (2) Shanghai-Hong Kong Stock Connect (Northbound) — Hong Kong and overseas investors trade SSE-eligible stocks via HKEX (mechanism details not separately source-registered this session, see detail)"
+    detail: "原『草稿印象：QFII/RQFII、沪港通北向资金等渠道』以已在缓存的《合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法》实施规定 PDF（regulation.foreign_ownership_limit 同一来源）坐实 QFII/RQFII 通道（复核订正：原 quote「第七条 境外投资者的合格境外机构投资者证券账户…」系从来源登记批注误转写——该 PDF 用「一、二、三…」条目编号、全文无「第七条」，已按缓存原文重摘第四条托管人开户与第七条 10%/30% 持股上限）；沪股通通道作为制度常识写入，其专项规则（沪港通试点办法）未单独登记，留待后续补源。"
+    sources:
+      - title: "《关于实施〈合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法〉有关问题的规定》PDF（证监会公告，regulation.foreign_ownership_limit 同源）"
+        url: https://www.sse.com.cn/lawandrules/regulations/csrcannoun/c/10117179/files/9cdbd4b41fc3453e8f8a036719ea8e24.pdf
+        accessed: 2026-09-05
+    quote: "四、合格境外投资者应当委托托管人申请开立证券期货账户。 ... 七、合格境外投资者及其他境外投资者的境内证券投资，应当遵循下列持股比例限制：（一）单个合格境外投资者或其他境外投资者持有单个上市公司或者挂牌公司的股份，不得超过该公司股份总数的10%；（二）全部合格境外投资者及其他境外投资者持有单个公司a股或者境内挂牌股份的总和，不得超过该公司股份总数的30%。"
+    confidence: medium
 
   membership_structure:
     zh: "会员制，会员为证券公司等持牌机构"
@@ -843,9 +928,15 @@ infrastructure:
     detail: "未核实现行核心交易系统的对外公开名称，留空。"
 
   access_methods:
-    zh: "会员通过交易单元接入；行情与交易数据另有第三方数据商分发"
-    en: "Members connect via trading units; market and trading data are also distributed by third-party data vendors"
-    confidence: low
+    zh: "交易接入与数据分发分层：证券公司等会员经交易系统接入本所市场开展经纪业务；行情与数据信息由上交所全资子公司上证所信息网络有限公司（SSE Infonet）独家全权经营——负责上证所即时行情在境内外的经营（境外实时行情由其在港子公司中国投资信息有限公司发售），提供 Level-1 及 Level-2 两种行情信息服务，并向会员单位、上市公司、投资者等市场参与者开发提供个性化数据产品"
+    en: "Trading access and data distribution are layered: securities companies and other members access the market through the Exchange's trading system for brokerage business; market data is exclusively operated by SSE Infonet, the SSE wholly-owned subsidiary, which manages the licensing of SSE real-time quotes domestically and abroad (overseas real-time data sold by its Hong Kong subsidiary China Investment Information Ltd), offering Level-1 and Level-2 market data services plus bespoke data products to members, listed companies and investors"
+    detail: "由 low 升级：『会员接入』沿用原结构性表述；数据分发一侧以 sseinfo.com 公司介绍官方页一手坐实（独家全权经营/两级行情/子公司境外发售）。"
+    sources:
+      - title: "公司介绍（上证所信息网络有限公司官网，独家全权经营与 Level-1/Level-2 行情服务的官方表述）"
+        url: https://www.sseinfo.com/aboutus/introduction/
+        accessed: 2026-09-05
+    quote: "公司作为上海证券交易所证券信息独家全权经营机构，负责上证所即时行情在境内外的经营业务，其中，在香港注册运营的子公司--中国投资信息有限公司负责对境外客户的实时行情发售。目前提供上证所Level-1及Level-2行情两种行情信息服务。"
+    confidence: medium
 
   major_outage_history:
     zh: "2024年9月27日，本所股票竞价交易出现成交确认缓慢的异常情况并影响交易，经处置于11点13分起逐步恢复交易，本所随后发布公告致歉"
@@ -951,14 +1042,24 @@ costs:
     detail: "2026-09-04（ADR-067 成本瀑布数据层长尾）：本字段原为空（草稿印象、未核实）。本次抓《印花税法》全文（fgk.chinatax.gov.cn 国家税务总局政策法规库）——该法把证券交易与合同/产权转移书据/营业账簿并列为印花税的征税范围（第一/二/三条），是中国交易环节税收的完整立法，无独立『金融交易税』税目。据此判 type: none（证券流转税即证券交易印花税，映射至 stamp_duty，沿用 ADR-002 语义）。confidence medium——《印花税法》是一手，但『无独立 FTT』是对『该法即完整立法』的结构性推断，非法条明文否定句。与 cn-szse 同步处置。"
 
   capital_gains_tax:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：个人投资者二级市场股票转让差价所得暂免征收个人所得税——未核实最新政策原文，留空。"
+    zh: "个人转让上市公司股票取得的所得暂免征收个人所得税：自 1997-01-01 起，经国务院批准，对个人转让上市公司股票取得的所得继续暂免征收个人所得税（财税字〔1998〕61号，现行有效）；个人在二级市场的股票转让差价所得因此不征个人所得税"
+    en: "Gains of individuals from transferring listed-company shares are temporarily exempt from individual income tax: with State Council approval, from 1 January 1997 such gains continue to be exempt (Caishuizi [1998] No. 61, currently in force); secondary-market transfer gains of individual investors are therefore not subject to IIT"
+    sources:
+      - title: "财政部 国家税务总局关于个人转让股票所得继续暂免征收个人所得税的通知（财税字〔1998〕61号全文，国家税务总局政策法规库）"
+        url: https://fgk.chinatax.gov.cn/zcfgk/c102416/c5202588/content.html
+        accessed: 2026-09-05
+    quote: "为了配合企业改制，促进股票市场的稳健发展，经报国务院批准，从1997年1月1日起，对个人转让上市公司股票取得的所得继续暂免征收个人所得税。"
+    confidence: high
 
   dividend_withholding_tax:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：个人投资者股息红利差别化征税，持股期限越长税负越低——未核实最新税率档位，留空。"
+    zh: "个人从公开发行和转让市场取得的上市公司股票股息红利按持股期限差别化计征个人所得税（财税〔2015〕101号）：持股超过 1 年的暂免征收；持股 1 个月以内（含）的全额计入应纳税所得额；持股 1 个月以上至 1 年（含）的暂减按 50% 计入；上述所得统一适用 20% 的税率计征"
+    en: "Dividend income of individuals from listed-company shares is taxed on a holding-period-differentiated basis (Caishui [2015] No. 101): exempt for holdings over 1 year; fully taxable for holdings within 1 month (inclusive); half-counted for holdings over 1 month up to 1 year (inclusive); all taxed at the 20% rate"
+    sources:
+      - title: "持有上市公司股票取得的股息红利需要缴纳个人所得税吗？（国家税务总局上海市税务局热点问答，转述财税〔2015〕101号现行口径）"
+        url: https://shanghai.chinatax.gov.cn/zcfw/rdwd/201512/t420630.html
+        accessed: 2026-09-05
+    quote: "根据《财政部国家税务总局证监会关于上市公司股息红利差别化个人所得税政策有关问题的通知》（财税〔2015〕101号）的规定，个人从公开发行和转让市场取得的上市公司股票，持股期限超过1年的,股息红利所得暂免征收个人所得税。个人从公开发行和转让市场取得的上市公司股票，持股期限在1个月以内（含1个月）的，其股息红利所得全额计入应纳税所得额；持股期限在1个月以上至1年（含1年）的，暂减按50%计入应纳税所得额;上述所得统一适用20%的税率计征个人所得税。"
+    confidence: high
 
   implicit_costs_note:
     zh: "隐性成本主要来自买卖价差与市场冲击成本；A股最小价格变动单位为0.01元人民币，叠加百分比涨跌幅限制（主板±10%、科创板±20%）在极端行情下可能加剧流动性缺口、扩大有效价差"
@@ -1000,9 +1101,21 @@ risks:
     confidence: high
 
   regulatory_change_risk_note:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：近年注册制、退市制度等改革频繁，规则变动速度较快——未附具体来源，留空。"
+    zh: "监管规则处于高频修订期，规则变动风险较高：可核实的官方样本包括——《股票上市规则》2026年4月修订（整合修订持续生效文本）、《股票发行上市审核规则》2024年4月修订、2024-07-11 起暂停转融券业务等融券逆周期调整措施；上市、审核与交易环节的核心规则近年均经历多次修订，参与者需要持续跟踪规则版本变化"
+    en: "Regulatory rules are in a high-frequency revision cycle, making rule-change risk material: verifiable official samples include the April 2026 revision of the Listing Rules (consolidated and in force), the April 2024 revision of the Issuance and Listing Review Rules, and the suspension of securities refinancing (转融券) from 11 July 2024; core listing, review and trading rules have all seen multiple revisions in recent years, so participants must track rule-version changes continuously"
+    detail: "分析性字段：以三份已在缓存的官方文件（上市规则 2026 修订 DOCX、审核规则 2024 修订 DOCX、转融券暂停要闻）作为『规则高频修订』的正面事件锚点；『规则变动风险较高』为基于修订频率的归纳判断，非引用专门论述该风险的官方文本。"
+    sources:
+      - title: "《上海证券交易所股票上市规则（2026年4月修订）》全文 DOCX（2026-04-24 发布）"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx
+        accessed: 2026-09-05
+      - title: "《上海证券交易所股票发行上市审核规则（2024年4月修订）》全文 DOCX"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/firstepisode/c/10778841/files/327d65c5e46d4e7d926e4ecc70e4c6d9.docx
+        accessed: 2026-09-05
+      - title: "证监会依法批准暂停转融券业务（上交所官网要闻，2024-07-10）"
+        url: https://www.sse.com.cn/home/component/news/c/c_20240710_10759727.shtml
+        accessed: 2026-09-05
+    quote: "证监会依法批准中证金融公司暂停转融券业务的申请，自2024年7月11日起实施。"
+    confidence: medium
 
   enforcement_note:
     zh: ""

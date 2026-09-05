@@ -76,8 +76,8 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 ## 四、质量的外部判据（不靠自觉）
 
 - `PROJECT/ROADMAP.md` 的进度矩阵是 `make sync` 扫描 `data/` **算出来的**，不是手写"做完了"就算数。🟡（部分完成，含 low confidence 或空字段）会一直挂着，直到字段真的被坐实。
-- **任何批量数据 / `spec` 工作，交付前人工抽检值与原始出处，通过率 < 95% 就停下来修流程，不带着已知错误率继续铺开。** 阈值不随样本量放宽（[ADR-017]）；某家 / 某批不过只暂停复核该家 / 该批，不牵连已过关的。历史实例：v0.1 上交所抽检 20 字段、v1.0 每新增一家抽检 10 字段，都按此执行。
-- **`spec` 层验收**（v2.0）：`spec` 与 `quote` 逐条比对 6 个维度——数值 / `unit` / `side` / `type: none` 的正面依据 / `note` 里的数字 / `components`·`tiered`·`cap` 完整性，均须 ⊆ `quote`（范式见 [ADR-054]）。**单批 `spec` 回填触及 > 30 个字段（约一章量）时，第二人独立复核是必经步骤**——不是协调者自查，ROADMAP 条目打勾前必须有另一个视角跑完这道关（[ADR-054] 实测串行回填初检约 80%，正是 95% 阈值要拦的个案错误）；章节可视化顺带的少量 `spec` 微调仍自检即可。
+- **任何批量数据 / `spec` 工作，交付前抽检值与原始出处，通过率 < 95% 就停下来修流程，不带着已知错误率继续铺开。** 抽检者必须是**独立视角**——可以是人，也可以是另一个未共享上下文的全新 agent 会话（不是 fork：fork 继承同一上下文的信念，原始抓取错了大概率也查不出来），协调者/执行者本人自查不算数（[ADR-081]，2026-09-05 起措辞由"人工抽检"改为"独立视角复核"，实践先例见 [ADR-074]）。阈值不随样本量放宽（[ADR-017]）；某家 / 某批不过只暂停复核该家 / 该批，不牵连已过关的。历史实例：v0.1 上交所抽检 20 字段、v1.0 每新增一家抽检 10 字段，都按此执行。
+- **`spec` 层验收**（v2.0）：`spec` 与 `quote` 逐条比对 6 个维度——数值 / `unit` / `side` / `type: none` 的正面依据 / `note` 里的数字 / `components`·`tiered`·`cap` 完整性，均须 ⊆ `quote`（范式见 [ADR-054]）。**单批 `spec` 回填触及 > 30 个字段（约一章量）时，独立视角复核是必经步骤**——不是协调者自查，ROADMAP 条目打勾前必须有另一个视角（人或独立 agent 会话）跑完这道关（[ADR-054] 实测串行回填初检约 80%，正是 95% 阈值要拦的个案错误）；章节可视化顺带的少量 `spec` 微调仍自检即可。
 - **改动交付前 `make build` 必须全绿。** 改动引入新的结构或不变式（新字段 / 新枚举 / 新 UI 约定 / 新 `spec` 形状……）时，必须同时给 `validate.py` / `verify_quotes.py` / `check_*.py` 加上能机器校验它的检查——[ADR-024]/[ADR-033]/[ADR-049] 的既有模式，把「该守的」从自觉变成构建关卡，别只在 ROADMAP 里提一句。
 
 ---
@@ -93,9 +93,9 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 个人独立维护的仓库，GitHub 上 `main` 无分支保护、无强制 CI 卡点，走 PR 只是多一次手动点 merge，没有额外价值。**默认直接推 main，不必开 PR、不必等审核**：
 
 - **交互式会话**（终端里逐轮对话）：开始改动前先 `git pull --ff-only` 确认本地 `main` 与 `origin/main` 同步、无分叉；改完后跑一遍 `make build`（`sync` + `check`）确认无误，直接 `git add` + `git commit` + `git push origin main`。本条即为 CLAUDE.md 对自动 push 的授权，不必每次都问"要不要 push"。仍然遵守：`make check` 不过不推、不 force push、不改写已推送的历史。
-- **后台任务（background job）**：Claude Code 平台对后台任务有硬性限制——不能直接 push/merge 到 main，只能建分支开 PR，这是运行环境层面的限制，CLAUDE.md 管不到，改不了。后台任务做完仓库改动后会照常留一个 PR，需要手动 `gh pr merge` 或在网页点一下。想要免 PR 的直接推送体验，走交互式会话。
+- **后台任务（background job）**：Claude Code 平台对后台任务有硬性限制——不能直接 push/merge 到 main，只能建分支开 PR，这是运行环境层面的限制，CLAUDE.md 管不到，改不了。**后台任务开 PR 时应带 `gh pr merge --auto --squash --subject "..." --body ""`（不必再传 `--delete-branch`——仓库已设 `deleteBranchOnMerge`，远端分支合并后自动删，本地分支删不删不影响这条流水线）**：`.github/workflows/pr-build.yml` 跑 `make build` 作为唯一必需检查，绿了 GitHub 服务端自动合并，不需要人点击；`DECISIONS.md` 里带的 `ADR-PENDING-*` 占位符不需要在分支上手动定号，合并进 main 后由 `.github/workflows/adr-heal.yml` 自动跑 `make assign-adr` 并直接提交（[ADR-081]，取代原来「合并协调者手动跑一遍」的步骤，见 `PROJECT/GIT-RUNBOOK.md`）。CI 报红（`make build` 不过）时仍需人工/协调者介入排查，这是这条流水线上仅剩的人工触发点。想要免 PR 的直接推送体验，走交互式会话。
 - **一个逻辑改动对应一个 commit**（便于单独回溯 / 回滚），不把不相关的改动攒进一个大提交；一次成体系的改动（如一条 ADR 完整落地）作为一个提交是可以的。
-- **合并后台任务留下的 PR 时**，`gh pr merge --delete-branch` 会因 head 分支正被 `.claude/worktrees/<name>` 检出而报错、且此时远端其实已合并成功（只看退出码会误判成失败）——完整踩坑与正确操作顺序见 `PROJECT/GIT-RUNBOOK.md`。
+- **人工兜底合并**（CI 报红、真实内容冲突等 auto-merge 走不通的情况）：`gh pr merge --delete-branch` 会因 head 分支正被 `.claude/worktrees/<name>` 检出而报错、且此时远端其实已合并成功（只看退出码会误判成失败）——完整踩坑与正确操作顺序见 `PROJECT/GIT-RUNBOOK.md`。正常路径（CI 绿、auto-merge 生效）不会触发这个坑，因为没有人在本地跑带 `--delete-branch` 的合并命令。
 
 ---
 

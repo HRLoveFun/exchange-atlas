@@ -42,3 +42,17 @@
   - 交易机制（含撮合原则/订单类型正文）: https://english.sse.com.cn/start/trading/mechanism/
   - Trading Rules of Shanghai Stock Exchange (2026 Revision) PDF: https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf
   - Implementing Rules of the Shanghai Stock Exchange for Margin Trading and Securities Lending Transactions PDF（融资融券实施细则英文版，本次仅确认标题与存在，未逐条抓取内容）: https://english.sse.com.cn/start/sserules/stocks/trading/c/10647720/files/95943f34d9d74a5f87b8581d793829bc.pdf
+
+- `chinaclear.cn`（2026-09-05 补充登记，任务四族A：结算保证金/备付金制度，沿用既有域名条目） | 官方（清算机构） | zh | curl 常规 UA 200（PDF 直链可过）
+  - 《证券结算保证金管理办法》PDF（第二条定义——结算参与人缴纳、用于交收违约时提供流动性保障与弥补违约损失的专项资金；第五条适用范围 A 股/债券/基金多边净额结算；第六/七/八条筹集方式与每账户 20 万元最低限额及互保功能）: http://www.chinaclear.cn/zdjs/editor_file/20211030211400917.pdf（HTTP 200，160KB）
+  - 《结算备付金管理办法（2023年8月修订版）》PDF（第九条：最低结算备付金限额＝上月证券买入金额／上月交易日历天数×最低结算备付金比例，逐月按业务类型确定比例）: http://www.chinaclear.cn/zdjs/qzb/202310/cca8984cb74a46aab0b3f75f2df4acb4/files/%E4%B8%AD%E5%9B%BD%E8%AF%81%E5%88%B8%E7%99%BB%E8%AE%B0%E7%BB%93%E7%AE%97%E6%9C%89%E9%99%90%E8%B4%A3%E4%BB%BB%E5%85%AC%E5%8F%B8%E7%BB%93%E7%AE%97%E5%A4%87%E4%BB%98%E9%87%91%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95%EF%BC%882023%E5%B9%B48%E6%9C%88%E4%BF%AE%E8%AE%A2%E7%89%88%EF%BC%89.pdf（HTTP 200，211KB）
+  - 2026-09-05 新增（任务四族A，交易端信用交易保证金比例现行标准）：《关于调整融资保证金比例的通知》（上证发〔2026〕5号，2026-01-14 发布、2026-01-19 施行，现行有效——「投资者融资买入证券时，融资保证金比例不得低于100%」，同时废止上证发〔2023〕140号）: https://www.sse.com.cn/lawandrules/sselawsrules2025/trade/specific/margin/c/c_20260114_10805174.shtml（HTTP 200）
+- `chinatax.gov.cn`（2026-09-05 新增登记，任务四族D：税收一手来源） | 官方（国家税务总局政策法规库） | zh | curl 常规 UA 200 | 个人转让股票所得暂免征个税的一手文件
+  - 财税字〔1998〕61号《关于个人转让股票所得继续暂免征收个人所得税的通知》（全文页，「从1997年1月1日起，对个人转让上市公司股票取得的所得继续暂免征收个人所得税」）: https://fgk.chinatax.gov.cn/zcfgk/c102416/c5202588/content.html（HTTP 200，36KB）
+  - 国家税务总局上海市税务局热点问答（财税〔2015〕101号差别化股息红利政策的现行口径转述：超1年暂免/1个月内全额/1个月至1年减按50%/20%税率）: https://shanghai.chinatax.gov.cn/zcfw/rdwd/201512/t420630.html（HTTP 200，27KB）
+  - 2026-09-05 新增（任务四族B/C，沿用 `sse.com.cn` 既有域名条目）: 《北京证券交易所上市公司向上海证券交易所科创板转板办法（试行）》（2025-05-14 公告页，transfer_between_boards 出处）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/flap/c/c_20250514_10778852.shtml（HTTP 200）
+  - 同上: 《上海证券交易所股票发行上市审核规则（2024年4月修订）》公告页（listing_process_duration 出处：受理5个工作日/补正最长30个工作日）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/firstepisode/c/c_20250514_10778841.shtml（HTTP 200）
+  - 同上: 《上海证券交易所股票发行上市审核规则（2024年4月修订）》全文 DOCX（第十三条受理时限、第四十四条审核+注册合计不超过3个月、回复问询累计不超过3个月）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/firstepisode/c/10778841/files/327d65c5e46d4e7d926e4ecc70e4c6d9.docx（HTTP 200，.docx 注意事项同上）
+  - 2026-09-05 新增（任务四族E/F/H，沿用 `sse.com.cn` 既有域名条目）: 本所简介（官方表述：1990-11-26 成立/12-19 开业、受证监会监督管理、组织监督证券交易并对会员进行监管——self_regulatory_org 与 overview.history 出处）: https://www.sse.com.cn/aboutus/overview/（HTTP 200，38KB）
+  - 同上: 证监会依法批准暂停转融券业务 进一步强化融券逆周期调节（要闻，2024-07-10——short_selling 与 regulatory_change_risk_note 出处）: https://www.sse.com.cn/home/component/news/c/c_20240710_10759727.shtml（HTTP 200）
+- `csrc.gov.cn`（2026-09-05 补充登记，任务四族F） | 官方（证监会） | zh | curl 常规 UA 200 | 证券期货投资者适当性管理办法全文（令第130号公布、2020年修订，suitability_management 出处）: https://www.csrc.gov.cn/csrc/c106256/c1653849/content.shtml（HTTP 200）

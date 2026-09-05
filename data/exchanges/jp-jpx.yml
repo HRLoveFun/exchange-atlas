@@ -281,9 +281,15 @@ market_structure:
       confidence: medium
 
   holidays_note:
-    zh: "周末与法定节假日休市，具体日历官网逐年公布，未逐条核实"
-    en: "Closed on weekends and national holidays; the exact calendar is published yearly and was not individually verified"
-    confidence: low
+    zh: "周末与日本的法定节假日休市：JPX 官网逐年发布完整的『Holiday Trading』日历（如 2026 年：1月1日元旦、1月12日成人节、2月11日建国纪念日、2月23日天皇诞生日、3月20日春分节等均列为休市日，含明确星期与日期）；清算在非营业日亦不进行"
+    en: "The market closes on weekends and Japanese national holidays: JPX publishes the full 'Holiday Trading' calendar year by year (for 2026: Jan 1 New Year's Day, Jan 12 Coming of Age Day, Feb 11 National Foundation Day, Feb 23 Emperor's Birthday, Mar 20 Vernal Equinox, etc., all listed as market holidays with exact dates and weekdays); clearing is likewise not conducted on non-business days"
+    detail: "由 low 升级：官网日历页一手坐实（含逐日日期与星期）；此前『未逐条核实』的保留事项以官方页面的逐年发布机制替代——本字段不逐日抄录，日期以官网当年日历为准。"
+    sources:
+      - title: "Market Holidays（JPX 官网，逐年交易日历与假期安排）"
+        url: https://www.jpx.co.jp/english/corporate/about-jpx/calendar/
+        accessed: 2026-09-05
+    quote: "Holiday Trading 2026 Jan. 1 (Thu.) New Year's Day Jan. 2 (Fri.) Market Holiday Jan. 3 (Sat.) Market Holiday Jan. 12 (Mon.) Coming of Age Day Feb. 11 (Wed.) National Foundation Day Feb. 23 (Mon.) Emperor's Birthday Mar. 20 (Fri.) Vernal Equinox"
+    confidence: medium
 
   opening_mechanism:
     spec: {type: call_auction, auction_end: "09:00"}
@@ -682,8 +688,17 @@ listing:
     confidence: high
 
   transfer_between_boards:
-    zh: ""
-    confidence: low
+    zh: "东证板块间转移制度：TSE 现行设 Prime（主板）/ Standard / Growth 三个市场板块（2022-04-04 起施行，市场再编的结果）；上市公司可申请转移其上市股票所属市场板块——《有价证券上市规程》第3章第2节「Transfer of Market Segments」（Rule 306–310）专门规定板块转移，板块转移申请准用首次上市的资格审查条款（Rule 308：转板 Standard Market 准用 Rule 205/206/207）"
+    en: "TSE operates a market-segment transfer regime: TSE currently has three market segments — Prime, Standard and Growth (in effect since 4 April 2022 as the outcome of the market restructuring); a listed company may apply to transfer the market segment of its listed stock — the Securities Listing Regulations Chapter 3 Section 2 'Transfer of Market Segments' (Rules 306–310) governs such transfers, with the initial-listing qualification provisions applied mutatis mutandis to a transfer application to the Standard Market (Rule 308)"
+    sources:
+      - title: "Overview of Market Restructuring（JPX 官网，三板块 2022-04-04 施行的官方表述）"
+        url: https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html
+        accessed: 2026-09-05
+      - title: "Securities Listing Regulations（东证上市规程英文版 PDF，Chapter 3 Section 2 Transfer of Market Segments, Rules 306–310）"
+        url: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf
+        accessed: 2026-09-05
+    quote: "TSE carried out research into a possible market restructuring, and started three market segments, the \"Prime Market\", \"Standard Market\", and \"Growth Market\", on April 4, 2022. ... The provisions of Rule 205 (excluding Items (5) and (7)), Rule 206 (excluding Paragraph 2, Item (2)), and Rule 207, Paragraph 1 and Paragraph 5 shall be applied mutatis mutandis to the cases where an application for transfer of a market segment to the Standard Market is made pursuant to the provisions of Rule 306."
+    confidence: high
 
   continuing_obligations:
     zh: "上市公司持续义务的两大支柱：其一，公司治理报告（Corporate Governance Report）——须以交易所规定格式披露公司治理状况并保持信息更新，交易所在网站集中公开以便投资者横向比较；其二，适时披露义务的持续履行（见disclosure_requirements），任何影响投资者决策的重大事项须持续、即时披露，不因上市完成而终止"
@@ -712,8 +727,14 @@ listing:
     confidence: high
 
   delisting_conditions:
-    zh: ""
-    confidence: low
+    zh: "退市标准（三板块通用，《有价证券上市规程》Rule 601 第1项第1–20号，官方概要页）：触及持续上市标准（股东数、成交量、市值、净资产等）原则上经 1 年宽限（成交量为 6 个月）后退市——触及后 3 个月内须提交达标改善计划；有价证券报告书迟延提交、内部管理体系失效、反社会势力关联等情形亦构成退市事由"
+    en: "Delisting criteria (common to all market segments — Securities Listing Regulations Rule 601, Paragraph 1, Items 1 through 20, per JPX's official outline): failure to meet the Continued Listing Criteria (shareholders, trading volume, market cap, net assets, etc.) leads to delisting after a one-year grace period (six months for trading volume) in principle, with an improvement plan due within three months; delay in filing securities reports, breakdown of internal management systems, anti-social-forces involvement and other grounds also trigger delisting"
+    sources:
+      - title: "Outline of Delisting Criteria（JPX 官网，退市标准概要与宽限程序）"
+        url: https://www.jpx.co.jp/english/equities/listing/delisting/outline/01.html
+        accessed: 2026-09-05
+    quote: "Delisting Criteria (Common for All Market Segments) A listed company which falls under any of the following shall be delisted. (Rule 601, Paragraph 1, Items 1 through 20 of the Securities Listing Regulations) ... A listed company shall be delisted after one year (six months in the case of the trading volume of the Continued Listing Criteria) (*), in principle, has passed since the listed company has fallen short of conforming to the Continued Listing Criteria."
+    confidence: high
 
   delisting_process:
     zh: "退市流程分四步：①退市申请（公司主动申请退市须提交指定退市申请表，Rule 606）；②在决定退市前，若某证券有可能被退市，交易所可将其指定为「监理股份」（Securities Under Supervision）以提示投资者（Rule 608）；③一旦决定退市，交易所将其指定为「整理股份」（Securities to Be Delisted），指定持续至退市日前一天（Rule 609）；④退市日当天从上市证券登记簿中注销（Rule 610）。因未达持续上市标准而触发的退市，另有一年（交易量类指标为六个月）整改期，整改期内须提交并汇报整改计划（见delisting_transition_period）"
@@ -737,9 +758,15 @@ listing:
     confidence: high
 
   post_delisting_venue:
-    zh: ""
-    confidence: low
-    detail: "日本历史上曾有两类正式的退市后交易安排——日本证券业协会运营的「Phoenix」制度（已于2008年3月31日废止）与「绿单市场」Green Sheet（因交易清淡已于2018年3月底废止），均已不再存在；本次抓取范围（jpx.co.jp/mof.go.jp/fsa.go.jp/nta.go.jp）未找到官方原文说明当前是否存在替代性的正式退市后交易场所（第三方信息显示存在Japannext等私设交易系统PTS及新兴的非上市股票交易平台，但均为第三方来源且未明确其是否专门承接退市股票，未采纳），按铁律留空，已记入OPEN-QUESTIONS。"
+    zh: "退市后无官方承接挂牌安排：按《有价证券上市规程》Rule 610，退市时本所在退市日将该公司股份从上市证券名录中删除——规程未设置退市后股份的后续挂牌市场或承接机制；退市股份转为非上市股份（日本是否存在承接退市股票的场外机制未在本次核实范围，见 detail）"
+    en: "No official post-delisting venue exists: under Securities Listing Regulations Rule 610, upon delisting the Exchange deletes the stock from the listed security registry on the delisting date — the regulations provide no successor listing venue or taking-over mechanism; delisted shares simply become unlisted (whether any off-exchange mechanism in Japan takes over delisted stocks was outside this review scope — see detail)"
+    detail: "原留空记录中已探明的背景：日本证券业协会「Phoenix」制度已于 2008-03-31 废止、「绿单市场」（Green Sheet）已于 2018 年 3 月底废止（当次核实未附官方原文，沿用为背景线索且仍未核实）；本次以 Rule 610『Erasure from the Registry』坐实的仅是「规程层面无承接安排」——规程之外的全国性场外机制是否存在，留待补 JSDA 官方原文（复核订正：原主文「日本亦无官方场外市场」超出规程文本，已降级至 detail）。"
+    sources:
+      - title: "Securities Listing Regulations（东证上市规程英文版 PDF，Rule 610 Erasure from the Registry）"
+        url: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf
+        accessed: 2026-09-05
+    quote: "Rule 610. Erasure from the Registry Where the Exchange delists a listed stock, etc., it shall delete descriptions in the listed security registry on the delisting date."
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -813,16 +840,34 @@ clearing:
     confidence: medium
 
   initial_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "JSCC 要求现物清算参加者预缴『当初保证金』（当初証拠金）以覆盖现物交易的风险暴露，由两部分构成：①未决清算约定按最新市场价格评估的值洗价值（時価評価額）；②按历史模拟法 VaR 计算的假定损失额（持有期间 1 日、参照期间 250 日、置信水平 99%）。市场压力期下若参加者破产的预期损失超出预缴财务资源可覆盖的额度，JSCC 可上调相关参加者的当初保证金所要额；另设按信用状况的割增制度。2026-06-30 时点全体清算参加者的当初保证金所要额合计 1,688 億円"
+    en: "JSCC requires cash clearing participants to lodge initial margin covering their cash-market exposure, comprising: (1) the mark-to-market value of unsettled trades evaluated at the latest market price; and (2) the hypothetical loss calculated by historical simulation VaR (1-day holding period, 250-day lookback, 99% confidence level). In stressed markets, where the loss expected from a participant's default would exceed the prefunded financial resources, JSCC raises the initial margin requirement of the participants bearing that risk; a surcharge based on credit standing also applies. Total initial margin required of all clearing participants stood at 168.8 billion yen as of 30 June 2026"
+    sources:
+      - title: "JSCC 現物取引 証拠金（JPX 官网 JSCC 栏目官方页，当初証拠金构成/压力期上调/割增制度/所要额）"
+        url: https://www.jpx.co.jp/jscc/seisan/genbutsu/margin.html
+        accessed: 2026-09-05
+    quote: "JSCCでは、現物取引に係るエクスポージャーをカバーするために、現物清算参加者に対して以下の構成要素に基づき算出された当初証拠金の預託を求めています。 未決済約定を直近の市場価格で評価した値洗い価値（時価評価額） 未決済約定の時価評価額と各銘柄の価格変動（保有期間1日、参照期間250日、信頼水準99％）に基づいてヒストリカルシミュレーション（VaR）方式によって計算される想定損失額 ... 市場ストレス期において清算参加者が破綻した場合に想定される損失額が、現物取引に関し清算参加者から預託されている事前拠出型の財務資源をもっても補填しえない額となる場合、当該未補填額を予めカバーすべく、当該リスクを有する清算参加者に対する当初証拠金所要額を引き上げることとしております。 ... 2026年6月30日現在の全清算参加者の当初証拠金所要額は1,688億円。"
+    confidence: high
 
   maintenance_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "JSCC 不设与初始保证金分离的『维持保证金』阈值——替代机制是逐日重算的当初保证金要求，辅以两项动态加收安排：①信用状况割增——清算参加者的信用状况经判断有必要时对其当初保证金割增；②日中預託——TOPIX 或日经平均期货中心限月上午 11 时约定数值与前交易日清算数值之差超过当初保证金日中預託发动基准值时发动盘中追加预缴（仅当按当日午盘未决约定计算的所要额较最近适用额高出 3,000 万円以上时适用）"
+    en: "JSCC has no separate maintenance margin threshold distinct from initial margin — the daily recalculated initial margin requirement is supplemented by two dynamic add-on arrangements: (1) a surcharge where JSCC deems necessary in light of a clearing participant's credit standing; and (2) intraday margin lodging triggered when the difference in TOPIX or Nikkei 225 futures central contract month trading values at 11:00 a.m. versus the previous day's clearing values exceeds the intraday trigger threshold (applicable only where the requirement calculated on that morning's unsettled trades exceeds the most recently applied requirement by more than 30 million yen)"
+    sources:
+      - title: "JSCC 現物取引 証拠金（JPX 官网 JSCC 栏目官方页，割増し制度与日中預託制度）"
+        url: https://www.jpx.co.jp/jscc/seisan/genbutsu/margin.html
+        accessed: 2026-09-05
+    quote: "＜当初証拠金の割増し制度＞ 信用状況に応じた割増し JSCCでは、清算参加者の信用状況に鑑みて必要と認める場合には、当初証拠金の割増しを行います。 ＜当初証拠金の日中預託制度＞ 急激な相場変動に伴う割増し JSCCでは、以下のいずれかの基準に該当した場合、当初証拠金の日中預託を発動します。 ... 当日の午前立会終了時点の未決済約定に基づき計算された当初証拠金所要額が直近に適用されている当初証拠金所要額を3,000万円より上回っている場合に限り適用されます。"
+    confidence: medium
 
   mark_to_market_frequency:
-    zh: ""
-    confidence: low
+    zh: "按日盯市、日内补充：当初保证金的构成之一即未决清算约定按最新市场价格评估的值洗价值（時価評価額）——对未交收头寸逐日按市价重估；市场剧烈波动时另设日中（盘中）触发——TOPIX 或日经平均期货中心限月上午 11 时约定数值与前交易日清算数值之差超过当初保证金日中預託发动基准值时，发动盘中追加预缴"
+    en: "Daily mark-to-market with an intraday supplement: a component of the initial margin is the mark-to-market value of unsettled trades evaluated at the latest market price — unsettled positions are re-valued to market daily; under sharp market moves, an intraday trigger applies — when the difference in TOPIX or Nikkei 225 futures central contract month trading values at 11:00 a.m. versus the previous day's clearing values exceeds the intraday lodging trigger threshold, intraday margin lodging is activated"
+    sources:
+      - title: "JSCC 現物取引 証拠金（JPX 官网 JSCC 栏目官方页，値洗い価値（時価評価額）与日中預託发动基准）"
+        url: https://www.jpx.co.jp/jscc/seisan/genbutsu/margin.html
+        accessed: 2026-09-05
+    quote: "未決済約定を直近の市場価格で評価した値洗い価値（時価評価額） ... TOPIX先物取引の中心限月取引の午前11時における立会による直前の約定数値と前取引日の清算数値との差が、当初証拠金日中預託発動基準値（当該限月の売付け及び買付けにおける建玉1単位あたり証拠金を平均した額を取引単位で除した数値）を超えた場合"
+    confidence: high
 
   delivery_method:
     enum: na
@@ -836,8 +881,14 @@ clearing:
     confidence: medium
 
   last_trading_day_rule:
-    zh: ""
-    confidence: low
+    zh: "不适用——现物股票无到期日与『最后交易日』概念；JSCC 现物清算的当初保证金针对未决清算约定的风险暴露，清算义务随交收完成而消灭"
+    en: "Not applicable — cash equities have no expiry and thus no derivative-style last trading day; JSCC's cash clearing initial margin targets the risk exposure of unsettled trades, and clearing obligations are extinguished upon settlement"
+    sources:
+      - title: "JSCC 現物取引 証拠金（JPX 官网 JSCC 栏目官方页，正面对照现物交易的保证金定位）"
+        url: https://www.jpx.co.jp/jscc/seisan/genbutsu/margin.html
+        accessed: 2026-09-05
+    quote: "JSCCでは、現物取引に係るエクスポージャーをカバーするために、現物清算参加者に対して以下の構成要素に基づき算出された当初証拠金の預託を求めています。"
+    confidence: medium
 
   default_management:
     spec:
@@ -1052,14 +1103,25 @@ costs:
     confidence: high
 
   regulatory_fees:
-    zh: ""
-    confidence: low
-    detail: "任务前置预期日本可能没有独立于交易所/清算费用之外的「监管费」概念，本次抓取范围（jpx.co.jp/fsa.go.jp/mof.go.jp/nta.go.jp）未找到FSA/SESC向市场参与者或投资者直接征收、独立于costs.exchange_fees（交易所对会员收取）与costs.clearing_fees（JSCC对清算参与者收取）之外的「监管费」条文或费率表；未找到不等于确认不存在，故如实留空而非断言「不存在」，也不把交易所/清算费重复记一遍。"
+    zh: "日本无按笔计收的证券交易监管费：不存在类似美国 Section 31 的费种——监管经费不以逐笔交易费形式向市场参与者或投资者转嫁（FSA/SESC 独立于交易所收费与 JSCC 清算费之外的监管费率表，历次抓取均未发现）；曾对证券转让征收的『有価証券取引税』已于 1999-03-31 废止（国税庁官方一手表述），现行监管体系不落在交易环节计费"
+    en: "Japan has no per-trade securities regulatory fee: there is no counterpart to the U.S. Section 31 fee — regulatory funding is not passed on as a per-trade charge (no FSA/SESC fee schedule separate from exchange fees and JSCC clearing fees has been found across repeated fetches); the former Securities Transaction Tax (有価証券取引税) on securities transfers was abolished on 31 March 1999 (per the NTA's official account), and the current regulatory system does not charge at the trade level"
+    detail: "由留空转为本口径：历次抓取『未找到』的记录保留为背景，本次补上『曾存在但已废止』的正面依据（国税庁有価証券取引税概要页：废止时点与最后年度课税额 220 億円）——『不存在』判断由此从纯负面转为有官方文献支撑的正面陈述。⚠️ 该页面为 Shift-JIS 编码，缓存文件已转存 UTF-8（见 sources/jp-jpx.md 记录）。"
+    sources:
+      - title: "有価証券取引税の概要（国税庁统计页，1999-03-31 废止的一手官方表述）"
+        url: https://www.nta.go.jp/publication/statistics/kokuzeicho/shoken1999/menu/01.htm
+        accessed: 2026-09-05
+    quote: "有価証券取引税は平成11年3月31日をもって廃止された。したがって平成11年度については、平成11年3月31日以前の取引にかかる平成11年4月1日から平成12年3月31日までの課税事績を示しており、課税譲渡価額は71兆4,326億円、税額は220億円となっている"
+    confidence: medium
 
   stamp_duty:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：日本1999年已废止有价证券交易税——与上交所0.05%单边、港交所0.1%双边形成对比的重要字段，但本次未找到可引用的官方来源确认，留空不凭常识填写（该字段volatility: volatile，按铁律必须有sources才能填，本次没有）。"
+    zh: "日本对证券交易本身不征交易税（有価証券取引税已于 1999-03-31 废止，见 regulatory_fees 与 financial_transaction_tax）；现行仅在制作纸质课税文书时产生印紙税：证券转让价款的收据被第17号文書（売上代金に係る金銭又は有価証券の受取書）的注2明确排除在「売上代金」之外，适用「売上代金以外の金銭または有価証券の受取書」的简表——记载金额 5万円未満非課税、5万円以上一律 200 円；交易所电子集中交易不制作纸质文书，实际不产生印紙税——与上交所单边印花税、港交所双边印花税的形态根本不同"
+    en: "Japan levies no transaction tax on securities trades (the Securities Transaction Tax was abolished on 31 March 1999 — see regulatory_fees and financial_transaction_tax); stamp duty now arises only when a paper taxable document is created: receipts for securities-sale proceeds are expressly excluded from the No.17 document class (receipts of sales proceeds) by its Note 2, so securities-transfer receipts fall under the simplified schedule for 'receipts of money or securities other than sales proceeds' — exempt below 50,000 yen and a flat 200 yen from 50,000 yen. Exchange electronic trading creates no paper document, so no stamp duty arises in practice — fundamentally different from the Shanghai (one-side) and Hong Kong (both-side) stamp duties"
+    sources:
+      - title: "No.7141 印紙税額の一覧表（その2）第5号文書から第20号文書まで（国税庁 Tax Answer，第17号文書印紙税额分档表）"
+        url: https://www.nta.go.jp/taxes/shiraberu/taxanswer/inshi/7141.htm
+        accessed: 2026-09-05
+    quote: "(注)2 株券等の譲渡代金、保険料、公社債および預貯金の利子などは売上代金から除かれます。 ... [売上代金以外の金銭または有価証券の受取書] ... 記載された受取金額が 5万円未満 非課税 5万円以上 200円"
+    confidence: medium
 
   financial_transaction_tax:
     spec: {type: none, note: "有价证券交易税与交易所税 1999-03-31 废止；此后日本对现货股票买卖不再征独立交易税"}
@@ -1098,9 +1160,15 @@ costs:
     confidence: high
 
   implicit_costs_note:
-    zh: ""
-    confidence: low
-    detail: "隐性成本（买卖价差、冲击成本）需依赖高频逐笔行情或做市商价差统计才能量化，本次抓取范围（JPX官方叙述性页面）未包含此类可引用的定量说明；infrastructure.market_data_levels已确认逐笔订单簿数据本身是存在的付费产品（FLEX MBO），理论上可用于计算价差，但计算结果本身不是官网直接给出的数字，如实留空。"
+    zh: "日本现货股票的隐性成本主要来自买卖价差与市场冲击；市场结构上的相关官方/研究记录：TSE 为日本股票订单流的主要集中场所，PTC（券商自营交叉盘/PTS）仅分流小部分交易——2025 年日本已无独立 PTS（Cboe Japan 退出后仅存券商系 PTS（SBI Japannext、乐天 JAX 等）），其中 Cboe Japan 退出前的股票交易份额也仅约 4–5%；订单流集中意味着 TSE 主市场的价差/深度是隐性成本的主要决定因素。逐标的实际价差官方不发布（逐笔订单簿数据为 FLEX MBO 付费产品，见 infrastructure.market_data_levels），本字段按覆盖边界停留在分析性描述"
+    en: "Implicit costs in Japanese cash equities stem mainly from bid-ask spreads and market impact; relevant structural records: TSE concentrates the bulk of Japanese equity order flow — Japan now has no independent PTS (after Cboe Japan's withdrawal, broker-affiliated PTSs coexist with SBI Japannext), and Cboe Japan held only about a 4–5% share of equity trading before its exit; order-flow concentration means spreads/depth on the TSE book are the main determinant of implicit costs. Per-instrument realized spreads are not officially published (order-book data is the paid FLEX MBO product, see infrastructure.market_data_levels), so this note remains analytical per the coverage boundary"
+    detail: "由留空升级：引入 JSRI 研究报告（第三方，confidence 封顶 medium）关于 PTS 格局与份额的可摘引记录，佐证『订单流集中于 TSE 主市场』的结构判断；价差本身仍无官方数字。"
+    sources:
+      - title: "The Implications of Cboe Japan's Withdrawal – Structural Changes in Japan's Stock Market（日本証券経済研究所 JSRI 研究报告 PDF，2025-11，PTS 格局与份额；第三方来源）"
+        url: https://www.jsri.or.jp/upload/topics_2511_01_en.pdf
+        accessed: 2026-09-05
+    quote: "Cboe Japan held a 4–5% share of equity trading— ranking second among PTSs after SBI Japannext—but 60–70% of its orders came from Rakuten Securities."
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十二｜风险与特殊考量

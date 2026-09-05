@@ -1,0 +1,49 @@
+name: adr-heal
+
+# main 上残留 ADR-PENDING-* 占位符是硬错误（validate.py 的
+# validate_no_pending_adr_placeholders，[ADR-076]）。这个 workflow 在每次 push 到
+# main 后自动跑一次 `make assign-adr` 把占位符定号并直接提交回 main，取代原来
+# 「合并协调者手动跑一遍再 commit」的人工步骤（见 PROJECT/GIT-RUNBOOK.md）。
+#
+# 用 concurrency group 而不是锁文件/互斥脚本，是因为 GitHub Actions 对同一 group
+# 的多次触发天然串行执行（一次只跑一个，其余排队等前一个结束）——这正好复刻
+# [ADR-076] 依赖的「合并本身是串行的」前提，不需要额外发明互斥机制。
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: main-adr-heal
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  heal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - run: git checkout -B main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r tools/requirements.txt
+      - name: 定号 ADR-PENDING 占位符
+        run: make assign-adr
+      - name: 有变更就直接提交回 main
+        run: |
+          if git diff --quiet; then
+            echo "没有 ADR-PENDING 占位符需要处理。"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: 自动定号 ADR-PENDING 占位符（make assign-adr）[skip ci]"
+          git push origin main
+      - name: 复核 make build 仍然全绿
+        run: make build

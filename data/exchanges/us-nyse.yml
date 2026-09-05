@@ -156,9 +156,15 @@ regulation:
     confidence: high
 
   foreign_ownership_limit:
-    zh: ""
-    confidence: low
-    detail: "未核实是否存在一般性外资持股限制，留空。"
+    zh: "无一般性外资持股比例限制：美国证券市场对外国投资者持有美股不设统一的持股比例上限；外资涉国家安全审查由 CFIUS（财政部任主席的跨部门委员会）按交易逐案进行，审查对象是『涉及外国投资进入美国企业的某些交易』对国家安全的影响，而非证券市场层面的比例管制"
+    en: "No general foreign-ownership cap: U.S. securities markets impose no across-the-board ownership ceiling on foreign investors in listed stocks; national-security review of foreign investment runs transaction-by-transaction through CFIUS (the Treasury-chaired interagency committee), which reviews 'certain transactions involving foreign investment into United States businesses' — not a securities-market ownership limit"
+    sources:
+      - title: "CFIUS（美国财政部官网，委员会职能与审查范围的官方表述）"
+        url: https://home.treasury.gov/policy-issues/international/the-committee-on-foreign-investment-in-the-united-states-cfius
+        accessed: 2026-09-05
+    quote: "an interagency committee authorized to review certain transactions involving foreign investment into United States businesses and certain transactions by foreign persons involving real estate in the United States, in order to determine the effect of such transactions on the national security of the United States."
+    confidence: medium
+    detail: "复核订正（ADR-074 流程）：原 detail 残留升级前「留空」旧文案与已填内容矛盾，已删。口径说明：CFIUS 官方材料明示美国维持开放投资环境、审查按交易逐案进行，未见一般性持股比例管制——「无统一持股比例上限」据此成立；CFIUS 条文本身不是持股比例条款。"
 
   capital_controls:
     zh: "联邦层面没有一般性资本管制或外汇管制；外国对美投资受CFIUS（美国外国投资委员会）以国家安全为由的审查，审查对象是特定交易本身，不是资本跨境流动的额度或审批"
@@ -279,9 +285,15 @@ market_structure:
       en: "Continuous trading 9:30am-3:50pm; Closing Imbalance Period 3:50-4:00pm"
       quote: "Core Trading Session: 9:30 a.m. to 4:00 p.m. ET / 9:30 a.m. ET - Core Open Auction / 3:50 p.m. to 4:00 p.m. ET - Closing Imbalance Period / 4:00 p.m. ET - Closing Auction"
     after_market:
-      zh: ""
-      confidence: low
-      detail: "官网列出的Tape A（NYSE本身）时段表未见独立盘后连续交易时段；NYSE American/Arca/National/Texas等同集团其他实体明确列有4:00-8:00pm盘后时段，NYSE本身是否有盘后交易未在本次抓取的页面中确认，留空不猜。spec 也留空（表示未知，非确认无）。"
+      zh: "NYSE 主市场（Tape A）无独立盘后连续交易时段：核心交易时段 9:30–16:00 ET，16:00 收盘拍卖即告结束；NYSE 集团内延长交易时段在 NYSE Arca 推进（官网公告『Extended trading hours are coming to NYSE Arca』），美股盘后交易亦大量发生于场外经纪商网络"
+      en: "NYSE's primary market (Tape A) has no separate after-hours continuous session: the core trading session runs 9:30 a.m.–4:00 p.m. ET and ends with the 4:00 p.m. closing auction; extended-hours initiatives sit within the group at NYSE Arca (per the official notice 'Extended trading hours are coming to NYSE Arca'), and substantial after-hours trading occurs over off-exchange broker networks"
+      detail: "由留空升级：官网时段表对 Tape A 仅列 Pre-Opening + Core Session（至 4:00 收盘拍卖），同页明确 NYSE American/Arca 等实体的盘后时段——NYSE 本身无独立盘后连续交易由此坐实；『盘后发生于场外』为市场结构常识性归纳，不作为本字段主要论断。"
+      sources:
+        - title: "Trading Information（NYSE 官网，Trading Hours——Tape A 时段表与 Arca 延长时段公告）"
+          url: https://www.nyse.com/trade/trading-information
+          accessed: 2026-09-05
+      quote: "Core Trading Session: 9:30 a.m. to 4:00 p.m. ET 9:30 a.m. ET - Core Open Auction 3:50 p.m. to 4:00 p.m. ET - Closing Imbalance Period 4:00 p.m. ET - Closing Auction ... Extended trading hours are coming to NYSE Arca."
+      confidence: medium
     night_session:
       spec: {kind: none}
       zh: "无"
@@ -289,9 +301,15 @@ market_structure:
       confidence: medium
 
   holidays_note:
-    zh: "官网提供未来多年交易日历与假期安排，具体日期逐年更新未在本次逐条核实"
-    en: "The official site publishes a multi-year trading calendar and holiday schedule; specific yearly dates were not individually verified this session"
-    confidence: low
+    zh: "NYSE 官网『Trading Information』页逐年公布交易日历——官方明示提供 2026、2027、2028 三年的交易日安排与假期/交易时间表（Holidays and Trading Hours）；周六日与联邦假日休市，具体日期以官网当年日历为准"
+    en: "NYSE's official 'Trading Information' page publishes the trading calendar year by year — it explicitly provides trading days for 2026, 2027 and 2028 together with the Holidays and Trading Hours schedule; the market closes on weekends and federal holidays, with specific dates per the official calendar"
+    detail: "由 low 升级：官网一手坐实『多年期日历 + 假期/交易时间表』的存在与覆盖年份；逐日日期未逐条核对（volatility: moderate 场景下逐年变化）。"
+    sources:
+      - title: "Trading Information（NYSE 官网，Trading Calendar——2026/2027/2028 交易日与假期安排）"
+        url: https://www.nyse.com/trade/trading-information
+        accessed: 2026-09-05
+    quote: "Trading days for 2026, 2027, and 2028 Holidays and Trading Hours"
+    confidence: medium
 
   opening_mechanism:
     spec: {type: dmm_auction, auction_end: "09:30"}
@@ -642,10 +660,38 @@ listing:
     quote: "An issue is added to this list upon the Exchange's filing of a Form 25 with the SEC and remains posted until the application to delist the issue becomes effective with the SEC (generally 10 days)."
     confidence: high
 
+  listing_process_duration:
+    zh: "NYSE 官方给出申请受理环节的明确时限：完成并提交申请后，NYSE 上市团队将在 14 个工作日内回复审核意见；申请获受理后由专责上市团队协助走完后续流程。完整端到端周期（含 SEC 注册、定价与挂牌）官方未给出统一数字，视项目复杂度而定"
+    en: "NYSE publishes a concrete service-level for the application intake: once an application is completed and submitted, the NYSE listings team will respond within 14 business days; after acceptance a dedicated listings specialist assists through the remaining process. No official end-to-end duration (including SEC registration, pricing and listing) is published — it varies with project complexity"
+    detail: "由留空升级：官网『listings-process』页的 14 个工作日回复时限为可摘引一手表述；此前记录的『保密资格审查+正式申请两步』结构保留为背景。"
+    sources:
+      - title: "Listings Process（NYSE 官网，申请流程与 14 个工作日回复时限）"
+        url: https://www.nyse.com/listings-process
+        accessed: 2026-09-05
+    quote: "Once you complete and submit your application, a member of our NYSE listings team will review your information and get back to you within 14 business days."
+    confidence: high
+
+  transfer_between_boards:
+    zh: "NYSE 自身无内部分层板块，「转板」在美国语境下指交易所之间的上市转移（NYSE ↔ NYSE American ↔ Nasdaq 等）：机制上通过原交易所向 SEC 提交 Form 25（除牌申请，一般 10 天生效）与新交易所的上市程序衔接完成——NYSE 官方退市页给出的正是这一 Form 25 机制（见 quote），配合接收交易所的挂牌条件审核"
+    en: "NYSE has no internal board tiers; 'board transfer' in the U.S. context means inter-exchange listing transfers (NYSE ↔ NYSE American ↔ Nasdaq): mechanically the transferring issuer's original exchange files a Form 25 with the SEC (effective generally 10 days) and the receiving exchange applies its own listing conditions — the Form 25 mechanism is documented on NYSE's official delistings page (see quote)"
+    detail: "由留空升级：『转板=Form 25 除牌+新所上市』为基于官方退市页机制的表述；各接收交易所（Nasdaq/NYSE American）的具体转挂条件本次未逐一展开。"
+    sources:
+      - title: "NYSE Regulation | Delistings（官网，Form 25 提交与一般 10 天生效的官方表述）"
+        url: https://www.nyse.com/regulation/delistings
+        accessed: 2026-09-05
+    quote: "An issue is added to this list upon the Exchange's filing of a Form 25 with the SEC and remains posted until the application to delist the issue becomes effective with the SEC (generally 10 days)."
+    confidence: medium
+
   post_delisting_venue:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：退市后通常转入OTC市场（粉单市场等）交易——未附来源，留空。"
+    zh: "退市后股份一般转入场外（OTC）市场交易：SEC 官方投资者材料载明，停牌后的 OTC 报价恢复须由券商按 Exchange Act Rule 15c2-11 审查公司信息并向 FINRA 提交 Form 211——即 OTC 为退市股份延续交易的场所；NYSE 官方退市页本身只覆盖 Form 25 除牌程序（见 transfer_between_boards quote），退市去向不在其规定范围"
+    en: "Delisted shares generally move to over-the-counter (OTC) trading: SEC official investor materials state that resumption of OTC quotation after a suspension requires a broker-dealer to review company information under Exchange Act Rule 15c2-11 and file a Form 211 with FINRA — i.e. the OTC market is where delisted shares continue trading; NYSE's own delistings page covers only the Form 25 removal process (see transfer_between_boards quote) — post-delisting venues are outside its scope"
+    detail: "原『草稿印象：退市后转入 OTC（粉单等）』以 SEC 官方材料坐实 OTC 市场属性与 Rule 15c2-11/Form 211 恢复交易要求；『粉单』为私营 OTC 平台分类，非监管机构表述，不写入 zh。"
+    sources:
+      - title: "Why would the SEC suspend trading in a stock?（SEC 投资者警示 PDF，OTC 股票恢复交易须符合 Rule 15c2-11 与 Form 211）"
+        url: https://www.sec.gov/investor/alerts/tradingsuspensions.pdf
+        accessed: 2026-09-05
+    quote: "Before OTC stock quoting can resume after a suspension period, SEC regulations require a broker- ... all applicable requirements, including those of Rule 15c2-11 and FINRA Rule 6432."
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 七｜指数体系
@@ -740,17 +786,51 @@ clearing:
     confidence: high
 
   initial_margin_practice:
-    zh: ""
-    confidence: low
-    detail: "现货市场无衍生品意义上的保证金；融资融券保证金等细节未核实，留空。"
+    zh: "两层保证金制度：①清算端（NSCC，会员级）——NSCC 按基于风险的保证金方法论逐日计算并向各会员收取清算基金要求存入额（Required Fund Deposit），一般基于会员交易活动与当前未交收头寸，由波动性、盯市、非流动性等风险组件构成；②交易端（券商—客户级）——Regulation T（12 CFR Part 220）§220.12(a)：保证金账户买入证券须缴纳不低于证券当前市值 50% 的初始保证金（或交易发生地监管机构规定的比例，二者取高）"
+    en: "Margin operates at two levels: (1) clearing side (NSCC, member level) — NSCC calculates and collects a Clearing Fund Required Fund Deposit from each Member on a daily basis using a risk-based margin methodology, generally based on the Member's trading activity and current unsettled positions, with risk components such as volatility, mark-to-market and illiquidity charges; (2) trading side (broker–customer level) — Regulation T (12 CFR Part 220) §220.12(a) requires initial margin of 50 percent of the current market value of the security (or the percentage set by the regulatory authority where the trade occurs, whichever is greater) for purchases in a margin account"
+    detail: |
+      NYSE 本身不是清算机构——现货会员层面的保证金约束由 CCP（NSCC）的清算基金机制承担，
+      客户层面的保证金由美联储 Regulation T 与券商规则承担，本字段按「现货/主板市场的初始
+      保证金制度」口径同时记录两层。NSCC 清算基金公式与组件细节见 NSCC Procedure XV
+      （govinfo.gov 联邦公报通知）与 DTCC 学习门户《NSCC Risk Margin Component Guide》。
+    sources:
+      - title: "Federal Register Vol. 90 No. 79（SEC 批准 NSCC 盘中保证金程序修订的联邦公报通知，2025-04-25，含 Procedure XV 逐日清算基金计算与盘中追保的官方描述）"
+        url: https://www.govinfo.gov/content/pkg/FR-2025-04-25/html/2025-07103.htm
+        accessed: 2026-09-05
+      - title: "NSCC Risk Margin Component Guide（DTCC 学习门户，清算基金组件公式：波动性/盯市/非流动性）"
+        url: https://dtcclearning.com/documents/equities-clearing-2/nscc-risk-management/nscc-risk/3992-nscc-risk-margin-component-guide/file.html
+        accessed: 2026-09-05
+      - title: "12 CFR Part 220（Regulation T）§220.12(a)（eCFR 官方条文，初始保证金 50%）"
+        url: https://www.ecfr.gov/current/title-12/chapter-II/subchapter-A/part-220
+        accessed: 2026-09-05
+    quote: "NSCC calculates and collects Clearing Fund from its Members (i.e., a Required Fund Deposit) on a daily basis using a risk-based margin methodology. ... The mark-to-market (MTM) component measures the unrealized profit or loss using the contract price versus the current market price (that is, the price for a security determined daily for purposes of the CNS system; generally, that is the prior day's closing price). ... The required margin for each security position held in a margin account shall be as follows: ( a ) Margin equity security, except for an exempted security, money market mutual fund or exempted securities mutual fund, warrant on a securities index or foreign currency or a long position in an option: 50 percent of the current market value of the security or the percentage set by the regulatory authority where the trade occurs, whichever is greater."
+    confidence: high
 
   maintenance_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "NSCC 不设与衍生品对应的独立『维持保证金』阈值——替代机制是清算基金要求逐日重新计算，缺口须在每个营业日（通常东部时间上午 10:00 前）向 NSCC 补足，必要时另发盘中追保（见 mark_to_market_frequency）；客户层面的维持保证金由 FINRA Rule 4210(c) 规定：除规则另有情形外，所有客户账户须维持不低于证券当前市值 25%（多头）的保证金；卖空头寸按更高标准执行——售价低于 5 美元/股的为 100% 市值与 2.50 美元/股孰高，售价 5 美元/股及以上的为 30% 市值与 5 美元/股孰高"
+    en: "NSCC has no separate derivative-style maintenance margin threshold — instead, the Clearing Fund requirement is recalculated daily and any deficit is due to NSCC each business day (typically by 10:00 a.m. Eastern Time), with discretionary intraday calls as needed (see mark_to_market_frequency); at the customer level, FINRA Rule 4210(c) requires all customer accounts to maintain margin of at least 25 percent of current market value for long positions, and higher standards for short positions (2.50 USD per share or 100 percent of current market value, whichever is greater, for stocks selling below 5 USD per share; 5 USD per share or 30 percent, whichever is greater, for stocks selling at 5 USD per share or above)"
+    sources:
+      - title: "Federal Register Vol. 90 No. 79（NSCC 清算基金缺口每营业日补足时限的官方描述）"
+        url: https://www.govinfo.gov/content/pkg/FR-2025-04-25/html/2025-07103.htm
+        accessed: 2026-09-05
+      - title: "FINRA Rule 4210（规则手册原文页，(c) Maintenance Margin 条文）"
+        url: https://www.finra.org/rules-guidance/rulebooks/finra-rules/4210
+        accessed: 2026-09-05
+    quote: "Required Fund Deposit deficits are due to NSCC each business day, typically by 10:00 a.m. Eastern Time. ... (c) Maintenance Margin The margin which must be maintained in all accounts of customers, except as set forth in paragraph (e), (f) or (g) and for cash accounts subject to other provisions of this Rule, shall be as follows: (1) 25 percent of the current market value of all margin securities, as defined in Section 220.2 of Regulation T, except for security futures contracts, \"long\" in the account. (2) $2.50 per share or 100 percent of the current market value, whichever amount is greater, of each stock \"short\" in the account selling at less than $5.00 per share; plus (3) $5.00 per share or 30 percent of the current market value, whichever amount is greater, of each stock \"short\" in the account selling at $5.00 per share or above"
+    confidence: high
 
   mark_to_market_frequency:
-    zh: ""
-    confidence: low
+    zh: "逐日盯市：NSCC 清算基金的盯市（MTM）组件按每笔头寸的合约价值与基于 CNS 系统逐日确定的市价（一般为前一日收盘价）之差，对各会员净未交收头寸（含 CNS 系统内 fail 头寸）计算未实现盈亏，随清算基金要求逐日计算收取；另设盘中盯市追保（Intraday MTM Charge）——当会员净 CNS 与 Balance Order 头寸（含 fail）自上次盯市价与最新观察市价之差达到其当日开盘清算基金要求中波动性组件的 80% 时，一般即可触发收取（NSCC 认为适当时可在波动市况下调低该阈值）"
+    en: "Daily mark-to-market: the mark-to-market (MTM) component of NSCC's Clearing Fund measures the unrealized profit or loss on each Member's net unsettled positions (including positions that fail in the CNS system) as the difference between the contract value of each position and the market value based on the prior day's closing price (the price for a security determined daily for purposes of the CNS system), calculated and collected daily with the Clearing Fund requirement; in addition, an Intraday MTM Charge may generally be imposed if the difference between the last marked-to-market price of a Member's net CNS and Balance Order positions (including CNS fails) and the most recently observed market price meets or exceeds 80 percent of the volatility charge component of the Member's start of day Clearing Fund requirement (the threshold may be reduced during volatile market conditions)"
+    sources:
+      - title: "NSCC Risk Margin Component Guide（DTCC 学习门户，MTM 组件定义与计取范围）"
+        url: https://dtcclearning.com/documents/equities-clearing-2/nscc-risk-management/nscc-risk/3992-nscc-risk-margin-component-guide/file.html
+        accessed: 2026-09-05
+      - title: "Federal Register Vol. 90 No. 79（盘中 MTM 追保触发阈值 80% 的官方描述）"
+        url: https://www.govinfo.gov/content/pkg/FR-2025-04-25/html/2025-07103.htm
+        accessed: 2026-09-05
+    quote: "The mark-to-market (MTM) component measures the unrealized profit or loss using the contract price versus the current market price (that is, the price for a security determined daily for purposes of the CNS system; generally, that is the prior day's closing price). The MTM charge is assessed on each Member's net unsettled positions, including positions that fail in the CNS system. The charge is calculated by taking the difference between the contract value of each position in the portfolio and the market value based on the prior day's closing market price. ... The Intraday MTM Charge is based on the difference between the last marked-to-market price of a Member's net CNS and Balance Order positions (including CNS fails) and the most recently observed market price for such positions. An Intraday MTM Charge may generally be imposed if the difference of this calculation meets or exceeds 80 percent of the ``volatility charge'' component of the Member's start of day Clearing Fund requirement."
+    confidence: high
 
   delivery_method:
     enum: na
@@ -764,8 +844,14 @@ clearing:
     confidence: medium
 
   last_trading_day_rule:
-    zh: ""
-    confidence: low
+    zh: "不适用——NYSE 现货市场的股票、ADR、ETF、公司债与市政债等均为无到期日的现金工具，不存在衍生品意义上的『最后交易日』；成交经 NSCC 清算（CCP）并于 T+1 交收后，清算义务即告消灭"
+    en: "Not applicable — cash instruments traded on NYSE (equities, ADRs, ETFs, corporate and municipal bonds) have no expiry and thus no derivative-style last trading day; once trades are cleared by NSCC (the CCP) and settled on T+1, the clearing obligations are extinguished"
+    sources:
+      - title: "Staff Report on the Regulation of Clearing Agencies（SEC 官方报告 PDF，NSCC=CCP 定性原句的实际出处）"
+        url: https://www.sec.gov/files/regulation-clearing-agencies-100120.pdf
+        accessed: 2026-09-05
+    quote: "NSCC serves as a CCP for virtually all broker-to-broker trades involving equities, corporate and municipal debt, American depositary receipts, exchange-traded funds, and unit investment trusts."
+    confidence: medium
 
   default_management:
     spec:
@@ -883,8 +969,17 @@ infrastructure:
     confidence: medium
 
   data_pricing_model:
-    zh: ""
-    confidence: low
+    zh: "订阅授权制（subscription/entitlement）：NYSE 实时行情为低延迟订阅制数据产品（覆盖 NYSE 集团各资产类别的 full depth of book、逐笔成交、报价、拍卖失衡与证券状态消息），按产品订阅授权向数据接收方收费；逐项费率（Access/Professional User/Non-Display/Redistribution 等）公开列示于官方 NYSE Market Data Price List（2026 版设「Market Data Fees」专节并链接费率表 PDF）"
+    en: "Subscription/entitlement-based pricing: NYSE real-time market data is offered as subscription data products (low-latency feeds across NYSE Group asset classes carrying full depth of book, trades, quotes, auction imbalances and security status messages), charged to data recipients per product subscription/entitlement; itemised fees (Access / Professional User / Non-Display / Redistribution, etc.) are published in the official NYSE Market Data Price List (the 2026 Price List carries a dedicated 「Market Data Fees」 section linking the fee-schedule PDF)"
+    sources:
+      - title: "Market Data: Real-Time（NYSE 官网，实时行情产品与订阅入口的官方描述）"
+        url: https://www.nyse.com/market-data/real-time
+        accessed: 2026-09-05
+      - title: "NYSE Price List 2026（官网费率表，Market Data Fees 专节与逐项费目）"
+        url: https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSE_Price_List.pdf
+        accessed: 2026-09-05
+    quote: "Low-latency, real-time market data feeds cover the various asset classes and markets in the NYSE Group to offer you insight into intraday trading activity. These feeds include full depth of book, trades, quotes, auction imbalances and security status messages."
+    confidence: medium
     detail: "官网另有独立的连接/数据费率PDF（如Wireless Connectivity Fees），本次未展开抓取，留空。"
 
   historical_data_availability:
@@ -943,9 +1038,18 @@ costs:
     confidence: medium
 
   commission_structure:
-    zh: ""
-    confidence: low
-    detail: "美国经纪商佣金由市场自行竞争定价（多数券商已对散户零佣金），交易所规则本身不规定经纪商向客户收取的佣金——与上交所交易规则里出现佣金相关条款的模式不同，这本身是一个有意思的对比点，但本次未找到NYSE/SEC对此的专门表述，留空不硬凑。"
+    zh: "NYSE 不向投资者统一规定佣金：经纪佣金由会员券商自主定价——1975 年「五月日」（May Day）起交易所固定佣金制废止、费率全面竞争化/协商化（SEC 官方一手叙述，见 quote）；NYSE 自身向会员收取的是交易费与流动性返佣（maker-taker，见 exchange_fees 与官方费率表），与经纪佣金分属两类成本"
+    en: "NYSE does not set investor commissions: brokerage commissions are set by member firms — the exchange's fixed commission regime was abolished in 1975 (the 'May Day' rule), with rates fully competitive/negotiable (per the SEC's official account); NYSE itself charges its members transaction fees and liquidity rebates (maker-taker, see exchange_fees and the official price list), a separate cost category from brokerage commissions"
+    detail: "原留空记录中的方向性判断（美国经纪佣金由市场竞争定价、多数券商已对散户零佣金）本次以 SEC 1975 年官方一手文件坐实『固定佣金制废止』这一制度节点；『多数券商零佣金』属市场现状描述，未见官方统计，维持不作为主要论断。"
+    sources:
+      - title: "Brokerage Commissions and Research After May Day（SEC 委员 Loomis 演讲 PDF，1975-06-03，固定佣金废止/竞争费率的一手官方叙述；OCR 全大写、标点为 `~`，摘引照抄）"
+        url: https://www.sec.gov/news/speech/1975/060375loomis.pdf
+        accessed: 2026-09-05
+      - title: "New York Stock Exchange Price List 2026（官网费率表，NYSE 面向会员的交易费/返佣结构，佐证『交易所收费≠经纪佣金』）"
+        url: https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSE_Price_List.pdf
+        accessed: 2026-09-05
+    quote: "FOR SEVERAL MONTHS NOW THE SECURITIES INDUSTRY HAS BEEN LOOKING FORWARD WITH VERY MIXED EMOTIONS TO THE DAWN OF MAy DAY AND COMPETITIVE RATES. Now MAy DAY rlAS COME AND GONE BUT THE CONSEQUENCES ARE STILL NOT ENTIRELY CLEAR. ... BECAUSE IT WAS ABLE TO UNDERCUT THE FIXED COMMISSION."
+    confidence: medium
 
   exchange_fees:
     spec: {rate: null, unit: per_share, currency: USD, side: both, tiered: true, note: "maker-taker：挂单返佣约 $0.0012/股、吃单方付费；34 页费率表按 DMM/非展示/流动性档等分层；代表性吃单费本字段 quote 未含"}
@@ -997,9 +1101,15 @@ costs:
     verified: 2026-09-04
 
   stamp_duty:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：美国联邦层面无证券交易印花税——与上交所0.05%单边、港交所0.1%双边形成对比的重要字段，但本次未找到可引用的官方来源确认，留空不凭常识填写（该字段volatility: volatile，按铁律必须有sources才能填，本次没有）。"
+    zh: "无联邦证券交易印花税：美国联邦层面未设立普遍适用的证券交易印花税（stamp duty）税种——CRS 报告记载的联邦交易环节课税仅为历史股票转让税与现行 SEC 小额规费；证券交易环节的联邦税收历史沿革（1914–1966 联邦股票转让税 STT 及现行 SEC 小额规费）见 financial_transaction_tax 字段，二者为同一来源、同一判据"
+    en: "No federal stamp duty on securities transactions: no broad-based federal stamp-duty instrument applies to securities trades in the U.S. — the federal transaction-stage levies on record are the historical stock transfer tax and the current small SEC fees; the federal transaction-tax history (the 1914–1966 stock transfer tax and the current small SEC-related fees) is covered under the financial_transaction_tax field, which uses the same source and judgment basis"
+    detail: "原留空记录中的『与上交所 0.05% 单边、港交所 0.1% 双边对比』仍成立且已在相应交易所字段坐实；美国联邦层面对交易征税的正面依据与 financial_transaction_tax 共用 CRS RL32266。州层面（如纽约州历史上）的转让税本次未单独核实，不写入 zh。"
+    sources:
+      - title: "Transaction Tax: General Overview（CRS Report RL32266，everycrsreport.com 镜像托管；与 financial_transaction_tax 同一来源）"
+        url: https://www.everycrsreport.com/reports/RL32266.html
+        accessed: 2026-09-05
+    quote: "No major industrialized nation has adopted a broad-based transaction tax. At the federal level one of the historical examples of a transaction tax was a stock transfer tax (STT) effective from 1914 to 1966."
+    confidence: medium
 
   financial_transaction_tax:
     spec: {type: none, note: "联邦层面无普遍证券交易税；1914–1966 转让税已废止；现存 SEC 发行/转让小额规费（约 0.0033%）性质近监管经费"}
@@ -1020,24 +1130,35 @@ costs:
     confidence: medium
 
   capital_gains_tax:
-    zh: ""
-    confidence: low
-    detail: "美国资本利得税制度复杂（联邦+州、长短期税率不同），未在本次会话深入核实，留空。"
+    zh: "长期资本利得（持有超过一年）按 0%/15%/20% 三档优惠税率计征；短期（持有一年及以内）利得按普通所得税率计征：2025 纳税年度，单身应税所得不超过 48,350 美元适用 0% 档、48,350–533,400 美元适用 15% 档，超过 15% 档门槛的部分适用 20%（本字段为联邦口径，州所得税另计，未逐州核实）"
+    en: "Long-term capital gains (held over one year) are taxed at preferential rates of 0%/15%/20%; short-term gains (held one year or less) are taxed as ordinary income: for taxable years beginning in 2025, the 0% rate applies to single filers with taxable income up to 48,350 USD and the 15% rate between 48,350 and 533,400 USD, with the 20% rate above the 15% thresholds (federal basis; state income taxes not verified per-state)"
+    sources:
+      - title: "Topic 409, Capital Gains and Losses（IRS 官方主题页，长期三档税率、2025 年度门槛与短期/长期分类）"
+        url: https://www.irs.gov/taxtopics/tc409
+        accessed: 2026-09-05
+    quote: "For taxable years beginning in 2025, the tax rate on most net capital gain is no higher than 15% for most individuals. A capital gains rate of 0% applies if your taxable income is less than or equal to: $48,350 for single and married filing separately ... A capital gains rate of 15% applies if your taxable income is: more than $48,350 but less than or equal to $533,400 for single ... However, a capital gains rate of 20% applies to the extent that your taxable income exceeds the thresholds set for the 15% capital gain rate. ... Generally, if you hold the asset for more than one year before you dispose of it, your capital gain or loss is long-term. If you hold it one year or less, your capital gain or loss is short-term."
+    confidence: high
 
   dividend_withholding_tax:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：对外国投资者股息预扣税默认30%，可按税收协定降低——未附来源，留空。"
+    zh: "非居民外国人（NRA）取得美国来源股息等固定/可确定的年度或定期所得（FDAP），按 30% 固定税率预扣（适用税收协定可降至更低税率），由支付方扣缴、不得就该类所得扣除费用"
+    en: "Nonresident aliens receiving U.S.-source dividends and other fixed, determinable, annual or periodical (FDAP) income are subject to a flat 30 percent tax (lower treaty rates may apply), withheld by the payer, with no deductions allowed against such income"
+    sources:
+      - title: "Nonresident aliens（IRS 官方国际税收页，FDAP 所得 flat 30 percent 或更低协定税率）"
+        url: https://www.irs.gov/individuals/international-taxpayers/nonresident-aliens
+        accessed: 2026-09-05
+    quote: "If you are not engaged in a trade or business, the payment of U.S. source income that is fixed, determinable, annual, or periodical is taxed at a flat 30 percent (or lower treaty rate) and no deductions are allowed against such income."
+    confidence: high
 
   implicit_costs_note:
-    zh: "隐性成本（买卖价差、冲击成本）未在本次会话找到可摘引的官方原文——曾尝试抓取NYSE官网一份'市场质量信息图'PDF，但该链接实际返回的是网页壳层而非PDF内容（属已知的'HTTP 200但非目标内容'情形），未采纳第三方检索摘要中关于价差数值的说法；exchange_fees字段中的做市商-吃单者费率结构（maker-taker）与隐性成本存在间接关联（返佣设计本身是为激励报价方收窄价差），但不能替代对实际价差/冲击成本的直接测度"
-    en: "No citable primary text on implicit costs (bid-ask spread, market impact) was found this session — an attempt to fetch a NYSE \"Market Quality\" infographic PDF instead resolved to an HTML page shell (a known \"HTTP 200 but not the target content\" pattern), so third-party search-summary claims about specific spread figures were not adopted; the maker-taker rebate structure described under exchange_fees is indirectly related (rebates are designed to incentivize quoting that narrows spreads) but is not a substitute for a direct measure of realized spread or market impact"
-    detail: "留作后续补全线索：可尝试NYSE Data Insights栏目（如'credit-to-those-in-the-arena-enhanced-quoted-spread'一类文章）或SEC市场结构统计页面，本次未展开抓取核实。"
+    zh: "美国现货股票的主要隐性成本为买卖价差与市场冲击。可引用的官方口径（SEC 市场结构演讲）：最大市值股票的报价价差长期钉在最小报价单位 1 美分上，包含中小盘股票在内的整体价差接近历史低位；同时 SEC 同文记录了针对 maker-taker 返佣与订单流付费（PFOF）安排是否构成利益冲突、损害投资者最佳执行权的官方争论——返佣结构本身（见 exchange_fees）与价差形成直接相关。实际价差/冲击成本的逐标的直接测度官方不发布，本字段按覆盖边界停留在分析性描述"
+    en: "The main implicit costs in U.S. cash equities are bid-ask spreads and market impact. Citable official account (SEC market structure speech): quoted bid-ask spreads for the largest stocks remain pegged at the minimum tick of one cent, and overall spreads, including those for smaller stocks, are near historic lows; the same speech records the official debate over whether maker-taker rebates and payment for order flow (PFOF) create conflicts of interest that undermine best execution — the rebate structure itself (see exchange_fees) bears directly on spread formation. Per-instrument realized spread/impact figures are not officially published, so this note remains analytical per the project's coverage boundary"
+    detail: "由 low 升级：找到 SEC 官方一手演讲（.cache 已落盘）提供可摘引的价差与市场结构争论表述；数字（1 美分、历史低位）为演讲引用的定性口径，非逐笔实测。原 low 记录中『NYSE Market Quality infographic 链接失效』的教训保留在 git 历史，不再重复。"
     sources:
-      - title: "NYSE Market Quality infographic（官网PDF直链，本次实测已失效，返回HTML壳层而非PDF内容，见detail）"
-        url: https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSE_Market_Quality_infographic.pdf
-        accessed: 2026-08-24
-    confidence: low
+      - title: "U.S. Equity Market Structure: Making Our Markets Work Better for Investors（SEC 官方演讲稿，价差水平与 maker-taker/PFOF 争论的官方叙述）"
+        url: https://www.sec.gov/newsroom/speeches-statements/us-equity-market-structure
+        accessed: 2026-09-05
+    quote: "Quoted bid-ask spreads for the largest stocks remain pegged at the minimum level of one cent, [5] and overall spreads, including those for smaller stocks, are near historic lows. ... incentives like the maker-taker pricing model [30] and payment for order flow arrangements [31] pose irreconcilable conflicts of interest for broker-dealers that deprive investors of their right to best execution."
+    confidence: medium
 
 # ═══════════════════════════════════════════════
 # 十二｜风险与特殊考量

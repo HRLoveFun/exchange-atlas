@@ -132,8 +132,14 @@ regulation:
     detail: "草稿印象：港元自由兑换，联系汇率制度（与美元挂钩，7.75-7.85区间）——未附来源，留空。"
 
   disclosure_requirements:
-    zh: ""
-    confidence: low
+    zh: "披露义务双层结构（《主板上市规则》第13章）：①法定层——SFO《内幕消息条文》（Inside Information Provisions）对上市发行人及其董事施加法定义务，内幕消息在知悉后须在合理切实可行范围内尽快披露，证监会负责执行（并发布《披露内幕消息指引》），联交所在发现可能违例时移交证监会处理；②规则层——第13章订明须披露的交易与其他事项分类，且发行人董事对全面遵守上市规则承担集体与个人责任（13.04）"
+    en: "A two-layer disclosure regime (Main Board Listing Rules Chapter 13): (1) statutory layer — the Inside Information Provisions of the SFO impose statutory obligations on listed issuers and their directors to disclose inside information as soon as reasonably practicable, with the SFC responsible for enforcement (and the Guidelines on Disclosure of Inside Information issued); the Exchange refers possible breaches to the SFC; (2) rules layer — Chapter 13 identifies the circumstances requiring disclosure of transactions and other matters, and an issuer's directors are collectively and individually responsible for full compliance with the Listing Rules (13.04)"
+    sources:
+      - title: "主板《上市规则》综合 PDF（HKEX 官方，第13章 DISCLOSURE：13.04 董事责任、13.05 内幕消息法定披露义务与证监会执行分工）"
+        url: https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Rules-and-Guidance/Listing-Rules/Consolidated-PDFs/Main-Board-Listing-Rules/consol_mb.pdf
+        accessed: 2026-09-05
+    quote: "13.04 An issuer's directors are collectively and individually responsible for ensuring the issuer's full compliance with the Listing Rules. ... 13.05 (2) The Inside Information Provisions impose statutory obligations on listed issuers and their directors to disclose inside information as soon as reasonably practicable after the information has come to the listed issuers' knowledge, and gives the Commission the responsibility for enforcing those obligations."
+    confidence: high
     detail: "草稿印象：中英双语披露，与上交所（仅中文）形成对比——具体披露义务细节未核实，留空。"
 
   investor_protection:
@@ -848,8 +854,14 @@ listing:
     confidence: high
 
   transfer_between_boards:
-    zh: ""
-    confidence: low
+    zh: "香港 GEM 与主板之间的转板上市制度：GEM 上市公司可申请将其证券的上市从 GEM 转移至主板——《主板上市规则》第九A章专门规定转板条件（转板申请须上市委员会批准；申请人须符合主板上市的全部资格条件，直至在主板开始买卖时仍持续符合），第九B章为合资格发行人提供简化转板程序"
+    en: "Hong Kong operates a GEM-to-Main Board transfer regime: a GEM listed issuer may apply to transfer the listing of its securities from GEM to the Main Board — Main Board Listing Rules Chapter 9A sets out the conditions (the transfer application is subject to Listing Committee approval; the applicant must meet all Main Board listing qualifications, continuing to do so up to commencement of dealings on the Main Board), and Chapter 9B provides a streamlined transfer for Eligible Issuers"
+    sources:
+      - title: "Main Board Listing Rules Chapter 9A — Transfer of Listing from GEM to Main Board（HKEX 官方单章 PDF）"
+        url: https://www.hkex.com.hk/-/media/hkex-market/listing/rules-and-guidance/listing-rules-contingency/main-board-listing-rules/equity-securities/chapter_9a
+        accessed: 2026-09-05
+    quote: "9A.01 Application for a transfer of listing shall be approved by the Listing Committee as set out in rule 2A.05, subject to the relevant review powers. ... 9A.01B This Chapter sets out the basic conditions and requirements for a transfer of listing of a GEM issuer's securities to the Main Board."
+    confidence: high
 
   continuing_obligations:
     zh: "《主板上市规则》第13章：发行人自证券获批上市起须持续遵守《上市规则》，董事共同及个别负责确保发行人全面合规；核心是维持公平有序市场及信息同时对称披露，第13.05条明确交易所根据《证券及期货条例》第21条负有确保市场有序、知情、公平的法定职责，发行人及其董事另按《证券及期货条例》「内幕消息条文」承担披露内幕消息的法定责任；违反持续责任除可能触发纪律处分外，交易所亦可动用暂停或撤销上市地位的权力"
@@ -874,8 +886,14 @@ listing:
     confidence: high
 
   delisting_conditions:
-    zh: ""
-    confidence: low
+    zh: "主板除牌条件（第6章）：上市是持续附条件安排——联交所在为保障投资者或维持有序市场而认为有必要时，可随时指示停牌或暂停买卖，或取消任何证券的上市（6.01，列举情形包括公众持股量不足等）；已连续停牌 18 个月的证券，联交所可取消其上市（6.01A）；发行人自愿撤回上市（受 6.15 规限）：有替代上市者按 6.11（仍须股东批准）；无替代上市者按 6.12（另须联交所许可＋股东批准）"
+    en: "Main Board delisting conditions (Chapter 6): listing is always granted subject to the condition that where the Exchange considers it necessary for the protection of the investor or the maintenance of an orderly market, it may at any time direct a trading halt or suspend dealings or cancel the listing of any securities (6.01, including insufficient public float); the Exchange may cancel the listing of securities suspended for a continuous period of 18 months (6.01A); voluntary withdrawal is possible under rule 6.11 (with an alternative listing) or rule 6.12 (without — requiring the Exchange's permission plus shareholder approval), subject to rule 6.15"
+    sources:
+      - title: "主板《上市规则》综合 PDF（HKEX 官方，第6章 GENERAL TRADING HALT, SUSPENSION, CANCELLATION AND WITHDRAWAL OF LISTING）"
+        url: https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Rules-and-Guidance/Listing-Rules/Consolidated-PDFs/Main-Board-Listing-Rules/consol_mb.pdf
+        accessed: 2026-09-05
+    quote: "6.01 Listing is always granted subject to the condition that where the Exchange considers it necessary for the protection of the investor or the maintenance of an orderly market, it may at any time direct a trading halt or suspend dealings in any securities or cancel the listing of any securities in such circumstances and subject to such conditions as it thinks fit, whether requested by the issuer or not. ... 6.01A (1) Without prejudice to its power under rule 6.01, the Exchange may cancel the listing of any securities that have been suspended from trading for a continuous period of 18 months. ... 6.11 Subject to rule 6.15, an issuer whose primary listing is on the Exchange and which has an alternative listing ... may not voluntarily withdraw its listing on the Exchange unless:– (1) the prior approval of shareholders has been obtained ... 6.12 Subject to rule 6.15, if the issuer has no such alternative listing, the issuer may not voluntarily withdraw its listing on the Exchange without the permission of the Exchange unless:- (1) the issuer has obtained the prior approval of its shareholders"
+    confidence: high
 
   delisting_process:
     zh: "《主板上市规则》第6.01/6.01A(1)/6.10条：就已触发退市条件的发行人，交易所可(a)发出退市通知并订明补救期限（remedial period），若发行人未能在期限届满前补救问题并恢复交易，交易所可撤销其上市地位；或(b)在触发退市条件的事项属根本性且无法补救的例外情况下直接撤销上市；若6.01与6.01A(1)两条同时可适用，交易所倾向按6.01订立较短的「特定补救期限」（specific remedial period，例如6个月），而非套用18个月的「订明补救期限」（prescribed remedial period）"
@@ -1010,34 +1028,64 @@ clearing:
     confidence: medium
 
   initial_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "HKSCC 对现货市场未交收头寸收取保证金，按恒生综合指数（HSCI）分类实行两级制度：大型/中型股成分股、全部股票 ETP 及以其为标的的结构性产品适用 Tier P——基于 VaR 的组合保证金，最低保证金水平 3.2%（2023-08-14 生效）；其余非 Tier P 品种与结构性产品适用 Tier N 平准费率——第 1 组 12%（2022-06-13 生效）、第 2 组 30%（2022-12-16 生效）、第 3 组 55%（2025-10-27 生效），并可施加清算参与者特定的保证金乘数；HKSCC 还可对清算参与者施加保证金附加项（margin add-ons）以监控与控制风险暴露"
+    en: "HKSCC applies margin to unsettled cash-market positions under a two-tier approach following the classification of the Hang Seng Composite Index (HSCI): constituents of the Hang Seng Composite LargeCap/MidCap Index, all equity ETPs and structured products with such Tier P instruments as underlyings are subject to Tier P — Value-at-Risk (VaR) based Portfolio Margining with a minimum margin level of 3.2% (effective 14 August 2023); all other non-Tier P instruments and structured products are subject to Tier N flat rate margins — margin group 1: 12% (effective 13 June 2022), group 2: 30% (effective 16 Dec 2022), group 3: 55% (effective 27 Oct 2025), subject to Clearing Participant-specific margin multiplier where appropriate; HKSCC may also apply margin add-ons to Clearing Participants to monitor and control risk exposure"
+    sources:
+      - title: "Margin（HKEX 官网 HKSCC 风险管理·保证金页，两级保证金制度与各档费率及生效日期）"
+        url: https://www.hkex.com.hk/Services/Clearing/Securities/Risk-Management/Margin?sc_lang=en
+        accessed: 2026-09-05
+      - title: "Initial Margin Calculation Guide v14（HKSCC 官方指南 PDF，VaR 平台与保证金计算操作细节）"
+        url: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Securities/Risk-Management/Margin/Initial-Margin-Calculation-Guide-HKv14.pdf
+        accessed: 2026-09-05
+    quote: "HKSCC adopts a two-tier margin approach that follows the classification of Hang Seng Composite Index (“HSCI”). Stocks which are constituents of Hang Seng Composite LargeCap Index or Hang Seng Composite MidCap Index, all equity ETPs, and structured products of the aforementioned Tier P instrument(s) as underlyings are subject to Tier P margin calculation. All other non-Tier P instruments and structured products are subject to Tier N margin calculation. In addition, HKSCC may apply Margin add-ons to Clearing Participants to monitor and control the risk exposure of HKSCC. Tier P: Value-at-Risk based (VaR based) Portfolio Margining is adopted, subject to minimum margin level of 3.2% (effective from 14 August 2023). Tier N: Flat rate margin of sub-margin groups is as below , subject to Clearing Participant-specific margin multiplier (where appropriate). ... Flat rate margin of 12% (effective from 13 June 2022) ... Flat rate margin of 30% (effective from 16 Dec 2022) ... Flat rate margin of 55% (effective from 27 Oct 2025)"
+    confidence: high
 
   maintenance_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "HKSCC 的两级保证金覆盖未交收头寸的结算风险并逐日重估（计算初始保证金所需的风险参数文件 IMRPF/RPF01 逐日发布），制度上不设与衍生品对应的『维持保证金』阈值；持续风险控制的替代机制是逐日重算的保证金要求＋清算参与者特定的保证金乘数（如适用）＋HKSCC 可对清算参与者施加的 margin add-ons"
+    en: "HKSCC's two-tier margin covers settlement risk on unsettled positions and is re-estimated daily (the Initial Margin Risk Parameter File IMRPF/RPF01 required for calculating IM is disseminated daily); there is no derivative-style separate maintenance margin threshold — continuous risk control instead relies on the daily recalculated margin requirement, the Clearing Participant-specific margin multiplier (where appropriate), and margin add-ons that HKSCC may apply to Clearing Participants"
+    sources:
+      - title: "Margin（HKEX 官网 HKSCC 风险管理·保证金页，margin add-ons 与保证金乘数）"
+        url: https://www.hkex.com.hk/Services/Clearing/Securities/Risk-Management/Margin?sc_lang=en
+        accessed: 2026-09-05
+      - title: "Initial Margin Calculation Guide v14（HKSCC 官方指南 PDF，IMRPF 逐日发布）"
+        url: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Securities/Risk-Management/Margin/Initial-Margin-Calculation-Guide-HKv14.pdf
+        accessed: 2026-09-05
+    quote: "In addition, HKSCC may apply Margin add-ons to Clearing Participants to monitor and control the risk exposure of HKSCC. ... Tier N: Flat rate margin of sub-margin groups is as below , subject to Clearing Participant-specific margin multiplier (where appropriate). ... a file containing the key risk parameters required for calculating IM (a.k.a., “Initial Margin Risk Parameter File”, or “IMRPF”) will be disseminated to all HKSCC’s CPs on a daily basis upon the launch of VaR Platform."
+    confidence: medium
 
   mark_to_market_frequency:
-    zh: ""
-    confidence: low
+    zh: "按日盯市、日内补充：HKSCC 保证金计算含盯市（MTM）要求成分——风险参数文件 RPF01 每营业日生成；由于证券交收在日内分批进行而资金交收在日终，另于日内 11:00（HKT）进行盘中 MTM 要求计算，以反映日内已交收股票持仓对应的未入账借记/贷记（unposted debit/credit）之未决风险暴露"
+    en: "Daily mark-to-market with an intraday supplement: HKSCC's margin calculation includes a mark-to-market (MTM) requirement component — the risk parameter file RPF01 is generated on each business day; because stock settlement occurs in multiple batch runs during the day while money settlement occurs at day-end, an intra-day MTM requirement calculation is performed at 11:00 a.m. HKT to reflect the outstanding risk exposure from unposted debits/credits on already-settled stock positions"
+    sources:
+      - title: "Initial Margin Calculation Guide v14（HKSCC 官方指南 PDF，4.8.1 盘中 MTM 要求计算（11:00 a.m. HKT）与 RPF01 逐营业日生成）"
+        url: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Securities/Risk-Management/Margin/Initial-Margin-Calculation-Guide-HKv14.pdf
+        accessed: 2026-09-05
+      - title: "Margin（HKEX 官网 HKSCC 风险管理·保证金页）"
+        url: https://www.hkex.com.hk/Services/Clearing/Securities/Risk-Management/Margin?sc_lang=en
+        accessed: 2026-09-05
+    quote: "An Initial Margin Risk Parameter File1 (i.e., RPF01) will be generated in csv format and could be downloaded by CPs on each business day2. ... There are multiple batch settlement runs in CCASS to settle the stock positions during the day. CPs could deliver stocks to settle their short positions. CPs could also arrange cash prepayments and withdraw the settled long positions resulting allocated shares intra-day. All these settlement activities would result in a change in marginable positions for MTM and margin calculation. ... 4.8.1 Intra-day MTM Requirement Calculation (11:00 a.m. HKT) Since the settlement of stock positions occurs during intra-day while money settlement occurs at day-end, unposted debit and unposted credit would be resulted during intra-day MTM requirement calculation to reflect the outstanding risk exposure."
+    confidence: high
 
   delivery_method:
     enum: na
-    zh: "不适用（现货市场为主）"
-    en: "Not applicable (primarily a cash/spot market)"
-    detail: "推断依据：products 章节所列品类（股票/ETF/REITs/权证/牛熊证/债券）均为现货或现金结算的结构性产品，
-      未见实物交割型衍生品——这是对本文件自身 products 章节的内部推断，sources 里的官网首页不构成对
-      这个具体结论的独立证据，只是笼统佐证 HKEX 现货业务为主，是本项目「网址精确到信息页」要求
-      尚未满足的已知案例，见 OPEN-QUESTIONS。"
+    zh: "不适用（现货证券经 CCASS 电子簿记交收，无实物交割概念）"
+    en: "Not applicable (cash securities settled by book-entry through CCASS; no physical delivery concept)"
     sources:
-      - title: HKEX 官网首页（未找到逐产品交割方式的专门页面，见本字段 detail 说明）
-        url: https://www.hkex.com.hk/
-        accessed: 2026-08-12
-    confidence: low
+      - title: HKEX Clearing - Securities Overview（官网，CCASS 交易所交易经 CNS/Isolated Trades 系统交收）
+        url: https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en
+        accessed: 2026-09-05
+    quote: "Exchange Trades: Continuous Net Settlement (CNS) and Isolated Trades Systems"
+    confidence: medium
 
   last_trading_day_rule:
-    zh: ""
-    confidence: low
+    zh: "不适用——现货证券无到期日与『最后交易日』概念；HKSCC 的两级保证金制度针对现金市场未交收头寸在 T+2 交收周期内的结算风险，清算义务随交收完成而消灭"
+    en: "Not applicable — cash securities have no expiry and thus no derivative-style last trading day; HKSCC's two-tier margin targets settlement risk on unsettled cash-market positions over the T+2 settlement cycle, and clearing obligations are extinguished upon settlement"
+    sources:
+      - title: "Margin（HKEX 官网 HKSCC 风险管理·保证金页，正面对照现金市场未交收头寸的保证金定位）"
+        url: https://www.hkex.com.hk/Services/Clearing/Securities/Risk-Management/Margin?sc_lang=en
+        accessed: 2026-09-05
+    quote: "HKSCC adopts a two-tier margin approach that follows the classification of Hang Seng Composite Index (“HSCI”)"
+    confidence: medium
 
   default_management:
     spec:
@@ -1219,9 +1267,15 @@ infrastructure:
     confidence: high
 
   trading_system_name:
-    zh: ""
-    confidence: low
-    detail: "旧系统 AMS/3 在卖空规则页中被提及为历史名称，现行系统对外公开名称未核实，留空。"
+    zh: "领航星证券交易平台（Orion Trading Platform – Securities Market, OTP-C）：2018 年 2 月投产，取代 2000 年 10 月启用的第三代电子股票交易系统 AMS/3；官方定位为基于开放系统技术、可扩展、灵活高性能的现货交易平台，功能可分阶段扩展；交易接入经领航星中央交易网关（Orion Central Gateway – Securities Market, OCG-C）"
+    en: "Orion Trading Platform – Securities Market (OTP-C): launched in February 2018, replacing AMS/3 — the third-generation electronic stock trading system introduced in October 2000; officially positioned as a scalable, flexible and high-performing cash equity trading platform based on open systems technology, with new and enhanced functionalities introducible in phases; access runs via the Orion Central Gateway – Securities Market (OCG-C)"
+    sources:
+      - title: "Infrastructure Overview（HKEX 官网证券交易基建总览，OTP-C 投产时间/定位/AMS-3 替代关系与 OCG-C）"
+        url: https://www.hkex.com.hk/Services/Trading/Securities/Infrastructure/Overview?sc_lang=en
+        accessed: 2026-09-05
+    quote: "the Orion Trading Platform – Securities Market (OTP-C) has been introduced in February 2018 to replace AMS/3, the third generation of electronic stock trading system introduced in October 2000. OTP-C aims to offer a scalable, flexible and high performing cash equity trading platform based on open systems technology."
+    confidence: high
+    detail: "原留空记录注：旧系统 AMS/3 曾在卖空规则页中被提及为历史名称——本次以基建总览官方页坐实现行系统名称与沿革（AMS/3 → OTP-C，2018-02 投产）。"
 
   access_methods:
     zh: "行情数据支持直连（Direct Connection，含首套标准连接及可加购的额外连接）与间连（Indirect Connection，即通过资讯供应商/终端整合商取得数据，前两个数据来源免费、第三个起收费）两种接入方式；另设Co-location（主机托管，于港交所主机托管中心HDC内自建服务器直连交易/行情系统）与内地市场数据枢纽（Mainland Market Data Hub）等专门连接方案，实时数据经许可后须缴付方案对应的连接费"
@@ -1255,9 +1309,15 @@ costs:
     confidence: medium
 
   commission_structure:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：券商佣金，费率市场化协商——未附来源，留空。"
+    zh: "香港证券经纪佣金已全面市场化：最低经纪佣金制的撤销自 2003-04-01 起实施（HKEx 2002-02-20 董事会决定推迟一年执行），佣金自由议价（HKEx 官方表述「making brokerage freely negotiable is the best way forward for Hong Kong」）；佣金由券商与客户协商确定，交易所不统一规定——交易所自身收取的是交易费等运营收费（见 exchange_fees），与经纪佣金分属两类"
+    en: "Brokerage commissions in Hong Kong are fully market-driven: the abolition of minimum brokerage took effect on 1 April 2003 (HKEx board decided on 20 Feb 2002 to defer it by one year), with 'brokerage freely negotiable ... the best way forward for Hong Kong' (HKEx's official wording); commissions are negotiated between brokers and clients and are not set by the exchange — the Exchange's own charges are operating fees (see exchange_fees), a separate category"
+    detail: "原『草稿印象：券商佣金，费率市场化协商』本次以 HKEx 官方新闻稿一手坐实，并给出制度节点（2003-04-01 撤销最低佣金）。"
+    sources:
+      - title: "Schedule for abolition of minimum brokerage revised（HKEX 官方新闻稿，2002-02-20）"
+        url: https://www.hkex.com.hk/News/News-Release/2002/020220news
+        accessed: 2026-09-05
+    quote: "The Board of Directors of Hong Kong Exchanges and Clearing Limited (HKEx) decided today (Wednesday) to defer the abolition of minimum brokerage for one year until 1 April 2003. HKEx believes making brokerage freely negotiable is the best way forward for Hong Kong, and this view is shared by the government."
+    confidence: high
 
   exchange_fees:
     spec: {rate: 0.00565, unit: pct, side: both}
@@ -1321,9 +1381,15 @@ costs:
     verified: 2026-09-04
 
   capital_gains_tax:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：香港不征资本利得税——一般知识，未核实是否有细分例外，留空。"
+    zh: "香港不征资本利得税：香港利得税仅对在港经营行业、专业或业务产生并源于香港的利润征收，且明确排除「出售资本资产产生的利润」（profits excluding those arising from the sale of capital assets）——出售上市股票等资本资产的收益不属于利得税应课税范围，不存在独立的资本利得税税种"
+    en: "Hong Kong levies no capital gains tax: Profits Tax applies only to profits (excluding profits arising from the sale of capital assets) arising in or derived from Hong Kong from a trade, profession or business carried on in Hong Kong — gains from disposing of capital assets such as listed shares fall outside the charge, and there is no separate capital gains tax"
+    detail: "原『草稿印象』以 IRD 利得税官方页一手坐实（评税范围条款排除资本资产出售利润）；IRD 同页还列明「已缴利得税法团分派的股息不计入应评税利润」，与 dividend_withholding_tax 字段呼应。"
+    sources:
+      - title: "Profits Tax（香港税务局官方页，利得税评税范围与资本资产利润排除条款）"
+        url: https://www.ird.gov.hk/eng/tax/bus_pft.htm
+        accessed: 2026-09-05
+    quote: "chargeable to tax on all profits (excluding profits arising from the sale of capital assets) arising in or derived from Hong Kong from such trade, profession or business. There is therefore no distinction made between residents and non-residents."
+    confidence: high
 
   dividend_withholding_tax:
     zh: "香港利得税制度下，已缴付香港利得税的法团所分派的股息，在计算应评税利润时予以豁免（不计入应课税利润）；《税务条例》未设有股息预扣税条款，与利得税豁免条文合并推断港股股息不适用预扣税"
@@ -1368,9 +1434,15 @@ risks:
     detail: "本次检索到的多为第三方律所简报/媒体报道对《国安法》与美国制裁交叉合规风险的评论（如 Lexology/Reed Smith/US-China Business Council），未找到港交所或证监会自身对这类地缘政治风险的正面官方表述可供逐字摘引，按铁律不采纳第三方推断性内容，留空。"
 
   liquidity_risk_note:
-    zh: ""
-    confidence: low
-    detail: "未找到港交所官方对『流动性风险』本身的正面说明性文字（如成交集中度、大市值股票占比等结构性流动性特征的官方论述）；overview.market_cap_usd_bn/listed_companies_count 等相关基础数据本身也留空，暂无法据此合成有质量的流动性风险描述，留空。"
+    zh: "香港现货市场流动性呈结构性分层（分析性归纳）：成交与流动性一般呈现向大市值蓝筹与恒生综合指数大型/中型股成分股集中的特征，小市值个股与部分结构性产品的价差与冲击成本通常更高——这一分层也直接体现在 HKSCC 的两级保证金制度中（Tier P 覆盖大型/中型股成分股、全部股票 ETP 及以其为标的的结构性产品，适用 VaR 组合保证金；其余品种适用 12%/30%/55% 的 Tier N 平准费率，费率档位本身即是对流动性分层与风险敞口的定价，见 clearing.initial_margin_practice）。结算层面流动性风险由 HKSCC 的 CNS 净额交收与保证金安排承接"
+    en: "Liquidity in Hong Kong's cash market is structurally tiered (analytical characterisation): turnover tends to concentrate in large-cap blue chips and Hang Seng Composite LargeCap/MidCap constituents, while small caps and some structured products typically carry wider spreads and higher impact cost — a stratification mirrored directly in HKSCC's two-tier margin regime (Tier P VaR portfolio margin for LargeCap/MidCap constituents, all equity ETPs and structured products thereon; 12%/30%/55% Tier N flat rates for the rest, with the tiers themselves pricing liquidity stratification and risk exposure — see clearing.initial_margin_practice). Settlement-level liquidity risk is absorbed by HKSCC's CNS netting and margin arrangements"
+    detail: "分析性字段（结构性停留 low/medium）：『流动性分层』与保证金分组的对应关系是以 HKSCC 保证金页的 Tier 划分为锚的归纳（Tier 分类跟随 HSCI 大/中/小盘），不是引用了一份专门论述流动性风险的官方文件；无具体成交集中度数字，不引入未核实统计。"
+    sources:
+      - title: "Margin（HKEX 官网 HKSCC 风险管理·保证金页，Tier P/Tier N 分组作为流动性分层与风险定价的制度证据）"
+        url: https://www.hkex.com.hk/Services/Clearing/Securities/Risk-Management/Margin?sc_lang=en
+        accessed: 2026-09-05
+    quote: "Stocks which are constituents of Hang Seng Composite LargeCap Index or Hang Seng Composite MidCap Index, all equity ETPs, and structured products of the aforementioned Tier P instrument(s) as underlyings are subject to Tier P margin calculation."
+    confidence: medium
 
   regulatory_change_risk_note:
     zh: "香港上市/交易制度近年处于活跃调整期，官方样本包括：①2023年6月19日推出港元-人民币双柜台模式（Dual Counter Model）及双柜台做市商计划；②2023年3月31日《上市规则》新增第18C章「特专科技公司」上市规则，2024年8月23日证监会与港交所联合公布为期三年（至2027年8月31日）的临时性宽免措施；③2024年10月18日起证监会与港交所推行「优化后申请时限」，为新上市申请审批设定更明确的监管意见轮次与时限；④2024年6月港交所就下调最小价差（买卖价差改革）展开市场咨询"

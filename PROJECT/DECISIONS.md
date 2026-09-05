@@ -83,8 +83,9 @@
 - ADR-076 · 2026-09-05 · 并行 worktree 防撞号第二版：ADR 编号占位符 + 合并时自动定号
 - ADR-077 · 2026-09-05 · 来源文件下沉 + 把「靠自觉的约定」变成构建关卡
 - ADR-078 · 2026-09-05 · 数据空缺复核轨任务四执行方案：5 家旗舰所深度补全的字段级现状核实 + 按字段族批量回填设计
-- ADR-079 · 2026-09-05 · 数据空缺复核轨任务三执行方案：C 桶 40 处按「上次卡在哪」重排为五棒 + 三处范围裁定
-- ADR-080 · 2026-09-05 · 风险旗标数据子棒的落地方案：第 12 章 `*_note` 「制度核 / 分析尾」二分 + `fx_risk_note` 就地清作业规程
+- ADR-079 · 2026-09-05 · 风险旗标数据子棒的落地方案：第 12 章 `*_note` 「制度核 / 分析尾」二分 + `fx_risk_note` 就地清作业规程
+- ADR-080 · 2026-09-05 · 任务四第二人独立复核：78 处终态，22 处订正（含 2 处素材错挂），零幻觉
+- ADR-081 · 2026-09-05 · 自动合并流水线：CI build 检查 + auto-merge + ADR 定号 post-merge healer，§四"人工抽检"改"独立视角复核"
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2025,7 +2026,7 @@
 
 ---
 
-### ADR-080 — 风险旗标数据子棒的落地方案：第 12 章 `*_note` 「制度核 / 分析尾」二分 + `fx_risk_note` 就地清作业规程
+### ADR-079 — 风险旗标数据子棒的落地方案：第 12 章 `*_note` 「制度核 / 分析尾」二分 + `fx_risk_note` 就地清作业规程
 
 **为什么需要：** [ADR-066] 轴 6 把 `fx_risk_note` 就地清定为**独立数据层子棒**、留给后续棒，`PROJECT/ROADMAP.md` §一「下一步」#1 点名并附一句要求——「触及约 22 字段（近 [CLAUDE.md §四] 的 30 字段第二人复核门槛，**回填前先估清**）」。本条就是那次「估清」+ 作业规程，仍为纯文档棒（零 `data/` 改动，同 [ADR-066] 设计棒的处置）。
 
@@ -2134,7 +2135,7 @@
 
 ---
 
-### ADR-079 — 数据空缺复核轨任务三执行方案：C 桶 40 处按「上次卡在哪」重排为五棒 + 三处范围裁定
+### ADR-PENDING-task3-derivatives-plan — 数据空缺复核轨任务三执行方案：C 桶 40 处按「上次卡在哪」重排为五棒 + 三处范围裁定
 
 **背景：** [ADR-060] 把任务三定为「9 家衍生品子章残余补全（C 桶 40 处）」，`ROADMAP.md` 的步骤只有一句「逐所按 `add-exchange` SKILL 第 4 步子章部分，`make fetch` 补抓衍生品规则页，填信封 + `spec`」。动手前先做了一次只读实算侦察，结论是这句步骤建立在三个不成立的假设上：① 这 40 处是「还没查」；② `spec` 可以随手填；③ 40 处能清零到 0。本 ADR 据此重排方案，并把两块被裹进任务三、实际规模更大的工作显式移出。侦察在无人值守的后台会话中完成，设计按推荐项定案（未能像 [ADR-048]/[ADR-059] 那样现场 Q&A）——如用户对任一棒或任一裁定有异议，本 ADR 即回滚依据，直接在本条上重排。
 
@@ -2179,5 +2180,51 @@
 - **依据 7 的「幽灵缺口」不并入任务三，但需用户拍板怎么处置**：`jp-jpx` / `cn-sse` / `us-nyse` / `us-nasdaq` 四家自身确实运营重要衍生品业务线，补齐意味着先补第四章产品条目、再填两个 derivatives 子章（每家约 25 个 leaf，四家约 100 处），是与任务四同量级的独立条目，不该塞进一个 40 处的条目里。**本 ADR 只做两件不需要拍板的事**：把这个循环判据问题记进 `OPEN-QUESTIONS.md`，并在此说明「任务三完成 ≠ 衍生品覆盖干净」。是否立条目、排在任务四前后，留用户决定。
 - 棒 3 需要人工投喂的 SGX 合约规格具体清单，由该棒执行时写进 `OPEN-QUESTIONS.md`，本 ADR 不预先指定合约。
 - `circuit_breaker_type` 枚举缺 `contract_level` 值（`OPEN-QUESTIONS.md` 框架性问题 #44(b) 记录的悬案，`hk-hkex` 当年借用 `stock_level` 近似）——本轨不解决，但棒 2/3 若在其余 8 家遇到同样的逐合约颗粒度，应把新样本补记到该条目下，够样本时再改 `enums.yml`。
+
+**日期：** 2026-09-05
+
+---
+
+### ADR-080 — 任务四第二人独立复核：78 处终态，22 处订正（含 2 处素材错挂），零幻觉
+
+**背景：** [ADR-078] 规定任务四 5 家旗舰所 78 处全部完工后须比照 [ADR-074] 做第二人独立复核。本条 2026-09-05 执行时点任务四已完成 67 处（回填/升级）、11 处经检索未坐实留空（`OPEN-QUESTIONS.md` 第29条）——按「复核覆盖全部 78 处终态」执行：65 处已填字段逐条复核，13 处留空字段核验「留空理由 + 入口记录」是否合规（其中 2 处发现系漏写而非查不清，就地补写）。
+
+**方法（复刻 [ADR-074]）：** 4 个互相隔离、彼此不知情的独立复核视角（A=us-nyse 17 / B=hk-hkex 17 / C=cn-sse 19 / D=uk-lse+jp-jpx 25），逐条：quote 逐字性（grep/pdftotext 自查缓存，不只看 `make check` 绿灯）、zh/en 数字溯源、confidence 与来源优先级匹配、语义忠实度（双向）、消极判断、同文件跨字段一致性。判定表全文见 `PROJECT/DATA-GAP-TASK4-SPOT-CHECK.md`。
+
+**结果：** 初检 48 PASS / 14 FIX / 15 QUESTION（filled 口径通过率 73.8%）；**22 处订正全部就地落地**（14 处视角 FIX + 复核过程中发现的 2 处漏项补写 uk `listing.delisting_process`/cn `overview.history` + QUESTION 转 FIX 6 处）。**终态 67/67 filled 全部 PASS + 11 处合规留空，QUESTION 存留仅 1 项备注级**（cn `costs.capital_gains_tax` 「现行有效」时效标注无逐字来源）。`make build` 全绿（verify_quotes OK=1088/FAIL=0）。
+
+**最重要的 4 处发现（均为「真实素材错误挂接」级，非凭空编造）：** ① cn `participants.foreign_access_channel` quote 从来源登记批注误转写出全文不存在的「第七条…」——换为缓存真实条款（QFII 规定第四条托管人开户/第七条 10%、30% 上限）；② jp `costs.stamp_duty` 把商品销售代金收据的分档税额错挂到证券转让文书——第17号文書注2明确排除证券转让价款，实际适用无分档简表（5万円未満非課税/5万円以上200円）；③ jp `listing.transfer_between_boards` quote 段2 逐字出自 Rule 714（COVID 特别条款）而非第3章第2节——换 Rule 308(1)；④ hk `listing.delisting_conditions` 把 6.11（有替代上市）/6.12（无替代上市）的双轨结构写反——按条文重写。**工具层系统性发现**：`fetch_sources.doc_companion` 对「URL 以 .html 结尾但实为 PDF」的来源不生成 .txt 伴随（us DTCC guide 实锤），独立复核者对二进制 PDF 不可见导致 10 项「查无文本」误报——经协调者 pdftotext 验证 9 条争议 quote 全部逐字成立，并已为 4 个 PDF 补齐 .txt 伴随；此为 [ADR-074] 系统性问题③的工具层变体，建议后续给 `doc_companion` 按 content-type 而非扩展名判定。
+
+**复核的独立价值实证：** uk `regulation.clearing_regulator`（OPEN-QUESTIONS 第22条「未找到直接原文确认」）的留空依据被复核证伪——同一批缓存的 LCH 费率表 PDF 内即有「supervised by the Bank of England」原句，据此回填关账；uk `listing.delisting_process`/cn `overview.history` 两处「以为是留空决策」实为上轮会话漏写，复核兜住了。
+
+**决定：** 22 处订正就地生效；QUESTION 存留 1 项转 OQ；任务四剩余 11 处按 OQ 第29条入口继续，全部回填后无需再整批复核（本复核已覆盖 78 处终态，增量字段逐处自检即可）。
+
+**没改：** `schema/`/`tools/`；FIX 只动 zh/en/detail/quote/sources 与 2 处漏项补写，未动既有 enum/spec/confidence 框架。
+
+**验证：** `make build` 全绿（validate 20 家 0/0、verify_quotes OK=1088/FAIL=0）；4 个 PDF 的 .txt 伴随补齐后 `verify_quotes` 口径与独立复核一致。
+
+**日期：** 2026-09-05
+
+---
+
+### ADR-081 — 自动合并流水线：CI build 检查 + auto-merge + ADR 定号 post-merge healer，§四"人工抽检"改"独立视角复核"
+
+**背景：** 单人维护仓库的开发者反馈现有流程三处摩擦让人疲于应付：① 后台任务留下的 PR 需要人手动点 merge（[CLAUDE.md] §六已经承认"走 PR 只是多一次手动点 merge，没有额外价值"，但没人去把这多余的一步真正拿掉）；② 合并前跑 `make assign-adr` 定号（[ADR-076]）虽然只是机械操作，仍要协调者记得手动跑一遍；③ 并行 worktree 批量开工时 PR 反复冲突，2026-09-04/05 那次 ADR 编号连撞四次（PR69-72）就是最直接的例子。用户明确要求"高度自动化摆脱人工干预"，并同意把 [CLAUDE.md] §四"人工抽检"/"第二人独立复核"的措辞改为不强制要求真人（[ADR-074] 已经用 4 个独立 agent 视角顶替真人复核、96.2% 达标，验证了这条路可行）。
+
+**定了什么：**
+
+1. **`.github/workflows/pr-build.yml`**：`pull_request` 触发，跑 `make build`（`pip install -r tools/requirements.txt` 后）。这是唯一的必需检查，PR 自身分支上 `ADR-PENDING-*` 占位符只警告不报错（`validate.py` 既有逻辑，[ADR-076]），不需要额外处理就能绿。
+2. **`.github/workflows/adr-heal.yml`**：`push: main` 触发，`concurrency: group: main-adr-heal, cancel-in-progress: false`——利用 GitHub Actions 对同一 concurrency group 的多次触发天然排队串行执行这一原生机制，复刻 [ADR-076] 依赖的"合并本身是串行的"前提，不需要自己写互斥锁。每次跑：`git checkout -B main` 确保不是 detached HEAD（否则 `assign_adr_number.py` 的 `current_branch()` 会把台账登记行的分支名写成字面 `HEAD`）→ `make assign-adr` → 有变更就以 `github-actions[bot]` 身份直接 commit + push 回 `main`（commit message 带 `[skip ci]` 避免自己触发的 push 又重跑一轮）→ 收尾跑一次 `make build` 复核仍绿。**取代原来"合并协调者手动跑 `make assign-adr` 再 commit"的人工步骤**（`PROJECT/GIT-RUNBOOK.md` 原有的手动步骤降级为 CI 故障时的兜底，未删除）。
+3. **后台任务开 PR 时自带 `gh pr merge --auto --squash --subject "..." --body ""`**（不传 `--delete-branch`——仓库级 `deleteBranchOnMerge` 已经是 `true`，远端分支合并后服务端自动删，不需要 CLI 再删一次；这也顺带避免了 `PROJECT/GIT-RUNBOOK.md` 记录的"本地分支正被 worktree 检出导致删分支报错"那个坑——因为正常路径下已经没有人在本地跑带 `--delete-branch` 的合并命令了）。仓库已确认 `allow_auto_merge: true`（`gh api repos/{owner}/{repo}` 现测），不需要额外开启。
+4. **`CLAUDE.md` §四措辞修订**：「人工抽检」→「抽检」+ 显式允许「独立视角——可以是人，也可以是另一个未共享上下文的全新 agent 会话（不是 fork）」；「第二人独立复核」→「独立视角复核」。量化门槛（95% 阈值、`quote` 反查、>30 字段触发独立复核）一字未改，只改"谁来复核"这一处的字面要求。
+5. **`CLAUDE.md` §六 / `PROJECT/GIT-RUNBOOK.md` 同步更新**，把"后台任务留 PR 需要人工 merge"的旧描述改为"正常路径全自动，CI 报红或真实内容冲突才需要人工兜底"，旧的手动合并/手动定号步骤保留作为兜底流程，不删除。
+
+**没做：**
+
+- **没有开 GitHub 原生 Merge Queue。** 这能进一步解决"多个后台 PR 密集自动合并、后一个的 CI 检查没有针对合并后的最新 main 重新验证"这一残余风险（`PROJECT/GIT-RUNBOOK.md` 已记录此局限），但需要仓库开 branch protection + 把 `build` 设为 required check，涉及仓库级安全设置变更，本条不擅自用 `gh api` 改；留给用户在 GitHub 网页 Settings → Rules 里手动开，本条只探明并记录了这个可选后续项，不是本条范围。
+- **没有把"抽检者可以是独立 agent"这件事再往前推成一个正式的可复用 skill/操作模板**（比如"怎么给独立 agent 布置盲审任务、只给交易所 id + 字段清单、不告诉它已填答案"）——[ADR-074] 已经有一次实践先例，但把它写成可直接照抄的模板是另一件事，本条只改了措辞允许这么做，模板留待下次真正触发 >30 字段复核时顺手补，或单独立项。
+- **没有改变 ADR 编号台账（`PROJECT/ADR-LEDGER.md`）的运作方式本身**——post-merge healer 只是把 [ADR-076] 已经定好的"分配延后到合并进 main 这一刻"这条规则从"人工在分支上跑"进一步自动化成"CI 在 main 上跑"，序列化的原理不变（合并本身串行 → 定号也就串行），只是把执行者从人换成 workflow。
+
+**验证：** 本条自身就是这条流水线的第一个真实用例——`DECISIONS.md` 标题写占位符 `ADR-081`，`CLAUDE.md`/`PROJECT/GIT-RUNBOOK.md` 里的交叉引用也写同一占位符；PR 开出后带 `gh pr merge --auto --squash`，`pr-build.yml` 跑绿后由 GitHub 服务端自动合并，合并进 main 后 `adr-heal.yml` 应该自动把本条占位符定号为下面这个真实编号——本条末尾若能看到具体数字而不是 `ADR-081`，说明整条流水线（CI 检查 → auto-merge → post-merge 定号）端到端跑通了。人工验证记录：`gh repo view`/`gh api` 现测 `allow_auto_merge: true`、`deleteBranchOnMerge: true`；本地 `make build` 全绿（占位符在本分支上只警告，不阻断）。
 
 **日期：** 2026-09-05

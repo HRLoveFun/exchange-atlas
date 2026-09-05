@@ -85,3 +85,11 @@
   - Profits Tax（英文版，与中文版交叉核对用）: https://www.ird.gov.hk/eng/tax/bus_pft.htm
 - `info.gov.hk`（香港政府新闻公报 GIA，2026-09-04 新增登记） | 官方（政府新闻处发布的立法会答问等一手文件） | en / zh-Hant | curl 常规 UA 200；⚠️ 旧公报页 `charset=BIG5`，非 UTF-8，抓下来后按 latin-1/BIG5 解码再抽正文 | `dark_pool` 依据：财经事务及库务局局长就「暗池交易的规管」的立法会书面答复（LCQ15，2012-11-28）——SFC 依《证券及期货条例》第 V 部发牌规管暗池运营者、SEHK 自 2012-10-03 起强制 ALP 标记
   - LCQ15: Regulation of dark pool trading（2012-11-28）: https://www.info.gov.hk/gia/general/201211/28/P201211280278.htm
+
+- `hkex.com.hk`（2026-09-05 补充登记，任务四族A：HKSCC 现货保证金制度，沿用既有域名条目） | 官方 | en | curl 常规 UA 200
+  - Margin（HKSCC 两级保证金制度官方页：Tier P VaR 组合保证金最低 3.2%（2023-08-14 生效）/ Tier N 平准费率第 1/2/3 组 12%/30%/55%（分别 2022-06-13、2022-12-16、2025-10-27 生效）、margin add-ons、抵押品形式）: https://www.hkex.com.hk/Services/Clearing/Securities/Risk-Management/Margin?sc_lang=en（HTTP 200，379KB）
+  - Initial Margin Calculation Guide v14（PDF，保证金逐日计算操作细节、IMRPF 于 VaR 启动后逐日向全体 CP 发布）: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Securities/Risk-Management/Margin/Initial-Margin-Calculation-Guide-HKv14.pdf（HTTP 200，PDF）
+  - 2026-09-05 新增（任务四族D：经纪佣金市场化沿革）: 撤销最低经纪佣金实施时间表修订（HKEX 新闻稿，2002-02-20，董事会决定推迟一年至 2003-04-01 撤销最低经纪佣金、「making brokerage freely negotiable is the best way forward」）: https://www.hkex.com.hk/News/News-Release/2002/020220news（HTTP 200，360KB）
+  - 2026-09-05 新增（任务四族B/C，沿用 `hkex.com.hk` 既有域名条目）: 主板《上市规则》综合 PDF（consol_mb，第6章停牌/除牌条文 6.01/6.01A/6.12 出处）: https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Rules-and-Guidance/Listing-Rules/Consolidated-PDFs/Main-Board-Listing-Rules/consol_mb.pdf（HTTP 200，3MB）
+  - 同上: 第9A章《由GEM转往主板上市》单章 PDF（transfer_between_boards 出处）: https://www.hkex.com.hk/-/media/hkex-market/listing/rules-and-guidance/listing-rules-contingency/main-board-listing-rules/equity-securities/chapter_9a（HTTP 200，PDF）
+  - 2026-09-05 新增（任务四族G，沿用 `hkex.com.hk` 既有域名条目）: Infrastructure Overview（证券交易基建总览，OTP-C/AMS-3 沿革与 OCG-C——trading_system_name 出处）: https://www.hkex.com.hk/Services/Trading/Securities/Infrastructure/Overview?sc_lang=en（HTTP 200，1.2MB）

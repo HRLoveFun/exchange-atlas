@@ -26,7 +26,7 @@
 19. **`in-nse` 的全市场熔断机制是本项目第一个"联动竞争对手交易所指数"的样本。** NSE 的指数熔断由 NSE 自己的 Nifty 50 或竞争对手 BSE 的 Sensex 两个指数中先触发者共同决定（`market_structure.circuit_breaker` 字段已如实记录），这与此前所有样本"熔断只看自己市场的指数"的假设不同——`taxonomy.yml` 目前没有字段专门表达"熔断依据的指数是否跨交易所"，`circuit_breaker_type` 枚举（none/index_level/stock_level/both）也没有这个维度。暂未改 schema，先记录这个真实案例，待样本更多再评估是否值得加字段。
 20. **`in-nse` 的证券交易税（STT）来源页面只覆盖股票衍生品（F&O），不含现货股票交割/日内交易适用的税率表**——`costs.financial_transaction_tax` 字段的 `quote` 已在 `detail` 里标注这个覆盖范围限制，不是"埋着不说"。同一批还有一个类似但更严重的情况：`participants.foreign_access_channel` 引用的 FPI 说明页（`nseindia.com/static/invest/fpi/broad-parameters`）标题写"Broad Parameters"，实际正文却是招商性质的概述文字，不含具体的外资分类标准或持股比例上限数值——`overview.foreign_ownership_limit` 因此整体留空。这是"网页标题暗示有具体参数、实际打开是营销文案"这类来源质量问题的新样本，与 OPEN-QUESTIONS 第4条"quote 粒度与成本"是同一类问题的延伸，下次找到 SEBI FPI Regulations 的具体条款页后应替换掉这条来源。**（2026-08-30 A2 补记：`participants.foreign_access_channel` 的来源已是 SEBI《FPI 条例 2019》全文 PDF，只是 URL 里 `2019` 被误写成 `1919` 导致抓到 404 壳——已订正，quote verbatim 命中。本条剩余部分——STT 税率表覆盖面、`overview.foreign_ownership_limit` 留空——仍未解决。）**
 21. **`uk-lse` 的 `euroclear.com` 全域名对 curl 常规 UA 返回 403**（根域名与内容页均如此，间隔12秒重试后仍403，判断为真实拦截而非限流），未能直接核实 Euroclear UK & International（原CREST）作为LSE中央证券存管机构的角色。改用《伦敦证券交易所规则》（Rules of the London Stock Exchange）自身术语表内"CREST — the settlement system operated by Euroclear UK & International Ltd"的定义作为替代来源，`clearing.csd_name` 因此仍能标 `confidence: high`（一手官方来源，只是换了个文件），但下次有空应该专门想办法绕过 euroclear.com 的反爬（换UA/加Referer/找欧洲结算集团年报等替代来源），以便未来核实更多CSD层面的细节（如结算失败处理、跨境结算安排等本次未触及的内容）。
-22. **`uk-lse.regulation.clearing_regulator` 留空。** 按公开常识，英格兰银行（Bank of England）应是英国中央对手方（CCP）在UK EMIR框架下的监管机关，但本次抓取范围（FCA/LSE/LCH官网）未找到直接原文确认这一点——与 `us-nyse` 当初 NSCC/DTCC 因 dtcc.com 403 而留空是同一类"几乎确定但没有当次抓取原文撑腰"的情况，按铁律不采纳未核实印象。下次有空应专门抓 bankofengland.co.uk 关于CCP监管职能的说明页。
+22. **【已解决 2026-09-05】`uk-lse.regulation.clearing_regulator` 留空。**（第二人复核发现同批缓存的 LCH 费率表 PDF 内有「supervised by the Bank of England」原句，已据此回填，字段字段见 data；本条留档） 按公开常识，英格兰银行（Bank of England）应是英国中央对手方（CCP）在UK EMIR框架下的监管机关，但本次抓取范围（FCA/LSE/LCH官网）未找到直接原文确认这一点——与 `us-nyse` 当初 NSCC/DTCC 因 dtcc.com 403 而留空是同一类"几乎确定但没有当次抓取原文撑腰"的情况，按铁律不采纳未核实印象。下次有空应专门抓 bankofengland.co.uk 关于CCP监管职能的说明页。
 23. **`uk-lse.costs.dividend_withholding_tax` 留空。** 常识印象是英国境内公司股息通常无预扣税（这也是英国税制的一个常被引用的特点），但本次抓取范围（gov.uk 印花税研究报告）未涉及股息预扣税主题，未找到当次可引用的官方原文。下次有空应专门抓 gov.uk/HMRC 关于非居民股息征税的说明页（如 HS300 系列指引）来核实。
 24. **`uk-lse` 的 `Admission and Disclosure Standards`（LSE官网自订说明文档，标注生效日期2021年1月）与 `UKLR`（FCA Handbook，标注最后更新2026年4月）两份同时在用的官方来源之间存在术语版本不一致**：前者仍使用"premium or standard listing"描述官方名册（Official List）内部分级，这是2024年7月UKLR改革（单一"equity shares (commercial companies)"类别取代Premium/Standard两级架构）之前的旧术语；后者已完全反映新架构。这意味着交易所自身面向市场参与者的说明文档，尚未同步更新以反映监管层面的规则变革——`uk-lse.yml` 的 `listing.boards` 与 `listing.review_system` 两处均已按新（UKLR）口径填写并在注释中标注了这个版本差异，但如果后续需要再次引用 Admission and Disclosure Standards 文档里涉及"Official List"分级的具体条款，需要留意这份文档本身的用语可能滞后于监管现状，不能机械照抄。
 25. **`organization_form` 受控词表的四个值（公司制上市/公司制未上市/会员制/国有事业单位制）覆盖不了「公法机构由独立私法运营公司运营」这第五种模式，`de-xetra` 是首个真实样本。** 法兰克福证券交易所（FWB）官方原文明确写道"a stock exchange, as a public law institution with limited legal capacity, cannot act as a legal entity under private law"——FWB 本身不是公司，运营公司（Trägerin）是另一层法律实体 Deutsche Börse AG。这与同集团 `de-eurex`（Eurex Deutschland，私法主体的公司，归入 `demutualized_unlisted`）是两种不同的法律形式，即使 `group_id` 相同；也不宜归为「国有事业单位制」（运营公司是跨国上市公司而非德国政府直接运营的国企），也不是「会员制」（1808年后即为公法机构而非会员合伙关系）。`de-xetra.yml` 的 `overview.organization_form` 已如实留空 `enum`、只写文字描述，不强行套用。与 `review_system` 曾经退化为自由文本的问题（已按 `DECISIONS.md` [ADR-023] 解决）性质相同：不是"这一个字段该不该进矩阵"的问题，而是受控词表本身需要评估是否新增一个"公法机构+独立运营公司"的枚举值，还是继续接受这个矩阵列在个别样本上留空——建议等更多欧陆交易所（如 Wave 2 的 `fr-euronext`）样本到位后一并评估，不要现在就为一个样本改 enums.yml。
@@ -51,7 +51,7 @@
 
 44. **`market_structure.derivatives` 子块（ADR-019 新增）在 `hk-hkex` 首次真实填充后，暴露出两处值得记录的问题。** (a) 原假设"HKFE（香港期货交易所）2000年公司化后与HKEX同一法人"，但 HKEX 官方2000-03-06新闻稿原文是"The Hong Kong Futures Exchange (HKFE) today became **a subsidiary of** Hong Kong Exchanges and Clearing Limited"——法律上 HKFE 是集团内**独立法人的全资附属公司**（股票期货再由 HKFE 全资附属的 HKCC 结算，还有第三层）。此前只有 NYSE Group（多个独立注册的 SEC 实体）与 Eurex/Xetra（同为独立法人）两种"历史交易所公司化"先例，`hk-hkex`/HKFE 是第三种"文档常说'合并'、官方原文显示实为'集团化为子公司'"的样本——下次遇到"某交易所X年与主交易所合并"描述时应找当年官方公告核实法律形式（同一法人 vs 集团子公司 vs 独立姊妹交易所），不要凭"合并"字面想当然。(b) `circuit_breaker_type` 枚举（none/index_level/stock_level/both）以股票市场为语境设计，`derivatives.circuit_breaker` 真实颗粒度是"部分期货品种的现月/次月合约级别"（六个指数期货品种，非全市场也非个股），本次借用 `stock_level` 只取其"非全市场"含义，是不完全贴合的近似——若其余 8 家（`au-asx`/`br-b3`/`cn-szse`/`fr-euronext`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse`）补齐衍生品机制后普遍遇到同样情况，值得给枚举新增 `contract_level`（逐合约级）值，现在只一家样本，先不改 enums.yml。(c) `derivatives.closing_mechanism`（收市机制）、`connect_schemes`（互联互通安排）、`block_trade`（大手交易门槛规则）三字段本次官方页面信息不足，已如实留空/降级，缺口说明见 `data/exchanges/hk-hkex.yml` 对应字段 `detail`。
 
-45. **[ADR-019] 判断「某所是否运营衍生品业务线」的判据是「第四章产品体系是否已列出 future/option 类产品」，这个判据存在循环，正在静默隐藏一块比 [ADR-060] C 桶更大的缺口。** 实测 `jp-jpx` / `cn-sse` / `us-nyse` / `us-nasdaq` 四家的 `products` 章**一条衍生品条目都没有**（`jp-jpx` 5 条为股票 / ETF / REIT / 债券 / ETN，无大阪交易所的日经 225 期货——按成交量计世界前列的股指期货市场；`cn-sse` 无 50ETF 期权；`us-nyse` 无 NYSE American / Arca 期权），于是 `market_structure.derivatives` 与 `clearing.derivatives` 两组整组为空 → 分组 `optional` 豁免（`count_chapter_leaves()`）→ 进度矩阵该格显 ✅。**第四章的缺项让第五章的缺口不可见，两章互相背书**，而这四家恰是 [ADR-060] 任务四点名的旗舰所，图鉴主视图最该讲清楚的市场。补齐意味着先补第四章产品条目、再填两个 derivatives 子章（每家约 25 个 leaf，四家约 100 处），与任务四同量级，**不并入任务三**（见 [ADR-079] 依据 7 与「没定/留后续」）。待用户决定是否立独立条目、以及排在任务四前后。在此之前，任务三的完成**不等于**衍生品覆盖已经干净。
+45. **[ADR-019] 判断「某所是否运营衍生品业务线」的判据是「第四章产品体系是否已列出 future/option 类产品」，这个判据存在循环，正在静默隐藏一块比 [ADR-060] C 桶更大的缺口。** 实测 `jp-jpx` / `cn-sse` / `us-nyse` / `us-nasdaq` 四家的 `products` 章**一条衍生品条目都没有**（`jp-jpx` 5 条为股票 / ETF / REIT / 债券 / ETN，无大阪交易所的日经 225 期货——按成交量计世界前列的股指期货市场；`cn-sse` 无 50ETF 期权；`us-nyse` 无 NYSE American / Arca 期权），于是 `market_structure.derivatives` 与 `clearing.derivatives` 两组整组为空 → 分组 `optional` 豁免（`count_chapter_leaves()`）→ 进度矩阵该格显 ✅。**第四章的缺项让第五章的缺口不可见，两章互相背书**，而这四家恰是 [ADR-060] 任务四点名的旗舰所，图鉴主视图最该讲清楚的市场。补齐意味着先补第四章产品条目、再填两个 derivatives 子章（每家约 25 个 leaf，四家约 100 处），与任务四同量级，**不并入任务三**（见 [ADR-PENDING-task3-derivatives-plan] 依据 7 与「没定/留后续」）。待用户决定是否立独立条目、以及排在任务四前后。在此之前，任务三的完成**不等于**衍生品覆盖已经干净。
 
 
 ## 具体数据悬案
@@ -132,7 +132,18 @@
   - `in-nse price_limits.other_boards` "NSE Emerge 沿用与主板同一套分类框架"的断言在 `.cache/in-nse/` 里只找到导航栏"Emerge Platform"字样、无正文支撑；印度 SME 板块实践中常有独立于主板的涨跌幅安排，待人工核对 SEBI/NSE Emerge 专属规则原文再定案。
   - （软性，非阻塞）`fr-euronext`/`uk-lse` 的 `block_trade` confidence 评级不对称（medium vs high），两者结构相似（门槛均由欧盟/英国 MiFIR 层级设定、非交易所自定），未见显式判断依据说明；`hk-hkex dark_pool` 的"第 1 类+第 7 类牌照""合资格投资者仅限机构"两处细节写入了 zh/en 主文而非仅限 `detail`，独立来源（SFC《操守准则》第 19 段/附表 8）本次未逐字缓存。
   - （系统性，跨多家）`connect_schemes` 的消极认定条目（`au-asx`/`br-b3`/`ch-six`/`de-xetra`/`jp-jpx`/`sa-tadawul` 共 6 处）普遍未填 `sources`，会静默继承与断言主题无关的章节级默认来源（`market_structure._meta.sources`，通常是交易时段页面），使"moderate 必须有 sources"的校验对这类字段形同虚设——建议给消极认定类字段设计专门的来源占位方式，本次未处理（跨 6 个文件的结构性调整超出复核范围）。
-- **[ADR-080] 「`confidence: medium` 却零 `sources`」的全库缺口：按 `validate` 展开后口径 64 处，且 100% 是 `volatility: stable` 字段（2026-09-05 实算）。** 校验 4 只要求 `volatile`/`moderate` 有 `sources`，`stable` 一档不设约束——头部是 `overview.timezone` 16 / `overview.settlement_currency` 16 / `overview.dst_rule` 14 / `overview.trading_currency` 5 / `regulation.clearing_regulator` 5。`risks.fx_risk_note`（同为 `stable`）近全库停在无来源的 `low` 而 `make check` 一路全绿，正是踩在这个缺口上。与上面 [ADR-074] 复核者提的「消极认定类字段静默继承章节 `_meta.sources`」是同一族问题的两面：一面是**没有来源也不报错**（`stable` 档），一面是**继承来了一个与断言无关的来源**（`moderate` 档，靠 `expand_field` 继承）。风险旗标数据子棒只在第 12 章加限定不变式（该章 `confidence` 已被 [ADR-066] 轴 3 做成一等视觉信号），**不代解全库**：`stable` 字段里「时区 / 币种 / 夏令时」这类确实近乎常识、是否值得逐条补源需要单独判断，别为了让校验好看而批量塞首页 URL（`PROJECT/SOURCES.md`「来源 URL 要精确到信息页」）。**待拍板**：是否把「`stable` 且 `medium` 须有来源」立为独立回填棒，还是承认这 64 处是可接受的常识层。
+- **[ADR-079] 「`confidence: medium` 却零 `sources`」的全库缺口：按 `validate` 展开后口径 64 处，且 100% 是 `volatility: stable` 字段（2026-09-05 实算）。** 校验 4 只要求 `volatile`/`moderate` 有 `sources`，`stable` 一档不设约束——头部是 `overview.timezone` 16 / `overview.settlement_currency` 16 / `overview.dst_rule` 14 / `overview.trading_currency` 5 / `regulation.clearing_regulator` 5。`risks.fx_risk_note`（同为 `stable`）近全库停在无来源的 `low` 而 `make check` 一路全绿，正是踩在这个缺口上。与上面 [ADR-074] 复核者提的「消极认定类字段静默继承章节 `_meta.sources`」是同一族问题的两面：一面是**没有来源也不报错**（`stable` 档），一面是**继承来了一个与断言无关的来源**（`moderate` 档，靠 `expand_field` 继承）。风险旗标数据子棒只在第 12 章加限定不变式（该章 `confidence` 已被 [ADR-066] 轴 3 做成一等视觉信号），**不代解全库**：`stable` 字段里「时区 / 币种 / 夏令时」这类确实近乎常识、是否值得逐条补源需要单独判断，别为了让校验好看而批量塞首页 URL（`PROJECT/SOURCES.md`「来源 URL 要精确到信息页」）。**待拍板**：是否把「`stable` 且 `medium` 须有来源」立为独立回填棒，还是承认这 64 处是可接受的常识层。
+
+29. **任务四（[ADR-078]）截至第二人复核（2026-09-05）仍未坐实的 11 处中的 10 处字段**（另 `uk-lse listing.delisting_process`/`cn-sse overview.history` 系漏写已补、`uk-lse regulation.clearing_regulator` 已回填）——按铁律留空，逐字段记下已试路径与下次入口：
+    - `hk-hkex regulation.foreign_ownership_limit`：未找到香港对外资持股「无一般比例限制」的官方正面表述（候选入口：InvestHK「Our business environment」、证监会/公司注册处行业牌照清单——个别行业才有持股限制是结构性常识，但需要一份官方页可摘引）。
+    - `hk-hkex regulation.capital_controls`：目标来源是《基本法》第112条（「香港特别行政区不实行外汇管制政策」），basiclaw.gov.hk 章节直达 URL 404（站点改版），下次从 basiclaw.gov.hk 首页导航重新定位全文链接。
+    - `hk-hkex overview.history` / `hk-hkex participants.foreign_access_channel` / `hk-hkex regulation.self_regulatory_org` 升级：hkex.com.hk 的 About-HKEX/History 与 /Regulation 页面 URL 均为 404（官网改版），HKEX「front-line regulator」官方表述待重新定位；境外投资者参与通道（直接开户）缺官方一句原文。
+    - `us-nyse participants.foreign_access_channel`：美国市场无外资准入限制缺官方一句原文（investor.gov 术语表/国际投资者页为 JS 渲染壳；候选入口：SEC「International Investors」栏目或 FINRA「Investing for beginners」类页面）。
+    - `uk-lse market_structure.trading_sessions.pre_market`：MIT201 不含盘前时段表——正确文档应是 docs.londonstockexchange.com 的「Trading Services」系列（与 business-days 页同族，注意 lseg.com 对应页是 SPA 空壳）。
+    - `uk-lse market_structure.holidays_note`：lseg.com business-days 页为 SPA 空壳、MIT201 无假期表——入口同上（Trading Services 系列文档）。
+    - `uk-lse infrastructure.major_outage_history`：未找到 LSE 官方重大故障披露汇总（候选入口：LSE Market Notices 存档、FCA NSM 中的事故类公告检索）。
+    - `cn-sse participants.investor_structure`：需沪市投资者结构官方口径（候选入口：上交所统计年鉴「投资者结构」章节、上交所新闻发布会数据）。
+    - `cn-sse infrastructure.trading_system_name`：上交所交易系统官方名称/介绍页未定位（官网技术栏目无系统命名页，候选入口：上交所技术大会/年报、上证技术发展有限责任公司页面）。
 
 <!-- BEGIN:GENERATED auto-issues -->
 - `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
@@ -145,8 +156,6 @@
 - `ch-six` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `ch-six` 风险与特殊考量 / 政治、地缘与制裁风险（political_risk_note）— confidence: low
 - `cn-sse` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
-- `cn-sse` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
-- `cn-sse` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `cn-sse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `cn-szse` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `cn-szse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
@@ -158,12 +167,10 @@
 - `fr-euronext` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `fr-euronext` 市场结构与交易机制 / 上午连续竞价（trading_sessions.continuous_am）— confidence: low
 - `hk-hkex` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
-- `hk-hkex` 清算、结算与交割 / 交割方式（delivery_method）— confidence: low
 - `hk-hkex` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（trading_halt_mechanism）— confidence: low
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（derivatives.trading_halt_mechanism）— confidence: low
 - `in-nse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `jp-jpx` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 错误交易处理规则（error_trade_rule）— confidence: low
@@ -184,7 +191,5 @@
 - `tw-twse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `us-nasdaq` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `us-nasdaq` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `us-nyse` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
-- `us-nyse` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `us-nyse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 <!-- END:GENERATED auto-issues -->

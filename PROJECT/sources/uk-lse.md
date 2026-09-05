@@ -45,3 +45,8 @@
   - FCA Handbook - COBS 10 Appropriateness (for non-advised services): https://handbook.fca.org.uk/handbook/cobs10
 - `legislation.gov.uk` | 官方（英国立法官方数据库） | en | curl 常规 UA 200 | 《2017年洗钱、恐怖主义融资与资金转移条例》（Money Laundering Regulations 2017）第28条客户尽职调查（开户KYC）要求原文
   - The Money Laundering, Terrorist Financing and Transfer of Funds (Information on the Payer) Regulations 2017, Regulation 28: https://www.legislation.gov.uk/uksi/2017/692/regulation/28
+
+- `lseg.com`（2026-09-05 补充登记，任务四族A：LCH Ltd EquityClear 保证金制度，沿用既有域名条目） | 官方 | en | curl 常规 UA 200
+  - LCH Ltd Rulebook 入口页（各章节 PDF 的权威索引）: https://www.lseg.com/en/post-trade/clearing/clearing-resources/rulebooks/lch-limited（HTTP 200）
+  - LCH Ltd Clearing House Procedures — EquityClear Service（PDF，2026年8月版：1.5.1 初始保证金由清算所按 LCH ERA 算法确定、1.5.4 变动保证金＝未平仓合约自成交价到当前市值的变动、1.5.6 盘中按日内多个时点计算初始/变动保证金并可在不足时发出盘中 PPS 追保）: https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/rulebooks/lch-ltd/section-2d-equityclear-service.pdf（HTTP 200，PDF）
+  - 2026-09-05 新增（任务四族D，沿用 `gov.uk` 既有域名条目）: HS300 Non-residents and investment income (2025)（HMRC 官方 helpsheet——非居民投资收入税负以源头扣缴额为限、英国公司股息属 disregarded income）: https://www.gov.uk/government/publications/non-residents-and-investment-income-hs300-self-assessment-helpsheet/hs300-non-residents-and-investment-income-2025（HTTP 200，92KB）

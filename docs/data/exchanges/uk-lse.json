@@ -216,15 +216,21 @@
         "spec": null
       },
       "clearing_regulator": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "中央对手方的审慎监管归属英格兰银行（Bank of England）：LCH 官方清算费率表自述『LCH Limited is supervised by the Bank of England within the UK regulatory framework』，并同时在美国 CFTC 注册为衍生品清算组织、依 EMIR 获第三国 CCP 认可；证券市场行为/上市监管仍属 FCA（见 regulator 字段）——即清算机构的审慎监督（BoE）与行为监管（FCA）分属两个机关",
+        "en": "Prudential supervision of central counterparties sits with the Bank of England: LCH's own clearing fee schedule states that 'LCH Limited is supervised by the Bank of England within the UK regulatory framework', while also registered as a derivatives clearing organisation with the U.S. CFTC and recognised as a third-country CCP under EMIR; conduct/listing regulation remains with the FCA (see the regulator field) — i.e. prudential CCP supervision (BoE) and conduct regulation (FCA) are split between two authorities",
         "detail": "英格兰银行（Bank of England）按常识应是英国中央对手方（CCP）的监管机关（UK EMIR框架下），但本次抓取范围内未找到直接原文确认这一点，按铁律不采纳未核实的印象，留空，见 OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "LCH Ltd EquityClear settlement fee schedule（LCH 官方费率表 PDF，开头条款自述 supervised by the Bank of England）",
+            "url": "https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/resources/lch-ltd-equity-clear-settlement-fee-schedule-current-010724.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "LCH Limited is supervised by the Bank of England within the UK regulatory framework, registered as a derivatives clearing organisation with the U.S. Commodity Futures Trading Commission (\"CFTC\") and recognised as a third-country CCP under Regulation (EU) No. 648/2012",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "core_laws": {
         "zh": "《2000年金融服务与市场法》（Financial Services and Markets Act 2000, FSMA）",
@@ -1072,31 +1078,21 @@
         "spec": null
       },
       "transfer_between_boards": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "AIM转Main Market等板块间转移机制本次未逐条核实，仅在Admission and Disclosure Standards术语表中确认存在“AIM转出”相关条款（1.5.1 Transfers from AIM），未展开细节。",
+        "zh": "主板内部上市类别间转移有专章规定：UKLR 21.5《Transfer between listing categories》列明发行人可在上市类别之间申请转移——如国际商业公司第二上市类↔商业公司类、过渡类↔商业公司类、↔封闭/开放式投资基金类等组合；主板与 AIM 之间的移动则不属于 UKLR 转移类别（AIM 是非交易所上市的交易场所准入），须按 AIM 准入规则另行办理",
+        "en": "Transfers between listing categories on the Main Market are governed by a dedicated section: UKLR 21.5 'Transfer between listing categories' allows an issuer to transfer its listing category — e.g. equity shares (international commercial companies secondary listing) ↔ (commercial companies), (transition) ↔ (commercial companies), and ↔ closed-ended/open-ended investment funds; moving between the Main Market and AIM is not a UKLR category transfer (AIM is admission to trading, not a listing) and follows separate AIM admission rules",
+        "detail": "由『未逐条核实』升级：UKLR sourcebook 全文 PDF（已在缓存）第 21.5 条正文坐实类别转移组合；主板↔AIM 的定性（UKLR 转移 vs AIM 准入）为基于规则框架的结构判断，如实标注。",
         "sources": [
           {
-            "title": "Admission and Disclosure Standards（官网，2021年1月版）",
-            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook，2026年4月更新版）",
+            "title": "UKLR — UK Listing Rules sourcebook 全文 PDF（FCA Handbook，UKLR 21.5 Transfer between listing categories）",
             "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "AIM Rules for Companies（官网，2026年1月版）",
-            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf",
-            "accessed": "2026-08-14"
+            "accessed": "2026-09-05"
           }
         ],
+        "quote": "UKLR 21.5 Transfer between listing categories Application R UKLR 21.5.1 This section applies to an issuer that wishes to transfer the category of its listing from: (1) the equity shares (international commercial companies secondary listing) category to the equity shares (commercial companies) category;",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "continuing_obligations": {
         "zh": "官方名册内公司适用UKLR第6章持续义务（equity shares (commercial companies) 类别）；AIM公司须始终保留一名保荐人（Nominated Adviser），由其负责持续评估公司对AIM监管框架的适当性",
@@ -1150,31 +1146,21 @@
         "detail": null
       },
       "delisting_process": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "发行人主动申请取消上市（Cancellation at issuer's request）须满足UKLR 21.2.8-21.2.18及21.3的具体程序要求，本次未逐条核实完整流程细节。",
+        "zh": "取消上市（除牌）双向程序（UKLR 21）：① FCA 强制取消——FCA 认为存在妨碍正常有序交易的特别情形时可取消上市（如证券不再按规则获准交易、发行人不再满足持续义务如公众持股比例低于 10%、停牌超过 6 个月等）；② 发行人主动申请——须书面提出并载明证券详情、背景与理由、拟生效日期等要素，并按 UKLR 21.2.8R 出具股东决议等证明文件",
+        "en": "Cancellation of listing runs both ways (UKLR 21): (1) FCA cancellation — the FCA may cancel the listing where special circumstances preclude normal regular dealings (e.g. securities no longer admitted to trading as required, continuing obligations unmet such as public hands falling below 10%, or suspension exceeding 6 months); (2) issuer-initiated requests — a written request must set out the issuer's name, the securities and RIEs concerned, background and reasons, the requested effective date, and evidence of any resolution required under UKLR 21.2.8R",
+        "detail": "复核订正（ADR-074 流程）：原记录『未逐条核实完整流程细节』的保守留空在第二人复核中发现 UKLR sourcebook 全文 PDF（已在缓存）第 21.2/21.3 节原文可直接摘引，据此回填。",
         "sources": [
           {
-            "title": "Admission and Disclosure Standards（官网，2021年1月版）",
-            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook，2026年4月更新版）",
+            "title": "UKLR — UK Listing Rules sourcebook 全文 PDF（FCA Handbook，UKLR 21.2 Cancelling listing / 21.3 Requests to cancel or suspend）",
             "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "AIM Rules for Companies（官网，2026年1月版）",
-            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf",
-            "accessed": "2026-08-14"
+            "accessed": "2026-09-05"
           }
         ],
+        "quote": "The FCA may cancel the listing of securities if it is satisfied that there are special circumstances that preclude normal regular dealings in them. ... (2) the issuer no longer satisfies its continuing obligations for listing – for example, if the percentage of shares in public hands falls below 10% ... (3) the securities' listing has been suspended for more than 6 months; ... A request by an issuer for the listing of its securities to be suspended or cancelled must be in writing and must include: (1) the issuer's name; (2) details of the securities to which it relates and the RIEs on which they are traded; (3) a clear explanation of the background and reasons for the request; (4) the date on which the issuer requests the suspension or cancellation to take effect;",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "delisting_transition_period": {
         "spec": {
@@ -1335,37 +1321,55 @@
         "detail": null
       },
       "initial_margin_practice": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "LCH Ltd 对 EquityClear 清算会员收取初始保证金：清算所要求清算会员就其初始保证金义务向清算所划转抵押品，金额由清算所按 LCH ERA 算法计算确定；初始与变动保证金对会员自营账户、各客户账户（间接总额账户除外）及间接总额子账户分别计算，自营与客户账户之间、客户账户相互之间不得抵销（Default Rules 及不足资源裁定规则规定情形除外）",
+        "en": "LCH Ltd collects initial margin from EquityClearing Members: the Clearing House requires members to transfer Collateral in respect of their initial margin obligations, the amount being determined by the Clearing House using the LCH ERA algorithm; initial and variation margin are calculated separately for a member's Proprietary Account, each Client Account (other than an Indirect Gross Account) and each Indirect Gross Sub-Account, with no offset between proprietary and client accounts or between client accounts (except as allowed under the Default Rules or any Insufficient Resources Determination Rule)",
+        "sources": [
+          {
+            "title": "LCH Ltd Clearing House Procedures — EquityClear Service（清算所官方程序手册 PDF，2026年8月版，1.5.1 初始保证金 / 1.5 Margin and Collateral）",
+            "url": "https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/rulebooks/lch-ltd/section-2d-equityclear-service.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "The Clearing House will require Equities Clearing Members to transfer Collateral in respect of their initial margin obligations to the Clearing House. The Clearing House will determine the initial margin obligations of an Equities Clearing Member, which is (without limitation to the Clearing House’s rights under Regulation 20) the amount calculated by the Clearing House using the LCH ERA algorithm. ... Separate initial and variation margin calculations are performed for an Equities Clearing Member's Proprietary Account, each Client Account (other than an Indirect Gross Account) and each Indirect Gross Sub-Account within an Indirect Gross Account. No offset between the Proprietary Accounts and Client Accounts is allowed (except pursuant to Rule 8(d) of the Default Rules or any Insufficient Resources Determination Rule)",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "maintenance_margin_practice": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "LCH 不设与初始保证金分离的『维持保证金』阈值——替代机制是清算所于日内多个时点计算各清算会员的初始与变动保证金要求，会员在清算所的抵押品不足时即发出盘中 PPS 追保（intra-day PPS call），会员须在日内任一时点都具备满足 PPS 追保的能力",
+        "en": "LCH has no separate maintenance margin threshold distinct from initial margin — instead, the Clearing House calculates each member's initial and variation margin requirement at several points throughout the day and issues an intra-day PPS call when a member's Collateral with the Clearing House is insufficient; members must be in a position to meet a PPS call at any point throughout the day",
+        "sources": [
+          {
+            "title": "LCH Ltd Clearing House Procedures — EquityClear Service（清算所官方程序手册 PDF，1.5.6 Intra-day Margin Calls）",
+            "url": "https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/rulebooks/lch-ltd/section-2d-equityclear-service.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "The Clearing House will calculate each Equities Clearing Member's initial and variation margin requirement at several points throughout the day. In the event that an Equities Clearing Member has insufficient Collateral with the Clearing House an intra-day PPS call will be issued. Equities Clearing Members should ensure that they are, at any point throughout the day, in a position to meet a PPS call.",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "mark_to_market_frequency": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "逐日盯市经变动保证金（variation margin）实现：每个未平仓股票合约自成交时价值到当前市值的变动即为变动保证金，以非实现/或然形式（贷记或借记记入清算会员账户）计算；因交收周期导致的变动保证金阶跃，清算所会在临近交收时限制贷记变动保证金的使用（限制可持续至交收违约解决）；日内清算所还按多个时点计算初始与变动保证金要求",
+        "en": "Daily mark-to-market is implemented via variation margin: variation margin represents the change in value of each open Equities Contract from the value at the time of trade to the current market value, posted in non-realised or contingent form (credit or debit to the member's account); to cope with step changes in variation margin due to the settlement cycle, the Clearing House restricts the use of credit variation margin just ahead of settlement (the restriction may continue from a settlement fail to its resolution); the Clearing House also calculates initial and variation margin requirement at several points throughout the day",
+        "sources": [
+          {
+            "title": "LCH Ltd Clearing House Procedures — EquityClear Service（清算所官方程序手册 PDF，1.5.4 Variation margin / 1.5.6 Intra-day Margin Calls）",
+            "url": "https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/rulebooks/lch-ltd/section-2d-equityclear-service.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "Variation margin represents the change in value of each open Equities Contract from the value at the time of trade to the current market value.. Variation margin in respect of Equities Contracts will be in non-realised or contingent form (i.e. it will be in the form of a credit or debit posted to Equities Clearing Member's relevant account(s)). In order to cope with step changes in the variation margin due to the settlement cycle, the Clearing House will restrict the use of credit variation margin just ahead of settlement ... The Clearing House will calculate each Equities Clearing Member's initial and variation margin requirement at several points throughout the day.",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "delivery_method": {
         "enum": "na",
@@ -1385,15 +1389,21 @@
         "quote": null
       },
       "last_trading_day_rule": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "不适用——EquityClear 清算的标的为现货股票等现金工具，无到期日与『最后交易日』概念；未平仓合约自成交至交收完成即消灭，仅在交收周期内暴露结算风险（期间价格变动由变动保证金覆盖）",
+        "en": "Not applicable — instruments cleared under EquityClear are cash instruments such as equities, with no expiry and thus no derivative-style last trading day; an open contract is extinguished upon settlement and exposes settlement risk only during the settlement cycle (price changes over the period are covered by variation margin)",
+        "sources": [
+          {
+            "title": "LCH Ltd Clearing House Procedures — EquityClear Service（清算所官方程序手册 PDF，1.5.4 Variation margin——未平仓合约成交至当前市值的变动）",
+            "url": "https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/rulebooks/lch-ltd/section-2d-equityclear-service.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "Variation margin represents the change in value of each open Equities Contract from the value at the time of trade to the current market value..",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "default_management": {
         "spec": {
@@ -1701,15 +1711,21 @@
     },
     "costs": {
       "commission_structure": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "英国经纪商向客户收取的佣金由市场自行竞争定价，交易所自身规则未见对经纪商佣金水平的直接规定——与NYSE的情形类似，本次未找到LSE/FCA对此的专门表述，留空不硬凑。",
+        "zh": "LSE 不向投资者收取佣金、也不规定经纪佣金费率：交易所自身收费仅面向会员与参与人（交易费按月度累计成交额分档、发行人上市费另计，见 exchange_fees 的官方价格表）；投资者支付的经纪佣金由券商与客户自行协商定价（此句为基于交易所收费结构边界的推断，未找到 LSE/FCA 的专门官方表述，如实标注）",
+        "en": "LSE charges no investor commissions and sets no brokerage commission rates: the Exchange's own charges are payable only by members and participants (tiered monthly trading fees plus issuer admission fees — see the official price list under exchange_fees); brokerage commissions paid by investors are negotiated with brokers (this latter statement is an inference from the exchange's fee-structure boundary — no dedicated LSE/FCA statement was found, and it is flagged as such)",
+        "detail": "与 us-nyse/hk-hkex 等同族字段处理一致：交易所收费与经纪佣金分属两类；英国端『券商自主定价』一句无专门官方原文，比照 1975 年美国 May Day 类制度节点在英国端未检索到对应文件，保持推断标注而非佯装已核实。",
+        "sources": [
+          {
+            "title": "Trading Services Price List（Excludes TRADEcho），Effective 01 January 2025（官网 PDF，收费对象为会员/参与人）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/trading-services-price-list-january-2025.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "Trading Services Price List (Excludes TRADEcho)",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "exchange_fees": {
         "spec": {
@@ -1818,15 +1834,21 @@
         "enum": null
       },
       "financial_transaction_tax": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "英国未见另设独立于印花税/SDRT之外的广义金融交易税；但本次来源（HMRC研究报告）本身聚焦印花税/SDRT，未见对“是否存在其他金融交易税”的专门排除性声明，为避免“未提及即等于不存在”的过度推断，本字段留空而非断言“无”，与stamp_duty字段分开处理。",
+        "zh": "英国对证券买卖不另设独立于印花税体系之外的金融交易税（FTT）：官方口径下购买股票所涉及的税种即为印花税或储备税（Stamp Duty / Stamp Duty Reserve Tax，对购入应课税股票按 0.5% 征收，见 stamp_duty 字段）——HMRC 官方页在「买股票要缴什么税」的条目下仅列举 SDRT/Stamp Duty 两项，无第三种交易税；欧盟级 FTT 从未生效，英国交易本就不在其范围",
+        "en": "The UK levies no financial transaction tax separate from its stamp-duty system: per the official guidance, the taxes on buying shares are precisely Stamp Duty Reserve Tax (SDRT) or Stamp Duty (0.5% on chargeable purchases — see the stamp_duty field); HMRC's official page lists only these two instruments under taxes payable when buying shares, and the EU-level FTT never entered into force, so UK transactions were never within its scope",
+        "detail": "由留空转为本口径的依据升级：gov.uk「Tax when you buy shares」页给出『买股票涉及的税』的官方枚举（仅 SDRT/Stamp Duty），足以作为『无另设 FTT』的正面依据而非『未提及即不存在』；EU 级 FTT 从未生效为公开法律事实。原留空记录的谨慎理由保留于 git 历史。",
+        "sources": [
+          {
+            "title": "Tax when you buy shares（gov.uk / HMRC 官方页，购买股票税种的官方枚举）",
+            "url": "https://www.gov.uk/tax-buy-shares",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "Stamp Duty Reserve Tax (SDRT) or Stamp Duty when you buy shares electronically or using a stock transfer form",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "capital_gains_tax": {
         "zh": "2026/27纳税年度（2026年4月6日起）个人股票资本利得税：落在基本税率所得区间内的部分按18%征收，超出基本税率所得区间的部分按24%征收（2024年10月30日预算案起，股票与其他非房产资产已与住宅物业统一适用同一档税率，此前股票适用更低的10%/20%）；年度免税额（Annual Exempt Amount）为£3,000/人；个人经营性公司股份处置符合条件的可适用「企业资产处置减免」（Business Asset Disposal Relief），税率自2025年4月6日起为14%，2026年4月6日起进一步升至18%",
@@ -1846,15 +1868,21 @@
         "spec": null
       },
       "dividend_withholding_tax": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "常识印象：英国境内公司股息通常无预扣税（不同于多数司法辖区的常见做法），但本次抓取范围（gov.uk印花税页）未涉及股息预扣税主题，未找到当次可引用的官方原文，按铁律不采纳未核实的印象，留空，见 OPEN-QUESTIONS。",
+        "zh": "英国对股息不设源头预扣：HMRC 官方 helpsheet（HS300）明确非居民取得的英国投资收入「税负以源头扣缴额为限」，且英国公司股息列为「disregarded income」（不计入该限额计算的收入）——支付时不作源头扣缴，非居民实际不因英国股息在英国被预扣税款；居民个人的股息税通过年度申报/自我评估解决，与预扣机制无关",
+        "en": "The UK operates no withholding on dividends: HMRC's official helpsheet (HS300) states that for non-residents the tax charge on UK investment income is restricted to the amount of tax deducted at source, and UK company dividends are 'disregarded income' — dividends are paid gross with no deduction at source, so non-residents suffer no UK withholding on UK dividends; resident individuals settle dividend tax via self-assessment, unrelated to any withholding mechanism",
+        "detail": "原留空记录（『常识印象：英国股息通常无预扣』）本次以 HMRC HS300 一手坐实——『restricted to the amount of tax, if any, deducted at source』与『disregarded income includes ... dividends from UK companies』两处条文合成『无预扣』的正面依据。",
+        "sources": [
+          {
+            "title": "HS300 Non-residents and investment income (2025)（HMRC 官方 helpsheet，非居民投资收入税负限制与 disregarded income 列举）",
+            "url": "https://www.gov.uk/government/publications/non-residents-and-investment-income-hs300-self-assessment-helpsheet/hs300-non-residents-and-investment-income-2025",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "the tax charge for non-residents on investment income arising in the UK is restricted to the amount of tax, if any, deducted at source. ... dividends from UK companies",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "implicit_costs_note": {
         "zh": "买卖价差（隐性成本的主要构成之一）在报价驱动品种上受交易所规则直接约束：注册做市商提供的可执行报价（Executable Quote）买卖价差须不小于一个最小报价单位（tick size），且不得超过就该证券设定的「最大价差百分比」（超出上限的报价会被系统拒绝，除非窄于「最大价差下限」）；具体的最大价差百分比数值定义在未抓取的Business Parameters文档内（与tick_size字段面临的数据缺口相同）",
@@ -1876,15 +1904,21 @@
     },
     "risks": {
       "fx_risk_note": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "英镑为自由浮动货币、英国无资本管制：1979-10-23 财政大臣 Geoffrey Howe 在下议院宣布自当日午夜起撤销全部剩余外汇管制（官方议会记录原文；原句末尾附有罗得西亚相关例外的但书，与 capital_controls 字段口径一致），英国投资者的跨境证券投资与外汇兑换自此不受管制；对非英镑投资者的 LSE 上市证券持仓而言，汇率风险来自其本币兑英镑的波动，无官方对冲安排或管制缓冲",
+        "en": "Sterling floats freely and the UK has no capital controls: on 23 October 1979 Chancellor Geoffrey Howe announced in the Commons the removal of all remaining exchange control restrictions from midnight that night (official Hansard record; the original sentence carries a caveat for Rhodesia-related restrictions, consistent with the capital_controls field) — since then UK cross-border portfolio investment and FX conversion are uncontrolled; for non-GBP investors holding LSE-listed securities, FX risk arises from their home currency's fluctuation against sterling, with no official hedging arrangement or control buffer",
+        "sources": [
+          {
+            "title": "EXCHANGE CONTROLS, HC Deb 23 October 1979 vol 972 cc202-14（英国议会官方 Hansard 记录，外汇管制全面撤销的一手原文）",
+            "url": "https://api.parliament.uk/historic-hansard/commons/1979/oct/23/exchange-controls",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "I have now decided to remove all the remaining exchange control restrictions from midnight tonight",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "political_risk_note": {
         "zh": "英国对俄制裁曾直接导致LSE按自身规则暂停特定证券交易：2022年3月3日，交易所依《伦敦证券交易所规则》第1510条，援引「俄乌事件相关制裁、市场状况恶化、维护市场平稳运行」为由，即时暂停约20只俄罗斯公司GDR/ADR（含Gazprom、Lukoil、Novatek、Norilsk Nickel、PhosAgro等）的交易准入，是地缘政治/制裁风险直接作用于LSE挂牌证券交易资格的一手实证",
