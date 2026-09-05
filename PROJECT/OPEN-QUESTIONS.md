@@ -58,6 +58,8 @@
 
 （填数据时遇到查不清的，按下面格式加条目；`make sync` 会额外从 `data/` 里 `confidence: low` 或空字段生成一份自动清单，附在下面，不需要手动同步那部分）
 
+- **[ADR-079] 风险旗标数据子棒执行残留（2026-09-05，15/28 字段完成后暂存，进度明细见 ROADMAP §三）：** ① 剩余 13 字段——`kr-krx` fx+enforcement、`tw-twse` fx+political、`cn-sse`/`cn-szse` political+enforcement、`au-asx`/`br-b3`/`ch-six`（fx，`ch-six` 另有 political E 组）、`sa-tadawul`/`uk-lse` fx；⚠️ `tw-twse.political_risk_note` 涉及两岸政治表述，留待人工/独立复核裁量，不要由代理会话擅自填写分析性内容。② 升 high 路径——`za-jse`/`us-nyse`/`us-nasdaq` fx 现以第三方/操作记录口径标 medium，需 IMF AREAER de jure 分类原文（elibrary.imf.org 直连 403、wayback 可达但具体报告编号未定位；imf.org 主站对 curl 403）。③ `fr-euronext` fx 的 NOK 部分需 Norges Bank 对克朗汇率制度的定性原文（专题页无制度性表述，`norges-bank.no` 暂未登记）。④ 取数坑复述——MAS 主站全站 Maintenance 壳（200 + 854KB，会绕过 fetch.py `looks_blocked`，勿全所盲刷）、SARB `/content/dam/` PDF 被 WAF 拦（Request Rejected，wayback 可用）、nseindia 对 curl 反爬复活（全站 22KB 恒定壳页，`make fetch` 会覆盖好缓存，坏缓存已清理退 CACHE_MISS）。
+
 - **[ADR-043] 第五章三字段回填时几家未坐实到官方一手英文原文，均已如实标 `medium`/`low` 并附 `detail`，集中记此备查：**
   - `kr-krx` `error_trade_rule` / `order_book_transparency`（均 `low`，已进自动清单）：KRX Business Regulation 主要为韩文，官网英文『Publication of Quotation Information』『Liquidity Provider』等栏目为 JS 导航壳、无正文。已知结构：KRX 设误单救济制度（源于 2013 HanMag 事件）+ 技术故障直接撤单权（2025 扩至债券市场）；订单簿为多档公开、无冰山/隐藏。**待人工提供**：KRX 官方英文《KOSPI/KOSDAQ Market Business Regulation》或其 Enforcement Rules 中「erroneous trade / trade cancellation」「market data / quotation dissemination」章节原文。
   - `sa-tadawul` `error_trade_rule`（`medium`）：已抓取的《Trading and Membership Procedures》无针对已成交订单的『明显错误成交作废』专章（Section 9 只讲成交前的订单撤销）。事前控制（±10% 静态限、波动性拍卖、§11.8 参数调整权）有官方文本支撑。**待人工提供**：Saudi Exchange / CMA 关于 mistrade / trade cancellation 的规则原文（可能在被 Akamai 拦截的 `www.saudiexchange.sa` 上）。`order_book_transparency`（`low`）：中央订单簿盘前展示程度与盘后披露延迟未逐条摘引。

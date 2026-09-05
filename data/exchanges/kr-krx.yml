@@ -686,6 +686,11 @@ market_structure:
       confidence: high
 
     order_types:
+      spec:
+        market: true
+        limit: true
+        tif: [fok, ioc]
+        note: "另有限价转收盘价申报（未成交限价转市价入收盘集合竞价）与即时可执行限价申报（申报时最优价固定为成交价的市价类、余量按最初最优价排队）；无止损类申报"
       zh: "限价申报（指定价格与数量）、市价申报（仅指定数量，以市场最优价成交）、限价转收盘价申报（收盘前连续交易阶段未成交的限价申报转为市价申报并入收盘集合竞价）、即时可执行限价申报（申报时的最优价格即固定为成交价的一种市价类申报，未成交余量按最初最优价挂单排队）；另可附加FOK（Fill or Kill，全部成交或全部取消）、IOC（Immediate or Cancel，部分成交、剩余取消）两种条件"
       en: "Limit order (price and quantity both specified); Market order (only quantity specified, matched at the best available price); Limit-to-market-on-close order (an unexecuted limit order at the end of continuous trading converts to a market order and joins the closing single-price auction); Immediately executable limit order (a market-order variant whose matching price is fixed at the best price at input time, with any unexecuted balance queued in the order book at that initial best price); orders may also carry a Fill-or-Kill (FOK) or Immediate-or-Cancel (IOC) condition"
       sources:
@@ -696,6 +701,7 @@ market_structure:
       confidence: high
 
     tick_size:
+      spec: {regime: per_instrument, min_tick: 0.05, currency: KRW, note: "KOSPI200 期货 0.05 点（每点 KRW 12,500）为样本；期权按权利金分档（<10 点 0.01、≥10 点 0.05，见 detail）；其余产品类别未逐一核实"}
       zh: "股指期货最小报价单位为0.05点（每点价值12,500韩元，以KOSPI200期货为例）"
       en: "Minimum tick for equity index futures is 0.05 point (KRW 12,500 per point, using KOSPI 200 Futures as the example)"
       sources:
