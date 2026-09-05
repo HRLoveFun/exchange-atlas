@@ -32,7 +32,7 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
   10. 路径引用：文档里反引号包住、首段是仓库顶层条目的路径必须存在（非仓库路径片段
       如站内相对路径 res/pc/js/x.js 或绝对路径 /tmp/x.html 不属校验对象）
   11. ADR 锚点：DECISIONS.md 里的 ADR 编号不重复；全库 .md/.py/.yml/.js/.css/.json 里
-      的引用处都能找到对应编号（[ADR-PENDING-antibloat] 扩面到非 .md）
+      的引用处都能找到对应编号（[ADR-077] 扩面到非 .md）
   12. ROADMAP §一 防失序（[ADR-069]）：「下一步」编号 1..n 连续无重复、「最近完成」不超
       滚动窗口（并行 worktree 各自重排该子节，git 静默三方合并 → 重号/超窗）
   13. 冲突标记：任何入库文本文件不得残留 git 合并冲突标记（<<<<<<< / ||||||| / >>>>>>>）
@@ -45,9 +45,9 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
       出现在 main 上直接 fail（合并前必须先跑 `tools/assign_adr_number.py` 定号）；
       出现在其他分支上只警告——占位符本就是分支未合并前的正常中间态，见
       `PROJECT/ADR-LEDGER.md`
-  17. 来源分片配对（[ADR-PENDING-antibloat]）：`data/exchanges/*.yml` 与
+  17. 来源分片配对（[ADR-077]）：`data/exchanges/*.yml` 与
       `PROJECT/sources/*.md` 必须一一对应——任一侧多出（漏建分片 / 孤儿分片）即报错
-  18. INBOX 一句话上限（[ADR-PENDING-antibloat]）：`ROADMAP-INBOX.md`「待折叠」区每条
+  18. INBOX 一句话上限（[ADR-077]）：`ROADMAP-INBOX.md`「待折叠」区每条
       `- ` 行不得超过 200 字——白纸黑字的「一行一条一句话」约定加机器上限，挡它
       静默膨胀成第二份详版（只限行长度，不限堆积条数：堆积是协调者未及时折叠所致，
       拿它挡后台任务自己的 make build 会误伤错误的人）
@@ -784,7 +784,7 @@ def validate_adr_anchors():
         err(f"PROJECT/DECISIONS.md: ADR 编号重复 {sorted(dupes)}")
     defined_set = set(defined)
 
-    # 扩面到非 .md（[ADR-PENDING-antibloat]）：让号/引用失配不只发生在文档里——
+    # 扩面到非 .md（[ADR-077]）：让号/引用失配不只发生在文档里——
     # .py（脚本注释）、schema/*.yml、docs/assets/app.js、data/*.yml 同样带
     # [ADR-NNN] 引用，此前只扫 *.md 是静默失配面。复用 under_skip_dir 处理 worktree。
     for p in ROOT.rglob("*"):
@@ -910,7 +910,7 @@ def validate_otp_sources():
 
 
 def sources_pairing_violations(data_ids, source_ids):
-    """`data/exchanges/*.yml` 与 `PROJECT/sources/*.md` 必须一一对应（[ADR-PENDING-antibloat]）。
+    """`data/exchanges/*.yml` 与 `PROJECT/sources/*.md` 必须一一对应（[ADR-077]）。
     返回违规消息列表（空 = 合法）。判定纯逻辑、无 I/O，selfcheck 喂合成输入锁行为：
     来源记录下沉到分片后，「多写者共写一个大文件」的并发点已物理分离，但拆分本身
     引入了新的结构不变式——任一侧多出都说明有人改了一边忘了另一边。"""
@@ -928,18 +928,18 @@ def sources_pairing_violations(data_ids, source_ids):
 
 
 def validate_sources_pairing():
-    """校验 17：来源分片与数据文件一一对应，见 [ADR-PENDING-antibloat]。"""
+    """校验 17：来源分片与数据文件一一对应，见 [ADR-077]。"""
     data_ids = {p.stem for p in (ROOT / "data" / "exchanges").glob("*.yml")}
     source_ids = {p.stem for p in (PROJECT_DIR / "sources").glob("*.md")} if (PROJECT_DIR / "sources").exists() else set()
     for v in sources_pairing_violations(data_ids, source_ids):
         err(v)
 
 
-INBOX_MAXLEN = 200  # 「一行一条一句话」的机器上限（字符数），见 [ADR-PENDING-antibloat]
+INBOX_MAXLEN = 200  # 「一行一条一句话」的机器上限（字符数），见 [ADR-077]
 
 
 def inbox_line_violations(text, maxlen=INBOX_MAXLEN):
-    """ROADMAP-INBOX.md「待折叠」区每条 `- ` 行不得超过 maxlen 字（[ADR-PENDING-antibloat]）。
+    """ROADMAP-INBOX.md「待折叠」区每条 `- ` 行不得超过 maxlen 字（[ADR-077]）。
     返回违规消息列表（空 = 合法）。判定纯逻辑、无 I/O，selfcheck 喂合成输入。
     只校验行长度、不校验堆积条数：堆积是协调者未及时折叠所致，拿它挡后台任务
     自己的 make build 会误伤错误的人；行长超限才是把详版体量写进便签，该拦。"""
@@ -956,7 +956,7 @@ def inbox_line_violations(text, maxlen=INBOX_MAXLEN):
 
 
 def validate_roadmap_inbox():
-    """校验 18：INBOX「待折叠」区行长上限，见 [ADR-PENDING-antibloat]。"""
+    """校验 18：INBOX「待折叠」区行长上限，见 [ADR-077]。"""
     path = PROJECT_DIR / "ROADMAP-INBOX.md"
     if not path.exists():
         return

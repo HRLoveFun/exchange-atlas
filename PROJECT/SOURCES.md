@@ -4,7 +4,7 @@
 
 `tools/fetch.py` 按来源分片登记的抓取方式取页；`tools/validate.py` 校验 `data/` 里引用的来源域名是否已在来源登记（本文件 + 分片）中。
 
-**各交易所的来源记录已按所拆分到 `PROJECT/sources/<id>.md`**（文件名 = `data/exchanges/<id>.yml` 的 id，两侧一一对应、由 `make check` 强制）——来源记录是并发写入点，拆分让「多写者共写一个大文件」物理分离，单所经验/探测记录写进对应分片即可（[ADR-PENDING-antibloat]）。本文件只保留条目格式规范与跨所通用经验。
+**各交易所的来源记录已按所拆分到 `PROJECT/sources/<id>.md`**（文件名 = `data/exchanges/<id>.yml` 的 id，两侧一一对应、由 `make check` 强制）——来源记录是并发写入点，拆分让「多写者共写一个大文件」物理分离，单所经验/探测记录写进对应分片即可（[ADR-077]）。本文件只保留条目格式规范与跨所通用经验。
 
 ## 交易所来源分片索引（`make sync` 生成，不手改）
 

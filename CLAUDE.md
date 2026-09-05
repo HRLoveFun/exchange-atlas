@@ -26,7 +26,8 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 | `schema/glossary.yml` | 术语译法唯一裁决 | 字段结构 → `taxonomy.yml` |
 | `schema/enums.yml` | 受控词表唯一裁决 | — |
 | `schema/spec.yml` | 字段 `spec`（量化机制的机器可读形式）的形状定义 —— 见 `DECISIONS.md` [ADR-035] | 具体数据值 → `data/` |
-| `PROJECT/SOURCES.md` | 资料入口、抓取方式、查证经验 | 从来源抄来的事实 → `data/` |
+| `PROJECT/SOURCES.md` | 条目格式规范 + 跨所通用查证经验（全局经验册）+ 生成的分片索引 | 单所来源记录 → `sources/<id>.md`；从来源抄来的事实 → `data/` |
+| `PROJECT/sources/<id>.md` | 单家交易所的来源登记与探测记录（文件名 = 交易所 id，与 `data/exchanges/` 一一对应，`make fetch` 按此抓取，[ADR-077]） | 跨所通用经验 → `SOURCES.md` |
 | `PROJECT/ROADMAP.md` | 进度状态 | 为什么这么排 → `DECISIONS.md` |
 | `PROJECT/ROADMAP-INBOX.md` | 并行会话给 ROADMAP §一 的一次性完成便签（折叠进 §一 后即删，[ADR-069]） | 事实本体 → `ROADMAP.md` §三详版 |
 | `PROJECT/DECISIONS.md` | **为什么这么定** | 是什么 → 各自权威文件 |
@@ -36,7 +37,7 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 | `PROJECT/GIT-RUNBOOK.md` | 后台任务 PR / worktree 清理的操作顺序（踩坑记录） | 推送原则（默认推 main 等）→ `CLAUDE.md` §六 |
 | `.claude/skills/add-exchange/` | 可执行步骤 | 铁律复述 → 引用本文件章节号，如"见 CLAUDE.md §二" |
 
-生成块（`<!-- BEGIN:GENERATED ... -->`）只在六处使用：`ROADMAP.md` 的 progress-matrix 与 health-summary、`README.md` 与 `README.en.md` 的 exchange-list（同一份数据的中英两种渲染，见 `sync.render_exchange_list(lang=...)`）、`GLOSSARY.md` 全文、`OPEN-QUESTIONS.md` 的 auto-issues。这些由 `make sync` 重新生成；`make check` 会验证生成块内容与重新生成的结果一致，跑完 `make sync` 后 `git diff` 应为空——不为空说明有文档忘了同步。
+生成块（`<!-- BEGIN:GENERATED ... -->`）只在八处使用：`ROADMAP.md` 的 progress-matrix 与 health-summary、`README.md` 与 `README.en.md` 的 exchange-list（同一份数据的中英两种渲染，见 `sync.render_exchange_list(lang=...)`）、`GLOSSARY.md` 全文、`OPEN-QUESTIONS.md` 的 auto-issues、`SOURCES.md` 的 sources-index（来源分片索引）、`DECISIONS.md` 的 adr-index（ADR 索引，[ADR-077]）。这些由 `make sync` 重新生成；`make check` 会验证生成块内容与重新生成的结果一致，跑完 `make sync` 后 `git diff` 应为空——不为空说明有文档忘了同步。
 
 ---
 
@@ -106,6 +107,7 @@ data/         各交易所权威数据（YAML，人手写）
 tools/        抓取 / 构建 / 校验脚本（清单见 Makefile 各 target 与文件头注）
 docs/         GitHub Pages 站点根目录（前端 assets/app.js·styles.css，构建产物 docs/data/）
 PROJECT/      进度、决策、悬案、资料来源、Git runbook
+PROJECT/sources/  每家交易所的来源登记分片（SOURCES.md 的单所拆分，make fetch 按此抓取）
 .cache/       抓取的原始页快照（不入库，供核查）
 ```
 

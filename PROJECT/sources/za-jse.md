@@ -64,7 +64,7 @@
 
 **2026-08-30 补记（一个后台任务）**：`jse.co.za` 三个子域名此时全部返回 Cloudflare「Access Denied」403
 ——`www.jse.co.za/`、`group.jse.co.za/group-overview/history`、`clientportal.jse.co.za/...pdf` 逐一实测，
-常规 Chrome UA、Safari UA + `Accept-Language` + `Referer: https://www.google.com/` 均 403，响应体是
+常规 Chrome UA、Safari UA + `Accept-Language` + Referer: https://www.google.com/ 均 403，响应体是
 ~170KB 的 Cloudflare 拦截页（含 "Access Denied" 与 `cloudflare` 字样）。`fsca.co.za` / `gov.za` /
 `sars.gov.za` / `resbank.co.za` 同批也大量 404/坏页。这与建档时「抓取难度最低」的记录相反，说明
 JSE 在 2026-08 中之后对官网加了 Cloudflare 防护，**且对数据中心/云 IP 段拦得比住宅 IP 严**——

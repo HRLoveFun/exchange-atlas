@@ -27,3 +27,4 @@
 - ADR-074 · 数据空缺复核轨任务二第二人独立复核（79 处，4 FIX + 3 QUESTION）（原占 ADR-072，撞已合并的 PR #69，按 ADR-029 协议让号） · worktree-data-q-task2-review · 2026-09-05
 - ADR-075 · 抓取基础设施：fetch.py OTP 两步 + wayback 回退 + kr-krx/za-jse 缓存重建（原占 ADR-072，撞已合并的 PR #69，按 ADR-029 协议让号） · worktree-fetch-infra-otp · 2026-09-05
 - ADR-076 · 并行 worktree 防撞号第二版：ADR 编号占位符 + 合并时自动定号 · worktree-adr-auto-numbering2 · 2026-09-05
+- ADR-077 · 来源文件下沉 + 把「靠自觉的约定」变成构建关卡 · main · 2026-09-05

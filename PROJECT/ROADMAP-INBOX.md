@@ -16,3 +16,5 @@
 <!-- 一行一条，格式：`- YYYY-MM-DD · <一句话结果> · [ADR-NNN] · <分支或 PR>` -->
 <!-- 折叠进 ROADMAP §一 后删除该行。 -->
 
+- 2026-09-05 · 抗膨胀落地：SOURCES 拆 20 分片 + SOURCES/DECISIONS 生成索引 + INBOX 200 字上限 + ADR 引用扩面（selfcheck 48→68） · [ADR-077] · main
+
