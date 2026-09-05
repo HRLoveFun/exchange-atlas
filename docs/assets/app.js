@@ -225,6 +225,56 @@
   }
 
   // ══════════════════════════════════════════════
+  // 共享：跨可视化模块基础设施
+  //   七个剖面模块（td/cw/sp/ll/rm/pt/rf）原先各自独立实现了一套结构相同的
+  //   resolveId / 文本折行 / 数据格子（点击→openCellOverlay）逻辑——典型的
+  //   clone-and-own 复制演化。收敛到这里，各模块原有的 xxResolveId/xxWrap/
+  //   xxCell 名字保留、改成 1 行委托，调用方零改动（见 ADR-PENDING-frontend-
+  //   shared-render-helpers）。legend/prose 类函数审查后发现内容各模块真正
+  //   不同（不是同一件事写两遍），不属于本次收敛范围。
+  // ══════════════════════════════════════════════
+  function resolveExchangeId(params, defaultEx) {
+    var l = cache.manifest.exchanges;
+    if (l.some(function (e) { return e.id === params.id; })) return params.id;
+    return l.some(function (e) { return e.id === defaultEx; }) ? defaultEx : l[0].id;
+  }
+  function clipText(s, max) {
+    s = String(s == null ? "" : s);
+    return s.length > max ? s.slice(0, max - 1) + "…" : s;
+  }
+  function wrapByCharBudget(s, per, maxLines) {
+    s = String(s == null ? "" : s).trim();
+    var out = [];
+    if (/[一-鿿]/.test(s)) {
+      for (var i = 0; i < s.length; i += per) out.push(s.slice(i, i + per));
+    } else {
+      var cur = "";
+      s.split(/\s+/).forEach(function (w) {
+        if (cur && (cur + " " + w).length > per) { out.push(cur); cur = w; }
+        else cur = cur ? cur + " " + w : w;
+      });
+      if (cur) out.push(cur);
+    }
+    if (out.length > maxLines) { out = out.slice(0, maxLines); out[maxLines - 1] = clipText(out[maxLines - 1] + "…", per + 1); }
+    return out;
+  }
+  function wrapByPixelWidth(text, innerW, maxLines) {
+    var avail = innerW - 24;
+    var per = /[一-鿿]/.test(text)
+      ? Math.max(6, Math.floor(avail / 10.5))
+      : Math.max(10, Math.floor(avail / 5.6));
+    return wrapByCharBudget(text, per, maxLines);
+  }
+  function cellG(id, path, chapter, inner, title) {
+    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
+      '" data-chapter="' + esc(chapter) + '">' + (title ? "<title>" + esc(title) + "</title>" : "") + inner + "</g>";
+  }
+  function laneLabel(x, y, main, sub, clsPrefix) {
+    return '<text x="' + (x - 16) + '" y="' + llN(y) + '" text-anchor="end" class="' + clsPrefix + '-lane-l">' + esc(t(main.zh, main.en)) + "</text>" +
+      '<text x="' + (x - 16) + '" y="' + llN(y + 13) + '" text-anchor="end" class="' + clsPrefix + '-lane-s">' + esc(t(sub.zh, sub.en)) + "</text>";
+  }
+
+  // ══════════════════════════════════════════════
   // 矩阵视图
   // ══════════════════════════════════════════════
   function renderMatrix(app, params) {
@@ -655,15 +705,8 @@
   function tdTip(path, body) {
     return tdFieldLabel(path) + sep() + body;
   }
-  function tdResolveId(params) {
-    var l = cache.manifest.exchanges;
-    if (l.some(function (e) { return e.id === params.id; })) return params.id;
-    return l.some(function (e) { return e.id === TD_DEFAULT_EX; }) ? TD_DEFAULT_EX : l[0].id;
-  }
-  function tdCell(id, path, inner, title) {
-    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
-      '" data-chapter="market_structure">' + (title ? "<title>" + esc(title) + "</title>" : "") + inner + "</g>";
-  }
+  function tdResolveId(params) { return resolveExchangeId(params, TD_DEFAULT_EX); }
+  function tdCell(id, path, inner, title) { return cellG(id, path, "market_structure", inner, title); }
   // 标注 chip（tdCorePanel 的六格 + tdSidePanels 的「交易细则·成本」组共用；ADR-055）。
   // val 传完整串，CSS 用 -webkit-line-clamp 截断，title 给完整内容；标签按 chapter+path 查 taxonomy。
   function tdChip(id, path, val, env, chapter) {
@@ -1223,15 +1266,8 @@
     if (v >= 1) return v.toFixed(1);
     return v.toFixed(2);
   }
-  function cwResolveId(params) {
-    var l = cache.manifest.exchanges;
-    if (l.some(function (e) { return e.id === params.id; })) return params.id;
-    return l.some(function (e) { return e.id === CW_DEFAULT_EX; }) ? CW_DEFAULT_EX : l[0].id;
-  }
-  function cwCell(id, key, inner, title) {
-    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(key) +
-      '" data-chapter="costs">' + (title ? "<title>" + esc(title) + "</title>" : "") + inner + "</g>";
-  }
+  function cwResolveId(params) { return resolveExchangeId(params, CW_DEFAULT_EX); }
+  function cwCell(id, key, inner, title) { return cellG(id, key, "costs", inner, title); }
   function cwTitle(r) {
     var s = (r.env && r.env.spec) || {};
     var parts = [cwFeeName(r.key) + sep()];
@@ -1531,15 +1567,8 @@
     shared_ccp:       { zh: "跨市场共享的独立 CCP（如 NSCC 覆盖多家美国交易所）", en: "An independent CCP shared across markets (e.g. NSCC covering multiple U.S. exchanges)" }
   };
 
-  function spResolveId(params) {
-    var l = cache.manifest.exchanges;
-    if (l.some(function (e) { return e.id === params.id; })) return params.id;
-    return l.some(function (e) { return e.id === SP_DEFAULT_EX; }) ? SP_DEFAULT_EX : l[0].id;
-  }
-  function spCell(id, path, inner, title) {
-    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
-      '" data-chapter="clearing">' + (title ? "<title>" + esc(title) + "</title>" : "") + inner + "</g>";
-  }
+  function spResolveId(params) { return resolveExchangeId(params, SP_DEFAULT_EX); }
+  function spCell(id, path, inner, title) { return cellG(id, path, "clearing", inner, title); }
   function spSettleDays(cl) {
     var e = cl.settlement_cycle && cl.settlement_cycle.enum;
     return e === "t0" ? 0 : e === "t1" ? 1 : e === "t3" ? 3 : 2;
@@ -1557,10 +1586,7 @@
     });
     return has ? "both" : "none";
   }
-  function spClip(s, max) {
-    s = String(s == null ? "" : s);
-    return s.length > max ? s.slice(0, max - 1) + "…" : s;
-  }
+  function spClip(s, max) { return clipText(s, max); }
   function spArrow(x1, x2, y, color) {
     return '<line x1="' + spNum(x1) + '" x2="' + spNum(x2 - 5) + '" y1="' + spNum(y) + '" y2="' + spNum(y) +
       '" stroke="' + color + '" stroke-width="1.5"/>' +
@@ -1859,33 +1885,11 @@
     mixed_by_board: { zh: "分板块不一", en: "Varies by board" }
   };
 
-  function llResolveId(params) {
-    var l = cache.manifest.exchanges;
-    if (l.some(function (e) { return e.id === params.id; })) return params.id;
-    return l.some(function (e) { return e.id === LL_DEFAULT_EX; }) ? LL_DEFAULT_EX : l[0].id;
-  }
+  function llResolveId(params) { return resolveExchangeId(params, LL_DEFAULT_EX); }
   function llN(v) { return Math.round(v * 10) / 10; }
-  function llCell(id, path, inner, title) {
-    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
-      '" data-chapter="listing">' + (title ? "<title>" + esc(title) + "</title>" : "") + inner + "</g>";
-  }
+  function llCell(id, path, inner, title) { return cellG(id, path, "listing", inner, title); }
   // CJK 按字数断行、拉丁按空格断行；最多 maxLines 行，超出末行省略号
-  function llWrap(s, per, maxLines) {
-    s = String(s == null ? "" : s).trim();
-    var out = [];
-    if (/[一-鿿]/.test(s)) {
-      for (var i = 0; i < s.length; i += per) out.push(s.slice(i, i + per));
-    } else {
-      var cur = "";
-      s.split(/\s+/).forEach(function (w) {
-        if (cur && (cur + " " + w).length > per) { out.push(cur); cur = w; }
-        else cur = cur ? cur + " " + w : w;
-      });
-      if (cur) out.push(cur);
-    }
-    if (out.length > maxLines) { out = out.slice(0, maxLines); out[maxLines - 1] = spClip(out[maxLines - 1] + "…", per + 1); }
-    return out;
-  }
+  function llWrap(s, per, maxLines) { return wrapByCharBudget(s, per, maxLines); }
   // 时长 spec → { months, label } | { none: true } | null
   function llDurInfo(env) {
     var sp = env && env.spec;
@@ -2209,22 +2213,12 @@
   //   固定槽位：每个字段固定位置、跨 20 家不变，「换所即对比」。
   // ══════════════════════════════════════════════
   var RM_DEFAULT_EX = "sg-sgx";
-  function rmResolveId(params) {
-    var l = cache.manifest.exchanges;
-    if (l.some(function (e) { return e.id === params.id; })) return params.id;
-    return l.some(function (e) { return e.id === RM_DEFAULT_EX; }) ? RM_DEFAULT_EX : l[0].id;
-  }
+  function rmResolveId(params) { return resolveExchangeId(params, RM_DEFAULT_EX); }
   // 折行：CJK 按字数、拉丁按单词，per 由可用像素反推（与 llWrap 同思路）。
   // innerW 传的是整卡宽 w，正文实际从 x+14 起排、右侧还要留白——扣 24px
   // （14 左内边距 + 10 右内边距），否则密排 CJK 长行会越过卡片右沿约 6px
   // （[ADR-061] 渲染层视觉修订，2026-09-03 审查反馈，几何实测）。
-  function rmWrap(text, innerW, maxLines) {
-    var avail = innerW - 24;
-    var per = /[一-鿿]/.test(text)
-      ? Math.max(6, Math.floor(avail / 10.5))
-      : Math.max(10, Math.floor(avail / 5.6));
-    return llWrap(text, per, maxLines);
-  }
+  function rmWrap(text, innerW, maxLines) { return wrapByPixelWidth(text, innerW, maxLines); }
   // 三张监管机构卡 / 两张闸门卡 / 两张保护卡共用：有值 = 实心 + 左缘色条；
   // 缺省 = 虚线框 + 居中「未记录」。卡整体走 openCellOverlay。
   function rmEnvCard(id, R, path, x, y, w, h, keyColor) {
@@ -2248,8 +2242,7 @@
         }).join("");
       titleTxt = (fieldLabel("regulation", path) + " · ") + (text.length > 200 ? text.slice(0, 200) + "…" : text);
     }
-    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
-      '" data-chapter="regulation">' + "<title>" + esc(titleTxt) + "</title>" + inner + "</g>";
+    return cellG(id, path, "regulation", inner, titleTxt);
   }
   // 法律基座：core_laws 满宽一条，暖色（--warn）作整图底座
   function rmLawStrip(id, R, path, x, y, w, h) {
@@ -2271,23 +2264,27 @@
         }).join("");
       titleTxt = (fieldLabel("regulation", path) + " · ") + (text.length > 200 ? text.slice(0, 200) + "…" : text);
     }
-    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
-      '" data-chapter="regulation">' + "<title>" + esc(titleTxt) + "</title>" + inner + "</g>";
+    return cellG(id, path, "regulation", inner, titleTxt);
   }
   // 左槽 lane label（主 + 副，随语言开关）
-  function rmLaneLabel(x, y, main, sub) {
-    return '<text x="' + (x - 16) + '" y="' + llN(y) + '" text-anchor="end" class="rm-lane-l">' + esc(t(main.zh, main.en)) + "</text>" +
-      '<text x="' + (x - 16) + '" y="' + llN(y + 13) + '" text-anchor="end" class="rm-lane-s">' + esc(t(sub.zh, sub.en)) + "</text>";
-  }
+  function rmLaneLabel(x, y, main, sub) { return laneLabel(x, y, main, sub, "rm"); }
 
+  // rm/pt 图例结构完全同构（连 CSS 类名 rm-lg-* 都被 pt 原样复制），收敛成
+  // 数据驱动的共享函数；cw/ll/rf/td 的图例含各自专属元素（幽灵条/loop/flag chip
+  // 等），审查后保留独立实现，不强行套模板。
+  function keyedLegend(items) {
+    return '<div class="td-legend rm-legend">' + items.map(function (it) {
+      return '<span><i class="' + it.cls + '"' + (it.color ? ' style="background:' + it.color + '"' : "") + "></i>" + t(it.zh, it.en) + "</span>";
+    }).join("") + "</div>";
+  }
   function rmLegend() {
-    return '<div class="td-legend rm-legend">' +
-      '<span><i class="rm-lg-solid"></i>' + t("已填事实", "Filled fact") + "</span>" +
-      '<span><i class="rm-lg-dash"></i>' + t("未记录（真实数据缺口）", "Not recorded (genuine data gap)") + "</span>" +
-      '<span><i class="rm-lg-key" style="background:var(--info)"></i>' + t("监管主体 · 透明保护", "regulators · disclosure/protection") + "</span>" +
-      '<span><i class="rm-lg-key" style="background:var(--accent)"></i>' + t("外资与资金闸门", "foreign access & capital gates") + "</span>" +
-      '<span><i class="rm-lg-key" style="background:var(--warn)"></i>' + t("法律基座", "legal basis") + "</span>" +
-      "</div>";
+    return keyedLegend([
+      { cls: "rm-lg-solid", zh: "已填事实", en: "Filled fact" },
+      { cls: "rm-lg-dash", zh: "未记录（真实数据缺口）", en: "Not recorded (genuine data gap)" },
+      { cls: "rm-lg-key", color: "var(--info)", zh: "监管主体 · 透明保护", en: "regulators · disclosure/protection" },
+      { cls: "rm-lg-key", color: "var(--accent)", zh: "外资与资金闸门", en: "foreign access & capital gates" },
+      { cls: "rm-lg-key", color: "var(--warn)", zh: "法律基座", en: "legal basis" },
+    ]);
   }
   function rmProse() {
     return '<div class="td-prose">' + t(
@@ -2384,20 +2381,10 @@
   //   纯衍生品所（de-eurex）第九章全章适用、无 only_spot（[ADR-064] 轴 8）。
   // ══════════════════════════════════════════════
   var PT_DEFAULT_EX = "hk-hkex";
-  function ptResolveId(params) {
-    var l = cache.manifest.exchanges;
-    if (l.some(function (e) { return e.id === params.id; })) return params.id;
-    return l.some(function (e) { return e.id === PT_DEFAULT_EX; }) ? PT_DEFAULT_EX : l[0].id;
-  }
+  function ptResolveId(params) { return resolveExchangeId(params, PT_DEFAULT_EX); }
   // 折行：CJK 按字数、拉丁按单词，per 由可用像素反推（同 [ADR-061] rmWrap 思路，
   // innerW 传整卡宽、扣 24px 左右内边距）。独立一份，便于各模块单独微调。
-  function ptWrap(text, innerW, maxLines) {
-    var avail = innerW - 24;
-    var per = /[一-鿿]/.test(text)
-      ? Math.max(6, Math.floor(avail / 10.5))
-      : Math.max(10, Math.floor(avail / 5.6));
-    return llWrap(text, per, maxLines);
-  }
+  function ptWrap(text, innerW, maxLines) { return wrapByPixelWidth(text, innerW, maxLines); }
   // 一张信封卡（满宽 / 接入链节点共用）：有值 = 实心 + 左缘色条 + 角色头 + 折行正文；
   // 缺省 = 虚线框 + 角色头 + 居中斜体「未记录」。卡整体走 openCellOverlay。
   function ptEnvCard(id, P, path, x, y, w, h, keyColor) {
@@ -2423,21 +2410,17 @@
         }).join("");
       titleTxt = label + " · " + (text.length > 200 ? text.slice(0, 200) + "…" : text);
     }
-    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
-      '" data-chapter="participants">' + "<title>" + esc(titleTxt) + "</title>" + inner + "</g>";
+    return cellG(id, path, "participants", inner, titleTxt);
   }
-  function ptLaneLabel(x, y, main, sub) {
-    return '<text x="' + (x - 16) + '" y="' + llN(y) + '" text-anchor="end" class="pt-lane-l">' + esc(t(main.zh, main.en)) + "</text>" +
-      '<text x="' + (x - 16) + '" y="' + llN(y + 13) + '" text-anchor="end" class="pt-lane-s">' + esc(t(sub.zh, sub.en)) + "</text>";
-  }
+  function ptLaneLabel(x, y, main, sub) { return laneLabel(x, y, main, sub, "pt"); }
   function ptLegend() {
-    return '<div class="td-legend rm-legend">' +
-      '<span><i class="rm-lg-solid"></i>' + t("已填事实", "Filled fact") + "</span>" +
-      '<span><i class="rm-lg-dash"></i>' + t("未记录（真实数据缺口）", "Not recorded (genuine data gap)") + "</span>" +
-      '<span><i class="rm-lg-key" style="background:var(--info)"></i>' + t("谁在场上", "who's on the floor") + "</span>" +
-      '<span><i class="rm-lg-key" style="background:var(--accent)"></i>' + t("接入 · 会员 / 经纪 / 外资", "access · member / broker / foreign") + "</span>" +
-      '<span><i class="rm-lg-key" style="background:var(--warn)"></i>' + t("准入门槛 · 开户 / 适当性", "gates · account / suitability") + "</span>" +
-      "</div>";
+    return keyedLegend([
+      { cls: "rm-lg-solid", zh: "已填事实", en: "Filled fact" },
+      { cls: "rm-lg-dash", zh: "未记录（真实数据缺口）", en: "Not recorded (genuine data gap)" },
+      { cls: "rm-lg-key", color: "var(--info)", zh: "谁在场上", en: "who's on the floor" },
+      { cls: "rm-lg-key", color: "var(--accent)", zh: "接入 · 会员 / 经纪 / 外资", en: "access · member / broker / foreign" },
+      { cls: "rm-lg-key", color: "var(--warn)", zh: "准入门槛 · 开户 / 适当性", en: "gates · account / suitability" },
+    ]);
   }
   function ptProse() {
     return '<div class="td-prose">' + t(
@@ -2555,19 +2538,9 @@
     { path: "political_risk_note", lane: 2 },
     { path: "enforcement_note", lane: 2 }
   ];
-  function rfResolveId(params) {
-    var l = cache.manifest.exchanges;
-    if (l.some(function (e) { return e.id === params.id; })) return params.id;
-    return l.some(function (e) { return e.id === RF_DEFAULT_EX; }) ? RF_DEFAULT_EX : l[0].id;
-  }
+  function rfResolveId(params) { return resolveExchangeId(params, RF_DEFAULT_EX); }
   // 折行：同 rmWrap / ptWrap 思路（整卡宽扣 24px 内边距、CJK 按字数 / 拉丁按词、委托 llWrap）
-  function rfWrap(text, innerW, maxLines) {
-    var avail = innerW - 24;
-    var per = /[一-鿿]/.test(text)
-      ? Math.max(6, Math.floor(avail / 10.5))
-      : Math.max(10, Math.floor(avail / 5.6));
-    return llWrap(text, per, maxLines);
-  }
+  function rfWrap(text, innerW, maxLines) { return wrapByPixelWidth(text, innerW, maxLines); }
   function rfConfWord(c) {
     return c === "high" ? t("有据可查", "documented")
       : c === "medium" ? t("综合判断", "assessed")
@@ -2623,13 +2596,9 @@
         }).join("");
       titleTxt = label + " · " + rfConfWord(conf) + " — " + (text.length > 220 ? text.slice(0, 220) + "…" : text);
     }
-    return '<g class="td-hit" data-role="cell" data-exchange="' + esc(id) + '" data-path="' + esc(path) +
-      '" data-chapter="risks">' + "<title>" + esc(titleTxt) + "</title>" + inner + "</g>";
+    return cellG(id, path, "risks", inner, titleTxt);
   }
-  function rfLaneLabel(x, y, main, sub) {
-    return '<text x="' + (x - 16) + '" y="' + llN(y) + '" text-anchor="end" class="rf-lane-l">' + esc(t(main.zh, main.en)) + "</text>" +
-      '<text x="' + (x - 16) + '" y="' + llN(y + 13) + '" text-anchor="end" class="rf-lane-s">' + esc(t(sub.zh, sub.en)) + "</text>";
-  }
+  function rfLaneLabel(x, y, main, sub) { return laneLabel(x, y, main, sub, "rf"); }
   function rfFlagChip(conf, color) {
     return '<svg class="rf-lg-flag" width="15" height="17" viewBox="-2 0 17 17" aria-hidden="true">' + rfFlag(2, 14, conf, color) + "</svg>";
   }
