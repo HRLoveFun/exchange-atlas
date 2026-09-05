@@ -2046,26 +2046,38 @@
         "detail": null
       },
       "regulatory_fees": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "任务前置预期日本可能没有独立于交易所/清算费用之外的「监管费」概念，本次抓取范围（jpx.co.jp/fsa.go.jp/mof.go.jp/nta.go.jp）未找到FSA/SESC向市场参与者或投资者直接征收、独立于costs.exchange_fees（交易所对会员收取）与costs.clearing_fees（JSCC对清算参与者收取）之外的「监管费」条文或费率表；未找到不等于确认不存在，故如实留空而非断言「不存在」，也不把交易所/清算费重复记一遍。",
+        "zh": "日本无按笔计收的证券交易监管费：不存在类似美国 Section 31 的费种——监管经费不以逐笔交易费形式向市场参与者或投资者转嫁（FSA/SESC 独立于交易所收费与 JSCC 清算费之外的监管费率表，历次抓取均未发现）；曾对证券转让征收的『有価証券取引税』已于 1999-03-31 废止（国税庁官方一手表述），现行监管体系不落在交易环节计费",
+        "en": "Japan has no per-trade securities regulatory fee: there is no counterpart to the U.S. Section 31 fee — regulatory funding is not passed on as a per-trade charge (no FSA/SESC fee schedule separate from exchange fees and JSCC clearing fees has been found across repeated fetches); the former Securities Transaction Tax (有価証券取引税) on securities transfers was abolished on 31 March 1999 (per the NTA's official account), and the current regulatory system does not charge at the trade level",
+        "detail": "由留空转为本口径：历次抓取『未找到』的记录保留为背景，本次补上『曾存在但已废止』的正面依据（国税庁有価証券取引税概要页：废止时点与最后年度课税额 220 億円）——『不存在』判断由此从纯负面转为有官方文献支撑的正面陈述。⚠️ 该页面为 Shift-JIS 编码，缓存文件已转存 UTF-8（见 sources/jp-jpx.md 记录）。",
+        "sources": [
+          {
+            "title": "有価証券取引税の概要（国税庁统计页，1999-03-31 废止的一手官方表述）",
+            "url": "https://www.nta.go.jp/publication/statistics/kokuzeicho/shoken1999/menu/01.htm",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "有価証券取引税は平成11年3月31日をもって廃止された。したがって平成11年度については、平成11年3月31日以前の取引にかかる平成11年4月1日から平成12年3月31日までの課税事績を示しており、課税譲渡価額は71兆4,326億円、税額は220億円となっている",
+        "confidence": "medium",
         "verified": "2026-08-24",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "stamp_duty": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：日本1999年已废止有价证券交易税——与上交所0.05%单边、港交所0.1%双边形成对比的重要字段，但本次未找到可引用的官方来源确认，留空不凭常识填写（该字段volatility: volatile，按铁律必须有sources才能填，本次没有）。",
+        "zh": "日本对证券交易本身不征交易税（有価証券取引税已于 1999-03-31 废止，见 regulatory_fees 与 financial_transaction_tax）；现行与证券转让文书相关的税为印紙税：制作纸质『有価証券売渡譲渡書』等第17号文書（金銭又は有価証券の受取書）时按记载金额分档贴花（如 5万円未満不课税、5万円以上100万円以下 200 円、1億円超2億円以下 4 万円）；交易所电子集中交易不制作纸质文书，实际不产生印紙税——与上交所单边印花税、港交所双边印花税的形态根本不同",
+        "en": "Japan levies no transaction tax on securities trades (the Securities Transaction Tax was abolished on 31 March 1999 — see regulatory_fees and financial_transaction_tax); the current stamp-duty exposure arises only when a paper document is created: 印紙税 applies to 第17号文書 (receipts of money or securities, including securities transfer documents) at rates tiered by the stated amount (e.g. below 50,000 yen exempt; 50,000–1,000,000 yen: 200 yen; over 100 million up to 200 million yen: 40,000 yen). Exchange electronic trading creates no paper document, so no stamp duty arises in practice — fundamentally different from the Shanghai (one-side) and Hong Kong (both-side) stamp duties",
+        "sources": [
+          {
+            "title": "No.7141 印紙税額の一覧表（その2）第5号文書から第20号文書まで（国税庁 Tax Answer，第17号文書印紙税额分档表）",
+            "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/inshi/7141.htm",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "記載された受取金額が 5万円未満 非課税 5万円以上100万円以下 200円 100万円を超え200万円以下 400円 ... 5千万円を超え1億円以下 2万円 1億円を超え2億円以下 4万円",
+        "confidence": "medium",
         "verified": "2026-08-24",
-        "en": null,
         "enum": null,
         "spec": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "financial_transaction_tax": {
         "spec": {
@@ -2127,15 +2139,21 @@
         "detail": null
       },
       "implicit_costs_note": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "隐性成本（买卖价差、冲击成本）需依赖高频逐笔行情或做市商价差统计才能量化，本次抓取范围（JPX官方叙述性页面）未包含此类可引用的定量说明；infrastructure.market_data_levels已确认逐笔订单簿数据本身是存在的付费产品（FLEX MBO），理论上可用于计算价差，但计算结果本身不是官网直接给出的数字，如实留空。",
+        "zh": "日本现货股票的隐性成本主要来自买卖价差与市场冲击；市场结构上的相关官方/研究记录：TSE 为日本股票订单流的主要集中场所，PTC（券商自营交叉盘/PTS）仅分流小部分交易——2025 年日本已无独立 PTS（Cboe Japan 退出后券商系 PTS 与 SBI Japannext 并存），其中 Cboe Japan 退出前的股票交易份额也仅约 4–5%；订单流集中意味着 TSE 主市场的价差/深度是隐性成本的主要决定因素。逐标的实际价差官方不发布（逐笔订单簿数据为 FLEX MBO 付费产品，见 infrastructure.market_data_levels），本字段按覆盖边界停留在分析性描述",
+        "en": "Implicit costs in Japanese cash equities stem mainly from bid-ask spreads and market impact; relevant structural records: TSE concentrates the bulk of Japanese equity order flow — Japan now has no independent PTS (after Cboe Japan's withdrawal, broker-affiliated PTSs coexist with SBI Japannext), and Cboe Japan held only about a 4–5% share of equity trading before its exit; order-flow concentration means spreads/depth on the TSE book are the main determinant of implicit costs. Per-instrument realized spreads are not officially published (order-book data is the paid FLEX MBO product, see infrastructure.market_data_levels), so this note remains analytical per the coverage boundary",
+        "detail": "由留空升级：引入 JSRI 研究报告（第三方，confidence 封顶 medium）关于 PTS 格局与份额的可摘引记录，佐证『订单流集中于 TSE 主市场』的结构判断；价差本身仍无官方数字。",
+        "sources": [
+          {
+            "title": "The Implications of Cboe Japan's Withdrawal – Structural Changes in Japan's Stock Market（日本証券経済研究所 JSRI 研究报告 PDF，2025-11，PTS 格局与份额；第三方来源）",
+            "url": "https://www.jsri.or.jp/upload/topics_2511_01_en.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "Cboe Japan held a 4–5% share of equity trading— ranking second among PTSs after SBI Japannext—but 60–70% of its orders came from Rakuten Securities.",
+        "confidence": "medium",
         "verified": "2026-08-24",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       }
     },
     "risks": {

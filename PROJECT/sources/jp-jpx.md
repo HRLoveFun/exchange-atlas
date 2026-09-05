@@ -62,3 +62,6 @@
   - JSCC 現物取引 証拠金（现物清算参加者当初証拠金构成：未決済約定の値洗い価値（時価評価額）＋ヒストリカルシミュレーション VaR（保有期間 1 日、参照期間 250 日、信頼水準 99％）；市场压力期上调；信用状况割增；TOPIX/日经期货 11 时约定差超基准值触发日中預託；2026-06-30 时点全参加者当初証拠金所要额 1,688 億円）: https://www.jpx.co.jp/jscc/seisan/genbutsu/margin.html（HTTP 200）
 
 ⚠️ **make fetch 对 jpx.co.jp 的误报（2026-09-05 发现）**：`tools/fetch.py`（curl）抓 jpx.co.jp 全部内容页都拿到 200 + 真实正文，但 `looks_blocked` 会在正文头部 4KB 里嗅到 `cloudflare` 字样（页面内嵌 CDN 资源路径所致）而把整批标成 FAIL——缓存文件本身是好的，`ok:false` 只是误记，`verify_quotes` 因此把引用 jpx 页面的字段降级为信息性 CACHE_MISS。改用 `python3 tools/fetch_sources.py --ex jp-jpx`（requests 实现）即可全部 OK（2026-09-05 实测 32/32 过）。jpx.co.jp 本身没有真反爬，连续快速请求也未见限流。
+- `nta.go.jp`（2026-09-05 补充登记，任务四族D，沿用既有域名条目） | 官方（国税厅） | ja | curl 常规浏览器 UA 200
+  - 有価証券取引税の概要（国税庁统计页，「有価証券取引税は平成11年3月31日をもって廃止された」一手表述；⚠️ 页面为 Shift-JIS 编码，`fetch_sources.py` 落盘后需转存 UTF-8 才能过 `verify_quotes` 文本比对，2026-09-05 实测）: https://www.nta.go.jp/publication/statistics/kokuzeicho/shoken1999/menu/01.htm（HTTP 200）
+  - No.7141 印紙税額の一覧表（その2）第5号文書から第20号文書まで（第17号文書印紙税额分档表，UTF-8 正常）: https://www.nta.go.jp/taxes/shiraberu/taxanswer/inshi/7141.htm（HTTP 200，30KB）
