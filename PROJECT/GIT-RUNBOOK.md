@@ -4,7 +4,7 @@
 
 ---
 
-## 自动合并流水线（[ADR-PENDING-solo-automation-pipeline]）——现在是默认路径
+## 自动合并流水线（[ADR-081]）——现在是默认路径
 
 后台任务开 PR 后，正常情况下**不需要人做任何事**：
 
@@ -75,7 +75,7 @@ git push
 
 ## 相关历史
 
-- 自动合并流水线（CI build 检查 + auto-merge + `adr-heal` post-merge 定号，取代人工点 merge / 人工跑 `assign-adr`），见 `DECISIONS.md` [ADR-PENDING-solo-automation-pipeline]。
+- 自动合并流水线（CI build 检查 + auto-merge + `adr-heal` post-merge 定号，取代人工点 merge / 人工跑 `assign-adr`），见 `DECISIONS.md` [ADR-081]。
 - 并行 worktree 防失序的四道护栏（§一 单写者 + ADR 台账 + 生成块 + 本节的串行合并纪律），见 `DECISIONS.md` [ADR-069]。
 - 并行分支 ADR 编号撞号、已推送提交不能 rebase（改用 `merge origin/main`）的处理，见 `DECISIONS.md` [ADR-029]（编号预支的第一版根治见 [ADR-069] 的 `ADR-LEDGER.md`；批量并行下该版仍会撞，占位符 + 合并时定号的第二版见 [ADR-076]）。
 - `isolation: "worktree"` 在「因限额中断后经 SendMessage 恢复」路径上多次失效的证据，见 [ADR-021] / [ADR-027] / [ADR-031]。

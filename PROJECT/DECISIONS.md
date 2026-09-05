@@ -2152,7 +2152,7 @@
 
 ---
 
-### ADR-PENDING-solo-automation-pipeline — 自动合并流水线：CI build 检查 + auto-merge + ADR 定号 post-merge healer，§四"人工抽检"改"独立视角复核"
+### ADR-081 — 自动合并流水线：CI build 检查 + auto-merge + ADR 定号 post-merge healer，§四"人工抽检"改"独立视角复核"
 
 **背景：** 单人维护仓库的开发者反馈现有流程三处摩擦让人疲于应付：① 后台任务留下的 PR 需要人手动点 merge（[CLAUDE.md] §六已经承认"走 PR 只是多一次手动点 merge，没有额外价值"，但没人去把这多余的一步真正拿掉）；② 合并前跑 `make assign-adr` 定号（[ADR-076]）虽然只是机械操作，仍要协调者记得手动跑一遍；③ 并行 worktree 批量开工时 PR 反复冲突，2026-09-04/05 那次 ADR 编号连撞四次（PR69-72）就是最直接的例子。用户明确要求"高度自动化摆脱人工干预"，并同意把 [CLAUDE.md] §四"人工抽检"/"第二人独立复核"的措辞改为不强制要求真人（[ADR-074] 已经用 4 个独立 agent 视角顶替真人复核、96.2% 达标，验证了这条路可行）。
 
@@ -2170,6 +2170,6 @@
 - **没有把"抽检者可以是独立 agent"这件事再往前推成一个正式的可复用 skill/操作模板**（比如"怎么给独立 agent 布置盲审任务、只给交易所 id + 字段清单、不告诉它已填答案"）——[ADR-074] 已经有一次实践先例，但把它写成可直接照抄的模板是另一件事，本条只改了措辞允许这么做，模板留待下次真正触发 >30 字段复核时顺手补，或单独立项。
 - **没有改变 ADR 编号台账（`PROJECT/ADR-LEDGER.md`）的运作方式本身**——post-merge healer 只是把 [ADR-076] 已经定好的"分配延后到合并进 main 这一刻"这条规则从"人工在分支上跑"进一步自动化成"CI 在 main 上跑"，序列化的原理不变（合并本身串行 → 定号也就串行），只是把执行者从人换成 workflow。
 
-**验证：** 本条自身就是这条流水线的第一个真实用例——`DECISIONS.md` 标题写占位符 `ADR-PENDING-solo-automation-pipeline`，`CLAUDE.md`/`PROJECT/GIT-RUNBOOK.md` 里的交叉引用也写同一占位符；PR 开出后带 `gh pr merge --auto --squash`，`pr-build.yml` 跑绿后由 GitHub 服务端自动合并，合并进 main 后 `adr-heal.yml` 应该自动把本条占位符定号为下面这个真实编号——本条末尾若能看到具体数字而不是 `ADR-PENDING-solo-automation-pipeline`，说明整条流水线（CI 检查 → auto-merge → post-merge 定号）端到端跑通了。人工验证记录：`gh repo view`/`gh api` 现测 `allow_auto_merge: true`、`deleteBranchOnMerge: true`；本地 `make build` 全绿（占位符在本分支上只警告，不阻断）。
+**验证：** 本条自身就是这条流水线的第一个真实用例——`DECISIONS.md` 标题写占位符 `ADR-081`，`CLAUDE.md`/`PROJECT/GIT-RUNBOOK.md` 里的交叉引用也写同一占位符；PR 开出后带 `gh pr merge --auto --squash`，`pr-build.yml` 跑绿后由 GitHub 服务端自动合并，合并进 main 后 `adr-heal.yml` 应该自动把本条占位符定号为下面这个真实编号——本条末尾若能看到具体数字而不是 `ADR-081`，说明整条流水线（CI 检查 → auto-merge → post-merge 定号）端到端跑通了。人工验证记录：`gh repo view`/`gh api` 现测 `allow_auto_merge: true`、`deleteBranchOnMerge: true`；本地 `make build` 全绿（占位符在本分支上只警告，不阻断）。
 
 **日期：** 2026-09-05
