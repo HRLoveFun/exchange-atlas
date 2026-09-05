@@ -1505,9 +1505,15 @@ risks:
     confidence: low
 
   fx_risk_note:
-    zh: "沙特里亚尔实行盯住美元的固定汇率制度（本条为一般常识性背景信息，本次未附一手原文来源，confidence 相应降级）"
-    en: "The Saudi riyal operates under a fixed exchange-rate regime pegged to the US dollar (general background information; no primary source cited this session, hence the lower confidence)"
-    confidence: low
+    zh: "沙特里亚尔盯住美元：沙特央行（SAMA）声明将汇率维持在官方汇率 3.75 里亚尔兑美元，作为货币与金融稳定之锚，并确认该盯住政策是支持沙特经济增长逾三十年的战略选择（SAMA 官方声明，经沙特通讯社 SPA 刊发，见 sources）。对非里亚尔投资者：Tadawul 上市证券以里亚尔计价结算，承担里亚尔兑投资者本币的汇率风险"
+    en: "The Saudi riyal is pegged to the US dollar: SAMA states it remains committed to maintaining the exchange rate at the official rate of 3.75 riyals to the dollar as an anchor of monetary and financial stability, affirming the peg as a strategic choice that has supported Saudi economic growth for over three decades (SAMA statement carried by the official Saudi Press Agency, see sources). For non-SAR investors: Tadawul-listed securities are denominated and settled in SAR, carrying SAR exchange-rate risk against the investor's currency"
+    quote: "SAMA remains committed to maintaining the exchange rate at the official rate of 3.75 riyals to the dollar as an anchor of monetary and financial stability."
+    sources:
+      - title: "SAMA affirms commitment to exchange rate policy of pegging Saudi riyal to US dollar strategic choice（沙特通讯社 SPA 官方刊发的 SAMA 声明）"
+        url: https://www.spa.gov.sa/2082342
+        accessed: 2026-09-05
+    confidence: high
+    verified: 2026-09-05
 
   political_risk_note:
     zh: "沙特为君主制、政治稳定，正推进'Vision 2030'经济多元化改革；市场面临区域地缘政治风险与油价敏感度，但国家维持稳定且改革导向的监管环境。外资准入已于 2026年2月进一步开放"
