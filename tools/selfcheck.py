@@ -219,6 +219,47 @@ case("OTP 计数：两行各违规各报一条",
          "  - a [OTP]: https://a.com/o\n  - b [OTP]: https://b.com/o\n")), 2)
 
 
+# ══════════════════════════════════════════════════════════════
+# [ADR-PENDING-antibloat] 来源分片配对：
+#   validate.sources_pairing_violations(data_ids, source_ids)
+#   —— data/exchanges/*.yml 与 PROJECT/sources/*.md 一一对应。
+# ══════════════════════════════════════════════════════════════
+def _pair_bad(d, s):
+    return bool(validate.sources_pairing_violations(set(d), set(s)))
+
+
+case("pairing 合法：两侧完全一致", _pair_bad(["a", "b"], ["b", "a"]), False)
+case("pairing 合法：两侧皆空", _pair_bad([], []), False)
+case("pairing 违规：data 多出（漏建分片）", _pair_bad(["a", "b"], ["a"]), True)
+case("pairing 违规：sources 多出（孤儿分片）", _pair_bad(["a"], ["a", "b"]), True)
+case("pairing 违规：两侧各多出一个互不相同", _pair_bad(["a", "x"], ["a", "y"]), True)
+case("pairing 计数：缺分片 + 孤儿分片 → 2 条消息",
+     len(validate.sources_pairing_violations({"a", "x"}, {"a", "y"})), 2)
+
+
+# ══════════════════════════════════════════════════════════════
+# [ADR-PENDING-antibloat] INBOX 一句话上限：
+#   validate.inbox_line_violations(text, maxlen=200)
+#   —— 「待折叠」区每条 `- ` 行 ≤200 字；只限行长、不限堆积条数。
+# ══════════════════════════════════════════════════════════════
+_INBOX_TMPL = "# INBOX\n\n## 待折叠\n\n{body}\n\n## 下一节\n"
+case("inbox 合法：短行",
+     validate.inbox_line_violations(_INBOX_TMPL.format(body="- 2026-09-05 · 一句话 · [ADR-001] · main")), [])
+case("inbox 违规：单行超 200 字",
+     len(validate.inbox_line_violations(_INBOX_TMPL.format(body="- " + "字" * 201))), 1)
+case("inbox 合法：恰好 200 字（含 `- ` 前缀）",
+     validate.inbox_line_violations(_INBOX_TMPL.format(body="- " + "字" * 198)), [])
+case("inbox 不误伤：长文本在 `- ` 行之外的说明段落",
+     validate.inbox_line_violations(_INBOX_TMPL.format(body="普通段落 " + "字" * 300)), [])
+case("inbox 不误伤：「待折叠」小节之外的长行",
+     validate.inbox_line_violations("# INBOX\n\n## 其他\n\n- " + "字" * 300 + "\n"), [])
+case("inbox 合法：没有「待折叠」小节", validate.inbox_line_violations("# INBOX\n"), [])
+case("inbox 计数：两行超限各报一条",
+     len(validate.inbox_line_violations(_INBOX_TMPL.format(body="- " + "字" * 201 + "\n- " + "字" * 202))), 2)
+case("inbox 自定义上限：maxlen=10 时 11 字的行违规",
+     len(validate.inbox_line_violations(_INBOX_TMPL.format(body="- 这是一句普通长度的话"), maxlen=10)), 1)
+
+
 def main():
     fails = [(n, g, w) for n, g, w in CASES if g != w]
     for n, g, w in CASES:
