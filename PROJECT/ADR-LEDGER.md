@@ -45,3 +45,4 @@
 - ADR-092 · OQ #45 四家旗舰所衍生品覆盖缺口落地（products 条目 + 两 derivatives 子章 + 盲审订正） · main · 2026-09-05
 - ADR-093 · 折行函数 `wrapByCharBudget` 改 token 折行：中英混排不再从拉丁词 / 数字中间切断 · main · 2026-09-05
 - ADR-094 · stable 档来源不变式全库化（校验 21）+ 63 处「stable + medium + 零 sources」闭环 · main · 2026-09-06
+- ADR-095 · Phase 3「其余章节可视化」收口认定 + Phase 4 启动前置条件达成 · main · 2026-09-05
