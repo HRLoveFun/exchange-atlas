@@ -1763,65 +1763,104 @@
         "detail": null
       },
       "initial_margin_practice": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "HKSCC 对现货市场未交收头寸收取保证金，按恒生综合指数（HSCI）分类实行两级制度：大型/中型股成分股、全部股票 ETP 及以其为标的的结构性产品适用 Tier P——基于 VaR 的组合保证金，最低保证金水平 3.2%（2023-08-14 生效）；其余非 Tier P 品种与结构性产品适用 Tier N 平准费率——第 1 组 12%（2022-06-13 生效）、第 2 组 30%（2022-12-16 生效）、第 3 组 55%（2025-10-27 生效），并可施加清算参与者特定的保证金乘数；HKSCC 还可对清算参与者施加保证金附加项（margin add-ons）以监控与控制风险暴露",
+        "en": "HKSCC applies margin to unsettled cash-market positions under a two-tier approach following the classification of the Hang Seng Composite Index (HSCI): constituents of the Hang Seng Composite LargeCap/MidCap Index, all equity ETPs and structured products with such Tier P instruments as underlyings are subject to Tier P — Value-at-Risk (VaR) based Portfolio Margining with a minimum margin level of 3.2% (effective 14 August 2023); all other non-Tier P instruments and structured products are subject to Tier N flat rate margins — margin group 1: 12% (effective 13 June 2022), group 2: 30% (effective 16 Dec 2022), group 3: 55% (effective 27 Oct 2025), subject to Clearing Participant-specific margin multiplier where appropriate; HKSCC may also apply margin add-ons to Clearing Participants to monitor and control risk exposure",
+        "sources": [
+          {
+            "title": "Margin（HKEX 官网 HKSCC 风险管理·保证金页，两级保证金制度与各档费率及生效日期）",
+            "url": "https://www.hkex.com.hk/Services/Clearing/Securities/Risk-Management/Margin?sc_lang=en",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "Initial Margin Calculation Guide v14（HKSCC 官方指南 PDF，VaR 平台与保证金计算操作细节）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Securities/Risk-Management/Margin/Initial-Margin-Calculation-Guide-HKv14.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "HKSCC adopts a two-tier margin approach that follows the classification of Hang Seng Composite Index (“HSCI”). Stocks which are constituents of Hang Seng Composite LargeCap Index or Hang Seng Composite MidCap Index, all equity ETPs, and structured products of the aforementioned Tier P instrument(s) as underlyings are subject to Tier P margin calculation. All other non-Tier P instruments and structured products are subject to Tier N margin calculation. In addition, HKSCC may apply Margin add-ons to Clearing Participants to monitor and control the risk exposure of HKSCC. Tier P: Value-at-Risk based (VaR based) Portfolio Margining is adopted, subject to minimum margin level of 3.2% (effective from 14 August 2023). Tier N: Flat rate margin of sub-margin groups is as below , subject to Clearing Participant-specific margin multiplier (where appropriate). ... Flat rate margin of 12% (effective from 13 June 2022) ... Flat rate margin of 30% (effective from 16 Dec 2022) ... Flat rate margin of 55% (effective from 27 Oct 2025)",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "maintenance_margin_practice": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "HKSCC 的两级保证金覆盖未交收头寸的结算风险并逐日重估（计算初始保证金所需的风险参数文件 IMRPF/RPF01 逐日发布），制度上不设与衍生品对应的『维持保证金』阈值；持续风险控制的替代机制是逐日重算的保证金要求＋清算参与者特定的保证金乘数（如适用）＋HKSCC 可对清算参与者施加的 margin add-ons",
+        "en": "HKSCC's two-tier margin covers settlement risk on unsettled positions and is re-estimated daily (the Initial Margin Risk Parameter File IMRPF/RPF01 required for calculating IM is disseminated daily); there is no derivative-style separate maintenance margin threshold — continuous risk control instead relies on the daily recalculated margin requirement, the Clearing Participant-specific margin multiplier (where appropriate), and margin add-ons that HKSCC may apply to Clearing Participants",
+        "sources": [
+          {
+            "title": "Margin（HKEX 官网 HKSCC 风险管理·保证金页，margin add-ons 与保证金乘数）",
+            "url": "https://www.hkex.com.hk/Services/Clearing/Securities/Risk-Management/Margin?sc_lang=en",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "Initial Margin Calculation Guide v14（HKSCC 官方指南 PDF，IMRPF 逐日发布）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Securities/Risk-Management/Margin/Initial-Margin-Calculation-Guide-HKv14.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "In addition, HKSCC may apply Margin add-ons to Clearing Participants to monitor and control the risk exposure of HKSCC. ... Tier N: Flat rate margin of sub-margin groups is as below , subject to Clearing Participant-specific margin multiplier (where appropriate). ... a file containing the key risk parameters required for calculating IM (a.k.a., “Initial Margin Risk Parameter File”, or “IMRPF”) will be disseminated to all HKSCC’s CPs on a daily basis upon the launch of VaR Platform.",
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "mark_to_market_frequency": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "按日盯市、日内补充：HKSCC 保证金计算含盯市（MTM）要求成分——风险参数文件 RPF01 每营业日生成；由于证券交收在日内分批进行而资金交收在日终，另于日内 11:00（HKT）进行盘中 MTM 要求计算，以反映日内已交收股票持仓对应的未入账借记/贷记（unposted debit/credit）之未决风险暴露",
+        "en": "Daily mark-to-market with an intraday supplement: HKSCC's margin calculation includes a mark-to-market (MTM) requirement component — the risk parameter file RPF01 is generated on each business day; because stock settlement occurs in multiple batch runs during the day while money settlement occurs at day-end, an intra-day MTM requirement calculation is performed at 11:00 a.m. HKT to reflect the outstanding risk exposure from unposted debits/credits on already-settled stock positions",
+        "sources": [
+          {
+            "title": "Initial Margin Calculation Guide v14（HKSCC 官方指南 PDF，4.8.1 盘中 MTM 要求计算（11:00 a.m. HKT）与 RPF01 逐营业日生成）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Securities/Risk-Management/Margin/Initial-Margin-Calculation-Guide-HKv14.pdf",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "Margin（HKEX 官网 HKSCC 风险管理·保证金页）",
+            "url": "https://www.hkex.com.hk/Services/Clearing/Securities/Risk-Management/Margin?sc_lang=en",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "An Initial Margin Risk Parameter File1 (i.e., RPF01) will be generated in csv format and could be downloaded by CPs on each business day2. ... There are multiple batch settlement runs in CCASS to settle the stock positions during the day. CPs could deliver stocks to settle their short positions. CPs could also arrange cash prepayments and withdraw the settled long positions resulting allocated shares intra-day. All these settlement activities would result in a change in marginable positions for MTM and margin calculation. ... 4.8.1 Intra-day MTM Requirement Calculation (11:00 a.m. HKT) Since the settlement of stock positions occurs during intra-day while money settlement occurs at day-end, unposted debit and unposted credit would be resulted during intra-day MTM requirement calculation to reflect the outstanding risk exposure.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "delivery_method": {
         "enum": "na",
-        "zh": "不适用（现货市场为主）",
-        "en": "Not applicable (primarily a cash/spot market)",
-        "detail": "推断依据：products 章节所列品类（股票/ETF/REITs/权证/牛熊证/债券）均为现货或现金结算的结构性产品， 未见实物交割型衍生品——这是对本文件自身 products 章节的内部推断，sources 里的官网首页不构成对 这个具体结论的独立证据，只是笼统佐证 HKEX 现货业务为主，是本项目「网址精确到信息页」要求 尚未满足的已知案例，见 OPEN-QUESTIONS。",
+        "zh": "不适用（现货证券经 CCASS 电子簿记交收，无实物交割概念）",
+        "en": "Not applicable (cash securities settled by book-entry through CCASS; no physical delivery concept)",
+        "detail": "推断依据：products 章节所列品类（股票/ETF/REITs/权证/牛熊证/债券）均为现货或现金结算的结构性产品，未见实物交割型衍生品；现货证券交收经 CCASS 以电子簿记形式进行（持续净额交收 CNS / 单独交收 Isolated Trades）。原记录的「网址精确到信息页」缺口（此前仅笼统引官网首页）本次以清算总览官方页坐实，confidence 由 low 升 medium。",
         "sources": [
           {
-            "title": "HKEX 官网首页（未找到逐产品交割方式的专门页面，见本字段 detail 说明）",
-            "url": "https://www.hkex.com.hk/",
-            "accessed": "2026-08-12"
+            "title": "HKEX Clearing - Securities Overview（官网，CCASS 交易所交易经 CNS/Isolated Trades 系统交收）",
+            "url": "https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en",
+            "accessed": "2026-09-05"
           }
         ],
-        "confidence": "low",
+        "quote": "Exchange Trades: Continuous Net Settlement (CNS) and Isolated Trades Systems",
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "last_trading_day_rule": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "不适用——现货证券无到期日与『最后交易日』概念；HKSCC 的两级保证金制度针对现金市场未交收头寸在 T+2 交收周期内的结算风险，清算义务随交收完成而消灭",
+        "en": "Not applicable — cash securities have no expiry and thus no derivative-style last trading day; HKSCC's two-tier margin targets settlement risk on unsettled cash-market positions over the T+2 settlement cycle, and clearing obligations are extinguished upon settlement",
+        "sources": [
+          {
+            "title": "Margin（HKEX 官网 HKSCC 风险管理·保证金页，正面对照现金市场未交收头寸的保证金定位）",
+            "url": "https://www.hkex.com.hk/Services/Clearing/Securities/Risk-Management/Margin?sc_lang=en",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "HKSCC adopts a two-tier margin approach that follows the classification of Hang Seng Composite Index (“HSCI”)",
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "default_management": {
         "spec": {
