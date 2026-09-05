@@ -284,6 +284,18 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
 }
 .td-banner-soft { background: var(--bg-elevated); border-left-color: var(--border-strong); color: var(--fg-muted); }
 
+/* ── 业务线切换（现货 / 衍生品）——仅同时运营衍生品业务线的所显示；剖面内控件，非顶层 tab（ADR-057） ── */
+.td-line-switch { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.td-line-lab { font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--fg-muted); text-transform: uppercase; }
+.td-line-seg {
+  border: 1px solid var(--border); background: var(--bg-elevated); color: var(--fg-muted);
+  padding: 5px 15px; border-radius: 999px; cursor: pointer; font-size: 12.5px; line-height: 1.2;
+}
+.td-line-seg + .td-line-seg { margin-left: -4px; }
+.td-line-seg:hover { color: var(--fg); border-color: var(--border-strong); }
+.td-line-seg.is-on { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.td-line-seg.is-on:hover { color: var(--accent-fg); }
+
 .td-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
 .td-chips-label { margin-top: 16px; font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--fg-muted); text-transform: uppercase; }
 .td-chips-label:first-child { margin-top: 14px; }

@@ -2497,3 +2497,45 @@ print('全库 medium 零 sources:',n)
 **共享检出事故注记：** 本会话与风险旗标子棒会话（[ADR-079]）在同一检出并行工作，本轨三段已暂存改动被对方整树提交扫入其 commit（cn-szse 批次一→`cf9f32c`、in-nse 批次一大部→`03780d5`、sg-sgx 复核订正→`e23c447`），内容无损但 commit 归属分裂。既有协议（[ADR-086]：共享检出按 hunk 选择性暂存）依赖双方自觉，`git add -A` 一方即可击穿——下次并行前值得给「共享检出下禁用 `git add -A`」加机器护栏。
 
 **日期：** 2026-09-05
+
+### ADR-PENDING-td-business-line-toggle — 市场机制剖面：现货 / 衍生品业务线切换（渲染层落地）
+
+**为什么需要：** [ADR-019] 起，同时运营重要衍生品业务线的 10 家所（`au-asx`/`br-b3`/`cn-szse`/`fr-euronext`/`hk-hkex`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse`）把衍生品的交易机制写在 `market_structure.derivatives.*` 子块，顶层字段继续描述现货。[ADR-040] 的市场机制剖面从一开始只画顶层（现货），对有 derivatives 字段的所挂一句 `td-banner-soft`「本剖面显示现货（衍生品 spec 待 Phase 3 补充）」——一张欠账凭证。[ADR-089] 把 130 处衍生品 `spec` 全部回填、三态齐备后，数据侧已备齐，这句 banner 该兑现成真正能切换查看的第二条业务线。
+
+**要达成的目标：**
+
+- 这 10 家所的剖面顶部（读图前的位置，SVG 之前）出现一个「业务线：现货 / 衍生品」二段切换控件；其余 10 家现货所、以及纯衍生品所 `de-eurex`（顶层本身即衍生品，[ADR-035] E）不显示控件、行为与之前逐字节一致。
+- 切到「衍生品」时，剖面的全部几何（时段带 / 涨跌停墙 / 熔断线 / 波动走廊 / 集合竞价区块）、机制核心面板七项、图下 chip 组、`data-path` / 字段标签 / 点击浮层出处都改从 `market_structure.derivatives.*`（及 `clearing.derivatives.*`）取。
+- **诚实三态（[ADR-035] D）**：衍生品子块缺省的字段保持 `undefined`，由既有各分支的 null 兜底如实留「—」/「未结构化」，**绝不静默回落现货值**——实现方式是「整体换数据源」而非「与现货合并」，缺口天然为空。
+- `make build` 全绿、`docs/data/` 与生成块零 diff（纯前端）。
+
+**如何达成（纯前端两文件：`docs/assets/app.js` + `styles.css`）：**
+
+1. **形态 = 剖面内切换，不新增顶层 tab**（[ADR-057] 北极星 Phase 4 要减 tab）。复用 [ADR-055] 透视开关的持久化 + 就地重渲染模式：`localStorage["ea-td-line"]`（`cash`/`deriv`，默认 `cash`）；点击 `data-role="td-line"` 段→写 localStorage→`loadExchange(id).then(d => wrap.innerHTML = tdBuild(id, d))` 就地重渲染 `.td-wrap`（`renderTradingDay` 把 `tdBuild` 输出包进 `.td-wrap`）。不进 hash（同 `td-ghost`：per-exchange、只 10/20 家有、Phase 4 才谈深链，[ADR-057] 留白项）。
+2. **新增** `tdLine()`（读持久化）、`tdHasDeriv(ms)`（`market_structure.derivatives` 是否有实际内容，从 `tdBanner` 内联逻辑提出）、`tdLineSwitch(hasDeriv, line)`（二段控件，`hasDeriv` 为假返回空串）。
+3. **`tdBuild`**：`var line = hasDeriv ? tdLine() : "cash"`；`var ms = line === "deriv" ? (msTop.derivatives || {}) : msTop`（有效数据源）；`var pfx = line === "deriv" ? "derivatives." : ""` + 局部 `fp(p)` 给全部 `tdCell` / `tdTip` / `tdFieldLabel` / `tdChip` 的路径加前缀（taxonomy 扁平化已含 `derivatives.*` 全部路径 + `clearing` 侧 `derivatives.mark_to_market_frequency` 等，`getByPath` 逐段穿透，点击浮层直接命中衍生品字段）。标题加「· 衍生品业务线」后缀、SVG aria-label 同。
+4. **`tdCorePanel`** 加 `pfx` 参数。第 5 格：现货 = 卖空立场；衍生品子块无 `short_selling`（做空天然对称），改放**保证金制度摘要**（`derivatives.margin_practice_note`，在子块 taxonomy 内、是衍生品持仓核心约束）。
+5. **`tdSidePanels`** 按 `line` 换字段族：现货 = 交易细则·成本（tick / 手数 / 交收 / 佣金 / 交易税 / 互联互通，不动）；衍生品 = 「合约与清算」（tick / 合约规格摘要 / 盯市频率 / 交割方式 / 大宗交易 / 假日）——成本瀑布与 T+N 交收周期是现货口径，衍生品这几个概念由 `clearing.derivatives` / `.derivatives` 子块承载。
+6. **`tdBanner(msTop, line)`**：`de-eurex` 的 `prev_settlement` banner 不动；`line === "deriv"` 时给一句说明 banner（代表样本 = 主力指数期货、y 轴 0 = 合约参考价、缺口留空不回落）；`line === "cash"` 且有衍生品业务线时返回空串——控件本身已表意，删掉原欠账 banner。
+7. **`tdEnvelopeLine` 顺带收窄**（[ADR-035] D 的诚实呈现，非本条主体）：`main_board.spec` 存在但形状无可播报数值 / 类型时，改为**先看 `price_limits.type` 受控枚举短标签**，再退一句「价格限制非固定百分比」。原写死的「按品种 / 证券分类分档」对衍生品的动态价格区间（`hk-hkex`）、期权定价公式型区间（`cn-szse`）是误述。
+8. **y 轴 0 基准**：`spec.reference` 明说 `prev_settlement`/`prev_close` 则照它；衍生品业务线未明说时用中性「参考价」而非臆断「前收盘价」（衍生品价格带几乎不以前收盘价为锚）。零轴刻度、banner 措辞一致。
+9. `styles.css` 加 `.td-line-switch` / `.td-line-lab` / `.td-line-seg` / `.is-on`（药丸二段、`is-on` 用 `--accent`，主题令牌驱动、明暗自适应）。
+
+**merge-ready 锚定（逐条答 [ADR-057] 清单）：**
+
+- **锚定关系**：业务线切换不是新分区、是同一张剖面平面的**数据源切换**，与主图共用全部坐标系与视觉语言（[ADR-040] 线条语言表）。Phase 4 合并画布里它仍是剖面模块自身的一个开关，不占额外版面。
+- **占位**：控件常驻剖面顶部一行（约 34px），仅 10/20 家显示；默认 `cash`。合并画布里维持这个位置（模块标题栏附近）。
+- **诚实三态**：整体换数据源 → 衍生品缺口天然为空，`tdChip` 的 `td-chip-empty`（斜体 + 半透明）、时段带的「未结构化」兜底、`tdEnvelopeLine` 的分级回退都照常生效；分区缩小不影响（三态是内容级、非布局级）。
+- **语言开关**：控件、banner、标题、「合约与清算」标签、`fieldLabel`/`enumDisplay` 全程走 `t()`/`tSel()`——`check_ui_i18n` 绿。
+- **零构建**：无新库；手写 SVG + vanilla JS + 事件委托，同既有模块。
+
+**已知局限 / cash-view 影响（留视觉迭代轨，ROADMAP §一 item 3）：**
+
+- `tdEnvelopeLine` 收窄使 `in-nse` **现货** 的价格约束句从「按品种 / 证券分类分档」变为枚举标签「百分比涨跌幅」——丢了「分档」语义但不误，完整 2/5/10/20% 分档在价格限制 chip 与点击浮层。这是唯一受影响的 cash 呈现。
+- `sg-sgx` 衍生品价格约束句落到 `price_limits.type.zh` 长句、CSS 单行省略号截断——SGX 合约规格不在规则手册（[ADR-082]）、无 `main_board.spec` 可结构化，属数据侧真实缺口。
+- `hk-hkex` / `za-jse` 等衍生品 `main_board.spec` 未带 `reference` 键，零轴显示中性「参考价」；要精确到「前结算价 / T 时段最后成交价」需数据层补 `reference`（需一手 quote），非本条范围。
+- 衍生品时段含夜盘 AHT 的所（`hk-hkex` 到次日 03:00）x 轴左端出现空白晨段——与现货侧夜盘所同源的既有 `tdBuild` 时段包络行为，非本条引入。
+
+**验证：** `make build` 全绿（`selfcheck` 93、`validate` 20 家 0/0、`verify_quotes` FAIL=0〔CACHE_MISS 为本 worktree 无 `.cache/` 的信息态，[ADR-053]〕、`check_ui_i18n` / `check_no_chapter_ordinals` / `check_no_dup_render_helpers` OK）；`make sync` 幂等，`git diff` 仅 `app.js` + `styles.css` + 本 ADR + ROADMAP，`docs/data/` 与 8 处生成块零 diff。Chrome headless 核对：`hk-hkex`（现货 / 衍生品 / 英文 / 暗色 / 透视 / 就地切换不重载）、`kr-krx`（stepwise + 英文暗色）、`br-b3`（index_level 熔断）、`au-asx`（`type:none`）、`sg-sgx`（最稀疏，7 spec）、`za-jse`（±8% 墙 + 「参考价」零轴）、`in-nse`（英文 + `prev_settlement`）、`cn-szse`（期权公式型）、`fr-euronext`、`cn-sse`（无子块 → 无控件）、`de-eurex`（纯衍生品 banner 不变）——控件 / banner / 标题 / chip 组 / 出处浮层路径 / 持久化 / 无 `.td-wrap` 嵌套均符合预期；矩阵 280 `<td>`、成本瀑布、交割管线三视图无回归。
+
+**日期：** 2026-09-05

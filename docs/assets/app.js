@@ -721,6 +721,25 @@
   function tdGhostOn() {
     try { return localStorage.getItem("ea-td-ghost") === "1"; } catch (e) { return false; }
   }
+  // 业务线（现货 / 衍生品）——仅对同时运营衍生品业务线的所有效，按访客持久化
+  // （复用 ADR-055 透视开关的持久化模式）。默认 cash。
+  function tdLine() {
+    try { return localStorage.getItem("ea-td-line") === "deriv" ? "deriv" : "cash"; }
+    catch (e) { return "cash"; }
+  }
+  // 该所 market_structure 是否带「衍生品市场机制」子章的实际内容（ADR-019）——
+  // 有则剖面显示业务线切换控件、切到衍生品时字段全部取自 .derivatives 子块。
+  function tdHasDeriv(ms) {
+    if (!ms || !ms.derivatives) return false;
+    function content(o) {
+      if (!o || typeof o !== "object") return false;
+      if (o.zh || o.enum || o.spec) return true;
+      return Object.keys(o).some(function (kk) {
+        return ["zh", "en", "quote", "sources", "detail", "confidence", "verified", "enum", "spec", "_meta"].indexOf(kk) < 0 && content(o[kk]);
+      });
+    }
+    return Object.keys(ms.derivatives).some(function (k) { return content(ms.derivatives[k]); });
+  }
   // 价格约束结论句（机制核心面板顶栏，恒 1 行）——只综述主板价格限制，不含熔断/回转
   // （熔断进面板槽③，回转已是平面右外缘标记）。
   function tdEnvelopeLine(ms, yRef) {
@@ -734,10 +753,12 @@
       if (s.type === "dynamic" && typeof s.band_pct === "number") return t("动态价格带 ±" + s.band_pct + "%（随参考价滚动）", "Dynamic price band ±" + s.band_pct + "% (rolling reference price)");
       if (s.type === "dynamic") return t("设动态价格带，档位官方未公布", "Dynamic price band in place; thresholds not published");
       if (s.type === "none") return t("无每日涨跌停墙", "No daily price-limit wall");
-      return t("价格限制按品种 / 证券分类分档", "Price limits are tiered by instrument / security class");
+      // spec 存在但形状里没有可播报的数值 / 类型（如衍生品的动态价格区间、期权定价公式型
+      // 区间）——优先用受控词表的短标签，否则一句「非固定百分比」概述，两者都恒 1 行。
     }
     var pt = getByPath(ms, "price_limits.type");
     if (pt && pt.enum) return enumDisplay("price_limit_type", pt.enum);
+    if (s) return t("价格限制非固定百分比（见字段详情）", "Price limits are not a fixed percentage (see field detail)");
     if (pt && pt.zh) return dv(pt);
     return t("价格约束未结构化——见档案页「市场结构与交易机制」章", "Price constraints not structured — see the Market Structure & Trading Mechanism chapter of the profile");
   }
@@ -758,14 +779,23 @@
     return loadExchange(id).then(function (data) {
       var cur = parseHash();
       if ((cur.view && cur.view !== "trading-day") || tdResolveId(cur) !== id) return;
-      app.innerHTML = toolbar + tdBuild(id, data);
+      // .td-wrap 是业务线切换就地重渲染的目标容器（见事件委托 role === "td-line"）
+      app.innerHTML = toolbar + '<div class="td-wrap">' + tdBuild(id, data) + "</div>";
     }).catch(function (e) {
       app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
     });
   }
 
   function tdBuild(id, data) {
-    var ms = (data.chapters && data.chapters.market_structure) || {};
+    var msTop = (data.chapters && data.chapters.market_structure) || {};
+    var hasDeriv = tdHasDeriv(msTop);
+    var line = hasDeriv ? tdLine() : "cash";
+    // 有效 market_structure：衍生品业务线时整体取 .derivatives 子块——缺省字段保持
+    // undefined，由下游各分支的 null 兜底如实留空，绝不静默回落现货值（ADR-035 D）。
+    var ms = (line === "deriv") ? (msTop.derivatives || {}) : msTop;
+    // 字段路径前缀：衍生品业务线时 data-path / 字段标签 / 出处浮层都指向 derivatives.* 子章。
+    var pfx = (line === "deriv") ? "derivatives." : "";
+    function fp(p) { return pfx + p; }
     var n = function (v) { return (+v).toFixed(1); };
     var sessions = ms.trading_sessions || {};
     var mb = ms.price_limits && ms.price_limits.main_board, mbS = (mb && mb.spec) || null;
@@ -773,7 +803,11 @@
     var vi = ms.volatility_interruption, viS = (vi && vi.spec) || null;
     var opnS = (ms.opening_mechanism && ms.opening_mechanism.spec) || null;
     var clsS = (ms.closing_mechanism && ms.closing_mechanism.spec) || null;
-    var yRef = (mbS && mbS.reference === "prev_settlement") ? t("前结算价", "previous settlement") : t("前收盘价", "previous close");
+    // y 轴 0 基准：spec.reference 明说则照它；衍生品业务线未明说时用中性「参考价」
+    // ——衍生品价格带几乎不以「前收盘价」为锚（多为前结算价 / 滚动参考价），不臆断（ADR-035 D）。
+    var yRef = (mbS && mbS.reference === "prev_settlement") ? t("前结算价", "previous settlement")
+      : (line === "deriv" && !(mbS && mbS.reference === "prev_close")) ? t("参考价", "reference price")
+      : t("前收盘价", "previous close");
 
     // ── x 轴范围：所有已知时刻的包络 + 15 分钟留白 ──
     var T = [];
@@ -865,12 +899,12 @@
       var dash = (mb && mb.confidence && mb.confidence !== "high") ? ' stroke-dasharray="6 3"' : "";
       g.push('<rect x="' + PL + '" y="' + PT + '" width="' + pw + '" height="' + n(Math.max(0, Y(wUp) - PT)) + '" fill="var(--danger)" opacity="0.07"/>');
       g.push('<rect x="' + PL + '" y="' + n(Y(wDn)) + '" width="' + pw + '" height="' + n(Math.max(0, PT + ph - Y(wDn))) + '" fill="var(--danger)" opacity="0.07"/>');
-      g.push(tdCell(id, "price_limits.main_board",
+      g.push(tdCell(id, fp("price_limits.main_board"),
         '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(wUp)) + '" y2="' + n(Y(wUp)) + '" stroke="var(--danger)" stroke-width="1.6"' + dash + '/>' +
         '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(wDn)) + '" y2="' + n(Y(wDn)) + '" stroke="var(--danger)" stroke-width="1.6"' + dash + '/>' +
         '<text x="' + (PL + pw + 7) + '" y="' + n(Y(wUp) + 4) + '" class="td-wl" fill="var(--danger)">' + t("涨停 ", "Limit up ") + "+" + wUp + '%</text>' +
         '<text x="' + (PL + pw + 7) + '" y="' + n(Y(wDn) + 4) + '" class="td-wl" fill="var(--danger)">' + t("跌停 ", "Limit down ") + wDn + '%</text>',
-        tdTip("price_limits.main_board", "±" + wUp + "% " + t("相对", "vs") + yRef)));
+        tdTip(fp("price_limits.main_board"), "±" + wUp + "% " + t("相对", "vs") + yRef)));
     }
     // 阶梯绝对值幅 → 半透明带（ADR-035 D3：来源给区间不给点）
     if (ladderPct) {
@@ -880,23 +914,23 @@
           '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(a)) + '" y2="' + n(Y(a)) + '" stroke="var(--danger)" stroke-width="1" stroke-dasharray="4 3" opacity="0.7"/>' +
           '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(b)) + '" y2="' + n(Y(b)) + '" stroke="var(--danger)" stroke-width="1" stroke-dasharray="4 3" opacity="0.7"/>';
       }
-      g.push(tdCell(id, "price_limits.main_board",
+      g.push(tdCell(id, fp("price_limits.main_board"),
         ladBand(lp0, lp1) + ladBand(-lp1, -lp0) +
         '<text x="' + (PL + pw + 7) + '" y="' + n(Y(lp1) + 4) + '" class="td-wl" fill="var(--danger)">' + t("阶梯值幅", "Stepwise limits") + '</text>' +
         '<text x="' + (PL + pw + 7) + '" y="' + n(Y(lp1) + 16) + '" class="td-wl-sub">' + t("约 ±", "approx ±") + Math.round(lp0) + "–" + Math.round(lp1) + '%</text>',
-        tdTip("price_limits.main_board", t("阶梯绝对值幅，幅度随基准价变化（点击看完整档位）", "Stepwise absolute limits; the band varies with the base price (click for the full ladder)"))));
+        tdTip(fp("price_limits.main_board"), t("阶梯绝对值幅，幅度随基准价变化（点击看完整档位）", "Stepwise absolute limits; the band varies with the base price (click for the full ladder)"))));
     }
     // 动态参考价区间
     if (mbS && mbS.type === "dynamic") {
       if (typeof mbS.band_pct === "number") {
         var bp = mbS.band_pct;
-        g.push(tdCell(id, "price_limits.main_board",
+        g.push(tdCell(id, fp("price_limits.main_board"),
           '<rect x="' + PL + '" y="' + n(Y(bp)) + '" width="' + pw + '" height="' + n(Y(-bp) - Y(bp)) + '" fill="var(--info)" opacity="0.10"/>' +
           '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(bp)) + '" y2="' + n(Y(bp)) + '" stroke="var(--info)" stroke-width="1.2" stroke-dasharray="5 4"/>' +
           '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(Y(-bp)) + '" y2="' + n(Y(-bp)) + '" stroke="var(--info)" stroke-width="1.2" stroke-dasharray="5 4"/>' +
           '<text x="' + (PL + pw + 7) + '" y="' + n(Y(bp) + 4) + '" class="td-wl" fill="var(--info)">' + t("动态带 ", "Dynamic band ") + "±" + bp + '%</text>' +
           '<text x="' + (PL + pw + 7) + '" y="' + n(Y(bp) + 16) + '" class="td-wl-sub">' + t("相对滚动参考价", "vs rolling reference price") + '</text>',
-          tdTip("price_limits.main_board", t("动态价格带 ±" + bp + "%（相对滚动参考价，非固定墙）", "Dynamic price band ±" + bp + "% (vs a rolling reference price, not a fixed wall)"))));
+          tdTip(fp("price_limits.main_board"), t("动态价格带 ±" + bp + "%（相对滚动参考价，非固定墙）", "Dynamic price band ±" + bp + "% (vs a rolling reference price, not a fixed wall)"))));
       }
       // band_pct: null / type: none / 分档 null 三种「墙画不出」的情形，
       // 不再单独标注——中心信息卡已用一句话说明（ADR-040 收口反馈）。
@@ -917,7 +951,7 @@
         // 标签放左侧内缘（右侧留给涨跌停墙/熔断标签，避免与同 % 的墙标签叠字，如 sa-tadawul）
         vf += '<text x="' + (PL + 6) + '" y="' + n(Y(Math.max.apply(null, cor)) - 4) + '" class="td-wl-sub" fill="var(--fg-muted)">' +
           t("波动走廊 ", "Volatility corridor ") + "±" + cor.join("/") + '%</text>';
-        g.push(tdCell(id, "volatility_interruption", vf, tdTip("volatility_interruption",
+        g.push(tdCell(id, fp("volatility_interruption"), vf, tdTip(fp("volatility_interruption"),
           t("出走廊触发短暂集合竞价", "Breaching the corridor triggers a short call auction"))));
       }
     }
@@ -932,10 +966,10 @@
         var yy = Y(-lv.threshold_pct), lab = "−" + lv.threshold_pct + "%";
         if (lv.day_end) lab += t(" 全日休市", " · close for the day");
         else if (typeof lv.halt_minutes === "number") lab += t(" 停", " · halt ") + lv.halt_minutes + t("分", " min");
-        g.push(tdCell(id, "circuit_breaker",
+        g.push(tdCell(id, fp("circuit_breaker"),
           '<line x1="' + PL + '" x2="' + (PL + pw) + '" y1="' + n(yy) + '" y2="' + n(yy) + '" stroke="var(--danger)" stroke-width="1.3" stroke-dasharray="8 3" opacity="0.85"/>' +
           '<text x="' + (PL + pw + 7) + '" y="' + n(yy + 4) + '" class="td-wl" fill="var(--danger)">' + t("熔断 ", "Halt ") + esc(lab) + '</text>',
-          tdTip("circuit_breaker", t("指数级 ", "Index-level ") + lab + xref)));
+          tdTip(fp("circuit_breaker"), t("指数级 ", "Index-level ") + lab + xref)));
       });
     }
 
@@ -956,18 +990,18 @@
         f += '<rect x="' + n(X(b)) + '" y="' + PT + '" width="' + n(X(tc) - X(b)) + '" height="' + ph + '" fill="var(--warn)" opacity="0.05"/>';
       }
       f += '<text x="' + n((a != null ? X(a) : X(b)) + 2) + '" y="' + (PT - 6) + '" class="td-inl" fill="var(--warn)">' + esc(tag) + '</text>';
-      g.push(tdCell(id, path, f, tdFieldLabel(path)));
+      g.push(tdCell(id, fp(path), f, tdFieldLabel(fp(path))));
     }
     auc(opnS, "opening_mechanism", t("开盘竞价", "Opening auction"));
     auc(clsS, "closing_mechanism", t("收盘竞价", "Closing auction"));
 
     // ── 临时停牌：顶边斜纹条（ADR-035 A："任意时刻"斜纹条；文案居中，ADR-073）──
     if (ms.trading_halt_mechanism && ms.trading_halt_mechanism.zh) {
-      g.push(tdCell(id, "trading_halt_mechanism",
+      g.push(tdCell(id, fp("trading_halt_mechanism"),
         '<rect x="' + PL + '" y="' + (PT + 1) + '" width="' + pw + '" height="9" fill="url(#tdHalt)"/>' +
         '<text x="' + n(PL + pw / 2) + '" y="' + (PT + 8.5) + '" class="td-inl" fill="var(--fg-muted)" text-anchor="middle">' +
           t("临时停牌可发生于任意时刻", "Temporary halts may occur at any time") + '</text>',
-        tdFieldLabel("trading_halt_mechanism")));
+        tdFieldLabel(fp("trading_halt_mechanism"))));
     }
 
     // ── 回转交易 T+N：右缘标记（ADR-035 A：x 轴右缘箭头）──
@@ -979,10 +1013,10 @@
         t2: { zh: "→ T+2", en: "→ T+2" },
         mixed: { zh: "⇄ 分品种不同", en: "⇄ varies by instrument" },
       };
-      g.push(tdCell(id, "intraday_reversal",
+      g.push(tdCell(id, fp("intraday_reversal"),
         '<text x="' + (PL + pw + 7) + '" y="' + n(PT + ph - 2) + '" class="td-margin">' +
           esc(irm[ir.enum] ? tSel(irm, ir.enum) : t("回转制度见档案", "See profile for reversal rules")) + '</text>',
-        tdTip("intraday_reversal", dv(ir) || "")));
+        tdTip(fp("intraday_reversal"), dv(ir) || "")));
     }
 
     // ── 网格 + 轴刻度（零轴刻度直接标参考价名称，取代无信息量的"0%"；
@@ -1030,8 +1064,8 @@
         var f = '<rect x="' + n(x1) + '" y="' + ry + '" width="' + n(w) + '" height="' + rh + '" rx="2" fill="' + tdKindFill(d.s.kind) + '" opacity="0.9"/>';
         if (w > 64) f += '<text x="' + n(x1 + w / 2) + '" y="' + (ry + 11) + '" class="td-rib" text-anchor="middle">' + esc(kind) + '</text>';
         var span = tdFmtHM(d.a) + "–" + tdFmtHM(d.b % 1440);
-        g.push(tdCell(id, "trading_sessions." + d.k, f,
-          tdTip("trading_sessions." + d.k, t(span + "（" + kind + "）", span + " (" + kind + ")"))));
+        g.push(tdCell(id, fp("trading_sessions." + d.k), f,
+          tdTip(fp("trading_sessions." + d.k), t(span + "（" + kind + "）", span + " (" + kind + ")"))));
       });
     } else {
       g.push('<rect x="' + PL + '" y="' + ry + '" width="' + pw + '" height="' + rh + '" rx="2" fill="var(--border)" opacity="0.4"/>');
@@ -1042,7 +1076,10 @@
     // ── 标题 / 轴名（y 轴标题已删——"涨跌幅 %"与参考价已由 % 刻度 + 零轴刻度本身表达，
     //    顶栏工具条另有一句完整口径，ADR-073）──
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
-    g.push('<text x="' + PL + '" y="' + (PT - 40) + '" class="td-title">' + t("市场机制剖面", "Market Mechanics Profile") + "</text>");
+    var titleTxt = (line === "deriv")
+      ? t("市场机制剖面 · 衍生品业务线", "Market Mechanics Profile · Derivatives")
+      : t("市场机制剖面", "Market Mechanics Profile");
+    g.push('<text x="' + PL + '" y="' + (PT - 40) + '" class="td-title">' + esc(titleTxt) + "</text>");
     g.push('<text x="' + n(PL + pw / 2) + '" y="' + (H - 5) + '" class="td-axis-name" text-anchor="middle">' +
       t("日内时间（当地）", "Time of day (local)") + "</text>");
 
@@ -1058,11 +1095,11 @@
       else if (clsBX != null) clsLeftX = X(clsBX);
     }
     var ghostOn = tdGhostOn();
-    g.push(tdCorePanel(id, ms, yRef, ghostOn, clsLeftX));
+    g.push(tdCorePanel(id, ms, yRef, ghostOn, clsLeftX, pfx));
 
     var svg = '<div class="td-plot-wrap' + (ghostOn ? " td-ghost" : "") + '"><svg viewBox="0 0 ' + W + ' ' + H + '" class="td-svg" role="img" aria-label="' +
-      esc(exName) + t(" 市场机制剖面", " market mechanics profile") + '">' + g.join("") + "</svg></div>";
-    return tdBanner(ms) + tdLegend() + svg + tdSidePanels(id, data) + tdProse();
+      esc(exName) + t(" 市场机制剖面", " market mechanics profile") + (line === "deriv" ? t("（衍生品业务线）", " (derivatives business line)") : "") + '">' + g.join("") + "</svg></div>";
+    return tdLineSwitch(hasDeriv, line) + tdBanner(msTop, line) + tdLegend() + svg + tdSidePanels(id, data, line) + tdProse();
   }
 
   // 机制核心面板（ADR-055）——高 276 的 foreignObject，水平居中、垂直居中于零轴
@@ -1070,7 +1107,8 @@
   // 宽度默认 628（左缘 x=120，右缘 x=748，左右各距绘图区边 60px）；当收盘集合竞价竖条
   // （clsLeftX，见 tdBuild）落在默认右缘之内时，右缘收到竞价块左侧 14px，左缘不动——
   // 窄跨度 / 有盘后时段的所（cn-sse≈719、tw-twse≈655、kr-krx≈610）由此让出竞价条。
-  function tdCorePanel(id, ms, yRef, ghostOn, clsLeftX) {
+  function tdCorePanel(id, ms, yRef, ghostOn, clsLeftX, pfx) {
+    pfx = pfx || "";
     var W = 960, PL = 60, PR = 152, PT = 62, PB = 106;
     var pw = W - PL - PR, ph = 556 - PT - PB;
     var fx = PL + 60, fh = 276, fy = PT + ph / 2 - fh / 2;
@@ -1080,27 +1118,34 @@
 
     var cells = [];
     var mp = ms.matching_principle;
-    cells.push(tdChip(id, "matching_principle", mp && mp.enum ? enumDisplay("matching_principle", mp.enum) : dv(mp), mp));
-    cells.push(tdChip(id, "order_types", dv(ms.order_types), ms.order_types));
+    cells.push(tdChip(id, pfx + "matching_principle", mp && mp.enum ? enumDisplay("matching_principle", mp.enum) : dv(mp), mp));
+    cells.push(tdChip(id, pfx + "order_types", dv(ms.order_types), ms.order_types));
     // 熔断：个股/合约级 → 展示机制描述（en 模式下信封 en 优先于中文 spec.note）；指数级/无 → 枚举标签
     var cbf = ms.circuit_breaker, cbfS = cbf && cbf.spec, cbv;
     if (cbfS && (cbfS.type === "stock_level" || cbfS.type === "contract_level")) {
       cbv = (state.langMode === "en" && cbf && cbf.en) ? cbf.en : (cbfS.note || (cbf && cbf.zh));
     } else if (cbf && cbf.enum) cbv = enumDisplay("circuit_breaker_type", cbf.enum);
     else cbv = dv(cbf);
-    cells.push(tdChip(id, "circuit_breaker", cbv, cbf));
+    cells.push(tdChip(id, pfx + "circuit_breaker", cbv, cbf));
     var vic = ms.volatility_interruption, vicS = vic && vic.spec, vicv;
     if (vicS && vicS.type === "none") vicv = t("无独立层", "No separate layer");
     else if (vicS && (typeof vicS.dynamic_pct === "number" || typeof vicS.static_pct === "number")) {
       vicv = t("走廊 ", "Corridor ") + "±" + [vicS.dynamic_pct, vicS.static_pct].filter(function (x) { return typeof x === "number"; }).join("/") + "%";
     } else vicv = dv(vic);
-    cells.push(tdChip(id, "volatility_interruption", vicv, vic));
-    var ss = ms.short_selling;
-    cells.push(tdChip(id, "short_selling", ss && ss.enum ? enumDisplay("short_selling_stance", ss.enum) : dv(ss), ss));
+    cells.push(tdChip(id, pfx + "volatility_interruption", vicv, vic));
+    // 第 5 格：现货业务线 = 卖空立场；衍生品业务线的 .derivatives 子块无 short_selling 字段
+    // （做空是天然对称的），改放「保证金制度」——衍生品持仓的核心约束，且在子块 taxonomy 内。
+    if (pfx) {
+      var mgn = ms.margin_practice_note;
+      cells.push(tdChip(id, pfx + "margin_practice_note", dv(mgn), mgn));
+    } else {
+      var ss = ms.short_selling;
+      cells.push(tdChip(id, "short_selling", ss && ss.enum ? enumDisplay("short_selling_stance", ss.enum) : dv(ss), ss));
+    }
     var mm = ms.market_maker_scheme, mmS = mm && mm.spec;
     var mmv = mmS && mmS.present === true ? (t("有", "Yes") + (mmS.quote_obligation ? t(" · 强制双边报价", " · mandatory two-sided quotes") : "")) :
       (mmS && mmS.present === false ? t("无", "No") : dv(mm));
-    cells.push(tdChip(id, "market_maker_scheme", mmv, mm));
+    cells.push(tdChip(id, pfx + "market_maker_scheme", mmv, mm));
 
     var gt = ghostOn ? t("恢复面板", "Restore panel")
       : t("透视面板：露出零轴 / 熔断线 / 走廊", "See-through: reveal zero line, halts, corridor");
@@ -1113,57 +1158,85 @@
       '<div class="td-core-grid">' + cells.join("") + '</div></div></foreignObject>';
   }
 
-  // 非现货 / 衍生品字段 banner（移到 SVG 之前——读图前要知道的前提；ADR-055）
-  function tdBanner(ms) {
-    var mbRef = ms.price_limits && ms.price_limits.main_board && ms.price_limits.main_board.spec && ms.price_limits.main_board.spec.reference;
+  // 业务线切换控件（现货 / 衍生品）——仅对同时运营衍生品业务线的所显示，移到 SVG 之前
+  // （读图前要知道看的是哪条业务线）。复用 ADR-055 透视开关的持久化 + 就地重渲染模式。
+  function tdLineSwitch(hasDeriv, line) {
+    if (!hasDeriv) return "";
+    function seg(v, label) {
+      var on = line === v;
+      return '<button type="button" class="td-line-seg' + (on ? " is-on" : "") +
+        '" data-role="td-line" data-line="' + v + '" aria-pressed="' + (on ? "true" : "false") + '">' +
+        esc(label) + '</button>';
+    }
+    return '<div class="td-line-switch" role="group" aria-label="' + esc(t("业务线", "Business line")) + '">' +
+      '<span class="td-line-lab">' + esc(t("业务线", "Business line")) + '</span>' +
+      seg("cash", t("现货", "Cash")) + seg("deriv", t("衍生品", "Derivatives")) + '</div>';
+  }
+
+  // 非现货 / 衍生品业务线 banner（移到 SVG 之前——读图前要知道的前提；ADR-055）
+  function tdBanner(msTop, line) {
+    var mbRef = msTop.price_limits && msTop.price_limits.main_board && msTop.price_limits.main_board.spec && msTop.price_limits.main_board.spec.reference;
     if (mbRef === "prev_settlement") {
       return t(
         '<p class="td-banner">纯衍生品交易所：y 轴基准为<strong>前结算价</strong>，「市场结构与交易机制」章字段描述衍生品市场（ADR-035 E）。</p>',
         '<p class="td-banner">Derivatives-only exchange: the y axis is benchmarked to the <strong>previous settlement price</strong>, and the Market Structure &amp; Trading Mechanism fields describe the derivatives market (ADR-035 E).</p>');
     }
-    var hasDeriv = ms.derivatives && Object.keys(ms.derivatives).some(function (k) {
-      var v = ms.derivatives[k];
-      function content(o) {
-        if (!o || typeof o !== "object") return false;
-        if (o.zh || o.enum || o.spec) return true;
-        return Object.keys(o).some(function (kk) { return ["zh", "en", "quote", "sources", "detail", "confidence", "verified", "enum", "spec", "_meta"].indexOf(kk) < 0 && content(o[kk]); });
-      }
-      return content(v);
-    });
-    if (hasDeriv) {
+    if (line === "deriv") {
       return t(
-        '<p class="td-banner td-banner-soft">本所记录含衍生品市场字段；本剖面显示<strong>现货</strong>（衍生品 spec 待 Phase 3 补充）。</p>',
-        '<p class="td-banner td-banner-soft">This exchange has derivatives-market fields on record; this profile shows the <strong>cash market</strong> (derivatives specs are pending Phase 3).</p>');
+        '<p class="td-banner">本剖面显示<strong>衍生品业务线</strong>：时段 / 撮合 / 价格限制 / 熔断等取自「衍生品市场机制」子章，以各所主力合约（指数期货为主）为代表样本；y 轴 0 为合约参考价（多为前结算价 / 滚动参考价，随合约与时段不同，见零轴刻度）。衍生品侧未结构化的字段如实留空，不回落现货值。</p>',
+        '<p class="td-banner">This profile shows the <strong>derivatives business line</strong>: sessions, matching, price limits and halts come from the “Derivatives Market Mechanics” sub-section, sampled on each exchange’s flagship contract (mostly index futures); the y-axis zero is the contract reference price (usually the previous settlement or a rolling reference — see the zero-axis label). Fields not structured on the derivatives side are left blank rather than falling back to the cash value.</p>');
     }
     return "";
   }
 
-  // 交易细则 · 成本组（tick size / 交易单位 / 交收 / 佣金 / 交易税 / 互联互通）——图下方保留，
-  // 「交易机制」七项已移入机制核心面板（ADR-055）。定宽 6 列，不随交易所换行漂移。
-  function tdSidePanels(id, data) {
-    var ms = (data.chapters && data.chapters.market_structure) || {};
+  // 图下方的 chip 组——「交易机制」七项已移入机制核心面板（ADR-055）。定宽 6 列，
+  // 不随交易所换行漂移。现货业务线 = 交易细则 · 成本（tick / 手数 / 交收 / 佣金 / 交易税 / 互联互通）；
+  // 衍生品业务线 = 合约与清算（tick / 合约规格 / 盯市 / 交割 / 大宗 / 假日）——成本瀑布与
+  // 交收周期是现货口径，衍生品这几个概念另有 clearing.derivatives / .derivatives 子块承载。
+  function tdSidePanels(id, data, line) {
+    var msTop = (data.chapters && data.chapters.market_structure) || {};
     var costs = (data.chapters && data.chapters.costs) || {};
     var clearing = (data.chapters && data.chapters.clearing) || {};
     function chip(path, val, env, chapter) { return tdChip(id, path, val, env, chapter); }
 
-    var chips2 = [];
-    var ts = ms.tick_size;
-    chips2.push(chip("tick_size", dv(ts), ts));
-    var bl = ms.board_lot_size;
-    chips2.push(chip("board_lot_size", dv(bl), bl));
-    var sc = clearing.settlement_cycle;
-    chips2.push(chip("settlement_cycle", sc && sc.enum ? enumDisplay("settlement_cycle", sc.enum) : dv(sc), sc, "clearing"));
-    var cm = costs.commission_structure;
-    chips2.push(chip("commission_structure", dv(cm), cm, "costs"));
-    // 交易税：印花税优先，其次金融交易税；都没有则指向印花税字段（多为空=不征）
-    var sd = costs.stamp_duty, ftt = costs.financial_transaction_tax;
-    if (sd && sd.zh) chips2.push(chip("stamp_duty", dv(sd), sd, "costs"));
-    else if (ftt && ftt.zh) chips2.push(chip("financial_transaction_tax", dv(ftt), ftt, "costs"));
-    else chips2.push(chip("stamp_duty", t("无 / 未见征收", "None / not found"), sd, "costs"));
-    var cs = ms.connect_schemes;
-    if (cs && cs.zh) chips2.push(chip("connect_schemes", dv(cs), cs));
+    var chips2 = [], label;
+    if (line === "deriv") {
+      label = t("合约与清算", "Contract & Clearing");
+      var ms = msTop.derivatives || {};
+      var cld = clearing.derivatives || {};
+      var dts = ms.tick_size;
+      chips2.push(chip("derivatives.tick_size", dv(dts), dts));
+      var csn = ms.contract_specs_note;
+      chips2.push(chip("derivatives.contract_specs_note", dv(csn), csn));
+      var mtm = cld.mark_to_market_frequency;
+      chips2.push(chip("derivatives.mark_to_market_frequency", dv(mtm), mtm, "clearing"));
+      var dm = cld.delivery_method;
+      chips2.push(chip("derivatives.delivery_method", dm && dm.enum ? enumDisplay("delivery_method", dm.enum) : dv(dm), dm, "clearing"));
+      var dbt = ms.block_trade;
+      chips2.push(chip("derivatives.block_trade", dv(dbt), dbt));
+      var dhol = ms.holidays_note;
+      chips2.push(chip("derivatives.holidays_note", dv(dhol), dhol));
+    } else {
+      label = t("交易细则 · 成本", "Trading Rules · Costs");
+      var msc = msTop;
+      var ts = msc.tick_size;
+      chips2.push(chip("tick_size", dv(ts), ts));
+      var bl = msc.board_lot_size;
+      chips2.push(chip("board_lot_size", dv(bl), bl));
+      var sc = clearing.settlement_cycle;
+      chips2.push(chip("settlement_cycle", sc && sc.enum ? enumDisplay("settlement_cycle", sc.enum) : dv(sc), sc, "clearing"));
+      var cm = costs.commission_structure;
+      chips2.push(chip("commission_structure", dv(cm), cm, "costs"));
+      // 交易税：印花税优先，其次金融交易税；都没有则指向印花税字段（多为空=不征）
+      var sd = costs.stamp_duty, ftt = costs.financial_transaction_tax;
+      if (sd && sd.zh) chips2.push(chip("stamp_duty", dv(sd), sd, "costs"));
+      else if (ftt && ftt.zh) chips2.push(chip("financial_transaction_tax", dv(ftt), ftt, "costs"));
+      else chips2.push(chip("stamp_duty", t("无 / 未见征收", "None / not found"), sd, "costs"));
+      var cs = msc.connect_schemes;
+      if (cs && cs.zh) chips2.push(chip("connect_schemes", dv(cs), cs));
+    }
 
-    return '<div class="td-chips-label">' + t("交易细则 · 成本", "Trading Rules · Costs") +
+    return '<div class="td-chips-label">' + label +
       '</div><div class="td-chips td-chips-6">' + chips2.join("") + "</div>";
   }
 
@@ -2865,6 +2938,13 @@
       hit.textContent = gon ? "●" : "◐";
       hit.title = gon ? t("恢复面板", "Restore panel")
         : t("透视面板：露出零轴 / 熔断线 / 走廊", "See-through: reveal zero line, halts, corridor");
+    } else if (role === "td-line") {
+      // 剖面业务线切换（现货 / 衍生品）：持久化 + 就地重渲染 .td-wrap（复用 ADR-055 模式）
+      if (hit.getAttribute("aria-pressed") === "true") return;
+      try { localStorage.setItem("ea-td-line", hit.dataset.line === "deriv" ? "deriv" : "cash"); } catch (err) { /* 隐私模式忽略 */ }
+      var lwrap = hit.closest(".td-wrap");
+      var lex = tdResolveId(parseHash());
+      if (lwrap) loadExchange(lex).then(function (d) { lwrap.innerHTML = tdBuild(lex, d); });
     } else if (role === "close-overlay") {
       closeOverlay();
     } else if (role === "group") {
