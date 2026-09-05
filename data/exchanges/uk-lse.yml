@@ -1442,7 +1442,11 @@ risks:
       - title: "EXCHANGE CONTROLS, HC Deb 23 October 1979 vol 972 cc202-14（英国议会官方 Hansard 记录，外汇管制全面撤销的一手原文）"
         url: https://api.parliament.uk/historic-hansard/commons/1979/oct/23/exchange-controls
         accessed: 2026-09-05
+      - title: "CFM12060 - Understanding corporate finance: foreign exchange: floating exchange rates（gov.uk HMRC 官方手册：包括英镑在内的全球主要货币相互自由浮动）"
+        url: https://www.gov.uk/hmrc-internal-manuals/corporate-finance-manual/cfm12060
+        accessed: 2026-09-05
     quote: "I have now decided to remove all the remaining exchange control restrictions from midnight tonight"
+    detail: "「自由浮动」的制度表述以 gov.uk HMRC 官方手册逐字句（『Today, the world’s major currencies, including the pound sterling, the euro and the US dollar, float freely against each other』）作据；BoE 官网无汇率制度定性专页（只有行情数据库），按 [ADR-079] 口径（非央行一手）封顶 medium。"
     confidence: medium
 
   political_risk_note:
