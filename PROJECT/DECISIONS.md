@@ -99,6 +99,7 @@
 - ADR-092 · 2026-09-05 · OQ #45 四家旗舰所衍生品覆盖缺口落地：products 条目 + 两 derivatives 子章 + 盲审订正
 - ADR-093 · 2026-09-06 · 折行函数 `wrapByCharBudget` 改 token 折行：中英混排不再从拉丁词 / 数字中间切断
 - ADR-094 · 2026-09-05 · stable 档来源不变式全库化（校验 21）+ 63 处「stable + medium + 零 sources」闭环
+- ADR-095 · 2026-09-06 · Phase 3「其余章节可视化」收口认定 + Phase 4 启动前置条件达成
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2619,7 +2620,7 @@ print('全库 medium 零 sources:',n)
 **没定 / 留后续：** 13 处降级字段待人工投喂（OQ #47）；`us` 两家 settlement_currency 的 DTCC NSCC 原文、`uk` CREST Rules（euroclear.com 403）是下次优先入口。
 
 **日期：** 2026-09-05
-### ADR-PENDING-phase3-closeout — Phase 3「其余章节可视化」收口认定 + Phase 4 启动前置条件达成
+### ADR-095 — Phase 3「其余章节可视化」收口认定 + Phase 4 启动前置条件达成
 
 **背景：** [ADR-057] #4 把 Phase 4（单页画布合并）的启动定为**硬前置**：Phase 3 的全部章节可视化模块均已落地，在此之前不动前端做画布布局。截至 2026-09-06，六个模块的渲染层与配套数据棒已全部完成——成本瀑布（[ADR-045] 数据 / [ADR-047] 渲染 / [ADR-054] 独立复核 / [ADR-071] 迭代）、交割管线（[ADR-048] 设计 / [ADR-050] 数据 / [ADR-051] 渲染）、上市生命周期（[ADR-059] 三棒做齐 / [ADR-091] 迭代收口）、监管图（[ADR-061]）、参与者图（[ADR-064]）、风险旗标（[ADR-066] 设计+渲染 / [ADR-079] 数据子棒 28/28 执行 + 独立复核 0 FIX）。另有市场机制剖面现货/衍生品业务线切换（[ADR-090]）、四模块共用折行 token 化（[ADR-093]）等穿插迭代。ROADMAP §三 Phase 3 顶层条目下所有子棒均为 `[x]`、各棒退出验收（`make build` 全绿、该走的独立复核已走）已在其各自 ADR 记录，只剩顶层复选框与「Phase 4 是否就此启动」的拍板——[ADR-066] 文末与 ROADMAP §一 明确把这一步留给用户 / 合并协调者按 §一 拍板，不由执行会话自行宣布（记忆 `v2-visualization-pivot` 亦记「渲染层口径早满足 [ADR-057] #4，别自作主张宣布解锁」）。用户 2026-09-06 拍板。
 
@@ -2636,6 +2637,6 @@ print('全库 medium 零 sources:',n)
 - **不动 Phase 3 各棒遗留的视觉迭代项**（ROADMAP §一 item 3：成本瀑布留白 / 交割管线深色层 / 上市生命周期中英混排等）——[ADR-057] #4 的口径是「模块落地」不是「视觉零遗留」，这些转交互式会话推进、不阻断 Phase 4。
 - **不新增机器校验**——本条不引入新结构或不变式（[CLAUDE.md §四]），纯文档状态回写。
 
-**验证：** 纯文档。改 `PROJECT/ROADMAP.md`（§三 Phase 3 顶层条目 `[x]` + Phase 4「前置条件达成」子条目）+ `PROJECT/DECISIONS.md`（本条）+ `PROJECT/ROADMAP-INBOX.md`（§一 折叠便签）。`make build` **exit 0**（`selfcheck` 101、`validate` 0 错误 / 3 警告〔均为本分支 `ADR-PENDING-phase3-closeout` 占位符，合并后 adr-heal 定号并补 `ADR-LEDGER.md` 登记行〕、`verify_quotes` FAIL=0、`check_ui_i18n` / `check_no_chapter_ordinals` / `check_no_dup_render_helpers` / `check_wrap_mixed` OK），`make sync` 二次幂等、`data/` 与 `docs/data/` 及生成块零 diff（三个文件内容均不被 `sync.py` 扫描；本条为 `ADR-PENDING-*` 占位符，不进 adr-index 编号索引）。
+**验证：** 纯文档。改 `PROJECT/ROADMAP.md`（§三 Phase 3 顶层条目 `[x]` + Phase 4「前置条件达成」子条目）+ `PROJECT/DECISIONS.md`（本条）+ `PROJECT/ROADMAP-INBOX.md`（§一 折叠便签）。`make build` **exit 0**（`selfcheck` 101、`validate` 0 错误 / 3 警告〔均为本分支 `ADR-095` 占位符，合并后 adr-heal 定号并补 `ADR-LEDGER.md` 登记行〕、`verify_quotes` FAIL=0、`check_ui_i18n` / `check_no_chapter_ordinals` / `check_no_dup_render_helpers` / `check_wrap_mixed` OK），`make sync` 二次幂等、`data/` 与 `docs/data/` 及生成块零 diff（三个文件内容均不被 `sync.py` 扫描；本条为 `ADR-PENDING-*` 占位符，不进 adr-index 编号索引）。
 
 **日期：** 2026-09-06
