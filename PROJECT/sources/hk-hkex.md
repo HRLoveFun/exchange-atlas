@@ -89,3 +89,4 @@
 - `hkex.com.hk`（2026-09-05 补充登记，任务四族A：HKSCC 现货保证金制度，沿用既有域名条目） | 官方 | en | curl 常规 UA 200
   - Margin（HKSCC 两级保证金制度官方页：Tier P VaR 组合保证金最低 3.2%（2023-08-14 生效）/ Tier N 平准费率第 1/2/3 组 12%/30%/55%（分别 2022-06-13、2022-12-16、2025-10-27 生效）、margin add-ons、抵押品形式）: https://www.hkex.com.hk/Services/Clearing/Securities/Risk-Management/Margin?sc_lang=en（HTTP 200，379KB）
   - Initial Margin Calculation Guide v14（PDF，保证金逐日计算操作细节、IMRPF 于 VaR 启动后逐日向全体 CP 发布）: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Securities/Risk-Management/Margin/Initial-Margin-Calculation-Guide-HKv14.pdf（HTTP 200，PDF）
+  - 2026-09-05 新增（任务四族D：经纪佣金市场化沿革）: 撤销最低经纪佣金实施时间表修订（HKEX 新闻稿，2002-02-20，董事会决定推迟一年至 2003-04-01 撤销最低经纪佣金、「making brokerage freely negotiable is the best way forward」）: https://www.hkex.com.hk/News/News-Release/2002/020220news（HTTP 200，360KB）

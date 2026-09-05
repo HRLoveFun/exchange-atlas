@@ -2220,15 +2220,21 @@
     },
     "costs": {
       "commission_structure": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：券商佣金，费率市场化协商——未附来源，留空。",
+        "zh": "香港证券经纪佣金已全面市场化：最低经纪佣金制的撤销自 2003-04-01 起实施（HKEx 2002-02-20 董事会决定推迟一年执行），佣金自由议价（HKEx 官方表述「making brokerage freely negotiable is the best way forward for Hong Kong」）；佣金由券商与客户协商确定，交易所不统一规定——交易所自身收取的是交易费等运营收费（见 exchange_fees），与经纪佣金分属两类",
+        "en": "Brokerage commissions in Hong Kong are fully market-driven: the abolition of minimum brokerage took effect on 1 April 2003 (HKEx board decided on 20 Feb 2002 to defer it by one year), with 'brokerage freely negotiable ... the best way forward for Hong Kong' (HKEx's official wording); commissions are negotiated between brokers and clients and are not set by the exchange — the Exchange's own charges are operating fees (see exchange_fees), a separate category",
+        "detail": "原『草稿印象：券商佣金，费率市场化协商』本次以 HKEx 官方新闻稿一手坐实，并给出制度节点（2003-04-01 撤销最低佣金）。",
+        "sources": [
+          {
+            "title": "Schedule for abolition of minimum brokerage revised（HKEX 官方新闻稿，2002-02-20）",
+            "url": "https://www.hkex.com.hk/News/News-Release/2002/020220news",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "The Board of Directors of Hong Kong Exchanges and Clearing Limited (HKEx) decided today (Wednesday) to defer the abolition of minimum brokerage for one year until 1 April 2003. HKEx believes making brokerage freely negotiable is the best way forward for Hong Kong, and this view is shared by the government.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "exchange_fees": {
         "spec": {
@@ -2351,15 +2357,21 @@
         "quote": null
       },
       "capital_gains_tax": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：香港不征资本利得税——一般知识，未核实是否有细分例外，留空。",
+        "zh": "香港不征资本利得税：香港利得税仅对在港经营行业、专业或业务产生并源于香港的利润征收，且明确排除「出售资本资产产生的利润」（profits excluding those arising from the sale of capital assets）——出售上市股票等资本资产的收益不属于利得税应课税范围，不存在独立的资本利得税税种",
+        "en": "Hong Kong levies no capital gains tax: Profits Tax applies only to profits (excluding profits arising from the sale of capital assets) arising in or derived from Hong Kong from a trade, profession or business carried on in Hong Kong — gains from disposing of capital assets such as listed shares fall outside the charge, and there is no separate capital gains tax",
+        "detail": "原『草稿印象』以 IRD 利得税官方页一手坐实（评税范围条款排除资本资产出售利润）；IRD 同页还列明「已缴利得税法团分派的股息不计入应评税利润」，与 dividend_withholding_tax 字段呼应。",
+        "sources": [
+          {
+            "title": "Profits Tax（香港税务局官方页，利得税评税范围与资本资产利润排除条款）",
+            "url": "https://www.ird.gov.hk/eng/tax/bus_pft.htm",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "chargeable to tax on all profits (excluding profits arising from the sale of capital assets) arising in or derived from Hong Kong from such trade, profession or business. There is therefore no distinction made between residents and non-residents.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "dividend_withholding_tax": {
         "zh": "香港利得税制度下，已缴付香港利得税的法团所分派的股息，在计算应评税利润时予以豁免（不计入应课税利润）；《税务条例》未设有股息预扣税条款，与利得税豁免条文合并推断港股股息不适用预扣税",
