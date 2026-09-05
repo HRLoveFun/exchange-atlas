@@ -39,14 +39,12 @@ import sys
 import tempfile
 from pathlib import Path
 
-import yaml
-
 ROOT = Path(__file__).resolve().parent.parent
 CACHE = ROOT / ".cache"
-DATA = ROOT / "data" / "exchanges"
 URLTEXT_CACHE = Path(tempfile.gettempdir()) / "verify_quotes_urltext.json"
 
 sys.path.insert(0, str(ROOT / "tools"))
+import data_files
 import sync  # noqa: E402  —— 复用 expand_exchange，让本脚本看到的 confidence/sources
               #    与 validate.py 一致（含 _meta 级联），否则靠章节级 _meta.sources
               #    的字段会被误判为"无来源"（CACHE_MISS）。
@@ -230,12 +228,12 @@ def main():
     ap.add_argument("--strict", action="store_true", help="CACHE_MISS 也按 FAIL 计")
     args = ap.parse_args()
 
-    exs = [args.ex] if args.ex else sorted(p.name[:-4] for p in DATA.glob("*.yml"))
+    exs = [args.ex] if args.ex else data_files.exchange_ids()
     taxonomy = sync.load_all()[0]
 
     fails, cache_miss, live_err, oks = [], [], [], []
     for ex in exs:
-        raw = yaml.safe_load(open(DATA / f"{ex}.yml", encoding="utf-8"))
+        raw = data_files.load_exchange(ex)
         d = sync.expand_exchange(taxonomy, raw).get("chapters", {})
         mmap = manifest_map(ex)  # url -> (规范正文, via)
         for path, node in walk(d, ""):
