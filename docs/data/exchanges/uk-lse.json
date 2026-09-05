@@ -15,24 +15,36 @@
       "timezone": {
         "zh": "Europe/London (GMT/BST)",
         "en": "Europe/London (GMT/BST)",
-        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "IANA tz database「europe」zone 文件（Europe/London：GMT/BST 及夏令时切换 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/europe",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "dst_rule": {
         "zh": "实行英国夏令时（British Summer Time, BST），在格林尼治标准时间（GMT）与BST之间切换",
         "en": "Observes British Summer Time (BST), switching between Greenwich Mean Time (GMT) and BST",
-        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "IANA tz database「europe」zone 文件（Europe/London 的 GMT/BST 夏令时切换 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/europe",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "founded_year": {
         "zh": "1801（第一家受监管的交易所在伦敦成立，现代意义上的证券交易所由此诞生）；渊源可上溯至1698年 Jonathan's Coffee House 内 John Castaing 开始发布证券商品价格清单",
@@ -165,12 +177,12 @@
       },
       "settlement_currency": {
         "zh": "英镑（GBP）为主，经CREST（由Euroclear UK & International运营）结算；部分品类另有多币种结算安排",
-        "en": "Primarily GBP, settled via CREST (operated by Euroclear UK & International); certain instruments have multi-currency settlement arrangements",
+        "detail": "2026-09-05 stable 档来源闭环时查而未得：缓存内（gov.uk/HMRC、LSEG 页）未找到 CREST 结算币种的明文陈述；候选出处为 CREST Rules（Euroclear UK & International；euroclear.com 对本环境 403），按防幻觉铁律降级 low，待补原文后升级。",
         "confidence": "medium",
+        "en": "Primarily GBP, settled via CREST (operated by Euroclear UK & International); certain instruments have multi-currency settlement arrangements",
         "verified": "2026-08-14",
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null,
         "sources": null
       }

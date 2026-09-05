@@ -89,3 +89,6 @@
 - `investor.gov`（2026-09-05 补充登记，任务四族C） | 官方（SEC 投资者教育与倡导办公室） | en | curl 常规浏览器 UA 200（⚠️ 术语表正文为客户端 JS 渲染，curl 拿到的是导航壳——本条 URL 登记保留但 quote 反查不可用，慎用） | OTC 术语定义页（post_delisting_venue 的 OTC 定性辅证）: https://www.investor.gov/introduction-investing/investing-basics/glossary/over-the-counter-otc
 - `congress.gov`（2026-09-05 新增登记，任务四收尾第29条） | 官方（美国国会研究服务处 CRS，国会官方研究出版物） | en | **更新本文件 v0.2 探测记录「congress.gov 两次 403 未攻克」的结论**：CRS PDF 直链 `/crs_external_products/...` 本次用常规浏览器 UA 与 Fair Access UA 直连均 200（此前 403 的应是站内其他路径，未复测）；fetch_sources 对 .gov 域名自动用 Fair Access UA，实测该 URL 可通 | 用于 participants.foreign_access_channel（开放投资环境与外资审查覆盖范围的官方口径）
   - Foreign Direct Investment: Background and Issues（CRS Report IF10636.11，Updated February 21, 2024；⚠️ 前两节为双栏排版，`pdftotext -layout` 会左右栏逐行交错——quote 必须取单栏内连续行，跨栏句子无法连续摘引）: https://www.congress.gov/crs_external_products/IF/PDF/IF10636/IF10636.11.pdf（HTTP 200，426KB）
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | America/New_York（EST/EDT 及夏令时切换 Rule） 的 UTC 偏移与夏令时规则
+  - tzdb「northamerica」zone 文件（`America/New_York`）: https://data.iana.org/time-zones/tzdb/northamerica（HTTP 200，61KB）

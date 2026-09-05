@@ -84,3 +84,6 @@
   - PHLX Electronic Market Maker Obligations（PDF，`market_structure.derivatives.market_maker_scheme` 的 PHLX 90% 双边报价义务出处）: https://www.sec.gov/files/rules/sro/phlx/2026/34-106064.pdf （HTTP 200，259KB）
 - `investor.gov`（SEC 投资者教育站，2026-09-05 新增登记） | 官方（监管机构，SEC 运营） | en | curl + 常规 UA 200，未见反爬 | 期权标准合约条款的 SEC 官方表述（合约单位 100 股、到期日一般为第三个周五后的周六）——OCC 官网（theocc.com）全域 403 后合约规格的官方替代出处
   - An Introduction to Options – Investor Bulletin（`contract_specs_note`/`last_trading_day_rule` 出处）: https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins-63 （HTTP 200，57KB）
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | America/New_York（EST/EDT 及夏令时切换 Rule） 的 UTC 偏移与夏令时规则
+  - tzdb「northamerica」zone 文件（`America/New_York`）: https://data.iana.org/time-zones/tzdb/northamerica（HTTP 200，61KB）

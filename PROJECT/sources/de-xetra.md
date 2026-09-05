@@ -36,3 +36,6 @@
 - `www.deloittelegal.de` | 第三方（律所） | de | WebSearch 定位 | EdW 投资者赔偿方案（investor_protection 出处，confidence medium）
 - `resourcehub.bakermckenzie.com` | 第三方（律所资源库） | en | WebSearch 定位 | 上市流程文件（listing_process_duration 出处，confidence medium）
 - `www.marketscreener.com` | 第三方（财经媒体） | en | curl 常规 UA 200 | Xetra 交易中断报道（major_outage_history 出处，confidence medium）
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Europe/Berlin（CET/CEST 及夏令时切换 Rule） 的 UTC 偏移与夏令时规则
+  - tzdb「europe」zone 文件（`Europe/Berlin`）: https://data.iana.org/time-zones/tzdb/europe（HTTP 200，64KB）

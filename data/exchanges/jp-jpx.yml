@@ -141,7 +141,13 @@ regulation:
   clearing_regulator:
     zh: "金融厅"
     en: "FSA"
+    detail: "《金融商品交易法》下金融商品交易业者的登记与监督权属内阁总理大臣、由金融厅执行（FSA 设立法）；当次缓存页（FSA 官方 FIEA FAQ）为登记权表述的间接依据，未直接陈述「金融厅监督交易所」句，维持 medium，待补 FSA 设立法/《金商法》主管机关条文后可升 high。"
+    sources:
+      - title: FSA「FAQ on the FIEA」（官方：A Financial Instruments Business Operator is a person registered by the Prime Minister under Article 29 of the FIEA——登记/监督权属内阁总理大臣，由金融厅执行）
+        url: https://www.fsa.go.jp/en/laws_regulations/faq_on_fiea/section06.html
+        accessed: 2026-09-05
     confidence: medium
+    verified: 2026-09-05
 
   core_laws:
     zh: "《金融商品交易法》"
@@ -878,21 +884,22 @@ market_structure:
           期货侧页面未逐字出现「前日清算结算价」字样，该键系按此归纳，如需逐字支撑可查大阪取引所业务规程。
         verified: 2026-09-05
       other_boards:
-        zh: "其他主力合约线（官方总表口径）：TOPIX 期货（含 mini）属 ±10% 组（熔断扩幅 15%、20%）；指数期权按基准价分档——不足 5 点 4%、5-20 点 6%、20-50 点 8%、50 点以上 11%，扩幅在原档上加 3% 递进；JGB 期货为绝对额档（10年期 ±2.00 日元、mini 20年期 ±4.00 日元）。⚠️ TOPIX 期货规格子页所标档位与总表不一致，详见 detail"
-        en: "Other flagship contract lines (per the official summary table): TOPIX Futures (incl. mini) fall in the ±10% group (CB expansions 15% and 20%); index options are tiered by base price — under 5 points 4%, 5-20 points 6%, 20-50 points 8%, 50 points or more 11%, with expansions adding 3% stepwise; JGB Futures use absolute-yen bands (10-year ±JPY 2.00, mini 20-year ±JPY 4.00). Note: the TOPIX Futures spec page shows values inconsistent with the summary table — see detail"
+        zh: "其他主力合约线（官方总表口径）：TOPIX 期货（含 mini）与日经 225 期货同属一组，正常档 ±8%、扩幅 ±12%/±16%（与 TOPIX 规格子页一致）；FTSE China 50 期货单独一档 ±10%（扩幅 15%、20%）；指数期权按基准价分档——不足 5 点 4%、5-20 点 6%、20-50 点 8%、50 点以上 11%，扩幅在原档上加 3% 递进；JGB 期货为绝对额档（10年期 ±2.00 日元、mini 20年期 ±4.00 日元）"
+        en: "Other flagship contract lines (per the official summary table): TOPIX Futures (incl. mini) share the same table group as Nikkei 225 Futures — ±8% normal band with ±12%/±16% expansions (consistent with the TOPIX spec page); FTSE China 50 Index Futures form their own row at ±10% (expansions 15% and 20%); index options are tiered by base price — under 5 points 4%, 5-20 points 6%, 20-50 points 8%, 50 points or more 11%, with expansions adding 3% stepwise; JGB Futures use absolute-yen bands (10-year ±JPY 2.00, mini 20-year ±JPY 4.00)"
         sources:
-          - title: Price Limits/ Circuit Breaker Rule（JPX官网英文版，指数期权/JGB 档位表）
+          - title: Price Limits/ Circuit Breaker Rule（JPX官网英文版，指数期货分组行/指数期权/JGB 档位表）
             url: https://www.jpx.co.jp/english/derivatives/rules/price-limit-cb/
             accessed: 2026-09-05
           - title: TOPIX Futures Contract Specifications（JPX官网英文版）
             url: https://www.jpx.co.jp/english/derivatives/products/domestic/topix-futures/01.html
             accessed: 2026-09-05
-        quote: "FTSE China 50 Index Futures ±10% ±15％ ±20％ ／ TOPIX Options （Reference price） less than 5 points 5 points or more to less than 20 points 20 points or more to less than 50 points 50 points or more ±4% ±6% ±8% ±11% Add 3% to Normal Price Limits Add 3% to 1st Expansion Price Limits ／ 10-year JGB Futures ±JPY 2.00 ／ mini 20-year JGB Futures ±JPY 4.00"
-        confidence: medium
+        quote: "Nikkei 225 Futures, Nikkei 225 mini, Nikkei 225 micro Futures ±8% ±12％ ±16％ TOPIX Futures, mini-TOPIX Futures JPX-Nikkei 400 Futures JPX Prime 150 Index Futures TSE Growth Market 250 Index Futures TOPIX Core30 Futures TOPIX Banks Index Futures TSE REIT Index Futures RN Prime Index Futures S&P/JPX 500 ESG Score Tilted Index Futures FTSE JPX Net Zero Japan 500 Index Futures Nikkei 225 Climate Change 1.5℃ Target Index Futures USD/JPY Futures CNH/JPY Futures EUR/JPY Futures FTSE China 50 Index Futures ±10% ±15％ ±20％ ／ TOPIX Options （Reference price） less than 5 points 5 points or more to less than 20 points 20 points or more to less than 50 points 50 points or more ±4% ±6% ±8% ±11% Add 3% to Normal Price Limits Add 3% to 1st Expansion Price Limits ／ 10-year JGB Futures ±JPY 2.00 ／ mini 20-year JGB Futures ±JPY 4.00"
+        confidence: high
         detail: |
-          档位表为分组行结构：±10%/15%/20% 一组覆盖 TOPIX 期货、mini-TOPIX、JPX-Nikkei 400、TOPIX Core30 等至 FTSE China 50 的整组产品（quote 段一取该组末行收尾处）。
-          ⚠️ 口径冲突待核实：TOPIX 期货规格子页（2025-05-26 更新）标注正常档 8%、扩幅 12%/16%，而 plcb 总表（2026-07-23 更新）
-          将 TOPIX 期货归入 ±10%/15%/20% 组——两官方页不一致，本字段按较新的总表记录并降级 medium，待官方口径统一后回核。
+          档位表为 HTML 表格 rowspan 分组结构：第一组（±8%/12%/16%）由「Nikkei 225 Futures, Nikkei 225 mini, Nikkei 225 micro
+          Futures」行起头、跨 15 行覆盖 TOPIX 期货、mini-TOPIX、JPX-Nikkei 400、TOPIX Core30、REIT 指数期货及 USD/JPY 等外汇期货；
+          FTSE China 50 Index Futures 为独立单行（±10%/15%/20%）。初版曾误读为「TOPIX 属 ±10% 组、与规格子页 8/12/16 冲突」，
+          独立复核（OQ45-DERIV-SPOT-CHECK）证实两官方页口径一致，属表格 rowspan 归属误判，已订正并升 high。
         verified: 2026-09-05
 
     circuit_breaker:
@@ -1505,8 +1512,13 @@ infrastructure:
   trading_system_name:
     zh: "arrowhead"
     en: "arrowhead"
-    detail: "TSE现货股票撮合引擎名称，本次仅在术语层面确认名称存在，未抓取到对该系统本身的专门介绍页面，故无独立quote，confidence标medium。"
-    confidence: medium
+    sources:
+      - title: JPX 社史年表（官方：「"arrowhead", the new equity and CB trading system, launched」2010-01-04）
+        url: https://www.jpx.co.jp/english/corporate/about-jpx/history/01-01.html
+        accessed: 2026-09-05
+    quote: "\"arrowhead\", the new equity and CB trading system, launched"
+    confidence: high
+    verified: 2026-09-05
 
   access_methods:
     zh: "行情/交易接入分三条渠道：①直连TSE专线（Dedicated Connection Line）；②经由信息商（Market Information Providers，如QUICK、路透、彭博等）间接获取；③托管/邻近服务——JPX Co-Location（在JPX主机房设置交易程序设备，可将行情获取与订单提交时延降至约几微秒单程）与关西邻近服务（Kansai Proximity Service，服务大阪地区、兼具大地震等广域灾害下的业务连续性功能）；另有历史数据专用的J-Quants API/SFTP渠道（见historical_data_availability）"

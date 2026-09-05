@@ -25,9 +25,19 @@ overview:
   timezone:
     zh: "America/New_York (ET)"
     en: "America/New_York (ET)"
+    sources:
+      - title: IANA tz database「northamerica」zone 文件（America/New_York：EST/EDT 及夏令时切换 Rule）
+        url: https://data.iana.org/time-zones/tzdb/northamerica
+        accessed: 2026-09-05
+    verified: 2026-09-05
   dst_rule:
     zh: "实行夏令时（东部时间在 EST/EDT 间切换）"
     en: "Observes daylight saving time (Eastern Time switches between EST and EDT)"
+    sources:
+      - title: IANA tz database「northamerica」zone 文件（America/New_York 的 EST/EDT 夏令时切换 Rule）
+        url: https://data.iana.org/time-zones/tzdb/northamerica
+        accessed: 2026-09-05
+    verified: 2026-09-05
 
   founded_year:
     zh: "1792（5月17日，梧桐树协议 Buttonwood Agreement）"
@@ -107,10 +117,14 @@ overview:
   trading_currency:
     zh: "美元 (USD)"
     en: "USD"
+    detail: "2026-09-05 stable 档来源闭环时查而未得：缓存内的 NYSE Rules/eCFR 对清算结算流程（Rule 7.14 经 member organization/clearing firm 交由 NSCC）有明文，但未见对交易/结算币种的专门陈述句；候选出处为 DTCC NSCC Rules & Procedures（CNS 以美元交收），按防幻觉铁律降级 low，待补原文后升级。"
+    confidence: low
 
   settlement_currency:
     zh: "美元 (USD)"
     en: "USD"
+    detail: "2026-09-05 stable 档来源闭环时查而未得（同 trading_currency）；候选出处为 DTCC NSCC Rules & Procedures（CNS 以美元交收），按防幻觉铁律降级 low，待补原文后升级。"
+    confidence: low
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境
@@ -1270,7 +1284,12 @@ participants:
   membership_structure:
     zh: "会员组织（member organization）体系，须通过NYSE Regulation合规审查"
     en: "Member organization structure; subject to NYSE Regulation compliance review"
+    sources:
+      - title: NYSE Rules（Rule 7.14 各 member organization 须经清算资格安排；NYSE Regulation 依规则体系对 member organization 行使规则制定与监管职能）
+        url: https://www.nyse.com/publicdocs/nyse/regulation/nyse/NYSE_Rules.pdf
+        accessed: 2026-09-05
     confidence: medium
+    verified: 2026-09-05
 
   broker_landscape:
     zh: "截至2024年末，FINRA注册的经纪商共3,249家（其中仅注册经纪商2,840家，同时注册经纪商与投资顾问的双重注册机构409家）；另有32,090家机构仅注册为投资顾问（由SEC或州监管机构监管，非FINRA经纪商会员），全行业注册机构合计35,339家"

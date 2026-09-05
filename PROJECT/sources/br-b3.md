@@ -47,3 +47,6 @@
 - `www.b3.com.br/data/files` | 官方（B3 官网文档库，PUMA 交易参数分册） | pt-BR | curl 常规 UA 200（`data/files` 短链需从索引页 HTML 取完整 href——部分列表条目由前端渲染，直接 WebSearch 摘要里的截断 href 会 404） | 任务三棒 3 衍生品逐合约价格限制（Túneis de Negociação）参数来源：B3 按「分市场分册」公布逐合约隧道参数（拒绝隧道/拍卖隧道/均价隧道/拍卖期间价格保护），每组到期月份分档，百分数为小数逗号形态
   - Parâmetros dos Túneis de Negociação 分册索引页: https://www.b3.com.br/pt_br/solucoes/plataformas/puma-trading-system/para-participantes-e-traders/regras-e-parametros-de-negociacao/parametros-dos-tuneis-de-negociacao/
   - Futuros Referenciados em Índices 分册（IND/WIN 隧道参数，2026-05-18 版）PDF: https://www.b3.com.br/data/files/D5/73/C0/79/DDC2E91064BF82E9AC094EA8/Futuro%20de%20Indices%20-%2018052026.pdf
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | America/Sao_Paulo（2019 年后固定 UTC-3，无夏令时） 的 UTC 偏移与夏令时规则
+  - tzdb「southamerica」zone 文件（`America/Sao_Paulo`）: https://data.iana.org/time-zones/tzdb/southamerica（HTTP 200，32KB）

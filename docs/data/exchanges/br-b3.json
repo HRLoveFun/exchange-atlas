@@ -16,24 +16,36 @@
       "timezone": {
         "zh": "America/Sao_Paulo (BRT, UTC-3)",
         "en": "America/Sao_Paulo (BRT, UTC-3)",
-        "verified": "2026-08-16",
+        "sources": [
+          {
+            "title": "IANA tz database「southamerica」zone 文件（America/Sao_Paulo：2019 年后固定 UTC-3，无夏令时 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/southamerica",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "dst_rule": {
         "zh": "无夏令时：巴西自2019年起全国不再实行夏令时切换，全年固定使用UTC-3",
         "en": "No daylight saving time: since 2019 Brazil no longer switches to DST nationwide, staying on UTC-3 year-round",
-        "confidence": "low",
-        "detail": "此说法来自本次会话的公开检索（非 b3.com.br 官网原文），未在本次抓取到的 B3 页面里\n找到直接确认该决令的官方原文，故未标 high。有意思的旁证：B3's Trading Procedures\nManual（2024年4月版）正文里仍保留\"during daylight saving time\"的备用时段条款（如\n收盘集合竞价在\"4:50-4:54:59 p.m.\"与\"5:50-5:49:59 p.m.*\"两套时刻表并存），但当前\nTrading Hours – Equities 页面给出的最新时段表只有一套时刻（16:55/17:00等），不再区分\n夏令时/非夏令时——这与\"巴西已取消夏令时\"的说法方向一致，但本次未做逐条比对确认。\n",
-        "verified": "2026-08-16",
+        "confidence": "medium",
+        "detail": "此说法来自本次会话的公开检索（非 b3.com.br 官网原文），未在本次抓取到的 B3 页面里\n找到直接确认该决令的官方原文。IANA tz database 对 America/Sao_Paulo 的官方定义\n（2019 年后固定 -03、无夏令时 Rule）为权威佐证（2026-09-05 补来源），与 B3 Trading\nHours – Equities 页面单一时刻表（不再区分夏令时/非夏令时）方向一致；法律原文\n（2019 年第 4.379 号法令）未逐字取到，故标 medium 而非 high。\n",
+        "sources": [
+          {
+            "title": "IANA tz database「southamerica」zone 文件（America/Sao_Paulo：2019 年后固定 UTC-3，无夏令时 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/southamerica",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "founded_year": {
         "zh": "2017（3月29日，由BM&FBOVESPA与Cetip完成合并）",
@@ -149,25 +161,37 @@
       },
       "trading_currency": {
         "zh": "巴西雷亚尔 (BRL)",
+        "sources": [
+          {
+            "title": "B3《外国投资者指南》（GUIA_INR-B3：境外投资强制以巴西雷亚尔 (BRL) 交收；B3 各产品页亦以 BRL 计价）",
+            "url": "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
         "en": "BRL",
         "detail": "部分场外/远期市场品种以美元报价（如规程手册记载的美元即期市场轮盘「Roda de Dólar」，整手为5万美元），但绝大多数现货证券与衍生品以BRL计价交易。",
         "verified": "2026-08-16",
         "confidence": "medium",
         "enum": null,
         "spec": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "settlement_currency": {
         "zh": "巴西雷亚尔 (BRL)",
         "en": "BRL",
-        "verified": "2026-08-16",
+        "sources": [
+          {
+            "title": "B3《外国投资者指南》（GUIA_INR-B3：Local law mandates that all foreign portfolio investment settle in Brazilian Reals (BRL)——境外投资强制以雷亚尔交收）",
+            "url": "https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "regulation": {

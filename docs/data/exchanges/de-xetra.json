@@ -17,24 +17,36 @@
       "timezone": {
         "zh": "中欧时间（法兰克福，CET，UTC+1；夏令时CEST，UTC+2）",
         "en": "Central European Time (Frankfurt, CET, UTC+1; CEST UTC+2 during daylight saving)",
+        "sources": [
+          {
+            "title": "IANA tz database「europe」zone 文件（Europe/Berlin：CET/CEST 及夏令时切换 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/europe",
+            "accessed": "2026-09-05"
+          }
+        ],
         "confidence": "medium",
-        "verified": "2026-08-14",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "dst_rule": {
         "zh": "实行夏令时（随欧盟统一切换CET/CEST），与同集团de-eurex一致",
         "en": "Observes daylight saving time (switches CET/CEST in line with the EU), same as de-eurex",
+        "sources": [
+          {
+            "title": "IANA tz database「europe」zone 文件（Europe/Berlin 的 CET/CEST 夏令时切换 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/europe",
+            "accessed": "2026-09-05"
+          }
+        ],
         "confidence": "medium",
-        "verified": "2026-08-14",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "founded_year": {
         "zh": "1585（法兰克福商人为统一汇兑牌价而集会，官方史料将此事件视为法兰克福交易所的诞生时刻）；现行电子交易系统Xetra于1997年上线",
@@ -168,13 +180,19 @@
       "settlement_currency": {
         "zh": "原则上同交易货币（以欧元为主），个别证券可另设结算货币，规则依据同trading_currency",
         "en": "In principle the same as the trading currency (primarily EUR); individual Securities may have a different settlement currency, same rule basis as trading_currency",
+        "sources": [
+          {
+            "title": "Exchange Rules for the FWB®®（Börsenordnung §58，与 trading_currency 同一规则依据：管理层可为个别证券另行指定交易与结算货币）",
+            "url": "https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
         "confidence": "medium",
-        "verified": "2026-08-14",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "regulation": {
