@@ -451,9 +451,11 @@ def build_json_schema(taxonomy):
 # ── GENERATED 块替换 ────────────────────────────────────────
 
 def replace_generated_block(text, name, new_content):
-    # 行尾容忍（[ADR-077]）：仓库行尾风格混合（PROJECT/SOURCES.md 与
-    # DECISIONS.md 是 CRLF，ROADMAP/README 等是 LF），标记行 \r 会让裸 `\n` 匹配失败。
-    # 生成内容沿用标记处检测到的行尾风格，保持目标文件行尾统一。
+    # 行尾容忍（[ADR-077]）：全库文本文件目前均为 LF，`\r?\n` 是防御性写法——
+    # 不假设行尾风格永不变（编辑器/工具引入 CRLF 时不静默失效），生成内容沿用
+    # 标记处检测到的行尾风格、保持目标文件行尾统一。本函数修掉的真实 bug 是
+    # 「空标记块匹配不上」：正则要求 `BEGIN -->\n` + 正文 + `\n<!-- END`，
+    # BEGIN/END 之间只有单个换行的空块永远匹配不上——空标记块必须留一个空行。
     pattern = re.compile(
         r"(<!-- BEGIN:GENERATED " + re.escape(name) + r" -->(?:\r\n|\n))"
         r"(.*?)"

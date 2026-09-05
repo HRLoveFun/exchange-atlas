@@ -676,8 +676,8 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
 # ── 8：文档 GENERATED 块新鲜度 ────────────────────────────────
 
 def extract_generated_block(text, name):
-    # 行尾容忍：与 sync.replace_generated_block 同一套规则（CRLF 文件的标记带 \r）；
-    # 提取出的正文统一归一成 \n 再与纯函数输出比对。
+    # 行尾容忍：与 sync.replace_generated_block 同一套规则（`\r?\n` 是防御性写法，
+    # 全库文本文件目前均为 LF）；提取出的正文统一归一成 \n 再与纯函数输出比对。
     m = re.search(
         r"<!-- BEGIN:GENERATED " + re.escape(name) + r" -->(?:\r\n|\n)(.*?)(?:\r\n|\n)<!-- END:GENERATED " + re.escape(name) + r" -->",
         text, re.S,
