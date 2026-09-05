@@ -242,19 +242,28 @@
     s = String(s == null ? "" : s);
     return s.length > max ? s.slice(0, max - 1) + "…" : s;
   }
+  // 折行预算（[ADR-PENDING-llwrap-mixed-wrap]）：CJK 表意字可在任意字间断，拉丁词 /
+  // 数字 / 连字符串作为整体 token 不从中间切。取代原「含任一 CJK 字符 → 整串按 per
+  // 逐字硬切」的分支——那会把中英混排里的 `Recognis|ed`、`CMN 4.37|3` 从词中截断
+  // （[ADR-061] 已知局限④，ll/rm/pt/rf 四模块共用此函数）。
+  // 纯 CJK 串仍精确按 per 逐字断行（每字 token 宽 1、字间无空格），与旧结果逐字一致；
+  // 纯拉丁串仍按词贪心折行。单个 token 宽度超 per（罕见：窄卡里的长词 / 长 URL）时
+  // 独占一行任其溢出——不硬切，同旧拉丁分支行为。
   function wrapByCharBudget(s, per, maxLines) {
     s = String(s == null ? "" : s).trim();
+    per = Math.max(1, per | 0);
+    var tokens = s.match(/[一-鿿]|[^\s一-鿿]+|\s+/g) || [];
     var out = [];
-    if (/[一-鿿]/.test(s)) {
-      for (var i = 0; i < s.length; i += per) out.push(s.slice(i, i + per));
-    } else {
-      var cur = "";
-      s.split(/\s+/).forEach(function (w) {
-        if (cur && (cur + " " + w).length > per) { out.push(cur); cur = w; }
-        else cur = cur ? cur + " " + w : w;
-      });
-      if (cur) out.push(cur);
-    }
+    var cur = "";
+    var pendingSpace = false;
+    tokens.forEach(function (tk) {
+      if (/^\s+$/.test(tk)) { pendingSpace = cur !== ""; return; }
+      var gap = pendingSpace && cur ? 1 : 0;
+      if (cur && cur.length + gap + tk.length > per) { out.push(cur); cur = ""; gap = 0; }
+      cur = cur ? (gap ? cur + " " + tk : cur + tk) : tk;
+      pendingSpace = false;
+    });
+    if (cur) out.push(cur);
     if (out.length > maxLines) { out = out.slice(0, maxLines); out[maxLines - 1] = clipText(out[maxLines - 1] + "…", per + 1); }
     return out;
   }
@@ -1961,7 +1970,7 @@
   function llResolveId(params) { return resolveExchangeId(params, LL_DEFAULT_EX); }
   function llN(v) { return Math.round(v * 10) / 10; }
   function llCell(id, path, inner, title) { return cellG(id, path, "listing", inner, title); }
-  // CJK 按字数断行、拉丁按空格断行；最多 maxLines 行，超出末行省略号
+  // 混排 token 折行（CJK 逐字 / 拉丁整词，见 wrapByCharBudget）；最多 maxLines 行，超出末行省略号
   function llWrap(s, per, maxLines) { return wrapByCharBudget(s, per, maxLines); }
   // 时长 spec → { months, label } | { none: true } | null
   // bound（2026-09-05 迭代）：spec 声明 value 是上限/下限时标签加 ≤/≥ 前缀——
@@ -2299,7 +2308,7 @@
   // ══════════════════════════════════════════════
   var RM_DEFAULT_EX = "sg-sgx";
   function rmResolveId(params) { return resolveExchangeId(params, RM_DEFAULT_EX); }
-  // 折行：CJK 按字数、拉丁按单词，per 由可用像素反推（与 llWrap 同思路）。
+  // 折行：混排 token（CJK 逐字 / 拉丁整词，见 wrapByCharBudget），per 由可用像素反推。
   // innerW 传的是整卡宽 w，正文实际从 x+14 起排、右侧还要留白——扣 24px
   // （14 左内边距 + 10 右内边距），否则密排 CJK 长行会越过卡片右沿约 6px
   // （[ADR-061] 渲染层视觉修订，2026-09-03 审查反馈，几何实测）。
@@ -2467,8 +2476,8 @@
   // ══════════════════════════════════════════════
   var PT_DEFAULT_EX = "hk-hkex";
   function ptResolveId(params) { return resolveExchangeId(params, PT_DEFAULT_EX); }
-  // 折行：CJK 按字数、拉丁按单词，per 由可用像素反推（同 [ADR-061] rmWrap 思路，
-  // innerW 传整卡宽、扣 24px 左右内边距）。独立一份，便于各模块单独微调。
+  // 折行：混排 token（CJK 逐字 / 拉丁整词，见 wrapByCharBudget），per 由可用像素反推
+  // （同 rmWrap，innerW 传整卡宽、扣 24px 左右内边距）。独立一份，便于各模块单独微调。
   function ptWrap(text, innerW, maxLines) { return wrapByPixelWidth(text, innerW, maxLines); }
   // 一张信封卡（满宽 / 接入链节点共用）：有值 = 实心 + 左缘色条 + 角色头 + 折行正文；
   // 缺省 = 虚线框 + 角色头 + 居中斜体「未记录」。卡整体走 openCellOverlay。
@@ -2624,7 +2633,7 @@
     { path: "enforcement_note", lane: 2 }
   ];
   function rfResolveId(params) { return resolveExchangeId(params, RF_DEFAULT_EX); }
-  // 折行：同 rmWrap / ptWrap 思路（整卡宽扣 24px 内边距、CJK 按字数 / 拉丁按词、委托 llWrap）
+  // 折行：同 rmWrap / ptWrap（整卡宽扣 24px 内边距、混排 token 折行，见 wrapByCharBudget）
   function rfWrap(text, innerW, maxLines) { return wrapByPixelWidth(text, innerW, maxLines); }
   function rfConfWord(c) {
     return c === "high" ? t("有据可查", "documented")
