@@ -1,4 +1,6 @@
 # 澳大利亚证券交易所 Australian Securities Exchange (ASX) `au-asx`
+- `rba.gov.au` | 官方（货币当局——澳大利亚储备银行 RBA；2026-09-05 新增登记，[ADR-079] 风险旗标子棒） | en | ⚠️ 直连 curl 403（476B），经 wayback 快照（2021-02-18）取得原文；快照与现行 URL 同路径，正文为 RBA Education explainer 服务端渲染 | 澳元汇率制度（fx_risk_note 出处）
+  - Drivers of the Australian Dollar Exchange Rate（RBA 官方 explainer：Australia has a floating exchange rate，澳元汇率由外汇市场供求决定）: https://www.rba.gov.au/education/resources/explainers/drivers-of-the-aud-exchange-rate.html（HTTP 200，经 wayback 2021-02-18 快照，46KB）
 - `asx.com.au` | 官方 | en | curl + 常规浏览器 UA 全程 200，未见反爬或限流（连续 20+ 次请求无一次 403，比 SEC/FINRA/DTCC 好抓得多）；PDF 与 HTML 均可直抓 | ASX Group 母公司 ASX Limited 本身在自己的市场上市（自身股票代码 ASX），`group_id` 判断：ASX Group 下设 ASX Clear/ASX Settlement/ASX Clear (Futures)/Austraclear 等清算结算法人实体，但均非"计划收录的姊妹交易所"（不像 NYSE American/Arca 或 JPX 的大阪交易所那样是独立可比的交易市场实体），本文件不设 group_id；现货市场"ASX"与衍生品市场"ASX 24"（2006 年由 Sydney Futures Exchange 并入）均由同一持牌市场运营商 ASX Limited 运营，非分立法人，本文件聚焦现货股票市场（ASX 本身），ASX 24 仅在必要处提及
   - 监管框架总览: https://www.asx.com.au/about/regulation（HTTP 200，180KB）
   - ASX Group 集团架构: https://www.asx.com.au/about/asx-group.htm（HTTP 200，152KB）
