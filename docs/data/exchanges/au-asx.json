@@ -1221,6 +1221,17 @@
           "detail": null
         },
         "order_types": {
+          "spec": {
+            "limit": true,
+            "tif": [
+              "day",
+              "gtc",
+              "gtd",
+              "fok",
+              "ioc"
+            ],
+            "note": "市价转限价盘（Market-to-Limit：仅按对手方最优一档成交、余量按该价挂单）为第二类型，无独立市价盘；另有 GTT（指定时间前有效）未入受控 tif 词表；未指定 TIF 默认 GFD；期权 GTC/GTD/GTT 仅适用双时段期权"
+          },
           "zh": "两种订单类型：限价盘（Limit）——可扫单成交至限价、未成交部分挂单；「市价转限价」盘（Market-to-Limit）——仅按对手方最优一档价格成交，未成交部分以该价挂单；有效期（Time in Force）含GFD（当日有效）/GTC（取消前有效）/GTD（指定日期前有效）/GTT（指定时间前有效）/FOK（全额成交或取消）/IOC（即时成交、剩余取消）共六种，未指定TIF默认按GFD处理；期权的GTC/GTD/GTT仅适用于双时段期权，不适用于单时段的日内/隔夜期权",
           "en": "Two order types: Limit — sweeps resting liquidity up to its limit price, with unexecuted volume posted to the book; Market-to-Limit — executes only at the best opposing price level, with unexecuted volume posted at that price. Six Time in Force values: GFD (Day), GTC (Good Till Cancel), GTD (Good Till Date), GTT (Good Till Time), FOK (Fill or Kill), IOC (Immediate or Cancel); orders submitted with no TIF default to GFD. GTC/GTD/GTT are available only for dual-session options, not single-session Intraday/Overnight Options",
           "sources": [
@@ -1234,10 +1245,14 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "tick_size": {
+          "spec": {
+            "regime": "per_instrument",
+            "min_tick": 1,
+            "note": "SPI 200 期货 1 个指数点（A$25）为样本；其余产品各自独立设定，未整理成统一档位表"
+          },
           "zh": "以SPI 200股指期货为例，最小价格变动为1个指数点（A$25）；其余产品各自设有独立的最小变动单位（见合约规格表），本次未整理成统一档位表",
           "en": "Example (SPI 200 Index Futures): minimum price movement is one index point (A$25); other products each have their own minimum price movement (see contract specifications), not consolidated into a unified table this round",
           "sources": [
@@ -1251,7 +1266,6 @@
           "confidence": "medium",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "contract_specs_note": {
@@ -1290,6 +1304,12 @@
             "detail": null
           },
           "main_board": {
+            "spec": {
+              "type": "dynamic",
+              "band_pct": null,
+              "reference_window_min": 0.5,
+              "note": "AOT/NCR 参考价=现货月 30 秒滚动 VWAP（reference_window_min 0.5 即 30 秒；SPI 200 每 15 秒更新、其余每 30 秒）；QCR 区间下限 >0.5%、上限 <5%，超出 5% 进入 ETR 触发强制复核/撤销（ETR 事件见 volatility_interruption）"
+            },
             "zh": "以SPI 200股指期货为例，AOT/NCR参考价为现货月合约30秒滚动成交量加权均价（SPI 200每15秒更新一次，其余合约每30秒更新一次）；QCR（合格撤销区间）下限>0.5%、上限<5%，超出5%即进入ETR（极端成交区间），触发交易所对该笔成交的强制复核/撤销",
             "en": "For SPI 200 Index Futures, the AOT/NCR Reference Price is a rolling 30-second VWAP of the spot-month contract (updated every 15 seconds for SPI 200, every 30 seconds for other contracts); the Qualifying Cancellation Range (QCR) runs from >0.5% (lower) to <5% (upper), and the Extreme Trade Range (ETR) starts at 5% deviation, triggering the Market Operator's mandatory review/cancellation of the trade",
             "sources": [
@@ -1303,7 +1323,6 @@
             "confidence": "high",
             "verified": "2026-08-14",
             "enum": null,
-            "spec": null,
             "detail": null
           },
           "other_boards": {
@@ -1326,6 +1345,10 @@
         },
         "circuit_breaker": {
           "enum": "none",
+          "spec": {
+            "type": "none",
+            "note": "ASX 明文不使用熔断（现货与衍生品同）；价格异常走监管性暂停（Regulatory Halt）人工重置参考价，见 volatility_interruption；ASIC MIRs 统一覆盖全澳证券与期货市场"
+          },
           "zh": "ASX不对现货或衍生品市场使用「熔断」机制；ASIC统一《市场诚信规则》（MIRs）覆盖「全澳所有证券及期货市场」；ASX的衍生品市场以「监管性暂停」（Regulatory Halt）作为价格异常时人工重置参考价的工具，而非自动触发的熔断",
           "en": "ASX does not use 'circuit breakers' on either the cash or derivatives markets; ASIC's common Market Integrity Rules (MIRs) cover 'all securities and futures markets in Australia'; ASX's derivatives market instead uses a manually-invoked 'Regulatory Halt' to reset the reference price when prices become anomalous, rather than an automatic circuit breaker",
           "sources": [
@@ -1338,10 +1361,13 @@
           "quote": "ASX does not use circuit breakers like those employed by some other international exchanges. ASIC applies a common set of market integrity rules (MIRs) for all securities and futures markets in Australia that all local market operators and their participants are required to adhere to.",
           "confidence": "high",
           "verified": "2026-08-14",
-          "spec": null,
           "detail": null
         },
         "volatility_interruption": {
+          "spec": {
+            "auction_minutes": 2,
+            "note": "ETR 事件→监管性暂停（人工重置 ETR 参考价与区间，时长未定）→固定 2 分钟 Pre-Open→恢复 Open；该产品所有到期月与期权同步暂停"
+          },
           "zh": "触发条件：连续交易期间若NCR/AOT区间发生位移、导致成交将落入ETR（构成ASIC《市场诚信规则》下的「ETR事件」），交易所将启动监管性暂停（Regulatory Halt）以重置ETR参考价及ETR/NCR/AOT区间；暂停后固定进入2分钟的开市前（Pre-Open）状态，之后再恢复Open交易；暂停期间该产品名下所有到期月份的期货与期权合约同步暂停",
           "en": "Trigger: if, during continuous trading, the NCR/AOT range shifts such that trades would occur within the ETR (an 'ETR Event' under the ASIC Market Integrity Rules), the Market Operator applies a Regulatory Halt to reset the ETR Reference Price and the ETR/NCR/AOT ranges; a fixed 2-minute Pre-Open state follows before Open trading resumes; the halt applies simultaneously to all expiry months of futures and options for that product",
           "sources": [
@@ -1355,7 +1381,6 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "trading_halt_mechanism": {
@@ -1398,6 +1423,12 @@
           "detail": null
         },
         "market_maker_scheme": {
+          "spec": {
+            "present": true,
+            "quote_obligation": true,
+            "max_spread_pct": null,
+            "note": "按产品类别商业协议：Mini SPI 200 期货 80% 时间于最近四个月双边报价、价差 ≤1 指数点；SPI 200 期权月内 70% 时间报价（20 个系列持续报价占 50% + 回应询价占 50%）、最低 15 张"
+          },
           "zh": "ASX 24按产品类别设有正式的做市商安排（Market Maker Arrangements），由交易所与获委任做市商签订商业协议，规定报价时间占比、最低流动性与最大价差：以Mini SPI 200股指期货为例，要求在合约可交易时间的80%内于最近四个合约月持续双边报价，最优买卖价差不超过标的SPI 200股指期货1个指数点；SPI 200期权做市商则要求在一个日历月内累计70%时间提供报价（其中20个期权系列持续报价占50%时间、回应询价请求占50%时间），最低流动性15张合约",
           "en": "ASX 24 has formal Market Maker Arrangements by product category, under commercial agreements between ASX and appointed market makers specifying quoting-time percentage, minimum liquidity and maximum spread: for Mini SPI 200 Index Futures, market makers must generally provide continuous two-way quotes in the front four months for 80% of the time the contract is tradeable, with a best bid/offer spread no wider than 1 index point around the SPI 200 Index Futures contract; for Options on SPI 200 Index Futures, market makers must generally quote for an aggregate of 70% of the time in a calendar month (providing continuous quotes in 20 option series per class for 50% of the time, and responding to 50% of quote requests), with minimum liquidity of 15 contracts in an options series",
           "sources": [
@@ -1416,7 +1447,6 @@
           "confidence": "high",
           "verified": "2026-08-14",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "margin_practice_note": {
