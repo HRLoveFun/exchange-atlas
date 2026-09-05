@@ -3697,13 +3697,13 @@
       "field_path": "self_regulatory_org",
       "label_zh": "自律组织",
       "label_en": "Self-regulatory Organization",
-      "zh": "港交所本身兼具前线监管职能（对上市公司与交易参与者）",
-      "en": "Front-line regulation by HKEX",
+      "zh": "香港交易所是香港中央证券及衍生产品市场的营运机构，兼上市发行人（包括上市公司）的前线监管机构：监管上市发行人、执行上市/交易/结算规则，并主要在批发层面向交易所及结算所客户提供服务；证监会（SFC）为独立法定机构，负责监管市场、确保市场质素，直接监管的对象包括港交所本身，而收购、股份购回及私有化等上市公司事宜一概由证监会负责监管",
+      "en": "HKEX is the operator of Hong Kong's central securities and derivatives marketplace and the front-line regulator of listed issuers (including listed companies): it regulates listed issuers and administers listing, trading and clearing rules. The SFC is an independent statutory body that regulates the market and safeguards market integrity — its regulated parties include HKEX itself — and takeovers, share buy-backs and privatizations of listed companies are regulated by the SFC",
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
       "verified": "2026-08-12",
-      "confidence": "low"
+      "confidence": "high"
     },
     {
       "exchange_id": "hk-hkex",

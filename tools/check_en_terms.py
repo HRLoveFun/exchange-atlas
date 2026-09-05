@@ -17,8 +17,10 @@
 """
 import re
 import sys
+from pathlib import Path
 
-import data_files
+ROOT = Path(__file__).resolve().parent.parent
+DATA_DIR = ROOT / "data" / "exchanges"
 
 # 概念组：标准写法（house style，与 schema/glossary.yml 头注一致）→ 需要报告的偏离写法。
 # 每项 (正则, 说明)，正则用 \b 词界；默认**大小写敏感**（`Renminbi` 只想抓拼全称的那种，
@@ -58,7 +60,7 @@ EN_KEY_RE = re.compile(r"^\s*en:\s*(.+?)\s*$", re.M)
 
 
 def iter_en_values():
-    for path in data_files.exchange_paths():
+    for path in sorted(DATA_DIR.glob("*.yml")):
         text = path.read_text(encoding="utf-8")
         for m in EN_KEY_RE.finditer(text):
             line_no = text[: m.start()].count("\n") + 1

@@ -629,6 +629,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.holidays_note",
+      "label_zh": "节假日与特殊休市",
+      "label_en": "Holidays & Special Closures",
+      "volatility": "stable",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "au-asx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "derivatives.opening_mechanism",
       "label_zh": "开盘机制",
       "label_en": "Opening Mechanism",
@@ -1985,6 +1997,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.holidays_note",
+      "label_zh": "节假日与特殊休市",
+      "label_en": "Holidays & Special Closures",
+      "volatility": "stable",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "br-b3",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "derivatives.opening_mechanism",
       "label_zh": "开盘机制",
       "label_en": "Opening Mechanism",
@@ -2062,6 +2086,30 @@
       "label_en": "Type",
       "volatility": "moderate",
       "verified": "2026-08-16",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "br-b3",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.price_limits.main_board",
+      "label_zh": "主力合约幅度",
+      "label_en": "Main Contract Band",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "br-b3",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.price_limits.other_boards",
+      "label_zh": "其他合约幅度",
+      "label_en": "Other Contracts' Bands",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {
@@ -5669,6 +5717,18 @@
       "chapter": "participants",
       "chapter_label_zh": "市场参与者",
       "chapter_label_en": "Market Participants",
+      "field_path": "investor_structure",
+      "label_zh": "投资者结构",
+      "label_en": "Investor Structure",
+      "volatility": "moderate",
+      "verified": "2026-08-12",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "cn-sse",
+      "chapter": "participants",
+      "chapter_label_zh": "市场参与者",
+      "chapter_label_en": "Market Participants",
       "field_path": "account_opening_requirements",
       "label_zh": "开户要求",
       "label_en": "Account Opening Requirements",
@@ -5771,6 +5831,18 @@
       "volatility": "stable",
       "verified": "2026-08-12",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "cn-sse",
+      "chapter": "infrastructure",
+      "chapter_label_zh": "市场数据与技术基础设施",
+      "chapter_label_en": "Market Data & Technology Infrastructure",
+      "field_path": "trading_system_name",
+      "label_zh": "交易系统/撮合引擎",
+      "label_en": "Trading System",
+      "volatility": "stable",
+      "verified": "2026-08-12",
+      "confidence": "medium"
     },
     {
       "exchange_id": "cn-sse",
@@ -9737,6 +9809,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.holidays_note",
+      "label_zh": "节假日与特殊休市",
+      "label_en": "Holidays & Special Closures",
+      "volatility": "stable",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "fr-euronext",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "derivatives.opening_mechanism",
       "label_zh": "开盘机制",
       "label_en": "Opening Mechanism",
@@ -10493,6 +10577,18 @@
       "chapter": "overview",
       "chapter_label_zh": "基本信息",
       "chapter_label_en": "Overview",
+      "field_path": "history",
+      "label_zh": "历史沿革",
+      "label_en": "History",
+      "volatility": "stable",
+      "verified": "2026-08-12",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "hk-hkex",
+      "chapter": "overview",
+      "chapter_label_zh": "基本信息",
+      "chapter_label_en": "Overview",
       "field_path": "organization_form",
       "label_zh": "组织形式",
       "label_en": "Organization Form",
@@ -10558,7 +10654,7 @@
       "label_en": "Self-regulatory Organization",
       "volatility": "stable",
       "verified": "2026-08-12",
-      "confidence": "low"
+      "confidence": "high"
     },
     {
       "exchange_id": "hk-hkex",
@@ -10580,6 +10676,30 @@
       "field_path": "core_laws",
       "label_zh": "核心法律法规体系",
       "label_en": "Core Laws & Regulations",
+      "volatility": "moderate",
+      "verified": "2026-08-12",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "hk-hkex",
+      "chapter": "regulation",
+      "chapter_label_zh": "监管与法律环境",
+      "chapter_label_en": "Regulation & Legal Environment",
+      "field_path": "foreign_ownership_limit",
+      "label_zh": "外资准入与持股比例限制",
+      "label_en": "Foreign Ownership Limit",
+      "volatility": "moderate",
+      "verified": "2026-08-12",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "hk-hkex",
+      "chapter": "regulation",
+      "chapter_label_zh": "监管与法律环境",
+      "chapter_label_en": "Regulation & Legal Environment",
+      "field_path": "capital_controls",
+      "label_zh": "资本管制与外汇管制",
+      "label_en": "Capital & FX Controls",
       "volatility": "moderate",
       "verified": "2026-08-12",
       "confidence": "high"
@@ -11026,6 +11146,18 @@
       "label_en": "Night Session",
       "volatility": "moderate",
       "verified": "2026-08-12",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "hk-hkex",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.holidays_note",
+      "label_zh": "节假日与特殊休市",
+      "label_en": "Holidays & Special Closures",
+      "volatility": "stable",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {
@@ -11516,6 +11648,18 @@
       "field_path": "suitability_management",
       "label_zh": "适当性管理",
       "label_en": "Suitability Management",
+      "volatility": "moderate",
+      "verified": "2026-08-12",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "hk-hkex",
+      "chapter": "participants",
+      "chapter_label_zh": "市场参与者",
+      "chapter_label_en": "Market Participants",
+      "field_path": "foreign_access_channel",
+      "label_zh": "外资参与通道",
+      "label_en": "Foreign Access Channel",
       "volatility": "moderate",
       "verified": "2026-08-12",
       "confidence": "high"
@@ -19481,6 +19625,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "trading_sessions.pre_market",
+      "label_zh": "盘前",
+      "label_en": "Pre-market",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "uk-lse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "trading_sessions.continuous_am",
       "label_zh": "上午连续竞价",
       "label_en": "Morning Continuous",
@@ -19535,6 +19691,18 @@
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "uk-lse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "holidays_note",
+      "label_zh": "节假日与特殊休市",
+      "label_en": "Holidays & Special Closures",
+      "volatility": "stable",
+      "verified": "2026-08-14",
+      "confidence": "medium"
     },
     {
       "exchange_id": "uk-lse",
@@ -20171,6 +20339,18 @@
       "volatility": "stable",
       "verified": "2026-08-14",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "uk-lse",
+      "chapter": "infrastructure",
+      "chapter_label_zh": "市场数据与技术基础设施",
+      "chapter_label_en": "Market Data & Technology Infrastructure",
+      "field_path": "major_outage_history",
+      "label_zh": "历史系统故障事件",
+      "label_en": "Major Outage History",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
     },
     {
       "exchange_id": "uk-lse",
@@ -22139,6 +22319,18 @@
       "volatility": "moderate",
       "verified": "2026-08-13",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "participants",
+      "chapter_label_zh": "市场参与者",
+      "chapter_label_en": "Market Participants",
+      "field_path": "foreign_access_channel",
+      "label_zh": "外资参与通道",
+      "label_en": "Foreign Access Channel",
+      "volatility": "moderate",
+      "verified": "2026-08-13",
+      "confidence": "medium"
     },
     {
       "exchange_id": "us-nyse",

@@ -32,12 +32,14 @@ import threading
 from pathlib import Path
 from urllib.parse import urlparse
 
+import yaml
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import data_files
 import fetch as fetchmod  # noqa: E402 — 复用 wayback_snapshot + 拦截页嗅探正则，见 tools/fetch.py
 
 ROOT = Path(__file__).resolve().parent.parent
 CACHE = ROOT / ".cache"
+DATA = ROOT / "data" / "exchanges"
 
 BROWSER_UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
               "(KHTML, like Gecko) Chrome/124 Safari/537.36")
@@ -51,7 +53,7 @@ def slugify(url: str) -> str:
 
 
 def cited_urls(ex):
-    d = data_files.load_exchange(ex)
+    d = yaml.safe_load(open(DATA / f"{ex}.yml", encoding="utf-8"))
     out = []
     seen = set()
 
@@ -186,7 +188,7 @@ def main():
     ap.add_argument("--workers", type=int, default=16)
     args = ap.parse_args()
 
-    exs = [args.ex] if args.ex else data_files.exchange_ids()
+    exs = [args.ex] if args.ex else sorted(p.name[:-4] for p in DATA.glob("*.yml"))
 
     # 收集任务
     tasks = []  # (ex, url)

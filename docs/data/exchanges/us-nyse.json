@@ -1449,15 +1449,21 @@
         "spec": null
       },
       "foreign_access_channel": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：无类似QFII的额度审批制度，境外投资者可直接通过持牌经纪商开户——与上交所形成对比的重要字段，但未附具体来源核实是否存在其他限制（如特定行业外资审查CFIUS等），留空。",
+        "zh": "美国证券市场对外资无一般性准入限制与额度审批：境外投资者可直接在美国券商开立账户买卖 NYSE 上市证券；联邦层面的外资审查制度只覆盖一小部分可能危及国家安全的具体入境交易，公开市场证券的普通组合投资不在其列",
+        "en": "The U.S. securities market imposes no general restrictions or quota approvals on foreign investors: overseas investors may open accounts directly with U.S. broker-dealers to trade NYSE-listed securities; the federal foreign-investment review regime covers only a small share of inbound transactions that may pose a national-security risk, not ordinary portfolio purchases of publicly traded securities",
+        "detail": "由 low 坐实：官方口径出自国会研究服务处（CRS）《Foreign Direct Investment: Background and Issues》\n（IF10636.11）——「Traditionally, the United States has supported a rules-based and open investment\nenvironment」（开放投资环境的官方表述）与「the United States maintains a foreign investment review\nregime to review a small share of inbound transactions that may pose a risk to U.S. national security」\n（外资审查仅覆盖一小部分入境交易）两句均已在落盘 PDF 中逐字核对，quote 取后一句。\ncongress.gov 此前两次 403（见 PROJECT/sources/us-nyse.md v0.2 探测记录），本次用常规浏览器 UA 与\nFair Access UA 直连该 CRS PDF 直链均 200，登记结论已更新。CFIUS 具体例外情形（home.treasury.gov\n已登记页）本次未逐条展开。此前 detail 中的 CFIUS 草稿印象就此收口。\n",
+        "sources": [
+          {
+            "title": "Foreign Direct Investment: Background and Issues（CRS Report IF10636.11，国会官方研究出版物）PDF",
+            "url": "https://www.congress.gov/crs_external_products/IF/PDF/IF10636/IF10636.11.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "the United States maintains a foreign investment review regime to review a small share of inbound transactions that may pose a risk to U.S. national security; many other countries have such policies in place.",
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "membership_structure": {
         "zh": "会员组织（member organization）体系，须通过NYSE Regulation合规审查",
