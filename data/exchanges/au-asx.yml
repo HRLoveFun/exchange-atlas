@@ -594,6 +594,7 @@ market_structure:
   derivatives:
     trading_sessions:
       pre_market:
+        spec: {kind: pre_open_queue, note: "夜盘与日盘各次 Open 前均设 10 分钟，无固定钟点（随产品而定）；录入买卖盘不撮合，转 Open 后按均衡价格算法一次性撮合"}
         zh: "夜盘（Night Session）与日盘（Day Session）开盘前均设10分钟的「开市前」（Pre-Open）状态：期货/期权合约可在此期间录入买卖盘但不撮合成交，直至转入Open状态后按「均衡价格」（Auction Equilibrium Price）算法一次性撮合未成交余额"
         en: "Both the Night Session and Day Session are preceded by a 10-minute Pre-Open state: bids and offers for futures/option contracts may be entered but are not matched until the market transitions to the Open state, when unmatched auction interest is matched at the Auction Equilibrium Price"
         sources:
@@ -603,6 +604,7 @@ market_structure:
         quote: "Pre-Open: A period of 10 minutes prior to the Open in respect of a particular Futures Contract or Option Contract during which bids and offers may be entered into the system."
         confidence: high
       continuous_am:
+        spec: {start: "09:50", end: "16:30", kind: continuous, note: "日盘单一连续时段，无上午/下午拆分（SPI 200 代表样本，见 continuous_pm）"}
         zh: "无「上午/下午」之分：一个交易日（Trading Day）由夜盘（Night Session）与日盘（Day Session）两段组成，夜盘固定先于日盘，可跨越两个日历日；平台以XSFE/NZFX市场为例按24/6近乎全周运作，每周一最早06:20开始首个产品的开市前时段，每周六08:00最后一个产品收盘"
         en: "There is no literal AM/PM split: a Trading Day consists of two sessions — a Night Session that always precedes a Day Session — which can span two calendar days; the Trading Platform operates the XSFE and NZFX markets on a near-continuous 24/6 basis, with the first product's Pre-Open as early as 06:20 each Monday and the last product closing at 08:00 each Saturday"
         sources:
@@ -612,6 +614,7 @@ market_structure:
         quote: "The Trading Platform will operate the XSFE and NZFX markets on a 24/6 basis, with the first product pre-opening at 06:20 each Monday and the last product closing at 08:00 each Saturday. A Trading Day cycle consists of two trading sessions – a Night Session which always precedes a Day Session – on the same Trading Day but across consecutive business days."
         confidence: high
       lunch_break:
+        spec: {kind: none, note: "日盘内部单一连续时段"}
         zh: "日盘（Day Session）内部为单一连续交易时段，未见独立午休安排"
         en: "The Day Session is a single continuous trading block; no separate lunch break was found"
         detail: "推断依据：ASX 24合约规格表将日盘列为单一连续区间（如SPI 200为9.50am–4.30pm一段式，中间无间断记录），未见专门声明「无午休」的原文，confidence相应降级，做法与本文件顶层market_structure.lunch_break一致。"
@@ -621,6 +624,7 @@ market_structure:
             accessed: 2026-08-18
         confidence: medium
       continuous_pm:
+        spec: {kind: none, note: "日盘为单一连续时段（SPI 200 代表样本 9:50-16:30），见 continuous_am"}
         zh: "日盘（Day Session）时段：以SPI 200股指期货为例，9.50am–4.30pm（悉尼时间）"
         en: "Day Session: for SPI 200 Index Futures, 9.50am–4.30pm Sydney time"
         sources:
@@ -630,6 +634,7 @@ market_structure:
         quote: "5.10pm – 7.00am and 9.50am – 4.30pm"
         confidence: high
       after_market:
+        spec: {kind: none, note: "日盘 Close 后进入 Maintenance（清算/换日）状态，随即衔接下一次夜盘 Pre-Open"}
         zh: "无独立的「盘后」连续交易时段；日盘Close之后进入Maintenance（清算/换日）状态，随即衔接下一次夜盘的Pre-Open"
         en: "There is no separate after-hours continuous trading session; after the Day Session's Close, the platform enters a Maintenance state (order purge / Trade Date roll) before the next Night Session's Pre-Open begins"
         sources:
@@ -639,6 +644,7 @@ market_structure:
         quote: "Maintenance: Relevant orders are purged. Expired instruments are deleted (including day only UDC contracts) and new instruments are added, the trading business day is incremented and pre-trade risk limits are reset."
         confidence: high
       night_session:
+        spec: {start: "17:10", end: "07:00", kind: night, note: "SPI 200 代表样本，夏令时（悉尼时间）止于次日 07:00、非夏令时 08:00；夜盘固定先于日盘，与日盘共同构成一个交易日"}
         zh: "夜盘（Night Session）时段：以SPI 200股指期货为例，夏令时（每年3月第二个周日至11月第一个周日）为5.10pm–次日7.00am，非夏令时为5.10pm–次日8.00am（均为悉尼时间）；夜盘固定先于日盘，与日盘共同构成一个交易日"
         en: "Night Session: for SPI 200 Index Futures, 5.10pm to 7.00am the next day during daylight saving (second Sunday in March to first Sunday in November), or to 8.00am the next day outside daylight saving (Sydney time); the Night Session always precedes the Day Session within a Trading Day"
         sources:
@@ -664,6 +670,7 @@ market_structure:
       verified: 2026-09-05
 
     opening_mechanism:
+      spec: {type: call_auction, note: "Pre-Open 未成交竞价盘转 Open 后按均衡价格（EP）算法一次性撮合：依次按最大成交量→最小剩余量→市场压力方向→参照前一成交/结算价四步择定均衡价"}
       zh: "开市前（Pre-Open）时段结束后转入Open状态，未成交的竞价盘按「均衡价格」（Equilibrium Price, EP）算法一次性撮合：算法依次以（1）最大成交量、（2）最小剩余量、（3）市场压力方向（买卖盈余符号）、（4）参照前一成交/结算价 四步择定均衡价"
       en: "After the Pre-Open state, the market transitions to Open, where unmatched auction orders are matched at an Equilibrium Price (EP) determined by a four-step algorithm: (1) maximum matched volume, (2) minimum surplus, (3) market pressure (the sign of the surplus), (4) reference to the last traded/settlement price"
       sources:
@@ -674,6 +681,7 @@ market_structure:
       confidence: high
 
     closing_mechanism:
+      spec: {type: continuous_to_close, note: "无收盘集合竞价（不同于现货市场的 CSPA）；Close 即当日交易结束，结算价按各合约方法论确定（未逐一核实）"}
       zh: "无独立的收盘集合竞价机制（不同于现货市场的CSPA）：Close状态仅代表当日交易结束，不再接受新订单或修改；各合约当日结算价按各自方法论确定（视产品而异，本轮未逐一核实），随后进入Maintenance完成清算与换日"
       en: "There is no dedicated closing auction (unlike the cash market's CSPA): the Close state simply means trading for the day has ended and no further order entry or modification is accepted; each contract's daily settlement price is determined by its own product-specific methodology (not exhaustively verified this round), after which the platform enters Maintenance to clear and roll to the next Trade Date"
       sources:
