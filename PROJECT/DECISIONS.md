@@ -2619,3 +2619,23 @@ print('全库 medium 零 sources:',n)
 **没定 / 留后续：** 13 处降级字段待人工投喂（OQ #47）；`us` 两家 settlement_currency 的 DTCC NSCC 原文、`uk` CREST Rules（euroclear.com 403）是下次优先入口。
 
 **日期：** 2026-09-05
+### ADR-PENDING-phase3-closeout — Phase 3「其余章节可视化」收口认定 + Phase 4 启动前置条件达成
+
+**背景：** [ADR-057] #4 把 Phase 4（单页画布合并）的启动定为**硬前置**：Phase 3 的全部章节可视化模块均已落地，在此之前不动前端做画布布局。截至 2026-09-06，六个模块的渲染层与配套数据棒已全部完成——成本瀑布（[ADR-045] 数据 / [ADR-047] 渲染 / [ADR-054] 独立复核 / [ADR-071] 迭代）、交割管线（[ADR-048] 设计 / [ADR-050] 数据 / [ADR-051] 渲染）、上市生命周期（[ADR-059] 三棒做齐 / [ADR-091] 迭代收口）、监管图（[ADR-061]）、参与者图（[ADR-064]）、风险旗标（[ADR-066] 设计+渲染 / [ADR-079] 数据子棒 28/28 执行 + 独立复核 0 FIX）。另有市场机制剖面现货/衍生品业务线切换（[ADR-090]）、四模块共用折行 token 化（[ADR-093]）等穿插迭代。ROADMAP §三 Phase 3 顶层条目下所有子棒均为 `[x]`、各棒退出验收（`make build` 全绿、该走的独立复核已走）已在其各自 ADR 记录，只剩顶层复选框与「Phase 4 是否就此启动」的拍板——[ADR-066] 文末与 ROADMAP §一 明确把这一步留给用户 / 合并协调者按 §一 拍板，不由执行会话自行宣布（记忆 `v2-visualization-pivot` 亦记「渲染层口径早满足 [ADR-057] #4，别自作主张宣布解锁」）。用户 2026-09-06 拍板。
+
+**定了什么：**
+
+1. **Phase 3「其余章节可视化」认定完成**，ROADMAP §三顶层条目打勾。判据 = [ADR-057] merge-ready 清单要求的六个章节可视化模块渲染层全部落地 + 风险旗标数据子棒收口，且每一项的退出验收已在其 ADR 有可核查记录。
+2. **Phase 4 启动硬前置（[ADR-057] #4）达成**，Phase 4 转为**可启动**状态。Phase 4 本体——画布整体布局形态（纵向滚动 / 缩放平移 / 分区网格）、「更多」入口形态、各模块排序与常驻 / 折叠策略、路由深链兼容——仍未开工，ROADMAP 复选框保持 `[ ]`，留启动时 Q&A 定稿（[ADR-057]「本条不做」段原样有效）。
+3. **本条纯收口回写，零 `data/` / `schema/` / 前端改动。** Phase 3 各棒的实体交付已在其 ADR 完成，本条只提供「阶段完成 + 下一阶段解锁」的可引用落点，供无记忆会话读 ROADMAP §三 / DECISIONS 时确认当前活跃阶段是 Phase 4。
+
+**没做：**
+
+- **不启动 Phase 4 前端画布工作**——那是下一个会话的事，且需要一轮 Q&A（[ADR-057]）。
+- **不改 ROADMAP §一**——后台任务纪律（[ADR-069]），完成便签写进 `ROADMAP-INBOX.md`，由合并协调者折进 §一「下一步」/「最近完成」。
+- **不动 Phase 3 各棒遗留的视觉迭代项**（ROADMAP §一 item 3：成本瀑布留白 / 交割管线深色层 / 上市生命周期中英混排等）——[ADR-057] #4 的口径是「模块落地」不是「视觉零遗留」，这些转交互式会话推进、不阻断 Phase 4。
+- **不新增机器校验**——本条不引入新结构或不变式（[CLAUDE.md §四]），纯文档状态回写。
+
+**验证：** 纯文档。改 `PROJECT/ROADMAP.md`（§三 Phase 3 顶层条目 `[x]` + Phase 4「前置条件达成」子条目）+ `PROJECT/DECISIONS.md`（本条）+ `PROJECT/ROADMAP-INBOX.md`（§一 折叠便签）。`make build` **exit 0**（`selfcheck` 101、`validate` 0 错误 / 3 警告〔均为本分支 `ADR-PENDING-phase3-closeout` 占位符，合并后 adr-heal 定号并补 `ADR-LEDGER.md` 登记行〕、`verify_quotes` FAIL=0、`check_ui_i18n` / `check_no_chapter_ordinals` / `check_no_dup_render_helpers` / `check_wrap_mixed` OK），`make sync` 二次幂等、`data/` 与 `docs/data/` 及生成块零 diff（三个文件内容均不被 `sync.py` 扫描；本条为 `ADR-PENDING-*` 占位符，不进 adr-index 编号索引）。
+
+**日期：** 2026-09-06
