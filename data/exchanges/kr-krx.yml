@@ -1455,14 +1455,15 @@ risks:
     confidence: low
 
   fx_risk_note:
-    zh: "外汇风险：韩元(KRW)为自由兑换货币、资本账户开放（见 capital_controls），但历史上波动较大，外资进出与汇率联动会放大股市波动；非居民需承担以KRW结算的汇率风险，且无专门对冲义务。美元加息/避险情绪升温时韩元易走弱、外资流出，形成股汇双杀风险。"
-    en: "FX risk: the Korean won (KRW) is freely convertible with an open capital account (see capital_controls), but has historically been volatile; foreign inflows/outflows and exchange-rate moves are correlated and can amplify equity volatility. Non-residents bear KRW-settlement currency risk with no dedicated hedging obligation. In USD-tightening or risk-off episodes the won tends to weaken and foreigners to exit, creating coincident equity-FX pressure."
+    zh: "韩国汇率制度于 1997 年 12 月转向自由浮动：银行间汇率日波动区间被取消，汇率原则上由境内外汇市场供求的相互作用决定（韩国银行官方 Exchange Rate System 说明，见 sources）。对非韩元投资者：韩股以韩元计价结算，承担韩元兑投资者本币的汇率风险；资本账户开放与外资参与渠道属资金跨境议题，见 capital_controls"
+    en: "Korea's exchange rate system shifted to a free-floating system in December 1997, when the daily fluctuation limits for the interbank exchange rate were abolished — the won rate is, in principle, determined by the interplay of foreign exchange supply and demand in the domestic market (BOK official Exchange Rate System overview, see sources). For non-KRW investors: Korean-listed securities are denominated and settled in KRW, carrying KRW exchange-rate risk against the investor's currency; capital-account openness and foreign-participation channels are covered in capital_controls"
+    quote: "In December 1997, the daily fluctuation limits for the interbank exchange rate were abolished and, thus, Korea's exchange rate system was shifted to a free-floating system."
     sources:
-      - title: Foreign Investor Registration Requirement to be Abolished in Korea（FSC，资本账户开放）
-        url: https://www.fsc.go.kr/eng/pr010101/80123
-        accessed: 2026-08-27
-    quote: ""
-    confidence: low
+      - title: "Foreign Exchange System — Exchange Rate System（韩国银行 BOK 官方说明，自由浮动制沿革与波幅表）"
+        url: https://www.bok.or.kr/eng/main/contents.do?menuNo=400186
+        accessed: 2026-09-05
+    confidence: high
+    verified: 2026-09-05
 
   political_risk_note:
     zh: "政治/政策风险：韩国历任政府频繁调整资本市场税制——2024年底废除「金融投资所得税」(FIIT)、2026年又将证券交易税由免税恢复为0.20%，政策反复增加了税负预期的不确定性；此外「韩国折价」(Korea Discount)部分源于外资对韩股治理、外资持股限制（33只关键行业股有上限）与信息披露透明度（曾阻碍MSCI升级）的担忧。监管改革（如大股东强制卖出、夜盘引入）亦可能短期扰动。"
