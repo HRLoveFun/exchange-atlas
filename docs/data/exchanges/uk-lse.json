@@ -1725,15 +1725,21 @@
     },
     "costs": {
       "commission_structure": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "英国经纪商向客户收取的佣金由市场自行竞争定价，交易所自身规则未见对经纪商佣金水平的直接规定——与NYSE的情形类似，本次未找到LSE/FCA对此的专门表述，留空不硬凑。",
+        "zh": "LSE 不向投资者收取佣金、也不规定经纪佣金费率：交易所自身收费仅面向会员与参与人（交易费按月度累计成交额分档、发行人上市费另计，见 exchange_fees 的官方价格表）；投资者支付的经纪佣金由券商与客户自行协商定价（此句为基于交易所收费结构边界的推断，未找到 LSE/FCA 的专门官方表述，如实标注）",
+        "en": "LSE charges no investor commissions and sets no brokerage commission rates: the Exchange's own charges are payable only by members and participants (tiered monthly trading fees plus issuer admission fees — see the official price list under exchange_fees); brokerage commissions paid by investors are negotiated with brokers (this latter statement is an inference from the exchange's fee-structure boundary — no dedicated LSE/FCA statement was found, and it is flagged as such)",
+        "detail": "与 us-nyse/hk-hkex 等同族字段处理一致：交易所收费与经纪佣金分属两类；英国端『券商自主定价』一句无专门官方原文，比照 1975 年美国 May Day 类制度节点在英国端未检索到对应文件，保持推断标注而非佯装已核实。",
+        "sources": [
+          {
+            "title": "Trading Services Price List（Excludes TRADEcho），Effective 01 January 2025（官网 PDF，收费对象为会员/参与人）",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/trading-services-price-list-january-2025.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "Trading Services Price List (Excludes TRADEcho)",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "exchange_fees": {
         "spec": {
@@ -1842,15 +1848,21 @@
         "enum": null
       },
       "financial_transaction_tax": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "英国未见另设独立于印花税/SDRT之外的广义金融交易税；但本次来源（HMRC研究报告）本身聚焦印花税/SDRT，未见对“是否存在其他金融交易税”的专门排除性声明，为避免“未提及即等于不存在”的过度推断，本字段留空而非断言“无”，与stamp_duty字段分开处理。",
+        "zh": "英国对证券买卖不另设独立于印花税体系之外的金融交易税（FTT）：官方口径下购买股票所涉及的税种即为印花税或储备税（Stamp Duty / Stamp Duty Reserve Tax，对购入应课税股票按 0.5% 征收，见 stamp_duty 字段）——HMRC 官方页在「买股票要缴什么税」的条目下仅列举 SDRT/Stamp Duty 两项，无第三种交易税；欧盟 FTT 因脱欧不适用于英国交易",
+        "en": "The UK levies no financial transaction tax separate from its stamp-duty system: per the official guidance, the taxes on buying shares are precisely Stamp Duty Reserve Tax (SDRT) or Stamp Duty (0.5% on chargeable purchases — see the stamp_duty field); HMRC's official page lists only these two instruments under taxes payable when buying shares, and the EU FTT does not apply to UK transactions post-Brexit",
+        "detail": "由留空转为本口径的依据升级：gov.uk「Tax when you buy shares」页给出『买股票涉及的税』的官方枚举（仅 SDRT/Stamp Duty），足以作为『无另设 FTT』的正面依据而非『未提及即不存在』；脱欧后 EU FTT 不适用为公开法律事实，作为背景写入 detail 而非主论断。原留空记录的谨慎理由保留于 git 历史。",
+        "sources": [
+          {
+            "title": "Tax when you buy shares（gov.uk / HMRC 官方页，购买股票税种的官方枚举）",
+            "url": "https://www.gov.uk/tax-buy-shares",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "Stamp Duty Reserve Tax (SDRT) or Stamp Duty when you buy shares electronically or using a stock transfer form",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "capital_gains_tax": {
         "zh": "2026/27纳税年度（2026年4月6日起）个人股票资本利得税：落在基本税率所得区间内的部分按18%征收，超出基本税率所得区间的部分按24%征收（2024年10月30日预算案起，股票与其他非房产资产已与住宅物业统一适用同一档税率，此前股票适用更低的10%/20%）；年度免税额（Annual Exempt Amount）为£3,000/人；个人经营性公司股份处置符合条件的可适用「企业资产处置减免」（Business Asset Disposal Relief），税率自2025年4月6日起为14%，2026年4月6日起进一步升至18%",
@@ -1870,15 +1882,21 @@
         "spec": null
       },
       "dividend_withholding_tax": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "常识印象：英国境内公司股息通常无预扣税（不同于多数司法辖区的常见做法），但本次抓取范围（gov.uk印花税页）未涉及股息预扣税主题，未找到当次可引用的官方原文，按铁律不采纳未核实的印象，留空，见 OPEN-QUESTIONS。",
+        "zh": "英国对股息不设源头预扣：HMRC 官方 helpsheet（HS300）明确非居民取得的英国投资收入「税负以源头扣缴额为限」，且英国公司股息列为「disregarded income」（不计入该限额计算的收入）——支付时不作源头扣缴，非居民实际不因英国股息在英国被预扣税款；居民个人的股息税通过年度申报/自我评估解决，与预扣机制无关",
+        "en": "The UK operates no withholding on dividends: HMRC's official helpsheet (HS300) states that for non-residents the tax charge on UK investment income is restricted to the amount of tax deducted at source, and UK company dividends are 'disregarded income' — dividends are paid gross with no deduction at source, so non-residents suffer no UK withholding on UK dividends; resident individuals settle dividend tax via self-assessment, unrelated to any withholding mechanism",
+        "detail": "原留空记录（『常识印象：英国股息通常无预扣』）本次以 HMRC HS300 一手坐实——『restricted to the amount of tax, if any, deducted at source』与『disregarded income includes ... dividends from UK companies』两处条文合成『无预扣』的正面依据。",
+        "sources": [
+          {
+            "title": "HS300 Non-residents and investment income (2025)（HMRC 官方 helpsheet，非居民投资收入税负限制与 disregarded income 列举）",
+            "url": "https://www.gov.uk/government/publications/non-residents-and-investment-income-hs300-self-assessment-helpsheet/hs300-non-residents-and-investment-income-2025",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "the tax charge for non-residents on investment income arising in the UK is restricted to the amount of tax, if any, deducted at source. ... dividends from UK companies",
+        "confidence": "medium",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "implicit_costs_note": {
         "zh": "买卖价差（隐性成本的主要构成之一）在报价驱动品种上受交易所规则直接约束：注册做市商提供的可执行报价（Executable Quote）买卖价差须不小于一个最小报价单位（tick size），且不得超过就该证券设定的「最大价差百分比」（超出上限的报价会被系统拒绝，除非窄于「最大价差下限」）；具体的最大价差百分比数值定义在未抓取的Business Parameters文档内（与tick_size字段面临的数据缺口相同）",
