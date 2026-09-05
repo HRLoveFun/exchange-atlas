@@ -95,6 +95,7 @@
 - ADR-088 · 2026-09-05 · `make check` 输出 stale 字段复核清单（数据空缺复核轨任务五③收尾）
 - ADR-089 · 2026-09-05 · 任务三附·衍生品 spec 回填落地（130 处两批 + 各自独立复核）+ 两处形状词汇演进
 - ADR-090 · 2026-09-05 · 市场机制剖面：现货 / 衍生品业务线切换（渲染层落地）
+- ADR-091 · 2026-09-05 · 上市生命周期模块迭代：8 个时长 spec 独立复核订正 + 时长 spec 扩容 8 处（含 `bound` 口径键）+ 散文块折行与停复牌 ↻ 视觉修订
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2538,5 +2539,21 @@ print('全库 medium 零 sources:',n)
 - 衍生品时段含夜盘 AHT 的所（`hk-hkex` 到次日 03:00）x 轴左端出现空白晨段——与现货侧夜盘所同源的既有 `tdBuild` 时段包络行为，非本条引入。
 
 **验证：** `make build` 全绿（`selfcheck` 93、`validate` 20 家 0/0、`verify_quotes` FAIL=0〔CACHE_MISS 为本 worktree 无 `.cache/` 的信息态，[ADR-053]〕、`check_ui_i18n` / `check_no_chapter_ordinals` / `check_no_dup_render_helpers` OK）；`make sync` 幂等，`git diff` 仅 `app.js` + `styles.css` + 本 ADR + ROADMAP，`docs/data/` 与 8 处生成块零 diff。Chrome headless 核对：`hk-hkex`（现货 / 衍生品 / 英文 / 暗色 / 透视 / 就地切换不重载）、`kr-krx`（stepwise + 英文暗色）、`br-b3`（index_level 熔断）、`au-asx`（`type:none`）、`sg-sgx`（最稀疏，7 spec）、`za-jse`（±8% 墙 + 「参考价」零轴）、`in-nse`（英文 + `prev_settlement`）、`cn-szse`（期权公式型）、`fr-euronext`、`cn-sse`（无子块 → 无控件）、`de-eurex`（纯衍生品 banner 不变）——控件 / banner / 标题 / chip 组 / 出处浮层路径 / 持久化 / 无 `.td-wrap` 嵌套均符合预期；矩阵 280 `<td>`、成本瀑布、交割管线三视图无回归。
+
+**日期：** 2026-09-05
+
+---
+
+### ADR-091 — 上市生命周期模块迭代：8 个时长 spec 独立复核订正 + 时长 spec 扩容 8 处（含 `bound` 口径键）+ 散文块折行与停复牌 ↻ 视觉修订
+
+**背景：** [ADR-059] 渲染层收尾时挂了三个已知局限 / 待办（ROADMAP §一 #3）：① 有散文无 spec 的阶段块内文字是按块宽估字数的单行硬裁剪（"This field captur…"式词中截断）；② 停复牌 `↻` 字形偏淡；③ 8 个时长 spec（`listing_process_duration` 5 家 + `delisting_transition_period` 3 家）的语义忠实度未经第二人独立复核、且其余 12 家 spec 缺省。本条把三件事一次做齐。
+
+**① 第二人独立复核（[ADR-081] 独立视角，全新上下文 agent 盲审，离线 spec-vs-quote 六维度 + `.cache/` 原文抽查 7 条）** —— 初检：格子级 40/48 PASS（83.3%）、行级 5/8 全 PASS（62.5%），**远低于 §四 95% 阈值，再次验证「make check 全绿 ≠ 语义忠实」**。3 FAIL 的共同根因是**数字真、语义错位**：`br-b3` 把 Annex A 时限表两个不同阶段的数字（初审 12、First Service 39）重组为「按 CVM 注册路径分」的两条总时长（原表 39 与注册路径无关，"prior registration" 全缓存 0 命中）；`fr-euronext` 把奥斯陆市场（Oslo Børs / Euronext Expand）流程表的 "Normal duration 8 weeks" 冠给「受监管市场（Euronext）」全市场；`kr-krx` 把 45 个工作日的适用主体从「已在 KRX 指定海外市场上市主体的二次上市」写成「国内企业」。**机器盲区实录**：verify_quotes 的 14 字符滑窗 + 5b 数值反查拦不住这类错——quote 片段逐字真、数字逐字真，错的只是拼合语义；语义忠实度只能靠独立复核（与 [ADR-054] 的教训同构）。处置：`br-b3` 按 Annex A 阶段表如实重写（`value: null` + 阶段明细进 note/zh/en，quote 重摘覆盖各阶段数字）；`fr-euronext` 归属订正（value 8 周保留但 note 限定「仅奥斯陆流程表数字」）；`kr-krx` 主体订正；2 QUESTION（`br-b3` 退市 30 天原文未区分日历日/营业日 → note 补口径；`sa-tadawul` 引用的 Baker McKenzie 页缓存为 404 notfound 页 → 语义通过、出处待重抓转 OPEN-QUESTIONS）。
+
+**② 时长 spec 扩容 8 处（`us-nyse` 14 工作日 / `us-nasdaq` 4–6 周 / `ch-six` ≤4 周 + 审查期 20/10 日历日 / `cn-sse` ≤3 个月 / `cn-szse` ≤3 个月 + 首轮问询 20 工作日 / `jp-jpx` ≈4 个月与监理+整理合计 6 个月 / `de-xetra` 撤销 Prime Standard 三个月）** —— 全部从既有已核实 quote 结构化、零新抓取。确立**个位数转写口径**：quote 把数字拼写成英文单词 / 中文数字（"about four months"「三个月」）时，个位数 `value` 可人工转写填入——`numbers_in` 对个位数豁免 5b（设计如此，T+0/T+1 记号噪声），quote 本身是逐字锚点，与 [ADR-071] `rate_raw` 的「人工转写 + 原文锚点」精神一致；**≥2 位数字仍必须有含阿拉伯数字的一手 quote**（5b 逐字反查硬关卡，`cn-szse` 退市整理期「十五个交易日」、`kr-krx` 7 个交易日整理卖出仍被挡，OQ 待补源不变）。 Schema/校验器配套（[CLAUDE.md §四] 新不变式机器化）：`listing_duration` 形状加 `bound: upper|lower` 键（value 口径为上限/下限——防「no more than 40」被读成「恰好 40」，即本次复核 D4 维度的数据侧承载）+ `validate.py` 值域校验；`value: null` 合法化（分阶段时限 / 多路径、无单一总时长时，如 br-b3）；`schema/spec.yml` 注释同步改写「拼写数字 → spec 缺省」旧口径。触及 16 个字段 < §四 30 字段门槛，协调者逐条自检。
+
+**③ 渲染层视觉迭代（纯前端两文件）** —— ① 散文无 spec 阶段块由单行 `spClip` 硬裁剪改为 `wrapByPixelWidth` 按像素宽度折 3 行（词边界折行，全文仍在 `<title>` + 浮层）；② 停复牌 `↻` 加 `--warn-soft` 圆底 + 描边、字形加大一号，暗色主题下不再偏淡（[ADR-059] 已知局限②）；③ `llDurInfo` 按 `spec.bound` 给标签加 `≤`/`≥` 前缀（hk-hkex「≤ 40 个工作日」、uk-lse「≥ 20 个工作日」），上限/下限不再被渲染成固定值——这是 ①复核 D4 维度与 ②扩容口径在渲染侧的共同落点。
+
+**验证：** `make build` 全绿（`selfcheck` 93、`validate` 20 家 0/0、`verify_quotes` OK=1087 / FAIL=0、`check_ui_i18n` / `check_no_chapter_ordinals` / `check_no_dup_render_helpers` OK）、`make sync` 幂等；Chrome headless 核对 `hk-hkex`（≤ 40 个工作日 + ↻ 底圈）/ `us-nyse`（新增 ≤ 14 个工作日填充条）/ `uk-lse`（≥ 20 个工作日）/ `jp-jpx`（≈ 4 个月）/ `br-b3`（null-spec 散文块 3 行折行 + ↻ 底圈）/ `za-jse`（无 spec 散文折行）——bound 前缀、底圈、折行均符合预期。**已知局限**：① `cn-szse` 退市整理期 15 个交易日 / `kr-krx` 整理卖出 7 个交易日仍被 5b 挡在 spec 外（需含阿拉伯数字一手源，OQ 待补）；② `sa-tadawul` listing quote 出处缓存为 404 页待重抓；③ `au-asx`（≈5 个月，来源缓存非 manifest 在册）未结构化。**过程坑（共享检出并行事故同类，[ADR-086]）**：并行会话提交时把本会话已再生的 `docs/data` 中间态扫进其 commit，事后由其自行 revert（e7bf540）——本条 yml 落库后生成块恢复一致。
 
 **日期：** 2026-09-05
