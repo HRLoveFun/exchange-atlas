@@ -929,16 +929,34 @@ clearing:
     confidence: high
 
   initial_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "LCH Ltd 对 EquityClear 清算会员收取初始保证金：清算所要求清算会员就其初始保证金义务向清算所划转抵押品，金额由清算所按 LCH ERA 算法计算确定；初始与变动保证金对会员自营账户、各客户账户（间接总额账户除外）及间接总额子账户分别计算，自营与客户账户之间、客户账户相互之间不得抵销（Default Rules 及不足资源裁定规则规定情形除外）"
+    en: "LCH Ltd collects initial margin from EquityClearing Members: the Clearing House requires members to transfer Collateral in respect of their initial margin obligations, the amount being determined by the Clearing House using the LCH ERA algorithm; initial and variation margin are calculated separately for a member's Proprietary Account, each Client Account (other than an Indirect Gross Account) and each Indirect Gross Sub-Account, with no offset between proprietary and client accounts or between client accounts (except as allowed under the Default Rules or any Insufficient Resources Determination Rule)"
+    sources:
+      - title: "LCH Ltd Clearing House Procedures — EquityClear Service（清算所官方程序手册 PDF，2026年8月版，1.5.1 初始保证金 / 1.5 Margin and Collateral）"
+        url: https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/rulebooks/lch-ltd/section-2d-equityclear-service.pdf
+        accessed: 2026-09-05
+    quote: "The Clearing House will require Equities Clearing Members to transfer Collateral in respect of their initial margin obligations to the Clearing House. The Clearing House will determine the initial margin obligations of an Equities Clearing Member, which is (without limitation to the Clearing House’s rights under Regulation 20) the amount calculated by the Clearing House using the LCH ERA algorithm. ... Separate initial and variation margin calculations are performed for an Equities Clearing Member's Proprietary Account, each Client Account (other than an Indirect Gross Account) and each Indirect Gross Sub-Account within an Indirect Gross Account. No offset between the Proprietary Accounts and Client Accounts is allowed (except pursuant to Rule 8(d) of the Default Rules or any Insufficient Resources Determination Rule)"
+    confidence: high
 
   maintenance_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "LCH 不设与初始保证金分离的『维持保证金』阈值——替代机制是清算所于日内多个时点计算各清算会员的初始与变动保证金要求，会员在清算所的抵押品不足时即发出盘中 PPS 追保（intra-day PPS call），会员须在日内任一时点都具备满足 PPS 追保的能力"
+    en: "LCH has no separate maintenance margin threshold distinct from initial margin — instead, the Clearing House calculates each member's initial and variation margin requirement at several points throughout the day and issues an intra-day PPS call when a member's Collateral with the Clearing House is insufficient; members must be in a position to meet a PPS call at any point throughout the day"
+    sources:
+      - title: "LCH Ltd Clearing House Procedures — EquityClear Service（清算所官方程序手册 PDF，1.5.6 Intra-day Margin Calls）"
+        url: https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/rulebooks/lch-ltd/section-2d-equityclear-service.pdf
+        accessed: 2026-09-05
+    quote: "The Clearing House will calculate each Equities Clearing Member's initial and variation margin requirement at several points throughout the day. In the event that an Equities Clearing Member has insufficient Collateral with the Clearing House an intra-day PPS call will be issued. Equities Clearing Members should ensure that they are, at any point throughout the day, in a position to meet a PPS call."
+    confidence: medium
 
   mark_to_market_frequency:
-    zh: ""
-    confidence: low
+    zh: "逐日盯市经变动保证金（variation margin）实现：每个未平仓股票合约自成交时价值到当前市值的变动即为变动保证金，以非实现/或然形式（贷记或借记记入清算会员账户）计算；因交收周期导致的变动保证金阶跃，清算所会在临近交收时限制贷记变动保证金的使用（限制可持续至交收违约解决）；日内清算所还按多个时点计算初始与变动保证金要求"
+    en: "Daily mark-to-market is implemented via variation margin: variation margin represents the change in value of each open Equities Contract from the value at the time of trade to the current market value, posted in non-realised or contingent form (credit or debit to the member's account); to cope with step changes in variation margin due to the settlement cycle, the Clearing House restricts the use of credit variation margin just ahead of settlement (the restriction may continue from a settlement fail to its resolution); the Clearing House also calculates initial and variation margin requirement at several points throughout the day"
+    sources:
+      - title: "LCH Ltd Clearing House Procedures — EquityClear Service（清算所官方程序手册 PDF，1.5.4 Variation margin / 1.5.6 Intra-day Margin Calls）"
+        url: https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/rulebooks/lch-ltd/section-2d-equityclear-service.pdf
+        accessed: 2026-09-05
+    quote: "Variation margin represents the change in value of each open Equities Contract from the value at the time of trade to the current market value.. Variation margin in respect of Equities Contracts will be in non-realised or contingent form (i.e. it will be in the form of a credit or debit posted to Equities Clearing Member's relevant account(s)). In order to cope with step changes in the variation margin due to the settlement cycle, the Clearing House will restrict the use of credit variation margin just ahead of settlement ... The Clearing House will calculate each Equities Clearing Member's initial and variation margin requirement at several points throughout the day."
+    confidence: high
 
   delivery_method:
     enum: na
@@ -952,8 +970,14 @@ clearing:
     confidence: medium
 
   last_trading_day_rule:
-    zh: ""
-    confidence: low
+    zh: "不适用——EquityClear 清算的标的为现货股票等现金工具，无到期日与『最后交易日』概念；未平仓合约自成交至交收完成即消灭，仅在交收周期内暴露结算风险（期间价格变动由变动保证金覆盖）"
+    en: "Not applicable — instruments cleared under EquityClear are cash instruments such as equities, with no expiry and thus no derivative-style last trading day; an open contract is extinguished upon settlement and exposes settlement risk only during the settlement cycle (price changes over the period are covered by variation margin)"
+    sources:
+      - title: "LCH Ltd Clearing House Procedures — EquityClear Service（清算所官方程序手册 PDF，1.5.4 Variation margin——未平仓合约成交至当前市值的变动）"
+        url: https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/rulebooks/lch-ltd/section-2d-equityclear-service.pdf
+        accessed: 2026-09-05
+    quote: "Variation margin represents the change in value of each open Equities Contract from the value at the time of trade to the current market value.."
+    confidence: medium
 
   default_management:
     spec:
