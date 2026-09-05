@@ -651,6 +651,7 @@ market_structure:
   derivatives:
     trading_sessions:
       pre_market:
+        spec: {start: "08:45", end: "09:15", kind: opening_auction, note: "午市前另有 12:30-13:00 开市前议价时段（仅标 * 的主要合约适用）"}
         zh: "开市前议价时段（Pre-Market Opening Period）：早市 上午8時45分－上午9時15分；午市 中午12時30分－下午1時（仅部分主要合约适用，如恒生指数/恒生中国企业指数/恒生科技指数系列期货期权，标*号品种）"
         en: "Pre-Market Opening Period: Morning 8:45 a.m.-9:15 a.m.; Afternoon 12:30 p.m.-1:00 p.m. (applies only to selected major contracts marked with *, e.g. HSI/HSCEI/Hang Seng TECH Index futures & options)"
         sources:
@@ -660,6 +661,7 @@ market_structure:
         quote: "設開市前議價時段： 早市：上午 8 時 45 分－上午 9 時 15 分 午市：中午 12 時 30 分－下午 1 時"
         confidence: high
       continuous_am:
+        spec: {start: "09:15", end: "12:00", kind: continuous, note: "以恒生指数系列期货期权为代表样本"}
         zh: "上午9時15分 - 正午12時（以恒生指数系列期货期权为例）"
         en: "9:15 a.m. - 12:00 noon (Hang Seng Index series futures & options)"
         sources:
@@ -669,10 +671,12 @@ market_structure:
         quote: "上午9時15分* - 正午12時"
         confidence: high
       lunch_break:
+        spec: {start: "12:00", end: "13:00", kind: lunch_recess, note: "12:30-13:00 为午市开市前议价时段（见 pre_market）；非官方单独命名的午休"}
         zh: "正午12時 - 下午1時：并非官方单独命名的「午休」时段，而是上午与下午交易时段之间的间隔，其中12:30-13:00是下午时段的开市前议价时段（见 pre_market）"
         en: "12:00 noon - 1:00 p.m.: not an officially separately-named \"lunch break\" but the interval between the morning and afternoon sessions, of which 12:30-13:00 is the afternoon session's Pre-Market Opening Period (see pre_market)"
         confidence: medium
       continuous_pm:
+        spec: {start: "13:00", end: "16:30", kind: continuous, note: "即月合约最后交易日提前收市至 16:00"}
         zh: "下午1時 - 下午4時30分；合约到期月（即月合约）最后交易日提前收市至下午4時"
         en: "1:00 p.m. - 4:30 p.m.; the spot-month contract's Last Trading Day closes earlier, at 4:00 p.m."
         sources:
@@ -682,10 +686,12 @@ market_structure:
         quote: "下午1時* - 下午4時30分"
         confidence: high
       after_market:
+        spec: {kind: none, note: "日盘收市后直接衔接收市后交易时段 AHT（见 night_session）"}
         zh: "无独立盘后连续交易时段；下午4:30（即月合约最后交易日为4:00）收市后直接衔接收市后交易时段（AHT，见 night_session）"
         en: "No separate after-market continuous trading session; after the 4:30 p.m. close (4:00 p.m. on the spot-month contract's Last Trading Day) the market rolls directly into the After-Hours Trading Session (AHT, see night_session)"
         confidence: medium
       night_session:
+        spec: {start: "17:00", end: "03:00", kind: after_hours_continuous, note: "恒指系列等代表性样本（end < start 表示次日）；货币期货及 MSCI Late Close 19:00 起、MSCI 台湾（美元）指数期货 14:15 起"}
         zh: "收市后交易时段（Extended/After-Hours Trading, AHT，业内俗称T+1時段）：恒生指数系列期货期权、黄金/白银期货、伦敦金属小型期货等 下午5時-翌日凌晨3時；货币期货及MSCI Late Close合约 下午7時-翌日凌晨3時；MSCI台湾（美元）指数期货 下午2:15-翌日凌晨3時"
         en: "After-Hours Trading (AHT, i.e. the \"T+1 Session\"): 5:00 p.m. to 3:00 a.m. the next day for Hang Seng Index series futures/options, Gold/Silver Futures, London Metal Mini Futures, etc.; 7:00 p.m. to 3:00 a.m. the next day for Currency Futures & MSCI Late Close Contracts; 2:15 p.m. to 3:00 a.m. the next day for MSCI Taiwan (USD) Index Futures"
         sources:
@@ -709,6 +715,7 @@ market_structure:
       verified: 2026-09-05
 
     opening_mechanism:
+      spec: {type: call_auction, auction_start: "08:45", auction_end: "09:15", note: "仅接受不设价格限制的竞价盘，以拟定开市价（COP）撮合、按时间优先排序；未配对竞价盘开市时转为限价盘"}
       zh: "开市前议价时段（Pre-Market Opening Period）：仅接受不设价格限制的竞价盘（競價盤），以「拟定开市价」（Calculated Opening Price, COP）撮合，按时间优先排序；未能配对的竞价盘于开市时转换为限价盘"
       en: "Pre-Market Opening Period: only unpriced Auction Orders are accepted, matched at the Calculated Opening Price (COP) on a time-priority basis; unmatched Auction Orders convert to Limit Orders at market open"
       sources:
@@ -1504,9 +1511,18 @@ risks:
     confidence: low
 
   fx_risk_note:
-    zh: "港元联系汇率制度下汇率波动相对可控，但联系汇率制度本身的可持续性存在长期讨论"
-    en: "Under the HKD's Linked Exchange Rate System, exchange-rate volatility is relatively contained, though the long-term sustainability of the peg itself remains a subject of ongoing debate"
-    confidence: low
+    zh: "港元实行联系汇率制度（LERS），自 1983 年 10 月 17 日起实施：HKMA 通过严谨、稳健而透明的货币发行局制度，使港元兑美元汇率保持在 7.75–7.85 的区间内；HKMA 提供双向兑换保证——强方兑换保证按 7.75 港元兑 1 美元向银行出售港元，弱方兑换保证按 7.85 从银行买入港元（HKMA 官网 LERS 专题，见 sources）。对非港元投资者：港元兑美元波动受制度区间约束，但港元兑投资者本币的汇率风险仍由投资者承担"
+    en: "The Hong Kong dollar operates under the Linked Exchange Rate System (LERS), in place since 17 October 1983: through a rigorous, robust and transparent Currency Board system, the LERS keeps the HKD/USD exchange rate stable within a band of HK$7.75-7.85, and the HKMA honours two-sided convertibility undertakings — selling Hong Kong dollars at the strong-side CU of HK$7.75 per US dollar and buying at the weak-side CU of HK$7.85 (HKMA LERS pages, see sources). For non-HKD investors: HKD/USD volatility is bounded by the band, while exchange-rate risk of the HKD against the investor's own currency remains with the investor"
+    quote: "The Linked Exchange Rate System (LERS) has been implemented in Hong Kong since 17 October 1983. Through a rigorous, robust and transparent Currency Board system, the LERS ensures that the Hong Kong dollar exchange rate remains stable within a band of HK$7.75-7.85 to one US dollar. The HKMA provides Convertibility Undertakings (CUs), under which the HKMA commits to sell Hong Kong dollars upon request by banks at the strong-side CU of HK$7.75 per US dollar, and to buy Hong Kong dollars upon request by banks at the weak-side CU of HK$7.85 per US dollar."
+    sources:
+      - title: "Linked Exchange Rate System（HKMA 官网 LERS 专题总览页）"
+        url: https://www.hkma.gov.hk/eng/key-functions/money/linked-exchange-rate-system
+        accessed: 2026-09-05
+      - title: "How Does the LERS Work?（HKMA 官网，强方/弱方兑换保证机制）"
+        url: https://www.hkma.gov.hk/eng/key-functions/money/linked-exchange-rate-system/how-does-the-lers-work
+        accessed: 2026-09-05
+    confidence: high
+    verified: 2026-09-05
 
   political_risk_note:
     zh: ""
