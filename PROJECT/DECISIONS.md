@@ -93,6 +93,7 @@
 - ADR-086 · 2026-09-05 · 任务三五棒执行落地：C 桶 40 处三态收口（18 填实 + 2 not_applicable + 20 留空）+ 独立复核订正
 - ADR-087 · 2026-09-05 · adr-heal.yml 改走「开分支 + PR + auto-merge」，不再直推 main（原占 ADR-086，撞已合并的 main 直推提交，按 ADR-029 协议让号）
 - ADR-088 · 2026-09-05 · `make check` 输出 stale 字段复核清单（数据空缺复核轨任务五③收尾）
+- ADR-089 · 2026-09-05 · 任务三附·衍生品 spec 回填落地（130 处两批 + 各自独立复核）+ 两处形状词汇演进
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2465,5 +2466,34 @@ print('全库 medium 零 sources:',n)
 **为什么这样：** 挂在 `validate.py` 而不是新建脚本或 Makefile target，是因为 `make check` 是唯一每个会话都必跑的入口，独立命令没人会记得跑；超期/未记 verified 分组不混排，是因为两者处置成本差一个量级（重抓原文复核 vs 补个日期），混排会把机械活和田野活搅在一起。warning 而非 err，沿用任务五③原始定义——stale 是数据会老化的事实，不是本次改动引入的错误，拿它阻断构建会让任何人在字段自然老化后连 `make build` 都跑不过，反而逼迫绕过检查。
 
 **验证：** `make build` 全绿（selfcheck 87/87、validate 20 家 0/0/0 警告——当前 stale 为 0、输出静默符合预期、verify_quotes FAIL=0、生成块零 diff）；输出侧行为由 selfcheck 合成用例正负向锁定（零输出基线 / 超期内容 / 未记 verified 归类 / 排序 / 头部计数 / 不误伤 fresh 高龄行）。
+
+**日期：** 2026-09-05
+
+---
+
+### ADR-089 — 任务三附·衍生品 spec 回填落地（130 处两批 + 各自独立复核）+ 两处形状词汇演进
+
+**背景：** [ADR-082] 裁定③ 把「衍生品 `spec` 回填 126 处」移出任务三单列。本次交互式会话（2026-09-05）执行。动手前只读实算勘误：实际口径是 **130 处**而非 126——[ADR-086] 任务三棒 2/3 又填实了 4 处带 spec 形状的字段（`br-b3`/`hk-hkex` 的 `closing_mechanism`、`in-nse` 的两处时段），它们同样有值可结构化。
+
+**执行结果：**
+
+- **批次一（时段 + 开收盘机制族 73 处）**：逐所串行（cn-szse/hk-hkex/in-nse/kr-krx/za-jse/au-asx/br-b3/fr-euronext/sa-tadawul/sg-sgx），从既有已核实 `zh`/`quote` 结构化，零新抓取。三态贯穿：`kind: none` 须有穷举性依据（cn-szse 4.1.2 条 / in-nse Market Timings 页 / za-jse 功能停用标注等）；sg-sgx 的 T/T+1 时段按「机制存在、钟点逐合约规定」落 `start/end: null + note`（不臆造钟点）。73/73 落 spec。
+- **批次二（价格限制 + 机制族 57 处）**：同范式。期权公式型区间不压成标量（cn-szse `limit_pct: null` + 公式入 note）；被动跟随现货熔断/与顶层共用的机制按三态如实落 `type: none` 或 note-only（kr-krx/br-b3/fr-euronext）；做市 `present` 不作断言处只落 note（kr-krx）。57/57 落 spec。
+- **形状词汇演进两处**（本条确立）：① `closing_mechanism` 形状 `type` 增 **`continuous_to_close`**（无收盘集合竞价、连续交易直接收市）——hk-hkex/in-nse/za-jse/au-asx/fr-euronext 五个衍生品样本确立，现有 `call_auction/last_price/vwap_window` 均无法诚实表达该形态；② `volatility_interruption` 形状文档补 **`auction_minutes`/`halt_minutes` 键位消歧**——「冷静期（期间可在区间内继续交易）」用前者、真停牌才用后者（hk-hkex/sg-sgx 口径），独立复核实测键位错配是真实错误模式（sa-tadawul FIX 同源）。
+- **验收口径确立一条**：spec 的 HH:MM 时刻允许由**同文件显式交叉引用的兄弟字段** `quote`/`zh` 锚定（字段自述「见 trading_sessions.pre_market」等），与 5c 的文件级反查同理；现货侧 [ADR-039] 已有同形先例（in-nse 现货 `continuous_am`）。
+
+**独立视角复核（两批均全新上下文 agent 盲审，7 维度同 [ADR-086] 口径）：**
+
+- 批次一：初检 **64/73 = 87.7%，0 FIX / 9 QUESTION**——零幻觉；A 组 7 条为「HH:MM 锚兄弟字段」口径问题（按上述口径确立转 PASS）、B 组 2 条 sg-sgx kind 缺省（以数据解决：T 时段补 `kind: continuous` 由同文件 `matching_principle` 支撑、T+1 补 `after_hours_continuous`）。终态 73/73。
+- 批次二：初检 **44/57 = 77%，3 FIX + 10 QUESTION**——数值层零幻觉（全部数字反查含跨字段均命中），问题集中于三种模式：(a) 键位/否定位与 zh 描述错配（sa-tadawul `hidden`→`iceberg`；in-nse CB `day_end:false` 无据且与顶层矛盾）；(b) `null` 的原文陈述缺位（6 处，正范是 fr-euronext price_limits）；(c) 同文件三机制表述摩擦（hk price_limits 与 DPB 矛盾、kr CB 借用）。13 处全部就地订正，终态 57/57。订正连带 `schema/spec.yml` VI 形状消歧（见上）。
+
+**没做 / 留独立排期：**
+
+- **「`null` 需原文陈述」的机器校验**——本批 7 个 QUESTION 同源（band_pct/halt_minutes 等为 null 但 zh 未说明未公布），现为 5b/5c 之外的机器盲区；加进 `validate.py` 需先辨析「null=未公布 / null=不适用」两义（au-asx 一例即后者），独立排期。
+- 剖面现货 / 衍生品业务线切换渲染层——另一条 ROADMAP 条目，数据侧本条已备齐（130 处 spec + 三态齐备）。
+
+**验证：** `make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`selfcheck` 93、`check_ui_i18n`/`check_no_chapter_ordinals` OK）、`make sync` 幂等；生成块零 diff（`spec` 不计「已填」分母，进度矩阵不动）。每所一个 commit；两处形状演进各有独立 commit。
+
+**共享检出事故注记：** 本会话与风险旗标子棒会话（[ADR-079]）在同一检出并行工作，本轨三段已暂存改动被对方整树提交扫入其 commit（cn-szse 批次一→`cf9f32c`、in-nse 批次一大部→`03780d5`、sg-sgx 复核订正→`e23c447`），内容无损但 commit 归属分裂。既有协议（[ADR-086]：共享检出按 hunk 选择性暂存）依赖双方自觉，`git add -A` 一方即可击穿——下次并行前值得给「共享检出下禁用 `git add -A`」加机器护栏。
 
 **日期：** 2026-09-05
