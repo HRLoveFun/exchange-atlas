@@ -711,6 +711,11 @@ market_structure:
       confidence: high
 
     order_types:
+      spec:
+        market: true
+        limit: true
+        tif: [fok, ioc]
+        note: "限价/市价两大类细分共 8 类申报指令（普通限价、全额成交或撤销限价、对手方最优市价、本方最优市价、最优五档即成剩撤、即时成交剩余撤销、全额成交或撤销市价等）；无止损/冰山/隐藏类型；申报数量 1 张或其整数倍，限价单笔最大 50 张、市价 10 张"
       zh: "买卖类型：买入开仓、买入平仓、卖出开仓、卖出平仓、备兑开仓、备兑平仓；委托类型分限价委托与市价委托，本所接受的申报指令含普通限价申报、全额成交或撤销限价申报、对手方最优价格市价申报、本方最优价格市价申报、最优五档即时成交剩余撤销市价申报、即时成交剩余撤销市价申报、全额成交或撤销市价申报等8类；申报数量为1张或其整数倍，限价申报单笔最大50张，市价申报单笔最大10张"
       en: "Trading types: buy-to-open, buy-to-close, sell-to-open, sell-to-close, covered-call-open, covered-call-close; orders are either limit or market orders, with 8 accepted instruction types including ordinary limit orders, fill-or-kill limit orders, opposite-best-price market orders, same-best-price market orders, best-five-immediate-or-cancel market orders, immediate-or-cancel market orders, and fill-or-kill market orders; order size is 1 contract or a multiple thereof, capped at 50 contracts per limit order and 10 per market order"
       sources:
@@ -721,6 +726,11 @@ market_structure:
       confidence: high
 
     tick_size:
+      spec:
+        regime: per_instrument
+        min_tick: 0.0001
+        currency: CNY
+        note: "按合约标的分档：ETF 标的 0.0001 元（现全部上市品种）；股票标的 0.001 元（尚未上市、未实际使用）"
       zh: "0.0001元人民币（合约标的为交易型开放式基金ETF——深交所目前上市的全部期权品种均属此类）；规则原文另定有以股票为标的期权的最小报价单位0.001元人民币，因深交所尚未上市股票期权，目前未实际使用"
       en: "RMB 0.0001 for ETF-underlying options (currently all SZSE-listed options); the rules separately provide for RMB 0.001 on stock-underlying options, not yet in actual use as SZSE has not listed any stock options"
       sources:
@@ -761,6 +771,10 @@ market_structure:
         quote: "合约涨跌停价格=合约前结算价格±最大涨跌幅 认购期权最大涨幅=max｛合约标的前收盘价×0.5%，min [（2×合约标的前收盘价－行权价格），合约标的前收盘价]×10%｝ 认购期权最大跌幅=合约标的前收盘价×10% 认沽期权最大涨幅=max｛行权价格×0.5%，min [（2×行权价格－合约标的前收盘价），合约标的前收盘价]×10%｝ 认沽期权最大跌幅=合约标的前收盘价×10%"
         confidence: high
       main_board:
+        spec:
+          limit_pct: null
+          symmetric: false
+          note: "非固定百分比、按公式定价（基准=标的前收盘价）：认购最大涨幅=max{标的前收盘价×0.5%, min[(2×标的前收盘价−行权价), 标的前收盘价]×10%}、最大跌幅=标的前收盘价×10%，认沽对称；最后交易日不设跌幅限制"
         zh: "以ETF为标的的期权（深交所目前全部上市品种）：认购期权最大涨幅=max{标的前收盘价×0.5%，min[(2×标的前收盘价－行权价)，标的前收盘价]×10%}，最大跌幅=标的前收盘价×10%；认沽期权最大涨幅=max{行权价×0.5%，min[(2×行权价－标的前收盘价)，标的前收盘价]×10%}，最大跌幅=标的前收盘价×10%；计算出的幅度按最小报价单位整数倍四舍五入取值，跌停价格低于最小报价单位的以最小报价单位为跌停价；合约最后交易日不设跌幅限制"
         en: "For ETF-underlying options (currently all SZSE-listed products): call max upside = max{underlying prior close×0.5%, min[(2×underlying prior close − strike), underlying prior close]×10%}, max downside = underlying prior close×10%; put max upside = max{strike×0.5%, min[(2×strike − underlying prior close), underlying prior close]×10%}, max downside = underlying prior close×10%; the computed band is rounded to a multiple of the tick size (a downside limit below one tick is set to one tick); no downside limit applies on the contract's last trading day"
         sources:
@@ -777,6 +791,13 @@ market_structure:
 
     circuit_breaker:
       enum: stock_level
+      spec:
+        type: contract_level
+        levels:
+          - threshold_pct: 50
+            halt_minutes: 3
+            day_end: false
+        note: "触发后进入 3 分钟集合竞价（非停牌），结束后恢复连续竞价；涨跌绝对值还须达该合约最小报价单位 10 倍；竞价跨越 14:57 的于 14:57 恢复并进行收盘集合竞价。enum 借用 stock_level 表「非全市场」（受控词表无合约级档位，见 OPEN-QUESTIONS #44(b)）"
       zh: "熔断机制：连续竞价期间，单个合约盘中交易价格较最近参考价格上涨或下跌达到或超过50%，且价格涨跌绝对值达到或超过该合约最小报价单位10倍的，该合约进入3分钟集合竞价阶段，集合竞价结束后恢复连续竞价；盘中集合竞价时间跨越14:57的，于14:57恢复交易并进行收盘集合竞价。属逐合约级别，非指数级/全市场熔断"
       en: "Circuit breaker: during continuous auction, if a single contract's intraday trading price moves up or down by 50% or more from the latest reference price, and the absolute price change is at least 10x the contract's tick size, that contract enters a 3-minute call auction, then resumes continuous auction; if the call auction window crosses 2:57 p.m., trading resumes at 2:57 p.m. straight into the closing call auction. This operates at the individual-contract level, not index-wide or market-wide."
       detail: "受控词表 `circuit_breaker_type` 的四个选项均以「指数级/个股级」这组现货语境的二分为设计出发点；本机制的真实颗粒度是「单一期权合约」，比 hk-hkex.derivatives.circuit_breaker 当初借用 stock_level 表达的「部分期货合约月份」更贴近字面的「个股（单一标的）」含义，故沿用同一 stock_level 借用手法，仅取其「非全市场」含义。"
@@ -788,6 +809,7 @@ market_structure:
       confidence: high
 
     volatility_interruption:
+      spec: {type: none, note: "无独立于熔断的第二层波动性中断；熔断机制（±50% 且绝对值达 10 倍最小报价单位→3 分钟集合竞价）兼跨本字段语义，见 circuit_breaker"}
       zh: "本次抓取的交易规则未见与「熔断」（见 circuit_breaker 字段）相独立的另一层波动性中断机制——规则第4.6节仅规定了「±50%且绝对涨跌幅≥10倍最小报价单位→3分钟集合竞价」这一套机制，兼具通常语境下「熔断」与「波动性中断」两层含义，不像部分市场（如 hk-hkex 衍生品市场区分动态价格限制机制 VCM 与单独的5分钟冷静期两层）拆成两套规则"
       en: "This session's fetch of the trading rules found no second, separate volatility-interruption layer distinct from the circuit breaker (see `circuit_breaker`) — Rule 4.6 defines only the single '±50% move and absolute change ≥10x tick size → 3-minute call auction' mechanism, which folds together what other markets sometimes split into two layers (cf. hk-hkex's derivatives market, which separates a Dynamic Price Banding/VCM mechanism from an independent 5-minute cooling-off period)"
       confidence: medium
@@ -814,6 +836,7 @@ market_structure:
       confidence: medium
 
     market_maker_scheme:
+      spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "分两级：主做市商须双边持续报价+双边回应报价+约定服务全部三项，一般做市商仅回应报价、不强制持续报价；无统一报价价差上限；做市订单不享有成交优先权"}
       zh: "期权做市商制度：做市商对深交所挂牌交易的期权合约提供双边持续报价、双边回应报价等流动性服务，享有交易费用减免、激励等权利，具体做市资格、权利义务由本所另行规定。做市商分主做市商（须提供双边持续报价+双边回应报价+其他约定服务全部三项）与一般做市商（仅提供双边回应报价及其他约定服务，不强制持续报价）两类；做市商报价订单与普通投资者订单同样按「价格优先、时间优先」原则撮合，不享有成交优先权"
       en: "Options Market Maker Scheme: market makers provide liquidity services for SZSE-listed option contracts — continuous two-way quoting and two-way quote-request response — in exchange for trading-fee rebates and other incentives; specific market-making qualifications and obligations are set separately by SZSE. Market makers fall into two categories: Primary Market Makers (must provide all three services — continuous two-way quoting, quote-request response, and other agreed services) and General Market Makers (only quote-request response and other agreed services, with continuous quoting not mandatory); market-maker quotes are matched under the same price-priority-then-time-priority rule as ordinary investor orders and receive no execution priority"
       sources:
