@@ -984,6 +984,30 @@ def validate_roadmap_inbox():
         err(msg)
 
 
+DECISIONS_MAXLINES = 3500  # 归档阈值（提醒性，非硬性），见 [ADR-PENDING-decisions-archive-threshold]
+
+
+def decisions_length_violations(text, maxlines=DECISIONS_MAXLINES):
+    """`DECISIONS.md` 单文件 append-only 只增不减，超过阈值时提醒该把最早一批 ADR
+    移入 `DECISIONS-ARCHIVE.md`——比照 [ADR-036] 对 `taxonomy.yml`「暂不拆，设阈值」
+    的处理范式。返回 warn 消息列表（空 = 未超限），纯逻辑无 I/O，selfcheck 喂合成输入。
+    只 warn 不 err：具体怎么拆、拆多少留给人判断，机器只负责按时提醒，不该替人拍板。"""
+    n = text.count("\n") + (0 if text.endswith("\n") else 1)  # 与 `wc -l` 口径一致
+    if n > maxlines:
+        return [f"PROJECT/DECISIONS.md 已 {n} 行，超过归档阈值 {maxlines}"
+                f"（见 [ADR-PENDING-decisions-archive-threshold]）——该把最早一批 ADR 移入 DECISIONS-ARCHIVE.md 了"]
+    return []
+
+
+def validate_decisions_length():
+    """校验 19：DECISIONS.md 增长阈值提醒（warn，不阻断构建）。"""
+    path = PROJECT_DIR / "DECISIONS.md"
+    if not path.exists():
+        return
+    for msg in decisions_length_violations(path.read_text(encoding="utf-8")):
+        warn(msg)
+
+
 def validate_no_conflict_markers():
     """任何入库文本文件里不得残留 git 合并冲突标记（[ADR-069]）。"""
     exts = (".md", ".yml", ".yaml", ".py", ".js", ".css", ".json", ".txt", ".html")
@@ -1037,6 +1061,7 @@ def main():
     validate_otp_sources()
     validate_sources_pairing()
     validate_roadmap_inbox()
+    validate_decisions_length()
 
     if warnings:
         print(f"[check] {len(warnings)} 条警告：")

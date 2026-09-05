@@ -290,6 +290,24 @@ case("deriv-spec-shape 不误伤：纯顶层形状 / 非 derivatives 前缀不�
                  "costs.stamp_duty": {"keys": {}}}), [])
 
 
+# ══════════════════════════════════════════════════════════════
+# [ADR-PENDING-decisions-archive-threshold] DECISIONS.md 归档阈值提醒：
+#   validate.decisions_length_violations(text, maxlines=...)
+#   —— 单文件行数超阈值时 warn（不 err），提醒该拆 DECISIONS-ARCHIVE.md 了。
+# ══════════════════════════════════════════════════════════════
+case("decisions-length 合法：远未到阈值",
+     validate.decisions_length_violations("一\n二\n三\n", maxlines=10), [])
+case("decisions-length 合法：恰好等于阈值",
+     validate.decisions_length_violations("行\n" * 10, maxlines=10), [])
+case("decisions-length 违规：超过阈值一行",
+     len(validate.decisions_length_violations("行\n" * 11, maxlines=10)), 1)
+case("decisions-length 消息含实际行数与阈值",
+     "11 行" in validate.decisions_length_violations("行\n" * 11, maxlines=10)[0]
+     and "10" in validate.decisions_length_violations("行\n" * 11, maxlines=10)[0], True)
+case("decisions-length 默认阈值 3500 行下不误报当前体量",
+     validate.decisions_length_violations("行\n" * 3000), [])
+
+
 def main():
     fails = [(n, g, w) for n, g, w in CASES if g != w]
     for n, g, w in CASES:
