@@ -765,6 +765,12 @@ market_structure:
       confidence: high
 
     order_types:
+      spec:
+        market: true
+        limit: true
+        stop: true
+        tif: [day, ioc]
+        note: "Stop Loss 触及触发价后转为限价单挂入常规订单簿（止损单，未单独列止损限价）；合约层面另支持价差单（Spread order）与整手单"
       zh: "时间条件：DAY（当日有效，收盘未成交自动撤销）、IOC（立即成交剩余部分自动撤销）；价格条件：限价单（Limit）、市价单（Market）、止损单（Stop Loss，触及触发价后转为限价单挂入常规订单簿）；另在具体合约层面支持整手单（Regular lot order）、止损单（Stop Loss Order）、IOC 单与价差单（Spread order）"
       en: "Time conditions: DAY (valid for the trading day, auto-cancelled if unmatched at close) and IOC (Immediate or Cancel, unmatched portion cancelled immediately); price conditions: Limit Price/Order, Market Price/Order, and Stop Loss (SL) Price/Order (activated once the trigger price is reached, then enters the regular order book as a limit order); at the contract level, Regular lot order, Stop Loss Order, Immediate-or-Cancel, and Spread order are also supported"
       sources:
@@ -778,6 +784,7 @@ market_structure:
       confidence: high
 
     tick_size:
+      spec: {regime: per_instrument, min_tick: 0.05, currency: INR, note: "Nifty 50 指数期权 0.05 卢比（代表样本）；国债利率期货 0.0025、INR 货币衍生品 0.25 paise（=0.0025）；期货最小变动按指数点位分档，未见统一单一数值"}
       zh: "以Nifty 50指数期权为例，最小报价单位（price step）为0.05卢比；期货的最小变动单位按指数点位分档设定，未见统一单一数值；国债利率期货最小报价单位为0.0025卢比；货币衍生品（INR货币对）最小变动0.25 paise（即0.0025卢比）"
       en: "Example (Nifty 50 index options): price step of Re. 0.05; futures tick sizes are tiered by index level with no single uniform value; government-securities interest rate futures tick size is Rs. 0.0025; currency derivatives (INR pairs) tick size is 0.25 paise (i.e. INR 0.0025)"
       sources:
@@ -857,6 +864,7 @@ market_structure:
         quote: "There are no day minimum/maximum price ranges applicable in the derivatives segment. However, in order to prevent erroneous order entry, operating ranges and day minimum/maximum ranges are kept as below: ... In view of this, orders placed at prices which are beyond the operating ranges would reach the Exchange as a price freeze."
         confidence: high
       main_board:
+        spec: {limit_pct: 10, reference: prev_settlement, symmetric: true, note: "指数期货：基准价（前日结算价，首日为理论期货价）±10%；个股期货无固定百分比、动态区间按趋势每次放宽 5%（跨所协同）；期权按各合约 delta 逐日计算"}
         zh: "指数期货：操作区间为基准价（前一交易日结算价，首日为理论期货价）±10%；个股期货：无固定百分比，动态区间可按市场趋势方向每次放宽5%（与其他交易所协同）；指数期权/个股期权：按各合约delta值逐日计算区间，非固定百分比"
         en: "Index futures: operating range is ±10% of the base price (prior day's settlement price, or theoretical futures price on the first day); stock futures: no fixed percentage — the dynamic band can be relaxed by 5% at a time in the direction of the market trend (coordinated with other exchanges); index/stock options: a contract-specific range computed daily from each contract's delta value, not a fixed percentage"
         sources:
@@ -874,6 +882,22 @@ market_structure:
 
     circuit_breaker:
       enum: index_level
+      spec:
+        type: index_level
+        reference:
+          - index: Nifty 50
+            exchange: self
+        levels:
+          - threshold_pct: 10
+            halt_minutes: null
+            day_end: false
+          - threshold_pct: 15
+            halt_minutes: null
+            day_end: false
+          - threshold_pct: 20
+            halt_minutes: null
+            day_end: false
+        note: "与现货市场共用的全市场指数熔断（10%/15%/20% 三级协调停市，覆盖股票现货与股票衍生品）；以 Nifty 50 或 BSE Sensex 先触发者为准（BSE 不在本库覆盖范围）；各档停市时长随触发时段而异，原文未给单一数值"
       zh: "衍生品分部本身未见独立熔断机制；与现货市场共用同一套全市场指数熔断（10%/15%/20%三级，以Nifty 50或BSE Sensex先触发者为准），触发后同时暂停「所有股票现货及股票衍生品市场」（coordinated trading halt in all equity and equity derivative markets nationwide）"
       en: "No independent circuit breaker specific to the derivatives segment was found; it shares the same market-wide index-based circuit breaker as the cash market (three tiers at 10%/15%/20%, triggered by whichever of the Nifty 50 or BSE Sensex breaches first), which upon triggering halts \"all equity and equity derivative markets nationwide\" simultaneously"
       detail: "与顶层 market_structure.circuit_breaker 字段引用同一机制、同一来源，此处从「衍生品视角」重复确认其覆盖范围包含衍生品市场，避免读者误以为衍生品分部只受现货熔断的间接影响。"
@@ -906,6 +930,7 @@ market_structure:
       detail: "棒 2「负面断言正面化」（[ADR-082]）：同 closing_mechanism 的判据——Market Timings 页穷举列示各分部时段，现货区块明列 Block Deal session 而衍生品区块无，据此以 medium 记「无大宗交易时段」的结构性推断；衍生品大额申报是否另有场外/其他渠道本次未核实。"
 
     market_maker_scheme:
+      spec: {present: true, note: "流动性提升计划（LES）面向指定做市商提供分级激励、要求向客户披露做市身份；本次页面列出的 LES 产品集中在商品衍生品（白银期权/电力期货/布伦特原油期货），股票/股指分部当月显示无做市商"}
       zh: "设有流动性提升计划（Liquidity Enhancement Scheme, LES），面向指定做市商（Designated Market Maker）提供业务量/持仓量相关的分级激励，并要求做市商向客户披露其做市商身份以避免利益冲突；本次抓取页面明确列出的适用产品集中在商品衍生品分部（白银30公斤期权、电力期货、迪拜原油期货），未能确认股票/股指衍生品分部当前是否有正在运行的LES产品（页面同时显示「本月无做市商」提示，可能反映的是抓取当月的临时状态而非长期无该产品线LES）"
       en: "NSE runs a Liquidity Enhancement Scheme (LES) offering tiered order/trade/open-interest incentives to Designated Market Makers, who must disclose their market-maker status to clients to avoid conflicts of interest. The products confirmed as currently covered by LES on the fetched page are concentrated in the Commodity Derivatives segment (Silver 30Kg Options, Electricity Futures, Dated Brent Crude Oil Futures); this session could not confirm whether the Equity Derivatives segment currently has an active LES product (the page also showed a \"no market makers this month\" notice, which may reflect a temporary status for the month fetched rather than a permanent absence of LES for this product line)"
       sources:
