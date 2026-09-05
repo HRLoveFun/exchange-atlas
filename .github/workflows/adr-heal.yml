@@ -2,12 +2,21 @@ name: adr-heal
 
 # main 上残留 ADR-PENDING-* 占位符是硬错误（validate.py 的
 # validate_no_pending_adr_placeholders，[ADR-076]）。这个 workflow 在每次 push 到
-# main 后自动跑一次 `make assign-adr` 把占位符定号并直接提交回 main，取代原来
-# 「合并协调者手动跑一遍再 commit」的人工步骤（见 PROJECT/GIT-RUNBOOK.md）。
+# main 后自动跑一次 `make assign-adr` 把占位符定号，取代原来「合并协调者手动跑
+# 一遍再 commit」的人工步骤（见 PROJECT/GIT-RUNBOOK.md）。
+#
+# 定号后走「开分支 + PR + auto-merge」而不是直推 main（[ADR-087]）：main 的
+# branch protection 要求 `build` 状态检查通过，而 github-actions[bot] 的直推
+# 没有关联的检查状态，会被 GitHub 判定为 "Required status check build is
+# expected" 拒绝（GH006）。走 PR 复用 pr-build.yml 已经在验证的同一条路径，
+# 不需要给这个 bot 开任何独立于代码之外的仓库设置（bypass 名单 / 长期凭据）。
 #
 # 用 concurrency group 而不是锁文件/互斥脚本，是因为 GitHub Actions 对同一 group
 # 的多次触发天然串行执行（一次只跑一个，其余排队等前一个结束）——这正好复刻
-# [ADR-076] 依赖的「合并本身是串行的」前提，不需要额外发明互斥机制。
+# [ADR-076] 依赖的「合并本身是串行的」前提。**关键**：本 job 必须等自己开的 PR
+# 真正合并完成才能算结束（不能开完 PR 挂上 auto-merge 标记就提前退出），否则
+# 串行保证名存实亡——下一个排队的 healer 运行会在台账还没被这次合并更新之前
+# 就读取 max 号，重演 [ADR-069]/[ADR-076] 要解决的撞号问题。
 
 on:
   push:
@@ -19,6 +28,7 @@ concurrency:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   heal:
@@ -34,16 +44,48 @@ jobs:
       - run: pip install -r tools/requirements.txt
       - name: 定号 ADR-PENDING 占位符
         run: make assign-adr
-      - name: 有变更就直接提交回 main
+      - name: 复核 make build 全绿（先本地快速失败，不带着已知会红的改动去开 PR）
         run: |
           if git diff --quiet; then
             echo "没有 ADR-PENDING 占位符需要处理。"
             exit 0
           fi
+          make build
+      - name: 开分支 + PR + 等待 auto-merge 真正完成
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet; then
+            exit 0
+          fi
+          BRANCH="adr-heal/auto-${GITHUB_SHA::12}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
           git add -A
-          git commit -m "chore: 自动定号 ADR-PENDING 占位符（make assign-adr）[skip ci]"
-          git push origin main
-      - name: 复核 make build 仍然全绿
-        run: make build
+          git commit -m "chore: 自动定号 ADR-PENDING 占位符（make assign-adr）"
+          git push origin "$BRANCH"
+
+          PR_URL=$(gh pr create --base main --head "$BRANCH" \
+            --title "chore: 自动定号 ADR-PENDING 占位符" \
+            --body "由 adr-heal.yml 自动生成——把 push 到 main 的提交里带的 ADR-PENDING-* 占位符定号为真实编号（见 [ADR-076]/[ADR-087]）。走 PR + auto-merge 而不是直推 main，理由见 [ADR-087]。")
+          PR_NUM=$(gh pr view "$PR_URL" --json number -q .number)
+          echo "已开 PR #$PR_NUM：$PR_URL"
+          gh pr merge "$PR_NUM" --auto --squash \
+            --subject "chore: 自动定号 ADR-PENDING 占位符 (#$PR_NUM) [skip ci]" --body ""
+
+          echo "等待 PR #$PR_NUM 合并（最多 10 分钟，每 15 秒查一次）..."
+          for i in $(seq 1 40); do
+            STATE=$(gh pr view "$PR_NUM" --json state -q .state)
+            if [ "$STATE" = "MERGED" ]; then
+              echo "PR #$PR_NUM 已合并。"
+              exit 0
+            fi
+            if [ "$STATE" = "CLOSED" ]; then
+              echo "::error::PR #$PR_NUM 被关闭但未合并——需要人工排查（可能是 build 检查失败被判定不可合并）。"
+              exit 1
+            fi
+            sleep 15
+          done
+          echo "::error::PR #$PR_NUM 在 10 分钟内未完成合并（多半是 build 检查一直不过，或排队中）——需要人工用 \`gh pr checks $PR_NUM\` 排查。"
+          exit 1
