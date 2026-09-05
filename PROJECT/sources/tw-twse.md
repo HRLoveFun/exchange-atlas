@@ -58,3 +58,6 @@
   - 台湾集中保管结算所股份有限公司收费办法 第1条 PDF（子域名 m.tdcc.com.tw，已由 tdcc.com.tw 登记覆盖，clearing_fees 依据，2026-08-24/25 新增）: https://m.tdcc.com.tw/TDCCWEB/upload/40289796531cece20153878c1c750017.pdf
 - `twsa.org.tw` | 官方（自律组织） | zh-Hant | curl + 常规 UA 200 | 中华民国证券商业同业公会，证券商层面的自律组织；本次仅用于确认机构名称与职能定位，未逐条抓取其自律规章
   - 首页: https://www.twsa.org.tw/
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Asia/Taipei（UTC+8，无夏令时） 的 UTC 偏移与夏令时规则
+  - tzdb「asia」zone 文件（`Asia/Taipei`）: https://data.iana.org/time-zones/tzdb/asia（HTTP 200，68KB）

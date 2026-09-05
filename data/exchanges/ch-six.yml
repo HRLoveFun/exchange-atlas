@@ -44,7 +44,12 @@ overview:
     zh: "中欧时间（苏黎世，CET，UTC+1；夏令时CEST，UTC+2）"
     en: "Central European Time (Zürich, CET, UTC+1; CEST UTC+2 during daylight saving)"
     confidence: medium
-    detail: "推断依据：Trading Guide 全篇交易时段均以 CET 标注（如「06:00 CET Start of Business Day」），未见交易所官方对时区本身的单独声明原文，故 confidence 标 medium 而非 high。"
+    detail: "推断依据：Trading Guide 全篇交易时段均以 CET 标注（如「06:00 CET Start of Business Day」），未见交易所官方对时区本身的单独声明原文，故 confidence 标 medium 而非 high。IANA tz database 对 Europe/Zurich 的定义（CET/CEST 及切换 Rule）为时区命名的权威出处（2026-09-05 补来源）。"
+    sources:
+      - title: IANA tz database「europe」zone 文件（Europe/Zurich：CET/CEST 及夏令时切换 Rule）
+        url: https://data.iana.org/time-zones/tzdb/europe
+        accessed: 2026-09-05
+    verified: 2026-09-05
 
   dst_rule:
     zh: "实行夏令时（随欧盟/欧洲统一切换CET/CEST；瑞士非欧盟成员国，但夏令时切换日期与欧盟一致）"

@@ -34,9 +34,19 @@ overview:
   timezone:
     zh: "Asia/Singapore (UTC+8)"
     en: "Asia/Singapore (UTC+8)"
+    sources:
+      - title: IANA tz database「asia」zone 文件（Asia/Singapore：UTC+8，全年无夏令时 Rule）
+        url: https://data.iana.org/time-zones/tzdb/asia
+        accessed: 2026-09-05
+    verified: 2026-09-05
   dst_rule:
     zh: "不实行夏令时"
     en: "No daylight saving time"
+    sources:
+      - title: IANA tz database「asia」zone 文件（Asia/Singapore 全年无夏令时 Rule）
+        url: https://data.iana.org/time-zones/tzdb/asia
+        accessed: 2026-09-05
+    verified: 2026-09-05
 
   founded_year:
     zh: "1999年12月1日（新加坡证券交易所SES、新加坡国际金融交易所SIMEX、证券结算与电脑服务公司SCCS三家法定合并成立）"
@@ -126,6 +136,11 @@ overview:
   settlement_currency:
     zh: "以交易货币结算，新元为主（见 trading_currency）"
     en: "Settled in the trading currency, predominantly Singapore dollars (see trading_currency)"
+    sources:
+      - title: CDP Clearing Rules（证券按 settlement currency 逐币种轧差交收——结算货币随交易货币的框架依据）
+        url: https://rulebook.sgx.com/rulebook/cdp-clearing-rules
+        accessed: 2026-09-05
+    verified: 2026-09-05
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境

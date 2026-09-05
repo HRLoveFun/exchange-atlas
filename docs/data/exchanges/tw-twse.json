@@ -16,24 +16,36 @@
       "timezone": {
         "zh": "Asia/Taipei (UTC+8)",
         "en": "Asia/Taipei (UTC+8)",
-        "verified": "2026-08-16",
+        "sources": [
+          {
+            "title": "IANA tz database「asia」zone 文件（Asia/Taipei：UTC+8，全年无夏令时 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/asia",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "dst_rule": {
         "zh": "不实行夏令时",
         "en": "No daylight saving time",
-        "verified": "2026-08-16",
+        "sources": [
+          {
+            "title": "IANA tz database「asia」zone 文件（Asia/Taipei 全年无夏令时 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/asia",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "founded_year": {
         "zh": "民国50年10月23日成立；民国51年2月9日正式开业（民國50年／51年）",
@@ -185,11 +197,11 @@
       "settlement_currency": {
         "zh": "新台币",
         "en": "New Taiwan dollar (TWD)",
+        "detail": "2026-09-05 stable 档来源闭环时查而未得：TWSE/TDCC 缓存页对款券交割流程（T+2 款券划拨）有明文，但未见对交割价金币种的专门陈述；候选出处为《台湾证券交易所股份有限公司营业细则》交割条款与 TDCC 业务规则，按防幻觉铁律降级 low，待补原文后升级。",
+        "confidence": "low",
         "verified": "2026-08-16",
-        "confidence": "medium",
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null,
         "sources": null
       }

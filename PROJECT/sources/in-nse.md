@@ -43,3 +43,6 @@
 - `rbi.org.in` | 官方（印度储备银行） | en | curl 常规 UA 200 | 外资准入/账户开立（foreign_access_channel/account_opening_requirements 出处）；另含央行对汇率制度的定性表述（fx_risk_note 出处）。⚠️ rbi.org.in 主站列表页（新闻稿/FAQ/出版物）均靠 JS postback 渲染，curl 只能拿到导航壳；但单条新闻稿详情页 `BS_PressReleaseDisplay.aspx?prid=<N>` 是服务端渲染、正文与 rbidocs PDF 直链都可抓。MPC 声明以「Monetary Policy Statement, YYYY-YY – Governor's Statement」新闻稿形式发布（每财年 6 次），PDF 落 `rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/`
   - Monetary Policy Statement, 2026-27 – Governor's Statement: April 08, 2026（行长声明 PDF，外部部门段落含汇率制度定性表述；prid=62515 详情页）PDF: https://rbidocs.rbi.org.in/rdocs/PressRelease/PDFs/PR37F51ECB4682364FFBB7BC60382CE58007.PDF
 - `www.fpi.nsdl.co.in` | 官方（NSDL FPI 登记处） | en | curl 常规 UA 200 | 外资参与者登记（foreign_ownership_limit 出处）
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Asia/Kolkata（IST UTC+5:30，无夏令时） 的 UTC 偏移与夏令时规则
+  - tzdb「asia」zone 文件（`Asia/Kolkata`）: https://data.iana.org/time-zones/tzdb/asia（HTTP 200，68KB）

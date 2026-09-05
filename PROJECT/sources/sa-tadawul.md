@@ -47,3 +47,6 @@
 - `taxonimo.com` | 第三方（税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
 - `www.bakermckenzie.com` | 第三方（律所） | en | WebSearch 定位 | 上市流程（listing_process_duration 出处，confidence medium）
 - `www.fintechfutures.com` | 第三方（金融科技媒体） | en | WebSearch 定位 | 交易系统/延迟（trading_system_name/data_latency 出处，confidence medium）
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Asia/Riyadh（UTC+3，无夏令时） 的 UTC 偏移与夏令时规则
+  - tzdb「asia」zone 文件（`Asia/Riyadh`）: https://data.iana.org/time-zones/tzdb/asia（HTTP 200，68KB）

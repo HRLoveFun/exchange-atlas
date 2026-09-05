@@ -73,3 +73,6 @@ JSE 在 2026-08 中之后对官网加了 Cloudflare 防护，**且对数据中�
 用户在自己机器上 curl 可能仍正常，但任何在云环境跑的 `make fetch` / `fetch_sources.py` 对 `za-jse`
 都会拿到拦截页（并可能覆盖已有好缓存，见文首「经验」一节）。下次需要重抓 `za-jse` 来源：优先在
 住宅网络环境跑；若只能在云环境，考虑找 `web.archive.org` 快照或人工投喂 PDF（CLAUDE.md 三降级）。
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Africa/Johannesburg（SAST UTC+2，无夏令时） 的 UTC 偏移与夏令时规则
+  - tzdb「africa」zone 文件（`Africa/Johannesburg`）: https://data.iana.org/time-zones/tzdb/africa（HTTP 200，21KB）

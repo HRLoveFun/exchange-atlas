@@ -33,3 +33,6 @@
 - `taxspecialty.com` | 第三方（税务分析） | en | WebSearch 定位 | 资本利得税计入比例（confidence 封顶 medium）
 - `tradingeconomics.com` | 第三方（宏观数据） | en | WebSearch 定位 | 加美贸易摩擦政治风险（confidence 封顶 medium）
 - `cepr.net` | 第三方（CEPR 金融交易税汇编） | en | WebSearch 定位 | 加拿大无金融交易税（costs.financial_transaction_tax，confidence 封顶 medium）
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | America/Toronto（EST/EDT 及夏令时切换 Rule） 的 UTC 偏移与夏令时规则
+  - tzdb「northamerica」zone 文件（`America/Toronto`）: https://data.iana.org/time-zones/tzdb/northamerica（HTTP 200，61KB）

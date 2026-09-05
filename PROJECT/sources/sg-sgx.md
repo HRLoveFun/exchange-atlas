@@ -38,3 +38,6 @@
   - Securities and Futures Act 2001: https://sso.agc.gov.sg/act/sfa2001（HTTP 200，1.3MB）
 - `cftc.gov` | 监管（美国商品期货交易委员会，第三方监管文件） | en | curl 常规 UA 200 | 用于交叉核实 SGX 集团法人实体结构（SGX-ST/SGX-DT/SGX-DC 等），因 CFTC 对 SGX-DC 的境外清算所注册审查披露了集团结构图；⚠️ 非新加坡本地监管机构，交叉验证用，`confidence` 相应处理
   - SGX Legal Entities Structure PDF: https://www.cftc.gov/sites/default/files/stellent/groups/public/@otherif/documents/ifdocs/sgxdcdcoapplegalentstructure.pdf（HTTP 200，197KB）
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Asia/Singapore（UTC+8，无夏令时） 的 UTC 偏移与夏令时规则
+  - tzdb「asia」zone 文件（`Asia/Singapore`）: https://data.iana.org/time-zones/tzdb/asia（HTTP 200，68KB）

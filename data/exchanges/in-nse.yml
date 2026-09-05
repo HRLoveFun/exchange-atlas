@@ -35,6 +35,11 @@ overview:
   timezone:
     zh: "Asia/Kolkata (IST)"
     en: "Asia/Kolkata (IST)"
+    sources:
+      - title: IANA tz database「asia」zone 文件（Asia/Kolkata：IST UTC+5:30，全年无夏令时 Rule）
+        url: https://data.iana.org/time-zones/tzdb/asia
+        accessed: 2026-09-05
+    verified: 2026-09-05
 
   dst_rule:
     zh: "无夏令时（印度全年采用统一的印度标准时间 IST，UTC+5:30，不做季节性调整）"
@@ -160,8 +165,8 @@ overview:
   settlement_currency:
     zh: "印度卢比 (INR)"
     en: "INR"
-    detail: "现货市场资金交收以印度卢比为主；货币衍生品等特定品种以外币计价交易但按卢比交收保证金/损益，本次未逐条核实细则。"
-    confidence: medium
+    detail: "现货市场资金交收以印度卢比为主；货币衍生品等特定品种以外币计价交易但按卢比交收保证金/损益，本次未逐条核实细则。2026-09-05 stable 档来源闭环时查而未得（nseindia.com 对本环境反爬、NSCCL clearing-settlement 页未能取到正文），按防幻觉铁律降级 low，待人工提供 NSCCL 结算规则原文后升级。"
+    confidence: low
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境
@@ -203,7 +208,12 @@ regulation:
     zh: "印度证券交易委员会 (SEBI)"
     en: "SEBI"
     detail: "与市场监管为同一机构；NSE Clearing Limited 作为清算机构本身是否受专门条例（如独立的《Clearing Corporation Regulations》）规管，本次未逐条核实。"
+    sources:
+      - title: About SEBI（SEBI 官网：SEBI 依《SEBI Act 1992》设立，职能为保护投资者利益并监管证券市场）
+        url: https://www.sebi.gov.in/about-sebi.html
+        accessed: 2026-09-05
     confidence: medium
+    verified: 2026-09-05
 
   core_laws:
     zh: "《1956年证券合同（监管）法》(SCRA) 与《1992年印度证券交易委员会法》(SEBI Act)"

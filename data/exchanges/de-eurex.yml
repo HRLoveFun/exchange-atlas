@@ -32,12 +32,22 @@ overview:
   timezone:
     zh: "中欧时间（法兰克福，CET，UTC+1；夏令时CEST，UTC+2）"
     en: "Central European Time (Frankfurt, CET, UTC+1; CEST UTC+2 during daylight saving)"
+    sources:
+      - title: IANA tz database「europe」zone 文件（Europe/Berlin：CET/CEST 及夏令时切换 Rule）
+        url: https://data.iana.org/time-zones/tzdb/europe
+        accessed: 2026-09-05
     confidence: medium
+    verified: 2026-09-05
 
   dst_rule:
     zh: "实行夏令时（随欧盟统一切换CET/CEST）"
     en: "Observes daylight saving time (switches CET/CEST in line with the EU)"
+    sources:
+      - title: IANA tz database「europe」zone 文件（Europe/Berlin 的 CET/CEST 夏令时切换 Rule）
+        url: https://data.iana.org/time-zones/tzdb/europe
+        accessed: 2026-09-05
     confidence: medium
+    verified: 2026-09-05
 
   founded_year:
     zh: "1998（由德国期货交易所DTB与瑞士期权及金融期货交易所SOFFEX合并成立，合并细节为第三方综述未逐条核实）"
@@ -107,13 +117,19 @@ overview:
   trading_currency:
     zh: "多币种——按标的合约计价，欧元为主，另有美元、英镑、瑞士法郎等计价的产品"
     en: "Multi-currency — denominated per underlying contract; primarily EUR, with USD/GBP/CHF-denominated products also listed"
-    detail: "与现货股票交易所'一种主要交易货币'的情况不同，衍生品交易所的计价货币随标的资产而定，是本所与四家现货标杆的一处结构性差异。"
+    detail: "与现货股票交易所'一种主要交易货币'的情况不同，衍生品交易所的计价货币随标的资产而定，是本所与四家现货标杆的一处结构性差异。多币种计价的官方依据见 Eurex Clearing 费用清单所列 quote/fee currencies（AUD/NZD/CAD/EUR/CHF/JPY/NOK/SEK/DKK/GBP）；「美元计价产品」具体合约本次未单独核实到逐字原文，维持待查。"
+    sources:
+      - title: Eurex Clearing AG Price List（费用币种随合约 quote currency 而定——AUD/NZD/CAD/EUR/CHF/JPY/NOK/SEK/DKK/GBP，多币种计价的官方依据）
+        url: https://www.eurex.com/resource/blob/46180/1f489f16fe6f64dfb49d56cdf0d1d4be/data/2026_08_17_ecag_price_list_en.pdf
+        accessed: 2026-09-05
     confidence: medium
+    verified: 2026-09-05
 
   settlement_currency:
     zh: "同交易货币，按合约计价货币结算"
     en: "Same as trading currency; settled in the currency each contract is denominated in"
-    confidence: medium
+    detail: "按合约计价货币结算为对 Eurex 清算结算框架的综合判断；Eurex Clearing Rules 的逐合约结算币种条款本次未在缓存页中取到正文（eurex.com 部分规则 PDF 未落盘），2026-09-05 stable 档来源闭环时降级 low，待补 Eurex Clearing Rules 原文后升级。"
+    confidence: low
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境

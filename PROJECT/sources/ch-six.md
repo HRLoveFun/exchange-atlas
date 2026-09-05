@@ -61,3 +61,6 @@
 - `www.eqs-news.com` | 第三方（公告分发） | en | curl 常规 UA 200 | Swiss Steel 退市 ad-hoc 公告（post_delisting_venue/liquidity_risk_note 出处，confidence medium）
 - `www.swissinfo.ch` | 第三方（瑞士资讯） | en | curl 常规 UA 200 | SIX 交易中断报道（major_outage_history 出处，confidence medium）
 - `www.admin.ch` | 官方（瑞士联邦） | en | curl 常规 UA 200 | 政治风险背景（risks.political_risk_note 出处，建议补一手国家风险来源）
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Europe/Zurich（CET/CEST 及夏令时切换 Rule） 的 UTC 偏移与夏令时规则
+  - tzdb「europe」zone 文件（`Europe/Zurich`）: https://data.iana.org/time-zones/tzdb/europe（HTTP 200，64KB）

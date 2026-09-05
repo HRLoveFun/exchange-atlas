@@ -14,3 +14,6 @@
 
 - `commission.europa.eu` | 官方（欧盟委员会） | en | curl 常规 UA 200 | 资本自由流动法律基础（capital_controls 出处）
 - `www.europarl.europa.eu` | 官方（欧洲议会） | en | curl 常规 UA 200 | 资本自由流动事实说明（capital_controls 交叉核对）
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Europe/Berlin（CET/CEST 及夏令时切换 Rule） 的 UTC 偏移与夏令时规则
+  - tzdb「europe」zone 文件（`Europe/Berlin`）: https://data.iana.org/time-zones/tzdb/europe（HTTP 200，64KB）

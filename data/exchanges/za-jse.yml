@@ -51,8 +51,13 @@ overview:
     detail: "quote 只确认时区名称本身（SAST），UTC+2 的具体偏移量是南非全国通行的标准时区常识、非本次抓取页面逐字确认的数字，故不标 high。"
 
   dst_rule:
-    zh: "不实行夏令时（南非全境全年使用统一的南非标准时间，未检索到官方专门声明，按国家层面常识记录，未附单独 quote）"
-    en: "No daylight saving time (South Africa uses a single South African Standard Time year-round; no dedicated official statement was located, recorded as country-level common knowledge without a separate quote)"
+    zh: "不实行夏令时（南非全境全年使用统一的南非标准时间 SAST，UTC+2，无夏令时切换规则）"
+    en: "No daylight saving time (South Africa uses a single South African Standard Time, SAST UTC+2, year-round with no DST rules)"
+    sources:
+      - title: IANA tz database「africa」zone 文件（Africa/Johannesburg：UTC+2，全年无夏令时 Rule）
+        url: https://data.iana.org/time-zones/tzdb/africa
+        accessed: 2026-09-05
+    verified: 2026-09-05
 
   founded_year:
     zh: "1887年11月8日，由本杰明·沃兰（Benjamin Wollan）创立，首个挂牌公司为其名下的Johannesburg Chambers and Company"
@@ -157,6 +162,8 @@ overview:
   settlement_currency:
     zh: "南非兰特（ZAR），与交易货币一致"
     en: "South African rand (ZAR), same as the trading currency"
+    detail: "2026-09-05 stable 档来源闭环时查而未得：缓存页（STRATE 简介页、JSE T+3 结算页）描述结算服务但未明文陈述结算币种；候选出处为 STRATE Rules 与 JSE 结算规则（jse.co.za 对本环境 Cloudflare 403），按防幻觉铁律降级 low，待人工提供原文后升级。"
+    confidence: low
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境

@@ -898,7 +898,7 @@
       "enum_ref": null,
       "has_detail": true,
       "verified": "2026-08-16",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "ca-tsx",
@@ -2562,7 +2562,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-27",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -2576,9 +2576,9 @@
       "en": "Same as trading currency; settled in the currency each contract is denominated in",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-27",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "de-eurex",
@@ -4063,7 +4063,7 @@
       "enum_ref": null,
       "has_detail": true,
       "verified": "2026-08-14",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "in-nse",
@@ -5261,9 +5261,9 @@
       "en": "Saudi riyal (SAR)",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-14",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "sa-tadawul",
@@ -5682,7 +5682,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -6101,9 +6101,9 @@
       "en": "New Taiwan dollar (TWD)",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-16",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "tw-twse",
@@ -7736,9 +7736,9 @@
       "en": "South African rand (ZAR), same as the trading currency",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-27",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "za-jse",

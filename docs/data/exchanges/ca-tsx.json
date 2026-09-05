@@ -17,24 +17,36 @@
       "timezone": {
         "zh": "东部时间（ET），与纽约同一时区",
         "en": "Eastern Time (ET), same zone as New York",
-        "detail": "TSX 官方文档统一以「ET」标注交易时段（如「9:30 AM」开盘），本次抓取范围内未见对 IANA 时区标识（如 America/Toronto）的专门声明，此处按交易时段惯例填写。",
+        "detail": "TSX 官方文档统一以「ET」标注交易时段（如「9:30 AM」开盘）；IANA tz database 对 America/Toronto 的定义（EST UTC-5 / EDT UTC-4 及夏令时切换 Rule）为时区命名的权威出处， 两者结合支撑本字段（2026-09-05 补来源）。",
+        "sources": [
+          {
+            "title": "IANA tz database「northamerica」zone 文件（America/Toronto：EST/EDT 及夏令时切换 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/northamerica",
+            "accessed": "2026-09-05"
+          }
+        ],
         "confidence": "medium",
-        "verified": "2026-08-16",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "dst_rule": {
         "zh": "实行夏令时（东部时间在 EST/EDT 间切换），与美股同步",
         "en": "Observes Daylight Saving Time (switches between EST/EDT), synchronized with U.S. markets",
+        "sources": [
+          {
+            "title": "IANA tz database「northamerica」zone 文件（America/Toronto 的 EST/EDT 夏令时切换 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/northamerica",
+            "accessed": "2026-09-05"
+          }
+        ],
         "confidence": "medium",
-        "verified": "2026-08-16",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "founded_year": {
         "zh": "1852年7月26日「经纪人协会」（Association of Brokers）成立；1861年10月25日24名经纪人正式创立多伦多证券交易所",
@@ -191,8 +203,8 @@
       "settlement_currency": {
         "zh": "与交易货币一致：加元为主，USD计价证券以美元结算",
         "en": "Same as trading currency: primarily CAD; USD-denominated securities settle in USD",
-        "detail": "推断自 trading_currency 字段，未找到专门针对结算货币的独立官方陈述。",
-        "confidence": "medium",
+        "detail": "推断自 trading_currency 字段，未找到专门针对结算货币的独立官方陈述。2026-09-05 stable 档来源闭环时查而未得（CDS Participant Rules 为候选出处、cds.ca 未能在本次环境取到正文）， 按防幻觉铁律降级 low，待人工提供 CDS 结算规则原文后升级。",
+        "confidence": "low",
         "verified": "2026-08-16",
         "enum": null,
         "spec": null,

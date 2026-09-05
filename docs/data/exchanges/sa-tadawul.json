@@ -15,24 +15,36 @@
       "timezone": {
         "zh": "Asia/Riyadh (UTC+3)",
         "en": "Asia/Riyadh (UTC+3)",
-        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "IANA tz database「asia」zone 文件（Asia/Riyadh：UTC+3，全年无夏令时 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/asia",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "dst_rule": {
         "zh": "不实行夏令时",
         "en": "No daylight saving time",
-        "verified": "2026-08-14",
+        "sources": [
+          {
+            "title": "IANA tz database「asia」zone 文件（Asia/Riyadh 全年无夏令时 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/asia",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "founded_year": {
         "zh": "2007年3月19日，依据《资本市场法》第20条注册成立为股份公司",
@@ -135,11 +147,11 @@
       "settlement_currency": {
         "zh": "沙特里亚尔（SAR）",
         "en": "Saudi riyal (SAR)",
+        "detail": "2026-09-05 stable 档来源闭环时查而未得：Edaa（CSD）会员结算页为本环境下的 JS 壳页、无正文，缓存内其余页面对 SAR 的提及均为保证金/资本语境而非交收币种；候选出处为 Edaa/Muqassa 规则 PDF，按防幻觉铁律降级 low，待补原文后升级。",
+        "confidence": "low",
         "verified": "2026-08-14",
-        "confidence": "medium",
         "enum": null,
         "spec": null,
-        "detail": null,
         "quote": null,
         "sources": null
       }
