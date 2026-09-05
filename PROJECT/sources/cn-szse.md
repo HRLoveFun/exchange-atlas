@@ -1,6 +1,11 @@
 # 深圳证券交易所 Shenzhen Stock Exchange (SZSE) `cn-szse`
 - `safe.gov.cn` | 官方（国家外汇管理局 SAFE；2026-09-05 新增登记，[ADR-079] 风险旗标子棒，与 `cn-sse` 共用） | zh | curl 常规 UA 200（m. 移动版页面为静态 HTML） | 人民币汇率制度（fx_risk_note 出处）
   - 《中华人民共和国外汇管理条例》（2008 修订）全文页（第二十七条：人民币汇率实行以市场供求为基础的、有管理的浮动汇率制度）: http://m.safe.gov.cn/safe/2008/0806/5321.html（HTTP 200，114KB）
+- `locpg.gov.cn` | 官方（中央人民政府驻香港特别行政区联络办公室官网，转载全国性法律全文；2026-09-05 新增登记，[ADR-079] 风险旗标子棒，与 `cn-sse` 共用） | zh | curl 常规 UA 200（静态页） | 外商投资法全文转载（political_risk_note 出处）
+  - 《中华人民共和国外商投资法》全文（第二十八条：外商投资准入负面清单管理；第三十五条：国家建立外商投资安全审查制度、依法作出的安全审查决定为最终决定）: https://www.locpg.gov.cn/jsdt/2019-03/20/c_1210087363.htm（HTTP 200，21KB）
+- `npc.gov.cn` | 官方（立法机构——中国人大网，2026-09-05 实测 curl 200，与 `cn-sse` 共用） | zh | curl 常规 UA 200 | 证券法执法条款（enforcement_note 出处）
+  - 《中华人民共和国证券法》（2019 修订）全文（第一百七十条：证监会执法措施）: http://www.npc.gov.cn/npc/c2/c30834/201912/t20191231_304436.html（HTTP 200，137KB）
+  - 《中华人民共和国外汇管理条例》（2008 修订）全文页（第二十七条：人民币汇率实行以市场供求为基础的、有管理的浮动汇率制度）: http://m.safe.gov.cn/safe/2008/0806/5321.html（HTTP 200，114KB）
 - `pbc.gov.cn` | 官方（货币当局——中国人民银行 PBOC；2026-09-05 新增登记，[ADR-079] 风险旗标子棒，与 `cn-sse` 共用） | zh | curl 常规 UA 200（个别静态页可抓，主站多 WAF） | 人民币汇率制度（fx_risk_note 出处）
   - 「人民币汇率制度」的内容（货币政策司专页）: https://www.pbc.gov.cn/huobizhengceersi/214481/214545/214769/3871699/index.html（HTTP 200，27KB）
 - `szse.cn` | 官方 | zh / en（英文版路径 `/English/...`，非同页切换，独立 URL；页面同样带"仅供参考，中文文本为准"类免责声明——与 SSE 一致，佐证 `source_lang: zh` 的选择） | curl + 常规浏览器 UA 全程 200，未见反爬/限流（比 `english.sse.com.cn` 好抓，不需要加延时）；PDF 用 `pdftotext -layout` 提取纯文本再 grep 定位条款 | 与上交所同属会员制事业法人、同受中国证监会监管、同为 A 股主板注册制，`region`/`regulator`/`review_system` 等字段与 cn-sse 高度一致，可直接对照校验取值口径是否统一；压测点是主板 vs 创业板（对照 cn-sse 主板 vs 科创板）

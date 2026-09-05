@@ -1474,14 +1474,16 @@ risks:
     verified: 2026-09-05
 
   political_risk_note:
-    zh: "深交所受中国证监会统一监管，跨境资金流动、外资持股比例、信息披露合规边界均受国家层面资本管制与外汇管理政策约束（见 regulation.capital_controls、regulation.foreign_ownership_limit）；地缘政治环境变化可能通过跨境资本流动限制、境外投资者准入政策调整等渠道传导至深市，与上交所面临同一国家层面的政治与监管环境"
-    en: "SZSE is regulated uniformly by the CSRC, and cross-border capital flows, foreign ownership limits, and the boundaries of disclosure compliance are all constrained by national-level capital and FX controls (see regulation.capital_controls, regulation.foreign_ownership_limit); shifts in the geopolitical environment could transmit to the Shenzhen market through channels such as cross-border capital flow restrictions or changes to foreign-investor access policy — the same national-level political and regulatory environment faced by SSE"
-    confidence: low
-    detail: "本条为基于已核实的 regulation.capital_controls / foreign_ownership_limit 等结构性字段的推断说明，非独立数据来源；sources 复用支撑 capital_controls 字段的同一份规章，作为背景支撑，而非本字段本身的直接出处。"
+    zh: "境外投资者参与 A 股的政策/政治风险制度核：国家对外商投资实行准入前国民待遇加负面清单管理制度——负面清单规定禁止投资的领域，外国投资者不得投资；规定限制投资的领域，进行投资应当符合负面清单规定的条件（《外商投资法》第二十八条）；国家建立外商投资安全审查制度，对影响或者可能影响国家安全的外商投资进行安全审查，依法作出的安全审查决定为最终决定（《外商投资法》第三十五条，见 sources）。上述准入管理与安全审查属国家层面制度，深交所与上交所同受其约束；与监管机构的日常执法边界见 enforcement_note"
+    en: "Institutional core of policy/political risk for foreign participation in A-shares: the state applies pre-establishment national treatment plus a negative-list management regime for foreign investment — sectors on the prohibited list are off-limits to foreign investors, and investment in restricted sectors must meet the negative-list conditions (Foreign Investment Law, official text); the state has established a foreign-investment security review regime covering investments that affect or may affect national security, and security review decisions made in accordance with law are final (Foreign Investment Law, see sources). These access-management and security-review arrangements are national-level institutions binding both SZSE and SSE; the day-to-day enforcement perimeter is covered in enforcement_note"
+    quote: "国家建立外商投资安全审查制度，对影响或者可能影响国家安全的外商投资进行安全审查。依法作出的安全审查决定为最终决定。"
     sources:
-      - title: 合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法（2020年证监会、人民银行、外汇局令第176号）
-        url: http://www.csrc.gov.cn/csrc/c106256/c1653823/content.shtml
-        accessed: 2026-08-24
+      - title: "《中华人民共和国外商投资法》全文（中联办官网转载；第二十八条负面清单管理、第三十五条安全审查制度）"
+        url: https://www.locpg.gov.cn/jsdt/2019-03/20/c_1210087363.htm
+        accessed: 2026-09-05
+    detail: "原条为基于 capital_controls 等结构性字段的推断说明（非独立来源）；本条按制度核口径改填具名法条官方逐字原文。跨境资金流动与外资持股限制仍见 regulation.capital_controls / foreign_ownership_limit。"
+    confidence: high
+    verified: 2026-09-05
 
   liquidity_risk_note:
     zh: "深市个股流动性分层明显：主板蓝筹与创业板龙头交投活跃，但风险警示（ST/*ST）与退市整理股票因涨跌幅收窄至±5%、叠加适当性门槛（两年以上交易经验、开通前20个交易日日均资产不低于50万元，见 participants.suitability_management）等制度安排，实际流动性显著低于普通股票"
@@ -1504,6 +1506,12 @@ risks:
     confidence: high
 
   enforcement_note:
-    zh: ""
-    confidence: low
-    detail: "已有来源的相关内容见 listing.delisting_conditions（重大违法强制退市情形）；本字段本身未附独立来源，留空。"
+    zh: "执法与稽查制度核：国务院证券监督管理机构（中国证监会）依法对全国证券市场实行集中统一监督管理；证券法第一百七十条规定其依法履行职责时有权采取的措施，包括对证券发行人、证券公司、证券服务机构、证券交易场所、证券登记结算机构进行现场检查，进入涉嫌违法行为发生场所调查取证，以及查阅复制当事人及有关单位和个人的证券交易记录、登记过户记录等资料，对可能被转移、隐匿或者毁损的文件和资料予以封存、扣押（见 sources）。深交所作为证券交易场所属于上述现场检查的明列对象；交易所自律处分与 listing.delisting_conditions（含重大违法强制退市情形）衔接"
+    en: "Enforcement is centralised: the CSRC (the State Council securities regulatory authority) exercises unified regulation over the national securities market; under the PRC Securities Law it may, in performing its duties, conduct on-site inspections of securities issuers, securities companies, securities service agencies, trading venues and depositary/clearing institutions, enter premises where suspected violations occurred to investigate and collect evidence, and inspect/copy trading and registration-transfer records, sealing or seizing documents and materials at risk of being transferred, hidden or destroyed (PRC Securities Law, see sources). SZSE, as a trading venue, is expressly within the enumerated inspection scope; exchange self-regulatory discipline links with listing.delisting_conditions (including mandatory delisting for major violations)"
+    quote: "国务院证券监督管理机构依法履行职责，有权采取下列措施：（一）对证券发行人、证券公司、证券服务机构、证券交易场所、证券登记结算机构进行现场检查；（二）进入涉嫌违法行为发生场所调查取证；"
+    sources:
+      - title: "《中华人民共和国证券法》（2019 修订）全文（中国人大网；第一百七十条证监会执法措施）"
+        url: http://www.npc.gov.cn/npc/c2/c30834/201912/t20191231_304436.html
+        accessed: 2026-09-05
+    confidence: high
+    verified: 2026-09-05
