@@ -90,6 +90,7 @@
 - ADR-083 · 2026-09-05 · tools/ 数据加载样板去重：新增 `tools/data_files.py`
 - ADR-084 · 2026-09-05 · DECISIONS.md 归档阈值：比照 taxonomy.yml 的「暂不拆，设阈值」范式
 - ADR-085 · 2026-09-05 · 前端可视化模块共享层抽取：收敛 clone-and-own
+- ADR-086 · 2026-09-05 · 任务三五棒执行落地：C 桶 40 处三态收口（18 填实 + 2 not_applicable + 20 留空）+ 独立复核订正
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2244,6 +2245,31 @@ print('全库 medium 零 sources:',n)
 **没改：** 本条是纯规划文档，`data/`/`schema/`/`tools/`/前端均未改动；只改 `PROJECT/DECISIONS.md`（本条）+ `PROJECT/ROADMAP.md`（任务四条目细化，指向本 ADR）。
 
 **验证：** 现状核实脚本基于 `tools/sync.py` 既有函数现算、非手数，78 处总量与逐所清单已在正文列出，供接手会话直接核对/复算；`make build` 全绿（两处改动文件均不被 `sync.py` 扫描，`validate`/`verify_quotes`/`check_ui_i18n` 零影响）；`make sync` 二次幂等零 diff。
+
+**日期：** 2026-09-05
+
+---
+
+### ADR-086 — 任务三五棒执行落地：C 桶 40 处三态收口（18 填实 + 2 not_applicable + 20 留空）+ 独立复核订正
+
+**背景：** [ADR-082] 定案的五棒方案本次交互式会话（2026-09-05）执行完毕。执行中的实况与原方案的两处偏差在此记录；「是什么」见各数据文件与 `ROADMAP.md` §三。
+
+**执行结果（逐棒）：**
+
+- **棒 0 · spec 形状前置** — `schema/spec.yml` 衍生品子块 14 个同名字段用 YAML anchor 复用现货侧形状；按 `CLAUDE.md` §四 新不变式 `derivatives_spec_shape_violations()` 机器化「两侧同源」（手抄/漂移即拦），selfcheck 68→73 用例。`data/` 零改动。
+- **棒 1 · `clearing.derivatives` 6 处全部填实（high）** — 验证了「补抓真能出货」的预期：sa-tadawul 四字段全部在**已缓存**的 Muqassa《Derivatives Index Brochure》/Tadawul《Derivatives Market Brochures》/MT30 合约规格里找到干净可整段引用的原文（含原文拼写错误逐字照录）；hk-hkex `delivery_method` 用已缓存的 HKCC PFMI 披露；cn-szse `delivery_method` 用已缓存的期权交易规则 5.13–5.14。**零新增抓取**——「40 处里 32 处是死胡同」的悲观预期只对衍生品交易机制字段成立，清算字段的原判据（源方向 Muqassa/HKCC/中国结算）本身没错，只是 [ADR-021] 那批没往清算来源页里翻。
+- **棒 2 · 负面断言正面化 6/14 填实** — 「换判据不换关键词」的实证：cn-szse `connect_schemes` 改查互联互通**标的证券穷举条款**（深港通办法第十六条），hk-hkex `closing_mechanism`/in-nse 三处改用**穷举式时段表**（官方页本身即全分部时段完整列示），kr-krx `connect_schemes` 是零抓取净收益（夜盘联动沿革 PDF 已在缓存）。8 处维持留空（判据与下次入口汇入 `OPEN-QUESTIONS.md` 第 31 条）。**「穷举性原文推断『无 X』一律 medium、不标 high」**——本条把这一点确立为本轨判级口径（独立复核对 cn-szse 初判 high 的订正即依据此）。
+- **棒 3 · 逐合约口径 2/13 填实** — br-b3 `price_limits` 两处找到 B3 官网按产品线分册公布的逐合约隧道参数（IND B2/WIN W6 组代表样本 + `detail` 声明代表性范围，百分数照录原文小数逗号）；sa-tadawul/in-nse `other_boards` 标字段级 `not_applicable`（裁定②仅有的两处合格样本）；hk-hkex `other_boards`（DPB 参数不公开）与 br-b3 `block_trade` 维持留空；**sg-sgx 8 处走降级**——所需合约规格 PDF 清单（到产品线、合约代码待规格文件确认）写入 `OPEN-QUESTIONS.md` 第 30 条等人工投喂，字段本身零改动。
+- **棒 4 · `holidays_note` 4/6 填实** — 两种合格原文各命中两例：衍生品**专属**日历（au-asx 的 ASX 24 Trading Calendar 页 + T24 PDF：澳公众假期日盘休市/夜盘正常；hk-hkex 的 HKFE 年度假日安排公告 MO/DT/120/25，且明示 MSCI/货币合约在港公众假期**照常交易**——与证券市场的实质差异，此前不为人知的正向发现）、现货日历页**明文纳入**衍生品（br-b3 休市规则句明文列举 listed derivatives；fr-euronext 官网《Holiday Calendar for Euronext's Cash and Derivatives markets》总述句）。in-nse/sg-sgx 维持留空。
+- **独立视角复核** — 触及 40 处 > 30 门槛，按 [ADR-081] 用全新上下文 agent 会话盲审 18 填实 + 2 `not_applicable`（7 维度：quote 整段逐字、数字 ⊆ quote、判级、语义忠实、detail/quote 区分、NA 判据、跨字段一致）：初检 16 PASS / 2 FIX / 2 QUESTION，通过率 88.9% < 95%。**2 处 FIX 就地订正**：cn-szse `connect_schemes` high→medium（穷举条款推断「无 X」不构成 high）+ 删无 quote 支撑的全称否定句；kr-krx `connect_schemes` 否定主张收窄为官方正面记载的夜盘联动终止事实。2 处 QUESTION（br-b3 两条 quote 因 PDF 无 .txt 伴随无法盲核）经协调者补齐 .txt 伴随并做整段核对后逐字成立、转 PASS——顺带证实 [ADR-080] 对 `doc_companion` 的工具层建议。终态 18/18 全 PASS，零幻觉。
+
+**遗留与纪律沉淀：**
+
+- 任务三终态 = **填实 18 + `not_applicable` 2 + 留空 20**（含 sg-sgx 9 处降级）。留空不是未完成：20 处的 `detail` 均写明本轮判据与结果，跨字段汇入 `OPEN-QUESTIONS.md` 第 30/31 条；翻空为实需新证据（人工投喂或渲染型抓取），不作为重开任务三的理由。
+- 「负面断言正面化」的判据沉淀为三型穷举性原文：**穷举标的条款**（cn-szse 第十六条）/ **穷举时段表**（hk、in-nse）/ **年度假日日历**（au、fr、hk）——比「换关键词重搜」有效，因为它把「找不到」转化为「正面依据上的结构性推断」，判级随之可定为 medium 而非留空。
+- 与并行会话的共享检出协调：本会话与任务四收尾会话在同一检出并行工作，棒 3/棒 4 与复核订正的 commit 均按 hunk 选择性暂存（只含本轨改动），生成块（`docs/data/`、`ROADMAP` 矩阵）留待树内全部改动合拢后由 `make sync` 统一再生。
+
+**验证：** `make build` 全绿（validate 20 家 0/0、verify_quotes FAIL=0、selfcheck 73/73、`check_ui_i18n`/`check_no_chapter_ordinals` OK）；`make sync` 幂等；新增登记域名 `asx.com.au`（部分历史 PDF 直链 404 属既有状态）与 `b3.com.br/data/files` 分册短链。
 
 **日期：** 2026-09-05
 

@@ -36,3 +36,4 @@
 - ADR-083 · tools/ 数据加载样板去重：新增 `tools/data_files.py` · worktree-fix-main-adr-heal · 2026-09-05
 - ADR-084 · DECISIONS.md 归档阈值：比照 taxonomy.yml 的「暂不拆，设阈值」范式 · worktree-fix-main-adr-heal · 2026-09-05
 - ADR-085 · 前端可视化模块共享层抽取：收敛 clone-and-own · worktree-frontend-shared-render-helpers · 2026-09-05
+- ADR-086 · 任务三五棒执行落地：C 桶 40 处三态收口（18 填实 + 2 not_applicable + 20 留空）+ 独立复核订正 · main · 2026-09-05
