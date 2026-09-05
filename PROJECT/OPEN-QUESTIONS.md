@@ -145,6 +145,17 @@
     - `cn-sse participants.investor_structure`：需沪市投资者结构官方口径（候选入口：上交所统计年鉴「投资者结构」章节、上交所新闻发布会数据）。
     - `cn-sse infrastructure.trading_system_name`：上交所交易系统官方名称/介绍页未定位（官网技术栏目无系统命名页，候选入口：上交所技术大会/年报、上证技术发展有限责任公司页面）。
 
+30. **[ADR-082 任务三棒 3] `sg-sgx` 衍生品子章 8 处按降级方案维持留空，待人工投喂合约规格 PDF（2026-09-05）。** 依据 [ADR-082] 依据 5：SGX 期货规则原文自述 Contract Specifications 是独立于 Rules 的另一份文件，逐合约的时段/开收盘程序/涨跌停载于合约规格；`www.sgx.com` 探针复核仍是 Angular SPA 空壳（HTTP 200 但正文前端渲染）。涉及字段：`market_structure.derivatives.trading_sessions.pre_market / lunch_break / continuous_pm / after_market`、`opening_mechanism`、`closing_mechanism`、`price_limits.main_board`、`price_limits.other_boards`。**待人工提供**（PDF 直链或文件均可，需覆盖本子块既有样本产品线——MSCI 新加坡指数期货/期权、日经 225 期货/期权、10 年期日本国债期货，见 `contract_specs_note`；其余 SGX 旗舰产品线如 FTSE 中国 A50 期货、STI 期货/期权、USD/CNH 外汇期货可视情况追加，合约代码以各规格文件为准）：
+    - 每份 Contract Specifications 中的 Trading Hours（含 pre-opening / lunch break / after-hours 结构）、Opening/Closing Routine（开盘/收盘例行程序与 Closing Range）、Daily Price Limit（涨跌停档位）三节；
+    - 若同一产品线多份规格参数一致，注明代表性样本即可，无需全产品线投喂。
+31. **[ADR-082 任务三棒 2/棒 3] 衍生品子章经「穷举性原文」复查后仍维持留空的 11 处（2026-09-05）。** 每处的 `detail` 已写明本轮判据与结果，此处汇总并给出下次入口；「维持留空」不是待办遗忘，是裁定①/②下的合法终态，翻空为实需新证据：
+    - `hk-hkex market_structure.derivatives.price_limits.other_boards`：T 时段「動態價格限制機制」逐合约参数未见于公开页面（HKATS 交易参数层面）。**下次入口**：HKEX 合约规格/交易参数文件（如发布过的 DPB/VCM 参数表 PDF）、或人工提供 HKATS 系统参数文档。
+    - `br-b3 market_structure.derivatives.block_trade`：B3 手册「Book of Block Trade」措辞泛指 assets、无衍生品专属时段/门槛页。**下次入口**：B3《Manual de Procedimentos Operacionais》大宗交易章节衍生品分部原文（B3 规则库 PDF 直链）。
+    - `hk-hkex`/`au-asx`/`br-b3`/`fr-euronext`/`sa-tadawul` 的衍生品 `connect_schemes` 5 处：均无官方穷举性清单可证「无跨境安排」（hk 已用「互換通属 OTC Clear 业务线」区隔、au 已用「NZ 计价合约共用同一平台/结算主体」区隔、sa 顶层已有 QFI 废止后的现状描述）。**下次入口**：各所规则手册跨境/互连专章（如 HKFE Rules 的 interconnect 章节）、监管机构跨境业务许可清单。
+    - `fr-euronext market_structure.derivatives.night_session`：22:00 CET 后无独立场次（18:30–22:00 晚间时段已归入 after_market）；Annexe One 的分产品时段表为多列宽表、无法整段引用。**下次入口**：Trading Procedures 正文（非 Annexe）对交易日结构的穷举陈述。
+    - `sa-tadawul market_structure.derivatives.volatility_interruption`：《衍生品交易与会员规则/程序》全文未见类似现货 Volatility Auction 的机制。**下次入口**：Muqassa/Saudi Exchange 对衍生品盘中价格管制的正面规则文本（注意 `saudiexchange.sa` Akamai 403，见上文 sa-tadawul 专条）。
+    - `in-nse market_structure.derivatives.volatility_interruption`：Market Timings 表能证「无独立时段」，证不了「无盘中冷静机制」。**下次入口**：NSE 衍生品交易规则/监控措施专页（Price Bands & Surveillance Actions 栏目下衍生品分部）原文。
+
 <!-- BEGIN:GENERATED auto-issues -->
 - `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `br-b3` 基本信息 / 夏令时规则（dst_rule）— confidence: low

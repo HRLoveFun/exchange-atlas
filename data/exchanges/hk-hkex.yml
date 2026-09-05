@@ -746,7 +746,7 @@ market_structure:
       other_boards:
         zh: ""
         confidence: low
-        detail: "T时段「動態價格限制機制」浮动区间的具体百分比参数，本次抓取页面未披露具体数值，留空。"
+        detail: "T时段「動態價格限制機制」（HKATS 防错价的动态价格区间）的逐合约百分比参数未在 HKEX 公开页面披露（载于 HKATS 交易参数/合约规格层面，本次官方检索未命中公开参数表），维持留空。注意与已填字段的分工：T+1 时段固定价格限制（±6%/±7%）在 main_board、市调机制 VCM ±5% 冷静期在 volatility_interruption，本字段只剩 T 时段 DPB 这一缺口。已记入 OPEN-QUESTIONS。"
 
     circuit_breaker:
       enum: stock_level
