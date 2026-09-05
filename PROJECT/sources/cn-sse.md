@@ -25,7 +25,10 @@
   - 2026-08-24 新增：证券公司名录（2026年6月）XLS（`participants.broker_landscape` 出处，用 `xlrd` 解析，表头1行+150家持牌证券公司数据行）: http://www.csrc.gov.cn/csrc/c101900/c1029659/1029659/files/%E8%AF%81%E5%88%B8%E5%85%AC%E5%8F%B8%E5%90%8D%E5%BD%95%EF%BC%882026%E5%B9%B46%E6%9C%88%EF%BC%89.xls（HTTP 200，44544B）
 - `chinaclear.cn` | 官方（清算机构） | zh | curl 常规 UA 可过；⚠️ 官网主站（`www.chinaclear.cn/zdjs/...`）导航栏页面是 Angular 前端渲染壳，静态 curl 只能拿到菜单文字、拿不到「法律规则」「收费标准」等栏目正文，需改找具体 PDF 直链（如 `zdjs/editor_file/` 路径下的历史通知附件） | 中国证券登记结算有限责任公司（ChinaClear），A股中央对手方与中央证券存管机构，设上海分公司
   - 2026-08-24 新增：《中国证券登记结算有限责任公司证券账户管理规则》修订通知附件 PDF（第三章「证券账户业务」第17-20条给出账户开立主体资格、一码通账户/子账户结构、身份信息核验要求，`participants.account_opening_requirements` 出处）: http://www.chinaclear.cn/zdjs/editor_file/20141008102818122.pdf（HTTP 200，359387B）
-- `npc.gov.cn` | 官方（立法机构） | zh | 未测试反爬，本次仅用 WebSearch 摘要定位未额外 curl | 全国人民代表大会官网，《中华人民共和国证券法》等法律的权威公布渠道
+- `npc.gov.cn` | 官方（立法机构——中国人大网，全国人民代表大会官网，《中华人民共和国证券法》等法律的权威公布渠道；2026-09-05 实测 curl 常规 UA 200，全文页为静态 HTML） | zh | curl 常规 UA 200 | 证券法执法条款（enforcement_note 出处）
+  - 《中华人民共和国证券法》（2019 修订）全文（第一百七十条：国务院证券监督管理机构依法履行职责有权采取的执法措施——现场检查/调查取证/封存扣押/查询账户等）: http://www.npc.gov.cn/npc/c2/c30834/201912/t20191231_304436.html（HTTP 200，137KB）
+- `locpg.gov.cn` | 官方（中央人民政府驻香港特别行政区联络办公室官网，转载全国性法律全文；2026-09-05 新增登记，[ADR-079] 风险旗标子棒） | zh | curl 常规 UA 200（静态页） | 外商投资法全文转载（political_risk_note 出处）
+  - 《中华人民共和国外商投资法》全文（第二十八条：外商投资准入负面清单管理；第三十五条：国家建立外商投资安全审查制度、依法作出的安全审查决定为最终决定）: https://www.locpg.gov.cn/jsdt/2019-03/20/c_1210087363.htm（HTTP 200，21KB）
 - `people.com.cn` | 第三方（官方媒体） | zh | curl 需按 GBK 解码（非 UTF-8），常规 UA 可过 | 用于印花税税率调整等财政部/税务总局公告的转载确认；`confidence` 相应标 medium（非财政部原始公告页）
 - `cls.cn` | 第三方（财经媒体） | zh | 未测试专门反爬，本次 WebSearch 摘要已够用未额外 curl | 用于退市规则修订的综述性报道；`confidence` 标 medium
   - 2026-08-24 新增：中国结算：4月29日起将股票交易过户费总体下调50%（2022-04-28发文，`costs.clearing_fees` 出处；第三方财经媒体转述 ChinaClear 通知，`confidence` 标 medium）: https://www.cls.cn/detail/1001120
