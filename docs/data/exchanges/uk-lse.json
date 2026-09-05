@@ -1072,31 +1072,21 @@
         "spec": null
       },
       "transfer_between_boards": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "AIM转Main Market等板块间转移机制本次未逐条核实，仅在Admission and Disclosure Standards术语表中确认存在“AIM转出”相关条款（1.5.1 Transfers from AIM），未展开细节。",
+        "zh": "主板内部上市类别间转移有专章规定：UKLR 21.5《Transfer between listing categories》列明发行人可在上市类别之间申请转移——如国际商业公司第二上市类↔商业公司类、过渡类↔商业公司类、↔封闭/开放式投资基金类等组合；主板与 AIM 之间的移动则不属于 UKLR 转移类别（AIM 是非交易所上市的交易场所准入），须按 AIM 准入规则另行办理",
+        "en": "Transfers between listing categories on the Main Market are governed by a dedicated section: UKLR 21.5 'Transfer between listing categories' allows an issuer to transfer its listing category — e.g. equity shares (international commercial companies secondary listing) ↔ (commercial companies), (transition) ↔ (commercial companies), and ↔ closed-ended/open-ended investment funds; moving between the Main Market and AIM is not a UKLR category transfer (AIM is admission to trading, not a listing) and follows separate AIM admission rules",
+        "detail": "由『未逐条核实』升级：UKLR sourcebook 全文 PDF（已在缓存）第 21.5 条正文坐实类别转移组合；主板↔AIM 的定性（UKLR 转移 vs AIM 准入）为基于规则框架的结构判断，如实标注。",
         "sources": [
           {
-            "title": "Admission and Disclosure Standards（官网，2021年1月版）",
-            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook，2026年4月更新版）",
+            "title": "UKLR — UK Listing Rules sourcebook 全文 PDF（FCA Handbook，UKLR 21.5 Transfer between listing categories）",
             "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "AIM Rules for Companies（官网，2026年1月版）",
-            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf",
-            "accessed": "2026-08-14"
+            "accessed": "2026-09-05"
           }
         ],
+        "quote": "UKLR 21.5 Transfer between listing categories Application R UKLR 21.5.1 This section applies to an issuer that wishes to transfer the category of its listing from: (1) the equity shares (international commercial companies secondary listing) category to the equity shares (commercial companies) category;",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "continuing_obligations": {
         "zh": "官方名册内公司适用UKLR第6章持续义务（equity shares (commercial companies) 类别）；AIM公司须始终保留一名保荐人（Nominated Adviser），由其负责持续评估公司对AIM监管框架的适当性",

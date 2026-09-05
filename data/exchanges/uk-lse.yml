@@ -754,9 +754,25 @@ listing:
     confidence: medium
 
   transfer_between_boards:
-    zh: ""
-    confidence: low
-    detail: "AIM转Main Market等板块间转移机制本次未逐条核实，仅在Admission and Disclosure Standards术语表中确认存在“AIM转出”相关条款（1.5.1 Transfers from AIM），未展开细节。"
+    zh: "主板内部上市类别间转移有专章规定：UKLR 21.5《Transfer between listing categories》列明发行人可在上市类别之间申请转移——如国际商业公司第二上市类↔商业公司类、过渡类↔商业公司类、↔封闭/开放式投资基金类等组合；主板与 AIM 之间的移动则不属于 UKLR 转移类别（AIM 是非交易所上市的交易场所准入），须按 AIM 准入规则另行办理"
+    en: "Transfers between listing categories on the Main Market are governed by a dedicated section: UKLR 21.5 'Transfer between listing categories' allows an issuer to transfer its listing category — e.g. equity shares (international commercial companies secondary listing) ↔ (commercial companies), (transition) ↔ (commercial companies), and ↔ closed-ended/open-ended investment funds; moving between the Main Market and AIM is not a UKLR category transfer (AIM is admission to trading, not a listing) and follows separate AIM admission rules"
+    detail: "由『未逐条核实』升级：UKLR sourcebook 全文 PDF（已在缓存）第 21.5 条正文坐实类别转移组合；主板↔AIM 的定性（UKLR 转移 vs AIM 准入）为基于规则框架的结构判断，如实标注。"
+    sources:
+      - title: "UKLR — UK Listing Rules sourcebook 全文 PDF（FCA Handbook，UKLR 21.5 Transfer between listing categories）"
+        url: https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf
+        accessed: 2026-09-05
+    quote: "UKLR 21.5 Transfer between listing categories Application R UKLR 21.5.1 This section applies to an issuer that wishes to transfer the category of its listing from: (1) the equity shares (international commercial companies secondary listing) category to the equity shares (commercial companies) category;"
+    confidence: high
+
+  delisting_process:
+    zh: "取消上市（除牌）双向程序（UKLR 21）：① FCA 强制取消——FCA 认为存在妨碍正常有序交易的特别情形时可取消上市（如证券不再按规则获准交易、发行人不再满足持续义务如公众持股比例低于 10%、停牌超过 6 个月等）；② 发行人主动申请——须书面提出并载明证券详情、背景与理由、拟生效日期等要素，并按 UKLR 21.2.8R 出具股东决议等证明文件"
+    en: "Cancellation of listing runs both ways (UKLR 21): (1) FCA cancellation — the FCA may cancel the listing where special circumstances preclude normal regular dealings (e.g. securities no longer admitted to trading as required, continuing obligations unmet such as public hands falling below 10%, or suspension exceeding 6 months); (2) issuer-initiated requests — a written request must set out the issuer's name, the securities and RIEs concerned, background and reasons, the requested effective date, and evidence of any resolution required under UKLR 21.2.8R"
+    sources:
+      - title: "UKLR — UK Listing Rules sourcebook 全文 PDF（FCA Handbook，UKLR 21.2 Cancelling listing / 21.3 Requests to cancel or suspend）"
+        url: https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf
+        accessed: 2026-09-05
+    quote: "The FCA may cancel the listing of securities if it is satisfied that there are special circumstances that preclude normal regular dealings in them. ... (2) the issuer no longer satisfies its continuing obligations for listing – for example, if the percentage of shares in public hands falls below 10% ... (3) the securities' listing has been suspended for more than 6 months; ... A request by an issuer for the listing of its securities to be suspended or cancelled must be in writing and must include: (1) the issuer's name; (2) details of the securities to which it relates and the RIEs on which they are traded; (3) a clear explanation of the background and reasons for the request; (4) the date on which the issuer requests the suspension or cancellation to take effect;"
+    confidence: high
 
   continuing_obligations:
     zh: "官方名册内公司适用UKLR第6章持续义务（equity shares (commercial companies) 类别）；AIM公司须始终保留一名保荐人（Nominated Adviser），由其负责持续评估公司对AIM监管框架的适当性"
