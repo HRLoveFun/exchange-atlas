@@ -44,6 +44,7 @@
 - `fss.or.kr` | 官方（金融监督院 FSS） | ko | curl 常规 UA 200 | 投资者保护/ suitability（investor_protection 出处）
 - `www.fss.or.kr` | 官方（FSS www 前缀） | ko | curl 常规 UA 200 | 同上
 - `www.fsc.go.kr` | 官方（金融委员会 FSC） | ko | curl 常规 UA 200；英文新闻页 `/eng/prXXXXXX/<id>` 同样 curl 200 | 监管框架（regulation 出处）；`dark_pool` 依据：FSC 于 2025-02-05 向 Nextrade 授予 ATS 最终许可、2025-03-04 开业的英文新闻稿 https://www.fsc.go.kr/eng/pr010101/83967（ATS 立法依据 2013 年立）
+  - FSC-FSS-KRX Launch Joint Response Team to Root Out Stock Market Manipulation（2025-07-30 英文新闻稿：FSC/FSS/KRX 三方在 KRX 设立股价操纵联合应对组、强化 KRX 市场监视委员会初期应对职能，证券期货委员会 SFC 委员长重申根除市场操纵；enforcement_note 出处）: https://www.fsc.go.kr/eng/pr010101/85032（HTTP 200，24KB）
 - `nextrade.co.kr` | 官方（韩国首家 ATS Nextrade / NXT 自身官网） | en（`/en/` 路径）/ ko | curl 常规 UA 200 | `dark_pool` 依据：NXT 市场概览页——「Korea's first Alternative Trading Platform」「second stock trading venue alongside the Korea Exchange, established under the Financial Investment Services and Capital Markets Act」，打破韩国 50 年单一交易系统
   - Market Overview: https://nextrade.co.kr/en/marketOverview/content.do
 - `law.kofia.or.kr` | 官方（韩国证券业协会 KOFIA） | ko | curl 常规 UA 200 | 自律规则/适当性（suitability_management 出处）

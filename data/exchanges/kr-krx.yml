@@ -1502,11 +1502,13 @@ risks:
     confidence: high
 
   enforcement_note:
-    zh: "执法与稽查：FSS/KRX对市场操纵、内幕交易、不实披露设有查处与披露机制；近年韩国加强对非法（无券）卖空(naked short selling)的执法——2023–2024年曾全面暂停卖空并对外资行立案调查，2025年6月有条件恢复卖空并引入NS(非同步)制度与更严罚则。上市公司违规可被指定为管理股乃至退市（见 delisting_process）。本次未从一手来源逐项抓取执法统计，建议后续以FSS年报复核。"
-    en: "Enforcement: the FSS/KRX have investigation and disclosure mechanisms for market manipulation, insider trading and false disclosure; in recent years Korea stepped up enforcement against illegal (naked) short selling — a full short-selling ban was in place during 2023–2024 with several foreign banks investigated, and short selling was conditionally resumed in June 2025 with an NS (non-synonymous) order system and stricter penalties. Listed-company violations can lead to administrative-issue designation and even delisting (see delisting_process). Enforcement statistics were not fetched from a primary source this session; recommend re-checking against FSS annual reports."
+    zh: "韩国股市执法为监管机构与交易所三方协同：金融委员会（FSC）、金融监督院（FSS）与韩国交易所（KRX）在 KRX 设立股价操纵联合应对组，作为三方协作机制、旨在强化 KRX 市场监视委员会的初期应对职能；证券期货委员会（SFC）委员长在相关场合重申根除市场操纵的重要性（FSC 官方英文新闻稿，见 sources）。上市公司违规可被指定为管理股乃至退市（见 delisting_process）"
+    en: "Korean equity-market enforcement runs as a three-way arrangement between regulators and the exchange: the Financial Services Commission (FSC), the Financial Supervisory Service (FSS) and the Korea Exchange (KRX) launched a joint response team on stock market manipulation, set up at the KRX as a collaborative operation of the three organizations and aimed at bolstering the initial response function of KRX's market surveillance committee; the Securities and Futures Commission (SFC) chairman reaffirmed the importance of stamping out market manipulation (official FSC press release, see sources). Listed-company violations can lead to administrative-issue designation and even delisting (see delisting_process)"
+    quote: "The joint response team is a collaborative operation of the three organizations set up at the KRX, and it aims to bolster the initial response function of KRX's market surveillance committee."
     sources:
-      - title: FSS enforcement / short-selling reform（FSS，本次未抓取一手页）
-        url: https://www.fss.or.kr/eng/
-        accessed: 2026-08-27
-    quote: ""
-    confidence: low
+      - title: "FSC-FSS-KRX Launch Joint Response Team to Root Out Stock Market Manipulation（FSC 官方英文新闻稿）"
+        url: https://www.fsc.go.kr/eng/pr010101/85032
+        accessed: 2026-09-05
+    detail: "原字段的无券卖空执法史（全面暂停/有条件恢复/NS 制度）未取得一手逐字原文，依覆盖边界删除；待 FSS 官方英文年报或新闻稿原文后可回填。"
+    confidence: high
+    verified: 2026-09-05
