@@ -33,3 +33,5 @@
 - ADR-080 · 任务四第二人独立复核：78 处终态，22 处订正（含 2 处素材错挂），零幻觉 · main · 2026-09-05
 - ADR-081 · 自动合并流水线：CI build 检查 + auto-merge + ADR 定号 post-merge healer，§四"人工抽检"改"独立视角复核" · main · 2026-09-05
 - ADR-082 · 数据空缺复核轨任务三执行方案：C 桶 40 处按「上次卡在哪」重排为五棒 + 三处范围裁定 · fix-main-adr-pending · 2026-09-05
+- ADR-083 · tools/ 数据加载样板去重：新增 `tools/data_files.py` · worktree-fix-main-adr-heal · 2026-09-05
+- ADR-084 · DECISIONS.md 归档阈值：比照 taxonomy.yml 的「暂不拆，设阈值」范式 · worktree-fix-main-adr-heal · 2026-09-05
