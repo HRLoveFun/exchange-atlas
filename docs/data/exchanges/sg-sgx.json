@@ -1046,6 +1046,11 @@
             "quote": null
           },
           "continuous_am": {
+            "spec": {
+              "start": null,
+              "end": null,
+              "note": "T 时段（正常交易时段）存在、钟点逐合约规定，载于各合约 Contract Specifications 文件（sgx.com SPA 未抓取，见 OPEN-QUESTIONS 第30条）"
+            },
             "zh": "「T时段」（T Session，即合约的正常交易时段）：具体开收盘钟点因合约而异，规则原文未给出统一时间表，仅确认「T时段」这一划分本身存在——用以区分「T日成交」与「T+1时段成交」两类协商大宗交易（NLT）的适用规则（见 night_session）；具体钟点载于各合约独立的 Contract Specifications 文件（sgx.com 前端渲染，本次未能抓取）",
             "en": "\"T Session\" (the Contract's normal trading hours): exact opening/closing clock times vary by contract and are not tabulated in the Rules text; only the existence of the \"T\" session designation itself is confirmed — used to distinguish \"T Trades\" from \"T+1 Trades\" for Negotiated Large Trade (NLT) purposes (see night_session); exact times live in each Contract's separate Contract Specifications document (client-rendered on sgx.com, not fetchable this session)",
             "sources": [
@@ -1059,7 +1064,6 @@
             "confidence": "medium",
             "verified": "2026-08-14",
             "enum": null,
-            "spec": null,
             "detail": null
           },
           "lunch_break": {
@@ -1114,6 +1118,11 @@
             "quote": null
           },
           "night_session": {
+            "spec": {
+              "start": null,
+              "end": null,
+              "note": "T+1 时段（收市后/延长交易时段）与 T 时段并列存在、钟点逐合约规定；错误交易撤销时限条款明文区分两时段"
+            },
             "zh": "「T+1时段」（T+1 Session，收市后/延长交易时段）：与「T时段」并列存在，规则原文在错误交易撤销时限（T或T+1时段收盘后15分钟内不得再申请撤销）等条款中明确区分两个时段的处理方式，但具体起止钟点同样未见统一时间表，因合约而异",
             "en": "\"T+1 Session\" (after-hours/extended trading session): exists alongside the \"T\" Session — the Rules text explicitly distinguishes the two sessions' treatment (e.g. no error-trade cancellation may be requested beyond 15 minutes after the close of the T or T+1 session), but exact clock times are likewise not tabulated and vary by contract",
             "sources": [
@@ -1127,7 +1136,6 @@
             "confidence": "medium",
             "verified": "2026-08-14",
             "enum": null,
-            "spec": null,
             "detail": null
           }
         },
