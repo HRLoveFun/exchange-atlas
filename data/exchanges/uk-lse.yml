@@ -1383,8 +1383,14 @@ risks:
     confidence: medium
 
   fx_risk_note:
-    zh: ""
-    confidence: low
+    zh: "英镑为自由浮动货币、英国无资本管制：1979-10-23 财政大臣 Geoffrey Howe 在下议院宣布自当日午夜起撤销全部剩余外汇管制（官方议会记录原文），英国投资者的跨境证券投资与外汇兑换自此不受管制；对非英镑投资者的 LSE 上市证券持仓而言，汇率风险来自其本币兑英镑的波动，无官方对冲安排或管制缓冲"
+    en: "Sterling floats freely and the UK has no capital controls: on 23 October 1979 Chancellor Geoffrey Howe announced in the Commons the removal of all remaining exchange control restrictions from midnight that night (official Hansard record) — since then UK cross-border portfolio investment and FX conversion are uncontrolled; for non-GBP investors holding LSE-listed securities, FX risk arises from their home currency's fluctuation against sterling, with no official hedging arrangement or control buffer"
+    sources:
+      - title: "EXCHANGE CONTROLS, HC Deb 23 October 1979 vol 972 cc202-14（英国议会官方 Hansard 记录，外汇管制全面撤销的一手原文）"
+        url: https://api.parliament.uk/historic-hansard/commons/1979/oct/23/exchange-controls
+        accessed: 2026-09-05
+    quote: "I have now decided to remove all the remaining exchange control restrictions from midnight tonight"
+    confidence: medium
 
   political_risk_note:
     zh: "英国对俄制裁曾直接导致LSE按自身规则暂停特定证券交易：2022年3月3日，交易所依《伦敦证券交易所规则》第1510条，援引「俄乌事件相关制裁、市场状况恶化、维护市场平稳运行」为由，即时暂停约20只俄罗斯公司GDR/ADR（含Gazprom、Lukoil、Novatek、Norilsk Nickel、PhosAgro等）的交易准入，是地缘政治/制裁风险直接作用于LSE挂牌证券交易资格的一手实证"
