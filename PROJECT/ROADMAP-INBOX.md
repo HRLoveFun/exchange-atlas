@@ -18,3 +18,4 @@
 
 - 2026-09-05 · 抗膨胀落地：SOURCES 拆 20 分片 + SOURCES/DECISIONS 生成索引 + INBOX 200 字上限 + ADR 引用扩面（selfcheck 48→68） · [ADR-077] · main
 
+- 2026-09-05 · 风险旗标数据子棒落地方案定案（估清 24 字段 / 制度核-分析尾二分 / AREAER 封顶 medium / 第12章来源不变式），执行未开始 · [ADR-PENDING-risk-flags-data-plan] · worktree-risk-flags-data-plan
