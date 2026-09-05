@@ -215,15 +215,21 @@
         "sources": null
       },
       "disclosure_requirements": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "披露义务双层结构（《主板上市规则》第13章）：①法定层——SFO《内幕消息条文》（Inside Information Provisions）对上市发行人及其董事施加法定义务，内幕消息在知悉后须在合理切实可行范围内尽快披露，证监会负责执行（并发布《披露内幕消息指引》），联交所在发现可能违例时移交证监会处理；②规则层——第13章订明须披露的交易与其他事项分类，且发行人董事对全面遵守上市规则承担集体与个人责任（13.04）",
+        "en": "A two-layer disclosure regime (Main Board Listing Rules Chapter 13): (1) statutory layer — the Inside Information Provisions of the SFO impose statutory obligations on listed issuers and their directors to disclose inside information as soon as reasonably practicable, with the SFC responsible for enforcement (and the Guidelines on Disclosure of Inside Information issued); the Exchange refers possible breaches to the SFC; (2) rules layer — Chapter 13 identifies the circumstances requiring disclosure of transactions and other matters, and an issuer's directors are collectively and individually responsible for full compliance with the Listing Rules (13.04)",
+        "sources": [
+          {
+            "title": "主板《上市规则》综合 PDF（HKEX 官方，第13章 DISCLOSURE：13.04 董事责任、13.05 内幕消息法定披露义务与证监会执行分工）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Rules-and-Guidance/Listing-Rules/Consolidated-PDFs/Main-Board-Listing-Rules/consol_mb.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "An issuer's directors are collectively and individually responsible for ensuring the issuer's full compliance with the Listing Rules. ... The Inside Information Provisions impose statutory obligations on listed issuers and their directors to disclose inside information as soon as reasonably practicable after the information has come to the listed issuers' knowledge, and gives the Commission the responsibility for enforcing those obligations.",
+        "confidence": "high",
         "detail": "草稿印象：中英双语披露，与上交所（仅中文）形成对比——具体披露义务细节未核实，留空。",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "investor_protection": {
         "zh": "《证券及期货条例》设立投资者赔偿基金，由证监会全资附属的投资者赔偿有限公司（ICC）管理，就持牌中介人/认可财务机构因无力偿债、破产清盘、违反信托、亏空、欺诈或渎职而违责导致的证券期货交易损失作出赔偿，2020年1月1日起每名投资者赔偿上限由15万港元提升至50万港元（联名户口每名户口持有人各享50万港元上限），2020年起并将沪深港通北向交易纳入保障范围；另设「合适性规定」（操守准则第5.2段），要求持牌人在提供建议或招揽时须确保在所有情况下均属合理",
