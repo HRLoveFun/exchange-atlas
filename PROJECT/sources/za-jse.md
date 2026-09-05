@@ -41,7 +41,9 @@
 
 ---
 
-- `www.resbank.co.za` | 官方（南非储备银行 SARB） | en | curl 常规 UA 200 | 资本管制/外汇/退市后转移（capital_controls/post_delisting_venue 出处）
+- `www.resbank.co.za` | 官方（南非储备银行 SARB） | en | curl 常规 UA 200；⚠️ 2026-09-05 复测：`/content/dam/` 下的 PDF 直链与 `mpc-statements` 列表页被 WAF 拦（HTTP 200 但响应体为 244B「Request Rejected」，F5/BIG-IP 特征），普通说明页仍可达——PDF 类来源走 wayback 回退；已实测 SARB 一手材料（MPC 声明 2026-03 / MPR April 2025）**均无汇率制度定性表述**，兰特自由浮动的制度性原文需另寻来源（fx_risk_note 改用 IMF，见下） | 资本管制/外汇/退市后转移（capital_controls/post_delisting_venue 出处）
+- `imf.org` | 第三方（国际组织，IMF——按 CLAUDE.md 二第3条与 [ADR-079]，confidence 封顶 medium，即便摘到逐字原文也一样；仅作 AREAER / 第四条款磋商类兜底与交叉印证，不作主源） | en | ⚠️ `www.elibrary.imf.org` 直连 403，经 wayback 快照抓取 | 汇率制度定性（fx_risk_note 出处）：SARB 一手页面无「兰特自由浮动」的定性原文（已实测 MPC 声明与 MPR），IMF 第四条款磋商报告的 Exchange Rate Arrangement 小节是该断言当前可得的最正式来源
+  - South Africa: 2022 Article IV Consultation—Staff Report（IMF Country Report No. 22/37，Exchange Rate Arrangement 小节：rand 自由浮动 + de jure free floating / de facto floating；直连 403，经 wayback 快照 20240529213244 抓取，392KB）PDF: https://www.elibrary.imf.org/downloadpdf/view/journals/002/2022/037/article-A002-en.pdf
 - `www.gov.za` | 官方（南非政府） | en | curl 常规 UA 200 | 账户开立/ suitability 监管（account_opening_requirements 出处）
 - `www.state.gov` | 官方（美国国务院投资环境报告） | en | WebSearch 定位 | 外资准入/政治风险（foreign_ownership_limit/political_risk_note 出处）
 - `www.fatf-gafi.org` | 官方（FATF） | en | WebSearch 定位 | 政治/合规风险（political_risk_note 出处）

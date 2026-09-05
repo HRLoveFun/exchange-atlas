@@ -51,6 +51,9 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
       `- ` 行不得超过 200 字——白纸黑字的「一行一条一句话」约定加机器上限，挡它
       静默膨胀成第二份详版（只限行长度，不限堆积条数：堆积是协调者未及时折叠所致，
       拿它挡后台任务自己的 make build 会误伤错误的人）
+  19. stale 复核提醒（[ADR-060] 任务五③）：已填字段超过 volatility 复核阈值、或
+      未记 verified 无法判定新鲜度时，以 warning 输出逐字段清单——不阻断构建
+      （[ADR-052] 之后构建侧不再有打印「哪些字段超期了」的出口，这里是唯一一处）
 """
 import datetime
 import json
@@ -706,6 +709,8 @@ def extract_generated_block(text, name):
 
 
 def validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchanges_expanded):
+    # freshness_rows 是 health-summary 校验本来就要算的；顺路返回给 main 喂
+    # stale_field_warnings（校验项 19），避免为 stale 清单二次扫描一遍 data/。
     matrix_cells, freshness_rows = [], []
     for eid, ex in exchanges_expanded.items():
         matrix_cells += sync.collect_matrix_cells(eid, taxonomy, ex["chapters"])
@@ -736,6 +741,41 @@ def validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchange
     expected_glossary = sync.render_glossary_md(glossary) + "\n"
     if glossary_md != expected_glossary:
         err("PROJECT/GLOSSARY.md 已过期（应由 schema/glossary.yml 全量生成），跑 `make sync` 重新生成")
+
+    return freshness_rows
+
+
+def stale_field_warnings(freshness_rows):
+    """校验项 19（[ADR-060] 任务五③）：stale 复核提醒，warning、不阻断。
+
+    输入是 sync.compute_freshness() 的行。stale 行分两组：
+    - 超期：verified 存在且 age_days 超过 volatility 阈值，按超期天数降序——
+      处置动作是重抓原文复核；
+    - 无法判定：未记 verified（compute_freshness 对缺失/非法日期默认置 stale）——
+      处置动作只是补个日期。
+    两者处置成本差一个量级，分开列，不混排。0 条 stale 返回空列表、零输出。
+    """
+    overdue = sorted(
+        (r for r in freshness_rows if r.get("stale") and r.get("age_days") is not None),
+        key=lambda r: -r["age_days"])
+    unknown = [r for r in freshness_rows if r.get("stale") and r.get("age_days") is None]
+    if not overdue and not unknown:
+        return []
+    parts = []
+    if overdue:
+        parts.append(f"{len(overdue)} 个已填字段超过复核阈值")
+    if unknown:
+        parts.append(f"{len(unknown)} 个未记 verified、无法判定新鲜度")
+    msgs = ["stale 复核提醒（不阻断构建）：" + "；".join(parts) + "，清单如下："]
+    msgs += [
+        f"`{r['exchange_id']}` {r['label_zh']}（{r['field_path']}）— {r['age_days']} 天未核实"
+        f"（volatility: {r.get('volatility')}，verified: {r.get('verified')}）"
+        for r in overdue]
+    msgs += [
+        f"`{r['exchange_id']}` {r['label_zh']}（{r['field_path']}）— 未记 verified，无法判定复核时限"
+        f"（volatility: {r.get('volatility')}）"
+        for r in unknown]
+    return msgs
 
 
 def validate_docs_data_fresh(taxonomy, glossary, enums, exchanges_expanded):
@@ -1050,7 +1090,8 @@ def main():
         err(msg)
 
     validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered_domains, domain_tags, spec_shapes)
-    validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchanges_expanded)
+    freshness_rows = validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchanges_expanded)
+    warnings.extend(stale_field_warnings(freshness_rows))
     validate_docs_data_fresh(taxonomy, glossary, enums, exchanges_expanded)
     validate_path_references()
     validate_adr_anchors()

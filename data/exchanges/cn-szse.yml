@@ -619,6 +619,7 @@ market_structure:
       verified: 2026-09-05
     trading_sessions:
       pre_market:
+        spec: {start: "09:15", end: "09:25", kind: opening_auction}
         zh: "无独立盘前时段；9:15-9:25 为开盘集合竞价，与现货主板/创业板集合竞价时段完全一致"
         en: "No separate pre-market session; 9:15-9:25 a.m. is the opening call auction — identical to the cash equity market's opening auction window"
         sources:
@@ -628,6 +629,7 @@ market_structure:
         quote: "期权合约的交易时间为每个交易日 9:15 至 9:25、9:30 至 11:30、13:00 至 15:00。其中，9:15 至 9:25 为开盘集合竞价时间，14:57 至 15:00 为收盘集合竞价时间，其余时段为连续竞价时间，本规则另有规定的除外。"
         confidence: high
       continuous_am:
+        spec: {start: "09:30", end: "11:30", kind: continuous}
         zh: "9:30-11:30"
         en: "9:30 a.m.-11:30 a.m."
         sources:
@@ -637,11 +639,13 @@ market_structure:
         quote: "9:15 至 9:25、9:30 至 11:30、13:00 至 15:00"
         confidence: high
       lunch_break:
+        spec: {start: "11:30", end: "13:00", kind: lunch_recess}
         zh: "11:30-13:00，与现货主板/创业板一致"
         en: "11:30 a.m.-1:00 p.m., same as the cash Main Board/ChiNext market"
         confidence: medium
         detail: "交易规则第4.1.2条枚举的交易时段中未包含11:30-13:00，属未列入交易时间的间隔段，与顶层 lunch_break 字段同一处理方式，未单独引用原文。"
       continuous_pm:
+        spec: {start: "13:00", end: "15:00", kind: continuous, note: "14:57-15:00 为收盘集合竞价，见 closing_mechanism"}
         zh: "13:00-15:00（13:00-14:57 连续竞价 + 14:57-15:00 收盘集合竞价），与现货主板/创业板时段完全一致"
         en: "1:00 p.m.-3:00 p.m. (1:00-2:57 p.m. continuous auction + 2:57-3:00 p.m. closing call auction) — identical to the cash equity market"
         sources:
@@ -651,11 +655,13 @@ market_structure:
         quote: "9:15 至 9:25、9:30 至 11:30、13:00 至 15:00。其中，9:15 至 9:25 为开盘集合竞价时间，14:57 至 15:00 为收盘集合竞价时间，其余时段为连续竞价时间"
         confidence: high
       after_market:
+        spec: {kind: none, note: "第4.1.2条穷举交易时间未含盘后固定价格交易（对照本文件顶层 after_market）"}
         zh: "无盘后固定价格交易时段——第4.1.2条枚举的期权交易时间仅为9:15-9:25、9:30-11:30、13:00-15:00，未纳入现货市场15:05-15:30的盘后固定价格交易机制（对照本文件顶层 after_market 字段），是期权与现货交易机制的一处具体差异"
         en: "No after-hours fixed-price trading session — Rule 4.1.2's exhaustive list of options trading hours (9:15-9:25, 9:30-11:30, 13:00-15:00) does not include the cash market's 15:05-15:30 after-hours fixed-price session (cf. the top-level `after_market` field); this is a concrete difference between the options and cash trading mechanisms"
         confidence: medium
         detail: "基于第4.1.2条对交易时间的穷举式表述作反向推断（该条未提及盘后固定价格交易），未见另有条文明确排除，故 confidence 定为 medium 而非 high。"
       night_session:
+        spec: {kind: none, note: "同 after_market，基于第4.1.2条穷举交易时间的反向推断"}
         zh: "无"
         en: "None"
         confidence: medium
@@ -672,6 +678,7 @@ market_structure:
       confidence: high
 
     opening_mechanism:
+      spec: {type: call_auction, auction_start: "09:15", auction_end: "09:25", note: "集合竞价未能产生开盘价的，以连续竞价方式产生"}
       zh: "开盘集合竞价（9:15-9:25）；开盘价为当日该合约第一笔成交价，集合竞价未能产生开盘价的，改以连续竞价方式产生"
       en: "Opening call auction (9:15-9:25 a.m.); the opening price is the contract's first trade price of the day — if the call auction fails to produce a price, it is instead determined via continuous auction"
       sources:
@@ -682,6 +689,7 @@ market_structure:
       confidence: high
 
     closing_mechanism:
+      spec: {type: call_auction, auction_start: "14:57", auction_end: "15:00", note: "集合竞价未产生收盘价或未进行的，以最后一分钟成交量加权平均价（含最后一笔）为收盘价；全日无成交用前收盘价"}
       zh: "收盘集合竞价（14:57-15:00）；未能产生收盘价或未进行收盘集合竞价的，以当日最后一笔交易前一分钟内所有成交的成交量加权平均价（含最后一笔）为收盘价；全日无成交则以前收盘价为当日收盘价"
       en: "Closing call auction (2:57-3:00 p.m.); if the closing auction fails to produce a price (or is not held), the closing price is the volume-weighted average price of all trades in the one minute before the day's last trade (inclusive of that trade); if there is no trade at all that day, the previous closing price is used"
       sources:

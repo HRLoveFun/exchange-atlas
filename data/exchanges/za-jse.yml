@@ -1552,18 +1552,16 @@ risks:
     confidence: medium
 
   fx_risk_note:
-    zh: "南非兰特（ZAR）实行自由浮动汇率，历史波动率高、且易受全球风险情绪与大宗商品价格周期影响；外资买卖 JSE 资产须承担兰特汇率风险，资本跨境汇出还受外汇管制申报约束（见 capital_controls）。"
-    en: "The South African rand (ZAR) is a free-floating currency with historically high volatility and sensitivity to global risk sentiment and commodity-price cycles; foreign investors in JSE assets bear rand FX risk, and cross-border repatriation is also subject to exchange-control declarations (see capital_controls)."
+    zh: "兰特对其他货币自由浮动；南非法律上（de jure）的汇率安排为自由浮动、事实上（de facto）为浮动，并维持符合 IMF《协定》第八条款义务的汇兑制度（IMF 第四条款磋商报告，见 sources）。对非兰特投资者：持有兰特计价资产承担兰特汇率风险；资本跨境汇出的外汇管制申报约束属资金进出议题，见 capital_controls"
+    en: "The rand floats against other currencies; South Africa's de-jure exchange rate arrangement is free floating and the de-facto arrangement is floating, consistent with its Article VIII obligations under the IMF's Articles of Agreement (IMF Article IV consultation report, see sources). For non-rand investors: rand-denominated assets bear rand exchange-rate risk; exchange-control declarations on cross-border repatriation are covered in capital_controls"
+    quote: "The rand floats against other currencies and South Africa maintains an exchange system consistent with obligations under Article VIII of the IMF’s Articles of Agreement. South Africa’s de-jure exchange rate arrangement is free floating, and the de-facto arrangement is floating."
     sources:
-      - title: "Exchange Control Regulations（South African Reserve Bank）"
-        url: https://www.resbank.co.za/en/sarb/what-we-do/financial-surveillance/exchange-control-regulations
-        accessed: 2026-08-27
-      - title: "Currency and exchange rates（South African Reserve Bank）"
-        url: https://www.resbank.co.za/en/sarb/what-we-do/financial-markets/currency-and-exchange-rates
-        accessed: 2026-08-27
-    quote: "The current set of Exchange Control Regulations was promulgated by Government Notice R.1111 of 1 December 1961 and amended from time to time."
+      - title: "South Africa: 2022 Article IV Consultation—Staff Report（IMF Country Report No. 22/37，Exchange Rate Arrangement 小节；第三方国际组织，confidence 封顶 medium；直连 403，经 wayback 快照 20240529213244 抓取）"
+        url: https://www.elibrary.imf.org/downloadpdf/view/journals/002/2022/037/article-A002-en.pdf
+        accessed: 2026-09-05
     confidence: medium
-    detail: "兰特浮动汇率与高波动为公认市场事实（medium 综合判断）；跨境汇出受外汇管制约束已见于 capital_controls。本字段定性提示汇率风险，不提供波动率数值（未逐条核实）。"
+    detail: "SARB 一手材料（MPC 声明 / MPR，2026-09-05 实测）无汇率制度定性表述，制度核暂以 IMF 第四条款磋商报告为据（第三方封顶 medium）；若日后拿到 SARB 官方定性原文可升 high。原引 Exchange Control Regulations 的 quote 支撑的是资本管制事实，已按 [ADR-079] 边界三分改归 capital_controls。"
+    verified: 2026-09-05
 
   political_risk_note:
     zh: "南非面临结构性治理与政策挑战：长期电力危机（限电 load-shedding）削弱增长、国有企业治理问题突出；南非曾于 2023 年 2 月被列入 FATF 灰名单，已于 2025 年 2 月移出。兰特与本地资产价格对政治更迭、政策转向与矿业/土地等敏感议题高度敏感。"

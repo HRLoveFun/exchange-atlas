@@ -308,6 +308,49 @@ case("decisions-length 默认阈值 3500 行下不误报当前体量",
      validate.decisions_length_violations("行\n" * 3000), [])
 
 
+# ══════════════════════════════════════════════════════════════
+# [ADR-060] 任务五③ · stale 复核提醒：validate.stale_field_warnings(freshness_rows)
+#   —— 当前全库 stale 为 0、真实数据触发不到任何分支，行为全靠这里的合成用例锁。
+# ══════════════════════════════════════════════════════════════
+def _row(**kw):
+    base = {"exchange_id": "ex", "label_zh": "某字段", "field_path": "a.b",
+            "volatility": "stable", "verified": "2026-01-01",
+            "age_days": 100, "stale": False}
+    base.update(kw)
+    return base
+
+
+case("stale 零输出：空列表", validate.stale_field_warnings([]), [])
+case("stale 零输出：全部 fresh（含高龄但未超阈值的行）",
+     validate.stale_field_warnings([_row(), _row(age_days=700)]), [])
+case("stale 超期：报头 + 每字段一行（共 2 条）",
+     len(validate.stale_field_warnings([_row(stale=True, age_days=800)])), 2)
+case("stale 超期行内容：交易所 id / 字段路径 / 天数都在消息里",
+     "ex" in validate.stale_field_warnings([_row(stale=True, age_days=800)])[1]
+     and "a.b" in validate.stale_field_warnings([_row(stale=True, age_days=800)])[1]
+     and "800" in validate.stale_field_warnings([_row(stale=True, age_days=800)])[1], True)
+case("stale 未记 verified：单独归类为「无法判定」，不冒充超期天数",
+     "未记 verified" in validate.stale_field_warnings(
+         [_row(stale=True, verified=None, age_days=None)])[1], True)
+case("stale 排序：超期久的排前面",
+     validate.stale_field_warnings([_row(exchange_id="new", stale=True, age_days=100),
+                                    _row(exchange_id="old", stale=True, age_days=900)])[1]
+     .startswith("`old`"), True)
+case("stale 头部计数：两条超期在头部汇总为 2",
+     "2 个已填字段超过复核阈值" in validate.stale_field_warnings(
+         [_row(exchange_id="a", stale=True, age_days=100),
+          _row(exchange_id="b", stale=True, age_days=200)])[0], True)
+case("stale 不误伤：stale=False 的高龄行不进清单",
+     validate.stale_field_warnings([_row(age_days=900, stale=False)]), [])
+case("stale 混合：超期 + 未记 verified 两组都在，头部都提到",
+     ("超过复核阈值" in validate.stale_field_warnings(
+         [_row(exchange_id="a", stale=True, age_days=100),
+          _row(exchange_id="b", stale=True, verified=None, age_days=None)])[0]
+      and "无法判定" in validate.stale_field_warnings(
+          [_row(exchange_id="a", stale=True, age_days=100),
+           _row(exchange_id="b", stale=True, verified=None, age_days=None)])[0]), True)
+
+
 def main():
     fails = [(n, g, w) for n, g, w in CASES if g != w]
     for n, g, w in CASES:
