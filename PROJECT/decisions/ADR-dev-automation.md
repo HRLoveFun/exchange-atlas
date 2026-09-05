@@ -12,8 +12,9 @@
 **一、CI 作合并关卡（轨 A）**
 
 - 新增 `.github/workflows/build.yml`：`pull_request` 与 `push: main` 上跑 `make build` + `git diff --exit-code`（生成块与 `docs/data/` 产物零 diff）。依赖只有 `pyyaml` / `jsonschema`，跑得很轻。
-- 仓库设置打开 `allow_auto_merge` 与 `delete_branch_on_merge`（用户 2026-09-05 授权代跑）。后台任务收尾改用 `gh pr merge --auto --squash`：CI 绿了 GitHub 自己合、自己删远端分支，**人不再点合并**，只在红的时候介入。`delete_branch_on_merge` 顺带消掉 `GIT-RUNBOOK.md` 记的那个坑（`--delete-branch` 因本地分支被 worktree 检出而报错）。
-- **不加分支保护。** [CLAUDE.md §六] 明确要交互式会话可以直推 main，加必需状态检查会把那条路堵死；`push: main` 上照跑 CI，红了看得见。
+- 仓库设置打开 `allow_auto_merge` 与 `delete_branch_on_merge`（用户 2026-09-05 授权代跑）。后台任务收尾改用 `gh pr merge --auto --squash`，`delete_branch_on_merge` 顺带消掉 `GIT-RUNBOOK.md` 记的那个坑（`--delete-branch` 因本地分支被 worktree 检出而报错）。
+- **⚠️ 「CI 绿了才合」需要两步，只做第一步不成立。** GitHub 的 auto-merge 等的是**必需的状态检查 / 必需审阅**；仓库当前没有分支保护、没有必需检查，`--auto` 会在 PR 一 mergeable 时**立刻合并、不等 CI**。要真正落地这道关，还需给 `main` 加一条 classic 分支保护：required status check = `build`，且 **`enforce_admins: false`**——这样必需检查只约束 PR 合并路径，交互式会话仍可直推 main（[CLAUDE.md §六] 不受影响）。
+- **这一步必须等 workflow 先进 main**：GitHub 只允许把「至少上报过一次的检查」设为必需。**本次 PR 上 CI 未触发**——该仓库 107 次 Actions 运行全部是 Pages 的 `dynamic` 事件，从未跑过任何自定义 workflow（`event=pull_request` 计数为 0），workflow 文件确认已在远端分支上（1267 字节）。合进 main 后 `push: main` 会触发一次，届时才能确认 Actions 在本仓库确实可用、并把 `build` 设为必需检查。若那次仍不触发，要去仓库 Settings → Actions 查账号层面的限制。**在配好必需检查之前，后台任务不要用 `--auto`**（那等于无条件立即合并），仍按人工确认合并。
 - **覆盖边界（诚实说明）：** `.cache/` 不入库（[ADR-044]），CI 里 `verify_quotes` 全是 CACHE_MISS、`FAIL=0`——**CI 守的是结构与一致性（schema / 枚举 / 生成块零 diff / 引用完整性），不是引文核对**。防幻觉那道关仍靠本地 `make check`（有 `.cache`）与第二人复核（[CLAUDE.md §四]），CI 不能替代，也不该让人误以为替代了。
 
 **二、一条 ADR 一个文件，数字编号冻结（轨 B）**

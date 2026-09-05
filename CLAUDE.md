@@ -93,7 +93,7 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 个人独立维护的仓库，GitHub 上 `main` 无分支保护、无强制 CI 卡点，走 PR 只是多一次手动点 merge，没有额外价值。**默认直接推 main，不必开 PR、不必等审核**：
 
 - **交互式会话**（终端里逐轮对话）：开始改动前先 `git pull --ff-only` 确认本地 `main` 与 `origin/main` 同步、无分叉；改完后跑一遍 `make build`（`sync` + `check`）确认无误，直接 `git add` + `git commit` + `git push origin main`。本条即为 CLAUDE.md 对自动 push 的授权，不必每次都问"要不要 push"。仍然遵守：`make check` 不过不推、不 force push、不改写已推送的历史。
-- **后台任务（background job）**：Claude Code 平台对后台任务有硬性限制——不能直接 push/merge 到 main，只能建分支开 PR，这是运行环境层面的限制，CLAUDE.md 管不到，改不了。**但「人工点合并」这一步已经自动化掉**（[ADR-dev-automation]）：后台任务收尾时开 PR 并跟一句 `gh pr merge --auto --squash`，GitHub Actions 跑完 `make build` 绿了就自动合并、自动删远端分支；红了就停在那里等人看。**正常情况下人不再需要点合并**，只在 CI 红时介入。想要免 PR 的直接推送体验，仍走交互式会话。
+- **后台任务（background job）**：Claude Code 平台对后台任务有硬性限制——不能直接 push/merge 到 main，只能建分支开 PR，这是运行环境层面的限制，CLAUDE.md 管不到，改不了。**「人工点合并」这一步正在自动化掉**（[ADR-dev-automation]）：CI（`.github/workflows/build.yml`）在 PR 上跑 `make build`，仓库已开 `allow_auto_merge` / `delete_branch_on_merge`。**但要到「CI 绿了才自动合并」还差一步**——GitHub 的 auto-merge 等的是**必需状态检查**，在给 `main` 配好 required check `build`（且 `enforce_admins: false`，以免堵死本节的交互式直推）之前，`gh pr merge --auto` 等于**无条件立即合并**。所以：**必需检查配好之前，后台任务照旧留 PR 等人确认**；配好之后才改用 `--auto`。想要免 PR 的直接推送体验，仍走交互式会话。
 - **一个逻辑改动对应一个 commit**（便于单独回溯 / 回滚），不把不相关的改动攒进一个大提交；一次成体系的改动（如一条 ADR 完整落地）作为一个提交是可以的。
 - **需要手动合并某个 PR 时**（CI 红了修完、或不想等 `--auto`），别再带 `--delete-branch`：仓库已开 `delete_branch_on_merge`，远端分支自动删；带这个参数反而会因 head 分支正被 `.claude/worktrees/<name>` 检出而报错、且此时远端其实已合并成功（只看退出码会误判成失败）。完整踩坑与操作顺序见 `PROJECT/GIT-RUNBOOK.md`。
 

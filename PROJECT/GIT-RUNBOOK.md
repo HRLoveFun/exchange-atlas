@@ -27,7 +27,9 @@ git pull --ff-only && make build             # gh 在删分支失败时会跳过
 
 ## 常态：不用手动合并（[ADR-dev-automation]）
 
-后台任务收尾时开 PR 并跟一句 `gh pr merge --auto --squash`：CI（`.github/workflows/build.yml`）跑完 `make build` 绿了就自动合并、自动删远端分支（仓库已开 `delete_branch_on_merge`），**人不需要点合并**。下面那些手动步骤只在两种情况下才用得上：CI 红了要就地修，或你不想等 `--auto`。
+目标形态：后台任务收尾时开 PR 并跟一句 `gh pr merge --auto --squash`，CI（`.github/workflows/build.yml`）跑完 `make build` 绿了就自动合并、自动删远端分支（仓库已开 `delete_branch_on_merge`），**人不需要点合并**。
+
+**⚠️ 前置未完成前不要用 `--auto`。** auto-merge 等的是**必需状态检查**；`main` 上还没配 required check `build` 之前，`--auto` 会在 PR 一 mergeable 时立刻合并、**完全不等 CI**。配置方法与为什么要 `enforce_admins: false`，见 [ADR-dev-automation] 轨 A。在那之前，后台任务照旧留 PR、由人确认后合并，下面的手动步骤仍然适用。
 
 **原「合并前先给占位符 ADR 定号」一节已删除**：数字编号在 001–080 冻结、新 ADR 一律是 `PROJECT/decisions/ADR-<slug>.md` 不取号，没有号可撞，也就没有「合并前先定号」这一步了（[ADR-dev-automation]）。`make assign-adr`、定号脚本、编号台账三者均已随之删除。
 
