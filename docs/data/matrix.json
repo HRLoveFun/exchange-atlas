@@ -3982,13 +3982,13 @@
       "field_path": "delivery_method",
       "label_zh": "交割方式",
       "label_en": "Delivery Method",
-      "zh": "不适用（现货市场为主）",
-      "en": "Not applicable (primarily a cash/spot market)",
+      "zh": "不适用（现货证券经 CCASS 电子簿记交收，无实物交割概念）",
+      "en": "Not applicable (cash securities settled by book-entry through CCASS; no physical delivery concept)",
       "enum": "na",
       "enum_ref": "delivery_method",
       "has_detail": true,
       "verified": "2026-08-12",
-      "confidence": "low"
+      "confidence": "medium"
     },
     {
       "exchange_id": "hk-hkex",
