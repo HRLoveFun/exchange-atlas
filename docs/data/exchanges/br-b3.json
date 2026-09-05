@@ -1268,6 +1268,15 @@
           "detail": null
         },
         "order_types": {
+          "spec": {
+            "market": true,
+            "limit": true,
+            "tif": [
+              "gtc",
+              "gtd"
+            ],
+            "note": "基础订单类型集合与现货共用（见顶层 order_types）；GTC/GTD 至衍生品到期失效；另有现货没有的结构化交易订单（美元联动 Casado、展期 Rollover、DI1 等 DV01/PU 中性联动，系统自动生成配对腿）"
+          },
           "zh": "基础订单类型集合与现货市场共用（市价单/限价单/管理单/自由裁量单等八种基础类型+MOA/MOC/LOC特殊撮合期订单+GTC/GTD有效期修饰符，见顶层order_types），其中GTC/GTD明确写明「直至该衍生品到期」这一衍生品专属失效条件。衍生品市场另有现货没有的「结构化交易」（Structured Transaction）订单类型，由系统自动生成配对腿——例如美元期货与即期美元反向对冲的「美元联动」（U.S. Dollar Casado）交易、跨两个到期月份联动的展期（Rollover）交易，以及DI1/DAP/FRC等利率期货专用的DV01/PU中性联动交易",
           "en": "The base order-type set is shared with the cash market (Market/Limit/Managed/Discretionary etc. eight base types, plus auction-period MOA/MOC/LOC and GTC/GTD time-in-force qualifiers — see top-level order_types); GTC/GTD explicitly extend validity 'until the derivative expires', a derivatives-specific condition. The derivatives market additionally has 'Structured Transaction' order types not found in the cash market, which auto-generate paired legs — e.g. the 'U.S. Dollar Casado' (an inverse-hedge pairing of US Dollar Futures with US Spot Dollar), calendar-month Rollover transactions, and DV01/PU-neutral structured transactions on DI1/DAP/FRC interest-rate futures",
           "sources": [
@@ -1281,10 +1290,14 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "tick_size": {
+          "spec": {
+            "regime": "per_instrument",
+            "min_tick": 5,
+            "note": "迷你指数期货（WIN）5 个指数点（每点 R$0.20）为样本；个股期货 0.01 点（R$1.00）；Ibovespa 指数期权 5 点（每点 R$0.01）"
+          },
           "zh": "以旗舰产品为例：迷你指数期货（WIN）最小变动价位为5个指数点（每点0.20雷亚尔）；个股期货最小报价单位为0.01点（每点1.00雷亚尔）；Ibovespa指数期权最小变动价位同为5个指数点（每点0.01雷亚尔）",
           "en": "Flagship examples: Mini Ibovespa Futures (WIN) has a minimum price fluctuation of 5 index points (BRL0.20 per point); Stock Futures have a tick size of 0.01 points (BRL1.00 per point); Options on Ibovespa likewise have a minimum fluctuation of 5 index points (BRL0.01 per point)",
           "sources": [
@@ -1308,7 +1321,6 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "contract_specs_note": {
@@ -1362,6 +1374,12 @@
             "detail": null
           },
           "main_board": {
+            "spec": {
+              "type": "dynamic",
+              "limit_pct": null,
+              "band_pct": null,
+              "note": "逐合约隧道参数制（IND B2 代表样本）：拒绝隧道 ±1,00%（中心=最近成交价）、拍卖隧道 ±0,50%、均价隧道 ±0,75%（对照最近 5 分钟 Last Trade）、拍卖价格保护 ±1,20%（数量保护 750）；按到期月/合约组分档，全表由 B3 隧道参数页公布更新"
+            },
             "zh": "逐合约「隧道」（Túneis）参数制，非全市场统一涨跌幅——以 Ibovespa 指数期货（IND）B2 组为代表性样本：拒绝隧道（Túnel Rejeição，超出即拒单）±1,00%，隧道中心为最近成交价（Most Recent）；拍卖隧道（Túnel Leilão）±0,50%；均价隧道（Túnel Preço Médio，对照区间为最近 5 分钟 Last Trade Price）±0,75%；拍卖期间价格保护隧道 ±1,20%，另有数量保护 750。参数按到期月份/合约组（B1/B2/B6…）分档，各组数值略有差异，全表按「指数期货分册」由 B3 官网「Parâmetros dos Túneis de Negociação」页公布并更新（百分数为原文小数逗号形态）",
             "en": "Per-contract \"tunnel\" (Túneis) parameters rather than a market-wide daily price limit — sampled by the Ibovespa index futures (IND) group B2: rejection tunnel (Túnel Rejeição, orders beyond it rejected) ±1,00% with tunnel centre at the most recent trade; auction tunnel (Túnel Leilão) ±0,50%; average-price tunnel (Túnel Preço Médio, calculated over the last 5 minutos of Last Trade Price) ±0,75%; price-protection-during-auction tunnel ±1,20%, plus a quantity protection of 750. Parameters are tiered by maturity/instrument group (B1/B2/B6…) with slightly different values, published and updated per product-line booklet on B3's \"Parâmetros dos Túneis de Negociação\" page (percentages in the source's comma-decimal form)",
             "detail": "棒 3「逐合约口径」（[ADR-082]）：沿用 hk-hkex 恒指系列样本做法——选代表合约（IND B2 组）并在本 detail 声明代表性范围：参数逐合约/逐组维护，B1/B6 等其他组数值不同，不把逐合约差异压成市场级单一数值；百分数照录原文小数逗号（1,00% 等），未转写为小数点。来源为 B3 官网指数期货分册 PDF（2026-05-18 版）。",
@@ -1380,8 +1398,7 @@
             "quote": "IND B2 +/- 1,00 % Most Recent +/- 0,50 % Most Recent +/- 0,75 % 5 minutos Last Trade Price +/- 1,20 % Last Trade Price 750",
             "confidence": "high",
             "verified": "2026-09-05",
-            "enum": null,
-            "spec": null
+            "enum": null
           },
           "other_boards": {
             "zh": "其他合约/产品线各用独立参数分册，与 IND 不同——如迷你 Ibovespa 期货（WIN）W6 组拒绝隧道为 ±2,60%、拍卖期间价格保护隧道 ±4,00%；每条产品线（期权/外汇/利率/商品/通胀指数/国际利率等）在 B3 官网同一索引页下各有分册，逐合约维护并随时更新",
@@ -1403,6 +1420,33 @@
         },
         "circuit_breaker": {
           "enum": "index_level",
+          "spec": {
+            "type": "index_level",
+            "reference": [
+              {
+                "index": "Ibovespa",
+                "exchange": "self"
+              }
+            ],
+            "levels": [
+              {
+                "threshold_pct": 10,
+                "halt_minutes": 30,
+                "day_end": false
+              },
+              {
+                "threshold_pct": 15,
+                "halt_minutes": 60,
+                "day_end": false
+              },
+              {
+                "threshold_pct": 20,
+                "halt_minutes": null,
+                "day_end": false
+              }
+            ],
+            "note": "与顶层同一套 Ibovespa 熔断，规程原文明文覆盖衍生品（全市场暂停含资产/衍生品/私募固收）；第三档暂停时长由 B3 自行决定并公告"
+          },
           "zh": "与顶层市场熔断机制（见market_structure.circuit_breaker）为同一套以Ibovespa跌幅触发的机制，规程原文明确写明覆盖范围包含衍生品：跌10%时全市场（含资产、衍生品与私募固定收益工具）暂停交易30分钟；恢复后再跌15%暂停1小时；恢复后再跌20%由B3自行决定暂停时长并公告",
           "en": "The same Ibovespa-decline-triggered circuit breaker described at the top level (see market_structure.circuit_breaker) explicitly covers derivatives per the rulebook text: a 10% decline halts all trading (assets, derivatives and private fixed-income instruments) for 30 minutes; upon resumption, a 15% decline halts trading for 1 hour; upon resumption, a 20% decline lets B3 determine and announce the suspension period",
           "sources": [
@@ -1415,10 +1459,12 @@
           "quote": "I - If the Ibovespa falls ten per cent (10%) from its closing level on the previous day, all trading in assets, derivatives and private fixed-income instruments is interrupted for thirty (30) minutes; II - When trading resumes, if the Ibovespa falls fifteen per cent (15%) from its closing level on the previous day, all trading in assets, derivatives and private fixed-income instruments is interrupted for one hour; III - When trading resumes, if the Ibovespa falls twenty per cent (20%) from its closing level on the previous day, B3 may determine a suspension of trading in assets, derivatives and private fixed-income instruments for a certain period to be announced by B3.",
           "confidence": "high",
           "verified": "2026-08-16",
-          "spec": null,
           "detail": null
         },
         "volatility_interruption": {
+          "spec": {
+            "note": "与顶层同一套拍卖隧道触发逻辑（不区分现货/衍生品），无独立参数；衍生品特有：隧道中枢用最活跃合约月（pivot point）成交价动态反推低流动性合约月，见 price_limits"
+          },
           "zh": "与顶层「拍卖隧道」自动触发集合竞价机制（见market_structure.volatility_interruption）为同一套通用触发逻辑，本身不区分现货与衍生品；衍生品的特有之处在于隧道中枢的计算方法——见上方price_limits.type的「基准合约月」（pivot point）动态更新方法学：用最活跃合约月份的成交价格反推流动性较低合约月份的隧道中枢",
           "en": "Shares the same general auction-tunnel trigger logic as the top level (see market_structure.volatility_interruption), which does not itself distinguish cash from derivatives; the derivatives-specific distinction lies in how the tunnel center is calculated — see price_limits.type above for the 'pivot point' contract-month methodology, which derives the tunnel center for less-liquid contract months from the trade prices of the most liquid (pivot) contract month",
           "sources": [
@@ -1432,7 +1478,6 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "trading_halt_mechanism": {
@@ -1475,6 +1520,10 @@
           "quote": null
         },
         "market_maker_scheme": {
+          "spec": {
+            "present": true,
+            "note": "与顶层同一套注册体系（独立做市商/参与计划的独立做市商/受托做市商三类，投资基金亦可注册），规程明文按各类别衍生品列出做市商数量上限——资产与衍生品通用、未见另立规则"
+          },
           "zh": "与顶层做市商制度（见market_structure.market_maker_scheme）为同一套注册体系（独立做市商/参与B3计划的独立做市商/受托做市商三类，投资基金亦可注册为独立做市商），规程手册原文明确将做市商数量上限单独按「各类别/各类衍生品」（each type or class of derivative）列出，即该体系本身就是资产与衍生品通用，未见衍生品另立一套规则",
           "en": "Shares the same registration regime as the top-level market_maker_scheme (independent market makers / independent market makers accredited for B3 programs / contracted market makers, with investment funds also eligible to register as independent market makers); the Manual's own text sets the market-maker headcount cap separately 'for each type or class of derivative', meaning this framework is itself asset-and-derivative-generic rather than the derivatives market running a distinct scheme",
           "sources": [
@@ -1488,7 +1537,6 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "margin_practice_note": {
