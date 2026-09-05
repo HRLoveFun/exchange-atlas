@@ -983,14 +983,24 @@ costs:
     detail: "2026-09-04（ADR-067 成本瀑布数据层长尾）：本字段原为空（草稿印象、未核实）。本次抓《印花税法》全文（fgk.chinatax.gov.cn 国家税务总局政策法规库）——该法把证券交易与合同/产权转移书据/营业账簿并列为印花税的征税范围（第一/二/三条），是中国交易环节税收的完整立法，无独立『金融交易税』税目。据此判 type: none（证券流转税即证券交易印花税，映射至 stamp_duty，沿用 ADR-002 语义）。confidence medium——《印花税法》是一手，但『无独立 FTT』是对『该法即完整立法』的结构性推断，非法条明文否定句。与 cn-szse 同步处置。"
 
   capital_gains_tax:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：个人投资者二级市场股票转让差价所得暂免征收个人所得税——未核实最新政策原文，留空。"
+    zh: "个人转让上市公司股票取得的所得暂免征收个人所得税：自 1997-01-01 起，经国务院批准，对个人转让上市公司股票取得的所得继续暂免征收个人所得税（财税字〔1998〕61号，现行有效）；个人在二级市场的股票转让差价所得因此不征个人所得税"
+    en: "Gains of individuals from transferring listed-company shares are temporarily exempt from individual income tax: with State Council approval, from 1 January 1997 such gains continue to be exempt (Caishuizi [1998] No. 61, currently in force); secondary-market transfer gains of individual investors are therefore not subject to IIT"
+    sources:
+      - title: "财政部 国家税务总局关于个人转让股票所得继续暂免征收个人所得税的通知（财税字〔1998〕61号全文，国家税务总局政策法规库）"
+        url: https://fgk.chinatax.gov.cn/zcfgk/c102416/c5202588/content.html
+        accessed: 2026-09-05
+    quote: "为了配合企业改制，促进股票市场的稳健发展，经报国务院批准，从1997年1月1日起，对个人转让上市公司股票取得的所得继续暂免征收个人所得税。"
+    confidence: high
 
   dividend_withholding_tax:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：个人投资者股息红利差别化征税，持股期限越长税负越低——未核实最新税率档位，留空。"
+    zh: "个人从公开发行和转让市场取得的上市公司股票股息红利按持股期限差别化计征个人所得税（财税〔2015〕101号）：持股超过 1 年的暂免征收；持股 1 个月以内（含）的全额计入应纳税所得额；持股 1 个月以上至 1 年（含）的暂减按 50% 计入；上述所得统一适用 20% 的税率计征"
+    en: "Dividend income of individuals from listed-company shares is taxed on a holding-period-differentiated basis (Caishui [2015] No. 101): exempt for holdings over 1 year; fully taxable for holdings within 1 month (inclusive); half-counted for holdings over 1 month up to 1 year (inclusive); all taxed at the 20% rate"
+    sources:
+      - title: "持有上市公司股票取得的股息红利需要缴纳个人所得税吗？（国家税务总局上海市税务局热点问答，转述财税〔2015〕101号现行口径）"
+        url: https://shanghai.chinatax.gov.cn/zcfw/rdwd/201512/t420630.html
+        accessed: 2026-09-05
+    quote: "根据《财政部国家税务总局证监会关于上市公司股息红利差别化个人所得税政策有关问题的通知》（财税〔2015〕101号）的规定,个人从公开发行和转让市场取得的上市公司股票,持股期限超过1年的,股息红利所得暂免征收个人所得税。个人从公开发行和转让市场取得的上市公司股票,持股期限在1个月以内(含1个月)的,其股息红利所得全额计入应纳税所得额;持股期限在1个月以上至1年(含1年)的,暂减按50%计入应纳税所得额;上述所得统一适用20%的税率计征个人所得税。"
+    confidence: high
 
   implicit_costs_note:
     zh: "隐性成本主要来自买卖价差与市场冲击成本；A股最小价格变动单位为0.01元人民币，叠加百分比涨跌幅限制（主板±10%、科创板±20%）在极端行情下可能加剧流动性缺口、扩大有效价差"
