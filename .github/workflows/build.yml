@@ -1,0 +1,34 @@
+# make build 作为 PR 合并关卡（[ADR-069] 「未做」清单里的 CI 一项）。
+#
+# 为什么需要：后台任务的 PR 此前靠人工点合并，而那个动作不跑任何校验——
+# PR #61/#62 就这样把 main 的 make check 合红（c0c2b04，PR #63 收拾），
+# PR #77 漏跑定号让 main 再次转红。人工环节既是瓶颈又不是真关卡。
+#
+# 覆盖边界（诚实说明）：`.cache/` 不入库（[ADR-044]），所以 CI 里
+# verify_quotes 全部是 CACHE_MISS、FAIL=0——**CI 守的是结构与一致性
+# （schema / 枚举 / 生成块零 diff / 引用完整性），不是引文核对**。
+# 引文那道关仍靠本地 make check（有 .cache）与第二人复核（CLAUDE.md §四）。
+name: build
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: 装依赖
+        run: pip install -r tools/requirements.txt
+      - name: make build（sync + check）
+        run: make build
+      - name: 生成块与构建产物必须零 diff（跑完 sync 后 git diff 应为空）
+        run: git diff --exit-code
