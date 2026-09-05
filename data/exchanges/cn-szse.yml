@@ -1110,9 +1110,16 @@ clearing:
       confidence: high
 
     delivery_method:
-      zh: ""
-      confidence: low
-      detail: "ADR-023 新增字段，深交所衍生品（股票期权）的实物/现金交割方式本次未核实，留空转 OPEN-QUESTIONS。"
+      zh: "股票期权行权交割默认以交付合约标的证券完成（实物交割），行权交收日为行权日的次一交易日，由中国结算办理证券与资金交收；行权日合约标的全天停牌/临时停牌直至收盘致实值认沽期权行权申报因合约标的不足未通过有效性检查、行权日次一交易日标的停牌致应交付标的不足、或出现异常情形等列明情形，按本所公布的行权现金结算价格以现金结算；其余应交付标的不足部分，按中国结算公布的价格以现金结算"
+      en: "Option exercise settles by default through delivery of the underlying securities (physical delivery): the exercise settlement date is the trading day after the exercise day, with securities and funds settled by ChinaClear; in the enumerated situations — an in-the-money put's exercise instruction failing validation due to a shortage of the underlying when the underlying is suspended all day until close on the exercise day, a suspended underlying on the day after the exercise day leaving a delivery shortfall, or other abnormal situations — settlement is made in cash at the exercise cash settlement price published by SZSE; any remaining shortfall in deliverable underlying is settled in cash at the price published by ChinaClear"
+      detail: "「实物交割为默认」系对规则结构的归纳：交易规则以「行权交割中应交付的合约标的」表述默认交割义务，仅在 5.14 列明情形以现金结算（quote 中 5.13/5.14 为条款号）。本字段 [ADR-023] 新增时留空转 OPEN-QUESTIONS，本次据已缓存的一手规则原文补齐。"
+      sources:
+        - title: 深圳证券交易所股票期权试点交易规则 第5.13-5.14条
+          url: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+          accessed: 2026-08-24
+      quote: "5.13 期权合约行权交收日为行权日的次一交易日。 ... 5.14 期权合约行权中出现以下情形之一的，对相应合约按照本所公布的行权现金结算价格，以现金结算方式进行行权交割： ... 除前款规定情形之外，对于行权交割中应交付的合约标的不足部分，按照中国结算公布的价格，以现金结算方式进行行权交割。"
+      confidence: high
+      verified: 2026-09-05
 
     last_trading_day_rule:
       zh: "期权合约到期日为到期月份的第四个星期三（遇国家法定节假日、本所休市日顺延至次一交易日）；最后交易日与行权日同其到期日，到期日提前或顺延时随之调整；合约标的除权除息、配股缴款复牌、合约暂停交易或取消交易等情形另有专门的顺延安排，且原则上最后交易日、到期日、行权日不因该合约当日停牌/临时停牌而顺延"

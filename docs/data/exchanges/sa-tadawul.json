@@ -1789,9 +1789,67 @@
         "enum": null
       },
       "derivatives": {
-        "initial_margin_practice": null,
-        "maintenance_margin_practice": null,
-        "mark_to_market_frequency": null,
+        "initial_margin_practice": {
+          "zh": "Muqassa（证券清算中心，CCP）对衍生品实行「初始保证金 + 变动保证金 + 附加保证金」的总量保证金框架：初始保证金用于覆盖每个客户持仓价值的潜在变动；最低初始保证金要求由 Muqassa 设定并因客户类型而异，Muqassa 规定的最小百分比保证金乘以「保证金乘数」（按客户类型分档：机构 100%、第一档个人 133%、第二档个人 200%）构成清算会员向其客户对新开仓位收取的保证金水平",
+          "en": "Muqassa (the Securities Clearing Center Company, CCP) operates a total-margin framework of Initial Margin + Variation Margin + additional margin for derivatives: Initial Margin covers potential changes in the value of each client position; the minimum initial margin requirement is set by Muqassa and varies by client type, and the minimum percentage margin required by Muqassa multiplied by the Margin Multiplier (tiered by client type: Institutions 100%, Tier 1 Individual 133%, Tier 2 Individual 200%) forms the margin the clearing member collects from its clients for newly entered positions",
+          "detail": "保证金乘数分档与乘数定义摘自 Muqassa 官方《Derivatives Index Brochure》（muqassa.sa）；「初始保证金覆盖客户持仓潜在变动」的定义摘自 Saudi Tadawul Group《Derivatives Market Brochures》。具体品种的保证金百分比参数未在已抓取官方页公布；quote 中「Magin Multiplierl」「position.」等拼写系 PDF 原文如此（逐字照录）。",
+          "sources": [
+            {
+              "title": "Muqassa — Derivatives Index Brochure（保证金乘数分档表与最低初始保证金表述）",
+              "url": "https://www.muqassa.sa/wps/wcm/connect/6a41fc1e-3ace-40de-a42c-9c1ac8ec97bc/Derivatives_Index_Brochure_Digital_EN.pdf?MOD=AJPERES&CVID=oMhahw8",
+              "accessed": "2026-09-05"
+            },
+            {
+              "title": "Tadawul Derivatives Market Brochures（Muqassa clearing & guarantee）",
+              "url": "https://www.tadawulgroup.sa/wps/wcm/connect/0e0e1657-e035-4172-a4e6-943c4dfce80d/Derivatives+Market+Brochures.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-0e0e1657-e035-4172-a4e6-943c4dfce80d-oW9oJ-.",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "The minimum initial margin requirements is set by Muqassa and its varies depending on the type of customer ... Magin Multiplierl: Is the number by which the minimum percentage margin, required by the Muqassa, have to be multiplied to form the margin required by the clearing member from his clients for newly entered position. ... Margin Multiplier 100% 133% 200% ... Initial Margin The margin that is collected to cover potential changes in the value of each client position.",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null
+        },
+        "maintenance_margin_practice": {
+          "zh": "不设固定「维持保证金」门槛表述，变动保证金（盯市差额）逐日结清：清算会员须在下一交易日（T+1）按 Muqassa 程序规定的时限将变动保证金缴至 Muqassa；盯市为 T+0、支付为 T+1",
+          "en": "No fixed \"maintenance margin\" threshold is used; variation margin (the mark-to-market differential) is settled daily: clearing members must pay variation margin to Muqassa by next day (T+1) by a prescribed time outlined in Muqassa Procedures; mark-to-market is T+0 and payment is T+1",
+          "detail": "Muqassa 手册未使用「维持保证金」术语，按变动保证金机制如实描述，不套用现货融资融券语境的维持保证金概念。",
+          "sources": [
+            {
+              "title": "Muqassa — Derivatives Index Brochure（变动保证金结算时限与盯市/支付时点）",
+              "url": "https://www.muqassa.sa/wps/wcm/connect/6a41fc1e-3ace-40de-a42c-9c1ac8ec97bc/Derivatives_Index_Brochure_Digital_EN.pdf?MOD=AJPERES&CVID=oMhahw8",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "Variation margin has to be settled by the clearing members to Muqassa by next day (T+1) by a prescribed time as outlined in Muqassa Procedures ... Mark to market (MTM) is T+0 and payment is T+1",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null
+        },
+        "mark_to_market_frequency": {
+          "zh": "每日一次：全部未平仓持仓在交易日日终按当日结算价盯市（盯市 T+0、支付 T+1）；以 MT30 指数期货为样本，当日结算价由 Muqassa 于市场收盘时按理论期货价（TFP）计算确定",
+          "en": "Once daily: all outstanding positions are marked to market based on the daily settlement price at the end of the trading day (mark-to-market T+0, payment T+1); for the MT30 index futures the daily settlement price is determined using the Theoretical Futures Price (TFP) calculated by Muqassa at the market closing time",
+          "sources": [
+            {
+              "title": "Muqassa — Derivatives Index Brochure（Daily Margin/Premium Settlement）",
+              "url": "https://www.muqassa.sa/wps/wcm/connect/6a41fc1e-3ace-40de-a42c-9c1ac8ec97bc/Derivatives_Index_Brochure_Digital_EN.pdf?MOD=AJPERES&CVID=oMhahw8",
+              "accessed": "2026-09-05"
+            },
+            {
+              "title": "Saudi Exchange — MT30 Index Futures contract specifications",
+              "url": "https://www.saudiexchange.sa/wps/portal/tadawul/markets/derivatives/products/mt30",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "Daily Margin/Settlement All outstanding positions are marked to market based on the daily settlement price at the end of the trading ... Mark to market (MTM) is T+0 and payment is T+1 ... Underlying Index MT30 (MSCI Tadawul) ... The daily settlement price of the futures contract shall be determined using the Theoretical Futures Price (TFP) calculated by Muqassa at the market closing time.",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null,
+          "detail": null
+        },
         "delivery_method": {
           "zh": "衍生品以 MT30 指数期货为代表为现金结算（Cash settled），交割方式为 T+0 现金差额结算，不涉及实物交割",
           "en": "Represented by the MT30 index futures, derivatives are cash-settled (Cash settled) with T+0 cash differential settlement; no physical delivery",
@@ -1809,7 +1867,28 @@
           "enum": null,
           "spec": null
         },
-        "last_trading_day_rule": null
+        "last_trading_day_rule": {
+          "zh": "以 MT30 指数期货为样本：合约到期日为到期月份第三个星期四，若该日非交易日则提前至其前一个交易日；到期日即该合约可交易的最后一日（最后交易日与到期日同日）。最终结算价按到期日 14:00–15:00 每 15 秒采样的标的指数均值计算（15:10:30 后再取一个值，剔除最高的三个与最低的三个采样值），四舍五入至最近的 0.5 个指数点，现金交割",
+          "en": "Sampled by the MT30 index futures: the contract expiration date is the third Thursday of the expiry month, moving to the preceding trading day if that day is not a trading day; the expiration day is the last day on which the contract is available for trading (last trading day = expiration day). The final settlement price is the average of index values sampled every 15 seconds between 14:00 and 15:00 plus one additional value taken after 15:10:30, excluding the highest three and lowest three samples, rounded to the nearest 0.5 index point, cash settled",
+          "detail": "MT30 为本所当前唯一衍生品产品线（MT30 指数期货），无跨产品口径问题；官方规则已预留未来新增单一股票期货/期权（SSF/SSO）的框架条款，届时须按各自产品规格另核。",
+          "sources": [
+            {
+              "title": "Saudi Exchange — MT30 Index Futures contract specifications",
+              "url": "https://www.saudiexchange.sa/wps/portal/tadawul/markets/derivatives/products/mt30",
+              "accessed": "2026-08-27"
+            },
+            {
+              "title": "Tadawul Derivatives Market Brochures（Key Terms: Expiration Day）",
+              "url": "https://www.tadawulgroup.sa/wps/wcm/connect/0e0e1657-e035-4172-a4e6-943c4dfce80d/Derivatives+Market+Brochures.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-0e0e1657-e035-4172-a4e6-943c4dfce80d-oW9oJ-.",
+              "accessed": "2026-08-27"
+            }
+          ],
+          "quote": "Contract Expiration Date The third Thursday of the expiry month. If that day is not a trading day, the contract will expire on the preceding trading day. ... Expiration Day It is the last day which the futures contract is available for trading. ... It is calculated as the average of index values sampled every 15 seconds between 14:00 and 15:00, plus one additional value taken after 15:10:30. The highest three and lowest three sampled values are excluded from the calculation. The result is then rounded to the nearest 0.5 index point (with values ending in 0.25 rounded down and 0.75 rounded up).",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null
+        }
       }
     },
     "participants": {

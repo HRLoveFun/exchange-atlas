@@ -1994,7 +1994,23 @@
           "spec": null,
           "detail": null
         },
-        "delivery_method": null,
+        "delivery_method": {
+          "zh": "以 HKCC 结算的 HKFE 衍生品合约为样本：全部合约到期按最终结算价结算，其中绝大多数（恒指系列等指数期货/期权）为现金结算；例外为美元兑人民币（香港）期货与期权（最终结算时卖方交付美元、买方以离岸人民币支付最终结算值）、实物结算的离岸人民币及美元黄金/白银期货（卖方交付实物金/银）、以及恒生指数/恒生中国企业指数/恒生科技指数期货的实物结算期权（到期后交付现货月标的期货）",
+          "en": "Sampled by HKFE contracts cleared by HKCC: all contracts are settled upon final settlement, and most (index futures/options such as the HSI series) are cash settled; the exceptions are USD/CNH currency futures and options (the seller delivers USD and the buyer pays the final settlement value in offshore RMB upon final settlement), physically settled CNH and USD gold/silver futures (the seller delivers physical gold/silver), and physically settled options on Hang Seng Index/HSCEI/Hang Seng TECH Index futures (settled by delivery of the spot-month underlying futures)",
+          "detail": "样本口径 = HKATS/HKFE 由 HKCC 清算的合约（见 market_structure.derivatives 顶部注释）；港交所股票期权由另一结算所（SEOCH）体系清算，不在本字段样本内。quote 中「contracts8」的 8 系 PDF 原文脚注编号。本字段此前 [ADR-021] 批次未核实留空，本次据已缓存的一手来源（HKCC PFMI 披露）补齐。",
+          "sources": [
+            {
+              "title": "HKCC（期货结算公司）PFMI 信息披露文件（2025年2月版）",
+              "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Listed-Derivatives/PFMI/HKCC_PFMI_Disclosure_2025_Feb.pdf",
+              "accessed": "2026-08-23"
+            }
+          ],
+          "quote": "All derivatives contracts8 traded on HKFE are cash settled upon final settlement, except US Dollar vs Renminbi (Hong Kong) (USD/CNH) currency futures and options contracts, physically settled CNH and USD gold/silver futures contracts and physically settled options contracts on Hang Seng Index Futures, Hang Seng China Enterprises Index Futures and Hang Seng TECH Index Futures. ... Physically settled CNH and USD gold/silver futures contracts are settled upon physical delivery of physical gold/silver by the seller and payment of final settlement value in the settlement currency by the buyer upon final settlement. ... Physically settled options contracts on Hang Seng Index Futures/Hang Seng China Enterprises Index Futures/Hang Seng TECH Index Futures are settled upon delivery of spot-month underlying futures.",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null
+        },
         "last_trading_day_rule": {
           "zh": "因产品而异，无统一规则：以股票期货为例，最后交易日为合约月份的倒数第二个交易日，最后结算日为最后交易日后第一个交易日，最终结算价采相关股票在最后交易日港交所（SEHK）官方收市价；恒生指数系列期货/期权则以「到期日」（Expiry Day）表述——合约月份第三个星期五（如非交易日则顺延至前一交易日），到期日下午收市前另设官方结算价计算窗口",
           "en": "Varies by product, with no single unified rule: for Stock Futures, the Last Trading Day is the second-last Trading Day of the Contract Month and the Final Settlement Day is the first Trading Day after it, with the Final Settlement Price being the underlying stock's official SEHK closing price on the Last Trading Day; the HSI-series index futures/options instead use \"Expiry Day\" — the third Friday of the Contract Month (or the preceding Trading Day if that is not a Trading Day) — with an official settlement-price calculation window before close on the Expiry Day",
