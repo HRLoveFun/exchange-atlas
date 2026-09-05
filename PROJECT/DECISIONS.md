@@ -2573,3 +2573,34 @@ print('全库 medium 零 sources:',n)
 **没定 / 留后续：** 枚举缺口（circuit_breaker `contract_level`、delivery_method 分产品线）登记 OPEN-QUESTIONS #46 不改表；`fetch_sources.py` BLOCK_SNIFF_RE 误报待修；us-nasdaq investor.gov wayback 快照待人工重抓。
 
 **日期：** 2026-09-05/06
+
+---
+
+### ADR-PENDING-llwrap-mixed-wrap — 折行函数 `wrapByCharBudget` 改 token 折行：中英混排不再从拉丁词 / 数字中间切断
+
+**背景：** `wrapByCharBudget`（旧名 `llWrap` 的核心逻辑，[ADR-085] 抽取为 ll / rm / pt / rf 四个可视化模块共用的 SVG 文本折行预算函数）的旧实现是**二分支**：串里含任一 CJK 表意字（`/[一-鿿]/.test(s)`）→ 整串按 `per` 逐字硬切（`s.slice(i, i+per)`）；否则按空格贪心折词。中英混排的散文走第一条分支，`per` 字一刀，把嵌在中文里的拉丁词 / 数字从词中截断——`Recognis|ed`、`CMN 4.37|3`、`Exchange Partic|ipant`、`±|10%`。[ADR-059] / [ADR-061] / [ADR-064] / [ADR-066] 四条渲染层 ADR 都把这列为已知局限（[ADR-061] 局限④，其余三条镜像同一句「四模块共用 `llWrap` 的既有局限，改需多模块一起上混排折行，超出本棒范围」）。[ADR-085] 把四模块的折行逻辑收敛到同一个函数后，这件事从「多模块一起改」变成「一处改、四处受益」，前提解除。
+
+**定了什么：**
+
+1. **`wrapByCharBudget` 改为单条 token 折行路径**，删掉「含 CJK → 逐字硬切」分支。`s.match(/[一-鿿]|[^\s一-鿿]+|\s+/g)` 切成 token：**单个 CJK 表意字**（每个都是断点，宽 1）｜**非空白非 CJK 的连续串**（拉丁词 / 数字 / 连字符串 / 标点串，整体不可断）｜**空白**（断点）。贪心按 `per` 预算打包，token 间是否补一个空格由原文该处有无空白决定（`pendingSpace`）。
+2. **既有行为逐字保持**（关键——四模块现网 20 家 × 中英 × 明暗全部纯 CJK / 纯拉丁卡不得回归）：
+   - **纯 CJK 串**：每字 token 宽 1、字间无空格 → 恰好按 `per` 断行，与旧「精确切片」逐字一致。5000 条随机 CJK 串 × 随机 `per`/`maxLines` 扫，0 mismatch。
+   - **纯拉丁串**：token 即词，打包等价于旧 `else` 分支的 `(cur + " " + w).length > per` 贪心。5000 条随机扫，0 mismatch。
+   - **单 token 宽度 > `per`**（罕见：窄卡里的长词 / 长 URL）：独占一行、任其溢出，不硬切——与旧拉丁分支「长词自成一行」同行为（宽卡内 24px 留白 + [ADR-061] 扣边距足够兜住，headless 未见越界）。
+   - 末行 `maxLines` 截断 + `clipText(… , per+1)` 省略号逻辑不变。
+3. **新机器关卡 `tools/check_wrap_mixed.py`，挂进 `make check`**（[CLAUDE.md §四]「新引入的不变式必须同时加机器校验」）。从 `app.js` 抽出 `wrapByCharBudget` + `clipText` 的**真实函数体**、拼 node harness 跑行为断言：(a) 6 组中英混排样例，输入里每个极大拉丁 / 数字 token 必须原样作为某输出行的子串（不触发省略号的 `per`/`maxLines`）；(b) 3 组纯 CJK 串，输出必须与精确 `per` 切片逐字相等。`node` 不在 `PATH`（纯 Python 环境）时打印跳过、返回 0——降级同「目标文件不存在则跳过」，CI（`ubuntu-latest` 预装 node）会真跑。**负向探针**：把 `app.js` 临时换回旧 blind-slice 实现，该检查 `exit 1`，逐条点名 `Investment` / `Connect` / `CMN` / `Committee` 被折断；换回新实现 `exit 0`。CJK 逐字断言在新旧实现下都通过，佐证纯中文卡零回归。
+4. **四个 `xxWrap` 一行委托的注释同步**（`llWrap` / `rmWrap` / `ptWrap` / `rfWrap`）：措辞由「CJK 按字数、拉丁按单词」改为「混排 token（CJK 逐字 / 拉丁整词，见 `wrapByCharBudget`）」。委托体本身不动（`check_no_dup_render_helpers` 的纯委托豁免不受影响）。
+
+**影响：** [ADR-061] 已知局限④ 及 [ADR-059] / [ADR-064] / [ADR-066] 的镜像条目关闭；`ROADMAP` §三对应子条目就地标注，§一「下一步」item 3 的「中英混排 Latin 折断为四模块共用局限仍挂」由合并协调者按 INBOX 便签更新。
+
+**没做：**
+
+- **没改 `wrapByPixelWidth` 的像素反推系数**（CJK `avail/10.5`、拉丁 `avail/5.6` 不动）——混排行的实际像素宽因拉丁 token 整体保留会与「按最坏情况逐字估」略有出入，但既有系数本就是估算 + 卡内留白足，不借本条顺手调参。
+- **没扩宽 CJK 断点字符集**——tokenizer 的 `[一-鿿]` 与全库一致的 CJK 探测正则同范围；CJK 标点 / 全角 / 扩展 A 作为「非空白非 CJK」串的一部分参与折行（不会从中间切、但也不在标点后主动断），要更细的中日文断行规则是独立小改，非本条范围。
+- **没上「先摘要后全文」的散文精修**——那是数据层活，四模块各自的「长文卡硬裁剪」局限里另挂。
+- **没做 headless 像素级核对**——本次在后台任务、无浏览器；以 `check_wrap_mixed.py` 的真实函数体行为断言 + 5000×2 随机等价扫替代，纯 CJK 零 mismatch 是「现网中文卡不动」的强证据。
+- **没提交 `docs/data/` 的再生结果**——本条基线 `b9ae247` 的 `docs/data/` / 生成块含并行「stable 档来源闭环」诸棒的在途中间态（该 commit message 自述「其后续 build 自收敛」）。`make build` 先 `sync` 后 `check`、开工即自愈，本 PR 的 CI 因此绿；把这份 ~1300 行再生扫进本前端 commit 只会与下一个数据棒撞车（同 [ADR-086]/[ADR-091] 记的「误扫入并行中间态」坑），不做。
+
+**验证：** 基线 rebase 到 `b9ae247`（OQ #45 盲审订正收尾，ADR-092）后 `make build` **exit 0**（`selfcheck` 93、`validate` 0 错误 / 5 警告〔均为本分支 `ADR-PENDING-*` 占位符，合并后 healer 定号〕、`verify_quotes` FAIL=0、`check_ui_i18n` / `check_no_chapter_ordinals` / `check_no_dup_render_helpers` / `check_wrap_mixed` OK）；`node --check docs/assets/app.js` 通过。本条 commit 只含 `app.js` / `Makefile` / 新增 `tools/check_wrap_mixed.py` / `DECISIONS` / `ROADMAP` / `ROADMAP-INBOX`——`data/` 与 `docs/data/` 零 diff（见「没做」末条）。`check_wrap_mixed.py` 负向探针：把 `app.js` 临时换回旧 blind-slice 实现 → `exit 1`、逐条点名 `Investment`/`Connect`/`CMN`/`Committee` 被折断；换回新实现 → `exit 0`；纯 CJK 逐字断言在新旧实现下都通过，佐证现网中文卡零回归。
+
+**日期：** 2026-09-06
