@@ -17,35 +17,53 @@
       "timezone": {
         "zh": "Asia/Hong_Kong (UTC+8)",
         "en": "Asia/Hong_Kong (UTC+8)",
-        "verified": "2026-08-12",
+        "sources": [
+          {
+            "title": "IANA tz database「asia」zone 文件（Asia/Hong_Kong：UTC+8，全年无夏令时 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/asia",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "dst_rule": {
         "zh": "不实行夏令时",
         "en": "No daylight saving time",
-        "verified": "2026-08-12",
+        "sources": [
+          {
+            "title": "IANA tz database「asia」zone 文件（Asia/Hong_Kong 全年无夏令时 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/asia",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "founded_year": {
         "zh": "1891（前身香港经纪协会）／2000年3月6日（现HKEX集团经公司化改制成立，同年6月27日上市）",
         "en": "1891 (predecessor Hong Kong Stockbrokers' Association) / 6 March 2000 (present-day HKEX Group formed via demutualisation, listed on its own Main Board on 27 June 2000)",
-        "detail": "交易所前身可追溯至1891年成立的香港经纪协会，1914年更名为香港证券交易所。\n2000年3月6日，香港联合交易所、香港期货交易所与香港中央结算公司公司化合并，\n组成现在的香港交易及结算所有限公司，同年6月27日在本所主板上市。\n本条来自第三方综述（MarketsWiki/维基百科等），未逐条核对港交所官方\"关于我们\"页原文，confidence 标 medium。\n",
+        "detail": "交易所前身可追溯至1891年成立的香港经纪协会，1914年更名为香港证券交易所。\n2000年3月6日，香港联合交易所、香港期货交易所与香港中央结算公司公司化合并，\n组成现在的香港交易及结算所有限公司，同年6月27日在本所主板上市。\n2000-03-06 合并与 2000-06-27 上市部分已由 HKEX 官网 Getting Started FAQ 官方原文坐实（见\nsources 及 history 字段）；1891 年前身部分仍为第三方综述（MarketsWiki/维基百科等）未逐条\n核对官方原文，故整字段 confidence 维持 medium。\n",
+        "sources": [
+          {
+            "title": "HKEX Getting Started FAQ（官方表述：SEHK/HKFE/HKSCC 于 2000-03-06 合并为 HKEX、2000-06-27 在 SEHK 上市）",
+            "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Getting-Started?sc_lang=en",
+            "accessed": "2026-09-05"
+          }
+        ],
         "confidence": "medium",
-        "verified": "2026-08-12",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       },
       "history": {
         "zh": "香港交易所由三家公司合并而来：香港联合交易所、香港期货交易所与香港中央结算于2000年3月6日完成合并，成为单一控股公司香港交易及结算所有限公司的全资附属公司；香港交易所于2000年6月27日在联交所上市；2012年12月收购伦敦金属交易所（LME）",
@@ -147,13 +165,24 @@
       "settlement_currency": {
         "zh": "港元（双柜台人民币柜台以人民币结算）",
         "en": "Hong Kong dollars (the renminbi counter under the dual-counter model settles in renminbi)",
-        "verified": "2026-08-12",
+        "sources": [
+          {
+            "title": "HKSCC Operational Procedures SEC 21（DDI/DCI 费用按「HKD items, RMB items and USD items」分币种计收——多币种交收条目的官方依据）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/HKSCC/Operational-Procedures/SEC21.pdf",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "HKSCC General Rules Rule 2502（Clearing Participant 现金供款以港元或 HKSCC 不时指定的其他货币缴付）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/HKSCC/General-Rules-of-HKSCC/R25.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
-        "quote": null,
-        "sources": null
+        "quote": null
       }
     },
     "regulation": {
@@ -194,13 +223,19 @@
       "clearing_regulator": {
         "zh": "证券及期货事务监察委员会",
         "en": "SFC",
-        "confidence": "medium",
-        "verified": "2026-08-12",
+        "sources": [
+          {
+            "title": "HKCC PFMI Disclosure（2025-02，官方披露 Authority Regulating, Supervising or Overseeing the FMI: Securities and Futures Commission of Hong Kong）",
+            "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Listed-Derivatives/PFMI/HKCC_PFMI_Disclosure_2025_Feb.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "Authority Regulating, Supervising or Overseeing the FMI: Securities and Futures Commission of Hong Kong",
+        "confidence": "high",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "core_laws": {
         "zh": "《证券及期货条例》",
@@ -2218,13 +2253,19 @@
       "membership_structure": {
         "zh": "交易所参与者（Exchange Participant）制度，须为持牌法团或注册机构",
         "en": "Exchange Participant system; must be a licensed corporation or registered institution",
-        "confidence": "medium",
-        "verified": "2026-08-12",
+        "sources": [
+          {
+            "title": "HKEX Getting Started FAQ（官方表述：持牌法团或注册机构成为 Exchange Participant 后，其交易设施可直接接入 HKEX 交易设施）",
+            "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Getting-Started?sc_lang=en",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "If a licensed person or registered institution is an Exchange Participant, its trading facilities can have direct access to HKEX's trading facilities.",
+        "confidence": "high",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "broker_landscape": {
         "zh": "截至2026年7月31日：证券市场（联交所）共600个交易权持有人（合共持有921个交易权），其中508家为交易所参与者（Trading EP，合共806个交易权）、81家为非交易交易所参与者（Non-trading EP，合共104个交易权）、另有11个交易权持有人非交易所参与者（合共11个交易权）；期货市场（期交所）共193个交易权持有人（合共210个交易权），其中146家为交易交易所参与者（合共162个交易权）、47个交易权持有人非交易所参与者（合共48个交易权）",

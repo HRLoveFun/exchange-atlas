@@ -102,6 +102,8 @@
   - 基本法第五章（经济）英文版全文页（Article 112: "No foreign exchange control policies shall be applied in the Hong Kong Special Administrative Region..."）: https://www.basiclaw.gov.hk/en/basiclaw/chapter5.html（HTTP 200，16KB）
   - 基本法第一章英文版全文页（Article 5：资本主义制度和生活方式 50 年不变——political_risk_note 的制度锚，[ADR-079] 风险旗标子棒）: https://www.basiclaw.gov.hk/en/basiclaw/chapter1.html（HTTP 200，5KB）
   - 基本法第五章（經濟）中文版全文页: https://www.basiclaw.gov.hk/tc/basiclaw/chapter5.html（HTTP 200，12KB）
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Asia/Hong_Kong 的 UTC 偏移与无夏令时规则
+  - tzdb「asia」zone 文件（`Zone Asia/Hong_Kong`，全年无夏令时 Rule）: https://data.iana.org/time-zones/tzdb/asia（HTTP 200，68KB）
 - `state.gov`（2026-09-05 新增登记，任务四收尾第29条） | 第三方（美国政府官方出版物，对港/他国属第三方年度评估，confidence 封顶 medium） | en | ⚠️ 站点对本环境 Akamai 拦截：报告落地页为 JS 壳（curl 200 但正文仅 151 字符）、`wp-content` PDF 直连 403（浏览器 UA 同样 403）——fetch_sources 会自动走 wayback 回退，2025 香港 ICS PDF 快照已验证可用 | 用于 regulation.foreign_ownership_limit（「open foreign investment policy 的主要例外清单」官方评估表述）
   - 2025 Hong Kong Investment Climate Statement PDF（直连 403，经 wayback 快照 20260214215223 抓取，481KB）: https://www.state.gov/wp-content/uploads/2025/09/638719_2025-Hong-Kong-Investment-Climate-Statement.pdf
   - 2026-09-05 新增（任务三棒 4 衍生品 holidays_note）: HKFE 通告 MO/DT/120/25（2025-06-02）— Derivatives Markets Holiday Schedule, Last Trading Days/Expiry Days and Final Settlement Days for Year 2026，附件一为衍生品市场假日表，正文并明示 MSCI 期货期权与货币期货期权在港公众假期照常交易（服务端直出 PDF，curl 可抓）: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Circulars-and-Notices/Participant-and-Members-Circulars/HKFE/2025/MO_DT_120_25_e.pdf（HTTP 200）
