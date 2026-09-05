@@ -131,6 +131,18 @@
   - （系统性，跨多家）`connect_schemes` 的消极认定条目（`au-asx`/`br-b3`/`ch-six`/`de-xetra`/`jp-jpx`/`sa-tadawul` 共 6 处）普遍未填 `sources`，会静默继承与断言主题无关的章节级默认来源（`market_structure._meta.sources`，通常是交易时段页面），使"moderate 必须有 sources"的校验对这类字段形同虚设——建议给消极认定类字段设计专门的来源占位方式，本次未处理（跨 6 个文件的结构性调整超出复核范围）。
 - **[ADR-079] 「`confidence: medium` 却零 `sources`」的全库缺口：按 `validate` 展开后口径 64 处，且 100% 是 `volatility: stable` 字段（2026-09-05 实算）。** 校验 4 只要求 `volatile`/`moderate` 有 `sources`，`stable` 一档不设约束——头部是 `overview.timezone` 16 / `overview.settlement_currency` 16 / `overview.dst_rule` 14 / `overview.trading_currency` 5 / `regulation.clearing_regulator` 5。`risks.fx_risk_note`（同为 `stable`）近全库停在无来源的 `low` 而 `make check` 一路全绿，正是踩在这个缺口上。与上面 [ADR-074] 复核者提的「消极认定类字段静默继承章节 `_meta.sources`」是同一族问题的两面：一面是**没有来源也不报错**（`stable` 档），一面是**继承来了一个与断言无关的来源**（`moderate` 档，靠 `expand_field` 继承）。风险旗标数据子棒只在第 12 章加限定不变式（该章 `confidence` 已被 [ADR-066] 轴 3 做成一等视觉信号），**不代解全库**：`stable` 字段里「时区 / 币种 / 夏令时」这类确实近乎常识、是否值得逐条补源需要单独判断，别为了让校验好看而批量塞首页 URL（`PROJECT/SOURCES.md`「来源 URL 要精确到信息页」）。**待拍板**：是否把「`stable` 且 `medium` 须有来源」立为独立回填棒，还是承认这 64 处是可接受的常识层。
 
+29. **任务四（[ADR-078]）本轮（2026-09-05）检索后仍未坐实的 5 家旗舰所字段**——按铁律留空，逐字段记下已试路径与下次入口：
+    - `hk-hkex regulation.foreign_ownership_limit`：未找到香港对外资持股「无一般比例限制」的官方正面表述（候选入口：InvestHK「Our business environment」、证监会/公司注册处行业牌照清单——个别行业才有持股限制是结构性常识，但需要一份官方页可摘引）。
+    - `hk-hkex regulation.capital_controls`：目标来源是《基本法》第112条（「香港特别行政区不实行外汇管制政策」），basiclaw.gov.hk 章节直达 URL 404（站点改版），下次从 basiclaw.gov.hk 首页导航重新定位全文链接。
+    - `hk-hkex overview.history` / `hk-hkex participants.foreign_access_channel` / `hk-hkex regulation.self_regulatory_org` 升级：hkex.com.hk 的 About-HKEX/History 与 /Regulation 页面 URL 均为 404（官网改版），HKEX「front-line regulator」官方表述待重新定位；境外投资者参与通道（直接开户）缺官方一句原文。
+    - `us-nyse participants.foreign_access_channel`：美国市场无外资准入限制缺官方一句原文（investor.gov 术语表/国际投资者页为 JS 渲染壳；候选入口：SEC「International Investors」栏目或 FINRA「Investing for beginners」类页面）。
+    - `uk-lse market_structure.trading_sessions.pre_market`：MIT201 不含盘前时段表——正确文档应是 docs.londonstockexchange.com 的「Trading Services」系列（与 business-days 页同族，注意 lseg.com 对应页是 SPA 空壳）。
+    - `uk-lse market_structure.holidays_note`：lseg.com business-days 页为 SPA 空壳、MIT201 无假期表——入口同上（Trading Services 系列文档）。
+    - `uk-lse regulation.clearing_regulator`：沿用原第22条（BoE 为 CCP 监管机关的官方页 bankofengland.co.uk/financial-market-infrastructure 是 JS 壳，需换页面或用 FSMA/UK EMIR 条文页）。
+    - `uk-lse infrastructure.major_outage_history`：未找到 LSE 官方重大故障披露汇总（候选入口：LSE Market Notices 存档、FCA NSM 中的事故类公告检索）。
+    - `cn-sse participants.investor_structure`：需沪市投资者结构官方口径（候选入口：上交所统计年鉴「投资者结构」章节、上交所新闻发布会数据）。
+    - `cn-sse infrastructure.trading_system_name`：上交所交易系统官方名称/介绍页未定位（官网技术栏目无系统命名页，候选入口：上交所技术大会/年报、上证技术发展有限责任公司页面）。
+
 <!-- BEGIN:GENERATED auto-issues -->
 - `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `br-b3` 基本信息 / 夏令时规则（dst_rule）— confidence: low
@@ -142,8 +154,6 @@
 - `ch-six` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `ch-six` 风险与特殊考量 / 政治、地缘与制裁风险（political_risk_note）— confidence: low
 - `cn-sse` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
-- `cn-sse` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
-- `cn-sse` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `cn-sse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `cn-szse` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `cn-szse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
@@ -159,7 +169,6 @@
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（trading_halt_mechanism）— confidence: low
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（derivatives.trading_halt_mechanism）— confidence: low
 - `in-nse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `jp-jpx` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `jp-jpx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 错误交易处理规则（error_trade_rule）— confidence: low
@@ -180,6 +189,5 @@
 - `tw-twse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `us-nasdaq` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `us-nasdaq` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `us-nyse` 市场结构与交易机制 / 节假日与特殊休市（holidays_note）— confidence: low
 - `us-nyse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 <!-- END:GENERATED auto-issues -->

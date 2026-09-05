@@ -2180,15 +2180,21 @@
         "detail": null
       },
       "trading_system_name": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "旧系统 AMS/3 在卖空规则页中被提及为历史名称，现行系统对外公开名称未核实，留空。",
+        "zh": "领航星证券交易平台（Orion Trading Platform – Securities Market, OTP-C）：2018 年 2 月投产，取代 2000 年 10 月启用的第三代电子股票交易系统 AMS/3；官方定位为基于开放系统技术、可扩展、灵活高性能的现货交易平台，功能可分阶段扩展；交易接入经领航星中央交易网关（Orion Central Gateway – Securities Market, OCG-C）",
+        "en": "Orion Trading Platform – Securities Market (OTP-C): launched in February 2018, replacing AMS/3 — the third-generation electronic stock trading system introduced in October 2000; officially positioned as a scalable, flexible and high-performing cash equity trading platform based on open systems technology, with new and enhanced functionalities introducible in phases; access runs via the Orion Central Gateway – Securities Market (OCG-C)",
+        "sources": [
+          {
+            "title": "Infrastructure Overview（HKEX 官网证券交易基建总览，OTP-C 投产时间/定位/AMS-3 替代关系与 OCG-C）",
+            "url": "https://www.hkex.com.hk/Services/Trading/Securities/Infrastructure/Overview?sc_lang=en",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "the Orion Trading Platform – Securities Market (OTP-C) has been introduced in February 2018 to replace AMS/3, the third generation of electronic stock trading system introduced in October 2000. OTP-C aims to offer a scalable, flexible and high performing cash equity trading platform based on open systems technology.",
+        "confidence": "high",
+        "detail": "原留空记录注：旧系统 AMS/3 曾在卖空规则页中被提及为历史名称——本次以基建总览官方页坐实现行系统名称与沿革（AMS/3 → OTP-C，2018-02 投产）。",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "access_methods": {
         "zh": "行情数据支持直连（Direct Connection，含首套标准连接及可加购的额外连接）与间连（Indirect Connection，即通过资讯供应商/终端整合商取得数据，前两个数据来源免费、第三个起收费）两种接入方式；另设Co-location（主机托管，于港交所主机托管中心HDC内自建服务器直连交易/行情系统）与内地市场数据枢纽（Mainland Market Data Hub）等专门连接方案，实时数据经许可后须缴付方案对应的连接费",
@@ -2449,15 +2455,21 @@
         "sources": null
       },
       "liquidity_risk_note": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "未找到港交所官方对『流动性风险』本身的正面说明性文字（如成交集中度、大市值股票占比等结构性流动性特征的官方论述）；overview.market_cap_usd_bn/listed_companies_count 等相关基础数据本身也留空，暂无法据此合成有质量的流动性风险描述，留空。",
+        "zh": "香港现货市场流动性呈结构性分层：成交与流动性高度集中于大市值蓝筹与恒生综合指数大型/中型股成分股，小市值个股与部分结构性产品价差偏宽、冲击成本更高——这一分层也直接体现在 HKSCC 的两级保证金制度中（Tier P 覆盖大型/中型股成分股、全部股票 ETP 及以其为标的的结构性产品，适用 VaR 组合保证金；其余品种适用 12%/30%/55% 的 Tier N 平准费率，费率档位本身即是对流动性分层与风险敞口的定价，见 clearing.initial_margin_practice）。结算层面流动性风险由 HKSCC 的 CNS 净额交收与保证金安排承接",
+        "en": "Liquidity in Hong Kong's cash market is structurally tiered: turnover concentrates in large-cap blue chips and Hang Seng Composite LargeCap/MidCap constituents, while small caps and some structured products carry wider spreads and higher impact cost — a stratification mirrored directly in HKSCC's two-tier margin regime (Tier P VaR portfolio margin for LargeCap/MidCap constituents, all equity ETPs and structured products thereon; 12%/30%/55% Tier N flat rates for the rest, with the tiers themselves pricing liquidity stratification and risk exposure — see clearing.initial_margin_practice). Settlement-level liquidity risk is absorbed by HKSCC's CNS netting and margin arrangements",
+        "detail": "分析性字段（结构性停留 low/medium）：『流动性分层』与保证金分组的对应关系是以 HKSCC 保证金页的 Tier 划分为锚的归纳（Tier 分类跟随 HSCI 大/中/小盘），不是引用了一份专门论述流动性风险的官方文件；无具体成交集中度数字，不引入未核实统计。",
+        "sources": [
+          {
+            "title": "Margin（HKEX 官网 HKSCC 风险管理·保证金页，Tier P/Tier N 分组作为流动性分层与风险定价的制度证据）",
+            "url": "https://www.hkex.com.hk/Services/Clearing/Securities/Risk-Management/Margin?sc_lang=en",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "Stocks which are constituents of Hang Seng Composite LargeCap Index or Hang Seng Composite MidCap Index, all equity ETPs, and structured products of the aforementioned Tier P instrument(s) as underlyings are subject to Tier P margin calculation.",
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "regulatory_change_risk_note": {
         "zh": "香港上市/交易制度近年处于活跃调整期，官方样本包括：①2023年6月19日推出港元-人民币双柜台模式（Dual Counter Model）及双柜台做市商计划；②2023年3月31日《上市规则》新增第18C章「特专科技公司」上市规则，2024年8月23日证监会与港交所联合公布为期三年（至2027年8月31日）的临时性宽免措施；③2024年10月18日起证监会与港交所推行「优化后申请时限」，为新上市申请审批设定更明确的监管意见轮次与时限；④2024年6月港交所就下调最小价差（买卖价差改革）展开市场咨询",

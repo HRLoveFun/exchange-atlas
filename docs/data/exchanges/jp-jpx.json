@@ -575,21 +575,21 @@
         }
       },
       "holidays_note": {
-        "zh": "周末与法定节假日休市，具体日历官网逐年公布，未逐条核实",
-        "en": "Closed on weekends and national holidays; the exact calendar is published yearly and was not individually verified",
-        "confidence": "low",
+        "zh": "周末与日本的法定节假日休市：JPX 官网逐年发布完整的『Holiday Trading』日历（如 2026 年：1月1日元旦、1月12日成人节、2月11日建国纪念日、2月23日天皇诞生日、3月20日春分节等均列为休市日，含明确星期与日期）；清算在非营业日亦不进行",
+        "en": "The market closes on weekends and Japanese national holidays: JPX publishes the full 'Holiday Trading' calendar year by year (for 2026: Jan 1 New Year's Day, Jan 12 Coming of Age Day, Feb 11 National Foundation Day, Feb 23 Emperor's Birthday, Mar 20 Vernal Equinox, etc., all listed as market holidays with exact dates and weekdays); clearing is likewise not conducted on non-business days",
+        "detail": "由 low 升级：官网日历页一手坐实（含逐日日期与星期）；此前『未逐条核实』的保留事项以官方页面的逐年发布机制替代——本字段不逐日抄录，日期以官网当年日历为准。",
         "sources": [
           {
-            "title": "Business Regulations（TSE官网英文版PDF）",
-            "url": "https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf",
-            "accessed": "2026-08-13"
+            "title": "Holiday Trading（JPX 官网，逐年交易日历与假期安排）",
+            "url": "https://www.jpx.co.jp/english/corporate/about-jpx/calendar/",
+            "accessed": "2026-09-05"
           }
         ],
+        "quote": "Holiday Trading 2026 Jan. 1 (Thu.) New Year's Day Jan. 2 (Fri.) Market Holiday Jan. 3 (Sat.) Market Holiday Jan. 12 (Mon.) Coming of Age Day Feb. 11 (Wed.) National Foundation Day Feb. 23 (Mon.) Emperor's Birthday Mar. 20 (Fri.) Vernal Equinox",
+        "confidence": "medium",
         "verified": "2026-08-13",
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "opening_mechanism": {
         "spec": {

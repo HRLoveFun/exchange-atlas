@@ -1762,7 +1762,7 @@
       "field_path": "self_regulatory_org",
       "label_zh": "自律组织",
       "label_en": "Self-regulatory Organization",
-      "zh": "中国证券业协会（券商层面）；交易所自身对上市公司行使一线自律监管职能",
+      "zh": "一线自律监管：上海证券交易所自身承担对上市公司与会员的一线自律监管职能（官方简介明列其职能包括『组织和监督证券交易；对会员进行监管』等，且『受中国证监会监督和管理』）；券商层面另有中国证券业协会（自律组织）承担行业自律职责",
       "en": "Securities Association of China (SAC)",
       "enum": null,
       "enum_ref": null,
@@ -1957,13 +1957,13 @@
       "field_path": "short_selling",
       "label_zh": "做空机制",
       "label_en": "Short Selling",
-      "zh": "融资融券制度，限指定标的范围内进行",
-      "en": "Margin Trading and Short Selling",
+      "zh": "融券（卖空）经融资融券制度在指定标的范围内进行（裸卖空不允许、须借券），且处于持续收紧的逆周期调节之下：2024-07-10 经证监会批准，中证金融公司暂停转融券业务（自 2024-07-11 起实施），融券卖空的实际可用券源因此大幅收缩",
+      "en": "Securities lending (short selling) runs through the margin-trading regime on designated eligible securities (no naked shorting; borrowing required), under progressively tightening counter-cyclical adjustment: with CSRC approval, China Securities Finance suspended its securities-refinancing business from 11 July 2024, materially shrinking the lendable supply for short selling",
       "enum": "restricted_list",
       "enum_ref": "short_selling_stance",
       "has_detail": true,
       "verified": "2026-08-12",
-      "confidence": "low"
+      "confidence": "medium"
     },
     {
       "exchange_id": "cn-sse",
