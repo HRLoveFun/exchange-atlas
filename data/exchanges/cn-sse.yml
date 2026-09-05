@@ -541,24 +541,46 @@ listing:
     confidence: medium
 
   listing_process_duration:
-    zh: ""
-    confidence: low
-    detail: "未核实具体周期数据，留空。"
+    zh: "注册制下上交所股票发行上市的法定时限（《上海证券交易所股票发行上市审核规则》现行版）：收到申请文件后 5 个工作日内作出是否受理的决定；自受理之日起，本所审核和证监会注册的时间总计不超过 3 个月（发行人及保荐机构回复审核问询的时间不计算在内）"
+    en: "Statutory timelines for SSE IPOs under the registration system (SSE Stock Issuance and Listing Review Rules, current version): accept/reject decision within 5 business days of receiving the application; review plus CSRC registration in total no more than 3 months from acceptance (time spent answering review inquiries is excluded)"
+    sources:
+      - title: "《上海证券交易所股票发行上市审核规则（2024年4月修订）》全文 DOCX（第十三条受理时限、第四十四条审核+注册 3 个月总时限）"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/firstepisode/c/10778841/files/327d65c5e46d4e7d926e4ecc70e4c6d9.docx
+        accessed: 2026-09-05
+    quote: "第十三条 本所收到发行上市申请文件后五个工作日内，对文件进行核对，作出是否受理的决定，告知发行人及其保荐人，并在本所网站公示。 ... 自受理发行上市申请文件之日起，本所审核和中国证监会注册的时间总计不超过三个月。"
+    confidence: high
 
   transfer_between_boards:
-    zh: ""
-    confidence: low
-    detail: "未核实转板机制细节，留空。"
+    zh: "转板上市制度：北京证券交易所上市公司可向本所申请转板至科创板上市——《北京证券交易所上市公司向上海证券交易所科创板转板办法（试行）》（上证发〔2022〕34号，现行有效）规范转板审核及上市安排；北交所公司亦可在符合条件时向深交所申请转板至创业板（另一通道，未在本所文件内）"
+    en: "Board-transfer system: Beijing Stock Exchange listed companies may apply to transfer-list onto the SSE STAR Market — governed by the Measures for the Transfer of BSE Listed Companies to the STAR Market of SSE (Trial) (SSE Fa [2022] No. 34, in force); BSE companies may also transfer to the ChiNext of SZSE under a parallel channel (outside this document)"
+    detail: "原『未核实转板机制细节』以本所官方办法一手坐实；此字段口径按 [ADR-062] 勘误后的『层级/板块间转移』理解：中国 A 股内部无多板块互转安排（主板/科创板为独立上市体系），现实制度即北交所转板通道。"
+    sources:
+      - title: "《北京证券交易所上市公司向上海证券交易所科创板转板办法（试行）》（上交所官网公告页，上证发〔2022〕34号，现行有效）"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/flap/c/c_20250514_10778852.shtml
+        accessed: 2026-09-05
+    quote: "北京证券交易所上市公司向上海证券交易所科创板转板办法（试行） 发文文号 上证发〔2022〕34号 发布日期 2022年03月04日 生效日期 2022年03月04日 时效性 现行有效 ... 为了细化落实《中国证监会关于北京证券交易所上市公司转板的指导意见》，规范北京证券交易所上市公司向上海证券交易所（以下简称本所）科创板转板审核及上市安排等事宜"
+    confidence: high
 
   continuing_obligations:
-    zh: ""
-    confidence: low
-    detail: "留空前的草稿印象：定期报告、临时信息披露、公司治理规范运作等持续义务——未核实来源，故未采纳为正式字段值。"
+    zh: "上市后的持续义务以《股票上市规则》为总纲：信息披露义务人应当及时、公平地披露信息并保证信息真实、准确、完整（第二章）；上市公司须遵守公司治理（第四章）、定期报告（第五章）、应当披露的交易与关联交易（第六章）、应当披露的其他重大事项（第七章）等持续规范；控股股东、实控人及董监高负有相应诚信与配合义务"
+    en: "Post-listing continuing obligations are codified in the SSE Listing Rules: timely and fair disclosure with information that is true, accurate and complete (Chapter 2); ongoing compliance across corporate governance (Chapter 4), periodic reports (Chapter 5), disclosable transactions and related-party transactions (Chapter 6) and other material matters (Chapter 7); controlling shareholders, actual controllers and directors/supervisors/senior management bear corresponding integrity and cooperation duties"
+    sources:
+      - title: "《上海证券交易所股票上市规则（2026年4月修订）》全文 DOCX（第一、二、四至七章持续义务条款）"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx
+        accessed: 2026-09-05
+    quote: "上市公司及相关信息披露义务人应当及时、公平地披露信息，并保证所披露的信息真实、准确、完整，不得有虚假记载、误导性陈述或者重大遗漏。"
+    confidence: high
 
   suspension_resumption:
-    zh: ""
-    confidence: low
-    detail: "个股级临时停牌见 market_structure.trading_halt_mechanism（已有来源）；此字段特指因重大事项等的长期停牌规则，未核实，留空。"
+    zh: "停牌与复牌专章规定（《股票上市规则》第八章）：上市公司发生本章规定事项应向本所申请停牌复牌；未按期披露定期报告、财报被责令改正未改正、信息披露或规范运作存在重大缺陷被要求改正未改正等情形应停牌，停牌期限不超过 2 个月，依规改正后复牌；资金占用达最近一期经审计净资产绝对值 30% 以上或金额达 2 亿元以上被责令改正未改正的同样停牌不超过 2 个月；股本总额/股权分布连续 20 个交易日不具备上市条件的停牌不超过 1 个月"
+    en: "Suspension and resumption are governed by a dedicated chapter (Chapter 8 of the SSE Listing Rules): the company must apply to the Exchange for suspension/resumption of the enumerated matters; trading is suspended — with a suspension period of no more than 2 months — where periodic reports are not disclosed on time, where financial reports are ordered to be corrected but are not, where disclosure or governance has major defects, or where non-operating fund occupation by controlling shareholders reaches 30% of audited net assets or two hundred million yuan; suspension for losing listing conditions on share capital/distribution over 20 consecutive trading days lasts no more than 1 month, with resumption upon rectification"
+    detail: "原留空记录（『个股级临时停牌见 market_structure.trading_halt_mechanism，此字段特指长期停牌』）的分工沿用：本字段聚焦第八章的制度性停复牌，盘中临时停牌仍在交易机制字段。"
+    sources:
+      - title: "《上海证券交易所股票上市规则（2026年4月修订）》全文 DOCX（第八章 停牌与复牌）"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx
+        accessed: 2026-09-05
+    quote: "8.1 上市公司发生本章规定的停牌、复牌事项，应当向本所申请对其股票及其衍生品种停牌与复牌。 ... 8.3 上市公司未在法定期限内披露年度报告或者半年度报告的 ... 股票及其衍生品种应当自相关定期报告披露期限届满后次一交易日起停牌，停牌期限不超过2个月。 ... 余额达到最近一期经审计净资产绝对值30%以上，或者金额达到2亿元以上 ... 8.7 上市公司因股本总额、股权分布发生变化导致连续20个交易日不具备上市条件的，本所将于前述交易日届满的次一交易日起对公司股票及其衍生品种实施停牌，停牌期限不超过1个月。"
+    confidence: high
 
   delisting_conditions:
     zh: "四类强制退市（交易类、财务类、规范类、重大违法类）+ 主动退市"

@@ -50,3 +50,6 @@
 - `chinatax.gov.cn`（2026-09-05 新增登记，任务四族D：税收一手来源） | 官方（国家税务总局政策法规库） | zh | curl 常规 UA 200 | 个人转让股票所得暂免征个税的一手文件
   - 财税字〔1998〕61号《关于个人转让股票所得继续暂免征收个人所得税的通知》（全文页，「从1997年1月1日起，对个人转让上市公司股票取得的所得继续暂免征收个人所得税」）: https://fgk.chinatax.gov.cn/zcfgk/c102416/c5202588/content.html（HTTP 200，36KB）
   - 国家税务总局上海市税务局热点问答（财税〔2015〕101号差别化股息红利政策的现行口径转述：超1年暂免/1个月内全额/1个月至1年减按50%/20%税率）: https://shanghai.chinatax.gov.cn/zcfw/rdwd/201512/t420630.html（HTTP 200，27KB）
+  - 2026-09-05 新增（任务四族B/C，沿用 `sse.com.cn` 既有域名条目）: 《北京证券交易所上市公司向上海证券交易所科创板转板办法（试行）》（2025-05-14 公告页，transfer_between_boards 出处）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/flap/c/c_20250514_10778852.shtml（HTTP 200）
+  - 同上: 《上海证券交易所股票发行上市审核规则（2024年4月修订）》公告页（listing_process_duration 出处：受理5个工作日/补正最长30个工作日）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/firstepisode/c/c_20250514_10778841.shtml（HTTP 200）
+  - 同上: 《上海证券交易所股票发行上市审核规则（2024年4月修订）》全文 DOCX（第十三条受理时限、第四十四条审核+注册合计不超过3个月、回复问询累计不超过3个月）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/firstepisode/c/10778841/files/327d65c5e46d4e7d926e4ecc70e4c6d9.docx（HTTP 200，.docx 注意事项同上）
