@@ -2085,7 +2085,117 @@
 
 **没定 / 留后续：** 该子棒是否为 Phase 4 启动硬前置（[ADR-066] 文末与 ROADMAP §一 #2 已挂起，本条不代拍）；全库 146 处 `medium` 零来源（转 `OPEN-QUESTIONS`）；`fx_regime` 枚举是否另立棒。
 
-**本条不动：** `data/` 与 `docs/data/`（纯方案棒，零数据改动，同 [ADR-066]）；`schema/`；`tools/`（第 12 章不变式随数据子棒**执行**时实装，与 `CLAUDE.md` §四「新引入不变式同批加校验」一致——本条只是方案）；前端；ROADMAP §一（后台任务走 `PROJECT/ROADMAP-INBOX.md`，[ADR-069]）。
+---
+
+#### 2026-09-05 补记 · 用户拍板 + 执行前实算勘误 + 逐所落地清单
+
+本补记关闭上文「不代拍」的三项，并补齐本条唯一未坐实的一块——**没有逐所落地清单**。仍为纯文档棒：`data/` / `schema/` / `tools/` 零改动，全部数字由 `tools/sync.py` 现算（非记忆），复算命令见文末。
+
+**一、三项拍板（用户 2026-09-05 现场拍板）**
+
+1. **范围 = 28**（三档全取：核心 24 + 建议 +2 + 顺带 +2）。⚠️ 构成按下文第三节重排——原「建议 +2」的两个字段在本次实算时已被后续回填填上、不再是空缺，两个名额改由 `fx_risk_note` 全扫多出的 2 处复核顶替，总量仍是 28。
+2. **走第二人独立复核**（本条原「建议自愿」，升为**执行约定**）：28 字段未过 [CLAUDE.md §四] 的 30 线，但跨 17 种货币制度、多语种一手源，全部完工后比照 [ADR-074] 做一次独立复核，不能只靠协调者自查收尾。
+3. **本子棒是 Phase 4 启动硬前置**（[ADR-066] 文末与 ROADMAP §一 #2 的挂起解除）。**另：「全库 `medium` 零 `sources`」立为独立回填棒**，不并入本子棒（ROADMAP §一 #4，`OPEN-QUESTIONS.md` 第 28 条已从「待拍板」改为「已拍板 · 独立棒」）。
+
+**二、执行前实算勘误（6 处；本条正文自 09-05 定案后，[ADR-078] 任务四轨道已推进过部分字段）**
+
+| # | 本条正文原述 | 现算实际（2026-09-05） | 对作业的影响 |
+|---|---|---|---|
+| 1 | 第 12 章分布 `low 21 / medium 44 / high 27 / 空 8` | **`low 21 / medium 47 / high 27 / 空 5`** | 合计数 100 不变；medium +3、空 −3 |
+| 2 | `fx_risk_note` = 17 `low` + **1 空（`uk-lse`）** + 2 `medium` | **17 `low` + 3 `medium`，零空缺**——`uk-lse` 已是 `medium` 且带一手源（Hansard 1979-10-23 撤销外汇管制） | 「`uk-lse` 属补填不属就地清」已不成立；该家从「补空」改为「复核升级」 |
+| 3 | 第 12 章空缺是 **8 处**（+`cn-sse.regulatory_change_risk_note` / `hk-hkex.liquidity_risk_note`） | **5 处**（`political_risk_note` 空 3 + `enforcement_note` 空 2）；该两个字段现为 `medium` + 有 `sources` | 本条 #2 的勘误已被回填推翻；原「建议 +2」失去「补空」理由 |
+| 4 | `fx_risk_note` 18 家零来源 | **16 家零来源**——17 家 `low` 里 `kr-krx`（FSC 源）与 `de-eurex`（章节 `_meta` 继承）带源 | 实质要动的家数 18 → 16 |
+| 5 | 「全库 **146 处** `medium` 零来源」（本条「没定/留后续」段） | **64 处**，100% 为 `volatility: stable`（全库 `medium` 已填共 802 处） | 本条 #6 正文的「64」正确，「没定/留后续」段的 146 系笔误；**独立棒范围按 64** |
+| 6 | 17 个候选域名（**16 家**央行/货币当局 + `imf.org`） | **18 个（17 家 + `imf.org`）**——漏了 `fr-euronext` 奥斯陆市场 NOK 对应的 **Norges Bank** | 本条 #验收自己写「跨 17 种货币制度（…含 NOK）」，17 种货币对应 17 家当局，原「16 家」少算 1 |
+
+**未变的：** 第 12 章字段级「`medium|high` 必须有 `sources`」今日违反 **2 处**，与本条 #6 一致——`fr-euronext.risks.fx_risk_note`、`de-eurex.risks.liquidity_risk_note`（后者靠 `risks._meta.sources` 继承蒙混，是全库 20 家里唯一有 `risks._meta.sources` 的一家）。新不变式落地时这两处即首批命中项，都在本子棒作业面内。
+
+**三、28 字段作业面重排（按现算，替代本条「范围三档」的构成）**
+
+| 组 | 字段 | 处数 | 动作 |
+|---|---|---|---|
+| A | `fx_risk_note` 17 家 `low` 就地清 | 17 | 删分析尾 + 摘央行一手 `quote` → `high`（拿不到央行原文、止于 AREAER 的 → `medium`） |
+| B | `fx_risk_note` 3 家 `medium` 复核 | 3 | `fr-euronext` 补字段级 `sources`（现零源，且是一所多币种需覆盖 EUR + NOK）；`uk-lse` / `za-jse` 见下方作业注意① |
+| C | `political_risk_note` 3 处空 | 3 | `cn-sse` / `hk-hkex` / `tw-twse` |
+| D | `enforcement_note` low 簇 | 3 | `cn-sse` 空 / `cn-szse` 空 / `kr-krx` `low` |
+| E | `political_risk_note` `low` 就地清 | 2 | `ch-six` / `cn-szse`（原「顺带 +2」） |
+| | **合计** | **28** | |
+
+原「建议 +2」（`cn-sse.regulatory_change_risk_note` / `hk-hkex.liquidity_risk_note`）现均为 `medium` + 有 `sources`、非空缺 → **不计入 28**，转为可选复核项（若执行中顺手可升则升，不升不阻塞验收）。
+
+**四、逐所落地清单（本条原缺的一块，执行时按此逐所闭环）**
+
+「登记」列 = 该货币当局域名是否已在 `PROJECT/SOURCES.md` + `PROJECT/sources/*.md` 登记（`validate` 校验 7 的前置）。**已登记 3 / 待登记 14 家当局 + `imf.org` = 15 个域名待登记。**
+
+| 所 | 币种 | 货币当局 | 域名 | 登记 | 候选入口（官方对本国汇率制度的定性表述） | 现状 | 预期终态 |
+|---|---|---|---|---|---|---|---|
+| `au-asx` | AUD | RBA 澳洲储备银行 | `rba.gov.au` | 待 | 货币政策 / 汇率制度说明（1983 起浮动） | low 零源 | high |
+| `br-b3` | BRL | BCB 巴西央行 | `bcb.gov.br` | 待 | 汇率制度页面（1999 起自由浮动） | low 零源 | high |
+| `ca-tsx` | CAD | BoC 加拿大央行 | `bankofcanada.ca` | 待 | 货币政策框架（浮动汇率 + 通胀目标） | low 零源 | high |
+| `ch-six` | CHF | SNB 瑞士央行 | `snb.ch` | 待 | 货币政策页面（自由浮动） | low 零源 | high |
+| `cn-sse` | CNY | SAFE 国家外汇管理局 | `safe.gov.cn` | 待 | 人民币汇率形成机制（以市场供求为基础、参考一篮子货币调节、有管理的浮动） | low 零源 | medium/high |
+| `cn-szse` | CNY | 同上（共用登记） | `safe.gov.cn` | 待 | 同上 | low 零源 | 同 `cn-sse` |
+| `de-eurex` | EUR（多币种） | ECB | `ecb.europa.eu` | 待 | 欧元区汇率政策表述 | low（源系 `_meta` 继承） | medium |
+| `de-xetra` | EUR | ECB | `ecb.europa.eu` | 待 | 同上 | low 零源 | medium |
+| `fr-euronext` | EUR + **NOK** | ECB + **Norges Bank** | `ecb.europa.eu` / `norges-bank.no` | 均待 | 欧元区 + 挪威（浮动 + 通胀目标） | medium **零源** | 补字段级源后 medium/high |
+| `hk-hkex` | HKD | HKMA 香港金管局 | `hkma.gov.hk` | 待 | **Linked Exchange Rate System** 专题（联系汇率） | low 零源 | high |
+| `in-nse` | INR | RBI 印度储备银行 | `rbi.org.in` | **已** | 汇率政策 / RBI Bulletin（有管理的浮动） | low 零源 | high |
+| `jp-jpx` | JPY | BOJ 日本银行 | `boj.or.jp` | 待 | 金融市场 / 外汇（浮动） | low 零源 | high |
+| `kr-krx` | KRW | BOK 韩国银行 | `bok.or.kr` | 待 | 货币政策 / 汇率制度（自由浮动） | low（源为 FSC，非汇率制度） | high |
+| `sa-tadawul` | SAR | SAMA 沙特央行 | `sama.gov.sa` | 待 | 货币政策 / 汇率政策（盯住美元固定平价） | low 零源 | high |
+| `sg-sgx` | SGD | MAS 新加坡金管局 | `mas.gov.sg` | **已** | 货币政策 / **S$NEER 一篮子区间** | low 零源 | high |
+| `tw-twse` | TWD | CBC 台湾央行 | `cbc.gov.tw` | 待 | 汇率政策 / 外汇管理（有管理浮动） | low 零源 | medium/high |
+| `uk-lse` | GBP | BoE 英格兰银行 | `bankofengland.co.uk` | 待 | 货币政策 / 通胀报告（自由浮动） | medium + Hansard 源 | 复核，见注意① |
+| `us-nasdaq` | USD | Fed 美联储 | `federalreserve.gov` | 待 | 货币政策报告（浮动汇率表述） | low 零源 | medium/high |
+| `us-nyse` | USD | Fed 美联储 | `federalreserve.gov` | 待 | 同上 | low 零源 | medium/high |
+| `za-jse` | ZAR | SARB 南非储备银行 | `resbank.co.za` | **已** | 货币政策 / 汇率（自由浮动） | medium + 2 源 | 复核，见注意① |
+
+**兜底（全部 20 家通用）：** IMF AREAER — `imf.org`，**待登记**；第三方（国际组织），按 `CLAUDE.md` §二 第 3 条**仅凭它封顶 `medium`**，只作兜底与交叉印证，不作主源。
+
+**五、两条作业注意**
+
+1. **现有两个「范式」其实未达标，执行时不要照抄。** 本条 #3 说 `kr-krx` / `za-jse` 可作交叉引用范式——交叉引用写法确实对，但**它们与 `uk-lse` 的 `quote` 撑的都是「资本管制 / 资本账户开放」，不是「汇率制度」**：`za-jse` 的 `quote` 摘自 Exchange Control Regulations、`kr-krx` 的源是 FSC 外资登记改革、`uk-lse` 的 `quote` 是 1979 年撤销外汇管制的 Hansard 原句。三者都落在 `regulation.capital_controls` 的地盘上，正是 #3 的边界三分要排除的东西。因此 B 组三家不是「已有源、补个汇率制度源即可」，而是**要把 `quote` 换成央行对本国汇率制度的定性原文**（HKMA "Linked Exchange Rate System" / MAS S$NEER 区间 / SAMA 盯住美元平价），原有资本管制内容按 #3 改为「见 `capital_controls`」交叉引用。
+2. **登记域名先于抓取。** 待登记的 15 个域名需在对应 `PROJECT/sources/<id>.md` 逐条追加（含抓取备注；`SOURCES.md` 「来源 URL 要精确到信息页」——**先只登记域名 + 栏目，深链以 `make fetch` 实抓到的页面为准**，不为凑数塞首页 URL）。未登记就写字段 `sources`，`validate` 校验 7 直接 fail。
+
+**六、执行顺序（沿用本条 #8 串行单所闭环，按货币当局归拢以省登记成本）**
+
+`in-nse`(RBI 已登记) → `sg-sgx`(MAS 已登记) → `za-jse`(SARB 已登记) → `hk-hkex`（HKMA，制度核最硬、可作 high 范式）→ 欧元区三家 `de-eurex`/`de-xetra`/`fr-euronext`（共用 ECB 登记，+ Norges Bank）→ 北美两家 `ca-tsx`/`us-nyse`+`us-nasdaq`（共用 Fed）→ 亚洲 `jp-jpx`/`kr-krx`/`tw-twse`/`cn-sse`+`cn-szse`（共用 SAFE）→ 其余 `au-asx`/`br-b3`/`ch-six`/`sa-tadawul`/`uk-lse`。C/D/E 三组（political 5 处 + enforcement 3 处）按所并入上述各家闭环，不单开棒。每家：登记域名 → `make fetch EX=<id>` → 读 `.cache/` → 重写 `zh`/`en`/`quote`/`sources`/`confidence` → 单文件 `validate` → 一个 commit。
+
+**复算命令（接手会话可直接核对本补记全部数字）：**
+
+```bash
+cd /Users/hrche/dev/exchange-atlas && python3 -c "
+import sys; sys.path.insert(0,'tools'); import sync
+tax,gloss,enums,raws = sync.load_all()
+# ① 第12章分布
+from collections import Counter
+d=Counter()
+for eid,raw in raws.items():
+    ex=sync.expand_exchange(tax,raw)
+    for kind,path,f in sync.walk_chapter_fields([c for c in tax['chapters'] if c['id']=='risks'][0]['fields']):
+        env=sync.get_by_path(ex['chapters']['risks'],path)
+        d[(env.get('confidence') if (env and env.get('zh')) else 'EMPTY')]+=1
+print(d)
+# ② 字段级（不继承 _meta）medium/high 零 sources
+for eid,raw in sorted(raws.items()):
+    rk=raw.get('risks') or {}
+    for kind,path,f in sync.walk_chapter_fields([c for c in tax['chapters'] if c['id']=='risks'][0]['fields']):
+        v=sync.get_by_path(rk,path)
+        if isinstance(v,dict) and v.get('zh') and v.get('confidence') in ('medium','high') and not v.get('sources'):
+            print(eid+'.risks.'+'.'.join(path), v['confidence'])
+# ③ 全库 medium 零 sources
+n=0
+for eid,raw in raws.items():
+    ex=sync.expand_exchange(tax,raw)
+    for ch in tax['chapters']:
+        if ch.get('kind')=='list': continue
+        for kind,path,f in sync.walk_chapter_fields(ch.get('fields',[])):
+            env=sync.get_by_path(ex['chapters'][ch['id']],path)
+            if env and env.get('zh') and env.get('confidence')=='medium' and not env.get('sources'): n+=1
+print('全库 medium 零 sources:',n)
+"
+
+**本条不动：** `data/` 与 `docs/data/`（纯方案棒，零数据改动，同 [ADR-066]）；`schema/`；`tools/`（第 12 章不变式随数据子棒**执行**时实装，与 `CLAUDE.md` §四「新引入不变式同批加校验」一致——本条只是方案）；前端。ROADMAP §一原按 [ADR-069] 留给后台任务走 `PROJECT/ROADMAP-INBOX.md`，**但上文补记的三项拍板系用户 2026-09-05 现场拍板、非后台自动续跑**，故由本次会话直接同步进 `ROADMAP.md` §一 #1/#2/#4，不走 INBOX。
 
 **日期：** 2026-09-05
 
