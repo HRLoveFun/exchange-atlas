@@ -27,9 +27,10 @@ from zoneinfo import ZoneInfo
 
 import yaml
 
+import data_files
+
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMA_DIR = ROOT / "schema"
-DATA_DIR = ROOT / "data" / "exchanges"
 DOCS_DATA = ROOT / "docs" / "data"
 PROJECT_DIR = ROOT / "PROJECT"
 
@@ -57,10 +58,7 @@ def load_all():
     taxonomy = load_yaml(SCHEMA_DIR / "taxonomy.yml")
     glossary = load_yaml(SCHEMA_DIR / "glossary.yml")
     enums = load_yaml(SCHEMA_DIR / "enums.yml")
-    exchanges = {}
-    for p in sorted(DATA_DIR.glob("*.yml")):
-        exchanges[p.stem] = load_yaml(p)
-    return taxonomy, glossary, enums, exchanges
+    return taxonomy, glossary, enums, data_files.load_all_exchanges()
 
 
 # ── 路径工具 ──────────────────────────────────────────────

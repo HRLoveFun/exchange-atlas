@@ -2339,3 +2339,13 @@ print('全库 medium 零 sources:',n)
 **验证：** 本条自身就是这条流水线的第一个真实用例——`DECISIONS.md` 标题写占位符 `ADR-081`，`CLAUDE.md`/`PROJECT/GIT-RUNBOOK.md` 里的交叉引用也写同一占位符；PR 开出后带 `gh pr merge --auto --squash`，`pr-build.yml` 跑绿后由 GitHub 服务端自动合并，合并进 main 后 `adr-heal.yml` 应该自动把本条占位符定号为下面这个真实编号——本条末尾若能看到具体数字而不是 `ADR-081`，说明整条流水线（CI 检查 → auto-merge → post-merge 定号）端到端跑通了。人工验证记录：`gh repo view`/`gh api` 现测 `allow_auto_merge: true`、`deleteBranchOnMerge: true`；本地 `make build` 全绿（占位符在本分支上只警告，不阻断）。
 
 **日期：** 2026-09-05
+
+### ADR-PENDING-tools-dedup — tools/ 数据加载样板去重：新增 `tools/data_files.py`
+
+**背景：** 架构腐烂审查（用户 2026-09-05 拍板的优化方案任务 B）发现 `sync.py`/`verify_quotes.py`/`fetch_sources.py`/`check_en_terms.py` 四处独立实现「glob `data/exchanges/*.yml` + `yaml.safe_load`」这段样板——是 CLAUDE.md 一节「同一件事只手写一处」DRY 铁律在代码层的违反版本。目前只是几行样板、代价不大，但每新增一个脚本都要再抄一遍，且四处实现已经出现两种枚举写法（`p.stem` vs `p.name[:-4]`，语义相同、写法不同），是典型的会随脚本数量线性累积的重复。
+
+**定了什么：** 新增 `tools/data_files.py`，提供 `exchange_paths()` / `exchange_ids()` / `load_exchange(id)` / `load_all_exchanges()` 四个函数，作为 `data/exchanges/*.yml` 遍历与加载的唯一实现；`sync.py`/`verify_quotes.py`/`fetch_sources.py`/`check_en_terms.py` 改为调用它，各自删除本地重复的 `DATA`/`DATA_DIR` 常量与 glob 循环（连带清理因此变为未使用的 `import yaml`/`from pathlib import Path`）。纯内部重构，不改变任何函数的对外行为——`sync.load_all()`、`fetch_sources.cited_urls()`、`verify_quotes.py` 的 `--ex` 枚举语义与返回值均不变。`tools/validate.py`/`tools/selfcheck.py` 已经通过调用 `sync.load_all()` 间接复用、`tools/fetch.py` 只接收显式 `--ex` 单所参数，均未发现同类重复，未改动。
+
+**验证：** `make build` 全绿；`make sync` 幂等，`git diff` 在 `docs/data/`、`PROJECT/ROADMAP.md`（生成块）等一切派生产物上零 diff，证明重构未改变任何行为；`check_en_terms.py currency` 与 `fetch_sources.cited_urls()` 单独跑通确认导入与返回值正常。改动范围仅 `tools/*.py` 五个文件（含新增的 `data_files.py`），不涉及 `data/`/`schema/`/`docs/`。
+
+**日期：** 2026-09-05
