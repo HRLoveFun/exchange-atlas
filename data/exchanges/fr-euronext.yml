@@ -957,6 +957,13 @@ market_structure:
         month/strategy are traded in accordance with the pro-rata algorithm'
       confidence: high
     order_types:
+      spec:
+        market: true
+        limit: true
+        stop: true
+        stop_limit: true
+        tif: [day, gtc, gtd, fok, ioc]
+        note: "Stop 分 Stop Limit/Stop Market 两类、不参与 Call Phase；另有 Minimum Quantity (MQ) 设计未入受控 tif 词表；逐合约适用性见 Annexe One Part II"
       zh: 限价单（Limit）、市价单（Market）、止损单（Stop，含Stop Limit/Stop Market两类，不参与Call Phase）三大类，可附加Day/Good
         Till Cancelled(GTC)/Good Till Date(GTD)/Immediate or Cancel(IOC)/Fill or Kill(FOK)/Minimum
         Quantity(MQ)六种有效期/执行方式设计；具体哪些订单功能适用于某一合约按市场/合约而异，见Annexe One逐合约对照表（Part II）
@@ -979,6 +986,7 @@ market_structure:
         (MQ)'
       confidence: high
     tick_size:
+      spec: {regime: tiered_by_price, min_tick: null, currency: EUR, note: "Optiq Tick Table 统一定义（按价格区间分档 + Front Month 收窄比例），逐合约分配、每日参考数据文件下发；样本：固定收益迷你期货 COB 0.01%（€2.5，BTP 30 年期 0.02%/€5）、LiS 0.001%（€0.25）"}
       zh: 由Optiq的『Tick Table（跳动点表）』机制统一定义：每张Tick Table含一组按价格区间分档的跳动点位，并为Front Month（最活跃到期月）及到期日更近的合约（日度/周度）另设一个跳动点位收窄比例；Tick
         Table按合约（Contract）分配，每日通过统一的参考数据文件下发，同一Tick Table可被多个合约及多种交易机制（COB/Wholesale/RFC）共用；不同产品线（股指期货期权/固定收益迷你期货/商品期货）跳动点位差异很大，例如固定收益迷你期货（BTP/OAT/Bund/BONO）中央订单簿跳动点位为票面值0.01%（对应€2.5/张，其中BTP
         30年期为0.02%/€5），大宗交易设施（LiS）跳动点位更细至0.001%（€0.25/张）
@@ -1102,6 +1110,7 @@ market_structure:
           the instrument on which the boundaries were breached.
         confidence: high
       main_board:
+        spec: {type: dynamic, band_pct: null, note: "主力合约（Blue Month）以未来市场价格法确定动态参考价 DCRP，其余到期月由与 Blue Month 的价差关系推导；区间幅度（Reference Spread）逐合约经标准数据文件分发，本次未获取实际数值（medium）"}
         zh: 主力合约（『Blue Month』，即成交量/持仓量最活跃的到期月，由交易所认定）：以『未来市场价格法』（future market price）确定动态参考价DCRP时，直接由该合约的中央订单簿行情算出；具体区间幅度（价差值）未见以百分比等明文形式列示于规则正文，而是逐合约通过标准数据文件（Reference
           Spread参考表）分发，本次未获取到该数据文件的实际数值
         en: 'The Main Contract (the "Blue Month" — the most actively traded expiry
@@ -1152,6 +1161,7 @@ market_structure:
           Procedure 2.1.3.
         confidence: high
     circuit_breaker:
+      spec: {type: none, note: "无独立全市场/指数级熔断；逐合约动态/静态区间与 Future Spike/Limit Interruption Protection 为主要保护，触发转预约（reservation）而非直接停牌，见 volatility_interruption"}
       zh: 未见独立于价格区间机制之外的全市场/指数级熔断；个股级（此处即『逐合约级』）的动态/静态区间（见price_limits）与Future Spike/Limit
         Interruption Protection已构成主要保护手段，触发后进入预约（reservation）而非直接停牌，与本所现货市场（同样未发现独立的全市场级熔断）情况一致。受控词表
         circuit_breaker_type 的既有选项（none/index_level/stock_level/both）均以『股票』为设计语境，与衍生品『逐合约』颗粒度不完全对应，本字段因此不代入
@@ -1176,6 +1186,7 @@ market_structure:
         outside prevailing dynamic or static, where appropriate, collars
       confidence: medium
     volatility_interruption:
+      spec: {auction_minutes: null, note: "预约（Reservation）机制：潜在撮合触及动态/静态区间边界即触发，标的转入程序化 Call Phase（时长未定，故 null）；动态区间触发走自动重开（达最大尝试次数可撤销引发订单）、静态区间触发走 Market Services 人工评估"}
       zh: 预约（Reservation）机制：连续交易阶段若潜在撮合价触及动态或静态区间边界即触发预约，标的合约转入一段程序化的Call Phase重新集合竞价；因动态区间触发的首次预约，恢复方式分两种——自动方式（系统按更新后的动态区间尝试重新揭示，对特定合约类别在达到最大尝试次数后可撤销引发预约的订单）或人工方式（针对静态区间触发的预约，由Market
         Services评估市场情况后决定是否恢复）；若自动方式重新揭示后同方向再次触发预约，是否进一步调整区间/参考价同样须转交人工评估
       en: 'Reservation mechanism: during continuous trading, if the theoretical matching
@@ -1271,6 +1282,7 @@ market_structure:
         08:00 - 22:00 08:00 - 16:00 07:30 – 22:00 07:30 – 16:00
       confidence: high
     market_maker_scheme:
+      spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "三类角色 MMA/MMS/MME（MME 仅部分股指期货晚间时段）；同合约同场次只能 MMA 或 MMS 择一；逐场次 Optiq 签到；须维持双边报价，可配置 MMP 扫单保护"}
       zh: 做市商角色分三类：MMA（Market Maker Agreement，标准做市协议）、MMS（Market Maker Scheme，做市商计划）、MME（Market
         Maker for Extended Hours，仅适用于部分股指期货的晚间交易时段）；同一会员（按Firm ID）在同一合约同一（日间）场次只能担任MMA或MMS其中之一，但可在不同合约分别担任不同角色；做市商须在每个交易场次开始前于Optiq逐合约『签到』（MM
         Sign-In），未获授权的合约签到会被单独拒绝；做市商在其报价的各合约订单簿中须维持买卖双边报价以满足流动性提供义务，并可配置做市商保护（Market
