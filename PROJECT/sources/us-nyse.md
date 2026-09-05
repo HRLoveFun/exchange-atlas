@@ -79,3 +79,4 @@
 - `sec.gov`（沿用既有域名条目，Fair Access UA）2026-09-05 新增 URL：
   - Brokerage Commissions and Research After May Day（SEC 委员 Loomis 演讲 PDF，1975-06-03，May Day 竞争性佣金费率的一手官方叙述；OCR 全大写、标点为 `~`，摘引时照抄）: https://www.sec.gov/news/speech/1975/060375loomis.pdf（HTTP 200，PDF）
   - 2026-09-05 新增（任务四族C，沿用 `sec.gov` 既有域名条目）: Why would the SEC suspend trading in a stock?（投资者警示 PDF，退市/停牌后股份转 OTC 交易需符合 Rule 15c2-11 与 Form 211 的官方表述——post_delisting_venue 出处）: https://www.sec.gov/investor/alerts/tradingsuspensions.pdf（直连 403，经 wayback 回退抓取）
+- `investor.gov`（2026-09-05 补充登记，任务四族C） | 官方（SEC 投资者教育与倡导办公室） | en | curl 常规浏览器 UA 200（⚠️ 术语表正文为客户端 JS 渲染，curl 拿到的是导航壳——本条 URL 登记保留但 quote 反查不可用，慎用） | OTC 术语定义页（post_delisting_venue 的 OTC 定性辅证）: https://www.investor.gov/introduction-investing/investing-basics/glossary/over-the-counter-otc

@@ -92,3 +92,4 @@
   - 2026-09-05 新增（任务四族D：经纪佣金市场化沿革）: 撤销最低经纪佣金实施时间表修订（HKEX 新闻稿，2002-02-20，董事会决定推迟一年至 2003-04-01 撤销最低经纪佣金、「making brokerage freely negotiable is the best way forward」）: https://www.hkex.com.hk/News/News-Release/2002/020220news（HTTP 200，360KB）
   - 2026-09-05 新增（任务四族B/C，沿用 `hkex.com.hk` 既有域名条目）: 主板《上市规则》综合 PDF（consol_mb，第6章停牌/除牌条文 6.01/6.01A/6.12 出处）: https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Rules-and-Guidance/Listing-Rules/Consolidated-PDFs/Main-Board-Listing-Rules/consol_mb.pdf（HTTP 200，3MB）
   - 同上: 第9A章《由GEM转往主板上市》单章 PDF（transfer_between_boards 出处）: https://www.hkex.com.hk/-/media/hkex-market/listing/rules-and-guidance/listing-rules-contingency/main-board-listing-rules/equity-securities/chapter_9a（HTTP 200，PDF）
+  - 2026-09-05 新增（任务四族G，沿用 `hkex.com.hk` 既有域名条目）: Infrastructure Overview（证券交易基建总览，OTP-C/AMS-3 沿革与 OCG-C——trading_system_name 出处）: https://www.hkex.com.hk/Services/Trading/Securities/Infrastructure/Overview?sc_lang=en（HTTP 200，1.2MB）

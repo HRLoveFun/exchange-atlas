@@ -53,3 +53,6 @@
   - 2026-09-05 新增（任务四族B/C，沿用 `sse.com.cn` 既有域名条目）: 《北京证券交易所上市公司向上海证券交易所科创板转板办法（试行）》（2025-05-14 公告页，transfer_between_boards 出处）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/flap/c/c_20250514_10778852.shtml（HTTP 200）
   - 同上: 《上海证券交易所股票发行上市审核规则（2024年4月修订）》公告页（listing_process_duration 出处：受理5个工作日/补正最长30个工作日）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/firstepisode/c/c_20250514_10778841.shtml（HTTP 200）
   - 同上: 《上海证券交易所股票发行上市审核规则（2024年4月修订）》全文 DOCX（第十三条受理时限、第四十四条审核+注册合计不超过3个月、回复问询累计不超过3个月）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/firstepisode/c/10778841/files/327d65c5e46d4e7d926e4ecc70e4c6d9.docx（HTTP 200，.docx 注意事项同上）
+  - 2026-09-05 新增（任务四族E/F/H，沿用 `sse.com.cn` 既有域名条目）: 本所简介（官方表述：1990-11-26 成立/12-19 开业、受证监会监督管理、组织监督证券交易并对会员进行监管——self_regulatory_org 与 overview.history 出处）: https://www.sse.com.cn/aboutus/overview/（HTTP 200，38KB）
+  - 同上: 证监会依法批准暂停转融券业务 进一步强化融券逆周期调节（要闻，2024-07-10——short_selling 与 regulatory_change_risk_note 出处）: https://www.sse.com.cn/home/component/news/c/c_20240710_10759727.shtml（HTTP 200）
+- `csrc.gov.cn`（2026-09-05 补充登记，任务四族F） | 官方（证监会） | zh | curl 常规 UA 200 | 证券期货投资者适当性管理办法全文（令第130号公布、2020年修订，suitability_management 出处）: https://www.csrc.gov.cn/csrc/c106256/c1653849/content.shtml（HTTP 200）

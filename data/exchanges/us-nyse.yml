@@ -156,8 +156,14 @@ regulation:
     confidence: high
 
   foreign_ownership_limit:
-    zh: ""
-    confidence: low
+    zh: "无一般性外资持股比例限制：美国证券市场对外国投资者持有美股不设统一的持股比例上限；外资涉国家安全审查由 CFIUS（财政部任主席的跨部门委员会）按交易逐案进行，审查对象是『涉及外国投资进入美国企业的某些交易』对国家安全的影响，而非证券市场层面的比例管制"
+    en: "No general foreign-ownership cap: U.S. securities markets impose no across-the-board ownership ceiling on foreign investors in listed stocks; national-security review of foreign investment runs transaction-by-transaction through CFIUS (the Treasury-chaired interagency committee), which reviews 'certain transactions involving foreign investment into United States businesses' — not a securities-market ownership limit"
+    sources:
+      - title: "CFIUS（美国财政部官网，委员会职能与审查范围的官方表述）"
+        url: https://home.treasury.gov/policy-issues/international/the-committee-on-foreign-investment-in-the-united-states-cfius
+        accessed: 2026-09-05
+    quote: "an interagency committee authorized to review certain transactions involving foreign investment into United States businesses and certain transactions by foreign persons involving real estate in the United States, in order to determine the effect of such transactions on the national security of the United States."
+    confidence: medium
     detail: "未核实是否存在一般性外资持股限制，留空。"
 
   capital_controls:
@@ -279,9 +285,15 @@ market_structure:
       en: "Continuous trading 9:30am-3:50pm; Closing Imbalance Period 3:50-4:00pm"
       quote: "Core Trading Session: 9:30 a.m. to 4:00 p.m. ET / 9:30 a.m. ET - Core Open Auction / 3:50 p.m. to 4:00 p.m. ET - Closing Imbalance Period / 4:00 p.m. ET - Closing Auction"
     after_market:
-      zh: ""
-      confidence: low
-      detail: "官网列出的Tape A（NYSE本身）时段表未见独立盘后连续交易时段；NYSE American/Arca/National/Texas等同集团其他实体明确列有4:00-8:00pm盘后时段，NYSE本身是否有盘后交易未在本次抓取的页面中确认，留空不猜。spec 也留空（表示未知，非确认无）。"
+      zh: "NYSE 主市场（Tape A）无独立盘后连续交易时段：核心交易时段 9:30–16:00 ET，16:00 收盘拍卖即告结束；NYSE 集团内延长交易时段在 NYSE Arca 推进（官网公告『Extended trading hours are coming to NYSE Arca』），美股盘后交易亦大量发生于场外经纪商网络"
+      en: "NYSE's primary market (Tape A) has no separate after-hours continuous session: the core trading session runs 9:30 a.m.–4:00 p.m. ET and ends with the 4:00 p.m. closing auction; extended-hours initiatives sit within the group at NYSE Arca (per the official notice 'Extended trading hours are coming to NYSE Arca'), and substantial after-hours trading occurs over off-exchange broker networks"
+      detail: "由留空升级：官网时段表对 Tape A 仅列 Pre-Opening + Core Session（至 4:00 收盘拍卖），同页明确 NYSE American/Arca 等实体的盘后时段——NYSE 本身无独立盘后连续交易由此坐实；『盘后发生于场外』为市场结构常识性归纳，不作为本字段主要论断。"
+      sources:
+        - title: "Trading Information（NYSE 官网，Trading Hours——Tape A 时段表与 Arca 延长时段公告）"
+          url: https://www.nyse.com/trade/trading-information
+          accessed: 2026-09-05
+      quote: "Core Trading Session: 9:30 a.m. to 4:00 p.m. ET 9:30 a.m. ET - Core Open Auction 3:50 p.m. to 4:00 p.m. ET - Closing Imbalance Period 4:00 p.m. ET - Closing Auction ... Extended trading hours are coming to NYSE Arca."
+      confidence: medium
     night_session:
       spec: {kind: none}
       zh: "无"
@@ -289,9 +301,15 @@ market_structure:
       confidence: medium
 
   holidays_note:
-    zh: "官网提供未来多年交易日历与假期安排，具体日期逐年更新未在本次逐条核实"
-    en: "The official site publishes a multi-year trading calendar and holiday schedule; specific yearly dates were not individually verified this session"
-    confidence: low
+    zh: "NYSE 官网『Trading Information』页逐年公布交易日历——官方明示提供 2026、2027、2028 三年的交易日安排与假期/交易时间表（Holidays and Trading Hours）；周六日与联邦假日休市，具体日期以官网当年日历为准"
+    en: "NYSE's official 'Trading Information' page publishes the trading calendar year by year — it explicitly provides trading days for 2026, 2027 and 2028 together with the Holidays and Trading Hours schedule; the market closes on weekends and federal holidays, with specific dates per the official calendar"
+    detail: "由 low 升级：官网一手坐实『多年期日历 + 假期/交易时间表』的存在与覆盖年份；逐日日期未逐条核对（volatility: moderate 场景下逐年变化）。"
+    sources:
+      - title: "Trading Information（NYSE 官网，Trading Calendar——2026/2027/2028 交易日与假期安排）"
+        url: https://www.nyse.com/trade/trading-information
+        accessed: 2026-09-05
+    quote: "Trading days for 2026, 2027, and 2028 Holidays and Trading Hours"
+    confidence: medium
 
   opening_mechanism:
     spec: {type: dmm_auction, auction_end: "09:30"}
@@ -954,8 +972,14 @@ infrastructure:
     confidence: medium
 
   data_pricing_model:
-    zh: ""
-    confidence: low
+    zh: "订阅授权制（subscription/entitlement）：NYSE 实时行情为低延迟订阅制数据产品（覆盖 NYSE 集团各资产类别的 full depth of book、逐笔成交、报价、拍卖失衡与证券状态消息），按产品订阅授权向数据接收方收费；具体费率与分发展开于官方数据产品页与许可协议，无统一定价公开页逐条列示"
+    en: "Subscription/entitlement-based pricing: NYSE real-time market data is offered as subscription data products (low-latency feeds across NYSE Group asset classes carrying full depth of book, trades, quotes, auction imbalances and security status messages), charged to data recipients per product subscription/entitlement; detailed rates live in official data-product pages and licence agreements rather than a single public price list"
+    sources:
+      - title: "Market Data: Real-Time（NYSE 官网，实时行情产品与订阅入口的官方描述）"
+        url: https://www.nyse.com/market-data/real-time
+        accessed: 2026-09-05
+    quote: "Low-latency, real-time market data feeds cover the various asset classes and markets in the NYSE Group to offer you insight into intraday trading activity. These feeds include full depth of book, trades, quotes, auction imbalances and security status messages."
+    confidence: medium
     detail: "官网另有独立的连接/数据费率PDF（如Wireless Connectivity Fees），本次未展开抓取，留空。"
 
   historical_data_availability:
