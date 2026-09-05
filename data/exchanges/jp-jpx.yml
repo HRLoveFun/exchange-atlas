@@ -657,6 +657,354 @@ market_structure:
     detail: "「无跨境互联互通」为消极认定（未见 JPX / TSE 关于此类机制的官方原文）。"
     confidence: medium
 
+  # ── 衍生品市场机制（大阪取引所 OSE——JPX 集团全资子公司，单记录覆盖集团，见 products 章注）──
+  # 衍生品端主体为 OSE 挂牌的利率/股指/商品衍生品；本子块以旗舰产品线（日经225/TOPIX/国债期货与期权）
+  # 为主描述对象，逐产品差异写进各字段 detail。清算端（保证金方法论/盯市/交割）见 clearing.derivatives。
+  derivatives:
+    trading_sessions:
+      pre_market:
+        spec: {start: "08:00", end: "08:45", kind: pre_open_queue, note: "8:44-8:45 为 Non-Cancel Period（可下新单、不可改单/撤单）；8:45 开盘 Itayose"}
+        zh: "盘前接单期（Pre-Open）8:00-8:44 只接受申报不撮合，8:44-8:45 为不可撤单期（Non-Cancel Period，可下新单、不可改撤），8:45 以 Itayose 开盘"
+        en: "Pre-open order acceptance 8:00-8:44 (orders accepted but not matched), followed by the Non-Cancel Period 8:44-8:45 (new orders accepted, no changes or cancellations), with the opening Itayose auction at 8:45"
+        sources:
+          - title: Trading Hours（JPX官网英文版，OSE衍生品时段总览与时点表）
+            url: https://www.jpx.co.jp/english/derivatives/rules/trading-hours/
+            accessed: 2026-09-05
+        quote: "Nikkei 225 Futures Nikkei 225 mini Nikkei 225 micro Futures TOPIX Futures (Large) Commodity Futures (excluding Rubber and Electricity) Options on Commodity Futures Day Session 8:00-8:44 8:44-8:45 8:45 8:45-15:40 15:40-15:45 - 15:45 Night Session 16:45-16:59 16:59-17:00 17:00 17:00-5:55 5:55-5:59 5:59-6:00 6:00"
+        confidence: high
+        verified: 2026-09-05
+      continuous_am:
+        spec: {start: "08:45", end: "15:40", kind: continuous, note: "指数期货/期权主线；JGB 与利率期货为 8:45-11:02 / 12:30-15:02 两段（见 continuous_pm）"}
+        zh: "日盘连续竞价（Regular Session，Zaraba 方式）8:45-15:40，中途无午间休市，一段贯通（与东证现货市场设午休不同）"
+        en: "Day-session continuous trading (Regular Session, Zaraba method) runs 8:45-15:40 straight through with no lunch break (unlike the TSE cash equity market, which has a midday recess)"
+        sources:
+          - title: Trading Hours（JPX官网英文版，OSE衍生品时段总览与时点表）
+            url: https://www.jpx.co.jp/english/derivatives/rules/trading-hours/
+            accessed: 2026-09-05
+        quote: "Day Session Opening Auction 8:45 Regular Session（Zaraba） 8:45-15:40 Closing Auction 15:45"
+        confidence: high
+        verified: 2026-09-05
+      lunch_break:
+        spec: {kind: none, note: "指数期货/期权日盘 8:45-15:40 一段贯通"}
+        zh: "无午间休市——官方时段表显示指数期货/期权日盘为 8:45-15:40 连续一段（结构性推断：时段表未列任何午间中断；东证现货市场另有 11:30-12:30 午休，见顶层 lunch_break）"
+        en: "No lunch break — the official schedule shows index futures/options trading 8:45-15:40 in one continuous stretch (structural inference from the exhaustive session table; the TSE cash market has a 11:30-12:30 midday recess, see the top-level lunch_break)"
+        sources:
+          - title: Trading Hours（JPX官网英文版）
+            url: https://www.jpx.co.jp/english/derivatives/rules/trading-hours/
+            accessed: 2026-09-05
+        quote: "Day Session Opening Auction 8:45 Regular Session（Zaraba） 8:45-15:40 Closing Auction 15:45"
+        confidence: medium
+        detail: "「无午休」基于官方时段表的穷举式表述作反向推断（该表未列午间中断段），未见另有条文明确说明，故 medium。"
+        verified: 2026-09-05
+      continuous_pm:
+        spec: {kind: none, note: "指数期货/期权日盘 8:45-15:40 一段贯通、无下午拆分；JGB/利率期货与证券期权为上下午两段式"}
+        zh: "无独立下午连续时段——指数期货/期权日盘 8:45-15:40 一段贯通（见 continuous_am）；JGB 与利率期货为上下午两段（8:45-11:02、12:30-15:02），夜盘 15:30 另启"
+        en: "No separate afternoon continuous session — index futures/options trade 8:45-15:40 in one stretch (see continuous_am); JGB and interest rate futures trade in morning/afternoon sessions (8:45-11:02 and 12:30-15:02) with a night session starting 15:30"
+        sources:
+          - title: Trading Hours（JPX官网英文版）
+            url: https://www.jpx.co.jp/english/derivatives/rules/trading-hours/
+            accessed: 2026-09-05
+          - title: JGB Futures Contract Specifications（JPX官网英文版）
+            url: https://www.jpx.co.jp/english/derivatives/products/jgb/jgb-futures/01.html
+            accessed: 2026-09-05
+        quote: "Trading Hours 8:45-11:02, 12:30-15:02, 15:30-6:00"
+        confidence: medium
+        detail: "「指数线无下午拆分」为对时点表的反向推断（medium）；JGB 上下午钟点为 JGB 规格页明文。"
+        verified: 2026-09-05
+      after_market:
+        spec: {kind: none, note: "收盘机制见 closing_mechanism；夜盘见 night_session；场外平台时段见 block_trade"}
+        zh: "无独立盘后时段——15:40-15:45 为 pre-closing 接单期、15:45 为收盘 Itayose，属日盘收盘机制而非盘后交易（见 closing_mechanism）；其后 17:00 进入夜盘（见 night_session），J-NET 场外平台另有自身时段（见 block_trade）"
+        en: "No standalone after-hours session — 15:40-15:45 is the pre-closing order-acceptance window and 15:45 the closing Itayose auction, part of the day-session closing mechanism rather than after-hours trading (see closing_mechanism); the night session then opens at 17:00 (see night_session), and the J-NET off-auction platform has its own hours (see block_trade)"
+        sources:
+          - title: Trading Hours（JPX官网英文版）
+            url: https://www.jpx.co.jp/english/derivatives/rules/trading-hours/
+            accessed: 2026-09-05
+        quote: "Day Session 8:00-8:44 8:44-8:45 8:45 8:45-15:40 15:40-15:45 - 15:45 Night Session 16:45-16:59 16:59-17:00 17:00 17:00-5:55 5:55-5:59 5:59-6:00 6:00"
+        confidence: medium
+        detail: "「无盘后交易」为对时段表与栏目清单的反向推断（OSE 衍生品无现货侧 ToSTNeT 类盘后平台；J-NET 为场外大宗平台、记入 block_trade）。"
+        verified: 2026-09-05
+      night_session:
+        spec: {start: "17:00", end: "06:00", kind: night, note: "跨零点至次日 6:00；JGB/利率期货夜盘 15:30 开始（15:25-15:30 接单）"}
+        zh: "夜盘 17:00 起连续竞价至次日 5:55，5:55-5:59 为 pre-closing、5:59-6:00 为不可撤单段、6:00 收盘 Itayose——跨零点交易；盘前接单 16:45-16:59。「交易日」口径为自夜盘开始至次一营业日日间交易（日盘与 J-NET）结束，结算与保证金缴存按该交易日口径处理；JGB/利率期货夜盘更早开始（15:25-15:30 接单、15:30 开盘）"
+        en: "Night session runs 17:00 to 5:55 the following morning on continuous trading, with pre-closing 5:55-5:59, a non-cancel window 5:59-6:00, and the closing Itayose auction at 6:00 — trading crosses midnight; pre-open acceptance 16:45-16:59. A 'trading day' runs from the start of a night session to the end of intraday trading (day session and J-NET) on the following business day, with settlement and margin deposit made on that basis; JGB/interest rate futures start earlier (acceptance 15:25-15:30, open at 15:30)"
+        sources:
+          - title: Trading Hours（JPX官网英文版）
+            url: https://www.jpx.co.jp/english/derivatives/rules/trading-hours/
+            accessed: 2026-09-05
+          - title: Night Session（JPX官网英文版，夜盘制度与交易日口径）
+            url: https://www.jpx.co.jp/english/derivatives/rules/trading-hours/01.html
+            accessed: 2026-09-05
+        quote: "Night Session 16:45-16:59 16:59-17:00 17:00 17:00-5:55 5:55-5:59 5:59-6:00 6:00 ／ Night Session 15:25-15:30 - 15:30 15:30-5:55 5:55-6:00 - 6:00"
+        confidence: high
+        detail: "交易日口径与夜盘结算处理引自 Night Session 页：『A trading day is a period from the beginning of a night session to the end of intra-day trading (day session and J-NET Trading) on the following business day. The settlement and margin deposit, etc. are made on a trading-day basis.』（原文 Trading day 带双引号，此处为过 YAML 双引号冲突改写引号样式，措辞未动）"
+        verified: 2026-09-05
+
+    holidays_note:
+      zh: "2022年9月23日（秋分日）起开办衍生品假日交易（Holiday Trading）——日经225期货、中东迪拜原油期货等衍生品可在多数国定假日交易，逐假日的开市/不开市安排由官方按年度公布（不开市的典型如年末年初与部分替代休假日）"
+      en: "Holiday trading launched on September 23, 2022 (Autumnal Equinox Day) — derivatives such as Nikkei 225 Futures and Platts Dubai crude oil Futures can be traded on most national holidays, with per-holiday open/closed arrangements published annually (typically closed on New Year's Eve and a few substitute holidays)"
+      sources:
+        - title: Holiday Trading（JPX官网英文版，OSE/TOCOM衍生品假日交易制度与年度日历）
+          url: https://www.jpx.co.jp/english/derivatives/rules/holidaytrading/index.html
+          accessed: 2026-09-05
+      quote: "Osaka Exchange, Inc. (OSE) and Tokyo Commodity Exchange, Inc. (TOCOM) launched holiday trading in our derivatives market on September 23, 2022 (Autumnal Equinox Day), from the perspective of further convenience for investors through provision of hedging opportunities during national holidays. Derivatives products such as Nikkei 225 Futures and Platts Dubai crude oil Futures can be traded on holidays."
+      confidence: high
+      detail: "2026 年日历中 1 月 2 日、11 月 23 日、12 月 31 日标为 Not Open，其余国定假日多数 Open（逐日表见来源页）。另据 Last Trading Day 页：假日交易日不作任何产品的最后交易日（Holiday trading date will not be the Last Trading Day for any product.）。"
+      verified: 2026-09-05
+
+    opening_mechanism:
+      spec: {type: call_auction, auction_start: "08:45", note: "夜盘开盘 Itayose 17:00；JGB/利率期货夜盘开盘 Itayose 15:30"}
+      zh: "开盘集合竞价（Itayose）：8:45 开盘拍卖——盘前接单期汇集的申报以 Itayose 方式（使成交量最大、未成交量最小的价格）产生开盘价，无成交则直接转入 Zaraba 连续竞价；夜盘 17:00 同样以开盘 Itayose 开始"
+      en: "Opening call auction (Itayose): the 8:45 opening auction matches pre-open accumulated orders by the Itayose method (the price maximizing traded volume and minimizing untraded volume); if no trade results, the session moves directly to Zaraba continuous trading; the night session likewise opens with an Itayose auction at 17:00"
+      sources:
+        - title: Trading Hours（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/rules/trading-hours/
+          accessed: 2026-09-05
+      quote: "Index futures (excluding TAIEX Futures and Nikkei 225 VI Futures) / Index Options Day Session Opening Auction 8:45 Regular Session（Zaraba） 8:45-15:40 Closing Auction 15:45 ／ Orders are matched by the Itayose method (If no trade is made, trading session moves to Zaraba.)"
+      confidence: high
+      verified: 2026-09-05
+
+    closing_mechanism:
+      spec: {type: call_auction, auction_end: "15:45", note: "夜盘收盘 Itayose 6:00；JGB/利率期货上下午段收盘 Itayose 分别为 11:02 与 15:02"}
+      zh: "收盘集合竞价（Itayose on close）：日盘 15:40-15:45 为 pre-closing 接单期（内含不可撤单段），15:45 以 Itayose 产生收盘价；夜盘 5:55-6:00 为 pre-closing、6:00 收盘 Itayose；JGB/利率期货上下午段的收盘 Itayose 分别为 11:02 与 15:02。收盘拍卖价若超出以最新价为基准的立即执行价格区间，则不产生成交（见 volatility_interruption）"
+      en: "Closing call auction (Itayose on close): 15:40-15:45 is the pre-closing order-acceptance window (with a non-cancel segment) and the closing price is set by Itayose at 15:45; the night session has pre-closing 5:55-6:00 with the closing Itayose at 6:00; JGB/interest rate futures close their morning and afternoon sessions by Itayose at 11:02 and 15:02 respectively. If the closing auction price falls outside the Immediately Executable Price Range based on the last contract price, no trade is made (see volatility_interruption)"
+      sources:
+        - title: Trading Hours（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/rules/trading-hours/
+          accessed: 2026-09-05
+      quote: "Day Session Opening Auction 8:45 Regular Session（Zaraba） 8:45-15:40 Closing Auction 15:45 ／ Morning Session 8:00-8:45 - 8:45 8:45-11:00 11:00-11:02 - 11:02 Afternoon Session 12:05-12:30 - 12:30 12:30-15:00 15:00-15:02 - 15:02 ／ Night Session 16:45-16:59 16:59-17:00 17:00 17:00-5:55 5:55-5:59 5:59-6:00 6:00"
+      confidence: high
+      detail: |
+        pre-closing 为收盘 Itayose 前 5 分钟的接单期（各规格页注明 An order acceptance period ("pre-closing") is established for 5 minutes before the Itayose on close；
+        JGB/利率期货为 2 分钟、夜盘 5 分钟——见 JGB 规格页 note）。收盘拍卖价出界不成交引自 Trading Methods 页：
+        In cases where the price determined by closing auction exceeds the defined price range (Executable Price Range in Closing Auction) from the last contract price, a transaction is not made.
+      verified: 2026-09-05
+
+    matching_principle:
+      enum: price_time
+      zh: "价格优先、时间优先：期货与期权按 individual auction（个别竞价）进行——常规时段（Zaraba）内在最低卖价与最高买价相等的价位、按价格与时间优先原则于撮合申报间成交；Itayose 集合竞价同样按价格/时间优先规则确定使成交量最大的价格，市价单另按接单时间优先参与"
+      en: "Price-time priority: futures and options trade by individual auction — in the regular session (Zaraba), transactions execute among matching orders according to the price and time priority rule at a price where the lowest offer and the highest bid are matched; the Itayose call auction also determines the volume-maximizing price under the price and time priority rule, with market orders prioritized by acceptance time"
+      sources:
+        - title: Trading Methods（JPX官网英文版，撮合方式总览）
+          url: https://www.jpx.co.jp/english/derivatives/rules/trading-methods/index.html
+          accessed: 2026-09-05
+      quote: "Futures and options trading is conducted on an individual auction basis according to the price and time priority rule. ／ Transactions by the Zaraba method are executed among the matching orders according to the price and time priority rule at a price where the lowest offer and the highest bid are matched."
+      confidence: high
+      verified: 2026-09-05
+
+    order_types:
+      spec:
+        market: true
+        limit: true
+        tif: [day, gtc, gtd, fok, ioc]
+        note: "另有带平仓条件订单（须指定 pre-closing 段）与策略交易；市价单在部分品种（如日经225分红点指数期货）不可用"
+      zh: "限价单与市价单两类；市价单未成交部分不得留存于订单簿（强制撤销），故不保证全部成交。下单须择一指定有效期/数量条件：GFD（当日有效）、GTD/GTC（指定日前/撤销前有效）、FAK（部分成交后撤销未成部分）、FOK（未即时全部成交即全撤）；另有跨期价差与跨商品价差策略交易（收盘集合竞价期间不可用）与带平仓条件订单（须指定 pre-closing 段）"
+      en: "Limit orders and market orders; the unfilled part of a market order cannot be stored on the order book (forced cancellation), so market orders are not guaranteed to fill. One validity/volume condition must be specified: GFD, GTD/GTC, FAK (cancel unfilled volume after partial execution) or FOK (cancel all unless executed immediately in full); calendar spread and inter-commodity spread strategy trading is available (not during the closing auction), alongside orders with closing conditions (which must specify a pre-closing session)"
+      sources:
+        - title: Order Types, etc.（JPX官网英文版，OSE衍生品订单类型总览）
+          url: https://www.jpx.co.jp/english/derivatives/rules/order-types/index.html
+          accessed: 2026-09-05
+      quote: "Limit Order An order submitted with a specified limit price and to be executed at the specified price or better price. Market Order An order submitted without the specified limit price and to be executed against the best bid or the best offer in order.* The unfilled part of a market order cannot be stored on the order book (the unfilled part is forced to be cancelled). ／ Good for Day (GFD) Valid until the end of the Day Session of the day (or, until the end of the Night Session if the order is submitted at the Night Session.). ／ Fill and Kill (FAK) In the case where there is unfilled volume after the order is partially executed, cancel the unfilled volume. Fill or Kill (FOK) In the case where all the volume is not executed immediately, cancel all the volume. ／ Calendar Spreads and Inter-Commodity Spreads are available."
+      confidence: high
+      verified: 2026-09-05
+
+    tick_size:
+      spec: {regime: per_instrument, note: "最小报价单位逐产品设定，旗舰档位见 zh/detail；完整档位表见各产品 Contract Specifications 页"}
+      zh: "逐合约设定：旗舰的日经225期货最小报价单位为 10 日元（每跳价值 10,000 日元/手）；其余产品线各有档位，见 detail"
+      en: "Set per contract: the flagship Nikkei 225 Futures quotes in JPY 10 increments (JPY 10,000 value per tick per contract); other product lines have their own tick schedules — see detail"
+      sources:
+        - title: Nikkei 225 Futures Contract Specifications（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/products/domestic/225futures/01.html
+          accessed: 2026-09-05
+      quote: "Contract Unit Nikkei 225 × JPY 1,000 Tick Size JPY 10 (Value per tick: JPY 10,000 per contract)"
+      confidence: high
+      detail: |
+        其余主力产品线 tick 摘自各自规格页原文：TOPIX 期货 0.5 points；日经225期权 JPY 300 or less: JPY 1 / Over JPY 300: JPY 5；
+        JGB 期货 JPY 0.01 per JPY 100 face value；J-NET 场外平台内另设 0.0001 报价单位（见 block_trade）。
+      verified: 2026-09-05
+
+    contract_specs_note:
+      zh: "以日经225期货为代表：合约乘数为日经225指数×1,000日元；挂牌季度合约（三月/六月/九月/十二月循环，跨度最长8年）——六月与十二月合约最近16个、三月与九月合约最近3个；TOPIX 期货合约乘数为 TOPIX×一万日元（六月/十二月最近十个、三月/九月最近三个）；国债期货以标准化名义债券为标的（名义票息与期限由交易所标准化）；日经225期权合约单位为期权价格×1,000日元、季度与月度合约并行挂牌"
+      en: "Using Nikkei 225 Futures as the flagship example: contract unit is Nikkei 225 × JPY 1,000; quarterly contract months (March/June/September/December cycle, available for a period up to 8 years) — June and December: Nearest 16 contract months, March and September: Nearest 3 contract months; TOPIX Futures multiply the index by ten thousand yen (nearest ten June/December and nearest three March/September months); JGB Futures are written on standardized notional bonds (standardized coupon and maturity set by the exchange); Nikkei 225 Options are Option Price × JPY 1,000 with monthly contract months alongside quarterly"
+      sources:
+        - title: Nikkei 225 Futures Contract Specifications（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/products/domestic/225futures/01.html
+          accessed: 2026-09-05
+        - title: TOPIX Futures Contract Specifications（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/products/domestic/topix-futures/01.html
+          accessed: 2026-09-05
+        - title: Nikkei 225 Options Contract Specifications（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/products/domestic/225options/01.html
+          accessed: 2026-09-05
+        - title: JGB Futures Contract Specifications（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/products/jgb/jgb-futures/01.html
+          accessed: 2026-09-05
+      quote: "Quarterly Contract Months (Available for a period up to 8 years) June and December: Nearest 16 contract months March and September: Nearest 3 contract months ／ Contract Unit Nikkei 225 × JPY 1,000"
+      confidence: high
+      detail: |
+        其余产品线乘数/到期序列摘自各自规格页：TOPIX 期货每手 TOPIX×10,000 日元、六月/十二月最近10个合约+三月/九月最近3个；
+        日经225期权到期序列另含最近8个月度合约；JGB 期货每手面额 5年期/10年期为 1 亿日元、mini 20年期为一千万日元。
+        上市日期：日经225期货/TOPIX 期货 1988-09-03、日经225期权 1989-06-12、TOPIX 期权 1989-10-20、10年期国债期货 1985-10-19（各规格页 Opening Date）。
+      verified: 2026-09-05
+
+    price_limits:
+      type:
+        enum: percentage_band
+        zh: "百分比涨跌幅：以涨跌停基准价（reference price for price limits）乘以规定比率形成当日价格区间，基准价逐交易日更新；触发熔断（SCB）时单方向或双向分级扩幅（见 circuit_breaker）"
+        en: "Percentage band: the daily price limit range is calculated by multiplying the reference price for price limits by prescribed rates, with the reference price renewed on a trading-day basis; on a circuit breaker (SCB) trigger the limits are expanded in stages in one or both directions (see circuit_breaker)"
+        sources:
+          - title: Price Limits/ Circuit Breaker Rule（JPX官网英文版）
+            url: https://www.jpx.co.jp/english/derivatives/rules/price-limit-cb/
+            accessed: 2026-09-05
+        quote: "the price limit range shall be calculated by multiplying the reference price for price limits by the following rates."
+        confidence: high
+        verified: 2026-09-05
+      main_board:
+        spec:
+          limit_pct: 8
+          reference: prev_settlement
+          symmetric: true
+          note: "日经225期货（大型/mini/micro）正常档；SCB 逐级扩幅机制见 circuit_breaker"
+        zh: "日经225期货（大型/mini/micro）正常档为基准价 ±8%，触发熔断时单方向逐级扩至 ±12%、±16%；幅度计算中不足最小报价单位的尾数舍去——官方示例：基准价 28,780 日元时幅度为 ±2,300 日元（上限 31,080、下限 26,480）"
+        en: "Nikkei 225 Futures (large/mini/micro) carry a normal band of ±8% around the reference price, expanded in one direction in stages to ±12% and ±16% on a circuit breaker trigger; fractions below one tick are discarded — official example: with a reference price of JPY 28,780 the band is ±JPY 2,300 (upper limit 31,080, lower limit 26,480)"
+        sources:
+          - title: Price Limits/ Circuit Breaker Rule（JPX官网英文版，指数期货档位表与算例）
+            url: https://www.jpx.co.jp/english/derivatives/rules/price-limit-cb/
+            accessed: 2026-09-05
+        quote: "Nikkei 225 Futures, Nikkei 225 mini, Nikkei 225 micro Futures ±8% ±12％ ±16％ ／ Suppose that the Reference Price for Nikkei 225 Futures is JPY 28,780. Since the price limit range is (JPY 28,780*8% = JPY 2,302.4, 2.4 shall be discarded) ± JPY 2,300, the upper limit is JPY 31,080 and the lower limit is JPY 26,480."
+        confidence: high
+        detail: |
+          spec.reference 取 prev_settlement 的依据：plcb 页 CB 节载 Reference Price「Renewed on a trading day basis」（逐交易日更新），
+          期权侧明文基准为 previous day's settlement price（=previous day's settlement price，见 plcb 页指数期权节）；
+          期货侧页面未逐字出现「前日清算结算价」字样，该键系按此归纳，如需逐字支撑可查大阪取引所业务规程。
+        verified: 2026-09-05
+      other_boards:
+        zh: "其他主力合约线（官方总表口径）：TOPIX 期货（含 mini）属 ±10% 组（熔断扩幅 15%、20%）；指数期权按基准价分档——不足 5 点 4%、5-20 点 6%、20-50 点 8%、50 点以上 11%，扩幅在原档上加 3% 递进；JGB 期货为绝对额档（10年期 ±2.00 日元、mini 20年期 ±4.00 日元）。⚠️ TOPIX 期货规格子页所标档位与总表不一致，详见 detail"
+        en: "Other flagship contract lines (per the official summary table): TOPIX Futures (incl. mini) fall in the ±10% group (CB expansions 15% and 20%); index options are tiered by base price — under 5 points 4%, 5-20 points 6%, 20-50 points 8%, 50 points or more 11%, with expansions adding 3% stepwise; JGB Futures use absolute-yen bands (10-year ±JPY 2.00, mini 20-year ±JPY 4.00). Note: the TOPIX Futures spec page shows values inconsistent with the summary table — see detail"
+        sources:
+          - title: Price Limits/ Circuit Breaker Rule（JPX官网英文版，指数期权/JGB 档位表）
+            url: https://www.jpx.co.jp/english/derivatives/rules/price-limit-cb/
+            accessed: 2026-09-05
+          - title: TOPIX Futures Contract Specifications（JPX官网英文版）
+            url: https://www.jpx.co.jp/english/derivatives/products/domestic/topix-futures/01.html
+            accessed: 2026-09-05
+        quote: "FTSE China 50 Index Futures ±10% ±15％ ±20％ ／ TOPIX Options （Reference price） less than 5 points 5 points or more to less than 20 points 20 points or more to less than 50 points 50 points or more ±4% ±6% ±8% ±11% Add 3% to Normal Price Limits Add 3% to 1st Expansion Price Limits ／ 10-year JGB Futures ±JPY 2.00 ／ mini 20-year JGB Futures ±JPY 4.00"
+        confidence: medium
+        detail: |
+          档位表为分组行结构：±10%/15%/20% 一组覆盖 TOPIX 期货、mini-TOPIX、JPX-Nikkei 400、TOPIX Core30 等至 FTSE China 50 的整组产品（quote 段一取该组末行收尾处）。
+          ⚠️ 口径冲突待核实：TOPIX 期货规格子页（2025-05-26 更新）标注正常档 8%、扩幅 12%/16%，而 plcb 总表（2026-07-23 更新）
+          将 TOPIX 期货归入 ±10%/15%/20% 组——两官方页不一致，本字段按较新的总表记录并降级 medium，待官方口径统一后回核。
+        verified: 2026-09-05
+
+    circuit_breaker:
+      enum: stock_level
+      spec:
+        type: contract_level
+        note: "同标的全限月期货+同标的全部期权+相关策略交易+其 J-NET 交易一并暂停；扩幅在暂停期间内进行"
+      zh: "SCB（Static Circuit Breaker）：当中央限月期货（触发判定不含 mini/micro 合约）的涨跌停价位出现买入（卖出）申报或成交时，暂停该标的全限月期货（含 mini、micro 与 Rolling-Spot）、同标的全部期权、相关策略交易及其 J-NET 交易——暂停时长 10 分钟以上，并以扩幅后的价格限制以 Itayose 方式复牌；触发条件在日盘/夜盘常规时段结束前 20 分钟以内满足时不适用"
+      en: "SCB (Static Circuit Breaker): when a buy (sell) order is placed or executed at the upper (lower) price limit for the central contract month of a futures contract (trigger test excluding mini/micro contracts), trading is suspended across all contract months of the same underlying (including mini, micro and Rolling-Spot contracts), all options on the same underlying, related strategy trades and their J-NET trading — for more than 10 minutes, with resumption by the Itayose method under expanded price limits; the rule does not apply where the criteria are met within 20 minutes before the end of the regular session"
+      sources:
+        - title: Price Limits/ Circuit Breaker Rule（JPX官网英文版，SCB 节）
+          url: https://www.jpx.co.jp/english/derivatives/rules/price-limit-cb/
+          accessed: 2026-09-05
+      quote: "In the case where a buy (sell) order is placed (or executed) at the upper (lower) price limit for the central contract month of a futures contract (excluding mini contracts and micro contracts), the trading of futures whose underlying is the same as this central contract month (including mini contracts, micro contracts and Rolling-Spot contracts) will be suspended and the upper (lower) daily price limit range will be expanded. ／ All future contract months All option contracts which have the same underlying The strategy trades related to (1) J-NET trading of (1) and (2) ／ More than 10 minutes ／ After the duration for a trading halt, trading will be resumed by the Itayose method with the price limit expanded. ／ In the case where the above criteria is met within 20 minutes before the end of the regular session of the day (afternoon) or night session."
+      confidence: high
+      detail: |
+        enum 借用 stock_level 表「非全市场」含义（受控词表 circuit_breaker_type 无「产品线/同标的整组」档位，见 OPEN-QUESTIONS #44(b) 惯例）：
+        OSE 的 SCB 触发颗粒度是「中央限月期货触及涨跌停」这一合约级事件，但暂停范围覆盖同标的全组产品——既非单合约暂停、
+        也非指数点位触发的全市场熔断。另注：TAIEX 期货与橡胶/农产品商品期货不适用 SCB；触发时点由 OSE 逐案确定（略有延迟）。
+      verified: 2026-09-05
+
+    volatility_interruption:
+      spec: {dynamic_pct: 0.8, note: "区间基准为最新成交价（LTP）；开盘/收盘拍卖区间更宽（见 quote）；冷静期经过后撮合价仍出界则更新基准价续停"}
+      zh: "DCB（Immediately Executable Price Range Rule，立即执行价格区间规则）：以最新成交价（LTP）为基准 ±0.8% 的价格区间，撮合价越出区间即触发临时中止并转 Itayose 冷静；开盘/收盘集合竞价的区间分别放宽至 ±3.0% 与 ±1.5%；冷静期经过后若撮合价仍在区间外，则将基准价更新至区间内最接近的报价单位继续暂停，回到区间内则以 Itayose 复牌"
+      en: "DCB (Immediately Executable Price Range Rule): a price band of ±0.8% around the last traded price (LTP); a match outside the band triggers a temporary halt and an Itayose cooling period; the band is wider for the opening and closing auctions (±3.0% and ±1.5% respectively); if after the set duration the matching price is still outside the band, the reference price is updated to the closest tick within the band and the halt continues — trading resumes by Itayose once the price is back inside"
+      sources:
+        - title: Nikkei 225 Futures Contract Specifications（JPX官网英文版，DCB 节）
+          url: https://www.jpx.co.jp/english/derivatives/products/domestic/225futures/01.html
+          accessed: 2026-09-05
+      quote: "Immediately Executable Price Range Rule(DCB)：LTP ±0.8% ※However, the DCB Price Range for Opening Auction and Closing Auction will be ±3.0% and ±1.5% respectively."
+      confidence: high
+      detail: |
+        机制全貌摘自 Immediately Executable Price Range Rule 页：官方明言 DCB「similar to special quotation mechanism in stock market」（与现货特別気配同源），
+        且冷静期时长为「a set duration of time」（脚注1，页内未给数值）。各产品线区间不同（如 TOPIX 期权按基准价水平分档 ±2.5 至 ±25 点、
+        JGB 为绝对额档），见 pricerange 页分档表；本字段 spec.dynamic_pct 取旗舰日经225期货常规时段值。
+      verified: 2026-09-05
+
+    trading_halt_mechanism:
+      zh: "除 SCB/DCB 自动机制外，交易所保有裁量性不停市判断——即使触发条件满足，交易所若认为停牌不妥亦可不中止交易；JGB/利率期货在上午段结束前 10 分钟以内触发熔断的，上午段停止交易但以扩幅区间照常进行上午段收盘 Itayose。个股/合约因重大消息等的裁量停牌条款本次未在大阪取引所业务规程中另行检索"
+      en: "Beyond the automatic SCB/DCB mechanisms, the Exchange retains discretion not to halt — even where trigger criteria are met, trading will not be suspended if the Exchange deems a trading suspension inappropriate in view of trading conditions; for JGB/interest rate futures, where the circuit breaker is triggered within 10 minutes of the morning session's end, the morning session is halted but its closing auction is still conducted with the expanded price limit. Discretionary halt provisions for individual contracts on material news were not separately retrieved from the OSE business regulations this session"
+      sources:
+        - title: Price Limits/ Circuit Breaker Rule（JPX官网英文版，SCB 例外与 JGB 上午段处理）
+          url: https://www.jpx.co.jp/english/derivatives/rules/price-limit-cb/
+          accessed: 2026-09-05
+      quote: "In cases where the Exchange deems that a trading suspension would not be appropriate in consideration of the trading conditions, etc. ／ In cases where the circuit breaker is triggered 10 minutes or less before the end of the morning session of JGB Futures and Interest Rate Futures, the trading in the morning session shall be halted, but the closing auction of the morning session would be conducted with the price limit expanded."
+      confidence: medium
+      detail: |
+        本字段为 medium：引用的两段均属 SCB 框架内的例外/特例条款，能支撑「交易所裁量」与「上午段收盘 Itayose 照常进行」两点；
+        OSE 业务规程（業務規程，日文）中的完整裁量停牌/恢复条款本次未抓取，如需补全可从
+        https://www.jpx.co.jp/derivatives/rules/ 日文侧业务规程入手。
+      verified: 2026-09-05
+
+    block_trade:
+      zh: "J-NET 交易为大阪取引所竞价市场之外的场外期货/期权交易平台：单一品种交易（与指定对手方就对手方、品种、价格、数量等报价要素撮合成交）、灵活单一品种交易（Flexible Futures/Options——SQ 日、最终结算方式等条件可协商）、头寸压缩交易（Compression，压降指数期货/期权头寸）；指数期货/期权的 J-NET 时段为 8:20-16:30 与 16:45-6:00（次日）；日经225期货在 J-NET 内最小报价单位 0.0001 日元、最小交易单位 1 单位"
+      en: "J-NET Trading is OSE's off-auction futures and options platform independent of the auction market: J-NET Single Issue Trading (executed when price quotations — counterparty, issue, price, volume, etc. — match against a designated counterparty), Flexible Single Issue Trading (Flexible Futures/Options — SQ date, final settlement method etc. negotiable) and Compression Trading (position reduction in index futures/options); J-NET hours for index futures/options are 8:20-16:30 and 16:45-6:00 (following day); Nikkei 225 Futures on J-NET tick at JPY 0.0001 with a minimum trading unit of 1 unit"
+      sources:
+        - title: J-NET Cross Trading（JPX官网英文版，场外/盘外交易）
+          url: https://www.jpx.co.jp/english/derivatives/rules/j-net/index.html
+          accessed: 2026-09-05
+      quote: "J-NET Derivatives Trading refers to off-auction futures and options trading in the J-NET market which is in independent of the auction market on Osaka Exchange. ／ J-NET Single Issue Trading Investors can trade with a designated couterparty. The order will be executed when the price quotations (counterparty, issue, price, and volume, etc.) match. ／ Index Futures (except for Nikkei 225 VI Futures) / Index Options 8:20～16:30 16:45～6:00 (following day)"
+      confidence: high
+      detail: |
+        quote 中的「which is in independent」「couterparty」为官方页原文拼写，逐字保留。日经225期货规格页另载：
+        J-NET Trading Available (Tick size: JPY 0.0001, Minimum trading unit: 1 unit)。日经225 micro 期货与 TAIEX 期货不适用 J-NET。
+      verified: 2026-09-05
+
+    market_maker_scheme:
+      spec: {present: true, note: "做市商名单与义务细则由官方附件 Handling of Market Maker Program 规定，本次未抓取附件原文，持续报价义务/价差要求未核实"}
+      zh: "对部分产品适用做市商制度（Market Maker Program）以保障平滑交易机会——日经225期货页载「为补充流动性引入了做市商制度」、TOPIX 期货页载「从确保平滑交易机会的观点出发适用做市商制度」；适用产品清单与做市商名单由官方另行公布，义务细则见附件（本次未抓取）"
+      en: "A Market Maker Program applies to some products to ensure smooth trading opportunity — the Nikkei 225 Futures page states a market maker system has been introduced to supplement liquidity, and the TOPIX Futures page states the program is applied to TOPIX Futures; the covered-product list and market maker roster are published separately, with obligation details in an official attachment (not fetched this session)"
+      sources:
+        - title: Market Maker Program（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/rules/market-maker/index.html
+          accessed: 2026-09-05
+        - title: Nikkei 225 Futures (Large Contracts) Overview（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/products/domestic/225futures/index.html
+          accessed: 2026-09-05
+        - title: TOPIX Futures (Large Contracts) Overview（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/products/domestic/topix-futures/index.html
+          accessed: 2026-09-05
+      quote: "From the viewpoint of ensuring the smooth trading opportunity, Market Maker Program is applied to some products."
+      confidence: medium
+      detail: |
+        是否含持续双边报价义务（quote_obligation）未核实——义务条款在 Handling of Market Maker Program 附件（PDF），
+        下次可从 https://www.jpx.co.jp/english/derivatives/rules/market-maker/index.html 页内附件直链抓取补全。
+        日经225期货页原文：To supplement liquidity, we have introduced a market maker system.
+      verified: 2026-09-05
+
+    margin_practice_note:
+      zh: "期货与期权保证金按 VaR 法计算（参数文件、模拟环境等细则由 JSCC 公布）；期货买卖双方均须缴纳保证金，期权卖方须缴纳、期权买方潜在损失以权利金为限故无须缴纳；客户实际保证金由各证券公司计算，且不得低于 JSCC 公布的每单位最低保证金额（Price Scan Range）"
+      en: "Margin requirements for futures and options are calculated by the VaR method (parameter files, simulation environment and other details published by JSCC); both buyer and seller must post margin in futures trading, while in options trading the seller posts margin but the buyer does not — the buyer's potential loss is limited to the premium; actual customer margin is calculated by each brokerage firm and must be at least the Price Scan Range (minimum margin per unit) published by JSCC"
+      sources:
+        - title: Margin（JPX官网英文版，OSE衍生品保证金说明）
+          url: https://www.jpx.co.jp/english/derivatives/rules/margin/index.html
+          accessed: 2026-09-05
+      quote: "Margin requirements for futures and options are calculated based on VaR method. Please refer to the JSCC website for details of VaR method such as parameter files, simulation environment and other related issues. ／ However, in cases where the market moves against the forecasts of an options buyer, potential losses would be limited to only the premium. As such, a margin deposit would not be required."
+      confidence: high
+      detail: |
+        官方示例（日经225期货页）：卖/买保证金 1,600,000/1,700,000 日元、并注明 The above margin amount is an example... required of customers
+        to be at least the amount of the Price Scan Range (the minimum margin amount per unit) published by the Japan Securities Clearing Corporation。
+        清算端（CCP）保证金方法论与清算参加者口径见 clearing.derivatives.initial_margin_practice（视角不同，[ADR-030]）。
+      verified: 2026-09-05
+
+    connect_schemes:
+      zh: ""
+      confidence: low
+      detail: |
+        本次检索的 OSE 衍生品规则栏目（Trading Methods / Other Trading Rules / J-NET / Flexible Trading 等）未见 Stock Connect 式
+        跨境互联互通安排的官方说明；境外投资者经一般外资渠道接入（与顶层 connect_schemes 的消极认定同款）。如实留空。
+        下次入口：大阪取引所業務規程日文原文、JPX 跨境合作（如与 SGX 的历史合作安排）官方页。
+      verified: 2026-09-05
+
 # ═══════════════════════════════════════════════
 # 六｜上市、持续监管与退市
 # ═══════════════════════════════════════════════
@@ -941,6 +1289,94 @@ clearing:
         accessed: 2026-08-24
     quote: "JSCC will declare that a Clearing Participant is in default if such participant is, or is likely to be, unable to perform its obligations, according to the determination of JSCC's senior management. If a default is declared, JSCC can take actions to contain losses by halting clearing of new transactions from the defaulter and liquidating the defaulter's positions. ... Even when a Clearing Participant default occurs, JSCC will fulfill settlement according to the regular schedule."
     confidence: high
+
+  # ── 衍生品保证金、盯市与交割（清算端主体为 JSCC——顶层五字段描述现货端，本子块描述衍生品端）──
+  derivatives:
+    initial_margin_practice:
+      zh: "JSCC 对各清算业务按与其适配的方法计算初始保证金，对所有产品以不低于 99% 的置信水平覆盖潜在未来风险暴露；上市衍生品的初始保证金采用 Expected Shortfall（历史模拟法）——参照期间 1,250 个营业日加压力期、持有期 2 个营业日、置信水平 99%、参数逐日更新"
+      en: "JSCC calculates initial margin for each Clearing Business using a method appropriate for that business, covering potential future exposures for all products with a confidence level of at least 99%; for listed derivatives, initial margin uses Expected Shortfall (historical simulation) — a reference period of 1,250 business days plus a stress period, a holding period of 2 business days, 99% confidence level, with parameters updated daily"
+      sources:
+        - title: "JSCC — Risk Management: Margin（JSCC官网英文版，各清算业务保证金方法论表）"
+          url: https://www.jpx.co.jp/jscc/en/risk/margin.html
+          accessed: 2026-09-05
+      quote: "Besides, initial margin is calculated for each Clearing Business using a method appropriate for that business, with a confidence level of at least 99% of potential future exposures for all products. ／ Listed Derivatives Expected Shortfall(*1) Historical Simulation 1,250 business days + Stress Period (*2) 2 business days (*3) 99% Daily(*5)"
+      confidence: high
+      detail: |
+        本字段为清算端（CCP）保证金方法论视角，与 market_structure.derivatives.margin_practice_note（交易端要求）描述同一制度但视角不同，
+        不合并（[ADR-030]）。JSCC 另实施逆周期措施（APC Measures：额外压力情景、波动率下限、最低保证金要求等）以抑制顺周期性；
+        并逐账户逐日回测验证置信水平达成（向风险管理委员会月报、董事会/风险委员会季报）。
+        注：表注 *1 载明日经225分红点指数期货及部分商品衍生品仍用 VaR；*3 载明上市商品衍生品持有期为 1 个营业日。
+      verified: 2026-09-05
+
+    maintenance_margin_practice:
+      zh: "不设与初始保证金并立的固定「维持保证金」阈值——机制为逐日盯市后与清算参加者收付变动保证金（variation margin）、初始保证金要求逐日重算；官方英文页未见上市衍生品的盘中维持阈值触发安排说明（顶层 maintenance_margin_practice 所述日中預託制度的触发标的是 TOPIX/日经期货约定数值差，属现物保证金页表述）"
+      en: "No fixed maintenance-margin threshold standing alongside initial margin — the mechanism is daily mark-to-market followed by variation margin exchange with Clearing Participants, with the initial margin requirement recalculated daily; no intraday maintenance-threshold trigger for listed derivatives is described on the official English page (the intraday lodging arrangement described at the top-level field is keyed to TOPIX/Nikkei futures trading-value differences per the cash-products margin page)"
+      sources:
+        - title: "JSCC — Risk Management: Margin（JSCC官网英文版）"
+          url: https://www.jpx.co.jp/jscc/en/risk/margin.html
+          accessed: 2026-09-05
+      quote: "For listed derivatives, CDS, IRS, and OTC JGB, open positions are marked-to-market using the most recent price at least once a day, following which variation margin is exchanged with Clearing Participants."
+      confidence: medium
+      detail: |
+        「无独立维持阈值」系对官方页面结构的归纳（负面推断：英文保证金页只描述初始保证金+变动保证金两层，未出现 maintenance margin 概念），
+        故 medium 而非 high；JSCC 规则原文（清算业务规程）若有盘中追加条款，下次可从 /jscc/en/rule/rule.html 规程页补查。
+      verified: 2026-09-05
+
+    mark_to_market_frequency:
+      zh: "至少每日一次：上市衍生品（及 CDS、IRS、OTC 国债）未平仓头寸按最新价格盯市，随后与清算参加者收付变动保证金"
+      en: "At least once a day: open positions in listed derivatives (as well as CDS, IRS and OTC JGB) are marked-to-market using the most recent price, following which variation margin is exchanged with Clearing Participants"
+      sources:
+        - title: "JSCC — Risk Management: Margin（JSCC官网英文版）"
+          url: https://www.jpx.co.jp/jscc/en/risk/margin.html
+          accessed: 2026-09-05
+      quote: "For listed derivatives, CDS, IRS, and OTC JGB, open positions are marked-to-market using the most recent price at least once a day, following which variation margin is exchanged with Clearing Participants."
+      confidence: high
+      verified: 2026-09-05
+
+    delivery_method:
+      enum: either
+      zh: "分产品线：股指期货（日经225、TOPIX 等）为现金结算——最终结算价为特别清算指数（SQ），按最后交易日的次一营业日各构成股开盘价合计计算；国债期货为实物交割（到期由卖方从可交割券中选定交付，名义债券不可实体交付故交割实际券种）；mini 10 年期国债期货为现金结算。enum 取 either 表达产品线间的分化，非同一头寸的可选交割"
+      en: "Varies by product line: equity index futures (Nikkei 225, TOPIX, etc.) settle in cash — the final settlement price is the Special Quotation (SQ), calculated from the total opening prices of each component stock on the business day following the last trading day; JGB Futures are physically delivered (the seller delivers one of the deliverable grades at final settlement, since standardized notional bonds cannot be delivered); mini 10-year JGB Futures (cash-settled) settle in cash. The enum value `either` expresses the per-product-line split, not an optional choice per position"
+      sources:
+        - title: Nikkei 225 Futures Contract Specifications（JPX官网英文版，Settlement 节）
+          url: https://www.jpx.co.jp/english/derivatives/products/domestic/225futures/01.html
+          accessed: 2026-09-05
+        - title: JGB Futures（JPX官网英文版，产品说明页）
+          url: https://www.jpx.co.jp/english/derivatives/products/jgb/jgb-futures/index.html
+          accessed: 2026-09-05
+        - title: JGB Futures Contract Specifications（JPX官网英文版，Final Settlement Method 节）
+          url: https://www.jpx.co.jp/english/derivatives/products/jgb/jgb-futures/01.html
+          accessed: 2026-09-05
+      quote: "Settlement Cash Settlement Final Settlement Price Special Quotation (SQ calculation is based on the total opening prices of each component stock of Nikkei 225 on the business day following the last trading day.)"
+      confidence: high
+      detail: |
+        国债期货实物交割依据（同一来源清单内、未并入 quote）：JGB 期货产品页「For the final settlement of JGB Futures, one of the deliverable
+        grades will be delivered because standardized bonds are unreal bonds.」+ 规格页「Final Settlement Method / Delivery of JGBs / Delivery of Bonds /
+        The delivery of issues is at the discretion of the seller of the futures contract.」。
+        受控词表 delivery_method（physical/cash/either/na）无「分产品线」档位，either 为近似取值——需协调者在 OPEN-QUESTIONS 登记（见完成报告）。
+      verified: 2026-09-05
+
+    last_trading_day_rule:
+      zh: "股指期货/期权最后交易日为各合约月份（期权为到期月份）第二个星期五前的工作日（第二个星期五为非营业日时为再前一个营业日）；新合约月份自最后交易日的次一营业日开始交易；SQ 日为最后交易日的次一营业日（最终结算价按该日构成股开盘价计算）；国债期货最后交易日为各交割日前的第五个营业日（交割日为合约月份第二十个自然日，遇非营业日顺延——日期细则见 detail）"
+      en: "For equity index futures/options, the last trading day is the business day preceding the second Friday of each contract (expiration) month (the preceding business day if the second Friday is a non-business day); trading in a new contract month begins on the business day following the last trading day; the SQ day is the business day following the last trading day (the final settlement price is calculated from that day's component opening prices); for JGB Futures, the last trading day falls a set number of business days prior to each delivery date — see detail for the exact date rule"
+      sources:
+        - title: Nikkei 225 Futures Contract Specifications（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/products/domestic/225futures/01.html
+          accessed: 2026-09-05
+        - title: JGB Futures Contract Specifications（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/products/jgb/jgb-futures/01.html
+          accessed: 2026-09-05
+        - title: Last Trading Day/Delivery Day（JPX官网英文版）
+          url: https://www.jpx.co.jp/english/derivatives/rules/last-trading-day/index.html
+          accessed: 2026-09-05
+      quote: "Last Trading Day The business day preceding the second Friday of each contract month (When the second Friday is a non-business day, it shall be the preceding business day.) Trading in a new contract month begins on the business day following the last trading day. SQ Day The business day following the last trading day."
+      confidence: high
+      detail: |
+        补充（未并入 quote，见 Last Trading Day 页 note 与 JGB 规格页）：最后交易日的交易在日盘（intra-day session）收盘时结束；
+        假日交易日不作任何产品的最后交易日；JGB 期货最后交易日规则原文为「5th business day prior to each delivery date
+        (20th day of each contract month, move-down the date when it is not the business day)」（zh/en 未带此数字故不入 quote 反查范围）。
+        TOPIX 期货/期权的第二个星期五规则与日经225相同（各自规格页同款表述）。
+      verified: 2026-09-05
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者

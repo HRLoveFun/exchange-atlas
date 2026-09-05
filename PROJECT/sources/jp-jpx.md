@@ -63,6 +63,34 @@
 - `jpx.co.jp`（2026-09-05 补充登记，任务四族A：JSCC 现物保证金，沿用既有域名条目） | 官方 | ja | curl 常规浏览器 UA 200
   - JSCC 現物取引 証拠金（现物清算参加者当初証拠金构成：未決済約定の値洗い価値（時価評価額）＋ヒストリカルシミュレーション VaR（保有期間 1 日、参照期間 250 日、信頼水準 99％）；市场压力期上调；信用状况割增；TOPIX/日经期货 11 时约定差超基准值触发日中預託；2026-06-30 时点全参加者当初証拠金所要额 1,688 億円）: https://www.jpx.co.jp/jscc/seisan/genbutsu/margin.html（HTTP 200）
 
+- `jpx.co.jp`（2026-09-05 补充登记，衍生品覆盖缺口子任务：大阪取引所（OSE）衍生品市场机制。本文件单记录覆盖 JPX 集团——现货=东京证券交易所 TSE，衍生品=大阪取引所 OSE，JPX 全资子公司，与 hk-hkex/HKFE 同款处理） | 官方 | en | curl 常规浏览器 UA 200，全程未见限流
+  - Trading Hours（OSE 衍生品日盘/夜盘钟点总览）: https://www.jpx.co.jp/english/derivatives/rules/trading-hours/（HTTP 200，45KB）
+  - Night Session（夜盘细则，含 2025-11 夜盘延长后钟点）: https://www.jpx.co.jp/english/derivatives/rules/trading-hours/01.html（HTTP 200，33KB）
+  - Order Types（衍生品订单类型总览）: https://www.jpx.co.jp/english/derivatives/rules/order-types/index.html（HTTP 200，53KB）
+  - Price Range（最小报价单位/价格区间）: https://www.jpx.co.jp/english/derivatives/rules/price-range/index.html（HTTP 200，55KB）
+  - Price Limits/Circuit Breaker Rule（逐合约涨跌停档位与熔断机制总览）: https://www.jpx.co.jp/english/derivatives/rules/price-limit-cb/（HTTP 200，59KB）
+  - Price Limits/Circuit Breaker Rule 附表 PDF（逐合约涨跌停与 CB 档位表）: https://www.jpx.co.jp/english/derivatives/rules/price-limit-cb/tvdivq0000003syn-att/tvdivq000000even.pdf（HTTP 200）
+  - Last Trading Day（逐产品线最后交易日/交割规则）: https://www.jpx.co.jp/english/derivatives/rules/last-trading-day/index.html（HTTP 200，35KB）
+  - Margin（交易端保证金说明）: https://www.jpx.co.jp/english/derivatives/rules/margin/index.html（HTTP 200，31KB）
+  - Market Maker（做市商制度）: https://www.jpx.co.jp/english/derivatives/rules/market-maker/index.html（HTTP 200，32KB）
+  - Trading Methods（撮合方式总览：individual auction + price and time priority rule，Zaraba/Itayose 定义）: https://www.jpx.co.jp/english/derivatives/rules/trading-methods/index.html（HTTP 200，33KB；页面 Update 2016-09-02，为官网在架现行说明页）
+  - Holiday Trading（衍生品假日交易制度）: https://www.jpx.co.jp/english/derivatives/rules/holidaytrading/index.html（HTTP 200）
+  - Outline（交易规则概览）: https://www.jpx.co.jp/english/derivatives/rules/outline/index.html（HTTP 200，39KB）
+  - J-NET Cross Trading（大宗/交叉交易平台）: https://www.jpx.co.jp/english/derivatives/rules/j-net/index.html（HTTP 200，45KB）
+  - Derivatives Products 总览页（产品线清单，products 章条目依据）: https://www.jpx.co.jp/english/derivatives/products/（HTTP 200，56KB）
+  - Nikkei 225 Futures 合约规格: https://www.jpx.co.jp/english/derivatives/products/domestic/225futures/index.html（HTTP 200，37KB；标签子页见 01.html——「Contract Specifications」tab 内容服务端渲染进 /01.html，可直接 curl）
+  - Nikkei 225 Futures Contract Specifications 子页: https://www.jpx.co.jp/english/derivatives/products/domestic/225futures/01.html（HTTP 200，38KB）
+  - Nikkei 225 Options 合约规格: https://www.jpx.co.jp/english/derivatives/products/domestic/225options/index.html（HTTP 200，33KB）
+  - Nikkei 225 Options Contract Specifications 子页: https://www.jpx.co.jp/english/derivatives/products/domestic/225options/01.html（HTTP 200，41KB）
+  - TOPIX Futures 合约规格: https://www.jpx.co.jp/english/derivatives/products/domestic/topix-futures/index.html（HTTP 200，33KB）
+  - TOPIX Futures Contract Specifications 子页: https://www.jpx.co.jp/english/derivatives/products/domestic/topix-futures/01.html（HTTP 200，38KB）
+  - TOPIX Options 合约规格: https://www.jpx.co.jp/english/derivatives/products/domestic/topix-options/index.html（HTTP 200，32KB）
+  - TOPIX Options Contract Specifications 子页: https://www.jpx.co.jp/english/derivatives/products/domestic/topix-options/01.html（HTTP 200，42KB）
+  - JGB Futures 合约规格: https://www.jpx.co.jp/english/derivatives/products/jgb/jgb-futures/index.html（HTTP 200，27KB）
+  - JGB Futures Contract Specifications 子页: https://www.jpx.co.jp/english/derivatives/products/jgb/jgb-futures/01.html（HTTP 200，34KB）
+- `jpx.co.jp`（2026-09-05 补充登记，JSCC 英文站风险栏目，沿用既有域名条目） | 官方 | en | curl 常规浏览器 UA 200
+  - JSCC Margin（衍生品清算保证金方法论 SPAN 说明）: https://www.jpx.co.jp/jscc/en/risk/margin.html（HTTP 200，50KB）
+
 ⚠️ **make fetch 对 jpx.co.jp 的误报（2026-09-05 发现）**：`tools/fetch.py`（curl）抓 jpx.co.jp 全部内容页都拿到 200 + 真实正文，但 `looks_blocked` 会在正文头部 4KB 里嗅到 `cloudflare` 字样（页面内嵌 CDN 资源路径所致）而把整批标成 FAIL——缓存文件本身是好的，`ok:false` 只是误记，`verify_quotes` 因此把引用 jpx 页面的字段降级为信息性 CACHE_MISS。改用 `python3 tools/fetch_sources.py --ex jp-jpx`（requests 实现）即可全部 OK（2026-09-05 实测 32/32 过）。jpx.co.jp 本身没有真反爬，连续快速请求也未见限流。
 - `nta.go.jp`（2026-09-05 补充登记，任务四族D，沿用既有域名条目） | 官方（国税厅） | ja | curl 常规浏览器 UA 200
   - 有価証券取引税の概要（国税庁统计页，「有価証券取引税は平成11年3月31日をもって廃止された」一手表述；⚠️ 页面为 Shift-JIS 编码，`fetch_sources.py` 落盘后需转存 UTF-8 才能过 `verify_quotes` 文本比对，2026-09-05 实测）: https://www.nta.go.jp/publication/statistics/kokuzeicho/shoken1999/menu/01.htm（HTTP 200）
