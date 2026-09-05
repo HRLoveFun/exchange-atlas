@@ -4917,7 +4917,7 @@
       "label_zh": "时区",
       "label_en": "Timezone",
       "volatility": "stable",
-      "verified": "2026-08-12",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -4929,7 +4929,7 @@
       "label_zh": "夏令时规则",
       "label_en": "DST Rule",
       "volatility": "stable",
-      "verified": "2026-08-12",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -5025,7 +5025,7 @@
       "label_zh": "结算货币",
       "label_en": "Settlement Currency(ies)",
       "volatility": "stable",
-      "verified": "2026-08-12",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -5061,8 +5061,8 @@
       "label_zh": "清算监管机构",
       "label_en": "Clearing Regulator",
       "volatility": "stable",
-      "verified": "2026-08-12",
-      "confidence": "medium"
+      "verified": "2026-09-05",
+      "confidence": "high"
     },
     {
       "exchange_id": "cn-sse",
@@ -5613,7 +5613,7 @@
       "label_zh": "托管机构",
       "label_en": "CSD/ICSD",
       "volatility": "stable",
-      "verified": "2026-08-12",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -5757,7 +5757,7 @@
       "label_zh": "会员体系",
       "label_en": "Membership Structure",
       "volatility": "stable",
-      "verified": "2026-08-12",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {

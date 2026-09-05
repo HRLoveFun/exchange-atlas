@@ -65,3 +65,5 @@
   - 2026-09-05 新增（任务四收尾第29条，沿用 `sse.com.cn` 既有域名条目）: 上海证券交易所统计年鉴（2025卷）全文 PDF（「2024年末各类投资者持股情况」表——investor_structure 出处；37MB 大文件，`pdftotext -layout` 可提取，表格数字带空格如「22. 40」，quote 反查的空白折叠可正常命中）: http://www.sse.com.cn/aboutus/publication/yearly/documents/c/10801255/files/02acb566841a48f0b2ca8941c73f4541.pdf（HTTP 200，37MB）
   - 同上: 上海证券交易所新竞价新综业若干技术调整市场参与人技术实施指南1.0版_20260122（技术开发稿——trading_system_name 出处，官方命名「新竞价」「新综业」与现生产「竞价」「综业」两组简称；挂于交易技术支持专区>测试文档栏）: https://www.sse.com.cn/services/tradingtech/development/c/10806442/files/763b327fac4a4c688b8ab9211bd48d40.pdf（HTTP 200，289KB）
 - `csrc.gov.cn`（2026-09-05 补充登记，任务四族F） | 官方（证监会） | zh | curl 常规 UA 200 | 证券期货投资者适当性管理办法全文（令第130号公布、2020年修订，suitability_management 出处）: https://www.csrc.gov.cn/csrc/c106256/c1653849/content.shtml（HTTP 200）
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Asia/Shanghai 的 UTC 偏移与无夏令时规则
+  - tzdb「asia」zone 文件（`Zone Asia/Shanghai` 行给出 +8 偏移、无夏令时 Rule）: https://data.iana.org/time-zones/tzdb/asia（HTTP 200，68KB）
