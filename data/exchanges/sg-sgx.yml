@@ -654,7 +654,7 @@ market_structure:
     holidays_note:
       zh: ""
       confidence: low
-      detail: "本次抓取页面未见衍生品市场（SGX-DT）节假日安排与现货市场存在实质差异的官方说明，未逐条核实，如实留空。"
+      detail: "棒 4 复查（[ADR-082]）：sgx.com 交易日历页探针复核仍为 SPA 空壳（HTTP 200 但正文前端渲染），与 [ADR-082] 依据 5 同一结构性受阻；维持留空，并入 OPEN-QUESTIONS（见第 30 条，与合约规格 PDF 一并待人工投喂）。"
 
     opening_mechanism:
       zh: ""

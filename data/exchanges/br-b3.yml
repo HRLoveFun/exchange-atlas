@@ -655,9 +655,16 @@ market_structure:
         confidence: high
 
     holidays_note:
-      zh: ""
-      confidence: low
-      detail: "未见衍生品市场节假日安排与现货市场（见顶层holidays_note）存在实质差异的官方说明，本次未逐条核实，留空。"
+      zh: "与现货市场共用同一假日框架：B3 官网 Trading Calendar / Holidays 页对每个休市日的标准表述为「休市日无股票、私募固定收益、固定收益 ETF、上市衍生品及证券借贷市场交易」——上市衍生品明文包含在该假日安排内；逐年具体日期以 B3 当年 Trading Calendar 为准（见顶层 holidays_note）"
+      en: "Derivatives share the same holiday framework as the cash market: B3's official Trading Calendar / Holidays page states for each closure day that there will be no trading on the equity, private fixed income, fixed income ETF or listed derivatives markets, or on the securities lending markets — listed derivatives are explicitly covered; year-by-year dates follow B3's current Trading Calendar (see the top-level holidays_note)"
+      detail: "棒 4（[ADR-082]）：现货日历页的休市规则句明文列举「listed derivatives markets」，属「现货日历页明文把衍生品纳入适用范围」的正面依据，直接复用同一来源；confidence 沿用顶层的 medium（该页无 JS 时默认显示往年骨架）。"
+      sources:
+        - title: "B3 — Trading calendar / Holidays（PUMA Trading System，For members and traders）"
+          url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-calendar/holidays/
+          accessed: 2026-09-04
+      quote: "There will be no trading on the equity, private fixed income, fixed income ETF or listed derivatives markets, or on the securities lending markets"
+      confidence: medium
+      verified: 2026-09-05
 
     opening_mechanism:
       zh: "沿用顶层市场通用的「开盘前阶段」（Pre-opening phase）机制定义——只接受挂单、不做撮合，仅用于确定理论开盘价；该定义见于《交易规程手册》Title II「交易环境」章节，明确适用于「各组资产与衍生品」（in each group of assets and derivatives），非现货专属。指数期货类旗舰合约的开盘前阶段时长为5分钟（具体时刻见trading_sessions.pre_market）"
