@@ -1389,7 +1389,7 @@
       "label_zh": "时区",
       "label_en": "Timezone",
       "volatility": "stable",
-      "verified": "2026-08-16",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -1401,8 +1401,8 @@
       "label_zh": "夏令时规则",
       "label_en": "DST Rule",
       "volatility": "stable",
-      "verified": "2026-08-16",
-      "confidence": "low"
+      "verified": "2026-09-05",
+      "confidence": "medium"
     },
     {
       "exchange_id": "br-b3",
@@ -1473,7 +1473,7 @@
       "label_zh": "结算货币",
       "label_en": "Settlement Currency(ies)",
       "volatility": "stable",
-      "verified": "2026-08-16",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -5205,7 +5205,7 @@
       "label_zh": "节假日与特殊休市",
       "label_en": "Holidays & Special Closures",
       "volatility": "stable",
-      "verified": "2026-08-12",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -5962,6 +5962,66 @@
       "label_en": "Default Management",
       "volatility": "moderate",
       "verified": "2026-08-12",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "cn-sse",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.initial_margin_practice",
+      "label_zh": "初始保证金制度",
+      "label_en": "Initial Margin",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "cn-sse",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.maintenance_margin_practice",
+      "label_zh": "维持保证金制度",
+      "label_en": "Maintenance Margin",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "cn-sse",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.mark_to_market_frequency",
+      "label_zh": "盯市频率",
+      "label_en": "Mark-to-market Frequency",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "cn-sse",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.delivery_method",
+      "label_zh": "交割方式",
+      "label_en": "Delivery Method",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "cn-sse",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.last_trading_day_rule",
+      "label_zh": "最后交易日规则",
+      "label_en": "Last Trading Day Rule",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {
@@ -8517,7 +8577,7 @@
       "label_zh": "时区",
       "label_en": "Timezone",
       "volatility": "stable",
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -8529,7 +8589,7 @@
       "label_zh": "夏令时规则",
       "label_en": "DST Rule",
       "volatility": "stable",
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -8601,7 +8661,7 @@
       "label_zh": "结算货币",
       "label_en": "Settlement Currency(ies)",
       "volatility": "stable",
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -10833,7 +10893,7 @@
       "label_zh": "时区",
       "label_en": "Timezone",
       "volatility": "stable",
-      "verified": "2026-08-12",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -10845,7 +10905,7 @@
       "label_zh": "夏令时规则",
       "label_en": "DST Rule",
       "volatility": "stable",
-      "verified": "2026-08-12",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -10857,7 +10917,7 @@
       "label_zh": "成立年份",
       "label_en": "Founded",
       "volatility": "stable",
-      "verified": "2026-08-12",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -10917,7 +10977,7 @@
       "label_zh": "结算货币",
       "label_en": "Settlement Currency(ies)",
       "volatility": "stable",
-      "verified": "2026-08-12",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -10953,8 +11013,8 @@
       "label_zh": "清算监管机构",
       "label_en": "Clearing Regulator",
       "volatility": "stable",
-      "verified": "2026-08-12",
-      "confidence": "medium"
+      "verified": "2026-09-05",
+      "confidence": "high"
     },
     {
       "exchange_id": "hk-hkex",
@@ -11961,8 +12021,8 @@
       "label_zh": "会员体系",
       "label_en": "Membership Structure",
       "volatility": "stable",
-      "verified": "2026-08-12",
-      "confidence": "medium"
+      "verified": "2026-09-05",
+      "confidence": "high"
     },
     {
       "exchange_id": "hk-hkex",
@@ -13689,7 +13749,7 @@
       "label_zh": "清算监管机构",
       "label_en": "Clearing Regulator",
       "volatility": "stable",
-      "verified": "2026-08-24",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -14102,6 +14162,270 @@
     },
     {
       "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.pre_market",
+      "label_zh": "盘前",
+      "label_en": "Pre-market",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.continuous_am",
+      "label_zh": "上午连续竞价",
+      "label_en": "Morning Continuous",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.lunch_break",
+      "label_zh": "午休",
+      "label_en": "Lunch Break",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.continuous_pm",
+      "label_zh": "下午连续竞价",
+      "label_en": "Afternoon Continuous",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.after_market",
+      "label_zh": "盘后",
+      "label_en": "After-market",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.night_session",
+      "label_zh": "夜盘",
+      "label_en": "Night Session",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.holidays_note",
+      "label_zh": "节假日与特殊休市",
+      "label_en": "Holidays & Special Closures",
+      "volatility": "stable",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.opening_mechanism",
+      "label_zh": "开盘机制",
+      "label_en": "Opening Mechanism",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.closing_mechanism",
+      "label_zh": "收盘机制",
+      "label_en": "Closing Mechanism",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.matching_principle",
+      "label_zh": "撮合原则",
+      "label_en": "Matching Principle",
+      "volatility": "stable",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.order_types",
+      "label_zh": "订单类型",
+      "label_en": "Order Types",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.tick_size",
+      "label_zh": "最小报价单位",
+      "label_en": "Tick Size",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.contract_specs_note",
+      "label_zh": "合约规格摘要",
+      "label_en": "Contract Specifications",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.price_limits.type",
+      "label_zh": "类型",
+      "label_en": "Type",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.price_limits.main_board",
+      "label_zh": "主力合约幅度",
+      "label_en": "Main Contract Band",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.price_limits.other_boards",
+      "label_zh": "其他合约幅度",
+      "label_en": "Other Contracts' Bands",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.circuit_breaker",
+      "label_zh": "熔断机制",
+      "label_en": "Circuit Breaker",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.volatility_interruption",
+      "label_zh": "波动性中断",
+      "label_en": "Volatility Interruption",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_halt_mechanism",
+      "label_zh": "临时停牌与恢复",
+      "label_en": "Trading Halt & Resumption",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.block_trade",
+      "label_zh": "大宗交易",
+      "label_en": "Block Trade",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.market_maker_scheme",
+      "label_zh": "做市商制度",
+      "label_en": "Market Maker Scheme",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.margin_practice_note",
+      "label_zh": "保证金制度摘要",
+      "label_en": "Margin Practice",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
       "chapter": "listing",
       "chapter_label_zh": "上市、持续监管与退市",
       "chapter_label_en": "Listing, Continuing Obligations & Delisting",
@@ -14330,6 +14654,66 @@
     },
     {
       "exchange_id": "jp-jpx",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.initial_margin_practice",
+      "label_zh": "初始保证金制度",
+      "label_en": "Initial Margin",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.maintenance_margin_practice",
+      "label_zh": "维持保证金制度",
+      "label_en": "Maintenance Margin",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.mark_to_market_frequency",
+      "label_zh": "盯市频率",
+      "label_en": "Mark-to-market Frequency",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.delivery_method",
+      "label_zh": "交割方式",
+      "label_en": "Delivery Method",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.last_trading_day_rule",
+      "label_zh": "最后交易日规则",
+      "label_en": "Last Trading Day Rule",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "jp-jpx",
       "chapter": "participants",
       "chapter_label_zh": "市场参与者",
       "chapter_label_en": "Market Participants",
@@ -14457,8 +14841,8 @@
       "label_zh": "交易系统/撮合引擎",
       "label_en": "Trading System",
       "volatility": "stable",
-      "verified": "2026-08-24",
-      "confidence": "medium"
+      "verified": "2026-09-05",
+      "confidence": "high"
     },
     {
       "exchange_id": "jp-jpx",
@@ -19737,7 +20121,7 @@
       "label_zh": "时区",
       "label_en": "Timezone",
       "volatility": "stable",
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -19749,7 +20133,7 @@
       "label_zh": "夏令时规则",
       "label_en": "DST Rule",
       "volatility": "stable",
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -20829,7 +21213,7 @@
       "label_zh": "时区",
       "label_en": "Timezone",
       "volatility": "stable",
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -20841,7 +21225,7 @@
       "label_zh": "夏令时规则",
       "label_en": "DST Rule",
       "volatility": "stable",
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -20914,7 +21298,7 @@
       "label_en": "Trading Currency(ies)",
       "volatility": "stable",
       "verified": "2026-08-14",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "us-nasdaq",
@@ -20926,7 +21310,7 @@
       "label_en": "Settlement Currency(ies)",
       "volatility": "stable",
       "verified": "2026-08-14",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "us-nasdaq",
@@ -20961,7 +21345,7 @@
       "label_zh": "清算监管机构",
       "label_en": "Clearing Regulator",
       "volatility": "stable",
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -21362,6 +21746,234 @@
     },
     {
       "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.pre_market",
+      "label_zh": "盘前",
+      "label_en": "Pre-market",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.continuous_am",
+      "label_zh": "上午连续竞价",
+      "label_en": "Morning Continuous",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.lunch_break",
+      "label_zh": "午休",
+      "label_en": "Lunch Break",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.continuous_pm",
+      "label_zh": "下午连续竞价",
+      "label_en": "Afternoon Continuous",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.after_market",
+      "label_zh": "盘后",
+      "label_en": "After-market",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.night_session",
+      "label_zh": "夜盘",
+      "label_en": "Night Session",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.holidays_note",
+      "label_zh": "节假日与特殊休市",
+      "label_en": "Holidays & Special Closures",
+      "volatility": "stable",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.opening_mechanism",
+      "label_zh": "开盘机制",
+      "label_en": "Opening Mechanism",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.closing_mechanism",
+      "label_zh": "收盘机制",
+      "label_en": "Closing Mechanism",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.matching_principle",
+      "label_zh": "撮合原则",
+      "label_en": "Matching Principle",
+      "volatility": "stable",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.order_types",
+      "label_zh": "订单类型",
+      "label_en": "Order Types",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.tick_size",
+      "label_zh": "最小报价单位",
+      "label_en": "Tick Size",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.contract_specs_note",
+      "label_zh": "合约规格摘要",
+      "label_en": "Contract Specifications",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.price_limits.type",
+      "label_zh": "类型",
+      "label_en": "Type",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.circuit_breaker",
+      "label_zh": "熔断机制",
+      "label_en": "Circuit Breaker",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.volatility_interruption",
+      "label_zh": "波动性中断",
+      "label_en": "Volatility Interruption",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_halt_mechanism",
+      "label_zh": "临时停牌与恢复",
+      "label_en": "Trading Halt & Resumption",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.market_maker_scheme",
+      "label_zh": "做市商制度",
+      "label_en": "Market Maker Scheme",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.margin_practice_note",
+      "label_zh": "保证金制度摘要",
+      "label_en": "Margin Practice",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
       "chapter": "listing",
       "chapter_label_zh": "上市、持续监管与退市",
       "chapter_label_en": "Listing, Continuing Obligations & Delisting",
@@ -21515,6 +22127,66 @@
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.initial_margin_practice",
+      "label_zh": "初始保证金制度",
+      "label_en": "Initial Margin",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.maintenance_margin_practice",
+      "label_zh": "维持保证金制度",
+      "label_en": "Maintenance Margin",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.mark_to_market_frequency",
+      "label_zh": "盯市频率",
+      "label_en": "Mark-to-market Frequency",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.delivery_method",
+      "label_zh": "交割方式",
+      "label_en": "Delivery Method",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nasdaq",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.last_trading_day_rule",
+      "label_zh": "最后交易日规则",
+      "label_en": "Last Trading Day Rule",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
     },
     {
       "exchange_id": "us-nasdaq",
@@ -21825,7 +22497,7 @@
       "label_zh": "时区",
       "label_en": "Timezone",
       "volatility": "stable",
-      "verified": "2026-08-13",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -21837,7 +22509,7 @@
       "label_zh": "夏令时规则",
       "label_en": "DST Rule",
       "volatility": "stable",
-      "verified": "2026-08-13",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -21898,7 +22570,7 @@
       "label_en": "Trading Currency(ies)",
       "volatility": "stable",
       "verified": "2026-08-13",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "us-nyse",
@@ -21910,7 +22582,7 @@
       "label_en": "Settlement Currency(ies)",
       "volatility": "stable",
       "verified": "2026-08-13",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "us-nyse",
@@ -22358,6 +23030,198 @@
     },
     {
       "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.pre_market",
+      "label_zh": "盘前",
+      "label_en": "Pre-market",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.continuous_am",
+      "label_zh": "上午连续竞价",
+      "label_en": "Morning Continuous",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.lunch_break",
+      "label_zh": "午休",
+      "label_en": "Lunch Break",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.continuous_pm",
+      "label_zh": "下午连续竞价",
+      "label_en": "Afternoon Continuous",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.after_market",
+      "label_zh": "盘后",
+      "label_en": "After-market",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.night_session",
+      "label_zh": "夜盘",
+      "label_en": "Night Session",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.holidays_note",
+      "label_zh": "节假日与特殊休市",
+      "label_en": "Holidays & Special Closures",
+      "volatility": "stable",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.opening_mechanism",
+      "label_zh": "开盘机制",
+      "label_en": "Opening Mechanism",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.closing_mechanism",
+      "label_zh": "收盘机制",
+      "label_en": "Closing Mechanism",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.order_types",
+      "label_zh": "订单类型",
+      "label_en": "Order Types",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.contract_specs_note",
+      "label_zh": "合约规格摘要",
+      "label_en": "Contract Specifications",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.circuit_breaker",
+      "label_zh": "熔断机制",
+      "label_en": "Circuit Breaker",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_halt_mechanism",
+      "label_zh": "临时停牌与恢复",
+      "label_en": "Trading Halt & Resumption",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.block_trade",
+      "label_zh": "大宗交易",
+      "label_en": "Block Trade",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.market_maker_scheme",
+      "label_zh": "做市商制度",
+      "label_en": "Market Maker Scheme",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.margin_practice_note",
+      "label_zh": "保证金制度摘要",
+      "label_en": "Margin Practice",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
       "chapter": "listing",
       "chapter_label_zh": "上市、持续监管与退市",
       "chapter_label_en": "Listing, Continuing Obligations & Delisting",
@@ -22586,6 +23450,66 @@
     },
     {
       "exchange_id": "us-nyse",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.initial_margin_practice",
+      "label_zh": "初始保证金制度",
+      "label_en": "Initial Margin",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.maintenance_margin_practice",
+      "label_zh": "维持保证金制度",
+      "label_en": "Maintenance Margin",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.mark_to_market_frequency",
+      "label_zh": "盯市频率",
+      "label_en": "Mark-to-market Frequency",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.delivery_method",
+      "label_zh": "交割方式",
+      "label_en": "Delivery Method",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "clearing",
+      "chapter_label_zh": "清算、结算与交割",
+      "chapter_label_en": "Clearing, Settlement & Delivery",
+      "field_path": "derivatives.last_trading_day_rule",
+      "label_zh": "最后交易日规则",
+      "label_en": "Last Trading Day Rule",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
       "chapter": "participants",
       "chapter_label_zh": "市场参与者",
       "chapter_label_en": "Market Participants",
@@ -22641,7 +23565,7 @@
       "label_zh": "会员体系",
       "label_en": "Membership Structure",
       "volatility": "stable",
-      "verified": "2026-08-13",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {

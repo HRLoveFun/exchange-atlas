@@ -551,7 +551,7 @@
             "accessed": "2026-08-12"
           }
         ],
-        "verified": "2026-08-12",
+        "verified": "2026-09-05",
         "confidence": "medium",
         "enum": null,
         "spec": null,
@@ -1102,7 +1102,7 @@
                 "accessed": "2026-09-05"
               }
             ],
-            "quote": "9:15至9:25为开盘集合竞价时间，14:57-15:00为收盘集合竞价时间，其余时段为连续竞价时间",
+            "quote": "期权合约的交易时间为每个交易日9:15至9:25、9:30至11:30、13：00至15:00。其中，9:15至9:25为开盘集合竞价时间，14:57-15:00为收盘集合竞价时间，其余时段为连续竞价时间，本规则另有规定的除外。",
             "confidence": "high",
             "verified": "2026-09-05",
             "enum": null,
@@ -1235,7 +1235,7 @@
               "fok",
               "ioc"
             ],
-            "note": "申报指令共 5 类：普通限价、市价剩余转限价、市价剩余撤销、全额即时限价、全额即时市价（全额即时类对应 FOK 语义、市价剩余撤销对应 IOC 语义，为本所规则语义的归纳）；申报数量 1 张或其整数倍，限价单笔最大 10 张、市价单笔最大 5 张；集合竞价阶段仅接受普通限价申报及撤单申报（不接受撤单申报的时段除外）；所列类型中未见止损/冰山/隐藏类"
+            "note": "申报指令共 5 类：普通限价、市价剩余转限价、市价剩余撤销、全额即时限价、全额即时市价（全额即时类对应 FOK 语义、市价剩余撤销对应 IOC 语义，为本所规则语义的归纳）；第五十五条另有兜底项「（六）本所规定的其他申报类型」；申报数量 1 张或其整数倍，限价单笔最大 10 张、市价单笔最大 5 张；集合竞价阶段仅接受普通限价申报及撤单申报（不接受撤单申报的时段除外）；所列类型中未见止损/冰山/隐藏类"
           },
           "zh": "买卖类型：买入开仓、买入平仓、卖出开仓、卖出平仓、备兑开仓、备兑平仓等；委托类型分限价与市价，本所接受的申报指令为普通限价申报、市价剩余转限价申报、市价剩余撤销申报、全额即时限价申报、全额即时市价申报五类；申报数量为1张或其整数倍，限价申报的单笔申报最大数量为10张，市价申报的单笔申报最大数量为5张",
           "en": "Trading types: buy-to-open, buy-to-close, sell-to-open, sell-to-close, covered-call-open and covered-call-close; orders are either limit or market orders, with five accepted instruction types — ordinary limit, market-with-remainder-to-limit, market-with-remainder-cancelled, fill-or-kill limit, and fill-or-kill market orders; order size is 1 contract or a multiple thereof, capped at 10 contracts per limit order and 5 per market order",
@@ -1462,8 +1462,8 @@
           "detail": null
         },
         "margin_practice_note": {
-          "zh": "保证金分为结算准备金与交易保证金（交易保证金再分开仓保证金、维持保证金），以现金或经上交所及中国结算认可的证券交纳，实行分级收取（期权经营机构向客户、中国结算向结算参与人、结算参与人向委托其结算的期权经营机构收取，下级收取标准不得低于上级标准）。公式按合约标的两套参数：股票标的——认购期权义务仓开仓保证金=[合约前结算价+Max(21%×合约标的前收盘价-认购期权虚值，10%×合约标的前收盘价)]×合约单位，认沽=Min{合约前结算价+Max(19%×合约标的前收盘价-认沽期权虚值，10%×行权价)，行权价}×合约单位；ETF标的（本所现行全部品种）——认购=[合约前结算价+Max(12%×合约标的前收盘价-认购期权虚值，7%×合约标的前收盘价)]×合约单位，认沽=Min[合约前结算价+Max(12%×合约标的前收盘价-认沽期权虚值，7%×行权价)，行权价]×合约单位；虚值=Max(行权价-合约标的前收盘价，0)（认购）或Max(合约标的前收盘价-行权价，0)（认沽）；维持保证金公式同构，仅将「前收盘价/前结算价」替换为「收盘价/结算价」。认购期权备兑开仓经中国结算日终交割锁定后不再收取维持保证金。另设组合策略保证金机制（按组合策略对应标准收取，构建/解除申报时段为交易日9:30-11:30、13:00-15:15），以及结算准备金小于零不得开仓、持仓超限与保证金不足的强行平仓机制、ETF标的限开仓机制（详见 clearing.derivatives 与《风险控制办法》）",
-          "en": "Margin comprises settlement reserve and trading margin (the latter split into opening margin and maintenance margin), payable in cash or securities recognized by SSE/ChinaClear, and collected in a tiered structure (options firms from clients, ChinaClear from clearing participants, clearing participants from the options firms clearing through them — each tier no lower than the tier above). Two parameter sets by underlying: stock-underlying — short-call opening margin = [prior settlement price + Max(21%×underlying prior close − call OTM value, 10%×underlying prior close)] × contract multiplier, short-put = Min{prior settlement price + Max(19%×underlying prior close − put OTM value, 10%×strike), strike} × contract multiplier; ETF-underlying (all currently listed products) — the same structure with 12%/7% parameters; OTM value = Max(strike − underlying prior close, 0) for calls or Max(underlying prior close − strike, 0) for puts; maintenance margin mirrors these formulas with the current close/settlement price substituted. Covered call positions, once delivery-locked by ChinaClear at end of day, are exempt from maintenance margin. A portfolio-strategy margining scheme also exists (margin at the strategy standard; construction/unwind windows 9:30-11:30 and 13:00-15:15), alongside no-open-when-reserve-is-negative rules, forced liquidation, and opening restrictions on ETF-underlying contracts (see clearing.derivatives and the Risk Control Measures)",
+          "zh": "保证金分为结算准备金与交易保证金（交易保证金再分开仓保证金、维持保证金），以现金或经上交所及中国结算认可的证券交纳，实行分级收取（期权经营机构向客户、中国结算向结算参与人、结算参与人向委托其结算的期权经营机构收取，下级收取标准不得低于上级标准）。公式按合约标的两套参数：股票标的——认购期权义务仓开仓保证金=[合约前结算价+Max(21%×合约标的前收盘价-认购期权虚值，10%×合约标的前收盘价)]×合约单位，认沽=Min{合约前结算价+Max(19%×合约标的前收盘价-认沽期权虚值，10%×行权价)，行权价}×合约单位；ETF标的（本所现行全部品种）——认购=[合约前结算价+Max(12%×合约标的前收盘价-认购期权虚值，7%×合约标的前收盘价)]×合约单位，认沽=Min[合约前结算价+Max(12%×合约标的前收盘价-认沽期权虚值，7%×行权价)，行权价]×合约单位；虚值=Max(行权价-合约标的前收盘价，0)（认购）或Max(合约标的前收盘价-行权价，0)（认沽）；维持保证金公式同构，仅将「前收盘价/前结算价」替换为「收盘价/结算价」。认购期权备兑开仓经中国结算日终交割锁定后不再收取维持保证金。另设组合策略保证金机制（按组合策略对应标准收取）以及结算准备金小于零不得开仓、持仓超限与保证金不足的强行平仓机制、ETF标的限开仓机制（详见 clearing.derivatives 与《风险控制办法》）",
+          "en": "Margin comprises settlement reserve and trading margin (the latter split into opening margin and maintenance margin), payable in cash or securities recognized by SSE/ChinaClear, and collected in a tiered structure (options firms from clients, ChinaClear from clearing participants, clearing participants from the options firms clearing through them — each tier no lower than the tier above). Two parameter sets by underlying: stock-underlying — short-call opening margin = [prior settlement price + Max(21%×underlying prior close − call OTM value, 10%×underlying prior close)] × contract multiplier, short-put = Min{prior settlement price + Max(19%×underlying prior close − put OTM value, 10%×strike), strike} × contract multiplier; ETF-underlying (all currently listed products) — the same structure with 12%/7% parameters; OTM value = Max(strike − underlying prior close, 0) for calls or Max(underlying prior close − strike, 0) for puts; maintenance margin mirrors these formulas with the current close/settlement price substituted. Covered call positions, once delivery-locked by ChinaClear at end of day, are exempt from maintenance margin. A portfolio-strategy margining scheme also exists (margin at the strategy standard), alongside no-open-when-reserve-is-negative rules, forced liquidation, and opening restrictions on ETF-underlying contracts (see clearing.derivatives and the Risk Control Measures)",
           "sources": [
             {
               "title": "上海证券交易所、中国证券登记结算有限责任公司股票期权试点风险控制管理办法 第十四条、第十五条",
@@ -1939,11 +1939,96 @@
         "enum": null
       },
       "derivatives": {
-        "initial_margin_practice": null,
-        "maintenance_margin_practice": null,
-        "mark_to_market_frequency": null,
-        "delivery_method": null,
-        "last_trading_day_rule": null
+        "initial_margin_practice": {
+          "zh": "期权保证金实行分级收取：中国结算向结算参与人收取、结算参与人向委托其结算的期权经营机构收取、期权经营机构向客户收取，下级收取标准不得低于上级标准；保证金以现金或经上交所及中国结算认可的证券交纳，开仓保证金按公式计算（本所现行全部品种为 ETF 标的，公式与参数见 market_structure.derivatives.margin_practice_note）；上交所对每笔卖出开仓申报实时计算开仓保证金额度，并根据结算参与人的保证金日间余额数据对申报进行校验",
+          "en": "Option margin is collected in a tiered structure: ChinaClear collects from clearing participants, clearing participants from the options firms that clear through them, and options firms from clients — each tier's requirement no lower than the tier above; margin is payable in cash or securities recognized by SSE/ChinaClear, and opening margin is formula-based (all currently listed products are ETF-underlying — formulas and parameters in market_structure.derivatives.margin_practice_note); SSE computes the opening-margin requirement for every sell-to-open order in real time and validates the order against the clearing participant's intraday margin balance",
+          "detail": "本字段是 clearing（清算/CCP）层面对同一保证金制度的视角，与 market_structure.derivatives.margin_practice_note（交易端保证金要求）描述同一套规则但视角不同，不合并，见 PROJECT/DECISIONS.md [ADR-030]。卖出开仓实时校验为《期权交易规则》第一百二十一条与《风险控制办法》第十二、十三条（已核实，未入 quote）。",
+          "sources": [
+            {
+              "title": "上海证券交易所、中国证券登记结算有限责任公司股票期权试点风险控制管理办法 第五条、第六条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781451/files/f993fec80e204f9fb013813f2b0e0c00.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "保证金按照下列要求，进行分级收取：（一）期权经营机构向客户收取；（二）中国结算向结算参与人收取。结算参与人应当向委托其结算的期权经营机构收取保证金。／期权经营机构向客户、结算参与人向委托其结算的期权经营机构收取保证金的标准，不得低于中国结算向结算参与人收取保证金的标准。委托结算参与人结算的期权经营机构向客户收取保证金的标准，不得低于结算参与人向其收取保证金的标准。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null
+        },
+        "maintenance_margin_practice": {
+          "zh": "每个交易日日终，中国结算按上交所公布的合约结算价格计算并收取结算参与人应交纳的维持保证金；结算参与人结算准备金最低余额应当达到中国结算的要求（以自有资金交纳），结算准备金小于零、或开盘时结算准备金大于零但低于最低余额的，不得进行买入开仓、卖出开仓；维持保证金计算公式与开仓保证金同构，仅将「前收盘价/前结算价」替换为「收盘价/结算价」（详细公式见 market_structure.derivatives.margin_practice_note）",
+          "en": "At the end of every trading day, ChinaClear calculates and collects the maintenance margin owed by each clearing participant, based on the contract settlement price published by SSE; a participant's minimum settlement-reserve balance must meet ChinaClear's requirement (funded with the participant's own capital), and a participant whose settlement reserve is negative — or positive but below the minimum at the open — may not open new long or short option positions; the maintenance-margin formula mirrors the opening-margin formula, substituting the prior close/prior settlement price with the current close/settlement price (formulas in market_structure.derivatives.margin_practice_note)",
+          "detail": "同 initial_margin_practice，本字段是清算/CCP 层面视角，与市场结构章节的交易端保证金说明不合并，见 [ADR-030]。",
+          "sources": [
+            {
+              "title": "上海证券交易所、中国证券登记结算有限责任公司股票期权试点风险控制管理办法 第十六条、第十七条、第十九条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781451/files/f993fec80e204f9fb013813f2b0e0c00.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "结算参与人结算准备金最低余额应当达到中国结算的要求。结算准备金最低余额由结算参与人以自有资金交纳。结算参与人结算准备金小于零，或者开盘时结算准备金大于零但低于结算准备金最低余额的，不得进行买入开仓、卖出开仓。／每个交易日日终，中国结算按上交所公布的合约结算价格计算并收取结算参与人应当交纳的维持保证金。合约结算价格计算方式由上交所及中国结算另行规定。／（一）认购期权义务仓维持保证金＝[合约结算价+Max（12%×合约标的收盘价-认购期权虚值，7%×合约标的收盘价）]×合约单位。（二）认沽期权义务仓维持保证金＝Min[合约结算价 +Max(12%×合约标的收盘价-认沽期权虚值，7%×行权价)，行权价]×合约单位。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null
+        },
+        "mark_to_market_frequency": {
+          "zh": "逐日盯市：每个交易日日终由中国结算按上交所公布的合约结算价格核算并收取结算参与人应交纳的维持保证金；合约结算价格为该合约当日收盘集合竞价的成交价格（未形成成交价或明显不合理时由本所另行计算），最后交易日实值合约按合约标的当日收盘价格与行权价格计算结算价格，虚值/平值合约结算价格为0",
+          "en": "Mark-to-market is performed daily: at the end of every trading day, ChinaClear calculates and collects the maintenance margin owed by clearing participants based on the contract settlement price published by SSE; the settlement price is that day's closing call auction traded price (computed separately by the Exchange if no price forms or it is evidently unreasonable), while on the last trading day in-the-money contracts settle from the underlying's closing price and the strike, and out-of-the-money/at-the-money contracts settle at 0",
+          "sources": [
+            {
+              "title": "上海证券交易所、中国证券登记结算有限责任公司股票期权试点风险控制管理办法 第十七条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781451/files/f993fec80e204f9fb013813f2b0e0c00.docx",
+              "accessed": "2026-09-05"
+            },
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第七十二条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "每个交易日日终，中国结算按上交所公布的合约结算价格计算并收取结算参与人应当交纳的维持保证金。合约结算价格计算方式由上交所及中国结算另行规定。／期权合约的结算价格为该合约当日收盘集合竞价的成交价格。当日收盘集合竞价未形成成交价格或者成交价格明显不合理的，由本所另行计算该合约的结算价格，具体事宜由本所及中国结算另行规定。／期权合约最后交易日为实值合约的，本所根据合约标的当日收盘价格和该合约行权价格，计算该合约的结算价格；期权合约最后交易日为虚值或者平值合约的，结算价格为0。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null,
+          "detail": null
+        },
+        "delivery_method": {
+          "enum": "physical",
+          "zh": "股票期权行权默认以给付合约标的的方式交割（实物交割），行权交收日为行权日的次一交易日；仅在列明情形（行权日合约标的全天停牌/临时停牌直至收盘致实值认沽期权行权申报因合约标的不足未通过有效性检查、交收日合约标的全天停牌/临时停牌直至收盘致行权交割中应交付合约标的不足、出现交易异常情况或本所认为有必要的情形）按本所公布的行权现金结算价格以现金结算，其余应交付标的不足部分按中国结算公布的价格以现金结算；行权现金结算价格：股票标的为最近一个交易日实际交易时段最后30分钟内的时间加权平均价，ETF标的为前一交易日单位净值×（1+对应指数当日涨跌幅）",
+          "en": "Option exercise settles by default through delivery of the underlying securities (physical delivery), with the exercise settlement date the trading day after the exercise day; only in enumerated situations — an in-the-money put's exercise instruction failing validation due to a shortage of the underlying when the underlying is suspended all day until close on the exercise day, a delivery shortfall caused by a full-day underlying suspension on the settlement day, or abnormal situations deemed necessary by the Exchange — is settlement made in cash at the exercise cash settlement price published by SSE, with any remaining shortfall settled in cash at the price published by ChinaClear; the exercise cash settlement price is the time-weighted average price of the last 30 minutes of the underlying's most recent trading day for stock underlyings, or the ETF's prior-day NAV × (1 + the tracked index's daily move) for ETF underlyings",
+          "detail": "「实物交割为默认」系对规则结构的归纳：第一百零三条以「期权合约行权以给付合约标的的方式进行」表述默认交割义务，仅第一百一十条列明情形以现金结算（与 cn-szse 同款归纳）。行权现金结算价格公式为第一百一十一条（股票标的）与第一百一十二条（ETF标的，原文公式中乘号为字母「X」——quote 逐字保留）。",
+          "sources": [
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第一百零三条、第一百零九至一百一十二条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "期权合约行权以给付合约标的的方式进行，本规则第一百一十条规定的情形除外。／期权合约行权交收日为行权日的次一交易日。／期权合约行权中出现以下情形之一的，对相应合约按照本所公布的行权现金结算价格，以现金结算方式进行行权交割：……除前款规定情形之外，对于行权交割中应交付的合约标的不足部分，按照中国结算公布的价格，以现金结算方式进行行权交割。／期权合约标的为股票的，行权现金结算价格为合约标的在最近一个交易日实际交易时段最后30分钟内的时间加权平均价。／行权现金结算价格=交易所交易基金前一交易日的单位净值X（1+对应指数当日涨跌幅）。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "spec": null
+        },
+        "last_trading_day_rule": {
+          "zh": "期权合约到期日为到期月份的第四个星期三（该日为国家法定节假日、本所休市日的顺延至下一个交易日）；最后交易日与行权日同到期日，到期日提前或顺延时随之调整；合约最后交易日发生全天停牌或盘中临时停牌的，行权申报照常进行，最后交易日、到期日、行权日不作顺延；另有专门顺延情形：最后交易日处于合约标的配股股权登记日与配股缴款日后复牌首日之间且标的停牌的顺延至复牌首日、标的将在最后交易日次一交易日除权除息的顺延至除权除息日、标的被暂停上市或终止上市的提前至其实施前最后交易日的前一交易日、本所暂停交易或临时停市当日未恢复的顺延至恢复交易首日、本所对合约当日采取取消交易措施的顺延至次一交易日",
+          "en": "An option contract's expiration date is the fourth Wednesday of the expiration month (deferred to the next trading day if a statutory holiday or an SSE non-trading day); the last trading day and exercise day coincide with expiration and move with it; if the contract is suspended all day or intraday on its last trading day, exercise instructions proceed as normal and the last trading day/expiration/exercise day are NOT deferred; dedicated deferral rules instead apply where the underlying's suspension spans a rights-issue registration/payment window (deferred to the resumption day), where the underlying goes ex-rights/ex-dividend the next day (deferred to that day), where the underlying is suspended from or delisted from listing (advanced to the trading day before), where an Exchange suspension/halt does not lift same-day (deferred to the resumption day), or where the Exchange cancels the contract's trades that day (deferred to the next trading day)",
+          "sources": [
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第九条、第一百零七条、第一百零八条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "期权合约的到期日为到期月份的第四个星期三，该日为国家法定节假日、本所休市日的，顺延至下一个交易日。期权合约的最后交易日和行权日，同其到期日；到期日提前或者顺延的，最后交易日和行权日随之调整。本规则另有规定的除外。／期权合约最后交易日，期权合约发生全天停牌或者盘中临时停牌的，期权合约的行权申报照常进行，期权合约最后交易日、到期日、行权日不作顺延。／（一）期权合约最后交易日处于合约标的配股股权登记日与配股缴款日后的复牌首日之间，且合约标的停牌的，期权合约最后交易日顺延至合约标的配股缴款日后的复牌首日，期权合约于当日到期并进行行权。（二）合约标的将在期权合约最后交易日的次一交易日进行除权、除息的，期权合约最后交易日顺延至合约标的除权、除息日，期权合约于当日到期并进行行权。（三）因合约标的被暂停上市、终止上市，该合约品种所有未平仓合约提前至合约标的被实施暂停或者终止上市前的最后交易日的前一交易日到期并行权。（四）期权合约最后交易日，本所对该合约采取暂时停止交易或者临时停市措施，且当日未恢复交易的，期权合约最后交易日顺延至期权合约恢复交易首日，期权合约于当日到期并进行行权。（五）期权合约最后交易日，本所对该合约当日交易采取取消交易措施的，期权合约最后交易日顺延至次一交易日，期权合约于当日到期并进行行权。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null,
+          "detail": null
+        }
       }
     },
     "participants": {

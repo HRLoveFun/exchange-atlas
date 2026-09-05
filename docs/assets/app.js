@@ -242,7 +242,7 @@
     s = String(s == null ? "" : s);
     return s.length > max ? s.slice(0, max - 1) + "…" : s;
   }
-  // 折行预算（[ADR-PENDING-llwrap-mixed-wrap]）：CJK 表意字可在任意字间断，拉丁词 /
+  // 折行预算（[ADR-093]）：CJK 表意字可在任意字间断，拉丁词 /
   // 数字 / 连字符串作为整体 token 不从中间切。取代原「含任一 CJK 字符 → 整串按 per
   // 逐字硬切」的分支——那会把中英混排里的 `Recognis|ed`、`CMN 4.37|3` 从词中截断
   // （[ADR-061] 已知局限④，ll/rm/pt/rf 四模块共用此函数）。
