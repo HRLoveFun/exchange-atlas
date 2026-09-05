@@ -1,4 +1,6 @@
 # 日本交易所集团 / 东京证券交易所 Japan Exchange Group (JPX / TSE) `jp-jpx`
+- `boj.or.jp` | 官方（货币当局——日本银行 BOJ；外汇干预由财务大臣行使、BOJ 作为代理人执行；2026-09-05 新增登记，[ADR-079] 风险旗标子棒） | en / ja | curl + 常规 UA 200，静态页正文可 grep | 日元汇率制度（fx_risk_note 出处）
+  - Outline of the Bank of Japan's Foreign Exchange Intervention Operations（BOJ 官方说明：1973 年 2 月起浮动汇率制 + 外汇法第 7 条第 3 款财务大臣权限 + BOJ 代理执行）: https://www.boj.or.jp/en/intl_finance/outline/expkainyu.htm（HTTP 200，44KB）
 - `jpx.co.jp` | 官方 | ja / en（英文版内容滞后，部分细则页无对应英文版） | **WebFetch 对内国株页面返回 403（反爬）**；curl + 常规浏览器 UA（`Mozilla/5.0 ... Chrome/131`）可过，HTTP 200，全程未见限流（比 english.sse.com.cn 好抓得多，不需要加延时）| ⚠️ v0.2 按 ADR-013「无中选英」，本节以 `/english/` 路径下的英文版为主要来源，日文版（`/equities/...`）只在没有对应英文页时才用。英文版每页均带免责声明"This translation may be used for reference purposes only... the Japanese version shall prevail"。JPX 集团下辖东京证券交易所（TSE）、大阪交易所（OSE，衍生品）、东京商品交易所（TOCOM）、Japan Exchange Regulation（自律监管）四个法人实体（`group_id: jpx-group`），本文件只记录 TSE 现货股票市场
   - 制限値幅（值幅制限档位表，日文版）: https://www.jpx.co.jp/equities/trading/domestic/06.html（HTTP 200，35KB；curl 提取得到 37 行档位，如 `100円未満→上下30円`……`50,000,000円以上→10,000,000円`）
   - 用語集: https://www.jpx.co.jp/glossary/

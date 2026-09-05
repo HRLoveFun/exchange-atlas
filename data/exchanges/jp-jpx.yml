@@ -1179,9 +1179,15 @@ risks:
     confidence: low
 
   fx_risk_note:
-    zh: "日元汇率波动相对自由浮动，无资本管制；对以日元计价资产的境外投资者而言，汇率风险来自其本币兑日元波动"
-    en: "JPY floats freely with no capital controls; for foreign investors holding JPY-denominated assets, FX risk arises from their home currency's fluctuation against the JPY"
-    confidence: low
+    zh: "日元自 1973 年 2 月起实行浮动汇率制度；外汇干预依法由财务大臣行使（外汇及外国贸易法第 7 条第 3 款：「财务大臣应通过买卖外汇支付手段等必要措施稳定日元汇率」），日本银行作为财务省的代理人按需执行（BOJ 官方说明，见 sources）。对非日元投资者：东京证券交易所产品以日元计价结算，承担日元兑投资者本币的汇率风险"
+    en: "Japan introduced a floating exchange rate system in February 1973; FX intervention is legally exercised by the Minister of Finance (Article 7, Section 3 of the Foreign Exchange and Foreign Trade Act: the Minister shall endeavor to stabilize the exchange rate of Japanese currency by taking necessary measures such as buying and selling of foreign means of payment) and executed by the Bank of Japan as the Ministry of Finance's agent, as needed (BOJ outline, see sources). For non-JPY investors: TSE-listed securities are denominated and settled in JPY, carrying JPY exchange-rate risk against the investor's currency"
+    quote: "Since the introduction of a floating exchange rate system in February 1973, the Japanese economy has experienced large fluctuations in foreign exchange rates."
+    sources:
+      - title: "Outline of the Bank of Japan's Foreign Exchange Intervention Operations（BOJ 官方说明，浮动汇率制沿革与干预权限/执行分工）"
+        url: https://www.boj.or.jp/en/intl_finance/outline/expkainyu.htm
+        accessed: 2026-09-05
+    confidence: high
+    verified: 2026-09-05
 
   political_risk_note:
     zh: "日本自身作为七国集团成员国，未发现制裁/资本冻结类地缘政治风险的官方信号；本次抓取范围内识别到的、与「政治」相关性最强的实际制度动向是《外汇及外国贸易法》（FEFTA）近年针对半导体、国防装备、网络安全等「核心业务领域」持续扩大国家安全审查范围（见regulation.capital_controls/foreign_ownership_limit）——即政治风险主要体现为对外资并购上市公司「核心业务领域」标的的国家安全审查趋严，而非日本国内政局不稳定或对既有境外持仓的征收/冻结风险"
