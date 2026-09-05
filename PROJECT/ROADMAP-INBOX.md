@@ -13,5 +13,5 @@
 
 ## 待折叠
 
-- 2026-09-05 · 架构优化任务B完成：新增 `tools/data_files.py` 收敛4处 `data/exchanges/*.yml` 遍历样板，`make build` 全绿零 diff（[ADR-PENDING-tools-dedup]）
-- 2026-09-05 · 架构优化任务C完成：DECISIONS.md 归档阈值定案（超3500行触发），validate.py 加非阻断 warn（[ADR-PENDING-decisions-archive-threshold]）
+- 2026-09-05 · 架构优化任务B完成：新增 `tools/data_files.py` 收敛4处 `data/exchanges/*.yml` 遍历样板，`make build` 全绿零 diff（[ADR-083]）
+- 2026-09-05 · 架构优化任务C完成：DECISIONS.md 归档阈值定案（超3500行触发），validate.py 加非阻断 warn（[ADR-084]）

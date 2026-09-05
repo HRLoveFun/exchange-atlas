@@ -291,7 +291,7 @@ case("deriv-spec-shape 不误伤：纯顶层形状 / 非 derivatives 前缀不�
 
 
 # ══════════════════════════════════════════════════════════════
-# [ADR-PENDING-decisions-archive-threshold] DECISIONS.md 归档阈值提醒：
+# [ADR-084] DECISIONS.md 归档阈值提醒：
 #   validate.decisions_length_violations(text, maxlines=...)
 #   —— 单文件行数超阈值时 warn（不 err），提醒该拆 DECISIONS-ARCHIVE.md 了。
 # ══════════════════════════════════════════════════════════════
