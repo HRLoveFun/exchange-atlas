@@ -1737,26 +1737,21 @@
     },
     "risks": {
       "fx_risk_note": {
-        "zh": "欧元区无资本管制，欧元自由浮动；因产品覆盖多币种计价（见overview.trading_currency），交易该所衍生品的汇率风险因具体产品计价货币而异，不能一概而论",
-        "en": "No capital controls in the Eurozone; the euro floats freely. Because products are denominated in multiple currencies (see overview.trading_currency), FX risk varies by the specific product's denomination currency rather than being uniform",
-        "confidence": "low",
+        "zh": "欧元汇率在全球外汇市场上随行就市、不断变动，且欧洲央行明确汇率不是其政策目标，不试图通过货币政策操作影响汇率（ECB 官方 explainer，见 sources）。对非欧元投资者：欧元计价合约承担欧元兑投资者本币的汇率风险；本所产品覆盖多币种计价，风险随具体产品计价货币而定（见 overview.trading_currency）；区内资金自由流动属单一市场制度安排，见 capital_controls",
+        "en": "The euro exchange rate changes constantly on global foreign exchange markets, and the ECB states explicitly that the exchange rate is not a policy target — it does not try to influence the exchange rate with its monetary policy operations (official ECB explainer, see sources). For non-euro investors: euro-denominated contracts carry EUR exchange-rate risk against the investor's currency; products here are denominated in multiple currencies, so risk follows each product's denomination currency (see overview.trading_currency); free movement of capital within the Single Market is covered in capital_controls",
+        "quote": "The exchange rate is not a policy target of the ECB. This means that the ECB does not try to influence the exchange rate with its monetary policy operations.",
         "sources": [
           {
-            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
-            "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
-            "accessed": "2026-08-27"
-          },
-          {
-            "title": "Eurex Clearing — Licensing & supervision（官网）",
-            "url": "https://www.eurex.com/ec-en/find/about-us/licensing-supervision",
-            "accessed": "2026-08-27"
+            "title": "What is the role of exchange rates?（ECB 官方 explainer，汇率非政策目标的定性表述）",
+            "url": "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/role_of_exchange_rates.en.html",
+            "accessed": "2026-09-05"
           }
         ],
-        "verified": "2026-08-27",
+        "confidence": "high",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null
+        "detail": null
       },
       "political_risk_note": {
         "zh": "德国/欧盟政治与法律环境总体稳定；主要地缘与政策风险来自欧盟/美国监管分化（如 EMIR 3.0 对第三国 CCP 的敞口限制、潜在欧盟金融业交易税）、制裁机制（如对俄制裁影响特定合约）以及欧元区能源/地缘冲击。Eurex Clearing 作为受 BaFin/ESMA 监管的 CCP，其稳健性亦受欧盟监管政策演变影响。",
@@ -1776,26 +1771,21 @@
         "quote": null
       },
       "liquidity_risk_note": {
-        "zh": "流动性风险集中于产品：Eurex 是全球流动性最高的欧洲衍生品场所之一，旗舰指数/利率衍生品（EURO STOXX 50、DAX、Bund 等）深度极佳；但长尾与部分商品/单一股票合约流动性较浅，极端行情下冲击成本上升。做市商制度在一定程度上缓释该风险。",
-        "en": "Liquidity risk is product-concentrated: Eurex is among the most liquid venues for European derivatives globally, with very deep flagship index/rate contracts (EURO STOXX 50, DAX, Bund etc.); but tail and some commodity/single-stock contracts are thinner, with higher impact cost under stress. The market-maker scheme partly mitigates this.",
-        "confidence": "medium",
+        "zh": "流动性风险集中于产品：旗舰指数/利率衍生品（EURO STOXX 50、DAX、Bund 等）为深度最佳的长尾市场板块，但长尾与部分商品/单一股票合约流动性较浅，极端行情下冲击成本上升。流动性供给的制度锚是 Eurex 交易规则（Börsenordnung）第九章的受监管做市商制度：受监管做市商的交易所交易员须在月均意义上于至少一份衍生品上、在每日交易时段的 50% 时间内持续输入约束性报价，且须满足管理董事会设定的最大价差与报价量要求（逐字原文见 quote，Börsenordnung § 49）；定价与分层含义属分析性归纳",
+        "en": "Liquidity risk is product-concentrated: flagship index/rate contracts (EURO STOXX 50, DAX, Bund etc.) are the deepest, while tail and some commodity/single-stock contracts are thinner, with higher impact cost under stress. The institutional anchor of liquidity provision is the Regulated Market Maker regime in Chapter IX of the Eurex Exchange Rules (Börsenordnung): exchange traders acting for a Regulated Market Maker must continuously enter binding quotes in at least one derivative and during 50% of the daily Trading Hours on a monthly average, meeting maximum spread and quoting-volume requirements set by the Management Board (verbatim in quote, Börsenordnung § 49); the pricing/stratification reading is an analytical characterisation",
+        "quote": "In Order Book trading, the Exchange Traders acting on behalf of the Regulated Market Maker are required to continuously enter binding Quotes in at least one Derivative and during 50% of the daily Trading Hours on a monthly average.",
         "sources": [
           {
-            "title": "Exchange Rules of Eurex Deutschland（官网英文版PDF）",
+            "title": "Börsenordnung of Eurex Deutschland（Eurex 交易规则 PDF，2026-07-07 版，§ 49 Quoting Obligations for Regulated Market Makers）",
             "url": "https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf",
-            "accessed": "2026-08-27"
-          },
-          {
-            "title": "Eurex Clearing — Licensing & supervision（官网）",
-            "url": "https://www.eurex.com/ec-en/find/about-us/licensing-supervision",
-            "accessed": "2026-08-27"
+            "accessed": "2026-09-05"
           }
         ],
-        "verified": "2026-08-27",
+        "confidence": "medium",
+        "detail": "原字段曾靠 risks._meta.sources 继承蒙混（[ADR-074] 复核者点名的静默继承漏洞，[ADR-079] 不变式的首批命中项之一）：原 _meta 两条来源（Börsenordnung + licensing/supervision 页）均不直接支撑流动性分层判断，本次改以 Börsenordnung § 49 做市报价义务作为流动性供给的制度锚（字段级 sources），旗舰/长尾分层与冲击成本判断保持分析性定性。",
+        "verified": "2026-09-05",
         "enum": null,
-        "spec": null,
-        "detail": null,
-        "quote": null
+        "spec": null
       },
       "regulatory_change_risk_note": {
         "zh": "监管变更风险显著：作为欧盟 CCP，Eurex Clearing 持续受 EMIR 框架演进影响，最典型的是 EMIR 3.0（Regulation (EU) 2024/2987）对第三国 CCP 敞口与风险共担规则的修订；此外 MiFID II、欧洲市场基础设施规则与潜在欧盟金融业交易税均可能改变成本与参与结构。交易所端规则也经管理董事会/Eurex 规则定期修订。",

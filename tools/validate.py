@@ -51,6 +51,14 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
       `- ` 行不得超过 200 字——白纸黑字的「一行一条一句话」约定加机器上限，挡它
       静默膨胀成第二份详版（只限行长度，不限堆积条数：堆积是协调者未及时折叠所致，
       拿它挡后台任务自己的 make build 会误伤错误的人）
+  19. DECISIONS.md 归档阈值提醒（[ADR-084]，warn 不阻断）
+  20. 第 12 章 `*_note` 来源不变式（[ADR-079]）：`risks` 章 5 个 `*_note` 字段的
+      `confidence: medium|high` 必须有**字段级** `sources`、不接受章节 `_meta.sources`
+      继承——依据是 [ADR-066] 轴 3 已把该章 `confidence` 做成风险旗标面板的一等视觉
+      信号（旗标填充度四态），无据的 `confidence` 会被直接画成错误的旗标。此前
+      `fx_risk_note` 的 `volatility: stable` 使它不受校验 4 约束，18 家零来源停在 `low`
+      而 make check 一路全绿，正是踩在这个缺口上（fr-euronext.fx_risk_note /
+      de-eurex.liquidity_risk_note 靠 `_meta` 继承蒙混是落地时的首批命中项）
   19. stale 复核提醒（[ADR-060] 任务五③）：已填字段超过 volatility 复核阈值、或
       未记 verified 无法判定新鲜度时，以 warning 输出逐字段清单——不阻断构建
       （[ADR-052] 之后构建侧不再有打印「哪些字段超期了」的出口，这里是唯一一处）
@@ -127,6 +135,31 @@ def err(msg):
 
 def warn(msg):
     warnings.append(msg)
+
+
+def risks_note_sources_violations(eid, raw_risks, note_paths):
+    """第 12 章 `*_note` 来源不变式（[ADR-079]）。返回违规消息列表（空 = 合法）。
+    判定纯逻辑、无 I/O，tools/selfcheck.py 喂合成输入锁行为：
+
+      `risks` 章 5 个 `*_note` 字段（fx_risk_note / political_risk_note /
+      liquidity_risk_note / regulatory_change_risk_note / enforcement_note）只要填了
+      zh 且 `confidence: medium|high`，就必须有**字段级** `sources`——且检查跑在
+      **未展开的 raw 数据**上，章节 `_meta.sources` 的继承不算数（[ADR-074] 复核者
+      点名的 expand_field 静默继承漏洞）。依据：[ADR-066] 轴 3 已把该章 confidence
+      做成风险旗标面板的一等视觉信号（旗标填充度 = 取证程度），无据的 confidence
+      会被直接画成错误的旗标。
+    """
+    out = []
+    for path in note_paths:
+        v = sync.get_by_path(raw_risks or {}, path)
+        if (isinstance(v, dict) and v.get("zh")
+                and v.get("confidence") in ("medium", "high")
+                and not v.get("sources")):
+            out.append(f"{eid}: risks.{'.'.join(path)}: confidence={v['confidence']} "
+                       f"但没有字段级 sources（第 12 章 `*_note` 不变式，[ADR-079]："
+                       f"confidence 是风险旗标面板一等视觉信号，无据会被画成错误旗标；"
+                       f"不接受章节 _meta.sources 继承）")
+    return out
 
 
 def field_na_violations(loc, fenv, fdef_optional):
@@ -476,8 +509,22 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
     only_spot_chapters = {ch["id"] for ch in taxonomy["chapters"] if ch.get("only_spot")}
     chapter_by_id = {ch["id"]: ch for ch in taxonomy["chapters"]}
 
+    # 第 12 章 `*_note` 不变式（[ADR-079]）的 leaf 路径，从 taxonomy 现算一次
+    risks_ch = chapter_by_id.get("risks")
+    risks_note_paths = []
+    if risks_ch and risks_ch.get("kind") != "list":
+        risks_note_paths = [
+            path for kind, path, _fdef in sync.walk_chapter_fields(risks_ch.get("fields", []))
+            if kind == "leaf"
+        ]
+
     for eid, raw in raw_exchanges.items():
         ex = exchanges_expanded[eid]
+
+        # 第 12 章 5 字段：confidence medium|high 必须有字段级 sources（[ADR-079]）
+        for v in risks_note_sources_violations(eid, raw.get("risks"), risks_note_paths):
+            err(v)
+
         # 5c 文件级反查池：本交易所所有字段的 quote / zh（[ADR-058] 收尾修订）
         verbatim_pool = collect_verbatim_texts(ex)
 

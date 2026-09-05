@@ -2228,14 +2228,16 @@ risks:
     verified: 2026-08-16
     confidence: low
   fx_risk_note:
-    zh: 六个欧元区市场（阿姆斯特丹/布鲁塞尔/都柏林/里斯本/巴黎/米兰）无资本管制，欧元自由浮动；奥斯陆市场以非欧元的挪威克朗（NOK）计价结算，是本所内部唯一存在真实汇率敞口的市场，交易该市场证券对欧元区投资者构成汇率风险，其余六个市场之间无汇率风险
-    en: The six euro-area markets (Amsterdam, Brussels, Dublin, Lisbon, Paris, Milan)
-      have no capital controls and the euro floats freely; the Oslo market is priced
-      and settled in Norwegian Krone (NOK), the only market within the group carrying
-      genuine FX exposure — trading its securities poses FX risk to euro-area investors,
-      while no FX risk exists among the other six markets
-    detail: 属结构性推论（基于各国法定货币这一基础事实），非交易所自设规则，未附强quote。
+    zh: "六个欧元区市场的欧元汇率在全球外汇市场上随行就市、不断变动，且欧洲央行明确汇率不是其政策目标，不试图通过货币政策操作影响汇率（ECB 官方 explainer，见 sources）；对非欧元投资者，欧元计价市场承担欧元兑投资者本币的汇率风险。奥斯陆市场以非欧元的挪威克朗（NOK）计价结算（见 overview.trading_currency / settlement_currency），是本所内部唯一存在真实汇率敞口的市场，交易该市场证券对欧元区投资者构成 NOK 汇率风险，其余六个欧元区市场之间无相互汇率风险"
+    en: "Across the six euro-area markets, the euro exchange rate changes constantly on global foreign exchange markets, and the ECB states explicitly that the exchange rate is not a policy target — it does not try to influence the exchange rate with its monetary policy operations (official ECB explainer, see sources); non-euro investors in these markets carry EUR exchange-rate risk against their own currency. The Oslo market is priced and settled in Norwegian Krone (NOK) (see overview.trading_currency / settlement_currency) — the only market within the group carrying genuine FX exposure for euro-area investors, while no FX risk exists among the six euro-area markets"
+    quote: "The exchange rate is not a policy target of the ECB. This means that the ECB does not try to influence the exchange rate with its monetary policy operations."
+    sources:
+    - title: "What is the role of exchange rates?（ECB 官方 explainer，汇率非政策目标的定性表述——覆盖本所六个欧元区市场）"
+      url: https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/role_of_exchange_rates.en.html
+      accessed: 2026-09-05
+    detail: "NOK 部分以 overview 计价币种字段的来源交叉引用支撑（属计价/结算制度事实），Norges Bank 对克朗汇率制度的定性原文本次未取得（Norges Bank 专题页无制度性表述，见 sources 分片登记注），fx_risk_note 因此按整条取证下限标 medium 而非 high；日后拿到 Norges Bank 定性原文可升 high。原『欧元自由浮动』表述改为以 ECB 一手 explainer 的汇率制度表述作据。"
     confidence: medium
+    verified: 2026-09-05
   political_risk_note:
     zh: 政治/监管风险具「多法域」两面性：一方面，七个市场分属多国监管，单一国家的政策冲击（如法国黄金权力审查、意大利新税）只局部影响，地理分散降低了单一主权风险；另一方面，集团受欧盟层面规则（MiFID
       II、EMIR、T+1 结算改革、MiFIR 修订）的统一牵引，欧盟级监管变动会同时波及全部市场，且跨市场整合（雅典迁移、CSD 整合）本身带来执行风险。
