@@ -857,25 +857,10 @@ market_structure:
           Phase 07:30-10:45、COB 10:45-18:30；阿姆斯特丹市场电力期货Call Phase 07:30-08:00、COB
           08:00-16:00），差异已在 contract_specs_note 字段中说明，此处不重复展开逐时段数字。
     holidays_note:
-      zh: 官网 Trading hours & Holidays 页发布《Holiday Calendar for Euronext's Cash and
-        Derivatives markets》（2026 年度），并明文陈述现货市场与衍生品市场 2026 年全年周一至周五开市、
-        例外休市共用同一张假日表——即衍生品市场节假日安排与现货市场相同的官方正面陈述；各市场差异标注
-        见顶层 holidays_note
-      en: The official Trading hours & Holidays page publishes the "Holiday Calendar for
-        Euronext's Cash and Derivatives markets" (for 2026) and states that the Euronext
-        Cash Markets and the Euronext Derivatives Markets will be open Monday to Friday
-        throughout 2026 except on the listed days — cash and derivatives markets share one
-        exception-holiday table; per-market annotations see the top-level holidays_note
-      detail: 棒 4（[ADR-082]）：此前 [ADR-021] 记「未见官方原文明确声明衍生品与现货节假日相同，不代入猜测」——本次在已缓存的同一官方页正文中找到覆盖两类市场的年度假日日历与明文陈述，属正面依据，按 high 记录。日历表本体（逐假日逐市场矩阵）为 HTML 表格，此处只引用总述句，逐日明细见来源页。
-      sources:
-      - title: Trading hours & Holidays（Euronext官网，页内「Holiday Calendar for Euronext's
-          Cash and Derivatives markets」节）
-        url: https://www.euronext.com/en/trading/trading-hours-holidays
-        accessed: 2026-08-16
-      quote: "The Euronext Cash Markets and the Euronext Derivatives Markets will be open
-        Monday to Friday throughout 2026 except on the following days:"
-      confidence: high
-      verified: 2026-09-05
+      zh: ''
+      confidence: low
+      detail: 未找到衍生品市场专属的节假日安排页面；衍生品市场与现货市场共享同一交易平台Optiq及同一集团法律实体架构，节假日安排大概率与顶层 holidays_note
+        一致，但本次未见官方原文明确声明『衍生品市场节假日安排与现货市场相同』，不代入猜测，如实留空。
     opening_mechanism:
       zh: Call Phase（开盘集合竞价累积阶段）结束后由撮合引擎运行揭示（uncrossing）算法；若开盘时出现价格倒挂（买价高于卖价）或买卖同价（choice
         price），撮合引擎将计算能实现最大成交量的价格并自动执行相应成交，成交价格不劣于原始委托价，未成交的买卖盘继续留在市场

@@ -814,19 +814,9 @@ participants:
     confidence: low
 
   investor_structure:
-    zh: "按持股总市值计，一般法人占57.22%、自然人投资者占22.40%、专业机构占20.38%（其中沪股通投资者占2.50%）；按持股账户数计，自然人投资者占99.74%、专业机构占0.14%、一般法人占0.12%——账户数上自然人占绝对主导，持股市值以一般法人居首"
-    en: "By value of share holdings, general legal persons hold 57.22%, natural-person investors 22.40%, and professional institutions 20.38% (of which northbound Stock Connect investors 2.50%); by number of holding accounts, natural-person investors account for 99.74%, professional institutions 0.14% and general legal persons 0.12% — retail dominates by account count while legal persons hold the largest share by value"
-    detail: |
-      由 low 坐实：出处为《上海证券交易所统计年鉴（2025卷）》「2024年末各类投资者持股情况」表
-      （SHAREHOLDER 投资者章，第766-767页；持股总市值以亿元、持股账户数以万户计），为上交所官方
-      全口径持股结构统计，quote 为表内四行原始数据逐字摘录（沪股通为专业机构项下「其中」项）。
-      交易占比口径（沪市成交额中散户/机构占比）本次未摘引，如需补充见 OPEN-QUESTIONS。
-    sources:
-      - title: "上海证券交易所统计年鉴（2025卷）——2024年末各类投资者持股情况表（官方统计）PDF"
-        url: http://www.sse.com.cn/aboutus/publication/yearly/documents/c/10801255/files/02acb566841a48f0b2ca8941c73f4541.pdf
-        accessed: 2026-09-05
-    quote: "自然人投资者 117395 22.40 4764.68 99.74 一般法人 299867 57.22 5.89 0.12 专业机构 106801 20.38 6.69 0.14 其中: 沪股通 13084 2.50 0.00 0.00"
-    confidence: high
+    zh: ""
+    confidence: low
+    detail: "草稿印象：散户占比历史上较高，机构化程度持续提升——未核实具体数据来源，留空。"
 
   account_opening_requirements:
     zh: "符合法律、行政法规及国务院证券监督管理机构、中国结算有关规定的自然人、法人、合伙企业及其他投资者可申请开立证券账户；账户体系为「一码通账户」统驭下的A股账户、B股账户、股转系统账户、开放式/封闭式基金账户等子账户；投资者须以本人名义开户，不得冒用他人名义或使用虚假证件"
@@ -933,19 +923,9 @@ infrastructure:
     confidence: high
 
   trading_system_name:
-    zh: "上交所核心交易系统的官方名称（技术文档口径）：现生产运行的竞价交易系统简称「竞价」、综合业务系统简称「综业」；其新一代系统为「新一代竞价交易系统」（简称「新竞价」）与「新一代综合业务系统」（简称「新综业」），上交所正发布配套市场参与人技术实施指南（技术开发稿），推进市场参与人配合新竞价和新综业的建设工作"
-    en: "Official names per SSE technical documentation: the currently production-running auction trading system is abbreviated \"Jingjia\" (竞价) and the comprehensive business system \"Zongye\" (综业); their next-generation successors are the \"New-Generation Auction Trading System\" (新竞价) and \"New-Generation Comprehensive Business System\" (新综业), for which SSE has been issuing market-participant technical implementation guides (development drafts) as participants are mobilized to support the build-out"
-    detail: |
-      由 low 坐实：官方技术文档《上海证券交易所新竞价新综业若干技术调整市场参与人技术实施指南1.0版
-      （技术开发稿）》（2026-01-22，官网交易技术支持专区）文档摘要明确两组官方简称；文档同时表明新系统
-      尚处建设推进阶段（「将推进市场参与人配合新竞价和新综业的建设工作」），现网生产系统的官方全称未在
-      官网单独命名页公布——现生产口径的简称「竞价」「综业」即出自同一文档。
-    sources:
-      - title: "上海证券交易所新竞价新综业若干技术调整市场参与人技术实施指南1.0版_20260122（技术开发稿，官方技术文档）PDF"
-        url: https://www.sse.com.cn/services/tradingtech/development/c/10806442/files/763b327fac4a4c688b8ab9211bd48d40.pdf
-        accessed: 2026-09-05
-    quote: "本文档是上海证券交易所（以下简称“本所”）对新一代竞价交易系统（以下简称“新竞价”）和新一代综合业务系统（以下简称“新综业”）相关技术调整的市场参与人技术实施指南。其中针对现生产运行的竞价交易系统和综合业务系统，以下简称“竞价”和“综业”。"
-    confidence: medium
+    zh: ""
+    confidence: low
+    detail: "未核实现行核心交易系统的对外公开名称，留空。"
 
   access_methods:
     zh: "交易接入与数据分发分层：证券公司等会员经交易系统接入本所市场开展经纪业务；行情与数据信息由上交所全资子公司上证所信息网络有限公司（SSE Infonet）独家全权经营——负责上证所即时行情在境内外的经营（境外实时行情由其在港子公司中国投资信息有限公司发售），提供 Level-1 及 Level-2 两种行情信息服务，并向会员单位、上市公司、投资者等市场参与者开发提供个性化数据产品"

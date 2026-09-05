@@ -134,20 +134,16 @@
   - （系统性，跨多家）`connect_schemes` 的消极认定条目（`au-asx`/`br-b3`/`ch-six`/`de-xetra`/`jp-jpx`/`sa-tadawul` 共 6 处）普遍未填 `sources`，会静默继承与断言主题无关的章节级默认来源（`market_structure._meta.sources`，通常是交易时段页面），使"moderate 必须有 sources"的校验对这类字段形同虚设——建议给消极认定类字段设计专门的来源占位方式，本次未处理（跨 6 个文件的结构性调整超出复核范围）。
 - **[ADR-079] 「`confidence: medium` 却零 `sources`」的全库缺口：按 `validate` 展开后口径 64 处，且 100% 是 `volatility: stable` 字段（2026-09-05 实算）。** 校验 4 只要求 `volatile`/`moderate` 有 `sources`，`stable` 一档不设约束——头部是 `overview.timezone` 16 / `overview.settlement_currency` 16 / `overview.dst_rule` 14 / `overview.trading_currency` 5 / `regulation.clearing_regulator` 5。`risks.fx_risk_note`（同为 `stable`）近全库停在无来源的 `low` 而 `make check` 一路全绿，正是踩在这个缺口上。与上面 [ADR-074] 复核者提的「消极认定类字段静默继承章节 `_meta.sources`」是同一族问题的两面：一面是**没有来源也不报错**（`stable` 档），一面是**继承来了一个与断言无关的来源**（`moderate` 档，靠 `expand_field` 继承）。风险旗标数据子棒只在第 12 章加限定不变式（该章 `confidence` 已被 [ADR-066] 轴 3 做成一等视觉信号），**不代解全库**：`stable` 字段里「时区 / 币种 / 夏令时」这类确实近乎常识、是否值得逐条补源需要单独判断，别为了让校验好看而批量塞首页 URL（`PROJECT/SOURCES.md`「来源 URL 要精确到信息页」）。**已拍板（用户 2026-09-05，见 [ADR-079] 补记）：立为独立回填棒**，不并入风险旗标数据子棒（后者只在第 12 章加限定不变式），已进 `ROADMAP.md` §一 #4 独立排期。范围按 `validate` 展开后口径 **64 处**（非 [ADR-079]「没定/留后续」段误记的 146 —— 该段 146 系笔误，本条与 [ADR-079] #6 正文的 64 为准；全库 `medium` 已填共 802 处），100% 为 `volatility: stable`。**开工前需先答的前置问题**：这 64 处里「时区 / 币种 / 夏令时」这类近乎常识、是否值得逐条补源需单独判断——按 `PROJECT/SOURCES.md`「来源 URL 要精确到信息页」，**别为了让校验好看而批量塞首页 URL**；若判定某类属可接受的常识层，正确做法是改 `taxonomy` 的 `volatility` 分档或另设豁免机制，而不是塞一条凑数来源。
 
-<!-- （原第29条「任务四（[ADR-078]）截至第二人复核仍未坐实的 11 处中的 10 处字段」已于 2026-09-05 交互式会话全部回填收口、按职责表删除：hk-hkex×5 / us-nyse×1 / uk-lse×3 / cn-sse×2，逐处自检记录见 ROADMAP §三任务四条目。残存微缺口已就地写进各字段 detail：uk-lse 完整银行假日表为 JS-SPA 待人工投喂、uk-lse 2023-12 事件未获官方原文、cn-sse 交易占比口径未摘引。）
-
-30. **[ADR-082 任务三棒 3] `sg-sgx` 衍生品子章 8 处按降级方案维持留空，待人工投喂合约规格 PDF（2026-09-05）。** 依据 [ADR-082] 依据 5：SGX 期货规则原文自述 Contract Specifications 是独立于 Rules 的另一份文件，逐合约的时段/开收盘程序/涨跌停载于合约规格；`www.sgx.com` 探针复核仍是 Angular SPA 空壳（HTTP 200 但正文前端渲染）。涉及字段：`market_structure.derivatives.trading_sessions.pre_market / lunch_break / continuous_pm / after_market`、`opening_mechanism`、`closing_mechanism`、`price_limits.main_board`、`price_limits.other_boards`、`holidays_note`（交易日历页同为 SPA，探针复核 2026-09-05）。**待人工提供**（PDF 直链或文件均可，需覆盖本子块既有样本产品线——MSCI 新加坡指数期货/期权、日经 225 期货/期权、10 年期日本国债期货，见 `contract_specs_note`；其余 SGX 旗舰产品线如 FTSE 中国 A50 期货、STI 期货/期权、USD/CNH 外汇期货可视情况追加，合约代码以各规格文件为准）：
-    - 每份 Contract Specifications 中的 Trading Hours（含 pre-opening / lunch break / after-hours 结构）、Opening/Closing Routine（开盘/收盘例行程序与 Closing Range）、Daily Price Limit（涨跌停档位）三节；
-    - 若同一产品线多份规格参数一致，注明代表性样本即可，无需全产品线投喂。
-31. **[ADR-082 任务三棒 2/棒 3/棒 4] 衍生品子章经「穷举性原文」复查后仍维持留空的 13 处（2026-09-05）。** 每处的 `detail` 已写明本轮判据与结果，此处汇总并给出下次入口；「维持留空」不是待办遗忘，是裁定①/②下的合法终态，翻空为实需新证据：
-    - `hk-hkex market_structure.derivatives.price_limits.other_boards`：T 时段「動態價格限制機制」逐合约参数未见于公开页面（HKATS 交易参数层面）。**下次入口**：HKEX 合约规格/交易参数文件（如发布过的 DPB/VCM 参数表 PDF）、或人工提供 HKATS 系统参数文档。
-    - `br-b3 market_structure.derivatives.block_trade`：B3 手册「Book of Block Trade」措辞泛指 assets、无衍生品专属时段/门槛页。**下次入口**：B3《Manual de Procedimentos Operacionais》大宗交易章节衍生品分部原文（B3 规则库 PDF 直链）。
-    - `hk-hkex`/`au-asx`/`br-b3`/`fr-euronext`/`sa-tadawul` 的衍生品 `connect_schemes` 5 处：均无官方穷举性清单可证「无跨境安排」（hk 已用「互換通属 OTC Clear 业务线」区隔、au 已用「NZ 计价合约共用同一平台/结算主体」区隔、sa 顶层已有 QFI 废止后的现状描述）。**下次入口**：各所规则手册跨境/互连专章（如 HKFE Rules 的 interconnect 章节）、监管机构跨境业务许可清单。
-    - `fr-euronext market_structure.derivatives.night_session`：22:00 CET 后无独立场次（18:30–22:00 晚间时段已归入 after_market）；Annexe One 的分产品时段表为多列宽表、无法整段引用。**下次入口**：Trading Procedures 正文（非 Annexe）对交易日结构的穷举陈述。
-    - `sa-tadawul market_structure.derivatives.volatility_interruption`：《衍生品交易与会员规则/程序》全文未见类似现货 Volatility Auction 的机制。**下次入口**：Muqassa/Saudi Exchange 对衍生品盘中价格管制的正面规则文本（注意 `saudiexchange.sa` Akamai 403，见上文 sa-tadawul 专条）。
-    - `in-nse market_structure.derivatives.volatility_interruption`：Market Timings 表能证「无独立时段」，证不了「无盘中冷静机制」。**下次入口**：NSE 衍生品交易规则/监控措施专页（Price Bands & Surveillance Actions 栏目下衍生品分部）原文。
-    - `in-nse market_structure.derivatives.holidays_note`：Market Timings 页的「holidays declared by the Exchange in advance」句式仅覆盖 Currency Derivatives 与 Debt segment，不覆盖股票/股指衍生品；现货 Holidays 页为 JS 渲染。**下次入口**：NSE 全市场通用假日页静态直链（或宣布假日的官方通函 PDF）。
-    - `sg-sgx market_structure.derivatives.holidays_note`：sgx.com 交易日历页 SPA 空壳（同第 30 条结构性受阻），与合约规格 PDF 一并待人工投喂。
+29. **任务四（[ADR-078]）截至第二人复核（2026-09-05）仍未坐实的 11 处中的 10 处字段**（另 `uk-lse listing.delisting_process`/`cn-sse overview.history` 系漏写已补、`uk-lse regulation.clearing_regulator` 已回填）——按铁律留空，逐字段记下已试路径与下次入口：
+    - `hk-hkex regulation.foreign_ownership_limit`：未找到香港对外资持股「无一般比例限制」的官方正面表述（候选入口：InvestHK「Our business environment」、证监会/公司注册处行业牌照清单——个别行业才有持股限制是结构性常识，但需要一份官方页可摘引）。
+    - `hk-hkex regulation.capital_controls`：目标来源是《基本法》第112条（「香港特别行政区不实行外汇管制政策」），basiclaw.gov.hk 章节直达 URL 404（站点改版），下次从 basiclaw.gov.hk 首页导航重新定位全文链接。
+    - `hk-hkex overview.history` / `hk-hkex participants.foreign_access_channel` / `hk-hkex regulation.self_regulatory_org` 升级：hkex.com.hk 的 About-HKEX/History 与 /Regulation 页面 URL 均为 404（官网改版），HKEX「front-line regulator」官方表述待重新定位；境外投资者参与通道（直接开户）缺官方一句原文。
+    - `us-nyse participants.foreign_access_channel`：美国市场无外资准入限制缺官方一句原文（investor.gov 术语表/国际投资者页为 JS 渲染壳；候选入口：SEC「International Investors」栏目或 FINRA「Investing for beginners」类页面）。
+    - `uk-lse market_structure.trading_sessions.pre_market`：MIT201 不含盘前时段表——正确文档应是 docs.londonstockexchange.com 的「Trading Services」系列（与 business-days 页同族，注意 lseg.com 对应页是 SPA 空壳）。
+    - `uk-lse market_structure.holidays_note`：lseg.com business-days 页为 SPA 空壳、MIT201 无假期表——入口同上（Trading Services 系列文档）。
+    - `uk-lse infrastructure.major_outage_history`：未找到 LSE 官方重大故障披露汇总（候选入口：LSE Market Notices 存档、FCA NSM 中的事故类公告检索）。
+    - `cn-sse participants.investor_structure`：需沪市投资者结构官方口径（候选入口：上交所统计年鉴「投资者结构」章节、上交所新闻发布会数据）。
+    - `cn-sse infrastructure.trading_system_name`：上交所交易系统官方名称/介绍页未定位（官网技术栏目无系统命名页，候选入口：上交所技术大会/年报、上证技术发展有限责任公司页面）。
 
 <!-- BEGIN:GENERATED auto-issues -->
 - `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low

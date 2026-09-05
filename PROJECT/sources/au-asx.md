@@ -57,5 +57,3 @@
 - `cepr.org` | 第三方（金融交易税研究库） | en | curl 常规 UA 200 | 澳大利亚无金融交易税佐证（costs.financial_transaction_tax，confidence 封顶 medium）
 - `resourcehub.bakermckenzie.com` | 第三方（律所，Global Private M&A Guide） | en | curl 常规 UA 200 | 澳大利亚对股份转让不课印花税（"Stamp duty is not payable on share transfers"，`au-asx.costs.financial_transaction_tax` 的第三方佐证，封顶 confidence medium；非一手税法条文，翻 `type: none` 仍需 ATO/财政部原文）
   - Stamp duty and tax | Australia | Global Private M&A Guide: https://resourcehub.bakermckenzie.com/en/resources/global-private-ma-guide-limited/asia-pacific/australia/topics/agreeing-the-acquisition-agreement/stamp-duty-and-tax
-  - ASX 24 Trading Calendar（衍生品市场专属日历页：假日交易时段政策表——Day Session Closed / Night Session Normal Trading Hours 等）: https://www.asx.com.au/markets/market-resources/asx-24-trading-calendar（HTTP 200，静态可抓）
-  - T24 Trading Calendar 2026 全年逐日 PDF（假日当日日盘/夜盘安排与到期/行权时刻）: https://www.asx.com.au/content/dam/asx/markets/market-resources/t24-trading-calendars/T24-trading-calendar2026.pdf（HTTP 200，任务三棒 4 新增）

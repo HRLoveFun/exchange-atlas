@@ -42,6 +42,3 @@
   - 英文首页: https://www.bsmsupervisao.com.br/en/us/home（HTTP 200）
 - `valorinternational.globo.com` | 第三方（财经媒体，Valor Econômico 英文版） | en | 未测试专门反爬 | `infrastructure.major_outage_history` / `risks.liquidity_risk_note` 用——2026-08-03 B3 交易延迟开市事件的报道；两字段均 `confidence: medium`（第三方来源，CLAUDE.md 二第3条），未找到 B3 官方对该次故障的事后复盘声明
   - B3 outage hits stock exchange at crucial moment（2026-08-03）: https://valorinternational.globo.com/markets/news/2026/08/03/b3-outage-hits-stock-exchange-at-crucial-moment.ghtml
-- `www.b3.com.br/data/files` | 官方（B3 官网文档库，PUMA 交易参数分册） | pt-BR | curl 常规 UA 200（`data/files` 短链需从索引页 HTML 取完整 href——部分列表条目由前端渲染，直接 WebSearch 摘要里的截断 href 会 404） | 任务三棒 3 衍生品逐合约价格限制（Túneis de Negociação）参数来源：B3 按「分市场分册」公布逐合约隧道参数（拒绝隧道/拍卖隧道/均价隧道/拍卖期间价格保护），每组到期月份分档，百分数为小数逗号形态
-  - Parâmetros dos Túneis de Negociação 分册索引页: https://www.b3.com.br/pt_br/solucoes/plataformas/puma-trading-system/para-participantes-e-traders/regras-e-parametros-de-negociacao/parametros-dos-tuneis-de-negociacao/
-  - Futuros Referenciados em Índices 分册（IND/WIN 隧道参数，2026-05-18 版）PDF: https://www.b3.com.br/data/files/D5/73/C0/79/DDC2E91064BF82E9AC094EA8/Futuro%20de%20Indices%20-%2018052026.pdf
