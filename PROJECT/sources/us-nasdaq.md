@@ -1,4 +1,6 @@
 # 纳斯达克证券交易所 The Nasdaq Stock Market `us-nasdaq`
+- `newyorkfed.org` | 官方（美联储系统——纽约联储，代表美国财政部与美联储执行外汇操作的机构；2026-09-05 新增登记，[ADR-079] 风险旗标子棒） | en | curl + 常规 UA 200，PDF 直链可抓 | 美元汇率政策（fx_risk_note 出处）；与 `us-nyse` 共用同一登记
+  - Treasury and Federal Reserve Foreign Exchange Operations, First Quarter 2026（季度 FX 操作报告：美联储与财政部报告期内未干预外汇市场的逐字记载）PDF: https://www.newyorkfed.org/medialibrary/media/newsevents/news/markets/2026/q1-2026-fx-quarterly-report.pdf（HTTP 200，361KB）
 - `nasdaq.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬 | Nasdaq Inc 集团层面的公司站，覆盖监管框架、公司概况/历史、市场数据产品说明、指数产品说明等叙述性内容；不含逐条规则条文（规则条文在 `nasdaqtrader.com`/`listingcenter.nasdaq.com`）
   - Market Regulation（监管架构总览，Nasdaq Regulation 与 FINRA 关系）: https://www.nasdaq.com/market-regulation（HTTP 200，310KB）
   - Market Regulation: Listings Review（上市审核团队职能）: https://www.nasdaq.com/market-regulation/americas/listing-review（HTTP 200，235KB）

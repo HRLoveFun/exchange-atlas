@@ -154,7 +154,6 @@
 - `br-b3` 基本信息 / 夏令时规则（dst_rule）— confidence: low
 - `br-b3` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
 - `br-b3` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `ca-tsx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `ch-six` 基本信息 / 夏令时规则（dst_rule）— confidence: low
 - `ch-six` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `ch-six` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
@@ -188,6 +187,4 @@
 - `tw-twse` 清算、结算与交割 / 初始保证金制度（initial_margin_practice）— confidence: low
 - `tw-twse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `us-nasdaq` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
-- `us-nasdaq` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `us-nyse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 <!-- END:GENERATED auto-issues -->

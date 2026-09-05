@@ -1,4 +1,6 @@
 # 纽约证券交易所 New York Stock Exchange (NYSE) `us-nyse`
+- `newyorkfed.org` | 官方（美联储系统——纽约联储，代表美国财政部与美联储执行外汇操作的机构；2026-09-05 新增登记，[ADR-079] 风险旗标子棒） | en | curl + 常规 UA 200，PDF 直链可抓 | 美元汇率政策（fx_risk_note 出处）：财政部与美联储外汇操作的官方季度记录
+  - Treasury and Federal Reserve Foreign Exchange Operations, First Quarter 2026（季度 FX 操作报告：美联储与财政部报告期内未干预外汇市场的逐字记载）PDF: https://www.newyorkfed.org/medialibrary/media/newsevents/news/markets/2026/q1-2026-fx-quarterly-report.pdf（HTTP 200，361KB）
 - `nyse.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬；注意站内不少旧 URL 会 301/302 跳转到新路径（如 `/products/etp-limit-up-limit-down` 跳到 `/trade/trading-information`），curl 要带 `-L` 跟随重定向 | ⚠️ NYSE 集团旗下有 NYSE、NYSE American、NYSE Arca、NYSE National、NYSE Texas 多个 SEC 注册的独立交易所实体（`group_id: nyse-group`），很多页面把几个实体的信息混在一起讲，摘引时要看清楚是哪个实体（本文件只收 NYSE 本身/Tape A 的信息）；⚠️ 主站是 CMS2（React）驱动，多数栏目落地页静态 HTML 里能拿到真实正文段落（挂在 `<main><div data-testid="belt">...` 结构下），但也有个别历史遗留 PDF 直链已失效、curl 200 却拿到的是 HTML 兜底壳（如 `NYSE_Market_Quality_infographic.pdf` 实测返回的是网页壳层，不是真正的 PDF 二进制，`pdftotext` 会直接报"Illegal character"语法错误——遇到这种"HTTP 200但内容类型不对"要用 `head -c 300` 看文件头是不是 `<!DOCTYPE html>` 而不是想当然按 PDF 处理）
   - Trading Information（交易时段、LULD、MWCB 熔断阈值）: https://www.nyse.com/trade/trading-information（HTTP 200，194KB）
   - Regulation（监管架构、SEC/FINRA 关系）: https://www.nyse.com/regulation（HTTP 200，127KB）

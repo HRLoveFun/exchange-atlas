@@ -1,4 +1,7 @@
 # 多伦多证券交易所 Toronto Stock Exchange (TSX) `ca-tsx`
+- `bankofcanada.ca` | 官方（货币当局——加拿大银行 BoC，加元汇率政策主体；2026-09-05 新增登记，[ADR-079] 风险旗标子棒） | en（另有 fr 版，同路径 `/fr/`） | curl + 常规 UA 200，正文服务端渲染可 grep | 加元汇率制度（fx_risk_note 出处）
+  - Understanding exchange rates（BoC 官方 explainer：外汇市场决定加元价值、央行不设定汇率、极少干预，「Letting the currency float」定性表述）: https://www.bankofcanada.ca/2020/08/understanding-exchange-rates/（HTTP 200，140KB）
+  - Monetary policy（BoC 货币政策框架总览：通胀目标 + 弹性汇率双支柱）: https://www.bankofcanada.ca/core-functions/monetary-policy/（HTTP 200，145KB）
 - `tsx.com` | 官方 | en / fr（`/en/` 与 `/fr/` 路径均可直接访问，法语版正文与英文版对应，如 `/fr/trading/calendars-and-trading-hours/trading-hours` 返回「Heures de négociation」正文；本次抓取全部走英文版，法语版未逐条比对） | curl + 常规 UA 全部 200，未见反爬，未加延时 | ⚠️ TSX 隶属 TMX Group（`group_id: tmx-group`），集团下还有 TSX Venture Exchange（TSXV，创业板，独立交易所实体非本文件板块）、TSX Alpha Exchange（另一撮合场所/marketplace）、Montréal Exchange（衍生品）、CDS（清算/托管）等实体，很多页面把 TSX/TSXV/Alpha 三个 marketplace 的规则并排列在同一张表里，摘引时要看清楚列头对应哪个实体——本文件只收 TSX 本身
   - 交易时段（含 MOO/MOC/PME 收盘流程完整时间表）: https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours
   - Toronto Stock Exchange Rule Book（PDF，全文，Effective January 13, 2026，含会员准入/交易时段/结算规则等 Part 1-8）: https://www.tsx.com/en/resource/1464

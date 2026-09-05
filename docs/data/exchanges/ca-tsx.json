@@ -1824,15 +1824,26 @@
     },
     "risks": {
       "fx_risk_note": {
-        "zh": "以加元（CAD）计价为主，对加拿大本土投资者本币风险较低；境外投资者持有CAD计价资产时，汇率风险来自其本币兑加元的波动；另有部分USD计价双重货币挂牌证券（见overview.trading_currency）",
-        "en": "Primarily CAD-denominated; low domestic FX risk for Canadian investors. Foreign investors holding CAD-denominated assets face FX risk from their home currency's fluctuation against the CAD; a subset of dual-currency listings trade in USD (see overview.trading_currency)",
-        "confidence": "low",
-        "verified": "2026-08-27",
+        "zh": "外汇市场决定加元的价值，加拿大央行不试图设定加元汇率、由市场决定其价值，且极少为支撑汇价而干预——加元实行弹性浮动（BoC 官方 explainer，见 sources）。对非加元投资者：多伦多证券交易所产品以加元计价为主，另有部分 USD 计价双重货币挂牌证券（见 overview.trading_currency），汇率风险随具体产品计价货币而定，来自其本币兑加元的波动",
+        "en": "The foreign exchange market determines how much the Canadian dollar is worth; the Bank of Canada doesn't try to set the dollar's exchange rate — it lets markets set its value and very rarely intervenes to support it, letting the currency float (BoC explainer, see sources). For non-CAD investors: TSX-listed securities are primarily CAD-denominated with a subset of dual-currency USD listings (see overview.trading_currency); FX risk follows each product's denomination currency, arising from the investor's home currency against the CAD",
+        "quote": "The Bank of Canada doesn’t try to set the dollar’s exchange rate. We let markets set its value. Because the Bank of Canada lets the Canadian dollar float, we can focus on setting interest rates to maintain inflation at 2 percent in Canada.",
+        "sources": [
+          {
+            "title": "Understanding exchange rates（BoC 官方 explainer，Letting the currency float 定性表述）",
+            "url": "https://www.bankofcanada.ca/2020/08/understanding-exchange-rates/",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "Monetary policy（BoC 官网，通胀目标 + 弹性汇率框架总览）",
+            "url": "https://www.bankofcanada.ca/core-functions/monetary-policy/",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "political_risk_note": {
         "zh": "加拿大为联邦制稳定民主体，证券市场运行的政治风险整体低；主要潜在政治风险来自加美贸易政策摩擦（近年加拿大曾对美钢铝加征报复性关税），可能间接影响资源/工业板块情绪与跨境发行，但不直接威胁 TSX 作为交易所的持续运营",

@@ -1844,15 +1844,21 @@
     },
     "risks": {
       "fx_risk_note": {
-        "zh": "美元为全球主要储备货币，本币汇率风险对美国本土投资者而言较低；对以美元计价资产的境外投资者而言，汇率风险来自其本币兑美元波动",
-        "en": "USD is the world's primary reserve currency; domestic FX risk is low for U.S.-based investors. For foreign investors holding USD-denominated assets, FX risk arises from their home currency's fluctuation against the USD",
-        "detail": "与us-nyse.yml记录的通用美元市场表述一致，非纳斯达克专属，未附独立来源。",
-        "confidence": "low",
-        "verified": "2026-08-14",
+        "zh": "美国对美元汇率不设常规干预：纽约联储代表美国财政部与美联储执行外汇操作，其官方季度报告逐字记载，美联储与美国财政部在报告期内未干预外汇市场（见 sources）。对非美元投资者：纳斯达克上市证券以美元计价结算，承担美元兑投资者本币的汇率风险",
+        "en": "The United States maintains no routine FX intervention: the Federal Reserve Bank of New York executes foreign exchange operations on behalf of the U.S. Treasury and the Federal Reserve, and its official quarterly report records verbatim that the Federal Reserve and the U.S. Treasury did not intervene in foreign exchange markets during the quarter (see sources). For non-USD investors: Nasdaq-listed securities are denominated and settled in USD, carrying USD exchange-rate risk against the investor's currency",
+        "quote": "The Federal Reserve and the U.S. Treasury did not intervene in foreign exchange markets during the quarter.",
+        "sources": [
+          {
+            "title": "Treasury and Federal Reserve Foreign Exchange Operations, First Quarter 2026（纽约联储官方季度 FX 操作报告）",
+            "url": "https://www.newyorkfed.org/medialibrary/media/newsevents/news/markets/2026/q1-2026-fx-quarterly-report.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "detail": "与 us-nyse.yml 同口径（美元汇率政策为美国联邦层面制度，非单所专属）。美元汇率制度的 de jure 分类（IMF AREAER：free floating）本次未取得可逐字摘引的一手文本，字段按「官方操作记录口径」标 medium 而非 high；AREAER 原文获取后可升 high。",
+        "confidence": "medium",
+        "verified": "2026-09-05",
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "political_risk_note": {
         "zh": "《外国公司问责法》（Holding Foreign Companies Accountable Act, HFCAA，2020年签署生效）：若上市公司使用的会计师事务所因所在辖区当局限制，连续3年无法接受美国上市公司会计监督委员会（PCAOB）检查，SEC须禁止该公司证券在美全国性证券交易所（含纳斯达克）及场外市场交易——该法是近年在美上市外国发行人（尤以中国大陆背景发行人为代表）面临的主要政治/地缘风险来源之一",

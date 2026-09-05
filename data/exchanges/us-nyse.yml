@@ -1186,9 +1186,16 @@ risks:
     confidence: low
 
   fx_risk_note:
-    zh: "美元为全球主要储备货币，本币汇率风险对美国本土投资者而言较低；对以美元计价资产的境外投资者而言，汇率风险来自其本币兑美元波动"
-    en: "USD is the world's primary reserve currency; domestic FX risk is low for U.S.-based investors. For foreign investors holding USD-denominated assets, FX risk arises from their home currency's fluctuation against the USD"
-    confidence: low
+    zh: "美国对美元汇率不设常规干预：纽约联储代表美国财政部与美联储执行外汇操作，其官方季度报告逐字记载，美联储与美国财政部在报告期内未干预外汇市场（见 sources）。对非美元投资者：美股以美元计价结算，承担美元兑投资者本币的汇率风险"
+    en: "The United States maintains no routine FX intervention: the Federal Reserve Bank of New York executes foreign exchange operations on behalf of the U.S. Treasury and the Federal Reserve, and its official quarterly report records verbatim that the Federal Reserve and the U.S. Treasury did not intervene in foreign exchange markets during the quarter (see sources). For non-USD investors: U.S.-listed securities are denominated and settled in USD, carrying USD exchange-rate risk against the investor's currency"
+    quote: "The Federal Reserve and the U.S. Treasury did not intervene in foreign exchange markets during the quarter."
+    sources:
+      - title: "Treasury and Federal Reserve Foreign Exchange Operations, First Quarter 2026（纽约联储官方季度 FX 操作报告）"
+        url: https://www.newyorkfed.org/medialibrary/media/newsevents/news/markets/2026/q1-2026-fx-quarterly-report.pdf
+        accessed: 2026-09-05
+    detail: "美元汇率制度的 de jure 分类（IMF AREAER：free floating）本次未取得可逐字摘引的一手文本，字段按「官方操作记录口径」标 medium 而非 high；AREAER 原文获取后可升 high。"
+    confidence: medium
+    verified: 2026-09-05
 
   political_risk_note:
     zh: "对特定外国（尤其中国大陆/香港）发行人而言，存在因《外国公司问责法》（HFCAA）触发的强制退市/停止交易政治风险：若SEC认定某发行人连续三年由PCAOB无法完成检查的会计师事务所出具审计报告，SEC将禁止其证券在美国全国性证券交易所或场外市场交易；此外OFAC经济制裁名单也会限制特定被制裁主体的证券交易资格，这两类风险独立于交易所自身监管框架，源自更广泛的美国对外政策与国家安全立法"
