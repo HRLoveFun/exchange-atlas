@@ -2,17 +2,44 @@
 
 本项目**最高价值的资产**——查交易所规则最费时的不是读，是找到并抓到权威原始出处。查明一次「这份文件在哪、要怎么抓、多久改版」就要记下来，否则下次重查一遍。
 
-`tools/fetch.py` 按本文件登记的抓取方式取页；`tools/validate.py` 校验 `data/` 里引用的来源域名是否已在本文件登记。
+`tools/fetch.py` 按来源分片登记的抓取方式取页；`tools/validate.py` 校验 `data/` 里引用的来源域名是否已在来源登记（本文件 + 分片）中。
 
-## 条目格式（供 `tools/fetch.py` 与 `validate.py` 解析，首行务必遵守）
+**各交易所的来源记录已按所拆分到 `PROJECT/sources/<id>.md`**（文件名 = `data/exchanges/<id>.yml` 的 id，两侧一一对应、由 `make check` 强制）——来源记录是并发写入点，拆分让「多写者共写一个大文件」物理分离，单所经验/探测记录写进对应分片即可（[ADR-PENDING-antibloat]）。本文件只保留条目格式规范与跨所通用经验。
+
+## 交易所来源分片索引（`make sync` 生成，不手改）
+
+<!-- BEGIN:GENERATED sources-index -->
+- `au-asx` 澳大利亚证券交易所 — [sources/au-asx.md](sources/au-asx.md)
+- `br-b3` 巴西B3交易所 — [sources/br-b3.md](sources/br-b3.md)
+- `ca-tsx` 多伦多证券交易所 — [sources/ca-tsx.md](sources/ca-tsx.md)
+- `ch-six` 瑞士证券交易所 — [sources/ch-six.md](sources/ch-six.md)
+- `cn-sse` 上海证券交易所 — [sources/cn-sse.md](sources/cn-sse.md)
+- `cn-szse` 深圳证券交易所 — [sources/cn-szse.md](sources/cn-szse.md)
+- `de-eurex` 欧洲期货交易所 — [sources/de-eurex.md](sources/de-eurex.md)
+- `de-xetra` 法兰克福证券交易所 — [sources/de-xetra.md](sources/de-xetra.md)
+- `fr-euronext` 泛欧交易所 — [sources/fr-euronext.md](sources/fr-euronext.md)
+- `hk-hkex` 香港交易及结算所 — [sources/hk-hkex.md](sources/hk-hkex.md)
+- `in-nse` 印度国家证券交易所 — [sources/in-nse.md](sources/in-nse.md)
+- `jp-jpx` 东京证券交易所 — [sources/jp-jpx.md](sources/jp-jpx.md)
+- `kr-krx` 韩国交易所 — [sources/kr-krx.md](sources/kr-krx.md)
+- `sa-tadawul` 沙特交易所 — [sources/sa-tadawul.md](sources/sa-tadawul.md)
+- `sg-sgx` 新加坡交易所 — [sources/sg-sgx.md](sources/sg-sgx.md)
+- `tw-twse` 台湾证券交易所 — [sources/tw-twse.md](sources/tw-twse.md)
+- `uk-lse` 伦敦证券交易所 — [sources/uk-lse.md](sources/uk-lse.md)
+- `us-nasdaq` 纳斯达克证券交易所 — [sources/us-nasdaq.md](sources/us-nasdaq.md)
+- `us-nyse` 纽约证券交易所 — [sources/us-nyse.md](sources/us-nyse.md)
+- `za-jse` 约翰内斯堡证券交易所 — [sources/za-jse.md](sources/za-jse.md)
+<!-- END:GENERATED sources-index -->
+
+## 条目格式（供 `tools/fetch.py` 与 `validate.py` 解析，每家分片首行务必遵守）
 
 ```markdown
-### 交易所中文名 English Name `<exchange-id>`
+# 交易所中文名 English Name `<exchange-id>`
 - `域名` | 官方/监管/第三方 | 语言 | 抓取备注 | 内容备注
   - 具体页面标题: URL
 ```
 
-标题行末尾反引号包裹的 `<exchange-id>` 必须与 `data/exchanges/<exchange-id>.yml` 的文件名一致——`make fetch EX=<exchange-id>` 靠这个 id 定位本节，抓取本节内所有 URL。
+分片文件名（= 首行反引号包裹的 `<exchange-id>`）必须与 `data/exchanges/<exchange-id>.yml` 的文件名一致——`make fetch EX=<exchange-id>` 直接读 `PROJECT/sources/<exchange-id>.md`，抓取其中所有 URL。
 
 抓取备注写清楚：要不要自定义 UA、WebFetch 能不能用、是 HTML 还是 PDF、要不要多跳导航、改版周期、译本滞后情况。
 

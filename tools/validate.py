@@ -676,11 +676,13 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
 # ── 8：文档 GENERATED 块新鲜度 ────────────────────────────────
 
 def extract_generated_block(text, name):
+    # 行尾容忍：与 sync.replace_generated_block 同一套规则（CRLF 文件的标记带 \r）；
+    # 提取出的正文统一归一成 \n 再与纯函数输出比对。
     m = re.search(
-        r"<!-- BEGIN:GENERATED " + re.escape(name) + r" -->\n(.*?)\n<!-- END:GENERATED " + re.escape(name) + r" -->",
+        r"<!-- BEGIN:GENERATED " + re.escape(name) + r" -->(?:\r\n|\n)(.*?)(?:\r\n|\n)<!-- END:GENERATED " + re.escape(name) + r" -->",
         text, re.S,
     )
-    return m.group(1) if m else None
+    return m.group(1).replace("\r\n", "\n") if m else None
 
 
 def validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchanges_expanded):
@@ -696,7 +698,12 @@ def validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchange
         (PROJECT_DIR / "ROADMAP.md", "progress-matrix", sync.render_progress_matrix(taxonomy, raw_exchanges, exchanges_expanded)),
         (PROJECT_DIR / "ROADMAP.md", "health-summary", sync.render_health_summary(freshness_rows)),
         (PROJECT_DIR / "OPEN-QUESTIONS.md", "auto-issues", sync.render_auto_issues(taxonomy, raw_exchanges, exchanges_expanded)),
+        (PROJECT_DIR / "SOURCES.md", "sources-index", sync.render_sources_index(raw_exchanges)),
     ]
+    decisions_path = PROJECT_DIR / "DECISIONS.md"
+    if decisions_path.exists():
+        checks.append((decisions_path, "adr-index",
+                       sync.render_adr_index(decisions_path.read_text(encoding="utf-8"))))
     for path, name, expected in checks:
         text = path.read_text(encoding="utf-8")
         actual = extract_generated_block(text, name)

@@ -6,12 +6,14 @@
   2. 把数据文件里的「简写字段」展开成完整事实信封（继承章节 _meta）
   3. 生成 docs/data/{manifest,matrix,freshness,glossary,taxonomy,_schema}.json
      与 docs/data/exchanges/<id>.json（前端直接 fetch 这些，不解析 YAML）
-  4. 重写六处 GENERATED 标记块：
+  4. 重写八处 GENERATED 标记块：
        PROJECT/ROADMAP.md      progress-matrix, health-summary
        README.md               exchange-list（中文名 + 中文地区）
        README.en.md            exchange-list（官方英文名 + 英文地区，方案 D）
        PROJECT/GLOSSARY.md     全文
        PROJECT/OPEN-QUESTIONS.md  auto-issues
+       PROJECT/SOURCES.md      sources-index（来源分片索引，[ADR-PENDING-antibloat]）
+       PROJECT/DECISIONS.md    adr-index（ADR 索引，[ADR-PENDING-antibloat]）
 
 跑完这个脚本后 `git diff` 应为空才说明库是一致的——这是 CLAUDE.md 一节
 「生成块新鲜度」校验的前提；validate.py 会重新跑一遍本脚本的生成逻辑做比对。
@@ -449,13 +451,21 @@ def build_json_schema(taxonomy):
 # ── GENERATED 块替换 ────────────────────────────────────────
 
 def replace_generated_block(text, name, new_content):
+    # 行尾容忍（[ADR-PENDING-antibloat]）：仓库行尾风格混合（PROJECT/SOURCES.md 与
+    # DECISIONS.md 是 CRLF，ROADMAP/README 等是 LF），标记行 \r 会让裸 `\n` 匹配失败。
+    # 生成内容沿用标记处检测到的行尾风格，保持目标文件行尾统一。
     pattern = re.compile(
-        r"(<!-- BEGIN:GENERATED " + re.escape(name) + r" -->\n)(.*?)(\n<!-- END:GENERATED " + re.escape(name) + r" -->)",
+        r"(<!-- BEGIN:GENERATED " + re.escape(name) + r" -->(?:\r\n|\n))"
+        r"(.*?)"
+        r"((?:\r\n|\n)<!-- END:GENERATED " + re.escape(name) + r" -->)",
         re.S,
     )
-    if not pattern.search(text):
+    m = pattern.search(text)
+    if not m:
         sys.exit(f"[sync] 错误：找不到 GENERATED 块 `{name}`（检查目标文件里的标记是否还在）")
-    return pattern.sub(lambda m: m.group(1) + new_content.rstrip("\n") + m.group(3), text)
+    eol = "\r\n" if m.group(1).endswith("\r\n") else "\n"
+    body = eol.join(new_content.rstrip("\n").split("\n"))
+    return text[:m.start()] + m.group(1) + body + m.group(3) + text[m.end():]
 
 
 def apply_blocks(path: Path, blocks: dict):
@@ -580,6 +590,41 @@ def render_auto_issues(taxonomy, raw_exchanges, exchanges_expanded):
     return "\n".join(issues)
 
 
+def render_sources_index(raw_exchanges):
+    """PROJECT/SOURCES.md 的分片索引：一行一家（id + 中文名 + 链接），[ADR-PENDING-antibloat]。
+    刻意不生成域名全表——跨分片 `grep -r PROJECT/sources/` 依然可用，全表只会变成
+    第二份要同步的膨胀物（同一事实只在一处手写）。"""
+    if not raw_exchanges:
+        return "（暂无交易所来源分片）"
+    lines = []
+    for eid in sorted(raw_exchanges):
+        name = raw_exchanges[eid].get("name_zh") or ""
+        lines.append(f"- `{eid}` {name} — [sources/{eid}.md](sources/{eid}.md)")
+    return "\n".join(lines)
+
+
+def render_adr_index(decisions_text):
+    """PROJECT/DECISIONS.md 的 ADR 索引（[ADR-PENDING-antibloat]）：提取 `### ADR-NNN — 标题` 与其后
+    的 **日期：**，按编号排序输出。物理顺序已被历次让号打乱，索引即顺序修正——
+    不动物理顺序（零迁移缓解认知负荷），新会话定位 ADR 不必通读全文。
+    `ADR-PENDING-<slug>` 占位符标题不匹配 `ADR-(\\d{3})`，自动跳过——与 [ADR-076]
+    的「合并前跑 make assign-adr 定号」流程天然兼容。"""
+    entries = []
+    for m in re.finditer(r"^### (ADR-\d{3})\s*[-—]\s*(.*)$", decisions_text, re.M):
+        num, title = m.group(1), m.group(2).strip()
+        nxt = re.search(r"^### ", decisions_text[m.end():], re.M)
+        block_end = m.end() + (nxt.start() if nxt else len(decisions_text) - m.end())
+        dm = re.search(r"\*\*日期：\*\*\s*(\d{4}-\d{2}-\d{2})", decisions_text[m.end():block_end])
+        entries.append((num, dm.group(1) if dm else "", title))
+    entries.sort(key=lambda e: e[0])
+    if not entries:
+        return "（暂无 ADR）"
+    return "\n".join(
+        f"- {num} · {date} · {title}" if date else f"- {num} · {title}"
+        for num, date, title in entries
+    )
+
+
 # ── 主流程 ────────────────────────────────────────────────
 
 def main():
@@ -688,11 +733,19 @@ def main():
     apply_blocks(PROJECT_DIR / "OPEN-QUESTIONS.md", {
         "auto-issues": render_auto_issues(taxonomy, raw_exchanges, exchanges_expanded),
     })
+    apply_blocks(PROJECT_DIR / "SOURCES.md", {
+        "sources-index": render_sources_index(raw_exchanges),
+    })
+    decisions_path = PROJECT_DIR / "DECISIONS.md"
+    if decisions_path.exists():
+        apply_blocks(decisions_path, {
+            "adr-index": render_adr_index(decisions_path.read_text(encoding="utf-8")),
+        })
 
     glossary_md_path = PROJECT_DIR / "GLOSSARY.md"
     glossary_md_path.write_text(render_glossary_md(glossary) + "\n", encoding="utf-8")
 
-    print(f"[sync] {len(exchanges_expanded)} 家交易所 → docs/data/ 产物已生成，6 处 GENERATED 块已更新")
+    print(f"[sync] {len(exchanges_expanded)} 家交易所 → docs/data/ 产物已生成，8 处 GENERATED 块已更新")
 
 
 if __name__ == "__main__":
