@@ -18,11 +18,12 @@
 2. `.github/workflows/pr-build.yml` 在 PR 上跑 `make build`，绿了 GitHub 服务端执行 auto-merge，squash 进 main——这一步不是本地 `gh` 命令做的，是 GitHub 服务端异步完成的，所以**不会触碰本地 worktree 检出的分支**，「先摘 worktree 再 merge」那个坑天然不会发生。
 3. 若 `DECISIONS.md` 里带 `ADR-PENDING-<slug>` 占位符，合并进 main 之后由 `.github/workflows/adr-heal.yml`（`push: main` 触发，`concurrency: group: main-adr-heal` 保证多个后台 PR 连续合并时逐条串行处理，不会重现 PR69-72 那次连撞四次）自动跑 `make assign-adr` 把占位符定号，然后**开一条 `adr-heal/auto-<sha>` 分支、开 PR、`gh pr merge --auto --squash`，并在同一个 job 里轮询等这条 PR 真正合并完成才收尾**（[ADR-087]，取代 [ADR-081] 最初「直接 commit + push 回 main」的做法——main 的 branch protection 要求 `build` 状态检查通过，bot 的直推没有关联检查会被 GitHub 拒绝，走 PR 复用 `pr-build.yml` 已经在验证的同一条路径）。**为什么必须等到真正合并**：`concurrency` 组的串行保证只在 job 跑到结束才生效——如果开完 PR 就提前退出，下一个排队的 healer 运行会在台账还没被这次合并更新之前就读取 max 号，重演 [ADR-069]/[ADR-076] 的撞号问题。全程无需协调者手动跑 `make assign-adr`。
 
-**什么时候还需要人工介入（仅剩三种情况）**：
+**什么时候还需要人工介入（仅剩四种情况）**：
 
 - **CI 报红**（`make build` 不过）——auto-merge 会一直等，PR 不会被错误地合进去；需要人/协调者去看 `gh pr checks <n>` 找出哪里红了，修完再等它自动合并，不需要重新设置 auto-merge。
 - **真实内容冲突**（两条分支改了同一处，git 判定不可自动合并）——auto-merge 同样会一直等；这种情况本来就该露出来给人看，走下面「人工兜底合并」的老流程。
-- **`adr-heal.yml` 的 PR 在 10 分钟内没合并完**——workflow 会主动报错退出（而不是无限等下去），`gh run view` 能看到具体是哪个 PR 卡住，多半是那个 PR 自己的 `build` 检查红了，按第一种情况处理。
+- **`adr-heal.yml` 的 PR 的 `build` 检查卡在 `action_required`**（GitHub 对 `github-actions[bot]` 开的 PR 有时要求人工放行其 workflow 运行——`gh run list --branch adr-heal/auto-<sha>` 显示 `action_required` / `0s`，PR `mergeStateStatus` 停在 `BLOCKED`、无 check 报告）。放行：`gh api --method POST repos/HRLoveFun/exchange-atlas/actions/runs/<run_id>/approve`，之后 `build` 正常跑、PR 自动合并。**不放行的后果**：`adr-heal` job 轮询到 10 分钟超时失败，main 残留 `ADR-PENDING-<slug>` 占位符 → `make check` 在 main 上转红，得走下面「人工兜底：定号」。2026-09-06 ADR-095（PR #100）实际撞上一次；同批更早的 PR #97 没撞——是否要放行不稳定，后台任务合并后留意一下那条 auto PR。
+- **`adr-heal.yml` 的 PR 在 10 分钟内没合并完**——workflow 会主动报错退出（而不是无限等下去），`gh run view` 能看到具体是哪个 PR 卡住，多半是那个 PR 自己的 `build` 检查红了或卡在上一条的 `action_required`，按对应情况处理。
 
 以下两节（先摘 worktree / 定号）是上面走不通时的**人工兜底流程**，不再是默认路径。
 
