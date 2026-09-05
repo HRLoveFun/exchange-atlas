@@ -1100,9 +1100,18 @@ risks:
     confidence: low
 
   fx_risk_note:
-    zh: "人民币非完全可自由兑换，外资参与需通过额度管理渠道，存在换汇与资金进出限制"
-    en: "The renminbi is not fully freely convertible; foreign participation requires quota-managed channels, and restrictions exist on currency conversion and cross-border fund movement"
-    confidence: low
+    zh: "人民币汇率实行以市场供求为基础的、有管理的浮动汇率制度（《外汇管理条例》第二十七条；中国人民银行官方表述：实行以市场供求为基础、参考一篮子货币进行调节、有管理的浮动汇率制度，从一篮子货币的角度看汇率、不片面关注与某个单一货币的双边汇率，见 sources）。对非人民币投资者：人民币汇率波动由管理浮动机制决定，A股以人民币计价结算，承担人民币兑投资者本币的汇率风险；人民币非完全可自由兑换，换汇与资金进出限制属资金跨境议题，见 capital_controls"
+    en: "The RMB exchange rate follows a managed float based on market supply and demand (the Foreign Exchange Regulations; the PBOC describes the regime as market-supply-demand-based, reference to a basket of currencies, managed float — looking at the RMB from a basket perspective rather than fixating on bilateral rates against any single currency, see sources). For non-RMB investors: A-share securities are denominated and settled in RMB, carrying RMB exchange-rate risk against the investor's currency; the RMB is not fully freely convertible, and conversion/cross-border fund restrictions are covered in capital_controls"
+    quote: "人民币汇率实行以市场供求为基础的、有管理的浮动汇率制度。"
+    sources:
+      - title: "《中华人民共和国外汇管理条例》（2008 修订）第二十七条（SAFE 官网转载，汇率制度的法条原文）"
+        url: http://m.safe.gov.cn/safe/2008/0806/5321.html
+        accessed: 2026-09-05
+      - title: "「人民币汇率制度」的内容（中国人民银行货币政策司专页，三点官方表述）"
+        url: https://www.pbc.gov.cn/huobizhengceersi/214481/214545/214769/3871699/index.html
+        accessed: 2026-09-05
+    confidence: high
+    verified: 2026-09-05
 
   political_risk_note:
     zh: ""

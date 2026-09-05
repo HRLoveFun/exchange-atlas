@@ -1,4 +1,8 @@
 # 深圳证券交易所 Shenzhen Stock Exchange (SZSE) `cn-szse`
+- `safe.gov.cn` | 官方（国家外汇管理局 SAFE；2026-09-05 新增登记，[ADR-079] 风险旗标子棒，与 `cn-sse` 共用） | zh | curl 常规 UA 200（m. 移动版页面为静态 HTML） | 人民币汇率制度（fx_risk_note 出处）
+  - 《中华人民共和国外汇管理条例》（2008 修订）全文页（第二十七条：人民币汇率实行以市场供求为基础的、有管理的浮动汇率制度）: http://m.safe.gov.cn/safe/2008/0806/5321.html（HTTP 200，114KB）
+- `pbc.gov.cn` | 官方（货币当局——中国人民银行 PBOC；2026-09-05 新增登记，[ADR-079] 风险旗标子棒，与 `cn-sse` 共用） | zh | curl 常规 UA 200（个别静态页可抓，主站多 WAF） | 人民币汇率制度（fx_risk_note 出处）
+  - 「人民币汇率制度」的内容（货币政策司专页）: https://www.pbc.gov.cn/huobizhengceersi/214481/214545/214769/3871699/index.html（HTTP 200，27KB）
 - `szse.cn` | 官方 | zh / en（英文版路径 `/English/...`，非同页切换，独立 URL；页面同样带"仅供参考，中文文本为准"类免责声明——与 SSE 一致，佐证 `source_lang: zh` 的选择） | curl + 常规浏览器 UA 全程 200，未见反爬/限流（比 `english.sse.com.cn` 好抓，不需要加延时）；PDF 用 `pdftotext -layout` 提取纯文本再 grep 定位条款 | 与上交所同属会员制事业法人、同受中国证监会监管、同为 A 股主板注册制，`region`/`regulator`/`review_system` 等字段与 cn-sse 高度一致，可直接对照校验取值口径是否统一；压测点是主板 vs 创业板（对照 cn-sse 主板 vs 科创板）
   - 本所简介（成立/开业日期、监管归属、职能）: https://www.szse.cn/aboutus/sse/introduction/index.html
   - 交易规则（2026年修订）PDF: https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf

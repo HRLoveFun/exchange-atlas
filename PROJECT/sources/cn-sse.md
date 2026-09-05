@@ -1,4 +1,8 @@
 # 上海证券交易所 Shanghai Stock Exchange (SSE) `cn-sse`
+- `safe.gov.cn` | 官方（国家外汇管理局 SAFE，人民币汇率与外汇市场监督管理主体；2026-09-05 新增登记，[ADR-079] 风险旗标子棒） | zh | curl 常规 UA 200（m. 移动版页面为静态 HTML，正文可 grep） | 人民币汇率制度（fx_risk_note 出处）：现行《外汇管理条例》官方转载页
+  - 《中华人民共和国外汇管理条例》（2008 修订）全文页（第二十七条：人民币汇率实行以市场供求为基础的、有管理的浮动汇率制度）: http://m.safe.gov.cn/safe/2008/0806/5321.html（HTTP 200，114KB）
+- `pbc.gov.cn` | 官方（货币当局——中国人民银行 PBOC，人民币汇率政策主体；2026-09-05 新增登记，[ADR-079] 风险旗标子棒） | zh | curl 常规 UA 200（货币政策司页面为静态 HTML；⚠️ 主站大量页面有 JS/WAF 关卡，仅个别静态页可抓） | 人民币汇率制度（fx_risk_note 出处）：人行对汇率制度内容的三点官方表述
+  - 「人民币汇率制度」的内容（货币政策司专页：以市场供求为基础、参考一篮子货币进行调节、有管理的浮动汇率制度及其三方面内容）: https://www.pbc.gov.cn/huobizhengceersi/214481/214545/214769/3871699/index.html（HTTP 200，27KB）
 - `sse.com.cn` | 官方 | zh | WebFetch 对规则总览页（`lawandrules/sselawsrules/overview/`）返回 403；换 `lawandrules/sselawsrules2025/overview/`（新版路径）+ curl 常规 UA 可过（HTTP 200）；PDF 用 `pdftotext -layout` 提取纯文本再 grep 定位条款，比逐页翻 PDF 快得多 | 规则总览页本身不含全文直链，需从站内导航多跳到具体规则文档；官网有《现行有效的业务规则清单》目录 PDF（见下）能确认某规则「现行有效」，但清单本身不含可点击的逐条直达链接，还没找到《交易规则》全文在 sse.com.cn 上的直接 URL——这是本节唯一的已知缺口，下次找到了请替换掉 mgzq.com 那条并把相关字段 confidence 升回 high
   - 规则总览: https://www.sse.com.cn/lawandrules/sselawsrules2025/overview/
   - 现行有效的业务规则清单（PDF，确认《交易规则》仍现行有效，但只是目录不含全文）: https://www.sse.com.cn/lawandrules/sselawsrules2025/overview/c/10778726/files/ddfc82e93a85496bb075175d9a8d811d.pdf
