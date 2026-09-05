@@ -722,7 +722,7 @@ market_structure:
     holidays_note:
       zh: ""
       confidence: low
-      detail: "本次抓取页面未见衍生品市场节假日安排与现货市场（见顶层 holidays_note）存在实质差异的官方说明，未逐条核实，留空。"
+      detail: "棒 4 复查（[ADR-082]）：Market Timings 页对 Equity Derivatives 无节假日专属表述——该页「holidays declared by the Exchange in advance」句式仅出现在 Currency Derivatives 与 Debt segment 段落，不覆盖股票/股指衍生品；现货日历页为 JS 渲染（任务二已知失败模式），维持留空，已并入 OPEN-QUESTIONS。"
 
     opening_mechanism:
       zh: "开盘前集合竞价（Pre-open session）09:00-09:08收集订单，09:08-09:12为订单确认/取消窗口，09:12-09:15为价格发现与向连续交易过渡的窗口；期间会披露指示性均衡价（Indicative equilibrium price）、买卖挂单量及涨跌幅；集合竞价确定的均衡价即为当日开盘价，若未能形成价格则以Normal Market首笔成交价作为开盘价"
@@ -861,9 +861,8 @@ market_structure:
         quote: "For Index Futures: at 10% of the base price ／ For Index and Stock Options: A contract specific price range based on its delta value is computed and updated on a daily basis. ／ There shall be no fixed price band applicable for stock futures contracts. ... a dynamic price band for a futures contract shall be kept at a certain percentage of the base price as defined by Exchange from time to time. In the event of a market trend in either direction, the dynamic price band shall be relaxed by 5% at a time in the direction of the price movement during the day in co-ordination with the other Exchanges"
         confidence: high
       other_boards:
-        zh: ""
-        confidence: low
-        detail: "本字段用于表达同一板块内不同子板/子类别，衍生品业务按产品线（股票/货币/商品/利率）划分而非「板块」，为避免概念混淆此处不填；其他产品线的价格限制机制（如商品衍生品非农品种6%基准限幅、触发后冷静15分钟放宽至9%；国债利率期货操作区间±3%可放宽两次）已记入 contract_specs_note 与 detail 说明。"
+        not_applicable: true
+        detail: "本字段用于表达同一板块内不同子板/子类别，衍生品业务按产品线（股票/货币/商品/利率）划分而非「板块」，「同板块内其他子板」的设计前提不成立（[ADR-082] 裁定②合格样本）；其他产品线的价格限制机制（如商品衍生品非农品种6%基准限幅、触发后冷静15分钟放宽至9%；国债利率期货操作区间±3%可放宽两次）已记入 contract_specs_note 与 detail 说明。"
 
     circuit_breaker:
       enum: index_level

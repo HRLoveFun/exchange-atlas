@@ -10,7 +10,7 @@
 
 1. 后台任务开 PR 时自带 `gh pr merge --auto --squash --subject "<标题>" --body ""`（`--subject`/`--body` 必须显式给，见下方「`gh pr merge` 非交互执行」一节；不需要 `--delete-branch`，仓库已开 `deleteBranchOnMerge`，远端分支合并后服务端自动删）。
 2. `.github/workflows/pr-build.yml` 在 PR 上跑 `make build`，绿了 GitHub 服务端执行 auto-merge，squash 进 main——这一步不是本地 `gh` 命令做的，是 GitHub 服务端异步完成的，所以**不会触碰本地 worktree 检出的分支**，「先摘 worktree 再 merge」那个坑天然不会发生。
-3. 若 `DECISIONS.md` 里带 `ADR-PENDING-<slug>` 占位符，合并进 main 之后由 `.github/workflows/adr-heal.yml`（`push: main` 触发，`concurrency: group: main-adr-heal` 保证多个后台 PR 连续合并时逐条串行处理，不会重现 PR69-72 那次连撞四次）自动跑 `make assign-adr` 把占位符定号，然后**开一条 `adr-heal/auto-<sha>` 分支、开 PR、`gh pr merge --auto --squash`，并在同一个 job 里轮询等这条 PR 真正合并完成才收尾**（[ADR-086]，取代 [ADR-081] 最初「直接 commit + push 回 main」的做法——main 的 branch protection 要求 `build` 状态检查通过，bot 的直推没有关联检查会被 GitHub 拒绝，走 PR 复用 `pr-build.yml` 已经在验证的同一条路径）。**为什么必须等到真正合并**：`concurrency` 组的串行保证只在 job 跑到结束才生效——如果开完 PR 就提前退出，下一个排队的 healer 运行会在台账还没被这次合并更新之前就读取 max 号，重演 [ADR-069]/[ADR-076] 的撞号问题。全程无需协调者手动跑 `make assign-adr`。
+3. 若 `DECISIONS.md` 里带 `ADR-PENDING-<slug>` 占位符，合并进 main 之后由 `.github/workflows/adr-heal.yml`（`push: main` 触发，`concurrency: group: main-adr-heal` 保证多个后台 PR 连续合并时逐条串行处理，不会重现 PR69-72 那次连撞四次）自动跑 `make assign-adr` 把占位符定号，然后**开一条 `adr-heal/auto-<sha>` 分支、开 PR、`gh pr merge --auto --squash`，并在同一个 job 里轮询等这条 PR 真正合并完成才收尾**（[ADR-087]，取代 [ADR-081] 最初「直接 commit + push 回 main」的做法——main 的 branch protection 要求 `build` 状态检查通过，bot 的直推没有关联检查会被 GitHub 拒绝，走 PR 复用 `pr-build.yml` 已经在验证的同一条路径）。**为什么必须等到真正合并**：`concurrency` 组的串行保证只在 job 跑到结束才生效——如果开完 PR 就提前退出，下一个排队的 healer 运行会在台账还没被这次合并更新之前就读取 max 号，重演 [ADR-069]/[ADR-076] 的撞号问题。全程无需协调者手动跑 `make assign-adr`。
 
 **什么时候还需要人工介入（仅剩三种情况）**：
 

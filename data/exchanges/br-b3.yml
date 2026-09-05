@@ -655,9 +655,16 @@ market_structure:
         confidence: high
 
     holidays_note:
-      zh: ""
-      confidence: low
-      detail: "未见衍生品市场节假日安排与现货市场（见顶层holidays_note）存在实质差异的官方说明，本次未逐条核实，留空。"
+      zh: "与现货市场共用同一假日框架：B3 官网 Trading Calendar / Holidays 页对每个休市日的标准表述为「休市日无股票、私募固定收益、固定收益 ETF、上市衍生品及证券借贷市场交易」——上市衍生品明文包含在该假日安排内；逐年具体日期以 B3 当年 Trading Calendar 为准（见顶层 holidays_note）"
+      en: "Derivatives share the same holiday framework as the cash market: B3's official Trading Calendar / Holidays page states for each closure day that there will be no trading on the equity, private fixed income, fixed income ETF or listed derivatives markets, or on the securities lending markets — listed derivatives are explicitly covered; year-by-year dates follow B3's current Trading Calendar (see the top-level holidays_note)"
+      detail: "棒 4（[ADR-082]）：现货日历页的休市规则句明文列举「listed derivatives markets」，属「现货日历页明文把衍生品纳入适用范围」的正面依据，直接复用同一来源；confidence 沿用顶层的 medium（该页无 JS 时默认显示往年骨架）。"
+      sources:
+        - title: "B3 — Trading calendar / Holidays（PUMA Trading System，For members and traders）"
+          url: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-calendar/holidays/
+          accessed: 2026-09-04
+      quote: "There will be no trading on the equity, private fixed income, fixed income ETF or listed derivatives markets, or on the securities lending markets"
+      confidence: medium
+      verified: 2026-09-05
 
     opening_mechanism:
       zh: "沿用顶层市场通用的「开盘前阶段」（Pre-opening phase）机制定义——只接受挂单、不做撮合，仅用于确定理论开盘价；该定义见于《交易规程手册》Title II「交易环境」章节，明确适用于「各组资产与衍生品」（in each group of assets and derivatives），非现货专属。指数期货类旗舰合约的开盘前阶段时长为5分钟（具体时刻见trading_sessions.pre_market）"
@@ -750,12 +757,30 @@ market_structure:
         quote: "The methodology uses the prices of actual trades in the most liquid contract months as a basis for dynamic updating of the reference price (tunnel center) to calculate auction and rejection tunnels for the less liquid contract months, as follows: I - Pivot point: the contract month considered most liquid and used as a basis for updating the other contract months, considered less liquid."
         confidence: high
       main_board:
-        zh: ""
-        confidence: low
-        detail: "具体隧道带宽参数（更新百分比、最小带宽等）依合约类型逐一维护于B3官网，本次抓取到的规程手册正文未给出固定数值表，留空不猜（与顶层price_limits.main_board同一处理方式）。"
+        zh: "逐合约「隧道」（Túneis）参数制，非全市场统一涨跌幅——以 Ibovespa 指数期货（IND）B2 组为代表性样本：拒绝隧道（Túnel Rejeição，超出即拒单）±1,00%，隧道中心为最近成交价（Most Recent）；拍卖隧道（Túnel Leilão）±0,50%；均价隧道（Túnel Preço Médio，对照区间为最近 5 分钟 Last Trade Price）±0,75%；拍卖期间价格保护隧道 ±1,20%，另有数量保护 750。参数按到期月份/合约组（B1/B2/B6…）分档，各组数值略有差异，全表按「指数期货分册」由 B3 官网「Parâmetros dos Túneis de Negociação」页公布并更新（百分数为原文小数逗号形态）"
+        en: "Per-contract \"tunnel\" (Túneis) parameters rather than a market-wide daily price limit — sampled by the Ibovespa index futures (IND) group B2: rejection tunnel (Túnel Rejeição, orders beyond it rejected) ±1,00% with tunnel centre at the most recent trade; auction tunnel (Túnel Leilão) ±0,50%; average-price tunnel (Túnel Preço Médio, calculated over the last 5 minutos of Last Trade Price) ±0,75%; price-protection-during-auction tunnel ±1,20%, plus a quantity protection of 750. Parameters are tiered by maturity/instrument group (B1/B2/B6…) with slightly different values, published and updated per product-line booklet on B3's \"Parâmetros dos Túneis de Negociação\" page (percentages in the source's comma-decimal form)"
+        detail: "棒 3「逐合约口径」（[ADR-082]）：沿用 hk-hkex 恒指系列样本做法——选代表合约（IND B2 组）并在本 detail 声明代表性范围：参数逐合约/逐组维护，B1/B6 等其他组数值不同，不把逐合约差异压成市场级单一数值；百分数照录原文小数逗号（1,00% 等），未转写为小数点。来源为 B3 官网指数期货分册 PDF（2026-05-18 版）。"
+        sources:
+          - title: "B3 — Contratos Futuros Referenciados em Índices: Parâmetros dos Túneis de Negociação（2026-05-18 分册）"
+            url: https://www.b3.com.br/data/files/D5/73/C0/79/DDC2E91064BF82E9AC094EA8/Futuro%20de%20Indices%20-%2018052026.pdf
+            accessed: 2026-09-05
+          - title: "B3 — Parâmetros dos Túneis de Negociação（分册索引页）"
+            url: https://www.b3.com.br/pt_br/solucoes/plataformas/puma-trading-system/para-participantes-e-traders/regras-e-parametros-de-negociacao/parametros-dos-tuneis-de-negociacao/
+            accessed: 2026-09-05
+        quote: "IND B2 +/- 1,00 % Most Recent +/- 0,50 % Most Recent +/- 0,75 % 5 minutos Last Trade Price +/- 1,20 % Last Trade Price 750"
+        confidence: high
+        verified: 2026-09-05
       other_boards:
-        zh: ""
-        confidence: low
+        zh: "其他合约/产品线各用独立参数分册，与 IND 不同——如迷你 Ibovespa 期货（WIN）W6 组拒绝隧道为 ±2,60%、拍卖期间价格保护隧道 ±4,00%；每条产品线（期权/外汇/利率/商品/通胀指数/国际利率等）在 B3 官网同一索引页下各有分册，逐合约维护并随时更新"
+        en: "Other contracts/product lines use their own parameter booklets, different from IND — e.g. the mini Ibovespa futures (WIN) group W6 has a rejection tunnel of ±2,60% and a price-protection-during-auction tunnel of ±4,00%; each product line (options/FX/rates/commodities/inflation-index/international rates etc.) has its own booklet under the same B3 index page, maintained per contract and updated over time"
+        detail: "棒 3「逐合约口径」（[ADR-082]）：本字段声明代表性范围——仅摘 WIN W6 组一档作跨产品线差异的示例（不将 W6/W7 表述为「主力组」——组别字母的确切含义未见官方说明），其余产品线分册未逐一摘引；WIN 原文另有 W1 组（±1,00%）等分档。"
+        sources:
+          - title: "B3 — Contratos Futuros Referenciados em Índices: Parâmetros dos Túneis de Negociação（2026-05-18 分册）"
+            url: https://www.b3.com.br/data/files/D5/73/C0/79/DDC2E91064BF82E9AC094EA8/Futuro%20de%20Indices%20-%2018052026.pdf
+            accessed: 2026-09-05
+        quote: "W6 +/- 2,60 % Most Recent +/- 1,30 % Most Recent +/- 2,40 % 5 minutos Last Trade Price +/-4,00 % Last Trade Price 750"
+        confidence: high
+        verified: 2026-09-05
 
     circuit_breaker:
       enum: index_level
@@ -791,7 +816,7 @@ market_structure:
     block_trade:
       zh: ""
       confidence: low
-      detail: "规程手册「大宗交易解决方案」（Midpoint order/Request For Quote/Book of Block Trade）章节措辞泛指「assets」，未见衍生品专属的大手交易时段表或规则页；顶层block_trade的10:00–16:55时段来自现货市场交易时段页，未找到衍生品对应版本，如实留空。"
+      detail: "规程手册「大宗交易解决方案」（Midpoint order/Request For Quote/Book of Block Trade）章节措辞泛指「assets」，未见衍生品专属的大手交易时段表或规则页；顶层block_trade的10:00–16:55时段来自现货市场交易时段页，未找到衍生品对应版本。棒 3 复查（[ADR-082]）：B3 隧道参数分册页（见 price_limits.main_board 来源）亦无大宗交易门槛参数，未找到穷举性原文前维持留空，已记入 OPEN-QUESTIONS。"
 
     market_maker_scheme:
       zh: "与顶层做市商制度（见market_structure.market_maker_scheme）为同一套注册体系（独立做市商/参与B3计划的独立做市商/受托做市商三类，投资基金亦可注册为独立做市商），规程手册原文明确将做市商数量上限单独按「各类别/各类衍生品」（each type or class of derivative）列出，即该体系本身就是资产与衍生品通用，未见衍生品另立一套规则"

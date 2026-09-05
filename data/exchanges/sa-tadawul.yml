@@ -726,9 +726,8 @@ market_structure:
         quote: "Daily Price Limits / 20 %"
         confidence: high
       other_boards:
-        zh: ""
-        confidence: low
-        detail: "本所衍生品市场目前仅 MT30 指数期货一条产品线（见 products 章节），无其他板块/品类可比较；官方规则文本预留了未来新增单一股票期货/期权（SSF/SSO）的框架，届时如涨跌幅参数不同需另行核实补充，不为凑填而假设。"
+        not_applicable: true
+        detail: "本所衍生品市场目前仅 MT30 指数期货一条产品线（见 products 章节），「其他合约/板块幅度」的设计前提不成立（[ADR-082] 裁定②合格样本：没有『其他』可比较）；官方规则文本预留了未来新增单一股票期货/期权（SSF/SSO）的框架——届时该字段前提成立，如涨跌幅参数与 MT30 不同需另行核实补充（时效性提示）。"
 
     circuit_breaker:
       enum: none
@@ -1135,9 +1134,9 @@ clearing:
         - title: "Muqassa — Derivatives Index Brochure（Daily Margin/Premium Settlement）"
           url: https://www.muqassa.sa/wps/wcm/connect/6a41fc1e-3ace-40de-a42c-9c1ac8ec97bc/Derivatives_Index_Brochure_Digital_EN.pdf?MOD=AJPERES&CVID=oMhahw8
           accessed: 2026-09-05
-        - title: "Saudi Exchange — MT30 Index Futures contract specifications"
-          url: https://www.saudiexchange.sa/wps/portal/tadawul/markets/derivatives/products/mt30
-          accessed: 2026-08-27
+        - title: "Saudi Exchange — MT30 Index Futures Contract Specifications PDF（经 tadawulgroup.sa 分发）"
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f5716373-65f9-4a6c-961c-f1f76f351138/MT30.pdf?MOD=AJPERES&CVID=pmfpIF7
+          accessed: 2026-09-05
       quote: "Daily Margin/Settlement All outstanding positions are marked to market based on the daily settlement price at the end of the trading ... Mark to market (MTM) is T+0 and payment is T+1 ... Underlying Index MT30 (MSCI Tadawul) ... The daily settlement price of the futures contract shall be determined using the Theoretical Futures Price (TFP) calculated by Muqassa at the market closing time."
       confidence: high
       verified: 2026-09-05
@@ -1159,9 +1158,9 @@ clearing:
       en: "Sampled by the MT30 index futures: the contract expiration date is the third Thursday of the expiry month, moving to the preceding trading day if that day is not a trading day; the expiration day is the last day on which the contract is available for trading (last trading day = expiration day). The final settlement price is the average of index values sampled every 15 seconds between 14:00 and 15:00 plus one additional value taken after 15:10:30, excluding the highest three and lowest three samples, rounded to the nearest 0.5 index point, cash settled"
       detail: "MT30 为本所当前唯一衍生品产品线（MT30 指数期货），无跨产品口径问题；官方规则已预留未来新增单一股票期货/期权（SSF/SSO）的框架条款，届时须按各自产品规格另核。"
       sources:
-        - title: "Saudi Exchange — MT30 Index Futures contract specifications"
-          url: https://www.saudiexchange.sa/wps/portal/tadawul/markets/derivatives/products/mt30
-          accessed: 2026-08-27
+        - title: "Saudi Exchange — MT30 Index Futures Contract Specifications PDF（经 tadawulgroup.sa 分发）"
+          url: https://www.tadawulgroup.sa/wps/wcm/connect/f5716373-65f9-4a6c-961c-f1f76f351138/MT30.pdf?MOD=AJPERES&CVID=pmfpIF7
+          accessed: 2026-09-05
         - title: "Tadawul Derivatives Market Brochures（Key Terms: Expiration Day）"
           url: https://www.tadawulgroup.sa/wps/wcm/connect/0e0e1657-e035-4172-a4e6-943c4dfce80d/Derivatives+Market+Brochures.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-0e0e1657-e035-4172-a4e6-943c4dfce80d-oW9oJ-.
           accessed: 2026-08-27

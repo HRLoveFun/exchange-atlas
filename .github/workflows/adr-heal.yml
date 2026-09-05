@@ -5,7 +5,7 @@ name: adr-heal
 # main 后自动跑一次 `make assign-adr` 把占位符定号，取代原来「合并协调者手动跑
 # 一遍再 commit」的人工步骤（见 PROJECT/GIT-RUNBOOK.md）。
 #
-# 定号后走「开分支 + PR + auto-merge」而不是直推 main（[ADR-086]）：main 的
+# 定号后走「开分支 + PR + auto-merge」而不是直推 main（[ADR-087]）：main 的
 # branch protection 要求 `build` 状态检查通过，而 github-actions[bot] 的直推
 # 没有关联的检查状态，会被 GitHub 判定为 "Required status check build is
 # expected" 拒绝（GH006）。走 PR 复用 pr-build.yml 已经在验证的同一条路径，
@@ -68,7 +68,7 @@ jobs:
 
           PR_URL=$(gh pr create --base main --head "$BRANCH" \
             --title "chore: 自动定号 ADR-PENDING 占位符" \
-            --body "由 adr-heal.yml 自动生成——把 push 到 main 的提交里带的 ADR-PENDING-* 占位符定号为真实编号（见 [ADR-076]/[ADR-086]）。走 PR + auto-merge 而不是直推 main，理由见 [ADR-086]。")
+            --body "由 adr-heal.yml 自动生成——把 push 到 main 的提交里带的 ADR-PENDING-* 占位符定号为真实编号（见 [ADR-076]/[ADR-087]）。走 PR + auto-merge 而不是直推 main，理由见 [ADR-087]。")
           PR_NUM=$(gh pr view "$PR_URL" --json number -q .number)
           echo "已开 PR #$PR_NUM：$PR_URL"
           gh pr merge "$PR_NUM" --auto --squash \

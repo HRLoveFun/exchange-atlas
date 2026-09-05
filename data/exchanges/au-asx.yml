@@ -649,9 +649,19 @@ market_structure:
         confidence: high
 
     holidays_note:
-      zh: ""
-      confidence: low
-      detail: "ASX 24另发布独立的Trading Calendar（如T24-trading-calendar系列PDF），与现货市场假期安排未必一致，本轮抓取范围未覆盖该日历PDF的具体条款，如实留空。"
+      zh: "ASX 24（衍生品市场）有专属交易日历：官网「ASX 24 Trading Calendar」页明示该页说明 ASX 24 市场在澳境内外公众假期的交易时段，并按年度发布 T24 Trading Calendar（逐月逐日，含假日当日的日盘/夜盘安排与合约到期/行权时刻）；政策表为：澳大利亚公众假期当日 ASX 24 日盘（Day Session）休市、夜盘（Night Session）正常交易，美国假日与新西兰元合约另按表内分档处理。与现货市场（ASX Trade，见顶层 holidays_note）分属两套日历"
+      en: "ASX 24 (the derivatives market) has its own trading calendar: the official ASX 24 Trading Calendar page details trading hours as they relate to the ASX 24 markets during domestic and international public holidays, and an annual T24 Trading Calendar is published with day-by-day entries covering holiday-day Day Session/Night Session arrangements plus expiry/exercise times; the policy table: on Australian public holidays the ASX 24 Day Session is Closed while the Night Session runs Normal Trading Hours, with US holidays and NZ Dollar contracts handled by separate rows. This is a separate calendar from the cash market (ASX Trade — see the top-level holidays_note)"
+      detail: "棒 4（[ADR-082]）：此前 [ADR-021] 记「另发 Trading Calendar PDF 本轮未覆盖」；本次定位到官方「ASX 24 Trading Calendar」页与 T24-trading-calendar2026.pdf（均静态可抓），假日期间安排取自页面政策表，逐日明细在 PDF。"
+      sources:
+        - title: "ASX — ASX 24 Trading Calendar（页内假日交易时段政策表）"
+          url: https://www.asx.com.au/markets/market-resources/asx-24-trading-calendar
+          accessed: 2026-09-05
+        - title: "ASX — T24 Trading Calendar January–December 2026 PDF"
+          url: https://www.asx.com.au/content/dam/asx/markets/market-resources/t24-trading-calendars/T24-trading-calendar2026.pdf
+          accessed: 2026-09-05
+      quote: "The following details Trading hours as they relate to the ASX 24 markets during domestic and international public holidays. ... Australian Day Session Closed Night Session Normal Trading Hours"
+      confidence: high
+      verified: 2026-09-05
 
     opening_mechanism:
       zh: "开市前（Pre-Open）时段结束后转入Open状态，未成交的竞价盘按「均衡价格」（Equilibrium Price, EP）算法一次性撮合：算法依次以（1）最大成交量、（2）最小剩余量、（3）市场压力方向（买卖盈余符号）、（4）参照前一成交/结算价 四步择定均衡价"
