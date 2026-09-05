@@ -684,6 +684,12 @@ market_structure:
       confidence: high
 
     order_types:
+      spec:
+        market: true
+        limit: true
+        stop: true
+        tif: [day, gtc, gtd, fok]
+        note: "清单以「例如」形式出现在审计留痕通告中、未必穷尽；另有组合型订单 MIT/MOC/OCO 与 good-till-session 未入受控 tif 词表"
       zh: "审计留痕相关监管通告举例列出的订单类型包括：市价盘（Market Order）、限价盘（Limit Order）、止损盘（Stop Order）；组合型订单如「市价触发」（Market-If-Touched）、「市价收盘」（Market-On-Close）、「一撤一」（One-Cancels-the-Other）；有效期类型含当日有效（day order）、全部成交否则取消（fill or kill）、撤销前有效（good-till-cancelled）、指定日期前有效（good-till-date）、指定时段内有效（good-till-session）——该清单以「例如」形式出现在审计留痕规定中，未必穷尽 SGX-DT 支持的全部订单类型"
       en: "Order types listed as examples in the audit-trail regulatory notice include: Market Order, Limit Order, Stop Order; combined order types such as Market-If-Touched, Market-On-Close, One-Cancels-the-Other; validity types including day order, fill or kill, good-till-cancelled, good-till-date, good-till-session — this list appears illustratively (\"e.g.\") within an audit-trail record-keeping notice and may not be an exhaustive enumeration of every order type SGX-DT supports"
       sources:
@@ -694,6 +700,7 @@ market_structure:
       confidence: medium
 
     tick_size:
+      spec: {regime: per_instrument, min_tick: 0.05, note: "逐合约载于 Contract Specifications；市场最小报价单位样本（Regulatory Notice 4.1.11 附录，适用期 2026-07-20~08-23）：MSCI 新加坡 0.05 指数点（S$5）、日经 225 期货 5 点（¥2,500）、澳元/美元期货 US$0.0001、10 年期 JGB 期货 ¥0.01/¥100 面值；协商大宗交易适用更细的 NLT Tick Size"}
       zh: "因合约而异，逐合约在 Contract Specifications 中规定；以《Regulatory Notice 4.1.11》附录公布的「一般市场最小报价单位」（Market Tick Size，区别于协商大宗交易适用的更细「NLT Tick Size」）为例：MSCI新加坡指数期货与期权为0.05指数点（合S$5）；日经225指数期货为5指数点（合¥2,500）；澳元/美元期货为US$0.0001（合US$2.50）；10年期日本国债期货为每¥100面值¥0.01（合¥10,000）——该表随监管通告定期更新（本次抓取版本注明适用期为2026年7月20日至8月23日），仅作举例，不代表长期不变或穷尽全部合约"
       en: "Varies by contract, set in each Contract's Contract Specifications; illustrative examples from the standard \"Market Tick Size\" table published as an appendix to Regulatory Notice 4.1.11 (distinct from the finer \"NLT Tick Size\" used for negotiated large trades): MSCI Singapore Index Futures and Options 0.05 index points (S$5); Nikkei 225 Index Futures 5 index points (¥2,500); AUD/USD Futures US$0.0001 (US$2.50); 10-Year Japanese Government Bond Futures ¥0.01 per ¥100 face value (¥10,000) — this table is periodically revised via regulatory notice (the fetched version states it is effective 20 Jul 2026 to 23 Aug 2026); illustrative only, not a stable long-term figure nor an exhaustive list"
       sources:
@@ -736,6 +743,7 @@ market_structure:
 
     circuit_breaker:
       enum: stock_level
+      spec: {type: contract_level, note: "逐合约价格限制+冷静期（交易所可为特定合约单独设置）；期权在标的期货冷静期内同步暂停。enum 借用 stock_level 表「非全市场」（先例 hk-hkex，见 OPEN-QUESTIONS #44(b)）"}
       zh: "逐合约级别的「价格限制/冷静期」机制（非全市场性质）：交易所可为特定合约单独设置价格限制并触发冷静期；期权合约在其标的期货合约冷静期内同步暂停交易——与港交所衍生品市场VCM同样是「逐合约」颗粒度，借用 stock_level 仅取其「非全市场」含义（沿用 hk-hkex.derivatives.circuit_breaker 先例的处理方式），不代表真的是个股层面"
       en: "A per-contract \"Price Limit / Cooling Off\" mechanism (not market-wide): the Exchange may prescribe Price Limits for specific Contracts that trigger a Cooling Off Period; an Option Contract halts in sync with its underlying Futures Contract's Cooling Off Period — the same per-contract granularity as HKEX derivatives' VCM; `stock_level` is borrowed only for its \"not market-wide\" sense (following the hk-hkex.derivatives.circuit_breaker precedent), not a literal single-stock-level claim"
       sources:
@@ -746,6 +754,7 @@ market_structure:
       confidence: high
 
     volatility_interruption:
+      spec: {halt_minutes: null, note: "冷静期时长载于各合约 Contract Specifications（规则未统一规定，故 null）；期间可在价格限制区间内继续交易，届满恢复至交易日结束或另行规定期间"}
       zh: "「冷静期」（Cooling Off Period）：持续时长载于各合约的 Contract Specifications（规则原文未统一规定），期间该合约可在价格限制区间内继续交易；冷静期届满后恢复正常交易，直至当个交易日结束或 Contract Specifications 另行规定的其他期间"
       en: "\"Cooling Off Period\": duration is set in each Contract's Contract Specifications (not uniformly prescribed in the Rules text); during the period the Contract may continue trading within its Price Limits; trading resumes normally upon the period's lapse, for the remainder of the Trading Day or such other period as the Contract Specifications prescribe"
       sources:
@@ -776,6 +785,7 @@ market_structure:
       confidence: high
 
     market_maker_scheme:
+      spec: {present: true, max_spread_pct: null, note: "认可指定做市商：撮合算法可启用 MM Allocation（同价位优先于其他订单）；RFQ 不构成预先约定交易；资格/义务/激励细则未见公开条款（medium）"}
       zh: "SGX-DT 认可「指定做市商」（designated market maker）身份：交易撮合算法可对其订单启用「做市商优先分配」（MM Allocation），使同价位下做市商订单优先于其他订单成交；做市商的报价请求（RFQ）不构成「预先约定交易」（pre-arranged trade）的禁止情形——但本次抓取的规则文本未找到类似 SGX-ST Chapter 6（现货市场指定做市商制度）那样完整的资格认定/义务/激励条款，衍生品市场做市商计划的具体细节可能载于未能抓取的商业性文件，confidence 因此标 medium"
       en: "SGX-DT recognises \"designated market maker\" status: the trade matching algorithm can activate \"Market Maker Allocation\" (MM), giving a designated market maker's orders priority over other orders at the same price; a request for a quote from a designated market maker does not fall foul of the pre-arranged-trade prohibition — however, this session's fetch did not turn up a full DMM eligibility/obligations/incentive chapter comparable to SGX-ST Chapter 6 for the securities market; the derivatives market maker programme's fuller details may live in commercial documentation not fetched this session, hence confidence: medium"
       sources:
