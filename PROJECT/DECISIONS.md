@@ -90,6 +90,7 @@
 - ADR-083 · 2026-09-05 · tools/ 数据加载样板去重：新增 `tools/data_files.py`
 - ADR-084 · 2026-09-05 · DECISIONS.md 归档阈值：比照 taxonomy.yml 的「暂不拆，设阈值」范式
 - ADR-085 · 2026-09-05 · 前端可视化模块共享层抽取：收敛 clone-and-own
+- ADR-086 · 2026-09-05 · adr-heal.yml 改走「开分支 + PR + auto-merge」，不再直推 main
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2394,5 +2395,31 @@ print('全库 medium 零 sources:',n)
 - **没有引入构建步骤 / 模块打包器**——沿用 [ADR-035] C 的零构建决策，所有收敛都在同一个 IIFE 内完成。
 - **没有合并 `rm`/`pt` 之外的图例、也没有触碰 prose 类文案**——内容审查后确认是各模块真正不同的业务信息，不是重复。
 - **没有把 `check_no_dup_render_helpers.py` 做成能自动改代码的工具**——只检测、只报告，改法交给写代码的人判断（同一克制原则见 [ADR-049] 的 `check_en_terms.py`）。
+
+**日期：** 2026-09-05
+
+### ADR-086 — adr-heal.yml 改走「开分支 + PR + auto-merge」，不再直推 main
+
+**背景：** [ADR-081] 落地的自动合并流水线里，`adr-heal.yml` 在 `push: main` 后跑 `make assign-adr` 定号，然后**直接 `git push origin main`**。同一天晚些时候给 main 加的 branch protection `required_status_checks`（`build`，见 `PROJECT/GIT-RUNBOOK.md`"已修复的缺口"一节）让这条直推路径失效：`github-actions[bot]` 的直推没有关联的 CI 检查状态，被 GitHub 判定为 "Required status check `build` is expected" 拒绝（GH006）；`enforce_admins: false` 只豁免真人管理员账号的推送，不覆盖走 Actions token 的 bot。实测：架构优化任务 B/C（PR #85/#86）合并后，`adr-heal` 均运行失败（exit 1），main 残留两个未定号的 `ADR-PENDING-*` 占位符，`make check` 一度在 main 上变红，用 PR #87 手动跑 `make assign-adr` 兜底修复。
+
+**为什么选这个方案（用户 2026-09-05 拍板，逐条对比过三个候选）：**
+
+1. **候选 A：迁移到 GitHub Rulesets，给 `github-actions[bot]` 开 bypass。** 技术上可行（查证确认经典 branch protection 的 bypass 机制"legacy branch protections... would not apply to status checks"，必须迁移到 Rulesets 才有真正覆盖状态检查的 bypass 名单），但 bypass 名单活在 GitHub 网页设置里，不受 git 历史/PR review 约束，且一旦开了 bypass，被绕过的是这个 actor 对 main 的**所有**直推，不只是这一次定号——跟本项目"该守的都写成脚本/机器校验、留在版本控制里"的一贯做法（`CLAUDE.md` §四）不是一回事，判定**不选**。
+2. **候选 B：用仓库主人的 PAT 替换直推用的 `GITHUB_TOKEN`。** 最贴近"个人仓库默认直推"的原有设计、延迟最低，但 PAT 有生命周期、到期前不会报警只会在某天悄悄推送失败，且是账号级凭据、泄露的影响面远超"只能碰这一个仓库这一个分支"，长期维护负担最重，判定**不选**。
+3. **候选 C（选定）：`adr-heal.yml` 自己开分支 + PR + `gh pr merge --auto --squash`，job 内轮询等 PR 真正合并完成才收尾。** 复用后台任务本来就在用、已经被 PR #85/#86/#87/#88 反复验证过的同一条路径（`CLAUDE.md` §六「后台任务开 PR 时应带 `gh pr merge --auto --squash`」），不新增任何游离于代码之外的仓库设置或长期凭据；`adr-heal.yml` 本身是纳入版本控制、可 diff、可 review 的 workflow 文件，跟仓库里其他一切自动化路径完全同构。自动化程度与直推方案打平（零人工点击，只多一次约 15–60 秒的 PR 检查耗时）。
+
+**定了什么：**
+
+1. `.github/workflows/adr-heal.yml`：`make assign-adr` 之后先本地跑一遍 `make build`（没有占位符则直接退出；有占位符但本地就红则快速失败，不带着已知会红的改动去开 PR）；确认绿了才 `git checkout -b adr-heal/auto-<sha>` 开分支、commit、push、`gh pr create`、`gh pr merge --auto --squash`（squash 提交带 `[skip ci]`，避免这次 squash 落地后又空转触发一轮 `adr-heal`）。
+2. **关键纪律：job 必须轮询 `gh pr view --json state` 直到 `MERGED` 才能返回成功**，不能开完 PR 挂上 auto-merge 标记就退出——`concurrency: group: main-adr-heal` 的串行保证建立在"上一次 healer 运行结束时台账已经是最新"这个前提上，提前退出会让下一个排队的 healer 读到过期的台账 max，重演 [ADR-069]/[ADR-076] 要解决的撞号问题。轮询上限 10 分钟（每 15 秒查一次），超时或 PR 被关闭则 `exit 1` 报错，交人工用 `gh pr checks` 排查——延续 [ADR-081] "CI 报红 / 真实冲突才需要人工介入"的既有原则，只是新增了"healer 自己的 PR 卡住"这第三种情形。
+3. **`CLAUDE.md` §六 / `PROJECT/GIT-RUNBOOK.md` 同步更新**，把"合并进 main 后自动跑 `make assign-adr` 并直接提交"的旧描述改为"自动跑 `make assign-adr`、开分支 + PR 并自动合并"。
+
+**没做：**
+
+- **没有改 branch protection / 没有迁移到 Rulesets**——候选 A 被拍板否决，required_status_checks 维持现状不动。
+- **没有引入任何新的仓库 secret 或凭据**——候选 B 被拍板否决，`adr-heal.yml` 仍然只用默认的 `github.token`（`GITHUB_TOKEN`），只是加了 `pull-requests: write` 权限。
+- **没有改 `pr-build.yml`**——它验证的对象（任意 PR 都要 `make build` 全绿）不变，healer 开的 PR 只是又走了一遍这条已有的检查，不需要为它单独开后门或例外。
+
+**验证：** 本条自身就是这条改造后流水线的第一个真实用例——本分支上手动跑 `make assign-adr` 把占位符定号为下面这个真实编号（沿用 [ADR-085] 落地时验证过的"合并前先在自己分支上定号"兜底做法，不依赖旧版 healer），本地 `make build` 全绿；YAML 语法（`yaml.safe_load`）与三段内嵌 shell 脚本（`bash -n`）均通过；`.github/workflows/adr-heal.yml` 合并进 main 后，下一次真正有 `ADR-PENDING-*` 占位符需要处理时（下一条 ADR 落地即是）会验证这条新流水线端到端跑通。
 
 **日期：** 2026-09-05
