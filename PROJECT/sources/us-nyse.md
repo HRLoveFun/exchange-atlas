@@ -61,3 +61,14 @@
 针对上面 v0.2 记录的「sec.gov/finra.org/dtcc.com 三个域名普遍拒绝」这一长期悬案（也是
 `PROJECT/OPEN-QUESTIONS.md` 框架性问题第14/15/32条的根源），本次专门花时间系统性尝试突破，
 结果是**三个域名里两个真正攻克，一个依然拒绝**：
+
+## 任务四族A补充登记（2026-09-05，ADR-078：clearing 保证金四件套）
+
+- `govinfo.gov` | 官方（美国政府出版局，Federal Register 电子归档） | en | curl 常规 UA 200，未见反爬 | NSCC 保证金方法论的一手官方文本（SEC 批准 NSCC 盘中保证金程序修订的联邦公报通知）
+  - Federal Register Vol. 90 No. 79（NSCC Intraday Monitoring and Margin Collection——Procedure XV 清算基金公式逐日计算、Required Fund Deposit 次日 10:00 am 前补足、盘中 MTM/波动性追保及 80% 触发阈值的官方描述）: https://www.govinfo.gov/content/pkg/FR-2025-04-25/html/2025-07103.htm（HTTP 200，50KB）
+- `dtcclearning.com` | 官方（DTCC 学习门户，NSCC 母公司运营） | en | curl 常规浏览器 UA 200；⚠️ URL 以 `.html` 结尾但实际返回 PDF 二进制（`tools/fetch.py` 按扩展名会存为 `.html`，`pdftotext` 不受扩展名影响仍可解析） | NSCC 清算基金保证金组件的官方技术指南
+  - NSCC Risk Margin Component Guide（清算基金要求逐日按未交收头寸计算、波动性/盯市/非流动性组件公式、MTM 组件约 4:00 p.m. 逐日收取）: https://dtcclearning.com/documents/equities-clearing-2/nscc-risk-management/nscc-risk/3992-nscc-risk-margin-component-guide/file.html（HTTP 200，610KB，PDF）
+- `ecfr.gov` | 官方（eCFR，联邦法规汇编官方在线版，国家档案局 OFR 运营） | en | curl 常规浏览器 UA 200，未见反爬 | 客户端保证金的一手法规文本
+  - 12 CFR Part 220（Regulation T，§220.12(a)「50 percent of the current market value」初始保证金条文）: https://www.ecfr.gov/current/title-12/chapter-II/subchapter-A/part-220（HTTP 200，300KB）
+- `finra.org`（沿用既有域名条目，Fair Access UA）2026-09-05 新增 URL：
+  - FINRA Rule 4210（(c) Maintenance Margin：多头 25% / 卖空 $5 以上 30% 条文页）: https://www.finra.org/rules-guidance/rulebooks/finra-rules/4210（HTTP 200，需 Fair Access UA）

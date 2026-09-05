@@ -1264,37 +1264,75 @@
         "detail": null
       },
       "initial_margin_practice": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "现货市场无衍生品意义上的保证金；融资融券保证金等细节未核实，留空。",
+        "zh": "两层保证金制度：①清算端（NSCC，会员级）——NSCC 按基于风险的保证金方法论逐日计算并向各会员收取清算基金要求存入额（Required Fund Deposit），一般基于会员交易活动与当前未交收头寸，由波动性、盯市、非流动性等风险组件构成；②交易端（券商—客户级）——Regulation T（12 CFR Part 220）§220.12(a)：保证金账户买入证券须缴纳不低于证券当前市值 50% 的初始保证金（或交易发生地监管机构规定的比例，二者取高）",
+        "en": "Margin operates at two levels: (1) clearing side (NSCC, member level) — NSCC calculates and collects a Clearing Fund Required Fund Deposit from each Member on a daily basis using a risk-based margin methodology, generally based on the Member's trading activity and current unsettled positions, with risk components such as volatility, mark-to-market and illiquidity charges; (2) trading side (broker–customer level) — Regulation T (12 CFR Part 220) §220.12(a) requires initial margin of 50 percent of the current market value of the security (or the percentage set by the regulatory authority where the trade occurs, whichever is greater) for purchases in a margin account",
+        "detail": "NYSE 本身不是清算机构——现货会员层面的保证金约束由 CCP（NSCC）的清算基金机制承担，\n客户层面的保证金由美联储 Regulation T 与券商规则承担，本字段按「现货/主板市场的初始\n保证金制度」口径同时记录两层。NSCC 清算基金公式与组件细节见 NSCC Procedure XV\n（govinfo.gov 联邦公报通知）与 DTCC 学习门户《NSCC Risk Margin Component Guide》。\n",
+        "sources": [
+          {
+            "title": "Federal Register Vol. 90 No. 79（SEC 批准 NSCC 盘中保证金程序修订的联邦公报通知，2025-04-25，含 Procedure XV 逐日清算基金计算与盘中追保的官方描述）",
+            "url": "https://www.govinfo.gov/content/pkg/FR-2025-04-25/html/2025-07103.htm",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "NSCC Risk Margin Component Guide（DTCC 学习门户，清算基金组件公式：波动性/盯市/非流动性）",
+            "url": "https://dtcclearning.com/documents/equities-clearing-2/nscc-risk-management/nscc-risk/3992-nscc-risk-margin-component-guide/file.html",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "12 CFR Part 220（Regulation T）§220.12(a)（eCFR 官方条文，初始保证金 50%）",
+            "url": "https://www.ecfr.gov/current/title-12/chapter-II/subchapter-A/part-220",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "NSCC calculates and collects Clearing Fund from its Members (i.e., a Required Fund Deposit) on a daily basis using a risk-based margin methodology. ... The mark-to-market (MTM) component measures the unrealized profit or loss using the contract price versus the current market price (that is, the price for a security determined daily for purposes of the CNS system; generally, that is the prior day's closing price). ... The required margin for each security position held in a margin account shall be as follows: ( a ) Margin equity security, except for an exempted security, money market mutual fund or exempted securities mutual fund, warrant on a securities index or foreign currency or a long position in an option: 50 percent of the current market value of the security or the percentage set by the regulatory authority where the trade occurs, whichever is greater.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "maintenance_margin_practice": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "NSCC 不设与衍生品对应的独立『维持保证金』阈值——替代机制是清算基金要求逐日重新计算，缺口须在每个营业日（通常东部时间上午 10:00 前）向 NSCC 补足，必要时另发盘中追保（见 mark_to_market_frequency）；客户层面的维持保证金由 FINRA Rule 4210(c) 规定：除规则另有情形外，所有客户账户须维持不低于证券当前市值 25%（多头）的保证金；卖空头寸按更高标准执行——售价低于 5 美元/股的为 100% 市值与 2.50 美元/股孰高，售价 5 美元/股及以上的为 30% 市值与 5 美元/股孰高",
+        "en": "NSCC has no separate derivative-style maintenance margin threshold — instead, the Clearing Fund requirement is recalculated daily and any deficit is due to NSCC each business day (typically by 10:00 a.m. Eastern Time), with discretionary intraday calls as needed (see mark_to_market_frequency); at the customer level, FINRA Rule 4210(c) requires all customer accounts to maintain margin of at least 25 percent of current market value for long positions, and higher standards for short positions (2.50 USD per share or 100 percent of current market value, whichever is greater, for stocks selling below 5 USD per share; 5 USD per share or 30 percent, whichever is greater, for stocks selling at 5 USD per share or above)",
+        "sources": [
+          {
+            "title": "Federal Register Vol. 90 No. 79（NSCC 清算基金缺口每营业日补足时限的官方描述）",
+            "url": "https://www.govinfo.gov/content/pkg/FR-2025-04-25/html/2025-07103.htm",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "FINRA Rule 4210（规则手册原文页，(c) Maintenance Margin 条文）",
+            "url": "https://www.finra.org/rules-guidance/rulebooks/finra-rules/4210",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "Required Fund Deposit deficits are due to NSCC each business day, typically by 10:00 a.m. Eastern Time. ... (c) Maintenance Margin The margin which must be maintained in all accounts of customers, except as set forth in paragraph (e), (f) or (g) and for cash accounts subject to other provisions of this Rule, shall be as follows: (1) 25 percent of the current market value of all margin securities, as defined in Section 220.2 of Regulation T, except for security futures contracts, \"long\" in the account. (2) $2.50 per share or 100 percent of the current market value, whichever amount is greater, of each stock \"short\" in the account selling at less than $5.00 per share; plus (3) $5.00 per share or 30 percent of the current market value, whichever amount is greater, of each stock \"short\" in the account selling at $5.00 per share or above",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "mark_to_market_frequency": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "逐日盯市：NSCC 清算基金的盯市（MTM）组件按每笔头寸的合约价值与基于 CNS 系统逐日确定的市价（一般为前一日收盘价）之差，对各会员净未交收头寸（含 CNS 系统内 fail 头寸）计算未实现盈亏，随清算基金要求逐日计算收取；另设盘中盯市追保（Intraday MTM Charge）——当会员净 CNS 与 Balance Order 头寸（含 fail）自上次盯市价与最新观察市价之差达到其当日开盘清算基金要求中波动性组件的 80% 时，一般即可触发收取（NSCC 认为适当时可在波动市况下调低该阈值）",
+        "en": "Daily mark-to-market: the mark-to-market (MTM) component of NSCC's Clearing Fund measures the unrealized profit or loss on each Member's net unsettled positions (including positions that fail in the CNS system) as the difference between the contract value of each position and the market value based on the prior day's closing price (the price for a security determined daily for purposes of the CNS system), calculated and collected daily with the Clearing Fund requirement; in addition, an Intraday MTM Charge may generally be imposed if the difference between the last marked-to-market price of a Member's net CNS and Balance Order positions (including CNS fails) and the most recently observed market price meets or exceeds 80 percent of the volatility charge component of the Member's start of day Clearing Fund requirement (the threshold may be reduced during volatile market conditions)",
+        "sources": [
+          {
+            "title": "NSCC Risk Margin Component Guide（DTCC 学习门户，MTM 组件定义与计取范围）",
+            "url": "https://dtcclearning.com/documents/equities-clearing-2/nscc-risk-management/nscc-risk/3992-nscc-risk-margin-component-guide/file.html",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "Federal Register Vol. 90 No. 79（盘中 MTM 追保触发阈值 80% 的官方描述）",
+            "url": "https://www.govinfo.gov/content/pkg/FR-2025-04-25/html/2025-07103.htm",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "The mark-to-market (MTM) component measures the unrealized profit or loss using the contract price versus the current market price (that is, the price for a security determined daily for purposes of the CNS system; generally, that is the prior day's closing price). The MTM charge is assessed on each Member's net unsettled positions, including positions that fail in the CNS system. The charge is calculated by taking the difference between the contract value of each position in the portfolio and the market value based on the prior day's closing market price. ... The Intraday MTM Charge is based on the difference between the last marked-to-market price of a Member's net CNS and Balance Order positions (including CNS fails) and the most recently observed market price for such positions. An Intraday MTM Charge may generally be imposed if the difference of this calculation meets or exceeds 80 percent of the ``volatility charge'' component of the Member's start of day Clearing Fund requirement.",
+        "confidence": "high",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "delivery_method": {
         "enum": "na",
@@ -1314,15 +1352,21 @@
         "quote": null
       },
       "last_trading_day_rule": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "不适用——NYSE 现货市场的股票、ADR、ETF、公司债与市政债等均为无到期日的现金工具，不存在衍生品意义上的『最后交易日』；成交经 NSCC 清算（CCP）并于 T+1 交收后，清算义务即告消灭",
+        "en": "Not applicable — cash instruments traded on NYSE (equities, ADRs, ETFs, corporate and municipal bonds) have no expiry and thus no derivative-style last trading day; once trades are cleared by NSCC (the CCP) and settled on T+1, the clearing obligations are extinguished",
+        "sources": [
+          {
+            "title": "SEC.gov | Clearing Agencies（NSCC 作为现货证券 CCP 的官方定性，正面对照『无到期日合约』的现金市场属性）",
+            "url": "https://www.sec.gov/about/divisions-offices/division-trading-markets/clearing-agencies",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "NSCC serves as a CCP for virtually all broker-to-broker trades involving equities, corporate and municipal debt, American depositary receipts, exchange-traded funds, and unit investment trusts.",
+        "confidence": "medium",
         "verified": "2026-08-13",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "default_management": {
         "spec": {
