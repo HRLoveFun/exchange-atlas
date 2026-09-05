@@ -681,17 +681,43 @@ clearing:
     confidence: medium
 
   initial_margin_practice:
-    zh: ""
-    confidence: low
-    detail: "现货市场无衍生品意义上的保证金；融资融券保证金比例等细节未核实，留空。"
+    zh: "现货市场无衍生品式客户初始保证金；清算端由中国结算向结算参与人收取『证券结算保证金』——结算参与人缴纳的、用于交收违约时提供流动性保障并对交收违约损失进行弥补的专项资金，适用于 A 股、债券、证券投资基金等由中国结算提供多边净额结算服务的品种；新增结算参与人参与单个证券市场缴纳的最低限额为每个结算保证金账户 20 万元人民币，自营结算保证金承担互保功能（互保最高限额 20 万元），客户结算保证金不具有互保功能；交易端客户信用交易方面，融资买入证券时融资保证金比例不得低于 100%（上证发〔2026〕5号，2026-01-19 施行）"
+    en: "No derivative-style customer initial margin in the cash market; at the clearing level, ChinaClear collects 'securities settlement margin' from clearing participants — dedicated funds contributed by participants (and allocated by ChinaClear) to provide liquidity and cover losses upon settlement default, applicable to multilateral netting settlement of A-shares, bonds, securities investment funds, etc.; a newly admitted clearing participant contributes a minimum of RMB 200,000 per settlement margin account for each single market, proprietary settlement margin carries mutual-guarantee function (capped at RMB 200,000) while client settlement margin does not; at the trading level, the margin ratio for margin purchases must be no less than 100% (SSE Notice Shang Zheng Fa [2026] No. 5, effective 2026-01-19)"
+    sources:
+      - title: "《证券结算保证金管理办法》（中国结算官方 PDF，第二条定义/第五条适用范围/第六·七·八条筹集与最低限额）"
+        url: http://www.chinaclear.cn/zdjs/editor_file/20211030211400917.pdf
+        accessed: 2026-09-05
+      - title: "《关于调整融资保证金比例的通知》（上交所官网，上证发〔2026〕5号，现行有效的融资保证金比例 100% 标准）"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/trade/specific/margin/c/c_20260114_10805174.shtml
+        accessed: 2026-09-05
+    quote: "第二条 本办法所称证券结算保证金（以下简称“结算保证金”），是指由结算参与人根据本办法向中国证券登记结算有限责任公司（以下简称“本公司”）缴纳的、以及本公司根据本办法划拨的，用于在结算参与人交收违约时提供流动性保障、并对交收违约损失进行弥补的专项资金。 ... 第八条 新增结算参与人在完成与本公司签订有关结算业务协议后，应向本公司分别缴纳用于参与京沪深证券市场交易结算的最低限额的结算保证金。结算参与人参与单个证券市场应缴纳的最低限额为：每个结算保证金账户 20 万元人民币。 ... 一、投资者融资买入证券时，融资保证金比例不得低于100%。"
+    confidence: high
 
   maintenance_margin_practice:
-    zh: ""
-    confidence: low
+    zh: "中国结算不设与衍生品对应的『维持保证金』阈值；对应机制是结算备付金的最低限额管理——每月按『最低结算备付金限额＝上月证券买入金额／上月交易日历天数×最低结算备付金比例』为各结算参与人确定限额（比例按业务类型与品种确定），且结算保证金不得用于日常交收、结算参与人不得因已缴纳结算保证金而拒绝履行资金交收义务"
+    en: "ChinaClear has no derivative-style maintenance margin threshold; the corresponding mechanism is minimum settlement reserve fund management — each month ChinaClear determines each clearing participant's minimum reserve fund limit as 'prior-month securities purchase amount / prior-month trading calendar days × minimum reserve fund ratio' (ratio set by business type and instrument class), and settlement margin may not be used for daily settlement nor excuse a participant from settling"
+    sources:
+      - title: "《结算备付金管理办法（2023年8月修订版）》（中国结算官方 PDF，第九条最低结算备付金限额公式）"
+        url: http://www.chinaclear.cn/zdjs/qzb/202310/cca8984cb74a46aab0b3f75f2df4acb4/files/%E4%B8%AD%E5%9B%BD%E8%AF%81%E5%88%B8%E7%99%BB%E8%AE%B0%E7%BB%93%E7%AE%97%E6%9C%89%E9%99%90%E8%B4%A3%E4%BB%BB%E5%85%AC%E5%8F%B8%E7%BB%93%E7%AE%97%E5%A4%87%E4%BB%98%E9%87%91%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95%EF%BC%882023%E5%B9%B48%E6%9C%88%E4%BF%AE%E8%AE%A2%E7%89%88%EF%BC%89.pdf
+        accessed: 2026-09-05
+      - title: "《证券结算保证金管理办法》（中国结算官方 PDF，第四条结算保证金不得用于日常交收）"
+        url: http://www.chinaclear.cn/zdjs/editor_file/20211030211400917.pdf
+        accessed: 2026-09-05
+    quote: "第九条 本公司每月根据最低结算备付金比例计算规则（见附件）为各结算参与人确定最低结算备付金比例，并按照各结算参与人上月证券日均买入金额和对应的最低结算备付金比例，确定其最低结算备付金限额。计算公式为： 最低结算备付金限额＝上月证券买入金额／上月交易日历天数×最低结算备付金比例。 ... 第四条 结算参与人缴纳的结算保证金不得用于其日常交收需要，结算参与人不得因已缴纳结算保证金而拒绝履行资金交收义务。"
+    confidence: medium
 
   mark_to_market_frequency:
-    zh: ""
-    confidence: low
+    zh: "不适用衍生品式逐日盯市盈亏划转——A 股实行多边净额结算（T+1 货银对付），交收完成后结算风险即告消灭；结算风险改由逐日资金交收、逐月重算的最低结算备付金限额与恒定缴存的结算保证金监控，而非逐日盯市"
+    en: "Derivative-style daily variation margin settlement does not apply — A-shares settle on a multilateral netting basis (T+1 DvP) and settlement risk is extinguished upon settlement; risk is instead monitored through daily cash settlement, the monthly recalculated minimum reserve fund limit, and the standing settlement margin, not through daily mark-to-market"
+    sources:
+      - title: "《证券结算保证金管理办法》（中国结算官方 PDF，第四条结算保证金不得用于日常交收）"
+        url: http://www.chinaclear.cn/zdjs/editor_file/20211030211400917.pdf
+        accessed: 2026-09-05
+      - title: "《结算备付金管理办法（2023年8月修订版）》（中国结算官方 PDF，第九条逐月限额管理）"
+        url: http://www.chinaclear.cn/zdjs/qzb/202310/cca8984cb74a46aab0b3f75f2df4acb4/files/%E4%B8%AD%E5%9B%BD%E8%AF%81%E5%88%B8%E7%99%BB%E8%AE%B0%E7%BB%93%E7%AE%97%E6%9C%89%E9%99%90%E8%B4%A3%E4%BB%BB%E5%85%AC%E5%8F%B8%E7%BB%93%E7%AE%97%E5%A4%87%E4%BB%98%E9%87%91%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95%EF%BC%882023%E5%B9%B48%E6%9C%88%E4%BF%AE%E8%AE%A2%E7%89%88%EF%BC%89.pdf
+        accessed: 2026-09-05
+    quote: "第四条 结算参与人缴纳的结算保证金不得用于其日常交收需要，结算参与人不得因已缴纳结算保证金而拒绝履行资金交收义务。"
+    confidence: medium
 
   delivery_method:
     enum: na
@@ -705,8 +731,14 @@ clearing:
     confidence: medium
 
   last_trading_day_rule:
-    zh: ""
-    confidence: low
+    zh: "不适用——现货证券无到期日与『最后交易日』概念；中国结算对 A 股等品种实行多边净额结算与担保交收，清算义务随 T+1 交收完成而消灭"
+    en: "Not applicable — cash securities have no expiry and thus no derivative-style last trading day; ChinaClear provides multilateral netting and guaranteed settlement for A-shares and other products, and clearing obligations are extinguished upon T+1 settlement"
+    sources:
+      - title: "《证券结算保证金管理办法》（中国结算官方 PDF，第五条适用范围——A 股/债券/基金的多边净额结算业务）"
+        url: http://www.chinaclear.cn/zdjs/editor_file/20211030211400917.pdf
+        accessed: 2026-09-05
+    quote: "第五条 本办法适用于由本公司提供多边净额结算服务的人民币普通股（A 股）、债券、证券投资基金和其他证券类金融产品（不含人民币特种股票交易、开放式基金等产品场外申购赎回）的交易结算业务。"
+    confidence: medium
 
   default_management:
     spec:

@@ -42,3 +42,8 @@
   - 交易机制（含撮合原则/订单类型正文）: https://english.sse.com.cn/start/trading/mechanism/
   - Trading Rules of Shanghai Stock Exchange (2026 Revision) PDF: https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf
   - Implementing Rules of the Shanghai Stock Exchange for Margin Trading and Securities Lending Transactions PDF（融资融券实施细则英文版，本次仅确认标题与存在，未逐条抓取内容）: https://english.sse.com.cn/start/sserules/stocks/trading/c/10647720/files/95943f34d9d74a5f87b8581d793829bc.pdf
+
+- `chinaclear.cn`（2026-09-05 补充登记，任务四族A：结算保证金/备付金制度，沿用既有域名条目） | 官方（清算机构） | zh | curl 常规 UA 200（PDF 直链可过）
+  - 《证券结算保证金管理办法》PDF（第二条定义——结算参与人缴纳、用于交收违约时提供流动性保障与弥补违约损失的专项资金；第五条适用范围 A 股/债券/基金多边净额结算；第六/七/八条筹集方式与每账户 20 万元最低限额及互保功能）: http://www.chinaclear.cn/zdjs/editor_file/20211030211400917.pdf（HTTP 200，160KB）
+  - 《结算备付金管理办法（2023年8月修订版）》PDF（第九条：最低结算备付金限额＝上月证券买入金额／上月交易日历天数×最低结算备付金比例，逐月按业务类型确定比例）: http://www.chinaclear.cn/zdjs/qzb/202310/cca8984cb74a46aab0b3f75f2df4acb4/files/%E4%B8%AD%E5%9B%BD%E8%AF%81%E5%88%B8%E7%99%BB%E8%AE%B0%E7%BB%93%E7%AE%97%E6%9C%89%E9%99%90%E8%B4%A3%E4%BB%BB%E5%85%AC%E5%8F%B8%E7%BB%93%E7%AE%97%E5%A4%87%E4%BB%98%E9%87%91%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95%EF%BC%882023%E5%B9%B48%E6%9C%88%E4%BF%AE%E8%AE%A2%E7%89%88%EF%BC%89.pdf（HTTP 200，211KB）
+  - 2026-09-05 新增（任务四族A，交易端信用交易保证金比例现行标准）：《关于调整融资保证金比例的通知》（上证发〔2026〕5号，2026-01-14 发布、2026-01-19 施行，现行有效——「投资者融资买入证券时，融资保证金比例不得低于100%」，同时废止上证发〔2023〕140号）: https://www.sse.com.cn/lawandrules/sselawsrules2025/trade/specific/margin/c/c_20260114_10805174.shtml（HTTP 200）
