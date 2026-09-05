@@ -1,0 +1,32 @@
+# 多伦多证券交易所 Toronto Stock Exchange (TSX) `ca-tsx`
+- `tsx.com` | 官方 | en / fr（`/en/` 与 `/fr/` 路径均可直接访问，法语版正文与英文版对应，如 `/fr/trading/calendars-and-trading-hours/trading-hours` 返回「Heures de négociation」正文；本次抓取全部走英文版，法语版未逐条比对） | curl + 常规 UA 全部 200，未见反爬，未加延时 | ⚠️ TSX 隶属 TMX Group（`group_id: tmx-group`），集团下还有 TSX Venture Exchange（TSXV，创业板，独立交易所实体非本文件板块）、TSX Alpha Exchange（另一撮合场所/marketplace）、Montréal Exchange（衍生品）、CDS（清算/托管）等实体，很多页面把 TSX/TSXV/Alpha 三个 marketplace 的规则并排列在同一张表里，摘引时要看清楚列头对应哪个实体——本文件只收 TSX 本身
+  - 交易时段（含 MOO/MOC/PME 收盘流程完整时间表）: https://www.tsx.com/en/trading/calendars-and-trading-hours/trading-hours
+  - Toronto Stock Exchange Rule Book（PDF，全文，Effective January 13, 2026，含会员准入/交易时段/结算规则等 Part 1-8）: https://www.tsx.com/en/resource/1464
+  - Order Types 页面（订单类型/匿名单/Odd Lot Dealer 说明正文）: https://www.tsx.com/en/trading/toronto-stock-exchange/order-types-and-features/order-types
+  - Order Types and Functionality Guide（PDF，TMX GROUP，Version 1.75，2025-11-03，含 6.1.2 最小报价单位表、6.2.4 Single Stock Circuit Breakers、6.7 清算安排等章节）: https://www.tsx.com/ebooks/en/order-types-guide/files/assets/common/downloads/Order%20Types%20and%20Functionality%20Guide.pdf
+  - Technical Guide to Listing（PDF，©2023 TSX Inc.，含上市财务门槛表/300名公众股东要求/做市商角色说明，Appendix C 为 Industrial/Technology/R&D 上市要求表）: https://www.tsx.com/ebooks/en/technical-guide-to-listing/files/assets/common/downloads/Technical%20Guide%20to%20Listing.pdf
+  - TSX Trading Fee Schedule effective July 2, 2026（PDF，会员费/逐笔交易费率，maker-taker 结构）: https://www.tsx.com/en/resource/3521/tsx-trading-fee-schedule-effective-july-2-2026-en.pdf
+  - TMX Group Consolidated Trading Statistics – December 2025（PDF，官方新闻稿，含 TSX 单独统计口径的 2025 全年成交额/成交量）: https://www.tsx.com/en/resource/3443
+  - S&P/TSX Canadian Indices Methodology（PDF，S&P Dow Jones Indices 编制，June 2016 版本，tsx.com 自行托管；⚠️ 版本较旧，编制方/加权方式等稳定事实可用，具体数值门槛可能已更新，未找到 tsx.com 上更新版本的直链，spglobal.com 官网当前版 PDF 直链本次访问返回 403）: https://www.tsx.com/en/resource/1330
+- `tmx.com` | 官方（集团层面） | en | curl + 常规 UA 200 | 用于确认 TMX Group 旗下公司清单（Toronto Stock Exchange / TSX Venture Exchange / TSX Trust / Montréal Exchange / TSX Alpha Exchange / AlphaX US / Shorcan / CDCC / CDS / TMX Datalinx 等），佐证 group_id 判断；正文本身导航链接为主，实质内容薄
+  - TSX Regulatory Policies and Procedures（含 TMX Group Companies 清单导航）: https://www.tmx.com/en/tmx-group/regulatory-policies/toronto-stock-exchange-regulatory-policies-and-procedures
+- `s21.q4cdn.com` | 官方（TMX Group 自有投资者关系文件托管 CDN，Q4 Inc. 提供基础设施，内容标注 "Source: TMX Group Limited"，视同集团官方新闻稿原文） | en | curl 常规 UA 200 | TMX Group Equity Financing Statistics 月度新闻稿，含 TSX 当月新上市家数/挂牌总数/总市值（区分 TSX 与 TSXV 两张表，不要混用）
+  - TMX Group Equity Financing Statistics – February 2026（PDF，含 TSX Issuers Listed 2,132 家、Market Cap Listed Issues 逐笔数字）: https://s21.q4cdn.com/671813756/files/doc_news/TMX-Group-Equity-Financing-Statistics---February-2026-2026.pdf
+- `osc.ca` | 监管 | en | curl + 常规 UA 全部 200，未见反爬 | 安大略省证券委员会（Ontario Securities Commission），TSX Inc. 与其母公司 TMX Group Limited 均由 OSC 认定为「recognized exchange」；CIRO（Canadian Investment Regulatory Organization，自律组织）的官网 `ciro.ca` 本次多次尝试（不同 UA/headers）均返回 403，改用 OSC 关于 CIRO 的说明页作为替代来源，见下方「探测记录」
+  - Recognized Exchanges（TMX Group Limited and TSX Inc. 认定页，含关键原文「together with its parent company, TMX Group Limited, is recognized as an exchange in Ontario」）: https://www.osc.ca/en/industry/market-regulation/marketplaces/exchanges/recognized-exchanges
+  - Canadian Investment Regulatory Organization (CIRO) 说明页（CIRO 定位、IIROC/MFDA 合并沿革）: https://www.osc.ca/en/industry/market-regulation/self-regulatory-organizations-sro/canadian-investment-regulatory-organization-ciro
+  - Notice of Approval – Amendments to the Toronto Stock Exchange Company Manual (November 6, 2025)（PDF，OSC 托管的 TSX 规则修订核准公告，Appendix D 为最终 clean 版 Company Manual 正文，含 Part III 上市财务门槛与 Part VII 停牌/退市完整条文）: https://www.osc.ca/sites/default/files/2025-11/tsx_20251106_noa-exchange-company-manual.pdf
+  - CIRO Bulletin 24-0154 – Request for Comments – Fee Model – Integrated Fee Model Project（PDF，OSC 托管的 CIRO 费模型征求意见公告；第 8 节复述现行《Equity Market Regulation Fee Model》原文——成本回收制、Message Processing Fee + Trade Fee 两部分、由 Participants 缴纳。`costs.regulatory_fees` 出处，2026-09-04 ADR-065；ciro.ca 官网仍 403，续用 OSC 托管件）: https://www.osc.ca/sites/default/files/2024-04/ciro_20240425_rfc-fee-model.pdf
+- `getsmarteraboutmoney.ca` | 监管（OSC Investor Office 运营的投资者教育网站，页脚署名「© Ontario Securities Commission」「Brought to you by the OSC Investor Office」） | en | curl 常规 UA 200 | 用于确认加拿大全市场熔断（market-wide circuit breaker）三级阈值（7%/13%/20%），该机制由 CIRO 监管、参照 S&P 500（美股休市时改用 S&P/TSX Composite），原始出处应是 ciro.ca（已 403，见下）
+  - Market-wide circuit breakers: https://www.getsmarteraboutmoney.ca/learning-path/stocks/market-wide-circuit-breakers/
+- `en.wikipedia.org` | 第三方 | en | curl 常规 UA 200 | 用于交易所历史沿革背景叙述（1852年 Association of Brokers、1861年正式创立、1999-2000年公司化、2008年与 Montréal Exchange 合并组成 TMX Group 等）；`confidence` 相应标 medium，未逐条核对一手史料
+  - Toronto Stock Exchange: https://en.wikipedia.org/wiki/Toronto_Stock_Exchange
+  - TMX Group（含 TMX Group Limited 股票代码 TSX:X 信息）: https://en.wikipedia.org/wiki/TMX_Group
+- `www.tmxinfoservices.com` | 官方（TMX Datalinx 行情数据） | en | curl 常规 UA 200 | Level 1/2/QuantumFeed 行情产品与定价（infrastructure 出处）
+- `www.cipf.ca` | 官方（加拿大投资者保护基金） | en | curl 常规 UA 200 | 投资者保护上限（participants.investor_protection 出处）
+- `ised-isde.canada.ca` | 官方（加拿大创新科学与经济发展部） | en | WebSearch 定位 | Investment Canada Act 仅审查控制权取得，无一般资本管制（capital_controls 出处）
+- `www.gov.mb.ca` | 官方（曼尼托巴省） | en | WebSearch 定位 | 银行业 Bank Act 10% / 电信 Telecom Act 20% 外资上限（foreign_ownership_limit 出处）
+- `www.mondaq.com` | 第三方（法律简报库） | en | WebSearch 定位 | 持续披露 NI 51-102、非居民预扣税（confidence 封顶 medium）
+- `taxspecialty.com` | 第三方（税务分析） | en | WebSearch 定位 | 资本利得税计入比例（confidence 封顶 medium）
+- `tradingeconomics.com` | 第三方（宏观数据） | en | WebSearch 定位 | 加美贸易摩擦政治风险（confidence 封顶 medium）
+- `cepr.net` | 第三方（CEPR 金融交易税汇编） | en | WebSearch 定位 | 加拿大无金融交易税（costs.financial_transaction_tax，confidence 封顶 medium）

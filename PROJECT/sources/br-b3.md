@@ -1,0 +1,44 @@
+# B3 – Brasil, Bolsa, Balcão `br-b3`
+- `b3.com.br` | 官方 | pt-BR / en（官网原文是葡萄牙语，`en_us` 路径下有官方英文版，覆盖面广，多数规则/交易机制/非居民投资者页面均有对应英文版；本节 source_lang 取 en，见下方说明） | curl + 常规 UA 全部 200，未见反爬（全程无延时也未被拦，比 english.sse.com.cn/JPX 好抓得多）；PDF 用 `pdftotext -layout` 提取 | ⚠️ B3 官网英文版**没有**看到类似 SSE/JPX 那种"译本仅供参考，以原文为准"的免责声明（本次抓取页面未发现此类文字），但取源规则仍按 ADR-013："有可核实的官方中文原文就填 zh，没有就填 en"——B3 官网无中文版，故 source_lang: en，把英文版当溯源锚点，不因为找不到 zh 就退回葡萄牙语原文（葡萄牙语不是 zh/en 二选一之外的第三态，见 taxonomy.yml source_lang 字段说明）。B3 是巴西唯一的证券交易所，由 2017 年 BM&FBOVESPA 与 Cetip 合并而成（`name_native` 用此说明）；集团层面 B3 本身即为最终控股主体（B3 S.A.自身在自己的 Novo Mercado 板块挂牌，代码 B3SA3），未发现类似 NYSE Group/JPX Group 那样同集团下辖多个独立注册交易所法人实体的结构，故不设 `group_id`
+  - 首页: https://www.b3.com.br/en_us/（HTTP 200）
+  - 历史沿革（投资者关系站 History 页）: https://ri.b3.com.br/en/b3/history/（HTTP 200）
+  - Regulatory Framework – Trading（交易规则文档索引页）: https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/trading.htm（HTTP 200）
+  - Regulatory Framework – Listing（上市规则文档索引页）: https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/listing.htm（HTTP 200）
+  - Regulatory Framework – Clearing, Settlement and Risk Management（清算结算规则文档索引页）: https://www.b3.com.br/en_us/regulation/regulatory-framework/regulations-and-manuals/clearing-settlement-and-risk-management.htm（HTTP 200）
+  - Non-resident Investor – Operational Procedures and Regulation: https://www.b3.com.br/en_us/non-resident-investor/market-rules/operational-procedures-and-regulation.htm（HTTP 200）
+  - Non-resident Investor – Regulatory Environment: https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/regulatory-environment.htm（HTTP 200）
+  - Non-resident Investor – Trading Equities, Derivatives and Fixed Income (CMN 4.373/2014)（外资准入通道核心法规）: https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/trading-equities-derivatives-and-fixed-income-cmn-4-373-2014.htm（HTTP 200）
+  - Non-resident Investor – Taxation（外资资本利得税/股息预扣税/IOF）: https://www.b3.com.br/en_us/non-resident-investor/characteristics-brazilian-market/taxation.htm（HTTP 200）
+  - B3 Trading Characteristics and Rules（交易时段/最小单位/碎股市场等核心交易机制）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/b3-trading-characteristics-and-rules.htm（HTTP 200）
+  - Trading Hours – Equities（具体交易时段表，从上一条页面内"here"链接跳转定位到，非站内导航直接可达）: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/equities/（HTTP 200）
+  - Project T+2 – Context（2019年结算周期从T+3缩短至T+2改革说明）: https://www.b3.com.br/en_us/project-t-2/context/（HTTP 200）
+  - Investor Relations – Corporate Information（B3自身作为上市公司的股票代码/板块归属，investor relations子站）: https://ri.b3.com.br/en/b3/corporate-information/（HTTP 200）
+  - Securities Lending, Equity and ETF Trades（证券借贷/融券机制页，做空机制的主要依据）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/securities-lending-equity-and-etf-trades.htm（HTTP 200）
+  - Trading Dynamics（撮合原则/订单类型）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/trading-dynamics.htm（HTTP 200）
+  - Circuit Breaker（熔断机制说明，Ibovespa跌幅阈值）: https://www.b3.com.br/en_us/news/circuit-breaker-8AE490CA70CB10030170CEECFCE05EAF.htm（HTTP 200）
+  - Market Maker – Regulation（做市商制度）: https://www.b3.com.br/en_us/products-and-services/trading/market-maker/join-in/regulation.htm（HTTP 200，本次抓取偶发一次超时，重试后200，非持续限流）
+  - About Listing Segments（板块体系总览：Novo Mercado / Nível 1 / Nível 2 / Bovespa Mais 等）: https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/about-listing-segments/（HTTP 200）
+  - Listing Segments – Novo Mercado（最高治理层级板块细则）: https://www.b3.com.br/en_us/products-and-services/solutions-for-issuers/listing-segments/novo-mercado/（HTTP 200）
+  - PUMA Trading System（交易撮合引擎，基于CME Globex技术）: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/（HTTP 200）
+  - Ibovespa（旗舰指数页）: https://www.b3.com.br/en_us/market-data-and-indices/indices/broad-indices/ibovespa.htm（HTTP 200）
+  - B3 Trading Procedures Manual（业务规程手册全文PDF，含价格限制/交易时段/订单类型等条款编号）: https://www.b3.com.br/data/files/55/84/E9/FB/7DBEE8100E866AE8AC094EA8/B3%20Trading%20Procedures%20Manual.pdf（HTTP 200，6.6MB，PDF文件名含空格已用%20编码，无括号无需%28%29）
+  - Novo Mercado Listing Regulation（Novo Mercado板块规则全文PDF，官方英文译本，标注"free translation"）: https://www.b3.com.br/data/files/43/E0/16/EF/F348F41054E072F492D828A8/SITE-NM-Listing-Regulation-2011.pdf（HTTP 200，416KB；⚠️ PDF首页自称"free translation"，与 SSE/JPX 类似的翻译免责声明，进一步佐证只把它当英文对照而非独立法律文本）
+  - Guide for Nonresident Investors（外资投资指南PDF，含CMN 4.373账户开户流程）: https://www.b3.com.br/data/files/29/67/59/B8/8871E610BB692DD6AC094EA8/GUIA_INR-B3.pdf（HTTP 200，1.7MB）
+  - Trading Hours – Derivatives, Indices（衍生品交易时段表·股指/利率分类：Ibovespa期货FUT IND、迷你指数期货FUT WIN、S&P 500期货FUT ISP/WSP等逐合约开盘/收盘/电子集合竞价时刻表，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/indices/（HTTP 200）
+  - Trading Hours – Derivatives, Single Stock and Units Futures（衍生品交易时段表·个股/份额期货分类，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/solutions/platforms/puma-trading-system/for-members-and-traders/trading-hours/derivatives/single-stock-and-units-futures/（HTTP 200）
+  - Ibovespa Futures（产品页标题为"Ibovespa Futures"，正文实际详述迷你指数期货WIN合约规格/保证金/每日盯市结算算例，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/ibovespa-futures.htm（HTTP 200）
+  - Futures Market（期货市场总览：利率/汇率/股指/大宗商品四大品类及对应ticker，多数合约现金结算少数实物交割，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/futures-market.htm（HTTP 200）
+  - Options on Ibovespa（Ibovespa指数期权合约规格：欧式行权、到期日自动履约规则，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/options-on-ibovespa.htm（HTTP 200）
+  - Stock Futures（个股期货合约规格：现金结算、最小报价单位0.01点，market_structure.derivatives 建档新增）: https://www.b3.com.br/en_us/products-and-services/trading/equities/cash-equities/stock-futures.htm（HTTP 200）
+- `www.gov.br` | 监管 | pt-BR / en | curl 常规 UA 200，未见反爬 | 巴西证券监督管理机构 Comissão de Valores Mobiliários（CVM，证券委员会）在联合政府门户 gov.br 下的英文栏目，B3 的政府监管机构；本条目仅登记 `www.gov.br` 而非更宽泛的 `gov.br`，因为实际抓取到的 URL netloc 就是 www 子域
+  - CVM 英文首页: https://www.gov.br/cvm/en（HTTP 200）
+  - CVM 机构简介"Sobre a CVM"页（葡萄牙语，核实CVM设立法律依据与历史地位，OPEN-QUESTIONS 悬案第2条用）: https://www.gov.br/cvm/pt-br/acesso-a-informacao-cvm/institucional/sobre-a-cvm
+  - Receita Federal（巴西联邦税务总局）官方新闻公告——关于第15.270/2025号法律利润/股息预扣所得税征收程序（OPEN-QUESTIONS 悬案第1条用）: https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2025/dezembro/receita-federal-orienta-sobre-os-procedimentos-para-o-recolhimento-do-imposto-de-renda-retido-na-fonte-sobre-lucros-e-dividendos
+- `conteudo.cvm.gov.br` | 官方（CVM自有法规库子域） | pt-BR | curl 常规 UA 200，未见反爬 | CVM 官网法规文库子站，托管历年法律/法令条目页；⚠️ 该子站是纯前端JS门户外壳的旧式CMS页面，条目页本身只给出法律标题/日期/一句话摘要，未附法律逐条正文（正文需另找 planalto.gov.br 等门户）
+  - Lei 6385/76 条目页（CVM法规库自有页面，标注1976-12-07与摘要"Cria a CVM e disciplina o mercado de capitais"，OPEN-QUESTIONS 悬案第2条用）: https://conteudo.cvm.gov.br/legislacao/leis-decretos/lei6385.html
+- `www.planalto.gov.br` | 官方（巴西联邦立法门户，总统府法务顾问办公室 Casa Civil 维护） | pt-BR | curl 常规 UA 200，未见反爬；⚠️ 页面无 `charset` 声明，实际编码为 Windows-1252（非UTF-8），用 python3 解析需显式指定 `encoding='cp1252'` 否则重音字符会乱码 | 巴西联邦法律现行有效文本的权威发布门户（`ccivil_03` 子路径），不是监管机构本身，但是法律原文/生效状态的一手来源
+  - Lei nº 15.270, de 26 de novembro de 2025 全文（OPEN-QUESTIONS 悬案第1条用，第3条修订《9.249/1995号法律》第10条新增非居民股息10%预扣税条款，第8条规定2026-01-01生效）: https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm
+- `bsmsupervisao.com.br` | 官方（B3自律监管子机构） | pt-BR / en | curl 常规 UA 200 | BSM Supervisão de Mercados，2007年由B3（原BM&FBOVESPA）设立的自律组织，负责对B3管理的市场及参与者进行一线监督、稽查与纪律处分，受CVM监督
+  - 英文首页: https://www.bsmsupervisao.com.br/en/us/home（HTTP 200）
+- `valorinternational.globo.com` | 第三方（财经媒体，Valor Econômico 英文版） | en | 未测试专门反爬 | `infrastructure.major_outage_history` / `risks.liquidity_risk_note` 用——2026-08-03 B3 交易延迟开市事件的报道；两字段均 `confidence: medium`（第三方来源，CLAUDE.md 二第3条），未找到 B3 官方对该次故障的事后复盘声明
+  - B3 outage hits stock exchange at crucial moment（2026-08-03）: https://valorinternational.globo.com/markets/news/2026/08/03/b3-outage-hits-stock-exchange-at-crucial-moment.ghtml

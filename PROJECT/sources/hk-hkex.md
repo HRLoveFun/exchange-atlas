@@ -1,0 +1,87 @@
+# 香港交易及结算所 Hong Kong Exchanges and Clearing (HKEX) `hk-hkex`
+- `hkex.com.hk` | 官方 | zh-Hant / en（官方双语，逐页各有独立 URL，非同页切换） | curl + 常规 UA 全部 200，未见反爬 | Rulebook 站另有独立域名；不少栏目页（如上市规则总览、结算总览）正文夹在大量导航菜单文字里，抓到后要按关键词（而非直接取前 N 段）定位正文
+  - Rulebook: https://en-rules.hkex.com.hk/（HTTP 200，170KB）
+  - VCM（波动性中断机制）FAQ: https://www.hkex.com.hk/Global/Exchange/FAQ/Securities-Market/Trading/VCM?sc_lang=en（HTTP 200，405KB，含精确阈值 ±10%/±15%/±20%、5分钟冷静期）
+  - 中文版页面把 `sc_lang=en` 换成 `sc_lang=zh-hk`，两版 URL 结构一致，抓取时两个语言版本都要各取一次。ADR-013 迁移时（2026-08-13）正式抓取中文版：https://www.hkex.com.hk/Global/Exchange/FAQ/Securities-Market/Trading/VCM?sc_lang=zh-hk（HTTP 200，402KB）。**官方全称是「市場波動調節機制」，「市調機制」是其简称**（此前只记录了简称，未区分全称/简称）；中文版正文比英文版更精确一层：明确写出 ±10%/±15%/±20% 分别对应恒生综合大型股/中型股/小型股指数成份股三个分组，英文版 FAQ 原文只笼统写 "depending on stock group" 未点明具体分组维度
+  - 交易时段（含北向沪深港通对照表）: https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en
+  - 卖空监管规则: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Regulated-Short-Selling?sc_lang=en
+  - 结算总览（CCASS）: https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en
+  - 上市规则总览: https://www.hkex.com.hk/Listing/Rules-and-Guidance/Listing-Rules?sc_lang=en
+  - 证券市场交易机制（Orion Trading Platform，含撮合原则/订单类型正文，2026-08-19 补登记——此前只登记了衍生品市场同名页面，两者内容不同，之前误当同一页处理）: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Trading-Mechanism?sc_lang=en
+  - 同上（中文版）: https://www.hkex.com.hk/Services/Trading/Securities/Overview/Trading-Mechanism?sc_lang=zh-hk
+- `en-rules.hkex.com.hk`（英文版规则手册，独立域名） | 官方 | en | curl 常规 UA 200，未见反爬；**单章节 Rulebook 落地页（如 `/rulebook/chapter-8-qualifications-listing`）本身是纯 JS 单页应用外壳，curl 只能拿到导航栏、抓不到正文（grep 不到任何规则数字）——真正含正文的是同一站点下的章节 PDF 直链**，需要先 WebSearch 定位具体 PDF URL（搜索关键词里带 `en-rules.hkex.com.hk` + 章节名，PDF 文件名形如 `HKEX4476_<element_id>_VER<version>.pdf`，无法直接从章节 slug 拼出，必须先搜到） | 用于补全 `listing.boards[].financial_threshold`（2026-08-17）
+  - Main Board Listing Rules Chapter 8《股本证券上市资格》PDF（8.05条盈利测试/市值收益现金流测试/市值收益测试三选一，8.09条一般市值门槛）: https://en-rules.hkex.com.hk/sites/default/files/net_file_store/HKEX4476_2301_VER24281.pdf（HTTP 200，86KB）
+  - GEM Listing Rules Chapter 11《股本证券上市资格》PDF（11.12A条现金流测试/市值收益研发测试二选一，11.23(6)条一般市值门槛）: https://en-rules.hkex.com.hk/sites/default/files/net_file_store/HKEX4476_567_VER38010.pdf（HTTP 200，74KB）
+  - GEM Listing Financial Eligibility（一页纸官方摘要，两套测试数字与 Chapter 11 正文完全对应，适合先核对再啃全文）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Getting-Started/GEM-Listing-Financial-Eligibility-eng.pdf（HTTP 200，59KB，域名归入 hkex.com.hk 一组）
+- `cn-rules.hkex.com.hk`（中文版规则手册，独立域名，与 en-rules 站点结构一致但非同一部署） | 官方 | zh-Hant | curl 常规 UA 200 | ⚠️**踩坑记录**：WebSearch 命中的单个章节 PDF（`HKEXCN_TC_5088_VER2598.pdf`，标题含「第八章 上市資格」）抓下来后发现「盈利測試」门槛是 2,000万/3,000万港元——与同一天抓取的英文版 Chapter 8 PDF（3,500万/4,500万港元）不一致。核对后确认**该中文单章 PDF 是未更新的旧版本**（页脚版本号明显早于英文版，很可能是主板盈利测试 2022-01-01 上调门槛前的存档件，搜索引擎索引到了旧文件未清理），**不能直接采信 WebSearch 命中的中文规则 PDF，必须用官网站内当前生效的整合页面交叉核对**。改用 `/entiresection/<id>` 这个「整章合并显示」页面（HTML 服务端渲染、非 JS 外壳，能 grep 到正文，比单章 PDF 更可能是当前生效版本，因为它是规则手册导航体系直接生成的页面而非独立托管的旧 PDF）验证，数字与英文版完全一致（3,500万/4,500万港元），已采信整合页版本，弃用单章旧 PDF
+  - 主板上市规则全章合并页（Entire Section，含第八章原文，已用于交叉核对盈利测试等数字，与英文版一致）: https://cn-rules.hkex.com.hk/entiresection/4416（HTTP 200，3.6MB，务必 grep 关键词定位，不要整页阅读）
+  - GEM上市规则全章合并页（Entire Section，含第十一章原文与 2.12 条 GEM 市场定位表述）: https://cn-rules.hkex.com.hk/entiresection/4417（HTTP 200，2.9MB）
+  - ⚠️ 已知过时、不要再引用：主板第八章中文单行本 PDF（盈利测试门槛为旧版 2,000万/3,000万港元）: https://cn-rules.hkex.com.hk/sites/default/files/net_file_store/HKEXCN_TC_5088_VER2598.pdf
+- `hkex.com.hk`（衍生品市场相关页面，与主站同域名，2026-08-17 补充登记）
+  - 衍生品市场交易时段（Derivatives Market Trading Hours）: https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=en（HTTP 200，405KB）
+  - 衍生品市场交易时段中文版: https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=zh-hk（HTTP 200，400KB）
+  - 衍生品市场交易机制总览（Trading Mechanism）: https://www.hkex.com.hk/Services/Trading/Derivatives/Overview/Trading-Mechanism?sc_lang=en（HTTP 200，368KB）
+  - 衍生品市场交易机制总览中文版: https://www.hkex.com.hk/Services/Trading/Derivatives/Overview/Trading-Mechanism?sc_lang=zh-hk（HTTP 200，379KB）
+  - HKATS（香港期货自动交易系统）介绍: https://www.hkex.com.hk/Services/Trading/Derivatives/Infrastructure/HKATS?sc_lang=en（HTTP 200，368KB）
+  - 收市后交易时段 FAQ（After-Hours Trading, AHT；⚠️ URL 路径本身含半角括号 `(AHT)`，本项目 `tools/fetch.py` 的 `URL_RE` 遇到半角 `)` 会误判为注释开始，把 URL 截断——这是本次新发现的 fetch.py 限制，本条按 %28/%29 百分号编码登记规避，见 add-exchange skill 回写）: https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/After-Hours-Trading-%28AHT%29?sc_lang=en（HTTP 200，404KB）
+  - 收市后交易时段 FAQ 中文版（含 T+1 时段 ±6%/±7% 价格上下限机制、短暫停牌機制 THM 的中文原文表述）: https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/After-Hours-Trading-%28AHT%29?sc_lang=zh-hk（HTTP 200，420KB）
+  - 衍生品市場波動調節機制 FAQ（Volatility Control Mechanism, VCM，与证券市场 VCM 是同名但独立的两套机制，触发阈值/覆盖品种不同；同样因 URL 含半角括号改用 %28/%29 编码登记）: https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/Volatility-Control-Mechanism-%28VCM%29?sc_lang=en（HTTP 200，370KB）
+  - 衍生品市場波動調節機制 FAQ 中文版: https://www.hkex.com.hk/Global/Exchange/FAQ/Derivatives-Market/Trading/Volatility-Control-Mechanism-%28VCM%29?sc_lang=zh-hk（HTTP 200，371KB）
+  - 衍生品市場 VCM 交易机制说明 PDF（同样因 URL 含半角括号改用 %28/%29 编码登记）: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Trading/Derivatives/Trading-Mechanism/Volatility-Control-Mechanism-%28VCM%29/Trading-Mechanism-for-VCM-141020221.pdf（HTTP 200，908KB）
+  - 恒指期货及期权产品页（HSI Futures & Options；同样因 URL 含半角括号改用 %28/%29 编码登记）: https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-Index-%28HSI%29/Hang-Seng-Index-Futures-Options?sc_lang=en（HTTP 200，439KB）
+  - 恒生科技指数期货及期权产品页（Hang Seng TECH Index Futures & Options）: https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-TECH-Index-Futures-and-Options/Hang-Seng-TECH-Index-Futures-Options?sc_lang=en（HTTP 200，269KB）
+  - 恒生中国企业指数期货及期权产品页（HSCEI Futures & Options）: https://www.hkex.com.hk/Products/Listed-Derivatives/Equity-Index/Hang-Seng-China-Enterprises-Index/Hang-Seng-China-Enterprises-Index-Futures-Options?sc_lang=en（HTTP 200，413KB）
+  - 股票期货产品页（Stock Futures）: https://www.hkex.com.hk/Products/Listed-Derivatives/Single-Stock/Stock-Futures?sc_lang=en（HTTP 200，578KB）
+  - 衍生品市场做市商计划（Market Maker Obligations and Incentives）: https://www.hkex.com.hk/Products/Listed-Derivatives/Market-Maker-Program/Market-Maker-Obligations-and-Incentives?sc_lang=en（HTTP 200，743KB）
+  - 衍生品市场做市商计划中文版: https://www.hkex.com.hk/Products/Listed-Derivatives/Market-Maker-Program/Market-Maker-Obligations-and-Incentives?sc_lang=zh-hk（HTTP 200，734KB）
+  - 衍生品结算风险管理／保证金（Margin）: https://www.hkex.com.hk/Services/Clearing/Listed-Derivatives/Risk-Management/Margin?sc_lang=en（HTTP 200，376KB）
+  - 衍生品结算风险管理／保证金中文版（含 PRiME/SPAN 兼容算法的中文表述，⚠️ 页面注明「结算所按金计算方法 – PRiME」条目本身只有英文版）: https://www.hkex.com.hk/Services/Clearing/Listed-Derivatives/Risk-Management/Margin?sc_lang=zh-hk（HTTP 200，387KB）
+  - HKFE 于 2000 年成为 HKEX 全资附属公司的新闻稿（"Hong Kong Futures Exchange becomes a subsidiary of Hong Kong Exchanges and Clearing Limited"）: https://www.hkex.com.hk/News/News-Release/2000-HKFE/p030600?sc_lang=en（HTTP 200，351KB；⚠️ 原文明确 HKFE 是 HKEX 的全资附属公司，法律上是集团内独立法人的子公司，不是与 HKEX 本身完全同一法人——与本文件先前"同一法人实体内业务线"的印象不完全一致，见 market_structure.derivatives 字段说明）
+- `assets.kpmg.com` | 第三方（四大会计师事务所税务简报） | en | 未测试反爬，本次一次性 curl 成功 | 用于印花税税率调整确认；`confidence` 标 medium
+- `hsi.com.hk`（恒生指数公司官网） | 官方（第三方指数编制商，非交易所本身） | ⚠️ 主站是纯 JS 单页应用（SPA），curl 只能拿到空壳 HTML；但 `/static/uploads/contents/...` 路径下的方法论 PDF 与 Factsheet 是静态资源，不受 SPA 限制，curl 常规 UA 可直接 200 抓到——2026-08-17 新发现，此前记录的"改用第三方综述"结论对这两类文件不再成立，指数方法论字段应优先用这些 PDF | 恒生中国企业指数、恒生科技指数两条新增指数条目的编制方法一手依据
+  - 恒生中国企业指数方法论（Hang Seng China Enterprises Index Methodology）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/methodologies/IM_hsceie.pdf（HTTP 200，177KB）
+  - 恒生中国企业指数 Factsheet（2026年6月版，含基本参数速览）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/factsheets/hsceie.pdf（HTTP 200，848KB）
+  - 恒生科技指数方法论（Hang Seng TECH Index Methodology）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/methodologies/IM_hsteche.pdf（HTTP 200，284KB）
+  - 恒生科技指数 Factsheet（2026年6月版）PDF: https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/factsheets/hsteche.pdf（HTTP 200，1.03MB）
+- `hkex.com.hk`（2026-08-22 补充登记，用于补全上市/清算/参与者/基建/成本/风险六章剩余空缺字段）
+  - Chapter 13 持续上市责任（Continuing Obligations）PDF（仅英文版，未找到对应中文整合页，已在字段 detail 中说明）: https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Rules-and-Guidance/Other-Resources/Continuing-Obligations-and-Annual-Listing-Fees/Continuing-Obligation-Fee/chapter_13.pdf?la=en
+  - 上市申请审批流程时限联合声明（HKEX/SFC Joint Statement on Enhanced Timeframe for New Listing Application Process）: https://www.hkex.com.hk/News/Regulatory-Announcements/2024/241018news?sc_lang=en
+  - IPO及上市流程研究报告（2019年9月，Chief China Economist's Office）PDF（URL 文件名含半角括号，已按 %28/%29 编码登记）: https://www.hkex.com.hk/-/media/HKEX-Market/News/Research-Reports/HKEx-Research-Papers/2019/CCEO_GIS%28ListingProcess%29_201909_e.pdf?la=en
+  - Delisted Issuers（退市发行人名单页，仅列名单不含去向说明，本次已确认对补全 post_delisting_venue 帮助有限）: https://www.hkex.com.hk/Listing/Rules-and-Guidance/Listing-of-Overseas-Companies/Company-Information-Sheets/Delisted-Issuers?sc_lang=en
+  - IPO价格发现及公众持股量优化咨询总结及进一步咨询文件（2025年8月，含"香港现无可供已除牌证券交易的替代平台"官方表述，OTC市场倡议进展）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/News/Market-Consultations/2016-Present/December-2024-Optimise-IPO-Price/Conclusions-Aug-2025/cp202412cc.pdf
+  - 衍生品结算风险管理／Default Fund（结算所储备基金）: https://www.hkex.com.hk/Services/Clearing/Listed-Derivatives/Risk-Management/Default-Fund?sc_lang=en
+  - 衍生品结算风险管理／Default Management（违约处置安排）: https://www.hkex.com.hk/Services/Clearing/Listed-Derivatives/Risk-Management/Default-Management?sc_lang=en
+  - HKCC（期货结算公司）PFMI（金融市场基础设施原则）信息披露文件 2025年2月版 PDF（含逐日盯市、保证金、违约处置完整披露）: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Clearing/Listed-Derivatives/PFMI/HKCC_PFMI_Disclosure_2025_Feb.pdf
+  - HKSCC（香港中央结算）通用规则第25章「保证基金」（Guarantee Fund）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/HKSCC/General-Rules-of-HKSCC/R25.pdf
+  - Exchange Participant Data（交易所参与者数目统计页）: https://www.hkex.com.hk/Market-Data/Statistics/Participant/Exchange-Participant-Data?sc_lang=en
+  - Guide to Becoming an Exchange Participant（交易所参与者准入指南）: https://www.hkex.com.hk/Services/Become-a-Participant/Guide-to-Becoming-an-Exchange-Participant?sc_lang=en
+  - Stock Exchange Participants' Market Share Report（经纪商市占率报告页）: https://www.hkex.com.hk/Market-Data/Statistics/Participant/Stock-Exchange-Participants_-Market-Share-Report?sc_lang=en
+  - Cash Market Transaction Survey 2019（现货市场交易调查，机构/个人投资者占比）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/News/Research-Reports/HKEX-Surveys/Cash-Market-Transaction-Survey-2019/CMTS2019_e.pdf?la=en
+  - HKEX Orion Market Data Platform – Securities Market (OMD-C) 介绍页: https://www.hkex.com.hk/Services/Market-Data-Services/Infrastructure/HKEX-Orion-Market-Data-Platform-Securities-Market-OMD-C?sc_lang=en
+  - Fee Schedule – Securities Market Datafeeds Licence Fees（行情数据层级与收费表）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/Market-Data-Fees/SEHK_Market-Data-Fees-for-Retail-Participation.pdf
+  - Historical Data Services（历史数据服务总览页，原登记的 Other-Historical-and-Reference-Data 子路径抓取返回404，改用上一级总览页，已验证200）: https://www.hkex.com.hk/Services/Market-Data-Services/Historical-Data-Services?sc_lang=en
+  - Market Data Vendor Licence Prices（数据牌照收费模式页，URL 含半角括号，已按 %28/%29 编码登记）: https://www.hkex.com.hk/Services/Market-Data-Services/Real-Time-Data-Services/Data-Licensing/Market-Data-Vendor-Licence/Prices-%28Fee-Schedule%29?sc_lang=en
+  - Trading Fee / Trading Tariff / SFC Transaction Levy 费率页（URL 含半角括号，已按 %28/%29 编码登记）: https://www.hkex.com.hk/Services/Rules-and-Forms-and-Fees/Fees/Securities-%28Hong-Kong%29/Trading/Transaction?sc_lang=en
+  - HKSCC Operational Procedures Section 21《Costs and Expenses》（CCASS结算费率）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Rules-and-Forms-and-Fees/Rules/HKSCC/Operational-Procedures/SEC21.pdf
+  - Disciplinary & Enforcement Overview（上市监管纪律处分总览页）: https://www.hkex.com.hk/Listing/Disciplinary-and-Enforcement/Overview?sc_lang=en
+  - Enforcement Sanctions Statement（纪律处分制裁声明）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Rules-and-Guidance/Disciplinary-and-Enforcement/Disciplinary-Procedures-and-Enforcement-Guidance-Materials/enf_sanctions.pdf
+  - HKEX Statement on Derivatives Market Suspension（2019年9月5日衍生品市场技术故障暂停交易官方声明）: https://www.hkex.com.hk/news/market-communications/2019/190905news?sc_lang=en
+  - Conclusion of Incident Review: Derivatives Market Suspension on 5 September 2019（事故复盘结论官方新闻稿）: https://www.hkex.com.hk/News/News-Release/2020/2012282news?sc_lang=en
+  - HKEX to Launch HKD-RMB Dual Counter Model on 19 June 2023（近年上市/交易制度改革样本之一）: https://www.hkex.com.hk/News/News-Release/2023/230519news?sc_lang=en
+  - Consultation Paper June 2024《Proposed Reduction of Minimum Spreads in the Securities Market》（最小价差／买卖价差隐性成本改革咨询文件）PDF: https://www.hkex.com.hk/-/media/HKEX-Market/News/Market-Consultations/2016-Present/June-2024-Review-of-Minimum-Spreads/Consultation-Paper/cp202406.pdf
+- `en-rules.hkex.com.hk`（2026-08-22 补充登记，沿用既有域名条目）
+  - Chapter 9《Trading Halt, Suspension and Resumption of Dealings, Cancellation and Withdrawal of Listing》Entire Section 合并页（服务端渲染，可grep正文，非单章JS外壳）: https://en-rules.hkex.com.hk/entiresection/2235
+  - GL95-18《Guidance on long suspension and delisting》（2025年2月版，退市整理期/三阶段程序官方指引）PDF: https://en-rules.hkex.com.hk/sites/default/files/pdf_documents/GL95-18_202502.pdf
+  - Chapter 18C《Specialist Technology Companies》全文 PDF（近年上市制度改革样本之一，2023年3月31日生效）: https://en-rules.hkex.com.hk/sites/default/files/net_file_store/HKEX4476_6059_VER24275.pdf
+- `sfc.hk`（证监会官网，2026-08-22 新增登记） | 官方（监管机构） | zh-Hant（`/TC/` 路径）/ en（`/en/` 路径，两版路径结构不同，非同页参数切换） | curl 常规 UA 探测通过 | 用于补全投资者保护、适当性管理、开户要求、经纪商准入类别、市场执法机制等字段
+  - 合適性規定（Suitability requirement，中文版）: https://www.sfc.hk/TC/Rules-and-standards/Suitability-requirement
+  - Suitability requirement（英文版，与中文版交叉核对用）: https://www.sfc.hk/en/Rules-and-standards/Suitability-requirement
+  - 中介人及持牌人士的類別（Types of intermediary and licensed individual，中文版）: https://www.sfc.hk/TC/Regulatory-functions/Intermediaries/Licensing/Types-of-intermediary-and-licensed-individual
+  - Acceptable account opening approaches（开户核实方式，本次未找到对应中文页直链，已在字段 detail 中说明）: https://www.sfc.hk/en/Rules-and-standards/Account-opening/Acceptable-account-opening-approaches
+  - Investor compensation（投资者赔偿机制 FAQ）: https://www.sfc.hk/en/faqs/Investor-compensation
+  - Disciplinary proceedings（纪律处分程序）: https://www.sfc.hk/en/Regulatory-functions/Enforcement/Disciplinary-proceedings
+- `ird.gov.hk`（税务局官网，2026-08-22 新增登记） | 官方（监管机构） | zh-Hant / en（同一路径 `/chi/` 与 `/eng/` 切换） | curl 常规 UA 探测通过 | 用于核实股息预扣税
+  - 利得税（股息不予徵税条文页，中文版）: https://www.ird.gov.hk/chi/tax/bus_pft.htm
+  - Profits Tax（英文版，与中文版交叉核对用）: https://www.ird.gov.hk/eng/tax/bus_pft.htm
+- `info.gov.hk`（香港政府新闻公报 GIA，2026-09-04 新增登记） | 官方（政府新闻处发布的立法会答问等一手文件） | en / zh-Hant | curl 常规 UA 200；⚠️ 旧公报页 `charset=BIG5`，非 UTF-8，抓下来后按 latin-1/BIG5 解码再抽正文 | `dark_pool` 依据：财经事务及库务局局长就「暗池交易的规管」的立法会书面答复（LCQ15，2012-11-28）——SFC 依《证券及期货条例》第 V 部发牌规管暗池运营者、SEHK 自 2012-10-03 起强制 ALP 标记
+  - LCQ15: Regulation of dark pool trading（2012-11-28）: https://www.info.gov.hk/gia/general/201211/28/P201211280278.htm

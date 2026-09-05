@@ -1,0 +1,61 @@
+# 瑞士证券交易所 SIX Swiss Exchange `ch-six`
+- `six-group.com` | 官方 | en（另有 de/fr/it 版本，本次统一取 en 版本，见 source_lang 说明） | curl + 常规 UA 全部 200，未见反爬，完全无限流（比多数标杆都好抓，唯一例外见下方 module-1 条目） | SIX Group 官网，交易所业务板块（`/en/products-services/the-swiss-stock-exchange/`）与集团公司页（`/en/company/`）分属不同栏目；`/dam/download/` 路径下是可直接抓取的 PDF 规则/指南文件
+  - Regulation 总览页（Trading Rules/Directives/Trading Guides 索引）: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/trading-provisions/regulation.html
+  - Trading Hours（交易时段结构）: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/trading-provisions/trading-hours.html
+  - Trading Guide（综合交易指南 PDF，含交易时段/订单类型/市场模式）: https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/trading-guide.pdf（HTTP 200，2.6MB）
+  - Product Guide - Equity Market（股票市场产品指南 PDF）: https://www.six-group.com/dam/download/the-swiss-stock-exchange/trading/trading-provisions/regulation/trading-guides/product-guide-equities.pdf
+  - Monitoring and Regulation（FINMA 监管关系说明）: https://www.six-group.com/en/company/governance/monitoring-and-regulation.html
+  - Regulatory Affairs: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/site/regulatory-affairs.html
+  - Clearing and Settlement Provisions（清算结算条款，T+2）: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/trading-provisions/clearing-and-settlement.html
+  - About SIX SIS AG（CSD/ICSD 说明）: https://www.six-group.com/en/products-services/securities-services/settlement-and-custody/info-center/about-six-sis-ag.html
+  - SMI 系列指数编制方案 PDF: https://www.six-group.com/dam/download/market-data/indices/equity-indices/six-methodology-smi-equity-and-re-en.pdf（HTTP 200，1.6MB）
+  - Swiss Stock Exchange 业务总览页: https://www.six-group.com/en/products-services/the-swiss-stock-exchange.html
+  - Listing 总览页: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/listing.html
+  - SIX Exchanges Figures（2026年6月，市值/成交额月度公告）: https://www.six-group.com/en/newsroom/media-releases/2026/20260701-keyfigures-exchange-june-2026.html
+  - Company 总览页（集团沿革）: https://www.six-group.com/en/company.html
+  - Self-regulation of the Swiss Exchange（博客，自律监管架构说明）: https://www.six-group.com/en/blog/exchanges-self-regulation.html
+  - Trading on SIX Swiss Exchange Module 2 - Rules & Regulations（培训材料 PDF，逐条摘引官方规则条文，非泛泛而谈）: https://www.six-group.com/dam/download/sites/education/preparatory-documentation/trading-module/trading-on-ssx-module-2-rules-regulations-en.pdf（HTTP 200，1.0MB）
+  - Trading on SIX Swiss Exchange Module 1 - Trading（同系列培训材料 PDF，含波动性中断参数；⚠️4.8MB大文件，本次探测阶段20秒超时下载到4.6MB中断一次，`make fetch`默认60秒超时下过一次即200成功，已正式纳入清单）: https://www.six-group.com/dam/download/sites/education/preparatory-documentation/trading-module/trading-on-ssx-module-1-trading-en.pdf
+  - Become a Trading Participant: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/participation/trading-participants.html
+  - Exchange Membership 总览: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/participation.html
+  - Trading data statistics（市场数据/统计总入口页）: https://www.six-group.com/en/market-data/statistics.html
+  - Monthly Reports Swiss Stock Exchange（Statistical Monthly Report 索引页，此前只见入口未点开，本次补抓；⚠️点开后确认该月度报表体系（Statistical Monthly Report ZIP，如`.../smr/2026/statistical-monthly-report-202607.zip`）只含分市场/分品类的成交额、成交笔数、挂牌证券数（`TRADABLES`按品类拆分，非"上市公司数"）与指数市值（仅指数成份股口径，非全市场汇总市值），全程未见"SIX Swiss Exchange整体总市值"这一汇总数字，佐证了市值数字确实不在月度统计体系内，需要另找年报）: https://www.six-group.com/en/market-data/statistics/monthly-reports.html
+  - Annual Reporting（Annual Report投资者关系入口页）: https://www.six-group.com/en/company/investors/annual-reporting.html
+  - SIX Annual Report 2025（PDF全文，2026-03-24发布，覆盖2025财年；Report on the Business Year一节明确写"In total, around 250 companies are listed on SIX Swiss Exchange"与"On SIX Swiss Exchange, overall turnover was up 12.8% to reach CHF 1,135.0 billion"——均为SIX Swiss Exchange单一实体口径，不与BME合并；全文逐页核对未见"总市值/市值"汇总数字，确认该指标确实未被官方公开披露）: https://www.six-group.com/dam/download/company/report/annual/2025/six-annual-report-2025-en.pdf
+  - SIX Key Figures 2025（Annual Report附属的Key Figures独立PDF，含"Turnover SIX Swiss Exchange"单独一行财务口径数据，佐证年报正文的年成交额数字）: https://www.six-group.com/dam/download/company/report/annual/2025/six-key-figures-2025.pdf
+- `handbooks.six-group.com` | 官方 | en | curl 常规 UA 200 | Relevant Regulators 页（列出 FINMA 与自律监管分工）
+  - Relevant Regulators: https://handbooks.six-group.com/en/investor-relations/regulatorisches-umfeld-regelwerk-und-reporting-six/relevante-regulatoren
+- `ser-ag.com` | 官方（SIX Exchange Regulation AG，法律上独立于交易所运营主体的自律监管法人，依瑞士法律要求分权设立，见 CLAUDE.md 二第2条「官方规则手册」优先级） | en | curl 常规 UA 200，未见反爬 | 托管《上市规则》《交易规则》正式 PDF 全文，是本所规则条文最权威的直接来源，优先于 six-group.com 的介绍性页面
+  - Listing Rules（LR，2024年11月6日版）PDF: https://www.ser-ag.com/dam/downloads/regulation/listing/listing-rules/lr-en.pdf（HTTP 200，1.15MB）
+  - Trading Rules（Rule Book，RB）PDF: https://www.ser-ag.com/dam/downloads/regulation/trading/rule-books/rb-en.pdf（HTTP 200，405KB）
+  - About SER（自律监管架构说明）: https://www.ser-ag.com/en/about.html
+  - Guideline "Trading Parameters"（GTP，各交易细分市场的波动性中断/价格监控参数）PDF: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/gtp-en.pdf（HTTP 200，842KB）
+  - Directive 1: Admission of Participants PDF: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir01-en.pdf（HTTP 200，259KB）
+  - Directive 3: Trading PDF（交易机制核心条款：订单类型、执行优先级、集合竞价、卖空、透明度豁免等，是market_structure章节最主要的单一来源）: https://www.ser-ag.com/dam/downloads/regulation/trading/directives/dir03-en.pdf（HTTP 200，869KB；⚠️本条系研究过程中期发现后手工curl补抓，未随第一批`make fetch`一起跑，下次维护本节时若重跑`make fetch EX=ch-six`会自动补齐，属正常范围内的URL）
+- `finma.ch` | 监管 | en/de | curl 常规 UA 200 | 瑞士金融市场监管局（FINMA）官网
+  - Authorised Swiss Stock Exchanges（受批准交易所名录 PDF，含 SIX Swiss Exchange AG 与 SDX Trading AG 两个独立受批准交易所实体）: https://www.finma.ch/en/~/media/finma/dokumente/bewilligungstraeger/pdf/bourses.pdf（HTTP 200，326KB）
+  - FINMA issues first-ever approval for a stock exchange and a central securities depository for the trading of tokens（2021年批准SDX Trading AG为独立交易所的新闻稿，佐证`group_id`判断）: https://www.finma.ch/en/news/2021/09/finma-issues-first-ever-approval-for-a-stock-exchange-and-a-central-securities-depository-for-the-trading-of-tokens/
+- `estv.admin.ch` | 监管（联邦税务局 Federal Tax Administration，印花税与预扣税的法定征收机关） | en/de/fr/it | curl 常规 UA 200（德语版子页与英文总览页均可正常抓取；⚠️PDF子域名`/dam/estv/...`路径本次两次尝试均返回502，见下方备注） | 用于印花税（Umsatzabgabe/transfer stamp tax）与股息预扣税（Verrechnungssteuer/anticipatory tax）的官方税率确认；⚠️ 预扣税页面直接给出35%具体税率数字（confidence可标high），英文版印花税总览页只确认税种法律性质，未给出0.15%/0.3%具体税率数字；2026-08-21 本次改抓德语版子页，成功定位到载明具体税率的原始文本（见下方"Umsatzabgabe kurz erklärt"条），已据此把`costs.stamp_duty`的`confidence`从medium升级为high，`taxsummaries.pwc.com`第三方来源降级为佐证来源保留
+  - Stamp Duty 总览: https://www.estv.admin.ch/en/stamp-duty
+  - Anticipatory Tax（预扣税/预提税）总览: https://www.estv.admin.ch/estv/en/home/anticipatory-tax.html
+  - Umsatzabgabe kurz erklärt（德语版印花税说明子页，原文"Die Abgabe beträgt 1,5 ‰ für inländische Wertpapiere und 3,0 ‰ für ausländische Wertpapiere"，即本项目费率字段的官方原文出处）: https://www.estv.admin.ch/estv/de/home/bundesabgaben/stempelabgaben/sta-fachinformationen/umsatzabgabe.html
+  - Eidgenössische Stempelabgaben（ESTV官方PDF，联邦印花税制度全文说明，Stand der Gesetzgebung: 1. Januar 2024；⚠️2026-08-21两次`make fetch`均返回502（`/dam/estv/de/dokumente/...`路径），怀疑是该PDF所在的dam静态资源子系统临时故障而非反爬——已从"Umsatzabgabe kurz erklärt"网页版拿到同一税率数字，不影响本节结论，但下次维护时若仍502可以考虑移除此条或换个时间重试）: https://www.estv.admin.ch/dam/estv/de/dokumente/estv/steuersystem/dossier-steuerinformationen/d/d-eidgenoessischen-stempelabgaben.pdf.download.pdf/d-eidgenoessischen-stempelabgaben.pdf
+- `taxsummaries.pwc.com` | 第三方（四大会计师事务所税务简报） | en | curl 常规 UA 200 | 用于确认瑞士联邦证券交易印花税具体税率（0.15%本国证券/0.3%外国证券）；2026-08-21已找到ESTV官方原文佐证同一数字（见上条），本条目降级为辅助佐证来源，主要作用是提供与官方德文千分比表述数学等价的百分比转述，便于`quote`里的数字反查校验（见`tools/validate.py`的quote数字校验机制）
+  - Switzerland - Corporate - Other taxes: https://taxsummaries.pwc.com/switzerland/corporate/other-taxes
+- `natlawreview.com` | 第三方（律所法律资讯平台） | en | curl 常规 UA 200 | 用于确认欧盟2017年认定瑞士交易所MiFID II「等效性」的具体决定内容（生效日期、有效期一年等）；⚠️非官方原文（欧盟官方 europa.eu/rapid 页面本次实测为纯JS渲染的SPA，curl只能拿到空壳，未能抓到正文，故退而求其次用此律所转述）；2026-08-21 已用下方 eur-lex.europa.eu 官方决定原文与瑞士联邦官方说明页核实并补全完整时间线（且发现该转述把首次决定的到期日期简化描述为"有效期一年"，容易被误读为2017年12月31日到期，实际官方原文到期日是2018年12月31日），本条目降级为辅助佐证来源
+  - European Commission Adopts Implementing Decision on the Equivalence of Swiss Stock Exchanges Under MiFID II: https://natlawreview.com/article/european-commission-adopts-implementing-decision-equivalence-swiss-stock-exchanges
+- `eur-lex.europa.eu` | 官方（欧盟法律数据库，与交易所无关但是MiFID II等效性认定决定的原始法律文本出处） | en | ⚠️curl 常规 UA 首次探测返回 202 + `x-amzn-waf-action: challenge`（AWS WAF机器人质询，空文件），与`sec.gov`/`finra.org`/`dtcc.com`同一类拦截；但随后用`make fetch`按标准流程正式重跑，两条URL均转为 200 完整抓到全文（307KB/309KB），未再复现质询——判断为间歇性/请求特征敏感的拦截，不是稳定域名级封锁，下次维护如遇到202空文件不必立即判定不可用，可重跑`make fetch`再试一次 | 用于核实欧盟对瑞士交易所MiFID II等效性认定的具体决定原文与失效时间线
+  - Commission Implementing Decision (EU) 2017/2441 of 21 December 2017（首次认定瑞士交易所与MiFID II等效，Article 2原文：有效期至2018年12月31日，不是"一年"这种简化说法容易让人误解的2017年12月31日）: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017D2441
+  - Commission Implementing Decision (EU) 2018/2047 of 20 December 2018（延长认定，自2019年1月1日起适用，2019年6月30日到期）: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018D2047
+- `sif.admin.ch` / `admin.ch` | 官方（瑞士联邦财政部国际金融事务秘书处 State Secretariat for International Finance SIF + 联邦委员会 Federal Council 新闻稿） | en | `sif.admin.ch`页面curl常规UA 200；⚠️`admin.ch`两条联邦委员会新闻稿页面（`/gov/en/start/documentation/media-releases...`路径）本次两次尝试均403，疑似该路径较`sif.admin.ch`有更严格的反爬策略；`sif.admin.ch`说明页本身已完整转述两条新闻稿的核心内容，不影响本节结论 | CLAUDE.md任务指引建议的替代来源——瑞士官方对欧盟MiFID II等效性认定失效及后续「交易所保护措施」整段历史的官方说明，比第三方律所转述更完整、且延伸到了2024-2025年最新进展（第三方来源当时未覆盖到）
+  - Measure to protect Swiss stock exchange infrastructure（SIF官方说明页，完整时间线：2019年失效→保护措施→2024年入法→2025年5月对EU解除，本节主要依据）: https://www.sif.admin.ch/en/protect-swiss-stock-exchange-infrastructure
+  - Statement by President Doris Leuthard on the EU's decision regarding stock market equivalence（2019年联邦委员会就等效性认定失效发布的官方声明；⚠️curl 403，未能直接抓到正文，内容已由上条sif.admin.ch页面转述覆盖）: https://www.admin.ch/gov/en/start/documentation/media-releases/media-releases-federal-council.msg-id-69354.html
+  - Federal Council to remove EU from stock exchange protection list as of 1 May 2025（2025年最新进展官方新闻稿；⚠️curl 403，同上，内容已由sif.admin.ch页面转述覆盖）: https://www.admin.ch/gov/en/start/documentation/media-releases.msg-id-103976.html
+
+---
+
+- `www.seco.admin.ch` | 官方（瑞士经济事务秘书处） | en | curl 常规 UA 200 | 投资审查（foreign_ownership_limit 出处）
+- `legacy.export.gov` | 官方（美国 ITA 历史站） | en | curl 常规 UA 200 | 瑞士外汇管制现状（capital_controls 出处，建议后续换 SNB/FINMA 一手来源）
+- `www.eqs-news.com` | 第三方（公告分发） | en | curl 常规 UA 200 | Swiss Steel 退市 ad-hoc 公告（post_delisting_venue/liquidity_risk_note 出处，confidence medium）
+- `www.swissinfo.ch` | 第三方（瑞士资讯） | en | curl 常规 UA 200 | SIX 交易中断报道（major_outage_history 出处，confidence medium）
+- `www.admin.ch` | 官方（瑞士联邦） | en | curl 常规 UA 200 | 政治风险背景（risks.political_risk_note 出处，建议补一手国家风险来源）

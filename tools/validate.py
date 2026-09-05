@@ -860,12 +860,29 @@ def otp_line_violations(sources_text: str):
     return out
 
 
+def load_sources_full_text() -> str:
+    """「SOURCES.md + PROJECT/sources/*.md 全部分片」拼接后的全文。
+
+    来源记录按交易所下沉到分片后，`SOURCES_DOMAIN_RE` / `SOURCES_TAG_RE` /
+    `[OTP]` 行这些逐行匹配的校验都应扫拼接全文——registered_domains 与
+    domain_tags 是全局扁平集合、无按交易所作用域，union 后语义不变。
+    """
+    parts = []
+    main_path = PROJECT_DIR / "SOURCES.md"
+    if main_path.exists():
+        parts.append(main_path.read_text(encoding="utf-8"))
+    src_dir = PROJECT_DIR / "sources"
+    if src_dir.exists():
+        parts.extend(p.read_text(encoding="utf-8") for p in sorted(src_dir.glob("*.md")))
+    return "\n".join(parts)
+
+
 def validate_otp_sources():
-    """PROJECT/SOURCES.md 里的 `[OTP]` 登记行格式合法，见 [ADR-075]。"""
-    path = PROJECT_DIR / "SOURCES.md"
-    if not path.exists():
+    """来源登记（SOURCES.md + sources/ 分片）里的 `[OTP]` 行格式合法，见 [ADR-075]。"""
+    text = load_sources_full_text()
+    if not text:
         return
-    for msg in otp_line_violations(path.read_text(encoding="utf-8")):
+    for msg in otp_line_violations(text):
         err(msg)
 
 
@@ -889,7 +906,7 @@ def main():
     taxonomy, glossary, enums, raw_exchanges = sync.load_all()
     exchanges_expanded = {eid: sync.expand_exchange(taxonomy, raw) for eid, raw in raw_exchanges.items()}
 
-    sources_text = (PROJECT_DIR / "SOURCES.md").read_text(encoding="utf-8") if (PROJECT_DIR / "SOURCES.md").exists() else ""
+    sources_text = load_sources_full_text()
     registered_domains = set(SOURCES_DOMAIN_RE.findall(sources_text))
 
     # domain -> {'primary'} / {'third_party'} / 混合。标签形如「官方」「监管」「第三方」，

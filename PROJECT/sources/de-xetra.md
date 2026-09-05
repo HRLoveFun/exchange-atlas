@@ -1,0 +1,36 @@
+# 法兰克福证券交易所 / Xetra Frankfurt Stock Exchange (FWB) / Deutsche Börse Xetra `de-xetra`
+- `cashmarket.deutsche-boerse.com` | 官方 | de/en（本节实测抓取的全部是英文页；同集团站群，抓取体验与 `de-eurex` 一致） | curl + 常规 UA 全部 200，未见反爬 | ⚠️ 法律实体是「法兰克福证券交易所」（Frankfurter Wertpapierbörse，FWB®），官方原文明确写它是「具有有限法律行为能力的公法机构，不能作为私法主体」（"a stock exchange, as a public law institution with limited legal capacity, cannot act as a legal entity under private law"），Deutsche Börse AG 是负责运营的「Trägerin/organising company」——这与 `de-eurex.yml`（Eurex Deutschland 是私法主体的公司）是两种不同的法律形式，即使同属 `deutsche-boerse-group`。「Xetra」是 FWB 名下的电子交易系统（品牌名），FWB 名下另有场内专家做市交易场所「Börse Frankfurt」（主要服务零售），站内很多页面把两个交易场所的信息混排，摘引时要看清楚具体指哪个。规则体系与 Eurex 平行但独立：Börsenordnung（交易所规则）/Handelsordnung（交易规则）/Zulassungsordnung（准入规则）/Gebührenordnung（费用规则）/Bedingungen für Geschäfte（交易条件）五份官方英文版 PDF，直链可从 Rules and Regulations 索引页的静态 HTML 里 grep 出来（同 Eurex 经验）
+  - Organisation of the FWB（法律结构说明页，含上述 Trägerin quote）: https://www.cashmarket.deutsche-boerse.com/cash-en/organisation-of-the-fwb（HTTP 200，119KB）
+  - Rules and Regulations 索引页: https://www.cashmarket.deutsche-boerse.com/cash-en/Stay-Informed/rules-and-regulations-for-the-fwb（HTTP 200，129KB）
+  - Exchange Rules for the FWB（「Börsenordnung」，法律地位/交易所理事会/监管机关等核心制度条款）PDF: https://www.cashmarket.deutsche-boerse.com/resource/blob/31802/6ab37d564c2934a20766824e4284d608/data/2026_07_07_fwb_boersenordnung_en.pdf（HTTP 200，889KB）
+  - Trading Rules for the FWB（「Handelsordnung」，交易时段/撮合原则/订单类型/波动性中断等交易机制细则）PDF: https://www.cashmarket.deutsche-boerse.com/resource/blob/306328/277fd149bd7315788c9048d06e1afd63/data/2025_12_01_fwb_handelsordnung_en.pdf（HTTP 200，145KB）
+  - Admission Regulations for the FWB（「Zulassungsordnung」，交易参与者/交易员准入资格）PDF: https://www.cashmarket.deutsche-boerse.com/resource/blob/276736/e9bd77a7b2a8e35358c21d7502768c90/data/2025_07_07_fwb_zulassungsordnung_en.pdf（HTTP 200，163KB）
+  - Fee Regulations for the FWB（「Gebührenordnung」）PDF: https://www.cashmarket.deutsche-boerse.com/resource/blob/258110/70065473df09ae3e44b1f262128749a2/data/2026_04_09_fwb_gebuehrenordnung_en.pdf（HTTP 200，271KB）
+  - Conditions for Transactions on the FWB（「Bedingungen für Geschäfte」）PDF: https://www.cashmarket.deutsche-boerse.com/resource/blob/258072/0c3583c58b7f5f34d7a14143f1419745/data/2025_12_01_fwb_bedingungen_fuer_geschaefte_en.pdf（HTTP 200，328KB）
+  - Trading calendar and trading hours: https://www.cashmarket.deutsche-boerse.com/cash-en/Trading-calendar-and-trading-hours-22048（HTTP 200，128KB）
+  - Continuous Trading with Auctions: https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/continuous-trading-with-auctions（HTTP 200，131KB）
+  - Protective Mechanisms（波动性中断总览）: https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/protective-mechanisms（HTTP 200，119KB）
+  - Protective Mechanisms in Continuous Trading（波动性中断细则：静态/动态双价格区间、单一模型 vs 自动扩展模型）: https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/protective-mechanisms/protective-mechanisms-in-continuous-trading（HTTP 200，116KB）
+  - Designated Sponsor and Market Maker: https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/Designated-Sponsor-and-Market-Maker（HTTP 200，122KB）
+  - Designated Sponsor Requirements: https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Xetra/Designated-Sponsor-and-Market-Maker/designated-sponsor-requirements（HTTP 200，158KB）
+  - Factsheet: EU-regulated market (General/Prime Standard) & Open Market Scale for shares（板块体系对照表）PDF: https://www.cashmarket.deutsche-boerse.com/resource/blob/1514900/3741d89481450eff301b97c66d23f0fb/data/Factsheet-EU-regulated-market-GS-PS-Scale-for-shares.pdf（HTTP 200，393KB）
+- `deutsche-boerse.com` | 官方（集团官网） | en | curl 常规 UA 200 | 集团层面页面，覆盖板块结构总览与监管机构说明
+  - Market Structure（Prime Standard/General Standard/Scale三层板块定义）: https://www.deutsche-boerse.com/dbg-en/markets-services/ps-pre-ipo-listing/ps-market-structure（HTTP 200，124KB）
+  - Frankfurt Stock Exchange Supervisory Bodies: https://www.deutsche-boerse.com/dbg-en/markets-services/trading/frankfurt-stock-exchange/supervisory-bodies（HTTP 200，160KB）
+- `live.deutsche-boerse.com` | 官方（集团知识库/术语站，与 cashmarket 站内容有重叠但独立域名） | en | curl 常规 UA 200 | Hessian Stock Exchange Supervisory Authority 说明页
+  - Hessian Stock Exchange Supervisory Authority（黑森州交易所监管机关，与 de-eurex 记录的机关同一层级，隶属黑森州经济、能源、交通、住房与农村事务部）: https://live.deutsche-boerse.com/en/know-how/about/organisation-der-boerse/hessische-boersenaufsicht（HTTP 200，723KB）
+- `xetra.com` | 官方（Xetra品牌站，与 cashmarket.deutsche-boerse.com 内容有重叠、URL结构不同，两个域名都要单独注册） | en | curl 常规 UA 200 | 清算结算与费用说明页
+  - Settlement: https://www.xetra.com/xetra-en/clearing-settlement/settlement（HTTP 200，167KB）
+  - Clearing: https://www.xetra.com/xetra-en/clearing-settlement/clearing（HTTP 200，167KB）
+  - Fees 总览页: https://www.xetra.com/fees/（HTTP 200，167KB）
+- `bafin.de` | 监管（联邦金融监管局，Bundesanstalt für Finanzdienstleistungsaufsicht） | en | curl 常规 UA 200 | 净卖空头寸申报页，依据欧盟第236/2012号法规；⚠️ 门槛具体数值（申报门槛0.1%、公开披露门槛0.5%）本次未能在该页找到逐字可摘引的表述（正文侧重申报操作流程，数值散见于示例段落，非规范性陈述句），`short_selling` 相关字段的具体阈值留空未采纳，见 OPEN-QUESTIONS
+  - Net Short Positions: https://www.bafin.de/EN/unternehmen-maerkte/mvp-portal/nettoleerverkauf/nettoleerverkauf_node_en.html（HTTP 200，78KB）
+- `bzst.de` | 监管（联邦中央税务局，Bundeszentralamt für Steuern） | de（未找到对应英文页） | curl 常规 UA 200 | 资本利得预扣税官方税率说明（25%资本利得税+其5.5%团结附加税，合计26.375%）
+  - Kapitalerträge und Entlastung（企业适用页）: https://www.bzst.de/DE/Unternehmen/Kapitalertraege/kapitalertraege_node.html（HTTP 200，74KB）
+- `stoxx.com` | 官方（集团关联指数商 Qontigo/STOXX，法人实体与交易所本身不同，但同属 Deutsche Börse Group 品牌矩阵） | en | curl 常规 UA 200 | DAX指数页：确认STOXX自2019年9月起为编制/管理方、自由流通市值加权、单一成分股权重上限15%（2024年3月18日起，此前为10%）
+  - DAX: https://stoxx.com/index/dax/（HTTP 200，878KB）
+
+- `dserver.bundestag.de` | 官方（德国联邦议会文件库） | de | curl 常规 UA 200 | Börsenumsatzsteuer 1991 废除立法（stamp_duty/financial_transaction_tax 出处）
+- `www.deloittelegal.de` | 第三方（律所） | de | WebSearch 定位 | EdW 投资者赔偿方案（investor_protection 出处，confidence medium）
+- `resourcehub.bakermckenzie.com` | 第三方（律所资源库） | en | WebSearch 定位 | 上市流程文件（listing_process_duration 出处，confidence medium）
+- `www.marketscreener.com` | 第三方（财经媒体） | en | curl 常规 UA 200 | Xetra 交易中断报道（major_outage_history 出处，confidence medium）

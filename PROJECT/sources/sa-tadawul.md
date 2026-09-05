@@ -1,0 +1,47 @@
+# 沙特交易所 Saudi Exchange (Tadawul) `sa-tadawul`
+- `tadawulgroup.sa` | 官方（集团控股公司站点，与被封锁的 saudiexchange.sa 共用同一套 IBM WebSphere Portal 内容管理后端） | ar/en（阿拉伯语为唯一官方语言，英文版为官方提供的对照译本；部分 PDF 首页标注"Arabic is the official language of the Saudi Exchange"或"unofficial translation"字样） | curl + 常规 UA 全部 200，未见反爬；⚠️ `/wps/portal/tadawulgroup/...` 命名空间下的集团公司页可正常抓取，但把 `saudiexchange`/`edaa` 等其他子品牌的 portal 路径直接拼到 `tadawulgroup.sa` 域名下会被应用层拒绝返回 403（如 `tadawulgroup.sa/wps/portal/saudiexchange/...`），只有 `wcm/connect/...`（内容仓库直链，通常是 PDF）路径不受这条限制、任意命名空间前缀都能抓到 | 规则类 PDF 大多是集团整体维护的内容仓库资源，即使标题写"Saudi Exchange Company"也通过 tadawulgroup.sa 域名分发；`Trading and Membership Procedures` 一份 PDF 信息密度最高，交易时段/订单类型/订单条件/最小报价单位/涨跌停与波动性拍卖机制均有精确条文可摘引
+  - Saudi Exchange 集团子公司页: https://www.tadawulgroup.sa/wps/portal/tadawulgroup/portfolio/saudi-exchange
+  - Edaa（证券存管中心）子公司页: https://www.tadawulgroup.sa/wps/portal/tadawulgroup/portfolio/edaa
+  - Muqassa（证券清算中心）子公司页: https://www.tadawulgroup.sa/wps/portal/tadawulgroup/portfolio/muqassa
+  - Listing Rules（上市规则）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/e4bfbba8-4932-4b0c-b405-c922ac56d780/Listing+Rules.pdf?MOD=AJPERES&CVID=pfpotDY
+  - Trading and Membership Procedures（交易与会员规程，含交易时段/订单类型/涨跌停与波动性拍卖机制的核心条文）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+  - Indices Methodology 2024（指数方法论）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/93482491-9528-4979-8e6e-f11691e35bf6/Indices+Methodology+2024.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-93482491-9528-4979-8e6e-f11691e35bf6-o.tGnQ1
+  - Market Making Regulations（做市商制度）PDF（⚠️ 文件名本身含半角括号"(2)"，URL 里必须用 `%282%29` 转义，否则 `tools/fetch.py` 的 `URL_RE` 会在半角 `)` 处截断——已实测转义后可正常抓取）: https://www.tadawulgroup.sa/wps/wcm/connect/2fc1a74f-4357-4843-9b50-0edbc06296b3/Market+Making+Regulations+%282%29.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-2fc1a74f-4357-4843-9b50-0edbc06296b3-oqd5Wba
+  - Derivatives Market Brochures（衍生品市场介绍）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/0e0e1657-e035-4172-a4e6-943c4dfce80d/Derivatives+Market+Brochures.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-0e0e1657-e035-4172-a4e6-943c4dfce80d-oW9oJ-.
+  - MT30 Index Futures Contract Specifications（MT30指数期货合约规格表：合约代码/合约乘数/最小变动价位/每日涨跌停/合约月份/结算方式/交易时段等）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/f5716373-65f9-4a6c-961c-f1f76f351138/MT30.pdf?MOD=AJPERES&CVID=pmfpIF7（HTTP 200）
+  - Derivatives Exchange Trading and Membership Procedures（衍生品交易与会员程序：交易时段表/订单类型/订单条件/订单有效期/撮合原则与开盘价算法/涨跌停/协商交易/暂停机制等条文密度最高的单一衍生品来源）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/f4480189-6e3e-4aac-b385-d858b3baff4c/Derivatives+Exchange+Trading+and+Membership+Procedure+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-f4480189-6e3e-4aac-b385-d858b3baff4c-pfkJUdp（HTTP 200）
+  - Derivatives Exchange Trading and Membership Rules（衍生品交易与会员规则：会员资格/做市商/保证金/协商交易/紧急情况等条款层级更高的规则文本，与上面的 Procedures 是同一体系的两份文件）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/89982883-848c-485e-9b94-5ef5ce0c27ce/Derivatives+Exchange+Trading+and+Membership+Rules+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-89982883-848c-485e-9b94-5ef5ce0c27ce-pfkI-F7（HTTP 200）
+  - Short Selling Regulations（做空/卖空监管规则全文，含合格卖空标的清单范围/报升规则等条款；2026-08-20新增登记，用于核实 OPEN-QUESTIONS `short_selling` 悬案）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/1300edb3-6987-4d93-9515-138e1e7343e8/Short+Selling+Regulations.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1300edb3-6987-4d93-9515-138e1e7343e8-oV2AOMl（HTTP 200；⚠️ 不带查询参数的短链会 404，必须带完整 `?MOD=AJPERES&...CACHEID=...` 查询串）
+  - Saudi Exchange Statistical Report 2024（年度统计报告；2026-08-20新增登记，曾尝试核实 OPEN-QUESTIONS TASI 基日/基点悬案，**已确认无果**——报告含市场概览/年度数据但不含TASI基日/基点历史信息，下次不必重复翻此文件找该悬案）PDF: https://www.tadawulgroup.sa/wps/wcm/connect/196987cf-f6b1-4f64-9fe4-430821edbf24/Saudi+Exchange+Statistical+Report+2024+En.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-196987cf-f6b1-4f64-9fe4-430821edbf24-pl7Xgyx（HTTP 200）
+- `annualreport.tadawulgroup.sa`（⚠️ 与 `annualreport2018.tadawul.com.sa` 是不同域名/不同静态存档站点，前者只有2018年报，本域名托管2021年及以后的年报，2026-08-20新增登记） | 官方（Saudi Tadawul Group 年度报告存档站点，静态站点） | en | curl + 常规 UA 200，未见反爬 | 用于核实 OPEN-QUESTIONS 母公司2021年改制为控股集团+完成IPO 的悬案
+  - The IPO（2021年报，Company Profile 章节，含改制公告日期/IPO完成日期/发行比例/发行价）: https://annualreport.tadawulgroup.sa/Resources/AnnualReport2021/company_profile/the_ipo.html
+  - Subsidiary Review（2021年报，Operation Review 章节，四家子公司列表与集团架构说明）: https://annualreport.tadawulgroup.sa/Resources/AnnualReport2021/operation_review/subsidiary_review.html
+- `cma.gov.sa` | 监管 | ar/en | curl + 常规 UA 全部 200，未见反爬 | 沙特资本市场管理局（Capital Market Authority, CMA），Saudi Exchange 的政府监管机构；官方确认域名是 `cma.gov.sa`（`.gov.sa` 而非旧域名 `cma.org.sa`，后者仍能 200 但已非最新权威站点，本次未采用）
+  - About CMA: https://cma.gov.sa/en/AboutCMA/Pages/AboutCMA.aspx
+  - Capital Market Law 索引页: https://cma.gov.sa/en/RulesRegulations/CMALaw/Pages/default.aspx
+  - Capital Market Law（资本市场法，含交易所/存管中心/清算中心须经 CMA 许可并采用股份公司形式等核心条文）PDF: https://cma.gov.sa/en/RulesRegulations/CMALaw/Documents/CMA_Law.pdf
+  - Capital Market Institutions Regulations PDF: https://cma.gov.sa/en/RulesRegulations/Regulations/Documents/CapitalMarketInstitutionsRegulations.pdf
+  - Awareness/Regulations 总览页: https://cma.gov.sa/en/Awareness/Pages/Regulations.aspx
+  - Saudi Tadawul Group Holding Company Prospectus（CMA官方备案的招股说明书，用于核实2021年改制/IPO悬案；2026-08-20新增登记）PDF: https://cma.gov.sa/en/Market/Prospectuses/Documents/Saudi_Tadawul_Group_en.pdf
+  - The CMA Opens the Capital Market to All Categories of Foreign Investors（2026-01-06/07官方公告页，取消QFI制度、开放主板予全体外资的官方一手公告；2026-08-20新增登记，用于核实 OPEN-QUESTIONS `foreign_ownership_limit` 悬案）: https://cma.gov.sa/en/MediaCenter/NEWS/Pages/CMA_N_3974.aspx
+  - Rules for Foreign Investment in Securities（外资证券投资规则，2026年1月5日修订版官方英译本；2026-08-20新增登记）PDF: https://cma.gov.sa/en/RulesRegulations/Regulations/Documents/Rules_for_Foreign_Investment_in_Securities_en.pdf
+  - Investing in the Stock Market（CMA投资者教育系列 Booklet 2；2026-08-20新增登记，曾尝试核实TASI基日悬案，**已确认无果**——提及TASI但无历史/基日信息）PDF: https://cma.gov.sa/en/Awareness/Publications/booklets/Booklet_2.pdf
+- `edaa.sa` | 官方（证券存管中心，Saudi Tadawul Group 旗下子公司，CSD） | en | curl + 常规 UA 200，未见反爬 | Depository and Settlement System (DSS) 说明，证券侧全额交收、资金侧净额结算
+  - Settlement 服务页: https://www.edaa.sa/wps/portal/edaa/services/memberservices/settlement?locale=en
+- `muqassa.sa` | 官方（证券清算中心，Saudi Tadawul Group 旗下子公司，CCP） | en | curl + 常规 UA 200，未见反爬 | 首页含公司成立年份（2018）与最新公告列表，本身即含正文，未见明显反爬
+  - 首页: https://www.muqassa.sa/wps/portal/muqassa/home
+  - Derivatives Index Brochure（MT30指数期货合约规格与保证金乘数表，含Institutions/Tier1 Individual/Tier2 Individual三档保证金乘数）PDF: https://www.muqassa.sa/wps/wcm/connect/6a41fc1e-3ace-40de-a42c-9c1ac8ec97bc/Derivatives_Index_Brochure_Digital_EN.pdf?MOD=AJPERES&CVID=oMhahw8（HTTP 200）
+- `annualreport2018.tadawul.com.sa` | 官方（2018 年度报告站点存档，静态站点，非现行 WebSphere Portal 系统） | en | curl + 常规 UA 200，未见反爬；⚠️ 是历史存档页（2018年报），仅用于确认「2007年3月19日依据资本市场法第20条成立为股份公司」这条历史成立事实，不代表当前最新股权/上市结构（Tadawul 已于2021年改制为控股集团并完成IPO，见 regulation/overview 相关字段 detail 说明）
+  - About Tadawul: https://annualreport2018.tadawul.com.sa/Resources/AnnualReport/company_profile/about_tadawul.html
+- `lw.com`（⚠️ 2026-08-20起已不再被 `data/exchanges/sa-tadawul.yml` 任何字段引用，保留本条仅作查证过程记录） | 第三方（Latham & Watkins 律所客户简报） | en | curl 常规 UA 200 | 曾用于确认 2026年2月1日起 CMA 取消 QFI（合格境外投资者）制度、保留外资合计49%上限与单一外资10%上限；已找到并改用 `cma.gov.sa` 官方原文（Rules for Foreign Investment in Securities 修订版 + CMA_N_3974 官方公告，见上方 `cma.gov.sa` 条目），相关字段 confidence 已从 medium 升级为 high，第三方来源不再需要
+  - Saudi CMA Broadens Main Market Access for Foreign Investors: https://www.lw.com/en/insights/saudi-cma-broadens-main-market-access-for-foreign-investors
+- `saudiexchange.sa`（⚠️ 本节唯一未攻克的域名，见 CLAUDE.md 三降级方案） | 官方（Saudi Exchange 运营实体自身官网，本应是最主要的一手来源） | — | **全站被 Akamai WAF 拦截，任何路径、任何 UA 组合均返回 403**（响应体含 `errors.edgesuite.net` 字样，确认是 Akamai Edge 防护，与 v0.2 探测记录里 `sec.gov`/`finra.org`/`dtcc.com` 同一类拦截）。已测试：①默认常规 UA 直连首页与深层 `/wps/portal/...` 路径均 403；②换 Safari UA + 加 `Accept-Language`/`Referer`（伪装成来自 Google 搜索跳转）头模拟真实浏览器仍 403；③直接请求站内 PDF 直链（如 `Trading and Membership Procedures.pdf`）同样 403，说明拦截是域名级而非仅拦网页；④尝试 `beta.saudiexchange.sa` 子域名，证书已过期（需 `-k` 跳过校验）且同样 403，判断是被弃用的旧站点，不值得继续尝试；⑤`web.archive.org` 可达但查询该域名快照时遇到限流（429/503），未能验证是否有可用快照。**降级方案**：改用同一 CMS 后端但未被拦截的 `tadawulgroup.sa` 域名（可抓到大量同源 PDF 规则文档与集团子公司页），配合监管方 `cma.gov.sa`、清算/存管子公司自己的域名 `edaa.sa`/`muqassa.sa` 作为一手来源替代，实测覆盖了监管、交易机制、上市、指数、清算五大章节的核心内容，缺口主要在 Saudi Exchange 自身网站上才有的实时市场数据类页面（如行情费率、历史数据可得性），这类字段本次相应留空或标 low confidence，见 OPEN-QUESTIONS
+- `vision2030.gov.sa` | 官方（沙特 Vision 2030） | en | curl 常规 UA 200 | 改革/政治风险背景（political_risk_note 出处）
+- `www.hmco.com.sa` | 第三方（Herbert Smith Freehills 沙特） | en | WebSearch 定位 | 印花税/费用（confidence 封顶 medium）
+- `www.nzte.govt.nz` | 官方（新西兰贸易发展局） | en | WebSearch 定位 | 跨境费用交叉核对（confidence medium）
+- `www.derayah.com` | 第三方（Derayah 券商） | en | curl 常规 UA 200 | 佣金结构（commission_structure 出处，confidence medium）
+- `sahmcapital.com` | 第三方（券商） | en | WebSearch 定位 | 费用/手续费（confidence 封顶 medium）
+- `jurisdb.com` | 第三方（法律数据库） | en | WebSearch 定位 | 股息预扣税（confidence 封顶 medium）
+- `taxonimo.com` | 第三方（税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
+- `www.bakermckenzie.com` | 第三方（律所） | en | WebSearch 定位 | 上市流程（listing_process_duration 出处，confidence medium）
+- `www.fintechfutures.com` | 第三方（金融科技媒体） | en | WebSearch 定位 | 交易系统/延迟（trading_system_name/data_latency 出处，confidence medium）

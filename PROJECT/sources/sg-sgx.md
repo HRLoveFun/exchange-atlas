@@ -1,0 +1,39 @@
+# 新加坡交易所 Singapore Exchange (SGX) `sg-sgx`
+- `rulebook.sgx.com` | 官方（规则手册独立域名） | en | curl + 常规 UA 全部 200，未见反爬；页面正文夹杂大量导航/相关链接文字，抓到后按关键词定位正文 | ⚠️ SGX 集团下 SGX-ST（Singapore Exchange Securities Trading Limited，现货证券）与 SGX-DT（Singapore Exchange Derivatives Trading Limited，衍生品）是 MAS 分别核准的两个独立"Approved Exchange"法人实体（另有 SGX-DC 衍生品清算、CDP 证券清算/存管，见下 cftc.gov 一条），但本项目只建一个 `sg-sgx` 条目覆盖整个 SGX 品牌的现货+衍生品业务（Wave 1/2 名单未规划把 SGX-DT 拆成姊妹交易所另行建档），**不设 `group_id`**——与 NYSE/JPX/Eurex 那种"本文件只记一个实体、集团内确有其他姊妹交易所品牌"的情况不同，这里是刻意合并单一条目代表整个可识别品牌，详见数据文件顶部注释
+  - SGX-ST Rules（现货证券交易规则总览）: https://rulebook.sgx.com/rulebook/sgx-st-rules（HTTP 200，2.1MB）
+  - SGX-ST Rules 4.23 Brokerages and Charges（4.23.2 列举客户须知/须披露的按笔费用 = CDP/SGX-ST 收费 + 印花税 + GST，`costs.regulatory_fees`/`costs.financial_transaction_tax` 的 `type: none` 依据，2026-09-04 ADR-067）: https://rulebook.sgx.com/rulebook/423-brokerages-and-charges
+  - Mainboard Rules（主板上市规则）: https://rulebook.sgx.com/rulebook/mainboard-rules（HTTP 200，2.0MB）
+  - Catalist Rules（凯利板上市规则）: https://rulebook.sgx.com/rulebook/catalist-rules（HTTP 200，1.8MB）
+  - Futures Trading Rules（衍生品交易规则总览）: https://rulebook.sgx.com/rulebook/futures-trading-rules（HTTP 200，1.2MB）
+  - Regulatory Notice 8.2.1 — Trading Hours, Market Phases（交易时段/市场阶段细则）: https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles（HTTP 200，613KB）
+  - Regulatory Notice 8.14.1 — Circuit Breaker（熔断机制细则）: https://rulebook.sgx.com/rulebook/regulatory-notice-8141-circuit-breaker（HTTP 200，587KB）
+  - Chapter 7 — Clearing and Margins（期货清算与保证金）: https://rulebook.sgx.com/rulebook/chapter-7-clearing-and-margins（HTTP 200，461KB）
+  - CDP Clearing Rules（证券中央存托/清算规则）: https://rulebook.sgx.com/rulebook/cdp-clearing-rules（HTTP 200，1.6MB）
+  - CDP Settlement Rules（证券结算规则）: https://rulebook.sgx.com/rulebook/cdp-settlement-rules（HTTP 200，288KB）
+  - SGX-DC Clearing Rules（衍生品清算规则）: https://rulebook.sgx.com/rulebook/sgx-dc-clearing-rules（HTTP 200，1.8MB）
+  - Chapter 6 — Designated Market-Makers（做市商制度）: https://rulebook.sgx.com/rulebook/chapter-6-designated-market-makers（HTTP 200，612KB）
+  - 18.12 Transaction Costs（交易成本总览章节）: https://rulebook.sgx.com/rulebook/1812-transaction-costs（HTTP 200，547KB）
+  - 18.12.2 Clearing Fees（清算费率）: https://rulebook.sgx.com/rulebook/18122-clearing-fees（HTTP 200，545KB）
+  - 18.12.4 Stamp Duty（此页实为期权交易章节的印花税条款，非现货股票印花税，现货部分改用下方 iras.gov.sg 来源）: https://rulebook.sgx.com/rulebook/18124-stamp-duty（HTTP 200，545KB）
+  - Global Listing Board Rules（⚠️ 全新第三上市板块，专供已在 Nasdaq 上市公司申请在 SGX 双重上市，定义章节里大量出现"Nasdaq"/"Nasdaq Listing Rules"，准入门槛为 S$20亿市值+以美元计的营收/利润测试+至少500名全球股东；发现时间 2026-08-14，此前完全不知道 SGX 有这第三块板，Mainboard/Catalist 之外）: https://rulebook.sgx.com/rulebook/global-listing-board-rules（HTTP 200，310KB）
+- `sgx.com` | 官方（主站，非规则手册） | en | ⚠️ curl 抓到的是 React/Next.js 空壳（`about-us/our-history`、`securities/corporate-information`、`securities/clearing-information` 等页面均只有约 14.5KB 的 `<title>Singapore Exchange (SGX)</title>` 外壳，正文由前端 JS 拉取 API 渲染，纯 curl 拿不到内容，`investorrelations.sgx.com` 与 `sgxgroup.com` 同样是空壳/连接超时）——公司概况/历史/统计类事实改走 `links.sgx.com` 静态 PDF 公告或监管机构文件，见下 | 主站本身仅用于确认域名归属，不作为具体事实的独立出处
+  - 首页（仅用于确认域名归属）: https://www.sgx.com/
+- `links.sgx.com` | 官方（公司公告静态托管） | en | curl 常规 UA 200，是纯静态 PDF 托管，不像 www.sgx.com 那样是 SPA | SGX 月度市场统计报告 PDF（总市值/上市公司数/成交量，每月更新，URL 含随机 ID，需要重新搜索定位当期文件）；2014年公告 PDF 确认标准板手（board lot）由1,000股下调至100股（2015-01-19生效），这是本节目前找到的唯一带原文数字的板手来源，2026年是否对高价股进一步下调未找到官方原文，未纳入
+  - 2026年4月市场统计报告 PDF: https://links.sgx.com/1.0.0/corporate-announcements/1DNTODDQ7XS4ENGJ/888606_SGX%20Monthly%20Statistics%20Report%20Update_Apr%202026.pdf（HTTP 200，816KB）
+  - 2014年board lot下调公告 PDF: https://links.sgx.com/1.0.0/corporate-announcements/7DQWR38YKAQKDCBE/312230_20140825_SGX_to_introduce_reduced_board_lot_size_from_19_January.pdf（HTTP 200，113KB）
+- `mas.gov.sg` | 监管 | en | curl 常规 UA 200，未见反爬 | 新加坡金融管理局（MAS），SGX 的政府监管机构；AE/RMO 制度页确认「Approved Exchange」这一监管牌照类别存在，但未在本节已抓取页面里直接看到"SGX-ST/SGX-DT 是分别核准的两个 Approved Exchange"这句原文——这条判断改用下方 CFTC 集团架构图（列出 ST/DT 为并列全资子公司）加 sso.agc.gov.sg 的 SFA 条文交叉印证，不单独归给 mas.gov.sg
+  - Markets and Exchanges（AE/RMO 监管框架说明）: https://www.mas.gov.sg/regulation/capital-markets/understand-the-types-of-capital-market-entities/markets-and-exchanges（HTTP 200，254KB）
+  - Approved Exchange (AE) or Recognised Market Operator (RMO) Licence: https://www.mas.gov.sg/regulation/capital-markets/apply-for-licensing-or-registration-of-capital-market-entities/approved-exchange-ae-or-recognised-market-operator-rmo-licence（HTTP 200，256KB）
+  - Monthly Statistical Bulletin III.7 — SGX-ST Price Index, Number of Listed Companies, Turnover and Capitalisation: https://www.mas.gov.sg/statistics/monthly-statistical-bulletin/iii-7-sgx-st-price-index-number-of-listed-companies-turnover-and-capitalisation（HTTP 200，253KB）
+- `iras.gov.sg` | 监管（税务机关） | en | curl 常规 UA 200 | 新加坡国内税务局（IRAS），确认印花税/资本利得税/股息预扣税待遇
+  - Stamp Duty for Shares — Basics（确认无纸化CDP过户股票免印花税）: https://www.iras.gov.sg/taxes/stamp-duty/for-shares/basics-of-stamp-duty-for-shares/learning-the-basics-for-shares（HTTP 200，287KB）
+  - Dividends（个人所得税下股息征税规则，单层企业税制下股东股息免税）: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/what-is-taxable-what-is-not/dividends（HTTP 200，261KB）
+  - Gains from Sale of Property, Shares and Financial Instruments（确认无资本利得税）: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/what-is-taxable-what-is-not/gains-from-sale-of-property-shares-and-financial-instruments（HTTP 200，261KB）
+- `sso.agc.gov.sg` 追加一条 —— 《交易所（公司化与合并）法》（Exchanges (Demutualisation and Merger) Act 1999），第3(1)条明文"The transfer date is 1 December 1999"，是SGX由SES（新加坡证券交易所）/SIMEX（新加坡国际金融交易所）/SCCS（证券结算与电脑服务）三家法定合并成立的直接法律依据，比第三方综述可靠得多: https://sso.agc.gov.sg/Act/EDMA1999（HTTP 200，131KB）
+- `lseg.com` | 官方（STI 指数编制方 FTSE Russell 官网，母公司 London Stock Exchange Group） | en | curl 常规 UA 200 | 确认海峡时报指数（STI）由 FTSE Russell、SPH Media、SGX Group 三方联合编制——与上证综指"交易所自编"、恒生指数"第三方独家编制"都不同，是第三种"交易所参与但非独家编制"模式
+  - FTSE Straits Times Index Series: https://www.lseg.com/en/ftse-russell/indices/sgx-st（HTTP 200，243KB）
+- `cftc.gov` 一条的用途更正：该 PDF 除确认 SGX-DC 境外清算所注册审查外，其"SGX Legal Entities Structure"图本身即列出 Singapore Exchange Limited 全资拥有 CDP／SGX-DT／SGX-DC／SGX-ST／SCCS／SGXI 等子公司，是本节 `group_id` 判断（不设）与集团架构描述的关键交叉证据
+- `sso.agc.gov.sg` | 官方（新加坡政府法规官方公布平台，Singapore Statutes Online） | en | curl 常规 UA 200 | 《证券期货法》（Securities and Futures Act 2001）等法律的权威公布渠道
+  - Securities and Futures Act 2001: https://sso.agc.gov.sg/act/sfa2001（HTTP 200，1.3MB）
+- `cftc.gov` | 监管（美国商品期货交易委员会，第三方监管文件） | en | curl 常规 UA 200 | 用于交叉核实 SGX 集团法人实体结构（SGX-ST/SGX-DT/SGX-DC 等），因 CFTC 对 SGX-DC 的境外清算所注册审查披露了集团结构图；⚠️ 非新加坡本地监管机构，交叉验证用，`confidence` 相应处理
+  - SGX Legal Entities Structure PDF: https://www.cftc.gov/sites/default/files/stellent/groups/public/@otherif/documents/ifdocs/sgxdcdcoapplegalentstructure.pdf（HTTP 200，197KB）

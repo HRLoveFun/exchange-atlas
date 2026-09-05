@@ -1,0 +1,44 @@
+# 上海证券交易所 Shanghai Stock Exchange (SSE) `cn-sse`
+- `sse.com.cn` | 官方 | zh | WebFetch 对规则总览页（`lawandrules/sselawsrules/overview/`）返回 403；换 `lawandrules/sselawsrules2025/overview/`（新版路径）+ curl 常规 UA 可过（HTTP 200）；PDF 用 `pdftotext -layout` 提取纯文本再 grep 定位条款，比逐页翻 PDF 快得多 | 规则总览页本身不含全文直链，需从站内导航多跳到具体规则文档；官网有《现行有效的业务规则清单》目录 PDF（见下）能确认某规则「现行有效」，但清单本身不含可点击的逐条直达链接，还没找到《交易规则》全文在 sse.com.cn 上的直接 URL——这是本节唯一的已知缺口，下次找到了请替换掉 mgzq.com 那条并把相关字段 confidence 升回 high
+  - 规则总览: https://www.sse.com.cn/lawandrules/sselawsrules2025/overview/
+  - 现行有效的业务规则清单（PDF，确认《交易规则》仍现行有效，但只是目录不含全文）: https://www.sse.com.cn/lawandrules/sselawsrules2025/overview/c/10778726/files/ddfc82e93a85496bb075175d9a8d811d.pdf
+  - 上证综合指数编制方案 PDF: https://www.sse.com.cn/market/sseindex/indexlist/indexdetails/indexmethods/c1/000001_000001_CN.pdf
+  - 指数熔断暂停通知（2016，上证发〔2016〕4号）: http://www.sse.com.cn/aboutus/mediacenter/hotandd/c/c_20160107_4033450.shtml
+  - 沪市市场运行情况例行发布（周度市值/上市公司数统计，URL 每周变化，需重新搜索定位当期文件）: http://www.sse.com.cn/aboutus/mediacenter/conference/
+  - 《上海证券交易所股票上市规则（2026年4月修订）》公告页（上证发〔2026〕42号，2024年4月30日发布的原规则关于「上市条件」的条款未被本次修订变动，本次仅修订董事会秘书等治理条款，但附件为整合后现行有效全文）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/c_20260424_10816589.shtml
+  - 《上海证券交易所股票上市规则（2026年4月修订）》全文 DOCX（第三章第一节 3.1.1-3.1.6 为主板上市条件，含市值及财务指标三选一标准、红筹企业标准、差异表决权标准；⚠️ 该公告页挂了两个 docx，另一个 `beaf9e6b9ded4380a24ca148cc3902e2.docx`（20KB）只是本次修订的「修订说明」，不含完整条文，第一次误取过要注意区分）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx（HTTP 200，175KB，⚠️ `.docx` 格式，`tools/fetch.py` 会按扩展名规则误存为 `.html`，字节内容不受影响；用 macOS `textutil -convert txt` 转纯文本后可直接 grep，比转 PDF 更简单)
+  - 《上海证券交易所科创板股票上市规则（2026年4月修订）》公告页（上证发〔2026〕43号）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/c_20260424_10816592.shtml
+  - 《上海证券交易所科创板股票上市规则（2026年4月修订）》全文 DOCX（第二章第一节 2.1.1-2.1.4 为科创板上市条件，含市值及财务指标五选一标准、红筹企业标准、差异表决权标准；⚠️ 同一公告页下 `cc4a8a0e637144ea93285a3773e3965a.docx`（16KB）同样只是修订说明，不是全文）: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/staripo/c/10816592/files/8d80222543f64159ac5d177b7aace71c.docx（HTTP 200，172KB，同上 `.docx` 注意事项）
+  - 2026-08-24 补全 Category B 空缺字段这次新增登记（均为 `sse.com.cn` 域名下，沿用既有域名条目）：
+    - 《上海证券交易所股票上市规则（2026年4月修订）》全文 DOCX 第九章「退市与风险警示」（9.1.10/9.1.13/9.1.14/9.1.15/9.2.9 逐条给出终止上市决定、公告时限、强制退市后主办券商安排、摘牌时限，是 `listing.delisting_process` 出处；与上面第三章第一节主板上市条件为同一份文件，不重复登记 URL）
+    - 《关于退市公司进入退市板块挂牌转让的实施办法》公告页（股转系统公告〔2022〕166号，2022-04-29发布，「现行有效」；由上交所/深交所/北交所/全国股转系统/中国结算联合制定，`listing.post_delisting_venue` 出处）: http://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/c_20250516_10779154.shtml（HTTP 200，33981B）
+    - 关于本所股票竞价交易异常情况的公告（上证公告〔2024〕32号，2024-09-27，`infrastructure.major_outage_history` 出处）: https://www.sse.com.cn/disclosure/announcement/general/c/c_20240927_10762482.shtml（HTTP 200，27635B）
+    - 《证券登记结算管理办法》（中国证监会令第29号，托管于 sse.com.cn「法律法规」栏目，第七章「风险防范和交收违约处理」第65-73条完整给出结算参与人违约处置顺序，`clearing.default_management` 主要出处）PDF: http://www.sse.com.cn/lawandrules/regulations/csrcorder/c/10116597/files/f2bae870b188483eae343f735c141cf6.pdf（HTTP 200，273253B）
+    - 《关于实施〈合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法〉有关问题的规定》PDF（第七条给出单个/全部境外投资者持股比例上限，`regulation.foreign_ownership_limit` 出处；同时含托管人-外汇局跨境资金流动联合监管条款，`regulation.capital_controls` 出处）: https://www.sse.com.cn/lawandrules/regulations/csrcannoun/c/10117179/files/9cdbd4b41fc3453e8f8a036719ea8e24.pdf（HTTP 200，126689B）
+- `mgzq.com` | 第三方（券商网站镜像的官方文件） | zh | curl 常规 UA 可过（499KB） | 《上海证券交易所交易规则（2023年修订）》镜像件，内含第六章"科创板交易特别规定"。⚠️ 非交易所自有域名，按 CLAUDE.md 二第3条，仅凭此来源的字段 `confidence` 上限为 `medium`，不得标 `high`——即使摘录到了逐字 quote 也一样，因为无法排除镜像件被静默改动的风险
+  - 交易规则（2023年修订）: https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf
+- `csrc.gov.cn` | 监管 | zh/en | curl 常规 UA 可过；`common_list.shtml` 类列表页有缓存滞后现象，仅用于确认机构名称与域名，不作为具体规则条款出处；直接拼接文件名 URL 抓 PDF 偶发"空响应"（`curl: (52) Empty reply from server`），间隔数秒重试即可恢复，不代表持续封锁 | 中国证券监督管理委员会（CSRC），SSE 的政府监管机构
+  - 2026-08-24 新增：证券公司名录（2026年6月）XLS（`participants.broker_landscape` 出处，用 `xlrd` 解析，表头1行+150家持牌证券公司数据行）: http://www.csrc.gov.cn/csrc/c101900/c1029659/1029659/files/%E8%AF%81%E5%88%B8%E5%85%AC%E5%8F%B8%E5%90%8D%E5%BD%95%EF%BC%882026%E5%B9%B46%E6%9C%88%EF%BC%89.xls（HTTP 200，44544B）
+- `chinaclear.cn` | 官方（清算机构） | zh | curl 常规 UA 可过；⚠️ 官网主站（`www.chinaclear.cn/zdjs/...`）导航栏页面是 Angular 前端渲染壳，静态 curl 只能拿到菜单文字、拿不到「法律规则」「收费标准」等栏目正文，需改找具体 PDF 直链（如 `zdjs/editor_file/` 路径下的历史通知附件） | 中国证券登记结算有限责任公司（ChinaClear），A股中央对手方与中央证券存管机构，设上海分公司
+  - 2026-08-24 新增：《中国证券登记结算有限责任公司证券账户管理规则》修订通知附件 PDF（第三章「证券账户业务」第17-20条给出账户开立主体资格、一码通账户/子账户结构、身份信息核验要求，`participants.account_opening_requirements` 出处）: http://www.chinaclear.cn/zdjs/editor_file/20141008102818122.pdf（HTTP 200，359387B）
+- `npc.gov.cn` | 官方（立法机构） | zh | 未测试反爬，本次仅用 WebSearch 摘要定位未额外 curl | 全国人民代表大会官网，《中华人民共和国证券法》等法律的权威公布渠道
+- `people.com.cn` | 第三方（官方媒体） | zh | curl 需按 GBK 解码（非 UTF-8），常规 UA 可过 | 用于印花税税率调整等财政部/税务总局公告的转载确认；`confidence` 相应标 medium（非财政部原始公告页）
+- `cls.cn` | 第三方（财经媒体） | zh | 未测试专门反爬，本次 WebSearch 摘要已够用未额外 curl | 用于退市规则修订的综述性报道；`confidence` 标 medium
+  - 2026-08-24 新增：中国结算：4月29日起将股票交易过户费总体下调50%（2022-04-28发文，`costs.clearing_fees` 出处；第三方财经媒体转述 ChinaClear 通知，`confidence` 标 medium）: https://www.cls.cn/detail/1001120
+- `mof.gov.cn`（2026-08-24 新增登记） | 官方（财政部，与 sse.com.cn/chinaclear.cn 并列的另一政府域名，非第三方） | zh | curl 常规 UA 可过（`m.mof.gov.cn` 移动版偶发 502，换 `www.mof.gov.cn` 桌面版路径可稳定拿到全文） | 国家发展改革委、财政部联合发布的《关于降低证券、期货市场监管费收费标准等问题的通知》（发改价格〔2012〕2119号），`costs.regulatory_fees` 历史沿革出处——确认"证券交易监管费"这一独立于交易所经手费之外的监管费种确实存在（对股票按年交易额0.02‰收取，基金/债券免收），但通知注明"有效期3年"（即至2015年）；现行标准见下方 `ndrc.gov.cn` 的 2018 通知
+  - 关于降低证券、期货市场监管费收费标准等问题的通知（发改价格〔2012〕2119号）: https://www.mof.gov.cn/zhengwuxinxi/zhengcefabu/201207/t20120714_666369.htm
+  - 证券结算风险基金管理办法（中国证监会、财政部联合发布，第二条给出风险基金定义与用途，`clearing.default_management` 补充出处）PDF: http://m.mof.gov.cn/zcfb/202511/P020251107701444228151.pdf
+- `ndrc.gov.cn`（2026-09-04 新增登记，ADR-067） | 官方（国家发展改革委，与财政部联合发布证券期货业行政事业性收费标准的定价机关，非第三方） | zh | curl 常规 UA 200，正文为静态 HTML | `cn-sse`/`cn-szse` `costs.regulatory_fees` 的**现行标准**出处——《国家发展改革委 财政部关于证券期货业监管费标准等有关问题的通知》（发改价格规〔2018〕917号）：『对上海、深圳证券交易所收取证券业务监管费，按股票交易额的0.02‰收取』『自2018年1月1日起执行』、同时废止 2016 年标准、无有效期限。confidence medium（发布已 7 年、机构监管费部分曾 2018–2020 暂免，未再核实到更晚文件）
+  - 关于证券期货业监管费标准等有关问题的通知（发改价格规〔2018〕917号）: https://www.ndrc.gov.cn/xxgk/zcfb/ghxwj/201806/t20180627_960950.html
+- `sipf.com.cn`（2026-08-24 新增登记） | 官方（中国证券投资者保护基金有限责任公司，国务院出资设立、归口证监会管理的国有独资企业） | zh | curl 常规 UA 可过 | `regulation.investor_protection` 出处；网站首页本身是纯导航壳无正文，需定位到具体规章条文页
+  - 证券投资者保护基金管理办法（2016年修订，中国证监会令第124号）: http://www.sipf.com.cn/tbfg/2020/03/12872.shtml
+- `sseinfo.com`（2026-08-24 新增登记） | 官方（上证所信息网络有限公司，上海证券交易所出资设立的全资子公司，SSE 证券信息独家全权经营机构） | zh | curl 常规 UA 可过 | `infrastructure.market_data_levels`/`data_latency`/`data_pricing_model`/`historical_data_availability` 出处；产品价目表本身是 PDF/公告列表页，本次仅取产品概述页正文，未逐条摘引具体单价数字
+  - 公司介绍: https://www.sseinfo.com/aboutus/introduction/
+  - 行情服务首页（Level-1/Level-2/智能数据/指数编制许可产品总览）: https://www.sseinfo.com/services/assortment/market/
+  - 上证所Level-1行情（产品说明，"即时行情信息"定性表述）: https://www.sseinfo.com/services/assortment/level1/
+  - 行情历史数据（数据内容：快照/逐笔成交/日K线/分钟K线/集合竞价）: https://www.sseinfo.com/services/assortment/historical/
+- `english.sse.com.cn` | 官方（英文版） | en | curl 常规 UA 前 1-2 次请求 200，此后短时间内连续请求会被 WAF 拒绝（返回通用 `403 Forbidden webserver` 页，非针对具体路径）；实测同一路径间隔 10-15 秒重试即可恢复 200，抓多个页面务必逐个加延时，不要连续快速请求 | ADR-013（source_lang: zh）迁移时发现。⚠️ 每页均带免责声明"This courtesy translation is for reference only. The original text in Chinese shall prevail"——SSE 自己声明英文版不具约束力，佐证了 source_lang: zh 的选择。首页 `/` 与 `/start/trading/mechanism/`（交易机制，含开支盘集合竞价/撮合原则/订单类型正文）可直接拿到实质内容；`/start/sserules/stocks/trading/` 是规则文档索引页，指向的 PDF《Trading Rules of Shanghai Stock Exchange (2026 Revision)》是官方英文译本——**修订版本比本节引用的 mgzq.com 中文镜像件（2023年修订）更新**，两者内容是否有实质差异尚未逐条核对，见 OPEN-QUESTIONS
+  - 首页: https://english.sse.com.cn/
+  - 交易机制（含撮合原则/订单类型正文）: https://english.sse.com.cn/start/trading/mechanism/
+  - Trading Rules of Shanghai Stock Exchange (2026 Revision) PDF: https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf
+  - Implementing Rules of the Shanghai Stock Exchange for Margin Trading and Securities Lending Transactions PDF（融资融券实施细则英文版，本次仅确认标题与存在，未逐条抓取内容）: https://english.sse.com.cn/start/sserules/stocks/trading/c/10647720/files/95943f34d9d74a5f87b8581d793829bc.pdf

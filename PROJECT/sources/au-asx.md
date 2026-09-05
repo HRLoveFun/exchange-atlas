@@ -1,0 +1,59 @@
+# 澳大利亚证券交易所 Australian Securities Exchange (ASX) `au-asx`
+- `asx.com.au` | 官方 | en | curl + 常规浏览器 UA 全程 200，未见反爬或限流（连续 20+ 次请求无一次 403，比 SEC/FINRA/DTCC 好抓得多）；PDF 与 HTML 均可直抓 | ASX Group 母公司 ASX Limited 本身在自己的市场上市（自身股票代码 ASX），`group_id` 判断：ASX Group 下设 ASX Clear/ASX Settlement/ASX Clear (Futures)/Austraclear 等清算结算法人实体，但均非"计划收录的姊妹交易所"（不像 NYSE American/Arca 或 JPX 的大阪交易所那样是独立可比的交易市场实体），本文件不设 group_id；现货市场"ASX"与衍生品市场"ASX 24"（2006 年由 Sydney Futures Exchange 并入）均由同一持牌市场运营商 ASX Limited 运营，非分立法人，本文件聚焦现货股票市场（ASX 本身），ASX 24 仅在必要处提及
+  - 监管框架总览: https://www.asx.com.au/about/regulation（HTTP 200，180KB）
+  - ASX Group 集团架构: https://www.asx.com.au/about/asx-group.htm（HTTP 200，152KB）
+  - 历史沿革: https://www.asx.com.au/about/history.htm（HTTP 200，163KB，1871年悉尼证券交易所成立、1987年六个州级交易所合并为 Australian Stock Exchange、2006年与悉尼期货交易所合并改名 Australian Securities Exchange）
+  - 现货市场交易时段: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/cash-market-trading-hours（HTTP 200，147KB，含开盘集合竞价/连续竞价/收盘集合竞价随机化时点）
+  - ASX Operating Rules 第三节·交易规则 PDF: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-operating-rules/rules/asx_or_section_03.pdf（HTTP 200，208KB）
+  - 上市要求总览页: https://www.asx.com.au/listings/listing-considerations/listing-requirements（HTTP 200，146KB，含300名非关联股东、A$1.5M营运资金等量化门槛）
+  - Listing Rules Chapter 1（准入规则）PDF: https://www.asx.com.au/documents/rules/Chapter01.pdf（HTTP 200，234KB）
+  - Listing Rules Guidance Note 1（准入指引）PDF: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-listing-rules/guidance-notes/gn01-admission.pdf（HTTP 200，829KB）
+  - Listing Rules Chapter 17（停牌/暂停/除牌）PDF: https://www.asx.com.au/documents/rules/Chapter17.pdf（HTTP 200，143KB）
+  - Listing Rules Guidance Note 16（停牌指引）PDF: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-listing-rules/guidance-notes/gn16-trading-halts.pdf（HTTP 200，314KB）
+  - 清算总览: https://www.asx.com.au/about/regulation/clearing-and-settlement-of-cash-equities-in-australia/clearing（HTTP 200，154KB）
+  - ASX Settlement（CHESS，托管/结算）: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-settlement（HTTP 200，161KB）
+  - T+1 结算周期改革页（现行仍为 T+2，本页为未来改革说明）: https://www.asx.com.au/markets/clearing-and-settlement-services/t1-settlement-cycle（HTTP 200，151KB）
+  - ASX Clear 现货市场清算（CCP角色）: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear/cash-market-clearing（HTTP 200，143KB）
+  - 费率总览页: https://www.asx.com.au/markets/market-resources/asx-schedule-of-fees（HTTP 200，142KB，仅导航链接页，不含具体费率数字）
+  - ASX Clear 现货市场清算费率表 PDF: https://www.asx.com.au/content/dam/asx/participants/clearing-and-settlement/asx-clear/schedule-of-fees.pdf（HTTP 200，155KB，含逐笔交易清算费率具体数值）
+  - ASIC 与 ASX 监管职责划分 PDF: https://www.asx.com.au/content/dam/asx/about/matters-regulated-by-asic-vs-matters-regulated-by-asx.pdf（HTTP 200，188KB）
+  - 市场波动性 FAQ（Extreme Trade Range / Enhanced Volatility Interruption 机制说明）: https://www.asx.com.au/markets/market-resources/market-volatility-faqs（HTTP 200，148KB）
+  - S&P/ASX 指数体系 101（博客，官方对第三方编制指数的说明）: https://www.asx.com.au/blog/listed-at-asx/sandp-asx-indices-101（HTTP 200，160KB）
+  - 开收盘机制改革说明（博客）: https://www.asx.com.au/blog/listed-at-asx/changes-to-equity-market-structure（HTTP 200，159KB）
+  - ASX 24衍生品市场（期货市场）总览页: https://www.asx.com.au/markets/trade-our-derivatives-market/futures-market （HTTP 200，152KB）
+  - ASX 24指数衍生品交易时段: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/index-derivatives （HTTP 200，133KB）
+  - ASX 24利率衍生品交易时段: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/interest-rate-derivatives （HTTP 200，136KB）
+  - ASX 24农产品衍生品交易时段: https://www.asx.com.au/markets/market-resources/trading-hours-calendar/agricultural-derivatives （HTTP 200，134KB）
+  - ASX 24合约规格总表 PDF: https://www.asx.com.au/content/dam/asx/participants/derivatives-market/ird/asx24-contract-specifications.pdf （HTTP 200，649KB）
+  - ASX 24 Operating Rules 第三节 PDF: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-24-operating-rules/rules/ASX-24-Operating-Rules-Section-03.pdf （HTTP 200，369KB）
+  - ASX 24 Operating Rules 第四节（订单录入与交易）PDF: https://www.asx.com.au/content/dam/asx/rules-guidance-notes-waivers/asx-24-operating-rules/rules/ASX-24-Operating-Rules-Section-04.pdf （HTTP 200，602KB）
+  - ASX 24 Trading Platform Guide PDF: https://www.asx.com.au/content/dam/asx/participants/trading-platforms/futures/asx-24-trading-platform-guide.pdf （HTTP 200，1237KB）
+  - ASX Clear (Futures) 保证金参数表 PDF: https://www.asx.com.au/content/dam/asx/participants/clearing-and-settlement/margin-rates.pdf （HTTP 200，657KB）
+  - 保证金机制说明页（Margining）: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear/risk-management/margining （HTTP 200，149KB）
+  - ASX Clear (Futures)（期货结算公司专页）: https://www.asx.com.au/markets/clearing-and-settlement-services/asx-clear-futures （HTTP 200，169KB）
+  - ASX Clear (Futures) SPAN保证金算例 PDF: https://www.asx.com.au/documents/clearing/asx-clear-futures-examples.pdf （HTTP 200，125KB）
+  - 做市商安排总览页（Market maker arrangements）: https://www.asx.com.au/markets/market-resources/market-maker-arrangements （HTTP 200，137KB）
+  - 指数衍生品做市商安排（含SPI 200期货期权）: https://www.asx.com.au/markets/market-resources/market-maker-arrangements/index-derivatives-market-maker-arrangements （HTTP 200，140KB）
+  - 利率衍生品做市商安排: https://www.asx.com.au/markets/market-resources/market-maker-arrangements/interest-rate-derivatives-market-maker-arrangements （HTTP 200，145KB）
+- `asic.gov.au` | 监管 | en | curl 常规 UA 200，未见反爬 | 澳大利亚证券及投资委员会（ASIC），ASX 的政府监管机构；RG 196 是卖空监管的权威监管指引原文
+  - Regulatory Guide 196 - Short Selling PDF: https://download.asic.gov.au/media/4896780/rg196-published-8-october-2018.pdf（HTTP 200，702KB）
+  - RG 196 索引页: https://www.asic.gov.au/regulatory-resources/find-a-document/regulatory-guides/rg-196-short-selling/（HTTP 200，66KB）
+  - ASX 因 CHESS 替换项目误导性陈述被罚 2050万澳元（2026年，用于风险与特殊考量章节的监管执法案例）: https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-143mr-asx-ordered-to-pay-20-5-million-penalty-for-misleading-conduct-relating-to-chess-replacement-project/（HTTP 200，20KB）
+  - Block trade tiers（`dark_pool` 依据：Market Integrity Rules Rule 6.2.1 盘前透明度豁免门槛 Tier 1 A$100 万 / Tier 2 A$50 万 / Tier 3 A$20 万，逐季按 ADV 分档）: https://asic.gov.au/regulatory-resources/markets/market-structure/block-trade-tiers/（curl 常规 UA 200，2026-09-04）
+- `foreigninvestment.gov.au` | 监管（外国投资审查委员会 FIRB 所属网站，财政部下设） | en | curl 常规 UA 200 | 用于确认外资持股上市公司的申报门槛（一般性被动持股 <20% 通常无需申报，达到实质利益门槛或涉及国家安全业务另有规则），非 ASX 自身规则而是全澳适用的外资审查制度，与港交所"自由港无限制"形成对比
+  - 首页: https://foreigninvestment.gov.au/（HTTP 200，34KB）
+  - Guidance Note 7 - Business Investments PDF: https://foreigninvestment.gov.au/sites/firb.gov.au/files/guidance-notes/gn07_business-20230531.pdf（HTTP 200，497KB）
+  - 货币门槛说明页: https://foreigninvestment.gov.au/guidance/general/monetary-thresholds（HTTP 200，32KB）
+- `legislation.gov.au` | 官方（立法机构，联邦官方法律文本库） | en | curl 常规 UA 200（响应体 2.8MB，偏大） | ⚠️ 实测发现：`/latest/text` 这个端点抓到的 2.8MB HTML 转纯文本后只有约6800行，通篇是《公司法2001》（Corporations Act 2001）的**章节目录索引**（Division/Part/section标题的树状列表），不含逐条正文——该法条文正文在这个网站上是按章节拆分成独立子页面渲染的，本轮未逐个子页面深挖具体条文。用途仅限于确认法律名称/编号/章节结构存在（如"Division 4—The Australian market licence""798G Market integrity rules"等标题本身），不能指望从这一个URL摘到具体条文quote；需要引用具体条文文字时改用ASX/ASIC自己转述该法条文的二手页面（如asic-vs-asx.txt已经很好用）
+  - Corporations Act 2001 目录索引: https://www.legislation.gov.au/C2004A00818/latest/text（HTTP 200，2.8MB，仅目录非正文）
+- `spglobal.com` | 第三方（指数编制商 S&P Dow Jones Indices 官网） | en | ⚠️ curl 常规 UA 及加 Referer 均返回 403（反爬，非限流，两次不同 UA/头部尝试均失败）——按 CLAUDE.md 三启用降级：指数体系章节改用 asx.com.au 自身对 S&P/ASX 200 等指数的说明博客作为来源（`confidence` 上限 medium，因非编制方原始方法论文档），方法论 PDF 具体条款留空，见 OPEN-QUESTIONS | S&P Dow Jones Indices，编制 S&P/ASX 200 等旗舰指数（第三方编制，非交易所自编，与上交所"自编"、港交所"恒生指数公司"形成第三种对比模式）
+
+- `asxonline.com` | 官方（ASX 文档库） | en | curl 常规 UA 200 | ASX 信息费/交易费价目表、CHESS 交收程序等 PDF
+- `www.asxonline.com` | 官方（ASX 文档库，同上域名 www 前缀） | en | curl 常规 UA 200 | 同上
+- `firb.gov.au` | 官方（外国投资审查委员会） | en | curl 常规 UA 200 | 外资投资审查框架（foreign_ownership_limit 出处）
+- `legislation.nsw.gov.au` | 官方（新南威尔士州立法库） | en | curl 常规 UA 200 | 印花税废除立法（stamp_duty 出处）
+- `www.ato.gov.au` | 官方（澳大利亚税务局） | en | curl 常规 UA 200 | 资本利得税/股息预扣税（costs 出处）
+- `www.austrac.gov.au` | 官方（AML/CTF 监管） | en | curl 常规 UA 200 | 客户身份识别（account_opening_requirements 出处）
+- `cepr.org` | 第三方（金融交易税研究库） | en | curl 常规 UA 200 | 澳大利亚无金融交易税佐证（costs.financial_transaction_tax，confidence 封顶 medium）
+- `resourcehub.bakermckenzie.com` | 第三方（律所，Global Private M&A Guide） | en | curl 常规 UA 200 | 澳大利亚对股份转让不课印花税（"Stamp duty is not payable on share transfers"，`au-asx.costs.financial_transaction_tax` 的第三方佐证，封顶 confidence medium；非一手税法条文，翻 `type: none` 仍需 ATO/财政部原文）
+  - Stamp duty and tax | Australia | Global Private M&A Guide: https://resourcehub.bakermckenzie.com/en/resources/global-private-ma-guide-limited/asia-pacific/australia/topics/agreeing-the-acquisition-agreement/stamp-duty-and-tax

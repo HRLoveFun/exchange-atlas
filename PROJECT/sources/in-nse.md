@@ -1,0 +1,44 @@
+# 印度国家证券交易所 National Stock Exchange of India (NSE) `in-nse`
+- `nseindia.com` | 官方 | en | curl + 常规 UA 全部 200，未见反爬/限流（连续抓 17 个页面无一次 403，是本项目目前最好抓的官网之一）；页面正文是服务端渲染的静态 HTML（非 SPA），关键词直接可 grep 到；导航栏占页面文本的大头（几百个重复菜单项），抓下来后建议先用 BeautifulSoup 转纯文本、跳到页面中部"About Us"之后的正文段落再读，效率更高 | ⚠️ NSE 官网本身没有官方中文版（`source_lang: en`，见下）；NSE 集团另有 `NSE Clearing Limited`（原 National Securities Clearing Corporation Limited, NSCCL，清算，全资子公司）、`NSE Indices Limited`（原 India Index Services & Products, IISL，指数编制，全资子公司）、`NSE IFSC Limited`（GIFT City 国际金融中心内的独立交易所实体，受 IFSCA 而非 SEBI 监管，是与本文件意义上"同集团下另一独立交易所实体"最接近的案例——参照 ADR 对 `group_id` 的判断标准，已标 `group_id: nse-group`；`listing.boards` 不收录 NSE IFSC 自己的板块规则，仅收录 NSE 本身/主板与 SME 平台）；⚠️ History & Milestones 页正文只写"NSE was incorporated in 1992"，未标具体月日——本节标题曾误记"1992年11月27日"，本轮核实后已删除这个未经原文支持的具体日期，只保留"1992年"
+  - History & Milestones（成立沿革：1992年注册成立/1993年4月经SEBI认定为证券交易所/1994年开始营业）: https://www.nseindia.com/static/national-stock-exchange/history-milestones（HTTP 200，306KB）
+  - NSE Group（集团结构，NSE Clearing/NSE Indices/NSE IFSC 等子公司列表）: https://www.nseindia.com/national-stock-exchange/our-group（HTTP 200，325KB）
+  - About NSE（组织定位简介，未涉及公司制/会员制或自身是否上市的明确表述）: https://www.nseindia.com/static/national-stock-exchange/about-nse-company（HTTP 200，295KB）
+  - Corporate Structure（集团子公司沿革列表，与 History & Milestones 内容高度重叠，未找到组织形式/自身上市状态的独立信息）: https://www.nseindia.com/structure-key-personnel/corporate-structure（HTTP 200，297KB）
+  - Market Timings（交易时段，含盘前/连续竞价/收盘时段/大宗交易窗口）: https://www.nseindia.com/static/market-data/market-timings（HTTP 200，315KB）
+  - Equity Market Circuit Breakers（全市场指数熔断，10%/15%/20%三级）: https://www.nseindia.com/products-services/equity-market-circuit-breakers（HTTP 200，336KB）
+  - Equity Market Price Bands（个股涨跌停价格带，2%/5%/10%/20%分档）: https://www.nseindia.com/static/products-services/equity-market-price-bands（HTTP 200，332KB）
+  - Raising Capital: Public Issues Eligibility（主板上市财务门槛）: https://www.nseindia.com/static/companies-listing/raising-capital-public-issues-eligibility-equity-debt（HTTP 200，366KB）
+  - NSE Clearing / Clearing-Settlement（NSE Clearing Limited 清算结算总览，T+1 结算周期，另有 T+0 可选试点）: https://www.nseindia.com/nsccl-nse-clearing/clearing-settlement（HTTP 200，133KB）
+  - Securities Transaction Tax（STT 证券交易税税率表，⚠️ 该页面只覆盖股票衍生品 F&O 的 STT，不含现货股票交割/日内 STT 税率表，见 OPEN-QUESTIONS）: https://www.nseindia.com/static/products-services/equity-derivatives-securities-transaction-tax（HTTP 200，359KB）
+  - Foreign Portfolio Investors: Broad Parameters（⚠️ 页面标题含"Broad Parameters"但实际正文是营销性简介，不含 FPI 分类与持股比例的具体数值，未达到本文件"精确到信息页"的标准——下次找到 SEBI FPI Regulations 具体条款页后应替换）: https://www.nseindia.com/static/invest/fpi/broad-parameters（HTTP 200，305KB）
+  - Categories of Membership（会员/经纪商类型：Trading Member/Clearing Member等）: https://www.nseindia.com/static/trade/membership-types（HTTP 200，332KB）
+  - Trading Protocols（NEAT 交易系统、行情数据层级、Colocation/MTBT 逐笔行情）: https://www.nseindia.com/static/trade/platform-services-neat-trading-system-protocols（HTTP 200，356KB）
+  - Nifty 50 Index（旗舰指数说明页）: https://www.nseindia.com/static/products-services/indices-nifty50-index（HTTP 200，294KB）
+  - About Equity Derivatives（衍生品市场沿革：指数期货2000-06-12/指数期权2001-06-04/个股期权2001-07-02/个股期货2001-11-09上线）: https://www.nseindia.com/static/products-services/about-equity-derivatives（HTTP 200，355KB）
+  - Equity Derivatives Pre-Open Session（股票/股指期货开盘前集合竞价机制，09:00-09:15）: https://www.nseindia.com/static/products-services/equity-derivatives-pre-open-session（HTTP 200，338KB）
+  - Equity Derivatives Trading System（F&O撮合系统：价格-时间优先、订单簿、DAY/IOC时间条件、限价/市价/止损价格条件）: https://www.nseindia.com/static/products-services/equity-derivatives-trading-system（HTTP 200，306KB）
+  - Equity Derivatives Price Bands（衍生品分部无每日涨跌停，改设10%/delta动态操作区间防止错价申报）: https://www.nseindia.com/static/products-services/equity-derivatives-price-bands（HTTP 200，125KB）
+  - Equity Derivatives Margins（NSE Clearing 保证金体系总览：SPAN初始保证金/Extreme Loss Margin）: https://www.nseindia.com/static/products-services/equity-derivatives-margins（HTTP 200，372KB）
+  - NSCCL SPAN（SPAN组合保证金算法原理：16档情景扫描、Scanning Risk Charge、Calendar Spread Charge）: https://www.nseindia.com/products-services/equity-derivatives-nse-clearing-span（HTTP 200，355KB）
+  - Liquidity Enhancement Scheme（做市商/流动性提供者计划，含指定做市商利益冲突披露要求；目前已确认产品集中在商品衍生品分部，如白银期权/电力期货/迪拜原油期货）: https://www.nseindia.com/static/market-data/liquidity-enhancement-scheme（HTTP 200，326KB）
+  - NIFTY 50 F&O（Nifty50期货/期权合约规格：3个月交易周期、最后交易日为到期月最后一个周二、期货最小合约价值不低于1500万卢比、期权行权价间距表）: https://www.nseindia.com/static/products-services/equity-derivatives-nifty50（HTTP 200，369KB）
+  - Individual Securities F&O（个股期货/期权合约规格：最小合约价值不低于500万卢比、期权为欧式且实物交割）: https://www.nseindia.com/static/products-services/equity-derivatives-individual-securities（HTTP 200，371KB）
+  - ⚠️ Equity Derivatives Settlement Mechanism（页面标注"Updated on: 03/01/2023"，早于上面两条2025年更新的合约规格页；文字写期权"Exercise settlement is cash settled"未按标的区分指数/个股，与 Individual Securities F&O 页"Options contracts are European style and physically settled"直接冲突——本次判断后者（更新更晚、专门针对个股期权）更可信，前者疑似未随2019年SEBI个股衍生品实物交割新规同步更新，未采信其"个股期权现金结算"表述，两页均已记入 quote 供核查）: https://www.nseindia.com/static/products-services/equity-derivatives-settlement-mechanism（HTTP 200，364KB）
+  - Currency Derivatives Contract Specification - INR Pairs（USDINR/EURINR/GBPINR/JPYINR期货期权合约规格：最小价格变动0.25 paise即INR 0.0025）: https://www.nseindia.com/static/products-services/currency-derivatives-contract-specification-inr（HTTP 200，376KB）
+  - Commodity Derivatives Contract Specifications - Base Metals（非农商品每日价格限制6%，触发后冷静期15分钟放宽至9%，国际市场价格另按3%阶梯放宽）: https://www.nseindia.com/static/products-services/commodity-derivatives-contract-specifications-base-metals（HTTP 200，395KB）
+  - Interest Rate Derivatives Contract Specifications - Government Securities（国债期货：1手=200万卢比面值、最小报价单位0.0025、到期月最后交易日为最后一个周四、操作区间±3%可放宽两次）: https://www.nseindia.com/static/products-services/interest-rate-derivatives-contract-specifications-g-sec（HTTP 200，355KB）
+- `nsearchives.nseindia.com` | 官方（NSE 官网文档归档子域） | en | curl 常规 UA 200，PDF 体积较大（3.2MB），用 `pdftotext -layout` 转纯文本再 grep 定位 | 存放规则/方法论类 PDF，与主站 `nseindia.com` 同属官方一手来源
+  - Methodology Document for NIFTY Equity Indices（含 Nifty 50 基日/基点/加权方式/成分股筛选规则）PDF: https://nsearchives.nseindia.com/content/indices/Method_NIFTY_Equity_Indices.pdf（HTTP 200，3.2MB）
+- `sebi.gov.in` | 监管 | en | curl 常规 UA 200，未见反爬；页面是服务端渲染的传统多页站（非 SPA），正文可直接 grep，比同为监管机构域名的 `sec.gov`（美国，v0.2 时实测 403）好抓得多 | 印度证券交易委员会（SEBI），NSE 的政府监管机构；本节只用于确认监管机构身份与核心法律名称，具体规则条款优先引用 NSE 官网转载/说明页
+  - About SEBI（设立沿革：1988年非法定机构成立/1992年成为法定机构）: https://www.sebi.gov.in/about-sebi.html（HTTP 200，8.5KB）
+  - Securities Contracts (Regulation) Act, 1956（核心法律之一，SCRA，确认法律名称与年份）: https://www.sebi.gov.in/legal/acts/feb-1957/securities-contracts-regulation-act-1956-as-amended-by-the-international-financial-services-centres-authority-act-2019-w-e-f-october-01-2020-_4.html（HTTP 200，8.6KB）
+- `archives.nseindia.com`（NSE 官网另一文档归档子域，与 `nsearchives.nseindia.com` 并列，2026-08-30 新增登记） | 官方（NSE 一手来源） | en | curl 常规 UA 200，PDF 用 `pdftotext -layout` | 存放历史交易通函（`/content/circulars/CMTR*.pdf` 等）
+  - NSE Circular CMTR54851（Market Price Protection + 确认 Trade Annulment 政策依 SEBI CIR/MRD/DP/15/2015 及 NSE 合并通函 44481 §4.3 处理）PDF: https://archives.nseindia.com/content/circulars/CMTR54851.pdf（HTTP 200，146KB）
+- `ricago.com`（compliance-tech 公司运营的合规知识库，逐字转载 NSE 官方合并通函，2026-08-30 新增登记；⚠️ 非交易所自有域名，按 CLAUDE.md 二第3条 `confidence` 上限 `medium`——即便摘到逐字原文也一样，无法排除转载件被静默改动的风险；与 `everycrsreport.com`（CRS 报告非营利镜像）同类，仅在 NSE 一手页面为 JS 壳、无正文时作降级来源） | 第三方（官方文件转载） | en | curl 常规 UA 200，PDF 用 `pdftotext -layout` | NSEIL Consolidated Circular 转载件，用于 `in-nse` 的 `market_structure.error_trade_rule`（Trade Annulment 政策：30 分钟窗口 / 最低订单价值 Rs 10 Crores / 须在价格带外 / 对手方须接受）与 Disclosed Quantity 机制说明——NSE 一手 `nseindia.com` 对应页面为 JS 导航壳、正文抓不到
+  - NSEIL Consolidated Circular（ITEM 3.1 Trade Annulment Request + Disclosed Quantity 撮合说明，转载 NSE 官方合并通函）PDF: https://www.ricago.com/assets/front/base/file/file_management/441.pdf（HTTP 200，约910KB）
+- `business-standard.com`（印度主流财经日报，2026-08-30 新增登记；第三方新闻媒体，按 CLAUDE.md 二第3条 `confidence` 上限 `medium`） | 第三方（财经媒体） | en | curl 常规 UA 200 | 用于 `in-nse` 的 `market_structure.tick_size` 数值转述——NSE 通函 Ref 66/2024（2024-06-10 起价格联动 tick：收盘价 < ₹250 为 ₹0.01、≥ ₹250 为 ₹0.05）的报道，NSE 一手通函 PDF 本次未定位到直链
+  - NSE lowers tick size for stocks below Rs 250（转述 NSE 通函 Ref 66/2024 的 tick size 数值与生效日）: https://www.business-standard.com/markets/capital-market-news/nse-lowers-tick-size-for-stocks-below-rs-250-124052700731_1.html（HTTP 200）
+
+- `incometaxindia.gov.in` | 官方（印度所得税局） | en | curl 常规 UA 200 | 资本利得税/股息预扣税（costs 出处）
+- `rbi.org.in` | 官方（印度储备银行） | en | curl 常规 UA 200 | 外资准入/账户开立（foreign_access_channel/account_opening_requirements 出处）
+- `www.fpi.nsdl.co.in` | 官方（NSDL FPI 登记处） | en | curl 常规 UA 200 | 外资参与者登记（foreign_ownership_limit 出处）

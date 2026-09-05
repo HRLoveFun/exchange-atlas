@@ -1,0 +1,67 @@
+# 深圳证券交易所 Shenzhen Stock Exchange (SZSE) `cn-szse`
+- `szse.cn` | 官方 | zh / en（英文版路径 `/English/...`，非同页切换，独立 URL；页面同样带"仅供参考，中文文本为准"类免责声明——与 SSE 一致，佐证 `source_lang: zh` 的选择） | curl + 常规浏览器 UA 全程 200，未见反爬/限流（比 `english.sse.com.cn` 好抓，不需要加延时）；PDF 用 `pdftotext -layout` 提取纯文本再 grep 定位条款 | 与上交所同属会员制事业法人、同受中国证监会监管、同为 A 股主板注册制，`region`/`regulator`/`review_system` 等字段与 cn-sse 高度一致，可直接对照校验取值口径是否统一；压测点是主板 vs 创业板（对照 cn-sse 主板 vs 科创板）
+  - 本所简介（成立/开业日期、监管归属、职能）: https://www.szse.cn/aboutus/sse/introduction/index.html
+  - 交易规则（2026年修订）PDF: https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf
+  - 股票上市规则（2026年修订，主板；原登记的2025年修订版链接抓取时返回404——已被2026年4月第十七次修订替换下线，重新 WebSearch 定位到现行版）PDF: http://docs.static.szse.cn/www/lawrules/rule/allrules/bussiness/W020260424747613955674.pdf ← 财务门槛条款见第3.1.2条（境内企业三选一标准，`listing.boards[cn-szse-main].financial_threshold` 出处）；第3.1.4-3.1.6条另有红筹企业/差异表决权发行人专项标准，本次未摘入 boards（量大且是特殊类别企业，非板块通用标准）
+  - 创业板股票上市规则（2026年修订；同上，原2025年修订版链接已下线）PDF: https://docs.static.szse.cn/www/lawrules/rule/stock/supervision/chinext/W020260424688875101057.pdf ← 财务门槛条款见第2.1.2条（境内企业四选一标准，`listing.boards[cn-szse-chinext].financial_threshold` 出处）
+  - 市场概况（上市公司数/总市值等统计）: https://www.szse.cn/market/overview/index.html
+  - 指数总览: https://www.szse.cn/market/exponent/pandect/index.html
+  - 会员与交易类规则入口: https://www.szse.cn/lawrules/service/member/index.html
+  - 关于下调股票交易经手费收费标准的通知（2023-08-18）: https://www.szse.cn/disclosure/notice/general/t20230818_602805.html
+  - 期权子网站首页（补全 market_structure.derivatives 时，2026-08-18 新增；`/option/` 路径下的公告详情页由服务端直出 HTML，与主站 `/lawrules/rule/...` 栏目的列表页不同——后者条目由前端 AJAX 异步加载（channelId 驱动的 CMS 组件），curl 拿不到列表内容，只能先 WebSearch 定位到具体 `t20YYMMDD_数字.html` 详情页直链，再用 curl 抓该详情页取得附件 PDF 真实链接；这是本次定位到期权交易规则原文 PDF 的关键方法）: https://www.szse.cn/option/
+  - 期权业务规则列表页（服务端直出，可直接 curl 拿到各条目详情页链接，与上条同一发现）: https://www.szse.cn/option/rules/optrules/
+  - 关于发布《深圳证券交易所股票期权试点交易规则》的通知（附件为交易规则原文 PDF，见下一条）: https://www.szse.cn/option/rules/optrules/t20191207_572478.html
+  - 深圳证券交易所股票期权试点交易规则（2019-12-07 发布，深证上〔2019〕800号，自发布之日起施行；本次 WebSearch 直接搜索该文件名多次未命中，最终通过上面的官方通知详情页取得附件真实链接；规则原文未见「XXXX年修订」字样，且未搜到任何后续修订通知，视为现行有效版本，但下次会话如需再次引用建议先按 SOURCES.md 开头教训 3 的方法重新探测一遍）PDF: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf ← market_structure.derivatives 除保证金公式外的绝大部分字段（交易时段/开收盘机制/撮合原则/订单类型/最小报价单位/涨跌停公式/熔断/交易异常情况处置/大宗交易/做市商）出处
+  - 深圳证券交易所 中国证券登记结算有限责任公司股票期权试点风险控制管理办法（第十四-二十条为开仓/维持保证金计算公式，ETF为标的12%/7%、股票为标的21%/10%与19%/10%两套）PDF: http://docs.static.szse.cn/www/option/rules/optrules/W020191207433397366259.pdf ← market_structure.derivatives.margin_practice_note 主要出处
+  - 关于嘉实沪深300ETF期权合约品种上市交易有关事项的通知（沪深300ETF期权2019-12-23上市、持仓限额分级表）: https://www.szse.cn/option/rules/optrules/t20191219_572722.html
+  - SZSE English — CSI 300 ETF Options（英文版合约条款页：合约乘数10,000/行权价间距表/涨跌停公式/保证金公式，均与上述中文来源交叉核对一致，仅作辅助佐证，未作为 derivatives 字段 quote 的主要来源，因 source_lang 为 zh）: https://www.szse.cn/English/products/options/etf/index.html
+- `investor.szse.cn` | 官方（深交所投资者教育／证券学院子站，与 szse.cn 同属深交所运营，页面均带"仅供投资者教育、不构成投资建议"免责声明） | zh | curl 常规 UA 200，未见反爬 | 补全 market_structure.derivatives 时（2026-08-18）新发现的官方来源；"期权入市手册"系列连载文章由深交所联合市场机构撰写，属"官网说明页"层级（非交易所规则原文本身），用于交易制度/做市商/风险控制等字段的补充与交叉印证
+  - 期权入市手册（十一）：深市期权交易制度（上）: https://investor.szse.cn/institute/rules/t20221108_597221.html
+  - 期权入市手册（十二）：深市期权交易制度（下）（合约单位10,000份的官方说明出处）: https://investor.szse.cn/institute/rules/t20221108_597223.html
+  - 期权入市手册（十三）：做市商制度: https://investor.szse.cn/institute/rules/t20221110_597273.html
+  - 期权入市手册（三十八）：交易所主要风险控制措施（下）（组合策略保证金/强行平仓触发机制）: https://investor.szse.cn/institute/rules/t20230227_598959.html
+- `english.szse.cn` / `szse.cn/English` | 官方（英文版） | en | 同域名下 `/English/` 路径，curl 常规 UA 200 | About Overview 与 Trading Overview 两页内容较薄，多为导航链接夹杂少量正文，摘引前需按关键词定位，不能直接取前 N 段
+  - About Overview: https://www.szse.cn/English/about/overview/index.html
+  - Trading Overview: https://www.szse.cn/English/services/trading/tradOverview/index.html
+  - Rules 索引页: https://www.szse.cn/English/rules/siteRule/
+  - Margin Trading: https://www.szse.cn/English/services/trading/marginTrading/index.html
+  - Suspension and Resumption of Trading PDF: https://www.szse.cn/www/English/rules/siteRule/P020190125614338960977.pdf （原登记 http:// 首次抓取连接失败，改 https:// 后 200）
+- `cnindex.com.cn` | 官方（深圳证券信息有限公司，SZSE 全资子公司，指数编制方） | zh | curl 常规 UA 200 | 深证成指官方编制方案，与 cn-sse 的"交易所自编"（上证综指）、hk-hkex 的"独立第三方"（恒生指数公司）并列第三种指数编制归属模式——SZSE 是"交易所全资子公司编制"，介于两者之间
+  - 深证成份指数编制方案 PDF: https://www.cnindex.com.cn/docs/gz_399002.pdf
+- `chinaclear.cn` | 官方（清算机构，与 cn-sse 共用同一登记结算法人，域名已在 cn-sse 一节登记） | zh | curl 常规 UA 可过 | 中国证券登记结算有限责任公司深圳分公司页面，确认其为 SZSE 上市证券提供登记结算服务、深港通相关登记存管结算业务
+  - 深圳分公司公告栏: http://www.chinaclear.cn/zdjs/szfgsgg/center_list.shtml
+- `people.com.cn` | 第三方（官方媒体，域名已在 cn-sse 一节登记） | zh | curl 需按 GBK 解码，常规 UA 可过 | 印花税为全国统一税率的国家税种，非交易所自定，与 cn-sse 引用同一篇报道确认 2023-08-28 减半征收
+  - 证券交易印花税8月28日起实施减半征收: http://finance.people.com.cn/n1/2023/0828/c1004-40065300.html
+- `csrc.gov.cn` | 监管（域名已在 cn-sse 一节登记） | zh/en | curl 常规 UA 可过 | 中国证监会官网，SZSE 与 SSE 共同的政府监管机构，本节独立抓取一次首页作为本所"当次抓取凭据"
+  - 官网首页: http://www.csrc.gov.cn/
+- `finance.sina.com.cn` | 第三方（财经媒体，全文转载深交所 2016-01-07 官方通知原文） | zh | curl 需按 GBK 解码（非 UTF-8），常规 UA 200 | 用于 circuit_breaker 字段：本次会话未抓到 szse.cn 自己的通知原页（WebSearch 未命中该页面的直链），退而用新浪财经转载的通知全文作为来源，quote 摘的是被转载的深交所官方通知原文本身，但因转载渠道是第三方，confidence 按铁律封顶 medium，不因转载内容是官方原文而破例标 high
+  - 三大交易所公告确认指数熔断制度暂停实施: http://finance.sina.com.cn/stock/y/20160107/223324126797.shtml
+
+补全 Category B 空缺字段（regulation/listing/clearing.derivatives/participants/infrastructure/costs/risks，2026-08-24）新增来源：
+- `szse.cn`（域名已登记，本轮新增以下具体页面/PDF）
+  - 深圳证券交易所合格境外机构投资者和人民币合格境外机构投资者证券交易实施细则（2020年修订）PDF ← `foreign_ownership_limit` 出处: https://docs.static.szse.cn/www/disclosure/notice/general/W020201030604374968707.pdf
+  - 深圳证券交易所上市公司自律监管指引第5号——信息披露事务管理（2025年修订）PDF ← `disclosure_requirements`/`continuing_obligations` 出处: https://docs.static.szse.cn/www/lawrules/rule/stock/supervision/currency/W020250327591142579433.pdf
+  - 深圳证券交易所股票发行上市审核规则（2024年修订）PDF ← `listing_process_duration` 出处: http://docs.static.szse.cn/www/lawrules/rule/stock/W020240430572636488364.pdf
+  - 深圳证券交易所股票期权试点交易规则 第2.5条、第5.11-5.13条（最后交易日顺延规则）← `clearing.derivatives.last_trading_day_rule` 出处，PDF 同已登记的期权交易规则条目: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf
+  - 深圳证券交易所 中国证券登记结算有限责任公司股票期权试点风险控制管理办法 第十四-十九条（分级收取/开仓保证金/维持保证金/逐日盯市）← `clearing.derivatives.initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency` 出处，PDF 同已登记的期权风险控制管理办法条目: http://docs.static.szse.cn/www/option/rules/optrules/W020191207433397366259.pdf
+  - 统计年鉴（市场数据导航页，日/周/月/年度概况分类）← `infrastructure.historical_data_availability` 出处: https://www.szse.cn/market/periodical/year/index.html
+- `csrc.gov.cn`（域名已登记，本轮新增以下具体页面）
+  - 合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法（2020年证监会、人民银行、外汇局令第176号）← `capital_controls` 出处: http://www.csrc.gov.cn/csrc/c106256/c1653823/content.shtml
+  - 中国证券登记结算有限责任公司证券账户业务指南（陕西监管局官网留存，二〇一六年十月版）← `participants.account_opening_requirements` 出处，文档版本较旧（2016年10月），未核实是否有更新修订版，confidence 定 medium: http://www.csrc.gov.cn/shanxi/c1055540/c1609332/1609332/files/中国证券登记结算有限责任公司证券账户业务指南.pdf
+- `chinaclear.cn`（域名已登记，本轮新增以下具体页面）
+  - 中国证券登记结算有限责任公司遵循《金融市场基础设施原则》信息披露报告（2022年6月）← `clearing.default_management` 出处: http://www.chinaclear.cn/zdjs/xxxpl/202307/e8fcc5f599a34963b5c83c8ac07ece1d/files/中国结算遵循《金融市场基础设施原则》信息披露报告（2022）.pdf
+- `people.com.cn`（域名已登记，本轮新增以下具体页面）
+  - 4月29日起股票交易过户费总体下调50%（转载中国结算官网公告）← `costs.clearing_fees` 出处: http://finance.people.com.cn/n1/2022/0429/c1004-32411923.html
+- `isc.com.cn` | 官方（中证中小投资者服务中心，中国证监会体系下全国性投资者保护机构官网） | zh | curl 常规 UA 200，未见反爬 | 用于 `regulation.investor_protection`：全国性机制，非深交所专属，故 confidence 定 medium
+  - 维权服务（特别代表人诉讼/支持诉讼/股东诉讼）: http://www.isc.com.cn/tsyw/wqfw/
+- `szsi.cn` | 官方（深圳证券信息有限公司，SZSE 全资子公司，行情数据授权与分发主体，域名与已登记的 `cnindex.com.cn` 同属该公司不同业务线） | zh | curl 常规 UA 200，未见反爬 | 用于 `infrastructure.market_data_levels`/`data_pricing_model`/`data_latency`：官方行情商用授权与定价说明
+  - 深市行情授权 - 增强行情介绍: http://www.szsi.cn/cpfw/fwsq/hq/yw-2.htm
+  - 深交所行情互联网接入服务说明（含收费标准）PDF: http://www.szsi.cn/cpfw/fwsq/hq/深交所行情互联网接入服务说明.pdf
+- `chinatax.gov.cn` | 官方（国家税务总局，含省级税务局子域名 `guangdong.chinatax.gov.cn` 转发件、政策法规库子域名 `fgk.chinatax.gov.cn`，均标注来源为国家税务总局） | zh | curl 常规 UA 200，未见反爬；`fgk.chinatax.gov.cn` 政策法规库为法律法规全文库，静态 HTML，逐字可抓 | 用于 `costs.capital_gains_tax`/`costs.dividend_withholding_tax`：全国统一税收政策，非深交所自定，与上交所（cn-sse）适用同一套规则；`costs.stamp_duty` 的 `side: sell` 一手依据（《印花税法》第三条『证券交易印花税对证券交易的出让方征收，不对受让方征收』）与 `costs.financial_transaction_tax` 的 `type: none`（《印花税法》即交易凭证/证券交易类税收完整立法、无独立 FTT 税目）——2026-09-04 ADR-067
+  - 中华人民共和国印花税法（政策法规库全文，2021 通过 / 2022-07-01 施行）: https://fgk.chinatax.gov.cn/zcfgk/c100009/c5193058/content.html
+  - 关于上市公司股息红利差别化个人所得税政策有关问题的通知（财税〔2015〕101号，通知抬头列明直接下发对象含"上海、深圳证券交易所"）: https://www.chinatax.gov.cn/n810341/n810755/c1797427/content.html
+  - 关于个人转让股票所得继续暂免征收个人所得税的通知（财税字〔1998〕61号，广东省税务局官网转发，标注来源为国家税务总局）: https://guangdong.chinatax.gov.cn/gdsw/grsdsgg_hmqsc_pyzbsc_ssgs/2021-08/31/content_0515931e3f044baf9a26bbe53e85eb38.shtml
+- `qianzhan.com` | 第三方（行业研究机构，前瞻产业研究院） | zh | curl 常规 UA 200，未见反爬 | 用于 `participants.broker_landscape`：全国证券业集中度数据，非深交所专属统计，confidence 依铁律封顶 medium
+  - 【行业深度】洞察2023：中国证券行业竞争格局及市场份额: https://www.qianzhan.com/analyst/detail/220/230518-3f033ad2.html
+- `zh.wikipedia.org` | 第三方（中文维基百科） | zh | curl 常规 UA 200，未见反爬 | 用于 `infrastructure.major_outage_history`：深交所历史系统故障事件（2002年卫星转发器干扰停市、1992年"8·10事件"），本次未核实到深交所官方对这两起事件的原始公告存档，confidence 依铁律封顶 medium
+  - 深圳证券交易所（大事记章节）: https://zh.wikipedia.org/zh-hans/%E6%B7%B1%E5%9C%B3%E8%AF%81%E5%88%B8%E4%BA%A4%E6%98%93%E6%89%80

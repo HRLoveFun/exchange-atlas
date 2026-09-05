@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""tools/fetch.py — 按 PROJECT/SOURCES.md 登记的方式抓取交易所官方页面到 .cache/
+"""tools/fetch.py — 按 PROJECT/sources/<exchange-id>.md 登记的方式抓取官方页面到 .cache/
 
 用法: python3 tools/fetch.py <exchange-id>   （或 make fetch EX=<exchange-id>）
 
 为什么不用 WebFetch：探针实测 WebFetch 对 SSE / JPX 的规则页返回 403，换常规浏览器 UA
-的 curl 可以过。见 CLAUDE.md 二、PROJECT/SOURCES.md 底部「探测记录」。
+的 curl 可以过。见 CLAUDE.md 二、PROJECT/sources/ 各分片的「探测记录」。
 
 见 CLAUDE.md 二：数据不得凭记忆填写，必须来自本脚本抓取并落盘在 .cache/ 的原始页——
 那是「这条数据不是编的」的可核查凭据。
@@ -25,7 +25,7 @@
 但带 code 的数据端点对数据中心 IP 一律拒绝（`data.krx.co.kr` 返回字面量 `LOGOUT`、
 `eindex.krx.co.kr` 302 跳转到 `SiteSearch.jsp`）——是 KRX 对云出口 IP 的封锁，不是本
 脚本逻辑错误。住宅 IP 下预期能走通；数据中心环境抓不到就是 CLAUDE.md 三的降级触发点
-（人工提供页面），不要因为这一步过不去就凭记忆填数据。见 PROJECT/SOURCES.md 对应记录。
+（人工提供页面），不要因为这一步过不去就凭记忆填数据。见 PROJECT/sources/kr-krx.md。
 
 ## wayback 回退（2026-09-04 新增，见 [ADR-075]）
 
@@ -46,7 +46,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
-SOURCES_MD = ROOT / "PROJECT" / "SOURCES.md"
+SOURCES_DIR = ROOT / "PROJECT" / "sources"
 CACHE_DIR = ROOT / ".cache"
 
 # 常规浏览器 UA —— 探针证实这是让多数交易所官网放行的关键（对比 WebFetch 的 403）
@@ -61,33 +61,10 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 # 用 TRAILING_ANNOTATION_RE 单独把这段尾巴切掉，不改动 URL 主体的字符集。
 URL_RE = re.compile(r"https?://[^\s)\]]+")
 TRAILING_ANNOTATION_RE = re.compile(r"（HTTP.*$")
-HEADING_RE = re.compile(r"^###\s.*`([a-z]{2}-[a-z0-9]+)`\s*$")
 OTP_LINE_RE = re.compile(r"^\s*-.*\[OTP\].*$", re.M)
 # 官网拦截页 / KRX 数据端点对数据中心 IP 的字面量拒绝——HTTP 200 但正文不是真内容，
 # 不能当成功缓存下来（PROJECT/SOURCES.md 记过的坑：坏正文覆盖好缓存）。
 BLOCK_SNIFF_RE = re.compile(r"cloudflare|Access Denied|Attention Required|Just a moment", re.I)
-
-
-def extract_section(exchange_id: str) -> str:
-    """从 SOURCES.md 里摘出 `<exchange-id>` 对应的整节文本（到下一个 ### 标题为止）。"""
-    lines = SOURCES_MD.read_text(encoding="utf-8").splitlines()
-    start = None
-    for i, line in enumerate(lines):
-        m = HEADING_RE.match(line.strip())
-        if m and m.group(1) == exchange_id:
-            start = i
-            break
-    if start is None:
-        sys.exit(
-            f"[fetch] 错误：PROJECT/SOURCES.md 里没有标题包含 `{exchange_id}` 的章节。\n"
-            f"        先在 SOURCES.md 按条目格式登记该所的资料来源，再抓取。"
-        )
-    end = len(lines)
-    for j in range(start + 1, len(lines)):
-        if lines[j].startswith("### "):
-            end = j
-            break
-    return "\n".join(lines[start:end])
 
 
 def extract_otp_pairs(section: str):
@@ -101,7 +78,7 @@ def extract_otp_pairs(section: str):
         urls = [TRAILING_ANNOTATION_RE.sub("", u) for u in URL_RE.findall(line)]
         if len(urls) != 2:
             sys.exit(
-                f"[fetch] 错误：SOURCES.md 里一行 `[OTP]` 登记必须恰好 2 个 URL"
+                f"[fetch] 错误：来源分片里一行 `[OTP]` 登记必须恰好 2 个 URL"
                 f"（GenerateOTP 端点 + 数据端点，见 tools/fetch.py 文首），这行有 "
                 f"{len(urls)} 个：\n  {line.strip()}"
             )
@@ -237,13 +214,20 @@ def main():
     if len(sys.argv) != 2 or not sys.argv[1].strip():
         sys.exit("用法: python3 tools/fetch.py <exchange-id>")
     exchange_id = sys.argv[1].strip()
-    section = extract_section(exchange_id)
+    section_path = SOURCES_DIR / f"{exchange_id}.md"
+    if not section_path.exists():
+        sys.exit(
+            f"[fetch] 错误：PROJECT/sources/{exchange_id}.md 不存在。\n"
+            f"        先按 PROJECT/SOURCES.md 的条目格式新建该所的来源分片"
+            f"（文件名 = data/exchanges/<exchange-id>.yml 的 id），再抓取。"
+        )
+    section = section_path.read_text(encoding="utf-8")
     otp_pairs = extract_otp_pairs(section)
     otp_urls = {u for pair in otp_pairs for u in pair}
     raw_urls = URL_RE.findall(section)
     urls = sorted({TRAILING_ANNOTATION_RE.sub("", u) for u in raw_urls} - otp_urls)
     if not urls and not otp_pairs:
-        sys.exit(f"[fetch] `{exchange_id}` 章节下没有找到任何 URL，先去 SOURCES.md 登记来源。")
+        sys.exit(f"[fetch] `{exchange_id}` 的来源分片里没有找到任何 URL，先去 PROJECT/sources/ 登记来源。")
 
     dest_dir = CACHE_DIR / exchange_id
     tail = f" + {len(otp_pairs)} 个 [OTP] 来源" if otp_pairs else ""

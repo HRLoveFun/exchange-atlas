@@ -1,0 +1,59 @@
+# 日本交易所集团 / 东京证券交易所 Japan Exchange Group (JPX / TSE) `jp-jpx`
+- `jpx.co.jp` | 官方 | ja / en（英文版内容滞后，部分细则页无对应英文版） | **WebFetch 对内国株页面返回 403（反爬）**；curl + 常规浏览器 UA（`Mozilla/5.0 ... Chrome/131`）可过，HTTP 200，全程未见限流（比 english.sse.com.cn 好抓得多，不需要加延时）| ⚠️ v0.2 按 ADR-013「无中选英」，本节以 `/english/` 路径下的英文版为主要来源，日文版（`/equities/...`）只在没有对应英文页时才用。英文版每页均带免责声明"This translation may be used for reference purposes only... the Japanese version shall prevail"。JPX 集团下辖东京证券交易所（TSE）、大阪交易所（OSE，衍生品）、东京商品交易所（TOCOM）、Japan Exchange Regulation（自律监管）四个法人实体（`group_id: jpx-group`），本文件只记录 TSE 现货股票市场
+  - 制限値幅（值幅制限档位表，日文版）: https://www.jpx.co.jp/equities/trading/domestic/06.html（HTTP 200，35KB；curl 提取得到 37 行档位，如 `100円未満→上下30円`……`50,000,000円以上→10,000,000円`）
+  - 用語集: https://www.jpx.co.jp/glossary/
+  - 英文版首页: https://www.jpx.co.jp/english/（HTTP 200）
+  - Rules & Regulations 索引页（列出全部官方英文规则 PDF 标题与直链）: https://www.jpx.co.jp/english/rules-participants/rules/regulations/index.html（HTTP 200；正文由 JS 渲染，纯 curl 只能拿到导航栏，但 PDF 直链本身在静态 HTML 里能 grep 出来）
+  - Business Regulations（TSE业务规程英文版，交易时段/撮合原则/特别气配等核心交易机制）PDF: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/business_regs_20250507.pdf（HTTP 200，784KB）
+  - Rules Concerning Price Limits on Bids and Offers（值幅制限官方英文版；Rule 2 Paragraph 1 股票值幅表实为 **34 档**，Phase 1b 逐行核实——此前 ADR-037 及本行曾写「37 档」系笔误）PDF: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/bids_and_offers_price_limits_20141201.pdf（HTTP 200，290KB；表格用 `pdftotext -layout` 能完整提取）
+  - Securities Listing Regulations（上市规则英文版，Prime/Standard/Growth三板定义与标准）PDF: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/01_listing_regs_20260721.pdf（HTTP 200，3MB，超长，用 pdftotext 后 grep 定位章节）
+  - Clearing and Settlement Regulations PDF: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/clearing-settlement_regs_20190716.pdf（HTTP 200，140KB）
+  - Regulations Regarding Margin Transactions and Loans for Margin Transactions PDF: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/regs_margin-loans_transactions_20250401.pdf（HTTP 200，175KB）
+  - Clearing & Settlement Summary（JSCC/JASDEC 角色说明）: https://www.jpx.co.jp/english/equities/clearing-settlement/outline/index.html（HTTP 200）
+  - T+2 结算周期改革说明（2019-07-16生效）: https://www.jpx.co.jp/english/equities/clearing-settlement/tplus2-settlement-cycle/index.html（HTTP 200）
+  - Initial Listing Criteria（三板初次上市门槛速查表，Prime/Standard/Growth 各一个 URL，含股东人数/流通股数/流通股市值/流通股比例/总市值/净资产/利润销售额门槛，与 Securities Listing Regulations Rule 205/211/217 的条文数值完全对应，可交叉核实）：
+    - Prime: https://www.jpx.co.jp/english/equities/listing/criteria/listing/index.html（HTTP 200，36KB）
+    - Standard: https://www.jpx.co.jp/english/equities/listing/criteria/listing/01.html（HTTP 200，36KB）
+    - Growth: https://www.jpx.co.jp/english/equities/listing/criteria/listing/02.html（HTTP 200，35KB）
+    - ⚠️ 页面视觉上是三个 tab 切换同一张表，但每个 tab 对应独立 URL 且该 tab 内容已服务端渲染进静态 HTML（不是纯 JS 异步加载），curl 三个 URL 各自都能拿到对应板块完整数值，不需要模拟点击
+  - Overview of Market Restructuring（2022年4月4日新三板体系改制说明，含新旧板块对应关系、每板"概念"定性表述、改制时间线）: https://www.jpx.co.jp/english/equities/improvements/market-structure/01.html（HTTP 200，38KB）
+  - 2026-08-24 补全 Category B 空缺字段这次新增抓取的 jpx.co.jp 页面（含 jscc 子路径，同域名不需要重复登记）：
+    - Overview of Timely Disclosure（信息披露制度总览）: https://www.jpx.co.jp/english/equities/listing/disclosure/overview/index.html（HTTP 200）
+    - Listing Schedule（新股上市流程时间线，含"申请日到上市首日约需四个月"表述）: https://www.jpx.co.jp/english/equities/listing-on-tse/new/basic/02.html（HTTP 200）
+    - Outline of Delisting Criteria（退市标准总览）: https://www.jpx.co.jp/english/equities/listing/delisting/outline/01.html（HTTP 200）
+    - Transitional Measures（整理銘柄退市过渡期安排）: https://www.jpx.co.jp/english/equities/listing/delisting/outline/02.html（HTTP 200）
+    - Delisting Criteria（退市标准入口页，逐条触发条件的导航起点）: https://www.jpx.co.jp/english/equities/listing/delisting/index.html（HTTP 200；WebSearch给出的旧链接 .../delisting/05.html 已404，改用本链接，经验记入下方）
+    - Companies in an Improvement Period（持续上市标准未达标整改期）: https://www.jpx.co.jp/english/listing/market-alerts/improvement-period/index.html（HTTP 200）
+    - Securities Under Supervision & Securities to Be Delisted（监理/整理銘柄指定制度说明）: https://www.jpx.co.jp/english/listing/market-alerts/supervision/index.html（HTTP 200）
+    - Trading Halts（个股停牌机制，含重大消息停牌15分钟规则）: https://www.jpx.co.jp/english/markets/equities/suspended/index.html（HTTP 200）
+    - Corporate Governance Report 说明页（持续上市义务之一）: https://www.jpx.co.jp/english/equities/listing/cg/01.html（HTTP 200）
+    - Default Management（JSCC违约处置流程）: https://www.jpx.co.jp/jscc/en/risk/default.html（HTTP 200）
+    - Clearing Fee for Cash Products（JSCC现货证券清算费率表）: https://www.jpx.co.jp/jscc/en/cash/cash/fee.html（HTTP 200）
+    - Trading by Type of Investors（Weekly，投资者类型交易占比统计总览页）: https://www.jpx.co.jp/english/markets/statistics-equities/investor-type/index.html（HTTP 200）
+    - Trading by Type of Investors（Annual，年度数据）: https://www.jpx.co.jp/english/markets/statistics-equities/investor-type/00-02.html（HTTP 200）
+    - List of Trading Participants（交易参与者名录，broker_landscape依据）: https://www.jpx.co.jp/english/rules-participants/participants/list/index.html（HTTP 200）
+    - The Failure of Equity Trading System on October 1, 2020（arrowhead系统故障新闻稿）: https://www.jpx.co.jp/english/corporate/news/news-releases/0060/20201019-01.html（HTTP 200）
+    - arrowhead故障详细报告 PDF: https://www.jpx.co.jp/english/corporate/news/news-releases/0060/b5b4pj000003qm41-att/arrowhead_e.pdf（HTTP 200）
+    - Real Time Market Data Outline（行情数据层级/时延说明）: https://www.jpx.co.jp/english/markets/paid-info-equities/realtime/index.html（HTTP 200）
+    - Real Time Market Data Fees（行情数据收费模式）: https://www.jpx.co.jp/english/markets/paid-info-equities/realtime/01.html（HTTP 200）
+    - Historical Data Outline（历史数据服务说明）: https://www.jpx.co.jp/english/markets/paid-info-equities/historical/index.html（HTTP 200）
+    - 15 Minute-Delayed Stock Price Information (API)（免费延时行情，与付费实时数据对照佐证data_latency分层）: https://www.jpx.co.jp/english/markets/paid-info-equities/realtime/06.html（HTTP 200）
+    - Connectivity Services Overview（接入方式：专线/API/数据商三种渠道）: https://www.jpx.co.jp/english/systems/connectivity/index.html（HTTP 200）
+    - Trading Participation Fees 总览页: https://www.jpx.co.jp/english/rules-participants/participants/fees/index.html（HTTP 200）
+    - Overview of Trading Participant Fees PDF（2026-04-13版，交易参与者费率明细）: https://www.jpx.co.jp/english/rules-participants/participants/fees/tvdivq000000v276-att/o4sio70000000p66.pdf（HTTP 200）
+    - Brokerage Agreement Standards（受託契約準則英文版，经纪商与客户开户/委托合同准则，account_opening_requirements依据）PDF: https://www.jpx.co.jp/english/rules-participants/rules/regulations/tvdivq0000001vyt-att/brokerage_agreement_standards_20260401.pdf（HTTP 200；WebSearch给出的旧文件名 ...20250401.pdf 已404，经验记入下方——与既有「XXXX年修订式规则文档URL会随修订版本更迭直接下线」经验一致）
+- `jipf.or.jp`（日本投资者保护基金 Japan Investor Protection Fund，FIEA法定设立的会员制法人，官方自身网站） | 官方（法定投资者保护机制运营主体） | en | curl 常规 UA 200 | investor_protection 字段依据
+  - About Us: https://jipf.or.jp/en/about/index.html（HTTP 200）
+- `jsri.or.jp`（日本証券経済研究所 Japan Securities Research Institute，2026-09-04 新增登记） | 第三方（证券业研究机构，按 CLAUDE.md 二第3条 confidence 上限 medium） | en | curl 常规 UA 200 | `dark_pool` 依据：研究报告《The Implications of Cboe Japan's Withdrawal》（Morimoto，2025-11）——2025-08 底 Cboe Japan（原 Chi-X Japan）终止 PTS 业务后日本已无独立 PTS，券商 SBI Cross / R-Cross 暗池与 SBI Japannext 为券商关联场所
+  - The Implications of Cboe Japan's Withdrawal – Structural Changes in Japan's Stock Market（PDF）: https://www.jsri.or.jp/upload/topics_2511_01_en.pdf
+- `mof.go.jp`（财务省，外汇外贸法FEFTA对内直接投资事前申报制度主管机关之一） | 官方（监管机构） | en | curl 常规 UA 200 | capital_controls/foreign_ownership_limit 字段依据，FEFTA要求外国投资者投资"核心业务领域"上市公司达1%以上须事前申报
+  - Foreign investors are required to submit a prior notification（制度概述其一）PDF: https://www.mof.go.jp/english/policy/international_policy/fdi/Overview/outline1.pdf（HTTP 200）
+  - Mandatory Notification of Foreign Investors: Outline of the system（制度概述其二）PDF: https://www.mof.go.jp/english/policy/international_policy/fdi/Overview/outline2.pdf（HTTP 200）
+  - Gist of the Tax Reform for FY 1999（1999年度税制改正纲要，含"有价证券交易税与交易所税于1999年3月31日废止"官方原文）: https://www.mof.go.jp/english/about_mof/councils/tax_commission/ts001.htm（HTTP 200；⚠️WebSearch给出的另一URL .../english/tax_policy/tax_reform/ts001.htm 已404，改用本链接）
+- `fsa.go.jp`（金融厅） | 官方（监管机构） | en | curl 常规 UA 200，与 SOURCES.md 其他章节记录的"金融监管机构域名易被拦"（sec.gov/finra.org）经验不同，fsa.go.jp 本次全程未见反爬 | regulation/participants/costs/risks 多个字段依据
+  - Japanese Big Bang: Full Liberalization of Brokerage Commissions（1999年佣金自由化历史说明）: https://www.fsa.go.jp/p_mof/english/big-bang/ebb37.htm（HTTP 200）
+  - FAQ on Financial Instruments and Exchange Act, Section 6（适合性原则FAQ）: https://www.fsa.go.jp/en/laws_regulations/faq_on_fiea/section06.html（HTTP 200）
+  - About SESC（证券取引等监视委员会职能与执法权限概述）PDF: https://www.fsa.go.jp/sesc/english/aboutsesc/all.pdf（HTTP 200）
+- `nta.go.jp`（国税厅） | 官方（税务机关） | en | curl 常规 UA 200 | costs.capital_gains_tax / dividend_withholding_tax 字段依据
+  - Selection of the Aggregate Taxation and the Separate Self-Assessment Taxation System（英文版所得税指南，含上市股票转让/股息分离课税税率）PDF: https://www.nta.go.jp/english/taxes/individual/pdf/incometax_2023/17.pdf（HTTP 200）
+  - Tax on the income of an individual as a non-resident in Japan for tax purposes（非居民股息预扣税率说明）: https://www.nta.go.jp/english/taxes/individual/12006.htm（HTTP 200）

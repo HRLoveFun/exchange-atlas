@@ -1,0 +1,69 @@
+# 韩国交易所 Korea Exchange (KRX) `kr-krx`
+- `global.krx.co.kr` | 官方（英文版） | en | curl + 常规 UA 全部 200，未见反爬；站点是 JSP，导航结构可从任意页面（如首页 `main/main.jsp`）的静态 HTML 里 grep `href="[^"]*GLB[0-9]+[^"]*"` 批量拿到几乎全站 URL 清单，比逐级点导航快得多——**但很多栏目页（如 About KRX/Organization/Regulation 分类落地页）静态 HTML 里只有 tab 标题导航，没有实质段落**，真正的解释性文字要么在专门的详情子页（URL 尾缀带 `T1`/`T2`.jsp，如上市标准详情页），要么整份塞进官方 PDF 指南。抓到 120KB+ 的页面不代表有正文，先搜关键词（如年份数字、百分比）确认，没命中就换该栏目的 `T*.jsp` 子页再试 | KRX 是 2005 年由韩国证券交易所（KSE）、KOSDAQ 市场、韩国期货交易所（KOFEX）依《资本市场与金融投资业法》合并而成的单一法人交易所（股份有限公司，会员金融机构持股，自身不在自己市场上市）；KOSPI/KOSDAQ/KONEX 均为该法人内部的市场板块（非独立法人），衍生品市场同样由 KRX 本身运营（不同于 JPX/NYSE Group 那种"衍生品另设独立法人"的集团结构），因此本文件不设 `group_id`。KRX 本身即清算业务的中央对手方（CCP）；韩国证券存管院（KSD，KRX 持股70%）与韩国证券电算（KOSCOM，KRX 持股76%）是控股子公司而非交易所内部部门
+  - Guide to Trading in the Korean Stock Market（PDF，官方权威操作手册，含交易时段/最小报价单位/涨跌停±30%/熔断三阶段8-15-20%/sidecar/波动性中断VI/做空报升规则/大宗交易门槛/交易暂停情形，几乎覆盖第五章全部核心交易机制字段，是本次抓取信息密度最高的单一来源）: https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf（HTTP 200，308KB）
+  - CEO Message（"Established in 1956"表述）: https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp（HTTP 200，120KB）
+  - History（KRX完整年表，1956年大韩证券交易所设立、1974年KSD设立、1996年KOSDAQ设立、1999年KOFEX设立、2005年三方合并设立"韩国证券期货交易所"、2008年更名"韩国交易所"、2013年设立KONEX）: https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp（HTTP 200，131KB）
+  - KRX Group Services（KRX自身业务范围：交易/市场数据、市场监察、上市与披露、CCP、清算结算；两家控股子公司KSD/KOSCOM持股比例）: https://global.krx.co.kr/contents/GLB/01/0102/0102020000/GLB0102020000.jsp（HTTP 200，121KB）
+  - Market Oversight Commission（自律监管机构说明，KRX内设机构）: https://global.krx.co.kr/contents/GLB/01/0103/0103020500/GLB0103020500.jsp（HTTP 200，121KB）
+  - Shareholder Status（截至2019年末的股东名册，全部为证券公司/金融机构/政府关联机构，佐证会员制、非自身上市）: https://global.krx.co.kr/contents/GLB/01/0104/0104030000/GLB0104030000.jsp（HTTP 200，124KB）
+  - Members（会员资格法律依据/会员七种类型/结算会员与交易会员区分/财务门槛表）: https://global.krx.co.kr/contents/GLB/01/0102/0102070100/GLB0102070100.jsp（HTTP 200，137KB）
+  - Concept of Clearing（KRX自身作为CCP的法律依据，援引FSCMA第378/393/394/397/399/400条与多项KRX内部规则）: https://global.krx.co.kr/contents/GLB/02/0202/0202020102/GLB0202020102.jsp（HTTP 200，122KB）
+  - Concept of Settlement（结算定义，援引FSCMA第297/378条）: https://global.krx.co.kr/contents/GLB/02/0202/0202020103/GLB0202020103.jsp（HTTP 200，121KB）
+  - KOSPI Market Listing Requirements — Criteria 详情子页（量化上市标准全表：经营年限/股本/股权分散/财务表现/审计意见等）: https://global.krx.co.kr/contents/GLB/03/0303/0303050100/GLB0303050100T1.jsp（HTTP 200，11KB）
+  - Designation of Administrative Issues and Delisting Criteria for the KOSPI Market（退市/管理股条件全表，含未提交定期报告/审计意见/资本侵蚀/股权分散/交易量/公司治理/不实披露/营收/市值等逐项标准，含2026-2028年过渡期门槛）: https://global.krx.co.kr/contents/GLB/03/0303/0303050500/GLB0303050500.jsp（HTTP 200，138KB）
+  - Listing Requirements for the KOSDAQ Market（KOSDAQ量化上市标准，标准企业/技术成长企业双轨制，含KONEX转板快速通道5条track）: https://global.krx.co.kr/contents/GLB/03/0303/0303060200/GLB0303060200.jsp（HTTP 200，131KB）
+  - ETF Taxation Regulation（"证券交易税(0.3%)对ETF不适用"的表述，间接确认一般股票证券交易税税率；该页聚焦ETF豁免场景，未见明确标注版本/生效日期，作为一般股票税率引用时降级为medium）: https://global.krx.co.kr/contents/GLB/06/0605/0605010103/GLB0605010103.jsp（HTTP 200，123KB）
+  - ⚠️ 以下新增条目为补齐 market_structure.derivatives（衍生品市场机制）子块所抓，2026-08-18；导航路径提示：`main/main.jsp` 静态 HTML 里全站菜单含逐级 `data-menu-id` 标注，比逐栏目试探更快定位「KRX Market」（02/0201，产品规格）与「Regulation」（06/0603，衍生品交易规则）两个分支下的具体子页
+  - Guide to Night Session in KRX Derivatives Market（PDF，2025年4月，KRX衍生品市场官方发布，覆盖夜盘交易时段/挂单价格限制分级表/实时价格限制/交易暂停分类/做市商制度/会员保证金双重计算等，信息密度最高的衍生品单一来源；同时确认KRX已于2025年6月转为自主运营夜盘、原CME/Eurex联动已终止，与本文件顶层night_session字段所述旧联动模式不一致，见data/exchanges/kr-krx.yml的detail说明与OPEN-QUESTIONS新增条目）: https://global.krx.co.kr/contents/GLB/02/0201/0201041003/Guide_to_Night_Session_in_KRX_Derivatives_Market.pdf（HTTP 200，2.4MB，pdftotext转出偶有"Missing 'endstream'"语法警告但正文可正常提取）
+  - KRX Market ‧ Derivatives ‧ Stock Index ‧ KOSPI 200 Futures（产品规格表：标的/合约规模/挂牌月份/交易时段/最小报价单位/最后交易日/最终结算/涨跌停分级/持仓限额）: https://global.krx.co.kr/contents/GLB/02/0201/0201040201/GLB0201040201.jsp（HTTP 200，124KB）
+  - KRX Market ‧ Derivatives ‧ Stock Index ‧ KOSPI 200 Options（产品规格表，另含周期权/行权价间距/欧式行权）: https://global.krx.co.kr/contents/GLB/02/0201/0201040202/GLB0201040202.jsp（HTTP 200，127KB）
+  - Regulation ‧ Derivatives ‧ Order Types（限价/市价/限价转收盘价/即时可执行限价四类申报与FOK/IOC条件定义）: https://global.krx.co.kr/contents/GLB/06/0603/0603010200/GLB0603010200.jsp（HTTP 200，121KB）
+  - Regulation ‧ Derivatives ‧ Trading Hours（常规时段按产品类别分组的开盘/连续/收盘集合竞价时刻表，另附夜盘时刻表与夜盘可交易10品种清单）: https://global.krx.co.kr/contents/GLB/06/0603/0603010300/GLB0603010300.jsp（HTTP 200，125KB）
+  - Regulation ‧ Derivatives ‧ Method of Trade Execution（个别竞价价格/时间优先原则、集合竞价与连续交易定义、协商大宗交易适用品种与例外、EFP机制；⚠️ 此页未出现在主导航菜单，是从「Order Placement」页(0603010600)按URL序号规律试探到的相邻页0603010700，登记备查）: https://global.krx.co.kr/contents/GLB/06/0603/0603010700/GLB0603010700.jsp（HTTP 200，125KB）
+  - Regulation ‧ Derivatives ‧ Margin ‧ Definition（客户保证金/会员保证金定义与可充抵保证金的外币种类）: https://global.krx.co.kr/contents/GLB/06/0603/0603011001/GLB0603011001.jsp（HTTP 200，122KB）
+  - Regulation ‧ Derivatives ‧ Margin ‧ Customer Margin（委托保证金与既有部位保证金计算逻辑）: https://global.krx.co.kr/contents/GLB/06/0603/0603011002/GLB0603011002.jsp（HTTP 200，125KB）
+  - Regulation ‧ Derivatives ‧ Margin ‧ Member Margin（引入夜盘后会员保证金每日两次计算、缴纳截止时间由12:00缩短至11:00、120%/500亿韩元触发补缴阈值）: https://global.krx.co.kr/contents/GLB/06/0603/0603011003/GLB0603011003.jsp（HTTP 200，122KB）
+  - Clearing/Settlement ‧ Margin Management ‧ Exchange Market — Types and Composition of Margin（KRX按标的资产分组计算组合净风险保证金的方法论总览，PC COMS教学软件）: https://global.krx.co.kr/contents/GLB/06/0608/0608030101/GLB0608030101.jsp（HTTP 200，126KB）
+  - KRX Market ‧ Derivatives ‧ List of Products（衍生品全品种清单，按标的资产分股指/个股/ETF/利率/货币/商品六组，并标注夜盘可交易品种）: https://global.krx.co.kr/contents/GLB/02/0201/0201040101/GLB0201040101.jsp（HTTP 200，126KB）
+  - ⚠️ 以下新增条目为 2026-08-21 回补 OPEN-QUESTIONS「具体数据悬案」kr-krx 一条所抓；定位方式：curl `main/main.jsp` 静态 HTML 里 `data-menu-id` 全站菜单，发现「KRX Market›Market›Equity›KOSPI Market›Introduction of KOSPI Market」与「Listing›Getting Started›Examination of KONEX Market›Listing Criteria」两个菜单项，按已验证的 URL 编码规律（父级6位menu-id + 子级2位 + 补零2位 = 10位目录段）推算出 URL，curl 直接命中，未经 WebSearch
+  - Introduction of KOSPI Market（正文明确给出KOSPI综合指数基日基点："its base index at 100 on January 4, 1980"）: https://global.krx.co.kr/contents/GLB/02/0201/0201010100/GLB0201010100.jsp（HTTP 200，122KB）
+  - KONEX Market Listing Criteria — Quantitative 子页（T1，量化标准表：官方原文明确写「KONEX market does not apply the financial criteria such as sales amount and net profit」，即制度设计上不设营收/净利等财务数值门槛，仅设股份转让限制/审计意见须无保留/须签约指定顾问/须为中小企业/面值六档几项非财务标准）: https://global.krx.co.kr/contents/GLB/03/0303/0303070100/GLB0303070100T1.jsp（HTTP 200，2.6KB；⚠️ 无tab后缀的 GLB0303070100.jsp 落地页只有导航壳无正文，与既有KOSPI/KOSDAQ标准页同类"先探T1再探正文"的坑一致）
+  - KONEX Market Listing Criteria — Qualitative 子页（T2，定性标准表：管理层市场诚信记录/公司治理透明度/会计信息透明度/投资风险揭示等五项，同样不含财务数值）: https://global.krx.co.kr/contents/GLB/03/0303/0303070100/GLB0303070100T2.jsp（HTTP 200，2.7KB）
+  - ⚠️ 以下两条为 2026-09-05 任务五（数据空缺复核轨）所抓，定位方式：curl `main/main.jsp` 静态 HTML 里 grep `data-menu-id` 全站菜单锁定「Regulation›Stocks›KONEX Market›Trading」与「Equity Product›ETF Trading›Trading System/Settlement System›LP System」两个菜单项，未经 WebSearch
+  - Regulation ‧ Stocks ‧ KONEX Market ‧ Trading（KONEX 交易机制说明：交易时段/休市日/停牌/交易方式/卖空限制/清算结算/诚信保证金与 KOSDAQ 市场相同；⚠️ 枚举清单里**未出现涨跌停幅度/price limit**——本页不足以支撑「KONEX 涨跌停 = KOSDAQ ±30%」这一具体断言，`price_limits.other_boards` 因此仍留空，见 OPEN-QUESTIONS）: https://global.krx.co.kr/contents/GLB/06/0602/0602030101/GLB0602030101.jsp（HTTP 200，122KB）
+  - Equity Product ‧ ETF Trading ‧ Trading System/Settlement System ‧ LP System（ETF 流动性提供者制度正文：双边报价义务/价差比例 1% 阈值/单边报价豁免条件/最小申报数量 100 股・上限为上市份额 5% 或 1 亿股/评估与换 LP 条件，`market_structure.market_maker_scheme` 出处）: https://global.krx.co.kr/contents/GLB/06/0605/0605010102/GLB0605010102.jsp（HTTP 200，125KB）
+- `www.krx.co.kr`（韩文版官网首页） | 官方（韩文版） | ko | curl 常规 UA 200，未见反爬；本次仅取 `<title>` 标签确认官方韩文名称，未深入抓取韩文正文内容（本项目 source_lang 判定为 en，韩文版仅用于确认 native name，不作为事实来源） | `<title>` 标签内容为「한국거래소」，即 KRX 官方韩文名称
+  - 首页（仅用于确认 `<title>` 韩文名称）: http://www.krx.co.kr/main/main.jsp（HTTP 200，186KB）
+- `elaw.klri.re.kr`（韩国法制研究院官方英译法律数据库） | 监管（政府法律译本） | en | curl 常规 UA 200，单页 4.8MB（含该法历年全部修正版本堆叠在同一页，需按关键词/条号 grep 定位，不要整页阅读）| 《资本市场与金融投资业法》(Financial Investment Services and Capital Markets Act, FSCMA) 官方英译全文，现行版本 20260306。第1条：立法目的；第373条：无许可不得设立市场；第373-2条：设立交易所须获金融委员会（Financial Services Commission, FSC）许可，且须为《商法》下的股份有限公司（stock company）；第297/378/393/394/397/399/400条：交易所本身担任证券与衍生品市场清算机构/CCP的法律依据
+  - Financial Investment Services and Capital Markets Act（全文，含历次修正版本堆叠）: https://elaw.klri.re.kr/eng_service/lawTwoView.do?hseq=31782（HTTP 200，4.8MB）
+- `data.krx.co.kr` | 官方（KRX 数据门户） | ko | curl 常规 UA 200 | 市场数据/成交统计（infrastructure 出处）
+- `openapi.krx.co.kr` | 官方（KRX OpenAPI） | ko | curl 常规 UA 200 | 行情接口/数据延迟（data_latency 出处）
+- `www.openapi.krx.co.kr` | 官方（KRX OpenAPI，同上 www 前缀） | ko | curl 常规 UA 200 | 同上
+- `fss.or.kr` | 官方（金融监督院 FSS） | ko | curl 常规 UA 200 | 投资者保护/ suitability（investor_protection 出处）
+- `www.fss.or.kr` | 官方（FSS www 前缀） | ko | curl 常规 UA 200 | 同上
+- `www.fsc.go.kr` | 官方（金融委员会 FSC） | ko | curl 常规 UA 200；英文新闻页 `/eng/prXXXXXX/<id>` 同样 curl 200 | 监管框架（regulation 出处）；`dark_pool` 依据：FSC 于 2025-02-05 向 Nextrade 授予 ATS 最终许可、2025-03-04 开业的英文新闻稿 https://www.fsc.go.kr/eng/pr010101/83967（ATS 立法依据 2013 年立）
+- `nextrade.co.kr` | 官方（韩国首家 ATS Nextrade / NXT 自身官网） | en（`/en/` 路径）/ ko | curl 常规 UA 200 | `dark_pool` 依据：NXT 市场概览页——「Korea's first Alternative Trading Platform」「second stock trading venue alongside the Korea Exchange, established under the Financial Investment Services and Capital Markets Act」，打破韩国 50 年单一交易系统
+  - Market Overview: https://nextrade.co.kr/en/marketOverview/content.do
+- `law.kofia.or.kr` | 官方（韩国证券业协会 KOFIA） | ko | curl 常规 UA 200 | 自律规则/适当性（suitability_management 出处）
+- `www.kcmi.re.kr` | 官方（资本市场研究院 KCMI） | ko | curl 常规 UA 200 | 市场结构研究（market_structure 出处）
+- `www.k-otc.or.kr` | 官方（K-OTC 场外市场） | ko | curl 常规 UA 200 | 退市后场外转移（post_delisting_venue 出处）
+- `www.clearstream.com` | 官方（Clearstream 国际中央存托） | en | curl 常规 UA 200 | 国际存托/交收（clearing 出处）
+  - Settlement process – South Korea（KRX 上市股票「当日回转交易」same-day turnaround 规则的明文表述；2026-09-04 数据空缺复核轨任务二 `intraday_reversal` 回填所抓，curl 200，205KB）: https://www.clearstream.com/clearstream-en/res-library/market-coverage/settlement-process-south-korea-1283572
+- `en.sedaily.com` | 第三方（韩国经济日报英文） | en | WebSearch 定位 | 市场背景（confidence 封顶 medium）
+- `en.yna.co.kr` | 第三方（韩联社英文） | en | WebSearch 定位 | 政治/流动性风险（confidence 封顶 medium）
+- `www.koreaherald.com` | 第三方（韩国先驱报） | en | WebSearch 定位 | 流动性/政治风险（confidence 封顶 medium）
+- `www.asiae.co.kr` | 第三方（亚洲经济） | ko | WebSearch 定位 | 流动性风险（confidence 封顶 medium）
+- `www.kedglobal.com` | 第三方（KED 全球） | en | WebSearch 定位；curl 常规 UA 200 | 政治风险（confidence 封顶 medium）；`costs.exchange_fees` 的费率沿革佐证（KRX『single fee rate of 0.0023% for nearly 20 years』、2025-12 阶梯下调『initially in effect for two months』、永久性下调须经 FSC 市场效率委员会审议——2026-09-04 ADR-065 补登记）
+  - Korea Exchange to cut trading fees for 1st time in 2 decades（ked202510020003）: https://www.kedglobal.com/korean-stock-market/newsView/ked202510020003
+- `www.kchipnews.com` | 第三方（半导体新闻） | ko | WebSearch 定位 | 市场背景（confidence 封顶 medium）
+- `taxnews.ey.com` | 第三方（EY 税务） | en | WebSearch 定位 | 资本利得税（confidence 封顶 medium）
+- `www.mondovisione.com` | 第三方（交易所资讯） | en | WebSearch 定位 | 市场结构背景（confidence 封顶 medium）
+- `taxsummaries.pwc.com` | 第三方（四大税务简报） | en | curl 常规 UA 200 | 韩国印花税税种定性（stamp tax 针对"制备证明财产权设立/转让/变更的文书者"，非证券转让；`kr-krx.costs.stamp_duty` 的第三方佐证，封顶 confidence medium）；澳大利亚综合税种综述（`au-asx.costs.financial_transaction_tax`：印花税节仅提未上市实体股份转让、全篇无 FTT 条目，佐证 `type: none`——2026-09-04 ADR-067）；韩国股息预扣税税率表（`kr-krx.costs.dividend_withholding_tax`，2026-09-05 任务五）
+  - Korea, Republic of - Corporate - Other taxes: https://taxsummaries.pwc.com/republic-of-korea/corporate/other-taxes
+  - Australia - Corporate - Other taxes: https://taxsummaries.pwc.com/australia/corporate/other-taxes
+  - Korea, Republic of - Corporate - Withholding taxes（非居民股息/利息/特许权使用费预提税率表，含税收协定网络逐国税率；2026-09-05 任务五所抓）: https://taxsummaries.pwc.com/republic-of-korea/corporate/withholding-taxes
+
+- `elaw.klri.re.kr`（韩国法制研究院法律数据库英文版，2026-09-01 A3 补充登记） | 官方镜像（韩国法制研究院 KLRI 运营的法律英文数据库，含韩国现行法令英文译本） | en | curl + 常规 UA 200，正文为静态 HTML，逐字可抓取；⚠️ 每页标注『Translations provided here are for reference only, and are neither official nor legally effective』，同 `english.sse.com.cn`——引此域名的字段 confidence 封顶 medium | `costs.financial_transaction_tax` 出处，韩国《证券取引税法》(Securities Transaction Tax Law) 英文版明文以『transferor（让与人=卖方）』为纳税义务人，坐实韩国 STT 向卖方课征（side: sell）；`costs.stamp_duty` 出处，韩国《印花税法》(Stamp Tax Act) 第1条明定印花税纳税义务人为『文书制备者』、课税对象是文书而非证券转让，`type: none` 由『暂定』转为一手条文支撑（2026-09-04 ADR-065）
+  - 증권거래세법 (Securities Transaction Tax Law), English version: https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=46383
+  - STAMP TAX ACT（韩国《印花税法》英文版，hseq=64499）: https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=64499
+  - Act on the Establishment of Financial Services Commission（韩国《金融委员会设置法》英文版，hseq=47931；第 46/47/38 条 FSS 经费来源=政府/韩行拨款 + 受检机构分担金，`kr-krx.costs.regulatory_fees` 的 `type: none` 一手依据，2026-09-04 ADR-067）: https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=47931
