@@ -2356,13 +2356,13 @@ print('全库 medium 零 sources:',n)
 
 **定了什么：**
 
-1. **阈值：`DECISIONS.md` 超过 3500 行时触发归档**（现 2341 行，约 1.5 倍缓冲，与 [ADR-036] 给 `taxonomy.yml` 的比例一致）。触发后把最早一批 ADR（建议从 `ADR-001` 开始，按行数切到略低于新阈值）整体移入新文件 `PROJECT/DECISIONS-ARCHIVE.md`，`DECISIONS.md` 顶部加一行指向归档文件；`adr-index` 生成块（[ADR-077]）改为汇总 `DECISIONS.md` + `DECISIONS-ARCHIVE.md` 两处的编号索引，不因归档丢失可查性。
+1. **阈值：`DECISIONS.md` 超过 3500 行时触发归档**（现 2341 行，约 1.5 倍缓冲，与 [ADR-036] 给 `taxonomy.yml` 的比例一致）。触发后把最早一批 ADR（建议从 `ADR-001` 开始，按行数切到略低于新阈值）整体移入 `PROJECT/` 目录下新建的 `DECISIONS-ARCHIVE.md`（该文件本条不预先创建，见下方「没做」），`DECISIONS.md` 顶部加一行指向归档文件；`adr-index` 生成块（[ADR-077]）改为汇总 `DECISIONS.md` + `DECISIONS-ARCHIVE.md` 两处的编号索引，不因归档丢失可查性。
 2. **`tools/validate.py` 新增非阻断 warn**（`decisions_length_violations`/`validate_decisions_length`）：超过阈值时打印提醒但不 `err`，不阻断 `make build`——具体怎么拆、拆多少留给人判断，机器只负责按时提醒，不该替人拍板。`tools/selfcheck.py` 补 5 条合成用例覆盖边界（阈值内 / 恰好等于 / 超一行 / 消息内容含实际行数与阈值 / 默认阈值 3500 不误报当前体量）。
 3. **文档职责边界表（`CLAUDE.md` 一节）待归档真正发生时再补一行**——本条不预先给尚不存在的 `DECISIONS-ARCHIVE.md` 写权威声明，等真正触发拆分时随该次改动一并补。
 
 **没做：**
 
-- **没有现在就执行归档**——现 2341 行未超阈值，属于「先定触发条件，不预先破例」（[ADR-036] 的措辞）。
+- **没有现在就执行归档、也没有预先创建空的 `DECISIONS-ARCHIVE.md`**——现 2341 行未超阈值，属于「先定触发条件，不预先破例」（[ADR-036] 的措辞）；建一个当下用不上的空文件同样是预先破例。
 - **没有给 ADR 数量单独设一个计数阈值**——ADR 数与行数强相关，两个指标同时机器化是重复判据，行数够用。
 
 **验证：** `make build` 全绿；`selfcheck` 新增 5 条用例全部通过；`decisions_length_violations` 在真实 `DECISIONS.md`（本条落地后约 2360+ 行）上返回 `[]`，确认默认阈值 3500 不会现在就报警。
