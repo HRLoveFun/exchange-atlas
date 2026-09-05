@@ -87,6 +87,8 @@
 - ADR-080 · 2026-09-05 · 任务四第二人独立复核：78 处终态，22 处订正（含 2 处素材错挂），零幻觉
 - ADR-081 · 2026-09-05 · 自动合并流水线：CI build 检查 + auto-merge + ADR 定号 post-merge healer，§四"人工抽检"改"独立视角复核"
 - ADR-082 · 2026-09-05 · 数据空缺复核轨任务三执行方案：C 桶 40 处按「上次卡在哪」重排为五棒 + 三处范围裁定
+- ADR-083 · 2026-09-05 · tools/ 数据加载样板去重：新增 `tools/data_files.py`
+- ADR-084 · 2026-09-05 · DECISIONS.md 归档阈值：比照 taxonomy.yml 的「暂不拆，设阈值」范式
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2340,7 +2342,7 @@ print('全库 medium 零 sources:',n)
 
 **日期：** 2026-09-05
 
-### ADR-PENDING-tools-dedup — tools/ 数据加载样板去重：新增 `tools/data_files.py`
+### ADR-083 — tools/ 数据加载样板去重：新增 `tools/data_files.py`
 
 **背景：** 架构腐烂审查（用户 2026-09-05 拍板的优化方案任务 B）发现 `sync.py`/`verify_quotes.py`/`fetch_sources.py`/`check_en_terms.py` 四处独立实现「glob `data/exchanges/*.yml` + `yaml.safe_load`」这段样板——是 CLAUDE.md 一节「同一件事只手写一处」DRY 铁律在代码层的违反版本。目前只是几行样板、代价不大，但每新增一个脚本都要再抄一遍，且四处实现已经出现两种枚举写法（`p.stem` vs `p.name[:-4]`，语义相同、写法不同），是典型的会随脚本数量线性累积的重复。
 
@@ -2350,7 +2352,7 @@ print('全库 medium 零 sources:',n)
 
 **日期：** 2026-09-05
 
-### ADR-PENDING-decisions-archive-threshold — DECISIONS.md 归档阈值：比照 taxonomy.yml 的「暂不拆，设阈值」范式
+### ADR-084 — DECISIONS.md 归档阈值：比照 taxonomy.yml 的「暂不拆，设阈值」范式
 
 **背景：** 架构腐烂审查（用户 2026-09-05 拍板的优化方案任务 C）指出 `DECISIONS.md` 是唯一的 ADR 权威来源、只增不减（现 2341 行），且没有像 `ROADMAP.md`「历史归档」那样的分段机制——继续按近期节奏（[ADR-069]～[ADR-082] 十四条在约两天内写完）增长，几个月后会成为下一个「单文件失控」。[ADR-036] 处理过同类问题（`taxonomy.yml` 当时 818 行）：不预防性拆分，只设明确触发阈值（超 1200 行或第 12 章）。本条把同一范式套用到 `DECISIONS.md`。
 

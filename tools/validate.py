@@ -984,7 +984,7 @@ def validate_roadmap_inbox():
         err(msg)
 
 
-DECISIONS_MAXLINES = 3500  # 归档阈值（提醒性，非硬性），见 [ADR-PENDING-decisions-archive-threshold]
+DECISIONS_MAXLINES = 3500  # 归档阈值（提醒性，非硬性），见 [ADR-084]
 
 
 def decisions_length_violations(text, maxlines=DECISIONS_MAXLINES):
@@ -995,7 +995,7 @@ def decisions_length_violations(text, maxlines=DECISIONS_MAXLINES):
     n = text.count("\n") + (0 if text.endswith("\n") else 1)  # 与 `wc -l` 口径一致
     if n > maxlines:
         return [f"PROJECT/DECISIONS.md 已 {n} 行，超过归档阈值 {maxlines}"
-                f"（见 [ADR-PENDING-decisions-archive-threshold]）——该把最早一批 ADR 移入 DECISIONS-ARCHIVE.md 了"]
+                f"（见 [ADR-084]）——该把最早一批 ADR 移入 DECISIONS-ARCHIVE.md 了"]
     return []
 
 
