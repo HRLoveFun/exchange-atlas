@@ -75,3 +75,5 @@
   - 【行业深度】洞察2023：中国证券行业竞争格局及市场份额: https://www.qianzhan.com/analyst/detail/220/230518-3f033ad2.html
 - `zh.wikipedia.org` | 第三方（中文维基百科） | zh | curl 常规 UA 200，未见反爬 | 用于 `infrastructure.major_outage_history`：深交所历史系统故障事件（2002年卫星转发器干扰停市、1992年"8·10事件"），本次未核实到深交所官方对这两起事件的原始公告存档，confidence 依铁律封顶 medium
   - 深圳证券交易所（大事记章节）: https://zh.wikipedia.org/zh-hans/%E6%B7%B1%E5%9C%B3%E8%AF%81%E5%88%B8%E4%BA%A4%E6%98%93%E6%89%80
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Asia/Shanghai 的 UTC 偏移与无夏令时规则
+  - tzdb「asia」zone 文件（`Zone Asia/Shanghai` 行给出 +8 偏移、无夏令时 Rule）: https://data.iana.org/time-zones/tzdb/asia（HTTP 200，68KB）

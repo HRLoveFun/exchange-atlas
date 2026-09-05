@@ -20,9 +20,19 @@ overview:
   timezone:
     zh: "Asia/Shanghai (UTC+8)"
     en: "Asia/Shanghai (UTC+8)"
+    sources:
+      - title: IANA tz database「asia」zone 文件（Asia/Shanghai：UTC+8，全年无夏令时规则）
+        url: https://data.iana.org/time-zones/tzdb/asia
+        accessed: 2026-09-05
+    verified: 2026-09-05
   dst_rule:
     zh: "不实行夏令时"
     en: "No daylight saving time"
+    sources:
+      - title: IANA tz database「asia」zone 文件（Asia/Shanghai 全年无夏令时规则）
+        url: https://data.iana.org/time-zones/tzdb/asia
+        accessed: 2026-09-05
+    verified: 2026-09-05
 
   founded_year:
     zh: "1990（12月1日开业）"
@@ -121,6 +131,11 @@ overview:
   settlement_currency:
     zh: "人民币（B股为港元）"
     en: "RMB (HKD for B-shares)"
+    sources:
+      - title: 深圳证券交易所交易规则（2026年修订）第3.3.11条（B 股以港元计价申报；A 股以人民币计价）
+        url: https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf
+        accessed: 2026-09-05
+    verified: 2026-09-05
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境
@@ -158,7 +173,13 @@ regulation:
   clearing_regulator:
     zh: "中国证券监督管理委员会（对中国结算的监管）"
     en: "CSRC"
-    confidence: medium
+    sources:
+      - title: 中国结算遵循《金融市场基础设施原则》信息披露报告（执行摘要：根据《证券法》的规定，中国结算接受证监会监管）
+        url: http://www.chinaclear.cn/zdjs/xxxpl/202307/e8fcc5f599a34963b5c83c8ac07ece1d/files/中国结算遵循《金融市场基础设施原则》信息披露报告（2022）.pdf
+        accessed: 2026-09-05
+    quote: "根据《证券法》的规定，中国结算接受证监会监管"
+    confidence: high
+    verified: 2026-09-05
 
   core_laws:
     zh: "《中华人民共和国证券法》"
@@ -1055,7 +1076,12 @@ clearing:
   csd_name:
     zh: "中国证券登记结算有限责任公司（与 CCP 为同一机构）"
     en: "ChinaClear"
+    sources:
+      - title: 中国结算遵循《金融市场基础设施原则》信息披露报告（机构全称与中央证券登记/存管机构角色的官方披露）
+        url: http://www.chinaclear.cn/zdjs/xxxpl/202307/e8fcc5f599a34963b5c83c8ac07ece1d/files/中国结算遵循《金融市场基础设施原则》信息披露报告（2022）.pdf
+        accessed: 2026-09-05
     confidence: medium
+    verified: 2026-09-05
 
   guarantee_model:
     enum: ccp_novation
