@@ -113,7 +113,15 @@ regulation:
     confidence: medium
 
   self_regulatory_org:
-    zh: "中国证券业协会（券商层面）；交易所自身对上市公司行使一线自律监管职能"
+    zh: "一线自律监管：上海证券交易所自身承担对上市公司与会员的一线自律监管职能（官方简介明列其职能包括『组织和监督证券交易；对会员进行监管』等，且『受中国证监会监督和管理』）；券商层面另有中国证券业协会（自律组织）承担行业自律职责"
+    en: "Front-line self-regulation: the Shanghai Stock Exchange itself exercises front-line self-regulatory functions over listed companies and members (its official profile lists 'organising and supervising securities trading; regulating members' among its functions, operating 'under the supervision and administration of the CSRC'); at the broker level, the Securities Association of China (SAC) undertakes industry self-regulation"
+    detail: "由 low 升级：以本所官网『本所简介』一手坐实交易所的自律监管职能与证监会监管关系；证券业协会一句为制度常识性补充，未单独登记来源，不作为字段主要论断。"
+    sources:
+      - title: "本所简介（上海证券交易所官网，成立时间、职能与证监会监管关系的官方表述）"
+        url: https://www.sse.com.cn/aboutus/overview/
+        accessed: 2026-09-05
+    quote: "上海证券交易所成立于1990年11月26日，同年12月19日开业，受中国证监会监督和管理。 ... 组织和监督证券交易；对会员进行监管"
+    confidence: medium
     en: "Securities Association of China (SAC)"
     confidence: low
     detail: "SAC 官网本次抓取失败（HTTP 异常），其与交易所自律监管的职责边界未逐条核实，见 OPEN-QUESTIONS。"
@@ -456,14 +464,15 @@ market_structure:
 
   short_selling:
     enum: restricted_list
-    spec: {naked_allowed: false, uptick_rule: null, borrow_required: true, note: "融资融券制度，限指定标的范围内进行；报升规则具体表述本次未核实（confidence: low）"}
-    zh: "融资融券制度，限指定标的范围内进行"
-    en: "Margin Trading and Short Selling"
-    confidence: low
-    detail: "报升规则、标的范围等具体细则未逐条核实，留待后续核实。en 术语已用 SSE 官方英文译本确认存在
-      对应条款（3.2.11：会员为客户证券交易提供融资融券服务的，应当按照有关规定办理），但该条未覆盖
-      「限指定标的范围」这一具体限制的表述，故 confidence 维持 low，不因新增英文来源而上调。"
+    spec: {naked_allowed: false, uptick_rule: null, borrow_required: true, note: "融资融券制度，限指定标的范围内进行；报升规则具体表述未核实；转融券业务 2024-07-11 起暂停（见 sources）"}
+    zh: "融券（卖空）经融资融券制度在指定标的范围内进行（裸卖空不允许、须借券），且处于持续收紧的逆周期调节之下：2024-07-10 经证监会批准，中证金融公司暂停转融券业务（自 2024-07-11 起实施），融券卖空的实际可用券源因此大幅收缩"
+    en: "Securities lending (short selling) runs through the margin-trading regime on designated eligible securities (no naked shorting; borrowing required), under progressively tightening counter-cyclical adjustment: with CSRC approval, China Securities Finance suspended its securities-refinancing business from 11 July 2024, materially shrinking the lendable supply for short selling"
+    confidence: medium
+    detail: "报升规则、标的范围等具体细则未逐条核实。en 术语已用 SSE 官方英文译本确认存在对应条款（3.2.11：会员为客户证券交易提供融资融券服务的，应当按照有关规定办理）。由 low 升级：2024-07 转融券暂停以上交所官网要闻一手坐实（见 sources），「融券券源大幅收缩」的判断由此有了官方事件锚点；报升规则表述仍未核实，故不到 high。"
     sources:
+      - title: "证监会依法批准暂停转融券业务 进一步强化融券逆周期调节（上交所官网要闻，2024-07-10）"
+        url: https://www.sse.com.cn/home/component/news/c/c_20240710_10759727.shtml
+        accessed: 2026-09-05
       - title: "Trading Rules of Shanghai Stock Exchange (2026 Revision) 第3.2.11条 — SSE 官方英文译本，仅供参考，中文本为准"
         url: https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf
         accessed: 2026-08-13
@@ -810,14 +819,25 @@ participants:
     confidence: high
 
   suitability_management:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：科创板设置投资者适当性门槛（如50万元资产+2年交易经验）——未核实最新标准原文，留空。"
+    zh: "投资者适当性管理制度为全市场统一框架：依《证券期货投资者适当性管理办法》（证监会令第130号公布，经2020年修订），向投资者销售证券期货产品或提供服务的经营机构须了解投资者信息、进行风险承受能力评估并做适当性匹配；在此基础上分板块设置准入门槛（如科创板另设资产与交易经验门槛，未核实最新标准原文，见 detail）"
+    en: "A unified investor-suitability regime applies market-wide: under the Measures for the Administration of Suitability Management of Securities and Futures Investors (CSRC Order No. 130, revised 2020), institutions selling securities/futures products or providing services must understand investor information, assess risk tolerance and match products appropriately; individual boards add entry thresholds on top (e.g. STAR Market asset/trading-experience gates — latest criteria not verified, see detail)"
+    sources:
+      - title: "证券期货投资者适当性管理办法（中国证监会官网全文，令第130号公布、2020年修订）"
+        url: https://www.csrc.gov.cn/csrc/c106256/c1653849/content.shtml
+        accessed: 2026-09-05
+    quote: "第一条 为了规范证券期货投资者适当性管理，维护投资者合法权益，根据《 证券法 》《 证券投资基金法 》《 证券公司监督管理条例 》《 期货交易管理条例 》及其他相关法律、行政法规，制定本办法。 第二条 向投资者销售公开或者非公开发行的 证券 、公开或者非公开募集的 证券投资基金 和 股权投资基金 （包括创业投资基金，以下简称基金）、公开或者非公开转让的期货及其他衍生产品，或者为投资者提供相关业务服务的，适用本办法。"
+    confidence: medium
 
   foreign_access_channel:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：QFII/RQFII、沪港通北向资金等渠道——未核实细节，留空。"
+    zh: "境外投资者参与沪市的两个制度通道：①合格境外机构投资者（QFII）/人民币合格境外机构投资者（RQFII）制度——境外机构依《合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法》经托管人办理开户与投资，持股比例受单一/全部境外投资者上限约束（见 regulation.foreign_ownership_limit）；②沪港通下的沪股通——香港及境外投资者经香港交易所买卖沪市标的（机制细节未在本次单独登记来源，见 detail）"
+    en: "Two institutional channels for foreign participation in the SSE market: (1) the QFII/RQFII regime — qualified foreign institutions open accounts and invest through custodians under the QFII/RQFII Measures, subject to single/all-foreign-investor ownership caps (see regulation.foreign_ownership_limit); (2) Shanghai-Hong Kong Stock Connect (Northbound) — Hong Kong and overseas investors trade SSE-eligible stocks via HKEX (mechanism details not separately source-registered this session, see detail)"
+    detail: "原『草稿印象：QFII/RQFII、沪港通北向资金等渠道』以已在缓存的《合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法》实施规定 PDF（regulation.foreign_ownership_limit 同一来源）坐实 QFII/RQFII 通道；沪股通通道作为制度常识写入，其专项规则（沪港通试点办法）未单独登记，留待后续补源。"
+    sources:
+      - title: "《关于实施〈合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法〉有关问题的规定》PDF（证监会公告，regulation.foreign_ownership_limit 同源）"
+        url: https://www.sse.com.cn/lawandrules/regulations/csrcannoun/c/10117179/files/9cdbd4b41fc3453e8f8a036719ea8e24.pdf
+        accessed: 2026-09-05
+    quote: "第七条 境外投资者的合格境外机构投资者证券账户或人民币合格境外机构投资者证券账户"
+    confidence: medium
 
   membership_structure:
     zh: "会员制，会员为证券公司等持牌机构"
@@ -897,9 +917,15 @@ infrastructure:
     detail: "未核实现行核心交易系统的对外公开名称，留空。"
 
   access_methods:
-    zh: "会员通过交易单元接入；行情与交易数据另有第三方数据商分发"
-    en: "Members connect via trading units; market and trading data are also distributed by third-party data vendors"
-    confidence: low
+    zh: "交易接入与数据分发分层：证券公司等会员经交易系统接入本所市场开展经纪业务；行情与数据信息由上交所全资子公司上证所信息网络有限公司（SSE Infonet）独家全权经营——负责上证所即时行情在境内外的经营（境外实时行情由其在港子公司中国投资信息有限公司发售），提供 Level-1 及 Level-2 两种行情信息服务，并向会员单位、上市公司、投资者等市场参与者开发提供个性化数据产品"
+    en: "Trading access and data distribution are layered: securities companies and other members access the market through the Exchange's trading system for brokerage business; market data is exclusively operated by SSE Infonet, the SSE wholly-owned subsidiary, which manages the licensing of SSE real-time quotes domestically and abroad (overseas real-time data sold by its Hong Kong subsidiary China Investment Information Ltd), offering Level-1 and Level-2 market data services plus bespoke data products to members, listed companies and investors"
+    detail: "由 low 升级：『会员接入』沿用原结构性表述；数据分发一侧以 sseinfo.com 公司介绍官方页一手坐实（独家全权经营/两级行情/子公司境外发售）。"
+    sources:
+      - title: "公司介绍（上证所信息网络有限公司官网，独家全权经营与 Level-1/Level-2 行情服务的官方表述）"
+        url: https://www.sseinfo.com/aboutus/introduction/
+        accessed: 2026-09-05
+    quote: "公司作为上海证券交易所证券信息独家全权经营机构，负责上证所即时行情在境内外的经营业务，其中，在香港注册运营的子公司--中国投资信息有限公司负责对境外客户的实时行情发售。目前提供上证所Level-1及Level-2行情两种行情信息服务。"
+    confidence: medium
 
   major_outage_history:
     zh: "2024年9月27日，本所股票竞价交易出现成交确认缓慢的异常情况并影响交易，经处置于11点13分起逐步恢复交易，本所随后发布公告致歉"
@@ -1064,9 +1090,21 @@ risks:
     confidence: high
 
   regulatory_change_risk_note:
-    zh: ""
-    confidence: low
-    detail: "草稿印象：近年注册制、退市制度等改革频繁，规则变动速度较快——未附具体来源，留空。"
+    zh: "监管规则处于高频修订期，规则变动风险较高：可核实的官方样本包括——《股票上市规则》2026年4月修订（整合修订持续生效文本）、《股票发行上市审核规则》2024年4月修订、2024-07-11 起暂停转融券业务等融券逆周期调整措施；上市、审核与交易环节的核心规则近年均经历多次修订，参与者需要持续跟踪规则版本变化"
+    en: "Regulatory rules are in a high-frequency revision cycle, making rule-change risk material: verifiable official samples include the April 2026 revision of the Listing Rules (consolidated and in force), the April 2024 revision of the Issuance and Listing Review Rules, and the suspension of securities refinancing (转融券) from 11 July 2024; core listing, review and trading rules have all seen multiple revisions in recent years, so participants must track rule-version changes continuously"
+    detail: "分析性字段：以三份已在缓存的官方文件（上市规则 2026 修订 DOCX、审核规则 2024 修订 DOCX、转融券暂停要闻）作为『规则高频修订』的正面事件锚点；『规则变动风险较高』为基于修订频率的归纳判断，非引用专门论述该风险的官方文本。"
+    sources:
+      - title: "《上海证券交易所股票上市规则（2026年4月修订）》全文 DOCX（2026-04-24 发布）"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/10816589/files/0017fa2bde184b53b43c046d503f54d0.docx
+        accessed: 2026-09-05
+      - title: "《上海证券交易所股票发行上市审核规则（2024年4月修订）》全文 DOCX"
+        url: https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/review/firstepisode/c/10778841/files/327d65c5e46d4e7d926e4ecc70e4c6d9.docx
+        accessed: 2026-09-05
+      - title: "证监会依法批准暂停转融券业务（上交所官网要闻，2024-07-10）"
+        url: https://www.sse.com.cn/home/component/news/c/c_20240710_10759727.shtml
+        accessed: 2026-09-05
+    quote: "证监会依法批准中证金融公司暂停转融券业务的申请，自2024年7月11日起实施。"
+    confidence: medium
 
   enforcement_note:
     zh: ""
