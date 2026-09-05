@@ -12,6 +12,7 @@
   - 期权业务规则列表页（服务端直出，可直接 curl 拿到各条目详情页链接，与上条同一发现）: https://www.szse.cn/option/rules/optrules/
   - 关于发布《深圳证券交易所股票期权试点交易规则》的通知（附件为交易规则原文 PDF，见下一条）: https://www.szse.cn/option/rules/optrules/t20191207_572478.html
   - 深圳证券交易所股票期权试点交易规则（2019-12-07 发布，深证上〔2019〕800号，自发布之日起施行；本次 WebSearch 直接搜索该文件名多次未命中，最终通过上面的官方通知详情页取得附件真实链接；规则原文未见「XXXX年修订」字样，且未搜到任何后续修订通知，视为现行有效版本，但下次会话如需再次引用建议先按 SOURCES.md 开头教训 3 的方法重新探测一遍）PDF: http://docs.static.szse.cn/www/option/rules/optrules/W020191207434561721119.pdf ← market_structure.derivatives 除保证金公式外的绝大部分字段（交易时段/开收盘机制/撮合原则/订单类型/最小报价单位/涨跌停公式/熔断/交易异常情况处置/大宗交易/做市商）出处
+  - 深圳证券交易所深港通业务实施办法（2024年修订；任务三棒 2 衍生品 connect_schemes 正面化新增——第十六条穷举列示深股通标的证券仅为「股票」与「股票 ETF」两类，不含本所挂牌期权，是「深港通不覆盖衍生品」的正面依据）PDF: http://docs.static.szse.cn/www/szhk/szhkrulesdirector/szhkrules/W020240614673497419312.pdf
   - 深圳证券交易所 中国证券登记结算有限责任公司股票期权试点风险控制管理办法（第十四-二十条为开仓/维持保证金计算公式，ETF为标的12%/7%、股票为标的21%/10%与19%/10%两套）PDF: http://docs.static.szse.cn/www/option/rules/optrules/W020191207433397366259.pdf ← market_structure.derivatives.margin_practice_note 主要出处
   - 关于嘉实沪深300ETF期权合约品种上市交易有关事项的通知（沪深300ETF期权2019-12-23上市、持仓限额分级表）: https://www.szse.cn/option/rules/optrules/t20191219_572722.html
   - SZSE English — CSI 300 ETF Options（英文版合约条款页：合约乘数10,000/行权价间距表/涨跌停公式/保证金公式，均与上述中文来源交叉核对一致，仅作辅助佐证，未作为 derivatives 字段 quote 的主要来源，因 source_lang 为 zh）: https://www.szse.cn/English/products/options/etf/index.html

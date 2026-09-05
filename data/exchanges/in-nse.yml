@@ -700,9 +700,15 @@ market_structure:
         quote: "Equity Derivatives / Trading sessions / Time / Normal Market Open Time / 09:15 hrs. / Normal Market Close Time / 15:40 hrs. / Trade Modification End Time / 16:15 hrs."
         confidence: high
       after_market:
-        zh: ""
-        confidence: low
-        detail: "官网 Market Timings 页「Equity Derivatives」折叠区块只列 Normal Market Open/Close 与 Trade Modification End 三行，未见独立盘后连续交易时段，未做「无」的断言，留空。"
+        zh: "无盘后时段——官方 Market Timings 页的 Equity Derivatives 区块仅列 Normal Market Open（09:15）、Normal Market Close（15:40）与 Trade Modification End（16:15）三条，无盘后/收盘后交易时段（对照：现货区块明列 Closing session 15:40–16:00 与 Block Deal 时段，衍生品区块无对应条目）"
+        en: "No after-market session — the official Market Timings page's Equity Derivatives block lists only Normal Market Open (09:15), Normal Market Close (15:40) and Trade Modification End (16:15), with no post-close trading session (by contrast, the cash-equities block explicitly lists a Closing session 15:40–16:00 and Block Deal sessions, which the derivatives block lacks)"
+        sources:
+          - title: Market Timings（官网，Derivatives Market 折叠区块 + Equities 区块对照）
+            url: https://www.nseindia.com/static/market-data/market-timings
+            accessed: 2026-08-18
+        quote: "Equity Derivatives Trading sessions Time Normal Market Open Time 09:15 hrs. Normal Market Close Time 15:40 hrs. Trade Modification End Time 16:15 hrs. ... Closing session Open 15:40 hrs Closing session Close 16:00 hrs"
+        confidence: medium
+        detail: "棒 2「负面断言正面化」（[ADR-082]）：Market Timings 页对全部分部时段做穷举列示，Equity Derivatives 区块无盘后条目而现货区块明列 Closing session，据此以 medium 记「无盘后时段」的结构性推断（官方无「不设盘后」明文，不标 high）。"
       night_session:
         zh: "股票/股指衍生品本身无夜盘；但同为衍生品业务线的商品衍生品（非农品种）时段可延至夜间23:30/23:55（跨美国夏令时调整），跨货币货币衍生品（EURUSD/GBPUSD/USDJPY交叉盘）收市时间也明显晚于股票/股指衍生品，具体见 contract_specs_note"
         en: "No night session for equity/index derivatives themselves; but the commodity derivatives line (non-agri) extends to 23:30/23:55 (adjusted for US daylight-saving), and cross-currency derivatives (EURUSD/GBPUSD/USDJPY) close markedly later than equity derivatives — see contract_specs_note"
@@ -729,9 +735,15 @@ market_structure:
       confidence: high
 
     closing_mechanism:
-      zh: ""
-      confidence: low
-      detail: "本次抓取的官方页面（About Equity Derivatives、Pre-Open Session、Trading System、Market Timings）均未提及类似现货市场收盘集合竞价（CAS，15:40-16:00）的独立衍生品收盘机制；Market Timings 页「Equity Derivatives」区块只列 Normal Market Close 15:40 与 Trade Modification End 16:15，未见「Closing session」条目（对照现货 Equities 区块明确有该条目）。不排除存在但本次抓取范围内未找到专门说明页，如实留空，记入 OPEN-QUESTIONS。"
+      zh: "无收盘集合竞价等独立收盘机制：衍生品正常连续交易至 15:40 收盘，官方 Market Timings 页 Equity Derivatives 区块无收盘竞价条目（现货市场设 Closing session 15:40–16:00，衍生品区块无对应时段）；其后仅有会员端报单修改截止时点（16:15），非市场时段"
+      en: "No independent closing mechanism (no closing call auction): derivatives trade continuously to the 15:40 normal market close; the official Market Timings page's Equity Derivatives block has no closing-auction entry (the cash market has a Closing session 15:40–16:00, absent from the derivatives block); the only later item, Trade Modification End Time 16:15, is a member-side cut-off, not a market session"
+      sources:
+        - title: Market Timings（官网，Derivatives Market 折叠区块 + Equities 区块对照）
+          url: https://www.nseindia.com/static/market-data/market-timings
+          accessed: 2026-08-18
+      quote: "Equity Derivatives Trading sessions Time Normal Market Open Time 09:15 hrs. Normal Market Close Time 15:40 hrs. Trade Modification End Time 16:15 hrs. ... Closing session Open 15:40 hrs Closing session Close 16:00 hrs"
+      confidence: medium
+      detail: "棒 2「负面断言正面化」（[ADR-082]）：此前 [ADR-021] 记「不排除存在但未找到专门说明页」；本次改用「穷举性原文」判据——Market Timings 页即全分部时段的完整列示，现货区块明列 Closing session 而衍生品区块无，据此以 medium 记结构性推断（无官方「不设收盘竞价」明文，不标 high）。"
 
     matching_principle:
       enum: price_time
@@ -876,9 +888,15 @@ market_structure:
       confidence: low
 
     block_trade:
-      zh: ""
-      confidence: low
-      detail: "现货市场设有专门的大宗交易时段（Block Deal session，08:45-09:00与14:05-14:20，见顶层 market_structure.block_trade），但 Market Timings 页「Equity Derivatives」折叠区块只列 Normal Market Open/Close 与 Trade Modification End 三行，未见衍生品分部有平行的 Block Deal 时段，不确定衍生品市场是否有对应机制（或走场外/其他申报渠道），本次未能进一步核实，如实留空。"
+      zh: "无大宗交易时段：官方 Market Timings 页 Equity Derivatives 区块仅列正常市场开/收盘与报单修改截止三条，无 Block Deal 时段（现货区块明列 Block Deal session 1 08:45–09:00 与 session 2 14:05–14:20，衍生品区块无对应条目）"
+      en: "No block-deal session: the official Market Timings page's Equity Derivatives block lists only Normal Market Open/Close and the trade-modification cut-off, with no Block Deal session (the cash-equities block explicitly lists Block Deal session 1 08:45–09:00 and session 2 14:05–14:20, absent from the derivatives block)"
+      sources:
+        - title: Market Timings（官网，Derivatives Market 折叠区块 + Equities 区块对照）
+          url: https://www.nseindia.com/static/market-data/market-timings
+          accessed: 2026-08-18
+      quote: "Equity Derivatives Trading sessions Time Normal Market Open Time 09:15 hrs. Normal Market Close Time 15:40 hrs. Trade Modification End Time 16:15 hrs. ... Block Deal session 1 Open 08:45 hrs Block Deal session 1 Close 09:00 hrs ... Block Deal session 2 Open 14:05 hrs Block Deal session 2 Close 14:20 hrs"
+      confidence: medium
+      detail: "棒 2「负面断言正面化」（[ADR-082]）：同 closing_mechanism 的判据——Market Timings 页穷举列示各分部时段，现货区块明列 Block Deal session 而衍生品区块无，据此以 medium 记「无大宗交易时段」的结构性推断；衍生品大额申报是否另有场外/其他渠道本次未核实。"
 
     market_maker_scheme:
       zh: "设有流动性提升计划（Liquidity Enhancement Scheme, LES），面向指定做市商（Designated Market Maker）提供业务量/持仓量相关的分级激励，并要求做市商向客户披露其做市商身份以避免利益冲突；本次抓取页面明确列出的适用产品集中在商品衍生品分部（白银30公斤期权、电力期货、迪拜原油期货），未能确认股票/股指衍生品分部当前是否有正在运行的LES产品（页面同时显示「本月无做市商」提示，可能反映的是抓取当月的临时状态而非长期无该产品线LES）"

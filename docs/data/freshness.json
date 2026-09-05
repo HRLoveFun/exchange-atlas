@@ -11045,6 +11045,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.closing_mechanism",
+      "label_zh": "收盘机制",
+      "label_en": "Closing Mechanism",
+      "volatility": "moderate",
+      "verified": "2026-08-12",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "hk-hkex",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "derivatives.matching_principle",
       "label_zh": "撮合原则",
       "label_en": "Matching Principle",
@@ -12329,6 +12341,18 @@
       "chapter": "market_structure",
       "chapter_label_zh": "市场结构与交易机制",
       "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.trading_sessions.after_market",
+      "label_zh": "盘后",
+      "label_en": "After-market",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "in-nse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
       "field_path": "derivatives.trading_sessions.night_session",
       "label_zh": "夜盘",
       "label_en": "Night Session",
@@ -12347,6 +12371,18 @@
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "in-nse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.closing_mechanism",
+      "label_zh": "收盘机制",
+      "label_en": "Closing Mechanism",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
     },
     {
       "exchange_id": "in-nse",
@@ -12443,6 +12479,18 @@
       "volatility": "moderate",
       "verified": "2026-08-14",
       "confidence": "low"
+    },
+    {
+      "exchange_id": "in-nse",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.block_trade",
+      "label_zh": "大宗交易",
+      "label_en": "Block Trade",
+      "volatility": "moderate",
+      "verified": "2026-08-14",
+      "confidence": "medium"
     },
     {
       "exchange_id": "in-nse",
@@ -14962,6 +15010,18 @@
       "label_en": "Margin Practice",
       "volatility": "moderate",
       "verified": "2026-08-16",
+      "confidence": "high"
+    },
+    {
+      "exchange_id": "kr-krx",
+      "chapter": "market_structure",
+      "chapter_label_zh": "市场结构与交易机制",
+      "chapter_label_en": "Market Structure & Trading Mechanism",
+      "field_path": "derivatives.connect_schemes",
+      "label_zh": "互联互通/跨境安排",
+      "label_en": "Connect / Cross-border Schemes",
+      "volatility": "moderate",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {

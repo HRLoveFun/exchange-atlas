@@ -666,9 +666,15 @@ market_structure:
       confidence: high
 
     closing_mechanism:
-      zh: ""
-      confidence: low
-      detail: "本次抓取的官方页面（衍生品市场交易机制总览、交易时段表）未提及类似证券市场收市集合竞价（CAS）的独立收市机制，仅确认各合约每日交易时段的收盘时刻（如下午4:30，即月合约最后交易日提前至下午4:00）；不排除存在但本次未找到专门说明页，如实留空，记入 OPEN-QUESTIONS。"
+      zh: "无独立收盘机制（无收盘集合竞价）：HKEX 官方衍生品交易时段表穷举列示各合约全部时段——开市前议价时段、日盘（早市/午市）与收市后交易（AHT/T+1 Session），日盘连续交易至收盘时刻结束（以恒指系列为样本：正常交易日午市 1:00 p.m.–4:30 p.m.，月合约最后交易日提前至 4:00 p.m.），其后并无收盘集合竞价环节"
+      en: "No separate closing mechanism (no closing call auction): the official HKEX derivatives trading-hours table enumerates all sessions exhaustively — Pre-Market Opening Period, Day Session (Morning/Afternoon) and After-Hours Trading (AHT / T+1 Session); the day session runs continuously to its close (sampled by the Hang Seng Index series: 1:00 p.m.–4:30 p.m. on normal trading days, 4:00 p.m. on the last trading day of the spot month), with no closing call auction after it"
+      sources:
+        - title: Trading Hours - Derivatives Market（HKEX 官网，穷举式时段表）
+          url: https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Derivatives-Market?sc_lang=en
+          accessed: 2026-08-17
+      quote: "Equity Contract Trading Day Day Session AHT Session Morning Session Afternoon Session ... Hang Seng Index Futures Normal Trading Days 9:15 a.m.* - 12:00 noon 1:00 p.m.* - 4:30 p.m. 5:00 p.m. - 03:00 a.m. the next day Last Trading Day of Spot Month Contract 1:00 p.m.* - 4:00 p.m. No AHT"
+      confidence: medium
+      detail: "棒 2「负面断言正面化」（[ADR-082]）：此前 [ADR-021] 记「不排除存在但未找到专门说明页」；本次改用「穷举性原文」判据——官方时段表本身即各合约时段的完整列示，据此以 medium 记结构性推断（表上无收盘竞价条目 ≠ 官方明文「不设」，故不标 high）。与现货市场（收盘竞价 4:00–4:10 p.m. 随机收市，见顶层 closing_mechanism）形成对照。"
 
     matching_principle:
       enum: price_time
