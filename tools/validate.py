@@ -276,6 +276,26 @@ def numbers_missing_from_quote(value_texts, quote):
     return nums, missing
 
 
+def derivatives_spec_shape_violations(spec_shapes):
+    """schema/spec.yml「两侧同源」不变式（任务三棒 0，[ADR-082]）：
+    `market_structure.derivatives.*` 的 spec 形状必须与现货侧顶层同名形状内容一致。
+    spec.yml 里 derivatives 侧一律用 YAML anchor（*别名）复用顶层形状——手抄一份
+    或日后改了顶层忘同步 derivatives，都会在这里被拦下。"""
+    out = []
+    prefix = "market_structure.derivatives."
+    for key, shape in spec_shapes.items():
+        if not key.startswith(prefix):
+            continue
+        top_key = "market_structure." + key[len(prefix):]
+        if top_key not in spec_shapes:
+            out.append(f"schema/spec.yml: `{key}` 有形状定义，但现货侧顶层 `{top_key}` 没有对应形状"
+                       f"——derivatives 侧必须与顶层同源")
+        elif spec_shapes[top_key] != shape:
+            out.append(f"schema/spec.yml: `{key}` 与顶层 `{top_key}` 形状不一致"
+                       f"——derivatives 侧必须用 YAML anchor（*别名）复用顶层形状，不得手抄")
+    return out
+
+
 def spec_number_strings(spec):
     """递归收集 spec 子块里所有数值型叶子（int/float/纯数字串），转成字符串集合。
     Phase 1 给 market_structure 加 spec 后这条校验才有对象；在那之前是 no-op。"""
@@ -1002,6 +1022,8 @@ def main():
 
     spec_path = ROOT / "schema" / "spec.yml"
     spec_shapes = (sync.load_yaml(spec_path).get("fields") if spec_path.exists() else None) or {}
+    for msg in derivatives_spec_shape_violations(spec_shapes):
+        err(msg)
 
     validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered_domains, domain_tags, spec_shapes)
     validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchanges_expanded)

@@ -260,6 +260,36 @@ case("inbox 自定义上限：maxlen=10 时 11 字的行违规",
      len(validate.inbox_line_violations(_INBOX_TMPL.format(body="- 这是一句普通长度的话"), maxlen=10)), 1)
 
 
+# ══════════════════════════════════════════════════════════════
+# [ADR-082] 任务三棒 0 · spec 形状两侧同源：
+#   validate.derivatives_spec_shape_violations(spec_shapes)
+#   —— market_structure.derivatives.* 形状必须与现货侧顶层同名形状内容一致
+#   （spec.yml 里用 YAML anchor 复用）。取违规消息列表。
+# ══════════════════════════════════════════════════════════════
+def _dv_shapes(shapes):
+    return validate.derivatives_spec_shape_violations(shapes)
+
+
+case("deriv-spec-shape 合法：anchor 复用（两侧内容一致）",
+     _dv_shapes({"market_structure.circuit_breaker": {"keys": {"type": "x"}},
+                 "market_structure.derivatives.circuit_breaker": {"keys": {"type": "x"}}}), [])
+case("deriv-spec-shape 违规：顶层形状不存在",
+     len(_dv_shapes({"market_structure.derivatives.circuit_breaker": {"keys": {}}})), 1)
+case("deriv-spec-shape 违规：两侧漂移（改了顶层忘同步 derivatives）",
+     _dv_shapes({"market_structure.circuit_breaker": {"keys": {"type": "x"}},
+                 "market_structure.derivatives.circuit_breaker": {"keys": {"type": "y"}}}),
+     ["schema/spec.yml: `market_structure.derivatives.circuit_breaker` 与顶层"
+      " `market_structure.circuit_breaker` 形状不一致——derivatives 侧必须用"
+      " YAML anchor（*别名）复用顶层形状，不得手抄"])
+case("deriv-spec-shape 计数：多条漂移各报一条",
+     len(_dv_shapes({"market_structure.tick_size": {"keys": {"a": 1}},
+                     "market_structure.derivatives.tick_size": {"keys": {"a": 2}},
+                     "market_structure.derivatives.order_types": {"keys": {}}})), 2)
+case("deriv-spec-shape 不误伤：纯顶层形状 / 非 derivatives 前缀不检查",
+     _dv_shapes({"market_structure.tick_size": {"keys": {}},
+                 "costs.stamp_duty": {"keys": {}}}), [])
+
+
 def main():
     fails = [(n, g, w) for n, g, w in CASES if g != w]
     for n, g, w in CASES:

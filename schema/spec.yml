@@ -29,6 +29,10 @@
 # [ADR-045]（2026-08-30）Phase 3 成本瀑布：第十一章 6 个按笔显性成本字段
 # （commission_structure / exchange_fees / clearing_fees / regulatory_fees /
 # stamp_duty / financial_transaction_tax）共用一份 cost_layer 形状。其余章节 Phase 3。
+# [ADR-082]（2026-09-05）任务三棒 0：`market_structure.derivatives.*` 子块的 14 个
+# 同名字段用 YAML anchor（*别名）复用现货侧顶层形状——语义同构、不新造形状；
+# 两侧同源由 validate.py 的 derivatives_spec_shape_violations() 机器强制
+# （手抄一份或两侧漂移都会被拦），正负向用例固化在 tools/selfcheck.py。
 
 fields:
 
@@ -47,7 +51,7 @@ fields:
   market_structure.trading_sessions.after_market: *session
   market_structure.trading_sessions.night_session: *session
 
-  market_structure.opening_mechanism:
+  market_structure.opening_mechanism: &opening_mechanism
     doc: "开盘价的形成方式。"
     keys:
       type: "call_auction / continuous_direct（直接连续竞价）/ dmm_auction（做市商主持）"
@@ -56,7 +60,7 @@ fields:
       randomised_seconds: "int，可选——出清时刻在此秒数内随机触发（如 ASX 15s）"
       note: "string，可选"
 
-  market_structure.closing_mechanism:
+  market_structure.closing_mechanism: &closing_mechanism
     doc: "收盘价的形成方式。"
     keys:
       type: "call_auction / last_price（末笔成交价）/ vwap_window（尾盘 VWAP）/ dmm_auction"
@@ -67,7 +71,7 @@ fields:
       trade_at_close_end: "HH:MM，可选——收盘后按收盘价撮合的延长窗口结束时刻"
       note: "string，可选"
 
-  market_structure.price_limits.main_board:
+  market_structure.price_limits.main_board: &price_limits_main_board
     doc: >
       主板 / 主力合约的每日价格限制。y 轴的墙。形态之一：
       (1) 百分比 limit_pct + reference + symmetric，非对称用 limit_pct_up / limit_pct_down；
@@ -88,7 +92,7 @@ fields:
       full_table_note: "string——ladder 只含 quote 撑得住的锚点时，说明完整表在哪"
       note: "string"
 
-  market_structure.circuit_breaker:
+  market_structure.circuit_breaker: &circuit_breaker
     doc: >
       全市场 / 指数级 / 合约级熔断。形态：type=none，或 type=index_level + reference + levels，
       或 type=stock_level / contract_level + note。
@@ -98,7 +102,7 @@ fields:
       levels: "list——每项 threshold_pct + halt_minutes（number 或 null）+ day_end（bool）"
       note: "string——stock_level / contract_level 无标准档位时的机制说明"
 
-  market_structure.volatility_interruption:
+  market_structure.volatility_interruption: &volatility_interruption
     doc: "个股 / 合约级的波动性中断（价格出走廊触发短暂集合竞价）。形态 type=none 或走廊参数。"
     keys:
       type: "none，可选（确认无时）"
@@ -117,7 +121,7 @@ fields:
       margin_note: "string，可选——卖空 / 融券保证金要求（维持保证金比例、专项保证金规定等），由交易所 / 清算所 / 监管强制"
       note: "string"
 
-  market_structure.market_maker_scheme:
+  market_structure.market_maker_scheme: &market_maker_scheme
     doc: "做市商制度的结构化补充。"
     keys:
       present: "bool"
@@ -148,7 +152,7 @@ fields:
       resolution: "cancel（作废）/ price_adjust（调整成交价）/ cancel_or_adjust / no_bust（不作废，仅事后监管）"
       note: "string"
 
-  market_structure.order_types:
+  market_structure.order_types: &order_types
     doc: >
       交易所标准化订单类型与有效期指令的结构化补充（散文清单见 zh/en）。布尔位缺省表示
       「原文未提及」，不等于「不支持」——不确定就不写该键。
@@ -163,7 +167,7 @@ fields:
       tif: "list——有效期指令子集，取值 day / gtc / gtd / fok / ioc"
       note: "string"
 
-  market_structure.tick_size:
+  market_structure.tick_size: &tick_size
     doc: >
       最小报价单位的结构化补充。regime 说明分档方式；min_tick 给最小一档；ladder（可选）
       列锚点档位，完整表用 full_table_note 指向。数值须逐字在 quote 里（校验 5b）。
@@ -275,3 +279,24 @@ fields:
       type: "none——规则明确不设此时长 / 过渡期（须有正面原文依据）"
       note: "string，可选——档位、口径、仅适用某情形的限定"
   listing.delisting_transition_period: *listing_duration
+
+  # ── 第五章｜衍生品子块（任务三棒 0，[ADR-082]）──
+  # `market_structure.derivatives.*` 与现货侧语义同构（同一法人实体的另一条产品线），
+  # 一律用 YAML anchor 复用顶层形状，不新造形状。两侧同源是机器不变式：
+  # validate.py derivatives_spec_shape_violations() 拦「手抄一份」与「两侧漂移」；
+  # `price_limits.main_board` 的 reference 已含 prev_settlement（[ADR-035] E），
+  # 衍生品语境（前结算价基准）直接可用。
+  market_structure.derivatives.trading_sessions.pre_market: *session
+  market_structure.derivatives.trading_sessions.continuous_am: *session
+  market_structure.derivatives.trading_sessions.lunch_break: *session
+  market_structure.derivatives.trading_sessions.continuous_pm: *session
+  market_structure.derivatives.trading_sessions.after_market: *session
+  market_structure.derivatives.trading_sessions.night_session: *session
+  market_structure.derivatives.opening_mechanism: *opening_mechanism
+  market_structure.derivatives.closing_mechanism: *closing_mechanism
+  market_structure.derivatives.order_types: *order_types
+  market_structure.derivatives.tick_size: *tick_size
+  market_structure.derivatives.price_limits.main_board: *price_limits_main_board
+  market_structure.derivatives.circuit_breaker: *circuit_breaker
+  market_structure.derivatives.volatility_interruption: *volatility_interruption
+  market_structure.derivatives.market_maker_scheme: *market_maker_scheme
