@@ -577,6 +577,7 @@ market_structure:
   derivatives:
     trading_sessions:
       pre_market:
+        spec: {start: "09:00", end: "09:30", kind: opening_auction}
         zh: "第一时段（开盘前集合竞价 Pre-Open / Opening Auction）09:00–09:30"
         en: "First Session: Pre-Open (Opening Auction) 09:00–09:30"
         sources:
@@ -586,6 +587,7 @@ market_structure:
         quote: "First Session: Pre-Open (Opening Auction) 09:00 – 09:30"
         confidence: high
       continuous_am:
+        spec: {start: "09:30", end: "15:30", kind: continuous, note: "单一连续时段，无上午/下午拆分"}
         zh: "第二时段（连续交易 Market Open - Trading，全天单一连续时段）9:30–15:30"
         en: "Second Session: Market Open - Trading 9:30–15:30"
         sources:
@@ -595,6 +597,7 @@ market_structure:
         quote: "Second Session: Market Open - Trading 9:30 – 15:30"
         confidence: high
       lunch_break:
+        spec: {kind: none}
         zh: "无午休；第二时段为单一连续交易时段，与现货市场结构一致"
         en: "No lunch break; the Second Session is a single continuous trading session, consistent with the cash market structure"
         sources:
@@ -604,6 +607,7 @@ market_structure:
         confidence: medium
         detail: "Table(1)交易时段表仅列三段（开盘前/连续交易/休市），未见独立午休时段，属对表格结构的推断而非直接原文陈述，故标 medium 而非 high。"
       continuous_pm:
+        spec: {kind: none, note: "同一连续时段，见 continuous_am"}
         zh: "同第二时段（9:30–15:30为单一连续交易时段，未按上午/下午拆分）"
         en: "Same as the Second Session (9:30–15:30 is a single continuous session, not split into morning/afternoon)"
         sources:
@@ -612,6 +616,7 @@ market_structure:
             accessed: 2026-08-18
         confidence: medium
       after_market:
+        spec: {kind: none, note: "15:30-16:00 为休市时段：不可新增/撮合订单，仅可修改有效期、撤单、停用挂单"}
         zh: "第三时段（休市 Market Closed）15:30–16:00：不可新增/撮合订单，仅允许修改订单有效期、撤单、停用挂单"
         en: "Third Session: Market Closed 15:30–16:00 (no new orders or matching; only order-validity amendment, cancellation, and deactivation are allowed)"
         sources:
@@ -621,6 +626,7 @@ market_structure:
         quote: "Third Session: Market Closed 15:30 – 16:00 ... When market is closed Derivatives Exchange Members may amend order validity and cancel orders; and they may deactivate outstanding orders during the Second and Third sessions."
         confidence: high
       night_session:
+        spec: {kind: none, note: "官方时段表仅列三个时段（开盘前、连续交易、休市）"}
         zh: "无独立夜盘/收市后交易时段；官方交易时段表仅列三个时段（开盘前、连续交易、休市），未见类似港交所AHT的延伸交易安排"
         en: "No separate night / after-hours session; the official session table lists only three sessions (pre-open, continuous trading, market closed), with no extended-hours arrangement comparable to HKEX's AHT"
         sources:
@@ -641,6 +647,7 @@ market_structure:
       confidence: high
 
     opening_mechanism:
+      spec: {type: call_auction, auction_start: "09:00", auction_end: "09:30", randomised_seconds: 30, note: "最大成交量价位为理论开盘价；于 09:30:00-09:30:30 间随机时点揭示（uncross），最后一次理论开盘价即正式开盘价"}
       zh: "第一时段（09:00–09:30）开盘前集合竞价：以能撮合最大成交量的价位作为理论开盘价，若剩余量相同再按买卖不平衡方向取最优价或均价（四舍五入至最小价位）；市场于09:30:00–09:30:30区间内随机时点开盘揭示（uncross）；第一时段最后一次理论开盘价即为正式开盘价"
       en: "First Session (09:00–09:30) Opening Auction: the price at which the maximum quantity might trade is assigned as the Theoretical Opening Price, with tie-breaking by minimum residual and imbalance direction; the market opens and uncrosses at a random point between 09:30:00 and 09:30:30; the last Theoretical Opening Price of the First Session becomes the Opening Price"
       sources:
@@ -651,6 +658,7 @@ market_structure:
       confidence: high
 
     closing_mechanism:
+      spec: {type: last_price, note: "收盘价=最后成交价（LTP）；15:30 后进入休市时段（至 16:00）"}
       zh: "无独立收盘集合竞价；收盘价即最后成交价（Last Traded Price, LTP）；15:30后进入休市状态（Third Session: Market Closed，至16:00）"
       en: "No separate closing auction; Close is the Last Traded Price (LTP); the market enters the Third Session (Market Closed) from 15:30 to 16:00"
       sources:

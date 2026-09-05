@@ -166,8 +166,6 @@
 - `cn-szse` 风险与特殊考量 / 政治、地缘与制裁风险（political_risk_note）— confidence: low
 - `cn-szse` 风险与特殊考量 / 流动性风险（liquidity_risk_note）— confidence: low
 - `de-eurex` 市场数据与技术基础设施 / 历史系统故障事件（major_outage_history）— confidence: low
-- `de-eurex` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `de-xetra` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `fr-euronext` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `fr-euronext` 市场结构与交易机制 / 上午连续竞价（trading_sessions.continuous_am）— confidence: low
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（trading_halt_mechanism）— confidence: low

@@ -1881,15 +1881,21 @@
     },
     "risks": {
       "fx_risk_note": {
-        "zh": "欧元区无资本管制，欧元自由浮动；与同集团de-eurex的判断一致",
-        "en": "No capital controls in the Eurozone; the euro floats freely — consistent with the assessment recorded for de-eurex",
-        "confidence": "low",
-        "verified": "2026-08-14",
+        "zh": "欧元汇率在全球外汇市场上随行就市、不断变动，且欧洲央行明确汇率不是其政策目标，不试图通过货币政策操作影响汇率（ECB 官方 explainer，见 sources）。对非欧元投资者：Xetra 现货以欧元计价结算，承担欧元兑投资者本币的汇率风险；区内资金自由流动属单一市场制度安排，见 capital_controls",
+        "en": "The euro exchange rate changes constantly on global foreign exchange markets, and the ECB states explicitly that the exchange rate is not a policy target — it does not try to influence the exchange rate with its monetary policy operations (official ECB explainer, see sources). For non-euro investors: Xetra cash securities are settled in EUR, carrying EUR exchange-rate risk against the investor's currency; free movement of capital within the Single Market is covered in capital_controls",
+        "quote": "The exchange rate is not a policy target of the ECB. This means that the ECB does not try to influence the exchange rate with its monetary policy operations.",
+        "sources": [
+          {
+            "title": "What is the role of exchange rates?（ECB 官方 explainer，汇率非政策目标的定性表述）",
+            "url": "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/role_of_exchange_rates.en.html",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "political_risk_note": {
         "zh": "德国为欧盟核心成员国、法治稳定、政治风险低；主要政治相关风险来自欧盟/德国监管政策变动（如税费、上市规则改革）以及地缘事件对欧元与资本市场的外溢，而非政权或资本流动不稳定",

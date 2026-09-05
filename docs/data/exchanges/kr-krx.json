@@ -1086,6 +1086,12 @@
       "derivatives": {
         "trading_sessions": {
           "pre_market": {
+            "spec": {
+              "start": "08:30",
+              "end": "08:45",
+              "kind": "opening_auction",
+              "note": "旗舰股指衍生品代表样本；其他产品类别的竞价窗口时点不同（见 detail）"
+            },
             "zh": "常规时段开盘集合竞价挂单接收时段 08:30-08:45（以KOSPI200期货/期权等旗舰股指衍生品为代表；其他产品类别对应的开盘集合竞价窗口时点不同，见 detail）",
             "en": "Regular-session opening call-auction quotation receiving window: 08:30-08:45 (using flagship index derivatives such as KOSPI 200 Futures/Options as the representative sample; other product categories use different opening call-auction windows, see detail)",
             "sources": [
@@ -1099,10 +1105,15 @@
             "confidence": "high",
             "detail": "该官方时段表另区分「所有其他产品（不含瘦肉猪期货）」「瘦肉猪期货」「最后交易日」等多组不同的开收盘集合竞价窗口，本字段仅取旗舰股指衍生品一组作代表，完整分组见 sources 页面原表。",
             "verified": "2026-08-16",
-            "enum": null,
-            "spec": null
+            "enum": null
           },
           "continuous_am": {
+            "spec": {
+              "start": "08:45",
+              "end": "15:35",
+              "kind": "continuous",
+              "note": "最后交易日 08:45-15:20 且当日无收盘集合竞价"
+            },
             "zh": "常规交易日连续交易 08:45-15:35（旗舰股指衍生品，最后交易日提前至08:45-15:20且当日无收盘集合竞价）",
             "en": "Continuous trading 08:45-15:35 on a normal trading day (flagship index derivatives; on the Last Trading Day it ends earlier at 08:45-15:20 with no closing call auction that day)",
             "sources": [
@@ -1121,10 +1132,12 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
-            "spec": null,
             "detail": null
           },
           "lunch_break": {
+            "spec": {
+              "kind": "none"
+            },
             "zh": "无午休，全天单一连续交易时段（与现货市场一致）",
             "en": "No lunch break; a single continuous trading session for the whole day (same structure as the cash market)",
             "confidence": "medium",
@@ -1138,10 +1151,13 @@
             ],
             "verified": "2026-08-16",
             "enum": null,
-            "spec": null,
             "quote": null
           },
           "continuous_pm": {
+            "spec": {
+              "kind": "none",
+              "note": "单一连续时段，见 continuous_am"
+            },
             "zh": "同 continuous_am 字段——常规时段为单一连续竞价时段，不单独区分下午盘",
             "en": "Same as continuous_am — the regular session is a single continuous auction, not split into a separate afternoon block",
             "confidence": "medium",
@@ -1154,11 +1170,14 @@
             ],
             "verified": "2026-08-16",
             "enum": null,
-            "spec": null,
             "detail": null,
             "quote": null
           },
           "after_market": {
+            "spec": {
+              "kind": "none",
+              "note": "15:35-15:45 为收盘集合竞价挂单接收窗口（见 closing_mechanism）；此后下一窗口即夜盘挂单接收（见 night_session）"
+            },
             "zh": "收盘集合竞价挂单接收时段 15:35-15:45（旗舰股指衍生品）；衍生品市场没有独立于夜盘之外的「盘后」交易时段，收盘后下一个窗口即为夜盘挂单接收（17:50起，见 night_session）",
             "en": "Closing call-auction quotation window 15:35-15:45 (flagship index derivatives); the derivatives market has no separate after-hours session apart from the Night-Session — the next window after the close is the Night-Session's quotation receiving period starting at 17:50 (see night_session)",
             "sources": [
@@ -1172,10 +1191,15 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
-            "spec": null,
             "detail": null
           },
           "night_session": {
+            "spec": {
+              "start": "17:50",
+              "end": "06:00",
+              "kind": "after_hours_continuous",
+              "note": "挂单接收（开盘集合竞价）17:50-18:00 → 连续交易 18:00-次日05:50 → 收盘集合竞价挂单 05:50-06:00；仅10只高流动性品种"
+            },
             "zh": "KRX自主运营的夜盘（Night-Session）：挂单接收17:50-18:00（开盘集合竞价）→ 连续交易18:00-次日05:50 → 收盘集合竞价挂单05:50-06:00；仅10只高流动性品种可交易：KOSPI200期货/期权/周期权（周一、周四合约）、Mini-KOSPI200期货/期权、KOSDAQ150期货/期权、3年期与10年期韩国国债期货、美元期货",
             "en": "KRX's own in-house Night-Session: quotation receiving 17:50-18:00 (opening call auction) → continuous trading 18:00-05:50 the next day → closing call-auction quotation 05:50-06:00; only 10 high-liquidity products are tradable: KOSPI 200 Futures/Options/Weekly Options (Monday & Thursday contracts), Mini-KOSPI 200 Futures/Options, KOSDAQ 150 Futures/Options, 3-Year & 10-Year KTB Futures, and USD Futures",
             "sources": [
@@ -1189,8 +1213,7 @@
             "confidence": "high",
             "detail": "KRX已于2025年6月转为自主运营夜盘（此前为2009年8月起与CME联动、2010年8月起与Eurex联动的挂钩交易模式，CME联动已于2020年4月先行终止、Eurex联动已于2025年6月终止），见《Guide to Night Session in KRX Derivatives Market》PDF（2025年4月发布）。顶层 market_structure.night_session 字段此前（2026-08-16核实）仍按旧的CME/Eurex联动模式表述，已于2026-08-20按同一份PDF重新核实更新，两处表述已一致。",
             "verified": "2026-08-16",
-            "enum": null,
-            "spec": null
+            "enum": null
           }
         },
         "holidays_note": {
@@ -1211,6 +1234,12 @@
           "detail": null
         },
         "opening_mechanism": {
+          "spec": {
+            "type": "call_auction",
+            "auction_start": "08:30",
+            "auction_end": "08:45",
+            "note": "单一价格集合竞价决定开盘价；交易暂停后恢复首笔价同机制"
+          },
           "zh": "开盘价由单一价格集合竞价（Single Price Auction / Call Auction）决定",
           "en": "The opening price is determined by a single-price (call) auction",
           "sources": [
@@ -1224,10 +1253,15 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "closing_mechanism": {
+          "spec": {
+            "type": "call_auction",
+            "auction_start": "15:35",
+            "auction_end": "15:45",
+            "note": "单一价格集合竞价决定收盘价；最后交易日无收盘集合竞价（连续交易至 15:20）"
+          },
           "zh": "收盘价同样由单一价格集合竞价决定；交易暂停后恢复交易的首笔价格也采用同一集合竞价机制确定",
           "en": "The closing price is likewise determined by a single-price (call) auction; the same mechanism also sets the first price when trading resumes after a suspension",
           "sources": [
@@ -1241,7 +1275,6 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "matching_principle": {

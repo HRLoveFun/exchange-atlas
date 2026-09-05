@@ -596,6 +596,7 @@ market_structure:
   derivatives:
     trading_sessions:
       pre_market:
+        spec: {start: "08:55", end: "09:00", kind: pre_open_queue, note: "IND/WIN 开盘前 5 分钟，只挂单不撮合；期权市场沿用现货 09:45-10:00 开盘集合竞价（见顶层 pre_market）"}
         zh: "衍生品市场没有统一的「开市前议价」时段，具体因产品而异：指数期货类旗舰合约（Ibovespa期货FUT IND/迷你指数期货FUT WIN）在09:00常规时段开盘前5分钟（即08:55）设开盘前阶段；期权市场（个股/ETF/指数期权）则沿用现货市场同一套09:30–09:45撤单、09:45–10:00开盘前集合竞价的安排（见顶层trading_sessions.pre_market）"
         en: "No unified pre-market period across the derivatives market as a whole; it varies by product: the flagship index futures (Ibovespa Futures FUT IND / Mini Ibovespa Futures FUT WIN) have a pre-opening phase starting 5 minutes before the 09:00 regular-session open (i.e. from 08:55); the options market (single-stock/ETF/index options) instead reuses the cash market's own 09:30-09:45 order-cancellation + 09:45-10:00 pre-opening call window (see top-level trading_sessions.pre_market)"
         sources:
@@ -605,6 +606,7 @@ market_structure:
         quote: "Ibovespa Futures FUT IND 09:00 (1) 18:25 (2) (4) - - 18:25 - - - - - - ... (1) The pre-opening phase starts 5 minutes before the trading phase."
         confidence: high
       continuous_am:
+        spec: {start: "09:00", end: "18:25", kind: continuous, note: "IND/WIN 代表样本，无上午/下午分段"}
         zh: "指数期货类旗舰合约（IND/WIN）自09:00起连续交易，无独立上午/下午分段，直至18:25收盘电子集合竞价（见continuous_pm）；B3官网概括性说法为多数衍生品合约交易时段在上午9时至下午6时之间，具体因合约类型而异"
         en: "The flagship index futures (IND/WIN) trade continuously from 09:00, with no separate morning/afternoon split, through to the 18:25 electronic closing call (see continuous_pm); B3's own general statement is that most derivatives contracts trade between 9 AM and 6 PM, varying by contract type"
         sources:
@@ -617,10 +619,12 @@ market_structure:
         quote: "Ibovespa Futures FUT IND 09:00 (1) 18:25 (2) (4) - - 18:25 - - - - - -"
         confidence: high
       lunch_break:
+        spec: {kind: none}
         zh: "无：指数期货、个股期货均为单一连续交易时段（09:00至收盘），不设午间休市；期权市场同样沿用现货市场无午休的连续交易安排（见顶层lunch_break）"
         en: "None: index futures and single-stock futures both run as a single continuous session (09:00 to close) with no midday break; the options market likewise follows the cash market's no-lunch-break continuous arrangement (see the top-level lunch_break)"
         confidence: medium
       continuous_pm:
+        spec: {kind: none, note: "同一连续时段至 18:25 电子集合竞价收盘（IND/WIN）；个股期货 17:55、期权 16:55/16:50 各异，见 closing_mechanism"}
         zh: "延续continuous_am的单一连续时段直至电子集合竞价收盘：指数期货类旗舰合约（IND/WIN）18:25；个股/份额期货（Single Stock, Units and ETFs Futures）17:55；期权市场（个股/ETF期权）连续交易至16:55、指数期权至16:50，其后进入收盘集合竞价（见closing_mechanism）"
         en: "Continues the single continuous session from continuous_am through to the electronic closing call: 18:25 for the flagship index futures (IND/WIN); 17:55 for Single Stock, Units and ETFs Futures; the options market (single-stock/ETF options) trades continuously to 16:55 and index options to 16:50, after which the closing call begins (see closing_mechanism)"
         sources:
@@ -633,6 +637,7 @@ market_structure:
         quote: "Ibovespa Futures FUT IND 09:00 (1) 18:25 (2) (4) - - 18:25 - - - - - -"
         confidence: high
       after_market:
+        spec: {kind: none, note: "已收录旗舰合约（IND/WIN、个股期货、S&P 500 期货）无延长时段；部分欧洲挂钩合约（如 DAX 期货 12:40-18:00）与期权 AHT（现货共用）除外"}
         zh: "本文件已收录的旗舰合约（Ibovespa/迷你指数期货、个股期货、S&P 500期货）在B3官方交易时段表中「Extended hours (T+0)」栏位均为空，即无独立盘后延长时段；但部分挂钩欧洲股指的合约（如DAX期货/Euro Stoxx期货）确有12:40–18:00的延长时段用于衔接欧美市场；期权市场另有独立的盘后交易窗口（AHT，与现货共用，具体时刻见顶层after_market）"
         en: "For the flagship contracts covered in this file (Ibovespa/Mini Ibovespa Futures, single-stock futures, S&P 500 Futures), B3's trading-hours table shows no populated 'Extended hours (T+0)' column, i.e. no separate after-market session; some other contracts tracking European indices (e.g. DAX Futures / Euro Stoxx Futures) do have a 12:40-18:00 extended window bridging into European/US hours; the options market has its own after-market window (AHT, shared with the cash market, see top-level after_market for the clock times)"
         sources:
@@ -642,6 +647,7 @@ market_structure:
         quote: "DAX Futures FUT DAX 09:00 (1)(2) 12:20 12:27 12:30 12:30 - - 12:40 18:00 - -"
         confidence: high
       night_session:
+        spec: {kind: none, note: "旗舰合约（IND/WIN、个股期货）无 T+1 夜盘；T+1 机制见于利率、大宗商品等其他品类"}
         zh: "《交易规程手册》Title II「交易环境」定义了市场通用的三段式框架——常规交易时段/盘后延长时段/收市后T+1时段，T+1时段的成交于次一营业日登记、日盯市保证金于T+2现金结算；但本文件已收录的旗舰合约（Ibovespa/迷你指数期货IND/WIN、个股期货）在B3官方交易时段表中「After-hours (T+1)」栏位均为空，即未见对这些合约开放T+1夜盘交易，T+1机制主要见于利率、大宗商品等其他品类合约"
         en: "Title II ('Trading Environment') of B3's Trading Procedures Manual defines a market-wide three-part session framework — regular trading period / after-market (extended-hours) period / after-hours (T+1) period — under which T+1 trades are registered on the next business day and daily variation margin is cash-settled on T+2; however, the flagship contracts covered in this file (Ibovespa/Mini Ibovespa Futures IND/WIN, single-stock futures) show no populated 'After-hours (T+1)' column in B3's trading-hours table, i.e. no T+1 night session for these contracts; the T+1 mechanism mainly applies to other segments such as interest-rate and commodity contracts"
         sources:
@@ -667,6 +673,7 @@ market_structure:
       verified: 2026-09-05
 
     opening_mechanism:
+      spec: {type: call_auction, auction_start: "08:55", auction_end: "09:00", note: "开盘前阶段只接受挂单不撮合、按拍卖规则确定理论开盘价（IND/WIN 开盘前 5 分钟）；期权市场沿用现货 09:45-10:00 开盘集合竞价"}
       zh: "沿用顶层市场通用的「开盘前阶段」（Pre-opening phase）机制定义——只接受挂单、不做撮合，仅用于确定理论开盘价；该定义见于《交易规程手册》Title II「交易环境」章节，明确适用于「各组资产与衍生品」（in each group of assets and derivatives），非现货专属。指数期货类旗舰合约的开盘前阶段时长为5分钟（具体时刻见trading_sessions.pre_market）"
       en: "Reuses the same market-wide 'Pre-opening phase' definition as the top level — orders are accepted but not matched, used only to determine the theoretical opening price; this is defined in Title II ('Trading Environment') of the Trading Procedures Manual, explicitly applicable to 'each group of assets and derivatives', not cash-market-exclusive. For the flagship index futures, the pre-opening phase lasts 5 minutes (see trading_sessions.pre_market for the concrete clock time)"
       sources:
@@ -677,6 +684,7 @@ market_structure:
       confidence: high
 
     closing_mechanism:
+      spec: {type: call_auction, auction_start: "18:25", note: "IND/WIN 收盘电子集合竞价 18:25；个股/份额期货 17:55、个股/ETF 期权 16:55、指数期权 16:50 各异"}
       zh: "沿用顶层「收盘集合竞价」（Closing call phase）机制定义——以现货市场收盘前几分钟同样的定价规则透明收盘；指数期货类旗舰合约（IND/WIN）的收盘电子集合竞价（Electronic call）在18:25进行，个股/份额期货在17:55，期权市场则在16:55（个股/ETF期权）或16:50（指数期权）进入收盘集合竞价"
       en: "Reuses the top-level 'Closing call phase' definition — trading closes transparently using the same pricing rules as those used for the final minutes of regular trading; for the flagship index futures (IND/WIN) the closing Electronic call occurs at 18:25, for Single Stock, Units and ETFs Futures at 17:55, and the options market enters its closing call at 16:55 (single-stock/ETF options) or 16:50 (index options)"
       sources:

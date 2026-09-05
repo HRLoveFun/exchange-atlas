@@ -63,7 +63,7 @@ fields:
   market_structure.closing_mechanism: &closing_mechanism
     doc: "收盘价的形成方式。"
     keys:
-      type: "call_auction / last_price（末笔成交价）/ vwap_window（尾盘 VWAP）/ dmm_auction"
+      type: "call_auction / last_price（末笔成交价）/ vwap_window（尾盘 VWAP）/ dmm_auction / continuous_to_close（无收盘集合竞价，连续交易直接持续到收盘时刻结束——衍生品子块三样本确立，见任务三附）"
       auction_start: "HH:MM，可选"
       auction_end: "HH:MM，可选"
       randomised_seconds: "int，可选——出清时刻在此秒数内随机触发（如 ASX 30s）"

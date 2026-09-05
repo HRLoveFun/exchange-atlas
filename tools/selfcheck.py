@@ -350,6 +350,33 @@ case("stale 混合：超期 + 未记 verified 两组都在，头部都提到",
           [_row(exchange_id="a", stale=True, age_days=100),
            _row(exchange_id="b", stale=True, verified=None, age_days=None)])[0]), True)
 
+# [ADR-079] 第 12 章 `*_note` 来源不变式：validate.risks_note_sources_violations(eid, raw_risks, note_paths)
+case("第12章 medium 无字段级 sources：报错",
+     len(validate.risks_note_sources_violations(
+         "ex", {"fx_risk_note": {"zh": "x", "confidence": "medium"}},
+         [("fx_risk_note",)])), 1)
+case("第12章 high 无字段级 sources：报错",
+     len(validate.risks_note_sources_violations(
+         "ex", {"enforcement_note": {"zh": "x", "confidence": "high"}},
+         [("enforcement_note",)])), 1)
+case("第12章 medium 带字段级 sources：合法",
+     validate.risks_note_sources_violations(
+         "ex", {"fx_risk_note": {"zh": "x", "confidence": "medium",
+                                 "sources": [{"url": "https://a.example.com/p"}]}},
+         [("fx_risk_note",)]), [])
+case("第12章 low 无 sources：合法（low 不在不变式范围）",
+     validate.risks_note_sources_violations(
+         "ex", {"fx_risk_note": {"zh": "x", "confidence": "low"}},
+         [("fx_risk_note",)]), [])
+case("第12章 空 zh 不触发（字段未填不算无据断言）",
+     validate.risks_note_sources_violations(
+         "ex", {"fx_risk_note": {"confidence": "medium"}}, [("fx_risk_note",)]), [])
+case("第12章 不变式跑在 raw 上：_meta.sources 继承不算数",
+     len(validate.risks_note_sources_violations(
+         "ex", {"_meta": {"sources": [{"url": "https://a.example.com/p"}]},
+                "fx_risk_note": {"zh": "x", "confidence": "medium"}},
+         [("fx_risk_note",)])), 1)
+
 
 def main():
     fails = [(n, g, w) for n, g, w in CASES if g != w]

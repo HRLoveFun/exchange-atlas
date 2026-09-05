@@ -726,6 +726,7 @@ market_structure:
       confidence: high
 
     closing_mechanism:
+      spec: {type: continuous_to_close, note: "无收盘集合竞价（官方时段表穷举无收盘竞价条目，medium 结构性推断）；日盘连续交易至收盘时刻结束"}
       zh: "无独立收盘机制（无收盘集合竞价）：HKEX 官方衍生品交易时段表穷举列示各合约全部时段——开市前议价时段、日盘（早市/午市）与收市后交易（AHT/T+1 Session），日盘连续交易至收盘时刻结束（以恒指系列为样本：正常交易日午市 1:00 p.m.–4:30 p.m.，月合约最后交易日提前至 4:00 p.m.），其后并无收盘集合竞价环节"
       en: "No separate closing mechanism (no closing call auction): the official HKEX derivatives trading-hours table enumerates all sessions exhaustively — Pre-Market Opening Period, Day Session (Morning/Afternoon) and After-Hours Trading (AHT / T+1 Session); the day session runs continuously to its close (sampled by the Hang Seng Index series: 1:00 p.m.–4:30 p.m. on normal trading days, 4:00 p.m. on the last trading day of the spot month), with no closing call auction after it"
       sources:

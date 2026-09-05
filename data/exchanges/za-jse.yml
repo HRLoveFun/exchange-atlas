@@ -643,6 +643,7 @@ market_structure:
   derivatives:
     trading_sessions:
       pre_market:
+        spec: {start: "08:25", end: "08:30", kind: opening_auction, note: "05:00-08:25 为系统下载专用时段（不可交易）；竞价仅适用 FTSE/JSE ALSI 与 ALMI Top40 股指期货"}
         zh: "05h00–08h25 为系统下载专用时段（Download only period，可登录查看数据但不可交易）；08h25–08h30 为FTSE/JSE ALSI与ALMI Top40股指期货专属的开盘集合竞价（Opening Auction Call Session），仅适用此类合约，其余合约无独立开盘集合竞价，直接进入连续交易"
         en: "05h00–08h25 Download-only period (login permitted, no trading); 08h25–08h30 Opening Auction Call Session applicable only to FTSE/JSE ALSI and ALMI Top 40 Index Futures — other contracts have no opening auction and move directly into continuous trading"
         sources:
@@ -655,6 +656,7 @@ market_structure:
         quote: "05h00 - 08h25 Download only period Users may login ... 08h25 - 08h30 ALSI contract in opening auction All ALSI expiries in auction ／ The Opening Auction Call Session is only applicable for FTSE/JSE ALSI and ALMI Top 40 Index Futures and will be scheduled immediately after the Start of Trading session."
         confidence: high
       continuous_am:
+        spec: {start: "08:30", end: "17:30", kind: continuous, note: "单一不间断连续时段，无上午/下午拆分（见 continuous_pm）"}
         zh: "08h30 起进入自动交易时段（\"Market open\"），全天为单一不间断的连续交易时段，不因上午/下午而拆分，与 continuous_pm 为同一时段（见该字段说明）"
         en: "Automated trading begins at 08h30 (\"Market open\"); the entire day runs as a single uninterrupted continuous session, not split into morning/afternoon segments — same session as continuous_pm (see that field)"
         sources:
@@ -664,6 +666,7 @@ market_structure:
         quote: "08h30 - 17h30 Market open"
         confidence: high
       lunch_break:
+        spec: {kind: none, note: "盘中集合竞价（Intraday Auction Call Session）功能停用"}
         zh: "无——盘中集合竞价（Intraday Auction Call Session）在当前规格文档中被明确标注功能停用，全日为单一连续交易时段，不像现货市场那样以集合竞价分隔上下午"
         en: "None — the Intraday Auction Call Session is explicitly marked as disabled in the current specification, so the day runs as a single continuous session rather than being split by an intraday auction as in the cash equity market"
         sources:
@@ -673,6 +676,7 @@ market_structure:
         quote: "5.7 Intraday Auction Call Session (functionality currently disabled)"
         confidence: high
       continuous_pm:
+        spec: {kind: none, note: "与 continuous_am 同一不间断时段，至 17:30 收市"}
         zh: "与上午连续交易为同一不间断时段，延续至17h30市场收市；收盘集合竞价（Closing Auction Call Session）机制在规则中有定义但当前版本同样标注功能停用，收市为连续交易直接停止而非集合竞价定价"
         en: "Continuous with the morning session through to 17h30 market close; a Closing Auction Call Session mechanism is defined in the rules but likewise currently marked disabled — the market simply stops continuous trading at close rather than uncrossing via a closing auction"
         sources:
@@ -685,6 +689,7 @@ market_structure:
         quote: "08h30 - 17h30 Market open ／ 5.8 Closing Auction Call Session (functionality currently disabled)"
         confidence: high
       after_market:
+        spec: {kind: none, note: "17:30-18:15 为管理时段（仅成交分配与报告，不可下单）；18:15-次日03:00 为系统下载专用时段"}
         zh: "17h30–18h15 为管理时段（Administration period，仅限成交分配与报告，不可下单）；18h15至次日03h00 为系统下载专用时段"
         en: "17h30–18h15 Administration period (allocations and reporting only, no order entry); 18h15 to 03h00 the next day is a download-only period"
         sources:
@@ -694,6 +699,7 @@ market_structure:
         quote: "17h30 - 18h15 Market is in admin period Allocations and report only ... 18h15 - 03h00 Download only period System available for downloads"
         confidence: high
       night_session:
+        spec: {kind: none, note: "18:15-次日08:25 均为管理/系统下载性质的非交易时段"}
         zh: "无独立夜盘连续竞价交易时段；18h15至次日08h25之间均为管理/系统下载性质的非交易时段（见 after_market/pre_market），未见类似港交所收市后交易时段（AHT）的夜盘连续竞价安排"
         en: "No separate night trading session; the window from 18h15 to 08h25 the next day is administrative/download-only (see after_market/pre_market), with no equivalent of an HKEX-style After-Hours Trading session found"
         confidence: medium
@@ -714,6 +720,7 @@ market_structure:
       detail: "衍生品与现货共用南非公共假期日历（medium 级背景；具体每年日期以 JSE 官网交易日历为准）。"
 
     opening_mechanism:
+      spec: {type: call_auction, auction_start: "08:25", auction_end: "08:30", note: "仅适用 FTSE/JSE ALSI 与 ALMI Top40 股指期货，按成交量最大化算法撮合、隐藏单参与；其余合约直接进入连续交易"}
       zh: "开盘集合竞价（Opening Auction Call Session）仅适用于FTSE/JSE ALSI与ALMI Top40股指期货，紧随「开始交易时段」（Start of Trading Session）之后，按成交量最大化算法（Volume Maximizing Algorithm）撮合定价，已有的隐藏单（Hidden Orders）参与撮合；其余合约无此环节，直接进入连续交易"
       en: "The Opening Auction Call Session applies only to FTSE/JSE ALSI and ALMI Top 40 Index Futures, scheduled immediately after the Start of Trading Session, and is uncrossed via the Volume Maximizing Algorithm with existing Hidden Orders participating; other contracts have no opening auction and move directly into continuous trading"
       sources:
@@ -724,6 +731,7 @@ market_structure:
       confidence: high
 
     closing_mechanism:
+      spec: {type: continuous_to_close, note: "Closing Auction Call Session 规则有定义但现行规格标注功能停用；实际收市为连续交易直接停止（17:30）"}
       zh: "收盘集合竞价（Closing Auction Call Session）机制本身在规格文档中有完整定义（含提前收市阈值 Early Close Threshold 等规则），但现行规格文档明确标注该功能处于停用状态；实际收市为连续交易直接停止（收市时刻见 trading_sessions.continuous_pm），未观察到以集合竞价方式产生收盘价的安排"
       en: "A Closing Auction Call Session mechanism (including an Early Close Threshold rule) is fully defined in the specification, but the current specification explicitly marks this functionality as disabled; in practice the market simply stops continuous trading at close (see trading_sessions.continuous_pm for the close time), with no auction-based close price observed"
       sources:
