@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """tools/check_no_dup_render_helpers.py — 防止 docs/assets/app.js 的可视化模块
-重演 clone-and-own（架构腐烂审查发现的历史模式，[ADR-PENDING-frontend-shared-
-render-helpers]）：七个模块 td/cw/sp/ll/rm/pt/rf 曾各自独立实现同构的
+重演 clone-and-own（架构腐烂审查发现的历史模式，[ADR-085]）：
+七个模块 td/cw/sp/ll/rm/pt/rf 曾各自独立实现同构的
 resolveId / 文本折行 / 数据格子（点击→openCellOverlay）逻辑——新模块照抄上一个
 模块、改个前缀，而不是抽取共享函数。
 

@@ -229,9 +229,9 @@
   //   七个剖面模块（td/cw/sp/ll/rm/pt/rf）原先各自独立实现了一套结构相同的
   //   resolveId / 文本折行 / 数据格子（点击→openCellOverlay）逻辑——典型的
   //   clone-and-own 复制演化。收敛到这里，各模块原有的 xxResolveId/xxWrap/
-  //   xxCell 名字保留、改成 1 行委托，调用方零改动（见 ADR-PENDING-frontend-
-  //   shared-render-helpers）。legend/prose 类函数审查后发现内容各模块真正
-  //   不同（不是同一件事写两遍），不属于本次收敛范围。
+  //   xxCell 名字保留、改成 1 行委托，调用方零改动（见 [ADR-085]）。
+  //   legend/prose 类函数审查后发现内容各模块真正不同（不是同一件事写两遍），
+  //   不属于本次收敛范围（rm/pt 图例结构同构的例外见 keyedLegend）。
   // ══════════════════════════════════════════════
   function resolveExchangeId(params, defaultEx) {
     var l = cache.manifest.exchanges;
