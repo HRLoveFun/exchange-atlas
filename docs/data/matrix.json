@@ -4741,6 +4741,21 @@
       "confidence": "high"
     },
     {
+      "exchange_id": "jp-jpx",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "stamp_duty",
+      "label_zh": "印花税",
+      "label_en": "Stamp Duty",
+      "zh": "日本对证券交易本身不征交易税（有価証券取引税已于 1999-03-31 废止，见 regulatory_fees 与 financial_transaction_tax）；现行与证券转让文书相关的税为印紙税：制作纸质『有価証券売渡譲渡書』等第17号文書（金銭又は有価証券の受取書）时按记载金额分档贴花（如 5万円未満不课税、5万円以上100万円以下 200 円、1億円超2億円以下 4 万円）；交易所电子集中交易不制作纸质文书，实际不产生印紙税——与上交所单边印花税、港交所双边印花税的形态根本不同",
+      "en": "Japan levies no transaction tax on securities trades (the Securities Transaction Tax was abolished on 31 March 1999 — see regulatory_fees and financial_transaction_tax); the current stamp-duty exposure arises only when a paper document is created: 印紙税 applies to 第17号文書 (receipts of money or securities, including securities transfer documents) at rates tiered by the stated amount (e.g. below 50,000 yen exempt; 50,000–1,000,000 yen: 200 yen; over 100 million up to 200 million yen: 40,000 yen). Exchange electronic trading creates no paper document, so no stamp duty arises in practice — fundamentally different from the Shanghai (one-side) and Hong Kong (both-side) stamp duties",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": false,
+      "verified": "2026-08-24",
+      "confidence": "medium"
+    },
+    {
       "exchange_id": "kr-krx",
       "chapter": "overview",
       "group": "overview",
@@ -7619,6 +7634,21 @@
       "has_detail": true,
       "verified": "2026-08-13",
       "confidence": "high"
+    },
+    {
+      "exchange_id": "us-nyse",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "stamp_duty",
+      "label_zh": "印花税",
+      "label_en": "Stamp Duty",
+      "zh": "无联邦证券交易印花税：美国税制中不存在针对证券交易的印花税税种；证券交易环节的联邦税收历史沿革（1914–1966 联邦股票转让税 STT 及现行 SEC 小额规费）见 financial_transaction_tax 字段，二者为同一来源、同一判据",
+      "en": "No federal stamp duty on securities transactions: the U.S. tax system has no stamp-duty instrument applying to securities trades; the federal transaction-tax history (the 1914–1966 stock transfer tax and the current small SEC-related fees) is covered under the financial_transaction_tax field, which uses the same source and judgment basis",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": true,
+      "verified": "2026-08-13",
+      "confidence": "medium"
     },
     {
       "exchange_id": "za-jse",
