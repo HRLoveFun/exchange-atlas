@@ -36,11 +36,21 @@ overview:
 
   timezone:
     zh: "韩国标准时间（KST，UTC+9）"
+    sources:
+      - title: IANA tz database「asia」zone 文件（Asia/Seoul：KST UTC+9，全年无夏令时 Rule）
+        url: https://data.iana.org/time-zones/tzdb/asia
+        accessed: 2026-09-05
+    verified: 2026-09-05
     en: "Korea Standard Time (KST, UTC+9)"
     confidence: medium
 
   dst_rule:
     zh: "不实行夏令时"
+    sources:
+      - title: IANA tz database「asia」zone 文件（Asia/Seoul 全年无夏令时 Rule）
+        url: https://data.iana.org/time-zones/tzdb/asia
+        accessed: 2026-09-05
+    verified: 2026-09-05
     en: "Does not observe daylight saving time"
     confidence: medium
 
@@ -119,11 +129,27 @@ overview:
     en: "KRW"
     confidence: medium
 
+    sources:
+      - title: History（KRX官网英文版年表）
+        url: https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp
+        accessed: 2026-08-16
+      - title: CEO Message（KRX官网英文版）
+        url: https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp
+        accessed: 2026-08-16
+    verified: 2026-09-05
   settlement_currency:
     zh: "韩元 (KRW)"
     en: "KRW"
     confidence: medium
 
+    sources:
+      - title: History（KRX官网英文版年表）
+        url: https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp
+        accessed: 2026-08-16
+      - title: CEO Message（KRX官网英文版）
+        url: https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp
+        accessed: 2026-08-16
+    verified: 2026-09-05
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境
 # ═══════════════════════════════════════════════
@@ -333,6 +359,11 @@ market_structure:
     quote: "The Korean securities markets are opened from Monday to Friday. However, the markets are closed on Labor Day (May 1), the last trading day of the year, etc."
     confidence: high
 
+    sources:
+      - title: Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）
+        url: https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf
+        accessed: 2026-08-16
+    verified: 2026-09-05
   opening_mechanism:
     spec: {type: call_auction, auction_end: "09:00", note: "开盘集合竞价（periodic call auction）决定开盘价，其后转连续竞价"}
     zh: "开盘集合竞价（Periodic call auction）决定开盘价，其后转为连续竞价"
@@ -378,6 +409,11 @@ market_structure:
     quote: "Regular session : Continuous auction / When new (or modified) orders are received, trade is executed immediately based on the principles of price priority and time priority. (not applied to issues with low liquidity)"
     confidence: high
 
+    sources:
+      - title: Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）
+        url: https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf
+        accessed: 2026-08-16
+    verified: 2026-09-05
   order_types:
     spec:
       market: true

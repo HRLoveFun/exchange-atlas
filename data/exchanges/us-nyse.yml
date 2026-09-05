@@ -145,6 +145,11 @@ regulation:
     quote: "As a registered securities exchange, NYSE is subject to the regulatory oversight of the SEC and all rules and amendments must be filed with and approved by the SEC pursuant to Section 19(b) of the Securities and Exchange Act of 1934 and Rule 19b-4 thereunder."
     confidence: high
 
+    sources:
+      - title: NYSE Regulation（官网）
+        url: https://www.nyse.com/regulation
+        accessed: 2026-08-13
+    verified: 2026-09-05
   self_regulatory_org:
     zh: "NYSE Regulation（交易所自身的一线监管部门）；金融业监管局（FINRA）按监管服务协议代为执行部分跨市场执法工作"
     en: "NYSE Regulation; FINRA (via Regulatory Services Agreements)"
@@ -157,11 +162,21 @@ regulation:
     quote: "Market Regulation also oversees the work that FINRA conducts on behalf of the NYSE Exchanges pursuant to Regulatory Services Agreements (RSAs). These matters are regularly brought as cross-market actions on behalf of multiple self-regulatory organizations, sometimes including FINRA."
     confidence: high
 
+    sources:
+      - title: NYSE Regulation（官网）
+        url: https://www.nyse.com/regulation
+        accessed: 2026-08-13
+    verified: 2026-09-05
   clearing_regulator:
     zh: "美国证券交易委员会"
     en: "SEC"
     detail: "与市场监管为同一机构；清算机构 NSCC/DTCC 本身的监管细节本次未核实，见 OPEN-QUESTIONS。"
+    sources:
+      - title: NYSE Regulation（官网：作为注册证券交易所，NYSE 受 SEC 监管——regulation.regulator 同一依据）
+        url: https://www.nyse.com/regulation
+        accessed: 2026-09-05
     confidence: medium
+    verified: 2026-09-05
 
   core_laws:
     zh: "《1934年证券交易法》"
@@ -383,6 +398,11 @@ market_structure:
     detail: "未找到对撮合优先顺序（价格优先/时间优先等）逐条说明的官方原文，本条为对整体机制的归纳，非逐字摘引。"
     confidence: medium
 
+    sources:
+      - title: Trading Information（官网）
+        url: https://www.nyse.com/trade/trading-information
+        accessed: 2026-08-13
+    verified: 2026-09-05
   order_types:
     spec:
       market: true

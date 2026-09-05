@@ -161,12 +161,34 @@ regulation:
     quote: "Supervision of the operations of Eurex Deutschland shall be the responsibility of the competent highest state authority in the State of Hesse (hereinafter \"Exchange Supervisory Authority\")."
     confidence: high
 
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+      - title: Eurex Clearing — Licensing & supervision（官网）
+        url: https://www.eurex.com/ec-en/find/about-us/licensing-supervision
+        accessed: 2026-08-27
+      - title: Free movement of capital — legal basis（欧盟委员会 PDF）
+        url: https://commission.europa.eu/system/files/2020-06/120216-legal-basis-free-movement-capital_en.pdf
+        accessed: 2026-08-27
+    verified: 2026-09-05
   self_regulatory_org:
     zh: "交易所理事会（Exchange Council），依据德国交易所法及黑森州交易所条例设立"
     en: "Exchange Council, established pursuant to the German Stock Exchange Act and the Exchange Regulation issued by the State of Hesse"
     quote: "Eurex Deutschland shall establish an Exchange Council pursuant to the German Stock Exchange Act and the Exchange Regulation (Börsenverordnung) issued by the State of Hesse."
     confidence: high
 
+    sources:
+      - title: Exchange Rules of Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/334918/a72a2163fa0bb8fac8d6c710e244bfd8/data/2026_07_07_eurex_d_boersenordnung_en.pdf
+        accessed: 2026-08-27
+      - title: Eurex Clearing — Licensing & supervision（官网）
+        url: https://www.eurex.com/ec-en/find/about-us/licensing-supervision
+        accessed: 2026-08-27
+      - title: Free movement of capital — legal basis（欧盟委员会 PDF）
+        url: https://commission.europa.eu/system/files/2020-06/120216-legal-basis-free-movement-capital_en.pdf
+        accessed: 2026-08-27
+    verified: 2026-09-05
   clearing_regulator:
     zh: "Eurex Clearing AG 作为中央对手方（CCP）由德国联邦金融监管局 BaFin 监管（依据《德国银行法》），并依《欧洲市场基础设施规制》(EMIR) 于 2014 年 4 月 10 日获 CCP 授权；监督还包括德国央行与 ESMA 牵头的 EMIR 监管学院"
     en: "Eurex Clearing AG, as the central counterparty (CCP), is supervised by the German Federal Financial Supervisory Authority (BaFin) under the German Banking Act and was authorised as a CCP under the European Market Infrastructure Regulation (EMIR) on 10 April 2014; supervision also involves the Deutsche Bundesbank and the ESMA-led EMIR Supervisory College"
@@ -380,6 +402,11 @@ market_structure:
     quote: "Market Orders shall always be executed before Limit Orders or Quotes, as the case may be, are executed."
     confidence: high
 
+    sources:
+      - title: Conditions for Trading at Eurex Deutschland（官网英文版PDF）
+        url: https://www.eurex.com/resource/blob/311224/9f99369a56e0d49b6ecb0038cfbf6e79/data/2026_07_27_eurex_d_handelsbedingungen_en.pdf
+        accessed: 2026-08-27
+    verified: 2026-09-05
   order_types:
     spec:
       market: true

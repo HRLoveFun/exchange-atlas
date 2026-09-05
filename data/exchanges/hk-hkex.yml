@@ -399,6 +399,11 @@ market_structure:
     en: "Closed on Hong Kong public holidays; no Extended Morning Session on the half-day-trading eves of Christmas, New Year and Lunar New Year"
     quote: "There is no Extended Morning Session and Afternoon Session on the eves of Christmas, New Year and Lunar New Year."
 
+    sources:
+      - title: Trading Hours - Securities Market（HKEX 官网）
+        url: https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en
+        accessed: 2026-08-12
+    verified: 2026-09-05
   opening_mechanism:
     spec: {type: call_auction, auction_start: "09:00", auction_end: "09:30"}
     zh: "盘前集合竞价（9:00-9:30，单一价格）"

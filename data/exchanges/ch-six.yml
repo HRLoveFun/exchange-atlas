@@ -203,6 +203,11 @@ regulation:
     quote: "All entities of SIX that are engaged in securities trading and securities settlement are subject to the direct supervision of FINMA. ... The legal framework is provided by the Federal Act on Financial Market Infrastructures and Market Conduct in Securities and Derivatives Trading (FinMIA). Ultimate supervisory authority lies with the Swiss Financial Market Supervisory Authority (FINMA)."
     confidence: high
 
+    sources:
+      - title: Monitoring and Regulation（SIX集团官网，监管架构说明页）
+        url: https://www.six-group.com/en/company/governance/monitoring-and-regulation.html
+        accessed: 2026-08-16
+    verified: 2026-09-05
   self_regulatory_org:
     zh: "SIX Exchange Regulation（SER）——依《证券交易法》自律监管授权设立的独立实体，与SIX集团运营业务分离，直接向SIX董事会主席报告"
     en: "SIX Exchange Regulation (SER) — an independent entity established under the self-regulatory mandate of the Stock Exchange Act, segregated from SIX's operational business and reporting directly to the Chairman of the Board of Directors of SIX"
@@ -220,6 +225,11 @@ regulation:
     quote: "SIX x-clear is licensed by the Swiss Financial Market Supervisory Authority (FINMA) as a central counterparty according to the Swiss Financial Market Infrastructure Act (FMIA). SIX SIS possesses a license as central security depository under FMIA."
     confidence: high
 
+    sources:
+      - title: Monitoring and Regulation（SIX集团官网，监管架构说明页）
+        url: https://www.six-group.com/en/company/governance/monitoring-and-regulation.html
+        accessed: 2026-08-16
+    verified: 2026-09-05
   core_laws:
     zh: "《联邦金融市场基础设施与证券衍生品交易市场行为法》（FinMIA/FMIA）"
     en: "Federal Act on Financial Market Infrastructures and Market Conduct in Securities and Derivatives Trading (FinMIA / FMIA)"

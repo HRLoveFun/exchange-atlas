@@ -317,6 +317,11 @@ market_structure:
     quote: "Listed securities are traded from Sunday to Thursday, except for on official holidays in the Kingdom."
     confidence: high
 
+    sources:
+      - title: Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+        accessed: 2026-08-14
+    verified: 2026-09-05
   opening_mechanism:
     spec: {type: call_auction, auction_start: "09:30", auction_end: "10:00"}
     zh: "第一时段开盘集合竞价（09:30–10:00，单一理论开盘价撮合）"
@@ -363,6 +368,11 @@ market_structure:
     en: "Price-driven matching with entry-order priority at each price level in continuous trading"
     confidence: medium
 
+    sources:
+      - title: Trading and Membership Procedures（Saudi Exchange 官方规程 PDF，经 tadawulgroup.sa 分发）
+        url: https://www.tadawulgroup.sa/wps/wcm/connect/1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c/Trading+and+Membership+Procedures+.pdf?MOD=AJPERES&ContentCache=NONE&CACHE=NONE&CACHEID=ROOTWORKSPACE-1c9c5c7b-1c6a-444e-994a-85fe1fbabb5c-pvARxBI
+        accessed: 2026-08-14
+    verified: 2026-09-05
   order_types:
     spec:
       market: true

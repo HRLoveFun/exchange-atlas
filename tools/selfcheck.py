@@ -377,6 +377,41 @@ case("第12章 不变式跑在 raw 上：_meta.sources 继承不算数",
                 "fx_risk_note": {"zh": "x", "confidence": "medium"}},
          [("fx_risk_note",)])), 1)
 
+# 校验 21 stable 档来源不变式：validate.stable_confidence_sources_violations(loc, raw_env, expanded_env, volatility)
+case("stable medium 无字段级 sources：报错",
+     len(validate.stable_confidence_sources_violations(
+         "ex", {"zh": "x", "confidence": "medium"}, {"zh": "x", "confidence": "medium"},
+         "stable")), 1)
+case("stable medium 无 own sources 但 _meta 继承（expanded 有 sources）：仍报错（raw 口径）",
+     len(validate.stable_confidence_sources_violations(
+         "ex", {"zh": "x"}, {"zh": "x", "confidence": "medium",
+                             "sources": [{"url": "https://a.example.com/p"}]},
+         "stable")), 1)
+case("stable medium 字段级 sources 齐全：合法",
+     validate.stable_confidence_sources_violations(
+         "ex", {"zh": "x", "confidence": "medium",
+                "sources": [{"url": "https://a.example.com/p"}]},
+         {"zh": "x", "confidence": "medium", "sources": [{"url": "https://a.example.com/p"}]},
+         "stable"), [])
+case("stable high 无 sources：同样报错（high 更须背书）",
+     len(validate.stable_confidence_sources_violations(
+         "ex", {"zh": "x", "confidence": "high"}, {"zh": "x", "confidence": "high"},
+         "stable")), 1)
+case("stable low 无 sources：合法（low = 定性背景·无官方来源，诚实降级）",
+     validate.stable_confidence_sources_violations(
+         "ex", {"zh": "x", "confidence": "low"}, {"zh": "x", "confidence": "low"},
+         "stable"), [])
+case("moderate/volatile 不进校验 21（校验 4 已兜住）",
+     validate.stable_confidence_sources_violations(
+         "ex", {"zh": "x", "confidence": "medium"}, {"zh": "x", "confidence": "medium"},
+         "moderate"), [])
+case("空 zh 不触发（字段未填不算无据断言）",
+     validate.stable_confidence_sources_violations(
+         "ex", {"confidence": "medium"}, {"confidence": "medium"}, "stable"), [])
+case("裸字符串字段展开后 confidence 为 None：不触发",
+     validate.stable_confidence_sources_violations(
+         "ex", "x", {"zh": "x", "confidence": None}, "stable"), [])
+
 
 def main():
     fails = [(n, g, w) for n, g, w in CASES if g != w]

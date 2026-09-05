@@ -15,21 +15,16 @@
     "overview": {
       "timezone": {
         "zh": "韩国标准时间（KST，UTC+9）",
-        "en": "Korea Standard Time (KST, UTC+9)",
-        "confidence": "medium",
         "sources": [
           {
-            "title": "History（KRX官网英文版年表）",
-            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
-            "accessed": "2026-08-16"
-          },
-          {
-            "title": "CEO Message（KRX官网英文版）",
-            "url": "https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp",
-            "accessed": "2026-08-16"
+            "title": "IANA tz database「asia」zone 文件（Asia/Seoul：KST UTC+9，全年无夏令时 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/asia",
+            "accessed": "2026-09-05"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-09-05",
+        "en": "Korea Standard Time (KST, UTC+9)",
+        "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
@@ -37,21 +32,16 @@
       },
       "dst_rule": {
         "zh": "不实行夏令时",
-        "en": "Does not observe daylight saving time",
-        "confidence": "medium",
         "sources": [
           {
-            "title": "History（KRX官网英文版年表）",
-            "url": "https://global.krx.co.kr/contents/GLB/01/0102/0102040000/GLB0102040000.jsp",
-            "accessed": "2026-08-16"
-          },
-          {
-            "title": "CEO Message（KRX官网英文版）",
-            "url": "https://global.krx.co.kr/contents/GLB/01/0101/0101000000/GLB0101000000.jsp",
-            "accessed": "2026-08-16"
+            "title": "IANA tz database「asia」zone 文件（Asia/Seoul 全年无夏令时 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/asia",
+            "accessed": "2026-09-05"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-09-05",
+        "en": "Does not observe daylight saving time",
+        "confidence": "medium",
         "enum": null,
         "spec": null,
         "detail": null,
@@ -239,7 +229,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
         "detail": null,
@@ -261,7 +251,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
         "detail": null,
@@ -611,7 +601,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
         "detail": null
@@ -693,7 +683,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-09-05",
         "spec": null,
         "detail": null
       },

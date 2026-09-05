@@ -36,17 +36,17 @@
       },
       "dst_rule": {
         "zh": "各市场均随欧盟统一切换夏令时（3月最后一个周日至10月最后一个周日CEST，其余为CET）；都柏林同步切换GMT/IST，切换日期与欧盟一致，仅钟点比CET区少1小时",
+        "sources": [
+          {
+            "title": "IANA tz database「europe」zone 文件（Europe/Amsterdam、Europe/Paris、Europe/Brussels、Europe/Dublin、Europe/Lisbon、Europe/Rome、Europe/Oslo 各市场的夏令时切换 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/europe",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "verified": "2026-09-05",
         "en": "All markets follow the EU-wide daylight saving switch (CEST from the last Sunday of March to the last Sunday of October, CET otherwise); Dublin switches GMT/IST on the same EU dates, one hour behind the CET markets",
         "detail": "本条为欧盟统一夏令时安排的常识性推论（非交易所自设规则），未单独抓取欧盟夏令时立法原文核实，confidence 相应降级。",
         "confidence": "medium",
-        "sources": [
-          {
-            "title": "Our Journey（Euronext官网，集团历史沿革时间线）",
-            "url": "https://www.euronext.com/en/about/our-journey",
-            "accessed": "2026-08-16"
-          }
-        ],
-        "verified": "2026-08-16",
         "enum": null,
         "spec": null,
         "quote": null
@@ -200,8 +200,8 @@
       "trading_currency": {
         "zh": "多币种，按各市场本国货币计价为主：阿姆斯特丹/布鲁塞尔/都柏林/里斯本/巴黎（欧元区五国）以欧元计价，米兰以欧元计价，奥斯陆以挪威克朗（NOK）计价——是本所与欧元区单一货币交易所最直接的结构性差异；部分产品另有美元/英镑等计价，未逐一核实",
         "en": "Multi-currency, predominantly each market's home currency: Amsterdam/Brussels/Dublin/Lisbon/Paris/Milan (all euro-area) price in EUR; Oslo prices in Norwegian Krone (NOK) — the most direct structural contrast with a single-currency exchange; some products are denominated in USD/GBP etc., not individually verified",
-        "detail": "各国采用的法定货币（欧元区成员国用欧元、挪威用克朗）属基础地理经济常识，非交易所自设的具体规则数值，未单独抓取官方原文逐一核实，confidence标medium。",
-        "confidence": "medium",
+        "detail": "各国采用的法定货币（欧元区成员国用欧元、挪威用克朗）属基础地理经济常识，非交易所自设的具体规则数值，未单独抓取官方原文逐一核实。2026-09-05 stable 档来源闭环时查而未得：缓存内无对各市场计价币种的专门官方陈述句；候选出处为 Euronext 各市场产品页与 Harmonised Rulebook（euronext.com 已登记），按防幻觉铁律降级 low，待补原文后升级。",
+        "confidence": "low",
         "sources": [
           {
             "title": "Our Journey（Euronext官网，集团历史沿革时间线）",

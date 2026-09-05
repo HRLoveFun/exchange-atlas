@@ -1332,7 +1332,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-16",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {
@@ -2592,7 +2592,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-27",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {
@@ -2607,7 +2607,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-27",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {
@@ -2682,7 +2682,7 @@
       "enum": "price_time",
       "enum_ref": "matching_principle",
       "has_detail": false,
-      "verified": "2026-08-27",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {
@@ -2937,7 +2937,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {
@@ -3298,7 +3298,7 @@
       "enum_ref": null,
       "has_detail": true,
       "verified": "2026-08-16",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "fr-euronext",
@@ -4406,9 +4406,9 @@
       "en": "JPY",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-13",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "jp-jpx",
@@ -4421,9 +4421,9 @@
       "en": "JPY",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-13",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "jp-jpx",
@@ -4827,7 +4827,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -4842,7 +4842,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -4947,7 +4947,7 @@
       "enum": "price_time",
       "enum_ref": "matching_principle",
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {
@@ -5367,7 +5367,7 @@
       "enum": "price_time",
       "enum_ref": "matching_principle",
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -5787,7 +5787,7 @@
       "enum": "price_time",
       "enum_ref": "matching_principle",
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {
@@ -6508,7 +6508,7 @@
       "enum_ref": null,
       "has_detail": true,
       "verified": "2026-08-14",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "uk-lse",
@@ -7332,7 +7332,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-13",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {
@@ -7347,7 +7347,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": true,
-      "verified": "2026-08-13",
+      "verified": "2026-09-05",
       "confidence": "high"
     },
     {
@@ -7422,7 +7422,7 @@
       "enum": "price_time",
       "enum_ref": "matching_principle",
       "has_detail": true,
-      "verified": "2026-08-13",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {

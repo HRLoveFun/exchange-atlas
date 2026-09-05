@@ -70,3 +70,6 @@
   - 증권거래세법 (Securities Transaction Tax Law), English version: https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=46383
   - STAMP TAX ACT（韩国《印花税法》英文版，hseq=64499）: https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=64499
   - Act on the Establishment of Financial Services Commission（韩国《金融委员会设置法》英文版，hseq=47931；第 46/47/38 条 FSS 经费来源=政府/韩行拨款 + 受检机构分担金，`kr-krx.costs.regulatory_fees` 的 `type: none` 一手依据，2026-09-04 ADR-067）: https://elaw.klri.re.kr/eng_service/lawViewContent.do?hseq=47931
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Asia/Seoul（KST UTC+9，无夏令时）
+  - tzdb「asia」zone 文件: https://data.iana.org/time-zones/tzdb/asia（HTTP 200，68KB）

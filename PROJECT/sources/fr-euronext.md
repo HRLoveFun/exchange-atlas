@@ -31,3 +31,6 @@
   - Euronext Derivatives – How the Market Works（v5.4，2025，114页会员培训文档，含Optiq Tick Table机制、Market Making框架MMA/MMS/MME角色、Nord Pool电力衍生品到期结算价说明等章节）PDF: https://connect.euronext.com/sites/default/files/it-documentation/Euronext%20Derivatives_How%20the%20Market%20Work_v5.4.pdf（HTTP 200，1.9MB）
   - Euronext Derivatives – Introduction of Fixed Income Derivatives on main European government bonds（Info-Flash，2024-12-16，BTP/OAT/Bund/BONO迷你期货上线前技术通知，Appendix含拟议合约规格表——合约规模/跳动点位/到期月序列/可交割券标准；⚠️ 原文标注为"proposed"规格，产品已于2025-09正式上线，主要参数经现行产品页交叉核实一致）PDF: https://connect.euronext.com/sites/default/files/2024-12/IF241216DE%20Euronext%20Derivatives%20%E2%80%93%20Introduction%20of%20Fixed%20Income%20Derivatives%20on%20main%20European%20government%20bonds.pdf（HTTP 200，165KB）
 - `www.reuters.com` | 第三方（财经通讯社） | en | WebSearch 定位 | 政治/市场背景（risks.*，confidence 封顶 medium）
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Europe/Amsterdam、Paris、Brussels、Dublin、Lisbon、Rome、Oslo 各市场夏令时 Rule
+  - tzdb「europe」zone 文件: https://data.iana.org/time-zones/tzdb/europe（HTTP 200，64KB）

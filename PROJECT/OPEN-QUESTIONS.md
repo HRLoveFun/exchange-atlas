@@ -52,6 +52,7 @@
 44. **`market_structure.derivatives` 子块（ADR-019 新增）在 `hk-hkex` 首次真实填充后，暴露出两处值得记录的问题。** (a) 原假设"HKFE（香港期货交易所）2000年公司化后与HKEX同一法人"，但 HKEX 官方2000-03-06新闻稿原文是"The Hong Kong Futures Exchange (HKFE) today became **a subsidiary of** Hong Kong Exchanges and Clearing Limited"——法律上 HKFE 是集团内**独立法人的全资附属公司**（股票期货再由 HKFE 全资附属的 HKCC 结算，还有第三层）。此前只有 NYSE Group（多个独立注册的 SEC 实体）与 Eurex/Xetra（同为独立法人）两种"历史交易所公司化"先例，`hk-hkex`/HKFE 是第三种"文档常说'合并'、官方原文显示实为'集团化为子公司'"的样本——下次遇到"某交易所X年与主交易所合并"描述时应找当年官方公告核实法律形式（同一法人 vs 集团子公司 vs 独立姊妹交易所），不要凭"合并"字面想当然。(b) `circuit_breaker_type` 枚举（none/index_level/stock_level/both）以股票市场为语境设计，`derivatives.circuit_breaker` 真实颗粒度是"部分期货品种的现月/次月合约级别"（六个指数期货品种，非全市场也非个股），本次借用 `stock_level` 只取其"非全市场"含义，是不完全贴合的近似——若其余 8 家（`au-asx`/`br-b3`/`cn-szse`/`fr-euronext`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse`）补齐衍生品机制后普遍遇到同样情况，值得给枚举新增 `contract_level`（逐合约级）值。**（2026-09-05 OQ #45 落地补记：样本 +1）** `jp-jpx` 衍生品子章的 SCB（Static Circuit Breaker）颗粒度是"同标的全限月期货+同标的全部期权+相关策略交易"的合约组级（`jp-jpx.yml` `derivatives.circuit_breaker` 同样借用 `stock_level`、`spec.type` 已如实标 `contract_level`），现两家样本、同一借用模式，仍按原判据暂不改 `enums.yml`，样本再累积后一并评估。(c) `derivatives.closing_mechanism`（收市机制）、`connect_schemes`（互联互通安排）、`block_trade`（大手交易门槛规则）三字段本次官方页面信息不足，已如实留空/降级，缺口说明见 `data/exchanges/hk-hkex.yml` 对应字段 `detail`。
 
 46. **衍生品子章的两个受控词表缺口（OQ #45 落地时坐实，均暂不改 enums.yml）：** (a) `circuit_breaker_type` 缺 `contract_level`（见 #44(b)，现 hk-hkex/jp-jpx 两家样本、同一借用模式）；(b) `clearing.derivatives.delivery_method` 的枚举（physical/cash/na/either）表达不了"分产品线"语义——`jp-jpx` 股指期货/期权现金结算（SQ）、国债期货实物交割、mini 10 年国债现金结算，只能近似取 `either` 并在 `detail` 声明"是产品线分化、非头寸可选"。触发条件：第三家"分产品线交割"样本出现时评估给 delivery_method 增加产品线维度。
+47. **stable 档来源闭环的 13 处降级待人工投喂（2026-09-05 闭环批，各字段 `detail` 已留候选出处）：** `ca-tsx`/`de-eurex`/`in-nse`/`sa-tadawul`/`tw-twse`/`uk-lse`/`za-jse` 的 `overview.settlement_currency`、`us-nyse`/`us-nasdaq`/`jp-jpx` 的 `overview.trading_currency`+`settlement_currency`、`fr-euronext` 的 `overview.trading_currency`。共性：币种值本身无争议，但缓存内官方页均无「交易/结算币种」的专门陈述句；候选出处分别为 CDS 结算规则（ca）、Eurex Clearing Rules（de-eurex）、NSCCL 结算规则（in）、Edaa/Muqassa 规则（sa）、TWSE 营业细则交割条款（tw）、CREST Rules（uk，euroclear.com 403）、DTCC NSCC Rules & Procedures（us×2）、TSE Business Regulations/JSCC 规则（jp）、Euronext 各市场产品页与 Harmonised Rulebook（fr）。人工提供原文后逐字段升 medium/high。
 
 
 
@@ -169,11 +170,14 @@
 - `cn-szse` 风险与特殊考量 / 流动性风险（liquidity_risk_note）— confidence: low
 - `de-eurex` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `de-eurex` 市场数据与技术基础设施 / 历史系统故障事件（major_outage_history）— confidence: low
+- `fr-euronext` 基本信息 / 交易货币（trading_currency）— confidence: low
 - `fr-euronext` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `fr-euronext` 市场结构与交易机制 / 上午连续竞价（trading_sessions.continuous_am）— confidence: low
 - `in-nse` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（trading_halt_mechanism）— confidence: low
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（derivatives.trading_halt_mechanism）— confidence: low
+- `jp-jpx` 基本信息 / 交易货币（trading_currency）— confidence: low
+- `jp-jpx` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 错误交易处理规则（error_trade_rule）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low
@@ -188,6 +192,7 @@
 - `tw-twse` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `tw-twse` 监管与法律环境 / 外资准入与持股比例限制（foreign_ownership_limit）— confidence: low
 - `tw-twse` 清算、结算与交割 / 初始保证金制度（initial_margin_practice）— confidence: low
+- `uk-lse` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `us-nasdaq` 基本信息 / 交易货币（trading_currency）— confidence: low
 - `us-nasdaq` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `us-nasdaq` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
