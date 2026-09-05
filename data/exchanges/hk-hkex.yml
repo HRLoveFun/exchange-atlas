@@ -886,13 +886,13 @@ listing:
     confidence: high
 
   delisting_conditions:
-    zh: "主板除牌条件（第6章）：上市是持续附条件安排——联交所在为保障投资者或维持有序市场而认为有必要时，可随时指示停牌或暂停买卖，或取消任何证券的上市（6.01，列举情形包括公众持股量不足等）；已连续停牌 18 个月的证券，联交所可取消其上市（6.01A）；发行人自愿撤回上市须有替代上市安排或经股东批准（6.12）"
-    en: "Main Board delisting conditions (Chapter 6): listing is always granted subject to the condition that where the Exchange considers it necessary for the protection of the investor or the maintenance of an orderly market, it may at any time direct a trading halt or suspend dealings or cancel the listing of any securities (6.01, including insufficient public float); the Exchange may cancel the listing of securities suspended for a continuous period of 18 months (6.01A); voluntary withdrawal requires an alternative listing or shareholder approval (6.12)"
+    zh: "主板除牌条件（第6章）：上市是持续附条件安排——联交所在为保障投资者或维持有序市场而认为有必要时，可随时指示停牌或暂停买卖，或取消任何证券的上市（6.01，列举情形包括公众持股量不足等）；已连续停牌 18 个月的证券，联交所可取消其上市（6.01A）；发行人自愿撤回上市（受 6.15 规限）：有替代上市者按 6.11（仍须股东批准）；无替代上市者按 6.12（另须联交所许可＋股东批准）"
+    en: "Main Board delisting conditions (Chapter 6): listing is always granted subject to the condition that where the Exchange considers it necessary for the protection of the investor or the maintenance of an orderly market, it may at any time direct a trading halt or suspend dealings or cancel the listing of any securities (6.01, including insufficient public float); the Exchange may cancel the listing of securities suspended for a continuous period of 18 months (6.01A); voluntary withdrawal is possible under rule 6.11 (with an alternative listing) or rule 6.12 (without — requiring the Exchange's permission plus shareholder approval), subject to rule 6.15"
     sources:
       - title: "主板《上市规则》综合 PDF（HKEX 官方，第6章 GENERAL TRADING HALT, SUSPENSION, CANCELLATION AND WITHDRAWAL OF LISTING）"
         url: https://www.hkex.com.hk/-/media/HKEX-Market/Listing/Rules-and-Guidance/Listing-Rules/Consolidated-PDFs/Main-Board-Listing-Rules/consol_mb.pdf
         accessed: 2026-09-05
-    quote: "6.01 Listing is always granted subject to the condition that where the Exchange considers it necessary for the protection of the investor or the maintenance of an orderly market, it may at any time direct a trading halt or suspend dealings in any securities or cancel the listing of any securities in such circumstances and subject to such conditions as it thinks fit, whether requested by the issuer or not. ... 6.01A (1) Without prejudice to its power under rule 6.01, the Exchange may cancel the listing of any securities that have been suspended from trading for a continuous period of 18 months."
+    quote: "6.01 Listing is always granted subject to the condition that where the Exchange considers it necessary for the protection of the investor or the maintenance of an orderly market, it may at any time direct a trading halt or suspend dealings in any securities or cancel the listing of any securities in such circumstances and subject to such conditions as it thinks fit, whether requested by the issuer or not. ... 6.01A (1) Without prejudice to its power under rule 6.01, the Exchange may cancel the listing of any securities that have been suspended from trading for a continuous period of 18 months. ... 6.11 Subject to rule 6.15, an issuer whose primary listing is on the Exchange and which has an alternative listing ... may not voluntarily withdraw its listing on the Exchange unless:– (1) the prior approval of shareholders has been obtained ... 6.12 Subject to rule 6.15, if the issuer has no such alternative listing, the issuer may not voluntarily withdraw its listing on the Exchange without the permission of the Exchange unless:- (1) the issuer has obtained the prior approval of its shareholders"
     confidence: high
 
   delisting_process:
@@ -1070,7 +1070,6 @@ clearing:
     enum: na
     zh: "不适用（现货证券经 CCASS 电子簿记交收，无实物交割概念）"
     en: "Not applicable (cash securities settled by book-entry through CCASS; no physical delivery concept)"
-    detail: "推断依据：products 章节所列品类（股票/ETF/REITs/权证/牛熊证/债券）均为现货或现金结算的结构性产品，未见实物交割型衍生品；现货证券交收经 CCASS 以电子簿记形式进行（持续净额交收 CNS / 单独交收 Isolated Trades）。原记录的「网址精确到信息页」缺口（此前仅笼统引官网首页）本次以清算总览官方页坐实，confidence 由 low 升 medium。"
     sources:
       - title: HKEX Clearing - Securities Overview（官网，CCASS 交易所交易经 CNS/Isolated Trades 系统交收）
         url: https://www.hkex.com.hk/Services/Clearing/Securities/Overview?sc_lang=en
@@ -1435,8 +1434,8 @@ risks:
     detail: "本次检索到的多为第三方律所简报/媒体报道对《国安法》与美国制裁交叉合规风险的评论（如 Lexology/Reed Smith/US-China Business Council），未找到港交所或证监会自身对这类地缘政治风险的正面官方表述可供逐字摘引，按铁律不采纳第三方推断性内容，留空。"
 
   liquidity_risk_note:
-    zh: "香港现货市场流动性呈结构性分层：成交与流动性高度集中于大市值蓝筹与恒生综合指数大型/中型股成分股，小市值个股与部分结构性产品价差偏宽、冲击成本更高——这一分层也直接体现在 HKSCC 的两级保证金制度中（Tier P 覆盖大型/中型股成分股、全部股票 ETP 及以其为标的的结构性产品，适用 VaR 组合保证金；其余品种适用 12%/30%/55% 的 Tier N 平准费率，费率档位本身即是对流动性分层与风险敞口的定价，见 clearing.initial_margin_practice）。结算层面流动性风险由 HKSCC 的 CNS 净额交收与保证金安排承接"
-    en: "Liquidity in Hong Kong's cash market is structurally tiered: turnover concentrates in large-cap blue chips and Hang Seng Composite LargeCap/MidCap constituents, while small caps and some structured products carry wider spreads and higher impact cost — a stratification mirrored directly in HKSCC's two-tier margin regime (Tier P VaR portfolio margin for LargeCap/MidCap constituents, all equity ETPs and structured products thereon; 12%/30%/55% Tier N flat rates for the rest, with the tiers themselves pricing liquidity stratification and risk exposure — see clearing.initial_margin_practice). Settlement-level liquidity risk is absorbed by HKSCC's CNS netting and margin arrangements"
+    zh: "香港现货市场流动性呈结构性分层（分析性归纳）：成交与流动性一般呈现向大市值蓝筹与恒生综合指数大型/中型股成分股集中的特征，小市值个股与部分结构性产品的价差与冲击成本通常更高——这一分层也直接体现在 HKSCC 的两级保证金制度中（Tier P 覆盖大型/中型股成分股、全部股票 ETP 及以其为标的的结构性产品，适用 VaR 组合保证金；其余品种适用 12%/30%/55% 的 Tier N 平准费率，费率档位本身即是对流动性分层与风险敞口的定价，见 clearing.initial_margin_practice）。结算层面流动性风险由 HKSCC 的 CNS 净额交收与保证金安排承接"
+    en: "Liquidity in Hong Kong's cash market is structurally tiered (analytical characterisation): turnover tends to concentrate in large-cap blue chips and Hang Seng Composite LargeCap/MidCap constituents, while small caps and some structured products typically carry wider spreads and higher impact cost — a stratification mirrored directly in HKSCC's two-tier margin regime (Tier P VaR portfolio margin for LargeCap/MidCap constituents, all equity ETPs and structured products thereon; 12%/30%/55% Tier N flat rates for the rest, with the tiers themselves pricing liquidity stratification and risk exposure — see clearing.initial_margin_practice). Settlement-level liquidity risk is absorbed by HKSCC's CNS netting and margin arrangements"
     detail: "分析性字段（结构性停留 low/medium）：『流动性分层』与保证金分组的对应关系是以 HKSCC 保证金页的 Tier 划分为锚的归纳（Tier 分类跟随 HSCI 大/中/小盘），不是引用了一份专门论述流动性风险的官方文件；无具体成交集中度数字，不引入未核实统计。"
     sources:
       - title: "Margin（HKEX 官网 HKSCC 风险管理·保证金页，Tier P/Tier N 分组作为流动性分层与风险定价的制度证据）"

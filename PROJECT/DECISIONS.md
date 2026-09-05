@@ -84,6 +84,7 @@
 - ADR-077 · 2026-09-05 · 来源文件下沉 + 把「靠自觉的约定」变成构建关卡
 - ADR-078 · 2026-09-05 · 数据空缺复核轨任务四执行方案：5 家旗舰所深度补全的字段级现状核实 + 按字段族批量回填设计
 - ADR-079 · 风险旗标数据子棒的落地方案：第 12 章 `*_note` 「制度核 / 分析尾」二分 + `fx_risk_note` 就地清作业规程
+- ADR-080 · 2026-09-05 · 任务四第二人独立复核：78 处终态，22 处订正（含 2 处素材错挂），零幻觉
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2123,5 +2124,28 @@
 **没改：** 本条是纯规划文档，`data/`/`schema/`/`tools/`/前端均未改动；只改 `PROJECT/DECISIONS.md`（本条）+ `PROJECT/ROADMAP.md`（任务四条目细化，指向本 ADR）。
 
 **验证：** 现状核实脚本基于 `tools/sync.py` 既有函数现算、非手数，78 处总量与逐所清单已在正文列出，供接手会话直接核对/复算；`make build` 全绿（两处改动文件均不被 `sync.py` 扫描，`validate`/`verify_quotes`/`check_ui_i18n` 零影响）；`make sync` 二次幂等零 diff。
+
+**日期：** 2026-09-05
+
+
+---
+
+### ADR-080 — 任务四第二人独立复核：78 处终态，22 处订正（含 2 处素材错挂），零幻觉
+
+**背景：** [ADR-078] 规定任务四 5 家旗舰所 78 处全部完工后须比照 [ADR-074] 做第二人独立复核。本条 2026-09-05 执行时点任务四已完成 67 处（回填/升级）、11 处经检索未坐实留空（`OPEN-QUESTIONS.md` 第29条）——按「复核覆盖全部 78 处终态」执行：65 处已填字段逐条复核，13 处留空字段核验「留空理由 + 入口记录」是否合规（其中 2 处发现系漏写而非查不清，就地补写）。
+
+**方法（复刻 [ADR-074]）：** 4 个互相隔离、彼此不知情的独立复核视角（A=us-nyse 17 / B=hk-hkex 17 / C=cn-sse 19 / D=uk-lse+jp-jpx 25），逐条：quote 逐字性（grep/pdftotext 自查缓存，不只看 `make check` 绿灯）、zh/en 数字溯源、confidence 与来源优先级匹配、语义忠实度（双向）、消极判断、同文件跨字段一致性。判定表全文见 `PROJECT/DATA-GAP-TASK4-SPOT-CHECK.md`。
+
+**结果：** 初检 48 PASS / 14 FIX / 15 QUESTION（filled 口径通过率 73.8%）；**22 处订正全部就地落地**（14 处视角 FIX + 复核过程中发现的 2 处漏项补写 uk `listing.delisting_process`/cn `overview.history` + QUESTION 转 FIX 6 处）。**终态 67/67 filled 全部 PASS + 11 处合规留空，QUESTION 存留仅 1 项备注级**（cn `costs.capital_gains_tax` 「现行有效」时效标注无逐字来源）。`make build` 全绿（verify_quotes OK=1088/FAIL=0）。
+
+**最重要的 4 处发现（均为「真实素材错误挂接」级，非凭空编造）：** ① cn `participants.foreign_access_channel` quote 从来源登记批注误转写出全文不存在的「第七条…」——换为缓存真实条款（QFII 规定第四条托管人开户/第七条 10%、30% 上限）；② jp `costs.stamp_duty` 把商品销售代金收据的分档税额错挂到证券转让文书——第17号文書注2明确排除证券转让价款，实际适用无分档简表（5万円未満非課税/5万円以上200円）；③ jp `listing.transfer_between_boards` quote 段2 逐字出自 Rule 714（COVID 特别条款）而非第3章第2节——换 Rule 308(1)；④ hk `listing.delisting_conditions` 把 6.11（有替代上市）/6.12（无替代上市）的双轨结构写反——按条文重写。**工具层系统性发现**：`fetch_sources.doc_companion` 对「URL 以 .html 结尾但实为 PDF」的来源不生成 .txt 伴随（us DTCC guide 实锤），独立复核者对二进制 PDF 不可见导致 10 项「查无文本」误报——经协调者 pdftotext 验证 9 条争议 quote 全部逐字成立，并已为 4 个 PDF 补齐 .txt 伴随；此为 [ADR-074] 系统性问题③的工具层变体，建议后续给 `doc_companion` 按 content-type 而非扩展名判定。
+
+**复核的独立价值实证：** uk `regulation.clearing_regulator`（OPEN-QUESTIONS 第22条「未找到直接原文确认」）的留空依据被复核证伪——同一批缓存的 LCH 费率表 PDF 内即有「supervised by the Bank of England」原句，据此回填关账；uk `listing.delisting_process`/cn `overview.history` 两处「以为是留空决策」实为上轮会话漏写，复核兜住了。
+
+**决定：** 22 处订正就地生效；QUESTION 存留 1 项转 OQ；任务四剩余 11 处按 OQ 第29条入口继续，全部回填后无需再整批复核（本复核已覆盖 78 处终态，增量字段逐处自检即可）。
+
+**没改：** `schema/`/`tools/`；FIX 只动 zh/en/detail/quote/sources 与 2 处漏项补写，未动既有 enum/spec/confidence 框架。
+
+**验证：** `make build` 全绿（validate 20 家 0/0、verify_quotes OK=1088/FAIL=0）；4 个 PDF 的 .txt 伴随补齐后 `verify_quotes` 口径与独立复核一致。
 
 **日期：** 2026-09-05

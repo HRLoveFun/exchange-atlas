@@ -164,7 +164,7 @@ regulation:
         accessed: 2026-09-05
     quote: "an interagency committee authorized to review certain transactions involving foreign investment into United States businesses and certain transactions by foreign persons involving real estate in the United States, in order to determine the effect of such transactions on the national security of the United States."
     confidence: medium
-    detail: "未核实是否存在一般性外资持股限制，留空。"
+    detail: "复核订正（ADR-074 流程）：原 detail 残留升级前「留空」旧文案与已填内容矛盾，已删。口径说明：CFIUS 官方材料明示美国维持开放投资环境、审查按交易逐案进行，未见一般性持股比例管制——「无统一持股比例上限」据此成立；CFIUS 条文本身不是持股比例条款。"
 
   capital_controls:
     zh: "联邦层面没有一般性资本管制或外汇管制；外国对美投资受CFIUS（美国外国投资委员会）以国家安全为由的审查，审查对象是特定交易本身，不是资本跨境流动的额度或审批"
@@ -683,17 +683,14 @@ listing:
     confidence: medium
 
   post_delisting_venue:
-    zh: "退市后股份一般转入场外（OTC）市场交易：SEC 官方投资者材料将 OTC 定位为交易所之外由券商网络构成的交易场所，退市/停牌股份在 OTC 恢复交易须符合 Rule 15c2-11 的审查要求（券商向 FINRA 提交 Form 211）；NYSE 官方退市页本身只覆盖 Form 25 除牌程序（见 transfer_between_boards quote），退市去向不在其规定范围"
-    en: "Delisted shares generally move to over-the-counter (OTC) trading: SEC official investor materials describe OTC as trading outside exchanges over broker-dealer networks, and OTC quotation of a delisted/suspended stock requires compliance with Rule 15c2-11 review (a Form 211 filed with FINRA); NYSE's own delistings page covers only the Form 25 removal process (see transfer_between_boards quote) — post-delisting venues are outside its scope"
+    zh: "退市后股份一般转入场外（OTC）市场交易：SEC 官方投资者材料载明，停牌后的 OTC 报价恢复须由券商按 Exchange Act Rule 15c2-11 审查公司信息并向 FINRA 提交 Form 211——即 OTC 为退市股份延续交易的场所；NYSE 官方退市页本身只覆盖 Form 25 除牌程序（见 transfer_between_boards quote），退市去向不在其规定范围"
+    en: "Delisted shares generally move to over-the-counter (OTC) trading: SEC official investor materials state that resumption of OTC quotation after a suspension requires a broker-dealer to review company information under Exchange Act Rule 15c2-11 and file a Form 211 with FINRA — i.e. the OTC market is where delisted shares continue trading; NYSE's own delistings page covers only the Form 25 removal process (see transfer_between_boards quote) — post-delisting venues are outside its scope"
     detail: "原『草稿印象：退市后转入 OTC（粉单等）』以 SEC 官方材料坐实 OTC 市场属性与 Rule 15c2-11/Form 211 恢复交易要求；『粉单』为私营 OTC 平台分类，非监管机构表述，不写入 zh。"
     sources:
-      - title: "Over-the-Counter (OTC)（investor.gov 术语表，SEC 投资者教育与倡导办公室，OTC 市场官方定义）"
-        url: https://www.investor.gov/introduction-investing/investing-basics/glossary/over-the-counter-otc
-        accessed: 2026-09-05
       - title: "Why would the SEC suspend trading in a stock?（SEC 投资者警示 PDF，OTC 股票恢复交易须符合 Rule 15c2-11 与 Form 211）"
         url: https://www.sec.gov/investor/alerts/tradingsuspensions.pdf
         accessed: 2026-09-05
-    quote: "Before OTC stock quoting can resume after a ... in accordance with Exchange Act Rule 15c2-11 and FINRA Rule 6432."
+    quote: "Before OTC stock quoting can resume after a suspension period, SEC regulations require a broker- ... all applicable requirements, including those of Rule 15c2-11 and FINRA Rule 6432."
     confidence: medium
 
 # ═══════════════════════════════════════════════
@@ -850,8 +847,8 @@ clearing:
     zh: "不适用——NYSE 现货市场的股票、ADR、ETF、公司债与市政债等均为无到期日的现金工具，不存在衍生品意义上的『最后交易日』；成交经 NSCC 清算（CCP）并于 T+1 交收后，清算义务即告消灭"
     en: "Not applicable — cash instruments traded on NYSE (equities, ADRs, ETFs, corporate and municipal bonds) have no expiry and thus no derivative-style last trading day; once trades are cleared by NSCC (the CCP) and settled on T+1, the clearing obligations are extinguished"
     sources:
-      - title: "SEC.gov | Clearing Agencies（NSCC 作为现货证券 CCP 的官方定性，正面对照『无到期日合约』的现金市场属性）"
-        url: https://www.sec.gov/about/divisions-offices/division-trading-markets/clearing-agencies
+      - title: "Staff Report on the Regulation of Clearing Agencies（SEC 官方报告 PDF，NSCC=CCP 定性原句的实际出处）"
+        url: https://www.sec.gov/files/regulation-clearing-agencies-100120.pdf
         accessed: 2026-09-05
     quote: "NSCC serves as a CCP for virtually all broker-to-broker trades involving equities, corporate and municipal debt, American depositary receipts, exchange-traded funds, and unit investment trusts."
     confidence: medium
@@ -972,11 +969,14 @@ infrastructure:
     confidence: medium
 
   data_pricing_model:
-    zh: "订阅授权制（subscription/entitlement）：NYSE 实时行情为低延迟订阅制数据产品（覆盖 NYSE 集团各资产类别的 full depth of book、逐笔成交、报价、拍卖失衡与证券状态消息），按产品订阅授权向数据接收方收费；具体费率与分发展开于官方数据产品页与许可协议，无统一定价公开页逐条列示"
-    en: "Subscription/entitlement-based pricing: NYSE real-time market data is offered as subscription data products (low-latency feeds across NYSE Group asset classes carrying full depth of book, trades, quotes, auction imbalances and security status messages), charged to data recipients per product subscription/entitlement; detailed rates live in official data-product pages and licence agreements rather than a single public price list"
+    zh: "订阅授权制（subscription/entitlement）：NYSE 实时行情为低延迟订阅制数据产品（覆盖 NYSE 集团各资产类别的 full depth of book、逐笔成交、报价、拍卖失衡与证券状态消息），按产品订阅授权向数据接收方收费；逐项费率（Access/Professional User/Non-Display/Redistribution 等）公开列示于官方 NYSE Market Data Price List（2026 版设「Market Data Fees」专节并链接费率表 PDF）"
+    en: "Subscription/entitlement-based pricing: NYSE real-time market data is offered as subscription data products (low-latency feeds across NYSE Group asset classes carrying full depth of book, trades, quotes, auction imbalances and security status messages), charged to data recipients per product subscription/entitlement; itemised fees (Access / Professional User / Non-Display / Redistribution, etc.) are published in the official NYSE Market Data Price List (the 2026 Price List carries a dedicated 「Market Data Fees」 section linking the fee-schedule PDF)"
     sources:
       - title: "Market Data: Real-Time（NYSE 官网，实时行情产品与订阅入口的官方描述）"
         url: https://www.nyse.com/market-data/real-time
+        accessed: 2026-09-05
+      - title: "NYSE Price List 2026（官网费率表，Market Data Fees 专节与逐项费目）"
+        url: https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSE_Price_List.pdf
         accessed: 2026-09-05
     quote: "Low-latency, real-time market data feeds cover the various asset classes and markets in the NYSE Group to offer you insight into intraday trading activity. These feeds include full depth of book, trades, quotes, auction imbalances and security status messages."
     confidence: medium
@@ -1038,8 +1038,8 @@ costs:
     confidence: medium
 
   commission_structure:
-    zh: "NYSE 不向投资者统一规定佣金：经纪佣金由会员券商自主定价——1975-05-01『五月日』（May Day）起交易所固定佣金制废止、费率全面竞争化/协商化（SEC 官方一手叙述，见 quote）；NYSE 自身向会员收取的是交易费与流动性返佣（maker-taker，见 exchange_fees 与官方费率表），与经纪佣金分属两类成本"
-    en: "NYSE does not set investor commissions: brokerage commissions are set by member firms — the exchange's fixed commission regime was abolished on 1 May 1975 ('May Day'), with rates fully competitive/negotiable (per the SEC's official account); NYSE itself charges its members transaction fees and liquidity rebates (maker-taker, see exchange_fees and the official price list), a separate cost category from brokerage commissions"
+    zh: "NYSE 不向投资者统一规定佣金：经纪佣金由会员券商自主定价——1975 年「五月日」（May Day）起交易所固定佣金制废止、费率全面竞争化/协商化（SEC 官方一手叙述，见 quote）；NYSE 自身向会员收取的是交易费与流动性返佣（maker-taker，见 exchange_fees 与官方费率表），与经纪佣金分属两类成本"
+    en: "NYSE does not set investor commissions: brokerage commissions are set by member firms — the exchange's fixed commission regime was abolished in 1975 (the 'May Day' rule), with rates fully competitive/negotiable (per the SEC's official account); NYSE itself charges its members transaction fees and liquidity rebates (maker-taker, see exchange_fees and the official price list), a separate cost category from brokerage commissions"
     detail: "原留空记录中的方向性判断（美国经纪佣金由市场竞争定价、多数券商已对散户零佣金）本次以 SEC 1975 年官方一手文件坐实『固定佣金制废止』这一制度节点；『多数券商零佣金』属市场现状描述，未见官方统计，维持不作为主要论断。"
     sources:
       - title: "Brokerage Commissions and Research After May Day（SEC 委员 Loomis 演讲 PDF，1975-06-03，固定佣金废止/竞争费率的一手官方叙述；OCR 全大写、标点为 `~`，摘引照抄）"
@@ -1048,7 +1048,7 @@ costs:
       - title: "New York Stock Exchange Price List 2026（官网费率表，NYSE 面向会员的交易费/返佣结构，佐证『交易所收费≠经纪佣金』）"
         url: https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSE_Price_List.pdf
         accessed: 2026-09-05
-    quote: "FOR SEVERAL MONTHS NOW THE SECURITIES INDUSTRY HAS BEEN LOOKING FORWARD WITH VERY MIXED EMOTIONS TO THE DAWN OF MAy DAY AND COMPETITIVE RATES. Now MAy DAY rlAS COME AND GONE BUT THE CONSEQUENCES ARE STILL NOT ENTIRELY CLEA ... BECAUSE IT WAS ABLE TO UNDERCUT THE FIXED COMMISSION."
+    quote: "FOR SEVERAL MONTHS NOW THE SECURITIES INDUSTRY HAS BEEN LOOKING FORWARD WITH VERY MIXED EMOTIONS TO THE DAWN OF MAy DAY AND COMPETITIVE RATES. Now MAy DAY rlAS COME AND GONE BUT THE CONSEQUENCES ARE STILL NOT ENTIRELY CLEAR. ... BECAUSE IT WAS ABLE TO UNDERCUT THE FIXED COMMISSION."
     confidence: medium
 
   exchange_fees:
@@ -1101,8 +1101,8 @@ costs:
     verified: 2026-09-04
 
   stamp_duty:
-    zh: "无联邦证券交易印花税：美国税制中不存在针对证券交易的印花税税种；证券交易环节的联邦税收历史沿革（1914–1966 联邦股票转让税 STT 及现行 SEC 小额规费）见 financial_transaction_tax 字段，二者为同一来源、同一判据"
-    en: "No federal stamp duty on securities transactions: the U.S. tax system has no stamp-duty instrument applying to securities trades; the federal transaction-tax history (the 1914–1966 stock transfer tax and the current small SEC-related fees) is covered under the financial_transaction_tax field, which uses the same source and judgment basis"
+    zh: "无联邦证券交易印花税：美国联邦层面未设立普遍适用的证券交易印花税（stamp duty）税种——CRS 报告记载的联邦交易环节课税仅为历史股票转让税与现行 SEC 小额规费；证券交易环节的联邦税收历史沿革（1914–1966 联邦股票转让税 STT 及现行 SEC 小额规费）见 financial_transaction_tax 字段，二者为同一来源、同一判据"
+    en: "No federal stamp duty on securities transactions: no broad-based federal stamp-duty instrument applies to securities trades in the U.S. — the federal transaction-stage levies on record are the historical stock transfer tax and the current small SEC fees; the federal transaction-tax history (the 1914–1966 stock transfer tax and the current small SEC-related fees) is covered under the financial_transaction_tax field, which uses the same source and judgment basis"
     detail: "原留空记录中的『与上交所 0.05% 单边、港交所 0.1% 双边对比』仍成立且已在相应交易所字段坐实；美国联邦层面对交易征税的正面依据与 financial_transaction_tax 共用 CRS RL32266。州层面（如纽约州历史上）的转让税本次未单独核实，不写入 zh。"
     sources:
       - title: "Transaction Tax: General Overview（CRS Report RL32266，everycrsreport.com 镜像托管；与 financial_transaction_tax 同一来源）"

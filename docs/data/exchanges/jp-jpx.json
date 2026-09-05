@@ -580,7 +580,7 @@
         "detail": "由 low 升级：官网日历页一手坐实（含逐日日期与星期）；此前『未逐条核实』的保留事项以官方页面的逐年发布机制替代——本字段不逐日抄录，日期以官网当年日历为准。",
         "sources": [
           {
-            "title": "Holiday Trading（JPX 官网，逐年交易日历与假期安排）",
+            "title": "Market Holidays（JPX 官网，逐年交易日历与假期安排）",
             "url": "https://www.jpx.co.jp/english/corporate/about-jpx/calendar/",
             "accessed": "2026-09-05"
           }
@@ -1343,8 +1343,8 @@
         "spec": null
       },
       "transfer_between_boards": {
-        "zh": "东证板块间转移制度：TSE 现行设 Prime（主板）/ Standard / Growth 三个市场板块（2022-04-04 起施行，市场再编的结果）；上市公司可申请转移其上市股票所属市场板块——《有价证券上市规程》第3章第2节「Transfer of Market Segments」（Rule 306–310）专门规定板块转移，相关规则准用于上市公司的板块转移申请",
-        "en": "TSE operates a market-segment transfer regime: TSE currently has three market segments — Prime, Standard and Growth (in effect since 4 April 2022 as the outcome of the market restructuring); a listed company may apply to transfer the market segment of its listed stock — the Securities Listing Regulations Chapter 3 Section 2 'Transfer of Market Segments' (Rules 306–310) governs such transfers, with the relevant provisions applied mutatis mutandis to segment-transfer applications by listed companies",
+        "zh": "东证板块间转移制度：TSE 现行设 Prime（主板）/ Standard / Growth 三个市场板块（2022-04-04 起施行，市场再编的结果）；上市公司可申请转移其上市股票所属市场板块——《有价证券上市规程》第3章第2节「Transfer of Market Segments」（Rule 306–310）专门规定板块转移，板块转移申请准用首次上市的资格审查条款（Rule 308：转板 Standard Market 准用 Rule 205/206/207）",
+        "en": "TSE operates a market-segment transfer regime: TSE currently has three market segments — Prime, Standard and Growth (in effect since 4 April 2022 as the outcome of the market restructuring); a listed company may apply to transfer the market segment of its listed stock — the Securities Listing Regulations Chapter 3 Section 2 'Transfer of Market Segments' (Rules 306–310) governs such transfers, with the initial-listing qualification provisions applied mutatis mutandis to a transfer application to the Standard Market (Rule 308)",
         "sources": [
           {
             "title": "Overview of Market Restructuring（JPX 官网，三板块 2022-04-04 施行的官方表述）",
@@ -1357,7 +1357,7 @@
             "accessed": "2026-09-05"
           }
         ],
-        "quote": "TSE carried out research into a possible market restructuring, and started three market segments, the \"Prime Market\", \"Standard Market\", and \"Growth Market\", on April 4, 2022. ... The provisions of the preceding Rule shall be applied mutatis mutandis to cases where a listed company applies for transfer of a market segment of its listed stock.",
+        "quote": "TSE carried out research into a possible market restructuring, and started three market segments, the \"Prime Market\", \"Standard Market\", and \"Growth Market\", on April 4, 2022. ... The provisions of Rule 205 (excluding Items (5) and (7)), Rule 206 (excluding Paragraph 2, Item (2)), and Rule 207, Paragraph 1 and Paragraph 5 shall be applied mutatis mutandis to the cases where an application for transfer of a market segment to the Standard Market is made pursuant to the provisions of Rule 306.",
         "confidence": "high",
         "verified": "2026-08-24",
         "enum": null,
@@ -1460,9 +1460,9 @@
         "spec": null
       },
       "post_delisting_venue": {
-        "zh": "退市后无官方承接挂牌安排：按《有价证券上市规程》Rule 610，退市时本所在退市日将该公司股份从上市证券名录中删除——规程未设置退市后股份的后续挂牌市场或承接机制；退市股份转为非上市股份，日本亦无自动承接退市股票的官方场外市场（历史上曾有的场外承接制度均已废止，见 detail）",
-        "en": "No official post-delisting venue exists: under Securities Listing Regulations Rule 610, upon delisting the Exchange deletes the stock from the listed security registry on the delisting date — the regulations provide no successor listing venue or taking-over mechanism; delisted shares simply become unlisted, and Japan operates no official OTC market that automatically takes over delisted stocks (the historical off-exchange regimes have all been abolished — see detail)",
-        "detail": "原留空记录中已探明的背景：日本证券业协会「Phoenix」制度已于 2008-03-31 废止、「绿单市场」（Green Sheet）已于 2018 年 3 月底废止（当次核实未附官方原文，沿用为背景线索）；本次以 Rule 610『Erasure from the Registry』为正面依据坐实『规则层面无承接安排』。",
+        "zh": "退市后无官方承接挂牌安排：按《有价证券上市规程》Rule 610，退市时本所在退市日将该公司股份从上市证券名录中删除——规程未设置退市后股份的后续挂牌市场或承接机制；退市股份转为非上市股份（日本是否存在承接退市股票的场外机制未在本次核实范围，见 detail）",
+        "en": "No official post-delisting venue exists: under Securities Listing Regulations Rule 610, upon delisting the Exchange deletes the stock from the listed security registry on the delisting date — the regulations provide no successor listing venue or taking-over mechanism; delisted shares simply become unlisted (whether any off-exchange mechanism in Japan takes over delisted stocks was outside this review scope — see detail)",
+        "detail": "原留空记录中已探明的背景：日本证券业协会「Phoenix」制度已于 2008-03-31 废止、「绿单市场」（Green Sheet）已于 2018 年 3 月底废止（当次核实未附官方原文，沿用为背景线索且仍未核实）；本次以 Rule 610『Erasure from the Registry』坐实的仅是「规程层面无承接安排」——规程之外的全国性场外机制是否存在，留待补 JSDA 官方原文（复核订正：原主文「日本亦无官方场外市场」超出规程文本，已降级至 detail）。",
         "sources": [
           {
             "title": "Securities Listing Regulations（东证上市规程英文版 PDF，Rule 610 Erasure from the Registry）",
@@ -2008,8 +2008,8 @@
         "spec": null
       },
       "stamp_duty": {
-        "zh": "日本对证券交易本身不征交易税（有価証券取引税已于 1999-03-31 废止，见 regulatory_fees 与 financial_transaction_tax）；现行与证券转让文书相关的税为印紙税：制作纸质『有価証券売渡譲渡書』等第17号文書（金銭又は有価証券の受取書）时按记载金额分档贴花（如 5万円未満不课税、5万円以上100万円以下 200 円、1億円超2億円以下 4 万円）；交易所电子集中交易不制作纸质文书，实际不产生印紙税——与上交所单边印花税、港交所双边印花税的形态根本不同",
-        "en": "Japan levies no transaction tax on securities trades (the Securities Transaction Tax was abolished on 31 March 1999 — see regulatory_fees and financial_transaction_tax); the current stamp-duty exposure arises only when a paper document is created: 印紙税 applies to 第17号文書 (receipts of money or securities, including securities transfer documents) at rates tiered by the stated amount (e.g. below 50,000 yen exempt; 50,000–1,000,000 yen: 200 yen; over 100 million up to 200 million yen: 40,000 yen). Exchange electronic trading creates no paper document, so no stamp duty arises in practice — fundamentally different from the Shanghai (one-side) and Hong Kong (both-side) stamp duties",
+        "zh": "日本对证券交易本身不征交易税（有価証券取引税已于 1999-03-31 废止，见 regulatory_fees 与 financial_transaction_tax）；现行仅在制作纸质课税文书时产生印紙税：证券转让价款的收据被第17号文書（売上代金に係る金銭又は有価証券の受取書）的注2明确排除在「売上代金」之外，适用「売上代金以外の金銭または有価証券の受取書」的简表——记载金额 5万円未満非課税、5万円以上一律 200 円；交易所电子集中交易不制作纸质文书，实际不产生印紙税——与上交所单边印花税、港交所双边印花税的形态根本不同",
+        "en": "Japan levies no transaction tax on securities trades (the Securities Transaction Tax was abolished on 31 March 1999 — see regulatory_fees and financial_transaction_tax); stamp duty now arises only when a paper taxable document is created: receipts for securities-sale proceeds are expressly excluded from the No.17 document class (receipts of sales proceeds) by its Note 2, so securities-transfer receipts fall under the simplified schedule for 'receipts of money or securities other than sales proceeds' — exempt below 50,000 yen and a flat 200 yen from 50,000 yen. Exchange electronic trading creates no paper document, so no stamp duty arises in practice — fundamentally different from the Shanghai (one-side) and Hong Kong (both-side) stamp duties",
         "sources": [
           {
             "title": "No.7141 印紙税額の一覧表（その2）第5号文書から第20号文書まで（国税庁 Tax Answer，第17号文書印紙税额分档表）",
@@ -2017,7 +2017,7 @@
             "accessed": "2026-09-05"
           }
         ],
-        "quote": "記載された受取金額が 5万円未満 非課税 5万円以上100万円以下 200円 100万円を超え200万円以下 400円 ... 5千万円を超え1億円以下 2万円 1億円を超え2億円以下 4万円",
+        "quote": "(注)2 株券等の譲渡代金、保険料、公社債および預貯金の利子などは売上代金から除かれます。 ... [売上代金以外の金銭または有価証券の受取書] ... 記載された受取金額が 5万円未満 非課税 5万円以上 200円",
         "confidence": "medium",
         "verified": "2026-08-24",
         "enum": null,
@@ -2084,7 +2084,7 @@
         "detail": null
       },
       "implicit_costs_note": {
-        "zh": "日本现货股票的隐性成本主要来自买卖价差与市场冲击；市场结构上的相关官方/研究记录：TSE 为日本股票订单流的主要集中场所，PTC（券商自营交叉盘/PTS）仅分流小部分交易——2025 年日本已无独立 PTS（Cboe Japan 退出后券商系 PTS 与 SBI Japannext 并存），其中 Cboe Japan 退出前的股票交易份额也仅约 4–5%；订单流集中意味着 TSE 主市场的价差/深度是隐性成本的主要决定因素。逐标的实际价差官方不发布（逐笔订单簿数据为 FLEX MBO 付费产品，见 infrastructure.market_data_levels），本字段按覆盖边界停留在分析性描述",
+        "zh": "日本现货股票的隐性成本主要来自买卖价差与市场冲击；市场结构上的相关官方/研究记录：TSE 为日本股票订单流的主要集中场所，PTC（券商自营交叉盘/PTS）仅分流小部分交易——2025 年日本已无独立 PTS（Cboe Japan 退出后仅存券商系 PTS（SBI Japannext、乐天 JAX 等）），其中 Cboe Japan 退出前的股票交易份额也仅约 4–5%；订单流集中意味着 TSE 主市场的价差/深度是隐性成本的主要决定因素。逐标的实际价差官方不发布（逐笔订单簿数据为 FLEX MBO 付费产品，见 infrastructure.market_data_levels），本字段按覆盖边界停留在分析性描述",
         "en": "Implicit costs in Japanese cash equities stem mainly from bid-ask spreads and market impact; relevant structural records: TSE concentrates the bulk of Japanese equity order flow — Japan now has no independent PTS (after Cboe Japan's withdrawal, broker-affiliated PTSs coexist with SBI Japannext), and Cboe Japan held only about a 4–5% share of equity trading before its exit; order-flow concentration means spreads/depth on the TSE book are the main determinant of implicit costs. Per-instrument realized spreads are not officially published (order-book data is the paid FLEX MBO product, see infrastructure.market_data_levels), so this note remains analytical per the coverage boundary",
         "detail": "由留空升级：引入 JSRI 研究报告（第三方，confidence 封顶 medium）关于 PTS 格局与份额的可摘引记录，佐证『订单流集中于 TSE 主市场』的结构判断；价差本身仍无官方数字。",
         "sources": [

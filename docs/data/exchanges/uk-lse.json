@@ -216,15 +216,21 @@
         "spec": null
       },
       "clearing_regulator": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "中央对手方的审慎监管归属英格兰银行（Bank of England）：LCH 官方清算费率表自述『LCH Limited is supervised by the Bank of England within the UK regulatory framework』，并同时在美国 CFTC 注册为衍生品清算组织、依 EMIR 获第三国 CCP 认可；证券市场行为/上市监管仍属 FCA（见 regulator 字段）——即清算机构的审慎监督（BoE）与行为监管（FCA）分属两个机关",
+        "en": "Prudential supervision of central counterparties sits with the Bank of England: LCH's own clearing fee schedule states that 'LCH Limited is supervised by the Bank of England within the UK regulatory framework', while also registered as a derivatives clearing organisation with the U.S. CFTC and recognised as a third-country CCP under EMIR; conduct/listing regulation remains with the FCA (see the regulator field) — i.e. prudential CCP supervision (BoE) and conduct regulation (FCA) are split between two authorities",
         "detail": "英格兰银行（Bank of England）按常识应是英国中央对手方（CCP）的监管机关（UK EMIR框架下），但本次抓取范围内未找到直接原文确认这一点，按铁律不采纳未核实的印象，留空，见 OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "LCH Ltd EquityClear settlement fee schedule（LCH 官方费率表 PDF，开头条款自述 supervised by the Bank of England）",
+            "url": "https://www.lseg.com/content/dam/post-trade/en_us/documents/lch/resources/lch-ltd-equity-clear-settlement-fee-schedule-current-010724.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "LCH Limited is supervised by the Bank of England within the UK regulatory framework, registered as a derivatives clearing organisation with the U.S. Commodity Futures Trading Commission (\"CFTC\") and recognised as a third-country CCP under Regulation (EU) No. 648/2012",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "core_laws": {
         "zh": "《2000年金融服务与市场法》（Financial Services and Markets Act 2000, FSMA）",
@@ -1140,31 +1146,21 @@
         "detail": null
       },
       "delisting_process": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "发行人主动申请取消上市（Cancellation at issuer's request）须满足UKLR 21.2.8-21.2.18及21.3的具体程序要求，本次未逐条核实完整流程细节。",
+        "zh": "取消上市（除牌）双向程序（UKLR 21）：① FCA 强制取消——FCA 认为存在妨碍正常有序交易的特别情形时可取消上市（如证券不再按规则获准交易、发行人不再满足持续义务如公众持股比例低于 10%、停牌超过 6 个月等）；② 发行人主动申请——须书面提出并载明证券详情、背景与理由、拟生效日期等要素，并按 UKLR 21.2.8R 出具股东决议等证明文件",
+        "en": "Cancellation of listing runs both ways (UKLR 21): (1) FCA cancellation — the FCA may cancel the listing where special circumstances preclude normal regular dealings (e.g. securities no longer admitted to trading as required, continuing obligations unmet such as public hands falling below 10%, or suspension exceeding 6 months); (2) issuer-initiated requests — a written request must set out the issuer's name, the securities and RIEs concerned, background and reasons, the requested effective date, and evidence of any resolution required under UKLR 21.2.8R",
+        "detail": "复核订正（ADR-074 流程）：原记录『未逐条核实完整流程细节』的保守留空在第二人复核中发现 UKLR sourcebook 全文 PDF（已在缓存）第 21.2/21.3 节原文可直接摘引，据此回填。",
         "sources": [
           {
-            "title": "Admission and Disclosure Standards（官网，2021年1月版）",
-            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/admission_disclosure_standards.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "UKLR UK Listing Rules sourcebook（FCA Handbook，2026年4月更新版）",
+            "title": "UKLR — UK Listing Rules sourcebook 全文 PDF（FCA Handbook，UKLR 21.2 Cancelling listing / 21.3 Requests to cancel or suspend）",
             "url": "https://api-handbook.fca.org.uk/files/sourcebook/UKLR.pdf",
-            "accessed": "2026-08-14"
-          },
-          {
-            "title": "AIM Rules for Companies（官网，2026年1月版）",
-            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/AIM%20Rules%20for%20Companies%20-%20January%202026.pdf",
-            "accessed": "2026-08-14"
+            "accessed": "2026-09-05"
           }
         ],
+        "quote": "The FCA may cancel the listing of securities if it is satisfied that there are special circumstances that preclude normal regular dealings in them. ... (2) the issuer no longer satisfies its continuing obligations for listing – for example, if the percentage of shares in public hands falls below 10% ... (3) the securities' listing has been suspended for more than 6 months; ... A request by an issuer for the listing of its securities to be suspended or cancelled must be in writing and must include: (1) the issuer's name; (2) details of the securities to which it relates and the RIEs on which they are traded; (3) a clear explanation of the background and reasons for the request; (4) the date on which the issuer requests the suspension or cancellation to take effect;",
+        "confidence": "high",
         "verified": "2026-08-14",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "delisting_transition_period": {
         "spec": {
@@ -1838,9 +1834,9 @@
         "enum": null
       },
       "financial_transaction_tax": {
-        "zh": "英国对证券买卖不另设独立于印花税体系之外的金融交易税（FTT）：官方口径下购买股票所涉及的税种即为印花税或储备税（Stamp Duty / Stamp Duty Reserve Tax，对购入应课税股票按 0.5% 征收，见 stamp_duty 字段）——HMRC 官方页在「买股票要缴什么税」的条目下仅列举 SDRT/Stamp Duty 两项，无第三种交易税；欧盟 FTT 因脱欧不适用于英国交易",
-        "en": "The UK levies no financial transaction tax separate from its stamp-duty system: per the official guidance, the taxes on buying shares are precisely Stamp Duty Reserve Tax (SDRT) or Stamp Duty (0.5% on chargeable purchases — see the stamp_duty field); HMRC's official page lists only these two instruments under taxes payable when buying shares, and the EU FTT does not apply to UK transactions post-Brexit",
-        "detail": "由留空转为本口径的依据升级：gov.uk「Tax when you buy shares」页给出『买股票涉及的税』的官方枚举（仅 SDRT/Stamp Duty），足以作为『无另设 FTT』的正面依据而非『未提及即不存在』；脱欧后 EU FTT 不适用为公开法律事实，作为背景写入 detail 而非主论断。原留空记录的谨慎理由保留于 git 历史。",
+        "zh": "英国对证券买卖不另设独立于印花税体系之外的金融交易税（FTT）：官方口径下购买股票所涉及的税种即为印花税或储备税（Stamp Duty / Stamp Duty Reserve Tax，对购入应课税股票按 0.5% 征收，见 stamp_duty 字段）——HMRC 官方页在「买股票要缴什么税」的条目下仅列举 SDRT/Stamp Duty 两项，无第三种交易税；欧盟级 FTT 从未生效，英国交易本就不在其范围",
+        "en": "The UK levies no financial transaction tax separate from its stamp-duty system: per the official guidance, the taxes on buying shares are precisely Stamp Duty Reserve Tax (SDRT) or Stamp Duty (0.5% on chargeable purchases — see the stamp_duty field); HMRC's official page lists only these two instruments under taxes payable when buying shares, and the EU-level FTT never entered into force, so UK transactions were never within its scope",
+        "detail": "由留空转为本口径的依据升级：gov.uk「Tax when you buy shares」页给出『买股票涉及的税』的官方枚举（仅 SDRT/Stamp Duty），足以作为『无另设 FTT』的正面依据而非『未提及即不存在』；EU 级 FTT 从未生效为公开法律事实。原留空记录的谨慎理由保留于 git 历史。",
         "sources": [
           {
             "title": "Tax when you buy shares（gov.uk / HMRC 官方页，购买股票税种的官方枚举）",
@@ -1908,8 +1904,8 @@
     },
     "risks": {
       "fx_risk_note": {
-        "zh": "英镑为自由浮动货币、英国无资本管制：1979-10-23 财政大臣 Geoffrey Howe 在下议院宣布自当日午夜起撤销全部剩余外汇管制（官方议会记录原文），英国投资者的跨境证券投资与外汇兑换自此不受管制；对非英镑投资者的 LSE 上市证券持仓而言，汇率风险来自其本币兑英镑的波动，无官方对冲安排或管制缓冲",
-        "en": "Sterling floats freely and the UK has no capital controls: on 23 October 1979 Chancellor Geoffrey Howe announced in the Commons the removal of all remaining exchange control restrictions from midnight that night (official Hansard record) — since then UK cross-border portfolio investment and FX conversion are uncontrolled; for non-GBP investors holding LSE-listed securities, FX risk arises from their home currency's fluctuation against sterling, with no official hedging arrangement or control buffer",
+        "zh": "英镑为自由浮动货币、英国无资本管制：1979-10-23 财政大臣 Geoffrey Howe 在下议院宣布自当日午夜起撤销全部剩余外汇管制（官方议会记录原文；原句末尾附有罗得西亚相关例外的但书，与 capital_controls 字段口径一致），英国投资者的跨境证券投资与外汇兑换自此不受管制；对非英镑投资者的 LSE 上市证券持仓而言，汇率风险来自其本币兑英镑的波动，无官方对冲安排或管制缓冲",
+        "en": "Sterling floats freely and the UK has no capital controls: on 23 October 1979 Chancellor Geoffrey Howe announced in the Commons the removal of all remaining exchange control restrictions from midnight that night (official Hansard record; the original sentence carries a caveat for Rhodesia-related restrictions, consistent with the capital_controls field) — since then UK cross-border portfolio investment and FX conversion are uncontrolled; for non-GBP investors holding LSE-listed securities, FX risk arises from their home currency's fluctuation against sterling, with no official hedging arrangement or control buffer",
         "sources": [
           {
             "title": "EXCHANGE CONTROLS, HC Deb 23 October 1979 vol 972 cc202-14（英国议会官方 Hansard 记录，外汇管制全面撤销的一手原文）",

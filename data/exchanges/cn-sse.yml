@@ -16,6 +16,16 @@ overview:
     verified: 2026-08-12
     confidence: medium
 
+  history:
+    zh: "上海证券交易所成立于 1990 年 11 月 26 日，同年 12 月 19 日开业，受中国证监会监督和管理（本所简介官方表述）"
+    en: "The Shanghai Stock Exchange was established on 26 November 1990 and opened on 19 December of the same year, operating under the supervision and administration of the CSRC (official profile)"
+    sources:
+      - title: "本所简介（上海证券交易所官网，成立与开业日期的官方表述）"
+        url: https://www.sse.com.cn/aboutus/overview/
+        accessed: 2026-09-05
+    quote: "上海证券交易所成立于1990年11月26日，同年12月19日开业，受中国证监会监督和管理。"
+    confidence: high
+
   timezone:
     zh: "Asia/Shanghai (UTC+8)"
     en: "Asia/Shanghai (UTC+8)"
@@ -114,7 +124,7 @@ regulation:
 
   self_regulatory_org:
     zh: "一线自律监管：上海证券交易所自身承担对上市公司与会员的一线自律监管职能（官方简介明列其职能包括『组织和监督证券交易；对会员进行监管』等，且『受中国证监会监督和管理』）；券商层面另有中国证券业协会（自律组织）承担行业自律职责"
-    en: "Front-line self-regulation: the Shanghai Stock Exchange itself exercises front-line self-regulatory functions over listed companies and members (its official profile lists 'organising and supervising securities trading; regulating members' among its functions, operating 'under the supervision and administration of the CSRC'); at the broker level, the Securities Association of China (SAC) undertakes industry self-regulation"
+    en: "Front-line self-regulation: the Shanghai Stock Exchange itself exercises front-line self-regulatory functions over listed companies and members (its official profile lists 'organising and supervising securities trading; regulating members' among its functions, operating 'under the supervision and administration of the CSRC'); at the broker level, the Securities Association of China (SAC) additionally undertakes industry self-regulation over securities firms"
     detail: "由 low 升级：以本所官网『本所简介』一手坐实交易所的自律监管职能与证监会监管关系；证券业协会一句为制度常识性补充，未单独登记来源，不作为字段主要论断。"
     sources:
       - title: "本所简介（上海证券交易所官网，成立时间、职能与证监会监管关系的官方表述）"
@@ -476,6 +486,7 @@ market_structure:
       - title: "Trading Rules of Shanghai Stock Exchange (2026 Revision) 第3.2.11条 — SSE 官方英文译本，仅供参考，中文本为准"
         url: https://english.sse.com.cn/start/sserules/stocks/trading/c/10825757/files/d263e3a87f37436ca2f8e5bcfc4ff001.pdf
         accessed: 2026-08-13
+    quote: "证监会依法批准中证金融公司暂停转融券业务的申请，自2024年7月11日起实施。"
 
   block_trade:
     zh: "大宗交易：意向申报 9:30-11:30、13:00-15:30；确认申报另可延至 16:00-17:00；固定价格申报 15:00-15:30"
@@ -831,12 +842,12 @@ participants:
   foreign_access_channel:
     zh: "境外投资者参与沪市的两个制度通道：①合格境外机构投资者（QFII）/人民币合格境外机构投资者（RQFII）制度——境外机构依《合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法》经托管人办理开户与投资，持股比例受单一/全部境外投资者上限约束（见 regulation.foreign_ownership_limit）；②沪港通下的沪股通——香港及境外投资者经香港交易所买卖沪市标的（机制细节未在本次单独登记来源，见 detail）"
     en: "Two institutional channels for foreign participation in the SSE market: (1) the QFII/RQFII regime — qualified foreign institutions open accounts and invest through custodians under the QFII/RQFII Measures, subject to single/all-foreign-investor ownership caps (see regulation.foreign_ownership_limit); (2) Shanghai-Hong Kong Stock Connect (Northbound) — Hong Kong and overseas investors trade SSE-eligible stocks via HKEX (mechanism details not separately source-registered this session, see detail)"
-    detail: "原『草稿印象：QFII/RQFII、沪港通北向资金等渠道』以已在缓存的《合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法》实施规定 PDF（regulation.foreign_ownership_limit 同一来源）坐实 QFII/RQFII 通道；沪股通通道作为制度常识写入，其专项规则（沪港通试点办法）未单独登记，留待后续补源。"
+    detail: "原『草稿印象：QFII/RQFII、沪港通北向资金等渠道』以已在缓存的《合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法》实施规定 PDF（regulation.foreign_ownership_limit 同一来源）坐实 QFII/RQFII 通道（复核订正：原 quote「第七条 境外投资者的合格境外机构投资者证券账户…」系从来源登记批注误转写——该 PDF 用「一、二、三…」条目编号、全文无「第七条」，已按缓存原文重摘第四条托管人开户与第七条 10%/30% 持股上限）；沪股通通道作为制度常识写入，其专项规则（沪港通试点办法）未单独登记，留待后续补源。"
     sources:
       - title: "《关于实施〈合格境外机构投资者和人民币合格境外机构投资者境内证券期货投资管理办法〉有关问题的规定》PDF（证监会公告，regulation.foreign_ownership_limit 同源）"
         url: https://www.sse.com.cn/lawandrules/regulations/csrcannoun/c/10117179/files/9cdbd4b41fc3453e8f8a036719ea8e24.pdf
         accessed: 2026-09-05
-    quote: "第七条 境外投资者的合格境外机构投资者证券账户或人民币合格境外机构投资者证券账户"
+    quote: "四、合格境外投资者应当委托托管人申请开立证券期货账户。 ... 七、合格境外投资者及其他境外投资者的境内证券投资，应当遵循下列持股比例限制：（一）单个合格境外投资者或其他境外投资者持有单个上市公司或者挂牌公司的股份，不得超过该公司股份总数的10%；（二）全部合格境外投资者及其他境外投资者持有单个公司a股或者境内挂牌股份的总和，不得超过该公司股份总数的30%。"
     confidence: medium
 
   membership_structure:
@@ -1047,7 +1058,7 @@ costs:
       - title: "持有上市公司股票取得的股息红利需要缴纳个人所得税吗？（国家税务总局上海市税务局热点问答，转述财税〔2015〕101号现行口径）"
         url: https://shanghai.chinatax.gov.cn/zcfw/rdwd/201512/t420630.html
         accessed: 2026-09-05
-    quote: "根据《财政部国家税务总局证监会关于上市公司股息红利差别化个人所得税政策有关问题的通知》（财税〔2015〕101号）的规定,个人从公开发行和转让市场取得的上市公司股票,持股期限超过1年的,股息红利所得暂免征收个人所得税。个人从公开发行和转让市场取得的上市公司股票,持股期限在1个月以内(含1个月)的,其股息红利所得全额计入应纳税所得额;持股期限在1个月以上至1年(含1年)的,暂减按50%计入应纳税所得额;上述所得统一适用20%的税率计征个人所得税。"
+    quote: "根据《财政部国家税务总局证监会关于上市公司股息红利差别化个人所得税政策有关问题的通知》（财税〔2015〕101号）的规定，个人从公开发行和转让市场取得的上市公司股票，持股期限超过1年的,股息红利所得暂免征收个人所得税。个人从公开发行和转让市场取得的上市公司股票，持股期限在1个月以内（含1个月）的，其股息红利所得全额计入应纳税所得额；持股期限在1个月以上至1年（含1年）的，暂减按50%计入应纳税所得额;上述所得统一适用20%的税率计征个人所得税。"
     confidence: high
 
   implicit_costs_note:

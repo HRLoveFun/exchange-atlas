@@ -25,7 +25,7 @@
 1. **风险旗标 · 数据子棒**（[ADR-066] 分棒 ①）— `fx_risk_note` 就地清（17 家 `confidence: low` → `make fetch` 央行 / IMF AREAER / 交易所外资指南补一手源升 medium）+ 补 3 处空 `political_risk_note`（`cn-sse`/`hk-hkex`/`tw-twse`）+ 复核 `enforcement_note` low 簇（`cn-sse`/`cn-szse` 空、`kr-krx` low）。触及约 22 字段（近 [CLAUDE.md §四] 的 30 字段第二人复核门槛，回填前先估清）；与 [ADR-060] 任务四并轨。风险旗标渲染层已落地（[ADR-066] 分棒 ②，2026-09-04）。
 2. **→ Phase 3 六个可视化模块做齐（硬前置）→ Phase 4 单页画布合并解锁**（[ADR-057]）— 成本瀑布 / 交割管线 / 上市生命周期 / 监管图 / 参与者图 / 风险旗标**六个模块渲染层均已落地**（[ADR-057] #4 按渲染层口径满足）；只差上面风险旗标数据子棒。合并画布整体布局形态 / 「更多」入口形态 / 各模块排序，Phase 4 启动时 Q&A 定；**该数据子棒是否也是硬前置留待拍板**（[ADR-066] 文末）。
 3. **已做齐模块的视觉迭代**（交互式会话，不阻断 Phase 4，与上并行）— 成本瀑布（[ADR-047]：单一费种远大于其余时左半留白 / 全零市场「合计 0.00 bp」/ 暗色「此侧不征」虚线偏弱 / 按股·定额费折算粗，佣金行降级+`rate_raw` 已由 [ADR-071] 落地）、交割管线（[ADR-051]：深色预防层偏淡 / T+1 现货所右半留白 / 违约瀑布 `resource` 短语无 `en`、英文态仍中文）、上市生命周期（[ADR-059]：散文无 spec 阶段块硬裁剪 / 停复牌 ↻ 偏淡 / 8 个时长 spec 语义忠实度待第二人复核 / 给更多所补时长 spec）、监管图（[ADR-061]：卡正文 ≤4 行硬裁剪 / 中英混排 Latin 词逐字折断 / 长文卡「先摘要后全文」）、参与者图（[ADR-064]：节点卡硬裁剪 / 同上 Latin 折断）、风险旗标（[ADR-066]：制度泳道 3 卡窄 + 长散文按卡 5 行硬裁剪 / 同上 Latin 折断 / `low` 卡左缘色条暗色下几乎不可见）。剖面机制核心面板右缘避让（[ADR-070]）与零轴刻度改标参考价名称（[ADR-073]）已落地。
-4. **数据空缺复核轨剩余**（横切，与上并行；[ADR-060]/[ADR-062]）— **任务三**（9 家衍生品子章 C 桶 40 处，穿插 viz）；**任务四**（5 家旗舰所深度 F 桶 78 处，`us-nyse`/`hk-hkex`/`uk-lse`/`cn-sse`/`jp-jpx`，执行方案已定案 [ADR-078]，建议 Phase 4 前完成、非硬前置；**65/78 已回填**，剩 13 处入口见 `OPEN-QUESTIONS.md` 第29条）。任务二第二人独立复核已完成（[ADR-074]，2026-09-05，79 处终态 96.2% 达标）；任务五 ①② 已完成（[ADR-075]，2026-09-05，`[OTP]` 抓取 + wayback 回退 + `za-jse` 缓存重建），③（`make check` stale 清单）未做、留独立排期，`kr-krx` 剩 8 处 low 待人工投喂。另有已收口的成本瀑布残差（[ADR-065]）/ 长尾（[ADR-067]）遗留移交项：`kr-krx exchange_fees` 当期档位（KRX 数据端点对数据中心 IP 封锁，[ADR-075] 已探明，仍需人工投喂）、`us` Section 31 FY2027 公告（未发布，OPEN-QUESTIONS #88）、`fr-euronext stamp_duty`（一所多国、`rate: null` 是正确终态）。详版见三节。
+4. **数据空缺复核轨剩余**（横切，与上并行；[ADR-060]/[ADR-062]）— **任务三**（9 家衍生品子章 C 桶 40 处，穿插 viz）；**任务四**（5 家旗舰所深度 F 桶 78 处，`us-nyse`/`hk-hkex`/`uk-lse`/`cn-sse`/`jp-jpx`，执行方案已定案 [ADR-078]，建议 Phase 4 前完成、非硬前置；**67/78 已回填且全部通过第二人独立复核**，剩 11 处入口见 `OPEN-QUESTIONS.md` 第29条）。任务二第二人独立复核已完成（[ADR-074]，2026-09-05，79 处终态 96.2% 达标）；任务五 ①② 已完成（[ADR-075]，2026-09-05，`[OTP]` 抓取 + wayback 回退 + `za-jse` 缓存重建），③（`make check` stale 清单）未做、留独立排期，`kr-krx` 剩 8 处 low 待人工投喂。另有已收口的成本瀑布残差（[ADR-065]）/ 长尾（[ADR-067]）遗留移交项：`kr-krx exchange_fees` 当期档位（KRX 数据端点对数据中心 IP 封锁，[ADR-075] 已探明，仍需人工投喂）、`us` Section 31 FY2027 公告（未发布，OPEN-QUESTIONS #88）、`fr-euronext stamp_duty`（一所多国、`rate: null` 是正确终态）。详版见三节。
 
 完整清单与每章的小型 `spec` 补充见三节 `- [ ] **Phase 3 · 其余章节可视化**`。
 
@@ -50,7 +50,7 @@
 | `br-b3` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 |
 | `ca-tsx` | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | 🟡 |
 | `ch-six` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | 🟡 |
-| `cn-sse` | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 |
+| `cn-sse` | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 |
 | `cn-szse` | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
 | `de-eurex` | ✅ | ✅ | ✅ | 🟡 | ➖ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | 🟡 |
 | `de-xetra` | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | 🟡 |
@@ -62,7 +62,7 @@
 | `sa-tadawul` | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | 🟡 | ✅ | 🟡 |
 | `sg-sgx` | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 |
 | `tw-twse` | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | 🟡 | 🟡 | 🟡 |
-| `uk-lse` | ✅ | 🟡 | ✅ | 🟡 | 🟡 | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ |
+| `uk-lse` | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ |
 | `us-nasdaq` | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | 🟡 | 🟡 |
 | `us-nyse` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 |
 | `za-jse` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -73,7 +73,7 @@
 ### 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
-共 1977 个已填字段，其中 0 个超过复核阈值待复核。
+共 1980 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
 |---|---|---|
@@ -81,7 +81,7 @@
 | `br-b3` | 113 | 0 |
 | `ca-tsx` | 89 | 0 |
 | `ch-six` | 90 | 0 |
-| `cn-sse` | 88 | 0 |
+| `cn-sse` | 89 | 0 |
 | `cn-szse` | 110 | 0 |
 | `de-eurex` | 73 | 0 |
 | `de-xetra` | 85 | 0 |
@@ -93,7 +93,7 @@
 | `sa-tadawul` | 111 | 0 |
 | `sg-sgx` | 110 | 0 |
 | `tw-twse` | 83 | 0 |
-| `uk-lse` | 86 | 0 |
+| `uk-lse` | 88 | 0 |
 | `us-nasdaq` | 83 | 0 |
 | `us-nyse` | 90 | 0 |
 | `za-jse` | 123 | 0 |
@@ -224,7 +224,7 @@
   - **步骤**：逐所按 `.claude/skills/add-exchange/SKILL.md` 第 4 步子章部分，`make fetch` 补抓衍生品规则页（合约规格、交易时段、涨跌停、保证金方法论），填信封 + `spec`。
   - **验收**：`make build` 全绿；触及 > 30 字段 → 第二人复核（[CLAUDE.md §四]）。
 - [ ] **任务四 · 5 家旗舰所深度补全（F 桶逐所 78 处，执行方案已定案，[ADR-078]）**（建议 Phase 4 合并启动前完成，非硬前置）
-  - **进展（2026-09-05，交互式会话两轮）**：**65/78 已回填或升级**——族A 清算保证金四件套 20 处＋`hk-hkex clearing.delivery_method` 升级（21）；族D costs 15 处（佣金协商化/印花税缺失正面依据/资本利得与股息税税率/无监管费与无 FTT 的 type-none 判据，全部一手税务与官方来源）；族B/C listing 14 处（HK 第9A章转板与第6章除牌、UKLR 21 转移与除牌、TSE 上市规程 Rule 306–310 板块转移/Rule 601 退市标准/Rule 610 退市除名、SSE 审核时限与转板办法与第八章停复牌、NYSE 14 工作日受理与 Form 25 机制与 OTC 去向）；族E/F/G/H/市场结构/族I 共 15 处（HK OTP-C 交易系统与第13章披露与流动性风险、CN 适当性办法/转融券暂停/本所简介/历史沿革/规则高频修订、UK 1979 撤销外汇管制（Hansard）、US CFIUS 无比例限制与交易日历与订阅制行情）。`verify_quotes` OK=1085/FAIL=0。**剩 13 处未坐实**（`hk-hkex`×5：foreign_ownership_limit/capital_controls/history/foreign_access_channel/self_regulatory 升级；`us-nyse`×1：foreign_access_channel；`uk-lse`×4：pre_market/holidays_note/clearing_regulator/major_outage_history；`cn-sse`×2：investor_structure/trading_system_name）——已逐字段登记 `OPEN-QUESTIONS.md` 第29条（含已试路径与下次入口）；官网改版 404（basiclaw/hkex Regulation 页）与 lseg/bankofengland SPA 空壳是本轮主要障碍。
+  - **进展（2026-09-05，交互式会话两轮 + 第二人复核）**：**67/78 已回填或升级，第二人独立复核已完成**（[ADR-080]：4 隔离视角 × 78 处终态，初检 48 PASS/14 FIX/15 QUESTION，22 处订正后终态 67/67 filled PASS，零幻觉；判定表见 `PROJECT/DATA-GAP-TASK4-SPOT-CHECK.md`；原「65/78」口径经复核修正——uk `listing.delisting_process`/cn `overview.history` 系漏写已补，uk `regulation.clearing_regulator` 依据失效已回填）——族A 清算保证金四件套 20 处＋`hk-hkex clearing.delivery_method` 升级（21）；族D costs 15 处（佣金协商化/印花税缺失正面依据/资本利得与股息税税率/无监管费与无 FTT 的 type-none 判据，全部一手税务与官方来源）；族B/C listing 14 处（HK 第9A章转板与第6章除牌、UKLR 21 转移与除牌、TSE 上市规程 Rule 306–310 板块转移/Rule 601 退市标准/Rule 610 退市除名、SSE 审核时限与转板办法与第八章停复牌、NYSE 14 工作日受理与 Form 25 机制与 OTC 去向）；族E/F/G/H/市场结构/族I 共 15 处（HK OTP-C 交易系统与第13章披露与流动性风险、CN 适当性办法/转融券暂停/本所简介/历史沿革/规则高频修订、UK 1979 撤销外汇管制（Hansard）、US CFIUS 无比例限制与交易日历与订阅制行情）。`verify_quotes` OK=1085/FAIL=0。**剩 13 处未坐实**（`hk-hkex`×5：foreign_ownership_limit/capital_controls/history/foreign_access_channel/self_regulatory 升级；`us-nyse`×1：foreign_access_channel；`uk-lse`×4：pre_market/holidays_note/clearing_regulator/major_outage_history；`cn-sse`×2：investor_structure/trading_system_name）——已逐字段登记 `OPEN-QUESTIONS.md` 第29条（含已试路径与下次入口）；官网改版 404（basiclaw/hkex Regulation 页）与 lseg/bankofengland SPA 空壳是本轮主要障碍。
   - **工具坑两则（本轮）**：① `tools/fetch.py` 的 `looks_blocked` 对 jpx.co.jp 页面（HTML 内嵌 cloudflare 字样）误报 FAIL，用 `fetch_sources.py --ex`（requests）即可全过（已记 `sources/jp-jpx.md`）；② NTA「有価証券取引税」页为 Shift-JIS 编码，`fetch_sources` 落盘后须转存 UTF-8 才能过 quote 反查（已记 `sources/jp-jpx.md`）。
   - **下一步（收尾）**：13 处按 `OPEN-QUESTIONS.md` 第29条入口逐个击破 → 78 处全部完工后比照 [ADR-074] 做第二人独立复核（本会话自检：每所交付时逐字段 quote 核对，`make build` 全绿）。
   - **目标**：`us-nyse`(17) / `hk-hkex`(17) / `cn-sse`(19) / `uk-lse`(14) / `jp-jpx`(11)（+`de-eurex` 11 / `fr-euronext` 10 / `in-nse` 10 视精力）F 桶清零到 ✅ / 显式不适用，达到 `za-jse` 的「全章 ✅、0 low」基准。图鉴主视图讲「一眼看懂一个市场」，最该完整的恰是这几家——ROADMAP 已承认、未排期的欠账。**逐所分布已用脚本现算更新**（原 15/13/13/11/9 是 2026-09-03 estimate，其后任务二 / 成本瀑布残差长尾 / 抓取基础设施修复已动过部分交叉字段）；逐字段清单（含所属交易所与来源类型建议）见 [ADR-078]，不必重新翻 YAML 现算。
