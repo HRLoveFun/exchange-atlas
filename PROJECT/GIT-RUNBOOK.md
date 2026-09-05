@@ -25,21 +25,11 @@ gh pr merge <n> --squash --delete-branch
 git pull --ff-only && make build             # gh 在删分支失败时会跳过本地 main 的同步，合并后自己补一次；build 红则停（见下）
 ```
 
-## 合并前先给占位符 ADR 定号（[ADR-076]）
+## 常态：不用手动合并（[ADR-dev-automation]）
 
-某条后台 PR 的 `DECISIONS.md` 里如果带着 `### ADR-PENDING-<slug>` 占位符（并行分支不再预支具体数字号的新纪律，见 `PROJECT/ADR-LEDGER.md`），**在 `gh pr merge` 之前**先在该分支上跑一次定号：
+后台任务收尾时开 PR 并跟一句 `gh pr merge --auto --squash`：CI（`.github/workflows/build.yml`）跑完 `make build` 绿了就自动合并、自动删远端分支（仓库已开 `delete_branch_on_merge`），**人不需要点合并**。下面那些手动步骤只在两种情况下才用得上：CI 红了要就地修，或你不想等 `--auto`。
 
-```bash
-cd .claude/worktrees/<name>       # 或该分支已签出的任意目录
-git pull --ff-only                # 确保台账是 main 最新状态，定号才准
-make assign-adr                   # 把占位符改写成台账下一个真实编号 + 全库替换引用
-git status -s                     # 确认只改了 DECISIONS.md / ADR-LEDGER.md 及被引用的文件
-git add -A
-git commit -m "编号定案：ADR-PENDING-<slug> → ADR-0NN（assign_adr_number.py）"
-git push
-```
-
-再按下面「一次只合一个后台 PR」的正常步骤 `gh pr merge`。**多个待合并 PR 都带占位符时仍要逐条串行处理**——定号、合并、`make build` 绿了，再处理下一个的定号，不要一次性给所有分支批量定号（那样又回到「预支」竞态，见 [ADR-076]）。
+**原「合并前先给占位符 ADR 定号」一节已删除**：数字编号在 001–080 冻结、新 ADR 一律是 `PROJECT/decisions/ADR-<slug>.md` 不取号，没有号可撞，也就没有「合并前先定号」这一步了（[ADR-dev-automation]）。`make assign-adr`、定号脚本、编号台账三者均已随之删除。
 
 ## 一次只合一个后台 PR，合完必 `make build`（[ADR-069]）
 
@@ -59,6 +49,6 @@ git push
 ## 相关历史
 
 - 并行 worktree 防失序的四道护栏（§一 单写者 + ADR 台账 + 生成块 + 本节的串行合并纪律），见 `DECISIONS.md` [ADR-069]。
-- 并行分支 ADR 编号撞号、已推送提交不能 rebase（改用 `merge origin/main`）的处理，见 `DECISIONS.md` [ADR-029]（编号预支的第一版根治见 [ADR-069] 的 `ADR-LEDGER.md`；批量并行下该版仍会撞，占位符 + 合并时定号的第二版见 [ADR-076]）。
+- 并行分支 ADR 编号撞号、已推送提交不能 rebase（改用 `merge origin/main`）的处理，见 `DECISIONS.md` [ADR-029]（编号预支的第一版根治是 [ADR-069] 的编号台账；批量并行下该版仍会撞，占位符 + 合并时定号的第二版见 [ADR-076]。两版都已随 [ADR-dev-automation] 退役——ADR 改为一条一个文件、不再取号，根本没有号可撞）。
 - `isolation: "worktree"` 在「因限额中断后经 SendMessage 恢复」路径上多次失效的证据，见 [ADR-021] / [ADR-027] / [ADR-031]。
 - `.cache/` 被误提交为符号链接导致 `git pull` 静默抹掉本地来源快照，见 [ADR-044]。

@@ -31,20 +31,20 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
   9. docs/data/*.json 新鲜度：磁盘内容 == 重新生成的内容（忘了跑 make sync 时报错）
   10. 路径引用：文档里反引号包住、首段是仓库顶层条目的路径必须存在（非仓库路径片段
       如站内相对路径 res/pc/js/x.js 或绝对路径 /tmp/x.html 不属校验对象）
-  11. ADR 锚点：DECISIONS.md 里的 ADR 编号不重复；全库 .md/.py/.yml/.js/.css/.json 里
-      的引用处都能找到对应编号（[ADR-077] 扩面到非 .md）
+  11. ADR 文件（[ADR-dev-automation]）：`PROJECT/decisions/ADR-*.md` 一条一个文件，
+      文件名 = 身份、首行 `# <id> — <标题>` 与文件名一致、id 不重复；全库
+      .md/.py/.yml/.js/.css/.json 里的 `ADR-NNN` 与 `[ADR-<slug>]` 引用都能解析到
+      真实文件（[ADR-077] 扩面到非 .md 的范围保留）
   12. ROADMAP §一 防失序（[ADR-069]）：「下一步」编号 1..n 连续无重复、「最近完成」不超
       滚动窗口（并行 worktree 各自重排该子节，git 静默三方合并 → 重号/超窗）
   13. 冲突标记：任何入库文本文件不得残留 git 合并冲突标记（<<<<<<< / ||||||| / >>>>>>>）
-  14. ADR 台账（[ADR-069]）：DECISIONS.md 每条 ### ADR-NNN 都在 PROJECT/ADR-LEDGER.md
-      登记过；台账编号 1..max 连续、不重复（并行分支预支编号必撞的护栏）
+  14.（已退役）ADR 编号台账 —— 数字编号在 001–080 冻结、新条目一律 slug 命名不取号，
+      没有号可撞，[ADR-029]/[ADR-069]/[ADR-076] 三条 ADR 管理的症状随之消失，
+      台账与占位符两套机制一并删除，见 [ADR-dev-automation]
   15. OTP 来源登记格式（[ADR-075]）：SOURCES.md 里含 `[OTP]` 标记的登记行必须恰好 2 个
       URL（GenerateOTP 端点 + 数据端点，见 tools/fetch.py 文首），否则 fetch.py 抓取时
       才会 sys.exit——挪到 make check 提前拦，别等抓取现场才发现登记写错了
-  16. ADR 占位符定号（[ADR-076]）：`ADR-PENDING-<slug>` 占位符
-      出现在 main 上直接 fail（合并前必须先跑 `tools/assign_adr_number.py` 定号）；
-      出现在其他分支上只警告——占位符本就是分支未合并前的正常中间态，见
-      `PROJECT/ADR-LEDGER.md`
+  16.（已退役）ADR-PENDING 占位符 —— 同第 14 条，见 [ADR-dev-automation]
   17. 来源分片配对（[ADR-077]）：`data/exchanges/*.yml` 与
       `PROJECT/sources/*.md` 必须一一对应——任一侧多出（漏建分片 / 孤儿分片）即报错
   18. INBOX 一句话上限（[ADR-077]）：`ROADMAP-INBOX.md`「待折叠」区每条
@@ -55,7 +55,6 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
 import datetime
 import json
 import re
-import subprocess
 import sys
 from pathlib import Path
 from urllib.parse import urlparse
@@ -79,21 +78,21 @@ TODAY = sync.TODAY
 # quote 反查产生假命中，反而削弱防幻觉能力）。
 NUMBER_RE = re.compile(r"\d+(?:,\d{3})*(?:\.\d+)?")
 PATH_TOKEN_RE = re.compile(r"`([A-Za-z0-9_.\-/]+(?:/[A-Za-z0-9_.\-]+)+)`")
-ADR_DEF_RE = re.compile(r"^### (ADR-\d{3})\b", re.M)
+# 一条 ADR 一个文件（[ADR-dev-automation]）：身份 = PROJECT/decisions/ 下的文件名。
+# 首行 `# <id> — <标题>` 是定义处；引用有两种写法——历史数字条目沿用裸/带括号的
+# `ADR-NNN`（1270 处存量引用一处不用改），新 slug 条目一律带方括号 `[ADR-<slug>]`
+# （裸 slug 会和正文里的普通短语混淆，故要求括号）。
+# 标题部分用 `(.*)`（而非 `(.+)`）：空标题要走下面"标题为空"那条具体报错，
+# 而不是被笼统地判成"首行格式不对"——后者会让人以为是格式写错了。
+ADR_FILE_HEAD_RE = re.compile(r"^#\s+(ADR-[A-Za-z0-9][A-Za-z0-9_-]*)\s*[-—]\s*(.*)$")
 ADR_REF_RE = re.compile(r"\[?(ADR-\d{3})\]?")
+ADR_SLUG_REF_RE = re.compile(r"\[(ADR-[a-z][a-z0-9-]*)\]")
+# 散文里表示「某条 ADR」的元占位符，不是真引用（如 ROADMAP 讲「`[ADR-xxx]` 链接改人话」）。
+ADR_META_PLACEHOLDERS = {"ADR-xxx", "ADR-nnn"}
 # git 合并冲突标记：`<<<<<<< `、`||||||| `、`>>>>>>> ` 三种带尾随空格 + 标签，
 # 误报率接近零（裸 `=======` 会撞 rst/markdown 标题，故不收）。并行分支未清冲突
 # 即入库的护栏（2026-09-04 PR #61/#62 的教训之一，见 [ADR-069]）。
 CONFLICT_MARKER_RE = re.compile(r"^(?:<{7}|\|{7}|>{7}) ", re.M)
-# ADR-LEDGER.md 的登记行：区间行 `- ADR-001 … ADR-068 · ...` 兜住建台账前的历史条目，
-# 之后逐条 `- ADR-069 · ...`。见 [ADR-069]。
-LEDGER_RANGE_RE = re.compile(r"ADR-(\d{3})\s*(?:…|\.\.\.|—|~)\s*ADR-(\d{3})")
-LEDGER_SINGLE_RE = re.compile(r"^-\s*ADR-(\d{3})\b")
-# ADR-PENDING-<slug> 占位符（[ADR-076]）：分支开工时不再预支
-# 具体数字号（那样几条并行分支几乎必撞，PR69-72 一批连撞四次），改用占位符，合并前
-# 由 tools/assign_adr_number.py 按 main 当前台账定号。main 上残留即错；分支上只是
-# 未合并前的正常中间态，只警告不挡该分支自己的 make build。
-PENDING_ADR_RE = re.compile(r"ADR-PENDING-[A-Za-z0-9][A-Za-z0-9_-]*")
 SOURCES_DOMAIN_RE = re.compile(r"^-\s+`([a-z0-9.\-]+\.[a-z]{2,})`", re.M)
 # 域名行含「官方/监管/第三方」标签的形式：- `domain`（可选括注） | 标签 | 语言 | ...
 # 部分"补充登记"行只有域名没有后续管道分隔，靠上面的 SOURCES_DOMAIN_RE 收录、
@@ -210,43 +209,38 @@ def roadmap_recent_violations(recent_block, limit=ROADMAP_RECENT_MAX):
     return []
 
 
-def pending_adr_placeholder_violations(text):
-    """文本里残留的 ADR-PENDING-<slug> 占位符（去重排序，空=合法）。纯函数、无 I/O，
-    selfcheck 喂合成输入。main 上出现是硬错误，feature 分支上出现只警告——分支/main
-    的区分由调用方（validate_no_pending_adr_placeholders）做，见 [ADR-076]。"""
-    return sorted(set(PENDING_ADR_RE.findall(text)))
+def adr_file_violations(filenames_and_heads):
+    """一条 ADR 一个文件（[ADR-dev-automation]）的三条不变式。返回违规消息列表（空 = 合法）。
+    判定纯逻辑、无 I/O——调用方读盘、传 [(文件名, 首行)]，selfcheck 喂合成输入锁行为。
 
+      1. 文件名必须是 `ADR-<id>.md`，首行必须是 `# <同一个 id> — <标题>`——身份即文件名，
+         两者不一致会让索引与引用解析对不上。
+      2. 同一个 id 不得出现两次（文件系统本身保证文件名唯一，这条兜住"首行 id 与文件名
+         不一致导致两个文件自称同一个 id"）。
+      3. 标题不得为空。
 
-def adr_ledger_violations(decisions_nums, ledger_text):
-    """DECISIONS.md 的 ADR 编号集合 ⊆ ADR-LEDGER.md 登记的编号；台账 1..max 连续无重复。
-    返回违规消息列表（空 = 合法）。判定纯逻辑、无 I/O，selfcheck 喂合成输入锁行为。"""
-    reserved, dup = set(), set()
-    for line in ledger_text.splitlines():
-        s = line.strip()
-        if not s.startswith("- ADR-"):
+    刻意**不再校验编号连续/不重复**：数字编号在 001–080 已冻结，新条目一律 slug 命名，
+    不取号就没有撞号可言——[ADR-029]（让号协议）/[ADR-069]（编号台账）/[ADR-076]
+    （占位符 + 合并前定号）三条 ADR 管理的都是这同一个症状，随本次一并退役。
+    """
+    out, seen = [], {}
+    for fname, head in filenames_and_heads:
+        stem = fname[:-3] if fname.endswith(".md") else fname
+        m = ADR_FILE_HEAD_RE.match((head or "").strip())
+        if not m:
+            out.append(f"PROJECT/decisions/{fname}: 首行不是 `# {stem} — <标题>` 格式"
+                       f"（一条 ADR 一个文件，首行即定义处）")
             continue
-        rng = LEDGER_RANGE_RE.search(s)
-        if rng:
-            for n in range(int(rng.group(1)), int(rng.group(2)) + 1):
-                reserved.add(n)
-            continue
-        m = LEDGER_SINGLE_RE.match(s)
-        if m:
-            n = int(m.group(1))
-            (dup if n in reserved else reserved).add(n)
-            reserved.add(n)
-    out = []
-    missing = sorted(decisions_nums - reserved)
-    if missing:
-        out.append("PROJECT/ADR-LEDGER.md: 未登记 " + ", ".join(f"ADR-{n:03d}" for n in missing)
-                   + "（DECISIONS.md 有、台账没有——写 ADR 前先登记，见 [ADR-069]）")
-    if dup:
-        out.append(f"PROJECT/ADR-LEDGER.md: 编号重复登记 {sorted(f'ADR-{n:03d}' for n in dup)}")
-    if reserved:
-        gaps = sorted(set(range(1, max(reserved) + 1)) - reserved)
-        if gaps:
-            out.append("PROJECT/ADR-LEDGER.md: 编号不连续，缺口 "
-                       + ", ".join(f"ADR-{n:03d}" for n in gaps))
+        adr_id, title = m.group(1), m.group(2).strip()
+        if adr_id != stem:
+            out.append(f"PROJECT/decisions/{fname}: 首行 id `{adr_id}` 与文件名不一致"
+                       f"（身份即文件名，应为 `{stem}`）")
+        if not title:
+            out.append(f"PROJECT/decisions/{fname}: 标题为空")
+        if adr_id in seen:
+            out.append(f"PROJECT/decisions/{fname}: id `{adr_id}` 与 `{seen[adr_id]}` 重复")
+        else:
+            seen[adr_id] = fname
     return out
 
 
@@ -701,9 +695,9 @@ def validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchange
         (PROJECT_DIR / "SOURCES.md", "sources-index", sync.render_sources_index(raw_exchanges)),
     ]
     decisions_path = PROJECT_DIR / "DECISIONS.md"
-    if decisions_path.exists():
-        checks.append((decisions_path, "adr-index",
-                       sync.render_adr_index(decisions_path.read_text(encoding="utf-8"))))
+    decisions_dir = PROJECT_DIR / "decisions"
+    if decisions_path.exists() and decisions_dir.is_dir():
+        checks.append((decisions_path, "adr-index", sync.render_adr_index(decisions_dir)))
     for path, name, expected in checks:
         text = path.read_text(encoding="utf-8")
         actual = extract_generated_block(text, name)
@@ -750,7 +744,14 @@ def validate_docs_data_fresh(taxonomy, glossary, enums, exchanges_expanded):
 # ── 10-11：文档内部引用 ────────────────────────────────────────
 
 def validate_path_references():
-    md_files = [p for p in ROOT.rglob("*.md") if not under_skip_dir(p)]
+    # 历史 ADR（`PROJECT/decisions/ADR-NNN.md`）豁免：它们是**某个时点决策的不可变记录**
+    # （[ADR-046]「历史 ADR 不可变」/ [CLAUDE.md §八]），写下时存在的文件后来被删除 / 改名
+    # 是正常演进，不是「忘了改文档」。为了让路径校验绿而去改写历史 ADR，才是真的错。
+    # 新 slug 条目不豁免——它们是活文档，路径写错照报。
+    historical_adr = re.compile(r"^ADR-\d{3}$")
+    md_files = [p for p in ROOT.rglob("*.md")
+                if not under_skip_dir(p)
+                and not (p.parent.name == "decisions" and historical_adr.match(p.stem))]
     known_ext = (".yml", ".yaml", ".py", ".json", ".md", ".html", ".js", ".css", ".txt")
     # 只把"首段是仓库顶层条目"的 token 当作仓库内路径校验。反引号里以已知扩展名结尾的
     # 字符串还有别的来源：站内相对路径片段（res/pc/js/func.js）、别的网站/仓库的路径、
@@ -773,78 +774,46 @@ def validate_path_references():
                 err(f"{md.relative_to(ROOT)}: 引用的路径 `{token}` 在仓库里不存在（改名/删除后忘了改文档？）")
 
 
-def validate_adr_anchors():
-    decisions_path = PROJECT_DIR / "DECISIONS.md"
-    if not decisions_path.exists():
-        return
-    text = decisions_path.read_text(encoding="utf-8")
-    defined = ADR_DEF_RE.findall(text)
-    dupes = {x for x in defined if defined.count(x) > 1}
-    if dupes:
-        err(f"PROJECT/DECISIONS.md: ADR 编号重复 {sorted(dupes)}")
-    defined_set = set(defined)
+def validate_adr_files():
+    """ADR 文件本身的不变式 + 全库引用都能解析到 `PROJECT/decisions/` 下的真实文件。
 
-    # 扩面到非 .md（[ADR-077]）：让号/引用失配不只发生在文档里——
-    # .py（脚本注释）、schema/*.yml、docs/assets/app.js、data/*.yml 同样带
-    # [ADR-NNN] 引用，此前只扫 *.md 是静默失配面。复用 under_skip_dir 处理 worktree。
+    一条 ADR 一个文件（[ADR-dev-automation]）：定义处从 `DECISIONS.md` 的
+    `### ADR-NNN` 标题挪到 `PROJECT/decisions/ADR-*.md` 的文件名 + 首行。
+    引用扫描面沿用 [ADR-077] 扩过的非 .md（.py / schema 的 yml / app.js / data 的 yml
+    同样带 ADR 引用，只扫 .md 是静默失配面）。
+    """
+    decisions_dir = PROJECT_DIR / "decisions"
+    if not decisions_dir.is_dir():
+        err("PROJECT/decisions/ 不存在（一条 ADR 一个文件，见 [ADR-dev-automation]）")
+        return
+    files = sorted(decisions_dir.glob("*.md"))
+    heads = []
+    for p in files:
+        first = p.read_text(encoding="utf-8").split("\n", 1)[0]
+        heads.append((p.name, first))
+    for v in adr_file_violations(heads):
+        err(v)
+    defined_set = {p.stem for p in files}
+    if not defined_set:
+        err("PROJECT/decisions/ 下没有任何 ADR 文件")
+        return
+
+    decisions_path = PROJECT_DIR / "DECISIONS.md"
     for p in ROOT.rglob("*"):
         if p.suffix not in (".md", ".py", ".yml", ".yaml", ".js", ".css", ".json"):
             continue
-        if under_skip_dir(p) or p == decisions_path:
+        # 索引文件与 ADR 正文自身不参与引用校验（它们就是定义处 / 由定义处生成）
+        if under_skip_dir(p) or p == decisions_path or p.parent == decisions_dir:
             continue
         try:
             p_text = p.read_text(encoding="utf-8")
         except (UnicodeDecodeError, OSError):
             continue
-        for ref in ADR_REF_RE.findall(p_text):
+        refs = set(ADR_REF_RE.findall(p_text)) | set(ADR_SLUG_REF_RE.findall(p_text))
+        for ref in sorted(refs - ADR_META_PLACEHOLDERS):
             if ref not in defined_set:
-                err(f"{p.relative_to(ROOT)}: 引用了不存在的 `{ref}`（DECISIONS.md 里没有这条）")
-
-
-def validate_adr_ledger():
-    """DECISIONS.md 的每条 ADR 都在 ADR-LEDGER.md 登记过；台账编号连续无重复（[ADR-069]）。"""
-    decisions_path = PROJECT_DIR / "DECISIONS.md"
-    ledger_path = PROJECT_DIR / "ADR-LEDGER.md"
-    if not decisions_path.exists():
-        return
-    if not ledger_path.exists():
-        err("PROJECT/ADR-LEDGER.md 不存在（ADR 编号台账，见 [ADR-069]）")
-        return
-    decisions_nums = {int(x[4:]) for x in ADR_DEF_RE.findall(decisions_path.read_text(encoding="utf-8"))}
-    for v in adr_ledger_violations(decisions_nums, ledger_path.read_text(encoding="utf-8")):
-        err(v)
-
-
-def _current_git_branch():
-    """当前分支名；取不到（非 git 环境/detached HEAD）时返回 None，调用方按「未知」从严处理。"""
-    try:
-        out = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"],
-                              cwd=ROOT, capture_output=True, text=True, timeout=5)
-        return out.stdout.strip() if out.returncode == 0 else None
-    except (OSError, subprocess.SubprocessError):
-        return None
-
-
-def validate_no_pending_adr_placeholders():
-    """main 上不得残留 `ADR-PENDING-*` 占位符（合并前必须先跑
-    `tools/assign_adr_number.py` 定号）；其他分支上允许存在，只给警告——占位符正是
-    分支未合并前的正常中间态，见 [ADR-076]。"""
-    on_main = _current_git_branch() in ("main", None)  # 取不到分支名时从严按 main 处理
-    exts = (".md", ".yml", ".yaml", ".py", ".js", ".css", ".json", ".txt", ".html")
-    for p in ROOT.rglob("*"):
-        if p.suffix not in exts or under_skip_dir(p):
-            continue
-        try:
-            text = p.read_text(encoding="utf-8")
-        except (UnicodeDecodeError, OSError):
-            continue
-        placeholders = pending_adr_placeholder_violations(text)
-        if not placeholders:
-            continue
-        msg = (f"{p.relative_to(ROOT)}: 残留 ADR 编号占位符 {placeholders}"
-               f"（合并前先跑 `python tools/assign_adr_number.py` 定号，见"
-               f" [ADR-076]）")
-        (err if on_main else warn)(msg)
+                err(f"{p.relative_to(ROOT)}: 引用了不存在的 `{ref}`"
+                    f"（PROJECT/decisions/{ref}.md 不存在）")
 
 
 def validate_roadmap_section_one():
@@ -1007,9 +976,7 @@ def main():
     validate_generated_blocks(taxonomy, glossary, enums, raw_exchanges, exchanges_expanded)
     validate_docs_data_fresh(taxonomy, glossary, enums, exchanges_expanded)
     validate_path_references()
-    validate_adr_anchors()
-    validate_adr_ledger()
-    validate_no_pending_adr_placeholders()
+    validate_adr_files()
     validate_roadmap_section_one()
     validate_no_conflict_markers()
     validate_otp_sources()

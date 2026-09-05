@@ -142,60 +142,30 @@ case("recent 计数：条目数按 `- **` 行首算，正文里的 `- **` 不计
 
 
 # ══════════════════════════════════════════════════════════════
-# [ADR-069] ADR 编号台账：validate.adr_ledger_violations(decisions_nums, ledger_text)
-#   —— DECISIONS 的 ADR 号 ⊆ 台账登记的号；台账 1..max 连续无重复。取 bool / count。
+# [ADR-dev-automation] 一条 ADR 一个文件：validate.adr_file_violations([(文件名, 首行)])
+#   —— 文件名 = 身份；首行 `# <id> — <标题>` 必须与文件名一致；id 不重复；标题非空。
+#   编号连续/台账/占位符三套旧机制随数字编号冻结一并退役，不再有对应用例。
 # ══════════════════════════════════════════════════════════════
-def _ledger_bad(nums, text):
-    return bool(validate.adr_ledger_violations(set(nums), text))
+def _adr_bad(pairs):
+    return bool(validate.adr_file_violations(pairs))
 
 
-_SEED = "- ADR-001 … ADR-003 · 历史 · pre-ledger\n"
-case("ledger 合法：区间行兜住历史 + DECISIONS 都在区间内",
-     _ledger_bad([1, 2, 3], _SEED), False)
-case("ledger 合法：区间 + 逐条，无缺口无重复",
-     _ledger_bad([1, 2, 3, 4], _SEED + "- ADR-004 · x · br · 2026-09-04\n"), False)
-case("ledger 违规：DECISIONS 有 ADR-005 但台账没登记",
-     _ledger_bad([1, 2, 3, 5], _SEED), True)
-case("ledger 违规：逐条行与区间重复登记同一号",
-     _ledger_bad([1, 2, 3], _SEED + "- ADR-002 · dup · x · d\n"), True)
-case("ledger 违规：编号有缺口（3 之后直接 5）",
-     _ledger_bad([], _SEED + "- ADR-005 · x · y · z\n"), True)
-case("ledger 不误伤：非登记行（说明文字里的 ADR-029）不计入",
-     _ledger_bad([1, 2, 3], _SEED + "真撞了按 [ADR-029] 让号。\n"), False)
-case("ledger 计数：缺登记 + 缺口 → 2 条消息",
-     len(validate.adr_ledger_violations({7}, _SEED + "- ADR-005 · x · y · z\n")), 2)
-
-
-# ══════════════════════════════════════════════════════════════
-# [ADR-076] ADR 占位符定号：
-#   validate.pending_adr_placeholder_violations(text)
-#   —— 分支开工写 ADR-PENDING-<slug> 占位符代替具体数字号，合并前才由
-#   tools/assign_adr_number.py 定号；main 上残留是错误、分支上只警告
-#   （严重程度判定在 validate_no_pending_adr_placeholders 里，不在这个纯函数）。
-# ══════════════════════════════════════════════════════════════
-def _pending(slug):
-    """拼出 `ADR-PENDING-<slug>`：不能在这写死完整字面量，否则这个测试文件自己会被
-    validate_no_pending_adr_placeholders 的仓库级扫描当成真占位符误报（[ADR-076]）。"""
-    return f"ADR-PENDING-{slug}"
-
-
-case("pending 合法：正文没有占位符",
-     validate.pending_adr_placeholder_violations("### ADR-076 — 正常已定号的标题\n"), [])
-case("pending 违规：标题带占位符",
-     validate.pending_adr_placeholder_violations(
-         f"### {_pending('td-axis-labels')} — 剖面零轴刻度\n"), [_pending("td-axis-labels")])
-case("pending 违规：正文引用也算，不只是标题",
-     validate.pending_adr_placeholder_violations(
-         f"见 [{_pending('foo')}] 的讨论。\n"), [_pending("foo")])
-case("pending 去重：同一占位符出现多次只报一条",
-     validate.pending_adr_placeholder_violations(
-         f"### {_pending('foo')} — x\n\n见 [{_pending('foo')}]。\n"), [_pending("foo")])
-case("pending 计数：两个不同占位符各报一条，按字典序排",
-     validate.pending_adr_placeholder_violations(
-         f"[{_pending('zzz')}] 与 [{_pending('aaa')}]\n"),
-     sorted([_pending("aaa"), _pending("zzz")]))
-case("pending 不误伤：已定号的普通 ADR 编号不匹配",
-     validate.pending_adr_placeholder_violations("[ADR-069] 与 ### ADR-070 — 标题\n"), [])
+case("adr 文件合法：历史数字条目",
+     _adr_bad([("ADR-001.md", "# ADR-001 — 不沿用参考项目的 CSV 数据格式")]), False)
+case("adr 文件合法：新 slug 条目",
+     _adr_bad([("ADR-dev-automation.md", "# ADR-dev-automation — 开发流程自动化")]), False)
+case("adr 文件合法：破折号用 ASCII 连字符也认",
+     _adr_bad([("ADR-002.md", "# ADR-002 - 标题")]), False)
+case("adr 文件违规：首行不是标题格式",
+     _adr_bad([("ADR-003.md", "### ADR-003 — 旧的三级标题写法")]), True)
+case("adr 文件违规：首行 id 与文件名不一致",
+     _adr_bad([("ADR-004.md", "# ADR-005 — 标题")]), True)
+case("adr 文件违规：标题为空",
+     _adr_bad([("ADR-006.md", "# ADR-006 — ")]), True)
+case("adr 文件违规：两个文件自称同一个 id",
+     _adr_bad([("ADR-007.md", "# ADR-007 — a"), ("ADR-008.md", "# ADR-007 — b")]), True)
+case("adr 文件计数：id 不符 + 标题空 → 2 条消息",
+     len(validate.adr_file_violations([("ADR-009.md", "# ADR-010 — "), ])), 2)
 
 
 # ══════════════════════════════════════════════════════════════

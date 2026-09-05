@@ -605,25 +605,44 @@ def render_sources_index(raw_exchanges):
     return "\n".join(lines)
 
 
-def render_adr_index(decisions_text):
-    """PROJECT/DECISIONS.md 的 ADR 索引（[ADR-077]）：提取 `### ADR-NNN — 标题` 与其后
-    的 **日期：**，按编号排序输出。物理顺序已被历次让号打乱，索引即顺序修正——
-    不动物理顺序（零迁移缓解认知负荷），新会话定位 ADR 不必通读全文。
-    `ADR-PENDING-<slug>` 占位符标题不匹配 `ADR-(\\d{3})`，自动跳过——与 [ADR-076]
-    的「合并前跑 make assign-adr 定号」流程天然兼容。"""
-    entries = []
-    for m in re.finditer(r"^### (ADR-\d{3})\s*[-—]\s*(.*)$", decisions_text, re.M):
-        num, title = m.group(1), m.group(2).strip()
-        nxt = re.search(r"^### ", decisions_text[m.end():], re.M)
-        block_end = m.end() + (nxt.start() if nxt else len(decisions_text) - m.end())
-        dm = re.search(r"\*\*日期：\*\*\s*(\d{4}-\d{2}-\d{2})", decisions_text[m.end():block_end])
-        entries.append((num, dm.group(1) if dm else "", title))
-    entries.sort(key=lambda e: e[0])
+ADR_FILE_HEAD_RE = re.compile(r"^#\s+(ADR-[A-Za-z0-9][A-Za-z0-9_-]*)\s*[-—]\s*(.*)$")
+
+
+def adr_entries(decisions_dir):
+    """扫 PROJECT/decisions/ 下的 ADR 文件，返回 [(id, date, title, filename)]。
+
+    一条 ADR 一个文件（[ADR-dev-automation]），文件名即身份：历史条目
+    `ADR-NNN.md`（编号已冻结、不再新增），新条目 `ADR-<slug>.md`（不取号——
+    并行分支各写各的文件，无从在文件尾撞车，因此不再需要编号台账与合并前的
+    定号步骤）。每个文件首行 `# <id> — <标题>`，日期取正文的 `**日期：**`。
+
+    排序：历史数字条目按编号在前，新 slug 条目按日期（无日期排最后）在后——
+    历史部分稳定不动，新条目自然追加在末尾。
+    """
+    numbered, slugged = [], []
+    for path in sorted(decisions_dir.glob("ADR-*.md")):
+        text = path.read_text(encoding="utf-8")
+        m = ADR_FILE_HEAD_RE.match(text.split("\n", 1)[0])
+        if not m:
+            continue
+        adr_id, title = m.group(1), m.group(2).strip()
+        dm = re.search(r"\*\*日期：\*\*\s*(\d{4}-\d{2}-\d{2})", text)
+        entry = (adr_id, dm.group(1) if dm else "", title, path.name)
+        (numbered if re.fullmatch(r"ADR-\d{3}", adr_id) else slugged).append(entry)
+    numbered.sort(key=lambda e: e[0])
+    slugged.sort(key=lambda e: (e[1] or "9999-99-99", e[0]))
+    return numbered + slugged
+
+
+def render_adr_index(decisions_dir):
+    """PROJECT/DECISIONS.md 的 ADR 索引（[ADR-077] 起有，[ADR-dev-automation] 改为扫目录）。"""
+    entries = adr_entries(decisions_dir)
     if not entries:
         return "（暂无 ADR）"
     return "\n".join(
-        f"- {num} · {date} · {title}" if date else f"- {num} · {title}"
-        for num, date, title in entries
+        f"- [{adr_id}](decisions/{fname}) · {date} · {title}" if date
+        else f"- [{adr_id}](decisions/{fname}) · {title}"
+        for adr_id, date, title, fname in entries
     )
 
 
@@ -739,9 +758,10 @@ def main():
         "sources-index": render_sources_index(raw_exchanges),
     })
     decisions_path = PROJECT_DIR / "DECISIONS.md"
-    if decisions_path.exists():
+    decisions_dir = PROJECT_DIR / "decisions"
+    if decisions_path.exists() and decisions_dir.is_dir():
         apply_blocks(decisions_path, {
-            "adr-index": render_adr_index(decisions_path.read_text(encoding="utf-8")),
+            "adr-index": render_adr_index(decisions_dir),
         })
 
     glossary_md_path = PROJECT_DIR / "GLOSSARY.md"

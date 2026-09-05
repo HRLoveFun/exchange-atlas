@@ -104,10 +104,11 @@ us-nasdaq/cn-szse/uk-lse/de-xetra/sg-sgx/au-asx/in-nse/sa-tadawul）、v1.0 Wave
   通用金融/清算/监管概念（而非交易所自定义机制名）的字段前，先搜一遍 `schema/glossary.yml`
   看是否已有该英文概念的现有译法（哪怕是别的交易所在你不知情的同一波里刚造的），没有再造，
   不要想当然自己是第一个遇到这个概念的人。**
-- **要写 ADR（发现 schema 设计问题、定了个会影响后续的取舍）时，编号先在 `PROJECT/ADR-LEDGER.md`
-  登记再写。** 并行子代理各自预支「下一个空号」几乎必撞（[ADR-029]/[ADR-068] 两次）。台账登记行是
-  纯 append、合并干净；`make check` 会拦「DECISIONS.md 有 ADR-NNN 但台账没登记」。真撞了按
-  [ADR-029] 晚合并方让号 + 全库 grep 改引用。见 [ADR-069]。
+- **要写 ADR（发现 schema 设计问题、定了个会影响后续的取舍）时，直接在 `PROJECT/decisions/`
+  新建一个文件 `ADR-<slug>.md`**（首行 `# ADR-<slug> — <标题>`，末尾 `**日期：**`），跑 `make sync`
+  刷索引。**不取号、不登记**——文件名即身份，并行子代理各写各的文件，git 层面无从撞车
+  （数字编号在 001–080 已冻结；[ADR-029]/[ADR-069]/[ADR-076] 那套让号 / 台账 / 占位符机制
+  已随 [ADR-dev-automation] 退役）。
 
 ## 步骤
 
@@ -491,7 +492,7 @@ make verify-quotes-live                       # 现场抓取所有引用来源�
 
 - `make sync` 会自动更新 `PROJECT/ROADMAP.md` 的进度矩阵，**不需要手改**
 - ROADMAP §一「下一步」「最近完成」**不要直接改**（并行会撞，[ADR-069]）——后台任务 / worktree 只往 `PROJECT/ROADMAP-INBOX.md` 追加一行完成便签，由交互式会话折进 §一
-- 若这次要写 ADR：编号先在 `PROJECT/ADR-LEDGER.md` 登记再写（见上方并行须知与 [ADR-069]）
+- 若这次要写 ADR：在 `PROJECT/decisions/` 新建 `ADR-<slug>.md`，不取号、不登记（见上方并行须知与 [ADR-dev-automation]）
 - 检查这次研究过程中有没有值得记的：新的术语（回写 glossary）、新的资料来源经验（回写 SOURCES.md）、结构性的疑问或发现（回写 OPEN-QUESTIONS.md，仿照现有条目的格式）
 - 如果这次填数据的过程让你意识到 `schema/taxonomy.yml` 某处设计有问题（字段不够用、某类交易所不适配现有结构），记一条到 `PROJECT/OPEN-QUESTIONS.md`「框架性问题」，不要为了绕开问题而在数据里硬凑
 - 顺手看一眼这家所有没有让某个已进矩阵的字段"雪上加霜"（本来就常空、这次又空）——攒够信号后

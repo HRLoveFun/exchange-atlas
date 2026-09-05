@@ -1,4 +1,4 @@
-.PHONY: help fetch fetch-sources sync check build serve verify-quotes verify-quotes-live check-en-terms assign-adr
+.PHONY: help fetch fetch-sources sync check build serve verify-quotes verify-quotes-live check-en-terms
 
 help: ## 列出所有命令
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
@@ -27,9 +27,6 @@ verify-quotes: ## 离线 verbatim-quote 反查（仅查 .cache 落盘来源）
 
 verify-quotes-live: ## verbatim-quote 反查 + 现场抓取 sources（JS 页/未缓存来源用此查）
 	python3 tools/verify_quotes.py --live
-
-assign-adr: ## 把 DECISIONS.md 里的 ADR-PENDING-* 占位符定号为台账下一个真实编号；合并该分支前跑，见 PROJECT/ADR-LEDGER.md；用法: make assign-adr [DRY=1]
-	python3 tools/assign_adr_number.py $(if $(DRY),--dry-run,)
 
 build: sync check ## sync 后立即 check，构建产物 + 校验一遍过
 
