@@ -94,6 +94,7 @@
 - ADR-087 · 2026-09-05 · adr-heal.yml 改走「开分支 + PR + auto-merge」，不再直推 main（原占 ADR-086，撞已合并的 main 直推提交，按 ADR-029 协议让号）
 - ADR-088 · 2026-09-05 · `make check` 输出 stale 字段复核清单（数据空缺复核轨任务五③收尾）
 - ADR-089 · 2026-09-05 · 任务三附·衍生品 spec 回填落地（130 处两批 + 各自独立复核）+ 两处形状词汇演进
+- ADR-090 · 2026-09-05 · 市场机制剖面：现货 / 衍生品业务线切换（渲染层落地）
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2498,7 +2499,7 @@ print('全库 medium 零 sources:',n)
 
 **日期：** 2026-09-05
 
-### ADR-PENDING-td-business-line-toggle — 市场机制剖面：现货 / 衍生品业务线切换（渲染层落地）
+### ADR-090 — 市场机制剖面：现货 / 衍生品业务线切换（渲染层落地）
 
 **为什么需要：** [ADR-019] 起，同时运营重要衍生品业务线的 10 家所（`au-asx`/`br-b3`/`cn-szse`/`fr-euronext`/`hk-hkex`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse`）把衍生品的交易机制写在 `market_structure.derivatives.*` 子块，顶层字段继续描述现货。[ADR-040] 的市场机制剖面从一开始只画顶层（现货），对有 derivatives 字段的所挂一句 `td-banner-soft`「本剖面显示现货（衍生品 spec 待 Phase 3 补充）」——一张欠账凭证。[ADR-089] 把 130 处衍生品 `spec` 全部回填、三态齐备后，数据侧已备齐，这句 banner 该兑现成真正能切换查看的第二条业务线。
 

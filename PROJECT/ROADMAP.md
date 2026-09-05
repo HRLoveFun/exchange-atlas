@@ -244,7 +244,7 @@
   - **独立复核**：两批各一个全新上下文 agent 盲审——批次一初检 87.7%（0 FIX / 9 QUESTION：7 条 HH:MM 锚兄弟字段口径确立 + 2 条 sg-sgx kind 以数据解决），批次二初检 77%（3 FIX + 10 QUESTION 全部就地订正：`hidden→iceberg` 键位、in-nse CB 与顶层对齐、hk DPB 矛盾、否定断言收窄、null 依据补齐），终态 130/130，数值层零幻觉。验收口径新增一条：spec 的 HH:MM 允许由同文件显式交叉引用的兄弟字段锚定（同 5c 文件级同理）。
   - **验收**：`make build` 全绿（validate 0/0、verify_quotes FAIL=0、selfcheck 93）、`make sync` 幂等、生成块零 diff（spec 不计已填分母）。**留独立排期**：「null 需原文陈述」机器校验（7 个 QUESTION 同源的机器盲区）。
 
-- [x] **任务三附 · 剖面现货 / 衍生品业务线切换（渲染层）**（2026-09-05 完成，[ADR-PENDING-td-business-line-toggle]）
+- [x] **任务三附 · 剖面现货 / 衍生品业务线切换（渲染层）**（2026-09-05 完成，[ADR-090]）
   - **为什么需要**：`docs/assets/app.js` 四处直接取 `data.chapters.market_structure`，`tdBanner` 对有 derivatives 字段的所只挂一句「本剖面显示现货（衍生品 spec 待 Phase 3 补充）」——数据备齐不会自动兑现，这句 banner 也一直是欠账凭证。
   - **形态倾向**：按 [ADR-057] 北极星**不新增顶层 tab**（Phase 4 要减 tab），改为剖面内的业务线切换（可复用 [ADR-055] 透视开关的控件位与持久化模式）；诚实三态照 [ADR-035] D（衍生品侧字段缺省时不静默回落现货）。
   - **前置**：✅ 任务三附 · `spec` 回填已全部完成（130/130，2026-09-05，含三态与形状演进，见上条）。
