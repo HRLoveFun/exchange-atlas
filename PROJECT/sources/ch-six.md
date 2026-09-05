@@ -1,4 +1,6 @@
 # 瑞士证券交易所 SIX Swiss Exchange `ch-six`
+- `snb.ch` | 官方（货币当局——瑞士国家银行 SNB；2026-09-05 新增登记，[ADR-079] 风险旗标子棒） | en / de / fr / it | curl + 常规 UA 200，策略页为服务端渲染、正文可 grep（导航占大头） | 瑞郎与 SNB 货币政策（fx_risk_note 出处）
+  - The SNB's monetary policy strategy（SNB 官方策略页：合意货币条件由利率水平与汇率决定、货币政策通过影响利率与汇率实施、必要时可用额外措施影响汇率）: https://www.snb.ch/en/the-snb/mandates-goals/monetary-policy/strategy（HTTP 200，96KB）
 - `six-group.com` | 官方 | en（另有 de/fr/it 版本，本次统一取 en 版本，见 source_lang 说明） | curl + 常规 UA 全部 200，未见反爬，完全无限流（比多数标杆都好抓，唯一例外见下方 module-1 条目） | SIX Group 官网，交易所业务板块（`/en/products-services/the-swiss-stock-exchange/`）与集团公司页（`/en/company/`）分属不同栏目；`/dam/download/` 路径下是可直接抓取的 PDF 规则/指南文件
   - Regulation 总览页（Trading Rules/Directives/Trading Guides 索引）: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/trading-provisions/regulation.html
   - Trading Hours（交易时段结构）: https://www.six-group.com/en/products-services/the-swiss-stock-exchange/trading/trading-provisions/trading-hours.html

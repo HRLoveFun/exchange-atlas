@@ -1331,9 +1331,15 @@ risks:
     confidence: low
 
   fx_risk_note:
-    zh: "瑞士法郎自由浮动、无外汇管制（常识性事实，本次未附ESTV/FINMA/SNB官方原文核实，confidence标low）；瑞士非欧元区，交易以瑞士法郎计价品种为主，非本币投资者需承担CHF汇率风险"
-    en: "The Swiss franc floats freely with no capital controls (commonly known, but not verified against an SNB/FINMA primary source this session); Switzerland is outside the Eurozone, and most instruments are CHF-denominated, exposing non-domestic investors to CHF exchange-rate risk"
-    confidence: low
+    zh: "瑞士央行（SNB）以维持合意货币条件来确保价格稳定，货币条件由利率水平与汇率共同决定；其货币政策通过影响利率水平和汇率来实施，必要时可动用额外货币政策措施影响汇率或利率水平（SNB 官方货币政策策略页，见 sources）。对非瑞郎投资者：瑞士以瑞郎计价结算为主（瑞士非欧元区），承担瑞郎兑投资者本币的汇率风险"
+    en: "The SNB ensures price stability by maintaining appropriate monetary conditions, determined by the interest rate level and exchange rates; it implements monetary policy by influencing the interest rate level and the exchange rate, and may, if necessary, use additional monetary policy measures to influence the exchange rate or the interest rate level (SNB monetary policy strategy page, see sources). For non-CHF investors: Swiss instruments are predominantly CHF-denominated (Switzerland is outside the Eurozone), carrying CHF exchange-rate risk against the investor's currency"
+    quote: "If necessary, the SNB may also use additional monetary policy measures to influence the exchange rate or the interest rate level."
+    sources:
+      - title: "The SNB's monetary policy strategy（SNB 官方策略页，汇率在货币政策传导中的角色）"
+        url: https://www.snb.ch/en/the-snb/mandates-goals/monetary-policy/strategy
+        accessed: 2026-09-05
+    confidence: high
+    verified: 2026-09-05
 
   political_risk_note:
     zh: "瑞士为永久中立国，政治体制长期稳定、机构健全、法治与财产权保护强，传统上被视为低政治风险国家；联邦制与直接民主带来政策可预期性，交易所运营与监管框架受此稳定环境支撑，政治中断风险低。主要可观察变量为与欧盟的监管等效性博弈（见regulatory_change_risk_note），属外部政策风险而非国内政治失稳。"
