@@ -35,3 +35,4 @@
 - ADR-082 · 数据空缺复核轨任务三执行方案：C 桶 40 处按「上次卡在哪」重排为五棒 + 三处范围裁定 · fix-main-adr-pending · 2026-09-05
 - ADR-083 · tools/ 数据加载样板去重：新增 `tools/data_files.py` · worktree-fix-main-adr-heal · 2026-09-05
 - ADR-084 · DECISIONS.md 归档阈值：比照 taxonomy.yml 的「暂不拆，设阈值」范式 · worktree-fix-main-adr-heal · 2026-09-05
+- ADR-085 · 前端可视化模块共享层抽取：收敛 clone-and-own · worktree-frontend-shared-render-helpers · 2026-09-05

@@ -18,6 +18,7 @@ check: ## 一致性 + 生成块新鲜度 + quote 支持性等全部校验
 	python3 tools/verify_quotes.py
 	python3 tools/check_ui_i18n.py
 	python3 tools/check_no_chapter_ordinals.py
+	python3 tools/check_no_dup_render_helpers.py
 
 check-en-terms: ## en 值术语漂移**建议清单**（只读，进不了 make check：漂移与官方用语需人工逐案判断）
 	python3 tools/check_en_terms.py

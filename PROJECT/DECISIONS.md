@@ -89,6 +89,7 @@
 - ADR-082 · 2026-09-05 · 数据空缺复核轨任务三执行方案：C 桶 40 处按「上次卡在哪」重排为五棒 + 三处范围裁定
 - ADR-083 · 2026-09-05 · tools/ 数据加载样板去重：新增 `tools/data_files.py`
 - ADR-084 · 2026-09-05 · DECISIONS.md 归档阈值：比照 taxonomy.yml 的「暂不拆，设阈值」范式
+- ADR-085 · 2026-09-05 · 前端可视化模块共享层抽取：收敛 clone-and-own
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2368,5 +2369,30 @@ print('全库 medium 零 sources:',n)
 - **没有给 ADR 数量单独设一个计数阈值**——ADR 数与行数强相关，两个指标同时机器化是重复判据，行数够用。
 
 **验证：** `make build` 全绿；`selfcheck` 新增 5 条用例全部通过；`decisions_length_violations` 在真实 `DECISIONS.md`（本条落地后约 2360+ 行）上返回 `[]`，确认默认阈值 3500 不会现在就报警。
+
+**日期：** 2026-09-05
+
+### ADR-085 — 前端可视化模块共享层抽取：收敛 clone-and-own
+
+**背景：** 架构腐烂审查（用户 2026-09-05 拍板的优化方案任务 A）逐字节比对发现，七个可视化模块（`td`=市场机制剖面 / `cw`=成本瀑布 / `sp`=交割管线 / `ll`=上市生命周期 / `rm`=监管图 / `pt`=参与者图 / `rf`=风险旗标）各自独立实现了一套结构相同的 `xxResolveId`（按路由参数解析交易所 id，找不到则回退默认所）/ `xxWrap`（SVG 文本按像素宽度折行）/ `xxCell`（点击 → `openCellOverlay` 的数据格子 `<g>` 包装）——典型的「复制上一个模块、改前缀」演化方式，而非抽取公共基础设施后复用。`rmWrap`/`ptWrap`/`rfWrap` 三者甚至逐字节完全相同；`cellG`（原 `tdCell`）的 CSS 类名 `td-hit` 被 `rm`/`pt`/`rf` 三个后写的模块原样沿用，是「clone 自 td」的直接物证。**修订：** 起草阶段人工审查按去空白比对发现的重复初判 3 类（resolveId/wrap/cell），实际写入 `check_no_dup_render_helpers.py` 用更严格的按参数个数分组 + 归一化字符串/常量字面量的探测跑了一遍原始文件，额外发现两组人工审查漏掉的重复：`rmLaneLabel`/`ptLaneLabel`/`rfLaneLabel`（三胞胎，仅 CSS 类前缀不同）与 `rmLegend`/`ptLegend`（结构完全同构，`pt` 连 `rm-lg-*` 类名前缀都原样复制），一并收敛；`confBadgeClass`/`rfConfColor` 结构相似但语义不同（一个返回 CSS 类名、一个返回颜色值，不同渲染目标），判定为巧合而非重复，不合并。
+
+**定了什么：**
+
+1. **新增 6 个共享函数**（`docs/assets/app.js` 顶部「共享：跨可视化模块基础设施」区块 + `rm`/`pt` 首次共用处就近放置）：`resolveExchangeId(params, defaultEx)`、`clipText(s, max)`（原 `spClip`）、`wrapByCharBudget(s, per, maxLines)`（原 `llWrap` 的核心逻辑）、`wrapByPixelWidth(text, innerW, maxLines)`（原 `rmWrap`/`ptWrap`/`rfWrap` 的共同实现）、`cellG(id, path, chapter, inner, title)`（原 `tdCell`/`cwCell`/`spCell`/`llCell` 与 `rmEnvCard`/`rmLawStrip`/`ptEnvCard`/`rfCard` 内联的同一包装）、`laneLabel(x, y, main, sub, clsPrefix)`（原 `rmLaneLabel`/`ptLaneLabel`/`rfLaneLabel`）；`rm`/`pt` 另共用 `keyedLegend(items)`（数据驱动的图例构建，`items` 为 `{cls, color?, zh, en}` 列表）。
+2. **原有具名函数一律保留、改为 1 行委托**（如 `function tdResolveId(params) { return resolveExchangeId(params, TD_DEFAULT_EX); }`），**不改任何调用点**——把风险从「在 3000 行文件里改几十处调用」降到「只新增共享函数 + 替换 14 处定义体」，call site 100% 不变。
+3. **legend（除 `rm`/`pt`）/ prose 类函数审查后判定内容各模块真正不同（费种文案、法律条款、图例专属元素如幽灵条/loop/flag chip 各异），不构成重复，未强行套模板**——避免把"看起来像"的表层相似误判成需要抽象的重复，这本身也是一种过度设计。
+4. **新增机器化 fitness function**：`tools/check_no_dup_render_helpers.py`，扫描 IIFE 顶层具名函数、按参数个数分组后比对去空白折叠的函数体文本，两个不同名字的函数逐字节相同即报违规；`return 共享函数(...);` 这种纯委托单语句体豁免（这正是本次收敛后的期望形状，不是要防的对象）。挂进 `make check`。**负向探针**：在重构前的原始 `app.js` 上跑同一脚本，确认能查出 `rmWrap`/`ptWrap`/`rfWrap` 三胞胎（严格按字节比对，未包含字符串/常量归一化，所以只报了这一组，其余组是人工加宽比对口径后另外发现的——`make check` 挂的是不含字面量归一化的严格版，理由见下条）。
+5. **不引入字面量归一化的模糊匹配作为 `make check` 硬闸门**——起草时试过给函数体归一化时把字符串字面量和全大写常量都替换成占位符再比对，能多抓出 `confBadgeClass`/`rfConfColor` 这类"形状相似但语义不同"的假阳性（一个映射到 CSS 类名、一个映射到颜色值），需要人工判断是否真的可合并；参照 `check_en_terms.py`（[ADR-049]）"漂移 vs 有意沿用"同样需要人工判断、因此只做建议不进 `make check` 的先例，`check_no_dup_render_helpers.py` 保持严格字节比对——牺牲一部分检出率换取零假阳性、可安全作为阻断构建的硬闸门。
+
+**验证：**
+- `node --check docs/assets/app.js` 语法通过；`make build` 全绿（`docs/data/` 无涉，纯前端结构重构）。
+- **Playwright 全量回归**：起草临时对照脚本，同一份 `docs/data/`，一份跑重构前 `app.js`（`git show HEAD~1` 取原始版本），一份跑重构后，20 家交易所 × 7 个受影响模块 × zh/en 两种语言模式（另加 `id` 缺省与不存在两种触发 `resolveExchangeId` 回退分支的边界输入）共 308 个 `(view, exchange, lang)` 组合，逐个 hash 路由后比对 `#app` 容器 `innerHTML`——**零 diff**。未测主题明暗（本次改动不涉及任何主题条件分支，颜色均走 `var(--xxx)` CSS 变量间接引用，验证前已确认改动范围不含主题逻辑）。
+- `python3 tools/check_no_dup_render_helpers.py` 对重构后文件返回 OK；对原始文件的负向探针如上。
+
+**没做：**
+
+- **没有引入构建步骤 / 模块打包器**——沿用 [ADR-035] C 的零构建决策，所有收敛都在同一个 IIFE 内完成。
+- **没有合并 `rm`/`pt` 之外的图例、也没有触碰 prose 类文案**——内容审查后确认是各模块真正不同的业务信息，不是重复。
+- **没有把 `check_no_dup_render_helpers.py` 做成能自动改代码的工具**——只检测、只报告，改法交给写代码的人判断（同一克制原则见 [ADR-049] 的 `check_en_terms.py`）。
 
 **日期：** 2026-09-05
