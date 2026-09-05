@@ -2339,3 +2339,22 @@ print('全库 medium 零 sources:',n)
 **验证：** 本条自身就是这条流水线的第一个真实用例——`DECISIONS.md` 标题写占位符 `ADR-081`，`CLAUDE.md`/`PROJECT/GIT-RUNBOOK.md` 里的交叉引用也写同一占位符；PR 开出后带 `gh pr merge --auto --squash`，`pr-build.yml` 跑绿后由 GitHub 服务端自动合并，合并进 main 后 `adr-heal.yml` 应该自动把本条占位符定号为下面这个真实编号——本条末尾若能看到具体数字而不是 `ADR-081`，说明整条流水线（CI 检查 → auto-merge → post-merge 定号）端到端跑通了。人工验证记录：`gh repo view`/`gh api` 现测 `allow_auto_merge: true`、`deleteBranchOnMerge: true`；本地 `make build` 全绿（占位符在本分支上只警告，不阻断）。
 
 **日期：** 2026-09-05
+
+### ADR-PENDING-decisions-archive-threshold — DECISIONS.md 归档阈值：比照 taxonomy.yml 的「暂不拆，设阈值」范式
+
+**背景：** 架构腐烂审查（用户 2026-09-05 拍板的优化方案任务 C）指出 `DECISIONS.md` 是唯一的 ADR 权威来源、只增不减（现 2341 行），且没有像 `ROADMAP.md`「历史归档」那样的分段机制——继续按近期节奏（[ADR-069]～[ADR-082] 十四条在约两天内写完）增长，几个月后会成为下一个「单文件失控」。[ADR-036] 处理过同类问题（`taxonomy.yml` 当时 818 行）：不预防性拆分，只设明确触发阈值（超 1200 行或第 12 章）。本条把同一范式套用到 `DECISIONS.md`。
+
+**定了什么：**
+
+1. **阈值：`DECISIONS.md` 超过 3500 行时触发归档**（现 2341 行，约 1.5 倍缓冲，与 [ADR-036] 给 `taxonomy.yml` 的比例一致）。触发后把最早一批 ADR（建议从 `ADR-001` 开始，按行数切到略低于新阈值）整体移入新文件 `PROJECT/DECISIONS-ARCHIVE.md`，`DECISIONS.md` 顶部加一行指向归档文件；`adr-index` 生成块（[ADR-077]）改为汇总 `DECISIONS.md` + `DECISIONS-ARCHIVE.md` 两处的编号索引，不因归档丢失可查性。
+2. **`tools/validate.py` 新增非阻断 warn**（`decisions_length_violations`/`validate_decisions_length`）：超过阈值时打印提醒但不 `err`，不阻断 `make build`——具体怎么拆、拆多少留给人判断，机器只负责按时提醒，不该替人拍板。`tools/selfcheck.py` 补 5 条合成用例覆盖边界（阈值内 / 恰好等于 / 超一行 / 消息内容含实际行数与阈值 / 默认阈值 3500 不误报当前体量）。
+3. **文档职责边界表（`CLAUDE.md` 一节）待归档真正发生时再补一行**——本条不预先给尚不存在的 `DECISIONS-ARCHIVE.md` 写权威声明，等真正触发拆分时随该次改动一并补。
+
+**没做：**
+
+- **没有现在就执行归档**——现 2341 行未超阈值，属于「先定触发条件，不预先破例」（[ADR-036] 的措辞）。
+- **没有给 ADR 数量单独设一个计数阈值**——ADR 数与行数强相关，两个指标同时机器化是重复判据，行数够用。
+
+**验证：** `make build` 全绿；`selfcheck` 新增 5 条用例全部通过；`decisions_length_violations` 在真实 `DECISIONS.md`（本条落地后约 2360+ 行）上返回 `[]`，确认默认阈值 3500 不会现在就报警。
+
+**日期：** 2026-09-05
