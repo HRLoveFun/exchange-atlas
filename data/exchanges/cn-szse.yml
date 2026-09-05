@@ -336,6 +336,14 @@ market_structure:
     en: "Trading days are Monday to Friday; the market closes on national statutory holidays and on days announced as closed by SZSE"
     quote: "本所交易日为每周一至周五。国家法定假日和本所公告的休市日，本所市场休市。"
 
+    sources:
+      - title: 深圳证券交易所交易规则（2026年修订）
+        url: https://docs.static.szse.cn/www/lawrules/rule/trade/current/W020260424690713155663.pdf
+        accessed: 2026-08-14
+      - title: SZSE English — Trading Overview
+        url: https://www.szse.cn/English/services/trading/tradOverview/index.html
+        accessed: 2026-08-14
+    verified: 2026-09-05
   opening_mechanism:
     spec: {type: call_auction, auction_start: "09:15", auction_end: "09:25"}
     zh: "开盘集合竞价（9:15-9:25）"

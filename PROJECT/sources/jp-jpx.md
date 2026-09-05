@@ -96,3 +96,6 @@
   - 有価証券取引税の概要（国税庁统计页，「有価証券取引税は平成11年3月31日をもって廃止された」一手表述；⚠️ 页面为 Shift-JIS 编码，`fetch_sources.py` 落盘后需转存 UTF-8 才能过 `verify_quotes` 文本比对，2026-09-05 实测）: https://www.nta.go.jp/publication/statistics/kokuzeicho/shoken1999/menu/01.htm（HTTP 200）
   - No.7141 印紙税額の一覧表（その2）第5号文書から第20号文書まで（第17号文書印紙税额分档表，UTF-8 正常）: https://www.nta.go.jp/taxes/shiraberu/taxanswer/inshi/7141.htm（HTTP 200，30KB）
   - 2026-09-05 新增（任务四市场结构残余）: Holiday Trading（JPX 官网逐年交易日历，2026 年逐日假期列表——holidays_note 升级出处）: https://www.jpx.co.jp/english/corporate/about-jpx/calendar/（HTTP 200，33KB）
+
+- `data.iana.org`（2026-09-05 新增登记，stable 档来源闭环） | 官方（IANA 时区数据库，时区命名的权威登记处，跨所通用——各交易所 `overview.timezone`/`overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本，zone 文件随 tzdata 版本更新 | Asia/Tokyo（JST UTC+9，无夏令时）
+  - tzdb「asia」zone 文件: https://data.iana.org/time-zones/tzdb/asia（HTTP 200，68KB）

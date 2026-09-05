@@ -59,6 +59,12 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
       `fx_risk_note` 的 `volatility: stable` 使它不受校验 4 约束，18 家零来源停在 `low`
       而 make check 一路全绿，正是踩在这个缺口上（fr-euronext.fx_risk_note /
       de-eurex.liquidity_risk_note 靠 `_meta` 继承蒙混是落地时的首批命中项）
+  21. stable 档来源不变式（[ADR-094]）：全库 `volatility: stable`
+      且已填、展开后 `confidence: medium|high` 的字段必须有**字段级** `sources`、不接受
+      章节 `_meta.sources` 继承——校验 20 的全库推广。校验 4 只兜 volatile/moderate，
+      能「medium + 零 sources + make check 全绿」的只剩 stable 这一档（2026-09-05 实算
+      63 处：overview.timezone 16 / settlement_currency 16 / dst_rule 14 / trading_currency
+      5 / regulation.clearing_regulator 5 / 长尾 7），本条把它永久变成构建关卡
   19. stale 复核提醒（[ADR-060] 任务五③）：已填字段超过 volatility 复核阈值、或
       未记 verified 无法判定新鲜度时，以 warning 输出逐字段清单——不阻断构建
       （[ADR-052] 之后构建侧不再有打印「哪些字段超期了」的出口，这里是唯一一处）
@@ -160,6 +166,32 @@ def risks_note_sources_violations(eid, raw_risks, note_paths):
                        f"confidence 是风险旗标面板一等视觉信号，无据会被画成错误旗标；"
                        f"不接受章节 _meta.sources 继承）")
     return out
+
+
+def stable_confidence_sources_violations(loc, raw_env, expanded_env, volatility):
+    """stable 档来源不变式（校验 21，[ADR-094]）。返回违规消息列表
+    （空 = 合法）。判定纯逻辑、无 I/O，tools/selfcheck.py 喂合成输入锁行为：
+
+      全库 `volatility: stable` 且已填（zh）、展开后 `confidence: medium|high` 的字段，
+      必须有**字段级** `sources`——检查跑在**未展开的 raw 数据**上，章节 `_meta.sources`
+      继承不算数（同校验 20 的理由：expand_field 的静默继承是 [ADR-074] 复核者点名的
+      漏洞）。依据：校验 4 只兜 volatile/moderate，能「medium + 零 sources + make check
+      全绿」的只剩 stable 这一档；medium 语义是「有第三方/官方出处」（CLAUDE.md 二第3条），
+      零 sources 说明出处根本没记下来——无法判断是抄来的还是「我记得」。
+    """
+    if volatility != "stable":
+        return []
+    if not (expanded_env or {}).get("zh"):
+        return []
+    conf = (expanded_env or {}).get("confidence")
+    if conf not in ("medium", "high"):
+        return []
+    own_sources = raw_env.get("sources") if isinstance(raw_env, dict) else None
+    if own_sources:
+        return []
+    return [f"{loc}: volatility=stable 且 confidence={conf} 但没有字段级 sources"
+            f"（stable 档来源不变式：medium/high 断言须有本字段出处背书，"
+            f"章节 _meta.sources 继承不算数，[ADR-094]）"]
 
 
 def field_na_violations(loc, fenv, fdef_optional):
@@ -587,6 +619,14 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                 if not env or not env.get("zh"):
                     continue
                 loc = f"{eid}: {ch['id']}.{'.'.join(path)}"
+
+                # 校验 21：stable 档来源不变式（[ADR-094]）——
+                # 展开口径取 confidence、raw 口径验字段级 sources（_meta 继承不算数）
+                ch_raw = raw_exchanges.get(eid) or {}
+                raw_env = sync.get_by_path(ch_raw.get(ch["id"]) or {}, path)
+                for v in stable_confidence_sources_violations(
+                        loc, raw_env, env, fdef.get("volatility", "moderate")):
+                    err(v)
 
                 # enum 合法性
                 enum_ref = fdef.get("enum_ref")

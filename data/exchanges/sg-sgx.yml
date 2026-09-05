@@ -367,6 +367,11 @@ market_structure:
     quote: "Half-Day Trading Opens/Starts at: 08:30 hours Closes/Ends at: 12:16 hours"
     confidence: high
 
+    sources:
+      - title: Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching
+        url: https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles
+        accessed: 2026-08-14
+    verified: 2026-09-05
   opening_mechanism:
     spec: {type: call_auction, auction_start: "08:30", auction_end: "09:00", note: "开盘例行程序：Pre-Open + Non-Cancel，按最大成交量/最小失衡量确定均衡价"}
     zh: "开盘例行程序：Pre-Open阶段可自由报单/改单/撤单不撮合，Non-Cancel阶段不可再报单改单，按SGX-ST算法计算出成交量最大、失衡量最小的均衡价（Equilibrium Price）作为开盘价"
@@ -405,6 +410,11 @@ market_structure:
     quote: "All orders are matched in accordance with price priority, subject to Rule 8.14, followed by time priority."
     confidence: high
 
+    sources:
+      - title: Regulatory Notice 8.2.1 — Trading Hours, Market Phases, Application of Market Phases and Principles and Rules for Trade Matching
+        url: https://rulebook.sgx.com/rulebook/regulatory-notice-821-trading-hours-market-phases-application-market-phases-and-principles
+        accessed: 2026-08-14
+    verified: 2026-09-05
   order_types:
     spec:
       market: true

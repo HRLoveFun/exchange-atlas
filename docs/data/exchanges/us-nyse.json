@@ -195,7 +195,7 @@
             "accessed": "2026-08-13"
           }
         ],
-        "verified": "2026-08-13",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null
       },
@@ -212,7 +212,7 @@
             "accessed": "2026-08-13"
           }
         ],
-        "verified": "2026-08-13",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null
       },
@@ -220,15 +220,15 @@
         "zh": "美国证券交易委员会",
         "en": "SEC",
         "detail": "与市场监管为同一机构；清算机构 NSCC/DTCC 本身的监管细节本次未核实，见 OPEN-QUESTIONS。",
-        "confidence": "medium",
         "sources": [
           {
-            "title": "NYSE Regulation（官网）",
+            "title": "NYSE Regulation（官网：作为注册证券交易所，NYSE 受 SEC 监管——regulation.regulator 同一依据）",
             "url": "https://www.nyse.com/regulation",
-            "accessed": "2026-08-13"
+            "accessed": "2026-09-05"
           }
         ],
-        "verified": "2026-08-13",
+        "confidence": "medium",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
         "quote": null
@@ -599,7 +599,7 @@
             "accessed": "2026-08-13"
           }
         ],
-        "verified": "2026-08-13",
+        "verified": "2026-09-05",
         "spec": null,
         "quote": null
       },

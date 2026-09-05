@@ -98,6 +98,7 @@
 - ADR-091 · 2026-09-05 · 上市生命周期模块迭代：8 个时长 spec 独立复核订正 + 时长 spec 扩容 8 处（含 `bound` 口径键）+ 散文块折行与停复牌 ↻ 视觉修订
 - ADR-092 · 2026-09-05 · OQ #45 四家旗舰所衍生品覆盖缺口落地：products 条目 + 两 derivatives 子章 + 盲审订正
 - ADR-093 · 2026-09-06 · 折行函数 `wrapByCharBudget` 改 token 折行：中英混排不再从拉丁词 / 数字中间切断
+- ADR-093 · 2026-09-05 · stable 档来源不变式全库化（校验 21）+ 63 处「stable + medium + 零 sources」闭环
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2605,3 +2606,16 @@ print('全库 medium 零 sources:',n)
 **验证：** 基线 rebase 到 `b9ae247`（OQ #45 盲审订正收尾，ADR-092）后 `make build` **exit 0**（`selfcheck` 93、`validate` 0 错误 / 5 警告〔均为本分支 `ADR-PENDING-*` 占位符，合并后 healer 定号〕、`verify_quotes` FAIL=0、`check_ui_i18n` / `check_no_chapter_ordinals` / `check_no_dup_render_helpers` / `check_wrap_mixed` OK）；`node --check docs/assets/app.js` 通过。本条 commit 只含 `app.js` / `Makefile` / 新增 `tools/check_wrap_mixed.py` / `DECISIONS` / `ROADMAP` / `ROADMAP-INBOX`——`data/` 与 `docs/data/` 零 diff（见「没做」末条）。`check_wrap_mixed.py` 负向探针：把 `app.js` 临时换回旧 blind-slice 实现 → `exit 1`、逐条点名 `Investment`/`Connect`/`CMN`/`Committee` 被折断；换回新实现 → `exit 0`；纯 CJK 逐字断言在新旧实现下都通过，佐证现网中文卡零回归。
 
 **日期：** 2026-09-06
+### ADR-094 — stable 档来源不变式全库化（校验 21）+ 63 处「stable + medium + 零 sources」闭环
+
+**背景：** [ADR-079] 落地时暴露的校验盲区：校验 4 只兜 `volatile`/`moderate`，`volatility: stable` 的字段可以「`confidence: medium` + 零 sources + make check 全绿」——`fx_risk_note` 18 家零来源正踩在这缺口上。2026-09-05 实算全库（展开口径）63 处，头部 `overview.timezone` 16 / `settlement_currency` 16 / `dst_rule` 14 / `trading_currency` 5 / `regulation.clearing_regulator` 5，长尾 7。用户拍板立项独立闭环。
+
+**定了什么：**
+1. **不变式口径取字段级（raw），不是展开口径**——校验 21 = 校验 20 的全库推广：`volatility: stable` 且已填、展开后 `confidence: medium|high` 的字段必须有**字段级** `sources`，章节 `_meta.sources` 继承不算数（[ADR-074] 点名的 `expand_field` 静默继承漏洞）。落地时暴露了 22 处靠 `_meta` 继承蒙混的字段（kr/jp/fr 的 overview 族、各所 `market_structure.holidays_note`/`matching_principle`、ch/de/us 的 regulation 族等）——它们不在 63 处清单里，但正是这条不变式要永久拦的形态，已随批把章节 `_meta.sources` 下沉到字段级（下沉前逐字段核对 quote 确系该章节来源页所出）。
+2. **IANA tz database 定为 timezone/dst_rule 的通用官方出处**（时区命名的权威登记处，`data.iana.org` 已按所登记），16 处 timezone + 15 处 dst_rule 由此闭环。
+3. **「查不到干净官方陈述句就降级 low」不做特赦**：13 处币种字段（值本身无争议，但官方页无专门陈述句）降 low + 各字段 `detail` 留候选出处 + OPEN-QUESTIONS #47 汇总，待人工投喂后升级——不因「常识不会错」放松铁律第 3/4 条。
+4. **可引则引、够格升 high**：8 处升 high（cn×2/hk 的 `clearing_regulator`、hk `membership_structure`、jp `trading_system_name`，官方条文/FAQ/PFMI 披露/社史页逐字 quote），`make verify_quotes` 逐字反查全过。
+
+**没定 / 留后续：** 13 处降级字段待人工投喂（OQ #47）；`us` 两家 settlement_currency 的 DTCC NSCC 原文、`uk` CREST Rules（euroclear.com 403）是下次优先入口。
+
+**日期：** 2026-09-05

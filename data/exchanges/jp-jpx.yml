@@ -32,11 +32,21 @@ overview:
 
   timezone:
     zh: "日本标准时间（JST，UTC+9）"
+    sources:
+      - title: IANA tz database「asia」zone 文件（Asia/Tokyo：JST UTC+9，全年无夏令时 Rule）
+        url: https://data.iana.org/time-zones/tzdb/asia
+        accessed: 2026-09-05
+    verified: 2026-09-05
     en: "Japan Standard Time (JST, UTC+9)"
     confidence: medium
 
   dst_rule:
     zh: "不实行夏令时"
+    sources:
+      - title: IANA tz database「asia」zone 文件（Asia/Tokyo 全年无夏令时 Rule）
+        url: https://data.iana.org/time-zones/tzdb/asia
+        accessed: 2026-09-05
+    verified: 2026-09-05
     en: "Does not observe daylight saving time"
     confidence: medium
 
@@ -50,6 +60,14 @@ overview:
     quote: "\"Tokyo Stock Exchange Co., Ltd.\" established. / \"Tokyo Stock Exchange\" in the present form founded (opened on May 16)."
     confidence: high
 
+    sources:
+      - title: History（JPX官网，公司发展历程）
+        url: https://www.jpx.co.jp/english/corporate/about-jpx/history/index.html
+        accessed: 2026-08-13
+      - title: Before JPX Launched（JPX官网，东证前史）
+        url: https://www.jpx.co.jp/english/corporate/about-jpx/history/01-01.html
+        accessed: 2026-08-13
+    verified: 2026-09-05
   history:
     zh: "1878年设立，几经战时整合与解散重组，1949年以现行组织形式重新成立；2013年东京证券交易所集团与大阪证券交易所合并成立日本交易所集团（JPX），JPX随即于同月在TSE挂牌上市；同年大阪证交所现货市场并入TSE，衍生品市场整合进更名后的大阪交易所（OSE）"
     en: "Established 1878; wartime consolidation and dissolution, refounded in present form in 1949; in 2013 Tokyo Stock Exchange Group merged with Osaka Securities Exchange to form Japan Exchange Group (JPX), which listed on TSE that same month; OSE's cash equity market was integrated into TSE while its derivatives market became the renamed Osaka Exchange (OSE)"
@@ -102,12 +120,14 @@ overview:
   trading_currency:
     zh: "日元 (JPY)"
     en: "JPY"
-    confidence: medium
+    detail: "2026-09-05 stable 档来源闭环时查而未得：缓存内（TSE Business Regulations 等）未见对交易/结算币种的专门陈述句；候选出处为 TSE Business Regulations 与 JSCC 规则（结算以日元计），按防幻觉铁律降级 low，待补原文后升级。"
+    confidence: low
 
   settlement_currency:
     zh: "日元 (JPY)"
     en: "JPY"
-    confidence: medium
+    detail: "2026-09-05 stable 档来源闭环时查而未得（同 trading_currency）；候选出处为 JSCC 结算规则（结算以日元计），按防幻觉铁律降级 low，待补原文后升级。"
+    confidence: low
 
 # ═══════════════════════════════════════════════
 # 三｜监管与法律环境
