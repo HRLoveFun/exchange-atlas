@@ -28,3 +28,4 @@
 - ADR-075 · 抓取基础设施：fetch.py OTP 两步 + wayback 回退 + kr-krx/za-jse 缓存重建（原占 ADR-072，撞已合并的 PR #69，按 ADR-029 协议让号） · worktree-fetch-infra-otp · 2026-09-05
 - ADR-076 · 并行 worktree 防撞号第二版：ADR 编号占位符 + 合并时自动定号 · worktree-adr-auto-numbering2 · 2026-09-05
 - ADR-077 · 来源文件下沉 + 把「靠自觉的约定」变成构建关卡 · main · 2026-09-05
+- ADR-078 · 数据空缺复核轨任务四执行方案：5 家旗舰所深度补全的字段级现状核实 + 按字段族批量回填设计 · main · 2026-09-05
