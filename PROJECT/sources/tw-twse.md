@@ -1,4 +1,6 @@
 # 台湾证券交易所 Taiwan Stock Exchange (TWSE) `tw-twse`
+- `cbc.gov.tw` | 官方（货币当局——台湾地区货币当局「中央银行」CBC；2026-09-05 新增登记，[ADR-079] 风险旗标子棒） | zh-Hant / en | curl + 常规 UA 200，部分「说明」链接实为 PDF（直链可抓，pdftotext 提取） | 新台币汇率制度（fx_risk_note 出处）
+  - 有關新台幣匯率政策之說明（CBC 官方说明 PDF，108.5.2：「本行採行管理浮動匯率制度，新台幣匯率原則上由市場供需決定」+ 不规则/季节因素致失序变动时维持外汇市场秩序）: https://www.cbc.gov.tw/tw/dl-33557-896d3e069a7c4d5d8d0e4857ae662cb7.html（HTTP 200，506KB PDF）
 - `twse.com.tw` | 官方 | zh-Hant / en（官方双语，各页各有独立 URL，非同页切换；英文版部分栏目滞后或缺失，细节不如中文版精确） | curl + 常规 UA 全部 200，未见反爬（含子域名 shl.twse.com.tw）；⚠️ 部分旧版路径（如网站首页导航曾指向的「pcversion 版放宽涨跌幅度专区」「旧版上市规章目录页」）已废弃，HTTP 状态码仍是 200，但正文是站内自定义 404 页（此網頁不存在，請回到本公司首頁）——不是抓取失败，是 URL 本身已失效，务必肉眼确认页面正文而非只看状态码，这两条已弃用未收录，不在下方列表中 | 台湾仅此一家股票集中交易市场；另有台湾期货交易所（TAIFEX，衍生品，`taifex.com.tw`）与证券柜台买卖中心（TPEx，OTC 市场，前身「柜买中心」，`tpex.org.tw`）为独立法人实体，规则不属于本文件收录范围
   - 集中市场交易制度介绍（开盘/收盘机制、撮合原则、订单类型正文）: https://www.twse.com.tw/zh/products/system/trading.html
   - Trading Mechanism Introduction（英文版，内容对应但部分细节比中文版简略）: https://www.twse.com.tw/en/products/system/trading.html

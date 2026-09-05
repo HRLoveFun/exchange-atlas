@@ -1138,9 +1138,15 @@ risks:
     confidence: low
 
   fx_risk_note:
-    zh: "新台币非完全自由兑换货币，外资参与须透过FINI/FIDI登记及银行结购汇作业进行，存在汇兑与资金进出相关限制；具体结购汇额度与作业规定本次未核实官方原文"
-    en: "The New Taiwan Dollar is not a fully freely convertible currency; foreign participation requires going through FINI/FIDI registration and bank foreign-exchange settlement procedures, which carry currency-conversion and fund-flow restrictions. The specific settlement quotas and operating rules were not verified against official source text this session"
-    confidence: low
+    zh: "台湾地区货币当局「中央银行」（CBC）采行管理浮动汇率制度，新台币汇率原则上由市场供需决定；遇不规则因素（如短期资金大量进出）与季节因素导致汇率过度波动或失序变动、有不利经济金融稳定之虞时，央行将本于职责维持外汇市场秩序（CBC 官方汇率政策说明，见 sources）。对非新台币投资者：台股以新台币计价结算，承担新台币兑投资者本币的汇率风险；外资参与须透过 FINI/FIDI 登记及银行结购汇作业，属资金跨境议题，见 capital_controls"
+    en: "CBC (the central bank of Taiwan) operates a managed float: the New Taiwan dollar exchange rate is, in principle, determined by market supply and demand, and the bank maintains order in the FX market when irregular factors (e.g. large short-term fund flows) or seasonal factors cause excessive or disorderly volatility that could harm economic and financial stability (CBC official FX policy statement, see sources). For non-TWD investors: TWSE-listed securities are denominated and settled in TWD, carrying TWD exchange-rate risk against the investor's currency; FINI/FIDI registration and bank FX-settlement procedures are covered in capital_controls"
+    quote: "本行採行管理浮動匯率制度，新台幣匯率原則上由市場供需決定"
+    sources:
+      - title: "有關新台幣匯率政策之說明（CBC 官方汇率政策说明，108.5.2）"
+        url: https://www.cbc.gov.tw/tw/dl-33557-896d3e069a7c4d5d8d0e4857ae662cb7.html
+        accessed: 2026-09-05
+    confidence: high
+    verified: 2026-09-05
 
   political_risk_note:
     zh: ""
