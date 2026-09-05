@@ -2492,7 +2492,7 @@ print('全库 medium 零 sources:',n)
 - **「`null` 需原文陈述」的机器校验**——本批 7 个 QUESTION 同源（band_pct/halt_minutes 等为 null 但 zh 未说明未公布），现为 5b/5c 之外的机器盲区；加进 `validate.py` 需先辨析「null=未公布 / null=不适用」两义（au-asx 一例即后者），独立排期。
 - 剖面现货 / 衍生品业务线切换渲染层——另一条 ROADMAP 条目，数据侧本条已备齐（130 处 spec + 三态齐备）。
 
-**验证：** `make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`selfcheck` 93、`check_ui_i18n`/`check_no_chapter_ordinals` OK）、`make sync` 幂等；生成块零 diff（`spec` 不计「已填」分母，进度矩阵不动）。每所一个 commit；两处形状演进各有独立 commit。
+**验证：** `make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`selfcheck` 93、`check_ui_i18n`/`check_no_chapter_ordinals` OK）、`make sync` 幂等；生成块零 diff（`spec` 不计「已填」分母，进度矩阵不动）。每所一个 commit；两处形状演进各有独立 commit。**过程教训一处**：本棒中途的构建验证用了 grep 模式过滤输出而没看退出码，`br-b3` circuit_breaker 的 `halt_minutes: 60`（原文仅 "one hour"，5b 逐字反查不过）在红树上带病提交了两轮才由退出码判定抓出——**「`make check` 不过不推」必须落实为「看 `make build` 的 exit code」**，不能靠肉眼/grep 扫输出。
 
 **共享检出事故注记：** 本会话与风险旗标子棒会话（[ADR-079]）在同一检出并行工作，本轨三段已暂存改动被对方整树提交扫入其 commit（cn-szse 批次一→`cf9f32c`、in-nse 批次一大部→`03780d5`、sg-sgx 复核订正→`e23c447`），内容无损但 commit 归属分裂。既有协议（[ADR-086]：共享检出按 hunk 选择性暂存）依赖双方自觉，`git add -A` 一方即可击穿——下次并行前值得给「共享检出下禁用 `git add -A`」加机器护栏。
 
