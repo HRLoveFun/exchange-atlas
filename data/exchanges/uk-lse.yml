@@ -1269,8 +1269,9 @@ infrastructure:
     detail: |
       2023年12月事件由「未获官方原文」收口：官方事后公告（Service Announcement Notice，docs 静态子域
       可 curl）对两次 halt 的根因、触发/复牌时刻逐字可摘，quote 即取自该公告；公告并披露 GTP 行情端
-      Instrument Status 未随复牌更新等次生问题。2019 年事件官方锚点仍为 AR2019 薪酬注脚（原 quote 句），
-      时长/波及面维持第三方口径；两起事件合并记 medium（quote 单槽只锚其一）。
+      Instrument Status 未随复牌更新等次生问题。2019 年事件官方锚点仍为 AR2019 薪酬注脚（原 quote 句，
+      官方仅记「August 2019」未记具体到日——zh 的「16日」与时长/波及面同为媒体报道口径）；
+      两起事件合并记 medium（quote 单槽只锚其一）。
     sources:
       - title: "Service Announcement Notice 001/05122023 — London Stock Exchange – 05 December 2023 - Technical Incident Update（官方事后公告）PDF"
         url: https://docs.londonstockexchange.com/sites/default/files/documents/live_-_001_-_05122023_-_london_stock_exchange_-_05_december_2023_-_technical_incident_update.pdf

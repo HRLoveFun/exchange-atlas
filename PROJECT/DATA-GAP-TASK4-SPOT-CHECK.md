@@ -72,3 +72,43 @@
 - 零幻觉确认：78 处终态无一条 quote 查无缓存支持；发现的 2 处素材错挂/来源错挂均已换为缓存真实原文。
 - `make build` 全绿（verify_quotes OK=1088 / FAIL=0）；FIX 只动 zh/en/detail/quote/sources，未动 enum/spec/confidence 结构（除 short_selling 补 quote、clearing_regulator 回填）。
 - 按 [CLAUDE.md §四]，78 处终态的第二人复核关卡至此关闭；后续 11 处空字段回填后无需再整批复核，逐处自检即可。
+
+---
+
+# 第二轮整批第二人独立复核（2026-09-05，用户指定加验）
+
+**背景与范围**：第一轮复核（上方）之后，收尾会话回填了原留空的 11 处（hk-hkex×5、us-nyse×1、uk-lse×3、cn-sse×2）并再更新 uk-lse 2 处（`holidays_note` 升 high、`major_outage_history` 换锚 2023-12-05 官方公告，commit `9f99035`）——合计 **13 处终态未经第二人复核**。虽第一轮裁定「回填后逐处自检即可」，用户 2026-09-05 指定加验一轮整批复核，本轮照办：**78 处终态全量重核**（67 处已复核字段做机器复检 + 漂移审计，13 处新终态做全视角深读）。
+
+## 方法（四视角，与第一轮同构）
+
+- **视角1 · 机器反查（78 处全量，脚本化 `/tmp/review_task4.py`）**：逐字段 quote 对其所引每个来源的缓存文本做 verbatim 连续窗口反查（复用 `verify_quotes.quote_in`，含 wayback 标记识别）；high 字段散文数值按 validate 真口径（至少一个 ≥2 位数字命中）+ strict 视角（逐个命中，仅信息性）双记；spec 子块按 5b 严口径（`spec_number_strings` 逐个命中）。
+- **视角2 · 来源工程（78 处全量）**：来源域名是否在 SOURCES.md/分片登记（含子域归并规则）；来源是否实际落盘且 `ok:true`；medium+ 字段无来源检测。
+- **视角3 · 语义保真（13 处新终态深读 + 67 处抽读）**：zh/en 主张与 quote/缓存原文逐句比对，标注推断性质是否就地声明。
+- **视角4 · 结构一致 + 漂移审计**：spec↔prose↔跨字段（pre_market 时刻 vs continuous_pm vs XLSX Early Close 12:30 等）；`git diff 1cd06d3..HEAD` 限定 5 家数据文件，确认上次复核基线以来只有本收尾会话的 13 字段变化（jp-jpx 零漂移；hk-hkex 另含任务三棒3 对 `derivatives.price_limits.other_boards` 的一处 detail 改写，非任务四字段）。
+
+## 判定汇总（第二轮）
+
+| 视角 | 范围 | PASS | FIX | QUESTION |
+|---|---|---|---|---|
+| 1 机器反查 | 78 全量 | 78 | 0 | 0 |
+| 2 来源工程 | 78 全量 | 78 | 0 | 0 |
+| 3 语义保真 | 13 深读 + 抽读 | 13 | 2（均 detail 级） | 0 未决 |
+| 4 结构一致+漂移 | 78 全量 | 78 | 0 | 0（1 项 Q 就地证伪） |
+| **合计** | **78** | **76** | **2** | **0** |
+
+- 机器层零问题：78/78 quote 逐源命中；4 处 quote 仅存于 wayback 快照（us `post_delisting_venue`/`last_trading_day_rule`/`implicit_costs_note`、hk `foreign_ownership_limit`），沿用 [ADR-075] 口径（同一官方原文的历史快照，confidence 判定不变）；strict-miss（zh/en 个别数字不在 quote、但至少一个命中）13 处，均为叙述性改写或含数字的规则名/文件名，抽读无语义风险。
+- **FIX（2 处，均已订正并复验）**：
+  1. us `participants.foreign_access_channel`：en「not ordinary portfolio purchases of publicly traded securities」为推断句，detail 原未给依据——补记 CRS 同报告 FDI/组合投资区分句（「It is distinct from portfolio investment…」）作为推断基础。
+  2. uk `infrastructure.major_outage_history`：zh「2019年8月16日」具体到日超出 AR2019 官方口径（官方仅记「August 2019」）——detail 补注「16日」与时长/波及面同为媒体报道口径。
+- **QUESTION → 就地证伪/存档（3 项，未订正数据）**：
+  1. uk `pre_market` `spec.kind: pre_open_queue`（挂单排队不成交）系对 XLSX 交易循环表的结构性读表（05:05–07:50 区间无成交时段、开盘集合竞价 07:50 起）——MIT201 15.9 无盘前行为描述，属「时段时刻逐字、性质结构推断」，spec note 已声明，接受。
+  2. cn `investor_structure`「其中沪股通」归属——用 2024 卷同表证实「其中: 沪股通」（其后随公募基金分项）确挂在专业机构名下，zh 表述无误。
+  3. hk `foreign_access_channel`「无类似内地 QFII 的额度审批」与 hk `foreign_ownership_limit`「例外均不涉及证券市场持股」为结构性对照/清单内推理——detail 均已声明推断性质，接受。
+- 本轮新引用来源的登记状态：`api.londonstockexchange.com`（官方内容 API，SPA 页数据层）、`congress.gov`、`basiclaw.gov.hk`、`state.gov`（wayback 回退）均已在分片登记且缓存 `ok:true`。
+
+## 第二轮终态
+
+- **78/78 filled 全部 PASS**（2 处 detail 级订正已落地复验）；11 处原留空字段全部回填，无合规空字段残留。
+- 零幻觉确认维持：78 处 quote 无一条查无缓存支持；本轮未发现新的素材错挂/来源错挂。
+- `make build` 全绿（selfcheck 78 不变式、validate 0/0、`verify_quotes` OK=1113 / FAIL=0）。
+- 残存微缺口（非字段缺失，记录于字段 detail）：uk-lse 逐日假日表的半日市具体钟点（12:30）锚在 detail 与 XLSX 侧、cn-sse 交易占比口径（官方现期年鉴不再按投资者类型发布成交占比）。
