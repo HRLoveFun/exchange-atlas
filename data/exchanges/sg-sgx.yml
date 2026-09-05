@@ -754,7 +754,7 @@ market_structure:
       confidence: high
 
     volatility_interruption:
-      spec: {halt_minutes: null, note: "冷静期时长载于各合约 Contract Specifications（规则未统一规定，故 null）；期间可在价格限制区间内继续交易，届满恢复至交易日结束或另行规定期间"}
+      spec: {auction_minutes: null, note: "冷静期（Cooling Off Period）非停牌——期间在价格限制区间内继续交易（同 hk-hkex 冷静期口径，故记 auction_minutes 而非 halt_minutes）；时长逐合约载于 Contract Specifications（规则未统一规定，故 null），届满恢复至交易日结束或另行规定期间"}
       zh: "「冷静期」（Cooling Off Period）：持续时长载于各合约的 Contract Specifications（规则原文未统一规定），期间该合约可在价格限制区间内继续交易；冷静期届满后恢复正常交易，直至当个交易日结束或 Contract Specifications 另行规定的其他期间"
       en: "\"Cooling Off Period\": duration is set in each Contract's Contract Specifications (not uniformly prescribed in the Rules text); during the period the Contract may continue trading within its Price Limits; trading resumes normally upon the period's lapse, for the remainder of the Trading Day or such other period as the Contract Specifications prescribe"
       sources:

@@ -887,17 +887,13 @@ market_structure:
         reference:
           - index: Nifty 50
             exchange: self
+          - index: BSE Sensex
+            exchange: bse
         levels:
           - threshold_pct: 10
-            halt_minutes: null
-            day_end: false
           - threshold_pct: 15
-            halt_minutes: null
-            day_end: false
           - threshold_pct: 20
-            halt_minutes: null
-            day_end: false
-        note: "与现货市场共用的全市场指数熔断（10%/15%/20% 三级协调停市，覆盖股票现货与股票衍生品）；以 Nifty 50 或 BSE Sensex 先触发者为准（BSE 不在本库覆盖范围）；各档停市时长随触发时段而异，原文未给单一数值"
+        note: "与现货市场共用的全市场指数熔断（10%/15%/20% 三级协调停市，覆盖股票现货与股票衍生品），以 Nifty 50 或 BSE Sensex 先触发者为准；各档停牌时长与恢复方式逐时段不同（见顶层 circuit_breaker detail），未逐字入 spec，与顶层口径一致"
       zh: "衍生品分部本身未见独立熔断机制；与现货市场共用同一套全市场指数熔断（10%/15%/20%三级，以Nifty 50或BSE Sensex先触发者为准），触发后同时暂停「所有股票现货及股票衍生品市场」（coordinated trading halt in all equity and equity derivative markets nationwide）"
       en: "No independent circuit breaker specific to the derivatives segment was found; it shares the same market-wide index-based circuit breaker as the cash market (three tiers at 10%/15%/20%, triggered by whichever of the Nifty 50 or BSE Sensex breaches first), which upon triggering halts \"all equity and equity derivative markets nationwide\" simultaneously"
       detail: "与顶层 market_structure.circuit_breaker 字段引用同一机制、同一来源，此处从「衍生品视角」重复确认其覆盖范围包含衍生品市场，避免读者误以为衍生品分部只受现货熔断的间接影响。"

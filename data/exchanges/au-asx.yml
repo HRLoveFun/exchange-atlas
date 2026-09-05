@@ -749,7 +749,7 @@ market_structure:
         quote: "ASX does not use circuit breakers like those employed by some other international exchanges. ASIC applies a common set of market integrity rules (MIRs) for all securities and futures markets in Australia that all local market operators and their participants are required to adhere to. These rules include specifications about the use of Anomalous Order Thresholds (AOTs), rather than circuit breakers."
         confidence: high
       main_board:
-        spec: {type: dynamic, band_pct: null, reference_window_min: 0.5, note: "AOT/NCR 参考价=现货月 30 秒滚动 VWAP（reference_window_min 0.5 即 30 秒；SPI 200 每 15 秒更新、其余每 30 秒）；QCR 区间下限 >0.5%、上限 <5%，超出 5% 进入 ETR 触发强制复核/撤销（ETR 事件见 volatility_interruption）"}
+        spec: {type: dynamic, reference_window_min: 0.5, note: "AOT/NCR 参考价=现货月 30 秒滚动 VWAP（reference_window_min 0.5 即 30 秒；SPI 200 每 15 秒更新、其余每 30 秒）；QCR 区间为非对称撤销区间（下限 >0.5%、上限 <5%，超出 5% 进入 ETR 触发强制复核/撤销，ETR 事件见 volatility_interruption），无对称带可填故不设 band_pct"}
         zh: "以SPI 200股指期货为例，AOT/NCR参考价为现货月合约30秒滚动成交量加权均价（SPI 200每15秒更新一次，其余合约每30秒更新一次）；QCR（合格撤销区间）下限>0.5%、上限<5%，超出5%即进入ETR（极端成交区间），触发交易所对该笔成交的强制复核/撤销"
         en: "For SPI 200 Index Futures, the AOT/NCR Reference Price is a rolling 30-second VWAP of the spot-month contract (updated every 15 seconds for SPI 200, every 30 seconds for other contracts); the Qualifying Cancellation Range (QCR) runs from >0.5% (lower) to <5% (upper), and the Extreme Trade Range (ETR) starts at 5% deviation, triggering the Market Operator's mandatory review/cancellation of the trade"
         sources:

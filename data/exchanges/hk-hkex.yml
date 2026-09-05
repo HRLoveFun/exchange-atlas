@@ -802,7 +802,7 @@ market_structure:
         quote: "動態價格限制機制是為避免顯然是錯價的買賣盤出現於 HKATS 內之額外監管措施⋯如最後成交價偏離參考價的數值超過更新參數，參考價將調整至最後成交價⋯此機制旨在限制特定交易時段內的價格波動。"
         confidence: high
       main_board:
-        spec: {limit_pct: null, symmetric: true, note: "T 时段（常规交易）无价格限制；仅 T+1 时段设 ±6%（指数期货）/±7%（货币期货）价格上下限，基准=T 时段现货月合约最后成交价"}
+        spec: {limit_pct: null, symmetric: true, note: "T 时段（常规交易）无固定百分比涨跌幅上下限（另有动态价格区间 DPB，参数未公开，见本组 type 字段），固定上下限仅存在于 T+1 时段：±6%（指数期货）/±7%（货币期货），基准=T 时段现货月合约最后成交价"}
         zh: "T+1時段（收市后交易）价格上下限：卖盘价不得低于T时段即月合约最后成交价的94%，买盘价不得高于106%（即±6%，适用于指数期货；货币期货为±7%）"
         en: "T+1 Session price limit: sell orders cannot be priced below 94% and buy orders cannot be priced above 106% of the T Session spot-month contract's last traded price (i.e. ±6% for index futures; ±7% for currency futures)"
         sources:
@@ -862,7 +862,7 @@ market_structure:
       confidence: medium
 
     market_maker_scheme:
-      spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "莊家分主要莊家（PMM）/持續報價莊家（CQMM）/回應詢價莊家（QRMM）三类；股票期货/股指期货及期权的莊家制度写入期交所规则、股票期权写入期权交易规则；流通量提供者（LP）计划为商业安排、不写入规则"}
+      spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "莊家分主要莊家（PMM）/持續報價莊家（CQMM）/回應詢價莊家（QRMM）三类；股票期货/股指期货及期权的莊家制度写入期交所规则、股票期权写入期权交易规则；流通量提供者（LP）计划为商业安排、不写入规则；莊家义务细则载于期交所规则/协议，本轮未获取价差上限数值"}
       zh: "香港交易所衍生產品市場內的不同產品均設有市場莊家計劃及/或流通量提供者計劃：股票期貨、股指期貨及期權的莊家責任及獎勵已闡述於期交所規則內；股票期權的莊家責任及獎勵則闡述於聯交所期權交易規則；莊家分主要莊家（PMM）、持續報價莊家（CQMM）、回應詢價莊家（QRMM）三類；流通量提供者計劃（LP）是交易所為新產品流通量所作的商業安排，要求及獎勵較具彈性，不寫入交易所規則"
       en: "HKEX's derivatives market has both a Market Maker (MM) Program and/or a Liquidity Provider (LP) Program depending on the product: MM obligations/incentives for futures and index options are set out in the HKFE Rules; for stock options, in SEHK's Options Trading Rules. Three MM categories: Primary Market Maker (PMM), continuous-quote market maker (CQMM), and quote-request-response market maker (QRMM). The LP Program is a more flexible commercial arrangement for new products' liquidity, not codified in exchange rules."
       sources:

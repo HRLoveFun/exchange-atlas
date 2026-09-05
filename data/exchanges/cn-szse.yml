@@ -715,7 +715,7 @@ market_structure:
         market: true
         limit: true
         tif: [fok, ioc]
-        note: "限价/市价两大类细分共 8 类申报指令（普通限价、全额成交或撤销限价、对手方最优市价、本方最优市价、最优五档即成剩撤、即时成交剩余撤销、全额成交或撤销市价等）；无止损/冰山/隐藏类型；申报数量 1 张或其整数倍，限价单笔最大 50 张、市价 10 张"
+        note: "限价/市价两大类细分共 8 类申报指令（普通限价、全额成交或撤销限价、对手方最优市价、本方最优市价、最优五档即成剩撤、即时成交剩余撤销、全额成交或撤销市价等，清单为举例性『等8类』非穷举）；所列各类型中未见止损/冰山/隐藏类；申报数量 1 张或其整数倍，限价单笔最大 50 张、市价 10 张"
       zh: "买卖类型：买入开仓、买入平仓、卖出开仓、卖出平仓、备兑开仓、备兑平仓；委托类型分限价委托与市价委托，本所接受的申报指令含普通限价申报、全额成交或撤销限价申报、对手方最优价格市价申报、本方最优价格市价申报、最优五档即时成交剩余撤销市价申报、即时成交剩余撤销市价申报、全额成交或撤销市价申报等8类；申报数量为1张或其整数倍，限价申报单笔最大50张，市价申报单笔最大10张"
       en: "Trading types: buy-to-open, buy-to-close, sell-to-open, sell-to-close, covered-call-open, covered-call-close; orders are either limit or market orders, with 8 accepted instruction types including ordinary limit orders, fill-or-kill limit orders, opposite-best-price market orders, same-best-price market orders, best-five-immediate-or-cancel market orders, immediate-or-cancel market orders, and fill-or-kill market orders; order size is 1 contract or a multiple thereof, capped at 50 contracts per limit order and 10 per market order"
       sources:
@@ -836,7 +836,7 @@ market_structure:
       confidence: medium
 
     market_maker_scheme:
-      spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "分两级：主做市商须双边持续报价+双边回应报价+约定服务全部三项，一般做市商仅回应报价、不强制持续报价；无统一报价价差上限；做市订单不享有成交优先权"}
+      spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "分两级：主做市商须双边持续报价+双边回应报价+约定服务全部三项，一般做市商仅回应报价、不强制持续报价；本轮规则文本未见统一报价价差上限（做市资格与义务细节由本所另行规定）；做市订单不享有成交优先权"}
       zh: "期权做市商制度：做市商对深交所挂牌交易的期权合约提供双边持续报价、双边回应报价等流动性服务，享有交易费用减免、激励等权利，具体做市资格、权利义务由本所另行规定。做市商分主做市商（须提供双边持续报价+双边回应报价+其他约定服务全部三项）与一般做市商（仅提供双边回应报价及其他约定服务，不强制持续报价）两类；做市商报价订单与普通投资者订单同样按「价格优先、时间优先」原则撮合，不享有成交优先权"
       en: "Options Market Maker Scheme: market makers provide liquidity services for SZSE-listed option contracts — continuous two-way quoting and two-way quote-request response — in exchange for trading-fee rebates and other incentives; specific market-making qualifications and obligations are set separately by SZSE. Market makers fall into two categories: Primary Market Makers (must provide all three services — continuous two-way quoting, quote-request response, and other agreed services) and General Market Makers (only quote-request response and other agreed services, with continuous quoting not mandatory); market-maker quotes are matched under the same price-priority-then-time-priority rule as ordinary investor orders and receive no execution priority"
       sources:

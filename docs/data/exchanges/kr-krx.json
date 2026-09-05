@@ -1384,8 +1384,7 @@
           "main_board": {
             "spec": {
               "type": "stepwise",
-              "reference": "prev_settlement",
-              "note": "三档 ±8%/±15%/±20% 随行情逐级扩大（以期货基准价为准；①档仅 08:45-09:00 与夜盘），档位与现货三阶段熔断一致；夜盘统一 ±8%"
+              "note": "三档 ±8%/±15%/±20% 随行情逐级扩大（以期货基准价为准，①档仅 08:45-09:00 与夜盘），档位与现货三阶段熔断一致；夜盘统一 ±8%。三档为百分比逐级扩大、非绝对值幅梯表，故不建 ladder；基准价的结算价锚点见顶层 price_limits（本字段原文仅称 futures base price）"
             },
             "zh": "以KOSPI200期货/期权等旗舰股指衍生品为代表：常规时段涨跌停分三档±8%/±15%/±20%（随行情逐级触发扩大，档位数值与现货市场三阶段熔断的8%/15%/20%一致，见顶层 circuit_breaker 与本子块 circuit_breaker 字段）；夜盘统一收窄为单一档±8%",
             "en": "Using KOSPI 200 Futures/Options etc. as the representative sample: the regular-session price limit widens through three phases — ±8%/±15%/±20% (the same 8%/15%/20% thresholds as the cash market's three-phase circuit breaker, see the top-level circuit_breaker field and this sub-block's circuit_breaker field); the Night-Session uses a single, narrower ±8% band throughout",
@@ -1423,8 +1422,8 @@
         "circuit_breaker": {
           "enum": "index_level",
           "spec": {
-            "type": "index_level",
-            "note": "衍生品市场无独立熔断判定，被动跟随现货三阶段指数熔断：第三阶段（全市场收市）触发当日，含夜盘在内全部衍生品交易不开展；夜盘期间标的指数无价格波动、熔断不可触发。enum 借用 index_level 取「触发基础是指数」含义（先例 hk-hkex，见 OPEN-QUESTIONS #44(b)）"
+            "type": "none",
+            "note": "衍生品市场无自身熔断判定（type:none），被动跟随现货三阶段指数熔断：第三阶段（全市场收市）触发当日，含夜盘在内全部衍生品交易不开展；夜盘期间标的指数无价格波动、熔断不可触发。数据字段 enum 借用 index_level 取「触发基础是指数」含义（先例 hk-hkex，见 OPEN-QUESTIONS #44(b)），spec 层按「无自身机制」如实记 none"
           },
           "zh": "衍生品市场本身未单独设立熔断机制，而是与现货市场的三阶段指数熔断（具体档位见顶层 circuit_breaker 字段）联动：现货市场熔断第三阶段（触发全市场收市）当日触发后，包括当晚夜盘在内的全部衍生品交易当天不开展；夜盘期间因标的股指本身不交易、无价格波动，熔断机制在夜盘无法被触发",
           "en": "The derivatives market has no independent circuit breaker of its own; it is instead linked to the cash market's three-phase index circuit breaker (see the top-level circuit_breaker field): once the cash market's Phase-3 circuit breaker (market closed for the day) is triggered, all derivatives trading — including that day's Night-Session — is not conducted; during the Night-Session itself, the circuit breaker cannot be triggered at all because the underlying stock index does not trade and therefore has no price movement at night",

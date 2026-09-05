@@ -103,13 +103,17 @@ fields:
       note: "string——stock_level / contract_level 无标准档位时的机制说明"
 
   market_structure.volatility_interruption: &volatility_interruption
-    doc: "个股 / 合约级的波动性中断（价格出走廊触发短暂集合竞价）。形态 type=none 或走廊参数。"
+    doc: >
+      个股 / 合约级的波动性中断（价格出走廊触发短暂集合竞价）。形态 type=none 或走廊参数。
+      触发后的处置按真实形态择键：集合竞价/冷静期（期间可在区间内继续交易）用
+      auction_minutes，真停牌才用 halt_minutes——衍生品子块多家的「冷静期」属前者
+      （hk-hkex/sg-sgx 口径），键位错配会被独立复核拦下（任务三附实测）。
     keys:
       type: "none，可选（确认无时）"
       static_pct: "number 或 null——静态价格区间半宽"
       dynamic_pct: "number 或 null——动态价格区间半宽"
-      auction_minutes: "number 或 null——触发后的集合竞价时长"
-      halt_minutes: "number 或 null——若为停牌而非集合竞价"
+      auction_minutes: "number 或 null——触发后的集合竞价 / 冷静期时长（期间可在区间内继续交易的用此键）"
+      halt_minutes: "number 或 null——若为真停牌而非集合竞价 / 冷静期"
       note: "string"
 
   market_structure.short_selling:

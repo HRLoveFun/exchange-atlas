@@ -1186,8 +1186,8 @@ market_structure:
         outside prevailing dynamic or static, where appropriate, collars
       confidence: medium
     volatility_interruption:
-      spec: {auction_minutes: null, note: "预约（Reservation）机制：潜在撮合触及动态/静态区间边界即触发，标的转入程序化 Call Phase（时长未定，故 null）；动态区间触发走自动重开（达最大尝试次数可撤销引发订单）、静态区间触发走 Market Services 人工评估"}
-      zh: 预约（Reservation）机制：连续交易阶段若潜在撮合价触及动态或静态区间边界即触发预约，标的合约转入一段程序化的Call Phase重新集合竞价；因动态区间触发的首次预约，恢复方式分两种——自动方式（系统按更新后的动态区间尝试重新揭示，对特定合约类别在达到最大尝试次数后可撤销引发预约的订单）或人工方式（针对静态区间触发的预约，由Market
+      spec: {auction_minutes: null, note: "预约（Reservation）机制：潜在撮合触及动态/静态区间边界即触发，标的转入程序化 Call Phase（原文仅称 programmed period of time、具体时长规则未载明，故 null）；动态区间触发走自动重开（达最大尝试次数可撤销引发订单）、静态区间触发走 Market Services 人工评估"}
+      zh: 预约（Reservation）机制：连续交易阶段若潜在撮合价触及动态或静态区间边界即触发预约，标的合约转入一段程序化的Call Phase重新集合竞价（具体时长规则未载明）；因动态区间触发的首次预约，恢复方式分两种——自动方式（系统按更新后的动态区间尝试重新揭示，对特定合约类别在达到最大尝试次数后可撤销引发预约的订单）或人工方式（针对静态区间触发的预约，由Market
         Services评估市场情况后决定是否恢复）；若自动方式重新揭示后同方向再次触发预约，是否进一步调整区间/参考价同样须转交人工评估
       en: 'Reservation mechanism: during continuous trading, if the theoretical matching
         price breaches the dynamic or static collar boundary, a reservation is triggered
@@ -1282,7 +1282,7 @@ market_structure:
         08:00 - 22:00 08:00 - 16:00 07:30 – 22:00 07:30 – 16:00
       confidence: high
     market_maker_scheme:
-      spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "三类角色 MMA/MMS/MME（MME 仅部分股指期货晚间时段）；同合约同场次只能 MMA 或 MMS 择一；逐场次 Optiq 签到；须维持双边报价，可配置 MMP 扫单保护"}
+      spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "三类角色 MMA/MMS/MME（MME 仅部分股指期货晚间时段）；同合约同场次只能 MMA 或 MMS 择一；逐场次 Optiq 签到；须维持双边报价，可配置 MMP 扫单保护；报价义务参数载于逐做市商协议、本轮未获取价差上限数值"}
       zh: 做市商角色分三类：MMA（Market Maker Agreement，标准做市协议）、MMS（Market Maker Scheme，做市商计划）、MME（Market
         Maker for Extended Hours，仅适用于部分股指期货的晚间交易时段）；同一会员（按Firm ID）在同一合约同一（日间）场次只能担任MMA或MMS其中之一，但可在不同合约分别担任不同角色；做市商须在每个交易场次开始前于Optiq逐合约『签到』（MM
         Sign-In），未获授权的合约签到会被单独拒绝；做市商在其报价的各合约订单簿中须维持买卖双边报价以满足流动性提供义务，并可配置做市商保护（Market
