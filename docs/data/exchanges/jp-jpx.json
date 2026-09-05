@@ -1625,37 +1625,55 @@
         "detail": null
       },
       "initial_margin_practice": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "JSCC 要求现物清算参加者预缴『当初保证金』（当初証拠金）以覆盖现物交易的风险暴露，由两部分构成：①未决清算约定按最新市场价格评估的值洗价值（時価評価額）；②按历史模拟法 VaR 计算的假定损失额（持有期间 1 日、参照期间 250 日、置信水平 99%）。市场压力期下若参加者破产的预期损失超出预缴财务资源可覆盖的额度，JSCC 可上调相关参加者的当初保证金所要额；另设按信用状况的割增制度。2026-06-30 时点全体清算参加者的当初保证金所要额合计 1,688 億円",
+        "en": "JSCC requires cash clearing participants to lodge initial margin covering their cash-market exposure, comprising: (1) the mark-to-market value of unsettled trades evaluated at the latest market price; and (2) the hypothetical loss calculated by historical simulation VaR (1-day holding period, 250-day lookback, 99% confidence level). In stressed markets, where the loss expected from a participant's default would exceed the prefunded financial resources, JSCC raises the initial margin requirement of the participants bearing that risk; a surcharge based on credit standing also applies. Total initial margin required of all clearing participants stood at 168.8 billion yen as of 30 June 2026",
+        "sources": [
+          {
+            "title": "JSCC 現物取引 証拠金（JPX 官网 JSCC 栏目官方页，当初証拠金构成/压力期上调/割增制度/所要额）",
+            "url": "https://www.jpx.co.jp/jscc/seisan/genbutsu/margin.html",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "JSCCでは、現物取引に係るエクスポージャーをカバーするために、現物清算参加者に対して以下の構成要素に基づき算出された当初証拠金の預託を求めています。 未決済約定を直近の市場価格で評価した値洗い価値（時価評価額） 未決済約定の時価評価額と各銘柄の価格変動（保有期間1日、参照期間250日、信頼水準99％）に基づいてヒストリカルシミュレーション（VaR）方式によって計算される想定損失額 ... 市場ストレス期において清算参加者が破綻した場合に想定される損失額が、現物取引に関し清算参加者から預託されている事前拠出型の財務資源をもっても補填しえない額となる場合、当該未補填額を予めカバーすべく、当該リスクを有する清算参加者に対する当初証拠金所要額を引き上げることとしております。 ... 2026年6月30日現在の全清算参加者の当初証拠金所要額は1,688億円。",
+        "confidence": "high",
         "verified": "2026-08-24",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "maintenance_margin_practice": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "JSCC 不设与初始保证金分离的『维持保证金』阈值——替代机制是逐日重算的当初保证金要求，辅以两项动态加收安排：①信用状况割增——清算参加者的信用状况经判断有必要时对其当初保证金割增；②日中預託——TOPIX 或日经平均期货中心限月上午 11 时约定数值与前交易日清算数值之差超过当初保证金日中預託发动基准值时发动盘中追加预缴（仅当按当日午盘未决约定计算的所要额较最近适用额高出 3,000 万円以上时适用）",
+        "en": "JSCC has no separate maintenance margin threshold distinct from initial margin — the daily recalculated initial margin requirement is supplemented by two dynamic add-on arrangements: (1) a surcharge where JSCC deems necessary in light of a clearing participant's credit standing; and (2) intraday margin lodging triggered when the difference in TOPIX or Nikkei 225 futures central contract month trading values at 11:00 a.m. versus the previous day's clearing values exceeds the intraday trigger threshold (applicable only where the requirement calculated on that morning's unsettled trades exceeds the most recently applied requirement by more than 30 million yen)",
+        "sources": [
+          {
+            "title": "JSCC 現物取引 証拠金（JPX 官网 JSCC 栏目官方页，割増し制度与日中預託制度）",
+            "url": "https://www.jpx.co.jp/jscc/seisan/genbutsu/margin.html",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "＜当初証拠金の割増し制度＞ 信用状況に応じた割増し JSCCでは、清算参加者の信用状況に鑑みて必要と認める場合には、当初証拠金の割増しを行います。 ＜当初証拠金の日中預託制度＞ 急激な相場変動に伴う割増し JSCCでは、以下のいずれかの基準に該当した場合、当初証拠金の日中預託を発動します。 ... 当日の午前立会終了時点の未決済約定に基づき計算された当初証拠金所要額が直近に適用されている当初証拠金所要額を3,000万円より上回っている場合に限り適用されます。",
+        "confidence": "medium",
         "verified": "2026-08-24",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "mark_to_market_frequency": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "按日盯市、日内补充：当初保证金的构成之一即未决清算约定按最新市场价格评估的值洗价值（時価評価額）——对未交收头寸逐日按市价重估；市场剧烈波动时另设日中（盘中）触发——TOPIX 或日经平均期货中心限月上午 11 时约定数值与前交易日清算数值之差超过当初保证金日中預託发动基准值时，发动盘中追加预缴",
+        "en": "Daily mark-to-market with an intraday supplement: a component of the initial margin is the mark-to-market value of unsettled trades evaluated at the latest market price — unsettled positions are re-valued to market daily; under sharp market moves, an intraday trigger applies — when the difference in TOPIX or Nikkei 225 futures central contract month trading values at 11:00 a.m. versus the previous day's clearing values exceeds the intraday lodging trigger threshold, intraday margin lodging is activated",
+        "sources": [
+          {
+            "title": "JSCC 現物取引 証拠金（JPX 官网 JSCC 栏目官方页，値洗い価値（時価評価額）与日中預託发动基准）",
+            "url": "https://www.jpx.co.jp/jscc/seisan/genbutsu/margin.html",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "未決済約定を直近の市場価格で評価した値洗い価値（時価評価額） ... TOPIX先物取引の中心限月取引の午前11時における立会による直前の約定数値と前取引日の清算数値との差が、当初証拠金日中預託発動基準値（当該限月の売付け及び買付けにおける建玉1単位あたり証拠金を平均した額を取引単位で除した数値）を超えた場合",
+        "confidence": "high",
         "verified": "2026-08-24",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "delivery_method": {
         "enum": "na",
@@ -1675,15 +1693,21 @@
         "quote": null
       },
       "last_trading_day_rule": {
-        "zh": "",
-        "confidence": "low",
+        "zh": "不适用——现物股票无到期日与『最后交易日』概念；JSCC 现物清算的当初保证金针对未决清算约定的风险暴露，清算义务随交收完成而消灭",
+        "en": "Not applicable — cash equities have no expiry and thus no derivative-style last trading day; JSCC's cash clearing initial margin targets the risk exposure of unsettled trades, and clearing obligations are extinguished upon settlement",
+        "sources": [
+          {
+            "title": "JSCC 現物取引 証拠金（JPX 官网 JSCC 栏目官方页，正面对照现物交易的保证金定位）",
+            "url": "https://www.jpx.co.jp/jscc/seisan/genbutsu/margin.html",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "JSCCでは、現物取引に係るエクスポージャーをカバーするために、現物清算参加者に対して以下の構成要素に基づき算出された当初証拠金の預託を求めています。",
+        "confidence": "medium",
         "verified": "2026-08-24",
-        "en": null,
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "default_management": {
         "spec": {
