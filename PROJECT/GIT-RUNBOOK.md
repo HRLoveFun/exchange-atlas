@@ -94,6 +94,25 @@ EOF
 
 `enforce_admins: false` 保留仓库 owner（admin 权限）直接推 main 不受影响（[CLAUDE.md] §六交互式会话默认直推的约定不变，管理员天然绕过 required checks）；只对 PR 合并生效。修复已按建议做完验证（2026-09-05，测试 PR #82）：故意弄红 `make build` 后，auto-merge 真的等在 `BLOCKED` 不合并，验证完已关闭删除。此前"修复落地前需人工留意合并后 `gh pr checks <n>` 是否变红"的临时提醒随修复生效撤销。
 
+## 定期清理残留分支
+
+`deleteBranchOnMerge` 已开，但有两类分支会漏网、越积越多，隔一阵扫一次（2026-09-06 扫掉 4 条：`adr-heal/auto-840a1321594b`〔PR #97〕、`adr-heal/auto-73bbbff4b54b`〔PR #100〕、`adr-heal/auto-d0a2d914c47e`〔无 PR〕、`worktree-dev-automation`〔PR #79 CLOSED〕）：
+
+- **`adr-heal/auto-<sha>`**：`adr-heal.yml` 为定号开的分支。其 PR 合并后**服务端删分支不总生效**（PR #97 / #100 合并后对应分支均残留远端）；healer 在开 PR 前就挂掉时还会留下**连 PR 都没有的孤儿分支**（如 `adr-heal/auto-d0a2d914c47e`——那次占位符最后由人工 PR #95 定号为 ADR-090）。
+- **后台任务的 `worktree-*` 分支**：PR 被 close（而非 merge）时不会自动删；本地那份可能还留在别的并行会话摘不掉的 worktree 里。
+
+安全删除判据（逐条过）：`gh pr view <n> --json state,mergeCommit` 为 `MERGED` 且 merge commit 是 `origin/main` 祖先（`git merge-base --is-ancestor <merge> origin/main`）；或 PR `CLOSED` 且确认被取代、`git diff <branch> origin/main` 为空。确认后：
+
+```bash
+gh pr list --state open ; git worktree list    # 先看清：别碰有 open PR 的分支、别碰活 worktree 占用的分支
+git push origin --delete <b1> <b2> ...          # 远端（不碰 main）
+git branch -D <local>                           # 本地（squash 合并后 -d 会误判"未合并"）
+git worktree unlock <path> && git worktree remove <path> && git worktree prune   # 分支被 worktree 占用时
+git fetch --prune
+```
+
+⚠️ 并行会话的活分支：它的 commit 若已 push + 开 PR，删掉本地那份不丢东西，但会打断它收尾——`git worktree remove` 尤其会把它正在写的目录端掉。删前务必对一遍 open PR 列表。
+
 ## `gh pr merge` 非交互执行
 
 不带 `--subject` / `--body` 会弹 `$EDITOR` 让人编辑 squash 提交信息，非交互执行必须显式给：
