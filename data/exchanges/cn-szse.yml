@@ -607,15 +607,15 @@ market_structure:
 
   derivatives:
     connect_schemes:
-      zh: "无——深港通不覆盖本所挂牌期权/衍生品：《深圳证券交易所深港通业务实施办法》第十六条穷举列示可作为深股通标的的证券仅为「股票」与「股票 ETF」两类，不含期权或其他衍生品；深港通机制以现货证券通道为设计对象（见顶层 connect_schemes）。本所挂牌衍生品亦无其他跨境互联互通安排"
-      en: "None — the Shenzhen-Hong Kong Stock Connect does not cover SZSE-listed options/derivatives: the exhaustive-enumeration article (第十六条) of the SZSE Implementation Measures for Shenzhen-Hong Kong Stock Connect lists the eligible northbound securities types as only \"股票 (stocks)\" and \"股票 ETF (stock ETFs)\", with no options or other derivatives; the Connect mechanism is designed as a cash-securities channel (see the top-level connect_schemes). SZSE-listed derivatives have no other cross-border connect arrangement"
-      detail: "棒 2「负面断言正面化」（[ADR-082]）：此前 [ADR-021] 记「未找到官方文件明确说明期权是否被排除或纳入」；本次换判据改查互联互通标的证券的穷举性条款而非搜「期权 跨境」关键词——《深港通业务实施办法（2024年修订）》第十六条将深股通标的证券穷举为股票与股票 ETF 两类，构成「衍生品未被纳入」的正面依据，故可标 high（与靠「没搜到」判 medium 的情形不同）。"
+      zh: "深港通不覆盖本所挂牌期权/衍生品：《深圳证券交易所深港通业务实施办法》第十六条穷举列示可作为深股通标的的证券仅为「股票」与「股票 ETF」两类，不含期权或其他衍生品；深股通机制以现货证券通道为设计对象（见顶层 connect_schemes）。本所挂牌衍生品本次未见其他跨境安排的官方说明"
+      en: "The Shenzhen-Hong Kong Stock Connect does not cover SZSE-listed options/derivatives: the exhaustive-enumeration article (第十六条) of the SZSE Implementation Measures for Shenzhen-Hong Kong Stock Connect lists the eligible northbound securities types as only \"股票 (stocks)\" and \"股票 ETF (stock ETFs)\", with no options or other derivatives; the Connect mechanism is designed as a cash-securities channel (see the top-level connect_schemes). No official statement on any other cross-border arrangement for SZSE-listed derivatives was found this session"
+      detail: "棒 2「负面断言正面化」（[ADR-082]）：此前 [ADR-021] 记「未找到官方文件明确说明期权是否被排除或纳入」；本次换判据改查互联互通标的证券的穷举性条款而非搜「期权 跨境」关键词——《深港通业务实施办法（2024年修订）》第十六条将深股通标的证券穷举为股票与股票 ETF 两类，构成「衍生品未被纳入」的正面依据。「深股通不含衍生品」系对该穷举条款的结构性推断（无官方『不纳入期权』明文），按独立复核（[ADR-083]）意见判 medium；除深股通外本次未见其他跨境安排的官方说明。"
       sources:
         - title: 深圳证券交易所深港通业务实施办法（2024年修订）第十六条
           url: http://docs.static.szse.cn/www/szhk/szhkrulesdirector/szhkrules/W020240614673497419312.pdf
           accessed: 2026-09-05
       quote: "第十六条 在本所上市交易的下列证券，符合相应条件的，可以作为深股通标的证券：（一） 股票；（二） 股票 ETF。"
-      confidence: high
+      confidence: medium
       verified: 2026-09-05
     trading_sessions:
       pre_market:
