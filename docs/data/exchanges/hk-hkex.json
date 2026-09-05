@@ -47,7 +47,28 @@
         "quote": null,
         "sources": null
       },
-      "history": null,
+      "history": {
+        "zh": "香港交易所由三家公司合并而来：香港联合交易所、香港期货交易所与香港中央结算于2000年3月6日完成合并，成为单一控股公司香港交易及结算所有限公司的全资附属公司；香港交易所于2000年6月27日在联交所上市；2012年12月收购伦敦金属交易所（LME）",
+        "en": "HKEX was formed through a merger: the Stock Exchange of Hong Kong, the Hong Kong Futures Exchange and the Hong Kong Securities Clearing Company merged on 6 March 2000 to become wholly-owned subsidiaries of a single holding company, Hong Kong Exchanges and Clearing Limited; HKEX listed on SEHK on 27 June 2000, and acquired the London Metal Exchange (LME) in December 2012",
+        "detail": "官方表述出自 HKEX 官网 Getting Started FAQ「香港交易所的發展歷史及架構為何？」官方答复（quote 为该页中文版原文）。\nfounded_year 里的 1891 年前身（香港经纪协会）仍为第三方口径，本次未另行核实。\n注意中文版官方表述的精确语义：三家机构合并后成为 HKEX 这一单一控股公司的全资附属公司（与 us-nyse 的「交易所实体本身被控股」结构形成对照，见 organization_form）。\n",
+        "sources": [
+          {
+            "title": "Getting Started FAQ（HKEX 官网，「香港交易所的發展歷史及架構為何？」官方答复，中文版）",
+            "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Getting-Started?sc_lang=zh-HK",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "Getting Started FAQ（HKEX 官网，How did HKEX develop into its existing framework? 官方答复，英文版）",
+            "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Getting-Started?sc_lang=en",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "香港聯合交易所有限公司(聯交所)、香港期貨交易所有限公司(期交所)和香港中央結算有限公司(香港結算)於2000年3月6日完成合併，成為單一控股公司香港交易及結算所有限公司(香港交易所)的全資附屬公司。香港交易所亦於2000年6月27日在聯交所上市。於2012年12月，香港交易所收購世界首屈一指的基本金屬市場London Metal Exchange (倫敦金屬交易所，簡稱LME)。",
+        "confidence": "high",
+        "verified": "2026-08-12",
+        "enum": null,
+        "spec": null
+      },
       "organization_form": {
         "enum": "demutualized_listed",
         "zh": "公司制（自身上市）",
@@ -154,15 +175,21 @@
         "quote": null
       },
       "self_regulatory_org": {
-        "zh": "港交所本身兼具前线监管职能（对上市公司与交易参与者）",
-        "en": "Front-line regulation by HKEX",
-        "confidence": "low",
-        "detail": "SFC 与 HKEX 之间自律监管职责的精确边界未逐条核实，留待后续核实。",
+        "zh": "香港交易所是香港中央证券及衍生产品市场的营运机构，兼上市发行人（包括上市公司）的前线监管机构：监管上市发行人、执行上市/交易/结算规则，并主要在批发层面向交易所及结算所客户提供服务；证监会（SFC）为独立法定机构，负责监管市场、确保市场质素，直接监管的对象包括港交所本身，而收购、股份购回及私有化等上市公司事宜一概由证监会负责监管",
+        "en": "HKEX is the operator of Hong Kong's central securities and derivatives marketplace and the front-line regulator of listed issuers (including listed companies): it regulates listed issuers and administers listing, trading and clearing rules. The SFC is an independent statutory body that regulates the market and safeguards market integrity — its regulated parties include HKEX itself — and takeovers, share buy-backs and privatizations of listed companies are regulated by the SFC",
+        "detail": "由 low 升级：官方原文出自 HKEX 官网 Getting Started FAQ「In what way is the regulatory role of HKEX\ndifferent from that of the Securities and Futures Commission?」官方答复（quote 为英文版逐字原文，\n中文版页面有对应官方表述「香港交易所是香港中央證券及衍生產品市場的營運機構兼上市發行人（包括上市公司）\n前線監管機構」）。上市监管架构的更多细节（ HKEX 与 SFC 的双边监管备忘录等）本次未逐条展开。\n",
+        "sources": [
+          {
+            "title": "Getting Started FAQ（HKEX 官网，SFC 与 HKEX 监管职能分工官方答复，英文版）",
+            "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Getting-Started?sc_lang=en",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "HKEX is the operator of Hong Kong’s central securities and derivatives marketplace and the front-line regulator of listed issuers (including listed companies). In this role, HKEX regulates listed issuers; administers listing, trading and clearing rules;",
+        "confidence": "high",
         "verified": "2026-08-12",
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "clearing_regulator": {
         "zh": "证券及期货事务监察委员会",
@@ -193,26 +220,38 @@
         "detail": null
       },
       "foreign_ownership_limit": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：无一般性外资持股比例限制（自由港）——与上交所形成对比的重要字段，但未核实具体例外情形，留空。",
+        "zh": "香港对外来投资实行开放政策，无一般性外资持股比例限制；官方评估口径下的主要例外为个别行业——免费电视的非居民表决权控股权上限49%、法律服务业对外国律师的执业要求——均不涉及证券市场对上市公司的持股",
+        "en": "Hong Kong maintains an open foreign investment policy with no general foreign ownership limits; the main exceptions are sector-specific (a 49 percent cap on non-resident voting control of free-to-air television stations, and residency/licensing requirements for foreign-qualified lawyers), none of which applies to shareholdings in listed companies on the securities market",
+        "detail": "由 low 坐实：「开放外来投资政策 + 例外的行业清单」出自美国国务院《2025 Hong Kong Investment Climate Statement》\n（官方出版物，但对港属第三方年度评估，confidence 封顶 medium）。此前 detail 中的「草稿印象：自由港」\n已由该来源坐实并改写。线上 state.gov 对本环境 Akamai 拦截（HTML 为 JS 壳、wp-content PDF 直连 403），\n落盘走 fetch_sources 的 wayback 回退（快照 20260214215223），see PROJECT/sources/hk-hkex.md。\n",
+        "sources": [
+          {
+            "title": "2025 Hong Kong Investment Climate Statement（美国国务院官方出版物，对港投资环境年度评估）PDF",
+            "url": "https://www.state.gov/wp-content/uploads/2025/09/638719_2025-Hong-Kong-Investment-Climate-Statement.pdf",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "The main exceptions to the Hong Kong government’s open foreign investment policy are: Broadcasting: Voting control of free-to-air television stations by non-residents is limited to 49 percent. There are also residency requirements for the directors of broadcasting companies.",
+        "confidence": "medium",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "capital_controls": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：港元自由兑换，联系汇率制度（与美元挂钩，7.75-7.85区间）——未附来源，留空。",
+        "zh": "《基本法》第112条订明：香港特别行政区不实行外汇管制政策，港币自由兑换，继续开放外汇、黄金、证券、期货等市场；特区政府保障资金在区内及进出区内的自由流动",
+        "en": "Under Article 112 of the Basic Law, no foreign exchange control policies shall be applied in Hong Kong; the Hong Kong dollar is freely convertible; markets for foreign exchange, gold, securities, futures and the like shall continue; and the Government safeguards the free flow of capital within, into and out of the Region",
+        "detail": "由 low 坐实：宪法性条文依据，官方《基本法》全文页（basiclaw.gov.hk 第五章，中英文两个版本均服务端渲染、curl 可抓）。\n此前 detail 中「联系汇率 7.75-7.85 区间」为草稿印象，本次未另行核实，不写入正文（港元汇率制度的规则性表述属\n货币当局口径，如需坐实应引 HKMA 官方页）。OPEN-QUESTIONS 第29条记录的「basiclaw.gov.hk 章节直达 URL 404」\n已失效——改版后正确路径为 /en/basiclaw/chapter5.html，见 PROJECT/sources/hk-hkex.md。\n",
+        "sources": [
+          {
+            "title": "《基本法》第五章 经济（第112条，官方全文页，英文版）",
+            "url": "https://www.basiclaw.gov.hk/en/basiclaw/chapter5.html",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "Article 112 No foreign exchange control policies shall be applied in the Hong Kong Special Administrative Region. The Hong Kong dollar shall be freely convertible. Markets for foreign exchange, gold, securities, futures and the like shall continue. The Government of the Hong Kong Special Administrative Region shall safeguard the free flow of capital within, into and out of the Region.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "disclosure_requirements": {
         "zh": "披露义务双层结构（《主板上市规则》第13章）：①法定层——SFO《内幕消息条文》（Inside Information Provisions）对上市发行人及其董事施加法定义务，内幕消息在知悉后须在合理切实可行范围内尽快披露，证监会负责执行（并发布《披露内幕消息指引》），联交所在发现可能违例时移交证监会处理；②规则层——第13章订明须披露的交易与其他事项分类，且发行人董事对全面遵守上市规则承担集体与个人责任（13.04）",
@@ -1336,7 +1375,7 @@
           "other_boards": {
             "zh": "",
             "confidence": "low",
-            "detail": "T时段「動態價格限制機制」浮动区间的具体百分比参数，本次抓取页面未披露具体数值，留空。",
+            "detail": "T时段「動態價格限制機制」（HKATS 防错价的动态价格区间）的逐合约百分比参数未在 HKEX 公开页面披露（载于 HKATS 交易参数/合约规格层面，本次官方检索未命中公开参数表），维持留空。注意与已填字段的分工：T+1 时段固定价格限制（±6%/±7%）在 main_board、市调机制 VCM ±5% 冷静期在 volatility_interruption，本字段只剩 T 时段 DPB 这一缺口。已记入 OPEN-QUESTIONS。",
             "sources": [
               {
                 "title": "Trading Hours - Securities Market（HKEX 官网）",
@@ -2093,15 +2132,21 @@
         "detail": null
       },
       "foreign_access_channel": {
-        "zh": "",
-        "confidence": "low",
-        "detail": "草稿印象：自由港，境外投资者可直接开户，无需类似 QFII 的额度审批渠道——与上交所形成对比的重要字段，但未核实是否存在其他限制，留空。",
+        "zh": "香港证券及衍生品市场自由开放，欢迎世界各地投资者参与：海外投资者可经持牌经纪商直接开户参与，无类似内地 QFII 的额度审批制度；惟海外投资者在香港进行交易前，须遵守其所在地规范国民于其他市场投资的规定",
+        "en": "HKEX operates securities and derivatives markets that are open and free and welcomes the participation of investors from all over the world: overseas investors may open accounts directly with licensed brokers, with no quota-approval regime akin to the Mainland's QFII; they should, however, comply with the regulations governing overseas trading in their own countries or places of residence before trading in Hong Kong",
+        "detail": "由 low 坐实：官方一句原文出自 HKEX 官网 Getting Started FAQ（英文版逐字原文，中文版页面有对应表述\n「香港交易所經營一個自由開放的證券及衍生產品市場，歡迎各地投資者參與」）。「无 QFII 额度审批」为与\n内地市场对照的结构性表述（同页 FAQ 设有「香港与内地两市差异」官方问答），非官方逐字句。\n",
+        "sources": [
+          {
+            "title": "Getting Started FAQ（HKEX 官网，海外投资者参与市场的官方表述，英文版）",
+            "url": "https://www.hkex.com.hk/Global/Exchange/FAQ/Getting-Started?sc_lang=en",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "quote": "HKEX operates securities and derivatives markets that are open and free and welcomes the participation of investors from all over the world. However, overseas investors should comply with regulations governing overseas trading in their own countries or places of residence before trading in Hong Kong.",
+        "confidence": "high",
         "verified": "2026-08-12",
-        "en": null,
         "enum": null,
-        "spec": null,
-        "quote": null,
-        "sources": null
+        "spec": null
       },
       "membership_structure": {
         "zh": "交易所参与者（Exchange Participant）制度，须为持牌法团或注册机构",
