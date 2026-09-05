@@ -694,8 +694,8 @@ market_structure:
         iceberg: true
         tif: [day, gtc, ioc]
         note: "另有拍卖专用订单 LOO（Limit-on-Open）/MOO（Market-on-Open）/IO（Imbalance Offset）/AON；Reserve Order 为部分显示+隐藏储备的冰山型订单；Market Order 受 Trading Collar（相对参考价的订单级价格保护带）约束；IOC 修饰符订单不参与拍卖"
-      zh: "主要订单类型（NYSE American 期权规则 Rule 900.3NYP Orders and Modifiers）：市价单（Market Order——未定价、按可得最优价成交、受 Trading Collar 约束，可指定 Day 或 GTC）、限价单（Limit Order）、储备单（Reserve Order——显示部分列展示优先级、隐藏储备量列非展示优先级的冰山型订单）；有效期修饰符含 Day、GTC、IOC（IOC 单不参与拍卖）；拍卖专用订单另有 LOO（限价开盘单）、MOO（市价开盘单）、IO（失衡补偿单）与 AON"
-      en: "Principal order types (NYSE American options rules, Rule 900.3NYP Orders and Modifiers): Market Order (unpriced, executes at the best price obtainable, subject to a Trading Collar, may be designated Day or GTC), Limit Order, and Reserve Order (an iceberg-type order whose displayed quantity ranks as display priority and whose reserve interest ranks as non-display priority); time-in-force modifiers include Day, GTC and IOC (IOC orders are not eligible for auctions); auction-specific types include LOO (Limit-on-Open), MOO (Market-on-Open), IO (Imbalance Offset) and AON"
+      zh: "主要订单类型（NYSE American 期权规则 Orders and Modifiers 节）：市价单（Market Order——未定价、按可得最优价成交、受 Trading Collar 约束，可指定 Day 或 GTC）、限价单（Limit Order）、储备单（Reserve Order——显示部分列展示优先级、隐藏储备量列非展示优先级的冰山型订单）；有效期修饰符含 Day、GTC、IOC（IOC 单不参与拍卖）；拍卖专用订单另有 LOO（限价开盘单）、MOO（市价开盘单）、IO（失衡补偿单）与 AON"
+      en: "Principal order types (NYSE American options rules, Orders and Modifiers): Market Order (unpriced, executes at the best price obtainable, subject to a Trading Collar, may be designated Day or GTC), Limit Order, and Reserve Order (an iceberg-type order whose displayed quantity ranks as display priority and whose reserve interest ranks as non-display priority); time-in-force modifiers include Day, GTC and IOC (IOC orders are not eligible for auctions); auction-specific types include LOO (Limit-on-Open), MOO (Market-on-Open), IO (Imbalance Offset) and AON"
       sources:
         - title: "Rules of NYSE American, Inc. — Trading of Option Contracts（Rule 900.3NYP，SEC 备案 Exhibit 5）"
           url: https://www.sec.gov/files/rules/sro/nyseamer/2023/34-97869-ex5.pdf
@@ -754,7 +754,7 @@ market_structure:
         - title: "NYSE Market-Wide Circuit Breakers FAQ（官网 PDF，v4.0 2026-02，Q10/Q11 期权市场联动停牌与自动复牌）"
           url: https://nyse.com/publicdocs/nyse/NYSE_MWCB_FAQ.pdf
           accessed: 2026-09-05
-      quote: "10. Do the options markets also halt? Yes. If the equities market triggers a MWCB halt, the NYSE Arca Options and NYSE American Options markets will halt trading. Any trades that occur after the halt is triggered will be nullified."
+      quote: "A MWCB can be triggered at three circuit breaker thresholds measured by a decrease against the prior day’s Closing Price of the S&P 500 Index -- 7% (Level 1), 13% (Level 2), and 20% (Level 3). ... 10. Do the options markets also halt? Yes. If the equities market triggers a MWCB halt, the NYSE Arca Options and NYSE American Options markets will halt trading. Any trades that occur after the halt is triggered will be nullified."
       confidence: high
       verified: 2026-09-05
 

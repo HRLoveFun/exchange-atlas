@@ -14,6 +14,7 @@
   - Data Products（行情数据产品总览：Real-Time/Reference/Historical(TAQ)/Corporate Actions四类，含各自官方简介段落）: https://www.nyse.com/data-products（HTTP 200，162KB）
   - Market Data: Real-Time（各实时行情产品逐条说明表，如NYSE Integrated Feed/OpenBook Ultra/BBO）: https://www.nyse.com/market-data/real-time（HTTP 200，143KB）
   - Data Center Colocation Services（Mahwah/Basildon机房、SFTI LCN/WAN两种网络接入说明）: https://www.nyse.com/technology/colo（HTTP 200，70KB）
+  - 2026-09-05 新增（衍生品缺口子任务）：Holidays & Trading Hours（全市场统一假日日历，正面表述「All NYSE markets observe U.S. holidays」覆盖含期权在内的全部 NYSE 市场；同页另列各实体分市场时段表）: https://www.nyse.com/trade/hours-calendars（HTTP 200，109KB）
 - `ice.com` | 官方（母公司 Intercontinental Exchange 的指数业务） | en | curl 常规 UA 200 | 用于确认 NYSE Composite 指数由 ICE Data Indices 编制（而非交易所自编）——与上交所"交易所自编"、港交所"恒生指数公司编制"形成第三种模式对比
   - Equity Indices: https://www.ice.com/fixed-income-data-services/index-solutions/equity-indices（HTTP 200，207KB）
 - `cahill.com` | 第三方（律所客户简报） | en | curl 常规 UA 200 | 用于确认 T+1 结算周期新规生效日期（2024-05-28）；`confidence` 标 medium。⚠️ 2026-08 补全会话已突破 sec.gov/finra.org 反爬（见下方 `sec.gov`/`finra.org` 条目与本节末尾"突破记录"），dtcc.com 仍未攻克，这份法律实务简报继续作为T+1字段的补充来源保留
@@ -29,6 +30,7 @@
   - In the Matter of New York Stock Exchange LLC（PDF，2026年3月行政处罚令，2023年开盘集合竞价系统性故障事件与900万美元罚款）: https://www.sec.gov/files/litigation/admin/2026/34-104934.pdf（HTTP 200，234KB）
   - SEC Adopts Amendments to Finalize Rules Relating to the Holding Foreign Companies Accountable Act（2021年HFCAA最终细则新闻稿）: https://www.sec.gov/newsroom/press-releases/2021-250（HTTP 200，65KB）
   - U.S. Equity Market Structure: Making Our Markets Work Better for Investors（官方演讲稿，市场分散化/暗池占比讨论）: https://www.sec.gov/newsroom/speeches-statements/us-equity-market-structure（HTTP 200，226KB）
+  - 2026-09-05 新增（衍生品缺口子任务）：Rules of NYSE American, Inc. — Trading of Option Contracts（Section 900NY/925.1NYP/952NYP 等期权交易规则条文：订单类型与修饰符、做市商双边报价义务与 60% 报价标准、Core Open Auction/Trading Halt Auction 定义与触发、QCC 大宗成组订单；Fair Access UA 可抓）: https://www.sec.gov/files/rules/sro/nyseamer/2023/34-97869-ex5.pdf（HTTP 200，327KB，PDF）
 - `finra.org` | 官方（自律组织） | en | ⚠️**2026-08补全会话突破**：默认UA对内容页返回Cloudflare「Just a moment...」JS质询页（403，非简单UA黑名单，是需要执行JS+Cookie的真实机器人质询）；换成与sec.gov相同的Fair Access格式UA后，`/rules-guidance/rulebooks/...`与`/rules-guidance/key-topics/...`路径下的规则条文页全部200且是真实服务端渲染正文；但`/about`、`/media-center/statistics`、首页等页面即使200了，静态HTML里也只有导航壳、正文靠客户端JS异步渲染，抓不到统计数字（转而用PDF报告解决，见下）
   - 2090. Know Your Customer（规则手册原文，KYC逐字条文）: https://www.finra.org/rules-guidance/rulebooks/finra-rules/2090（HTTP 200，92KB）
   - Suitability（Key Topics页，Rule 2111逐字条文+与Reg BI关系说明）: https://www.finra.org/rules-guidance/key-topics/suitability（HTTP 200，115KB）
@@ -41,6 +43,9 @@
   - What SIPC Protects: https://www.sipc.org/for-investors/what-sipc-protects（HTTP 200，112KB）
 - `everycrsreport.com`（国会研究服务处报告的非营利镜像站，非congress.gov官方本身） | 第三方 | en | curl常规UA 200；`congress.gov`官方页本次两次尝试（含Fair Access格式UA）均403，未攻克，退而用此镜像 | 用于costs.financial_transaction_tax（联邦无普遍性金融交易税、历史印花性质转让税沿革），`confidence`按CLAUDE.md第三方来源规则封顶medium
   - Transaction Tax: General Overview（CRS Report RL32266，2004年）: https://www.everycrsreport.com/reports/RL32266.html（HTTP 200，44KB）
+- `theocc.com` | 官方（OCC——Options Clearing Corporation，全美上市期权（含 NYSE American/Arca 期权）的唯一中央清算机构/CCP，SEC 注册清算机构兼 CFTC 注册 DCO；2026-09-05 新增登记，衍生品缺口子任务） | en | ⚠️ 直连内容页 403（常规浏览器 UA 与 Fair Access 格式 UA 均被拦，Akamai 级防护；主站为 JS 渲染壳）；⚠️ `fetch_sources.py` 的 wayback 回退对这两个 URL 实际 FAIL——原因不是 wayback 没有快照，而是 `BLOCK_SNIFF_RE` 把含 `cdnjs.cloudflare.com`/`/cdn-cgi/` 静态资源引用的 OCC 真实正文误判为 Cloudflare 拦截页（工具误报），已改为手动抓 wayback `id_` 原始快照（equity-options-product-specifications 快照 2025-08-08、margin-methodology 快照 2025-12-09）按工具同款 manifest 条目（`via: wayback`，ok: true）落盘，quote 反查可用；后续会话遇到 theocc.com 或其他页内引用 cloudflare CDN 的站点，直接手动抓 `id_` 快照，不要指望 fetch_sources 自动回退 | 期权合约规格（100 股乘数、行权价间距分档、到期序列、第三个星期五到期、美式行权、T+1 行权交割、客户保证金公式）与 OCC 保证金方法论（STANS 蒙特卡洛、逐日收取、盘中追保）的一手官方文本
+  - Equity Options Product Specifications（标准股票期权合约规格）: https://www.theocc.com/clearance-and-settlement/clearing/equity-options-product-specifications（直连 403，经 wayback 2025-08-08 快照抓取）
+  - Margin Methodology（STANS 保证金方法论总览）: https://www.theocc.com/risk-management/margin-methodology（直连 403，经 wayback 2025-12-09 快照抓取）
 
 ## 探测记录（v0.2 NYSE 填充，2026-08-13）
 
