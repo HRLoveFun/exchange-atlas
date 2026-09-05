@@ -49,9 +49,10 @@
 42. ~~`market_structure` 新增的 `derivatives` 子块目前只在 `hk-hkex` 一家验证过 schema 可用，还有 8 家交易所产品体系已列出期货/期权类产品、市场结构却完全没有衍生品机制字段~~ — **已解决（2026-08-18/19）。** `au-asx`/`br-b3`/`cn-szse`/`fr-euronext`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse` 九家均已按 [ADR-017] 并行子代理模式补齐 `market_structure.derivatives`，人工抽检 90 个 `confidence: high` 字段全部通过（逐字核对 `quote` 与原始来源），细节与执行过程中的新发现见 `PROJECT/DECISIONS.md` [ADR-021]。
 43. **港交所的国企指数（Hang Seng China Enterprises Index，恒生中国企业指数）与恒生科技指数（Hang Seng TECH Index）尚未收录进 `hk-hkex.yml` 的 `indices` 章节**——两者与已收录的恒生指数同属恒生指数公司编制的旗舰指数家族，成分股同样来自港交所上市证券（`scope: exchange`，不涉及 [ADR-019] 的跨交易所口径问题，纯粹是数据缺口）。`hsi.com.hk` 官网是纯 JS 单页应用（SPA），curl 抓不到实质内容（`SOURCES.md` 已有记录），需要找该公司或港交所自己发布的指数方法论 PDF/新闻稿作为替代来源，下次连同 `hk-hkex` 的衍生品市场机制一起补。
 
-44. **`market_structure.derivatives` 子块（ADR-019 新增）在 `hk-hkex` 首次真实填充后，暴露出两处值得记录的问题。** (a) 原假设"HKFE（香港期货交易所）2000年公司化后与HKEX同一法人"，但 HKEX 官方2000-03-06新闻稿原文是"The Hong Kong Futures Exchange (HKFE) today became **a subsidiary of** Hong Kong Exchanges and Clearing Limited"——法律上 HKFE 是集团内**独立法人的全资附属公司**（股票期货再由 HKFE 全资附属的 HKCC 结算，还有第三层）。此前只有 NYSE Group（多个独立注册的 SEC 实体）与 Eurex/Xetra（同为独立法人）两种"历史交易所公司化"先例，`hk-hkex`/HKFE 是第三种"文档常说'合并'、官方原文显示实为'集团化为子公司'"的样本——下次遇到"某交易所X年与主交易所合并"描述时应找当年官方公告核实法律形式（同一法人 vs 集团子公司 vs 独立姊妹交易所），不要凭"合并"字面想当然。(b) `circuit_breaker_type` 枚举（none/index_level/stock_level/both）以股票市场为语境设计，`derivatives.circuit_breaker` 真实颗粒度是"部分期货品种的现月/次月合约级别"（六个指数期货品种，非全市场也非个股），本次借用 `stock_level` 只取其"非全市场"含义，是不完全贴合的近似——若其余 8 家（`au-asx`/`br-b3`/`cn-szse`/`fr-euronext`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse`）补齐衍生品机制后普遍遇到同样情况，值得给枚举新增 `contract_level`（逐合约级）值，现在只一家样本，先不改 enums.yml。(c) `derivatives.closing_mechanism`（收市机制）、`connect_schemes`（互联互通安排）、`block_trade`（大手交易门槛规则）三字段本次官方页面信息不足，已如实留空/降级，缺口说明见 `data/exchanges/hk-hkex.yml` 对应字段 `detail`。
+44. **`market_structure.derivatives` 子块（ADR-019 新增）在 `hk-hkex` 首次真实填充后，暴露出两处值得记录的问题。** (a) 原假设"HKFE（香港期货交易所）2000年公司化后与HKEX同一法人"，但 HKEX 官方2000-03-06新闻稿原文是"The Hong Kong Futures Exchange (HKFE) today became **a subsidiary of** Hong Kong Exchanges and Clearing Limited"——法律上 HKFE 是集团内**独立法人的全资附属公司**（股票期货再由 HKFE 全资附属的 HKCC 结算，还有第三层）。此前只有 NYSE Group（多个独立注册的 SEC 实体）与 Eurex/Xetra（同为独立法人）两种"历史交易所公司化"先例，`hk-hkex`/HKFE 是第三种"文档常说'合并'、官方原文显示实为'集团化为子公司'"的样本——下次遇到"某交易所X年与主交易所合并"描述时应找当年官方公告核实法律形式（同一法人 vs 集团子公司 vs 独立姊妹交易所），不要凭"合并"字面想当然。(b) `circuit_breaker_type` 枚举（none/index_level/stock_level/both）以股票市场为语境设计，`derivatives.circuit_breaker` 真实颗粒度是"部分期货品种的现月/次月合约级别"（六个指数期货品种，非全市场也非个股），本次借用 `stock_level` 只取其"非全市场"含义，是不完全贴合的近似——若其余 8 家（`au-asx`/`br-b3`/`cn-szse`/`fr-euronext`/`in-nse`/`kr-krx`/`sa-tadawul`/`sg-sgx`/`za-jse`）补齐衍生品机制后普遍遇到同样情况，值得给枚举新增 `contract_level`（逐合约级）值。**（2026-09-05 OQ #45 落地补记：样本 +1）** `jp-jpx` 衍生品子章的 SCB（Static Circuit Breaker）颗粒度是"同标的全限月期货+同标的全部期权+相关策略交易"的合约组级（`jp-jpx.yml` `derivatives.circuit_breaker` 同样借用 `stock_level`、`spec.type` 已如实标 `contract_level`），现两家样本、同一借用模式，仍按原判据暂不改 `enums.yml`，样本再累积后一并评估。(c) `derivatives.closing_mechanism`（收市机制）、`connect_schemes`（互联互通安排）、`block_trade`（大手交易门槛规则）三字段本次官方页面信息不足，已如实留空/降级，缺口说明见 `data/exchanges/hk-hkex.yml` 对应字段 `detail`。
 
-45. **[ADR-019] 判断「某所是否运营衍生品业务线」的判据是「第四章产品体系是否已列出 future/option 类产品」，这个判据存在循环，正在静默隐藏一块比 [ADR-060] C 桶更大的缺口。** 实测 `jp-jpx` / `cn-sse` / `us-nyse` / `us-nasdaq` 四家的 `products` 章**一条衍生品条目都没有**（`jp-jpx` 5 条为股票 / ETF / REIT / 债券 / ETN，无大阪交易所的日经 225 期货——按成交量计世界前列的股指期货市场；`cn-sse` 无 50ETF 期权；`us-nyse` 无 NYSE American / Arca 期权），于是 `market_structure.derivatives` 与 `clearing.derivatives` 两组整组为空 → 分组 `optional` 豁免（`count_chapter_leaves()`）→ 进度矩阵该格显 ✅。**第四章的缺项让第五章的缺口不可见，两章互相背书**，而这四家恰是 [ADR-060] 任务四点名的旗舰所，图鉴主视图最该讲清楚的市场。补齐意味着先补第四章产品条目、再填两个 derivatives 子章（每家约 25 个 leaf，四家约 100 处），与任务四同量级，**不并入任务三**（见 [ADR-082] 依据 7 与「没定/留后续」）。待用户决定是否立独立条目、以及排在任务四前后。在此之前，任务三的完成**不等于**衍生品覆盖已经干净。
+46. **衍生品子章的两个受控词表缺口（OQ #45 落地时坐实，均暂不改 enums.yml）：** (a) `circuit_breaker_type` 缺 `contract_level`（见 #44(b)，现 hk-hkex/jp-jpx 两家样本、同一借用模式）；(b) `clearing.derivatives.delivery_method` 的枚举（physical/cash/na/either）表达不了"分产品线"语义——`jp-jpx` 股指期货/期权现金结算（SQ）、国债期货实物交割、mini 10 年国债现金结算，只能近似取 `either` 并在 `detail` 声明"是产品线分化、非头寸可选"。触发条件：第三家"分产品线交割"样本出现时评估给 delivery_method 增加产品线维度。
+
 
 
 ## 具体数据悬案
@@ -151,19 +152,31 @@
     - `in-nse market_structure.derivatives.holidays_note`：Market Timings 页的「holidays declared by the Exchange in advance」句式仅覆盖 Currency Derivatives 与 Debt segment，不覆盖股票/股指衍生品；现货 Holidays 页为 JS 渲染。**下次入口**：NSE 全市场通用假日页静态直链（或宣布假日的官方通函 PDF）。
     - `sg-sgx market_structure.derivatives.holidays_note`：sgx.com 交易日历页 SPA 空壳（同第 30 条结构性受阻），与合约规格 PDF 一并待人工投喂。
 
+- **[OQ #45 落地（2026-09-05）] `jp-jpx` 衍生品子章留空/降级处：** ① `derivatives.connect_schemes` 留空——OSE 规则栏目（Trading Methods/Other Trading Rules/J-NET/Flexible Trading）未见 Stock Connect 式跨境安排官方说明，下次入口：大阪取引所業務規程日文原文（jpx.co.jp/derivatives/rules/ 日文侧）与 JPX 跨境合作官方页；② `market_maker_scheme` 的报价义务条款在 Handling of Market Maker Program 附件 PDF，本次未抓取（present: true/medium）；③ `trading_halt_mechanism` 引 SCB 框架内裁量例外条款（medium），完整裁量停牌条款在業務規程日文原文；④ `clearing.derivatives.maintenance_margin_practice`（medium）"无独立维持阈值"系对 JSCC 英文页结构的负面推断，待 JSCC 清算业务规程正面原文；⑤ TOPIX 期货涨跌停初版曾误判"两官方页口径冲突"，独立复核证实为表格 rowspan 归属误读，已订正升 high（见 PROJECT/OQ45-DERIV-SPOT-CHECK.md）。
+- **[OQ #45 落地（2026-09-05）] `cn-sse` 衍生品子章：** ① `derivatives.block_trade` 留空——现行《期权交易规则》171 条全文检索「大宗」零命中（上交所期权规则未设大宗交易条款；深交所规则第 4.6.8 条有明文授权，两边不对称），上交所期权是否有场外/大宗安排待官方说明；② 熔断阈值口径：现行规则正文第七十六条=最小报价单位 5 倍，官网《上证50ETF期权合约基本条款》页（2023-03-03）写 10 个最小报价单位，以现行规则正文为准、差异已记 detail，待官网条款页更新后回核；③ `membership_structure` 引用的 hyzq.jsp 本次重抓 404（盲审 QUESTION），待补源或注明失效。
+- **[OQ #45 落地（2026-09-05）] `us-nasdaq` 衍生品子章：** ① `investor.gov` 两段 quote 来自 wayback 自动回退快照（fetch_sources 误判直连被拦），建议人工重抓核实一次；② `tick_size` 引 2019 年 Wolters Kluwer 规则书快照，Penny Pilot 条款已载明到期日，2019 后报价档位是否调整待更新的 SR-NASDAQ 规则文件复核；③ Nasdaq Futures（NFX，能源期货）停运仅见第三方迁移公告，无官方原文，未列为产品条目——如需收录查 SEC/CFTC 官方 withdrawal 文件。
+- **[OQ #45 落地（2026-09-05）] `us-nyse` 衍生品子章 7 处留空（detail 均已写明阻断，汇总下次入口）：** `matching_principle`（NYSE American 期权规则 964NYP 排序条文——手册正文本体未直抓，本次仅 Exhibit 引用级）、`tick_size`（期权 MPV 档位表条文）、`price_limits.*`（美式期权无日常涨跌停，但 [ADR-067] 判据要求的正面文本未定位，不断 type: none；相邻事实 Trading Collar 订单级保护带已记录）、`volatility_interruption`（同前）、`connect_schemes`（无穷举性条文可正面化）。
+- **工具层待修（OQ #45 执行中发现）：`tools/fetch_sources.py` 的 BLOCK_SNIFF_RE 对引用 `cdnjs.cloudflare.com`/`/cdn-cgi/` 静态资源的真实正文会误判为 Cloudflare 拦截页**，触发 wayback 回退（theocc.com 两页实锤；内容无损、快照链经盲审 CDX 核实）。修复方向：只匹配质询页特征（Attention Required/Just a moment/error code: 1020 等）而非"cloudflare"字样。
+
+
 <!-- BEGIN:GENERATED auto-issues -->
-- `br-b3` 基本信息 / 夏令时规则（dst_rule）— confidence: low
 - `br-b3` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
+- `ca-tsx` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `ch-six` 基本信息 / 夏令时规则（dst_rule）— confidence: low
 - `ch-six` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `cn-sse` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `cn-szse` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `cn-szse` 风险与特殊考量 / 流动性风险（liquidity_risk_note）— confidence: low
+- `de-eurex` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `de-eurex` 市场数据与技术基础设施 / 历史系统故障事件（major_outage_history）— confidence: low
+- `fr-euronext` 基本信息 / 交易货币（trading_currency）— confidence: low
 - `fr-euronext` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `fr-euronext` 市场结构与交易机制 / 上午连续竞价（trading_sessions.continuous_am）— confidence: low
+- `in-nse` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（trading_halt_mechanism）— confidence: low
 - `in-nse` 市场结构与交易机制 / 临时停牌与恢复（derivatives.trading_halt_mechanism）— confidence: low
+- `jp-jpx` 基本信息 / 交易货币（trading_currency）— confidence: low
+- `jp-jpx` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 错误交易处理规则（error_trade_rule）— confidence: low
 - `kr-krx` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low
@@ -172,9 +185,17 @@
 - `kr-krx` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `kr-krx` 交易成本与税费 / 佣金结构（commission_structure）— confidence: low
 - `kr-krx` 交易成本与税费 / 清算费用（clearing_fees）— confidence: low
+- `sa-tadawul` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `sa-tadawul` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low
 - `sa-tadawul` 市场数据与技术基础设施 / 历史系统故障事件（major_outage_history）— confidence: low
+- `tw-twse` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `tw-twse` 监管与法律环境 / 外资准入与持股比例限制（foreign_ownership_limit）— confidence: low
 - `tw-twse` 清算、结算与交割 / 初始保证金制度（initial_margin_practice）— confidence: low
+- `uk-lse` 基本信息 / 结算货币（settlement_currency）— confidence: low
+- `us-nasdaq` 基本信息 / 交易货币（trading_currency）— confidence: low
+- `us-nasdaq` 基本信息 / 结算货币（settlement_currency）— confidence: low
 - `us-nasdaq` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
+- `us-nyse` 基本信息 / 交易货币（trading_currency）— confidence: low
+- `us-nyse` 基本信息 / 结算货币（settlement_currency）— confidence: low
+- `za-jse` 基本信息 / 结算货币（settlement_currency）— confidence: low
 <!-- END:GENERATED auto-issues -->

@@ -31,9 +31,9 @@
 
 ### 最近完成（滚动窗口，只留最近 3 条；更早的见三节）
 
+- **2026-09-05/06 · OQ #45 四家旗舰所衍生品覆盖缺口落地**（jp-jpx/cn-sse/us-nyse/us-nasdaq）— products 衍生品条目 + `market_structure.derivatives` + `clearing.derivatives` 两组子章整组建制消除「第四章缺项背书第五章缺口」的循环（[ADR-082] 依据 7）；四代理并行 + 两隔离视角盲审 117 处判定（PASS 102/FIX 3/QUESTION 5，零幻觉，判定表 `PROJECT/OQ45-DERIV-SPOT-CHECK.md`）；盲审抓出 TOPIX 期货 rowspan 归组误读等 3 处 FIX 已订正；`make build` 全绿、verify_quotes FAIL=0。留空与待办汇总见 OPEN-QUESTIONS #46 与四家悬案条目。
 - **2026-09-05 · 上市生命周期模块迭代（[ADR-091]）** — 8 个时长 spec 第二人独立复核：初检 83.3%（3 FAIL 全部订正——br-b3 阶段表语义重组 / fr-euronext 8 周归属 / kr-krx 45 日适用主体——+ 2 QUESTION 处置）；时长 spec 扩容 8 处至 16 家（个位数转写口径 + schema `bound` 口径键 + `value: null` 合法化 + validate 值域校验）；渲染层散文阶段块 3 行折行替代单行硬裁剪、停复牌 ↻ 琥珀底圈、时长标签 ≤/≥ 前缀。
 - **2026-09-05 · 任务三附·剖面现货/衍生品业务线切换（渲染层）完成**（[ADR-090]）— 10 家所剖面加业务线切换，切衍生品整体换数据源到 `*.derivatives.*`、诚实三态缺口留空，删欠账 banner，纯前端零 data diff。Phase 3 六模块渲染层 + 本切换均已落地。
-- **2026-09-05 · 风险旗标数据子棒 28/28 收口** — `tw-twse.political_risk_note` 独立复核完成（留空合规、0 FIX），子棒全部字段闭环（[ADR-079]）。
 
 ---
 
@@ -47,25 +47,25 @@
 | 交易所 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | `au-asx` | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ |
-| `br-b3` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `ca-tsx` | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ |
+| `br-b3` | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `ca-tsx` | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ |
 | `ch-six` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | 🟡 |
 | `cn-sse` | ✅ | 🟡 | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `cn-szse` | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | 🟡 | 🟡 | 🟡 |
-| `de-eurex` | ✅ | ✅ | ✅ | 🟡 | ➖ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ |
+| `de-eurex` | 🟡 | ✅ | ✅ | 🟡 | ➖ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ |
 | `de-xetra` | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ |
 | `fr-euronext` | 🟡 | 🟡 | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ |
 | `hk-hkex` | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `in-nse` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ |
-| `jp-jpx` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `jp-jpx` | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `kr-krx` | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | 🟡 | 🟡 | ✅ |
 | `sa-tadawul` | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ |
 | `sg-sgx` | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `tw-twse` | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | 🟡 | 🟡 | 🟡 |
-| `uk-lse` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `us-nasdaq` | ✅ | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ |
-| `us-nyse` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `za-jse` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `tw-twse` | 🟡 | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | 🟡 | 🟡 | 🟡 |
+| `uk-lse` | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `us-nasdaq` | 🟡 | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ |
+| `us-nyse` | 🟡 | ✅ | ✅ | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `za-jse` | 🟡 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 列说明：2 基本信息、3 监管与法律环境、4 产品体系、5 市场结构与交易机制、6 上市、持续监管与退市、7 指数体系、8 清算、结算与交割、9 市场参与者、10 市场数据与技术基础设施、11 交易成本与税费、12 风险与特殊考量
 <!-- END:GENERATED progress-matrix -->
@@ -73,7 +73,7 @@
 ### 数据健康度摘要
 
 <!-- BEGIN:GENERATED health-summary -->
-共 2032 个已填字段，其中 0 个超过复核阈值待复核。
+共 2109 个已填字段，其中 0 个超过复核阈值待复核。
 
 | 交易所 | 已填字段 | 待复核 |
 |---|---|---|
@@ -81,21 +81,21 @@
 | `br-b3` | 116 | 0 |
 | `ca-tsx` | 89 | 0 |
 | `ch-six` | 89 | 0 |
-| `cn-sse` | 115 | 0 |
+| `cn-sse` | 120 | 0 |
 | `cn-szse` | 112 | 0 |
 | `de-eurex` | 73 | 0 |
 | `de-xetra` | 85 | 0 |
 | `fr-euronext` | 108 | 0 |
 | `hk-hkex` | 117 | 0 |
 | `in-nse` | 111 | 0 |
-| `jp-jpx` | 91 | 0 |
+| `jp-jpx` | 118 | 0 |
 | `kr-krx` | 115 | 0 |
 | `sa-tadawul` | 115 | 0 |
 | `sg-sgx` | 110 | 0 |
 | `tw-twse` | 83 | 0 |
 | `uk-lse` | 91 | 0 |
-| `us-nasdaq` | 83 | 0 |
-| `us-nyse` | 91 | 0 |
+| `us-nasdaq` | 107 | 0 |
+| `us-nyse` | 112 | 0 |
 | `za-jse` | 123 | 0 |
 <!-- END:GENERATED health-summary -->
 
@@ -265,6 +265,9 @@
     - **② `.cache/za-jse/` 重建**：`verify_quotes` 全库 CACHE_MISS 77→39（za-jse 一家 70→36）、OK 1023→1062、FAIL 全程 0；`jse.co.za` 官网本身仍不可达，重建的是离线核对覆盖率，非重新核实数据，`data/` 零改动。**顺带修 `verify_quotes.py` 两处消费侧回归**（有了 wayback 回退才暴露）：`manifest_map` 原不看 `ok` 字段，把 404 错误页当正文核对，挖出一个真实假阳性（`au-asx infrastructure.access_methods`，已修复降级为 CACHE_MISS）；wayback 快照可能明显滞后官网原文（za-jse 一处仅 2020 年归档）导致假 FAIL，现降级规则：未命中时只有"当次直连"来源也确认没有才判 FAIL。
     - **③ `make check` stale 复核清单**（2026-09-05 交互式会话补完，[ADR-088]）：`validate.py` 校验项 19 `stale_field_warnings`——超阈值（按超期天数降序）与未记 verified（无法判定）分两组、warning 不阻断（任务五③原始定义）；freshness_rows 由 `validate_generated_blocks` 为 health-summary 校验顺路返回复用，不二次扫描 `data/`；selfcheck 78→87 锁行为（全库现算 stale=0、2,007 个 freshness 行，所有分支真实数据触发不到）。[ADR-060] 评估题「stale 复核节奏是否固化进 CLAUDE.md §八」结论：**不固化**（周期巡检非事件回写，`make check` 必跑已保证可见性），宪法零改动。
   - **验收**：`make build` 全绿（`selfcheck` 48/48、`validate` 20/0、`verify_quotes` FAIL=0、6 处生成块零 diff）；人工核对 2 处 kr-krx `quote` 与落盘原文逐字一致（2/2，远低于第二人复核门槛）。③ 收尾时复验 `make build` 全绿（`selfcheck` 87/87、`validate` 20 家 0 警告 0 错误、生成块零 diff）。已知局限：OTP 数据步骤端到端成功路径（住宅 IP）本次环境无法验证，仅验证机制正确接线；kr-krx 剩 8 处 low 待人工投喂。
+
+
+- [x] **任务六 · OQ #45 四家旗舰所衍生品覆盖缺口落地**（2026-09-05/06，执行 + 独立复核完成）— `jp-jpx`/`cn-sse`/`us-nyse`/`us-nasdaq` 四家补 products 衍生品条目 + `market_structure.derivatives`（22 leaf/家）+ `clearing.derivatives`（5 leaf/家），消除 [ADR-082] 依据 7 的「products 缺项 → derivatives 组 optional 豁免 → 矩阵 ✅」两章互证循环。执行模式：四代理并行（文件级隔离：各自 yml + sources 分片）+ 两隔离视角盲审（[ADR-081]）。**结果**：四家合计填实 100 处 leaf（jp 27/28、cn 27/28、us-nyse 21/28、us-nasdaq 25/28），high 65 / medium 26 / low 9（均留空占位）；products 新增 OSE 6 条 / SSE 期权 3 条 / NYSE American+Arca Options 2 条 / NOM+BX+PHLX Options 3 条。**盲审**：117 处判定 PASS 102 / FIX 3 / QUESTION 5，零幻觉；3 处 FIX（jp TOPIX 期货 rowspan 归组误读升 high、us-nasdaq trading_halt quote 补 LULD FAQ 原句、7 leaf 补 verified）与 1 处跨文件口径裁定（纯否定断言按 [ADR-082] 棒 2 留空，us-nasdaq connect_schemes 降级）已全部落地。**留空 9 处**均有阻断记录，汇总 `OPEN-QUESTIONS.md` #46 + 四家悬案条目；新枚举缺口（circuit_breaker contract_level、delivery_method 分产品线）登记 #46。`make build` 全绿、`verify_quotes` FAIL=0、四家 CACHE_MISS=0。**事故记录**：执行期间并行会话的 stable 棒批量工具以 YAML round-trip 方式重写 13 个数据文件（注释丢失、格式展开），本任务两个待提交文件以 HEAD 为基语义重建后提交（c607448/2396eb9），注释与格式还原；该工具副作用待其会话自行修复（见 OQ 工具层待修条）。
 
 ### 广度扩张（新增交易所，原「Phase 4 · Wave 3」）——按需可选能力，非计划阶段
 

@@ -96,6 +96,7 @@
 - ADR-089 · 2026-09-05 · 任务三附·衍生品 spec 回填落地（130 处两批 + 各自独立复核）+ 两处形状词汇演进
 - ADR-090 · 2026-09-05 · 市场机制剖面：现货 / 衍生品业务线切换（渲染层落地）
 - ADR-091 · 2026-09-05 · 上市生命周期模块迭代：8 个时长 spec 独立复核订正 + 时长 spec 扩容 8 处（含 `bound` 口径键）+ 散文块折行与停复牌 ↻ 视觉修订
+- ADR-092 · 2026-09-05 · OQ #45 四家旗舰所衍生品覆盖缺口落地：products 条目 + 两 derivatives 子章 + 盲审订正
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2557,3 +2558,18 @@ print('全库 medium 零 sources:',n)
 **验证：** `make build` 全绿（`selfcheck` 93、`validate` 20 家 0/0、`verify_quotes` OK=1087 / FAIL=0、`check_ui_i18n` / `check_no_chapter_ordinals` / `check_no_dup_render_helpers` OK）、`make sync` 幂等；Chrome headless 核对 `hk-hkex`（≤ 40 个工作日 + ↻ 底圈）/ `us-nyse`（新增 ≤ 14 个工作日填充条）/ `uk-lse`（≥ 20 个工作日）/ `jp-jpx`（≈ 4 个月）/ `br-b3`（null-spec 散文块 3 行折行 + ↻ 底圈）/ `za-jse`（无 spec 散文折行）——bound 前缀、底圈、折行均符合预期。**已知局限**：① `cn-szse` 退市整理期 15 个交易日 / `kr-krx` 整理卖出 7 个交易日仍被 5b 挡在 spec 外（需含阿拉伯数字一手源，OQ 待补）；② `sa-tadawul` listing quote 出处缓存为 404 页待重抓；③ `au-asx`（≈5 个月，来源缓存非 manifest 在册）未结构化。**过程坑（共享检出并行事故同类，[ADR-086]）**：并行会话提交时把本会话已再生的 `docs/data` 中间态扫进其 commit，事后由其自行 revert（e7bf540）——本条 yml 落库后生成块恢复一致。
 
 **日期：** 2026-09-05
+
+### ADR-092 — OQ #45 四家旗舰所衍生品覆盖缺口落地：products 条目 + 两 derivatives 子章 + 盲审订正
+
+**背景：** [ADR-082] 依据 7 指出 [ADR-019] 的启用判据「第四章是否列出 future/option 类产品」存在循环——`jp-jpx`/`cn-sse`/`us-nyse`/`us-nasdaq` 四家 products 章零衍生品条目 → 两个 derivatives 子章整组空 → 分组 `optional` 豁免 → 矩阵显 ✅，两章互相背书隐藏缺口（每家约 27 leaf，四家约 100 处，与任务四同量级，不并入任务三）。用户拍板立项落地。
+
+**定了什么：**
+1. **执行模式**：四代理并行（沿用 [ADR-017] 模式，[ADR-077] 后文件级隔离已足够——各自只写 `data/exchanges/<id>.yml` + `PROJECT/sources/<id>.md`），共享文件（本文件/ROADMAP/OPEN-QUESTIONS）由协调者统一回写。
+2. **三态收口**（沿用 [ADR-082] 裁定①）：填实 / 留空写明阻断；`not_applicable` 本批无合格样本。终态：填实 100 处（high 65 / medium 26）、留空 9 处（jp connect_schemes、cn block_trade、us-nyse 7 处；us-nasdaq block_trade 亦留空——每处 detail 写明判据与下次入口，汇总 OPEN-QUESTIONS）。
+3. **盲审独立视角复核**（[ADR-081]，>30 处必经）：两个隔离视角分部盲审 117 处判定，PASS 102 / FIX 3 / QUESTION 5，零幻觉。3 处 FIX（jp TOPIX 期货 rowspan 归组误读——执行者自报的「两官方页口径冲突」被证伪，实为表格归属误读，订正升 high；us-nasdaq trading_halt quote 补 LULD FAQ 原句；7 leaf 补 verified）全部落地。判定表 `PROJECT/OQ45-DERIV-SPOT-CHECK.md`。
+4. **负面断言入库边界（本条新立，回应盲审 QUESTION）**：衍生品子块的「无 X」断言，只有在同一字段承载了有 `quote` 的正面机制描述、且负面部分显式声明为结构性推断时，才可 `medium` 入库；纯否定断言（零正面 quoted 内容）一律留空。us-nasdaq `derivatives.connect_schemes` 据此由 medium 降级留空，与 us-nyse 对齐。
+5. **法律结构表达**：单记录覆盖集团的衍生品线，集团内结构注释入文件——jp（OSE 为 JPX 全资子公司，同 hk-hkex/HKFE 范式）、us 两家（NYSE American/Arca Options 与 NOM/BX/PHLX Options 为同集团独立注册 SEC 交易所/SRO 实体，按 `group_id` 单记录覆盖，与 [ADR-019] 的「同一法人实体」原意不同，本条将其扩展为「记录级覆盖其规则可核的集团内衍生品实体」）。
+
+**没定 / 留后续：** 枚举缺口（circuit_breaker `contract_level`、delivery_method 分产品线）登记 OPEN-QUESTIONS #46 不改表；`fetch_sources.py` BLOCK_SNIFF_RE 误报待修；us-nasdaq investor.gov wayback 快照待人工重抓。
+
+**日期：** 2026-09-05/06
