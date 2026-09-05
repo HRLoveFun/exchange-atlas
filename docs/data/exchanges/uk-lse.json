@@ -510,18 +510,23 @@
         }
       },
       "holidays_note": {
-        "zh": "官方 Business Parameters 文档（Trading Cycles 表）对「圣诞前最后交易日与日历年最后交易日」单列提前收盘日（Early Close Day）时刻表——该两类交易日常规交易提前结束；完整的公共及银行假日逐日安排由官网 Business days 页面公布（该页为 JS 动态页面，curl 无法取得正文，逐字坐实待人工投喂，见 OPEN-QUESTIONS）",
-        "en": "The official Business Parameters document (Trading Cycles sheet) lists a separate Early Close Day timetable for the final trading day before Christmas and the final trading day of the calendar year — on such days regular trading ends early; the full day-by-day public and bank holiday calendar is published on the LSE Business days page (a JS-rendered page whose body curl cannot capture — quotable verification pending manual provision, see OPEN-QUESTIONS)",
-        "detail": "由 low（空）部分坐实：可逐字摘引的部分限于官方 XLSX。官网 Business days 动态页经 Chrome headless\n渲染确认存在一般性表述（「London Stock Exchange generally operates its Trading Services each\nweekday. It does however, recognise the Public and Bank Holidays of England & Wales...」+ 2026-2028\n逐日假期表），但按铁律不采纳无法落盘存档的正文为 quote——与 [ADR-068] holidays_note 4 家 JS-SPA\n同一失败模式。Business Parameters 的真实文件 URL 由该 SPA 页渲染后提取，见 PROJECT/sources/uk-lse.md。\n",
+        "zh": "LSE 一般在每个工作日运营其交易服务，并按英格兰与威尔士的公共及银行假日调整各服务安排：银行假日当日场内交易服务为非交易日，场外/SI 报告服务多数照常、个别不提供；圣诞与新年前夕为半日市，当日收盘流程提前开始。官方逐日安排（各年圣诞季与银行假日明细、覆盖至日历年年末滚动更新）由官网 Business days 页公布，本库经官方内容 API 抓取存档",
+        "en": "LSE generally operates its Trading Services each weekday, adjusted for the Public and Bank Holidays of England & Wales: on-exchange trading services are non-trading on bank holidays, OTC/SI off-book trade reporting is mostly available as normal (occasionally not), and the days before Christmas and New Year are half days with an early markets closing process. The official day-by-day schedule (holiday-by-holiday detail, rolling through the calendar coverage) is published on the LSE Business days page, archived in this repository via the official content API",
+        "detail": "由 medium 升级为 high（「JS-SPA 待人工投喂」缺口就此收口，无需人工投喂）：发现主站 SPA 页运行时\n调用官方内容 API（api.londonstockexchange.com，Chrome headless --log-net-log 抓到 XHR），该 API\ncurl 直连 200、返回 HTTP JSON，Business days 页正文（政策句 + 逐日假日表）以 HTML 片段内嵌其中，\n可照常落盘存档并作 quote 反查。逐日表要点（2026 下半至 2029 年初，以存档 JSON 为准）：\nSummer Bank Holiday/圣诞日/节礼日/元旦/耶稣受难节/复活节星期一/Early May 与 Spring Bank Holiday\n当日场内交易服务为 NON-trading day（OTC/SI 报告多数「Available as normal」、圣诞日等「Not available」、\n个别「To be confirmed」）；圣诞与新年前夕为半日市，收盘流程自伦敦时间 12:30 开始。政策句 quote 中的\n「&amp;」为源文件原样 HTML 实体（照抄）；与之互补，Business Parameters XLSX 的 Early Close Day\n列（12:30 收盘）从交易时段侧交叉印证半日市安排。\n",
         "sources": [
+          {
+            "title": "Business days 页官方内容 API（政策句与逐日银行假日表，含 2026-2029 年安排）",
+            "url": "https://api.londonstockexchange.com/api/v1/pages?path=equities-trading/business-days&parameters=",
+            "accessed": "2026-09-05"
+          },
           {
             "title": "Millennium Exchange & TRADEcho Business Parameters v10.0（2026-07-27，Trading Cycles 工作表特殊交易日定义）XLSX",
             "url": "https://docs.londonstockexchange.com/sites/default/files/documents/20260727-mit-and-te-parameters-version-10-0.xlsx",
             "accessed": "2026-09-05"
           }
         ],
-        "quote": "Final trading day before Christmas. Final Trading day of calendar year",
-        "confidence": "medium",
+        "quote": "London Stock Exchange generally operates its Trading Services each weekday. It does however, recognise the Public and Bank Holidays of England &amp; Wales and the impact on its Trading Services of these days are set out in the table below.",
+        "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
         "spec": null
@@ -1715,17 +1720,22 @@
         "detail": null
       },
       "major_outage_history": {
-        "zh": "2019年8月曾发生一次重大技术故障：LSEG 2019年度报告在薪酬委员会报告注脚中正式记载「the technology outage in LSE plc in August 2019」，并因此对时任资本市场总监的花红公式结果作出调整；据当时媒体广泛报道，该故障导致主板开盘推迟约100分钟、为2011年以来最长中断、波及数百只证券（含富时100/250成分股）——时长、波及面与「软件配置问题」归因为第三方报道口径，交易所官方未发布逐字可摘的完整事后报告，见 OPEN-QUESTIONS",
-        "en": "A major technology outage occurred in August 2019: LSEG's 2019 annual report formally records 'the technology outage in LSE plc in August 2019' in a remuneration report footnote, with an adjustment made to the formulaic bonus outcome of the then Director of Capital Markets. Contemporary media widely reported that the outage delayed the Main Market opening by about 100 minutes — the longest disruption in eight years — affecting hundreds of securities (including FTSE 100/250 constituents); the duration, scope and the 'software configuration' attribution are third-party press accounts, as the Exchange has not published a quotable full post-incident report",
-        "detail": "由 low 坐实（部分）：官方年报注脚逐字记载故障的存在与时间（官方一手来源），时长/波及面属第三方口径，\n按铁律只入 detail 不进 quote 体系。此前 detail 记录的 2023年12月事件本次仍未找到官方原文，维持不填。\n候选入口（LSE Market Notices 存档、FCA NSM 事故类公告）本次仍未命中承载正文的官方页面。\n",
+        "zh": "重大技术事件两起：①2019年8月16日主板技术故障——LSEG 2019年报薪酬注脚正式记载「the technology outage in LSE plc in August 2019」并据此调整时任资本市场总监花红公式结果；据当时媒体广泛报道开盘推迟约100分钟、为2011年以来最长中断（时长与波及面为第三方口径）。②2023年12月5日撮合引擎分区3（Partition 3）两度盘中暂停——官方事后公告（Service Announcement Notice 001/05122023）逐字记载：根因为磁盘阵列处理性能降级触发保护性暂停，第一次暂停于09:16:58触发、复牌竞价09:55开始、10:15撮合，第二次于11:20:57触发、12:20复牌竞价、12:40撮合；富时100/250全部成分股与国际订单簿（IOB）证券全程正常交易；公告同时说明2023年10月19日分区3曾发生性质完全不同的RFQ/ETP软件逻辑问题",
+        "en": "Two major technical incidents: (1) August 2019 — LSEG's 2019 annual report formally records 'the technology outage in LSE plc in August 2019' in a remuneration footnote, with an adjustment made to the then Director of Capital Markets' formulaic bonus outcome; contemporary media widely reported a delayed Main Market opening of about 100 minutes (duration and scope are third-party accounts). (2) 5 December 2023 — two intraday halts of matching engine Partition 3, recorded verbatim in the Exchange's official post-incident Service Announcement Notice 001/05122023: the root cause was degraded processing performance of a disk array triggering protective suspensions; the first halt triggered at 09:16:58 with a re-opening auction from 09:55 and uncrossing at 10:15, the second at 11:20:57 with a re-opening auction at 12:20 and uncrossing at 12:40; all FTSE 100/250 constituents and International Order Book securities traded as normal throughout; the same notice records a completely different software-logic issue (RFQ/ETP) on Partition 3 on 19 October 2023",
+        "detail": "2023年12月事件由「未获官方原文」收口：官方事后公告（Service Announcement Notice，docs 静态子域\n可 curl）对两次 halt 的根因、触发/复牌时刻逐字可摘，quote 即取自该公告；公告并披露 GTP 行情端\nInstrument Status 未随复牌更新等次生问题。2019 年事件官方锚点仍为 AR2019 薪酬注脚（原 quote 句），\n时长/波及面维持第三方口径；两起事件合并记 medium（quote 单槽只锚其一）。\n",
         "sources": [
+          {
+            "title": "Service Announcement Notice 001/05122023 — London Stock Exchange – 05 December 2023 - Technical Incident Update（官方事后公告）PDF",
+            "url": "https://docs.londonstockexchange.com/sites/default/files/documents/live_-_001_-_05122023_-_london_stock_exchange_-_05_december_2023_-_technical_incident_update.pdf",
+            "accessed": "2026-09-05"
+          },
           {
             "title": "LSEG Annual Report 2019（薪酬委员会报告注脚3，官方正式记载 August 2019 技术故障）PDF",
             "url": "https://www.lseg.com/content/dam/lseg/en_us/documents/investor-relations/annual-reports/lseg-annual-report-2019.pdf",
             "accessed": "2026-09-05"
           }
         ],
-        "quote": "Incorporates an adjustment to the formulaic bonus outcome of Mr Jerusalmi, in light of the technology outage in LSE plc in August 2019 when he was Director of Capital Markets.",
+        "quote": "The London Stock Exchange experienced two halts to trading impacting securities that trade on matching engine Partition 3 on Tuesday 5 December. All constituents of the FTSE 100 and FTSE 250 indices and International Order Book securities continued to trade as normal throughout. The cause of the halts was the degradation of processing performance of a disk array.",
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
