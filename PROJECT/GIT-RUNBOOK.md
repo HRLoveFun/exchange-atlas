@@ -66,9 +66,9 @@ git push
 
 **走自动合并流水线时的同类风险（未开 Merge Queue 前的已知局限）**：`pr-build.yml` 的 `make build` 检查是在 PR 开出/更新那一刻的内容上跑的；如果两个后台 PR 前后脚都设了 auto-merge，第一个合并后 `main` 往前走了，第二个的检查结果不会自动重新验证（GitHub 只保证没有文本冲突就按你 PR 自己的内容合并，不保证生成块 / ADR 台账这类"合并后语义" 仍然一致）。缓解办法：给 `main` 开 GitHub 原生 **Merge Queue**（仓库设置里勾选，需要基本的 branch protection + 把 `build` 设成 required check）——开了之后每条排队项会自动 rebase 到最新 `main` 再重跑检查、一次只处理一个，从根上解决这个残余风险；没开之前，多个后台 PR 密集合并后建议手动跑一次 `make build` 确认 `main` 仍绿。
 
-**⚠️ 更严重的已知缺口（[ADR-081] 落地 PR #80 现测发现，尚未修复）：`gh pr merge --auto` 目前根本不等 `build` 检查跑完就合并。** 实测：PR #80 设置 auto-merge 后立即变成 `MERGED`，此时 `statusCheckRollup` 里 `build` 这条检查的 `status` 还是 `IN_PROGRESS`——这次侥幸检查本来就会过，但如果 `make build` 真的报红，**现状是它照样会被合进 main，不会被拦下来**。根因：GitHub 的 auto-merge 只保证"没有文本冲突就合并"，只有当 `build` 被设成仓库分支保护的 **required status check** 时，auto-merge 才会真正等它跑完并且失败就不合并。
+**⚠️ 已修复的缺口（[ADR-081] 落地 PR #80 现测发现）：`gh pr merge --auto` 原本根本不等 `build` 检查跑完就合并。** 实测：PR #80 设置 auto-merge 后立即变成 `MERGED`，此时 `statusCheckRollup` 里 `build` 这条检查的 `status` 还是 `IN_PROGRESS`——侥幸那次检查本来就会过，但若 `make build` 真的报红，它照样会被合进 main，不会被拦下来。根因：GitHub 的 auto-merge 只保证"没有文本冲突就合并"，只有当 `build` 被设成仓库分支保护的 **required status check** 时，auto-merge 才会真正等它跑完并且失败就不合并。**2026-09-05 已按下方命令把 `build` 设为 required check，并用"故意弄红 build 的测试 PR #82"实测验证：检查 FAILURE 后 `mergeStateStatus` 稳定停在 `BLOCKED`、不合并**——本节开头"CI 报红会拦下来"的前提现已成立。
 
-**修复方法（需要仓库 admin 权限改 branch protection，值日的 Claude Code 会话的 auto-mode 权限分类器会拦截这类改动，需要人手动做或显式授权）**：
+**修复命令（已于 2026-09-05 执行落地，留档备查；改 branch protection 需仓库 admin 权限，值日的 Claude Code 会话的 auto-mode 权限分类器会拦截这类改动，需人手动做或显式授权）**：
 
 ```bash
 gh api -X PUT repos/HRLoveFun/exchange-atlas/branches/main/protection \
@@ -84,7 +84,7 @@ gh api -X PUT repos/HRLoveFun/exchange-atlas/branches/main/protection \
 EOF
 ```
 
-`enforce_admins: false` 保留仓库 owner（admin 权限）直接推 main 不受影响（[CLAUDE.md] §六交互式会话默认直推的约定不变，管理员天然绕过 required checks）；只对 PR 合并生效。做完后建议故意开一条会让 `make build` 报红的测试 PR，确认 auto-merge 真的会等在那里不合并，再删掉测试 PR。**在这条修复落地前，auto-merge 流水线的"CI 报红会拦下来"这个前提不成立，多加一道人工留意**：后台任务开的 PR 合并后，建议随手看一眼 `gh pr checks <n>` 的最终结果有没有变红，而不是完全信任"没人管就自动没事"。
+`enforce_admins: false` 保留仓库 owner（admin 权限）直接推 main 不受影响（[CLAUDE.md] §六交互式会话默认直推的约定不变，管理员天然绕过 required checks）；只对 PR 合并生效。修复已按建议做完验证（2026-09-05，测试 PR #82）：故意弄红 `make build` 后，auto-merge 真的等在 `BLOCKED` 不合并，验证完已关闭删除。此前"修复落地前需人工留意合并后 `gh pr checks <n>` 是否变红"的临时提醒随修复生效撤销。
 
 ## `gh pr merge` 非交互执行
 
