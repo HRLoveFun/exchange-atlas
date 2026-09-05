@@ -2417,15 +2417,21 @@
     },
     "risks": {
       "fx_risk_note": {
-        "zh": "澳元为自由浮动货币，与大宗商品价格及利差交易情绪相关性较高，波动性通常高于美元/欧元等主要货币，但未附官方来源量化，属一般性知识",
-        "en": "The Australian dollar floats freely and is relatively correlated with commodity prices and carry-trade sentiment, typically more volatile than major currencies such as USD/EUR; general knowledge, not sourced to an official quote",
-        "confidence": "low",
-        "verified": "2026-08-14",
+        "zh": "澳大利亚实行浮动汇率制，澳元汇率在外汇市场上由澳元的供求决定（澳联储官方 explainer，见 sources）。对非澳元投资者：澳股以澳元计价结算，承担澳元兑投资者本币的汇率风险",
+        "en": "Australia has a floating exchange rate: movements in the Australian dollar exchange rate are determined by the demand for, and supply of, Australian dollars in the foreign exchange market (RBA explainer, see sources). For non-AUD investors: ASX-listed securities are denominated and settled in AUD, carrying AUD exchange-rate risk against the investor's currency",
+        "quote": "Australia has a floating exchange rate, which means that movements in the Australian dollar exchange rate are determined by the demand for, and supply of, Australian dollars in the foreign exchange market.",
+        "sources": [
+          {
+            "title": "Drivers of the Australian Dollar Exchange Rate（RBA 官方 explainer，浮动汇率制定性表述；直连 403，经 wayback 2021-02-18 快照取文）",
+            "url": "https://www.rba.gov.au/education/resources/explainers/drivers-of-the-aud-exchange-rate.html",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "political_risk_note": {
         "zh": "澳大利亚为稳定发达的议会制民主体制，制度与法治风险低，无征收、国有化或资本冻结类政治风险；对本市场投资者而言，政治风险主要体现为政策/监管变动渠道——如联邦预算宣布自 2027 年 7 月废止 CGT 长期折扣、外国投资审查（FIRB）门槛与审查力度的调整、以及审慎监管取向变化。此类变动经正式立法程序，可预期性较强，但会影响税后收益与外资准入",

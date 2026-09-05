@@ -2530,15 +2530,21 @@
     },
     "risks": {
       "fx_risk_note": {
-        "zh": "巴西雷亚尔（BRL）历史波动性较高，属新兴市场货币；以其他币种计价资产为主的境外投资者持有BRL计价资产存在汇率风险；B3的美元远期市场与美元期货是常见对冲工具",
-        "en": "The Brazilian real (BRL) is a historically volatile emerging-market currency; foreign investors holding BRL-denominated assets are exposed to FX risk against their home currency; B3's US Dollar forward market and US Dollar futures are common hedging instruments",
-        "confidence": "low",
-        "verified": "2026-08-16",
+        "zh": "巴西实行浮动汇率制；与通胀目标制相一致，巴西央行不为决定汇率水平而干预外汇市场，但可动用多种工具以遏制过度波动或向市场提供对冲与流动性（BCB 官方外汇政策页，见 sources）。对非雷亚尔投资者：B3 上市证券以雷亚尔计价结算，承担雷亚尔兑投资者本币的汇率风险",
+        "en": "The Brazilian economy operates with a floating exchange rate regime; consistent with the inflation-targeting regime, the BCB does not intervene in the FX market to determine the exchange rate level, though it may use several instruments to reduce excessive volatility or provide FX hedge and liquidity to market agents (BCB FX policy page, see sources). For non-BRL investors: B3-listed securities are denominated and settled in BRL, carrying BRL exchange-rate risk against the investor's currency",
+        "quote": "The Brazilian economy operates with a floating exchange rate regime and—consistent with the inflation-targeting regime—the BCB does not intervene in the FX market to determine the exchange rate level.",
+        "sources": [
+          {
+            "title": "Foreign exchange policy（BCB 官方外汇政策页；直连为 JS 壳，经渲染代理取全文）",
+            "url": "https://www.bcb.gov.br/en/financialstability/fxpolicy",
+            "accessed": "2026-09-05"
+          }
+        ],
+        "confidence": "high",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
-        "detail": null,
-        "quote": null,
-        "sources": null
+        "detail": null
       },
       "political_risk_note": {
         "zh": "巴西为联邦民主共和国，政策与监管环境总体稳定但受选举周期与财政/税制改革影响；国有企业（如Petrobras、Banco do Brasil、Eletrobras）在指数中权重较大，其治理与政治干预风险可能影响市场。整体属新兴市场政治风险，但CVM/B3监管框架成熟。",

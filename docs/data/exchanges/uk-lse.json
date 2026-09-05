@@ -1944,14 +1944,19 @@
             "title": "EXCHANGE CONTROLS, HC Deb 23 October 1979 vol 972 cc202-14（英国议会官方 Hansard 记录，外汇管制全面撤销的一手原文）",
             "url": "https://api.parliament.uk/historic-hansard/commons/1979/oct/23/exchange-controls",
             "accessed": "2026-09-05"
+          },
+          {
+            "title": "CFM12060 - Understanding corporate finance: foreign exchange: floating exchange rates（gov.uk HMRC 官方手册：包括英镑在内的全球主要货币相互自由浮动）",
+            "url": "https://www.gov.uk/hmrc-internal-manuals/corporate-finance-manual/cfm12060",
+            "accessed": "2026-09-05"
           }
         ],
         "quote": "I have now decided to remove all the remaining exchange control restrictions from midnight tonight",
+        "detail": "「自由浮动」的制度表述以 gov.uk HMRC 官方手册逐字句（『Today, the world’s major currencies, including the pound sterling, the euro and the US dollar, float freely against each other』）作据；BoE 官网无汇率制度定性专页（只有行情数据库），按 [ADR-079] 口径（非央行一手）封顶 medium。",
         "confidence": "medium",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
-        "detail": null
+        "spec": null
       },
       "political_risk_note": {
         "zh": "英国对俄制裁曾直接导致LSE按自身规则暂停特定证券交易：2022年3月3日，交易所依《伦敦证券交易所规则》第1510条，援引「俄乌事件相关制裁、市场状况恶化、维护市场平稳运行」为由，即时暂停约20只俄罗斯公司GDR/ADR（含Gazprom、Lukoil、Novatek、Norilsk Nickel、PhosAgro等）的交易准入，是地缘政治/制裁风险直接作用于LSE挂牌证券交易资格的一手实证",

@@ -58,7 +58,7 @@
 
 （填数据时遇到查不清的，按下面格式加条目；`make sync` 会额外从 `data/` 里 `confidence: low` 或空字段生成一份自动清单，附在下面，不需要手动同步那部分）
 
-- **[ADR-079] 风险旗标数据子棒执行残留（2026-09-05，15/28 字段完成后暂存，进度明细见 ROADMAP §三）：** ① 剩余 13 字段——`kr-krx` fx+enforcement、`tw-twse` fx+political、`cn-sse`/`cn-szse` political+enforcement、`au-asx`/`br-b3`/`ch-six`（fx，`ch-six` 另有 political E 组）、`sa-tadawul`/`uk-lse` fx；⚠️ `tw-twse.political_risk_note` 涉及两岸政治表述，留待人工/独立复核裁量，不要由代理会话擅自填写分析性内容。② 升 high 路径——`za-jse`/`us-nyse`/`us-nasdaq` fx 现以第三方/操作记录口径标 medium，需 IMF AREAER de jure 分类原文（elibrary.imf.org 直连 403、wayback 可达但具体报告编号未定位；imf.org 主站对 curl 403）。③ `fr-euronext` fx 的 NOK 部分需 Norges Bank 对克朗汇率制度的定性原文（专题页无制度性表述，`norges-bank.no` 暂未登记）。④ 取数坑复述——MAS 主站全站 Maintenance 壳（200 + 854KB，会绕过 fetch.py `looks_blocked`，勿全所盲刷）、SARB `/content/dam/` PDF 被 WAF 拦（Request Rejected，wayback 可用）、nseindia 对 curl 反爬复活（全站 22KB 恒定壳页，`make fetch` 会覆盖好缓存，坏缓存已清理退 CACHE_MISS）。
+- **[ADR-079] 风险旗标数据子棒执行残留（2026-09-05，27/28 字段完成，进度终态见 ROADMAP §三）：** ① 唯一剩余——`tw-twse.political_risk_note` 按用户拍板留第二人独立复核裁量，代理会话不填（涉及两岸政治表述）。② 升 high 路径——`za-jse`/`us-nyse`/`us-nasdaq` fx（IMF AREAER de jure 分类原文：elibrary.imf.org 直连 403、wayback 可达但报告编号未定位）；`fr-euronext` fx 的 NOK 部分（Norges Bank 克朗汇率制度定性原文，专题页无制度性表述）；`uk-lse` fx（BoE 官网无汇率制度定性专页，只有行情数据库——如日后 BoE 发布制度表述可替换 gov.uk HMRC 出处）。③ 回填待办——`kr-krx.enforcement_note` 被删的无券卖空执法史（暂停/恢复/NS 制度）待 FSS 官方英文年报或新闻稿原文；`ch-six.political_risk_note` 已清空，admin.ch/eda.admin.ch（Akamai 403）与 ch.ch（JS 壳）均拿不到政治体制正文，待人工提供瑞士联邦宪法或联邦官方页原文。④ 取数坑存档——MAS 主站全站 Maintenance 壳（200 + 854KB，会绕过 fetch.py `looks_blocked`，勿全所盲刷）、SARB `/content/dam/` PDF 被 WAF 拦（Request Rejected，wayback 可用）、nseindia 对 curl 反爬复活（全站 22KB 恒定壳页，`make fetch` 会覆盖好缓存，坏缓存已清理退 CACHE_MISS）、bcb.gov.br 全站 React 壳（r.jina.ai 渲染代理可取全文，缓存为 .md）。
 
 - **[ADR-043] 第五章三字段回填时几家未坐实到官方一手英文原文，均已如实标 `medium`/`low` 并附 `detail`，集中记此备查：**
   - `kr-krx` `error_trade_rule` / `order_book_transparency`（均 `low`，已进自动清单）：KRX Business Regulation 主要为韩文，官网英文『Publication of Quotation Information』『Liquidity Provider』等栏目为 JS 导航壳、无正文。已知结构：KRX 设误单救济制度（源于 2013 HanMag 事件）+ 技术故障直接撤单权（2025 扩至债券市场）；订单簿为多档公开、无冰山/隐藏。**待人工提供**：KRX 官方英文《KOSPI/KOSDAQ Market Business Regulation》或其 Enforcement Rules 中「erroneous trade / trade cancellation」「market data / quotation dissemination」章节原文。
@@ -152,17 +152,12 @@
     - `sg-sgx market_structure.derivatives.holidays_note`：sgx.com 交易日历页 SPA 空壳（同第 30 条结构性受阻），与合约规格 PDF 一并待人工投喂。
 
 <!-- BEGIN:GENERATED auto-issues -->
-- `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `br-b3` 基本信息 / 夏令时规则（dst_rule）— confidence: low
 - `br-b3` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
-- `br-b3` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `ch-six` 基本信息 / 夏令时规则（dst_rule）— confidence: low
 - `ch-six` 基本信息 / 结算货币（settlement_currency）— confidence: low
-- `ch-six` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `ch-six` 风险与特殊考量 / 政治、地缘与制裁风险（political_risk_note）— confidence: low
 - `cn-sse` 监管与法律环境 / 自律组织（self_regulatory_org）— confidence: low
 - `cn-szse` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
-- `cn-szse` 风险与特殊考量 / 政治、地缘与制裁风险（political_risk_note）— confidence: low
 - `cn-szse` 风险与特殊考量 / 流动性风险（liquidity_risk_note）— confidence: low
 - `de-eurex` 市场数据与技术基础设施 / 历史系统故障事件（major_outage_history）— confidence: low
 - `fr-euronext` 基本信息 / 结算货币（settlement_currency）— confidence: low
@@ -177,13 +172,9 @@
 - `kr-krx` 市场数据与技术基础设施 / 接入方式（access_methods）— confidence: low
 - `kr-krx` 交易成本与税费 / 佣金结构（commission_structure）— confidence: low
 - `kr-krx` 交易成本与税费 / 清算费用（clearing_fees）— confidence: low
-- `kr-krx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `kr-krx` 风险与特殊考量 / 市场操纵与监管执法环境（enforcement_note）— confidence: low
 - `sa-tadawul` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low
 - `sa-tadawul` 市场数据与技术基础设施 / 历史系统故障事件（major_outage_history）— confidence: low
-- `sa-tadawul` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `tw-twse` 监管与法律环境 / 外资准入与持股比例限制（foreign_ownership_limit）— confidence: low
 - `tw-twse` 清算、结算与交割 / 初始保证金制度（initial_margin_practice）— confidence: low
-- `tw-twse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `us-nasdaq` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 <!-- END:GENERATED auto-issues -->
