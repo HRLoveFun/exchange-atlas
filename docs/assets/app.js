@@ -1964,6 +1964,8 @@
   // CJK 按字数断行、拉丁按空格断行；最多 maxLines 行，超出末行省略号
   function llWrap(s, per, maxLines) { return wrapByCharBudget(s, per, maxLines); }
   // 时长 spec → { months, label } | { none: true } | null
+  // bound（2026-09-05 迭代）：spec 声明 value 是上限/下限时标签加 ≤/≥ 前缀——
+  // 「no more than 40 个营业日」不能被读成「恰好 40」（独立复核 D4 维度的渲染侧）。
   function llDurInfo(env) {
     var sp = env && env.spec;
     if (!sp) return null;
@@ -1974,7 +1976,8 @@
       months: t("个月", " mo"), weeks: t(" 周", " wk"), business_days: t(" 个工作日", " business days"),
       trading_days: t(" 个交易日", " trading days"), calendar_days: t(" 日", " days")
     })[sp.unit] || "";
-    var lbl = (sp.unit === "months" ? "≈ " + sp.value + " " : sp.value) + unitTxt;
+    var pre = sp.bound === "upper" ? "≤ " : sp.bound === "lower" ? "≥ " : "";
+    var lbl = pre + (sp.unit === "months" ? "≈ " + sp.value + " " : sp.value) + unitTxt;
     return { months: sp.value * per, label: lbl.trim() };
   }
   function llBoardName(b) {
@@ -2009,8 +2012,14 @@
         g += '<text x="' + llN(x + w / 2) + '" y="' + llN(by0 + i * 10) + '" text-anchor="middle" class="ll-phase-s">' + esc(ln) + "</text>";
       });
     } else if (opts.sub) {
-      var sw = /[一-鿿]/.test(opts.sub) ? Math.floor((w - 10) / 9.5) : Math.floor((w - 10) / 5);
-      g += '<text x="' + llN(x + w / 2) + '" y="' + llN(cy + 3.5) + '" text-anchor="middle" class="ll-phase-s">' + esc(spClip(opts.sub, Math.max(4, sw))) + "</text>";
+      // 2026-09-05 迭代（[ADR-059] 已知局限①）：散文无 spec 的阶段块由单行
+      // 硬裁剪改为按像素宽度折 3 行（全文仍在 <title> + 浮层）——词边界折行，
+      // 不再把 "This field captur…" 从词中间切断。
+      var subLines = wrapByPixelWidth(opts.sub, w, 3);
+      var sy0 = cy + 3.5 - (subLines.length - 1) * 5;
+      subLines.forEach(function (ln, i) {
+        g += '<text x="' + llN(x + w / 2) + '" y="' + llN(sy0 + i * 10) + '" text-anchor="middle" class="ll-phase-s">' + esc(ln) + "</text>";
+      });
     }
     return path ? llCell(id, path, g, opts.title) : ("<g>" + (opts.title ? "<title>" + esc(opts.title) + "</title>" : "") + g + "</g>");
   }
@@ -2157,9 +2166,12 @@
     g.push(llNode(bandX, bandY, "solid", "var(--accent)", t("挂牌", "Listed")));
     if (has(suspEnv)) {
       var loopX = bandX + bandW * 0.52;
+      // ↻ 回环加琥珀底圈（2026-09-05 迭代，[ADR-059] 已知局限②）：此前字形悬空
+      // 在存续带上、暗色主题下偏淡，加 --warn-soft 圆底 + 描边承载视觉信号。
       g.push(llCell(id, "suspension_resumption",
+        '<circle cx="' + llN(loopX) + '" cy="' + llN(bandY) + '" r="12" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1"/>' +
         '<text x="' + llN(loopX) + '" y="' + llN(bandY + 6) + '" text-anchor="middle" class="ll-loop-glyph">↻</text>' +
-        '<text x="' + llN(loopX) + '" y="' + llN(bandY - 16) + '" text-anchor="middle" class="ll-loop-k">' + esc(t("停牌 / 复牌", "Halt / resume")) + "</text>",
+        '<text x="' + llN(loopX) + '" y="' + llN(bandY - 20) + '" text-anchor="middle" class="ll-loop-k">' + esc(t("停牌 / 复牌", "Halt / resume")) + "</text>",
         t("停牌 / 复牌规则", "Suspension / resumption") + sep() + spClip(dv(suspEnv), 120)));
     }
     g.push(llNode(triggerX, bandY, "diamond", "var(--danger)", t("退市触发", "Delisting trigger"), { above: true }));

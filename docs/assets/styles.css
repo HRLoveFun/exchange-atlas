@@ -450,7 +450,7 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
 .ll-svg .ll-node-s { font-size: 9.5px; fill: var(--fg-muted); }
 .ll-svg .ll-tier { font-size: 9.5px; fill: var(--info); font-weight: 600; }
 .ll-svg .ll-loop-k { font-size: 10px; font-weight: 700; fill: var(--warn); }
-.ll-svg .ll-loop-glyph { font-size: 17px; font-weight: 700; fill: var(--warn); }
+.ll-svg .ll-loop-glyph { font-size: 18px; font-weight: 700; fill: var(--warn); }
 .ll-svg .ll-dur { font-size: 9.5px; font-family: var(--font-mono); fill: var(--fg-muted); }
 .ll-svg .ll-callout-k { font-size: 9.5px; font-weight: 700; fill: var(--danger); }
 .ll-svg .ll-callout-v { font-size: 10px; fill: var(--fg); }
