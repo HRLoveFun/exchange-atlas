@@ -97,6 +97,7 @@
 - ADR-090 · 2026-09-05 · 市场机制剖面：现货 / 衍生品业务线切换（渲染层落地）
 - ADR-091 · 2026-09-05 · 上市生命周期模块迭代：8 个时长 spec 独立复核订正 + 时长 spec 扩容 8 处（含 `bound` 口径键）+ 散文块折行与停复牌 ↻ 视觉修订
 - ADR-092 · 2026-09-05 · OQ #45 四家旗舰所衍生品覆盖缺口落地：products 条目 + 两 derivatives 子章 + 盲审订正
+- ADR-093 · 2026-09-06 · 折行函数 `wrapByCharBudget` 改 token 折行：中英混排不再从拉丁词 / 数字中间切断
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2576,7 +2577,7 @@ print('全库 medium 零 sources:',n)
 
 ---
 
-### ADR-PENDING-llwrap-mixed-wrap — 折行函数 `wrapByCharBudget` 改 token 折行：中英混排不再从拉丁词 / 数字中间切断
+### ADR-093 — 折行函数 `wrapByCharBudget` 改 token 折行：中英混排不再从拉丁词 / 数字中间切断
 
 **背景：** `wrapByCharBudget`（旧名 `llWrap` 的核心逻辑，[ADR-085] 抽取为 ll / rm / pt / rf 四个可视化模块共用的 SVG 文本折行预算函数）的旧实现是**二分支**：串里含任一 CJK 表意字（`/[一-鿿]/.test(s)`）→ 整串按 `per` 逐字硬切（`s.slice(i, i+per)`）；否则按空格贪心折词。中英混排的散文走第一条分支，`per` 字一刀，把嵌在中文里的拉丁词 / 数字从词中截断——`Recognis|ed`、`CMN 4.37|3`、`Exchange Partic|ipant`、`±|10%`。[ADR-059] / [ADR-061] / [ADR-064] / [ADR-066] 四条渲染层 ADR 都把这列为已知局限（[ADR-061] 局限④，其余三条镜像同一句「四模块共用 `llWrap` 的既有局限，改需多模块一起上混排折行，超出本棒范围」）。[ADR-085] 把四模块的折行逻辑收敛到同一个函数后，这件事从「多模块一起改」变成「一处改、四处受益」，前提解除。
 

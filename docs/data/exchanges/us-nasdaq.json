@@ -244,7 +244,7 @@
             "accessed": "2026-08-14"
           }
         ],
-        "verified": "2026-08-14",
+        "verified": "2026-09-05",
         "enum": null,
         "spec": null,
         "quote": null
@@ -1054,7 +1054,7 @@
             ],
             "quote": "(4) \"Eligible Interest\" shall mean any quotation or any order that may be entered into the system and designated\nwith a time-in-force of IOC (immediate-or-cancel), DAY (day order), GTC (good-till-cancelled), and OPG (On\nthe Open Order).\n",
             "confidence": "medium",
-            "verified": "2026-08-14",
+            "verified": "2026-09-05",
             "enum": null
           },
           "continuous_am": {
@@ -1073,7 +1073,7 @@
             ],
             "quote": "Orders and bids and oﬀers shall be open and available for execution as of 9:30 a.m. Eastern Time and shall\nclose as of 4:00 p.m. Eastern Time except for option contracts on certain fund shares or broad-based indexes\nwhich will close as of 4:15 p.m. Eastern Time.\n",
             "confidence": "medium",
-            "verified": "2026-08-14",
+            "verified": "2026-09-05",
             "enum": null,
             "detail": null
           },
@@ -1092,7 +1092,7 @@
             ],
             "quote": "Orders and bids and oﬀers shall be open and available for execution as of 9:30 a.m. Eastern Time and shall\nclose as of 4:00 p.m. Eastern Time except for option contracts on certain fund shares or broad-based indexes\nwhich will close as of 4:15 p.m. Eastern Time.\n",
             "confidence": "medium",
-            "verified": "2026-08-14",
+            "verified": "2026-09-05",
             "enum": null,
             "detail": null
           },
@@ -1140,7 +1140,7 @@
             ],
             "quote": "Equity Options 9:30 a.m. ET to 4:00 p.m. ET ETF & ETN Options 9:30 a.m. ET to 4:00 p.m. ET* Index\nOptions 9:30 a.m. ET to 4:00 p.m. ET* World Currency Options 9:30 a.m. ET to 4:00 p.m. ET\n",
             "confidence": "medium",
-            "verified": "2026-08-14",
+            "verified": "2026-09-05",
             "enum": null
           },
           "night_session": {
@@ -1159,7 +1159,7 @@
             ],
             "quote": "Equity Options 9:30 a.m. ET to 4:00 p.m. ET ETF & ETN Options 9:30 a.m. ET to 4:00 p.m. ET* Index\nOptions 9:30 a.m. ET to 4:00 p.m. ET* World Currency Options 9:30 a.m. ET to 4:00 p.m. ET\n",
             "confidence": "medium",
-            "verified": "2026-08-14",
+            "verified": "2026-09-05",
             "enum": null,
             "detail": null
           }
@@ -1379,7 +1379,7 @@
         },
         "trading_halt_mechanism": {
           "zh": "期权随标的暂停：标的证券被触发 LULD 交易暂停时，NOM/NTX Options（Nasdaq ISE）与 PHLX 暂停相应期权交易，复牌时执行与常规开盘类似的开盘流程（Opening/Halt Cross）；暂停期间保留全部未成交订单、清除做市商报价，可接受新订单/报价/撤改；标的处于 Limit/Straddle 状态时期权不开盘；指数期权另有自设停牌标准——宽基指数成分（按加权值）超过 20%、其他指数超过 10% 的标的证券被停牌时，该指数期权交易暂停或中止",
-          "en": "Options halt with the underlying: when a LULD trading pause has been initiated on an underlying security, NOM, NTX Options (Nasdaq ISE) and PHLX pause trading in the corresponding options and commence an opening process similar to the normal options opening upon resumption; open orders are kept, standing market maker quotes are purged, and new orders/quotes/cancel-replaces are accepted during the pause; an option will not open while the underlying NMS stock is in a Limit or Straddle state; index options additionally halt whenever trading in underlying securities representing more than 20% (broad-based) or 10% (all other indices) of weighted index value is halted",
+          "en": "Options halt with the underlying: when a LULD trading pause has been initiated on an underlying security, NOM, NTX Options (Nasdaq ISE) and PHLX pause trading in the corresponding options and commence an opening process similar to the normal options opening upon resumption; open orders are kept, standing market maker quotes are purged, and new orders/quotes/cancel-replaces are accepted during the pause; an option will not open while the underlying NMS stock is on a Limit or Straddle state; index options additionally halt whenever trading in underlying securities representing more than 20% (broad-based) or 10% (all other indices) of weighted index value is halted",
           "sources": [
             {
               "title": "Limit Up-Limit Down FAQ（PDF，Options 一节）",
@@ -1392,7 +1392,7 @@
               "accessed": "2026-09-05"
             }
           ],
-          "quote": "Yes. NOM, NTX Options and PHLX pause trading in options when a trading pause has been initiated on an underlying security.\n／ NOM, NTX Options and PHLX commence an opening process similar to the normal options opening when a trading resumption\n(Trading Action = T) message is received over the UTP data feeds. ／ Yes. NOM, NTX Options and PHLX will keep all open\norders during the pause. Firms have the ability to cancel open orders. ／ Trading on NOM in any index option shall be\nhalted or suspended whenever trading in underlying securities whose weighted value represents more than twenty percent\n(20%), in the case of a broad based index, and ten percent (10%) for all other indices, of the index value is halted or\nsuspended.\n",
+          "quote": "Yes. NOM, NTX Options and PHLX pause trading in options when a trading pause has been initiated on an underlying security.\n／ NOM, NTX Options and PHLX commence an opening process similar to the normal options opening when a trading resumption\n(Trading Action = T) message is received over the UTP data feeds. ／ Yes. NOM, NTX Options and PHLX will keep all open\norders during the pause. Firms have the ability to cancel open orders. ／ Trading on NOM in any index option shall be\nhalted or suspended whenever trading in underlying securities whose weighted value represents more than twenty percent\n(20%), in the case of a broad based index, and ten percent (10%) for all other indices, of the index value is halted or\nsuspended. ／ Q: Will an option open if the underlying NMS stock is on a Limit or Straddle state?\nNo\n",
           "confidence": "high",
           "verified": "2026-09-05",
           "enum": null,
@@ -1402,6 +1402,7 @@
         "block_trade": {
           "zh": "",
           "confidence": "low",
+          "verified": "2026-09-05",
           "detail": "所引 NOM 规则书快照中未见期权大宗交易（block trade）设施或最低门槛条款，本次亦未找到 Nasdaq 期权市场大宗交易的官方原文，按铁律留空不猜。",
           "sources": [
             {
@@ -1410,7 +1411,6 @@
               "accessed": "2026-08-14"
             }
           ],
-          "verified": "2026-08-14",
           "en": null,
           "enum": null,
           "spec": null,
@@ -1461,10 +1461,10 @@
           "detail": null
         },
         "connect_schemes": {
-          "zh": "无（未找到关于本所挂牌期权/衍生品跨境互联互通安排的官方说明；美股市场亦无 Stock Connect 类跨境通道，与顶层 connect_schemes 同判）",
-          "en": "None (no official statement on cross-border Connect-style arrangements covering options listed on the Nasdaq options markets; the US market has no Stock Connect-type cross-border channel, consistent with the top-level connect_schemes)",
-          "detail": "负面断言按顶层 connect_schemes 同一处理方式：无官方明文可引，不作穷举性正面化。",
-          "confidence": "medium",
+          "zh": "",
+          "confidence": "low",
+          "detail": "未找到关于本所挂牌期权/衍生品跨境互联互通安排的官方说明；盲审复核后按 [ADR-082] 棒 2 判据裁定：纯否定断言且无穷举性原文支撑，不作正面化填实，维持留空（与 us-nyse 同款处置）——此前 medium「无」入库系跨文件口径不一致，独立复核 QUESTION 经协调者裁定降级。",
+          "verified": "2026-09-05",
           "sources": [
             {
               "title": "The Nasdaq Stock Market（交易机制总览页）",
@@ -1472,7 +1472,7 @@
               "accessed": "2026-08-14"
             }
           ],
-          "verified": "2026-08-14",
+          "en": null,
           "enum": null,
           "spec": null,
           "quote": null

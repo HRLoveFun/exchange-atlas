@@ -477,7 +477,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-16",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -2907,7 +2907,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-14",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -3672,7 +3672,7 @@
       "enum": null,
       "enum_ref": null,
       "has_detail": false,
-      "verified": "2026-08-12",
+      "verified": "2026-09-05",
       "confidence": "medium"
     },
     {
@@ -6506,7 +6506,7 @@
       "en": "Primarily GBP, settled via CREST (operated by Euroclear UK & International); certain instruments have multi-currency settlement arrangements",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-14",
       "confidence": "medium"
     },
@@ -6911,9 +6911,9 @@
       "en": "USD",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-14",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "us-nasdaq",
@@ -6926,9 +6926,9 @@
       "en": "USD",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-14",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "us-nasdaq",
@@ -7301,9 +7301,9 @@
       "en": "USD",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-13",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "us-nyse",
@@ -7316,9 +7316,9 @@
       "en": "USD",
       "enum": null,
       "enum_ref": null,
-      "has_detail": false,
+      "has_detail": true,
       "verified": "2026-08-13",
-      "confidence": "medium"
+      "confidence": "low"
     },
     {
       "exchange_id": "us-nyse",

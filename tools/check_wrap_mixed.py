@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """tools/check_wrap_mixed.py — 锁住 docs/assets/app.js `wrapByCharBudget` 的
-中英混排折行不变式（[ADR-PENDING-llwrap-mixed-wrap]）。
+中英混排折行不变式（[ADR-093]）。
 
 背景：`wrapByCharBudget` 是 ll / rm / pt / rf 四个可视化模块共用的 SVG 文本折行
 预算函数（[ADR-085] 抽取）。它原来的实现「串里含任一 CJK 字符 → 整串按 per 逐字
@@ -148,7 +148,7 @@ def main():
         for ln in out.splitlines():
             if ln != "FAIL":
                 print(ln if ln.startswith("  ") else "  " + ln)
-        print("\n  见 [ADR-PENDING-llwrap-mixed-wrap]：拉丁词 / 数字 token 不得从中间"
+        print("\n  见 [ADR-093]：拉丁词 / 数字 token 不得从中间"
               "切；纯 CJK 折行须与精确 per 切片逐字一致。")
         return 1
     print("[check-wrap-mixed] OK — 混排不切词 + 纯 CJK 逐字对齐")
