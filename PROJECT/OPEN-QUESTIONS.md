@@ -132,6 +132,8 @@
   - `in-nse price_limits.other_boards` "NSE Emerge 沿用与主板同一套分类框架"的断言在 `.cache/in-nse/` 里只找到导航栏"Emerge Platform"字样、无正文支撑；印度 SME 板块实践中常有独立于主板的涨跌幅安排，待人工核对 SEBI/NSE Emerge 专属规则原文再定案。
   - （软性，非阻塞）`fr-euronext`/`uk-lse` 的 `block_trade` confidence 评级不对称（medium vs high），两者结构相似（门槛均由欧盟/英国 MiFIR 层级设定、非交易所自定），未见显式判断依据说明；`hk-hkex dark_pool` 的"第 1 类+第 7 类牌照""合资格投资者仅限机构"两处细节写入了 zh/en 主文而非仅限 `detail`，独立来源（SFC《操守准则》第 19 段/附表 8）本次未逐字缓存。
   - （系统性，跨多家）`connect_schemes` 的消极认定条目（`au-asx`/`br-b3`/`ch-six`/`de-xetra`/`jp-jpx`/`sa-tadawul` 共 6 处）普遍未填 `sources`，会静默继承与断言主题无关的章节级默认来源（`market_structure._meta.sources`，通常是交易时段页面），使"moderate 必须有 sources"的校验对这类字段形同虚设——建议给消极认定类字段设计专门的来源占位方式，本次未处理（跨 6 个文件的结构性调整超出复核范围）。
+- **[ADR-PENDING-risk-flags-data-plan] 「`confidence: medium` 却零 `sources`」的全库缺口：按 `validate` 展开后口径 64 处，且 100% 是 `volatility: stable` 字段（2026-09-05 实算）。** 校验 4 只要求 `volatile`/`moderate` 有 `sources`，`stable` 一档不设约束——头部是 `overview.timezone` 16 / `overview.settlement_currency` 16 / `overview.dst_rule` 14 / `overview.trading_currency` 5 / `regulation.clearing_regulator` 5。`risks.fx_risk_note`（同为 `stable`）近全库停在无来源的 `low` 而 `make check` 一路全绿，正是踩在这个缺口上。与上面 [ADR-074] 复核者提的「消极认定类字段静默继承章节 `_meta.sources`」是同一族问题的两面：一面是**没有来源也不报错**（`stable` 档），一面是**继承来了一个与断言无关的来源**（`moderate` 档，靠 `expand_field` 继承）。风险旗标数据子棒只在第 12 章加限定不变式（该章 `confidence` 已被 [ADR-066] 轴 3 做成一等视觉信号），**不代解全库**：`stable` 字段里「时区 / 币种 / 夏令时」这类确实近乎常识、是否值得逐条补源需要单独判断，别为了让校验好看而批量塞首页 URL（`PROJECT/SOURCES.md`「来源 URL 要精确到信息页」）。**待拍板**：是否把「`stable` 且 `medium` 须有来源」立为独立回填棒，还是承认这 64 处是可接受的常识层。
+
 <!-- BEGIN:GENERATED auto-issues -->
 - `au-asx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `br-b3` 基本信息 / 夏令时规则（dst_rule）— confidence: low

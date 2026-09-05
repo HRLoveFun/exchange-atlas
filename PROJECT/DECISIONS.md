@@ -82,6 +82,8 @@
 - ADR-075 · 2026-09-05 · 抓取基础设施：`fetch.py` OTP 两步 + wayback 回退 + `kr-krx`/`za-jse` 缓存重建（数据空缺复核轨任务五）
 - ADR-076 · 2026-09-05 · 并行 worktree 防撞号第二版：ADR 编号占位符 + 合并时自动定号
 - ADR-077 · 2026-09-05 · 来源文件下沉 + 把「靠自觉的约定」变成构建关卡
+- ADR-078 · 2026-09-05 · 数据空缺复核轨任务四执行方案：5 家旗舰所深度补全的字段级现状核实 + 按字段族批量回填设计
+- ADR-079 · 2026-09-05 · 数据空缺复核轨任务三执行方案：C 桶 40 处按「上次卡在哪」重排为五棒 + 三处范围裁定
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2017,6 +2019,115 @@
 - **不给 ROADMAP §三 详版加长度上限。** §三 本来就该详，不违反「同一事实只写一遍」原则，加上限是无依据的规训。
 
 **验证：** `make build` 全绿；`make sync` 二次幂等零 diff；`selfcheck` 48→68（来源分片配对 6 条 + INBOX 行长 8 条正负向用例）；迁移零丢失断言全过（拼接比对）；端到端验活 `make fetch EX=cn-sse`（28/29，唯一 FAIL 为 csrc.gov.cn 外部 301，环境因素）与 `EX=za-jse`（25/34，jse.co.za Cloudflare 拦截为已知环境限制，[ADR-075] 已记录）均正常走通新分片读取链路——验活顺带暴露并修复一处潜伏问题：za-jse 探测记录里 `Referer: https://www.google.com/` 的 URL 被反引号包裹、`URL_RE` 把收尾反引号误捕进 URL（迁移前即存在，去反引号修复）；反向验活：临时删除一个分片 make check 即红（校验 17 报「缺少来源分片」）、恢复复绿。
+
+**日期：** 2026-09-05
+
+---
+
+### ADR-PENDING-risk-flags-data-plan — 风险旗标数据子棒的落地方案：第 12 章 `*_note` 「制度核 / 分析尾」二分 + `fx_risk_note` 就地清作业规程
+
+**为什么需要：** [ADR-066] 轴 6 把 `fx_risk_note` 就地清定为**独立数据层子棒**、留给后续棒，`PROJECT/ROADMAP.md` §一「下一步」#1 点名并附一句要求——「触及约 22 字段（近 [CLAUDE.md §四] 的 30 字段第二人复核门槛，**回填前先估清**）」。本条就是那次「估清」+ 作业规程，仍为纯文档棒（零 `data/` 改动，同 [ADR-066] 设计棒的处置）。
+
+真正的紧迫性来自渲染层：[ADR-066] 分棒② 已把 `confidence` 做成第 12 章面板的**一等视觉信号**（`rfFlag` 旗标填充度四态）。这意味着该章每一格的 `confidence` 现在**直接进图**——`fx_risk_note` 近全库 `low` 会让 20 家面板的「交易层面」泳道恒显空心旗标 + 斜纹卡底，跨市场切换时这一格读不出任何差异。子棒的目标因此不是「把 low 改成 medium」这个动作，而是**让这一格在图上重新携带信息**。
+
+**实算勘误（估清结果，三点与既有记述不符）**
+
+20 家 × 5 字段 = 100 个字段位：`low` 21 / `medium` 44 / `high` 27 / 空 8。
+
+1. **`fx_risk_note` 的 20 家分布** = 17 `low`（已填）+ **1 空（`uk-lse`）** + 2 `medium`（`fr-euronext` **零 `sources`** / `za-jse` 2 源）。ROADMAP 的「17 家 `low`」准确，但 `uk-lse` 是**空缺**、属补填不属就地清；`fr-euronext` 已 `medium` 却无来源可依。**该字段实质要动 18 家、须 20 家全扫。**
+2. **第 12 章空缺是 8 处不是 5 处。** ROADMAP 点名 `political_risk_note` ×3（`cn-sse`/`hk-hkex`/`tw-twse`）+ `enforcement_note` ×2（`cn-sse`/`cn-szse`），**漏了 `cn-sse.regulatory_change_risk_note` 与 `hk-hkex.liquidity_risk_note`**。按原口径做完，`cn-sse`/`hk-hkex` 两家面板仍各留 1 个虚线框。
+3. **「第 12 章结构性停留 `low`/`medium`」在数据上已不成立**——27 处 `high`（`enforcement_note` 11 / `political_risk_note` 3 / …）。宪法「覆盖边界」段约束的是**分析性内容**（「没有官方文件会写『本国流动性风险是 X』」），不是整章字段；已有的 27 处 `high` 无一例外都是「具名法条 / 具名个案 + 逐字 `quote`」。**这是本方案置信度目标的依据，属对既有条文的读法，不是宪法改动**（宪法可变性程序见 `CLAUDE.md` 文首）。
+
+**定了什么**
+
+1. **`*_note` 的「制度核 / 分析尾」二分写法（本方案核心规则）。** 每条第 12 章 `*_note` 按两段写：
+   - **制度核** —— 写进官方文件、可逐字 `quote` 的制度事实（汇率制度名称与政策主体、具名法条、已执行的处罚 / 制裁 / 暂停个案）。
+   - **分析尾**（可选）—— 定性判断（「历史波动较大」「易受风险情绪影响」）。
+
+   `confidence` 取整条的**下限**：`zh` 里只要留了 `quote` 撑不住的分析尾，整条封顶 `medium`；分析尾删净、只留制度核 + 逐字 `quote`，才可标 `high`。这样 `confidence` 的语义与 [ADR-066] 轴 3 的旗标字形一致——旗标填充度 = 取证程度。
+
+2. **`fx_risk_note` 一律删掉分析尾。** 三条理由：① 分析尾（波动率、风险情绪、「股汇双杀」）正是宪法「覆盖边界」排除的那一层，不据第三方推断填写；② 删掉后多数家的制度核可达 `high`，面板四态才有区分度；③ 现有 17 条里夹着「本次未附官方来源」「属一般性知识」「confidence 标 low」这类**自述性免责**——渲染层已把 `confidence` 画成旗标字形，散文里再写一遍是同一事实两处渲染（`CLAUDE.md` §一）。`political_risk_note` / `enforcement_note` 的分析尾按同规则定 `confidence`，但**不强制删**：这两个字段的制度核（制裁清单、执法个案）常需一句语境才可读。
+
+3. **与既有字段的边界三分——这是「就地清」最实质的一层，不只是补 `sources`。**
+
+   | 字段 | 唯一负责 |
+   |---|---|
+   | `overview.trading_currency` / `settlement_currency` | 计价 / 结算币种 |
+   | `regulation.capital_controls` | 资金跨境进出与换汇的管制、外资准入渠道 |
+   | `risks.fx_risk_note` | **汇率制度本身**（自由浮动 / 联系汇率 / 盯住 / 有管理浮动 / 爬行区间）+ 政策主体 + 一句对非本币投资者的敞口指向 |
+
+   现有 17 条里 `cn-sse` / `cn-szse` / `in-nse` / `tw-twse` / `kr-krx` / `za-jse` 六家在 `fx_risk_note` 复述了 `capital_controls` 已记的事实（`cn-sse` 写「外资参与需通过额度管理渠道」，而 `capital_controls` 已写「须通过 QFII/RQFII 等渠道并委托境内托管人」），属同一事实两处手写（`CLAUDE.md` §一）。就地清要删掉该段、改为交叉引用——`kr-krx`（「见 capital_controls」）与 `za-jse`（「还受外汇管制申报约束（见 capital_controls）」）**已是这个写法，可直接作范式**。
+
+4. **来源优先级与置信度上限（决定每家的抓取目标与终态）。**
+   - **该国央行 / 货币当局官网**（HKMA / MAS / SAMA / SNB / BOK / BOJ / RBI / CBC / RBA / BCB / BoC / ECB / BoE / Fed / SAFE）—— 一手，摘到逐字表述可标 `high`。
+   - **IMF AREAER** —— 按 `PROJECT/SOURCES.md` 的「官方 / 监管 / 第三方」三分，IMF 对某国既非该国官方也非该国监管，是**第三方（国际组织）**：按 `CLAUDE.md` §二 第 3 条，**仅凭 AREAER 的字段封顶 `medium`**，即使摘到逐字 `quote` 也一样（同 `PROJECT/sources/cn-sse.md` 对 `mgzq.com` 镜像件的处置）。AREAER 的正确用法是**兜底与交叉印证，不作主源**。
+   - 因此**每家终态分两级**：拿到央行原文可引 → `high`；只有 AREAER、或央行页无可引正文 → `medium`。**不设「必须全部升 medium/high」的一刀切目标**——查不清仍留空 + 记 `OPEN-QUESTIONS`（`CLAUDE.md` §二 第 4 条）。
+
+5. **来源登记是必经前置工序**（`tools/validate.py` 校验 7：来源域名须已在来源登记中）。17 个候选域名（16 家央行 / 货币当局 + `imf.org`）里 **14 个未登记**，仅 `mas.gov.sg` / `rbi.org.in` / `resbank.co.za` 已有。每家的闭环因此是：先在 `PROJECT/sources/<id>.md` 追加央行域名条目（含抓取备注）→ 再 `make fetch EX=<id>`，否则字段引用会直接 fail。
+
+6. **补一条限定在第 12 章的机器不变式（`CLAUDE.md` §四：新引入的不变式必须加构建关卡）。** 本次暴露的盲区：`fx_risk_note` 的 `volatility: stable` 使它**不受校验 4（`volatile`/`moderate` 必须有 `sources`）约束**——这正是 18 家零来源停在 `low`、而 `make check` 一路全绿的原因。加：**第 12 章 5 字段的 `confidence: medium|high` 必须有 `sources`**；依据是 [ADR-066] 轴 3 已把该章 `confidence` 当一等视觉信号，无据的 `confidence` 会被直接画成错误的旗标。**且要求字段级 `sources`、不接受章节 `_meta` 继承**——`tools/sync.py` `expand_field` 会把章节 `_meta.sources` 继承给未自带来源的字段（这正是 [ADR-074] 复核者已点名的漏洞：消极认定类字段静默继承与断言主题无关的章节默认来源，使校验 4 形同虚设）。第 12 章按字段级口径今日 **2 处**违反（`fr-euronext.fx_risk_note` / `de-eurex.liquidity_risk_note`，后者正是靠章节 `_meta` 继承蒙混、展开后口径只剩 1 处），两处都在或紧邻作业面，落地成本近零。
+   **不折入**全库口径：按 `validate` 展开后口径，`medium` 且零 `sources` 全库 **64 处、且全部是 `volatility: stable`**（头部 `overview.timezone` 16 / `settlement_currency` 16 / `dst_rule` 14 / `trading_currency` 5 / `regulation.clearing_regulator` 5）——`moderate`/`volatile` 已被校验 4 兜住，能零来源的只剩 `stable` 一档，`fx_risk_note` 正是踩在这个缺口上。这是远超本子棒的独立议题，转 `PROJECT/OPEN-QUESTIONS.md`。
+
+7. **不折入 `fx_regime` 枚举 / `spec`**（[ADR-066] 轴 6 已定第 12 章零 `spec`）。但作业时**要求 `quote` 摘到该国官方对本国汇率制度的定性表述原文**（HKMA "Linked Exchange Rate System"、MAS 一篮子货币政策区间、SAMA 盯住美元固定平价…），这样日后若另立枚举棒，20 家原文底稿已在库、零重抓。理由：折入等于当场推翻刚定的设计棒；且枚举会牵动 `schema/enums.yml` + `schema/taxonomy.yml` 的 `enum_ref` + `tools/validate.py` + `progress-matrix` 生成块 + `renderRiskFlags`，与 [ADR-066]「子棒可单独验收」冲突。
+
+8. **作业规程 = 串行、单所闭环**（[ADR-043] 教训：7 路并行子代理瞬间打爆 session limit、零产出）。每家一个闭环：登记域名 → `make fetch EX=<id>` → 读 `.cache/` 原文 → 按二分写法重写 `zh` + 摘 `quote` + 定 `confidence` → 单文件 `validate` → 一个 commit。
+
+**范围三档（第二、三档留用户拍板，本条不代拍）**
+
+- **核心（本子棒，24 字段）** —— `fx_risk_note` 20 家全扫（18 处实质改动：17 就地清 + `uk-lse` 补空 + `fr-euronext` 补源）+ 3 处空 `political_risk_note` + `enforcement_note` low 簇 3 处（`cn-sse`/`cn-szse` 空、`kr-krx` low）。
+- **建议扩容 +2** —— `cn-sse.regulatory_change_risk_note` / `hk-hkex.liquidity_risk_note`：补上后第 12 章 8 处空缺全清、20 家面板零虚线框；两家都在 [ADR-060] 任务四旗舰所名单（并轨目标本就一致）。⚠️ `liquidity_risk_note` **只填官方发布的结构性数据**（成交集中度、做市商覆盖、南向通占比），价差与深度判断按覆盖边界不填、留空记 `OPEN-QUESTIONS`。
+- **顺带 +2** —— `ch-six` / `cn-szse` 的 `political_risk_note` low 就地清。
+
+**验收：** [CLAUDE.md §四] 95% 抽检。实质改动 24 字段（三档全取 ≤ 28）**未过 30 的强制第二人复核线**，但**建议自愿走一次第二人独立复核**——[ADR-054] 实测串行回填初检约 80%、[ADR-074] 任务二初检 91.1%，而本批跨 **17 种货币制度**（AUD/BRL/CAD/CHF/CNY/EUR/HKD/INR/JPY/KRW/SAR/SGD/TWD/GBP/USD/ZAR/NOK）、多语种一手源，个案错误率结构上高于任务二。
+
+**没定 / 留后续：** 该子棒是否为 Phase 4 启动硬前置（[ADR-066] 文末与 ROADMAP §一 #2 已挂起，本条不代拍）；全库 146 处 `medium` 零来源（转 `OPEN-QUESTIONS`）；`fx_regime` 枚举是否另立棒。
+
+**本条不动：** `data/` 与 `docs/data/`（纯方案棒，零数据改动，同 [ADR-066]）；`schema/`；`tools/`（第 12 章不变式随数据子棒**执行**时实装，与 `CLAUDE.md` §四「新引入不变式同批加校验」一致——本条只是方案）；前端；ROADMAP §一（后台任务走 `PROJECT/ROADMAP-INBOX.md`，[ADR-069]）。
+
+**日期：** 2026-09-05
+
+---
+
+### ADR-078 — 数据空缺复核轨任务四执行方案：5 家旗舰所深度补全的字段级现状核实 + 按字段族批量回填设计
+
+**背景：** ROADMAP §三「任务四」（`us-nyse`/`hk-hkex`/`uk-lse`/`cn-sse`/`jp-jpx` 深度补全到 `za-jse` 的「全章 ✅、0 low」基准）自 2026-09-03（[ADR-060]）立项以来只有目标和一句话步骤（"逐所过字段清单，`make fetch` 补抓……"），逐所具体缺哪些字段从未现算过、写在 ROADMAP 里的"约 78 处"与"15/13/13/11/9"是当时对全库 316 处空缺做 A–F 六桶粗分时的估算，其后任务二（[ADR-068]）、成本瀑布残差/长尾（[ADR-065]/[ADR-067]）、抓取基础设施修复（[ADR-075]）等多条轨道已经动过这 5 家的部分字段——不重新现算就直接排期，接手的会话第一步还是要逐所翻一遍 YAML，等于白估。本条不做任何抓取，只把"任务四到底要填哪 78 个字段格子、按什么顺序、找什么来源"这件事坐实成可以直接拿去执行的清单，同棒的方法论也定下来，避免下一个接手的会话重新做这次核实。
+
+**现状核实（脚本现算，非记忆）：** 用 `tools/sync.py` 现成的 `expand_exchange`/`walk_chapter_fields` 对 5 家 `data/exchanges/*.yml` 直接现算「无 `zh` 的 leaf」与「`confidence: low` 的已填 leaf」，口径：① 排除 `market_structure.derivatives.*` 子章——这是任务三 C 桶范围（9 家衍生品子章残余 40 处，穿插 viz 模块之间，[ADR-060]），5 家旗舰所里 `us-nyse`/`uk-lse`/`cn-sse`/`jp-jpx` 也运营衍生品业务线、derivatives 子章同样有残余空缺，但那是任务三的记账，不重复计入任务四；② 排除已标字段级 `not_applicable` 与 leaf 级 `optional` 的字段（[ADR-060]/[ADR-062] 机制）；③ 排除 `risks` 章里已经在 ROADMAP §一「下一步 1」（`fx_risk_note` 数据子棒，与本任务"并轨"排期）范围内、且当次核实时点尚未完工的 8 处——`fx_risk_note`（`us-nyse`/`hk-hkex`/`cn-sse`/`jp-jpx` 四家 `confidence: low`）、`political_risk_note`（`hk-hkex`/`cn-sse` 两处空）、`enforcement_note`（`cn-sse` 一处空）；这 8 处已经排在"下一步 1"的执行范围内，任务四不重复认领，只需等其完工后对这 5 家做一次结果复核（确认确实从 low 升到 medium/high、空的确实已填），不必重新抓取。
+
+净得任务四自身范围 **78 处**——与 ROADMAP 原估算的「约 78 处」总量吻合，验证了扣除口径正确；但逐所分布已随其后各条轨道的进展变化，不再是原文的 15/13/13/11/9，现测得：
+
+| 交易所 | 处数 | 字段清单（`章.字段`，`(low)` 标已填但需升级，其余为空） |
+|---|---|---|
+| `us-nyse` | 17 | `regulation.foreign_ownership_limit` · `market_structure.trading_sessions.after_market` · `market_structure.holidays_note(low)` · `listing.listing_process_duration` · `listing.transfer_between_boards` · `listing.post_delisting_venue` · `clearing.initial_margin_practice` · `clearing.maintenance_margin_practice` · `clearing.mark_to_market_frequency` · `clearing.last_trading_day_rule` · `participants.foreign_access_channel` · `infrastructure.data_pricing_model` · `costs.commission_structure` · `costs.stamp_duty` · `costs.capital_gains_tax` · `costs.dividend_withholding_tax` · `costs.implicit_costs_note(low)` |
+| `hk-hkex` | 17 | `overview.history` · `regulation.self_regulatory_org(low)` · `regulation.foreign_ownership_limit` · `regulation.capital_controls` · `regulation.disclosure_requirements` · `listing.transfer_between_boards` · `listing.delisting_conditions` · `clearing.initial_margin_practice` · `clearing.maintenance_margin_practice` · `clearing.mark_to_market_frequency` · `clearing.delivery_method(low)` · `clearing.last_trading_day_rule` · `participants.foreign_access_channel` · `infrastructure.trading_system_name` · `costs.commission_structure` · `costs.capital_gains_tax` · `risks.liquidity_risk_note` |
+| `cn-sse` | 19 | `overview.history` · `regulation.self_regulatory_org(low)` · `market_structure.short_selling(low)` · `listing.listing_process_duration` · `listing.transfer_between_boards` · `listing.continuing_obligations` · `listing.suspension_resumption` · `clearing.initial_margin_practice` · `clearing.maintenance_margin_practice` · `clearing.mark_to_market_frequency` · `clearing.last_trading_day_rule` · `participants.investor_structure` · `participants.suitability_management` · `participants.foreign_access_channel` · `infrastructure.trading_system_name` · `infrastructure.access_methods(low)` · `costs.capital_gains_tax` · `costs.dividend_withholding_tax` · `risks.regulatory_change_risk_note` |
+| `uk-lse` | 14 | `regulation.clearing_regulator` · `market_structure.trading_sessions.pre_market` · `market_structure.holidays_note` · `listing.transfer_between_boards` · `listing.delisting_process` · `clearing.initial_margin_practice` · `clearing.maintenance_margin_practice` · `clearing.mark_to_market_frequency` · `clearing.last_trading_day_rule` · `infrastructure.major_outage_history` · `costs.commission_structure` · `costs.financial_transaction_tax` · `costs.dividend_withholding_tax` · `risks.fx_risk_note` |
+| `jp-jpx` | 11 | `market_structure.holidays_note(low)` · `listing.transfer_between_boards` · `listing.delisting_conditions` · `listing.post_delisting_venue` · `clearing.initial_margin_practice` · `clearing.maintenance_margin_practice` · `clearing.mark_to_market_frequency` · `clearing.last_trading_day_rule` · `costs.regulatory_fees` · `costs.stamp_duty` · `costs.implicit_costs_note` |
+
+（`uk-lse.risks.fx_risk_note` 是空的而非 low，不在"下一步 1"只升级既有 low 值的范围内，仍算任务四；`hk-hkex.risks.liquidity_risk_note`、`cn-sse.risks.regulatory_change_risk_note` 同理——"下一步 1"没有点名这两个字段。）
+
+**定了什么（执行方法论）：**
+
+1. **检索按「字段族」批量做，交付仍按「每所一个 commit」——两者不冲突，前者是效率手段，后者是 ROADMAP 已定的交付粒度不变。** 78 处里同族字段结构高度重复（如清算保证金四件套在 5 家的字段定义、大概率的信息来源类型完全一样），按字段族一次性摸清"这类信息通常在官方文件的哪个位置"比逐所各自摸索一遍更省检索成本——这正是任务二（横切 8 高频字段批量回填，[ADR-068]）验证过、且第二人复核 96.2% 达标（[ADR-074]）的方法论，不是新发明。落盘提交时仍按交易所归拢成 5 个 commit，不因为按字段族检索就把 commit 也拆成按字段族（那样每家的验收/抽检反而分散、不便按所过 `make build`）。
+2. **字段族划分与来源类型（供执行时直接按图索骥，不是穷举，实际检索中可能需要调整）：**
+   - **族 A · 清算保证金四件套**（`initial_margin_practice`/`maintenance_margin_practice`/`mark_to_market_frequency`/`last_trading_day_rule`）× 5 家 = 20 处，全库最大最规整的一族。来源：各所对应 CCP 的清算规则细则（NSCC Rule 15 / HKSCC 结算细则 / LCH RIE 规则 / 中国结算登记结算业务规则 / JSCC 业务规程）。
+   - **族 B · `listing.transfer_between_boards`** × 5 家 = 5 处（全部命中，[ADR-062] 已勘误此字段真实适用于这 5 家）。来源：各所上市规则手册的转板/升降板章节。
+   - **族 C · listing 其余残余**（`listing_process_duration`/`post_delisting_venue`/`delisting_conditions`/`delisting_process`/`continuing_obligations`/`suspension_resumption`）分布不均共 8 处。来源：各所上市规则手册对应章节，多数与族 B 同一份文件。
+   - **族 D · costs 税费/佣金**（`commission_structure`/`stamp_duty`/`financial_transaction_tax`/`capital_gains_tax`/`dividend_withholding_tax`/`regulatory_fees`/`implicit_costs_note`）约 15 处。来源：各国税务机关一手文件 + 交易所收费页——直接复用 [ADR-065]/[ADR-067] 已确立的判定范式（完整立法/费率通知 → 具体税率或 `type: none` 正面依据，而非"查不到"）。
+   - **族 E · regulation 监管细节**（`foreign_ownership_limit`/`capital_controls`/`disclosure_requirements`/`clearing_regulator`/`self_regulatory_org`）约 7 处。来源：各国证券监管机构官网 + 中央银行（`clearing_regulator` 参照 `uk-lse` 已记录的判断路径，见 `OPEN-QUESTIONS.md` 第 22 条）。
+   - **族 F · participants**（`foreign_access_channel`/`investor_structure`/`suitability_management`）约 5 处。来源：各所投资者适当性制度页 + 监管机构外资准入指引。
+   - **族 G · infrastructure**（`data_pricing_model`/`trading_system_name`/`major_outage_history`/`access_methods`）约 5 处。来源：交易所技术白皮书/市场数据服务页；`major_outage_history` 若确无官方公开记录可考虑 `type: none`（正面依据：官方无重大故障披露义务或未披露过）而非久拖留空。
+   - **族 H · `overview.history`**（`hk-hkex`/`cn-sse`）2 处。来源：交易所历史沿革官方页。
+   - **族 I · risks 残余**（`uk-lse.fx_risk_note`/`hk-hkex.liquidity_risk_note`/`cn-sse.regulatory_change_risk_note`）3 处，建议排在"下一步 1"完工之后做，直接复用其升级 `fx_risk_note` 时摸出的央行/IMF AREAER 来源与 `confidence` 判据经验（[ADR-066] 轴 6），不必单独重新摸路子。
+3. **排序建议**：族 A（最大宗、验证效率最高）→ 族 D（复用 [ADR-065]/[ADR-067] 判据，检索成本低）→ 族 B/C（同一份上市规则手册，顺手一起做）→ 族 E/F/G/H → 族 I（等"下一步 1"完工）。这是建议顺序，不是强制流程，接手会话可按实际检索命中情况调整。
+4. **验收沿用 ROADMAP 既定「每所抽检 10 字段」，但 78 处总量远超 [CLAUDE.md §四] 的 30 字段第二人复核门槛（对照任务二 79 处先例，[ADR-074] 做了独立复核、96.2% 达标）——任务四全部 5 家做完后，必须比照 [ADR-074] 做一次第二人独立复核，不能只靠协调者自查收尾。** 每所一个 commit 的自检仍要做（历史惯例），第二人复核是全部完工后的收尾关卡，不是替代。
+5. **预期会有部分字段以 `type: none` / 字段级 `not_applicable` 收尾，不是"回填失败"。** 如某些 `commission_structure` 可能查证到"交易所不统一定价、由会员自主定价"这类正面依据，`major_outage_history` 可能查无官方披露义务——按 [ADR-065]/[ADR-067] 已确立的范式处理，如实记录判据来源，不强行找一个数值凑数。
+6. **`de-eurex`(11)/`fr-euronext`(10)/`in-nse`(10) 三家"视精力"扩展不计入本次设计范围**，ROADMAP 原文已注明"视精力"、非承诺项——做完 5 家核心后再视排期决定是否追加，本条不预先展开。
+7. **与"下一步 1"的边界（重申，避免重复认领）**：`fx_risk_note`（4 家 low）/`political_risk_note`（2 家空）/`enforcement_note`（1 家空）共 8 处已排在"下一步 1"范围内，任务四执行时跳过，只在"下一步 1"完工后对这 5 家做结果复核。
+
+**没改：** 本条是纯规划文档，`data/`/`schema/`/`tools/`/前端均未改动；只改 `PROJECT/DECISIONS.md`（本条）+ `PROJECT/ROADMAP.md`（任务四条目细化，指向本 ADR）。
+
+**验证：** 现状核实脚本基于 `tools/sync.py` 既有函数现算、非手数，78 处总量与逐所清单已在正文列出，供接手会话直接核对/复算；`make build` 全绿（两处改动文件均不被 `sync.py` 扫描，`validate`/`verify_quotes`/`check_ui_i18n` 零影响）；`make sync` 二次幂等零 diff。
 
 **日期：** 2026-09-05
 
