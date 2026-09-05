@@ -18,3 +18,4 @@
 
 - 2026-09-05 · 抗膨胀落地：SOURCES 拆 20 分片 + SOURCES/DECISIONS 生成索引 + INBOX 200 字上限 + ADR 引用扩面（selfcheck 48→68） · [ADR-077] · main
 
+- 2026-09-05 · 任务三执行方案定案：C 桶 40 处按「上次卡在哪」重排五棒 + 三处裁定（清零改三态收口 / spec 126 处与渲染层切换移出另立 / 幽灵缺口记 OQ #45） · [ADR-PENDING-task3-derivatives-plan] · worktree-task3-derivatives-plan

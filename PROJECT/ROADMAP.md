@@ -211,10 +211,25 @@
   - **结果**：8 字段结构性空缺清零（`holidays_note` 余 4 家 `ca-tsx`/`uk-lse`/`ch-six`/`de-eurex` 因官方交易日历 JS-SPA、按 [CLAUDE.md §三] 降级留空、已文档化）。全库已填字段 1,900→1,918（+18）；`de-eurex` 5 字段标字段级 `not_applicable`（`intraday_reversal`/`board_lot_size`/`odd_lot_handling`/`price_limits.other_boards`/`dark_pool`——全库首次真实使用该机制，`validate.py` `field_na_violations` 首跑真数据分支通过）。26 个新 high-confidence 字段 `verify_quotes` 逐条反查缓存 FAIL=0。`price_limits.other_boards` 评估后**不补 `in_matrix`**（内容结构异质、不可归约为可比标量，理由见 [ADR-068]）；`intraday_reversal` 本就有 `in_matrix`。新增来源域名登记 6 个。
   - **已知局限**：① `holidays_note` 4 家 JS-SPA 待人工 / 任务五渲染型抓取；② `ca-tsx block_trade` 的 CIRO UMIR 6.6 跨市场 block 门槛因 `ciro.ca` Cloudflare 403 未取到一手原文；③ `dark_pool` 5 家 medium（`hk-hkex`/`sg-sgx`/`kr-krx`/`jp-jpx`/`in-nse`）可日后升 high——均已记 OPEN-QUESTIONS。
   - **✅ 第二人独立复核已完成**（2026-09-05，[ADR-074]）：4 个互相隔离的独立视角，逐条去 `.cache/` 核对 `quote` 真实性、confidence 分级、语义忠实度、跨所口径一致性，共复核 79 处交易所×字段。初检 72/79=91.1%；4 处 FIX（`sa-tadawul intraday_reversal` 删无据历史细节、`sa-tadawul connect_schemes` 订正 QFI 已废止的跨字段矛盾、`ch-six`/`hk-hkex block_trade` 补全 quote 摘录）已就地订正，终态 76/79=96.2%，达 [CLAUDE.md §四] 95% 阈值；3 处 QUESTION（`de-eurex board_lot_size` 的 `not_applicable` 判据分歧、`de-xetra connect_schemes` CEINEX 遗漏、`in-nse price_limits.other_boards` Emerge 断言未证实）非事实错误、转 OPEN-QUESTIONS 留待人工。**零处发现幻觉/编造**。逐条判定表见 `PROJECT/DATA-GAP-TASK2-SPOT-CHECK.md`。
-- [ ] **任务三 · 9 家衍生品子章残余补全（C 桶 40 处）**（穿插 viz 模块之间）
-  - **目标**：运营衍生品业务线的 9 家，`market_structure.derivatives.*`（主体已 [ADR-021] 补齐）与 `clearing.derivatives.*` 的残余空缺清零到 ✅ 或显式 `not_applicable`，`spec` 层同步（驱动剖面「衍生品业务线」切换）；缺口集中在 `derivatives.connect_schemes`(7) / `holidays_note`(6) / `price_limits.other_boards`(5) / `closing_mechanism`(3)。
-  - **步骤**：逐所按 `.claude/skills/add-exchange/SKILL.md` 第 4 步子章部分，`make fetch` 补抓衍生品规则页（合约规格、交易时段、涨跌停、保证金方法论），填信封 + `spec`。
-  - **验收**：`make build` 全绿；触及 > 30 字段 → 第二人复核（[CLAUDE.md §四]）。
+- [ ] **任务三 · 9 家衍生品子章残余补全（C 桶 40 处）**（穿插 viz 模块之间；执行方案见 [ADR-PENDING-task3-derivatives-plan]，2026-09-05 实算侦察后按「上次卡在哪」重排为五棒）
+  - **目标**：运营衍生品业务线的 9 家（`sg-sgx` 9 / `sa-tadawul` 7 / `in-nse` 6 / `br-b3` 5 / `hk-hkex` 5 / `fr-euronext` 3 / `au-asx` 2 / `cn-szse` 2 / `kr-krx` 1；`za-jse` 已 0 缺口），`market_structure.derivatives.*` 与 `clearing.derivatives.*` 的 40 处残余**三态收口**——填实 / 显式 `not_applicable` / 留空但 `detail` + `OPEN-QUESTIONS` 写清阻断。**不以「清零到 0」为判据**：40 处里 32 处是 [ADR-021] 当年查过并留下 `detail` 的死胡同，5 处才是从未填过的空信封，把清零当验收会把执行者推向猜测（裁定①）。
+  - **棒 0 · `spec` 形状前置**（schema，不抓取，其余四棒硬前置）— `schema/spec.yml` 现无任何 `derivatives.*` 形状，`validate.py` 对无形状定义的 `spec` 直接 err，全库 derivatives `spec` 数 = 0。用 anchor 把现货侧 17 个形状复用到同名 derivatives 路径 + 一条「两侧同源防漂移」不变式与正负探针；`data/` 零改动。
+  - **棒 1 · 低垂果实：`clearing.derivatives` 6 处**（`sa-tadawul` 4 + `hk-hkex`/`cn-szse` 各 1 `delivery_method`）— 40 处里唯一真正没查过的一块；源方向 Muqassa 清算规则 / HKCC 结算规则 / 深交所股票期权结算规则。**先跑这棒验证「补抓真能出货」**，出不来则整体下调后三棒预期。
+  - **棒 2 · 负面断言正面化：约 14 处**（`connect_schemes` 7 + `volatility_interruption` 2 + `closing_mechanism` 2 + `after_market`/`night_session`/`block_trade`）— 换判据不换关键词重抓：找**穷举性原文**（跨境安排专章 / 官网 Connectivity 完整清单 / 全市场阶段表），找到填「无 X」+ `quote`，找不到维持留空。`kr-krx connect_schemes` 是零抓取净收益（CME/Eurex 夜盘联动一手 PDF 已在 `.cache/kr-krx/`）。
+  - **棒 3 · 逐合约口径：约 13 处**（`sg-sgx` 8 + `br-b3` 3 + `hk-hkex`/`sa-tadawul`/`in-nse` 的 `price_limits.other_boards`）— 先定「代表合约 + `detail` 声明代表性范围」口径（沿用 `hk-hkex` 恒指系列样本做法），不把逐合约差异压成假的市场级数值。**`sg-sgx` 8 处走 [CLAUDE.md §三] 降级**：SGX 规则原文自述合约规格「不属于本规则手册」、`www.sgx.com` 实测 SPA 空壳，本棒只负责把所需合约规格 PDF 清单（具体到合约代码）写进 `OPEN-QUESTIONS.md` 等人工投喂。
+  - **棒 4 · `holidays_note` 6 处**（`au-asx`/`br-b3`/`fr-euronext`/`hk-hkex`/`in-nse`/`sg-sgx`）— 只认两种原文：衍生品专属交易日历（`au-asx` 的 ASX 24 是这 6 处里唯一确知存在的），或现货日历页明文把衍生品纳入适用范围的句子（`br-b3` 现货 `quote` 已含此表述）。都没有则留空，不用「大概率一致」补。注意 [ADR-068] 的 JS-SPA 日历失败模式。
+  - **验收**：`make build` 全绿；每处落到三态之一且 `not_applicable` 只用于设计前提不成立（裁定②，已识别合格样本仅 `in-nse`/`sa-tadawul` 的 `price_limits.other_boards` 两处）；合计 40 处 > 30 → **第二人独立复核必经**，打勾前完成；抽检沿用 [ADR-021] 口径（每家最多 10 个 `high` 字段逐字核对 `.cache/` 原文），< 95% 停下修流程。
+  - **已移出本条**（裁定③，工作对象与本条几乎不相交）：衍生品 `spec` 回填 126 处、剖面业务线切换渲染层 —— 见下两条。
+
+- [ ] **任务三附 · 衍生品 `spec` 回填（126 处）**（棒 0 合并后可启动，与任务三其余棒并行）
+  - **为什么单列**：`spec` 的对象是 derivatives 子块里**已填**的 126 处（`au-asx`/`cn-szse`/`kr-krx`/`za-jse` 各 14、`br-b3`/`fr-euronext`/`hk-hkex`/`sa-tadawul` 各 13、`in-nse` 11、`sg-sgx` 7），与 C 桶 40 处缺口几乎不重叠——缺口字段本就没有值可结构化。规模是任务三的三倍，独立触发第二人复核，混在一起两份验收会互相污染（[ADR-PENDING-task3-derivatives-plan] 裁定③）。
+  - **步骤**：建议按字段族拆两批（时段族 ≈60 / 价格限制 + 机制族 ≈66），每批独立复核；`spec` 数值须过 `validate.py` 5b（`high` 字段数值 ⊆ `quote`）与 5c（`note` 内嵌数字反查），验收范式照 [ADR-054] 六维度。
+  - **验收**：`make build` 全绿；每批 > 30 字段 → 第二人独立复核。
+
+- [ ] **任务三附 · 剖面现货 / 衍生品业务线切换（渲染层）**
+  - **为什么需要**：`docs/assets/app.js` 四处直接取 `data.chapters.market_structure`，`tdBanner` 对有 derivatives 字段的所只挂一句「本剖面显示现货（衍生品 spec 待 Phase 3 补充）」——数据备齐不会自动兑现，这句 banner 也一直是欠账凭证。
+  - **形态倾向**：按 [ADR-057] 北极星**不新增顶层 tab**（Phase 4 要减 tab），改为剖面内的业务线切换（可复用 [ADR-055] 透视开关的控件位与持久化模式）；诚实三态照 [ADR-035] D（衍生品侧字段缺省时不静默回落现货）。
+  - **前置**：任务三附 · `spec` 回填至少完成时段族；启动时机（Phase 3 收尾小棒 vs 并入 Phase 4 单页画布）待拍板。
 - [ ] **任务四 · 5 家旗舰所深度补全（F 桶逐所约 78 处）**（建议 Phase 4 合并启动前完成，非硬前置）
   - **目标**：`us-nyse`(15) / `hk-hkex`(13) / `uk-lse`(13) / `cn-sse`(11) / `jp-jpx`(9)（+`de-eurex` 11 / `fr-euronext` 10 / `in-nse` 10 视精力）F 桶清零到 ✅ / 显式不适用，达到 `za-jse` 的「全章 ✅、0 low」基准。图鉴主视图讲「一眼看懂一个市场」，最该完整的恰是这几家——ROADMAP 已承认、未排期的欠账。
   - **步骤**：逐所过字段清单，`make fetch` 补抓，重点监管细节（`foreign_ownership_limit` / `capital_controls` / `clearing_regulator`）、成本税费（`stamp_duty` / `capital_gains_tax` / `dividend_withholding_tax`）、`csd_name`；每所一个 commit。
