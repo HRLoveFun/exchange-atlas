@@ -697,9 +697,16 @@ market_structure:
         detail: "本 trading_sessions 子块整体以恒生指数/恒生中国企业指数/恒生科技指数期货期权为代表性样本；不同产品（如货币期货、商品期货、单一股票期权/期货）的具体时段有差异，已在各字段说明中标注，完整逐品种时段表见 sources 页面。"
 
     holidays_note:
-      zh: ""
-      confidence: low
-      detail: "衍生品市场节假日安排未见与证券市场（见顶层 holidays_note）存在实质差异的官方说明，本次未逐条核实，留空。"
+      zh: "衍生品市场有专属假日安排：HKFE 每年按香港特区政府公布的一般假期发布次年《Derivatives Markets Holiday Schedule》（2026 年度见官方公告及其附件一），按附件假日表休市；且官方公告明示全部 MSCI 期货与期权、货币期货与期权合约在港公众假期照常交易。证券市场假日安排见顶层 holidays_note"
+      en: "The derivatives market has its own holiday schedule: each year HKFE publishes the next year's Derivatives Markets Holiday Schedule per the general holidays announced by the HKSAR Government (for 2026, see the official circular and its Attachment I), with other contracts closed per the attached schedule; the circular also states that all MSCI futures and options and Currency futures and options contracts will be available for trading during Hong Kong public holidays. For the securities market holidays see the top-level holidays_note"
+      detail: "棒 4（[ADR-082]）：此前 [ADR-021] 记「未见与证券市场存在实质差异的官方说明」；本次定位到 HKFE 官方年度假日安排公告（MO/DT/120/25，服务端直出 PDF）——衍生品市场不仅有专属假日表，部分产品线（MSCI/货币合约）更在港公众假期照常交易，与证券市场安排存在实质差异，属关键事实。quote 中「contracts will be available...」前略去的括注（Ref: MO/DT/085/22 与 EBF/FIC/003/24）与脚注 2 见原文。"
+      sources:
+        - title: "HKFE 通告 MO/DT/120/25 — Derivatives Markets Holiday Schedule, Last Trading Days/Expiry Days and Final Settlement Days for Year 2026"
+          url: https://www.hkex.com.hk/-/media/HKEX-Market/Services/Circulars-and-Notices/Participant-and-Members-Circulars/HKFE/2025/MO_DT_120_25_e.pdf
+          accessed: 2026-09-05
+      quote: "Exchange Participants are advised that the Holiday Schedule, Last Trading Days/Expiry Days and Final Settlement Days for Year 2026 are set forth in the attachments according to the general holidays for Year 2026 as announced by the Government of the Hong Kong Special Administrative Region. ... all MSCI futures and options and Currency futures and options contracts will be available for trading during Hong Kong public holidays"
+      confidence: high
+      verified: 2026-09-05
 
     opening_mechanism:
       zh: "开市前议价时段（Pre-Market Opening Period）：仅接受不设价格限制的竞价盘（競價盤），以「拟定开市价」（Calculated Opening Price, COP）撮合，按时间优先排序；未能配对的竞价盘于开市时转换为限价盘"
