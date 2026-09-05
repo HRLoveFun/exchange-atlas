@@ -742,6 +742,7 @@ market_structure:
       confidence: high
 
     closing_mechanism:
+      spec: {type: continuous_to_close, note: "无收盘集合竞价（Market Timings 页穷举无收盘竞价条目，medium 结构性推断）；连续交易至 15:40，交易修改截止 16:15 为会员端时点"}
       zh: "无收盘集合竞价等独立收盘机制：衍生品正常连续交易至 15:40 收盘，官方 Market Timings 页 Equity Derivatives 区块无收盘竞价条目（现货市场设 Closing session 15:40–16:00，衍生品区块无对应时段）；其后仅有会员端报单修改截止时点（16:15），非市场时段"
       en: "No independent closing mechanism (no closing call auction): derivatives trade continuously to the 15:40 normal market close; the official Market Timings page's Equity Derivatives block has no closing-auction entry (the cash market has a Closing session 15:40–16:00, absent from the derivatives block); the only later item, Trade Modification End Time 16:15, is a member-side cut-off, not a market session"
       sources:
