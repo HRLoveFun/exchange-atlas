@@ -1272,6 +1272,13 @@
           "detail": null
         },
         "order_types": {
+          "spec": {
+            "market": true,
+            "limit": true,
+            "stop": true,
+            "stop_limit": true,
+            "note": "另有触价单 MIT（价格条件满足后才注入订单簿，用于锁定盈利）与市转限价单 ML（先吃单、剩余转限价）；未见独立有效期（TIF）条件清单"
+          },
           "zh": "市价单（Market Order, MO）、限价单（Limit Order, LO）、止损单（Stop Order, SO）、止损限价单（Stop Limit Order, SL）、触价单（Market If Touched, MIT，价格条件满足后才注入订单簿，用于锁定盈利而非止损）、市转限价单（Market to Limit, ML，先按市价盘方式吃单，剩余数量在撮合结束后转为限价盘）",
           "en": "Market Order (MO), Limit Order (LO), Stop Order (SO), Stop Limit Order (SL), Market If Touched (MIT — parked until a price condition is met, used to lock in profit rather than exit a loss), and Market to Limit (ML — behaves as a market order while aggressing, with any remainder converted to a limit order at the end)",
           "sources": [
@@ -1285,10 +1292,14 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "tick_size": {
+          "spec": {
+            "regime": "per_instrument",
+            "min_tick": 1,
+            "note": "FTSE/JSE Top40 指数期货（ALSI, J200）为样本：1 个指数点（R10/点）；来源为 2012-08 官方 Fact Sheet（medium，年代较久未确认现行）"
+          },
           "zh": "以FTSE/JSE Top40股指期货（ALSI）为例：最小价格变动为1个指数点（每点价值10兰特）",
           "en": "Example (FTSE/JSE Top 40 Index Future, ALSI): minimum price movement is 1 index point (R10 per point)",
           "sources": [
@@ -1302,8 +1313,7 @@
           "confidence": "medium",
           "detail": "来源为2012年8月版官方Fact Sheet，本次未找到更新版本；合约乘数/最小变动单位一般是稳定的结构性事实，但因文档年代较久未能确认是否仍完全现行，如实标注medium而非high。",
           "verified": "2026-08-27",
-          "enum": null,
-          "spec": null
+          "enum": null
         },
         "contract_specs_note": {
           "zh": "以FTSE/JSE Top40股指期货（ALSI）为例：合约乘数为每指数点10兰特，到期日为3/6/9/12月第三个星期四（如遇公众假期则提前至上一营业日），现金结算，到期结算价通过到期日12h00–12h15的盘中集合竞价（按成交量最大化算法）产生；利率衍生品另有Jibar期货（短期利率）、掉期期货（长期利率）及债券期货/期权/指数期货，货币衍生品另有货币期货/期权/Quanto期货期权，具体合约规格未逐一核实",
@@ -1346,6 +1356,11 @@
             "detail": null
           },
           "main_board": {
+            "spec": {
+              "limit_pct": 8,
+              "symmetric": true,
+              "note": "股票期货静态熔断 ±8%（连续交易/开盘/波动性拍卖/重开竞价各阶段同值）；另有动态熔断 ±4%；指数/TOPI 期货阈值各异（见 circuit_breaker）"
+            },
             "zh": "股票期货（Single Stock Futures）：连续交易/开盘/波动性拍卖/重开集合竞价各阶段均为静态±8%、动态±4%",
             "en": "Single Stock Futures: Static ±8% / Dynamic ±4% across the Continuous Trading, Opening, Volatility and Re-Opening Auction Call sessions",
             "sources": [
@@ -1359,7 +1374,6 @@
             "confidence": "high",
             "verified": "2026-08-27",
             "enum": null,
-            "spec": null,
             "detail": null
           },
           "other_boards": {
@@ -1382,6 +1396,10 @@
         },
         "circuit_breaker": {
           "enum": "stock_level",
+          "spec": {
+            "type": "contract_level",
+            "note": "按产品类别（股票期货/指数期货/TOPI 期货）分别设阈值，触发后进入波动性拍卖冷静期（见 volatility_interruption）；股票期货静态 ±8%/动态 ±4%。enum 借用 stock_level 表「非全市场」（见 OPEN-QUESTIONS #44(b)）"
+          },
           "zh": "按合约类别（股票期货 / 指数期货 / TOPI期货）分别设定阈值的逐类别熔断，而非全市场统一熔断；触发后移入波动性拍卖冷静期（Volatility Auction Call Session，时长变更沿革见 volatility_interruption 字段）",
           "en": "Circuit breaker thresholds are set per contract category (Single Stock Futures / Index Futures / TOPI Futures) rather than as a uniform market-wide breaker; a breach moves the instrument into a Volatility Auction Call Session (see the volatility_interruption field for the history of its duration)",
           "detail": "受控词表 circuit_breaker_type 同样没有\"逐合约类别\"这一档，与本文件顶层 circuit_breaker 及 hk-hkex.derivatives.circuit_breaker 是同一处不完全贴合——这里借用 stock_level 仅取其\"非全市场统一\"的含义，真实颗粒度是按股票期货/指数期货/TOPI期货三个产品类别分别设阈值，不是逐个股。",
@@ -1399,10 +1417,13 @@
           ],
           "quote": "The following percentages have been defined for the Equity Derivatives Market: Single Stock Futures ... Index (excl. TOPI) Futures ... TOPI Futures ／ The duration of the volatility auction applicable for the Equity Derivatives Market has been increased from 2 minutes to 5 minutes.",
           "confidence": "high",
-          "verified": "2026-08-27",
-          "spec": null
+          "verified": "2026-08-27"
         },
         "volatility_interruption": {
+          "spec": {
+            "auction_minutes": 5,
+            "note": "静态/动态容忍阈值被突破触发，波动性拍卖 5 分钟（2020-03 由 2 分钟延长至 5 分钟）；可追加市价单/价格监察延期（Market Order/Price Monitoring Extensions）"
+          },
           "zh": "波动性拍卖冷静期（Volatility Auction Call Session）：仅当合约的静态或动态参考价容忍阈值被突破时触发，持续5分钟（2020年3月由2分钟延长至5分钟），随后可能追加一系列市价单/价格监察延期（Market Order/Price Monitoring Extensions）",
           "en": "Volatility Auction Call Session: triggered only when an instrument's Static or Dynamic Reference Price tolerance is breached, lasting 5 minutes (extended from 2 minutes in March 2020), and may be followed by a series of Market Order/Price Monitoring Extensions",
           "sources": [
@@ -1421,7 +1442,6 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "trading_halt_mechanism": {
@@ -1459,6 +1479,12 @@
           "detail": null
         },
         "market_maker_scheme": {
+          "spec": {
+            "present": true,
+            "quote_obligation": true,
+            "max_spread_pct": null,
+            "note": "指数期权做市计划两阶段：一阶段 best-efforts 无义务（maker-taker 挂单方零费率）；二阶段指定做市商须在场时间 ≥50% 双边报价（不含竞价）、最小报价量 100 张、最小价差 2 个波动率点"
+          },
           "zh": "JSE指数期权做市商计划（Index Options Market-Making Scheme）：为ALSI Top40指数期权提供实时挂牌报价，分两阶段——第一阶段（Best Efforts Basis）面向所有市场参与者，无强制义务，采用挂单方零费率的做市-吃单（maker-taker）收费模式；第二阶段（正式做市商计划）仅限指定做市商，须满足最低在场时间（不含集合竞价时段≥50%双边报价）、最小报价量（100张指数合约，买卖量相当）、最小价差（2个波动率点）等量化要求，JSE持续监控并按月向做市商反馈合规情况",
           "en": "The JSE Index Options Market-Making Scheme provides real-time on-screen pricing for ALSI Top 40 Index Options, in two phases: Phase 1 (Best Efforts Basis) is open to all participants with no formal obligations, using a maker-taker fee model with zero fees for liquidity providers; Phase 2 (the formal Market Making Scheme) is limited to designated market makers, requiring minimum quoting presence (two-way quotes ≥50% of the time excluding auctions), minimum quote size (100 index contracts, comparable bid/offer size), and minimum spread (2 volatility points), with the JSE continuously monitoring and reporting monthly compliance to market makers",
           "sources": [
@@ -1472,7 +1498,6 @@
           "confidence": "high",
           "verified": "2026-08-27",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "margin_practice_note": {
