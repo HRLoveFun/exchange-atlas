@@ -1068,6 +1068,13 @@
       "derivatives": {
         "trading_sessions": {
           "pre_market": {
+            "spec": {
+              "start": "07:30",
+              "end": "08:00",
+              "kind": "opening_auction",
+              "randomised_seconds": 30,
+              "note": "旗舰股指期货代表样本；期权/固定收益迷你期货等 07:30-09:01 起各异，逐合约见 Annexe One"
+            },
             "zh": "开盘集合竞价阶段（Call Phase）：以旗舰股指期货为例（CAC 40/AEX-Index期货）07:30-08:00，期权/固定收益迷你期货/部分成分股期货等07:30-09:01（或07:30-09:00/09:30，因合约而异）；阶段内只累积订单不撮合，阶段结束时有长达30秒的随机时点撮合（防止时点被预测利用）；具体钟点逐合约不同，衍生品市场覆盖阿姆斯特丹/布鲁塞尔/里斯本/米兰/奥斯陆/巴黎六个市场（不含都柏林——都柏林只运营现货证券市场，未见运营衍生品市场）",
             "en": "Call Phase (opening auction accumulation): e.g. 07:30-08:00 CET for flagship index futures (CAC 40/AEX-Index); 07:30-09:01 (or 07:30-09:00/09:30 depending on contract) for options/fixed income mini-futures/some single-stock futures; orders accumulate without matching during the phase, followed by a random uncrossing of up to 30 seconds at the end to prevent timing gaming; exact times vary per contract. The Derivatives Markets cover six of the seven Euronext markets — Amsterdam, Brussels, Lisbon, Milan, Oslo and Paris — Dublin operates only the Securities (cash) Market, with no Derivatives Market found",
             "sources": [
@@ -1081,10 +1088,15 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
-            "spec": null,
             "detail": null
           },
           "continuous_am": {
+            "spec": {
+              "start": "08:00",
+              "end": "22:00",
+              "kind": "continuous",
+              "note": "CAC 40/AEX 期货代表样本（到期日提前至 16:00）；期权等 09:01-17:30 各异，见 Annexe One"
+            },
             "zh": "中央订单簿（Central Order Book, COB）连续交易：无午间休市，全天单一连续时段，与现货市场一致；以CAC 40/AEX-Index旗舰股指期货为例08:00-22:00（到期日提前收市至16:00）；期权/固定收益迷你期货等COB时段普遍为09:01-17:30左右（各合约不同，详见Annexe One逐合约时刻表）",
             "en": "Central Order Book (COB) continuous trading: a single continuous session all day with no lunch break, consistent with the cash market; e.g. 08:00-22:00 CET for CAC 40/AEX-Index flagship futures (closing earlier at 16:00 on the Last Trading Day); options/fixed income mini-futures etc. generally run COB around 09:01-17:30 (varies by contract, see Annexe One's per-contract table)",
             "sources": [
@@ -1098,10 +1110,12 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
-            "spec": null,
             "detail": null
           },
           "lunch_break": {
+            "spec": {
+              "kind": "none"
+            },
             "zh": "无——中央订单簿全天单一连续时段运行（如CAC 40/AEX期货08:00至22:00不间断），期间无午休间隔，与现货市场一致",
             "en": "None — the Central Order Book runs as a single continuous session all day (e.g. 08:00-22:00 CET for CAC 40/AEX futures without a break), consistent with the cash market",
             "confidence": "medium",
@@ -1120,10 +1134,13 @@
             ],
             "verified": "2026-08-16",
             "enum": null,
-            "spec": null,
             "quote": null
           },
           "continuous_pm": {
+            "spec": {
+              "kind": "none",
+              "note": "同一连续时段（COB 不设 AM/PM 切分），见 continuous_am"
+            },
             "zh": "与 continuous_am 为同一段连续交易时段（中央订单簿不设AM/PM切分），不重复列出具体钟点",
             "en": "Same continuous session as continuous_am (the Central Order Book is not split into AM/PM segments); see continuous_am for times",
             "confidence": "medium",
@@ -1141,11 +1158,16 @@
             ],
             "verified": "2026-08-16",
             "enum": null,
-            "spec": null,
             "detail": null,
             "quote": null
           },
           "after_market": {
+            "spec": {
+              "start": "18:30",
+              "end": "22:00",
+              "kind": "after_hours_continuous",
+              "note": "晚间时段成交按 T+1 清算；仍在同一 COB 连续区间内，非另开独立场次"
+            },
             "zh": "晚间交易时段（Evening Trading Session）：CAC 40/AEX-Index等部分旗舰股指期货/期权合约在18:30-22:00（期货）区间内的成交按T+1（次一交易日）而非当日（T）清算；该时段仍在同一中央订单簿连续运行区间内，不是收盘后另开的独立市场阶段，客户如不希望订单在晚间时段内成交需在落单时特别声明",
             "en": "Evening Trading Session: for certain flagship index futures/options (e.g. CAC 40, AEX-Index), trades executed within the 18:30-22:00 window are cleared T+1 (the next business day) rather than T (same day); this window still sits inside the same continuous Central Order Book session rather than being a separate post-close market phase — a client who does not want an order executed during the evening session must state this when placing the order",
             "sources": [
@@ -1164,7 +1186,6 @@
             "confidence": "high",
             "verified": "2026-08-16",
             "enum": null,
-            "spec": null,
             "detail": null
           },
           "night_session": {
@@ -1208,6 +1229,10 @@
           "spec": null
         },
         "opening_mechanism": {
+          "spec": {
+            "type": "call_auction",
+            "note": "Call Phase 结束时随机揭示（最长30秒）；开盘遇倒挂/同价由撮合引擎按最大成交量价自动执行，成交价不劣于委托价，未成交留市"
+          },
           "zh": "Call Phase（开盘集合竞价累积阶段）结束后由撮合引擎运行揭示（uncrossing）算法；若开盘时出现价格倒挂（买价高于卖价）或买卖同价（choice price），撮合引擎将计算能实现最大成交量的价格并自动执行相应成交，成交价格不劣于原始委托价，未成交的买卖盘继续留在市场",
           "en": "After the Call Phase (order-accumulation period) ends, the matching engine runs an uncrossing algorithm; where backwardation (bids higher than offers) or choice prices (bids equal to offers) exist at Market Open, the engine calculates the price at which maximum volume can be traded and automatically executes trades accordingly, at a price no worse than the order's entered price, with any untraded bids/offers remaining in the market",
           "sources": [
@@ -1221,10 +1246,13 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "closing_mechanism": {
+          "spec": {
+            "type": "continuous_to_close",
+            "note": "无收盘集合竞价；每日结算价（DSP）按合约分官方收盘价法 / 中央订单簿价格法（结算区间内加权均价）二法之一，逐合约见 Annexe One"
+          },
           "zh": "每日结算价（Daily Settlement Price, DSP）机制：期货合约按『中央订单簿价格法』（结算时点前不少于2分钟的『结算区间』内的成交价/成交量加权均价/买卖盘中间价/公允价值，按优先顺序取值）或『官方收盘价法』二者之一确定，具体某合约采用哪种方法见Annexe One；其中股票期货（所有市场）与股指期货（所有市场，但股指总回报期货与股指分红期货除外）统一采用官方收盘价法，其余期货合约采用中央订单簿价格法",
           "en": "Daily Settlement Price (DSP) mechanism: for futures contracts, DSP is set by either the Central Order Book price method (a hierarchy of last traded price / volume-weighted average / mid-BBO / fair value, calculated over a Settlement Range of no less than 2 minutes before the settlement time) or the official closing price method — which applies to which contract is set out in Annexe One; Single Stock Futures (all markets) and Index Futures (all markets, except Index Total Return Futures and Index Dividend Futures) uniformly use the official closing price method, while other futures contracts use the Central Order Book price method",
           "sources": [
@@ -1243,7 +1271,6 @@
           "confidence": "high",
           "verified": "2026-08-16",
           "enum": null,
-          "spec": null,
           "detail": null
         },
         "matching_principle": {
