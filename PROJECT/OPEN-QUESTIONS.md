@@ -187,7 +187,6 @@
 - `sa-tadawul` 市场结构与交易机制 / 订单簿透明度（order_book_transparency）— confidence: low
 - `sa-tadawul` 市场数据与技术基础设施 / 历史系统故障事件（major_outage_history）— confidence: low
 - `sa-tadawul` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
-- `sg-sgx` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low
 - `tw-twse` 监管与法律环境 / 外资准入与持股比例限制（foreign_ownership_limit）— confidence: low
 - `tw-twse` 清算、结算与交割 / 初始保证金制度（initial_margin_practice）— confidence: low
 - `tw-twse` 风险与特殊考量 / 汇率风险（fx_risk_note）— confidence: low

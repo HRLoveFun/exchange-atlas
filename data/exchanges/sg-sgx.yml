@@ -1376,9 +1376,15 @@ risks:
     confidence: low
 
   fx_risk_note:
-    zh: "新元实行管理浮动汇率制度，由MAS参考一篮子货币设定政策区间（而非盯住单一货币或自由浮动）——一般性市场认知，本次未附官方原文来源，confidence 标 low"
-    en: "The Singapore dollar operates under a managed-float regime in which MAS sets a policy band against a basket of currencies (rather than a single-currency peg or a free float) — general market knowledge; no official source cited this session, hence low confidence"
-    confidence: low
+    zh: "新加坡不以利率而以汇率为货币政策的中间目标：MAS 设定新加坡元名义有效汇率（S$NEER，贸易加权一篮子货币）的政策区间路径，以实现中期价格稳定。S$NEER 在围绕目标爬行率设定的政策区间内浮动——MAS 明言不实行钉住一篮子货币的爬行钉住，必要时可调整区间宽度与中心水平（MAS《新加坡的货币政策框架》FAQ，见 sources）。对非新元投资者：新元计价资产在兑换回投资者本币时承担新元汇率风险"
+    en: "Singapore conducts monetary policy through the exchange rate rather than interest rates: MAS sets a path for the policy band of the Singapore Dollar Nominal Effective Exchange Rate (S$NEER, a trade-weighted basket of currencies) to ensure medium-term price stability. The S$NEER is allowed to float within a policy band set around the targeted crawl rate — MAS does not have a crawling peg to a basket of currencies, and can adjust the width of the band and the level at which it is centred when necessary (MAS, 'Singapore's Monetary Policy Framework' FAQs, see sources). For non-S$ investors: S$-denominated assets carry S$ exchange-rate risk on conversion back to the investor's currency"
+    quote: "MAS does not have a crawling peg to a basket of currencies. Instead, the S$NEER is allowed to float within a policy band that is set around the targeted crawl rate. When necessary, MAS can adjust the width of the band, as well as the level at which it is centred."
+    sources:
+      - title: "Singapore's Monetary Policy Framework — FAQs（MAS 经济政策组官方框架 FAQ PDF；主站处于 Maintenance 壳状态，经 wayback 快照 20251206205550 抓取）"
+        url: https://www.mas.gov.sg/-/media/mas-media-library/monetary-policy/singapores-monetary-policy-framework/faqs/mp_faqs.pdf
+        accessed: 2026-09-05
+    confidence: high
+    verified: 2026-09-05
 
   political_risk_note:
     zh: "新加坡以政治稳定、法治健全、监管透明著称，主权信用评级长期居投资级高位；但作为高度开放的小型经济体，对全球贸易与地缘政治冲击（如主要经济体增长放缓、区域紧张）的敏感度较高。整体政治/制度性风险偏低，外部宏观敏感度偏高。本描述为通用国别风险评估，故标 medium。"
