@@ -220,7 +220,7 @@ regulation:
 # ═══════════════════════════════════════════════
 products:
   _meta:
-    verified: 2026-08-13
+    verified: 2026-09-05
     confidence: medium
   items:
     - id: us-nyse-equities
@@ -250,6 +250,24 @@ products:
       category: bond
       name_zh: 债券（NYSE Bonds平台）
       description: "每个交易日两场债券拍卖：开盘4:00am、核心8:00am，未成交订单转入连续交易"
+    # ⚠️ 期权条目的法律结构说明（2026-09-05 衍生品缺口子任务）：NYSE American Options 与
+    # NYSE Arca Options 分别由 NYSE American, LLC 与 NYSE Arca, Inc. 运营——两者是与
+    # The New York Stock Exchange LLC 并列的独立注册 SEC 交易所（同属 ICE 旗下 NYSE
+    # Group），不是 NYSE 本身的内部板块。本文件按 group_id: nyse-group 以单记录覆盖集团
+    # 全部实体（与 overview / listing.boards 对姊妹交易所实体的既有处理方式一致）。
+    # 这与 hk-hkex 的情形不同：港交所文件把 HKFE（期货交易所）作为同一上市法人 HKEX
+    # 集团内的业务线直接写入同一记录；而这里的两个期权市场是独立交易所法人，只是不单独立档、
+    # 靠集团 id 表达归属。
+    - id: us-nyse-american-options
+      category: option
+      name_zh: NYSE American 期权
+      name_native: "NYSE American Options"
+      description: "原美国证券交易所（AMEX）期权业务——2008年NYSE收购AMEX（官网历史页：并购后『成为全美第三大期权市场』），由 NYSE American, LLC 运营；做市商为任期制 Market Maker，规则条文为 Section 900NY 系列（见 market_structure.derivatives）"
+    - id: us-nyse-arca-options
+      category: option
+      name_zh: NYSE Arca 期权
+      name_native: "NYSE Arca Options"
+      description: "由 NYSE Arca, Inc. 运营的期权市场（做市商称 LMM，Lead Market Maker）；与 NYSE American Options 同经 OCC 中央清算、同随股票市场 MWCB 联动停牌（见 market_structure.derivatives）"
 
 # ═══════════════════════════════════════════════
 # 五｜市场结构与交易机制
@@ -562,6 +580,247 @@ market_structure:
     en: "None (no cross-border Connect-style scheme analogous to Stock Connect)"
     confidence: medium
 
+  # derivatives 子块（2026-09-05，框架性问题 #45 之 us-nyse 衍生品缺口）：描述 NYSE
+  # American Options 与 NYSE Arca Options 两个期权市场（products 章新增条目，法律结构
+  # 说明见 products 章注释）。条文以 NYSE American Options Rules（Section 900NY 系列，
+  # SEC 备案 Exhibit 5）与 NYSE 官网时段/日历页、OCC（美式期权唯一 CCP）官方页为主；
+  # NYSE Arca 侧与 American 侧机制同构但本次未逐条并核，凡仅核实 American 侧的均在
+  # detail 注明。来源落盘见 .cache/us-nyse/。
+  derivatives:
+    trading_sessions:
+      pre_market:
+        spec: {start: "06:00", end: "09:30", kind: pre_open_queue, note: "官方时段表：Options Pre-Opening Session 6:00am 起；规则侧 pre-open state 自 6:00am 起、止于拍卖处理期开始"}
+        zh: "6:00am起接受订单与报价挂单排队（不成交），直至9:30am后标的证券主市场触发开盘拍卖（Core Open Auction）为止"
+        en: "Orders and quotes can be entered and are queued from 6:00 a.m. ET without executing, until the Core Open Auction for an option series is triggered after 9:30 a.m. ET"
+        sources:
+          - title: "Trading Information（NYSE 官网，Trading Hours——NYSE 集团各市场分时段表，含 Options 段）"
+            url: https://www.nyse.com/trade/trading-information
+            accessed: 2026-09-05
+          - title: "Rules of NYSE American, Inc. — Trading of Option Contracts（Section 900NY 系列，SEC 备案 Exhibit 5，Rule 952NYP Auction Process 定义）"
+            url: https://www.sec.gov/files/rules/sro/nyseamer/2023/34-97869-ex5.pdf
+            accessed: 2026-09-05
+        quote: "Options Pre-Opening Session: 6:00 a.m. ET Orders and Quote can be entered and will be queued until 9:30 a.m. ET Core Trading Session: 9:30 a.m. to 4:00/4:15 p.m. ET ... (12) “Pre-open state” means the period before a series is opened or reopened for trading. (A) The pre-open state for the Core Open Auction begins at 6:00 a.m. Eastern Time and ends when the Auction Processing Period begins."
+        confidence: high
+        verified: 2026-09-05
+      continuous_am:
+        spec: {kind: none, note: "由官网时段表穷举反向推断：Options 段仅列 Pre-Opening 与 Core 两个阶段"}
+        zh: "无独立上午连续时段——NYSE 期权市场官方时段表只列 Pre-Opening Session（6:00am起排队）与 Core Trading Session（9:30am-4:00/4:15pm）两个阶段，没有同集团股票市场（NYSE American/Arca）那种7:00-9:30am的早盘连续交易时段"
+        en: "No separate morning continuous session — the official NYSE options hours table lists only a Pre-Opening Session (queueing from 6:00 a.m. ET) and a Core Trading Session (9:30 a.m.-4:00/4:15 p.m. ET), with no Early Trading Session of the kind the group's NYSE American/Arca equity markets run from 7:00-9:30 a.m. ET"
+        confidence: medium
+        detail: "基于官方时段表对 Options 段时段的穷举式列示作反向推断（该表未列任何早盘连续时段），故 confidence 为 medium 而非 high；对照同页 Tapes B & C / NYSE American 股票的 Early Trading Session。"
+        verified: 2026-09-05
+      lunch_break:
+        spec: {kind: none}
+        zh: "无"
+        en: "None"
+        confidence: medium
+        detail: "官方时段表 Options 段未列午休（美股期权市场全天连续），同 continuous_am 的反向推断口径。"
+        verified: 2026-09-05
+      continuous_pm:
+        spec: {start: "09:30", end: "16:00", kind: continuous, note: "4:00pm 收盘；部分合约经批准延后至 4:15pm 收盘（Options Late Close Exceptions）"}
+        zh: "9:30am-4:00pm连续交易（无午休、无上下午分段）；部分合约经批准延后至4:15pm收盘（Options Late Close Exceptions）"
+        en: "Continuous trading 9:30 a.m.-4:00 p.m. ET (no lunch break, no morning/afternoon split); certain symbols have an approved late close at 4:15 p.m. ET (Options Late Close Exceptions)"
+        sources:
+          - title: "Trading Information（NYSE 官网，Trading Hours——Options 段）"
+            url: https://www.nyse.com/trade/trading-information
+            accessed: 2026-09-05
+          - title: "OCC — Equity Options Product Specifications（Trading Hours: 9:30 a.m. to 4:00 p.m. ET，经 wayback 2025-08-08 快照）"
+            url: https://www.theocc.com/clearance-and-settlement/clearing/equity-options-product-specifications
+            accessed: 2026-09-05
+        quote: "Options Pre-Opening Session: 6:00 a.m. ET Orders and Quote can be entered and will be queued until 9:30 a.m. ET Core Trading Session: 9:30 a.m. to 4:00/4:15 p.m. ET 4:15 p.m. Options Late Close Exceptions ... Trading Hours: 9:30 a.m. to 4:00 p.m. ET"
+        confidence: high
+        verified: 2026-09-05
+      after_market:
+        spec: {kind: none, note: "时段表穷举未含盘后连续时段；4:15pm Late Close 是收盘延后例外，不是盘后交易时段"}
+        zh: "无盘后连续交易时段——官方时段表在 Core Trading Session（至4:00/4:15pm）之后不再列任何期权时段；美股盘后交易主要发生于场外经纪商网络，与股票市场一致（对照本文件顶层 after_market）"
+        en: "No after-hours continuous session — the official options hours table lists nothing after the Core Trading Session (to 4:00/4:15 p.m. ET); US after-hours trading occurs mainly over off-exchange broker networks, consistent with the cash equity market (cf. the top-level after_market field)"
+        confidence: medium
+        detail: "基于官方时段表穷举式列示的反向推断（4:15pm Options Late Close Exceptions 为指定合约的收盘延后，仍属核心时段内收盘，不是盘后时段）。"
+        verified: 2026-09-05
+      night_session:
+        spec: {kind: none}
+        zh: "无"
+        en: "None"
+        confidence: medium
+        detail: "同 after_market，基于官方时段表穷举的反向推断。"
+        verified: 2026-09-05
+
+    holidays_note:
+      zh: "全部NYSE市场（含 NYSE American Options 与 NYSE Arca Options）统一按官网公布的美国假日日历休市——官方正面表述「All NYSE markets observe U.S. holidays」，日历覆盖2026、2027、2028三个年度，具体日期以官网当年日历为准"
+      en: "All NYSE markets (including NYSE American Options and NYSE Arca Options) close per the unified U.S. holiday calendar published on the exchange website — the official statement reads 'All NYSE markets observe U.S. holidays as listed below', covering 2026, 2027 and 2028, with specific dates per the official calendar"
+      sources:
+        - title: "Holidays & Trading Hours（NYSE 官网，全市场统一假日日历——覆盖含期权在内的全部 NYSE 市场）"
+          url: https://www.nyse.com/trade/hours-calendars
+          accessed: 2026-09-05
+      quote: "All NYSE markets observe U.S. holidays as listed below for 2026, 2027, and 2028."
+      confidence: high
+      verified: 2026-09-05
+
+    opening_mechanism:
+      spec: {type: call_auction, auction_start: "09:30", note: "拍卖由标的证券主市场触发（Primary Market 于 9:30am 或之后首次同时发布双边报价与落在价差内的一笔成交）；拍卖价格受 Auction Collar（Legal Width Quote 买卖价）约束"}
+      zh: "开盘拍卖（Core Open Auction）：6:00am起进入 pre-open 状态接受挂单；当标的证券的主市场在东部时间9:30am或之后首次同时发布双边报价与一笔落在价差内的成交时，触发该期权系列的开盘拍卖，拍卖撮合决定开盘价（拍卖价格受以 Legal Width Quote 买卖价为界的 Auction Collar 约束）"
+      en: "Core Open Auction: the pre-open state begins at 6:00 a.m. ET accepting orders; the auction for an option series is triggered when the primary market of the underlying security first disseminates, at or after 9:30 a.m. Eastern Time, both a two-sided quote and a trade of any size at or within the quote; auction pricing is bounded by Auction Collars set at the bid/offer of the Legal Width Quote"
+      sources:
+        - title: "Rules of NYSE American, Inc. — Trading of Option Contracts（Rule 952NYP Auction Process，SEC 备案 Exhibit 5）"
+          url: https://www.sec.gov/files/rules/sro/nyseamer/2023/34-97869-ex5.pdf
+          accessed: 2026-09-05
+      quote: "(1) “Auction” means the opening or reopening of a series for trading either with or without a trade. ... (A) “Core Open Auction” means the Auction that opens trading after the beginning of Core Trading Hours. ... (7) “Auction Trigger” means the information disseminated by the Primary Market in the underlying security that triggers the Auction Process for a series to begin. (A) For a Core Open Auction, the Auction Trigger is when the Primary Market first disseminates at or after 9:30 a.m. Eastern Time both a two-sided quote and a trade of any size that is at or within the quote."
+      confidence: high
+      verified: 2026-09-05
+
+    closing_mechanism:
+      spec: {type: continuous_to_close, note: "官方时段表未列收盘集合竞价——连续交易持续到 4:00pm 收盘（部分合约 4:15pm 延后收盘）；「无收盘拍卖」系由时段表穷举反向推断，故 confidence: medium"}
+      zh: "连续交易持续到收盘：官方时段表在9:30am-4:00/4:15pm核心时段之外未列任何收盘集合竞价环节，收盘即连续撮合结束；4:15pm Options Late Close Exceptions 为部分合约经批准的收盘延后例外"
+      en: "Continuous trading through the close: the official options hours table lists no closing call auction after the 9:30 a.m.-4:00/4:15 p.m. core session, so continuous matching simply ends at the close; 4:15 p.m. Options Late Close Exceptions are approved late closes for certain symbols"
+      sources:
+        - title: "Trading Information（NYSE 官网，Trading Hours——Options 段）"
+          url: https://www.nyse.com/trade/trading-information
+          accessed: 2026-09-05
+      quote: "Core Trading Session: 9:30 a.m. to 4:00/4:15 p.m. ET 4:15 p.m. Options Late Close Exceptions"
+      confidence: medium
+      verified: 2026-09-05
+
+    matching_principle:
+      zh: ""
+      en: ""
+      detail: "连续撮合阶段的成交优先级条文（Rule 964NYP 排序规则——Priority 1 市价单 / Priority 2 展示订单 / Priority 3 非展示订单的完整优先序与价格-时间关系）未包含在本次抓取的 SEC 备案 Exhibit 5 中（该 Exhibit 为修订条文汇编，Rule 964NYP 仅以引用形式出现），NYSE American 期权规则手册正文本会话未能直抓。为不猜不凑，本 leaf 留空。已核实的相邻事实：拍卖内排序与订单优先级命名见 opening_mechanism 与 order_types（Reserve Order 展示量列 Priority 2、储备量列 Priority 3）。可补方向：NYSE American 期权规则手册 Rule 964NYP 全文（SEC 备案或规则手册 PDF）。"
+      confidence: low
+      verified: 2026-09-05
+
+    order_types:
+      spec:
+        market: true
+        limit: true
+        iceberg: true
+        tif: [day, gtc, ioc]
+        note: "另有拍卖专用订单 LOO（Limit-on-Open）/MOO（Market-on-Open）/IO（Imbalance Offset）/AON；Reserve Order 为部分显示+隐藏储备的冰山型订单；Market Order 受 Trading Collar（相对参考价的订单级价格保护带）约束；IOC 修饰符订单不参与拍卖"
+      zh: "主要订单类型（NYSE American 期权规则 Rule 900.3NYP Orders and Modifiers）：市价单（Market Order——未定价、按可得最优价成交、受 Trading Collar 约束，可指定 Day 或 GTC）、限价单（Limit Order）、储备单（Reserve Order——显示部分列展示优先级、隐藏储备量列非展示优先级的冰山型订单）；有效期修饰符含 Day、GTC、IOC（IOC 单不参与拍卖）；拍卖专用订单另有 LOO（限价开盘单）、MOO（市价开盘单）、IO（失衡补偿单）与 AON"
+      en: "Principal order types (NYSE American options rules, Rule 900.3NYP Orders and Modifiers): Market Order (unpriced, executes at the best price obtainable, subject to a Trading Collar, may be designated Day or GTC), Limit Order, and Reserve Order (an iceberg-type order whose displayed quantity ranks as display priority and whose reserve interest ranks as non-display priority); time-in-force modifiers include Day, GTC and IOC (IOC orders are not eligible for auctions); auction-specific types include LOO (Limit-on-Open), MOO (Market-on-Open), IO (Imbalance Offset) and AON"
+      sources:
+        - title: "Rules of NYSE American, Inc. — Trading of Option Contracts（Rule 900.3NYP，SEC 备案 Exhibit 5）"
+          url: https://www.sec.gov/files/rules/sro/nyseamer/2023/34-97869-ex5.pdf
+          accessed: 2026-09-05
+      quote: "Market Order. An unpriced order message to buy or sell a stated number of option contracts at the best price obtainable, subject to the Trading Collar assigned to the order. A Market Order may be designated Day or GTC. ... Immediate-or-Cancel (“IOC”) Modifier. A Limit Order may be designated IOC or Routable IOC, as described in paragraphs (A) and (B) of this paragraph (b)(2). A Limit Order designated IOC is not eligible to participate in any Auctions. ... Reserve Order. A Limit Order with a quantity of the size displayed and with a reserve quantity of the size (“reserve interest”) that is not displayed. The displayed quantity of a Reserve Order is ranked Priority 2 - Display Orders and the reserve interest is ranked Priority 3 - Non-Display Orders."
+      confidence: high
+      verified: 2026-09-05
+
+    tick_size:
+      zh: ""
+      en: ""
+      detail: "期权报价最小变动单位（MPV）的档位条文本次未能获取：已抓的 NYSE American 期权规则 Exhibit 只含「MPV for the series」「Legal Width Quote」等引用级概念（报价须满足 Rule 925NY 法定宽度），未含具体档位表；OCC 合约规格页只给权利金报价点值（Premium Quotations: Stated in points, one point equals $100），不给 tick。按铁律不猜，留空。可补方向：NYSE American/Arca 期权规则 MPV 条文（含 Penny Pilot 相关分档）的 SEC 备案 Exhibit 或规则手册全文。"
+      confidence: low
+      verified: 2026-09-05
+
+    contract_specs_note:
+      zh: "标准股票期权合约规格（OCC 合约规格页）：每张标准合约代表标的证券100股（公司行动如配股、送股、并购可产生非100股的调整合约）；权利金按点报价、1点等于$100；行权方式为美式——到期日（含）之前的任一营业日均可行权，任一营业日提交的行权通知于行权后第一个营业日（T+1）交付标的股票；到期月份一般为两个近月加一、二或三月季月循环中的另外两个月；月度合约在到期月的第三个星期五到期；行权价间距一般为低于$25按$2.50、$25至$200按$5、高于$200按$10（各交易所另有超出标准方式的挂牌计划）"
+      en: "Standard equity option contract specifications (OCC product specifications page): each standard contract represents 100 shares of the underlying equity (corporate actions such as rights offerings, stock dividends and mergers can result in adjusted contracts representing other than 100 shares); premiums are stated in points, one point equaling $100; exercise style is American-style — options may be exercised on any business day up to and including the expiration date, and exercise notices tendered on any business day result in delivery of the underlying stock on the first (T+1) business day following exercise; expiration months are generally two near-term months plus two additional months from the January, February or March quarterly cycle; monthly options expire on the third Friday of the expiration month; strike price intervals are generally $2.50 increments below $25, $5 increments from $25 through $200, and $10 increments above $200 (exchange programs allow listing beyond the standard method)"
+      sources:
+        - title: "OCC — Equity Options Product Specifications（合约规格：乘数/报价点值/行权价间距/美式行权/到期序列/第三周五到期/T+1 交割；经 wayback 2025-08-08 快照）"
+          url: https://www.theocc.com/clearance-and-settlement/clearing/equity-options-product-specifications
+          accessed: 2026-09-05
+      quote: "Unit of Trade: Each standard contract represents 100 shares of the underlying equity. Corporate actions, such as rights offerings, stock dividends, and mergers can result in adjusted contracts representing something other than 100 shares of stock. ... Premium Quotations: Stated in points. One point equals $100. ... In general, $2.50 increments for strikes below $25, $5 increments for those trading from $25 through $200, and $10 increments for strikes above $200. ... American-style. Options may be exercised on any business day up to and including the expiration date. ... In general, two near-term months plus two additional months in the January, February or March quarterly cycle. ... Monthly options expire on the third Friday of the expiration month."
+      confidence: high
+      verified: 2026-09-05
+
+    price_limits:
+      type:
+        zh: ""
+        en: ""
+        detail: "美式上市期权未见「日常涨跌停」制度：OCC 合约规格页与 NYSE American 期权规则 Exhibit 中均无期权合约日常价格限制（涨跌幅）条文，但按 [ADR-067] 判据，断言 type: none 需要正面文本（如规则明文「不设价格限制」或把约束穷举列尽的条文），本次未能定位此类原文，故 type 留空不设 enum。相邻事实：NYSE American 期权存在订单级保护机制——可成交订单受 Trading Collar（相对参考价的档位表，如参考价 $3.01-$5.00 档为 $0.30 与参考价 25% 孰低）约束、拍卖价格受 Auction Collar 约束，这些是订单级/拍卖级保护带，不是合约级日常涨跌停，不冒充本字段。"
+        confidence: low
+        verified: 2026-09-05
+      main_board:
+        zh: ""
+        en: ""
+        detail: "见 price_limits.type 字段说明——无正面文本支撑 type: none 之前不填幅度；Trading Collar 档位表属订单级保护，不作为合约涨跌停幅度填写。"
+        confidence: low
+        verified: 2026-09-05
+      other_boards:
+        zh: ""
+        en: ""
+        detail: "不适用——本所期权市场不按板块划分（products 章期权条目按运营法人分列，机制统一记录于本子块），见 price_limits.type 字段说明。"
+        confidence: low
+        verified: 2026-09-05
+
+    circuit_breaker:
+      enum: index_level
+      spec:
+        type: index_level
+        reference: [{index: "S&P 500", exchange: self}]
+        note: "期权市场不独立设熔断阈值——随股票市场 MWCB（标普500三级阈值）联动停牌；MWCB 阈值 7%/13%/20% 的全文见本文件顶层 circuit_breaker"
+      zh: "期权市场自身不设独立熔断阈值，随美股股票市场的全市场熔断（MWCB，基于标普500指数单日跌幅的三级阈值）联动：股票市场触发 MWCB 停牌时，NYSE Arca Options 与 NYSE American Options 市场同步停止交易，停牌触发后发生的成交一律作废（nullified）"
+      en: "The options markets set no independent circuit-breaker thresholds; they halt in step with the equity market's Market-Wide Circuit Breaker (MWCB, three thresholds measuring a decrease against the S&P 500's prior close) — if the equities market triggers a MWCB halt, the NYSE Arca Options and NYSE American Options markets halt trading, and any trades that occur after the halt is triggered are nullified"
+      sources:
+        - title: "NYSE Market-Wide Circuit Breakers FAQ（官网 PDF，v4.0 2026-02，Q10/Q11 期权市场联动停牌与自动复牌）"
+          url: https://nyse.com/publicdocs/nyse/NYSE_MWCB_FAQ.pdf
+          accessed: 2026-09-05
+      quote: "10. Do the options markets also halt? Yes. If the equities market triggers a MWCB halt, the NYSE Arca Options and NYSE American Options markets will halt trading. Any trades that occur after the halt is triggered will be nullified."
+      confidence: high
+      verified: 2026-09-05
+
+    volatility_interruption:
+      zh: ""
+      en: ""
+      detail: "美式期权市场未见个股/合约级「波动性中断」（价格走廊触发集合竞价/冷静期）机制的正面条文。NYSE American 期权规则的 Trading Collar 是针对市价单/可成交单的订单级价格保护带（相对参考价的档位表），不是波动性中断机制，不能冒充本字段；Auction Collar 只作用于开盘/复牌拍卖。按 [ADR-082] 棒 2 判据：既无「有」的原文，也未找到可正面断言「无」的穷举性条文，留空。"
+      confidence: low
+      verified: 2026-09-05
+
+    trading_halt_mechanism:
+      zh: "停牌与恢复随标的证券联动：期权系列因标的主市场停牌而停牌后，由 Trading Halt Auction（复牌拍卖）重新开盘——触发条件为主市场在停牌/暂停结束时同时发布复牌消息、双边报价与一笔落在价差内的成交；MWCB 停牌后的期权复牌同此机制：主市场恢复双边报价与落在价差内的成交后，相关期权系列自动开盘"
+      en: "Halts and resumptions follow the underlying: an option series halted due to a trading halt in the underlying's primary market reopens via a Trading Halt Auction — triggered when the primary market disseminates, at the end of the trading halt or pause, a resume message, a two-sided quote, and a trade of any size at or within the quote; after a MWCB halt the related option series likewise opens automatically once the primary market disseminates a quote and a trade at or within the quote"
+      sources:
+        - title: "Rules of NYSE American, Inc. — Trading of Option Contracts（Rule 952NYP Trading Halt Auction 定义与触发，SEC 备案 Exhibit 5）"
+          url: https://www.sec.gov/files/rules/sro/nyseamer/2023/34-97869-ex5.pdf
+          accessed: 2026-09-05
+        - title: "NYSE Market-Wide Circuit Breakers FAQ（官网 PDF，Q11 期权市场自动复牌）"
+          url: https://nyse.com/publicdocs/nyse/NYSE_MWCB_FAQ.pdf
+          accessed: 2026-09-05
+      quote: "(B) “Trading Halt Auction” means the Auction that reopens trading following a trading halt. ... (B) For a Trading Halt Auction, the Auction Trigger is when the Primary Market disseminates at the end of a trading halt or pause a resume message, a two-sided quote, and a trade of any size that is at or within the quote. ... Once the primary market for the underlying security disseminates a quote and a trade that is at or within the quote, the related option series will be opened automatically."
+      confidence: high
+      verified: 2026-09-05
+
+    block_trade:
+      zh: "期权侧的大宗/成组交易以合格或有交叉订单（QCC，Qualified Contingent Cross）为代表：至少1,000张合约的母订单与数量相等的对手方订单构成的合格或有交易，满足条件的 QCC 按其价格立即整体成交、不路由，且可以$0.01的MPV输入（不受该系列MPV限制）；多腿版本 Complex QCC 每腿至少1,000张。NYSE Arca 期权侧的大宗交易条款本次未逐条核实"
+      en: "Block-style trading on the options side is represented by the Qualified Contingent Cross (QCC): an originating order to buy or sell at least 1,000 contracts identified as part of a qualified contingent trade, coupled with contra-side order(s) totaling an equal number of contracts; a conforming QCC trades immediately in full at its price, does not route, and may be entered with an MPV of $0.01 regardless of the MPV of the options series; the multi-leg Complex QCC Order requires at least 1,000 contracts per leg. The NYSE Arca options-side block-trade provisions were not verified in detail this session"
+      sources:
+        - title: "Rules of NYSE American, Inc. — Trading of Option Contracts（Rule 900.3NYP(g) Cross Orders — QCC，SEC 备案 Exhibit 5）"
+          url: https://www.sec.gov/files/rules/sro/nyseamer/2023/34-97869-ex5.pdf
+          accessed: 2026-09-05
+      quote: "A QCC Order must be comprised of an originating order to buy or sell at least 1,000 contracts that is identified as being part of a qualified contingent trade coupled with a contra-side order or orders totaling an equal number of contracts. If a QCC has more than one option leg (a “Complex QCC Order”), each option leg must have at least 1,000 contracts. A QCC Order that is not rejected per paragraph (g)(1)(C) or (D) below will immediately trade in full at its price, does not route, and may be entered with an MPV of $0.01 regardless of the MPV of the options series."
+      confidence: medium
+      detail: "「QCC 是期权侧大宗型机制的代表性安排」为本字段的结构化归纳（QCC 属规则中的 Cross Orders 节），机制事实本身逐字有据；因与顶层 block_trade 字段（NYSE 股票 block 定义）不是同一制度、且 Arca 侧未并核，confidence 取 medium 而非 high。"
+      verified: 2026-09-05
+
+    market_maker_scheme:
+      spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "NYSE American 期权：任期制 Market Maker，双边持续报价义务（每类别交易时间的 60%，按月集合考核）+ firm quote 强制成交义务 + 报价须满足法定宽度（Legal Width）；无统一价差上限数值公布。NYSE Arca 期权为 LMM（Lead Market Maker）制，义务条文本次未逐条核实"}
+      zh: "做市商制度（NYSE American 期权）：Market Maker 须在其任期的期权类别上提供持续双边报价，时间为交易所对每个类别开盘交易时间的60%（按月考核、对其全部任期类别集合适用），报价须满足 Rule 925NY 的法定报价宽度要求；做市商可被交易官要求对特定系列提交单一报价或维持持续报价，并对其发布的买卖报价负有强制成交义务（firm quotes）；NYSE 官网另按类别公布 NYSE Arca Options 的 LMM 名单（Arca 侧为 Lead Market Maker 制，义务条文本次未逐条核实）"
+      en: "Market Maker scheme (NYSE American options): Market Makers must provide continuous two-sided quotations throughout the trading day in their appointed issues for 60% of the time the Exchange is open for trading in each issue (assessed monthly, applied collectively across all appointed issues), meeting the legal quote width requirements of Rule 925NY; Market Makers may be called upon by a Trading Official to quote specific series and are compelled to buy/sell a specified quantity at their disseminated bid/offer (firm quotes); NYSE also publishes per-class LMM lists for NYSE Arca Options (Arca runs a Lead Market Maker scheme, whose obligations were not verified in detail this session)"
+      sources:
+        - title: "Rules of NYSE American, Inc. — Trading of Option Contracts（Rule 925.1NYP Market Maker Quotations，SEC 备案 Exhibit 5）"
+          url: https://www.sec.gov/files/rules/sro/nyseamer/2023/34-97869-ex5.pdf
+          accessed: 2026-09-05
+      quote: "Market Makers. A Market Maker must provide continuous two-sided quotations throughout the trading day in its appointed issues for 60% of the time the Exchange is open for trading in each issue. Such quotations must meet the legal quote width requirements of Rule 925NY. These obligations will apply to all of the Market Maker's appointed issues collectively, rather than on an issue-by-issue basis. Compliance with this obligation will be determined on a monthly basis. ... Firm Quotes. A Market Maker will be compelled to buy/sell a specified quantity of option contracts at the disseminated bid/offer pursuant to his obligations under Rule 970NY."
+      confidence: high
+      verified: 2026-09-05
+
+    margin_practice_note:
+      zh: "交易端保证金（OCC 最低客户保证金要求，经会员经纪商执行）：买入9个月以内到期的认沽/认购期权须全额付清权利金——期权买方不融资、不缴保证金；无备兑（uncovered）期权卖方须存入并维持「100%期权权利金收入 + 20%标的合约总值（标的现价×$100）−期权虚值额（如有）」，其中认购的最低要求为权利金+10%合约总值、认沽的最低要求为权利金+10%行权价总值；计算维持保证金时以期权当前市值替代权利金收入。OCC 对清算会员层级的保证金方法论（STANS）见 clearing.derivatives"
+      en: "Trading-side margin (OCC's minimum customer margin, applied through member brokers): purchases of puts or calls with nine months or less until expiration must be paid for in full — option buyers neither finance nor post margin; writers of uncovered puts or calls must deposit/maintain 100% of the option proceeds plus 20% of the aggregate contract value (current equity price x $100) minus the out-of-the-money amount (if any), subject to a minimum of proceeds + 10% of the aggregate contract value for calls and proceeds + 10% of the aggregate exercise value for puts; for maintenance margin the option's current market value replaces the option proceeds. OCC's clearing-member-level margin methodology (STANS) is described under clearing.derivatives"
+      sources:
+        - title: "OCC — Equity Options Product Specifications（Minimum Customer Margin 段；经 wayback 2025-08-08 快照）"
+          url: https://www.theocc.com/clearance-and-settlement/clearing/equity-options-product-specifications
+          accessed: 2026-09-05
+      quote: "Purchases of puts or calls with nine months or less until expiration must be paid for in full. Writers of uncovered puts or calls must deposit / maintain 100% of the option proceeds* plus 20% of the aggregate contract value (current equity price x $100) minus the amount by which the option is out-of-the-money, if any, subject to a minimum for calls of option proceeds* plus 10% of the aggregate contract value and a minimum for puts of option proceeds* plus 10% of the aggregate exercise price amount. *For calculating maintenance margin, use the option's current market value instead of the option proceeds."
+      confidence: high
+      verified: 2026-09-05
+
+    connect_schemes:
+      zh: ""
+      en: ""
+      detail: "未找到可正面化「无跨境互联互通安排」的穷举性条文——美国期权市场对境外参与者是开放式准入，不存在 Stock Connect 式机制，但按 [ADR-082] 棒 2 判据，「不存在」需要穷举性原文（如把跨境安排列尽的官方清单）支撑，本次未能定位此类条文，留空。"
+      confidence: low
+      verified: 2026-09-05
+
 # ═══════════════════════════════════════════════
 # 六｜上市、持续监管与退市
 # ═══════════════════════════════════════════════
@@ -661,6 +920,7 @@ listing:
     confidence: high
 
   listing_process_duration:
+    spec: {value: 14, unit: business_days, bound: upper, note: "申请完成提交后 NYSE 上市团队 14 个工作日内回复审核意见；完整端到端周期（含 SEC 注册、定价与挂牌）官方未给统一数字"}
     zh: "NYSE 官方给出申请受理环节的明确时限：完成并提交申请后，NYSE 上市团队将在 14 个工作日内回复审核意见；申请获受理后由专责上市团队协助走完后续流程。完整端到端周期（含 SEC 注册、定价与挂牌）官方未给出统一数字，视项目复杂度而定"
     en: "NYSE publishes a concrete service-level for the application intake: once an application is completed and submitted, the NYSE listings team will respond within 14 business days; after acceptance a dedicated listings specialist assists through the remaining process. No official end-to-end duration (including SEC registration, pricing and listing) is published — it varies with project complexity"
     detail: "由留空升级：官网『listings-process』页的 14 个工作日回复时限为可摘引一手表述；此前记录的『保密资格审查+正式申请两步』结构保留为背景。"
@@ -869,6 +1129,74 @@ clearing:
         accessed: 2026-08-24
     quote: "DTC, FICC, and NSCC adopted the Clearing Agency Stress Testing Framework... DTC, FICC, and NSCC adopted recovery and wind-down plans (\"RWPs\") and related rules... Loss Allocation. DTC, FICC, and NSCC adopted enhanced loss allocation rules designed to (i) modify each respective clearing agency's loss allocation processes, (ii) harmonize the loss allocation processes among the clearing agencies, (iii) reduce the time within which NSCC is required to return a former member's Clearing Fund deposit"
     confidence: high
+
+  # derivatives 子块（2026-09-05，框架性问题 #45 之 us-nyse 衍生品缺口）：期权清算端主体是
+  # OCC（Options Clearing Corporation）——全美上市期权（含 NYSE American/Arca 期权）的唯一
+  # 中央清算机构/CCP，与本文件顶层 clearing.ccp_name 描述的现货端 CCP（NSCC）是两回事，
+  # OCC 的身份与角色在本子块内如实描述。theocc.com 直连 403，原始页经 wayback 回退落盘
+  # （快照日期见 PROJECT/sources/us-nyse.md 登记条目）。
+  derivatives:
+    initial_margin_practice:
+      zh: "期权清算的中央对手方是 OCC（Options Clearing Corporation）——全美上市期权的唯一 CCP，NYSE American/Arca 期权成交全部经 OCC 清算；OCC 对清算会员的保证金采用自研的 STANS（System for Theoretical Analysis and Numerical Simulations）方法论：全球首个采用大规模蒙特卡洛模拟的衍生品清算机构，对清算会员账户中经 OCC 清算持有的期权、期货与现金工具组合计量风险敞口，基础保证金组件取自 99% Expected Shortfall 风险度量，另加压力测试组件"
+      en: "The CCP for options clearing is OCC (Options Clearing Corporation) — the sole central counterparty for all US-listed options, clearing all NYSE American/Arca options trades; OCC's clearing-member margin uses its proprietary STANS (System for Theoretical Analysis and Numerical Simulations) methodology: the first derivatives clearinghouse in the world to use a large-scale Monte Carlo-based risk management methodology, measuring the exposure of portfolios of options, futures and cash instruments cleared and carried by OCC for its clearing member firms, with the base margin component obtained from the 99% Expected Shortfall risk measure plus a stress-test component"
+      detail: "顶层 clearing.ccp_name 描述现货端（NSCC）；期权端 CCP 为 OCC，本子块按衍生品口径记录。原始页经 wayback 回退抓取（theocc.com 直连 403）。"
+      sources:
+        - title: "OCC — Margin Methodology（STANS 方法论总览；经 wayback 2025-12-09 快照）"
+          url: https://www.theocc.com/risk-management/margin-methodology
+          accessed: 2026-09-05
+      quote: "OCC is the first derivatives clearinghouse in the world to use a large-scale Monte Carlo-based risk management methodology. The STANS methodology is used to measure the exposure of portfolios of options, futures and cash instruments cleared and carried by OCC on behalf of its clearing member firms (“CMs”). ... The base component of the margin requirement for each account is obtained from the risk measure known as 99% Expected Shortfall."
+      confidence: high
+      verified: 2026-09-05
+
+    maintenance_margin_practice:
+      zh: "OCC 逐日对每个清算会员账户适用保证金要求：逐日保证金计算基于全组合蒙特卡洛模拟并保守构建，确保账户内已清算产品价值加已缴保证金抵押品在两日展望期内不会明显为负；出现重大亏损的账户可被盘中追加保证金（intraday calls）；客户层无备兑期权空头的维持要求以期权当前市值替代权利金收入计算（公式见 market_structure.derivatives.margin_practice_note）；客户账户中的期权多头头寸出于投资者保护原因整体不计入 OCC 保证金计算"
+      en: "OCC applies margin requirements on a daily basis to each clearing-member account: the daily margin calculation is based on full-portfolio Monte Carlo simulations, constructed conservatively to ensure that the value of cleared products in the account plus posted collateral will not be appreciably negative at a two-day horizon; intraday calls may be made on accounts incurring significant losses; at the customer level, maintenance requirements for uncovered short options use the option's current market value in place of the option proceeds (formula under market_structure.derivatives.margin_practice_note); long option positions in customer accounts are excluded altogether from OCC margin calculations for investor protection reasons"
+      detail: "同 initial_margin_practice，本字段是清算/CCP 层面视角，与市场结构章节的交易端保证金说明不合并，见 [ADR-030]。"
+      sources:
+        - title: "OCC — Margin Methodology（General Features 段与脚注1；经 wayback 2025-12-09 快照）"
+          url: https://www.theocc.com/risk-management/margin-methodology
+          accessed: 2026-09-05
+        - title: "OCC — Equity Options Product Specifications（Minimum Customer Margin 脚注；经 wayback 2025-08-08 快照）"
+          url: https://www.theocc.com/clearance-and-settlement/clearing/equity-options-product-specifications
+          accessed: 2026-09-05
+      quote: "OCC applies margin requirements on a daily basis to each account maintained at OCC by its CMs. Intraday calls for additional margin may be made on accounts incurring significant losses. ... Monte Carlo simulations and - as set out in more detail below - is constructed conservatively to ensure a very high level of assurance that the overall value of cleared products in the account, plus collateral posted to meet margin requirements, will not be appreciably negative at a two-day horizon. ... Long option positions held in customer accounts of CMs, and not part of various designated spread positions, are excluded altogether from OCC margin calculations for investor protection reasons. ... *For calculating maintenance margin, use the option's current market value instead of the option proceeds."
+      confidence: high
+      verified: 2026-09-05
+
+    mark_to_market_frequency:
+      zh: "逐日盯市：OCC 对其清算会员在 OCC 开立的每个账户逐日计算并适用保证金要求；出现重大亏损的账户可被盘中追保"
+      en: "Daily: OCC applies margin requirements on a daily basis to each account maintained at OCC by its clearing members; intraday calls for additional margin may be made on accounts incurring significant losses"
+      sources:
+        - title: "OCC — Margin Methodology（General Features 段；经 wayback 2025-12-09 快照）"
+          url: https://www.theocc.com/risk-management/margin-methodology
+          accessed: 2026-09-05
+      quote: "OCC applies margin requirements on a daily basis to each account maintained at OCC by its CMs. Intraday calls for additional margin may be made on accounts incurring significant losses."
+      confidence: high
+      verified: 2026-09-05
+
+    delivery_method:
+      enum: physical
+      zh: "实物交割为主：行权或被指派的结果是标的股份的取得或交付——每张标准股票期权对应标的证券100股，任一营业日提交的行权通知于行权后第一个营业日（T+1）交付标的股票；个别产品为现金结算（如 NYSE 官网 Options Trading 信息列示的 Cash-Settled FLEX ETF Options——经批准以现金结算为灵活条款的类别），与股票期权实物交割为默认的主线不同"
+      en: "Physical delivery as the default: exercise or assignment results in acquisition or delivery of the underlying shares — each standard equity option covers 100 shares of the underlying security, and exercise notices tendered on any business day result in delivery of the underlying stock on the first (T+1) business day following exercise; a few products are cash-settled (e.g. the Cash-Settled FLEX ETF Options listed in NYSE's Options Trading information — issues eligible for cash settlement as a flexible term), unlike the physical-delivery default of equity options"
+      detail: "enum 取 physical（占主导的标准股票期权口径）；现金结算例外写入 zh/detail，受控词表 delivery_method 无「分品种」选项，不强行改设 enum。"
+      sources:
+        - title: "OCC — Equity Options Product Specifications（Unit of Trade / Exercise Settlement Time；经 wayback 2025-08-08 快照）"
+          url: https://www.theocc.com/clearance-and-settlement/clearing/equity-options-product-specifications
+          accessed: 2026-09-05
+      quote: "Unit of Trade: Each standard contract represents 100 shares of the underlying equity. ... Exercise or assignment of equity options results in acquisition or delivery of the underlying shares. ... Exercise notices tendered on any business day will result in delivery of the underlying stock on the first (T+1) business day following exercise."
+      confidence: high
+      verified: 2026-09-05
+
+    last_trading_day_rule:
+      zh: "标准月度期权合约在到期月的第三个星期五到期（美式行权，到期日（含）之前的任一营业日均可行权）；到期月份一般为两个近月加一、二或三月季月循环中的另外两个月（见 contract_specs_note）"
+      en: "Standard monthly option contracts expire on the third Friday of the expiration month (American-style, exercisable on any business day up to and including the expiration date); expiration months are generally two near-term months plus two additional months from the January, February or March quarterly cycle (see contract_specs_note)"
+      sources:
+        - title: "OCC — Equity Options Product Specifications（Expiration Dates / Exercise Style；经 wayback 2025-08-08 快照）"
+          url: https://www.theocc.com/clearance-and-settlement/clearing/equity-options-product-specifications
+          accessed: 2026-09-05
+      quote: "Monthly options expire on the third Friday of the expiration month. ... American-style. Options may be exercised on any business day up to and including the expiration date."
+      confidence: high
+      verified: 2026-09-05
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者

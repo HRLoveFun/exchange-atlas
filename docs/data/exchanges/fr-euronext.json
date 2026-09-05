@@ -1643,10 +1643,10 @@
         "spec": {
           "value": 8,
           "unit": "weeks",
-          "note": "受监管市场（Euronext）IPO 约 8 周；Euronext Growth（奥斯陆市场）标准 15 个工作日；具体在发行人与市场运营方商定的上市时间表中确定，规则手册不设统一天数"
+          "note": "「Normal duration 8 周」出自官网奥斯陆市场（Oslo Børs，适用 Euronext Expand）挂牌流程表，非 Euronext 全市场口径；Euronext Growth（奥斯陆）标准 15 个工作日；其余市场按各自商定时间表，规则手册不设统一天数"
         },
-        "zh": "上市周期因板块而异：受监管市场（Euronext）IPO 通常约 8 周；Euronext Growth 板块在奥斯陆市场的标准流程为 15 个工作日，其余市场参照各自时间表。具体时长在发行人保荐人与相关市场运营实体共同商定的上市时间表（timetable）中明确，规则手册仅要求双方对上市安排达成共同认可的时间表，未规定统一最短/最长天数。",
-        "en": "Time-to-listing varies by segment: an IPO on the regulated Euronext market typically takes about 8 weeks; the Euronext Growth segment runs a standard 15 business days in the Oslo market, with other markets following their own schedules. The precise duration is set out in the timetable jointly agreed between the issuer's sponsor and the relevant Market Undertaking; the rulebook merely requires the two parties to agree on a joint timetable and does not prescribe a uniform minimum/maximum number of days.",
+        "zh": "上市周期因板块与市场而异：官网仅对奥斯陆市场（Oslo Børs，适用 Euronext Expand）的挂牌流程给出「正常时长 8 周」的量化数字；Euronext Growth 奥斯陆标准流程为 15 个工作日；其余市场在发行人保荐人与相关市场运营实体共同商定的上市时间表（timetable）中明确，规则手册仅要求双方对上市安排达成共同认可的时间表，未规定统一最短/最长天数。",
+        "en": "Time-to-listing varies by segment and market: the only quantified figure on the official site is \"Normal duration 8 weeks\" in the listing-process table for the Oslo market (Oslo Børs, applying to Euronext Expand); the Euronext Growth segment runs a standard 15 business days in the Oslo market, with other markets following their own schedules. The precise duration is set out in the timetable jointly agreed between the issuer's sponsor and the relevant Market Undertaking; the rulebook merely requires the two parties to agree on a joint timetable and does not prescribe a uniform minimum/maximum number of days.",
         "sources": [
           {
             "title": "Euronext IPO Journey（官网，各板块上市时长）",

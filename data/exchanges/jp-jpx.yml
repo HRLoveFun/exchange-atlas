@@ -209,9 +209,13 @@ regulation:
 # ═══════════════════════════════════════════════
 # 四｜产品体系
 # ═══════════════════════════════════════════════
+# 注：本文件按单记录覆盖 JPX 集团（与 hk-hkex/HKFE 同款处理）——现货股票线由东京证券交易所
+# （TSE）运营，衍生品业务线由集团全资子公司大阪取引所（Osaka Exchange, OSE）运营。下列
+# future/option 条目为 OSE 挂牌的旗舰衍生品（合规规格原文见各产品 Contract Specifications 页，
+# 抓取来源见 PROJECT/sources/jp-jpx.md 2026-09-05 补充登记节）。
 products:
   _meta:
-    verified: 2026-08-13
+    verified: 2026-09-05
     confidence: medium
   items:
     - id: jp-jpx-stocks
@@ -235,6 +239,39 @@ products:
       category: structured
       name_zh: 交易所买卖票据
       name_native: "ETN"
+    # ── 以下为集团内大阪取引所（OSE）挂牌的旗舰衍生品（单记录覆盖集团）──
+    - id: jp-jpx-nk225-futures
+      category: future
+      name_zh: 日经225期货
+      name_native: "Nikkei 225 Futures"
+      description: "OSE 旗舰股指期货（1988年9月3日上市）：标的为日经225指数，合约乘数每点1,000日元，季度合约月份（3/6/9/12月）挂牌、6月与12月合约最近16个，最后交易日为合约月份第二个星期五前的工作日，现金结算（最终结算价为SQ特别清算指数）"
+    - id: jp-jpx-nk225-mini
+      category: future
+      name_zh: 日经225迷你期货
+      name_native: "Nikkei 225 mini"
+      description: "日经225期货的1/10规格迷你合约，与大型合约同桶撮合（同标的联动熔断）"
+    - id: jp-jpx-nk225-options
+      category: option
+      name_zh: 日经225期权
+      name_native: "Nikkei 225 Options"
+      description: "标的日经225指数的欧式期权（1989年6月12日上市），合约单位为期权价格×1,000日元，季度+月度合约月份并行挂牌"
+    - id: jp-jpx-topix-futures
+      category: future
+      name_zh: TOPIX期货
+      name_native: "TOPIX Futures"
+      derivative_of: topix
+      description: "标的东证股价指数TOPIX的股指期货（1988年9月3日上市），合约乘数每点1万日元，现金结算（SQ）"
+    - id: jp-jpx-topix-options
+      category: option
+      name_zh: TOPIX期权
+      name_native: "TOPIX Options"
+      derivative_of: topix
+      description: "标的TOPIX的欧式期权（1989年10月20日上市），合约单位为期权价格×1万日元"
+    - id: jp-jpx-jgb-futures
+      category: future
+      name_zh: 国债期货
+      name_native: "JGB Futures"
+      description: "以标准化名义国债为标的的利率期货（10年期1985年10月19日上市，另有5年期、mini 20年期与现金结算的mini 10年期），到期实物交割（卖方从可交割券中选择交付）"
 
 # ═══════════════════════════════════════════════
 # 五｜市场结构与交易机制
@@ -677,6 +714,7 @@ listing:
     confidence: high
 
   listing_process_duration:
+    spec: {value: 4, unit: months, note: "境外公司：上市审核约 3 个月 + 上市批准后公开发售程序约 1 个月，自申请日至上市首日原则上约 4 个月；含内部筹备（须完成两个会计年度审计）自启动到上市整体约 1 年"}
     zh: "境外公司申请上市：审核约需3个月，审核通过后公开发售（IPO）程序约需1个月，合计原则上自申请日至上市首日约需4个月；若计入公司内部筹备（含须完成两个会计年度的审计），从启动到上市整体约需1年"
     en: "For a foreign applicant: the listing examination takes about three months, and public-offering (IPO) procedures after approval take about one more month — an applicant needs about four months, as a rule, from the listing application date to the first day of listing; including internal preparation (the company must be audited for two business years), the overall process from kick-off to listing takes about one year"
     detail: "官网原文以境外公司申请为例给出精确月数；境内公司流程结构相同，官网未单独给出境内公司的月数拆分。"
@@ -747,6 +785,7 @@ listing:
     confidence: high
 
   delisting_transition_period:
+    spec: {value: 6, unit: months, note: "监理股份（Securities Under Supervision）+ 整理股份（Securities to be Delisted）两阶段合计原则上共六个月；单只股票的整理股份指定天数由交易所按 Enforcement Rules 逐案确定"}
     zh: "因未达持续上市标准触发退市的公司：先经一年（交易量类指标为六个月）整改期未能达标，随后被指定为「监理股份」与「整理股份」，两阶段合计原则上共六个月，期满仍未达标即正式退市；「整理股份」指定期本身持续至退市日前一天（见delisting_process）"
     en: "For delisting triggered by failing Continued Listing Criteria: after a one-year (six months for trading-volume criteria) improvement period without meeting the criteria, the company is designated as Securities Under Supervision and then Securities to be Delisted — the two designations together last a total of six months in principle before delisting takes effect; the Securities-to-be-Delisted designation itself runs until the day before the delisting date (see delisting_process)"
     detail: "「六个月」是监理+整理两阶段合计的原则性时长，出自Issues in an Improvement Period说明页；具体到某一只股票的整理股份指定天数由交易所按Enforcement Rules另行确定，本次未抓取到Enforcement Rules条文核实固定天数。"

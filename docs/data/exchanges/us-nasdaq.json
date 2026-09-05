@@ -330,12 +330,27 @@
     },
     "products": {
       "meta": {
-        "verified": "2026-08-14",
+        "verified": "2026-09-05",
         "sources": [
           {
             "title": "Nasdaq Initial Listing Guide（PDF）",
             "url": "https://listingcenter.nasdaq.com/assets/initialguide.pdf",
             "accessed": "2026-08-14"
+          },
+          {
+            "title": "SEC Order（六家 Nasdaq 期权 SRO 法人实体列名，govinfo.gov 转载，2025-12-23）",
+            "url": "https://www.govinfo.gov/content/pkg/FR-2025-12-23/html/2025-23668.htm",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "Nasdaq Options Market (NOM) Data（官网）",
+            "url": "https://www.nasdaq.com/solutions/data/options/nom",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "Options Regulatory Alert",
+            "url": "https://www.nasdaqtrader.com/MicroNews.aspx?id=ORA2024-40",
+            "accessed": "2026-09-05"
           }
         ],
         "confidence": "medium"
@@ -375,6 +390,27 @@
           "name_zh": "债券",
           "name_native": "Debt Securities",
           "description": "Initial Listing Guide 提及debt securities有独立上市规则，未逐条核实具体门槛"
+        },
+        {
+          "id": "us-nasdaq-nom",
+          "category": "option",
+          "name_zh": "纳斯达克期权市场",
+          "name_native": "The Nasdaq Options Market (NOM)",
+          "description": "Nasdaq 集团六家注册期权交易所之一（SEC 命令列名六家 SRO：The Nasdaq Stock Market LLC / Nasdaq BX / Nasdaq GEMX / Nasdaq MRX / Nasdaq PHLX / Nasdaq ISE）；官网对 NOM 的描述为全电子、价格/时间优先、运行于 Nasdaq INET 技术"
+        },
+        {
+          "id": "us-nasdaq-bx-options",
+          "category": "option",
+          "name_zh": "纳斯达克 BX 期权市场",
+          "name_native": "Nasdaq BX Options",
+          "description": "Nasdaq BX, Inc. 运营的期权市场，集团六家注册期权交易所之一；2024-08 官方 Options Regulatory Alert 仍将 Phlx/BX/NOM 三家并列列入盘中报价义务提醒"
+        },
+        {
+          "id": "us-nasdaq-phlx-options",
+          "category": "option",
+          "name_zh": "纳斯达克 PHLX 期权市场",
+          "name_native": "Nasdaq PHLX Options",
+          "description": "Nasdaq PHLX, LLC 运营的期权市场，集团六家注册期权交易所之一；做市制度分层含 Lead Market Maker/SQT/RSQT 与 Directed Market Maker（90% 双边报价义务，SEC 规则文件原文）"
         }
       ]
     },
@@ -1062,6 +1098,15 @@
         "spec": null
       },
       "listing_process_duration": {
+        "spec": {
+          "value": 5,
+          "unit": "weeks",
+          "range": [
+            4,
+            6
+          ],
+          "note": "一般四至六周完成审核（第 1 周开始审核；第 2–3 周初步审核并出具意见函；第 3–6 周公司回应；第 7–8 周完成并批准）；无争议问题且公司迅速回应可大幅缩短；代表值取区间中点"
+        },
         "zh": "通常4-6周完成审核（第1周开始审核；第2-3周完成初步审核并出具意见函；第3-6周公司回应问题；第7-8周完成审核并批准上市），若无争议问题可能更短",
         "en": "Typically 4-6 weeks (Week 1 review begins; Weeks 2-3 preliminary review and comment letter; Weeks 3-6 company responds; Weeks 7-8 review completed and approved), may be shorter if no issues arise",
         "sources": [
@@ -1075,7 +1120,6 @@
         "confidence": "high",
         "verified": "2026-08-14",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "transfer_between_boards": {

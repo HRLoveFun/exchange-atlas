@@ -610,6 +610,11 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                             if k not in declared:
                                 err(f"{loc}: spec 里的键 `{k}` 未在 schema/spec.yml 声明"
                                     f"（拼写错？可用键：{sorted(declared)}）")
+                        # bound 值域（2026-09-05 上市生命周期迭代）：口径标记只有两值，
+                        # 渲染层据此显示 ≤/≥——写错会让上限被读成固定值
+                        if "bound" in spec and spec["bound"] not in ("upper", "lower"):
+                            err(f"{loc}: spec.bound 只允许 `upper`（上限/不超过）或 "
+                                f"`lower`（下限/不少于），实际是 {spec['bound']!r}")
 
                         # 5c：note（及 *_note）自由文本里内嵌的数字反查。不限 confidence——
                         # [ADR-054] 复核 8 处 FIX 里 4 处属于这个盲区（cn-sse 夹带深交所

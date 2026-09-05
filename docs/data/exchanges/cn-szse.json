@@ -1621,6 +1621,12 @@
         "spec": null
       },
       "listing_process_duration": {
+        "spec": {
+          "value": 3,
+          "unit": "months",
+          "bound": "upper",
+          "note": "受理后审核+证监会注册总计不超过 3 个月（回复问询时间不计入、总计另有 3 个月上限）；首轮审核问询 20 个工作日内发出"
+        },
         "zh": "自受理发行上市申请文件之日起，深交所审核与中国证监会注册的时间总计不超过3个月（发行人及中介机构回复审核问询所耗用的时间不计入，回复问询时间总计另有3个月上限）；受理后深交所须在20个工作日内发出首轮审核问询",
         "en": "From acceptance of the listing application, SZSE's own review plus CSRC's registration decision must together take no more than 3 months (time the issuer and intermediaries spend responding to review inquiries is excluded from this clock, and is itself capped separately at 3 months in total); SZSE must issue its first round of review inquiries within 20 working days of acceptance",
         "sources": [
@@ -1634,8 +1640,7 @@
         "detail": "原文条款用汉字数字「二十个工作日」，zh/en 摘要为便于横向阅读换成阿拉伯数字「20」，quote 已逐字保留原文汉字数字未做改写；confidence 因 make check 的数字反查规则识别不到「二十」对应「20」而降为 medium，非数据准确性问题。",
         "confidence": "medium",
         "verified": "2026-08-14",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "transfer_between_boards": {
         "zh": "",

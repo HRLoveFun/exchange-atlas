@@ -309,7 +309,7 @@
     },
     "products": {
       "meta": {
-        "verified": "2026-08-13",
+        "verified": "2026-09-05",
         "confidence": "medium"
       },
       "items": [
@@ -351,6 +351,20 @@
           "category": "bond",
           "name_zh": "债券（NYSE Bonds平台）",
           "description": "每个交易日两场债券拍卖：开盘4:00am、核心8:00am，未成交订单转入连续交易"
+        },
+        {
+          "id": "us-nyse-american-options",
+          "category": "option",
+          "name_zh": "NYSE American 期权",
+          "name_native": "NYSE American Options",
+          "description": "原美国证券交易所（AMEX）期权业务——2008年NYSE收购AMEX（官网历史页：并购后『成为全美第三大期权市场』），由 NYSE American, LLC 运营；做市商为任期制 Market Maker，规则条文为 Section 900NY 系列（见 market_structure.derivatives）"
+        },
+        {
+          "id": "us-nyse-arca-options",
+          "category": "option",
+          "name_zh": "NYSE Arca 期权",
+          "name_native": "NYSE Arca Options",
+          "description": "由 NYSE Arca, Inc. 运营的期权市场（做市商称 LMM，Lead Market Maker）；与 NYSE American Options 同经 OCC 中央清算、同随股票市场 MWCB 联动停牌（见 market_structure.derivatives）"
         }
       ]
     },
@@ -1019,6 +1033,12 @@
         "spec": null
       },
       "listing_process_duration": {
+        "spec": {
+          "value": 14,
+          "unit": "business_days",
+          "bound": "upper",
+          "note": "申请完成提交后 NYSE 上市团队 14 个工作日内回复审核意见；完整端到端周期（含 SEC 注册、定价与挂牌）官方未给统一数字"
+        },
         "zh": "NYSE 官方给出申请受理环节的明确时限：完成并提交申请后，NYSE 上市团队将在 14 个工作日内回复审核意见；申请获受理后由专责上市团队协助走完后续流程。完整端到端周期（含 SEC 注册、定价与挂牌）官方未给出统一数字，视项目复杂度而定",
         "en": "NYSE publishes a concrete service-level for the application intake: once an application is completed and submitted, the NYSE listings team will respond within 14 business days; after acceptance a dedicated listings specialist assists through the remaining process. No official end-to-end duration (including SEC registration, pricing and listing) is published — it varies with project complexity",
         "detail": "由留空升级：官网『listings-process』页的 14 个工作日回复时限为可摘引一手表述；此前记录的『保密资格审查+正式申请两步』结构保留为背景。",
@@ -1032,8 +1052,7 @@
         "quote": "Once you complete and submit your application, a member of our NYSE listings team will review your information and get back to you within 14 business days.",
         "confidence": "high",
         "verified": "2026-08-13",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "transfer_between_boards": {
         "zh": "NYSE 自身无内部分层板块，「转板」在美国语境下指交易所之间的上市转移（NYSE ↔ NYSE American ↔ Nasdaq 等）：机制上通过原交易所向 SEC 提交 Form 25（除牌申请，一般 10 天生效）与新交易所的上市程序衔接完成——NYSE 官方退市页给出的正是这一 Form 25 机制（见 quote），配合接收交易所的挂牌条件审核",

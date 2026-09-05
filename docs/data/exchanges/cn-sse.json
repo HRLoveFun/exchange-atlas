@@ -331,12 +331,22 @@
     },
     "products": {
       "meta": {
-        "verified": "2026-08-12",
+        "verified": "2026-09-05",
         "sources": [
           {
             "title": "上海证券交易所交易规则（2023年修订）第二章第三节，经 mgzq.com 镜像获取，见 SOURCES.md 说明",
             "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
             "accessed": "2026-08-12"
+          },
+          {
+            "title": "期权「合约规格」栏目列表页（官网列示沪市挂牌的全部 5 只 ETF 期权品种，2026-09-05 衍生品覆盖缺口任务新增）",
+            "url": "https://www.sse.com.cn/assortment/options/contract/",
+            "accessed": "2026-09-05"
+          },
+          {
+            "title": "上证50ETF期权合约基本条款（2026-09-05 衍生品覆盖缺口任务新增）",
+            "url": "https://www.sse.com.cn/assortment/options/contract/c/c_20230303_5717359.shtml",
+            "accessed": "2026-09-05"
           }
         ],
         "confidence": "medium"
@@ -377,6 +387,27 @@
           "category": "fund",
           "name_zh": "公募 REITs",
           "description": "2021 年起试点，一般知识，未逐条核实"
+        },
+        {
+          "id": "cn-sse-50etf-options",
+          "category": "option",
+          "name_zh": "上证50ETF期权",
+          "name_native": "SSE 50 ETF Options",
+          "description": "本所首只股票期权品种（试点依据上证发〔2015〕7号《股票期权试点交易规则》）；标的为上证50交易型开放式指数证券投资基金（50ETF），合约单位 10000 份、欧式行权、实物交割为默认（详见官网《上证50ETF期权合约基本条款》与 market_structure.derivatives.contract_specs_note）"
+        },
+        {
+          "id": "cn-sse-300etf-options",
+          "category": "option",
+          "name_zh": "沪深300ETF期权",
+          "name_native": "CSI 300 ETF Options",
+          "description": "标的为华泰柏瑞沪深300交易型开放式指数证券投资基金（沪深300ETF，代码 510300）；官网「合约规格」栏目列示的基本条款品种之一"
+        },
+        {
+          "id": "cn-sse-500etf-options",
+          "category": "option",
+          "name_zh": "中证500ETF期权",
+          "name_native": "CSI 500 ETF Options",
+          "description": "标的为南方中证500交易型开放式指数证券投资基金（中证500ETF，代码 510500）；官网「合约规格」栏目另列示华夏科创50ETF期权、易方达科创50ETF期权两个科创板 ETF 期权品种，共 5 只 ETF 期权"
         }
       ]
     },
@@ -992,32 +1023,483 @@
       },
       "derivatives": {
         "trading_sessions": {
-          "pre_market": null,
-          "continuous_am": null,
-          "lunch_break": null,
-          "continuous_pm": null,
-          "after_market": null,
-          "night_session": null
+          "pre_market": {
+            "spec": {
+              "start": "09:15",
+              "end": "09:25",
+              "kind": "opening_auction"
+            },
+            "zh": "无独立盘前时段；9:15-9:25 为开盘集合竞价，与现货市场开盘集合竞价时段一致",
+            "en": "No separate pre-market session; 9:15-9:25 a.m. is the opening call auction, aligned with the cash equity market's opening auction window",
+            "sources": [
+              {
+                "title": "上海证券交易所股票期权试点交易规则 第十九条",
+                "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+                "accessed": "2026-09-05"
+              }
+            ],
+            "quote": "期权合约的交易时间为每个交易日9:15至9:25、9:30至11:30、13：00至15:00。其中，9:15至9:25为开盘集合竞价时间，14:57-15:00为收盘集合竞价时间，其余时段为连续竞价时间，本规则另有规定的除外。",
+            "confidence": "high",
+            "verified": "2026-09-05",
+            "enum": null,
+            "detail": null
+          },
+          "continuous_am": {
+            "spec": {
+              "start": "09:30",
+              "end": "11:30",
+              "kind": "continuous"
+            },
+            "zh": "9:30-11:30",
+            "en": "9:30 a.m.-11:30 a.m.",
+            "sources": [
+              {
+                "title": "上海证券交易所股票期权试点交易规则 第十九条",
+                "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+                "accessed": "2026-09-05"
+              }
+            ],
+            "quote": "9:30至11:30、13：00至15:00",
+            "confidence": "high",
+            "verified": "2026-09-05",
+            "enum": null,
+            "detail": null
+          },
+          "lunch_break": {
+            "spec": {
+              "start": "11:30",
+              "end": "13:00",
+              "kind": "lunch_recess"
+            },
+            "zh": "11:30-13:00，与现货市场一致",
+            "en": "11:30 a.m.-1:00 p.m., same as the cash market",
+            "confidence": "medium",
+            "detail": "第十九条枚举的交易时段中未包含11:30-13:00，属未列入交易时间的间隔段，与顶层 lunch_break 字段同一处理方式，未单独引用原文。",
+            "sources": [
+              {
+                "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
+                "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
+                "accessed": "2026-08-12"
+              }
+            ],
+            "verified": "2026-08-12",
+            "enum": null,
+            "quote": null
+          },
+          "continuous_pm": {
+            "spec": {
+              "start": "13:00",
+              "end": "15:00",
+              "kind": "continuous",
+              "note": "14:57-15:00 为收盘集合竞价，见 closing_mechanism"
+            },
+            "zh": "13:00-15:00（13:00-14:57 连续竞价 + 14:57-15:00 收盘集合竞价），与现货市场时段一致",
+            "en": "1:00 p.m.-3:00 p.m. (1:00-2:57 p.m. continuous auction + 2:57-3:00 p.m. closing call auction), aligned with the cash equity market",
+            "sources": [
+              {
+                "title": "上海证券交易所股票期权试点交易规则 第十九条",
+                "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+                "accessed": "2026-09-05"
+              }
+            ],
+            "quote": "9:15至9:25为开盘集合竞价时间，14:57-15:00为收盘集合竞价时间，其余时段为连续竞价时间",
+            "confidence": "high",
+            "verified": "2026-09-05",
+            "enum": null,
+            "detail": null
+          },
+          "after_market": {
+            "spec": {
+              "kind": "none",
+              "note": "第十九条穷举交易时间未含盘后时段（对照本文件顶层 after_market 的科创板盘后固定价格交易）"
+            },
+            "zh": "无盘后交易时段——《期权交易规则》第十九条枚举的期权交易时间仅为9:15-9:25、9:30-11:30、13：00-15:00，未包含现货科创板股票的盘后固定价格交易机制（见顶层 after_market），是期权与现货交易机制的一处具体差异",
+            "en": "No after-hours session — Rule 19's exhaustive list of options trading hours (9:15-9:25, 9:30-11:30, 13:00-15:00) does not include the cash STAR Market's after-hours fixed-price trading mechanism (see the top-level `after_market` field); a concrete difference between the options and cash trading mechanisms",
+            "confidence": "medium",
+            "detail": "基于第十九条对交易时间的穷举式表述作反向推断（该条未提及任何盘后时段），未见另有条文明确排除，故 confidence 定为 medium 而非 high。",
+            "sources": [
+              {
+                "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
+                "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
+                "accessed": "2026-08-12"
+              }
+            ],
+            "verified": "2026-08-12",
+            "enum": null,
+            "quote": null
+          },
+          "night_session": {
+            "spec": {
+              "kind": "none",
+              "note": "同 after_market，基于第十九条穷举交易时间的反向推断"
+            },
+            "zh": "无",
+            "en": "None",
+            "confidence": "medium",
+            "detail": "同 after_market，基于第十九条穷举交易时间的反向推断。",
+            "sources": [
+              {
+                "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
+                "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
+                "accessed": "2026-08-12"
+              }
+            ],
+            "verified": "2026-08-12",
+            "enum": null,
+            "quote": null
+          }
         },
-        "holidays_note": null,
-        "opening_mechanism": null,
-        "closing_mechanism": null,
-        "matching_principle": null,
-        "order_types": null,
-        "tick_size": null,
-        "contract_specs_note": null,
+        "holidays_note": {
+          "zh": "期权交易日为每周一至周五，国家法定节假日和本所公告的休市日休市，与现货市场一致",
+          "en": "Options trading days are Monday to Friday; the market is closed on national statutory holidays and days announced as closed by the Exchange — same as the cash equity market",
+          "sources": [
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第十八条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "本所期权交易日为每周一至周五。国家法定节假日和本所公告的休市日，本所市场休市。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null,
+          "detail": null
+        },
+        "opening_mechanism": {
+          "spec": {
+            "type": "call_auction",
+            "auction_start": "09:15",
+            "auction_end": "09:25",
+            "note": "集合竞价未能产生开盘价的，以连续竞价方式产生"
+          },
+          "zh": "开盘集合竞价（9:15-9:25）；开盘价为当日该合约第一笔成交价格，通过集合竞价方式产生，不能产生开盘价的以连续竞价方式产生",
+          "en": "Opening call auction (9:15-9:25 a.m.); the opening price is the contract's first trade price of the day, produced via the call auction — failing which it is determined via continuous auction",
+          "sources": [
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第十九条、第七十条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "9:15至9:25为开盘集合竞价时间／期权合约的开盘价为当日该合约的第一笔成交价格。开盘价通过集合竞价方式产生，不能产生开盘价的，以连续竞价方式产生。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "detail": null
+        },
+        "closing_mechanism": {
+          "spec": {
+            "type": "call_auction",
+            "auction_start": "14:57",
+            "auction_end": "15:00",
+            "note": "收盘价=当日最后一笔成交价格；全日无成交用上一交易日收盘价，挂牌首日无成交用开盘参考价；合约结算价格=当日收盘集合竞价的成交价格"
+          },
+          "zh": "收盘集合竞价（14:57-15:00）；与深交所规则不同，本所期权收盘价定义为当日该合约的最后一笔成交价格（全日无成交的用上一交易日收盘价，挂牌首日无成交的用本所公布的开盘参考价），而非单独定义的收盘集合竞价出清价；合约结算价格则为该合约当日收盘集合竞价的成交价格，收盘集合竞价未形成成交价格或成交价格明显不合理的由本所另行计算",
+          "en": "Closing call auction (2:57-3:00 p.m.); unlike the SZSE rule, SSE defines an option's closing price as the contract's last trade price of the day (previous trading day's close if no trade, or the published reference price on the listing day), not a separately defined closing-auction clearing price; the contract settlement price is instead the traded price of that day's closing call auction, computed separately by the Exchange if the auction produces no price or an evidently unreasonable one",
+          "sources": [
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第十九条、第七十条、第七十二条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "14:57-15:00为收盘集合竞价时间／期权合约的收盘价为当日该合约的最后一笔成交价格，当日无成交的，以上一交易日收盘价为当日收盘价。期权合约挂牌首日无成交的，以本所公布的开盘参考价作为当日收盘价。／期权合约的结算价格为该合约当日收盘集合竞价的成交价格。当日收盘集合竞价未形成成交价格或者成交价格明显不合理的，由本所另行计算该合约的结算价格，具体事宜由本所及中国结算另行规定。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "detail": null
+        },
+        "matching_principle": {
+          "enum": "price_time",
+          "zh": "价格优先、时间优先；连续竞价期间以涨跌停价格进行的申报另按平仓优先、时间优先原则撮合（涨停价的买入平仓申报优先于买入开仓申报，跌停价的卖出平仓申报优先于卖出开仓申报）",
+          "en": "Price priority, then time priority; during continuous auction, orders submitted at the price limit are instead matched on a close-priority, then time-priority basis (at the up-limit price, closing buy orders including covered closing orders take priority over opening buy orders; at the down-limit price, closing sell orders take priority over opening sell orders)",
+          "sources": [
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第六十五条、第六十六条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "期权竞价交易按价格优先、时间优先的原则撮合成交。／连续竞价交易时段，以涨跌停价格进行的申报，按照平仓优先、时间优先的原则撮合成交。平仓优先的原则为：以涨停价格进行的申报，买入平仓（含备兑平仓）申报优先于买入开仓申报；以跌停价格进行的申报，卖出平仓申报优先于卖出开仓申报。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "spec": null,
+          "detail": null
+        },
+        "order_types": {
+          "spec": {
+            "market": true,
+            "limit": true,
+            "tif": [
+              "fok",
+              "ioc"
+            ],
+            "note": "申报指令共 5 类：普通限价、市价剩余转限价、市价剩余撤销、全额即时限价、全额即时市价（全额即时类对应 FOK 语义、市价剩余撤销对应 IOC 语义，为本所规则语义的归纳）；申报数量 1 张或其整数倍，限价单笔最大 10 张、市价单笔最大 5 张；集合竞价阶段仅接受普通限价申报及撤单申报（不接受撤单申报的时段除外）；所列类型中未见止损/冰山/隐藏类"
+          },
+          "zh": "买卖类型：买入开仓、买入平仓、卖出开仓、卖出平仓、备兑开仓、备兑平仓等；委托类型分限价与市价，本所接受的申报指令为普通限价申报、市价剩余转限价申报、市价剩余撤销申报、全额即时限价申报、全额即时市价申报五类；申报数量为1张或其整数倍，限价申报的单笔申报最大数量为10张，市价申报的单笔申报最大数量为5张",
+          "en": "Trading types: buy-to-open, buy-to-close, sell-to-open, sell-to-close, covered-call-open and covered-call-close; orders are either limit or market orders, with five accepted instruction types — ordinary limit, market-with-remainder-to-limit, market-with-remainder-cancelled, fill-or-kill limit, and fill-or-kill market orders; order size is 1 contract or a multiple thereof, capped at 10 contracts per limit order and 5 per market order",
+          "detail": "与深交所《股票期权试点交易规则》的申报口径存在实质差异：深交所限价/市价单笔上限为50张/10张、申报指令清单为8类，上交所为10张/5张、5类——数据未混用，quote 全部摘自上交所规则原文。卖出平仓须持有权利仓、买入平仓须持有义务仓（第四十五、四十六条），备兑开仓须先提交合约标的备兑锁定指令（第四十七条），均为上交所原文，未逐条入 quote。",
+          "sources": [
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第四十三条、第五十五条、第五十八条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "前款第（三）项所称买卖类型，包括买入开仓、买入平仓、卖出开仓、卖出平仓、备兑开仓以及备兑平仓等。前款第（五）项所称委托类型，包括普通限价委托、市价剩余转限价委托、市价剩余撤销委托、全额即时限价委托、全额即时市价委托等。／本所接受交易参与人的下列限价申报和市价申报指令：（一）普通限价申报；（二）市价剩余转限价申报；（三）市价剩余撤销申报；（四）全额即时限价申报；（五）全额即时市价申报；……／期权交易的申报数量为1张或者其整数倍，限价申报的单笔申报最大数量为10张，市价申报的单笔申报最大数量为5张。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null
+        },
+        "tick_size": {
+          "spec": {
+            "regime": "per_instrument",
+            "min_tick": 0.0001,
+            "currency": "CNY",
+            "note": "按合约标的分档：ETF 标的 0.0001 元（本所现行挂牌品种均为此类）；股票标的 0.001 元（本所尚未上市股票期权，未实际使用）"
+          },
+          "zh": "0.0001元人民币（合约标的为交易所交易基金——本所目前挂牌的期权品种均属此类）；规则原文另定有以股票为标的期权的最小报价单位0.001元人民币，因本所尚未上市股票期权，目前未实际使用",
+          "en": "RMB 0.0001 for ETF-underlying options (currently all SSE-listed option products); the rules separately provide for RMB 0.001 on stock-underlying options, not yet in actual use as SSE has not listed any stock options",
+          "sources": [
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第五十九条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "合约标的为股票的，期权交易的委托、申报及成交价格为每股股票对应的权利金金额，申报价格最小变动单位为0.001元人民币；合约标的为交易所交易基金的，期权交易的委托、申报及成交价格为每份交易所交易基金对应的权利金金额，申报价格最小变动单位为0.0001元人民币。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "detail": null
+        },
+        "contract_specs_note": {
+          "zh": "以上证50ETF期权（官网「合约规格」栏目列示的首只品种，标的为上证50交易型开放式指数证券投资基金「50ETF」）为例：合约类型分认购、认沽两类；合约单位10000份（合约标的发生除权除息时按《期权交易规则》第十三条公式调整合约单位与行权价格）；到期月份为当月、下月及随后两个季月；行权价格间距按标的价格分档（3元或以下为0.05元，3元至5元（含）为0.1元，5元至10元（含）为0.25元，10元至20元（含）为0.5元，20元至50元（含）为1元，50元至100元（含）为2.5元，100元以上为5元）；欧式行权（到期日行权）；交割方式为实物交割（业务规则另有规定的除外）；到期日为到期月份的第四个星期三（遇法定节假日顺延），行权日同到期日，交收日为行权日次一交易日。官网「合约规格」栏目列示沪市挂牌的全部5只ETF期权品种：上证50ETF期权、沪深300ETF期权（标的华泰柏瑞沪深300ETF）、中证500ETF期权（标的南方中证500ETF）、华夏科创50ETF期权、易方达科创50ETF期权；本条目仅以上证50ETF期权为代表样本摘录条款，其余四只的具体条款未逐一摘引",
+          "en": "Example (SSE 50 ETF Options — the first product listed under the Exchange's options 'Contract Specifications' section, underlying the SSE 50 ETF): two contract types (calls and puts); contract unit 10,000 units (adjusted per the Rule 13 formula on the underlying's ex-rights/ex-dividend dates together with the strike); expiration months of the spot month, next calendar month and the following two calendar-quarter months; strike price intervals tiered by underlying price (RMB 0.05 at or below 3, 0.1 at (3,5], 0.25 at (5,10], 0.5 at (10,20], 1 at (20,50], 2.5 at (50,100], 5 above 100); European exercise; physical delivery by default (unless otherwise provided by business rules); expiration on the fourth Wednesday of the expiration month (deferred on statutory holidays), exercise day same as expiration day, settlement day the next trading day after exercise. The Exchange's 'Contract Specifications' section lists all five SSE-listed ETF option products: SSE 50 ETF Options, CSI 300 ETF Options (underlying Huatai-PineBridge CSI 300 ETF), CSI 500 ETF Options (underlying China Southern CSI 500 ETF), Huaxia STAR 50 ETF Options and E Fund STAR 50 ETF Options; this entry excerpts only the SSE 50 ETF Options terms as a representative sample",
+          "sources": [
+            {
+              "title": "上证50ETF期权合约基本条款（上交所官网「合约规格」栏目正文页）",
+              "url": "https://www.sse.com.cn/assortment/options/contract/c/c_20230303_5717359.shtml",
+              "accessed": "2026-09-05"
+            },
+            {
+              "title": "期权「合约规格」栏目列表页（挂牌品种清单）",
+              "url": "https://www.sse.com.cn/assortment/options/contract/",
+              "accessed": "2026-09-05"
+            },
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第九条、第十三条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "合约标的 上证50交易型开放式指数证券投资基金（“50ETF”）／合约单位 10000份／合约到期月份 当月、下月及随后两个季月／行权价格间距 3元或以下为0.05元，3元至5元（含）为0.1元，5元至10元（含）为0.25元，10元至20元（含）为0.5元，20元至50元（含）为1元，50元至100元（含）为2.5元，100元以上为5元／行权方式 到期日行权（欧式）／交割方式 实物交割（业务规则另有规定的除外）／到期日 到期月份的第四个星期三（遇法定节假日顺延）／交收日 行权日次一交易日／中证500ETF期权合约基本条款 沪深300ETF期权合约基本条款 上证50ETF期权合约基本条款 华夏科创50ETF期权合约基本条款 易方达科创50ETF期权合约基本条款",
+          "detail": "行权价格间距分档表、欧式行权、实物交割、交收日等取自官网《上证50ETF期权合约基本条款》正文页（规则正文不含间距表）；挂牌品种清单取自官网「合约规格」栏目列表页（quote 最后一段为该页五只基本条款条目名）；合约单位调整公式为《期权交易规则》第十三条（未入 quote）。全部来源均为 sse.com.cn 官网一手来源，标 high。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null
+        },
         "price_limits": {
-          "type": null,
-          "main_board": null,
-          "other_boards": null
+          "type": {
+            "zh": "逐合约、公式化的当日固定区间机制：以合约前结算价格为基准，按认购/认沽方向分别代入公式（引用合约标的前收盘价与行权价格）计算当日最大涨跌幅，是基于期权定价逻辑（挂钩标的价与行权价）的当日固定区间，而非对合约自身前收盘价的简单百分比。受控词表 `price_limit_type` 的四个选项（无/百分比涨跌幅/阶梯绝对值幅/动态参考价区间）均不能干净覆盖这种「期权定价公式型」区间，故不填 enum，仅以文字描述——与 cn-szse 同一处理方式",
+            "en": "A per-contract, formula-based same-day-fixed band: the daily limit is calculated from the contract's previous settlement price using a formula referencing the underlying's previous close and the strike price (separate formulas for calls and puts) — an options-pricing-logic-based band, not a simple percentage of the contract's own prior close. None of the four `price_limit_type` values cleanly covers this option-pricing-formula type, so `enum` is left blank — same treatment as cn-szse.",
+            "sources": [
+              {
+                "title": "上海证券交易所股票期权试点交易规则 第六十条、第六十一条",
+                "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+                "accessed": "2026-09-05"
+              }
+            ],
+            "quote": "期权交易实行价格涨跌停制度，申报价格超过涨跌停价格的申报无效。／合约涨跌停价格=合约前结算价格±最大涨跌幅",
+            "confidence": "high",
+            "verified": "2026-09-05",
+            "enum": null,
+            "spec": null,
+            "detail": null
+          },
+          "main_board": {
+            "spec": {
+              "limit_pct": null,
+              "symmetric": false,
+              "note": "非固定百分比、按公式定价（基准=合约前结算价±最大涨跌幅，公式引用标的前收盘价与行权价）：认购最大涨幅=max{标的前收盘价×0.5%, min[(2×标的前收盘价−行权价), 标的前收盘价]×10%}、最大跌幅=标的前收盘价×10%，认沽对称；最后交易日不设跌幅限制"
+            },
+            "zh": "认购期权最大涨幅=max｛合约标的前收盘价×0.5％，min[（2×合约标的前收盘价－行权价格），合约标的前收盘价]×10％｝，最大跌幅=合约标的前收盘价×10％；认沽期权最大涨幅=max｛行权价格×0.5％，min[（2×行权价格－合约标的前收盘价），合约标的前收盘价]×10％｝，最大跌幅=合约标的前收盘价×10％；计算出的涨跌幅按四舍五入原则取最小价格变动单位的整数倍，算出的跌停价格低于最小价格变动单位的以最小价格变动单位为跌停价；合约最后交易日不设跌幅限制",
+            "en": "Call max upside = max{underlying prior close×0.5%, min[(2×underlying prior close − strike), underlying prior close]×10%}, max downside = underlying prior close×10%; put max upside = max{strike×0.5%, min[(2×strike − underlying prior close), underlying prior close]×10%}, max downside = underlying prior close×10%; the computed band is rounded to a multiple of the tick size (a downside limit below one tick is set to one tick); no downside limit applies on the contract's last trading day",
+            "sources": [
+              {
+                "title": "上海证券交易所股票期权试点交易规则 第六十一条、第六十二条",
+                "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+                "accessed": "2026-09-05"
+              }
+            ],
+            "quote": "认购期权最大涨幅=max｛合约标的前收盘价×0.5％，min [（2×合约标的前收盘价－行权价格），合约标的前收盘价]×10％｝ 认购期权最大跌幅=合约标的前收盘价×10％ 认沽期权最大涨幅=max｛行权价格×0.5％，min [（2×行权价格－合约标的前收盘价），合约标的前收盘价]×10％｝ 认沽期权最大跌幅=合约标的前收盘价×10％／根据前条规定计算出的合约涨跌幅，按照四舍五入原则取最小价格变动单位的整数倍。计算出的合约跌停价格低于最小价格变动单位的，合约跌停价格为最小价格变动单位。／期权合约的最后交易日，合约价格不设跌幅限制。",
+            "confidence": "high",
+            "verified": "2026-09-05",
+            "enum": null,
+            "detail": null
+          },
+          "other_boards": {
+            "zh": "价格涨跌停公式不区分「板块」，本所目前仅ETF一类标的实际挂牌（官网「合约规格」栏目列示的5只期权品种标的均为ETF），不存在与 main_board 并列的第二档；与保证金公式（《风险控制办法》第十四条股票标的与第十五条ETF标的两套参数）形成对照",
+            "en": "The price-limit formula does not distinguish by 'board' — SSE currently lists only ETF-underlying contracts (all five products under the 'Contract Specifications' section have ETF underlyings), so there is no second tier alongside main_board; this contrasts with the margin formula, which does have separate stock/ETF parameter sets (Articles 14 and 15 of the Risk Control Measures)",
+            "confidence": "medium",
+            "detail": "留空 quote，因本字段实质是「不适用」——不是查不清，是该市场目前只有一类合约标的、无第二档可记录，与 cn-szse 同一处理方式。",
+            "sources": [
+              {
+                "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
+                "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
+                "accessed": "2026-08-12"
+              }
+            ],
+            "verified": "2026-08-12",
+            "enum": null,
+            "spec": null,
+            "quote": null
+          }
         },
-        "circuit_breaker": null,
-        "volatility_interruption": null,
-        "trading_halt_mechanism": null,
-        "block_trade": null,
-        "market_maker_scheme": null,
-        "margin_practice_note": null,
-        "connect_schemes": null
+        "circuit_breaker": {
+          "enum": "stock_level",
+          "spec": {
+            "type": "contract_level",
+            "levels": [
+              {
+                "threshold_pct": 50,
+                "halt_minutes": 3,
+                "day_end": false
+              }
+            ],
+            "note": "触发后进入 3 分钟集合竞价（非停牌），结束后恢复连续竞价；价格涨跌绝对值还须达该合约最小报价单位 5 倍；最近参考价格=最近一次集合竞价阶段产生的成交价格（开盘集合竞价未产生成交价的用前结算价格）；11:27-11:30 之间触发的集合竞价延续至 13:00 后继续；14:54-14:57 之间触发的直接进入收盘集合竞价，收盘前 1 分钟不接受撤单申报；enum 借用 stock_level 表「非全市场」（受控词表无合约级档位，见 cn-szse 同款处理与 OPEN-QUESTIONS #44(b)）"
+          },
+          "zh": "熔断机制：连续竞价交易期间，合约盘中交易价格较最近参考价格上涨、下跌达到或者超过50%，且价格涨跌绝对值达到或者超过该合约最小报价单位5倍的，该合约进入3分钟的集合竞价交易阶段，集合竞价结束后合约继续进行连续竞价交易；11:27至11:30之间达到熔断标准进入集合竞价的，未完成阶段延续至13:00后的交易时段继续进行；14:54至14:57之间达到熔断标准的直接进入收盘集合竞价。属逐合约级别，非指数级/全市场熔断",
+          "en": "Circuit breaker: during continuous auction, if a single contract's intraday trading price moves up or down by 50% or more from the latest reference price, and the absolute price change is at least 5x the contract's tick size, that contract enters a 3-minute call auction, then resumes continuous auction; a call auction triggered between 11:27 and 11:30 continues after the lunch break from 1:00 p.m., and one triggered between 14:54 and 14:57 flows directly into the closing call auction. This operates at the individual-contract level, not index-wide or market-wide.",
+          "detail": "⚠️ 现行《期权交易规则》（本次抓取的上证发〔2015〕7号官网现行有效版）的绝对值门槛为「最小报价单位5倍」；官网《上证50ETF期权合约基本条款》页（2023-03-03）写的是「10个最小报价单位」——两者不一致，本条以规则正文（上位规则文本、且为官网标注现行有效版本）为准记 5 倍，差异已在此说明。受控词表 `circuit_breaker_type` 无「合约级」档位，沿用 cn-szse 的 stock_level 借用手法（仅取其「非全市场」含义）。",
+          "sources": [
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第七十六条、第七十七条、第七十九条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "期权交易实行熔断制度。连续竞价交易期间，合约盘中交易价格较最近参考价格上涨、下跌达到或者超过50%，且价格涨跌绝对值达到或者超过该合约最小报价单位5倍的，该合约进入3分钟的集合竞价交易阶段。集合竞价交易结束后，合约继续进行连续竞价交易。／前条规定的最近参考价格，是指期权合约在最近一次集合竞价阶段产生的成交价格。开盘集合竞价阶段未产生成交价格的，以期权合约前结算价格作为最近参考价格。／期权交易在11:27至11:30之间达到熔断标准进入集合竞价的，在11:30前未完成的集合竞价阶段，延续至13:00后的交易时段继续进行。期权交易达到熔断标准进入集合竞价阶段时，该集合竞价阶段的最后1分钟内，本所不接受撤单申报；期权交易在14:54至14:57之间达到熔断标准的，直接进入收盘集合竞价阶段，收盘前1分钟内不接受撤单申报。",
+          "confidence": "high",
+          "verified": "2026-09-05"
+        },
+        "volatility_interruption": {
+          "spec": {
+            "type": "none",
+            "note": "无独立于熔断的第二层波动性中断；熔断机制（±50% 且绝对值达 5 倍最小报价单位→3 分钟集合竞价）兼跨本字段语义，见 circuit_breaker"
+          },
+          "zh": "本次抓取的《期权交易规则》未见与「熔断」（见 circuit_breaker 字段）相独立的另一层波动性中断机制——规则第五节仅规定了「±50%且绝对值达5倍最小报价单位→3分钟集合竞价」这一套机制，兼具通常语境下「熔断」与「波动性中断」两层含义，不像部分市场拆成两套规则",
+          "en": "This session's fetch of the options trading rules found no second, separate volatility-interruption layer distinct from the circuit breaker (see `circuit_breaker`) — the rules define only the single '±50% move and absolute change at least 5x tick size → 3-minute call auction' mechanism, which folds together what other markets sometimes split into two layers",
+          "confidence": "medium",
+          "detail": "非「查不清」而是结构性发现——该市场用同一套机制覆盖了 circuit_breaker 与 volatility_interruption 两个字段通常分别描述的场景，故本字段不重复引用同一段原文作 quote，仅作说明性交叉引用。",
+          "sources": [
+            {
+              "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
+              "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "enum": null,
+          "quote": null
+        },
+        "trading_halt_mechanism": {
+          "zh": "合约标的停牌的，期权合约相应停牌，合约标的复牌的期权合约同时复牌；期权合约停牌期间可以继续申报也可以撤销申报，复牌时对已接受的申报按集合竞价成交价格的确定原则撮合。另设「交易异常情况处置」：因不可抗力、意外事件、技术故障、重大差错或市场操纵，或合约标的连续涨跌停等原因导致或可能导致重大风险的，本所可采取暂时停止交易、临时停市等多类风险控制措施之一并立即报告中国证监会；暂停及恢复交易的时间由本所决定并公告，属裁量性安排而非自动触发的量化阈值",
+          "en": "Where the underlying is suspended, the option contract is suspended in step and resumes together with it; during a contract suspension orders may still be submitted or cancelled, and on resumption accepted orders are matched under the call-auction price-determination principles. A discretionary 'abnormal-circumstance handling' regime also applies: where force majeure, technical failure, material error, market manipulation, or continuous underlying limit moves could pose material risk, the Exchange may adopt measures including a trading suspension or market-wide halt and immediately report to the CSRC; suspension and resumption timing is decided and announced by the Exchange, not governed by automatic quantitative triggers",
+          "sources": [
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第七十四条、第七十五条、第八十条、第八十一条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "期权合约存续期间，合约标的停牌的，期权合约相应停牌。合约标的复牌的，期权合约同时复牌，本规则另有规定的除外。／因不可抗力、意外事件、技术故障、重大差错或者市场操纵等原因，导致或者可能导致部分或者全部期权交易不能正常进行，或者因合约标的连续涨跌停等原因导致或者可能导致期权市场出现重大风险的，本所可以按照规定的权限与程序采取下列风险控制措施，并立即报告中国证监会：（一）暂时停止交易；（二）临时停市；……／暂停及恢复交易的时间由本所决定，并予以公告。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null,
+          "detail": null
+        },
+        "block_trade": {
+          "zh": "",
+          "confidence": "low",
+          "detail": "现行《上海证券交易所股票期权试点交易规则》（本次抓取的171条全文 DOCX）不含大宗交易条款（全文检索「大宗」零命中），与深交所《股票期权试点交易规则》第4.6.8条明文「股票期权交易可采用大宗交易方式」形成对照；本次亦未核实到上交所期权大宗交易的其他官方细则或说明。如实留空，请协调者登记 OPEN-QUESTIONS（上交所期权是否有场外/大宗安排及对应规则文件）。",
+          "sources": [
+            {
+              "title": "上海证券交易所交易规则（2023年修订，经 mgzq.com 镜像获取，见 SOURCES.md 说明）",
+              "url": "https://www.mgzq.com/userfiles/ecb5375bc6ab4174a6d9fb405222c2a7/files/cms/article/上海证券交易所交易规则（2023年修订）.pdf",
+              "accessed": "2026-08-12"
+            }
+          ],
+          "verified": "2026-08-12",
+          "en": null,
+          "enum": null,
+          "spec": null,
+          "quote": null
+        },
+        "market_maker_scheme": {
+          "spec": {
+            "present": true,
+            "quote_obligation": true,
+            "max_spread_pct": null,
+            "note": "做市商对挂牌期权合约提供双边持续报价+双边回应报价，享有交易费用减免、激励等权利；做市资格、权利义务与考核由本所另行规定；本轮规则文本未见统一报价价差上限；条文与深交所《股票期权试点交易规则》第4.1.13条几乎一致，quote 各自摘自本所原文"
+          },
+          "zh": "期权做市商对本所挂牌交易的期权合约提供双边持续报价、双边回应报价等服务，并享有交易费用减免、激励等权利；做市商的做市资格、权利、义务以及考核等事宜由本所另行规定",
+          "en": "Options market makers provide liquidity services for SSE-listed option contracts — continuous two-way quoting and two-way quote-request response — in exchange for trading-fee rebates and other incentives; market-making qualifications, rights, obligations and assessment are set separately by the Exchange",
+          "sources": [
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第三十二条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "期权做市商对本所挂牌交易的期权合约提供双边持续报价、双边回应报价等服务，并享有交易费用减免、激励等权利。期权做市商的做市资格、权利、义务以及考核等事宜，由本所另行规定。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "detail": null
+        },
+        "margin_practice_note": {
+          "zh": "保证金分为结算准备金与交易保证金（交易保证金再分开仓保证金、维持保证金），以现金或经上交所及中国结算认可的证券交纳，实行分级收取（期权经营机构向客户、中国结算向结算参与人、结算参与人向委托其结算的期权经营机构收取，下级收取标准不得低于上级标准）。公式按合约标的两套参数：股票标的——认购期权义务仓开仓保证金=[合约前结算价+Max(21%×合约标的前收盘价-认购期权虚值，10%×合约标的前收盘价)]×合约单位，认沽=Min{合约前结算价+Max(19%×合约标的前收盘价-认沽期权虚值，10%×行权价)，行权价}×合约单位；ETF标的（本所现行全部品种）——认购=[合约前结算价+Max(12%×合约标的前收盘价-认购期权虚值，7%×合约标的前收盘价)]×合约单位，认沽=Min[合约前结算价+Max(12%×合约标的前收盘价-认沽期权虚值，7%×行权价)，行权价]×合约单位；虚值=Max(行权价-合约标的前收盘价，0)（认购）或Max(合约标的前收盘价-行权价，0)（认沽）；维持保证金公式同构，仅将「前收盘价/前结算价」替换为「收盘价/结算价」。认购期权备兑开仓经中国结算日终交割锁定后不再收取维持保证金。另设组合策略保证金机制（按组合策略对应标准收取，构建/解除申报时段为交易日9:30-11:30、13:00-15:15），以及结算准备金小于零不得开仓、持仓超限与保证金不足的强行平仓机制、ETF标的限开仓机制（详见 clearing.derivatives 与《风险控制办法》）",
+          "en": "Margin comprises settlement reserve and trading margin (the latter split into opening margin and maintenance margin), payable in cash or securities recognized by SSE/ChinaClear, and collected in a tiered structure (options firms from clients, ChinaClear from clearing participants, clearing participants from the options firms clearing through them — each tier no lower than the tier above). Two parameter sets by underlying: stock-underlying — short-call opening margin = [prior settlement price + Max(21%×underlying prior close − call OTM value, 10%×underlying prior close)] × contract multiplier, short-put = Min{prior settlement price + Max(19%×underlying prior close − put OTM value, 10%×strike), strike} × contract multiplier; ETF-underlying (all currently listed products) — the same structure with 12%/7% parameters; OTM value = Max(strike − underlying prior close, 0) for calls or Max(underlying prior close − strike, 0) for puts; maintenance margin mirrors these formulas with the current close/settlement price substituted. Covered call positions, once delivery-locked by ChinaClear at end of day, are exempt from maintenance margin. A portfolio-strategy margining scheme also exists (margin at the strategy standard; construction/unwind windows 9:30-11:30 and 13:00-15:15), alongside no-open-when-reserve-is-negative rules, forced liquidation, and opening restrictions on ETF-underlying contracts (see clearing.derivatives and the Risk Control Measures)",
+          "sources": [
+            {
+              "title": "上海证券交易所、中国证券登记结算有限责任公司股票期权试点风险控制管理办法 第十四条、第十五条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781451/files/f993fec80e204f9fb013813f2b0e0c00.docx",
+              "accessed": "2026-09-05"
+            },
+            {
+              "title": "上海证券交易所股票期权试点交易规则 第六章「风险控制」第一百二十至一百二十九条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/option/c/10781448/files/0c0f89e74e9c4a5b9aa3a7acafdf5119.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "合约标的为股票的，每张合约的开仓保证金的计算公式为：（一）认购期权义务仓开仓保证金＝[合约前结算价+ Max（21%×合约标的前收盘价-认购期权虚值，10%×合约标的前收盘价）]×合约单位。（二）认沽期权义务仓开仓保证金＝Min{合约前结算价+Max（19%×合约标的前收盘价-认沽期权虚值，10%×行权价），行权价}×合约单位。／合约标的为交易型开放式指数基金（以下简称“交易所交易基金”）的，每张合约的开仓保证金的计算公式为：（一）认购期权义务仓开仓保证金＝[合约前结算价+Max（12%×合约标的前收盘价-认购期权虚值，7%×合约标的前收盘价）]×合约单位。（二）认沽期权义务仓开仓保证金＝Min[合约前结算价+Max（12%×合约标的前收盘价-认沽期权虚值，7%×行权价），行权价]×合约单位。",
+          "detail": "组合策略申报时段（9:30-11:30、13:00-15:15）为《期权交易规则》第一百二十五条、ETF 标的限开仓（75%/70%触发-回落阈值）为《风险控制办法》第四十七条、备兑免收维持保证金为《风险控制办法》第二十一条——均已在 .cache 原文中核实但未逐条入 quote。保证金公式不压标量，spec 缺省（参照 cn-szse 范式）。",
+          "confidence": "high",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null
+        },
+        "connect_schemes": {
+          "zh": "沪港通不覆盖本所挂牌期权/衍生品：《上海证券交易所沪港通业务实施办法（2024年修订）》第十六条穷举列示可作为沪股通标的的证券仅为「股票」与「股票ETF」两类，不含期权或其他衍生品；沪股通机制以现货证券通道为设计对象（见顶层 connect_schemes）。本所挂牌衍生品本次未见其他跨境安排的官方说明",
+          "en": "The Shanghai-Hong Kong Stock Connect does not cover SSE-listed options/derivatives: the exhaustive-enumeration article (Article 16) of the SSE Implementation Measures for the Shanghai-Hong Kong Stock Connect (2024 revision) lists eligible northbound securities types as only stocks and stock ETFs, with no options or other derivatives; the Connect mechanism is designed as a cash-securities channel (see the top-level connect_schemes). No official statement on any other cross-border arrangement for SSE-listed derivatives was found this session",
+          "detail": "与 cn-szse 同款处理（[ADR-082] 棒 2「负面断言正面化」）：以互联互通标的证券的穷举性条款正面支撑「衍生品未被纳入」——对穷举条款的结构性推断（无官方『不纳入期权』明文），按独立复核（[ADR-086]）意见判 medium。⚠️ 该办法 2024-06-14 原发布页（lawandrules/sselawsrules/global/hkexsc/ 路径）附件已 404，本次取 sselawsrules2025 栏目下 2025-10-17 重新挂载的公告页全文 DOCX（见 sources 与 PROJECT/sources/cn-sse.md）。",
+          "sources": [
+            {
+              "title": "上海证券交易所沪港通业务实施办法（2024年修订）第十六条",
+              "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/global/hkexsc/c/10795123/files/e8c08d2dfcd74f27b88728d986bb9cda.docx",
+              "accessed": "2026-09-05"
+            }
+          ],
+          "quote": "第十六条 在本所上市交易的下列证券，符合相应条件的，可作为沪股通标的证券：（一）股票；（二）股票ETF。",
+          "confidence": "medium",
+          "verified": "2026-09-05",
+          "enum": null,
+          "spec": null
+        }
       }
     },
     "listing": {
@@ -1055,6 +1537,12 @@
         "quote": null
       },
       "listing_process_duration": {
+        "spec": {
+          "value": 3,
+          "unit": "months",
+          "bound": "upper",
+          "note": "受理后本所审核+证监会注册总计不超过 3 个月（问询回复时间不计入）；受理决定 5 个工作日内作出"
+        },
         "zh": "注册制下上交所股票发行上市的法定时限（《上海证券交易所股票发行上市审核规则》现行版）：收到申请文件后 5 个工作日内作出是否受理的决定；自受理之日起，本所审核和证监会注册的时间总计不超过 3 个月（发行人及保荐机构回复审核问询的时间不计算在内）",
         "en": "Statutory timelines for SSE IPOs under the registration system (SSE Stock Issuance and Listing Review Rules, current version): accept/reject decision within 5 business days of receiving the application; review plus CSRC registration in total no more than 3 months from acceptance (time spent answering review inquiries is excluded)",
         "sources": [
@@ -1068,7 +1556,6 @@
         "confidence": "high",
         "verified": "2026-08-17",
         "enum": null,
-        "spec": null,
         "detail": null
       },
       "transfer_between_boards": {

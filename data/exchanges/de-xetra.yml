@@ -658,6 +658,7 @@ listing:
     confidence: high
 
   delisting_transition_period:
+    spec: {value: 3, unit: months, note: "发行人主动撤销 Prime Standard 的公示日至生效日之间设三个月过渡期；依职权撤销（如破产）无此缓冲，须立即公示"}
     zh: "发行人主动申请撤销Prime Standard的，公示日至生效日之间设三个月过渡期；依职权撤销的情形（如破产）无此三个月缓冲，须立即公示"
     en: "For issuer-initiated revocation of Prime Standard admission, there is a three-month period between publication and the effective date; ex-officio revocations (e.g. insolvency) have no such buffer and must be published without undue delay"
     sources:

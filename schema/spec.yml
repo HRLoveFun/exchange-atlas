@@ -265,21 +265,27 @@ fields:
   # 填充条（满条 = 9 个月；其余阶段块为示意顺序、不按真实时长比例——一家公司上市多久
   # 没有固定值）。
   # 只有能从 quote 拿到干净数字的交易所才填。多数市场不设法定固定时长（"无硬性法定
-  # 期限"），或唯一来源把数字拼写成英文单词 / 中文数字（"about four months" /
-  # "十五个交易日"——5b 的逐字数字反查拿不到）——spec 整个缺省、散文承载，属预期，
-  # 不是缺口（缺 quote 的几家记 OPEN-QUESTIONS）。
+  # 期限"）——spec 整个缺省、散文承载，属预期，不是缺口。quote 把数字拼写成英文
+  # 单词 / 中文数字（"about four months" / "十五个交易日"）时：个位数 value 可人工
+  # 转写填入（5b 对个位数豁免，quote 本身是逐字锚点——同 [ADR-071] rate_raw 的
+  # 转写精神，2026-09-05 上市生命周期迭代确立）；≥2 位数字仍必须有含阿拉伯数字的
+  # 一手 quote（5b 逐字反查），拿不到就 spec 缺省、记 OPEN-QUESTIONS。
   # value + unit 给代表值（有跨度时通常取上界或最典型档）；range [min,max] 给板块 /
-  # CVM 注册路径 / 境内外不同导致的跨度；type: none 仅在规则明确"不设此过渡期"且有
-  # 正面原文依据时用。value/range 里的 ≥2 位数字受 validate.py 5b 逐字反查（quote），
-  # note 里的数字受 5c 文件级反查。
+  # 注册路径 / 境内外不同导致的跨度；bound 标 value 的口径（上限/下限，渲染层据此
+  # 显示 ≤/≥，防「no more than 40」被读成「恰好 40」——2026-09-05 独立复核 D4 维度）；
+  # type: none 仅在规则明确"不设此过渡期"且有正面原文依据时用。value/range 里的
+  # ≥2 位数字受 validate.py 5b 逐字反查（quote），note 里的数字受 5c 文件级反查。
+  # value: null 合法——机制分阶段 / 多路径、无单一总时长时用（如 br-b3 Annex A
+  # 阶段时限表），note 承载阶段明细，渲染层退回散文块。
   listing.listing_process_duration: &listing_duration
     doc: >
       从上市申请 / 受理到挂牌的时长。value 是代表值（与 unit 同单位），range 给跨度。
       多数交易所不设法定固定时长——查不到干净数字时整个 spec 缺省，不强行填。
     keys:
-      value: "number——代表时长，与 unit 同单位"
+      value: "number（或 null——分阶段时限 / 多路径、无单一总时长时）——代表时长，与 unit 同单位"
       unit: "business_days / trading_days / calendar_days / weeks / months"
       range: "[min, max]，可选——与 value 同单位，板块 / 注册路径 / 境内外不同导致的跨度"
+      bound: "upper / lower，可选——value 口径为上限（不超过 / no more than）或下限（不少于 / not less than）；缺省 = 固定值或代表值"
       type: "none——规则明确不设此时长 / 过渡期（须有正面原文依据）"
       note: "string，可选——档位、口径、仅适用某情形的限定"
   listing.delisting_transition_period: *listing_duration

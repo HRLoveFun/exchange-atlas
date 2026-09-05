@@ -883,9 +883,9 @@ listing:
     confidence: high
 
   listing_process_duration:
-    spec: {value: 65, unit: business_days, range: [45, 65], note: "国内企业约 45 个工作日、外国企业 IPO 约 65 个工作日发出资格审定通知；预审申请到上市批准整体约 3–4 个月"}
-    zh: "从提交上市资格预审申请到取得上市批准，通常约需3至4个月（取决于IPO准备度）；KRX对国内企业申请在收到预审申请后原则上2个月内（45个工作日）、外国企业IPO原则上3个月内（65个工作日）发出资格审定通知书。整体上市审查若遇重大异议可延长。"
-    en: "From the filing of the application for preliminary review on listing eligibility to listing approval normally takes about 3 to 4 months (depending on IPO readiness); KRX issues the notice of eligibility clearance within two months (45 business days) for a domestic applicant and within three months (65 business days) for a foreign IPO applicant. The overall review may be extended if significant issues arise."
+    spec: {value: 65, unit: business_days, range: [45, 65], bound: upper, note: "已在 KRX 指定海外市场上市的申请人进行二次上市（secondary listing）：2 个月（45 个工作日）内发出资格审定通知；外国申请人 IPO：3 个月（65 个工作日）内；预审申请到上市批准整体约 3–4 个月"}
+    zh: "从提交上市资格预审申请到取得上市批准，通常约需3至4个月（取决于IPO准备度）；KRX对已在KRX指定海外市场（NYSE、NASDAQ等）上市的申请人进行二次上市的，在收到预审申请后原则上2个月内（45个工作日）发出资格审定通知书；外国企业IPO原则上3个月内（65个工作日）。整体上市审查若遇重大异议可延长。"
+    en: "From the filing of the application for preliminary review on listing eligibility to listing approval normally takes about 3 to 4 months (depending on IPO readiness); KRX issues the notice of eligibility clearance within two months (45 business days) in case of a secondary listing of an applicant already listed on one of the overseas markets designated by KRX, and within three months (65 business days) for a foreign IPO applicant. The overall review may be extended if significant issues arise."
     sources:
       - title: Listing ‧ Getting Started ‧ TimeLine（KRX官网英文版）
         url: https://global.krx.co.kr/contents/GLB/03/0303/0303040000/GLB0303040000.jsp

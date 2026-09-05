@@ -1235,6 +1235,12 @@
         "spec": null
       },
       "listing_process_duration": {
+        "spec": {
+          "value": 4,
+          "unit": "weeks",
+          "bound": "upper",
+          "note": "上市审核决定通常不晚于申请提交后四周；招股说明书审查期：新发行人 20 个日历日、其他发行人 10 个日历日（Going Public Process）"
+        },
         "zh": "通常自上市申请提交后不超过四周内完成审核决定（「申请通常最迟在提交后四周内作出决定」）；招股说明书审查期为新发行人20个日历日、其他发行人10个日历日，见Going Public Process。",
         "en": "Normally the decision is taken no later than four weeks after the listing application is filed; the prospectus review period is 20 calendar days for new issuers (10 for others), per the Going Public Process.",
         "detail": "官方「Going Public Process」手册给出「不超过四周」的审核时点与招股说明书审查期（新发行人20个日历日、其他10个日历日）。",
@@ -1248,8 +1254,7 @@
         ],
         "verified": "2026-08-27",
         "confidence": "high",
-        "enum": null,
-        "spec": null
+        "enum": null
       },
       "transfer_between_boards": {
         "zh": "",

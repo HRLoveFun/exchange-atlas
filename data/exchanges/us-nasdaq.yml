@@ -272,11 +272,20 @@ regulation:
 # ═══════════════════════════════════════════════
 products:
   _meta:
-    verified: 2026-08-14
+    verified: 2026-09-05
     sources:
       - title: Nasdaq Initial Listing Guide（PDF）
         url: https://listingcenter.nasdaq.com/assets/initialguide.pdf
         accessed: 2026-08-14
+      - title: SEC Order（六家 Nasdaq 期权 SRO 法人实体列名，govinfo.gov 转载，2025-12-23）
+        url: https://www.govinfo.gov/content/pkg/FR-2025-12-23/html/2025-23668.htm
+        accessed: 2026-09-05
+      - title: Nasdaq Options Market (NOM) Data（官网）
+        url: https://www.nasdaq.com/solutions/data/options/nom
+        accessed: 2026-09-05
+      - title: Options Regulatory Alert #2024-40（Nasdaq Phlx/BX/NOM 盘中报价义务提醒）
+        url: https://www.nasdaqtrader.com/MicroNews.aspx?id=ORA2024-40
+        accessed: 2026-09-05
     confidence: medium
   items:
     - id: us-nasdaq-equities
@@ -304,6 +313,21 @@ products:
       name_zh: 债券
       name_native: "Debt Securities"
       description: "Initial Listing Guide 提及debt securities有独立上市规则，未逐条核实具体门槛"
+    - id: us-nasdaq-nom
+      category: option
+      name_zh: 纳斯达克期权市场
+      name_native: "The Nasdaq Options Market (NOM)"
+      description: "Nasdaq 集团六家注册期权交易所之一（SEC 命令列名六家 SRO：The Nasdaq Stock Market LLC / Nasdaq BX / Nasdaq GEMX / Nasdaq MRX / Nasdaq PHLX / Nasdaq ISE）；官网对 NOM 的描述为全电子、价格/时间优先、运行于 Nasdaq INET 技术"
+    - id: us-nasdaq-bx-options
+      category: option
+      name_zh: 纳斯达克 BX 期权市场
+      name_native: "Nasdaq BX Options"
+      description: "Nasdaq BX, Inc. 运营的期权市场，集团六家注册期权交易所之一；2024-08 官方 Options Regulatory Alert 仍将 Phlx/BX/NOM 三家并列列入盘中报价义务提醒"
+    - id: us-nasdaq-phlx-options
+      category: option
+      name_zh: 纳斯达克 PHLX 期权市场
+      name_native: "Nasdaq PHLX Options"
+      description: "Nasdaq PHLX, LLC 运营的期权市场，集团六家注册期权交易所之一；做市制度分层含 Lead Market Maker/SQT/RSQT 与 Directed Market Maker（90% 双边报价义务，SEC 规则文件原文）"
 
 # ═══════════════════════════════════════════════
 # 五｜市场结构与交易机制
@@ -624,6 +648,337 @@ market_structure:
     en: "None (no cross-border Connect-style scheme analogous to Stock Connect)"
     confidence: medium
 
+  # ── 衍生品子块（[ADR-019]/[ADR-082] 框架，2026-09-05 衍生品覆盖缺口任务）──
+  # 对象为 Nasdaq 集团旗下期权市场（NOM/BX Options/PHLX 等，见 products 章期权条目）；
+  # 规则原文主要取自 nasdaqtrader.com 托管的 NASDAQ OPTIONS RULES（NOM 规则，Wolters
+  # Kluwer 2019 快照）、nasdaqtrader 期权时段页、SEC 就 SR-OCC/SR-Phlx 规则文件发布的
+  # 官方文本（经 govinfo.gov/sec.gov 取得，theocc.com 全域 403）。
+  derivatives:
+    trading_sessions:
+      pre_market:
+        spec: {kind: pre_open_queue, note: "开盘 Cross 前可向系统录入订单（含 OPG 开盘单）；此前提交的 IOC 订单被拒绝，其余订单持有至开盘"}
+        zh: "无独立盘前成交时段：常规时段开盘前订单（含 OPG「On the Open」开盘单）可录入系统等待，经 Nasdaq Opening Cross 统一开盘处理，盘前不成交"
+        en: "No separate pre-open trading session: orders entered before the regular open (including OPG On-the-Open orders) are held in the system and processed through the Nasdaq Opening Cross, with no pre-open executions"
+        detail: "规则以 Eligible Interest 定义正面列出 OPG（On the Open Order）等可在 Opening Cross 前录入的订单类型；「盘前不成交」系对开盘 Cross 处理流程的结构性推断，故 medium 而非 high。"
+        sources:
+          - title: "Nasdaq Stock Market Rules — NOM Options 6, Sec. 8（Nasdaq Opening and Halt Cross，NASDAQ OPTIONS RULES PDF）"
+            url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+            accessed: 2026-09-05
+        quote: |
+          (4) "Eligible Interest" shall mean any quotation or any order that may be entered into the system and designated
+          with a time-in-force of IOC (immediate-or-cancel), DAY (day order), GTC (good-till-cancelled), and OPG (On
+          the Open Order).
+        confidence: medium
+      continuous_am:
+        spec: {kind: none, note: "常规时段为 9:30 起的单段连续交易，官网时段表与规则均不再划分上下午"}
+        zh: "无独立的上午子时段：美股期权常规交易自 9:30 起为单段连续交易（见 continuous_pm），与现货侧字段按上下午划分的用法不同"
+        en: "No separate morning sub-session: the US options regular session is a single continuous session from 9:30 a.m. (see continuous_pm)"
+        sources:
+          - title: "Nasdaq Stock Market Rules — NOM Options 6, Sec. 5（Orders and Bids and Offers，NASDAQ OPTIONS RULES PDF）"
+            url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+            accessed: 2026-09-05
+        quote: |
+          Orders and bids and oﬀers shall be open and available for execution as of 9:30 a.m. Eastern Time and shall
+          close as of 4:00 p.m. Eastern Time except for option contracts on certain fund shares or broad-based indexes
+          which will close as of 4:15 p.m. Eastern Time.
+        confidence: medium
+      lunch_break:
+        spec: {kind: none}
+        zh: "无午间休市：常规时段为 9:30 起单段连续交易，时段枚举中无午休间隔"
+        en: "No lunch break: the regular session is a single continuous session from 9:30 a.m., with no midday recess in the enumerated schedule"
+        sources:
+          - title: "Nasdaq Stock Market Rules — NOM Options 6, Sec. 5（NASDAQ OPTIONS RULES PDF）"
+            url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+            accessed: 2026-09-05
+        quote: |
+          Orders and bids and oﬀers shall be open and available for execution as of 9:30 a.m. Eastern Time and shall
+          close as of 4:00 p.m. Eastern Time except for option contracts on certain fund shares or broad-based indexes
+          which will close as of 4:15 p.m. Eastern Time.
+        confidence: medium
+      continuous_pm:
+        spec: {start: "09:30", end: "16:00", kind: continuous, note: "特定基金份额/宽基指数期权合约收盘延至 4:15 p.m."}
+        zh: "常规时段（Regular Hours）为 9:30 a.m.-4:00 p.m. 连续交易；特定基金份额或宽基指数期权合约延至 4:15 p.m. 收盘"
+        en: "Regular Hours: continuous trading from 9:30 a.m. to 4:00 p.m. ET; option contracts on certain fund shares or broad-based indexes close at 4:15 p.m. ET"
+        sources:
+          - title: "Nasdaq Stock Market Rules — NOM Options 6, Sec. 5（NASDAQ OPTIONS RULES PDF）"
+            url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+            accessed: 2026-09-05
+          - title: "Options Market Hours（nasdaqtrader.com 官网）"
+            url: https://www.nasdaqtrader.com/Trader.aspx?id=optionshours
+            accessed: 2026-09-05
+        quote: |
+          Orders and bids and oﬀers shall be open and available for execution as of 9:30 a.m. Eastern Time and shall
+          close as of 4:00 p.m. Eastern Time except for option contracts on certain fund shares or broad-based indexes
+          which will close as of 4:15 p.m. Eastern Time. ／ Equity Options 9:30 a.m. ET to 4:00 p.m. ET
+        confidence: high
+        verified: 2026-09-05
+      after_market:
+        spec: {kind: none, note: "官方时段页对四类期权均只列 9:30-4:00 常规时段"}
+        zh: "无盘后时段：官方期权时段表对股票期权/ETF与ETN期权/指数期权/世界货币期权均只列 9:30 a.m.-4:00 p.m.（部分品种 4:15 p.m. 收盘），未设盘后交易时段"
+        en: "No after-market session: the official options hours page lists only 9:30 a.m.-4:00 p.m. ET (4:15 p.m. for certain contracts) for equity, ETF & ETN, index, and World Currency options, with no after-hours session"
+        detail: "基于官方时段页的穷举式列表作反向推断（未列盘后时段），未见另有条文明确排除，故 medium 而非 high。"
+        sources:
+          - title: "Options Market Hours（nasdaqtrader.com 官网）"
+            url: https://www.nasdaqtrader.com/Trader.aspx?id=optionshours
+            accessed: 2026-09-05
+        quote: |
+          Equity Options 9:30 a.m. ET to 4:00 p.m. ET ETF & ETN Options 9:30 a.m. ET to 4:00 p.m. ET* Index
+          Options 9:30 a.m. ET to 4:00 p.m. ET* World Currency Options 9:30 a.m. ET to 4:00 p.m. ET
+        confidence: medium
+      night_session:
+        spec: {kind: none, note: "同 after_market，基于官方时段表穷举的反向推断"}
+        zh: "无夜盘"
+        en: "None (no night session; the official options hours page lists no evening/overnight session)"
+        sources:
+          - title: "Options Market Hours（nasdaqtrader.com 官网）"
+            url: https://www.nasdaqtrader.com/Trader.aspx?id=optionshours
+            accessed: 2026-09-05
+        quote: |
+          Equity Options 9:30 a.m. ET to 4:00 p.m. ET ETF & ETN Options 9:30 a.m. ET to 4:00 p.m. ET* Index
+          Options 9:30 a.m. ET to 4:00 p.m. ET* World Currency Options 9:30 a.m. ET to 4:00 p.m. ET
+        confidence: medium
+
+    holidays_note:
+      zh: "NOM 休市日为 The Nasdaq Stock Market, LLC（现货母市场）所观察的假日——规则明文；具体逐年日历与美股统一假期表见顶层 holidays_note"
+      en: "NOM is closed on any holiday observed by The Nasdaq Stock Market, LLC (its cash-equity parent market), per the rulebook; the annual calendar follows the unified US equity/options holiday schedule (see the top-level holidays_note)"
+      sources:
+        - title: "Nasdaq Stock Market Rules — NOM Options 6, Sec. 5（Days of Business，NASDAQ OPTIONS RULES PDF）"
+          url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+          accessed: 2026-09-05
+      quote: "NOM shall not be open for business on any holiday observed by The Nasdaq Stock Market, LLC."
+      confidence: high
+      verified: 2026-09-05
+
+    opening_mechanism:
+      spec: {type: call_auction, note: "Nasdaq Opening Cross：9:30 后、且标的证券已开出常规时段行情（指数期权则已收到标的指数开盘价）后进行；同时用于停牌期权复牌定价"}
+      zh: "开盘集合竞价（Nasdaq Opening Cross）：开盘 Cross 在 9:30 之后、且标的证券已传出常规时段行情或报价（指数期权则须已收到标的指数开盘价）后进行，用于确定当日开盘价或停牌期权复牌价；NOM 规则另定义 Order Imbalance Indicator 在开盘过程中发布参考价与失衡信息"
+      en: "Opening call auction (Nasdaq Opening Cross): the Opening Cross occurs at or after 9:30 a.m., once the market for the underlying security has disseminated a regular-hours quote or trade (for index options, once the opening price of the underlying index has been received), to determine the opening price for the day or the reopening price of a halted option; the rulebook also defines an Order Imbalance Indicator disseminated during the process"
+      sources:
+        - title: "Nasdaq Stock Market Rules — NOM Options 6, Sec. 8（Nasdaq Opening and Halt Cross，NASDAQ OPTIONS RULES PDF）"
+          url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+          accessed: 2026-09-05
+      quote: |
+        (3) "Nasdaq Opening Cross" shall mean the process for opening or resuming trading pursuant to this rule and
+        shall include the process for determining the price at which Eligible Interest shall be executed at the open of
+        trading for the day, or the open of trading for a halted option, and the process for executing that Eligible Interest.
+        ／ (b) Processing of Nasdaq Opening Cross. For the opening of trading of System securities, the Opening Cross
+        shall occur at or after 9:30, if the dissemination of a regular market hours quote or trade (as determined by
+        the Exchange) by the Market for the Underlying Security has occurred (or, in the case of index options, the
+        Exchange has received the opening price of the underlying index).
+      confidence: high
+      verified: 2026-09-05
+
+    closing_mechanism:
+      spec: {type: continuous_to_close, note: "无收盘集合竞价；特定基金份额/宽基指数期权合约收盘延至 4:15 p.m."}
+      zh: "无收盘集合竞价：连续交易直接持续到收盘时刻结束（4:00 p.m.；特定基金份额或宽基指数期权合约 4:15 p.m. 收盘），时段表未列任何尾盘竞价安排"
+      en: "No closing call auction: continuous trading runs directly to the close (4:00 p.m. ET; 4:15 p.m. ET for option contracts on certain fund shares or broad-based indexes), with no end-of-day auction in the schedule"
+      sources:
+        - title: "Nasdaq Stock Market Rules — NOM Options 6, Sec. 5（NASDAQ OPTIONS RULES PDF）"
+          url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+          accessed: 2026-09-05
+      quote: |
+        Orders and bids and oﬀers shall be open and available for execution as of 9:30 a.m. Eastern Time and shall
+        close as of 4:00 p.m. Eastern Time except for option contracts on certain fund shares or broad-based indexes
+        which will close as of 4:15 p.m. Eastern Time.
+      confidence: high
+      verified: 2026-09-05
+
+    matching_principle:
+      enum: price_time_or_pro_rata
+      zh: "逐合约择一适用：交易所为每类期权指定两种执行算法之一并以 Options Alert 公告——Price/Time（价格优先，同价位内按时间优先）或 Size Pro-Rata（价格优先，同价位内按各参与者报价/订单规模占比分配，余数取整后逐张按时间优先分配）"
+      en: "Per-option selection: for each option the Exchange designates one of two execution algorithms, announced via Options Alert — Price/Time (price priority, then time priority within each price level) or Size Pro-Rata (price priority, then allocation pro rata to the size of each Participant's quote or order within a price level, with residual contracts distributed one at a time in time priority)"
+      sources:
+        - title: "Nasdaq Stock Market Rules — NOM Options 6, Sec. 6（Execution Algorithm，NASDAQ OPTIONS RULES PDF）"
+          url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+          accessed: 2026-09-05
+      quote: |
+        (1) Execution Algorithm - The Exchange will determine to apply, for each option, one of the following execution
+        algorithms described in paragraphs (A) or (B). ／ (A) Price/Time - The System shall execute trading interest
+        within the System in price/time priority, meaning it will execute all trading interest at the best price level
+        within the System before executing trading interest at the next best price. Within each price level, if there
+        are two or more quotes or orders at the best price, trading interest will be executed in time priority. ／ (B)
+        Size Pro-Rata - The System shall execute trading interest within the System in price priority, meaning it will
+        execute all trading interest at the best price level within the System before executing trading interest at the
+        next best price. Within each price level, if there are two or more quotes or orders at the best price, trading
+        interest will be executed based on the size of each Participant's quote or order as a percentage of the total
+        size of all orders and quotes resting at that price.
+      confidence: high
+      verified: 2026-09-05
+
+    order_types:
+      spec:
+        market: true
+        limit: true
+        tif: [ioc, gtc, day]
+        note: "另可指定 Minimum Quantity / Price Improving / All-or-None / Post-Only 与 OPG 开盘单；NOM 不提供止损单（集团内仅 PHLX 提供止损单，见 LULD FAQ）；WAIT 为非标准有效期指定"
+      zh: "系统订单须指明认购/认沽、买卖方向及价格（如有）；有效期指定含即成剩撤（IOC）、撤销前有效（GTC）、当日（DAY）与 WAIT；订单可指定为限价单、最小数量单（Minimum Quantity）、市价单、价格改善单（Price Improving）、全部或无为（All-or-None）、只挂单（Post-Only）；NOM 不提供止损单（集团内仅 PHLX 提供止损单）"
+      en: "System orders must indicate call or put, buy or sell, and a price if any; time-in-force designations include IOC, GTC, DAY and WAIT; orders may be designated as a Limit Order, Minimum Quantity Order, Market Order, Price Improving Order, All-or-None Order, or Post-Only Order; NOM does not offer Stop Orders (only PHLX offers Stop Orders within the Nasdaq options group)"
+      sources:
+        - title: "Nasdaq Stock Market Rules — NOM Options 6, Sec. 6（System Orders，NASDAQ OPTIONS RULES PDF）"
+          url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+          accessed: 2026-09-05
+        - title: "Limit Up-Limit Down FAQ（PDF，Options 一节）"
+          url: https://www.nasdaqtrader.com/content/MarketRegulation/LULD_FAQ.pdf
+          accessed: 2026-09-05
+      quote: |
+        All System Orders shall indicate whether they are a call or put and buy or sell and a price, if any. Systems
+        Orders can be designated as Immediate or Cancel ( "IOC"), Good-till-Cancelled ( "GTC"), Day ( "DAY") or WAIT.
+        ／ (2) A System order may also be designated as a Limit Order, a Minimum Quantity Order, a Market Order, a Price
+        Improving Order, an All-or-None Order, or a Post-Only Order. ／ Stop Orders apply only to PHLX as NTX Options
+        and NOM do not offer Stop Orders.
+      confidence: high
+      verified: 2026-09-05
+
+    tick_size:
+      spec:
+        regime: tiered_by_price
+        min_tick: 0.01
+        currency: USD
+        note: "报价档位按价格分层：低于 3 美元为 5 美分、3 美元或以上为 10 美分（Penny Pilot 类另有更低档位）；下单最小交易变动全序列一律 1 美分"
+      zh: "报价档位按价格分层（NOM 规则第 6 章第 5 节 Minimum Increments）：期权系列价格低于 $3.00 时报价档位为 5 美分，$3.00 或以上为 10 美分（Penny Pilot 计划内的系列另有 1 美分/5 美分档位）；而下单的最小交易变动对全部系列一律为 1 美分"
+      en: "Quoting increments are tiered by price (NOM Options Chapter VI, Section 5, Minimum Increments): five cents for series trading below $3.00 and ten cents for series trading at $3.00 or higher (with lower increments for series in the Penny Pilot program); the minimum trading increment for orders is one cent for all series"
+      detail: "所引规则书为 Wolters Kluwer 2019 年快照，Penny Pilot 条款原文已载明其试点到期日；2019 年后报价档位是否有调整未逐条核实，故整体 medium 而非 high。"
+      sources:
+        - title: "Nasdaq Stock Market Rules — NOM Options 6, Sec. 5（Minimum Increments，NASDAQ OPTIONS RULES PDF）"
+          url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+          accessed: 2026-09-05
+      quote: |
+        (1) If the options series is trading at less than $3.00, ﬁve (5) cents;
+        (2) If the options series is trading at $3.00 or higher, ten (10) cents; and
+        ／ (b) The minimum trading increment for options contracts traded on NOM will be one (1) cent for all series.
+      confidence: medium
+      verified: 2026-09-05
+
+    contract_specs_note:
+      zh: "标准股票期权合约单位为 100 股——NOM 规则将交易单位交由清算机构（OCC）按其规则设定，SEC 投资者公告写明「一份期权合约通常代表标的股票 100 股」；行权价间距按标的价格分档（个股期权：行权价 ≤$25.00 为 $2.50 或以上，>$25.00 为 $5.00 或以上，>$200.00 为 $10.00 或以上，另有 $1 行权价计划等特别安排；ETF 期权 ≤$200 为 $1 或以上、>$200 为 $5 或以上）；到期序列：每类期权至少开一个到期月，另有短期期权序列计划与季度期权序列（详见规则第 4 章）"
+      en: "A standard equity option contract generally represents 100 shares of the underlying stock — NOM rules defer the unit of trading to the Clearing Corporation's rules, and the SEC investor bulletin states that an option contract generally represents 100 shares; strike price intervals are tiered by strike level (individual-stock options: $2.50 or greater where the strike is $25.00 or less, $5.00 or greater above $25.00, $10.00 or greater above $200.00, plus a $1 Strike Price Program and other special schedules; ETF-share options: $1 or greater where the strike is $200 or less, $5 or greater above $200); expiration series: at least one expiration month is opened for each class, with Short Term Option Series and Quarterly Options Series programs on top (Chapter IV)"
+      sources:
+        - title: "Nasdaq Stock Market Rules — NOM Options 6, Sec. 3（Units of Trading）/ NOM Options 4, Sec. 6（strike price intervals，NASDAQ OPTIONS RULES PDF）"
+          url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+          accessed: 2026-09-05
+        - title: "An Introduction to Options – Investor Bulletin（SEC Investor.gov）"
+          url: https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins-63
+          accessed: 2026-09-05
+      quote: |
+        The unit of trading in each series of options traded on NOM shall be the unit of trading established for that series
+        by the Clearing Corporation pursuant to the Rules of the Clearing Corporation and the agreements of Nasdaq
+        with the Clearing Corporation. ／ (d) The interval between strike prices of series of options on individual stocks
+        will be: i. $2.50 or greater where the strike price is $25.00 or less; ii. $5.00 or greater where the strike price
+        is greater than $25.00; and iii. $10.00 or greater where the strike price is greater than $200.00, except as provided
+        in (d)(v). ／ An option contract generally represents 100 shares of the underlying stock.
+      confidence: high
+      verified: 2026-09-05
+
+    price_limits:
+      type:
+        zh: "未见 Nasdaq 期权市场设日常涨跌停/固定价格区的官方条文：LULD 价格带机制仅适用于 NMS 股票（全国市场系统证券，不含期权），Nasdaq 期权市场的价格处置体现为跟随标的证券的暂停与熔断（见本子块 trading_halt_mechanism / circuit_breaker）。受控词表 price_limit_type 的 type: none 需「明确不设」的正面官方表述，本次未找到，故不填 enum，与 cn-szse 期权涨跌停因词表不贴切而留空的处理一致"
+        en: "No official provision of daily price limits/fixed price bands on the Nasdaq options markets was found: the LULD price-band mechanism applies to NMS securities (National Market System stocks, not options), and the options markets' price handling consists of following pauses and halts in the underlying security (see trading_halt_mechanism / circuit_breaker below). As no affirmative official statement that options have no price limits was found, the enum is left blank"
+        sources:
+          - title: "Limit Up-Limit Down FAQ（PDF，Options 一节）"
+            url: https://www.nasdaqtrader.com/content/MarketRegulation/LULD_FAQ.pdf
+            accessed: 2026-09-05
+        quote: |
+          Yes. NOM, NTX Options and PHLX pause trading in options when a trading pause has been initiated on an underlying security.
+        detail: "「LULD 仅适用 NMS 股票」与「期权无自身涨跌停」均为结构性推断（LULD FAQ 全文以 NMS 证券为对象、期权仅作为标的暂停的跟随方出现），未见「期权不设价格限制」的正面明文，故不填 enum、confidence medium。"
+        confidence: medium
+        verified: 2026-09-05
+
+    circuit_breaker:
+      enum: index_level
+      spec: {type: index_level, reference: [{index: "S&P 500", exchange: self}], note: "MWCB 为跨市场联合计划（与现货顶层 circuit_breaker 同一机制、同一阈值体系）；MWCB 暂停触发时期权市场暂停相应期权交易；期权市场无自设指数熔断"}
+      zh: "期权市场跟随跨市场全市场熔断（MWCB，基于标普500指数跌幅的统一阈值体系，见顶层 circuit_breaker）：当 MWCB 交易暂停触发时，Nasdaq 各期权市场将暂停相应期权交易；暂停期间保留全部未成交订单、清除做市商挂出报价，并可接受新订单与撤单"
+      en: "The options markets follow the cross-market Market-Wide Circuit Breaker (MWCB, the same joint plan and threshold framework as the top-level cash-equity circuit_breaker): when an MWCB trading halt has been initiated, Nasdaq options markets halt trading in the corresponding options; during the halt all open orders are kept, standing market maker quotes are purged, and new orders, quotes and cancels are accepted"
+      sources:
+        - title: "Market-Wide Circuit Breakers FAQ（PDF，Nasdaq 期权市场一节）"
+          url: https://www.nasdaqtrader.com/content/marketregulation/mwcb_faq.pdf
+          accessed: 2026-09-05
+      quote: |
+        A: Yes. Nasdaq options markets will halt trading in options when an MWCB trading halt has been initiated.
+        ／ Yes. All 6 Nasdaq options markets will keep all open orders during the halt. Firms have the ability to cancel open orders.
+      confidence: high
+      verified: 2026-09-05
+
+    volatility_interruption:
+      zh: "无自设的波动性中断（价格走廊触发集合竞价类机制）：Nasdaq 期权市场未见此类官方条文；期权的波动性处置体现为跟随标的证券的 LULD Limit State/暂停而暂停（见 trading_halt_mechanism）"
+      en: "No volatility interruption of its own (no price-corridor-triggered auction mechanism found in official sources): the options markets' volatility handling consists of pausing options when a LULD pause has been initiated on the underlying security (see trading_halt_mechanism)"
+      detail: "「无自设波动性中断」为结构性推断：LULD FAQ 的 Options 一节仅描述期权跟随标的暂停，未载任何期权自设走廊机制；未见正面明文，故 medium 且不填 spec type: none。"
+      sources:
+        - title: "Limit Up-Limit Down FAQ（PDF，Options 一节）"
+          url: https://www.nasdaqtrader.com/content/MarketRegulation/LULD_FAQ.pdf
+          accessed: 2026-09-05
+      quote: |
+        Yes. NOM, NTX Options and PHLX pause trading in options when a trading pause has been initiated on an underlying security.
+      confidence: medium
+      verified: 2026-09-05
+
+    trading_halt_mechanism:
+      zh: "期权随标的暂停：标的证券被触发 LULD 交易暂停时，NOM/NTX Options（Nasdaq ISE）与 PHLX 暂停相应期权交易，复牌时执行与常规开盘类似的开盘流程（Opening/Halt Cross）；暂停期间保留全部未成交订单、清除做市商报价，可接受新订单/报价/撤改；标的处于 Limit/Straddle 状态时期权不开盘；指数期权另有自设停牌标准——宽基指数成分（按加权值）超过 20%、其他指数超过 10% 的标的证券被停牌时，该指数期权交易暂停或中止"
+      en: "Options halt with the underlying: when a LULD trading pause has been initiated on an underlying security, NOM, NTX Options (Nasdaq ISE) and PHLX pause trading in the corresponding options and commence an opening process similar to the normal options opening upon resumption; open orders are kept, standing market maker quotes are purged, and new orders/quotes/cancel-replaces are accepted during the pause; an option will not open while the underlying NMS stock is in a Limit or Straddle state; index options additionally halt whenever trading in underlying securities representing more than 20% (broad-based) or 10% (all other indices) of weighted index value is halted"
+      sources:
+        - title: "Limit Up-Limit Down FAQ（PDF，Options 一节）"
+          url: https://www.nasdaqtrader.com/content/MarketRegulation/LULD_FAQ.pdf
+          accessed: 2026-09-05
+        - title: "Nasdaq Stock Market Rules — NOM Options 7, Sec. 6（Index Options Sessions，NASDAQ OPTIONS RULES PDF）"
+          url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+          accessed: 2026-09-05
+      quote: |
+        Yes. NOM, NTX Options and PHLX pause trading in options when a trading pause has been initiated on an underlying security.
+        ／ NOM, NTX Options and PHLX commence an opening process similar to the normal options opening when a trading resumption
+        (Trading Action = T) message is received over the UTP data feeds. ／ Yes. NOM, NTX Options and PHLX will keep all open
+        orders during the pause. Firms have the ability to cancel open orders. ／ Trading on NOM in any index option shall be
+        halted or suspended whenever trading in underlying securities whose weighted value represents more than twenty percent
+        (20%), in the case of a broad based index, and ten percent (10%) for all other indices, of the index value is halted or
+        suspended.
+      confidence: high
+      verified: 2026-09-05
+
+    block_trade:
+      zh: ""
+      confidence: low
+      detail: "所引 NOM 规则书快照中未见期权大宗交易（block trade）设施或最低门槛条款，本次亦未找到 Nasdaq 期权市场大宗交易的官方原文，按铁律留空不猜。"
+
+    market_maker_scheme:
+      spec: {present: true, quote_obligation: true, max_spread_pct: null, note: "NOM：同一参与者名下的做市商合计须在其获配序列开盘交易秒数的 60% 内提供双边报价（季度序列/调整序列/9 个月以上到期序列豁免）；PHLX：电子做市商（含 Directed LMM/SQT/RSQT）承担 90% 双边报价义务"}
+      zh: "期权做市商制度（分层报价义务）：NOM——同一期权参与者名下的做市商合计须在其获配期权序列开盘交易秒数的 60%（或交易所公告的更高比例）内提供双边报价，季度期权序列、调整序列与到期 9 个月以上的序列豁免；PHLX——Directed Lead Market Makers、Directed SQTs 与 Directed RSQTs 合计须在 90% 的累计秒数内（或交易所公告的更高比例）对其执行过 Directed Order 的期权序列提供双边报价"
+      en: "Tiered market maker quoting obligations: NOM — Market Makers associated with the same Options Participant are collectively required to provide two-sided quotations in 60% of the cumulative seconds their assigned series are open for trading (Quarterly, Adjusted and >9-month series exempt); PHLX — Directed Lead Market Makers, Directed SQTs and Directed RSQTs are collectively required to provide two-sided quotations in 90% of the cumulative seconds across the series in which they executed a Directed Order"
+      sources:
+        - title: "Nasdaq Stock Market Rules — NOM Options 7, Sec. 6（Market Maker quoting obligations，NASDAQ OPTIONS RULES PDF）"
+          url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+          accessed: 2026-09-05
+        - title: "PHLX Electronic Market Maker Obligations（SEC 规则文件 34-106064，PDF）"
+          url: https://www.sec.gov/files/rules/sro/phlx/2026/34-106064.pdf
+          accessed: 2026-09-05
+      quote: |
+        Market Makers, associated with the same Options Participant, are collectively required to provide two-sided
+        quotations in 60% of the cumulative number of seconds, or such higher percentage as NOM may announce in advance,
+        for which that Options Participant's assigned options series are open for trading. ／ Directed Lead Market Makers,
+        Directed SQTs and Directed RSQTs (“Directed Market Makers”), associated with the same member organization, are
+        collectively required to provide two-sided quotations in 90% of the cumulative number of seconds, or such higher
+        percentage as Phlx may announce in advance, among all options series in which the Directed Market Maker has
+        executed a Directed Order on a daily basis
+      confidence: high
+      verified: 2026-09-05
+
+    margin_practice_note:
+      zh: "交易端保证金：NOM 规则要求参与者/关联人遵守 CBOE 或 NYSE 二者之一的初始与维持保证金要求（以向 Nasdaq Regulation 提交书面通知选定为准）——即美国期权市场通行的 OCC 最低保证金体系在交易端的落地，由交易所对会员执行；清算端 CCP 的保证金方法论（STANS）见 clearing.derivatives（与本字段视角不同，不合并，见 [ADR-030]）"
+      en: "Trading-side margin: NOM rules require a Participant or associated person to be bound by the initial and maintenance margin requirements of either the CBOE or the NYSE (elected by written notice to Nasdaq Regulation) — i.e. the exchange enforces the industry-standard OCC minimum margin framework at the member level; the clearing-side CCP margin methodology (STANS) is described in clearing.derivatives (a different perspective, not merged, see ADR-030)"
+      sources:
+        - title: "Nasdaq Stock Market Rules — NOM Options 13, Sec. 3（Margin Requirements，NASDAQ OPTIONS RULES PDF）"
+          url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+          accessed: 2026-09-05
+      quote: |
+        (a) A Participant or associated person must be bound by the initial and maintenance margin requirements of
+        either the Chicago Board Options Exchange ( "CBOE") or the New York Stock Exchange ( "NYSE") as the same
+        may be in eﬀect from time to time.
+      confidence: high
+      verified: 2026-09-05
+
+    connect_schemes:
+      zh: "无（未找到关于本所挂牌期权/衍生品跨境互联互通安排的官方说明；美股市场亦无 Stock Connect 类跨境通道，与顶层 connect_schemes 同判）"
+      en: "None (no official statement on cross-border Connect-style arrangements covering options listed on the Nasdaq options markets; the US market has no Stock Connect-type cross-border channel, consistent with the top-level connect_schemes)"
+      detail: "负面断言按顶层 connect_schemes 同一处理方式：无官方明文可引，不作穷举性正面化。"
+      confidence: medium
+
 # ═══════════════════════════════════════════════
 # 六｜上市、持续监管与退市
 # ═══════════════════════════════════════════════
@@ -674,6 +1029,7 @@ listing:
     confidence: high
 
   listing_process_duration:
+    spec: {value: 5, unit: weeks, range: [4, 6], note: "一般四至六周完成审核（第 1 周开始审核；第 2–3 周初步审核并出具意见函；第 3–6 周公司回应；第 7–8 周完成并批准）；无争议问题且公司迅速回应可大幅缩短；代表值取区间中点"}
     zh: "通常4-6周完成审核（第1周开始审核；第2-3周完成初步审核并出具意见函；第3-6周公司回应问题；第7-8周完成审核并批准上市），若无争议问题可能更短"
     en: "Typically 4-6 weeks (Week 1 review begins; Weeks 2-3 preliminary review and comment letter; Weeks 3-6 company responds; Weeks 7-8 review completed and approved), may be shorter if no issues arise"
     sources:
@@ -946,6 +1302,107 @@ clearing:
         url: https://www.federalregister.gov/documents/2026/06/04/2026-11144/self-regulatory-organizations-national-securities-clearing-corporation-notice-of-filing-of-proposed
         accessed: 2026-08-24
     confidence: medium
+
+  # ── 衍生品保证金、盯市与交割子块（[ADR-019]/[ADR-023]/[ADR-030] 框架，2026-09-05 衍生品覆盖缺口任务）──
+  # 清算端主体为 OCC（Options Clearing Corporation）：顶层 clearing 章描述现货端（NSCC），
+  # 本子块如实描述期权清算端。theocc.com 全域 403，OCC 身份与 STANS 方法论原文经 SEC 就
+  # SR-OCC 规则文件发布的官方公告（govinfo.gov 转载的 Federal Register 全文）取得。
+  derivatives:
+    initial_margin_practice:
+      zh: "清算端为 OCC（Options Clearing Corporation，期权清算公司）：OCC 是在 SEC 注册的全国性证券交易所挂牌的标准化股票期权的唯一清算机构，以中央对手方身份担保其清算的全部合约（成为每个买方的卖方、每个卖方的买方）；计算保证金要求时使用其专有风险管理系统 STANS——用大规模蒙特卡洛模拟预测价格与波动率变动以确定清算会员的保证金要求，在清算会员账户组合层面计算，由基础分量（99% 置信、两天期限的预期短缺估计）与集中度/依赖性压力测试附加分量构成"
+      en: "The clearing-side CCP is OCC (Options Clearing Corporation): OCC is the sole clearing agency for standardized equity options listed on SEC-registered national securities exchanges and acts as a central counterparty guarantying all contracts it clears (buyer to every seller, seller to every buyer); to calculate margin requirements OCC uses STANS, its proprietary risk management system — large-scale Monte Carlo simulations forecasting price and volatility movements at the portfolio level of Clearing Member accounts, consisting of a base component (a 99% expected shortfall estimate over a two-day time horizon) plus a concentration/dependence stress test add-on"
+      detail: "OCC 官网（theocc.com）全域 403（与 sec.gov/finra.org 同类边缘防护），STANS 方法论原文经 SEC 就 SR-OCC-2024-016/SR-OCC-2026-003 发布的官方公告（govinfo.gov 转载的 Federal Register 全文）逐字取得。TIMS 为市场惯称的旧方法论名，本批官方文本未提，故不写入。"
+      sources:
+        - title: "SR-OCC-2024-016（SEC Notice of Filing，govinfo.gov 转载：OCC sole clearing agency/CCP 身份、每日压力测试原文）"
+          url: https://www.govinfo.gov/content/pkg/FR-2024-12-06/html/2024-28538.htm
+          accessed: 2026-09-05
+        - title: "SR-OCC-2026-003（SEC Notice of Filing，govinfo.gov 转载：STANS 蒙特卡洛/99% ES 两天期限原文）"
+          url: https://www.govinfo.gov/content/pkg/FR-2026-04-15/html/2026-07265.htm
+          accessed: 2026-09-05
+      quote: |
+        OCC is the sole clearing agency for standardized equity options listed on national securities exchanges
+        registered with the Commission. In its role as a clearing agency, OCC acts as a central counterparty (``CCP''),
+        guarantying all contracts it clears. That is, OCC becomes the buyer to every seller and the seller to every
+        buyer, which exposes OCC to risk because OCC is obligated to perform even when one of its members defaults.
+        ／ To calculate margin requirements, OCC uses STANS, its proprietary risk management system. ／ The STANS
+        methodology utilizes large-scale Monte Carlo simulations to forecast price and volatility movements in
+        determining a Clearing Member's margin requirement. ／ The base component is an estimate of a 99% expected
+        shortfall over a two-day time horizon.
+      confidence: high
+      verified: 2026-09-05
+
+    maintenance_margin_practice:
+      zh: "OCC 一般每日执行压力测试，测算清算会员可能呈现给 OCC 的潜在风险敞口，以决定是否需要就保证金或清算基金追加担保；清算会员保证金数额按 STANS 计算结果收取，清算基金出资则由 CST 方法论按违约情景生成——即维持层面的保证金随市场变动逐日重算、不足即追缴"
+      en: "OCC generally performs daily stress testing to measure the potential exposures Clearing Members may present to OCC and to determine whether calls for additional collateral in either margin or in the Clearing Fund would be needed; Clearing Member margin amounts are collected based on STANS calculations, while Clearing Fund contributions are default-scenario amounts generated by the CST methodology — i.e. maintenance-level margin requirements are recalculated daily and topped up when insufficient"
+      detail: "本字段是清算/CCP 层面视角，与市场结构子块的 margin_practice_note（交易端保证金要求，NOM 规则援引 CBOE/NYSE 标准）描述同一体系的不同层面，不合并，见 [ADR-030]。"
+      sources:
+        - title: "SR-OCC-2024-016（SEC Notice of Filing，govinfo.gov 转载）"
+          url: https://www.govinfo.gov/content/pkg/FR-2024-12-06/html/2024-28538.htm
+          accessed: 2026-09-05
+      quote: |
+        In general, OCC performs daily stress testing of its financial resources using scenarios designed to assess
+        whether the resources collected are adequate and inform the size of OCC's financial resources (``Sizing
+        Scenarios'') and measure the potential exposures Clearing Members may present to OCC to determine whether
+        calls for additional collateral in either margin or in the Clearing Fund would be needed (``Sufficiency
+        Scenarios''). Clearing Member margin amounts are collected based on calculations obtained from STANS, while
+        Clearing Fund contributions are default scenario-based amounts generated by the CST methodology.
+      confidence: high
+      verified: 2026-09-05
+
+    mark_to_market_frequency:
+      zh: "逐日：OCC 每日执行压力测试（Sufficiency Scenarios）并据以判断是否需要追加保证金/清算基金担保；本批官方文本未载期权权利金逐笔/盘中变动的更细盯市安排，如实按「逐日评估+追加担保」口径填写"
+      en: "Daily: OCC performs stress testing daily and determines from it whether calls for additional margin/Clearing Fund collateral are needed; the official texts reviewed this session contain no finer intraday/variation-marking schedule for option premiums, so this field states the daily assessment-plus-call basis only"
+      detail: "「逐日」的逐字依据为 OCC 公告原文 performs daily stress testing...to determine whether calls for additional collateral...would be needed——追缴判断是每日的；盯市（variation margin）意义上的更细频率未找到原文，故 medium 而非 high。"
+      sources:
+        - title: "SR-OCC-2024-016（SEC Notice of Filing，govinfo.gov 转载）"
+          url: https://www.govinfo.gov/content/pkg/FR-2024-12-06/html/2024-28538.htm
+          accessed: 2026-09-05
+      quote: |
+        In general, OCC performs daily stress testing of its financial resources using scenarios designed to assess
+        whether the resources collected are adequate and inform the size of OCC's financial resources (``Sizing
+        Scenarios'') and measure the potential exposures Clearing Members may present to OCC to determine whether
+        calls for additional collateral in either margin or in the Clearing Fund would be needed (``Sufficiency
+        Scenarios'').
+      confidence: medium
+      verified: 2026-09-05
+
+    delivery_method:
+      enum: physical
+      zh: "实物交割为主：NOM 规则将 underlying security 定义为清算机构（即 OCC）在期权有效行权时有义务卖出（认购）或买入（认沽）的证券——个股/ETF 期权行权以交付/受领标的证券完成；指数期权为特例，按 A.M./P.M. 结晒口径以现金结算（结算价值按行权日或行权日前最后交易日的收盘指数值、或成分股开盘价计算）"
+      en: "Physical delivery as the default: NOM rules define the underlying security as the security the Clearing Corporation (OCC) is obligated to sell (call) or purchase (put) upon valid exercise — equity/ETF options settle by delivery of the underlying; index options are the exception, settled in cash on an A.M./P.M.-settled basis (settlement value from the closing index value on the exercise day or the last trading day before exercise, or from component opening prices)"
+      detail: "enum physical 系对规则结构的归纳：个股/ETF 期权的行权义务以「交付标的证券」表述（quote 第 64 条定义），A.M./P.M. 现金结算仅出现在指数期权定义（第 65 条）——与 cn-szse.delivery_method 的处理一致。"
+      sources:
+        - title: "Nasdaq Stock Market Rules — NOM Options 1, Sec. 2（定义第 64/65 条，NASDAQ OPTIONS RULES PDF）"
+          url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+          accessed: 2026-09-05
+      quote: |
+        (64) The term "underlying security" means the security that the Clearing Corporation shall be obligated to sell (in
+        the case of a call option) or purchase (in the case of a put option) upon the valid exercise of an options contract.
+        ／ (65) The term "closing index value" in respect of a particular index means the current index value calculated at
+        the close of business on the day of exercise, or, if the day of exercise is not a trading day, on the last trading day
+        before exercise (P.M.-settled), unless the settlement value of the index is based on the opening price of each
+        component issue on the primary market (A.M.- settled).
+      confidence: high
+      verified: 2026-09-05
+
+    last_trading_day_rule:
+      zh: "到期日一般为每月第三个周五之后的周六（SEC 投资者公告；周度、季度等更短/更长周期的合约另有到期安排）；指数期权的到期结算价值按行权日（或行权日不是交易日时的行权日前最后交易日）收盘指数值计算，P.M.-settled/A.M.-settled 两种口径。个股期权「最后交易日 = 到期前的周五」这一表述未在本次来源中找到逐字明文，不写入正文"
+      en: "Expiration generally falls on the Saturday after the third Friday of each month (SEC investor bulletin; weekly, quarterly and other schedules exist for certain contracts); index options settle at expiration against the closing index value on the exercise day (or the last trading day before exercise when that day is not a trading day), on a P.M.-settled or A.M.-settled basis. The frequently-cited 'last trading day = the Friday before expiration' phrasing for equity options was not found verbatim this session and is therefore not stated"
+      sources:
+        - title: "An Introduction to Options – Investor Bulletin（SEC Investor.gov）"
+          url: https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins-63
+          accessed: 2026-09-05
+        - title: "Nasdaq Stock Market Rules — NOM Options 1, Sec. 2（定义第 65 条，NASDAQ OPTIONS RULES PDF）"
+          url: https://www.nasdaqtrader.com/Content/MarketRegulation/Rulebooks/NASDAQ%20OPTIONS%20RULES.pdf
+          accessed: 2026-09-05
+      quote: |
+        Generally, the expiration date for an option contract is the Saturday after the third Friday of each month.
+        However, certain option contracts may have an expiration date that occurs after only a week, a calendar quarter,
+        or at other some other specified time ／ the close of business on the day of exercise, or, if the day of exercise
+        is not a trading day, on the last trading day before exercise (P.M.-settled), unless the settlement value of the
+        index is based on the opening price of each component issue on the primary market (A.M.- settled).
+      confidence: high
+      verified: 2026-09-05
 
 # ═══════════════════════════════════════════════
 # 九｜市场参与者
