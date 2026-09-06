@@ -604,24 +604,30 @@ def render_sources_index(raw_exchanges):
 
 
 def render_adr_index(decisions_text):
-    """PROJECT/DECISIONS.md 的 ADR 索引（[ADR-077]）：提取 `### ADR-NNN — 标题` 与其后
-    的 **日期：**，按编号排序输出。物理顺序已被历次让号打乱，索引即顺序修正——
-    不动物理顺序（零迁移缓解认知负荷），新会话定位 ADR 不必通读全文。
-    `ADR-PENDING-<slug>` 占位符标题不匹配 `ADR-(\\d{3})`，自动跳过——与 [ADR-076]
-    的「合并前跑 make assign-adr 定号」流程天然兼容。"""
+    """PROJECT/DECISIONS.md 的 ADR 索引（[ADR-077]）：提取 `### ADR-<id> — 标题` 与其后
+    的 **日期：**。历史 `ADR-NNN`（三位数字，物理顺序因历次让号不连续）按编号排在前，
+    新的 `ADR-<slug>` 按日期排在后（slug 只追加、日期即物理顺序）。新会话定位 ADR
+    不必通读全文。"""
     entries = []
-    for m in re.finditer(r"^### (ADR-\d{3})\s*[-—]\s*(.*)$", decisions_text, re.M):
-        num, title = m.group(1), m.group(2).strip()
+    adr_id_re = r"(?:\d{3}|[a-z][a-z0-9]*(?:-[a-z0-9]+)+)"
+    for m in re.finditer(r"^### (ADR-" + adr_id_re + r")\s*[-—]\s*(.*)$", decisions_text, re.M):
+        adr_id, title = m.group(1), m.group(2).strip()
         nxt = re.search(r"^### ", decisions_text[m.end():], re.M)
         block_end = m.end() + (nxt.start() if nxt else len(decisions_text) - m.end())
         dm = re.search(r"\*\*日期：\*\*\s*(\d{4}-\d{2}-\d{2})", decisions_text[m.end():block_end])
-        entries.append((num, dm.group(1) if dm else "", title))
-    entries.sort(key=lambda e: e[0])
+        entries.append((adr_id, dm.group(1) if dm else "", title))
     if not entries:
         return "（暂无 ADR）"
+
+    def sort_key(e):
+        adr_id, date, _ = e
+        m = re.fullmatch(r"ADR-(\d{3})", adr_id)
+        return (0, int(m.group(1)), "") if m else (1, 10**9, date or "9999-99-99")
+
+    entries.sort(key=sort_key)
     return "\n".join(
-        f"- {num} · {date} · {title}" if date else f"- {num} · {title}"
-        for num, date, title in entries
+        f"- {adr_id} · {date} · {title}" if date else f"- {adr_id} · {title}"
+        for adr_id, date, title in entries
     )
 
 

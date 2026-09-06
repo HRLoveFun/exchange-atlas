@@ -14,7 +14,7 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 
 **核心原则：任何一个事实只在一处手写，其余位置要么生成、要么引用、要么被校验。** 发现自己在两个文件写同一件事，说明这张表哪里划错了，先改表，别继续复制。
 
-同一事实允许有多种「渲染」而不算"写两遍"：`data/` 字段里 `enum`（受控词表值）、`spec`（量化机制的机器形式，见 [ADR-035]）、`zh`/`en`（人读散文）是同一事实的不同渲染，`quote` 是它们共同的 verbatim 底稿。纪律：驱动图形的量化值只在 `spec` 手写，`zh`/`detail` 可复述但不得携带 `spec` 没有的量化事实（`make check` 校验 5b 反查 `spec` 数值 ⊆ `quote`，只覆盖 `confidence: high` 的数值叶子；`spec.note`（及 `*_note`）内嵌数字由 5c 不限 confidence 反查**本交易所文件内所有 `quote`/`zh`** 加本字段 `detail`〔note 常跨字段引 `price_limits` 等的阈值〕，见 [ADR-054]/[ADR-058]）；medium/low 数值叶子仍靠人。
+同一事实允许多种「渲染」而不算"写两遍"：`enum`（受控词表值）/ `spec`（量化机制的机器形式，见 [ADR-035]）/ `zh`·`en`（散文）是同一事实的不同渲染，`quote` 是共同的 verbatim 底稿。驱动图形的量化值只在 `spec` 手写，`zh`/`detail` 可复述但不得携带 `spec` 没有的量化事实；`make check` 有数值反查关卡（`spec` 及 `note` 内嵌数字 ⊆ `quote`，细则见 `tools/validate.py` 文首校验 5b–5d）。medium/low 数值叶子仍靠人。
 
 | 文件 | 唯一负责 | 绝不写（改为指向） |
 |---|---|---|
@@ -28,16 +28,14 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 | `schema/spec.yml` | 字段 `spec`（量化机制的机器可读形式）的形状定义 —— 见 `DECISIONS.md` [ADR-035] | 具体数据值 → `data/` |
 | `PROJECT/SOURCES.md` | 条目格式规范 + 跨所通用查证经验（全局经验册）+ 生成的分片索引 | 单所来源记录 → `sources/<id>.md`；从来源抄来的事实 → `data/` |
 | `PROJECT/sources/<id>.md` | 单家交易所的来源登记与探测记录（文件名 = 交易所 id，与 `data/exchanges/` 一一对应，`make fetch` 按此抓取，[ADR-077]） | 跨所通用经验 → `SOURCES.md` |
-| `PROJECT/ROADMAP.md` | 进度状态 | 为什么这么排 → `DECISIONS.md` |
-| `PROJECT/ROADMAP-INBOX.md` | 并行会话给 ROADMAP §一 的一次性完成便签（折叠进 §一 后即删，[ADR-069]） | 事实本体 → `ROADMAP.md` §三详版 |
-| `PROJECT/DECISIONS.md` | **为什么这么定** | 是什么 → 各自权威文件 |
-| `PROJECT/ADR-LEDGER.md` | ADR 编号被谁占了（占位符 + 合并时定号，[ADR-076]） | 每条 ADR 的内容 → `DECISIONS.md` |
+| `PROJECT/ROADMAP.md` | 进度状态（§一「下一步」= 优先级判断；§三详版 = 逐条 checklist） | 为什么这么排 → `DECISIONS.md` |
+| `PROJECT/DECISIONS.md` | **为什么这么定**（每条 `### ADR-<id>`：历史 `ADR-NNN` 冻结、新条目 `ADR-<slug>`） | 是什么 → 各自权威文件 |
 | `PROJECT/OPEN-QUESTIONS.md` | 尚未解决的疑问 | 已解决的 → 删除该条目（转 `data/` + 一条 ADR） |
 | `PROJECT/GLOSSARY.md` | ⚠️ 由 `schema/glossary.yml` 生成，**不要手改** | — |
 | `PROJECT/GIT-RUNBOOK.md` | 后台任务 PR / worktree 清理的操作顺序（踩坑记录） | 推送原则（默认推 main 等）→ `CLAUDE.md` §六 |
 | `.claude/skills/add-exchange/` | 可执行步骤 | 铁律复述 → 引用本文件章节号，如"见 CLAUDE.md §二" |
 
-生成块（`<!-- BEGIN:GENERATED ... -->`）只在八处使用：`ROADMAP.md` 的 progress-matrix 与 health-summary、`README.md` 与 `README.en.md` 的 exchange-list（同一份数据的中英两种渲染，见 `sync.render_exchange_list(lang=...)`）、`GLOSSARY.md` 全文、`OPEN-QUESTIONS.md` 的 auto-issues、`SOURCES.md` 的 sources-index（来源分片索引）、`DECISIONS.md` 的 adr-index（ADR 索引，[ADR-077]）。这些由 `make sync` 重新生成；`make check` 会验证生成块内容与重新生成的结果一致，跑完 `make sync` 后 `git diff` 应为空——不为空说明有文档忘了同步。
+生成块（`<!-- BEGIN:GENERATED ... -->`）的清单与生成逻辑都在 `tools/sync.py`（`main()` 里的一串 `apply_blocks(...)`），`make sync` 重新生成、`make check` 校验其内容与重新生成的结果一致。纪律：跑完 `make sync` 后 `git diff` 应为空——不为空说明有生成块忘了同步。
 
 ---
 
@@ -53,7 +51,7 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 
 `detail` 与 `quote` 不要混淆：`detail` 是自己写的解释，允许归纳改写；`quote` 是原文照抄，是抽检凭据。
 
-这五条里，第 3 条（第三方封顶 `medium`）与第 5 条的 verbatim + 数值反查已是 `make check`（`validate.py` / `verify_quotes.py`）可阻断构建的硬关卡（[ADR-032]/[ADR-033]）；`spec.note` 内嵌数字已由 5c 机器化（[ADR-058]），但 `type: none` 的正面依据、散文的语义忠实度仍是机器盲区（[ADR-054]）——**`make check` 全绿不等于数据没被幻觉污染**，铁律该守的地方一处都不能省。哪几条已机器化随校验器演进，不在这里追。
+这五条里，第 3 条（第三方封顶 `medium`）与第 5 条的 verbatim + 数值反查已是 `make check`（`validate.py` / `verify_quotes.py`）可阻断构建的硬关卡；但 `type: none` 的正面依据、散文的语义忠实度仍是机器盲区——**`make check` 全绿不等于数据没被幻觉污染**，铁律该守的地方一处都不能省。哪几条已机器化随校验器演进（见 `validate.py` 文首校验清单），不在这里追。
 
 抓取用 `make fetch EX=<id>`（单家，按 `PROJECT/SOURCES.md` 登记的方式取页）或 `make fetch-sources`（收割全库 `sources` URL 落盘、给 PDF 生成 `.txt` 伴随文本，是 `verify_quotes` 全库反查的前置）——**不要用 WebFetch 直接抓交易所官网**，已实测多个交易所对 WebFetch 返回 403。UA / 反爬绕过的具体门道（含 `sec.gov`/`finra.org` 的 Fair Access 身份 UA、`fetch-sources` 全量重跑会用失败页覆盖好缓存的坑）见 `PROJECT/SOURCES.md`，不写死在这里。抓到的原始页存 `.cache/`，是「这条数据不是编的」的可核查凭据。
 
@@ -93,7 +91,7 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 个人独立维护的公开仓库。`main` 已设分支保护：required status check `build`（`pr-build.yml` 跑 `make build`）、`enforce_admins: false`（owner 以 admin 权限绕过 required check、可直推）。推送方式按会话类型 + 改动是否触及**受保护文件**分：
 
 - **交互式会话**（owner）：改动前 `git pull --ff-only` 确认与 `origin/main` 无分叉；改完 `make build` 全绿后直接 `git add` + `git commit` + `git push origin main`。本条即为 CLAUDE.md 对自动 push 的授权，不必每次问"要不要 push"。**触及受保护文件时例外**：先在对话里说清改什么、拿到用户明确同意再推。仍然遵守：`make check` 不过不推、不 force push、不改写已推送的历史。
-- **后台任务（background job）**：平台硬限制——不能直接 push/merge，只能建分支开 PR。开 PR 时带 `gh pr merge --auto --squash --subject "..." --body ""`（不必传 `--delete-branch`——仓库已设 `deleteBranchOnMerge`）：`.github/workflows/pr-build.yml` 跑 `make build`，绿了 GitHub 服务端自动 squash 进 main，不需要人点击；`DECISIONS.md` 里带的 `ADR-PENDING-*` 占位符合并进 main 后由 `.github/workflows/adr-heal.yml` 自动定号（[ADR-081]/[ADR-087]，见 `PROJECT/GIT-RUNBOOK.md`）。CI 报红时人工排查。**触及受保护文件时**：**不挂 `--auto`**，PR 标题带 `[需 owner 批准]`、正文 `@HRLoveFun`，等用户在 PR 上审阅后合并（`.github/CODEOWNERS` + 分支保护的 code-owner review 也会从服务端挡住 auto-merge，双保险）。
+- **后台任务（background job）**：平台硬限制——不能直接 push/merge，只能建分支开 PR。开 PR 时带 `gh pr merge --auto --squash --subject "..." --body ""`（不必传 `--delete-branch`——仓库已设 `deleteBranchOnMerge`）：`.github/workflows/pr-build.yml` 跑 `make build`，绿了 GitHub 服务端自动 squash 进 main，不需要人点击。CI 报红时人工排查（见 `PROJECT/GIT-RUNBOOK.md`）。**触及受保护文件时**：**不挂 `--auto`**，PR 标题带 `[需 owner 批准]`、正文 `@HRLoveFun`，等用户在 PR 上审阅后合并（`.github/CODEOWNERS` + 分支保护的 code-owner review 也会从服务端挡住 auto-merge，双保险）。
 - **一个逻辑改动对应一个 commit**（便于单独回溯 / 回滚），不把不相关的改动攒进一个大提交；一次成体系的改动（如一条 ADR 完整落地）作为一个提交是可以的。
 - **受保护文件**（`.github/CODEOWNERS` 权威清单，改动需 owner 批准）：`CLAUDE.md`、`schema/**`、`.github/**`、`Makefile`。清单要增删也是受保护文件改动本身。
 - **人工兜底合并**（CI 报红、真实内容冲突等 auto-merge 走不通的情况）：`gh pr merge --delete-branch` 会因 head 分支正被 `.claude/worktrees/<name>` 检出而报错、且此时远端其实已合并成功（只看退出码会误判成失败）——完整踩坑与正确操作顺序见 `PROJECT/GIT-RUNBOOK.md`。正常路径（CI 绿、auto-merge 生效）不会触发这个坑，因为没有人在本地跑带 `--delete-branch` 的合并命令。
@@ -114,33 +112,31 @@ PROJECT/sources/  每家交易所的来源登记分片（SOURCES.md 的单所拆
 
 ---
 
-## 八、记录纪律：里程碑/进展/可复用知识，收尾时就地回写
+## 八、记录纪律：里程碑 / 决策 / 踩坑，收尾时就地回写
 
-**目的**：新会话只读 `CLAUDE.md` + `ROADMAP.md` 就能接上下文（见文首），前提是每次真发生了这三类事就有人写下来——不要等被问起、也不要攒到"下次一起补"。回写是收尾的一部分，不是额外任务：一件事做完了但该回写的文件没改，视为没做完。
+**目的**：新会话只读 `CLAUDE.md` + `ROADMAP.md` 就能接上下文（见文首），前提是每次真发生了该记的事就有人当场写下——不要等被问起、不要攒到"下次一起补"。回写是收尾的一部分：一件事做完了但该回写的文件没改，视为没做完。
 
-同理，另外两件也是收尾的一部分，缺了同样算没做完：**每个逻辑改动一个 `git commit`**（规则见 §六）、**交付前 `make build` 全绿且新引入的不变式已加机器校验**（判据见 §四）。
+收尾还有两件同样不能缺：**每个逻辑改动一个 `git commit`**（§六）、**交付前 `make build` 全绿，且新引入的结构 / 不变式已加机器校验**（§四）。
 
-写什么、写去哪继续遵循第一节边界表；这里只补一件事——**触发时机**：
+**该记什么、记去哪**——去向查 §一 边界表，这里只说触发条件与写法：
 
-| 发生了什么 | 就去写 | 写成什么样 |
+| 触发 | 去 | 写法 |
 |---|---|---|
-| 阶段/波次/某交易所批次跑完，或验收（抽检）出了结果 | `PROJECT/ROADMAP.md` §三详版条目打勾 **+ §一 走 `ROADMAP-INBOX.md`**（见下方「ROADMAP 回写」） | 带日期，写清楚结果（几/几家、抽检通过率），别只写"完成" |
-| 做了一个会影响后续做法的选择——哪怕当时觉得是小事 | `PROJECT/DECISIONS.md` 新增一条 ADR（**标题先写占位符 `ADR-PENDING-<slug>`，合并前跑 `make assign-adr` 定号**，见 `PROJECT/ADR-LEDGER.md`） | 写决策 + 理由，"是什么"留给权威文件，这里不重复 |
-| 抓取/核实中踩的坑或摸出的通用经验（反爬方式、页面结构、来源查证技巧） | `PROJECT/SOURCES.md` | 写清楚现象 + 应对方式，下次能直接照抄，不必重新试错 |
-| `add-exchange` 执行步骤本身暴露的教训（某步骤该加检查、某类字段易错） | `.claude/skills/add-exchange/SKILL.md` | 改步骤本身或加一条提醒，别只在 ROADMAP 里提一句就算了 |
-| 查证中发现但当次没解决的疑问 | `PROJECT/OPEN-QUESTIONS.md` | 具体到交易所 + 字段，别写成模糊待办 |
-| 术语译法定案 | `schema/glossary.yml` | 这是唯一裁决处；`PROJECT/GLOSSARY.md` 由它生成，不手改 |
+| 阶段 / 波次 / 某批次跑完，或验收出了结果 | `ROADMAP.md` §三详版条目打勾（§一「下一步」只在优先级 / 阶段变化时改，见下） | 带日期 + ADR + 可核验结果（几家、通过率、零 diff、已知局限），别只写"完成" |
+| 做了一个会影响后续做法的选择——哪怕当时觉得是小事 | `DECISIONS.md` 新增一条 `### ADR-<slug>`（kebab，取自分支名 / 主题；历史 `ADR-NNN` 冻结、不再新增数字号） | 写决策 + 理由，"是什么"留给权威文件 |
+| 抓取 / 核实踩的坑或通用经验（反爬、页面结构、查证技巧） | `PROJECT/SOURCES.md` | 现象 + 应对，下次能直接照抄 |
+| `add-exchange` 步骤本身暴露的教训 | `.claude/skills/add-exchange/SKILL.md` | 改步骤或加提醒，别只在 ROADMAP 提一句 |
+| 查证中发现、当次没解决的疑问 | `PROJECT/OPEN-QUESTIONS.md` | 具体到交易所 + 字段 |
 
-**ROADMAP 回写：详版就地改，§一 走收件箱**（文件结构见 `PROJECT/ROADMAP.md` 文首导航；机制见 [ADR-069]）：
+（术语译法定案、schema 字段增删等改到 §一 边界表里的权威文件的事，直接查表——不在这里重列。）
 
-1. **详版条目**（活跃阶段的计划节，当前是第三节「v2.0 计划」）——事实只在这里写一遍：日期 + ADR 编号 + 可核验结果（几家、通过率、零 diff、已知局限）。逐条 checklist，并行会话改不同条目不冲突，就地改。
-2. **「一、当前状态」的两个子节是单写者资源**——并行 worktree 各自重排「下一步」/ 各自 prepend「最近完成」，git 把不同分支的行看成互不冲突，静默三方合并成重号列表 / 超窗窗口（[ADR-069]，`make check` 已加两条不变式拦这个）。因此：
-   - **后台任务 / worktree**：**不碰 §一**，只往 `PROJECT/ROADMAP-INBOX.md` 末尾追加一行完成便签（纯 append，不同分支合并干净）。
-   - **交互式会话 / 合并协调者**：开工时先把 `ROADMAP-INBOX.md` 堆积的行折进 §一——**最近完成**滚动窗口只留最近 3 条（更早的细节已在详版，不丢）、**下一步**按新情况重排编号并把完成项划掉——然后清空收件箱。这一步串行、单写者，不会撞。§一 只做速览索引，**不重复写结果**（写两遍违反第一节）。
+**ROADMAP 回写**（文件结构见 `ROADMAP.md` 文首导航）：
 
-版本换季时把上一版本的计划整节移入「四、历史归档」（只增补、不改写），活跃计划节重建，并同步文首导航。
+- **§三详版**——事实只在这里写一遍。逐条 checklist，并行会话改不同条目 git 合并干净，就地改。
+- **§一「下一步」**——3–5 条优先级判断，不编号。只在阶段切换 / 优先级重排时改（罕见）；任何会话可直接改（后台走 PR）。并行改同一处 → git 文本冲突可见，按 `GIT-RUNBOOK.md` 的内容冲突路径处理——这本就该露出来。§一 不再写「最近完成」（想看刚落地什么读 §三或 `git log`）。
+- 版本换季：上一版计划整节移入「四、历史归档」（只增补不改写），活跃节重建，同步文首导航。
 
-判断标准：**这件事如果不写下来，下一个不带记忆的会话会不会重新踩一次坑、重新犯一次同样的判断错误、或者不知道现在做到哪了？** 只要答案是"会"，就属于该记录的范围。
+判断标准：**这件事不写下来，下一个不带记忆的会话会不会重新踩坑、重犯同样的判断错误、或不知道做到哪了？** 答案是"会"就该记。
 
 ---
 

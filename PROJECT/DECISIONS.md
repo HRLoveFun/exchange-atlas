@@ -100,6 +100,8 @@
 - ADR-093 · 2026-09-06 · 折行函数 `wrapByCharBudget` 改 token 折行：中英混排不再从拉丁词 / 数字中间切断
 - ADR-094 · 2026-09-05 · stable 档来源不变式全库化（校验 21）+ 63 处「stable + medium + 零 sources」闭环
 - ADR-095 · 2026-09-06 · Phase 3「其余章节可视化」收口认定 + Phase 4 启动前置条件达成
+- ADR-protected-files-approval-gate · 2026-09-06 · 受保护文件审批闸：CODEOWNERS + 分支保护 code-owner review
+- ADR-slim-coordination-machinery · 2026-09-06 · 精简协调机器：ADR 改 slug 标识、删 ROADMAP-INBOX、§六 / §八 重写
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2663,5 +2665,32 @@ print('全库 medium 零 sources:',n)
 - **没把 `PROJECT/`（DECISIONS / ROADMAP / SOURCES 等）纳入受保护**——那些是高频协作写入点，纳入会把审批闸变成瓶颈；它们的正确性靠 `validate.py` 关卡，不靠人肉审。
 
 **验证：** `make build` 全绿（本 PR 只加 `.github/CODEOWNERS` + 改 `CLAUDE.md` §六 + 本条 ADR，不触碰 `sync.py` 扫描的文件，生成块零 diff）。分支保护 API 改动的实测（故意开一个碰 `schema/` 的测试 PR 看 auto-merge 是否被挡）留用户执行命令后做。
+
+**日期：** 2026-09-06
+
+---
+
+### ADR-slim-coordination-machinery — 精简协调机器：ADR 改 slug 标识、删 ROADMAP-INBOX、§六 / §八 重写
+
+**背景：** 承接 [ADR-protected-files-approval-gate] 同一次「`CLAUDE.md` 腐烂检讨」（2026-09-06）。两套为「并行后台作业」打的补丁，维护成本已超过它们防住的问题，核心失效模式还在复发：
+
+- **ADR 流水号机器**（[ADR-069] 台账 → [ADR-076] 占位符 → [ADR-081]/[ADR-087] adr-heal）：`adr-heal.yml`（91 行 + 10 分钟轮询）+ `assign_adr_number.py`（148 行）+ `ADR-LEDGER.md` + `validate.py` 两条校验 + `selfcheck` 7 条 + `GIT-RUNBOOK.md` 三节 + `adr-index` 生成块 + `ADR-PENDING` 约定。近 18 条 ADR 里 5 条（ADR-072/073/074/075/087）撞号触发全库 grep-replace，另 5 条（ADR-069/076/077/081/087）本身在修这套机器。流水号只买到「时间序 + 短引用」——而 `DECISIONS.md` 本就按物理顺序追加、每条带日期。
+- **ROADMAP-INBOX 折叠机制**（[ADR-069] 护栏②）：`ROADMAP-INBOX.md` + §八「ROADMAP 回写」子节 + `validate.py` 三条校验（roadmap_nextstep / roadmap_recent / inbox_line）+ `selfcheck` ~20 条。折叠靠「交互式会话开工时记得做」，2026-09-06 §一 就落后到需要用户授权破例才折；「最近完成」滚动窗口本身是 §三 详版的便利副本。
+
+**定了什么：**
+
+1. **ADR 改 slug 标识。** 新条目标题 `### ADR-<slug>`（kebab，取自分支名 / 主题），引用 `[ADR-<slug>]`。`ADR-001`…`ADR-095` 冻结为历史、永不重编号（旧 `[ADR-069]` 引用零改动仍解析）。撞号从「静默数字冲突」变成 `DECISIONS.md` 上的可见文本冲突，串行合并时暴露。**删**：`tools/assign_adr_number.py`、`.github/workflows/adr-heal.yml`、`PROJECT/ADR-LEDGER.md`、`ADR-PENDING-<slug>` 约定、`make assign-adr`、[ADR-029] 让「号」协议（改让 slug）。`validate.py` 校验 11（ADR 锚点）扩正则接受 slug + 裸 `ADR-NNN`；删校验 14（台账）、16（占位符）。`sync.py` `render_adr_index` 接受 slug 标题（数字号按号排前、slug 按日期排后）。
+2. **删 ROADMAP-INBOX。** `ROADMAP.md` §一 只留「下一步」（3–5 条优先级判断、不编号），删「最近完成」（想看刚落地什么读 §三 / `git log`）。**删**：`PROJECT/ROADMAP-INBOX.md`、`validate.py` 校验 12（roadmap 防失序）与 18（INBOX 行长）。「下一步」任何会话可直接改（后台走 PR）；并行改同一处 → git 文本冲突可见，走 `GIT-RUNBOOK.md` 内容冲突路径——它只在阶段切换时变，冲突罕见且本该露出来。
+3. **`CLAUDE.md` §六 / §八 重写。** §六：修正「main 无分支保护」过时句、删 adr-heal 段。§八：收敛为「三类该记的事 + 判断标准 + 去 §一 表找去向」，删折叠机制整段、ADR-PENDING 整段、glossary 触发行（与 §一 表逐字重复）；触发表 6 行 → 6 行但去掉重复列。§一 边界表删 `ROADMAP-INBOX.md` / `ADR-LEDGER.md` 两行；生成块段从枚举改指针（`tools/sync.py`）；「同一事实多种渲染」段压缩。
+4. **`validate.py` 校验编号有意留空不重排**（12/14/16/18），保留历史文档对「校验 17/19/20/21」的引用；双 19 修正为 19 / 22。`REMOVED_PATHS` 白名单让校验 10 跳过历史 ADR 正文里对已删文件的反引号引用（改写历史 ADR 违反 §八）。`selfcheck` 101→68。
+
+**没做：**
+
+- **没重写历史 ADR**（ADR-069/076/081/087 等描述当时机器的正文原样保留，[CLAUDE.md §八]「只增补不改写」）——本条即「后续做法变了」的可引用落点。
+- **没动 `DECISIONS.md` 物理顺序 / 归档阈值**（[ADR-084] 的 3500 行 warn 保留）。
+- **没碰 `pr-build.yml`**——CI 关卡不变；`data/` / `schema/` / 前端零改动。
+- **没给 slug 加唯一性机器校验**——两条分支同名 slug 会在 `DECISIONS.md` 尾部产生相邻行文本冲突，git 合并时就报，不需要额外关卡；真漏了，`validate_adr_anchors` 的 dupe 检查（`### ADR-<slug>` 出现两次）仍会 fail。
+
+**验证：** `make build` 全绿（`selfcheck` 101→68、`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_*` OK）、`make sync` 二次幂等、`data/` 与 `docs/data/` 零 diff、`adr-index` 生成块按新规则重算（本条 slug 条目入索引尾部）。负向：临时把某处 `[ADR-069]` 改成 `[ADR-999]` → 校验 11 fail；`### ADR-x` 写两遍 → dupe fail。本条与 [ADR-protected-files-approval-gate] 是同一次检讨的产物、按序两个 PR（A = 审批闸，B = 本条），均走受保护文件审批（改的正是 `CLAUDE.md` / `.github/` / `Makefile`）。
 
 **日期：** 2026-09-06

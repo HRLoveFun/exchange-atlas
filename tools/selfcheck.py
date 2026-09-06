@@ -108,97 +108,6 @@ case("chapter-is-NA 假：raw_chapter 为 None",
 
 
 # ══════════════════════════════════════════════════════════════
-# [ADR-069] ROADMAP §一 防失序：
-#   validate.roadmap_nextstep_violations(block) / roadmap_recent_violations(block, limit)
-#   —— 并行 worktree 各自重排 §一 子节、git 静默三方合并 → 重号/超窗。取 bool / count。
-# ══════════════════════════════════════════════════════════════
-def _next_bad(block):
-    return bool(validate.roadmap_nextstep_violations(block))
-
-
-case("nextstep 合法：1..4 连续", _next_bad("1. a\n2. b\n3. c\n4. d\n"), False)
-case("nextstep 合法：空列表（无编号行）", _next_bad("完整清单见三节。\n"), False)
-case("nextstep 合法：带 ~~划掉~~ 前缀仍算一项", _next_bad("1. ~~done~~ ✅\n2. b\n"), False)
-case("nextstep 违规：重号（并行合并残留 1-6,4-6）",
-     _next_bad("1. a\n2. b\n3. c\n4. d\n5. e\n6. f\n4. g\n5. h\n6. i\n"), True)
-case("nextstep 违规：不连续（缺 3）", _next_bad("1. a\n2. b\n4. d\n"), True)
-case("nextstep 违规：不从 1 起", _next_bad("2. a\n3. b\n"), True)
-case("nextstep 计数：重号各报一条 + 不连续 → 2 条消息",
-     len(validate.roadmap_nextstep_violations("1. a\n1. b\n3. c\n")), 2)
-case("nextstep 不误伤：缩进的子编号不计入顶层",
-     _next_bad("1. a\n  1. sub\n  2. sub\n2. b\n"), False)
-
-
-def _recent_bad(block, limit=3):
-    return bool(validate.roadmap_recent_violations(block, limit))
-
-
-case("recent 合法：正好 3 条", _recent_bad("- **2026-09-04 · a** — x\n- **2026-09-03 · b** — y\n- **2026-09-02 · c** — z\n"), False)
-case("recent 合法：2 条", _recent_bad("- **a** — x\n- **b** — y\n"), False)
-case("recent 违规：9 条（并行各自 prepend 未裁剪）",
-     _recent_bad("".join(f"- **{i}** — x\n" for i in range(9))), True)
-case("recent 计数：条目数按 `- **` 行首算，正文里的 `- **` 不计",
-     len(validate.roadmap_recent_violations("- **a** — 见 `- **b**` 的说明\n- **c** — y\n", 3)), 0)
-
-
-# ══════════════════════════════════════════════════════════════
-# [ADR-069] ADR 编号台账：validate.adr_ledger_violations(decisions_nums, ledger_text)
-#   —— DECISIONS 的 ADR 号 ⊆ 台账登记的号；台账 1..max 连续无重复。取 bool / count。
-# ══════════════════════════════════════════════════════════════
-def _ledger_bad(nums, text):
-    return bool(validate.adr_ledger_violations(set(nums), text))
-
-
-_SEED = "- ADR-001 … ADR-003 · 历史 · pre-ledger\n"
-case("ledger 合法：区间行兜住历史 + DECISIONS 都在区间内",
-     _ledger_bad([1, 2, 3], _SEED), False)
-case("ledger 合法：区间 + 逐条，无缺口无重复",
-     _ledger_bad([1, 2, 3, 4], _SEED + "- ADR-004 · x · br · 2026-09-04\n"), False)
-case("ledger 违规：DECISIONS 有 ADR-005 但台账没登记",
-     _ledger_bad([1, 2, 3, 5], _SEED), True)
-case("ledger 违规：逐条行与区间重复登记同一号",
-     _ledger_bad([1, 2, 3], _SEED + "- ADR-002 · dup · x · d\n"), True)
-case("ledger 违规：编号有缺口（3 之后直接 5）",
-     _ledger_bad([], _SEED + "- ADR-005 · x · y · z\n"), True)
-case("ledger 不误伤：非登记行（说明文字里的 ADR-029）不计入",
-     _ledger_bad([1, 2, 3], _SEED + "真撞了按 [ADR-029] 让号。\n"), False)
-case("ledger 计数：缺登记 + 缺口 → 2 条消息",
-     len(validate.adr_ledger_violations({7}, _SEED + "- ADR-005 · x · y · z\n")), 2)
-
-
-# ══════════════════════════════════════════════════════════════
-# [ADR-076] ADR 占位符定号：
-#   validate.pending_adr_placeholder_violations(text)
-#   —— 分支开工写 ADR-PENDING-<slug> 占位符代替具体数字号，合并前才由
-#   tools/assign_adr_number.py 定号；main 上残留是错误、分支上只警告
-#   （严重程度判定在 validate_no_pending_adr_placeholders 里，不在这个纯函数）。
-# ══════════════════════════════════════════════════════════════
-def _pending(slug):
-    """拼出 `ADR-PENDING-<slug>`：不能在这写死完整字面量，否则这个测试文件自己会被
-    validate_no_pending_adr_placeholders 的仓库级扫描当成真占位符误报（[ADR-076]）。"""
-    return f"ADR-PENDING-{slug}"
-
-
-case("pending 合法：正文没有占位符",
-     validate.pending_adr_placeholder_violations("### ADR-076 — 正常已定号的标题\n"), [])
-case("pending 违规：标题带占位符",
-     validate.pending_adr_placeholder_violations(
-         f"### {_pending('td-axis-labels')} — 剖面零轴刻度\n"), [_pending("td-axis-labels")])
-case("pending 违规：正文引用也算，不只是标题",
-     validate.pending_adr_placeholder_violations(
-         f"见 [{_pending('foo')}] 的讨论。\n"), [_pending("foo")])
-case("pending 去重：同一占位符出现多次只报一条",
-     validate.pending_adr_placeholder_violations(
-         f"### {_pending('foo')} — x\n\n见 [{_pending('foo')}]。\n"), [_pending("foo")])
-case("pending 计数：两个不同占位符各报一条，按字典序排",
-     validate.pending_adr_placeholder_violations(
-         f"[{_pending('zzz')}] 与 [{_pending('aaa')}]\n"),
-     sorted([_pending("aaa"), _pending("zzz")]))
-case("pending 不误伤：已定号的普通 ADR 编号不匹配",
-     validate.pending_adr_placeholder_violations("[ADR-069] 与 ### ADR-070 — 标题\n"), [])
-
-
-# ══════════════════════════════════════════════════════════════
 # [ADR-075] OTP 来源登记格式：validate.otp_line_violations(sources_text)
 #   —— 复用 fetch.py 的 OTP_LINE_RE/URL_RE 解析同一份正则，一行 [OTP] 必须恰好 2 个 URL。
 # ══════════════════════════════════════════════════════════════
@@ -235,29 +144,6 @@ case("pairing 违规：sources 多出（孤儿分片）", _pair_bad(["a"], ["a",
 case("pairing 违规：两侧各多出一个互不相同", _pair_bad(["a", "x"], ["a", "y"]), True)
 case("pairing 计数：缺分片 + 孤儿分片 → 2 条消息",
      len(validate.sources_pairing_violations({"a", "x"}, {"a", "y"})), 2)
-
-
-# ══════════════════════════════════════════════════════════════
-# [ADR-077] INBOX 一句话上限：
-#   validate.inbox_line_violations(text, maxlen=200)
-#   —— 「待折叠」区每条 `- ` 行 ≤200 字；只限行长、不限堆积条数。
-# ══════════════════════════════════════════════════════════════
-_INBOX_TMPL = "# INBOX\n\n## 待折叠\n\n{body}\n\n## 下一节\n"
-case("inbox 合法：短行",
-     validate.inbox_line_violations(_INBOX_TMPL.format(body="- 2026-09-05 · 一句话 · [ADR-001] · main")), [])
-case("inbox 违规：单行超 200 字",
-     len(validate.inbox_line_violations(_INBOX_TMPL.format(body="- " + "字" * 201))), 1)
-case("inbox 合法：恰好 200 字（含 `- ` 前缀）",
-     validate.inbox_line_violations(_INBOX_TMPL.format(body="- " + "字" * 198)), [])
-case("inbox 不误伤：长文本在 `- ` 行之外的说明段落",
-     validate.inbox_line_violations(_INBOX_TMPL.format(body="普通段落 " + "字" * 300)), [])
-case("inbox 不误伤：「待折叠」小节之外的长行",
-     validate.inbox_line_violations("# INBOX\n\n## 其他\n\n- " + "字" * 300 + "\n"), [])
-case("inbox 合法：没有「待折叠」小节", validate.inbox_line_violations("# INBOX\n"), [])
-case("inbox 计数：两行超限各报一条",
-     len(validate.inbox_line_violations(_INBOX_TMPL.format(body="- " + "字" * 201 + "\n- " + "字" * 202))), 2)
-case("inbox 自定义上限：maxlen=10 时 11 字的行违规",
-     len(validate.inbox_line_violations(_INBOX_TMPL.format(body="- 这是一句普通长度的话"), maxlen=10)), 1)
 
 
 # ══════════════════════════════════════════════════════════════
