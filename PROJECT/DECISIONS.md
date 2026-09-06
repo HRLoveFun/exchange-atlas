@@ -106,6 +106,7 @@
 - ADR-phase4-canvas-layout · 2026-09-06 · Phase 4 单页画布合并：布局形态 / 模块排序 / 折叠策略 / 深链兼容定案
 - ADR-phase4-canvas-polish · 2026-09-06 · Phase 4 棒 5：跨模块视觉语言对账 + 已知视觉遗留收口 + 20 家巡检 + 非专业读者实测
 - ADR-phase4-closeout · 2026-09-06 · Phase 4 单页画布合并收口认定 + 交付质量独立审查
+- ADR-canvas-ui-iterate · 2026-09-06 · 画布 UI 常态迭代：市场选择条常驻 + 地区分组选择面板 + 折叠 toggle + 说明段按需展开
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2831,5 +2832,25 @@ print('全库 medium 零 sources:',n)
 **没做：** 不改棒 1–5 与 [ADR-phase4-canvas-polish] 的正文（[CLAUDE.md §八] 只增补不改写）；本条不动前端（审查只读；PR #114 的死代码清理是独立逻辑改动）。
 
 **验证：** 纯文档（`PROJECT/DECISIONS.md` 本条 + `PROJECT/ROADMAP.md` §三顶层 `[x]` + 收口子条目 + 「合并节奏」行 + §一 三处）。`make build` 全绿、`make sync` 幂等、adr-index 生成块重算入本条 slug、其余生成块零 diff。
+
+**日期：** 2026-09-06
+
+### ADR-canvas-ui-iterate — 画布 UI 常态迭代：市场选择条常驻 + 地区分组选择面板 + 折叠 toggle + 说明段按需展开
+
+**背景：** Phase 4 收口（[ADR-phase4-closeout]）后的第一轮画布常态迭代（§一「下一步」）。用户 2026-09-06 提出五点使用反馈：市场选择条随滚动消失、20 家平铺 `<select>` 难找目标、整条标题棒可点折叠容易误触且不可发现、各模块 SVG 内部重复画了模块名、各模块「本视图…」说明段常驻挤占版面。
+
+**定了什么：**
+
+1. **市场选择条 sticky 常驻**：`canvasToolbar` 从文档流内的 `.view-toolbar` 改为 `.canvas-marketbar`（`position: sticky; top: var(--ea-header-h)`）——滚到画布任何位置都能换所。`--ea-header-h` 由 app.js 启动时测量页头高度写入、`ResizeObserver` 随「更多」二级横条开合自动跟随；section 的 `scroll-margin-top` 同步让过页头 + 吸顶条（深链锚点落点不再被盖住）。
+2. **选择器 = 按钮 + 按地区分组的弹出面板**：平铺 20 家的 `<select>` 改为「当前交易所名」按钮 + 弹出面板，按 **亚太 APAC / 欧洲 EMEA / 美洲 AMER / 中东非 MEA**（`MARKET_REGION_ORDER`，顺序与 README 覆盖范围表一致）分组罗列。选市交互仍是画布级 `data-role="canvas-market"`（从 `change` 事件迁到 `click` 委托），hash 契约不变；面板点外部 / Esc 收起，选市后随工具条重渲染自然收起。「市场 Market」label 字面量仍全库 1 处（`check_no_dup_render_helpers` 关卡不变）。
+3. **折叠从整条标题棒改为独立 toggle**：`.canvas-sec-head` 不再整体可点，标题棒右侧加 `▸/▾ + 展开/折叠` 字样的 pill 按钮（`canvas-fold` 分支改按 `closest('.canvas-section')` 找 body）。消除「想选中标题文字却触发了折叠」的误触，也把折叠能力变成可见控件。
+4. **主图内不再重复模块名**：7 个 builder 的 SVG 内部标题（td/cw/sp 原有、`llCollapsed`、rm/pt/rf）全部删除——section 标题棒已有模块名。顺带收紧各图顶边（td `PT` 62→46 并同步 `tdCorePanel` 保持面板垂直居中于零轴、sp `PT` 60→40、cw 副标题上移、rm/pt/rf/ll 槽位整体上移），不留删标题后的空带。轴名 / 副标题 / 图例等信息性文字不动。
+5. **「本视图…」说明段默认隐藏、点击模块名展开**：新增 `secProse()` 包装器，7 个 builder 的 prose 段（`tdProse`/`cwProse`/`spProse`/`llProse`/`rmProse`/`ptProse`/`rfProse`）包进 `.sec-prose[hidden]`；模块名本体改为 `canvas-prose` 分支的展开开关（`aria-expanded` 同步）。折叠态下点模块名先借 toggle 展开模块再显示说明。**例外**：风险旗标的「这不是风险评分」声明（`rfDisclaimer`）按 [ADR-066] 轴 4 保持常驻——它是设计内的一等声明不是脚注。
+
+**理由：** 五点反馈同指一个症状——常驻 / 可点的东西太多，正文（图）被推挤、误触面大。方向与 [ADR-057] 减标签、[ADR-040] 收口反馈「说明进中心卡」一脉相承：默认画面只留图与最短路径控件，解释性内容按需展开。
+
+**已知取舍：** 说明段隐藏后，首访读者可能不知道点模块名有解释——接受（模块名 hover 有 title 提示 + 下划线 affordance；英文模式 `zhNoteBlock` 同为先例）。SVG 内删标题使各图 `viewBox` 顶边略紧，已在本批同步收紧；20 家 × 中英 × 明暗全量巡检留待下一轮覆盖。
+
+**验证：** 纯前端两文件（`docs/assets/app.js` + `docs/assets/styles.css`），`data/` 与 `docs/data/` 零 diff。`make build` 全绿（`check_ui_i18n` / `check_no_dup_render_helpers`「市场 Market」=1 / `check_canvas_sections` 等 8 关全过）；`node --check` 通过；headless 实测：吸顶（滚动 1200px 后市场条 top=57px 紧贴页头）、地区面板四组齐全、选市 jp-jpx 生效、折叠 toggle 双向、折叠态点标题自动展开 + 说明段出现、说明段二次点击收起。
 
 **日期：** 2026-09-06

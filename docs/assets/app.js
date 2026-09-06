@@ -250,14 +250,43 @@
   // check_no_dup_render_helpers.py 有 ≤1 关卡）。切市场只写 market 参数、保留
   // 当前视图：一次 loadExchange，所在 section 就地重渲染（棒 2 画布外壳落地后
   // 驱动全部 7 个 section）。note 传调用方已过 t() 的现成片段。
+  // 交互形态（2026-09-06 UI 迭代）：选择条 sticky 常驻在页头下方，滚到画布任何
+  // 位置都能换所；选择器从平铺 20 家的 <select> 下拉改为「当前交易所名」按钮 +
+  // 按地区分组的弹出面板（亚太 APAC / 欧洲 EMEA / 美洲 AMER / 中东非 MEA）。
+  var MARKET_REGION_ORDER = [
+    { id: "apac", zh: "亚太地区", en: "APAC" },
+    { id: "europe", zh: "欧洲", en: "EMEA" },
+    { id: "americas", zh: "美洲", en: "AMER" },
+    { id: "mena_africa", zh: "中东非", en: "MEA" }
+  ];
+  function marketPanelHtml(currentId) {
+    var byRegion = {};
+    cache.manifest.exchanges.forEach(function (e) {
+      (byRegion[e.region] = byRegion[e.region] || []).push(e);
+    });
+    return '<div class="market-panel" data-role="market-panel" hidden>' +
+      '<div class="market-panel-regions">' +
+      MARKET_REGION_ORDER.map(function (r) {
+        var list = byRegion[r.id] || [];
+        if (!list.length) return "";
+        return '<div class="market-panel-region">' +
+          '<div class="market-panel-region-h">' + esc(r.zh + " " + r.en) + "</div>" +
+          '<div class="market-panel-list">' +
+          list.map(function (e) {
+            return '<button type="button" class="market-panel-item' + (e.id === currentId ? " active" : "") +
+              '" data-role="canvas-market" data-market="' + esc(e.id) + '">' + esc(exchangeDisplayName(e)) + "</button>";
+          }).join("") + "</div></div>";
+      }).join("") + "</div></div>";
+  }
   function canvasToolbar(note) {
     var id = canvasResolveId(parseHash());
-    return '<div class="view-toolbar">' +
-      '<label for="canvasExchange">市场 Market</label>' +
-      '<select id="canvasExchange" data-role="canvas-market">' +
-      cache.manifest.exchanges.map(function (e) {
-        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
-      }).join("") + "</select>" +
+    var cur = cache.exchangeById[id];
+    return '<div class="canvas-marketbar">' +
+      '<span class="canvas-marketbar-label">市场 Market</span>' +
+      '<button type="button" class="canvas-market-btn" data-role="canvas-market-toggle" aria-haspopup="true" aria-expanded="false"' +
+      ' title="' + esc(t("切换交易所", "Switch exchange")) + '">' +
+      esc(cur ? exchangeDisplayName(cur) : id) + '<span class="canvas-market-caret" aria-hidden="true">▾</span></button>' +
+      marketPanelHtml(id) +
       '<span class="td-tb-note">' + note + "</span>" +
       "</div>";
   }
@@ -869,7 +898,7 @@
     var yR = Math.min(40, Math.max(5, mags.length ? Math.ceil(Math.max.apply(null, mags) * 1.15) : 9));
 
     // ── 画布 ──
-    var W = 960, H = 556, PL = 60, PR = 152, PT = 62, PB = 106;
+    var W = 960, H = 556, PL = 60, PR = 152, PT = 46, PB = 106;
     var pw = W - PL - PR, ph = H - PT - PB;
     var X = function (m) { return PL + (m - xMin) / (xMax - xMin) * pw; };
     var Y = function (p) { return PT + (yR - p) / (2 * yR) * ph; };
@@ -1086,13 +1115,9 @@
         t("交易时段钟点未结构化——见档案页「市场结构与交易机制」章", "Session times not structured — see the Market Structure &amp; Trading Mechanism chapter of the profile") + '</text>');
     }
 
-    // ── 标题 / 轴名（y 轴标题已删——"涨跌幅 %"与参考价已由 % 刻度 + 零轴刻度本身表达，
-    //    顶栏工具条另有一句完整口径，ADR-073）──
+    // ── 轴名（模块标题已删——画布 section 标题棒已有模块名，主图内不再重复；
+    //    y 轴标题亦已删——"涨跌幅 %"与参考价已由 % 刻度 + 零轴刻度本身表达，ADR-073）──
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
-    var titleTxt = (line === "deriv")
-      ? t("市场机制剖面 · 衍生品业务线", "Market Mechanics Profile · Derivatives")
-      : t("市场机制剖面", "Market Mechanics Profile");
-    g.push('<text x="' + PL + '" y="' + (PT - 40) + '" class="td-title">' + esc(titleTxt) + "</text>");
     g.push('<text x="' + n(PL + pw / 2) + '" y="' + (H - 5) + '" class="td-axis-name" text-anchor="middle">' +
       t("日内时间（当地）", "Time of day (local)") + "</text>");
 
@@ -1112,7 +1137,7 @@
 
     var svg = '<div class="td-plot-wrap' + (ghostOn ? " td-ghost" : "") + '"><svg viewBox="0 0 ' + W + ' ' + H + '" class="td-svg" role="img" aria-label="' +
       esc(exName) + t(" 市场机制剖面", " market mechanics profile") + (line === "deriv" ? t("（衍生品业务线）", " (derivatives business line)") : "") + '">' + g.join("") + "</svg></div>";
-    return tdLineSwitch(hasDeriv, line) + tdBanner(msTop, line) + tdLegend() + svg + tdSidePanels(id, data, line) + tdProse();
+    return tdLineSwitch(hasDeriv, line) + tdBanner(msTop, line) + tdLegend() + svg + tdSidePanels(id, data, line) + secProse(tdProse());
   }
 
   // 机制核心面板（ADR-055）——高 276 的 foreignObject，水平居中、垂直居中于零轴
@@ -1122,7 +1147,7 @@
   // 窄跨度 / 有盘后时段的所（cn-sse≈719、tw-twse≈655、kr-krx≈610）由此让出竞价条。
   function tdCorePanel(id, ms, yRef, ghostOn, clsLeftX, pfx) {
     pfx = pfx || "";
-    var W = 960, PL = 60, PR = 152, PT = 62, PB = 106;
+    var W = 960, PL = 60, PR = 152, PT = 46, PB = 106;
     var pw = W - PL - PR, ph = 556 - PT - PB;
     var fx = PL + 60, fh = 276, fy = PT + ph / 2 - fh / 2;
     var fRight = PL + pw - 60;                                    // 默认右缘 x=748
@@ -1501,10 +1526,10 @@
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
     var rt = buySum + sellSum;
     // 副标题与合计行同口径：未知零侧写「—」，往返合计在该情形标明是下限
+    // （模块标题已删——画布 section 标题棒已有模块名，主图内不再重复）
     var buyUnknownZero = buySum === 0 && !(sideNone.buy && !sideUnknown.buy);
     var sellUnknownZero = sellSum === 0 && !(sideNone.sell && !sideUnknown.sell);
     var sideTxt = function (v, unk) { return unk ? "—" : cwFmtBp2(v); };
-    g.push('<text x="' + PL + '" y="34" class="td-title">' + t("交易成本瀑布", "Cost Waterfall") + "</text>");
     var sub;
     if (buySum === 0 && sellSum === 0) {
       sub = t("显性成本按笔 / 按合约计，本所未摘引到可折算为 bp 的费率（见下方各费种）",
@@ -1517,16 +1542,16 @@
         (rt >= 1 ? " (about " + (rt / 100).toFixed(rt >= 10 ? 2 : 3) + "%)" : "") +
         (buyUnknownZero || sellUnknownZero ? " (one side unrecorded; total is a floor)" : ""));
     }
-    g.push('<text x="' + PL + '" y="55" class="cw-rt">' + esc(sub) + "</text>");
+    g.push('<text x="' + PL + '" y="34" class="cw-rt">' + esc(sub) + "</text>");
     if (rt > 0 && rt < 2) {
-      g.push('<text x="' + PL + '" y="73" class="cw-rt cw-rt-note">' +
+      g.push('<text x="' + PL + '" y="52" class="cw-rt cw-rt-note">' +
         t("按笔显性成本极低；实际成本主要在买卖价差 / 市场冲击，不在本项目覆盖范围",
           "Per-trade explicit cost is very low; the real cost sits in the bid-ask spread / market impact, which is outside this project’s scope") + "</text>");
     }
 
     var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + ' ' + n(H) + '" class="td-svg cw-svg" role="img" aria-label="' +
       esc(exName) + t(" 交易成本瀑布", " cost waterfall") + '">' + g.join("") + "</svg></div>";
-    return cwLegend() + cwBanner(ms) + svg + cwCommissionNote(id, data) + cwTaxPanel(id, data) + cwProse();
+    return cwLegend() + cwBanner(ms) + svg + cwCommissionNote(id, data) + cwTaxPanel(id, data) + secProse(cwProse());
   }
 
   function cwBanner(ms) {
@@ -1709,7 +1734,7 @@
   function spLanes(id, data, derivState) {
     var cl = (data.chapters && data.chapters.clearing) || {};
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
-    var W = 960, PL = 134, PR = 46, PT = 60;
+    var W = 960, PL = 134, PR = 46, PT = 40;
     var plotW = W - PL - PR;
     var settleDays = spSettleDays(cl);
     var Nmax = Math.max(settleDays, 2);
@@ -1719,7 +1744,7 @@
     var H = gridBot + 44;
     var g = [];
 
-    g.push('<text x="14" y="30" class="td-title">' + esc(t("交割管线", "Settlement Pipeline")) + '</text>');
+    // 模块标题已删——画布 section 标题棒已有模块名，主图内不再重复
 
     // ── T+k 天数轴 + 竖网格 ──
     for (var d = 0; d <= Nmax; d++) {
@@ -1924,7 +1949,7 @@
       spBearerLegend() +
       spWaterfall(id, data) +
       spChipsBlock(id, data) +
-      spProse();
+      secProse(spProse());
   }
 
   // ══════════════════════════════════════════════
@@ -2031,7 +2056,6 @@
     var W = 1180, PR = 40, PL = 80, H = 150, midY = 84;
     return '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + " " + H + '" class="td-svg ll-svg" role="img" aria-label="' +
       esc(t("纯衍生品交易所，无公司上市生命周期", "derivatives-only exchange, no corporate listing lifecycle")) + '">' +
-      '<text x="18" y="28" class="ll-title">' + esc(t("上市生命周期", "Listing Lifecycle")) + "</text>" +
       '<line x1="' + PL + '" y1="' + midY + '" x2="' + (W - PR) + '" y2="' + midY + '" stroke="var(--fg-faint)" stroke-width="1.4" stroke-dasharray="5 4"/>' +
       '<text x="' + W / 2 + '" y="' + (midY - 16) + '" text-anchor="middle" class="ll-empty-strong">' +
       esc(t("衍生品交易所 · 无公司上市生命周期", "Derivatives-only exchange · no corporate listing lifecycle")) + "</text>" +
@@ -2044,7 +2068,7 @@
   function llBuild(id, data) {
     var L = (data.chapters && data.chapters.listing) || {};
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
-    if (L._meta && L._meta.not_applicable) return llCollapsed(id, exName) + llProse(true);
+    if (L._meta && L._meta.not_applicable) return llCollapsed(id, exName) + secProse(llProse(true));
 
     var W = 1180, PL = 80, PR = 40;
     var boards = L.boards || [];
@@ -2061,19 +2085,19 @@
     var boardMore = boards.length - boardRows.length;
     var ladderN = boardRows.length + (boardMore > 0 ? 1 : 0);
     var tierRowH = 13, tierStackH = ladderN * tierRowH;
-    var bandY = 66 + (boards.length > 1 ? tierStackH : 18) + 44;
+    var bandY = 50 + (boards.length > 1 ? tierStackH : 18) + 44;
     var calloutTop = bandY + 40, calloutH = 44;
     var axisY = calloutTop + (hasCond ? calloutH : 16) + 24, H = axisY + 24;
 
     var g = [];
-    g.push('<text x="18" y="26" class="ll-title">' + esc(t("上市生命周期", "Listing Lifecycle")) + "</text>");
+    // 模块标题已删——画布 section 标题棒已有模块名，主图内不再重复。
     // 派生一句描述：审核制度 · N 个板块 [· 可转板]
     var desc = [];
     if (reviewEnv && reviewEnv.enum) desc.push(enumDisplay("review_system", reviewEnv.enum));
     else if (has(reviewEnv)) desc.push(spClip(dv(reviewEnv), 18));
     if (boards.length) desc.push(boards.length + t(" 个板块", boards.length === 1 ? " board" : " boards"));
     if (has(xferEnv) && boards.length > 1) desc.push(t("可转板", "transferable"));
-    g.push('<text x="18" y="43" class="ll-archetype">' + esc(desc.join(" · ")) + "</text>");
+    g.push('<text x="18" y="26" class="ll-archetype">' + esc(desc.join(" · ")) + "</text>");
 
     // ── 横向布局（顺序推进） ──
     var x = PL + 18;
@@ -2222,7 +2246,7 @@
       '<rect width="6" height="6" fill="var(--danger-soft)"/>' +
       '<line x1="0" y1="0" x2="0" y2="6" stroke="var(--danger)" stroke-width="1.4" opacity="0.5"/></pattern></defs>' +
       g.join("") + "</svg></div>";
-    return llLegend() + svg + llProse(false);
+    return llLegend() + svg + secProse(llProse(false));
   }
 
   function llLegend() {
@@ -2355,13 +2379,13 @@
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
     var W = 1180, PL = 150, PR = 44;
     var g = [];
-    g.push('<text x="18" y="28" class="rm-title">' + esc(t("监管图", "Regulation Map")) + "</text>");
+    // 模块标题已删——画布 section 标题棒已有模块名，主图内不再重复
 
-    // 四层纵向槽位（y 固定，不随内容伸缩）
-    var rowA = { top: 74, h: 100 };
-    var rowB = { top: 200, h: 58 };
-    var rowC = { top: 282, h: 100 };
-    var rowD = { top: 406, h: 96 };
+    // 四层纵向槽位（y 固定，不随内容伸缩；顶边随标题移除整体收紧）
+    var rowA = { top: 46, h: 100 };
+    var rowB = { top: 172, h: 58 };
+    var rowC = { top: 254, h: 100 };
+    var rowD = { top: 378, h: 96 };
     var H = rowD.top + rowD.h + 12;
     var cardX1 = PL, cardW3 = Math.floor((W - PR - PL - 48) / 3), gap3 = 24;
     var cardW2 = 480, gap2 = 26;
@@ -2390,7 +2414,7 @@
 
     var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + " " + llN(H) + '" class="td-svg rm-svg" role="img" aria-label="' +
       esc(exName) + esc(t(" 监管图", " regulation map")) + '">' + g.join("") + "</svg></div>";
-    return rmLegend() + svg + rmProse();
+    return rmLegend() + svg + secProse(rmProse());
   }
   // ══════════════════════════════════════════════
   // 参与者图 Participant Map（v2.0 Phase 3 第六棒，ADR-064）
@@ -2466,11 +2490,11 @@
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
     var W = 1180, PL = 150, PR = 44, CW = W - PL - PR; // 986
     var g = [];
-    g.push('<text x="18" y="26" class="pt-title">' + esc(t("参与者图", "Participant Map")) + "</text>");
-    g.push('<text x="18" y="42" class="pt-sub">' + esc(t("谁在场上 → 我怎么进场 → 外资走哪条道", "who's on the floor → how you get in → the foreign lane")) + "</text>");
+    // 模块标题已删——画布 section 标题棒已有模块名，主图内不再重复
+    g.push('<text x="18" y="26" class="pt-sub">' + esc(t("谁在场上 → 我怎么进场 → 外资走哪条道", "who's on the floor → how you get in → the foreign lane")) + "</text>");
 
     // ── 层 1 · 谁在场上（investor_structure）──
-    var y1 = 66, h1 = 90;
+    var y1 = 50, h1 = 90;
     g.push(ptLaneLabel(PL, y1 + 18, { zh: "谁在场上", en: "Who's here" }, { zh: "投资者结构", en: "investor structure" }));
     g.push(ptEnvCard(id, P, "investor_structure", PL, y1, CW, h1, "var(--info)"));
 
@@ -2509,7 +2533,7 @@
       "</defs>";
     var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + " " + llN(H) + '" class="td-svg pt-svg" role="img" aria-label="' +
       esc(exName) + esc(t(" 参与者图", " participant map")) + '">' + defs + g.join("") + "</svg></div>";
-    return ptLegend() + svg + ptProse();
+    return ptLegend() + svg + secProse(ptProse());
   }
   // ══════════════════════════════════════════════
   // 风险旗标 Risk Flags（v2.0 Phase 3 第七棒，ADR-066）
@@ -2650,12 +2674,12 @@
     var g = [];
     g.push('<defs><pattern id="rf-hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">' +
       '<line x1="0" y1="0" x2="0" y2="7" stroke="var(--fg-faint)" stroke-width="1" opacity="0.16"/></pattern></defs>');
-    g.push('<text x="18" y="26" class="rf-title">' + esc(t("风险旗标", "Risk Flags")) + "</text>");
-    g.push('<text x="18" y="42" class="rf-sub">' +
+    g.push('<text x="18" y="26" class="rf-sub">' +
       esc(t("正在改什么规则 · 制裁过没有 · 流动性多集中 · 谁在盯操纵", "rules changing · sanctions on record · how concentrated · who polices")) + "</text>");
 
-    var rowA = { top: 70, h: 126 };
-    var rowB = { top: 230, h: 150 };
+    // 模块标题已删——画布 section 标题棒已有模块名，主图内不再重复（顶边随之收紧）
+    var rowA = { top: 54, h: 126 };
+    var rowB = { top: 214, h: 150 };
     var w2 = (CW - 30) / 2;
     var w3 = (CW - 48) / 3;
     var laneA = RF_FIELDS.filter(function (f) { return f.lane === 1; });
@@ -2674,7 +2698,8 @@
 
     var svg = '<div class="td-plot-wrap"><svg viewBox="0 0 ' + W + " " + llN(H) + '" class="td-svg rf-svg" role="img" aria-label="' +
       esc(exName) + esc(t(" 风险旗标", " risk flags")) + '">' + g.join("") + "</svg></div>";
-    return rfLegend() + svg + rfDisclaimer() + rfProse();
+    // 「这不是风险评分」声明按 ADR-066 轴 4 保持常驻；td-prose 说明段改点击展开
+    return rfLegend() + svg + rfDisclaimer() + secProse(rfProse());
   }
   // ══════════════════════════════════════════════
   // 出处浮层
@@ -2828,7 +2853,15 @@
     else delete st[moduleId];
     try { localStorage.setItem("ea-canvas-fold", JSON.stringify(st)); } catch (e) { /* 隐私模式忽略 */ }
   }
+  // 「本视图…」说明段（各模块 xxProse 的产物）不再常驻——包进 .sec-prose
+  // 默认隐藏，点击模块标题展开 / 再点收起（2026-09-06 UI 迭代）。
+  function secProse(inner) {
+    return '<div class="sec-prose" hidden>' + inner + "</div>";
+  }
   // 画布编排壳：builder 调用只走这张注册表（check_canvas_sections.py 关卡）
+  // 折叠交互（2026-09-06 UI 迭代）：整条标题棒可点改为标题棒右侧的独立
+  // toggle 按钮（▸/▾ + 展开/折叠 字样）；模块名本身改为「本视图…」说明段
+  // 的展开开关（点击出现 / 收起）。
   function canvasShell(id, data) {
     var folded = canvasFolded();
     return '<div id="canvas-sections">' + CANVAS_SECTIONS.map(function (s) {
@@ -2836,10 +2869,14 @@
       var body = s.build(id, data);
       if (s.wrap) body = '<div class="' + s.wrap + '">' + body + "</div>";
       return '<section class="canvas-section' + (isFolded ? " is-folded" : "") + '" id="section-' + s.id + '">' +
-        '<button type="button" class="canvas-sec-head" data-role="canvas-fold" data-module="' + s.id + '" aria-expanded="' + (isFolded ? "false" : "true") + '">' +
-        '<span class="canvas-sec-title">' + esc(s.title) + "</span>" +
+        '<div class="canvas-sec-head">' +
+        '<button type="button" class="canvas-sec-title" data-role="canvas-prose" data-module="' + s.id + '"' +
+        ' aria-expanded="false" title="' + esc(t("查看本视图说明", "About this view")) + '">' + esc(s.title) + "</button>" +
+        '<button type="button" class="canvas-sec-toggle" data-role="canvas-fold" data-module="' + s.id +
+        '" aria-expanded="' + (isFolded ? "false" : "true") + '" title="' + esc(t("折叠 / 展开本模块", "Fold / unfold this section")) + '">' +
         '<span class="canvas-sec-arrow" aria-hidden="true">' + (isFolded ? "▸" : "▾") + "</span>" +
-        "</button>" +
+        '<span class="canvas-sec-toggle-word">' + (isFolded ? t("展开", "Expand") : t("折叠", "Fold")) + "</span></button>" +
+        "</div>" +
         '<div class="canvas-sec-body"' + (isFolded ? " hidden" : "") + ">" + body + "</div>" +
         "</section>";
     }).join("") + "</div>";
@@ -2913,6 +2950,10 @@
   // 事件委托
   // ══════════════════════════════════════════════
   document.addEventListener("click", function (e) {
+    // 市场选择面板：点击选择条以外区域即收起（选市 / 开合按钮的分支自会处理）
+    if (!e.target.closest(".canvas-marketbar")) {
+      $all(".market-panel:not([hidden])").forEach(function (p) { p.hidden = true; });
+    }
     // 点击遮罩本身（不是里面的面板）关闭浮层——必须在 data-role 分派之前单独判断，
     // 否则面板内部没有 data-role 的普通文字（如摘录段落）点击后，
     // closest("[data-role]") 会一路冒泡穿过面板找到外层遮罩的 data-role，误触发关闭。
@@ -2951,15 +2992,45 @@
       var lex = canvasResolveId(parseHash());
       if (lwrap) loadExchange(lex).then(function (d) { lwrap.innerHTML = tdBuild(lex, d); });
     } else if (role === "canvas-fold") {
-      // 画布 section 标题条折叠（ADR-phase4-canvas-layout #3：默认展开、手动收起、
-      // 状态存 localStorage）。就地切换 DOM 状态，不重渲染整个画布。
+      // 画布 section 折叠 toggle（ADR-phase4-canvas-layout #3：默认展开、手动收起、
+      // 状态存 localStorage；2026-09-06 UI 迭代改为标题棒右侧的独立按钮）。
+      // 就地切换 DOM 状态，不重渲染整个画布。
       var foldNext = hit.getAttribute("aria-expanded") !== "false";
       canvasSetFolded(hit.dataset.module, foldNext);
       hit.setAttribute("aria-expanded", foldNext ? "false" : "true");
-      var secBody = hit.nextElementSibling;
+      var foldSec = hit.closest(".canvas-section");
+      var secBody = foldSec && foldSec.querySelector(".canvas-sec-body");
       if (secBody) secBody.hidden = foldNext;
       var secArrow = hit.querySelector(".canvas-sec-arrow");
       if (secArrow) secArrow.textContent = foldNext ? "▸" : "▾";
+      var secWord = hit.querySelector(".canvas-sec-toggle-word");
+      if (secWord) secWord.textContent = foldNext ? t("展开", "Expand") : t("折叠", "Fold");
+    } else if (role === "canvas-prose") {
+      // 点击模块名展开 / 收起「本视图…」说明段（默认隐藏，见 secProse）。
+      // 说明段在模块 body 里：折叠态下先借 toggle 展开模块再显示说明。
+      var psec = document.getElementById("section-" + hit.dataset.module);
+      if (psec) {
+        var pbody = psec.querySelector(".canvas-sec-body");
+        var ptoggle = psec.querySelector('[data-role="canvas-fold"]');
+        if (pbody && pbody.hidden && ptoggle) ptoggle.click();
+        var anyShown = false;
+        $all(".sec-prose", psec).forEach(function (p) { p.hidden = !p.hidden; if (!p.hidden) anyShown = true; });
+        hit.setAttribute("aria-expanded", anyShown ? "true" : "false");
+      }
+    } else if (role === "canvas-market-toggle") {
+      // 市场选择面板开合（按地区分组的弹出面板，见 canvasToolbar / marketPanelHtml）
+      var mpanel = hit.parentElement.querySelector(".market-panel");
+      if (mpanel) {
+        mpanel.hidden = !mpanel.hidden;
+        hit.setAttribute("aria-expanded", mpanel.hidden ? "false" : "true");
+      }
+    } else if (role === "canvas-market") {
+      // 画布级市场切换（Phase 4 棒 1，ADR-phase4-canvas-layout）：只写 market
+      // 参数、保留当前视图——route() 重渲染后面板随 toolbar 重建而收起。
+      var pm = parseHash();
+      pm.market = hit.dataset.market;
+      delete pm.id;
+      setHash(pm);
     } else if (role === "close-overlay") {
       closeOverlay();
     } else if (role === "group") {
@@ -2985,18 +3056,13 @@
       var p3 = parseHash();
       p3[role === "health-exchange" ? "hex" : "htype"] = e.target.value;
       setHash(p3);
-    } else if (role === "canvas-market") {
-      // 画布级市场切换（Phase 4 棒 1，ADR-phase4-canvas-layout）：只写 market
-      // 参数、保留当前视图——一次 loadExchange 后所在模块就地重渲染；旧模块级
-      // id 参数不再写入（旧深链的 id 由 canvasResolveId 兼容读取到棒 4）。
-      var pm = parseHash();
-      pm.market = e.target.value;
-      delete pm.id;
-      setHash(pm);
     }
   });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") closeOverlay();
+    if (e.key === "Escape") {
+      $all(".market-panel:not([hidden])").forEach(function (p) { p.hidden = true; });
+      closeOverlay();
+    }
   });
 
   $("#themeToggle").addEventListener("click", toggleTheme);
@@ -3026,6 +3092,14 @@
   // ══════════════════════════════════════════════
   applyTheme();
   applyLang();
+  // 吸顶市场选择条的 top 偏移 = 页头实际高度（「更多」二级横条开合会改变页头
+  // 高度，ResizeObserver 自动跟随，写进 --ea-header-h 供 styles.css 使用）。
+  function updateHeaderOffset() {
+    var h = $(".page-header");
+    if (h) document.documentElement.style.setProperty("--ea-header-h", h.offsetHeight + "px");
+  }
+  updateHeaderOffset();
+  if (window.ResizeObserver && $(".page-header")) new ResizeObserver(updateHeaderOffset).observe($(".page-header"));
   loadCore()
     .then(function () {
       window.addEventListener("hashchange", route);

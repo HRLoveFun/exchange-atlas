@@ -159,20 +159,77 @@ main#app { max-width: 1400px; margin: 0 auto; padding: 20px; min-height: 60vh; }
 
 .group-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
 
+/* ── 吸顶市场选择条（2026-09-06 UI 迭代）──
+   选择条 sticky 常驻页头下方（--ea-header-h 由 app.js 按页头实际高度写入，
+   含「更多」二级横条开合的变化）；选择器 = 当前交易所名按钮 + 按地区分组的
+   弹出面板（亚太 APAC / 欧洲 EMEA / 美洲 AMER / 中东非 MEA）。 */
+.canvas-marketbar {
+  position: sticky; top: var(--ea-header-h, 57px); z-index: 15;
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  margin-bottom: 16px; padding: 9px 14px; background: var(--bg-elevated);
+  border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.canvas-marketbar-label { font-size: 12.5px; color: var(--fg-muted); }
+.canvas-market-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid var(--border-strong); background: var(--bg); color: var(--fg);
+  padding: 6px 14px; border-radius: 999px; cursor: pointer;
+  font-size: 13.5px; font-weight: 600; max-width: 320px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.canvas-market-btn:hover { border-color: var(--accent); color: var(--accent); }
+.canvas-market-caret { font-size: 10px; color: var(--fg-faint); }
+.market-panel {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 30;
+  background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 14px 16px; max-height: min(62vh, 480px); overflow-y: auto;
+}
+.market-panel-regions {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px 24px;
+}
+.market-panel-region-h {
+  font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--fg-muted);
+  border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 6px;
+}
+.market-panel-list { display: flex; flex-direction: column; gap: 2px; }
+.market-panel-item {
+  text-align: left; border: none; background: transparent; color: var(--fg);
+  padding: 5px 8px; border-radius: 6px; cursor: pointer; font-size: 13px; font-family: inherit;
+}
+.market-panel-item:hover { background: var(--bg-hover); }
+.market-panel-item.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+
+/* 模块「本视图…」说明段：默认隐藏（secProse 包 hidden），点模块标题展开 */
+.sec-prose[hidden] { display: none; }
+
 /* ── 单页市场画布（Phase 4 棒 2，ADR-phase4-canvas-layout）── */
 /* 7 个模块整宽纵向堆叠：每个 section 一张卡（边框 + 标题条），折叠只收 body */
 .canvas-section {
   margin-bottom: 26px; border: 1px solid var(--border); border-radius: var(--radius);
   background: var(--bg); box-shadow: var(--shadow); overflow: hidden;
+  /* 深链 #market=X&section=<module> 的 scrollIntoView 落点要让过页头 + 吸顶市场条 */
+  scroll-margin-top: calc(var(--ea-header-h, 57px) + 64px);
 }
+/* 标题条本身不再可点折叠（折叠收进右侧独立 toggle）；模块名是「本视图…」
+   说明段的展开开关（2026-09-06 UI 迭代） */
 .canvas-sec-head {
   display: flex; align-items: baseline; gap: 10px; width: 100%;
   border: none; border-bottom: 1px solid var(--border); background: var(--bg-elevated);
-  color: var(--fg); padding: 9px 16px; cursor: pointer; text-align: left;
+  color: var(--fg); padding: 7px 16px; text-align: left;
 }
-.canvas-sec-head:hover { background: var(--bg-hover); }
-.canvas-sec-title { font-size: 14.5px; font-weight: 700; }
-.canvas-sec-arrow { margin-left: auto; color: var(--fg-faint); font-size: 12px; }
+.canvas-sec-title {
+  border: none; background: transparent; padding: 0; cursor: pointer;
+  color: var(--fg); font-family: inherit; font-size: 14.5px; font-weight: 700; text-align: left;
+}
+.canvas-sec-title:hover { color: var(--accent); text-decoration: underline; }
+.canvas-sec-toggle {
+  margin-left: auto; align-self: center;
+  display: inline-flex; align-items: center; gap: 5px;
+  border: 1px solid var(--border); background: var(--bg-elevated); color: var(--fg-muted);
+  padding: 3px 10px; border-radius: 999px; cursor: pointer; font-size: 11px; line-height: 1.4;
+}
+.canvas-sec-toggle:hover { color: var(--fg); border-color: var(--border-strong); background: var(--bg-hover); }
+.canvas-sec-arrow { color: var(--fg-faint); font-size: 11px; }
 .canvas-sec-body { padding: 16px; }
 .canvas-section.is-folded .canvas-sec-head { border-bottom-color: transparent; }
 .group-tab {
@@ -597,4 +654,6 @@ html:not([data-lang="en"]) .i18n-en { display: none; }
   .header-inner { flex-wrap: wrap; }
   .header-tabs { order: 3; width: 100%; }
   .td-tb-note { display: none; }
+  .canvas-sec-toggle-word { display: none; }
+  .market-panel-regions { grid-template-columns: 1fr; }
 }
