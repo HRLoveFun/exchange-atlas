@@ -2868,4 +2868,8 @@ print('全库 medium 零 sources:',n)
 
 **三轮验证：** `make build` 全绿、`node --check` 通过；headless 实测：弹窗无副题、导航常驻细横线 / hover 展开 7 模块名 / 点击跳转落点在吸顶层下方、切所（cn-sse → jp-jpx）滚动位置精确保持（588 → 588）、导航随视图显隐（matrix 隐藏 / 画布显示）。
 
+**同日四轮迭代增补（用户复看反馈一点）：** 右侧导航收起态从「一列细横线」改为**单个半透明圆形按钮**（34px 毛玻璃圆钮 + ☰ 字形，`color-mix` 半透明底 + `backdrop-filter`）；hover 圆钮或**点击**圆钮（触屏无 hover，加 `.open` class 切换 + `aria-expanded`）展开为模块名药丸列表（当前模块绿框高亮，`IntersectionObserver` 判定不变）；点外部 / Escape / 跳转完成后自动收起。跳转 / 显隐 / 切所保持滚动等其余行为不变。
+
+**四轮验证：** `make build` 全绿、`node --check` 通过；headless 实测：常驻圆钮渲染、fab 点击展开 / 收起（aria-expanded 同步）、条目点击跳转（scrollY 4587 落风险旗标）并自动收起、点外收起。
+
 **日期：** 2026-09-06
