@@ -292,7 +292,7 @@ products:
 # ═══════════════════════════════════════════════
 market_structure:
   _meta:
-    verified: 2026-08-16
+    verified: 2026-09-06
     sources:
       - title: Guide to Trading in the Korean Stock Market（KRX官网英文版官方手册PDF）
         url: https://global.krx.co.kr/contents/GLB/01/0109/0109000000/guide_to_trading_in_the_korean_stock_market.pdf
@@ -534,14 +534,15 @@ market_structure:
     confidence: low
 
   order_book_transparency:
-    zh: "KRX 公布多档买卖申报价量信息（Publication of Quotation Information）；一般股票订单簿为全展示，未见冰山 / 隐藏订单类型。盘后大宗交易单独进行。具体披露档位数、盘后成交延迟安排本次未从官方英文规则文本逐条核实"
-    en: "The KRX publishes multi-level quotation (order-book) price and quantity information; the ordinary-stock order book is fully displayed and no iceberg or hidden order type was found. Block trades run separately. The exact number of disclosed price levels and any post-trade publication deferral were not verified from official English rule text this session"
-    detail: "低置信度——KRX 官网『Publication of Quotation Information』栏目为 JS 壳、无正文，官方英文规则文本未取得。已记入 OPEN-QUESTIONS。字段管本所订单簿内部的（非）展示流动性；行情层级 / 收费见第十章 market_data_levels。"
+    zh: "KRX 实时向全体市场参与者公开买卖申报价量信息（호가정보）：连续竞价（접속매매）披露买卖双方含最优报价在内的 10 档优先报价价格、各价档申报数量及其合计数量；集合竞价（단일가매매）披露预期成交价格·数量及买卖双方 3 档优先报价的价格·数量。订单簿不披露经纪商席位信息，按价格—时间优先级撮合（见 infrastructure.market_data_levels）。盘后大宗交易单独进行。"
+    en: "The KRX releases submitted bid/ask price-and-quantity information to every market participant in real time: in continuous (order-matching) trading it discloses, per sell/buy side, the 10 levels of priority quoted prices including the best quote, the quantity at each price level and the aggregate quantity; in single-price (call auction) trading it discloses the expected execution price and quantity plus 3 levels of priority quoted prices and quantities. Broker/dealer seat identifiers are not disclosed in the book, and matching is by price-time priority (see infrastructure.market_data_levels). Block trades run separately."
+    detail: "2026-09-06 从 KRX 규정/제도 규칙门户（regulation.krx.co.kr）「호가정보」说明页逐字坐实——该站为服务端渲染、韩文正文可抓；英文站 global.krx.co.kr 同栏目（Publication of Quotation Information）是 JS 壳无正文，2026-08-16 因此留 low。韩文一手 quote 与本文件 market_data_levels 引 OpenAPI 韩文字段的既有先例一致（[ADR-kr-krx-legacy-closeout]）。"
+    quote: "거래소는 투자자의 투자판단, 증권회사의 서비스 제고 및 시장의 가격발견기능의 효율성을 제고하기 위하여 시장에 제출된 매도·매수호가의 가격·수량등 호가정보를 실시간으로 모든 시장참가자에게 공개하고 있습니다. 호가정보공개의 범위는 접속매매의 경우 매도·매수별 최우선호가의 가격을 포함한 10단계 우선 호가가격, 그 가격대별 호가수량 및 당해호가수량의 합계수량을 공개하고, 단일가매매의 경우 예상체결가격·수량 및 매도·매수별 3단계우선호가의 가격· 수량을 공개합니다."
     sources:
-      - title: Regulation ‧ Stocks ‧ KOSPI Market（KRX 官网英文版，栏目含 "Publication of Quotation Information"）
-        url: https://global.krx.co.kr/contents/GLB/06/0602/0602010204/GLB0602010204.jsp
-        accessed: 2026-08-16
-    confidence: low
+      - title: 규정/제도 ‧ 매매거래제도 ‧ 유가증권시장 ‧ 시장운영 및 관리 ‧ 호가정보（KRX 규정 포털）
+        url: https://regulation.krx.co.kr/contents/RGL/03/03010406/RGL03010406.jsp
+        accessed: 2026-09-06
+    confidence: medium
 
   intraday_reversal:
     enum: t0
@@ -883,7 +884,7 @@ market_structure:
 # ═══════════════════════════════════════════════
 listing:
   _meta:
-    verified: 2026-08-27
+    verified: 2026-09-06
     confidence: high
 
   boards:
@@ -981,13 +982,15 @@ listing:
     confidence: medium
 
   delisting_transition_period:
+    spec: {value: 7, unit: trading_days, note: "退市决定生效后的整理卖出（liquidation trading）期；quote 作 'seven trading days'，7 为个位数人工转写（5b 豁免，[ADR-091] 转写口径）。改善期时长逐案确定、无单一数字，不在此字段口径内"}
     zh: "退市决定生效后，先有7个交易日的「整理卖出」(liquidation trading)期供投资者退出，之后正式摘牌；在退市决定前，被指定为管理股的发行人有一个「改善期」(improvement period)进行整改，2025年金融委员会退市制度改进方案缩短了改善期并改为技术与实质退市事由并行审查。摘牌后自2026年1月起可进入K-OTC「退市企业指定部」继续交易最多6个月（见 post_delisting_venue）。"
     en: "After a delisting decision becomes effective, there is first a 7-trading-day 'liquidation (clean-up) trading' period for investors to exit before formal delisting; prior to the decision, an issuer designated as an administrative issue is given an 'improvement period' to cure deficiencies. The 2025 FSC delisting-reform plan shortened the improvement period and introduced parallel review of technical and substantive delisting grounds. From January 2026, post-delisting the stock may enter the K-OTC 'Delisted Company Division' for up to six months of continued trading (see post_delisting_venue)."
+    detail: "「7 个交易日」锚点为 FSC 英文新闻稿原句『a post-delisting liquidation trading period of seven trading days』（官方原文描述当时现行制度；2026-09-06 从已缓存页面补摘，替换此前只覆盖改善期短语的 quote）——至此 [ADR-091] 挂出的 kr-krx 整理卖出期待补源收口。"
     sources:
       - title: Reform Plans for IPO and Delisting Rules（FSC）
         url: https://www.fsc.go.kr/eng/pr010101/83926
         accessed: 2026-08-27
-    quote: "shortening improvement periods and a parallel review of technical and substantive delisting reasons"
+    quote: "Currently, once a company is delisted, there is virtually no way for investors to trade the delisted stocks other than a post-delisting liquidation trading period of seven trading days. To address this issue, K-OTC, the trading platform for unlisted stocks operated by KOFIA, will be utilized."
     confidence: medium
 
   post_delisting_venue:

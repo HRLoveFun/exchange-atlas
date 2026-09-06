@@ -158,3 +158,10 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 - **交易所费率页只能证明「交易所收什么」，不能证明「市场不征什么」。** 它不覆盖国家税制（印花税 / FTT / 监管征费都由税务局 / 立法机构定）。「费率页没列」≠「不征收」——本次 31 个 `type: none` 里 13 个因此降级。正面依据要去税法原文、税务局说明页或立法机构文档找（过了的三家正是这类：`de-xetra` 的 Bundestag 废止条文、`sg-sgx` 的 IRAS 豁免规则页、`jp-jpx` 的 MOF 税改纲要）。
 - **第三方「国别税费综述」只在其主题范围内有效。** CEPR 的 FTT 国别清单支撑得了「无 FTT」（它就是干这个的），支撑不了「无监管费」；IRAS 的 GST 税率页支撑得了「券商服务费适用 9% GST」，支撑不了「无按笔征费」。来源主题与断言错配，比没有来源更危险——它看起来有据。
 - **含税率的官方页常是 JS 渲染或图像型 PDF（sgx.com 主站 SPA、ASX/JSE 价目 PDF），而「不征」类断言的来源反而多为静态 HTML 立法/税局页。** 后者用 `make fetch` 常规 curl 即可落盘，坐实降级点的成本不高，见 OPEN-QUESTIONS 的清单。
+
+## 查证经验（数据遗留项会话，2026-09-06，[ADR-kr-krx-legacy-closeout]）
+
+- **sec.gov 的封锁是「数据中心 IP + 身份不明 UA」的组合拳，住宅 IP + 常规声明 UA 的 curl 可直连。** 此前（2026-08-24，OPEN-QUESTIONS #32 记录）sec.gov/finra.org 主站全 403、只能绕道 govinfo.gov/ecfr.gov；2026-09-06 在本机（住宅网络）用 `curl -A "Mozilla/5.0 ... research contact@example.com"`（常规浏览器 UA 带联系邮箱，照 Fair Access 要求声明身份）直接 200 拿到 Fee Rate Advisories 列表页与公告正文，无需 EDGAR API 子域绕道。教训：**封锁判定要分「网络出口」与「UA」两个变量分别试**，换环境（如本地会话）时老结论要重新验证一遍。
+- **szse.cn 全域（含 www.szse.cn / english.szse.cn）在住宅 IP 下同样连接失败（curl HTTP 000，非 HTTP 错误而是 TCP 层不通），数据中心 IP 也 403/不通——深交所官网基本只能靠人工投喂或镜像。** 且 web.archive.org 对 english.szse.cn 与其英文规则 PDF（`/English/rules/siteRule/P020240911599025860114.pdf`）均无快照——「官方 PDF 已定位 URL」≠「拿得到」，wayback 覆盖中国交易所官网极稀疏，别指望回退。
+- **同一交易所的韩文站与英文站是两套渲染栈（KRX）：** global.krx.co.kr（英文）多数栏目页是「导航壳无正文」的 JS 壳，而 regulation.krx.co.kr（韩文规则门户）与 www.krx.co.kr svc 页是服务端渲染、正文可逐字抓。英文站挖不到正文时，韩文规则门户往往有完整说明页（KRX 수수료 등费率仍以《업무규정》别表承载、未上 HTML，属例外）。韩文页作事实来源需 quote 逐字 + 与既有韩文 quote 先例一致（kr-krx `market_data_levels`）。
+

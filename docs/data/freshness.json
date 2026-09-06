@@ -15237,7 +15237,7 @@
       "label_zh": "盘前",
       "label_en": "Pre-market",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15249,7 +15249,7 @@
       "label_zh": "上午连续竞价",
       "label_en": "Morning Continuous",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15261,7 +15261,7 @@
       "label_zh": "午休",
       "label_en": "Lunch Break",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15273,7 +15273,7 @@
       "label_zh": "下午连续竞价",
       "label_en": "Afternoon Continuous",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15285,7 +15285,7 @@
       "label_zh": "盘后",
       "label_en": "After-market",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15297,7 +15297,7 @@
       "label_zh": "夜盘",
       "label_en": "Night Session",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15321,7 +15321,7 @@
       "label_zh": "开盘机制",
       "label_en": "Opening Mechanism",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15333,7 +15333,7 @@
       "label_zh": "收盘机制",
       "label_en": "Closing Mechanism",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15345,7 +15345,7 @@
       "label_zh": "执行模型",
       "label_en": "Execution Model",
       "volatility": "stable",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15369,7 +15369,7 @@
       "label_zh": "订单类型",
       "label_en": "Order Types",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15381,7 +15381,7 @@
       "label_zh": "最小报价单位",
       "label_en": "Tick Size",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15393,7 +15393,7 @@
       "label_zh": "最小交易单位",
       "label_en": "Board Lot Size",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15405,7 +15405,7 @@
       "label_zh": "碎股处理",
       "label_en": "Odd Lot Handling",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15417,7 +15417,7 @@
       "label_zh": "类型",
       "label_en": "Type",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15429,7 +15429,7 @@
       "label_zh": "主板幅度",
       "label_en": "Main Board Band",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15441,7 +15441,7 @@
       "label_zh": "其他板块幅度",
       "label_en": "Other Boards' Bands",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "low"
     },
     {
@@ -15453,7 +15453,7 @@
       "label_zh": "熔断机制",
       "label_en": "Circuit Breaker",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15465,7 +15465,7 @@
       "label_zh": "波动性中断",
       "label_en": "Volatility Interruption",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15477,7 +15477,7 @@
       "label_zh": "临时停牌与恢复",
       "label_en": "Trading Halt & Resumption",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15489,7 +15489,7 @@
       "label_zh": "错误交易处理规则",
       "label_en": "Erroneous Trade / Mistrade Rule",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "low"
     },
     {
@@ -15501,7 +15501,7 @@
       "label_zh": "回转交易制度",
       "label_en": "Intraday Reversal (T+N)",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15513,7 +15513,7 @@
       "label_zh": "做空机制",
       "label_en": "Short Selling",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15525,7 +15525,7 @@
       "label_zh": "大宗交易",
       "label_en": "Block Trade",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15537,8 +15537,8 @@
       "label_zh": "订单簿透明度",
       "label_en": "Order Book Transparency",
       "volatility": "moderate",
-      "verified": "2026-08-16",
-      "confidence": "low"
+      "verified": "2026-09-06",
+      "confidence": "medium"
     },
     {
       "exchange_id": "kr-krx",
@@ -15549,7 +15549,7 @@
       "label_zh": "暗池与场外交易",
       "label_en": "Dark Pool / OTC",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15573,7 +15573,7 @@
       "label_zh": "互联互通/跨境安排",
       "label_en": "Connect / Cross-border Schemes",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15585,7 +15585,7 @@
       "label_zh": "盘前",
       "label_en": "Pre-market",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15597,7 +15597,7 @@
       "label_zh": "上午连续竞价",
       "label_en": "Morning Continuous",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15609,7 +15609,7 @@
       "label_zh": "午休",
       "label_en": "Lunch Break",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15621,7 +15621,7 @@
       "label_zh": "下午连续竞价",
       "label_en": "Afternoon Continuous",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15633,7 +15633,7 @@
       "label_zh": "盘后",
       "label_en": "After-market",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15645,7 +15645,7 @@
       "label_zh": "夜盘",
       "label_en": "Night Session",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15657,7 +15657,7 @@
       "label_zh": "节假日与特殊休市",
       "label_en": "Holidays & Special Closures",
       "volatility": "stable",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15669,7 +15669,7 @@
       "label_zh": "开盘机制",
       "label_en": "Opening Mechanism",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15681,7 +15681,7 @@
       "label_zh": "收盘机制",
       "label_en": "Closing Mechanism",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15693,7 +15693,7 @@
       "label_zh": "撮合原则",
       "label_en": "Matching Principle",
       "volatility": "stable",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15705,7 +15705,7 @@
       "label_zh": "订单类型",
       "label_en": "Order Types",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15717,7 +15717,7 @@
       "label_zh": "最小报价单位",
       "label_en": "Tick Size",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15729,7 +15729,7 @@
       "label_zh": "合约规格摘要",
       "label_en": "Contract Specifications",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15741,7 +15741,7 @@
       "label_zh": "类型",
       "label_en": "Type",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15753,7 +15753,7 @@
       "label_zh": "主力合约幅度",
       "label_en": "Main Contract Band",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15765,7 +15765,7 @@
       "label_zh": "其他合约幅度",
       "label_en": "Other Contracts' Bands",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15777,7 +15777,7 @@
       "label_zh": "熔断机制",
       "label_en": "Circuit Breaker",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15789,7 +15789,7 @@
       "label_zh": "波动性中断",
       "label_en": "Volatility Interruption",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15801,7 +15801,7 @@
       "label_zh": "临时停牌与恢复",
       "label_en": "Trading Halt & Resumption",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15813,7 +15813,7 @@
       "label_zh": "大宗交易",
       "label_en": "Block Trade",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15825,7 +15825,7 @@
       "label_zh": "做市商制度",
       "label_en": "Market Maker Scheme",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15837,7 +15837,7 @@
       "label_zh": "保证金制度摘要",
       "label_en": "Margin Practice",
       "volatility": "moderate",
-      "verified": "2026-08-16",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15861,7 +15861,7 @@
       "label_zh": "审核制度",
       "label_en": "Review System",
       "volatility": "moderate",
-      "verified": "2026-08-27",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15873,7 +15873,7 @@
       "label_zh": "上市流程周期",
       "label_en": "Listing Process Duration",
       "volatility": "moderate",
-      "verified": "2026-08-27",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15885,7 +15885,7 @@
       "label_zh": "转板/升降板机制",
       "label_en": "Board Transfer Mechanism",
       "volatility": "moderate",
-      "verified": "2026-08-27",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15897,7 +15897,7 @@
       "label_zh": "持续上市义务",
       "label_en": "Continuing Obligations",
       "volatility": "moderate",
-      "verified": "2026-08-27",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15909,7 +15909,7 @@
       "label_zh": "停牌/复牌规则",
       "label_en": "Suspension & Resumption",
       "volatility": "moderate",
-      "verified": "2026-08-27",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15921,7 +15921,7 @@
       "label_zh": "退市条件",
       "label_en": "Delisting Conditions",
       "volatility": "moderate",
-      "verified": "2026-08-27",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {
@@ -15933,7 +15933,7 @@
       "label_zh": "退市流程",
       "label_en": "Delisting Process",
       "volatility": "moderate",
-      "verified": "2026-08-27",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15945,7 +15945,7 @@
       "label_zh": "退市整理期",
       "label_en": "Delisting Transition Period",
       "volatility": "moderate",
-      "verified": "2026-08-27",
+      "verified": "2026-09-06",
       "confidence": "medium"
     },
     {
@@ -15957,7 +15957,7 @@
       "label_zh": "退市后去向",
       "label_en": "Post-delisting Venue",
       "volatility": "moderate",
-      "verified": "2026-08-27",
+      "verified": "2026-09-06",
       "confidence": "high"
     },
     {

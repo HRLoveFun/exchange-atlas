@@ -107,6 +107,7 @@
 - ADR-phase4-canvas-polish · 2026-09-06 · Phase 4 棒 5：跨模块视觉语言对账 + 已知视觉遗留收口 + 20 家巡检 + 非专业读者实测
 - ADR-phase4-closeout · 2026-09-06 · Phase 4 单页画布合并收口认定 + 交付质量独立审查
 - ADR-canvas-ui-iterate · 2026-09-06 · 画布 UI 常态迭代：市场选择条常驻 + 地区分组选择面板 + 折叠 toggle + 说明段按需展开
+- ADR-kr-krx-legacy-closeout · 2026-09-06 · 数据遗留项会话：kr-krx 整理期坐实 + order_book_transparency 升 medium + Section 31 FY2027 复核
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2873,5 +2874,24 @@ print('全库 medium 零 sources:',n)
 **四轮验证：** `make build` 全绿、`node --check` 通过；headless 实测：常驻圆钮渲染、fab 点击展开 / 收起（aria-expanded 同步）、条目点击跳转（scrollY 4587 落风险旗标）并自动收起、点外收起。
 
 **同日五轮迭代增补（用户复看反馈：四轮形态过于复杂）：** 导航简化为「收起态 = 半透明圆形按钮，指针移到按钮区域展开导航，其余不变」——撤下点击开合（`.open` / `aria-expanded` / 点外与 Escape / 跳转后自动收起）与药丸标签，条目回到「模块名 + 细横线」（active = 线加长主题色），fab 改为纯 hover 触发的装饰元素（`aria-hidden`）。跳转 / 深链同步 / 显隐 / active 高亮 / 切所保持滚动不变。
+
+**日期：** 2026-09-06
+
+### ADR-kr-krx-legacy-closeout — 数据遗留项会话：kr-krx 整理期坐实 + order_book_transparency 升 medium + Section 31 FY2027 复核
+
+**背景：** ROADMAP §一「数据遗留项」挂五条：`kr-krx` 8 处 low 待人工投喂、`kr-krx exchange_fees` 当期档位（[ADR-075] 记 KRX 数据端点封数据中心 IP）、`us` Section 31 FY2027 公告（SEC 未发布）、`fr-euronext stamp_duty` 终态、上市生命周期 `cn-szse` 15 交易日 / `kr-krx` 整理卖出 7 交易日待含阿拉伯数字一手源（[ADR-091]）。本会话跑在用户本机（住宅 IP），先探明网络环境变化解锁了什么，再逐条处置。
+
+**定了什么：**
+
+1. **`kr-krx delisting_transition_period` 收口（[ADR-091] 待补源完成）。** 关键发现是「翻旧缓存」而不是「抓新页面」：字段既引的 FSC 英文新闻稿（`fsc.go.kr/eng/pr010101/83926`）正文原句就写着『a post-delisting liquidation trading period of seven trading days』——此前（2026-08-27 建档）quote 只摘了改善期短语，数字锚点一直躺在已落盘的缓存里没人再读一遍。补 spec `{value: 7, unit: trading_days}`（「seven」为个位数人工转写，5b 豁免，[ADR-091] 口径）+ 替换 quote + 更新 detail。confidence 维持 medium（FSC 新闻稿描述当时现行制度、非规则条文句）。
+2. **`order_book_transparency` low→medium，8 处 low 簇减至 7 处。** 新登记 `regulation.krx.co.kr`（KRX 韩文规则门户）：RGL 规则说明页为服务端渲染、韩文正文可逐字抓——而英文站 global.krx.co.kr 同栏目（Publication of Quotation Information）是 [ADR-075] 时代已确认的 JS 壳。「호가정보」页逐字坐实：连续竞价披露买卖各 10 档优先报价价格 + 各档数量 + 合计数量，集合竞价披露预期成交价量 + 3 档，均实时向全体市场参与者公开。**韩文页作事实来源**循 kr-krx `market_data_levels` 引 OpenAPI 韩文字段的既有先例；全站 RGL URL 可从缓存 FAQ 页的 `data-menu-id` 菜单直接 grep，无需逐级试探。
+3. **`us` Section 31 FY2027 复核（OQ「费率时效」条更新，维持 open）。** 本机 curl + 常规声明 UA 直接 200 拿到 sec.gov Fee Rate Advisories 列表页与公告正文——「sec.gov 一律 403」的旧结论是数据中心 IP 环境的产物，**封锁判定要分网络出口与 UA 两个变量分别试、换环境要重验**。复核结论：FY2027 相关仅 2026-08-21 发布的 **Section 6(b) 注册费**公告（$138.10→$87.00，2026-10-01 起），与 Section 31 是两个费种；Section 31 公告仍未发布，按 FY2025/FY2026「晚于 Section 6(b) 约半年」的拆分模式预计 2027 年初，$20.60 现值不变。
+4. **`kr-krx exchange_fees` 当期档位维持现状 + 排查记录。** 규정 포털 03 章（股票市场）全菜单排查无费率页——交易费率载于《업무규정》别表、未以 HTML 发布；韩媒一手报道止于 2025-12 的临时阶梯。`rate: 0.0023` 审慎现值不变，待 KRX 收费表一手或 FSC 永久性下调决议。[ADR-075] 遗留的「OTP 数据端点住宅 IP 端到端验证」仍未做（分片无 `[OTP]` 登记 URL，且费率表不在行情数据端点里，做了也不推进本字段）。
+5. **`cn-szse` 整理期 15 交易日：URL 定位成功、取文仍失败，如实登记。** 官方英文规则 PDF 确切 URL 已找到（`szse.cn/English/rules/siteRule/P020240911599025860114.pdf`），但 szse.cn 全域在本机住宅 IP 下 TCP 层即不通（HTTP 000，非 HTTP 状态码错误），web.archive.org 对该 PDF 与 english.szse.cn 均无快照——「官方 PDF 已定位」≠「拿得到」，待人工下载投喂。
+6. **`fr-euronext stamp_duty` 无动作**：一所七国、`rate: null` 是正确终态，OQ 已登记，无需处理。
+
+**为什么这样：** 本棒的真正产出是三条环境/方法层面的可复用结论（SOURCES.md 经验册已记）：① sec.gov 封锁是「出口 IP × UA」组合拳，住宅网络可直连，老的可达性结论换了环境要重验；② szse.cn 全域不可达 + wayback 零覆盖，中国交易所官网实质只能人工投喂，别在自动抓取上再花时间；③ 同一交易所的韩文站与英文站是两套渲染栈（KRX），英文站挖不到正文先试韩文规则门户。数据侧两处坐实（kr 整理期 / order_book_transparency）都遵循既有转写与韩文 quote 先例，未新增任何需要新不变式的结构——改动仅 `data/exchanges/kr-krx.yml` 两字段 + 两处章 `_meta.verified`，不触发 [CLAUDE.md §四] 30 字段独立复核门槛。
+
+**验证：** `make build` 全绿（`validate` 20 家 0/0、`verify_quotes` OK 增至含新 RGL 来源、FAIL=0、生成块零 diff）；新来源经 `fetch_sources --ex kr-krx` 落盘 `ok:true`；两处新 quote 与 `.cache/` 原文逐字一致（逐字复制自程序提取的缓存文本，非手抄）。`fr-euronext` 数据零改动。
 
 **日期：** 2026-09-06

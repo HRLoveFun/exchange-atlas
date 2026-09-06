@@ -45,8 +45,11 @@
 - `www.fss.or.kr` | 官方（FSS www 前缀） | ko | curl 常规 UA 200 | 同上
 - `www.fsc.go.kr` | 官方（金融委员会 FSC） | ko | curl 常规 UA 200；英文新闻页 `/eng/prXXXXXX/<id>` 同样 curl 200 | 监管框架（regulation 出处）；`dark_pool` 依据：FSC 于 2025-02-05 向 Nextrade 授予 ATS 最终许可、2025-03-04 开业的英文新闻稿 https://www.fsc.go.kr/eng/pr010101/83967（ATS 立法依据 2013 年立）
   - FSC-FSS-KRX Launch Joint Response Team to Root Out Stock Market Manipulation（2025-07-30 英文新闻稿：FSC/FSS/KRX 三方在 KRX 设立股价操纵联合应对组、强化 KRX 市场监视委员会初期应对职能，证券期货委员会 SFC 委员长重申根除市场操纵；enforcement_note 出处）: https://www.fsc.go.kr/eng/pr010101/85032（HTTP 200，24KB）
+  - Reform Plans for IPO and Delisting Rules（英文新闻稿：退市程序改革方案；原文明句描述现行制度『a post-delisting liquidation trading period of seven trading days』——delisting_transition_period 的整理卖出 7 交易日逐字锚点（[ADR-091] 个位数转写、2026-09-06 补摘 quote），K-OTC 退市企业指定部 6 个月支持为 post_delisting_venue 出处；该 URL 此前被 data 侧引用但未在分片登记为条目，本次补登记）: https://www.fsc.go.kr/eng/pr010101/83926（HTTP 200，已缓存）
 - `nextrade.co.kr` | 官方（韩国首家 ATS Nextrade / NXT 自身官网） | en（`/en/` 路径）/ ko | curl 常规 UA 200 | `dark_pool` 依据：NXT 市场概览页——「Korea's first Alternative Trading Platform」「second stock trading venue alongside the Korea Exchange, established under the Financial Investment Services and Capital Markets Act」，打破韩国 50 年单一交易系统
   - Market Overview: https://nextrade.co.kr/en/marketOverview/content.do
+- `regulation.krx.co.kr` | 官方（KRX 규정/제도 规则门户） | ko | curl 常规 UA 200；RGL 规则说明页为**服务端渲染、韩文正文可逐字 grep**——英文站 global.krx.co.kr 同栏目多为 JS 壳无正文（如 Publication of Quotation Information），找交易规则细则先来韩文站；全站菜单 `data-menu-id` 导航在 `.cache/kr-krx/www-krx-co-kr-svc-svcOpenDataFAQ-do-*.html` 缓存页里可直接 grep RGL URL。⚠️ 韩文页作事实来源的先例：market_data_levels 引 OpenAPI 韩文字段、order_book_transparency 引 RGL 호가정보 页（[ADR-kr-krx-legacy-closeout]） | 交易规则细则（order_book_transparency 出处）
+  - 규정/제도 ‧ 매매거래제도 ‧ 유가증권시장 ‧ 시장운영 및 관리 ‧ 호가정보（连续竞价 10 档 / 集合竞价 3 档报价披露范围官方说明，2026-09-06 order_book_transparency 回填所抓）: https://regulation.krx.co.kr/contents/RGL/03/03010406/RGL03010406.jsp（HTTP 200，26.6KB）
 - `law.kofia.or.kr` | 官方（韩国证券业协会 KOFIA） | ko | curl 常规 UA 200 | 自律规则/适当性（suitability_management 出处）
 - `www.kcmi.re.kr` | 官方（资本市场研究院 KCMI） | ko | curl 常规 UA 200 | 市场结构研究（market_structure 出处）
 - `www.k-otc.or.kr` | 官方（K-OTC 场外市场） | ko | curl 常规 UA 200 | 退市后场外转移（post_delisting_venue 出处）

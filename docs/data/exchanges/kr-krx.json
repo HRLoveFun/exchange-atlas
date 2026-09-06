@@ -481,7 +481,7 @@
             }
           ],
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "detail": null
         },
@@ -503,7 +503,7 @@
             }
           ],
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "detail": null
         },
@@ -522,7 +522,7 @@
               "accessed": "2026-08-16"
             }
           ],
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "quote": null
         },
@@ -541,7 +541,7 @@
               "accessed": "2026-08-16"
             }
           ],
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "detail": null,
           "quote": null
@@ -564,7 +564,7 @@
             }
           ],
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "detail": null
         },
@@ -585,7 +585,7 @@
           "quote": "KRX is now transitioning to its own night session. The launch is targeted for early June 2025 / * (CME-linked trading) August 2009~April 2020 / (Eurex-linked trading) August 2010~June 2025",
           "confidence": "high",
           "detail": "2026-08-20核实并订正：此前（2026-08-16）本字段仅提及CME/Eurex夜盘联动仍在进行，未反映KRX已于2025年6月转自主运营、且CME联动实际已于2020年4月（早于Eurex）终止的事实；本次改用《Guide to Night Session in KRX Derivatives Market》官方PDF重新核实。与 market_structure.derivatives.trading_sessions.night_session（2026-08-18核实的衍生品子块，同一份PDF来源）此前存在的表述不一致已解决，见 PROJECT/OPEN-QUESTIONS.md 相关条目（已删除）。",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null
         }
       },
@@ -623,7 +623,7 @@
           }
         ],
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "enum": null,
         "detail": null
       },
@@ -645,7 +645,7 @@
           }
         ],
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "enum": null,
         "detail": null
       },
@@ -668,7 +668,7 @@
         ],
         "quote": "Regular session : Continuous auction / When new (or modified) orders are received, trade is executed immediately based on the principles of price priority and time priority. (not applied to issues with low liquidity)",
         "confidence": "medium",
-        "verified": "2026-08-16"
+        "verified": "2026-09-06"
       },
       "matching_principle": {
         "enum": "price_time",
@@ -708,7 +708,7 @@
           }
         ],
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "enum": null,
         "detail": null
       },
@@ -731,7 +731,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "enum": null,
         "detail": null
       },
@@ -747,7 +747,7 @@
           }
         ],
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "enum": null,
         "spec": null,
         "detail": null
@@ -764,7 +764,7 @@
             "accessed": "2026-08-16"
           }
         ],
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "enum": null,
         "spec": null,
         "quote": null
@@ -783,7 +783,7 @@
           ],
           "quote": "Daily Price limit ±30% of base prices",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "spec": null,
           "detail": null
         },
@@ -805,7 +805,7 @@
           ],
           "quote": "Daily Price limit ±30% of base prices",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "detail": null
         },
@@ -820,7 +820,7 @@
               "accessed": "2026-08-16"
             }
           ],
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "spec": null,
           "detail": null,
@@ -869,7 +869,7 @@
         ],
         "quote": "KOSPI (KOSDAQ) index falls by 8% or more compared to the previous day. (The fall lasts for one minute.) The entire market is suspended for 20 minutes. (Only cancellation of quotations is allowed.) KOSPI (KOSDAQ) index falls by 15% or more compared to the previous day. An additional fall by 1% or more follows compared to the first activation point. After CB activation, single price call auction is in operation for 10 minutes, followed by continuous auction. KOSPI (KOSDAQ) index falls by 20% or more compared to the previous day. An additional fall by 1% or more follows compared to the second activation point. The market is closed when the third phase is activated.",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "detail": null
       },
       "volatility_interruption": {
@@ -891,7 +891,7 @@
         ],
         "quote": "When VI is activated during continuous auction session, continuous auction is switched to single price call auction for two minutes. ... Activation price : reference price ± (reference price x activation price rate) ... KOSPI 200 constituents ... ±3% ... ±10% ... Other issues ... ±6%",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "enum": null
       },
       "trading_halt_mechanism": {
@@ -906,7 +906,7 @@
         ],
         "quote": "Disclosing material information of a listed company — for 30 minutes from the disclosure / Designation of unfaithful disclosure corporation (5 point penalty) — the designation day (one day)",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "enum": null,
         "spec": null,
         "detail": null
@@ -930,7 +930,7 @@
           }
         ],
         "confidence": "low",
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "enum": null,
         "quote": null
       },
@@ -948,7 +948,7 @@
           }
         ],
         "confidence": "medium",
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "spec": null
       },
       "short_selling": {
@@ -971,7 +971,7 @@
         ],
         "quote": "All types of short-selling are prohibited in principle; however, selling securities with borrowing(covered short-selling) is permitted exceptionally. ... Uptick rule : Short-selling orders may not be quoted at or under the most recently matched price.",
         "confidence": "high",
-        "verified": "2026-08-16"
+        "verified": "2026-09-06"
       },
       "block_trade": {
         "zh": "大宗/篮子交易：KOSPI大宗交易最低数量为5,000倍交易单位（ETF/ETN为500倍）或1亿韩元以上；KOSDAQ为5000万韩元以上；篮子交易KOSPI须5只以上标的且合计10亿韩元以上，KOSDAQ须5只以上标的且合计2亿韩元以上；常规时段大宗交易价格须在申报当日已形成的最高价与最低价之间，盘前盘后大宗交易须在当日涨跌停范围内",
@@ -985,27 +985,27 @@
         ],
         "quote": "KOSPI: 5,000 times trading unit (500 times for ETFs and ETNs), or 100 million KRW or more / KOSDAQ : 50 million KRW or more",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "enum": null,
         "spec": null,
         "detail": null
       },
       "order_book_transparency": {
-        "zh": "KRX 公布多档买卖申报价量信息（Publication of Quotation Information）；一般股票订单簿为全展示，未见冰山 / 隐藏订单类型。盘后大宗交易单独进行。具体披露档位数、盘后成交延迟安排本次未从官方英文规则文本逐条核实",
-        "en": "The KRX publishes multi-level quotation (order-book) price and quantity information; the ordinary-stock order book is fully displayed and no iceberg or hidden order type was found. Block trades run separately. The exact number of disclosed price levels and any post-trade publication deferral were not verified from official English rule text this session",
-        "detail": "低置信度——KRX 官网『Publication of Quotation Information』栏目为 JS 壳、无正文，官方英文规则文本未取得。已记入 OPEN-QUESTIONS。字段管本所订单簿内部的（非）展示流动性；行情层级 / 收费见第十章 market_data_levels。",
+        "zh": "KRX 实时向全体市场参与者公开买卖申报价量信息（호가정보）：连续竞价（접속매매）披露买卖双方含最优报价在内的 10 档优先报价价格、各价档申报数量及其合计数量；集合竞价（단일가매매）披露预期成交价格·数量及买卖双方 3 档优先报价的价格·数量。订单簿不披露经纪商席位信息，按价格—时间优先级撮合（见 infrastructure.market_data_levels）。盘后大宗交易单独进行。",
+        "en": "The KRX releases submitted bid/ask price-and-quantity information to every market participant in real time: in continuous (order-matching) trading it discloses, per sell/buy side, the 10 levels of priority quoted prices including the best quote, the quantity at each price level and the aggregate quantity; in single-price (call auction) trading it discloses the expected execution price and quantity plus 3 levels of priority quoted prices and quantities. Broker/dealer seat identifiers are not disclosed in the book, and matching is by price-time priority (see infrastructure.market_data_levels). Block trades run separately.",
+        "detail": "2026-09-06 从 KRX 규정/제도 규칙门户（regulation.krx.co.kr）「호가정보」说明页逐字坐实——该站为服务端渲染、韩文正文可抓；英文站 global.krx.co.kr 同栏目（Publication of Quotation Information）是 JS 壳无正文，2026-08-16 因此留 low。韩文一手 quote 与本文件 market_data_levels 引 OpenAPI 韩文字段的既有先例一致（[ADR-kr-krx-legacy-closeout]）。",
+        "quote": "거래소는 투자자의 투자판단, 증권회사의 서비스 제고 및 시장의 가격발견기능의 효율성을 제고하기 위하여 시장에 제출된 매도·매수호가의 가격·수량등 호가정보를 실시간으로 모든 시장참가자에게 공개하고 있습니다. 호가정보공개의 범위는 접속매매의 경우 매도·매수별 최우선호가의 가격을 포함한 10단계 우선 호가가격, 그 가격대별 호가수량 및 당해호가수량의 합계수량을 공개하고, 단일가매매의 경우 예상체결가격·수량 및 매도·매수별 3단계우선호가의 가격· 수량을 공개합니다.",
         "sources": [
           {
-            "title": "Regulation ‧ Stocks ‧ KOSPI Market（KRX 官网英文版，栏目含 \"Publication of Quotation Information\"）",
-            "url": "https://global.krx.co.kr/contents/GLB/06/0602/0602010204/GLB0602010204.jsp",
-            "accessed": "2026-08-16"
+            "title": "규정/제도 ‧ 매매거래제도 ‧ 유가증권시장 ‧ 시장운영 및 관리 ‧ 호가정보（KRX 규정 포털）",
+            "url": "https://regulation.krx.co.kr/contents/RGL/03/03010406/RGL03010406.jsp",
+            "accessed": "2026-09-06"
           }
         ],
-        "confidence": "low",
-        "verified": "2026-08-16",
+        "confidence": "medium",
+        "verified": "2026-09-06",
         "enum": null,
-        "spec": null,
-        "quote": null
+        "spec": null
       },
       "dark_pool": {
         "zh": "KRX 不运营暗池。2025-03-04 之前 KRX 是韩国唯一股票交易场所（『50 年单一系统』）。2025 年起有 **Nextrade（NXT）**——韩国首家另类交易系统（ATS），FSC 于 2025-02-05 授予最终许可、3 月 4 日开业，依《资本市场与金融投资业法》(FSCMA) 设立（ATS 立法依据早于 2013 年）；NXT 是与 KRX 并列、可交易相同上市股票的第二个交易场所，主要为明盘（展示订单簿、延长交易时段、费率低于 KRX），设有『中间价申报』但在其订单簿内处理。韩国市场内无券商暗池",
@@ -1025,7 +1025,7 @@
         ],
         "quote": "Nextrade is the second stock trading venue alongside the Korea Exchange, established under the Financial Investment Services and Capital Markets Act. …… This breaks the 50-year single system in Korea …… granted final approval to Nextrade for operating an alternative trading system (ATS). The introduction of an ATS in domestic stock market will officially set off a multiple-exchange and competition-based stock trading system in Korea. …… the government first established legislative grounds for ATS in 2013",
         "confidence": "medium",
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "enum": null,
         "spec": null
       },
@@ -1069,7 +1069,7 @@
         ],
         "detail": "quote 用「…」「……」连接同一 PDF 的引言句、『Trading Linked to CME and Eurex』时间线表两列、以及 Q&A 段（中间为表格其他行 / 段落）。「无股票互联互通」为消极认定。境外准入渠道见 participants.foreign_access_channel。",
         "confidence": "high",
-        "verified": "2026-08-16",
+        "verified": "2026-09-06",
         "enum": null,
         "spec": null
       },
@@ -1094,7 +1094,7 @@
             "quote": "08:30 ~ 08:45 08:45 ~ 15:35 15:35 ~ 15:45",
             "confidence": "high",
             "detail": "该官方时段表另区分「所有其他产品（不含瘦肉猪期货）」「瘦肉猪期货」「最后交易日」等多组不同的开收盘集合竞价窗口，本字段仅取旗舰股指衍生品一组作代表，完整分组见 sources 页面原表。",
-            "verified": "2026-08-16",
+            "verified": "2026-09-06",
             "enum": null
           },
           "continuous_am": {
@@ -1120,7 +1120,7 @@
             ],
             "quote": "08:30 ~ 08:45 08:45 ~ 15:35 15:35 ~ 15:45",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-09-06",
             "enum": null,
             "detail": null
           },
@@ -1139,7 +1139,7 @@
                 "accessed": "2026-08-16"
               }
             ],
-            "verified": "2026-08-16",
+            "verified": "2026-09-06",
             "enum": null,
             "quote": null
           },
@@ -1158,7 +1158,7 @@
                 "accessed": "2026-08-16"
               }
             ],
-            "verified": "2026-08-16",
+            "verified": "2026-09-06",
             "enum": null,
             "detail": null,
             "quote": null
@@ -1179,7 +1179,7 @@
             ],
             "quote": "08:30 ~ 08:45 08:45 ~ 15:35 15:35 ~ 15:45",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-09-06",
             "enum": null,
             "detail": null
           },
@@ -1202,7 +1202,7 @@
             "quote": "17:50~18:00 18:00~05:50 05:50~6:00 ⋯ KOSPI200 Futures, KOSPI200 Options, KOSPI200 Weekly Options(Monday, Thursday), Mini-KOSPI200 Futures, Mini-Kospi200 Options, KOSDAQ150 Futures, KOSDAQ150 Options, 3-year KTB Futures, 10-year KTB Futures, USD Futures",
             "confidence": "high",
             "detail": "KRX已于2025年6月转为自主运营夜盘（此前为2009年8月起与CME联动、2010年8月起与Eurex联动的挂钩交易模式，CME联动已于2020年4月先行终止、Eurex联动已于2025年6月终止），见《Guide to Night Session in KRX Derivatives Market》PDF（2025年4月发布）。顶层 market_structure.night_session 字段此前（2026-08-16核实）仍按旧的CME/Eurex联动模式表述，已于2026-08-20按同一份PDF重新核实更新，两处表述已一致。",
-            "verified": "2026-08-16",
+            "verified": "2026-09-06",
             "enum": null
           }
         },
@@ -1218,7 +1218,7 @@
           ],
           "quote": "As night trading is scheduled from Monday to Friday, if the night session's start date falls on a holiday (weekend, public holiday, etc.), that day's night trading is canceled. Conversely, even if regular trading is closed tomorrow, night trading is proceeded as scheduled if regular trading is conducted today.",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "spec": null,
           "detail": null
@@ -1241,7 +1241,7 @@
           ],
           "quote": "The single price auction is used for determining the opening price, the closing price, and the first price resuming trading after a trading suspension.",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "detail": null
         },
@@ -1263,7 +1263,7 @@
           ],
           "quote": "The single price auction is used for determining the opening price, the closing price, and the first price resuming trading after a trading suspension.",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "detail": null
         },
@@ -1280,7 +1280,7 @@
           ],
           "quote": "Individual auction has price and time priorities for the orders to execute. That is, a lower ask has the priority over a higher ask and a higher bid has the priority over a lower bid. Among the orders with same prices, the order received earlier has the priority over those received later. However, in case of single price auction, if the price is determined at the upper or lower price limit, the time priority is not applied to those orders at the price limit. Orders are matched based on quantity priority where the larger order has the priority over the smaller order and the execution quantity is allocated from the larger ones to the smaller ones until the whole quantity is matched. Among the orders with same quantity, time priority is applied.",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "spec": null,
           "detail": null
         },
@@ -1305,7 +1305,7 @@
           ],
           "quote": "The limit order is an order of which the price and quantity are specified. It is matched at prices better than the specified price or at the specified price. The market order is an order placed to buy or sell at the best available price. Whereas the quantity of order is specified, the price is not. The limit-to-market-on-close order is the limit order placed with an instruction to convert it to the market order and include it in the single price auction at the time when the closing price is determined, if the order remains unexecuted until the end of the continuous auction on a given trading day. The immediately executable limit order is the market order in the sense that its price is not specified, but it is different from the market order in that the matching price is fixed at the price that is the best at the time of input. Unexecuted best orders are queued in the order book at the initial best price. Fill or Kill : Orders are that all of the orders are cancelled, if not executed immediately after the enter thereof Immediate or Cancel : Orders are that any of the orders possible to execute is executed and the remaining order are cancelled",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "detail": null
         },
@@ -1328,7 +1328,7 @@
           "quote": "0.05 point(KRW 12,500)",
           "confidence": "high",
           "detail": "期权按权利金档位分级报价（见KOSPI 200 Options产品页，未在zh/en正文重复列出具体数字，避免单一quote字段跨文档拼接）：权利金<10点时最小变动0.01点（2,500韩元），权利金≥10点时最小变动0.05点（12,500韩元，与期货相同）。其余产品类别（利率、货币、商品衍生品）最小报价单位本次未逐一核实，见 OPEN-QUESTIONS。",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null
         },
         "contract_specs_note": {
@@ -1349,7 +1349,7 @@
           "quote": "KOSPI 200 Futures price times KRW 250,000 ⋯ Four quarterly months + two half-yearly months + one yearly month ⋯ 0.05 point(KRW 12,500) ⋯ Second Thursday of the contract month ⋯ The following day of the last trading day ⋯ Cash ⋯ 10,000 contracts ⋯ 20,000 contracts",
           "confidence": "high",
           "detail": "KOSPI200期权合约结构与期货存在若干差异（数字见KOSPI 200 Options产品页原文，未在zh/en正文重复列出以避免quote字段跨文档拼接）：合约规模公式相同（期权价格×25万韩元）；除月度期权外另设周期权（每周一、周四各挂一份，到期日分别为下一个周一/周四，与月度期权到期周撞期的周期权不挂牌）；挂牌月份为6个连续月＋2个季月＋2个半年月＋1个年月（月度期权）；行权方式为欧式（仅到期日可行权）；行权价间距按合约月远近分3-4档；持仓限额按Delta计算（个人1万Delta、其他2万Delta）。",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "spec": null
         },
@@ -1367,7 +1367,7 @@
             ],
             "quote": "① ±8% ② ±15% ③ ±20% price limits are applied to the futures base price(①tier only during 08:45~09:00 and Night-Session)",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-09-06",
             "spec": null,
             "detail": null
           },
@@ -1387,7 +1387,7 @@
             ],
             "quote": "① ±8% ② ±15% ③ ±20% price limits are applied to the futures base price(①tier only during 08:45~09:00 and Night-Session)",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-09-06",
             "enum": null,
             "detail": null
           },
@@ -1403,7 +1403,7 @@
             ],
             "quote": "USD Futures 4.5% ⋯ 3-Yr KTB Futures 1.5% ⋯ 10-Yr KTB Futures 2.7% ⋯ Same as regular trading",
             "confidence": "high",
-            "verified": "2026-08-16",
+            "verified": "2026-09-06",
             "enum": null,
             "spec": null,
             "detail": null
@@ -1427,7 +1427,7 @@
           ],
           "quote": "there is no price fluctuation in the stock index during night hours, so circuit breaker (CB) cannot be triggered. However, if trading in the stock market is terminated due to the activation of CB stage 3 during the regular session, night trading for all derivatives that open on the same day, including FICC derivatives, is not conducted.",
           "confidence": "high",
-          "verified": "2026-08-16"
+          "verified": "2026-09-06"
         },
         "volatility_interruption": {
           "spec": {
@@ -1445,7 +1445,7 @@
           ],
           "quote": "Real-time price limits are applied to 8 products among the tradable products to night trading ⋯ KOSPI 200 Futures Mini-KOSPI 200 Futures 1.0% 2.0% 1.0% 2.0% ⋯ USD Futures 1.0% 2.0% 1.0% 2.0% ⋯ 3-Yr KTB Futures 0.5% 1.0% 0.5% 1.0% ⋯ 10-Yr KTB Futures 0.9% 1.8% 0.9% 1.8% ⋯ [Annex 25]",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "detail": null
         },
@@ -1461,7 +1461,7 @@
           ],
           "quote": "The compulsory suspension refers to cases where the market can be operated but trading is suspended as needed, and does not apply to night trading. This is because there is no price fluctuation in the stock index during night hours, so circuit breaker (CB) cannot be triggered. ⋯ The discretionary suspension refers to suspension due to the impossibility of market operation or trading of a specific product, and includes Exchange and member system failures. The discretionary suspension also applies to night trading, with some exceptions. ⋯ When a system failure occurs in the stock market for more than 10 minutes and trading is not possible for a certain number of stock index constituents",
           "confidence": "high",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "spec": null,
           "detail": null
@@ -1479,7 +1479,7 @@
           "quote": "Negotiated block trading is used for the convenience of the block traders like institutional investors who intend to trade a large amount of securities without any sudden impact on the market price. Trading parties negotiate the transaction details such as the issue, price and quantity and file an application with the exchange via members to execute the block trade. The following derivatives are availiable for negotiated block trading : 1. Equity derivatives trades. Provided that KOSPI 200 volatility index futures trades are excluded; 2. Interest futures trades. Provided that 5-year KTB futures trades are exclueded; 3. Currency derivatives trades. Provided that USD options trades are exclueded; 4. Commodity futures trades. Provided that Lean Hog futures trades are exclueded; 5. Futures spread trades. Provided that KOSPI 200 volatility index futures spread trades, 5-year KTB futures spread trades, Inter-KTB futures spread trades and Lean Hog futures spread trades are excluded ⋯ EFP trading is a method of block trading for the convenience of the block traders like institutional investors who intend to trade a large amount of EFPs avoiding sudden fluctuations in the market price from the large volume. ⋯ EFPs are available for USD futures. * EFPs are not applicable during night session",
           "confidence": "high",
           "detail": "未找到协商大宗交易的最低数量/金额门槛具体数值（现货市场对应门槛见顶层 block_trade 字段），本次抓取材料仅确认适用品种范围与交易方式，未展开具体门槛，已记入 PROJECT/OPEN-QUESTIONS.md。",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "spec": null
         },
@@ -1498,7 +1498,7 @@
           ],
           "quote": "Since most products tradable in the night session are highly liquid products with sufficient demand, the market maker system will not be introduced. However, KRX plans to review whether to introduce it after observing the trading trends in the night session.",
           "confidence": "medium",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "detail": null
         },
@@ -1525,7 +1525,7 @@
           "quote": "With the introduction of Night-Session, member margin will be calculated twice each trading day(After clsoings of 1) regular and 2) night sessions respectively) and the deadline for margin deposit is shortened by an hour(12:00 -> 11:00 on T+1 day). If the recalculated margin(for night session) required for deposit is significantly higher (by \"120% or more\" or \"50 billion KRW or more\") than that at the end of the previous day's regular session, the account holder must deposit the recalculated amount until the deposit deadline (11 am).",
           "confidence": "high",
           "detail": "整体保证金计算方法论（未直接体现具体数字，故未纳入zh/en正文）：KRX按标的资产特性相近的产品分组（股指、个股、债券、货币、商品等）分别计算组合净风险保证金，再加总各组得出总保证金要求，费率原则上依标的价格波动性、衍生品特性与市场状况厘定，并提供PC COMS教学软件辅助投资者理解（见 Types and Composition of Margin 页）。客户保证金进一步细分为新增未平仓部位所需的委托（初始）保证金与既有未平仓部位所需的保证金（净风险保证金+待结算损益）两部分，计算细节见 Customer Margin 页原文，未逐条摘引quote。",
-          "verified": "2026-08-16",
+          "verified": "2026-09-06",
           "enum": null,
           "spec": null
         },
@@ -1589,7 +1589,7 @@
         ],
         "quote": "Years in operation since incorporation — At least 3 years / Equity Capital — At least KRW 30 billion / No. of Shares to be listed — At least 1 million shares",
         "confidence": "high",
-        "verified": "2026-08-27",
+        "verified": "2026-09-06",
         "spec": null
       },
       "listing_process_duration": {
@@ -1614,7 +1614,7 @@
         ],
         "quote": "it normally takes about 3 to 4 months from the date filing the application for preliminary review on listing eligibility to the date of listing approval. KRX sends the notice of eligibility clearance within three months(65 business days) in case of an application being filed by a foreign applicant in case of an IPO, but within two months (45 business days)",
         "confidence": "high",
-        "verified": "2026-08-27",
+        "verified": "2026-09-06",
         "enum": null,
         "detail": null
       },
@@ -1630,7 +1630,7 @@
         ],
         "quote": "Track 1 / At least one (1) year of elapse after being listed on the KONEX market / Recommendation from the designated advisor (listing sponsor) / Positive operating income in the latest business year / At least KRW 10 billion in sales for the latest business year / At least KRW 30 billion in base market capitalization",
         "confidence": "high",
-        "verified": "2026-08-27",
+        "verified": "2026-09-06",
         "enum": null,
         "spec": null,
         "detail": null
@@ -1646,7 +1646,7 @@
           }
         ],
         "confidence": "medium",
-        "verified": "2026-08-27",
+        "verified": "2026-09-06",
         "enum": null,
         "spec": null,
         "detail": null,
@@ -1663,7 +1663,7 @@
           }
         ],
         "confidence": "medium",
-        "verified": "2026-08-27",
+        "verified": "2026-09-06",
         "enum": null,
         "spec": null,
         "detail": null,
@@ -1681,7 +1681,7 @@
         ],
         "quote": "When market capitalization drops below KRW 50 billion and remains so for 30 consecutive trading days. ... Less than KRW 30 billion at the end of the most recent fiscal year.",
         "confidence": "high",
-        "verified": "2026-08-27",
+        "verified": "2026-09-06",
         "enum": null,
         "spec": null,
         "detail": null
@@ -1703,14 +1703,20 @@
         ],
         "quote": "Currently, once a company is delisted, there is virtually no way for investors to trade the delisted stocks other than a post-delisting liquidation trading period of seven trading days.",
         "confidence": "medium",
-        "verified": "2026-08-27",
+        "verified": "2026-09-06",
         "enum": null,
         "spec": null,
         "detail": null
       },
       "delisting_transition_period": {
+        "spec": {
+          "value": 7,
+          "unit": "trading_days",
+          "note": "退市决定生效后的整理卖出（liquidation trading）期；quote 作 'seven trading days'，7 为个位数人工转写（5b 豁免，[ADR-091] 转写口径）。改善期时长逐案确定、无单一数字，不在此字段口径内"
+        },
         "zh": "退市决定生效后，先有7个交易日的「整理卖出」(liquidation trading)期供投资者退出，之后正式摘牌；在退市决定前，被指定为管理股的发行人有一个「改善期」(improvement period)进行整改，2025年金融委员会退市制度改进方案缩短了改善期并改为技术与实质退市事由并行审查。摘牌后自2026年1月起可进入K-OTC「退市企业指定部」继续交易最多6个月（见 post_delisting_venue）。",
         "en": "After a delisting decision becomes effective, there is first a 7-trading-day 'liquidation (clean-up) trading' period for investors to exit before formal delisting; prior to the decision, an issuer designated as an administrative issue is given an 'improvement period' to cure deficiencies. The 2025 FSC delisting-reform plan shortened the improvement period and introduced parallel review of technical and substantive delisting grounds. From January 2026, post-delisting the stock may enter the K-OTC 'Delisted Company Division' for up to six months of continued trading (see post_delisting_venue).",
+        "detail": "「7 个交易日」锚点为 FSC 英文新闻稿原句『a post-delisting liquidation trading period of seven trading days』（官方原文描述当时现行制度；2026-09-06 从已缓存页面补摘，替换此前只覆盖改善期短语的 quote）——至此 [ADR-091] 挂出的 kr-krx 整理卖出期待补源收口。",
         "sources": [
           {
             "title": "Reform Plans for IPO and Delisting Rules（FSC）",
@@ -1718,12 +1724,10 @@
             "accessed": "2026-08-27"
           }
         ],
-        "quote": "shortening improvement periods and a parallel review of technical and substantive delisting reasons",
+        "quote": "Currently, once a company is delisted, there is virtually no way for investors to trade the delisted stocks other than a post-delisting liquidation trading period of seven trading days. To address this issue, K-OTC, the trading platform for unlisted stocks operated by KOFIA, will be utilized.",
         "confidence": "medium",
-        "verified": "2026-08-27",
-        "enum": null,
-        "spec": null,
-        "detail": null
+        "verified": "2026-09-06",
+        "enum": null
       },
       "post_delisting_venue": {
         "zh": "摘牌后，股票自2026年1月2日起可进入韩国金融投资协会(KOFIA)运营的K-OTC市场的「退市企业指定部」(Delisted Company Division)，为符合最低投资者保护要件（无保留/限定范围审计意见、股份可转让、无破产等）的退市股提供最长6个月的交易支持；6个月后若KOFIA认定适当，可转入K-OTC登记·指定企业部继续场外交易。这是对原仅7个交易日整理卖出后基本无法交易的补缺。",
@@ -1742,7 +1746,7 @@
         ],
         "quote": "will be established to support trading of delisted stocks for six months. After the six months of trading, those stocks may be transferred to the K-OTC platform to continue to be traded if KOFIA deems it appropriate. The K-OTC support system for trading delisted stocks will be implemented in three phases starting January 2026.",
         "confidence": "high",
-        "verified": "2026-08-27",
+        "verified": "2026-09-06",
         "enum": null,
         "spec": null,
         "detail": null
