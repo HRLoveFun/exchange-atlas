@@ -2776,6 +2776,25 @@
   function closeOverlay() {
     $all(".overlay-backdrop").forEach(function (n) { n.remove(); });
   }
+  // 「本视图…」说明弹窗（2026-09-06 二轮迭代，ADR-canvas-ui-iterate 增补）：
+  // 复用出处浮层的遮罩 / 面板 / 关闭基建；内容取自对应 section 里隐藏的
+  // .sec-prose 节点（含各 prose 段的链接与强调标记），不重渲染。
+  function openProseOverlay(moduleId) {
+    var sec = document.getElementById("section-" + moduleId);
+    var proseEl = sec && sec.querySelector(".sec-prose");
+    if (!proseEl) return;
+    var secDef = CANVAS_SECTIONS.filter(function (s) { return s.id === moduleId; })[0];
+    closeOverlay();
+    var backdrop = document.createElement("div");
+    backdrop.className = "overlay-backdrop";
+    backdrop.setAttribute("data-role", "overlay-backdrop");
+    backdrop.innerHTML = '<div class="overlay-panel overlay-panel-prose">' +
+      '<button type="button" class="overlay-close" data-role="close-overlay">&times;</button>' +
+      "<h3>" + esc(secDef ? secDef.title : moduleId) + "</h3>" +
+      '<div class="overlay-sub">' + t("本视图…", "About this view") + "</div>" +
+      proseEl.innerHTML + "</div>";
+    document.body.appendChild(backdrop);
+  }
 
   // ══════════════════════════════════════════════
   // 主题 / 语言模式开关
@@ -2853,15 +2872,15 @@
     else delete st[moduleId];
     try { localStorage.setItem("ea-canvas-fold", JSON.stringify(st)); } catch (e) { /* 隐私模式忽略 */ }
   }
-  // 「本视图…」说明段（各模块 xxProse 的产物）不再常驻——包进 .sec-prose
-  // 默认隐藏，点击模块标题展开 / 再点收起（2026-09-06 UI 迭代）。
+  // 「本视图…」说明段（各模块 xxProse 的产物）：不占版面——渲染为隐藏节点，
+  // 点击模块名时 openProseOverlay 取其内容弹窗展示（2026-09-06 二轮迭代）。
   function secProse(inner) {
     return '<div class="sec-prose" hidden>' + inner + "</div>";
   }
   // 画布编排壳：builder 调用只走这张注册表（check_canvas_sections.py 关卡）
   // 折叠交互（2026-09-06 UI 迭代）：整条标题棒可点改为标题棒右侧的独立
-  // toggle 按钮（▸/▾ + 展开/折叠 字样）；模块名本身改为「本视图…」说明段
-  // 的展开开关（点击出现 / 收起）。
+  // toggle 按钮（▸/▾ + 展开/折叠 字样）；模块名本身改为「本视图…」说明弹窗
+  // 的入口（点击弹窗出现，二轮迭代由就地展开改为弹窗）。
   function canvasShell(id, data) {
     var folded = canvasFolded();
     return '<div id="canvas-sections">' + CANVAS_SECTIONS.map(function (s) {
@@ -2871,7 +2890,7 @@
       return '<section class="canvas-section' + (isFolded ? " is-folded" : "") + '" id="section-' + s.id + '">' +
         '<div class="canvas-sec-head">' +
         '<button type="button" class="canvas-sec-title" data-role="canvas-prose" data-module="' + s.id + '"' +
-        ' aria-expanded="false" title="' + esc(t("查看本视图说明", "About this view")) + '">' + esc(s.title) + "</button>" +
+        ' aria-haspopup="dialog" title="' + esc(t("查看本视图说明", "About this view")) + '">' + esc(s.title) + "</button>" +
         '<button type="button" class="canvas-sec-toggle" data-role="canvas-fold" data-module="' + s.id +
         '" aria-expanded="' + (isFolded ? "false" : "true") + '" title="' + esc(t("折叠 / 展开本模块", "Fold / unfold this section")) + '">' +
         '<span class="canvas-sec-arrow" aria-hidden="true">' + (isFolded ? "▸" : "▾") + "</span>" +
@@ -3006,17 +3025,10 @@
       var secWord = hit.querySelector(".canvas-sec-toggle-word");
       if (secWord) secWord.textContent = foldNext ? t("展开", "Expand") : t("折叠", "Fold");
     } else if (role === "canvas-prose") {
-      // 点击模块名展开 / 收起「本视图…」说明段（默认隐藏，见 secProse）。
-      // 说明段在模块 body 里：折叠态下先借 toggle 展开模块再显示说明。
-      var psec = document.getElementById("section-" + hit.dataset.module);
-      if (psec) {
-        var pbody = psec.querySelector(".canvas-sec-body");
-        var ptoggle = psec.querySelector('[data-role="canvas-fold"]');
-        if (pbody && pbody.hidden && ptoggle) ptoggle.click();
-        var anyShown = false;
-        $all(".sec-prose", psec).forEach(function (p) { p.hidden = !p.hidden; if (!p.hidden) anyShown = true; });
-        hit.setAttribute("aria-expanded", anyShown ? "true" : "false");
-      }
+      // 点击模块名弹出「本视图…」说明弹窗（2026-09-06 二轮迭代：由就地展开
+      // 改为弹窗，与出处浮层共用遮罩 / Esc / 点外关闭的交互）。说明段内容
+      // 在隐藏的 .sec-prose 节点里（见 secProse），弹窗只搬运不重渲染。
+      openProseOverlay(hit.dataset.module);
     } else if (role === "canvas-market-toggle") {
       // 市场选择面板开合（按地区分组的弹出面板，见 canvasToolbar / marketPanelHtml）
       var mpanel = hit.parentElement.querySelector(".market-panel");

@@ -185,13 +185,13 @@ main#app { max-width: 1400px; margin: 0 auto; padding: 20px; min-height: 60vh; }
   box-shadow: var(--shadow); padding: 14px 16px; max-height: min(62vh, 480px); overflow-y: auto;
 }
 .market-panel-regions {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px 24px;
+  display: flex; flex-direction: column; gap: 12px;
 }
 .market-panel-region-h {
   font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--fg-muted);
   border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 6px;
 }
-.market-panel-list { display: flex; flex-direction: column; gap: 2px; }
+.market-panel-list { display: flex; flex-wrap: wrap; gap: 4px 6px; }
 .market-panel-item {
   text-align: left; border: none; background: transparent; color: var(--fg);
   padding: 5px 8px; border-radius: 6px; cursor: pointer; font-size: 13px; font-family: inherit;
@@ -618,6 +618,10 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
 .rf-disclaimer code { font-family: var(--font-mono); font-size: 11px; background: var(--bg-hover); padding: 0 3px; border-radius: 3px; }
 .rf-disclaimer .rf-hard { color: var(--danger); font-weight: 650; }
 
+/* 「本视图…」说明弹窗（canvas 模块名点击触发）：比出处浮层略宽，容散文长段 */
+.overlay-panel-prose { max-width: 680px; }
+.overlay-panel-prose .td-prose { margin-top: 6px; }
+
 .overlay-spec {
   background: var(--bg); border-radius: 4px; padding: 10px 12px; margin: 0;
   font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted);
@@ -655,5 +659,4 @@ html:not([data-lang="en"]) .i18n-en { display: none; }
   .header-tabs { order: 3; width: 100%; }
   .td-tb-note { display: none; }
   .canvas-sec-toggle-word { display: none; }
-  .market-panel-regions { grid-template-columns: 1fr; }
 }

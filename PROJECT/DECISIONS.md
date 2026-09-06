@@ -2853,4 +2853,11 @@ print('全库 medium 零 sources:',n)
 
 **验证：** 纯前端两文件（`docs/assets/app.js` + `docs/assets/styles.css`），`data/` 与 `docs/data/` 零 diff。`make build` 全绿（`check_ui_i18n` / `check_no_dup_render_helpers`「市场 Market」=1 / `check_canvas_sections` 等 8 关全过）；`node --check` 通过；headless 实测：吸顶（滚动 1200px 后市场条 top=57px 紧贴页头）、地区面板四组齐全、选市 jp-jpx 生效、折叠 toggle 双向、折叠态点标题自动展开 + 说明段出现、说明段二次点击收起。
 
+**同日二轮迭代增补（用户复看反馈两点）：**
+
+1. **地区面板从左右多列改为上下分组**：`.market-panel-regions` 由 auto-fit 多列 grid 改为纵向 flex（每个地区块占满宽、上下依次），组内交易所名改横向流式排列（`flex-wrap`）保持面板紧凑；窄屏单列覆盖随之删除。
+2. **「本视图…」说明从就地展开改为点击模块名弹窗**：新增 `openProseOverlay(moduleId)`，复用出处浮层的遮罩 / 面板 / Esc / 点外关闭基建；内容仍取自 `secProse()` 渲染的隐藏 `.sec-prose` 节点（链接与强调标记原样搬运，不重渲染），弹窗标题 = 模块名、副题 =「本视图… About this view」。模块名按钮 `aria-expanded` 改 `aria-haspopup="dialog"`；前一轮的「折叠态先展开模块再显示」逻辑随之删除（弹窗与折叠态无关，交互更简）。
+
+**二轮验证：** `make build` 全绿、`node --check` 通过；headless 实测：面板四地区上下纵排、点击模块名弹出说明弹窗、Esc / 关闭按钮 / 点遮罩可关。
+
 **日期：** 2026-09-06
