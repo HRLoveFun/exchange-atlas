@@ -2640,3 +2640,28 @@ print('全库 medium 零 sources:',n)
 **验证：** 纯文档。改 `PROJECT/ROADMAP.md`（§三 Phase 3 顶层条目 `[x]` + Phase 4「前置条件达成」子条目）+ `PROJECT/DECISIONS.md`（本条）+ `PROJECT/ROADMAP-INBOX.md`（§一 折叠便签）。`make build` **exit 0**（`selfcheck` 101、`validate` 0 错误 / 3 警告〔均为本分支 `ADR-095` 占位符，合并后 adr-heal 定号并补 `ADR-LEDGER.md` 登记行〕、`verify_quotes` FAIL=0、`check_ui_i18n` / `check_no_chapter_ordinals` / `check_no_dup_render_helpers` / `check_wrap_mixed` OK），`make sync` 二次幂等、`data/` 与 `docs/data/` 及生成块零 diff（三个文件内容均不被 `sync.py` 扫描；本条为 `ADR-PENDING-*` 占位符，不进 adr-index 编号索引）。
 
 **日期：** 2026-09-06
+
+---
+
+### ADR-protected-files-approval-gate — 受保护文件审批闸：CODEOWNERS + 分支保护 code-owner review
+
+（本条是 exchange-atlas 第一条 **slug 式 ADR**——不再预支数字号。约定的完整确立 + 删除旧 ADR 流水号机器见 [ADR-slim-coordination-machinery]（同批 PR B）。历史 `ADR-NNN` 冻结、`ADR-<slug>` 只追加、同名 slug 撞车 = `DECISIONS.md` 上的可见文本冲突。）
+
+**背景：** 2026-09-06 检讨 `CLAUDE.md` 腐烂程度时发现：现状对绝大多数改动**没有任何用户审批闸**——交互式会话直推 main（§六「不必每次问」），后台任务 PR + auto-merge（`pr-build.yml` 绿即合）。「重要文件改动需用户批准」这条原则目前只靠会话侧的 auto-mode 权限分类器兜底，而 `GIT-RUNBOOK.md` 自己记着那个分类器会误拦（改 branch protection 时）——不是可靠的服务端关卡。宪法本身（`CLAUDE.md`）、数据结构权威（`schema/`）、CI（`.github/`）、命令权威（`Makefile`）这几类文件被一个冷启动会话默默改掉、CI 绿了自动进 main，是真实风险。
+
+**定了什么：**
+
+1. **新增 `.github/CODEOWNERS`**，把 `CLAUDE.md` / `schema/**` / `.github/**` / `Makefile` 指给 `@HRLoveFun`。清单的增删本身也算受保护文件改动。
+2. **`main` 分支保护加 `required_pull_request_reviews.require_code_owner_reviews: true`**（`required_approving_review_count: 0`，即只有 CODEOWNERS 路径的 PR 需要 owner 批准，其余 PR 流水线不变）。改 branch protection 需 admin 权限、且 auto-mode 分类器会拦，由用户手动跑一次 `gh api`（命令附在本 PR 说明里）。
+3. **`CLAUDE.md` §六 明确两条**：交互式会话（owner）改受保护文件前先在对话里说清、拿到明确同意再推；后台任务改受保护文件的 PR **不挂 `--auto`**、标题带 `[需 owner 批准]`、正文 `@HRLoveFun`——CODEOWNERS + 分支保护会同时从服务端挡住 auto-merge，纪律 + 关卡双保险。
+4. **不碰的部分**：`pr-build.yml` 不动；非受保护文件的后台 PR 仍 CI 绿即自动 squash 合并——审批面刻意缩到 4 个路径，其余全自动，这正是「在审批原则下增强自动化」。
+
+**没做：**
+
+- **没做 label-gate 型自定义 workflow**——CODEOWNERS 是 GitHub 原生、零维护，不再叠一个 `.github/workflows/*.yml` 与「删机器」的方向相悖。
+- **solo 仓库 owner 不能给自己的 PR 点 approve**——受保护文件的 PR 由 owner 以 admin 权限手动合并（`enforce_admins: false` 允许），这个「手动合并」动作本身即为批准。auto-merge 会一直等、不会误合。
+- **没把 `PROJECT/`（DECISIONS / ROADMAP / SOURCES 等）纳入受保护**——那些是高频协作写入点，纳入会把审批闸变成瓶颈；它们的正确性靠 `validate.py` 关卡，不靠人肉审。
+
+**验证：** `make build` 全绿（本 PR 只加 `.github/CODEOWNERS` + 改 `CLAUDE.md` §六 + 本条 ADR，不触碰 `sync.py` 扫描的文件，生成块零 diff）。分支保护 API 改动的实测（故意开一个碰 `schema/` 的测试 PR 看 auto-merge 是否被挡）留用户执行命令后做。
+
+**日期：** 2026-09-06
