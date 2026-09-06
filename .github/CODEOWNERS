@@ -1,0 +1,19 @@
+# 受保护文件——改动需仓库 owner 在 PR 上批准后才能合并。
+#
+# 配合 main 分支保护的 "Require review from Code Owners"：碰到下面这些路径的
+# PR，GitHub 会挡住 auto-merge，直到 @HRLoveFun 批准（或以 admin 权限手动合并）。
+# 不碰这些路径的 PR 流水线不变——pr-build.yml 绿了自动合并。
+#
+# 依据见 PROJECT/DECISIONS.md 的「受保护文件审批闸」条目。
+
+# 会话宪法
+/CLAUDE.md                @HRLoveFun
+
+# 数据结构 / 术语 / 枚举 / spec 形状的权威
+/schema/                  @HRLoveFun
+
+# CI 与仓库自动化
+/.github/                 @HRLoveFun
+
+# 命令的唯一权威
+/Makefile                 @HRLoveFun
