@@ -1,0 +1,30 @@
+# 胡志明市证券交易所 Ho Chi Minh Stock Exchange (HOSE)
+# 抓取来源见 PROJECT/sources/vn-hose.md；原始页缓存于 .cache/vn-hose/
+# 建档轨：[ADR-add-exchange-skill-forge]（用实际新增越南市场迭代 add-exchange skill）。
+#
+# source_lang: en——越南官方语言为越南语，不在 ADR-013 的 zh/en 二分内（同 sa-tadawul 阿语 /
+#   br-b3 葡语 / kr-krx 韩语）；按「无中选英」定 en。越南证券法规的官方英译普遍带「非官方、
+#   仅供参考」免责，据此 confidence 封顶 medium（同 english.sse.com.cn / elaw.klri.re.kr）；
+#   越南语一手条文可作事实来源支撑 medium（同 kr-krx 규정 포털韩文一手先例），不升 high。
+#   从一开始就同时充实 zh 与 en，不把 en 当简短术语标签。
+#
+# group_id: vnx-group——越南交易所（Sở Giao dịch Chứng khoán Việt Nam / Vietnam Exchange，
+#   VNX）依 37/2020/QĐ-TTg 于 2021-02-20 成立，为国家 100% 持股的一人有限责任公司，
+#   下辖 HOSE（胡志明，现货股票主板）与 HNX（河内，UPCoM / 债券 / 衍生品）两家独立法人
+#   子公司。本文件只记录 HOSE。姊妹所 HNX 的板块 / 规则不塞进本文件 boards。
+
+id: vn-hose
+name_zh: 胡志明市证券交易所
+name_native: {vi: "Sở Giao dịch Chứng khoán Thành phố Hồ Chí Minh", en: "Ho Chi Minh Stock Exchange (HOSE)"}
+official_languages: [vi]
+source_lang: en
+group_id: vnx-group
+region: apac
+
+# ═══════════════════════════════════════════════
+# 二｜基本信息
+# ═══════════════════════════════════════════════
+overview:
+  _meta:
+    verified: 2026-09-07
+    confidence: low

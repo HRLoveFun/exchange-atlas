@@ -42,6 +42,7 @@
 | `uk-lse` | 伦敦证券交易所 | 欧洲 |
 | `us-nasdaq` | 纳斯达克证券交易所 | 美洲 |
 | `us-nyse` | 纽约证券交易所 | 美洲 |
+| `vn-hose` | 胡志明市证券交易所 | 亚太 |
 | `za-jse` | 约翰内斯堡证券交易所 | 中东非 |
 <!-- END:GENERATED exchange-list -->
 

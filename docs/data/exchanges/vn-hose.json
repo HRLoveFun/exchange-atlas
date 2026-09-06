@@ -1,0 +1,178 @@
+{
+  "id": "vn-hose",
+  "name_zh": "胡志明市证券交易所",
+  "name_native": {
+    "vi": "Sở Giao dịch Chứng khoán Thành phố Hồ Chí Minh",
+    "en": "Ho Chi Minh Stock Exchange (HOSE)"
+  },
+  "official_languages": [
+    "vi"
+  ],
+  "source_lang": "en",
+  "group_id": "vnx-group",
+  "region": "apac",
+  "chapters": {
+    "overview": {
+      "timezone": null,
+      "dst_rule": null,
+      "founded_year": null,
+      "history": null,
+      "organization_form": null,
+      "self_listed": null,
+      "market_cap_usd_bn": null,
+      "listed_companies_count": null,
+      "annual_turnover_usd_bn": null,
+      "global_ranking": null,
+      "trading_currency": null,
+      "settlement_currency": null
+    },
+    "regulation": {
+      "regulator": null,
+      "self_regulatory_org": null,
+      "clearing_regulator": null,
+      "core_laws": null,
+      "foreign_ownership_limit": null,
+      "capital_controls": null,
+      "disclosure_requirements": null,
+      "investor_protection": null
+    },
+    "products": {
+      "meta": {},
+      "items": []
+    },
+    "market_structure": {
+      "trading_sessions": {
+        "pre_market": null,
+        "continuous_am": null,
+        "lunch_break": null,
+        "continuous_pm": null,
+        "after_market": null,
+        "night_session": null
+      },
+      "holidays_note": null,
+      "opening_mechanism": null,
+      "closing_mechanism": null,
+      "execution_model": null,
+      "matching_principle": null,
+      "order_types": null,
+      "tick_size": null,
+      "board_lot_size": null,
+      "odd_lot_handling": null,
+      "price_limits": {
+        "type": null,
+        "main_board": null,
+        "other_boards": null
+      },
+      "circuit_breaker": null,
+      "volatility_interruption": null,
+      "trading_halt_mechanism": null,
+      "error_trade_rule": null,
+      "intraday_reversal": null,
+      "short_selling": null,
+      "block_trade": null,
+      "order_book_transparency": null,
+      "dark_pool": null,
+      "market_maker_scheme": null,
+      "connect_schemes": null,
+      "derivatives": {
+        "trading_sessions": {
+          "pre_market": null,
+          "continuous_am": null,
+          "lunch_break": null,
+          "continuous_pm": null,
+          "after_market": null,
+          "night_session": null
+        },
+        "holidays_note": null,
+        "opening_mechanism": null,
+        "closing_mechanism": null,
+        "matching_principle": null,
+        "order_types": null,
+        "tick_size": null,
+        "contract_specs_note": null,
+        "price_limits": {
+          "type": null,
+          "main_board": null,
+          "other_boards": null
+        },
+        "circuit_breaker": null,
+        "volatility_interruption": null,
+        "trading_halt_mechanism": null,
+        "block_trade": null,
+        "market_maker_scheme": null,
+        "margin_practice_note": null,
+        "connect_schemes": null
+      }
+    },
+    "listing": {
+      "boards": [],
+      "review_system": null,
+      "listing_process_duration": null,
+      "transfer_between_boards": null,
+      "continuing_obligations": null,
+      "suspension_resumption": null,
+      "delisting_conditions": null,
+      "delisting_process": null,
+      "delisting_transition_period": null,
+      "post_delisting_venue": null
+    },
+    "indices": {
+      "meta": {},
+      "items": []
+    },
+    "clearing": {
+      "settlement_cycle": null,
+      "ccp_name": null,
+      "csd_name": null,
+      "guarantee_model": null,
+      "initial_margin_practice": null,
+      "maintenance_margin_practice": null,
+      "mark_to_market_frequency": null,
+      "delivery_method": null,
+      "last_trading_day_rule": null,
+      "default_management": null,
+      "derivatives": {
+        "initial_margin_practice": null,
+        "maintenance_margin_practice": null,
+        "mark_to_market_frequency": null,
+        "delivery_method": null,
+        "last_trading_day_rule": null
+      }
+    },
+    "participants": {
+      "investor_structure": null,
+      "account_opening_requirements": null,
+      "suitability_management": null,
+      "foreign_access_channel": null,
+      "membership_structure": null,
+      "broker_landscape": null
+    },
+    "infrastructure": {
+      "market_data_levels": null,
+      "data_latency": null,
+      "data_pricing_model": null,
+      "historical_data_availability": null,
+      "trading_system_name": null,
+      "access_methods": null,
+      "major_outage_history": null
+    },
+    "costs": {
+      "commission_structure": null,
+      "exchange_fees": null,
+      "clearing_fees": null,
+      "regulatory_fees": null,
+      "stamp_duty": null,
+      "financial_transaction_tax": null,
+      "capital_gains_tax": null,
+      "dividend_withholding_tax": null,
+      "implicit_costs_note": null
+    },
+    "risks": {
+      "fx_risk_note": null,
+      "political_risk_note": null,
+      "liquidity_risk_note": null,
+      "regulatory_change_risk_note": null,
+      "enforcement_note": null
+    }
+  }
+}
