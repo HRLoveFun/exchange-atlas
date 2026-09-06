@@ -105,6 +105,7 @@
 - ADR-protected-paths-ci-guard · 2026-09-06 · 受保护文件审批闸的服务端实现：CI guard check 取代 GitHub 原生 code-owner review
 - ADR-phase4-canvas-layout · 2026-09-06 · Phase 4 单页画布合并：布局形态 / 模块排序 / 折叠策略 / 深链兼容定案
 - ADR-phase4-canvas-polish · 2026-09-06 · Phase 4 棒 5：跨模块视觉语言对账 + 已知视觉遗留收口 + 20 家巡检 + 非专业读者实测
+- ADR-phase4-closeout · 2026-09-06 · Phase 4 单页画布合并收口认定 + 交付质量独立审查
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2798,5 +2799,37 @@ print('全库 medium 零 sources:',n)
 **改动面：** 纯前端两文件（`docs/assets/app.js` +36/−11、`docs/assets/styles.css` +1）+ 本条 + ROADMAP。`data/` 与 `docs/data/` 零 diff。**未加新机器校验**：本棒无新数据结构 / 不变式，色彩语义与零值口径是渲染层约定、无可机检的数据不变式（[CLAUDE.md §四] 门槛不触发）。
 
 **验证：** `make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_ui_i18n` / `check_canvas_sections` / `check_no_stale_view_links` / `check_wrap_mixed` OK）；`node --check` 通过；Playwright 80/80 + 四视图冒烟（修复前后各一轮）。
+
+**日期：** 2026-09-06
+
+---
+
+### ADR-phase4-closeout — Phase 4 单页画布合并收口认定 + 交付质量独立审查
+
+**背景：** [ADR-phase4-canvas-layout] 拆的棒 1–5 于 2026-09-06 全部落地（棒 1 `1ca157e` / 棒 2–4 PR #113 / 棒 5 `6cd7421` + [ADR-phase4-canvas-polish]），ROADMAP §三 五个子棒均 `[x]`，只剩顶层复选框与收口拍板——[ADR-phase4-canvas-polish] 与 ROADMAP §一 明确把这步留给用户复核（同 Phase 2 收口 gate 先例）。用户 2026-09-06 确认 Phase 4 完成并要求交付质量审查。审查由一个**未参与棒 1–5 实施**的会话执行（[ADR-081] 独立视角：审查者只写过棒 0 的方向 ADR、未碰任何实现代码），对照 [ADR-phase4-canvas-layout] 的 5 项决策 + 7 模块 merge-ready 对账表逐条核，含 Chrome headless 实测。
+
+**审查结论（headless 实测 + 代码走查，无阻断项）：**
+
+- **画布编排**：7 模块按认知流顺序（监管 → 参与者 → 剖面 → 成本 → 交割 → 上市 → 风险）整宽堆叠，`CANVAS_SECTIONS` 注册表驱动、builder 只走注册表；单一画布级市场选择器（`市场 Market` label 全库 1 处）；每 section 可折叠、默认展开、状态存 `localStorage`。cn-sse / jp-jpx / au-asx / us-nyse 四所 headless DOM：7 section 齐全、无 `undefined` / `NaN` / 加载失败、诚实三态（au-asx「不设 / 未公布 / 未记录」）保留。
+- **路由**：旧 `#view=<module>&id=X`（7 模块）→ `#market=X&section=<module>` 迁移 + `scrollIntoView` 实测通过（`settlement-pipeline&id=jp-jpx` → 画布 + jp-jpx 选中）；matrix / timezone / health / exchange 深链原样保留（`#view=matrix` → 二级横条展开、两级 tab 高亮正确、矩阵 280 `<td>` 无回归）。
+- **窄视口**：7 模块 SVG 均在各自 `.td-plot-wrap`（`overflow-x: auto`）内横向滚动，390px 视口实测 `scrollLeftMax` 764 / 384、页面 body 不横滚——无裁剪回归。
+- **机器校验**：3 道新关卡（`check_canvas_sections` 7 模块顺序 / 注册表 / 锚点 / tab 行、`check_no_stale_view_links` `#view=` 白名单、`check_no_dup_render_helpers` 扩「`市场 Market` ≤ 1」）均并入 `make check`。`make build` exit 0（当前 main 独立复跑）、`make sync` 幂等、`docs/data/` 零 diff。
+
+**发现并处置：**
+
+- **7 个失效 `xxResolveId` 委托函数**（棒 2 删 `render*` 包装后零调用点，[ADR-085] 要防的 clone-and-own 残留，`check_no_dup_render_helpers` 的「纯委托」例外未拦下）——已删（PR #114），docstring 同步。
+- **棒 1 `1ca157e` / 棒 5 `6cd7421` 直推 main、未过 PR / `pr-build.yml`**——棒 5 ROADMAP 记为交互式会话（§六 允许 owner 直推）；棒 1 计划原为「独立 PR」。审查在直推后的 main 上独立跑 `make build` = 全绿、PR #114 的 CI `build` 也在含真实 `.cache` 的环境复核过，无破损入库。ROADMAP §三「合并节奏」行改为记录实际路径。
+- **棒 5「非专业读者实测」由 agent 在用户授权下执行**（[ADR-phase4-canvas-polish]）——[CLAUDE.md §四] 认可全新上下文 agent 作独立视角，较 Phase 2 用户亲测弱一档，记录不阻断。
+- **测试缺口**：棒 5 Playwright 巡检仅 1440px 单宽。窄视口滚动本审查已实测可用，但无回归护栏——建议后续加「`.td-plot-wrap` `scrollWidth > clientWidth` @ 窄宽」断言（非阻断，转 §一 视觉迭代）。
+
+**定了什么：**
+
+1. **Phase 4「单页画布合并」认定完成**，ROADMAP §三顶层条目 `[ ]`→`[x]`。判据 = [ADR-phase4-canvas-layout] 5 项决策全部落地 + 7 模块 merge-ready 对账表逐条兑现 + 3 道机器关卡 + 独立视角审查（本条）无阻断项。
+2. **v2.0 Phase 序列（Phase 0–4）至此全部完成**，北极星（[ADR-057]）达成：7 个可视化模块合并为单页纵向画布，矩阵 / 时区 / 健康度进「更多」二级横条，档案页经矩阵行链接进入。
+3. 剩余项转 §一 常态迭代：[ADR-phase4-canvas-polish] 记录的「判定为诚实呈现 / 结构性遗留」项、窄视口回归护栏、`[ADR-xxx]` 裸链接（[ADR-072]）、违约瀑布 `resource` 英文态（[ADR-051]）。
+
+**没做：** 不改棒 1–5 与 [ADR-phase4-canvas-polish] 的正文（[CLAUDE.md §八] 只增补不改写）；本条不动前端（审查只读；PR #114 的死代码清理是独立逻辑改动）。
+
+**验证：** 纯文档（`PROJECT/DECISIONS.md` 本条 + `PROJECT/ROADMAP.md` §三顶层 `[x]` + 收口子条目 + 「合并节奏」行 + §一 三处）。`make build` 全绿、`make sync` 幂等、adr-index 生成块重算入本条 slug、其余生成块零 diff。
 
 **日期：** 2026-09-06
