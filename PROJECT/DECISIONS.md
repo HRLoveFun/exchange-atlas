@@ -109,6 +109,7 @@
 - ADR-canvas-ui-iterate · 2026-09-06 · 画布 UI 常态迭代：市场选择条常驻 + 地区分组选择面板 + 折叠 toggle + 说明段按需展开
 - ADR-kr-krx-legacy-closeout · 2026-09-06 · 数据遗留项会话：kr-krx 整理期坐实 + order_book_transparency 升 medium + Section 31 FY2027 复核
 - ADR-supply-chain-ci-hardening · 2026-09-06 · 供应链 / CI 加固：依赖哈希锁定 + Dependabot + CI「quote 真实性闸」
+- ADR-add-exchange-skill-forge · 2026-09-06 · 用实际新增交易所迭代 add-exchange 为 v2.0 对齐的通用 skill；候选池：越南市场
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2929,5 +2930,22 @@ print('全库 medium 零 sources:',n)
 **分支 `origin/0001`：** 审查顺带发现的陈旧分支，经用户确认是**永久保存的快照**（指向 `2e1ba34`「guard e2e C (#111)」，是 `main` 线性历史倒数第 16 个提交的冻结指针）。处置：在该分支上加一个归档标记提交（根目录 `ARCHIVE.md`，走 base=`0001` 的 PR），并在 `GIT-RUNBOOK.md`「定期清理残留分支」加不删不动例外条——防下一个会话按「清理残留分支」判据把它删了。
 
 **验证：** `make build` 全绿（`selfcheck` / `validate` 20 家 0/0 / `verify_quotes` FAIL=0 / 8 关全过 / 生成块零 diff）、`make sync` 二次幂等；`tools/requirements.txt` 哈希锁在干净 venv 里 `pip install --require-hashes` 通过、`import yaml/jsonschema/requests` OK；`pr-build.yml` 经 `python3 -c "import yaml"` 解析无误。CI「quote 真实性闸」的端到端红/绿只能在真实 PR 上验证，逻辑与 `verify_quotes.py` 退出码语义对齐。
+
+**日期：** 2026-09-06
+
+### ADR-add-exchange-skill-forge — 用实际新增交易所迭代 add-exchange 为 v2.0 对齐的通用 skill；候选池：越南市场
+
+**背景：** `add-exchange` skill 上一次「定型」是 v0.1（SSE/HKEX）+ v0.2（NYSE/JPX/Eurex）+ v1.0 两波 + v1.1 Batch 1 共 28 次串 / 并行实操（[ADR-016] / [ADR-017] / [ADR-021] / [ADR-031] / [ADR-032]），此后 [ADR-041] 把新增交易所降为「按需可选能力、agent 不主动提议」，skill 被冻在原地。但 v2.0 高度可视化转向（Phase 0–4，[ADR-035]～[ADR-095] + [ADR-phase4-closeout]）之后，一次完整新增要做的事已经变了：第五章要直接落 `spec`（含 [ADR-042] 的 `execution_model` / `error_trade_rule` / `order_book_transparency` / `order_types` / `tick_size`）、成本瀑布 / 交割管线 / 上市生命周期 / 监管图 / 参与者 / 风险旗标六个模块各有 `spec` 与 `*_note` 需求、市场机制剖面与单页画布要逐所自检、`make check` 关卡从 v1.1 的十几项涨到几十项。**skill 的十一章步骤从未在这套新契约下被真正跑过一次**——它与当前 schema / 校验 / 视图的脱节是静默的，没人知道断在哪。
+
+**为什么需要：** skill 是 [ADR-041] 那项「按需可选能力」的唯一实现载体，载体腐化 = 能力名存实亡。光靠读代码比对补 skill 不可靠（v2.0 的改动散在几十条 ADR 里），只有真跑一遍完整新增才能把摩擦点逼出来。同时 20 家的地区覆盖里东南亚仍是明显空白（[ADR-016] ① 的填空目标），越南市场是合适的真实样本。
+
+**要达成的目标（可核验状态）：**
+1. **越南市场入库**：HOSE（胡志明证交所）为主，HNX（河内证交所）视 `group_id` / [ADR-036] #1 `federation_of` 压测需要一并——两所同属 VNX（越南交易所）控股，正好检验「姊妹所不把规则塞进彼此 `boards`」这条设计在又一个真实案例下站不站得住。数据过 `make build` 全绿、`verify_quotes` FAIL=0，并按 [CLAUDE.md §四] / [ADR-081] 做独立视角复核（≥95% 通过率）。
+2. **每个 skill 摩擦点就地回写 `.claude/skills/add-exchange/SKILL.md`**——步骤过时、字段缺失、校验没覆盖到的 `spec` 形状、剖面 / 画布自检缺的动作，逐条改进 skill 正文（不只在 ROADMAP 记一句，[CLAUDE.md §八]）。
+3. **收官时 skill 达到通用性**：十一章步骤覆盖 `spec` 层 + 六模块 `spec` / `*_note` + 剖面与单页画布自检，冷启动子代理在 v2.0 契约下可靠执行——即 [ADR-017] 并行子代理模式在 v2.0 契约下重新成立的前提。
+
+**如何达成：** 走 `/add-exchange` 的「新增整所」路径。候选池当前只有越南市场；后续若继续，仍从 [ADR-016] ①（东南亚 / 中东 / 非洲 / 拉美空白）取样。**本 ADR 起，「用实际新增迭代 skill」是一条已排期的开发轨**（ROADMAP §一「当前重点」+ §三「广度扩张 · skill 迭代轨」带 `- [ ]`），此轨内的新增**不受 [ADR-041]「agent 不主动规划 / 提议 / 启动」约束**；[ADR-041] 的其余部分（skill 十一章骨架原样保留、schema 触发条件语义、迭代轨之外的随口新增仍需用户触发、不在下一步建议里泛列「加某家」）不变。
+
+**没改什么：** `CLAUDE.md`（[ADR-041] 已判过 scope / roadmap 类不进宪法，本轨同理）；已有 20 家数据；`add-exchange` skill 的十一章骨架（迭代是就地改进，不是重写）；[ADR-036] 以「用户触发的新增满足条件时」为触发语义的 schema 裁定。
 
 **日期：** 2026-09-06

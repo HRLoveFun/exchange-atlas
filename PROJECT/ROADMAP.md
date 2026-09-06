@@ -20,10 +20,15 @@
 
 北极星（[ADR-057]）**已达成**：7 个可视化模块（监管图 / 参与者图 / 市场机制剖面 / 成本瀑布 / 交割管线 / 上市生命周期 / 风险旗标）合并为同一页整宽纵向滚动画布，矩阵 / 时区 / 健康度进「更多」二级横条，档案页经矩阵行链接进入。Phase 4 棒 1–5 于 2026-09-06 全部落地（[ADR-phase4-canvas-layout] / [ADR-phase4-canvas-polish]），同日经独立视角审查收口（[ADR-phase4-closeout]，无阻断项）。**v2.0 高度可视化转向（Phase 0–4）至此收官**；后续为常态迭代（§一「下一步」）。
 
+### 当前重点：用实际新增交易所迭代 add-exchange skill（[ADR-add-exchange-skill-forge]）
+
+v2.0 收官后无活跃 Phase。当前开发重点：**通过真实走一遍完整新增，把 `add-exchange` skill 迭代成与 v2.0 契约对齐的通用 skill**——skill 上次定型于 v1.1（[ADR-032] 时代），此后 `spec` 结构化层 / [ADR-042] 第五章三字段 / 六个可视化模块的 `spec` 与 `*_note` 需求 / 市场机制剖面与单页画布的逐所自检都没进过它的十一章步骤，脱节是静默的。候选池：**越南市场**（HOSE 胡志明证交所为主，HNX 河内证交所视 `group_id` / [ADR-036] #1 压测需要一并）。此轨是 [ADR-041]「agent 不主动规划 / 提议新增」的显式例外，迭代轨之外的随口新增仍需用户触发。详版见 §三「广度扩张」。
+
 ### 下一步
 
 *（3–5 条优先级判断，不编号；详版与「刚落地什么」都在 §三 / `git log`）*
 
+- **用实际新增迭代 add-exchange skill**（[ADR-add-exchange-skill-forge]，当前重点）— 走 `/add-exchange` 新增越南市场（HOSE 为主，HNX 视 `group_id` 压测需要），把每个卡壳点（步骤过时 / 字段缺失 / 校验未覆盖的 `spec` 形状 / 剖面·画布自检缺的动作）就地回写 `.claude/skills/add-exchange/SKILL.md`；数据过 `make build` + 独立视角复核 ≥95%，skill 收官达到「冷启动子代理在 v2.0 契约下可靠执行」。详版见 §三「广度扩张」。
 - **画布常态迭代**（交互式会话，Phase 4 已收口 [ADR-phase4-closeout]，以下均非阻断）— ① **窄视口回归护栏**：棒 5 Playwright 巡检仅 1440 单宽，加「`.td-plot-wrap` `scrollWidth > clientWidth` @ 窄宽」断言（审查已实测窄视口横滚可用，缺的是护栏）；② 画布内「跳到某模块」目录 / 侧边导航（[ADR-phase4-canvas-layout]「没做」段，纵向长图先靠滚动 + section 锚点）；③ 移动端专属布局优化（纵向长图天然单列，超出「无回归」的优化）。
 - **已做齐模块的视觉迭代**（交互式会话，与上并行）— 棒 5 已收口：成本瀑布（全零合计 / 暗色不征虚线）、交割管线（深色预防层）、风险旗标（low 色条）、上市生命周期中英混排（[ADR-093]）；诚实呈现不改几何的三项（T+1 右半留白 / 单一费种镜像留白 / 按股定额折算）理由已记 ADR。**仍挂**：成本瀑布左半留白的进一步方案已关闭但可复议；违约瀑布 `resource` 短语 en（[ADR-051] 触发条件：数据窗口回填约 70 短语）、模块说明段 `[ADR-xxx]` 裸链接（[ADR-072]）、监管图 / 参与者图长散文卡内硬裁剪 + `<title>` / 浮层（[ADR-035] D 设计内）。
 - **数据遗留项**（横切，与上并行，非 Phase 4 前置）— `kr-krx` 7 处 low 待人工投喂（`order_book_transparency` 已由 KRX 규정 포털韩文一手坐实升 medium）、`kr-krx exchange_fees` 当期档位（KRX 收费表载于《업무규정》别表、未上 HTML，규정 포털排查未果，[ADR-kr-krx-legacy-closeout]）、`us` Section 31 FY2027 公告（2026-09-06 复核仍未发布，FY2027 目前仅 Section 6(b) 注册费公告，预计 2027 年初出）、`fr-euronext stamp_duty`（一所七国，`rate: null` 是正确终态）、上市生命周期 `cn-szse` 整理期 15 交易日仍待含阿拉伯数字一手源（中文 2026 版与创业板英译 2022 版均已取得、条文均拼「十五 / fifteen trading days」，仅主板英译 2024 版未核——www/english 主站子域 TCP 不通、wayback 无快照，待人工下载）/ `kr-krx` 整理卖出 7 交易日已由 FSC 新闻稿坐实（[ADR-091] 个位数转写口径）。数据空缺复核轨任务一～六 + stable 档来源闭环（[ADR-094]）均已完成，详版见 §三。
@@ -291,12 +296,27 @@
   - **验收**：`make build` 全绿、`make sync` 幂等；哈希锁在干净 venv 通过 `--require-hashes` 安装。端到端红/绿待真实 PR 验证。**审查里未做、留后续**（关 Actions approve-PR 权限 / actions 钉 SHA / commit signing / 宪法加「抓取内容 = 不可信输入」条 / 收紧 auto-merge 对数值字段 PR）见 ADR「未做」段。
   - **分支 `origin/0001`**：经用户确认是永久保存的快照（指向 `2e1ba34`），已加归档标记 + `GIT-RUNBOOK.md` 不删例外条。
 
-### 广度扩张（新增交易所，原「Phase 4 · Wave 3」）——按需可选能力，非计划阶段
+### 广度扩张（新增交易所）——① skill 迭代轨（活跃）+ ② 按需新增（可选能力）
 
-见 [ADR-041]。不排进 Phase 序列、无"解冻条件"，不带进度框。
+两条并存。①（[ADR-add-exchange-skill-forge]）是当前重点、带进度框；②（[ADR-041]）不排进 Phase 序列、无"解冻条件"、不带进度框。
+
+#### ① skill 迭代轨（活跃，[ADR-add-exchange-skill-forge]）
+
+用实际新增把 `add-exchange` skill 迭代成 v2.0 对齐的通用 skill——skill 上次定型于 v1.1（[ADR-032]），此后 `spec` 层与六个可视化模块的需求 / 剖面 / 单页画布自检都没进过它的步骤，且脱节是静默的。
+
+- [ ] **越南市场新增 + skill 迭代**（候选池当前唯一目标）
+  - **为什么**：[ADR-041] 那项「按需可选能力」的唯一实现载体已随 v2.0 静默腐化，读代码补不可靠，只有真跑一遍完整新增才能把摩擦点逼出来；东南亚也是 [ADR-016] ① 的地区空白。
+  - **数据目标**：HOSE（胡志明证交所）入库为主，HNX（河内证交所）视 `group_id` / [ADR-036] #1 `federation_of` 压测需要一并——两所同属 VNX（越南交易所）控股，检验「姊妹所不把规则塞进彼此 `boards`」设计。过 `make build` 全绿 / `verify_quotes` FAIL=0 / 独立视角复核 ≥95%（[CLAUDE.md §四] / [ADR-081]）。
+  - **skill 产出**：每个摩擦点就地回写 `.claude/skills/add-exchange/SKILL.md`——① 第五章直接填 `spec`（含 [ADR-042] 的 `execution_model` / `error_trade_rule` / `order_book_transparency` / `order_types` / `tick_size`）；② 成本瀑布 / 交割管线 / 上市生命周期 / 监管图 / 参与者 / 风险旗标六模块的 `spec` 与 `*_note` 需求逐条补进步骤；③ 市场机制剖面 + 单页画布逐所自检写成明确动作；④ v1.1 之后新增的 `make check` 关卡（`spec` 5b–5d / `check_ui_i18n` / `check_canvas_sections` / …）在 skill 里点名。
+  - **收官判据**：skill 十一章步骤覆盖上述四点，冷启动子代理在 v2.0 契约下可靠执行（[ADR-017] 并行模式重新成立的前提）。
+  - **步骤**：`/add-exchange` 走「新增整所」路径；[ADR-036] #1 `federation_of` / #9 `rule_level` 触发条件按「本次新增是否满足」现判。
+
+#### ② 按需新增（可选能力，[ADR-041] 不变）
+
+迭代轨之外的随口新增（用户日后想加某一家）仍是按需能力：
 
 - `add-exchange` skill 十一章完整流程**原样保留**，随时可用（`/add-exchange` 或口头要求）。
-- **仅在用户主动要求时执行；agent 不主动提议、规划或启动新增交易所**，也不在下一步任务建议里列「加某家交易所」。
+- **迭代轨之外仅在用户主动要求时执行；agent 不主动提议、规划或启动**，也不在下一步任务建议里泛列「加某家交易所」。
 - 用户触发某次新增时：候选思路见 [ADR-016]（补东南亚 / 中东 / 非洲 / 拉美空白）；若纳入第 3 个 MENA/非洲所同步执行 [ADR-036] #2 的 `region` 拆分（#1 `federation_of` / #9 `rule_level` 触发条件同理）；子代理任务里加"第五章直接填 `spec`（含 [ADR-042] 的 `execution_model` / `error_trade_rule` / `order_book_transparency` / `order_types` / `tick_size`）、并在市场机制剖面里自检"。
 
 ---
