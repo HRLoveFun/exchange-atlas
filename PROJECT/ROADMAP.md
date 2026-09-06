@@ -8,7 +8,7 @@
 > - **当前版本的计划与进度** → 三、v2.0 计划：高度可视化转向
 > - **v0.x / v1.x 已全部完成** → 四、历史归档，只在需要追溯时读
 >
-> **怎么改这份文件**：§三详版就地改；**§一「下一步」「最近完成」是单写者资源**——后台任务 / worktree 只往 `ROADMAP-INBOX.md` 追加便签，由交互式会话折叠进 §一（机制见 [ADR-069]、`CLAUDE.md` §八）。
+> **怎么改这份文件**：§三详版逐条 checklist，并行改不同条目 git 合并干净、就地改。§一「下一步」是 3–5 条优先级判断、不编号，只在阶段切换 / 优先级重排时改（罕见）；任何会话可直接改（后台走 PR），并行改同一处 → git 文本冲突可见（`CLAUDE.md` §八 / `GIT-RUNBOOK.md`）。事实只在 §三写一遍。
 
 ---
 
@@ -20,19 +20,13 @@
 
 北极星（[ADR-057]）：这几个按主题分的视图是过渡形态，终态合并为单页可视化画布、其余视图（矩阵 / 时区 / 健康度 / 档案页）降级到「更多」入口。**Phase 3「其余章节可视化」六个模块已全部收口（[ADR-095]，2026-09-06，用户拍板），[ADR-057] #4 的 Phase 4 启动硬前置满足；Phase 4（单页画布合并）转为可启动——本体未开工，画布整体布局形态 / 「更多」入口形态 / 模块排序 / 路由深链兼容留启动时 Q&A 定。**
 
-### 下一步（按此顺序）
+### 下一步
 
-1. **Phase 4 · 单页画布合并** — 把市场机制剖面 / 成本瀑布 / 交割管线 / 上市生命周期 / 监管图 / 参与者图 / 风险旗标合并为同一页一块可视化画布，矩阵 / 时区甘特条 / 数据健康度 / 档案页降「更多」入口（[ADR-057]）。启动 Q&A 定：整体布局形态（纵向滚动 / 缩放平移 / 分区网格）、「更多」入口形态、各模块排序、路由深链兼容；每个模块的 merge-ready 锚定关系按 [ADR-057] 清单逐条回答。详版见三节 `- [ ] **Phase 4 · 单页画布合并**`。
-2. **已做齐模块的视觉迭代**（交互式会话，不阻断 Phase 4，与上并行）— 成本瀑布（[ADR-047]：单一费种远大于其余时左半留白 / 全零市场「合计 0.00 bp」/ 暗色「此侧不征」虚线偏弱 / 按股·定额费折算粗）、交割管线（[ADR-051]：深色预防层偏淡 / T+1 现货所右半留白 / 违约瀑布 `resource` 短语无 `en`、英文态仍中文）、监管图 / 参与者图 / 风险旗标（[ADR-061]/[ADR-064]/[ADR-066]：卡内长散文按卡高硬裁剪 + 全文进 `<title>` / 浮层；风险旗标 `low` 卡左缘色条暗色下几乎不可见）。剖面机制核心面板右缘避让（[ADR-070]）、零轴刻度改标参考价名称（[ADR-073]）、四模块共用折行 token 化（[ADR-093]，关闭 [ADR-061] 局限④ 及 [ADR-059]/[ADR-064]/[ADR-066] 镜像）均已落地。
-3. **数据遗留项**（横切，与上并行，非 Phase 4 前置）— `kr-krx` 8 处 low 待人工投喂、`kr-krx exchange_fees` 当期档位（KRX 数据端点对数据中心 IP 封锁，[ADR-075] 已探明）、`us` Section 31 FY2027 公告（SEC 未发布，OPEN-QUESTIONS #88）、`fr-euronext stamp_duty`（一所七国，`rate: null` 是正确终态）、上市生命周期 `cn-szse` 整理期 15 交易日 / `kr-krx` 整理卖出 7 交易日待含阿拉伯数字一手源（[ADR-091]）。数据空缺复核轨任务一～六 + stable 档来源闭环（[ADR-094]）均已完成，详版见三节。
+*（3–5 条优先级判断，不编号；详版与「刚落地什么」都在 §三 / `git log`）*
 
-完整清单见三节 `- [ ] **Phase 4 · 单页画布合并**` 及其上「Phase 3 · 其余章节可视化」收口条目。
-
-### 最近完成（滚动窗口，只留最近 3 条；更早的见三节）
-
-- **2026-09-06 · Phase 3「其余章节可视化」收口 + Phase 4 解锁**（[ADR-095]）— 六个章节可视化模块渲染层全部落地（成本瀑布 / 交割管线 / 上市生命周期 / 监管图 / 参与者图 / 风险旗标）+ 风险旗标数据子棒 28/28 收口，[ADR-057] #4 的 Phase 4 启动硬前置全部满足，用户拍板 Phase 3 完成；Phase 4 转可启动（本体未开工，复选框保持 `[ ]`，启动需 Q&A）。
-- **2026-09-06 · 四模块共用折行改 token 折行**（[ADR-093]）— `wrapByCharBudget` 旧实现把中文里的拉丁词 / 数字从词中切断，改单条 token 折行（既有纯 CJK / 纯拉丁行为逐字保持，5000 随机样例 0 mismatch）；新机器关卡 `check_wrap_mixed.py` 挂进 `make check`。关闭 [ADR-061] 局限④ 及 [ADR-059]/[ADR-064]/[ADR-066] 镜像。
-- **2026-09-05/06 · OQ #45 四家旗舰所衍生品覆盖缺口落地**（jp-jpx/cn-sse/us-nyse/us-nasdaq）— products 衍生品条目 + `market_structure.derivatives` + `clearing.derivatives` 两组子章整组建制消除「第四章缺项背书第五章缺口」的循环（[ADR-082] 依据 7）；四代理并行 + 两隔离视角盲审 117 处判定（PASS 102/FIX 3/QUESTION 5，零幻觉，判定表 `PROJECT/OQ45-DERIV-SPOT-CHECK.md`）；`make build` 全绿、verify_quotes FAIL=0。留空与待办汇总见 OPEN-QUESTIONS #46 与四家悬案条目。
+- **Phase 4 · 单页画布合并** — 把市场机制剖面 / 成本瀑布 / 交割管线 / 上市生命周期 / 监管图 / 参与者图 / 风险旗标合并为同一页一块可视化画布，矩阵 / 时区甘特条 / 数据健康度 / 档案页降「更多」入口（[ADR-057]）。启动 Q&A 定：整体布局形态（纵向滚动 / 缩放平移 / 分区网格）、「更多」入口形态、各模块排序、路由深链兼容；每个模块的 merge-ready 锚定关系按 [ADR-057] 清单逐条回答。详版见 §三 `- [ ] **Phase 4 · 单页画布合并**`。
+- **已做齐模块的视觉迭代**（交互式会话，不阻断 Phase 4，与上并行）— 成本瀑布（[ADR-047]：单一费种远大于其余时左半留白 / 全零市场「合计 0.00 bp」/ 暗色「此侧不征」虚线偏弱 / 按股·定额费折算粗）、交割管线（[ADR-051]：深色预防层偏淡 / T+1 现货所右半留白 / 违约瀑布 `resource` 短语无 `en`、英文态仍中文）、监管图 / 参与者图 / 风险旗标（[ADR-061]/[ADR-064]/[ADR-066]：卡内长散文按卡高硬裁剪 + 全文进 `<title>` / 浮层；风险旗标 `low` 卡左缘色条暗色下几乎不可见）。
+- **数据遗留项**（横切，与上并行，非 Phase 4 前置）— `kr-krx` 8 处 low 待人工投喂、`kr-krx exchange_fees` 当期档位（KRX 数据端点封数据中心 IP，[ADR-075]）、`us` Section 31 FY2027 公告（SEC 未发布，OPEN-QUESTIONS #88）、`fr-euronext stamp_duty`（一所七国，`rate: null` 是正确终态）、上市生命周期 `cn-szse` 整理期 15 交易日 / `kr-krx` 整理卖出 7 交易日待含阿拉伯数字一手源（[ADR-091]）。数据空缺复核轨任务一～六 + stable 档来源闭环（[ADR-094]）均已完成，详版见 §三。
 
 ---
 
@@ -205,7 +199,7 @@
 
 - [x] **不变式纯函数合成用例自检**（横切条目，2026-09-03，[ADR-063]；接 [ADR-062] 审查反馈）— [ADR-059]/[ADR-062] 的 `not_applicable` / `optional` 判定抽了纯函数但探针一次性跑过就丢，B/D 桶勘误回 F 后**全库无真实 `not_applicable`**，`validate.py` 这两条检查跑不到核心分支。新增 `tools/selfcheck.py`（stdlib，无 pytest）固化 24 条正负向用例（`field_na_violations` 6 / `chapter_na_violations` 6 / `count_chapter_leaves` 8 / `chapter_is_not_applicable` 4），接入 `make check`（排 `validate` 前）；`validate.py` 抽 `chapter_na_violations()` 纯函数（内联调用点行为等价）。负向探针确认失配 → 退出码 1。今后新增 / 改一条不变式纯函数 = 顺手补 `selfcheck.py` 用例（[CLAUDE.md §四] 操作化落点）。
 
-- [x] **并行 worktree 防失序 · 四道护栏**（横切条目，2026-09-04，[ADR-069]）— 2026-09-03/04 三条后台 worktree 并行 → 合并把 `main` 的 `make check` 合红（`c0c2b04`，PR #63 收拾）。四类失序、成因各异，共同点是并行分支各自手写 git 无法语义合并的单写者资源。四道护栏：① `validate.py` 加 `roadmap_nextstep_violations` / `roadmap_recent_violations`（§一「下一步」编号 `1..n` 连续无重复、「最近完成」≤3）+ `validate_no_conflict_markers`（全库扫 `<<<<<<< ` / `||||||| ` / `>>>>>>> ` 残留），`selfcheck` 加 12 条用例；② §一 改单写者——新增 `PROJECT/ROADMAP-INBOX.md`，后台任务只往收件箱追加便签、由交互式会话折进 §一，`CLAUDE.md §八` 改写；③ `GIT-RUNBOOK.md` 定「后台 PR 串行合并、每合一个 `git pull --ff-only && make build`、红则停」；④ 新增 `PROJECT/ADR-LEDGER.md` 编号台账 + `validate.py` `adr_ledger_violations`（`DECISIONS.md` 每条 ADR 都登记过、台账编号连续无重复），`selfcheck` 加 7 条用例。`selfcheck` 24→43。**未做（列 [ADR-069]）**：`renumber_adr.py` 机械让号、`DECISIONS.md` 拆文件、CI。**已知局限**：护栏 3 是纪律非机器强制（后台任务平台限制不能装 CI 卡点）；§一 折叠动作仍靠交互式会话记得做；`make check` 全绿 ≠ 无并行风险，只覆盖这四类已复现的。`make build` 全绿、`data/` 与 `docs/data/` 零 diff。
+- [x] **并行 worktree 防失序 · 四道护栏**（横切条目，2026-09-04，[ADR-069]）— 2026-09-03/04 三条后台 worktree 并行 → 合并把 `main` 的 `make check` 合红（`c0c2b04`，PR #63 收拾）。四类失序、成因各异，共同点是并行分支各自手写 git 无法语义合并的单写者资源。四道护栏：① `validate.py` 加 `roadmap_nextstep_violations` / `roadmap_recent_violations`（§一「下一步」编号 `1..n` 连续无重复、「最近完成」≤3）+ `validate_no_conflict_markers`（全库扫 `<<<<<<< ` / `||||||| ` / `>>>>>>> ` 残留），`selfcheck` 加 12 条用例；② §一 改单写者——新增 `PROJECT/ROADMAP-INBOX.md`，后台任务只往收件箱追加便签、由交互式会话折进 §一，`CLAUDE.md §八` 改写；③ `GIT-RUNBOOK.md` 定「后台 PR 串行合并、每合一个 `git pull --ff-only && make build`、红则停」；④ 新增 `PROJECT/ADR-LEDGER.md` 编号台账 + `validate.py` `adr_ledger_violations`（`DECISIONS.md` 每条 ADR 都登记过、台账编号连续无重复），`selfcheck` 加 7 条用例。`selfcheck` 24→43。**未做（列 [ADR-069]）**：`renumber_adr.py` 机械让号、`DECISIONS.md` 拆文件、CI。**已知局限**：护栏 3 是纪律非机器强制（后台任务平台限制不能装 CI 卡点）；§一 折叠动作仍靠交互式会话记得做；`make check` 全绿 ≠ 无并行风险，只覆盖这四类已复现的。`make build` 全绿、`data/` 与 `docs/data/` 零 diff。**（2026-09-06 补记：护栏 ① 的 `roadmap_nextstep/recent_violations` 校验、护栏 ②〔ROADMAP-INBOX〕、护栏 ④〔ADR 编号台账〕已由 [ADR-slim-coordination-machinery] 移除——「§一 折叠靠人记得做」这条已知局限正是移除动因；§一「下一步」改不编号、任何会话直接改，ADR 改 slug 标识、撞车 = `DECISIONS.md` 上的可见文本冲突。保留：护栏 ① 的 `validate_no_conflict_markers` 冲突标记扫描、护栏 ③ 的串行合并纪律。）**
 
 - [x] **前端隐去 taxonomy 章序数**（横切条目，2026-09-04，[ADR-072]，原占 ADR-070，撞已合并的 [ADR-070]/[ADR-071]，按 ADR-029 协议让号）— 六个可视化视图的设计思想段落写「本视图由第X章《XXX》……驱动」，SVG 空态 / 工具条另有「见档案页第五章」「第 8 章未记录」「第三章 8 字段固定槽位」等，档案页左栏以 `chapter_no + ". "` 渲染「2. … 12.」——这套序数来自 `taxonomy.yml` 的 `chapter_no`（源自原始十三章大纲，[ADR-010]），前端没有一个页面把它当目录呈现，读者看到「第五章」无从知道是什么的第五章。二选一（加框架标签页 / 隐去）取**隐去**：与北极星逆行的是加标签（[ADR-057] Phase 4 要减标签），且病灶是序数不是章名。改法：`docs/assets/app.js` 约 15 处 reader-facing 串删序数、保留章节名 + 「每所档案页某章」的指向（英文态用 `taxonomy` 的 `label_en` 原词），档案页导航去掉数字前缀（`chapter_no` 仍留 `taxonomy` / `docs/data`，只是不进 DOM）。新增 `tools/check_no_chapter_ordinals.py`（复用 `check_ui_i18n.scan` 扫 app.js 字面量 + index.html 正文，命中 `第X章` / `Chapter N` 即 FAIL，注释放行），并入 `make check`。**未做**：档案页导航顶部框架说明行 + footer 链接（「可选补强」，留 Phase 4）；`[ADR-xxx]` 链接改人话（相关但独立）。合并 `origin/main`（含 [ADR-070] 面板避让 / [ADR-071] 成本瀑布佣金迭代 / [ADR-066] 风险旗标渲染层）后：语义合并了 `cwProse()` 一处真实代码冲突（保留 [ADR-071] 的 5 费种新内容，套用本条去序数改法）；新加的 `check_no_chapter_ordinals.py` 当场抓出风险旗标模块（合并前不存在、不在本条原始 15 处范围内）也带同款「第十二章」/`Chapter 12` 悬空引用（`rfProse` 说明段 + 工具条note，共 4 处），一并按同一改法修掉——验证了本条机器校验拦「后续新视图再犯」的设计意图确实生效。`make build` 全绿（`check_no_chapter_ordinals` OK、`check_ui_i18n` OK、`validate` 0/0、`verify_quotes` FAIL=0）、`make sync` 幂等、`data/` 与 `docs/data/` 及生成块零 diff（只动前端 + `tools/` + `Makefile` + `PROJECT/`）。
 
