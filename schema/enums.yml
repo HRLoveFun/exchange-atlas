@@ -152,4 +152,3 @@ yes_no:
     - {id: "yes", label_zh: 有, label_en: "Yes"}
     - {id: "no", label_zh: 无, label_en: "No"}
     - {id: partial, label_zh: 部分/有限, label_en: Partial}
-# guard e2e 测试 B（2026-09-06）：本行触及受保护路径 schema/，用于验证 guard 阻断 + owner-approved 放行；测试 C 删除
