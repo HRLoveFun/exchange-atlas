@@ -2928,21 +2928,21 @@
     });
   }
 
-  // ── Notion 式右侧模块导航（2026-09-06 三轮迭代；四轮收起态改半透明圆钮）──
-  //   常驻 = 右缘一个半透明圆形按钮；hover / 点击展开为模块名列表（当前所在
-  //   模块高亮，IntersectionObserver 判定）；点击条目跳转对应 section
-  //   （scroll-margin-top 已让过页头 + 吸顶条），并 history.replaceState 同步
-  //   section 深链参数（不触发 route 重渲染）。仅画布视图显示（route() 控制
-  //   hidden），窄屏隐藏。
+  // ── Notion 式右侧模块导航（2026-09-06 三轮迭代；四轮收起态改圆形按钮）──
+  //   常驻 = 右缘一个半透明圆形按钮（不显眼）；hover 按钮区域展开导航列表
+  //   （模块名 + 细横线，当前所在模块的线更长、主题色）；点击跳转对应
+  //   section（scroll-margin-top 已让过页头 + 吸顶条），并 history.replaceState
+  //   同步 section 深链参数（不触发 route 重渲染）。仅画布视图显示
+  //  （route() 控制 hidden），窄屏隐藏。
   function buildCanvasNav() {
     var nav = $("#canvas-nav");
     if (!nav) return;
-    nav.innerHTML = CANVAS_SECTIONS.map(function (s) {
-      return '<button type="button" class="canvas-nav-item" data-role="canvas-nav-jump" data-module="' + s.id + '" title="' + esc(s.title) + '">' +
-        '<span class="canvas-nav-label">' + esc(s.title) + "</span></button>";
-    }).join("") +
-      '<button type="button" class="canvas-nav-fab" data-role="canvas-nav-fab" aria-haspopup="true" aria-expanded="false"' +
-      ' title="' + esc(t("模块导航", "Sections")) + '" aria-label="' + esc(t("模块导航", "Sections")) + '">☰</button>';
+    nav.innerHTML = '<button type="button" class="canvas-nav-dot" aria-label="模块导航 Sections">☰</button>' +
+      '<div class="canvas-nav-items">' + CANVAS_SECTIONS.map(function (s) {
+        return '<button type="button" class="canvas-nav-item" data-role="canvas-nav-jump" data-module="' + s.id + '" title="' + esc(s.title) + '">' +
+          '<span class="canvas-nav-label" aria-hidden="true">' + esc(s.title) + "</span>" +
+          '<i class="canvas-nav-line" aria-hidden="true"></i></button>';
+      }).join("") + "</div>";
   }
   var canvasNavObserver = null;
   function observeCanvasSections() {
@@ -3011,21 +3011,11 @@
   // ══════════════════════════════════════════════
   // 事件委托
   // ══════════════════════════════════════════════
-  // 右侧导航展开态收起（fab 点击切换 / 点外部 / 跳转后 / Escape 共用）
-  function closeNavFlyout() {
-    var nav = $("#canvas-nav");
-    if (!nav || !nav.classList.contains("open")) return;
-    nav.classList.remove("open");
-    var fab = nav.querySelector(".canvas-nav-fab");
-    if (fab) fab.setAttribute("aria-expanded", "false");
-  }
   document.addEventListener("click", function (e) {
     // 市场选择面板：点击选择条以外区域即收起（选市 / 开合按钮的分支自会处理）
     if (!e.target.closest(".canvas-marketbar")) {
       $all(".market-panel:not([hidden])").forEach(function (p) { p.hidden = true; });
     }
-    // 右侧导航：点击导航区以外区域收起展开态（fab / 条目的分支自会处理）
-    if (!e.target.closest(".canvas-nav")) closeNavFlyout();
     // 点击遮罩本身（不是里面的面板）关闭浮层——必须在 data-role 分派之前单独判断，
     // 否则面板内部没有 data-role 的普通文字（如摘录段落）点击后，
     // closest("[data-role]") 会一路冒泡穿过面板找到外层遮罩的 data-role，误触发关闭。
@@ -3084,7 +3074,7 @@
       openProseOverlay(hit.dataset.module);
     } else if (role === "canvas-nav-jump") {
       // Notion 式右侧导航：跳到对应 section（锚点 scroll-margin-top 让过吸顶层），
-      // 并 replaceState 同步 section 深链参数——不触发 route 重渲染。跳转后收起展开态。
+      // 并 replaceState 同步 section 深链参数——不触发 route 重渲染。
       var navSec = document.getElementById("section-" + hit.dataset.module);
       if (navSec) {
         navSec.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -3092,13 +3082,6 @@
         np.section = hit.dataset.module;
         history.replaceState(null, "", "#" + new URLSearchParams(np).toString());
       }
-      closeNavFlyout();
-    } else if (role === "canvas-nav-fab") {
-      // 圆形按钮点击切换展开态（触屏没有 hover；桌面 hover 也可展开）
-      var navOpen = hit.getAttribute("aria-expanded") !== "true";
-      var navRoot = $("#canvas-nav");
-      if (navRoot) navRoot.classList.toggle("open", navOpen);
-      hit.setAttribute("aria-expanded", navOpen ? "true" : "false");
     } else if (role === "canvas-market-toggle") {
       // 市场选择面板开合（按地区分组的弹出面板，见 canvasToolbar / marketPanelHtml）
       var mpanel = hit.parentElement.querySelector(".market-panel");
@@ -3143,7 +3126,6 @@
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
       $all(".market-panel:not([hidden])").forEach(function (p) { p.hidden = true; });
-      closeNavFlyout();
       closeOverlay();
     }
   });
