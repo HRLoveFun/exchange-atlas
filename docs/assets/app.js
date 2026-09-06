@@ -252,12 +252,13 @@
   // 驱动全部 7 个 section）。note 传调用方已过 t() 的现成片段。
   // 交互形态（2026-09-06 UI 迭代）：选择条 sticky 常驻在页头下方，滚到画布任何
   // 位置都能换所；选择器从平铺 20 家的 <select> 下拉改为「当前交易所名」按钮 +
-  // 按地区分组的弹出面板（亚太 APAC / 欧洲 EMEA / 美洲 AMER / 中东非 MEA）。
+  // 按地区分组的弹出面板（亚太 APAC / 欧中东非 EMEA / 美洲 AMER）。
+  // 2026-09-06 UI 迭代：欧洲 EMEA 与中东非 MEA 合并为一组「欧中东非 EMEA」；
+  // regions 是该组在 manifest 里的底层 region 值，组内按其出现顺序拼接。
   var MARKET_REGION_ORDER = [
-    { id: "apac", zh: "亚太地区", en: "APAC" },
-    { id: "europe", zh: "欧洲", en: "EMEA" },
-    { id: "americas", zh: "美洲", en: "AMER" },
-    { id: "mena_africa", zh: "中东非", en: "MEA" }
+    { id: "apac", zh: "亚太", en: "APAC", regions: ["apac"] },
+    { id: "emea", zh: "欧中东非", en: "EMEA", regions: ["europe", "mena_africa"] },
+    { id: "americas", zh: "美洲", en: "AMER", regions: ["americas"] }
   ];
   function marketPanelHtml(currentId) {
     var byRegion = {};
@@ -267,7 +268,7 @@
     return '<div class="market-panel" data-role="market-panel" hidden>' +
       '<div class="market-panel-regions">' +
       MARKET_REGION_ORDER.map(function (r) {
-        var list = byRegion[r.id] || [];
+        var list = r.regions.reduce(function (acc, rid) { return acc.concat(byRegion[rid] || []); }, []);
         if (!list.length) return "";
         return '<div class="market-panel-region">' +
           '<div class="market-panel-region-h">' + esc(r.zh + " " + r.en) + "</div>" +
