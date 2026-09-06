@@ -124,6 +124,15 @@ button { font-family: inherit; }
 .tab-btn:hover { background: var(--bg-hover); color: var(--fg); }
 .tab-btn.active { background: var(--accent-soft); color: var(--accent); }
 
+/* 「更多」二级标签横条（Phase 4 棒 3，ADR-phase4-canvas-layout #4）：
+   主 tab 行下方展开的横条，不是下拉菜单；hidden 属性要显式压制 display:flex */
+.header-subtabs {
+  max-width: 1400px; margin: 0 auto; padding: 0 20px 8px;
+  display: flex; flex-wrap: wrap; gap: 2px;
+}
+.header-subtabs[hidden] { display: none; }
+.header-subtabs .tab-btn { padding: 5px 12px; font-size: 12.5px; }
+
 .header-actions { display: flex; gap: 6px; align-items: center; }
 .action-btn {
   border: 1px solid var(--border); background: var(--bg-elevated); color: var(--fg-muted);

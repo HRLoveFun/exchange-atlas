@@ -2851,15 +2851,20 @@
   // 路由
   // ══════════════════════════════════════════════
   function updateActiveTab(view) {
-    // 无 view 参数 = 市场画布（route 默认分支）；「更多」组的视图（含档案页——
-    // 它经矩阵行链接进入、不是 tab）高亮「更多」按钮，棒 3 起二级横条随之展开。
+    // 两级 tab（ADR-phase4-canvas-layout #4）：无 view 参数 = 画布 → 主行第一项；
+    // 「更多」组视图 → 主行「更多」高亮 + 二级横条展开并高亮对应项（档案页也
+    // 展开横条——它经矩阵行链接进入、不是二级标签，故不高亮任何一项）。
     var canvasView = !view;
+    var moreView = !canvasView && MORE_VIEWS.indexOf(view) >= 0;
     $all(".tab-btn").forEach(function (b) {
       var v = b.dataset.view;
-      var on = canvasView ? v === "canvas"
-        : v === view || (v === "more" && MORE_VIEWS.indexOf(view) >= 0);
+      var on = canvasView ? v === "canvas" : v === view || (v === "more" && moreView);
       b.classList.toggle("active", on);
     });
+    var bar = $("#moreTabs");
+    if (bar) bar.hidden = !moreView;
+    var moreBtn = $('.tab-btn[data-view="more"]');
+    if (moreBtn) moreBtn.setAttribute("aria-expanded", moreView ? "true" : "false");
   }
   function route() {
     closeOverlay();
@@ -2968,7 +2973,13 @@
         // 画布 hash：#market=<当前或默认市场>（不带 section——回顶部）
         setHash({ market: canvasResolveId(parseHash()) });
       } else if (v === "more") {
-        // 「更多」= 主 tab 行下方的二级横条入口（棒 3 落地展开行为），不是视图
+        // 「更多」= 展开 / 收起主 tab 行下方的二级横条（不换视图）；当前视图属于
+        // 「更多」组时横条的显隐由 updateActiveTab 按 hash 决定，点击只做手动开合。
+        var bar = $("#moreTabs");
+        if (bar) {
+          bar.hidden = !bar.hidden;
+          b.setAttribute("aria-expanded", bar.hidden ? "false" : "true");
+        }
       } else {
         setHash({ view: v });
       }

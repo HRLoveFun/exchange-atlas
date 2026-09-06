@@ -32,6 +32,14 @@
         <a class="action-btn" href="https://github.com/HRLoveFun/exchange-atlas" target="_blank" rel="noopener noreferrer" data-title-zh="GitHub 仓库" data-title-en="GitHub repository">GitHub</a>
       </div>
     </div>
+    <!-- Phase 4 棒 3（ADR-phase4-canvas-layout #4）：「更多」入口 = 主 tab 行下方
+         展开的二级标签横条（非下拉菜单 / 页脚链接 / 独立落地页）。挂对比矩阵 /
+         时区甘特条 / 数据健康度三项；档案页经矩阵行链接进入，不单列二级标签。 -->
+    <nav class="header-subtabs" id="moreTabs" hidden aria-label="更多视图 More views">
+      <button type="button" class="tab-btn" data-view="matrix">对比矩阵 <span class="en">Matrix</span></button>
+      <button type="button" class="tab-btn" data-view="timezone">时区甘特条 <span class="en">Timezone</span></button>
+      <button type="button" class="tab-btn" data-view="health">数据健康度 <span class="en">Health</span></button>
+    </nav>
   </header>
 
   <main id="app">
