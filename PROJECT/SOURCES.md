@@ -145,6 +145,16 @@ quote 不在里面」，落进 FAIL 桶，会让 `make check` 变红。
 **预防**：`fetch_sources.py` 跑完先扫一眼它报的成功率；成功率低时先查是不是这次网络环境的问题，
 不要立刻相信新的 `.cache/` 状态。
 
+## 经验：CI（GitHub Actions）里的「quote 真实性闸」是数据中心 IP，能验的所有限
+
+[ADR-supply-chain-ci-hardening] 给 `pr-build.yml` 的 `build` job 加了一步：对本 PR 改动的
+`data/exchanges/<id>.yml` 跑 `verify_quotes.py --live --ex <id>`。跑在 GitHub Actions 的
+runner 上 = 数据中心 IP，`fetch.py` 里记过的那些反爬（`jse.co.za` Cloudflare 403、KRX 数据端点
+返 `LOGOUT`、多所 JS 壳）在这里同样命中，这些来源记 `LIVE_ERR`、**不阻断**。闸对 SEC / FINRA
+（Fair Access 声明 UA）、静态 HTML 规则页这类「CI 也能直连」的来源是真的，能挡住「改了数值 +
+编一段对得上的 quote」；抓不到的来源退化为「和没有这一步一样」。所以 CI 绿 ≠ 全部 quote 都核过，
+只是净增了一层。真要全量离线反查仍靠本地 `make fetch-sources` + `make verify-quotes`。
+
 ---
 
 ## 探测记录（v0.0 可达性探针，2026-08-12）

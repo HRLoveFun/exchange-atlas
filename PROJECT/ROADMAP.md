@@ -283,6 +283,14 @@
 
 - [x] **数据遗留项会话：`kr-krx` 整理期坐实 + `order_book_transparency` 升 medium + Section 31 FY2027 复核**（2026-09-06，住宅 IP 交互式会话，[ADR-kr-krx-legacy-closeout]）— §一「数据遗留项」五条逐条过：① **`kr-krx delisting_transition_period` 收口**——发现字段既引的 FSC 英文新闻稿（`fsc.go.kr/eng/pr010101/83926`，[ADR-059] 时代已入缓存）正文原句即含『a post-delisting liquidation trading period of seven trading days』，补 spec `{value: 7, unit: trading_days}`（个位数人工转写，[ADR-091] 口径）+ 替换 quote，[ADR-091] 挂出的 kr-krx 待补源完成；② **`order_book_transparency` low→medium**——新登记 `regulation.krx.co.kr`（KRX 韩文规则门户，服务端渲染正文可抓；英文站同栏目是 JS 壳），「호가정보」页逐字坐实连续竞价 10 档 / 集合竞价 3 档实时披露，8 处 low 簇减至 7 处；③ **`us` Section 31 FY2027**——本机 curl 直连 sec.gov（住宅 IP + 声明 UA 可行，推翻「sec.gov 一律 403」旧结论）复核：FY2027 相关仅 8-21 发布的 Section 6(b) **注册费**公告（$138.10→$87.00，与 Section 31 是两个费种勿混淆），Section 31 公告仍未发布、按 FY2025/FY2026 模式预计 2027 年初，OQ「费率时效」条已更新复核记录，$20.60 现值不变；④ **`kr-krx exchange_fees` 当期档位**——규정 포털 03 章全菜单排查无费率页（费率载于《업무규정》别表、未上 HTML），维持 `rate: 0.0023` 审慎现值待一手；⑤ **`fr-euronext stamp_duty`** 无动作（`rate: null` 终态已登记 OQ）；**`cn-szse` 整理期 15 交易日**——修正可达性认知（szse.cn 分子域分裂：`docs.static.szse.cn` / `investor.szse.cn` 本机 200 可达，www/english 主站 TCP 不通），中文 2026 修订全文与创业板官方英译 2022 版均已取得，但中英文一手对整理期 15 交易日均拼「十五 / fifteen trading days」（英译对复核期混用阿拉伯「15-trading day」、语义不可挪用），spec 的 5b 关卡仍过不去；仅主板英译 2024 版未核（挂 www 主站、wayback 无快照），待人工下载核对。改动仅 `data/exchanges/kr-krx.yml`（2 字段 + 2 处章 `_meta.verified`）+ 来源分片 + OQ/SOURCES/ROADMAP，`make fetch_sources --ex kr-krx` 落盘 1 个新来源（顺带重试 3 个历史失败来源仍失败，无回归）。
 
+### 安全 / 供应链加固（横切条目，不属于 Phase 序列）
+
+- [x] **恶意修改风险审查 · 建议 1/3 落地**（2026-09-06，[ADR-supply-chain-ci-hardening]）— 用户要求检讨「项目是否有被他人恶意修改的风险」，审查后落地两项可机器化收口：
+  - **依赖哈希锁定**：`tools/requirements.txt` 改 `uv pip compile --generate-hashes --universal` 全量哈希锁（精确 `==` + 全 wheel/sdist hash），CI 与本地统一 `pip install --require-hashes`；直接依赖新增 `requests`。`.github/dependabot.yml`（新，`pip` `/tools` + `github-actions` `/` 周更）。仓库设置打开 Dependabot alerts + automated security fixes（`gh api -X PUT .../vulnerability-alerts` + `.../automated-security-fixes`）。
+  - **CI「quote 真实性闸」**：`pr-build.yml` 的 `build` job 在 `make build` 后加一步——对本 PR 改动的每个 `data/exchanges/<id>.yml` 跑 `verify_quotes.py --live --ex <id>`，`FAIL`（能抓到的来源正文里找不到 `confidence: high` 字段的 quote）→ build 红；`LIVE_ERR`（数据中心 IP 被拦 / JS 壳）不阻断。配套 `fetch-depth: 0` + `poppler-utils` + `permissions: contents: read`。补上了 `verify_quotes` verbatim 反查在 CI 里全 `CACHE_MISS` 空转的缺口。
+  - **验收**：`make build` 全绿、`make sync` 幂等；哈希锁在干净 venv 通过 `--require-hashes` 安装。端到端红/绿待真实 PR 验证。**审查里未做、留后续**（关 Actions approve-PR 权限 / actions 钉 SHA / commit signing / 宪法加「抓取内容 = 不可信输入」条 / 收紧 auto-merge 对数值字段 PR）见 ADR「未做」段。
+  - **分支 `origin/0001`**：经用户确认是永久保存的快照（指向 `2e1ba34`），已加归档标记 + `GIT-RUNBOOK.md` 不删例外条。
+
 ### 广度扩张（新增交易所，原「Phase 4 · Wave 3」）——按需可选能力，非计划阶段
 
 见 [ADR-041]。不排进 Phase 序列、无"解冻条件"，不带进度框。
