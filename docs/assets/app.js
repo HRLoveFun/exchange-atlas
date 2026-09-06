@@ -1380,7 +1380,17 @@
     });
 
     var buySum = 0, sellSum = 0, vMax = 0;
+    // 每侧的「0 是真零还是没数据」：noneRow = 该侧有 type:none 费种（真零依据）、
+    // unknown = 该侧存在未结构化 / 幽灵条（0 只是没摘到数，不是真零）。
+    // 全零市场的合计不再盲目写「0.00 bp」（ADR-047 已知局限的收口）。
+    var sideNone = {}, sideUnknown = {};
     rows.forEach(function (r) {
+      [-1, 1].forEach(function (dir) {
+        if (dir < 0 ? r.side === "sell" : r.side === "buy") return;
+        var key = dir < 0 ? "buy" : "sell";
+        if (!r.d || (typeof r.d.bp !== "number" && !r.d.none)) sideUnknown[key] = true;
+        if (r.d && r.d.none) sideNone[key] = true;
+      });
       if (!r.d || typeof r.d.bp !== "number") return;
       if (r.side !== "sell") buySum += r.d.bp;
       if (r.side !== "buy") sellSum += r.d.bp;
@@ -1424,7 +1434,7 @@
       }
       if (r.d.none) {
         g.push(cwCell(id, r.key,
-          '<rect x="' + n(cx - 26) + '" y="' + n(y + barH / 2) + '" width="52" height="2" fill="var(--border-strong)"/>' +
+          '<rect x="' + n(cx - 26) + '" y="' + n(y + barH / 2) + '" width="52" height="2" fill="var(--fg-muted)"/>' +
           '<text x="' + n(cx + 32) + '" y="' + n(yc) + '" class="cw-none">' + t("不征收 / 不适用", "Not levied / N/A") + '</text>',
           cwFeeName(r.key) + sep() + t("本市场不征该费种 / 税目（type: none）",
             "this fee / tax is not levied in this market (type: none)")));
@@ -1434,7 +1444,7 @@
         var active = dir < 0 ? r.side !== "sell" : r.side !== "buy";
         if (!active) {
           g.push('<line x1="' + n(cx + dir * 5) + '" x2="' + n(cx + dir * 19) + '" y1="' + n(y + barH / 2 + 1) + '" y2="' + n(y + barH / 2 + 1) +
-            '" stroke="var(--border-strong)" stroke-width="1" stroke-dasharray="2 2"/>');
+            '" stroke="var(--fg-muted)" stroke-width="1" stroke-dasharray="2 2"/>');
           return;
         }
         if (typeof r.d.bp !== "number") {
@@ -1460,9 +1470,17 @@
 
     // 小计行
     g.push('<text x="' + (PL + labelW - 8) + '" y="' + n(totalY + barH / 2 + 4) + '" text-anchor="end" class="cw-flabel cw-total-l">' + t("合计", "Total") + '</text>');
-    [[-1, buySum], [1, sellSum]].forEach(function (p) {
-      var dir = p[0], v = p[1], w = Math.max(1.5, sc(v));
-      var bx = dir < 0 ? cx - w : cx;
+    [[-1, buySum, "buy"], [1, sellSum, "sell"]].forEach(function (p) {
+      var dir = p[0], v = p[1], side = p[2], w, bx;
+      // 0 的两种含义分家：该侧有 type:none 且没有未结构化 / 幽灵条 → 真零写 0.00 bp；
+      // 只是没摘到数 → 画「—」不画条，不冒充实测值（ADR-047「全零市场合计 0.00 bp」收口）。
+      if (v === 0 && !(sideNone[side] && !sideUnknown[side])) {
+        g.push('<text x="' + n(dir < 0 ? cx - 4 : cx + 4) + '" y="' + n(totalY + barH / 2 + 4) + '" text-anchor="' + (dir < 0 ? "end" : "start") +
+          '" class="cw-none">' + t("— 未摘引到可折算费率", "— no convertible rate on record") + "</text>");
+        return;
+      }
+      w = Math.max(1.5, sc(v));
+      bx = dir < 0 ? cx - w : cx;
       g.push('<rect x="' + n(bx) + '" y="' + n(totalY + 1) + '" width="' + n(w) + '" height="' + barH + '" fill="var(--fg)" opacity="0.86"/>');
       g.push('<text x="' + n(dir < 0 ? bx - 4 : bx + w + 4) + '" y="' + n(totalY + barH / 2 + 4) + '" text-anchor="' + (dir < 0 ? "end" : "start") +
         '" class="cw-vlab cw-total-v">' + cwFmtBp2(v) + ' bp</text>');
@@ -1484,16 +1502,22 @@
 
     var exName = (cache.exchangeById[id] && exchangeDisplayName(cache.exchangeById[id])) || id;
     var rt = buySum + sellSum;
+    // 副标题与合计行同口径：未知零侧写「—」，往返合计在该情形标明是下限
+    var buyUnknownZero = buySum === 0 && !(sideNone.buy && !sideUnknown.buy);
+    var sellUnknownZero = sellSum === 0 && !(sideNone.sell && !sideUnknown.sell);
+    var sideTxt = function (v, unk) { return unk ? "—" : cwFmtBp2(v); };
     g.push('<text x="' + PL + '" y="34" class="td-title">' + t("交易成本瀑布", "Cost Waterfall") + "</text>");
     var sub;
     if (buySum === 0 && sellSum === 0) {
       sub = t("显性成本按笔 / 按合约计，本所未摘引到可折算为 bp 的费率（见下方各费种）",
         "Explicit costs are charged per trade / per contract; no rate convertible to bp was cited for this exchange (see the fee rows below)");
     } else {
-      sub = t("单边显性成本 买 " + cwFmtBp2(buySum) + " bp / 卖 " + cwFmtBp2(sellSum) + " bp　·　往返合计 ≈ " + cwFmtBp2(rt) + " bp" +
-        (rt >= 1 ? "（约 " + (rt / 100).toFixed(rt >= 10 ? 2 : 3) + "%）" : ""),
-        "One-way explicit cost: buy " + cwFmtBp2(buySum) + " bp / sell " + cwFmtBp2(sellSum) + " bp　·　round trip ≈ " + cwFmtBp2(rt) + " bp" +
-        (rt >= 1 ? " (about " + (rt / 100).toFixed(rt >= 10 ? 2 : 3) + "%)" : ""));
+      sub = t("单边显性成本 买 " + sideTxt(buySum, buyUnknownZero) + " bp / 卖 " + sideTxt(sellSum, sellUnknownZero) + " bp　·　往返合计 ≈ " + cwFmtBp2(rt) + " bp" +
+        (rt >= 1 ? "（约 " + (rt / 100).toFixed(rt >= 10 ? 2 : 3) + "%）" : "") +
+        (buyUnknownZero || sellUnknownZero ? t("（一侧未摘全，合计为下限）", " (one side unrecorded; total is a floor)") : ""),
+        "One-way explicit cost: buy " + sideTxt(buySum, buyUnknownZero) + " bp / sell " + sideTxt(sellSum, sellUnknownZero) + " bp　·　round trip ≈ " + cwFmtBp2(rt) + " bp" +
+        (rt >= 1 ? " (about " + (rt / 100).toFixed(rt >= 10 ? 2 : 3) + "%)" : "") +
+        (buyUnknownZero || sellUnknownZero ? " (one side unrecorded; total is a floor)" : ""));
     }
     g.push('<text x="' + PL + '" y="55" class="cw-rt">' + esc(sub) + "</text>");
     if (rt > 0 && rt < 2) {
@@ -1812,7 +1836,7 @@
         return '<circle cx="' + badgeX + '" cy="' + spNum(cyc) + '" r="11" fill="var(--bg-elevated)" stroke="var(--border-strong)"/>' +
           '<text x="' + badgeX + '" y="' + spNum(cyc + 4) + '" text-anchor="middle" class="sp-wf-ord">' + (L.order || (i + 1)) + '</text>' +
           '<rect x="' + boxX + '" y="' + spNum(y) + '" width="' + boxW + '" height="' + boxH + '" rx="4" fill="' + spBearerFill(L.bearer) +
-          '" opacity="' + (hasB ? "0.82" : "0.22") + '"' + (hasB ? "" : ' stroke="var(--border-strong)"') + '/>' +
+          '" opacity="' + (hasB ? "0.82" : "0.32") + '"' + (hasB ? "" : ' stroke="var(--border-strong)"') + '/>' +
           '<text x="' + spNum(boxX + 12) + '" y="' + spNum(cyc + 4) + '" class="sp-wf-res">' + esc(spClip(L.resource, 58)) + '</text>' +
           '<text x="' + spNum(tagX) + '" y="' + spNum(cyc + 4) + '" class="sp-wf-tag">' + esc(spBearerName(L.bearer)) + '</text>' +
           (i < layers.length - 1 ? '<path d="M' + badgeX + ' ' + spNum(y + boxH + 2) + ' l 0 ' + spNum(rowH - boxH - 7) +
@@ -2559,7 +2583,7 @@
       titleTxt = label + " · " + t("此维度暂无记录（真实数据缺口）", "no note recorded (genuine data gap)");
     } else {
       var conf = env.confidence || "low";
-      var edgeOp = conf === "high" ? 1 : conf === "medium" ? 0.6 : 0.3;
+      var edgeOp = conf === "high" ? 1 : conf === "medium" ? 0.6 : 0.45; // low 0.3→0.45：暗色下左缘色条不可读（[ADR-066] 遗留收口，仍低于 medium）
       var cc = rfConfColor(conf);
       var text = dv(env) || env.zh || "";
       var maxLines = Math.max(3, Math.min(5, Math.floor((h - 66) / 14)));
