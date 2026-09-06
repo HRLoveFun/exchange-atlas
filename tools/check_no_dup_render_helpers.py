@@ -15,6 +15,11 @@ resolveId / 文本折行 / 数据格子（点击→openCellOverlay）逻辑—�
 
 跑法：
     python3 tools/check_no_dup_render_helpers.py
+
+第二个关卡（Phase 4 棒 1，[ADR-phase4-canvas-layout]）：画布只有一个「当前市场」，
+「市场 Market」选择器必须是共享的画布级控件、label 字面量全库 ≤ 1 处——7 个模块
+再各自内嵌一份下拉（count ≥ 2）即报违规。计数只算字符串字面量（复用
+check_ui_i18n.scan 的词法扫描），注释里提到这几个字不算。
 """
 import re
 import sys
@@ -22,6 +27,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 APP_JS = ROOT / "docs" / "assets" / "app.js"
+MARKET_LABEL = "市场 Market"
 
 FUNC_RE = re.compile(r"^  function (\w+)\(([^)]*)\)\s*\{", re.M)
 DELEGATE_RE = re.compile(r"^return \w+\([^()]*\);$")
@@ -68,10 +74,19 @@ def duplicate_groups(text):
     return groups
 
 
+def market_label_count(text):
+    """字符串字面量里「市场 Market」label 的出现次数（注释 / 正则不计——
+    复用 check_ui_i18n.scan 的词法扫描拿字面量区间）。"""
+    from check_ui_i18n import scan
+    _, literals = scan(text)
+    return sum(text[s + 1:e - 1].count(MARKET_LABEL) for s, e in literals)
+
+
 def main():
     if not APP_JS.exists():
         return
-    groups = duplicate_groups(APP_JS.read_text(encoding="utf-8"))
+    text = APP_JS.read_text(encoding="utf-8")
+    groups = duplicate_groups(text)
     if groups:
         print(f"[check-no-dup-render-helpers] 发现 {len(groups)} 组函数体完全重复：")
         for body, names in groups:
@@ -82,6 +97,13 @@ def main():
               "1 行委托（`return 共享函数(...);` 这种纯委托形状本检查不拦）。")
         sys.exit(1)
     print("[check-no-dup-render-helpers] OK — 未发现完全重复的函数体")
+    n = market_label_count(text)
+    if n > 1:
+        print(f"[check-no-dup-render-helpers] FAIL — 「{MARKET_LABEL}」label 字面量出现 {n} 次（上限 1）：\n"
+              "  单页画布只有一个「当前市场」（[ADR-phase4-canvas-layout] 棒 1），选择器必须是"
+              "共享的画布级控件（canvasToolbar），各模块不得再内嵌自己的「市场 Market」下拉。")
+        sys.exit(1)
+    print(f"[check-no-dup-render-helpers] OK — 「{MARKET_LABEL}」label 字面量 {n} 处（≤ 1）")
 
 
 if __name__ == "__main__":

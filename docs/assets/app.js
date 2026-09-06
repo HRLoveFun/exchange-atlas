@@ -233,10 +233,38 @@
   //   legend/prose 类函数审查后发现内容各模块真正不同（不是同一件事写两遍），
   //   不属于本次收敛范围（rm/pt 图例结构同构的例外见 keyedLegend）。
   // ══════════════════════════════════════════════
-  function resolveExchangeId(params, defaultEx) {
+  // ── 画布级「当前市场」（Phase 4 棒 1，ADR-phase4-canvas-layout）──
+  //   单页画布只有一个当前市场：hash 键收敛为 market（旧模块级 id 参数在棒 4
+  //   深链迁移落地前仍兼容读取）；默认所收敛为单一 CANVAS_DEFAULT_EX，取代
+  //   7 个模块各自的 XX_DEFAULT_EX。canvasResolveId 是市场 id 的唯一裁决点，
+  //   7 个 xxResolveId 保留名字、改成读画布级 id 的一行委托，调用方零改动。
+  var CANVAS_DEFAULT_EX = "cn-sse"; // 默认着陆视图是市场机制剖面，沿用其原默认
+  function canvasResolveId(params) {
+    var want = params.market || params.id;
     var l = cache.manifest.exchanges;
-    if (l.some(function (e) { return e.id === params.id; })) return params.id;
-    return l.some(function (e) { return e.id === defaultEx; }) ? defaultEx : l[0].id;
+    if (l.some(function (e) { return e.id === want; })) return want;
+    return l.some(function (e) { return e.id === CANVAS_DEFAULT_EX; }) ? CANVAS_DEFAULT_EX : l[0].id;
+  }
+  // 画布级市场选择器——7 个模块共用这一份（label 字面量全库仅此一处，
+  // check_no_dup_render_helpers.py 有 ≤1 关卡）。切市场只写 market 参数、保留
+  // 当前视图：一次 loadExchange，所在 section 就地重渲染（棒 2 画布外壳落地后
+  // 驱动全部 7 个 section）。note 传调用方已过 t() 的现成片段。
+  function canvasToolbar(note) {
+    var id = canvasResolveId(parseHash());
+    return '<div class="view-toolbar">' +
+      '<label for="canvasExchange">市场 Market</label>' +
+      '<select id="canvasExchange" data-role="canvas-market">' +
+      cache.manifest.exchanges.map(function (e) {
+        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
+      }).join("") + "</select>" +
+      '<span class="td-tb-note">' + note + "</span>" +
+      "</div>";
+  }
+  // hash 同步守卫：loadExchange 在途时用户切了视图 / 换了市场，丢弃过期响应。
+  function canvasSynced(view, id) {
+    var cur = parseHash();
+    if (cur.view && cur.view !== view) return false;
+    return canvasResolveId(cur) === id;
   }
   function clipText(s, max) {
     s = String(s == null ? "" : s);
@@ -672,7 +700,6 @@
   //   诚实渲染三态（ADR-035 D）：spec 有值+high → 实线；spec 值 null → 幽灵虚线+"未公布"角标；
   //   medium/low → 更淡 / 虚线。每个渲染元素带 data-role="cell"，点击复用 openCellOverlay 弹出处。
   // ══════════════════════════════════════════════
-  var TD_DEFAULT_EX = "cn-sse";
   var TD_SESSION_ORDER = ["pre_market", "continuous_am", "lunch_break", "continuous_pm", "after_market", "night_session"];
   // 时段类型字典：{zh, en} 结构，用 tSel() 取值（跟随语言开关）
   var TD_KIND_LABEL = {
@@ -714,7 +741,7 @@
   function tdTip(path, body) {
     return tdFieldLabel(path) + sep() + body;
   }
-  function tdResolveId(params) { return resolveExchangeId(params, TD_DEFAULT_EX); }
+  function tdResolveId(params) { return canvasResolveId(params); }
   function tdCell(id, path, inner, title) { return cellG(id, path, "market_structure", inner, title); }
   // 标注 chip（tdCorePanel 的六格 + tdSidePanels 的「交易细则·成本」组共用；ADR-055）。
   // val 传完整串，CSS 用 -webkit-line-clamp 截断，title 给完整内容；标签按 chapter+path 查 taxonomy。
@@ -773,21 +800,12 @@
   }
 
   function renderTradingDay(app, params) {
-    var list = cache.manifest.exchanges;
     var id = tdResolveId(params);
-    var toolbar = '<div class="view-toolbar">' +
-      '<label for="tdExchange">市场 Market</label>' +
-      '<select id="tdExchange" data-role="td-exchange">' +
-      list.map(function (e) {
-        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
-      }).join("") + "</select>" +
-      '<span class="td-tb-note">' + t("x = 日内时间 · y = 涨跌幅相对前收盘价 · 点击任意元素看出处",
-        "x = time of day · y = % change vs previous close · click any element for sources") + "</span>" +
-      "</div>";
+    var toolbar = canvasToolbar(t("x = 日内时间 · y = 涨跌幅相对前收盘价 · 点击任意元素看出处",
+      "x = time of day · y = % change vs previous close · click any element for sources"));
     app.innerHTML = toolbar + '<div class="loading">' + t("加载机制剖面中…", "Loading market mechanics profile…") + "</div>";
     return loadExchange(id).then(function (data) {
-      var cur = parseHash();
-      if ((cur.view && cur.view !== "trading-day") || tdResolveId(cur) !== id) return;
+      if (!canvasSynced("trading-day", id)) return;
       // .td-wrap 是业务线切换就地重渲染的目标容器（见事件委托 role === "td-line"）
       app.innerHTML = toolbar + '<div class="td-wrap">' + tdBuild(id, data) + "</div>";
     }).catch(function (e) {
@@ -1290,7 +1308,6 @@
   //   证券交易税）→ 实心条 + 「*」标记。资本利得税 / 股息预扣税为持有 / 退出税，
   //   非按笔成本，另列图下方（ADR-045 轴①）。手写 SVG，不引图表库。
   // ══════════════════════════════════════════════
-  var CW_DEFAULT_EX = "hk-hkex";
   var CW_ASSUMED_NOTIONAL = 100000; // 单笔成交金额（当地货币），折算定额 / 按笔费种
   var CW_ASSUMED_PRICE = 50;        // 单股价格（当地货币），折算按股费种
   var CW_FEE_ORDER = ["exchange_fees", "clearing_fees", "regulatory_fees", "stamp_duty", "financial_transaction_tax"];
@@ -1348,7 +1365,7 @@
     if (v >= 1) return v.toFixed(1);
     return v.toFixed(2);
   }
-  function cwResolveId(params) { return resolveExchangeId(params, CW_DEFAULT_EX); }
+  function cwResolveId(params) { return canvasResolveId(params); }
   function cwCell(id, key, inner, title) { return cellG(id, key, "costs", inner, title); }
   function cwTitle(r) {
     var s = (r.env && r.env.spec) || {};
@@ -1365,21 +1382,12 @@
   }
 
   function renderCostWaterfall(app, params) {
-    var list = cache.manifest.exchanges;
     var id = cwResolveId(params);
-    var toolbar = '<div class="view-toolbar">' +
-      '<label for="cwExchange">市场 Market</label>' +
-      '<select id="cwExchange" data-role="cw-exchange">' +
-      list.map(function (e) {
-        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
-      }).join("") + "</select>" +
-      '<span class="td-tb-note">' + t("左 = 买入侧 · 右 = 卖出侧 · 归一到 bp of 成交额 · 点击任意条看出处",
-        "left = buy side · right = sell side · normalised to bp of notional · click any bar for sources") + "</span>" +
-      "</div>";
+    var toolbar = canvasToolbar(t("左 = 买入侧 · 右 = 卖出侧 · 归一到 bp of 成交额 · 点击任意条看出处",
+      "left = buy side · right = sell side · normalised to bp of notional · click any bar for sources"));
     app.innerHTML = toolbar + '<div class="loading">' + t("加载成本瀑布中…", "Loading cost waterfall…") + "</div>";
     return loadExchange(id).then(function (data) {
-      var cur = parseHash();
-      if ((cur.view && cur.view !== "cost-waterfall") || cwResolveId(cur) !== id) return;
+      if (!canvasSynced("cost-waterfall", id)) return;
       app.innerHTML = toolbar + cwBuild(id, data);
     }).catch(function (e) {
       app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
@@ -1612,7 +1620,6 @@
   //   guarantee_model 枚举决定「CCP 介入」节点图形。手写 SVG，不引图表库（ADR-035 C）。
   //   新代码从一开始接语言开关（吸取 ADR-047 教训）：所有文案走 t() / tSel() / enumDisplay()。
   // ══════════════════════════════════════════════
-  var SP_DEFAULT_EX = "hk-hkex";
   function spNum(v) { return (+v).toFixed(1); }
 
   // bearer → 填色（[ADR-048] 轴②：按「谁的钱」上色）。除存续会员金色外均复用既有主题令牌；
@@ -1649,7 +1656,7 @@
     shared_ccp:       { zh: "跨市场共享的独立 CCP（如 NSCC 覆盖多家美国交易所）", en: "An independent CCP shared across markets (e.g. NSCC covering multiple U.S. exchanges)" }
   };
 
-  function spResolveId(params) { return resolveExchangeId(params, SP_DEFAULT_EX); }
+  function spResolveId(params) { return canvasResolveId(params); }
   function spCell(id, path, inner, title) { return cellG(id, path, "clearing", inner, title); }
   function spSettleDays(cl) {
     var e = cl.settlement_cycle && cl.settlement_cycle.enum;
@@ -1926,21 +1933,12 @@
   }
 
   function renderSettlementPipeline(app, params) {
-    var list = cache.manifest.exchanges;
     var id = spResolveId(params);
-    var toolbar = '<div class="view-toolbar">' +
-      '<label for="spExchange">市场 Market</label>' +
-      '<select id="spExchange" data-role="sp-exchange">' +
-      list.map(function (e) {
-        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
-      }).join("") + "</select>" +
-      '<span class="td-tb-note">' + t("上 = 现货 T+N · 下 = 衍生品盯市循环 · 点任意节点看出处",
-        "top = cash T+N · bottom = derivatives mark-to-market loop · click any node for sources") + "</span>" +
-      "</div>";
+    var toolbar = canvasToolbar(t("上 = 现货 T+N · 下 = 衍生品盯市循环 · 点任意节点看出处",
+      "top = cash T+N · bottom = derivatives mark-to-market loop · click any node for sources"));
     app.innerHTML = toolbar + '<div class="loading">' + t("加载交割管线中…", "Loading settlement pipeline…") + "</div>";
     return loadExchange(id).then(function (data) {
-      var cur = parseHash();
-      if ((cur.view && cur.view !== "settlement-pipeline") || spResolveId(cur) !== id) return;
+      if (!canvasSynced("settlement-pipeline", id)) return;
       app.innerHTML = toolbar + spBuild(id, data);
     }).catch(function (e) {
       app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
@@ -1956,7 +1954,6 @@
   //   null 斜体灰。纯衍生品所（listing._meta.not_applicable，ADR-036 #5）整图折叠为一行。
   //   每个渲染元素带 data-role="cell"，点击复用 openCellOverlay。
   // ══════════════════════════════════════════════
-  var LL_DEFAULT_EX = "hk-hkex";
   // review_system 枚举 label 偏长（"交易所审核+监管机构平行注册"），阶段块里放不下——
   // 图上用短名，全称进 tooltip / 顶栏描述 / 出处浮层。
   var LL_REVIEW_SHORT = {
@@ -1967,7 +1964,7 @@
     mixed_by_board: { zh: "分板块不一", en: "Varies by board" }
   };
 
-  function llResolveId(params) { return resolveExchangeId(params, LL_DEFAULT_EX); }
+  function llResolveId(params) { return canvasResolveId(params); }
   function llN(v) { return Math.round(v * 10) / 10; }
   function llCell(id, path, inner, title) { return cellG(id, path, "listing", inner, title); }
   // 混排 token 折行（CJK 逐字 / 拉丁整词，见 wrapByCharBudget）；最多 maxLines 行，超出末行省略号
@@ -2274,21 +2271,12 @@
   }
 
   function renderListingLifecycle(app, params) {
-    var list = cache.manifest.exchanges;
     var id = llResolveId(params);
-    var toolbar = '<div class="view-toolbar">' +
-      '<label for="llExchange">市场 Market</label>' +
-      '<select id="llExchange" data-role="ll-exchange">' +
-      list.map(function (e) {
-        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
-      }).join("") + "</select>" +
-      '<span class="td-tb-note">' + t("一只证券的一生：上市审核 → 挂牌 → 持续义务 → 退市 → 去向 · 点任意元素看出处",
-        "a security's lifetime: review → listed → obligations → delisting → destination · click any element for sources") + "</span>" +
-      "</div>";
+    var toolbar = canvasToolbar(t("一只证券的一生：上市审核 → 挂牌 → 持续义务 → 退市 → 去向 · 点任意元素看出处",
+      "a security's lifetime: review → listed → obligations → delisting → destination · click any element for sources"));
     app.innerHTML = toolbar + '<div class="loading">' + t("加载上市生命周期中…", "Loading listing lifecycle…") + "</div>";
     return loadExchange(id).then(function (data) {
-      var cur = parseHash();
-      if ((cur.view && cur.view !== "listing-lifecycle") || llResolveId(cur) !== id) return;
+      if (!canvasSynced("listing-lifecycle", id)) return;
       app.innerHTML = toolbar + llBuild(id, data);
     }).catch(function (e) {
       app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
@@ -2306,8 +2294,7 @@
   //   诚实三态退化为「有值实心卡 / 未记录虚线框」两态；点卡片复用 openCellOverlay。
   //   固定槽位：每个字段固定位置、跨 20 家不变，「换所即对比」。
   // ══════════════════════════════════════════════
-  var RM_DEFAULT_EX = "sg-sgx";
-  function rmResolveId(params) { return resolveExchangeId(params, RM_DEFAULT_EX); }
+  function rmResolveId(params) { return canvasResolveId(params); }
   // 折行：混排 token（CJK 逐字 / 拉丁整词，见 wrapByCharBudget），per 由可用像素反推。
   // innerW 传的是整卡宽 w，正文实际从 x+14 起排、右侧还要留白——扣 24px
   // （14 左内边距 + 10 右内边距），否则密排 CJK 长行会越过卡片右沿约 6px
@@ -2439,21 +2426,12 @@
     return rmLegend() + svg + rmProse();
   }
   function renderRegulationMap(app, params) {
-    var list = cache.manifest.exchanges;
     var id = rmResolveId(params);
-    var toolbar = '<div class="view-toolbar">' +
-      '<label for="rmExchange">市场 Market</label>' +
-      '<select id="rmExchange" data-role="rm-exchange">' +
-      list.map(function (e) {
-        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
-      }).join("") + "</select>" +
-      '<span class="td-tb-note">' + t("8 字段固定槽位：谁在管 · 依什么法 · 外资与资金 · 透明与保护 —— 点任意卡片看全文与出处",
-        "8 fixed slots: who regulates · legal basis · access & capital · disclosure & protection — click any card for full text and sources") + "</span>" +
-      "</div>";
+    var toolbar = canvasToolbar(t("8 字段固定槽位：谁在管 · 依什么法 · 外资与资金 · 透明与保护 —— 点任意卡片看全文与出处",
+      "8 fixed slots: who regulates · legal basis · access & capital · disclosure & protection — click any card for full text and sources"));
     app.innerHTML = toolbar + '<div class="loading">' + t("加载监管图中…", "Loading regulation map…") + "</div>";
     return loadExchange(id).then(function (data) {
-      var cur = parseHash();
-      if ((cur.view && cur.view !== "regulation-map") || rmResolveId(cur) !== id) return;
+      if (!canvasSynced("regulation-map", id)) return;
       app.innerHTML = toolbar + rmBuild(id, data);
     }).catch(function (e) {
       app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
@@ -2474,8 +2452,7 @@
   //   固定槽位：每个字段固定位置、跨 20 家不变，「换所即对比」。
   //   纯衍生品所（de-eurex）第九章全章适用、无 only_spot（[ADR-064] 轴 8）。
   // ══════════════════════════════════════════════
-  var PT_DEFAULT_EX = "hk-hkex";
-  function ptResolveId(params) { return resolveExchangeId(params, PT_DEFAULT_EX); }
+  function ptResolveId(params) { return canvasResolveId(params); }
   // 折行：混排 token（CJK 逐字 / 拉丁整词，见 wrapByCharBudget），per 由可用像素反推
   // （同 rmWrap，innerW 传整卡宽、扣 24px 左右内边距）。独立一份，便于各模块单独微调。
   function ptWrap(text, innerW, maxLines) { return wrapByPixelWidth(text, innerW, maxLines); }
@@ -2582,21 +2559,12 @@
     return ptLegend() + svg + ptProse();
   }
   function renderParticipantMap(app, params) {
-    var list = cache.manifest.exchanges;
     var id = ptResolveId(params);
-    var toolbar = '<div class="view-toolbar">' +
-      '<label for="ptExchange">市场 Market</label>' +
-      '<select id="ptExchange" data-role="pt-exchange">' +
-      list.map(function (e) {
-        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
-      }).join("") + "</select>" +
-      '<span class="td-tb-note">' + t("6 字段固定槽位：谁在场上 · 接入链（会员 → 经纪 → 开户 → 适当性 → 你）· 外资平行道 —— 点任意卡片看全文与出处",
-        "6 fixed slots: who's on the floor · access chain (member → broker → account → suitability → you) · the foreign lane — click any card for full text and sources") + "</span>" +
-      "</div>";
+    var toolbar = canvasToolbar(t("6 字段固定槽位：谁在场上 · 接入链（会员 → 经纪 → 开户 → 适当性 → 你）· 外资平行道 —— 点任意卡片看全文与出处",
+      "6 fixed slots: who's on the floor · access chain (member → broker → account → suitability → you) · the foreign lane — click any card for full text and sources"));
     app.innerHTML = toolbar + '<div class="loading">' + t("加载参与者图中…", "Loading participant map…") + "</div>";
     return loadExchange(id).then(function (data) {
-      var cur = parseHash();
-      if ((cur.view && cur.view !== "participant-map") || ptResolveId(cur) !== id) return;
+      if (!canvasSynced("participant-map", id)) return;
       app.innerHTML = toolbar + ptBuild(id, data);
     }).catch(function (e) {
       app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
@@ -2624,7 +2592,6 @@
   //   纯衍生品所（de-eurex）第十二章全章适用、无 only_spot（ADR-066 轴 7）。
   //   固定槽位：每个字段固定位置、跨 20 家不变，「换所即对比」。
   // ══════════════════════════════════════════════
-  var RF_DEFAULT_EX = "us-nyse"; // l/h/h/m/h —— 四态里的 high/medium/low 都出现
   var RF_FIELDS = [
     { path: "liquidity_risk_note", lane: 1 },
     { path: "fx_risk_note", lane: 1 },
@@ -2632,7 +2599,7 @@
     { path: "political_risk_note", lane: 2 },
     { path: "enforcement_note", lane: 2 }
   ];
-  function rfResolveId(params) { return resolveExchangeId(params, RF_DEFAULT_EX); }
+  function rfResolveId(params) { return canvasResolveId(params); }
   // 折行：同 rmWrap / ptWrap（整卡宽扣 24px 内边距、混排 token 折行，见 wrapByCharBudget）
   function rfWrap(text, innerW, maxLines) { return wrapByPixelWidth(text, innerW, maxLines); }
   function rfConfWord(c) {
@@ -2771,21 +2738,12 @@
     return rfLegend() + svg + rfDisclaimer() + rfProse();
   }
   function renderRiskFlags(app, params) {
-    var list = cache.manifest.exchanges;
     var id = rfResolveId(params);
-    var toolbar = '<div class="view-toolbar">' +
-      '<label for="rfExchange">市场 Market</label>' +
-      '<select id="rfExchange" data-role="rf-exchange">' +
-      list.map(function (e) {
-        return '<option value="' + esc(e.id) + '"' + (e.id === id ? " selected" : "") + ">" + esc(exchangeDisplayName(e)) + "</option>";
-      }).join("") + "</select>" +
-      '<span class="td-tb-note">' + t("5 字段固定槽位：流动性 · 汇率 · 制度变革 · 政治地缘 · 执法 —— 旗标填充度 = 取证程度、非风险评分；点卡片看全文与出处",
-        "5 fixed slots: liquidity · FX · regulatory change · geopolitical · enforcement — flag fill = how well sourced, not a risk score; click a card for full text and sources") + "</span>" +
-      "</div>";
+    var toolbar = canvasToolbar(t("5 字段固定槽位：流动性 · 汇率 · 制度变革 · 政治地缘 · 执法 —— 旗标填充度 = 取证程度、非风险评分；点卡片看全文与出处",
+      "5 fixed slots: liquidity · FX · regulatory change · geopolitical · enforcement — flag fill = how well sourced, not a risk score; click a card for full text and sources"));
     app.innerHTML = toolbar + '<div class="loading">' + t("加载风险旗标中…", "Loading risk flags…") + "</div>";
     return loadExchange(id).then(function (data) {
-      var cur = parseHash();
-      if ((cur.view && cur.view !== "risk-flags") || rfResolveId(cur) !== id) return;
+      if (!canvasSynced("risk-flags", id)) return;
       app.innerHTML = toolbar + rfBuild(id, data);
     }).catch(function (e) {
       app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
@@ -2960,11 +2918,13 @@
       hit.title = gon ? t("恢复面板", "Restore panel")
         : t("透视面板：露出零轴 / 熔断线 / 走廊", "See-through: reveal zero line, halts, corridor");
     } else if (role === "td-line") {
-      // 剖面业务线切换（现货 / 衍生品）：持久化 + 就地重渲染 .td-wrap（复用 ADR-055 模式）
+      // 剖面业务线切换（现货 / 衍生品）：持久化 + 就地重渲染 .td-wrap（复用 ADR-055 模式）。
+      // 状态存 localStorage、跨模块生效——本来就是画布级开关（Phase 4 棒 1 起显式如此：
+      // 读市场 id 也改走 canvasResolveId，不再经由模块自己的 ResolveId）。
       if (hit.getAttribute("aria-pressed") === "true") return;
       try { localStorage.setItem("ea-td-line", hit.dataset.line === "deriv" ? "deriv" : "cash"); } catch (err) { /* 隐私模式忽略 */ }
       var lwrap = hit.closest(".td-wrap");
-      var lex = tdResolveId(parseHash());
+      var lex = canvasResolveId(parseHash());
       if (lwrap) loadExchange(lex).then(function (d) { lwrap.innerHTML = tdBuild(lex, d); });
     } else if (role === "close-overlay") {
       closeOverlay();
@@ -2991,20 +2951,14 @@
       var p3 = parseHash();
       p3[role === "health-exchange" ? "hex" : "htype"] = e.target.value;
       setHash(p3);
-    } else if (role === "td-exchange") {
-      setHash({ view: "trading-day", id: e.target.value });
-    } else if (role === "cw-exchange") {
-      setHash({ view: "cost-waterfall", id: e.target.value });
-    } else if (role === "sp-exchange") {
-      setHash({ view: "settlement-pipeline", id: e.target.value });
-    } else if (role === "ll-exchange") {
-      setHash({ view: "listing-lifecycle", id: e.target.value });
-    } else if (role === "rm-exchange") {
-      setHash({ view: "regulation-map", id: e.target.value });
-    } else if (role === "pt-exchange") {
-      setHash({ view: "participant-map", id: e.target.value });
-    } else if (role === "rf-exchange") {
-      setHash({ view: "risk-flags", id: e.target.value });
+    } else if (role === "canvas-market") {
+      // 画布级市场切换（Phase 4 棒 1，ADR-phase4-canvas-layout）：只写 market
+      // 参数、保留当前视图——一次 loadExchange 后所在模块就地重渲染；旧模块级
+      // id 参数不再写入（旧深链的 id 由 canvasResolveId 兼容读取到棒 4）。
+      var pm = parseHash();
+      pm.market = e.target.value;
+      delete pm.id;
+      setHash(pm);
     }
   });
   document.addEventListener("keydown", function (e) {
