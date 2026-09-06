@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0            # 「quote 真实性闸」要 diff base..head 取改动的交易所
       - uses: actions/setup-python@v5
