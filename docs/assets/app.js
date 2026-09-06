@@ -799,20 +799,6 @@
     return t("价格约束未结构化——见档案页「市场结构与交易机制」章", "Price constraints not structured — see the Market Structure & Trading Mechanism chapter of the profile");
   }
 
-  function renderTradingDay(app, params) {
-    var id = tdResolveId(params);
-    var toolbar = canvasToolbar(t("x = 日内时间 · y = 涨跌幅相对前收盘价 · 点击任意元素看出处",
-      "x = time of day · y = % change vs previous close · click any element for sources"));
-    app.innerHTML = toolbar + '<div class="loading">' + t("加载机制剖面中…", "Loading market mechanics profile…") + "</div>";
-    return loadExchange(id).then(function (data) {
-      if (!canvasSynced("trading-day", id)) return;
-      // .td-wrap 是业务线切换就地重渲染的目标容器（见事件委托 role === "td-line"）
-      app.innerHTML = toolbar + '<div class="td-wrap">' + tdBuild(id, data) + "</div>";
-    }).catch(function (e) {
-      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
-    });
-  }
-
   function tdBuild(id, data) {
     var msTop = (data.chapters && data.chapters.market_structure) || {};
     var hasDeriv = tdHasDeriv(msTop);
@@ -1381,19 +1367,6 @@
     return parts.join(" · ");
   }
 
-  function renderCostWaterfall(app, params) {
-    var id = cwResolveId(params);
-    var toolbar = canvasToolbar(t("左 = 买入侧 · 右 = 卖出侧 · 归一到 bp of 成交额 · 点击任意条看出处",
-      "left = buy side · right = sell side · normalised to bp of notional · click any bar for sources"));
-    app.innerHTML = toolbar + '<div class="loading">' + t("加载成本瀑布中…", "Loading cost waterfall…") + "</div>";
-    return loadExchange(id).then(function (data) {
-      if (!canvasSynced("cost-waterfall", id)) return;
-      app.innerHTML = toolbar + cwBuild(id, data);
-    }).catch(function (e) {
-      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
-    });
-  }
-
   function cwBuild(id, data) {
     var costs = (data.chapters && data.chapters.costs) || {};
     var ms = (data.chapters && data.chapters.market_structure) || {};
@@ -1932,19 +1905,6 @@
       spProse();
   }
 
-  function renderSettlementPipeline(app, params) {
-    var id = spResolveId(params);
-    var toolbar = canvasToolbar(t("上 = 现货 T+N · 下 = 衍生品盯市循环 · 点任意节点看出处",
-      "top = cash T+N · bottom = derivatives mark-to-market loop · click any node for sources"));
-    app.innerHTML = toolbar + '<div class="loading">' + t("加载交割管线中…", "Loading settlement pipeline…") + "</div>";
-    return loadExchange(id).then(function (data) {
-      if (!canvasSynced("settlement-pipeline", id)) return;
-      app.innerHTML = toolbar + spBuild(id, data);
-    }).catch(function (e) {
-      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
-    });
-  }
-
   // ══════════════════════════════════════════════
   // 上市生命周期剖面（v2.0 Phase 3 第四棒，ADR-059）
   //   一条水平「证券的一生」时间轴：上市审核 → 上市流程周期 → 挂牌 → 持续义务存续带
@@ -2270,19 +2230,6 @@
       "The time scale is <strong>the life of a security (years)</strong> — a third zoom level alongside the one-trading-day of “Market Mechanics” and the T+N business days of “Settlement”. Phase blocks show sequence only and are <strong>not to real-time scale</strong> (how long a company stays listed has no fixed value); only “Listing process” and “Transition period” carry a fill bar scaled to their <code>spec</code> months (full bar = 9 months). Honest three-state: a dashed block = “not yet filled”, a hollow dot = the rule explicitly sets none, italic grey = “exists but not published”. Click any element for sources. Rules are as officially published by each exchange; nothing here is investment advice.") + "</div>";
   }
 
-  function renderListingLifecycle(app, params) {
-    var id = llResolveId(params);
-    var toolbar = canvasToolbar(t("一只证券的一生：上市审核 → 挂牌 → 持续义务 → 退市 → 去向 · 点任意元素看出处",
-      "a security's lifetime: review → listed → obligations → delisting → destination · click any element for sources"));
-    app.innerHTML = toolbar + '<div class="loading">' + t("加载上市生命周期中…", "Loading listing lifecycle…") + "</div>";
-    return loadExchange(id).then(function (data) {
-      if (!canvasSynced("listing-lifecycle", id)) return;
-      app.innerHTML = toolbar + llBuild(id, data);
-    }).catch(function (e) {
-      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
-    });
-  }
-
   // ══════════════════════════════════════════════
   // 监管图 Regulation Map（v2.0 Phase 3 第五棒，ADR-061）
   //   第三章「监管与法律环境」8 字段的固定槽位「监管截面」单画布：
@@ -2425,19 +2372,6 @@
       esc(exName) + esc(t(" 监管图", " regulation map")) + '">' + g.join("") + "</svg></div>";
     return rmLegend() + svg + rmProse();
   }
-  function renderRegulationMap(app, params) {
-    var id = rmResolveId(params);
-    var toolbar = canvasToolbar(t("8 字段固定槽位：谁在管 · 依什么法 · 外资与资金 · 透明与保护 —— 点任意卡片看全文与出处",
-      "8 fixed slots: who regulates · legal basis · access & capital · disclosure & protection — click any card for full text and sources"));
-    app.innerHTML = toolbar + '<div class="loading">' + t("加载监管图中…", "Loading regulation map…") + "</div>";
-    return loadExchange(id).then(function (data) {
-      if (!canvasSynced("regulation-map", id)) return;
-      app.innerHTML = toolbar + rmBuild(id, data);
-    }).catch(function (e) {
-      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
-    });
-  }
-
   // ══════════════════════════════════════════════
   // 参与者图 Participant Map（v2.0 Phase 3 第六棒，ADR-064）
   //   第九章「市场参与者」6 字段的固定槽位「参与者截面」单画布，自上而下三层：
@@ -2558,19 +2492,6 @@
       esc(exName) + esc(t(" 参与者图", " participant map")) + '">' + defs + g.join("") + "</svg></div>";
     return ptLegend() + svg + ptProse();
   }
-  function renderParticipantMap(app, params) {
-    var id = ptResolveId(params);
-    var toolbar = canvasToolbar(t("6 字段固定槽位：谁在场上 · 接入链（会员 → 经纪 → 开户 → 适当性 → 你）· 外资平行道 —— 点任意卡片看全文与出处",
-      "6 fixed slots: who's on the floor · access chain (member → broker → account → suitability → you) · the foreign lane — click any card for full text and sources"));
-    app.innerHTML = toolbar + '<div class="loading">' + t("加载参与者图中…", "Loading participant map…") + "</div>";
-    return loadExchange(id).then(function (data) {
-      if (!canvasSynced("participant-map", id)) return;
-      app.innerHTML = toolbar + ptBuild(id, data);
-    }).catch(function (e) {
-      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
-    });
-  }
-
   // ══════════════════════════════════════════════
   // 风险旗标 Risk Flags（v2.0 Phase 3 第七棒，ADR-066）
   //   第十二章「风险与特殊考量」5 字段的固定槽位「旗标面板」单画布，两泳道：
@@ -2737,19 +2658,6 @@
       esc(exName) + esc(t(" 风险旗标", " risk flags")) + '">' + g.join("") + "</svg></div>";
     return rfLegend() + svg + rfDisclaimer() + rfProse();
   }
-  function renderRiskFlags(app, params) {
-    var id = rfResolveId(params);
-    var toolbar = canvasToolbar(t("5 字段固定槽位：流动性 · 汇率 · 制度变革 · 政治地缘 · 执法 —— 旗标填充度 = 取证程度、非风险评分；点卡片看全文与出处",
-      "5 fixed slots: liquidity · FX · regulatory change · geopolitical · enforcement — flag fill = how well sourced, not a risk score; click a card for full text and sources"));
-    app.innerHTML = toolbar + '<div class="loading">' + t("加载风险旗标中…", "Loading risk flags…") + "</div>";
-    return loadExchange(id).then(function (data) {
-      if (!canvasSynced("risk-flags", id)) return;
-      app.innerHTML = toolbar + rfBuild(id, data);
-    }).catch(function (e) {
-      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
-    });
-  }
-
   // ══════════════════════════════════════════════
   // 出处浮层
   // ══════════════════════════════════════════════
@@ -2866,28 +2774,104 @@
   }
 
   // ══════════════════════════════════════════════
+  // 单页市场画布（Phase 4 棒 2，ADR-phase4-canvas-layout）
+  //   7 个可视化模块按「交易员认知流」整宽纵向堆叠成一块滚动长图：监管图 →
+  //   参与者图 → 市场机制剖面 → 成本瀑布 → 交割管线 → 上市生命周期 → 风险旗标。
+  //   每个 section 有可折叠标题条：默认全部展开，手动收起的状态存 localStorage。
+  //   画布 hash = #market=<id>&section=<module>（section 可省）——route() 默认
+  //   分支进画布、命中 section 参数即滚到对应锚点；矩阵 / 时区 / 健康度 / 档案页
+  //   不进画布，走「更多」入口（#view= 深链不变）。
+  // ══════════════════════════════════════════════
+  // 数组顺序 = 页面顺序 = 认知流（ADR-phase4-canvas-layout #2）。id 同时是
+  // section 锚点后缀与旧 #view=<module> 深链的迁移目标（棒 4）；wrap 是就地
+  // 重渲染的目标容器类名（业务线切换 role === "td-line" 重写 .td-wrap）。
+  // check_canvas_sections.py 校验 7 个模块一个不少、builder 走注册表调用、
+  // section 锚点模板齐全、tab 行收敛为 2 项。
+  var CANVAS_SECTIONS = [
+    { id: "regulation-map",      build: rmBuild, title: "监管图 Regulation Map" },
+    { id: "participant-map",     build: ptBuild, title: "参与者图 Participant Map" },
+    { id: "trading-day",         build: tdBuild, wrap: "td-wrap", title: "市场机制剖面 Market Mechanics" },
+    { id: "cost-waterfall",      build: cwBuild, title: "交易成本瀑布 Cost Waterfall" },
+    { id: "settlement-pipeline", build: spBuild, title: "交割管线 Settlement Pipeline" },
+    { id: "listing-lifecycle",   build: llBuild, title: "上市生命周期 Listing Lifecycle" },
+    { id: "risk-flags",          build: rfBuild, title: "风险旗标 Risk Flags" },
+  ];
+  var CANVAS_SECTION_IDS = CANVAS_SECTIONS.map(function (s) { return s.id; });
+  // 「更多」组视图：不进画布的 4 个视图（档案页经矩阵行链接进入，不是二级标签）
+  var MORE_VIEWS = ["matrix", "timezone", "health", "exchange"];
+  // 折叠状态：{"<module>": 1} 只记收起的——缺省（无记录）= 展开，落实「全部默认展开」。
+  function canvasFolded() {
+    try { return JSON.parse(localStorage.getItem("ea-canvas-fold") || "{}") || {}; }
+    catch (e) { return {}; }
+  }
+  function canvasSetFolded(moduleId, folded) {
+    var st = canvasFolded();
+    if (folded) st[moduleId] = 1;
+    else delete st[moduleId];
+    try { localStorage.setItem("ea-canvas-fold", JSON.stringify(st)); } catch (e) { /* 隐私模式忽略 */ }
+  }
+  // 画布编排壳：builder 调用只走这张注册表（check_canvas_sections.py 关卡）
+  function canvasShell(id, data) {
+    var folded = canvasFolded();
+    return '<div id="canvas-sections">' + CANVAS_SECTIONS.map(function (s) {
+      var isFolded = !!folded[s.id];
+      var body = s.build(id, data);
+      if (s.wrap) body = '<div class="' + s.wrap + '">' + body + "</div>";
+      return '<section class="canvas-section' + (isFolded ? " is-folded" : "") + '" id="section-' + s.id + '">' +
+        '<button type="button" class="canvas-sec-head" data-role="canvas-fold" data-module="' + s.id + '" aria-expanded="' + (isFolded ? "false" : "true") + '">' +
+        '<span class="canvas-sec-title">' + esc(s.title) + "</span>" +
+        '<span class="canvas-sec-arrow" aria-hidden="true">' + (isFolded ? "▸" : "▾") + "</span>" +
+        "</button>" +
+        '<div class="canvas-sec-body"' + (isFolded ? " hidden" : "") + ">" + body + "</div>" +
+        "</section>";
+    }).join("") + "</div>";
+  }
+  // section 锚点：#market=X&section=<module> 命中即滚到对应 section（ADR-phase4-canvas-layout #5）
+  function canvasScrollToSection(sec) {
+    if (!sec || CANVAS_SECTION_IDS.indexOf(sec) < 0) return;
+    var el = document.getElementById("section-" + sec);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function renderCanvas(app, params) {
+    var id = canvasResolveId(params);
+    var toolbar = canvasToolbar(t(
+      "从上到下读完一个市场：谁在管 → 谁在场 → 盘中怎么走 → 一笔交易花多少 → 成交后 T+N → 一只证券的一生 → 还要当心什么 · 点击任意元素看出处",
+      "Read one market top to bottom: who regulates → who trades → how the day runs → what a trade costs → T+N after the trade → life of a security → what to watch out for · click any element for sources"));
+    app.innerHTML = toolbar + '<div class="loading">' + t("加载市场画布中…", "Loading market canvas…") + "</div>";
+    return loadExchange(id).then(function (data) {
+      if (!canvasSynced("canvas", id)) return;
+      app.innerHTML = toolbar + canvasShell(id, data);
+      canvasScrollToSection(params.section);
+    }).catch(function (e) {
+      app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
+    });
+  }
+
+  // ══════════════════════════════════════════════
   // 路由
   // ══════════════════════════════════════════════
   function updateActiveTab(view) {
-    $all(".tab-btn").forEach(function (b) { b.classList.toggle("active", b.dataset.view === view); });
+    // 无 view 参数 = 市场画布（route 默认分支）；「更多」组的视图（含档案页——
+    // 它经矩阵行链接进入、不是 tab）高亮「更多」按钮，棒 3 起二级横条随之展开。
+    var canvasView = !view;
+    $all(".tab-btn").forEach(function (b) {
+      var v = b.dataset.view;
+      var on = canvasView ? v === "canvas"
+        : v === view || (v === "more" && MORE_VIEWS.indexOf(view) >= 0);
+      b.classList.toggle("active", on);
+    });
   }
   function route() {
     closeOverlay();
     var params = parseHash();
-    var view = params.view || "trading-day";
-    updateActiveTab(view === "exchange" ? "matrix" : view);
+    var view = params.view;
+    updateActiveTab(view);
     var app = $("#app");
     if (view === "exchange") renderExchange(app, params);
     else if (view === "health") renderHealth(app, params);
     else if (view === "timezone") renderTimezone(app, params);
     else if (view === "matrix") renderMatrix(app, params);
-    else if (view === "cost-waterfall") renderCostWaterfall(app, params);
-    else if (view === "settlement-pipeline") renderSettlementPipeline(app, params);
-    else if (view === "listing-lifecycle") renderListingLifecycle(app, params);
-    else if (view === "regulation-map") renderRegulationMap(app, params);
-    else if (view === "participant-map") renderParticipantMap(app, params);
-    else if (view === "risk-flags") renderRiskFlags(app, params);
-    else renderTradingDay(app, params);
+    else renderCanvas(app, params);
   }
 
   // ══════════════════════════════════════════════
@@ -2926,6 +2910,16 @@
       var lwrap = hit.closest(".td-wrap");
       var lex = canvasResolveId(parseHash());
       if (lwrap) loadExchange(lex).then(function (d) { lwrap.innerHTML = tdBuild(lex, d); });
+    } else if (role === "canvas-fold") {
+      // 画布 section 标题条折叠（ADR-phase4-canvas-layout #3：默认展开、手动收起、
+      // 状态存 localStorage）。就地切换 DOM 状态，不重渲染整个画布。
+      var foldNext = hit.getAttribute("aria-expanded") !== "false";
+      canvasSetFolded(hit.dataset.module, foldNext);
+      hit.setAttribute("aria-expanded", foldNext ? "false" : "true");
+      var secBody = hit.nextElementSibling;
+      if (secBody) secBody.hidden = foldNext;
+      var secArrow = hit.querySelector(".canvas-sec-arrow");
+      if (secArrow) secArrow.textContent = foldNext ? "▸" : "▾";
     } else if (role === "close-overlay") {
       closeOverlay();
     } else if (role === "group") {
@@ -2968,7 +2962,17 @@
   $("#themeToggle").addEventListener("click", toggleTheme);
   $("#langToggle").addEventListener("click", toggleLang);
   $all(".tab-btn").forEach(function (b) {
-    b.addEventListener("click", function () { setHash({ view: b.dataset.view }); });
+    b.addEventListener("click", function () {
+      var v = b.dataset.view;
+      if (v === "canvas") {
+        // 画布 hash：#market=<当前或默认市场>（不带 section——回顶部）
+        setHash({ market: canvasResolveId(parseHash()) });
+      } else if (v === "more") {
+        // 「更多」= 主 tab 行下方的二级横条入口（棒 3 落地展开行为），不是视图
+      } else {
+        setHash({ view: v });
+      }
+    });
   });
 
   // ══════════════════════════════════════════════
@@ -2979,7 +2983,7 @@
   loadCore()
     .then(function () {
       window.addEventListener("hashchange", route);
-      if (!location.hash) setHash({ view: "trading-day" }, true);
+      if (!location.hash) setHash({ market: CANVAS_DEFAULT_EX }, true);
       route();
     })
     .catch(function (e) {

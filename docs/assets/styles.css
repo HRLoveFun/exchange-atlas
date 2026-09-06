@@ -148,6 +148,23 @@ main#app { max-width: 1400px; margin: 0 auto; padding: 20px; min-height: 60vh; }
 }
 
 .group-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+
+/* ── 单页市场画布（Phase 4 棒 2，ADR-phase4-canvas-layout）── */
+/* 7 个模块整宽纵向堆叠：每个 section 一张卡（边框 + 标题条），折叠只收 body */
+.canvas-section {
+  margin-bottom: 26px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg); box-shadow: var(--shadow); overflow: hidden;
+}
+.canvas-sec-head {
+  display: flex; align-items: baseline; gap: 10px; width: 100%;
+  border: none; border-bottom: 1px solid var(--border); background: var(--bg-elevated);
+  color: var(--fg); padding: 9px 16px; cursor: pointer; text-align: left;
+}
+.canvas-sec-head:hover { background: var(--bg-hover); }
+.canvas-sec-title { font-size: 14.5px; font-weight: 700; }
+.canvas-sec-arrow { margin-left: auto; color: var(--fg-faint); font-size: 12px; }
+.canvas-sec-body { padding: 16px; }
+.canvas-section.is-folded .canvas-sec-head { border-bottom-color: transparent; }
 .group-tab {
   border: 1px solid var(--border); background: var(--bg-elevated); color: var(--fg-muted);
   padding: 6px 12px; border-radius: 999px; cursor: pointer; font-size: 12.5px;
