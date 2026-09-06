@@ -7,11 +7,12 @@ resolveId / 文本折行 / 数据格子（点击→openCellOverlay）逻辑—�
 
 做法：扫描 IIFE 顶层（缩进恰好 2 空格）的具名 `function`，按参数个数分组，
 组内比较去空白折叠后的函数体文本——两个不同名字的函数体逐字节相同即报违规。
-**例外**：函数体只是一条 `return 共享函数(...)` 的纯委托语句不报——这正是
-本次重构收敛后期望的形状（如 `tdResolveId`/`cwResolveId` 各自委托同一个
-`resolveExchangeId`，只是传入的默认交易所常量不同；`rmWrap`/`ptWrap`/`rfWrap`
-委托同一个 `wrapByPixelWidth`，参数原样透传）——纯委托没有需要维护两次的逻辑，
-不是这条检查要防的对象；有实质逻辑（多条语句）却逐字节重复才是。
+**例外**：函数体只是一条 `return 共享函数(...)` 的纯委托语句不报——保留原名字、
+只把逻辑委托给一个共享函数，是 [ADR-085] 收敛期望的形状（如 `rmWrap`/`ptWrap`/
+`rfWrap` 委托同一个 `wrapByPixelWidth`，参数原样透传）——纯委托没有需要维护两次
+的逻辑，不是这条检查要防的对象；有实质逻辑（多条语句）却逐字节重复才是。
+（Phase 4 棒 1/2 起画布只有一个当前市场，7 个 `xxResolveId` 委托 `canvasResolveId`
+后调用方全删、函数本身也一并删除，不再作为本例外的示例。）
 
 跑法：
     python3 tools/check_no_dup_render_helpers.py

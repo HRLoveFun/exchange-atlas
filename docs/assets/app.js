@@ -742,7 +742,6 @@
   function tdTip(path, body) {
     return tdFieldLabel(path) + sep() + body;
   }
-  function tdResolveId(params) { return canvasResolveId(params); }
   function tdCell(id, path, inner, title) { return cellG(id, path, "market_structure", inner, title); }
   // 标注 chip（tdCorePanel 的六格 + tdSidePanels 的「交易细则·成本」组共用；ADR-055）。
   // val 传完整串，CSS 用 -webkit-line-clamp 截断，title 给完整内容；标签按 chapter+path 查 taxonomy。
@@ -1352,7 +1351,6 @@
     if (v >= 1) return v.toFixed(1);
     return v.toFixed(2);
   }
-  function cwResolveId(params) { return canvasResolveId(params); }
   function cwCell(id, key, inner, title) { return cellG(id, key, "costs", inner, title); }
   function cwTitle(r) {
     var s = (r.env && r.env.spec) || {};
@@ -1654,7 +1652,6 @@
     shared_ccp:       { zh: "跨市场共享的独立 CCP（如 NSCC 覆盖多家美国交易所）", en: "An independent CCP shared across markets (e.g. NSCC covering multiple U.S. exchanges)" }
   };
 
-  function spResolveId(params) { return canvasResolveId(params); }
   function spCell(id, path, inner, title) { return cellG(id, path, "clearing", inner, title); }
   function spSettleDays(cl) {
     var e = cl.settlement_cycle && cl.settlement_cycle.enum;
@@ -1949,7 +1946,6 @@
     mixed_by_board: { zh: "分板块不一", en: "Varies by board" }
   };
 
-  function llResolveId(params) { return canvasResolveId(params); }
   function llN(v) { return Math.round(v * 10) / 10; }
   function llCell(id, path, inner, title) { return cellG(id, path, "listing", inner, title); }
   // 混排 token 折行（CJK 逐字 / 拉丁整词，见 wrapByCharBudget）；最多 maxLines 行，超出末行省略号
@@ -2266,7 +2262,6 @@
   //   诚实三态退化为「有值实心卡 / 未记录虚线框」两态；点卡片复用 openCellOverlay。
   //   固定槽位：每个字段固定位置、跨 20 家不变，「换所即对比」。
   // ══════════════════════════════════════════════
-  function rmResolveId(params) { return canvasResolveId(params); }
   // 折行：混排 token（CJK 逐字 / 拉丁整词，见 wrapByCharBudget），per 由可用像素反推。
   // innerW 传的是整卡宽 w，正文实际从 x+14 起排、右侧还要留白——扣 24px
   // （14 左内边距 + 10 右内边距），否则密排 CJK 长行会越过卡片右沿约 6px
@@ -2411,7 +2406,6 @@
   //   固定槽位：每个字段固定位置、跨 20 家不变，「换所即对比」。
   //   纯衍生品所（de-eurex）第九章全章适用、无 only_spot（[ADR-064] 轴 8）。
   // ══════════════════════════════════════════════
-  function ptResolveId(params) { return canvasResolveId(params); }
   // 折行：混排 token（CJK 逐字 / 拉丁整词，见 wrapByCharBudget），per 由可用像素反推
   // （同 rmWrap，innerW 传整卡宽、扣 24px 左右内边距）。独立一份，便于各模块单独微调。
   function ptWrap(text, innerW, maxLines) { return wrapByPixelWidth(text, innerW, maxLines); }
@@ -2545,7 +2539,6 @@
     { path: "political_risk_note", lane: 2 },
     { path: "enforcement_note", lane: 2 }
   ];
-  function rfResolveId(params) { return canvasResolveId(params); }
   // 折行：同 rmWrap / ptWrap（整卡宽扣 24px 内边距、混排 token 折行，见 wrapByCharBudget）
   function rfWrap(text, innerW, maxLines) { return wrapByPixelWidth(text, innerW, maxLines); }
   function rfConfWord(c) {
