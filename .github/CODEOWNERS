@@ -17,3 +17,5 @@
 
 # 命令的唯一权威
 /Makefile                 @HRLoveFun
+
+# smoke test: 验证 code-owner review 闸对 .github/ 路径生效（本行会被回滚）
