@@ -199,8 +199,39 @@ main#app { max-width: 1400px; margin: 0 auto; padding: 20px; min-height: 60vh; }
 .market-panel-item:hover { background: var(--bg-hover); }
 .market-panel-item.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
 
-/* 模块「本视图…」说明段：默认隐藏（secProse 包 hidden），点模块标题展开 */
+/* 模块「本视图…」说明段：默认隐藏（secProse 包 hidden），点模块名弹窗展示 */
 .sec-prose[hidden] { display: none; }
+
+/* ── Notion 式右侧模块导航（2026-09-06 三轮迭代）──
+   常驻 = 右缘一列不显眼的细横线（当前所在模块的线更长、主题色）；
+   hover 导航区整体展开显示模块名；点击跳转对应 section。窄屏隐藏。 */
+.canvas-nav {
+  position: fixed; right: 8px; top: 50%; transform: translateY(-50%);
+  z-index: 16; display: flex; flex-direction: column; align-items: flex-end; gap: 5px;
+}
+.canvas-nav[hidden] { display: none; }
+.canvas-nav-item {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: none; background: transparent; padding: 3px 0; cursor: pointer;
+  max-width: 26px; overflow: hidden;
+  transition: max-width .18s ease;
+}
+.canvas-nav-line {
+  flex: none; display: block; width: 16px; height: 2px; border-radius: 1px;
+  background: var(--border-strong); transition: background .15s ease, width .15s ease;
+}
+.canvas-nav-label {
+  font-size: 11.5px; line-height: 1.3; color: var(--fg-muted); white-space: nowrap;
+  opacity: 0; transform: translateX(4px);
+  transition: opacity .15s ease, transform .15s ease;
+}
+/* hover 导航区：全部条目展开显示模块名 */
+.canvas-nav:hover .canvas-nav-item { max-width: 240px; }
+.canvas-nav:hover .canvas-nav-label { opacity: 1; transform: none; }
+.canvas-nav-item:hover .canvas-nav-line { background: var(--fg); width: 22px; }
+.canvas-nav-item.active .canvas-nav-line { background: var(--accent); width: 26px; }
+.canvas-nav:hover .canvas-nav-item.active .canvas-nav-label { color: var(--accent); font-weight: 600; }
+@media (max-width: 760px) { .canvas-nav { display: none; } }
 
 /* ── 单页市场画布（Phase 4 棒 2，ADR-phase4-canvas-layout）── */
 /* 7 个模块整宽纵向堆叠：每个 section 一张卡（边框 + 标题条），折叠只收 body */

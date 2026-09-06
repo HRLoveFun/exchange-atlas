@@ -2860,4 +2860,12 @@ print('全库 medium 零 sources:',n)
 
 **二轮验证：** `make build` 全绿、`node --check` 通过；headless 实测：面板四地区上下纵排、点击模块名弹出说明弹窗、Esc / 关闭按钮 / 点遮罩可关。
 
+**同日三轮迭代增补（用户复看反馈三点）：**
+
+1. **说明弹窗移除多余内容**：删掉弹窗内的「本视图… About this view」副题行——弹窗标题（模块名）本身已说明这是什么，副题是冗余。
+2. **Notion 式右侧模块导航**：`index.html` 加 `#canvas-nav` 容器，7 个条目常驻为右缘一列不显眼的细横线（当前所在模块的线更长、主题色，`IntersectionObserver` 观察 section 过视口中带判定 active）；hover 导航区整体展开显示模块名；点击 `scrollIntoView` 跳转（锚点 `scroll-margin-top` 让过吸顶层）并 `history.replaceState` 同步 `section` 深链参数（不触发 route 重渲染）。仅画布视图显示（`route()` 控制 hidden），窄屏（≤760px）隐藏。
+3. **切换交易所画面停留原位**：`renderCanvas` 识别「画布已在 + 目标市场不同」的切换态——不先进 loading 态（旧画面保留，避免内容塌陷把滚动顶回页首），新数据就绪后一次性替换 DOM 并 `window.scrollTo(0, 原scrollY)` 恢复位置。各模块 SVG 高度与市场无关（仅上市生命周期随板块数 ±30px），按像素恢复足够准；非切所路径（首次进入 / 深链带 section）行为不变。
+
+**三轮验证：** `make build` 全绿、`node --check` 通过；headless 实测：弹窗无副题、导航常驻细横线 / hover 展开 7 模块名 / 点击跳转落点在吸顶层下方、切所（cn-sse → jp-jpx）滚动位置精确保持（588 → 588）、导航随视图显隐（matrix 隐藏 / 画布显示）。
+
 **日期：** 2026-09-06

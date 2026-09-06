@@ -2791,7 +2791,6 @@
     backdrop.innerHTML = '<div class="overlay-panel overlay-panel-prose">' +
       '<button type="button" class="overlay-close" data-role="close-overlay">&times;</button>' +
       "<h3>" + esc(secDef ? secDef.title : moduleId) + "</h3>" +
-      '<div class="overlay-sub">' + t("本视图…", "About this view") + "</div>" +
       proseEl.innerHTML + "</div>";
     document.body.appendChild(backdrop);
   }
@@ -2887,7 +2886,7 @@
       var isFolded = !!folded[s.id];
       var body = s.build(id, data);
       if (s.wrap) body = '<div class="' + s.wrap + '">' + body + "</div>";
-      return '<section class="canvas-section' + (isFolded ? " is-folded" : "") + '" id="section-' + s.id + '">' +
+      return '<section class="canvas-section' + (isFolded ? " is-folded" : "") + '" id="section-' + s.id + '" data-market="' + esc(id) + '">' +
         '<div class="canvas-sec-head">' +
         '<button type="button" class="canvas-sec-title" data-role="canvas-prose" data-module="' + s.id + '"' +
         ' aria-haspopup="dialog" title="' + esc(t("查看本视图说明", "About this view")) + '">' + esc(s.title) + "</button>" +
@@ -2911,13 +2910,52 @@
     var toolbar = canvasToolbar(t(
       "从上到下读完一个市场：谁在管 → 谁在场 → 盘中怎么走 → 一笔交易花多少 → 成交后 T+N → 一只证券的一生 → 还要当心什么 · 点击任意元素看出处",
       "Read one market top to bottom: who regulates → who trades → how the day runs → what a trade costs → T+N after the trade → life of a security → what to watch out for · click any element for sources"));
-    app.innerHTML = toolbar + '<div class="loading">' + t("加载市场画布中…", "Loading market canvas…") + "</div>";
+    // 切换交易所（画布已在、目标市场不同）不先进 loading 态——旧画面保留到新
+    // 数据就绪一次性替换，并把滚动位置恢复到原处（切所不跳顶，三轮迭代）；
+    // 各模块 SVG 高度与市场无关（仅 ll 随板块数 ±30px），按像素恢复足够准。
+    var prevSec = app.querySelector(".canvas-section");
+    var isSwitch = !!(prevSec && prevSec.dataset.market && prevSec.dataset.market !== id);
+    var savedY = isSwitch ? window.scrollY : null;
+    if (!isSwitch) app.innerHTML = toolbar + '<div class="loading">' + t("加载市场画布中…", "Loading market canvas…") + "</div>";
     return loadExchange(id).then(function (data) {
       if (!canvasSynced("canvas", id)) return;
       app.innerHTML = toolbar + canvasShell(id, data);
-      canvasScrollToSection(params.section);
+      if (savedY != null) window.scrollTo(0, savedY);
+      else canvasScrollToSection(params.section);
+      observeCanvasSections();
     }).catch(function (e) {
       app.innerHTML = toolbar + '<p style="color:var(--danger)">' + t("加载失败：", "Failed to load: ") + esc(e.message) + "</p>";
+    });
+  }
+
+  // ── Notion 式右侧模块导航（2026-09-06 三轮迭代）──
+  //   常驻 = 右缘一列不显眼的细横线（当前所在模块的线更长、主题色）；
+  //   hover 导航区展开显示模块名；点击跳转对应 section（scroll-margin-top
+  //   已让过页头 + 吸顶条），并 history.replaceState 同步 section 深链参数
+  //   （不触发 route 重渲染）。仅画布视图显示（route() 控制 hidden），窄屏隐藏。
+  function buildCanvasNav() {
+    var nav = $("#canvas-nav");
+    if (!nav) return;
+    nav.innerHTML = CANVAS_SECTIONS.map(function (s) {
+      return '<button type="button" class="canvas-nav-item" data-role="canvas-nav-jump" data-module="' + s.id + '" title="' + esc(s.title) + '">' +
+        '<span class="canvas-nav-label" aria-hidden="true">' + esc(s.title) + "</span>" +
+        '<i class="canvas-nav-line" aria-hidden="true"></i></button>';
+    }).join("");
+  }
+  var canvasNavObserver = null;
+  function observeCanvasSections() {
+    if (canvasNavObserver) canvasNavObserver.disconnect();
+    if (!window.IntersectionObserver) return;
+    canvasNavObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var id = en.target.id.replace(/^section-/, "");
+        var item = document.querySelector('.canvas-nav-item[data-module="' + id + '"]');
+        if (item) item.classList.toggle("active", en.isIntersecting);
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    CANVAS_SECTION_IDS.forEach(function (sid) {
+      var el = document.getElementById("section-" + sid);
+      if (el) canvasNavObserver.observe(el);
     });
   }
 
@@ -2957,6 +2995,9 @@
     var params = migrateLegacyModuleHash(parseHash());
     var view = params.view;
     updateActiveTab(view);
+    // 右侧模块导航仅画布视图显示（非画布视图无 section 锚点，导航无意义）
+    var nav = $("#canvas-nav");
+    if (nav) nav.hidden = !!view;
     var app = $("#app");
     if (view === "exchange") renderExchange(app, params);
     else if (view === "health") renderHealth(app, params);
@@ -3029,6 +3070,16 @@
       // 改为弹窗，与出处浮层共用遮罩 / Esc / 点外关闭的交互）。说明段内容
       // 在隐藏的 .sec-prose 节点里（见 secProse），弹窗只搬运不重渲染。
       openProseOverlay(hit.dataset.module);
+    } else if (role === "canvas-nav-jump") {
+      // Notion 式右侧导航：跳到对应 section（锚点 scroll-margin-top 让过吸顶层），
+      // 并 replaceState 同步 section 深链参数——不触发 route 重渲染。
+      var navSec = document.getElementById("section-" + hit.dataset.module);
+      if (navSec) {
+        navSec.scrollIntoView({ behavior: "smooth", block: "start" });
+        var np = parseHash();
+        np.section = hit.dataset.module;
+        history.replaceState(null, "", "#" + new URLSearchParams(np).toString());
+      }
     } else if (role === "canvas-market-toggle") {
       // 市场选择面板开合（按地区分组的弹出面板，见 canvasToolbar / marketPanelHtml）
       var mpanel = hit.parentElement.querySelector(".market-panel");
@@ -3112,6 +3163,7 @@
   }
   updateHeaderOffset();
   if (window.ResizeObserver && $(".page-header")) new ResizeObserver(updateHeaderOffset).observe($(".page-header"));
+  buildCanvasNav();
   loadCore()
     .then(function () {
       window.addEventListener("hashchange", route);
