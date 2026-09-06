@@ -1,6 +1,7 @@
 /* exchange-atlas 前端 — 零依赖 vanilla JS
  * 数据源：docs/data/*.json（由 tools/sync.py 从 schema/ + data/ 生成，见 CLAUDE.md）
- * 路由：hash 驱动，#view=matrix|exchange|health
+ * 路由：hash 驱动——市场画布 #market=<id>&section=<module>（默认）；
+ *       「更多」组 #view=matrix|timezone|health|exchange（深链不变）
  * 两个全局开关（存 localStorage）：
  *   - 数据语言模式：zh（中文）⇄ en（英文）—— 只影响数据值，UI 标签恒双语。
  *     哪个是原文锚点由各交易所的 source_lang 决定（见 DECISIONS.md ADR-013），
@@ -2866,9 +2867,21 @@
     var moreBtn = $('.tab-btn[data-view="more"]');
     if (moreBtn) moreBtn.setAttribute("aria-expanded", moreView ? "true" : "false");
   }
+  // 旧 module 深链迁移（Phase 4 棒 4，ADR-phase4-canvas-layout #5）：
+  // #view=<module>&id=X（7 个可视化模块）→ history.replaceState 到
+  // #market=X&section=<module>（旧 id 参数经 canvasResolveId 兼容读取、裁决）
+  // + 滚到对应 section，不留死链；矩阵 / 时区 / 健康度 / 档案页的 #view= 深链
+  // 原样保留（它们进「更多」不进画布）。迁移目标 id 集合 = CANVAS_SECTION_IDS
+  // （check_canvas_sections.py 保证与 7 个模块一一对应、一个不少）。
+  function migrateLegacyModuleHash(params) {
+    if (!params.view || CANVAS_SECTION_IDS.indexOf(params.view) < 0) return params;
+    var migrated = { market: canvasResolveId(params), section: params.view };
+    history.replaceState(null, "", "#" + new URLSearchParams(migrated).toString());
+    return migrated;
+  }
   function route() {
     closeOverlay();
-    var params = parseHash();
+    var params = migrateLegacyModuleHash(parseHash());
     var view = params.view;
     updateActiveTab(view);
     var app = $("#app");
@@ -2894,7 +2907,12 @@
     var hit = e.target.closest("[data-role]");
     if (!hit) return;
     var role = hit.dataset.role;
-    if (role === "cell" || role === "goto-health-field") {
+    if (role === "goto-canvas") {
+      // 品牌角标回画布（不带 section——回顶部）；默认市场由 canvasResolveId 裁决，
+      // 不在 HTML 里硬编码默认所（CANVAS_DEFAULT_EX 单一权威在 app.js）
+      e.preventDefault();
+      setHash({ market: canvasResolveId(parseHash()) });
+    } else if (role === "cell" || role === "goto-health-field") {
       openCellOverlay(hit.dataset.exchange, hit.dataset.path, hit.dataset.chapter);
     } else if (role === "td-ghost") {
       // 机制核心面板透视开关（ADR-055）：切 .td-plot-wrap 的 td-ghost 类 + 持久化

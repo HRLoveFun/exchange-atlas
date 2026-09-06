@@ -11,9 +11,8 @@ A unified framework for recording the trading mechanics and market rules of the 
 
 ## What this is
 
-- **Market Mechanics Profile**: pick a market and see how its trading day works on a single screen — sessions, call auctions, price-limit walls, circuit-breaker triggers, volatility corridors, matching model, order types, tick size, settlement cycle, and taxes and fees — plotted on a plane of *intraday time × % change from previous close*. Every element opens to show the source text it came from.
-- **A comparison matrix**: rows are exchanges, columns are switchable dimension groups (trading mechanism / listing & delisting / clearing & settlement / regulatory environment / costs & taxes), so institutional differences read across at a glance.
-- **One profile per exchange**: recorded systematically across eleven chapters (basic information, regulation, products, trading mechanism, listing & delisting, indices, clearing & settlement, participants, technical infrastructure, costs & taxes, risks).
+- **Market canvas**: pick a market and read it top to bottom — Regulation Map (who regulates, how money moves in and out) → Participant Map (who is on the other side of your trades) → Market Mechanics Profile (how the trading day runs: sessions, call auctions, price-limit walls, circuit-breaker triggers, volatility corridors, matching model) → Cost Waterfall (what a trade costs) → Settlement Pipeline (T+N days after the trade) → Listing Lifecycle (the life of a security) → Risk Flags (what to watch out for); every section can be collapsed, and every element opens to show the source text it came from
+- Under **More**: a comparison matrix (rows are exchanges, columns are switchable dimension groups — trading mechanism / listing & delisting / clearing & settlement / regulatory environment / costs & taxes — so institutional differences read across at a glance), a timezone gantt chart, and data health; one profile per exchange, recorded systematically across eleven chapters (basic information, regulation, products, trading mechanism, listing & delisting, indices, clearing & settlement, participants, technical infrastructure, costs & taxes, risks)
 - Every fact carries a source link, a verbatim quote, a verification date and a confidence level — not "reportedly", but "this document, this clause, says this".
 
 ## What this does not cover
