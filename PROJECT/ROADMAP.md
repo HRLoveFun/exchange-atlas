@@ -201,6 +201,7 @@
   - [x] **二轮迭代（同日，[ADR-canvas-ui-iterate] 增补）**— 用户复看反馈两点：② 地区面板从左右多列改**上下分组**（每地区块占满宽纵排、组内交易所名横向流式）；⑤ 「本视图…」说明从就地展开改**点击模块名弹窗**（`openProseOverlay` 复用出处浮层基建，内容取隐藏 `.sec-prose` 节点搬运，模块名 `aria-haspopup="dialog"`）。`make build` 全绿；headless 实测面板纵排与弹窗开合通过。
   - [x] **三轮迭代（同日，[ADR-canvas-ui-iterate] 增补）**— 用户复看反馈三点：⑤ 弹窗移除「本视图…」副题行；新增 **Notion 式右侧模块导航**（常驻右缘细横线、`IntersectionObserver` 高亮当前模块、hover 展开模块名、点击跳转 + `replaceState` 同步 section 深链，仅画布视图显示、窄屏隐藏）；**切换交易所画面停留原位**（`renderCanvas` 切所态跳过 loading、旧画面保留到新数据就绪一次性替换并恢复 `scrollY`，不跳顶）。`make build` 全绿；headless 实测弹窗无副题、导航显隐 / hover / 跳转、切所滚动位置精确保持（588 → 588）全过。
   - [x] **四轮迭代（同日，[ADR-canvas-ui-iterate] 增补）**— 导航收起态从一列细横线改为**单个半透明圆形按钮**（34px 毛玻璃圆钮，触屏可点击开合 + `aria-expanded`，hover 同样展开），条目改药丸标签、当前模块绿框高亮；点外部 / Escape / 跳转后自动收起。`make build` 全绿；headless 实测圆钮开合 / 跳转收起 / 点外收起全过。
+  - [x] **五轮迭代（同日，[ADR-canvas-ui-iterate] 增补）**— 用户复看反馈：四轮形态过于复杂，简化为「收起态 = 半透明圆形按钮，hover 展开导航」——撤下点击开合 / 药丸样式 / 自动收起，条目回到模块名 + 细横线（active 高亮不变），其余不变。headless 实测全过。
 
 - [x] **英文版可用性修订**（横切条目，不属于 Phase 序列；审查 2026-08-30，四批次全部执行完 2026-08-31，[ADR-049]）— 走查发现「英文版」（`langMode: en`）只在矩阵 / 档案 / 健康度三视图部分成立；市场机制剖面 + 成本瀑布几乎全中文（Phase 2/3 新代码未接语言开关），另 1028 个 `detail` 从不翻译、[ADR-006] UI 双语约定多处漏网、站点外壳与 `README` 无英文。**完整审查 + 修订计划见 `PROJECT/ENGLISH-REVISION-PLAN.md`（已归档），决策落点见 [ADR-049]，此处只记执行结果。**
   - **批次 1（方案 A + C，[ADR-049]）**：市场机制剖面 / 成本瀑布 / 时区甘特条全面接入语言开关，约 180 个串走新增的零依赖 `t(zh, en)` / `tSel()`；chip 名改为按 `chapter` + `path` 查 taxonomy 的 `label_zh` / `label_en`（**中文态因此有 5 个 chip 改名**，是唯一偏离「zh 逐字不变」处，理由见 ADR）。新增 `tools/check_ui_i18n.py` 并入 `make check`（已用探针串验证能拦下）。
