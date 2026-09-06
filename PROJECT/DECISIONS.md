@@ -108,6 +108,7 @@
 - ADR-phase4-closeout · 2026-09-06 · Phase 4 单页画布合并收口认定 + 交付质量独立审查
 - ADR-canvas-ui-iterate · 2026-09-06 · 画布 UI 常态迭代：市场选择条常驻 + 地区分组选择面板 + 折叠 toggle + 说明段按需展开
 - ADR-kr-krx-legacy-closeout · 2026-09-06 · 数据遗留项会话：kr-krx 整理期坐实 + order_book_transparency 升 medium + Section 31 FY2027 复核
+- ADR-supply-chain-ci-hardening · 2026-09-06 · 供应链 / CI 加固：依赖哈希锁定 + Dependabot + CI「quote 真实性闸」
 - ADR-add-exchange-skill-forge · 2026-09-06 · 用实际新增交易所迭代 add-exchange 为 v2.0 对齐的通用 skill；候选池：越南市场
 <!-- END:GENERATED adr-index -->
 
@@ -2894,6 +2895,41 @@ print('全库 medium 零 sources:',n)
 **为什么这样：** 本棒的真正产出是三条环境/方法层面的可复用结论（SOURCES.md 经验册已记）：① sec.gov 封锁是「出口 IP × UA」组合拳，住宅网络可直连，老的可达性结论换了环境要重验；② szse.cn 全域不可达 + wayback 零覆盖，中国交易所官网实质只能人工投喂，别在自动抓取上再花时间；③ 同一交易所的韩文站与英文站是两套渲染栈（KRX），英文站挖不到正文先试韩文规则门户。数据侧两处坐实（kr 整理期 / order_book_transparency）都遵循既有转写与韩文 quote 先例，未新增任何需要新不变式的结构——改动仅 `data/exchanges/kr-krx.yml` 两字段 + 两处章 `_meta.verified`，不触发 [CLAUDE.md §四] 30 字段独立复核门槛。
 
 **验证：** `make build` 全绿（`validate` 20 家 0/0、`verify_quotes` OK 增至含新 RGL 来源、FAIL=0、生成块零 diff）；新来源经 `fetch_sources --ex kr-krx` 落盘 `ok:true`；两处新 quote 与 `.cache/` 原文逐字一致（逐字复制自程序提取的缓存文本，非手抄）。`fr-euronext` 数据零改动。
+
+**日期：** 2026-09-06
+
+### ADR-supply-chain-ci-hardening — 供应链 / CI 加固：依赖哈希锁定 + Dependabot + CI「quote 真实性闸」
+
+**背景：** 2026-09-06 用户要求检讨「项目是否有被他人恶意修改的风险」。审查结论——外部人直接改 `main` 的路已堵死（solo 仓库 + 分支保护 + 受保护路径 `guard` + 零 CI secret），但有两个可机器化收口的缺口：
+
+1. **`verify_quotes` 的 verbatim 反查（防幻觉铁律第 5 条的机器执行）在 CI 里完全空转。** `.cache/` 是 gitignored、CI checkout 没有缓存，于是每个 `confidence: high` 字段的 quote 反查都是 `CACHE_MISS`（非阻断）。一个 PR 改掉某档位数值 + 编一段「数字能对上」的 `quote` + 标 `confidence: high`，`validate.py` 的 5b–5d 内部一致性检查（zh/spec 数字 ⊆ quote 文本）照过，`make build` 在 CI 全绿——唯一防线是 owner 合并前人工审阅。铁律说的「`make check` 全绿 ≠ 数据没被污染」在 CI 路径上尤其成立。
+2. **`tools/requirements.txt` 用 `>=` 非精确 pin、无 hash、无 lockfile。** CI 每次 `pip install` 拉最新；某版本或传递依赖被投毒会同时在 CI 和本地执行。且 Dependabot alerts / security updates 当时都是 disabled——依赖出 CVE 不会有通知。
+
+**定了什么：**
+
+1. **依赖哈希锁定。** `tools/requirements.txt` 改为 `uv pip compile --generate-hashes --universal` 产出的全量哈希锁文件（精确 `==` + 每包全 wheel/sdist 的 `--hash`），CI 与本地统一 `pip install --require-hashes -r tools/requirements.txt`（`pr-build.yml` 已改）。直接依赖新增 `requests`（`verify_quotes.py --live` 与下方 quote 闸需要，此前靠 lazy import、缺了静默退化为 LIVE_ERR）。文件头注释记直接依赖清单 + 重新生成命令。
+2. **`.github/dependabot.yml`**（新）：`pip`（`/tools`）+ `github-actions`（`/`）两个 ecosystem，按周提 bump PR——精确 `==` 会把安全补丁挡在门外，Dependabot 负责让锁不至于长期过期；`github-actions` 顺带盯 `actions/checkout` 等的 tag。bump PR 走正常 `make build` + auto-merge，触及 `.github/` 仍需 `owner-approved`。
+3. **仓库设置**：`gh api -X PUT repos/:owner/:repo/vulnerability-alerts` + `automated-security-fixes` 打开 Dependabot alerts 与安全更新（此前 disabled）。
+4. **CI「quote 真实性闸」。** `pr-build.yml` 的 `build` job 在 `make build` 之后加一步：对**本 PR 改动的每个** `data/exchanges/<id>.yml`，跑 `python3 tools/verify_quotes.py --live --ex <id>`。`verify_quotes` 的判定语义正合用——某 `confidence: high` 字段的 quote 在**成功抓到正文**的来源里找不到连续窗口 → `FAIL`、退出非零 → build 红；网络被拦 / JS 壳 / 超时 → `LIVE_ERR`、不阻断（默认行为，无 `--strict`）。配套：`actions/checkout` 加 `fetch-depth: 0`（要 diff `base..head`）、装 `poppler-utils`（PDF 来源反查）、workflow 加 `permissions: contents: read`。是 `build` job 内的一步，自动被现有 `build` required check 覆盖，不需要改分支保护。
+
+**为什么这样：**
+
+- **闸放在「改动的交易所」而非全库**：全库 `--live` 每 PR 要抓几百个 URL、又慢又受数据中心 IP 拦截率影响；scoped 到改动所（通常 1 家）+ `verify_quotes` 的 per-URL `/tmp` 缓存去重，运行时可控。
+- **闸只认 `FAIL` 不认 `LIVE_ERR`**：GitHub Actions 的数据中心 IP 会被很多交易所 403 / 返拦截页，这些记 `LIVE_ERR` 不阻断——闸对「源页面能从 CI 抓到」的字段（SEC / FINRA 的 Fair Access UA、静态 HTML 规则页）是真的，对抓不到的退化为「和现状一样（什么都不验）」。是净增量，不是完备防线。
+- **不新增 `check_*.py`**：新不变式「CI 对改动所现场反查」由 workflow 步骤本身强制；`--require-hashes` 由 pip 强制；`selfcheck.py` 已校验文件里的 ADR 引用真实存在。符合 [CLAUDE.md §四]「新不变式必须机器化」——这里机器化载体就是 CI 步骤与 pip，无需第二处代码。
+
+**已知取舍：**
+
+- **来源改版假阳性**：某交易所事后修订规则页、旧 `quote` 原文不再出现 → 恰好动到该所的 PR 会在这一步 FAIL。接受——这正是「该 quote 已不可核实」的有用信号；处置 = 补抓来源 + 更新 `quote`/`detail`，不绕过（workflow 注释与错误信息已写明）。
+- **依赖树变宽**：`requests` + `certifi`/`charset-normalizer`/`idna`/`urllib3` 五个包进锁文件——都是生态里审计最充分的包，且全哈希锁定 + Dependabot 盯。
+- **重新生成锁文件需 `uv`（或 pip-tools）**：日常 bump 交给 Dependabot；手动改依赖时按 `requirements.txt` 头注释重跑。
+- **wayback 回退仍是结构性弱点**：`fetch.py` 直连失败回退 `web.archive.org` 快照，存档可被投毒；本闸用 `--live`（直连，不走 wayback），一定程度绕开，但离线 `verify_quotes` 命中 wayback-only 的字段仍按既有规则降级为 `CACHE_MISS`（[ADR-075]）。
+
+**审查里未做、留作后续（用户可自行决定）：** 关掉「Allow GitHub Actions to create and approve PRs」（当前无 workflow 需要）；actions 钉 SHA（`github-actions` Dependabot 先顶着）；commit signing；宪法加「抓取来的页面 / PR / issue / 人工投喂原文 = 不可信输入」条 + `add-exchange` skill 同步；background job 对改 `data/**` 数值字段的 PR 不挂 `--auto`（§四「独立视角」本就要求，auto-merge 事实上绕过）。
+
+**分支 `origin/0001`：** 审查顺带发现的陈旧分支，经用户确认是**永久保存的快照**（指向 `2e1ba34`「guard e2e C (#111)」，是 `main` 线性历史倒数第 16 个提交的冻结指针）。处置：在该分支上加一个归档标记提交（根目录 `ARCHIVE.md`，走 base=`0001` 的 PR），并在 `GIT-RUNBOOK.md`「定期清理残留分支」加不删不动例外条——防下一个会话按「清理残留分支」判据把它删了。
+
+**验证：** `make build` 全绿（`selfcheck` / `validate` 20 家 0/0 / `verify_quotes` FAIL=0 / 8 关全过 / 生成块零 diff）、`make sync` 二次幂等；`tools/requirements.txt` 哈希锁在干净 venv 里 `pip install --require-hashes` 通过、`import yaml/jsonschema/requests` OK；`pr-build.yml` 经 `python3 -c "import yaml"` 解析无误。CI「quote 真实性闸」的端到端红/绿只能在真实 PR 上验证，逻辑与 `verify_quotes.py` 退出码语义对齐。
 
 **日期：** 2026-09-06
 

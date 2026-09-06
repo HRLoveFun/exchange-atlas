@@ -4,13 +4,56 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0            # 「quote 真实性闸」要 diff base..head 取改动的交易所
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -r tools/requirements.txt
+      - run: pip install --require-hashes -r tools/requirements.txt
       - run: make build
+
+      # ---------------------------------------------------------------------
+      # quote 真实性闸（[ADR-supply-chain-ci-hardening]）
+      #
+      # verify_quotes 的 verbatim 反查在 CI 里本来空转——.cache/ 不入库，全部记
+      # CACHE_MISS。这一步对「本 PR 改动的交易所」补一次现场抓取反查：某 confidence:
+      # high 字段的 quote 在**能抓到的**来源正文里找不到连续窗口 → verify_quotes 判
+      # FAIL、退出非零、build 变红。网络被拦 / JS 壳 / 超时只记 LIVE_ERR，不阻断
+      # （verify_quotes 默认行为，无 --strict）。
+      #
+      # 误报处置：若 FAIL 确因来源页面事后改版、旧 quote 原文不再出现，补抓来源
+      # （make fetch EX=<id>）并更新该字段 quote / detail，不要绕过本步。
+      # ---------------------------------------------------------------------
+      - name: poppler-utils（PDF 来源现场反查用）
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: quote 真实性（改动的交易所现场反查）
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" \
+            | sed -n 's#^data/exchanges/\(.*\)\.yml$#\1#p' | sort -u)
+          if [ -z "$CHANGED" ]; then
+            echo "本 PR 未改动 data/exchanges/*.yml，跳过。"
+            exit 0
+          fi
+          echo "改动的交易所：$CHANGED"
+          rc=0
+          for ex in $CHANGED; do
+            echo "::group::verify_quotes --live --ex $ex"
+            python3 tools/verify_quotes.py --live --ex "$ex" || rc=1
+            echo "::endgroup::"
+          done
+          if [ "$rc" -ne 0 ]; then
+            echo "::error::存在 FAIL —— 某 confidence:high 字段的 quote 在能抓到的来源正文里找不到（疑似改写 / 编造）。见上方 FAIL 清单；若确因来源页面改版，补抓来源并更新 quote，不要绕过本步。"
+            exit 1
+          fi

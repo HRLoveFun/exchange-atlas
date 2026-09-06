@@ -1,0 +1,24 @@
+# Dependabot —— 按周提依赖 bump PR，配合 tools/requirements.txt 的哈希锁定，
+# 避免精确 == 把安全补丁挡在门外。依据见 PROJECT/DECISIONS.md [ADR-supply-chain-ci-hardening]。
+#
+# bump PR 走正常 pr-build.yml（make build）+ auto-merge 流水线；改到 .github/ 会触发
+# protected-paths-guard 的 `guard` check，需 owner 打 `owner-approved` 标签后才合并。
+version: 2
+updates:
+  # 构建 / 校验脚本的 Python 依赖
+  - package-ecosystem: pip
+    directory: /tools
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+
+  # GitHub Actions（actions/checkout、actions/setup-python 等的版本 tag）
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(ci)"

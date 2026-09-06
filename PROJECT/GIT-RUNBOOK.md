@@ -19,7 +19,7 @@
 
 **什么时候还需要人工介入（两种情况）**：
 
-- **CI 报红**（`make build` 不过）——auto-merge 会一直等，PR 不会被错误地合进去；人 / 协调者去看 `gh pr checks <n>` 找出哪里红了，修完再等它自动合并，不需要重新设置 auto-merge。
+- **CI 报红**（`make build` 不过）——auto-merge 会一直等，PR 不会被错误地合进去；人 / 协调者去看 `gh pr checks <n>` 找出哪里红了，修完再等它自动合并，不需要重新设置 auto-merge。`build` check 现在除 `make build` 外还跑「quote 真实性闸」（[ADR-supply-chain-ci-hardening]）：对本 PR 改动的 `data/exchanges/<id>.yml` 现场抓来源反查 `confidence: high` 字段的 quote，能抓到的来源里找不到原文就 `FAIL`。红在这一步且确因来源页改版，`make fetch EX=<id>` 补抓 + 更新 quote，别绕过。
 - **真实内容冲突**（两条分支改了同一处，git 判定不可自动合并）——auto-merge 同样会一直等；这种情况本就该露出来给人看，走下面「人工兜底合并」。`ROADMAP.md` §一「下一步」并行改同一处即属此类——只在阶段切换时才会撞，撞了按内容冲突处理。
 
 - **触及受保护文件的 PR**（清单见 `.github/CODEOWNERS`）——`protected-paths-guard.yml` 的 required check `guard` 会因缺 `owner-approved` 标签而失败，把 PR 挡在 `BLOCKED`；owner 审阅后在 PR 上打 `owner-approved` 标签，`guard` 转绿、auto-merge 放行（见 [ADR-protected-paths-ci-guard]）。
@@ -81,6 +81,8 @@ git pull --ff-only && make build             # gh 在删分支失败时会跳过
 ## 定期清理残留分支
 
 `deleteBranchOnMerge` 已开，但后台任务的 `worktree-*` 分支在 PR 被 **close**（而非 merge）时不会自动删；本地那份可能还留在别的并行会话摘不掉的 worktree 里。隔一阵扫一次。
+
+> ⚠️ **`origin/0001` 是永久保存的快照分支，永远不要删、不要推、不要变基。** 它指向 `2e1ba34`（"guard e2e C (#111)"，2026-09-06），是 `main` 线性历史上的一个冻结点，用户明确要求长期保留（见 [ADR-supply-chain-ci-hardening] 与分支内 `ARCHIVE.md`）。下面的「安全删除判据」对它不适用——`git diff origin/0001 origin/main` 非空只是因为 `main` 往前走了，不代表它可以清理。
 
 安全删除判据（逐条过）：`gh pr view <n> --json state,mergeCommit` 为 `MERGED` 且 merge commit 是 `origin/main` 祖先（`git merge-base --is-ancestor <merge> origin/main`）；或 PR `CLOSED` 且确认被取代、`git diff <branch> origin/main` 为空。确认后：
 
