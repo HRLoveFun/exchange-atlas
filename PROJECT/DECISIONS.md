@@ -103,6 +103,7 @@
 - ADR-protected-files-approval-gate · 2026-09-06 · 受保护文件审批闸：CODEOWNERS + 分支保护 code-owner review
 - ADR-slim-coordination-machinery · 2026-09-06 · 精简协调机器：ADR 改 slug 标识、删 ROADMAP-INBOX、§六 / §八 重写
 - ADR-protected-paths-ci-guard · 2026-09-06 · 受保护文件审批闸的服务端实现：CI guard check 取代 GitHub 原生 code-owner review
+- ADR-phase4-canvas-layout · 2026-09-06 · Phase 4 单页画布合并：布局形态 / 模块排序 / 折叠策略 / 深链兼容定案
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2716,5 +2717,57 @@ print('全库 medium 零 sources:',n)
 - **没动 [ADR-protected-files-approval-gate] 的正文**（[CLAUDE.md §八] 只增补不改写）——那条记录的是当时的判断（「CODEOWNERS 是 GitHub 原生、零维护」），本条是实测后的修正。
 
 **验证：** `.github/workflows/protected-paths-guard.yml` YAML 语法 + 内嵌 shell `bash -n` 通过；本 PR 自身触及受保护路径（`CLAUDE.md` / `.github/`）——合并前 `guard` check 应失败（红），owner 打 `owner-approved` 标签后转绿。冒烟：合并后开一个只改 `README.md` 一行的 PR，确认 `guard` 放行、auto-merge 正常；再开一个改 `schema/` 注释的 PR，确认 `guard` 红、打标签后转绿合并。`make build` 不受影响（本 PR 不碰 `tools/` / `data/`）。
+
+**日期：** 2026-09-06
+
+---
+
+### ADR-phase4-canvas-layout — Phase 4 单页画布合并：布局形态 / 模块排序 / 折叠策略 / 深链兼容定案
+
+**背景：** [ADR-057] 立了北极星（7 个可视化模块终态合并为单页画布，矩阵 / 时区 / 健康度 / 档案页降「更多」入口）与 merge-ready 设计清单，但把四件事明确留给「Phase 4 启动时 Q&A」：① 画布整体布局形态 ② 「更多」入口形态 ③ 各模块排序与常驻 / 折叠策略 ④ 路由深链兼容。[ADR-095]（2026-09-06 用户拍板）确认 Phase 3 六个模块渲染层全部落地、[ADR-057] #4 硬前置满足，Phase 4 转为可启动。本条是启动 Q&A 的落点，把这四件事定死，并把 7 个模块散在各自设计 ADR 里的 merge-ready 意向对账成一张「整块画布」表。
+
+**定了什么（用户 2026-09-06 Q&A 拍板）：**
+
+1. **布局形态 = 纵向滚动长图。** 7 个模块整宽堆叠，向下滚动读完一个市场。不做缩放平移无限画布（移动端体验差、需视口 / 小地图管理、实现复杂），不做固定分区网格 dashboard（市场机制剖面需横向宽度，挤进网格失真）。移动端天然退化为单列。
+
+2. **模块排序 = 交易员认知流。** 自上而下：监管图（谁在管 / 外资能否进 / 钱能否出）→ 参与者图（谁在场上跟我做对手盘）→ 市场机制剖面（盘中价格怎么走）→ 成本瀑布（一笔交易花多少）→ 交割管线（成交之后 T+N 天）→ 上市生命周期（一只证券的一生）→ 风险旗标（还需要当心什么）。这条线是 [ADR-035] 转向定义的「交易员首次接触陌生市场」叙事的自然顺序——剖面虽是 v2.0 旗舰主视图，但认知上「能不能进这个市场」先于「盘中怎么走」。
+
+3. **常驻 / 折叠策略 = 全部默认展开。** 一路滚下去 7 个模块全部可见，折叠只作用户手动收起（每个 `<section>` 标题条可点击收起，状态存 `localStorage`）。不做「剖面常驻 + 其余默认折叠」——那样「一眼看懂全貌」要多一轮交互，与北极星逆行。
+
+4. **「更多」入口形态 = 主 tab 行下方展开的二级标签横条**（记忆 `v2-visualization-pivot` 已预表态、2026-09-04 用户口头确认，此处正式落定）。顶层 tab 行收敛为「市场画布 Canvas」（默认）+「更多 More」两项；点「更多」→ 其下方展开二级横条：对比矩阵 / 时区甘特条 / 数据健康度（档案页经矩阵行链接进入，不单列二级标签）。不做下拉菜单 / 页脚链接 / 独立落地页。
+
+5. **路由深链兼容 = 旧 module 深链重定向到画布锚点。** 画布 hash = `#market=<id>`（单一当前市场，取代 7 个模块各自的 `id` 参数）；section 锚点 = `#market=<id>&section=<module>`（如 `settlement-pipeline`），`route()` 命中即滚到对应 `<section id>`。旧 `#view=<module>&id=X`（7 个模块）→ `history.replaceState` 迁移为 `#market=X&section=<module>` + `scrollIntoView`，不留死链。矩阵 / 时区 / 健康度 / 档案页的 `#view=matrix|timezone|health|exchange` 深链原样保留（它们进「更多」不进画布）。
+
+**7 模块 merge-ready 对账（逐条汇总各设计 ADR 已答的 [ADR-057] 五项）：**
+
+| 模块（排序 / 设计 ADR） | 锚定关系 | 诚实三态载体 | 语言开关 | 零构建 builder |
+|---|---|---|---|---|
+| 1 监管图（[ADR-061]） | 独立分区，自上而下四层「监管截面」，靠视觉语言呼应 | 四层各自「未记录 / 不设 / 未公布」占位 | 从首版接入 | `rmBuild` 手写 SVG |
+| 2 参与者图（[ADR-064]） | 独立分区，自上而下三层「参与者截面」 | 接入链节点虚线框占位 | 从首版接入 | `ptBuild` 手写 SVG |
+| 3 市场机制剖面（[ADR-040]/[ADR-042]） | 画布核心平面「日内时间 × 相对前收价」 | [ADR-035] D 三态（null / `type: none` / 缺省） | [ADR-049] 批次 1 接入 | `tdBuild` 手写 SVG |
+| 4 成本瀑布（[ADR-047]） | 独立分区，中轴 0 bp 镜像双瀑布，线条语言呼应主图（[ADR-040] 表） | 实心条 / 幽灵斜纹条 / 不征收 / 未结构化 | [ADR-049] 批次 1 接入 | `cwBuild` 手写 SVG |
+| 5 交割管线（[ADR-051]） | 共用「相对天数」轴，是剖面日内时间的自然延伸（三级缩放之二） | 双泳道 only/both/none + 违约瀑布 unstructured 占位 | 从首版接入 | `spLanes` 手写 SVG |
+| 6 上市生命周期（[ADR-059]） | 时间尺度「一只证券的一生（年）」，三级缩放之三 | 虚线框 / 空心点 / 斜体灰 | 从首版接入 | `llBuild` 手写 SVG |
+| 7 风险旗标（[ADR-066]） | 独立分区，两泳道旗标面板 | 置信度四态字形（含「未记录」虚线框） | 从首版接入 | `rfBuild` 手写 SVG |
+
+**占位**：本条 #3 统一定为「全部常驻、默认展开、可手动折叠」，覆盖各模块设计 ADR 里个别的 merge-ready 意向表述（如上市生命周期曾提「可折叠」）——以本条为准。诚实三态在整宽纵向布局下不缩小（每个模块仍占满宽度），[ADR-057] 清单「分区缩小后三态会不会被挤没」的顾虑在纵向长图形态下不成立。
+
+**实施棒序（详版进 ROADMAP §三 Phase 4 条目）：**
+
+- **棒 1 · 统一市场选择器 + 单次数据加载**（可独立合并）——7 个模块各自的 `市场 Market` 下拉 + `*ResolveId(params, 各自 DEFAULT_EX)` + hash 同步守卫收敛为一个画布级选择器；抽 `canvasResolveId(params)`（单一默认所）；[ADR-055]/[ADR-090] 的透视 / 业务线开关一并收敛到画布级。机器校验：`check_no_dup_render_helpers.py` 扩「`市场 Market` label 字面量 ≤ 1」。
+- **棒 2 · 画布外壳 + 模块编排**——新 `renderCanvas(app, params)` 按 #2 顺序把 7 个 builder 堆进滚动容器，每个包 `<section id="section-<module>">` + 可折叠标题条（默认展开，状态存 `localStorage`）；`route()` 默认分支改 `renderCanvas`。`index.html` tab 行 10 → 2。机器校验：新 `check_canvas_sections.py`（7 个 builder 都被 `renderCanvas` 调用、7 个 section 锚点齐全）。
+- **棒 3 ·「更多」入口**——`index.html` 加二级 `<nav hidden>`；`updateActiveTab` 拆两级；matrix / timezone / health / exchange 的 `route()` 分支与深链不动。
+- **棒 4 · 路由深链兼容 + 内链迁移**——`route()` 加旧 hash 迁移（7 个 module view → `replaceState` + `scrollIntoView`）；grep 仓库 `#view=` 内链逐处更新；机器校验 `check_no_stale_view_links.py`。README / README.en.md 手工同步。
+- **棒 5 · 视觉打磨 + 20 家巡检 + 收口 gate**（交互式会话）——headless 20 家 × 明暗 × 中英；跨模块视觉语言统一（[ADR-040] 线条语言表跨整块画布重新校）；穿插 §一 已知视觉遗留；「非专业读者滚一遍画布看懂一个市场」实测（Phase 2 收口 gate 的等价关卡）。
+
+合并节奏：棒 1 独立 PR；棒 2–4 一组（3 commit，一个 PR，紧耦合）；棒 5 交互式。均走后台 PR + `--auto`，只触 `docs/` + `tools/` + `PROJECT/`，不碰受保护文件。
+
+**没做（留后续棒 / 交互式）：**
+
+- 画布内「跳到某模块」的目录 / 侧边导航（与 [ADR-072]「未做」段的档案页框架说明行同源）——纵向长图先靠滚动 + section 锚点，Phase 4 收尾再评估。
+- 档案页（`#view=exchange`）本身的形态——它进「更多」，但内部结构不变。
+- 移动端专属布局优化——纵向长图天然单列，超出「无回归」的额外优化留 §一 视觉迭代。
+
+**验证：** 本条为纯文档（改 `PROJECT/DECISIONS.md` 本条 + `PROJECT/ROADMAP.md` §三 Phase 4 条目 + §一）。`make build` 全绿（`validate` 20 家 0/0、`verify_quotes` FAIL=0、`make sync` 重算 adr-index 把本条 slug 排入索引尾部、其余生成块零 diff、二次幂等）。各实施棒的机器校验在其棒落地时同步加（[CLAUDE.md §四]）。
 
 **日期：** 2026-09-06
