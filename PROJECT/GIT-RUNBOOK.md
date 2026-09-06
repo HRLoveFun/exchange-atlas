@@ -22,7 +22,7 @@
 - **CI 报红**（`make build` 不过）——auto-merge 会一直等，PR 不会被错误地合进去；人 / 协调者去看 `gh pr checks <n>` 找出哪里红了，修完再等它自动合并，不需要重新设置 auto-merge。
 - **真实内容冲突**（两条分支改了同一处，git 判定不可自动合并）——auto-merge 同样会一直等；这种情况本就该露出来给人看，走下面「人工兜底合并」。`ROADMAP.md` §一「下一步」并行改同一处即属此类——只在阶段切换时才会撞，撞了按内容冲突处理。
 
-- **触及受保护文件的 PR**（`CLAUDE.md` / `schema/**` / `.github/**` / `Makefile`，见 `.github/CODEOWNERS`）——CODEOWNERS + 分支保护的 code-owner review 会挡住 auto-merge；owner 在 PR 上审阅后手动合并（solo 仓库自己 approve 不了自己的 PR，owner 以 admin 权限「Merge without waiting」即可，这个手动动作本身即为批准）。
+- **触及受保护文件的 PR**（清单见 `.github/CODEOWNERS`）——`protected-paths-guard.yml` 的 required check `guard` 会因缺 `owner-approved` 标签而失败，把 PR 挡在 `BLOCKED`；owner 审阅后在 PR 上打 `owner-approved` 标签，`guard` 转绿、auto-merge 放行（见 [ADR-protected-paths-ci-guard]）。
 
 以下两节是上面走不通时的**人工兜底流程**，不再是默认路径。
 
@@ -63,9 +63,9 @@ git pull --ff-only && make build             # gh 在删分支失败时会跳过
 
 ```json
 {
-  "required_status_checks": {"strict": false, "contexts": ["build"]},
+  "required_status_checks": {"strict": false, "contexts": ["build", "guard"]},
   "enforce_admins": false,
-  "required_pull_request_reviews": {"require_code_owner_reviews": true, "required_approving_review_count": 0},
+  "required_pull_request_reviews": null,
   "restrictions": null,
   "allow_force_pushes": false,
   "allow_deletions": false
@@ -73,8 +73,8 @@ git pull --ff-only && make build             # gh 在删分支失败时会跳过
 ```
 
 - `build` required check（2026-09-05 设，[ADR-081]）：`gh pr merge --auto` 只有在 `build` 是 required check 时才真的等它跑完、失败就不合并（实测 PR #82：故意弄红后 `mergeStateStatus` 稳定停在 `BLOCKED`）。
-- `require_code_owner_reviews`（[ADR-protected-files-approval-gate]）：碰 `.github/CODEOWNERS` 列出的路径的 PR，auto-merge 被服务端挡住，等 owner 批准 / 合并。
-- `enforce_admins: false`：仓库 owner（admin）直接推 main、以及 admin 手动合并受保护文件 PR 不受 required checks / review 约束（`CLAUDE.md` §六 交互式会话默认直推的约定不变）。
+- `guard` required check（`protected-paths-guard.yml`，[ADR-protected-paths-ci-guard]）：碰 `.github/CODEOWNERS` 列出路径的 PR，缺 `owner-approved` 标签则 `guard` 红、PR 停在 `BLOCKED`；打标签后转绿。**取代**原 `require_code_owner_reviews`——后者配 `count: 0` 不阻断（实测 PR #107 照样合入），配 `count: 1` 会卡住所有 PR。
+- `enforce_admins: false`：仓库 owner（admin）直接推 main、以及 admin 手动合并受保护文件 PR 不受 required checks 约束（`CLAUDE.md` §六 交互式会话默认直推的约定不变）。
 
 改 branch protection 需 admin 权限、且值日会话的 auto-mode 权限分类器会拦——由用户手动跑 `gh api -X PUT ...`。
 
@@ -104,7 +104,7 @@ git fetch --prune
 ## 相关历史
 
 - 自动合并流水线（CI build 检查 + auto-merge，取代人工点 merge），见 `DECISIONS.md` [ADR-081]。
-- 受保护文件审批闸（CODEOWNERS + code-owner review），见 [ADR-protected-files-approval-gate]。
+- 受保护文件审批闸：方案 [ADR-protected-files-approval-gate]（CODEOWNERS）+ 实测修正 [ADR-protected-paths-ci-guard]（改用 `protected-paths-guard.yml` 的 required check + `owner-approved` 标签，因 solo 仓库 GitHub 原生 code-owner review 不阻断）。
 - 并行 worktree 防失序四道护栏 [ADR-069] 里的「§一 单写者 + ROADMAP-INBOX + ADR 编号台账」两道已随「协调机器精简」删除（[ADR-slim-coordination-machinery]）——§一「下一步」改为不编号、任何会话直接改、并行冲突走内容冲突路径；ADR 改 slug 标识、同名 slug 撞车即 `DECISIONS.md` 上的可见文本冲突。留下的是「串行合并、每合一个 `make build`」这道纪律。
 - 并行分支已推送提交不能 rebase（改用 `merge origin/main`）的处理，见 [ADR-029]。
 - `isolation: "worktree"` 在「因限额中断后经 SendMessage 恢复」路径上多次失效的证据，见 [ADR-021] / [ADR-027] / [ADR-031]。

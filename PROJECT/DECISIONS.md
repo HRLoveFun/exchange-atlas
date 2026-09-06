@@ -102,6 +102,7 @@
 - ADR-095 · 2026-09-06 · Phase 3「其余章节可视化」收口认定 + Phase 4 启动前置条件达成
 - ADR-protected-files-approval-gate · 2026-09-06 · 受保护文件审批闸：CODEOWNERS + 分支保护 code-owner review
 - ADR-slim-coordination-machinery · 2026-09-06 · 精简协调机器：ADR 改 slug 标识、删 ROADMAP-INBOX、§六 / §八 重写
+- ADR-protected-paths-ci-guard · 2026-09-06 · 受保护文件审批闸的服务端实现：CI guard check 取代 GitHub 原生 code-owner review
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -2692,5 +2693,28 @@ print('全库 medium 零 sources:',n)
 - **没给 slug 加唯一性机器校验**——两条分支同名 slug 会在 `DECISIONS.md` 尾部产生相邻行文本冲突，git 合并时就报，不需要额外关卡；真漏了，`validate_adr_anchors` 的 dupe 检查（`### ADR-<slug>` 出现两次）仍会 fail。
 
 **验证：** `make build` 全绿（`selfcheck` 101→68、`validate` 20 家 0/0、`verify_quotes` FAIL=0、`check_*` OK）、`make sync` 二次幂等、`data/` 与 `docs/data/` 零 diff、`adr-index` 生成块按新规则重算（本条 slug 条目入索引尾部）。负向：临时把某处 `[ADR-069]` 改成 `[ADR-999]` → 校验 11 fail；`### ADR-x` 写两遍 → dupe fail。本条与 [ADR-protected-files-approval-gate] 是同一次检讨的产物、按序两个 PR（A = 审批闸，B = 本条），均走受保护文件审批（改的正是 `CLAUDE.md` / `.github/` / `Makefile`）。
+
+**日期：** 2026-09-06
+
+---
+
+### ADR-protected-paths-ci-guard — 受保护文件审批闸的服务端实现：CI guard check 取代 GitHub 原生 code-owner review
+
+**背景：** [ADR-protected-files-approval-gate] 的方案是「`.github/CODEOWNERS` + 分支保护 `require_code_owner_reviews: true` / `required_approving_review_count: 0`」。2026-09-06 用户按此配好后，冒烟测试（PR #107，往 `.github/CODEOWNERS` 加一行注释、挂 `--auto`）**直接被 auto-merge 合进了 main**——`reviewDecision` 为空、`mergeStateStatus` 从没进过 `BLOCKED`。结论：GitHub 的 `require_code_owner_reviews` 只有在 `required_approving_review_count >= 1` 时才真的阻断合并；配 `count: 0` 时它只「自动请求 review」不「阻断」。而 solo 仓库把 `count` 设成 1 会让**所有** PR（不只受保护路径的）都需要一个 approval，owner 又不能 approve 自己的 PR → auto-merge 对后台任务全废。GitHub 原生分支保护没有「按路径要审批、其余自动合」的 solo-repo 配置。
+
+**定了什么：**
+
+1. **新增 `.github/workflows/protected-paths-guard.yml`**：`pull_request`（含 `labeled`/`unlabeled`）触发，job `guard`——`git diff --name-only base head`，与**从 `.github/CODEOWNERS` 解析出的**受保护路径模式（gitignore 风格：结尾 `/` 前缀匹配、否则精确）比对；命中且 PR 无 `owner-approved` 标签 → `exit 1`。把 check `guard` 加入 main 分支保护的 required status checks（与 `build` 并列）。
+2. **`分支保护` 配置回退**：`required_pull_request_reviews` 设回 `null`（`require_code_owner_reviews` 既然不阻断就是噪音）；required checks = `["build", "guard"]`。由用户手动跑 `gh api`。
+3. **`.github/CODEOWNERS` 保留**——它让 GitHub 在这类 PR 上自动向 `@HRLoveFun` 请求 review（可见提醒），且是 workflow 解析受保护清单的**唯一权威**（不第二处手写）。
+4. **后台任务纪律微调**（`CLAUDE.md` §六）：受保护文件的 PR **仍照常挂 `--auto`**（省得忘了重开），靠 `guard` check 失败把它挡在 `BLOCKED`；owner 审阅后打 `owner-approved` 标签 → `guard` 转绿 → auto-merge 放行。比原来「记得不挂 `--auto`」更难漏。
+
+**没做：**
+
+- **没把 `guard` 做成 `pr-build.yml` 的一个 job**——它触发条件不同（要监听 `labeled`），且职责正交，独立文件更清楚。
+- **没给 `owner-approved` 标签加「谁能打」的限制**——公开仓库里只有协作者能打标签，本仓库协作者只有 owner，天然够。
+- **没动 [ADR-protected-files-approval-gate] 的正文**（[CLAUDE.md §八] 只增补不改写）——那条记录的是当时的判断（「CODEOWNERS 是 GitHub 原生、零维护」），本条是实测后的修正。
+
+**验证：** `.github/workflows/protected-paths-guard.yml` YAML 语法 + 内嵌 shell `bash -n` 通过；本 PR 自身触及受保护路径（`CLAUDE.md` / `.github/`）——合并前 `guard` check 应失败（红），owner 打 `owner-approved` 标签后转绿。冒烟：合并后开一个只改 `README.md` 一行的 PR，确认 `guard` 放行、auto-merge 正常；再开一个改 `schema/` 注释的 PR，确认 `guard` 红、打标签后转绿合并。`make build` 不受影响（本 PR 不碰 `tools/` / `data/`）。
 
 **日期：** 2026-09-06

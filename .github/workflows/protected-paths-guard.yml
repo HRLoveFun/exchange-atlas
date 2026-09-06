@@ -1,0 +1,75 @@
+name: protected-paths-guard
+
+# 受保护文件的改动需 owner 审阅后打 `owner-approved` 标签才能合并。
+# 受保护路径清单的唯一权威是 .github/CODEOWNERS（本 workflow 从它解析，不第二处手写）。
+#
+# 为什么不用 GitHub 原生 CODEOWNERS + required review：solo 仓库里
+# `require_code_owner_reviews` 只有配 `required_approving_review_count >= 1` 才真的阻断，
+# 而 owner 无法 approve 自己的 PR → 那样等于所有 PR 都要人工点，auto-merge 全废。配
+# `count: 0` 则 code-owner review 只「请求」不「阻断」（2026-09-06 PR #107 实测：碰
+# CODEOWNERS 的 PR 照样被 auto-merge 合进 main）。本 workflow 是能在 solo 仓库真正生效
+# 的等价物。见 [ADR-protected-paths-ci-guard]。
+#
+# 用法：把本 workflow 的 check（context 名 `guard`，首次运行后 `gh pr checks` 可见）
+# 设为 main 分支保护的 required status check。CODEOWNERS 保留——它让 GitHub 在这类 PR
+# 上自动向 owner 请求 review，是可见的提醒。
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 受保护路径改动须带 owner-approved 标签
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+        run: |
+          set -euo pipefail
+
+          # 受保护路径清单：从 CODEOWNERS 的 `/pattern owner` 行解析（gitignore 风格：
+          # 结尾 `/` = 目录前缀匹配，否则 = 精确文件匹配）。
+          PATTERNS=$(grep -E '^/[^[:space:]]+' .github/CODEOWNERS | awk '{print $1}' | sed 's#^/##')
+          echo "受保护路径模式：" $PATTERNS
+
+          CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
+          echo "改动文件："
+          echo "$CHANGED"
+
+          HITS=""
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            for p in $PATTERNS; do
+              case "$p" in
+                */) case "$f" in "$p"*) HITS="$HITS $f" ;; esac ;;
+                *)  [ "$f" = "$p" ] && HITS="$HITS $f" ;;
+              esac
+            done
+          done <<EOF
+          $CHANGED
+          EOF
+
+          if [ -z "$HITS" ]; then
+            echo "✅ 未触及受保护路径，放行。"
+            exit 0
+          fi
+          echo "⚠️ 触及受保护路径：$HITS"
+
+          case ",$LABELS," in
+            *,owner-approved,*)
+              echo "✅ 已带 owner-approved 标签，放行。"
+              exit 0
+              ;;
+          esac
+
+          echo "::error::此 PR 改动了受保护路径——需 @HRLoveFun 审阅后在 PR 上打 'owner-approved' 标签才能合并（受保护清单见 .github/CODEOWNERS）。"
+          exit 1

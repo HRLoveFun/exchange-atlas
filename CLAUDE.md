@@ -88,12 +88,12 @@ exchange-atlas《全球交易所图鉴》：用统一框架采集全球主要交
 
 ## 六、Git 推送方式
 
-个人独立维护的公开仓库。`main` 已设分支保护：required status check `build`（`pr-build.yml` 跑 `make build`）、`enforce_admins: false`（owner 以 admin 权限绕过 required check、可直推）。推送方式按会话类型 + 改动是否触及**受保护文件**分：
+个人独立维护的公开仓库。`main` 已设分支保护：required status check `build`（`pr-build.yml` 跑 `make build`）+ `guard`（`protected-paths-guard.yml`，见下）、`enforce_admins: false`（owner 以 admin 权限绕过 required check、可直推）。推送方式按会话类型 + 改动是否触及**受保护文件**分：
 
 - **交互式会话**（owner）：改动前 `git pull --ff-only` 确认与 `origin/main` 无分叉；改完 `make build` 全绿后直接 `git add` + `git commit` + `git push origin main`。本条即为 CLAUDE.md 对自动 push 的授权，不必每次问"要不要 push"。**触及受保护文件时例外**：先在对话里说清改什么、拿到用户明确同意再推。仍然遵守：`make check` 不过不推、不 force push、不改写已推送的历史。
-- **后台任务（background job）**：平台硬限制——不能直接 push/merge，只能建分支开 PR。开 PR 时带 `gh pr merge --auto --squash --subject "..." --body ""`（不必传 `--delete-branch`——仓库已设 `deleteBranchOnMerge`）：`.github/workflows/pr-build.yml` 跑 `make build`，绿了 GitHub 服务端自动 squash 进 main，不需要人点击。CI 报红时人工排查（见 `PROJECT/GIT-RUNBOOK.md`）。**触及受保护文件时**：**不挂 `--auto`**，PR 标题带 `[需 owner 批准]`、正文 `@HRLoveFun`，等用户在 PR 上审阅后合并（`.github/CODEOWNERS` + 分支保护的 code-owner review 也会从服务端挡住 auto-merge，双保险）。
+- **后台任务（background job）**：平台硬限制——不能直接 push/merge，只能建分支开 PR。开 PR 时带 `gh pr merge --auto --squash --subject "..." --body ""`（不必传 `--delete-branch`——仓库已设 `deleteBranchOnMerge`）：`pr-build.yml` 跑 `make build`，绿了 GitHub 服务端自动 squash 进 main，不需要人点击。CI 报红时人工排查（见 `PROJECT/GIT-RUNBOOK.md`）。**触及受保护文件时**：仍带 `--auto`（省得合并前忘了重开），但 `guard` check 会因缺 `owner-approved` 标签而失败、把 PR 挡在 `BLOCKED`；PR 标题带 `[需 owner 批准]`、正文 `@HRLoveFun`，等用户审阅后打 `owner-approved` 标签，`guard` 转绿、auto-merge 放行。
 - **一个逻辑改动对应一个 commit**（便于单独回溯 / 回滚），不把不相关的改动攒进一个大提交；一次成体系的改动（如一条 ADR 完整落地）作为一个提交是可以的。
-- **受保护文件**（`.github/CODEOWNERS` 权威清单，改动需 owner 批准）：`CLAUDE.md`、`schema/**`、`.github/**`、`Makefile`。清单要增删也是受保护文件改动本身。
+- **受保护文件**（清单唯一权威 = `.github/CODEOWNERS`：`CLAUDE.md` / `Makefile` / `schema/` / `.github/`）：改动需 owner 审阅 + 在 PR 上打 `owner-approved` 标签。阻断由 `.github/workflows/protected-paths-guard.yml` 的 required check `guard` 做（它从 CODEOWNERS 解析清单，不第二处手写；solo 仓库 GitHub 原生 CODEOWNERS review 挡不住 auto-merge，见 [ADR-protected-paths-ci-guard]）。要增删受保护路径 = 改 CODEOWNERS（本身也是受保护文件改动）。
 - **人工兜底合并**（CI 报红、真实内容冲突等 auto-merge 走不通的情况）：`gh pr merge --delete-branch` 会因 head 分支正被 `.claude/worktrees/<name>` 检出而报错、且此时远端其实已合并成功（只看退出码会误判成失败）——完整踩坑与正确操作顺序见 `PROJECT/GIT-RUNBOOK.md`。正常路径（CI 绿、auto-merge 生效）不会触发这个坑，因为没有人在本地跑带 `--delete-branch` 的合并命令。
 
 ---
