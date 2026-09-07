@@ -93,7 +93,7 @@
 - **`uk-lse.costs.clearing_fees` 只覆盖了LCH Ltd EquityClear的"结算费"（每笔£0.85等），未覆盖"清算费"（按成交金额/笔数计费的主清算费率表）。** 对应的官方PDF（`lch-equityclear-clearing-fee-subscription.pdf`）本次抓取成功（HTTP 200，466KB），但`pdftotext -layout`提取出的文本几乎为空（只有零散的"–"符号和"LCH"/"lseg.com"几个词），判断是表格以图片形式渲染、无文本层，与SKILL.md记录的SIX月度统计PDF提取失败是同一类问题。下次有空可尝试：①找是否有面向清算会员的非图片版说明文档（如培训material/FAQ）；②如有OCR工具可用，尝试对该PDF做OCR提取。
 
 - **[ADR-054] 成本瀑布 spec 层核查（2026-09-01）留下的坐实项**——13 个 `type: none` 降级点 + 6 个方向/费率补强点，逐条判定见 `PROJECT/COST-WATERFALL-SPOT-CHECK.md`。共同模式：断言「本市场不征收某税费」需要税法/税务局/立法机构的**正面**文本，交易所费率页与第三方国别税费综述都撑不住。
-  - **`type: none` 长尾 —— [ADR-067]（2026-09-04）系统收口**。范式：一国「证券交易环节流转税」有完整立法（印花税法 / STT Act / 州印花税）且把证券交易明文并入征税范围、无独立「金融交易税」税目时，按 [ADR-002] 语义映射至 `stamp_duty`，`financial_transaction_tax` 判 `type: none`（confidence medium，结构性推断非法条否定句）；监管费同理靠监管机构经费来源立法（机构分担金 vs 按交易计收）。逐条：
+  - **`type: none` 长尾 —— [ADR-067]（2026-09-04）系统收口**。范式：一国「证券交易环节流转税」有完整立法（印花税法 / STT Act / 州印花税）且把证券交易明文并入征税范围、无独立「金融交易税」税目时，按 [ADR-096] 语义映射至 `stamp_duty`，`financial_transaction_tax` 判 `type: none`（confidence medium，结构性推断非法条否定句）；监管费同理靠监管机构经费来源立法（机构分担金 vs 按交易计收）。逐条：
     - ✅ `cn-sse`/`cn-szse financial_transaction_tax` → `type: none`（《印花税法》第一/二/三条把证券交易与合同/产权转移书据/营业账簿并列为印花税征税范围）
     - ✅ `de-eurex stamp_duty` 与 `financial_transaction_tax` → `type: none`（自持 de-xetra 已引的 Bundestag BT-Drs. 16/12571 + 衍生品合约无证券过户）
     - ✅ `za-jse financial_transaction_tax` → `type: none`（SARS：STT『levied on every transfer of a security』，Securities Transfer Tax Act No. 25 of 2007）
@@ -178,7 +178,7 @@
   - `vn-hose`/`vn-hnx` `costs.exchange_fees.spec.side: both`：财政部决定 1541 只写「0,027% giá trị giao dịch」，无「买卖双向」措辞。撮合费双边计收是各所通例、渲染层缺省回退 `both`，但按 [ADR-054] side 细则应补一份说明「HOSE/HNX 交易服务价格买卖双向各计」的一手表述。
   - `vn-hose` `market_structure.tick_size.spec.ladder` 顶档 `price_min: 50000`：附录 II 原文为「> 50.000」（严格大于），中间档为「10.000-49.950」。50,000 处于两档间隙、实际按顶档 100 đ 处理（中间档 tick 50、下一有效价即 50,000）——ladder 用 `price_min: 50000` 是这一实务推断；≥/> 边界口径待人拍板是否精确化。
   - `vn-hose`/`vn-hnx` `market_structure.volatility_interruption.spec.type: none`：无正面「不设」原文，仅「QĐ22 第五章 + 附录 II 未出现」的消极认定，已用 `confidence: low` + detail 如实标注。[ADR-054] 维度 4 要求 `type: none` 有正面依据——此处按 low-confidence 消极认定处置，是否接受待裁量。
-  - **全库既有问题（非 vn 独有，建议单独订正 ADR）**：`cn-sse` / `za-jse` / `de-eurex` / `au-asx` 等所的 `costs` 章 note 与 `DECISIONS.md` 多处把「证券交易流转税映射至 stamp_duty 字段」的语义**误引为 `[ADR-002]`**——`### ADR-002` 正文实为「YAML 为权威 + JSON 派生」，与税费映射无关。vn 两所本次已改为「与 cn-sse / tw-twse / za-jse 同构处理」不再引 ADR-002；其余所待单独开条订正引用号。
+  - **全库既有问题（非 vn 独有，建议单独订正 ADR）**：`cn-sse` / `za-jse` / `de-eurex` / `au-asx` 等所的 `costs` 章 note 与 `DECISIONS.md` 多处把「证券交易流转税映射至 stamp_duty 字段」的语义**误引为 `[ADR-002]`**——`### ADR-002` 正文实为「YAML 为权威 + JSON 派生」，与税费映射无关。vn 两所本次已改为「与 cn-sse / tw-twse / za-jse 同构处理」不再引 ADR-002；其余所待单独开条订正引用号——→ **已结案**：[ADR-096]（2026-09-07）以本条为映射语义的规范出处，全库 17 处误引就地改为 `[ADR-096]`，清单见该条「改了哪里」（`de-eurex` 经查并无此误引）。
 
 
 <!-- BEGIN:GENERATED auto-issues -->

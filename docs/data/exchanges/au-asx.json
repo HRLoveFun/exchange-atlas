@@ -2362,8 +2362,8 @@
           "type": "none",
           "note": "澳大利亚证券转让环节的凭证税是各州『marketable securities』印花税，对上市证券已全部废除（见 stamp_duty，如 NSW Duties Act 1997 §34）；联邦层面无独立的金融交易税税目——PwC Australia『Other taxes』的综合税种清单中仅提及未上市实体股份转让的印花税、无 FTT 条目"
         },
-        "zh": "澳大利亚对股票等证券的买卖不征收金融交易税(FTT)：澳大利亚证券转让环节的凭证税历来是各州对『可流通证券』(marketable securities) 征收的印花税，对上市证券已由各州先后全部废除（见 stamp_duty，例：NSW《1997 年税收法》第 34 条）。PwC Australia『Other taxes』的综合税种综述中，印花税一节仅述『未上市实体的股份转让印花税各州不一』（隐含上市股份不征），全篇无金融交易税条目；Baker McKenzie 亦述『Stamp duty is not payable on share transfers』。联邦层面无独立 FTT 税目。沿用 ADR-002 语义（可流通证券印花税映射至 stamp_duty），本字段判 type: none。",
-        "en": "Australia levies no financial transaction tax (FTT) on share trades: the instrument tax at the securities-transfer stage was historically the states' 'marketable securities' stamp duty, which every state has abolished for listed securities (see stamp_duty, e.g. s34 of the NSW Duties Act 1997). PwC Australia's 'Other taxes' survey, in its stamp-duty section, mentions only that 'the imposition of duty on share transfers involving unlisted entities differs from state to state' (implying listed shares are not dutiable), and its comprehensive tax survey contains no FTT entry; Baker McKenzie likewise states 'Stamp duty is not payable on share transfers'. There is no separate federal FTT head of tax. Under this project's ADR-002 semantics (marketable-securities duty mapped to stamp_duty), this field is type: none.",
+        "zh": "澳大利亚对股票等证券的买卖不征收金融交易税(FTT)：澳大利亚证券转让环节的凭证税历来是各州对『可流通证券』(marketable securities) 征收的印花税，对上市证券已由各州先后全部废除（见 stamp_duty，例：NSW《1997 年税收法》第 34 条）。PwC Australia『Other taxes』的综合税种综述中，印花税一节仅述『未上市实体的股份转让印花税各州不一』（隐含上市股份不征），全篇无金融交易税条目；Baker McKenzie 亦述『Stamp duty is not payable on share transfers』。联邦层面无独立 FTT 税目。沿用 ADR-096 语义（可流通证券印花税映射至 stamp_duty），本字段判 type: none。",
+        "en": "Australia levies no financial transaction tax (FTT) on share trades: the instrument tax at the securities-transfer stage was historically the states' 'marketable securities' stamp duty, which every state has abolished for listed securities (see stamp_duty, e.g. s34 of the NSW Duties Act 1997). PwC Australia's 'Other taxes' survey, in its stamp-duty section, mentions only that 'the imposition of duty on share transfers involving unlisted entities differs from state to state' (implying listed shares are not dutiable), and its comprehensive tax survey contains no FTT entry; Baker McKenzie likewise states 'Stamp duty is not payable on share transfers'. There is no separate federal FTT head of tax. Under this project's ADR-096 semantics (marketable-securities duty mapped to stamp_duty), this field is type: none.",
         "sources": [
           {
             "title": "ASX Trade 现货市场费率表（ASX 官网 PDF）",
@@ -2384,7 +2384,7 @@
         "quote": "Stamp duty is not payable on share transfers (provided that the target company does not directly or indirectly hold ... landholder).／All states and territories impose a stamp duty on a wide variety of transactions at different rates. ... The imposition of duty on share transfers involving unlisted entities differs from state to state.",
         "confidence": "medium",
         "verified": "2026-09-04",
-        "detail": "2026-09-04（ADR-067 成本瀑布数据层长尾）：ADR-054/058 因 Baker McKenzie 综述未逐字出现『no FTT』而维持 rate: null。本次以 cn-szse/za-jse FTT 同一结构性论据处置——澳大利亚证券转让凭证税是各州『可流通证券』印花税（对上市证券已全废，见 stamp_duty，已 type: none）；PwC Australia 综合税种综述无 FTT 条目、印花税节仅提未上市实体。据 ADR-002 语义，可流通证券印花税映射 stamp_duty，FTT 字段判 type: none（confidence medium：仍为第三方综述 + 结构性推断，非 ATO/财政部『无 FTT』一手否定句）。",
+        "detail": "2026-09-04（ADR-067 成本瀑布数据层长尾）：ADR-054/058 因 Baker McKenzie 综述未逐字出现『no FTT』而维持 rate: null。本次以 cn-szse/za-jse FTT 同一结构性论据处置——澳大利亚证券转让凭证税是各州『可流通证券』印花税（对上市证券已全废，见 stamp_duty，已 type: none）；PwC Australia 综合税种综述无 FTT 条目、印花税节仅提未上市实体。据 ADR-096 语义，可流通证券印花税映射 stamp_duty，FTT 字段判 type: none（confidence medium：仍为第三方综述 + 结构性推断，非 ATO/财政部『无 FTT』一手否定句）。",
         "enum": null
       },
       "capital_gains_tax": {

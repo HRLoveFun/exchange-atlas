@@ -2491,10 +2491,10 @@
       "financial_transaction_tax": {
         "spec": {
           "type": "none",
-          "note": "南非证券交易环节的流转税即证券转让税（STT），依《Securities Transfer Tax Act No. 25 of 2007》『levied on every transfer of a security』——见 stamp_duty（映射依 ADR-002 语义）；无另立的『金融交易税』税种"
+          "note": "南非证券交易环节的流转税即证券转让税（STT），依《Securities Transfer Tax Act No. 25 of 2007》『levied on every transfer of a security』——见 stamp_duty（映射依 ADR-096 语义）；无另立的『金融交易税』税种"
         },
-        "zh": "南非对证券交易不另立独立于证券转让税（STT）之外的『金融交易税』税种：STT 依《Securities Transfer Tax Act No. 25 of 2007》『对每一次证券转让征收』（levied on every transfer of a security），2008-07-01 起施行、取代原印花税，是南非证券交易环节唯一的流转税（现行 0.25%，见 stamp_duty；本项目按 ADR-002 语义把 STT 映射至 stamp_duty 字段）。南非财政部曾在预算文件中讨论过更广义的金融交易税，但从未立法开征。",
-        "en": "South Africa imposes no financial transaction tax separate from the Securities Transfer Tax (STT): the STT is 'levied on every transfer of a security' under the Securities Transfer Tax Act No. 25 of 2007, effective 1 July 2008 in place of the former stamp duty, and is the only turnover tax at the securities-trading stage (currently 0.25%, see stamp_duty; under this project's ADR-002 semantics the STT is mapped to the stamp_duty field). South Africa's National Treasury has discussed a broader financial transaction tax in budget documents but has never enacted one.",
+        "zh": "南非对证券交易不另立独立于证券转让税（STT）之外的『金融交易税』税种：STT 依《Securities Transfer Tax Act No. 25 of 2007》『对每一次证券转让征收』（levied on every transfer of a security），2008-07-01 起施行、取代原印花税，是南非证券交易环节唯一的流转税（现行 0.25%，见 stamp_duty；本项目按 ADR-096 语义把 STT 映射至 stamp_duty 字段）。南非财政部曾在预算文件中讨论过更广义的金融交易税，但从未立法开征。",
+        "en": "South Africa imposes no financial transaction tax separate from the Securities Transfer Tax (STT): the STT is 'levied on every transfer of a security' under the Securities Transfer Tax Act No. 25 of 2007, effective 1 July 2008 in place of the former stamp duty, and is the only turnover tax at the securities-trading stage (currently 0.25%, see stamp_duty; under this project's ADR-096 semantics the STT is mapped to the stamp_duty field). South Africa's National Treasury has discussed a broader financial transaction tax in budget documents but has never enacted one.",
         "sources": [
           {
             "title": "Securities Transfer Tax（sars.gov.za）",
@@ -2505,7 +2505,7 @@
         "quote": "Securities Transfer Tax is levied on every transfer of a security and was implemented from 1 July 2008 under the Securities Transfer Tax Act, No. 25 of 2007, together with the Securities Transfer Tax Administration Act, No. 26 of 2007.",
         "confidence": "medium",
         "verified": "2026-09-04",
-        "detail": "2026-09-04（ADR-067 成本瀑布数据层长尾）：ADR-054 曾把 type: none 降为 rate: null（quote 未含『无独立 FTT』正面句）。本次与 cn-szse FTT 同一处置逻辑——SARS 页明文 STT『levied on every transfer of a security』，是南非证券交易环节的完整流转税立法；ADR-002 语义已把 STT 映射至 stamp_duty，故 FTT 字段判 type: none（confidence medium：『无独立 FTT』是对『STT 即完整流转税』的结构性推断 + 南非从未立法开征更广义 FTT）。",
+        "detail": "2026-09-04（ADR-067 成本瀑布数据层长尾）：ADR-054 曾把 type: none 降为 rate: null（quote 未含『无独立 FTT』正面句）。本次与 cn-szse FTT 同一处置逻辑——SARS 页明文 STT『levied on every transfer of a security』，是南非证券交易环节的完整流转税立法；ADR-096 语义已把 STT 映射至 stamp_duty，故 FTT 字段判 type: none（confidence medium：『无独立 FTT』是对『STT 即完整流转税』的结构性推断 + 南非从未立法开征更广义 FTT）。",
         "enum": null
       },
       "capital_gains_tax": {

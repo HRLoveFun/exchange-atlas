@@ -100,6 +100,7 @@
 - ADR-093 · 2026-09-06 · 折行函数 `wrapByCharBudget` 改 token 折行：中英混排不再从拉丁词 / 数字中间切断
 - ADR-094 · 2026-09-05 · stable 档来源不变式全库化（校验 21）+ 63 处「stable + medium + 零 sources」闭环
 - ADR-095 · 2026-09-06 · Phase 3「其余章节可视化」收口认定 + Phase 4 启动前置条件达成
+- ADR-096 · 2026-09-07 · 订正「证券交易流转税 → `stamp_duty` 字段」映射语义的引用号：全库 `[ADR-002]` 误引改判本条
 - ADR-protected-files-approval-gate · 2026-09-06 · 受保护文件审批闸：CODEOWNERS + 分支保护 code-owner review
 - ADR-slim-coordination-machinery · 2026-09-06 · 精简协调机器：ADR 改 slug 标识、删 ROADMAP-INBOX、§六 / §八 重写
 - ADR-protected-paths-ci-guard · 2026-09-06 · 受保护文件审批闸的服务端实现：CI guard check 取代 GitHub 原生 code-owner review
@@ -1771,7 +1772,7 @@
 
 **背景：** [ADR-054] 把 13 个 `type: none` 降为 `rate: null`（根因：把「费率页没列」当「不征收」）；[ADR-058]/[ADR-065] 逐条重抓，方法学结论是「税务局页只覆盖自身税种、不证伪 FTT/监管费，`rate: null` 是审慎终态」。但 [ADR-065] 收尾时对 `hk-hkex FTT` 用了一个更强的论证——**「该国某类税的完整立法把 X 并入征税范围、无独立 Y 税目」是结构性正面依据**（香港列举式税制虽仍判不足）。本条把这个论证范式系统应用到剩余长尾，并顺带把中国监管费换成现行标准。
 
-**处理范式（本条确立）：** 当一国「证券交易环节的流转税」有一部**完整立法**（印花税法 / STT Act / 州印花税），且该法把证券交易明文并入征税范围、通篇无独立「金融交易税」税目时——按 [ADR-002] 语义把该税映射至 `stamp_duty`，则 `financial_transaction_tax` 判 `type: none`（confidence medium：这是对「该法即完整立法」的结构性推断，非法条明文否定句）。监管费同理：当一国证券监管机构的**经费来源立法**明定「政府拨款 + 机构层面分担金」、不含按交易计收时，`regulatory_fees` 判 `type: none`（与 `au-asx` 的 ASIC 机构征费先例同构）。
+**处理范式（本条确立）：** 当一国「证券交易环节的流转税」有一部**完整立法**（印花税法 / STT Act / 州印花税），且该法把证券交易明文并入征税范围、通篇无独立「金融交易税」税目时——按 [ADR-096] 语义把该税映射至 `stamp_duty`，则 `financial_transaction_tax` 判 `type: none`（confidence medium：这是对「该法即完整立法」的结构性推断，非法条明文否定句）。监管费同理：当一国证券监管机构的**经费来源立法**明定「政府拨款 + 机构层面分担金」、不含按交易计收时，`regulatory_fees` 判 `type: none`（与 `au-asx` 的 ASIC 机构征费先例同构）。
 
 **逐条结果（8 字段，触及 7 家）：**
 
@@ -1782,10 +1783,10 @@
 | `cn-szse` / `cn-sse stamp_duty` | `side: sell` 由人民网转载公告支撑 | ✅ `side: sell` 升为《印花税法》第三条一手 | 《印花税法》(fgk.chinatax.gov.cn 政策法规库) 第三条『证券交易印花税对证券交易的出让方征收，不对受让方征收』 |
 | `cn-szse` / `cn-sse financial_transaction_tax` | `rate: null`（『检索未发现』/ 空）| ✅ `type: none` medium | 《印花税法》第一/二/三条把证券交易与合同/产权转移书据/营业账簿并列为印花税征税范围——中国交易环节税收的完整立法，无独立 FTT 税目 |
 | `de-eurex stamp_duty` + `financial_transaction_tax` | 无源 `rate: null`（『N/A / 不作断言』）| ✅ `type: none` medium | 自持一份 de-xetra 已引的 Bundestag 文档（BT-Drs. 16/12571，Börsenumsatzsteuer 1991-01-01 废除）+ 结构性论据（衍生品合约无证券过户）；与 de-xetra FTT 同处置 |
-| `za-jse financial_transaction_tax` | `rate: null` | ✅ `type: none` medium | SARS：STT『levied on every transfer of a security』（Securities Transfer Tax Act No. 25 of 2007）——南非证券交易环节的完整流转税立法；[ADR-002] 语义 STT→stamp_duty，故 FTT 判 `type: none` |
+| `za-jse financial_transaction_tax` | `rate: null` | ✅ `type: none` medium | SARS：STT『levied on every transfer of a security』（Securities Transfer Tax Act No. 25 of 2007）——南非证券交易环节的完整流转税立法；[ADR-096] 语义 STT→stamp_duty，故 FTT 判 `type: none` |
 | `za-jse regulatory_fees` | `rate: null`，note 自相矛盾 | ✅ `rate: 0.0002 pct`（Investor Protection Levy）| sharenet 第三方券商费率表『Investor Protection levy at 0.0002% of trade value』（jse.co.za 三子域名 + WebFetch 全 Cloudflare 403；2026 据 Market Notice 37025 约 0.000345%，未一手核实）。confidence medium |
 | `sg-sgx regulatory_fees` + `financial_transaction_tax` | `rate: null`（IRAS GST 页主题错配）| ✅ `type: none` medium | SGX-ST Rule 4.23.2：客户须知/须披露的按笔费用 =『any fees imposed by CDP and/or SGX-ST, stamp duty and Goods and Services Tax』——无 MAS 按笔征费、无本金税项；配合已 high 的 `stamp_duty`（scripless 豁免）+ 多份券商成本拆解一致 |
-| `au-asx financial_transaction_tax` | `rate: null`（Baker McKenzie 未逐字『no FTT』）| ✅ `type: none` medium | 各州『可流通证券』印花税对上市证券已全废（见 stamp_duty，NSW Duties Act §34）+ PwC Australia『Other taxes』综合税种综述印花税节仅提未上市实体、全篇无 FTT 条目。[ADR-002] 语义映射 |
+| `au-asx financial_transaction_tax` | `rate: null`（Baker McKenzie 未逐字『no FTT』）| ✅ `type: none` medium | 各州『可流通证券』印花税对上市证券已全废（见 stamp_duty，NSW Duties Act §34）+ PwC Australia『Other taxes』综合税种综述印花税节仅提未上市实体、全篇无 FTT 条目。[ADR-096] 语义映射 |
 | `kr-krx regulatory_fees` | 无 quote / low | ✅ `type: none` medium | 《金融委员会设置法》(elaw.klri.re.kr) 第 46 条 FSS 经费 = 政府/韩行拨款 + 第 38 条受检机构（含证券公司）分担金；第 47(1) 条『属第 38 条各款的机构……应向金融监督院缴纳其费用分摊额』——机构层面征收、非按交易计收（同 au-asx ASIC 先例） |
 
 **仍为 `rate: null`（长尾未竟，非本条范围）：** `au-asx` / `ca-tsx` / `kr-krx` 的 `regulatory_fees` 已在本条或 [ADR-065] 处理；`fr-euronext stamp_duty`（一所多国、七国税制各异，`rate: null` 是正确的「无法逐国断言」）；`kr-krx exchange_fees`（KRX 站 JS，当期档位未取到——与「有无税/费」无关，见 OPEN-QUESTIONS）。
@@ -2980,3 +2981,22 @@ print('全库 medium 零 sources:',n)
   `[ADR-002]` 税费映射误引（vn 两所已改为「与 cn-sse/tw-twse/za-jse 同构处理」）。
 - **收官**：PR #121 转正式合并；ROADMAP §三该条目 `[x]`。skill 十一章步骤已在 v2.0 契约下
   真跑一遍并逐点回写，[ADR-017] 冷启动子代理模式在 v2.0 契约下重新成立的前提达成。
+
+---
+
+### ADR-096 — 订正「证券交易流转税 → `stamp_duty` 字段」映射语义的引用号：全库 `[ADR-002]` 误引改判本条
+
+**背景：** [ADR-067] 确立「证券交易环节流转税的完整立法 → 映射至 `stamp_duty` → `financial_transaction_tax` 判 `type: none`」范式时，把「该税映射至 `stamp_duty` 字段」的语义出处写作 `[ADR-002]`——但 `### ADR-002` 正文是「YAML 权威 + JSON 派生，产物入库」，与税费映射无关（ADR-002 的正确用途是 `.cache` 不入库 / 产物入库等管线决策，如 `tools/validate.py` 的路径校验注释）。该误引随 ADR-067 范式复用到 5 所 costs note 与多份受控文档。[ADR-add-exchange-skill-forge] 越南轨独立视角复核（2026-09-07）点名此全库既有问题（OPEN-QUESTIONS）；`vn-hose`/`vn-hnx` 当时已改为「与 cn-sse/tw-twse/za-jse 同构处理」不再引 ADR，其余所与文档残留待订正。
+
+**定了什么：** 「证券交易环节的流转税（印花税 / 证券交易税 / STT 等凭证类流转税）记入 `stamp_duty` 字段、不另占 `financial_transaction_tax`」的映射语义，自本条起以 [ADR-096] 为规范引用出处——实践发端于 ADR-067 范式确立之前的各所先例（tw-twse 证券交易税 / cn-sse 印花税 / za-jse STT），本条只收编出处、不改任何判定规则。全库该语义的 `[ADR-002]` 引用号就地改为 `[ADR-096]`。选择单开订正条而非静默改号：引用号是机器可校验资产（validate 校验 14），语义出处也需要一个权威落点，避免下一个引用者继续抄错。
+
+**改了哪里（17 处）：**
+
+- 数据层 5 所 10 处 note：`cn-sse` / `cn-szse` `financial_transaction_tax` detail 各 1；`za-jse` FTT spec note / zh / en / detail 共 4；`au-asx` FTT zh / en / detail 共 3；`sg-sgx` FTT detail 1。
+- 文档层 7 处：`DECISIONS.md` ADR-067 处理范式段 1 + 逐条结果表 2；`ROADMAP.md` ADR-067 摘要 1；`OPEN-QUESTIONS.md` ADR-067 收口段 1；`COST-WATERFALL-SPOT-CHECK.md` ADR-067 段 2。
+
+**没改什么：** 判定规则本身（ADR-067 范式原样有效）；`schema/`、`tools/`、前端；vn 两所的「同构处理」措辞（本就不引 ADR，合规）；`tools/validate.py` 与 `DECISIONS.md` 其余 `[ADR-002]`（`.cache` 不入库 / 产物入库语境）为正确引用，不动；`de-eurex` costs note 经查并未引 ADR-002（OPEN-QUESTIONS 原记录列举偏宽，实际无误引）。
+
+**验证：** `make build` 全绿（`sync` 再生成 5 所 JSON 与 ADR 索引、`validate` 校验 14 对新引用号放行）、`make sync` 二次幂等；全库 grep 复查 `[ADR-002]` / `ADR-002` 残留均为管线语境或问题记录原文。
+
+**日期：** 2026-09-07

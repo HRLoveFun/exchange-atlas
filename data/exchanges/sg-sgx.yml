@@ -1373,7 +1373,7 @@ costs:
     quote: "All charges and expenses, including any fees imposed by CDP and/or SGX-ST, stamp duty and Goods and Services Tax, to be borne by the customer (whether included as part of the brokerage or otherwise) must be accurately disclosed to the customer and agreed between the customer and the Trading Member.／The electronic entry made by CDP in its register to effect the transfer of scripless shares is exempt from stamp duty pursuant to the Stamp Duties (Exempt Record) Rules 2018."
     confidence: medium
     verified: 2026-09-04
-    detail: "2026-09-04（ADR-067 成本瀑布数据层长尾）：本字段原引 IRAS 印花税页（rate: null）。本次以 SGX-ST 规则第 4.23.2 条（客户须知费用列举 = CDP/SGX-ST 收费 + 印花税 + GST，无本金税项）+ 已 high 的 stamp_duty 豁免为正面依据，判 type: none。新加坡的证券凭证税即印花税、无独立 FTT；沿用 ADR-002 语义。confidence medium（4.23.2 是交易所规则非税务当局声明，『无 FTT』仍是对该列举完整性的推断）。同 de-xetra FTT 的处置逻辑。"
+    detail: "2026-09-04（ADR-067 成本瀑布数据层长尾）：本字段原引 IRAS 印花税页（rate: null）。本次以 SGX-ST 规则第 4.23.2 条（客户须知费用列举 = CDP/SGX-ST 收费 + 印花税 + GST，无本金税项）+ 已 high 的 stamp_duty 豁免为正面依据，判 type: none。新加坡的证券凭证税即印花税、无独立 FTT；沿用 ADR-096 语义。confidence medium（4.23.2 是交易所规则非税务当局声明，『无 FTT』仍是对该列举完整性的推断）。同 de-xetra FTT 的处置逻辑。"
 
   capital_gains_tax:
     zh: "无资本利得税——买卖股票等金融工具产生的利润/损失一般视为个人投资行为，不征税"
