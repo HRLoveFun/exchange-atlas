@@ -9,15 +9,18 @@ description: 给 exchange-atlas 项目新增一家交易所的数据，或补全
 
 本文档基于 v0.1（SSE/HKEX）、v0.2（NYSE/JPX/Eurex）、v1.0 Wave 1（8 个子代理并行跑
 us-nasdaq/cn-szse/uk-lse/de-xetra/sg-sgx/au-asx/in-nse/sa-tadawul）、v1.0 Wave 2（7 个子代理
-并行跑 fr-euronext/kr-krx/ca-tsx/br-b3/tw-twse/ch-six/za-jse）与 v1.1 Batch 1（8 个子代理
-并行"补全"模式跑 cn-sse/cn-szse/hk-hkex/tw-twse/us-nyse/us-nasdaq/uk-lse/jp-jpx）共二十八次
+并行跑 fr-euronext/kr-krx/ca-tsx/br-b3/tw-twse/ch-six/za-jse）、v1.1 Batch 1（8 个子代理
+并行"补全"模式跑 cn-sse/cn-szse/hk-hkex/tw-twse/us-nyse/us-nasdaq/uk-lse/jp-jpx），与 v2.0
+对齐轨（[ADR-add-exchange-skill-forge]，协调者单会话串行新增越南市场 `vn-hose` + `vn-hnx`，
+含衍生品市场、六个可视化模块的 `spec` / `*_note`、市场机制剖面 + 单页画布逐所自检）共三十次
 实操整理，步骤里标注的具体坑都是真实踩过的，不是预防性猜测。
 
-> **⚠️ 本文档待 v2.0 对齐（[ADR-add-exchange-skill-forge]）。** 上面 28 次实操都在 v1.1 及更早——
-> `spec` 结构化层、[ADR-042] 第五章三字段、成本瀑布 / 交割管线 / 上市生命周期 / 监管图 / 参与者 /
-> 风险旗标六个可视化模块的 `spec` 与 `*_note` 需求、市场机制剖面与单页画布的逐所自检，都还没进
-> 下面的十一章步骤。当前开发轨「用实际新增越南市场来迭代本 skill」正是要把这些补齐（ROADMAP §三
-> 「广度扩张 · ① skill 迭代轨」）。走流程时遇到步骤与现状脱节，就地改本文档并在 commit 里说明。
+**v2.0 契约在本文档里的落点**（[ADR-add-exchange-skill-forge] 收口）：第五章直接落 `spec`（含
+[ADR-042] 的 `execution_model` / `error_trade_rule` / `order_book_transparency` / `order_types` /
+`tick_size`）见步骤 4.8；成本瀑布 6 字段 `spec` 见 4.9；交割管线 `guarantee_model` +
+`default_management.spec` 见 4.10；上市生命周期两段时长 `spec` 见 4.11；监管图 / 参与者图 /
+风险旗标三个「纯散文 / enum」模块的数据形状见 4.12；市场机制剖面 + 单页画布 7 模块逐所自检 +
+v1.1 之后新增的 `make check` 关卡见步骤 5。
 
 ## 何时用
 
@@ -33,6 +36,11 @@ us-nasdaq/cn-szse/uk-lse/de-xetra/sg-sgx/au-asx/in-nse/sa-tadawul）、v1.0 Wave
 7 个全部提前终止、零产出**，改协调者串行才跑完。后台任务里做「补全已有交易所少量字段」这类
 工作，协调者串行（一家一家：抓→填→单文件校验→提交→下一家）往往比并行更稳——单条 API 流、
 可控、即时提交、session limit 风险归零。并行只在「新增整所、每所工作量大、且额度充裕」时值得。
+
+**v2.0 对齐轨（越南）的实操模式**：协调者**单会话串行**跑完 `vn-hose` + `vn-hnx` 两整所（含
+HNX 衍生品市场），一章一章填、每几章一个 commit、`make build` 全绿再下一步。全程无并行子代理。
+一整所 spec 层触及 > 30 字段（[CLAUDE.md §四]），故收官前必须过独立视角复核（见步骤 7 收尾 +
+Phase E 记录）；单会话协调者自查不算数。
 
 如果你是 orchestrator 按 [ADR-017] 派发的并行子代理之一（同一时刻还有其他子代理在跑别的交易所），
 有两条 v0.1/v0.2 单会话串行时不会遇到的坑：
@@ -121,16 +129,29 @@ us-nasdaq/cn-szse/uk-lse/de-xetra/sg-sgx/au-asx/in-nse/sa-tadawul）、v1.0 Wave
 - 定 `id`：`<ISO 3166-1 alpha-2 小写国家码>-<简称>`，如 `us-nyse`、`jp-jpx`、`de-eurex`
 - 查该所是否有集团归属（`group_id`）：查官网"About us"/页脚/品牌归属信息，看有没有同集团下其他
   独立交易所实体（如 NYSE Group 下的 NYSE American/Arca、JPX Group 下的大阪交易所、Deutsche
-  Börse Group 下的 Eurex）。**判断标准是"是否存在计划收录的姊妹交易所实体"，不是"母公司叫
-  什么名字"**——有就填 `<集团简称>-group`。这个标记直接决定 `listing.boards` 怎么填：姊妹
-  交易所的板块/规则不能塞进本文件的 `boards`（那会歪曲"哪个法人实体拥有哪条规则"这个事实），
-  只能靠 `group_id` 表达归属关系，`boards` 照实留空或只列同一法人实体内部的真实板块
+  Börse Group 下的 Eurex、VNX 下的 HOSE + HNX）。**判断标准是"是否存在计划收录的姊妹交易所实体"，
+  不是"母公司叫什么名字"**——有就填 `<集团简称>-group`。这个标记直接决定 `listing.boards` 怎么填：
+  姊妹交易所的板块/规则不能塞进本文件的 `boards`（那会歪曲"哪个法人实体拥有哪条规则"这个事实），
+  只能靠 `group_id` 表达归属关系，`boards` 照实留空或只列同一法人实体内部的真实板块。
+  **v2.0 轨压测（[ADR-036] #1）**：VNX 一控股、HOSE / HNX 两独立法人，各自完全不同的规则集
+  （HOSE 单一上市板 / ±7% / 三档 tick；HNX 四个市场〔上市股 / UPCoM / 政府债券 / 衍生品〕/
+  ±10%·±30% / 恒 100đ tick / 有盘后 PLO），共享的只有 VNX 上位规则与 VSDC。**`group_id` 表达归属
+  + `boards` 各记各的，设计够用——不触发 `federation_of` 新字段**（那是给 Euronext 式「多国联邦、
+  整体收录为一条」留的，单国控股不算）。
 - 确定 `official_languages`（BCP47 数组）——该所自身的官方语言，与下面的 `source_lang` 是两回事
 - 确定 `source_lang: zh` 或 `en`（必填，交易所级别一次性声明，决定 `quote`/`sources`/`confidence`
   锚定哪种语言，另一种视为翻译展示，见 `PROJECT/DECISIONS.md` [ADR-013]）——取源规则：
   **有可核实的官方中文原文就填 `zh`，没有就填 `en`，中英文都没有可靠原文的先别填，转
   `PROJECT/OPEN-QUESTIONS.md` 悬置**。v0.2 的 NYSE/JPX/Eurex 都是这样定的 `en`（没有官方中文
   原文，直接用英文官网取数，不必啃日语/德语原文）
+  - **母语是第三语言、官方英文覆盖又薄的市场**（越南 `vn-hose`/`vn-hnx` 是首例；沙特 `sa-tadawul`
+    阿语、巴西 `br-b3` 葡语、韩国 `kr-krx` 韩语同类但英文站更全）：`source_lang` 仍只能 zh/en，
+    按「无中选 en」定 `en`。一手规则语言（越南语）的处理——① 官方 / 半官方英译普遍带
+    「unofficial translation / for reference only」免责，据此 confidence **封顶 medium**（同
+    `english.sse.com.cn` / `elaw.klri.re.kr` 先例）；② 母语一手条文（含下面步骤 3 的 OCR 产物）
+    可作事实来源支撑 medium、**不升 high**（`kr-krx` 규정 포털韩文一手先例，[ADR-kr-krx-legacy-closeout]）；
+    ③ quote 写母语原文、`zh`/`en` 是译写。**这类所的正常终态是「近乎全 medium + 少量 low」，
+    progress-matrix 全 🟡 不是没做完**（[CLAUDE.md §四]）。
 - 确定 `region`（对照 `schema/enums.yml` 的受控词表）
 
 ### 2. 查 `PROJECT/SOURCES.md`，缺就探测
@@ -202,8 +223,19 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
 主题。
 
 **某些官网主站是纯前端渲染的 SPA**，curl 拿到的是几乎空的 `<title>` 壳（比 403 更隐蔽的一种
-"抓不到"，SGX 主站是 v0.2/v1.0 第一个样本，`europa.eu/rapid` 新闻稿页是第二个）——遇到这种情况
+"抓不到"，SGX 主站是 v0.2/v1.0 第一个样本，`europa.eu/rapid` 新闻稿页是第二个，越南 `www.hsx.vn`
+React SPA、`www.hnx.vn` Vue SPA 是第三、四个——**两所自有站都取不到规则正文**）——遇到这种情况
 不要反复重试当成限流处理，改找该内容的规则手册子域名（通常服务端渲染）或年报/监管备案文件。
+
+- **`group_id` 结构的市场：先查母公司 / 集团实体的站点有没有服务端渲染的法规登记栏目。**
+  越南两所官网都是 SPA，但母公司 VNX 的 `vnx.vn/van-ban-phap-ly/{1..6}`（Luật / Nghị định /
+  Thông tư / Quyết định / Quy chế 五类）是服务端渲染的法规登记表——表格行含文号 + 名称 + 发布 /
+  生效日期 + 附件名，全部可 grep，PDF 附件在 `stream.vnx.vn/VNX//Legal/`。往往比子交易所自己的
+  SPA 门户可抓得多。清算结算侧同理：`vsdc.vn/en/` 的文章页（`/en/sd/<id>` 服务页、`/en/ads/<id>`
+  新闻）服务端渲染、正文完整（只有菜单是 JS）。
+- **监管机构文档服务器直链**：`ssc.gov.vn` 的 portal 页全 JS，但
+  `ssc.gov.vn/cs/idcplg?IdcService=GET_FILE&dDocName=<id>&dID=<id>&filename=<name>` 文档直链可
+  curl（Oracle UCM 后端的通用形态）——每份英译带「not official / for reference only」→ 封顶 medium。
 
 **PDF 抓取成功（HTTP 200 + 合理文件大小）不代表 `pdftotext` 能正常提取文本**——SIX 交易所的
 月度统计 PDF 抓下来完好，但 `pdftotext -layout` 输出的是逐字母断行的乱码（如"Turnover"被拆成
@@ -214,11 +246,41 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
 **v1.1 Batch 1 二次确认了这类"图片渲染表格"问题不是 SIX 的个案**：uk-lse 的 LCH EquityClear
 清算费率表 PDF 同样 200+466KB 但 `pdftotext -layout` 只提取出零散的"–"符号，属同一类问题。
 
+**扫描件 / 纯图片 PDF → 自助 OCR（[ADR-add-exchange-skill-forge] 新增的降级手段，先于「转人工」）**：
+越南政府的 `.signed.pdf`（数字签名、Pdftools SDK 生成）是整份图片、无文本层——`pdftotext -layout`
+只吐 ~50–300 字节（签名元数据），`pdffonts <pdf>` 输出空字体表就是 image-only 确证。**不要立刻
+按 CLAUDE.md §三 转人工**，先自助 OCR：
+
+```
+# 缺语言包时先下（tessdata_fast 够用；放进一个含 eng/osd 软链的目录，TESSDATA_PREFIX 指过去）
+curl -L -o <lang>.traineddata "https://github.com/tesseract-ocr/tessdata_fast/raw/main/<lang>.traineddata"
+TESSDATA_PREFIX=<dir> ocrmypdf -l <lang> --force-ocr --sidecar out.txt in.pdf out-ocr.pdf
+# 数字签名 PDF：加 --invalidate-digital-signatures（只是为提取文本，不保留签名件）
+```
+
+越南语 OCR 实测质量足以逐字摘 `quote`（含声调符号）；confidence 按「母语一手」→ medium。OCR 也
+读不出（表格是纯图片截图、内嵌字体异常）再降级转人工。**把 OCR 出来的全文存成
+`.cache/<id>/<缓存文件同名>.txt` sidecar**——`verify_quotes` 只查 `high` 字段，但独立复核者 /
+`--live` 能据此对 medium 字段的母语 quote 逐字核（见步骤 5）。
+
 **`tools/fetch.py` 按 URL 生成缓存文件名，不看 Content-Type**——如果一个来源实际是 `.xlsx`
 （如某监管机构公布的持牌机构名录表），落盘文件名仍会带 `.html` 后缀（因为 URL 路径本身可能
 不以 `.xlsx` 结尾，或工具没有识别真实内容类型）。想用 `openpyxl`/`xlrd` 打开做行数统计等操作
 前，先确认真实文件格式（`file <cache路径>`），必要时复制一份改成正确后缀再打开，不要被
 `.html` 后缀误导成"这是网页，正文应该用 grep"。
+
+**大 PDF 源集 + `make fetch` 每次全量重下 + kill 留截断 PDF**（越南源集 ~40MB：QĐ22 12.7MB +
+附录 10.5MB + 政府令 8MB…，`stream.vnx.vn` 服务器慢，一次 `make fetch` 要几分钟）：
+- 加少量小 HTML 源后**不必 `make fetch` 全量重跑**——可单独 curl 进 `.cache/<id>/`：文件名 =
+  `fetch.py` 的 slugify（`{url 去协议后、非字母数字转 `-` 的末 40 字符}-{sha1(url)[:10]}` + `.pdf`/`.html`），
+  再手工往 `.cache/<id>/_manifest.json` 追一条（list 形式，每项
+  `{url, http_status, ok, via, size, file, fetched_at}`）。
+- **中途 `kill` fetch 进程会留下截断的 PDF**（实测 QĐ22 12.7MB → 3.8MB），`pdftotext` 仍能出
+  部分文本、不报错——静默坏缓存。kill 后 `ls -la .cache/<id>` 核对大 PDF 字节数与预期一致，
+  截断的重下。
+- 姊妹所（`group_id` 相同）共用同一批 VNX / 法律 PDF：`slugify` 只依赖 URL，两所缓存目录里的
+  文件同名——可直接 `cp .cache/vn-hose/<name>.pdf .cache/vn-hnx/`（连 `.txt` sidecar 一起），
+  不必重下。
 
 ### 4. 建数据文件，逐章填
 
@@ -343,6 +405,15 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
      存在这个概念"本身需要认真检索一遍才能下结论，不能因为任务描述里写了"预期多数留空"就
      跳过检索直接判定不适用。
 8. **第五章有几个 2026-08 新增（[ADR-042]）、规则手册里往往不集中的字段，建档时留意：**
+   - **量化表通常在规则手册的附录 / 别表 / Schedule 里，不在正文条款。** 越南 VNX QĐ22 正文
+     第29–34 条只说「交易单位 / 报价单位 / 涨跌幅由交易所公告」，真正的数值表（开盘集合竞价
+     09:00–09:15、±7%/±20%、tick 三档 10/50/100 đ、整手 100 / 大宗 20,000 / 碎股 1–99）全在
+     **附录 II（Phụ lục II，一份独立 PDF 附件）**。抓到规则手册后先找它的附录 / Schedule PDF。
+   - **「法规写了但未落地」= enum 按实务现状填，`detail` + `note` 分开记「依据条款」与「落地状态」。**
+     越南 Circular 120 第 10/11 条为 T+0 当日交易、担保卖空预留了法律依据，但 KRX 系统 2025 上线
+     后仍未推出——`intraday_reversal` 填 `t2`、`short_selling` 填 `banned`，`detail` 同时说清
+     ①哪条法规授权 ②哪个来源证实未落地。改革中的新兴市场常有这种「纸面 vs 现实」落差，别照
+     法条填成「已有」。
    - `execution_model`（执行模型：订单驱动 / 报价驱动 / 混合 / 经纪撮合）——从既有
      `matching_principle` + `market_maker_scheme` 的已核实 quote 派生（同 [ADR-038] 把
      `matching_principle` 转 enum 的做法），`detail` 写推理链，不用重新抓。判定规则（[ADR-043]
@@ -380,9 +451,11 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
      - **欧陆逗号小数**：RTS 11 原文「0,01」，validate 5b 做 `quote.replace(",","")`→「001」，
        与 spec repr「0.01」不匹配 → 这类表一律 `min_tick: null` + 散文 `full_table_note`，
        不放数值 `ladder`（SIX Annex D 用句点小数，是可放 ladder 的例外）。
-     - **规则 / 条款号别写进 `zh` / `en` 正文**：`NUMBER_RE` 把「Rule 4403」「RTS 11」「§ 87」
-       「Ref 66/2024」里的数字当反查目标，quote 里没有就 fail——条款号只写进 `detail` / `note`
-       / `sources` title。
+     - **规则 / 条款号别写进 `zh` / `en` 正文，也别写进 `spec.note`**：`NUMBER_RE`（校验 5）把
+       「Rule 4403」「RTS 11」「§ 87」「Ref 66/2024」里的数字当反查目标，quote 里没有就 fail；
+       **`spec.note` 另受校验 5c 的文件级数字反查（不限 confidence）**——note 里出现「第63(3)条」
+       的「63」，若本文件任何 `quote`/`zh` 里都没有，直接 fail（越南轨 `clearing.default_management`
+       与 `costs.stamp_duty` 各撞过一次）。**条款号 / 法规引用号只写进 `detail` 与 `sources` title。**
      - **flow-mapping spec 里的长 note**：`spec: {a: b, note: "很长…含半角逗号…"}` PyYAML
        偶发 parse error；长 note 用块式 `spec:` 换行写。
    - 有些交易所的一手规则页是 JS 导航壳、curl 抓不到正文（KRX 英文栏目、NSE 现货交易机制页）——
@@ -446,7 +519,28 @@ URL 尾缀带 `T1`/`T2`.jsp 的详情子页，要么整份塞进官方 PDF 指�
       文件级反查。**语义把关**：`delisting_transition_period` 只填「退市决定后证券仍可交易的
       整理 / 通知窗口」——「除牌前的整改宽限期（期间停牌）」「注销生效等待期」不是一回事，
       硬填会让剖面里的时长块误导（[ADR-059] 因此未收 `hk-hkex` 18 个月补救期限、`us-nyse`
-      Form 25 生效期）。
+      Form 25 生效期）。越南 `vn-hose`/`vn-hnx` 的政府令 155 第120(4)条「继续交易最多 30 日」
+      正好是这个窗口——`spec: {value: 30, unit: calendar_days, bound: upper}`。
+
+12. **监管图 / 参与者图 / 风险旗标三个模块（[ADR-061]/[ADR-064]/[ADR-066]）——纯散文 / enum，
+    无 `spec`，但有明确的数据形状要求：**
+    - **监管图（第三章）** 消费 `regulation.regulator` / `self_regulatory_org` / `clearing_regulator` /
+      `core_laws` / `foreign_ownership_limit` / `capital_controls` / `disclosure_requirements` /
+      `investor_protection`——四个 `en_required` 字段（前 3 + core_laws）必须 `{zh, en}` 完整信封。
+      画的是「政府监管机构 → 自律组织 → 交易所」的层级链 + 核心法律；把机构关系（谁监管谁、
+      谁颁布规则）写清楚，别只写机构名。
+    - **参与者图（第九章）** 消费 `participants.*` 六个字段——多为 `moderate` volatility（要
+      `sources`）。`investor_structure` / `broker_landscape` 常查不到官方统计 → 如实 `low` + 空
+      + 记 OPEN-QUESTIONS，别用第三方估计凑 `medium`（`sources` 会拦）。
+    - **风险旗标（第十二章，[ADR-066]/[ADR-079]）** 消费 `risks` 章 5 个 `*_note`
+      （`fx_risk_note` / `political_risk_note` / `liquidity_risk_note` / `regulatory_change_risk_note` /
+      `enforcement_note`）。**关键：`confidence` 是旗标面板的一等视觉信号（填充度四态），
+      `confidence: medium|high` 的 `*_note` 必须有字段级 `sources`，章节 `_meta.sources` 继承不算数
+      （`make check` 校验 20 硬拦）**。`fx_risk_note` 的 `volatility: stable` 使它不受校验 4 约束，
+      但校验 20 专门盯它——写了 medium 就必须配 field-level `sources` + `quote`。
+      `political_risk_note` 若涉及政治体制的对外定性（如「单一制社会主义国家」），按
+      [ADR-079] 边界**留空、留公开仓库维护者裁量、代理会话不代拟**（同 `tw-twse`/`ch-six`）；
+      宏观—贸易层面因素（关税、地缘）不属证券市场机制范畴、不往这里塞。
 
 ### 5. 本地验证
 
@@ -456,6 +550,18 @@ make serve       # 本地预览，浏览器打开 http://localhost:8000
 ```
 
 `make check` 报错就照着错误信息改——每一条错误都对应一条铁律或一致性规则，不要绕过去。
+v1.1 之后新增、新增一整所时会被触发的关卡（`make check` 内含，报错时按名字定位）：
+- **校验 5c**（`validate.py`）：`spec.note` 内嵌数字须在本文件任一 `quote`/`zh` 里命中——见步骤 4.8。
+- **校验 20 / 21**（`validate.py`，[ADR-079]/[ADR-094]）：第十二章 5 个 `*_note` 与全库
+  `volatility: stable` 且已填的 medium/high 字段，必须有**字段级** `sources`（章节 `_meta` 继承不算）。
+- **`derivatives_spec_shape_violations`**（`validate.py`，[ADR-082]）：`market_structure.derivatives.*` /
+  `clearing.derivatives.*` 的 spec 键必须落在共享形状内——数据文件写普通 `spec: {...}` 即可，
+  别自造键。
+- **`check_ui_i18n` / `check_no_chapter_ordinals` / `check_wrap_mixed` / `check_no_stale_view_links` /
+  `check_no_dup_render_helpers`**：都是前端关卡，纯数据新增一般不触发；只有顺带改了 `docs/assets/`
+  才需要关心。
+- **`check_canvas_sections`**（[ADR-phase4-canvas-layout]）：锁 `app.js` 的 7 模块画布注册表——
+  纯数据新增不触发，但它是「单页画布仍是 7 模块」的护栏，自检时可跑一遍确认没被误动。
 
 **verbatim-quote 反查（v1.1 Batch 2 后必做）**：`make check` 现在内含 `tools/verify_quotes.py`——它把每个 `confidence: high` 字段的 `quote` 与 `.cache/<id>/_manifest.json` 中实际落盘的引用来源逐字比对（剥离 HTML 标签 + PDF/Office 文本提取）。任一 `high` 字段的 `quote` 不在已抓来源里即报错并阻断构建。填完一家后建议显式跑一遍确认：
 ```
@@ -466,10 +572,27 @@ make verify-quotes-live                       # 现场抓取所有引用来源�
 
 浏览器里确认：矩阵新增了一行、点格子能看到刚填的出处、切到「English」模式该所的 `en` 字段显示正确、档案页十一章能逐章翻。
 
+**市场机制剖面 + 单页画布 7 模块逐所自检（v2.0 必做）**——把新所在「更多」以外的主画布里
+从上到下翻一遍，逐模块确认：
+1. **市场机制剖面**：y 轴的墙位置对不对（`price_limits.main_board.spec` 的 `limit_pct` + `reference`）；
+   `circuit_breaker: type=none` 时不该画熔断线、`volatility_interruption: type=none` 时不该画走廊；
+   x 轴时段与午休从 `trading_sessions.*.spec` 来（新所要进 `tools/sync.py` 的 `EXCHANGE_IANA_TZ`
+   才有甘特条，越南两所已加 `Asia/Ho_Chi_Minh`）；剖面中心信息卡「日内价格受什么约束」这句话
+   读起来对不对。现货 / 衍生品有 `derivatives` 子块的能切换。
+2. **成本瀑布**：`exchange_fees` / `stamp_duty` 等 6 字段的 `spec.rate`（或 `rate_raw`）画出的
+   条形高度合理，`rate: null` 的画幽灵条、`type: none` 的画 0 高度 + 标注。
+3. **交割管线**：`settlement_cycle` enum 的时间轴、`guarantee_model` 的「CCP 介入」节点、
+   `default_management.spec` 的常驻违约瀑布按 `bearer` 上色。衍生品所另看 `clearing.derivatives`。
+4. **上市生命周期**：`listing_process_duration` / `delisting_transition_period` 的 `spec` 时长块
+   （满条 = 9 个月）；`spec` 缺省时退回散文块。
+5. **监管图** / **6. 参与者图** / **7. 风险旗标**：三张纯散文 / enum 图有没有内容、风险旗标面板
+   的 `confidence` 四态字形显示对不对（见步骤 4.12）。
+
 如果当前环境没有浏览器工具，用 Python 直接读 `docs/data/matrix.json` 和
 `docs/data/exchanges/<id>.json` 模拟 `app.js` 的取值逻辑做等效核对（新交易所的枚举格子在
-中英两种模式下能不能正确取到 label、`zh`/`en` 两个字段有没有大片不对称留空）——不如真人点一遍
-浏览器可靠，但能捕捉"数据结构对不对"这类问题，比什么都不做强。
+中英两种模式下能不能正确取到 label、`zh`/`en` 两个字段有没有大片不对称留空、上面 7 个模块
+的 `spec` / `*_note` 字段在展开后的 JSON 里结构是否完整）——不如真人点一遍浏览器可靠，但能
+捕捉"数据结构对不对"这类问题，比什么都不做强。
 
 ### 6. 遇阻：降级方案
 
@@ -494,6 +617,13 @@ make verify-quotes-live                       # 现场抓取所有引用来源�
 
 ### 7. 收尾
 
+- **独立视角复核（新增一整所必做，[CLAUDE.md §四] / [ADR-081] / [ADR-054]）**：一整所的
+  `spec` 层轻松触及 > 30 个字段（越南轨 `vn-hose` 单所约 25、加 `vn-hnx` 衍生品子块远超 30），
+  ROADMAP 条目打勾前必须有**另一个未共享上下文的视角**（人，或全新 general-purpose 子代理
+  会话——**不是 fork**，fork 继承同一信念、原始抓错查不出）跑完抽检：每所抽 ≥10 个字段的
+  `quote` ↔ 出处，加全部 `spec` 按 [ADR-054] 6 维度（数值 / unit / side / `type: none` 的正面
+  依据 / note 里的数字 / `components`·`tiered`·`cap` 完整性）比对，通过率 ≥ 95%。协调者 / 执行者
+  本人自查不算数。母语一手 + OCR 的所，复核者据 `.cache/<id>/*.txt` sidecar 逐字核 quote。
 - `make sync` 会自动更新 `PROJECT/ROADMAP.md` 的进度矩阵，**不需要手改**
 - 事实写进 `ROADMAP.md` §三详版条目（逐条 checklist，就地改）。§一「下一步」只在优先级 / 阶段变化时改（见 `CLAUDE.md` §八）
 - 若这次要写 ADR：`DECISIONS.md` 追加一条 `### ADR-<slug>`（见上方并行须知与 [ADR-slim-coordination-machinery]）

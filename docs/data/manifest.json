@@ -357,6 +357,58 @@
       }
     },
     {
+      "id": "vn-hnx",
+      "name_zh": "河内证券交易所",
+      "name_native": {
+        "vi": "Sở Giao dịch Chứng khoán Hà Nội",
+        "en": "Hanoi Stock Exchange (HNX)"
+      },
+      "official_languages": [
+        "vi"
+      ],
+      "source_lang": "en",
+      "group_id": "vnx-group",
+      "region": "apac",
+      "trading_hours": {
+        "iana_tz": "Asia/Ho_Chi_Minh",
+        "utc_offset_hours": 7.0,
+        "open_local": "09:00",
+        "close_local": "15:00",
+        "lunch_start_local": "11:30",
+        "lunch_end_local": "13:00",
+        "open_utc": 2.0,
+        "close_utc": 8.0,
+        "lunch_start_utc": 4.5,
+        "lunch_end_utc": 6.0
+      }
+    },
+    {
+      "id": "vn-hose",
+      "name_zh": "胡志明市证券交易所",
+      "name_native": {
+        "vi": "Sở Giao dịch Chứng khoán Thành phố Hồ Chí Minh",
+        "en": "Ho Chi Minh Stock Exchange (HOSE)"
+      },
+      "official_languages": [
+        "vi"
+      ],
+      "source_lang": "en",
+      "group_id": "vnx-group",
+      "region": "apac",
+      "trading_hours": {
+        "iana_tz": "Asia/Ho_Chi_Minh",
+        "utc_offset_hours": 7.0,
+        "open_local": "09:00",
+        "close_local": "14:45",
+        "lunch_start_local": "11:30",
+        "lunch_end_local": "13:00",
+        "open_utc": 2.0,
+        "close_utc": 7.75,
+        "lunch_start_utc": 4.5,
+        "lunch_end_utc": 6.0
+      }
+    },
+    {
       "id": "za-jse",
       "name_zh": "约翰内斯堡证券交易所",
       "name_native": {

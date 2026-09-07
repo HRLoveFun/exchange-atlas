@@ -159,6 +159,27 @@
 - **[OQ #45 落地（2026-09-05）] `us-nyse` 衍生品子章 7 处留空（detail 均已写明阻断，汇总下次入口）：** `matching_principle`（NYSE American 期权规则 964NYP 排序条文——手册正文本体未直抓，本次仅 Exhibit 引用级）、`tick_size`（期权 MPV 档位表条文）、`price_limits.*`（美式期权无日常涨跌停，但 [ADR-067] 判据要求的正面文本未定位，不断 type: none；相邻事实 Trading Collar 订单级保护带已记录）、`volatility_interruption`（同前）、`connect_schemes`（无穷举性条文可正面化）。
 - **工具层待修（OQ #45 执行中发现）：`tools/fetch_sources.py` 的 BLOCK_SNIFF_RE 对引用 `cdnjs.cloudflare.com`/`/cdn-cgi/` 静态资源的真实正文会误判为 Cloudflare 拦截页**，触发 wayback 回退（theocc.com 两页实锤；内容无损、快照链经盲审 CDX 核实）。修复方向：只匹配质询页特征（Attention Required/Just a moment/error code: 1020 等）而非"cloudflare"字样。
 
+- **[ADR-add-exchange-skill-forge 越南轨] `vn-hose` Phase B 留空 / 降级项，待人工或后续会话补：**
+  - `regulation.foreign_ownership_limit`（`low`，空）：外资持股上限（room）分行业比例表待从政府令 155/2020/NĐ-CP 第139条 + 245/2025/NĐ-CP 一手条文逐条核实。155 号令越南语签署版为图片型 PDF（`stream.vnx.vn/VNX//Legal/...155.signed.pdf`），OCR 进行中；SSC idcplg 只托管 245 号令（修订件）英译，未见 155 号令合并英译。**下次入口**：155 号令合并版 OCR、或 SSC 英译 155 号令 idcplg 直链、或 Baker McKenzie 跨境上市指南「Foreign ownership」专题页。
+  - `regulation.capital_controls`（`low`，空）：越南盾非完全可兑换、组合投资经越南盾间接投资资本账户（IICA）进出——具体规则待从越南国家银行（SBV）外汇管理条例 + 相关通函（如 51/2021/TT-BTC）一手核实。SBV 英文站已抓（`sbv.gov.vn/en/home`，1.5MB）但未定位到外汇制度专页。**下次入口**：SBV 英文站「Legal Documents / Foreign Exchange Management」栏目、或 IMF AREAER 越南章节。
+  - `regulation.investor_protection`（`low`，空）：越南无 SIPC 式投资者赔偿基金；《证券法》第66/67条的结算支持基金 / 清算基金属交收层面（已在第八章覆盖）。证券公司客户资产隔离、VNX 会员间纠纷调解等机制待核实。
+  - `market_structure.volatility_interruption`（`low`，已入自动清单）：「无个股级波动性中断」为消极认定——QĐ22 第五章交易条款与附录 II 时间表均无对应机制。KRX 系统后续若引入需复核。
+  - `market_structure` 全章 quote 为越南语、锚定 QĐ22 图片型 PDF 的 tesseract OCR（confidence 按越南语一手封顶 `medium`，`.cache/vn-hose/` 已放 OCR sidecar 供独立复核逐字比对）。若日后 VNX / HOSE 发布 QĐ22 的文本层 PDF 或官方英译，可整章回核升级。
+
+- **[ADR-add-exchange-skill-forge 越南轨] `vn-hnx` Phase C 留空 / 降级项：**
+  - `regulation.foreign_ownership_limit` / `capital_controls` / `investor_protection`：同 `vn-hose`（见上条），另加衍生品投资者资格分类（政府令 158 第16条）的逐条比例待核。
+  - `market_structure.price_limits.other_boards`（`low`）：UPCoM ±15% / 首日 ±40% 为越南市场通行值，未取得 UPCoM 专项业务规则一手条文（该规则独立于 QĐ22）。**下次入口**：VNX 法规栏目下的 UPCoM 交易业务规则 PDF（`stream.vnx.vn/VNX//Legal/`）。
+  - `market_structure.derivatives.price_limits.other_boards`（`low`）：政府债券期货涨跌幅按各合约规格，未取得。
+  - `infrastructure` 全章（`low`）：KRX 新系统向 HNX 上市股票 / UPCoM / 政府债券 / 衍生品市场的迁移进度与范围未从一手核实（衍生品市场此前运行 HNX 自建系统）；行情层级 / 收费 / 故障史未取得。**下次入口**：HNX 官方系统迁移公告、HNX 数据服务栏目。
+  - `indices` 三项（HNX-Index / HNX30 / UPCoM-Index）基日 / 基点均留空——未取得 HNX 指数方法论一手 PDF。**下次入口**：HNX 网站「INDEX > Introduction」栏目或指数方法论 PDF。
+  - `market_structure.derivatives` 与 `clearing.derivatives` 的时段 / tick / 涨跌幅 / 保证金 / 结算引自 SSI·KGI 券商托管的 VN30 期货合约规格英译 + 政府令 158 OCR（第三方 + 越南语一手 → `medium`）。**下次入口**：VNX 衍生品交易业务规则 + VSDC 衍生品清算结算业务规则（26/QĐ-HĐTV）一手 PDF。
+
+- **[ADR-add-exchange-skill-forge 越南轨] 独立视角复核（2026-09-07，全新未共享上下文 agent 会话）遗留的 QUESTION（非 FIX，待用户 / 后续会话裁量）：**
+  - `vn-hose`/`vn-hnx` `costs.exchange_fees.spec.side: both`：财政部决定 1541 只写「0,027% giá trị giao dịch」，无「买卖双向」措辞。撮合费双边计收是各所通例、渲染层缺省回退 `both`，但按 [ADR-054] side 细则应补一份说明「HOSE/HNX 交易服务价格买卖双向各计」的一手表述。
+  - `vn-hose` `market_structure.tick_size.spec.ladder` 顶档 `price_min: 50000`：附录 II 原文为「> 50.000」（严格大于），中间档为「10.000-49.950」。50,000 处于两档间隙、实际按顶档 100 đ 处理（中间档 tick 50、下一有效价即 50,000）——ladder 用 `price_min: 50000` 是这一实务推断；≥/> 边界口径待人拍板是否精确化。
+  - `vn-hose`/`vn-hnx` `market_structure.volatility_interruption.spec.type: none`：无正面「不设」原文，仅「QĐ22 第五章 + 附录 II 未出现」的消极认定，已用 `confidence: low` + detail 如实标注。[ADR-054] 维度 4 要求 `type: none` 有正面依据——此处按 low-confidence 消极认定处置，是否接受待裁量。
+  - **全库既有问题（非 vn 独有，建议单独订正 ADR）**：`cn-sse` / `za-jse` / `de-eurex` / `au-asx` 等所的 `costs` 章 note 与 `DECISIONS.md` 多处把「证券交易流转税映射至 stamp_duty 字段」的语义**误引为 `[ADR-002]`**——`### ADR-002` 正文实为「YAML 为权威 + JSON 派生」，与税费映射无关。vn 两所本次已改为「与 cn-sse / tw-twse / za-jse 同构处理」不再引 ADR-002；其余所待单独开条订正引用号。
+
 
 <!-- BEGIN:GENERATED auto-issues -->
 - `br-b3` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
@@ -197,5 +218,12 @@
 - `us-nasdaq` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `us-nyse` 基本信息 / 交易货币（trading_currency）— confidence: low
 - `us-nyse` 基本信息 / 结算货币（settlement_currency）— confidence: low
+- `vn-hnx` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
+- `vn-hnx` 市场结构与交易机制 / 波动性中断（volatility_interruption）— confidence: low
+- `vn-hnx` 市场结构与交易机制 / 节假日与特殊休市（derivatives.holidays_note）— confidence: low
+- `vn-hnx` 市场结构与交易机制 / 其他合约幅度（derivatives.price_limits.other_boards）— confidence: low
+- `vn-hnx` 市场结构与交易机制 / 波动性中断（derivatives.volatility_interruption）— confidence: low
+- `vn-hnx` 市场结构与交易机制 / 互联互通/跨境安排（derivatives.connect_schemes）— confidence: low
+- `vn-hose` 市场结构与交易机制 / 波动性中断（volatility_interruption）— confidence: low
 - `za-jse` 基本信息 / 结算货币（settlement_currency）— confidence: low
 <!-- END:GENERATED auto-issues -->

@@ -2949,3 +2949,34 @@ print('全库 medium 零 sources:',n)
 **没改什么：** `CLAUDE.md`（[ADR-041] 已判过 scope / roadmap 类不进宪法，本轨同理）；已有 20 家数据；`add-exchange` skill 的十一章骨架（迭代是就地改进，不是重写）；[ADR-036] 以「用户触发的新增满足条件时」为触发语义的 schema 裁定。
 
 **日期：** 2026-09-06
+
+**执行进度（2026-09-07，协调者单会话串行、后台任务分支 PR）：**
+- **越南两所入库**：`vn-hose`（HOSE，11 章全填、72 已填字段）+ `vn-hnx`（HNX 全量含衍生品市场，
+  99 已填字段）。`group_id: vnx-group` 压测结论——一控股、两独立法人、各自完全不同的规则集
+  （HOSE 单一上市板 / ±7% / 三档 tick / 无 PLO；HNX 四个市场 / ±10%·±30% / 恒 100đ tick / 有盘后
+  PLO），`boards` 完全不交叉、共享的只有 VNX 上位规则与 VSDC——**`group_id` + `boards` 各记各的
+  设计够用，不触发 `federation_of`**（VNX 单国控股，非 Euronext 式多国联邦）。
+- **confidence 结构性偏低**：越南一手规则语言是越南语（`source_lang: en`，同 sa-tadawul/br-b3/kr-krx），
+  两所官网均 SPA（HOSE React / HNX Vue），核心规则 QĐ22 与政府令 155/158 是图片型 PDF——经
+  tesseract 越南语 OCR 提取（sidecar 存 `.cache`）作一手支撑 medium，官方英译带「unofficial」
+  免责亦封顶 medium。两所 progress-matrix 均 ch2✅ ch4✅ ch7✅ ch8✅ 其余 🟡——是「母语第三语言 +
+  官方英文薄」市场的正确终态，不是没做完。仅 `settlement_cycle` 一处 high（VSDC 英文站 verbatim）。
+- **skill 收口**：`.claude/skills/add-exchange/SKILL.md` 删「⚠️ 待 v2.0 对齐」警告框，就地补 12 条
+  摩擦点——source_lang「母语第三语言」处理 / SPA→母公司法规登记栏目 / 扫描件自助 OCR 降级路径 /
+  条款号不进 spec.note（5c）/ 量化表在附录 / 「法规写了但未落地」/ 步骤 4.12 三个纯散文可视化
+  模块的数据形状（含风险旗标 confidence 是一等视觉信号 + 校验 20）/ 步骤 5 的单页画布 7 模块
+  逐所自检清单 + v1.1 后新增关卡清单 / 步骤 7 的独立视角复核（新增一整所必做）。
+- `make check` 全绿（22 家）、`verify_quotes` FAIL=0；`tools/sync.py` 加两所进 `EXCHANGE_IANA_TZ`
+  （`Asia/Ho_Chi_Minh`，时区甘特条）；剖面 / 画布 spec 结构自检通过。
+- **独立视角复核（2026-09-07，全新未共享上下文 general-purpose agent 会话，非 fork）**：
+  初审——机器核全过、**spec 层 [ADR-054] 6 维度约 70 字段 100% 通过**（越南语一手 QĐ22 /
+  政府令 155·158 / 决定 1541 / 《证券法》/ VSDC 的 quote 逐字反查全部命中），但 `risks` 章
+  4 处英文第三方/新闻来源 FIX（fx_risk_note 的 ±5% 与所引早期文的 ±3% 冲突；enforcement_note
+  的 FLC 具体数字误 attribute；regulatory_change / HNX intraday_reversal 的 quote 是 WebSearch
+  AI 摘要、来源里没有）——通过率 92.6%/92.7% < 95% → FAIL。**FIX 逐条修复**（换一手源 +
+  quote 逐字替换，未改机制判断，提交 `5db4977`）。复审——4 处全部逐字复核通过、无新 FIX、
+  复合引用每段各归其源，**两所 100% → 整体 PASS**。QUESTION（记 OPEN-QUESTIONS）：exchange_fees
+  side 无方向措辞 / tick ladder 50,000 边界 / volatility_interruption 消极认定 / 全库既有的
+  `[ADR-002]` 税费映射误引（vn 两所已改为「与 cn-sse/tw-twse/za-jse 同构处理」）。
+- **收官**：PR #121 转正式合并；ROADMAP §三该条目 `[x]`。skill 十一章步骤已在 v2.0 契约下
+  真跑一遍并逐点回写，[ADR-017] 冷启动子代理模式在 v2.0 契约下重新成立的前提达成。
