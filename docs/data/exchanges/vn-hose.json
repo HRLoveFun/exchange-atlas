@@ -313,8 +313,58 @@
       }
     },
     "products": {
-      "meta": {},
-      "items": []
+      "meta": {
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "Ho Chi Minh Stock Exchange — Overview（Baker McKenzie，HOSE 2024 年报口径的上市证券构成）",
+            "url": "https://resourcehub.bakermckenzie.com/en/resources/cross-border-listings-guide/asia-pacific/ho-chi-minh-stock-exchange/topics/overview-of-exchange",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "VNX QĐ 22/QĐ-HĐTV 正文（第4条：股票 / 封闭式基金 / ETF / 备兑权证 / 公司债券的上市与交易）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ]
+      },
+      "items": [
+        {
+          "id": "vn-hose-equities",
+          "category": "equity",
+          "name_zh": "上市普通股",
+          "name_native": "Cổ phiếu niêm yết",
+          "description": "HOSE 是越南两家交易所中规模最大的一家，主要挂牌大中型公司普通股；单一上市板（无科创 / 创业板式分层），交易机制见 market_structure"
+        },
+        {
+          "id": "vn-hose-closed-end-fund",
+          "category": "fund",
+          "name_zh": "封闭式基金份额",
+          "name_native": "Chứng chỉ quỹ đóng"
+        },
+        {
+          "id": "vn-hose-etf",
+          "category": "fund",
+          "name_zh": "ETF 份额",
+          "name_native": "Chứng chỉ quỹ ETF (quỹ hoán đổi danh mục)",
+          "description": "跟踪 VN30、VNDiamond、VNFinLead 等 HOSE 指数的实物申赎 ETF；设做市商制度"
+        },
+        {
+          "id": "vn-hose-covered-warrant",
+          "category": "structured",
+          "name_zh": "备兑权证",
+          "name_native": "Chứng quyền có bảo đảm (CW)",
+          "description": "由证券公司发行、以 HOSE 上市股票为标的的备兑认购 / 认沽权证；欧式、发行人义务做市，到期现金结算"
+        },
+        {
+          "id": "vn-hose-corporate-bond",
+          "category": "bond",
+          "name_zh": "上市公司债券",
+          "name_native": "Trái phiếu doanh nghiệp niêm yết",
+          "description": "在 HOSE 挂牌交易的公司债券；结算周期 T+1（见 clearing）。政府债券与私募公司债券在 HNX 交易，不在本文件范围"
+        }
+      ]
     },
     "market_structure": {
       "trading_sessions": {
@@ -994,20 +1044,252 @@
       }
     },
     "listing": {
-      "boards": [],
-      "review_system": null,
-      "listing_process_duration": null,
-      "transfer_between_boards": null,
-      "continuing_obligations": null,
-      "suspension_resumption": null,
-      "delisting_conditions": null,
-      "delisting_process": null,
-      "delisting_transition_period": null,
-      "post_delisting_venue": null
+      "boards": {
+        "_meta": {
+          "verified": "2026-09-07",
+          "confidence": "medium"
+        },
+        "items": [
+          {
+            "id": "vn-hose-listed",
+            "name_zh": "上市板",
+            "name_native": "Niêm yết (Sở Giao dịch Chứng khoán Thành phố Hồ Chí Minh)",
+            "financial_threshold": "实缴注册资本 ≥ 300 亿越南盾且市值 ≥ 300 亿越南盾；上市前年 ROE ≥ 5% 且前两年经营盈利；无逾期一年以上债务、无累计亏损；至少 15%（注册资本 ≥ 1 万亿越南盾时为 10%）有表决权股由 ≥ 100 名非大股东持有",
+            "target_companies": "大中型公众公司；HOSE 为越南规模最大的交易所",
+            "launched_year": 2000
+          }
+        ]
+      },
+      "review_system": {
+        "enum": "approval",
+        "zh": "核准制：上市登记由交易所（VNX / HOSE）依政府令 155/2020/NĐ-CP 与 VNX 上市业务规则审核批准；发行环节的公开发行由国家证券委员会（SSC）发放公开发行注册证书。与交易所审核并行的监管注册以 SSC 为准",
+        "en": "Approval-based: listing registration is reviewed and approved by the exchange (VNX/HOSE) under Decree 155/2020/NĐ-CP and the VNX listing regulation; the public-offering leg requires a certificate of registration for public offering from the State Securities Commission (SSC)",
+        "detail": "越南是核准制而非注册制——公开发行须经 SSC 逐案发放注册证书（《证券法》第25条），上市须经交易所逐案批准。enum 取 approval。",
+        "sources": [
+          {
+            "title": "政府令 155/2020/NĐ-CP 第109(1)条 + Law on Securities 英译 Art 25（公开发行注册证书）",
+            "url": "https://stream.vnx.vn/VNX//Legal/20211122161440105155.signed.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Là công ty cỗ phần có vốn điều lệ đã góp tại thời điểm đăng ký niêm yết từ 30 tỷ đồng trở lên căn cứ trên báo cáo tài chính gần nhất được kiểm toán, đồng thời giá trị vốn hóa đạt tối thiểu 30 tỷ đồng",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "spec": null
+      },
+      "listing_process_duration": {
+        "zh": "",
+        "detail": "越南《证券法》与政府令 155 未设从上市申请到挂牌的单一法定总时长；交易所收到完整申请后有法定审核时限（政府令 155 第111条），本次未从 OCR 定位到含阿拉伯数字的干净时限句，spec 整个不填，记 OPEN-QUESTIONS。实务上从递交到挂牌通常数月。",
+        "sources": [
+          {
+            "title": "政府令 155/2020/NĐ-CP 第111条（上市登记程序）",
+            "url": "https://stream.vnx.vn/VNX//Legal/20211122161440105155.signed.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "confidence": "low",
+        "verified": "2026-09-07",
+        "en": null,
+        "enum": null,
+        "spec": null,
+        "quote": null
+      },
+      "transfer_between_boards": {
+        "zh": "强制退市但仍符合公众公司条件的股票，须转入河内证券交易所的 UPCoM 注册交易市场（政府令 155 第120(2)条 / 第133条）。UPCoM 公司满足政府令 155 第109条条件的可申请到 HOSE 上市。HOSE 与 HNX 之间无正式转板通道（两所定位不同、HNX 主要为 UPCoM / 债券 / 衍生品）",
+        "en": "A stock that is mandatorily delisted but still qualifies as a public company must move to the UPCoM registered-trading market at the Hanoi Stock Exchange (Decree 155 Art 120(2) / Art 133). A UPCoM company meeting the Art 109 conditions may apply to list on HOSE. There is no formal board-transfer channel between HOSE and HNX (the two exchanges have different roles — HNX mainly runs UPCoM/bonds/derivatives)",
+        "sources": [
+          {
+            "title": "政府令 155/2020/NĐ-CP 第120(2)条（强制退市股转 UPCoM）",
+            "url": "https://stream.vnx.vn/VNX//Legal/20211122161440105155.signed.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Cổ phiếu của công ty hủy bỏ niêm yết nhưng vẫn đáp ứng điều kiện là công ty đại chúng phải đăng ký giao dịch trên hệ thống giao dịch Upcom theo quy định tại Điều 133 Nghị định này.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "detail": null
+      },
+      "continuing_obligations": {
+        "zh": "上市公司须持续满足公众公司治理要求（《证券法》第40–41条）、按通函 96/2020/TT-BTC 与 VNX 规则作定期与临时信息披露、保持最低公众持股与 100 名非大股东门槛、按 HOSE 规则接受警告 / 控制 / 限制交易等监管状态管理（QĐ22 第六章）",
+        "en": "A listed company must continuously meet public-company governance requirements (Law on Securities Arts 40–41), make periodic and ad-hoc disclosures under Circular 96/2020/TT-BTC and VNX rules, maintain the minimum public float and the 100-non-major-shareholder threshold, and be subject to HOSE's status ladder — warning/control/trading-restriction, etc. (QĐ22 Chapter VI)",
+        "detail": "具体持续义务清单待从 VNX 上市业务规则与通函 96/2020 逐条核实。",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第六章（个股监管状态：警告 / 控制 / 限制交易 / 停牌 / 暂停）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "quote": null
+      },
+      "suspension_resumption": {
+        "zh": "个股停牌由 HOSE 依 QĐ22 第43条（临时停牌 Tạm ngừng giao dịch）与第44条（暂停交易 Đình chỉ giao dịch）施加，触发条件包括未按期披露、被列入控制 / 限制交易后仍未改善、重大不确定事件等；复牌须整改并经 HOSE 决定。停牌 / 暂停连续 ≥25 个交易日的证券复牌首日适用 ±20% 涨跌幅（见 market_structure.price_limits）",
+        "en": "Stock suspension is imposed by HOSE under QĐ22 Art 43 (Tạm ngừng giao dịch / trading halt) and Art 44 (Đình chỉ giao dịch / trading suspension), on grounds including late disclosure, failure to remedy after being placed under control/restriction, and material uncertainty; resumption requires remediation and a HOSE decision. A security halted/suspended for ≥25 consecutive trading days uses the ±20% band on its first day back (see market_structure.price_limits)",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第43–44条（临时停牌 / 暂停交易）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_conditions": {
+        "zh": "强制退市（政府令 155 第120条）触发条件包括：连续 3 年经营亏损、或累计亏损超过实缴注册资本、或最近一期审计财报净资产为负；连续 3 年审计意见为否定 / 拒绝表示意见（或连续 3 年保留意见）；连续 3 年迟报年度财报；丧失公众公司资格；主营业务停顿 ≥1 年；在交易所无交易满 12 个月；伪造上市文件；因《证券法》第12条禁止行为被处罚；严重违反信息披露义务等。自愿退市（第121条）须经股东大会批准且上市满 2 年以上",
+        "en": "Mandatory delisting (Decree 155 Art 120) is triggered by, among others: losses for 3 consecutive years, or accumulated losses exceeding paid-up charter capital, or negative equity in the latest audited financial statements; an adverse or disclaimed audit opinion for 3 consecutive years (or a qualified opinion for 3 consecutive years); late annual financial statements for 3 consecutive years; loss of public-company status; cessation of main business for ≥1 year; no trading at the exchange for 12 months; forged listing documents; sanction for prohibited acts under Article 12 of the Law on Securities; serious disclosure violations. Voluntary delisting (Art 121) requires shareholder-meeting approval and a minimum of 2 years listed",
+        "sources": [
+          {
+            "title": "政府令 155/2020/NĐ-CP 第120条（强制退市）+ 第121条（自愿退市）",
+            "url": "https://stream.vnx.vn/VNX//Legal/20211122161440105155.signed.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Kết quả sản xuất, kinh doanh bị thua lỗ trong 03 năm liên tục hoặc tổng số lỗ luỹ kế vượt quá số vốn điều lệ thực góp hoặc vốn chủ sở hữu âm trong báo cáo tài chính kiểm toán năm gần nhất trước thời điểm xem xét ... Tổ chức kiểm toán không chấp nhận thực hiện kiểm toán hoặc có ý kiến kiểm toán trái ngược hoặc từ chối cho ý kiến ... Cổ phiếu không có giao dịch tại Sở giao dịch chứng khoán trong thời hạn 12 tháng",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "detail": null
+      },
+      "delisting_process": {
+        "zh": "HOSE 作出退市决定并公告；符合条件的强制退市股票在退市决定日起继续交易一段整理期后摘牌（见 delisting_transition_period），仍属公众公司的转 UPCoM（见 transfer_between_boards）；被退市组织可依政府令 155 第122条在满足条件后申请重新上市",
+        "en": "HOSE issues and announces the delisting decision; an eligible mandatorily-delisted stock keeps trading for a transition period from the decision date before removal (see delisting_transition_period), and if still a public company moves to UPCoM (see transfer_between_boards); a delisted organization may re-apply to list under Decree 155 Art 122 once it meets the conditions",
+        "sources": [
+          {
+            "title": "政府令 155/2020/NĐ-CP 第120(4)条 + 第122条（重新上市）",
+            "url": "https://stream.vnx.vn/VNX//Legal/20211122161440105155.signed.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "detail": null,
+        "quote": null
+      },
+      "delisting_transition_period": {
+        "spec": {
+          "value": 30,
+          "unit": "calendar_days",
+          "bound": "upper",
+          "note": "强制退市股票自退市决定日起继续交易「最多 30 日」再摘牌；因吊销营业执照、无交易满 12 个月、破产解散、伪造文件、《证券法》第12条违法、被暂停主营等特定事由退市的不适用此过渡期（政府令 155 第120(4)条列举的例外情形）"
+        },
+        "zh": "强制退市股票自退市决定日起继续交易最多 30 日后摘牌；特定严重事由（吊照 / 无交易满 12 个月 / 破产 / 伪造文件 / 第12条违法等）退市的不适用该整理期，直接摘牌",
+        "en": "A mandatorily-delisted stock continues trading for up to 30 days from the delisting decision before removal; this transition period does not apply where delisting is on certain serious grounds (licence revocation, no trading for 12 months, bankruptcy, forged documents, Article 12 breaches, etc.), in which case the stock is removed immediately",
+        "sources": [
+          {
+            "title": "政府令 155/2020/NĐ-CP 第120(4)条（退市整理期最多 30 日 + 例外）",
+            "url": "https://stream.vnx.vn/VNX//Legal/20211122161440105155.signed.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Cổ phiếu của công ty đại chúng, chứng chỉ quỹ đóng, quỹ đầu tư bất động sản, quỹ hoán đổi danh mục và cổ phiếu của công ty đầu tư chứng khoán thuộc diện hủy bỏ niêm yết bắt buộc được tiếp tục giao dịch trong thời hạn tối đa 30 ngày kể từ ngày ra quyết định hủy niêm yết, trừ trường hợp hủy niêm yết theo quy định tại các điểm c, d, đ, g, k, l, m khoản 1",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "detail": null
+      },
+      "post_delisting_venue": {
+        "zh": "仍符合公众公司条件的退市股票转入河内证券交易所的 UPCoM 注册交易市场（政府令 155 第120(2)条 / 第133条）",
+        "en": "A delisted stock still meeting the public-company criteria moves to the UPCoM registered-trading market at the Hanoi Stock Exchange (Decree 155 Art 120(2) / Art 133)",
+        "sources": [
+          {
+            "title": "政府令 155/2020/NĐ-CP 第120(2)条",
+            "url": "https://stream.vnx.vn/VNX//Legal/20211122161440105155.signed.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Cổ phiếu của công ty hủy bỏ niêm yết nhưng vẫn đáp ứng điều kiện là công ty đại chúng phải đăng ký giao dịch trên hệ thống giao dịch Upcom theo quy định tại Điều 133 Nghị định này.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "detail": null
+      }
     },
     "indices": {
-      "meta": {},
-      "items": []
+      "meta": {
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "GROUND RULES FOR MANAGEMENT OF THE HOSE-INDEX（v4.0 英译，依 HOSE 主席决定 747/QĐ-SGDHCM 2024-12-30 发布）",
+            "url": "https://static2.vietstock.vn/vietstock/2024/12/30/20241230_25_12_hose_index_4_0_translation.pdf",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "Ho Chi Minh City Stock Exchange（Wikipedia，VN-Index 基日基点交叉印证）",
+            "url": "https://en.wikipedia.org/wiki/Ho_Chi_Minh_City_Stock_Exchange",
+            "accessed": "2026-09-07"
+          }
+        ]
+      },
+      "items": [
+        {
+          "id": "vn-hose-vnindex",
+          "name_zh": "VN-Index",
+          "name_native": "VN-Index (Chỉ số VN-Index)",
+          "compiler": "self",
+          "weighting_method": "market_cap",
+          "base_date": "2000-07-28",
+          "base_point": "100",
+          "review_frequency": "实时计算；无固定成分股（涵盖 HOSE 全部上市普通股，随上市 / 退市自动增减）",
+          "derivatives_ref": "",
+          "flagship": "yes",
+          "scope": "exchange"
+        },
+        {
+          "id": "vn-hose-vn30",
+          "name_zh": "VN30",
+          "name_native": "VN30 Index",
+          "compiler": "self",
+          "weighting_method": "float_adjusted",
+          "base_date": "2014-01-24",
+          "base_point": "560.19",
+          "review_frequency": "成分股每年 1 月、7 月第三个星期三调整；自由流通 / 流通股本每年 1/4/7/10 月第三个星期三调整；变更于 2/5/8/11 月首个星期一生效",
+          "derivatives_ref": "vn-hnx（VN30 指数期货在河内证券交易所交易）",
+          "flagship": "no",
+          "scope": "exchange"
+        },
+        {
+          "id": "vn-hose-vnallshare",
+          "name_zh": "VNAllShare",
+          "name_native": "VNAllShare Index",
+          "compiler": "self",
+          "weighting_method": "float_adjusted",
+          "base_date": "2009-01-02",
+          "base_point": "313.34",
+          "review_frequency": "同 VN30（1/7 月第三个星期三调成分，2/5/8/11 月首周一生效）",
+          "derivatives_ref": "",
+          "flagship": "no",
+          "scope": "exchange"
+        },
+        {
+          "id": "vn-hose-vn100",
+          "name_zh": "VN100",
+          "name_native": "VN100 Index",
+          "compiler": "self",
+          "weighting_method": "float_adjusted",
+          "base_date": "",
+          "base_point": "",
+          "review_frequency": "VN30 与 VNMidcap 的 100 只成分股合集",
+          "derivatives_ref": "",
+          "flagship": "no",
+          "scope": "exchange"
+        }
+      ]
     },
     "clearing": {
       "settlement_cycle": {

@@ -25,7 +25,7 @@
   - 《VNX 关于 FTSE Russell 指数调整期强化监察业务规则》QĐ 76/QĐ-HĐTV（2026-08-28，**官方英译版**，short_selling / 交易监察出处）: https://stream.vnx.vn/VNX//Legal/202608281819229476.QD-HDTV-28.08.2026-TA.pdf
   - 财政部《在 VNX 及子公司、VSDC 适用的证券领域服务价格》决定 1541/QĐ-BTC（2025-04-29，交易费 / 结算费 / 上市费费率——第十一章成本一手）: https://stream.vnx.vn/VNX//Legal/20250913170108484QD1541.QD.BTC.29042025.full.pdf
   - 《证券法》54/2019/QH14（2019-11-26 国会通过，越南语签署版；监管框架 / SSC 职权 / 上市与退市 / 信息披露 / 执法措施）: https://stream.vnx.vn/VNX//Legal/2021112211275354854.signed.pdf
-  - 政府令 155/2020/NĐ-CP（细化《证券法》：上市条件 / 外资持股比例 / 公开发行；越南语签署版）: https://stream.vnx.vn/VNX//Legal/20211122161440105155.signed.pdf
+  - 政府令 155/2020/NĐ-CP（细化《证券法》：上市条件〔第109条〕/ 强制退市〔第120条〕/ 退市整理期〔第120(4)条：最多30日〕/ 外资持股比例 / 公开发行；越南语签署版，图片型 PDF 已 tesseract OCR，sidecar 在 .cache）: https://stream.vnx.vn/VNX//Legal/20211122161440105155.signed.pdf
   - 政府令 155/2020/NĐ-CP 附录 1（PL1）: https://stream.vnx.vn/VNX//Legal/20211122161441436155_PL1.pdf
   - 政府令 158/2020/NĐ-CP（衍生证券与衍生品市场；越南语签署版——第四/五章衍生品子块、HNX 衍生品市场出处）: https://stream.vnx.vn/VNX//Legal/20211122160710946158.signed.pdf
   - 财政部通函 34/2026/TT-BTC（2026-03-30，VNX / VSDC 证券服务的经济技术特征，国家定价——成本章补充）: https://stream.vnx.vn/VNX//Legal/202604060859492234.2026.TT.BTC_30032026.pdf
@@ -62,3 +62,5 @@
   - FTSE Russell upgrades Việt Nam to secondary emerging market status: https://vietnamnews.vn/economy/1726818/ftse-russell-upgrades-viet-nam-to-secondary-emerging-market-status.html
 - `vietnamnet.vn` | 第三方（越南信息传媒部旗下英文报，半官方） | en | curl 常规 UA 200 | KRX 交易系统上线报道，confidence medium
   - KRX trading system goes live, marking turning point for Vietnam's stock market: https://vietnamnet.vn/en/krx-trading-system-goes-live-marking-turning-point-for-vietnam-s-stock-market-2397688.html
+- `static2.vietstock.vn` | 第三方（Vietstock 财经数据站，托管 HOSE 官方指数规则英译 PDF） | en | curl 常规 UA 200，`application/pdf` ~592KB | HOSE-Index 管理规则（Ground Rules for Management of the HOSE-Index，v4.0 英译）——VN-Index / VN30 / VNAllShare 等指数的编制方法；confidence 封顶 medium
+  - GROUND RULES FOR MANAGEMENT OF THE HOSE-INDEX（v4.0 英译，2024-12 版）: https://static2.vietstock.vn/vietstock/2024/12/30/20241230_25_12_hose_index_4_0_translation.pdf
