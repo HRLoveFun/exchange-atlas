@@ -64,8 +64,10 @@
   - KRX trading system goes live, marking turning point for Vietnam's stock market: https://vietnamnet.vn/en/krx-trading-system-goes-live-marking-turning-point-for-vietnam-s-stock-market-2397688.html
 - `static2.vietstock.vn` | 第三方（Vietstock 财经数据站，托管 HOSE 官方指数规则英译 PDF） | en | curl 常规 UA 200，`application/pdf` ~592KB | HOSE-Index 管理规则（Ground Rules for Management of the HOSE-Index，v4.0 英译）——VN-Index / VN30 / VNAllShare 等指数的编制方法；confidence 封顶 medium
   - GROUND RULES FOR MANAGEMENT OF THE HOSE-INDEX（v4.0 英译，2024-12 版）: https://static2.vietstock.vn/vietstock/2024/12/30/20241230_25_12_hose_index_4_0_translation.pdf
-- `en.vietnamplus.vn` | 第三方（越南通讯社 VietnamPlus 英文版，半官方） | en | curl 常规 UA 200 | 越南盾中心汇率机制（SBV 每日公布中心汇率、商业银行 ±5% 交易带）与 SSC 执法（FLC/Trịnh Văn Quyết 案量刑）报道，confidence medium
-  - Central bank announces central rate for VND, USD（中心汇率机制说明）: https://en.vietnamplus.vn/central-bank-announces-central-rate-for-vnd-usd-post87117.vnp
-  - Former FLC Chairman Trinh Van Quyet sentenced to 21 years in prison（SSC 行政处罚 + 刑事量刑）: https://en.vietnamplus.vn/former-flc-chairman-trinh-van-quyet-sentenced-to-21-years-in-prison-post291386.vnp
-- `theinvestor.vn` | 第三方（越南投资评论 The Investor / VAFIE，英文财经） | en | curl 常规 UA 200 | SSC 禁止 17 人证券交易 2 年（操纵股价）等执法报道 + T+0 / 午盘研究进展，confidence medium
+- `en.vietnamplus.vn` | 第三方（越南通讯社 VietnamPlus 英文版，半官方） | en | curl 常规 UA 200 | 越南盾中心汇率机制（SBV 每日公布中心汇率）与其 ±5% 交易带（2022-10-17 由 ±3% 扩至 ±5%）报道，confidence medium
+  - Central bank announces central rate for VND, USD（中心汇率机制说明，早期文，≈2016）: https://en.vietnamplus.vn/central-bank-announces-central-rate-for-vnd-usd-post87117.vnp
+  - State Bank adjusts USD/VND exchange rate band to 5%（2022-10-17，SBV 将即期汇率交易带由 ±3% 扩至 ±5% —— fx_risk_note 现行 ±5% 出处）: https://en.vietnamplus.vn/state-bank-adjusts-usdvnd-exchange-rate-band-to-5-post240176.vnp
+- `vietnamnews.vn`（补充登记）: FLC Chairman Trịnh Văn Quyết arrested for stock manipulation（2022-03-30，含 SSC 撤销 7,480 万股 FLC 卖出交易 + 2022-01-18 处 15 亿越南盾行政罚款 —— enforcement_note FLC 案出处）: https://vietnamnews.vn/society/1169496/flc-chairman-trinh-van-quyet-arrested-for-stock-manipulation.html
+- `theinvestor.vn` | 第三方（越南投资评论 The Investor / VAFIE，英文财经） | en | curl 常规 UA 200 | SSC 执法报道 + 卖空 / T+0 上市升级路线图（依 PM 2014/QĐ-TTg），confidence medium
   - Vietnam bans 17 individuals from securities trading for 2 years over stock manipulation: https://theinvestor.vn/vietnam-bans-17-individuals-from-securities-trading-for-2-years-over-stock-manipulation-d18403.html
+  - Vietnam plans roadmap to allow short selling under stock market upgrade program（2025-11-15，财政部实施计划：SSC 于 2026–2028 逐步推出证券借贷 / 担保卖空 / 当日交易，短期先解决预缴款、待 CCP —— regulatory_change_risk_note / intraday_reversal 出处）: https://theinvestor.vn/vietnam-plans-roadmap-to-allow-short-selling-under-stock-market-upgrade-program-d17588.html

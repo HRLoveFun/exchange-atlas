@@ -1116,20 +1116,20 @@ costs:
       rate: 0.1
       unit: pct
       side: sell
-      note: "越南不单设证券交易印花税；个人转让证券按每次转让价格缴 0.1% 个人所得税（依《个人所得税法》与通函 111/2013/TT-BTC，统一为按转让价缴、不论盈亏），本项目按 ADR-002 语义把此项证券交易环节流转税映射至 stamp_duty 字段。机构转让证券按企业所得税就转让所得征收（见 capital_gains_tax）"
+      note: "越南不单设证券交易印花税；个人转让证券按每次转让价格缴 0.1% 个人所得税（依《个人所得税法》与通函 111/2013/TT-BTC，统一为按转让价缴、不论盈亏）。本项目把证券交易环节的流转税记入 stamp_duty 字段（与 cn-sse 印花税 / tw-twse 证券交易税 / za-jse STT 同构处理），机构转让证券按企业所得税就转让所得征收（见 capital_gains_tax）"
     zh: "越南对证券交易不单设印花税。个人卖出上市证券须按每次转让价格的 0.1% 缴纳个人所得税（转让税），无论该笔盈亏；依《个人所得税法》及财政部通函 111/2013/TT-BTC"
     en: "Vietnam has no separate securities stamp duty. An individual selling listed securities pays personal income tax (a transfer tax) at 0.1% of the transfer price on each transfer, regardless of gain or loss; under the Law on Personal Income Tax and Circular 111/2013/TT-BTC"
     sources:
       - title: "财政部通函 111/2013/TT-BTC 英译（个人证券转让暂按转让价 0.1% 缴税）"
         url: https://english.luatvietnam.vn/circular-no-111-2013-tt-btc-of-august-15-2013-guiding-the-law-on-personal-income-tax-the-law-amending-and-supplementing-a-number-of-articles-of-th-80846-doc1.html
         accessed: 2026-09-07
-    quote: "Securities-transferring individuals shall temporarily pay tax at the rate of 0.1% of the securities transfer price upon each time of transfer even when the 20% tax rate is applicable. Tax calculation method: Payable personal income tax = Transfer price upon each time of transfer x Tax rate of 0.1%"
+    quote: "Securities-transferring individuals shall temporarily pay tax at the rate of 0.1% of the securities transfer price upon each time of transfer even when the 20% tax rate is applicable."
     confidence: medium
 
   financial_transaction_tax:
     zh: ""
     confidence: low
-    detail: "越南未另设独立于证券转让个人所得税（0.1%）之外的金融交易税，见 stamp_duty 字段（本项目按 ADR-002 语义把证券交易流转税记入 stamp_duty），此处如实留空避免重复。"
+    detail: "越南未另设独立于证券转让个人所得税（0.1%）之外的金融交易税，见 stamp_duty 字段（本项目按证券交易流转税映射至 stamp_duty 的既有惯例），此处如实留空避免重复。"
 
   capital_gains_tax:
     zh: "个人：无单独的资本利得税，卖出证券按转让价 0.1% 缴个人所得税（见 stamp_duty）。机构：证券转让所得计入应纳税所得，按 20% 企业所得税征收。外国机构投资者证券转让按转让价 0.1% 预提"
@@ -1164,15 +1164,18 @@ risks:
     verified: 2026-09-07
 
   fx_risk_note:
-    zh: "越南盾（VND）实行有管理的浮动汇率制：越南国家银行（SBV）每日公布 USD/VND 中心汇率（tỷ giá trung tâm），商业银行的即期汇率须在中心汇率上下 ±5% 交易带内。越南盾非完全可自由兑换，证券组合投资的外汇进出经越南盾间接投资资本账户办理。越南盾对美元多年来渐进贬值（大体每年数个百分点）"
-    en: "The Vietnamese dong (VND) operates under a managed float: the State Bank of Vietnam (SBV) announces a daily USD/VND central rate (tỷ giá trung tâm), and commercial banks' spot rates must stay within a ±5% trading band around it. The VND is not fully convertible, and foreign-exchange flows for portfolio investment go through a VND indirect-investment capital account. The VND has depreciated gradually against the USD over the years (broadly a few per cent a year)"
-    detail: "外国投资者的汇率风险敞口来自：① 越南盾兑本币的持续小幅贬值；② 换汇进出的时点与额度受资本账户管理；③ 市场承压时 SBV 会动用外汇储备与利率工具干预。中心汇率 + ±5% 带的机制引自 VietnamPlus 转述 SBV 每日公告；具体外汇管理条例条文待从 SBV 一手核实（见 regulation.capital_controls）。"
+    zh: "越南盾（VND）实行有管理的浮动汇率制：越南国家银行（SBV）每日公布 USD/VND 中心汇率（tỷ giá trung tâm），商业银行的即期汇率须在中心汇率上下的交易带内——该带于 2022 年 10 月 17 日由 ±3% 扩大至 ±5%。越南盾非完全可自由兑换，证券组合投资的外汇进出经越南盾间接投资资本账户办理。越南盾对美元多年来渐进贬值（大体每年数个百分点）"
+    en: "The Vietnamese dong (VND) operates under a managed float: the State Bank of Vietnam (SBV) announces a daily USD/VND central rate (tỷ giá trung tâm), and commercial banks' spot rates must stay within a trading band around it — the band was widened from ±3% to ±5% effective 17 October 2022. The VND is not fully convertible, and foreign-exchange flows for portfolio investment go through a VND indirect-investment capital account. The VND has depreciated gradually against the USD over the years (broadly a few per cent a year)"
+    detail: "外国投资者的汇率风险敞口来自：① 越南盾兑美元的持续小幅贬值；② 换汇进出的时点与额度受资本账户管理；③ 市场承压时 SBV 会动用外汇储备与利率工具干预。中心汇率每日公告机制 + ±5% 交易带均引自 VietnamPlus（越南通讯社英文版，半官方，封顶 medium）；具体外汇管理条例条文待从 SBV 一手核实（见 regulation.capital_controls）。"
     volatility: stable
     sources:
-      - title: "Central bank announces central rate for VND, USD（VietnamPlus，SBV 中心汇率机制 + 商业银行 ±5% 交易带）"
+      - title: "Central bank announces central rate for VND, USD（VietnamPlus，SBV 每日公布 VND/USD 中心汇率）"
         url: https://en.vietnamplus.vn/central-bank-announces-central-rate-for-vnd-usd-post87117.vnp
         accessed: 2026-09-07
-    quote: "the State Bank of Vietnam (SBV) announces a central rate for the Vietnamese dong (VND) and the US dollar (USD) on a daily basis"
+      - title: "State Bank adjusts USD/VND exchange rate band to 5%（VietnamPlus，2022-10-17，±3%→±5%）"
+        url: https://en.vietnamplus.vn/state-bank-adjusts-usdvnd-exchange-rate-band-to-5-post240176.vnp
+        accessed: 2026-09-07
+    quote: "widen the USD/VND spot exchange rate band from +/-3% to +/-5%, effective from October 17. ... will announce a central rate for the VND and the USD on a daily basis, serving as reference rate for credit institutions and foreign bank branches to set their own rates"
     confidence: medium
 
   political_risk_note:
@@ -1197,25 +1200,29 @@ risks:
     confidence: medium
 
   regulatory_change_risk_note:
-    zh: "越南证券市场处于密集改革期，制度变动频繁：KRX 新交易系统 2025-05-05 上线并同步改革多项交易机制（订单类型、集合竞价优先级、外资 room 即时更新等）；2024-11 对外资机构取消买入预缴款；FTSE Russell 升级 2026-09-21 生效、MSCI 升级评估进行中；SSC 与 VSDC 拟以新通函取代登记结算通函 119/2020/TT-BTC；当日交易（T+0）、卖空、证券借贷、期权、现货中央对手方（CCP）均在路线图上但尚未落地。外国投资者须预期规则在数年内继续快速演进"
-    en: "Vietnam's securities market is in an intensive reform period with frequent regulatory change: the KRX trading system went live on 5 May 2025 alongside a set of trading-mechanism reforms (order types, auction priority, real-time foreign room, etc.); the buy-side pre-funding requirement was removed for foreign institutions in November 2024; the FTSE Russell upgrade takes effect on 21 September 2026 and an MSCI upgrade review is under way; the SSC and VSDC plan a new circular to replace registration/settlement Circular 119/2020/TT-BTC; day trading (T+0), short selling, securities lending, options and a cash-market central counterparty (CCP) are all on the roadmap but not yet deployed. Foreign investors should expect rules to keep evolving quickly over the coming years"
+    zh: "越南证券市场处于密集改革期，制度变动频繁：KRX 新交易系统 2025-05-05 上线（历经十余年延迟）并同步改革多项交易机制（ATO/ATC 不再优先于既有限价单、订单修改的时间优先规则、MP→MTL、外资 room 即时更新等）；FTSE Russell 升级 2026-09-21 生效；财政部依总理 2014/QĐ-TTg（2025-09）的实施计划，责成 SSC 于 2026–2028 逐步推出证券借贷、担保卖空（经「pending settlement」）与当日交易，短期（2025–2027）先解决预缴款问题、待现货中央对手方（CCP）机制上线。外国投资者须预期规则在数年内继续快速演进"
+    en: "Vietnam's securities market is in an intensive reform period with frequent regulatory change: the KRX trading system went live on 5 May 2025 (after more than a decade of delays) alongside a set of trading-mechanism reforms (ATO/ATC no longer prioritised over pre-entered limit orders, order-amendment time-priority rules, MP→MTL, real-time foreign room, etc.); the FTSE Russell upgrade takes effect on 21 September 2026; under the Ministry of Finance's implementation plan for PM Decision No. 2014/QD-TTg (Sept 2025), the SSC is to study and gradually roll out securities borrowing/lending, secured short selling (via \"pending settlement\") and intraday trading between 2026 and 2028, first addressing the pre-funding requirement in the short term (2025–2027) pending a cash-market central counterparty (CCP). Foreign investors should expect rules to keep evolving quickly over the coming years"
+    detail: "MSCI 亦将越南列入前沿→新兴的观察，具体评审时点未逐一核实、未写入正文。"
     volatility: moderate
     sources:
-      - title: "KRX trading system goes live, marking turning point for Vietnam's stock market（vietnamnet，2025-05）"
+      - title: "Vietnam plans roadmap to allow short selling under stock market upgrade program（The Investor，2025-11-15，财政部依 PM 2014/QĐ-TTg 的实施计划）"
+        url: https://theinvestor.vn/vietnam-plans-roadmap-to-allow-short-selling-under-stock-market-upgrade-program-d17588.html
+        accessed: 2026-09-07
+      - title: "KRX trading system goes live（vietnamnet，2025-05-05，交易机制改革要点）"
         url: https://vietnamnet.vn/en/krx-trading-system-goes-live-marking-turning-point-for-vietnam-s-stock-market-2397688.html
         accessed: 2026-09-07
-      - title: "The Vietnam Stock Exchange 2026（the-shiv，KRX 改革 + T+0/卖空路线图 + 新通函取代 119/2020）"
-        url: https://the-shiv.com/the-vietnam-stock-exchange-quick-guide/
-        accessed: 2026-09-07
-    quote: "With the new system, long-anticipated products such as intraday trading, short-selling, securities lending, and options contracts are expected to be rolled out soon."
+    quote: "Under the plan, the ministry has assigned the State Securities Commission (SSC) to study and gradually implement mechanisms for securities borrowing and lending, and regulated short selling through “pending settlement” and intraday trading between 2026 and 2028. In the short term (2025-2027), the SSC will address the prefunding requirement that obliges investors to deposit money before trading, a key obstacle to foreign participation, until a central counterparty clearing (CCP) mechanism is launched. ... After more than a decade of delays, Vietnam’s new trading platform KRX promises increased liquidity and market upgrade readiness."
     confidence: medium
 
   enforcement_note:
-    zh: "国家证券委员会（SSC）依《证券法》第12条（禁止行为：操纵市场、内幕交易、虚假披露等）与证券行政处罚政府令行使执法权，手段含罚款与证券交易禁入。近年重大案例：FLC 集团董事长 Trịnh Văn Quyết 因未申报即减持 7,480 万股被 SSC 罚款 15 亿越南盾，其后 2022 年被刑事逮捕、2024 年一审因诈骗与操纵市场合计判 21 年（上诉后减轻）；SSC 另曾一次性禁止 17 人证券交易 2 年（操纵股价、出借交易账户）。社交媒体「拉高出货」式操纵是越南市场反复出现的监管关切"
-    en: "The State Securities Commission (SSC) enforces the Law on Securities (Article 12 prohibited acts — market manipulation, insider dealing, false disclosure, etc.) and the securities administrative-penalty decree, using fines and securities-trading bans. Recent major cases: FLC Group chairman Trịnh Văn Quyết was fined VND 1.5 billion by the SSC for selling 74.8 million shares without prior reporting, then criminally arrested in 2022 and, at first instance in 2024, sentenced to a combined 21 years for fraud and market manipulation (reduced on appeal); the SSC has also banned 17 individuals from securities trading for 2 years for share manipulation and lending trading accounts. Social-media-driven \"pump and dump\" manipulation is a recurring supervisory concern in Vietnam"
+    zh: "国家证券委员会（SSC）依《证券法》第12条（禁止行为：操纵市场、内幕交易、虚假披露等）与证券行政处罚政府令行使执法权，手段含罚款与证券交易禁入。近年重大案例：2022 年 1 月，FLC 集团董事长 Trịnh Văn Quyết 未按规定事先申报即卖出 7,480 万股 FLC 股票，SSC 责令 HOSE 撤销该笔交易、并于 1 月 18 日处以 15 亿越南盾行政罚款（顶格）+ 5 个月证券交易禁入；同年 3 月他因「操纵证券市场」「隐瞒证券活动信息」被刑事逮捕，2024 年一审判 21 年。SSC 另曾一次性禁止 17 人证券交易 2 年（操纵股价、出借交易账户）"
+    en: "The State Securities Commission (SSC) enforces the Law on Securities (Article 12 prohibited acts — market manipulation, insider dealing, false disclosure, etc.) and the securities administrative-penalty decree, using fines and securities-trading bans. Recent major cases: in January 2022, FLC Group chairman Trịnh Văn Quyết sold 74.8 million FLC shares without the required prior disclosure, whereupon the SSC directed HOSE to cancel the trade and, on 18 January, imposed a top-level VND 1.5 billion administrative fine plus a five-month suspension from securities trading; that March he was criminally arrested for \"manipulating the stock market\" and \"hiding information in securities activities\", and sentenced to 21 years at first instance in 2024. The SSC has separately banned 17 individuals from securities trading for 2 years for share manipulation and lending trading accounts"
     volatility: moderate
     sources:
-      - title: "Former FLC Chairman Trinh Van Quyet sentenced to 21 years in prison（VietnamPlus，SSC 行政处罚 + 刑事量刑）"
+      - title: "FLC Chairman Trịnh Văn Quyết arrested for stock manipulation（Việt Nam News / VNS，2022-03-30，SSC 撤销 7,480 万股交易 + 15 亿盾罚款 + 5 个月禁入）"
+        url: https://vietnamnews.vn/society/1169496/flc-chairman-trinh-van-quyet-arrested-for-stock-manipulation.html
+        accessed: 2026-09-07
+      - title: "Former FLC Chairman Trinh Van Quyet sentenced to 21 years in prison（VietnamPlus，2024 一审量刑）"
         url: https://en.vietnamplus.vn/former-flc-chairman-trinh-van-quyet-sentenced-to-21-years-in-prison-post291386.vnp
         accessed: 2026-09-07
       - title: "Vietnam bans 17 individuals from securities trading for 2 years over stock manipulation（The Investor）"
@@ -1224,5 +1231,5 @@ risks:
       - title: "Law on Securities No. 54/2019/QH14 英译（Art 12 禁止行为）"
         url: https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf
         accessed: 2026-09-07
-    quote: "the State Securities Commission, Vietnam's stock market watchdog, has banned 17 individuals from trading securities for two years for manipulating shares and lending trading accounts to facilitate the misconduct"
+    quote: "sold 74.8 million FLC shares on January 10 but did not report or disclose information before performing transactions as per regulations ... The SCC also directed the HCM City Stock Exchange (HoSE) to cancel Quyết's transaction of selling 74.8 million shares of FLC on January 10 ... On January 18, the SCC decided to give Quyết an administrative fine of VNĐ1.5 billion (US$65,500), the highest level. He also received additional punishment of a five-month suspension from securities trading activities ... arrested on Tuesday afternoon for \"manipulating the stock market\" and \"hiding information in securities activities\" / the State Securities Commission, Vietnam's stock market watchdog, has banned 17 individuals from trading securities for two years for manipulating shares and lending trading accounts to facilitate the misconduct"
     confidence: medium

@@ -174,6 +174,12 @@
   - `indices` 三项（HNX-Index / HNX30 / UPCoM-Index）基日 / 基点均留空——未取得 HNX 指数方法论一手 PDF。**下次入口**：HNX 网站「INDEX > Introduction」栏目或指数方法论 PDF。
   - `market_structure.derivatives` 与 `clearing.derivatives` 的时段 / tick / 涨跌幅 / 保证金 / 结算引自 SSI·KGI 券商托管的 VN30 期货合约规格英译 + 政府令 158 OCR（第三方 + 越南语一手 → `medium`）。**下次入口**：VNX 衍生品交易业务规则 + VSDC 衍生品清算结算业务规则（26/QĐ-HĐTV）一手 PDF。
 
+- **[ADR-add-exchange-skill-forge 越南轨] 独立视角复核（2026-09-07，全新未共享上下文 agent 会话）遗留的 QUESTION（非 FIX，待用户 / 后续会话裁量）：**
+  - `vn-hose`/`vn-hnx` `costs.exchange_fees.spec.side: both`：财政部决定 1541 只写「0,027% giá trị giao dịch」，无「买卖双向」措辞。撮合费双边计收是各所通例、渲染层缺省回退 `both`，但按 [ADR-054] side 细则应补一份说明「HOSE/HNX 交易服务价格买卖双向各计」的一手表述。
+  - `vn-hose` `market_structure.tick_size.spec.ladder` 顶档 `price_min: 50000`：附录 II 原文为「> 50.000」（严格大于），中间档为「10.000-49.950」。50,000 处于两档间隙、实际按顶档 100 đ 处理（中间档 tick 50、下一有效价即 50,000）——ladder 用 `price_min: 50000` 是这一实务推断；≥/> 边界口径待人拍板是否精确化。
+  - `vn-hose`/`vn-hnx` `market_structure.volatility_interruption.spec.type: none`：无正面「不设」原文，仅「QĐ22 第五章 + 附录 II 未出现」的消极认定，已用 `confidence: low` + detail 如实标注。[ADR-054] 维度 4 要求 `type: none` 有正面依据——此处按 low-confidence 消极认定处置，是否接受待裁量。
+  - **全库既有问题（非 vn 独有，建议单独订正 ADR）**：`cn-sse` / `za-jse` / `de-eurex` / `au-asx` 等所的 `costs` 章 note 与 `DECISIONS.md` 多处把「证券交易流转税映射至 stamp_duty 字段」的语义**误引为 `[ADR-002]`**——`### ADR-002` 正文实为「YAML 为权威 + JSON 派生」，与税费映射无关。vn 两所本次已改为「与 cn-sse / tw-twse / za-jse 同构处理」不再引 ADR-002；其余所待单独开条订正引用号。
+
 
 <!-- BEGIN:GENERATED auto-issues -->
 - `br-b3` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
