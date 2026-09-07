@@ -28,7 +28,7 @@ v2.0 收官后无活跃 Phase。当前开发重点：**通过真实走一遍完�
 
 *（3–5 条优先级判断，不编号；详版与「刚落地什么」都在 §三 / `git log`）*
 
-- **用实际新增迭代 add-exchange skill**（[ADR-add-exchange-skill-forge]，当前重点）— 走 `/add-exchange` 新增越南市场（HOSE 为主，HNX 视 `group_id` 压测需要），把每个卡壳点（步骤过时 / 字段缺失 / 校验未覆盖的 `spec` 形状 / 剖面·画布自检缺的动作）就地回写 `.claude/skills/add-exchange/SKILL.md`；数据过 `make build` + 独立视角复核 ≥95%，skill 收官达到「冷启动子代理在 v2.0 契约下可靠执行」。详版见 §三「广度扩张」。
+- **越南轨独立视角复核**（[ADR-add-exchange-skill-forge]，当前重点的收尾）— `vn-hose` + `vn-hnx` 数据与 skill v2.0 对齐已落地（`make check` 全绿 22 家、`verify_quotes` FAIL=0），但一整所 spec > 30 字段，按 [CLAUDE.md §四] / [ADR-081] 须过**全新未共享上下文视角**（人或非 fork 的 agent 会话）抽检 ≥95% 才能给 §三 该条目打 `[x]`：两所各抽 ≥10 字段 quote↔出处 + 全部 spec 按 [ADR-054] 6 维度，母语 + OCR 的字段据 `.cache/<id>/*.txt` sidecar 逐字核。详版见 §三「广度扩张」。
 - **画布常态迭代**（交互式会话，Phase 4 已收口 [ADR-phase4-closeout]，以下均非阻断）— ① **窄视口回归护栏**：棒 5 Playwright 巡检仅 1440 单宽，加「`.td-plot-wrap` `scrollWidth > clientWidth` @ 窄宽」断言（审查已实测窄视口横滚可用，缺的是护栏）；② 画布内「跳到某模块」目录 / 侧边导航（[ADR-phase4-canvas-layout]「没做」段，纵向长图先靠滚动 + section 锚点）；③ 移动端专属布局优化（纵向长图天然单列，超出「无回归」的优化）。
 - **已做齐模块的视觉迭代**（交互式会话，与上并行）— 棒 5 已收口：成本瀑布（全零合计 / 暗色不征虚线）、交割管线（深色预防层）、风险旗标（low 色条）、上市生命周期中英混排（[ADR-093]）；诚实呈现不改几何的三项（T+1 右半留白 / 单一费种镜像留白 / 按股定额折算）理由已记 ADR。**仍挂**：成本瀑布左半留白的进一步方案已关闭但可复议；违约瀑布 `resource` 短语 en（[ADR-051] 触发条件：数据窗口回填约 70 短语）、模块说明段 `[ADR-xxx]` 裸链接（[ADR-072]）、监管图 / 参与者图长散文卡内硬裁剪 + `<title>` / 浮层（[ADR-035] D 设计内）。
 - **数据遗留项**（横切，与上并行，非 Phase 4 前置）— `kr-krx` 7 处 low 待人工投喂（`order_book_transparency` 已由 KRX 규정 포털韩文一手坐实升 medium）、`kr-krx exchange_fees` 当期档位（KRX 收费表载于《업무규정》别表、未上 HTML，규정 포털排查未果，[ADR-kr-krx-legacy-closeout]）、`us` Section 31 FY2027 公告（2026-09-06 复核仍未发布，FY2027 目前仅 Section 6(b) 注册费公告，预计 2027 年初出）、`fr-euronext stamp_duty`（一所七国，`rate: null` 是正确终态）、上市生命周期 `cn-szse` 整理期 15 交易日仍待含阿拉伯数字一手源（中文 2026 版与创业板英译 2022 版均已取得、条文均拼「十五 / fifteen trading days」，仅主板英译 2024 版未核——www/english 主站子域 TCP 不通、wayback 无快照，待人工下载）/ `kr-krx` 整理卖出 7 交易日已由 FSC 新闻稿坐实（[ADR-091] 个位数转写口径）。数据空缺复核轨任务一～六 + stable 档来源闭环（[ADR-094]）均已完成，详版见 §三。
@@ -308,12 +308,10 @@ v2.0 收官后无活跃 Phase。当前开发重点：**通过真实走一遍完�
 
 用实际新增把 `add-exchange` skill 迭代成 v2.0 对齐的通用 skill——skill 上次定型于 v1.1（[ADR-032]），此后 `spec` 层与六个可视化模块的需求 / 剖面 / 单页画布自检都没进过它的步骤，且脱节是静默的。
 
-- [ ] **越南市场新增 + skill 迭代**（候选池当前唯一目标）
-  - **为什么**：[ADR-041] 那项「按需可选能力」的唯一实现载体已随 v2.0 静默腐化，读代码补不可靠，只有真跑一遍完整新增才能把摩擦点逼出来；东南亚也是 [ADR-016] ① 的地区空白。
-  - **数据目标**：HOSE（胡志明证交所）入库为主，HNX（河内证交所）视 `group_id` / [ADR-036] #1 `federation_of` 压测需要一并——两所同属 VNX（越南交易所）控股，检验「姊妹所不把规则塞进彼此 `boards`」设计。过 `make build` 全绿 / `verify_quotes` FAIL=0 / 独立视角复核 ≥95%（[CLAUDE.md §四] / [ADR-081]）。
-  - **skill 产出**：每个摩擦点就地回写 `.claude/skills/add-exchange/SKILL.md`——① 第五章直接填 `spec`（含 [ADR-042] 的 `execution_model` / `error_trade_rule` / `order_book_transparency` / `order_types` / `tick_size`）；② 成本瀑布 / 交割管线 / 上市生命周期 / 监管图 / 参与者 / 风险旗标六模块的 `spec` 与 `*_note` 需求逐条补进步骤；③ 市场机制剖面 + 单页画布逐所自检写成明确动作；④ v1.1 之后新增的 `make check` 关卡（`spec` 5b–5d / `check_ui_i18n` / `check_canvas_sections` / …）在 skill 里点名。
-  - **收官判据**：skill 十一章步骤覆盖上述四点，冷启动子代理在 v2.0 契约下可靠执行（[ADR-017] 并行模式重新成立的前提）。
-  - **步骤**：`/add-exchange` 走「新增整所」路径；[ADR-036] #1 `federation_of` / #9 `rule_level` 触发条件按「本次新增是否满足」现判。
+- [~] **越南市场新增 + skill 迭代**（数据 + skill 落地 2026-09-07，待独立视角复核后打 `[x]`；[ADR-add-exchange-skill-forge]「执行进度」段）
+  - **已落地**：`vn-hose`（11 章全填、72 字段）+ `vn-hnx`（全量含衍生品市场、99 字段）入库；`make check` 全绿（22 家）、`verify_quotes` FAIL=0；`tools/sync.py` 两所进 `EXCHANGE_IANA_TZ`。`group_id` 压测结论——VNX 单国控股、两独立法人、规则集完全不交叉，`group_id` + `boards` 各记各的设计够用，**不触发 `federation_of` / `rule_level`**。confidence 结构性偏低（越南语一手 + OCR + 官方英译「unofficial」，两所 progress-matrix 均 ch2/4/7/8 ✅ 其余 🟡，是「母语第三语言 + 官方英文薄」市场的正确终态）。
+  - **skill 落地**：`.claude/skills/add-exchange/SKILL.md` 删「⚠️ 待 v2.0 对齐」框，就地补 12 条摩擦点（source_lang 母语第三语言 / SPA→母公司法规登记栏目 / 扫描件自助 OCR / 条款号不进 spec.note / 附录量化表 / 「法规写了但未落地」/ 步骤 4.12 监管图·参与者图·风险旗标数据形状 + 校验 20 / 步骤 5 单页画布 7 模块自检清单 + v1.1 后关卡清单 / 步骤 7 独立复核）。
+  - **待办（打 `[x]` 的硬前置）**：一整所 spec 层 > 30 字段，按 [CLAUDE.md §四] / [ADR-081] 须过独立视角复核（≥95%，全新未共享上下文 agent 会话或人，非 fork）——两所各抽 ≥10 字段 quote↔出处 + 全部 spec 按 [ADR-054] 6 维度比对。母语 + OCR 的所，复核者据 `.cache/<id>/*.txt` sidecar 逐字核。
 
 #### ② 按需新增（可选能力，[ADR-041] 不变）
 
