@@ -28,6 +28,7 @@
 - `uk-lse` 伦敦证券交易所 — [sources/uk-lse.md](sources/uk-lse.md)
 - `us-nasdaq` 纳斯达克证券交易所 — [sources/us-nasdaq.md](sources/us-nasdaq.md)
 - `us-nyse` 纽约证券交易所 — [sources/us-nyse.md](sources/us-nyse.md)
+- `vn-hnx` 河内证券交易所 — [sources/vn-hnx.md](sources/vn-hnx.md)
 - `vn-hose` 胡志明市证券交易所 — [sources/vn-hose.md](sources/vn-hose.md)
 - `za-jse` 约翰内斯堡证券交易所 — [sources/za-jse.md](sources/za-jse.md)
 <!-- END:GENERATED sources-index -->

@@ -45,6 +45,7 @@ Elements that are **consequences of enforcement** are out of scope: real executi
 | `uk-lse` | London Stock Exchange (LSE) | Europe |
 | `us-nasdaq` | The Nasdaq Stock Market (Nasdaq) | Americas |
 | `us-nyse` | New York Stock Exchange (NYSE) | Americas |
+| `vn-hnx` | Hanoi Stock Exchange (HNX) | APAC |
 | `vn-hose` | Ho Chi Minh Stock Exchange (HOSE) | APAC |
 | `za-jse` | JSE Limited (Johannesburg Stock Exchange) | MENA & Africa |
 <!-- END:GENERATED exchange-list -->

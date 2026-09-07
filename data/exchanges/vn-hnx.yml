@@ -1,0 +1,27 @@
+# 河内证券交易所 Hanoi Stock Exchange (HNX)
+# 抓取来源见 PROJECT/sources/vn-hnx.md（HNX 特有）+ PROJECT/sources/vn-hose.md（VNX / VSDC /
+# 法律等共用来源）；原始页缓存于 .cache/vn-hnx/ 与 .cache/vn-hose/。
+# 建档轨：[ADR-add-exchange-skill-forge]（越南市场，压测 group_id 姊妹所 boards 边界）。
+#
+# source_lang: en——同 HOSE，越南语不在 ADR-013 zh/en 二分；官方英译 / 越南语一手 OCR /
+#   第三方英译一律 confidence 封顶 medium。
+#
+# group_id: vnx-group——HNX 与 HOSE 同属越南交易所（VNX）100% 控股，各为独立法人子公司。
+#   HNX 组织四个市场：① 上市股票市场（HNX-Index）② UPCoM 注册交易市场 ③ 政府债券市场
+#   ④ 衍生品市场（VN30 指数期货、政府债券期货）。本文件 market_structure 顶层描述上市
+#   股票市场，market_structure.derivatives 描述衍生品市场；UPCoM 与政府债券在 boards /
+#   products 记录。**姊妹所 HOSE 的板块 / 规则不塞进本文件 boards——这是 [ADR-036] #1
+#   group_id 设计的压测：VNX 一控股、两独立法人、各自不同的规则集。**
+
+id: vn-hnx
+name_zh: 河内证券交易所
+name_native: {vi: "Sở Giao dịch Chứng khoán Hà Nội", en: "Hanoi Stock Exchange (HNX)"}
+official_languages: [vi]
+source_lang: en
+group_id: vnx-group
+region: apac
+
+overview:
+  _meta:
+    verified: 2026-09-07
+    confidence: low
