@@ -204,6 +204,12 @@
 - `us-nasdaq` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `us-nyse` 基本信息 / 交易货币（trading_currency）— confidence: low
 - `us-nyse` 基本信息 / 结算货币（settlement_currency）— confidence: low
+- `vn-hnx` 市场结构与交易机制 / 其他板块幅度（price_limits.other_boards）— confidence: low
+- `vn-hnx` 市场结构与交易机制 / 波动性中断（volatility_interruption）— confidence: low
+- `vn-hnx` 市场结构与交易机制 / 节假日与特殊休市（derivatives.holidays_note）— confidence: low
+- `vn-hnx` 市场结构与交易机制 / 其他合约幅度（derivatives.price_limits.other_boards）— confidence: low
+- `vn-hnx` 市场结构与交易机制 / 波动性中断（derivatives.volatility_interruption）— confidence: low
+- `vn-hnx` 市场结构与交易机制 / 互联互通/跨境安排（derivatives.connect_schemes）— confidence: low
 - `vn-hose` 市场结构与交易机制 / 波动性中断（volatility_interruption）— confidence: low
 - `za-jse` 基本信息 / 结算货币（settlement_currency）— confidence: low
 <!-- END:GENERATED auto-issues -->
