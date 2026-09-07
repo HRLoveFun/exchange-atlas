@@ -369,7 +369,18 @@
       "source_lang": "en",
       "group_id": "vnx-group",
       "region": "apac",
-      "trading_hours": null
+      "trading_hours": {
+        "iana_tz": "Asia/Ho_Chi_Minh",
+        "utc_offset_hours": 7.0,
+        "open_local": "09:00",
+        "close_local": "14:45",
+        "lunch_start_local": "11:30",
+        "lunch_end_local": "13:00",
+        "open_utc": 2.0,
+        "close_utc": 7.75,
+        "lunch_start_utc": 4.5,
+        "lunch_end_utc": 6.0
+      }
     },
     {
       "id": "za-jse",

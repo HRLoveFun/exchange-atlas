@@ -13,28 +13,304 @@
   "region": "apac",
   "chapters": {
     "overview": {
-      "timezone": null,
-      "dst_rule": null,
-      "founded_year": null,
-      "history": null,
-      "organization_form": null,
-      "self_listed": null,
+      "timezone": {
+        "zh": "越南标准时间（ICT，UTC+7），全年固定",
+        "en": "Indochina Time (ICT, UTC+7), fixed year-round",
+        "spec": null,
+        "sources": [
+          {
+            "title": "IANA tz database「asia」zone 文件（Asia/Ho_Chi_Minh：现行 7:00 偏移、无夏令时 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/asia",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Zone\tAsia/Ho_Chi_Minh\t7:06:30 -\tLMT\t1906 Jul  1 / 7:00\t-\t%z\t1942 Dec 31 23:00",
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "enum": null,
+        "detail": null
+      },
+      "dst_rule": {
+        "zh": "不实行夏令时",
+        "en": "Does not observe daylight saving time",
+        "detail": "越南 1975 年后不再实行夏令时；IANA tzdb 的 Asia/Ho_Chi_Minh zone 自 1975-06-13 起偏移恒为 +7、无 Rule 列。",
+        "sources": [
+          {
+            "title": "IANA tz database「asia」zone 文件（Asia/Ho_Chi_Minh 现行行无夏令时 Rule）",
+            "url": "https://data.iana.org/time-zones/tzdb/asia",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "7:00\t-\t%z\t1942 Dec 31 23:00",
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "enum": null,
+        "spec": null
+      },
+      "founded_year": {
+        "zh": "2000（作为「胡志明市证券交易中心」开业，7月28日首场交易）；2007年升格为「胡志明市证券交易所」",
+        "en": "2000 (opened as the Ho Chi Minh City Securities Trading Center, first trading session 28 July); upgraded to the Ho Chi Minh Stock Exchange in 2007",
+        "detail": "交易中心依总理 127/1998/QĐ-TTg（1998-07-11）设立，2000-07-20 挂牌、2000-07-28\n首场交易。2007 年依总理 599/2007/QĐ-TTg 升格为「胡志明市证券交易所」（Sở Giao dịch\nChứng khoán Thành phố Hồ Chí Minh），组织形式转为国有一人有限责任公司。2021 年起并入\n越南交易所（VNX）体系，成为其子公司（见 history）。\n",
+        "sources": [
+          {
+            "title": "Ho Chi Minh Stock Exchange — Overview（Baker McKenzie 跨境上市指南，2026-02-01 更新）",
+            "url": "https://resourcehub.bakermckenzie.com/en/resources/cross-border-listings-guide/asia-pacific/ho-chi-minh-stock-exchange/topics/overview-of-exchange",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "Ho Chi Minh City Stock Exchange（Wikipedia，沿革交叉印证）",
+            "url": "https://en.wikipedia.org/wiki/Ho_Chi_Minh_City_Stock_Exchange",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Originally, the HOSE was officially opened as a securities trading center in 2000 and then upgraded to a stock exchange in 2007.",
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "enum": null,
+        "spec": null
+      },
+      "history": {
+        "zh": "2021年越南「一个集中交易所」改革：依《证券法》54/2019/QH14 与总理 37/2020/QĐ-TTg 设立越南交易所（VNX）作母公司，HOSE 与河内证券交易所（HNX）成为其两家独立法人子公司；VNX 于2021年12月11日正式挂牌",
+        "en": "The 2021 \"one concentrated stock exchange\" reform: under the Law on Securities No. 54/2019/QH14 and PM Decision No. 37/2020/QD-TTg, the Vietnam Exchange (VNX) was set up as the parent, with HOSE and the Hanoi Stock Exchange (HNX) becoming its two separately-incorporated subsidiaries; VNX was officially launched on 11 December 2021",
+        "detail": "改革前 HOSE（胡志明，主板股票）与 HNX（河内，早期为主板 + 后来的 UPCoM、政府债券、\n衍生品）各自独立。VNX 为国家 100% 持股的一人有限责任公司、注册资本 3 万亿越南盾、\n总部设河内，统一设计与升级两所 IT 系统、颁布上市 / 交易 / 披露 / 会员规则、监督两所。\n两所仍是不同法人（different legal status）、各自运营。VNX 之上是国家证券委员会（SSC）。\n",
+        "sources": [
+          {
+            "title": "Ho Chi Minh Stock Exchange — Overview（Baker McKenzie 跨境上市指南）",
+            "url": "https://resourcehub.bakermckenzie.com/en/resources/cross-border-listings-guide/asia-pacific/ho-chi-minh-stock-exchange/topics/overview-of-exchange",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "Law on Securities No. 54/2019/QH14 英译（Art 42–43：交易市场组织、VNX 设立与运行）",
+            "url": "https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "On 11 December 2021, the VNX was officially launched. The VNX and its subsidiaries (the Hanoi Stock Exchange and the Ho Chi Minh Stock Exchange) perform the function of organizing the securities market in Vietnam and operate under the management and supervision of the State Securities Commission (SSC).",
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "enum": null,
+        "spec": null
+      },
+      "organization_form": {
+        "enum": "state_owned",
+        "zh": "国有：越南交易所（VNX）是国家持股逾50%（实为100%）的企业，HOSE 是其一人有限责任公司子公司；由国家证券委员会管理监督",
+        "en": "State-owned: the Vietnam Exchange (VNX) is an enterprise with over 50% (in fact 100%) of charter capital held by the State, and HOSE is its single-member limited-liability subsidiary; managed and supervised by the State Securities Commission",
+        "sources": [
+          {
+            "title": "Law on Securities No. 54/2019/QH14 英译（Art 43(1)/(3)）",
+            "url": "https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "The Vietnam Stock Exchange is an enterprise established and operating under the provisions of this Law and the Law on Enterprises, with over 50% of its charter capital or total voting shares held by the State. ... The Vietnam Stock Exchange and its subsidiaries shall be managed and supervised by the State Securities Commission.",
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "spec": null,
+        "detail": null
+      },
+      "self_listed": {
+        "enum": "no",
+        "zh": "否。HOSE 与母公司 VNX 均为国有非上市实体",
+        "en": "No. Both HOSE and its parent VNX are unlisted state-owned entities",
+        "sources": [
+          {
+            "title": "Law on Securities No. 54/2019/QH14 英译（Art 43(1)：VNX 由国家持股逾50%）",
+            "url": "https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "The Vietnam Stock Exchange is an enterprise established and operating under the provisions of this Law and the Law on Enterprises, with over 50% of its charter capital or total voting shares held by the State.",
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "spec": null,
+        "detail": null
+      },
       "market_cap_usd_bn": null,
       "listed_companies_count": null,
       "annual_turnover_usd_bn": null,
       "global_ranking": null,
-      "trading_currency": null,
-      "settlement_currency": null
+      "trading_currency": {
+        "zh": "越南盾（VND）",
+        "en": "Vietnamese dong (VND)",
+        "detail": "上市证券以越南盾报价与交易；QĐ22 附录 II 的最小报价单位表以「đồng」（越南盾）为单位。",
+        "sources": [
+          {
+            "title": "VNX《上市证券的上市与交易业务规则》QĐ 22/QĐ-HĐTV 附录 II（报价单位表：10 đồng / 50 đồng / 100 đồng）",
+            "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "enum": null,
+        "spec": null,
+        "quote": null
+      },
+      "settlement_currency": {
+        "zh": "越南盾（VND）",
+        "en": "Vietnamese dong (VND)",
+        "detail": "证券交易的资金交收以越南盾进行；QĐ22 附录 II 报价与交收单位均为越南盾。",
+        "sources": [
+          {
+            "title": "VNX《上市证券的上市与交易业务规则》QĐ 22/QĐ-HĐTV 附录 II（报价单位以 đồng（越南盾）计）",
+            "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "enum": null,
+        "spec": null,
+        "quote": null
+      }
     },
     "regulation": {
-      "regulator": null,
-      "self_regulatory_org": null,
-      "clearing_regulator": null,
-      "core_laws": null,
-      "foreign_ownership_limit": null,
-      "capital_controls": null,
-      "disclosure_requirements": null,
-      "investor_protection": null
+      "regulator": {
+        "zh": "国家证券委员会（SSC，越南语 Ủy ban Chứng khoán Nhà nước / UBCKNN），隶属财政部",
+        "en": "State Securities Commission (SSC; Ủy ban Chứng khoán Nhà nước / UBCKNN), attached to the Ministry of Finance",
+        "detail": "SSC 依《证券法》第9条对证券与证券市场行使国家管理职能：拟订法规、直接管理与监督\n市场活动、发放与吊销牌照、审批 VNX 与 VSDC 的规则、批准新的交易方式、查处行政违法、\n处理投诉举报。SSC 主任、副主任由财政部管理。\n",
+        "sources": [
+          {
+            "title": "Law on Securities No. 54/2019/QH14 英译（Art 9：国家证券委员会）",
+            "url": "https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "The State Securities Commission is attached to the Ministry of Finance, assumes the responsibilities for advising and assisting the Minister of Finance in the state management of securities and securities market, and organizing the enforcement of the law on securities and securities market",
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "enum": null,
+        "spec": null
+      },
+      "self_regulatory_org": {
+        "zh": "越南交易所（VNX，Sở Giao dịch Chứng khoán Việt Nam）——颁布上市、交易、信息披露、会员等业务规则，制定交易监察标准，受理与撤销会员资格，监督 HOSE 与 HNX 执行业务规则；HOSE 本身作为子公司组织交易并制定实施细则",
+        "en": "The Vietnam Exchange (VNX) — promulgates the regulations on listing, trading, information disclosure and membership, sets trade-surveillance criteria, admits and cancels membership, and supervises HOSE and HNX in applying the operational regulations; HOSE itself, as a subsidiary, organizes trading and issues implementing procedures",
+        "detail": "依总理 37/2020/QĐ-TTg 第2条与《证券法》第46条。VNX 颁布的规则须经 SSC 批准。",
+        "sources": [
+          {
+            "title": "VNX 官网「职能任务」页（依 37/2020/QĐ-TTg 第2条）",
+            "url": "https://vnx.vn/chuc-nang-nhiem-vu",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Xây dựng và ban hành các quy chế về niêm yết chứng khoán, giao dịch chứng khoán, công bố thông tin, thành viên của Sở Giao dịch Chứng khoán Việt Nam và các quy chế nghiệp vụ khác liên quan đến tổ chức và hoạt động thị trường giao dịch chứng khoán; ban hành tiêu chí giám sát giao dịch ... Giám sát Sở Giao dịch Chứng khoán Hà Nội, Sở Giao dịch Chứng khoán thành phố Hồ Chí Minh thực hiện các quy chế hoạt động nghiệp vụ",
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "enum": null,
+        "spec": null
+      },
+      "clearing_regulator": {
+        "zh": "国家证券委员会（SSC）——依《证券法》第9条对越南证券存托与清算总公司（VSDC）行使管理、监督、检查职能，并审批其业务规则",
+        "en": "The State Securities Commission (SSC) — under Article 9 of the Law on Securities, manages, supervises and inspects the Vietnam Securities Depository and Clearing Corporation (VSDC) and approves its rules",
+        "sources": [
+          {
+            "title": "Law on Securities No. 54/2019/QH14 英译（Art 9(d)：审批 VNX 与 VSDC 的规则）",
+            "url": "https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "To manage, inspect, examine and supervise the professional operations of the Vietnam Stock Exchange and its affiliated companies, the Vietnam Securities Depository and Clearing Corporation; to approve the rules and regulations of the Vietnam Stock Exchange and its affiliated companies, the Vietnam Securities Depository and Clearing Corporation",
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "enum": null,
+        "spec": null,
+        "detail": null
+      },
+      "core_laws": {
+        "zh": "《证券法》第54/2019/QH14号（2019-11-26，2021-01-01 施行；经第56/2024/QH15号法律修订）",
+        "en": "Law on Securities No. 54/2019/QH14 (26 Nov 2019, effective 1 Jan 2021; amended by Law No. 56/2024/QH15)",
+        "detail": "配套法规体系：政府令 155/2020/NĐ-CP（细化《证券法》，经 245/2025/NĐ-CP 修订）、\n158/2020/NĐ-CP（衍生证券与衍生品市场）；财政部通函 119/2020/TT-BTC（登记、存托、\n清算与结算，经 68/2024/TT-BTC 等修订）、120/2020/TT-BTC（上市与注册交易证券的交易，\n经 68/2024、08/2026/TT-BTC 修订）、121/2020/TT-BTC（证券公司业务）、96/2020/TT-BTC\n（信息披露）、95/2020/TT-BTC（交易监察）；VNX《上市证券的上市与交易业务规则》\nQĐ 22/QĐ-HĐTV。\n",
+        "sources": [
+          {
+            "title": "Ho Chi Minh Stock Exchange — Overview（Baker McKenzie，《证券法》54/2019/QH14 与 56/2024/QH15 修订）",
+            "url": "https://resourcehub.bakermckenzie.com/en/resources/cross-border-listings-guide/asia-pacific/ho-chi-minh-stock-exchange/topics/overview-of-exchange",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "VNX 法规栏目·Luật（《证券法》54/2019/QH14 越南语签署版）",
+            "url": "https://vnx.vn/van-ban-phap-ly/3",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "The Law on Securities No. 54/2019/QH14 adopted by the National Assembly on 26 November 2019, as amended by Law No. 56/2024/QH15 adopted by the National Assembly on 29 November 2024 (Law on Securities), established the foundation for one concentrated stock exchange in Vietnam, the Vietnam Exchange (VNX)",
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "enum": null,
+        "spec": null
+      },
+      "foreign_ownership_limit": {
+        "zh": "",
+        "detail": "待坐实。越南外资持股上限（room）由政府令 155/2020/NĐ-CP 第139条规定（经\n245/2025/NĐ-CP 修订），一般框架：法律 / 国际条约有明确比例的从其规定；银行业 30%；\n属于「有条件经营行业但未规定具体比例」的为 50%；其余原则上不限。QĐ22 第28条载明\n交易系统按 VSDC 提供的数据实时扣减外资可买余额、超额买单拒单。具体分行业比例表待\n从 155/2020 / 245/2025 一手条文逐条核实（政府令 155 越南语签署版为图片型 PDF，\nOCR 进行中），记入 OPEN-QUESTIONS。\n",
+        "sources": [
+          {
+            "title": "VNX《上市证券的上市与交易业务规则》QĐ 22 第28条（外资交易：实时扣减可买余额）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "Decree 245/2025/NĐ-CP 英译（修订 Decree 155/2020，含外资持股条款）",
+            "url": "https://ssc.gov.vn/cs/idcplg?IdcService=GET_FILE&allowInterrupt=1&dID=166306&dDocName=APPSSCGOVVN1620159819&filename=Eng+-+Decree+245+amending+Decree+155+in+English+translation+final.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "verified": "2026-09-07",
+        "confidence": "low",
+        "en": null,
+        "enum": null,
+        "spec": null,
+        "quote": null
+      },
+      "capital_controls": {
+        "zh": "",
+        "detail": "待坐实。越南盾非完全可自由兑换，证券组合投资的外汇进出由越南国家银行（SBV）的外汇管理法规（外汇管理条例 + 相关通函）规范，外国投资者须通过越南盾间接投资资本账户（IICA）进出资金。具体规则待从 SBV 一手页面核实，记入 OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "State Bank of Vietnam 英文站（外汇管理主体）",
+            "url": "https://www.sbv.gov.vn/en/home",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "verified": "2026-09-07",
+        "confidence": "low",
+        "en": null,
+        "enum": null,
+        "spec": null,
+        "quote": null
+      },
+      "disclosure_requirements": {
+        "zh": "信息披露依财政部通函 96/2020/TT-BTC（经 68/2024/TT-BTC、08/2026/TT-BTC 修订）与 VNX 披露业务规则；披露语言为越南语，上市公司须作定期披露（年报、半年报、季报、经审计财报）与临时披露（重大事件）",
+        "en": "Information disclosure is governed by Circular No. 96/2020/TT-BTC (as amended by Circular No. 68/2024/TT-BTC and 08/2026/TT-BTC) and the VNX disclosure regulation; disclosure is in Vietnamese, and listed companies must make periodic disclosures (annual, semi-annual and quarterly reports, audited financial statements) and ad-hoc disclosures of material events",
+        "detail": "英文披露非强制、多为大盘蓝筹自愿提供。具体披露时限（如重大事件 24 小时 / 定期报告期限）待从通函一手条文核实。",
+        "sources": [
+          {
+            "title": "VNX《上市证券的上市与交易业务规则》QĐ 22 第14(5)条（依通函 96/2020/TT-BTC 披露交易信息）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "SGDCK thực hiện công bố thông tin về giao dịch theo quy định tại Thông tư số 96/2020/TT-BTC ngày 16/11/2020 của Bộ trưởng Bộ Tài chính hướng dẫn công bố thông tin trên thị trường chứng khoán",
+        "verified": "2026-09-07",
+        "confidence": "medium",
+        "enum": null,
+        "spec": null
+      },
+      "investor_protection": {
+        "zh": "",
+        "detail": "待坐实。越南无类似投资者赔偿基金 / SIPC 的法定安排；《证券法》设有 VSDC 层面的结算支持基金（payment assistance fund）与清算基金（clearing fund）以保障交收（见第八章）。证券公司客户资产隔离、纠纷调解（VNX 作会员间调解人）等机制待核实。记入 OPEN-QUESTIONS。",
+        "sources": [
+          {
+            "title": "Law on Securities No. 54/2019/QH14 英译（Art 66 payment assistance funds / Art 67 clearing funds）",
+            "url": "https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "verified": "2026-09-07",
+        "confidence": "low",
+        "en": null,
+        "enum": null,
+        "spec": null,
+        "quote": null
+      }
     },
     "products": {
       "meta": {},
@@ -42,38 +318,651 @@
     },
     "market_structure": {
       "trading_sessions": {
-        "pre_market": null,
-        "continuous_am": null,
-        "lunch_break": null,
-        "continuous_pm": null,
-        "after_market": null,
-        "night_session": null
+        "pre_market": {
+          "spec": {
+            "start": "09:00",
+            "end": "09:15",
+            "kind": "opening_auction"
+          },
+          "zh": "开盘集合竞价 09h00–09h15，接收 LO 与 ATO 订单，撮合确定开盘价",
+          "en": "Opening call auction 09:00–09:15, accepting LO and ATO orders, matched to determine the opening price",
+          "quote": "Phiên trong giờ (sáng) | Khớp lệnh định kỳ mở cửa 09h00 - 09h15 | Lệnh giới hạn (LO), Lệnh giao dịch tại mức giá khớp lệnh xác định giá mở cửa (ATO)",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "VNX《上市证券的上市与交易业务规则》QĐ 22/QĐ-HĐTV 正文（第14–34条：交易组织、时间方式、订单、撮合、价差、涨跌幅、参考价、碎股）",
+              "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            },
+            {
+              "title": "VNX QĐ 22/QĐ-HĐTV 附录 II（HOSE 交易时间表 + 交易单位 / 报价单位 / 价格波动幅度 表）",
+              "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            }
+          ],
+          "verified": "2026-09-07",
+          "enum": null,
+          "detail": null
+        },
+        "continuous_am": {
+          "spec": {
+            "start": "09:15",
+            "end": "11:30",
+            "kind": "continuous"
+          },
+          "zh": "上午连续竞价（Khớp lệnh liên tục I）09h15–11h30，接收 LO 与 MTL（市价转限价）订单",
+          "en": "Morning continuous session (Khớp lệnh liên tục I) 09:15–11:30, accepting LO and MTL (market-to-limit) orders",
+          "quote": "Khớp lệnh liên tục I 09h15 - 11h30 | Lệnh giới hạn (LO), Lệnh thị trường (MTL)",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "VNX《上市证券的上市与交易业务规则》QĐ 22/QĐ-HĐTV 正文（第14–34条：交易组织、时间方式、订单、撮合、价差、涨跌幅、参考价、碎股）",
+              "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            },
+            {
+              "title": "VNX QĐ 22/QĐ-HĐTV 附录 II（HOSE 交易时间表 + 交易单位 / 报价单位 / 价格波动幅度 表）",
+              "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            }
+          ],
+          "verified": "2026-09-07",
+          "enum": null,
+          "detail": null
+        },
+        "lunch_break": {
+          "spec": {
+            "start": "11:30",
+            "end": "13:00",
+            "kind": "lunch_recess"
+          },
+          "zh": "午休 11h30–13h00，不撮合；期间不得输入 / 修改 / 撤销撮合订单，不得发布 / 撤销协议交易广告或执行未完成的协议交易",
+          "en": "Lunch recess 11:30–13:00, no matching; during it members may not enter/amend/cancel order-matching orders, nor advertise/cancel or execute pending put-through trades",
+          "quote": "Nghi giữa hai phiên sáng- chiều 11h30 - 13h00",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "VNX《上市证券的上市与交易业务规则》QĐ 22/QĐ-HĐTV 正文（第14–34条：交易组织、时间方式、订单、撮合、价差、涨跌幅、参考价、碎股）",
+              "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            },
+            {
+              "title": "VNX QĐ 22/QĐ-HĐTV 附录 II（HOSE 交易时间表 + 交易单位 / 报价单位 / 价格波动幅度 表）",
+              "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            }
+          ],
+          "verified": "2026-09-07",
+          "enum": null,
+          "detail": null
+        },
+        "continuous_pm": {
+          "spec": {
+            "start": "13:00",
+            "end": "14:45",
+            "kind": "continuous",
+            "note": "连续竞价 II 13h00–14h30；收盘集合竞价 14h30–14h45（见 closing_mechanism）；协议交易下午段 13h00–15h00"
+          },
+          "zh": "下午连续竞价（Khớp lệnh liên tục II）13h00–14h30，接收 LO 与 MTL；随后 14h30–14h45 为收盘集合竞价",
+          "en": "Afternoon continuous session (Khớp lệnh liên tục II) 13:00–14:30, accepting LO and MTL; followed by the closing call auction 14:30–14:45",
+          "quote": "Khớp lệnh liên tụcII 13h00-14h30 | Lệnh giới hạn (LO), Lệnh thị trường (MTL) ... Khớp lệnh định kỳ 14h30 - 14h45 | Lệnh giới hạn (LO), Lệnh giao dịch tại mức giá khớp lệnh xác định giá đóng cửa (ATC)",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "VNX《上市证券的上市与交易业务规则》QĐ 22/QĐ-HĐTV 正文（第14–34条：交易组织、时间方式、订单、撮合、价差、涨跌幅、参考价、碎股）",
+              "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            },
+            {
+              "title": "VNX QĐ 22/QĐ-HĐTV 附录 II（HOSE 交易时间表 + 交易单位 / 报价单位 / 价格波动幅度 表）",
+              "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            }
+          ],
+          "verified": "2026-09-07",
+          "enum": null,
+          "detail": null
+        },
+        "after_market": {
+          "spec": {
+            "kind": "none",
+            "note": "HOSE 无盘后集合竞价 / 盘后连续交易时段（附录 II HOSE 时间表止于 14h45 收盘集合竞价 + 15h00 前的协议交易）；盘后订单（PLO）为 HNX 特有"
+          },
+          "zh": "无。HOSE 收盘集合竞价 14h45 结束后无盘后交易时段（协议交易延至 15h00）；盘后限价订单（PLO）为 HNX 特有机制",
+          "en": "None. HOSE has no after-hours session after the 14:45 closing auction (put-through runs to 15:00); the post-close limit order (PLO) session is an HNX-only feature",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "VNX《上市证券的上市与交易业务规则》QĐ 22/QĐ-HĐTV 正文（第14–34条：交易组织、时间方式、订单、撮合、价差、涨跌幅、参考价、碎股）",
+              "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            },
+            {
+              "title": "VNX QĐ 22/QĐ-HĐTV 附录 II（HOSE 交易时间表 + 交易单位 / 报价单位 / 价格波动幅度 表）",
+              "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            }
+          ],
+          "verified": "2026-09-07",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        },
+        "night_session": {
+          "spec": {
+            "kind": "none"
+          },
+          "zh": "无夜盘",
+          "en": "No night session",
+          "confidence": "medium",
+          "sources": [
+            {
+              "title": "VNX《上市证券的上市与交易业务规则》QĐ 22/QĐ-HĐTV 正文（第14–34条：交易组织、时间方式、订单、撮合、价差、涨跌幅、参考价、碎股）",
+              "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            },
+            {
+              "title": "VNX QĐ 22/QĐ-HĐTV 附录 II（HOSE 交易时间表 + 交易单位 / 报价单位 / 价格波动幅度 表）",
+              "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            }
+          ],
+          "verified": "2026-09-07",
+          "enum": null,
+          "detail": null,
+          "quote": null
+        }
       },
-      "holidays_note": null,
-      "opening_mechanism": null,
-      "closing_mechanism": null,
-      "execution_model": null,
-      "matching_principle": null,
-      "order_types": null,
-      "tick_size": null,
-      "board_lot_size": null,
-      "odd_lot_handling": null,
+      "holidays_note": {
+        "zh": "周一至周五交易，越南《劳动法》规定的法定节假日休市：元旦、越南新年（Tết，农历新年，通常连休5–7天）、雄王节（农历三月初十）、南方解放日（4月30日）、国际劳动节（5月1日）、国庆日（9月2日及前/后一日）",
+        "en": "Trades Monday–Friday, closed on public holidays under Vietnam's Labour Code: New Year's Day, Vietnamese New Year (Tết, the Lunar New Year, usually a 5–7 day break), Hung Kings' Commemoration Day (10th day of the 3rd lunar month), Reunification Day (30 April), International Labour Day (1 May), National Day (2 September, plus an adjacent day)",
+        "detail": "QĐ22 第15(1)条 / 附录 II 均只表述「除《劳动法》规定的休息日外」，未逐日列举；具体年度日历由 VNX / HOSE 公告。本字段不逐日抄录。",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第15(1)条（交易日：周一至周五，除《劳动法》规定的休息日）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "SGDCK tổ chức giao dịch chứng khoán niêm yết từ thứ Hai đến thứ Sáu hàng tuần, trừ các ngày nghỉ theo quy định của Bộ Luật Lao động.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null
+      },
+      "opening_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "09:00",
+          "auction_end": "09:15"
+        },
+        "zh": "开盘集合竞价（Khớp lệnh định kỳ mở cửa），09h00–09h15 集中申报，按「成交量最大」原则确定开盘价：选中价位上所有更优买单 / 卖单必须全部成交；有多个满足的价位时取一方全部成交、对手方全部或部分成交的价位，仍多个则取最接近最近成交价者",
+        "en": "Opening call auction (Khớp lệnh định kỳ mở cửa), order collection 09:00–09:15, opening price set on the maximum-executable-volume principle: at the chosen price all better-priced buy/sell orders must fully execute; where several prices qualify, the one at which one side fully executes and the other side fully or partly executes; if still several, the one nearest the most recent traded price",
+        "detail": "ATO 订单仅在开盘集合竞价时段有效、出清后自动撤销；ATO 不优先于此前已进入系统的涨停价买入限价单 / 跌停价卖出限价单（KRX 系统 2025 年改革要点）。",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第19(c)条（ATO 订单）+ 第22(2)条（集合竞价定价原则）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Lệnh ATO được nhập vào hệ thống trong thời gian khớp lệnh định kỳ để xác định giá mở cửa. Sau thời điểm xác định giá mở cửa, lệnh không được thực hiện hoặc phần còn lại của lệnh không được thực hiện hết sẽ tự động bị hủy. Lệnh ATO không được ưu tiên trước lệnh giới hạn mua giá trần hoặc lệnh giới hạn bán giá sàn đã nhập vào hệ thống trước đó.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null
+      },
+      "closing_mechanism": {
+        "spec": {
+          "type": "call_auction",
+          "auction_start": "14:30",
+          "auction_end": "14:45"
+        },
+        "zh": "收盘集合竞价（Khớp lệnh định kỳ đóng cửa），14h30–14h45 集中申报，按与开盘相同的「成交量最大」原则确定收盘价；接收 LO 与 ATC 订单，ATC 出清后失效",
+        "en": "Closing call auction (Khớp lệnh định kỳ đóng cửa), order collection 14:30–14:45, closing price set on the same maximum-volume principle as the open; accepts LO and ATC orders, ATC lapses after the uncrossing",
+        "quote": "Khớp lệnh định kỳ 14h30 - 14h45 | Lệnh giới hạn (LO), Lệnh giao dịch tại mức giá khớp lệnh xác định giá đóng cửa (ATC) ... Lệnh ATC được nhập vào hệ thống trong thời gian khớp lệnh định kỳ để xác định giá đóng cửa. Sau thời điểm xác định giá đóng cửa, lệnh không được thực hiện hoặc phần còn lại của lệnh không được hiện hết sẽ hết hiệu lực.",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "VNX《上市证券的上市与交易业务规则》QĐ 22/QĐ-HĐTV 正文（第14–34条：交易组织、时间方式、订单、撮合、价差、涨跌幅、参考价、碎股）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "VNX QĐ 22/QĐ-HĐTV 附录 II（HOSE 交易时间表 + 交易单位 / 报价单位 / 价格波动幅度 表）",
+            "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "verified": "2026-09-07",
+        "enum": null,
+        "detail": null
+      },
+      "execution_model": {
+        "enum": "order_driven",
+        "spec": {
+          "electronic": true,
+          "dealer_intermediated": false,
+          "note": "全电子中央订单簿、价格-时间优先连续 + 集合竞价撮合；普通股票无场内做市商。做市商制度限于备兑权证（CW）与 ETF，做市商仅下限价单、按合同承担报价义务——订单驱动之上的补充（同 jp-jpx / hk-hkex，[ADR-043]）",
+          "zh": "订单驱动：交易通过撮合方式（khớp lệnh，价格-时间优先）与协议方式（thỏa thuận）进行；普通股票无场内做市商；做市商制度限于备兑权证与 ETF、按合同报价",
+          "en": "Order-driven: trading is via the order-matching method (khớp lệnh, price-then-time priority) and the negotiated/put-through method (thỏa thuận); ordinary shares have no on-exchange market makers; market making is limited to covered warrants and ETFs under contract"
+        },
+        "detail": "enum 依据 matching_principle（价格-时间优先）+ market_maker_scheme（限 CW/ETF、激励型）综合判定为 order_driven（「hybrid vs order_driven」为综合判断，confidence: medium）。",
+        "sources": [
+          {
+            "title": "财政部通函 120/2020/TT-BTC 英译第3条 / 第12条（做市）",
+            "url": "https://english.luatvietnam.vn/circular-no-120-2020-tt-btc-dated-december-31-2020-of-the-ministry-of-finance-on-transaction-of-listed-shares-registration-of-transactions-and-fund-196778-doc1.html",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "The Stock Exchange organizes securities trading according to the concentrated order matching method and agreement based trading method and the following principles: a) The concentrated order matching method on the securities trading system must ensure the priority principle of price and time",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "zh": null,
+        "en": null
+      },
+      "matching_principle": {
+        "enum": "price_time",
+        "zh": "价格优先、时间优先：买单价高者优先、卖单价低者优先；同价位则先进入系统者优先。集合竞价取成交量最大的价位；连续竞价按订单簿上等待的对手方订单价格成交",
+        "en": "Price priority then time priority: higher-priced buy orders and lower-priced sell orders rank first; at the same price, the earlier order ranks first. The periodic auction uses the maximum-volume price; continuous matching executes at the price of the waiting counter-order on the book",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第22(1)条（撮合优先原则）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Hệ thống giao dịch thực hiện so khớp các lệnh mua và lệnh bán chứng khoán theo nguyên tắc thứ tự ưu tiên về giá và thời gian, cụ thể như sau: a) Ưu tiên về giá: - Lệnh mua có mức giá cao hơn được ưu tiên thực hiện trước. - Lệnh bán có mức giá thấp hơn được ưu tiên thực hiện trước. b) Ưu tiên về thời gian: Trường hợp các lệnh mua hoặc lệnh bán có cùng mức giá thì lệnh nhập vào hệ thống giao dịch trước sẽ được ưu tiên thực hiện trước.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "spec": null,
+        "detail": null
+      },
+      "order_types": {
+        "spec": {
+          "market": true,
+          "limit": true,
+          "stop": false,
+          "iceberg": false,
+          "hidden": false,
+          "tif": [
+            "day"
+          ],
+          "note": "HOSE 附录 II 列示的订单类型：LO（限价单）、MTL（市价转限价单，连续竞价专用，未成交余量转为末笔成交价 ±1 报价单位的限价单）、ATO（开盘集合竞价专用）、ATC（收盘集合竞价专用）。无 MOK / MAK（那两类为 HNX 专用）、无冰山 / 隐藏单。LO 有效至收盘集合竞价结束或被撤销 → tif=day"
+        },
+        "zh": "HOSE 订单类型：LO（限价单，可在连续与集合竞价输入，有效至收盘集合竞价结束或撤销）、MTL（市价转限价单，仅连续竞价，无对手盘即撤，未全部成交部分转为末笔成交价 ±1 报价单位的限价单）、ATO（仅开盘集合竞价）、ATC（仅收盘集合竞价）",
+        "en": "HOSE order types: LO (limit order, usable in continuous and auction phases, valid until the closing auction ends or cancelled); MTL (market-to-limit, continuous phase only, cancelled if no counterparty, unfilled remainder converts to a limit order at the last match price ±1 tick); ATO (opening auction only); ATC (closing auction only)",
+        "detail": "MP / MOK / MAK 在 QĐ22 第19条中定义，但附录 II 的 HOSE 表只启用 LO 与 MTL（HNX 表另启用 MOK / MAK）。stop / stop_limit / 冰山 / 隐藏单：HOSE 交易系统不提供。",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第19条（订单类型）+ 附录 II（HOSE 各时段可用订单类型）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Lệnh giới hạn (ký hiệu lệnh LO) ... Lệnh thị trường giới hạn (ký hiệu lệnh MTL) là lệnh nếu không được thực hiện toàn bộ thì phần còn lại của lệnh được chuyển thành lệnh LO mua với mức giá cao hơn mức giá khớp lệnh cuối cùng một đơn vị yết giá ... Lệnh giao dịch tại mức giá khớp lệnh xác định giá mở cửa (ký hiệu lệnh ATO) ... Lệnh giao dịch tại mức giá khớp lệnh xác định giá đóng cửa (ký hiệu lệnh ATC)",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null
+      },
+      "tick_size": {
+        "spec": {
+          "regime": "tiered_by_price",
+          "min_tick": 10,
+          "currency": "VND",
+          "ladder": [
+            {
+              "price_max": 9990,
+              "tick": 10
+            },
+            {
+              "price_min": 10000,
+              "price_max": 49950,
+              "tick": 50
+            },
+            {
+              "price_min": 50000,
+              "tick": 100
+            }
+          ],
+          "full_table_note": "股票与封闭式基金按价格分三档：< 10,000 đ → 10 đ；10,000–49,950 đ → 50 đ；≥ 50,000 đ → 100 đ。ETF 与备兑权证：所有价位统一 10 đ。协议交易：1 đ",
+          "note": "股票 / 封闭式基金三档 10 / 50 / 100 đ；ETF·CW 恒 10 đ；协议交易 1 đ"
+        },
+        "zh": "报价单位（đơn vị yết giá）：股票、封闭式基金按价格分档——低于 10,000 đ 为 10 đ，10,000–49,950 đ 为 50 đ，50,000 đ 及以上为 100 đ；ETF 与备兑权证所有价位统一 10 đ；协议交易 1 đ",
+        "en": "Quotation unit (đơn vị yết giá): for stocks and closed-end funds, tiered by price — 10 đ below 10,000 đ, 50 đ for 10,000–49,950 đ, and 100 đ at 50,000 đ and above; ETFs and covered warrants use a flat 10 đ at all price levels; put-through trades use 1 đ",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 附录 II 第1.2项（报价单位表）",
+            "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Đơn vị yết giá | Mức giá | Đơn vị yết giá | Cổ phiếu, chứng chỉ quỹ đóng | <10.000 | 10 đồng | 10.000-49.950 | 50 đồng | > 50.000 | 100 đồng | Chứng chỉ quỹ ETF, chứng quyền có bảo đảm | Áp dụng đơn vị yết giá 10 đồng cho tất cả các mức giá | Đơn vị yết giá đối với giao dịch thỏa thuận là 1 đồng",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "detail": null
+      },
+      "board_lot_size": {
+        "spec": null,
+        "zh": "撮合交易的整手单位为 100 股（股票 / 封闭式基金 / ETF / 备兑权证），单笔撮合订单上限 500,000；大宗（lô lớn）最低 20,000；碎股（lô lẻ）1–99 股，见 odd_lot_handling",
+        "en": "The round-lot unit for order-matching is 100 (shares / closed-end fund / ETF / covered warrant), with a single order capped at 500,000; a large lot (lô lớn) is a minimum of 20,000; odd lots (lô lẻ) are 1–99 shares, see odd_lot_handling",
+        "detail": "QĐ22 第29条规定交易单位由 SGDCK 依第14(4)条公告、VNX 经 SSC 同意后可调整；具体数值载于附录 II。",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 附录 II 第1.1项（交易单位表）+ 第29条",
+            "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Đơn vị giao dịch | Cổ phiếu, chứng chỉ quỹ đóng, chứng chỉ quỹ ETF, chứng quyền có bảo đảm | - Đơn vị giao dịch lô chẵn ... 100, khối lượng tối đa là 500.000 | - Đơn vị giao dịch lô lẻ 1, khối lượng tối đa là 99 | - Đơn vị giao dịch lô lớn 1, khối lượng tối thiểu là 20.000",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null
+      },
+      "odd_lot_handling": {
+        "zh": "碎股（lô lẻ）1–99 股，可通过集中撮合与协议方式交易；碎股只能下 LO 限价单、修改撤销规则同整手；碎股交易单位 1 股；碎股价格遵守与整手相同的价格规则；碎股成交不用于确定参考价与指数价；新上市 / 复牌后 25 日内的碎股在整手撮合价确立前不进系统",
+        "en": "Odd lots (lô lẻ) are 1–99 shares, tradable via centralised matching and the negotiated method; only LO orders are allowed for odd lots, with the same amend/cancel rules as round lots; the odd-lot trading unit is 1 share; odd-lot prices follow the same price rules as round lots; odd-lot trades are not used to determine the reference price or index prices; newly-listed / post-25-day-suspension odd lots are not accepted until a round-lot match price is established",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第34条（碎股交易）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Giao dịch lô lẻ được thực hiện theo phương thức khớp lệnh tập trung và phương thức giao dịch thỏa thuận trên hệ thống giao dịch. Nhà đầu tư chỉ được phép nhập lệnh LO đối với giao dịch lô lẻ ... Đơn vị giao dịch lô lẻ là 01 cổ phiếu hoặc chứng chỉ quỹ hoặc chứng quyền có bảo đảm ... Các lệnh giao dịch lô lẻ không được sử dụng để xác định giá tham chiếu, giá tính chỉ số.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "detail": null
+      },
       "price_limits": {
-        "type": null,
-        "main_board": null,
-        "other_boards": null
+        "type": {
+          "enum": "percentage_band",
+          "zh": "百分比涨跌幅（biên độ dao động giá），主板股票 / 基金常规 ±7%，特殊情形 ±20%",
+          "en": "Percentage price band (biên độ dao động giá), a regular ±7% for main-board stocks/funds and ±20% in special cases",
+          "sources": [
+            {
+              "title": "VNX QĐ 22 附录 II 第1.3–1.4项（价格波动幅度表）",
+              "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            }
+          ],
+          "quote": "Biên độ dao động giá | #7% so với giá tham chiêu",
+          "confidence": "medium",
+          "verified": "2026-09-07",
+          "spec": null,
+          "detail": null
+        },
+        "main_board": {
+          "spec": {
+            "limit_pct": 7,
+            "reference": "prev_close",
+            "symmetric": true,
+            "note": "常规 ±7%（含向现有股东出售库存股的除权日）；±20% 适用于：新上市股票 / 基金的首个交易日至整手撮合价确立；停牌 / 暂停交易连续 25 个交易日以上后复牌至整手撮合价确立；企业分立 / 以库存股派息送股 / 现金股息不低于前收盘价 的除权日与复牌日"
+          },
+          "zh": "常规涨跌幅 ±7%（相对参考价）；±20% 适用于新上市首日至整手撮合价确立、连续 25 交易日以上停牌后复牌、以及企业分立 / 库存股派息送股 / 大额现金股息等除权 / 复牌情形。涨停价 = 参考价 +（参考价 × 幅度），跌停价 = 参考价 -（参考价 × 幅度），涨停向下取整、跌停向上取整到报价单位",
+          "en": "Regular band ±7% (against the reference price); ±20% applies to the first trading day of a newly-listed stock/fund until a round-lot match price is set, resumption after 25 or more consecutive trading days of suspension, and certain ex-rights/resumption cases (company split, stock dividend/bonus from treasury shares, large cash dividend). Ceiling = reference + (reference × band), floor = reference − (reference × band), with the ceiling rounded down and the floor rounded up to the tick unit",
+          "sources": [
+            {
+              "title": "VNX QĐ 22 附录 II 第1.3–1.4项 + 第31–32条",
+              "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            }
+          ],
+          "quote": "Biên độ dao động giá | #7% so với giá tham chiêu ... Biên độ dao động giá trong ngày giao dịch đầu tiên của cỗ phiếu, chứng chỉ quỹ đóng, chứng chỉ quỹ ETF ... +20% so với giá tham chiếu ... Giá trần = Giá tham chiếu + (Giá tham chiếu x Biên độ dao động giá) Giá sàn = Giá tham chiếu - (Giá tham chiếu x Biên độ dao động giá)",
+          "confidence": "medium",
+          "verified": "2026-09-07",
+          "enum": null,
+          "detail": null
+        },
+        "other_boards": {
+          "zh": "HOSE 只有一个上市板（见第六章 boards）；受限制交易（bị hạn chế giao dịch）证券只在集合竞价方式下交易（开盘集合竞价 + 若干 15 分钟定期集合竞价 + 收盘集合竞价），涨跌幅仍为 ±7%",
+          "en": "HOSE has a single listing board (see chapter 6 boards); securities under a trading restriction (bị hạn chế giao dịch) trade only via the auction method (opening auction + a series of 15-minute periodic auctions + closing auction), with the same ±7% band",
+          "sources": [
+            {
+              "title": "VNX QĐ 22 附录 II 第1项（受限制交易证券的交易安排）",
+              "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+              "accessed": "2026-09-07"
+            }
+          ],
+          "confidence": "medium",
+          "verified": "2026-09-07",
+          "enum": null,
+          "spec": null,
+          "detail": null,
+          "quote": null
+        }
       },
-      "circuit_breaker": null,
-      "volatility_interruption": null,
-      "trading_halt_mechanism": null,
-      "error_trade_rule": null,
-      "intraday_reversal": null,
-      "short_selling": null,
-      "block_trade": null,
-      "order_book_transparency": null,
-      "dark_pool": null,
-      "market_maker_scheme": null,
-      "connect_schemes": null,
+      "circuit_breaker": {
+        "enum": "none",
+        "spec": {
+          "type": "none",
+          "note": "《证券法》配套通函 120/2020/TT-BTC 第5条授权交易所经 SSC 批准可设「熔断机制」（cơ chế ngắt mạch thị trường），QĐ22 第17条引用该条；但截至 2026 年越南未启用全市场 / 指数级熔断，日内价格约束仅为 ±7% / ±20% 涨跌幅"
+        },
+        "zh": "无。通函 120/2020/TT-BTC 第5条与 QĐ22 第17条为「熔断机制」预留了法律依据（由交易所经 SSC 批准设定），但越南目前未实际启用全市场或指数级熔断；日内波动由 ±7% / ±20% 涨跌幅控制",
+        "en": "None. Article 5 of Circular 120/2020/TT-BTC and Article 17 of QĐ22 reserve a legal basis for a circuit breaker mechanism (to be defined by the exchange upon SSC approval), but Vietnam does not currently operate any market-wide or index-level circuit breaker; intraday volatility is contained by the ±7%/±20% price bands",
+        "sources": [
+          {
+            "title": "财政部通函 120/2020/TT-BTC 英译第5条（Circuit breaker）",
+            "url": "https://english.luatvietnam.vn/circular-no-120-2020-tt-btc-dated-december-31-2020-of-the-ministry-of-finance-on-transaction-of-listed-shares-registration-of-transactions-and-fund-196778-doc1.html",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "VNX QĐ 22 第17条（引用通函 120 第5条）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "The Stock Exchange shall, upon the State Securities Commission's approval, define the circuit breaker mechanism. Based on the practical market conditions, the State Securities Commission shall decide to apply the circuit breaker mechanism or the circuit breaker mechanism combined with price fluctuation limit.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "detail": null
+      },
+      "volatility_interruption": {
+        "spec": {
+          "type": "none",
+          "note": "未见独立于 ±7% / ±20% 日内涨跌幅之外的个股级波动性中断 / 冷静期集合竞价机制（如 HKEX VCM、Eurex Volatility Interruption 那类）；日内价格出界即被涨跌停挡下，不触发额外的临时集合竞价"
+        },
+        "zh": "无独立的个股级波动性中断机制。日内价格由 ±7% / ±20% 涨跌停硬约束，触及即无法越过，不设「触及价格走廊 → 短暂集合竞价 → 恢复」这类冷静期安排",
+        "en": "No separate stock-level volatility interruption. Intraday prices are hard-bounded by the ±7%/±20% limits and cannot move beyond them; there is no \"price collar breach → brief auction → resume\" cooling-off arrangement",
+        "detail": "「无」为消极认定——QĐ22 第五章交易条款未出现波动性中断 / 冷静期条款，附录 II 时间表也无对应时段。若后续 KRX 系统引入此类机制需复核。",
+        "confidence": "low",
+        "sources": [
+          {
+            "title": "VNX《上市证券的上市与交易业务规则》QĐ 22/QĐ-HĐTV 正文（第14–34条：交易组织、时间方式、订单、撮合、价差、涨跌幅、参考价、碎股）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "VNX QĐ 22/QĐ-HĐTV 附录 II（HOSE 交易时间表 + 交易单位 / 报价单位 / 价格波动幅度 表）",
+            "url": "https://stream.vnx.vn/VNX//Legal/20260318161451415VNX.-PL-Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "verified": "2026-09-07",
+        "enum": null,
+        "quote": null
+      },
+      "trading_halt_mechanism": {
+        "zh": "全市场层面：VNX 依《证券法》第49(1)条可临时停止 / 暂停交易系统运行，恢复依第49(2)条。个股层面：QĐ22 第六章设有警告（Cảnh báo）、控制（Kiểm soát）、限制交易（Hạn chế giao dịch）、临时停牌（Tạm ngừng giao dịch）、暂停交易（Đình chỉ giao dịch）五级状态，由 HOSE 依信息披露 / 财报 / 审计意见等触发条件施加与解除",
+        "en": "Market-wide: VNX may temporarily halt or suspend operation of the trading system under Article 49(1) of the Law on Securities, with resumption under Article 49(2). Stock-level: Chapter VI of QĐ22 provides a five-tier status ladder — Warning (Cảnh báo), Control (Kiểm soát), Trading restriction (Hạn chế giao dịch), Trading halt (Tạm ngừng giao dịch) and Trading suspension (Đình chỉ giao dịch) — imposed and lifted by HOSE on disclosure/financial-statement/audit-opinion triggers",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第16条（引用《证券法》第49条）+ 第六章第40–44条（个股状态阶梯）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Việc tạm ngừng, đình chỉ hoạt động giao dịch trên hệ thống giao dịch thực hiện theo quy định tại khoản 1 Điều 49 Luật Chứng khoán. Việc khôi phục hoạt động giao dịch trên hệ thống giao dịch sau khi tạm ngừng, đình chỉ thực hiện theo quy định tại khoản 2 Điều 49 Luật Chứng khoán.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "detail": null
+      },
+      "error_trade_rule": {
+        "spec": {
+          "bust_allowed": true,
+          "review_window_min": null,
+          "deviation_threshold_pct": null,
+          "resolution": "cancel",
+          "note": "已撮合成交仅在两种情形下可被作废，且须 HOSE 报 VNX、同时报请并经 SSC 批准：① 交易系统因不可抗力（系统故障、天灾、火灾等）出错；② 已成交违反交易规定，严重影响投资者合法权益或整个市场。无「偏离参考价 X%」的量化门槛、无固定复核时限。协议交易一经执行不得修改 / 撤销（第27条）"
+        },
+        "zh": "已撮合成交（或已记录的协议交易）原则上终局。仅当①系统因不可抗力出错，或②成交严重违反交易规定、危害投资者权益或市场时，HOSE 报 VNX 并报经 SSC 批准后作废该笔交易。无量化偏离阈值、无固定复核时限。协议交易执行后不得修改 / 撤销",
+        "en": "A matched trade (or a recorded put-through trade) is in principle final. It may be cancelled only where (i) the trading system erred due to force majeure (system failure, natural disaster, fire, etc.) or (ii) the trade seriously breaches trading rules and harms investors' interests or the market — with HOSE reporting to VNX and obtaining SSC approval. There is no quantitative price-deviation threshold and no fixed review window. Put-through trades cannot be amended or cancelled once executed",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第18条（交易的确立与作废）+ 第27条（协议交易不得修改 / 撤销）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "SGDCK báo cáo SGDCKVN, đồng thời báo cáo, kiến nghị UBCKNN thực hiện loại bỏ đối với giao dịch đã được xác lập sau khi được UBCKNN chấp thuận trong các trường hợp sau đây: a) Hệ thống giao dịch gặp sự cố vì các nguyên nhân bất khả kháng như lỗi hệ thống, thiên tai, hỏa hoạn... b) Giao dịch đã được xác lập vi phạm quy định giao dịch, ảnh hưởng nghiêm trọng đến quyền và lợi ích hợp pháp của nhà đầu tư hoặc toàn bộ giao dịch trên thị trường. ... Giao dịch thoả thuận đã thực hiện trên hệ thống giao dịch không được phép sửa, huỷ.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "detail": null
+      },
+      "intraday_reversal": {
+        "enum": "t2",
+        "zh": "无当日回转（T+0）。现货证券交收周期 T+2（见第八章），买入证券须待交收到账后方可卖出。通函 120/2020/TT-BTC 第10条为「当日交易」（day trading，需签订当日交易合同）预留了法律依据，但 KRX 系统 2025 年上线后 T+0 仍在研究、未实际推出",
+        "en": "No intraday reversal (T+0). Cash securities settle T+2 (see chapter 8), and a bought security can only be sold after settlement. Article 10 of Circular 120/2020/TT-BTC reserves a legal basis for \"day trading\" (requiring a day-trading contract), but even after the KRX system went live in 2025, T+0 remains under study and has not been deployed",
+        "sources": [
+          {
+            "title": "财政部通函 120/2020/TT-BTC 英译第10条（Day trading）",
+            "url": "https://english.luatvietnam.vn/circular-no-120-2020-tt-btc-dated-december-31-2020-of-the-ministry-of-finance-on-transaction-of-listed-shares-registration-of-transactions-and-fund-196778-doc1.html",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "The Vietnam Stock Exchange 2026（the-shiv，KRX 系统上线后 T+0 / 卖空仍在路线图上）",
+            "url": "https://the-shiv.com/the-vietnam-stock-exchange-quick-guide/",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Investor can conduct day trading after entered into day trading contract with securities company eligible to provide the service of securities loan. ... Investor shall place trading orders and ensure that total number of a securities in sell orders must be equal to total number of such securities in buy orders within a trading date and vice versa.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "spec": null,
+        "detail": null
+      },
+      "short_selling": {
+        "enum": "banned",
+        "spec": {
+          "naked_allowed": false,
+          "uptick_rule": false,
+          "borrow_required": true,
+          "note": "裸卖空禁止。通函 120/2020/TT-BTC 第11条为「担保卖空」（secured short sale，须先经 VSDC 证券借贷系统借入证券）预留法律依据，但该机制连同证券借贷、当日交易一样，KRX 系统上线后仍未实际推出；截至 2026 年越南市场实务上不能卖空"
+        },
+        "zh": "实务上禁止。通函 120/2020/TT-BTC 第11条规定「担保卖空」须通过 VSDC 证券借贷系统借入证券、签订借贷合同，但该机制尚未在越南市场落地运行；裸卖空一律禁止",
+        "en": "Banned in practice. Article 11 of Circular 120/2020/TT-BTC provides for a \"secured short sale\" requiring securities to be borrowed via the securities lending system at VSDC under a loan contract, but this mechanism is not yet operational in the Vietnamese market; naked short selling is prohibited outright",
+        "sources": [
+          {
+            "title": "财政部通函 120/2020/TT-BTC 英译第11条（Secured short sale transaction）",
+            "url": "https://english.luatvietnam.vn/circular-no-120-2020-tt-btc-dated-december-31-2020-of-the-ministry-of-finance-on-transaction-of-listed-shares-registration-of-transactions-and-fund-196778-doc1.html",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "The Vietnam Stock Exchange 2026（the-shiv，卖空 / 证券借贷仍未推出）",
+            "url": "https://the-shiv.com/the-vietnam-stock-exchange-quick-guide/",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Securities loan transaction contracts on the securities loan and lending system at the Vietnam Securities Depository and Clearing Corporation to conduct short sale transactions must contain at least a minimum content of collateral, loan interest rates, loan term, loan extension, collateral handling when investors fail to return securities",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "detail": null
+      },
+      "block_trade": {
+        "zh": "协议交易（giao dịch thỏa thuận / put-through）：一方录入、对手方确认；HOSE 大宗（lô lớn）最低 20,000 股；成交价须在当日 ±7% / ±20% 涨跌幅内；协议交易时段 09h00–11h30 与 13h00–15h00；新上市首日、连续 25 交易日以上停牌证券在整手撮合价确立前不适用协议交易",
+        "en": "Put-through (giao dịch thỏa thuận): one side enters, the counterparty confirms; HOSE large lot (lô lớn) minimum 20,000 shares; the price must be within the day's ±7%/±20% band; put-through runs 09:00–11:30 and 13:00–15:00; not available on a newly-listed stock's first day or for securities suspended 25 or more consecutive trading days until a round-lot match price is set",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第24–27条（协议交易）+ 附录 II（协议交易时段 / 大宗单位）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Giao dịch thỏa thuận không áp dụng trong ngày giao dịch đầu tiên của cổ phiếu niêm yết, chứng chỉ quỹ ETF, chứng chỉ quỹ đóng, chứng quyền có bảo đảm niêm yết và chứng khoán bị tạm ngừng, đình chỉ giao dịch liên tiếp từ 25 ngày giao dịch cho đến khi có giá được xác lập từ kết quả của khớp lệnh lô chẵn. Giao dịch thỏa thuận ... phải tuân theo quy định về biên độ dao động giá trong ngày. Giao dịch thỏa thuận được thực hiện theo nguyên tắc bên bán hoặc bên mua nhập lệnh giao dịch vào hệ thống và bên còn lại xác nhận giao dịch thỏa thuận.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "detail": null
+      },
+      "order_book_transparency": {
+        "zh": "全展示订单簿，无非展示订单类型。连续竞价盘口向市场公开三档最优买 / 卖报价及对应数量；集合竞价期间公开预计撮合价与撮合后剩余的三档最优买 / 卖报价及数量。不支持冰山单 / 隐藏限价单。外资买单按剩余可买额度计入各价位的市场买量显示",
+        "en": "A fully-displayed order book with no non-displayed order types. In continuous trading the book publishes the three best bid/ask levels and their sizes; during an auction it publishes the indicative match price plus the three best remaining bid/ask levels and sizes post-uncrossing. Iceberg and hidden limit orders are not supported. Foreign-investor buy orders are added to the displayed market buy volume at each price up to the remaining foreign room",
+        "detail": "「三档最优」依 QĐ22 第14(5)条（引用通函 96/2020/TT-BTC 第37条）。全展示、无隐藏单类型是与欧美订单簿（NYSE 非展示单、Xetra 冰山单等）的显著差异，与 jp-jpx / hk-hkex / cn-sse 等东亚现货订单簿一致。",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第14(5)条（披露三档最优买卖报价）+ 第28(3)条（外资买单显示）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "ba mức giá chào mua, chào bán tốt nhất trong đợt khớp lệnh định kỳ theo quy định tại điểm c khoản 1 Điều 37 Thông tư số 96/2020/TT-BTC là ba mức giá chào mua, chào bán tốt nhất dự kiến còn lại sau khi khớp lệnh kèm theo khối lượng đặt mua, bán dự kiến còn lại sau khi khớp lệnh",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null
+      },
+      "dark_pool": {
+        "zh": "无。越南无与交易所并列的独立暗池 / MTF；场外只有《证券法》与登记结算通函允许的少数「系统外过户」（继承、赠与、要约收购、法院裁定等），非匿名连续交易场所",
+        "en": "None. Vietnam has no independent dark pool or MTF alongside the exchange; off-exchange transfers are limited to the few \"outside-the-system ownership transfers\" allowed by the Law on Securities and the registration/settlement circular (inheritance, gift, tender offer, court order, etc.), not an anonymous continuous trading venue",
+        "detail": "消极认定 + QĐ22 第14(1)条「上市证券在 SGDCK 交易系统交易，系统外过户仅限通函 119/2020/TT-BTC 第6(2)条列举情形」的推论。",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第14(1)条（上市证券在系统内交易，系统外过户的例外）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "quote": null
+      },
+      "market_maker_scheme": {
+        "spec": {
+          "present": true,
+          "quote_obligation": true,
+          "max_spread_pct": null,
+          "note": "做市限于备兑权证（CW）发行人对其权证、以及 ETF；做市商与 VNX 签做市合同、按合同承担双边或单边报价义务（含最大买卖价差、报价维持时长等）；做市商仅下限价单，可同时做市与自营。普通股票无做市商"
+        },
+        "zh": "有限做市商制度：交易会员经登记可对特定证券做市，主要用于备兑权证（发行人义务做市）与 ETF。做市商须诚信履行做市职能，按 VNX 规则与做市合同双边 / 单边报价，只下限价单；VNX 可对未尽责的做市商中止或终止其做市。普通上市股票无场内做市商",
+        "en": "A limited market-maker scheme: registered trading members may make markets in designated securities, mainly for covered warrants (issuer market-making obligation) and ETFs. Market makers must perform the function in good faith, quote two-way or one-way under VNX rules and the market-making contract, and place limit orders only; VNX may suspend or terminate a market maker that fails its duties. Ordinary listed shares have no on-exchange market maker",
+        "sources": [
+          {
+            "title": "财政部通函 120/2020/TT-BTC 英译第12条（Market making transactions）",
+            "url": "https://english.luatvietnam.vn/circular-no-120-2020-tt-btc-dated-december-31-2020-of-the-ministry-of-finance-on-transaction-of-listed-shares-registration-of-transactions-and-fund-196778-doc1.html",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Trading members taking part in market making shall only place limit orders for market making trading. Trading members taking part in market making can simultaneously conduct market making trading and self-trading provided that price principle must be ensured ... In case a securities number needs liquidity, market-making period, quote methods, limit of difference between the bid price and the asked price, price rate-of-change, maintenance period of quote and cases in which trading is suspended shall apply regulations of the Stock Exchange and market making contract",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "detail": null
+      },
+      "connect_schemes": {
+        "zh": "无。越南与其他市场无沪港通式互联互通；外国投资者通过在越南证券公司开立的越南盾间接投资资本账户与证券交易账户直接参与本地市场，受外资持股上限（room）实时约束",
+        "en": "None. Vietnam has no Stock-Connect-style cross-border link with other markets; foreign investors participate directly in the local market through a VND indirect-investment capital account and a securities trading account opened at a Vietnamese securities company, subject to the real-time foreign ownership limit (room)",
+        "detail": "消极认定；QĐ22 第28条只规范外资在本地系统内的交易与 room 计算，无跨境通道条款。",
+        "sources": [
+          {
+            "title": "VNX QĐ 22 第28条（外国投资者的证券交易 / room 计算）",
+            "url": "https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "quote": null
+      },
       "derivatives": {
         "trading_sessions": {
           "pre_market": null,

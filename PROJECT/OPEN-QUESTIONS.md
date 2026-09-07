@@ -159,6 +159,13 @@
 - **[OQ #45 落地（2026-09-05）] `us-nyse` 衍生品子章 7 处留空（detail 均已写明阻断，汇总下次入口）：** `matching_principle`（NYSE American 期权规则 964NYP 排序条文——手册正文本体未直抓，本次仅 Exhibit 引用级）、`tick_size`（期权 MPV 档位表条文）、`price_limits.*`（美式期权无日常涨跌停，但 [ADR-067] 判据要求的正面文本未定位，不断 type: none；相邻事实 Trading Collar 订单级保护带已记录）、`volatility_interruption`（同前）、`connect_schemes`（无穷举性条文可正面化）。
 - **工具层待修（OQ #45 执行中发现）：`tools/fetch_sources.py` 的 BLOCK_SNIFF_RE 对引用 `cdnjs.cloudflare.com`/`/cdn-cgi/` 静态资源的真实正文会误判为 Cloudflare 拦截页**，触发 wayback 回退（theocc.com 两页实锤；内容无损、快照链经盲审 CDX 核实）。修复方向：只匹配质询页特征（Attention Required/Just a moment/error code: 1020 等）而非"cloudflare"字样。
 
+- **[ADR-add-exchange-skill-forge 越南轨] `vn-hose` Phase B 留空 / 降级项，待人工或后续会话补：**
+  - `regulation.foreign_ownership_limit`（`low`，空）：外资持股上限（room）分行业比例表待从政府令 155/2020/NĐ-CP 第139条 + 245/2025/NĐ-CP 一手条文逐条核实。155 号令越南语签署版为图片型 PDF（`stream.vnx.vn/VNX//Legal/...155.signed.pdf`），OCR 进行中；SSC idcplg 只托管 245 号令（修订件）英译，未见 155 号令合并英译。**下次入口**：155 号令合并版 OCR、或 SSC 英译 155 号令 idcplg 直链、或 Baker McKenzie 跨境上市指南「Foreign ownership」专题页。
+  - `regulation.capital_controls`（`low`，空）：越南盾非完全可兑换、组合投资经越南盾间接投资资本账户（IICA）进出——具体规则待从越南国家银行（SBV）外汇管理条例 + 相关通函（如 51/2021/TT-BTC）一手核实。SBV 英文站已抓（`sbv.gov.vn/en/home`，1.5MB）但未定位到外汇制度专页。**下次入口**：SBV 英文站「Legal Documents / Foreign Exchange Management」栏目、或 IMF AREAER 越南章节。
+  - `regulation.investor_protection`（`low`，空）：越南无 SIPC 式投资者赔偿基金；《证券法》第66/67条的结算支持基金 / 清算基金属交收层面（已在第八章覆盖）。证券公司客户资产隔离、VNX 会员间纠纷调解等机制待核实。
+  - `market_structure.volatility_interruption`（`low`，已入自动清单）：「无个股级波动性中断」为消极认定——QĐ22 第五章交易条款与附录 II 时间表均无对应机制。KRX 系统后续若引入需复核。
+  - `market_structure` 全章 quote 为越南语、锚定 QĐ22 图片型 PDF 的 tesseract OCR（confidence 按越南语一手封顶 `medium`，`.cache/vn-hose/` 已放 OCR sidecar 供独立复核逐字比对）。若日后 VNX / HOSE 发布 QĐ22 的文本层 PDF 或官方英译，可整章回核升级。
+
 
 <!-- BEGIN:GENERATED auto-issues -->
 - `br-b3` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
@@ -197,5 +204,6 @@
 - `us-nasdaq` 交易成本与税费 / 隐性成本（implicit_costs_note）— confidence: low
 - `us-nyse` 基本信息 / 交易货币（trading_currency）— confidence: low
 - `us-nyse` 基本信息 / 结算货币（settlement_currency）— confidence: low
+- `vn-hose` 市场结构与交易机制 / 波动性中断（volatility_interruption）— confidence: low
 - `za-jse` 基本信息 / 结算货币（settlement_currency）— confidence: low
 <!-- END:GENERATED auto-issues -->

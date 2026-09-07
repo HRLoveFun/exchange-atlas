@@ -42,6 +42,8 @@
   - 英文站首页: https://www.sbv.gov.vn/en/home
 - `www.hsx.vn` | 官方（HOSE） | vi/en | **`www.hsx.vn` 是 React SPA，curl 仅得 1.9KB 空壳**（`<div id="HOSE">` + `main.<hash>.js`）；实质数据经 `api.hsx.vn/{a,c,i,l,m,mk,n,s}/api/v1/...` JSON 端点（端点路径需从 `main.js` 逆推，`main.js` 约 2.4MB 抓取偶超时）；文档/图片在 `staticfile.hsx.vn` | 市场统计（上市公司数 / 市值 / 参与者）、HOSE 公告
   - SPA 壳（仅确认官网域名归属，非事实来源）: https://www.hsx.vn/
+- `data.iana.org` | 官方（IANA 时区数据库，时区命名权威登记处，跨所通用——`overview.timezone` / `overview.dst_rule` 出处） | en | curl 常规 UA 200，静态纯文本 | `Asia/Ho_Chi_Minh` 的 UTC 偏移（+7）与无夏令时规则
+  - tzdb「asia」zone 文件（`Zone Asia/Ho_Chi_Minh` 行给出 +7 偏移、无夏令时 Rule）: https://data.iana.org/time-zones/tzdb/asia
 - `en.wikipedia.org` | 第三方（百科） | en | curl 常规 UA 200 | 仅用于沿革交叉印证（成立 2000-07 为交易中心、2007 升格交易所），confidence medium 且需一手复核
   - Ho Chi Minh City Stock Exchange: https://en.wikipedia.org/wiki/Ho_Chi_Minh_City_Stock_Exchange
 - `english.luatvietnam.vn` | 第三方（越南法律英文数据库 LuatVietnam） | en | curl 常规 UA 200，部分条文全文可读、部分付费墙截断 | 越南证券法规英译（框架条款交叉核对，confidence 封顶 medium）
@@ -51,3 +53,11 @@
   - Securities Law 2019 (No. 54/2019/QH14) English PDF（URL 内 `(1)` 须编码为 `%281%29`，否则 `tools/fetch.py` 的 `URL_RE` 遇 `)` 截断——见 SKILL.md 步骤2 坑2）: https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf
 - `resourcehub.bakermckenzie.com` | 第三方（Baker McKenzie 跨境上市指南） | en | curl 常规 UA 200 | HOSE 概览 / 上市要求交叉核对，confidence medium
   - Cross-Border Listings Guide — Ho Chi Minh Stock Exchange: https://resourcehub.bakermckenzie.com/en/resources/cross-border-listings-guide/asia-pacific/ho-chi-minh-stock-exchange/topics/overview-of-exchange
+- `the-shiv.com` | 第三方（东南亚商业资讯站，面向外国投资者） | en | curl 常规 UA 200 | KRX 系统上线后的交易机制改革要点、T+0 / 卖空「路线图未落地」现状——confidence 封顶 medium
+  - The Vietnam Stock Exchange 2026: Regulations, Indexes, Development: https://the-shiv.com/the-vietnam-stock-exchange-quick-guide/
+- `www.lseg.com` | 官方（伦交所集团 / FTSE Russell，市场分类决定发布方） | en | curl 常规 UA 200 | FTSE Russell 2025-09 国别分类评审——越南前沿→次级新兴升级，2026-09-21 生效
+  - FTSE Russell Country Classification September 2025（2025-10-07 发布）: https://www.lseg.com/en/media-centre/press-releases/ftse-russell/2025/ftse-russell-country-classification-september-2025
+- `vietnamnews.vn` | 第三方（越南通讯社旗下英文报，半官方） | en | curl 常规 UA 200 | KRX 系统上线 / FTSE 升级 / 市场结构性变化的报道，confidence medium
+  - FTSE Russell upgrades Việt Nam to secondary emerging market status: https://vietnamnews.vn/economy/1726818/ftse-russell-upgrades-viet-nam-to-secondary-emerging-market-status.html
+- `vietnamnet.vn` | 第三方（越南信息传媒部旗下英文报，半官方） | en | curl 常规 UA 200 | KRX 交易系统上线报道，confidence medium
+  - KRX trading system goes live, marking turning point for Vietnam's stock market: https://vietnamnet.vn/en/krx-trading-system-goes-live-marking-turning-point-for-vietnam-s-stock-market-2397688.html
