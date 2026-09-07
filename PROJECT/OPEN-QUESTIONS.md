@@ -166,6 +166,14 @@
   - `market_structure.volatility_interruption`（`low`，已入自动清单）：「无个股级波动性中断」为消极认定——QĐ22 第五章交易条款与附录 II 时间表均无对应机制。KRX 系统后续若引入需复核。
   - `market_structure` 全章 quote 为越南语、锚定 QĐ22 图片型 PDF 的 tesseract OCR（confidence 按越南语一手封顶 `medium`，`.cache/vn-hose/` 已放 OCR sidecar 供独立复核逐字比对）。若日后 VNX / HOSE 发布 QĐ22 的文本层 PDF 或官方英译，可整章回核升级。
 
+- **[ADR-add-exchange-skill-forge 越南轨] `vn-hnx` Phase C 留空 / 降级项：**
+  - `regulation.foreign_ownership_limit` / `capital_controls` / `investor_protection`：同 `vn-hose`（见上条），另加衍生品投资者资格分类（政府令 158 第16条）的逐条比例待核。
+  - `market_structure.price_limits.other_boards`（`low`）：UPCoM ±15% / 首日 ±40% 为越南市场通行值，未取得 UPCoM 专项业务规则一手条文（该规则独立于 QĐ22）。**下次入口**：VNX 法规栏目下的 UPCoM 交易业务规则 PDF（`stream.vnx.vn/VNX//Legal/`）。
+  - `market_structure.derivatives.price_limits.other_boards`（`low`）：政府债券期货涨跌幅按各合约规格，未取得。
+  - `infrastructure` 全章（`low`）：KRX 新系统向 HNX 上市股票 / UPCoM / 政府债券 / 衍生品市场的迁移进度与范围未从一手核实（衍生品市场此前运行 HNX 自建系统）；行情层级 / 收费 / 故障史未取得。**下次入口**：HNX 官方系统迁移公告、HNX 数据服务栏目。
+  - `indices` 三项（HNX-Index / HNX30 / UPCoM-Index）基日 / 基点均留空——未取得 HNX 指数方法论一手 PDF。**下次入口**：HNX 网站「INDEX > Introduction」栏目或指数方法论 PDF。
+  - `market_structure.derivatives` 与 `clearing.derivatives` 的时段 / tick / 涨跌幅 / 保证金 / 结算引自 SSI·KGI 券商托管的 VN30 期货合约规格英译 + 政府令 158 OCR（第三方 + 越南语一手 → `medium`）。**下次入口**：VNX 衍生品交易业务规则 + VSDC 衍生品清算结算业务规则（26/QĐ-HĐTV）一手 PDF。
+
 
 <!-- BEGIN:GENERATED auto-issues -->
 - `br-b3` 市场结构与交易机制 / 做空机制（short_selling）— confidence: low
