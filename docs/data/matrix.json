@@ -8056,6 +8056,36 @@
       "confidence": "medium"
     },
     {
+      "exchange_id": "vn-hose",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "exchange_fees",
+      "label_zh": "交易所费用",
+      "label_en": "Exchange Fees",
+      "zh": "HOSE 股票交易服务价格为成交额的 0.027%（公司债券 0.0054%、UPCoM 股票 0.018%），由越南交易所依财政部决定 1541/QĐ-BTC（2025-04-29）收取，买卖双向各计",
+      "en": "HOSE's trading service price for stocks is 0.027% of transaction value (corporate bonds 0.0054%, UPCoM stocks 0.018%), charged by the Vietnam Exchange under Ministry of Finance Decision No. 1541/QD-BTC (29 Apr 2025), on both the buy and sell sides",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": false,
+      "verified": "2026-09-07",
+      "confidence": "medium"
+    },
+    {
+      "exchange_id": "vn-hose",
+      "chapter": "costs",
+      "group": "costs_taxes",
+      "field_path": "stamp_duty",
+      "label_zh": "印花税",
+      "label_en": "Stamp Duty",
+      "zh": "越南对证券交易不单设印花税。个人卖出上市证券须按每次转让价格的 0.1% 缴纳个人所得税（转让税），无论该笔盈亏；依《个人所得税法》及财政部通函 111/2013/TT-BTC",
+      "en": "Vietnam has no separate securities stamp duty. An individual selling listed securities pays personal income tax (a transfer tax) at 0.1% of the transfer price on each transfer, regardless of gain or loss; under the Law on Personal Income Tax and Circular 111/2013/TT-BTC",
+      "enum": null,
+      "enum_ref": null,
+      "has_detail": false,
+      "verified": "2026-09-07",
+      "confidence": "medium"
+    },
+    {
       "exchange_id": "za-jse",
       "chapter": "overview",
       "group": "overview",

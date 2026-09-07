@@ -953,3 +953,276 @@ clearing:
         accessed: 2026-09-07
     quote: "To use payment support sources in case a member of the Vietnam Securities Depository and Clearing Corporation temporarily loses its solvency in accordance with law ... Payment assistance funds are formed from contributions of depository members for making payments on depository members' behalf in case they are temporarily insolvent to pay securities transactions."
     confidence: medium
+
+# ═══════════════════════════════════════════════
+# 九｜市场参与者
+# ═══════════════════════════════════════════════
+participants:
+  _meta:
+    verified: 2026-09-07
+    confidence: medium
+
+  investor_structure:
+    zh: ""
+    detail: "待坐实。越南股市由本地散户主导（普遍估计占日成交额 80–90%），本次未取得 HOSE / VSDC 官方投资者结构统计的可摘引数据。外资持仓受外资持股上限（room）约束。记入 OPEN-QUESTIONS。"
+    confidence: low
+
+  account_opening_requirements:
+    zh: "投资者须在作为交易会员的证券公司开立证券交易账户，并提供完整准确的客户识别信息；每名投资者在每家证券公司只能开立 1 个证券交易账户（基金管理公司、外国基金管理公司分支等有例外）。外国投资者须先经 VSDC 取得交易代码（trading code）方可开户交易"
+    en: "An investor opens a securities trading account at a securities company that is a trading member, providing complete and accurate customer-identification information; an investor may open only one securities trading account at each securities company (with exceptions for fund management companies, branches of foreign fund management companies, etc.). A foreign investor must first obtain a trading code from VSDC before opening an account and trading"
+    sources:
+      - title: "财政部通函 120/2020/TT-BTC 英译第6条（账户开立）"
+        url: https://english.luatvietnam.vn/circular-no-120-2020-tt-btc-dated-december-31-2020-of-the-ministry-of-finance-on-transaction-of-listed-shares-registration-of-transactions-and-fund-196778-doc1.html
+        accessed: 2026-09-07
+      - title: "VSDC 英文站服务列表（Allocation of trading codes for foreign investors）"
+        url: https://vsdc.vn/en/
+        accessed: 2026-09-07
+    quote: "The investor must open securities trading account at securities company which is transaction member to carry out trading in securities as prescribed in this Circular and is also responsible for providing sufficient and accurate information for customer identification during the course of opening securities trading account ... The investor is allowed to open multiple securities trading accounts according to the principle that in each securities company, an investor is only allowed to open 1 securities trading account"
+    confidence: medium
+
+  suitability_management:
+    zh: ""
+    detail: "待坐实。越南对备兑权证、衍生品等有投资者资格 / 适当性要求（衍生品交易账户须单独开立），但普通股票交易无分层适当性门槛的可摘引官方条文本次未定位。记入 OPEN-QUESTIONS。"
+    confidence: low
+
+  foreign_access_channel:
+    zh: "外国投资者经 VSDC 取得交易代码后，在越南证券公司开立越南盾间接投资资本账户（IICA）与证券交易账户，直接参与本地市场交易；不得进行融资交易（margin trading）；持股受行业别外资持股上限（room）约束，交易系统实时扣减可买余额（QĐ22 第28条）。2024 年 11 月起对外国机构投资者取消买入预缴款要求（non-prefunding，通函 68/2024/TT-BTC）"
+    en: "A foreign investor, after obtaining a trading code from VSDC, opens a VND indirect-investment capital account (IICA) and a securities trading account at a Vietnamese securities company to trade directly in the local market; may not conduct margin trading; holdings are subject to sector-specific foreign ownership limits (room), with the trading system deducting the available buy quantity in real time (QĐ22 Art 28). From November 2024 the buy-side pre-funding requirement was removed for foreign institutional investors (non-prefunding, Circular 68/2024/TT-BTC)"
+    sources:
+      - title: "VNX QĐ 22 第28条（外国投资者交易 / room 实时扣减）"
+        url: https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf
+        accessed: 2026-09-07
+      - title: "The Vietnam Stock Exchange 2026（the-shiv，2024 取消预缴款）"
+        url: https://the-shiv.com/the-vietnam-stock-exchange-quick-guide/
+        accessed: 2026-09-07
+    quote: "Khối lượng cổ phiếu, chứng chỉ quỹ đóng nhà đầu tư nước ngoài còn được phép mua được tính toán theo nguyên tắc sau: a) Đối với giao dịch khớp lệnh: - Khối lượng mua cỗ phiếu, chứng chỉ quỹ đóng của nhà đầu tư nước ngoài được trừ vào khối lượng còn được phép mua ngay sau khi lệnh mua được nhập vào hệ thống."
+    confidence: medium
+
+  membership_structure:
+    zh: "交易会员（thành viên giao dịch）须是取得 SSC 牌照并经 VNX 批准的证券公司；交易系统只接收来自交易会员的订单。清算 / 结算侧另设存托会员（证券公司 / 商业银行 / 外国银行分行，取得 SSC 存托登记证书并经 VSDC 批准）与清算会员（取得 SSC 清算业务资格证书并经 VSDC 批准，主要服务衍生品）"
+    en: "A trading member (thành viên giao dịch) must be a securities company licensed by the SSC and approved by VNX; the trading system only accepts orders from trading members. On the clearing/settlement side, VSDC has depository members (securities companies, commercial banks or foreign bank branches with an SSC depository registration certificate and VSDC approval) and clearing members (with an SSC clearing-services eligibility certificate and VSDC approval, mainly serving derivatives)"
+    sources:
+      - title: "VNX QĐ 22 第15(2)条（系统只接收交易会员订单）+ Law on Securities 英译 Art 47 / Art 56"
+        url: https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf
+        accessed: 2026-09-07
+    quote: "A depository member is a securities company, commercial bank or foreign bank branch which is granted a securities depository registration certificate by the State Securities Commission and approved by the Vietnam Securities Depository and Clearing Corporation ... A clearing member is a securities company, a commercial bank, a foreign bank branch which is granted a certificate of eligibility for clearing services"
+    confidence: medium
+
+  broker_landscape:
+    zh: ""
+    detail: "待坐实。越南有约 70–80 家证券公司（多数为交易会员），头部集中（SSI、VNDirect、VPS、HSC、VCSC、Mirae Asset 等）。本次未取得 SSC / VNX 官方持牌证券公司名录的可摘引数据。记入 OPEN-QUESTIONS。"
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 十｜市场数据与技术基础设施
+# ═══════════════════════════════════════════════
+infrastructure:
+  _meta:
+    verified: 2026-09-07
+    confidence: medium
+
+  trading_system_name:
+    zh: "KRX 交易系统——由韩国交易所（KRX）承建的新一代交易系统，2025 年 5 月 5 日在 HOSE 正式上线，取代此前沿用的旧系统；为 T+0、卖空、证券借贷、期权等未来产品提供技术基础"
+    en: "The KRX trading system — a new-generation trading system built by the Korea Exchange (KRX), which went live on HOSE on 5 May 2025, replacing the previous legacy system; it provides the technical foundation for future products such as T+0, short selling, securities lending and options"
+    detail: "项目历时约 13 年（2012 签约）。上线同时落地一批交易机制改革：ATO/ATC 不再优先于既有限价单且显示价格、订单修改的时间优先规则、MP→MTL、外资 room 即时更新等（见 market_structure）。"
+    sources:
+      - title: "KRX trading system goes live, marking turning point for Vietnam's stock market（vietnamnet，2025-05）"
+        url: https://vietnamnet.vn/en/krx-trading-system-goes-live-marking-turning-point-for-vietnam-s-stock-market-2397688.html
+        accessed: 2026-09-07
+      - title: "The Vietnam Stock Exchange 2026（the-shiv，KRX 系统改革要点）"
+        url: https://the-shiv.com/the-vietnam-stock-exchange-quick-guide/
+        accessed: 2026-09-07
+    quote: "The KRX system is a long-awaited leap forward for Vietnam's stock market, boosting transparency, bringing it more in line with international practices, and positioning the stock market to attract deeper institutional investment flows."
+    confidence: medium
+
+  market_data_levels:
+    zh: ""
+    detail: "待坐实。HOSE 通过 api.hsx.vn 发布实时行情（盘口三档、逐笔成交、指数），并向数据供应商与证券公司分发。行情层级划分、逐笔深度数据产品的官方说明本次未从一手页面取得（www.hsx.vn 为 SPA）。记入 OPEN-QUESTIONS。"
+    confidence: low
+
+  data_latency:
+    zh: ""
+    detail: "待坐实。指数为实时计算（HOSE-Index 价格指数每 5 秒），行情实时 / 延时产品划分未从一手取得。"
+    confidence: low
+
+  data_pricing_model:
+    zh: ""
+    detail: "待坐实。行情数据收费模式（订阅 / 分发许可）未从一手页面取得。"
+    confidence: low
+
+  historical_data_availability:
+    zh: ""
+    detail: "待坐实。HOSE 历史行情可经 hsx.vn 与数据供应商获取，官方历史数据产品说明本次未取得。"
+    confidence: low
+
+  access_methods:
+    zh: "交易会员经其在线交易系统与紧急订单录入通道（kênh nhập lệnh khẩn cấp）向 HOSE 交易系统报单；投资者经证券公司下单，不直连交易所。行情经 api.hsx.vn 与数据供应商分发"
+    en: "Trading members submit orders to the HOSE trading system via their online trading systems and an emergency order-entry channel (kênh nhập lệnh khẩn cấp); investors route orders through securities companies and do not connect directly to the exchange. Market data is distributed via api.hsx.vn and data vendors"
+    sources:
+      - title: "VNX QĐ 22 第15(2)条（系统只从交易会员经紧急录入通道与在线交易系统接单）"
+        url: https://stream.vnx.vn/VNX//Legal/2026031816145088VNX.Quy-che-niem-yet_QD22.pdf
+        accessed: 2026-09-07
+    quote: "Hệ thống giao dịch của SGDCK chỉ nhận lệnh từ thành viên giao dịch thông qua kênh nhập lệnh khẩn cấp và hệ thống giao dịch trực tuyến của thành viên giao dịch."
+    confidence: medium
+
+  major_outage_history:
+    zh: ""
+    detail: "待坐实。旧系统在 2018–2021 年 HOSE 成交量激增期间曾多次出现拥堵 / 过载导致盘中暂停（2021 年尤为严重，一度将部分交易迁至 HNX 系统），KRX 新系统上线正是为解决此问题；本次未取得 HOSE 官方事故说明的可摘引一手文本。记入 OPEN-QUESTIONS。"
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 十一｜交易成本与税费
+# ═══════════════════════════════════════════════
+# 交易所费用一手：财政部决定 1541/QĐ-BTC（2025-04-29，越南语签署 PDF 已 OCR）。
+# 证券转让税一手：财政部通函 111/2013/TT-BTC 英译（luatvietnam，第三方封顶 medium）。
+costs:
+  _meta:
+    verified: 2026-09-07
+    confidence: medium
+
+  commission_structure:
+    zh: ""
+    detail: "证券公司经纪佣金由证券公司与投资者按合同约定：财政部通函 128/2018/TT-BTC 取消了此前的最低佣金下限、保留法定上限（成交额的 0.5%）。头部券商在线交易佣金实务上约 0.1%–0.25%。本次未取得该通函一手条文，如实留空。"
+    confidence: low
+
+  exchange_fees:
+    spec:
+      rate: 0.027
+      rate_raw: "0,027%"
+      unit: pct
+      side: both
+      note: "HOSE 撮合股票交易的「交易服务价格」（giá dịch vụ giao dịch）0,027% 成交额（原文逗号小数，rate 为人工转写，rate_raw 存原文，见 [ADR-071]）；公司债券 0,0054%、UPCoM 股票 0,018%。由 VNX 依财政部决定 1541/QĐ-BTC 收取，买卖双向各计一次"
+    zh: "HOSE 股票交易服务价格为成交额的 0.027%（公司债券 0.0054%、UPCoM 股票 0.018%），由越南交易所依财政部决定 1541/QĐ-BTC（2025-04-29）收取，买卖双向各计"
+    en: "HOSE's trading service price for stocks is 0.027% of transaction value (corporate bonds 0.0054%, UPCoM stocks 0.018%), charged by the Vietnam Exchange under Ministry of Finance Decision No. 1541/QD-BTC (29 Apr 2025), on both the buy and sell sides"
+    sources:
+      - title: "财政部决定 1541/QĐ-BTC（2025-04-29，VNX / VSDC 证券服务价格）第3项「交易服务价格」（越南语签署 PDF，tesseract OCR）"
+        url: https://stream.vnx.vn/VNX//Legal/20250913170108484QD1541.QD.BTC.29042025.full.pdf
+        accessed: 2026-09-07
+    quote: "Giá dịch vụ giao dịch | Giá dịch vụ giao dịch thông thường | Cổ phiếu 0,027% giá trị giao dịch | Trái phiếu doanh nghiệp 0,0054% giá trị giao dịch | Cổ phiếu đăng ký giao dịch (UPCOM) 0,018% giá trị giao dịch"
+    confidence: medium
+
+  clearing_fees:
+    zh: ""
+    detail: "VSDC 就证券登记、存托、交易结算收取费用（存托费按季 / 按账户计，交易结算费按成交额计），由财政部就 VSDC 服务定价的决定规定。VSDC 费用规则栏目为 JS 壳，本次未取得现行费率表的可摘引数值，如实留空，记 OPEN-QUESTIONS。"
+    confidence: low
+
+  regulatory_fees:
+    zh: ""
+    detail: "越南对证券活动设有「证券活动管理与监督费」（phí quản lý và giám sát hoạt động chứng khoán），由财政部关于证券领域费、规费的通函规定、上市公司与市场主体缴纳。本次未取得现行费率的可摘引一手条文，如实留空，记 OPEN-QUESTIONS。"
+    confidence: low
+
+  stamp_duty:
+    spec:
+      rate: 0.1
+      unit: pct
+      side: sell
+      note: "越南不单设证券交易印花税；个人转让证券按每次转让价格缴 0.1% 个人所得税（依《个人所得税法》与通函 111/2013/TT-BTC，统一为按转让价缴、不论盈亏），本项目按 ADR-002 语义把此项证券交易环节流转税映射至 stamp_duty 字段。机构转让证券按企业所得税就转让所得征收（见 capital_gains_tax）"
+    zh: "越南对证券交易不单设印花税。个人卖出上市证券须按每次转让价格的 0.1% 缴纳个人所得税（转让税），无论该笔盈亏；依《个人所得税法》及财政部通函 111/2013/TT-BTC"
+    en: "Vietnam has no separate securities stamp duty. An individual selling listed securities pays personal income tax (a transfer tax) at 0.1% of the transfer price on each transfer, regardless of gain or loss; under the Law on Personal Income Tax and Circular 111/2013/TT-BTC"
+    sources:
+      - title: "财政部通函 111/2013/TT-BTC 英译（个人证券转让暂按转让价 0.1% 缴税）"
+        url: https://english.luatvietnam.vn/circular-no-111-2013-tt-btc-of-august-15-2013-guiding-the-law-on-personal-income-tax-the-law-amending-and-supplementing-a-number-of-articles-of-th-80846-doc1.html
+        accessed: 2026-09-07
+    quote: "Securities-transferring individuals shall temporarily pay tax at the rate of 0.1% of the securities transfer price upon each time of transfer even when the 20% tax rate is applicable. Tax calculation method: Payable personal income tax = Transfer price upon each time of transfer x Tax rate of 0.1%"
+    confidence: medium
+
+  financial_transaction_tax:
+    zh: ""
+    confidence: low
+    detail: "越南未另设独立于证券转让个人所得税（0.1%）之外的金融交易税，见 stamp_duty 字段（本项目按 ADR-002 语义把证券交易流转税记入 stamp_duty），此处如实留空避免重复。"
+
+  capital_gains_tax:
+    zh: "个人：无单独的资本利得税，卖出证券按转让价 0.1% 缴个人所得税（见 stamp_duty）。机构：证券转让所得计入应纳税所得，按 20% 企业所得税征收。外国机构投资者证券转让按转让价 0.1% 预提"
+    en: "Individuals: no separate capital gains tax — on sale, PIT is levied at 0.1% of the transfer price (see stamp_duty). Corporations: gains on securities transfer are included in taxable income and taxed at the 20% corporate income tax rate. Foreign institutional investors' securities transfers are withheld at 0.1% of the transfer price"
+    detail: "个人 0.1% 一手见 stamp_duty quote；机构 20% CIT 与外资 0.1% 预提为越南税制通例，本次未逐条摘引一手条文，confidence: medium 偏低。"
+    sources:
+      - title: "财政部通函 111/2013/TT-BTC 英译（个人证券转让 0.1%）"
+        url: https://english.luatvietnam.vn/circular-no-111-2013-tt-btc-of-august-15-2013-guiding-the-law-on-personal-income-tax-the-law-amending-and-supplementing-a-number-of-articles-of-th-80846-doc1.html
+        accessed: 2026-09-07
+    confidence: medium
+
+  dividend_withholding_tax:
+    zh: "个人取得股息（资本投资所得）按 5% 缴个人所得税（依通函 111/2013/TT-BTC，全额个人所得税率表）；以股票形式派息暂不缴税、待转让该股票时一并缴"
+    en: "Dividends received by an individual (income from capital investment) are subject to 5% personal income tax (Circular 111/2013/TT-BTC, the Whole Personal Income Tax Tariff); a stock dividend is not taxed on receipt but taxed together with the transfer when the stock is later sold"
+    sources:
+      - title: "财政部通函 111/2013/TT-BTC 英译（资本投资所得 5%）"
+        url: https://english.luatvietnam.vn/circular-no-111-2013-tt-btc-of-august-15-2013-guiding-the-law-on-personal-income-tax-the-law-amending-and-supplementing-a-number-of-articles-of-th-80846-doc1.html
+        accessed: 2026-09-07
+    quote: "income from capital investment is 5% under the Whole Personal Income Tax Tariff ... An individual is not required to pay personal income tax when receiving dividends in stocks but shall pay this tax for income from capital investment and securities transfer when transferring those stocks"
+    confidence: medium
+
+  implicit_costs_note:
+    zh: ""
+    detail: "买卖价差、市场冲击成本、限价申报的价格聚簇等隐性成本靠小额实盘测试暴露，不在本项目覆盖范围（CLAUDE.md 覆盖边界 / ADR-020 / ADR-042）。结构性停留在 low。"
+    confidence: low
+
+# ═══════════════════════════════════════════════
+# 十二｜风险与特殊考量
+# ═══════════════════════════════════════════════
+risks:
+  _meta:
+    verified: 2026-09-07
+
+  fx_risk_note:
+    zh: "越南盾（VND）实行有管理的浮动汇率制：越南国家银行（SBV）每日公布 USD/VND 中心汇率（tỷ giá trung tâm），商业银行的即期汇率须在中心汇率上下 ±5% 交易带内。越南盾非完全可自由兑换，证券组合投资的外汇进出经越南盾间接投资资本账户办理。越南盾对美元多年来渐进贬值（大体每年数个百分点）"
+    en: "The Vietnamese dong (VND) operates under a managed float: the State Bank of Vietnam (SBV) announces a daily USD/VND central rate (tỷ giá trung tâm), and commercial banks' spot rates must stay within a ±5% trading band around it. The VND is not fully convertible, and foreign-exchange flows for portfolio investment go through a VND indirect-investment capital account. The VND has depreciated gradually against the USD over the years (broadly a few per cent a year)"
+    detail: "外国投资者的汇率风险敞口来自：① 越南盾兑本币的持续小幅贬值；② 换汇进出的时点与额度受资本账户管理；③ 市场承压时 SBV 会动用外汇储备与利率工具干预。中心汇率 + ±5% 带的机制引自 VietnamPlus 转述 SBV 每日公告；具体外汇管理条例条文待从 SBV 一手核实（见 regulation.capital_controls）。"
+    volatility: stable
+    sources:
+      - title: "Central bank announces central rate for VND, USD（VietnamPlus，SBV 中心汇率机制 + 商业银行 ±5% 交易带）"
+        url: https://en.vietnamplus.vn/central-bank-announces-central-rate-for-vnd-usd-post87117.vnp
+        accessed: 2026-09-07
+    quote: "the State Bank of Vietnam (SBV) announces a central rate for the Vietnamese dong (VND) and the US dollar (USD) on a daily basis"
+    confidence: medium
+
+  political_risk_note:
+    zh: ""
+    detail: "留空（同 tw-twse / ch-six 的处置）：越南是越南共产党领导的单一制社会主义国家，政策对外资与市场化改革长期一致；本项目「政治风险作为市场因子」的口径要求有具名法条把政治风险表述为市场因子（HK/CN 意义），越南证券市场无此类专门条文。越南特有的宏观—贸易层面因素（对美贸易顺差与关税谈判、南海地缘）不属证券市场机制范畴；外资准入限制归 regulation.foreign_ownership_limit。政治体制的对外定性留公开仓库维护者裁量，代理会话不代拟（[ADR-079] 边界）。"
+    volatility: moderate
+    confidence: low
+
+  liquidity_risk_note:
+    zh: "越南股市流动性由本地散户主导（普遍估计占日成交额 80–90%），集中于大盘股与 VN30；部分蓝筹（尤以银行股）外资持股上限已用尽，外资想买也无「room」。中小盘流动性显著偏薄。FTSE Russell 于 2025-10 宣布将越南由前沿市场升级为次级新兴市场、2026-09-21 生效，预计带来被动指数配置的增量外资"
+    en: "Liquidity on Vietnam's equity market is dominated by domestic retail investors (widely estimated at 80–90% of daily turnover) and concentrated in large caps and the VN30; for some blue chips (banks especially) the foreign ownership limit is fully used, leaving no \"room\" for foreign buyers. Mid- and small-cap liquidity is markedly thinner. FTSE Russell announced in October 2025 an upgrade of Vietnam from Frontier to Secondary Emerging market, effective 21 September 2026, which is expected to bring incremental passive index inflows"
+    detail: "散户占比为第三方普遍估计（未取得 HOSE 官方投资者结构统计）；FTSE 升级时间与分类引自 FTSE Russell 官方公告。"
+    volatility: moderate
+    sources:
+      - title: "FTSE Russell Country Classification September 2025（LSEG 官方公告：越南前沿→次级新兴，2026-09-21 生效）"
+        url: https://www.lseg.com/en/media-centre/press-releases/ftse-russell/2025/ftse-russell-country-classification-september-2025
+        accessed: 2026-09-07
+      - title: "The Vietnam Stock Exchange 2026（the-shiv，散户主导 / 外资 room 约束）"
+        url: https://the-shiv.com/the-vietnam-stock-exchange-quick-guide/
+        accessed: 2026-09-07
+    quote: "Vietnam will be reclassified from Frontier to Secondary Emerging market status with an effective date of Monday 21 September 2026"
+    confidence: medium
+
+  regulatory_change_risk_note:
+    zh: "越南证券市场处于密集改革期，制度变动频繁：KRX 新交易系统 2025-05-05 上线并同步改革多项交易机制（订单类型、集合竞价优先级、外资 room 即时更新等）；2024-11 对外资机构取消买入预缴款；FTSE Russell 升级 2026-09-21 生效、MSCI 升级评估进行中；SSC 与 VSDC 拟以新通函取代登记结算通函 119/2020/TT-BTC；当日交易（T+0）、卖空、证券借贷、期权、现货中央对手方（CCP）均在路线图上但尚未落地。外国投资者须预期规则在数年内继续快速演进"
+    en: "Vietnam's securities market is in an intensive reform period with frequent regulatory change: the KRX trading system went live on 5 May 2025 alongside a set of trading-mechanism reforms (order types, auction priority, real-time foreign room, etc.); the buy-side pre-funding requirement was removed for foreign institutions in November 2024; the FTSE Russell upgrade takes effect on 21 September 2026 and an MSCI upgrade review is under way; the SSC and VSDC plan a new circular to replace registration/settlement Circular 119/2020/TT-BTC; day trading (T+0), short selling, securities lending, options and a cash-market central counterparty (CCP) are all on the roadmap but not yet deployed. Foreign investors should expect rules to keep evolving quickly over the coming years"
+    volatility: moderate
+    sources:
+      - title: "KRX trading system goes live, marking turning point for Vietnam's stock market（vietnamnet，2025-05）"
+        url: https://vietnamnet.vn/en/krx-trading-system-goes-live-marking-turning-point-for-vietnam-s-stock-market-2397688.html
+        accessed: 2026-09-07
+      - title: "The Vietnam Stock Exchange 2026（the-shiv，KRX 改革 + T+0/卖空路线图 + 新通函取代 119/2020）"
+        url: https://the-shiv.com/the-vietnam-stock-exchange-quick-guide/
+        accessed: 2026-09-07
+    quote: "With the new system, long-anticipated products such as intraday trading, short-selling, securities lending, and options contracts are expected to be rolled out soon."
+    confidence: medium
+
+  enforcement_note:
+    zh: "国家证券委员会（SSC）依《证券法》第12条（禁止行为：操纵市场、内幕交易、虚假披露等）与证券行政处罚政府令行使执法权，手段含罚款与证券交易禁入。近年重大案例：FLC 集团董事长 Trịnh Văn Quyết 因未申报即减持 7,480 万股被 SSC 罚款 15 亿越南盾，其后 2022 年被刑事逮捕、2024 年一审因诈骗与操纵市场合计判 21 年（上诉后减轻）；SSC 另曾一次性禁止 17 人证券交易 2 年（操纵股价、出借交易账户）。社交媒体「拉高出货」式操纵是越南市场反复出现的监管关切"
+    en: "The State Securities Commission (SSC) enforces the Law on Securities (Article 12 prohibited acts — market manipulation, insider dealing, false disclosure, etc.) and the securities administrative-penalty decree, using fines and securities-trading bans. Recent major cases: FLC Group chairman Trịnh Văn Quyết was fined VND 1.5 billion by the SSC for selling 74.8 million shares without prior reporting, then criminally arrested in 2022 and, at first instance in 2024, sentenced to a combined 21 years for fraud and market manipulation (reduced on appeal); the SSC has also banned 17 individuals from securities trading for 2 years for share manipulation and lending trading accounts. Social-media-driven \"pump and dump\" manipulation is a recurring supervisory concern in Vietnam"
+    volatility: moderate
+    sources:
+      - title: "Former FLC Chairman Trinh Van Quyet sentenced to 21 years in prison（VietnamPlus，SSC 行政处罚 + 刑事量刑）"
+        url: https://en.vietnamplus.vn/former-flc-chairman-trinh-van-quyet-sentenced-to-21-years-in-prison-post291386.vnp
+        accessed: 2026-09-07
+      - title: "Vietnam bans 17 individuals from securities trading for 2 years over stock manipulation（The Investor）"
+        url: https://theinvestor.vn/vietnam-bans-17-individuals-from-securities-trading-for-2-years-over-stock-manipulation-d18403.html
+        accessed: 2026-09-07
+      - title: "Law on Securities No. 54/2019/QH14 英译（Art 12 禁止行为）"
+        url: https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf
+        accessed: 2026-09-07
+    quote: "the State Securities Commission, Vietnam's stock market watchdog, has banned 17 individuals from trading securities for two years for manipulating shares and lending trading accounts to facilitate the misconduct"
+    confidence: medium
