@@ -1010,16 +1010,226 @@
       "items": []
     },
     "clearing": {
-      "settlement_cycle": null,
-      "ccp_name": null,
-      "csd_name": null,
-      "guarantee_model": null,
-      "initial_margin_practice": null,
-      "maintenance_margin_practice": null,
-      "mark_to_market_frequency": null,
-      "delivery_method": null,
-      "last_trading_day_rule": null,
-      "default_management": null,
+      "settlement_cycle": {
+        "enum": "t2",
+        "zh": "股票、基金份额、备兑权证 T+2；上市公司债券 T+1；债务工具逐笔 T+1；私募债券逐笔 T+0",
+        "en": "T+2 for stocks, fund certificates and secured warrants; T+1 for listed corporate bonds; T+1 for debt instruments (transaction-by-transaction); T+0 for privately-placed bonds",
+        "detail": "2022 年 8 月起 T+2 的资金 / 证券到账时间从午后提前至上午（结算时间提前，非周期缩短）；2024 年 11 月起对外国机构投资者取消预缴款要求（non-prefunding，Circular 68/2024/TT-BTC），是 FTSE Russell 升级的关键改革之一。",
+        "sources": [
+          {
+            "title": "VSDC 英文站「Clearing and Settlement」服务页（结算时间）",
+            "url": "https://vsdc.vn/en/sd/XAz40d2Q-9j569TvBgLQaQ",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Settlement is carried out according to the results of multilateral clearing with a settlement time of T+1 for listed corporate bond transactions and T+2 for stock, fund certificate, and secured warrant transactions.",
+        "confidence": "high",
+        "verified": "2026-09-07",
+        "spec": null
+      },
+      "ccp_name": {
+        "zh": "越南证券存托与清算总公司（VSDC，Vietnam Securities Depository and Clearing Corporation）——现货市场执行多边净额清算但无更替（novation）；VSDC 同时是越南衍生品市场的中央对手方",
+        "en": "Vietnam Securities Depository and Clearing Corporation (VSDC) — performs multilateral netting for the cash market but without novation; VSDC is also the central counterparty for Vietnam's derivatives market",
+        "detail": "依 Circular 120/2020/TT-BTC 第6条，现货证券清算结算在「尚未按中央对手方（CCP）机制实施」期间，投资者经账户交易与交收、无需清算保证金账户——即现货市场目前不走 CCP 更替。向现货 CCP 过渡是 KRX 系统 / FTSE 升级配套改革的方向（拟以新通函取代 Circular 119/2020）。衍生品市场 VSDC 依《证券法》第55–56条作 CCP，设清算会员、清算基金与保证金（见 clearing.derivatives，主要属 HNX 衍生品市场）。",
+        "sources": [
+          {
+            "title": "财政部通函 120/2020/TT-BTC 英译第6条（CCP 机制实施前后的账户安排）",
+            "url": "https://english.luatvietnam.vn/circular-no-120-2020-tt-btc-dated-december-31-2020-of-the-ministry-of-finance-on-transaction-of-listed-shares-registration-of-transactions-and-fund-196778-doc1.html",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "During the time the securities clearing and settlement has not been implemented under the central clearing partner mechanism, the investor shall carry out securities transactions, and make payment for securities transactions via their account and securities depository accounts without having to open clearing margin accounts.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null
+      },
+      "csd_name": {
+        "zh": "越南证券存托与清算总公司（VSDC）——上市证券必须集中登记与集中存托于 VSDC，方可交易；VSDC 依总理决定 26/2022/QĐ-TTg（2022-12-16）在原越南证券存托中心（VSD）基础上改制设立",
+        "en": "Vietnam Securities Depository and Clearing Corporation (VSDC) — listed securities must be centrally registered and centrally deposited at VSDC before trading; VSDC was established by PM Decision No. 26/2022/QD-TTg (16 Dec 2022) on the basis of transforming the former Vietnam Securities Depository (VSD)",
+        "detail": "沿革：总理 189/2005/QĐ-TTg（2005-07-27，VSD 职能）→ 171/2008/QĐ-TTg（2008-12-18，VSD 设立为国有一人有限责任公司）→ 26/2022/QĐ-TTg（2022-12-16，改制为 VSDC）。",
+        "sources": [
+          {
+            "title": "VSDC 英文站「History」页（189/2005、171/2008、26/2022/QĐ-TTg）",
+            "url": "https://vsdc.vn/en/ads/qAvcirUlO9cfJnF4OqtNOg",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "Law on Securities No. 54/2019/QH14 英译（Art 61–62：集中登记与集中存托）",
+            "url": "https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Securities of public companies and securities of other organizations listed and registered for trading on the securities trading system must be deposited in a concentrated manner at the Vietnam Securities Depository and Clearing Corporation before being traded",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null
+      },
+      "guarantee_model": {
+        "enum": "lines_of_defence",
+        "zh": "现货市场为多层结算保障防线、无中央对手方更替：交收违约时先动用违约会员自有资源与投资者担保品，再动用「结算支持基金」（由存托会员按财政部规定缴纳、由 VSDC 单独管理），并可动用 VSDC 依法可动用的支付支持来源；具体处置程序载于 VSDC《证券交易清算结算业务规则》（39/QĐ-HĐTV，2025-04-29）。衍生品市场另设由清算会员出资的「清算基金」与保证金制度，VSDC 充当 CCP",
+        "en": "The cash market runs on multiple lines of defence with no central-counterparty novation: on a settlement default, the defaulting member's own resources and investors' collateral are used first, then the \"payment assistance fund\" (contributed by depository members per Ministry of Finance rules, managed separately by VSDC), and VSDC's lawful payment-support sources; the detailed procedure is set out in VSDC's Regulations on clearing and settling securities transactions (Decision No. 39/QD-HDTV, 29 Apr 2025). The derivatives market separately maintains a \"clearing fund\" funded by clearing members plus a margin regime, with VSDC acting as CCP",
+        "detail": "定级：quote 里未逐字出现 central counterparty / novation 描述现货市场（反而 Circular 120 第6条明说 CCP 机制尚未实施），依《证券法》第66条结算支持基金 + Circular 120 第6条判为 lines_of_defence，confidence: medium。",
+        "sources": [
+          {
+            "title": "Law on Securities No. 54/2019/QH14 英译（Art 66 payment assistance funds / Art 67 clearing funds）",
+            "url": "https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "VSDC 英文站「Clearing and Settlement」服务页（规则出处 Decision 39/QĐ-HĐTV）",
+            "url": "https://vsdc.vn/en/sd/XAz40d2Q-9j569TvBgLQaQ",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "Payment assistance funds are formed from contributions of depository members for making payments on depository members' behalf in case they are temporarily insolvent to pay securities transactions. Payment assistance funds are managed by the Vietnam Securities Depository and Clearing Corporation separately from its assets.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "spec": null
+      },
+      "initial_margin_practice": {
+        "zh": "现货市场无 CCP 层面的初始保证金（Circular 120 第6条：CCP 机制实施前投资者无需开立清算保证金账户）。交易端的信用交易（融资买入 margin trading）由证券公司按与投资者的合同收取初始与维持保证金——初始保证金比例、追保时限、平仓处置由合同约定、SSC 制定指引；外国投资者不得进行融资交易",
+        "en": "The cash market has no CCP-level initial margin (Circular 120 Art 6: before the CCP mechanism is implemented, investors need not open a clearing margin account). On the trading side, margin trading (buying on margin) is run by securities companies under contract with investors, who set the initial and maintenance margin — margin ratios, top-up deadlines and forced-sale handling are set by contract with SSC guidance; foreign investors may not conduct margin trading",
+        "sources": [
+          {
+            "title": "财政部通函 120/2020/TT-BTC 英译第9条（Margin trading）+ 第6条",
+            "url": "https://english.luatvietnam.vn/circular-no-120-2020-tt-btc-dated-december-31-2020-of-the-ministry-of-finance-on-transaction-of-listed-shares-registration-of-transactions-and-fund-196778-doc1.html",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "The investor is obliged to ensure initial margin rate, margin rate maintenance in accordance with the contract signed with securities company. When the margin ratio on the investor's margin trading account falls below the maintenance margin rate, the securities company shall issue an additional margin order. ... Foreign investor is not allowed to conduct margin trading.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "detail": null
+      },
+      "maintenance_margin_practice": {
+        "zh": "见 initial_margin_practice——融资交易的维持保证金比例由证券公司与投资者的合同约定，低于维持比例即触发追加保证金指令，未补足证券公司有权按合同处置担保证券",
+        "en": "See initial_margin_practice — the maintenance margin ratio for margin trading is set by contract between the securities company and the investor; falling below it triggers an additional-margin order, and on failure to top up the securities company may dispose of the collateral securities per the contract",
+        "sources": [
+          {
+            "title": "财政部通函 120/2020/TT-BTC 英译第9(6)条（维持保证金与追保 / 处置）",
+            "url": "https://english.luatvietnam.vn/circular-no-120-2020-tt-btc-dated-december-31-2020-of-the-ministry-of-finance-on-transaction-of-listed-shares-registration-of-transactions-and-fund-196778-doc1.html",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "When the margin ratio on the investor's margin trading account falls below the maintenance margin rate, the securities company shall issue an additional margin order. ... In case the investor fails to make the additional margin, securities company is entitled to sell collateral securities according to provisions stated in the contract for opening margin trading account.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "detail": null
+      },
+      "mark_to_market_frequency": {
+        "zh": "现货市场无 CCP 盯市概念（无 CCP 更替、无清算保证金账户）。衍生品市场每日盯市（见 clearing.derivatives，属 HNX 衍生品市场）",
+        "en": "The cash market has no CCP mark-to-market concept (no novation, no clearing margin account). The derivatives market is marked to market daily (see clearing.derivatives, which is the HNX derivatives market)",
+        "detail": "现货语境不适用——照 taxonomy 说明如实留短说明。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "VSDC 英文站「Clearing and Settlement」服务页（现货多边净额、T+2 / T+1 / T+0 结算时间、结算银行分工、DVP）",
+            "url": "https://vsdc.vn/en/sd/XAz40d2Q-9j569TvBgLQaQ",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "Law on Securities No. 54/2019/QH14 英译（Art 61–69：证券登记、存托、清算与结算）",
+            "url": "https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "quote": null
+      },
+      "delivery_method": {
+        "enum": "na",
+        "zh": "现货市场：买卖双方经 VSDC 存托账户体系簿记过户交收证券，结算银行按 VSDC 指令通过存托会员在结算银行的存款账户体系付款，证券过户与资金支付同步（DVP）。BIDV 为股票 / ETF / 权证等一般现货证券的结算银行，越南国家银行营业部为债务工具、越南外贸银行（VCB）为私募债券的结算银行",
+        "en": "Cash market: securities are settled by book-entry transfer via VSDC's depository account system, with the settlement bank paying per VSDC's instructions through depository members' deposit accounts at the settlement bank, and securities transfer occurring simultaneously with cash payment (DVP). BIDV is the settlement bank for stocks/ETFs/warrants and other general underlying securities; the State Bank of Vietnam's Exchange for debt instruments and Vietcombank (VCB) for privately-placed bonds",
+        "sources": [
+          {
+            "title": "VSDC 英文站「Clearing and Settlement」服务页（结算原则、结算银行分工、DVP）",
+            "url": "https://vsdc.vn/en/sd/XAz40d2Q-9j569TvBgLQaQ",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "The State Bank of Vietnam's Exchange is the settlement bank for debt instrument transactions; VCB Bank is the clearing bank for private placement transactions; BIDV Bank is the clearing bank for the remaining underlying securities. ... the buyer is guaranteed to receive the securities upon payment, and the seller is guaranteed to receive the money upon transfer of securities.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "spec": null,
+        "detail": null
+      },
+      "last_trading_day_rule": {
+        "zh": "现货市场无「最后交易日」概念（无到期证券）。衍生品市场的最后交易日 / 最后结算日规则见 clearing.derivatives（属 HNX 衍生品市场）",
+        "en": "The cash market has no \"last trading day\" concept (no expiring securities). Last-trading-day / last-settlement-day rules for the derivatives market are in clearing.derivatives (the HNX derivatives market)",
+        "detail": "现货语境不适用——照 taxonomy 说明如实留短说明。",
+        "confidence": "medium",
+        "sources": [
+          {
+            "title": "VSDC 英文站「Clearing and Settlement」服务页（现货多边净额、T+2 / T+1 / T+0 结算时间、结算银行分工、DVP）",
+            "url": "https://vsdc.vn/en/sd/XAz40d2Q-9j569TvBgLQaQ",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "Law on Securities No. 54/2019/QH14 英译（Art 61–69：证券登记、存托、清算与结算）",
+            "url": "https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "verified": "2026-09-07",
+        "enum": null,
+        "spec": null,
+        "quote": null
+      },
+      "default_management": {
+        "spec": {
+          "model": "lines_of_defence",
+          "layers": [
+            {
+              "order": 1,
+              "resource": "违约会员自有资源 + 投资者担保品 / 保证金",
+              "bearer": "defaulter"
+            },
+            {
+              "order": 2,
+              "resource": "结算支持基金（存托会员按财政部规定缴纳，VSDC 单独管理）",
+              "bearer": "surviving_members"
+            },
+            {
+              "order": 3,
+              "resource": "VSDC 依法可动用的支付支持来源",
+              "bearer": "ccp"
+            },
+            {
+              "order": 4,
+              "resource": "财政部就 VSDC 会员暂时丧失清偿能力规定的处置措施",
+              "bearer": "external"
+            }
+          ],
+          "note": "现货市场——无中央对手方更替；层级依《证券法》结算支持基金与 VSDC 支付支持来源条款 + Circular 120 现货 CCP 机制未实施条款整理，逐层绝对额不披露。详细处置程序载于 VSDC《证券交易清算结算业务规则》，本次未取全文。衍生品市场另有清算基金 + 保证金的 CCP 违约瀑布（属 HNX 衍生品市场）"
+        },
+        "zh": "现货交收违约处置为多层防线（无 CCP 更替）：① 违约会员自有资源与投资者担保品；② 结算支持基金（存托会员缴纳）；③ VSDC 依法可动用的支付支持来源；④ 财政部规定的处置措施。绝对额不披露",
+        "en": "Cash-market settlement default is handled through layered defences (no CCP novation): (1) the defaulting member's own resources and investors' collateral; (2) the payment assistance fund (depository member contributions); (3) VSDC's lawful payment-support sources; (4) handling measures prescribed by the Ministry of Finance. Absolute amounts are not disclosed",
+        "sources": [
+          {
+            "title": "Law on Securities No. 54/2019/QH14 英译（Art 55(1)(e) / 63(3) / 66）",
+            "url": "https://www.economica.vn/Content/files/LAW%20%26%20REG/Securities%20Law%202019%20ENG%281%29.pdf",
+            "accessed": "2026-09-07"
+          },
+          {
+            "title": "财政部通函 120/2020/TT-BTC 英译第6条（现货尚未实施 CCP 机制）",
+            "url": "https://english.luatvietnam.vn/circular-no-120-2020-tt-btc-dated-december-31-2020-of-the-ministry-of-finance-on-transaction-of-listed-shares-registration-of-transactions-and-fund-196778-doc1.html",
+            "accessed": "2026-09-07"
+          }
+        ],
+        "quote": "To use payment support sources in case a member of the Vietnam Securities Depository and Clearing Corporation temporarily loses its solvency in accordance with law ... Payment assistance funds are formed from contributions of depository members for making payments on depository members' behalf in case they are temporarily insolvent to pay securities transactions.",
+        "confidence": "medium",
+        "verified": "2026-09-07",
+        "enum": null,
+        "detail": null
+      },
       "derivatives": {
         "initial_margin_practice": null,
         "maintenance_margin_practice": null,

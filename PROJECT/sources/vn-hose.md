@@ -35,9 +35,10 @@
 - `ssc.gov.vn` | 官方（越南国家证券委员会 SSC，隶属财政部；亦托管财政部证券法规英译） | vi/en（英译带官方免责「not official / for reference only」→ confidence 封顶 medium） | portal 页（`/webcenter/portal/...`）为 Oracle WebCenter JS 壳、curl 仅得 ~6.7KB "requires JavaScript"；**文档下载走 `idcplg?IdcService=GET_FILE&dDocName=<id>&dID=<id>&filename=<name>` 直链**，可 curl，均 `application/pdf` | 证券法规英文译本 + SSC 机构信息
   - 通函 99/2020/TT-BTC 英译全文（证券公司业务活动指引；participants / 做市 / 自营出处）: https://ssc.gov.vn/cs/idcplg?IdcService=GET_FILE&allowInterrupt=1&dDocName=APPSSCGOVVN1620129765&dID=130632&filename=Thong+tu+99+Tieng+Anh+%28Full+15.5.2023%29.pdf
   - 政府令 245/2025/NĐ-CP 英译（修订政府令 155/2020/NĐ-CP，含外资持股与公开发行的最新调整）: https://ssc.gov.vn/cs/idcplg?IdcService=GET_FILE&allowInterrupt=1&dID=166306&dDocName=APPSSCGOVVN1620159819&filename=Eng+-+Decree+245+amending+Decree+155+in+English+translation+final.pdf
-- `vsdc.vn` | 官方（越南证券存托与清算总公司 Vietnam Securities Depository and Clearing Corporation，2023-08 由 VSD 改制；股票 CSD + 结算、衍生品市场 CCP） | vi | curl 常规 UA 200，首页 ~115KB、`/vi/gioi-thieu-chung` 等简介页部分服务端渲染可 grep；业务规则栏目多为前端渲染，需定位具体 PDF | 第八章清算结算 / guarantee_model / default_management 一手（结算周期 T+2、结算支持基金、衍生品 CCP 违约瀑布）
-  - 首页: https://vsdc.vn/vi/
-  - 简介（Giới thiệu chung——机构定位、职能）: https://vsdc.vn/vi/gioi-thieu-chung
+- `vsdc.vn` | 官方（越南证券存托与清算总公司 Vietnam Securities Depository and Clearing Corporation，2023-08 依总理决定由 VSD 改制；现货 CSD + 多边净额结算、衍生品市场 CCP） | en/vi | curl 常规 UA 200；**`/en/` 英文站服务页服务端渲染、正文可 grep**（`ABOUT VSDC` / `SERVICES` 菜单为 JS，但文章页 `/en/sd/<id>`、`/en/ads/<id>` 正文完整）；主站菜单页 JS 壳 | 第八章清算结算 / guarantee_model / default_management 一手（结算周期 T+2 股票·T+1 债券、结算银行 BIDV、结算支持基金）
+  - 英文站首页: https://vsdc.vn/en/
+  - Clearing and Settlement（清算结算服务页——净额机制、T+2 / T+1 / T+0 结算时间、结算银行分工 BIDV / VCB / SBV Exchange、DVP 原则）: https://vsdc.vn/en/sd/XAz40d2Q-9j569TvBgLQaQ
+  - History（VSDC 沿革——依总理 189/2005/QĐ-TTg 设立 VSD，2023 改制 VSDC）: https://vsdc.vn/en/ads/qAvcirUlO9cfJnF4OqtNOg
 - `www.sbv.gov.vn` | 官方（越南国家银行 SBV，越南盾汇率制度与外汇管理主体） | en/vi | curl 常规 UA 200，英文站 `/en/` 服务端渲染（首页 ~1.5MB）| 第十二章 fx_risk_note 一手（越南盾管理浮动、中心汇率机制、资本项目外汇管理）
   - 英文站首页: https://www.sbv.gov.vn/en/home
 - `www.hsx.vn` | 官方（HOSE） | vi/en | **`www.hsx.vn` 是 React SPA，curl 仅得 1.9KB 空壳**（`<div id="HOSE">` + `main.<hash>.js`）；实质数据经 `api.hsx.vn/{a,c,i,l,m,mk,n,s}/api/v1/...` JSON 端点（端点路径需从 `main.js` 逆推，`main.js` 约 2.4MB 抓取偶超时）；文档/图片在 `staticfile.hsx.vn` | 市场统计（上市公司数 / 市值 / 参与者）、HOSE 公告
