@@ -2968,6 +2968,15 @@ print('全库 medium 零 sources:',n)
   逐所自检清单 + v1.1 后新增关卡清单 / 步骤 7 的独立视角复核（新增一整所必做）。
 - `make check` 全绿（22 家）、`verify_quotes` FAIL=0；`tools/sync.py` 加两所进 `EXCHANGE_IANA_TZ`
   （`Asia/Ho_Chi_Minh`，时区甘特条）；剖面 / 画布 spec 结构自检通过。
-- **未打勾项**：一整所 spec 层触及 > 30 字段，按 [CLAUDE.md §四] / [ADR-081]，ROADMAP 条目打勾
-  前必须过独立视角复核（≥95%，非 fork 的全新 agent 会话或人）——**本条截至提交尚未完成**，
-  ROADMAP §三 该条目暂标「数据 + skill 落地，待独立复核」。
+- **独立视角复核（2026-09-07，全新未共享上下文 general-purpose agent 会话，非 fork）**：
+  初审——机器核全过、**spec 层 [ADR-054] 6 维度约 70 字段 100% 通过**（越南语一手 QĐ22 /
+  政府令 155·158 / 决定 1541 / 《证券法》/ VSDC 的 quote 逐字反查全部命中），但 `risks` 章
+  4 处英文第三方/新闻来源 FIX（fx_risk_note 的 ±5% 与所引早期文的 ±3% 冲突；enforcement_note
+  的 FLC 具体数字误 attribute；regulatory_change / HNX intraday_reversal 的 quote 是 WebSearch
+  AI 摘要、来源里没有）——通过率 92.6%/92.7% < 95% → FAIL。**FIX 逐条修复**（换一手源 +
+  quote 逐字替换，未改机制判断，提交 `5db4977`）。复审——4 处全部逐字复核通过、无新 FIX、
+  复合引用每段各归其源，**两所 100% → 整体 PASS**。QUESTION（记 OPEN-QUESTIONS）：exchange_fees
+  side 无方向措辞 / tick ladder 50,000 边界 / volatility_interruption 消极认定 / 全库既有的
+  `[ADR-002]` 税费映射误引（vn 两所已改为「与 cn-sse/tw-twse/za-jse 同构处理」）。
+- **收官**：PR #121 转正式合并；ROADMAP §三该条目 `[x]`。skill 十一章步骤已在 v2.0 契约下
+  真跑一遍并逐点回写，[ADR-017] 冷启动子代理模式在 v2.0 契约下重新成立的前提达成。

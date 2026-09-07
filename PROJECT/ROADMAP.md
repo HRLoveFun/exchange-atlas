@@ -20,15 +20,15 @@
 
 北极星（[ADR-057]）**已达成**：7 个可视化模块（监管图 / 参与者图 / 市场机制剖面 / 成本瀑布 / 交割管线 / 上市生命周期 / 风险旗标）合并为同一页整宽纵向滚动画布，矩阵 / 时区 / 健康度进「更多」二级横条，档案页经矩阵行链接进入。Phase 4 棒 1–5 于 2026-09-06 全部落地（[ADR-phase4-canvas-layout] / [ADR-phase4-canvas-polish]），同日经独立视角审查收口（[ADR-phase4-closeout]，无阻断项）。**v2.0 高度可视化转向（Phase 0–4）至此收官**；后续为常态迭代（§一「下一步」）。
 
-### 当前重点：用实际新增交易所迭代 add-exchange skill（[ADR-add-exchange-skill-forge]）
+### 当前重点：无活跃 Phase / 轨
 
-v2.0 收官后无活跃 Phase。当前开发重点：**通过真实走一遍完整新增，把 `add-exchange` skill 迭代成与 v2.0 契约对齐的通用 skill**——skill 上次定型于 v1.1（[ADR-032] 时代），此后 `spec` 结构化层 / [ADR-042] 第五章三字段 / 六个可视化模块的 `spec` 与 `*_note` 需求 / 市场机制剖面与单页画布的逐所自检都没进过它的十一章步骤，脱节是静默的。候选池：**越南市场**（HOSE 胡志明证交所为主，HNX 河内证交所视 `group_id` / [ADR-036] #1 压测需要一并）。此轨是 [ADR-041]「agent 不主动规划 / 提议新增」的显式例外，迭代轨之外的随口新增仍需用户触发。详版见 §三「广度扩张」。
+v2.0 高度可视化转向（Phase 0–4）与 add-exchange skill v2.0 对齐轨（越南 `vn-hose` + `vn-hnx` 入库，[ADR-add-exchange-skill-forge]，PR #121）均已收官。当前为常态迭代：画布迭代 / 已做齐模块的视觉遗留 / 数据遗留项（见「下一步」），无排期 Phase；新增交易所回到 [ADR-041] 的「按需可选能力」。
 
 ### 下一步
 
 *（3–5 条优先级判断，不编号；详版与「刚落地什么」都在 §三 / `git log`）*
 
-- **越南轨独立视角复核**（[ADR-add-exchange-skill-forge]，当前重点的收尾）— `vn-hose` + `vn-hnx` 数据与 skill v2.0 对齐已落地（`make check` 全绿 22 家、`verify_quotes` FAIL=0），但一整所 spec > 30 字段，按 [CLAUDE.md §四] / [ADR-081] 须过**全新未共享上下文视角**（人或非 fork 的 agent 会话）抽检 ≥95% 才能给 §三 该条目打 `[x]`：两所各抽 ≥10 字段 quote↔出处 + 全部 spec 按 [ADR-054] 6 维度，母语 + OCR 的字段据 `.cache/<id>/*.txt` sidecar 逐字核。详版见 §三「广度扩张」。
+- **广度扩张轨回到 ② 按需新增（[ADR-041]，无进度框）** — `vn-hose` + `vn-hnx` 入库 + `add-exchange` skill v2.0 对齐已于 2026-09-07 收官（PR #121，[ADR-add-exchange-skill-forge]「执行进度」段）：skill 十一章步骤已在 v2.0 契约下真跑一遍并逐点回写，冷启动子代理可靠执行的前提达成。此后新增交易所回到「按需可选能力」——agent 不主动提议 / 规划 / 启动，仅用户触发时走 `/add-exchange`。
 - **画布常态迭代**（交互式会话，Phase 4 已收口 [ADR-phase4-closeout]，以下均非阻断）— ① **窄视口回归护栏**：棒 5 Playwright 巡检仅 1440 单宽，加「`.td-plot-wrap` `scrollWidth > clientWidth` @ 窄宽」断言（审查已实测窄视口横滚可用，缺的是护栏）；② 画布内「跳到某模块」目录 / 侧边导航（[ADR-phase4-canvas-layout]「没做」段，纵向长图先靠滚动 + section 锚点）；③ 移动端专属布局优化（纵向长图天然单列，超出「无回归」的优化）。
 - **已做齐模块的视觉迭代**（交互式会话，与上并行）— 棒 5 已收口：成本瀑布（全零合计 / 暗色不征虚线）、交割管线（深色预防层）、风险旗标（low 色条）、上市生命周期中英混排（[ADR-093]）；诚实呈现不改几何的三项（T+1 右半留白 / 单一费种镜像留白 / 按股定额折算）理由已记 ADR。**仍挂**：成本瀑布左半留白的进一步方案已关闭但可复议；违约瀑布 `resource` 短语 en（[ADR-051] 触发条件：数据窗口回填约 70 短语）、模块说明段 `[ADR-xxx]` 裸链接（[ADR-072]）、监管图 / 参与者图长散文卡内硬裁剪 + `<title>` / 浮层（[ADR-035] D 设计内）。
 - **数据遗留项**（横切，与上并行，非 Phase 4 前置）— `kr-krx` 7 处 low 待人工投喂（`order_book_transparency` 已由 KRX 규정 포털韩文一手坐实升 medium）、`kr-krx exchange_fees` 当期档位（KRX 收费表载于《업무규정》别表、未上 HTML，규정 포털排查未果，[ADR-kr-krx-legacy-closeout]）、`us` Section 31 FY2027 公告（2026-09-06 复核仍未发布，FY2027 目前仅 Section 6(b) 注册费公告，预计 2027 年初出）、`fr-euronext stamp_duty`（一所七国，`rate: null` 是正确终态）、上市生命周期 `cn-szse` 整理期 15 交易日仍待含阿拉伯数字一手源（中文 2026 版与创业板英译 2022 版均已取得、条文均拼「十五 / fifteen trading days」，仅主板英译 2024 版未核——www/english 主站子域 TCP 不通、wayback 无快照，待人工下载）/ `kr-krx` 整理卖出 7 交易日已由 FSC 新闻稿坐实（[ADR-091] 个位数转写口径）。数据空缺复核轨任务一～六 + stable 档来源闭环（[ADR-094]）均已完成，详版见 §三。
@@ -300,18 +300,18 @@ v2.0 收官后无活跃 Phase。当前开发重点：**通过真实走一遍完�
   - **验收**：`make build` 全绿、`make sync` 幂等；哈希锁在干净 venv 通过 `--require-hashes` 安装。端到端红/绿待真实 PR 验证。**审查里未做、留后续**（关 Actions approve-PR 权限 / actions 钉 SHA / commit signing / 宪法加「抓取内容 = 不可信输入」条 / 收紧 auto-merge 对数值字段 PR）见 ADR「未做」段。
   - **分支 `origin/0001`**：经用户确认是永久保存的快照（指向 `2e1ba34`），已加归档标记 + `GIT-RUNBOOK.md` 不删例外条。
 
-### 广度扩张（新增交易所）——① skill 迭代轨（活跃）+ ② 按需新增（可选能力）
+### 广度扩张（新增交易所）——① skill 迭代轨（2026-09-07 收官）+ ② 按需新增（可选能力）
 
-两条并存。①（[ADR-add-exchange-skill-forge]）是当前重点、带进度框；②（[ADR-041]）不排进 Phase 序列、无"解冻条件"、不带进度框。
+①（[ADR-add-exchange-skill-forge]）已收官，此后回到 ②（[ADR-041]）：新增交易所是按需可选能力，不排进 Phase 序列、无"解冻条件"、不带进度框。
 
-#### ① skill 迭代轨（活跃，[ADR-add-exchange-skill-forge]）
+#### ① skill 迭代轨（2026-09-07 收官，[ADR-add-exchange-skill-forge]）
 
-用实际新增把 `add-exchange` skill 迭代成 v2.0 对齐的通用 skill——skill 上次定型于 v1.1（[ADR-032]），此后 `spec` 层与六个可视化模块的需求 / 剖面 / 单页画布自检都没进过它的步骤，且脱节是静默的。
+用实际新增把 `add-exchange` skill 迭代成 v2.0 对齐的通用 skill——skill 上次定型于 v1.1（[ADR-032]），此后 `spec` 层与六个可视化模块的需求 / 剖面 / 单页画布自检都没进过它的步骤，且脱节是静默的。**已通过实际新增越南市场（`vn-hose` + `vn-hnx`）跑通并收口。**
 
-- [~] **越南市场新增 + skill 迭代**（数据 + skill 落地 2026-09-07，待独立视角复核后打 `[x]`；[ADR-add-exchange-skill-forge]「执行进度」段）
-  - **已落地**：`vn-hose`（11 章全填、72 字段）+ `vn-hnx`（全量含衍生品市场、99 字段）入库；`make check` 全绿（22 家）、`verify_quotes` FAIL=0；`tools/sync.py` 两所进 `EXCHANGE_IANA_TZ`。`group_id` 压测结论——VNX 单国控股、两独立法人、规则集完全不交叉，`group_id` + `boards` 各记各的设计够用，**不触发 `federation_of` / `rule_level`**。confidence 结构性偏低（越南语一手 + OCR + 官方英译「unofficial」，两所 progress-matrix 均 ch2/4/7/8 ✅ 其余 🟡，是「母语第三语言 + 官方英文薄」市场的正确终态）。
-  - **skill 落地**：`.claude/skills/add-exchange/SKILL.md` 删「⚠️ 待 v2.0 对齐」框，就地补 12 条摩擦点（source_lang 母语第三语言 / SPA→母公司法规登记栏目 / 扫描件自助 OCR / 条款号不进 spec.note / 附录量化表 / 「法规写了但未落地」/ 步骤 4.12 监管图·参与者图·风险旗标数据形状 + 校验 20 / 步骤 5 单页画布 7 模块自检清单 + v1.1 后关卡清单 / 步骤 7 独立复核）。
-  - **待办（打 `[x]` 的硬前置）**：一整所 spec 层 > 30 字段，按 [CLAUDE.md §四] / [ADR-081] 须过独立视角复核（≥95%，全新未共享上下文 agent 会话或人，非 fork）——两所各抽 ≥10 字段 quote↔出处 + 全部 spec 按 [ADR-054] 6 维度比对。母语 + OCR 的所，复核者据 `.cache/<id>/*.txt` sidecar 逐字核。
+- [x] **越南市场新增 + skill 迭代**（2026-09-07 收官，PR #121；[ADR-add-exchange-skill-forge]「执行进度」段）
+  - **数据**：`vn-hose`（11 章全填、72 字段）+ `vn-hnx`（全量含衍生品市场、99 字段）入库；`make check` 全绿（22 家）、`verify_quotes` FAIL=0；`tools/sync.py` 两所进 `EXCHANGE_IANA_TZ`。`group_id` 压测结论——VNX 单国控股、两独立法人、规则集完全不交叉，`group_id` + `boards` 各记各的设计够用，**不触发 `federation_of` / `rule_level`**。confidence 结构性偏低（越南语一手 + OCR + 官方英译「unofficial」，两所 progress-matrix 均 ch2/4/7/8 ✅ 其余 🟡，是「母语第三语言 + 官方英文薄」市场的正确终态）。
+  - **skill**：`.claude/skills/add-exchange/SKILL.md` 删「⚠️ 待 v2.0 对齐」框，就地补 12 条摩擦点（source_lang 母语第三语言 / SPA→母公司法规登记栏目 / 扫描件自助 OCR / 条款号不进 spec.note / 附录量化表 / 「法规写了但未落地」/ 步骤 4.12 监管图·参与者图·风险旗标数据形状 + 校验 20 / 步骤 5 单页画布 7 模块自检清单 + v1.1 后关卡清单 / 步骤 7 独立复核）。
+  - **独立视角复核（全新未共享上下文 agent 会话，非 fork）**：spec 层 [ADR-054] 6 维度约 70 字段 100% 通过；初审 `risks` 章 4 处第三方来源 FIX（92.6%/92.7%）→ 逐条修复（换一手源 + quote 逐字替换）→ 复审两所 100%、整体 PASS。QUESTION 3 项 + 全库既有 `[ADR-002]` 税费映射误引记 OPEN-QUESTIONS。
 
 #### ② 按需新增（可选能力，[ADR-041] 不变）
 
