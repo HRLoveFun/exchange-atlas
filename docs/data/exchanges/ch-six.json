@@ -1591,22 +1591,34 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约会员保证金",
+              "resource": {
+                "zh": "违约会员保证金",
+                "en": "Defaulter's margin"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "SIX x-clear 自有出资（skin in the game）",
+              "resource": {
+                "zh": "SIX x-clear 自有出资（skin in the game）",
+                "en": "SIX x-clear's own equity contribution (skin in the game)"
+              },
               "bearer": "ccp"
             },
             {
               "order": 3,
-              "resource": "违约基金各分段出资（Default Fund Segments）",
+              "resource": {
+                "zh": "违约基金各分段出资（Default Fund Segments）",
+                "en": "Default Fund Segment contributions"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 4,
-              "resource": "其他会员的补充出资（极端情形）",
+              "resource": {
+                "zh": "其他会员的补充出资（极端情形）",
+                "en": "Supplementary contributions from non-defaulting members (extreme cases)"
+              },
               "bearer": "surviving_members"
             }
           ],

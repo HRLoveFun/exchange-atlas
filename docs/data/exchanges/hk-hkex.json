@@ -2027,42 +2027,66 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约方自身向结算基金（RF）的出资（固定 + 可变）",
+              "resource": {
+                "zh": "违约方自身向结算基金（RF）的出资（固定 + 可变）",
+                "en": "Defaulter's own Reserve Fund (RF) contributions (Fixed + Variable)"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "授予违约方的可变出资信用额",
+              "resource": {
+                "zh": "授予违约方的可变出资信用额",
+                "en": "Variable Contribution Credit granted to the defaulter"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 3,
-              "resource": "RF 累计利息收入",
+              "resource": {
+                "zh": "RF 累计利息收入",
+                "en": "RF accumulated interest income"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 4,
-              "resource": "保险赔付（目前无相关安排）",
+              "resource": {
+                "zh": "保险赔付（目前无相关安排）",
+                "en": "Proceeds of any insurance policies (none currently arranged)"
+              },
               "bearer": "external"
             },
             {
               "order": 5,
-              "resource": "结算所自身拨入 RF 的资源（HKCC skin in the game）",
+              "resource": {
+                "zh": "结算所自身拨入 RF 的资源（HKCC skin in the game）",
+                "en": "HKCC's own resources appropriated to the RF (skin in the game)"
+              },
               "bearer": "ccp"
             },
             {
               "order": 6,
-              "resource": "非违约参与者的固定出资",
+              "resource": {
+                "zh": "非违约参与者的固定出资",
+                "en": "Fixed Contributions of non-defaulting Participants"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 7,
-              "resource": "担保或信贷安排所得",
+              "resource": {
+                "zh": "担保或信贷安排所得",
+                "en": "Proceeds of any guarantees or facilities arranged"
+              },
               "bearer": "external"
             },
             {
               "order": 8,
-              "resource": "非违约参与者的可变出资及可变出资信用额（按比例分摊）",
+              "resource": {
+                "zh": "非违约参与者的可变出资及可变出资信用额（按比例分摊）",
+                "en": "Variable Contributions and Variable Contribution Credits of non-defaulting Participants (pro rata)"
+              },
               "bearer": "surviving_members"
             }
           ],

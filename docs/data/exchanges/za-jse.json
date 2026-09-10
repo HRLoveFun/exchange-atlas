@@ -1961,37 +1961,61 @@
           "layers": [
             {
               "order": 1,
-              "resource": "会员准入门槛（财务 / 资本 / 管理 / 运营）"
+              "resource": {
+                "zh": "会员准入门槛（财务 / 资本 / 管理 / 运营）",
+                "en": "Membership entry requirements (financial / capital / management / operational)"
+              }
             },
             {
               "order": 2,
-              "resource": "每日资本充足监控（经 BDA 系统）"
+              "resource": {
+                "zh": "每日资本充足监控（经 BDA 系统）",
+                "en": "Daily capital-adequacy monitoring (via the BDA system)"
+              }
             },
             {
               "order": 3,
-              "resource": "资产透明度（JSE 可查会员及客户持仓）"
+              "resource": {
+                "zh": "资产透明度（JSE 可查会员及客户持仓）",
+                "en": "Asset visibility (JSE can view members' and clients' holdings)"
+              }
             },
             {
               "order": 4,
-              "resource": "CSDP 结算承诺"
+              "resource": {
+                "zh": "CSDP 结算承诺",
+                "en": "CSDP settlement commits"
+              }
             },
             {
               "order": 5,
-              "resource": "T+2 结算保证金",
+              "resource": {
+                "zh": "T+2 结算保证金",
+                "en": "T+2 settlement margin"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 6,
-              "resource": "失败交易处置流程（Fails Transaction Management Process）"
+              "resource": {
+                "zh": "失败交易处置流程（Fails Transaction Management Process）",
+                "en": "Fails Transaction Management Process"
+              }
             },
             {
               "order": 7,
-              "resource": "违约管理（Default Management）",
+              "resource": {
+                "zh": "违约管理（Default Management）",
+                "en": "Default Management"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 8,
-              "resource": "治理机制（Governance）"
+              "resource": {
+                "zh": "治理机制（Governance）",
+                "en": "Governance"
+              }
             }
           ],
           "note": "现货市场无 CCP novation、无互助违约基金；「防线」以预防 + 程序性措施为主，仅 T+2 结算保证金为可上色的财务资源层。za-jse 现货 guarantee_model: lines_of_defence 指向本 layers（≈ 同一串，不重复建模）；衍生品由独立 CCP JSE Clear 承担、瀑布另计"

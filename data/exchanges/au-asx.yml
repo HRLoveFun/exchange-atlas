@@ -1116,10 +1116,10 @@ clearing:
     spec:
       model: ccp_default_waterfall
       layers:
-        - {order: 1, resource: "违约清算参与人的保证金及附加保证金", bearer: defaulter}
-        - {order: 2, resource: "ASX Clear 自有可用资源", bearer: ccp}
-        - {order: 3, resource: "向非违约参与人征收的恢复摊派（Recovery Assessments）", bearer: surviving_members}
-        - {order: 4, resource: "对所有未平仓头寸「完全终止」并削减结算支付（最后手段）", bearer: surviving_members}
+        - {order: 1, resource: {zh: "违约清算参与人的保证金及附加保证金", en: "Defaulting Clearing Participant's margins and additional margins"}, bearer: defaulter}
+        - {order: 2, resource: {zh: "ASX Clear 自有可用资源", en: "ASX Clear's own available resources"}, bearer: ccp}
+        - {order: 3, resource: {zh: "向非违约参与人征收的恢复摊派（Recovery Assessments）", en: "Recovery Assessments called from non-defaulting Clearing Participants"}, bearer: surviving_members}
+        - {order: 4, resource: {zh: "对所有未平仓头寸「完全终止」并削减结算支付（最后手段）", en: "'Complete termination' of all open positions and reduction of settlement payments (last resort)"}, bearer: surviving_members}
       note: "各层金额（自有资源约 250M AUD、摊派上限约 300M AUD）见 zh / detail；spec 只存顺序与 bearer，不存金额。所引 PDF 为图像型无文本层，default_management confidence 为 medium"
     zh: "ASX Clear（现金市场 CCP）设有分层违约处置资源与调用顺序：第一层为违约清算参与人缴存的保证金及附加保证金（可为现金或合格非现金抵押品）；不足时调用 ASX Clear 自有资源（当前 250 million 澳元）；再不足时依《恢复规则》向非违约参与人征收恢复摊派（上限 300 million 澳元）；作为最后手段，可动用《恢复规则》权力对所有未平仓头寸实施「完全终止」并削减结算支付。整个流程以 ASX Clear 回归「匹配账簿」为终点"
     en: "ASX Clear (cash-market CCP) has a layered default resource waterfall: the first layer is the defaulting Clearing Participant's margins and additional margins lodged (cash or eligible non-cash collateral); if insufficient, ASX Clear draws on its own available resources (currently $250 million); if still insufficient, it may call Recovery Assessments from non-defaulting Clearing Participants up to $300 million under its Recovery Rules; as a last resort it may invoke Recovery Rules powers to apply 'complete termination' of all open positions and reduce settlement payments. The process ends when ASX Clear returns to a matched book"

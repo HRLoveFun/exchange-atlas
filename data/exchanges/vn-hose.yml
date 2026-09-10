@@ -937,10 +937,10 @@ clearing:
     spec:
       model: lines_of_defence
       layers:
-        - {order: 1, resource: "违约会员自有资源 + 投资者担保品 / 保证金", bearer: defaulter}
-        - {order: 2, resource: "结算支持基金（存托会员按财政部规定缴纳，VSDC 单独管理）", bearer: surviving_members}
-        - {order: 3, resource: "VSDC 依法可动用的支付支持来源", bearer: ccp}
-        - {order: 4, resource: "财政部就 VSDC 会员暂时丧失清偿能力规定的处置措施", bearer: external}
+        - {order: 1, resource: {zh: "违约会员自有资源 + 投资者担保品 / 保证金", en: "Defaulting member's own resources + investors' collateral / margin"}, bearer: defaulter}
+        - {order: 2, resource: {zh: "结算支持基金（存托会员按财政部规定缴纳，VSDC 单独管理）", en: "Payment assistance fund (depository-member contributions per Ministry of Finance rules, managed separately by VSDC)"}, bearer: surviving_members}
+        - {order: 3, resource: {zh: "VSDC 依法可动用的支付支持来源", en: "Payment-support sources VSDC may lawfully draw on"}, bearer: ccp}
+        - {order: 4, resource: {zh: "财政部就 VSDC 会员暂时丧失清偿能力规定的处置措施", en: "Handling measures prescribed by the Ministry of Finance for a VSDC member's temporary insolvency"}, bearer: external}
       note: "现货市场——无中央对手方更替；层级依《证券法》结算支持基金与 VSDC 支付支持来源条款 + Circular 120 现货 CCP 机制未实施条款整理，逐层绝对额不披露。详细处置程序载于 VSDC《证券交易清算结算业务规则》，本次未取全文。衍生品市场另有清算基金 + 保证金的 CCP 违约瀑布（属 HNX 衍生品市场）"
     zh: "现货交收违约处置为多层防线（无 CCP 更替）：① 违约会员自有资源与投资者担保品；② 结算支持基金（存托会员缴纳）；③ VSDC 依法可动用的支付支持来源；④ 财政部规定的处置措施。绝对额不披露"
     en: "Cash-market settlement default is handled through layered defences (no CCP novation): (1) the defaulting member's own resources and investors' collateral; (2) the payment assistance fund (depository member contributions); (3) VSDC's lawful payment-support sources; (4) handling measures prescribed by the Ministry of Finance. Absolute amounts are not disclosed"

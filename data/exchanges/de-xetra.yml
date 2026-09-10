@@ -802,13 +802,13 @@ clearing:
     spec:
       model: ccp_default_waterfall
       layers:
-        - {order: 1, resource: "违约会员的保证金抵押品", bearer: defaulter}
-        - {order: 2, resource: "违约会员的违约基金出资", bearer: defaulter}
-        - {order: 3, resource: "Eurex Clearing 专项自有投入（Dedicated Amount / Skin in the Game）", bearer: ccp}
-        - {order: 4, resource: "非违约会员的违约基金出资", bearer: surviving_members}
-        - {order: 5, resource: "第二层自有投入（Second Skin in the Game）", bearer: ccp}
-        - {order: 6, resource: "向会员追收的附加出资（assessments）", bearer: surviving_members}
-        - {order: 7, resource: "Eurex Clearing 自有股本", bearer: ccp}
+        - {order: 1, resource: {zh: "违约会员的保证金抵押品", en: "Defaulted Clearing Member's margin collateral"}, bearer: defaulter}
+        - {order: 2, resource: {zh: "违约会员的违约基金出资", en: "Defaulted Clearing Member's Default Fund contribution"}, bearer: defaulter}
+        - {order: 3, resource: {zh: "Eurex Clearing 专项自有投入（Dedicated Amount / Skin in the Game）", en: "Eurex Clearing's Dedicated Amount (Skin in the Game)"}, bearer: ccp}
+        - {order: 4, resource: {zh: "非违约会员的违约基金出资", en: "Non-defaulting members' Default Fund contributions"}, bearer: surviving_members}
+        - {order: 5, resource: {zh: "第二层自有投入（Second Skin in the Game）", en: "Second Skin in the Game"}, bearer: ccp}
+        - {order: 6, resource: {zh: "向会员追收的附加出资（assessments）", en: "Additional assessments levied on members"}, bearer: surviving_members}
+        - {order: 7, resource: {zh: "Eurex Clearing 自有股本", en: "Eurex Clearing's own equity"}, bearer: ccp}
       note: "层级与 de-eurex 一致（同一 Eurex Clearing 违约瀑布）；Deutsche Börse AG 另出具安慰函提供资金支持"
     zh: "Xetra现货交易的清算由Eurex Clearing AG（或交易参与者指定的Cboe Clear Europe）担任中央对手方，其违约处置遵循Eurex Clearing的「违约瀑布」（Default Waterfall）：首先动用违约清算会员自身的保证金与违约基金出资覆盖损失；不足时依次动用Eurex Clearing自有「投入金额」（Dedicated Amount/Skin in the Game）、非违约会员的违约基金出资与「第二层自有投入」、向会员追收的附加出资（assessments），最后动用Eurex Clearing自有股本；Deutsche Börse AG另出具安慰函提供资金支持"
     en: "Clearing of Xetra spot trades is undertaken by Eurex Clearing AG (or Cboe Clear Europe where designated by the trading participant) as CCP; its default management follows Eurex Clearing's \"Default Waterfall\": first, the defaulted clearing member's own margin collateral and Default Fund contribution are used to cover losses; if insufficient, Eurex Clearing's own \"Dedicated Amount\" (Skin in the Game), then non-defaulting members' Default Fund contributions and \"Second Skin in the Game\", then additional assessments levied on members, and finally Eurex Clearing's own equity; Deutsche Börse AG additionally provides a letter of comfort"

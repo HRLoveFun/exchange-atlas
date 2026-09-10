@@ -1940,17 +1940,26 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约会员缴存的保证金 / 存款（FSCMA §397）",
+              "resource": {
+                "zh": "违约会员缴存的保证金 / 存款（FSCMA §397）",
+                "en": "Defaulting member's deposits and margins (FSCMA §397)"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "共同补偿基金（Joint Compensation Fund，§394）",
+              "resource": {
+                "zh": "共同补偿基金（Joint Compensation Fund，§394）",
+                "en": "Joint Compensation Fund (§394)"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 3,
-              "resource": "KRX 自有资本（交易所承担会员违约赔偿责任，§399）",
+              "resource": {
+                "zh": "KRX 自有资本（交易所承担会员违约赔偿责任，§399）",
+                "en": "KRX's own capital (the Exchange bears the member-default compensation responsibility, §399)"
+              },
               "bearer": "ccp"
             }
           ],

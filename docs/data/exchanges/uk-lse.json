@@ -1446,42 +1446,66 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约会员的各类保证金（初始 / 追加 / 交割等）",
+              "resource": {
+                "zh": "违约会员的各类保证金（初始 / 追加 / 交割等）",
+                "en": "Defaulter's margins (initial, variation, delivery and additional)"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "违约会员的违约基金出资",
+              "resource": {
+                "zh": "违约会员的违约基金出资",
+                "en": "Defaulter's Default Fund contribution"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 3,
-              "resource": "LCH Ltd 自有资本出资（skin in the game）",
+              "resource": {
+                "zh": "LCH Ltd 自有资本出资（skin in the game）",
+                "en": "LCH Ltd's own capital contribution (skin in the game)"
+              },
               "bearer": "ccp"
             },
             {
               "order": 4,
-              "resource": "非违约会员对 EquityClear 违约基金的出资",
+              "resource": {
+                "zh": "非违约会员对 EquityClear 违约基金的出资",
+                "en": "Non-defaulting members' EquityClear Default Fund contributions"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 5,
-              "resource": "追加缴款（callable Assessments）",
+              "resource": {
+                "zh": "追加缴款（callable Assessments）",
+                "en": "Callable Assessments"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 6,
-              "resource": "服务连续性阶段的损失分摊（Loss Distribution）",
+              "resource": {
+                "zh": "服务连续性阶段的损失分摊（Loss Distribution）",
+                "en": "Loss Distribution during the service continuity phase"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 7,
-              "resource": "自愿服务连续性",
+              "resource": {
+                "zh": "自愿服务连续性",
+                "en": "Voluntary Service Continuity"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 8,
-              "resource": "EquityClear 服务关闭（最终手段）",
+              "resource": {
+                "zh": "EquityClear 服务关闭（最终手段）",
+                "en": "EquityClear Service Closure (last resort)"
+              },
               "bearer": "surviving_members"
             }
           ],

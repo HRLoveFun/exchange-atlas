@@ -1861,32 +1861,50 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约会员的违约基金（Default Fund）出资",
+              "resource": {
+                "zh": "违约会员的违约基金（Default Fund）出资",
+                "en": "Defaulting member's Default Fund contribution"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "违约会员的结算保证金与变动保证金盈余",
+              "resource": {
+                "zh": "违约会员的结算保证金与变动保证金盈余",
+                "en": "Defaulting member's Clearing Margin and variation-margin surplus"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 3,
-              "resource": "SGX-DC 资本（Capital）",
+              "resource": {
+                "zh": "SGX-DC 资本（Capital）",
+                "en": "SGX-DC's Capital"
+              },
               "bearer": "ccp"
             },
             {
               "order": 4,
-              "resource": "全体结算会员的共同保证金（mutualised margin）",
+              "resource": {
+                "zh": "全体结算会员的共同保证金（mutualised margin）",
+                "en": "Mutualised margin of all Clearing Members"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 5,
-              "resource": "全体会员的共同违约基金（mutualised Default Fund）",
+              "resource": {
+                "zh": "全体会员的共同违约基金（mutualised Default Fund）",
+                "en": "Mutualised Default Fund of all members"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 6,
-              "resource": "SGX-DC 其他资源（Other Resources，含外部授信 / 流动性安排）",
+              "resource": {
+                "zh": "SGX-DC 其他资源（Other Resources，含外部授信 / 流动性安排）",
+                "en": "SGX-DC's Other Resources (incl. external credit / liquidity lines)"
+              },
               "bearer": "external"
             }
           ],

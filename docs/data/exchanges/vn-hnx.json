@@ -1917,22 +1917,34 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约投资者保证金 + 违约清算会员保证金",
+              "resource": {
+                "zh": "违约投资者保证金 + 违约清算会员保证金",
+                "en": "Defaulting investor's margin + defaulting clearing member's margin"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "违约清算会员对清算基金（quỹ bù trừ）的出资",
+              "resource": {
+                "zh": "违约清算会员对清算基金（quỹ bù trừ）的出资",
+                "en": "Defaulting clearing member's clearing-fund (quỹ bù trừ) contribution"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 3,
-              "resource": "VSDC 自有资源 / 职业风险防范基金",
+              "resource": {
+                "zh": "VSDC 自有资源 / 职业风险防范基金",
+                "en": "VSDC's own resources / professional risk-prevention fund"
+              },
               "bearer": "ccp"
             },
             {
               "order": 4,
-              "resource": "存续清算会员对清算基金的出资 + VSDC 安排存续会员做反向交易平仓",
+              "resource": {
+                "zh": "存续清算会员对清算基金的出资 + VSDC 安排存续会员做反向交易平仓",
+                "en": "Surviving clearing members' clearing-fund contributions + VSDC-arranged position close-out by surviving members"
+              },
               "bearer": "surviving_members"
             }
           ],

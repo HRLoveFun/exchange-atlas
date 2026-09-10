@@ -2009,12 +2009,18 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约方按 CORE 方法论质押的担保品（defaulters pay）",
+              "resource": {
+                "zh": "违约方按 CORE 方法论质押的担保品（defaulters pay）",
+                "en": "Defaulter's CORE-methodology collateral (defaulters pay)"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "专项安全垫基金 + 存续参与人分摊（survivors pay；含 Liquidez Investment Fund）",
+              "resource": {
+                "zh": "专项安全垫基金 + 存续参与人分摊（survivors pay；含 Liquidez Investment Fund）",
+                "en": "Dedicated safeguard funds + surviving-participant mutualisation (survivors pay; incl. Liquidez Investment Fund)"
+              },
               "bearer": "surviving_members"
             }
           ],

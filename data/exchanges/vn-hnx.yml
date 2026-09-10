@@ -1052,10 +1052,10 @@ clearing:
     spec:
       model: ccp_default_waterfall
       layers:
-        - {order: 1, resource: "违约投资者保证金 + 违约清算会员保证金", bearer: defaulter}
-        - {order: 2, resource: "违约清算会员对清算基金（quỹ bù trừ）的出资", bearer: defaulter}
-        - {order: 3, resource: "VSDC 自有资源 / 职业风险防范基金", bearer: ccp}
-        - {order: 4, resource: "存续清算会员对清算基金的出资 + VSDC 安排存续会员做反向交易平仓", bearer: surviving_members}
+        - {order: 1, resource: {zh: "违约投资者保证金 + 违约清算会员保证金", en: "Defaulting investor's margin + defaulting clearing member's margin"}, bearer: defaulter}
+        - {order: 2, resource: {zh: "违约清算会员对清算基金（quỹ bù trừ）的出资", en: "Defaulting clearing member's clearing-fund (quỹ bù trừ) contribution"}, bearer: defaulter}
+        - {order: 3, resource: {zh: "VSDC 自有资源 / 职业风险防范基金", en: "VSDC's own resources / professional risk-prevention fund"}, bearer: ccp}
+        - {order: 4, resource: {zh: "存续清算会员对清算基金的出资 + VSDC 安排存续会员做反向交易平仓", en: "Surviving clearing members' clearing-fund contributions + VSDC-arranged position close-out by surviving members"}, bearer: surviving_members}
       note: "衍生品市场违约瀑布（政府令 158 第28(5)条 / 第35条）：VSDC 依次动用违约方保证金与担保品 → 违约清算会员的清算基金份额 → VSDC 自有资源 → 存续会员清算基金。VSDC 可强制平仓违约方头寸、要求其他清算会员做对冲交易。现货市场是另一套 lines_of_defence（无更替，见 guarantee_model）"
     zh: "衍生品市场为标准 CCP 违约瀑布：① 违约投资者 / 清算会员保证金；② 违约清算会员的清算基金出资；③ VSDC 自有资源 / 职业风险防范基金；④ 存续清算会员清算基金 + VSDC 组织平仓。绝对额不披露。现货市场违约处置见 guarantee_model（多层防线、无更替）"
     en: "The derivatives market runs a standard CCP default waterfall: (1) the defaulting investor's / clearing member's margin; (2) the defaulting clearing member's clearing-fund contribution; (3) VSDC's own resources / professional risk-prevention fund; (4) surviving clearing members' clearing-fund contributions plus VSDC-arranged position close-out. Absolute amounts are not disclosed. Cash-market default handling is in guarantee_model (lines of defence, no novation)"

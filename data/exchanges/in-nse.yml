@@ -1262,14 +1262,14 @@ clearing:
     spec:
       model: ccp_default_waterfall
       layers:
-        - {order: 1, resource: "违约清算会员自有资金", bearer: defaulter}
-        - {order: 2, resource: "违约会员未实现收益（MTM 盈余）", bearer: defaulter}
-        - {order: 3, resource: "违约会员抵押品 / 保证金", bearer: defaulter}
-        - {order: 4, resource: "核心结算担保基金（Core SGF，按业务线分设）", bearer: surviving_members}
-        - {order: 5, resource: "交易所 / 清算所缴付资本", bearer: ccp}
-        - {order: 6, resource: "NCL（清算所）其余资产", bearer: ccp}
-        - {order: 7, resource: "SEBI 投资者保护基金", bearer: statutory_fund}
-        - {order: 8, resource: "其他交易所基金", bearer: statutory_fund}
+        - {order: 1, resource: {zh: "违约清算会员自有资金", en: "Defaulting clearing member's own funds"}, bearer: defaulter}
+        - {order: 2, resource: {zh: "违约会员未实现收益（MTM 盈余）", en: "Defaulting member's unrealised gains (MTM surplus)"}, bearer: defaulter}
+        - {order: 3, resource: {zh: "违约会员抵押品 / 保证金", en: "Defaulting member's collateral / margin"}, bearer: defaulter}
+        - {order: 4, resource: {zh: "核心结算担保基金（Core SGF，按业务线分设）", en: "Core Settlement Guarantee Fund (Core SGF, ring-fenced per segment)"}, bearer: surviving_members}
+        - {order: 5, resource: {zh: "交易所 / 清算所缴付资本", en: "Exchange / clearing-corporation contributed capital"}, bearer: ccp}
+        - {order: 6, resource: {zh: "NCL（清算所）其余资产", en: "NCL (clearing corporation) remaining assets"}, bearer: ccp}
+        - {order: 7, resource: {zh: "SEBI 投资者保护基金", en: "SEBI Investor Protection Fund"}, bearer: statutory_fund}
+        - {order: 8, resource: {zh: "其他交易所基金", en: "Other exchange funds"}, bearer: statutory_fund}
       note: "Core SGF 用途有官方原文；第 5–8 层顺序据 SEBI 2025-09 新闻稿（权威，本次为 WebSearch 摘录，非逐层 verbatim），见 detail"
     zh: "NSE Clearing 设立核心结算担保基金（Core SGF），按业务线（现货/F&O/CD 等）分设，用于保证各线交易的结算；当清算会员无法履行结算义务时，核心 SGF 用于偿付该会员义务、完成结算而不影响正常结算流程。叠加 SEBI 规定的多层'违约瀑布'（waterfall）处置顺序，交易所/清算所资本与担保基金逐级吸收损失"
     en: "NSE Clearing maintains a Core Settlement Guarantee Fund (Core SGF), ring-fenced per segment (Cash, F&O, CD, etc.), to guarantee settlement of trades in each segment; if a clearing member fails to honour settlement commitments, the Core SGF is used to fund that member's obligations and complete settlement without affecting the normal process. This is supplemented by SEBI's multi-tier 'default waterfall' loss-allocation hierarchy, where exchange/clearing-corporation capital and guarantee funds absorb losses in sequence"

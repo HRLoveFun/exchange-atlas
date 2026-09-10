@@ -1734,9 +1734,9 @@ clearing:
     spec:
       model: ccp_default_waterfall
       layers:
-        - {order: 1, resource: "违约会员的保证金", bearer: defaulter}
-        - {order: 2, resource: "违约基金（互助层，Default Fund）", bearer: surviving_members}
-        - {order: 3, resource: "CCP 自有资本", bearer: ccp}
+        - {order: 1, resource: {zh: "违约会员的保证金", en: "Defaulting Clearing Member's margins"}, bearer: defaulter}
+        - {order: 2, resource: {zh: "违约基金（互助层，Default Fund）", en: "Default Fund (mutualised layer)"}, bearer: surviving_members}
+        - {order: 3, resource: {zh: "CCP 自有资本", en: "CCP's own capital"}, bearer: ccp}
       note: "EMIR 标准损失分担层级；Euronext Clearing 逐层参数（SITG 规模、assessments、Second SITG 等）本次未逐条核实，故只结构化 3 段"
     zh: Euronext Clearing 采用多层风险防护：每日向清算会员（Clearing Member）收取保证金以覆盖其违约及平仓的 theoretical
       成本；此外设立「违约基金」(Default Fund) 作为额外、互助式的保护层，覆盖超出保证金的极端但合理的风险。违约处置按 EMIR 框架下的损失分担层级（保证金→违约基金→CCP

@@ -2019,17 +2019,26 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约会员的保证金",
+              "resource": {
+                "zh": "违约会员的保证金",
+                "en": "Defaulting Clearing Member's margins"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "违约基金（互助层，Default Fund）",
+              "resource": {
+                "zh": "违约基金（互助层，Default Fund）",
+                "en": "Default Fund (mutualised layer)"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 3,
-              "resource": "CCP 自有资本",
+              "resource": {
+                "zh": "CCP 自有资本",
+                "en": "CCP's own capital"
+              },
               "bearer": "ccp"
             }
           ],

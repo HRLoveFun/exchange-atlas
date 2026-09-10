@@ -111,6 +111,7 @@
 - ADR-kr-krx-legacy-closeout · 2026-09-06 · 数据遗留项会话：kr-krx 整理期坐实 + order_book_transparency 升 medium + Section 31 FY2027 复核
 - ADR-supply-chain-ci-hardening · 2026-09-06 · 供应链 / CI 加固：依赖哈希锁定 + Dependabot + CI「quote 真实性闸」
 - ADR-add-exchange-skill-forge · 2026-09-06 · 用实际新增交易所迭代 add-exchange 为 v2.0 对齐的通用 skill；候选池：越南市场
+- ADR-en-monolingual-leaks · 2026-09-10 · 英文态「露中文」核查：违约瀑布层标签双语化 + 列表型自由文本诚实降级
 <!-- END:GENERATED adr-index -->
 
 ---
@@ -3000,3 +3001,36 @@ print('全库 medium 零 sources:',n)
 **验证：** `make build` 全绿（`sync` 再生成 5 所 JSON 与 ADR 索引、`validate` 校验 14 对新引用号放行）、`make sync` 二次幂等；全库 grep 复查 `[ADR-002]` / `ADR-002` 残留均为管线语境或问题记录原文。
 
 **日期：** 2026-09-07
+
+
+### ADR-en-monolingual-leaks — 英文态「露中文」核查：违约瀑布层标签双语化 + 列表型自由文本诚实降级
+
+**背景（2026-09-10 用户核查请求，例子：交割管线的「违约处置与风险共担 Default Management」）：** 切到英文模式后仍显示中文的内容分三类——事实信封层（字段 `zh`/`en` 正文）经 [ADR-034] #3 全库回填后已 0 缺口（本次实测 22 家 × 全字段脚本核对、headless 渲染 15+ 页确认）；剩下的是**从来不在英文化扫描口径里**的两处：
+
+1. **`clearing.default_management.spec.layers[].resource`（违约瀑布层标签）**——[ADR-050] 定 spec 形状时明确「`resource` 留自由短语」，只考虑中文渲染；[ADR-051] 渲染层落地时已记为「已知局限」并预留触发条件。交割管线模块下方常驻的「违约损失吸收顺序」附图，16 家有结构化 layers（`ccp_default_waterfall` 14 家 + `lines_of_defence` 2 家：`za-jse`/`vn-hose`），共 84 条 `resource` 短语英文态全是中文；`unstructured` 的 6 家占位文案本就走 `t()`、不受影响。
+2. **列表型章节/字段的自由文本列**——`renderItemsTable`（`products` / `indices` 章、`listing.boards` 字段共用）对非枚举字符串单元格直接输出 `item[f.id]`，完全不经语言开关。约 295 条中文串：`products.description` 130 / `boards.target_companies` 52 / `boards.financial_threshold` 42 / `indices.description` 48 / `indices.review_frequency` 23。schema 里这些字段只定义单个 id 存单语字符串。此前 [ADR-024]（`en_required` 机器校验）、[ADR-026]（`isZhFallback` 标记）、[ADR-034] #3（全库 `en` 回填）、[ADR-049] 方案 B（`detail`/`spec.*note` 折叠）四次英文化努力，扫描口径均为 object 章节的 leaf 信封，进不了 list-item 与 spec 结构化子字段。
+
+**定了什么（两类分开处置，沿用 [ADR-049] 对不同内容类型分层的思路）：**
+
+1. **违约瀑布 `resource` → 彻底双语化（本条落地）。** `schema/spec.yml` 的 `clearing.default_management` `layers[].resource` 由裸 `string` 放宽为 `{zh, en}` 双语对象；16 家 84 条回填 `en`——`resource` 本就是「从 quote 摘的简短人读标签」，英文侧同纪律从各所英文 `quote` / `en` 信封摘（非英文一手来源的 `cn-sse`/`cn-szse`/`vn-hnx`/`vn-hose` 4 家按 [ADR-024] #2「已核实的另一语言内容转译」，与其信封 `en` 同性质）。`app.js` `spWaterfall` 渲染改走 `spResourceText(L.resource)` → `t(zh, en)`。`tools/validate.py` 加**校验 23**（纯函数 `default_management_resource_violations`，`tools/selfcheck.py` 10 条正负向用例）：有 layers 时每层 `resource` 必须是含非空 `zh` 与 `en` 的对象——把「英文态不再露中文」从自觉变成构建关卡（[CLAUDE.md §四] 模式，对照 [ADR-024]/[ADR-033]）。
+
+2. **列表型自由文本 → 诚实降级标记（本条落地），彻底双语化延后。** `renderItemsTable` 英文模式下，对非 `name_zh`/`name_native`（这两列按定义就是中文名 / 原文书写体）、非枚举、含 CJK 的单元格追加 `（中文原文）` 灰字小标——沿用 [ADR-026]/[ADR-049] 方案 B 哲学「加视觉标记、不改数据可见性」，读者立刻知道「这是中文原文、不是漏译」。`zhFallbackTag()` 助手与 `renderObjectChapter` 既有的字段卡标记（[ADR-026]）合并为一处（消除「同一段 HTML 两处手写」）。
+   **为什么不现在彻底翻译这 295 条**：与 [ADR-049] 方案 B 拒绝「`detail` 升 `{zh,en}` 回填 1028 条」同理——每新增一家永久多一份双语负担、会持续拖慢 [ADR-017] 建档流程；且这批里 `products.description`（产品体系，130 条、占比最大）对交易员的价值低于 `boards.*`（上市门槛）。拆成按价值排期的可选数据轨，记 `OPEN-QUESTIONS.md` +  `ROADMAP.md §一`。
+
+3. **板块名英文缺口一并记入 OPEN-QUESTIONS（不在本条动手）。** `listing.boards` 有 `name_zh` + `name_native`（两者都可能非拉丁），无 `name_en`——`llBoardName`（上市生命周期模块）英文态对 `cn-sse`/`cn-szse`「主板」、`tw-twse`「一般板」无英文可显、回退中文。属列表项 schema 需增 `name_en`（或「`name_native` 必须罗马化」）的同一类结构问题，与 #2 的彻底方案合并评估。
+
+**范围：** `schema/spec.yml`（受保护，仅 `resource` 形状说明 + 段注释）/ `data/exchanges/*.yml` × 16（84 条 `resource` 迁移，纯加 `en` 键，`zh` 逐字不变）/ `docs/assets/app.js` + `styles.css`（`renderItemsTable` 标记、`spWaterfall` 渲染、`zhFallbackTag`/`CJK_RE` 助手、`.zh-fallback-note` 去 `.field-card` 作用域）/ `tools/validate.py` + `selfcheck.py`（校验 23）/ `tools/verify_quotes.py`（CI 现场闸修复，见下）。`docs/data/` 由 `make sync` 再生成。
+
+**CI「quote 真实性闸」修复（[ADR-supply-chain-ci-hardening] 的 `--live` 路径，本 PR 首次触到）：** 16 家 `data/exchanges/*.yml` 改动触发 `pr-build.yml` 对每家跑 `verify_quotes.py --live`，炸出 **30 处 FAIL，全部与本次改动无关**（本次只加 `resource.en` 键、不碰任何 `quote`）——是 `--live` 的 `fetch_text()` 的既有盲区，之前没有 PR 同时触到这批文件所以从未暴露：
+
+1. **`.docx` / `.xlsx` / 无扩展名 PDF 一律当 HTML 解码**（cn-sse ×25 `sse.com.cn` 规则 `.docx`、`uk-lse` ×1 `.xlsx`、`hk-hkex` ×1 `chapter_9a` 返回 `application/pdf` 但 URL 无 `.pdf`）→ 读成 ZIP / PDF 二进制乱码 → quote 命中不了 → 假 FAIL。**改：`fetch_text` 按魔术字节 + `Content-Type` + 扩展名判二进制、落临时文件走 `file_text()`**（已能处理 PDF/docx/xlsx/xls/HTML）；`.xlsx` 无 `openpyxl` 时优雅返回 `""` → LIVE_ERR。
+2. **中文站 GB2312/GBK 编码被硬 `decode("utf-8","ignore")` 丢字**（cn-sse ×3：`regulation.core_laws` npc.gov.cn / `error_trade_rule` mgzq.com PDF / `default_management` sse.com.cn PDF——正文汉字大面积丢掉后变成非空乱码）→ 假 FAIL。**改：HTML 走 `requests` 的 `Content-Type` charset，缺失时 `r.apparent_encoding`（charset-normalizer，已是依赖）。**
+3. **JS 壳页正文抓不到但 HTML 非空**（`bcb.gov.br` 97 字「需启用 JavaScript」、`szse.cn` 关于页 ~2.6k 字纯侧边导航）→ `all(t=="")` 判据（只认全空）漏掉 → 假 FAIL。**改：`norm()` 先剥 `<script>`/`<style>` 块** + **`fetch_text` 对非二进制、正文 < 3000 字的 HTML 归 `""`** → 记 LIVE_ERR（信息性）不记 FAIL。一手规则 / 法规摘录页正文远超此阈值；offline verbatim 反查 + 录入时核实不受影响。
+
+4. **`--live` 对无法现场核实的字段降级**（用户 2026-09-11 选定「加已知难抓清单 / 对 `*_note` 跳过现场反查」）：`verify_quotes.py` 的 `--live` 分支——quote 未命中时，两类不判 FAIL 只记 LIVE_ERR（**只影响 `--live`，offline verbatim 反查逐字查 note、行为不变**）：**(a) 类别规则 `*_note` / `note` 字段**——note 是归纳散文（[ADR-049] / CLAUDE.md §二），`quote` 是抽检凭据、不要求逐字复现，且 note 常综合多份来源，「verbatim ⊆ 单一现场抓取页」是错配判据；**(b) `LIVE_UNVERIFIABLE` 逐字段白名单**（`(ex, path)` 元组，当前 3 条：`br-b3.clearing.delivery_method` / `cn-szse.infrastructure.market_data_levels` / `cn-szse.costs.exchange_fees`）——出处页现为 JS SPA / 选错文档、curl 拿不到可核实正文的**具体字段**。刻意做成显式逐字段、不做域名级模糊匹配（`b3.com.br` / `szse.cn` 也托管大量可抓 PDF，实测 `br-b3.market_structure.matching_principle` 等仍正常 OK），避免掩盖同域名下真正的漂移；每条对应 OQ #49 的一个待办，人工换成可抓一手源后从清单删除。
+
+修复后 `--live` FAIL 30 → **0**（cn-sse 25→0、hk-hkex / uk-lse 全清、5 处残留按 4 分类降级）。`.github/`（受保护）零改动——闸的 FAIL 判据（能抓到正文却找不到 quote → 编造）不变，只补 `fetch_text` / `norm` 的解析能力 + 对「抓不到正文」的两类字段诚实归 LIVE_ERR。3 条白名单 + 2 处 `contract_specs_note` 的**数据侧待办**（换一手源 / 重核 confidence）记 `OPEN-QUESTIONS.md` #49。
+
+**验证：** `make build` 全绿；`make sync` 二次幂等（`git diff` 为空）；`selfcheck` 85 用例全过（含 `default_management_resource_violations` 10 条 + `_live_exempt` 8 条）；`check_ui_i18n` OK；offline `verify_quotes` OK/FAIL 不变（`norm` 剥 script 是纯收益、`--live` 豁免不碰 offline 路径）。headless 强制英文渲染：交割管线 16 家违约瀑布层标签转英文（`unstructured` 6 家不受影响）；档案页 `products`/`indices`/`boards` 表的中文自由文本列带上 `（中文原文）` 标记、`name_zh`/`name_native`/枚举列不误标；`zh` 态逐字不变（`resource` 迁移只加 `en` 键、渲染 `t()` 中文分支取 `zh`）。`verify_quotes --live` 全 16 家 FAIL=0（本地实测 cn-sse `.docx` 转 OK、5 处残留降 LIVE_ERR、对照字段 `br-b3.matching_principle` 等仍 OK）。**独立视角复核待办**：84 条 `resource` `en` 是 >30 字段批量数据改动，按 [CLAUDE.md §四] 需独立视角（非 fork 的全新 agent 会话或人）逐条比对 `en` ⊆ 各所 `quote`/`en` 信封语义，ROADMAP §三条目在复核通过前不打 `[x]`；本条受保护文件改动的 owner 批准闸是这道复核的挂靠点。
+
+**日期：** 2026-09-10

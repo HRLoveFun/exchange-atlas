@@ -239,6 +239,10 @@ fields:
   #   （defaulter 红 / ccp 橙 / surviving_members 黄 / statutory_fund 灰 /
   #    external 灰蓝——外部授信 / 保险 / 流动性安排，[ADR-048] 的 4 类之外，
   #    因 cn-sse / hk-hkex / sg-sgx / jp-jpx 等有明确的外部资源层而补入，见 [ADR-050]）。
+  #    每层 resource 文本英文态直接渲染，故 resource = {zh, en} 双语对象、两侧都写
+  #    （[ADR-en-monolingual-leaks]：原 [ADR-050] 定的裸字符串英文态露中文，已迁移 +
+  #    validate.py default_management_resource_violations 机器强制）。
+  # unstructured（无 layers）的占位文案在渲染层走 t()，本 spec 不涉及。
   # 结构化不出干净层级的（us-nyse NSCC/DTC 共享框架、tw-twse 指定他方代交付等），
   # 走 model: unstructured + note（[ADR-035] D 三态的「机制存在、结构查不到」）。
   # settlement 时间轴不新增 spec：由既有 settlement_cycle enum（t1/t2/t3）+
@@ -253,7 +257,9 @@ fields:
       layers: >
         list——按动用 / 防线顺序，每项：
         order（int，从 1）；
-        resource（string——该层动用的资源 / 防线措施，从 quote 摘的简短人读标签）；
+        resource（{zh, en} 双语对象——该层动用的资源 / 防线措施，从 quote 摘的简短人读标签，
+        两侧都写；驱动的「违约瀑布」附图英文态直接渲染 en，[ADR-en-monolingual-leaks]。
+        非英文一手来源的所（cn / vn）en 与信封 en 同纪律=已核实的另一语言内容转译）；
         bearer（可选——谁的钱：defaulter / ccp / surviving_members / statutory_fund /
         external（外部授信 / 保险 / 流动性安排）。ccp_default_waterfall 的损失吸收层必填；
         lines_of_defence 的预防性层级（准入门槛、资本监控等非损失吸收）可省）
