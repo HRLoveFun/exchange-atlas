@@ -1923,42 +1923,66 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约清算会员自有资金",
+              "resource": {
+                "zh": "违约清算会员自有资金",
+                "en": "Defaulting clearing member's own funds"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "违约会员未实现收益（MTM 盈余）",
+              "resource": {
+                "zh": "违约会员未实现收益（MTM 盈余）",
+                "en": "Defaulting member's unrealised gains (MTM surplus)"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 3,
-              "resource": "违约会员抵押品 / 保证金",
+              "resource": {
+                "zh": "违约会员抵押品 / 保证金",
+                "en": "Defaulting member's collateral / margin"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 4,
-              "resource": "核心结算担保基金（Core SGF，按业务线分设）",
+              "resource": {
+                "zh": "核心结算担保基金（Core SGF，按业务线分设）",
+                "en": "Core Settlement Guarantee Fund (Core SGF, ring-fenced per segment)"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 5,
-              "resource": "交易所 / 清算所缴付资本",
+              "resource": {
+                "zh": "交易所 / 清算所缴付资本",
+                "en": "Exchange / clearing-corporation contributed capital"
+              },
               "bearer": "ccp"
             },
             {
               "order": 6,
-              "resource": "NCL（清算所）其余资产",
+              "resource": {
+                "zh": "NCL（清算所）其余资产",
+                "en": "NCL (clearing corporation) remaining assets"
+              },
               "bearer": "ccp"
             },
             {
               "order": 7,
-              "resource": "SEBI 投资者保护基金",
+              "resource": {
+                "zh": "SEBI 投资者保护基金",
+                "en": "SEBI Investor Protection Fund"
+              },
               "bearer": "statutory_fund"
             },
             {
               "order": 8,
-              "resource": "其他交易所基金",
+              "resource": {
+                "zh": "其他交易所基金",
+                "en": "Other exchange funds"
+              },
               "bearer": "statutory_fund"
             }
           ],

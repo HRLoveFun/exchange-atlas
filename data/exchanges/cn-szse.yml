@@ -1135,10 +1135,10 @@ clearing:
     spec:
       model: ccp_default_waterfall
       layers:
-        - {order: 1, resource: "违约方担保物中的现金部分", bearer: defaulter}
-        - {order: 2, resource: "结算保证金（全体结算参与人共同缴纳）", bearer: surviving_members}
-        - {order: 3, resource: "证券结算风险基金", bearer: statutory_fund}
-        - {order: 4, resource: "一般风险准备金及其他资金", bearer: statutory_fund}
+        - {order: 1, resource: {zh: "违约方担保物中的现金部分", en: "Cash portion of the defaulter's collateral"}, bearer: defaulter}
+        - {order: 2, resource: {zh: "结算保证金（全体结算参与人共同缴纳）", en: "Settlement margin (jointly contributed by all clearing participants)"}, bearer: surviving_members}
+        - {order: 3, resource: {zh: "证券结算风险基金", en: "Securities Settlement Risk Fund"}, bearer: statutory_fund}
+        - {order: 4, resource: {zh: "一般风险准备金及其他资金", en: "General risk reserve and other funds"}, bearer: statutory_fund}
       note: "中国结算全国性框架，沪深共用（见 cn-sse.clearing.default_management）；本所 quote 未细分结算保证金中违约方 / 其他方缴纳部分，故第 2 层归 surviving_members"
     zh: "中国结算作为CCP以分层财务资源应对结算参与人交收违约：先动用违约方担保物中的现金部分、结算保证金，不足部分动用证券结算风险基金及一般风险准备金；对逾期无法追偿的证券/资金，可依法动用结算保证金与结算风险基金予以弥补，之后继续向违约方追偿；程序上可采取扣划证券、处置证券等措施完成违约处置"
     en: "As CCP, ChinaClear meets a clearing participant's settlement default with tiered financial resources: first the defaulting party's own cash collateral and settlement margin, then (if insufficient) the securities settlement risk fund and general risk reserve; for securities or funds that cannot be recovered within the prescribed period, it may draw on the settlement margin and risk fund to cover the shortfall and then continue pursuing recovery from the defaulter; procedurally it may debit or dispose of the defaulter's securities to make up the shortfall"

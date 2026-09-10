@@ -1049,14 +1049,14 @@ clearing:
     spec:
       model: ccp_default_waterfall
       layers:
-        - {order: 1, resource: "违约会员的各类保证金（初始 / 追加 / 交割等）", bearer: defaulter}
-        - {order: 2, resource: "违约会员的违约基金出资", bearer: defaulter}
-        - {order: 3, resource: "LCH Ltd 自有资本出资（skin in the game）", bearer: ccp}
-        - {order: 4, resource: "非违约会员对 EquityClear 违约基金的出资", bearer: surviving_members}
-        - {order: 5, resource: "追加缴款（callable Assessments）", bearer: surviving_members}
-        - {order: 6, resource: "服务连续性阶段的损失分摊（Loss Distribution）", bearer: surviving_members}
-        - {order: 7, resource: "自愿服务连续性", bearer: surviving_members}
-        - {order: 8, resource: "EquityClear 服务关闭（最终手段）", bearer: surviving_members}
+        - {order: 1, resource: {zh: "违约会员的各类保证金（初始 / 追加 / 交割等）", en: "Defaulter's margins (initial, variation, delivery and additional)"}, bearer: defaulter}
+        - {order: 2, resource: {zh: "违约会员的违约基金出资", en: "Defaulter's Default Fund contribution"}, bearer: defaulter}
+        - {order: 3, resource: {zh: "LCH Ltd 自有资本出资（skin in the game）", en: "LCH Ltd's own capital contribution (skin in the game)"}, bearer: ccp}
+        - {order: 4, resource: {zh: "非违约会员对 EquityClear 违约基金的出资", en: "Non-defaulting members' EquityClear Default Fund contributions"}, bearer: surviving_members}
+        - {order: 5, resource: {zh: "追加缴款（callable Assessments）", en: "Callable Assessments"}, bearer: surviving_members}
+        - {order: 6, resource: {zh: "服务连续性阶段的损失分摊（Loss Distribution）", en: "Loss Distribution during the service continuity phase"}, bearer: surviving_members}
+        - {order: 7, resource: {zh: "自愿服务连续性", en: "Voluntary Service Continuity"}, bearer: surviving_members}
+        - {order: 8, resource: {zh: "EquityClear 服务关闭（最终手段）", en: "EquityClear Service Closure (last resort)"}, bearer: surviving_members}
       note: "EquityClear 业务线专属瀑布；LCH Ltd 四条业务线各自独立的违约基金与自有资本额度、互不交叉污染（见 detail）。spec 不存各层金额"
     zh: "LCH Ltd（本所CCP，见ccp_name）对EquityClear（证券清算业务线）设有分层「违约处置瀑布」（Default Waterfall）：违约会员自身的初始保证金/追加保证金等各类保证金及其违约基金出资首先被吸收→LCH LTD自有资本出资（「风险共担」，截至2024年10月末为€1.6百万，四条业务线中最低，与EquityClear业务线整体风险规模匹配）→非违约会员对EquityClear违约基金的出资（截至2024年10月末规模£155百万，可通过「追加缴款」Assessment进一步补充）→服务连续性阶段的损失分摊（Loss Distribution）→自愿服务连续性→EquityClear服务关闭（最终手段）。LCH LTD截至2024年10月31日持有的保证金抵押品市值合计€288十亿"
     en: "LCH Ltd (this Exchange's CCP, see ccp_name) operates a tiered Default Waterfall for its EquityClear (securities clearing) service line: the defaulting member's own margin (initial, variation, delivery and additional margins) and its default fund contribution are absorbed first, then LCH LTD's own capital ('skin in the game', €1.6mn as of end-October 2024 — the smallest of the four service lines, scaled to EquityClear's relative risk size), then non-defaulting members' EquityClear default fund contributions (£155mn as of end-October 2024, further replenishable via callable 'Assessments'), then loss distribution during the service continuity phase, then voluntary service continuity, and finally EquityClear service closure as a last resort. LCH LTD held margin collateral with a total market value of €288bn as of 31 October 2024"

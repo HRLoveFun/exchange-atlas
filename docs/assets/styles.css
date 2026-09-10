@@ -337,7 +337,7 @@ table.matrix tbody tr:hover td { background: var(--bg-hover); }
 .field-card .field-label { font-size: 11.5px; color: var(--fg-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.03em; font-weight: 600; }
 .field-card .field-value { font-size: 15.5px; font-weight: 500; max-width: 70ch; }
 .field-card .field-value.empty { color: var(--fg-faint); font-style: italic; font-weight: 400; }
-.field-card .zh-fallback-note { font-size: 11px; font-weight: 400; color: var(--fg-faint); font-style: italic; }
+.zh-fallback-note { font-size: 11px; font-weight: 400; color: var(--fg-faint); font-style: italic; white-space: nowrap; }
 .field-card .field-detail { margin-top: 7px; font-size: 13px; color: var(--fg-muted); white-space: pre-wrap; max-width: 70ch; }
 .field-card .field-foot { margin-top: 10px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 

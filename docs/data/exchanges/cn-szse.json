@@ -1924,22 +1924,34 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约方担保物中的现金部分",
+              "resource": {
+                "zh": "违约方担保物中的现金部分",
+                "en": "Cash portion of the defaulter's collateral"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "结算保证金（全体结算参与人共同缴纳）",
+              "resource": {
+                "zh": "结算保证金（全体结算参与人共同缴纳）",
+                "en": "Settlement margin (jointly contributed by all clearing participants)"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 3,
-              "resource": "证券结算风险基金",
+              "resource": {
+                "zh": "证券结算风险基金",
+                "en": "Securities Settlement Risk Fund"
+              },
               "bearer": "statutory_fund"
             },
             {
               "order": 4,
-              "resource": "一般风险准备金及其他资金",
+              "resource": {
+                "zh": "一般风险准备金及其他资金",
+                "en": "General risk reserve and other funds"
+              },
               "bearer": "statutory_fund"
             }
           ],

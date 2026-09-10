@@ -1128,9 +1128,9 @@ clearing:
     spec:
       model: ccp_default_waterfall
       layers:
-        - {order: 1, resource: "违约会员缴存的保证金 / 存款（FSCMA §397）", bearer: defaulter}
-        - {order: 2, resource: "共同补偿基金（Joint Compensation Fund，§394）", bearer: surviving_members}
-        - {order: 3, resource: "KRX 自有资本（交易所承担会员违约赔偿责任，§399）", bearer: ccp}
+        - {order: 1, resource: {zh: "违约会员缴存的保证金 / 存款（FSCMA §397）", en: "Defaulting member's deposits and margins (FSCMA §397)"}, bearer: defaulter}
+        - {order: 2, resource: {zh: "共同补偿基金（Joint Compensation Fund，§394）", en: "Joint Compensation Fund (§394)"}, bearer: surviving_members}
+        - {order: 3, resource: {zh: "KRX 自有资本（交易所承担会员违约赔偿责任，§399）", en: "KRX's own capital (the Exchange bears the member-default compensation responsibility, §399)"}, bearer: ccp}
       note: "顺序据 FSCMA §397 / §394 / §399；KRX 对违约会员的其他债权人享有优先受偿权（§400）。CCP 自有专项出资（SITG）层级未在原文单列"
     zh: "KRX作为中央对手方(CCP)，违约处置依FSCMA构建：向会员收取共同补偿基金(Joint Compensation Funds, §394)；违约时先以该会员缴存的保证金/存款抵偿债务(§397)，不足部分由KRX承担会员违约赔偿责任(§399)，且KRX对违约会员的其他债权人享有优先受偿权(§400)。即损失吸收顺序为：违约会员自有保证金→共同补偿基金→交易所自有资本。"
     en: "As the CCP, KRX's default management is built on the FSCMA: it collects a Joint Compensation Fund from members (§394); on a member's default it first appropriates that member's deposits and margins to redeem obligations (§397), and to the extent still uncovered KRX bears the compensation responsibility for the member's default (§399), with claim priority over other creditors of the defaulting member (§400). The loss-absorption order is: the defaulting member's own margin → the Joint Compensation Fund → the Exchange's own capital."

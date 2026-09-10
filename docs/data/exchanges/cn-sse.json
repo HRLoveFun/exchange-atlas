@@ -1892,27 +1892,42 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约方担保物中的现金部分",
+              "resource": {
+                "zh": "违约方担保物中的现金部分",
+                "en": "Cash portion of the defaulter's collateral"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "证券结算保证金中违约方缴纳部分",
+              "resource": {
+                "zh": "证券结算保证金中违约方缴纳部分",
+                "en": "Defaulter's own contribution to the securities settlement deposit"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 3,
-              "resource": "证券结算保证金中其他参与人缴纳及公司划拨部分",
+              "resource": {
+                "zh": "证券结算保证金中其他参与人缴纳及公司划拨部分",
+                "en": "Other participants' contributions and ChinaClear's allocation within that deposit"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 4,
-              "resource": "证券结算风险基金",
+              "resource": {
+                "zh": "证券结算风险基金",
+                "en": "Securities Settlement Risk Fund"
+              },
               "bearer": "statutory_fund"
             },
             {
               "order": 5,
-              "resource": "商业银行等机构的授信支持",
+              "resource": {
+                "zh": "商业银行等机构的授信支持",
+                "en": "Commercial-bank (and similar institutions') credit facilities"
+              },
               "bearer": "external"
             }
           ],

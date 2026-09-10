@@ -1178,8 +1178,8 @@ clearing:
     spec:
       model: ccp_default_waterfall
       layers:
-        - {order: 1, resource: "违约方按 CORE 方法论质押的担保品（defaulters pay）", bearer: defaulter}
-        - {order: 2, resource: "专项安全垫基金 + 存续参与人分摊（survivors pay；含 Liquidez Investment Fund）", bearer: surviving_members}
+        - {order: 1, resource: {zh: "违约方按 CORE 方法论质押的担保品（defaulters pay）", en: "Defaulter's CORE-methodology collateral (defaulters pay)"}, bearer: defaulter}
+        - {order: 2, resource: {zh: "专项安全垫基金 + 存续参与人分摊（survivors pay；含 Liquidez Investment Fund）", en: "Dedicated safeguard funds + surviving-participant mutualisation (survivors pay; incl. Liquidez Investment Fund)"}, bearer: surviving_members}
       note: "B3 官方仅表述为『defaulters pay and survivors pay』二段式，未公开逐层瀑布参数与 CCP 自有出资（SITG）层级；spec 按此二段结构化"
     zh: "「违约者先付、生存者分摊」（defaulters pay and survivors pay）的风险共担机制，依托CORE方法论计算的担保品与安全垫（含Liquidez Investment Fund等专项基金）应对结算参与者违约"
     en: "A 'defaulters pay, survivors pay' mutualized default-management structure, backed by CORE-methodology collateral and dedicated safeguard funds (including the Liquidez Investment Fund)"

@@ -1021,10 +1021,10 @@ clearing:
     spec:
       model: ccp_default_waterfall
       layers:
-        - {order: 1, resource: "违约会员保证金", bearer: defaulter}
-        - {order: 2, resource: "SIX x-clear 自有出资（skin in the game）", bearer: ccp}
-        - {order: 3, resource: "违约基金各分段出资（Default Fund Segments）", bearer: surviving_members}
-        - {order: 4, resource: "其他会员的补充出资（极端情形）", bearer: surviving_members}
+        - {order: 1, resource: {zh: "违约会员保证金", en: "Defaulter's margin"}, bearer: defaulter}
+        - {order: 2, resource: {zh: "SIX x-clear 自有出资（skin in the game）", en: "SIX x-clear's own equity contribution (skin in the game)"}, bearer: ccp}
+        - {order: 3, resource: {zh: "违约基金各分段出资（Default Fund Segments）", en: "Default Fund Segment contributions"}, bearer: surviving_members}
+        - {order: 4, resource: {zh: "其他会员的补充出资（极端情形）", en: "Supplementary contributions from non-defaulting members (extreme cases)"}, bearer: surviving_members}
       note: "顺序见 SIX x-clear Operational Manual 第 10 章 Default Waterfall（Figure 6）；spec 不存各段金额"
     zh: "SIX x-clear（本所交易的中央对手方）设有违约基金（Default Fund）与违约 waterfall（损失分摊层级），覆盖其清算的各类工具；违约时依序以违约会员保证金、SIX x-clear自有出资（skin in the game）、违约基金各分段出资、以及（在极端情形下）其他会员的补充出资吸收损失。"
     en: "SIX x-clear (the CCP for SIX Swiss Exchange trades) maintains a Default Fund and a default waterfall (loss-allocation hierarchy) covering its cleared instruments; on a member default, losses are absorbed in order by the defaulter's margin, SIX x-clear's own equity contribution (skin in the game), the respective Default Fund Segment contributions, and (in extreme cases) supplementary contributions from non-defaulting members."

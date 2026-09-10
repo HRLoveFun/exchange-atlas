@@ -106,6 +106,12 @@
   function isZhFallback(env, hasEnumRef) {
     return state.langMode === "en" && !hasEnumRef && !!(env && env.zh && !env.en);
   }
+  // 英文模式下把"退回显示中文"的数据值标出来的灰字小标（[ADR-026] 哲学：加视觉标记、
+  // 不改数据可见性）。档案页字段卡（isZhFallback 命中）与列表表格自由文本列共用。
+  var CJK_RE = /[　-〿぀-ヿ㐀-䶿一-鿿가-힣]/;
+  function zhFallbackTag() {
+    return ' <span class="zh-fallback-note" title="该字段未要求双语，此处为中文原文 ZH source, not translated">（中文原文）</span>';
+  }
   // 交易所显示名——同样是"数据值"，要服从 langMode。name_native 是 {语言代码: 名称}
   // 对象，只有当 en 是其中一个键时才有真正的英文名（如 us-nyse/jp-jpx/de-eurex/hk-hkex）；
   // 没有（如 cn-sse 目前只有 zh-Hans）就诚实回退 name_zh，不臆造英文名。
@@ -482,12 +488,19 @@
     var html = '<div style="overflow-x:auto"><table class="list-table"><thead><tr>';
     itemFields.forEach(function (f) { html += "<th>" + esc(f.label_zh) + "<br><span style=\"opacity:.6;font-weight:400\">" + esc(f.label_en) + "</span></th>"; });
     html += "</tr></thead><tbody>";
+    // name_zh / name_native 两列按定义就是中文名 / 原文书写体，英文态显示非拉丁不算漏译；
+    // 其余自由文本列（description / financial_threshold / target_companies / review_frequency…）
+    // schema 只存单语字符串，英文态退回中文——加灰字标记（不改可见性，见 zhFallbackTag）。
+    // 彻底双语化属数据层任务，见 PROJECT/OPEN-QUESTIONS.md「列表型内容单语」条。
+    var nativeCols = { name_zh: 1, name_native: 1 };
     items.forEach(function (item) {
       html += "<tr>";
       itemFields.forEach(function (f) {
         var raw = item[f.id];
         var text = f.enum_ref && raw ? enumDisplay(f.enum_ref, raw) : raw;
-        html += "<td>" + esc(text == null ? "" : text) + "</td>";
+        text = text == null ? "" : String(text);
+        var zhTag = state.langMode === "en" && !f.enum_ref && !nativeCols[f.id] && CJK_RE.test(text);
+        html += "<td>" + esc(text) + (zhTag ? zhFallbackTag() : "") + "</td>";
       });
       html += "</tr>";
     });
@@ -528,7 +541,7 @@
       html += '<div class="field-card">';
       html += '<div class="field-label">' + esc(f.label_zh) + " · " + esc(f.label_en) + "</div>";
       html += '<div class="field-value' + (hasValue ? "" : " empty") + '">' + esc(hasValue ? value : t("（暂缺，见 OPEN-QUESTIONS）", "(missing, see OPEN-QUESTIONS)")) +
-        (zhFallback ? ' <span class="zh-fallback-note" title="该字段未要求双语，此处为中文原文 ZH source, not translated">（中文原文）</span>' : "") + "</div>";
+        (zhFallback ? zhFallbackTag() : "") + "</div>";
       if (env && env.detail) {
         html += zhNoteBlock('<div class="field-detail">' + esc(env.detail) + "</div>");
       }
@@ -1663,6 +1676,12 @@
   function spBearerName(b) {
     return b && SP_BEARER[b] ? tSel(SP_BEARER, b) : t("未标注", "unspecified");
   }
+  // 违约瀑布每层的 resource 标签——[ADR-en-monolingual-leaks] 起为 {zh, en} 双语对象
+  // （validate.py 机器强制两侧非空）；裸字符串是迁移前的旧形状，做防御性兜底。
+  function spResourceText(r) {
+    if (r && typeof r === "object") return t(r.zh, r.en) || r.zh || r.en || "";
+    return r || "";
+  }
 
   // guarantee_model → 「CCP 介入」节点的短名 + 一句话释义（enums.yml 的 label 偏长，图上另用短名）
   var SP_GM_SHORT = {
@@ -1860,7 +1879,7 @@
           '<text x="' + badgeX + '" y="' + spNum(cyc + 4) + '" text-anchor="middle" class="sp-wf-ord">' + (L.order || (i + 1)) + '</text>' +
           '<rect x="' + boxX + '" y="' + spNum(y) + '" width="' + boxW + '" height="' + boxH + '" rx="4" fill="' + spBearerFill(L.bearer) +
           '" opacity="' + (hasB ? "0.82" : "0.32") + '"' + (hasB ? "" : ' stroke="var(--border-strong)"') + '/>' +
-          '<text x="' + spNum(boxX + 12) + '" y="' + spNum(cyc + 4) + '" class="sp-wf-res">' + esc(spClip(L.resource, 58)) + '</text>' +
+          '<text x="' + spNum(boxX + 12) + '" y="' + spNum(cyc + 4) + '" class="sp-wf-res">' + esc(spClip(spResourceText(L.resource), 58)) + '</text>' +
           '<text x="' + spNum(tagX) + '" y="' + spNum(cyc + 4) + '" class="sp-wf-tag">' + esc(spBearerName(L.bearer)) + '</text>' +
           (i < layers.length - 1 ? '<path d="M' + badgeX + ' ' + spNum(y + boxH + 2) + ' l 0 ' + spNum(rowH - boxH - 7) +
             ' m -3 -4 l 3 4 l 3 -4" fill="none" stroke="var(--fg-faint)" stroke-width="1.3"/>' : "");

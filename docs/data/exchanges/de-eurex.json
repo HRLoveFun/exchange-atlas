@@ -1249,32 +1249,50 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约会员的保证金抵押品",
+              "resource": {
+                "zh": "违约会员的保证金抵押品",
+                "en": "Defaulter's margin collateral"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "违约会员的违约基金出资",
+              "resource": {
+                "zh": "违约会员的违约基金出资",
+                "en": "Defaulter's Default Fund contribution"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 3,
-              "resource": "Eurex Clearing 专项自有出资（Skin in the Game）",
+              "resource": {
+                "zh": "Eurex Clearing 专项自有出资（Skin in the Game）",
+                "en": "Eurex Clearing's dedicated own contribution (Skin in the Game)"
+              },
               "bearer": "ccp"
             },
             {
               "order": 4,
-              "resource": "非违约会员的违约基金出资",
+              "resource": {
+                "zh": "非违约会员的违约基金出资",
+                "en": "Non-defaulting members' Default Fund contributions"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 5,
-              "resource": "第二层自有出资（Second Skin in the Game）",
+              "resource": {
+                "zh": "第二层自有出资（Second Skin in the Game）",
+                "en": "Second Skin in the Game"
+              },
               "bearer": "ccp"
             },
             {
               "order": 6,
-              "resource": "Eurex Clearing 剩余资本",
+              "resource": {
+                "zh": "Eurex Clearing 剩余资本",
+                "en": "Eurex Clearing's remaining capital"
+              },
               "bearer": "ccp"
             }
           ],

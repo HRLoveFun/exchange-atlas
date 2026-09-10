@@ -710,12 +710,12 @@ clearing:
     spec:
       model: ccp_default_waterfall
       layers:
-        - {order: 1, resource: "违约会员的保证金抵押品", bearer: defaulter}
-        - {order: 2, resource: "违约会员的违约基金出资", bearer: defaulter}
-        - {order: 3, resource: "Eurex Clearing 专项自有出资（Skin in the Game）", bearer: ccp}
-        - {order: 4, resource: "非违约会员的违约基金出资", bearer: surviving_members}
-        - {order: 5, resource: "第二层自有出资（Second Skin in the Game）", bearer: ccp}
-        - {order: 6, resource: "Eurex Clearing 剩余资本", bearer: ccp}
+        - {order: 1, resource: {zh: "违约会员的保证金抵押品", en: "Defaulter's margin collateral"}, bearer: defaulter}
+        - {order: 2, resource: {zh: "违约会员的违约基金出资", en: "Defaulter's Default Fund contribution"}, bearer: defaulter}
+        - {order: 3, resource: {zh: "Eurex Clearing 专项自有出资（Skin in the Game）", en: "Eurex Clearing's dedicated own contribution (Skin in the Game)"}, bearer: ccp}
+        - {order: 4, resource: {zh: "非违约会员的违约基金出资", en: "Non-defaulting members' Default Fund contributions"}, bearer: surviving_members}
+        - {order: 5, resource: {zh: "第二层自有出资（Second Skin in the Game）", en: "Second Skin in the Game"}, bearer: ccp}
+        - {order: 6, resource: {zh: "Eurex Clearing 剩余资本", en: "Eurex Clearing's remaining capital"}, bearer: ccp}
       note: "单一、跨所有资产类别的联合违约基金；顺序为 Eurex Clearing Default Management Process 明列"
     zh: "违约处置采用多层「违约瀑布」（Default Waterfall / Lines of Defense）：先动用违约结算会员自身的保证金抵押与违约基金出资；不足时依次动用 Eurex Clearing 的自有「Skin in the Game」出资、非违约会员的违约基金出资（含「Second Skin in the Game」）及 Eurex Clearing 剩余资本。设有单一、跨所有资产类别的联合违约基金。"
     en: "Default management uses a multi-level 'Default Waterfall' (Lines of Defense): first the defaulter's own margin collateral and Default Fund contribution are used; if insufficient, Eurex Clearing's own 'Skin in the Game', then non-defaulting members' Default Fund contributions (including 'Second Skin in the Game') and Eurex Clearing's remaining capital follow. There is one joint Default Fund covering all asset classes."

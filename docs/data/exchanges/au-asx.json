@@ -1874,22 +1874,34 @@
           "layers": [
             {
               "order": 1,
-              "resource": "违约清算参与人的保证金及附加保证金",
+              "resource": {
+                "zh": "违约清算参与人的保证金及附加保证金",
+                "en": "Defaulting Clearing Participant's margins and additional margins"
+              },
               "bearer": "defaulter"
             },
             {
               "order": 2,
-              "resource": "ASX Clear 自有可用资源",
+              "resource": {
+                "zh": "ASX Clear 自有可用资源",
+                "en": "ASX Clear's own available resources"
+              },
               "bearer": "ccp"
             },
             {
               "order": 3,
-              "resource": "向非违约参与人征收的恢复摊派（Recovery Assessments）",
+              "resource": {
+                "zh": "向非违约参与人征收的恢复摊派（Recovery Assessments）",
+                "en": "Recovery Assessments called from non-defaulting Clearing Participants"
+              },
               "bearer": "surviving_members"
             },
             {
               "order": 4,
-              "resource": "对所有未平仓头寸「完全终止」并削减结算支付（最后手段）",
+              "resource": {
+                "zh": "对所有未平仓头寸「完全终止」并削减结算支付（最后手段）",
+                "en": "'Complete termination' of all open positions and reduction of settlement payments (last resort)"
+              },
               "bearer": "surviving_members"
             }
           ],

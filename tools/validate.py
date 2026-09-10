@@ -62,6 +62,10 @@ build_json_schema...）的地方一律直接 import 复用——这份校验脚�
   22. stale 复核提醒（[ADR-060] 任务五③）：已填字段超过 volatility 复核阈值、或
       未记 verified 无法判定新鲜度时，以 warning 输出逐字段清单——不阻断构建
       （[ADR-052] 之后构建侧不再有打印「哪些字段超期了」的出口，这里是唯一一处）
+  23. `default_management.spec.layers[].resource` 双语不变式（[ADR-en-monolingual-leaks]）：
+      有 layers 时每层的 resource 必须是含非空 zh 与 en 的双语对象——违约瀑布附图英文态
+      直接渲染 resource.en，原 [ADR-050] 定的裸字符串英文态露中文。en_required 机器校验
+      （见下方 en_required 分支）只覆盖 object 章节的 leaf 信封，进不了 spec 的结构化子字段
 """
 import datetime
 import json
@@ -273,6 +277,28 @@ def derivatives_spec_shape_violations(spec_shapes):
         elif spec_shapes[top_key] != shape:
             out.append(f"schema/spec.yml: `{key}` 与顶层 `{top_key}` 形状不一致"
                        f"——derivatives 侧必须用 YAML anchor（*别名）复用顶层形状，不得手抄")
+    return out
+
+
+def default_management_resource_violations(loc, spec):
+    """校验 23（[ADR-en-monolingual-leaks]）：`default_management.spec.layers[].resource`
+    必须是含非空 zh 与 en 的双语对象。违约瀑布常驻附图英文态直接渲染 `resource.en`——
+    原 [ADR-050] 定的裸字符串英文态露中文。返回违规消息列表（空 = 合法）。
+
+    纯函数（不读 data/），正负向用例固化在 tools/selfcheck.py。"""
+    out = []
+    if not isinstance(spec, dict):
+        return out
+    for i, layer in enumerate(spec.get("layers") or []):
+        if not isinstance(layer, dict) or "resource" not in layer:
+            continue
+        res = layer["resource"]
+        if (not isinstance(res, dict)
+                or not str(res.get("zh") or "").strip()
+                or not str(res.get("en") or "").strip()):
+            out.append(f"{loc}: spec.layers[{i}].resource 必须是含非空 zh 与 en 的双语对象"
+                       f"（违约瀑布英文态直接渲染 resource.en，[ADR-en-monolingual-leaks]）；"
+                       f"实际是 {res!r}")
     return out
 
 
@@ -567,6 +593,11 @@ def validate_data(taxonomy, enums, raw_exchanges, exchanges_expanded, registered
                         if "bound" in spec and spec["bound"] not in ("upper", "lower"):
                             err(f"{loc}: spec.bound 只允许 `upper`（上限/不超过）或 "
                                 f"`lower`（下限/不少于），实际是 {spec['bound']!r}")
+
+                        # 校验 23：违约瀑布层标签双语不变式（[ADR-en-monolingual-leaks]）
+                        if field_key == "clearing.default_management":
+                            for v in default_management_resource_violations(loc, spec):
+                                err(v)
 
                         # 5c：note（及 *_note）自由文本里内嵌的数字反查。不限 confidence——
                         # [ADR-054] 复核 8 处 FIX 里 4 处属于这个盲区（cn-sse 夹带深交所

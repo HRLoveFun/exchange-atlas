@@ -54,6 +54,15 @@
 46. **衍生品子章的两个受控词表缺口（OQ #45 落地时坐实，均暂不改 enums.yml）：** (a) `circuit_breaker_type` 缺 `contract_level`（见 #44(b)，现 hk-hkex/jp-jpx 两家样本、同一借用模式）；(b) `clearing.derivatives.delivery_method` 的枚举（physical/cash/na/either）表达不了"分产品线"语义——`jp-jpx` 股指期货/期权现金结算（SQ）、国债期货实物交割、mini 10 年国债现金结算，只能近似取 `either` 并在 `detail` 声明"是产品线分化、非头寸可选"。触发条件：第三家"分产品线交割"样本出现时评估给 delivery_method 增加产品线维度。
 47. **stable 档来源闭环的 13 处降级待人工投喂（2026-09-05 闭环批，各字段 `detail` 已留候选出处）：** `ca-tsx`/`de-eurex`/`in-nse`/`sa-tadawul`/`tw-twse`/`uk-lse`/`za-jse` 的 `overview.settlement_currency`、`us-nyse`/`us-nasdaq`/`jp-jpx` 的 `overview.trading_currency`+`settlement_currency`、`fr-euronext` 的 `overview.trading_currency`。共性：币种值本身无争议，但缓存内官方页均无「交易/结算币种」的专门陈述句；候选出处分别为 CDS 结算规则（ca）、Eurex Clearing Rules（de-eurex）、NSCCL 结算规则（in）、Edaa/Muqassa 规则（sa）、TWSE 营业细则交割条款（tw）、CREST Rules（uk，euroclear.com 403）、DTCC NSCC Rules & Procedures（us×2）、TSE Business Regulations/JSCC 规则（jp）、Euronext 各市场产品页与 Harmonised Rulebook（fr）。人工提供原文后逐字段升 medium/high。
 
+48. **列表型内容单语——`renderItemsTable` 渲染的自由文本列 + 板块 `name_en` 缺口（[ADR-en-monolingual-leaks] 核查坐实；route 2「（中文原文）」标记已落地，route 1 彻底双语化延后）。** 历次英文化（[ADR-024]/[ADR-026]/[ADR-034] #3/[ADR-049]）扫描口径都是 object 章节的 leaf 信封，从不覆盖 `products`/`indices` 章与 `listing.boards` 字段的列表项。这些 item 字段 schema 只存单语字符串：`products.description` 130 条、`boards.target_companies` 52、`boards.financial_threshold` 42、`indices.description` 48、`indices.review_frequency` 23，共约 295 条中文自由文本，英文态原样显示（现带 `（中文原文）` 灰字标记）。另 `listing.boards` 无 `name_en` 字段——`name_zh` + `name_native` 都可能非拉丁，`cn-sse`/`cn-szse`「主板」、`tw-twse`「一般板」英文态在上市生命周期模块 `llBoardName` 回退中文。**route 1 落地方向**：`item_schema` 里这几个描述键升 `{zh, en}`（`renderItemsTable` 接 `dv()`）、`listing.boards` 加 `name_en`（或定「`name_native` 必须罗马化」），`validate.py` 加对应校验；按交易员价值排期（`boards.*` 上市门槛 > `products.description` 产品体系）。**不现在做的理由**同 [ADR-049] 方案 B 拒绝「`detail` 全量翻译」：每新增一家永久多一份双语负担、拖慢 [ADR-017] 建档。解决后转 `data/` + 一条 ADR、删本条。
+
+49. **5 处 `confidence: high` 字段的出处页现为 JS SPA / 选错文档，`--live` 现场反查抓不到可核实正文（[ADR-en-monolingual-leaks] 坐实，2026-09-10/11）。** 均非编造、非本次改动引入——是「出处页事后改版 / 选错文档」，与 `us-nyse` dtcc.com 403、`uk-lse` BoE 待补同类。**CI 侧已处理**（用户选定方案）：`verify_quotes.py --live` 对这些字段降 LIVE_ERR 不 FAIL——2 处 `*_note` 走类别规则、3 处进 `LIVE_UNVERIFIABLE` 白名单；offline verbatim 反查行为不变。**数据侧待办**（换成可抓一手源后从白名单 / 本条删除）：
+    - `br-b3.clearing.delivery_method` —— `b3.com.br` 产品页是 JS SPA（现货交割周期表靠前端渲染）；需找 B3 的交割 / 清算规则 PDF（`b3.com.br/data/files/` 下的 PDF 可抓）。
+    - `cn-szse.infrastructure.market_data_levels` —— 引的 PDF 是「深交所行情互联网接入服务说明」（1.7k 字短文），不含「增强行情五档→十档 + 前 50 分档」正文；需找深证信「增强行情」产品说明 / 行情接口规范。
+    - `cn-szse.costs.exchange_fees` —— 2023-08-28 A/B 股经手费下调通知的 verbatim 出处 `szse.cn/disclosure/notice/general/t20230818_602805.html` 现为 JS 壳；费率值 0.0341‰ 无争议、缺可核实的一手陈述句（试 wayback 快照 / 深交所收费公告 PDF）。
+    - `cn-sse` / `cn-szse` `market_structure.derivatives.contract_specs_note` —— 分析性 `*_note`（ETF 期权合约单位 + 除权除息调整），`quote` 是抽检凭据、note 允许归纳（[ADR-049]），verbatim 不在单一可抓页；如要坐实可补一段确在《期权试点交易规则》PDF 里的 verbatim，或按 note 性质接受现状。
+    **`--live` 闸的系统性局限**（本条附带记录，非阻断）：curl 对 JS SPA / 登录墙站点只能拿到骨架，`--live` 现场反查在这类来源上天然无能为力——它是 offline verbatim 反查（quote ⊆ `.cache`）的补充抽查，不是替代。白名单是显式逐字段的「已知无能为力」登记，不是把整域名开天窗。
+
 
 
 ## 具体数据悬案

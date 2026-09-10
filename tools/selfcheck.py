@@ -21,6 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import sync  # noqa: E402
 import validate  # noqa: E402
+import verify_quotes  # noqa: E402
 
 CASES = []  # (name, got, want)
 
@@ -297,6 +298,54 @@ case("空 zh 不触发（字段未填不算无据断言）",
 case("裸字符串字段展开后 confidence 为 None：不触发",
      validate.stable_confidence_sources_violations(
          "ex", "x", {"zh": "x", "confidence": None}, "stable"), [])
+
+
+# ══════════════════════════════════════════════════════════════
+# 校验 23（[ADR-en-monolingual-leaks]）· 违约瀑布层标签双语不变式：
+#   validate.default_management_resource_violations(loc, spec)
+#   —— 有 layers 时每层 resource 必须是含非空 zh 与 en 的双语对象。
+# ══════════════════════════════════════════════════════════════
+def _dmr(spec):
+    return validate.default_management_resource_violations("L", spec)
+
+
+case("dm-resource 合法：{zh, en} 两侧非空",
+     _dmr({"layers": [{"order": 1, "resource": {"zh": "违约方保证金", "en": "Defaulter's margin"}}]}), [])
+case("dm-resource 违规：裸字符串（迁移前旧形状）",
+     len(_dmr({"layers": [{"order": 1, "resource": "违约方保证金"}]})), 1)
+case("dm-resource 违规：缺 en",
+     len(_dmr({"layers": [{"order": 1, "resource": {"zh": "违约方保证金"}}]})), 1)
+case("dm-resource 违规：en 是空串",
+     len(_dmr({"layers": [{"order": 1, "resource": {"zh": "x", "en": "  "}}]})), 1)
+case("dm-resource 违规：缺 zh",
+     len(_dmr({"layers": [{"order": 1, "resource": {"en": "Defaulter's margin"}}]})), 1)
+case("dm-resource 计数：多层各报一条",
+     len(_dmr({"layers": [{"resource": "a"}, {"resource": {"zh": "b"}}, {"resource": {"zh": "c", "en": "C"}}]})), 2)
+case("dm-resource 不误伤：层没有 resource 键（lines_of_defence 预防层理论上仍应有，但键缺省不在本校验）",
+     _dmr({"layers": [{"order": 1, "bearer": "defaulter"}]}), [])
+case("dm-resource 不误伤：unstructured（无 layers）",
+     _dmr({"model": "unstructured", "note": "机制存在结构查不到"}), [])
+case("dm-resource 不误伤：spec 非 dict",
+     _dmr(None), [])
+
+
+# ══════════════════════════════════════════════════════════════
+# [ADR-en-monolingual-leaks] · `verify_quotes.py --live` 的两类「无法现场核实」豁免：
+#   verify_quotes._live_exempt(ex, path) —— True → LIVE_ERR 不 FAIL。
+#   （只影响 --live；offline verbatim 反查行为不变。）
+# ══════════════════════════════════════════════════════════════
+def _le(ex, path):
+    return verify_quotes._live_exempt(ex, path)
+
+
+case("live-exempt 命中：*_note 叶子字段（类别规则）", _le("br-b3", "risks.fx_risk_note"), True)
+case("live-exempt 命中：末级 key 恰为 note", _le("cn-sse", "market_structure.circuit_breaker.spec.note"), True)
+case("live-exempt 命中：深层 *_note", _le("cn-szse", "market_structure.derivatives.contract_specs_note"), True)
+case("live-exempt 命中：LIVE_UNVERIFIABLE 白名单（br-b3 delivery_method）", _le("br-b3", "clearing.delivery_method"), True)
+case("live-exempt 命中：LIVE_UNVERIFIABLE 白名单（cn-szse exchange_fees）", _le("cn-szse", "costs.exchange_fees"), True)
+case("live-exempt 不命中：普通字段（同所非白名单路径）", _le("br-b3", "clearing.settlement_cycle"), False)
+case("live-exempt 不命中：白名单路径但换个交易所", _le("cn-sse", "costs.exchange_fees"), False)
+case("live-exempt 不命中：default_management 不豁免", _le("cn-szse", "clearing.default_management"), False)
 
 
 def main():
